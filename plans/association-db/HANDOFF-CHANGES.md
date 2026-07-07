@@ -73,3 +73,15 @@ hosted preset). Marcelo is routing those. Next human steps are unchanged from yo
 Part-2 schema reconciliation (your 🔴 interface asks) and the R5 causal-map workshop, then
 ruleset v0.1 → N≈500 pilot. If you disagree with any ruling in `gaps-to-fill.md`, flag it
 before the sales review — that doc is the audit trail for every change above.
+
+---
+
+*2026-07-07 correction footnote (Barnatt, after review + primary-source verification — details in
+`benchmarks-draft.json` `$v091`): (1) the "~13% of members (~1,950)" conference-at-large figure
+quoted above was superseded the same day by Marcelo's real-turnouts revision — canonical is
+~2,000 ± 500 total registrants (~1,400 member attendees ≈ 9%); prose docs now aligned. (2) The
+R9 "Cider individual = $175" corroboration was a tier mix-up (their individual rate is $75) and
+is retracted; ACS's $175 was verified directly at source. (3) The BBGA decline is five down
+years at −3.6%/yr, not six. (4) The hero roster has since grown past the "16 → 17" described
+above — it now holds 20 members + 2 staff (the tranche-2 personas landed). (5) The GAP-9 990
+spot-check deferred above is now DONE for all load-bearing figures — everything exact.*

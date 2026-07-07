@@ -174,8 +174,23 @@ Also: **1.2's mechanism example ("WI/CA producers") is US-parochial** — rewrit
 4. Certification: one global credential (CCP-style) — consistent with US calibration.
 5. **Honorific grades: rejected** — MembershipType stays a paid-tier-only dimension.
 
+## 2026-07-07 — post-v0.9 alignment: proposed NEW arrows (benchmarks now exist with no generating arrow; DRAFT for workshop)
+
+The v0.8/v0.9 gap-fill passes added benchmark families this map predates. Each proposed arrow
+below cites the benchmark it must reproduce:
+
+| # | Arrow | Sign | Strength | Mechanism / benchmark |
+|---|---|---|---|---|
+| 4.8 | payerTimingTrait (per-member sticky early/on-time/late) → days-to-pay | trait | med | `payer_trait_persistence` 0.70 — timing is a persistent member trait, not an independent draw; interacts with grace/lapse + back-dated renewals |
+| 4.9 | invoiceChannel (card-at-checkout / auto-pay dues / net-terms B2B) → payment-timing shape | gate/mixture | strong | the `payments_timing` 3-part mixture: checkout mass, due-date spike (+3–14d failed-card retries), Atradius/CRF late curve for net-terms only |
+| 4.10 | affluence → merch orders | + | weak | `merch_orders_per_member_year` 0.15, `merch_revenue_share` 2.5% — affluence-coupled like other spend |
+| 5.15 | season(Nov–Jan renewal window) → support tickets (dues/login topics); post-event window → refund/transfer tickets | + | med | `support_topic_mix` seasonal coupling — seasonality matters more than topic precision (R11 flag) |
+| 1.15 | employerEvent (dissolution / acquisition / program-cut) → renewed? | − | med | crowd-level mechanism behind the hero churn stories (Anna/Bob/Danielle all churn via employer events); makes "every lapse has a findable cause" (FEATURES-REVIEW #2) statistical rather than hero-only — requires employer-org lifecycle events in the generated world |
+
 ## Workshop protocol
 1. Walk arrows ranked by strength (strong first). For each: agree/flip/cut + one-line justification survives into the ruleset as `signPrediction` + `justification`.
 2. Fill strengths marked TBD from R1/R3 deliverables.
 3. Confirm the copula (φ↔θ +med) and whether `expertise` earns its place as a third latent (cost: every ε arrow) or folds into θ.
-4. Output = `X.correlations` + `CausalDAG.edges` first draft for the vertical slice (arrows 1.1–1.12, 2.1–2.9, 4.1–4.3).
+4. **Confirm the 2026-07-07 proposed arrows above** (4.8–4.10, 5.15, 1.15) — they carry benchmarks with no other generating mechanism.
+5. **Ratify GAP-12** (calendar-year renewals vs release-relative hero pins — see `../gaps-to-fill.md`): Barnatt's proposal (2026-07-07) is option (a) — calendar-year dominant + a ~25–30% anniversary cohort via auto-pay-bills-on-anniversary (+ optional grandfathered legacy cohort from a 2022 policy switch). Confirm with Robert/Amith; if ratified, the renewal-unroll rule gains a cycle-type branch and Marcus Chen moves to the anniversary cohort (auto-renew OFF).
+6. Output = `X.correlations` + `CausalDAG.edges` first draft for the vertical slice (arrows 1.1–1.12, 2.1–2.9, 4.1–4.3 + the payments arrows 4.8–4.9 if the money chain is in-slice).

@@ -1,8 +1,8 @@
-# Hero Personas — Draft v0.2 (for team review)
+# Hero Personas — Draft v0.3 (for team review)
 
 **Status: DRAFT.** Heroes are team-owned, quality-gated content (v2 plan §7.0) — this draft exists so the team edits instead of starting from blank. **Names are placeholders until the team blesses them; after that they're permanent** (renames break demo scripts and need explicit sign-off).
 
-Target: ~16 now → 50–100 by release. Every release re-verifies each hero loads with their storyline intact (release blocker).
+Roster: 22 now (20 members + 2 staff) → 50–100 by release. Every release re-verifies each hero loads with their storyline intact (release blocker).
 
 > **This document is the SINGLE roster of record** (decided 2026-07-06): the earlier 8-candidate
 > stub at `mj/plans/association-db/morecheese-v2-hero-personas.md` is superseded by this doc and
@@ -109,7 +109,7 @@ Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen 
 ### Marcus Chen `ICF-000102` — the renewal nudge
 **38 · Specialty Cheese Buyer, Puget Provisions (8-store grocer, Seattle WA) · Retailer · joined 2021 · Professional, Active — renewal due in ~3 weeks · θ med, φ med**
 Started behind the counter at a Pike Place cheese shop in 2012; now buys for eight stores. **Join trigger:** 2021 supply-chain chaos — the federation's distributor forum was where buyers were actually finding stock. Solid but busy member: regional chapter meetings yes, July flagship conference never (retail can't leave in summer — a *pattern* the data should show, not a flaw). Opened both renewal emails, clicked neither. Not disengaged — swamped. Exactly the member a renewal-outreach queue exists for.
-*Pins: EndDate ≈ release+21d, 2 renewal-campaign opens / 0 clicks, chapter-meeting-only attendance pattern.*
+*Pins: EndDate ≈ release+21d, 2 renewal-campaign opens / 0 clicks, chapter-meeting-only attendance pattern. ⚠ D6/GAP-12 (2026-07-07): the release-relative EndDate requires the proposed anniversary cohort — Marcus goes in it with auto-renew OFF (an auto-payer would get no reminders); pending team ratification.*
 
 ### Danielle Okafor `ICF-000103` — the diagnosable lapse
 **27 · Assistant Cheesemaker, formerly Meadowbrook Dairy (Brattleboro VT, closed) · Producer/Cheesemaking · joined 2024 · was Individual, Lapsed · θ was med, φ low**
@@ -184,7 +184,7 @@ She and her husband converted her family's sheep operation to farmstead cheese i
 ### Anna Brown `ICF-000117` — the post-lapse diagnosis *(team-named — carried from the original roster, story revamped 2026-07-06)*
 **44 · Category Manager, Dairy & Deli (formerly Specialty Cheese Buyer), Northgate Market Group (regional grocer, ~40 stores, Boston metro) · Retailer · joined 2019 · Professional (employer-paid), **Lapsed** (~5 months) · θ was med-high, now low · φ med**
 *She's the name the team already uses — "let's look at Anna Brown's member profile" — so she stays, permanently.* Fifteen years in grocery buying. **Join trigger:** in 2019 Northgate launched an in-store specialty cheese program and gave it to Anna; the federation's retail track and monger-training courses were her supplier network and her staff's training pipeline. For three years she was a fixture — retail-track workshops, two courses a year for her counter leads, reliable renewal on the program's budget line. **The cause of her churn is in the data:** in 2023 Northgate consolidated category management — the specialty program folded into general dairy, her Employment row shows the title change, and the program budget line that paid her dues died with it. Attendance stopped after 2022, renewal emails went unopened (she'd opened every one before), dues went unpaid past the grace period. Distinct from Bob (still active, save him now) and Danielle (employer vanished, win her back): Anna is the **post-mortem** — the "why did she churn?" walkthrough where Sage reads the title change, the budget-line death, and the engagement cliff straight off the record.
-*Pins: Employment title change 2023 (Specialty Cheese Buyer → Category Manager, Dairy & Deli — the legible cause), heavy 2019–2022 event history then zero, renewal-campaign opens present in prior cycles / absent in the final one, last payment ~14 months pre-release, Lapsed with CancellationDate = EndDate + 2mo grace, CancellationReason 'non-payment — program discontinued'.*
+*Pins: Employment title change 2023 (Specialty Cheese Buyer → Category Manager, Dairy & Deli — the legible cause), heavy 2019–2022 event history then zero, renewal-campaign opens present in prior cycles / absent in the final one, last payment ~17 months pre-release (corrected 2026-07-07 from ~14 — a 12-month period from the last payment must end ~5 months pre-release to match her lapse timing; CancellationDate then lands ~3 months pre-release), Lapsed with CancellationDate = EndDate + 2mo grace, CancellationReason 'non-payment — program discontinued'.*
 
 ### Dale Peterson `ICF-000118` — the event-ROI lesson
 **58 · GM, Meadowlark Co-op Creamery; volunteer Education Chair, Upper Midwest chapter · Producer · joined 2011 · Professional, Active · θ high (organizer-shaped), φ med**
@@ -230,10 +230,10 @@ Owns renewals and the health of the membership funnel. Demo use: the **Membershi
   to fit the causal-data style and keep both only when they cover distinct pitch flows.
 - **Adding** heroes: any release. **Renaming/removing:** explicit sign-off — demo scripts depend on them.
 - Every release: automated check that each hero loads with pinned milestones intact (release blocker).
-- Next tranches toward 50–100: Nia's shop owner, a board member, chapter officers per region, competition judges, a suspended member, an org-admin contact, staff personas for the issues/messaging apps.
+- Next tranches toward 50–100: Nia's shop owner, a board member, chapter officers per region, competition judges, an org-admin contact, more staff personas (events/education roles). *(Suspended member and the first two staff personas landed 2026-07: Gary Toth, Maya Delgado, Denise Archer.)*
 
 ## 7. Asks for the team
 
 1. **Bless or edit the names** (permanent afterward).
-2. Check storylines against real demo scripts — and note **event-ROI still lacks a poster child** (no hero is an event organizer; candidate for the next tranche).
+2. Check storylines against real demo scripts (every §0 scenario now has an anchor — event-ROI is Dale Peterson).
 3. Who owns hero authoring going forward (OQ-7)?

@@ -3,9 +3,12 @@
 **Status: ✅ REVIEWED & FITTED (Marcelo, 2026-07-06).** Ruling: *"All sources from actual
 associations are within the realm of acceptable. I leave it to you to select the applicable and
 accurate ones"* — selection below, relevance-weighted (ACF highest: food-craft domain, right
-size band). Fitted results live in `benchmarks-draft.json` v0.9 `scalingLaws.sizeAttenuation`
-(canonical): participation α = 0.55 ± 0.10 → large conference ≈ 13% of members (~1,950);
-revenue-at-large ≈ $4M (ACF's real 990).
+size band). Fitted results live in `benchmarks-draft.json` `scalingLaws.sizeAttenuation`
+(canonical): conference-at-large from REAL turnouts (see the 2026-07-06 REVISION below):
+~2,000 ± 500 total registrants, ~1,400 member attendees (≈9% ± 3); participation α = 0.55 ± 0.10
+retained for NON-conference rates only; revenue-at-large ≈ $4M (ACF's real 990).
+*(An earlier α-derived "13% of members (~1,950)" appears in the adopted-earlier section below —
+superseded by the revision.)*
 **Standing constraint (Marcelo): DATA POINTS ONLY — none of these orgs' subject matter
 (programs, topics, industry content) enters the cheese demo. Numbers in; domains out.**
 
@@ -66,8 +69,9 @@ portfolio at large.
 - participation α = **0.55 ± 0.10** (ACF pulls ~0.35–0.4; SNA/AND ~0.65–0.67; ACF weighted up
   for domain relevance) — applies to conference %, event regs/member, posts/member, download
   participation
-- large (15k) flagship: **0.13 ± 0.03** member attendance (~1,950 ± 450) + ~32% non-member
-  registrants; regional-event portfolio absorbs participation (regs/member ~1.6–1.8 at large)
+- ~~large (15k) flagship: **0.13 ± 0.03** member attendance (~1,950 ± 450)~~ **SUPERSEDED by the
+  2026-07-06 revision above** (real turnouts: ~1,400 ± 400 member attendees ≈ 9% ± 3, ~2,000
+  total registrants); regional-event portfolio absorbs participation (regs/member ~1.6–1.8 at large)
 - revenue at large: **$4M ± 1.5M** (ACF's real $3.81M FY2024 990 — revenue/member falls with size)
 - governance at large: committees ~12 / seats ~90 / volunteer share ~1.5% (ESTIMATE, α≈0.2;
   hardening = DEMO-BACKLOG BL-4)
