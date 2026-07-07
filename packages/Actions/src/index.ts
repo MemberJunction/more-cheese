@@ -1,5 +1,5 @@
 /**
- * @mj-sample-app/actions — the app's ACTIONS package (OPTIONAL — delete the
+ * @mj-more-cheese-demo/actions — the app's ACTIONS package (OPTIONAL — delete the
  * package + its manifest entry if your app exposes no Actions).
  *
  * Actions are metadata-driven integration points for agents / workflows /

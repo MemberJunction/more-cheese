@@ -1,5 +1,5 @@
 /**
- * @mj-sample-app/server — the SERVER BOOTSTRAP package.
+ * @mj-more-cheese-demo/server — the SERVER BOOTSTRAP package.
  *
  * This is the package named in mj-app.json under packages.server with
  * role "bootstrap". At startup MJAPI dynamically imports it and calls the
@@ -21,8 +21,8 @@
  * TODO(template): rename the function to Load<YourApp>Server and keep it in
  * sync with mj-app.json "startupExport".
  */
-import { LoadSampleAppEntitiesServer } from '@mj-sample-app/core-entities-server';
-import { LoadSampleAppActions } from '@mj-sample-app/actions';
+import { LoadSampleAppEntitiesServer } from '@mj-more-cheese-demo/core-entities-server';
+import { LoadSampleAppActions } from '@mj-more-cheese-demo/actions';
 
 export function LoadSampleAppServer(): void {
     // Chain the sub-package loaders so a single startupExport call registers
