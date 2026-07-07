@@ -13,7 +13,7 @@ source are tagged **(estimate)**.
 >
 > Four headline numbers below are **evidence-backed recommendations still awaiting team
 > sign-off**, marked ⚠ where they appear. The formal decision list — with owners,
-> recommendations, and evidence — is **[DESIGN-REVIEW.md](DESIGN-REVIEW.md) §6**:
+> recommendations, and evidence — is **[DESIGN-REVIEW.md](DESIGN-REVIEW.md) §1**:
 >
 > 1. **Renewal 87%** (§3) — vs the team's 89% prior *(D1)*
 > 2. **Flagship attendance 35% of members** (§6) — vs the 25% prior *(D2)*
@@ -254,7 +254,7 @@ engaged — she earns it when Sonar scores her actual activity.
 > release day* — which only works under D6's proposed anniversary cohort (pending sign-off).
 > If ratified, Marcus sits in that cohort with auto-renew OFF (his story needs reminder
 > emails), and Danielle's/Anna's lapse dates stay release-relative legitimately. See
-> [DESIGN-REVIEW.md](DESIGN-REVIEW.md) §6 D6.
+> [DESIGN-REVIEW.md](DESIGN-REVIEW.md) §1 D6.
 
 Heroes know each other (mentorships, a running forum debate, one corporate acquisition
 connecting two trajectories) so drill-downs feel alive. Full roster:

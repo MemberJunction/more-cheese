@@ -1,18 +1,37 @@
 # MoreCheese Demo Data — Design Review
 
-**What this is:** the design of the MoreCheese demo data, in one reviewable document — what
-we're building and why (§1–§2), the database design (§3), how the data gets generated and
-checked (§4), what's already decided (§5), and the open decisions we need input on (§6).
+**What this is:** the design of the MoreCheese demo data, in one reviewable document.
+**The open decisions that need your input come first (§1).** Everything after them is
+context: what we're building and why (§2–§3), the database design (§4), how the data gets
+generated and checked (§5), and what's already decided (§6).
 
-**Status: OPEN FOR REVIEW** · Drafted 2026-07-07 · §5 is settled, with the evidence cited —
-please don't re-open it. §6 is where input is needed.
+**Status: OPEN FOR REVIEW** · Drafted 2026-07-07 · §1 is where input is needed. §6 is
+settled, with the evidence cited — please don't re-open it.
 
 Companions: [ASSOCIATION-PROFILE.md](ASSOCIATION-PROFILE.md) (the fictional association,
 described plainly) · [DATA-SUMMARY.md](DATA-SUMMARY.md) (the sales-facing summary).
 
 ---
 
-## 1. What we're building
+## 1. Decisions we need
+
+Eight open decisions. Each has a recommendation and the evidence in one line; the context
+behind them is in §2–§5, and the full evidence trail is in the reading map (§9).
+
+| # | Decision | Recommendation | Why (one line) |
+|---|---|---|---|
+| D1 | Renewal rate: **87%** vs the 89% prior | Adopt 87% | The closest real societies' own tax filings show flat-to-shrinking membership (the size-twin: five straight down years) — 89% would mean growth none of them shows. Verified against the e-filed 990s. |
+| D2 | Flagship attendance: **35% of members** vs the 25% prior | Adopt 35% (+32% non-member registrants) | The old 25% was a generic guess; real ACS numbers decompose to exactly 35% + 32%. |
+| D3 | Grace period = **2 months** | Adopt | It's the industry's most common policy (48% of associations, MGI survey). |
+| D4 | **~625 organizations** at default scale (plan said ~25) | Adopt 625 | The competition needs ~210 entering companies to look real; 25 orgs can't carry it. |
+| D5 | Default hosted-demo size | **Large (15,000 members)** | Meets the "10k+ credibility" ask, and it's now honestly sized from real same-size associations (~2,000-person flagship, ~$4M revenue). |
+| D6 | Renewal cycle: pure calendar-year, or calendar-year **plus a ~25–30% anniversary cohort** (GAP-12) | **The mixed policy** *(Barnatt's pick, 2026-07-07)*: auto-pay members bill on their join anniversary (that's how subscription billing really works — and it exercises our subscriptions app), optionally plus members grandfathered from a 2022 policy switch. December still dominates. | Pure calendar-year empties the "who's about to renew?" demo — and bunches all lapses around March — for most of the year. Half of individual-member associations really do run anniversary cycles, so the mix is honest. Also fixes three hero storylines. Detail: Marcus Chen goes in the anniversary cohort with auto-renew OFF (his story needs reminder emails); org-tier cycle to be specified at ratification. *(If adopted: ASSOCIATION-PROFILE §3, the §6 calendar row here, and the JSON cycle note get updated — flagged in each.)* |
+| D7 | Bless the hero names (permanent afterward) | Review via [PERSONAS-REVIEW.md](PERSONAS-REVIEW.md) | Two names are already fixed by prior team use (Elena Rodriguez, Anna Brown). |
+| D8 | Who owns hero authoring from here (OQ-7) | **Name an owner now** | Hero content is hand-written, quality-gated, and release-blocking; 22 of the target 50–100 exist and the ship date is July 31. This is the schedule's longest pole. |
+
+---
+
+## 2. What we're building
 
 The demo database for **MoreCheese** (the International Cheese Federation): a fake but
 carefully realistic professional association — ~2,500 members at default scale, with small
@@ -42,7 +61,7 @@ storylines keeps demo scripts working release after release.
 It ships as one installable MJ Open App in two packages: the app (schemas, config,
 dashboards — no fake data) and an optional data companion (all the generated content).
 
-## 2. How it's put together
+## 3. How it's put together
 
 We do **not** build members, orders, payments, or committees from scratch. The app
 **composes 10 apps we already have** and adds only the genuinely cheese-specific parts.
@@ -82,7 +101,7 @@ a support desk — that MJ then unifies.
   Elena isn't labeled "engaged" — her activity earns it. (This also means Sonar's
   still-moving table design can't block us; we depend on its engine, not its tables.)
 
-## 3. The database design (summary — column detail in [research-plan-and-schema-proposal.md](research-plan-and-schema-proposal.md) Part 2)
+## 4. The database design (summary — column detail in [research-plan-and-schema-proposal.md](research-plan-and-schema-proposal.md) Part 2)
 
 | Schema | Tables |
 |---|---|
@@ -131,7 +150,7 @@ of the rules above**: cross-schema foreign keys (rule 3), `IsSharedDemo` everywh
 and the competition's "entrant must be a member organization" hard gate. We state them here
 as design requirements; they're asks B5–B7 until Marcelo confirms.
 
-## 4. How the fake data gets made — and how we'll know it worked
+## 5. How the fake data gets made — and how we'll know it worked
 
 ### The ruleset
 
@@ -183,7 +202,7 @@ release. No live AI calls, no external services, no surprises on a customer's ma
    after generation we measure the data and **the build fails** if it misses. A handful of
    benchmarks are deliberately held out as blind checks — the generator never sees them, and
    the data has to reproduce them anyway.
-2. **The database rules in §3** — bad combinations simply can't load.
+2. **The database rules in §4** — bad combinations simply can't load.
 3. **The 108 curated queries** ported from v1 — every one must return a meaningful,
    non-degenerate answer (in v1, whole query families silently ran on dead columns).
 
@@ -194,7 +213,7 @@ LTV, attendance forecast, engagement, cert completion, event ROI) train on real 
 dashboards, saved views, semantic search, and the demo scripts all sit on top. If the causal
 rules are wrong, every one of those layers wobbles — which is why the pilot gate exists.
 
-### The pilot gate (first milestone once §6 is settled)
+### The pilot gate (first milestone once §1 is settled)
 
 Generate a small vertical slice — member → subscription → event registration — at ~500
 people, then check it. **Pass means:** every cause-and-effect rule in the slice shows up in
@@ -204,7 +223,7 @@ benchmark lands within tolerance, and the in-slice heroes load with their pins i
 workshop rather than being patched quietly. **Who calls it:** Barnatt (data workstream), with
 Madhav confirming the method held. Only after a green pilot do we generate the full dataset.
 
-## 5. Already decided — please don't re-open (evidence cited)
+## 6. Already decided — please don't re-open (evidence cited)
 
 | Decision | Evidence / authority |
 |---|---|
@@ -220,19 +239,6 @@ Madhav confirming the method held. Only after a green pilot do we generate the f
 | Support-ticket realism is estimate-led (no real data exists; Izzy data confidential) | Marcelo, 2026-07-06 |
 | All load-bearing benchmark figures verified against primary sources | 2026-07-07, JSON `$v091` |
 
-## 6. Decisions we need
-
-| # | Decision | Recommendation | Why (one line) |
-|---|---|---|---|
-| D1 | Renewal rate: **87%** vs the 89% prior | Adopt 87% | The closest real societies' own tax filings show flat-to-shrinking membership (the size-twin: five straight down years) — 89% would mean growth none of them shows. Verified against the e-filed 990s. |
-| D2 | Flagship attendance: **35% of members** vs the 25% prior | Adopt 35% (+32% non-member registrants) | The old 25% was a generic guess; real ACS numbers decompose to exactly 35% + 32%. |
-| D3 | Grace period = **2 months** | Adopt | It's the industry's most common policy (48% of associations, MGI survey). |
-| D4 | **~625 organizations** at default scale (plan said ~25) | Adopt 625 | The competition needs ~210 entering companies to look real; 25 orgs can't carry it. |
-| D5 | Default hosted-demo size | **Large (15,000 members)** | Meets the "10k+ credibility" ask, and it's now honestly sized from real same-size associations (~2,000-person flagship, ~$4M revenue). |
-| D6 | Renewal cycle: pure calendar-year, or calendar-year **plus a ~25–30% anniversary cohort** (GAP-12) | **The mixed policy** *(Barnatt's pick, 2026-07-07)*: auto-pay members bill on their join anniversary (that's how subscription billing really works — and it exercises our subscriptions app), optionally plus members grandfathered from a 2022 policy switch. December still dominates. | Pure calendar-year empties the "who's about to renew?" demo — and bunches all lapses around March — for most of the year. Half of individual-member associations really do run anniversary cycles, so the mix is honest. Also fixes three hero storylines. Detail: Marcus Chen goes in the anniversary cohort with auto-renew OFF (his story needs reminder emails); org-tier cycle to be specified at ratification. *(If adopted: ASSOCIATION-PROFILE §3, the §5 calendar row here, and the JSON cycle note get updated — flagged in each.)* |
-| D7 | Bless the hero names (permanent afterward) | Review via [PERSONAS-REVIEW.md](PERSONAS-REVIEW.md) | Two names are already fixed by prior team use (Elena Rodriguez, Anna Brown). |
-| D8 | Who owns hero authoring from here (OQ-7) | **Name an owner now** | Hero content is hand-written, quality-gated, and release-blocking; 22 of the target 50–100 exist and the ship date is July 31. This is the schedule's longest pole. |
-
 ## 7. What happens next (the sequence)
 
 | Step | Who | Output |
@@ -240,7 +246,7 @@ Madhav confirming the method held. Only after a green pilot do we generate the f
 | 1. Schema reconciliation session (agenda: [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)) | Barnatt + Marcelo (needs his BizApps survey) | Final table shapes for the vertical slice; B1–B7 answered |
 | 2. Causal-map workshop | Barnatt, Marcelo, Madhav, Robert | Every arrow direction agreed; D6 mechanism ratified; the ruleset's first-draft edge list |
 | 3. Ruleset v0.1 | Barnatt | The vertical slice (member → subscription → event registration), authored and runnable |
-| 4. N≈500 pilot | Barnatt (Madhav confirms method) | Pass/fail against the §4 gate; fixes looped until green |
+| 4. N≈500 pilot | Barnatt (Madhav confirms method) | Pass/fail against the §5 gate; fixes looped until green |
 | 5. Full generation | data workstream | All three presets, full benchmark check, heroes verified |
 
 Rough effort and calendar (ship date July 31): see [work-breakdown.md](work-breakdown.md) —
@@ -257,7 +263,7 @@ the generator is the hardest engineering in the project, hero content is the lon
   integration time vanishes; the cross-app integrity check is the smoke test that proves the
   composition works.
 - **The generator itself is real engineering** — thousands of records that all line up
-  (dates, statuses, payments-to-ledger) is exactly where v1 broke; the §3/§4 machinery exists
+  (dates, statuses, payments-to-ledger) is exactly where v1 broke; the §4/§5 machinery exists
   because of it.
 - **Support-ticket numbers are estimates** — no real association data exists (and internal
   Izzy data was ruled out for confidentiality). Labeled as estimates; fine for demos.

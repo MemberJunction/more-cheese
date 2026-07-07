@@ -138,7 +138,7 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 ## 7. Open items before generation (the approval checklist)
 
 > The open decisions — with recommendations and one-line evidence per item — live in
-> **[DESIGN-REVIEW.md](DESIGN-REVIEW.md) §6** (the design review). The items below are the
+> **[DESIGN-REVIEW.md](DESIGN-REVIEW.md) §1** (the design review). The items below are the
 > same asks in summary form.
 
 1. Sign off **renewal 87%** and **conference 35%** (evidence packet vs Robert's 89/25 priors).
