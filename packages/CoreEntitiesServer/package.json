@@ -1,5 +1,5 @@
 {
-  "name": "@mj-sample-app/core-entities-server",
+  "name": "@mj-more-cheese-demo/core-entities-server",
   "version": "1.0.0",
   "type": "module",
   "description": "Server-side entity subclass overrides (validation, computed fields, save hooks). TODO(template): rename.",
@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-sample-app/entities": "1.0.0"
+    "@mj-more-cheese-demo/entities": "1.0.0"
   },
   "peerDependencies": {
     "@memberjunction/core": "^5.44.0",

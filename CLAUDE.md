@@ -12,11 +12,11 @@ mj-app.json            - MJ Open App manifest (the source of truth for the app)
 migrations/            - Skyway migrations for the app schema (starts empty)
 metadata/              - mj-sync metadata (dev-time; seeds ship as migrations)
 packages/
-  Entities/            - @mj-sample-app/entities   (CodeGen entity subclasses)
-  CoreEntitiesServer/  - @mj-sample-app/core-entities-server (server-side entity overrides)
-  Actions/             - @mj-sample-app/actions    (MJ Actions)
-  Server/              - @mj-sample-app/server     (server bootstrap -> MJAPI)
-  Angular/             - @mj-sample-app/ng         (client bootstrap -> MJExplorer)
+  Entities/            - @mj-more-cheese-demo/entities   (CodeGen entity subclasses)
+  CoreEntitiesServer/  - @mj-more-cheese-demo/core-entities-server (server-side entity overrides)
+  Actions/             - @mj-more-cheese-demo/actions    (MJ Actions)
+  Server/              - @mj-more-cheese-demo/server     (server bootstrap -> MJAPI)
+  Angular/             - @mj-more-cheese-demo/ng         (client bootstrap -> MJExplorer)
 docs/                  - how this repo works (branching, publishing, codegen, linking)
 docs/claude/           - the MemberJunction development guide (topic-split, with TOC)
 ```
@@ -65,7 +65,7 @@ covered there). Read the relevant topic before working in its area:
 
 ```sh
 # linked (from the MJ repo root — the normal mode):
-npx turbo build --filter="@mj-sample-app/*"
+npx turbo build --filter="@mj-more-cheese-demo/*"
 npx mj migrate --schema sample_app --dir packages/dev-apps/mj-sample-open-app/migrations
 npx mj codegen
 

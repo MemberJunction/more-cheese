@@ -1,10 +1,10 @@
 /**
- * @mj-sample-app/ng — the CLIENT BOOTSTRAP package.
+ * @mj-more-cheese-demo/ng — the CLIENT BOOTSTRAP package.
  *
  * This is the package named in mj-app.json under packages.client with role
  * "bootstrap". When the app is installed (or dev-linked), MJExplorer's
  * auto-generated open-app-bootstrap.generated.ts gains a static
- * `import '@mj-sample-app/ng';` — ESBuild bundles it and module evaluation
+ * `import '@mj-more-cheese-demo/ng';` — ESBuild bundles it and module evaluation
  * fires the @RegisterClass decorators that make your components discoverable.
  *
  * WHAT LIVES HERE
@@ -16,7 +16,7 @@
  * decorators fire, and RE-EXPORT the generated module/components so the
  * host's class-registration manifest can import them by name:
  *
- *   import '@mj-sample-app/entities';
+ *   import '@mj-more-cheese-demo/entities';
  *   import './lib/generated/generated-forms.module';
  *   export { GeneratedFormsModule } from './lib/generated/generated-forms.module';
  *   export { <YourEntity>FormComponent } from './lib/generated/Entities/<YourEntity>/<yourentity>.form.component';

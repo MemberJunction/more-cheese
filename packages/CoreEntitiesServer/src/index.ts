@@ -1,5 +1,5 @@
 /**
- * @mj-sample-app/core-entities-server — SERVER-ONLY entity subclasses
+ * @mj-more-cheese-demo/core-entities-server — SERVER-ONLY entity subclasses
  * (OPTIONAL — delete if you have no server-side entity logic).
  *
  * Override generated entities here to add server-side behavior: validation,
@@ -8,7 +8,7 @@
  * code — it is a dependency of the Server package only.
  *
  * NOTE the dependency shape in package.json: the sibling app package
- * (@mj-sample-app/entities) is a HARD dependency pinned to the exact same
+ * (@mj-more-cheese-demo/entities) is a HARD dependency pinned to the exact same
  * version (all app packages version together via changesets `fixed`), while
  * every @memberjunction/* package is a PEER (^X.Y.Z).
  *
@@ -16,7 +16,7 @@
  *
  *   import { RegisterClass } from '@memberjunction/global';
  *   import { BaseEntity } from '@memberjunction/core';
- *   import { SampleRecordEntity } from '@mj-sample-app/entities';
+ *   import { SampleRecordEntity } from '@mj-more-cheese-demo/entities';
  *
  *   @RegisterClass(BaseEntity, 'Sample App: Sample Records')
  *   export class SampleRecordEntityServer extends SampleRecordEntity {

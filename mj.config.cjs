@@ -7,7 +7,7 @@
 // NOT put credentials here. Most settings have sensible package defaults; this
 // file only declares what is specific to this app's directory structure.
 //
-// TODO(template): everywhere you see "sample" or "@mj-sample-app", replace with
+// TODO(template): everywhere you see "sample" or "@mj-more-cheese-demo", replace with
 // your app's schema name and npm scope. The full rename checklist lives in
 // docs/template-docs/getting-started.md.
 //
@@ -18,7 +18,7 @@ module.exports = {
 
   // The npm package that receives generated entity subclasses. Must match
   // packages/Entities/package.json "name".
-  entityPackageName: '@mj-sample-app/entities',
+  entityPackageName: '@mj-more-cheese-demo/entities',
 
   // Where each kind of generated artifact is written. These paths match this
   // template's packages/ layout — keep them in sync if you rename packages.
