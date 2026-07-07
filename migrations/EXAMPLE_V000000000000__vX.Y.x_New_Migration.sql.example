@@ -1,0 +1,19 @@
+-- ============================================================
+-- <YourApp>: <what this migration does> (v<X.Y.x>)
+-- Copy to: V<YYYYMMDDHHMM>__v<X.Y.x>_<Description>.sql (timestamp = now, UTC)
+-- ============================================================
+
+-- Your schema objects (use the placeholder, never a hardcoded schema name):
+-- CREATE TABLE ${flyway:defaultSchema}.Widget (
+--     ID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
+--     Name NVARCHAR(200) NOT NULL,
+--     CONSTRAINT PK_Widget PRIMARY KEY (ID)
+-- )
+-- GO
+
+-- REMEMBER (docs/codegen-and-metadata-migrations.md):
+--   * no __mj_CreatedAt/__mj_UpdatedAt columns, no FK indexes (CodeGen adds them)
+--   * hardcoded UUIDs for any metadata rows (never NEWID())
+--   * after this migration: run codegen, commit the regenerated code + the
+--     codegen-emitted SQL folded into this (or a follow-up) migration
+--   * add a changeset: npx changeset  (>= minor when a migration is added)
