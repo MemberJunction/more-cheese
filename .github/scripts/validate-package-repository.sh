@@ -2,7 +2,13 @@
 # Validates repository.url in all @mj-sample-app packages
 # Required for npm provenance verification (OIDC trusted publishing)
 
-EXPECTED_URL="https://github.com/MemberJunction/bizapps-common"
+# Derive the expected URL from the ROOT package.json so this script survives
+# the template rename — keep repository.url correct there and everywhere else.
+EXPECTED_URL=$(jq -r '.repository.url // ""' package.json)
+if [ -z "$EXPECTED_URL" ]; then
+  echo "::error::Root package.json has no repository.url — set it first"
+  exit 1
+fi
 ERRORS=0
 
 echo "Checking repository.url in all @mj-sample-app packages..."

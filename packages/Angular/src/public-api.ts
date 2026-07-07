@@ -23,7 +23,7 @@
  *
  * HAND-WRITTEN COMPONENT EXAMPLE — a resource component that renders as a tab
  * in MJ Explorer (its DriverClass must match a DefaultNavItems entry in your
- * application metadata — see metadata/_examples/application.example.json):
+ * application metadata — see docs/template-docs/metadata.md):
  *
  *   import { Component } from '@angular/core';
  *   import { RegisterClass } from '@memberjunction/global';

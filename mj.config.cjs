@@ -9,7 +9,7 @@
 //
 // TODO(template): everywhere you see "sample" or "@mj-sample-app", replace with
 // your app's schema name and npm scope. The full rename checklist lives in
-// docs/getting-started.md.
+// docs/template-docs/getting-started.md.
 //
 module.exports = {
   // ==========================================================================
@@ -63,6 +63,8 @@ module.exports = {
   // ==========================================================================
   // CodeGen for THIS app must only touch THIS app's schema. Never generate
   // against MJ core (__mj) or system schemas from an app repo.
+  // Include schemas for dependencies to avoid generating duplicate entities for 
+  // them. See docs/template-docs/codegen-and-metadata-migrations.md.
   excludeSchemas: ['sys', 'staging', 'dbo', '__mj'],
 
   // ==========================================================================

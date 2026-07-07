@@ -8,7 +8,7 @@
  *   generated code — the committed code is the source of truth consumers
  *   install; CodeGen on a clean branch is an expected no-op.
  *
- * PEER DEPENDENCIES (see package.json + docs/versioning-and-peer-deps.md)
+ * PEER DEPENDENCIES (see package.json + docs/template-docs/versioning-and-peer-deps.md)
  *   @memberjunction/core + global are PEERS (^X.Y.Z), never hard deps —
  *   exactly one copy of each may exist in a host process; a second copy
  *   splits MJ's class factory and silently breaks registration.
