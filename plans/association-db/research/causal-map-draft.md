@@ -185,7 +185,9 @@ below cites the benchmark it must reproduce:
 | 4.9 | invoiceChannel (card-at-checkout / auto-pay dues / net-terms B2B) → payment-timing shape | gate/mixture | strong | the `payments_timing` 3-part mixture: checkout mass, due-date spike (+3–14d failed-card retries), Atradius/CRF late curve for net-terms only |
 | 4.10 | affluence → merch orders | + | weak | `merch_orders_per_member_year` 0.15, `merch_revenue_share` 2.5% — affluence-coupled like other spend |
 | 5.15 | season(Nov–Jan renewal window) → support tickets (dues/login topics); post-event window → refund/transfer tickets | + | med | `support_topic_mix` seasonal coupling — seasonality matters more than topic precision (R11 flag) |
-| 1.15 | employerEvent (dissolution / acquisition / program-cut) → renewed? | − | med | crowd-level mechanism behind the hero churn stories (Anna/Bob/Danielle all churn via employer events); makes "every lapse has a findable cause" (FEATURES-REVIEW #2) statistical rather than hero-only — requires employer-org lifecycle events in the generated world |
+| 1.15 | employerEvent (dissolution / acquisition / program-cut) → renewed? | − | med | crowd-level mechanism behind the hero churn stories (Anna/Bob/Danielle all churn via employer events); makes "every lapse has a findable cause" (FEATURES-REVIEW #2) statistical rather than hero-only — requires employer-org lifecycle events in the generated world. **Review 2026-07-08: LOAD-BEARING — walk this arrow FIRST at the workshop** (without it, feature #2 collapses to hero-only) |
+| 4.11 | *(conditional on D10/forms)* engagement → form/survey response rate | + | med | engaged members answer the post-event survey; ghosts don't — responses become another engagement observable |
+| 4.12 | *(conditional on D10/forms)* satisfaction (survey scores) → repeat attendance / renewal | + | weak-med | closes the event-ROI loop (Dale Peterson's "great reviews" get a table AND a consequence) |
 
 ## Workshop protocol
 1. Walk arrows ranked by strength (strong first). For each: agree/flip/cut + one-line justification survives into the ruleset as `signPrediction` + `justification`.

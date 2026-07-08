@@ -234,6 +234,9 @@ Owns renewals and the health of the membership funnel. Demo use: the **Membershi
 
 ## 7. Asks for the team
 
-1. **Bless or edit the names** (permanent afterward).
+1. **Bless or edit the names** (permanent afterward). ⚠ Gate first (review 2026-07-08): run a
+   name/entity collision check — hero and org names (Sierra Vista Creamery, Northgate Market
+   Group, …) against real people and businesses in this small, real industry — and add a
+   one-line "calibration, not depiction" note re: the identifiable ACS.
 2. Check storylines against real demo scripts (every §0 scenario now has an anchor — event-ROI is Dale Peterson).
 3. Who owns hero authoring going forward (OQ-7)?

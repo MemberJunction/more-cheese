@@ -13,6 +13,8 @@ Execution of the research plan in [../research-plan-and-schema-proposal.md](../r
 > `mj/plans/association-db/PLAN-UPDATES.md`. Sales-review summary: [../DATA-SUMMARY.md](../DATA-SUMMARY.md).
 >
 > **2026-07-07 — verification pass (Barnatt).** JSON → **v0.9.1**: the 990 spot-check (GAP-9's load-bearing half) is DONE — every dues-trend and ACS revenue figure verified against the e-filed 990s, all exact; renewal-87% evidence intact. Turnout citations re-verified. Two corrections: BBGA streak = 5 down yrs (−3.6%/yr), and the "Cider individual = $175" corroboration RETRACTED (their individual tier is $75; ACS's $175 verified directly at source). Conference-at-large prose aligned to the canonical JSON (~2,000 registrants / ~9% member attendance — the 13%/~1,950 figure was the superseded α-derived value). New: **GAP-12** (calendar-year renewals vs release-relative hero pins) in [../gaps-to-fill.md](../gaps-to-fill.md); consolidated reconciliation walk-list at [../RECONCILIATION-ASKS.md](../RECONCILIATION-ASKS.md). Details: JSON `$v091`.
+>
+> **2026-07-08 — review-feedback pass.** Robert's review ([../DESIGN-REVIEW-FEEDBACK.md](../DESIGN-REVIEW-FEEDBACK.md), PR #1) concurs on D1–D8; accepted findings folded: JSON → **v0.9.2** (`$texture` anti-smoothness block with variance floors, holdout-isolation mechanism, org-count derivation chain, tenure-mix note, decliningOrg composition question), D9 (per-app data packs) + D10 (bizapps-forms) added to the decision register (GAP-13/14), ruleset-spec step inserted in the build sequence, pilot gate upgraded (effect-size bands + trainability check), reconciliation agenda extended (B8 packs, B9 IsA rule, same-DB FK constraint, Sonar contract in writing).
 
 | Workstream | Deliverable | Status |
 |---|---|---|
@@ -30,7 +32,7 @@ Execution of the research plan in [../research-plan-and-schema-proposal.md](../r
 | R11 — Support topics *(added 2026-07-06, was GAP-2)* | [candidate-sources/gap2-support-topics-sources.md](candidate-sources/gap2-support-topics-sources.md) — ticket taxonomy + volumes; ESTIMATE-LED (no association-native data exists): Gartner + HDI/MetricNet kept, marketing-grade sources removed as evidence | ✅ resolved estimate-led (Marcelo) |
 | R12 — Size attenuation *(added 2026-07-06, was GAP-5)* | [candidate-sources/gap5-size-attenuation-sources.md](candidate-sources/gap5-size-attenuation-sources.md) — participation α = 0.55 fitted on ACF/SNA/AND vs the ACS anchor (expo/confounded orgs removed); conference-at-large from REAL turnouts (~2,000 registrants / ~9% member attendance), ~$4M revenue | ✅ reviewed & fitted (Marcelo) |
 | *(backlogged)* — HubSpot/Higher Logic object models *(was GAP-3)* | [candidate-sources/gap3-hubspot-higherlogic-docs.md](candidate-sources/gap3-hubspot-higherlogic-docs.md) — public dev-doc survey, parked | 📦 backlogged → `../DEMO-BACKLOG.md` BL-1 |
-| Synthesis | [benchmarks-draft.json](benchmarks-draft.json) — consolidated targets + tolerances + scaling laws + regimes + scenarios, holdouts marked. **Canonical target list** — where any prose doc disagrees, the JSON wins | ✅ **v0.9.1-draft** |
+| Synthesis | [benchmarks-draft.json](benchmarks-draft.json) — consolidated targets + tolerances + scaling laws + regimes + scenarios, holdouts marked. **Canonical target list** — where any prose doc disagrees, the JSON wins | ✅ **v0.9.2-draft** |
 
 ## Headline findings
 

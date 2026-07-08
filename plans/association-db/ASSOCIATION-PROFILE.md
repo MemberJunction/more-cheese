@@ -4,7 +4,7 @@
 If you're entering demo data, prepping a pitch, or checking whether a number "sounds right,"
 this is the single document that describes the world.
 
-Every figure traces to `research/benchmarks-draft.json` v0.9.1 (the canonical numbers file —
+Every figure traces to `research/benchmarks-draft.json` v0.9.2 (the canonical numbers file —
 where any document disagrees with it, the JSON wins). Load-bearing figures were verified
 against real IRS filings and primary sources on 2026-07-07. Figures the research could not
 source are tagged **(estimate)**.
@@ -309,7 +309,7 @@ The data ships with labeled problems that have known-truth answers:
 
 ## 11. Where every number comes from
 
-- **Canonical file:** `research/benchmarks-draft.json` v0.9.1 — every target carries source,
+- **Canonical file:** `research/benchmarks-draft.json` v0.9.2 — every target carries source,
   confidence, and tolerance; estimates are labeled
 - **Evidence base:** real IRS 990 filings (verified against the e-filed originals on
   2026-07-07), published association benchmarks (MGI, Higher Logic, ASAE, FEP, Atradius/CRF),

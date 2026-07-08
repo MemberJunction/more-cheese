@@ -3,7 +3,7 @@
 **Date:** 2026-07-05 · **Status: FOR REVIEW** — this is the pre-generation approval document.
 Once sales signs off (and the open items in §7 are decided), we generate the dataset.
 Deep-dive companions: `research-plan-and-schema-proposal.md` (design),
-`research/benchmarks-draft.json` v0.9.1 (every target number, now primary-source-verified), `hero-personas-draft.md` (the
+`research/benchmarks-draft.json` v0.9.2 (every target number, primary-source-verified), `hero-personas-draft.md` (the
 named characters), `gaps-to-fill.md` (what's still open), and the master plan at
 `mj/plans/association-db/v2-plan.md` + `PLAN-UPDATES.md`.
 
