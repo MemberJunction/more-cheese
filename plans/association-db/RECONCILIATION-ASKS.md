@@ -1,5 +1,43 @@
 # Schema Reconciliation — Consolidated Walk-List (Barnatt ↔ Marcelo)
 
+> **2026-07-10 — the composed apps' design docs are public and were read** (MemberJunction org:
+> `bizapps-orders` master plan BO-D1..D47, `bizapps-accounting` plans, `bizapps-forms`).
+> Several asks below are now ANSWERED at design level; the session should confirm rather than
+> discover. Key findings:
+>
+> 1. **A1 answered (design-level):** `Subscription` is a **continuity record** (one per member,
+>    not per period) with `CurrentPeriodStart/End`, statuses `Active·Paused·Canceled·Migrated·Trialing`;
+>    **each cycle spawns a renewal `Order`** (BO-D40/D45 — no Invoice entity, the posted Order IS
+>    the bill). Our per-year MembershipPeriod maps to *one renewal Order per cycle* + the
+>    Subscription + `SubscriptionEvent` stream. `CancellationDate` splits into `CanceledAt` +
+>    `EndDate`. **No `Lapsed`/`PendingRenewal` statuses and no grace concept exist** — those are
+>    OUR domain rules layered on top (pending-renewal = open Unpaid renewal Order; lapse =
+>    Canceled + EndDate at end-of-grace with the reason in `SubscriptionEvent.EventData`).
+>    **No AutoRenew flag** — auto-renewal = stored `CustomerPaymentMethod` + provider billing;
+>    manual = cron-billed renewal Orders + dunning.
+> 2. **A2 answered:** order-line typing is via `Product`/`ProductType` (seeded types include
+>    **Membership, Event, Donation**, PhysicalGood…) — one Order can mix dues + event + donation
+>    + merch lines. `Order.DueDate` derives from `PaymentTermsType` at Post → our payment-timing
+>    model attaches to `DueDate` vs `Payment.PaymentDate`. GAP-7's donations-as-products ruling
+>    is first-class in their design (`DonationProduct`/`DonationOrderLine`).
+> 3. **D6 is unconstrained by their design** — calendar-vs-anniversary is genuinely unmodeled
+>    (formal renewal terms deferred to a future BizAppsContracts); both cycles are expressible.
+>    Grace, dunning cadence, and **all fields of the `MembershipProduct` IsA extension are
+>    undefined** — that extension is exactly where our association attributes should go; we can
+>    PROPOSE its fields rather than ask.
+> 4. **⏱ Readiness (OQ-11), quantified:** `bizapps-orders` is **design/pre-implementation** —
+>    no tables exist; its own phasing lands Subscriptions at **week 10–13** of an 18-week plan,
+>    gated on `bizapps-accounting` locking (which was still churning as of 07-08: AccountingPeriod
+>    removed, batch-lock redesign). **The money chain cannot ride real orders tables by July 31** —
+>    our cheese-schema MembershipPeriod stands in for v1 of the demo, decomposing into
+>    Subscription+Orders when the app ships (the generator's flat period table becomes the
+>    intermediate that emits both shapes).
+> 5. **D10 largely de-risked:** `bizapps-forms` Phase 1 is **BUILD COMPLETE** (audited 07-01,
+>    396 tests; schema migrated + codegen'd) — `FormResponse`/`FormResponseAnswer` shapes known.
+> 6. **New flag:** `Subscription.CustomerOrganizationID` and `Order.CustomerOrganizationID` are
+>    **NOT NULL** (B2B-shaped) — individual members need a pattern (Person-as-customer via
+>    `CustomerPersonID`/beneficiary, or a self-org). Raise at the session.
+
 **Created 2026-07-07.** Single-page agenda for the Part-2 schema reconciliation. The asks below
 were scattered across the schema proposal, the gap register, the JSON `$demo_alignment`, and
 individual hero pins — this consolidates them so nothing gets dropped in the session. Deep

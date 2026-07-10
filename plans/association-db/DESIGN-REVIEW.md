@@ -28,11 +28,11 @@ behind them is in §2–§5, and the full evidence trail is in the reading map (
 | D3 | Grace period = **2 months** | Adopt | It's the industry's most common policy (48% of associations, MGI survey). |
 | D4 | **~625 organizations** at default scale (plan said ~25) | Adopt 625 | The competition needs ~210 entering companies to look real; 25 orgs can't carry it. |
 | D5 | Default hosted-demo size | **Large (15,000 members)** — with two conditions (review 2026-07-08): (a) a **volume budget** before sign-off (large ≈ 5M+ email-send rows over 5 years, plus pre-computed embeddings — get install-time and package-size numbers); (b) at least **one full large-preset generation** before launch, not just the 500-pilot | Meets the "10k+ credibility" ask, and it's now honestly sized from real same-size associations (~2,000-person flagship, ~$4M revenue) — but large is the least-validated preset. |
-| D6 | Renewal cycle: pure calendar-year, or calendar-year **plus a ~25–30% anniversary cohort** (GAP-12) | **The mixed policy** *(Barnatt's pick, 2026-07-07)*: auto-pay members bill on their join anniversary (that's how subscription billing really works — and it exercises our subscriptions app), optionally plus members grandfathered from a 2022 policy switch. December still dominates. | Pure calendar-year empties the "who's about to renew?" demo — and bunches all lapses around March — for most of the year. Half of individual-member associations really do run anniversary cycles, so the mix is honest. Also fixes three hero storylines. Detail: Marcus Chen goes in the anniversary cohort with auto-renew OFF (his story needs reminder emails); org-tier cycle to be specified at ratification. *(If adopted: ASSOCIATION-PROFILE §3, the §6 calendar row here, and the JSON cycle note get updated — flagged in each.)* |
+| D6 | Renewal cycle: pure calendar-year, or calendar-year **plus a ~25–30% anniversary cohort** (GAP-12) | **The mixed policy** *(Barnatt's pick, 2026-07-07)*: auto-pay members bill on their join anniversary (that's how subscription billing really works — and it exercises the subscription machinery in bizapps-orders), optionally plus members grandfathered from a 2022 policy switch. December still dominates. *(2026-07-10: bizapps-orders' published design models NO cycle alignment — zero upstream constraint on this decision.)* | Pure calendar-year empties the "who's about to renew?" demo — and bunches all lapses around March — for most of the year. Half of individual-member associations really do run anniversary cycles, so the mix is honest. Also fixes three hero storylines. Detail: Marcus Chen goes in the anniversary cohort with auto-renew OFF (his story needs reminder emails); org-tier cycle to be specified at ratification. *(If adopted: ASSOCIATION-PROFILE §3, the §6 calendar row here, and the JSON cycle note get updated — flagged in each.)* |
 | D7 | Bless the hero names (permanent afterward) | Review via [PERSONAS-REVIEW.md](PERSONAS-REVIEW.md) — with one gate first (review 2026-07-08): a **name/entity collision check** (hero and org names vs. real people/businesses in this small, real industry) and a one-line "calibration, not depiction" note re: the identifiable ACS | Two names are already fixed by prior team use (Elena Rodriguez, Anna Brown). |
 | D8 | Who owns hero authoring from here (OQ-7) | **Name an owner now — and formally re-scope the July-31 hero target to ~25** (roughly the current cast), letting quarterly refreshes grow toward 50–100 (review 2026-07-08) | Hero content is hand-written, quality-gated, and release-blocking; 22 exist, the owner is unassigned, and the ship date is July 31. Deliberate scoping now beats week-5 triage. |
 | D9 | **Per-app data packs** — one installable data pack per composed bizapps app (common → tasks → issues → committees → …), rolling up to the full dataset *(proposed 2026-07-08 from Amith's comments)* | Adopt, with the **generate-once / partition-into-packs** principle fixed now, a pack dependency pyramid mirroring the app graph, and a handful of **named, tested bundles** rather than arbitrary combinations | Amith's ask, and it's the BizApps-suite sales story — but the causal generator cannot run per-pack (one hidden dial drives a person's registrations *and* posts *and* payments), so generation stays monolithic and packaging becomes the final partitioning step. Additive if decided before the generator's output format is designed; a rewrite after. |
-| D10 | **bizapps-forms as composed app #11** — forms + responses (session evaluations, post-event surveys, membership applications) *(proposed 2026-07-08)* | Adopt as an **optional pack**, not a July-31 blocker — pending Pranav's schema status + freeze date (Robert chasing) | Plugs a real hole (Dale Peterson's "great reviews" currently have no table to live in; event-ROI gains a satisfaction signal) — but an 11th unfrozen dependency 3 weeks before ship is exactly the OQ-11 risk. |
+| D10 | **bizapps-forms as composed app #11** — forms + responses (session evaluations, post-event surveys, membership applications) *(proposed 2026-07-08)* | Adopt as an **optional pack** — the readiness concern resolved itself (2026-07-10): forms Phase 1 is **build complete** (audited 07-01; schema migrated, codegen'd, 396 tests; `FormResponse`/`FormResponseAnswer` shapes known). Still not a July-31 blocker: the forms *data* module (response-rate benchmarks, arrows 4.11/4.12) stays post-pilot work | Plugs a real hole (Dale Peterson's "great reviews" currently have no table to live in; event-ROI gains a satisfaction signal) — and it turned out to be the *most* frozen of the newer apps, not the least. |
 
 ---
 
@@ -76,9 +76,7 @@ vs. what's truly custom."
 | Composed app | What it provides to the demo |
 |---|---|
 | bizapps-common | People, organizations, employment, contact info — the identity layer |
-| subscriptions | Memberships, modeled as recurring subscriptions |
-| orders | Every purchase: dues, event registrations, course fees, entry fees, merch, donations |
-| payments | Payment records against those orders |
+| bizapps-orders | Every purchase AND the payments AND the subscriptions — its published design folds all three together: products (typed: Membership/Event/Donation/merch), orders (the posted Order *is* the bill — no invoices), payments, and subscriptions that spawn a renewal order each cycle. **Memberships live here.** *(2026-07-10: the plan's original list counted payments and subscriptions as separate apps; the real design merges them — and the app is pre-implementation, see §8.)* |
 | accounting | The ledger — every payment lands as a balanced journal entry |
 | sonar | Engagement scoring (feeds the predictive models) |
 | committees | Charters, terms, meetings, motions, votes, minutes |
@@ -160,13 +158,22 @@ v2's design makes each of those **impossible to store**, not just unlikely:
    engagement score or an invoice balance is produced from the underlying rows at the end,
    with arithmetic checks so it can't silently go stale.
 
-**Still to confirm with Marcelo** (tracked in [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)):
-the Subscription and order-line shapes, where org size/region lives, event venue geo columns,
-map coordinates on addresses (a bizapps-common change), the 'Suspended' status value, and
-donation order-line typing — **plus confirmation that the composed apps can accommodate three
-of the rules above**: cross-schema foreign keys (rule 3), `IsSharedDemo` everywhere (rule 5),
-and the competition's "entrant must be a member organization" hard gate. We state them here
-as design requirements; they're asks B5–B7 until Marcelo confirms.
+**Still to confirm with Marcelo** (tracked in [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)
+— see its **2026-07-10 findings banner**: the composed apps' public design docs were read, and
+the Subscription/order-line questions are now answered at design level; the session confirms
+rather than discovers). What remains genuinely open: the **individual-member pattern**
+(their Order/Subscription design requires a customer *organization* — B2B-shaped), the
+**`MembershipProduct` extension fields** (exists by name, zero fields defined — we propose,
+not ask), where org size/region lives, event venue geo columns, map coordinates on addresses,
+the 'Suspended' status value — plus confirmation that the composed apps accommodate
+cross-schema foreign keys (rule 3), `IsSharedDemo` everywhere (rule 5), and the competition's
+"entrant must be a member organization" hard gate (asks B5–B7).
+
+**Membership data's two-stage life** (2026-07-10): bizapps-orders won't have tables by July 31
+(§8), so our `MembershipPeriod` is the **shipping shape** for this release. When the orders app
+lands, each period row decomposes into their design's canonical form — one long-lived
+`Subscription` per member + one renewal `Order` per cycle + payments + an event stream. The
+generator's flat period table is deliberately the intermediate that can emit either.
 
 ## 5. How the fake data gets made — and how we'll know it worked
 
@@ -312,9 +319,14 @@ the generator is the hardest engineering in the project, hero content is the lon
 
 ## 8. Risks & schedule watch-items
 
-- **⏱ Composed-app schema freezes (OQ-11)** — the whole timeline hangs on when the 10
-  dependency apps' tables freeze; several were unconfirmed at kickoff. Owner: Marcelo.
-  Get dates.
+- **⏱ Composed-app schema freezes (OQ-11) — now quantified (2026-07-10, from the public
+  design docs):** `bizapps-orders` (which contains payments AND subscriptions) is
+  **design/pre-implementation** — no tables exist, its own phasing lands Subscriptions at
+  week 10–13, and it's gated on `bizapps-accounting`, which was still structurally churning
+  on 07-08 (AccountingPeriod removed; batch-lock redesign). **The money chain cannot ride
+  real orders tables by July 31** — membership data ships on our `MembershipPeriod` shape
+  and decomposes into Subscription+Orders later (see §4). Conversely, `bizapps-forms` is
+  build-complete and `bizapps-common` is stable. Owner: Marcelo confirms the rest.
 - **⏱ Hero pipeline** — 22 of 50–100 written, authoring owner unassigned (D8),
   release-blocking.
 - **The seams between apps** — where one app's tables meet another's assumptions is where
