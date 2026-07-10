@@ -15,7 +15,7 @@
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { logisticFit } from './lib/stats.mjs';
+import { logisticFit } from './core/stats.mjs';
 import { loadRuleset } from './lib/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));

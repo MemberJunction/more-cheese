@@ -4,12 +4,13 @@
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compileRuleset } from './compile.mjs';
-import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from './lint.mjs';
+import { compileRuleset } from '../core/compile.mjs';
+import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from '../core/lint.mjs';
+import { morecheeseHooks } from '../domains/morecheese/hooks.mjs';
 
 export const DATAGEN_DIR = dirname(dirname(fileURLToPath(import.meta.url)));
-export { DAY, iso, addDays, addYears, endOfYear, parseDate } from './dates.mjs';
-import { parseDate } from './dates.mjs';
+export { DAY, iso, addDays, addYears, endOfYear, parseDate } from '../core/dates.mjs';
+import { parseDate } from '../core/dates.mjs';
 
 /** Deep-merge: objects merge recursively; arrays and scalars replace. */
 function deepMerge(base, overlay) {
@@ -47,9 +48,9 @@ export function loadRuleset(scenario) {
     if (unknown.length) throw new Error(`scenario '${scenario}' has keys the base ruleset doesn't: ${unknown.join(', ')}`);
     deepMerge(ruleset, overlay);
   }
-  lintRuleset(ruleset); // a malformed recipe never reaches the kitchen
+  lintRuleset(ruleset, morecheeseHooks.domainLint); // a malformed recipe never reaches the kitchen
   // compile: human-authored effect forms (liftPts / groupTarget / strength) → solved βs
-  return compileRuleset(ruleset);
+  return compileRuleset(ruleset, morecheeseHooks);
 }
 
 /** The AUTHORING view: the composed (pre-compile) ruleset with holdout-flagged targets

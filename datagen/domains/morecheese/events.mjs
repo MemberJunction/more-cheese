@@ -12,8 +12,8 @@
 // register more, so the pool skews low-no-show — the naive base rate undershoots the
 // target. Spec §7 lesson #1.)
 
-import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
-import { iso, addDays, parseDate } from './dates.mjs';
+import { rng, sigmoid, calibrateIntercept } from '../../core/rng.mjs';
+import { iso, addDays, parseDate } from '../../core/dates.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 export function buildEvents(cfg) {

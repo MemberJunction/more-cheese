@@ -12,12 +12,12 @@
 //   4. packs.mjs       — deal the finished rows into per-app packs (cook once, portion last)
 
 import { loadConfig } from './lib/config.mjs';
-import { buildOrgs, buildPeople } from './lib/world.mjs';
-import { runRenewalUnroll, applyArchiveRule } from './lib/membership.mjs';
-import { buildEvents, buildRegistrations } from './lib/events.mjs';
-import { buildMoney } from './lib/money.mjs';
-import { buildLearning } from './lib/learning.mjs';
-import { emitPacks } from './lib/packs.mjs';
+import { buildOrgs, buildPeople } from './domains/morecheese/world.mjs';
+import { runRenewalUnroll, applyArchiveRule } from './domains/morecheese/membership.mjs';
+import { buildEvents, buildRegistrations } from './domains/morecheese/events.mjs';
+import { buildMoney } from './domains/morecheese/money.mjs';
+import { buildLearning } from './domains/morecheese/learning.mjs';
+import { emitPacks } from './core/packs.mjs';
 import { join } from 'node:path';
 
 const cfg = loadConfig(process.argv.slice(2));

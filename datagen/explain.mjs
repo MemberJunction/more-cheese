@@ -10,7 +10,8 @@ import { writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadRuleset } from './lib/config.mjs';
-import { describeEffectPts } from './lib/compile.mjs';
+import { describeEffectPts } from './core/compile.mjs';
+import { morecheeseHooks } from './domains/morecheese/hooks.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const R = loadRuleset();
@@ -59,7 +60,7 @@ for (const [k, a] of Object.entries(R.membership.arrows)) {
   if (k === 'covidYear') {
     eff = `${a.logitShift} on the dial (a few points off that year's renewal)`;
   } else {
-    const d = describeEffectPts(R, k);
+    const d = describeEffectPts(R, k, morecheeseHooks);
     eff = d.kind === 'group'
       ? `**${d.pts > 0 ? '+' : ''}${d.pts.toFixed(1)}pt** ${detail} (the group lands at ~${d.groupRate.toFixed(0)}%)`
       : `**${d.pts > 0 ? '+' : ''}${d.pts.toFixed(1)}pt** ${detail}`;

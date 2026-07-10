@@ -10,8 +10,8 @@
 // The mechanics encode the team's rules: renewals back-date (no gaps), a lapse past the
 // 2-month grace gets a CancellationDate, and member status is always derived, never stored.
 
-import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
-import { iso, addDays, addYears, endOfYear, parseDate, DAY } from './dates.mjs';
+import { rng, sigmoid, calibrateIntercept } from '../../core/rng.mjs';
+import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../core/dates.mjs';
 
 export function runRenewalUnroll(cfg, people, orgs) {
   const { R, seed, release, releaseYear } = cfg;
