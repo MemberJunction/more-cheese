@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compileRuleset } from './compile.mjs';
+import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from './lint.mjs';
 
 export const DATAGEN_DIR = dirname(dirname(fileURLToPath(import.meta.url)));
 export { DAY, iso, addDays, addYears, endOfYear, parseDate } from './dates.mjs';
@@ -41,10 +42,21 @@ export function loadRuleset(scenario) {
   if (scenario) {
     const overlay = JSON.parse(readFileSync(join(DATAGEN_DIR, `ruleset/scenarios/${scenario}.json`), 'utf8'));
     delete overlay.$comment;
+    // overlays may only override, never invent — a typo'd key would merge silently otherwise
+    const unknown = findUnknownOverlayKeys(ruleset, overlay);
+    if (unknown.length) throw new Error(`scenario '${scenario}' has keys the base ruleset doesn't: ${unknown.join(', ')}`);
     deepMerge(ruleset, overlay);
   }
+  lintRuleset(ruleset); // a malformed recipe never reaches the kitchen
   // compile: human-authored effect forms (liftPts / groupTarget / strength) → solved βs
   return compileRuleset(ruleset);
+}
+
+/** The AUTHORING view: the composed (pre-compile) ruleset with holdout-flagged targets
+ * stripped — this is what any AI authoring step is allowed to read (spec §7 blindness). */
+export function loadAuthoringView(scenario) {
+  const full = loadRuleset(scenario);
+  return stripHoldouts(full);
 }
 
 /** Parse `--flag value` pairs; returns the run configuration + the composed ruleset. */

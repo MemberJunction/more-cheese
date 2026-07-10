@@ -43,6 +43,8 @@ const DATA = {
     'membership/membership_periods': load('membership', 'membership_periods'),
     'events/events': load('events', 'events'),
     'events/event_registrations': load('events', 'event_registrations'),
+    'learning/courses': load('learning', 'courses'),
+    'learning/enrollments': load('learning', 'enrollments'),
     'orders/products': load('orders', 'products'),
     'orders/orders': load('orders', 'orders'),
     'orders/order_lines': load('orders', 'order_lines'),

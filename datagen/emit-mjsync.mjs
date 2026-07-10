@@ -90,6 +90,23 @@ const MAPPING = [
     }),
   },
   {
+    pack: 'learning', json: 'courses', dir: 'courses', entity: 'MoreCheese: Courses',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('course', r.CourseKey) },
+      fields: { CourseKey: r.CourseKey, Name: r.Name, StartDate: r.StartDate, DurationWeeks: r.DurationWeeks, IsSharedDemo: r.IsSharedDemo },
+    }),
+  },
+  {
+    pack: 'learning', json: 'enrollments', dir: 'enrollments', entity: 'MoreCheese: Course Enrollments',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('enroll', r.EnrollKey) },
+      fields: {
+        EnrollKey: r.EnrollKey, PersonID: uuidFor('person', r.MemberNumber), CourseID: uuidFor('course', r.CourseKey),
+        EnrolledOn: r.EnrolledOn, Status: r.Status, CompletedOn: r.CompletedOn, IsSharedDemo: r.IsSharedDemo,
+      },
+    }),
+  },
+  {
     pack: 'orders', json: 'products', dir: 'products', entity: 'MoreCheese: Products',
     record: (r) => ({
       primaryKey: { ID: uuidFor('product', r.ProductKey) },

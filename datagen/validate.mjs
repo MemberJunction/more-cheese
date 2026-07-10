@@ -34,6 +34,8 @@ const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
 const payments = load('orders', 'payments');
+const courses = load('learning', 'courses');
+const enrollments = load('learning', 'enrollments');
 // validator-private: renewal decisions WITH the latents (never installed) — needed so arrow
 // recovery isn't attenuated by omitting a strong hidden driver (spec §7 lesson #2)
 const renewalEvents = JSON.parse(readFileSync(join(OUT, 'validation-events.json'), 'utf8'));
@@ -222,6 +224,61 @@ function checkTiers() {
   check('tiers: Enthusiast tier exists and is populated', enthMismatch > 0, `${enthMismatch} members`);
 }
 
+// ---------- learning: participation + completion, engagement expressing (3rd domain) ----------
+function checkLearning() {
+  const L = R.learning;
+  const courseKeys = new Set(courses.map((c) => c.CourseKey));
+  const badRefs = enrollments.filter((e) => !courseKeys.has(e.CourseKey) || !joinOf.has(e.MemberNumber)).length;
+  check('pack refs: learning→common+courses', badRefs === 0, `${badRefs} dangling`);
+
+  // participation: members with ≥1 enrollment per eligible year ≈ 50%. Eligible = covered
+  // mid-year — the same pool the generator calibrates on; counting raw period-years instead
+  // double-counts anniversary members and dilutes with partial years (measurement artifact).
+  const courseYear = new Map(courses.map((c) => [c.CourseKey, c.Year]));
+  const participated = new Set(enrollments.map((e) => `${e.MemberNumber}:${courseYear.get(e.CourseKey)}`));
+  let activeYears = 0, partYears = 0;
+  const lastYear = +run.releaseDate.slice(0, 4);
+  for (const [m, list] of periodsByMember) {
+    const seen = new Set();
+    for (const per of list) {
+      const y0 = +per.StartDate.slice(0, 4), y1 = Math.min(+per.EndDate.slice(0, 4), lastYear);
+      for (let y = y0; y <= y1; y++) {
+        if (seen.has(y)) continue;
+        const mid = `${y}-06-15`;
+        if (!(per.StartDate <= mid && mid <= per.EndDate) && !list.some((p2) => p2.StartDate <= mid && mid <= p2.EndDate)) continue;
+        seen.add(y);
+        activeYears++;
+        if (participated.has(`${m}:${y}`)) partYears++;
+      }
+    }
+  }
+  const partRate = partYears / activeYears;
+  const partAllow = L.participation.tolerance + 1.5 * Math.sqrt(L.participation.target * (1 - L.participation.target) / activeYears);
+  check(`learning: participation ${(partRate * 100).toFixed(1)}% vs ${L.participation.target * 100}% ±${(partAllow * 100).toFixed(1)}`, Math.abs(partRate - L.participation.target) <= partAllow, `${activeYears} member-years`);
+
+  // completion among terminal enrollments ≈ 72%
+  const terminal = enrollments.filter((e) => e.Status !== 'InProgress');
+  const compRate = terminal.filter((e) => e.Status === 'Completed').length / terminal.length;
+  const compAllow = L.completion.tolerance + 1.5 * Math.sqrt(L.completion.target * (1 - L.completion.target) / terminal.length);
+  check(`learning: completion ${(compRate * 100).toFixed(1)}% vs ${L.completion.target * 100}% ±${(compAllow * 100).toFixed(1)}`, Math.abs(compRate - L.completion.target) <= compAllow, `${terminal.length} terminal enrollments`);
+
+  // engagement expresses through completion (observable proxy: anchor quartiles)
+  const latents = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
+  const anchorOf = new Map(latents.map((l) => [l.m, l.theta]));
+  const withAnchor = terminal.filter((e) => anchorOf.has(e.MemberNumber));
+  withAnchor.sort((a, b) => anchorOf.get(a.MemberNumber) - anchorOf.get(b.MemberNumber));
+  const q = (lo, hi) => { const s = withAnchor.slice(Math.floor(withAnchor.length * lo), Math.floor(withAnchor.length * hi)); return s.filter((e) => e.Status === 'Completed').length / s.length; };
+  check(`learning: completion rises with engagement (bottom quartile ${(q(0, 0.25) * 100).toFixed(0)}% < top ${(q(0.75, 1) * 100).toFixed(0)}%)`, q(0.75, 1) > q(0, 0.25) + 0.03, 'observable proxy');
+
+  // enrollments only inside membership windows (carry-down, 3rd domain)
+  const courseStart = new Map(courses.map((c) => [c.CourseKey, c.StartDate]));
+  const outside = enrollments.filter((e) => {
+    const d = courseStart.get(e.CourseKey);
+    return !(periodsByMember.get(e.MemberNumber) ?? []).some((per) => per.StartDate <= d && d <= per.EndDate);
+  }).length;
+  check('learning: enrollments covered by a membership period', outside === 0, `${outside} outside`);
+}
+
 // ---------- the money chain: order-per-cycle, 3-part payment timing, reconciliation ----------
 function checkMoney() {
   const G = R.orders.gates;
@@ -349,6 +406,7 @@ checkTemporal();
 checkBenchmarks();
 checkArrows();
 checkTiers();
+checkLearning();
 checkMoney();
 checkEngagementDynamics();
 checkTrainability();

@@ -70,6 +70,24 @@ const MAPPING = {
       }),
     },
   ],
+  learning: [
+    {
+      json: 'courses', table: '[morecheese_learning].[Course]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('course', r.CourseKey)), CourseKey: sqlStr(r.CourseKey), Name: sqlStr(r.Name),
+        StartDate: sqlDate(r.StartDate), DurationWeeks: sqlNum(r.DurationWeeks), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
+      json: 'enrollments', table: '[morecheese_learning].[CourseEnrollment]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('enroll', r.EnrollKey)), EnrollKey: sqlStr(r.EnrollKey),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)), CourseID: sqlId(uuidFor('course', r.CourseKey)),
+        EnrolledOn: sqlDate(r.EnrolledOn), Status: sqlStr(r.Status), CompletedOn: sqlDate(r.CompletedOn),
+        IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+  ],
   orders: [
     {
       json: 'products', table: '[morecheese_orders].[Product]',
@@ -127,7 +145,7 @@ const MAPPING = {
 
 // ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
 const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
-const INSTALL_ORDER = ['common', 'membership', 'events', 'orders']; // the pack pyramid
+const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders']; // the pack pyramid
 mkdirSync(join(OUT, 'sql'), { recursive: true });
 const summary = [];
 let packIndex = 0;

@@ -10,7 +10,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { iso } from './dates.mjs';
 
-export function emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents, money }) {
+export function emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents, money, learning }) {
   const packs = {
     common: {
       dependsOn: [],
@@ -23,6 +23,10 @@ export function emitPacks(cfg, { people, orgs, periods, events, registrations, r
     events: {
       dependsOn: ['common', 'membership'],
       tables: { events, event_registrations: registrations.map(({ _class, _theta, ...rest }) => rest) },
+    },
+    learning: {
+      dependsOn: ['common', 'membership'],
+      tables: { courses: learning.courses, enrollments: learning.enrollments.map(({ _theta, _endBase, _weeks, ...rest }) => rest) },
     },
     orders: {
       dependsOn: ['common', 'membership', 'events'],

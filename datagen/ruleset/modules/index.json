@@ -1,4 +1,4 @@
 {
   "$comment": "Ruleset composition manifest. Modules merge in this order (later keys would win, but modules own disjoint top-level keys — one module per app domain, mirroring the D9 pack pyramid). 'core' holds what everything shares: the latent dials, cohorts, texture, scale. Adding a new app = adding one module here (e.g. 'forms' when D10 lands). Structure-only split of ruleset v0.0.2 — merged content is identical, proven by byte-identical regeneration.",
-  "modules": ["core", "world", "membership", "events", "orders", "heroes"]
+  "modules": ["core", "world", "membership", "events", "orders", "learning", "heroes"]
 }

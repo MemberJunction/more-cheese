@@ -1,0 +1,13 @@
+{
+  "$comment": "LEARNING MODULE (pack: learning) — courses, enrollments, completions. Targets mirror benchmarks-draft.json: course_participation_rate 0.50 (team ground truth), course_completion_rate 0.72. Third domain built on the same score→calibrate→draw pattern — deliberate: the third repetition is the extraction evidence for datagen-core.",
+  "learning": {
+    "coursesPerYear": 8,
+    "participation": { "target": 0.50, "tolerance": 0.06, "$note": "members with ≥1 enrollment per year — TEAM (R4): '50% sign up for courses'" },
+    "completion": { "target": 0.72, "tolerance": 0.06, "$note": "industry 70-80%; v1 intent 72%" },
+    "extraEnrollmentShare": 0.35,
+    "arrows": {
+      "enrollEngagement": { "beta": 0.6, "label": "med", "note": "engaged members take courses" },
+      "completionEngagement": { "beta": 0.55, "label": "med", "note": "disengaged learners stall (causal map 3.4, softened: completion is less θ-driven than enrollment)" }
+    }
+  }
+}
