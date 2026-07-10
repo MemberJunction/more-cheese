@@ -76,6 +76,14 @@ the tolerance factor).
 **Latents:** each person draws `(engagement θ, affluence φ)` from a Gaussian copula,
 ρ = +0.4 (med) — **⏳session** (workshop confirms ρ and whether `expertise ε` earns a slot).
 Latents are generator-internal only: never stored, expressed only through behavior.
+**θ is a process, not a constant** (2026-07-10): a stable anchor (≈60% of variance,
+copula-correlated with φ) plus a persistent AR(1) yearly wander (ρ≈0.75), total variance 1 so
+β sizes keep their meaning. This is what makes decline *precede* lapse in the crowd — the
+substrate Sonar trends and churn early-warning train on — and it's gated (§7): lapsers'
+final-year activity must sit below their own within-person baseline. Two harness notes that
+came with it: arrow refits include the anchor and prior-year θ as nuisance covariates
+(selection acts on θ *history*, and omitting it attenuates neighbors), and magnitude gates
+carry a 3·SE small-sample allowance (the multiple-comparisons budget across ~30 gates).
 
 **Regime gates:** era and seasonal effects are multiplicative modifiers with calendar
 anchors (COVID: event volume ×0.5, entries ×0 in 2020–21; December renewal season;

@@ -44,6 +44,24 @@ function joinDateFor(r, cfg) {
   return d > cfg.release ? addYears(d, -1) : d;
 }
 
+/**
+ * Engagement is a PROCESS, not a constant (core.json latents.engagementDrift): a stable
+ * personal anchor + a persistent yearly wander. Variance splits so total stays ~1 (β sizes
+ * keep their meaning). Returns { anchor, path: {year: theta_y} } from its own substream —
+ * a member's drift never depends on anyone else.
+ */
+function thetaProcess(cfg, key, anchorZ) {
+  const { R, seed, releaseYear } = cfg;
+  const d = R.latents.engagementDrift;
+  const anchor = Math.sqrt(d.anchorShare) * anchorZ;
+  const wanderSd = Math.sqrt(1 - d.anchorShare);
+  const years = releaseYear - R.history.startYear + 2; // through the forward window
+  const wander = rng(seed, `theta-drift:${key}`).ar1(years, d.yearRho, wanderSd * Math.sqrt(1 - d.yearRho * d.yearRho));
+  const path = {};
+  for (let i = 0; i < years; i++) path[R.history.startYear + i] = anchor + wander[i];
+  return { anchor, path };
+}
+
 export function buildPeople(cfg, orgs) {
   const { R, seed } = cfg;
   const people = [];
@@ -52,14 +70,15 @@ export function buildPeople(cfg, orgs) {
     const r = rng(seed, `person:${key}`);
     const region = r.pickWeighted(R.geography.mix);
     const [city, state, lat, lon] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
-    const [theta, phi] = r.copulaPair(R.latents.copulaRho);
+    const [thetaZ, phi] = r.copulaPair(R.latents.copulaRho);
+    const { anchor: theta, path: thetaPath } = thetaProcess(cfg, key, thetaZ);
     const org = r.bernoulli(0.8) ? orgs[r.int(0, orgs.length - 1)] : null;
     const anniversary = r.bernoulli(R.cohorts.anniversaryShare); // ASSUMPTION: D6 pending
     people.push({
       MemberNumber: key, FirstName: r.pick(FIRST), LastName: r.pick(LAST),
       Segment: r.pickWeighted(SEGMENTS), Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
-      _theta: theta, _phi: phi, // latents: generator-internal, stripped before emit
+      _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit
       CycleType: anniversary ? 'anniversary' : 'calendar',
       AutoRenew: anniversary ? r.bernoulli(0.8) : r.bernoulli(R.cohorts.autoRenewShare * 0.5),
       IsSharedDemo: true,
@@ -74,7 +93,7 @@ export function buildPeople(cfg, orgs) {
     people[idx] = {
       MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last,
       Segment: h.segment, Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
-      OrgKey: heroOrg.OrgKey, JoinDate: joinDate, _theta: h.theta, _phi: h.phi,
+      OrgKey: heroOrg.OrgKey, JoinDate: joinDate, _theta: h.theta, _thetaPath: null, _phi: h.phi, // heroes: pinned level, no drift (their arcs are pinned facts)
       CycleType: h.cycleType, AutoRenew: h.autoRenew, IsSharedDemo: true, _hero: true,
     };
   }

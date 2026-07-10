@@ -22,10 +22,10 @@ Who differs, and by how much:
 | Rule | Effect (percentage points) | Authored as | Evidence |
 |---|---|---|---|
 | Longer-tenured members renew more | **+4.0pt** per extra “standard deviation” of tenure | β 0.55 (expert form) → compiled β 0.55 | per 1 SD of tenure at decision |
-| Engaged members renew more | **+6.9pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
-| Auto-renew members stick around | **+12.8pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.91 | MGI: +10-15pt |
-| Employer trouble drives churn | **-8.3pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year |
-| The enthusiast tier churns hardest | **-27.0pt** hobbyists vs professional tiers (the group lands at ~64%) | "lands at 65%" (human form) → compiled β -2.25 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
+| Engaged members renew more | **+7.0pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
+| Auto-renew members stick around | **+11.7pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.652 | MGI: +10-15pt |
+| Employer trouble drives churn | **-8.7pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year |
+| The enthusiast tier churns hardest | **-24.8pt** hobbyists vs professional tiers (the group lands at ~66%) | "lands at 65%" (human form) → compiled β -2.062 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
 | COVID years dent renewal | -0.25 on the dial (a few points off that year's renewal) | β -0.25 (expert form) → compiled β -0.25 | regime gate, 2020-2021 |
 
 ## The event rules

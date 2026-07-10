@@ -63,23 +63,25 @@ export function runRenewalUnroll(cfg, people, orgs) {
     // 2. score everyone, then solve the baseline so the cohort hits the target
     const meanT = cohort.reduce((s, c) => s + c.tenureYrs, 0) / cohort.length;
     const sdT = Math.sqrt(cohort.reduce((s, c) => s + (c.tenureYrs - meanT) ** 2, 0) / cohort.length) || 1;
-    const covid = y === 2020 || y === 2021 ? M.arrows.covidYear.logitShift : 0;
     const scores = cohort.map((c) =>
       M.arrows.tenure.beta * ((c.tenureYrs - meanT) / sdT) +
-      M.arrows.engagement.beta * c.p._theta +
+      M.arrows.engagement.beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting process; heroes pinned)
       M.arrows.autoRenew.beta * (c.p.AutoRenew ? 1 : 0) +
       M.arrows.employerEvent.beta * c.employerEvent +
-      M.arrows.enthusiastTier.beta * (c.p.Segment === 'Enthusiast' ? 1 : 0) +
-      covid
+      M.arrows.enthusiastTier.beta * (c.p.Segment === 'Enthusiast' ? 1 : 0)
     );
     const target = Math.min(0.97, Math.max(0.5, M.renewalTarget));
-    const b0 = calibrateIntercept(scores, target) + (yearWobble.get(y) ?? 0);
+    // regime shifts and texture apply AFTER calibration — they're tide, not boats. (Putting
+    // COVID inside the calibrated scores let the solver cancel it exactly, erasing the dip:
+    // a shift shared by the whole cohort is a level effect, and levels belong to the baseline.)
+    const covid = y === 2020 || y === 2021 ? M.arrows.covidYear.logitShift : 0;
+    const b0 = calibrateIntercept(scores, target) + (yearWobble.get(y) ?? 0) + covid;
 
     // 3. draw each decision (heroes are conditioned, not drawn)
     cohort.forEach((c, i) => {
       const r = rng(seed, `renew:${c.p.MemberNumber}:${y}`);
       const renewed = c.p._hero ? true : r.bernoulli(sigmoid(b0 + scores[i]));
-      if (!c.p._hero) renewalEvents.push({ year: y, tenureZ: (c.tenureYrs - meanT) / sdT, theta: c.p._theta, autoRenew: c.p.AutoRenew ? 1 : 0, employerEvent: c.employerEvent, enthusiast: c.p.Segment === 'Enthusiast' ? 1 : 0, renewed: renewed ? 1 : 0 });
+      if (!c.p._hero) renewalEvents.push({ year: y, tenureZ: (c.tenureYrs - meanT) / sdT, theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta, autoRenew: c.p.AutoRenew ? 1 : 0, employerEvent: c.employerEvent, enthusiast: c.p.Segment === 'Enthusiast' ? 1 : 0, renewed: renewed ? 1 : 0 });
       if (renewed) {
         pushPeriod(c.p, c.st.start, c.st.end, 'Renewed', null, null);
         const nextEnd = c.p.CycleType === 'calendar' ? endOfYear(y + 1) : addYears(c.st.end, 1);

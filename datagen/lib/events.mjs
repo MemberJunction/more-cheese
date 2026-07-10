@@ -68,12 +68,13 @@ export function buildRegistrations(cfg, people, periods, events) {
 
     // flagship: calibrated so ~35% of members attend; engagement pulls in, distance pushes out
     if (conf && activeThisYear.length > 5) {
-      const scores = activeThisYear.map((p) => E.arrows.conferenceEngagement.beta * p._theta + E.arrows.conferenceInternational.beta * (p.Region === 'NA' ? 0 : 1));
+      const scores = activeThisYear.map((p) => E.arrows.conferenceEngagement.beta * (p._thetaPath?.[y] ?? p._theta) + E.arrows.conferenceInternational.beta * (p.Region === 'NA' ? 0 : 1));
       const b0 = calibrateIntercept(scores, E.conference.memberAttendanceTarget);
       activeThisYear.forEach((p, i) => {
         const r = rng(seed, `conf:${p.MemberNumber}:${y}`);
         if (!r.bernoulli(sigmoid(b0 + scores[i]))) return;
-        registrations.push({ RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -45)), Attended: null, _class: 'paid', _theta: p._theta, IsSharedDemo: true });
+        if (!coveredOn(p.MemberNumber, conf.Date)) return; // active July 1 ≠ covered July 15 — anniversary lapses in the gap
+        registrations.push({ RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -45)), Attended: null, _class: 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true });
       });
     }
 
@@ -81,13 +82,13 @@ export function buildRegistrations(cfg, people, periods, events) {
     for (const p of activeThisYear) {
       const r = rng(seed, `regs:${p.MemberNumber}:${y}`);
       const covid = E.conference.covidVirtual.includes(y) ? E.registrationRatePerYear.covidMultiplier : 1;
-      const mean = E.registrationRatePerYear.base * Math.exp(E.registrationRatePerYear.engagementBeta * p._theta) * covid;
+      const mean = E.registrationRatePerYear.base * Math.exp(E.registrationRatePerYear.engagementBeta * (p._thetaPath?.[y] ?? p._theta)) * covid;
       const k = r.negbin(mean, E.registrationRatePerYear.dispersionK);
       const pool = eventsByYear.get(y).filter((e) => e.EventType !== 'Conference');
       for (let i = 0; i < Math.min(k, pool.length * 2); i++) {
         const ev = r.pick(pool);
         if (!ev || !coveredOn(p.MemberNumber, ev.Date)) continue;
-        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}-${i}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -14)), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: p._theta, IsSharedDemo: true });
+        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}-${i}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -14)), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true });
       }
     }
   }

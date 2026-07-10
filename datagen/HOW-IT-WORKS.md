@@ -41,6 +41,14 @@ Every member carries two hidden dials, drawn correlated: **engagement (θ)** and
 (φ)**. They are never stored in any table — everything visible is a downstream consequence.
 (The validator keeps a private copy to verify the machinery; it never ships.)
 
+**Engagement is a process, not a personality** (added 2026-07-10 after review): θ = a stable
+personal anchor + a slow, persistent year-to-year wander. Most members are roughly themselves
+each year, but some genuinely rise and some fade — and the faders are who lapses. That's what
+makes Sonar's score *trends* and churn *early-warning* real for the whole crowd rather than
+only for pinned heroes: a validation gate now requires that lapsers' final-year activity sits
+measurably below their own earlier baseline (decline precedes lapse, ~71% in practice).
+Heroes keep pinned constant levels — their arcs are authored facts.
+
 ## 3. What β means — the strength of a cause, NOT a tolerance
 
 Every yes/no outcome is decided by a **dial**. Each cause gets a β saying how hard it pushes:

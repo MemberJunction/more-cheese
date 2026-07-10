@@ -14,7 +14,7 @@ export function emitPacks(cfg, { people, orgs, periods, events, registrations, r
   const packs = {
     common: {
       dependsOn: [],
-      tables: { people: people.map(({ _theta, _phi, _hero, CycleType, AutoRenew, ...rest }) => rest), organizations: orgs },
+      tables: { people: people.map(({ _theta, _thetaPath, _phi, _hero, CycleType, AutoRenew, ...rest }) => rest), organizations: orgs },
     },
     membership: {
       dependsOn: ['common'],

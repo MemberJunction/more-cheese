@@ -3,7 +3,14 @@
   "version": "0.0.2",
   "scale": { "members": 500 },
   "history": { "startYear": 2013, "conferenceMonth": 7, "conferenceDay": 15 },
-  "latents": { "copulaRho": 0.4 },
+  "latents": {
+    "copulaRho": 0.4,
+    "engagementDrift": {
+      "anchorShare": 0.6,
+      "yearRho": 0.75,
+      "$note": "2026-07-10: engagement is a sticky-but-drifting PROCESS, not a lifetime constant. Each person's yearly theta = stable anchor (anchorShare of the variance; copula-correlated with affluence) + a persistent AR(1) wander (the rest). Members rise and fade over the decade; the faders are who lapses — which is what makes Sonar trends and churn early-warning real for the crowd, not just for pinned heroes. Total variance stays 1 so all beta effect sizes keep their meaning."
+    }
+  },
   "cohorts": {
     "$assumption": "D6 pending ratification: calendar-year dominant + anniversary minority (auto-pay bills on join anniversary + grandfathered)",
     "anniversaryShare": 0.30,

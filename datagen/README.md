@@ -13,7 +13,7 @@ into a real package once the reconciliation fixes the table shapes.
 
 ## New here? The 30-minute path
 
-1. **Run it first** (the build command, below) — watching 28 gates go green beats reading.
+1. **Run it first** (the build command, below) — watching 30 gates go green beats reading.
 2. **Read the recipe in English:** [`ruleset/RULESET.md`](ruleset/RULESET.md) — every rule as
    a sentence with its effect in percentage points. Then the concepts:
    [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md) — causality, calibration, β, the baseline, and what
