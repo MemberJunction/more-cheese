@@ -2,8 +2,8 @@
   "$comment": "EVENTS MODULE: conferences, workshops, webinars + registration behavior (pack: events).",
   "events": {
     "perYear": { "workshops": 5, "webinars": 6 },
-    "conference": { "memberAttendanceTarget": 0.35, "tolerance": 0.10, "covidVirtual": [2020, 2021] },
-    "registrationRatePerYear": { "base": 1.7, "engagementBeta": 0.6, "dispersionK": 1.4, "covidMultiplier": 0.5 },
+    "conference": { "memberAttendanceTarget": 0.35, "tolerance": 0.10 },
+    "registrationRatePerYear": { "base": 1.7, "engagementBeta": 0.6, "dispersionK": 1.4 },
     "arrows": {
       "conferenceEngagement": { "beta": 1.0, "label": "strong" },
       "conferenceInternational": { "beta": -0.6, "label": "med", "note": "distance arrow 2.10, binary form" }

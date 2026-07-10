@@ -1,8 +1,7 @@
 # datagen — walking-skeleton generator (prototype)
 
 **What this is:** the prototype implementation of
-[ruleset-spec.md](../plans/association-db/ruleset-spec.md), covering the vertical slice
-(member → membership periods → event registrations). It exists to prove the architecture —
+[ruleset-spec.md](../plans/association-db/ruleset-spec.md), covering the vertical slice (member → membership periods → event registrations → orders → payments). It exists to prove the architecture —
 calibrated causal generation, deterministic substreams, texture with variance floors,
 per-app pack emission, and the validation harness — **before** the reconciliation and
 causal-map sessions, so their outputs land in a running machine instead of a document.
@@ -13,7 +12,7 @@ into a real package once the reconciliation fixes the table shapes.
 
 ## New here? The 30-minute path
 
-1. **Run it first** (the build command, below) — watching 30 gates go green beats reading.
+1. **Run it first** (the build command, below) — watching the full gate battery go green beats reading.
 2. **Read the recipe in English:** [`ruleset/RULESET.md`](ruleset/RULESET.md) — every rule as
    a sentence with its effect in percentage points. Then the concepts:
    [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md) — causality, calibration, β, the baseline, and what
@@ -57,6 +56,8 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `lib/world.mjs` | Step 1–2: orgs (with lifecycle events) + people (with the two hidden dials); heroes pinned. |
 | `lib/membership.mjs` | Step 3: the renewal unroll — score → **calibrate** → draw, year by year; grace/back-dating rules; the archive rule. |
 | `lib/events.mjs` | Step 4: events + registrations + the two-pass no-show draw (selection-effect calibration). |
+| `lib/money.mjs` | Step 5: the money chain — one order per billable fact (order-per-cycle, per bizapps-orders design), payments per the 3-part timing mixture, real A/R aging, the open renewal-order queue. |
+| `ruleset/scenarios/` | **Parameter overlays on the same causal model** — `--scenario decliningOrg` rebuilds the world at ~78%% renewal (real craft-food decline curves); compiler and validator re-target automatically. |
 | `lib/packs.mjs` | Step 8: deal finished rows into per-app packs with manifests; strip the latents. |
 | `validate.mjs` | **The inspector** — seven named gate groups (packs, temporal, benchmarks, arrows, trainability, heroes, status mix). |
 | `build.mjs` | **The pipeline** — generate → validate on staging → promote to `out/` only on green; red runs park in `out-failed/`. |
@@ -72,7 +73,7 @@ determinism means "byte-identical or you broke something."
 
 ## What it produces
 
-`out/packs/{common,membership,events}/` — one folder per app pack (D9: cook once, portion
+`out/packs/{common,membership,events,orders}/` — one folder per app pack (D9: cook once, portion
 at the end), each with table JSON files + a `manifest.json` declaring `dependsOn`. The
 validator checks referential closure per pack layer, exactly like the future install-time
 check.

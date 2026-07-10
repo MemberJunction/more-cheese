@@ -21,14 +21,14 @@ export function buildEvents(cfg) {
   const E = R.events;
   const events = [];
   for (let y = R.history.startYear; y <= releaseYear; y++) {
-    const covid = E.conference.covidVirtual.includes(y);
+    const covid = R.regimes.covid.years.includes(y) && R.regimes.covid.virtualConference;
     const confDate = new Date(Date.UTC(y, R.history.conferenceMonth - 1, R.history.conferenceDay));
     if (confDate <= addDays(release, 365)) {
       const [city, state_, lat, lon] = y % 3 === 0 ? ['Louisville', 'KY', 38.2527, -85.7585] : y % 3 === 1 ? ['Des Moines', 'IA', 41.5868, -93.625] : ['Sacramento', 'CA', 38.5816, -121.4944];
       events.push({ EventKey: `EVT-${y}-CONF`, Name: `ICF Annual Conference ${y}`, EventType: 'Conference', Year: y, Date: iso(confDate), IsVirtual: covid, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
     }
     const rEv = rng(seed, `events:${y}`);
-    const nW = covid ? Math.round(E.perYear.workshops * E.registrationRatePerYear.covidMultiplier) : E.perYear.workshops;
+    const nW = covid ? Math.round(E.perYear.workshops * R.regimes.covid.eventVolumeMultiplier) : E.perYear.workshops;
     for (let i = 0; i < nW; i++) {
       const region = rEv.pickWeighted(cfg.R.geography.mix.map(([k, w]) => [k, k === 'NA' ? w * 2 : w]));
       const [city, state_, lat, lon] = rEv.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
@@ -81,7 +81,7 @@ export function buildRegistrations(cfg, people, periods, events) {
     // the rest: engagement-driven NegBin volume over the year's workshop/webinar pool
     for (const p of activeThisYear) {
       const r = rng(seed, `regs:${p.MemberNumber}:${y}`);
-      const covid = E.conference.covidVirtual.includes(y) ? E.registrationRatePerYear.covidMultiplier : 1;
+      const covid = R.regimes.covid.years.includes(y) ? R.regimes.covid.eventVolumeMultiplier : 1;
       const mean = E.registrationRatePerYear.base * Math.exp(E.registrationRatePerYear.engagementBeta * (p._thetaPath?.[y] ?? p._theta)) * covid;
       const k = r.negbin(mean, E.registrationRatePerYear.dispersionK);
       const pool = eventsByYear.get(y).filter((e) => e.EventType !== 'Conference');

@@ -5,7 +5,7 @@
       "memberNumber": "ICF-000101", "first": "Elena", "last": "Rodriguez",
       "employerName": "Sierra Vista Creamery", "segment": "Producer", "region": "NA",
       "city": "Petaluma", "state": "CA", "lat": 38.2324, "lon": -122.6367,
-      "joinDate": "2022-03-15", "theta": 1.8, "phi": 0.8,
+      "joinDate": "2022-03-15", "theta": 1.8, "phi": 0.8, "tier": "Individual",
       "cycleType": "calendar", "autoRenew": true,
       "pins": { "status": "Active", "minRegistrationsPerYear": 2 }
     },
@@ -13,7 +13,7 @@
       "memberNumber": "ICF-000102", "first": "Marcus", "last": "Chen",
       "employerName": "Puget Provisions", "segment": "Retailer", "region": "NA",
       "city": "Seattle", "state": "WA", "lat": 47.6062, "lon": -122.3321,
-      "joinYearsAgo": 5, "anniversaryOffsetDays": 21, "theta": 0.3, "phi": 0.2,
+      "joinYearsAgo": 5, "anniversaryOffsetDays": 21, "theta": 0.3, "phi": 0.2, "tier": "Individual",
       "cycleType": "anniversary", "autoRenew": false,
       "$assumption": "anniversary cohort with auto-renew OFF per D6 detail",
       "pins": { "status": "PendingRenewal", "endDateWithinDaysOfRelease": [14, 28] }

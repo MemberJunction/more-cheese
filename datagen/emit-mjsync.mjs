@@ -61,6 +61,7 @@ const MAPPING = [
       primaryKey: { ID: uuidFor('period', r.PeriodKey) },
       fields: {
         PeriodKey: r.PeriodKey, PersonID: uuidFor('person', r.MemberNumber),
+        MembershipTier: r.MembershipTier, DuesAmount: r.DuesAmount,
         StartDate: r.StartDate, EndDate: r.EndDate, RenewalDate: r.RenewalDate,
         Status: r.Status, CancellationDate: r.CancellationDate, CancellationReason: r.CancellationReason,
         AutoRenew: r.AutoRenew, IsSharedDemo: r.IsSharedDemo,
@@ -85,6 +86,43 @@ const MAPPING = [
       fields: {
         RegKey: r.RegKey, PersonID: uuidFor('person', r.MemberNumber), EventID: uuidFor('event', r.EventKey),
         RegisteredOn: r.RegisteredOn, Attended: r.Attended, IsSharedDemo: r.IsSharedDemo,
+      },
+    }),
+  },
+  {
+    pack: 'orders', json: 'products', dir: 'products', entity: 'MoreCheese: Products',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('product', r.ProductKey) },
+      fields: { ProductKey: r.ProductKey, Name: r.Name, ProductType: r.ProductType, UnitPrice: r.UnitPrice, IsSharedDemo: r.IsSharedDemo },
+    }),
+  },
+  {
+    pack: 'orders', json: 'orders', dir: 'orders', entity: 'MoreCheese: Orders',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('order', r.OrderKey) },
+      fields: {
+        OrderKey: r.OrderKey, PersonID: uuidFor('person', r.MemberNumber), OrderType: r.OrderType, Status: r.Status,
+        OrderDate: r.OrderDate, DueDate: r.DueDate, TotalGross: r.TotalGross, PaymentStatus: r.PaymentStatus, IsSharedDemo: r.IsSharedDemo,
+      },
+    }),
+  },
+  {
+    pack: 'orders', json: 'order_lines', dir: 'order-lines', entity: 'MoreCheese: Order Lines',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('line', r.LineKey) },
+      fields: {
+        LineKey: r.LineKey, OrderID: uuidFor('order', r.OrderKey), ProductID: uuidFor('product', r.ProductKey),
+        Quantity: r.Quantity, UnitPrice: r.UnitPrice, LineTotal: r.LineTotal, IsSharedDemo: r.IsSharedDemo,
+      },
+    }),
+  },
+  {
+    pack: 'orders', json: 'payments', dir: 'payments', entity: 'MoreCheese: Payments',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('payment', r.PaymentKey) },
+      fields: {
+        PaymentKey: r.PaymentKey, OrderID: uuidFor('order', r.OrderKey), Amount: r.Amount,
+        PaymentDate: r.PaymentDate, Method: r.Method, Status: r.Status, IsSharedDemo: r.IsSharedDemo,
       },
     }),
   },

@@ -74,9 +74,16 @@ export function buildPeople(cfg, orgs) {
     const { anchor: theta, path: thetaPath } = thetaProcess(cfg, key, thetaZ);
     const org = r.bernoulli(0.8) ? orgs[r.int(0, orgs.length - 1)] : null;
     const anniversary = r.bernoulli(R.cohorts.anniversaryShare); // ASSUMPTION: D6 pending
+    const segment = r.pickWeighted(SEGMENTS);
+    // tier assignment: the affluence dial made observable (ruleset membership.tiers)
+    const T = R.membership.tiers.affluenceThresholds;
+    const tier = segment === 'Enthusiast' ? 'Enthusiast'
+      : org && phi > T.corporate ? 'Corporate'
+      : org && phi > T.smallBusiness ? 'SmallBusiness'
+      : 'Individual';
     people.push({
       MemberNumber: key, FirstName: r.pick(FIRST), LastName: r.pick(LAST),
-      Segment: r.pickWeighted(SEGMENTS), Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
+      Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
       _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit
       CycleType: anniversary ? 'anniversary' : 'calendar',
@@ -92,7 +99,7 @@ export function buildPeople(cfg, orgs) {
     const idx = R.heroes.indexOf(h);
     people[idx] = {
       MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last,
-      Segment: h.segment, Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
+      Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
       OrgKey: heroOrg.OrgKey, JoinDate: joinDate, _theta: h.theta, _thetaPath: null, _phi: h.phi, // heroes: pinned level, no drift (their arcs are pinned facts)
       CycleType: h.cycleType, AutoRenew: h.autoRenew, IsSharedDemo: true, _hero: true,
     };

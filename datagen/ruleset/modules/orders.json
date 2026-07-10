@@ -1,0 +1,19 @@
+{
+  "$comment": "MONEY MODULE (pack: orders) — shaped to bizapps-orders' published design: one renewal Order per membership cycle (BO-D40/D45 — the posted Order IS the bill; no invoices), product-typed lines, and payment timing per the GAP-1-approved 3-part mixture (Atradius/CRF primary sources).",
+  "orders": {
+    "eventPrices": { "Conference": 450, "Workshop": 150 },
+    "renewalBilledDaysAhead": 30,
+    "paymentTiming": {
+      "$note": "the 3-part mixture: (1) card-at-checkout for event registrations — same-day; (2) auto-pay dues land ON the due date, with a small failed-card retry tail; (3) manual individual dues spread early-to-grace (lateShare mirrors late_renewal_share 0.25); business tiers pay NET-TERMS with the sourced B2B late curve (~45% late, log-normal ~12d median, thin tail capped)",
+      "autopayFailShare": 0.03,
+      "autopayRetryDaysMax": 14,
+      "manualDues": { "lateShare": 0.25, "earlyDaysMax": 45, "graceLateDaysMax": 60 },
+      "netTerms": { "termsDays": 30, "lateShare": 0.45, "daysLateMedian": 12, "daysLateSigma": 0.85, "capDays": 60 }
+    },
+    "gates": {
+      "netTermsLate": { "target": 0.45, "tolerance": 0.10 },
+      "manualLate": { "target": 0.25, "tolerance": 0.10 },
+      "autopayOnDueMin": 0.90
+    }
+  }
+}

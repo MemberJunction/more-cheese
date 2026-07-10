@@ -15,6 +15,7 @@ import { loadConfig } from './lib/config.mjs';
 import { buildOrgs, buildPeople } from './lib/world.mjs';
 import { runRenewalUnroll, applyArchiveRule } from './lib/membership.mjs';
 import { buildEvents, buildRegistrations } from './lib/events.mjs';
+import { buildMoney } from './lib/money.mjs';
 import { emitPacks } from './lib/packs.mjs';
 import { join } from 'node:path';
 
@@ -34,8 +35,11 @@ const periods = archived.periods;
 const events = buildEvents(cfg);
 const registrations = buildRegistrations(cfg, people, periods, events);
 
+// §5.5: the money chain — one order per billable fact, payments per the 3-part timing mixture
+const money = buildMoney(cfg, people, periods, events, registrations);
+
 // §8: pack emission
-emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents });
+emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents, money });
 
 // run summary
 const lastStatus = new Map();

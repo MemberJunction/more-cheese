@@ -16,6 +16,10 @@
     "anniversaryShare": 0.30,
     "autoRenewShare": 0.30
   },
+  "regimes": {
+    "$note": "era shifts are TIDE, not boats — applied to the calibrated baseline, never inside the calibrated scores (the 2026-07-10 lesson: a shared shift inside calibration gets solved away). Data-driven so scenarios can override them and future eras (recession, membership drive) are one entry, not a code change.",
+    "covid": { "years": [2020, 2021], "renewalLogitShift": -0.25, "eventVolumeMultiplier": 0.5, "virtualConference": true }
+  },
   "texture": {
     "yearlyLogitWobble": { "rho": 0.3, "sigma": 0.13, "$note": "co-designed with effect sizes AND tolerances (spec §3): sigma raised 0.08→0.13 when the compiled +12pt auto-renew effect pushed members toward the renewal ceiling, where the sigmoid compresses wobble (the variance-floor gate caught it); rho lowered 0.5→0.3 so the multi-year MEAN still averages onto target. At pilot scale binomial cohort noise adds ~2pt on top; re-tune at production scale" }
   },

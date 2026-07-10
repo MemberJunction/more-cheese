@@ -10,11 +10,11 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { iso } from './dates.mjs';
 
-export function emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents }) {
+export function emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents, money }) {
   const packs = {
     common: {
       dependsOn: [],
-      tables: { people: people.map(({ _theta, _thetaPath, _phi, _hero, CycleType, AutoRenew, ...rest }) => rest), organizations: orgs },
+      tables: { people: people.map(({ _theta, _thetaPath, _phi, _hero, CycleType, AutoRenew, MembershipTier, ...rest }) => rest), organizations: orgs },
     },
     membership: {
       dependsOn: ['common'],
@@ -23,6 +23,10 @@ export function emitPacks(cfg, { people, orgs, periods, events, registrations, r
     events: {
       dependsOn: ['common', 'membership'],
       tables: { events, event_registrations: registrations.map(({ _class, _theta, ...rest }) => rest) },
+    },
+    orders: {
+      dependsOn: ['common', 'membership', 'events'],
+      tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments },
     },
   };
   mkdirSync(join(cfg.outDir, 'packs'), { recursive: true });
@@ -39,6 +43,6 @@ export function emitPacks(cfg, { people, orgs, periods, events, registrations, r
   writeFileSync(join(cfg.outDir, 'validation-events.json'), JSON.stringify(renewalEvents));
   // per-member latents — validator/inspector-private, NEVER installed: lets an engineer
   // verify the hidden dials actually expressed through behavior
-  writeFileSync(join(cfg.outDir, 'validation-latents.json'), JSON.stringify(people.map((p) => ({ m: p.MemberNumber, theta: +p._theta.toFixed(4), phi: +p._phi.toFixed(4), hero: !!p._hero }))));
-  writeFileSync(join(cfg.outDir, 'run.json'), JSON.stringify({ seed: cfg.seed, n: cfg.n, releaseDate: iso(cfg.release), ruleset: cfg.R.version }, null, 2));
+  writeFileSync(join(cfg.outDir, 'validation-latents.json'), JSON.stringify(people.map((p) => ({ m: p.MemberNumber, theta: +p._theta.toFixed(4), phi: +p._phi.toFixed(4), tier: p.MembershipTier, hero: !!p._hero }))));
+  writeFileSync(join(cfg.outDir, 'run.json'), JSON.stringify({ seed: cfg.seed, n: cfg.n, releaseDate: iso(cfg.release), ruleset: cfg.R.version, scenario: cfg.scenario ?? null, covidYears: cfg.R.regimes.covid.years }, null, 2));
 }

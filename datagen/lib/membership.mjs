@@ -34,11 +34,14 @@ export function runRenewalUnroll(cfg, people, orgs) {
     state.set(p.MemberNumber, { start: join, end: firstEnd, n: 0, alive: true });
   }
 
+  const duesOf = new Map(M.tiers.list.map((t) => [t.name, t.dues]));
+
   function pushPeriod(p, start, end, status, cancellationDate, reason) {
     const st = state.get(p.MemberNumber);
     st.n += 1;
     periods.push({
       PeriodKey: `${p.MemberNumber}-P${st.n}`, MemberNumber: p.MemberNumber,
+      MembershipTier: p.MembershipTier, DuesAmount: duesOf.get(p.MembershipTier),
       StartDate: iso(start), EndDate: iso(end), RenewalDate: iso(end),
       Status: status, CancellationDate: cancellationDate ? iso(cancellationDate) : null,
       CancellationReason: reason ?? null, AutoRenew: p.AutoRenew, IsSharedDemo: true,
@@ -74,8 +77,8 @@ export function runRenewalUnroll(cfg, people, orgs) {
     // regime shifts and texture apply AFTER calibration — they're tide, not boats. (Putting
     // COVID inside the calibrated scores let the solver cancel it exactly, erasing the dip:
     // a shift shared by the whole cohort is a level effect, and levels belong to the baseline.)
-    const covid = y === 2020 || y === 2021 ? M.arrows.covidYear.logitShift : 0;
-    const b0 = calibrateIntercept(scores, target) + (yearWobble.get(y) ?? 0) + covid;
+    const regime = R.regimes.covid.years.includes(y) ? R.regimes.covid.renewalLogitShift : 0;
+    const b0 = calibrateIntercept(scores, target) + (yearWobble.get(y) ?? 0) + regime;
 
     // 3. draw each decision (heroes are conditioned, not drawn)
     cohort.forEach((c, i) => {

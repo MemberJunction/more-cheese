@@ -1,6 +1,17 @@
 {
   "$comment": "MEMBERSHIP MODULE: the renewal machine (pack: membership). UPSTREAM MAPPING (2026-07-10, bizapps-orders published design): our flat period-per-year rows are the INTERMEDIATE + July-31 shipping shape; the eventual decomposition is one long-lived Subscription per member spawning a renewal Order each cycle (BO-D40/D45). Their design has NO Lapsed/PendingRenewal statuses, NO grace concept, NO AutoRenew flag (auto-renew = stored CustomerPaymentMethod + provider billing) — those are OUR domain rules, later expressed through their SubscriptionEvent stream. Cycle alignment (calendar vs anniversary) is unmodeled upstream — D6 is unconstrained.",
   "membership": {
+    "tiers": {
+      "$note": "the ACS lattice, verified at source 2026-07-07. Assignment activates the affluence dial: Enthusiast segment → Enthusiast tier; org-backed members climb to business tiers as φ rises; everyone else Individual. Dues ride the tier — so φ becomes OBSERVABLE through tier mix and dues revenue (a copula check the validator can see).",
+      "list": [
+        { "name": "Enthusiast", "dues": 150 },
+        { "name": "Individual", "dues": 175 },
+        { "name": "SmallBusiness", "dues": 400 },
+        { "name": "Corporate", "dues": 1000 }
+      ],
+      "affluenceThresholds": { "smallBusiness": 0.7, "corporate": 1.6 },
+      "individualDuesTarget": 175
+    },
     "renewalTarget": 0.87,
     "renewalTolerance": 0.02,
     "yearlyBand": [0.84, 0.90],
@@ -13,8 +24,7 @@
       "engagement": { "beta": 1.10, "label": "strong", "note": "latent theta; validated via behavioral proxy (attenuated)" },
       "autoRenew": { "liftPts": 12, "note": "HUMAN-AUTHORED FORM: members on auto-renew renew about 12 points better — stated exactly as MGI states it; the compiler solves the β", "evidence": "MGI: +10-15pt" },
       "employerEvent": { "beta": -0.90, "label": "med-strong", "note": "arrow 1.15 — dissolution/acquisition in the decision year" },
-      "enthusiastTier": { "groupTarget": 0.65, "share": 0.15, "note": "HUMAN-AUTHORED FORM: 'the enthusiast tier renews at about 65%' — the compiler solves the β against the calibrated baseline (hand-sizing this took two attempts; see git history)", "evidence": "hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier" },
-      "covidYear": { "logitShift": -0.25, "label": "med", "note": "regime gate, 2020-2021" }
+      "enthusiastTier": { "groupTarget": 0.65, "share": 0.15, "note": "HUMAN-AUTHORED FORM: 'the enthusiast tier renews at about 65%' — the compiler solves the β against the calibrated baseline (hand-sizing this took two attempts; see git history)", "evidence": "hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier" }
     }
   }
 }

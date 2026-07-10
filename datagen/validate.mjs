@@ -21,15 +21,19 @@ import { loadRuleset } from './lib/config.mjs';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
 const OUT = join(HERE, args.out ?? 'out');
-const R = loadRuleset();
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
+const R = loadRuleset(run.scenario); // the validator judges against the SAME world the run was built for
 
 const people = load('common', 'people');
 const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
 const regs = load('events', 'event_registrations');
+const products = load('orders', 'products');
+const orders = load('orders', 'orders');
+const orderLines = load('orders', 'order_lines');
+const payments = load('orders', 'payments');
 // validator-private: renewal decisions WITH the latents (never installed) — needed so arrow
 // recovery isn't attenuated by omitting a strong hidden driver (spec §7 lesson #2)
 const renewalEvents = JSON.parse(readFileSync(join(OUT, 'validation-events.json'), 'utf8'));
@@ -57,7 +61,13 @@ function checkPacks() {
   check('pack refs: people→orgs (within common)', badEmployer === 0, `${badEmployer} dangling`);
   check('pack refs: membership→common', badPeriod === 0, `${badPeriod} dangling`);
   check('pack refs: events→common+events', badRegP + badRegE === 0, `${badRegP}+${badRegE} dangling`);
-  for (const pack of ['common', 'membership', 'events']) {
+  const productKeys = new Set(products.map((x) => x.ProductKey));
+  const orderKeys = new Set(orders.map((x) => x.OrderKey));
+  const badOrderM = orders.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badLine = orderLines.filter((x) => !orderKeys.has(x.OrderKey) || !productKeys.has(x.ProductKey)).length;
+  const badPay = payments.filter((x) => !orderKeys.has(x.OrderKey)).length;
+  check('pack refs: orders→common + lines→products + payments→orders', badOrderM + badLine + badPay === 0, `${badOrderM}+${badLine}+${badPay} dangling`);
+  for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
   }
@@ -96,7 +106,7 @@ function checkTemporal() {
 const byYear = {};
 for (const e of renewalEvents) { (byYear[e.year] ??= { n: 0, r: 0 }); byYear[e.year].n++; byYear[e.year].r += e.renewed; }
 // band/variance gates run on cohorts big enough that binomial noise doesn't dominate
-const yearRates = Object.entries(byYear).filter(([, v]) => v.n >= 100).map(([y, v]) => ({ y: +y, n: v.n, rate: v.r / v.n, covid: +y === 2020 || +y === 2021 }));
+const yearRates = Object.entries(byYear).filter(([, v]) => v.n >= 100).map(([y, v]) => ({ y: +y, n: v.n, rate: v.r / v.n, covid: (run.covidYears ?? [2020, 2021]).includes(+y) }));
 
 function checkBenchmarks() {
   const M = R.membership;
@@ -192,6 +202,72 @@ function checkArrows() {
   check(`arrow engagement→retention (proxy): top-quartile activity retention ${(high * 100).toFixed(0)}% > bottom ${(low * 100).toFixed(0)}%`, high > low + 0.05, 'observable proxy, attenuated by design');
 }
 
+// ---------- tiers & dues: the affluence dial made observable ----------
+function checkTiers() {
+  const latents = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
+  const duesOf = new Map(R.membership.tiers.list.map((t) => [t.name, t.dues]));
+  const badDues = periods.filter((x) => x.DuesAmount !== duesOf.get(x.MembershipTier)).length;
+  check('dues: every period carries its tier\'s exact dues', badDues === 0, `${badDues} mismatched`);
+  const indiv = periods.filter((x) => x.MembershipTier === 'Individual');
+  check(`dues: Individual tier = $${R.membership.tiers.individualDuesTarget} exactly (the verified ACS rate)`, indiv.every((x) => x.DuesAmount === R.membership.tiers.individualDuesTarget), `${indiv.length} periods`);
+  // φ must be monotone across paid tiers — the copula's second dial expressing through money
+  const phiOf = (tier) => {
+    const rows = latents.filter((l) => !l.hero && l.tier === tier);
+    return rows.length ? rows.reduce((s, l) => s + l.phi, 0) / rows.length : null;
+  };
+  const pIndiv = phiOf('Individual'), pSmall = phiOf('SmallBusiness'), pCorp = phiOf('Corporate');
+  const monotone = pIndiv != null && pSmall != null && pCorp != null && pIndiv < pSmall && pSmall < pCorp;
+  check(`tiers: mean φ rises Individual(${pIndiv?.toFixed(2)}) < SmallBusiness(${pSmall?.toFixed(2)}) < Corporate(${pCorp?.toFixed(2)})`, monotone, 'affluence → tier, observable');
+  const enthMismatch = latents.filter((l) => !l.hero && (l.tier === 'Enthusiast')).length;
+  check('tiers: Enthusiast tier exists and is populated', enthMismatch > 0, `${enthMismatch} members`);
+}
+
+// ---------- the money chain: order-per-cycle, 3-part payment timing, reconciliation ----------
+function checkMoney() {
+  const G = R.orders.gates;
+  // BO-D40 verbatim: one dues order per membership period
+  const duesOrders = orders.filter((x) => x.OrderKey.startsWith('ORD-D-'));
+  check('money: one dues order per membership period (order-per-cycle)', duesOrders.length === periods.length, `${duesOrders.length} orders / ${periods.length} periods`);
+
+  // reconciliation: every Paid order's payments sum to its total; no orphan payments
+  const paidByOrder = new Map();
+  for (const p of payments) paidByOrder.set(p.OrderKey, (paidByOrder.get(p.OrderKey) ?? 0) + p.Amount);
+  const badRecon = orders.filter((x) => x.PaymentStatus === 'Paid' && paidByOrder.get(x.OrderKey) !== x.TotalGross).length;
+  const paidButNo = orders.filter((x) => x.PaymentStatus !== 'Paid' && paidByOrder.has(x.OrderKey)).length;
+  check('money: every Paid order reconciles (payments sum = total; unpaid have none)', badRecon + paidButNo === 0, `${badRecon}+${paidButNo} bad`);
+
+  // the 3-part timing mixture, measured
+  const perByKey = new Map(periods.map((x) => [`ORD-D-${x.PeriodKey}`, x]));
+  const payDate = new Map(payments.map((p) => [p.OrderKey, p.PaymentDate]));
+  const cls = { auto: [], manual: [], net: [] };
+  for (const o of duesOrders) {
+    if (!payDate.has(o.OrderKey)) continue; // unpaid orders age instead
+    const per = perByKey.get(o.OrderKey);
+    const late = payDate.get(o.OrderKey) > o.DueDate ? 1 : 0;
+    const onDue = payDate.get(o.OrderKey) === o.DueDate ? 1 : 0;
+    if (['SmallBusiness', 'Corporate'].includes(per.MembershipTier)) cls.net.push(late);
+    else if (per.AutoRenew) cls.auto.push(onDue);
+    else cls.manual.push(late);
+  }
+  const rate = (a) => a.reduce((s, x) => s + x, 0) / a.length;
+  const se = (p, n) => Math.sqrt(p * (1 - p) / n);
+  const netLate = rate(cls.net), manualLate = rate(cls.manual), autoOn = rate(cls.auto);
+  check(`money: net-terms late share ${(netLate * 100).toFixed(1)}% vs ${G.netTermsLate.target * 100}% ±${(G.netTermsLate.tolerance * 100).toFixed(0)}+SE (Atradius/CRF)`, Math.abs(netLate - G.netTermsLate.target) <= G.netTermsLate.tolerance + 1.5 * se(G.netTermsLate.target, cls.net.length), `${cls.net.length} net-terms payments`);
+  check(`money: manual dues late share ${(manualLate * 100).toFixed(1)}% vs ${G.manualLate.target * 100}% ±${(G.manualLate.tolerance * 100).toFixed(0)}+SE (mirrors late_renewal_share)`, Math.abs(manualLate - G.manualLate.target) <= G.manualLate.tolerance + 1.5 * se(G.manualLate.target, cls.manual.length), `${cls.manual.length} manual payments`);
+  check(`money: auto-pay lands ON the due date ${(autoOn * 100).toFixed(1)}% (≥${G.autopayOnDueMin * 100}%)`, autoOn >= G.autopayOnDueMin, `${cls.auto.length} auto-payments`);
+
+  // event orders: card-at-checkout = paid same day, always
+  const evOrders = orders.filter((x) => x.OrderKey.startsWith('ORD-E-'));
+  const badEv = evOrders.filter((x) => payDate.get(x.OrderKey) !== x.OrderDate).length;
+  check('money: event registrations are card-at-checkout (paid same day)', badEv === 0, `${evOrders.length} event orders, ${badEv} bad`);
+
+  // the renewal-outreach queue exists in the money data: pending members carry an OPEN order
+  const pendingMembers = periods.filter((x) => x.Status === 'PendingRenewal').map((x) => x.MemberNumber);
+  const openRenewals = new Set(orders.filter((x) => x.OrderKey.startsWith('ORD-R-') && x.PaymentStatus !== 'Paid').map((x) => x.MemberNumber));
+  const missing = pendingMembers.filter((m) => !openRenewals.has(m)).length;
+  check(`money: every PendingRenewal member has an open renewal order (incl. Marcus)`, missing === 0 && openRenewals.has('ICF-000102'), `${pendingMembers.length} pending, ${missing} missing`);
+}
+
 // ---------- engagement dynamics: decline must PRECEDE lapse (found 2026-07-10) ----------
 // With a constant lifetime θ, members lapse without warning — activity is level right up to
 // the cliff, Sonar trends are flat, and churn early-warning (the "save Bob" demo) has nothing
@@ -204,7 +280,7 @@ function checkEngagementDynamics() {
     const key = `${x.MemberNumber}:${eventYear.get(x.EventKey)}`;
     regsByMemberYear.set(key, (regsByMemberYear.get(key) ?? 0) + 1);
   }
-  const isCovid = (y) => y === 2020 || y === 2021;
+  const isCovid = (y) => (run.covidYears ?? [2020, 2021]).includes(y);
   let finalSum = 0, earlierSum = 0, members = 0;
   for (const [m, list] of periodsByMember) {
     const last = list[list.length - 1];
@@ -272,6 +348,8 @@ checkPacks();
 checkTemporal();
 checkBenchmarks();
 checkArrows();
+checkTiers();
+checkMoney();
 checkEngagementDynamics();
 checkTrainability();
 checkHeroes();

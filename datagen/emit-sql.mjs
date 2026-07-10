@@ -63,9 +63,44 @@ const MAPPING = {
       columns: (r) => ({
         ID: sqlId(uuidFor('period', r.PeriodKey)), PeriodKey: sqlStr(r.PeriodKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)),
+        MembershipTier: sqlStr(r.MembershipTier), DuesAmount: sqlNum(r.DuesAmount),
         StartDate: sqlDate(r.StartDate), EndDate: sqlDate(r.EndDate), RenewalDate: sqlDate(r.RenewalDate),
         Status: sqlStr(r.Status), CancellationDate: sqlDate(r.CancellationDate), CancellationReason: sqlStr(r.CancellationReason),
         AutoRenew: sqlBit(r.AutoRenew), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+  ],
+  orders: [
+    {
+      json: 'products', table: '[morecheese_orders].[Product]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('product', r.ProductKey)), ProductKey: sqlStr(r.ProductKey), Name: sqlStr(r.Name),
+        ProductType: sqlStr(r.ProductType), UnitPrice: sqlNum(r.UnitPrice), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
+      json: 'orders', table: '[morecheese_orders].[Order]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('order', r.OrderKey)), OrderKey: sqlStr(r.OrderKey),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)), OrderType: sqlStr(r.OrderType), Status: sqlStr(r.Status),
+        OrderDate: sqlDate(r.OrderDate), DueDate: sqlDate(r.DueDate), TotalGross: sqlNum(r.TotalGross),
+        PaymentStatus: sqlStr(r.PaymentStatus), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
+      json: 'order_lines', table: '[morecheese_orders].[OrderLine]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('line', r.LineKey)), OrderID: sqlId(uuidFor('order', r.OrderKey)),
+        ProductID: sqlId(uuidFor('product', r.ProductKey)), Quantity: sqlNum(r.Quantity),
+        UnitPrice: sqlNum(r.UnitPrice), LineTotal: sqlNum(r.LineTotal), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
+      json: 'payments', table: '[morecheese_orders].[Payment]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('payment', r.PaymentKey)), OrderID: sqlId(uuidFor('order', r.OrderKey)),
+        Amount: sqlNum(r.Amount), PaymentDate: sqlDate(r.PaymentDate), Method: sqlStr(r.Method),
+        Status: sqlStr(r.Status), IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
   ],
@@ -92,10 +127,12 @@ const MAPPING = {
 
 // ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
 const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
+const INSTALL_ORDER = ['common', 'membership', 'events', 'orders']; // the pack pyramid
 mkdirSync(join(OUT, 'sql'), { recursive: true });
 const summary = [];
 let packIndex = 0;
-for (const [pack, tables] of Object.entries(MAPPING)) {
+for (const pack of INSTALL_ORDER) {
+  const tables = MAPPING[pack];
   packIndex++;
   const lines = [
     `-- MoreCheese demo seed — pack: ${pack} (install order ${packIndex})`,
@@ -121,7 +158,7 @@ for (const [pack, tables] of Object.entries(MAPPING)) {
 }
 writeFileSync(join(OUT, 'sql', '_install-order.txt'),
   'Install packs in file order (the pack dependency pyramid — common first, always):\n' +
-  Object.keys(MAPPING).map((p, i) => `${String(i + 1).padStart(2, '0')}_${p}.sql`).join('\n') + '\n');
+  INSTALL_ORDER.map((p, i) => `${String(i + 1).padStart(2, '0')}_${p}.sql`).join('\n') + '\n');
 
 for (const s of summary) console.log(`${s.pack.padEnd(11)} ${s.table.padEnd(46)} ${String(s.rows).padStart(6)} rows`);
 console.log(`sql → ${join(OUT, 'sql')}`);
