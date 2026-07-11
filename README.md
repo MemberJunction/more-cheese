@@ -1,12 +1,17 @@
-# MJ Sample Open App — the Open App template
+# MoreCheese Demo — `more-cheese-demo`
 
-A **blank-start template** for building
-[MemberJunction](https://github.com/MemberJunction/MJ) Open Apps. Clone it,
-rename a handful of identifiers, and start adding your schema, code, and
-metadata — every folder and config file is pre-wired to MJ's conventions and
-carries comments explaining what goes in it. It ships **no migrations, no
-generated code, and no build output**: the structure and guidance are here,
-the content is yours.
+The **MoreCheese demo open app** for
+[MemberJunction](https://github.com/MemberJunction/MJ): the fictional
+**International Cheese Federation (ICF)** association demo. It composes the
+BizApps open-app catalog with custom association-domain schemas — members,
+events, learning, forums, resources, awards, legislative, marketing (the
+`AssociationDemoV2_*` schemas; home schema `AssociationDemoV2_Members`) — the
+way a real customer environment composes multiple source systems. Dataset
+plans, benchmarks, and hero personas live in `plans/association-db/`; the
+data generator lives on the `datagen-walking-skeleton` branch.
+
+Built from the `mj-sample-open-app` template — the template's structure and
+docs below still apply.
 
 > **What an Open App is:** its manifest (`mj-app.json`) plus whatever optional
 > blocks it declares — a database schema + migrations, mj-sync metadata,
@@ -49,14 +54,11 @@ npm install && npm run build:packages     # no MJ checkout or DB needed
 
 ## Getting started
 
-1. **Run the setup script** — `npm run init` renames every template
-   identifier to your app's values (id, display name, npm scope, schema,
-   entity prefix, repo URL, publisher) and activates
-   `metadata/schema-info/` with a freshly generated stable UUID. Review with
-   `git diff`, then `npm install` to regenerate the lockfile. Prefer doing it
-   by hand? The manual checklist lives in
-   [docs/template-docs/getting-started.md](docs/template-docs/getting-started.md)
-   (`grep -r "mj-sample-app" .` finds every fill-in point).
+1. **Setup script — already run.** This repo's identity was set with
+   `npm run init` (id `more-cheese-demo`, scope `@mj-more-cheese-demo/*`,
+   schema `AssociationDemoV2_Members`, prefix `ICF: `). The script is
+   re-runnable if a value must change before first publish — see
+   [docs/template-docs/getting-started.md](docs/template-docs/getting-started.md).
 2. **Create your repo + branches** — `next` (default, integration) and `main`
    (release): [docs/template-docs/repo-setup.md](docs/template-docs/repo-setup.md).
 3. **Link into a MemberJunction checkout** — development happens inside MJ;
@@ -73,14 +75,14 @@ folder under `packages/dev-apps/`.
 | You want to… | Do this | Details |
 |---|---|---|
 | **Add a table / schema change** | Write `migrations/V<YYYYMMDDHHMM>__v<ver>_<Desc>.sql` (copy the `EXAMPLE_*.sql.example` skeleton), then run migrations + codegen (below) | [migrations/_README.md](migrations/_README.md), [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
-| **Run your migrations** | `npx mj migrate --schema sample_app --dir packages/dev-apps/<app>/migrations` | [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md) §5 |
+| **Run your migrations** | `npx mj migrate --schema AssociationDemoV2_Members --dir packages/dev-apps/<app>/migrations` | [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md) §5 |
 | **Run CodeGen** (after every schema/metadata change) | `npx mj codegen` — generates entity classes, resolvers, and forms into `packages/*/src/generated/`; **commit the generated code with its migration** | [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
 | **Capture a CodeGen migration** | Fold the SQL CodeGen emitted for YOUR objects (from `migrations/codegen/`, gitignored scratch) into a `V*` migration; never fold the `__mj_*` system plumbing — CodeGen re-applies that everywhere itself | [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
 | **Add / change metadata** (apps, nav items, lookup seeds, actions) | Add an entity folder under `metadata/`, `npx mj sync push --dir=<app>/metadata --format=json`, then capture the SQL as a `V*_Metadata_Sync.sql` migration | [docs/template-docs/metadata.md](docs/template-docs/metadata.md) |
 | **Add server code** (entity overrides, engines, resolvers) | `packages/CoreEntitiesServer` / `packages/Server` — wire new modules into `Server/src/index.ts` so the bootstrap loads them | comments in those files |
-| **Add an Action** | `packages/Actions` — `@RegisterClass(BaseAction, '<Your App>: <Name>')` + an action metadata record + migration | comments in `packages/Actions/src/index.ts` |
+| **Add an Action** | `packages/Actions` — `@RegisterClass(BaseAction, 'MoreCheese Demo: <Name>')` + an action metadata record + migration | comments in `packages/Actions/src/index.ts` |
 | **Add UI** (components / dashboards) | `packages/Angular` — components under `src/lib/`, exported from `public-api.ts`; nav items via an application metadata record | comments in `packages/Angular/src/public-api.ts` |
-| **Build** | `npx turbo build --filter="@mj-sample-app/*"` (or `npm run build:packages` standalone) | — |
+| **Build** | `npx turbo build --filter="@more-cheese-demo/*"` (or `npm run build:packages` standalone) | — |
 | **Ship a change** | Changeset (`npx changeset`, ≥ minor if it adds a migration) → PR to `next` | [docs/template-docs/branching.md](docs/template-docs/branching.md) |
 | **Release / publish to npm** | Merge the release PR `next` → `main`; the publish workflow does the rest | [docs/template-docs/publishing.md](docs/template-docs/publishing.md) |
 

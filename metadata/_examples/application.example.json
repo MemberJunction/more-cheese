@@ -1,7 +1,7 @@
 {
   "_comment": "Example 'Applications' record: gives your app a nav presence in MJ Explorer. Put it in an applications/ folder with its own .mj-sync.json (entity: 'Applications'). Each DefaultNavItems DriverClass must match an @RegisterClass(BaseResourceComponent, '<DriverClass>') in your Angular package.",
   "fields": {
-    "Name": "Sample App",
+    "Name": "ICF",
     "Description": "Sample application installed by the MJ Sample Open App template",
     "Icon": "fa-solid fa-cube",
     "DefaultForNewUser": false,
@@ -12,7 +12,7 @@
         "Label": "Dashboard",
         "Icon": "fa-solid fa-chart-line",
         "ResourceType": "Custom",
-        "DriverClass": "SampleAppDashboard",
+        "DriverClass": "MoreCheeseDemoDashboard",
         "isDefault": true
       }
     ]

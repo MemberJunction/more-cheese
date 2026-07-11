@@ -28,7 +28,7 @@ installs replay it. Full flow: `docs/codegen-and-metadata-migrations.md`.
 | Give your app a UI presence in MJ Explorer     | `application.example.json` (nav items)     |
 | Register your schema with MJ (`__mj.SchemaInfo`) | `../schema-info/` (live in this template)  |
 
-NOTE: this template registers the `sample_app` schema via metadata: the live
+NOTE: this template registers the `AssociationDemoV2_Members` schema via metadata: the live
 `metadata/schema-info/` record (with a pinned `primaryKey.ID`) is CREATED in
 `__mj.SchemaInfo` on the first `mj sync push` — the same pattern the shipped
 BizApps use. Rename its `SchemaName`, `EntityNamePrefix`, and description when

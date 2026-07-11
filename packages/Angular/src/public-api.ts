@@ -29,14 +29,14 @@
  *   import { RegisterClass } from '@memberjunction/global';
  *   import { BaseResourceComponent, ResourceData } from '@memberjunction/ng-shared';
  *
- *   @RegisterClass(BaseResourceComponent, 'SampleAppDashboard')
+ *   @RegisterClass(BaseResourceComponent, 'MoreCheeseDemoDashboard')
  *   @Component({
  *     selector: 'sample-app-dashboard',
- *     template: '<div><h2>Sample App</h2></div>',
+ *     template: '<div><h2>ICF</h2></div>',
  *     standalone: false
  *   })
- *   export class SampleAppDashboardComponent extends BaseResourceComponent {
- *     async GetResourceDisplayName(data: ResourceData): Promise<string> { return 'Sample App'; }
+ *   export class MoreCheeseDemoDashboardComponent extends BaseResourceComponent {
+ *     async GetResourceDisplayName(data: ResourceData): Promise<string> { return 'ICF'; }
  *     async GetResourceIconClass(data: ResourceData): Promise<string> { return 'fa-solid fa-cube'; }
  *   }
  *
@@ -47,7 +47,7 @@
  * TODO(template): rename the function to Load<YourApp>Client and keep it in
  * sync with mj-app.json "startupExport".
  */
-export function LoadSampleAppClient(): void {
+export function LoadMoreCheeseDemoClient(): void {
     // No-op until you add components: importing this module is what
     // registers everything above.
 }

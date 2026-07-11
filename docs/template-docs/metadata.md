@@ -49,7 +49,7 @@ section).
 
 `__mj.SchemaInfo` is the record that registers your schema with MJ: it
 reserves an entity **ID range** and sets the **`EntityNamePrefix`** that keeps
-your entity names (`Sample App: Item Types`) from colliding with MJ core or
+your entity names (`ICF: Item Types`) from colliding with MJ core or
 other apps. Every schema-backed app needs exactly one row.
 
 **The template ships it deliberately unusable-as-is**: the record is a
@@ -65,7 +65,7 @@ won't apply your prefix). **Activate it before your first real sync:**
    |---|---|
    | `SchemaName` | Exactly your `mj-app.json` `schema.name` |
    | `EntityIDMin` / `EntityIDMax` | An integer range reserved for your app's entities, non-overlapping with other apps (e.g. `10000001`–`10099999`) |
-   | `EntityNamePrefix` | Your prefix (e.g. `Sample App`) — must agree with `mj.config.cjs` `NameRulesBySchema` |
+   | `EntityNamePrefix` | Your prefix (e.g. `ICF`) — must agree with `mj.config.cjs` `NameRulesBySchema` |
    | `Description` | One line about the schema |
    | `primaryKey.ID` | A **freshly generated UUID** (`uuidgen`) — keep it stable forever once pushed anywhere |
 3. Push (workflow below) — the row is created with your pinned ID.
@@ -77,7 +77,7 @@ file itself.
 
 ```json
 {
-  "entity": "Sample App: Item Types",
+  "entity": "ICF: Item Types",
   "filePattern": "**/.*.json",
   "pull": {
     "createNewFileIfNotFound": true,
@@ -91,7 +91,7 @@ file itself.
 ```
 
 `entity` is the exact MJ entity name (your entities carry your
-`EntityNamePrefix`, e.g. `Sample App: Item Types`; core entities may need the
+`EntityNamePrefix`, e.g. `ICF: Item Types`; core entities may need the
 `MJ: ` prefix — verify names in the generated `entity_subclasses.ts`).
 
 ## Record file format
@@ -131,7 +131,7 @@ the records that reference them — never paste escaped-JSON strings inline.
 ## Worked example 1 — seeding a lookup table
 
 Your migration created `${flyway:defaultSchema}.ItemType` and codegen
-registered `Sample App: Item Types`. To seed it: create
+registered `ICF: Item Types`. To seed it: create
 `metadata/item-types/` with the folder config + record file shown above, add
 `"item-types"` to the root `directoryOrder`, then push (below). Don't seed
 lookup tables with hand-written INSERTs as the source of truth — author here,
@@ -146,7 +146,7 @@ An `Applications` record gives your app a UI presence in MJ Explorer
 [
   {
     "fields": {
-      "Name": "Sample App",
+      "Name": "ICF",
       "Description": "Sample application installed by this Open App",
       "Icon": "fa-solid fa-cube",
       "DefaultForNewUser": false,
@@ -157,7 +157,7 @@ An `Applications` record gives your app a UI presence in MJ Explorer
           "Label": "Dashboard",
           "Icon": "fa-solid fa-chart-line",
           "ResourceType": "Custom",
-          "DriverClass": "SampleAppDashboard",
+          "DriverClass": "MoreCheeseDemoDashboard",
           "isDefault": true
         }
       ]

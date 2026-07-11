@@ -12,10 +12,10 @@ apply your entity-name prefix).
 1. Copy `schema-info.json.template` → **`.schema-info.json`** (note the
    leading dot — that's what makes it a record file).
 2. Fill every `TODO`:
-   - `SchemaName` — exactly your `mj-app.json` `schema.name` (this template: `sample_app`)
+   - `SchemaName` — exactly your `mj-app.json` `schema.name` (this template: `AssociationDemoV2_Members`)
    - `EntityIDMin` / `EntityIDMax` — an integer ID range reserved for your
      app's entities, non-overlapping with other apps (e.g. `10000001` / `10099999`)
-   - `EntityNamePrefix` — the prefix for your entity names (e.g. `Sample App`);
+   - `EntityNamePrefix` — the prefix for your entity names (e.g. `ICF`);
      must agree with `mj.config.cjs` `NameRulesBySchema`
    - `Description` — one line about the schema
    - `primaryKey.ID` — **generate a UUID** (`uuidgen`) and never change it

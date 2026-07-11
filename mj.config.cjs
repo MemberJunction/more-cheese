@@ -7,9 +7,10 @@
 // NOT put credentials here. Most settings have sensible package defaults; this
 // file only declares what is specific to this app's directory structure.
 //
-// TODO(template): everywhere you see "sample" or "@mj-more-cheese-demo", replace with
-// your app's schema name and npm scope. The full rename checklist lives in
-// docs/template-docs/getting-started.md.
+// MoreCheese demo (International Cheese Federation). Custom demo data is split
+// across multiple AssociationDemoV2_* schemas (per the v2 plan — simulates a
+// realistic multi-source-system customer environment); the manifest's home
+// schema (migration default) is AssociationDemoV2_Members.
 //
 module.exports = {
   // ==========================================================================
@@ -53,8 +54,16 @@ module.exports = {
   newEntityDefaults: {
     NameRulesBySchema: [
       { SchemaName: '${mj_core_schema}', EntityNamePrefix: 'MJ: ' },
-      // TODO(template): your schema + your prefix:
-      { SchemaName: 'sample_app', EntityNamePrefix: 'Sample App: ', EntityNameSuffix: '' },
+      // All AssociationDemoV2_* demo schemas share the ICF prefix (the demo
+      // association brand). One entry per schema in the v2 plan's domain map.
+      { SchemaName: 'AssociationDemoV2_Members', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Events', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Learning', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Forums', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Resources', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Awards', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Legislative', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      { SchemaName: 'AssociationDemoV2_Marketing', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
     ],
   },
 
@@ -84,8 +93,10 @@ module.exports = {
     schemaPlaceholders: [
       // Order matters: more-specific schema names must come first (greedy
       // sequential substitution).
-      // TODO(template): your schema name here:
-      { schema: 'sample_app', placeholder: '${flyway:defaultSchema}' },
+      // Only the HOME schema maps to the default placeholder; the other
+      // AssociationDemoV2_* schemas are fixed names written literally by the
+      // migrations.
+      { schema: 'AssociationDemoV2_Members', placeholder: '${flyway:defaultSchema}' },
       { schema: '__mj', placeholder: '${mjSchema}' },
     ],
   },

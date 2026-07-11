@@ -1,22 +1,21 @@
 {
   "$schema": "https://schema.memberjunction.org/mj-app/v1.json",
   "manifestVersion": 1,
-  "name": "mj-sample-app",
-  "displayName": "MJ Sample Open App (Template)",
-  "description": "A fill-in-the-blanks template for building MemberJunction Open Apps. Clone it, rename it, and replace the samples with your app.",
+  "name": "more-cheese-demo",
+  "displayName": "MoreCheese Demo",
+  "description": "The MoreCheese demo open app \u2014 the fictional International Cheese Federation. Composes the BizApps open-app catalog with association-domain schemas (members, events, learning, forums, awards, legislative, marketing) to demonstrate MemberJunction against a realistic multi-system environment.",
   "version": "1.0.0",
-  "license": "<Set-this>",
-  "icon": "fa-solid fa-cube",
-  "color": "#264FAF",
+  "license": "ISC",
+  "icon": "fa-solid fa-cheese",
+  "color": "#E8A33D",
   "publisher": {
-    "name": "MemberJunction",
-    "email": "dev@memberjunction.com",
-    "url": "https://memberjunction.com"
+    "name": "Blue Cypress",
+    "email": "marcelo.torres@bluecypress.io"
   },
-  "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2.git",
-  "mjVersionRange": ">=5.0.0 <6.0.0",
+  "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2",
+  "mjVersionRange": ">=5.43.0 <6.0.0",
   "schema": {
-    "name": "sample_app",
+    "name": "AssociationDemoV2_Members",
     "createIfNotExists": true
   },
   "migrations": {
@@ -31,14 +30,14 @@
       {
         "name": "@mj-more-cheese-demo/server",
         "role": "bootstrap",
-        "startupExport": "LoadSampleAppServer"
+        "startupExport": "LoadMoreCheeseDemoServer"
       }
     ],
     "client": [
       {
         "name": "@mj-more-cheese-demo/ng",
         "role": "bootstrap",
-        "startupExport": "LoadSampleAppClient"
+        "startupExport": "LoadMoreCheeseDemoClient"
       }
     ],
     "shared": [
@@ -56,6 +55,13 @@
     "visibility": "public",
     "sourceDirectory": "packages"
   },
-  "categories": ["Template"],
-  "tags": ["template", "sample", "starter"]
+  "categories": [
+    "Demo"
+  ],
+  "tags": [
+    "demo",
+    "association",
+    "morecheese",
+    "international-cheese-federation"
+  ]
 }

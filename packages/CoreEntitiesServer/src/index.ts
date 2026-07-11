@@ -18,7 +18,7 @@
  *   import { BaseEntity } from '@memberjunction/core';
  *   import { SampleRecordEntity } from '@mj-more-cheese-demo/entities';
  *
- *   @RegisterClass(BaseEntity, 'Sample App: Sample Records')
+ *   @RegisterClass(BaseEntity, 'ICF: Sample Records')
  *   export class SampleRecordEntityServer extends SampleRecordEntity {
  *       public override async Save(): Promise<boolean> {
  *           // server-side enrichment / invariants here
@@ -26,6 +26,6 @@
  *       }
  *   }
  */
-export function LoadSampleAppEntitiesServer(): void {
+export function LoadMoreCheeseDemoEntitiesServer(): void {
     // No-op: importing this module registers the server-side subclasses above.
 }

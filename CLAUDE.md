@@ -1,9 +1,15 @@
-# <Your App> — development guide (template)
+# MoreCheese Demo — development guide
 
-This repository is a **MemberJunction Open App** built from the
-mj-sample-open-app template. It is developed **linked inside a MemberJunction
-checkout** — see `docs/template-docs/linking-to-mj.md`. TODO(template): replace the
-placeholders in this file when you rename the app.
+This repository is a **MemberJunction Open App**: the MoreCheese demo — the
+fictional **International Cheese Federation (ICF)** association demo (built
+from the mj-sample-open-app template). It is developed **linked inside a
+MemberJunction checkout** — see `docs/template-docs/linking-to-mj.md`.
+
+Custom demo data is split across multiple `AssociationDemoV2_*` schemas
+(Members = home/migration default, plus Events, Learning, Forums, Resources,
+Awards, Legislative, Marketing — wired in `mj.config.cjs`); all demo entities
+use the `ICF: ` prefix. Dataset plans and benchmarks: `plans/association-db/`
+(`research/benchmarks-draft.json` is canonical).
 
 ## Repository structure
 
@@ -66,7 +72,7 @@ covered there). Read the relevant topic before working in its area:
 ```sh
 # linked (from the MJ repo root — the normal mode):
 npx turbo build --filter="@mj-more-cheese-demo/*"
-npx mj migrate --schema sample_app --dir packages/dev-apps/mj-sample-open-app/migrations
+npx mj migrate --schema AssociationDemoV2_Members --dir packages/dev-apps/More-Cheese-Demo-V2/migrations
 npx mj codegen
 
 # standalone smoke build (no DB):
