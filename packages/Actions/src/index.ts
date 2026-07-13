@@ -17,7 +17,7 @@
  *   import { BaseAction } from '@memberjunction/actions';
  *   import { ActionResultSimple, RunActionParams } from '@memberjunction/actions-base';
  *
- *   @RegisterClass(BaseAction, 'ICF: Do Something')
+ *   @RegisterClass(BaseAction, 'MoreCheese: Do Something')
  *   export class DoSomethingAction extends BaseAction {
  *       protected async InternalRunAction(params: RunActionParams): Promise<ActionResultSimple> {
  *           return { Success: true, ResultCode: 'SUCCESS' };

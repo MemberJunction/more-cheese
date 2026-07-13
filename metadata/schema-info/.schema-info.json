@@ -1,11 +1,11 @@
 [
   {
     "fields": {
-      "SchemaName": "AssociationDemoV2_Members",
-      "EntityIDMin": 10100001,
-      "EntityIDMax": 10199999,
-      "EntityNamePrefix": "ICF: ",
-      "Description": "MoreCheese Demo - application schema"
+      "SchemaName": "morecheese_common",
+      "EntityIDMin": 1,
+      "EntityIDMax": 999999999,
+      "EntityNamePrefix": "MoreCheese: ",
+      "Description": "MoreCheese Demo (International Cheese Federation) - common domain: people + organizations"
     },
     "primaryKey": {
       "ID": "DC96E7DD-5395-43EA-BE8A-0FE9F43F198F"

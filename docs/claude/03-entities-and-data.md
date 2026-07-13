@@ -62,7 +62,7 @@ Newer MJ core entities are named with an `MJ: ` prefix
 (`'MJ: AI Agent Runs'`, not `'AI Agent Runs'`); older ones aren't. Verify
 names in the generated `entity_subclasses.ts` (the `@RegisterClass` JSDoc
 shows each entity's exact name). Your own app's entities get YOUR schema
-prefix (this template: `ICF: `) via `SchemaInfo.EntityNamePrefix` +
+prefix (this template: `MoreCheese: `) via `SchemaInfo.EntityNamePrefix` +
 `mj.config.cjs` `NameRulesBySchema` — that's what prevents cross-app
 collisions.
 

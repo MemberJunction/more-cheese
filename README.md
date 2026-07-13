@@ -5,7 +5,7 @@ The **MoreCheese demo open app** for
 **International Cheese Federation (ICF)** association demo. It composes the
 BizApps open-app catalog with custom association-domain schemas — members,
 events, learning, forums, resources, awards, legislative, marketing (the
-`AssociationDemoV2_*` schemas; home schema `AssociationDemoV2_Members`) — the
+`morecheese_*` schemas; home schema `morecheese_common`) — the
 way a real customer environment composes multiple source systems. Dataset
 plans, benchmarks, and hero personas live in `plans/association-db/`; the
 data generator lives on the `datagen-walking-skeleton` branch.
@@ -56,7 +56,7 @@ npm install && npm run build:packages     # no MJ checkout or DB needed
 
 1. **Setup script — already run.** This repo's identity was set with
    `npm run init` (id `more-cheese-demo`, scope `@mj-more-cheese-demo/*`,
-   schema `AssociationDemoV2_Members`, prefix `ICF: `). The script is
+   schema `morecheese_common`, prefix `MoreCheese: `). The script is
    re-runnable if a value must change before first publish — see
    [docs/template-docs/getting-started.md](docs/template-docs/getting-started.md).
 2. **Create your repo + branches** — `next` (default, integration) and `main`
@@ -75,7 +75,7 @@ folder under `packages/dev-apps/`.
 | You want to… | Do this | Details |
 |---|---|---|
 | **Add a table / schema change** | Write `migrations/V<YYYYMMDDHHMM>__v<ver>_<Desc>.sql` (copy the `EXAMPLE_*.sql.example` skeleton), then run migrations + codegen (below) | [migrations/_README.md](migrations/_README.md), [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
-| **Run your migrations** | `npx mj migrate --schema AssociationDemoV2_Members --dir packages/dev-apps/<app>/migrations` | [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md) §5 |
+| **Run your migrations** | `npx mj migrate --schema morecheese_common --dir packages/dev-apps/<app>/migrations` | [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md) §5 |
 | **Run CodeGen** (after every schema/metadata change) | `npx mj codegen` — generates entity classes, resolvers, and forms into `packages/*/src/generated/`; **commit the generated code with its migration** | [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
 | **Capture a CodeGen migration** | Fold the SQL CodeGen emitted for YOUR objects (from `migrations/codegen/`, gitignored scratch) into a `V*` migration; never fold the `__mj_*` system plumbing — CodeGen re-applies that everywhere itself | [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
 | **Add / change metadata** (apps, nav items, lookup seeds, actions) | Add an entity folder under `metadata/`, `npx mj sync push --dir=<app>/metadata --format=json`, then capture the SQL as a `V*_Metadata_Sync.sql` migration | [docs/template-docs/metadata.md](docs/template-docs/metadata.md) |

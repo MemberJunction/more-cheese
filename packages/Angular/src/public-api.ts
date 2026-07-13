@@ -32,11 +32,11 @@
  *   @RegisterClass(BaseResourceComponent, 'MoreCheeseDemoDashboard')
  *   @Component({
  *     selector: 'sample-app-dashboard',
- *     template: '<div><h2>ICF</h2></div>',
+ *     template: '<div><h2>MoreCheese</h2></div>',
  *     standalone: false
  *   })
  *   export class MoreCheeseDemoDashboardComponent extends BaseResourceComponent {
- *     async GetResourceDisplayName(data: ResourceData): Promise<string> { return 'ICF'; }
+ *     async GetResourceDisplayName(data: ResourceData): Promise<string> { return 'MoreCheese'; }
  *     async GetResourceIconClass(data: ResourceData): Promise<string> { return 'fa-solid fa-cube'; }
  *   }
  *

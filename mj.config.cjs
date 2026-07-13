@@ -8,9 +8,9 @@
 // file only declares what is specific to this app's directory structure.
 //
 // MoreCheese demo (International Cheese Federation). Custom demo data is split
-// across multiple AssociationDemoV2_* schemas (per the v2 plan — simulates a
-// realistic multi-source-system customer environment); the manifest's home
-// schema (migration default) is AssociationDemoV2_Members.
+// across multiple morecheese_* schemas (simulates a realistic multi-source
+// customer environment; naming per the datagen emitters); the manifest's home
+// schema (migration default) is morecheese_common.
 //
 module.exports = {
   // ==========================================================================
@@ -54,16 +54,14 @@ module.exports = {
   newEntityDefaults: {
     NameRulesBySchema: [
       { SchemaName: '${mj_core_schema}', EntityNamePrefix: 'MJ: ' },
-      // All AssociationDemoV2_* demo schemas share the ICF prefix (the demo
-      // association brand). One entry per schema in the v2 plan's domain map.
-      { SchemaName: 'AssociationDemoV2_Members', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Events', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Learning', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Forums', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Resources', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Awards', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Legislative', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
-      { SchemaName: 'AssociationDemoV2_Marketing', EntityNamePrefix: 'ICF: ', EntityNameSuffix: '' },
+      // All morecheese_* demo schemas share the MoreCheese prefix (matches the
+      // datagen emitters). One entry per domain schema; add a rule when a new
+      // domain schema lands.
+      { SchemaName: 'morecheese_common', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_orders', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
     ],
   },
 
@@ -94,9 +92,9 @@ module.exports = {
       // Order matters: more-specific schema names must come first (greedy
       // sequential substitution).
       // Only the HOME schema maps to the default placeholder; the other
-      // AssociationDemoV2_* schemas are fixed names written literally by the
+      // morecheese_* schemas are fixed names written literally by the
       // migrations.
-      { schema: 'AssociationDemoV2_Members', placeholder: '${flyway:defaultSchema}' },
+      { schema: 'morecheese_common', placeholder: '${flyway:defaultSchema}' },
       { schema: '__mj', placeholder: '${mjSchema}' },
     ],
   },
