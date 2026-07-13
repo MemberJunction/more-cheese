@@ -103,7 +103,7 @@ vs the 60/25/15 target; acceptable for heroes (the generated long tail carries t
 
 ### Elena Rodriguez `ICF-000101` — the flagship member
 **43 · Head Cheesemaker, Crowfeather Creamery (mid-size, Petaluma CA) · Producer/Cheesemaking · joined 2022 · Professional, Active · θ high, φ med-high**
-Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen years working up through Sierra Vista's make room to head cheesemaker in 2019. **Join trigger:** in 2022 she launched the creamery's first raw-milk alpine-style ("Sierra Vista Reserve") and needed the federation's aging-standards network and food-safety guidance. Earned her CCP in 2024. Sits on the Standards Committee — she pushed for the raw-milk aging guidance doc. Answers make-room questions in the forum with the patience of someone who's trained a dozen assistants. **Mentors Priya Natarajan** (met at the 2025 conference affinage workshop).
+Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen years working up through Crowfeather's make room to head cheesemaker in 2019. **Join trigger:** in 2022 she launched the creamery's first raw-milk alpine-style ("Crowfeather Reserve") and needed the federation's aging-standards network and food-safety guidance. Earned her CCP in 2024. Sits on the Standards Committee — she pushed for the raw-milk aging guidance doc. Answers make-room questions in the forum with the patience of someone who's trained a dozen assistants. **Mentors Priya Natarajan** (met at the 2025 conference affinage workshop).
 *Pins: Standards Committee seat 2023–, CCP 2024, 3 consecutive conference attendances, top-decile Sonar.*
 
 ### Marcus Chen `ICF-000102` — the renewal nudge

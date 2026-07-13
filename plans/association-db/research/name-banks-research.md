@@ -1,9 +1,9 @@
 # Name Banks — Research Brief (fixing the mad-libs problem)
 
 **Status:** research complete + banks AUTHORED and wired (2026-07-13) — `datagen/projects/morecheese/banks/{orgs,people}.json`; component clearance run via web-search agents, flags culled.
-**Problem:** `datagen/projects/morecheese/banks.mjs` builds names by chaining cheese words
-("Whey Rind Creamery Co.") — structurally the same weakness as Faker's company provider, and
-it reads instantly fake. **The fix:** names become AUTHORED content (like heroes) — large
+**Problem (now fixed):** `banks.mjs` BUILT names by chaining cheese words ("Whey Rind
+Creamery Co.") — structurally the same weakness as Faker's company provider; it read
+instantly fake. **The fix:** names become AUTHORED content (like heroes) — large
 curated JSON banks, reviewed in git, safety-cleared once at authoring time; the generator
 samples without replacement from its dice. Determinism and zero-dependency unchanged.
 

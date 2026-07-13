@@ -33,6 +33,7 @@ datagen/
     lint.mjs            structural ruleset checks + overlay typo protection + holdout stripping
     patterns.mjs        rung 3: the declarative pattern executor
     features.mjs        the factor contract's feature grammar
+    ids.mjs             deterministic UUIDv5 from business keys (shared by both emitters)
     packs.mjs           pack emission machinery (the project supplies the pack map)
   projects/morecheese/  ← ONE PROJECT = one generated universe (a second = a sibling dir)
     index.mjs           the project's two exports: hooks + buildWorld(cfg) (the pipeline)
@@ -41,10 +42,12 @@ datagen/
     world.mjs           orgs + people + latents (drift process) + hero pinning
     membership.mjs      the renewal unroll + archive rule
     events.mjs          events + registrations + no-show pass
+    learning.mjs        courses, enrollments, completions (declarative via patterns)
     money.mjs           the order/payment chain
     hooks.mjs           what the core needs from the project: compile feature map,
                         refinement measure, pack assembly
     ruleset/            the project's authored content (modules, scenarios, RULESET.md)
+  lib/config.mjs        ← wiring: CLI args, project loading, ruleset compose+compile
   generate.mjs …        ← project-generic entrypoints (--project, default morecheese)
 ```
 

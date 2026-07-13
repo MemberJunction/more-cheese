@@ -13,7 +13,7 @@ import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
 
 /**
  * annualParticipation — per year: an eligible pool faces a calibrated yes/no; participants
- * spawn child rows. (Instances: course enrollment; conference attendance is next.)
+ * spawn child rows. (Instances: course enrollment + conference attendance.)
  *
  * opts: {
  *   seed, years: [..],
@@ -146,8 +146,8 @@ function drawOffsetDays(r, spec) {
 }
 
 /**
- * childOutcome — per existing row: a calibrated outcome. (Instances: course completion;
- * no-show is next.) The calibration runs over the ACTUAL item pool — the selection-effect
+ * childOutcome — per existing row: a calibrated outcome. (Instances: course completion +
+ * event no-show.) The calibration runs over the ACTUAL item pool — the selection-effect
  * lesson (spec §7 lesson #1) is built into the pattern.
  *
  * opts: {

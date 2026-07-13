@@ -10,7 +10,7 @@
 // is what the data measurably shows. Deterministic: fixed compile seed.
 //
 // DOMAIN-BLIND: everything this file knows about the application arrives through `hooks`
-// (injected by the domain, see domains/<name>/hooks.mjs):
+// (injected by the domain, see projects/<name>/hooks.mjs):
 //   hooks.compile.arrowsOf(C)       → the arrow map being compiled
 //   hooks.compile.overallTarget(C)  → the calibration target those arrows negotiate with
 //   hooks.compile.features          → arrow name → synthetic-population feature name

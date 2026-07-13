@@ -1,5 +1,5 @@
 // Renders the composed+compiled ruleset as plain English → ruleset/RULESET.md
-// Usage: node explain.mjs
+// Usage: node explain.mjs [--project morecheese]
 //
 // The interpretability contract: anyone should be able to READ the recipe without knowing
 // what a log-odds is. Effects are stated in percentage points (computed from the compiled

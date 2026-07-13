@@ -1,5 +1,5 @@
 // The release pipeline in miniature: generate → validate → promote ONLY on green.
-// Usage: node build.mjs [--n 500] [--seed 42] [--release 2026-07-31] [--demo]
+// Usage: node build.mjs [--project morecheese] [--n 500] [--seed 42] [--release 2026-07-31] [--demo]
 //
 // Fixes the emit-before-validate gap: generation lands in a STAGING folder, the validator
 // runs against staging, and only a fully green run is promoted to out/. A red run leaves

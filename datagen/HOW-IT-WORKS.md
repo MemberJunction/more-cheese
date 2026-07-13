@@ -15,7 +15,7 @@ explains *why the machine is shaped this way*. (Distilled from the design discus
   drives churn"), world facts (geography, cohorts, seasons), and the pinned heroes. **The AI
   is only ever allowed in the recipe-writing room.** It authors this file once; the file is
   reviewed in git like code.
-- **The kitchen** (`generate.mjs` + `lib/`): plain, deterministic code that executes the
+- **The kitchen** (`generate.mjs` + `core/` + `projects/<p>/`): plain, deterministic code that executes the
   recipe. No AI calls, no network, no clock. Same seed → byte-identical world, forever.
 - **The inspector** (`validate.mjs`): re-measures the finished data against the recipe and
   **fails the build** on any miss — including data that's *too smooth* to be believable.

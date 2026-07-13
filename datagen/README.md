@@ -71,7 +71,7 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `projects/morecheese/membership.mjs` | Step 3: the renewal unroll via `recurringDecision` — score → **calibrate** → draw, year by year; grace/back-dating rules; the archive rule. |
 | `projects/morecheese/events.mjs` | Step 4: events + registrations; conference attendance via `annualParticipation`, no-show via `childOutcome` (selection-effect calibration over the actual registrant pool). |
 | `projects/morecheese/money.mjs` | Step 5: the money chain via `derivedTransaction` — one order per billable fact (order-per-cycle, per bizapps-orders design), payment timing DECLARED in `orders.paymentProfiles`, real A/R aging, the open renewal-order queue. |
-| `projects/<p>/ruleset/scenarios/` | **Parameter overlays on the same causal model** — `--scenario decliningOrg` rebuilds the world at ~78%% renewal (real craft-food decline curves); compiler and validator re-target automatically. |
+| `projects/<p>/ruleset/scenarios/` | **Parameter overlays on the same causal model** — `--scenario decliningOrg` rebuilds the world at ~78% renewal (real craft-food decline curves); compiler and validator re-target automatically. |
 | `core/packs.mjs` | Step 8: deal finished rows into per-app packs with manifests; strip the latents. |
 | `validate.mjs` | **The inspector** — seven named gate groups (packs, temporal, benchmarks, arrows, trainability, heroes, status mix). |
 | `build.mjs` | **The pipeline** — generate → validate on staging → promote to `out/` only on green; red runs park in `out-failed/`. |
@@ -87,7 +87,7 @@ determinism means "byte-identical or you broke something."
 
 ## What it produces
 
-`out/packs/{common,membership,events,orders}/` — one folder per app pack (D9: cook once, portion
+`out/packs/{common,membership,events,learning,orders}/` — one folder per app pack (D9: cook once, portion
 at the end), each with table JSON files + a `manifest.json` declaring `dependsOn`. The
 validator checks referential closure per pack layer, exactly like the future install-time
 check.

@@ -4,7 +4,7 @@
 // Format per docs/template-docs/metadata.md: root .mj-sync.json with directoryOrder
 // (parents before children — the pack pyramid), one folder per ENTITY with its own
 // .mj-sync.json, records as dot-prefixed JSON arrays. Every record pins its primaryKey
-// with our deterministic UUID (lib/ids.mjs), so `mj sync push` is a stable upsert:
+// with our deterministic UUID (core/ids.mjs), so `mj sync push` is a stable upsert:
 // re-push after a regeneration updates the same rows in place. FK fields carry literal
 // pinned IDs (derived independently) — no @lookup needed.
 //
