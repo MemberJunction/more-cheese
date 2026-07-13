@@ -10,18 +10,21 @@
 import { rng } from '../../core/rng.mjs';
 import { staticAssignment } from '../../core/patterns.mjs';
 import { iso, addDays, addYears } from '../../core/dates.mjs';
-import { FIRST, LAST, CHEESE_WORDS, ORG_SUFFIX, CITIES, SEGMENTS } from './banks.mjs';
+import { orgNameDealer, personNameFor, CITIES, SEGMENTS } from './banks.mjs';
 
 export function buildOrgs(cfg) {
   const { R, seed, releaseYear } = cfg;
   const orgs = [];
   const nOrgs = Math.round(cfg.n * R.orgs.ratioToMembers);
+  // AUTHORED names, dealt without replacement from the bank's own dice streams —
+  // dice assign names, they never compose them (the mad-libs lesson)
+  const dealName = orgNameDealer(seed);
   for (let i = 0; i < nOrgs; i++) {
     const r = rng(seed, `org:${i}`);
     const region = r.pickWeighted(R.geography.mix);
     const [city, state, lat, lon] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
     const type = r.pickWeighted([['Producer', R.orgs.producerShare], ['Retailer', 0.30], ['Supplier', 0.15], ['Educator', 0.10]]);
-    const name = `${r.pick(CHEESE_WORDS)} ${r.pick(CHEESE_WORDS)} ${r.pick(ORG_SUFFIX[type])}`;
+    const name = dealName(type);
     // small chance per history year of a dissolution/acquisition/program-cut
     let event = null;
     for (let y = R.history.startYear + 2; y <= releaseYear; y++) {
@@ -78,8 +81,10 @@ export function buildPeople(cfg, orgs) {
     const segment = r.pickWeighted(SEGMENTS);
     // tier assignment: DECLARED rules (ruleset membership.tiers.assign) via core staticAssignment
     const tier = staticAssignment(R.membership.tiers.assign, { Segment: segment, hasOrganization: !!org, phi });
+    // origin-consistent authored name from the member's own name stream (region-weighted buckets)
+    const nm = personNameFor(seed, key, region);
     people.push({
-      MemberNumber: key, FirstName: r.pick(FIRST), LastName: r.pick(LAST),
+      MemberNumber: key, FirstName: nm.first, LastName: nm.last,
       Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
       _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit

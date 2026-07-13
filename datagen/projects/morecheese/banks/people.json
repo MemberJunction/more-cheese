@@ -1,0 +1,46 @@
+{
+  "$comment": "AUTHORED person-name bank: origin-consistent component pools (research §2 — pick a bucket first, then first+last WITHIN it; naive cross-products read fake at scale). Buckets are weighted per member Region (GAP-6's design: geography drives name distribution). Duplicates across members are allowed — real membership lists have three David Meyers. Sources for realism: US Census 2010 surname frequencies, SSA first names, Faker locale lists (seeded from, not copied). Birth-decade conditioning is a known next step (members don't carry ages yet).",
+  "regionWeights": {
+    "NA":  { "anglo": 0.40, "germanicNordic": 0.16, "hispanic": 0.14, "italianIberian": 0.08, "eastAsian": 0.07, "franco": 0.04, "southAsian": 0.04, "westAfrican": 0.04, "slavic": 0.03 },
+    "EU":  { "germanicNordic": 0.28, "franco": 0.22, "italianIberian": 0.18, "anglo": 0.14, "slavic": 0.14, "southAsian": 0.02, "westAfrican": 0.01, "eastAsian": 0.01 },
+    "RoW": { "anglo": 0.34, "hispanic": 0.22, "eastAsian": 0.16, "southAsian": 0.12, "westAfrican": 0.06, "italianIberian": 0.04, "franco": 0.03, "germanicNordic": 0.03 }
+  },
+  "buckets": {
+    "anglo": {
+      "first": ["James", "Mary", "Robert", "Linda", "Michael", "Susan", "David", "Karen", "Emily", "Tyler", "Sarah", "Daniel", "Laura", "Kevin", "Megan", "Brian", "Ashley", "Eric", "Hannah", "Grace", "Owen", "Cole", "June", "Ruth"],
+      "last": ["Whitaker", "Marsh", "Ferris", "Hale", "Ryder", "Keane", "Beckett", "Holloway", "Merrick", "Paxton", "Sutton", "Ellery", "Winslow", "Prescott", "Farrow", "Kendall", "Bramley", "Ashworth", "Fenwick", "Grantham", "Hollis", "Ives", "Pace", "Quill"]
+    },
+    "hispanic": {
+      "first": ["Diego", "Sofia", "Mateo", "Lucia", "Carlos", "Elena", "Miguel", "Rosa", "Javier", "Carmen", "Andres", "Marisol", "Rafael", "Ines", "Tomas", "Alejandra", "Hector", "Paloma", "Emilio", "Beatriz"],
+      "last": ["Vega", "Chavez", "Delgado", "Fuentes", "Ibarra", "Marquez", "Navarro", "Ochoa", "Prado", "Quintero", "Rosales", "Salinas", "Torres", "Valdez", "Zamora", "Cabrera", "Duarte", "Galvan", "Herrera", "Luna", "Mendez", "Orozco"]
+    },
+    "germanicNordic": {
+      "first": ["Lars", "Greta", "Emil", "Freya", "Anders", "Sanne", "Bram", "Lena", "Otto", "Maren", "Hugo", "Astrid", "Klaus", "Ingrid", "Sven", "Petra", "Nils", "Anneke", "Dirk", "Elke"],
+      "last": ["Muller", "Brandt", "Dietrich", "Klein", "Meyer", "Bauer", "Zeller", "Voss", "Falk", "Lund", "Olsen", "Sorensen", "Iversen", "Lindqvist", "Jansen", "Groen", "Ostrom", "Yoder", "Steiner", "Krueger", "Vandermeer", "Holzer", "Nystrom", "Dahl"]
+    },
+    "italianIberian": {
+      "first": ["Marco", "Giulia", "Luca", "Chiara", "Matteo", "Bianca", "Dario", "Alessia", "Paolo", "Serena", "Joao", "Mariana", "Rui", "Catarina", "Enzo", "Livia", "Bruno", "Camila", "Nico", "Elisa"],
+      "last": ["Moretti", "Caruso", "Ferraro", "Bianchi", "Romano", "Greco", "Ricci", "Santoro", "Pellegrini", "Serra", "Pires", "Cardoso", "Lombardi", "Marchetti", "Oliveira", "Barros", "Esposito", "Gallo", "Neves", "Vitale", "Vidal", "Almeida"]
+    },
+    "franco": {
+      "first": ["Amelie", "Julien", "Camille", "Etienne", "Margaux", "Luc", "Elodie", "Mathieu", "Celeste", "Remi", "Juliette", "Olivier", "Manon", "Pascal", "Sylvie", "Antoine", "Claire", "Denis", "Noemie", "Marcel"],
+      "last": ["Beauchamp", "Moreau", "Lefevre", "Girard", "Dubois", "Fontaine", "Rousseau", "Mercier", "Blanchard", "Chevalier", "Gagnon", "Tremblay", "Bergeron", "Lacroix", "Pelletier", "Bouchard", "Marchand", "Renard", "Vachon", "Cloutier"]
+    },
+    "eastAsian": {
+      "first": ["Yuki", "Haruto", "Aiko", "Kenji", "Mei", "Jun", "Sora", "Hana", "Minho", "Jiwoo", "Seojun", "Eunji", "Wei", "Ling", "Anh", "Linh", "Kazuo", "Naomi", "Daichi", "Rina"],
+      "last": ["Nakamura", "Sato", "Ueda", "Tanaka", "Kobayashi", "Chen", "Lin", "Wang", "Zhang", "Park", "Kim", "Choi", "Nguyen", "Tran", "Pham", "Watanabe", "Fujimoto", "Okada", "Yoon", "Kang"]
+    },
+    "southAsian": {
+      "first": ["Arjun", "Priya", "Rohan", "Ananya", "Vikram", "Meera", "Aditya", "Kavya", "Ravi", "Nisha", "Sanjay", "Divya", "Kiran", "Anil", "Pooja", "Dev", "Lakshmi", "Rahul", "Sita", "Amar"],
+      "last": ["Patel", "Sharma", "Gupta", "Iyer", "Rao", "Mehta", "Desai", "Kapoor", "Nair", "Reddy", "Banerjee", "Chowdhury", "Singh", "Kaur", "Menon", "Joshi", "Kulkarni", "Verma", "Bhatt", "Pillai"]
+    },
+    "westAfrican": {
+      "first": ["Kofi", "Ama", "Kwame", "Abena", "Chidi", "Ngozi", "Sekou", "Fatou", "Tunde", "Zainab", "Emeka", "Adaeze", "Kojo", "Efua", "Obi", "Amara", "Yusuf", "Nia", "Jelani", "Imani"],
+      "last": ["Okoro", "Okonkwo", "Adeyemi", "Mensah", "Boateng", "Abara", "Chukwu", "Diallo", "Kamara", "Toure", "Sesay", "Osei", "Ndiaye", "Achebe", "Eze", "Adjei", "Owusu", "Banda", "Moyo", "Oduya"]
+    },
+    "slavic": {
+      "first": ["Priit", "Katya", "Milan", "Zofia", "Andrei", "Janek", "Ivana", "Magda", "Piotr", "Stefan", "Alina", "Marek", "Dana", "Viktor", "Irina", "Pavel", "Nadia", "Tomasz", "Eva", "Oleg"],
+      "last": ["Kowalski", "Nowak", "Horvat", "Petrov", "Ivanov", "Zielinski", "Dvorak", "Svoboda", "Kovacs", "Nagy", "Popescu", "Ionescu", "Sokolov", "Krol", "Baran", "Urban", "Cerny", "Mazur", "Tamm", "Novak"]
+    }
+  }
+}

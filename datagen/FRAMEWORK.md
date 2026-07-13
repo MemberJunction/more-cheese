@@ -36,7 +36,8 @@ datagen/
     packs.mjs           pack emission machinery (the project supplies the pack map)
   projects/morecheese/  ← ONE PROJECT = one generated universe (a second = a sibling dir)
     index.mjs           the project's two exports: hooks + buildWorld(cfg) (the pipeline)
-    banks.mjs           names, cities, segment mix (placeholder → curated name banks)
+    banks.mjs           bank dealing (authored banks/*.json) + cities + segment mix
+    banks/              AUTHORED name banks: cleared components, composed by real morphology
     world.mjs           orgs + people + latents (drift process) + hero pinning
     membership.mjs      the renewal unroll + archive rule
     events.mjs          events + registrations + no-show pass

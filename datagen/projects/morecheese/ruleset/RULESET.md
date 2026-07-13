@@ -24,10 +24,10 @@ Who differs, and by how much:
 | Rule | Effect (percentage points) | Authored as | Evidence |
 |---|---|---|---|
 | Longer-tenured members renew more | **+4.1pt** per extra “standard deviation” of tenure | β 0.55 (expert form) → compiled β 0.55 | per 1 SD of tenure at decision |
-| Engaged members renew more | **+7.1pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
-| Auto-renew members stick around | **+11.5pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.576 | MGI: +10-15pt |
-| Employer trouble drives churn | **-8.9pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~78%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows |
-| The enthusiast tier churns hardest | **-21.5pt** hobbyists vs professional tiers (the group lands at ~69%) | "lands at 65%" (human form) → compiled β -1.811 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
+| Engaged members renew more | **+7.0pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
+| Auto-renew members stick around | **+12.2pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.746 | MGI: +10-15pt |
+| Employer trouble drives churn | **-8.6pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows |
+| The enthusiast tier churns hardest | **-23.6pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.979 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
 
 ## The event rules
 

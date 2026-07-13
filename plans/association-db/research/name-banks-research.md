@@ -1,6 +1,6 @@
 # Name Banks — Research Brief (fixing the mad-libs problem)
 
-**Status:** research complete (2026-07-13); authoring not started.
+**Status:** research complete + banks AUTHORED and wired (2026-07-13) — `datagen/projects/morecheese/banks/{orgs,people}.json`; component clearance run via web-search agents, flags culled.
 **Problem:** `datagen/projects/morecheese/banks.mjs` builds names by chaining cheese words
 ("Whey Rind Creamery Co.") — structurally the same weakness as Faker's company provider, and
 it reads instantly fake. **The fix:** names become AUTHORED content (like heroes) — large

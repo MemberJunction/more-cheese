@@ -80,7 +80,7 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `core/ids.mjs` | Deterministic UUIDv5 from business keys — shared by both emitters. |
 | `core/rng.mjs` | The dice: content-addressed substreams, distributions, the intercept solver. |
 | `core/stats.mjs` | The inspector's math: logistic regression with standard errors. |
-| `lib/config.mjs` / `projects/morecheese/banks.mjs` | Args + date helpers / the (placeholder) name & city banks. |
+| `lib/config.mjs` / `projects/morecheese/banks.mjs` | Args + project loading / the AUTHORED name banks (`banks/*.json` — safety-cleared components, dealt without replacement from their own dice streams; see `plans/association-db/research/name-banks-research.md`) + cities + segment mix. |
 
 Refactors are provably safe here: regenerate with the same seed and `diff -r` the output —
 determinism means "byte-identical or you broke something."
