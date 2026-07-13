@@ -8,7 +8,7 @@ events, learning, forums, resources, awards, legislative, marketing (the
 `morecheese_*` schemas; home schema `morecheese_common`) — the
 way a real customer environment composes multiple source systems. Dataset
 plans, benchmarks, and hero personas live in `plans/association-db/`; the
-data generator lives on the `datagen-walking-skeleton` branch.
+data generator lives in `datagen/` (engine / projects/morecheese / cli).
 
 Built from the `mj-sample-open-app` template — the template's structure and
 docs below still apply.
