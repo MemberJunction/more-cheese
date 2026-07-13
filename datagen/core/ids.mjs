@@ -5,6 +5,13 @@
 
 import { createHash } from 'node:crypto';
 
+// COLLISION MODEL: within a namespace, entity-prefixed names ('person:…', 'order:…') are
+// unique by construction; accidental SHA-1 collisions are ~10^-24 at our scale; and PK
+// uniqueness makes the impossible case fail loudly rather than corrupt. The ONE real
+// hazard is procedural: deterministic IDs mean a cloned app reusing this namespace with
+// overlapping business keys would mint the SAME UUIDs by construction. Framework rule:
+// **one namespace per domain/app** — a new domain mints its own constant (uuidgen) and
+// never changes it after first push. This constant belongs to MoreCheese, forever.
 const NAMESPACE = Buffer.from('9b1dcbf2c05341e8a2f4d40e11ce66a1', 'hex'); // fixed forever — changing it changes every ID
 
 export function uuidFor(entity, businessKey) {

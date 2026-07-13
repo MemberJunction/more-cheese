@@ -50,6 +50,13 @@ goes in `domains/`. If it would survive unchanged in an accounting-demo world, i
 `core/`. `compile.mjs` was the one genuine tangle — its feature map and empirical-refinement
 world were domain knowledge embedded in engine code; rung 2 inverts that into injected hooks.
 
+**The namespace rule (identity safety):** deterministic UUIDs are minted as
+`uuidv5(namespace, "entity:businessKey")`. Accidental collision is a non-issue (~10⁻²⁴);
+the real hazard is a cloned domain reusing a namespace with overlapping keys — same UUIDs
+by construction. So: **every domain mints its own namespace constant** (uuidgen once,
+frozen forever). The `9b1dcbf2…` constant in `core/ids.mjs` belongs to MoreCheese; a second
+domain passes its own (a rung-3 hooks field when the second domain arrives).
+
 ## The pattern vocabulary (rung 3)
 
 Three repetitions of the same shape across membership, events, and learning earned the
@@ -68,6 +75,46 @@ A domain entity declares `{ pattern, pool, arrows, target, spawn, streamKey }` i
 module; `core/patterns.mjs` interprets. **Stream-key templates are part of the declaration**,
 so a declarative re-expression reproduces the hand-written world *byte-identically* — the
 proof standard for every migration to declarative form.
+
+## The factor contract (the standardized unit of authoring)
+
+A **factor** is the atom a domain author writes — one cause, its strength, and its why:
+
+```jsonc
+"recentLearner": {
+  "liftPts": 6,                                       // effect: liftPts | groupTarget | strength | beta
+  "feature": { "from": "self", "field": "AutoRenew" },// feature: WHAT fact feeds in (grammar below)
+  "evidence": "MGI: education participation ↔ +5-8pt retention"  // lint-enforced
+}
+```
+
+Everything else is a projection of this artifact: the executor reads it forward (a score
+term), the validator reads it backward (an auto-derived recovery gate), the schema layer
+reads it sideways (do the referenced fields exist?), RULESET.md renders it in English, and
+the AI authoring loop is constrained to writing exactly this shape.
+
+**Feature grammar v1** (deliberately tiny — standardize observed needs, not imagined ones):
+
+| Form | Meaning |
+|---|---|
+| `{ "from": "self", "field": "F" }` | the entity's own field, coerced to a number (booleans → 0/1) |
+| `{ "from": "self", "where": { "F": v, … } }` | 1 if all equalities match, else 0 |
+| `{ "from": "<table>", "where": {…}, "as": "hasAny" }` | tier-1 cross-entity lookups (next: requires the ordering rule) |
+
+**Ordering rule:** a factor's `from:` reference creates a dependency edge — the referenced
+facts must be generated before the consuming decision. The executor topologically sorts on
+these edges; a cycle (facts in year Y consuming facts from year Y) is an error pointing at
+the time-stepped-scheduler frontier, not something to fudge.
+
+**Effect-form rule (v1):** feature-declared factors accept `beta`/`strength` forms; the
+`liftPts`/`groupTarget` solver currently requires the feature to exist in the compile hooks'
+synthetic population — extending the solver to measure declared features empirically is a
+known next step, not silently supported.
+
+**Ossification policy:** every admitted field is supported ~forever, so the grammar only
+grows when a real domain demonstrates the need in hand-written form first, and every
+migration to the contract must reproduce the previous world **byte-identically at the pack
+level** (validator-private files may evolve with the harness).
 
 ## What stays honest (the hard parts we're NOT claiming yet)
 

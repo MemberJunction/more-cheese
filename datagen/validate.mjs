@@ -161,29 +161,35 @@ function checkArrows() {
   // the anchor rides along as a nuisance covariate: with a DRIFTING θ, renewal selection
   // acted on past θ values the decision-year θ can't represent — omitting that history
   // attenuates neighboring coefficients (tenure especially). The anchor stands in for it.
-  const X = renewalEvents.map((e) => [1, e.tenureZ, e.theta, e.anchor ?? e.theta, e.prevTheta ?? e.theta, e.autoRenew, e.employerEvent, e.enthusiast]);
+  //
+  // CONTRACT PROJECTION #2: the built-in drivers are gated by name; every DECLARED-FEATURE
+  // factor in the ruleset auto-gains a column and a recovery gate — author a factor, get
+  // its check, no validator edit.
+  const A = R.membership.arrows;
+  const declaredNames = Object.entries(A).filter(([, a]) => a.feature).map(([k]) => k);
+  const X = renewalEvents.map((e) => [1, e.tenureZ, e.theta, e.anchor ?? e.theta, e.prevTheta ?? e.theta, e.employerEvent, ...declaredNames.map((k) => e[k] ?? 0)]);
   const y = renewalEvents.map((e) => e.renewed);
-  const { beta: [, bTenure, bTheta, , , bAuto, bEmployer, bEnth], se: [, seTenure, seTheta, , , seAuto, seEmployer, seEnth] } = logisticFit(X, y);
-  const gate = (name, got, se, authored) => {
+  const { beta, se } = logisticFit(X, y);
+  const [, bTenure, bTheta, , , bEmployer, ...bDeclared] = beta;
+  const [, seTenure, seTheta, , , seEmployer, ...seDeclared] = se;
+  const gate = (name, got, seV, authored) => {
     const okSign = Math.sign(got) === Math.sign(authored);
     const ratio = Math.abs(got / authored);
     // strict band, with a small-sample allowance (±3·SE) that vanishes at production scale.
     // 3 (not 2.5) is the multiple-comparisons budget: ~30 gates × many seeds means a 2.5σ
     // false failure is EXPECTED occasionally (verified empirically: recoveries center on the
     // authored values; a 2.9σ outlier appeared in a 7-seed sweep exactly as statistics predicts)
-    const ok = okSign && ((ratio >= 0.5 && ratio <= 2.0) || Math.abs(got - authored) <= 3 * se);
-    check(`arrow ${name}: recovered β=${got.toFixed(2)}±${se.toFixed(2)} vs authored ${authored} (×${ratio.toFixed(2)})`, ok, okSign ? 'sign ok' : 'SIGN FLIP');
+    const ok = okSign && ((ratio >= 0.5 && ratio <= 2.0) || Math.abs(got - authored) <= 3 * seV);
+    check(`arrow ${name}: recovered β=${got.toFixed(2)}±${seV.toFixed(2)} vs authored ${authored} (×${ratio.toFixed(2)})`, ok, okSign ? 'sign ok' : 'SIGN FLIP');
   };
-  const A = R.membership.arrows;
   gate('tenure→renewal', bTenure, seTenure, A.tenure.beta);
   gate('engagement→renewal', bTheta, seTheta, A.engagement.beta);
-  gate('autoRenew→renewal', bAuto, seAuto, A.autoRenew.beta);
   gate('employerEvent→renewal (1.15)', bEmployer, seEmployer, A.employerEvent.beta);
-  gate('enthusiastTier→renewal', bEnth, seEnth, A.enthusiastTier.beta);
+  declaredNames.forEach((k, i) => gate(`${k}→renewal [declared feature]`, bDeclared[i], seDeclared[i], A[k].beta));
 
   // the enthusiast rule's own benchmark: ~65% tier renewal while overall stays 87%
   // (tolerance + binomial SE at the observed group size — vanishes at production scale)
-  const enth = renewalEvents.filter((e) => e.enthusiast === 1);
+  const enth = renewalEvents.filter((e) => e.enthusiastTier === 1);
   const enthRate = enth.reduce((s, e) => s + e.renewed, 0) / enth.length;
   const EB = R.membership.enthusiastRenewal;
   const enthAllow = EB.tolerance + 1.5 * Math.sqrt((EB.target * (1 - EB.target)) / enth.length);

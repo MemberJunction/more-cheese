@@ -12,6 +12,7 @@
 
 import { rng, sigmoid, calibrateIntercept } from '../../core/rng.mjs';
 import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../core/dates.mjs';
+import { featureArrows } from '../../core/features.mjs';
 
 export function runRenewalUnroll(cfg, people, orgs) {
   const { R, seed, release, releaseYear } = cfg;
@@ -63,15 +64,18 @@ export function runRenewalUnroll(cfg, people, orgs) {
     }
     if (!cohort.length) continue;
 
-    // 2. score everyone, then solve the baseline so the cohort hits the target
+    // 2. score everyone, then solve the baseline so the cohort hits the target.
+    // BUILT-IN drivers (computed facts: standardized tenure, the drifting latent, the
+    // employer-event window) + DECLARED-FEATURE factors read straight from the ruleset —
+    // the factor contract: authoring a self-referencing factor requires no code here.
+    const declared = featureArrows(M.arrows);
     const meanT = cohort.reduce((s, c) => s + c.tenureYrs, 0) / cohort.length;
     const sdT = Math.sqrt(cohort.reduce((s, c) => s + (c.tenureYrs - meanT) ** 2, 0) / cohort.length) || 1;
     const scores = cohort.map((c) =>
       M.arrows.tenure.beta * ((c.tenureYrs - meanT) / sdT) +
       M.arrows.engagement.beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting process; heroes pinned)
-      M.arrows.autoRenew.beta * (c.p.AutoRenew ? 1 : 0) +
       M.arrows.employerEvent.beta * c.employerEvent +
-      M.arrows.enthusiastTier.beta * (c.p.Segment === 'Enthusiast' ? 1 : 0)
+      declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0)
     );
     const target = Math.min(0.97, Math.max(0.5, M.renewalTarget));
     // regime shifts and texture apply AFTER calibration — they're tide, not boats. (Putting
@@ -84,7 +88,15 @@ export function runRenewalUnroll(cfg, people, orgs) {
     cohort.forEach((c, i) => {
       const r = rng(seed, `renew:${c.p.MemberNumber}:${y}`);
       const renewed = c.p._hero ? true : r.bernoulli(sigmoid(b0 + scores[i]));
-      if (!c.p._hero) renewalEvents.push({ year: y, tenureZ: (c.tenureYrs - meanT) / sdT, theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta, autoRenew: c.p.AutoRenew ? 1 : 0, employerEvent: c.employerEvent, enthusiast: c.p.Segment === 'Enthusiast' ? 1 : 0, renewed: renewed ? 1 : 0 });
+      if (!c.p._hero) renewalEvents.push({
+        year: y, tenureZ: (c.tenureYrs - meanT) / sdT,
+        theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta,
+        employerEvent: c.employerEvent,
+        // declared-feature factors record under their ARROW names — the validator derives
+        // its recovery gates from the same declarations (contract projection #2)
+        ...Object.fromEntries(declared.map((fa) => [fa.name, fa.fn(c.p)])),
+        renewed: renewed ? 1 : 0,
+      });
       if (renewed) {
         pushPeriod(c.p, c.st.start, c.st.end, 'Renewed', null, null);
         const nextEnd = c.p.CycleType === 'calendar' ? endOfYear(y + 1) : addYears(c.st.end, 1);

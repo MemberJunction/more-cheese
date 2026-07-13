@@ -36,7 +36,7 @@ export const morecheeseHooks = {
       const { renewalEvents } = runRenewalUnroll(cfg, ppl, orgs);
       const rate = (rows) => rows.reduce((s, e) => s + e.renewed, 0) / rows.length;
       return {
-        enthusiastTier: { group: rate(renewalEvents.filter((e) => e.enthusiast)), rest: rate(renewalEvents.filter((e) => !e.enthusiast)) },
+        enthusiastTier: { group: rate(renewalEvents.filter((e) => e.enthusiastTier)), rest: rate(renewalEvents.filter((e) => !e.enthusiastTier)) },
         autoRenew: { group: rate(renewalEvents.filter((e) => e.autoRenew)), rest: rate(renewalEvents.filter((e) => !e.autoRenew)) },
       };
     },

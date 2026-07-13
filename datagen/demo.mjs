@@ -216,7 +216,7 @@ function renderMember(m) {
   const splits = [
     ['auto-renew ON', rate(ev.filter((e) => e.autoRenew)), 'auto-renew OFF', rate(ev.filter((e) => !e.autoRenew)), 'authored β ' + ${JSON.stringify(R.membership.arrows.autoRenew.beta)}],
     ['employer event', rate(ev.filter((e) => e.employerEvent)), 'no employer event', rate(ev.filter((e) => !e.employerEvent)), 'authored β ' + ${JSON.stringify(R.membership.arrows.employerEvent.beta)}],
-    ['enthusiast tier', rate(ev.filter((e) => e.enthusiast)), 'professional tiers', rate(ev.filter((e) => !e.enthusiast)), 'authored β ' + ${JSON.stringify(R.membership.arrows.enthusiastTier.beta)}],
+    ['enthusiast tier', rate(ev.filter((e) => e.enthusiastTier)), 'professional tiers', rate(ev.filter((e) => !e.enthusiastTier)), 'authored β ' + ${JSON.stringify(R.membership.arrows.enthusiastTier.beta)}],
     ['tenure above median', rate(ev.filter((e) => e.tenureZ > 0)), 'tenure below median', rate(ev.filter((e) => e.tenureZ <= 0)), 'authored β ' + ${JSON.stringify(R.membership.arrows.tenure.beta)}],
     ['θ top third', rate(ev.filter((e) => e.theta > 0.43)), 'θ bottom third', rate(ev.filter((e) => e.theta < -0.43)), 'authored β ' + ${JSON.stringify(R.membership.arrows.engagement.beta)}],
   ];
