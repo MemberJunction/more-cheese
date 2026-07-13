@@ -116,7 +116,6 @@
         "Hidden Bell Farmstead",
         "Slowfield Dairy",
         "Bellows & Brine Creamery",
-        "Fromagerie Saint-Rémille",
         "Hofkäserei Grunefeld",
         "Käserei Almwind",
         "Caseificio Valdorna",
@@ -138,7 +137,6 @@
       "oneOffs": [
         "Curd & Cellar",
         "The Cave Door",
-        "The Quiet Curd",
         "The Brined Board",
         "Split Ash Cheese Shop",
         "The Paraffin Wheel",
@@ -172,6 +170,18 @@
       ]
     }
   },
-  "$heroReserved": "Crowfeather Creamery + Mongers' Row are cleared names RESERVED for hero employers (heroes.json) — removed from dealt pools so no crowd org duplicates them",
-  "$headroom": "pool sizes {'Producer': 383, 'Retailer': 232, 'Supplier': 167, 'Educator': 180} — supports ~n=3000 members (org ratio 0.25; retailer register binds first); extend toponyms to raise the ceiling"
+  "$heroReserved": "reserved[] = cleared names RESERVED for hero employers (heroes.json) — excluded from the dealt pools so no crowd org duplicates them. All composed from cleared components or individually cleared one-offs.",
+  "$headroom": "pool sizes {'Producer': 383, 'Retailer': 232, 'Supplier': 167, 'Educator': 180} — supports ~n=3000 members (org ratio 0.25; retailer register binds first); extend toponyms to raise the ceiling",
+  "reserved": [
+    "Crowfeather Creamery",
+    "Mongers' Row",
+    "Mistlebrook Dairy",
+    "Larkhollow Creamery",
+    "Ostergaard & Sons Dairy Supply",
+    "Fromagerie Saint-Rémille",
+    "Orchardmere Cheese & Provisions",
+    "The Quiet Curd",
+    "Reedmere Dairy Systems",
+    "Winterfen Dairy"
+  ]
 }
