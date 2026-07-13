@@ -23,7 +23,7 @@ const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.star
 const OUT = join(HERE, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
-const R = loadRuleset(run.scenario); // the validator judges against the SAME world the run was built for
+const R = await loadRuleset(run.scenario, run.project); // the validator judges against the SAME world (project + scenario) the run was built for
 
 const people = load('common', 'people');
 const orgs = load('common', 'organizations');

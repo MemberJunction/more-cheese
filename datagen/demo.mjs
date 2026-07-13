@@ -22,7 +22,7 @@ const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.star
 const OUT = join(HERE, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 
-const R = loadRuleset();
+const R = await loadRuleset();
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 
 // run the real validator and embed its verdicts (single source of truth)

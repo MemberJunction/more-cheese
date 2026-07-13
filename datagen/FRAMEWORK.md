@@ -16,7 +16,7 @@ below moves toward a "yes."
 | Rung | What | Status |
 |---|---|---|
 | 1 | Engine + one hand-built domain (walking skeleton) | ✅ done (`datagen-walking-skeleton`) |
-| 2 | **Extraction**: `core/` (domain-blind engine) vs `domains/morecheese/` (the app) | ✅ this branch — byte-identical proof |
+| 2 | **Extraction**: `core/` (domain-blind engine) vs `projects/morecheese/` (the app) | ✅ this branch — byte-identical proof; hardened into the `projects/` layout (one directory per generated universe, `--project` on every entrypoint) |
 | 3 | **Declarative patterns**: domains declare generation patterns; a generic executor interprets them | ✅ this branch: all five patterns live and every instance migrated — learning, tier assignment, the renewal unroll, the money chain, conference attendance, and event no-show (each byte-identical). Only genuinely non-pattern code stays hand-written (NegBin volume, event fixtures, hero pinning) |
 | 4 | **Schema-driven (`S`)**: read MJ `EntityInfo` for entities/FKs/value lists; emitters self-configure | ⬜ needs the reconciliation + CodeGen (real entities) |
 | 5 | **Authoring loop**: AI drafts modules from `S` + benchmarks, builds, reads gates, iterates | ⬜ the containment (gates, holdout view, lint) already exists |
@@ -29,24 +29,26 @@ datagen/
     rng.mjs             dice, distributions, the calibration solver
     dates.mjs           date arithmetic
     stats.mjs           logistic recovery with SEs
-    compile.mjs         human forms → β (takes DOMAIN HOOKS: feature map + refine-measure)
+    compile.mjs         human forms → β (takes PROJECT HOOKS: feature map + refine-measure)
     lint.mjs            structural ruleset checks + overlay typo protection + holdout stripping
     patterns.mjs        rung 3: the declarative pattern executor
-    packs.mjs           pack emission machinery (domain supplies the pack map)
-  domains/morecheese/   ← the application
-    banks.mjs           names, cities, segment mix (placeholder until template library)
+    features.mjs        the factor contract's feature grammar
+    packs.mjs           pack emission machinery (the project supplies the pack map)
+  projects/morecheese/  ← ONE PROJECT = one generated universe (a second = a sibling dir)
+    index.mjs           the project's two exports: hooks + buildWorld(cfg) (the pipeline)
+    banks.mjs           names, cities, segment mix (placeholder → curated name banks)
     world.mjs           orgs + people + latents (drift process) + hero pinning
     membership.mjs      the renewal unroll + archive rule
     events.mjs          events + registrations + no-show pass
     money.mjs           the order/payment chain
-    hooks.mjs           what the core needs from the domain: compile feature map,
+    hooks.mjs           what the core needs from the project: compile feature map,
                         refinement measure, pack assembly
-  ruleset/              ← authored content (modules, scenarios) — stays at top level
-  generate.mjs …        ← entrypoints, unchanged commands
+    ruleset/            the project's authored content (modules, scenarios, RULESET.md)
+  generate.mjs …        ← project-generic entrypoints (--project, default morecheese)
 ```
 
 **The extraction rule:** if a file mentions cheese, members, renewal, or any table name, it
-goes in `domains/`. If it would survive unchanged in an accounting-demo world, it goes in
+goes in `projects/<name>/`. If it would survive unchanged in an accounting-demo world, it goes in
 `core/`. `compile.mjs` was the one genuine tangle — its feature map and empirical-refinement
 world were domain knowledge embedded in engine code; rung 2 inverts that into injected hooks.
 
@@ -55,7 +57,7 @@ world were domain knowledge embedded in engine code; rung 2 inverts that into in
 the real hazard is a cloned domain reusing a namespace with overlapping keys — same UUIDs
 by construction. So: **every domain mints its own namespace constant** (uuidgen once,
 frozen forever). The `9b1dcbf2…` constant in `core/ids.mjs` belongs to MoreCheese; a second
-domain passes its own (a rung-3 hooks field when the second domain arrives).
+domain passes its own (a hooks field, now that projects are directories).
 
 ## The pattern vocabulary (rung 3)
 

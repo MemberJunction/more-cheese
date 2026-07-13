@@ -7,14 +7,13 @@
 // Auto-generated — regenerate after any module change; never edit by hand.
 
 import { writeFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { loadRuleset } from './lib/config.mjs';
+import { join } from 'node:path';
+import { loadRuleset, loadProject, projectDir } from './lib/config.mjs';
 import { describeEffectPts } from './core/compile.mjs';
-import { morecheeseHooks } from './domains/morecheese/hooks.mjs';
 
-const HERE = dirname(fileURLToPath(import.meta.url));
-const R = loadRuleset();
+const PROJECT = process.argv.includes('--project') ? process.argv[process.argv.indexOf('--project') + 1] : 'morecheese';
+const { hooks } = await loadProject(PROJECT);
+const R = await loadRuleset(undefined, PROJECT);
 
 const HUMAN = {
   tenure: ['Longer-tenured members renew more', 'per extra “standard deviation” of tenure'],
@@ -60,7 +59,7 @@ for (const [k, a] of Object.entries(R.membership.arrows)) {
   if (k === 'covidYear') {
     eff = `${a.logitShift} on the dial (a few points off that year's renewal)`;
   } else {
-    const d = describeEffectPts(R, k, morecheeseHooks);
+    const d = describeEffectPts(R, k, hooks);
     eff = d.kind === 'group'
       ? `**${d.pts > 0 ? '+' : ''}${d.pts.toFixed(1)}pt** ${detail} (the group lands at ~${d.groupRate.toFixed(0)}%)`
       : `**${d.pts > 0 ? '+' : ''}${d.pts.toFixed(1)}pt** ${detail}`;
@@ -110,5 +109,5 @@ P('runs the real generator on a reference world and adjusts until the stated eff
 P('the data actually shows. You write the sentence; the machine makes it true.');
 P();
 
-writeFileSync(join(HERE, 'ruleset/RULESET.md'), lines.join('\n'));
-console.log(`plain-English rendering → ${join(HERE, 'ruleset/RULESET.md')}`);
+writeFileSync(join(projectDir(PROJECT), 'ruleset/RULESET.md'), lines.join('\n'));
+console.log(`plain-English rendering → ${join(projectDir(PROJECT), 'ruleset/RULESET.md')}`);

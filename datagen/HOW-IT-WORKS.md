@@ -1,7 +1,7 @@
 # How the Generator Works, in Plain Language
 
 The concepts behind `datagen/`, written for anyone on the team — no statistics background
-assumed. The executable truth lives in [the ruleset](ruleset/RULESET.md) and
+assumed. The executable truth lives in [the ruleset](projects/morecheese/ruleset/RULESET.md) and
 [ruleset-spec.md](../plans/association-db/ruleset-spec.md); this is the companion that
 explains *why the machine is shaped this way*. (Distilled from the design discussions,
 2026-07-09/10.)
@@ -10,7 +10,7 @@ explains *why the machine is shaped this way*. (Distilled from the design discus
 
 ## 1. The big picture: a recipe, a kitchen, and a food inspector
 
-- **The recipe** (`ruleset/modules/*.json`): a readable file describing how association life
+- **The recipe** (`projects/<p>/ruleset/modules/*.json`): a readable file describing how association life
   works — target numbers ("renewal averages 87%"), cause-and-effect rules ("employer trouble
   drives churn"), world facts (geography, cohorts, seasons), and the pinned heroes. **The AI
   is only ever allowed in the recipe-writing room.** It authors this file once; the file is
