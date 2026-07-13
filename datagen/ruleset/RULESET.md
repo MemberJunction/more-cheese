@@ -38,7 +38,7 @@ Who differs, and by how much:
 
 ## The money rules
 
-Every billable fact becomes an **order** (one renewal order per membership cycle — the posted order IS the bill, no invoices, per bizapps-orders' design) and usually a **payment**, timed by the 3-part mixture:
+Every billable fact becomes an **order** (one renewal order per membership cycle — the posted order IS the bill, no invoices, per bizapps-orders' design) and usually a **payment**, timed by the DECLARED payment profiles (orders.paymentProfiles):
 
 - Event registrations: **card at checkout** — paid the same day, always.
 - Auto-pay dues: land **on the due date** (a ~3% failed-card tail retries a few days late).

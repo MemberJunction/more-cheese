@@ -3,12 +3,37 @@
   "orders": {
     "eventPrices": { "Conference": 450, "Workshop": 150 },
     "renewalBilledDaysAhead": 30,
-    "paymentTiming": {
-      "$note": "the 3-part mixture: (1) card-at-checkout for event registrations — same-day; (2) auto-pay dues land ON the due date, with a small failed-card retry tail; (3) manual individual dues spread early-to-grace (lateShare mirrors late_renewal_share 0.25); business tiers pay NET-TERMS with the sourced B2B late curve (~45% late, log-normal ~12d median, thin tail capped)",
-      "autopayFailShare": 0.03,
-      "autopayRetryDaysMax": 14,
-      "manualDues": { "lateShare": 0.25, "earlyDaysMax": 45, "graceLateDaysMax": 60 },
-      "netTerms": { "termsDays": 30, "lateShare": 0.45, "daysLateMedian": 12, "daysLateSigma": 0.85, "capDays": 60 }
+    "paymentProfiles": {
+      "$note": "DECLARED derivedTransaction timing grammar (core/patterns.mjs) — the GAP-1-approved 3-part mixture, now authored here instead of coded in money.mjs. Each profile: method (fixed) or methods (uniform pick), lateShare (bernoulli branch), and late/onTime day-offset distributions relative to the due date. Same numbers as the previous paymentTiming block; byte-identical migration.",
+      "netTerms": {
+        "appliesToTiers": ["SmallBusiness", "Corporate"],
+        "termsDays": 30,
+        "methods": ["ACH", "Check", "Wire"],
+        "lateShare": 0.45,
+        "late": { "dist": "lognormalDays", "medianDays": 12, "sigma": 0.85, "minDays": 1, "capDays": 60 },
+        "onTime": { "dist": "uniformDays", "min": 0, "max": 5, "sign": -1 },
+        "$evidence": "Atradius/CRF B2B late curve: ~45% late, log-normal ~12d median, thin tail capped"
+      },
+      "autopay": {
+        "method": "CreditCard",
+        "lateShare": 0.03,
+        "late": { "dist": "uniformDays", "min": 3, "max": 14 },
+        "onTime": { "dist": "const", "days": 0 },
+        "$note": "auto-pay lands ON the due date; the lateShare is the failed-card retry tail"
+      },
+      "manual": {
+        "methods": ["CreditCard", "CreditCard", "Check"],
+        "lateShare": 0.25,
+        "late": { "dist": "uniformDays", "min": 1, "max": 60 },
+        "onTime": { "dist": "uniformDays", "min": 0, "max": 45, "sign": -1 },
+        "$note": "manual individual dues spread early-to-grace; lateShare mirrors late_renewal_share 0.25"
+      },
+      "checkout": {
+        "method": "CreditCard",
+        "lateShare": 0,
+        "onTime": { "dist": "const", "days": 0 },
+        "$note": "event registrations: card at checkout, same day"
+      }
     },
     "gates": {
       "netTermsLate": { "target": 0.45, "tolerance": 0.10 },

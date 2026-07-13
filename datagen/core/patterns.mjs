@@ -94,6 +94,58 @@ export function recurringDecision(opts) {
 }
 
 /**
+ * derivedTransaction — per parent fact: a child transaction with DECLARED timing.
+ * (Instance: the money chain — dues payments, event checkout.) Core owns the named dice
+ * and the timing-mixture interpreter; the domain owns row shapes and which declared
+ * profile applies to which parent.
+ *
+ * A timing PROFILE (authored in the ruleset) declares:
+ *   method: "X"  (fixed, no draw)  |  methods: [..] (uniform pick — one draw)
+ *   lateShare    → bernoulli branch between the two offset distributions
+ *   late/onTime  → day-offset relative to the due date:
+ *     { dist: "const", days }                                  (no draw)
+ *     { dist: "uniformDays", min, max, sign? }                 (sign −1 = early)
+ *     { dist: "lognormalDays", medianDays, sigma, minDays?, capDays? }
+ *   termsDays?   → due date = anchor + termsDays (net-terms billing)
+ *
+ * DRAW ORDER PER PARENT (part of the contract — byte-identity depends on it):
+ * method pick (if `methods`), then the lateShare bernoulli, then the chosen offset draw.
+ *
+ * opts: {
+ *   seed, parents,
+ *   profileOf(parent)  → a declared profile, or null/undefined to skip the parent
+ *   streamKey(parent)  → dice stream for this transaction
+ *   emit(parent, { method, late, offsetDays, termsDays }, r) → domain pushes its rows
+ * }
+ */
+export function derivedTransaction(opts) {
+  for (const parent of opts.parents) {
+    const profile = opts.profileOf(parent);
+    if (!profile) continue;
+    const r = rng(opts.seed, opts.streamKey(parent));
+    const method = profile.methods ? r.pick(profile.methods) : (profile.method ?? null);
+    const late = r.bernoulli(profile.lateShare ?? 0);
+    const offsetDays = drawOffsetDays(r, late ? profile.late : profile.onTime);
+    opts.emit(parent, { method, late, offsetDays, termsDays: profile.termsDays ?? 0 }, r);
+  }
+}
+
+function drawOffsetDays(r, spec) {
+  switch (spec.dist) {
+    case 'const':
+      return spec.days ?? 0;
+    case 'uniformDays':
+      return (spec.sign ?? 1) * r.int(spec.min, spec.max);
+    case 'lognormalDays': {
+      const raw = Math.round(r.lognormal(Math.log(spec.medianDays), spec.sigma));
+      return Math.min(spec.capDays ?? Infinity, Math.max(spec.minDays ?? 1, raw));
+    }
+    default:
+      throw new Error(`derivedTransaction: unknown offset dist '${spec.dist}'`);
+  }
+}
+
+/**
  * childOutcome — per existing row: a calibrated outcome. (Instances: course completion;
  * no-show is next.) The calibration runs over the ACTUAL item pool — the selection-effect
  * lesson (spec §7 lesson #1) is built into the pattern.
