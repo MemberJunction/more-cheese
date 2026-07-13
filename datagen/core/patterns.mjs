@@ -43,6 +43,57 @@ export function annualParticipation(opts) {
 }
 
 /**
+ * staticAssignment — pick a category from ordered rules over a context of drivers.
+ * (Instance: membership tier from segment/affluence.) First matching rule wins; a rule
+ * with no conditions is the default. Conditions: `when` (equalities) and `whenAbove`
+ * (strict numeric >) — both ANDed. No dice: pure function of the context.
+ */
+export function staticAssignment(rules, ctx) {
+  for (const rule of rules) {
+    const eq = !rule.when || Object.entries(rule.when).every(([k, v]) => ctx[k] === v);
+    const gt = !rule.whenAbove || Object.entries(rule.whenAbove).every(([k, v]) => ctx[k] > v);
+    if (eq && gt) return rule.value;
+  }
+  throw new Error('staticAssignment: no rule matched and no default rule (a rule without conditions) was declared');
+}
+
+/**
+ * recurringDecision — the richest pattern: per cycle, an eligible cohort faces a calibrated
+ * yes/no with state consequences. (Instance: the renewal unroll.) Core owns the universal
+ * mechanics — per-cohort calibration, post-calibration baseline shifts (texture/regime:
+ * tide, not boats), PINNED entities (hero conditioning: outcomes are facts, not draws),
+ * and the named dice. The domain owns eligibility, scoring inputs, state transitions,
+ * and event recording.
+ *
+ * opts: {
+ *   seed, years,
+ *   cohortOf(y)             → items due to decide this cycle (may be empty)
+ *   prepare(cohort, y)      → per-cohort context (e.g. tenure standardization stats)
+ *   scoreOf(item, y, ctx)   → arrow score
+ *   target                  → the rate the cohort calibrates to
+ *   baselineShift(y)        → applied AFTER calibration (texture wobble + regime shifts)
+ *   streamKey(item, y)      → dice stream for this decision
+ *   isPinned(item)          → pinned entities always decide YES (conditioned, not drawn)
+ *   record(item, y, ctx, decided) / onYes(item, y) / onNo(item, y)
+ * }
+ */
+export function recurringDecision(opts) {
+  for (const y of opts.years) {
+    const cohort = opts.cohortOf(y);
+    if (!cohort.length) continue;
+    const ctx = opts.prepare ? opts.prepare(cohort, y) : undefined;
+    const scores = cohort.map((c) => opts.scoreOf(c, y, ctx));
+    const b0 = calibrateIntercept(scores, opts.target) + (opts.baselineShift?.(y) ?? 0);
+    cohort.forEach((c, i) => {
+      const r = rng(opts.seed, opts.streamKey(c, y));
+      const decided = opts.isPinned?.(c) ? true : r.bernoulli(sigmoid(b0 + scores[i]));
+      opts.record?.(c, y, ctx, decided);
+      if (decided) opts.onYes(c, y); else opts.onNo(c, y);
+    });
+  }
+}
+
+/**
  * childOutcome — per existing row: a calibrated outcome. (Instances: course completion;
  * no-show is next.) The calibration runs over the ACTUAL item pool — the selection-effect
  * lesson (spec §7 lesson #1) is built into the pattern.

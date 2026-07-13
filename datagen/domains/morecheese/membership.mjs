@@ -11,6 +11,7 @@
 // 2-month grace gets a CancellationDate, and member status is always derived, never stored.
 
 import { rng, sigmoid, calibrateIntercept } from '../../core/rng.mjs';
+import { recurringDecision } from '../../core/patterns.mjs';
 import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../core/dates.mjs';
 import { featureArrows } from '../../core/features.mjs';
 
@@ -49,46 +50,49 @@ export function runRenewalUnroll(cfg, people, orgs) {
     });
   }
 
-  for (const y of years) {
-    // 1. gather this year's renewal cohort with their causal inputs
-    const cohort = [];
-    for (const p of people) {
-      const st = state.get(p.MemberNumber);
-      if (!st.alive || st.end.getUTCFullYear() !== y || st.end > release) continue;
-      const tenureYrs = (st.end - parseDate(p.JoinDate)) / (365.25 * DAY);
-      const org = p.OrgKey ? orgByKey.get(p.OrgKey) : null;
-      // employer shock hits the decision in the event year and the one after (dissolutions persist)
-      const ev = org?.LifecycleEvent;
-      const employerEvent = ev && (ev.year === y || ev.year === y - 1 || (ev.kind === 'Dissolved' && ev.year < y)) ? 1 : 0;
-      cohort.push({ p, st, tenureYrs, employerEvent });
-    }
-    if (!cohort.length) continue;
+  // The unroll, expressed through core's recurringDecision pattern: core owns the universal
+  // mechanics (per-cohort calibration, tide-not-boats baseline shifts, hero conditioning,
+  // named dice); this domain owns eligibility, scoring inputs, the state machine, and the
+  // event record. BUILT-IN drivers (standardized tenure, the drifting latent, the employer-
+  // event window) + DECLARED-FEATURE factors read straight from the ruleset.
+  const declared = featureArrows(M.arrows);
+  recurringDecision({
+    seed, years,
+    streamKey: (c, y) => `renew:${c.p.MemberNumber}:${y}`,
+    isPinned: (c) => !!c.p._hero,
+    target: Math.min(0.97, Math.max(0.5, M.renewalTarget)),
+    // regime shifts and texture apply AFTER calibration — tide, not boats (a shared shift
+    // inside the calibrated scores gets solved away, erasing the dip)
+    baselineShift: (y) => (yearWobble.get(y) ?? 0) + (R.regimes.covid.years.includes(y) ? R.regimes.covid.renewalLogitShift : 0),
 
-    // 2. score everyone, then solve the baseline so the cohort hits the target.
-    // BUILT-IN drivers (computed facts: standardized tenure, the drifting latent, the
-    // employer-event window) + DECLARED-FEATURE factors read straight from the ruleset —
-    // the factor contract: authoring a self-referencing factor requires no code here.
-    const declared = featureArrows(M.arrows);
-    const meanT = cohort.reduce((s, c) => s + c.tenureYrs, 0) / cohort.length;
-    const sdT = Math.sqrt(cohort.reduce((s, c) => s + (c.tenureYrs - meanT) ** 2, 0) / cohort.length) || 1;
-    const scores = cohort.map((c) =>
+    cohortOf: (y) => {
+      const cohort = [];
+      for (const p of people) {
+        const st = state.get(p.MemberNumber);
+        if (!st.alive || st.end.getUTCFullYear() !== y || st.end > release) continue;
+        const tenureYrs = (st.end - parseDate(p.JoinDate)) / (365.25 * DAY);
+        const org = p.OrgKey ? orgByKey.get(p.OrgKey) : null;
+        // employer shock hits the decision in the event year and the one after (dissolutions persist)
+        const ev = org?.LifecycleEvent;
+        const employerEvent = ev && (ev.year === y || ev.year === y - 1 || (ev.kind === 'Dissolved' && ev.year < y)) ? 1 : 0;
+        cohort.push({ p, st, tenureYrs, employerEvent });
+      }
+      return cohort;
+    },
+    prepare: (cohort) => {
+      const meanT = cohort.reduce((s, c) => s + c.tenureYrs, 0) / cohort.length;
+      const sdT = Math.sqrt(cohort.reduce((s, c) => s + (c.tenureYrs - meanT) ** 2, 0) / cohort.length) || 1;
+      return { meanT, sdT };
+    },
+    scoreOf: (c, y, { meanT, sdT }) =>
       M.arrows.tenure.beta * ((c.tenureYrs - meanT) / sdT) +
-      M.arrows.engagement.beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting process; heroes pinned)
+      M.arrows.engagement.beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting; heroes pinned)
       M.arrows.employerEvent.beta * c.employerEvent +
-      declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0)
-    );
-    const target = Math.min(0.97, Math.max(0.5, M.renewalTarget));
-    // regime shifts and texture apply AFTER calibration — they're tide, not boats. (Putting
-    // COVID inside the calibrated scores let the solver cancel it exactly, erasing the dip:
-    // a shift shared by the whole cohort is a level effect, and levels belong to the baseline.)
-    const regime = R.regimes.covid.years.includes(y) ? R.regimes.covid.renewalLogitShift : 0;
-    const b0 = calibrateIntercept(scores, target) + (yearWobble.get(y) ?? 0) + regime;
+      declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0),
 
-    // 3. draw each decision (heroes are conditioned, not drawn)
-    cohort.forEach((c, i) => {
-      const r = rng(seed, `renew:${c.p.MemberNumber}:${y}`);
-      const renewed = c.p._hero ? true : r.bernoulli(sigmoid(b0 + scores[i]));
-      if (!c.p._hero) renewalEvents.push({
+    record: (c, y, { meanT, sdT }, renewed) => {
+      if (c.p._hero) return;
+      renewalEvents.push({
         year: y, tenureZ: (c.tenureYrs - meanT) / sdT,
         theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta,
         employerEvent: c.employerEvent,
@@ -97,19 +101,20 @@ export function runRenewalUnroll(cfg, people, orgs) {
         ...Object.fromEntries(declared.map((fa) => [fa.name, fa.fn(c.p)])),
         renewed: renewed ? 1 : 0,
       });
-      if (renewed) {
-        pushPeriod(c.p, c.st.start, c.st.end, 'Renewed', null, null);
-        const nextEnd = c.p.CycleType === 'calendar' ? endOfYear(y + 1) : addYears(c.st.end, 1);
-        c.st.start = addDays(c.st.end, 1); // late renewals back-date: no gap (team rule)
-        c.st.end = nextEnd;
-      } else {
-        const cancellation = addDays(c.st.end, Math.round(M.gracePeriodMonths * 30.44));
-        const reason = c.employerEvent ? 'non-payment — employer event' : 'non-payment — lapsed past grace';
-        pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
-        c.st.alive = false;
-      }
-    });
-  }
+    },
+    onYes: (c, y) => {
+      pushPeriod(c.p, c.st.start, c.st.end, 'Renewed', null, null);
+      const nextEnd = c.p.CycleType === 'calendar' ? endOfYear(y + 1) : addYears(c.st.end, 1);
+      c.st.start = addDays(c.st.end, 1); // late renewals back-date: no gap (team rule)
+      c.st.end = nextEnd;
+    },
+    onNo: (c) => {
+      const cancellation = addDays(c.st.end, Math.round(M.gracePeriodMonths * 30.44));
+      const reason = c.employerEvent ? 'non-payment — employer event' : 'non-payment — lapsed past grace';
+      pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
+      c.st.alive = false;
+    },
+  });
 
   // close out the in-flight period for members still alive at release
   for (const p of people) {

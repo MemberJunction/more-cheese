@@ -9,7 +9,13 @@
         { "name": "SmallBusiness", "dues": 400 },
         { "name": "Corporate", "dues": 1000 }
       ],
-      "affluenceThresholds": { "smallBusiness": 0.7, "corporate": 1.6 },
+      "assign": [
+        { "value": "Enthusiast", "when": { "Segment": "Enthusiast" } },
+        { "value": "Corporate", "when": { "hasOrganization": true }, "whenAbove": { "phi": 1.6 } },
+        { "value": "SmallBusiness", "when": { "hasOrganization": true }, "whenAbove": { "phi": 0.7 } },
+        { "value": "Individual" }
+      ],
+      "$assignNote": "DECLARED staticAssignment rules (first match wins; last = default) — the affluence dial made observable, now authored here instead of coded in world.mjs",
       "individualDuesTarget": 175
     },
     "renewalTarget": 0.87,

@@ -8,6 +8,7 @@
 // person never reshuffles anyone else.
 
 import { rng } from '../../core/rng.mjs';
+import { staticAssignment } from '../../core/patterns.mjs';
 import { iso, addDays, addYears } from '../../core/dates.mjs';
 import { FIRST, LAST, CHEESE_WORDS, ORG_SUFFIX, CITIES, SEGMENTS } from './banks.mjs';
 
@@ -75,12 +76,8 @@ export function buildPeople(cfg, orgs) {
     const org = r.bernoulli(0.8) ? orgs[r.int(0, orgs.length - 1)] : null;
     const anniversary = r.bernoulli(R.cohorts.anniversaryShare); // ASSUMPTION: D6 pending
     const segment = r.pickWeighted(SEGMENTS);
-    // tier assignment: the affluence dial made observable (ruleset membership.tiers)
-    const T = R.membership.tiers.affluenceThresholds;
-    const tier = segment === 'Enthusiast' ? 'Enthusiast'
-      : org && phi > T.corporate ? 'Corporate'
-      : org && phi > T.smallBusiness ? 'SmallBusiness'
-      : 'Individual';
+    // tier assignment: DECLARED rules (ruleset membership.tiers.assign) via core staticAssignment
+    const tier = staticAssignment(R.membership.tiers.assign, { Segment: segment, hasOrganization: !!org, phi });
     people.push({
       MemberNumber: key, FirstName: r.pick(FIRST), LastName: r.pick(LAST),
       Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
