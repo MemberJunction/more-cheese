@@ -1,28 +1,14 @@
-# schema-info — ⚠️ FILL THIS OUT before your first metadata sync
+# schema-info — intentionally empty (naming rules live in mj.config.cjs)
 
-This folder registers your app's schema in `__mj.SchemaInfo` — the record that
-gives your entities their name prefix and ID range. **It ships as an inert
-`.template` file that `mj sync` cannot see**, so nothing placeholder ever
-reaches a database. Until you activate it, a sync push over `metadata/` pushes
-nothing for this folder (and your schema stays unregistered — codegen won't
-apply your entity-name prefix).
+This app does NOT ship a SchemaInfo metadata record. CodeGen auto-creates the
+`__mj.SchemaInfo` row for each schema it meets, and this repo's naming rules
+(`mj.config.cjs` `newEntityDefaults.NameRulesBySchema` — the `MoreCheese: `
+prefix for every `morecheese_*` schema) take precedence over the DB row, so a
+shipped record adds nothing — and it actively breaks dev-linking: the mjdev
+link flow runs codegen (which auto-creates the row with a random UUID) before
+the first metadata sync, so a shipped record with a pinned UUID then collides
+on the SchemaName unique key (`IX_SchemaInfo`).
 
-## To activate (one-time)
-
-1. Copy `schema-info.json.template` → **`.schema-info.json`** (note the
-   leading dot — that's what makes it a record file).
-2. Fill every `TODO`:
-   - `SchemaName` — exactly your `mj-app.json` `schema.name` (this template: `morecheese_common`)
-   - `EntityIDMin` / `EntityIDMax` — an integer ID range reserved for your
-     app's entities, non-overlapping with other apps (e.g. `10000001` / `10099999`)
-   - `EntityNamePrefix` — the prefix for your entity names (e.g. `MoreCheese`);
-     must agree with `mj.config.cjs` `NameRulesBySchema`
-   - `Description` — one line about the schema
-   - `primaryKey.ID` — **generate a UUID** (`uuidgen`) and never change it
-     once pushed anywhere; the pinned ID is what makes the row deterministic
-     across databases
-3. Push: the row is CREATED with your ID on the first
-   `mj sync push` (autoCreateMissingRecords).
-
-Full guide: [`docs/template-docs/metadata.md`](../../docs/template-docs/metadata.md)
-(§ Schema registration).
+To set a human-readable `Description` (or per-schema prefix overrides) on the
+SchemaInfo rows, do it as an idempotent `UPDATE ... WHERE SchemaName = '...'`
+inside a `V*_Metadata_Sync` migration — never as an inserted metadata record.
