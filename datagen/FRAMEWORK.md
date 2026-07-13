@@ -17,7 +17,7 @@ below moves toward a "yes."
 |---|---|---|
 | 1 | Engine + one hand-built domain (walking skeleton) | ✅ done (`datagen-walking-skeleton`) |
 | 2 | **Extraction**: `core/` (domain-blind engine) vs `domains/morecheese/` (the app) | ✅ this branch — byte-identical proof |
-| 3 | **Declarative patterns**: domains declare generation patterns; a generic executor interprets them | ✅ this branch: all five patterns live — learning, tier assignment, the renewal unroll, and the money chain re-expressed (each byte-identical). Remaining hand-written instances (conference attendance, no-show) migrate opportunistically |
+| 3 | **Declarative patterns**: domains declare generation patterns; a generic executor interprets them | ✅ this branch: all five patterns live and every instance migrated — learning, tier assignment, the renewal unroll, the money chain, conference attendance, and event no-show (each byte-identical). Only genuinely non-pattern code stays hand-written (NegBin volume, event fixtures, hero pinning) |
 | 4 | **Schema-driven (`S`)**: read MJ `EntityInfo` for entities/FKs/value lists; emitters self-configure | ⬜ needs the reconciliation + CodeGen (real entities) |
 | 5 | **Authoring loop**: AI drafts modules from `S` + benchmarks, builds, reads gates, iterates | ⬜ the containment (gates, holdout view, lint) already exists |
 
@@ -65,8 +65,8 @@ contexts it runs in:
 
 | Pattern | Declares | Instances today |
 |---|---|---|
-| `annualParticipation` | eligible pool per year → calibrated yes/no → spawn child rows | learning enrollment (declarative NOW); conference attendance (next) |
-| `childOutcome` | per parent row → calibrated categorical/binary outcome | course completion (declarative NOW); no-show (next) |
+| `annualParticipation` | eligible pool per year → calibrated yes/no → spawn child rows | learning enrollment + conference attendance (declarative NOW) |
+| `childOutcome` | per parent row → calibrated categorical/binary outcome | course completion + event no-show (declarative NOW) |
 | `recurringDecision` | per entity per cycle → calibrated decision with state transition | the renewal unroll (declarative NOW — byte-identical) |
 | `derivedTransaction` | per parent fact → child rows with DECLARED timing distributions | the money chain — dues + event checkout (declarative NOW — byte-identical; timing profiles authored in `orders.paymentProfiles`) |
 | `staticAssignment` | per entity → ordered rules over drivers | tier assignment (declared in the ruleset NOW — byte-identical) |
