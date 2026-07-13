@@ -2,7 +2,7 @@
 // application. A second domain (accounting, forms, …) supplies its own version of this
 // file — that's the framework contract (FRAMEWORK.md rung 2).
 
-import { parseDate } from '../../core/dates.mjs';
+import { parseDate } from '../../engine/dates.mjs';
 import { buildOrgs, buildPeople } from './world.mjs';
 import { runRenewalUnroll } from './membership.mjs';
 

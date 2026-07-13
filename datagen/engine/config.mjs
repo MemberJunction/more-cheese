@@ -4,12 +4,12 @@
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compileRuleset } from '../core/compile.mjs';
-import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from '../core/lint.mjs';
+import { compileRuleset } from './compile.mjs';
+import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from './lint.mjs';
 
 export const DATAGEN_DIR = dirname(dirname(fileURLToPath(import.meta.url)));
-export { DAY, iso, addDays, addYears, endOfYear, parseDate } from '../core/dates.mjs';
-import { parseDate } from '../core/dates.mjs';
+export { DAY, iso, addDays, addYears, endOfYear, parseDate } from './dates.mjs';
+import { parseDate } from './dates.mjs';
 
 /** Deep-merge: objects merge recursively; arrays and scalars replace. */
 function deepMerge(base, overlay) {

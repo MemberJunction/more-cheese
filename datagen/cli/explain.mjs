@@ -8,8 +8,8 @@
 
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { loadRuleset, loadProject, projectDir } from './lib/config.mjs';
-import { describeEffectPts } from './core/compile.mjs';
+import { loadRuleset, loadProject, projectDir } from '../engine/config.mjs';
+import { describeEffectPts } from '../engine/compile.mjs';
 
 const PROJECT = process.argv.includes('--project') ? process.argv[process.argv.indexOf('--project') + 1] : 'morecheese';
 const { hooks } = await loadProject(PROJECT);

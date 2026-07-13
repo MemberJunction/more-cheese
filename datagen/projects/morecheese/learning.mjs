@@ -6,9 +6,9 @@
 // semantics. Migration gate: this re-expression reproduces the hand-written module's
 // output byte-identically (same stream keys, same draw order).
 
-import { annualParticipation, childOutcome } from '../../core/patterns.mjs';
-import { rng } from '../../core/rng.mjs';
-import { iso, addDays, parseDate } from '../../core/dates.mjs';
+import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
+import { rng } from '../../engine/rng.mjs';
+import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
 
 const TOPICS = ['Affinage Fundamentals', 'Cheese Chemistry', 'Sensory Foundations', 'Food Safety & HACCP', 'Counter Culture: Retailing', 'Raw Milk Practices', 'Cave Management', 'Dairy Microbiology'];

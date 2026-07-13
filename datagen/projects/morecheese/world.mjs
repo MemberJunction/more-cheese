@@ -7,9 +7,9 @@
 // appended as extra orgs. Every entity draws from its own substream (spec §4), so adding a
 // person never reshuffles anyone else.
 
-import { rng } from '../../core/rng.mjs';
-import { staticAssignment } from '../../core/patterns.mjs';
-import { iso, addDays, addYears } from '../../core/dates.mjs';
+import { rng } from '../../engine/rng.mjs';
+import { staticAssignment } from '../../engine/patterns.mjs';
+import { iso, addDays, addYears } from '../../engine/dates.mjs';
 import { orgNameDealer, personNameFor, CITIES, SEGMENTS } from './banks.mjs';
 
 export function buildOrgs(cfg) {

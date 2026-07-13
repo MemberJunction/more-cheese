@@ -11,8 +11,8 @@
 //   · PendingRenewal members carry an OPEN renewal order for the next cycle — the
 //     renewal-outreach queue (Marcus) exists in the money data too
 
-import { derivedTransaction } from '../../core/patterns.mjs';
-import { iso, addDays, parseDate } from '../../core/dates.mjs';
+import { derivedTransaction } from '../../engine/patterns.mjs';
+import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
 export function buildMoney(cfg, people, periods, events, registrations) {
   const { R, seed, release } = cfg;

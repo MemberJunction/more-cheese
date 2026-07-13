@@ -11,7 +11,7 @@
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { rng } from '../../core/rng.mjs';
+import { rng } from '../../engine/rng.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ORG_BANK = JSON.parse(readFileSync(join(HERE, 'banks/orgs.json'), 'utf8'));

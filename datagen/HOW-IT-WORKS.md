@@ -15,7 +15,7 @@ explains *why the machine is shaped this way*. (Distilled from the design discus
   drives churn"), world facts (geography, cohorts, seasons), and the pinned heroes. **The AI
   is only ever allowed in the recipe-writing room.** It authors this file once; the file is
   reviewed in git like code.
-- **The kitchen** (`generate.mjs` + `core/` + `projects/<p>/`): plain, deterministic code that executes the
+- **The kitchen** (`cli/generate.mjs` + `engine/` + `projects/<p>/`): plain, deterministic code that executes the
   recipe. No AI calls, no network, no clock. Same seed → byte-identical world, forever.
 - **The inspector** (`validate.mjs`): re-measures the finished data against the recipe and
   **fails the build** on any miss — including data that's *too smooth* to be believable.
@@ -113,7 +113,7 @@ more, so the pool is skewed; calibration applies at every selection layer). The 
 runs the whole pattern in a loop to solve human-authored effects.
 
 Since the framework refactor, "reused" is literal: the four steps live **once**, in
-`core/patterns.mjs`, as five declarative patterns (yearly participation, child outcomes,
+`engine/patterns.mjs`, as five declarative patterns (yearly participation, child outcomes,
 recurring decisions, static assignment, derived transactions). A domain module supplies
 only what's domain-shaped — who's eligible, what feeds the score, what happens on yes/no —
 and every migration to this form was proven **byte-identical** to the hand-written code it

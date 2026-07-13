@@ -12,9 +12,9 @@
 // register more, so the pool skews low-no-show — the naive base rate undershoots the
 // target. Spec §7 lesson #1.)
 
-import { rng } from '../../core/rng.mjs';
-import { annualParticipation, childOutcome } from '../../core/patterns.mjs';
-import { iso, addDays, parseDate } from '../../core/dates.mjs';
+import { rng } from '../../engine/rng.mjs';
+import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
+import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 export function buildEvents(cfg) {

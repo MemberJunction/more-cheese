@@ -8,8 +8,8 @@
 // to build its world, and hands the finished rows to the pack emitter. The pipeline itself —
 // what exists and in what causal order — is the project's `buildWorld` (its table of contents).
 
-import { loadConfig, loadProject } from './lib/config.mjs';
-import { emitPacks } from './core/packs.mjs';
+import { loadConfig, loadProject } from '../engine/config.mjs';
+import { emitPacks } from '../engine/packs.mjs';
 import { join } from 'node:path';
 
 const cfg = await loadConfig(process.argv.slice(2));

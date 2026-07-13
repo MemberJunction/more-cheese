@@ -16,7 +16,8 @@ const SEEDS = QUICK ? ['42', '7'] : ['7', '42', '99', '2026', '555', '13', '88']
 const RELEASE = '2026-07-31';
 
 let failures = 0;
-const run = (script, args) => execFileSync(process.execPath, [join(HERE, script), ...args], { encoding: 'utf8' });
+const CLI = join(HERE, 'cli');
+const run = (script, args) => execFileSync(process.execPath, [join(CLI, script), ...args], { encoding: 'utf8' });
 const step = (name, fn) => {
   try { fn(); console.log(`✅ ${name}`); }
   catch (e) { failures++; console.log(`❌ ${name}`); console.log((e.stdout ?? String(e)).split('\n').filter((l) => l.startsWith('❌')).join('\n')); }

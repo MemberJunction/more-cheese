@@ -12,6 +12,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(HERE, '..'); // output dirs live at the datagen root, not under cli/
 const STAGING = 'out-staging';
 const FAILED = 'out-failed';
 const FINAL = 'out';
@@ -29,7 +30,7 @@ for (let i = 0; i < argv.length; i++) {
 const run = (script, args) => execFileSync(process.execPath, [join(HERE, script), ...args], { encoding: 'utf8' });
 
 console.log('▸ generate → staging');
-rmSync(join(HERE, STAGING), { recursive: true, force: true });
+rmSync(join(ROOT, STAGING), { recursive: true, force: true });
 console.log(run('generate.mjs', [...fwd, '--out', STAGING]).trim());
 
 console.log('▸ validate (staging)');
@@ -44,17 +45,17 @@ try {
 console.log(report.trim());
 
 if (!green) {
-  rmSync(join(HERE, FAILED), { recursive: true, force: true });
-  renameSync(join(HERE, STAGING), join(HERE, FAILED));
-  writeFileSync(join(HERE, FAILED, 'validation-report.txt'), report);
+  rmSync(join(ROOT, FAILED), { recursive: true, force: true });
+  renameSync(join(ROOT, STAGING), join(ROOT, FAILED));
+  writeFileSync(join(ROOT, FAILED, 'validation-report.txt'), report);
   console.error(`\n✋ RED — nothing promoted. Last good build untouched in ${FINAL}/; failing output parked in ${FAILED}/ (report inside).`);
   process.exit(1);
 }
 
-writeFileSync(join(HERE, STAGING, 'validation-report.txt'), report);
-rmSync(join(HERE, FINAL), { recursive: true, force: true });
-renameSync(join(HERE, STAGING), join(HERE, FINAL));
-if (existsSync(join(HERE, FAILED))) rmSync(join(HERE, FAILED), { recursive: true, force: true });
+writeFileSync(join(ROOT, STAGING, 'validation-report.txt'), report);
+rmSync(join(ROOT, FINAL), { recursive: true, force: true });
+renameSync(join(ROOT, STAGING), join(ROOT, FINAL));
+if (existsSync(join(ROOT, FAILED))) rmSync(join(ROOT, FAILED), { recursive: true, force: true });
 console.log(`\n✔ GREEN — promoted to ${FINAL}/ (validation report included).`);
 
 if (wantDemo) {
