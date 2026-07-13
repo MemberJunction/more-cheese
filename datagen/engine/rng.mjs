@@ -46,6 +46,14 @@ export function rng(masterSeed, streamKey) {
       return pairs[pairs.length - 1][0];
     },
     bernoulli: (p) => next() < p,
+    shuffle(arr) { // Fisher–Yates on a copy — deterministic bank dealing (sample without replacement)
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(next() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    },
     normal(mean = 0, sd = 1) {
       if (spare !== null) { const z = spare; spare = null; return mean + sd * z; }
       let u, v, s;

@@ -4,7 +4,7 @@
 // Format per docs/template-docs/metadata.md: root .mj-sync.json with directoryOrder
 // (parents before children — the pack pyramid), one folder per ENTITY with its own
 // .mj-sync.json, records as dot-prefixed JSON arrays. Every record pins its primaryKey
-// with our deterministic UUID (lib/ids.mjs), so `mj sync push` is a stable upsert:
+// with our deterministic UUID (core/ids.mjs), so `mj sync push` is a stable upsert:
 // re-push after a regeneration updates the same rows in place. FK fields carry literal
 // pinned IDs (derived independently) — no @lookup needed.
 //
@@ -19,11 +19,12 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { uuidFor } from './lib/ids.mjs';
+import { uuidFor } from '../engine/ids.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
-const OUT = join(HERE, args.out ?? 'out');
+const PKG = join(HERE, '..');
+const OUT = join(PKG, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 

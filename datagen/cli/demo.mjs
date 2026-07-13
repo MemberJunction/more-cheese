@@ -15,15 +15,16 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadRuleset } from './lib/config.mjs';
+import { loadRuleset } from '../engine/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
-const OUT = join(HERE, args.out ?? 'out');
+const ROOT = join(HERE, '..');
+const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 
-const R = loadRuleset();
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
+const R = await loadRuleset(run.scenario, run.project); // the inspector shows the SAME world the run was built for
 
 // run the real validator and embed its verdicts (single source of truth)
 let gateLines;
@@ -216,7 +217,7 @@ function renderMember(m) {
   const splits = [
     ['auto-renew ON', rate(ev.filter((e) => e.autoRenew)), 'auto-renew OFF', rate(ev.filter((e) => !e.autoRenew)), 'authored β ' + ${JSON.stringify(R.membership.arrows.autoRenew.beta)}],
     ['employer event', rate(ev.filter((e) => e.employerEvent)), 'no employer event', rate(ev.filter((e) => !e.employerEvent)), 'authored β ' + ${JSON.stringify(R.membership.arrows.employerEvent.beta)}],
-    ['enthusiast tier', rate(ev.filter((e) => e.enthusiast)), 'professional tiers', rate(ev.filter((e) => !e.enthusiast)), 'authored β ' + ${JSON.stringify(R.membership.arrows.enthusiastTier.beta)}],
+    ['enthusiast tier', rate(ev.filter((e) => e.enthusiastTier)), 'professional tiers', rate(ev.filter((e) => !e.enthusiastTier)), 'authored β ' + ${JSON.stringify(R.membership.arrows.enthusiastTier.beta)}],
     ['tenure above median', rate(ev.filter((e) => e.tenureZ > 0)), 'tenure below median', rate(ev.filter((e) => e.tenureZ <= 0)), 'authored β ' + ${JSON.stringify(R.membership.arrows.tenure.beta)}],
     ['θ top third', rate(ev.filter((e) => e.theta > 0.43)), 'θ bottom third', rate(ev.filter((e) => e.theta < -0.43)), 'authored β ' + ${JSON.stringify(R.membership.arrows.engagement.beta)}],
   ];

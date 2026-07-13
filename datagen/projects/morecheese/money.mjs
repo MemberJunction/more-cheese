@@ -11,13 +11,13 @@
 //   · PendingRenewal members carry an OPEN renewal order for the next cycle — the
 //     renewal-outreach queue (Marcus) exists in the money data too
 
-import { rng } from './rng.mjs';
-import { iso, addDays, parseDate } from './dates.mjs';
+import { derivedTransaction } from '../../engine/patterns.mjs';
+import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
 export function buildMoney(cfg, people, periods, events, registrations) {
   const { R, seed, release } = cfg;
   const O = R.orders;
-  const T = O.paymentTiming;
+  const P = O.paymentProfiles;
 
   // ---------- products: one Membership product per tier + the event products ----------
   const products = R.membership.tiers.list.map((t) => ({
@@ -50,51 +50,50 @@ export function buildMoney(cfg, people, periods, events, registrations) {
   };
 
   // ---------- dues: one order per membership period (order-per-cycle, BO-D40 verbatim) ----------
-  const NET_TERMS_TIERS = new Set(['SmallBusiness', 'Corporate']);
-  for (const per of periods) {
-    const p = personByKey.get(per.MemberNumber);
-    if (!p) continue;
-    const r = rng(seed, `pay:${per.PeriodKey}`);
-    const start = parseDate(per.StartDate);
-    const netTerms = NET_TERMS_TIERS.has(per.MembershipTier);
-    const orderDate = start; // the bill posts at period start
-    const dueDate = netTerms ? addDays(start, T.netTerms.termsDays) : start;
+  // Expressed through core's derivedTransaction: the timing mixture is DECLARED in the
+  // ruleset (orders.paymentProfiles); this domain only picks the profile per period and
+  // shapes the rows. Draw order (method pick → late bernoulli → offset) is the pattern's
+  // contract — byte-identical to the previous hand-written branches.
+  const netTermsTiers = new Set(P.netTerms.appliesToTiers);
+  derivedTransaction({
+    seed,
+    parents: periods,
+    streamKey: (per) => `pay:${per.PeriodKey}`,
+    profileOf: (per) => {
+      if (!personByKey.has(per.MemberNumber)) return null;
+      return netTermsTiers.has(per.MembershipTier) ? P.netTerms : per.AutoRenew ? P.autopay : P.manual;
+    },
+    emit: (per, t) => {
+      const start = parseDate(per.StartDate);
+      const orderDate = start; // the bill posts at period start
+      const dueDate = addDays(start, t.termsDays);
+      const paymentDate = addDays(dueDate, t.offsetDays);
+      pushOrder(`ORD-D-${per.PeriodKey}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, per.DuesAmount, orderDate, dueDate, paymentDate, t.method);
 
-    let paymentDate;
-    let method;
-    if (netTerms) {
-      method = r.pick(['ACH', 'Check', 'Wire']);
-      paymentDate = r.bernoulli(T.netTerms.lateShare)
-        ? addDays(dueDate, Math.min(T.netTerms.capDays, Math.max(1, Math.round(r.lognormal(Math.log(T.netTerms.daysLateMedian), T.netTerms.daysLateSigma)))))
-        : addDays(dueDate, -r.int(0, 5));
-    } else if (per.AutoRenew) {
-      method = 'CreditCard';
-      paymentDate = r.bernoulli(T.autopayFailShare) ? addDays(dueDate, r.int(3, T.autopayRetryDaysMax)) : dueDate;
-    } else {
-      method = r.pick(['CreditCard', 'CreditCard', 'Check']);
-      paymentDate = r.bernoulli(T.manualDues.lateShare)
-        ? addDays(dueDate, r.int(1, T.manualDues.graceLateDaysMax))   // late, inside grace
-        : addDays(dueDate, -r.int(0, T.manualDues.earlyDaysMax));     // early or on time
-    }
-    pushOrder(`ORD-D-${per.PeriodKey}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, per.DuesAmount, orderDate, dueDate, paymentDate, method);
+      // PendingRenewal: the NEXT cycle's renewal order is already open and unpaid —
+      // the renewal-outreach queue, visible in the money data
+      if (per.Status === 'PendingRenewal') {
+        const nextDue = addDays(parseDate(per.EndDate), 1);
+        pushOrder(`ORD-R-${per.MemberNumber}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, per.DuesAmount, addDays(nextDue, -O.renewalBilledDaysAhead), nextDue, null, null);
+      }
+    },
+  });
 
-    // PendingRenewal: the NEXT cycle's renewal order is already open and unpaid —
-    // the renewal-outreach queue, visible in the money data
-    if (per.Status === 'PendingRenewal') {
-      const nextDue = addDays(parseDate(per.EndDate), 1);
-      pushOrder(`ORD-R-${per.MemberNumber}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, per.DuesAmount, addDays(nextDue, -O.renewalBilledDaysAhead), nextDue, null, null);
-    }
-  }
-
-  // ---------- event registrations: card-at-checkout, same day ----------
-  for (const reg of registrations) {
-    const ev = eventByKey.get(reg.EventKey);
-    if (!ev?.IsPaid) continue;
-    const price = O.eventPrices[ev.EventType];
-    if (!price) continue;
-    const d = parseDate(reg.RegisteredOn);
-    pushOrder(`ORD-E-${reg.RegKey}`, reg.MemberNumber, `PROD-EVT-${ev.EventType.toUpperCase()}`, price, d, d, d, 'CreditCard');
-  }
+  // ---------- event registrations: card-at-checkout (declared `checkout` profile) ----------
+  derivedTransaction({
+    seed,
+    parents: registrations,
+    streamKey: (reg) => `pay:${reg.RegKey}`,
+    profileOf: (reg) => {
+      const ev = eventByKey.get(reg.EventKey);
+      return ev?.IsPaid && O.eventPrices[ev.EventType] ? P.checkout : null;
+    },
+    emit: (reg, t) => {
+      const ev = eventByKey.get(reg.EventKey);
+      const d = parseDate(reg.RegisteredOn);
+      pushOrder(`ORD-E-${reg.RegKey}`, reg.MemberNumber, `PROD-EVT-${ev.EventType.toUpperCase()}`, O.eventPrices[ev.EventType], d, addDays(d, t.offsetDays), addDays(d, t.offsetDays), t.method);
+    },
+  });
 
   return { products, orders, orderLines, payments };
 }

@@ -4,10 +4,10 @@
 
 const AUTHORING_FORMS = ['beta', 'liftPts', 'groupTarget', 'strength', 'logitShift'];
 
-export function lintRuleset(R) {
+export function lintRuleset(R, domainLint) {
   const problems = [];
 
-  // every arrow must have exactly one authoring form, and evidence or a note
+  // GENERIC: every arrow must have exactly one authoring form, and evidence or a note
   for (const [domain, block] of Object.entries(R)) {
     if (!block || typeof block !== 'object' || !block.arrows) continue;
     for (const [name, a] of Object.entries(block.arrows)) {
@@ -20,21 +20,8 @@ export function lintRuleset(R) {
     }
   }
 
-  // tiers must be a coherent lattice
-  if (R.membership?.tiers) {
-    for (const t of R.membership.tiers.list ?? []) {
-      if (!t.name || typeof t.dues !== 'number') problems.push(`membership.tiers: entry ${JSON.stringify(t)} needs name + numeric dues`);
-    }
-  }
-
-  // targets that gates consume must carry tolerances
-  for (const [path, target] of [
-    ['membership.renewalTarget+renewalTolerance', R.membership?.renewalTolerance],
-    ['learning.participation.tolerance', R.learning?.participation?.tolerance],
-    ['learning.completion.tolerance', R.learning?.completion?.tolerance],
-  ]) {
-    if (target == null) problems.push(`${path}: missing tolerance — the validator can't gate a target without one`);
-  }
+  // DOMAIN checks arrive through the hook (tier lattices, gate tolerances, …)
+  if (domainLint) problems.push(...domainLint(R));
 
   if (problems.length) {
     throw new Error(`ruleset lint failed:\n  - ${problems.join('\n  - ')}`);

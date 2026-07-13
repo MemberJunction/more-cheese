@@ -9,7 +9,13 @@
         { "name": "SmallBusiness", "dues": 400 },
         { "name": "Corporate", "dues": 1000 }
       ],
-      "affluenceThresholds": { "smallBusiness": 0.7, "corporate": 1.6 },
+      "assign": [
+        { "value": "Enthusiast", "when": { "Segment": "Enthusiast" } },
+        { "value": "Corporate", "when": { "hasOrganization": true }, "whenAbove": { "phi": 1.6 } },
+        { "value": "SmallBusiness", "when": { "hasOrganization": true }, "whenAbove": { "phi": 0.7 } },
+        { "value": "Individual" }
+      ],
+      "$assignNote": "DECLARED staticAssignment rules (first match wins; last = default) — the affluence dial made observable, now authored here instead of coded in world.mjs",
       "individualDuesTarget": 175
     },
     "renewalTarget": 0.87,
@@ -22,9 +28,9 @@
     "arrows": {
       "tenure": { "beta": 0.55, "label": "med", "note": "per 1 SD of tenure at decision" },
       "engagement": { "beta": 1.10, "label": "strong", "note": "latent theta; validated via behavioral proxy (attenuated)" },
-      "autoRenew": { "liftPts": 12, "note": "HUMAN-AUTHORED FORM: members on auto-renew renew about 12 points better — stated exactly as MGI states it; the compiler solves the β", "evidence": "MGI: +10-15pt" },
-      "employerEvent": { "beta": -0.90, "label": "med-strong", "note": "arrow 1.15 — dissolution/acquisition in the decision year" },
-      "enthusiastTier": { "groupTarget": 0.65, "share": 0.15, "note": "HUMAN-AUTHORED FORM: 'the enthusiast tier renews at about 65%' — the compiler solves the β against the calibrated baseline (hand-sizing this took two attempts; see git history)", "evidence": "hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier" }
+      "autoRenew": { "liftPts": 12, "feature": { "from": "self", "field": "AutoRenew" }, "note": "HUMAN-AUTHORED FORM + DECLARED FEATURE: members on auto-renew renew about 12 points better — the compiler solves the β; the executor reads the feature from the declaration, not from code", "evidence": "MGI: +10-15pt" },
+      "employerEvent": { "beta": -0.90, "label": "med-strong", "note": "arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows" },
+      "enthusiastTier": { "groupTarget": 0.65, "share": 0.15, "feature": { "from": "self", "where": { "Segment": "Enthusiast" } }, "note": "HUMAN-AUTHORED FORM + DECLARED FEATURE: 'the enthusiast tier renews at about 65%' — compiler solves the β against the calibrated baseline; executor reads the Segment match from the declaration", "evidence": "hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier" }
     }
   }
 }

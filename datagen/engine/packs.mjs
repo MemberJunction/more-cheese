@@ -48,5 +48,5 @@ export function emitPacks(cfg, { people, orgs, periods, events, registrations, r
   // per-member latents — validator/inspector-private, NEVER installed: lets an engineer
   // verify the hidden dials actually expressed through behavior
   writeFileSync(join(cfg.outDir, 'validation-latents.json'), JSON.stringify(people.map((p) => ({ m: p.MemberNumber, theta: +p._theta.toFixed(4), phi: +p._phi.toFixed(4), tier: p.MembershipTier, hero: !!p._hero }))));
-  writeFileSync(join(cfg.outDir, 'run.json'), JSON.stringify({ seed: cfg.seed, n: cfg.n, releaseDate: iso(cfg.release), ruleset: cfg.R.version, scenario: cfg.scenario ?? null, covidYears: cfg.R.regimes.covid.years }, null, 2));
+  writeFileSync(join(cfg.outDir, 'run.json'), JSON.stringify({ project: cfg.project, seed: cfg.seed, n: cfg.n, releaseDate: iso(cfg.release), ruleset: cfg.R.version, scenario: cfg.scenario ?? null, covidYears: cfg.R.regimes.covid.years }, null, 2));
 }

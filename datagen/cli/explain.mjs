@@ -1,5 +1,5 @@
 // Renders the composed+compiled ruleset as plain English → ruleset/RULESET.md
-// Usage: node explain.mjs
+// Usage: node explain.mjs [--project morecheese]
 //
 // The interpretability contract: anyone should be able to READ the recipe without knowing
 // what a log-odds is. Effects are stated in percentage points (computed from the compiled
@@ -7,13 +7,13 @@
 // Auto-generated — regenerate after any module change; never edit by hand.
 
 import { writeFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { loadRuleset } from './lib/config.mjs';
-import { describeEffectPts } from './lib/compile.mjs';
+import { join } from 'node:path';
+import { loadRuleset, loadProject, projectDir } from '../engine/config.mjs';
+import { describeEffectPts } from '../engine/compile.mjs';
 
-const HERE = dirname(fileURLToPath(import.meta.url));
-const R = loadRuleset();
+const PROJECT = process.argv.includes('--project') ? process.argv[process.argv.indexOf('--project') + 1] : 'morecheese';
+const { hooks } = await loadProject(PROJECT);
+const R = await loadRuleset(undefined, PROJECT);
 
 const HUMAN = {
   tenure: ['Longer-tenured members renew more', 'per extra “standard deviation” of tenure'],
@@ -59,7 +59,7 @@ for (const [k, a] of Object.entries(R.membership.arrows)) {
   if (k === 'covidYear') {
     eff = `${a.logitShift} on the dial (a few points off that year's renewal)`;
   } else {
-    const d = describeEffectPts(R, k);
+    const d = describeEffectPts(R, k, hooks);
     eff = d.kind === 'group'
       ? `**${d.pts > 0 ? '+' : ''}${d.pts.toFixed(1)}pt** ${detail} (the group lands at ~${d.groupRate.toFixed(0)}%)`
       : `**${d.pts > 0 ? '+' : ''}${d.pts.toFixed(1)}pt** ${detail}`;
@@ -77,12 +77,12 @@ P(`- International members attend the flagship less (the distance arrow).`);
 P();
 P('## The money rules');
 P();
-P(`Every billable fact becomes an **order** (one renewal order per membership cycle — the posted order IS the bill, no invoices, per bizapps-orders' design) and usually a **payment**, timed by the 3-part mixture:`);
+P(`Every billable fact becomes an **order** (one renewal order per membership cycle — the posted order IS the bill, no invoices, per bizapps-orders' design) and usually a **payment**, timed by the DECLARED payment profiles (orders.paymentProfiles):`);
 P();
 P(`- Event registrations: **card at checkout** — paid the same day, always.`);
-P(`- Auto-pay dues: land **on the due date** (a ~${(R.orders.paymentTiming.autopayFailShare * 100).toFixed(0)}% failed-card tail retries a few days late).`);
-P(`- Manual dues: most pay early or on time; ~${(R.orders.paymentTiming.manualDues.lateShare * 100).toFixed(0)}% pay late inside the grace window.`);
-P(`- Business tiers pay on **net-${R.orders.paymentTiming.netTerms.termsDays} terms**: ~${(R.orders.paymentTiming.netTerms.lateShare * 100).toFixed(0)}% pay late (median ~${R.orders.paymentTiming.netTerms.daysLateMedian} days — the sourced Atradius/CRF curve, thin tail).`);
+P(`- Auto-pay dues: land **on the due date** (a ~${(R.orders.paymentProfiles.autopay.lateShare * 100).toFixed(0)}% failed-card tail retries a few days late).`);
+P(`- Manual dues: most pay early or on time; ~${(R.orders.paymentProfiles.manual.lateShare * 100).toFixed(0)}% pay late inside the grace window.`);
+P(`- Business tiers pay on **net-${R.orders.paymentProfiles.netTerms.termsDays} terms**: ~${(R.orders.paymentProfiles.netTerms.lateShare * 100).toFixed(0)}% pay late (median ~${R.orders.paymentProfiles.netTerms.late.medianDays} days — the sourced Atradius/CRF curve, thin tail).`);
 P(`- A payment dated after release day *hasn't happened yet* — those orders sit Unpaid or Overdue (real A/R aging), and every pending-renewal member carries an **open renewal order** (the outreach queue).`);
 P();
 P('## Scenarios');
@@ -109,5 +109,5 @@ P('runs the real generator on a reference world and adjusts until the stated eff
 P('the data actually shows. You write the sentence; the machine makes it true.');
 P();
 
-writeFileSync(join(HERE, 'ruleset/RULESET.md'), lines.join('\n'));
-console.log(`plain-English rendering → ${join(HERE, 'ruleset/RULESET.md')}`);
+writeFileSync(join(projectDir(PROJECT), 'ruleset/RULESET.md'), lines.join('\n'));
+console.log(`plain-English rendering → ${join(projectDir(PROJECT), 'ruleset/RULESET.md')}`);

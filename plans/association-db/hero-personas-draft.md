@@ -102,12 +102,12 @@ vs the 60/25/15 target; acceptable for heroes (the generated long tail carries t
 ---
 
 ### Elena Rodriguez `ICF-000101` — the flagship member
-**43 · Head Cheesemaker, Sierra Vista Creamery (mid-size, Petaluma CA) · Producer/Cheesemaking · joined 2022 · Professional, Active · θ high, φ med-high**
-Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen years working up through Sierra Vista's make room to head cheesemaker in 2019. **Join trigger:** in 2022 she launched the creamery's first raw-milk alpine-style ("Sierra Vista Reserve") and needed the federation's aging-standards network and food-safety guidance. Earned her CCP in 2024. Sits on the Standards Committee — she pushed for the raw-milk aging guidance doc. Answers make-room questions in the forum with the patience of someone who's trained a dozen assistants. **Mentors Priya Natarajan** (met at the 2025 conference affinage workshop).
+**43 · Head Cheesemaker, Crowfeather Creamery (mid-size, Petaluma CA) · Producer/Cheesemaking · joined 2022 · Professional, Active · θ high, φ med-high**
+Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen years working up through Crowfeather's make room to head cheesemaker in 2019. **Join trigger:** in 2022 she launched the creamery's first raw-milk alpine-style ("Crowfeather Reserve") and needed the federation's aging-standards network and food-safety guidance. Earned her CCP in 2024. Sits on the Standards Committee — she pushed for the raw-milk aging guidance doc. Answers make-room questions in the forum with the patience of someone who's trained a dozen assistants. **Mentors Priya Natarajan** (met at the 2025 conference affinage workshop).
 *Pins: Standards Committee seat 2023–, CCP 2024, 3 consecutive conference attendances, top-decile Sonar.*
 
 ### Marcus Chen `ICF-000102` — the renewal nudge
-**38 · Specialty Cheese Buyer, Puget Provisions (8-store grocer, Seattle WA) · Retailer · joined 2021 · Professional, Active — renewal due in ~3 weeks · θ med, φ med**
+**38 · Specialty Cheese Buyer, Mongers' Row (8-store grocer, Seattle WA) · Retailer · joined 2021 · Professional, Active — renewal due in ~3 weeks · θ med, φ med**
 Started behind the counter at a Pike Place cheese shop in 2012; now buys for eight stores. **Join trigger:** 2021 supply-chain chaos — the federation's distributor forum was where buyers were actually finding stock. Solid but busy member: regional chapter meetings yes, July flagship conference never (retail can't leave in summer — a *pattern* the data should show, not a flaw). Opened both renewal emails, clicked neither. Not disengaged — swamped. Exactly the member a renewal-outreach queue exists for.
 *Pins: EndDate ≈ release+21d, 2 renewal-campaign opens / 0 clicks, chapter-meeting-only attendance pattern. ⚠ D6/GAP-12 (2026-07-07): the release-relative EndDate requires the proposed anniversary cohort — Marcus goes in it with auto-renew OFF (an auto-payer would get no reminders); pending team ratification.*
 
@@ -235,7 +235,7 @@ Owns renewals and the health of the membership funnel. Demo use: the **Membershi
 ## 7. Asks for the team
 
 1. **Bless or edit the names** (permanent afterward). ⚠ Gate first (review 2026-07-08): run a
-   name/entity collision check — hero and org names (Sierra Vista Creamery, Northgate Market
+   name/entity collision check — hero and org names (Crowfeather Creamery, Northgate Market
    Group, …) against real people and businesses in this small, real industry — and add a
    one-line "calibration, not depiction" note re: the identifiable ACS.
 2. Check storylines against real demo scripts (every §0 scenario now has an anchor — event-ROI is Dale Peterson).

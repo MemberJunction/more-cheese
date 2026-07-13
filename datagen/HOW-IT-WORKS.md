@@ -1,7 +1,7 @@
 # How the Generator Works, in Plain Language
 
 The concepts behind `datagen/`, written for anyone on the team — no statistics background
-assumed. The executable truth lives in [the ruleset](ruleset/RULESET.md) and
+assumed. The executable truth lives in [the ruleset](projects/morecheese/ruleset/RULESET.md) and
 [ruleset-spec.md](../plans/association-db/ruleset-spec.md); this is the companion that
 explains *why the machine is shaped this way*. (Distilled from the design discussions,
 2026-07-09/10.)
@@ -10,12 +10,12 @@ explains *why the machine is shaped this way*. (Distilled from the design discus
 
 ## 1. The big picture: a recipe, a kitchen, and a food inspector
 
-- **The recipe** (`ruleset/modules/*.json`): a readable file describing how association life
+- **The recipe** (`projects/<p>/ruleset/modules/*.json`): a readable file describing how association life
   works — target numbers ("renewal averages 87%"), cause-and-effect rules ("employer trouble
   drives churn"), world facts (geography, cohorts, seasons), and the pinned heroes. **The AI
   is only ever allowed in the recipe-writing room.** It authors this file once; the file is
   reviewed in git like code.
-- **The kitchen** (`generate.mjs` + `lib/`): plain, deterministic code that executes the
+- **The kitchen** (`cli/generate.mjs` + `engine/` + `projects/<p>/`): plain, deterministic code that executes the
   recipe. No AI calls, no network, no clock. Same seed → byte-identical world, forever.
 - **The inspector** (`validate.mjs`): re-measures the finished data against the recipe and
   **fails the build** on any miss — including data that's *too smooth* to be believable.
@@ -112,12 +112,27 @@ The same four-step pattern is reused everywhere: renewal (target 87%), conferenc
 more, so the pool is skewed; calibration applies at every selection layer). The compiler
 runs the whole pattern in a loop to solve human-authored effects.
 
-## 6. Writing a new rule = four small edits
+Since the framework refactor, "reused" is literal: the four steps live **once**, in
+`engine/patterns.mjs`, as five declarative patterns (yearly participation, child outcomes,
+recurring decisions, static assignment, derived transactions). A domain module supplies
+only what's domain-shaped — who's eligible, what feeds the score, what happens on yes/no —
+and every migration to this form was proven **byte-identical** to the hand-written code it
+replaced (see [FRAMEWORK.md](FRAMEWORK.md)).
 
-1. Declare it in the ruleset (sign, size or human-form effect, evidence).
-2. Add one term to the score sum.
-3. Add its gates to the validator (arrow recovery + its own benchmark if it has one).
-4. Run, and let the gates argue with you.
+## 6. Writing a new rule = one declaration (for most rules)
+
+The original recipe was four edits: declare in the ruleset, add a score term, add validator
+gates, run. The **factor contract** collapsed the middle two for any factor whose input the
+feature grammar can express (`"feature": {"from": "self", "field": ...}` or a `where` match):
+the executor reads the score term from the declaration, and the validator **auto-derives the
+recovery gate** from the same declaration. So:
+
+1. Declare the factor in the ruleset (effect in human units, its feature, evidence).
+2. Run, and let the gates argue with you.
+
+Factors the grammar can't express yet (e.g. the employer-event window, which needs
+cross-entity time logic) stay as built-in score terms with hand-added gates — the grammar
+only grows behind hand-written precedent (FRAMEWORK.md's ossification policy).
 
 Case study: "enthusiasts renew at ~65%" first shipped at 76% — because the calibrator
 noticed the group dragging the average and **raised the tide for everyone**, enthusiasts

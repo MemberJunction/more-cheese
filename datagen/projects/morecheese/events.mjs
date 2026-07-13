@@ -12,8 +12,9 @@
 // register more, so the pool skews low-no-show — the naive base rate undershoots the
 // target. Spec §7 lesson #1.)
 
-import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
-import { iso, addDays, parseDate } from './dates.mjs';
+import { rng } from '../../engine/rng.mjs';
+import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
+import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 export function buildEvents(cfg) {
@@ -62,23 +63,31 @@ export function buildRegistrations(cfg, people, periods, events) {
   const coveredOn = (memberNumber, dateIso) => (memberPeriods.get(memberNumber) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
   const clampToJoin = (p, d) => iso(new Date(Math.max(d.getTime(), parseDate(p.JoinDate).getTime())));
 
-  for (const y of years) {
-    const conf = eventsByYear.get(y).find((e) => e.EventType === 'Conference');
-    const activeThisYear = people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 6, 1)))));
+  // flagship: core's annualParticipation — calibrated so ~35% of members attend;
+  // engagement pulls in, distance pushes out. minPool 6 preserves the original ">5" skip.
+  const confOf = (y) => eventsByYear.get(y).find((e) => e.EventType === 'Conference');
+  const activeOn = (y) => people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 6, 1)))));
+  const confRegs = annualParticipation({
+    seed, years, minPool: 6,
+    poolOf: (y) => (confOf(y) ? activeOn(y) : []),
+    scoreOf: (p, y) => E.arrows.conferenceEngagement.beta * (p._thetaPath?.[y] ?? p._theta) + E.arrows.conferenceInternational.beta * (p.Region === 'NA' ? 0 : 1),
+    target: E.conference.memberAttendanceTarget,
+    streamKey: (p, y) => `conf:${p.MemberNumber}:${y}`,
+    spawn: (r, p, y) => {
+      const conf = confOf(y);
+      if (!coveredOn(p.MemberNumber, conf.Date)) return null; // active July 1 ≠ covered July 15 — anniversary lapses in the gap
+      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -45)), Attended: null, _class: 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true };
+    },
+  });
 
-    // flagship: calibrated so ~35% of members attend; engagement pulls in, distance pushes out
-    if (conf && activeThisYear.length > 5) {
-      const scores = activeThisYear.map((p) => E.arrows.conferenceEngagement.beta * (p._thetaPath?.[y] ?? p._theta) + E.arrows.conferenceInternational.beta * (p.Region === 'NA' ? 0 : 1));
-      const b0 = calibrateIntercept(scores, E.conference.memberAttendanceTarget);
-      activeThisYear.forEach((p, i) => {
-        const r = rng(seed, `conf:${p.MemberNumber}:${y}`);
-        if (!r.bernoulli(sigmoid(b0 + scores[i]))) return;
-        if (!coveredOn(p.MemberNumber, conf.Date)) return; // active July 1 ≠ covered July 15 — anniversary lapses in the gap
-        registrations.push({ RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -45)), Attended: null, _class: 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true });
-      });
-    }
+  for (const y of years) {
+    // registrations interleave year-major (conference first, then volume) — output-order contract
+    const activeThisYear = activeOn(y);
+    const confKey = confOf(y)?.EventKey;
+    if (confKey) registrations.push(...confRegs.filter((x) => x.EventKey === confKey));
 
     // the rest: engagement-driven NegBin volume over the year's workshop/webinar pool
+    // (NOT a calibrated-participation instance — volume is a NegBin count, so it stays hand-written)
     for (const p of activeThisYear) {
       const r = rng(seed, `regs:${p.MemberNumber}:${y}`);
       const covid = R.regimes.covid.years.includes(y) ? R.regimes.covid.eventVolumeMultiplier : 1;
@@ -93,16 +102,17 @@ export function buildRegistrations(cfg, people, periods, events) {
     }
   }
 
-  // attendance pass: calibrate no-show intercepts over the actual registrant pool
+  // attendance pass: core's childOutcome — the no-show intercept calibrates over the
+  // ACTUAL registrant pool (the selection-effect lesson is built into the pattern)
   for (const cls of ['paid', 'webinar']) {
     const pool = registrations.filter((x) => x._class === cls);
     if (!pool.length) continue;
-    const target = cls === 'paid' ? E.noShow.paidInPerson.target : E.noShow.freeWebinar.target;
-    const scores = pool.map((x) => E.noShow.engagementBeta * x._theta);
-    const b0 = calibrateIntercept(scores, target);
-    pool.forEach((x, i) => {
-      const r = rng(seed, `noshow:${x.RegKey}`);
-      x.Attended = !r.bernoulli(sigmoid(b0 + scores[i]));
+    childOutcome({
+      seed, items: pool,
+      scoreOf: (x) => E.noShow.engagementBeta * x._theta,
+      target: cls === 'paid' ? E.noShow.paidInPerson.target : E.noShow.freeWebinar.target,
+      streamKey: (x) => `noshow:${x.RegKey}`,
+      decide: (x, p, r) => { x.Attended = !r.bernoulli(p); },
     });
   }
 

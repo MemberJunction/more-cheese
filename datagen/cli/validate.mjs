@@ -15,15 +15,16 @@
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { logisticFit } from './lib/stats.mjs';
-import { loadRuleset } from './lib/config.mjs';
+import { logisticFit } from '../engine/stats.mjs';
+import { loadRuleset } from '../engine/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
-const OUT = join(HERE, args.out ?? 'out');
+const ROOT = join(HERE, '..');
+const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
-const R = loadRuleset(run.scenario); // the validator judges against the SAME world the run was built for
+const R = await loadRuleset(run.scenario, run.project); // the validator judges against the SAME world (project + scenario) the run was built for
 
 const people = load('common', 'people');
 const orgs = load('common', 'organizations');
@@ -161,33 +162,49 @@ function checkArrows() {
   // the anchor rides along as a nuisance covariate: with a DRIFTING θ, renewal selection
   // acted on past θ values the decision-year θ can't represent — omitting that history
   // attenuates neighboring coefficients (tenure especially). The anchor stands in for it.
-  const X = renewalEvents.map((e) => [1, e.tenureZ, e.theta, e.anchor ?? e.theta, e.prevTheta ?? e.theta, e.autoRenew, e.employerEvent, e.enthusiast]);
+  //
+  // CONTRACT PROJECTION #2: the built-in drivers are gated by name; every DECLARED-FEATURE
+  // factor in the ruleset auto-gains a column and a recovery gate — author a factor, get
+  // its check, no validator edit.
+  const A = R.membership.arrows;
+  const declaredNames = Object.entries(A).filter(([, a]) => a.feature).map(([k]) => k);
+  const X = renewalEvents.map((e) => [1, e.tenureZ, e.theta, e.anchor ?? e.theta, e.prevTheta ?? e.theta, e.employerEvent, ...declaredNames.map((k) => e[k] ?? 0)]);
   const y = renewalEvents.map((e) => e.renewed);
-  const { beta: [, bTenure, bTheta, , , bAuto, bEmployer, bEnth], se: [, seTenure, seTheta, , , seAuto, seEmployer, seEnth] } = logisticFit(X, y);
-  const gate = (name, got, se, authored) => {
+  const { beta, se } = logisticFit(X, y);
+  const [, bTenure, bTheta, , , bEmployer, ...bDeclared] = beta;
+  const [, seTenure, seTheta, , , seEmployer, ...seDeclared] = se;
+  const gate = (name, got, seV, authored) => {
     const okSign = Math.sign(got) === Math.sign(authored);
     const ratio = Math.abs(got / authored);
     // strict band, with a small-sample allowance (±3·SE) that vanishes at production scale.
     // 3 (not 2.5) is the multiple-comparisons budget: ~30 gates × many seeds means a 2.5σ
     // false failure is EXPECTED occasionally (verified empirically: recoveries center on the
     // authored values; a 2.9σ outlier appeared in a 7-seed sweep exactly as statistics predicts)
-    const ok = okSign && ((ratio >= 0.5 && ratio <= 2.0) || Math.abs(got - authored) <= 3 * se);
-    check(`arrow ${name}: recovered β=${got.toFixed(2)}±${se.toFixed(2)} vs authored ${authored} (×${ratio.toFixed(2)})`, ok, okSign ? 'sign ok' : 'SIGN FLIP');
+    const ok = okSign && ((ratio >= 0.5 && ratio <= 2.0) || Math.abs(got - authored) <= 3 * seV);
+    check(`arrow ${name}: recovered β=${got.toFixed(2)}±${seV.toFixed(2)} vs authored ${authored} (×${ratio.toFixed(2)})`, ok, okSign ? 'sign ok' : 'SIGN FLIP');
   };
-  const A = R.membership.arrows;
   gate('tenure→renewal', bTenure, seTenure, A.tenure.beta);
   gate('engagement→renewal', bTheta, seTheta, A.engagement.beta);
-  gate('autoRenew→renewal', bAuto, seAuto, A.autoRenew.beta);
   gate('employerEvent→renewal (1.15)', bEmployer, seEmployer, A.employerEvent.beta);
-  gate('enthusiastTier→renewal', bEnth, seEnth, A.enthusiastTier.beta);
+  declaredNames.forEach((k, i) => gate(`${k}→renewal [declared feature]`, bDeclared[i], seDeclared[i], A[k].beta));
 
-  // the enthusiast rule's own benchmark: ~65% tier renewal while overall stays 87%
-  // (tolerance + binomial SE at the observed group size — vanishes at production scale)
-  const enth = renewalEvents.filter((e) => e.enthusiast === 1);
+  // the enthusiast rule's own benchmark: ~65% tier renewal while overall stays 87%.
+  // COMPOSITION-ADJUSTED: the 65% is a claim about a composition-typical cohort — in a
+  // small world the group can legitimately skew (e.g. mostly recent joiners → low tenure),
+  // and the OTHER arrows then move its raw rate for authored reasons the recovery gates
+  // already verify. So the target shifts by each recovered arrow's β × the group-vs-rest
+  // gap in its measured driver. The adjustment (like every small-sample allowance here)
+  // vanishes at scale: group means converge to the cohort's, and the gap → 0.
+  const enth = renewalEvents.filter((e) => e.enthusiastTier === 1);
+  const rest = renewalEvents.filter((e) => e.enthusiastTier !== 1);
   const enthRate = enth.reduce((s, e) => s + e.renewed, 0) / enth.length;
   const EB = R.membership.enthusiastRenewal;
-  const enthAllow = EB.tolerance + 1.5 * Math.sqrt((EB.target * (1 - EB.target)) / enth.length);
-  check(`enthusiast-tier renewal ${(enthRate * 100).toFixed(1)}% vs ${EB.target * 100}% ±${(enthAllow * 100).toFixed(1)} (tol + SE at n=${enth.length})`, Math.abs(enthRate - EB.target) <= enthAllow, `${enth.length} decisions`);
+  const meanOf = (rows, f) => rows.reduce((s, e) => s + e[f], 0) / rows.length;
+  const compShift = [['tenure', 'tenureZ'], ['engagement', 'theta'], ['employerEvent', 'employerEvent']]
+    .reduce((s, [arrow, f]) => s + A[arrow].beta * (meanOf(enth, f) - meanOf(rest, f)), 0);
+  const adjTarget = 1 / (1 + Math.exp(-(Math.log(EB.target / (1 - EB.target)) + compShift)));
+  const enthAllow = EB.tolerance + 1.5 * Math.sqrt((adjTarget * (1 - adjTarget)) / enth.length);
+  check(`enthusiast-tier renewal ${(enthRate * 100).toFixed(1)}% vs ${(adjTarget * 100).toFixed(1)}% (target ${EB.target * 100}%, composition-adjusted ${(compShift >= 0 ? '+' : '')}${compShift.toFixed(2)} logit) ±${(enthAllow * 100).toFixed(1)}`, Math.abs(enthRate - adjTarget) <= enthAllow, `${enth.length} decisions`);
 
   // engagement double-check through a fully OBSERVABLE proxy (activity quartiles) —
   // attenuated by design, but it's what a customer's analyst would actually see
