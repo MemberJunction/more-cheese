@@ -52,7 +52,8 @@ datagen/
                         refinement measure, pack assembly
     ruleset/            the project's authored content (modules, scenarios, RULESET.md)
   cli/                  ← THE COMMANDS (project-generic; --project, default morecheese)
-    generate.mjs build.mjs validate.mjs demo.mjs explain.mjs emit-sql.mjs emit-mjsync.mjs
+    generate.mjs build.mjs validate.mjs demo.mjs explain.mjs
+    emit-sql.mjs emit-schema.mjs emit-mjsync.mjs
   test.mjs              ← the regression suite (drives the cli)
 ```
 

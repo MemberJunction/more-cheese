@@ -6,7 +6,7 @@
 // This is what CI runs when datagen graduates to a package.
 
 import { execFileSync } from 'node:child_process';
-import { rmSync } from 'node:fs';
+import { rmSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -61,11 +61,36 @@ step('scenario: decliningOrg builds and validates against its own targets', () =
 });
 
 // 6. emitters run and agree
-step('emitters: sql + mjsync + explain', () => {
+step('emitters: sql + schema + mjsync + explain', () => {
   if (QUICK) run('build.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE]);
   run('emit-sql.mjs', []);
+  run('emit-schema.mjs', []);
   run('emit-mjsync.mjs', []);
   run('explain.mjs', []);
+});
+
+// 6b. schema/insert drift guard: every column an INSERT writes must exist in the CREATE TABLE
+// (the provisional DDL and the seed INSERTs share assumed shapes — they must never disagree)
+step('schema DDL covers every INSERT column', () => {
+  const sqlDir = join(HERE, 'out', 'sql');
+  const ddl = readFileSync(join(sqlDir, '00_schema.sql'), 'utf8');
+  // CREATE TABLE [schema].[Table] ( ... ) → map "schema.Table" → Set(columns)
+  const created = {};
+  for (const m of ddl.matchAll(/CREATE TABLE \[(\w+)\]\.\[(\w+)\] \(([\s\S]*?)\n\);/g)) {
+    const cols = [...m[3].matchAll(/^\s{2}\[(\w+)\]/gm)].map((x) => x[1]); // leading "  [Col]" defs (not FK/PK lines)
+    created[`${m[1]}.${m[2]}`] = new Set(cols);
+  }
+  const missing = [];
+  for (const f of ['01_common', '02_membership', '03_events', '04_learning', '05_orders']) {
+    let sql; try { sql = readFileSync(join(sqlDir, `${f}.sql`), 'utf8'); } catch { continue; }
+    for (const m of sql.matchAll(/INSERT INTO \[(\w+)\]\.\[(\w+)\] \(([^)]*)\)/g)) {
+      const key = `${m[1]}.${m[2]}`;
+      const cols = m[3].match(/\[(\w+)\]/g).map((x) => x.slice(1, -1));
+      if (!created[key]) { missing.push(`no CREATE TABLE for ${key}`); continue; }
+      for (const col of cols) if (!created[key].has(col)) missing.push(`${key}.${col} inserted but not in DDL`);
+    }
+  }
+  if (missing.length) throw new Error('❌ schema/insert drift:\n' + missing.map((x) => '  ' + x).join('\n'));
 });
 
 for (const d of ['out-test', 'out-test2']) rmSync(join(HERE, d), { recursive: true, force: true });
