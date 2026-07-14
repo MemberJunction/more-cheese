@@ -7,7 +7,9 @@
 // parent and child (referential integrity by construction, no lookup fragility). Business
 // keys stay on the rows as the human handle; UUIDs are plumbing.
 //
-// ⚠ TABLE/COLUMN NAMES ARE ASSUMED SHAPES — but informed ones (2026-07-10): the cheese
+// ⚠ TABLE/COLUMN NAMES ARE ASSUMED SHAPES — but informed, and PROVEN LOADABLE (2026-07-13:
+// installed clean onto a cloned MJ database via emit-schema DDL; all FKs trusted; CodeGen
+// then registered all 11 tables as MJ entities): the cheese
 // tables follow our schema proposal, and MembershipPeriod is confirmed as the July-31
 // SHIPPING shape because bizapps-orders (the eventual home: Subscription + renewal Orders,
 // schema __mj_BizAppsOrders) is pre-implementation. When that app lands, this emitter gains
@@ -34,26 +36,49 @@ const sqlDate = (v) => v == null ? 'NULL' : `'${v}'`;
 const sqlId = (v) => v == null ? 'NULL' : `'${v}'`;
 
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
+// THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
+// to bizapps-common's tables (their REAL columns, from bizapps-common
+// migrations/B202602271452); everything member-ish becomes an extension-profile row in OUR
+// morecheese_members schema carrying the PersonID/OrganizationID. The pinned uuidv5 IDs make
+// the FK pairs line up by construction — parent and child derive them independently.
+// IsSharedDemo never goes on bizapps-common tables (not ours to alter — memo §2.5); demo
+// rows are identifiable through their profile row.
 const MAPPING = {
   common: [
     {
-      json: 'organizations', table: '[morecheese_common].[Organization]',
+      json: 'organizations', table: '[__mj_BizAppsCommon].[Organization]',
       columns: (r) => ({
-        ID: sqlId(uuidFor('org', r.OrgKey)), OrgKey: sqlStr(r.OrgKey), Name: sqlStr(r.Name),
-        Type: sqlStr(r.Type), Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
+        ID: sqlId(uuidFor('org', r.OrgKey)), Name: sqlStr(r.Name),
+        // their Status CHECK: Active|Inactive|Dissolved — our dissolution stories map straight on
+        Status: sqlStr(r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active'),
+      }),
+    },
+    {
+      json: 'organizations', table: '[morecheese_members].[OrganizationProfile]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('orgprofile', r.OrgKey)), OrganizationID: sqlId(uuidFor('org', r.OrgKey)),
+        OrgKey: sqlStr(r.OrgKey), Type: sqlStr(r.Type), Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
         LifecycleEventKind: sqlStr(r.LifecycleEvent?.kind ?? null), LifecycleEventYear: sqlNum(r.LifecycleEvent?.year ?? null),
         IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
     {
-      json: 'people', table: '[morecheese_common].[Person]',
+      json: 'people', table: '[__mj_BizAppsCommon].[Person]',
       columns: (r) => ({
-        ID: sqlId(uuidFor('person', r.MemberNumber)), MemberNumber: sqlStr(r.MemberNumber),
-        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), Segment: sqlStr(r.Segment),
+        ID: sqlId(uuidFor('person', r.MemberNumber)),
+        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), Email: sqlStr(r.Email),
+        Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
+      }),
+    },
+    {
+      json: 'people', table: '[morecheese_members].[MemberProfile]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('memberprofile', r.MemberNumber)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
+        OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null),
+        MemberNumber: sqlStr(r.MemberNumber), Segment: sqlStr(r.Segment),
         Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
-        OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null), // FK derived independently — no lookups
         JoinDate: sqlDate(r.JoinDate), IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },

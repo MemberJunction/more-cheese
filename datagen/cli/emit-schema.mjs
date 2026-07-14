@@ -35,17 +35,41 @@ const c = (name, type, opt = {}) => ({ name, type, nullable: !!opt.null, pk: !!o
 
 // The tables in DEPENDENCY order (a referenced table is created before its referencer), so
 // the FK constraints resolve in a single top-to-bottom run.
-const SCHEMAS = ['morecheese_common', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
+// __mj_BizAppsCommon is a STAND-IN: IF-guarded, real column shapes (copied from
+// bizapps-common migrations/B202602271452) — when the real app is installed first, the
+// guards skip and our INSERTs land in the genuine tables.
+const SCHEMAS = ['__mj_BizAppsCommon', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
 const TABLES = [
-  { schema: 'morecheese_common', table: 'Organization', cols: [
-    c('ID', UID, { pk: true }), c('OrgKey', s(50)), c('Name', s(200)), c('Type', s(50)),
-    c('Region', s(50)), c('City', s(100)), c('State', s(50)), c('Latitude', GEO), c('Longitude', GEO),
+  // bizapps-common stand-ins — REAL shapes (B202602271452), minus their FKs to tables we
+  // don't stand in (__mj.User, OrganizationType); columns we don't fill stay nullable
+  { schema: '__mj_BizAppsCommon', table: 'Organization', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(255)), c('LegalName', s(255), { null: true }),
+    c('OrganizationTypeID', UID, { null: true }), c('ParentID', UID, { null: true }),
+    c('Website', s(1000), { null: true }), c('LogoURL', s(1000), { null: true }), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('Email', s(255), { null: true }), c('Phone', s(50), { null: true }), c('FoundedDate', DATE, { null: true }),
+    c('TaxID', s(50), { null: true }), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'Person', cols: [
+    c('ID', UID, { pk: true }), c('FirstName', s(100)), c('LastName', s(100)),
+    c('MiddleName', s(100), { null: true }), c('Prefix', s(20), { null: true }), c('Suffix', s(20), { null: true }),
+    c('PreferredName', s(100), { null: true }), c('Title', s(200), { null: true }), c('Email', s(255), { null: true }),
+    c('Phone', s(50), { null: true }), c('DateOfBirth', DATE, { null: true }), c('Gender', s(50), { null: true }),
+    c('PhotoURL', s(1000), { null: true }), c('Bio', 'NVARCHAR(MAX)', { null: true }),
+    c('LinkedUserID', UID, { null: true }), c('Status', s(50)),
+  ] },
+  // OUR extension profiles (memo §2.3 shape convention) — member/org-specific fields,
+  // hard FKs into the dependency schema (Marcelo's linking ruling)
+  { schema: 'morecheese_members', table: 'OrganizationProfile', cols: [
+    c('ID', UID, { pk: true }), c('OrganizationID', UID, { fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('OrgKey', s(50)), c('Type', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
+    c('Latitude', GEO), c('Longitude', GEO),
     c('LifecycleEventKind', s(50), { null: true }), c('LifecycleEventYear', INT, { null: true }), c('IsSharedDemo', BIT),
   ] },
-  { schema: 'morecheese_common', table: 'Person', cols: [
-    c('ID', UID, { pk: true }), c('MemberNumber', s(50)), c('FirstName', s(100)), c('LastName', s(100)),
-    c('Segment', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)), c('Latitude', GEO), c('Longitude', GEO),
-    c('OrganizationID', UID, { null: true, fk: '[morecheese_common].[Organization]' }), c('JoinDate', DATE), c('IsSharedDemo', BIT),
+  { schema: 'morecheese_members', table: 'MemberProfile', cols: [
+    c('ID', UID, { pk: true }), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('MemberNumber', s(50)), c('Segment', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
+    c('Latitude', GEO), c('Longitude', GEO), c('JoinDate', DATE), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_events', table: 'Event', cols: [
     c('ID', UID, { pk: true }), c('EventKey', s(50)), c('Name', s(200)), c('EventType', s(50)), c('EventDate', DATE),
@@ -53,27 +77,27 @@ const TABLES = [
     c('Latitude', GEO, { null: true }), c('Longitude', GEO, { null: true }), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_members', table: 'MembershipPeriod', cols: [
-    c('ID', UID, { pk: true }), c('PeriodKey', s(60)), c('PersonID', UID, { fk: '[morecheese_common].[Person]' }),
+    c('ID', UID, { pk: true }), c('PeriodKey', s(60)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('MembershipTier', s(50)), c('DuesAmount', MONEY), c('StartDate', DATE), c('EndDate', DATE), c('RenewalDate', DATE),
     c('Status', s(50)), c('CancellationDate', DATE, { null: true }), c('CancellationReason', s(200), { null: true }),
     c('AutoRenew', BIT), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_events', table: 'EventRegistration', cols: [
-    c('ID', UID, { pk: true }), c('RegKey', s(120)), c('PersonID', UID, { fk: '[morecheese_common].[Person]' }),
+    c('ID', UID, { pk: true }), c('RegKey', s(120)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('EventID', UID, { fk: '[morecheese_events].[Event]' }), c('RegisteredOn', DATE), c('Attended', BIT, { null: true }), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_learning', table: 'Course', cols: [
     c('ID', UID, { pk: true }), c('CourseKey', s(50)), c('Name', s(200)), c('StartDate', DATE), c('DurationWeeks', INT), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_learning', table: 'CourseEnrollment', cols: [
-    c('ID', UID, { pk: true }), c('EnrollKey', s(80)), c('PersonID', UID, { fk: '[morecheese_common].[Person]' }),
+    c('ID', UID, { pk: true }), c('EnrollKey', s(80)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('CourseID', UID, { fk: '[morecheese_learning].[Course]' }), c('EnrolledOn', DATE), c('Status', s(50)), c('CompletedOn', DATE, { null: true }), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_orders', table: 'Product', cols: [
     c('ID', UID, { pk: true }), c('ProductKey', s(50)), c('Name', s(200)), c('ProductType', s(50)), c('UnitPrice', MONEY), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_orders', table: 'Order', cols: [
-    c('ID', UID, { pk: true }), c('OrderKey', s(50)), c('PersonID', UID, { fk: '[morecheese_common].[Person]' }),
+    c('ID', UID, { pk: true }), c('OrderKey', s(50)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('OrderType', s(50)), c('Status', s(50)), c('OrderDate', DATE), c('DueDate', DATE), c('TotalGross', MONEY), c('PaymentStatus', s(50)), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_orders', table: 'OrderLine', cols: [

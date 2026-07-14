@@ -12,9 +12,11 @@
 // re-push after a regeneration updates the same rows in place. FK fields carry literal
 // pinned IDs (derived independently) — no @lookup needed.
 //
-// ⚠ ENTITY NAMES ARE ASSUMED pending the schema reconciliation + CodeGen run — verify
-//   against entity_subclasses.ts before pointing a real sync at this. The common-pack
-//   entities will actually belong to bizapps-common, not MoreCheese.
+// ✓ ENTITY NAMES VERIFIED (2026-07-13): a real CodeGen run against a cloned MJ database
+//   (MoreCheese_Playground) minted exactly these names, and `mj sync push` round-tripped
+//   ("no changes" vs SQL-loaded rows — pinned UUIDs make both load paths the same rows).
+//   Table SHAPES remain provisional pending the reconciliation, and the common-pack
+//   entities will eventually belong to bizapps-common, not MoreCheese.
 // ⚠ `mj sync push` is a FULL RECONCILE per entity scope — it can DELETE rows that exist
 //   in the DB but not in these files. Dev databases only; never over real data.
 //
@@ -35,28 +37,46 @@ const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 
 const CHUNK = 5000; // records per file; big tables split across .part-N.json files
 
-// ---------- mapping: pack table → entity folder (ASSUMED entity names) ----------
+// ---------- mapping: pack table → entity folder (entity names verified vs CodeGen) ----------
 const MAPPING = [
+  // THE PERSON/ORG SPLIT (memo §2.2/2.3): identity → bizapps-common's entities (their
+  // prefix, not ours); member/org-specific fields → our extension-profile entities.
+  // No IsSharedDemo on their entities (§2.5) — demo rows identify via the profile join.
   {
-    pack: 'common', json: 'organizations', dir: 'organizations', entity: 'MoreCheese: Organizations',
+    pack: 'common', json: 'organizations', dir: 'organizations', entity: 'MJ_BizApps_Common: Organizations',
     record: (r) => ({
       primaryKey: { ID: uuidFor('org', r.OrgKey) },
+      fields: { Name: r.Name, Status: r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active' },
+    }),
+  },
+  {
+    pack: 'common', json: 'organizations', dir: 'organization-profiles', entity: 'MoreCheese: Organization Profiles',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('orgprofile', r.OrgKey) },
       fields: {
-        OrgKey: r.OrgKey, Name: r.Name, Type: r.Type, Region: r.Region, City: r.City, State: r.State,
-        Latitude: r.Latitude, Longitude: r.Longitude,
+        OrganizationID: uuidFor('org', r.OrgKey), OrgKey: r.OrgKey, Type: r.Type,
+        Region: r.Region, City: r.City, State: r.State, Latitude: r.Latitude, Longitude: r.Longitude,
         LifecycleEventKind: r.LifecycleEvent?.kind ?? null, LifecycleEventYear: r.LifecycleEvent?.year ?? null,
         IsSharedDemo: r.IsSharedDemo,
       },
     }),
   },
   {
-    pack: 'common', json: 'people', dir: 'people', entity: 'MoreCheese: People',
+    pack: 'common', json: 'people', dir: 'people', entity: 'MJ_BizApps_Common: People',
     record: (r) => ({
       primaryKey: { ID: uuidFor('person', r.MemberNumber) },
+      fields: { FirstName: r.FirstName, LastName: r.LastName, Email: r.Email, Status: 'Active' },
+    }),
+  },
+  {
+    pack: 'common', json: 'people', dir: 'member-profiles', entity: 'MoreCheese: Member Profiles',
+    record: (r) => ({
+      primaryKey: { ID: uuidFor('memberprofile', r.MemberNumber) },
       fields: {
-        MemberNumber: r.MemberNumber, FirstName: r.FirstName, LastName: r.LastName, Segment: r.Segment,
-        Region: r.Region, City: r.City, State: r.State, Latitude: r.Latitude, Longitude: r.Longitude,
+        PersonID: uuidFor('person', r.MemberNumber),
         OrganizationID: r.OrgKey ? uuidFor('org', r.OrgKey) : null,
+        MemberNumber: r.MemberNumber, Segment: r.Segment,
+        Region: r.Region, City: r.City, State: r.State, Latitude: r.Latitude, Longitude: r.Longitude,
         JoinDate: r.JoinDate, IsSharedDemo: r.IsSharedDemo,
       },
     }),

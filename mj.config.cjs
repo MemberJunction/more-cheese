@@ -53,8 +53,12 @@ module.exports = {
   newEntityDefaults: {
     NameRulesBySchema: [
       { SchemaName: '${mj_core_schema}', EntityNamePrefix: 'MJ: ' },
-      // TODO(template): your schema + your prefix:
-      { SchemaName: 'sample_app', EntityNamePrefix: 'Sample App: ', EntityNameSuffix: '' },
+      // stand-in for the bizapps-common dependency (playground DBs): their prefix, not ours
+      { SchemaName: '__mj_BizAppsCommon', EntityNamePrefix: 'MJ_BizApps_Common: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      { SchemaName: 'morecheese_orders', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
     ],
   },
 
@@ -65,7 +69,7 @@ module.exports = {
   // against MJ core (__mj) or system schemas from an app repo.
   // Include schemas for dependencies to avoid generating duplicate entities for 
   // them. See docs/template-docs/codegen-and-metadata-migrations.md.
-  excludeSchemas: ['sys', 'staging', 'dbo', '__mj'],
+  excludeSchemas: ['sys', 'staging', 'dbo', '__mj', '__mj_UDT', 'sample_app', 'AssociationDemo', 'Bookstore'],
 
   // ==========================================================================
   // SQL output for migrations — RECOMMENDED
