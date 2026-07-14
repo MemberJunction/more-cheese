@@ -79,6 +79,13 @@ export function buildForms(cfg, people, events, registrations) {
   for (const resp of formResponses) {
     const r = rng(seed, `formans:${resp.ResponseKey}`);
     const theta = resp._theta;
+    // real funnels leak: a slice of responses start but never submit (first answer only)
+    if (r.bernoulli(F.response.partialShare)) {
+      resp.Status = 'Partial';
+      resp.StartedAt = resp.SubmittedAt; resp.SubmittedAt = null;
+      formAnswers.push({ AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: Math.max(A.nps.min, Math.min(A.nps.max, Math.round(npsBase + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd)))), IsSharedDemo: true });
+      continue;
+    }
     formAnswers.push(
       { AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: clampRound(npsBase + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd), A.nps.min, A.nps.max), IsSharedDemo: true },
       { AnswerKey: `${resp.ResponseKey}:overall`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:overall', NumericValue: clampRound(overallBase + A.overall.engagementBeta * theta + r.normal(0, A.overall.noiseSd), A.overall.min, A.overall.max), IsSharedDemo: true },

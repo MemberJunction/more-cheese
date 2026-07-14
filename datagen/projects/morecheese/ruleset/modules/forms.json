@@ -6,22 +6,66 @@
       "description": "Sent to all attendees the day after the ICF Annual Conference closes.",
       "page": "Your conference experience",
       "questions": [
-        { "key": "nps", "type": "NPS", "prompt": "How likely are you to recommend the ICF Annual Conference to a colleague?", "required": true },
-        { "key": "overall", "type": "Rating", "prompt": "How would you rate your overall conference experience?", "required": true },
-        { "key": "returning", "type": "YesNo", "prompt": "Do you plan to attend next year's conference?", "required": false }
+        {
+          "key": "nps",
+          "type": "NPS",
+          "prompt": "How likely are you to recommend the ICF Annual Conference to a colleague?",
+          "required": true
+        },
+        {
+          "key": "overall",
+          "type": "Rating",
+          "prompt": "How would you rate your overall conference experience?",
+          "required": true
+        },
+        {
+          "key": "returning",
+          "type": "YesNo",
+          "prompt": "Do you plan to attend next year's conference?",
+          "required": false
+        }
       ],
-      "distribution": { "channel": "Email", "opensDaysAfter": 1, "closesDaysAfter": 31 }
+      "distribution": {
+        "channel": "Email",
+        "opensDaysAfter": 1,
+        "closesDaysAfter": 31
+      }
     },
     "response": {
-      "rateTarget": 0.35, "tolerance": 0.06,
+      "rateTarget": 0.35,
+      "tolerance": 0.06,
       "$note": "post-event survey response rates for engaged member audiences run 30-40% (ESTIMATE; email-distributed, incentive-free)",
       "submitDelayDaysMax": 14,
-      "arrows": { "engagement": { "beta": 0.7, "label": "med", "note": "engaged attendees answer surveys" } }
+      "arrows": {
+        "engagement": {
+          "beta": 0.7,
+          "label": "med",
+          "note": "engaged attendees answer surveys"
+        }
+      },
+      "partialShare": 0.08,
+      "$partialNote": "share of responses that start but never submit (Status Partial, first answer only) — real funnels leak"
     },
     "answers": {
-      "nps": { "base": 7.2, "engagementBeta": 1.3, "noiseSd": 1.4, "min": 0, "max": 10, "meanTolerance": 0.5 },
-      "overall": { "base": 3.9, "engagementBeta": 0.5, "noiseSd": 0.7, "min": 1, "max": 5 },
-      "returning": { "baseLogit": 1.2, "engagementBeta": 0.8 },
+      "nps": {
+        "base": 7.2,
+        "engagementBeta": 1.3,
+        "noiseSd": 1.4,
+        "min": 0,
+        "max": 10,
+        "meanTolerance": 0.5
+      },
+      "overall": {
+        "base": 3.9,
+        "engagementBeta": 0.5,
+        "noiseSd": 0.7,
+        "min": 1,
+        "max": 5
+      },
+      "returning": {
+        "baseLogit": 1.2,
+        "engagementBeta": 0.8
+      },
       "$note": "satisfaction rides the same hidden engagement dial as renewal — correlations between NPS and retention EMERGE from the shared cause, never painted on"
     }
   }

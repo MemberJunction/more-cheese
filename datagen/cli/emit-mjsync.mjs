@@ -65,7 +65,7 @@ const MAPPING = [
     pack: 'common', json: 'people', dir: 'people', entity: 'MJ_BizApps_Common: People',
     record: (r) => ({
       primaryKey: { ID: uuidFor('person', r.MemberNumber) },
-      fields: { FirstName: r.FirstName, LastName: r.LastName, Email: r.Email, Status: 'Active' },
+      fields: { FirstName: r.FirstName, LastName: r.LastName, Title: r.Title, Email: r.Email, Status: 'Active' },
     }),
   },
   {
@@ -94,7 +94,18 @@ const MAPPING = [
       },
     }),
   },
-  // committees pack → bizapps-committees entities (their prefix 'Committees: '); no IsSharedDemo
+  { pack: 'common', json: 'relationship_types', dir: 'relationship-types', entity: 'MJ_BizApps_Common: Relationship Types',
+    record: (r) => ({ primaryKey: { ID: uuidFor('reltype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, Category: r.Category, IsDirectional: r.IsDirectional, ForwardLabel: r.ForwardLabel, ReverseLabel: r.ReverseLabel, IsActive: r.IsActive } }) },
+  { pack: 'common', json: 'relationships', dir: 'relationships', entity: 'MJ_BizApps_Common: Relationships',
+    record: (r) => ({ primaryKey: { ID: uuidFor('rel', r.RelKey) }, fields: {
+      RelationshipTypeID: r.TypeID ?? uuidFor('reltype', r.TypeKey),
+      FromPersonID: r.FromMemberNumber ? uuidFor('person', r.FromMemberNumber) : null,
+      FromOrganizationID: r.FromOrgKey ? uuidFor('org', r.FromOrgKey) : null,
+      ToPersonID: r.ToMemberNumber ? uuidFor('person', r.ToMemberNumber) : null,
+      ToOrganizationID: r.ToOrgKey ? uuidFor('org', r.ToOrgKey) : null,
+      Title: r.Title ?? null, StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status, Notes: r.Notes ?? null,
+    } }) },
+    // committees pack → bizapps-committees entities (their prefix 'Committees: '); no IsSharedDemo
   { pack: 'committees', json: 'committee_types', dir: 'committee-types', entity: 'Committees: Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('ctype', r.TypeKey) }, fields: { Name: r.Name, IsStandards: r.IsStandards, DefaultTermMonths: r.DefaultTermMonths } }) },
   { pack: 'committees', json: 'committee_roles', dir: 'committee-roles', entity: 'Committees: Roles',
@@ -109,7 +120,31 @@ const MAPPING = [
     record: (r) => ({ primaryKey: { ID: uuidFor('meeting', r.MeetingKey) }, fields: { CommitteeID: uuidFor('committee', r.CommitteeKey), Name: r.Name, StartDateTime: r.StartDateTime, TimeZone: 'UTC', LocationType: r.LocationType, Status: r.Status } }) },
   { pack: 'committees', json: 'committee_attendance', dir: 'committee-attendance', entity: 'Committees: Attendances',
     record: (r) => ({ primaryKey: { ID: uuidFor('att', r.AttendanceKey) }, fields: { MeetingID: uuidFor('meeting', r.MeetingKey), PersonID: uuidFor('person', r.MemberNumber), AttendanceStatus: r.AttendanceStatus } }) },
-  // forms pack → bizapps-forms entities (their prefix 'MJ_BizApps_Forms: ')
+  { pack: 'committees', json: 'committee_agenda_items', dir: 'committee-agenda-items', entity: 'Committees: Agenda Items',
+    record: (r) => ({ primaryKey: { ID: uuidFor('agenda', r.AgendaKey) }, fields: { MeetingID: uuidFor('meeting', r.MeetingKey), Sequence: r.Sequence, Name: r.Name, PresenterPersonID: uuidFor('person', r.PresenterMemberNumber), DurationMinutes: r.DurationMinutes, ItemType: r.ItemType, Status: r.Status } }) },
+  { pack: 'committees', json: 'committee_motions', dir: 'committee-motions', entity: 'Committees: Motions',
+    record: (r) => ({ primaryKey: { ID: uuidFor('motion', r.MotionKey) }, fields: { MeetingID: uuidFor('meeting', r.MeetingKey), AgendaItemID: uuidFor('agenda', r.AgendaKey), Sequence: r.Sequence, Name: r.Name, MovedByMembershipID: uuidFor('cmembership', r.MovedByMembershipKey), SecondedByMembershipID: uuidFor('cmembership', r.SecondedByMembershipKey), Result: r.Result, ResultSummary: r.ResultSummary, YesCount: r.YesCount, NoCount: r.NoCount, AbstainCount: r.AbstainCount } }) },
+  { pack: 'committees', json: 'committee_votes', dir: 'committee-votes', entity: 'Committees: Votes',
+    record: (r) => ({ primaryKey: { ID: uuidFor('vote', r.VoteKey) }, fields: { MotionID: uuidFor('motion', r.MotionKey), MembershipID: uuidFor('cmembership', r.MembershipKey), VoteValue: r.VoteValue } }) },
+  // tasks pack → bizapps-tasks entities; polymorphic refs use @lookup by entity NAME
+  { pack: 'tasks', json: 'task_types', dir: 'task-types', entity: 'MJ_BizApps_Tasks: Task Types',
+    record: (r) => ({ primaryKey: { ID: uuidFor('tasktype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, DefaultPriority: r.DefaultPriority, IsActive: r.IsActive } }) },
+  { pack: 'tasks', json: 'tasks', dir: 'tasks', entity: 'MJ_BizApps_Tasks: Tasks',
+    record: (r) => ({ primaryKey: { ID: uuidFor('task', r.TaskKey) }, fields: { Name: r.Name, TypeID: uuidFor('tasktype', r.TypeKey), Status: r.Status, Priority: r.Priority, DueAt: r.DueAt, CompletedAt: r.CompletedAt ?? null, PercentComplete: r.PercentComplete ?? 0, CreatedByPersonID: r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null } }) },
+  { pack: 'tasks', json: 'task_assignments', dir: 'task-assignments', entity: 'MJ_BizApps_Tasks: Task Assignments',
+    record: (r) => ({ primaryKey: { ID: uuidFor('taskassign', r.AssignKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), AssigneeEntityID: `@lookup:Entities.Name=${r.AssigneeEntityName}`, AssigneeRecordID: uuidFor('person', r.AssigneeMemberNumber), Status: r.Status } }) },
+  { pack: 'tasks', json: 'task_links', dir: 'task-links', entity: 'MJ_BizApps_Tasks: Task Links',
+    record: (r) => ({ primaryKey: { ID: uuidFor('tasklink', r.LinkKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), EntityID: `@lookup:Entities.Name=${r.EntityName}`, RecordID: r.RefKind === 'meeting' ? uuidFor('meeting', r.RefKey) : uuidFor('person', r.RefKey) } }) },
+  // issues pack → bizapps-issues entities
+  { pack: 'issues', json: 'issue_types', dir: 'issue-types', entity: 'MJ_BizApps_Issues: Issue Types',
+    record: (r) => ({ primaryKey: { ID: uuidFor('issuetype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, DefaultPriority: r.DefaultPriority, IsActive: r.IsActive } }) },
+  { pack: 'issues', json: 'issue_statuses', dir: 'issue-statuses', entity: 'MJ_BizApps_Issues: Issue Statuses',
+    record: (r) => ({ primaryKey: { ID: uuidFor('issuestatus', r.StatusKey) }, fields: { Name: r.Name, Sequence: r.Sequence, IsDefault: r.IsDefault, IsTerminal: r.IsTerminal, ColorCode: r.ColorCode } }) },
+  { pack: 'issues', json: 'issues', dir: 'issues', entity: 'MJ_BizApps_Issues: Issues',
+    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: uuidFor('issuestatus', r.StatusKey), Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), SourceEntityID: `@lookup:Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
+  { pack: 'issues', json: 'issue_sequences', dir: 'issue-sequences', entity: 'MJ_BizApps_Issues: Issue Number Sequences',
+    record: (r) => ({ primaryKey: { ScopeCode: r.ScopeCode }, fields: { NextSequenceNumber: r.NextSequenceNumber } }) },
+    // forms pack → bizapps-forms entities (their prefix 'MJ_BizApps_Forms: ')
   { pack: 'forms', json: 'forms', dir: 'forms', entity: 'MJ_BizApps_Forms: Forms',
     record: (r) => ({ primaryKey: { ID: uuidFor('form', r.FormKey) }, fields: { Name: r.Name, Description: r.Description, Status: r.Status, RenderMode: r.RenderMode } }) },
   { pack: 'forms', json: 'form_versions', dir: 'form-versions', entity: 'MJ_BizApps_Forms: Form Versions',

@@ -2,36 +2,146 @@
   "$comment": "COMMITTEES MODULE (pack: committees) — targets bizapps-committees' REAL shapes (migrations/B202602151200, schema __mj_BizAppsCommittees, entity prefix 'Committees: '). Slice v1: Type/Committee/Term/Role/Membership/Meeting/Attendance; motions, votes, ballots, minutes, artifacts and action items are out of scope until a demo needs them. Unlocks the Gwen Whitfield persona (ICF-000108) and Elena's Standards-seat pin.",
   "committees": {
     "types": [
-      { "name": "Standing", "isStandards": false, "termMonths": 24 },
-      { "name": "Technical Standards", "isStandards": true, "termMonths": 24 }
+      {
+        "name": "Standing",
+        "isStandards": false,
+        "termMonths": 24
+      },
+      {
+        "name": "Technical Standards",
+        "isStandards": true,
+        "termMonths": 24
+      }
     ],
     "roles": [
-      { "name": "Chair", "isOfficer": true, "isVoting": true, "sequence": 1 },
-      { "name": "Vice Chair", "isOfficer": true, "isVoting": true, "sequence": 2 },
-      { "name": "Member", "isOfficer": false, "isVoting": true, "sequence": 100 }
+      {
+        "name": "Chair",
+        "isOfficer": true,
+        "isVoting": true,
+        "sequence": 1
+      },
+      {
+        "name": "Vice Chair",
+        "isOfficer": true,
+        "isVoting": true,
+        "sequence": 2
+      },
+      {
+        "name": "Member",
+        "isOfficer": false,
+        "isVoting": true,
+        "sequence": 100
+      }
     ],
     "list": [
-      { "name": "Standards Committee", "type": "Technical Standards", "formed": "2015-03-01", "mission": "Aging, labeling, and raw-milk production standards for member producers." },
-      { "name": "Food Safety Committee", "type": "Standing", "formed": "2014-06-01", "mission": "FSMA compliance guidance, recall readiness, and the quarterly food-safety webinar series." },
-      { "name": "Education Committee", "type": "Standing", "formed": "2016-01-15", "mission": "Course catalog, certification pathways, and the conference workshop program." },
-      { "name": "Membership & Outreach Committee", "type": "Standing", "formed": "2017-09-01", "mission": "Recruitment, retention programs, and chapter development." }
+      {
+        "name": "Standards Committee",
+        "type": "Technical Standards",
+        "formed": "2015-03-01",
+        "mission": "Aging, labeling, and raw-milk production standards for member producers."
+      },
+      {
+        "name": "Food Safety Committee",
+        "type": "Standing",
+        "formed": "2014-06-01",
+        "mission": "FSMA compliance guidance, recall readiness, and the quarterly food-safety webinar series."
+      },
+      {
+        "name": "Education Committee",
+        "type": "Standing",
+        "formed": "2016-01-15",
+        "mission": "Course catalog, certification pathways, and the conference workshop program."
+      },
+      {
+        "name": "Membership & Outreach Committee",
+        "type": "Standing",
+        "formed": "2017-09-01",
+        "mission": "Recruitment, retention programs, and chapter development."
+      }
     ],
     "terms": [
-      { "name": "2023–24 Term", "start": "2023-01-01", "end": "2024-12-31" },
-      { "name": "2025–26 Term", "start": "2025-01-01", "end": "2026-12-31" }
+      {
+        "name": "2023–24 Term",
+        "start": "2023-01-01",
+        "end": "2024-12-31"
+      },
+      {
+        "name": "2025–26 Term",
+        "start": "2025-01-01",
+        "end": "2026-12-31"
+      }
     ],
     "participation": {
-      "shareOfEligible": 0.06, "tolerance": 0.02,
+      "shareOfEligible": 0.06,
+      "tolerance": 0.02,
       "$note": "share of term-start-covered members who serve on a committee; engaged members volunteer (theta arrow). ESTIMATE pending a real benchmark — associations typically see 5-10% of members in governance roles.",
-      "arrows": { "engagement": { "beta": 0.9, "label": "med-strong", "note": "volunteering is an engagement behavior" } }
+      "arrows": {
+        "engagement": {
+          "beta": 0.9,
+          "label": "med-strong",
+          "note": "volunteering is an engagement behavior"
+        }
+      }
     },
     "meetings": {
-      "cadencePerYear": 4, "startYear": 2023, "dayOfMonth": 15, "hourUTC": 15,
+      "cadencePerYear": 4,
+      "startYear": 2023,
+      "dayOfMonth": 15,
+      "hourUTC": 15,
       "attendance": {
-        "presentTarget": 0.75, "tolerance": 0.06,
+        "presentTarget": 0.75,
+        "tolerance": 0.06,
         "excusedShareOfAbsent": 0.4,
         "$note": "committee-meeting attendance runs well above event attendance — members chose the obligation",
-        "arrows": { "engagement": { "beta": 0.6, "label": "med" } }
+        "arrows": {
+          "engagement": {
+            "beta": 0.6,
+            "label": "med"
+          }
+        }
+      },
+      "agenda": {
+        "standingItems": [
+          {
+            "name": "Call to order & minutes approval",
+            "type": "Information",
+            "minutes": 5
+          },
+          {
+            "name": "Chair's report",
+            "type": "Report",
+            "minutes": 15
+          },
+          {
+            "name": "Old business",
+            "type": "Discussion",
+            "minutes": 20
+          },
+          {
+            "name": "New business",
+            "type": "Discussion",
+            "minutes": 15
+          }
+        ]
+      },
+      "motions": {
+        "ratePerMeeting": 0.35,
+        "voteSplit": {
+          "yes": 0.8,
+          "no": 0.1,
+          "abstain": 0.1
+        },
+        "$note": "votes are CONSISTENT with attendance by construction — members absent from the meeting vote 'Absent'",
+        "topics": [
+          "Adopt the revised charter language",
+          "Approve the quarterly budget request",
+          "Publish the draft guidance document",
+          "Form a working group on member feedback",
+          "Endorse the proposed program changes",
+          "Approve co-hosting the regional workshop",
+          "Adopt the updated meeting cadence",
+          "Approve the speaker honorarium policy"
+        ]
       }
     }
   }

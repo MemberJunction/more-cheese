@@ -10,7 +10,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { staticAssignment } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears } from '../../engine/dates.mjs';
-import { orgNameDealer, personNameFor, CITIES, SEGMENTS } from './banks.mjs';
+import { orgNameDealer, personNameFor, titleFor, CITIES, SEGMENTS } from './banks.mjs';
 
 export function buildOrgs(cfg) {
   const { R, seed, releaseYear } = cfg;
@@ -91,7 +91,7 @@ export function buildPeople(cfg, orgs) {
     // origin-consistent authored name from the member's own name stream (region-weighted buckets)
     const nm = personNameFor(seed, key, region);
     people.push({
-      MemberNumber: key, FirstName: nm.first, LastName: nm.last, Email: emailFor(nm.first, nm.last, key),
+      MemberNumber: key, FirstName: nm.first, LastName: nm.last, Email: emailFor(nm.first, nm.last, key), Title: titleFor(seed, key, segment),
       Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
       _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit
@@ -118,7 +118,7 @@ export function buildPeople(cfg, orgs) {
     }
     const idx = R.heroes.indexOf(h);
     people[idx] = {
-      MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, Email: emailFor(h.first, h.last, h.memberNumber),
+      MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, Email: emailFor(h.first, h.last, h.memberNumber), Title: h.title ?? null,
       Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
       OrgKey: heroOrg?.OrgKey ?? null, JoinDate: joinDate,
       _theta: h.theta, _thetaPath: h.thetaByYear ?? null, _phi: h.phi, // pinned level — or a pinned ARC (thetaByYear); never drawn drift

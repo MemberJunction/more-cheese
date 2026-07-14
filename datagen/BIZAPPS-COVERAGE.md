@@ -1,7 +1,7 @@
 # BizApps Coverage — what the generator produces per open app
 
 What gets generated into which app's schema, what the shapes are based on, and how each
-claim was verified. Updated 2026-07-14 (committees + forms landed).
+claim was verified. Updated 2026-07-14 (committees/forms + relationships, meeting content, tasks, issues).
 
 ## The ownership rule (who does what — settled 2026-07-14)
 
@@ -29,16 +29,19 @@ install wins and the same seed files load into it). Where it doesn't, we keep a 
 
 | App | Schema | Entity prefix | Tables generated | What's in them |
 |---|---|---|---|---|
-| **bizapps-common** | `__mj_BizAppsCommon` | `MJ_BizApps_Common: ` | **2 of 10** — Person, Organization | 1,998 identity rows (name, deterministic `@example.com` email, Status) + 637 orgs (Name, Status incl. 52 `Dissolved` mapped from lifecycle events) |
-| **bizapps-committees** | `__mj_BizAppsCommittees` | `Committees: ` | **7 of 17** — Type, Role, Committee, Term, Membership, Meeting, Attendance | 4 authored committees, 2-year terms, θ-driven volunteering (~6% of members), quarterly meetings, calibrated 75% attendance; Gwen chairs Food Safety |
+| **bizapps-common** | `__mj_BizAppsCommon` | `MJ_BizApps_Common: ` | **4 of 10** — Person, Organization, Relationship, RelationshipType | 1,998 identity rows (name, TITLE, deterministic email) + 637 orgs + ~1,600 RELATIONSHIPS: an Employee edge per employed member (their seeded type IDs; ended on dissolution — Danielle's third witness), Elena→Priya mentorship, the Kate/Kathy duplicate ground truth, the Bob↔Victor acquisition (Subsidiary). Demo-owned types (Mentor, Duplicate Of) carry our pinned IDs |
+| **bizapps-committees** | `__mj_BizAppsCommittees` | `Committees: ` | **10 of 17** — + AgendaItem, Motion, Vote | 4 authored committees, θ-driven volunteering, quarterly meetings with calibrated 75% attendance, standing AGENDAS, and MOTIONS with per-member VOTES that are attendance-consistent by construction (absent members vote Absent); Gwen chairs Food Safety |
 | **bizapps-forms** | `__mj_BizAppsForms` | `MJ_BizApps_Forms: ` | **7 of 10** — Form, FormVersion, FormPage, FormQuestion, FormDistribution, FormResponse, FormResponseAnswer | The post-conference survey (D10 optional pack): per-year Email distributions, 35% calibrated response rate, NPS/Rating/YesNo answers riding the engagement dial |
 | **bizapps-orders** | *(not targeted)* | — | **0** — app is pre-implementation | `morecheese_orders` is the **sanctioned stand-in** (Marcelo memo §2.4): Product/Order/OrderLine/Payment in our shapes until their Subscription + renewal-Order tables exist; then period rows decompose into their model |
 | **MoreCheese (ours)** | `morecheese_members/_events/_learning/_orders` | `MoreCheese: ` | 11 tables | MemberProfile + OrganizationProfile (the extension rows carrying everything upstream doesn't model), MembershipPeriod, events, learning, money |
 
-**Not targeted, by design:** bizapps-accounting (design still churning), bizapps-tasks /
--issues (consumption side — they'd reference our people via the polymorphic pattern, out of
-scope until those demos compose), bizapps-sonar (a CONSUMER — it scores our data),
--caliber, -secure-messaging.
+| **bizapps-tasks** | `__mj_BizAppsTasks` | `MJ_BizApps_Tasks: ` | **4 of 17** — TaskType, Task, TaskAssignment, TaskLink | Committee ACTION ITEMS spawned by meetings (their design's replacement for committee ActionItems; θ-driven completion, real overdue rows) + a RENEWAL OUTREACH task per PendingRenewal member assigned to the M&O chair (Marcus gets one). Assignees/links are POLYMORPHIC — entity names resolve to `__mj.Entity` IDs at load time (DECLAREd variables in SQL, `@lookup:` in mj-sync) |
+| **bizapps-issues** | `__mj_BizAppsIssues` | `MJ_BizApps_Issues: ` | **4 of 5** — IssueType, IssueStatus, Issue, IssueNumberSequence | Support tickets DERIVED from real facts: overdue orders → billing, employer lifecycle events → data corrections, paid no-shows → refunds, plus the authored Kate/Kathy duplicate report. Dense unique MC-#### numbering; status rides recency |
+
+**Not targeted, by design:** bizapps-accounting (28-table baseline EXISTS — GL/journal
+entries from our orders/payments is feasible and DEFERRED as its own batch),
+bizapps-sonar (a CONSUMER — it scores our data), -caliber (no schema yet),
+-secure-messaging (portal-auth plumbing only, no message entities).
 
 ## Shape sources (the authority for every column)
 
@@ -47,6 +50,8 @@ scope until those demos compose), bizapps-sonar (a CONSUMER — it scores our da
 | `__mj_BizAppsCommon` | bizapps-common `migrations/B202602271452__v1.0.x_Schema_and_Tables.sql` (checked out locally) |
 | `__mj_BizAppsCommittees` | bizapps-committees `migrations/B202602151200__v1.0__Committees_Baseline.sql` (fetched from the public repo) |
 | `__mj_BizAppsForms` | bizapps-forms `migrations/B202606281200__v0.1.x_Schema_and_Tables.sql` (fetched from the public repo) |
+| `__mj_BizAppsTasks` | bizapps-tasks `migrations/B202604011500__v1.0.x_Schema_and_Tables.sql` (fetched from the public repo) |
+| `__mj_BizAppsIssues` | bizapps-issues `migrations/B202606091000__v1.0.x_Schema_and_Tables.sql` (fetched from the public repo) |
 | `morecheese_*` | **frozen** — `migrations/B202607141200__v1.0.0_MoreCheese_Baseline.sql` (converted once from the generator's proven shapes, 2026-07-14; migrations own them from here) |
 
 ## How "correct" was verified (evidence, not vibes)

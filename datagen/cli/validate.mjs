@@ -36,6 +36,12 @@ const cMeetings = load('committees', 'committee_meetings');
 const cAttendance = load('committees', 'committee_attendance');
 const fResponses = load('forms', 'form_responses');
 const fAnswers = load('forms', 'form_answers');
+const relationships = load('common', 'relationships');
+const cMotions = load('committees', 'committee_motions');
+const cVotes = load('committees', 'committee_votes');
+const tTasks = load('tasks', 'tasks');
+const tAssignments = load('tasks', 'task_assignments');
+const issues = load('issues', 'issues');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -83,6 +89,9 @@ function checkPacks() {
   const badResp = fResponses.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
   const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
   check('pack refs: forms→common + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
+  const badRel = relationships.filter((x) => (x.FromMemberNumber && !peopleKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !peopleKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
+  const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length;
+  check('pack refs: relationships/tasks/issues→common', badRel + badTask === 0, `${badRel}+${badTask} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -443,7 +452,37 @@ function checkComposedApps() {
   const npsMean = nps.length ? nps.reduce((s2, a) => s2 + a.NumericValue, 0) / nps.length : 0;
   const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, nps.length)));
   check(`forms: mean NPS ${npsMean.toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(npsMean - FF.answers.nps.base) <= npsAllow, `${nps.length} NPS answers`);
+  // relationships: every employed member has exactly one Employee edge; dissolved employers end it
+  const employed = people.filter((p) => p.OrgKey).length;
+  const empRels = relationships.filter((r2) => r2.RelKey.startsWith('emp:'));
+  const endedOk = empRels.every((r2) => (r2.Status === 'Ended') === (orgByKeyG(r2.ToOrgKey)?.LifecycleEvent?.kind === 'Dissolved'));
+  check(`relationships: employment edges ${empRels.length} = employed members ${employed}, dissolution-consistent`, empRels.length === employed && endedOk, `${relationships.length} total relationships`);
+  // motions: stored tallies match the vote rows; votes consistent with attendance (Absent ⇔ not Present)
+  let tallyBad = 0;
+  const votesByMotion = new Map();
+  for (const v of cVotes) { if (!votesByMotion.has(v.MotionKey)) votesByMotion.set(v.MotionKey, []); votesByMotion.get(v.MotionKey).push(v); }
+  const attStatus = new Map(cAttendance.map((a) => [`${a.MemberNumber}:${a.MeetingKey}`, a.AttendanceStatus]));
+  let attBad = 0;
+  for (const m of cMotions) {
+    const vs = votesByMotion.get(m.MotionKey) ?? [];
+    const yes = vs.filter((v) => v.VoteValue === 'Yes').length, no = vs.filter((v) => v.VoteValue === 'No').length;
+    if (yes !== m.YesCount || no !== m.NoCount || m.Result !== (yes > no ? 'Passed' : 'Failed')) tallyBad++;
+    for (const v of vs) {
+      const st = attStatus.get(`${v.MembershipKey.split(':')[0]}:${m.MeetingKey}`);
+      if ((v.VoteValue === 'Absent') !== (st !== 'Present')) attBad++;
+    }
+  }
+  check('committees: motion tallies match votes; votes consistent with attendance', tallyBad + attBad === 0, `${cMotions.length} motions, ${cVotes.length} votes`);
+  // tasks: every PendingRenewal member carries an outreach task
+  const pendingMembers = [...lastStatus.entries()].filter(([, st]) => st === 'PendingRenewal').map(([m2]) => m2);
+  const outreach = new Set(tTasks.filter((t) => t.TypeKey === 'Renewal Outreach').map((t) => t.TaskKey));
+  const missingOutreach = pendingMembers.filter((m2) => !outreach.has(`otask:${m2}`)).length;
+  check(`tasks: renewal-outreach task per PendingRenewal member (${pendingMembers.length})`, missingOutreach === 0, `${tTasks.length} tasks total`);
+  // issues: numbering dense + unique
+  const nums = new Set(issues.map((x) => x.IssueNumber));
+  check(`issues: ${issues.length} tickets, numbering dense + unique`, nums.size === issues.length && issues.length > 0, `${[...nums].slice(0, 2)}…`);
 }
+const orgByKeyG = (k) => orgs.find((o) => o.OrgKey === k);
 
 // ---------- heroes (§7.5): the pinned people load with their stories intact ----------
 function checkHeroes() {

@@ -57,6 +57,8 @@ module.exports = {
       { SchemaName: '__mj_BizAppsCommon', EntityNamePrefix: 'MJ_BizApps_Common: ', EntityNameSuffix: '' },
       { SchemaName: '__mj_BizAppsCommittees', EntityNamePrefix: 'Committees: ', EntityNameSuffix: '' },
       { SchemaName: '__mj_BizAppsForms', EntityNamePrefix: 'MJ_BizApps_Forms: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsTasks', EntityNamePrefix: 'MJ_BizApps_Tasks: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsIssues', EntityNamePrefix: 'MJ_BizApps_Issues: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },

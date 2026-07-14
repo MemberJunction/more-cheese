@@ -80,6 +80,7 @@ export function buildCommittees(cfg, people, periods) {
   // ---------- meetings: quarterly per committee; attendance over the term's actual roster ----------
   const meetings = [];
   const attendance = [];
+  const attByMeeting = new Map(); // MeetingKey → [{membership row, status}] — votes stay consistent with attendance
   const releaseIso = iso(release);
   for (const c of C.list) {
     for (let y = C.meetings.startYear; y <= release.getUTCFullYear(); y++) {
@@ -109,6 +110,8 @@ export function buildCommittees(cfg, people, periods) {
             const present = m.p._hero && seatPinned(m.p.MemberNumber, c.name) ? true : r.bernoulli(prob);
             const status = present ? 'Present' : r.bernoulli(A.excusedShareOfAbsent) ? 'Excused' : 'Absent';
             attendance.push({ AttendanceKey: `${m.p.MemberNumber}:${meeting.MeetingKey}`, MeetingKey: meeting.MeetingKey, MemberNumber: m.p.MemberNumber, AttendanceStatus: status, IsSharedDemo: true });
+            if (!attByMeeting.has(meeting.MeetingKey)) attByMeeting.set(meeting.MeetingKey, []);
+            attByMeeting.get(meeting.MeetingKey).push({ membership: m.row, status });
           },
         });
       }
@@ -120,7 +123,58 @@ export function buildCommittees(cfg, people, periods) {
     return (h?.committees ?? []).some((s) => s.committee === committee);
   }
 
-  return { types, roles, committees, terms, memberships, meetings, attendance };
+  // ---------- meeting CONTENT: agenda items, and sometimes a motion with real votes ----------
+  // Votes are CONSISTENT with attendance by construction: members absent from the meeting
+  // vote 'Absent' — a data-quality property no independent roll could guarantee.
+  const agendaItems = [];
+  const motions = [];
+  const votes = [];
+  const AG = C.meetings.agenda;
+  const MO = C.meetings.motions;
+  for (const meeting of meetings) {
+    const roster = attByMeeting.get(meeting.MeetingKey) ?? [];
+    if (!roster.length) continue;
+    const chair = roster.find((x) => x.membership.RoleKey === 'Chair') ?? roster[0];
+    AG.standingItems.forEach((item, i) => agendaItems.push({
+      AgendaKey: `${meeting.MeetingKey}:${i + 1}`, MeetingKey: meeting.MeetingKey, Sequence: i + 1,
+      Name: item.name, ItemType: item.type, DurationMinutes: item.minutes,
+      PresenterMemberNumber: chair.membership.MemberNumber, Status: 'Completed', IsSharedDemo: true,
+    }));
+    const r = rng(seed, `motion:${meeting.MeetingKey}`);
+    const present = roster.filter((x) => x.status === 'Present');
+    if (!r.bernoulli(MO.ratePerMeeting) || present.length < 2) continue;
+    const topic = r.pick(MO.topics);
+    const moverIdx = r.int(0, present.length - 1);
+    let secondIdx = r.int(0, present.length - 2);
+    if (secondIdx >= moverIdx) secondIdx += 1;
+    const agendaKey = `${meeting.MeetingKey}:${AG.standingItems.length + 1}`;
+    agendaItems.push({
+      AgendaKey: agendaKey, MeetingKey: meeting.MeetingKey, Sequence: AG.standingItems.length + 1,
+      Name: `Motion: ${topic}`, ItemType: 'Vote', DurationMinutes: 10,
+      PresenterMemberNumber: present[moverIdx].membership.MemberNumber, Status: 'Completed', IsSharedDemo: true,
+    });
+    let yes = 0, no = 0, abstain = 0;
+    const motionKey = `${meeting.MeetingKey}:m1`;
+    for (const x of roster) {
+      let value;
+      if (x.status !== 'Present') value = 'Absent';
+      else {
+        const vr = rng(seed, `vote:${motionKey}:${x.membership.MembershipKey}`);
+        value = vr.pickWeighted([['Yes', MO.voteSplit.yes], ['No', MO.voteSplit.no], ['Abstain', MO.voteSplit.abstain]]);
+      }
+      if (value === 'Yes') yes++; else if (value === 'No') no++; else if (value === 'Abstain') abstain++;
+      votes.push({ VoteKey: `${motionKey}:${x.membership.MembershipKey}`, MotionKey: motionKey, MembershipKey: x.membership.MembershipKey, VoteValue: value, IsSharedDemo: true });
+    }
+    motions.push({
+      MotionKey: motionKey, MeetingKey: meeting.MeetingKey, AgendaKey: agendaKey, Sequence: 1,
+      Name: topic, MovedByMembershipKey: present[moverIdx].membership.MembershipKey,
+      SecondedByMembershipKey: present[secondIdx].membership.MembershipKey,
+      Result: yes > no ? 'Passed' : 'Failed', ResultSummary: `${yes}–${no}, ${abstain} abstaining`,
+      YesCount: yes, NoCount: no, AbstainCount: abstain, IsSharedDemo: true,
+    });
+  }
+
+  return { types, roles, committees, terms, memberships, meetings, attendance, agendaItems, motions, votes };
 }
 
 /** membership-period coverage lookup (same rule the events module uses) */

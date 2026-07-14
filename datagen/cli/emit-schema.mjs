@@ -39,7 +39,7 @@ const c = (name, type, opt = {}) => ({ name, type, nullable: !!opt.null, pk: !!o
 // __mj_BizAppsCommon is a STAND-IN: IF-guarded, real column shapes (copied from
 // bizapps-common migrations/B202602271452) — when the real app is installed first, the
 // guards skip and our INSERTs land in the genuine tables.
-const SCHEMAS = ['__mj_BizAppsCommon', '__mj_BizAppsCommittees', '__mj_BizAppsForms', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
+const SCHEMAS = ['__mj_BizAppsCommon', '__mj_BizAppsCommittees', '__mj_BizAppsForms', '__mj_BizAppsTasks', '__mj_BizAppsIssues', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
 const TABLES = [
   // bizapps-common stand-ins — REAL shapes (B202602271452), minus their FKs to tables we
   // don't stand in (__mj.User, OrganizationType); columns we don't fill stay nullable
@@ -57,6 +57,59 @@ const TABLES = [
     c('Phone', s(50), { null: true }), c('DateOfBirth', DATE, { null: true }), c('Gender', s(50), { null: true }),
     c('PhotoURL', s(1000), { null: true }), c('Bio', 'NVARCHAR(MAX)', { null: true }),
     c('LinkedUserID', UID, { null: true }), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'RelationshipType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('Category', s(50)), c('IsDirectional', BIT), c('ForwardLabel', s(100), { null: true }),
+    c('ReverseLabel', s(100), { null: true }), c('IsActive', BIT),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'Relationship', cols: [
+    c('ID', UID, { pk: true }), c('RelationshipTypeID', UID, { fk: '[__mj_BizAppsCommon].[RelationshipType]' }),
+    c('FromPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('FromOrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('ToPersonID', UID, { null: true }), c('ToOrganizationID', UID, { null: true }),
+    c('Title', s(255), { null: true }), c('StartDate', DATE, { null: true }), c('EndDate', DATE, { null: true }),
+    c('Status', s(50)), c('Notes', 'NVARCHAR(MAX)', { null: true }),
+  ] },
+  // bizapps-tasks stand-ins (B202604011500) — polymorphic entity refs are plain columns here
+  { schema: '__mj_BizAppsTasks', table: 'TaskType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('DefaultPriority', s(20)), c('IsActive', BIT),
+  ] },
+  { schema: '__mj_BizAppsTasks', table: 'Task', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(255)), c('TypeID', UID, { fk: '[__mj_BizAppsTasks].[TaskType]' }),
+    c('Status', s(50)), c('Priority', s(20)), c('DueAt', 'DATETIMEOFFSET', { null: true }),
+    c('CompletedAt', 'DATETIMEOFFSET', { null: true }), c('PercentComplete', INT),
+    c('CreatedByPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+  ] },
+  { schema: '__mj_BizAppsTasks', table: 'TaskAssignment', cols: [
+    c('ID', UID, { pk: true }), c('TaskID', UID, { fk: '[__mj_BizAppsTasks].[Task]' }),
+    c('AssigneeEntityID', UID), c('AssigneeRecordID', s(450)), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsTasks', table: 'TaskLink', cols: [
+    c('ID', UID, { pk: true }), c('TaskID', UID, { fk: '[__mj_BizAppsTasks].[Task]' }),
+    c('EntityID', UID), c('RecordID', s(450)),
+  ] },
+  // bizapps-issues stand-ins (B202606091000)
+  { schema: '__mj_BizAppsIssues', table: 'IssueType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('DefaultPriority', s(20)), c('IsActive', BIT),
+  ] },
+  { schema: '__mj_BizAppsIssues', table: 'IssueStatus', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)), c('Sequence', INT), c('IsDefault', BIT),
+    c('IsTerminal', BIT), c('ColorCode', s(20), { null: true }),
+  ] },
+  { schema: '__mj_BizAppsIssues', table: 'Issue', cols: [
+    c('ID', UID, { pk: true }), c('IssueNumber', s(50), { null: true }), c('Title', s(500)),
+    c('IssueTypeID', UID, { fk: '[__mj_BizAppsIssues].[IssueType]' }),
+    c('StatusID', UID, { fk: '[__mj_BizAppsIssues].[IssueStatus]' }),
+    c('Severity', s(20)), c('Priority', s(20)),
+    c('ReporterPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('SourceEntityID', UID, { null: true }), c('SourceRecordID', s(450), { null: true }),
+    c('ResolvedAt', 'DATETIMEOFFSET', { null: true }), c('ClosedAt', 'DATETIMEOFFSET', { null: true }),
+  ] },
+  { schema: '__mj_BizAppsIssues', table: 'IssueNumberSequence', cols: [
+    c('ScopeCode', s(50), { pk: true }), c('NextSequenceNumber', INT),
   ] },
   // OUR extension profiles (memo §2.3 shape convention) — member/org-specific fields,
   // hard FKs into the dependency schema (Marcelo's linking ruling)
@@ -103,6 +156,24 @@ const TABLES = [
   { schema: '__mj_BizAppsCommittees', table: 'Attendance', cols: [
     c('ID', UID, { pk: true }), c('MeetingID', UID, { fk: '[__mj_BizAppsCommittees].[Meeting]' }),
     c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }), c('AttendanceStatus', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'AgendaItem', cols: [
+    c('ID', UID, { pk: true }), c('MeetingID', UID, { fk: '[__mj_BizAppsCommittees].[Meeting]' }),
+    c('Sequence', INT), c('Name', s(255)), c('PresenterPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('DurationMinutes', INT, { null: true }), c('ItemType', s(50)), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Motion', cols: [
+    c('ID', UID, { pk: true }), c('MeetingID', UID, { null: true, fk: '[__mj_BizAppsCommittees].[Meeting]' }),
+    c('AgendaItemID', UID, { null: true, fk: '[__mj_BizAppsCommittees].[AgendaItem]' }),
+    c('Sequence', INT), c('Name', s(255)),
+    c('MovedByMembershipID', UID, { null: true, fk: '[__mj_BizAppsCommittees].[Membership]' }),
+    c('SecondedByMembershipID', UID, { null: true, fk: '[__mj_BizAppsCommittees].[Membership]' }),
+    c('Result', s(50)), c('ResultSummary', s(255), { null: true }),
+    c('YesCount', INT, { null: true }), c('NoCount', INT, { null: true }), c('AbstainCount', INT, { null: true }),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Vote', cols: [
+    c('ID', UID, { pk: true }), c('MotionID', UID, { fk: '[__mj_BizAppsCommittees].[Motion]' }),
+    c('MembershipID', UID, { fk: '[__mj_BizAppsCommittees].[Membership]' }), c('VoteValue', s(20)),
   ] },
   // bizapps-forms stand-ins (B202606281200) — the D10 optional pack
   { schema: '__mj_BizAppsForms', table: 'Form', cols: [
@@ -209,6 +280,32 @@ for (const t of TABLES) {
   lines.push(');');
   lines.push('');
 }
+
+
+// bizapps-common's own RelationshipType seeds (their pinned IDs, from their metadata) —
+// stand-in playgrounds need them as FK targets; IF NOT EXISTS keeps this inert on genuine installs
+const REL_TYPE_SEEDS = [
+  ['FEB33819-FC85-4309-B1EC-A54EEA91DACF', 'Spouse', 'PersonToPerson', 'is spouse of', 'is spouse of'],
+  ['431DBAF3-AC1D-47E6-B91E-264E8C76FC57', 'Parent / Child', 'PersonToPerson', 'is parent of', 'is child of'],
+  ['D471B007-0717-493E-AC0D-2F102A32BCC2', 'Sibling', 'PersonToPerson', 'is sibling of', 'is sibling of'],
+  ['6A17A929-8B23-4D73-9DF9-A368E7C1C1B9', 'Friend', 'PersonToPerson', 'is friend of', 'is friend of'],
+  ['27CFD031-5663-4000-A7AB-8AC87DB88C1D', 'Employee', 'PersonToOrganization', 'is employee of', 'employs'],
+  ['2FE33D05-5FD0-4076-8EF2-A30A640651B4', 'Board Member', 'PersonToOrganization', 'is board member of', 'has board member'],
+  ['5B8C871C-025B-410A-9D44-4D30C76534C7', 'Member', 'PersonToOrganization', 'is member of', 'has member'],
+  ['DF72DDBB-A829-41AC-8698-01FCCD21FEEF', 'Volunteer', 'PersonToOrganization', 'volunteers for', 'has volunteer'],
+  ['DC06CB0C-A6CE-437C-A19E-F615F949BC51', 'Customer', 'PersonToOrganization', 'is customer of', 'has customer'],
+  ['6BF6959D-18B4-4615-AFCE-643963A87C1B', 'Consultant', 'PersonToOrganization', 'consults for', 'has consultant'],
+  ['39373681-5C70-4845-896B-4BFE4343751F', 'Subsidiary', 'OrganizationToOrganization', 'is subsidiary of', 'has subsidiary'],
+  ['CA9BBDBE-3595-4C3F-80FF-DA78D3389EA7', 'Partner', 'OrganizationToOrganization', 'is partner of', 'is partner of'],
+  ['190A8BBF-771E-4631-980A-84918311E5EC', 'Vendor', 'OrganizationToOrganization', 'is vendor to', 'has vendor'],
+  ['2DBA78A6-DF6F-4A7E-B126-AE038BD3B6BA', 'Affiliate', 'OrganizationToOrganization', 'is affiliate of', 'is affiliate of'],
+];
+lines.push("-- bizapps-common's RelationshipType seeds (their pinned IDs) — playground FK targets; inert on genuine installs");
+for (const [id, name, cat, fwd, rev] of REL_TYPE_SEEDS) {
+  lines.push(`IF NOT EXISTS (SELECT 1 FROM [__mj_BizAppsCommon].[RelationshipType] WHERE ID = '${id}')`);
+  lines.push(`INSERT INTO [__mj_BizAppsCommon].[RelationshipType] (ID, Name, Category, IsDirectional, ForwardLabel, ReverseLabel, IsActive) VALUES ('${id}', N'${name}', N'${cat}', 1, N'${fwd}', N'${rev}', 1);`);
+}
+lines.push('');
 
 mkdirSync(join(OUT, 'sql'), { recursive: true });
 writeFileSync(join(OUT, 'sql', '00_schema.sql'), lines.join('\n'));

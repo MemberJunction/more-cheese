@@ -34,6 +34,7 @@ const sqlNum = (v) => v == null ? 'NULL' : String(v);
 const sqlBit = (v) => v == null ? 'NULL' : v ? '1' : '0';
 const sqlDate = (v) => v == null ? 'NULL' : `'${v}'`;
 const sqlId = (v) => v == null ? 'NULL' : `'${v}'`;
+const sqlVar = (v) => v; // raw expression (e.g. a DECLAREd @Entity variable) — polymorphic refs resolve by NAME at load time
 
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
 // THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
@@ -64,10 +65,18 @@ const MAPPING = {
       }),
     },
     {
+      json: 'relationship_types', table: '[__mj_BizAppsCommon].[RelationshipType]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('reltype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description),
+        Category: sqlStr(r.Category), IsDirectional: sqlBit(r.IsDirectional), ForwardLabel: sqlStr(r.ForwardLabel),
+        ReverseLabel: sqlStr(r.ReverseLabel), IsActive: sqlBit(r.IsActive),
+      }),
+    },
+    {
       json: 'people', table: '[__mj_BizAppsCommon].[Person]',
       columns: (r) => ({
         ID: sqlId(uuidFor('person', r.MemberNumber)),
-        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), Email: sqlStr(r.Email),
+        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
         Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
       }),
     },
@@ -80,6 +89,19 @@ const MAPPING = {
         Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
         JoinDate: sqlDate(r.JoinDate), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
+      json: 'relationships', table: '[__mj_BizAppsCommon].[Relationship]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('rel', r.RelKey)),
+        RelationshipTypeID: sqlId(r.TypeID ?? uuidFor('reltype', r.TypeKey)),
+        FromPersonID: sqlId(r.FromMemberNumber ? uuidFor('person', r.FromMemberNumber) : null),
+        FromOrganizationID: sqlId(r.FromOrgKey ? uuidFor('org', r.FromOrgKey) : null),
+        ToPersonID: sqlId(r.ToMemberNumber ? uuidFor('person', r.ToMemberNumber) : null),
+        ToOrganizationID: sqlId(r.ToOrgKey ? uuidFor('org', r.ToOrgKey) : null),
+        Title: sqlStr(r.Title ?? null), StartDate: sqlDate(r.StartDate), EndDate: sqlDate(r.EndDate),
+        Status: sqlStr(r.Status), Notes: sqlStr(r.Notes ?? null),
       }),
     },
   ],
@@ -195,6 +217,93 @@ const MAPPING = {
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), AttendanceStatus: sqlStr(r.AttendanceStatus),
       }),
     },
+    {
+      json: 'committee_agenda_items', table: '[__mj_BizAppsCommittees].[AgendaItem]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('agenda', r.AgendaKey)), MeetingID: sqlId(uuidFor('meeting', r.MeetingKey)),
+        Sequence: sqlNum(r.Sequence), Name: sqlStr(r.Name),
+        PresenterPersonID: sqlId(uuidFor('person', r.PresenterMemberNumber)), DurationMinutes: sqlNum(r.DurationMinutes),
+        ItemType: sqlStr(r.ItemType), Status: sqlStr(r.Status),
+      }),
+    },
+    {
+      json: 'committee_motions', table: '[__mj_BizAppsCommittees].[Motion]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('motion', r.MotionKey)), MeetingID: sqlId(uuidFor('meeting', r.MeetingKey)),
+        AgendaItemID: sqlId(uuidFor('agenda', r.AgendaKey)), Sequence: sqlNum(r.Sequence), Name: sqlStr(r.Name),
+        MovedByMembershipID: sqlId(uuidFor('cmembership', r.MovedByMembershipKey)),
+        SecondedByMembershipID: sqlId(uuidFor('cmembership', r.SecondedByMembershipKey)),
+        Result: sqlStr(r.Result), ResultSummary: sqlStr(r.ResultSummary),
+        YesCount: sqlNum(r.YesCount), NoCount: sqlNum(r.NoCount), AbstainCount: sqlNum(r.AbstainCount),
+      }),
+    },
+    {
+      json: 'committee_votes', table: '[__mj_BizAppsCommittees].[Vote]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('vote', r.VoteKey)), MotionID: sqlId(uuidFor('motion', r.MotionKey)),
+        MembershipID: sqlId(uuidFor('cmembership', r.MembershipKey)), VoteValue: sqlStr(r.VoteValue),
+      }),
+    },
+  ],
+  tasks: [
+    // bizapps-tasks' REAL shapes (B202604011500). Polymorphic assignee/link references
+    // resolve by ENTITY NAME through the pack preamble's DECLAREd variables.
+    {
+      json: 'task_types', table: '[__mj_BizAppsTasks].[TaskType]',
+      columns: (r) => ({ ID: sqlId(uuidFor('tasktype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), DefaultPriority: sqlStr(r.DefaultPriority), IsActive: sqlBit(r.IsActive) }),
+    },
+    {
+      json: 'tasks', table: '[__mj_BizAppsTasks].[Task]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
+        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt), CompletedAt: sqlDate(r.CompletedAt ?? null),
+        PercentComplete: sqlNum(r.PercentComplete ?? 0),
+        CreatedByPersonID: sqlId(r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null),
+      }),
+    },
+    {
+      json: 'task_assignments', table: '[__mj_BizAppsTasks].[TaskAssignment]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('taskassign', r.AssignKey)), TaskID: sqlId(uuidFor('task', r.TaskKey)),
+        AssigneeEntityID: sqlVar('@E_People'), AssigneeRecordID: sqlId(uuidFor('person', r.AssigneeMemberNumber)),
+        Status: sqlStr(r.Status),
+      }),
+    },
+    {
+      json: 'task_links', table: '[__mj_BizAppsTasks].[TaskLink]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('tasklink', r.LinkKey)), TaskID: sqlId(uuidFor('task', r.TaskKey)),
+        EntityID: sqlVar(r.EntityName === 'Committees: Meetings' ? '@E_Meetings' : '@E_People'),
+        RecordID: sqlId(r.RefKind === 'meeting' ? uuidFor('meeting', r.RefKey) : uuidFor('person', r.RefKey)),
+      }),
+    },
+  ],
+  issues: [
+    // bizapps-issues' REAL shapes (B202606091000). Source references are polymorphic.
+    {
+      json: 'issue_types', table: '[__mj_BizAppsIssues].[IssueType]',
+      columns: (r) => ({ ID: sqlId(uuidFor('issuetype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), DefaultPriority: sqlStr(r.DefaultPriority), IsActive: sqlBit(r.IsActive) }),
+    },
+    {
+      json: 'issue_statuses', table: '[__mj_BizAppsIssues].[IssueStatus]',
+      columns: (r) => ({ ID: sqlId(uuidFor('issuestatus', r.StatusKey)), Name: sqlStr(r.Name), Sequence: sqlNum(r.Sequence), IsDefault: sqlBit(r.IsDefault), IsTerminal: sqlBit(r.IsTerminal), ColorCode: sqlStr(r.ColorCode) }),
+    },
+    {
+      json: 'issues', table: '[__mj_BizAppsIssues].[Issue]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('issue', r.IssueKey)), IssueNumber: sqlStr(r.IssueNumber), Title: sqlStr(r.Title),
+        IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlId(uuidFor('issuestatus', r.StatusKey)),
+        Severity: sqlStr(r.Severity), Priority: sqlStr(r.Priority),
+        ReporterPersonID: sqlId(uuidFor('person', r.ReporterMemberNumber)),
+        SourceEntityID: sqlVar({ 'MoreCheese: Orders': '@E_Orders', 'MJ_BizApps_Common: Organizations': '@E_Orgs', 'MoreCheese: Event Registrations': '@E_Regs', 'MJ_BizApps_Common: People': '@E_People' }[r.SourceEntityName]),
+        SourceRecordID: sqlId({ order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind]),
+        ResolvedAt: sqlDate(r.ResolvedAt), ClosedAt: sqlDate(r.ClosedAt),
+      }),
+    },
+    {
+      json: 'issue_sequences', table: '[__mj_BizAppsIssues].[IssueNumberSequence]',
+      columns: (r) => ({ ScopeCode: sqlStr(r.ScopeCode), NextSequenceNumber: sqlNum(r.NextSequenceNumber) }),
+    },
   ],
   forms: [
     // bizapps-forms' REAL shapes (B202606281200) — the D10 optional pack
@@ -264,7 +373,20 @@ const MAPPING = {
 
 // ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
 const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
-const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms']; // the pack pyramid
+const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues']; // the pack pyramid
+// polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
+const PREAMBLE = {
+  tasks: [
+    "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
+    "DECLARE @E_Meetings UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'Committees: Meetings');",
+  ],
+  issues: [
+    "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
+    "DECLARE @E_Orders UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Orders');",
+    "DECLARE @E_Orgs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Organizations');",
+    "DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');",
+  ],
+};
 mkdirSync(join(OUT, 'sql'), { recursive: true });
 const summary = [];
 let packIndex = 0;
@@ -277,6 +399,8 @@ for (const pack of INSTALL_ORDER) {
     `-- Deterministic: same seed + release regenerates this file byte-identically.`,
     `-- ⚠ ASSUMED table/column names pending schema reconciliation (A1/A2). No __mj_* columns (CodeGen owns them).`,
     '',
+    ...(PREAMBLE[pack] ?? []),
+    ...(PREAMBLE[pack] ? [''] : []),
   ];
   for (const t of tables) {
     const rows = load(pack, t.json);

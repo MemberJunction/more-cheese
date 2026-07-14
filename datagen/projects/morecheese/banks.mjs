@@ -45,6 +45,15 @@ export function orgNameDealer(seed) {
   };
 }
 
+/** Association-relevant job title from the member's own title stream — NULL for
+ * Enthusiasts (their day job isn't association data). Own stream: adding titles
+ * re-rolled nothing. */
+export function titleFor(seed, key, segment) {
+  const pool = PEOPLE_BANK.titles[segment];
+  if (!pool) return null;
+  return rng(seed, `title:${key}`).pick(pool);
+}
+
 /** Origin-consistent person name from the member's own name stream (`personname:<key>`). */
 export function personNameFor(seed, key, region) {
   const r = rng(seed, `personname:${key}`);
