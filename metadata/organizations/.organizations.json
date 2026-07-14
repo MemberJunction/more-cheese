@@ -1,0 +1,2450 @@
+[
+  {
+    "primaryKey": {
+      "ID": "C2C1B64B-5E5B-504C-8ED6-5FD291B2B771"
+    },
+    "fields": {
+      "OrgKey": "ORG-0001",
+      "Name": "Fallowfen Farm",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46602109-75C9-5ADF-B681-3E4EEE53208D"
+    },
+    "fields": {
+      "OrgKey": "ORG-0002",
+      "Name": "Alderwick Cheese Co.",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B"
+    },
+    "fields": {
+      "OrgKey": "ORG-0003",
+      "Name": "Cindervale Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4270CAE6-4BFF-52EF-B0BD-DAC840C3AFE7"
+    },
+    "fields": {
+      "OrgKey": "ORG-0004",
+      "Name": "Pellegrini & Sons Dairy Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2025,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092"
+    },
+    "fields": {
+      "OrgKey": "ORG-0005",
+      "Name": "Larkhollow Dairy Systems",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "823BEBA6-7678-5C5B-8E5E-7101F9ECC163"
+    },
+    "fields": {
+      "OrgKey": "ORG-0006",
+      "Name": "Dovetarn Fine Cheese",
+      "Type": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2018,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F2A2BAD-AE0B-5F90-A58C-1D4C864A8697"
+    },
+    "fields": {
+      "OrgKey": "ORG-0007",
+      "Name": "Novacek & Sons Dairy Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D4D9136-BBC2-59B8-AE06-10C9308D2998"
+    },
+    "fields": {
+      "OrgKey": "ORG-0008",
+      "Name": "Saltfen Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D2DC2636-C0E7-5FD2-AE31-57DE866B36BF"
+    },
+    "fields": {
+      "OrgKey": "ORG-0009",
+      "Name": "Norgaard & Daughters Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A48E94E9-02F2-5274-9431-3A94D05C0569"
+    },
+    "fields": {
+      "OrgKey": "ORG-0010",
+      "Name": "Sorrelgate Farm",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F888B34-DC97-57F0-A272-CF44E54C611C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0011",
+      "Name": "Damsonwick Farm",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94CBB866-A8CB-5D1A-9792-B6F3D41E69FA"
+    },
+    "fields": {
+      "OrgKey": "ORG-0012",
+      "Name": "Ottermere Farm",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FAFE91D1-7738-56EF-BF16-9FFD2C5483FD"
+    },
+    "fields": {
+      "OrgKey": "ORG-0013",
+      "Name": "Tarnwick Dairy",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "27ED2659-5025-51BC-9A10-0224EF214B37"
+    },
+    "fields": {
+      "OrgKey": "ORG-0014",
+      "Name": "The Brined Board",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44210B1F-CB18-56E7-B138-1D262B662C78"
+    },
+    "fields": {
+      "OrgKey": "ORG-0015",
+      "Name": "Brackenfell Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "21800A48-0979-5A38-A47F-66DB03226894"
+    },
+    "fields": {
+      "OrgKey": "ORG-0016",
+      "Name": "Ottermere Dairy",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2026,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18667307-C404-50A5-BFFF-98EFC4F1A25C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0017",
+      "Name": "Rimefield Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E888B70B-61AA-5A4F-AB02-5BBD09A66830"
+    },
+    "fields": {
+      "OrgKey": "ORG-0018",
+      "Name": "Lindenfen Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2023,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C9E497EC-AF16-53E5-BFA9-EA8E30544956"
+    },
+    "fields": {
+      "OrgKey": "ORG-0019",
+      "Name": "Briarholt Cheese School",
+      "Type": "Educator",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "73240336-3BC8-57EE-8CCE-A4D1E575A239"
+    },
+    "fields": {
+      "OrgKey": "ORG-0020",
+      "Name": "Lambswick Creamery",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2821DD33-3059-5950-8FDD-2F2AA7838E29"
+    },
+    "fields": {
+      "OrgKey": "ORG-0021",
+      "Name": "Dubois Farmstead",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2016,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E112B043-CF20-582F-A730-D939564ABB27"
+    },
+    "fields": {
+      "OrgKey": "ORG-0022",
+      "Name": "Novacek Cultures Co.",
+      "Type": "Supplier",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "276736CE-9D25-5A32-B578-944843C5FA8A"
+    },
+    "fields": {
+      "OrgKey": "ORG-0023",
+      "Name": "Wrenfield Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04FB337D-69E8-5252-87EA-121158F4FA82"
+    },
+    "fields": {
+      "OrgKey": "ORG-0024",
+      "Name": "Beauchamp & Sons Dairy Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "517C3E29-81D3-594C-9679-26DF0A3B9AA1"
+    },
+    "fields": {
+      "OrgKey": "ORG-0025",
+      "Name": "Rimefield Creamery",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "62FC8432-1D1A-5B8A-8FB9-FC06D1CDE387"
+    },
+    "fields": {
+      "OrgKey": "ORG-0026",
+      "Name": "Quincewick Center for Cheese Studies",
+      "Type": "Educator",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "375FE593-C683-5D96-B2DE-E81D2BA991F9"
+    },
+    "fields": {
+      "OrgKey": "ORG-0027",
+      "Name": "Pippinvale Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1E036B18-FCCB-54DE-8D6D-21B1CD29A5E7"
+    },
+    "fields": {
+      "OrgKey": "ORG-0028",
+      "Name": "Harrowfen Creamery",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7697680-8F2C-5E29-9AC6-48AD1F7FE9CB"
+    },
+    "fields": {
+      "OrgKey": "ORG-0029",
+      "Name": "Corbiemoor Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2020,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "551882A4-3A86-5044-BD9A-DD96ED6CB1C0"
+    },
+    "fields": {
+      "OrgKey": "ORG-0030",
+      "Name": "Iversen Farmstead Creamery",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6888A090-2881-5AEC-9534-1F8206A55801"
+    },
+    "fields": {
+      "OrgKey": "ORG-0031",
+      "Name": "Cloverholt Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "32C148F3-8C94-5348-81A4-3612B00AADEF"
+    },
+    "fields": {
+      "OrgKey": "ORG-0032",
+      "Name": "Bergstrom Cultures Co.",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B25EDC48-05C3-577E-9D7C-8F886C7BDB21"
+    },
+    "fields": {
+      "OrgKey": "ORG-0033",
+      "Name": "Elderfen Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "630176C6-D1E6-5492-87F5-CD3CAB15675C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0034",
+      "Name": "Winterfen Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC2B3B7C-A23B-5645-B2E5-2F411F4A122B"
+    },
+    "fields": {
+      "OrgKey": "ORG-0035",
+      "Name": "Norgaard's Cheese Shop",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2021,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D78CA98F-FAAC-55E4-A180-5A994C533BF7"
+    },
+    "fields": {
+      "OrgKey": "ORG-0036",
+      "Name": "Tarnwick Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2D2A1CD3-3ECF-58DD-BBAC-29B10DA32178"
+    },
+    "fields": {
+      "OrgKey": "ORG-0037",
+      "Name": "Alderwick Fine Cheese",
+      "Type": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "95A57710-1FD1-5A66-B534-A9D5902DC502"
+    },
+    "fields": {
+      "OrgKey": "ORG-0038",
+      "Name": "Dubois Farmstead Creamery",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2024,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5E5986C1-D73D-5953-B565-593993A9A450"
+    },
+    "fields": {
+      "OrgKey": "ORG-0039",
+      "Name": "Rimefield Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2017,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BA680645-3296-566C-8297-7A3550D8E8A7"
+    },
+    "fields": {
+      "OrgKey": "ORG-0040",
+      "Name": "Fallowfen Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2018,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "749501B1-39E2-592B-8275-C08A367DD12A"
+    },
+    "fields": {
+      "OrgKey": "ORG-0041",
+      "Name": "Holzhauser Cultures Co.",
+      "Type": "Supplier",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2017,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B87E9DC6-2BB1-5C48-AE9F-6F687520DA78"
+    },
+    "fields": {
+      "OrgKey": "ORG-0042",
+      "Name": "Yarrowdale Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "22A71467-70AE-57C2-AB2A-91DB645BD733"
+    },
+    "fields": {
+      "OrgKey": "ORG-0043",
+      "Name": "Rowanbrook Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65D86762-F96B-5053-82F7-A07E157FD432"
+    },
+    "fields": {
+      "OrgKey": "ORG-0044",
+      "Name": "Thistlemere Cheese School",
+      "Type": "Educator",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7B0E681A-632D-59E3-8E85-4BF93004679E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0045",
+      "Name": "Kaasboerderij Wilgenhof",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BA319EF-0C7B-5930-86E7-92147A4EDE1E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0046",
+      "Name": "Rimefield Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8"
+    },
+    "fields": {
+      "OrgKey": "ORG-0047",
+      "Name": "Cindervale Cheese Co.",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3F95137D-255D-50C9-BA85-BD087A90FC9B"
+    },
+    "fields": {
+      "OrgKey": "ORG-0048",
+      "Name": "Käserei Almwind",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2025,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D50477D7-090B-5F2E-B60D-9B010FB19535"
+    },
+    "fields": {
+      "OrgKey": "ORG-0049",
+      "Name": "Damsonwick Cheese Co.",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "11554301-1DD5-5935-AA6B-EBF93B5D8266"
+    },
+    "fields": {
+      "OrgKey": "ORG-0050",
+      "Name": "Wrenfield Creamery",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2017,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FDE1172E-F6DE-5B17-AB30-A44744330B9C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0051",
+      "Name": "Saltfen Dairy Systems",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BD3E8349-D95F-5111-B1FB-4B5B57510CDE"
+    },
+    "fields": {
+      "OrgKey": "ORG-0052",
+      "Name": "Harrowfen Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5062AFF2-FB09-598A-8A92-E0612C2E78D1"
+    },
+    "fields": {
+      "OrgKey": "ORG-0053",
+      "Name": "Garnetmoor Dairy Systems",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B"
+    },
+    "fields": {
+      "OrgKey": "ORG-0054",
+      "Name": "Heathercombe Farm",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83937F57-B361-5C9B-B36B-3F0B13A6224F"
+    },
+    "fields": {
+      "OrgKey": "ORG-0055",
+      "Name": "Dapplewick Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2022,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B139DFB4-D8E6-5788-8A8D-674BAF35E20F"
+    },
+    "fields": {
+      "OrgKey": "ORG-0056",
+      "Name": "Thistlemere Farm",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F6B1B9E-BFC4-503C-BEAB-5D4D24B6A0E3"
+    },
+    "fields": {
+      "OrgKey": "ORG-0057",
+      "Name": "Beauchamp Family Dairy",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2026,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C4673957-6085-5517-961B-55437064655E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0058",
+      "Name": "Juniperfen Dairy Institute",
+      "Type": "Educator",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E2F4A713-63B6-51A8-9FE3-34166F2662CD"
+    },
+    "fields": {
+      "OrgKey": "ORG-0059",
+      "Name": "Ashby & Sons Dairy Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "20AF58BA-D141-586D-A963-218C420206B5"
+    },
+    "fields": {
+      "OrgKey": "ORG-0060",
+      "Name": "Ostergaard's Cheese Shop",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FA569E7A-54D0-56CE-A26B-9EB3699BBE2D"
+    },
+    "fields": {
+      "OrgKey": "ORG-0061",
+      "Name": "Emberlea Cheesemonger",
+      "Type": "Retailer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42BBFB4D-E7C9-512D-B707-3B14B3A0F9EC"
+    },
+    "fields": {
+      "OrgKey": "ORG-0062",
+      "Name": "Briarholt Cheese Co.",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CCE39B5C-94D6-5E5C-BA09-2F3A2E70776E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0063",
+      "Name": "Thistlemere Dairy Systems",
+      "Type": "Supplier",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2025,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5EAC1AB7-8524-59BF-A931-E844681844FF"
+    },
+    "fields": {
+      "OrgKey": "ORG-0064",
+      "Name": "Saltfen Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F0216BE5-58B9-58CF-9906-8B29B4284A40"
+    },
+    "fields": {
+      "OrgKey": "ORG-0065",
+      "Name": "Umberfen Farm",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2026,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "55844F08-7B8A-57CC-B39E-4940CACC6910"
+    },
+    "fields": {
+      "OrgKey": "ORG-0066",
+      "Name": "Iversen & Daughters Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C282353F-1EF8-58CA-8D6C-2929EF98BE3A"
+    },
+    "fields": {
+      "OrgKey": "ORG-0067",
+      "Name": "Gorsemere Dairy",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8C7B4818-8C13-52F7-861C-30F2DE50ED59"
+    },
+    "fields": {
+      "OrgKey": "ORG-0068",
+      "Name": "Rushfen Dairy Institute",
+      "Type": "Educator",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1EB962BC-9267-529D-B833-93BAC4456239"
+    },
+    "fields": {
+      "OrgKey": "ORG-0069",
+      "Name": "Nornbrook Fine Cheese",
+      "Type": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2021,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C014B260-662C-57B2-B2D7-4DE1E438ED89"
+    },
+    "fields": {
+      "OrgKey": "ORG-0070",
+      "Name": "Fernholt Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DD2C6B76-B483-5ED6-A0CC-242EE9B71966"
+    },
+    "fields": {
+      "OrgKey": "ORG-0071",
+      "Name": "Ottermere Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3ADB0865-5B9B-5C0B-A892-23C5BD5FD318"
+    },
+    "fields": {
+      "OrgKey": "ORG-0072",
+      "Name": "Mensah & Sons Dairy Supply",
+      "Type": "Supplier",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7414A17-3967-5686-95AB-5A56729CDAA9"
+    },
+    "fields": {
+      "OrgKey": "ORG-0073",
+      "Name": "Larkhollow Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40AE721D-5F9E-5518-8551-52ADB437E5D3"
+    },
+    "fields": {
+      "OrgKey": "ORG-0074",
+      "Name": "Rimefield Dairy",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E069DAE8-201D-5683-BEF8-6466D5DB6020"
+    },
+    "fields": {
+      "OrgKey": "ORG-0075",
+      "Name": "Bramblewick Dairy",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E382293-97BB-5CEF-B340-75059DF2DE37"
+    },
+    "fields": {
+      "OrgKey": "ORG-0076",
+      "Name": "Quincewick Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2023,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ADE3C422-4A19-53D2-A84C-3E7EA0F004B0"
+    },
+    "fields": {
+      "OrgKey": "ORG-0077",
+      "Name": "Damsonwick Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "68E14202-A210-5FD9-950D-175AA7D76076"
+    },
+    "fields": {
+      "OrgKey": "ORG-0078",
+      "Name": "Maplefen Dairy",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E4A25E0F-0374-5091-94CD-D7F9CC1DFFE4"
+    },
+    "fields": {
+      "OrgKey": "ORG-0079",
+      "Name": "Plumgate Cheese Co.",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2022,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DD0EAF48-FDBE-520C-9D13-E3B117DD9B36"
+    },
+    "fields": {
+      "OrgKey": "ORG-0080",
+      "Name": "Mossgate Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2022,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09F8F019-3DAF-53E1-97FD-A0BCB5D17383"
+    },
+    "fields": {
+      "OrgKey": "ORG-0081",
+      "Name": "Foxcombe Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08427BC7-6702-5483-A55C-AB0194A2751E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0082",
+      "Name": "Lambswick Center for Cheese Studies",
+      "Type": "Educator",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2019,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DD371B00-EF93-5D98-B202-E507D6C8BA64"
+    },
+    "fields": {
+      "OrgKey": "ORG-0083",
+      "Name": "Bramblewick Center for Cheese Studies",
+      "Type": "Educator",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2016,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1684BAEF-4FF1-52AC-AF20-0179BD443762"
+    },
+    "fields": {
+      "OrgKey": "ORG-0084",
+      "Name": "Gorsemere Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "800923B6-A2B5-5482-BF08-628505CA7C7C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0085",
+      "Name": "Pinebarrow Dairy Systems",
+      "Type": "Supplier",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DC8E48A1-D0FD-5892-9410-D91AE816ECC2"
+    },
+    "fields": {
+      "OrgKey": "ORG-0086",
+      "Name": "Corbiemoor Dairy Institute",
+      "Type": "Educator",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DE942B58-3E8E-54C3-982D-3108B065EF8B"
+    },
+    "fields": {
+      "OrgKey": "ORG-0087",
+      "Name": "Bramblewick Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93EA8397-304D-5769-9154-424614EBB387"
+    },
+    "fields": {
+      "OrgKey": "ORG-0088",
+      "Name": "Slowfield Dairy",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2021,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83A5E9B1-F388-578D-900E-D4566B5A5C47"
+    },
+    "fields": {
+      "OrgKey": "ORG-0089",
+      "Name": "Winterfen Cheese Co.",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0972C949-A0F7-51F2-AAD0-1D3EE74ED596"
+    },
+    "fields": {
+      "OrgKey": "ORG-0090",
+      "Name": "Rushfen Farm",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DADEC1F2-5FBF-5C7E-9263-8FB1E3BC1E71"
+    },
+    "fields": {
+      "OrgKey": "ORG-0091",
+      "Name": "Dapplewick Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FAB192DD-5289-53BA-8328-C4F224632C7B"
+    },
+    "fields": {
+      "OrgKey": "ORG-0092",
+      "Name": "Nettlewick Cheesemonger",
+      "Type": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E068AA31-0E71-54CF-9BBF-B48B67B0D82C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0093",
+      "Name": "Marchetti Farmstead",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CDF8DDFE-23D8-53F4-AB0A-49983FA3B358"
+    },
+    "fields": {
+      "OrgKey": "ORG-0094",
+      "Name": "Speltmoor Creamery",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E22BBEA7-FCB1-50DA-9ADB-FDD1B804D78C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0095",
+      "Name": "Rowanbrook Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D2A92C23-5DBC-5575-8B88-0CE878600DCD"
+    },
+    "fields": {
+      "OrgKey": "ORG-0096",
+      "Name": "Mensah's Cheese Shop",
+      "Type": "Retailer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "564F9F45-78E3-59FD-8C33-CBE8DA7C1AE8"
+    },
+    "fields": {
+      "OrgKey": "ORG-0097",
+      "Name": "Gildermere Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6B023BE5-5345-5444-88BD-691C679C95BF"
+    },
+    "fields": {
+      "OrgKey": "ORG-0098",
+      "Name": "Umberfen Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "083327FD-FFA8-5DE6-94A1-526B904FB91F"
+    },
+    "fields": {
+      "OrgKey": "ORG-0099",
+      "Name": "Speltmoor Fine Cheese",
+      "Type": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2018,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D9B50876-2CDB-5AD5-B378-99EDE3963557"
+    },
+    "fields": {
+      "OrgKey": "ORG-0100",
+      "Name": "Birchmoor Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "LifecycleEventKind": "ProgramCut",
+      "LifecycleEventYear": 2022,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "10239B3E-9919-51C8-B1C8-2CE6249220ED"
+    },
+    "fields": {
+      "OrgKey": "ORG-0101",
+      "Name": "Pinebarrow Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5B7A7CE1-E79B-5318-A740-FCCA047DC54F"
+    },
+    "fields": {
+      "OrgKey": "ORG-0102",
+      "Name": "Quillbrook Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7190000B-1B03-5034-BF26-9055F8886D3A"
+    },
+    "fields": {
+      "OrgKey": "ORG-0103",
+      "Name": "Holzhauser's Cheese Shop",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B5C369D-382F-522C-A6BF-EAC9D6F80A4D"
+    },
+    "fields": {
+      "OrgKey": "ORG-0104",
+      "Name": "Dovetarn Creamery",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ACF57C72-3982-59EE-A216-CEA6EF72B1D5"
+    },
+    "fields": {
+      "OrgKey": "ORG-0105",
+      "Name": "Ferran Farmstead",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DC07965D-E293-5FBB-86FB-F83297F7F2FB"
+    },
+    "fields": {
+      "OrgKey": "ORG-0106",
+      "Name": "Ostergaard Farmstead Creamery",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D53B5FFF-6A15-543D-8526-BF4F29CE1D3C"
+    },
+    "fields": {
+      "OrgKey": "ORG-0107",
+      "Name": "Cloverholt Dairy Systems",
+      "Type": "Supplier",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "19E2A174-5284-598E-8323-20406BA34E14"
+    },
+    "fields": {
+      "OrgKey": "ORG-0108",
+      "Name": "Heathercombe Creamery",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "99A27117-7A51-531A-A3F9-5E24BF0E3FA8"
+    },
+    "fields": {
+      "OrgKey": "ORG-0109",
+      "Name": "Kestrelmoor Farm",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B36EA8E0-0A6F-550E-8042-9CE9E51B2164"
+    },
+    "fields": {
+      "OrgKey": "ORG-0110",
+      "Name": "Mossgate Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "15A19624-4201-5A8C-AE00-2C793EDC1251"
+    },
+    "fields": {
+      "OrgKey": "ORG-0111",
+      "Name": "Damsonwick Cheesemonger",
+      "Type": "Retailer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F5FD1757-93A8-575E-91E6-810AF6F902E1"
+    },
+    "fields": {
+      "OrgKey": "ORG-0112",
+      "Name": "Dvorak & Daughters Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2023,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D0C5291-09CB-57F0-B923-956F2C8BA1AD"
+    },
+    "fields": {
+      "OrgKey": "ORG-0113",
+      "Name": "Mistlebrook Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BAC3207A-5555-5090-9BA0-7EA99ABAD581"
+    },
+    "fields": {
+      "OrgKey": "ORG-0114",
+      "Name": "Quincewick Creamery Cooperative",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2017,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3"
+    },
+    "fields": {
+      "OrgKey": "ORG-0115",
+      "Name": "Grunewald Family Dairy",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "424094F1-0953-5984-8947-BAD7F6AB0AE4"
+    },
+    "fields": {
+      "OrgKey": "ORG-0116",
+      "Name": "Alderwick Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46BC9FB5-6F63-54CB-8854-630EDD2864FA"
+    },
+    "fields": {
+      "OrgKey": "ORG-0117",
+      "Name": "Cindervale Fine Cheese",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8D87BB31-11A7-5F00-8C4E-4331426A50F7"
+    },
+    "fields": {
+      "OrgKey": "ORG-0118",
+      "Name": "Corbiemoor Cheesemaking Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "010CEEED-B6DD-5351-8DC5-F78EED3DF7C0"
+    },
+    "fields": {
+      "OrgKey": "ORG-0119",
+      "Name": "Beauchamp Farmstead",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A612F8CB-9D42-5010-B507-88F20222B3AF"
+    },
+    "fields": {
+      "OrgKey": "ORG-0120",
+      "Name": "Elderfen Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "36F8088C-2679-50EC-BBAE-E862795F2577"
+    },
+    "fields": {
+      "OrgKey": "ORG-0121",
+      "Name": "Ferran's Cheese Shop",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "467B9E40-4559-5488-8FDB-79C2A6EE631E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0122",
+      "Name": "Nornbrook Cheesemonger",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6525D573-ACE6-5046-8C6C-7C22FAAF9D88"
+    },
+    "fields": {
+      "OrgKey": "ORG-0123",
+      "Name": "Briarholt Creamery",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2AD13D42-934B-57B1-B459-C4B554E5A28E"
+    },
+    "fields": {
+      "OrgKey": "ORG-0124",
+      "Name": "Corbiemoor Farm",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E20ADA88-2275-5577-8294-A10CBDF42FC5"
+    },
+    "fields": {
+      "OrgKey": "ORG-0125",
+      "Name": "Verhoeven Farmstead",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E6EF686F-D8D8-5E9A-807D-54C3B7D215B1"
+    },
+    "fields": {
+      "OrgKey": "ORG-H101",
+      "Name": "Crowfeather Creamery",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C40B766-B496-5C2D-836A-D81398079C2E"
+    },
+    "fields": {
+      "OrgKey": "ORG-H102",
+      "Name": "Mongers' Row",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47C52061-5A36-5789-B23D-154FDA553793"
+    },
+    "fields": {
+      "OrgKey": "ORG-H103",
+      "Name": "Mistlebrook Dairy",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "LifecycleEventKind": "Dissolved",
+      "LifecycleEventYear": 2025,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D78AEF6-E55C-5198-AAB6-048A9B767595"
+    },
+    "fields": {
+      "OrgKey": "ORG-H104",
+      "Name": "Larkhollow Creamery",
+      "Type": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "379DB5E2-AEDA-521C-9C19-F50F6F189A09"
+    },
+    "fields": {
+      "OrgKey": "ORG-H105",
+      "Name": "Ostergaard & Sons Dairy Supply",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "LifecycleEventKind": "Acquired",
+      "LifecycleEventYear": 2023,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6870ED95-5624-55C7-BBFC-63D09084B3FE"
+    },
+    "fields": {
+      "OrgKey": "ORG-H107",
+      "Name": "Fromagerie Saint-Rémille",
+      "Type": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49F8D031-623B-551A-9B52-96DBF1387AD8"
+    },
+    "fields": {
+      "OrgKey": "ORG-H111",
+      "Name": "Orchardmere Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09E61B9F-0526-50A7-A32F-EAB97C98F37D"
+    },
+    "fields": {
+      "OrgKey": "ORG-H287",
+      "Name": "Orchardmere Cheese & Provisions",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E08064B3-BF27-5B28-B6CD-04CD039ED103"
+    },
+    "fields": {
+      "OrgKey": "ORG-H114",
+      "Name": "Reedmere Dairy Systems",
+      "Type": "Supplier",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4B2A8584-BFBF-56FC-AE4B-35684703C7D2"
+    },
+    "fields": {
+      "OrgKey": "ORG-H115",
+      "Name": "The Quiet Curd",
+      "Type": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1A83398-3C09-53B9-BB2C-2873877033EF"
+    },
+    "fields": {
+      "OrgKey": "ORG-H116",
+      "Name": "Winterfen Dairy",
+      "Type": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "LifecycleEventKind": null,
+      "LifecycleEventYear": null,
+      "IsSharedDemo": true
+    }
+  }
+]

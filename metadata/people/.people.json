@@ -1,0 +1,7317 @@
+[
+  {
+    "primaryKey": {
+      "ID": "CCFA1913-AF56-545A-B63A-3916FFA4318B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000101",
+      "FirstName": "Elena",
+      "LastName": "Rodriguez",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "E6EF686F-D8D8-5E9A-807D-54C3B7D215B1",
+      "JoinDate": "2022-03-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B9C43A3-7290-522E-B8B2-0DF886F32ED1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000102",
+      "FirstName": "Marcus",
+      "LastName": "Chen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "3C40B766-B496-5C2D-836A-D81398079C2E",
+      "JoinDate": "2021-08-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9DE343E8-A72A-558A-9FC3-F7110F73B75D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000103",
+      "FirstName": "Danielle",
+      "LastName": "Okafor",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": "47C52061-5A36-5789-B23D-154FDA553793",
+      "JoinDate": "2024-03-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77DA4FA9-8A69-5051-82D2-D4B49335EC6B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000104",
+      "FirstName": "Priya",
+      "LastName": "Natarajan",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "7D78AEF6-E55C-5198-AAB6-048A9B767595",
+      "JoinDate": "2025-02-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8090D46F-6D4D-54FE-B90B-8541EEF33569"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000105",
+      "FirstName": "Bob",
+      "LastName": "Kowalski",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "379DB5E2-AEDA-521C-9C19-F50F6F189A09",
+      "JoinDate": "2013-06-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C33BD05-03EC-5EEE-9EBF-F2F5F8815E99"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000107",
+      "FirstName": "Henri",
+      "LastName": "Dubois",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "6870ED95-5624-55C7-BBFC-63D09084B3FE",
+      "JoinDate": "2019-01-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D0FED47-F850-561A-9CFB-649953199664"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000111",
+      "FirstName": "Kate",
+      "LastName": "O'Leary",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "49F8D031-623B-551A-9B52-96DBF1387AD8",
+      "JoinDate": "2015-04-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D8FE5D60-508F-52FA-8FA5-53CA1E3E101B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000287",
+      "FirstName": "Kathy",
+      "LastName": "OLeary",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "09E61B9F-0526-50A7-A32F-EAB97C98F37D",
+      "JoinDate": "2023-06-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F9DD7A28-C34E-5E68-B0A8-37A1F939E862"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000113",
+      "FirstName": "Jamie",
+      "LastName": "Fuller",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": null,
+      "JoinDate": "2023-05-30",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4AE7D208-DB44-5910-A44A-82FAE6520415"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000114",
+      "FirstName": "Victor",
+      "LastName": "Sandoval",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "E08064B3-BF27-5B28-B6CD-04CD039ED103",
+      "JoinDate": "2017-09-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E5275DC0-22AE-5D19-8624-B8835F048FE6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000115",
+      "FirstName": "Nia",
+      "LastName": "Thompson",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "4B2A8584-BFBF-56FC-AE4B-35684703C7D2",
+      "JoinDate": "2026-07-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "37BED2EF-F5CD-5266-9FCC-F366A15299AA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-000116",
+      "FirstName": "Charlie",
+      "LastName": "Mason",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "A1A83398-3C09-53B9-BB2C-2873877033EF",
+      "JoinDate": "2021-08-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CDEF0F4B-6AFD-5069-AB21-A7B4BA8461C8"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100013",
+      "FirstName": "Andres",
+      "LastName": "Ochoa",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": null,
+      "JoinDate": "2022-09-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "25B9BE1D-33B9-5AE5-BAEF-B2D0A5B4429F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100014",
+      "FirstName": "Ruth",
+      "LastName": "Farrow",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "6525D573-ACE6-5046-8C6C-7C22FAAF9D88",
+      "JoinDate": "2025-04-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E1AD3EA-5162-5A0A-8AAE-17C8520F8051"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100015",
+      "FirstName": "Nico",
+      "LastName": "Greco",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "C9E497EC-AF16-53E5-BFA9-EA8E30544956",
+      "JoinDate": "2022-06-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "62A19953-D2DD-5DC3-9423-A95B0423EDCF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100016",
+      "FirstName": "Hugo",
+      "LastName": "Zeller",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "8D87BB31-11A7-5F00-8C4E-4331426A50F7",
+      "JoinDate": "2016-07-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "71A863C5-6539-5099-B0D5-A10FE5F74F0F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100018",
+      "FirstName": "Otto",
+      "LastName": "Holzer",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "46602109-75C9-5ADF-B681-3E4EEE53208D",
+      "JoinDate": "2022-06-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100019",
+      "FirstName": "Matteo",
+      "LastName": "Pellegrini",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "3ADB0865-5B9B-5C0B-A892-23C5BD5FD318",
+      "JoinDate": "2017-02-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D4650E5F-B923-502B-BACB-79216B3ED3F7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100020",
+      "FirstName": "Miguel",
+      "LastName": "Ochoa",
+      "Segment": "Educator",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "42BBFB4D-E7C9-512D-B707-3B14B3A0F9EC",
+      "JoinDate": "2023-07-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75E2DD35-160D-5E76-ADAF-FCCEE7541A39"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100021",
+      "FirstName": "Jelani",
+      "LastName": "Achebe",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "E22BBEA7-FCB1-50DA-9ADB-FDD1B804D78C",
+      "JoinDate": "2020-07-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CF159B28-585C-5074-9E43-F825F4B62512"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100022",
+      "FirstName": "Anders",
+      "LastName": "Ostrom",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": null,
+      "JoinDate": "2024-10-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E8011CA-08EB-55BC-A091-324A240AFD08"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100023",
+      "FirstName": "Beatriz",
+      "LastName": "Marquez",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": null,
+      "JoinDate": "2023-10-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1DEF8894-B083-5BB9-92AD-0C624625744F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100024",
+      "FirstName": "Brian",
+      "LastName": "Hollis",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": null,
+      "JoinDate": "2022-03-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A82DD4FF-A7EB-5F0D-9F1A-83D425EA235C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100025",
+      "FirstName": "Sylvie",
+      "LastName": "Chevalier",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "18667307-C404-50A5-BFFF-98EFC4F1A25C",
+      "JoinDate": "2021-10-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E50537B-176D-5709-AADA-F3D0C1DEEB70"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100026",
+      "FirstName": "Lucia",
+      "LastName": "Quintero",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "4270CAE6-4BFF-52EF-B0BD-DAC840C3AFE7",
+      "JoinDate": "2022-11-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "673E1770-551C-54E6-9A95-82F93ED35FA1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100028",
+      "FirstName": "Alejandra",
+      "LastName": "Duarte",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "0972C949-A0F7-51F2-AAD0-1D3EE74ED596",
+      "JoinDate": "2026-02-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3FC34C81-1CD9-5E31-B90C-F48DDC11B4E7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100029",
+      "FirstName": "Aiko",
+      "LastName": "Kim",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "68E14202-A210-5FD9-950D-175AA7D76076",
+      "JoinDate": "2025-10-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "120F89AB-56FF-5C12-9F08-E29E99DCCF19"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100030",
+      "FirstName": "Daniel",
+      "LastName": "Ives",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "21800A48-0979-5A38-A47F-66DB03226894",
+      "JoinDate": "2026-03-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F6AA6408-C465-578E-9B77-A92E8722A59B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100031",
+      "FirstName": "Susan",
+      "LastName": "Keane",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "9F2A2BAD-AE0B-5F90-A58C-1D4C864A8697",
+      "JoinDate": "2020-12-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E81C0B49-4001-58A2-BB58-5F9D19F24067"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100032",
+      "FirstName": "Kevin",
+      "LastName": "Beckett",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "083327FD-FFA8-5DE6-94A1-526B904FB91F",
+      "JoinDate": "2025-12-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "57F2257C-F91E-52BC-A644-25A8D4C02B03"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100034",
+      "FirstName": "Brian",
+      "LastName": "Ellery",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "630176C6-D1E6-5492-87F5-CD3CAB15675C",
+      "JoinDate": "2019-06-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "183F4FA3-8730-520A-85BD-B56B5CDC5784"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100035",
+      "FirstName": "Greta",
+      "LastName": "Klein",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": null,
+      "JoinDate": "2020-09-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "550909F0-527A-539C-AF82-4603AD448838"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100036",
+      "FirstName": "Linda",
+      "LastName": "Farrow",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "D53B5FFF-6A15-543D-8526-BF4F29CE1D3C",
+      "JoinDate": "2019-11-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "11314CE9-CE9B-5102-8D1D-B418A5843AF0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100037",
+      "FirstName": "Sofia",
+      "LastName": "Prado",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "20AF58BA-D141-586D-A963-218C420206B5",
+      "JoinDate": "2023-03-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59F134C7-5626-53C6-9BEB-1B193FF0E845"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100038",
+      "FirstName": "Laura",
+      "LastName": "Bramley",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "B7414A17-3967-5686-95AB-5A56729CDAA9",
+      "JoinDate": "2026-02-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "99E0BDB0-D33E-52D6-92A3-072E2BFC6961"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100039",
+      "FirstName": "Claire",
+      "LastName": "Marchand",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "E888B70B-61AA-5A4F-AB02-5BBD09A66830",
+      "JoinDate": "2019-10-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C70D8E9D-6386-5747-9B71-5F6B43B59205"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100040",
+      "FirstName": "Marcel",
+      "LastName": "Blanchard",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "99A27117-7A51-531A-A3F9-5E24BF0E3FA8",
+      "JoinDate": "2025-08-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BF1A781C-0604-5388-89DE-C838923203D5"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100042",
+      "FirstName": "Otto",
+      "LastName": "Olsen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": null,
+      "JoinDate": "2024-07-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8010857E-9CEF-56E7-8879-A72AE72E6B3C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100043",
+      "FirstName": "Vikram",
+      "LastName": "Sharma",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "6B023BE5-5345-5444-88BD-691C679C95BF",
+      "JoinDate": "2016-12-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "28BCF3D4-32D4-549B-B1E5-DDAB47D091B9"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100044",
+      "FirstName": "Julien",
+      "LastName": "Mercier",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "D78CA98F-FAAC-55E4-A180-5A994C533BF7",
+      "JoinDate": "2025-11-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42E41651-434E-5CB7-A5E4-022A41AF3EC5"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100045",
+      "FirstName": "Anders",
+      "LastName": "Nystrom",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "5062AFF2-FB09-598A-8A92-E0612C2E78D1",
+      "JoinDate": "2025-03-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F63D638B-A734-5ADF-8C2A-96A6E8459A38"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100046",
+      "FirstName": "Fatou",
+      "LastName": "Diallo",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": null,
+      "JoinDate": "2023-06-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3927F0D5-2693-51BD-B367-E416CDDA1C4F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100047",
+      "FirstName": "Eric",
+      "LastName": "Fenwick",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "ADE3C422-4A19-53D2-A84C-3E7EA0F004B0",
+      "JoinDate": "2020-12-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F76F4724-1286-55AE-AFC1-DA5B7AB8B350"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100048",
+      "FirstName": "Tomasz",
+      "LastName": "Popescu",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "08427BC7-6702-5483-A55C-AB0194A2751E",
+      "JoinDate": "2023-09-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C4219B4F-578C-5ED5-B6B9-D40AFF3133E4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100049",
+      "FirstName": "Laura",
+      "LastName": "Kendall",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "65D86762-F96B-5053-82F7-A07E157FD432",
+      "JoinDate": "2025-08-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7A26597-C4D5-53DB-90B3-52C94AB6F948"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100050",
+      "FirstName": "Sanne",
+      "LastName": "Jansen",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "8C7B4818-8C13-52F7-861C-30F2DE50ED59",
+      "JoinDate": "2023-06-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC5CA0FD-D6AA-5DA5-A53A-BD66188C60C4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100051",
+      "FirstName": "Hector",
+      "LastName": "Delgado",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": null,
+      "JoinDate": "2017-02-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "45EDD94C-6D2C-57D9-A60D-B7F1517CF641"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100052",
+      "FirstName": "Giulia",
+      "LastName": "Ferraro",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "62FC8432-1D1A-5B8A-8FB9-FC06D1CDE387",
+      "JoinDate": "2025-10-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FEC8ED2-ED7D-59B3-A3AF-7DA39CE47D65"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100053",
+      "FirstName": "Susan",
+      "LastName": "Bramley",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "D50477D7-090B-5F2E-B60D-9B010FB19535",
+      "JoinDate": "2025-08-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "27E303E0-83C3-5412-B2CD-4EEF7408C897"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100055",
+      "FirstName": "Robert",
+      "LastName": "Keane",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "15A19624-4201-5A8C-AE00-2C793EDC1251",
+      "JoinDate": "2024-10-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B8241140-8076-5EDA-A9A8-EA3385F147E4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100056",
+      "FirstName": "Kenji",
+      "LastName": "Wang",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": null,
+      "JoinDate": "2023-11-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B7B661F-9B2D-53C4-A5DC-24BECFB49EED"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100059",
+      "FirstName": "Rosa",
+      "LastName": "Luna",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": null,
+      "JoinDate": "2025-12-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C0CE9201-41E0-5C22-A043-C79C97925692"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100063",
+      "FirstName": "Rosa",
+      "LastName": "Torres",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "3ADB0865-5B9B-5C0B-A892-23C5BD5FD318",
+      "JoinDate": "2024-07-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "272F3F74-01AD-537F-BC1C-E1D47460EBDA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100064",
+      "FirstName": "Giulia",
+      "LastName": "Ferraro",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": null,
+      "JoinDate": "2025-08-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C8257B59-5616-57B6-A992-045F0865028B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100065",
+      "FirstName": "Linda",
+      "LastName": "Winslow",
+      "Segment": "Educator",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "467B9E40-4559-5488-8FDB-79C2A6EE631E",
+      "JoinDate": "2025-12-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8CCE6636-940A-53D9-875E-545FDDC06D42"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100066",
+      "FirstName": "Susan",
+      "LastName": "Farrow",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "40AE721D-5F9E-5518-8551-52ADB437E5D3",
+      "JoinDate": "2021-12-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "465ACD23-D6E2-5F10-807C-4529390306E1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100067",
+      "FirstName": "Remi",
+      "LastName": "Chevalier",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092",
+      "JoinDate": "2020-12-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B4B3EEB6-30A6-5FC3-BA10-67CD7D5D1C79"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100068",
+      "FirstName": "Brian",
+      "LastName": "Fenwick",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2026-07-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "52E84A4B-4A03-5530-9CB6-C862A389F967"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100069",
+      "FirstName": "Mary",
+      "LastName": "Winslow",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": null,
+      "JoinDate": "2025-09-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51CF0B70-44BD-56BE-A6A4-3D6C80D8E3E9"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100070",
+      "FirstName": "Etienne",
+      "LastName": "Girard",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "8E382293-97BB-5CEF-B340-75059DF2DE37",
+      "JoinDate": "2021-10-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF763A52-A8E9-57B6-BD0D-0EFF68CAE6E1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100071",
+      "FirstName": "Mary",
+      "LastName": "Prescott",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "BAC3207A-5555-5090-9BA0-7EA99ABAD581",
+      "JoinDate": "2014-09-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D12BE4B2-8001-5665-A979-D7B1601C1BA7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100072",
+      "FirstName": "Ashley",
+      "LastName": "Fenwick",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "65D86762-F96B-5053-82F7-A07E157FD432",
+      "JoinDate": "2023-05-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B6A4FB3C-D2A8-5821-BE6E-40F84FD6D078"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100074",
+      "FirstName": "Lena",
+      "LastName": "Lund",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2024-04-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C6F76432-CED6-5499-AD2F-E5D0B01425C0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100075",
+      "FirstName": "Hector",
+      "LastName": "Herrera",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "C9E497EC-AF16-53E5-BFA9-EA8E30544956",
+      "JoinDate": "2022-01-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F79A2D02-8626-50E2-999C-FA6E17322140"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100078",
+      "FirstName": "James",
+      "LastName": "Ryder",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "JoinDate": "2017-02-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0370CEF6-1676-5F46-8CB4-C6D51FF38B17"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100081",
+      "FirstName": "Karen",
+      "LastName": "Fenwick",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "DADEC1F2-5FBF-5C7E-9263-8FB1E3BC1E71",
+      "JoinDate": "2022-06-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "685B8FD0-697A-5A91-AFAA-3F394B8CCA7D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100082",
+      "FirstName": "Maren",
+      "LastName": "Groen",
+      "Segment": "Educator",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "551882A4-3A86-5044-BD9A-DD96ED6CB1C0",
+      "JoinDate": "2025-11-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B74944F8-D23C-5620-8CAE-3A3FF2554F5E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100084",
+      "FirstName": "Linh",
+      "LastName": "Tran",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "375FE593-C683-5D96-B2DE-E81D2BA991F9",
+      "JoinDate": "2024-11-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93975800-1B25-54DC-88B2-144A70F901E7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100085",
+      "FirstName": "Sven",
+      "LastName": "Yoder",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3",
+      "JoinDate": "2024-02-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "88417707-92A5-5DC1-A8AB-44C309757CE7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100088",
+      "FirstName": "Luc",
+      "LastName": "Girard",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "551882A4-3A86-5044-BD9A-DD96ED6CB1C0",
+      "JoinDate": "2022-05-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A5264D6B-6ED7-516A-9200-3585DE999856"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100089",
+      "FirstName": "Hannah",
+      "LastName": "Prescott",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": null,
+      "JoinDate": "2019-11-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100090",
+      "FirstName": "Joao",
+      "LastName": "Vitale",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "6888A090-2881-5AEC-9534-1F8206A55801",
+      "JoinDate": "2020-11-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1E46E0A7-5F99-5040-94AB-C0AD702940B9"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100091",
+      "FirstName": "June",
+      "LastName": "Bramley",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": null,
+      "JoinDate": "2025-08-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D55B79D6-6D62-57AA-B1EF-B97D2238EAF1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100093",
+      "FirstName": "Rohan",
+      "LastName": "Pillai",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2025-09-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0347E50D-98C2-5D89-829D-DA5ADA342F4D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100094",
+      "FirstName": "Kenji",
+      "LastName": "Lin",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "3ADB0865-5B9B-5C0B-A892-23C5BD5FD318",
+      "JoinDate": "2026-03-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "06A106EB-6978-58AA-B72A-A5197131CC7E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100096",
+      "FirstName": "Astrid",
+      "LastName": "Lindqvist",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "C014B260-662C-57B2-B2D7-4DE1E438ED89",
+      "JoinDate": "2026-06-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA734AB7-4DC1-52E4-A82E-714D6717DE08"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100097",
+      "FirstName": "Serena",
+      "LastName": "Almeida",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "DC07965D-E293-5FBB-86FB-F83297F7F2FB",
+      "JoinDate": "2022-11-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "992122ED-5813-5129-A1B8-093C7BF98256"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100102",
+      "FirstName": "Freya",
+      "LastName": "Zeller",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "BA680645-3296-566C-8297-7A3550D8E8A7",
+      "JoinDate": "2021-04-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FBA249A5-8EA5-5C40-9089-7880C7FB7E55"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100103",
+      "FirstName": "Sekou",
+      "LastName": "Okoro",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": "D50477D7-090B-5F2E-B60D-9B010FB19535",
+      "JoinDate": "2025-10-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100105",
+      "FirstName": "Petra",
+      "LastName": "Lund",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "95A57710-1FD1-5A66-B534-A9D5902DC502",
+      "JoinDate": "2024-08-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B5457E20-7938-5A1C-B28D-3081FF5FAB84"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100106",
+      "FirstName": "Nils",
+      "LastName": "Lindqvist",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B",
+      "JoinDate": "2025-09-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F7654A0D-8C78-5B65-85B6-13B46A1AEDE3"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100107",
+      "FirstName": "Brian",
+      "LastName": "Ryder",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "DE942B58-3E8E-54C3-982D-3108B065EF8B",
+      "JoinDate": "2018-12-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D206F01E-EC9A-58A2-B462-1FBF8FB8B511"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100108",
+      "FirstName": "Serena",
+      "LastName": "Ferraro",
+      "Segment": "Educator",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "42BBFB4D-E7C9-512D-B707-3B14B3A0F9EC",
+      "JoinDate": "2019-05-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C903F49D-DDA3-541F-BA03-A88A86424816"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100109",
+      "FirstName": "Efua",
+      "LastName": "Sesay",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": null,
+      "JoinDate": "2025-06-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "64E0D90A-751B-5708-BBC1-BC3AB7AD38A5"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100110",
+      "FirstName": "Claire",
+      "LastName": "Lefevre",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "08427BC7-6702-5483-A55C-AB0194A2751E",
+      "JoinDate": "2024-05-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2745242A-8877-5038-928E-813916054372"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100111",
+      "FirstName": "Marisol",
+      "LastName": "Salinas",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": null,
+      "JoinDate": "2024-07-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "20F132F6-7DF8-5598-9C71-2C47D2647A25"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100112",
+      "FirstName": "Tomas",
+      "LastName": "Luna",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": null,
+      "JoinDate": "2023-11-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C01EEFE-690E-512A-AE94-4DF93501B708"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100114",
+      "FirstName": "Alessia",
+      "LastName": "Esposito",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "20AF58BA-D141-586D-A963-218C420206B5",
+      "JoinDate": "2015-05-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F9D2912E-5B73-5127-8ECC-B67F552716AF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100115",
+      "FirstName": "Megan",
+      "LastName": "Farrow",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "99A27117-7A51-531A-A3F9-5E24BF0E3FA8",
+      "JoinDate": "2025-10-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "875F2632-1B94-516C-B713-1AB213994913"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100118",
+      "FirstName": "Kevin",
+      "LastName": "Hollis",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "010CEEED-B6DD-5351-8DC5-F78EED3DF7C0",
+      "JoinDate": "2025-10-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DD07DAD6-5401-5487-BF82-2BC8D2B06085"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100119",
+      "FirstName": "Marek",
+      "LastName": "Mazur",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "95A57710-1FD1-5A66-B534-A9D5902DC502",
+      "JoinDate": "2026-03-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A051AF80-9AD5-55EE-ACD1-754D9C252FA6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100120",
+      "FirstName": "Javier",
+      "LastName": "Zamora",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "D9B50876-2CDB-5AD5-B378-99EDE3963557",
+      "JoinDate": "2026-02-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4C3BDB3F-337C-5EB6-9CE9-FF7D5D9EBFBB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100121",
+      "FirstName": "Cole",
+      "LastName": "Ryder",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "6888A090-2881-5AEC-9534-1F8206A55801",
+      "JoinDate": "2024-05-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16FDBAE7-DD65-5476-95D4-C27C5887A341"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100122",
+      "FirstName": "Olivier",
+      "LastName": "Pelletier",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "375FE593-C683-5D96-B2DE-E81D2BA991F9",
+      "JoinDate": "2021-05-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "22B7E5ED-CEB6-5DDB-AA82-59B1E05B11CC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100123",
+      "FirstName": "Grace",
+      "LastName": "Holloway",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": null,
+      "JoinDate": "2019-09-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72777CB5-AA0B-54DE-9B62-6AA262C711A1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100124",
+      "FirstName": "Pavel",
+      "LastName": "Urban",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "62FC8432-1D1A-5B8A-8FB9-FC06D1CDE387",
+      "JoinDate": "2024-03-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "949ED98C-76D8-5980-9489-CAF2424A3348"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100125",
+      "FirstName": "Ines",
+      "LastName": "Vega",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": null,
+      "JoinDate": "2022-07-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0920D7F6-2F73-5819-BE2D-ECDCF8EE65E4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100126",
+      "FirstName": "Mei",
+      "LastName": "Watanabe",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "B25EDC48-05C3-577E-9D7C-8F886C7BDB21",
+      "JoinDate": "2022-09-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BDDE2E77-F127-57A9-AFDB-BCF60DE24169"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100127",
+      "FirstName": "Sanne",
+      "LastName": "Yoder",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "FAFE91D1-7738-56EF-BF16-9FFD2C5483FD",
+      "JoinDate": "2023-07-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "334BAC84-52E0-5482-903F-2B107095679B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100128",
+      "FirstName": "Sita",
+      "LastName": "Nair",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "1D4D9136-BBC2-59B8-AE06-10C9308D2998",
+      "JoinDate": "2014-09-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "05633105-2226-54D0-A769-3B3C016767F7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100129",
+      "FirstName": "Emily",
+      "LastName": "Pace",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": null,
+      "JoinDate": "2025-10-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100133",
+      "FirstName": "Wei",
+      "LastName": "Kang",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "2AD13D42-934B-57B1-B459-C4B554E5A28E",
+      "JoinDate": "2018-08-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "883775AA-E134-5A62-872B-A178D0FFA945"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100134",
+      "FirstName": "Marisol",
+      "LastName": "Delgado",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "40AE721D-5F9E-5518-8551-52ADB437E5D3",
+      "JoinDate": "2019-08-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A77F5614-8B02-5C4A-BA94-B86DDA43C306"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100135",
+      "FirstName": "Eunji",
+      "LastName": "Kang",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "1684BAEF-4FF1-52AC-AF20-0179BD443762",
+      "JoinDate": "2023-01-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "13E6F9F5-8826-5C46-AEF4-424F5CC5C9EC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100137",
+      "FirstName": "Sven",
+      "LastName": "Yoder",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "DD2C6B76-B483-5ED6-A0CC-242EE9B71966",
+      "JoinDate": "2024-05-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CD523F93-F5C3-54BD-A9B1-6BA531B1F7F2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100138",
+      "FirstName": "Mateo",
+      "LastName": "Marquez",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092",
+      "JoinDate": "2026-03-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D094E9F-B4B8-58C5-A9F7-784FB72879A9"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100139",
+      "FirstName": "Mariana",
+      "LastName": "Almeida",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B",
+      "JoinDate": "2025-10-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "43584488-DDA4-54F3-B217-3A273ED79141"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100140",
+      "FirstName": "Daniel",
+      "LastName": "Hollis",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2025-07-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFB72FB6-8121-5048-8FF3-BCAF356AE7AE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100141",
+      "FirstName": "Astrid",
+      "LastName": "Zeller",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "4270CAE6-4BFF-52EF-B0BD-DAC840C3AFE7",
+      "JoinDate": "2023-11-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97A90B7B-FE18-5BFF-B583-9A8EF9AE917F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100142",
+      "FirstName": "Petra",
+      "LastName": "Lund",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": null,
+      "JoinDate": "2025-11-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3CEC8FC4-71D3-5BCE-A9C6-E8C21F13C689"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100143",
+      "FirstName": "Milan",
+      "LastName": "Zielinski",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": null,
+      "JoinDate": "2020-01-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "81776B1F-5D80-509D-81A4-37E56A6936A3"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100144",
+      "FirstName": "Mariana",
+      "LastName": "Moretti",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "BD3E8349-D95F-5111-B1FB-4B5B57510CDE",
+      "JoinDate": "2021-02-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3256DD1E-9F3F-5159-9A26-3AEB94A9BACD"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100145",
+      "FirstName": "Andres",
+      "LastName": "Duarte",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "564F9F45-78E3-59FD-8C33-CBE8DA7C1AE8",
+      "JoinDate": "2013-08-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CC4304CA-F0D0-5C48-A5E7-E247F13DC16B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100147",
+      "FirstName": "Catarina",
+      "LastName": "Pellegrini",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "ACF57C72-3982-59EE-A216-CEA6EF72B1D5",
+      "JoinDate": "2024-06-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "99900BBA-8A1D-525C-8AFE-D792DD31C894"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100148",
+      "FirstName": "Sven",
+      "LastName": "Holzer",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "010CEEED-B6DD-5351-8DC5-F78EED3DF7C0",
+      "JoinDate": "2021-03-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF6DEB36-DEF1-5DCD-B7EB-99FAE32C7BE4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100150",
+      "FirstName": "Minho",
+      "LastName": "Sato",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "95A57710-1FD1-5A66-B534-A9D5902DC502",
+      "JoinDate": "2024-09-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FA575D5-F0A8-5B1A-B008-12DE5B88761D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100152",
+      "FirstName": "Marek",
+      "LastName": "Baran",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": null,
+      "JoinDate": "2020-08-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2980EAB2-2260-5C34-9828-158B1EE2C44D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100153",
+      "FirstName": "Paolo",
+      "LastName": "Moretti",
+      "Segment": "Educator",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": null,
+      "JoinDate": "2014-02-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D2C7650-913A-5E96-A39D-AAD13D2A4236"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100154",
+      "FirstName": "Hugo",
+      "LastName": "Sorensen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "ADE3C422-4A19-53D2-A84C-3E7EA0F004B0",
+      "JoinDate": "2024-10-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C1B13564-4981-5EC0-8052-159BD72DF004"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100155",
+      "FirstName": "Lakshmi",
+      "LastName": "Singh",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "823BEBA6-7678-5C5B-8E5E-7101F9ECC163",
+      "JoinDate": "2025-02-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7C2D10FF-E2DF-5E83-9A96-DF128965F7C1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100156",
+      "FirstName": "Mary",
+      "LastName": "Farrow",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "630176C6-D1E6-5492-87F5-CD3CAB15675C",
+      "JoinDate": "2016-12-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED159023-0BBE-53E0-B867-CC7DDD4C1FC1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100157",
+      "FirstName": "Otto",
+      "LastName": "Lund",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "D2DC2636-C0E7-5FD2-AE31-57DE866B36BF",
+      "JoinDate": "2024-04-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1857953A-EA7A-5227-9FC2-3C75AFD1A953"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100158",
+      "FirstName": "Ling",
+      "LastName": "Lin",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": null,
+      "JoinDate": "2023-07-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "486D746C-5913-5805-9ADD-528EC4413B92"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100159",
+      "FirstName": "Sarah",
+      "LastName": "Hale",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "E112B043-CF20-582F-A730-D939564ABB27",
+      "JoinDate": "2017-10-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5825F04A-0ADD-5B52-854B-245294D3F54B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100160",
+      "FirstName": "Tyler",
+      "LastName": "Sutton",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "E112B043-CF20-582F-A730-D939564ABB27",
+      "JoinDate": "2020-10-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100161",
+      "FirstName": "Joao",
+      "LastName": "Bianchi",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": null,
+      "JoinDate": "2025-06-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D96B441C-ED6E-5EE9-8EBC-39D0ED445B2F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100162",
+      "FirstName": "Ingrid",
+      "LastName": "Meyer",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": null,
+      "JoinDate": "2025-01-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D42CDE04-C034-5584-88C8-9D340F3E7C3E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100163",
+      "FirstName": "Marco",
+      "LastName": "Pellegrini",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "F0216BE5-58B9-58CF-9906-8B29B4284A40",
+      "JoinDate": "2026-07-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100165",
+      "FirstName": "Alessia",
+      "LastName": "Neves",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "BD3E8349-D95F-5111-B1FB-4B5B57510CDE",
+      "JoinDate": "2022-09-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1165D5BB-0E92-5B7F-AD47-94FC4F84AC78"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100168",
+      "FirstName": "Robert",
+      "LastName": "Ryder",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "93EA8397-304D-5769-9154-424614EBB387",
+      "JoinDate": "2025-02-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "80D40EEF-144E-543F-96BE-6D3D70D590C8"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100169",
+      "FirstName": "Aditya",
+      "LastName": "Bhatt",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "8E382293-97BB-5CEF-B340-75059DF2DE37",
+      "JoinDate": "2025-11-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8F352C1E-F22E-59AA-B5E9-D46CC29A954B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100172",
+      "FirstName": "Sarah",
+      "LastName": "Ellery",
+      "Segment": "Educator",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "2821DD33-3059-5950-8FDD-2F2AA7838E29",
+      "JoinDate": "2025-06-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "57A04A0C-A574-5468-AAFA-D9462179CC7A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100174",
+      "FirstName": "Nadia",
+      "LastName": "Nowak",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "FDE1172E-F6DE-5B17-AB30-A44744330B9C",
+      "JoinDate": "2024-04-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F177401-80DE-50AF-8D84-46EA19DCA247"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100175",
+      "FirstName": "Elodie",
+      "LastName": "Lefevre",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "65D86762-F96B-5053-82F7-A07E157FD432",
+      "JoinDate": "2026-04-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100176",
+      "FirstName": "Kevin",
+      "LastName": "Winslow",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "55844F08-7B8A-57CC-B39E-4940CACC6910",
+      "JoinDate": "2021-10-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AC33FEF2-1F5B-5440-B304-2AAE28C34A5A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100177",
+      "FirstName": "Astrid",
+      "LastName": "Olsen",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "JoinDate": "2025-12-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "920D544C-DF08-5E58-A51B-D14F82E472CF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100178",
+      "FirstName": "Fatou",
+      "LastName": "Adjei",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": null,
+      "JoinDate": "2024-06-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BD816A95-0553-5ACA-A2BF-96F088C1C88B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100179",
+      "FirstName": "Bram",
+      "LastName": "Zeller",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "55844F08-7B8A-57CC-B39E-4940CACC6910",
+      "JoinDate": "2023-08-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "55165BE5-0852-54FD-9360-2C170EB6679A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100183",
+      "FirstName": "Elke",
+      "LastName": "Brandt",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "E069DAE8-201D-5683-BEF8-6466D5DB6020",
+      "JoinDate": "2021-05-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7E11E7F7-EE29-592F-A081-D6BC228CB612"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100185",
+      "FirstName": "Sylvie",
+      "LastName": "Lefevre",
+      "Segment": "Educator",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "010CEEED-B6DD-5351-8DC5-F78EED3DF7C0",
+      "JoinDate": "2023-07-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FADA4274-BDE0-5400-93F4-3FB514BF82B5"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100187",
+      "FirstName": "Andres",
+      "LastName": "Delgado",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": null,
+      "JoinDate": "2015-05-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "03CA13D5-613D-578A-AB62-72861E36D9CF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100188",
+      "FirstName": "Sarah",
+      "LastName": "Holloway",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "D9B50876-2CDB-5AD5-B378-99EDE3963557",
+      "JoinDate": "2023-10-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "13C26A72-0136-5915-B019-E1318823B255"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100189",
+      "FirstName": "Kiran",
+      "LastName": "Pillai",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": null,
+      "JoinDate": "2026-01-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8AAF90C9-29C8-5588-8355-72CDC414BD74"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100190",
+      "FirstName": "Joao",
+      "LastName": "Pellegrini",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "32C148F3-8C94-5348-81A4-3612B00AADEF",
+      "JoinDate": "2024-08-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2B92402D-268F-55EC-B137-6EDB838E5AAB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100191",
+      "FirstName": "Lars",
+      "LastName": "Zeller",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "2AD13D42-934B-57B1-B459-C4B554E5A28E",
+      "JoinDate": "2023-01-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "895A5CB2-37C6-5F56-B894-A29CD0823F4E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100192",
+      "FirstName": "Kevin",
+      "LastName": "Ferris",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "5B7A7CE1-E79B-5318-A740-FCCA047DC54F",
+      "JoinDate": "2019-10-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EBFA9046-A336-5BAB-8AC3-A9A6732F9FFD"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100193",
+      "FirstName": "Laura",
+      "LastName": "Holloway",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "65D86762-F96B-5053-82F7-A07E157FD432",
+      "JoinDate": "2024-05-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A97170FD-AEF7-50C9-A7AB-C0DBB3D9ADF1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100194",
+      "FirstName": "Kwame",
+      "LastName": "Okoro",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": null,
+      "JoinDate": "2023-09-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "71BBDF70-8C62-5113-9B59-5E680181CAFA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100195",
+      "FirstName": "Petra",
+      "LastName": "Ostrom",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "93EA8397-304D-5769-9154-424614EBB387",
+      "JoinDate": "2016-07-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5A5DE45A-27E4-5EE1-8C6C-89F073E440AE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100196",
+      "FirstName": "Giulia",
+      "LastName": "Neves",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": null,
+      "JoinDate": "2026-02-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6CF4116F-6958-503D-BC98-0EC8683FE905"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100197",
+      "FirstName": "Ashley",
+      "LastName": "Marsh",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": null,
+      "JoinDate": "2024-03-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CBD408B2-EFE4-53A0-BDF0-D207A4C9B01B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100198",
+      "FirstName": "Janek",
+      "LastName": "Nowak",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "C4673957-6085-5517-961B-55437064655E",
+      "JoinDate": "2021-11-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C9BDEB36-7388-591F-AA55-1F546FE9B67E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100200",
+      "FirstName": "Brian",
+      "LastName": "Farrow",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": null,
+      "JoinDate": "2024-02-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FA229B6-0061-52F4-96EA-267B8E46A28E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100201",
+      "FirstName": "Mariana",
+      "LastName": "Ricci",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": null,
+      "JoinDate": "2025-09-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "61FA0132-31F1-59E9-9B50-DBDF42780822"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100203",
+      "FirstName": "David",
+      "LastName": "Farrow",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "BC2B3B7C-A23B-5645-B2E5-2F411F4A122B",
+      "JoinDate": "2025-06-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0CDBBF02-9C57-5663-9153-0692ED7137B1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100204",
+      "FirstName": "Susan",
+      "LastName": "Ellery",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": null,
+      "JoinDate": "2020-01-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "52613A21-1874-59B6-92B8-D7A20BE1D716"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100206",
+      "FirstName": "Bram",
+      "LastName": "Steiner",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "FDE1172E-F6DE-5B17-AB30-A44744330B9C",
+      "JoinDate": "2024-07-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1E3F82E-515C-5C13-9F02-C677CE03B098"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100207",
+      "FirstName": "Bianca",
+      "LastName": "Bianchi",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "8D87BB31-11A7-5F00-8C4E-4331426A50F7",
+      "JoinDate": "2023-03-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4A4B6024-7442-5470-B7E6-6D368191BDB8"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100208",
+      "FirstName": "Klaus",
+      "LastName": "Yoder",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": null,
+      "JoinDate": "2025-09-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A015A43A-7B37-5651-B06E-6F5D5661B976"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100209",
+      "FirstName": "Mary",
+      "LastName": "Holloway",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "27ED2659-5025-51BC-9A10-0224EF214B37",
+      "JoinDate": "2016-06-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE973E85-21E2-56F1-892D-3DB16CFB1665"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100212",
+      "FirstName": "Chiara",
+      "LastName": "Romano",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "FAB192DD-5289-53BA-8328-C4F224632C7B",
+      "JoinDate": "2026-02-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "365A5932-0CF2-5257-AD65-914F4E33F161"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100213",
+      "FirstName": "Kazuo",
+      "LastName": "Okada",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "8C7B4818-8C13-52F7-861C-30F2DE50ED59",
+      "JoinDate": "2025-12-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CCA03ACE-A9E4-55A9-A31C-5BD37E9666B3"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100214",
+      "FirstName": "Stefan",
+      "LastName": "Baran",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "517C3E29-81D3-594C-9679-26DF0A3B9AA1",
+      "JoinDate": "2026-03-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "71B3DEC0-A4E4-5133-B93E-0D523C38EB2A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100215",
+      "FirstName": "Emeka",
+      "LastName": "Adeyemi",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": null,
+      "JoinDate": "2024-03-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "459759C2-7083-5C88-ADF4-14B00F4AA3CD"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100216",
+      "FirstName": "Sita",
+      "LastName": "Iyer",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "D2A92C23-5DBC-5575-8B88-0CE878600DCD",
+      "JoinDate": "2021-08-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ABF0F53A-B6FA-586F-8592-60328ADA7AA1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100218",
+      "FirstName": "Celeste",
+      "LastName": "Dubois",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "18667307-C404-50A5-BFFF-98EFC4F1A25C",
+      "JoinDate": "2023-02-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8EEE6AEA-AAA0-5DB6-B0C7-600FD03B86FF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100219",
+      "FirstName": "Pascal",
+      "LastName": "Bergeron",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "1B5C369D-382F-522C-A6BF-EAC9D6F80A4D",
+      "JoinDate": "2026-02-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B2B25E60-0C65-5677-B4EA-B4C430BB670E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100220",
+      "FirstName": "Rosa",
+      "LastName": "Prado",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2024-08-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A96CE815-B121-5BD2-823B-ACA6C5600EEA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100222",
+      "FirstName": "Rosa",
+      "LastName": "Zamora",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "D9B50876-2CDB-5AD5-B378-99EDE3963557",
+      "JoinDate": "2025-09-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "394F83DA-FF50-5067-B462-23371C4A884C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100223",
+      "FirstName": "Mary",
+      "LastName": "Prescott",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "FAB192DD-5289-53BA-8328-C4F224632C7B",
+      "JoinDate": "2025-08-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "259F2B40-8D75-548E-BB09-2F0ECF5DBA97"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100224",
+      "FirstName": "Brian",
+      "LastName": "Ashworth",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "375FE593-C683-5D96-B2DE-E81D2BA991F9",
+      "JoinDate": "2024-09-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100225",
+      "FirstName": "Freya",
+      "LastName": "Falk",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "95A57710-1FD1-5A66-B534-A9D5902DC502",
+      "JoinDate": "2013-12-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "58ACB9D0-5A6B-523C-864D-631A07914DF6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100226",
+      "FirstName": "Margaux",
+      "LastName": "Dubois",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "7190000B-1B03-5034-BF26-9055F8886D3A",
+      "JoinDate": "2025-09-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5544CB6B-86DC-58AE-B998-01B75615B1B0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100227",
+      "FirstName": "Petra",
+      "LastName": "Ostrom",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": null,
+      "JoinDate": "2021-07-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02F9C2F3-D824-515F-8786-874B30D87DF6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100228",
+      "FirstName": "Noemie",
+      "LastName": "Moreau",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "7F888B34-DC97-57F0-A272-CF44E54C611C",
+      "JoinDate": "2025-10-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE620CE1-D552-5F3E-B564-E53FB52CDC1A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100229",
+      "FirstName": "Daniel",
+      "LastName": "Farrow",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": null,
+      "JoinDate": "2016-07-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "99BF88EC-2A39-55AA-AE90-B8BBB839F25C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100230",
+      "FirstName": "Stefan",
+      "LastName": "Cerny",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "823BEBA6-7678-5C5B-8E5E-7101F9ECC163",
+      "JoinDate": "2024-06-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51EC2E5B-8C9F-569B-BB3C-7BA6C2969201"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100231",
+      "FirstName": "Jelani",
+      "LastName": "Owusu",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "10239B3E-9919-51C8-B1C8-2CE6249220ED",
+      "JoinDate": "2018-09-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DAFCCD29-FD42-5F34-B20C-B8F4E2D9B5BA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100232",
+      "FirstName": "Klaus",
+      "LastName": "Klein",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "ACF57C72-3982-59EE-A216-CEA6EF72B1D5",
+      "JoinDate": "2020-02-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A09D444A-AB20-51C0-9849-3AE2BB365E4A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100233",
+      "FirstName": "Nils",
+      "LastName": "Sorensen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "BA680645-3296-566C-8297-7A3550D8E8A7",
+      "JoinDate": "2024-01-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "35C3254E-30D9-5DD8-A8D5-88B654F21AB2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100234",
+      "FirstName": "Hana",
+      "LastName": "Kim",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "083327FD-FFA8-5DE6-94A1-526B904FB91F",
+      "JoinDate": "2013-09-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "23767AE2-C6F7-51F2-9A47-97B36451AF49"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100235",
+      "FirstName": "Mateo",
+      "LastName": "Fuentes",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "ADE3C422-4A19-53D2-A84C-3E7EA0F004B0",
+      "JoinDate": "2026-03-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "17CB3515-EB08-5663-8564-423A73D71F3C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100236",
+      "FirstName": "Freya",
+      "LastName": "Sorensen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "FAFE91D1-7738-56EF-BF16-9FFD2C5483FD",
+      "JoinDate": "2026-05-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FFA17F6-3FC4-58E0-9E75-8EE811566AAE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100237",
+      "FirstName": "Piotr",
+      "LastName": "Urban",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "1E036B18-FCCB-54DE-8D6D-21B1CD29A5E7",
+      "JoinDate": "2025-09-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A2FC6CD5-4910-50F7-8679-6A03873FBF09"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100238",
+      "FirstName": "Tyler",
+      "LastName": "Bramley",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "DD2C6B76-B483-5ED6-A0CC-242EE9B71966",
+      "JoinDate": "2025-05-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4697C566-7414-59F6-9841-1A0D0776514A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100239",
+      "FirstName": "Hannah",
+      "LastName": "Quill",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "68E14202-A210-5FD9-950D-175AA7D76076",
+      "JoinDate": "2025-05-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C7964B4-6A26-5D45-B05A-D8C99EA826B5"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100240",
+      "FirstName": "Diego",
+      "LastName": "Duarte",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "42BBFB4D-E7C9-512D-B707-3B14B3A0F9EC",
+      "JoinDate": "2021-04-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44FB5D56-139D-527F-9FB5-CCBAD9003229"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100241",
+      "FirstName": "Robert",
+      "LastName": "Keane",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "6525D573-ACE6-5046-8C6C-7C22FAAF9D88",
+      "JoinDate": "2022-11-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A92AD551-B723-5D3F-B147-5A1FB6D15B36"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100243",
+      "FirstName": "James",
+      "LastName": "Paxton",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "15A19624-4201-5A8C-AE00-2C793EDC1251",
+      "JoinDate": "2025-11-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6C8DC058-870A-5126-A67E-8FE8664C5A27"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100244",
+      "FirstName": "Beatriz",
+      "LastName": "Herrera",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "7F888B34-DC97-57F0-A272-CF44E54C611C",
+      "JoinDate": "2025-09-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "22B281CF-A98C-5773-9520-0AFD8E35C9F0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100245",
+      "FirstName": "Megan",
+      "LastName": "Holloway",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "DD371B00-EF93-5D98-B202-E507D6C8BA64",
+      "JoinDate": "2022-08-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0F9EFE0D-1944-5836-87DF-39300669D028"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100246",
+      "FirstName": "Greta",
+      "LastName": "Holzer",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "5BA319EF-0C7B-5930-86E7-92147A4EDE1E",
+      "JoinDate": "2021-08-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "527618A8-02F2-5B15-A8ED-BFA609BC99C0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100247",
+      "FirstName": "Grace",
+      "LastName": "Keane",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3",
+      "JoinDate": "2020-01-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "71BB1653-DE96-5580-A1F8-9224EA3B99EC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100248",
+      "FirstName": "Kenji",
+      "LastName": "Watanabe",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "CCE39B5C-94D6-5E5C-BA09-2F3A2E70776E",
+      "JoinDate": "2023-05-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E922AF99-32F6-522A-9D87-8674ECF303FC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100249",
+      "FirstName": "Lars",
+      "LastName": "Holzer",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": null,
+      "JoinDate": "2024-05-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A7954973-BC74-5318-B4A1-4DFE0176F444"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100250",
+      "FirstName": "Emil",
+      "LastName": "Zeller",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "467B9E40-4559-5488-8FDB-79C2A6EE631E",
+      "JoinDate": "2023-04-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2CADB6EF-BC46-52CA-B2A4-C3F7D647367F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100251",
+      "FirstName": "Etienne",
+      "LastName": "Girard",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "DD0EAF48-FDBE-520C-9D13-E3B117DD9B36",
+      "JoinDate": "2025-10-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E857E6EF-B70B-5891-A814-2E746D105664"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100253",
+      "FirstName": "Robert",
+      "LastName": "Grantham",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "2AD13D42-934B-57B1-B459-C4B554E5A28E",
+      "JoinDate": "2022-08-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D03F16A-A6CD-59BC-BBEA-F010AF5FB22F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100254",
+      "FirstName": "Owen",
+      "LastName": "Whitaker",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": null,
+      "JoinDate": "2023-04-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E27F593A-547B-5A05-B4E5-069128D4234F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100255",
+      "FirstName": "Ruth",
+      "LastName": "Whitaker",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "62FC8432-1D1A-5B8A-8FB9-FC06D1CDE387",
+      "JoinDate": "2026-04-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08D97465-E898-565E-B464-C1E8E8AE8C64"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100256",
+      "FirstName": "Antoine",
+      "LastName": "Lacroix",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": null,
+      "JoinDate": "2023-07-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3353BCE6-8FCB-5F79-9ABD-170F13A21550"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100257",
+      "FirstName": "Laura",
+      "LastName": "Hollis",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092",
+      "JoinDate": "2024-01-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E4B1BCFD-7579-5655-9F00-34AEA93F0A5E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100260",
+      "FirstName": "Michael",
+      "LastName": "Farrow",
+      "Segment": "Educator",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "1684BAEF-4FF1-52AC-AF20-0179BD443762",
+      "JoinDate": "2025-09-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1226F62-FA41-5284-B20D-C629B426C0CC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100261",
+      "FirstName": "Mary",
+      "LastName": "Farrow",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "ACF57C72-3982-59EE-A216-CEA6EF72B1D5",
+      "JoinDate": "2025-01-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97574A48-2112-59DA-A708-0E545CF0AB37"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100263",
+      "FirstName": "Rafael",
+      "LastName": "Ibarra",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "D53B5FFF-6A15-543D-8526-BF4F29CE1D3C",
+      "JoinDate": "2026-02-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D66455B-1CD2-50F7-9A96-97B011E2DA5A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100264",
+      "FirstName": "Tunde",
+      "LastName": "Adeyemi",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "7190000B-1B03-5034-BF26-9055F8886D3A",
+      "JoinDate": "2024-04-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5533E7E9-25F5-58CF-A8B7-07B7C6FA8DC0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100265",
+      "FirstName": "Pavel",
+      "LastName": "Dvorak",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": null,
+      "JoinDate": "2023-02-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "38789E4D-0BD7-52CD-9277-7789CFEEC23C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100266",
+      "FirstName": "Catarina",
+      "LastName": "Barros",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2022-06-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F8F20245-280B-5BB3-8B54-B6E26A3BC69F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100267",
+      "FirstName": "Sylvie",
+      "LastName": "Cloutier",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "FAFE91D1-7738-56EF-BF16-9FFD2C5483FD",
+      "JoinDate": "2024-11-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8201D4D9-6542-5719-92AE-A6169A73D7DE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100268",
+      "FirstName": "Kojo",
+      "LastName": "Adeyemi",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": "8D87BB31-11A7-5F00-8C4E-4331426A50F7",
+      "JoinDate": "2023-01-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F549570-D0A3-5C20-8925-50C68F78C1F1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100269",
+      "FirstName": "Claire",
+      "LastName": "Mercier",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": null,
+      "JoinDate": "2018-01-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1CCD7102-E719-5D41-AA4C-EBFFD5E3DDF7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100270",
+      "FirstName": "Maren",
+      "LastName": "Dahl",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "F5FD1757-93A8-575E-91E6-810AF6F902E1",
+      "JoinDate": "2025-11-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6CF36A03-202E-5932-A8FA-301F0A0200EF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100271",
+      "FirstName": "Freya",
+      "LastName": "Bauer",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "27ED2659-5025-51BC-9A10-0224EF214B37",
+      "JoinDate": "2025-11-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "517F4D7F-98BA-51DA-8081-2E43DC6A7B29"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100272",
+      "FirstName": "Owen",
+      "LastName": "Hale",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "630176C6-D1E6-5492-87F5-CD3CAB15675C",
+      "JoinDate": "2022-09-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1F00878A-94AE-54C5-971A-38CF4BDB2DEB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100273",
+      "FirstName": "Ines",
+      "LastName": "Galvan",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "99A27117-7A51-531A-A3F9-5E24BF0E3FA8",
+      "JoinDate": "2023-01-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4287D0CD-B4B5-52AC-BF9B-7C4148E22B5D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100275",
+      "FirstName": "Owen",
+      "LastName": "Sutton",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": null,
+      "JoinDate": "2021-10-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CB0D79A5-C8D4-5B0F-AC76-1CC6C572DB37"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100277",
+      "FirstName": "Paloma",
+      "LastName": "Orozco",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "36F8088C-2679-50EC-BBAE-E862795F2577",
+      "JoinDate": "2024-04-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C1C335BC-0A58-564A-AD34-C41A992BDB58"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100279",
+      "FirstName": "Robert",
+      "LastName": "Marsh",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "46BC9FB5-6F63-54CB-8854-630EDD2864FA",
+      "JoinDate": "2014-04-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1A5A640C-AD4D-5427-85C3-04F329FB75D1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100280",
+      "FirstName": "Otto",
+      "LastName": "Brandt",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "BC2B3B7C-A23B-5645-B2E5-2F411F4A122B",
+      "JoinDate": "2020-06-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44BA4C63-2483-59D1-9932-BE7925F1AE81"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100281",
+      "FirstName": "June",
+      "LastName": "Bramley",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "55844F08-7B8A-57CC-B39E-4940CACC6910",
+      "JoinDate": "2021-06-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93BC564D-4C25-5720-A772-83AB6D420586"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100282",
+      "FirstName": "Otto",
+      "LastName": "Groen",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "1EB962BC-9267-529D-B833-93BAC4456239",
+      "JoinDate": "2026-07-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7C9D5CC1-B8D4-5151-B2ED-F9A74A136F0B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100283",
+      "FirstName": "Mary",
+      "LastName": "Keane",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "83937F57-B361-5C9B-B36B-3F0B13A6224F",
+      "JoinDate": "2025-02-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "05EFB8B6-09E7-5A01-B538-046DEEE09F53"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100284",
+      "FirstName": "Carmen",
+      "LastName": "Marquez",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "276736CE-9D25-5A32-B578-944843C5FA8A",
+      "JoinDate": "2025-03-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "074CC51A-4973-5668-8495-C2C0F5FACE39"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100287",
+      "FirstName": "Bianca",
+      "LastName": "Santoro",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": null,
+      "JoinDate": "2026-04-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A4FB5DED-12D5-5616-95C1-5C5F57622B80"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100288",
+      "FirstName": "Seojun",
+      "LastName": "Chen",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "749501B1-39E2-592B-8275-C08A367DD12A",
+      "JoinDate": "2024-08-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "23F014CA-836A-5A2D-99BF-3A1A01AE79CE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100289",
+      "FirstName": "Eric",
+      "LastName": "Beckett",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "E888B70B-61AA-5A4F-AB02-5BBD09A66830",
+      "JoinDate": "2025-10-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BED1B9E-D380-5B08-827F-9D3F7B0FCDBA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100290",
+      "FirstName": "Susan",
+      "LastName": "Farrow",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "800923B6-A2B5-5482-BF08-628505CA7C7C",
+      "JoinDate": "2015-12-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "054A24EF-A743-5E6B-8492-DD2EB63DF043"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100291",
+      "FirstName": "Emilio",
+      "LastName": "Rosales",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "630176C6-D1E6-5492-87F5-CD3CAB15675C",
+      "JoinDate": "2019-11-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92E30246-47F2-5BE7-81C6-F8CB10B44A48"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100293",
+      "FirstName": "Ines",
+      "LastName": "Mendez",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "5BA319EF-0C7B-5930-86E7-92147A4EDE1E",
+      "JoinDate": "2015-06-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BE25139D-3C81-57BE-AD99-7E51BBAECDBB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100295",
+      "FirstName": "Sven",
+      "LastName": "Krueger",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "E888B70B-61AA-5A4F-AB02-5BBD09A66830",
+      "JoinDate": "2026-05-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BAF4D058-F47C-5E28-8E1D-200078DF0AD2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100297",
+      "FirstName": "Ruth",
+      "LastName": "Ferris",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2024-06-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D6B32B7A-F1F1-5FEC-94C6-6ACCA70047DF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100298",
+      "FirstName": "David",
+      "LastName": "Prescott",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "3F95137D-255D-50C9-BA85-BD087A90FC9B",
+      "JoinDate": "2018-05-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "285FF258-A3F8-544C-AA39-902B25F2A1AD"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100299",
+      "FirstName": "Sven",
+      "LastName": "Dietrich",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": null,
+      "JoinDate": "2023-10-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "279CBB7F-CE5B-54DD-9254-6217A453A5C3"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100300",
+      "FirstName": "Karen",
+      "LastName": "Bramley",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "D50477D7-090B-5F2E-B60D-9B010FB19535",
+      "JoinDate": "2026-05-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02CF19F9-D56D-58B0-9CAB-D746BB182AAB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100303",
+      "FirstName": "Emily",
+      "LastName": "Sutton",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "823BEBA6-7678-5C5B-8E5E-7101F9ECC163",
+      "JoinDate": "2023-11-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF495B3F-1634-568B-9611-900C90CC1B2A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100304",
+      "FirstName": "Grace",
+      "LastName": "Keane",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "JoinDate": "2026-04-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ECD287B0-2D4E-53C0-8440-0DCDC3C71084"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100306",
+      "FirstName": "Priit",
+      "LastName": "Petrov",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "65D86762-F96B-5053-82F7-A07E157FD432",
+      "JoinDate": "2018-09-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51247A2F-B62F-55E7-BCB6-E1B33D783205"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100307",
+      "FirstName": "Klaus",
+      "LastName": "Ostrom",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "1B5C369D-382F-522C-A6BF-EAC9D6F80A4D",
+      "JoinDate": "2020-04-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0085D456-ED84-548F-A3B0-E06566F60778"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100308",
+      "FirstName": "Paloma",
+      "LastName": "Orozco",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "7D0C5291-09CB-57F0-B923-956F2C8BA1AD",
+      "JoinDate": "2024-02-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "994C7FDB-DC42-51EB-BC44-FA4D43AA5084"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100310",
+      "FirstName": "Anh",
+      "LastName": "Watanabe",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "C282353F-1EF8-58CA-8D6C-2929EF98BE3A",
+      "JoinDate": "2023-08-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "10EAD074-8D81-537A-BFF9-894E4FF0ED41"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100311",
+      "FirstName": "Petra",
+      "LastName": "Iversen",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "83A5E9B1-F388-578D-900E-D4566B5A5C47",
+      "JoinDate": "2025-10-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "34092391-6BC0-5AB9-A5D6-CDD16B7E2CC2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100313",
+      "FirstName": "Kavya",
+      "LastName": "Kulkarni",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "CDF8DDFE-23D8-53F4-AB0A-49983FA3B358",
+      "JoinDate": "2017-08-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "116DC1B5-0692-5B11-931E-AAA1EC984976"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100316",
+      "FirstName": "Arjun",
+      "LastName": "Patel",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "749501B1-39E2-592B-8275-C08A367DD12A",
+      "JoinDate": "2025-03-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E535DD86-20AD-5841-A5D8-DCA26A3C1038"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100318",
+      "FirstName": "Javier",
+      "LastName": "Herrera",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "99A27117-7A51-531A-A3F9-5E24BF0E3FA8",
+      "JoinDate": "2024-04-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16FF061B-A339-591E-8545-7D751703CFEA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100320",
+      "FirstName": "Linh",
+      "LastName": "Ueda",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "19E2A174-5284-598E-8323-20406BA34E14",
+      "JoinDate": "2014-06-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7FF01B4-EED6-5060-BB53-7F1B551F5F3A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100321",
+      "FirstName": "Manon",
+      "LastName": "Marchand",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": "D53B5FFF-6A15-543D-8526-BF4F29CE1D3C",
+      "JoinDate": "2026-03-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6C57E4E4-CA9B-5CAA-9EFA-06AAE8947B28"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100323",
+      "FirstName": "Irina",
+      "LastName": "Baran",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "B139DFB4-D8E6-5788-8A8D-674BAF35E20F",
+      "JoinDate": "2021-12-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "618A80C3-1B45-5B6D-9F20-812DDCF17AE1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100324",
+      "FirstName": "Dana",
+      "LastName": "Horvat",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "467B9E40-4559-5488-8FDB-79C2A6EE631E",
+      "JoinDate": "2026-05-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A17EACD8-190E-58D4-839B-BB05EC5BFC5C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100325",
+      "FirstName": "Claire",
+      "LastName": "Lacroix",
+      "Segment": "Educator",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "JoinDate": "2025-10-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E293FA33-01FD-5A41-A50F-F6D2BE166D6B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100326",
+      "FirstName": "Mathieu",
+      "LastName": "Mercier",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "FDE1172E-F6DE-5B17-AB30-A44744330B9C",
+      "JoinDate": "2026-07-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FAEBADE-0BE3-5567-A9BF-BE4D063E9922"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100327",
+      "FirstName": "Jelani",
+      "LastName": "Toure",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "19E2A174-5284-598E-8323-20406BA34E14",
+      "JoinDate": "2025-12-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5DC5A4FD-B1A8-5A33-8163-BA0888E4E84D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100328",
+      "FirstName": "Paolo",
+      "LastName": "Serra",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "JoinDate": "2022-12-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A99E61DF-89C0-5288-ACB4-E3B969CA9538"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100329",
+      "FirstName": "Priya",
+      "LastName": "Joshi",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "15A19624-4201-5A8C-AE00-2C793EDC1251",
+      "JoinDate": "2024-05-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6E192273-2421-5A7F-91DE-27090A3487BF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100331",
+      "FirstName": "Tyler",
+      "LastName": "Ashworth",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "D50477D7-090B-5F2E-B60D-9B010FB19535",
+      "JoinDate": "2025-02-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A7EADE71-A7C3-505A-9395-09A2BCA17AAD"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100332",
+      "FirstName": "Elke",
+      "LastName": "Iversen",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "E22BBEA7-FCB1-50DA-9ADB-FDD1B804D78C",
+      "JoinDate": "2024-02-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "90697A97-AE46-5B81-9FE4-1478F7DB1556"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100333",
+      "FirstName": "Owen",
+      "LastName": "Ellery",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "7D0C5291-09CB-57F0-B923-956F2C8BA1AD",
+      "JoinDate": "2026-06-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97DDE0E1-297D-519C-90E3-DD3F32947C87"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100334",
+      "FirstName": "Joao",
+      "LastName": "Marchetti",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "1E036B18-FCCB-54DE-8D6D-21B1CD29A5E7",
+      "JoinDate": "2025-10-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "00352627-BED6-5014-8DC9-B730DEE3F992"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100336",
+      "FirstName": "Matteo",
+      "LastName": "Neves",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "E4A25E0F-0374-5091-94CD-D7F9CC1DFFE4",
+      "JoinDate": "2025-08-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5A6227A3-D2E5-53C1-86E8-BECE3E0EA779"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100337",
+      "FirstName": "Adaeze",
+      "LastName": "Adeyemi",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "E112B043-CF20-582F-A730-D939564ABB27",
+      "JoinDate": "2025-09-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39E80EFB-5FDA-5F80-9879-DE8CCBDF2095"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100338",
+      "FirstName": "Kevin",
+      "LastName": "Fenwick",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "15A19624-4201-5A8C-AE00-2C793EDC1251",
+      "JoinDate": "2022-07-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40DBA8DD-08BD-5DE4-9E2B-F32C9D73F9B0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100339",
+      "FirstName": "Sofia",
+      "LastName": "Ochoa",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "DD371B00-EF93-5D98-B202-E507D6C8BA64",
+      "JoinDate": "2024-11-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C21622B6-9ED2-5DBF-9164-52FB1F736E94"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100340",
+      "FirstName": "Divya",
+      "LastName": "Desai",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "3ADB0865-5B9B-5C0B-A892-23C5BD5FD318",
+      "JoinDate": "2022-01-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "28E5BF06-39CE-5676-A37F-DC9FA80D9E79"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100341",
+      "FirstName": "Magda",
+      "LastName": "Cerny",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "E20ADA88-2275-5577-8294-A10CBDF42FC5",
+      "JoinDate": "2025-05-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FA12DC1-05A0-58B8-AE78-418DABED14BB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100342",
+      "FirstName": "Marco",
+      "LastName": "Santoro",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "JoinDate": "2019-12-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "87A37AE8-711D-5D63-9C79-8D7A1FB54F9C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100343",
+      "FirstName": "Nils",
+      "LastName": "Dietrich",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B",
+      "JoinDate": "2015-08-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BA100495-9F5B-5838-B056-04A709AC273F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100344",
+      "FirstName": "Jiwoo",
+      "LastName": "Chen",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": null,
+      "JoinDate": "2024-03-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B6D3A0B7-B3C3-521B-9407-BD5224072AB7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100345",
+      "FirstName": "Mary",
+      "LastName": "Ives",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "551882A4-3A86-5044-BD9A-DD96ED6CB1C0",
+      "JoinDate": "2021-05-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "496717A7-1068-5F63-B3AD-A9D4D1256B5D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100347",
+      "FirstName": "Mariana",
+      "LastName": "Greco",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "D53B5FFF-6A15-543D-8526-BF4F29CE1D3C",
+      "JoinDate": "2015-09-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C945BD4-E32A-557C-A9BA-15C34F5A1EE0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100348",
+      "FirstName": "Linda",
+      "LastName": "Fenwick",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "F5FD1757-93A8-575E-91E6-810AF6F902E1",
+      "JoinDate": "2023-10-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C4597C9-1399-5A63-A89C-7F9D4F5467A4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100350",
+      "FirstName": "Marek",
+      "LastName": "Krol",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "BA680645-3296-566C-8297-7A3550D8E8A7",
+      "JoinDate": "2025-12-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C3CF006E-E321-51C1-99A6-D9F4DB6B062D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100351",
+      "FirstName": "Giulia",
+      "LastName": "Vidal",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "2AD13D42-934B-57B1-B459-C4B554E5A28E",
+      "JoinDate": "2015-02-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83E8DC31-465F-5457-AB1C-485AF573EA4C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100352",
+      "FirstName": "Catarina",
+      "LastName": "Pires",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": null,
+      "JoinDate": "2018-11-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A4660B65-7A4A-5C39-9F61-38D0ABEC2407"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100353",
+      "FirstName": "Etienne",
+      "LastName": "Moreau",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "2821DD33-3059-5950-8FDD-2F2AA7838E29",
+      "JoinDate": "2026-05-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "982D2746-77C3-5611-A894-FD7C1BB3CDA6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100354",
+      "FirstName": "Elodie",
+      "LastName": "Bergeron",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": null,
+      "JoinDate": "2025-11-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72854C12-755B-549D-B1A7-86CC8826C2F7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100355",
+      "FirstName": "Hannah",
+      "LastName": "Ashworth",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": null,
+      "JoinDate": "2024-01-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "272EFC25-D451-50CC-8650-D465E2C16307"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100356",
+      "FirstName": "Astrid",
+      "LastName": "Meyer",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": null,
+      "JoinDate": "2022-11-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AB211A33-5CB5-5690-8C01-5D4A249185B4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100357",
+      "FirstName": "Linh",
+      "LastName": "Choi",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2024-01-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08E9592C-5E02-5913-BECF-ABE855B0EB39"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100358",
+      "FirstName": "Rohan",
+      "LastName": "Mehta",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": null,
+      "JoinDate": "2021-03-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "85EEEBB8-DB9A-5CAD-B114-248B21BCB1CA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100359",
+      "FirstName": "Mateo",
+      "LastName": "Rosales",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": "5B7A7CE1-E79B-5318-A740-FCCA047DC54F",
+      "JoinDate": "2025-12-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3345474A-B468-5EF8-9007-D0412C7AF5B4"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100360",
+      "FirstName": "Emilio",
+      "LastName": "Luna",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": null,
+      "JoinDate": "2023-06-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A8FBE4B2-54EB-531F-8804-FDEF8F53651B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100361",
+      "FirstName": "Eric",
+      "LastName": "Paxton",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "E4A25E0F-0374-5091-94CD-D7F9CC1DFFE4",
+      "JoinDate": "2025-09-13",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39ABC508-BDC5-52B0-8FC6-D9212A9112C1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100362",
+      "FirstName": "Lena",
+      "LastName": "Meyer",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": null,
+      "JoinDate": "2025-09-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "76B456F7-64E5-5A57-878B-2A36C6DF4EB2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100363",
+      "FirstName": "Emilio",
+      "LastName": "Luna",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "2D2A1CD3-3ECF-58DD-BBAC-29B10DA32178",
+      "JoinDate": "2019-09-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FF56533-CA50-5A2F-9DD0-C6085EE96835"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100364",
+      "FirstName": "Jelani",
+      "LastName": "Oduya",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B",
+      "JoinDate": "2024-08-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "168116A8-E788-5F6F-886E-D0E551E01D26"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100365",
+      "FirstName": "Elke",
+      "LastName": "Zeller",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "40AE721D-5F9E-5518-8551-52ADB437E5D3",
+      "JoinDate": "2023-08-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC9EE950-4BE8-5D7D-B3AA-070F0A16E816"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100366",
+      "FirstName": "James",
+      "LastName": "Hollis",
+      "Segment": "Educator",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "10239B3E-9919-51C8-B1C8-2CE6249220ED",
+      "JoinDate": "2018-04-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0F78A7D8-9DC1-548A-93D8-805245C927E7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100367",
+      "FirstName": "Brian",
+      "LastName": "Grantham",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "749501B1-39E2-592B-8275-C08A367DD12A",
+      "JoinDate": "2025-10-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC6EC98F-24DD-5A2C-A955-F5D371D49FAB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100368",
+      "FirstName": "Miguel",
+      "LastName": "Rosales",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B",
+      "JoinDate": "2021-02-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A3DAAA9F-B147-5D27-863B-EAAA224BF4AB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100369",
+      "FirstName": "Vikram",
+      "LastName": "Gupta",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "7D0C5291-09CB-57F0-B923-956F2C8BA1AD",
+      "JoinDate": "2025-02-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5983F608-7AD7-5728-8BDF-23B4CD4DE816"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100370",
+      "FirstName": "Camila",
+      "LastName": "Pellegrini",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": "1457AF6D-697E-5AAB-BCC6-3E0BD0EF2D8B",
+      "JoinDate": "2025-08-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "20FF74A7-9536-5EE3-A7B4-C2A4253DD2C0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100371",
+      "FirstName": "Brian",
+      "LastName": "Fenwick",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "DC07965D-E293-5FBB-86FB-F83297F7F2FB",
+      "JoinDate": "2017-06-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BFE5F36-EDC9-577F-90B0-3423DDBE89E2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100373",
+      "FirstName": "Ines",
+      "LastName": "Rosales",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "73240336-3BC8-57EE-8CCE-A4D1E575A239",
+      "JoinDate": "2025-07-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F2B19FA-2D7D-59A9-9C16-076ABB85D092"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100374",
+      "FirstName": "James",
+      "LastName": "Beckett",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": null,
+      "JoinDate": "2023-01-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "679E5DCD-5655-55FA-AE95-434B2D158A57"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100378",
+      "FirstName": "Jun",
+      "LastName": "Nakamura",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "8C7B4818-8C13-52F7-861C-30F2DE50ED59",
+      "JoinDate": "2026-07-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B8DCE865-DD7C-5C3D-9066-427C52DE9842"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100379",
+      "FirstName": "Emilio",
+      "LastName": "Delgado",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2022-05-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D1B40B8-5DE2-5CB3-BDCF-05D06ABA7121"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100380",
+      "FirstName": "Carmen",
+      "LastName": "Fuentes",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "OrganizationID": "5E5986C1-D73D-5953-B565-593993A9A450",
+      "JoinDate": "2024-06-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C636165-0593-5DD2-9830-453E3E2CC719"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100382",
+      "FirstName": "Miguel",
+      "LastName": "Ochoa",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "B36EA8E0-0A6F-550E-8042-9CE9E51B2164",
+      "JoinDate": "2024-05-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFCFF056-0C8E-5F95-9E0C-6AE71AF66348"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100383",
+      "FirstName": "Eric",
+      "LastName": "Marsh",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "55844F08-7B8A-57CC-B39E-4940CACC6910",
+      "JoinDate": "2023-09-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4C84E28B-6942-508E-A21F-9C4B1C5E91C3"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100384",
+      "FirstName": "Magda",
+      "LastName": "Dvorak",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "99A27117-7A51-531A-A3F9-5E24BF0E3FA8",
+      "JoinDate": "2023-09-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "86F2D6D4-236D-508E-9EC8-77BC7AF89E2A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100386",
+      "FirstName": "Michael",
+      "LastName": "Fenwick",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "27ED2659-5025-51BC-9A10-0224EF214B37",
+      "JoinDate": "2026-07-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1F11AD22-E242-5E67-AB28-C5A6193CA1FF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100387",
+      "FirstName": "Astrid",
+      "LastName": "Dietrich",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": "6525D573-ACE6-5046-8C6C-7C22FAAF9D88",
+      "JoinDate": "2024-06-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "332C4FD5-2B81-5439-B535-8191CA723EA2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100388",
+      "FirstName": "Michael",
+      "LastName": "Beckett",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "CCE39B5C-94D6-5E5C-BA09-2F3A2E70776E",
+      "JoinDate": "2025-03-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77F91851-ABF5-540B-8358-8F1793B50D34"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100390",
+      "FirstName": "Sanjay",
+      "LastName": "Chowdhury",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092",
+      "JoinDate": "2023-11-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A409E145-39A3-56A7-8C32-98656E742B00"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100391",
+      "FirstName": "Ruth",
+      "LastName": "Holloway",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "B7697680-8F2C-5E29-9AC6-48AD1F7FE9CB",
+      "JoinDate": "2023-01-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C2C7391F-4CFC-50E4-9D43-039C91E3955A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100395",
+      "FirstName": "Daniel",
+      "LastName": "Ryder",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": "BAC3207A-5555-5090-9BA0-7EA99ABAD581",
+      "JoinDate": "2025-11-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4262C832-ACED-57B9-9B7C-00C7A4116E57"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100396",
+      "FirstName": "Obi",
+      "LastName": "Diallo",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": "B87E9DC6-2BB1-5C48-AE9F-6F687520DA78",
+      "JoinDate": "2026-05-18",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "461987EB-6F30-5EAE-A7B4-B13A42440498"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100397",
+      "FirstName": "Carlos",
+      "LastName": "Vega",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": null,
+      "JoinDate": "2026-05-24",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B5C7AFE7-CFAF-5B46-B2C4-57F0B2A33E97"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100398",
+      "FirstName": "Robert",
+      "LastName": "Whitaker",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": null,
+      "JoinDate": "2024-07-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "920348FE-7997-5C81-BAB2-1C12479FE3AA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100399",
+      "FirstName": "Sarah",
+      "LastName": "Ellery",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "375FE593-C683-5D96-B2DE-E81D2BA991F9",
+      "JoinDate": "2026-07-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100400",
+      "FirstName": "Elke",
+      "LastName": "Iversen",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "8E382293-97BB-5CEF-B340-75059DF2DE37",
+      "JoinDate": "2019-03-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26CDD612-4839-549D-8318-079BD964B479"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100401",
+      "FirstName": "Rui",
+      "LastName": "Oliveira",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "20AF58BA-D141-586D-A963-218C420206B5",
+      "JoinDate": "2020-02-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47B326D0-9A4E-5205-9A6F-D589E50B0F27"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100402",
+      "FirstName": "Camille",
+      "LastName": "Mercier",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "D9B50876-2CDB-5AD5-B378-99EDE3963557",
+      "JoinDate": "2023-10-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C91617C6-D073-5660-9C9E-B4035AD8CFC3"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100403",
+      "FirstName": "Brian",
+      "LastName": "Kendall",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "E068AA31-0E71-54CF-9BBF-B48B67B0D82C",
+      "JoinDate": "2024-05-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "28CC8833-7946-583A-BCE3-F98BE34CCEFA"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100405",
+      "FirstName": "Otto",
+      "LastName": "Voss",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "F5FD1757-93A8-575E-91E6-810AF6F902E1",
+      "JoinDate": "2023-05-14",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7435C501-ABC2-5C4A-958D-97AEF8824432"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100407",
+      "FirstName": "Karen",
+      "LastName": "Hale",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2025-10-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8EB3EF8E-AA99-5251-9F5C-65C5F778C7C2"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100408",
+      "FirstName": "Noemie",
+      "LastName": "Pelletier",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": null,
+      "JoinDate": "2026-07-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FE5869BF-C110-51E4-A0C7-5D93244AC220"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100409",
+      "FirstName": "Emily",
+      "LastName": "Prescott",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2020-06-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E5639886-0524-5AD0-A707-A3D7E1BF2F3F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100410",
+      "FirstName": "Chidi",
+      "LastName": "Diallo",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": null,
+      "JoinDate": "2013-01-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "85D48244-93A1-5B81-8E4B-F6AFE6F9B1AF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100411",
+      "FirstName": "Brian",
+      "LastName": "Whitaker",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "CCE39B5C-94D6-5E5C-BA09-2F3A2E70776E",
+      "JoinDate": "2025-12-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02C30567-BAE8-56DA-8184-EAF1614F304F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100412",
+      "FirstName": "Beatriz",
+      "LastName": "Fuentes",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "5EAC1AB7-8524-59BF-A931-E844681844FF",
+      "JoinDate": "2025-05-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A8A17F46-89CA-5822-AEA5-DC69C8B3C349"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100413",
+      "FirstName": "Marcel",
+      "LastName": "Dubois",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "DD2C6B76-B483-5ED6-A0CC-242EE9B71966",
+      "JoinDate": "2025-12-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100415",
+      "FirstName": "Dirk",
+      "LastName": "Holzer",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": "94CBB866-A8CB-5D1A-9792-B6F3D41E69FA",
+      "JoinDate": "2019-02-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8C38DDBF-6C5B-50AC-BFDB-3001D33B48DC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100416",
+      "FirstName": "Ruth",
+      "LastName": "Holloway",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "D2A92C23-5DBC-5575-8B88-0CE878600DCD",
+      "JoinDate": "2019-11-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "820AA130-FF14-5869-9E7F-F10A5E28D5C1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100417",
+      "FirstName": "Michael",
+      "LastName": "Pace",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "B139DFB4-D8E6-5788-8A8D-674BAF35E20F",
+      "JoinDate": "2024-08-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75CAA667-9200-5622-8457-25AA71A1837D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100418",
+      "FirstName": "James",
+      "LastName": "Pace",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2023-04-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "248D5DCE-232D-5103-B87A-28191CFDA7F6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100419",
+      "FirstName": "Nadia",
+      "LastName": "Ionescu",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "6525D573-ACE6-5046-8C6C-7C22FAAF9D88",
+      "JoinDate": "2026-02-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F4EB723-407F-5839-9674-27A94F00EBFF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100420",
+      "FirstName": "Lars",
+      "LastName": "Dahl",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "9F2A2BAD-AE0B-5F90-A58C-1D4C864A8697",
+      "JoinDate": "2013-11-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F990ACA2-5CD1-518F-BE14-2CBC452DAD18"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100421",
+      "FirstName": "Anh",
+      "LastName": "Chen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "B7414A17-3967-5686-95AB-5A56729CDAA9",
+      "JoinDate": "2026-06-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6C0EF3AB-216F-5232-84E0-5CA8466009F8"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100422",
+      "FirstName": "Yuki",
+      "LastName": "Lin",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "800923B6-A2B5-5482-BF08-628505CA7C7C",
+      "JoinDate": "2026-02-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75F3B7F3-5CE6-5E42-9EE3-76A40068B633"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100423",
+      "FirstName": "Giulia",
+      "LastName": "Santoro",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": null,
+      "JoinDate": "2013-09-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "872628B1-7604-58B4-AEF5-19CA8D88F523"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100424",
+      "FirstName": "Mary",
+      "LastName": "Bramley",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "375FE593-C683-5D96-B2DE-E81D2BA991F9",
+      "JoinDate": "2025-10-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01D2C9DE-82A3-57BE-9637-3DF7689C000F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100425",
+      "FirstName": "Tomas",
+      "LastName": "Prado",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "C282353F-1EF8-58CA-8D6C-2929EF98BE3A",
+      "JoinDate": "2025-11-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DA56125D-378D-59B5-895A-1904707B6219"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100426",
+      "FirstName": "Robert",
+      "LastName": "Whitaker",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "1EB962BC-9267-529D-B833-93BAC4456239",
+      "JoinDate": "2024-04-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B38FFC82-7F85-538E-875D-014A5B771D38"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100427",
+      "FirstName": "Sanne",
+      "LastName": "Dietrich",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "E22BBEA7-FCB1-50DA-9ADB-FDD1B804D78C",
+      "JoinDate": "2023-07-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F61EF601-9DDA-57B0-BB3D-86A9388369E1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100428",
+      "FirstName": "Brian",
+      "LastName": "Marsh",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "OrganizationID": null,
+      "JoinDate": "2025-12-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "933F2653-C99A-5C37-8944-6B18783E383C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100429",
+      "FirstName": "Rui",
+      "LastName": "Serra",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": "5EAC1AB7-8524-59BF-A931-E844681844FF",
+      "JoinDate": "2022-09-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7C2AF962-00A9-5835-A433-5E22F353DB6F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100431",
+      "FirstName": "Hana",
+      "LastName": "Fujimoto",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "010CEEED-B6DD-5351-8DC5-F78EED3DF7C0",
+      "JoinDate": "2023-09-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C031DC1-8EA3-5C72-9841-ED68BB5F2C17"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100433",
+      "FirstName": "Anneke",
+      "LastName": "Dietrich",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "B7697680-8F2C-5E29-9AC6-48AD1F7FE9CB",
+      "JoinDate": "2026-07-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6A7DE378-6360-570D-8B99-BA1C11981FAC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100434",
+      "FirstName": "Hugo",
+      "LastName": "Yoder",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "C2C1B64B-5E5B-504C-8ED6-5FD291B2B771",
+      "JoinDate": "2017-03-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "03B3E314-E720-5043-972D-67AD4713959E"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100435",
+      "FirstName": "Jiwoo",
+      "LastName": "Fujimoto",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "E112B043-CF20-582F-A730-D939564ABB27",
+      "JoinDate": "2019-08-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1804A697-87D1-5AF1-A3D2-F31A5AC73D9C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100436",
+      "FirstName": "David",
+      "LastName": "Ferris",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "32C148F3-8C94-5348-81A4-3612B00AADEF",
+      "JoinDate": "2017-12-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AEF18D57-10EB-5166-BC7B-DFE1544E2FD6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100437",
+      "FirstName": "Brian",
+      "LastName": "Beckett",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "8D87BB31-11A7-5F00-8C4E-4331426A50F7",
+      "JoinDate": "2022-05-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8070DF85-4D70-5905-B86D-54549CE5BD32"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100438",
+      "FirstName": "Fatou",
+      "LastName": "Okonkwo",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "7D0C5291-09CB-57F0-B923-956F2C8BA1AD",
+      "JoinDate": "2023-01-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E053DE86-8267-5CCC-890B-9B11504573B1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100439",
+      "FirstName": "Katya",
+      "LastName": "Petrov",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "E068AA31-0E71-54CF-9BBF-B48B67B0D82C",
+      "JoinDate": "2023-06-16",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "869BFD47-C1FA-5409-BFDF-2EE31519BC2C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100444",
+      "FirstName": "Ines",
+      "LastName": "Rosales",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": "010CEEED-B6DD-5351-8DC5-F78EED3DF7C0",
+      "JoinDate": "2022-04-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6E3F4C44-3127-5FB2-BF5A-B0F8670B7A44"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100445",
+      "FirstName": "Carmen",
+      "LastName": "Cabrera",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "E068AA31-0E71-54CF-9BBF-B48B67B0D82C",
+      "JoinDate": "2024-10-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C735D283-5A46-5D91-87DD-0BE2C77F68B6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100446",
+      "FirstName": "Emeka",
+      "LastName": "Sesay",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "4F6B1B9E-BFC4-503C-BEAB-5D4D24B6A0E3",
+      "JoinDate": "2025-09-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ACF49DE0-8EAF-5419-9F61-154C8F16BE98"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100447",
+      "FirstName": "Sita",
+      "LastName": "Mehta",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "93EA8397-304D-5769-9154-424614EBB387",
+      "JoinDate": "2019-05-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E543CFE7-6721-5BFA-A896-2A25D310BB73"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100449",
+      "FirstName": "Enzo",
+      "LastName": "Bianchi",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "OrganizationID": "276736CE-9D25-5A32-B578-944843C5FA8A",
+      "JoinDate": "2017-04-21",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5577DD32-74FF-5743-AA70-B5B636CCA531"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100452",
+      "FirstName": "Rui",
+      "LastName": "Vidal",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "2D2A1CD3-3ECF-58DD-BBAC-29B10DA32178",
+      "JoinDate": "2024-10-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EA55A406-419A-5F4C-8194-41F35A2E10B7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100454",
+      "FirstName": "Wei",
+      "LastName": "Lin",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "15A19624-4201-5A8C-AE00-2C793EDC1251",
+      "JoinDate": "2024-11-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "997880E4-6606-5BDC-8439-3C3EE498B072"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100456",
+      "FirstName": "Kenji",
+      "LastName": "Choi",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Oaxaca",
+      "State": "MX",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "OrganizationID": null,
+      "JoinDate": "2023-05-27",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D491DB88-82E5-5A2D-A20E-018781BD3E24"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100457",
+      "FirstName": "Karen",
+      "LastName": "Grantham",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": "551882A4-3A86-5044-BD9A-DD96ED6CB1C0",
+      "JoinDate": "2022-12-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D1B62727-CF12-5B4E-BB94-C89A64CCB717"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100459",
+      "FirstName": "Olivier",
+      "LastName": "Tremblay",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2026-07-22",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8694F4E6-B573-5585-B938-BFDB33806F45"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100460",
+      "FirstName": "Grace",
+      "LastName": "Hale",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "OrganizationID": "B7697680-8F2C-5E29-9AC6-48AD1F7FE9CB",
+      "JoinDate": "2025-04-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "76D40D3D-2816-5004-A8E8-ED6E3EC7ADA9"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100461",
+      "FirstName": "Daniel",
+      "LastName": "Marsh",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "73240336-3BC8-57EE-8CCE-A4D1E575A239",
+      "JoinDate": "2025-05-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "82ADEE0B-7298-509D-AB8A-6C1A83ECD502"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100463",
+      "FirstName": "Rafael",
+      "LastName": "Fuentes",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "OrganizationID": "424094F1-0953-5984-8947-BAD7F6AB0AE4",
+      "JoinDate": "2020-03-09",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B2A96F41-7951-521B-9BB3-0DC721E2260B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100464",
+      "FirstName": "David",
+      "LastName": "Whitaker",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3",
+      "JoinDate": "2025-10-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3AD67FD-D186-5098-82E8-EE248FCC03A1"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100465",
+      "FirstName": "Paloma",
+      "LastName": "Salinas",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2013-04-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F6EE395B-C155-5139-BD33-2DF119F0F8C0"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100466",
+      "FirstName": "Elisa",
+      "LastName": "Ricci",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "CDF8DDFE-23D8-53F4-AB0A-49983FA3B358",
+      "JoinDate": "2025-08-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9FA53977-456E-5345-A7E5-035669684E0D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100467",
+      "FirstName": "Anil",
+      "LastName": "Pillai",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "DD0EAF48-FDBE-520C-9D13-E3B117DD9B36",
+      "JoinDate": "2017-07-01",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A5F227F4-FF21-5F60-B21D-59C33D7E9BEC"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100468",
+      "FirstName": "Mei",
+      "LastName": "Pham",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "OrganizationID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092",
+      "JoinDate": "2022-12-25",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DC32DBED-3585-56B8-9A48-F4011A90ED17"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100469",
+      "FirstName": "Anders",
+      "LastName": "Yoder",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "OrganizationID": "E069DAE8-201D-5683-BEF8-6466D5DB6020",
+      "JoinDate": "2025-09-19",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6A2CD410-4E99-5474-9FB4-C5227ED7474D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100470",
+      "FirstName": "Hector",
+      "LastName": "Cabrera",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Brooklyn",
+      "State": "NY",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "OrganizationID": "C4673957-6085-5517-961B-55437064655E",
+      "JoinDate": "2025-08-08",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B872E4E2-0C9C-59D4-B001-CC5914F282CF"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100471",
+      "FirstName": "Petra",
+      "LastName": "Sorensen",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "OrganizationID": "42BBFB4D-E7C9-512D-B707-3B14B3A0F9EC",
+      "JoinDate": "2025-07-11",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "965ED95C-59D7-55DE-AA49-FCC9041BC734"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100472",
+      "FirstName": "Serena",
+      "LastName": "Gallo",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2016-01-10",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B8C3EF3D-D6AC-5721-B0FF-3FB4F5E7F72C"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100474",
+      "FirstName": "David",
+      "LastName": "Whitaker",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2026-07-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB2FB48B-A035-5394-AE08-A29B69428A46"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100477",
+      "FirstName": "Otto",
+      "LastName": "Olsen",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "10239B3E-9919-51C8-B1C8-2CE6249220ED",
+      "JoinDate": "2015-03-04",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100478",
+      "FirstName": "Eric",
+      "LastName": "Kendall",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "OrganizationID": null,
+      "JoinDate": "2023-10-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9053A0C3-0534-5ECB-A548-57FDFC94AD75"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100479",
+      "FirstName": "Robert",
+      "LastName": "Winslow",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "OrganizationID": null,
+      "JoinDate": "2026-04-17",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F1B4E07-28C8-51C7-851E-BF077CF46B37"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100480",
+      "FirstName": "Emily",
+      "LastName": "Kendall",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": "93EA8397-304D-5769-9154-424614EBB387",
+      "JoinDate": "2026-06-26",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "502EE68E-B3EB-56EA-AB89-092EB3B0E44A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100482",
+      "FirstName": "Elodie",
+      "LastName": "Cloutier",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "BD3E8349-D95F-5111-B1FB-4B5B57510CDE",
+      "JoinDate": "2018-08-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D6906904-9F7F-5214-AA25-5615DB18EBE6"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100483",
+      "FirstName": "Sanne",
+      "LastName": "Groen",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "OrganizationID": "15A19624-4201-5A8C-AE00-2C793EDC1251",
+      "JoinDate": "2024-09-03",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C43892E4-2729-5AA2-B4C9-ADB70F7CFD58"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100484",
+      "FirstName": "Olivier",
+      "LastName": "Lefevre",
+      "Segment": "Producer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": "18667307-C404-50A5-BFFF-98EFC4F1A25C",
+      "JoinDate": "2022-10-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C533F968-59CB-54D6-83D7-C5F27953332A"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100485",
+      "FirstName": "Nia",
+      "LastName": "Kamara",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "OrganizationID": "5B7A7CE1-E79B-5318-A740-FCCA047DC54F",
+      "JoinDate": "2017-04-15",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "63645031-63AC-5650-97C6-9BDD4E08DA54"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100486",
+      "FirstName": "Kiran",
+      "LastName": "Menon",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Denver",
+      "State": "CO",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "OrganizationID": "C4673957-6085-5517-961B-55437064655E",
+      "JoinDate": "2025-03-20",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5E58D77-0401-58BF-B4E0-78D472994CFE"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100487",
+      "FirstName": "Lars",
+      "LastName": "Meyer",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "OrganizationID": "7190000B-1B03-5034-BF26-9055F8886D3A",
+      "JoinDate": "2019-08-23",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E64DD9E-FAA0-5AB2-9A12-99F3021AD38F"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100488",
+      "FirstName": "Hannah",
+      "LastName": "Grantham",
+      "Segment": "Educator",
+      "Region": "NA",
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "OrganizationID": null,
+      "JoinDate": "2018-12-06",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "11DDF75D-0D60-519A-8722-E963C2BA072B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100490",
+      "FirstName": "Ines",
+      "LastName": "Cabrera",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": null,
+      "JoinDate": "2024-03-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B1D3FEC9-89C2-54A6-AD42-D817A84269F9"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100492",
+      "FirstName": "Sora",
+      "LastName": "Choi",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "OrganizationID": "EC827E27-A6D6-53B1-B47E-B65ABBEF1092",
+      "JoinDate": "2024-12-07",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83F282B0-8570-5A4A-831A-BF33DFF35A5D"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100493",
+      "FirstName": "Zofia",
+      "LastName": "Svoboda",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "OrganizationID": "A612F8CB-9D42-5010-B507-88F20222B3AF",
+      "JoinDate": "2025-10-02",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "713F9D46-0C6A-5239-B259-A2A30AD711AB"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100495",
+      "FirstName": "Sven",
+      "LastName": "Lund",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "OrganizationID": "20AF58BA-D141-586D-A963-218C420206B5",
+      "JoinDate": "2018-06-28",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E053CEFD-44F2-5CF3-9C60-48B7B11F922B"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100496",
+      "FirstName": "Michael",
+      "LastName": "Ashworth",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "OrganizationID": null,
+      "JoinDate": "2024-04-05",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D3C17707-961C-58EE-8CE8-60995ED31F69"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100498",
+      "FirstName": "Seojun",
+      "LastName": "Nakamura",
+      "Segment": "Producer",
+      "Region": "NA",
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "OrganizationID": null,
+      "JoinDate": "2022-06-12",
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7AFC951F-90E6-5975-930D-D4B542DA49B7"
+    },
+    "fields": {
+      "MemberNumber": "ICF-100500",
+      "FirstName": "Noemie",
+      "LastName": "Fontaine",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "JoinDate": "2019-09-28",
+      "IsSharedDemo": true
+    }
+  }
+]

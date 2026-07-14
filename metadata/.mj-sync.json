@@ -4,6 +4,17 @@
     "autoCreateMissingRecords": true
   },
   "directoryOrder": [
-    "schema-info"
+    "schema-info",
+    "organizations",
+    "people",
+    "membership-periods",
+    "events",
+    "event-registrations",
+    "courses",
+    "enrollments",
+    "products",
+    "orders",
+    "order-lines",
+    "payments"
   ]
 }

@@ -1,0 +1,2954 @@
+[
+  {
+    "primaryKey": {
+      "ID": "9FD741DC-D996-5FC0-A795-B4421A264C7B"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-CONF",
+      "Name": "ICF Annual Conference 2013",
+      "EventType": "Conference",
+      "EventDate": "2013-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Louisville",
+      "State": "KY",
+      "Latitude": 38.2527,
+      "Longitude": -85.7585,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EAC5BC1C-D2A2-5B31-A17A-BFC0DF90BFEB"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-W1",
+      "Name": "Workshop: Rind Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2013-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B793419F-CE37-5C3C-B711-7F741CD6A190"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-W2",
+      "Name": "Workshop: Meadow Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2013-12-21",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D2811607-1922-5538-8E83-FAAABBADA234"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-W3",
+      "Name": "Workshop: Birch Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2013-10-07",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "239C74AC-3F46-55B4-8831-834AF7747139"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-W4",
+      "Name": "Workshop: Harvest Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2013-07-24",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "762DC9CA-9EC3-5D6C-B986-06B5DB8F1852"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-W5",
+      "Name": "Workshop: Lark Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2013-10-20",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "50045BDD-0C71-5939-8249-C8A7D9D0900D"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-WEB1",
+      "Name": "Webinar: Counter Culture 2013",
+      "EventType": "Webinar",
+      "EventDate": "2013-05-08",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5F55077-E396-595F-ADE6-BC102C9EDC1A"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-WEB2",
+      "Name": "Webinar: Raw Milk Rules 2013",
+      "EventType": "Webinar",
+      "EventDate": "2013-02-16",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ACA8CB91-0FF3-55DE-8CD9-E3C9E43AA81F"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-WEB3",
+      "Name": "Webinar: Raw Milk Rules 2013",
+      "EventType": "Webinar",
+      "EventDate": "2013-02-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "61FAB4EA-4409-5A06-A58A-3ED390BA4966"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-WEB4",
+      "Name": "Webinar: Counter Culture 2013",
+      "EventType": "Webinar",
+      "EventDate": "2013-03-27",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E14F6CB-1B22-52E1-858A-42A08D229CE3"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-WEB5",
+      "Name": "Webinar: Cave Management 2013",
+      "EventType": "Webinar",
+      "EventDate": "2013-03-28",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "836A0E5E-526F-568E-AF7A-6206C5B8533A"
+    },
+    "fields": {
+      "EventKey": "EVT-2013-WEB6",
+      "Name": "Webinar: Label Law 2013",
+      "EventType": "Webinar",
+      "EventDate": "2013-05-10",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BF5690BC-55FD-52E5-B99F-08E3D03D67B9"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-CONF",
+      "Name": "ICF Annual Conference 2014",
+      "EventType": "Conference",
+      "EventDate": "2014-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Des Moines",
+      "State": "IA",
+      "Latitude": 41.5868,
+      "Longitude": -93.625,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8BC3268B-B5A5-5435-8277-FC1CCBDB1C6D"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-W1",
+      "Name": "Workshop: Alpine Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2014-05-13",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C7E743F7-FBAD-5BEA-A8F3-A04F874D53B0"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-W2",
+      "Name": "Workshop: Brook Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2014-10-17",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "209C5BA5-79D4-570B-AFB2-B01EAB071ACB"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-W3",
+      "Name": "Workshop: Rind Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2014-10-08",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "89BFFA5A-4A3B-56AD-B7DC-4F4882961B35"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-W4",
+      "Name": "Workshop: Willow Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2014-04-27",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "84F5F9EC-8662-5A73-8E9F-51E11106E4C5"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-W5",
+      "Name": "Workshop: Granite Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2014-07-20",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "19398ECB-3ADB-5563-8259-BA8BECEF07E2"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-WEB1",
+      "Name": "Webinar: Raw Milk Rules 2014",
+      "EventType": "Webinar",
+      "EventDate": "2014-04-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C8BD9C0A-602E-5151-A301-6ECBBE4BBAB7"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-WEB2",
+      "Name": "Webinar: Cave Management 2014",
+      "EventType": "Webinar",
+      "EventDate": "2014-11-20",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C4218309-4636-59B1-8825-2C75BEB304E4"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-WEB3",
+      "Name": "Webinar: Raw Milk Rules 2014",
+      "EventType": "Webinar",
+      "EventDate": "2014-08-22",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8057EFD7-92AB-56E5-9217-C472EBFF7122"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-WEB4",
+      "Name": "Webinar: Counter Culture 2014",
+      "EventType": "Webinar",
+      "EventDate": "2014-05-22",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "81814337-15BD-5AD9-B555-BBCC7358230A"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-WEB5",
+      "Name": "Webinar: Cave Management 2014",
+      "EventType": "Webinar",
+      "EventDate": "2014-08-26",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "497C0525-787E-59D8-9231-C181F305C0A9"
+    },
+    "fields": {
+      "EventKey": "EVT-2014-WEB6",
+      "Name": "Webinar: Counter Culture 2014",
+      "EventType": "Webinar",
+      "EventDate": "2014-01-27",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E9945D2-E890-519C-A2C1-B7051DA9B436"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-CONF",
+      "Name": "ICF Annual Conference 2015",
+      "EventType": "Conference",
+      "EventDate": "2015-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sacramento",
+      "State": "CA",
+      "Latitude": 38.5816,
+      "Longitude": -121.4944,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "131368FE-BC31-5F5D-B704-B69468886BBC"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-W1",
+      "Name": "Workshop: Clover Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2015-12-14",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1E5EA85A-4F29-5CC9-9CE4-275565606203"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-W2",
+      "Name": "Workshop: Rind Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2015-07-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD33DC9C-5649-55E3-A939-57B32B7C148A"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-W3",
+      "Name": "Workshop: Cave Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2015-06-01",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D9BD2851-14D0-548B-BB21-2B3080D66B65"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-W4",
+      "Name": "Workshop: Lark Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2015-02-19",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AE20F19-8239-5C1E-8B0F-51309D46ADA4"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-W5",
+      "Name": "Workshop: Willow Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2015-09-11",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A3E5CF38-F631-5F52-B3EB-2E1FDB93C9C2"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-WEB1",
+      "Name": "Webinar: Raw Milk Rules 2015",
+      "EventType": "Webinar",
+      "EventDate": "2015-10-19",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40C51CC4-9C4D-5C29-96F5-BEEAE6008720"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-WEB2",
+      "Name": "Webinar: Raw Milk Rules 2015",
+      "EventType": "Webinar",
+      "EventDate": "2015-01-11",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EAB194B9-5518-5BED-99A8-358B4ECC37EA"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-WEB3",
+      "Name": "Webinar: Raw Milk Rules 2015",
+      "EventType": "Webinar",
+      "EventDate": "2015-04-02",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DFBBF4D5-CF7F-5EEF-8636-4B1CA1B6898C"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-WEB4",
+      "Name": "Webinar: Raw Milk Rules 2015",
+      "EventType": "Webinar",
+      "EventDate": "2015-05-21",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "981E5591-0140-51A5-BB90-399A30E4B560"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-WEB5",
+      "Name": "Webinar: Cave Management 2015",
+      "EventType": "Webinar",
+      "EventDate": "2015-10-16",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4D7E2403-9FF6-5F35-ADC4-4F8C83374EE1"
+    },
+    "fields": {
+      "EventKey": "EVT-2015-WEB6",
+      "Name": "Webinar: Label Law 2015",
+      "EventType": "Webinar",
+      "EventDate": "2015-06-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "32E20939-F4C4-5BB0-9DDB-1FC963DF6531"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-CONF",
+      "Name": "ICF Annual Conference 2016",
+      "EventType": "Conference",
+      "EventDate": "2016-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Louisville",
+      "State": "KY",
+      "Latitude": 38.2527,
+      "Longitude": -85.7585,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "53F4581F-3811-5EAC-835B-40B760E0DF0D"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-W1",
+      "Name": "Workshop: Summit Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2016-09-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1114C3A1-54CA-50C6-9AC6-43422C4F559F"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-W2",
+      "Name": "Workshop: Meadow Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2016-02-24",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F3302A9E-F9FC-58EA-944F-54B10C4DD035"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-W3",
+      "Name": "Workshop: Rind Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2016-08-04",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Somerset",
+      "State": "UK",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8EE93209-95E6-5B4D-AB71-CF7381E51E16"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-W4",
+      "Name": "Workshop: Cave Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2016-04-17",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "247D2147-4C75-5155-838F-94C8F03CA862"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-W5",
+      "Name": "Workshop: Dairy Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2016-03-03",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1B28082-803B-50FB-8A93-4711CEB0A208"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-WEB1",
+      "Name": "Webinar: Label Law 2016",
+      "EventType": "Webinar",
+      "EventDate": "2016-11-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5F06B377-974E-5C74-9C89-33898D338F4D"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-WEB2",
+      "Name": "Webinar: Raw Milk Rules 2016",
+      "EventType": "Webinar",
+      "EventDate": "2016-07-01",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5D8F9F52-ABF7-5488-B14C-7D9E2F6EA1EE"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-WEB3",
+      "Name": "Webinar: Label Law 2016",
+      "EventType": "Webinar",
+      "EventDate": "2016-03-23",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3759B23E-F9B7-572C-9A11-8D57E39E478E"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-WEB4",
+      "Name": "Webinar: Label Law 2016",
+      "EventType": "Webinar",
+      "EventDate": "2016-03-24",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9084205E-71AB-559B-9E49-3578CAF3054F"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-WEB5",
+      "Name": "Webinar: Label Law 2016",
+      "EventType": "Webinar",
+      "EventDate": "2016-01-04",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B6A31D7-E97B-5CE2-9B60-F9C59075F4D7"
+    },
+    "fields": {
+      "EventKey": "EVT-2016-WEB6",
+      "Name": "Webinar: Cave Management 2016",
+      "EventType": "Webinar",
+      "EventDate": "2016-11-04",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF34537C-D404-5B01-B229-6698594A342C"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-CONF",
+      "Name": "ICF Annual Conference 2017",
+      "EventType": "Conference",
+      "EventDate": "2017-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Des Moines",
+      "State": "IA",
+      "Latitude": 41.5868,
+      "Longitude": -93.625,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DDDDEC3F-752C-5CBD-B147-2C2D63B18315"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-W1",
+      "Name": "Workshop: Rind Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2017-11-10",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42266D2D-1CEB-5788-AC01-7B592ADB52C0"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-W2",
+      "Name": "Workshop: Brook Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2017-07-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A0FCB2EB-C885-5FAC-B2E6-0C5E9C509ED8"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-W3",
+      "Name": "Workshop: Willow Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2017-06-16",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "960AF460-D313-5ACC-8326-2495135BB72F"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-W4",
+      "Name": "Workshop: Harvest Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2017-05-25",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F905AF3-E5F9-510E-A32C-8C1540276F8D"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-W5",
+      "Name": "Workshop: Cedar Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2017-05-19",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92B8BA3D-6ADC-58F3-AE82-5C80EF13F305"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-WEB1",
+      "Name": "Webinar: Cave Management 2017",
+      "EventType": "Webinar",
+      "EventDate": "2017-06-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8ED1FA38-1353-5E11-8EFC-319956F1D331"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-WEB2",
+      "Name": "Webinar: Cave Management 2017",
+      "EventType": "Webinar",
+      "EventDate": "2017-01-18",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A5B8FB0C-A5A4-5583-82D9-0A8DEA983587"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-WEB3",
+      "Name": "Webinar: Counter Culture 2017",
+      "EventType": "Webinar",
+      "EventDate": "2017-12-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0BB8FEE2-3C41-50DB-816E-F5F4F620BF4B"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-WEB4",
+      "Name": "Webinar: Counter Culture 2017",
+      "EventType": "Webinar",
+      "EventDate": "2017-04-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E33801CB-D9DD-5179-BDDB-35BDF34C4468"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-WEB5",
+      "Name": "Webinar: Raw Milk Rules 2017",
+      "EventType": "Webinar",
+      "EventDate": "2017-09-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "90EDAC1F-5687-59BF-A188-25B0AC056DEA"
+    },
+    "fields": {
+      "EventKey": "EVT-2017-WEB6",
+      "Name": "Webinar: Label Law 2017",
+      "EventType": "Webinar",
+      "EventDate": "2017-04-20",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7E4714B9-BE1E-5EA4-B95D-DCD4ADDCD086"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-CONF",
+      "Name": "ICF Annual Conference 2018",
+      "EventType": "Conference",
+      "EventDate": "2018-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sacramento",
+      "State": "CA",
+      "Latitude": 38.5816,
+      "Longitude": -121.4944,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0D543D66-73B7-5578-A1FF-5FDE13DA5107"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-W1",
+      "Name": "Workshop: Curd Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2018-07-10",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E15C9227-DE17-52CC-9186-5B58B7EAB748"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-W2",
+      "Name": "Workshop: Birch Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2018-10-22",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Aarhus",
+      "State": "DK",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F64899B5-A9F2-5B33-84B8-FD6996A431F5"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-W3",
+      "Name": "Workshop: Clover Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2018-10-07",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BCE0AB57-6CE4-530A-85CA-E16B99520719"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-W4",
+      "Name": "Workshop: Summit Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2018-11-25",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "76B1E6FF-D07B-5672-909A-B67E0991AE3F"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-W5",
+      "Name": "Workshop: Alpine Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2018-01-16",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BF9C9A5C-DAFC-56FD-8FD9-1FADE9C599FE"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-WEB1",
+      "Name": "Webinar: Label Law 2018",
+      "EventType": "Webinar",
+      "EventDate": "2018-08-27",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94C91C3E-1D0E-569C-8FB8-83CE43DE5D99"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-WEB2",
+      "Name": "Webinar: Raw Milk Rules 2018",
+      "EventType": "Webinar",
+      "EventDate": "2018-03-28",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "34A80943-A63A-532C-A083-A68331124073"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-WEB3",
+      "Name": "Webinar: Cave Management 2018",
+      "EventType": "Webinar",
+      "EventDate": "2018-11-06",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E681F093-B883-5EF9-A9A2-D7C61E3246AF"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-WEB4",
+      "Name": "Webinar: Raw Milk Rules 2018",
+      "EventType": "Webinar",
+      "EventDate": "2018-10-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7BE2B97C-6CBC-5B6A-905E-77D6C2D3817F"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-WEB5",
+      "Name": "Webinar: Raw Milk Rules 2018",
+      "EventType": "Webinar",
+      "EventDate": "2018-11-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "282E239E-83EE-5C9C-BF2C-79271DBF1B23"
+    },
+    "fields": {
+      "EventKey": "EVT-2018-WEB6",
+      "Name": "Webinar: Label Law 2018",
+      "EventType": "Webinar",
+      "EventDate": "2018-11-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C79D969-93DF-5FD2-A96C-84B7F2417710"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-CONF",
+      "Name": "ICF Annual Conference 2019",
+      "EventType": "Conference",
+      "EventDate": "2019-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Louisville",
+      "State": "KY",
+      "Latitude": 38.2527,
+      "Longitude": -85.7585,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E8BDFBD1-8ECD-5EEE-BD12-98E5989CB9AF"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-W1",
+      "Name": "Workshop: Prairie Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2019-02-27",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A31F15A7-6FC2-5B28-A648-E4F0894FCD73"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-W2",
+      "Name": "Workshop: Dairy Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2019-06-02",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Bern",
+      "State": "CH",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3CE303AC-DD93-5464-B52C-312EA391F132"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-W3",
+      "Name": "Workshop: Granite Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2019-10-03",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FF6690CA-F13E-52D8-BD27-D83EEF67E948"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-W4",
+      "Name": "Workshop: Summit Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2019-12-10",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BD8F64AA-0BF5-519F-AA14-FDBB704F46C4"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-W5",
+      "Name": "Workshop: Alpine Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2019-12-16",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F4BDF01D-3578-52F6-8A1C-9162C7CCE442"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-WEB1",
+      "Name": "Webinar: Raw Milk Rules 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-05-16",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF80DC93-285D-50A8-8585-CB1C3548448F"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-WEB2",
+      "Name": "Webinar: Counter Culture 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-10-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E0888AC-7F7A-5907-B9C9-B8B487C06CA9"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-WEB3",
+      "Name": "Webinar: Cave Management 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-05-24",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E71591D-EFCD-5CD4-ACF1-7381FDB0627C"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-WEB4",
+      "Name": "Webinar: Cave Management 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-06-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6E5B85FF-BF35-50C4-8D45-344F07F11576"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-WEB5",
+      "Name": "Webinar: Counter Culture 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-09-23",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60A6D9DB-C8C9-5A44-AD66-56496CF26FB1"
+    },
+    "fields": {
+      "EventKey": "EVT-2019-WEB6",
+      "Name": "Webinar: Label Law 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-12-11",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A51DB221-9118-51A1-81EC-39AD97E57622"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-CONF",
+      "Name": "ICF Annual Conference 2020",
+      "EventType": "Conference",
+      "EventDate": "2020-07-15",
+      "IsVirtual": true,
+      "IsPaid": true,
+      "City": "Des Moines",
+      "State": "IA",
+      "Latitude": 41.5868,
+      "Longitude": -93.625,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "278529BC-4865-5B38-97A4-FCEBA341EC84"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-W1",
+      "Name": "Workshop: Lark Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2020-05-26",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E22CC7E9-ED8A-5763-AC00-9EE38C8DA308"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-W2",
+      "Name": "Workshop: Cave Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2020-09-21",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE958102-0DC7-5B56-9B5D-E9459A6A18BF"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-W3",
+      "Name": "Workshop: Harvest Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2020-07-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "WI",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8FC0C22D-A1D1-5CE9-909E-B7C29FCA1CA9"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-WEB1",
+      "Name": "Webinar: Cave Management 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-09-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED1B89A4-0F86-5C43-8B42-919EE9885061"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-WEB2",
+      "Name": "Webinar: Raw Milk Rules 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-01-12",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C281A83C-973C-5EE8-A6AA-518FFF3F6A57"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-WEB3",
+      "Name": "Webinar: Label Law 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-12-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98D5976C-1B8E-5FF4-A472-F063B8E33E9A"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-WEB4",
+      "Name": "Webinar: Label Law 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-06-21",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1DF9226-630D-576E-91E1-10EAF1F2C910"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-WEB5",
+      "Name": "Webinar: Raw Milk Rules 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-09-15",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3F874443-D300-5F34-A3D7-83CE6CE59CC8"
+    },
+    "fields": {
+      "EventKey": "EVT-2020-WEB6",
+      "Name": "Webinar: Counter Culture 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-01-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D0488DFC-2ADC-5C39-AE54-EC876454025B"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-CONF",
+      "Name": "ICF Annual Conference 2021",
+      "EventType": "Conference",
+      "EventDate": "2021-07-15",
+      "IsVirtual": true,
+      "IsPaid": true,
+      "City": "Sacramento",
+      "State": "CA",
+      "Latitude": 38.5816,
+      "Longitude": -121.4944,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD2D4B52-EA35-501F-9760-4F46B8377C02"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-W1",
+      "Name": "Workshop: Stone Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2021-04-05",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B9A2A09D-B6BA-5E32-BDFA-5CD14CD1EFDE"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-W2",
+      "Name": "Workshop: Cedar Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2021-12-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F8A8AA6-38EE-5AB5-A5C2-FF3590B5C5A3"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-W3",
+      "Name": "Workshop: Lark Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2021-07-06",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CD7F1EEE-F5CB-5E4E-A716-54DE09CF6E7D"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-WEB1",
+      "Name": "Webinar: Counter Culture 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-07-26",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "11E848FE-EF5B-50C8-8BD6-EE49763857BE"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-WEB2",
+      "Name": "Webinar: Cave Management 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-08-15",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "33018260-3096-584E-913E-5CDACC03FF47"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-WEB3",
+      "Name": "Webinar: Counter Culture 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-05-18",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0DA89E25-5128-5A06-9CF0-96C837782B3C"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-WEB4",
+      "Name": "Webinar: Counter Culture 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-01-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3325F08F-AEA2-58A9-AA97-1C26F883ABA1"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-WEB5",
+      "Name": "Webinar: Label Law 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-02-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6B2A3E6C-EE75-52BB-BBA4-2126DB2D5CFC"
+    },
+    "fields": {
+      "EventKey": "EVT-2021-WEB6",
+      "Name": "Webinar: Cave Management 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-01-05",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91866867-54CB-58CE-9A66-0BD23457BF73"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-CONF",
+      "Name": "ICF Annual Conference 2022",
+      "EventType": "Conference",
+      "EventDate": "2022-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Louisville",
+      "State": "KY",
+      "Latitude": 38.2527,
+      "Longitude": -85.7585,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "315EEB94-62C6-536E-817E-DFBF2A96153B"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-W1",
+      "Name": "Workshop: Brook Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2022-05-12",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Brattleboro",
+      "State": "VT",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C1D42CCD-0536-5ADC-91E2-13090AECCD55"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-W2",
+      "Name": "Workshop: Valley Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2022-02-01",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "15493C20-F068-560F-B4DF-D369D6DF1FFD"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-W3",
+      "Name": "Workshop: Meadow Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2022-03-08",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Chicago",
+      "State": "IL",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6A4A6530-6C0A-528F-BB5D-B0890DF71338"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-W4",
+      "Name": "Workshop: Hollow Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2022-11-07",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "33B4E835-FA60-5DD2-86A9-214BB12204E0"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-W5",
+      "Name": "Workshop: Birch Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2022-09-07",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BCD3DCC-620A-51B8-A1C0-1FFECE5B49C2"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-WEB1",
+      "Name": "Webinar: Counter Culture 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-11-26",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C786B6C2-7848-55F6-B507-3DD3C967590B"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-WEB2",
+      "Name": "Webinar: Counter Culture 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-03-16",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4A4A03D1-1B5F-5B96-81DD-5BC75707F1F8"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-WEB3",
+      "Name": "Webinar: Raw Milk Rules 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-07-12",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE530ADD-2C16-5014-A090-64BD06E3D245"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-WEB4",
+      "Name": "Webinar: Cave Management 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-07-10",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EE9011FD-5053-5746-A19D-3D126D77319A"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-WEB5",
+      "Name": "Webinar: Raw Milk Rules 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-05-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B129DC45-6DCE-5B6C-89D9-D924A4DB8535"
+    },
+    "fields": {
+      "EventKey": "EVT-2022-WEB6",
+      "Name": "Webinar: Counter Culture 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-06-26",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44B09D33-59FB-5627-B876-5EC47FF14B61"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-CONF",
+      "Name": "ICF Annual Conference 2023",
+      "EventType": "Conference",
+      "EventDate": "2023-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Des Moines",
+      "State": "IA",
+      "Latitude": 41.5868,
+      "Longitude": -93.625,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4EDCFD02-21B8-52D4-9253-A57D2338D66B"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-W1",
+      "Name": "Workshop: Meadow Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2023-02-05",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CAC39A2A-DDE6-5BBC-A85F-AF916085328B"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-W2",
+      "Name": "Workshop: Curd Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2023-05-25",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C9E65A9A-F55F-5333-8851-3D08DB6BE4D1"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-W3",
+      "Name": "Workshop: Willow Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2023-11-13",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DA421AC0-1DFC-5FC7-B930-B07457355437"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-W4",
+      "Name": "Workshop: Clover Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2023-08-17",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0330F16F-F915-580C-A742-C9DE735F54F3"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-W5",
+      "Name": "Workshop: Cave Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2023-02-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CF566EEE-99A4-54CB-B2D5-AEEE3488F432"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-WEB1",
+      "Name": "Webinar: Counter Culture 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-08-08",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D23D2EEA-9924-51AF-8577-41F540A12A34"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-WEB2",
+      "Name": "Webinar: Label Law 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-04-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "710CF638-4492-5CE9-B8FF-4B0CB037C029"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-WEB3",
+      "Name": "Webinar: Raw Milk Rules 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-05-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F5FDACC-CFF7-5D02-96EA-E53135328DB8"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-WEB4",
+      "Name": "Webinar: Label Law 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-03-05",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2937BE57-B9C3-528C-B921-BB8C1409157B"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-WEB5",
+      "Name": "Webinar: Cave Management 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-07-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C64BAA7-7FAF-5D0B-98F6-84EB763ADDBA"
+    },
+    "fields": {
+      "EventKey": "EVT-2023-WEB6",
+      "Name": "Webinar: Counter Culture 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-11-26",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4ED62CDA-F504-5D85-AFA8-9E35F714AEBC"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-CONF",
+      "Name": "ICF Annual Conference 2024",
+      "EventType": "Conference",
+      "EventDate": "2024-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sacramento",
+      "State": "CA",
+      "Latitude": 38.5816,
+      "Longitude": -121.4944,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0878D37F-4D65-53BF-B97C-E1A2E068805F"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-W1",
+      "Name": "Workshop: Birch Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2024-02-21",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Green Bay",
+      "State": "WI",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A04C745C-C187-52A5-8D8D-C593CF003B8F"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-W2",
+      "Name": "Workshop: Hollow Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2024-03-02",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Hobart",
+      "State": "AU",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "832EBCF4-C741-599A-B681-6C787268C4AE"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-W3",
+      "Name": "Workshop: Summit Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2024-12-18",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "WA",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "624C0D5B-2742-53D4-AAA1-D76711A16AE4"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-W4",
+      "Name": "Workshop: Meadow Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2024-12-10",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C92356C9-D86D-508D-8E0A-AC7328C674E6"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-W5",
+      "Name": "Workshop: Cedar Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2024-08-17",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sonoma",
+      "State": "CA",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4277EABD-962D-5119-B8D7-06691B6FC175"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-WEB1",
+      "Name": "Webinar: Counter Culture 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-02-07",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F5940B1A-B2B0-5B00-A957-34CAEC4BBADB"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-WEB2",
+      "Name": "Webinar: Counter Culture 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-10-26",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "079A3CF3-1675-5961-9BB0-FD57A51954E6"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-WEB3",
+      "Name": "Webinar: Counter Culture 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-02-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1F907F45-4B3F-51CE-8192-4BB9610841C5"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-WEB4",
+      "Name": "Webinar: Label Law 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-06-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E00A1268-56E9-55CC-B1B2-A9B0D7EDCF96"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-WEB5",
+      "Name": "Webinar: Label Law 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-07-22",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "27B547FC-86A5-51EF-8E0A-F3A26A743AC8"
+    },
+    "fields": {
+      "EventKey": "EVT-2024-WEB6",
+      "Name": "Webinar: Label Law 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-03-24",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2AFBD4CB-049E-5367-854F-8BF2AED9FDA1"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-CONF",
+      "Name": "ICF Annual Conference 2025",
+      "EventType": "Conference",
+      "EventDate": "2025-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Louisville",
+      "State": "KY",
+      "Latitude": 38.2527,
+      "Longitude": -85.7585,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "95FE0623-B0D8-5FB3-94B7-80A7B5880237"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-W1",
+      "Name": "Workshop: Cedar Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2025-02-04",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Burlington",
+      "State": "VT",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "548956C9-4D45-5F97-99E7-2C22FA337ED6"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-W2",
+      "Name": "Workshop: Curd Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2025-09-06",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Amsterdam",
+      "State": "NL",
+      "Latitude": 52.3676,
+      "Longitude": 4.9041,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B400E470-7EC9-5B99-9E4E-C79AC0F74C22"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-W3",
+      "Name": "Workshop: Curd Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2025-06-26",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "894C6127-CB8F-5C70-8CEE-7FA5098EFB4A"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-W4",
+      "Name": "Workshop: Brook Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2025-08-02",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0FC9A6A-F3CF-57F2-8A9C-A5A5B5E09F0E"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-W5",
+      "Name": "Workshop: Wheel Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2025-06-21",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Petaluma",
+      "State": "CA",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47BA6B9F-EAD9-56C7-95E6-FFFD928B94FB"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-WEB1",
+      "Name": "Webinar: Label Law 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-12-05",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F33153F3-4368-5395-9B73-9E415E30F9ED"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-WEB2",
+      "Name": "Webinar: Cave Management 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-07-08",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4A0BA54C-E67E-53F2-82EC-4FDC939C4623"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-WEB3",
+      "Name": "Webinar: Label Law 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-11-23",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F1AF1DB7-BF63-57C5-A333-2C34A0EEC44A"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-WEB4",
+      "Name": "Webinar: Label Law 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-08-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5D170E0A-50F6-5590-A523-BD31285543F5"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-WEB5",
+      "Name": "Webinar: Label Law 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-09-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0B6C1C68-7CD2-5E73-AEF0-1B41D274E1AA"
+    },
+    "fields": {
+      "EventKey": "EVT-2025-WEB6",
+      "Name": "Webinar: Raw Milk Rules 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-04-15",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E6F4DC23-33BC-50A5-902A-F38A1D57E8A7"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-CONF",
+      "Name": "ICF Annual Conference 2026",
+      "EventType": "Conference",
+      "EventDate": "2026-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Des Moines",
+      "State": "IA",
+      "Latitude": 41.5868,
+      "Longitude": -93.625,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "50EAEA97-B8D3-5A6D-A131-2F346A2E4F40"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-W1",
+      "Name": "Workshop: Stone Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2026-07-20",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Auckland",
+      "State": "NZ",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6936BE88-9FAC-5060-B214-DE8027DEE381"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-W2",
+      "Name": "Workshop: Hollow Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2026-11-18",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Poligny",
+      "State": "FR",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "847AC873-1D91-5197-AE67-EF13A316850C"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-W3",
+      "Name": "Workshop: Stone Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2026-01-27",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Guelph",
+      "State": "CA-ON",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B56CE062-87CC-51AF-9471-DC728EA6DAB6"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-W4",
+      "Name": "Workshop: Cedar Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2026-01-05",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Austin",
+      "State": "TX",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B476A7A8-7F1B-59D1-A257-AA3A4A4E7173"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-W5",
+      "Name": "Workshop: Granite Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2026-10-22",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Ithaca",
+      "State": "NY",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "282D863E-422A-5BFB-9BBF-EAAA1B94FDE6"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-WEB1",
+      "Name": "Webinar: Raw Milk Rules 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-04-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2877EFC7-6A45-5E72-8955-7A5F3D4F24F9"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-WEB2",
+      "Name": "Webinar: Label Law 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-11-05",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C2855A93-02F4-521C-B310-30761285D660"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-WEB3",
+      "Name": "Webinar: Cave Management 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-03-01",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98963378-397A-5EF9-B7F3-CC84E7539506"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-WEB4",
+      "Name": "Webinar: Counter Culture 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-09-06",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8010AE60-1B2E-5B89-AC48-6FC2639B4EB3"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-WEB5",
+      "Name": "Webinar: Label Law 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-11-17",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9E75DEBF-6C9C-5FCE-B6A4-23A19006DCE8"
+    },
+    "fields": {
+      "EventKey": "EVT-2026-WEB6",
+      "Name": "Webinar: Label Law 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-01-05",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null,
+      "Latitude": null,
+      "Longitude": null,
+      "IsSharedDemo": true
+    }
+  }
+]
