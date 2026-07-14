@@ -81,7 +81,7 @@ step('schema DDL covers every INSERT column', () => {
     created[`${m[1]}.${m[2]}`] = new Set(cols);
   }
   const missing = [];
-  for (const f of ['01_common', '02_membership', '03_events', '04_learning', '05_orders']) {
+  for (const f of ['01_common', '02_membership', '03_events', '04_learning', '05_orders', '06_committees', '07_forms']) {
     let sql; try { sql = readFileSync(join(sqlDir, `${f}.sql`), 'utf8'); } catch { continue; }
     for (const m of sql.matchAll(/INSERT INTO \[(\w+)\]\.\[(\w+)\] \(([^)]*)\)/g)) {
       const key = `${m[1]}.${m[2]}`;

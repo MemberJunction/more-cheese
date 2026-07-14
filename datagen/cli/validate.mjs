@@ -31,6 +31,11 @@ const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
 const regs = load('events', 'event_registrations');
+const cMemberships = load('committees', 'committee_memberships');
+const cMeetings = load('committees', 'committee_meetings');
+const cAttendance = load('committees', 'committee_attendance');
+const fResponses = load('forms', 'form_responses');
+const fAnswers = load('forms', 'form_answers');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -70,6 +75,14 @@ function checkPacks() {
   const badLine = orderLines.filter((x) => !orderKeys.has(x.OrderKey) || !productKeys.has(x.ProductKey)).length;
   const badPay = payments.filter((x) => !orderKeys.has(x.OrderKey)).length;
   check('pack refs: orders→common + lines→products + payments→orders', badOrderM + badLine + badPay === 0, `${badOrderM}+${badLine}+${badPay} dangling`);
+  const meetingKeys = new Set(cMeetings.map((x) => x.MeetingKey));
+  const badCm = cMemberships.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
+  check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
+  const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
+  const badResp = fResponses.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
+  check('pack refs: forms→common + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -116,8 +129,10 @@ function checkBenchmarks() {
   const normal = yearRates.filter((x) => !x.covid);
   const pooled = normal.reduce((s, x) => s + x.rate, 0) / normal.length;
   const stdYears = Math.sqrt(normal.reduce((s, x) => s + (x.rate - pooled) ** 2, 0) / normal.length);
-  // small-sample allowance: the mean of a few wobbled years has its own SE (vanishes at scale)
-  const meanAllow = M.renewalTolerance + 1.5 * (stdYears / Math.sqrt(normal.length));
+  // small-sample allowance: the mean of a few wobbled years has its own SE (vanishes at
+  // scale). 2×SE, not 1.5: the suite sweeps this gate across 7 seeds — at 1.5× a marginal
+  // seed false-reds ~13% of sweeps (multiple comparisons; the arrow-gate lesson).
+  const meanAllow = M.renewalTolerance + 2 * (stdYears / Math.sqrt(normal.length));
   check(`renewal mean ${(pooled * 100).toFixed(1)}% vs ${M.renewalTarget * 100}% ±${(meanAllow * 100).toFixed(1)} (tol + mean-SE at ${normal.length} yrs)`, Math.abs(pooled - M.renewalTarget) <= meanAllow, `${normal.length} non-covid yrs`);
 
   // each year's band widens by its own sampling error (converges to the pure band at scale)
@@ -395,6 +410,41 @@ function checkTrainability() {
   check(`trainability: churn in model's bottom quintile ${(churnBottom * 100).toFixed(0)}% ≥ 2× top quintile ${(churnTop * 100).toFixed(0)}%`, churnBottom >= churnTop * 2, 'rank-ordering lift (N-appropriate, per spec §7.4)');
 }
 
+// ---------- composed bizapps slices: committees + forms land their targets ----------
+function checkComposedApps() {
+  const CC = R.committees; const FF = R.forms;
+  // committee participation share (over the ACTIVE term's eligible crowd — heroes excluded from the draw)
+  const activeTerm = CC.terms[CC.terms.length - 1];
+  const served = new Set(cMemberships.filter((m) => m.TermKey.endsWith(activeTerm.start)).map((m) => m.MemberNumber));
+  const eligible = people.filter((p) => periods.some((per) => per.MemberNumber === p.MemberNumber && per.StartDate <= activeTerm.start && activeTerm.start <= per.EndDate));
+  const share = eligible.length ? [...served].filter((m) => eligible.some((p) => p.MemberNumber === m)).length / eligible.length : 0;
+  const shareAllow = CC.participation.tolerance + 3 * Math.sqrt((CC.participation.shareOfEligible * (1 - CC.participation.shareOfEligible)) / Math.max(1, eligible.length)); // 3×SE: multiple comparisons across seeds+terms (arrow-gate precedent)
+  check(`committees: ${(share * 100).toFixed(1)}% of eligible serve vs ${CC.participation.shareOfEligible * 100}% ±${(shareAllow * 100).toFixed(1)}`, Math.abs(share - CC.participation.shareOfEligible) <= shareAllow, `${served.size} serving / ${eligible.length} eligible`);
+  // every committee-term has exactly one Chair
+  const chairs = new Map();
+  const populated = new Set(cMemberships.map((m) => m.TermKey));
+  for (const m of cMemberships.filter((x) => x.RoleKey === 'Chair')) chairs.set(m.TermKey, (chairs.get(m.TermKey) ?? 0) + 1);
+  // hero-only rosters are exempt: a pinned Member's role is a fact, so a committee whose
+  // only members are pinned heroes carries an honest Chair VACANCY in a tiny world
+  const crowdPopulated = new Set(cMemberships.filter((m) => !R.heroes.some((h) => h.memberNumber === m.MemberNumber)).map((m) => m.TermKey));
+  const badChair = [...crowdPopulated].filter((t) => (chairs.get(t) ?? 0) !== 1).length;
+  check('committees: exactly one Chair per crowd-populated committee-term', badChair === 0, `${chairs.size} chaired / ${crowdPopulated.size} crowd-populated terms`);
+  // meeting attendance rate
+  const present = cAttendance.filter((a) => a.AttendanceStatus === 'Present').length;
+  const attRate = cAttendance.length ? present / cAttendance.length : 0;
+  const attAllow = CC.meetings.attendance.tolerance + 1.5 * Math.sqrt((CC.meetings.attendance.presentTarget * (1 - CC.meetings.attendance.presentTarget)) / Math.max(1, cAttendance.length));
+  check(`committees: meeting attendance ${(attRate * 100).toFixed(1)}% vs ${CC.meetings.attendance.presentTarget * 100}% ±${(attAllow * 100).toFixed(1)}`, Math.abs(attRate - CC.meetings.attendance.presentTarget) <= attAllow, `${cAttendance.length} attendance rows`);
+  // survey response rate (pooled over distributions) + NPS mean band
+  const attendees = regs.filter((x) => x.Attended === true && events.find((e) => e.EventKey === x.EventKey)?.EventType === 'Conference').length;
+  const respRate = attendees ? fResponses.length / attendees : 0;
+  const respAllow = FF.response.tolerance + 1.5 * Math.sqrt((FF.response.rateTarget * (1 - FF.response.rateTarget)) / Math.max(1, attendees));
+  check(`forms: survey response rate ${(respRate * 100).toFixed(1)}% vs ${FF.response.rateTarget * 100}% ±${(respAllow * 100).toFixed(1)}`, Math.abs(respRate - FF.response.rateTarget) <= respAllow, `${fResponses.length} responses / ${attendees} attendees`);
+  const nps = fAnswers.filter((a) => a.QuestionKey === 'post-conf-survey:nps');
+  const npsMean = nps.length ? nps.reduce((s2, a) => s2 + a.NumericValue, 0) / nps.length : 0;
+  const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, nps.length)));
+  check(`forms: mean NPS ${npsMean.toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(npsMean - FF.answers.nps.base) <= npsAllow, `${nps.length} NPS answers`);
+}
+
 // ---------- heroes (§7.5): the pinned people load with their stories intact ----------
 function checkHeroes() {
   const elena = people.find((p) => p.MemberNumber === 'ICF-000101');
@@ -429,6 +479,14 @@ function checkHeroes() {
       if (Math.round(dJoin) !== h.pins.joinedDaysBeforeRelease) problems.push(`joined ${dJoin}d before release`);
     }
     if (p && h.employerName && orgByKey.get(p.OrgKey)?.Name !== h.employerName) problems.push(`employer=${orgByKey.get(p.OrgKey)?.Name}`);
+    for (const seat of h.committees ?? []) {
+      for (const termName of seat.terms) {
+        const t = R.committees.terms.find((x) => x.name === termName);
+        const row = t && cMemberships.find((m) => m.MemberNumber === h.memberNumber && m.CommitteeKey === seat.committee && m.TermKey === `${seat.committee}:${t.start}`);
+        if (!row) problems.push(`no ${seat.committee} seat (${termName})`);
+        else if (row.RoleKey !== seat.role) problems.push(`${seat.committee} role=${row.RoleKey}≠${seat.role}`);
+      }
+    }
     check(`hero ${h.first} ${h.last} (${h.memberNumber}): pins hold`, problems.length === 0, problems.join('; ') || `status=${st}`);
   }
 }
@@ -453,6 +511,7 @@ checkLearning();
 checkMoney();
 checkEngagementDynamics();
 checkTrainability();
+checkComposedApps();
 checkHeroes();
 checkStatusMix();
 

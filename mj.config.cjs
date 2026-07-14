@@ -55,6 +55,8 @@ module.exports = {
       { SchemaName: '${mj_core_schema}', EntityNamePrefix: 'MJ: ' },
       // stand-in for the bizapps-common dependency (playground DBs): their prefix, not ours
       { SchemaName: '__mj_BizAppsCommon', EntityNamePrefix: 'MJ_BizApps_Common: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsCommittees', EntityNamePrefix: 'Committees: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsForms', EntityNamePrefix: 'MJ_BizApps_Forms: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },

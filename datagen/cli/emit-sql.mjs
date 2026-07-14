@@ -148,6 +148,99 @@ const MAPPING = {
       }),
     },
   ],
+  committees: [
+    // bizapps-committees' REAL shapes (B202602151200) — no IsSharedDemo (their tables, §2.5 logic)
+    {
+      json: 'committee_types', table: '[__mj_BizAppsCommittees].[Type]',
+      columns: (r) => ({ ID: sqlId(uuidFor('ctype', r.TypeKey)), Name: sqlStr(r.Name), IsStandards: sqlBit(r.IsStandards), DefaultTermMonths: sqlNum(r.DefaultTermMonths) }),
+    },
+    {
+      json: 'committee_roles', table: '[__mj_BizAppsCommittees].[Role]',
+      columns: (r) => ({ ID: sqlId(uuidFor('crole', r.RoleKey)), Name: sqlStr(r.Name), IsOfficer: sqlBit(r.IsOfficer), IsVotingRole: sqlBit(r.IsVotingRole), Sequence: sqlNum(r.Sequence) }),
+    },
+    {
+      json: 'committees', table: '[__mj_BizAppsCommittees].[Committee]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('committee', r.CommitteeKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('ctype', r.TypeKey)),
+        MissionStatement: sqlStr(r.MissionStatement), Status: sqlStr(r.Status), IsPublic: sqlBit(true), FormationDate: sqlDate(r.FormationDate),
+      }),
+    },
+    {
+      json: 'committee_terms', table: '[__mj_BizAppsCommittees].[Term]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('cterm', r.TermKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
+        Name: sqlStr(r.Name), StartDate: sqlDate(r.StartDate), EndDate: sqlDate(r.EndDate), Status: sqlStr(r.Status === 'Completed' ? 'Completed' : 'Active'),
+      }),
+    },
+    {
+      json: 'committee_memberships', table: '[__mj_BizAppsCommittees].[Membership]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('cmembership', r.MembershipKey)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
+        RoleID: sqlId(uuidFor('crole', r.RoleKey)), TermID: sqlId(uuidFor('cterm', r.TermKey)),
+        StartDate: sqlDate(r.StartDate), EndDate: sqlDate(r.EndDate), Status: sqlStr(r.Status),
+      }),
+    },
+    {
+      json: 'committee_meetings', table: '[__mj_BizAppsCommittees].[Meeting]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('meeting', r.MeetingKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
+        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), TimeZone: sqlStr('UTC'),
+        LocationType: sqlStr(r.LocationType), Status: sqlStr(r.Status),
+      }),
+    },
+    {
+      json: 'committee_attendance', table: '[__mj_BizAppsCommittees].[Attendance]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('att', r.AttendanceKey)), MeetingID: sqlId(uuidFor('meeting', r.MeetingKey)),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)), AttendanceStatus: sqlStr(r.AttendanceStatus),
+      }),
+    },
+  ],
+  forms: [
+    // bizapps-forms' REAL shapes (B202606281200) — the D10 optional pack
+    {
+      json: 'forms', table: '[__mj_BizAppsForms].[Form]',
+      columns: (r) => ({ ID: sqlId(uuidFor('form', r.FormKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), Status: sqlStr(r.Status), RenderMode: sqlStr(r.RenderMode) }),
+    },
+    {
+      json: 'form_versions', table: '[__mj_BizAppsForms].[FormVersion]',
+      columns: (r) => ({ ID: sqlId(uuidFor('formver', r.VersionKey)), FormID: sqlId(uuidFor('form', r.FormKey)), VersionNumber: sqlNum(r.VersionNumber), Status: sqlStr(r.Status), PublishedAt: sqlDate(r.PublishedAt) }),
+    },
+    {
+      json: 'form_pages', table: '[__mj_BizAppsForms].[FormPage]',
+      columns: (r) => ({ ID: sqlId(uuidFor('formpage', r.PageKey)), FormID: sqlId(uuidFor('form', r.FormKey)), Title: sqlStr(r.Title), DisplayOrder: sqlNum(r.DisplayOrder) }),
+    },
+    {
+      json: 'form_questions', table: '[__mj_BizAppsForms].[FormQuestion]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('formq', r.QuestionKey)), FormID: sqlId(uuidFor('form', r.FormKey)), PageID: sqlId(uuidFor('formpage', r.PageKey)),
+        QuestionType: sqlStr(r.QuestionType), Prompt: sqlStr(r.Prompt), IsRequired: sqlBit(r.IsRequired), DisplayOrder: sqlNum(r.DisplayOrder),
+      }),
+    },
+    {
+      json: 'form_distributions', table: '[__mj_BizAppsForms].[FormDistribution]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('formdist', r.DistributionKey)), FormID: sqlId(uuidFor('form', r.FormKey)), Name: sqlStr(r.Name),
+        ChannelType: sqlStr(r.ChannelType), Status: sqlStr(r.Status), OpenAt: sqlDate(r.OpenAt), CloseAt: sqlDate(r.CloseAt),
+        MaxResponses: sqlNum(null), ResponseCount: sqlNum(r.ResponseCount), CaptchaRequired: sqlBit(false), IsActive: sqlBit(r.Status !== 'Closed'),
+      }),
+    },
+    {
+      json: 'form_responses', table: '[__mj_BizAppsForms].[FormResponse]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('formresp', r.ResponseKey)), FormID: sqlId(uuidFor('form', r.FormKey)),
+        FormVersionID: sqlId(uuidFor('formver', r.VersionKey)), Status: sqlStr(r.Status),
+        RespondentPersonID: sqlId(uuidFor('person', r.MemberNumber)), SubmittedAt: sqlDate(r.SubmittedAt),
+      }),
+    },
+    {
+      json: 'form_answers', table: '[__mj_BizAppsForms].[FormResponseAnswer]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('formans', r.AnswerKey)), ResponseID: sqlId(uuidFor('formresp', r.ResponseKey)),
+        QuestionID: sqlId(uuidFor('formq', r.QuestionKey)), NumericValue: sqlNum(r.NumericValue ?? null), BooleanValue: sqlBit(r.BooleanValue ?? null),
+      }),
+    },
+  ],
   events: [
     {
       json: 'events', table: '[morecheese_events].[Event]',
@@ -171,7 +264,7 @@ const MAPPING = {
 
 // ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
 const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
-const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders']; // the pack pyramid
+const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms']; // the pack pyramid
 mkdirSync(join(OUT, 'sql'), { recursive: true });
 const summary = [];
 let packIndex = 0;

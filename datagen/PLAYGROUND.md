@@ -10,7 +10,7 @@ entities**. No reconciliation required; wipe-and-recreate whenever.
 - **Data:** seed 42 · N=2500 · release 2026-07-31 · 60/60 gates green — 1,999 visible
   members (2,500 generated minus the 3-year archive rule), 627 orgs, ~8k membership
   periods, ~17.5k registrations, ~17.4k orders, 12 hero personas.
-- **MJ layer:** all 13 tables registered — identity as `MJ_BizApps_Common: *`, the rest as `MoreCheese: *` entities (CodeGen run scoped to
+- **MJ layer:** all 27 tables registered across four apps — `MJ_BizApps_Common: *` (identity), `Committees: *` (governance), `MJ_BizApps_Forms: *` (the survey), `MoreCheese: *` (the rest) (CodeGen run scoped to
   the `morecheese_*` schemas), with generated views (`vwPeople`, `vwMembershipPeriods`, …)
   and CRUD procs. `mj sync push` round-trips against them ("no changes" vs the SQL-loaded
   rows — the pinned UUIDs make both load paths the same rows).
@@ -51,6 +51,25 @@ JOIN morecheese_members.MemberProfile pr ON pr.PersonID=per.ID
 WHERE mp.Status = 'PendingRenewal' ORDER BY mp.EndDate;
 ```
 
+-- the causal money shot: NPS predicts churn because both share the engagement cause
+SELECT mp.Status, AVG(a.NumericValue) AS meanNPS, COUNT(*) AS n
+FROM __mj_BizAppsForms.FormResponseAnswer a
+JOIN __mj_BizAppsForms.FormResponse fr ON a.ResponseID = fr.ID
+JOIN __mj_BizAppsForms.FormQuestion q ON a.QuestionID = q.ID
+JOIN morecheese_members.MembershipPeriod mp ON mp.PersonID = fr.RespondentPersonID
+  AND mp.StartDate <= fr.SubmittedAt AND fr.SubmittedAt <= mp.EndDate
+WHERE q.QuestionType = 'NPS' AND mp.Status IN ('Renewed','Lapsed') GROUP BY mp.Status;
+
+-- who chairs what (bizapps-committees' real FK chain)
+SELECT c.Name AS Committee, t.Name AS Term, p.FirstName + ' ' + p.LastName AS Chair
+FROM __mj_BizAppsCommittees.Membership m
+JOIN __mj_BizAppsCommittees.Role r ON m.RoleID = r.ID
+JOIN __mj_BizAppsCommittees.Term t ON m.TermID = t.ID
+JOIN __mj_BizAppsCommittees.Committee c ON t.CommitteeID = c.ID
+JOIN __mj_BizAppsCommon.Person p ON m.PersonID = p.ID
+WHERE r.Name = 'Chair' ORDER BY c.Name, t.StartDate;
+```
+
 Also: `datagen/out/dashboard.html` — the offline inspector (member timelines, the causal
 tab, the gate report) over the same build.
 
@@ -62,7 +81,7 @@ node datagen/cli/build.mjs --n 2500 --seed 42 --release 2026-07-31 --demo
 node datagen/cli/emit-sql.mjs && node datagen/cli/emit-schema.mjs && node datagen/cli/emit-mjsync.mjs
 
 # 2. clone the MJ DB (inside the sql container) + install:
-#    RESTORE ... AS MoreCheese_Playground, then run out/sql/00_schema.sql, 01..05_*.sql in order
+#    RESTORE ... AS MoreCheese_Playground, then run out/sql/00_schema.sql, 01..07_*.sql in order
 
 # 3. register entities: from this repo root, with DB_* env pointed at the playground DB
 npx mj codegen --skipfiles   # DB-side only: registers entities, generates views/procs —

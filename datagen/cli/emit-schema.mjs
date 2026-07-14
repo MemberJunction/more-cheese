@@ -38,7 +38,7 @@ const c = (name, type, opt = {}) => ({ name, type, nullable: !!opt.null, pk: !!o
 // __mj_BizAppsCommon is a STAND-IN: IF-guarded, real column shapes (copied from
 // bizapps-common migrations/B202602271452) — when the real app is installed first, the
 // guards skip and our INSERTs land in the genuine tables.
-const SCHEMAS = ['__mj_BizAppsCommon', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
+const SCHEMAS = ['__mj_BizAppsCommon', '__mj_BizAppsCommittees', '__mj_BizAppsForms', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
 const TABLES = [
   // bizapps-common stand-ins — REAL shapes (B202602271452), minus their FKs to tables we
   // don't stand in (__mj.User, OrganizationType); columns we don't fill stay nullable
@@ -70,6 +70,72 @@ const TABLES = [
     c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
     c('MemberNumber', s(50)), c('Segment', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
     c('Latitude', GEO), c('Longitude', GEO), c('JoinDate', DATE), c('IsSharedDemo', BIT),
+  ] },
+  // bizapps-committees stand-ins (B202602151200) — same IF-guard convention
+  { schema: '__mj_BizAppsCommittees', table: 'Type', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('IsStandards', BIT), c('DefaultTermMonths', INT, { null: true }),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Role', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('IsOfficer', BIT), c('IsVotingRole', BIT), c('Sequence', INT),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Committee', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(255)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('TypeID', UID, { fk: '[__mj_BizAppsCommittees].[Type]' }), c('MissionStatement', 'NVARCHAR(MAX)', { null: true }),
+    c('Status', s(50)), c('IsPublic', BIT), c('FormationDate', DATE, { null: true }),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Term', cols: [
+    c('ID', UID, { pk: true }), c('CommitteeID', UID, { fk: '[__mj_BizAppsCommittees].[Committee]' }),
+    c('Name', s(100)), c('StartDate', DATE), c('EndDate', DATE, { null: true }), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Membership', cols: [
+    c('ID', UID, { pk: true }), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('RoleID', UID, { fk: '[__mj_BizAppsCommittees].[Role]' }), c('TermID', UID, { fk: '[__mj_BizAppsCommittees].[Term]' }),
+    c('StartDate', DATE), c('EndDate', DATE, { null: true }), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Meeting', cols: [
+    c('ID', UID, { pk: true }), c('CommitteeID', UID, { fk: '[__mj_BizAppsCommittees].[Committee]' }),
+    c('Name', s(255)), c('StartDateTime', 'DATETIMEOFFSET'), c('TimeZone', s(50)),
+    c('LocationType', s(50)), c('Status', s(50)),
+  ] },
+  { schema: '__mj_BizAppsCommittees', table: 'Attendance', cols: [
+    c('ID', UID, { pk: true }), c('MeetingID', UID, { fk: '[__mj_BizAppsCommittees].[Meeting]' }),
+    c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }), c('AttendanceStatus', s(50)),
+  ] },
+  // bizapps-forms stand-ins (B202606281200) — the D10 optional pack
+  { schema: '__mj_BizAppsForms', table: 'Form', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(255)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('Status', s(20)), c('RenderMode', s(20)),
+  ] },
+  { schema: '__mj_BizAppsForms', table: 'FormVersion', cols: [
+    c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
+    c('VersionNumber', INT), c('Status', s(20)), c('PublishedAt', 'DATETIMEOFFSET', { null: true }),
+  ] },
+  { schema: '__mj_BizAppsForms', table: 'FormPage', cols: [
+    c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
+    c('Title', s(255), { null: true }), c('DisplayOrder', INT),
+  ] },
+  { schema: '__mj_BizAppsForms', table: 'FormQuestion', cols: [
+    c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
+    c('PageID', UID, { null: true, fk: '[__mj_BizAppsForms].[FormPage]' }),
+    c('QuestionType', s(50)), c('Prompt', 'NVARCHAR(MAX)'), c('IsRequired', BIT), c('DisplayOrder', INT),
+  ] },
+  { schema: '__mj_BizAppsForms', table: 'FormDistribution', cols: [
+    c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
+    c('Name', s(255)), c('ChannelType', s(20)), c('Status', s(20)),
+    c('OpenAt', 'DATETIMEOFFSET', { null: true }), c('CloseAt', 'DATETIMEOFFSET', { null: true }),
+    c('MaxResponses', INT, { null: true }), c('ResponseCount', INT), c('CaptchaRequired', BIT), c('IsActive', BIT),
+  ] },
+  { schema: '__mj_BizAppsForms', table: 'FormResponse', cols: [
+    c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
+    c('FormVersionID', UID, { fk: '[__mj_BizAppsForms].[FormVersion]' }), c('Status', s(20)),
+    c('RespondentPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }), c('SubmittedAt', 'DATETIMEOFFSET', { null: true }),
+  ] },
+  { schema: '__mj_BizAppsForms', table: 'FormResponseAnswer', cols: [
+    c('ID', UID, { pk: true }), c('ResponseID', UID, { fk: '[__mj_BizAppsForms].[FormResponse]' }),
+    c('QuestionID', UID, { fk: '[__mj_BizAppsForms].[FormQuestion]' }),
+    c('NumericValue', 'DECIMAL(18,4)', { null: true }), c('BooleanValue', BIT, { null: true }),
   ] },
   { schema: 'morecheese_events', table: 'Event', cols: [
     c('ID', UID, { pk: true }), c('EventKey', s(50)), c('Name', s(200)), c('EventType', s(50)), c('EventDate', DATE),
