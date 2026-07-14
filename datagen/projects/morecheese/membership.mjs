@@ -59,7 +59,9 @@ export function runRenewalUnroll(cfg, people, orgs) {
   recurringDecision({
     seed, years,
     streamKey: (c, y) => `renew:${c.p.MemberNumber}:${y}`,
-    isPinned: (c) => !!c.p._hero,
+    // hero conditioning: outcomes are facts — pinned heroes renew, except a hero with a
+    // declared lapseYear, whose renewal in that year is a pinned NO (Danielle's story)
+    pinnedDecision: (c, y) => (c.p._hero ? (c.p._lapseYear != null ? y < c.p._lapseYear : true) : undefined),
     target: Math.min(0.97, Math.max(0.5, M.renewalTarget)),
     // regime shifts and texture apply AFTER calibration — tide, not boats (a shared shift
     // inside the calibrated scores gets solved away, erasing the dip)

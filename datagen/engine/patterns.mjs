@@ -73,7 +73,9 @@ export function staticAssignment(rules, ctx) {
  *   target                  → the rate the cohort calibrates to
  *   baselineShift(y)        → applied AFTER calibration (texture wobble + regime shifts)
  *   streamKey(item, y)      → dice stream for this decision
- *   isPinned(item)          → pinned entities always decide YES (conditioned, not drawn)
+ *   pinnedDecision(item, y) → a boolean makes the outcome a FACT (hero conditioning: a
+ *                             pinned yes never lapses, a pinned no lapses on schedule);
+ *                             null/undefined → the entity rolls its own dice
  *   record(item, y, ctx, decided) / onYes(item, y) / onNo(item, y)
  * }
  */
@@ -86,7 +88,8 @@ export function recurringDecision(opts) {
     const b0 = calibrateIntercept(scores, opts.target) + (opts.baselineShift?.(y) ?? 0);
     cohort.forEach((c, i) => {
       const r = rng(opts.seed, opts.streamKey(c, y));
-      const decided = opts.isPinned?.(c) ? true : r.bernoulli(sigmoid(b0 + scores[i]));
+      const pin = opts.pinnedDecision?.(c, y);
+      const decided = pin != null ? pin : r.bernoulli(sigmoid(b0 + scores[i]));
       opts.record?.(c, y, ctx, decided);
       if (decided) opts.onYes(c, y); else opts.onNo(c, y);
     });

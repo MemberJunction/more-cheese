@@ -93,16 +93,29 @@ export function buildPeople(cfg, orgs) {
       IsSharedDemo: true,
     });
   }
-  // heroes overwrite the first slots with pinned facts (their employers become extra orgs)
+  // heroes overwrite the first slots with pinned facts (their employers become extra orgs).
+  // Pinnable per hero: joinDate | joinYearsAgo+anniversaryOffsetDays | joinDaysBeforeRelease
+  // (release-relative — Nia's cold start survives any release date); employerEvent
+  // ({year, kind} — Danielle's dissolution, Bob's acquisition); thetaByYear (a pinned arc,
+  // e.g. Bob's 3-year decline); lapseYear (a pinned NO at that renewal); employerName null
+  // → no org (Jamie the enthusiast).
+  const ORG_TYPE = { Producer: 'Producer', Retailer: 'Retailer', Supplier: 'Supplier', Educator: 'Educator' };
   for (const h of R.heroes) {
-    const joinDate = h.joinDate ?? iso(addDays(addYears(cfg.release, -h.joinYearsAgo), h.anniversaryOffsetDays));
-    const heroOrg = { OrgKey: `ORG-H${h.memberNumber.slice(-3)}`, Name: h.employerName, Type: h.segment === 'Producer' ? 'Producer' : 'Retailer', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon, LifecycleEvent: null, IsSharedDemo: true };
-    orgs.push(heroOrg);
+    const joinDate = h.joinDate
+      ?? (h.joinDaysBeforeRelease != null ? iso(addDays(cfg.release, -h.joinDaysBeforeRelease))
+        : iso(addDays(addYears(cfg.release, -h.joinYearsAgo), h.anniversaryOffsetDays)));
+    let heroOrg = null;
+    if (h.employerName) {
+      heroOrg = { OrgKey: `ORG-H${h.memberNumber.slice(-3)}`, Name: h.employerName, Type: ORG_TYPE[h.segment] ?? 'Retailer', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon, LifecycleEvent: h.employerEvent ?? null, IsSharedDemo: true };
+      orgs.push(heroOrg);
+    }
     const idx = R.heroes.indexOf(h);
     people[idx] = {
       MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last,
       Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
-      OrgKey: heroOrg.OrgKey, JoinDate: joinDate, _theta: h.theta, _thetaPath: null, _phi: h.phi, // heroes: pinned level, no drift (their arcs are pinned facts)
+      OrgKey: heroOrg?.OrgKey ?? null, JoinDate: joinDate,
+      _theta: h.theta, _thetaPath: h.thetaByYear ?? null, _phi: h.phi, // pinned level — or a pinned ARC (thetaByYear); never drawn drift
+      _lapseYear: h.lapseYear ?? null,
       CycleType: h.cycleType, AutoRenew: h.autoRenew, IsSharedDemo: true, _hero: true,
     };
   }

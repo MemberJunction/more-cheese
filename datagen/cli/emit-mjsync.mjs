@@ -1,5 +1,9 @@
 // mj-sync emitter: converts the JSON packs into an MJ metadata tree.
-// Usage: node emit-mjsync.mjs [--out out]   (run build.mjs first) → out/metadata/…
+// Usage: node emit-mjsync.mjs [--out out] [--metadata-out <dir>]   (run build.mjs first)
+//   --metadata-out points the tree anywhere — e.g. the app's `metadata/demo-data/` so a
+//   `mj sync push` over that dir picks it up. Resolved against the CWD; default is the
+//   disposable out/metadata/. Only THIS emitter's own entity folders are cleared on
+//   regeneration — sibling content in the target dir (e.g. schema-info/) is left alone.
 //
 // Format per docs/template-docs/metadata.md: root .mj-sync.json with directoryOrder
 // (parents before children — the pack pyramid), one folder per ENTITY with its own
@@ -14,10 +18,11 @@
 // ⚠ `mj sync push` is a FULL RECONCILE per entity scope — it can DELETE rows that exist
 //   in the DB but not in these files. Dev databases only; never over real data.
 //
-// Output goes to out/metadata/ (inert), NOT the repo's live metadata/ folder.
+// Output defaults to out/metadata/ (inert); pass --metadata-out to write into the repo's
+// live metadata/ tree (e.g. a dedicated metadata/demo-data/ folder) for a real `mj sync`.
 
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { uuidFor } from '../engine/ids.mjs';
 
@@ -147,8 +152,10 @@ const MAPPING = [
 ];
 
 // ---------- emit the tree ----------
-const ROOT = join(OUT, 'metadata');
-rmSync(ROOT, { recursive: true, force: true });
+// --metadata-out targets any dir (default: disposable out/metadata/). We do NOT wipe the
+// whole target — only our own entity folders (below) — so pointing this at a shared
+// metadata/ tree can't delete a sibling like schema-info/.
+const ROOT = args['metadata-out'] ? resolve(args['metadata-out']) : join(OUT, 'metadata');
 mkdirSync(ROOT, { recursive: true });
 
 writeFileSync(join(ROOT, '.mj-sync.json'), JSON.stringify({
@@ -171,6 +178,7 @@ writeFileSync(join(ROOT, 'README.md'), [
 const summary = [];
 for (const m of MAPPING) {
   const dir = join(ROOT, m.dir);
+  rmSync(dir, { recursive: true, force: true }); // clear only OUR entity dir — never siblings
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, '.mj-sync.json'), JSON.stringify({ entity: m.entity, filePattern: '**/.*.json' }, null, 2));
   const rows = load(m.pack, m.json).map(m.record);

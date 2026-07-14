@@ -22,7 +22,7 @@ datagen/
                         its domain modules, name banks, and ruleset/. A second
                         universe is just a second projects/<name>/ directory.
   cli/                  the commands (generate, build, validate, demo, explain,
-                        emit-sql, emit-mjsync) — each takes --project
+                        emit-sql, emit-schema, emit-mjsync) — each takes --project
   test.mjs              the regression suite
 ```
 
@@ -89,8 +89,9 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `engine/packs.mjs` | Step 8: deal finished rows into per-app packs with manifests; strip the latents. |
 | `cli/validate.mjs` | **The inspector** — seven named gate groups (packs, temporal, benchmarks, arrows, trainability, heroes, status mix). |
 | `cli/build.mjs` | **The pipeline** — generate → validate on staging → promote to `out/` only on green; red runs park in `out-failed/`. |
-| `cli/emit-sql.mjs` | **SQL emitter** — packs → per-pack seed `.sql` with **deterministic real UUIDs** (uuidv5 of the business key; FKs derived independently by parent and child). Table names are ASSUMED shapes until the reconciliation. |
-| `cli/emit-mjsync.mjs` | **mj-sync emitter** — packs → `out/metadata/` tree in MJ's native format (per `docs/template-docs/metadata.md`): folder per entity, records with **pinned primaryKeys**, directoryOrder = the pack pyramid. Same UUIDs as the SQL emitter, so either load path fills identical rows. Entity names ASSUMED; ⚠ `mj sync push` full-reconciles — dev DBs only. |
+| `cli/emit-sql.mjs` | **SQL seed emitter** — packs → per-pack `.sql` `INSERT`s with **deterministic real UUIDs** (uuidv5 of the business key; FKs derived independently by parent and child). Pure inserts; assumes the tables exist. Table names are ASSUMED shapes until the reconciliation. |
+| `cli/emit-schema.mjs` | **Provisional schema emitter** — `CREATE SCHEMA` + `CREATE TABLE` DDL (→ `out/sql/00_schema.sql`, runs before the seed packs) so you can stand up a **standalone throwaway demo DB** without waiting on Marcelo's authoritative migrations. Assumed shapes, clearly labeled; no `__mj_*` columns. A `test.mjs` guard asserts the DDL covers every column `emit-sql` inserts, so the two can't drift. |
+| `cli/emit-mjsync.mjs` | **mj-sync emitter** — packs → an MJ metadata tree (per `docs/template-docs/metadata.md`): folder per entity, records with **pinned primaryKeys**, directoryOrder = the pack pyramid. Same UUIDs as the SQL emitter, so either load path fills identical rows. Defaults to `out/metadata/`; **`--metadata-out <dir>`** writes into the repo's live `metadata/` tree (e.g. a dedicated `metadata/demo-data/`) for a real `mj sync` — only its own entity folders are cleared on regen, so a sibling like `schema-info/` is safe. Entity names ASSUMED; ⚠ `mj sync push` full-reconciles — dev DBs only. |
 | `engine/ids.mjs` | Deterministic UUIDv5 from business keys — shared by both emitters. |
 | `engine/rng.mjs` | The dice: content-addressed substreams, distributions, the intercept solver. |
 | `engine/stats.mjs` | The inspector's math: logistic regression with standard errors. |
@@ -105,6 +106,14 @@ determinism means "byte-identical or you broke something."
 at the end), each with table JSON files + a `manifest.json` declaring `dependsOn`. The
 validator checks referential closure per pack layer, exactly like the future install-time
 check.
+
+The emitters turn those packs into loadable artifacts:
+- **`out/sql/`** — `00_schema.sql` (provisional `CREATE TABLE` DDL, `emit-schema`) then
+  `01…05_<pack>.sql` (`INSERT` seeds, `emit-sql`), plus `_install-order.txt`. Run in order
+  against a throwaway SQL Server DB to stand up a full standalone demo database.
+- **`out/metadata/`** (or a `--metadata-out` target) — the mj-sync tree (`emit-mjsync`) to
+  push into an MJ dev database. Same deterministic UUIDs as the SQL path, so both fill
+  identical rows.
 
 ## Assumptions carried (swap when the sessions answer)
 

@@ -405,6 +405,32 @@ function checkHeroes() {
   const dTo = (new Date(`${marcus.EndDate}T00:00:00Z`) - new Date(`${run.releaseDate}T00:00:00Z`)) / 86400000;
   const [dLo, dHi] = R.heroes[1].pins.endDateWithinDaysOfRelease;
   check(`hero Marcus: PendingRenewal, EndDate release+${dTo}d ∈ [${dLo},${dHi}], autoRenew off`, marcus.Status === 'PendingRenewal' && dTo >= dLo && dTo <= dHi && marcus.AutoRenew === false, `status=${marcus.Status}`);
+
+  // generic pin gates: EVERY hero loads with its declared pins intact (driven by heroes.json,
+  // so a new persona gets its gates by declaration — no validator edit)
+  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  for (const h of R.heroes) {
+    const p = people.find((x) => x.MemberNumber === h.memberNumber);
+    const per = lastPeriod.get(h.memberNumber);
+    const st = lastStatus.get(h.memberNumber);
+    const problems = [];
+    if (!p) problems.push('missing');
+    if (p && h.pins.status === 'Active' && !['Active', 'PendingRenewal'].includes(st)) problems.push(`status=${st}≠Active`);
+    if (p && h.pins.status === 'Lapsed' && st !== 'Lapsed') problems.push(`status=${st}≠Lapsed`);
+    if (p && h.pins.tier && per?.MembershipTier !== h.pins.tier) problems.push(`tier=${per?.MembershipTier}`);
+    if (p && h.pins.cancellationReasonContains && !(per?.CancellationReason ?? '').includes(h.pins.cancellationReasonContains)) problems.push(`reason='${per?.CancellationReason}'`);
+    if (p && (h.pins.employerDissolved || h.pins.employerAcquired)) {
+      const ev = orgByKey.get(p.OrgKey)?.LifecycleEvent;
+      const want = h.pins.employerDissolved ? ['Dissolved', h.pins.employerDissolved] : ['Acquired', h.pins.employerAcquired];
+      if (ev?.kind !== want[0] || ev?.year !== want[1]) problems.push(`employerEvent=${JSON.stringify(ev)}`);
+    }
+    if (p && h.pins.joinedDaysBeforeRelease != null) {
+      const dJoin = (new Date(`${run.releaseDate}T00:00:00Z`) - new Date(`${p.JoinDate}T00:00:00Z`)) / 86400000;
+      if (Math.round(dJoin) !== h.pins.joinedDaysBeforeRelease) problems.push(`joined ${dJoin}d before release`);
+    }
+    if (p && h.employerName && orgByKey.get(p.OrgKey)?.Name !== h.employerName) problems.push(`employer=${orgByKey.get(p.OrgKey)?.Name}`);
+    check(`hero ${h.first} ${h.last} (${h.memberNumber}): pins hold`, problems.length === 0, problems.join('; ') || `status=${st}`);
+  }
 }
 
 // ---------- status mix (loose at N=500) ----------

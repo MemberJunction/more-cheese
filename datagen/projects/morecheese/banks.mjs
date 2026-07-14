@@ -23,7 +23,8 @@ function expandRegister(reg) {
   for (const form of reg.toponymForms) for (const t of ORG_BANK.toponyms) pool.push(form.replace('{t}', t));
   for (const form of reg.surnameForms) for (const s of ORG_BANK.surnames) pool.push(form.replace('{s}', s));
   pool.push(...reg.oneOffs);
-  return pool;
+  const reserved = new Set(ORG_BANK.reserved ?? []); // hero employers — never dealt to the crowd
+  return pool.filter((n) => !reserved.has(n));
 }
 
 /**
