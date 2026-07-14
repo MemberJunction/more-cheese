@@ -1,9 +1,9 @@
 {
   "$schema": "https://schema.memberjunction.org/mj-app/v1.json",
   "manifestVersion": 1,
-  "name": "mj-sample-app",
-  "displayName": "MJ Sample Open App (Template)",
-  "description": "A fill-in-the-blanks template for building MemberJunction Open Apps. Clone it, rename it, and replace the samples with your app.",
+  "name": "more-cheese-demo",
+  "displayName": "MoreCheese Demo",
+  "description": "The MoreCheese demo association (International Cheese Federation): a generated, causally-consistent dataset demonstrating the MJ platform across composed BizApps.",
   "version": "1.0.0",
   "license": "<Set-this>",
   "icon": "fa-solid fa-cube",
@@ -16,7 +16,7 @@
   "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2.git",
   "mjVersionRange": ">=5.0.0 <6.0.0",
   "schema": {
-    "name": "sample_app",
+    "name": "morecheese_members",
     "createIfNotExists": true
   },
   "migrations": {
@@ -56,6 +56,29 @@
     "visibility": "public",
     "sourceDirectory": "packages"
   },
-  "categories": ["Template"],
-  "tags": ["template", "sample", "starter"]
+  "categories": [
+    "Demo"
+  ],
+  "tags": [
+    "demo",
+    "association",
+    "morecheese"
+  ],
+  "dependencies": [
+    {
+      "name": "mj-bizapps-common",
+      "repository": "https://github.com/MemberJunction/bizapps-common",
+      "versionRange": ">=5.30.0 <6.0.0"
+    },
+    {
+      "name": "mj-committees",
+      "repository": "https://github.com/MemberJunction/bizapps-committees",
+      "versionRange": ">=1.0.0 <2.0.0"
+    },
+    {
+      "name": "mj-bizapps-forms",
+      "repository": "https://github.com/MemberJunction/bizapps-forms",
+      "versionRange": ">=0.1.0 <1.0.0"
+    }
+  ]
 }

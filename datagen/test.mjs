@@ -93,6 +93,34 @@ step('schema DDL covers every INSERT column', () => {
   if (missing.length) throw new Error('❌ schema/insert drift:\n' + missing.map((x) => '  ' + x).join('\n'));
 });
 
+// 6c. migration ↔ generator drift guard: the frozen baseline migration OWNS the morecheese
+// shapes; the generator's emit-schema (a dev shim) must keep matching it exactly
+step('frozen migration matches generator shapes (morecheese tables)', () => {
+  const mig = readFileSync(join(HERE, '..', 'migrations', 'B202607141200__v1.0.0_MoreCheese_Baseline.sql'), 'utf8');
+  const shim = readFileSync(join(HERE, 'out', 'sql', '00_schema.sql'), 'utf8');
+  const cols = (body) => new Set([...body.matchAll(/^\s+\[?(\w+)\]? /gm)].map((x) => x[1]).filter((c) => c !== 'CONSTRAINT'));
+  const parse = (sql, resolve) => {
+    const out = {};
+    for (const m of sql.matchAll(/CREATE TABLE (\S+?)\.(\[?\w+\]?) \(([\s\S]*?)\n\);/g)) {
+      const schema = resolve(m[1].replace(/[\[\]]/g, ''));
+      out[`${schema}.${m[2].replace(/[\[\]]/g, '')}`] = cols(m[3]);
+    }
+    return out;
+  };
+  const migT = parse(mig, (s2) => s2 === '${flyway:defaultSchema}' ? 'morecheese_members' : s2);
+  const shimT = parse(shim, (s2) => s2);
+  const problems = [];
+  for (const [t, mcols] of Object.entries(migT)) {
+    if (!shimT[t]) { problems.push(`migration table ${t} missing from generator shim`); continue; }
+    for (const c of mcols) if (!shimT[t].has(c)) problems.push(`${t}.${c} in migration, not in shim`);
+    for (const c of shimT[t]) if (!mcols.has(c)) problems.push(`${t}.${c} in shim, not in migration`);
+  }
+  for (const t of Object.keys(shimT).filter((x) => x.startsWith('morecheese'))) {
+    if (!migT[t]) problems.push(`generator table ${t} has no frozen migration (write a V* file!)`);
+  }
+  if (problems.length) throw new Error('❌ migration/shim drift:\n' + problems.map((x) => '  ' + x).join('\n'));
+});
+
 for (const d of ['out-test', 'out-test2']) rmSync(join(HERE, d), { recursive: true, force: true });
 console.log(`\n${failures === 0 ? '✔ ALL GREEN' : `✋ ${failures} step(s) failed`}`);
 process.exit(failures ? 1 : 0);

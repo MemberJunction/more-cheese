@@ -7,8 +7,9 @@ per-app pack emission, and the validation harness — **before** the reconciliat
 causal-map sessions, so their outputs land in a running machine instead of a document.
 
 **What this is NOT:** production code. Zero dependencies, plain Node (≥ 20), deliberately
-outside `packages/*` (no workspace/publishing ceremony while the design moves). It graduates
-into a real package once the reconciliation fixes the table shapes.
+outside `packages/*` (no workspace/publishing ceremony while the design moves). The
+`morecheese_*` shapes are FROZEN into the app's baseline migration (2026-07-14); the
+bizapps dependencies are declared in `mj-app.json`.
 
 **Structure (framework rungs 2–3 — see [FRAMEWORK.md](FRAMEWORK.md)):** three roles, three
 directories.

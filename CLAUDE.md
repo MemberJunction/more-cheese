@@ -66,7 +66,7 @@ covered there). Read the relevant topic before working in its area:
 ```sh
 # linked (from the MJ repo root — the normal mode):
 npx turbo build --filter="@mj-more-cheese-demo/*"
-npx mj migrate --schema sample_app --dir packages/dev-apps/mj-sample-open-app/migrations
+npx mj migrate --schema morecheese_members --dir packages/dev-apps/more-cheese-demo/migrations
 npx mj codegen
 
 # standalone smoke build (no DB):

@@ -1,11 +1,12 @@
 // SCHEMA emitter: provisional CREATE SCHEMA + CREATE TABLE DDL for STANDALONE demo DBs.
 // Usage: node emit-schema.mjs [--out out]   → out/sql/00_schema.sql (run before the seed packs)
 //
-// ⚠ THIS IS NOT THE RECONCILIATION. Table/column shapes here are the generator's ASSUMED
-//   shapes — the same ones emit-sql's INSERTs target. They exist so you can stand up a
-//   throwaway SQL Server demo database WITHOUT waiting on Marcelo's authoritative migrations
-//   (which own the real shapes and ship to consumers). When those land, delete this file's
-//   output and load the seed packs into the real tables instead.
+// ⚠ DEV SHIM — NEVER SHIPS. Since 2026-07-14 the morecheese_* shapes are OWNED by the
+//   frozen baseline migration (migrations/B202607141200__v1.0.0_MoreCheese_Baseline.sql);
+//   the bizapps stand-ins remain playground conveniences (a genuine app install wins the
+//   IF-guards). This file exists only to stand up throwaway demo databases without doing
+//   full app installs. A suite drift-guard asserts these shapes still match the migration —
+//   any new morecheese table added here requires a new hand-authored V* migration.
 //
 // Deliberately omits everything CodeGen/MJ owns: no __mj_* audit columns, no MJ entity
 // registration. Column names + nullability are kept in lockstep with emit-sql's MAPPING by

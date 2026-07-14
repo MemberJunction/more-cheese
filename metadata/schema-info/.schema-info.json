@@ -1,11 +1,11 @@
 [
   {
     "fields": {
-      "SchemaName": "sample_app",
+      "SchemaName": "morecheese_members",
       "EntityIDMin": 10000001,
       "EntityIDMax": 10099999,
-      "EntityNamePrefix": "Sample App",
-      "Description": "MJ Sample Open App - demonstration schema"
+      "EntityNamePrefix": "MoreCheese: ",
+      "Description": "MoreCheese demo \u2014 home schema (member/org extension profiles + membership periods)"
     },
     "primaryKey": {
       "ID": "E0A00001-0001-0001-0001-E0A000000001"

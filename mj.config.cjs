@@ -91,7 +91,7 @@ module.exports = {
       // Order matters: more-specific schema names must come first (greedy
       // sequential substitution).
       // TODO(template): your schema name here:
-      { schema: 'sample_app', placeholder: '${flyway:defaultSchema}' },
+      { schema: 'morecheese_members', placeholder: '${flyway:defaultSchema}' },
       { schema: '__mj', placeholder: '${mjSchema}' },
     ],
   },

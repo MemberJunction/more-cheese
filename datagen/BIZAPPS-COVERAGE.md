@@ -3,6 +3,20 @@
 What gets generated into which app's schema, what the shapes are based on, and how each
 claim was verified. Updated 2026-07-14 (committees + forms landed).
 
+## The ownership rule (who does what — settled 2026-07-14)
+
+**Apps own schemas. Datagen owns data. The generator wrote our migrations exactly once.**
+
+- Every bizapp's schema comes from installing that app (its own migrations) — declared as
+  dependencies in `mj-app.json` (bizapps-common, committees, forms; install order
+  guaranteed). Apps we don't generate for (e.g. sonar, a CONSUMER that scores our data)
+  are covered by the same mechanism — datagen never needs to know they exist.
+- The `morecheese_*` shapes were frozen ONCE into
+  `migrations/B202607141200__v1.0.0_MoreCheese_Baseline.sql` — from here on, migrations own
+  them (immutable, additive-only, hand-authored `V*` files for every change).
+- `emit-schema` is a DEV SHIM for throwaway playgrounds; it never ships. A suite
+  drift-guard asserts the generator's shapes still match the frozen migration.
+
 ## The rule
 
 Each domain's **system of record** is the bizapps app that owns it; MoreCheese keeps
@@ -33,7 +47,7 @@ scope until those demos compose), bizapps-sonar (a CONSUMER — it scores our da
 | `__mj_BizAppsCommon` | bizapps-common `migrations/B202602271452__v1.0.x_Schema_and_Tables.sql` (checked out locally) |
 | `__mj_BizAppsCommittees` | bizapps-committees `migrations/B202602151200__v1.0__Committees_Baseline.sql` (fetched from the public repo) |
 | `__mj_BizAppsForms` | bizapps-forms `migrations/B202606281200__v0.1.x_Schema_and_Tables.sql` (fetched from the public repo) |
-| `morecheese_*` | ours — ASSUMED shapes pending the reconciliation (the one remaining assumption) |
+| `morecheese_*` | **frozen** — `migrations/B202607141200__v1.0.0_MoreCheese_Baseline.sql` (converted once from the generator's proven shapes, 2026-07-14; migrations own them from here) |
 
 ## How "correct" was verified (evidence, not vibes)
 
