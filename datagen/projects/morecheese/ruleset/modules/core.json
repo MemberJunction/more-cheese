@@ -1,7 +1,7 @@
 {
   "$comment": "Walking-skeleton ruleset for the vertical slice (member → membership → event registration). Targets mirror benchmarks-draft.json v0.9.2 (canonical — that file wins). Effect sizes use the ruleset-spec §2 bands: weak 0.15-0.40, med 0.40-0.90, strong 0.90-1.80 per 1 SD. ASSUMPTION markers = provisional pending reconciliation/workshop. CORE MODULE: the shared substrate every domain module builds on.",
   "version": "0.0.2",
-  "scale": { "members": 500 },
+  "scale": { "members": 2500, "$note": "THE demo scope (D-register): a bare build produces the canonical 2,500-member world. Tests pass --n 500 explicitly for speed — explicit beats implicit for the small world, not the shipped one." },
   "history": { "startYear": 2013, "conferenceMonth": 7, "conferenceDay": 15 },
   "latents": {
     "copulaRho": 0.4,

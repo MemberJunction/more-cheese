@@ -7,7 +7,7 @@
 
 ## The world
 
-- **500 members** (pilot scale), history from 2013, flagship conference every July 15.
+- **2500 members** (the demo scope; tests run a 500-member pilot via --n), history from 2013, flagship conference every July 15.
 - Geography: 60% NA · 25% EU · 15% RoW — members cluster in real dairy-belt cities with real coordinates.
 - Organizations: about 1 per 4 members; 45% are producers; each year ~2% of orgs hit a lifecycle event (dissolved / acquired / program cut) — the fuel for employer-driven churn stories.
 - Renewal cycles: 70% calendar-year (everyone expires Dec 31) + 30% anniversary cohort *(D6 assumption, pending ratification)*.
