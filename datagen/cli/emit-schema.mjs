@@ -305,6 +305,30 @@ for (const [id, name, cat, fwd, rev] of REL_TYPE_SEEDS) {
   lines.push(`IF NOT EXISTS (SELECT 1 FROM [__mj_BizAppsCommon].[RelationshipType] WHERE ID = '${id}')`);
   lines.push(`INSERT INTO [__mj_BizAppsCommon].[RelationshipType] (ID, Name, Category, IsDirectional, ForwardLabel, ReverseLabel, IsActive) VALUES ('${id}', N'${name}', N'${cat}', 1, N'${fwd}', N'${rev}', 1);`);
 }
+// playground seeds for APP-OWNED lookups our data references by name (real installs ship
+// their own — the name guards keep this inert there; integration finding F6)
+const LOOKUP_SEEDS = [
+  ['[__mj_BizAppsCommittees].[Role]', '(ID, Name, IsOfficer, IsVotingRole, Sequence)', [
+    ["'FF49949F-D6EE-5D20-858D-B6606DAF070A'", "N'Chair'", 1, 1, 1],
+    ["'9C9BB0CE-0144-5F75-97C3-6C8463C08B51'", "N'Vice Chair'", 1, 1, 2],
+    ["'271A996D-04DB-5977-9296-1CA0FB679147'", "N'Member'", 0, 1, 100],
+  ]],
+  ['[__mj_BizAppsIssues].[IssueStatus]', '(ID, Name, Sequence, IsDefault, IsTerminal)', [
+    ["'FD5D7CB0-76D3-5071-83A2-84956BC40C04'", "N'New'", 10, 1, 0],
+    ["'D475F44D-87C0-5096-A63E-6F246D6CB736'", "N'In Progress'", 20, 0, 0],
+    ["'9F669D60-DF28-5B86-A7EB-421AA3293183'", "N'Resolved'", 30, 0, 1],
+    ["'06EB4A32-7F06-504C-A3C0-9F1DF0098CA3'", "N'Closed'", 40, 0, 1],
+  ]],
+];
+lines.push('-- app-owned lookup seeds for STANDALONE playgrounds (name-guarded; real installs ship their own — F6)');
+for (const [table, cols, rows] of LOOKUP_SEEDS) {
+  for (const row of rows) {
+    lines.push(`IF NOT EXISTS (SELECT 1 FROM ${table} WHERE Name = ${row[1]})`);
+    lines.push(`INSERT INTO ${table} ${cols} VALUES (${row.join(', ')});`);
+  }
+}
+lines.push('');
+
 lines.push('');
 
 mkdirSync(join(OUT, 'sql'), { recursive: true });

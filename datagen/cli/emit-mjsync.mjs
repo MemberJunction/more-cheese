@@ -15,6 +15,8 @@
 // ✓ ENTITY NAMES VERIFIED (2026-07-13): a real CodeGen run against a cloned MJ database
 //   (MoreCheese_Playground) minted exactly these names, and `mj sync push` round-tripped
 //   ("no changes" vs SQL-loaded rows — pinned UUIDs make both load paths the same rows).
+//   App-SEEDED lookups (committee Roles, issue Statuses) are referenced BY NAME (@lookup) —
+//   the owning apps ship those rows (integration finding F6); we never emit them.
 //   Table SHAPES remain provisional pending the reconciliation, and the common-pack
 //   entities will eventually belong to bizapps-common, not MoreCheese.
 // ⚠ `mj sync push` is a FULL RECONCILE per entity scope — it can DELETE rows that exist
@@ -108,14 +110,12 @@ const MAPPING = [
     // committees pack → bizapps-committees entities (their prefix 'Committees: '); no IsSharedDemo
   { pack: 'committees', json: 'committee_types', dir: 'committee-types', entity: 'Committees: Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('ctype', r.TypeKey) }, fields: { Name: r.Name, IsStandards: r.IsStandards, DefaultTermMonths: r.DefaultTermMonths } }) },
-  { pack: 'committees', json: 'committee_roles', dir: 'committee-roles', entity: 'Committees: Roles',
-    record: (r) => ({ primaryKey: { ID: uuidFor('crole', r.RoleKey) }, fields: { Name: r.Name, IsOfficer: r.IsOfficer, IsVotingRole: r.IsVotingRole, Sequence: r.Sequence } }) },
   { pack: 'committees', json: 'committees', dir: 'committees', entity: 'Committees: Committees',
     record: (r) => ({ primaryKey: { ID: uuidFor('committee', r.CommitteeKey) }, fields: { Name: r.Name, TypeID: uuidFor('ctype', r.TypeKey), MissionStatement: r.MissionStatement, Status: r.Status, IsPublic: true, FormationDate: r.FormationDate } }) },
   { pack: 'committees', json: 'committee_terms', dir: 'committee-terms', entity: 'Committees: Terms',
     record: (r) => ({ primaryKey: { ID: uuidFor('cterm', r.TermKey) }, fields: { CommitteeID: uuidFor('committee', r.CommitteeKey), Name: r.Name, StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status === 'Completed' ? 'Completed' : 'Active' } }) },
   { pack: 'committees', json: 'committee_memberships', dir: 'committee-memberships', entity: 'Committees: Memberships',
-    record: (r) => ({ primaryKey: { ID: uuidFor('cmembership', r.MembershipKey) }, fields: { PersonID: uuidFor('person', r.MemberNumber), RoleID: uuidFor('crole', r.RoleKey), TermID: uuidFor('cterm', r.TermKey), StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('cmembership', r.MembershipKey) }, fields: { PersonID: uuidFor('person', r.MemberNumber), RoleID: `@lookup:Committees: Roles.Name=${r.RoleKey}`, TermID: uuidFor('cterm', r.TermKey), StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status } }) },
   { pack: 'committees', json: 'committee_meetings', dir: 'committee-meetings', entity: 'Committees: Meetings',
     record: (r) => ({ primaryKey: { ID: uuidFor('meeting', r.MeetingKey) }, fields: { CommitteeID: uuidFor('committee', r.CommitteeKey), Name: r.Name, StartDateTime: r.StartDateTime, TimeZone: 'UTC', LocationType: r.LocationType, Status: r.Status } }) },
   { pack: 'committees', json: 'committee_attendance', dir: 'committee-attendance', entity: 'Committees: Attendances',
@@ -138,10 +138,8 @@ const MAPPING = [
   // issues pack → bizapps-issues entities
   { pack: 'issues', json: 'issue_types', dir: 'issue-types', entity: 'MJ_BizApps_Issues: Issue Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('issuetype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, DefaultPriority: r.DefaultPriority, IsActive: r.IsActive } }) },
-  { pack: 'issues', json: 'issue_statuses', dir: 'issue-statuses', entity: 'MJ_BizApps_Issues: Issue Statuses',
-    record: (r) => ({ primaryKey: { ID: uuidFor('issuestatus', r.StatusKey) }, fields: { Name: r.Name, Sequence: r.Sequence, IsDefault: r.IsDefault, IsTerminal: r.IsTerminal, ColorCode: r.ColorCode } }) },
   { pack: 'issues', json: 'issues', dir: 'issues', entity: 'MJ_BizApps_Issues: Issues',
-    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: uuidFor('issuestatus', r.StatusKey), Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), SourceEntityID: `@lookup:Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: `@lookup:MJ_BizApps_Issues: Issue Statuses.Name=${r.StatusKey}`, Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), SourceEntityID: `@lookup:Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
   { pack: 'issues', json: 'issue_sequences', dir: 'issue-sequences', entity: 'MJ_BizApps_Issues: Issue Number Sequences',
     record: (r) => ({ primaryKey: { ScopeCode: r.ScopeCode }, fields: { NextSequenceNumber: r.NextSequenceNumber } }) },
     // forms pack → bizapps-forms entities (their prefix 'MJ_BizApps_Forms: ')

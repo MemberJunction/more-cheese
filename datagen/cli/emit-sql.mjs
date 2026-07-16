@@ -177,10 +177,6 @@ const MAPPING = {
       columns: (r) => ({ ID: sqlId(uuidFor('ctype', r.TypeKey)), Name: sqlStr(r.Name), IsStandards: sqlBit(r.IsStandards), DefaultTermMonths: sqlNum(r.DefaultTermMonths) }),
     },
     {
-      json: 'committee_roles', table: '[__mj_BizAppsCommittees].[Role]',
-      columns: (r) => ({ ID: sqlId(uuidFor('crole', r.RoleKey)), Name: sqlStr(r.Name), IsOfficer: sqlBit(r.IsOfficer), IsVotingRole: sqlBit(r.IsVotingRole), Sequence: sqlNum(r.Sequence) }),
-    },
-    {
       json: 'committees', table: '[__mj_BizAppsCommittees].[Committee]',
       columns: (r) => ({
         ID: sqlId(uuidFor('committee', r.CommitteeKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('ctype', r.TypeKey)),
@@ -198,7 +194,7 @@ const MAPPING = {
       json: 'committee_memberships', table: '[__mj_BizAppsCommittees].[Membership]',
       columns: (r) => ({
         ID: sqlId(uuidFor('cmembership', r.MembershipKey)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
-        RoleID: sqlId(uuidFor('crole', r.RoleKey)), TermID: sqlId(uuidFor('cterm', r.TermKey)),
+        RoleID: sqlVar({ Chair: '@Role_Chair', 'Vice Chair': '@Role_ViceChair', Member: '@Role_Member' }[r.RoleKey]), TermID: sqlId(uuidFor('cterm', r.TermKey)),
         StartDate: sqlDate(r.StartDate), EndDate: sqlDate(r.EndDate), Status: sqlStr(r.Status),
       }),
     },
@@ -285,14 +281,10 @@ const MAPPING = {
       columns: (r) => ({ ID: sqlId(uuidFor('issuetype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), DefaultPriority: sqlStr(r.DefaultPriority), IsActive: sqlBit(r.IsActive) }),
     },
     {
-      json: 'issue_statuses', table: '[__mj_BizAppsIssues].[IssueStatus]',
-      columns: (r) => ({ ID: sqlId(uuidFor('issuestatus', r.StatusKey)), Name: sqlStr(r.Name), Sequence: sqlNum(r.Sequence), IsDefault: sqlBit(r.IsDefault), IsTerminal: sqlBit(r.IsTerminal), ColorCode: sqlStr(r.ColorCode) }),
-    },
-    {
       json: 'issues', table: '[__mj_BizAppsIssues].[Issue]',
       columns: (r) => ({
         ID: sqlId(uuidFor('issue', r.IssueKey)), IssueNumber: sqlStr(r.IssueNumber), Title: sqlStr(r.Title),
-        IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlId(uuidFor('issuestatus', r.StatusKey)),
+        IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlVar({ New: '@IS_New', 'In Progress': '@IS_InProgress', Resolved: '@IS_Resolved', Closed: '@IS_Closed' }[r.StatusKey]),
         Severity: sqlStr(r.Severity), Priority: sqlStr(r.Priority),
         ReporterPersonID: sqlId(uuidFor('person', r.ReporterMemberNumber)),
         SourceEntityID: sqlVar({ 'MoreCheese: Orders': '@E_Orders', 'MJ_BizApps_Common: Organizations': '@E_Orgs', 'MoreCheese: Event Registrations': '@E_Regs', 'MJ_BizApps_Common: People': '@E_People' }[r.SourceEntityName]),
@@ -376,11 +368,22 @@ const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably u
 const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues']; // the pack pyramid
 // polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
 const PREAMBLE = {
+  committees: [
+    "-- app-seeded lookups resolve BY NAME (the owning app ships these rows; integration finding F6)",
+    "DECLARE @Role_Chair UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommittees].[Role] WHERE Name = N'Chair');",
+    "DECLARE @Role_ViceChair UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommittees].[Role] WHERE Name = N'Vice Chair');",
+    "DECLARE @Role_Member UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommittees].[Role] WHERE Name = N'Member');",
+  ],
   tasks: [
     "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
     "DECLARE @E_Meetings UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'Committees: Meetings');",
   ],
   issues: [
+    "-- app-seeded lookups resolve BY NAME (F6)",
+    "DECLARE @IS_New UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsIssues].[IssueStatus] WHERE Name = N'New');",
+    "DECLARE @IS_InProgress UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsIssues].[IssueStatus] WHERE Name = N'In Progress');",
+    "DECLARE @IS_Resolved UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsIssues].[IssueStatus] WHERE Name = N'Resolved');",
+    "DECLARE @IS_Closed UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsIssues].[IssueStatus] WHERE Name = N'Closed');",
     "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
     "DECLARE @E_Orders UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Orders');",
     "DECLARE @E_Orgs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Organizations');",

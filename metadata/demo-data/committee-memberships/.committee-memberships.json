@@ -5,7 +5,7 @@
   },
   "fields": {
    "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -18,7 +18,7 @@
   },
   "fields": {
    "PersonID": "81776B1F-5D80-509D-81A4-37E56A6936A3",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -31,7 +31,7 @@
   },
   "fields": {
    "PersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -44,7 +44,7 @@
   },
   "fields": {
    "PersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -57,7 +57,7 @@
   },
   "fields": {
    "PersonID": "0C7964B4-6A26-5D45-B05A-D8C99EA826B5",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -70,7 +70,7 @@
   },
   "fields": {
    "PersonID": "87A37AE8-711D-5D63-9C79-8D7A1FB54F9C",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -83,7 +83,7 @@
   },
   "fields": {
    "PersonID": "08E9592C-5E02-5913-BECF-ABE855B0EB39",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -96,7 +96,7 @@
   },
   "fields": {
    "PersonID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -109,7 +109,7 @@
   },
   "fields": {
    "PersonID": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -122,7 +122,7 @@
   },
   "fields": {
    "PersonID": "713F9D46-0C6A-5239-B259-A2A30AD711AB",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -135,7 +135,7 @@
   },
   "fields": {
    "PersonID": "C530EB45-9DE9-5458-91C7-458214CD16AB",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -148,7 +148,7 @@
   },
   "fields": {
    "PersonID": "B2A26737-D6CB-5149-8848-01C2954C376E",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -161,7 +161,7 @@
   },
   "fields": {
    "PersonID": "772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -174,7 +174,7 @@
   },
   "fields": {
    "PersonID": "4EA6CC93-E783-592C-8C4C-B74C4E1331EE",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -187,7 +187,7 @@
   },
   "fields": {
    "PersonID": "346BE678-4FB4-52EC-8F91-05D7976784E4",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -200,7 +200,7 @@
   },
   "fields": {
    "PersonID": "94A08A04-BBAD-5D8A-B728-79EFE6C9DD62",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -213,7 +213,7 @@
   },
   "fields": {
    "PersonID": "52C28E21-26ED-505E-8B9A-D2BDE568A26F",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -226,7 +226,7 @@
   },
   "fields": {
    "PersonID": "06638A55-B78C-5C5C-B02E-4D17A27CAD38",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -239,7 +239,7 @@
   },
   "fields": {
    "PersonID": "F9C47E84-4FD8-5B8E-A0EA-9618070C75A6",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -252,7 +252,7 @@
   },
   "fields": {
    "PersonID": "461E5FE0-3553-596A-830E-DF7F2E0A4DB4",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -265,7 +265,7 @@
   },
   "fields": {
    "PersonID": "1A3E7616-EF59-543E-AA03-413D8790979A",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -278,7 +278,7 @@
   },
   "fields": {
    "PersonID": "F3B0BD92-7812-538E-AC7C-A99AC4B70322",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -291,7 +291,7 @@
   },
   "fields": {
    "PersonID": "5A2B2472-DF21-55F4-A89E-54B16497E62D",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -304,7 +304,7 @@
   },
   "fields": {
    "PersonID": "306F6492-82B8-5D3E-93CE-C4A0C843690A",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -317,7 +317,7 @@
   },
   "fields": {
    "PersonID": "1B207F57-1685-59C1-82FB-30330CD4CC7E",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -330,7 +330,7 @@
   },
   "fields": {
    "PersonID": "82E5E82A-9152-53FD-A6FF-20F383A65261",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -343,7 +343,7 @@
   },
   "fields": {
    "PersonID": "34E7DE27-DB27-5ECB-BF07-0086AA0844AF",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -356,7 +356,7 @@
   },
   "fields": {
    "PersonID": "A07C1D28-30E3-5C0A-8B7A-2AD396DAEF98",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -369,7 +369,7 @@
   },
   "fields": {
    "PersonID": "ACB443AB-E853-56DD-990C-2749FDB643D0",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -382,7 +382,7 @@
   },
   "fields": {
    "PersonID": "7D1D1249-BCD3-5AC4-B842-99FE08C2AE30",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -395,7 +395,7 @@
   },
   "fields": {
    "PersonID": "61B58E8A-68A5-5B97-BB77-D1884BB1850A",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -408,7 +408,7 @@
   },
   "fields": {
    "PersonID": "F5B13498-FFB6-5BBC-B2B2-3D57B57F87B1",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -421,7 +421,7 @@
   },
   "fields": {
    "PersonID": "D609A950-5337-5B3C-B1EB-75B3936BBE53",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -434,7 +434,7 @@
   },
   "fields": {
    "PersonID": "E0343322-6B12-5B7F-B87E-E32340983D41",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -447,7 +447,7 @@
   },
   "fields": {
    "PersonID": "4560C14E-BA3E-585F-BA69-2C76D3BADB7C",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -460,7 +460,7 @@
   },
   "fields": {
    "PersonID": "E4313B6C-F512-518B-99E8-01433EAE7ADA",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -473,7 +473,7 @@
   },
   "fields": {
    "PersonID": "958B1085-3310-588F-AAC0-31AA558B19D5",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -486,7 +486,7 @@
   },
   "fields": {
    "PersonID": "A5B841FC-5FAC-5C15-84B8-01E923FDC052",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -499,7 +499,7 @@
   },
   "fields": {
    "PersonID": "EB0444A4-30A5-55CC-9ED2-8EE08BCDA187",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -512,7 +512,7 @@
   },
   "fields": {
    "PersonID": "76520CD2-2568-53CD-87CD-FFC846614FEB",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "86EA82F2-30B6-5DA3-A5F0-CC16CFED5A1A",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -525,7 +525,7 @@
   },
   "fields": {
    "PersonID": "89F1CB57-8635-5136-BE1C-4A0ECE48FCA9",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "C3D1DE49-E420-5A83-BF41-B3D18D3BCA37",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -538,7 +538,7 @@
   },
   "fields": {
    "PersonID": "71D79854-CEBE-54C2-AAB4-77F79BC69892",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -551,7 +551,7 @@
   },
   "fields": {
    "PersonID": "07255377-8B30-5E98-B9AC-10040BA112CA",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -564,7 +564,7 @@
   },
   "fields": {
    "PersonID": "428B287D-C6A8-51EC-A12D-B731FBB6D825",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -577,7 +577,7 @@
   },
   "fields": {
    "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -590,7 +590,7 @@
   },
   "fields": {
    "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -603,7 +603,7 @@
   },
   "fields": {
    "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -616,7 +616,7 @@
   },
   "fields": {
    "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -629,7 +629,7 @@
   },
   "fields": {
    "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -642,7 +642,7 @@
   },
   "fields": {
    "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -655,7 +655,7 @@
   },
   "fields": {
    "PersonID": "3CEC8FC4-71D3-5BCE-A9C6-E8C21F13C689",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -668,7 +668,7 @@
   },
   "fields": {
    "PersonID": "459759C2-7083-5C88-ADF4-14B00F4AA3CD",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -681,7 +681,7 @@
   },
   "fields": {
    "PersonID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -694,7 +694,7 @@
   },
   "fields": {
    "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -707,7 +707,7 @@
   },
   "fields": {
    "PersonID": "5BED1B9E-D380-5B08-827F-9D3F7B0FCDBA",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -720,7 +720,7 @@
   },
   "fields": {
    "PersonID": "0085D456-ED84-548F-A3B0-E06566F60778",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -733,7 +733,7 @@
   },
   "fields": {
    "PersonID": "E535DD86-20AD-5841-A5D8-DCA26A3C1038",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -746,7 +746,7 @@
   },
   "fields": {
    "PersonID": "D491DB88-82E5-5A2D-A20E-018781BD3E24",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -759,7 +759,7 @@
   },
   "fields": {
    "PersonID": "82ADEE0B-7298-509D-AB8A-6C1A83ECD502",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -772,7 +772,7 @@
   },
   "fields": {
    "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
-   "RoleID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -785,7 +785,7 @@
   },
   "fields": {
    "PersonID": "2E64DD9E-FAA0-5AB2-9A12-99F3021AD38F",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -798,7 +798,7 @@
   },
   "fields": {
    "PersonID": "11DDF75D-0D60-519A-8722-E963C2BA072B",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -811,7 +811,7 @@
   },
   "fields": {
    "PersonID": "EEFFFD90-CDF4-55B3-BC6D-C53840064A38",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -824,7 +824,7 @@
   },
   "fields": {
    "PersonID": "3ADDF481-AEBA-58F6-B1F3-77A4383EF8C2",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -837,7 +837,7 @@
   },
   "fields": {
    "PersonID": "B253E680-3869-5D3B-8349-57E1D2424E02",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -850,7 +850,7 @@
   },
   "fields": {
    "PersonID": "50C4B479-7320-5314-A525-F03017ED9411",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -863,7 +863,7 @@
   },
   "fields": {
    "PersonID": "83F1E1CF-8BDC-59B2-B3D5-E88E914DA670",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -876,7 +876,7 @@
   },
   "fields": {
    "PersonID": "F66CF544-89C9-53F5-B3E0-1C4433727146",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -889,7 +889,7 @@
   },
   "fields": {
    "PersonID": "06638A55-B78C-5C5C-B02E-4D17A27CAD38",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -902,7 +902,7 @@
   },
   "fields": {
    "PersonID": "95FB516B-C00F-5181-99C9-8850930A9D83",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -915,7 +915,7 @@
   },
   "fields": {
    "PersonID": "02508426-9885-5339-A60A-17E16C1AF7EE",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -928,7 +928,7 @@
   },
   "fields": {
    "PersonID": "15D868B4-B3DD-5920-B5AE-04D95410D654",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -941,7 +941,7 @@
   },
   "fields": {
    "PersonID": "AD96F858-249F-52DE-A856-82201D766FE5",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -954,7 +954,7 @@
   },
   "fields": {
    "PersonID": "87FCCAAF-DF34-50A3-9FB7-3E3C0C13597D",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -967,7 +967,7 @@
   },
   "fields": {
    "PersonID": "D6115D11-B9EC-5280-A5D4-A408527454F8",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -980,7 +980,7 @@
   },
   "fields": {
    "PersonID": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -993,7 +993,7 @@
   },
   "fields": {
    "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1006,7 +1006,7 @@
   },
   "fields": {
    "PersonID": "C32AC7DC-3260-5F8C-90F9-4D734070A951",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1019,7 +1019,7 @@
   },
   "fields": {
    "PersonID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1032,7 +1032,7 @@
   },
   "fields": {
    "PersonID": "D4A6A540-8DEC-5999-A7D5-5F88415EC0F8",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1045,7 +1045,7 @@
   },
   "fields": {
    "PersonID": "6EB548E6-BE0D-56A1-A61F-0F5001C0FE27",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1058,7 +1058,7 @@
   },
   "fields": {
    "PersonID": "38462C1A-999E-520E-BE56-FA3FD1B9C162",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1071,7 +1071,7 @@
   },
   "fields": {
    "PersonID": "F6C9862B-FDBF-58D8-B7E2-DA4CC32556B0",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1084,7 +1084,7 @@
   },
   "fields": {
    "PersonID": "A3B0E807-D7E1-538B-896F-24A842D2DF5F",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1097,7 +1097,7 @@
   },
   "fields": {
    "PersonID": "40E83159-9F07-508D-B760-A07200CC5B70",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1110,7 +1110,7 @@
   },
   "fields": {
    "PersonID": "9E87FF0D-F5FD-5ECC-B55A-D7183BD57789",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1123,7 +1123,7 @@
   },
   "fields": {
    "PersonID": "A75FC351-9913-5229-A277-277BB1984ACA",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1136,7 +1136,7 @@
   },
   "fields": {
    "PersonID": "794F53A7-E89A-54BA-8331-CB3A287C1C52",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1149,7 +1149,7 @@
   },
   "fields": {
    "PersonID": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1162,7 +1162,7 @@
   },
   "fields": {
    "PersonID": "D2168E46-AF30-5485-BB34-F2838DFE7151",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1175,7 +1175,7 @@
   },
   "fields": {
    "PersonID": "4BBB9EBD-2817-50E2-88DB-3B04A506A5A2",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1188,7 +1188,7 @@
   },
   "fields": {
    "PersonID": "EC2149AA-8C67-5D97-B5DB-6ABD80052189",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1201,7 +1201,7 @@
   },
   "fields": {
    "PersonID": "9FE55C26-8983-53AA-B517-52BE385CC0F0",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1214,7 +1214,7 @@
   },
   "fields": {
    "PersonID": "B5B922EA-B7F4-5FB0-97A4-C7CD1601E396",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1227,7 +1227,7 @@
   },
   "fields": {
    "PersonID": "15B3FB99-3484-5847-94C8-1FFF8C578C91",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1240,7 +1240,7 @@
   },
   "fields": {
    "PersonID": "A077CA54-4EC0-5F10-93B2-706F255E6876",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1253,7 +1253,7 @@
   },
   "fields": {
    "PersonID": "3DDEE449-AB71-5AFB-8575-C4455F47BB79",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1266,7 +1266,7 @@
   },
   "fields": {
    "PersonID": "0DCF2EA3-6822-584B-8E61-66A322E7AA45",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1279,7 +1279,7 @@
   },
   "fields": {
    "PersonID": "856688F8-C895-5E8E-91F2-CDF18AA68503",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1292,7 +1292,7 @@
   },
   "fields": {
    "PersonID": "63E19143-DB9A-5D70-AF46-97C9B3332233",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1305,7 +1305,7 @@
   },
   "fields": {
    "PersonID": "E7F3F84A-7FD4-58AF-A70E-FD5F73A52481",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1318,7 +1318,7 @@
   },
   "fields": {
    "PersonID": "89F1CB57-8635-5136-BE1C-4A0ECE48FCA9",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1331,7 +1331,7 @@
   },
   "fields": {
    "PersonID": "FEDB24D2-F31A-5907-B65D-1FFA73ACE3F7",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1344,7 +1344,7 @@
   },
   "fields": {
    "PersonID": "A52270AF-36AD-50CD-87C8-9A2E6ED946A7",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1357,7 +1357,7 @@
   },
   "fields": {
    "PersonID": "7D868A84-0297-5CD2-8D36-BFCEE85D4A1D",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1370,7 +1370,7 @@
   },
   "fields": {
    "PersonID": "BA581A9A-64B6-5CE1-9618-38C09AE040D6",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1383,7 +1383,7 @@
   },
   "fields": {
    "PersonID": "D3BDA71C-FF10-577E-9E98-18F2518310B3",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1396,7 +1396,7 @@
   },
   "fields": {
    "PersonID": "0ABB7909-50BB-5441-9B4F-E1CDAC691507",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1409,7 +1409,7 @@
   },
   "fields": {
    "PersonID": "399D4F68-D5EA-5598-9A33-3F99125DD92D",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "F4681896-6A95-5F28-BDAC-E68A8274EFF9",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1422,7 +1422,7 @@
   },
   "fields": {
    "PersonID": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "D165F1D8-9472-5028-82BA-8D9024A83FFA",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -1435,7 +1435,7 @@
   },
   "fields": {
    "PersonID": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",
@@ -1448,7 +1448,7 @@
   },
   "fields": {
    "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
-   "RoleID": "271A996D-04DB-5977-9296-1CA0FB679147",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -1461,7 +1461,7 @@
   },
   "fields": {
    "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
-   "RoleID": "FF49949F-D6EE-5D20-858D-B6606DAF070A",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
    "TermID": "3E406F2E-9034-5D41-B0BD-BE074162962C",
    "StartDate": "2025-01-01",
    "EndDate": "2026-12-31",

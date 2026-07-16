@@ -28,8 +28,6 @@ sync root** and is deliberately NOT listed in this folder's `directoryOrder` —
 
 ⚠ push is a FULL RECONCILE per entity scope (can delete rows) — never over real data.
 ⚠ entities must exist first (apps installed + CodeGen run) — see datagen/INTEGRATION-RUNBOOK.md.
-⚠ known caveat on REAL app installs: committee Role / issue Status references still carry
-  generated IDs; the apps seed their own rows for those (lookup-by-name emit patch is the
-  first integration-phase change). The SQL packs already handle this; regenerate this tree
-  after that patch lands.
+App-seeded lookups (committee Roles, issue Statuses) are referenced BY NAME (`@lookup:`),
+so this tree loads correctly on real app installs AND playgrounds — no caveats.
 Regenerate any time — pinned IDs make a re-push a stable upsert of the same records.
