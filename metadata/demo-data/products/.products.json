@@ -1,0 +1,74 @@
+[
+ {
+  "primaryKey": {
+   "ID": "736DDC26-30BF-5357-8F5E-9BB946B3B415"
+  },
+  "fields": {
+   "ProductKey": "PROD-MEM-ENTHUSIAST",
+   "Name": "Enthusiast Membership (annual)",
+   "ProductType": "Membership",
+   "UnitPrice": 150,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "67FBE689-6598-536D-BC8D-09D25B63F982"
+  },
+  "fields": {
+   "ProductKey": "PROD-MEM-INDIVIDUAL",
+   "Name": "Individual Membership (annual)",
+   "ProductType": "Membership",
+   "UnitPrice": 175,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "0F37A3CC-2D70-54FB-8474-C9A7D4AE73F1"
+  },
+  "fields": {
+   "ProductKey": "PROD-MEM-SMALLBUSINESS",
+   "Name": "SmallBusiness Membership (annual)",
+   "ProductType": "Membership",
+   "UnitPrice": 400,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "23C8BE1D-3AE0-5413-AC7D-D7C779647A31"
+  },
+  "fields": {
+   "ProductKey": "PROD-MEM-CORPORATE",
+   "Name": "Corporate Membership (annual)",
+   "ProductType": "Membership",
+   "UnitPrice": 1000,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "9AA3136D-3DC7-5B78-8E46-C949083E5EB0"
+  },
+  "fields": {
+   "ProductKey": "PROD-EVT-CONFERENCE",
+   "Name": "Conference Registration",
+   "ProductType": "Event",
+   "UnitPrice": 450,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "24ABF9A9-C12F-56EE-8B06-A4081BD24475"
+  },
+  "fields": {
+   "ProductKey": "PROD-EVT-WORKSHOP",
+   "Name": "Workshop Registration",
+   "ProductType": "Event",
+   "UnitPrice": 150,
+   "IsSharedDemo": true
+  }
+ }
+]

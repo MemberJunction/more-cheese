@@ -1,0 +1,35 @@
+[
+ {
+  "primaryKey": {
+   "ID": "FF49949F-D6EE-5D20-858D-B6606DAF070A"
+  },
+  "fields": {
+   "Name": "Chair",
+   "IsOfficer": true,
+   "IsVotingRole": true,
+   "Sequence": 1
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "9C9BB0CE-0144-5F75-97C3-6C8463C08B51"
+  },
+  "fields": {
+   "Name": "Vice Chair",
+   "IsOfficer": true,
+   "IsVotingRole": true,
+   "Sequence": 2
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "271A996D-04DB-5977-9296-1CA0FB679147"
+  },
+  "fields": {
+   "Name": "Member",
+   "IsOfficer": false,
+   "IsVotingRole": true,
+   "Sequence": 100
+  }
+ }
+]
