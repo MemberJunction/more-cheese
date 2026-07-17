@@ -18,7 +18,7 @@ const { buildWorld, buildPacks } = await loadProject(cfg.project);
 const world = buildWorld(cfg);
 
 // §8: pack emission — the project supplies the pack map, the engine deals the rows
-emitPacks(cfg, { packs: buildPacks(world), people: world.people, renewalEvents: world.renewalEvents });
+emitPacks(cfg, { packs: buildPacks(world), people: world.people, renewalEvents: world.renewalEvents, registries: world.motifs ? { motifs: world.motifs } : undefined });
 
 // run summary
 const { people, orgs, periods, events, registrations, renewalEvents } = world;

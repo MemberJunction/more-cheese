@@ -74,7 +74,7 @@
     "participation": {
       "shareOfEligible": 0.06,
       "tolerance": 0.02,
-      "$note": "share of term-start-covered members who serve on a committee; engaged members volunteer (theta arrow). ESTIMATE pending a real benchmark — associations typically see 5-10% of members in governance roles.",
+      "$note": "share of term-start-covered members who serve on a committee; engaged members volunteer (theta arrow). ESTIMATE (confidence: low, researched 2026-07-16 - no direct published benchmark exists): consistent with ASAE Foundation's Decision to Volunteer study (Gazley & Dignam 2008, 26,305 respondents) finding 30% of members have EVER volunteered in any capacity - current committee service is a small subset of that. MGI benchmarking reports publish no members-on-committees share.",
       "arrows": {
         "engagement": {
           "beta": 0.9,
@@ -92,7 +92,7 @@
         "presentTarget": 0.75,
         "tolerance": 0.06,
         "excusedShareOfAbsent": 0.4,
-        "$note": "committee-meeting attendance runs well above event attendance — members chose the obligation",
+        "$note": "SOURCED 2026-07-16 (confidence: medium-high): governance-industry bands put >80% = strong, 70-80% = moderate, <70% = problem (kpidepot.com board-meeting-attendance-rate; boardeffect.com attendance trends); the SEC/public-company norm is directors attending >=75% of board+committee meetings (lexology.com 75%-attendance-test). 75% +/-6 spans the moderate band to the strong threshold.",
         "arrows": {
           "engagement": {
             "beta": 0.6,

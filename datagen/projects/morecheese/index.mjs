@@ -17,6 +17,8 @@ import { buildRelationships } from './relationships.mjs';
 import { buildTasks } from './tasks.mjs';
 import { buildIssues } from './issues.mjs';
 import { buildPrograms } from './programs.mjs';
+import { buildDefects } from './defects.mjs';
+import { applyMotifs } from './motifs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
 
@@ -24,6 +26,10 @@ export function buildWorld(cfg) {
   // §5.1–2: the world and its drivers
   const orgs = buildOrgs(cfg);
   let people = buildPeople(cfg, orgs); // note: appends hero employers to orgs
+
+  // motifs BEFORE the unroll: stamped archetypes pin renewal outcomes (_lapseYear) and
+  // author engagement arcs (_thetaPath) that every downstream domain reads
+  const motifs = applyMotifs(cfg, people, orgs);
 
   // §5.3: membership — the renewal unroll, then archive old lapsed records
   const { periods: allPeriods, renewalEvents } = runRenewalUnroll(cfg, people, orgs);
@@ -50,16 +56,20 @@ export function buildWorld(cfg) {
   const issues = buildIssues(cfg, people, orgs, events, registrations, money);
   const programs = buildPrograms(cfg, people, periods, learning);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs };
+  // defects LAST: labeled record corruption over the finished world (mutates emails,
+  // appends duplicate contact records and true-employer relationship edges)
+  const defects = buildDefects(cfg, people, orgs, relationships);
+
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, defects, motifs };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, defects } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
-    common: { dependsOn: [], tables: { people: strip(people, ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
-    membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions } },
+    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
+    membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
     events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta']), competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },

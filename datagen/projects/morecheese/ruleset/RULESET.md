@@ -25,9 +25,9 @@ Who differs, and by how much:
 |---|---|---|---|
 | Longer-tenured members renew more | **+4.1pt** per extra “standard deviation” of tenure | β 0.55 (expert form) → compiled β 0.55 | per 1 SD of tenure at decision |
 | Engaged members renew more | **+7.0pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
-| Auto-renew members stick around | **+12.1pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.722 | MGI: +10-15pt |
+| Auto-renew members stick around | **+12.1pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.721 | MGI: +10-15pt |
 | Employer trouble drives churn | **-8.6pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows |
-| The enthusiast tier churns hardest | **-23.3pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.96 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
+| The enthusiast tier churns hardest | **-23.2pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.948 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
 
 ## The event rules
 
@@ -67,6 +67,7 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 - **Gwen Whitfield** (`ICF-000108`) — Educator, Chicago. Pins: {"status":"Active","committeeSeat":"Food Safety Committee","committeeRole":"Chair"}.
 - **Sofia Marchetti** (`ICF-000106`) — Retailer, Brooklyn. Pins: {"status":"Active","certStatus":"InProgress"}.
 - **Tom Reyes** (`ICF-000109`) — Producer, Ithaca. Pins: {"status":"Active","advocacyMin":30,"testimonies":2}.
+- **Aisha Bell** (`ICF-000110`) — Producer, Petaluma. Pins: {"status":"Active","defect":"StaleEmployer"}.
 
 ## How to author a rule (the three vocabularies)
 

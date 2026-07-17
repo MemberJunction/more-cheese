@@ -93,6 +93,7 @@
     "paymentOutcomes": {
       "$note": "payment lifecycle enrichment (feedback 2026-07-16). DELIBERATE causal-vs-noise mix: a base failure rate that is pure noise + an affluence-driven component (low-phi members' cards fail more) — so 'find what is causal' is an honest analyst exercise with a known answer. Failed attempts precede the retry; a retry landing after release leaves the order OVERDUE (the failed card IS the churn-adjacent story). In-flight payments near release sit InProgress.",
       "noiseFailShare": 0.015,
+      "$noiseFailSource": "SOURCED 2026-07-16 (confidence: high): this models ULTIMATE unrecovered card failure after retries, not per-attempt declines. SaaS involuntary churn ~0.86%/month (churnkey.co involuntary-churn-benchmarks); per-attempt declines run far higher (Recurly: 5-14% of monthly subscription transactions, credit cards averaging 7.6% - blog.recurly.com benchmarking-decline-rates). 1.5% +/-0.5 final-failure is well supported.",
       "lowPhiFailBonus": 0.05,
       "lowPhiCut": -0.8,
       "deniedShareOfFailed": 0.3,

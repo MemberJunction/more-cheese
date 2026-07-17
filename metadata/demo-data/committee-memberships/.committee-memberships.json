@@ -92,6 +92,19 @@
  },
  {
   "primaryKey": {
+   "ID": "B18A5796-D71F-59D7-8585-6E4D0F3DAE1E"
+  },
+  "fields": {
+   "PersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+   "RoleID": "@lookup:Committees: Roles.Name=Chair",
+   "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
+   "StartDate": "2023-01-01",
+   "EndDate": "2024-12-31",
+   "Status": "Ended"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "D8B39038-A9A3-58A5-B7DD-CD73BE63AB1E"
   },
   "fields": {
@@ -109,7 +122,7 @@
   },
   "fields": {
    "PersonID": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
-   "RoleID": "@lookup:Committees: Roles.Name=Chair",
+   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -122,7 +135,7 @@
   },
   "fields": {
    "PersonID": "713F9D46-0C6A-5239-B259-A2A30AD711AB",
-   "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "A493F3CA-2E6D-5C56-8C6C-2424C2B2E683",
    "StartDate": "2023-01-01",
    "EndDate": "2024-12-31",
@@ -638,6 +651,19 @@
  },
  {
   "primaryKey": {
+   "ID": "CE0DE10D-712D-52FF-9680-8C32C3D0EA4C"
+  },
+  "fields": {
+   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
+   "RoleID": "@lookup:Committees: Roles.Name=Member",
+   "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
+   "StartDate": "2025-01-01",
+   "EndDate": "2026-12-31",
+   "Status": "Active"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "1FA4DAAB-F91E-57D3-B316-4CCF62A07586"
   },
   "fields": {
@@ -967,19 +993,6 @@
   },
   "fields": {
    "PersonID": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
-   "RoleID": "@lookup:Committees: Roles.Name=Member",
-   "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
-   "StartDate": "2025-01-01",
-   "EndDate": "2026-12-31",
-   "Status": "Active"
-  }
- },
- {
-  "primaryKey": {
-   "ID": "BC71092E-96A0-513A-B39F-E448C0E9AB0B"
-  },
-  "fields": {
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
    "RoleID": "@lookup:Committees: Roles.Name=Member",
    "TermID": "92B3CE27-00B4-5B3A-AE63-FE5D352BE55D",
    "StartDate": "2025-01-01",

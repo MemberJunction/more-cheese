@@ -426,6 +426,34 @@
         "advocacyMin": 30,
         "testimonies": 2
       }
+    },
+    {
+      "memberNumber": "ICF-000110",
+      "first": "Aisha",
+      "last": "Bell",
+      "$persona": "the stale record — changed employers ~8 months ago, never updated her profile; the record says one org, the Relationship truth says another; the enrichment demo has a labeled right answer. Employers are cleared composed names (draft's Curdwell/Golden Gate substituted).",
+      "employerName": "Quincewick Creamery",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Petaluma",
+      "state": "CA",
+      "lat": 38.2324,
+      "lon": -122.6367,
+      "joinDate": "2018-04-12",
+      "theta": 0.4,
+      "phi": 0.3,
+      "tier": "Individual",
+      "title": "Quality Manager",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "staleEmployer": {
+        "trueEmployerName": "Fernholt Creamery",
+        "monthsAgo": 8
+      },
+      "pins": {
+        "status": "Active",
+        "defect": "StaleEmployer"
+      }
     }
   ]
 }

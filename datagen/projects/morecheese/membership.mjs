@@ -59,9 +59,9 @@ export function runRenewalUnroll(cfg, people, orgs) {
   recurringDecision({
     seed, years,
     streamKey: (c, y) => `renew:${c.p.MemberNumber}:${y}`,
-    // hero conditioning: outcomes are facts — pinned heroes renew, except a hero with a
-    // declared lapseYear, whose renewal in that year is a pinned NO (Danielle's story)
-    pinnedDecision: (c, y) => (c.p._hero ? (c.p._lapseYear != null ? y < c.p._lapseYear : true) : undefined),
+    // pin conditioning: outcomes are facts — a declared lapseYear (hero story OR stamped
+    // motif) renews until that year then lapses; heroes without one always renew
+    pinnedDecision: (c, y) => (c.p._lapseYear != null ? y < c.p._lapseYear : (c.p._hero || c.p._renewAlways ? true : undefined)),
     target: Math.min(0.97, Math.max(0.5, M.renewalTarget)),
     // regime shifts and texture apply AFTER calibration — tide, not boats (a shared shift
     // inside the calibrated scores gets solved away, erasing the dip)
@@ -93,7 +93,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
       declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0),
 
     record: (c, y, { meanT, sdT }, renewed) => {
-      if (c.p._hero) return;
+      if (c.p._hero || c.p._lapseYear != null || c.p._renewAlways) return; // pinned outcomes never train the arrows
       renewalEvents.push({
         year: y, tenureZ: (c.tenureYrs - meanT) / sdT,
         theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta,
@@ -144,6 +144,8 @@ export function applyArchiveRule(cfg, people, periods) {
     if (per.Status === 'Lapsed' && per.CancellationDate && per.CancellationDate < cutoff) archived.add(m);
   }
   for (const h of cfg.R.heroes) archived.delete(h.memberNumber);
+  // stamped motif members are pointable stories — they must survive in the DB, like heroes
+  for (const p of people) if (p._motif) archived.delete(p.MemberNumber);
   return {
     people: people.filter((p) => !archived.has(p.MemberNumber)),
     periods: periods.filter((x) => !archived.has(x.MemberNumber)),

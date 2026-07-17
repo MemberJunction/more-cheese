@@ -107,6 +107,17 @@ const MAPPING = {
   ],
   membership: [
     {
+      json: 'data_quality_labels', table: '[morecheese_members].[DataQualityLabel]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('dqlabel', r.LabelKey)), LabelKey: sqlStr(r.LabelKey), DefectKind: sqlStr(r.DefectKind),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)),
+        RelatedPersonID: sqlId(r.RelatedMemberNumber ? uuidFor('person', r.RelatedMemberNumber) : null),
+        RelatedOrganizationID: sqlId(r.RelatedOrgKey ? uuidFor('org', r.RelatedOrgKey) : null),
+        DefectValue: sqlStr(r.DefectValue ?? null), TruthValue: sqlStr(r.TruthValue ?? null),
+        Notes: sqlStr(r.Notes ?? null), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
       json: 'advocacy_actions', table: '[morecheese_members].[AdvocacyAction]',
       columns: (r) => ({
         ID: sqlId(uuidFor('advocacy', r.ActionKey)), ActionKey: sqlStr(r.ActionKey),

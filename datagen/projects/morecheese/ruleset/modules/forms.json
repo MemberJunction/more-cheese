@@ -32,9 +32,9 @@
       }
     },
     "response": {
-      "rateTarget": 0.35,
-      "tolerance": 0.06,
-      "$note": "post-event survey response rates for engaged member audiences run 30-40% (ESTIMATE; email-distributed, incentive-free)",
+      "rateTarget": 0.28,
+      "tolerance": 0.08,
+      "$note": "SOURCED 2026-07-16 (confidence: medium): Explori puts conference/corporate-event survey response at 10-20%, event-industry consensus 20-30% typical, paid conferences 30-40% aspirational (explori.com 'what is a good post-event survey response rate'; formbricks.com; formgrid.com). Members-only paid conference justifies the upper band: 28% +/-8. Was 35% ESTIMATE - lowered per research.",
       "submitDelayDaysMax": 14,
       "arrows": {
         "engagement": {
@@ -48,12 +48,13 @@
     },
     "answers": {
       "nps": {
-        "base": 7.2,
+        "base": 8.3,
         "engagementBeta": 1.3,
         "noiseSd": 1.4,
         "min": 0,
         "max": 10,
-        "meanTolerance": 0.5
+        "meanTolerance": 0.5,
+        "$source": "SOURCED 2026-07-16 (confidence: high): Explori benchmark across thousands of events puts conference-attendee NPS at +35.4 (explori.com/blog/nps_for_events; medium.com/@erikfabian NPS-for-events; retently.com benchmarks: 20-40 average, 30-50 excellent for B2B events). The old 7.2 mean computed to NPS ~ -10 - materially wrong; a mean of ~8.3 yields computed NPS ~ +25-40."
       },
       "overall": {
         "base": 3.9,

@@ -21,7 +21,7 @@
       ],
       "pursuitShareOfCompleters": 0.1,
       "tolerance": 0.03,
-      "$note": "pool = members with a completed course (the prerequisite); engaged completers pursue a credential",
+      "$note": "pool = members with a completed course (the prerequisite); engaged completers pursue a credential. ESTIMATE (confidence: low, researched 2026-07-16 - no published take-rate exists): directionally sensible against 51% of members VALUING certifications (netforumams.com association-certifications-101) and 39% joining primarily for continuing education; I.C.E. publishes no pipeline-conversion stat.",
       "awardShare": 0.75,
       "arrows": {
         "engagement": {
@@ -59,8 +59,9 @@
       "$productNote": "product names compose from CLEARED toponyms (the org-name bank) — the separate product-name morphology from the name research"
     },
     "advocacy": {
-      "advocateShare": 0.04,
+      "advocateShare": 0.05,
       "tolerance": 0.02,
+      "$source": "SOURCED 2026-07-16 (confidence: medium): VoterVoice/FiscalNote Advocacy Benchmark Report (2,000+ orgs, 545M+ emails) puts advocacy email action rates at 6.9% (2024) / 6.5% (H1 2025) (info.votervoice.net 2025-advocacy-benchmark-report); discounted to 5% +/-2 because not all members receive/open advocacy emails. Was 4% ESTIMATE - nudged up and anchored.",
       "actionsPerYearMean": 2.2,
       "dispersionK": 1.4,
       "kindWeights": {

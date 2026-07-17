@@ -46,6 +46,7 @@ const issues = load('issues', 'issues');
 const memberCerts = load('learning', 'member_certifications');
 const compEntries = load('events', 'competition_entries');
 const advocacy = load('membership', 'advocacy_actions');
+const dqLabels = load('membership', 'data_quality_labels');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -493,7 +494,9 @@ function checkComposedApps() {
   // relationships: every employed member has exactly one Employee edge; dissolved employers end it
   const employed = people.filter((p) => p.OrgKey).length;
   const empRels = relationships.filter((r2) => r2.RelKey.startsWith('emp:'));
-  const endedOk = empRels.every((r2) => (r2.Status === 'Ended') === (orgByKeyG(r2.ToOrgKey)?.LifecycleEvent?.kind === 'Dissolved'));
+  // Ended is legitimate for a dissolved employer OR a labeled stale-employer job switch (the emp-true: edge)
+  const switched = new Set(relationships.filter((r2) => r2.RelKey.startsWith('emp-true:')).map((r2) => r2.FromMemberNumber));
+  const endedOk = empRels.every((r2) => (r2.Status === 'Ended') === (orgByKeyG(r2.ToOrgKey)?.LifecycleEvent?.kind === 'Dissolved' || switched.has(r2.FromMemberNumber)));
   check(`relationships: employment edges ${empRels.length} = employed members ${employed}, dissolution-consistent`, empRels.length === employed && endedOk, `${relationships.length} total relationships`);
   // motions: stored tallies match the vote rows; votes consistent with attendance (Absent ⇔ not Present)
   let tallyBad = 0;
@@ -563,6 +566,9 @@ function checkHeroes() {
     if (h.pins.competitionGold) {
       if (!compEntries.some((x) => x.MemberNumber === h.memberNumber && x.EntryYear === h.pins.competitionGold && x.Result === 'Gold')) problems.push(`no Gold ${h.pins.competitionGold}`);
     }
+    if (h.pins.defect) {
+      if (!dqLabels.some((l) => l.MemberNumber === h.memberNumber && l.DefectKind === h.pins.defect)) problems.push(`no ${h.pins.defect} label`);
+    }
     if (h.pins.advocacyMin) {
       const acts = advocacy.filter((x) => x.MemberNumber === h.memberNumber);
       if (acts.length < h.pins.advocacyMin) problems.push(`advocacy ${acts.length}<${h.pins.advocacyMin}`);
@@ -582,16 +588,99 @@ function checkHeroes() {
 
 // ---------- status mix (loose at N=500) ----------
 function checkStatusMix() {
+  // pinned-lapse motif members are authored facts kept past the archive rule — a crowd
+  // distribution gate must not count them (they'd bias the mix by construction)
+  const pinnedLapse = new Set(JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8')).registry
+    .filter((x) => x.LapseYear != null).map((x) => x.MemberNumber));
   const counts = { Active: 0, Lapsed: 0, Cancelled: 0, PendingRenewal: 0 };
-  for (const s of lastStatus.values()) counts[s] = (counts[s] ?? 0) + 1;
-  const total = people.length;
+  for (const [m, s] of lastStatus) { if (!pinnedLapse.has(m)) counts[s] = (counts[s] ?? 0) + 1; }
+  // injected contact-duplicates (ICF-D*) are records, not members — they carry no periods
+  const total = people.filter((p) => !p.MemberNumber.startsWith('ICF-D') && !pinnedLapse.has(p.MemberNumber)).length;
   const active = (counts.Active + counts.PendingRenewal) / total;
   const [tA] = R.statusMix.target;
   check(`status mix: active-ish ${(active * 100).toFixed(0)}% vs ~${(tA + 0.02) * 100}% ±${R.statusMix.tolerance * 100}`, Math.abs(active - (tA + 0.02)) <= R.statusMix.tolerance, JSON.stringify(counts));
 }
 
+// ---------- defects: every injected defect is labeled AND verifiable ----------
+function checkDefects() {
+  const D = R.defects;
+  const byKind = (k) => dqLabels.filter((l) => l.DefectKind === k);
+  const personBy = new Map(people.map((p) => [p.MemberNumber, p]));
+  const orgByKey2 = new Map(orgs.map((o) => [o.OrgKey, o]));
+
+  // declared counts: crowd injections + persona-declared exemplars
+  const wantDup = D.duplicatePerson.count + R.heroes.filter((h) => h.pins?.duplicateOf).length;
+  const wantStale = D.staleEmployer.count + R.heroes.filter((h) => h.staleEmployer).length;
+  check(`defects: DuplicatePerson labels = ${wantDup}`, byKind('DuplicatePerson').length === wantDup, `${byKind('DuplicatePerson').length}`);
+  check(`defects: StaleEmployer labels = ${wantStale}`, byKind('StaleEmployer').length === wantStale, `${byKind('StaleEmployer').length}`);
+  check(`defects: TypoEmail labels = ${D.typoEmail.count}`, byKind('TypoEmail').length === D.typoEmail.count, `${byKind('TypoEmail').length}`);
+
+  // every label points at real records and describes a defect that is actually present
+  const problems = [];
+  for (const l of dqLabels) {
+    const p = personBy.get(l.MemberNumber);
+    if (!p) { problems.push(`${l.LabelKey}: person missing`); continue; }
+    if (l.DefectKind === 'DuplicatePerson') {
+      if (!personBy.has(l.RelatedMemberNumber)) problems.push(`${l.LabelKey}: canonical missing`);
+      if (l.MemberNumber.startsWith('ICF-D') && periodsByMember.has(l.MemberNumber)) problems.push(`${l.LabelKey}: shallow dup has history`);
+    } else if (l.DefectKind === 'StaleEmployer') {
+      const profileOrg = orgByKey2.get(p.OrgKey)?.Name;
+      if (profileOrg !== l.DefectValue) problems.push(`${l.LabelKey}: profile=${profileOrg}≠${l.DefectValue}`);
+      if (profileOrg === l.TruthValue) problems.push(`${l.LabelKey}: profile already correct`);
+      const trueRel = relationships.find((x) => x.RelKey === `emp-true:${l.MemberNumber}`);
+      if (!trueRel || trueRel.Status !== 'Active') problems.push(`${l.LabelKey}: no Active truth edge`);
+      const oldRel = relationships.find((x) => x.RelKey === `emp:${l.MemberNumber}`);
+      if (oldRel && oldRel.Status !== 'Ended') problems.push(`${l.LabelKey}: stale edge not Ended`);
+    } else if (l.DefectKind === 'TypoEmail') {
+      if (p.Email !== l.DefectValue) problems.push(`${l.LabelKey}: email=${p.Email}≠${l.DefectValue}`);
+      if (p.Email === l.TruthValue) problems.push(`${l.LabelKey}: typo not applied`);
+    }
+  }
+  check('defects: every label verifiable against the data', problems.length === 0, problems.slice(0, 3).join('; ') || `${dqLabels.length} labels`);
+}
+
+// ---------- motifs: every stamped archetype actually expresses ----------
+function checkMotifs() {
+  const { registry, meta } = JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8'));
+  for (const [name, m] of Object.entries(meta)) {
+    check(`motifs: ${name} stamped ${m.stamped} = min(declared ${m.declared}, pool ${m.pool})`, m.stamped === Math.min(m.declared, m.pool), JSON.stringify(m));
+  }
+  // employerCollapseLapse: the member really lapsed, at (or after) the stamped year
+  const collapseBad = registry.filter((x) => x.Motif === 'employerCollapseLapse')
+    .filter((x) => lastStatus.get(x.MemberNumber) !== 'Lapsed');
+  check('motifs: employerCollapseLapse members all Lapsed', collapseBad.length === 0, collapseBad.map((x) => x.MemberNumber).join(', ') || 'all lapsed');
+  // authored arcs express through behavior: activity (registrations + course enrollments)
+  // late-in-arc vs early-in-arc — one signal alone is too thin at 6 members
+  const regYears = new Map();
+  const addYear = (m, y) => (regYears.get(m) ?? regYears.set(m, []).get(m)).push(y);
+  for (const r2 of regs) addYear(r2.MemberNumber, +r2.RegisteredOn.slice(0, 4));
+  for (const e2 of enrollments) addYear(e2.MemberNumber, +e2.EnrolledOn.slice(0, 4));
+  const relYear = +run.releaseDate.slice(0, 4);
+  const halves = (x) => {
+    const ys = regYears.get(x.MemberNumber) ?? [];
+    const mid = (x.StartYear + relYear) / 2;
+    return { early: ys.filter((y) => y < mid).length, late: ys.filter((y) => y >= mid).length };
+  };
+  for (const [name, dir] of [['risingStar', 1], ['quietFade', -1]]) {
+    const rows = registry.filter((x) => x.Motif === name);
+    if (!rows.length) continue;
+    let early = 0, late = 0;
+    for (const x of rows) { const w = halves(x); early += w.early; late += w.late; }
+    const ok = dir > 0 ? late > early : late < early;
+    check(`motifs: ${name} arc expresses (${rows.length} members: first-half ${early} vs second-half ${late} activity)`, ok, `authored theta swing must show in activity`);
+  }
+}
+
 // ---------- run all gates & report ----------
+// FK-FIRST (feedback 2026-07-16): referential integrity is a PHASE, not a peer gate.
+// If any pack-reference gate fails, causal/benchmark gates are meaningless (they'd
+// measure a broken world) — report the referential failures alone and hard-fail.
 checkPacks();
+if (results.some((r) => !r.ok)) {
+  for (const r of results) console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);
+  console.log('\n✋ FK-first: referential gates failed — causal gates not run');
+  process.exit(1);
+}
 checkTemporal();
 checkBenchmarks();
 checkArrows();
@@ -603,6 +692,8 @@ checkTrainability();
 checkComposedApps();
 checkHeroes();
 checkStatusMix();
+checkDefects();
+checkMotifs();
 
 let failed = 0;
 for (const r of results) {

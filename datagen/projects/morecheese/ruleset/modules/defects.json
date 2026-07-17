@@ -1,0 +1,18 @@
+{
+  "$comment": "DEFECTS MODULE (feedback 2026-07-16: 'error generation'): the generator deliberately injects realistic record defects and labels EVERY injection in morecheese_members.DataQualityLabel — data-quality demos get a verifiable answer sheet. Generalizes the Kate/Kathy duplicate pair; unlocks Aisha Bell (the stale record).",
+  "defects": {
+    "duplicatePerson": {
+      "count": 24,
+      "$note": "shallow contact-duplicates (second Person+MemberProfile, name variant, no membership history) — how org-portal dupes are actually born. The Kate/Kathy pair is the deep, activity-split exemplar and keeps its own labels.",
+      "$source": "SOURCED 2026-07-16 (confidence: high on the ranges, vendor-published): healthy maintained CRM/AMS databases run 2-5% duplicate records, best-in-class <2% with ~1% the achievable benchmark (landbase.com duplicate-record-statistics; plauti.com average-rate-duplicates-crm). 24+1 dups ~ 1% of the 2,500-member canonical build - the 'well-run AMS that still has findable dupes' story."
+    },
+    "staleEmployer": {
+      "count": 10,
+      "$note": "profile still points at the old employer; the TRUTH (new employer, ~8mo tenure) lives in the Relationship stream — the enrichment demo's verifiable target. ESTIMATE (no published stale-employer rate exists; researched 2026-07-16)"
+    },
+    "typoEmail": {
+      "count": 12,
+      "$note": "transposed characters in the local part; TruthValue carries the correct address. ESTIMATE (no published per-record typo rate; researched 2026-07-16)"
+    }
+  }
+}

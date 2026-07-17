@@ -1,0 +1,21 @@
+{
+  "$comment": "MOTIFS MODULE (feedback 2026-07-16: 'ask and create motifs' = repeatable story templates). A motif is a declared archetype stamped onto crowd members through the SAME pin plumbing heroes use (_lapseYear pins renewal outcomes, _thetaPath authors an engagement arc) — no new engine machinery. Every stamped instance lands in out/motifs.json (harness registry, never installed) so a demo can point at a guaranteed, findable story instead of hoping the dice produced one. Counts are UP-TO: a motif never stamps more members than its candidate pool holds (the registry records both).",
+  "motifs": {
+    "employerCollapseLapse": {
+      "count": 6,
+      "$note": "a member whose employer dissolved renews to the collapse, then lapses the following cycle — the guaranteed, pointable instance of the employerEvent arrow. Pool: crowd members at a Dissolved org who joined before the event (event no later than release-2 so the lapse is observable)."
+    },
+    "risingStar": {
+      "count": 6,
+      "startTheta": -0.9,
+      "endTheta": 1.1,
+      "$note": "engagement ramps low-to-high across the membership (authored linear theta arc) — activity visibly accelerates year over year. Pool: crowd with 4+ years of tenure."
+    },
+    "quietFade": {
+      "count": 6,
+      "startTheta": 0.9,
+      "endTheta": -1.1,
+      "$note": "the ghost: engagement decays high-to-low; rising renewal risk EMERGES from the falling dial, never painted on. Pool: crowd with 4+ years of tenure."
+    }
+  }
+}

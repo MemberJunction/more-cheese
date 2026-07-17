@@ -183,6 +183,97 @@
  },
  {
   "primaryKey": {
+   "ID": "2C9E008A-439C-5C45-BD47-E807A3012D14"
+  },
+  "fields": {
+   "ActionKey": "ICF-100052:2025:0",
+   "PersonID": "45EDD94C-6D2C-57D9-A60D-B7F1517CF641",
+   "ActionDate": "2025-12-03",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "515EEE87-232B-579F-9E29-70AC3455A569"
+  },
+  "fields": {
+   "ActionKey": "ICF-100061:2023:0",
+   "PersonID": "4862B9A6-0FFC-52CA-8253-6544EF86E603",
+   "ActionDate": "2023-09-24",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "7043B237-E0F0-57B6-AB52-E9E1481B8E0C"
+  },
+  "fields": {
+   "ActionKey": "ICF-100061:2023:1",
+   "PersonID": "4862B9A6-0FFC-52CA-8253-6544EF86E603",
+   "ActionDate": "2023-06-20",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "90421787-9F54-583E-A5A0-234B33096363"
+  },
+  "fields": {
+   "ActionKey": "ICF-100061:2023:2",
+   "PersonID": "4862B9A6-0FFC-52CA-8253-6544EF86E603",
+   "ActionDate": "2023-02-06",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C46EBD6C-003D-55F8-BB7C-A1E3EDBBF38E"
+  },
+  "fields": {
+   "ActionKey": "ICF-100061:2023:3",
+   "PersonID": "4862B9A6-0FFC-52CA-8253-6544EF86E603",
+   "ActionDate": "2023-06-20",
+   "Kind": "PetitionSignature",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "D2C654F0-F12B-5CA2-902C-EC2EF6CC4691"
+  },
+  "fields": {
+   "ActionKey": "ICF-100061:2023:4",
+   "PersonID": "4862B9A6-0FFC-52CA-8253-6544EF86E603",
+   "ActionDate": "2023-09-20",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "10C1EC9F-3407-525D-920D-5279FA7162A5"
+  },
+  "fields": {
+   "ActionKey": "ICF-100061:2023:5",
+   "PersonID": "4862B9A6-0FFC-52CA-8253-6544EF86E603",
+   "ActionDate": "2023-09-02",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "743DCCD3-9D66-5C35-983D-419F85761C3F"
   },
   "fields": {
@@ -373,6 +464,110 @@
    "ActionDate": "2026-07-06",
    "Kind": "PetitionSignature",
    "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "32B93358-E433-5387-898C-DACDCABC3B96"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2025:0",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2025-08-27",
+   "Kind": "LetterCampaign",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "F152EF65-62E1-5852-B740-BF70DD3B9B7C"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2025:1",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2025-04-20",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "E2EDD3AD-28BB-5000-82FF-1D5E101C6C2A"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2025:2",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2025-03-22",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "71721D2A-9E7E-5BB5-9DC2-80F937D25FCD"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2025:3",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2025-06-18",
+   "Kind": "PetitionSignature",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "5E2C0FA2-FC58-51A1-99B2-AEA3175E1A9C"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2025:4",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2025-08-16",
+   "Kind": "PetitionSignature",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "6936A408-83BF-50F8-ADDD-44E99595D0FA"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2026:0",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2026-11-13",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "6270C0B0-9137-599E-954F-6C6B90922731"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2026:1",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2026-09-21",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "599A58CF-3517-5CA5-BD19-80AE9E6CA080"
+  },
+  "fields": {
+   "ActionKey": "ICF-100161:2026:2",
+   "PersonID": "5AD4958E-25D2-50B8-9D7B-E5C681C2F854",
+   "ActionDate": "2026-07-28",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Raw-milk aging rules",
    "IsSharedDemo": true
   }
  },
@@ -2614,6 +2809,110 @@
  },
  {
   "primaryKey": {
+   "ID": "E76CAB06-37FE-527A-B33E-D6C518AEC054"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2020:0",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2020-06-25",
+   "Kind": "PetitionSignature",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "5F0BEF45-B9B9-5185-AB99-846D4E2B5723"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2020:1",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2020-02-05",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "912C6E21-F193-5AE3-917F-962BEFA2939D"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2020:2",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2020-10-07",
+   "Kind": "PetitionSignature",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "92A87C07-B11A-56EB-A591-331FEA50345B"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2021:0",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2021-10-02",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "73252400-7455-5FC6-BBE8-694E194A1963"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2022:0",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2022-05-07",
+   "Kind": "Testimony",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "58CC0757-FC0D-5097-B1BA-18580C47F622"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2023:0",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2023-04-17",
+   "Kind": "Testimony",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "FF62061D-8354-5D5D-A58C-2A2A8DC7833A"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2023:1",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2023-03-15",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "08D681C5-62CA-5226-A3D4-37366A90150E"
+  },
+  "fields": {
+   "ActionKey": "ICF-100600:2024:0",
+   "PersonID": "56DFABB6-FBB5-51C5-9E86-BACE12550F61",
+   "ActionDate": "2024-03-24",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "80EAF6B9-26EB-5559-A943-99D24AF70CD6"
   },
   "fields": {
@@ -2861,6 +3160,110 @@
  },
  {
   "primaryKey": {
+   "ID": "92D4B2EC-76F2-5F12-B314-A9BBD1631476"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2021:0",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2021-11-01",
+   "Kind": "PetitionSignature",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "51FC5363-C883-5DFF-A4BA-7686E0AB3E45"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2021:1",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2021-01-06",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "9F6BACD0-608E-5231-A180-487ECDD37066"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2021:2",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2021-08-12",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "E785EDB3-9FED-5D6D-BDAA-67E030D0FCCC"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2021:3",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2021-04-23",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "56C61F9F-E96F-54FE-86C9-54C370A04D34"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2022:0",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2022-12-10",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "2CB5CD30-7B3E-54F4-9581-0B1E645B99AF"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2022:1",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2022-12-01",
+   "Kind": "LetterCampaign",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "56866DF0-F058-5A1B-8ADC-3EE168CFB872"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2022:2",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2022-07-17",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "3270B8C8-DA1B-5DB1-9EE5-5CDE6D785194"
+  },
+  "fields": {
+   "ActionKey": "ICF-100682:2023:0",
+   "PersonID": "4D36076C-BC8E-51B0-97CC-F3F6A7A985B1",
+   "ActionDate": "2023-05-16",
+   "Kind": "CoalitionMeeting",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "97B15F08-DA85-5B25-8DBC-0BE4C7490A61"
   },
   "fields": {
@@ -3038,6 +3441,162 @@
    "ActionDate": "2026-08-22",
    "Kind": "LetterCampaign",
    "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "E02DEBD8-6703-58D2-8F57-88FCAC6A6176"
+  },
+  "fields": {
+   "ActionKey": "ICF-100756:2026:0",
+   "PersonID": "E8822131-2881-5154-A81A-2935C260490B",
+   "ActionDate": "2026-12-07",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "6DD49B48-96F0-59D2-8526-E79DAE88A08E"
+  },
+  "fields": {
+   "ActionKey": "ICF-100756:2026:1",
+   "PersonID": "E8822131-2881-5154-A81A-2935C260490B",
+   "ActionDate": "2026-02-22",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "DE93DCBE-9F2B-5A37-B844-887B2BF6482A"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:0",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-03-27",
+   "Kind": "LetterCampaign",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "E047A481-4B6E-52B7-BD14-973F0C2C4BA4"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:1",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-09-01",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "4B270E2A-330E-53B0-93E2-AA80F00E7F14"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:2",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-07-11",
+   "Kind": "PetitionSignature",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "A0BC6514-8E15-5E2E-9C89-4D90D481DC01"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:3",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-02-10",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "10495CFE-80C5-5EC6-9A0D-02BDE6D7E1C7"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:4",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-04-13",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "21FC28DA-D25A-54CD-B9F6-67909CCA718C"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:5",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-09-28",
+   "Kind": "PetitionSignature",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "D8620271-7AD7-5BCB-BA1C-7C0A5F2BAC4D"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:6",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-05-14",
+   "Kind": "PetitionSignature",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "7AD21E68-1256-54CB-A2D0-BC5EAA6BCFA2"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2024:7",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2024-02-12",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "294F33D1-4C29-57F4-84C2-EC6A27691085"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2026:0",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2026-09-26",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "67DD96F6-7F04-5228-B5B0-ADF03BA5CE36"
+  },
+  "fields": {
+   "ActionKey": "ICF-100770:2026:1",
+   "PersonID": "45B443BA-47F8-5381-B252-295185535317",
+   "ActionDate": "2026-06-08",
+   "Kind": "PetitionSignature",
+   "Topic": "Dairy pricing reform",
    "IsSharedDemo": true
   }
  },
@@ -3634,6 +4193,32 @@
    "ActionKey": "ICF-100834:2024:2",
    "PersonID": "F9C47E84-4FD8-5B8E-A0EA-9618070C75A6",
    "ActionDate": "2024-11-03",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "A8978FCD-9E37-5CFB-9283-0D82807CC4DF"
+  },
+  "fields": {
+   "ActionKey": "ICF-100892:2025:0",
+   "PersonID": "79A127B7-D626-5114-8DA7-F04888CC17F2",
+   "ActionDate": "2025-01-23",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "55F3186A-BB56-5C03-AB5D-71753F6252DD"
+  },
+  "fields": {
+   "ActionKey": "ICF-100892:2025:1",
+   "PersonID": "79A127B7-D626-5114-8DA7-F04888CC17F2",
+   "ActionDate": "2025-05-16",
    "Kind": "LetterCampaign",
    "Topic": "FSMA small-producer exemptions",
    "IsSharedDemo": true
@@ -4252,6 +4837,123 @@
  },
  {
   "primaryKey": {
+   "ID": "15D658EC-DB69-5ED3-85DF-75DFE813ED38"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2024:0",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2024-12-14",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "14589EB3-9D7E-5B43-86EC-DD8E2C1F8124"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2024:1",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2024-02-05",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "47837B19-0625-543F-95E7-9255DED9E8AE"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2024:2",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2024-10-04",
+   "Kind": "PetitionSignature",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "6C216AC8-C55F-5C1A-B382-CB72C63BFB3E"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2024:3",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2024-09-25",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "D176BC7C-1A94-5E1E-8950-EE786E02A5A3"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2024:4",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2024-09-05",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "2BC29BAD-9E54-5B89-B342-31F29A397708"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2025:0",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2025-03-11",
+   "Kind": "PetitionSignature",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "42CBE079-1EC5-517F-BD1E-875CF04D2440"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2026:0",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2026-01-28",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "0F42D69E-FE4A-5EF8-9F39-2F0ED6E3E11F"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2026:1",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2026-07-03",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "B9A20F97-9FD4-587D-B6F3-C074FD03BF99"
+  },
+  "fields": {
+   "ActionKey": "ICF-101177:2026:2",
+   "PersonID": "8D3ADE4A-334E-5298-9B95-013C1A80112B",
+   "ActionDate": "2026-06-22",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "7D3DD269-8B46-5424-BC11-21F7895BEEF7"
   },
   "fields": {
@@ -4499,162 +5201,6 @@
  },
  {
   "primaryKey": {
-   "ID": "72FD2C56-F8E6-54C7-A119-976338ECD284"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2024:0",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2024-12-02",
-   "Kind": "PetitionSignature",
-   "Topic": "Interstate cheese shipment",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "F76ABACD-B22A-5A44-A85D-DF8B174F9EEF"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2024:1",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2024-08-21",
-   "Kind": "PetitionSignature",
-   "Topic": "Raw-milk aging rules",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "D885BC6E-3BCF-520D-832D-53B26AAF1A23"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2024:2",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2024-02-02",
-   "Kind": "Testimony",
-   "Topic": "Labeling standards",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "DF3BBA83-370E-5EAB-BA13-0C28DF35661C"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2024:3",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2024-05-22",
-   "Kind": "CoalitionMeeting",
-   "Topic": "FSMA small-producer exemptions",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "DED2EAED-0999-551E-8592-0591BADCC443"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2024:4",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2024-07-03",
-   "Kind": "PetitionSignature",
-   "Topic": "Labeling standards",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "7C6E06FA-A30E-5C07-BF94-E76DC25A1888"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2024:5",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2024-01-04",
-   "Kind": "LetterCampaign",
-   "Topic": "Raw-milk aging rules",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "0EE493B7-ED37-55CF-B5E1-6CF7530AAB1E"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2025:0",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2025-04-12",
-   "Kind": "LetterCampaign",
-   "Topic": "Dairy pricing reform",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "D1F18D73-A37E-5D63-803B-DA89305D2897"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2025:1",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2025-07-18",
-   "Kind": "LetterCampaign",
-   "Topic": "Interstate cheese shipment",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "3DCF1F5B-1274-51FE-BD93-36312B117329"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2025:2",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2025-04-26",
-   "Kind": "LetterCampaign",
-   "Topic": "Interstate cheese shipment",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "7A160175-169A-5050-8703-8AC42BB7D026"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2025:3",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2025-08-11",
-   "Kind": "CoalitionMeeting",
-   "Topic": "Interstate cheese shipment",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "084F164E-93F7-54F6-B368-A2B423CB18B3"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2026:0",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2026-12-18",
-   "Kind": "PetitionSignature",
-   "Topic": "Dairy pricing reform",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "AB14CC26-F967-5C42-A354-5754A112AE24"
-  },
-  "fields": {
-   "ActionKey": "ICF-101191:2026:1",
-   "PersonID": "CF7513A2-79D5-5524-9FD3-38BCA54253D6",
-   "ActionDate": "2026-09-03",
-   "Kind": "LetterCampaign",
-   "Topic": "Labeling standards",
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "8E56340B-9200-5AE4-AC42-B1A74EADAF67"
   },
   "fields": {
@@ -4741,6 +5287,32 @@
    "ActionDate": "2023-10-24",
    "Kind": "CoalitionMeeting",
    "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "1E3D2596-4837-5661-8726-FE86B7BEE3FB"
+  },
+  "fields": {
+   "ActionKey": "ICF-101355:2026:0",
+   "PersonID": "6DD995D7-633E-59E6-8E71-5BB6930977C8",
+   "ActionDate": "2026-02-20",
+   "Kind": "PetitionSignature",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "4A7B02C6-B842-53C7-A731-6AAEBA4982B9"
+  },
+  "fields": {
+   "ActionKey": "ICF-101355:2026:1",
+   "PersonID": "6DD995D7-633E-59E6-8E71-5BB6930977C8",
+   "ActionDate": "2026-03-15",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Dairy pricing reform",
    "IsSharedDemo": true
   }
  },
@@ -4936,6 +5508,110 @@
    "ActionDate": "2024-10-12",
    "Kind": "LetterCampaign",
    "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "A090C20A-BB61-57C5-AC7F-8F7551DE3DAA"
+  },
+  "fields": {
+   "ActionKey": "ICF-101446:2026:0",
+   "PersonID": "BBB52F3F-E3BA-54D1-88AE-E2A373F8229A",
+   "ActionDate": "2026-03-03",
+   "Kind": "Testimony",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "4CFCD01B-BC0F-5E05-8F11-B5A70DCCBE45"
+  },
+  "fields": {
+   "ActionKey": "ICF-101512:2025:0",
+   "PersonID": "7DE39464-DB57-5FF8-BB67-A88E596C40D7",
+   "ActionDate": "2025-04-09",
+   "Kind": "LetterCampaign",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C7E7E707-E9F5-5415-B42B-4A66406ECBA4"
+  },
+  "fields": {
+   "ActionKey": "ICF-101512:2026:0",
+   "PersonID": "7DE39464-DB57-5FF8-BB67-A88E596C40D7",
+   "ActionDate": "2026-08-02",
+   "Kind": "Testimony",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "FBFC784E-6D0D-595F-A29A-3D581E98252D"
+  },
+  "fields": {
+   "ActionKey": "ICF-101595:2024:0",
+   "PersonID": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+   "ActionDate": "2024-09-18",
+   "Kind": "PetitionSignature",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C461809F-3CC3-5097-9489-85B04DDF0668"
+  },
+  "fields": {
+   "ActionKey": "ICF-101595:2024:1",
+   "PersonID": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+   "ActionDate": "2024-09-01",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "15F00487-33A5-5A62-9431-8E5D0F184D78"
+  },
+  "fields": {
+   "ActionKey": "ICF-101595:2024:2",
+   "PersonID": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+   "ActionDate": "2024-08-09",
+   "Kind": "PetitionSignature",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "0C5A6049-11CB-528D-A6DB-72E8DA9431E9"
+  },
+  "fields": {
+   "ActionKey": "ICF-101595:2025:0",
+   "PersonID": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+   "ActionDate": "2025-01-15",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "9A4711C9-79D3-5171-9AC5-0419225B32E1"
+  },
+  "fields": {
+   "ActionKey": "ICF-101595:2026:0",
+   "PersonID": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+   "ActionDate": "2026-10-09",
+   "Kind": "PetitionSignature",
+   "Topic": "Labeling standards",
    "IsSharedDemo": true
   }
  },
@@ -6774,6 +7450,71 @@
  },
  {
   "primaryKey": {
+   "ID": "42297743-2909-564D-B22E-D914EF4ACE46"
+  },
+  "fields": {
+   "ActionKey": "ICF-101920:2024:0",
+   "PersonID": "17F32EFE-A082-55BC-BD0C-B535D2556B74",
+   "ActionDate": "2024-09-02",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "5F2255E2-F24F-5586-8F9B-ACCA750E8E31"
+  },
+  "fields": {
+   "ActionKey": "ICF-101920:2024:1",
+   "PersonID": "17F32EFE-A082-55BC-BD0C-B535D2556B74",
+   "ActionDate": "2024-02-16",
+   "Kind": "PetitionSignature",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "8C95ADD7-E065-5C1F-B95A-2FD5E26A8B22"
+  },
+  "fields": {
+   "ActionKey": "ICF-101920:2024:2",
+   "PersonID": "17F32EFE-A082-55BC-BD0C-B535D2556B74",
+   "ActionDate": "2024-01-06",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "EE248E51-F7E7-5E36-91D2-99A9AE876BA4"
+  },
+  "fields": {
+   "ActionKey": "ICF-101920:2024:3",
+   "PersonID": "17F32EFE-A082-55BC-BD0C-B535D2556B74",
+   "ActionDate": "2024-11-08",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C5027210-0777-59F1-8068-D685FA36A17F"
+  },
+  "fields": {
+   "ActionKey": "ICF-101920:2024:4",
+   "PersonID": "17F32EFE-A082-55BC-BD0C-B535D2556B74",
+   "ActionDate": "2024-05-21",
+   "Kind": "PetitionSignature",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "3FF077D9-F9EF-588F-BB75-4B9284F6CF9D"
   },
   "fields": {
@@ -7276,6 +8017,331 @@
    "ActionDate": "2026-12-14",
    "Kind": "LetterCampaign",
    "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "4977DAB9-19F4-54AB-B770-2FF84F239C09"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2022:0",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2022-12-13",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "EB4673C1-FC98-5798-B50C-475419F8861F"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2023:0",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2023-12-02",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "9D871DA6-6342-51AF-8448-191338C365FE"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2024:0",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2024-05-01",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "35A57C4F-AD8D-58BE-9D9E-7D347ABF31E6"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2024:1",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2024-06-28",
+   "Kind": "PetitionSignature",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "291E77C3-A57C-5B78-915C-B4060A556A2E"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2024:2",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2024-11-04",
+   "Kind": "PetitionSignature",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "71D4B736-578F-54E4-BBA1-9F7BC47C76D2"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2024:3",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2024-11-04",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "D69C3430-8A06-5175-AE7B-3B259EB21EB2"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2024:4",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2024-01-23",
+   "Kind": "CoalitionMeeting",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "7424BDD3-15C4-5F93-8DE7-FF20998FA933"
+  },
+  "fields": {
+   "ActionKey": "ICF-102062:2024:5",
+   "PersonID": "AF2D7D67-9714-505F-8C64-7564AC892D3B",
+   "ActionDate": "2024-02-22",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "066357B0-3DEB-50D1-B576-13E1BC4974C5"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:0",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-11-21",
+   "Kind": "PetitionSignature",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "3A5DEB2D-9C77-5CFA-B817-B74F70123126"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:1",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-06-10",
+   "Kind": "PetitionSignature",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "B6123FFB-D7C2-5F93-ABC0-8A0BCF42CC32"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:2",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-12-18",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "0131E8FC-B124-59D6-B399-388DD9E57509"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:3",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-02-25",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "389EB26D-A74B-5F9D-AB74-B5B14DAC4DD9"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:4",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-04-04",
+   "Kind": "PetitionSignature",
+   "Topic": "FSMA small-producer exemptions",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "E10CF68A-E9CA-5947-BD3E-2E74AA43388C"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:5",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-03-03",
+   "Kind": "LetterCampaign",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C7F83DFB-BC38-54BB-9DE9-0FCFC3DD6E60"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:6",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-05-07",
+   "Kind": "PetitionSignature",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "CB90D52A-E44C-5D3A-B7A7-799C68E9A28D"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:7",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-10-26",
+   "Kind": "CoalitionMeeting",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "7662309D-4F69-512D-9CA9-CB87D6968319"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2024:8",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2024-08-28",
+   "Kind": "PetitionSignature",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "EC4A5385-0EC8-5E2E-A268-900C910427BD"
+  },
+  "fields": {
+   "ActionKey": "ICF-102069:2025:0",
+   "PersonID": "7B428593-E65A-59B5-BD89-8252C83A72F5",
+   "ActionDate": "2025-08-04",
+   "Kind": "PetitionSignature",
+   "Topic": "Interstate cheese shipment",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "8C81F0C8-A8BD-5308-9AE5-822CD576A2AD"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2024:0",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2024-11-18",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "2A809AA7-B6C0-5694-A7B8-0E7B1F532756"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2024:1",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2024-03-13",
+   "Kind": "LetterCampaign",
+   "Topic": "Raw-milk aging rules",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "0AE142AD-CFCD-5E57-9A80-6196982855CE"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2024:2",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2024-02-19",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "AC8BF814-F880-54B5-82DC-FFB2153E1469"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2024:3",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2024-12-27",
+   "Kind": "LetterCampaign",
+   "Topic": "Labeling standards",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "A7403344-721D-5A00-A6C0-F0AA62D52A53"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2025:0",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2025-09-04",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "AB2B4809-6242-5F3C-967A-C9CD00FFF24F"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2025:1",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2025-03-05",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "32399C6C-EF87-5405-A222-F65E8C155D12"
+  },
+  "fields": {
+   "ActionKey": "ICF-102103:2026:0",
+   "PersonID": "D4768E56-F37E-5D44-974F-5EF218074C3C",
+   "ActionDate": "2026-07-13",
+   "Kind": "LetterCampaign",
+   "Topic": "Dairy pricing reform",
    "IsSharedDemo": true
   }
  },

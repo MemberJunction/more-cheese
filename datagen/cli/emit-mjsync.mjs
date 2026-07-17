@@ -83,6 +83,8 @@ const MAPPING = [
       },
     }),
   },
+  { pack: 'membership', json: 'data_quality_labels', dir: 'data-quality-labels', entity: 'MoreCheese: Data Quality Labels',
+    record: (r) => ({ primaryKey: { ID: uuidFor('dqlabel', r.LabelKey) }, fields: { LabelKey: r.LabelKey, DefectKind: r.DefectKind, PersonID: uuidFor('person', r.MemberNumber), RelatedPersonID: r.RelatedMemberNumber ? uuidFor('person', r.RelatedMemberNumber) : null, RelatedOrganizationID: r.RelatedOrgKey ? uuidFor('org', r.RelatedOrgKey) : null, DefectValue: r.DefectValue ?? null, TruthValue: r.TruthValue ?? null, Notes: r.Notes ?? null, IsSharedDemo: r.IsSharedDemo } }) },
   { pack: 'membership', json: 'advocacy_actions', dir: 'advocacy-actions', entity: 'MoreCheese: Advocacy Actions',
     record: (r) => ({ primaryKey: { ID: uuidFor('advocacy', r.ActionKey) }, fields: { ActionKey: r.ActionKey, PersonID: uuidFor('person', r.MemberNumber), ActionDate: r.ActionDate, Kind: r.Kind, Topic: r.Topic, IsSharedDemo: r.IsSharedDemo } }) },
   { pack: 'events', json: 'competition_entries', dir: 'competition-entries', entity: 'MoreCheese: Competition Entries',

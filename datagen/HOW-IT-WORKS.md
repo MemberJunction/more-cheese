@@ -148,6 +148,20 @@ storyline outcomes are facts, not dice rolls — Marcus cannot accidentally laps
 That's why hand-written hero stories and emergent crowd stories (Sofia Hartman's employer
 cut its program → she lapsed; nobody wrote that) are indistinguishable in kind.
 
+**Motifs** sit between heroes and crowd: a motif is a story *template* declared once with a
+count ("6 members whose employer collapsed, who renewed to the collapse then lapsed"; "6
+rising stars whose engagement ramps year over year"), stamped onto crowd members through
+the exact same pin plumbing heroes use. Every stamped instance is recorded in
+`out/motifs.json` (harness-private, never installed) so a demo can point at a guaranteed,
+findable story instead of hoping the dice produced one. Pinned outcomes are excluded from
+the validator's training data, same as heroes.
+
+**Defects** are the deliberate mess: the generator injects realistic record corruption —
+duplicate people (shallow portal-minted contact records), stale employers (the profile
+lies; the Relationship stream holds the truth), typo'd emails — and writes every injection
+to `morecheese_members.DataQualityLabel` with the correct answer. Data-quality demos
+(dedup, enrichment, cleansing) verify against the answer sheet instead of hand-waving.
+
 ## 8. Trainable, honestly: recovery, not discovery
 
 A model trained on this data **works**: it converges, calibrates, rank-orders churn risk,

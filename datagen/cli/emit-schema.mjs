@@ -226,6 +226,14 @@ const TABLES = [
     c('ID', UID, { pk: true }), c('ActionKey', s(80)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('ActionDate', DATE), c('Kind', s(50)), c('Topic', s(200)), c('IsSharedDemo', BIT),
   ] },
+  { schema: 'morecheese_members', table: 'DataQualityLabel', cols: [
+    c('ID', UID, { pk: true }), c('LabelKey', s(80)), c('DefectKind', s(50)),
+    c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('RelatedPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('RelatedOrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('DefectValue', s(400), { null: true }), c('TruthValue', s(400), { null: true }),
+    c('Notes', s(500), { null: true }), c('IsSharedDemo', BIT),
+  ] },
   { schema: 'morecheese_events', table: 'Event', cols: [
     c('ID', UID, { pk: true }), c('EventKey', s(50)), c('Name', s(200)), c('EventType', s(50)), c('EventDate', DATE),
     c('IsVirtual', BIT), c('IsPaid', BIT), c('City', s(100), { null: true }), c('State', s(50), { null: true }),

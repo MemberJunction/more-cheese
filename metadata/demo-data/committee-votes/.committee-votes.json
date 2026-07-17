@@ -151,16 +151,6 @@
  },
  {
   "primaryKey": {
-   "ID": "D30ABFC7-E42A-524A-9725-6766778B5C12"
-  },
-  "fields": {
-   "MotionID": "463F3AA4-DF33-5687-A8F8-F26B6AD52542",
-   "MembershipID": "BC71092E-96A0-513A-B39F-E448C0E9AB0B",
-   "VoteValue": "Absent"
-  }
- },
- {
-  "primaryKey": {
    "ID": "C1B48D0A-D33E-5727-9A11-9B92A12A7504"
   },
   "fields": {
@@ -256,17 +246,7 @@
   "fields": {
    "MotionID": "DAB8B6FA-5346-54F8-8A4D-11C591EDA4AD",
    "MembershipID": "8BC01E35-F1FB-53A9-9A91-2078CBDC1520",
-   "VoteValue": "Yes"
-  }
- },
- {
-  "primaryKey": {
-   "ID": "6BA7D4ED-45C6-5A41-BC73-80ED3A2EF090"
-  },
-  "fields": {
-   "MotionID": "DAB8B6FA-5346-54F8-8A4D-11C591EDA4AD",
-   "MembershipID": "BC71092E-96A0-513A-B39F-E448C0E9AB0B",
-   "VoteValue": "Yes"
+   "VoteValue": "Absent"
   }
  },
  {
@@ -371,16 +351,6 @@
  },
  {
   "primaryKey": {
-   "ID": "3C8FFF3A-B7E7-54EE-A588-89D9559F6B64"
-  },
-  "fields": {
-   "MotionID": "550F2262-6EA0-5984-8170-8DEB8AC13121",
-   "MembershipID": "BC71092E-96A0-513A-B39F-E448C0E9AB0B",
-   "VoteValue": "Yes"
-  }
- },
- {
-  "primaryKey": {
    "ID": "55903115-0E4E-58B9-A0E7-C871E301A51F"
   },
   "fields": {
@@ -426,6 +396,16 @@
   "fields": {
    "MotionID": "550F2262-6EA0-5984-8170-8DEB8AC13121",
    "MembershipID": "AF7B44E4-7665-57BA-9C51-70BB7B7814D9",
+   "VoteValue": "Yes"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C7C4D9E5-6904-5E33-9043-F27573146A8A"
+  },
+  "fields": {
+   "MotionID": "94D068BF-DBFF-575A-B869-CE9E8D66CA1B",
+   "MembershipID": "B18A5796-D71F-59D7-8585-6E4D0F3DAE1E",
    "VoteValue": "Yes"
   }
  },
@@ -571,6 +551,16 @@
  },
  {
   "primaryKey": {
+   "ID": "5B908EB5-82FB-5E15-9F91-BCFAFC8F10F8"
+  },
+  "fields": {
+   "MotionID": "D7E08F50-2710-5DC8-B194-F9C871FA2C80",
+   "MembershipID": "B18A5796-D71F-59D7-8585-6E4D0F3DAE1E",
+   "VoteValue": "Absent"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "C0C42428-391B-5035-B43D-C145AAC9153F"
   },
   "fields": {
@@ -707,6 +697,16 @@
    "MotionID": "D7E08F50-2710-5DC8-B194-F9C871FA2C80",
    "MembershipID": "5E7D400E-E73B-5BC5-9C58-90B28C1C969C",
    "VoteValue": "Abstain"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "7310813E-4F47-5CDD-A2C6-407588C448B4"
+  },
+  "fields": {
+   "MotionID": "C34C1E85-635C-57F8-8BC3-D8A106F7A2F8",
+   "MembershipID": "B18A5796-D71F-59D7-8585-6E4D0F3DAE1E",
+   "VoteValue": "Yes"
   }
  },
  {
@@ -2511,6 +2511,16 @@
  },
  {
   "primaryKey": {
+   "ID": "196E7BE9-D8DA-574E-9FAF-2EFC19E16AC0"
+  },
+  "fields": {
+   "MotionID": "F5B44B67-2384-50F1-A68C-FF74130990C6",
+   "MembershipID": "CE0DE10D-712D-52FF-9680-8C32C3D0EA4C",
+   "VoteValue": "Yes"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "6F32148B-C7A7-5355-8B81-645F7FC199EF"
   },
   "fields": {
@@ -2686,6 +2696,16 @@
   "fields": {
    "MotionID": "41A3E623-FF96-5FE1-A82F-915BE7A165A7",
    "MembershipID": "D2BE6260-AD61-5DD6-8769-D60B35887E25",
+   "VoteValue": "Yes"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "CCDD83F5-5071-5B7B-8FFD-885A704B666A"
+  },
+  "fields": {
+   "MotionID": "41A3E623-FF96-5FE1-A82F-915BE7A165A7",
+   "MembershipID": "CE0DE10D-712D-52FF-9680-8C32C3D0EA4C",
    "VoteValue": "Yes"
   }
  },

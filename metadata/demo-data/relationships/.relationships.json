@@ -239,17 +239,17 @@
  },
  {
   "primaryKey": {
-   "ID": "0FA92522-5C5D-50E6-9856-95803F7BD4CE"
+   "ID": "F15BC3B2-9359-51C4-AD7F-A7BA0C0FF155"
   },
   "fields": {
    "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
-   "FromPersonID": "62A19953-D2DD-5DC3-9423-A95B0423EDCF",
+   "FromPersonID": "66F3B60D-6222-50BB-95DB-2E11F1C1C7F5",
    "FromOrganizationID": null,
    "ToPersonID": null,
-   "ToOrganizationID": "42EC8617-1697-5690-9524-9D73CE42468E",
-   "Title": "Head Cheesemaker",
-   "StartDate": "2016-07-11",
-   "EndDate": "2017-12-31",
+   "ToOrganizationID": "F7E66B8F-3460-5205-937A-D184723AA457",
+   "Title": "Quality Manager",
+   "StartDate": "2018-04-12",
+   "EndDate": "2025-11-29",
    "Status": "Ended",
    "Notes": null
   }
@@ -4397,8 +4397,8 @@
    "ToOrganizationID": "27376049-C5DC-57FC-BA30-FCBF3BBEBD03",
    "Title": "Store Manager",
    "StartDate": "2026-06-27",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2025-09-30",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -5101,6 +5101,23 @@
  },
  {
   "primaryKey": {
+   "ID": "53FAB5EE-1A6B-5E62-A459-94B46FD0A8FE"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "A25301FB-735B-50DE-99CE-3FC7C1FF701F",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "618848B4-E1C2-5ECD-A8C0-6DFBB272F5D9",
+   "Title": "Specialty Cheese Buyer",
+   "StartDate": "2020-03-16",
+   "EndDate": "2024-12-31",
+   "Status": "Ended",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "E3840554-9B08-5A75-BE07-623E9F08AA53"
   },
   "fields": {
@@ -5315,6 +5332,23 @@
    "ToOrganizationID": "3D2DAB5A-4994-5F69-ADBC-4B9C6558E0DB",
    "Title": "Co-owner",
    "StartDate": "2020-12-05",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "3C2C2583-AAD8-58E2-B53C-2AD5BAC1C050"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "DFAB6297-82A3-58EB-8DC5-105F95EC8246",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "22E755C6-7E72-5F15-80DE-87AB48D26AB0",
+   "Title": "Creamery Manager",
+   "StartDate": "2018-02-17",
    "EndDate": null,
    "Status": "Active",
    "Notes": null
@@ -6029,8 +6063,8 @@
    "ToOrganizationID": "89FF7D44-C019-596C-B136-D14BC71AEBF5",
    "Title": null,
    "StartDate": "2019-05-09",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2025-10-30",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -8195,6 +8229,23 @@
  },
  {
   "primaryKey": {
+   "ID": "F6C83454-0F7C-549E-A59B-4A8138286BA7"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "0736D00C-124C-5FE2-ADD9-2820EBADAE62",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "AA977B88-D633-5740-8B1C-B44BB85D59EE",
+   "Title": null,
+   "StartDate": "2017-11-24",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "CC698152-D756-52E9-8EA1-E3422F01702C"
   },
   "fields": {
@@ -8545,8 +8596,8 @@
    "ToOrganizationID": "1F9158DC-1D4D-54D7-BD8F-6BAAFDA537ED",
    "Title": "Cheesemonger",
    "StartDate": "2014-04-23",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2026-01-29",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -9854,8 +9905,8 @@
    "ToOrganizationID": "777115EF-4D5F-5582-804B-BAB1AD2E7A1B",
    "Title": "Head Cheesemonger",
    "StartDate": "2025-08-28",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2025-07-31",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -11384,8 +11435,8 @@
    "ToOrganizationID": "3A35605A-3301-512D-8C8C-B4A50805A3B0",
    "Title": "Head Cheesemonger",
    "StartDate": "2024-02-28",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2025-12-30",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -13866,8 +13917,8 @@
    "ToOrganizationID": "026A8BB3-CF01-53D4-8D6F-347C4F93EE04",
    "Title": "Co-owner",
    "StartDate": "2016-01-07",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2026-03-31",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -14274,6 +14325,23 @@
    "ToOrganizationID": "8213C549-4762-5C0B-AFBA-8F037B905DE2",
    "Title": "Cheesemonger",
    "StartDate": "2023-01-09",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "67857E67-645B-52EA-B04E-634D0ABE3A7A"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "3FB528D4-6D26-5C5D-A131-9E828C4A735D",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "B7414A17-3967-5686-95AB-5A56729CDAA9",
+   "Title": "Product Manager",
+   "StartDate": "2017-12-26",
    "EndDate": null,
    "Status": "Active",
    "Notes": null
@@ -15090,8 +15158,8 @@
    "ToOrganizationID": "1E036B18-FCCB-54DE-8D6D-21B1CD29A5E7",
    "Title": "Creamery Manager",
    "StartDate": "2025-02-18",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2026-03-31",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -16433,8 +16501,8 @@
    "ToOrganizationID": "63D50943-0886-526B-9CA1-A90515A0FE24",
    "Title": "Creamery Manager",
    "StartDate": "2023-10-24",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2026-03-01",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -20843,6 +20911,23 @@
  },
  {
   "primaryKey": {
+   "ID": "02B457BE-E65F-5627-B06B-3FC78107097F"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "086939D9-42E1-5070-936B-91A63DBB0274",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "5F5567AC-60BD-5400-8834-4F947290CFB9",
+   "Title": "Production Lead",
+   "StartDate": "2020-06-19",
+   "EndDate": "2023-12-31",
+   "Status": "Ended",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "3E63ADFC-3129-5CE1-AAB3-B8510B9A96B6"
   },
   "fields": {
@@ -21023,8 +21108,8 @@
    "ToOrganizationID": "A2A0E276-87A9-52B5-90F2-5B209A3E8D42",
    "Title": null,
    "StartDate": "2025-08-01",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2026-01-29",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -21074,8 +21159,8 @@
    "ToOrganizationID": "3E44E60C-7FB8-5034-91CC-B03AAC47B53E",
    "Title": "Assistant Cheesemaker",
    "StartDate": "2024-06-07",
-   "EndDate": null,
-   "Status": "Active",
+   "EndDate": "2025-05-31",
+   "Status": "Ended",
    "Notes": null
   }
  },
@@ -22747,6 +22832,23 @@
  },
  {
   "primaryKey": {
+   "ID": "2122958D-31EC-5FAB-85D5-8E17264CDC0A"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "12B7E2C4-6662-5545-BC8B-3825526C11EF",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "F4A02027-5F98-58B6-921B-AB0B5BE8DC35",
+   "Title": "Assistant Cheesemaker",
+   "StartDate": "2016-09-03",
+   "EndDate": "2017-12-31",
+   "Status": "Ended",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "EA369AAF-F0B5-54B9-A1E0-639A05274E6F"
   },
   "fields": {
@@ -23573,6 +23675,23 @@
    "ToOrganizationID": "5B1E97CA-345B-5AAF-A036-6A297E4A41BF",
    "Title": null,
    "StartDate": "2025-06-12",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "FA26FF79-D042-5631-9E6A-C6BFB2C92A47"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "2D1F1E0E-F045-5803-ACD9-115216E31687",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "D75440A6-2164-5279-A404-912F24144E6C",
+   "Title": null,
+   "StartDate": "2022-07-07",
    "EndDate": null,
    "Status": "Active",
    "Notes": null
@@ -26823,6 +26942,193 @@
    "EndDate": null,
    "Status": "Active",
    "Notes": "the 2023 acquisition — connects Bob's employer to Victor's"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "F31D1521-9484-535D-8259-7ABB86475A32"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "371AD224-298F-55BB-92B6-52FF4E130FDE",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "35B1308C-737C-59CD-AA5A-1F21BE48F28F",
+   "Title": "Co-owner",
+   "StartDate": "2026-03-31",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "1CD27EEE-9D05-5D97-A4BF-42622B8DE7A9"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "F1D7D14B-C981-5D84-B38A-328D02153AA8",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "7F4B94D9-4E1C-54CF-82F0-30478AC1AF4C",
+   "Title": "Assistant Cheesemaker",
+   "StartDate": "2025-05-31",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "46B159AC-1BB6-5D35-8399-BA56BD1EFDC0"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "6D2C42D3-7DEB-54C4-95BE-B25DEB8A9120",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "43707115-330B-5FCC-BB7B-EE4F15A2E0E7",
+   "Title": null,
+   "StartDate": "2025-10-30",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "B7EEE2A1-2698-5969-A654-8D41DB800F84"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "0DE4BB6B-954A-5C9C-85E9-E929CB0DD332",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "AD5DFFC3-1933-5CA8-83FA-45F9D84FE586",
+   "Title": "Head Cheesemonger",
+   "StartDate": "2025-07-31",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "A979DF45-9296-5982-82EA-767D0DE7B8FE"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "F86AEEBC-16F7-50F0-91CB-45B271758FC5",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "BC25BEE5-BE74-5C40-85B3-8816DF0E2F40",
+   "Title": "Cheesemonger",
+   "StartDate": "2026-01-29",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "4B843124-12DF-5195-9E52-6BEB2A2309DF"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "96712D9B-6800-57D1-A5E3-26BCC90F678A",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "551882A4-3A86-5044-BD9A-DD96ED6CB1C0",
+   "Title": "Head Cheesemonger",
+   "StartDate": "2025-12-30",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "DCC900E3-3C68-57BB-B05F-CF2C91AC2642"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "2D3971E6-F85D-5305-B820-E989C95414C6",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "08598FA5-3711-5B85-A77C-5D2E94F4217F",
+   "Title": "Creamery Manager",
+   "StartDate": "2026-03-01",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "2C07DCF3-A5F3-59D3-B592-5E633B32C27D"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "F990ACA2-5CD1-518F-BE14-2CBC452DAD18",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "B0FEE947-296E-558B-98DC-74BB190C38D9",
+   "Title": "Store Manager",
+   "StartDate": "2025-09-30",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "7E68D467-05D4-55AA-93E9-6D6381DD2841"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "DB172A77-74A4-5420-BDE6-A931F1B38DF7",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "2884EA5E-5EAE-5E2E-B2EE-258BFDD8B174",
+   "Title": null,
+   "StartDate": "2026-01-29",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "707D3F0D-B5F9-51FF-B056-89CE2D282725"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "5F0E7640-6627-503B-8F32-3B1709B23E7E",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "937D7996-9D99-5EB5-893A-FEB205F8A1BF",
+   "Title": "Creamery Manager",
+   "StartDate": "2026-03-31",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "16B2E73C-3A4D-5C6C-AA62-402AE2A6C59B"
+  },
+  "fields": {
+   "RelationshipTypeID": "27CFD031-5663-4000-A7AB-8AC87DB88C1D",
+   "FromPersonID": "66F3B60D-6222-50BB-95DB-2E11F1C1C7F5",
+   "FromOrganizationID": null,
+   "ToPersonID": null,
+   "ToOrganizationID": "ECA06E40-E4FE-5B31-A29E-18BCCCBBBEB7",
+   "Title": "Quality Manager",
+   "StartDate": "2025-11-29",
+   "EndDate": null,
+   "Status": "Active",
+   "Notes": null
   }
  }
 ]

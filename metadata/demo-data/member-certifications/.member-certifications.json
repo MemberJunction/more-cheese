@@ -1261,6 +1261,21 @@
  },
  {
   "primaryKey": {
+   "ID": "1D30E432-F438-575D-A76B-CA75E756BE4D"
+  },
+  "fields": {
+   "MemberCertKey": "ICF-102173:CERT-CCP",
+   "PersonID": "67F84FA1-D51B-55E4-BD46-43244F9C987D",
+   "CertificationID": "169AD79A-12F1-54D1-893B-2DE6075D3C80",
+   "Status": "Awarded",
+   "EnrolledOn": "2024-09-05",
+   "AwardedOn": "2025-01-23",
+   "ExpiresOn": "2028-01-23",
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "4D5A26C9-54D6-578F-A0D2-93A327AE58D4"
   },
   "fields": {
