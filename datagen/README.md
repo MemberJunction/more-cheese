@@ -105,10 +105,12 @@ determinism means "byte-identical or you broke something."
 
 ## What it produces
 
-`out/packs/{common,membership,events,learning,orders,committees,forms}/` — one folder per app pack (D9: cook once, portion
+`out/packs/{common,membership,events,learning,orders,committees,forms,tasks,issues}/` — one folder per app pack (D9: cook once, portion
 at the end), each with table JSON files + a `manifest.json` declaring `dependsOn`. The
 validator checks referential closure per pack layer, exactly like the future install-time
-check.
+check. Harness-private files sit next to the packs and are never installed:
+`validation-events.json`/`validation-latents.json` (ground truth for the validator) and
+`motifs.json` (the registry of stamped story templates — where to point a demo).
 
 The emitters turn those packs into loadable artifacts:
 - **`out/sql/`** — `00_schema.sql` (provisional `CREATE TABLE` DDL, `emit-schema`) then
@@ -135,9 +137,13 @@ The emitters turn those packs into loadable artifacts:
 
 ## What the validator gates (ruleset-spec §7)
 
-Benchmark means + tolerance · yearly-band + **variance floor** (anti-smoothness) · sign AND
+**FK-first**: referential pack gates run as a hard-fail PHASE — if any cross-pack reference
+dangles, causal gates don't run at all (they'd measure a broken world). Then: benchmark
+means + tolerance · yearly-band + **variance floor** (anti-smoothness) · sign AND
 magnitude recovery per arrow (logistic refit on observables — note: the engagement arrow is
 checked via a behavioral proxy and is attenuated by design) · trainability (rank-ordering
 lift at N-appropriate scale) · temporal/referential integrity (grace mechanics, no-gap
-back-dating, registrations inside membership windows) · hero pins (Elena, Marcus) · pack
-manifests + cross-pack reference closure · status mix.
+back-dating, registrations inside membership windows) · hero pins (all 16, per-persona
+milestones) · defect labels (counts match the declaration AND every label is verifiable
+against the data it describes) · motif expression (stamped counts, collapse members really
+lapsed, authored arcs visible in activity) · status mix.
