@@ -11,6 +11,7 @@
 //   · PendingRenewal members carry an OPEN renewal order for the next cycle — the
 //     renewal-outreach queue (Marcus) exists in the money data too
 
+import { rng } from '../../engine/rng.mjs';
 import { derivedTransaction } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
@@ -61,7 +62,10 @@ export function buildMoney(cfg, people, periods, events, registrations) {
     streamKey: (per) => `pay:${per.PeriodKey}`,
     profileOf: (per) => {
       if (!personByKey.has(per.MemberNumber)) return null;
-      return netTermsTiers.has(per.MembershipTier) ? P.netTerms : per.AutoRenew ? P.autopay : P.manual;
+      const base = netTermsTiers.has(per.MembershipTier) ? P.netTerms : per.AutoRenew ? P.autopay : P.manual;
+      // covid-year bills pay later (regime expression — lateShare scaled, capped)
+      const covid = R.regimes.covid.years.includes(parseDate(per.StartDate).getUTCFullYear());
+      return covid ? { ...base, lateShare: Math.min(0.95, base.lateShare * R.regimes.covid.paymentLateMultiplier) } : base;
     },
     emit: (per, t) => {
       const start = parseDate(per.StartDate);
@@ -95,5 +99,41 @@ export function buildMoney(cfg, people, periods, events, registrations) {
     },
   });
 
-  return { products, orders, orderLines, payments };
+  // ---------- payment lifecycle (feedback 2026-07-16): Failed/Denied attempts, retries,
+  // in-flight payments. DELIBERATE causal-vs-noise mix: base failure rate is pure noise;
+  // low-affluence members' cards fail MORE (the causal component an analyst can find).
+  // A retry that would land after release hasn't happened — the order goes back to aging.
+  const PO = O.paymentOutcomes;
+  const failedAttempts = [];
+  const dropCaptured = new Set();
+  for (const pay of payments) {
+    if (pay.Method !== 'CreditCard') continue; // card failures only — ACH/checks fail differently (not modeled)
+    const person = personByKey.get(orders.find((o) => o.OrderKey === pay.OrderKey)?.MemberNumber);
+    if (!person) continue;
+    const r = rng(seed, `payfail:${pay.PaymentKey}`);
+    const pFail = PO.noiseFailShare + (person._phi < PO.lowPhiCut ? PO.lowPhiFailBonus : 0);
+    if (!r.bernoulli(pFail)) continue;
+    const denied = r.bernoulli(PO.deniedShareOfFailed);
+    failedAttempts.push({
+      PaymentKey: `${pay.PaymentKey}-F1`, OrderKey: pay.OrderKey, Amount: pay.Amount,
+      PaymentDate: pay.PaymentDate, Method: pay.Method, Status: denied ? 'Denied' : 'Failed', IsSharedDemo: true,
+    });
+    const retry = addDays(parseDate(pay.PaymentDate), 1 + r.int(0, PO.retryDaysMax - 1));
+    if (retry > release) {
+      // the retry hasn't happened yet — order returns to aging (the failed card IS the story)
+      dropCaptured.add(pay.PaymentKey);
+      const ord = orders.find((o) => o.OrderKey === pay.OrderKey);
+      if (ord) ord.PaymentStatus = parseDate(ord.DueDate) < release ? 'Overdue' : 'Unpaid';
+    } else {
+      pay.PaymentDate = iso(retry); // captured on retry
+    }
+  }
+  const finalPayments = payments.filter((x) => !dropCaptured.has(x.PaymentKey)).concat(failedAttempts);
+  // in-flight: captures within the settlement window of release are still InProgress
+  const inflightCut = iso(addDays(release, -PO.inProgressWindowDays));
+  for (const pay of finalPayments) {
+    if (pay.Status === 'Captured' && pay.PaymentDate >= inflightCut) pay.Status = 'InProgress';
+  }
+
+  return { products, orders, orderLines, payments: finalPayments };
 }

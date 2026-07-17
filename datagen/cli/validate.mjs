@@ -16,6 +16,7 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logisticFit } from '../engine/stats.mjs';
+import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../engine/dates.mjs';
 import { loadRuleset } from '../engine/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -329,9 +330,10 @@ function checkMoney() {
 
   // reconciliation: every Paid order's payments sum to its total; no orphan payments
   const paidByOrder = new Map();
-  for (const p of payments) paidByOrder.set(p.OrderKey, (paidByOrder.get(p.OrderKey) ?? 0) + p.Amount);
+  // failed/denied ATTEMPTS are not money — only settled/settling captures reconcile
+  for (const p of payments.filter((x) => x.Status === 'Captured' || x.Status === 'InProgress')) paidByOrder.set(p.OrderKey, (paidByOrder.get(p.OrderKey) ?? 0) + p.Amount);
   const badRecon = orders.filter((x) => x.PaymentStatus === 'Paid' && paidByOrder.get(x.OrderKey) !== x.TotalGross).length;
-  const paidButNo = orders.filter((x) => x.PaymentStatus !== 'Paid' && paidByOrder.has(x.OrderKey)).length;
+  const paidButNo = orders.filter((x) => x.PaymentStatus !== 'Paid' && paidByOrder.has(x.OrderKey)).length; // failed attempts on aging orders are expected — excluded above
   check('money: every Paid order reconciles (payments sum = total; unpaid have none)', badRecon + paidButNo === 0, `${badRecon}+${paidButNo} bad`);
 
   // the 3-part timing mixture, measured
@@ -448,10 +450,30 @@ function checkComposedApps() {
   const respRate = attendees ? fResponses.length / attendees : 0;
   const respAllow = FF.response.tolerance + 1.5 * Math.sqrt((FF.response.rateTarget * (1 - FF.response.rateTarget)) / Math.max(1, attendees));
   check(`forms: survey response rate ${(respRate * 100).toFixed(1)}% vs ${FF.response.rateTarget * 100}% ±${(respAllow * 100).toFixed(1)}`, Math.abs(respRate - FF.response.rateTarget) <= respAllow, `${fResponses.length} responses / ${attendees} attendees`);
+  // NPS gate on NON-covid years (the covid dip is gated separately as regime expression)
+  const covidDists = new Set(R.regimes.covid.years.map((y) => `post-conf-survey:${y}`));
+  const respDist = new Map(fResponses.map((x) => [x.ResponseKey, x.DistributionKey]));
   const nps = fAnswers.filter((a) => a.QuestionKey === 'post-conf-survey:nps');
-  const npsMean = nps.length ? nps.reduce((s2, a) => s2 + a.NumericValue, 0) / nps.length : 0;
-  const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, nps.length)));
-  check(`forms: mean NPS ${npsMean.toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(npsMean - FF.answers.nps.base) <= npsAllow, `${nps.length} NPS answers`);
+  const npsN = nps.filter((a) => !covidDists.has(respDist.get(a.ResponseKey)));
+  const npsC = nps.filter((a) => covidDists.has(respDist.get(a.ResponseKey)));
+  const mean = (xs) => xs.length ? xs.reduce((s2, a) => s2 + a.NumericValue, 0) / xs.length : 0;
+  const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, npsN.length)));
+  check(`forms: mean NPS (non-covid) ${mean(npsN).toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(mean(npsN) - FF.answers.nps.base) <= npsAllow, `${npsN.length} answers`);
+  if (npsC.length >= 20) check(`regime: covid NPS dip expressed (${mean(npsC).toFixed(2)} < ${mean(npsN).toFixed(2)})`, mean(npsC) < mean(npsN), `${npsC.length} covid-year answers`);
+  // payment lifecycle: failure mix is part causal (low-phi), part noise — the ratio must express
+  const PO2 = R.orders.paymentOutcomes;
+  const latents2 = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
+  const phiOf = new Map(latents2.map((x) => [x.m, x.phi]));
+  const orderMember = new Map(orders.map((o) => [o.OrderKey, o.MemberNumber]));
+  const cardPays = payments.filter((x) => x.Method === 'CreditCard');
+  const failed = cardPays.filter((x) => x.Status === 'Failed' || x.Status === 'Denied');
+  const isLow = (x) => (phiOf.get(orderMember.get(x.OrderKey)) ?? 0) < PO2.lowPhiCut;
+  const lowN = cardPays.filter(isLow).length, lowF = failed.filter(isLow).length;
+  const restN = cardPays.length - lowN, restF = failed.length - lowF;
+  const rLow = lowF / Math.max(1, lowN), rRest = restF / Math.max(1, restN);
+  check(`payments: card-failure causality expressed — low-φ ${(rLow * 100).toFixed(1)}% > rest ${(rRest * 100).toFixed(1)}% (noise floor)`, failed.length > 0 && rLow > rRest * 1.8, `${failed.length} failed/denied of ${cardPays.length} card payments`);
+  const badInflight = payments.filter((x) => x.Status === 'InProgress' && x.PaymentDate < iso2(addDays2(parseDate2(run.releaseDate), -PO2.inProgressWindowDays))).length;
+  check('payments: InProgress only inside the settlement window', badInflight === 0, `${payments.filter((x) => x.Status === 'InProgress').length} in-flight`);
   // relationships: every employed member has exactly one Employee edge; dissolved employers end it
   const employed = people.filter((p) => p.OrgKey).length;
   const empRels = relationships.filter((r2) => r2.RelKey.startsWith('emp:'));

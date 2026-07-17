@@ -76,7 +76,7 @@ const MAPPING = {
       json: 'people', table: '[__mj_BizAppsCommon].[Person]',
       columns: (r) => ({
         ID: sqlId(uuidFor('person', r.MemberNumber)),
-        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
+        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), MiddleName: sqlStr(r.MiddleName), PreferredName: sqlStr(r.PreferredName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
         Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
       }),
     },

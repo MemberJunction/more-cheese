@@ -67,7 +67,7 @@ const MAPPING = [
     pack: 'common', json: 'people', dir: 'people', entity: 'MJ_BizApps_Common: People',
     record: (r) => ({
       primaryKey: { ID: uuidFor('person', r.MemberNumber) },
-      fields: { FirstName: r.FirstName, LastName: r.LastName, Title: r.Title, Email: r.Email, Status: 'Active' },
+      fields: { FirstName: r.FirstName, LastName: r.LastName, MiddleName: r.MiddleName, PreferredName: r.PreferredName, Title: r.Title, Email: r.Email, Status: 'Active' },
     }),
   },
   {

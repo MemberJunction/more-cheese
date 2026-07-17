@@ -3988,7 +3988,7 @@
   "fields": {
    "ResponseID": "184BD9F5-B277-5464-86BC-C4BB674C49CC",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 10,
+   "NumericValue": 9,
    "BooleanValue": null
   }
  },
@@ -4032,7 +4032,7 @@
   "fields": {
    "ResponseID": "CEED550D-6A7F-500C-A43B-CB083E53DD09",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 4,
+   "NumericValue": 3,
    "BooleanValue": null
   }
  },
@@ -4065,7 +4065,7 @@
   "fields": {
    "ResponseID": "9E12DE22-12E4-5D86-BA7A-9DF0DB3B649C",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 6,
+   "NumericValue": 5,
    "BooleanValue": null
   }
  },
@@ -4126,39 +4126,6 @@
  },
  {
   "primaryKey": {
-   "ID": "C3863D16-03B7-596D-99F7-FBB5A139DA12"
-  },
-  "fields": {
-   "ResponseID": "FCA8311C-D655-5C65-8C0E-B477637B1D6E",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "C9CBE259-0D8E-5959-9D06-2765DC0F1590"
-  },
-  "fields": {
-   "ResponseID": "FCA8311C-D655-5C65-8C0E-B477637B1D6E",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "24620DFF-DD3B-5A94-ADB2-A86DCD1ECF49"
-  },
-  "fields": {
-   "ResponseID": "FCA8311C-D655-5C65-8C0E-B477637B1D6E",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "284E28A7-1AC3-5820-888A-C427CA1F5557"
   },
   "fields": {
@@ -4197,7 +4164,7 @@
   "fields": {
    "ResponseID": "814E8F97-52D1-5AA1-A62C-2BC5F0484329",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 3,
+   "NumericValue": 2,
    "BooleanValue": null
   }
  },
@@ -4428,7 +4395,7 @@
   "fields": {
    "ResponseID": "6307D1CB-E41B-52D7-83F8-27C5B5EB070A",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -4489,45 +4456,12 @@
  },
  {
   "primaryKey": {
-   "ID": "9491AB0F-0F60-5386-974A-381C65BF65A8"
-  },
-  "fields": {
-   "ResponseID": "A76B78C4-932F-5A8F-BB04-B2BA2770B0CC",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "D762D81E-9575-5BC9-BEF3-90FA3A2E09E6"
-  },
-  "fields": {
-   "ResponseID": "A76B78C4-932F-5A8F-BB04-B2BA2770B0CC",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 3,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "EF26E0D2-4074-5F7D-9090-C663787249F7"
-  },
-  "fields": {
-   "ResponseID": "A76B78C4-932F-5A8F-BB04-B2BA2770B0CC",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "1E998778-0AAF-5ECE-94B2-8BE3408C3753"
   },
   "fields": {
    "ResponseID": "47613F51-5B7A-554C-9FFE-E1E85BD38B63",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
+   "NumericValue": 8,
    "BooleanValue": null
   }
  },
@@ -4560,7 +4494,7 @@
   "fields": {
    "ResponseID": "83CFE07C-3570-5C38-A70B-0B24A1A21B6F",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -4581,39 +4515,6 @@
   },
   "fields": {
    "ResponseID": "83CFE07C-3570-5C38-A70B-0B24A1A21B6F",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "3D23C706-1420-5742-BE8F-D4C488B5CAC1"
-  },
-  "fields": {
-   "ResponseID": "D6B47A8B-934E-5020-88BF-CF72E926F3EA",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "97F080DE-3402-54C8-8750-46C8402E41CD"
-  },
-  "fields": {
-   "ResponseID": "D6B47A8B-934E-5020-88BF-CF72E926F3EA",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 3,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "88F41E1C-099D-5709-BF68-C2B1675123EA"
-  },
-  "fields": {
-   "ResponseID": "D6B47A8B-934E-5020-88BF-CF72E926F3EA",
    "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
    "NumericValue": null,
    "BooleanValue": true
@@ -4659,7 +4560,7 @@
   "fields": {
    "ResponseID": "BFF45C40-A2B1-5C6C-96C0-15DB695FBF8D",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -4692,7 +4593,7 @@
   "fields": {
    "ResponseID": "9CFB12A5-3300-5170-8089-13EA5C9A791A",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -4725,7 +4626,7 @@
   "fields": {
    "ResponseID": "6D448F44-1C1F-5799-AB2A-7FED4343C09E",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -4753,45 +4654,12 @@
  },
  {
   "primaryKey": {
-   "ID": "A114A5E1-F741-5F13-8E9C-4B6F05433068"
-  },
-  "fields": {
-   "ResponseID": "E62F1307-F480-5EA2-B389-1FFD27C31BB6",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "C96A07A1-5C85-573A-802F-E7EF11713D9F"
-  },
-  "fields": {
-   "ResponseID": "E62F1307-F480-5EA2-B389-1FFD27C31BB6",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "0CB8B264-46DA-57E6-A2CD-C8E697F6B406"
-  },
-  "fields": {
-   "ResponseID": "E62F1307-F480-5EA2-B389-1FFD27C31BB6",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "B58CE460-E9C3-5C81-B663-700D6924A07E"
   },
   "fields": {
    "ResponseID": "5D43BC25-6C37-55A9-9629-36C2E87A5649",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 10,
+   "NumericValue": 9,
    "BooleanValue": null
   }
  },
@@ -4824,7 +4692,7 @@
   "fields": {
    "ResponseID": "A6461BC0-8E18-5E0C-9381-49843C950588",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -4857,7 +4725,7 @@
   "fields": {
    "ResponseID": "D301C56F-F060-5733-88AB-A306F030350B",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -4923,7 +4791,7 @@
   "fields": {
    "ResponseID": "BAAD7E4A-C74D-54CD-AD25-CF965CE1AF85",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
+   "NumericValue": 8,
    "BooleanValue": null
   }
  },
@@ -4956,7 +4824,7 @@
   "fields": {
    "ResponseID": "2498B20B-9897-54E5-92AA-3671A0B8C86C",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -4989,7 +4857,7 @@
   "fields": {
    "ResponseID": "C3147832-EFEB-5D0F-8583-A288611BE2C4",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -5022,7 +4890,7 @@
   "fields": {
    "ResponseID": "B62EED79-3A66-51A6-ADFB-EDC34AA9ECDA",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -5121,7 +4989,7 @@
   "fields": {
    "ResponseID": "ACA26067-61CD-5ADF-B783-3A4AECAF485A",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
+   "NumericValue": 8,
    "BooleanValue": null
   }
  },
@@ -5187,7 +5055,7 @@
   "fields": {
    "ResponseID": "615B6E23-B64A-5194-9E0C-C43A488CCD2A",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -5248,45 +5116,12 @@
  },
  {
   "primaryKey": {
-   "ID": "C3F965D6-481E-5910-BD14-8C866D747F1E"
-  },
-  "fields": {
-   "ResponseID": "0CAC3CDE-6997-52BD-AC52-EB69B244618A",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "9BDCCC5A-0434-5F44-9B88-566D12485BA2"
-  },
-  "fields": {
-   "ResponseID": "0CAC3CDE-6997-52BD-AC52-EB69B244618A",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "83AD264D-3124-5F48-8851-2B8EF90F2304"
-  },
-  "fields": {
-   "ResponseID": "0CAC3CDE-6997-52BD-AC52-EB69B244618A",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": false
-  }
- },
- {
-  "primaryKey": {
    "ID": "D15CA2F9-473C-557F-ACC8-319548D6CC63"
   },
   "fields": {
    "ResponseID": "E1DD6BFD-A370-5C42-82E1-C0A12E470911",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -5319,7 +5154,7 @@
   "fields": {
    "ResponseID": "3F2AF334-1A1D-5CF1-9120-D23F3D25B050",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -5396,7 +5231,7 @@
   "fields": {
    "ResponseID": "4B814E46-835E-59E1-8CB1-8E3864B87C35",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -5429,7 +5264,7 @@
   "fields": {
    "ResponseID": "FEBEFF2F-0418-5E9A-8528-7CDAF49C3C64",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -5495,7 +5330,7 @@
   "fields": {
    "ResponseID": "0C2C0EDD-A06B-53B9-9A92-FD7BB4644DBC",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -5528,7 +5363,7 @@
   "fields": {
    "ResponseID": "C0ADAE63-47D3-5A59-B992-F22F7ED530BD",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 6,
+   "NumericValue": 5,
    "BooleanValue": null
   }
  },
@@ -5561,7 +5396,7 @@
   "fields": {
    "ResponseID": "C5E9CFEF-B5EA-530F-A69A-9691B4D27FDB",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 10,
+   "NumericValue": 9,
    "BooleanValue": null
   }
  },
@@ -5594,7 +5429,7 @@
   "fields": {
    "ResponseID": "DA744325-8420-57F2-9B67-4D40CB7A8308",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -5627,7 +5462,7 @@
   "fields": {
    "ResponseID": "E1369C7C-9F59-5568-8A42-5E52799FF400",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 6,
+   "NumericValue": 5,
    "BooleanValue": null
   }
  },
@@ -5660,7 +5495,7 @@
   "fields": {
    "ResponseID": "68F00CF6-274B-5647-AC3A-6F8EF25259E7",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -5684,39 +5519,6 @@
    "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
    "NumericValue": null,
    "BooleanValue": false
-  }
- },
- {
-  "primaryKey": {
-   "ID": "25C2C344-6142-597E-B3EB-CCD036802219"
-  },
-  "fields": {
-   "ResponseID": "B271A867-33D0-5EDD-A9FD-937A105C27D2",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "2509A612-710A-50F3-8203-E018999110A4"
-  },
-  "fields": {
-   "ResponseID": "B271A867-33D0-5EDD-A9FD-937A105C27D2",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "D884934F-3A37-562B-8F7D-2D4E3223619F"
-  },
-  "fields": {
-   "ResponseID": "B271A867-33D0-5EDD-A9FD-937A105C27D2",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
   }
  },
  {
@@ -5759,7 +5561,7 @@
   "fields": {
    "ResponseID": "BC6889A3-C3B4-5DA1-B7AE-304EBE7AD752",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -5853,45 +5655,12 @@
  },
  {
   "primaryKey": {
-   "ID": "B8E8D6CB-57EF-5200-9A0D-2D01C6BE48A1"
-  },
-  "fields": {
-   "ResponseID": "04DEEB59-C7B1-5EAF-9769-B07175DF12B3",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "11F8AC00-6356-5B4E-8E25-D829D183CF4C"
-  },
-  "fields": {
-   "ResponseID": "04DEEB59-C7B1-5EAF-9769-B07175DF12B3",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "93ADECF7-9667-5E11-A9F7-1AE0FC918F39"
-  },
-  "fields": {
-   "ResponseID": "04DEEB59-C7B1-5EAF-9769-B07175DF12B3",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "F05EECA7-048E-5538-8D8D-2BE277F8EC35"
   },
   "fields": {
    "ResponseID": "939E442E-F62E-5411-AF28-D974E8BC7AAD",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -5924,7 +5693,7 @@
   "fields": {
    "ResponseID": "7862B76C-6448-57AA-9CDF-C212FC3040B3",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -5957,7 +5726,7 @@
   "fields": {
    "ResponseID": "21E67361-B03F-52DF-8FF9-4404869BD3FE",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 6,
+   "NumericValue": 5,
    "BooleanValue": null
   }
  },
@@ -6023,7 +5792,7 @@
   "fields": {
    "ResponseID": "25B85B97-9F73-5210-9A56-9396A2C12D0F",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -6056,7 +5825,7 @@
   "fields": {
    "ResponseID": "0372C247-7656-5D90-B1C0-D597975F73A9",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -6128,39 +5897,6 @@
  },
  {
   "primaryKey": {
-   "ID": "E6D97B98-C79A-5F5B-A0A1-55F45AD60CB1"
-  },
-  "fields": {
-   "ResponseID": "E9B276D3-1B5E-5352-9267-5FF714D8DBE0",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 6,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "E2A0425E-25C5-57F4-9A5E-575AA2952FE8"
-  },
-  "fields": {
-   "ResponseID": "E9B276D3-1B5E-5352-9267-5FF714D8DBE0",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "1630B36D-19D3-5006-A940-DA28C912E277"
-  },
-  "fields": {
-   "ResponseID": "E9B276D3-1B5E-5352-9267-5FF714D8DBE0",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "EDCB03DE-D9D4-5C67-AA46-01A9A088B3AA"
   },
   "fields": {
@@ -6194,78 +5930,12 @@
  },
  {
   "primaryKey": {
-   "ID": "A8D27F54-58EF-58E3-8D43-F21FA1F1EB1A"
-  },
-  "fields": {
-   "ResponseID": "16231965-F0DA-56D7-8EFF-4D06F591544A",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "694B0958-84E0-565C-86C6-5C178AB47FFB"
-  },
-  "fields": {
-   "ResponseID": "16231965-F0DA-56D7-8EFF-4D06F591544A",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "11A41A2B-D141-5872-8248-5FD13DEA7AF4"
-  },
-  "fields": {
-   "ResponseID": "16231965-F0DA-56D7-8EFF-4D06F591544A",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "BB5C041B-7B8C-51A7-9270-33B04C2B06F3"
-  },
-  "fields": {
-   "ResponseID": "F6BAD3F1-0BCC-5BFF-851E-5D6CB130D4EA",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "9BCE89BE-3441-5831-91F3-45D8365E31B4"
-  },
-  "fields": {
-   "ResponseID": "F6BAD3F1-0BCC-5BFF-851E-5D6CB130D4EA",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "BFDE276F-30BE-5C74-B92F-872BDFEBFEE2"
-  },
-  "fields": {
-   "ResponseID": "F6BAD3F1-0BCC-5BFF-851E-5D6CB130D4EA",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "4177F839-7E48-51DD-88B7-5100BE5BD0F2"
   },
   "fields": {
    "ResponseID": "0273B5B3-C131-5281-9876-A5B488004CEC",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -6286,50 +5956,6 @@
   },
   "fields": {
    "ResponseID": "0273B5B3-C131-5281-9876-A5B488004CEC",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "C8B966FC-CE98-5A1F-A2A9-B6DE78A88A2A"
-  },
-  "fields": {
-   "ResponseID": "BF662C24-E364-59E1-85FE-B11F1744EA8A",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "D03A9082-5E3E-56F8-8E48-781DA768EB86"
-  },
-  "fields": {
-   "ResponseID": "A1D04D1F-6DBC-502B-BEE2-A2B1C0D9A32A",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "BC8CDD30-1FE7-5E43-9686-E413A563B591"
-  },
-  "fields": {
-   "ResponseID": "A1D04D1F-6DBC-502B-BEE2-A2B1C0D9A32A",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 5,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "A05443BB-73B8-524E-BB96-2401BA5E4351"
-  },
-  "fields": {
-   "ResponseID": "A1D04D1F-6DBC-502B-BEE2-A2B1C0D9A32A",
    "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
    "NumericValue": null,
    "BooleanValue": true
@@ -6436,78 +6062,12 @@
  },
  {
   "primaryKey": {
-   "ID": "4031E4CA-3515-576F-92FB-AE3C194F8D00"
-  },
-  "fields": {
-   "ResponseID": "12BA5580-8588-555F-996E-92819577F357",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "2B49A8DD-9E7D-5EA4-B62B-5A992C984D4B"
-  },
-  "fields": {
-   "ResponseID": "12BA5580-8588-555F-996E-92819577F357",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 5,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "8B078DF2-9DFA-5C65-A675-93BF9F83FF0B"
-  },
-  "fields": {
-   "ResponseID": "12BA5580-8588-555F-996E-92819577F357",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "0D9D1B7D-DD81-56BA-B104-C690C4C7C597"
-  },
-  "fields": {
-   "ResponseID": "F4AA9577-5C80-58FA-9127-6C8DA95C1525",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 10,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "0D8B66DD-FDF9-5F25-928D-1235D3341015"
-  },
-  "fields": {
-   "ResponseID": "F4AA9577-5C80-58FA-9127-6C8DA95C1525",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "FA9E8DFE-F93A-52A9-8A12-C092D633F509"
-  },
-  "fields": {
-   "ResponseID": "F4AA9577-5C80-58FA-9127-6C8DA95C1525",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "1E951D94-527B-5BC1-BF76-C5BC35F9BD29"
   },
   "fields": {
    "ResponseID": "42C68EF3-5172-5ED1-93FD-B70C1E37F68F",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -6540,7 +6100,7 @@
   "fields": {
    "ResponseID": "56A0967D-763B-58AE-BB02-05672ABAE87E",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -6573,7 +6133,7 @@
   "fields": {
    "ResponseID": "472322A2-95AB-56F2-BBDF-F5BC357A5B3C",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 7,
+   "NumericValue": 6,
    "BooleanValue": null
   }
  },
@@ -6606,7 +6166,7 @@
   "fields": {
    "ResponseID": "19337820-8C79-5A8B-ADFA-7737E33077D1",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
+   "NumericValue": 8,
    "BooleanValue": null
   }
  },
@@ -6627,50 +6187,6 @@
   },
   "fields": {
    "ResponseID": "19337820-8C79-5A8B-ADFA-7737E33077D1",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "42B4FA33-B826-5FA8-8AF6-8D1BB19E50C3"
-  },
-  "fields": {
-   "ResponseID": "EB48FA8B-1029-5215-A991-C8232489F904",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "69373266-D42D-587C-B09A-76C441E7B02A"
-  },
-  "fields": {
-   "ResponseID": "1B7E425F-62BC-54FF-BB0A-9E9AF5402AD1",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "7366FB30-9D67-5646-8D21-7D38E9600921"
-  },
-  "fields": {
-   "ResponseID": "1B7E425F-62BC-54FF-BB0A-9E9AF5402AD1",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 5,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "2472309F-CDA0-587D-8223-C7737F42F6B1"
-  },
-  "fields": {
-   "ResponseID": "1B7E425F-62BC-54FF-BB0A-9E9AF5402AD1",
    "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
    "NumericValue": null,
    "BooleanValue": true
@@ -6711,45 +6227,12 @@
  },
  {
   "primaryKey": {
-   "ID": "709C86BF-9EA6-5D57-8EF1-AF6F7640CF18"
-  },
-  "fields": {
-   "ResponseID": "EEDDC3F6-8D74-59FF-9C3F-92D7601056B9",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "1BD47735-DE5C-51C9-A182-77D1DB213403"
-  },
-  "fields": {
-   "ResponseID": "EEDDC3F6-8D74-59FF-9C3F-92D7601056B9",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 3,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "2C41800F-CF16-5518-A61D-EDF75393258A"
-  },
-  "fields": {
-   "ResponseID": "EEDDC3F6-8D74-59FF-9C3F-92D7601056B9",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "29E318F9-72EF-505D-95F8-6AF1B4E4F223"
   },
   "fields": {
    "ResponseID": "C4EF79F5-9F66-554A-ACE2-12DF02E4C987",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -6782,7 +6265,7 @@
   "fields": {
    "ResponseID": "BA241B1F-3753-5236-8BC5-4750533FE2E4",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 5,
+   "NumericValue": 4,
    "BooleanValue": null
   }
  },
@@ -6803,39 +6286,6 @@
   },
   "fields": {
    "ResponseID": "BA241B1F-3753-5236-8BC5-4750533FE2E4",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "DCCBCE2C-E376-53E8-B14D-7609E2A7B095"
-  },
-  "fields": {
-   "ResponseID": "D06F19B3-A755-5BE1-9624-2EB2B7AD0B95",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "88F75DF1-2D2B-521A-8ACE-DE852386124D"
-  },
-  "fields": {
-   "ResponseID": "D06F19B3-A755-5BE1-9624-2EB2B7AD0B95",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "6F4ABB61-646E-5300-87E3-4F1D66784601"
-  },
-  "fields": {
-   "ResponseID": "D06F19B3-A755-5BE1-9624-2EB2B7AD0B95",
    "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
    "NumericValue": null,
    "BooleanValue": true
@@ -6876,78 +6326,12 @@
  },
  {
   "primaryKey": {
-   "ID": "9237FC7E-EF6D-5C3D-AA25-D121A1D6213A"
-  },
-  "fields": {
-   "ResponseID": "D02B050F-2211-5A43-9DC0-33E05CC4E7B8",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "0AB1F58D-A011-5FC6-8D09-0D534E33C73B"
-  },
-  "fields": {
-   "ResponseID": "D02B050F-2211-5A43-9DC0-33E05CC4E7B8",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 5,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "C3742D63-E1A8-53DD-8034-5F286D484320"
-  },
-  "fields": {
-   "ResponseID": "D02B050F-2211-5A43-9DC0-33E05CC4E7B8",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "E40F1EBF-C81E-569C-B544-F617A860611E"
-  },
-  "fields": {
-   "ResponseID": "C0DE09D4-D71E-5CA5-90C3-468744C59D46",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "C96BE3FF-FB48-53B8-AC23-92B823FE88AC"
-  },
-  "fields": {
-   "ResponseID": "C0DE09D4-D71E-5CA5-90C3-468744C59D46",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 4,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "B407386E-7ECC-5D85-9FC1-50DB1E4C0F31"
-  },
-  "fields": {
-   "ResponseID": "C0DE09D4-D71E-5CA5-90C3-468744C59D46",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": false
-  }
- },
- {
-  "primaryKey": {
    "ID": "C108C01B-F484-5C11-B94B-1B801FADA7D9"
   },
   "fields": {
    "ResponseID": "0C6BF33B-85E4-5067-AC15-D74698CDCCFE",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },
@@ -7063,39 +6447,6 @@
  },
  {
   "primaryKey": {
-   "ID": "A6350BED-EA95-5DDC-AEBB-10BE9D253AD9"
-  },
-  "fields": {
-   "ResponseID": "242E9139-DA72-58F7-8ECF-EF7672B31E18",
-   "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 6,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "D1587658-CCE6-5722-9EC8-92C0515C38D3"
-  },
-  "fields": {
-   "ResponseID": "242E9139-DA72-58F7-8ECF-EF7672B31E18",
-   "QuestionID": "49CD87D8-D739-5C5E-8787-4FCBBD176DAB",
-   "NumericValue": 3,
-   "BooleanValue": null
-  }
- },
- {
-  "primaryKey": {
-   "ID": "5BC6D7CF-1D00-51B3-821A-46B48AFECE94"
-  },
-  "fields": {
-   "ResponseID": "242E9139-DA72-58F7-8ECF-EF7672B31E18",
-   "QuestionID": "3FF54F3C-35C8-5C93-9CDB-E70B6373B381",
-   "NumericValue": null,
-   "BooleanValue": false
-  }
- },
- {
-  "primaryKey": {
    "ID": "6A5EFE2E-FCCB-5B8F-A871-9894B0A9318C"
   },
   "fields": {
@@ -7134,7 +6485,7 @@
   "fields": {
    "ResponseID": "9A15B9F1-54B1-5DC1-BCFF-6997745A80CF",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 9,
+   "NumericValue": 8,
    "BooleanValue": null
   }
  },
@@ -9972,7 +9323,7 @@
   "fields": {
    "ResponseID": "A4B70D44-AF6A-503E-AAFD-2A7258D1FF59",
    "QuestionID": "26BE7B64-3D4E-5F4D-9F1C-A3D393F9F348",
-   "NumericValue": 8,
+   "NumericValue": 7,
    "BooleanValue": null
   }
  },

@@ -45,9 +45,11 @@ export function buildForms(cfg, people, events, registrations) {
     };
     formDistributions.push(dist);
 
+    const covid = R.regimes.covid.years.includes(year);
     childOutcome({
       seed,
       items: attendees,
+      baselineShift: covid ? R.regimes.covid.formsResponseLogitShift : 0, // virtual-year fatigue
       scoreOf: (x) => F.response.arrows.engagement.beta * (personByKey.get(x.MemberNumber)._thetaPath?.[year] ?? personByKey.get(x.MemberNumber)._theta),
       target: F.response.rateTarget,
       streamKey: (x) => `formresp:${x.RegKey}`,
@@ -59,7 +61,7 @@ export function buildForms(cfg, people, events, registrations) {
           ResponseKey: respKey, FormKey: 'post-conf-survey', VersionKey: 'post-conf-survey:1',
           DistributionKey: distKey, MemberNumber: x.MemberNumber, Status: 'Complete',
           SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T12:00:00Z`,
-          IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta,
+          IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta, _covid: covid,
         });
         dist.ResponseCount += 1;
       },
@@ -87,12 +89,12 @@ export function buildForms(cfg, people, events, registrations) {
       continue;
     }
     formAnswers.push(
-      { AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: clampRound(npsBase + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd), A.nps.min, A.nps.max), IsSharedDemo: true },
+      { AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: clampRound(npsBase + (resp._covid ? R.regimes.covid.npsShift : 0) + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd), A.nps.min, A.nps.max), IsSharedDemo: true },
       { AnswerKey: `${resp.ResponseKey}:overall`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:overall', NumericValue: clampRound(overallBase + A.overall.engagementBeta * theta + r.normal(0, A.overall.noiseSd), A.overall.min, A.overall.max), IsSharedDemo: true },
       { AnswerKey: `${resp.ResponseKey}:returning`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:returning', BooleanValue: r.bernoulli(1 / (1 + Math.exp(-(A.returning.baseLogit + A.returning.engagementBeta * theta)))), IsSharedDemo: true },
     );
   }
-  for (const resp of formResponses) delete resp._theta; // latent — never ships
+  for (const resp of formResponses) { delete resp._theta; delete resp._covid; } // latents — never ship
 
   return { forms, formVersions, formPages, formQuestions, formDistributions, formResponses, formAnswers };
 }
