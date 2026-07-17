@@ -143,6 +143,28 @@ level** (validator-private files may evolve with the harness).
 - Rung 4 is *blocked on real entities existing* (reconciliation → migrations → CodeGen), not
   on this codebase.
 
+## Where this stands + what's left (as of 2026-07-17)
+
+Everything from the 2026-07-16 meeting feedback is landed: names v2, COVID amplification,
+the payment lifecycle, the programs domains (certifications/competition/advocacy), the
+**defects module** (labeled record corruption → `DataQualityLabel` answer sheet), **motifs
+v1** (stamped story templates + `out/motifs.json` registry), FK-first validation phasing,
+and benchmark sourcing folded into the rulesets (every target now carries
+source + confidence + tolerance; NPS was the one materially wrong number — fixed 7.2 → 8.3).
+Full suite green across 7 seeds; 96 gates.
+
+Open, in rough effort-to-payoff order for July 31:
+
+| Item | State |
+|---|---|
+| **Knowledge Hub** | Researched, decision pending — see `plans/association-db/KNOWLEDGE-HUB-ONE-PAGER-2026-07-16.md`. Option A (fatten 3–4 existing prose fields; KH demos with config only) vs Option B (generated document corpus). Recommend A. |
+| **Dashboard catch-up** | `out/dashboard.html` doesn't know the newer packs (programs, defects, motifs). |
+| **Accounting pack** | bizapps-accounting's 28-table baseline exists; GL/journal entries derived from our orders/payments — designed, deferred as its own batch. Biggest fillable coverage gap. |
+| **Ops** | `setup-playground.sh` (one-command playground rebuild) and CI running `node test.mjs`. |
+| **Orders decomposition** | BLOCKED upstream — waits on bizapps-orders' Subscription/renewal-Order tables (their phasing lands past July 31). `morecheese_orders` stays the sanctioned stand-in. |
+| **Team integration session** | Real installs + their Explorer apps + Sonar over our data. The path is proven (INTEGRATION-RUNBOOK.md, findings F1–F7); needs team time. |
+| **Rung 4 / Rung 5 / second project** | Parked deliberately — rung 4 blocked on real entities, rung 5 is design work, a second project should wait for a genuine second dataset need. |
+
 ## Migration policy
 
 Hand-written domain code is not debt — it's the reference implementation. Each pattern
