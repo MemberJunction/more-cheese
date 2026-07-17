@@ -1,44 +1,104 @@
 {
   "$comment": "MONEY MODULE (pack: orders) — shaped to bizapps-orders' published design: one renewal Order per membership cycle (BO-D40/D45 — the posted Order IS the bill; no invoices), product-typed lines, and payment timing per the GAP-1-approved 3-part mixture (Atradius/CRF primary sources).",
   "orders": {
-    "eventPrices": { "Conference": 450, "Workshop": 150 },
+    "eventPrices": {
+      "Conference": 450,
+      "Workshop": 150
+    },
     "renewalBilledDaysAhead": 30,
     "paymentProfiles": {
       "$note": "DECLARED derivedTransaction timing grammar (core/patterns.mjs) — the GAP-1-approved 3-part mixture, now authored here instead of coded in money.mjs. Each profile: method (fixed) or methods (uniform pick), lateShare (bernoulli branch), and late/onTime day-offset distributions relative to the due date. Same numbers as the previous paymentTiming block; byte-identical migration.",
       "netTerms": {
-        "appliesToTiers": ["SmallBusiness", "Corporate"],
+        "appliesToTiers": [
+          "SmallBusiness",
+          "Corporate"
+        ],
         "termsDays": 30,
-        "methods": ["ACH", "Check", "Wire"],
+        "methods": [
+          "ACH",
+          "Check",
+          "Wire"
+        ],
         "lateShare": 0.45,
-        "late": { "dist": "lognormalDays", "medianDays": 12, "sigma": 0.85, "minDays": 1, "capDays": 60 },
-        "onTime": { "dist": "uniformDays", "min": 0, "max": 5, "sign": -1 },
+        "late": {
+          "dist": "lognormalDays",
+          "medianDays": 12,
+          "sigma": 0.85,
+          "minDays": 1,
+          "capDays": 60
+        },
+        "onTime": {
+          "dist": "uniformDays",
+          "min": 0,
+          "max": 5,
+          "sign": -1
+        },
         "$evidence": "Atradius/CRF B2B late curve: ~45% late, log-normal ~12d median, thin tail capped"
       },
       "autopay": {
         "method": "CreditCard",
         "lateShare": 0.03,
-        "late": { "dist": "uniformDays", "min": 3, "max": 14 },
-        "onTime": { "dist": "const", "days": 0 },
+        "late": {
+          "dist": "uniformDays",
+          "min": 3,
+          "max": 14
+        },
+        "onTime": {
+          "dist": "const",
+          "days": 0
+        },
         "$note": "auto-pay lands ON the due date; the lateShare is the failed-card retry tail"
       },
       "manual": {
-        "methods": ["CreditCard", "CreditCard", "Check"],
+        "methods": [
+          "CreditCard",
+          "CreditCard",
+          "Check"
+        ],
         "lateShare": 0.25,
-        "late": { "dist": "uniformDays", "min": 1, "max": 60 },
-        "onTime": { "dist": "uniformDays", "min": 0, "max": 45, "sign": -1 },
+        "late": {
+          "dist": "uniformDays",
+          "min": 1,
+          "max": 60
+        },
+        "onTime": {
+          "dist": "uniformDays",
+          "min": 0,
+          "max": 45,
+          "sign": -1
+        },
         "$note": "manual individual dues spread early-to-grace; lateShare mirrors late_renewal_share 0.25"
       },
       "checkout": {
         "method": "CreditCard",
         "lateShare": 0,
-        "onTime": { "dist": "const", "days": 0 },
+        "onTime": {
+          "dist": "const",
+          "days": 0
+        },
         "$note": "event registrations: card at checkout, same day"
       }
     },
     "gates": {
-      "netTermsLate": { "target": 0.45, "tolerance": 0.10 },
-      "manualLate": { "target": 0.25, "tolerance": 0.10 },
-      "autopayOnDueMin": 0.90
+      "netTermsLate": {
+        "target": 0.45,
+        "tolerance": 0.1
+      },
+      "manualLate": {
+        "target": 0.25,
+        "tolerance": 0.1
+      },
+      "autopayOnDueMin": 0.9
+    },
+    "paymentOutcomes": {
+      "$note": "payment lifecycle enrichment (feedback 2026-07-16). DELIBERATE causal-vs-noise mix: a base failure rate that is pure noise + an affluence-driven component (low-phi members' cards fail more) — so 'find what is causal' is an honest analyst exercise with a known answer. Failed attempts precede the retry; a retry landing after release leaves the order OVERDUE (the failed card IS the churn-adjacent story). In-flight payments near release sit InProgress.",
+      "noiseFailShare": 0.015,
+      "$noiseFailSource": "SOURCED 2026-07-16 (confidence: high): this models ULTIMATE unrecovered card failure after retries, not per-attempt declines. SaaS involuntary churn ~0.86%/month (churnkey.co involuntary-churn-benchmarks); per-attempt declines run far higher (Recurly: 5-14% of monthly subscription transactions, credit cards averaging 7.6% - blog.recurly.com benchmarking-decline-rates). 1.5% +/-0.5 final-failure is well supported.",
+      "lowPhiFailBonus": 0.05,
+      "lowPhiCut": -0.8,
+      "deniedShareOfFailed": 0.3,
+      "retryDaysMax": 6,
+      "inProgressWindowDays": 3
     }
   }
 }

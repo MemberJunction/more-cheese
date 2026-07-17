@@ -45,13 +45,49 @@ export function orgNameDealer(seed) {
   };
 }
 
-/** Origin-consistent person name from the member's own name stream (`personname:<key>`). */
+/** Association-relevant job title from the member's own title stream — NULL for
+ * Enthusiasts (their day job isn't association data). Own stream: adding titles
+ * re-rolled nothing. */
+export function titleFor(seed, key, segment) {
+  const pool = PEOPLE_BANK.titles[segment];
+  if (!pool) return null;
+  return rng(seed, `title:${key}`).pick(pool);
+}
+
+/** Frequency-weighted pick: earlier entries are more common (Zipf-ish) — uniform sampling
+ * over-represents rare names and reads fake (name-bank research §2). */
+function namePick(r, arr) {
+  return r.pickWeighted(arr.map((v, i) => [v, arr.length - i]));
+}
+
+/** Origin-consistent person name from the member's own name stream (`personname:<key>`).
+ * v2 robustness: Zipf-weighted picks, controlled mixed-heritage surnames (first from one
+ * origin + surname from another — common in NA/RoW), hyphenated surnames, middle initials,
+ * and nicknames as PreferredName. */
 export function personNameFor(seed, key, region) {
   const r = rng(seed, `personname:${key}`);
+  const S = PEOPLE_BANK.structure;
   const weights = PEOPLE_BANK.regionWeights[region] ?? PEOPLE_BANK.regionWeights.NA;
   const bucket = PEOPLE_BANK.buckets[r.pickWeighted(Object.entries(weights))];
-  return { first: r.pick(bucket.first), last: r.pick(bucket.last) };
+  const first = namePick(r, bucket.first);
+  let last;
+  if (r.bernoulli(S.mixedHeritageShare[region] ?? 0)) {
+    const other = PEOPLE_BANK.buckets[r.pickWeighted(Object.entries(weights))];
+    last = namePick(r, other.last);
+  } else {
+    last = namePick(r, bucket.last);
+  }
+  if (r.bernoulli(S.compoundSurnameShare)) {
+    const second = namePick(r, bucket.last);
+    if (second !== last) last = `${last}-${second}`;
+  }
+  const middle = r.bernoulli(S.middleInitialShare) ? String.fromCharCode(65 + r.int(0, 25)) + '.' : null;
+  const nick = PEOPLE_BANK.nicknames[first];
+  const preferred = nick && r.bernoulli(S.preferredNameShare) ? nick : null;
+  return { first, last, middle, preferred };
 }
+
+export const TOPONYMS = ORG_BANK.toponyms; // cleared components — also compose competition product names
 
 // Workshop TOPIC words (not brand names — "Workshop: Alpine Affinage" is a subject line)
 export const CHEESE_WORDS = ['Alpine','Meadow','Cave','Wheel','Rind','Curd','Brook','Dairy','Hollow','Prairie','Cedar','Willow','Granite','Clover','Harvest','Stone','Valley','Summit','Lark','Birch'];

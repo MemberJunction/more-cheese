@@ -16,6 +16,7 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logisticFit } from '../engine/stats.mjs';
+import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../engine/dates.mjs';
 import { loadRuleset } from '../engine/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -31,6 +32,21 @@ const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
 const regs = load('events', 'event_registrations');
+const cMemberships = load('committees', 'committee_memberships');
+const cMeetings = load('committees', 'committee_meetings');
+const cAttendance = load('committees', 'committee_attendance');
+const fResponses = load('forms', 'form_responses');
+const fAnswers = load('forms', 'form_answers');
+const relationships = load('common', 'relationships');
+const cMotions = load('committees', 'committee_motions');
+const cVotes = load('committees', 'committee_votes');
+const tTasks = load('tasks', 'tasks');
+const tAssignments = load('tasks', 'task_assignments');
+const issues = load('issues', 'issues');
+const memberCerts = load('learning', 'member_certifications');
+const compEntries = load('events', 'competition_entries');
+const advocacy = load('membership', 'advocacy_actions');
+const dqLabels = load('membership', 'data_quality_labels');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -70,6 +86,17 @@ function checkPacks() {
   const badLine = orderLines.filter((x) => !orderKeys.has(x.OrderKey) || !productKeys.has(x.ProductKey)).length;
   const badPay = payments.filter((x) => !orderKeys.has(x.OrderKey)).length;
   check('pack refs: orders→common + lines→products + payments→orders', badOrderM + badLine + badPay === 0, `${badOrderM}+${badLine}+${badPay} dangling`);
+  const meetingKeys = new Set(cMeetings.map((x) => x.MeetingKey));
+  const badCm = cMemberships.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
+  check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
+  const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
+  const badResp = fResponses.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
+  check('pack refs: forms→common + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
+  const badRel = relationships.filter((x) => (x.FromMemberNumber && !peopleKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !peopleKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
+  const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length;
+  check('pack refs: relationships/tasks/issues→common', badRel + badTask === 0, `${badRel}+${badTask} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -116,8 +143,10 @@ function checkBenchmarks() {
   const normal = yearRates.filter((x) => !x.covid);
   const pooled = normal.reduce((s, x) => s + x.rate, 0) / normal.length;
   const stdYears = Math.sqrt(normal.reduce((s, x) => s + (x.rate - pooled) ** 2, 0) / normal.length);
-  // small-sample allowance: the mean of a few wobbled years has its own SE (vanishes at scale)
-  const meanAllow = M.renewalTolerance + 1.5 * (stdYears / Math.sqrt(normal.length));
+  // small-sample allowance: the mean of a few wobbled years has its own SE (vanishes at
+  // scale). 2×SE, not 1.5: the suite sweeps this gate across 7 seeds — at 1.5× a marginal
+  // seed false-reds ~13% of sweeps (multiple comparisons; the arrow-gate lesson).
+  const meanAllow = M.renewalTolerance + 2 * (stdYears / Math.sqrt(normal.length));
   check(`renewal mean ${(pooled * 100).toFixed(1)}% vs ${M.renewalTarget * 100}% ±${(meanAllow * 100).toFixed(1)} (tol + mean-SE at ${normal.length} yrs)`, Math.abs(pooled - M.renewalTarget) <= meanAllow, `${normal.length} non-covid yrs`);
 
   // each year's band widens by its own sampling error (converges to the pure band at scale)
@@ -305,9 +334,10 @@ function checkMoney() {
 
   // reconciliation: every Paid order's payments sum to its total; no orphan payments
   const paidByOrder = new Map();
-  for (const p of payments) paidByOrder.set(p.OrderKey, (paidByOrder.get(p.OrderKey) ?? 0) + p.Amount);
+  // failed/denied ATTEMPTS are not money — only settled/settling captures reconcile
+  for (const p of payments.filter((x) => x.Status === 'Captured' || x.Status === 'InProgress')) paidByOrder.set(p.OrderKey, (paidByOrder.get(p.OrderKey) ?? 0) + p.Amount);
   const badRecon = orders.filter((x) => x.PaymentStatus === 'Paid' && paidByOrder.get(x.OrderKey) !== x.TotalGross).length;
-  const paidButNo = orders.filter((x) => x.PaymentStatus !== 'Paid' && paidByOrder.has(x.OrderKey)).length;
+  const paidButNo = orders.filter((x) => x.PaymentStatus !== 'Paid' && paidByOrder.has(x.OrderKey)).length; // failed attempts on aging orders are expected — excluded above
   check('money: every Paid order reconciles (payments sum = total; unpaid have none)', badRecon + paidButNo === 0, `${badRecon}+${paidButNo} bad`);
 
   // the 3-part timing mixture, measured
@@ -395,6 +425,106 @@ function checkTrainability() {
   check(`trainability: churn in model's bottom quintile ${(churnBottom * 100).toFixed(0)}% ≥ 2× top quintile ${(churnTop * 100).toFixed(0)}%`, churnBottom >= churnTop * 2, 'rank-ordering lift (N-appropriate, per spec §7.4)');
 }
 
+// ---------- composed bizapps slices: committees + forms land their targets ----------
+function checkComposedApps() {
+  const CC = R.committees; const FF = R.forms;
+  // committee participation share (over the ACTIVE term's eligible crowd — heroes excluded from the draw)
+  const activeTerm = CC.terms[CC.terms.length - 1];
+  const served = new Set(cMemberships.filter((m) => m.TermKey.endsWith(activeTerm.start)).map((m) => m.MemberNumber));
+  const eligible = people.filter((p) => periods.some((per) => per.MemberNumber === p.MemberNumber && per.StartDate <= activeTerm.start && activeTerm.start <= per.EndDate));
+  const share = eligible.length ? [...served].filter((m) => eligible.some((p) => p.MemberNumber === m)).length / eligible.length : 0;
+  const shareAllow = CC.participation.tolerance + 3 * Math.sqrt((CC.participation.shareOfEligible * (1 - CC.participation.shareOfEligible)) / Math.max(1, eligible.length)); // 3×SE: multiple comparisons across seeds+terms (arrow-gate precedent)
+  check(`committees: ${(share * 100).toFixed(1)}% of eligible serve vs ${CC.participation.shareOfEligible * 100}% ±${(shareAllow * 100).toFixed(1)}`, Math.abs(share - CC.participation.shareOfEligible) <= shareAllow, `${served.size} serving / ${eligible.length} eligible`);
+  // every committee-term has exactly one Chair
+  const chairs = new Map();
+  const populated = new Set(cMemberships.map((m) => m.TermKey));
+  for (const m of cMemberships.filter((x) => x.RoleKey === 'Chair')) chairs.set(m.TermKey, (chairs.get(m.TermKey) ?? 0) + 1);
+  // hero-only rosters are exempt: a pinned Member's role is a fact, so a committee whose
+  // only members are pinned heroes carries an honest Chair VACANCY in a tiny world
+  const crowdPopulated = new Set(cMemberships.filter((m) => !R.heroes.some((h) => h.memberNumber === m.MemberNumber)).map((m) => m.TermKey));
+  const badChair = [...crowdPopulated].filter((t) => (chairs.get(t) ?? 0) !== 1).length;
+  check('committees: exactly one Chair per crowd-populated committee-term', badChair === 0, `${chairs.size} chaired / ${crowdPopulated.size} crowd-populated terms`);
+  // meeting attendance rate
+  const present = cAttendance.filter((a) => a.AttendanceStatus === 'Present').length;
+  const attRate = cAttendance.length ? present / cAttendance.length : 0;
+  const attAllow = CC.meetings.attendance.tolerance + 1.5 * Math.sqrt((CC.meetings.attendance.presentTarget * (1 - CC.meetings.attendance.presentTarget)) / Math.max(1, cAttendance.length));
+  check(`committees: meeting attendance ${(attRate * 100).toFixed(1)}% vs ${CC.meetings.attendance.presentTarget * 100}% ±${(attAllow * 100).toFixed(1)}`, Math.abs(attRate - CC.meetings.attendance.presentTarget) <= attAllow, `${cAttendance.length} attendance rows`);
+  // survey response rate (pooled over distributions) + NPS mean band
+  const attendees = regs.filter((x) => x.Attended === true && events.find((e) => e.EventKey === x.EventKey)?.EventType === 'Conference').length;
+  const respRate = attendees ? fResponses.length / attendees : 0;
+  const respAllow = FF.response.tolerance + 1.5 * Math.sqrt((FF.response.rateTarget * (1 - FF.response.rateTarget)) / Math.max(1, attendees));
+  check(`forms: survey response rate ${(respRate * 100).toFixed(1)}% vs ${FF.response.rateTarget * 100}% ±${(respAllow * 100).toFixed(1)}`, Math.abs(respRate - FF.response.rateTarget) <= respAllow, `${fResponses.length} responses / ${attendees} attendees`);
+  // NPS gate on NON-covid years (the covid dip is gated separately as regime expression)
+  const covidDists = new Set(R.regimes.covid.years.map((y) => `post-conf-survey:${y}`));
+  const respDist = new Map(fResponses.map((x) => [x.ResponseKey, x.DistributionKey]));
+  const nps = fAnswers.filter((a) => a.QuestionKey === 'post-conf-survey:nps');
+  const npsN = nps.filter((a) => !covidDists.has(respDist.get(a.ResponseKey)));
+  const npsC = nps.filter((a) => covidDists.has(respDist.get(a.ResponseKey)));
+  const mean = (xs) => xs.length ? xs.reduce((s2, a) => s2 + a.NumericValue, 0) / xs.length : 0;
+  const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, npsN.length)));
+  check(`forms: mean NPS (non-covid) ${mean(npsN).toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(mean(npsN) - FF.answers.nps.base) <= npsAllow, `${npsN.length} answers`);
+  if (npsC.length >= 20) check(`regime: covid NPS dip expressed (${mean(npsC).toFixed(2)} < ${mean(npsN).toFixed(2)})`, mean(npsC) < mean(npsN), `${npsC.length} covid-year answers`);
+  // programs: pursuit + advocate shares land (over their real pools)
+  const PRG = R.programs;
+  const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
+  const crowdCompleters = [...completerSet].filter((m) => !R.heroes.some((h) => h.memberNumber === m)).length;
+  const crowdCerts = memberCerts.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).length;
+  const certShare = crowdCerts / Math.max(1, crowdCompleters);
+  const certAllow = PRG.certifications.tolerance + 3 * Math.sqrt(PRG.certifications.pursuitShareOfCompleters * (1 - PRG.certifications.pursuitShareOfCompleters) / Math.max(1, crowdCompleters));
+  check(`programs: cert pursuit ${(certShare * 100).toFixed(1)}% of completers vs ${PRG.certifications.pursuitShareOfCompleters * 100}% ±${(certAllow * 100).toFixed(1)}`, Math.abs(certShare - PRG.certifications.pursuitShareOfCompleters) <= certAllow, `${crowdCerts} certs / ${crowdCompleters} completers`);
+  const advocates = new Set(advocacy.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).map((x) => x.MemberNumber)).size;
+  const advShare = advocates / Math.max(1, people.length);
+  const advAllow = PRG.advocacy.tolerance + 3 * Math.sqrt(PRG.advocacy.advocateShare * (1 - PRG.advocacy.advocateShare) / Math.max(1, people.length));
+  check(`programs: advocates ${(advShare * 100).toFixed(1)}% vs ${PRG.advocacy.advocateShare * 100}% ±${(advAllow * 100).toFixed(1)}`, Math.abs(advShare - PRG.advocacy.advocateShare) <= advAllow, `${advocates} advocates`);
+
+  // payment lifecycle: failure mix is part causal (low-phi), part noise — the ratio must express
+  const PO2 = R.orders.paymentOutcomes;
+  const latents2 = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
+  const phiOf = new Map(latents2.map((x) => [x.m, x.phi]));
+  const orderMember = new Map(orders.map((o) => [o.OrderKey, o.MemberNumber]));
+  const cardPays = payments.filter((x) => x.Method === 'CreditCard');
+  const failed = cardPays.filter((x) => x.Status === 'Failed' || x.Status === 'Denied');
+  const isLow = (x) => (phiOf.get(orderMember.get(x.OrderKey)) ?? 0) < PO2.lowPhiCut;
+  const lowN = cardPays.filter(isLow).length, lowF = failed.filter(isLow).length;
+  const restN = cardPays.length - lowN, restF = failed.length - lowF;
+  const rLow = lowF / Math.max(1, lowN), rRest = restF / Math.max(1, restN);
+  check(`payments: card-failure causality expressed — low-φ ${(rLow * 100).toFixed(1)}% > rest ${(rRest * 100).toFixed(1)}% (noise floor)`, failed.length > 0 && rLow > rRest * 1.8, `${failed.length} failed/denied of ${cardPays.length} card payments`);
+  const badInflight = payments.filter((x) => x.Status === 'InProgress' && x.PaymentDate < iso2(addDays2(parseDate2(run.releaseDate), -PO2.inProgressWindowDays))).length;
+  check('payments: InProgress only inside the settlement window', badInflight === 0, `${payments.filter((x) => x.Status === 'InProgress').length} in-flight`);
+  // relationships: every employed member has exactly one Employee edge; dissolved employers end it
+  const employed = people.filter((p) => p.OrgKey).length;
+  const empRels = relationships.filter((r2) => r2.RelKey.startsWith('emp:'));
+  // Ended is legitimate for a dissolved employer OR a labeled stale-employer job switch (the emp-true: edge)
+  const switched = new Set(relationships.filter((r2) => r2.RelKey.startsWith('emp-true:')).map((r2) => r2.FromMemberNumber));
+  const endedOk = empRels.every((r2) => (r2.Status === 'Ended') === (orgByKeyG(r2.ToOrgKey)?.LifecycleEvent?.kind === 'Dissolved' || switched.has(r2.FromMemberNumber)));
+  check(`relationships: employment edges ${empRels.length} = employed members ${employed}, dissolution-consistent`, empRels.length === employed && endedOk, `${relationships.length} total relationships`);
+  // motions: stored tallies match the vote rows; votes consistent with attendance (Absent ⇔ not Present)
+  let tallyBad = 0;
+  const votesByMotion = new Map();
+  for (const v of cVotes) { if (!votesByMotion.has(v.MotionKey)) votesByMotion.set(v.MotionKey, []); votesByMotion.get(v.MotionKey).push(v); }
+  const attStatus = new Map(cAttendance.map((a) => [`${a.MemberNumber}:${a.MeetingKey}`, a.AttendanceStatus]));
+  let attBad = 0;
+  for (const m of cMotions) {
+    const vs = votesByMotion.get(m.MotionKey) ?? [];
+    const yes = vs.filter((v) => v.VoteValue === 'Yes').length, no = vs.filter((v) => v.VoteValue === 'No').length;
+    if (yes !== m.YesCount || no !== m.NoCount || m.Result !== (yes > no ? 'Passed' : 'Failed')) tallyBad++;
+    for (const v of vs) {
+      const st = attStatus.get(`${v.MembershipKey.split(':')[0]}:${m.MeetingKey}`);
+      if ((v.VoteValue === 'Absent') !== (st !== 'Present')) attBad++;
+    }
+  }
+  check('committees: motion tallies match votes; votes consistent with attendance', tallyBad + attBad === 0, `${cMotions.length} motions, ${cVotes.length} votes`);
+  // tasks: every PendingRenewal member carries an outreach task
+  const pendingMembers = [...lastStatus.entries()].filter(([, st]) => st === 'PendingRenewal').map(([m2]) => m2);
+  const outreach = new Set(tTasks.filter((t) => t.TypeKey === 'Renewal Outreach').map((t) => t.TaskKey));
+  const missingOutreach = pendingMembers.filter((m2) => !outreach.has(`otask:${m2}`)).length;
+  check(`tasks: renewal-outreach task per PendingRenewal member (${pendingMembers.length})`, missingOutreach === 0, `${tTasks.length} tasks total`);
+  // issues: numbering dense + unique
+  const nums = new Set(issues.map((x) => x.IssueNumber));
+  check(`issues: ${issues.length} tickets, numbering dense + unique`, nums.size === issues.length && issues.length > 0, `${[...nums].slice(0, 2)}…`);
+}
+const orgByKeyG = (k) => orgs.find((o) => o.OrgKey === k);
+
 // ---------- heroes (§7.5): the pinned people load with their stories intact ----------
 function checkHeroes() {
   const elena = people.find((p) => p.MemberNumber === 'ICF-000101');
@@ -429,22 +559,128 @@ function checkHeroes() {
       if (Math.round(dJoin) !== h.pins.joinedDaysBeforeRelease) problems.push(`joined ${dJoin}d before release`);
     }
     if (p && h.employerName && orgByKey.get(p.OrgKey)?.Name !== h.employerName) problems.push(`employer=${orgByKey.get(p.OrgKey)?.Name}`);
+    if (h.pins.certStatus) {
+      const mc = memberCerts.find((x) => x.MemberNumber === h.memberNumber);
+      if (!mc || mc.Status !== h.pins.certStatus) problems.push(`cert=${mc?.Status}≠${h.pins.certStatus}`);
+    }
+    if (h.pins.competitionGold) {
+      if (!compEntries.some((x) => x.MemberNumber === h.memberNumber && x.EntryYear === h.pins.competitionGold && x.Result === 'Gold')) problems.push(`no Gold ${h.pins.competitionGold}`);
+    }
+    if (h.pins.defect) {
+      if (!dqLabels.some((l) => l.MemberNumber === h.memberNumber && l.DefectKind === h.pins.defect)) problems.push(`no ${h.pins.defect} label`);
+    }
+    if (h.pins.advocacyMin) {
+      const acts = advocacy.filter((x) => x.MemberNumber === h.memberNumber);
+      if (acts.length < h.pins.advocacyMin) problems.push(`advocacy ${acts.length}<${h.pins.advocacyMin}`);
+      if ((h.pins.testimonies ?? 0) > acts.filter((x) => x.Kind === 'Testimony').length) problems.push('testimonies missing');
+    }
+    for (const seat of h.committees ?? []) {
+      for (const termName of seat.terms) {
+        const t = R.committees.terms.find((x) => x.name === termName);
+        const row = t && cMemberships.find((m) => m.MemberNumber === h.memberNumber && m.CommitteeKey === seat.committee && m.TermKey === `${seat.committee}:${t.start}`);
+        if (!row) problems.push(`no ${seat.committee} seat (${termName})`);
+        else if (row.RoleKey !== seat.role) problems.push(`${seat.committee} role=${row.RoleKey}≠${seat.role}`);
+      }
+    }
     check(`hero ${h.first} ${h.last} (${h.memberNumber}): pins hold`, problems.length === 0, problems.join('; ') || `status=${st}`);
   }
 }
 
 // ---------- status mix (loose at N=500) ----------
 function checkStatusMix() {
+  // pinned-lapse motif members are authored facts kept past the archive rule — a crowd
+  // distribution gate must not count them (they'd bias the mix by construction)
+  const pinnedLapse = new Set(JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8')).registry
+    .filter((x) => x.LapseYear != null).map((x) => x.MemberNumber));
   const counts = { Active: 0, Lapsed: 0, Cancelled: 0, PendingRenewal: 0 };
-  for (const s of lastStatus.values()) counts[s] = (counts[s] ?? 0) + 1;
-  const total = people.length;
+  for (const [m, s] of lastStatus) { if (!pinnedLapse.has(m)) counts[s] = (counts[s] ?? 0) + 1; }
+  // injected contact-duplicates (ICF-D*) are records, not members — they carry no periods
+  const total = people.filter((p) => !p.MemberNumber.startsWith('ICF-D') && !pinnedLapse.has(p.MemberNumber)).length;
   const active = (counts.Active + counts.PendingRenewal) / total;
   const [tA] = R.statusMix.target;
   check(`status mix: active-ish ${(active * 100).toFixed(0)}% vs ~${(tA + 0.02) * 100}% ±${R.statusMix.tolerance * 100}`, Math.abs(active - (tA + 0.02)) <= R.statusMix.tolerance, JSON.stringify(counts));
 }
 
+// ---------- defects: every injected defect is labeled AND verifiable ----------
+function checkDefects() {
+  const D = R.defects;
+  const byKind = (k) => dqLabels.filter((l) => l.DefectKind === k);
+  const personBy = new Map(people.map((p) => [p.MemberNumber, p]));
+  const orgByKey2 = new Map(orgs.map((o) => [o.OrgKey, o]));
+
+  // declared counts: crowd injections + persona-declared exemplars
+  const wantDup = D.duplicatePerson.count + R.heroes.filter((h) => h.pins?.duplicateOf).length;
+  const wantStale = D.staleEmployer.count + R.heroes.filter((h) => h.staleEmployer).length;
+  check(`defects: DuplicatePerson labels = ${wantDup}`, byKind('DuplicatePerson').length === wantDup, `${byKind('DuplicatePerson').length}`);
+  check(`defects: StaleEmployer labels = ${wantStale}`, byKind('StaleEmployer').length === wantStale, `${byKind('StaleEmployer').length}`);
+  check(`defects: TypoEmail labels = ${D.typoEmail.count}`, byKind('TypoEmail').length === D.typoEmail.count, `${byKind('TypoEmail').length}`);
+
+  // every label points at real records and describes a defect that is actually present
+  const problems = [];
+  for (const l of dqLabels) {
+    const p = personBy.get(l.MemberNumber);
+    if (!p) { problems.push(`${l.LabelKey}: person missing`); continue; }
+    if (l.DefectKind === 'DuplicatePerson') {
+      if (!personBy.has(l.RelatedMemberNumber)) problems.push(`${l.LabelKey}: canonical missing`);
+      if (l.MemberNumber.startsWith('ICF-D') && periodsByMember.has(l.MemberNumber)) problems.push(`${l.LabelKey}: shallow dup has history`);
+    } else if (l.DefectKind === 'StaleEmployer') {
+      const profileOrg = orgByKey2.get(p.OrgKey)?.Name;
+      if (profileOrg !== l.DefectValue) problems.push(`${l.LabelKey}: profile=${profileOrg}≠${l.DefectValue}`);
+      if (profileOrg === l.TruthValue) problems.push(`${l.LabelKey}: profile already correct`);
+      const trueRel = relationships.find((x) => x.RelKey === `emp-true:${l.MemberNumber}`);
+      if (!trueRel || trueRel.Status !== 'Active') problems.push(`${l.LabelKey}: no Active truth edge`);
+      const oldRel = relationships.find((x) => x.RelKey === `emp:${l.MemberNumber}`);
+      if (oldRel && oldRel.Status !== 'Ended') problems.push(`${l.LabelKey}: stale edge not Ended`);
+    } else if (l.DefectKind === 'TypoEmail') {
+      if (p.Email !== l.DefectValue) problems.push(`${l.LabelKey}: email=${p.Email}≠${l.DefectValue}`);
+      if (p.Email === l.TruthValue) problems.push(`${l.LabelKey}: typo not applied`);
+    }
+  }
+  check('defects: every label verifiable against the data', problems.length === 0, problems.slice(0, 3).join('; ') || `${dqLabels.length} labels`);
+}
+
+// ---------- motifs: every stamped archetype actually expresses ----------
+function checkMotifs() {
+  const { registry, meta } = JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8'));
+  for (const [name, m] of Object.entries(meta)) {
+    check(`motifs: ${name} stamped ${m.stamped} = min(declared ${m.declared}, pool ${m.pool})`, m.stamped === Math.min(m.declared, m.pool), JSON.stringify(m));
+  }
+  // employerCollapseLapse: the member really lapsed, at (or after) the stamped year
+  const collapseBad = registry.filter((x) => x.Motif === 'employerCollapseLapse')
+    .filter((x) => lastStatus.get(x.MemberNumber) !== 'Lapsed');
+  check('motifs: employerCollapseLapse members all Lapsed', collapseBad.length === 0, collapseBad.map((x) => x.MemberNumber).join(', ') || 'all lapsed');
+  // authored arcs express through behavior: activity (registrations + course enrollments)
+  // late-in-arc vs early-in-arc — one signal alone is too thin at 6 members
+  const regYears = new Map();
+  const addYear = (m, y) => (regYears.get(m) ?? regYears.set(m, []).get(m)).push(y);
+  for (const r2 of regs) addYear(r2.MemberNumber, +r2.RegisteredOn.slice(0, 4));
+  for (const e2 of enrollments) addYear(e2.MemberNumber, +e2.EnrolledOn.slice(0, 4));
+  const relYear = +run.releaseDate.slice(0, 4);
+  const halves = (x) => {
+    const ys = regYears.get(x.MemberNumber) ?? [];
+    const mid = (x.StartYear + relYear) / 2;
+    return { early: ys.filter((y) => y < mid).length, late: ys.filter((y) => y >= mid).length };
+  };
+  for (const [name, dir] of [['risingStar', 1], ['quietFade', -1]]) {
+    const rows = registry.filter((x) => x.Motif === name);
+    if (!rows.length) continue;
+    let early = 0, late = 0;
+    for (const x of rows) { const w = halves(x); early += w.early; late += w.late; }
+    const ok = dir > 0 ? late > early : late < early;
+    check(`motifs: ${name} arc expresses (${rows.length} members: first-half ${early} vs second-half ${late} activity)`, ok, `authored theta swing must show in activity`);
+  }
+}
+
 // ---------- run all gates & report ----------
+// FK-FIRST (feedback 2026-07-16): referential integrity is a PHASE, not a peer gate.
+// If any pack-reference gate fails, causal/benchmark gates are meaningless (they'd
+// measure a broken world) — report the referential failures alone and hard-fail.
 checkPacks();
+if (results.some((r) => !r.ok)) {
+  for (const r of results) console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);
+  console.log('\n✋ FK-first: referential gates failed — causal gates not run');
+  process.exit(1);
+}
 checkTemporal();
 checkBenchmarks();
 checkArrows();
@@ -453,8 +689,11 @@ checkLearning();
 checkMoney();
 checkEngagementDynamics();
 checkTrainability();
+checkComposedApps();
 checkHeroes();
 checkStatusMix();
+checkDefects();
+checkMotifs();
 
 let failed = 0;
 for (const r of results) {

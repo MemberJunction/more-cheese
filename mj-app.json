@@ -3,8 +3,8 @@
   "manifestVersion": 1,
   "name": "more-cheese-demo",
   "displayName": "MoreCheese Demo",
-  "description": "The MoreCheese demo open app \u2014 the fictional International Cheese Federation. Composes the BizApps open-app catalog with association-domain schemas (members, events, learning, forums, awards, legislative, marketing) to demonstrate MemberJunction against a realistic multi-system environment.",
-  "version": "0.1.0",
+  "description": "The MoreCheese demo association (International Cheese Federation): a generated, causally-consistent dataset demonstrating the MJ platform across composed BizApps.",
+  "version": "1.0.0",
   "license": "ISC",
   "icon": "fa-solid fa-cheese",
   "color": "#E8A33D",
@@ -15,8 +15,9 @@
   "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2",
   "mjVersionRange": ">=5.43.0 <6.0.0",
   "schema": {
-    "name": "morecheese_common",
-    "createIfNotExists": true
+    "name": "morecheese_members",
+    "createIfNotExists": true,
+    "entityPackage": "@mj-more-cheese-demo/entities"
   },
   "migrations": {
     "directory": "migrations",
@@ -29,6 +30,22 @@
     "mj-bizapps-common": {
       "version": ">=5.30.0 <6.0.0",
       "repository": "https://github.com/MemberJunction/bizapps-common"
+    },
+    "mj-committees": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-committees"
+    },
+    "mj-bizapps-forms": {
+      "version": ">=0.1.0 <1.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-forms"
+    },
+    "mj-bizapps-tasks": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-tasks"
+    },
+    "mj-bizapps-issues": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-issues"
     }
   },
   "packages": {

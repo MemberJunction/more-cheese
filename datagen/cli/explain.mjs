@@ -36,7 +36,7 @@ P('> this page is its readable rendering.');
 P();
 P('## The world');
 P();
-P(`- **${R.scale.members} members** (pilot scale), history from ${R.history.startYear}, flagship conference every July ${R.history.conferenceDay}.`);
+P(`- **${R.scale.members} members** (the demo scope; tests run a 500-member pilot via --n), history from ${R.history.startYear}, flagship conference every July ${R.history.conferenceDay}.`);
 P(`- Geography: ${R.geography.mix.map(([k, w]) => `${(w * 100).toFixed(0)}% ${k}`).join(' · ')} — members cluster in real dairy-belt cities with real coordinates.`);
 P(`- Organizations: about 1 per ${Math.round(1 / R.orgs.ratioToMembers)} members; ${(R.orgs.producerShare * 100).toFixed(0)}% are producers; each year ~${(R.orgs.lifecycleEventRatePerYear * 100).toFixed(0)}% of orgs hit a lifecycle event (dissolved / acquired / program cut) — the fuel for employer-driven churn stories.`);
 P(`- Renewal cycles: ${((1 - R.cohorts.anniversaryShare) * 100).toFixed(0)}% calendar-year (everyone expires Dec 31) + ${(R.cohorts.anniversaryShare * 100).toFixed(0)}% anniversary cohort *(D6 assumption, pending ratification)*.`);

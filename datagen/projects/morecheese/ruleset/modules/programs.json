@@ -1,0 +1,88 @@
+{
+  "$comment": "PROGRAMS MODULE (2026-07-16 'more tables' enrichment): certifications (learning pack), competition entries (events pack), advocacy actions (membership pack). Unlocks Sofia Marchetti (cert journey), Henri's Gold medal, Tom Reyes (advocacy-shaped engagement — Sonar's component-breakdown demo). Targets are ESTIMATEs pending sources.",
+  "programs": {
+    "certifications": {
+      "catalog": [
+        {
+          "key": "CERT-CCP",
+          "name": "Certified Cheese Professional (CCP)",
+          "validYears": 3
+        },
+        {
+          "key": "CERT-SENSORY",
+          "name": "Sensory Evaluation Certificate",
+          "validYears": 3
+        },
+        {
+          "key": "CERT-FOODSAFETY",
+          "name": "Food Safety & HACCP Certificate",
+          "validYears": 2
+        }
+      ],
+      "pursuitShareOfCompleters": 0.1,
+      "tolerance": 0.03,
+      "$note": "pool = members with a completed course (the prerequisite); engaged completers pursue a credential. ESTIMATE (confidence: low, researched 2026-07-16 - no published take-rate exists): directionally sensible against 51% of members VALUING certifications (netforumams.com association-certifications-101) and 39% joining primarily for continuing education; I.C.E. publishes no pipeline-conversion stat.",
+      "awardShare": 0.75,
+      "arrows": {
+        "engagement": {
+          "beta": 0.7,
+          "label": "med"
+        }
+      }
+    },
+    "competition": {
+      "eligibility": "producer members with an organization (org membership is the gate — Henri's join trigger)",
+      "entryRatePerYear": 0.12,
+      "maxPerYear": 3,
+      "medalWeights": {
+        "Gold": 0.05,
+        "Silver": 0.1,
+        "Bronze": 0.15,
+        "None": 0.7
+      },
+      "categories": [
+        "Alpine Styles",
+        "Soft-Ripened",
+        "Blue Veined",
+        "Fresh & Pasta Filata",
+        "Washed Rind",
+        "Aged Cheddar & Territorials"
+      ],
+      "productForms": [
+        "{t} Reserve",
+        "{t} Tomme",
+        "{t} Blue",
+        "{t} Wheel",
+        "Old {t}",
+        "{t} Clothbound"
+      ],
+      "$productNote": "product names compose from CLEARED toponyms (the org-name bank) — the separate product-name morphology from the name research"
+    },
+    "advocacy": {
+      "advocateShare": 0.05,
+      "tolerance": 0.02,
+      "$source": "SOURCED 2026-07-16 (confidence: medium): VoterVoice/FiscalNote Advocacy Benchmark Report (2,000+ orgs, 545M+ emails) puts advocacy email action rates at 6.9% (2024) / 6.5% (H1 2025) (info.votervoice.net 2025-advocacy-benchmark-report); discounted to 5% +/-2 because not all members receive/open advocacy emails. Was 4% ESTIMATE - nudged up and anchored.",
+      "actionsPerYearMean": 2.2,
+      "dispersionK": 1.4,
+      "kindWeights": {
+        "LetterCampaign": 0.45,
+        "PetitionSignature": 0.35,
+        "CoalitionMeeting": 0.15,
+        "Testimony": 0.05
+      },
+      "topics": [
+        "Raw-milk aging rules",
+        "FSMA small-producer exemptions",
+        "Interstate cheese shipment",
+        "Labeling standards",
+        "Dairy pricing reform"
+      ],
+      "arrows": {
+        "engagement": {
+          "beta": 0.8,
+          "label": "med-strong"
+        }
+      }
+    }
+  }
+}

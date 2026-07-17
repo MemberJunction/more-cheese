@@ -7,10 +7,9 @@
 // NOT put credentials here. Most settings have sensible package defaults; this
 // file only declares what is specific to this app's directory structure.
 //
-// MoreCheese demo (International Cheese Federation). Custom demo data is split
-// across multiple morecheese_* schemas (simulates a realistic multi-source
-// customer environment; naming per the datagen emitters); the manifest's home
-// schema (migration default) is morecheese_common.
+// TODO(template): everywhere you see "sample" or "@mj-more-cheese-demo", replace with
+// your app's schema name and npm scope. The full rename checklist lives in
+// docs/template-docs/getting-started.md.
 //
 module.exports = {
   // ==========================================================================
@@ -54,10 +53,12 @@ module.exports = {
   newEntityDefaults: {
     NameRulesBySchema: [
       { SchemaName: '${mj_core_schema}', EntityNamePrefix: 'MJ: ' },
-      // All morecheese_* demo schemas share the MoreCheese prefix (matches the
-      // datagen emitters). One entry per domain schema; add a rule when a new
-      // domain schema lands.
-      { SchemaName: 'morecheese_common', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      // stand-in for the bizapps-common dependency (playground DBs): their prefix, not ours
+      { SchemaName: '__mj_BizAppsCommon', EntityNamePrefix: 'MJ_BizApps_Common: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsCommittees', EntityNamePrefix: 'Committees: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsForms', EntityNamePrefix: 'MJ_BizApps_Forms: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsTasks', EntityNamePrefix: 'MJ_BizApps_Tasks: ', EntityNameSuffix: '' },
+      { SchemaName: '__mj_BizAppsIssues', EntityNamePrefix: 'MJ_BizApps_Issues: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
@@ -72,7 +73,7 @@ module.exports = {
   // against MJ core (__mj) or system schemas from an app repo.
   // Include schemas for dependencies to avoid generating duplicate entities for 
   // them. See docs/template-docs/codegen-and-metadata-migrations.md.
-  excludeSchemas: ['sys', 'staging', 'dbo', '__mj'],
+  excludeSchemas: ['sys', 'staging', 'dbo', '__mj', '__mj_UDT', 'sample_app', 'AssociationDemo', 'Bookstore'],
 
   // ==========================================================================
   // SQL output for migrations — RECOMMENDED
@@ -91,10 +92,8 @@ module.exports = {
     schemaPlaceholders: [
       // Order matters: more-specific schema names must come first (greedy
       // sequential substitution).
-      // Only the HOME schema maps to the default placeholder; the other
-      // morecheese_* schemas are fixed names written literally by the
-      // migrations.
-      { schema: 'morecheese_common', placeholder: '${flyway:defaultSchema}' },
+      // TODO(template): your schema name here:
+      { schema: 'morecheese_members', placeholder: '${flyway:defaultSchema}' },
       { schema: '__mj', placeholder: '${mjSchema}' },
     ],
   },

@@ -16,3 +16,18 @@ either way (the sync loop needs at least one entity folder listed in
 
 Only dot-prefixed `.json` files inside folders listed in `.mj-sync.json`
 `directoryOrder` are treated as records — don't park drafts in this tree.
+
+## `demo-data/` — the generated MoreCheese dataset (mj-sync form)
+
+The full canonical demo dataset (seed 42 · 2,500 members · ~90k records) emitted by
+`datagen/cli/emit-mjsync.mjs --metadata-out metadata/demo-data`. It is a **self-contained
+sync root** and is deliberately NOT listed in this folder's `directoryOrder` — a routine
+`mj sync push --dir=metadata` will never touch it. Load it explicitly, dev DBs only:
+
+    npx mj sync push --dir=metadata/demo-data
+
+⚠ push is a FULL RECONCILE per entity scope (can delete rows) — never over real data.
+⚠ entities must exist first (apps installed + CodeGen run) — see datagen/INTEGRATION-RUNBOOK.md.
+App-seeded lookups (committee Roles, issue Statuses) are referenced BY NAME (`@lookup:`),
+so this tree loads correctly on real app installs AND playgrounds — no caveats.
+Regenerate any time — pinned IDs make a re-push a stable upsert of the same records.

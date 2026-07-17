@@ -1,0 +1,70 @@
+{
+  "$comment": "ISSUES MODULE (pack: issues) — targets bizapps-issues (B202606091000, schema __mj_BizAppsIssues, prefix 'MJ_BizApps_Issues: '). Slice: IssueType/IssueStatus/Issue/IssueNumberSequence. Issues DERIVE from real facts: overdue orders → billing tickets, dissolved employers → data-correction requests, paid no-shows → refund requests, plus the authored Kate/Kathy duplicate report. Status mix rides recency (old issues resolved, recent ones open).",
+  "issues": {
+    "types": [
+      {
+        "name": "Billing",
+        "priority": "High",
+        "description": "Dues and payment problems"
+      },
+      {
+        "name": "Data Correction",
+        "priority": "Medium",
+        "description": "Member/organization record fixes"
+      },
+      {
+        "name": "Events",
+        "priority": "Medium",
+        "description": "Registration and refund requests"
+      },
+      {
+        "name": "General",
+        "priority": "Low",
+        "description": "Everything else"
+      }
+    ],
+    "statuses": [
+      {
+        "name": "New",
+        "sequence": 10,
+        "isDefault": true,
+        "isTerminal": false,
+        "color": "#2196F3"
+      },
+      {
+        "name": "In Progress",
+        "sequence": 20,
+        "isDefault": false,
+        "isTerminal": false,
+        "color": "#FF9800"
+      },
+      {
+        "name": "Resolved",
+        "sequence": 30,
+        "isDefault": false,
+        "isTerminal": true,
+        "color": "#4CAF50"
+      },
+      {
+        "name": "Closed",
+        "sequence": 40,
+        "isDefault": false,
+        "isTerminal": true,
+        "color": "#9E9E9E"
+      }
+    ],
+    "billing": {
+      "sharePerOverdueMember": 0.35,
+      "$note": "ESTIMATE — share of members with an overdue order who file a ticket"
+    },
+    "refunds": {
+      "sharePerPaidNoShow": 0.04,
+      "$note": "ESTIMATE — share of paid no-shows who ask about refunds"
+    },
+    "dataCorrection": {
+      "$note": "one per member whose employer had a lifecycle event while they were active (incl. Danielle)"
+    },
+    "recencyOpenDays": 75,
+    "numberPrefix": "MC"
+  }
+}

@@ -38,7 +38,9 @@ export function buildLearning(cfg, people, periods) {
 
   // pattern 1: who enrolls each year — core owns the calibration; we own the shapes
   const enrollments = annualParticipation({
-    seed, years,
+    seed,
+    // lockdown SPIKED online learning — post-calibration regime shift (tide, not boats)
+    baselineShift: (y) => (R.regimes.covid.years.includes(y) ? R.regimes.covid.learningLogitBoost : 0), years,
     poolOf: (y) => coursesByYear.get(y)?.length ? people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 5, 15))))) : null,
     scoreOf: (p, y) => L.arrows.enrollEngagement.beta * (p._thetaPath?.[y] ?? p._theta),
     target: L.participation.target,

@@ -1,116 +1,459 @@
 {
-  "$comment": "HEROES MODULE: pinned people — facts, not draws (hero-personas-draft.md is the roster of record). 12 of the draft's 16 personas are expressible in the current slice; the four skipped need entities we don't generate yet: Sofia Marchetti ICF-000106 (certifications), Gwen Whitfield ICF-000108 (committees), Tom Reyes ICF-000109 (advocacy), Aisha Bell ICF-000110 (employment-history defect), Lars Vestergaard ICF-000112 (live/on-demand webinar split). Employer names are CLEARED bank names reserved in banks/orgs.json (never dealt to crowd orgs); the persona doc's original employer names were substituted for clearance, same as Sierra Vista → Crowfeather.",
+  "$comment": "HEROES MODULE: pinned people — facts, not draws (hero-personas-draft.md is the roster of record). 12 of the draft's 16 personas are expressible in the current slice; the personas still skipped need entities we don't generate yet: Sofia Marchetti ICF-000106 (certifications), Tom Reyes ICF-000109 (advocacy), Aisha Bell ICF-000110 (employment-history defect), Lars Vestergaard ICF-000112 (live/on-demand webinar split). Employer names are CLEARED bank names reserved in banks/orgs.json (never dealt to crowd orgs); the persona doc's original employer names were substituted for clearance, same as Sierra Vista → Crowfeather. ROSTER IS APPEND-ONLY: heroes overwrite crowd slots by position, so inserting mid-list reshuffles every later hero's slot and re-rolls those crowd members — new personas go at the END.",
   "heroes": [
     {
-      "memberNumber": "ICF-000101", "first": "Elena", "last": "Rodriguez",
-      "employerName": "Crowfeather Creamery", "segment": "Producer", "region": "NA",
-      "city": "Petaluma", "state": "CA", "lat": 38.2324, "lon": -122.6367,
-      "joinDate": "2022-03-15", "theta": 1.8, "phi": 0.8, "tier": "Individual",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active", "minRegistrationsPerYear": 2 }
+      "memberNumber": "ICF-000101",
+      "first": "Elena",
+      "last": "Rodriguez",
+      "employerName": "Crowfeather Creamery",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Petaluma",
+      "state": "CA",
+      "lat": 38.2324,
+      "lon": -122.6367,
+      "joinDate": "2022-03-15",
+      "theta": 1.8,
+      "phi": 0.8,
+      "tier": "Individual",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active",
+        "minRegistrationsPerYear": 2,
+        "committeeSeat": "Standards Committee"
+      },
+      "committees": [
+        {
+          "committee": "Standards Committee",
+          "role": "Member",
+          "terms": [
+            "2023–24 Term",
+            "2025–26 Term"
+          ]
+        }
+      ],
+      "title": "Head Cheesemaker"
     },
     {
-      "memberNumber": "ICF-000102", "first": "Marcus", "last": "Chen",
-      "employerName": "Mongers' Row", "segment": "Retailer", "region": "NA",
-      "city": "Seattle", "state": "WA", "lat": 47.6062, "lon": -122.3321,
-      "joinYearsAgo": 5, "anniversaryOffsetDays": 21, "theta": 0.3, "phi": 0.2, "tier": "Individual",
-      "cycleType": "anniversary", "autoRenew": false,
+      "memberNumber": "ICF-000102",
+      "first": "Marcus",
+      "last": "Chen",
+      "employerName": "Mongers' Row",
+      "segment": "Retailer",
+      "region": "NA",
+      "city": "Seattle",
+      "state": "WA",
+      "lat": 47.6062,
+      "lon": -122.3321,
+      "joinYearsAgo": 5,
+      "anniversaryOffsetDays": 21,
+      "theta": 0.3,
+      "phi": 0.2,
+      "tier": "Individual",
+      "cycleType": "anniversary",
+      "autoRenew": false,
       "$assumption": "anniversary cohort with auto-renew OFF per D6 detail",
-      "pins": { "status": "PendingRenewal", "endDateWithinDaysOfRelease": [14, 28] }
+      "pins": {
+        "status": "PendingRenewal",
+        "endDateWithinDaysOfRelease": [
+          14,
+          28
+        ]
+      },
+      "title": "Specialty Cheese Buyer"
     },
     {
-      "memberNumber": "ICF-000103", "first": "Danielle", "last": "Okafor",
+      "memberNumber": "ICF-000103",
+      "first": "Danielle",
+      "last": "Okafor",
       "$persona": "the diagnosable lapse — employer folded, membership lapsed with her paycheck; prime win-back",
-      "employerName": "Mistlebrook Dairy", "segment": "Producer", "region": "NA",
-      "city": "Brattleboro", "state": "VT", "lat": 42.8509, "lon": -72.5579,
-      "joinDate": "2024-03-20", "theta": 0.2, "phi": -0.8, "tier": "Individual",
-      "cycleType": "anniversary", "autoRenew": false,
-      "employerEvent": { "year": 2025, "kind": "Dissolved" },
+      "employerName": "Mistlebrook Dairy",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Brattleboro",
+      "state": "VT",
+      "lat": 42.8509,
+      "lon": -72.5579,
+      "joinDate": "2024-03-20",
+      "theta": 0.2,
+      "phi": -0.8,
+      "tier": "Individual",
+      "cycleType": "anniversary",
+      "autoRenew": false,
+      "employerEvent": {
+        "year": 2025,
+        "kind": "Dissolved"
+      },
       "lapseYear": 2026,
-      "pins": { "status": "Lapsed", "employerDissolved": 2025, "cancellationReasonContains": "employer" }
+      "pins": {
+        "status": "Lapsed",
+        "employerDissolved": 2025,
+        "cancellationReasonContains": "employer"
+      },
+      "title": "Assistant Cheesemaker"
     },
     {
-      "memberNumber": "ICF-000104", "first": "Priya", "last": "Natarajan",
+      "memberNumber": "ICF-000104",
+      "first": "Priya",
+      "last": "Natarajan",
       "$persona": "the rising star — career-changer apprentice, steepest positive engagement in her cohort",
-      "employerName": "Larkhollow Creamery", "segment": "Producer", "region": "NA",
-      "city": "Madison", "state": "WI", "lat": 43.0731, "lon": -89.4012,
-      "joinDate": "2025-02-10", "theta": 1.5, "phi": -0.6, "tier": "Individual",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active" }
+      "employerName": "Larkhollow Creamery",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Madison",
+      "state": "WI",
+      "lat": 43.0731,
+      "lon": -89.4012,
+      "joinDate": "2025-02-10",
+      "theta": 1.5,
+      "phi": -0.6,
+      "tier": "Individual",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active"
+      },
+      "title": "Affinage Apprentice"
     },
     {
-      "memberNumber": "ICF-000105", "first": "Bob", "last": "Kowalski",
+      "memberNumber": "ICF-000105",
+      "first": "Bob",
+      "last": "Kowalski",
       "$persona": "the churn save — joined at history start (draft says 2008; clamped to the simulation window); employer acquired 2023, engagement declining 3 years; huge LTV, top-decile risk, still renewing",
-      "employerName": "Ostergaard & Sons Dairy Supply", "segment": "Supplier", "region": "NA",
-      "city": "Chicago", "state": "IL", "lat": 41.8781, "lon": -87.6298,
-      "joinDate": "2013-06-12", "theta": 0.9, "phi": 0.9, "tier": "SmallBusiness",
-      "cycleType": "calendar", "autoRenew": false,
-      "employerEvent": { "year": 2023, "kind": "Acquired" },
-      "thetaByYear": { "2023": 0.9, "2024": 0.4, "2025": -0.1, "2026": -0.4 },
-      "pins": { "status": "Active", "employerAcquired": 2023 }
+      "employerName": "Ostergaard & Sons Dairy Supply",
+      "segment": "Supplier",
+      "region": "NA",
+      "city": "Chicago",
+      "state": "IL",
+      "lat": 41.8781,
+      "lon": -87.6298,
+      "joinDate": "2013-06-12",
+      "theta": 0.9,
+      "phi": 0.9,
+      "tier": "SmallBusiness",
+      "cycleType": "calendar",
+      "autoRenew": false,
+      "employerEvent": {
+        "year": 2023,
+        "kind": "Acquired"
+      },
+      "thetaByYear": {
+        "2023": 0.9,
+        "2024": 0.4,
+        "2025": -0.1,
+        "2026": -0.4
+      },
+      "pins": {
+        "status": "Active",
+        "employerAcquired": 2023
+      },
+      "title": "Regional Sales Director"
     },
     {
-      "memberNumber": "ICF-000107", "first": "Henri", "last": "Dubois",
+      "memberNumber": "ICF-000107",
+      "first": "Henri",
+      "last": "Dubois",
       "$persona": "the international member — Jura affineur, flies over once a year; the distance arrows personified",
-      "employerName": "Fromagerie Saint-Rémille", "segment": "Producer", "region": "EU",
-      "city": "Poligny", "state": "FR", "lat": 46.8367, "lon": 5.7075,
-      "joinDate": "2019-01-15", "theta": 0.3, "phi": 1.8, "tier": "Corporate",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active", "tier": "Corporate" }
+      "employerName": "Fromagerie Saint-Rémille",
+      "segment": "Producer",
+      "region": "EU",
+      "city": "Poligny",
+      "state": "FR",
+      "lat": 46.8367,
+      "lon": 5.7075,
+      "joinDate": "2019-01-15",
+      "theta": 0.3,
+      "phi": 1.8,
+      "tier": "Corporate",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active",
+        "tier": "Corporate",
+        "competitionGold": 2025
+      },
+      "title": "Affineur & Owner",
+      "competition": {
+        "entriesPerYear": 8,
+        "pinnedResults": {
+          "2025": "Gold"
+        },
+        "category": "Alpine Styles",
+        "productName": "Saint-Rémille Réserve d'Alpage"
+      }
     },
     {
-      "memberNumber": "ICF-000111", "first": "Kate", "last": "O'Leary",
+      "memberNumber": "ICF-000111",
+      "first": "Kate",
+      "last": "O'Leary",
       "$persona": "the dedup pair (original) — 2015 record on her personal email",
-      "employerName": "Orchardmere Cheese & Provisions", "segment": "Retailer", "region": "NA",
-      "city": "Madison", "state": "WI", "lat": 43.0731, "lon": -89.4012,
-      "joinDate": "2015-04-22", "theta": 0.5, "phi": 0.4, "tier": "Individual",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active", "duplicateOf": null }
+      "employerName": "Orchardmere Cheese & Provisions",
+      "segment": "Retailer",
+      "region": "NA",
+      "city": "Madison",
+      "state": "WI",
+      "lat": 43.0731,
+      "lon": -89.4012,
+      "joinDate": "2015-04-22",
+      "theta": 0.5,
+      "phi": 0.4,
+      "tier": "Individual",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active",
+        "duplicateOf": null
+      },
+      "title": "Cheese Program Director"
     },
     {
-      "memberNumber": "ICF-000287", "first": "Kathy", "last": "OLeary",
+      "memberNumber": "ICF-000287",
+      "first": "Kathy",
+      "last": "OLeary",
       "$persona": "the dedup pair (duplicate) — minted 2023 when her assistant registered her via the org portal on her work email; same employer, split history",
-      "employerName": "Orchardmere Cheese & Provisions", "segment": "Retailer", "region": "NA",
-      "city": "Madison", "state": "WI", "lat": 43.0731, "lon": -89.4012,
-      "joinDate": "2023-06-05", "theta": 0.5, "phi": 0.4, "tier": "Individual",
-      "cycleType": "calendar", "autoRenew": false,
-      "pins": { "status": "Active", "duplicateOf": "ICF-000111" }
+      "employerName": "Orchardmere Cheese & Provisions",
+      "segment": "Retailer",
+      "region": "NA",
+      "city": "Madison",
+      "state": "WI",
+      "lat": 43.0731,
+      "lon": -89.4012,
+      "joinDate": "2023-06-05",
+      "theta": 0.5,
+      "phi": 0.4,
+      "tier": "Individual",
+      "cycleType": "calendar",
+      "autoRenew": false,
+      "pins": {
+        "status": "Active",
+        "duplicateOf": "ICF-000111"
+      },
+      "title": "Cheese Program Director"
     },
     {
-      "memberNumber": "ICF-000113", "first": "Jamie", "last": "Fuller",
+      "memberNumber": "ICF-000113",
+      "first": "Jamie",
+      "last": "Fuller",
       "$persona": "engagement ≠ revenue — home-cheesemaking blogger, top-decile activity, lowest tier, no employer org",
-      "employerName": null, "segment": "Enthusiast", "region": "NA",
-      "city": "Portland", "state": "OR", "lat": 45.5152, "lon": -122.6784,
-      "joinDate": "2023-05-30", "theta": 2.0, "phi": -0.5, "tier": "Enthusiast",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active", "tier": "Enthusiast" }
+      "employerName": null,
+      "segment": "Enthusiast",
+      "region": "NA",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5152,
+      "lon": -122.6784,
+      "joinDate": "2023-05-30",
+      "theta": 2.0,
+      "phi": -0.5,
+      "tier": "Enthusiast",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active",
+        "tier": "Enthusiast"
+      },
+      "title": null
     },
     {
-      "memberNumber": "ICF-000114", "first": "Victor", "last": "Sandoval",
+      "memberNumber": "ICF-000114",
+      "first": "Victor",
+      "last": "Sandoval",
       "$persona": "the auto-renewing ghost — employer-paid, near-zero engagement, unbroken renewals since 2017; tests employer-paid + auto-renew as protective factors",
-      "employerName": "Reedmere Dairy Systems", "segment": "Supplier", "region": "NA",
-      "city": "Austin", "state": "TX", "lat": 30.2672, "lon": -97.7431,
-      "joinDate": "2017-09-01", "theta": -1.8, "phi": 1.9, "tier": "Corporate",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active", "tier": "Corporate" }
+      "employerName": "Reedmere Dairy Systems",
+      "segment": "Supplier",
+      "region": "NA",
+      "city": "Austin",
+      "state": "TX",
+      "lat": 30.2672,
+      "lon": -97.7431,
+      "joinDate": "2017-09-01",
+      "theta": -1.8,
+      "phi": 1.9,
+      "tier": "Corporate",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active",
+        "tier": "Corporate"
+      },
+      "title": "VP Procurement"
     },
     {
-      "memberNumber": "ICF-000115", "first": "Nia", "last": "Thompson",
+      "memberNumber": "ICF-000115",
+      "first": "Nia",
+      "last": "Thompson",
       "$persona": "the cold start — joined two weeks before release; models must score her on priors, not history",
-      "employerName": "The Quiet Curd", "segment": "Retailer", "region": "NA",
-      "city": "Brooklyn", "state": "NY", "lat": 40.6782, "lon": -73.9442,
-      "joinDaysBeforeRelease": 14, "theta": 0.5, "phi": -0.4, "tier": "Individual",
-      "cycleType": "anniversary", "autoRenew": false,
-      "pins": { "status": "Active", "joinedDaysBeforeRelease": 14 }
+      "employerName": "The Quiet Curd",
+      "segment": "Retailer",
+      "region": "NA",
+      "city": "Brooklyn",
+      "state": "NY",
+      "lat": 40.6782,
+      "lon": -73.9442,
+      "joinDaysBeforeRelease": 14,
+      "theta": 0.5,
+      "phi": -0.4,
+      "tier": "Individual",
+      "cycleType": "anniversary",
+      "autoRenew": false,
+      "pins": {
+        "status": "Active",
+        "joinedDaysBeforeRelease": 14
+      },
+      "title": "Junior Cheesemonger"
     },
     {
-      "memberNumber": "ICF-000116", "first": "Charlie", "last": "Mason",
+      "memberNumber": "ICF-000116",
+      "first": "Charlie",
+      "last": "Mason",
       "$persona": "rest-of-world — Tasmanian sheep dairy; the RoW slice of the geography mix, given a face",
-      "employerName": "Winterfen Dairy", "segment": "Producer", "region": "RoW",
-      "city": "Hobart", "state": "AU", "lat": -42.8821, "lon": 147.3272,
-      "joinDate": "2021-08-19", "theta": 0.3, "phi": 0.5, "tier": "SmallBusiness",
-      "cycleType": "calendar", "autoRenew": true,
-      "pins": { "status": "Active", "tier": "SmallBusiness" }
+      "employerName": "Winterfen Dairy",
+      "segment": "Producer",
+      "region": "RoW",
+      "city": "Hobart",
+      "state": "AU",
+      "lat": -42.8821,
+      "lon": 147.3272,
+      "joinDate": "2021-08-19",
+      "theta": 0.3,
+      "phi": 0.5,
+      "tier": "SmallBusiness",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "pins": {
+        "status": "Active",
+        "tier": "SmallBusiness"
+      },
+      "title": "Cheesemaker & Co-owner"
+    },
+    {
+      "memberNumber": "ICF-000108",
+      "first": "Gwen",
+      "last": "Whitfield",
+      "$persona": "the committee chair — solo food-safety consultant; the federation is her client pipeline; chairs Food Safety (cleared via web search 2026-07-14: no real 'Whitfield Food Safety' business)",
+      "employerName": "Whitfield Food Safety Training",
+      "segment": "Educator",
+      "region": "NA",
+      "city": "Chicago",
+      "state": "IL",
+      "lat": 41.8781,
+      "lon": -87.6298,
+      "joinDate": "2014-02-10",
+      "theta": 1.6,
+      "phi": 0.3,
+      "tier": "Individual",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "committees": [
+        {
+          "committee": "Food Safety Committee",
+          "role": "Member",
+          "terms": [
+            "2023–24 Term"
+          ]
+        },
+        {
+          "committee": "Food Safety Committee",
+          "role": "Chair",
+          "terms": [
+            "2025–26 Term"
+          ]
+        }
+      ],
+      "pins": {
+        "status": "Active",
+        "committeeSeat": "Food Safety Committee",
+        "committeeRole": "Chair"
+      },
+      "title": "Principal"
+    },
+    {
+      "memberNumber": "ICF-000106",
+      "first": "Sofia",
+      "last": "Marchetti",
+      "$persona": "the certification journey — third-generation cheesemonger; the credential is her counter-move to the chain store four blocks away",
+      "employerName": "Marchetti's Salumeria & Formaggio",
+      "segment": "Retailer",
+      "region": "NA",
+      "city": "Brooklyn",
+      "state": "NY",
+      "lat": 40.6782,
+      "lon": -73.9442,
+      "joinDate": "2024-02-18",
+      "theta": 1.2,
+      "phi": 0.3,
+      "tier": "Individual",
+      "title": "Cheesemonger",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "certification": {
+        "key": "CERT-CCP",
+        "status": "InProgress",
+        "enrolledOn": "2025-09-15"
+      },
+      "pins": {
+        "status": "Active",
+        "certStatus": "InProgress"
+      }
+    },
+    {
+      "memberNumber": "ICF-000109",
+      "first": "Tom",
+      "last": "Reyes",
+      "$persona": "the advocacy champion — raw-milk farmstead owner; ALL his engagement is legislative (Sonar component-breakdown demo). Theta pinned moderate so event/course activity stays low; his advocacy volume is a DECLARED fact, not theta-driven. Employer renamed from the draft's 'Stone Meadow Farmstead' for clearance (cleared toponym compose).",
+      "employerName": "Speltmoor Farmstead",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Ithaca",
+      "state": "NY",
+      "lat": 42.444,
+      "lon": -76.5019,
+      "joinDate": "2016-05-09",
+      "theta": 0.1,
+      "phi": -0.2,
+      "tier": "Individual",
+      "title": "Owner",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "advocacy": {
+        "totalActions": 34,
+        "testimonies": 2,
+        "topic": "Raw-milk aging rules"
+      },
+      "pins": {
+        "status": "Active",
+        "advocacyMin": 30,
+        "testimonies": 2
+      }
+    },
+    {
+      "memberNumber": "ICF-000110",
+      "first": "Aisha",
+      "last": "Bell",
+      "$persona": "the stale record — changed employers ~8 months ago, never updated her profile; the record says one org, the Relationship truth says another; the enrichment demo has a labeled right answer. Employers are cleared composed names (draft's Curdwell/Golden Gate substituted).",
+      "employerName": "Quincewick Creamery",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Petaluma",
+      "state": "CA",
+      "lat": 38.2324,
+      "lon": -122.6367,
+      "joinDate": "2018-04-12",
+      "theta": 0.4,
+      "phi": 0.3,
+      "tier": "Individual",
+      "title": "Quality Manager",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "staleEmployer": {
+        "trueEmployerName": "Fernholt Creamery",
+        "monthsAgo": 8
+      },
+      "pins": {
+        "status": "Active",
+        "defect": "StaleEmployer"
+      }
     }
   ]
 }

@@ -10,7 +10,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { staticAssignment } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears } from '../../engine/dates.mjs';
-import { orgNameDealer, personNameFor, CITIES, SEGMENTS } from './banks.mjs';
+import { orgNameDealer, personNameFor, titleFor, CITIES, SEGMENTS } from './banks.mjs';
 
 export function buildOrgs(cfg) {
   const { R, seed, releaseYear } = cfg;
@@ -36,6 +36,13 @@ export function buildOrgs(cfg) {
     orgs.push({ OrgKey: `ORG-${String(i + 1).padStart(4, '0')}`, Name: name, Type: type, Region: region, City: city, State: state, Latitude: lat, Longitude: lon, LifecycleEvent: event, IsSharedDemo: true });
   }
   return orgs;
+}
+
+/** Deterministic demo email — RFC 2606 reserved domain, PURE derivation (no dice: adding
+ * Email re-rolls nothing). Unique per member via the member-number digits. */
+export function emailFor(first, last, memberNumber) {
+  const name = `${first}.${last}`.toLowerCase().replace(/[^a-z0-9.]/g, '');
+  return `${name}.${memberNumber.replace(/\D/g, '')}@example.com`;
 }
 
 /** Join dates: growth-weighted intake (~15%/yr) — attrition then builds the tenure pyramid honestly. */
@@ -84,7 +91,7 @@ export function buildPeople(cfg, orgs) {
     // origin-consistent authored name from the member's own name stream (region-weighted buckets)
     const nm = personNameFor(seed, key, region);
     people.push({
-      MemberNumber: key, FirstName: nm.first, LastName: nm.last,
+      MemberNumber: key, FirstName: nm.first, LastName: nm.last, MiddleName: nm.middle, PreferredName: nm.preferred, Email: emailFor(nm.first, nm.last, key), Title: titleFor(seed, key, segment),
       Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
       _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit
@@ -111,7 +118,7 @@ export function buildPeople(cfg, orgs) {
     }
     const idx = R.heroes.indexOf(h);
     people[idx] = {
-      MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last,
+      MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, MiddleName: null, PreferredName: h.preferred ?? null, Email: emailFor(h.first, h.last, h.memberNumber), Title: h.title ?? null,
       Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
       OrgKey: heroOrg?.OrgKey ?? null, JoinDate: joinDate,
       _theta: h.theta, _thetaPath: h.thetaByYear ?? null, _phi: h.phi, // pinned level — or a pinned ARC (thetaByYear); never drawn drift

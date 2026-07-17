@@ -10,29 +10,9 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { iso } from './dates.mjs';
 
-export function emitPacks(cfg, { people, orgs, periods, events, registrations, renewalEvents, money, learning }) {
-  const packs = {
-    common: {
-      dependsOn: [],
-      tables: { people: people.map(({ _theta, _thetaPath, _phi, _hero, CycleType, AutoRenew, MembershipTier, ...rest }) => rest), organizations: orgs },
-    },
-    membership: {
-      dependsOn: ['common'],
-      tables: { membership_periods: periods },
-    },
-    events: {
-      dependsOn: ['common', 'membership'],
-      tables: { events, event_registrations: registrations.map(({ _class, _theta, ...rest }) => rest) },
-    },
-    learning: {
-      dependsOn: ['common', 'membership'],
-      tables: { courses: learning.courses, enrollments: learning.enrollments.map(({ _theta, _endBase, _weeks, ...rest }) => rest) },
-    },
-    orders: {
-      dependsOn: ['common', 'membership', 'events'],
-      tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments },
-    },
-  };
+/** Emit the project's packs. The PACK MAP comes from the project (its buildPacks(world)) —
+ * the engine only deals rows into folders and writes the harness-private files. */
+export function emitPacks(cfg, { packs, people, renewalEvents, registries }) {
   mkdirSync(join(cfg.outDir, 'packs'), { recursive: true });
   for (const [name, pack] of Object.entries(packs)) {
     const dir = join(cfg.outDir, 'packs', name);
@@ -45,6 +25,11 @@ export function emitPacks(cfg, { people, orgs, periods, events, registrations, r
     writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ name, version: cfg.R.version, seed: cfg.seed, releaseDate: iso(cfg.release), dependsOn: pack.dependsOn, rowCounts }, null, 2));
   }
   writeFileSync(join(cfg.outDir, 'validation-events.json'), JSON.stringify(renewalEvents));
+  // harness-private registries (e.g. the motif registry) — ground truth the project wants
+  // written next to the packs but never installed
+  for (const [name, value] of Object.entries(registries ?? {})) {
+    writeFileSync(join(cfg.outDir, `${name}.json`), JSON.stringify(value, null, 1));
+  }
   // per-member latents — validator/inspector-private, NEVER installed: lets an engineer
   // verify the hidden dials actually expressed through behavior
   writeFileSync(join(cfg.outDir, 'validation-latents.json'), JSON.stringify(people.map((p) => ({ m: p.MemberNumber, theta: +p._theta.toFixed(4), phi: +p._phi.toFixed(4), tier: p.MembershipTier, hero: !!p._hero }))));

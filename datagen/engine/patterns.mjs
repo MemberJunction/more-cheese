@@ -23,6 +23,7 @@ import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
  *   streamKey(m, y)     → dice stream for this member-year decision
  *   spawn(r, member, y) → called ONLY for participants; does its own draws in declared order
  *   minPool?            → skip years with fewer eligible (default 5)
+ *   baselineShift?(y)   → applied AFTER calibration (regime shifts: tide, not boats)
  * }
  */
 export function annualParticipation(opts) {
@@ -31,7 +32,7 @@ export function annualParticipation(opts) {
     const pool = opts.poolOf(y);
     if (!pool || pool.length < (opts.minPool ?? 5)) continue;
     const scores = pool.map((p) => opts.scoreOf(p, y));
-    const b0 = calibrateIntercept(scores, opts.target);
+    const b0 = calibrateIntercept(scores, opts.target) + (opts.baselineShift?.(y) ?? 0);
     pool.forEach((p, i) => {
       const r = rng(opts.seed, opts.streamKey(p, y));
       if (!r.bernoulli(sigmoid(b0 + scores[i]))) return;
@@ -160,11 +161,12 @@ function drawOffsetDays(r, spec) {
  *   streamKey(item)     → dice stream per item
  *   decide(item, p, r)  → applies the outcome; receives the calibrated probability and the
  *                         item's dice (branching/extra draws are the domain's, in its order)
+ *   baselineShift?      → scalar applied AFTER calibration (regime shifts: tide, not boats)
  * }
  */
 export function childOutcome(opts) {
   const scores = opts.items.map((e) => opts.scoreOf(e));
-  const b0 = calibrateIntercept(scores, opts.target);
+  const b0 = calibrateIntercept(scores, opts.target) + (opts.baselineShift ?? 0);
   opts.items.forEach((e, i) => {
     const r = rng(opts.seed, opts.streamKey(e));
     opts.decide(e, sigmoid(b0 + scores[i]), r);

@@ -1,0 +1,73 @@
+{
+  "$comment": "FORMS MODULE (pack: forms — D10, the OPTIONAL pack) — targets bizapps-forms' REAL shapes (migrations/B202606281200, schema __mj_BizAppsForms, entity prefix 'MJ_BizApps_Forms: '). Slice v1: one post-conference attendee survey, distributed per conference year, answered by attendees with theta-driven satisfaction — so 'NPS predicts renewal' demos work because both share the engagement cause.",
+  "forms": {
+    "survey": {
+      "name": "Post-Conference Attendee Survey",
+      "description": "Sent to all attendees the day after the ICF Annual Conference closes.",
+      "page": "Your conference experience",
+      "questions": [
+        {
+          "key": "nps",
+          "type": "NPS",
+          "prompt": "How likely are you to recommend the ICF Annual Conference to a colleague?",
+          "required": true
+        },
+        {
+          "key": "overall",
+          "type": "Rating",
+          "prompt": "How would you rate your overall conference experience?",
+          "required": true
+        },
+        {
+          "key": "returning",
+          "type": "YesNo",
+          "prompt": "Do you plan to attend next year's conference?",
+          "required": false
+        }
+      ],
+      "distribution": {
+        "channel": "Email",
+        "opensDaysAfter": 1,
+        "closesDaysAfter": 31
+      }
+    },
+    "response": {
+      "rateTarget": 0.28,
+      "tolerance": 0.08,
+      "$note": "SOURCED 2026-07-16 (confidence: medium): Explori puts conference/corporate-event survey response at 10-20%, event-industry consensus 20-30% typical, paid conferences 30-40% aspirational (explori.com 'what is a good post-event survey response rate'; formbricks.com; formgrid.com). Members-only paid conference justifies the upper band: 28% +/-8. Was 35% ESTIMATE - lowered per research.",
+      "submitDelayDaysMax": 14,
+      "arrows": {
+        "engagement": {
+          "beta": 0.7,
+          "label": "med",
+          "note": "engaged attendees answer surveys"
+        }
+      },
+      "partialShare": 0.08,
+      "$partialNote": "share of responses that start but never submit (Status Partial, first answer only) — real funnels leak"
+    },
+    "answers": {
+      "nps": {
+        "base": 8.3,
+        "engagementBeta": 1.3,
+        "noiseSd": 1.4,
+        "min": 0,
+        "max": 10,
+        "meanTolerance": 0.5,
+        "$source": "SOURCED 2026-07-16 (confidence: high): Explori benchmark across thousands of events puts conference-attendee NPS at +35.4 (explori.com/blog/nps_for_events; medium.com/@erikfabian NPS-for-events; retently.com benchmarks: 20-40 average, 30-50 excellent for B2B events). The old 7.2 mean computed to NPS ~ -10 - materially wrong; a mean of ~8.3 yields computed NPS ~ +25-40."
+      },
+      "overall": {
+        "base": 3.9,
+        "engagementBeta": 0.5,
+        "noiseSd": 0.7,
+        "min": 1,
+        "max": 5
+      },
+      "returning": {
+        "baseLogit": 1.2,
+        "engagementBeta": 0.8
+      },
+      "$note": "satisfaction rides the same hidden engagement dial as renewal — correlations between NPS and retention EMERGE from the shared cause, never painted on"
+    }
+  }
+}

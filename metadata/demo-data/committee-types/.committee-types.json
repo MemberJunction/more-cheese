@@ -1,0 +1,22 @@
+[
+ {
+  "primaryKey": {
+   "ID": "D079B344-B897-57D0-94CB-927CF6E825AF"
+  },
+  "fields": {
+   "Name": "Standing",
+   "IsStandards": false,
+   "DefaultTermMonths": 24
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "97B1E92D-DBF0-5A37-BC04-963E511C198D"
+  },
+  "fields": {
+   "Name": "Technical Standards",
+   "IsStandards": true,
+   "DefaultTermMonths": 24
+  }
+ }
+]
