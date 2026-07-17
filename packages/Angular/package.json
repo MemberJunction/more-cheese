@@ -1,6 +1,6 @@
 {
   "name": "@mj-more-cheese-demo/ng",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Client bootstrap package - Angular components loaded by MJExplorer via the generated open-app bootstrap import. TODO(template): rename.",
   "main": "dist/public-api.js",
@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-more-cheese-demo/entities": "^0.1.0"
+    "@mj-more-cheese-demo/entities": "^1.0.0"
   },
   "peerDependencies": {
     "@angular/common": ">=21.0.0 <22.0.0",
