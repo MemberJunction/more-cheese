@@ -771,9 +771,9 @@
    "StartDate": "2024-11-20",
    "EndDate": "2025-11-19",
    "RenewalDate": "2025-11-19",
-   "Status": "Renewed",
-   "CancellationDate": null,
-   "CancellationReason": null,
+   "Status": "Lapsed",
+   "CancellationDate": "2026-01-19",
+   "CancellationReason": "non-payment — lapsed past grace",
    "AutoRenew": true,
    "IsSharedDemo": true
   }
@@ -17975,25 +17975,6 @@
  },
  {
   "primaryKey": {
-   "ID": "A7A2FB72-84FB-54AC-A568-7103B8699CE0"
-  },
-  "fields": {
-   "PeriodKey": "ICF-102173-P3",
-   "PersonID": "67F84FA1-D51B-55E4-BD46-43244F9C987D",
-   "MembershipTier": "SmallBusiness",
-   "DuesAmount": 400,
-   "StartDate": "2025-01-01",
-   "EndDate": "2025-12-31",
-   "RenewalDate": "2025-12-31",
-   "Status": "Renewed",
-   "CancellationDate": null,
-   "CancellationReason": null,
-   "AutoRenew": false,
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
    "ID": "7B86E778-694E-5F71-A24F-064E393F34F0"
   },
   "fields": {
@@ -21561,44 +21542,6 @@
    "CancellationDate": "2026-05-20",
    "CancellationReason": "non-payment — employer event",
    "AutoRenew": false,
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "BD5A2689-19E3-56F0-A5DB-E438B9CC537E"
-  },
-  "fields": {
-   "PeriodKey": "ICF-100014-P1",
-   "PersonID": "25B9BE1D-33B9-5AE5-BAEF-B2D0A5B4429F",
-   "MembershipTier": "SmallBusiness",
-   "DuesAmount": 400,
-   "StartDate": "2025-04-23",
-   "EndDate": "2026-04-23",
-   "RenewalDate": "2026-04-23",
-   "Status": "Renewed",
-   "CancellationDate": null,
-   "CancellationReason": null,
-   "AutoRenew": true,
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "4ACC7824-CFE9-5DCC-BF93-288B6B5426A0"
-  },
-  "fields": {
-   "PeriodKey": "ICF-100015-P4",
-   "PersonID": "0E1AD3EA-5162-5A0A-8AAE-17C8520F8051",
-   "MembershipTier": "Individual",
-   "DuesAmount": 175,
-   "StartDate": "2025-06-21",
-   "EndDate": "2026-06-20",
-   "RenewalDate": "2026-06-20",
-   "Status": "Renewed",
-   "CancellationDate": null,
-   "CancellationReason": null,
-   "AutoRenew": true,
    "IsSharedDemo": true
   }
  },
@@ -27266,16 +27209,16 @@
  },
  {
   "primaryKey": {
-   "ID": "D484C6BA-15F0-526E-B34A-096E6F33C56A"
+   "ID": "B7BEF532-C3F6-54EC-B555-49BE4B666317"
   },
   "fields": {
-   "PeriodKey": "ICF-100014-P2",
-   "PersonID": "25B9BE1D-33B9-5AE5-BAEF-B2D0A5B4429F",
-   "MembershipTier": "SmallBusiness",
-   "DuesAmount": 400,
-   "StartDate": "2026-04-24",
-   "EndDate": "2027-04-23",
-   "RenewalDate": "2027-04-23",
+   "PeriodKey": "ICF-000106-P3",
+   "PersonID": "0D2B1994-E693-5F50-8B9C-0336EC93E5C6",
+   "MembershipTier": "Individual",
+   "DuesAmount": 175,
+   "StartDate": "2026-01-01",
+   "EndDate": "2026-12-31",
+   "RenewalDate": "2026-12-31",
    "Status": "Active",
    "CancellationDate": null,
    "CancellationReason": null,
@@ -27285,16 +27228,16 @@
  },
  {
   "primaryKey": {
-   "ID": "C190C1A9-CA3D-581E-82D0-F95D319220A7"
+   "ID": "B0CB5FAF-A4DC-5DA9-A0F1-7790E35CB415"
   },
   "fields": {
-   "PeriodKey": "ICF-100015-P5",
-   "PersonID": "0E1AD3EA-5162-5A0A-8AAE-17C8520F8051",
+   "PeriodKey": "ICF-000109-P11",
+   "PersonID": "8A87AB15-2766-52DB-8B17-10F08727BE37",
    "MembershipTier": "Individual",
    "DuesAmount": 175,
-   "StartDate": "2026-06-21",
-   "EndDate": "2027-06-20",
-   "RenewalDate": "2027-06-20",
+   "StartDate": "2026-01-01",
+   "EndDate": "2026-12-31",
+   "RenewalDate": "2026-12-31",
    "Status": "Active",
    "CancellationDate": null,
    "CancellationReason": null,
@@ -33736,25 +33679,6 @@
    "StartDate": "2025-12-20",
    "EndDate": "2026-12-20",
    "RenewalDate": "2026-12-20",
-   "Status": "Active",
-   "CancellationDate": null,
-   "CancellationReason": null,
-   "AutoRenew": true,
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "7C4CA469-F675-5370-9A91-52BA7F874628"
-  },
-  "fields": {
-   "PeriodKey": "ICF-100565-P8",
-   "PersonID": "6F83545F-6202-509C-8CB1-7B3397B5C140",
-   "MembershipTier": "Individual",
-   "DuesAmount": 175,
-   "StartDate": "2025-11-20",
-   "EndDate": "2026-11-19",
-   "RenewalDate": "2026-11-19",
    "Status": "Active",
    "CancellationDate": null,
    "CancellationReason": null,
@@ -53329,25 +53253,6 @@
    "CancellationDate": null,
    "CancellationReason": null,
    "AutoRenew": true,
-   "IsSharedDemo": true
-  }
- },
- {
-  "primaryKey": {
-   "ID": "8284211A-A7FC-5646-AAD4-E7338F7A073B"
-  },
-  "fields": {
-   "PeriodKey": "ICF-102173-P4",
-   "PersonID": "67F84FA1-D51B-55E4-BD46-43244F9C987D",
-   "MembershipTier": "SmallBusiness",
-   "DuesAmount": 400,
-   "StartDate": "2026-01-01",
-   "EndDate": "2026-12-31",
-   "RenewalDate": "2026-12-31",
-   "Status": "Active",
-   "CancellationDate": null,
-   "CancellationReason": null,
-   "AutoRenew": false,
    "IsSharedDemo": true
   }
  },

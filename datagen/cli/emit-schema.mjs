@@ -209,6 +209,23 @@ const TABLES = [
     c('QuestionID', UID, { fk: '[__mj_BizAppsForms].[FormQuestion]' }),
     c('NumericValue', 'DECIMAL(18,4)', { null: true }), c('BooleanValue', BIT, { null: true }),
   ] },
+  { schema: 'morecheese_learning', table: 'Certification', cols: [
+    c('ID', UID, { pk: true }), c('CertKey', s(50)), c('Name', s(200)), c('ValidYears', INT), c('IsSharedDemo', BIT),
+  ] },
+  { schema: 'morecheese_learning', table: 'MemberCertification', cols: [
+    c('ID', UID, { pk: true }), c('MemberCertKey', s(80)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('CertificationID', UID, { fk: '[morecheese_learning].[Certification]' }), c('Status', s(50)),
+    c('EnrolledOn', DATE), c('AwardedOn', DATE, { null: true }), c('ExpiresOn', DATE, { null: true }), c('IsSharedDemo', BIT),
+  ] },
+  { schema: 'morecheese_events', table: 'CompetitionEntry', cols: [
+    c('ID', UID, { pk: true }), c('EntryKey', s(80)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('EntryYear', INT), c('Category', s(100)), c('ProductName', s(200)), c('Result', s(50)), c('IsSharedDemo', BIT),
+  ] },
+  { schema: 'morecheese_members', table: 'AdvocacyAction', cols: [
+    c('ID', UID, { pk: true }), c('ActionKey', s(80)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('ActionDate', DATE), c('Kind', s(50)), c('Topic', s(200)), c('IsSharedDemo', BIT),
+  ] },
   { schema: 'morecheese_events', table: 'Event', cols: [
     c('ID', UID, { pk: true }), c('EventKey', s(50)), c('Name', s(200)), c('EventType', s(50)), c('EventDate', DATE),
     c('IsVirtual', BIT), c('IsPaid', BIT), c('City', s(100), { null: true }), c('State', s(50), { null: true }),

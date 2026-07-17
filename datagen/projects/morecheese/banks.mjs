@@ -87,6 +87,8 @@ export function personNameFor(seed, key, region) {
   return { first, last, middle, preferred };
 }
 
+export const TOPONYMS = ORG_BANK.toponyms; // cleared components — also compose competition product names
+
 // Workshop TOPIC words (not brand names — "Workshop: Alpine Affinage" is a subject line)
 export const CHEESE_WORDS = ['Alpine','Meadow','Cave','Wheel','Rind','Curd','Brook','Dairy','Hollow','Prairie','Cedar','Willow','Granite','Clover','Harvest','Stone','Valley','Summit','Lark','Birch'];
 

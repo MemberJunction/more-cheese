@@ -7061,16 +7061,6 @@
  },
  {
   "primaryKey": {
-   "ID": "8B7BAF3C-2FE9-5497-BA87-5E830BE101FE"
-  },
-  "fields": {
-   "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "AttendanceStatus": "Present"
-  }
- },
- {
-  "primaryKey": {
    "ID": "07A9C35F-E8CD-51D6-83E4-9A345A8C5D26"
   },
   "fields": {
@@ -7251,16 +7241,6 @@
  },
  {
   "primaryKey": {
-   "ID": "9595967B-1F9B-55FA-86E7-D6C0D0BBFA79"
-  },
-  "fields": {
-   "MeetingID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "AttendanceStatus": "Present"
-  }
- },
- {
-  "primaryKey": {
    "ID": "847ED955-1D82-5642-B826-C936EDAA90FA"
   },
   "fields": {
@@ -7436,16 +7416,6 @@
   "fields": {
    "MeetingID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3",
    "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
-   "AttendanceStatus": "Present"
-  }
- },
- {
-  "primaryKey": {
-   "ID": "04D3B474-F3D4-5134-B6EB-EA371812E562"
-  },
-  "fields": {
-   "MeetingID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
    "AttendanceStatus": "Present"
   }
  },
@@ -7631,16 +7601,6 @@
  },
  {
   "primaryKey": {
-   "ID": "909FC0E3-3C4F-5DE2-8967-AE19FB4E7FAD"
-  },
-  "fields": {
-   "MeetingID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "AttendanceStatus": "Present"
-  }
- },
- {
-  "primaryKey": {
    "ID": "D55ED129-A16C-5CCF-BC5B-61EC41043251"
   },
   "fields": {
@@ -7666,7 +7626,7 @@
   "fields": {
    "MeetingID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B",
    "PersonID": "82ADEE0B-7298-509D-AB8A-6C1A83ECD502",
-   "AttendanceStatus": "Present"
+   "AttendanceStatus": "Absent"
   }
  },
  {
@@ -7817,16 +7777,6 @@
    "MeetingID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6",
    "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
    "AttendanceStatus": "Excused"
-  }
- },
- {
-  "primaryKey": {
-   "ID": "8D8E8A27-C6D8-562D-95D8-0B6AEB41590F"
-  },
-  "fields": {
-   "MeetingID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "AttendanceStatus": "Present"
   }
  },
  {
@@ -8011,16 +7961,6 @@
  },
  {
   "primaryKey": {
-   "ID": "D4307A87-45C3-54FA-935A-560756086F7A"
-  },
-  "fields": {
-   "MeetingID": "81934060-2910-5B3F-A680-4263BBC91FFA",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "AttendanceStatus": "Present"
-  }
- },
- {
-  "primaryKey": {
    "ID": "B34CE0EA-13FD-5650-9F58-3F648D1034BF"
   },
   "fields": {
@@ -8196,16 +8136,6 @@
   "fields": {
    "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
    "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
-   "AttendanceStatus": "Present"
-  }
- },
- {
-  "primaryKey": {
-   "ID": "86068781-00F0-5941-882E-FE98F69927F0"
-  },
-  "fields": {
-   "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
    "AttendanceStatus": "Present"
   }
  },

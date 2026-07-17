@@ -638,19 +638,6 @@
  },
  {
   "primaryKey": {
-   "ID": "CE0DE10D-712D-52FF-9680-8C32C3D0EA4C"
-  },
-  "fields": {
-   "PersonID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
-   "RoleID": "@lookup:Committees: Roles.Name=Member",
-   "TermID": "861EBDAB-5708-53DE-8502-5E61A8884106",
-   "StartDate": "2025-01-01",
-   "EndDate": "2026-12-31",
-   "Status": "Active"
-  }
- },
- {
-  "primaryKey": {
    "ID": "1FA4DAAB-F91E-57D3-B316-4CCF62A07586"
   },
   "fields": {

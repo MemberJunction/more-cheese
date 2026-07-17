@@ -6,7 +6,7 @@
 // This is what CI runs when datagen graduates to a package.
 
 import { execFileSync } from 'node:child_process';
-import { rmSync, readFileSync } from 'node:fs';
+import { rmSync, readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -96,7 +96,9 @@ step('schema DDL covers every INSERT column', () => {
 // 6c. migration ↔ generator drift guard: the frozen baseline migration OWNS the morecheese
 // shapes; the generator's emit-schema (a dev shim) must keep matching it exactly
 step('frozen migration matches generator shapes (morecheese tables)', () => {
-  const mig = readFileSync(join(HERE, '..', 'migrations', 'B202607141200__v1.0.0_MoreCheese_Baseline.sql'), 'utf8');
+  const migDir = join(HERE, '..', 'migrations');
+  const mig = readdirSync(migDir).filter((f) => /^[BV]\d+__.*\.sql$/.test(f)).sort()
+    .map((f) => readFileSync(join(migDir, f), 'utf8')).join('\n');
   const shim = readFileSync(join(HERE, 'out', 'sql', '00_schema.sql'), 'utf8');
   const cols = (body) => new Set([...body.matchAll(/^\s+\[?(\w+)\]? /gm)].map((x) => x[1]).filter((c) => c !== 'CONSTRAINT'));
   const parse = (sql, resolve) => {

@@ -25,9 +25,9 @@ Who differs, and by how much:
 |---|---|---|---|
 | Longer-tenured members renew more | **+4.1pt** per extra “standard deviation” of tenure | β 0.55 (expert form) → compiled β 0.55 | per 1 SD of tenure at decision |
 | Engaged members renew more | **+7.0pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
-| Auto-renew members stick around | **+12.1pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.729 | MGI: +10-15pt |
+| Auto-renew members stick around | **+12.1pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.722 | MGI: +10-15pt |
 | Employer trouble drives churn | **-8.6pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows |
-| The enthusiast tier churns hardest | **-23.6pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.983 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
+| The enthusiast tier churns hardest | **-23.3pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.96 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
 
 ## The event rules
 
@@ -57,7 +57,7 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 - **Danielle Okafor** (`ICF-000103`) — Producer, Brattleboro. Pins: {"status":"Lapsed","employerDissolved":2025,"cancellationReasonContains":"employer"}.
 - **Priya Natarajan** (`ICF-000104`) — Producer, Madison. Pins: {"status":"Active"}.
 - **Bob Kowalski** (`ICF-000105`) — Supplier, Chicago. Pins: {"status":"Active","employerAcquired":2023}.
-- **Henri Dubois** (`ICF-000107`) — Producer, Poligny. Pins: {"status":"Active","tier":"Corporate"}.
+- **Henri Dubois** (`ICF-000107`) — Producer, Poligny. Pins: {"status":"Active","tier":"Corporate","competitionGold":2025}.
 - **Kate O'Leary** (`ICF-000111`) — Retailer, Madison. Pins: {"status":"Active","duplicateOf":null}.
 - **Kathy OLeary** (`ICF-000287`) — Retailer, Madison. Pins: {"status":"Active","duplicateOf":"ICF-000111"}.
 - **Jamie Fuller** (`ICF-000113`) — Enthusiast, Portland. Pins: {"status":"Active","tier":"Enthusiast"}.
@@ -65,6 +65,8 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 - **Nia Thompson** (`ICF-000115`) — Retailer, Brooklyn. Pins: {"status":"Active","joinedDaysBeforeRelease":14}.
 - **Charlie Mason** (`ICF-000116`) — Producer, Hobart. Pins: {"status":"Active","tier":"SmallBusiness"}.
 - **Gwen Whitfield** (`ICF-000108`) — Educator, Chicago. Pins: {"status":"Active","committeeSeat":"Food Safety Committee","committeeRole":"Chair"}.
+- **Sofia Marchetti** (`ICF-000106`) — Retailer, Brooklyn. Pins: {"status":"Active","certStatus":"InProgress"}.
+- **Tom Reyes** (`ICF-000109`) — Producer, Ithaca. Pins: {"status":"Active","advocacyMin":30,"testimonies":2}.
 
 ## How to author a rule (the three vocabularies)
 

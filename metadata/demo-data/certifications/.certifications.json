@@ -1,0 +1,35 @@
+[
+ {
+  "primaryKey": {
+   "ID": "169AD79A-12F1-54D1-893B-2DE6075D3C80"
+  },
+  "fields": {
+   "CertKey": "CERT-CCP",
+   "Name": "Certified Cheese Professional (CCP)",
+   "ValidYears": 3,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "6B965323-F825-5614-97EE-796C25495964"
+  },
+  "fields": {
+   "CertKey": "CERT-SENSORY",
+   "Name": "Sensory Evaluation Certificate",
+   "ValidYears": 3,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "E47053CA-362D-554B-ACEC-967CED84FFDE"
+  },
+  "fields": {
+   "CertKey": "CERT-FOODSAFETY",
+   "Name": "Food Safety & HACCP Certificate",
+   "ValidYears": 2,
+   "IsSharedDemo": true
+  }
+ }
+]

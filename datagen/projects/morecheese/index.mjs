@@ -16,6 +16,7 @@ import { buildForms } from './forms.mjs';
 import { buildRelationships } from './relationships.mjs';
 import { buildTasks } from './tasks.mjs';
 import { buildIssues } from './issues.mjs';
+import { buildPrograms } from './programs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
 
@@ -47,19 +48,20 @@ export function buildWorld(cfg) {
   const relationships = buildRelationships(cfg, people, orgs);
   const tasks = buildTasks(cfg, people, periods, committees);
   const issues = buildIssues(cfg, people, orgs, events, registrations, money);
+  const programs = buildPrograms(cfg, people, periods, learning);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues };
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
     common: { dependsOn: [], tables: { people: strip(people, ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
-    membership: { dependsOn: ['common'], tables: { membership_periods: periods } },
-    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta']) } },
-    learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']) } },
+    membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions } },
+    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta']), competition_entries: programs.competitionEntries } },
+    learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },
     committees: { dependsOn: ['common', 'membership'], tables: { committee_types: committees.types, committee_roles: committees.roles, committees: committees.committees, committee_terms: committees.terms, committee_memberships: committees.memberships, committee_meetings: committees.meetings, committee_attendance: committees.attendance, committee_agenda_items: committees.agendaItems, committee_motions: committees.motions, committee_votes: committees.votes } },
     forms: { dependsOn: ['common', 'events'], tables: { forms: forms.forms, form_versions: forms.formVersions, form_pages: forms.formPages, form_questions: forms.formQuestions, form_distributions: forms.formDistributions, form_responses: forms.formResponses, form_answers: forms.formAnswers } },

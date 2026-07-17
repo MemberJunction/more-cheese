@@ -43,6 +43,9 @@ const cVotes = load('committees', 'committee_votes');
 const tTasks = load('tasks', 'tasks');
 const tAssignments = load('tasks', 'task_assignments');
 const issues = load('issues', 'issues');
+const memberCerts = load('learning', 'member_certifications');
+const compEntries = load('events', 'competition_entries');
+const advocacy = load('membership', 'advocacy_actions');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -460,6 +463,19 @@ function checkComposedApps() {
   const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, npsN.length)));
   check(`forms: mean NPS (non-covid) ${mean(npsN).toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(mean(npsN) - FF.answers.nps.base) <= npsAllow, `${npsN.length} answers`);
   if (npsC.length >= 20) check(`regime: covid NPS dip expressed (${mean(npsC).toFixed(2)} < ${mean(npsN).toFixed(2)})`, mean(npsC) < mean(npsN), `${npsC.length} covid-year answers`);
+  // programs: pursuit + advocate shares land (over their real pools)
+  const PRG = R.programs;
+  const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
+  const crowdCompleters = [...completerSet].filter((m) => !R.heroes.some((h) => h.memberNumber === m)).length;
+  const crowdCerts = memberCerts.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).length;
+  const certShare = crowdCerts / Math.max(1, crowdCompleters);
+  const certAllow = PRG.certifications.tolerance + 3 * Math.sqrt(PRG.certifications.pursuitShareOfCompleters * (1 - PRG.certifications.pursuitShareOfCompleters) / Math.max(1, crowdCompleters));
+  check(`programs: cert pursuit ${(certShare * 100).toFixed(1)}% of completers vs ${PRG.certifications.pursuitShareOfCompleters * 100}% ±${(certAllow * 100).toFixed(1)}`, Math.abs(certShare - PRG.certifications.pursuitShareOfCompleters) <= certAllow, `${crowdCerts} certs / ${crowdCompleters} completers`);
+  const advocates = new Set(advocacy.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).map((x) => x.MemberNumber)).size;
+  const advShare = advocates / Math.max(1, people.length);
+  const advAllow = PRG.advocacy.tolerance + 3 * Math.sqrt(PRG.advocacy.advocateShare * (1 - PRG.advocacy.advocateShare) / Math.max(1, people.length));
+  check(`programs: advocates ${(advShare * 100).toFixed(1)}% vs ${PRG.advocacy.advocateShare * 100}% ±${(advAllow * 100).toFixed(1)}`, Math.abs(advShare - PRG.advocacy.advocateShare) <= advAllow, `${advocates} advocates`);
+
   // payment lifecycle: failure mix is part causal (low-phi), part noise — the ratio must express
   const PO2 = R.orders.paymentOutcomes;
   const latents2 = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
@@ -540,6 +556,18 @@ function checkHeroes() {
       if (Math.round(dJoin) !== h.pins.joinedDaysBeforeRelease) problems.push(`joined ${dJoin}d before release`);
     }
     if (p && h.employerName && orgByKey.get(p.OrgKey)?.Name !== h.employerName) problems.push(`employer=${orgByKey.get(p.OrgKey)?.Name}`);
+    if (h.pins.certStatus) {
+      const mc = memberCerts.find((x) => x.MemberNumber === h.memberNumber);
+      if (!mc || mc.Status !== h.pins.certStatus) problems.push(`cert=${mc?.Status}≠${h.pins.certStatus}`);
+    }
+    if (h.pins.competitionGold) {
+      if (!compEntries.some((x) => x.MemberNumber === h.memberNumber && x.EntryYear === h.pins.competitionGold && x.Result === 'Gold')) problems.push(`no Gold ${h.pins.competitionGold}`);
+    }
+    if (h.pins.advocacyMin) {
+      const acts = advocacy.filter((x) => x.MemberNumber === h.memberNumber);
+      if (acts.length < h.pins.advocacyMin) problems.push(`advocacy ${acts.length}<${h.pins.advocacyMin}`);
+      if ((h.pins.testimonies ?? 0) > acts.filter((x) => x.Kind === 'Testimony').length) problems.push('testimonies missing');
+    }
     for (const seat of h.committees ?? []) {
       for (const termName of seat.terms) {
         const t = R.committees.terms.find((x) => x.name === termName);

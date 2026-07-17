@@ -2511,16 +2511,6 @@
  },
  {
   "primaryKey": {
-   "ID": "196E7BE9-D8DA-574E-9FAF-2EFC19E16AC0"
-  },
-  "fields": {
-   "MotionID": "F5B44B67-2384-50F1-A68C-FF74130990C6",
-   "MembershipID": "CE0DE10D-712D-52FF-9680-8C32C3D0EA4C",
-   "VoteValue": "Yes"
-  }
- },
- {
-  "primaryKey": {
    "ID": "6F32148B-C7A7-5355-8B81-645F7FC199EF"
   },
   "fields": {
@@ -2696,16 +2686,6 @@
   "fields": {
    "MotionID": "41A3E623-FF96-5FE1-A82F-915BE7A165A7",
    "MembershipID": "D2BE6260-AD61-5DD6-8769-D60B35887E25",
-   "VoteValue": "Yes"
-  }
- },
- {
-  "primaryKey": {
-   "ID": "CCDD83F5-5071-5B7B-8FFD-885A704B666A"
-  },
-  "fields": {
-   "MotionID": "41A3E623-FF96-5FE1-A82F-915BE7A165A7",
-   "MembershipID": "CE0DE10D-712D-52FF-9680-8C32C3D0EA4C",
    "VoteValue": "Yes"
   }
  },

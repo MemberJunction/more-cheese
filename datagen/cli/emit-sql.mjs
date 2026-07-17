@@ -107,6 +107,14 @@ const MAPPING = {
   ],
   membership: [
     {
+      json: 'advocacy_actions', table: '[morecheese_members].[AdvocacyAction]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('advocacy', r.ActionKey)), ActionKey: sqlStr(r.ActionKey),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)), ActionDate: sqlDate(r.ActionDate),
+        Kind: sqlStr(r.Kind), Topic: sqlStr(r.Topic), IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
       json: 'membership_periods', table: '[morecheese_members].[MembershipPeriod]',
       columns: (r) => ({
         ID: sqlId(uuidFor('period', r.PeriodKey)), PeriodKey: sqlStr(r.PeriodKey),
@@ -119,6 +127,19 @@ const MAPPING = {
     },
   ],
   learning: [
+    {
+      json: 'certifications', table: '[morecheese_learning].[Certification]',
+      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
+    },
+    {
+      json: 'member_certifications', table: '[morecheese_learning].[MemberCertification]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('membercert', r.MemberCertKey)), MemberCertKey: sqlStr(r.MemberCertKey),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)), CertificationID: sqlId(uuidFor('cert', r.CertKey)),
+        Status: sqlStr(r.Status), EnrolledOn: sqlDate(r.EnrolledOn), AwardedOn: sqlDate(r.AwardedOn), ExpiresOn: sqlDate(r.ExpiresOn),
+        IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
     {
       json: 'courses', table: '[morecheese_learning].[Course]',
       columns: (r) => ({
@@ -350,6 +371,15 @@ const MAPPING = {
         EventType: sqlStr(r.EventType), EventDate: sqlDate(r.Date), IsVirtual: sqlBit(r.IsVirtual), IsPaid: sqlBit(r.IsPaid),
         City: sqlStr(r.City), State: sqlStr(r.State), Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
         IsSharedDemo: sqlBit(r.IsSharedDemo),
+      }),
+    },
+    {
+      json: 'competition_entries', table: '[morecheese_events].[CompetitionEntry]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('compentry', r.EntryKey)), EntryKey: sqlStr(r.EntryKey),
+        PersonID: sqlId(uuidFor('person', r.MemberNumber)), OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null),
+        EntryYear: sqlNum(r.EntryYear), Category: sqlStr(r.Category), ProductName: sqlStr(r.ProductName),
+        Result: sqlStr(r.Result), IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
     {

@@ -11464,5 +11464,41 @@
    "LifecycleEventYear": null,
    "IsSharedDemo": true
   }
+ },
+ {
+  "primaryKey": {
+   "ID": "25BE4E47-F6A7-5EEC-AD42-04162D897745"
+  },
+  "fields": {
+   "OrganizationID": "12EEFC15-2D84-5FA2-9B9F-D26813ED5DB5",
+   "OrgKey": "ORG-H106",
+   "Type": "Retailer",
+   "Region": "NA",
+   "City": "Brooklyn",
+   "State": "NY",
+   "Latitude": 40.6782,
+   "Longitude": -73.9442,
+   "LifecycleEventKind": null,
+   "LifecycleEventYear": null,
+   "IsSharedDemo": true
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "25AF3C70-65BC-5F71-BD4C-3308C315A6D2"
+  },
+  "fields": {
+   "OrganizationID": "8C51EA9E-3DA6-5BF7-BF23-740298C2C65B",
+   "OrgKey": "ORG-H109",
+   "Type": "Producer",
+   "Region": "NA",
+   "City": "Ithaca",
+   "State": "NY",
+   "Latitude": 42.444,
+   "Longitude": -76.5019,
+   "LifecycleEventKind": null,
+   "LifecycleEventYear": null,
+   "IsSharedDemo": true
+  }
  }
 ]

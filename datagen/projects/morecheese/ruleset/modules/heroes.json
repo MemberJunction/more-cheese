@@ -170,9 +170,18 @@
       "autoRenew": true,
       "pins": {
         "status": "Active",
-        "tier": "Corporate"
+        "tier": "Corporate",
+        "competitionGold": 2025
       },
-      "title": "Affineur & Owner"
+      "title": "Affineur & Owner",
+      "competition": {
+        "entriesPerYear": 8,
+        "pinnedResults": {
+          "2025": "Gold"
+        },
+        "category": "Alpine Styles",
+        "productName": "Saint-Rémille Réserve d'Alpage"
+      }
     },
     {
       "memberNumber": "ICF-000111",
@@ -358,6 +367,65 @@
         "committeeRole": "Chair"
       },
       "title": "Principal"
+    },
+    {
+      "memberNumber": "ICF-000106",
+      "first": "Sofia",
+      "last": "Marchetti",
+      "$persona": "the certification journey — third-generation cheesemonger; the credential is her counter-move to the chain store four blocks away",
+      "employerName": "Marchetti's Salumeria & Formaggio",
+      "segment": "Retailer",
+      "region": "NA",
+      "city": "Brooklyn",
+      "state": "NY",
+      "lat": 40.6782,
+      "lon": -73.9442,
+      "joinDate": "2024-02-18",
+      "theta": 1.2,
+      "phi": 0.3,
+      "tier": "Individual",
+      "title": "Cheesemonger",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "certification": {
+        "key": "CERT-CCP",
+        "status": "InProgress",
+        "enrolledOn": "2025-09-15"
+      },
+      "pins": {
+        "status": "Active",
+        "certStatus": "InProgress"
+      }
+    },
+    {
+      "memberNumber": "ICF-000109",
+      "first": "Tom",
+      "last": "Reyes",
+      "$persona": "the advocacy champion — raw-milk farmstead owner; ALL his engagement is legislative (Sonar component-breakdown demo). Theta pinned moderate so event/course activity stays low; his advocacy volume is a DECLARED fact, not theta-driven. Employer renamed from the draft's 'Stone Meadow Farmstead' for clearance (cleared toponym compose).",
+      "employerName": "Speltmoor Farmstead",
+      "segment": "Producer",
+      "region": "NA",
+      "city": "Ithaca",
+      "state": "NY",
+      "lat": 42.444,
+      "lon": -76.5019,
+      "joinDate": "2016-05-09",
+      "theta": 0.1,
+      "phi": -0.2,
+      "tier": "Individual",
+      "title": "Owner",
+      "cycleType": "calendar",
+      "autoRenew": true,
+      "advocacy": {
+        "totalActions": 34,
+        "testimonies": 2,
+        "topic": "Raw-milk aging rules"
+      },
+      "pins": {
+        "status": "Active",
+        "advocacyMin": 30,
+        "testimonies": 2
+      }
     }
   ]
 }
