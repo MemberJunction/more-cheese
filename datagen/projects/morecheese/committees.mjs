@@ -83,18 +83,26 @@ export function buildCommittees(cfg, people, periods) {
   const attByMeeting = new Map(); // MeetingKey → [{membership row, status}] — votes stay consistent with attendance
   const releaseIso = iso(release);
   for (const c of C.list) {
-    for (let y = C.meetings.startYear; y <= release.getUTCFullYear(); y++) {
+    let upcoming = 0; // committees schedule a few meetings ahead — populates the app's "upcoming" view
+    for (let y = C.meetings.startYear; y <= release.getUTCFullYear() + 1; y++) {
       for (let q = 0; q < C.meetings.cadencePerYear; q++) {
         const month = q * 3 + 1; // Jan/Apr/Jul/Oct
         const dt = `${y}-${String(month).padStart(2, '0')}-${String(C.meetings.dayOfMonth).padStart(2, '0')}`;
-        if (dt > releaseIso) continue;
-        const term = C.terms.find((t) => t.start <= dt && dt <= t.end);
-        if (!term) continue;
-        const meeting = {
+        const base = {
           MeetingKey: `${c.name}:${dt}`, CommitteeKey: c.name, Name: `${c.name} — Q${q + 1} ${y} meeting`,
           StartDateTime: `${dt}T${String(C.meetings.hourUTC).padStart(2, '0')}:00:00Z`,
-          LocationType: 'Virtual', Status: 'Completed', IsSharedDemo: true,
+          LocationType: 'Virtual', IsSharedDemo: true,
         };
+        if (dt > releaseIso) {
+          // future meeting: a Scheduled placeholder, capped per committee — no attendance/motions yet
+          if (upcoming >= C.meetings.upcomingPerCommittee) continue;
+          upcoming++;
+          meetings.push({ ...base, Status: 'Scheduled' });
+          continue;
+        }
+        const term = C.terms.find((t) => t.start <= dt && dt <= t.end);
+        if (!term) continue;
+        const meeting = { ...base, Status: 'Completed' };
         meetings.push(meeting);
         const roster = (rosterByTerm.get(`${c.name}:${term.start}`) ?? []);
         if (!roster.length) continue;
@@ -143,6 +151,8 @@ export function buildCommittees(cfg, people, periods) {
     const r = rng(seed, `motion:${meeting.MeetingKey}`);
     const present = roster.filter((x) => x.status === 'Present');
     if (!r.bernoulli(MO.ratePerMeeting) || present.length < 2) continue;
+    // some motions are contentious (tighter/against split → they can FAIL); outcome stays derived from the tally
+    const split = r.bernoulli(MO.contentiousShare) ? MO.contentiousVoteSplit : MO.voteSplit;
     const topic = r.pick(MO.topics);
     const moverIdx = r.int(0, present.length - 1);
     let secondIdx = r.int(0, present.length - 2);
@@ -160,7 +170,7 @@ export function buildCommittees(cfg, people, periods) {
       if (x.status !== 'Present') value = 'Absent';
       else {
         const vr = rng(seed, `vote:${motionKey}:${x.membership.MembershipKey}`);
-        value = vr.pickWeighted([['Yes', MO.voteSplit.yes], ['No', MO.voteSplit.no], ['Abstain', MO.voteSplit.abstain]]);
+        value = vr.pickWeighted([['Yes', split.yes], ['No', split.no], ['Abstain', split.abstain]]);
       }
       if (value === 'Yes') yes++; else if (value === 'No') no++; else if (value === 'Abstain') abstain++;
       votes.push({ VoteKey: `${motionKey}:${x.membership.MembershipKey}`, MotionKey: motionKey, MembershipKey: x.membership.MembershipKey, VoteValue: value, IsSharedDemo: true });

@@ -88,6 +88,8 @@
       "startYear": 2023,
       "dayOfMonth": 15,
       "hourUTC": 15,
+      "upcomingPerCommittee": 2,
+      "$upcomingNote": "committees schedule ahead — each carries this many future (Status Scheduled) meetings past the release so the app's 'upcoming meetings' view is populated; future meetings have no attendance/motions yet",
       "attendance": {
         "presentTarget": 0.75,
         "tolerance": 0.06,
@@ -131,6 +133,13 @@
           "no": 0.1,
           "abstain": 0.1
         },
+        "contentiousShare": 0.35,
+        "contentiousVoteSplit": {
+          "yes": 0.25,
+          "no": 0.6,
+          "abstain": 0.15
+        },
+        "$contentiousNote": "a share of motions are contentious — a tighter/against split so some genuinely FAIL. Outcome stays causally derived from the tally (yes>no), never forced; this just makes governance look real instead of rubber-stamp.",
         "$note": "votes are CONSISTENT with attendance by construction — members absent from the meeting vote 'Absent'",
         "topics": [
           "Adopt the revised charter language",

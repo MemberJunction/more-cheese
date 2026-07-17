@@ -514,6 +514,11 @@ function checkComposedApps() {
     }
   }
   check('committees: motion tallies match votes; votes consistent with attendance', tallyBad + attBad === 0, `${cMotions.length} motions, ${cVotes.length} votes`);
+  // upcoming meetings: each committee schedules ahead so the app's forward view is populated; future meetings carry no attendance
+  const scheduled = cMeetings.filter((m) => m.Status === 'Scheduled');
+  const wantUpcoming = CC.list.length * CC.meetings.upcomingPerCommittee;
+  const futureNoAtt = scheduled.every((m) => !cAttendance.some((a) => a.MeetingKey === m.MeetingKey));
+  check(`committees: upcoming Scheduled meetings = ${wantUpcoming} (each committee schedules ahead), no attendance yet`, scheduled.length === wantUpcoming && futureNoAtt, `${scheduled.length} scheduled`);
   // tasks: every PendingRenewal member carries an outreach task
   const pendingMembers = [...lastStatus.entries()].filter(([, st]) => st === 'PendingRenewal').map(([m2]) => m2);
   const outreach = new Set(tTasks.filter((t) => t.TypeKey === 'Renewal Outreach').map((t) => t.TaskKey));
