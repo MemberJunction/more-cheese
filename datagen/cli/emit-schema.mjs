@@ -210,7 +210,7 @@ const TABLES = [
     c('NumericValue', 'DECIMAL(18,4)', { null: true }), c('BooleanValue', BIT, { null: true }),
   ] },
   { schema: 'morecheese_learning', table: 'Certification', cols: [
-    c('ID', UID, { pk: true }), c('CertKey', s(50)), c('Name', s(200)), c('ValidYears', INT), c('IsSharedDemo', BIT),
+    c('ID', UID, { pk: true }), c('CertKey', s(50)), c('Name', s(200)), c('Description', 'NVARCHAR(MAX)', { null: true }), c('ValidYears', INT), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_learning', table: 'MemberCertification', cols: [
     c('ID', UID, { pk: true }), c('MemberCertKey', s(80)), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
