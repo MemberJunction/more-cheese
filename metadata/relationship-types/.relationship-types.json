@@ -1,0 +1,38 @@
+[
+  {
+    "primaryKey": {
+      "ID": "0F4E6E6A-FDCF-5D5E-9DF0-D4A3023C90A3"
+    },
+    "fields": {
+      "Name": "Mentor",
+      "Description": "Demo-owned type: structured mentorship pairs",
+      "Category": "PersonToPerson",
+      "IsDirectional": true,
+      "ForwardLabel": "mentors",
+      "ReverseLabel": "is mentored by",
+      "IsActive": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:37.741Z",
+      "checksum": "a73d2156b1bddb660522d82b904525eb3262c1366b725be49fda5df93d2439fb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B93A4452-68D3-5B4D-A2B2-C3537FA29B2E"
+    },
+    "fields": {
+      "Name": "Duplicate Of",
+      "Description": "Demo-owned type: labeled ground truth for the dedup demo",
+      "Category": "PersonToPerson",
+      "IsDirectional": true,
+      "ForwardLabel": "is duplicate of",
+      "ReverseLabel": "has duplicate",
+      "IsActive": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:37.744Z",
+      "checksum": "2ec2bdff0095cd5daa28c5705e5fc00fc50243c7a60d310cbfca4e2f4a12db8a"
+    }
+  }
+]

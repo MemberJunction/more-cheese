@@ -1,0 +1,4682 @@
+[
+  {
+    "primaryKey": {
+      "ID": "4D5E8CF5-4D30-5DF5-8D32-4A8A801339F4"
+    },
+    "fields": {
+      "MeetingID": "0A8175F6-CA09-5BD8-AAC4-70C954722764",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.912Z",
+      "checksum": "1d455b5ccbf75f82ac4471d359cf2290f5585de3e7d5aca921ff92a6bab20956"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BEC4939C-068F-56C5-B9D8-18515A8FC053"
+    },
+    "fields": {
+      "MeetingID": "0A8175F6-CA09-5BD8-AAC4-70C954722764",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.917Z",
+      "checksum": "ac579d2750f647c6f5f90cfada4fb377dca5494678becd6cae18097793c46eb9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5A839DA9-69E3-5A8C-A5E3-5FDC7164A8D8"
+    },
+    "fields": {
+      "MeetingID": "0A8175F6-CA09-5BD8-AAC4-70C954722764",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.922Z",
+      "checksum": "35422f3f0a7702b917e84bf7c605e667c06c529f967af9232bb22f2124547923"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "219FC96F-4C87-521B-A818-86D366FC76EF"
+    },
+    "fields": {
+      "MeetingID": "0A8175F6-CA09-5BD8-AAC4-70C954722764",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.926Z",
+      "checksum": "fb5a09afd4d8235e8e2e985e127c9cc15aad2066a760ee6e4443639ec5ccb2fe"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7BAC3852-D46C-5D51-B499-54A71762F2C6"
+    },
+    "fields": {
+      "MeetingID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.931Z",
+      "checksum": "efd882dcb798318cfd25ccd936cd6ecfc1f7658bce8995cd483c5222b7dac65a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C1CDCE75-9A99-527A-A734-E6B95753B5A0"
+    },
+    "fields": {
+      "MeetingID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.938Z",
+      "checksum": "dfa1e6975024d3551e17c00b25d3d203e5a274d379fdcf5afba75a86cb238ff4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "37B7151B-50DF-5647-80E3-473E24E0C527"
+    },
+    "fields": {
+      "MeetingID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.943Z",
+      "checksum": "519be8f6f0d3897b0cafd4cc0dfaa11861d0c53f64c64c9b0dfee548875c2fb3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7BF691B2-E2C6-5C07-AABC-1C94C04800EC"
+    },
+    "fields": {
+      "MeetingID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.947Z",
+      "checksum": "a5e9edc63e3c0369f8f9c8513f0ea87896fd49d256afd0301afc6b669333981b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0B2EA185-8974-5CCE-9960-8F5760BC34E1"
+    },
+    "fields": {
+      "MeetingID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6",
+      "Sequence": 5,
+      "Name": "Motion: Approve the speaker honorarium policy",
+      "PresenterPersonID": "52C28E21-26ED-505E-8B9A-D2BDE568A26F",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.951Z",
+      "checksum": "605eb62469ce1de48e702053dcdadf7c11150d3e03ad769a476ce744b0e778e5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D25E7344-4158-5F7A-962C-0E03A331E21E"
+    },
+    "fields": {
+      "MeetingID": "624F6C3C-2A27-591D-B8E3-C5499A4EE9A1",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.954Z",
+      "checksum": "97d6ea9a22938f9635dc275e78b61b4f8837f8d41a91c88a9a5fa5fc27ed6c09"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A5446FD4-19CD-59A1-ACE8-9775FF77D169"
+    },
+    "fields": {
+      "MeetingID": "624F6C3C-2A27-591D-B8E3-C5499A4EE9A1",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.964Z",
+      "checksum": "314969f0b6959589ce5a0b828ca63db39cafe67a97db04f52dcb3a0706458428"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D6B32BCD-B28B-5D8F-83E3-BE2F4A653DDF"
+    },
+    "fields": {
+      "MeetingID": "624F6C3C-2A27-591D-B8E3-C5499A4EE9A1",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.969Z",
+      "checksum": "bfa8da038bc83fb7b94e23af2ed8724cebb0c239f80439e976aee55af1fca43c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "846BD916-69A2-5A1D-8A94-6FDCB56CEFC0"
+    },
+    "fields": {
+      "MeetingID": "624F6C3C-2A27-591D-B8E3-C5499A4EE9A1",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.974Z",
+      "checksum": "7f0bf080b0dd315ff67581b0146b9c8420fa92bd1897b22ab01fe20320af4690"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1CF1BAC3-6FF8-507C-B6CF-F15BD85D7E16"
+    },
+    "fields": {
+      "MeetingID": "E9307B3D-28D4-5C7D-AF59-15D1F70EE066",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.978Z",
+      "checksum": "6fce01236939fd0204deea91cb73bf44b32dfaf295ef5204102268744e242fa6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D4EF0D07-71A4-53DC-9A69-B51E929A5B21"
+    },
+    "fields": {
+      "MeetingID": "E9307B3D-28D4-5C7D-AF59-15D1F70EE066",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.985Z",
+      "checksum": "dbfe5f287ad90040e9325756aff44705e324c1138b01ca272983fd5fe9587f1b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "130CAB08-8D93-57F4-B6A2-7BA814C29837"
+    },
+    "fields": {
+      "MeetingID": "E9307B3D-28D4-5C7D-AF59-15D1F70EE066",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.989Z",
+      "checksum": "2bdabc6e10370a3e74147579a7b2931478646b99cc4a373c3502de6e10e35023"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4034FA64-85F9-5BD4-90AA-D082314EC870"
+    },
+    "fields": {
+      "MeetingID": "E9307B3D-28D4-5C7D-AF59-15D1F70EE066",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:48.994Z",
+      "checksum": "d6e343cc86964b84f55cbc4dc6d276a705d1c4b30b3e37ba65ec3711c8f5b53e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59466CFE-A45D-55EA-AB36-4B75DA618806"
+    },
+    "fields": {
+      "MeetingID": "F1019ACF-2DA0-5C2D-BF71-59450A596CDC",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.002Z",
+      "checksum": "d5600f475b26195ae25a86dbbb32facce2b65ede964d37cf3741e4e660de28a2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB7ADCD9-CBE7-5A5F-A4EA-773B0D8188D5"
+    },
+    "fields": {
+      "MeetingID": "F1019ACF-2DA0-5C2D-BF71-59450A596CDC",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.007Z",
+      "checksum": "306407142a37348afe45d9f09d8810a601277eefae0f87e4529ef5d0a9d6afd9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "514EACF7-64CA-5636-A2C0-1E95BCF7099B"
+    },
+    "fields": {
+      "MeetingID": "F1019ACF-2DA0-5C2D-BF71-59450A596CDC",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.010Z",
+      "checksum": "6127ca336344fdf78086725db33fb2c00034d0dcc4f87bd05061b01d265d3e8c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C5413143-B47D-5D31-8151-97823E861B34"
+    },
+    "fields": {
+      "MeetingID": "F1019ACF-2DA0-5C2D-BF71-59450A596CDC",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.019Z",
+      "checksum": "a116748c5cae9ab8e82824488f9af39b772e0cbb15d53ac7a70438b15b875a2a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72814045-7CCF-5EE0-A9D3-BBA5B4DBBB9B"
+    },
+    "fields": {
+      "MeetingID": "B2933EEB-7A28-5077-BD81-4F3A0B20F654",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.024Z",
+      "checksum": "51841cb6ed259a7f287652a65f8dbce0d47b905b1f907946852339dc0981bbc5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A6287946-9F93-5A13-8710-9DDCBCD0E63C"
+    },
+    "fields": {
+      "MeetingID": "B2933EEB-7A28-5077-BD81-4F3A0B20F654",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.033Z",
+      "checksum": "b0310dcb532912840d3a010a973fb1f15c5666ee561c8d2c8ec6f7cf93a31be7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D1FEB3B2-053C-5780-9A46-7AAF5A1D3827"
+    },
+    "fields": {
+      "MeetingID": "B2933EEB-7A28-5077-BD81-4F3A0B20F654",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.029Z",
+      "checksum": "1cd38818da8265cba9b0e326c78e1153671f000fc1f2d474c7219ed7e68a679a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EAE2F07C-0FDC-5953-8B7E-97C66FAC3C94"
+    },
+    "fields": {
+      "MeetingID": "B2933EEB-7A28-5077-BD81-4F3A0B20F654",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.038Z",
+      "checksum": "2dde3996461d3946ff31eb02b706d0787c6f7a1dc76f8e243e79862f8d2efb40"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7063F48E-CA42-5F52-B8FB-C404663604A5"
+    },
+    "fields": {
+      "MeetingID": "5555B99F-0F65-554B-84E2-03B7334942E4",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.042Z",
+      "checksum": "a84a4e7331287ea3c74a26b4b2a2a15ce0c17bbb5074b6b6348b202cc109480d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E3EF6CA1-DF55-5669-86EA-2F3D18E46FAF"
+    },
+    "fields": {
+      "MeetingID": "5555B99F-0F65-554B-84E2-03B7334942E4",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.046Z",
+      "checksum": "133c99bb077cf4afe87a68588605ce9f00422a4921ad79affc4a80d6d2780b72"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5B6A5C26-6E7E-5907-A005-479F114D1FC5"
+    },
+    "fields": {
+      "MeetingID": "5555B99F-0F65-554B-84E2-03B7334942E4",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.050Z",
+      "checksum": "c11b7aa7a8b1c4eff274f6db5c4a30d011d0e62a19f561592c4a121a4293777e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E945F30-75E9-5B64-A04C-C94756E92D92"
+    },
+    "fields": {
+      "MeetingID": "5555B99F-0F65-554B-84E2-03B7334942E4",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.054Z",
+      "checksum": "2806a6c3d213f1787ebf9ed3f51302cbba04122e07e620b859e99a99c80bb8d5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49A2491F-B077-5EAE-BF4C-77EE61E601D9"
+    },
+    "fields": {
+      "MeetingID": "79636F02-BF6F-5DDB-A078-B6A78121DDA0",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.059Z",
+      "checksum": "b545723577235bf6e0a0771ca18c406d926483575a63eafb53e17076c8bbcd98"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F28B1C50-D8DA-5F74-A8EB-E069EB333BAD"
+    },
+    "fields": {
+      "MeetingID": "79636F02-BF6F-5DDB-A078-B6A78121DDA0",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.068Z",
+      "checksum": "442f8ea692dc375cd86861a82bc2747e1f41168c6f0762f73dd6a470749debfa"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1FFBDC58-E536-570E-A1B1-25DC5BE54F09"
+    },
+    "fields": {
+      "MeetingID": "79636F02-BF6F-5DDB-A078-B6A78121DDA0",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.071Z",
+      "checksum": "69a15399648ca3e6d98435fc6180eff677de33414f5654f1eda0d196a4eceabe"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9B789B40-9300-5EB8-9315-26E372C2C55F"
+    },
+    "fields": {
+      "MeetingID": "79636F02-BF6F-5DDB-A078-B6A78121DDA0",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.075Z",
+      "checksum": "ab8c21869601a663ea10096c6a1b69dbf52eacb507058e5683ecc20a77f30171"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "351FFC89-BBF0-502B-9ABC-9AB4ADAA3937"
+    },
+    "fields": {
+      "MeetingID": "2E624942-D52D-5536-8C74-80D8EDA16EA2",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.081Z",
+      "checksum": "98d85d8386ff2006251cd7e82e947508eb6812daaeee3107caef52d8e2e4a088"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D321E1B0-3EF2-547F-8041-EF0A79278866"
+    },
+    "fields": {
+      "MeetingID": "2E624942-D52D-5536-8C74-80D8EDA16EA2",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.085Z",
+      "checksum": "2b0cbead1d0f7c768d2e8521974b220ba3e76eafd686aa5b4e95edc369bd6080"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DBCA8EB2-7AFA-5311-B962-2100DD556923"
+    },
+    "fields": {
+      "MeetingID": "2E624942-D52D-5536-8C74-80D8EDA16EA2",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.089Z",
+      "checksum": "5eba1d9df4ef760e1a09f5576d1ed0a4543e52fa60a5ac69052d89d55d85222f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01FF4B4F-38C5-5CB0-BD15-0D63EC810CB0"
+    },
+    "fields": {
+      "MeetingID": "2E624942-D52D-5536-8C74-80D8EDA16EA2",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.093Z",
+      "checksum": "58feec896e735d2b5d4b053a226c681194936d16f1b6e2efe641e4b14127387f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3421FE48-3EA6-5B3F-98DF-DE23D10FA4BB"
+    },
+    "fields": {
+      "MeetingID": "2E624942-D52D-5536-8C74-80D8EDA16EA2",
+      "Sequence": 5,
+      "Name": "Motion: Approve the quarterly budget request",
+      "PresenterPersonID": "83F1E1CF-8BDC-59B2-B3D5-E88E914DA670",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.097Z",
+      "checksum": "d801b9feec1b70f4346ccc7b0d713b9ca95e99f23d3c6389d70e2f563ce2a0d3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "347481BC-C19D-5378-B83C-A6A22AB3EC09"
+    },
+    "fields": {
+      "MeetingID": "C3309E1B-3378-56A2-A680-3EC2CA009962",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.100Z",
+      "checksum": "c4a2dd442b392cd04684d7fab1f2993ef6ce6543241628a8ba7611abb8ca2912"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16238AC5-00FB-519F-A5D3-95873F07F5D5"
+    },
+    "fields": {
+      "MeetingID": "C3309E1B-3378-56A2-A680-3EC2CA009962",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.103Z",
+      "checksum": "52214b68aec0d1e543cf3898d0486934ad8104b6cee529cc501ee22ccfa967c8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D8FE826B-27D6-5A1E-A645-5A24EE51F6F8"
+    },
+    "fields": {
+      "MeetingID": "C3309E1B-3378-56A2-A680-3EC2CA009962",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.113Z",
+      "checksum": "6bcf4184b773d70ddae13ea138d30ceab187523cea873fece56ba07515481691"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1B2030C-DAB2-5D8D-AE52-E922F93C1ED3"
+    },
+    "fields": {
+      "MeetingID": "C3309E1B-3378-56A2-A680-3EC2CA009962",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.124Z",
+      "checksum": "56ec604d826dda163aa33b7f932881a457d6faf791f951e2793e7852117eba56"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "20E000AF-AA76-5510-A625-C96CFA30F95D"
+    },
+    "fields": {
+      "MeetingID": "C3309E1B-3378-56A2-A680-3EC2CA009962",
+      "Sequence": 5,
+      "Name": "Motion: Form a working group on member feedback",
+      "PresenterPersonID": "83F1E1CF-8BDC-59B2-B3D5-E88E914DA670",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.117Z",
+      "checksum": "8eb5b490e6aa426b7f37ceaaf7fd830b7b96ed112246e619df8a495b6446eb4b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31977D85-403C-5783-8AD9-0C103D4DF49C"
+    },
+    "fields": {
+      "MeetingID": "9E06D402-39BE-5E22-BFC9-AAE5C68031F6",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.133Z",
+      "checksum": "cce8e64190b1d6b6a0c8ceb0828e50d5193fea5a02cbe5871ba9befa75c5f588"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC06ACE4-E0C5-5243-BF95-85A59D91EC18"
+    },
+    "fields": {
+      "MeetingID": "9E06D402-39BE-5E22-BFC9-AAE5C68031F6",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.128Z",
+      "checksum": "c93a64903cf8fda78e45b373d2ebc4ab19f50305b8ceba49a0ff81f1e3adc25a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A78C9578-251B-53EE-8A3B-77F93E34C6CF"
+    },
+    "fields": {
+      "MeetingID": "9E06D402-39BE-5E22-BFC9-AAE5C68031F6",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.138Z",
+      "checksum": "f25e834a438f2155dea31f8f3658c87af0099a8c5d0442e2a11905c20cc448b3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C1B3A8B-A27D-5607-9358-AC0446C121DB"
+    },
+    "fields": {
+      "MeetingID": "9E06D402-39BE-5E22-BFC9-AAE5C68031F6",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.142Z",
+      "checksum": "d94dc16b6d0c524eacea9de6620db76ccf49bc351cb52d9c46cf9dbe60c37698"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6FF13000-10F1-52E1-BB11-4AC1256ACC48"
+    },
+    "fields": {
+      "MeetingID": "51E95386-496E-58B9-8AA2-E715ECE1FFDD",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.150Z",
+      "checksum": "a840e2f47a406ac9cf665f7d62e0017f6c81cffe718c968f8c2dc02fac8a0e84"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5471AA63-438C-5373-AA2B-C9932A999418"
+    },
+    "fields": {
+      "MeetingID": "51E95386-496E-58B9-8AA2-E715ECE1FFDD",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.146Z",
+      "checksum": "88ec841ca4d575823e71b698f58d373f2289cf14b7b3eb1c437478ba5aa6f181"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77D66540-E4B0-5752-AB6B-2C773834DA6F"
+    },
+    "fields": {
+      "MeetingID": "51E95386-496E-58B9-8AA2-E715ECE1FFDD",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.153Z",
+      "checksum": "3f18696f499c83551442c59883431f3b73109fe74e5e0ad31086ba0832ee0c19"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3E8162BC-DE57-5B58-A225-9A3CC7E8048F"
+    },
+    "fields": {
+      "MeetingID": "51E95386-496E-58B9-8AA2-E715ECE1FFDD",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.179Z",
+      "checksum": "15f996996b78fc74f1ec8579bd79f837454e942b6c988ac7c2101e527cc42b41"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8AC4CA6D-8428-518C-BD4E-DD373B4BECD3"
+    },
+    "fields": {
+      "MeetingID": "3409B637-743F-50E3-B546-3181DBE1F26B",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.163Z",
+      "checksum": "38f9e904a1efeba45dd2c819455e92e0c752a4a164e7ff6a37f87f6f66e25cd8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5F5E737B-503B-5943-811D-C21AED2229A2"
+    },
+    "fields": {
+      "MeetingID": "3409B637-743F-50E3-B546-3181DBE1F26B",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.168Z",
+      "checksum": "42b0424b88256f7c96ca320a93c188d681face88770f20509bd3913be7b5d771"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "515FA311-77C3-54A1-AEF3-F01999999E9C"
+    },
+    "fields": {
+      "MeetingID": "3409B637-743F-50E3-B546-3181DBE1F26B",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.174Z",
+      "checksum": "e6ecd39baee7402917516e643eef6a1be284fd8937f36d35986a2b0e84908ade"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "07990957-A554-5091-B4B2-20C3C4AE7BE8"
+    },
+    "fields": {
+      "MeetingID": "3409B637-743F-50E3-B546-3181DBE1F26B",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.187Z",
+      "checksum": "1b90549592843fbdee878785dcbfa1a6ed9e00ff2052c40317a7cc00ded25dfc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B9573E31-497C-5D21-8C10-11CD0299BD30"
+    },
+    "fields": {
+      "MeetingID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.183Z",
+      "checksum": "cadb03347793ab457905e9132634e4a5f8ade46ab1ac4ebfe0cfa9a4ffbb15a9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49E152B3-74D2-54A2-92C4-792FA981AD98"
+    },
+    "fields": {
+      "MeetingID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.191Z",
+      "checksum": "93e6a648121918f07b37725635acbe0d0b3514888e2846d2f4c2a7be4504b7b4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E0A1A8A0-C0C0-5506-B39E-D98AC22C4832"
+    },
+    "fields": {
+      "MeetingID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.196Z",
+      "checksum": "1fae7a7a67259937b190b895eac008160d86a5d5f7b7ff6d7349effc15b45077"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5CA029F4-BE4B-5BE1-8BDA-FB26D94BB853"
+    },
+    "fields": {
+      "MeetingID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.200Z",
+      "checksum": "406afb5783865aa7bf47633cc76e62de39255f2ba5fad32e0a207e919c1d1b76"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1F3F561-B473-505E-B578-CB52D29A4F40"
+    },
+    "fields": {
+      "MeetingID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505",
+      "Sequence": 5,
+      "Name": "Motion: Approve the speaker honorarium policy",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.203Z",
+      "checksum": "0d9af8249e913a9fcb73ace49ab87133cc72ba5ba7394f952dd44bcc7d2586cd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CBDE86C1-F0D4-59D8-8108-00AE1C185126"
+    },
+    "fields": {
+      "MeetingID": "70B2F31B-FCA2-5361-B3C2-B154378F168D",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.213Z",
+      "checksum": "9299f00bb505c8e9c84d567984ca34d4c5fe87087f6338b479a8e4ed4c06b4ab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E40E1639-54DE-5825-82F1-4CC44401BAE1"
+    },
+    "fields": {
+      "MeetingID": "70B2F31B-FCA2-5361-B3C2-B154378F168D",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.220Z",
+      "checksum": "f6667d4d556eae478941945e0d17185c4eabcde6afa798521cb811dce3750be3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24360691-1B95-5D79-A199-ACEA970ACC20"
+    },
+    "fields": {
+      "MeetingID": "70B2F31B-FCA2-5361-B3C2-B154378F168D",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.224Z",
+      "checksum": "8203158f0ac8acadd7f46115b87bfe338a0d4059da937f24809c05457f8d3b4c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D3D3F9F0-8500-59DA-98C4-7BFBCA1F940C"
+    },
+    "fields": {
+      "MeetingID": "70B2F31B-FCA2-5361-B3C2-B154378F168D",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.239Z",
+      "checksum": "dc630e056315905e90949f83681cdb33d0774dcb6a5fcc21dc2e11e9bafaae90"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0B99E3B-9514-53DD-BD7D-6E2F7E05D4D7"
+    },
+    "fields": {
+      "MeetingID": "1615C1D2-DA18-588B-BECF-B0CF54ED9D26",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.229Z",
+      "checksum": "1d9d2e15196692735acb63fde2e1ed5b2decdbe66da092ec176724beed0d57b2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "54F66ACF-2DCA-5CB8-9173-49B6BA81D0BB"
+    },
+    "fields": {
+      "MeetingID": "1615C1D2-DA18-588B-BECF-B0CF54ED9D26",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.234Z",
+      "checksum": "19512b5ae42bf86edc124fc5903439b0bf61763d91cc9d24b744d69f25388a7b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44FE314B-319D-5744-8EA6-8BFF1907E49A"
+    },
+    "fields": {
+      "MeetingID": "1615C1D2-DA18-588B-BECF-B0CF54ED9D26",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.243Z",
+      "checksum": "2eed999f5392b71d4206278631641a5ece38cad7ca9f065bc33696f38a0a219b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F8268438-0FD3-5D5C-A0CC-4EF14F9B0457"
+    },
+    "fields": {
+      "MeetingID": "1615C1D2-DA18-588B-BECF-B0CF54ED9D26",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.247Z",
+      "checksum": "eccc7a06401eb499aaa2c96f023a1af19b8cf4585558b58a2dd4f96d8befd6da"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08B8D116-194A-5595-BB6F-8DF288BB8A8F"
+    },
+    "fields": {
+      "MeetingID": "135B9AFA-4440-50EE-AFD0-A82453579A3F",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.254Z",
+      "checksum": "5759776c6b6c02f838fefcd6d0065724546d0f8d47dd5cb1e6613f99a507907d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "96A84D86-9C1B-56F0-830A-B0C61D4FCC47"
+    },
+    "fields": {
+      "MeetingID": "135B9AFA-4440-50EE-AFD0-A82453579A3F",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.251Z",
+      "checksum": "31fb92f86349c701f6e7b4142ac6329e88b3227f6d46d75c30eb83d9edc5e360"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5576CE6E-9CD1-51B8-9EA6-2DE8B05AC5C4"
+    },
+    "fields": {
+      "MeetingID": "135B9AFA-4440-50EE-AFD0-A82453579A3F",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.264Z",
+      "checksum": "fe7600f60a75afd09d754dd51c0ce348285e0dee07fa13769d2180064d1bafbc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "045ECED7-862E-54BA-94B9-5F4517564759"
+    },
+    "fields": {
+      "MeetingID": "135B9AFA-4440-50EE-AFD0-A82453579A3F",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.270Z",
+      "checksum": "fe9584cccc87c445e7bbecec434dc3c02e38abfd054eba33371f7d8151bd6060"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "48D2E7E2-96D1-5EAD-A502-696D117840E9"
+    },
+    "fields": {
+      "MeetingID": "3EF5F09F-F578-570F-99CF-BD018E75A767",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.274Z",
+      "checksum": "63692fb76e3f9908a61a11bfc7d0c92ee026a2f7e19f925ebf7383c245afcda3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65EDE0E4-AC19-551A-9C6C-2F8D9A5CFC7C"
+    },
+    "fields": {
+      "MeetingID": "3EF5F09F-F578-570F-99CF-BD018E75A767",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.288Z",
+      "checksum": "0d1fac69dd818c8388fc1e81c338ab739d3e0aa4ee3b78680f2c4ae7df48a101"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4BC3AB6E-25D8-5405-A7FC-1DF2F4797892"
+    },
+    "fields": {
+      "MeetingID": "3EF5F09F-F578-570F-99CF-BD018E75A767",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.279Z",
+      "checksum": "4bac2e3bb2be0e920fe84009b3d3ddcc2fc18f7f7b22032cf93e7b4349ea8a73"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1ED9FAC0-B623-5B95-8B39-1399B93AF340"
+    },
+    "fields": {
+      "MeetingID": "3EF5F09F-F578-570F-99CF-BD018E75A767",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.283Z",
+      "checksum": "da97c3afeb87116d2449fde559dae3acf5e0e1fa49c50b0532afa3721d139408"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D111224F-2F05-5392-B565-2584DD55C056"
+    },
+    "fields": {
+      "MeetingID": "3EF5F09F-F578-570F-99CF-BD018E75A767",
+      "Sequence": 5,
+      "Name": "Motion: Form a working group on member feedback",
+      "PresenterPersonID": "461E5FE0-3553-596A-830E-DF7F2E0A4DB4",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.292Z",
+      "checksum": "74132b3a198d92a45a71642efbfb482ddbba3297e1634451ad7ebb1bc7c00aec"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7A35219D-14EE-5A43-A0AC-A983E972C6B8"
+    },
+    "fields": {
+      "MeetingID": "853B5323-FCF6-5DA8-956D-B7EB2760306A",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.297Z",
+      "checksum": "01e21fc2c4b8e12b535c4ead6b4b681f8916fd085ed323b17a466f9f7c330a3d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF944001-AAC0-5FAC-8564-EE02067D7474"
+    },
+    "fields": {
+      "MeetingID": "853B5323-FCF6-5DA8-956D-B7EB2760306A",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.301Z",
+      "checksum": "3dcdcd09091eea33faec77b15612fd82089c8bce83aa304b9c7c2653e43bce06"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DA6591CF-45B3-58E8-AA50-82192362D117"
+    },
+    "fields": {
+      "MeetingID": "853B5323-FCF6-5DA8-956D-B7EB2760306A",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.304Z",
+      "checksum": "149aba623a5b9b88e56a30b6d144069e659a26d8250d8f8dca1aeb31ee815636"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7E5BE38B-6CCF-5015-A061-F746B87C9E84"
+    },
+    "fields": {
+      "MeetingID": "853B5323-FCF6-5DA8-956D-B7EB2760306A",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.315Z",
+      "checksum": "af592e0e66d2ec15ec422ea22fddb1eeaf6b8a551613e846954375f024d205f5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F5227A23-CB76-59E4-810F-1E7FCBF399EC"
+    },
+    "fields": {
+      "MeetingID": "853B5323-FCF6-5DA8-956D-B7EB2760306A",
+      "Sequence": 5,
+      "Name": "Motion: Publish the draft guidance document",
+      "PresenterPersonID": "A5B841FC-5FAC-5C15-84B8-01E923FDC052",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.319Z",
+      "checksum": "ef4fc9ab8d4e2869921b5e90f9b037f6f4d893533335f100725132cb2ee091d9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "53DB0979-993A-5413-9E0C-1AA3CE6D5A42"
+    },
+    "fields": {
+      "MeetingID": "30CC4BFD-6D87-5E54-8EC1-412DD51CBF96",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.323Z",
+      "checksum": "3137d6f0c8aea3c66895dd56d1fe274d7980c1b0f7e44dfc0e0b6677574fc2a9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "333BD30D-DF0D-5783-B05C-0892DEF5B3D6"
+    },
+    "fields": {
+      "MeetingID": "30CC4BFD-6D87-5E54-8EC1-412DD51CBF96",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.327Z",
+      "checksum": "66d977318d2e59c07954ecd82f9466cf67ad3a0a52e8dbb97d25fed6c8665ded"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D55108E-0280-5744-87D1-2C9B5DA35479"
+    },
+    "fields": {
+      "MeetingID": "30CC4BFD-6D87-5E54-8EC1-412DD51CBF96",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.344Z",
+      "checksum": "fbc78d65368412a3550e9137b2f0d9315c2efee95ac64a80f1aaa2502cd57800"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3FC60137-A2CD-5A76-8AE1-3560638F9270"
+    },
+    "fields": {
+      "MeetingID": "30CC4BFD-6D87-5E54-8EC1-412DD51CBF96",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.331Z",
+      "checksum": "fc75d8ca2e2c85268394a1ac672f1d74928e1fa12a9cce932ac33a980eaa7c13"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "36F92B33-4A4E-5399-9C86-A9ED601CC8D7"
+    },
+    "fields": {
+      "MeetingID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.335Z",
+      "checksum": "0e2a7c9c3208ee8c8ae8fd2f38464e00da690a09cfe97290d020c2c05b2ae122"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A9223CCA-7E50-518C-B649-386B8629BD06"
+    },
+    "fields": {
+      "MeetingID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.340Z",
+      "checksum": "413db248e9c4757c9b794213226f2a8323289dfa5f6b36d3ecb91441f08640c4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5321366-057D-5E91-B02A-CD57DFAFF3A2"
+    },
+    "fields": {
+      "MeetingID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.348Z",
+      "checksum": "6968eb83b3ba9869f9ebb8552a1090dd48061147c3239b3818f331e74da173f9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "89B07DCA-3183-5F44-A156-93C60AC20B48"
+    },
+    "fields": {
+      "MeetingID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.351Z",
+      "checksum": "a16a4690703a55467710a6bed58a404ebdc3c46729003b74304042134c1c2d19"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B87DED33-9237-5FB6-A7C2-7B7A11CA9B45"
+    },
+    "fields": {
+      "MeetingID": "69516A4D-37D6-5AC8-984C-ACD4F2F85F90",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.363Z",
+      "checksum": "e500595446f643b9e23dc540a143a07d933209213197b21dad8e44f215b88f97"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C1F291DB-1CBB-591A-9F6F-76FF8801E8E6"
+    },
+    "fields": {
+      "MeetingID": "69516A4D-37D6-5AC8-984C-ACD4F2F85F90",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.371Z",
+      "checksum": "af5f06f581aeb103de25bf5503411800f442d47b775ed3689748a81b375256cc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "66441345-3F79-5F56-96B2-ED1A8471CAC3"
+    },
+    "fields": {
+      "MeetingID": "69516A4D-37D6-5AC8-984C-ACD4F2F85F90",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.367Z",
+      "checksum": "34707f46482287e7467b2ef6c1fcd963397406fefca854fc3da86e2a80aa35ea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "471789B1-F6D9-5922-82BF-DA17122CE505"
+    },
+    "fields": {
+      "MeetingID": "69516A4D-37D6-5AC8-984C-ACD4F2F85F90",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.374Z",
+      "checksum": "ca48fdf99b790108b531b3ce28b2758db5494400aeb1239c5b2ece8b0527e334"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FCABE883-D841-5EFC-987D-D6ED6235DD12"
+    },
+    "fields": {
+      "MeetingID": "07508716-B8C2-5F46-B770-58AA53F5BF24",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.378Z",
+      "checksum": "4130e2f62af17da33b4e9c760ed126478f3ac194391d99284b6ca16ea29a26cf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D2317133-FF69-5357-AB4D-DDFA778946D8"
+    },
+    "fields": {
+      "MeetingID": "07508716-B8C2-5F46-B770-58AA53F5BF24",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.382Z",
+      "checksum": "a26aaa8de23018cb38d104b83a6ec998deb2997a35e7efb3ba21f7ecdacfa25e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09C72DE3-063E-58F7-BFF6-148032741B50"
+    },
+    "fields": {
+      "MeetingID": "07508716-B8C2-5F46-B770-58AA53F5BF24",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.398Z",
+      "checksum": "ea02f598a264687f5f21dd2d925a7865db4d5c09979fb64d2d601847f8040bfc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E2E6D0BF-5193-57E6-AEBC-13EEBA068F07"
+    },
+    "fields": {
+      "MeetingID": "07508716-B8C2-5F46-B770-58AA53F5BF24",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.387Z",
+      "checksum": "8cbfb4afda7ff8fded886f4c1940c34b3856942514aca12902e2d951b6d823a1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F6C58C60-160A-5034-A086-965F53EFAF9F"
+    },
+    "fields": {
+      "MeetingID": "07508716-B8C2-5F46-B770-58AA53F5BF24",
+      "Sequence": 5,
+      "Name": "Motion: Approve the quarterly budget request",
+      "PresenterPersonID": "07255377-8B30-5E98-B9AC-10040BA112CA",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.391Z",
+      "checksum": "c7d82aa8998552ad814fb0f87b2ccdbc4dc94ed802cfa3e4f99c5ae537055d82"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "62C1A5FC-2106-5C2F-A11A-21153AAB534E"
+    },
+    "fields": {
+      "MeetingID": "519E1137-C2BB-56C1-9C82-1F29887D17E8",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.395Z",
+      "checksum": "44964ecc460e56bb90b1ad6dbd72156fb3c653f4c8b677a4aac3cfe16b966c93"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "586A9E39-587C-54B9-B9C9-4F56DCEC7CE6"
+    },
+    "fields": {
+      "MeetingID": "519E1137-C2BB-56C1-9C82-1F29887D17E8",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.409Z",
+      "checksum": "2d02d00d01782846c23fb63ef0289d5af7084ba19d50fd299ec02fa231c813f1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75821B7B-7133-5E60-81AA-8D98550D2034"
+    },
+    "fields": {
+      "MeetingID": "519E1137-C2BB-56C1-9C82-1F29887D17E8",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.413Z",
+      "checksum": "c62a5983ac5581da5f0f27005017c144d4a75d56f66625b221da0e3a6d8112f0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "814BCB2E-95A8-5C84-B4D6-2A95E13BD64F"
+    },
+    "fields": {
+      "MeetingID": "519E1137-C2BB-56C1-9C82-1F29887D17E8",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.418Z",
+      "checksum": "47aad40a503034d2ebc3268ed247d2db92def60cdd26ef83f8414533316e79f8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "264CA6B0-AFF0-51DD-9473-8C38DD8A7673"
+    },
+    "fields": {
+      "MeetingID": "519E1137-C2BB-56C1-9C82-1F29887D17E8",
+      "Sequence": 5,
+      "Name": "Motion: Adopt the updated meeting cadence",
+      "PresenterPersonID": "0ABB7909-50BB-5441-9B4F-E1CDAC691507",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.422Z",
+      "checksum": "63809de49a75d43a8a4d1b3c042a7ceb92cc77bae25c170dfd4383866ee56506"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42CF9309-3BC7-5059-8BD8-ADCDA6043F7C"
+    },
+    "fields": {
+      "MeetingID": "0A4242E3-5863-50F2-A005-0166824C9B32",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.427Z",
+      "checksum": "a41491361018619700bf3631937a2af9cc930d57d66de492cef78b95bad1544f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7A64419-E33D-5D44-A098-1ADEF1F91D71"
+    },
+    "fields": {
+      "MeetingID": "0A4242E3-5863-50F2-A005-0166824C9B32",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.431Z",
+      "checksum": "9c7c89139d28c7ce6ee1b24b5dc7a470f4d40c1356a6a86578d13e53fdab5368"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A19FD914-3D05-52EE-A02A-E1D96986445F"
+    },
+    "fields": {
+      "MeetingID": "0A4242E3-5863-50F2-A005-0166824C9B32",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.436Z",
+      "checksum": "806f7e8c5de94129014cc0d52ec7a97c3b7bdc2dc19685cd6980c173c7b47682"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "615BA4FB-DB9F-54B1-BE9A-880ED8CF1A63"
+    },
+    "fields": {
+      "MeetingID": "0A4242E3-5863-50F2-A005-0166824C9B32",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.440Z",
+      "checksum": "4f5b65bd41a42888da37400f39b87046a014320af407d5334361c18c463ccc2a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42B36D94-925F-5AB0-BBC7-D76E7A8C6F27"
+    },
+    "fields": {
+      "MeetingID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.444Z",
+      "checksum": "dc0afd9d2ef21f5dae8f650072f673a617c41261506ff41392c69605e6f51a38"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "78824FA8-ECDA-5659-B9F1-9680BCE7D792"
+    },
+    "fields": {
+      "MeetingID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.447Z",
+      "checksum": "7b2a1b7e9114deddbc1ab30e25e8959045672ee9900bc48d1e8798008d4a3a21"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8093F32A-E346-5AC9-ADFC-AD39DD4E2DB7"
+    },
+    "fields": {
+      "MeetingID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.458Z",
+      "checksum": "875450f7a142684603dae4c7e2f8367a53b8ca562d5575b3d275d173a0e0b9d3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7E9CFCB-81D7-5043-B729-D9FCBF9F7F85"
+    },
+    "fields": {
+      "MeetingID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.463Z",
+      "checksum": "fa1e36aab6248445c7ee25b8c3d1811dbc5f3c53b6414c87a987534c0b251140"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DFBB7142-9F01-5A66-94CC-752644B69665"
+    },
+    "fields": {
+      "MeetingID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A",
+      "Sequence": 5,
+      "Name": "Motion: Adopt the updated meeting cadence",
+      "PresenterPersonID": "A52270AF-36AD-50CD-87C8-9A2E6ED946A7",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.468Z",
+      "checksum": "9b5ed93cbcc9f51920741fb2816528727a4fc53f11285165bdc46b257a3594d2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CF9C0A47-5E9E-55CC-98DC-0D0A518C209A"
+    },
+    "fields": {
+      "MeetingID": "2A55C348-66E7-5878-B636-B7E7159D6EBF",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.473Z",
+      "checksum": "3d7785be5a6b22eaad22a0186a65c068a766240b36f163b1467596d83eb19bc2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "69920853-831A-5889-BC2F-BA5EFBAC51C8"
+    },
+    "fields": {
+      "MeetingID": "2A55C348-66E7-5878-B636-B7E7159D6EBF",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.477Z",
+      "checksum": "84bd912524d5d709cb18ac582686d8006fe660b3ccfec65b5335f9a93d8d8937"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "63C1252A-72E6-56BE-89A1-7889588735CD"
+    },
+    "fields": {
+      "MeetingID": "2A55C348-66E7-5878-B636-B7E7159D6EBF",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.481Z",
+      "checksum": "7a89eb41d4077be2908f176ed40ea094fc21e3ea7ca08f1086a4e463bb51667c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "07481CC6-B419-529E-97D7-8BFB7138B5E6"
+    },
+    "fields": {
+      "MeetingID": "2A55C348-66E7-5878-B636-B7E7159D6EBF",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.487Z",
+      "checksum": "7a1d35c109b346f2f26ac537c1aebc46edd0375f9d8206e79bb7066ca794b217"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2BA2865E-2238-521E-BEF2-446B7F645BB7"
+    },
+    "fields": {
+      "MeetingID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.495Z",
+      "checksum": "f192864c5a7ff92b94f071959c2089954b5e728a419bae139ae8672e78c52a10"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F3BBBEAC-6583-5E1B-AB70-1E705631DEFC"
+    },
+    "fields": {
+      "MeetingID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.491Z",
+      "checksum": "1bf08b3e2dc21e8e0346fdf5ff8589d1b93350074530113fafe5859bad44528b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FC241690-1E5D-57B4-B8B6-2D5CB46436C0"
+    },
+    "fields": {
+      "MeetingID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.497Z",
+      "checksum": "b5c586df513eee640c955b272bbb3d3c7e8485b88746ea77b3949a528fc8f970"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75E103AD-4436-56AB-AA2C-41E0062415EA"
+    },
+    "fields": {
+      "MeetingID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.509Z",
+      "checksum": "841588433fea23bbe350f960a6fd114e6e04b3a1548ea09c738035fa97cbe240"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AFADF435-7E60-55E2-98F0-4A3EFD4EFC24"
+    },
+    "fields": {
+      "MeetingID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181",
+      "Sequence": 5,
+      "Name": "Motion: Form a working group on member feedback",
+      "PresenterPersonID": "0ABB7909-50BB-5441-9B4F-E1CDAC691507",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.521Z",
+      "checksum": "3e62608336021246ca1c4f9f2151e0e04184bbcd0967e4ee5bb75b8831f52dce"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "50FD96A6-C321-5EA7-B869-6203936973D9"
+    },
+    "fields": {
+      "MeetingID": "DA3903E1-2E59-51AA-B66B-3F4D93F42D79",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.513Z",
+      "checksum": "9fc8fd8ab0c2687b039d44c88002795c2a1d4c87366f80a8af3bd644056e12fb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7441B37-1CFD-5328-8053-FF7B4BB75A0E"
+    },
+    "fields": {
+      "MeetingID": "DA3903E1-2E59-51AA-B66B-3F4D93F42D79",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.517Z",
+      "checksum": "02e95056afedf61debb24bd5c7475f59fc5b2f7495c1e54b6bb0015eb5d01763"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ADC85493-4583-5A26-99C4-1F82526B7FDB"
+    },
+    "fields": {
+      "MeetingID": "DA3903E1-2E59-51AA-B66B-3F4D93F42D79",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.526Z",
+      "checksum": "9576d4f7ea99701787d7a8970e45f24517342b17aaea9e2f0fcd9bc353892b66"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BA7A304F-318D-5A1D-AE0D-A45CC8643082"
+    },
+    "fields": {
+      "MeetingID": "DA3903E1-2E59-51AA-B66B-3F4D93F42D79",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.530Z",
+      "checksum": "2782b87ad03a3eff7c12beb9e2e5efcb3b80ff73e615744c9a591314a7c09d91"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6A3E6E80-2569-5CEB-8B01-CA805D61F685"
+    },
+    "fields": {
+      "MeetingID": "1CEBD69F-B704-5771-AEC1-2F95ACA3CD13",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.535Z",
+      "checksum": "992af677ed8aae490ac034daeefb6cf1026ddee153e1683284e073fb32ea5d9a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FE8A18E-513B-5578-B1FF-A4D6A6BF92F1"
+    },
+    "fields": {
+      "MeetingID": "1CEBD69F-B704-5771-AEC1-2F95ACA3CD13",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.544Z",
+      "checksum": "ab4634e8cf6d8a01096f0ec0d6af79d25483d6cfdbe7bdcb7a0e5d257c48fae9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3F44AA9D-A373-5A65-9C9C-44CD2B43B723"
+    },
+    "fields": {
+      "MeetingID": "1CEBD69F-B704-5771-AEC1-2F95ACA3CD13",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.539Z",
+      "checksum": "1d63426b8fa36f3d03be4f5c8164d131eb0f846cc114d4e66a16f9170c57e3e5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EFF9B508-3DB9-5506-AEB9-6E869DFD7B35"
+    },
+    "fields": {
+      "MeetingID": "1CEBD69F-B704-5771-AEC1-2F95ACA3CD13",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.547Z",
+      "checksum": "6cc5fd6de7f4fb48fcb0edb5a79025303245bb394bae49d376a4d2aac804aa12"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3A38482A-8D3B-5BD6-A621-BB5537D0AD14"
+    },
+    "fields": {
+      "MeetingID": "DCE3C72C-F4D2-58BC-AA77-9229676505E4",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.558Z",
+      "checksum": "5c126e6fe7cd95bf0b987a070d9b3bf31fba0898453718881b63ce5e62f7a562"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "732A1EB6-40F2-5B96-BF36-AD6569696A07"
+    },
+    "fields": {
+      "MeetingID": "DCE3C72C-F4D2-58BC-AA77-9229676505E4",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.568Z",
+      "checksum": "24abbe50088d5ff56bd032c1dc521c70e7777eb25db119b1465d194c4691d865"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E5A6B75-6BA8-58C6-9BF8-6213C485B275"
+    },
+    "fields": {
+      "MeetingID": "DCE3C72C-F4D2-58BC-AA77-9229676505E4",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.563Z",
+      "checksum": "67ba7663513174f8d07787e1c35de76e07264c39f43c82dbbef8c2379fa5fe7c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6F64162B-A055-5812-BD77-D97AFC2F5E46"
+    },
+    "fields": {
+      "MeetingID": "DCE3C72C-F4D2-58BC-AA77-9229676505E4",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.581Z",
+      "checksum": "1cf8967ce0b252cb7a686d7f2a2d5bf92d3ead32c826b94a1c74c02bc88b1b8d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51F09CFC-6B28-51AF-944A-61948DC1EF0A"
+    },
+    "fields": {
+      "MeetingID": "A71368DE-B67A-50E9-9A52-07FA382BC139",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.572Z",
+      "checksum": "d2ecfda09d8957edf65c999279b5b2d2dfb0278f035c4063264e215d4a173056"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "662220DF-D004-58F4-A73D-D7C1FC00D421"
+    },
+    "fields": {
+      "MeetingID": "A71368DE-B67A-50E9-9A52-07FA382BC139",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.577Z",
+      "checksum": "5d008883b764b2f2a254e885135c8c68325badee11428336671c4e74298dd903"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F0FA96F-DA8F-5054-8E5D-5AB0768FF3B1"
+    },
+    "fields": {
+      "MeetingID": "A71368DE-B67A-50E9-9A52-07FA382BC139",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.585Z",
+      "checksum": "e7619e7dd41866330dbd7730139ed7a0ee5022dffd7fbf7e0b4c3aef463228b9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9DC67A0C-1339-54D7-AB6F-2802DB4AFC5C"
+    },
+    "fields": {
+      "MeetingID": "A71368DE-B67A-50E9-9A52-07FA382BC139",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.589Z",
+      "checksum": "494cfae476a348c396d9896461e6df3e91205b9d017a9eb89ee278e4fc9a14a5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8D590CD8-445E-5C35-9240-45A49DE8E24B"
+    },
+    "fields": {
+      "MeetingID": "F18BBA60-3973-5228-A30A-B6347AA5C77A",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.593Z",
+      "checksum": "b8973b1ae39dd2a64630201f49e87922a1e958b0b516c883b001749b45096f45"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A25870E7-1094-5321-B245-6EDEBC01BB33"
+    },
+    "fields": {
+      "MeetingID": "F18BBA60-3973-5228-A30A-B6347AA5C77A",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.596Z",
+      "checksum": "f2a819ea747392804c32b5666769f26cb06b8b1f13c88af4e2f486b7828f92de"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0F9A8EA1-3729-505C-A18D-7B8AB65E3F99"
+    },
+    "fields": {
+      "MeetingID": "F18BBA60-3973-5228-A30A-B6347AA5C77A",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.608Z",
+      "checksum": "c91042b536ad2e11951d472ad36120856eb3c96d2803967ca8b2b78a6995a476"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B40A0589-655E-5AA1-97F8-AD0C6E897399"
+    },
+    "fields": {
+      "MeetingID": "F18BBA60-3973-5228-A30A-B6347AA5C77A",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.612Z",
+      "checksum": "0a24bdb84781d8f934ba1dcfc5ce6f39738184833729d1074607a23578029975"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24ED2A61-4D74-5BA5-A6D2-12302E52CFF7"
+    },
+    "fields": {
+      "MeetingID": "F18BBA60-3973-5228-A30A-B6347AA5C77A",
+      "Sequence": 5,
+      "Name": "Motion: Form a working group on member feedback",
+      "PresenterPersonID": "0C7964B4-6A26-5D45-B05A-D8C99EA826B5",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.642Z",
+      "checksum": "0338b362a91e606cda566de90cbaffe0418dbe796c573f88a811768d9d0f5242"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F8C9558-46B8-5557-B10E-8F842F64F63F"
+    },
+    "fields": {
+      "MeetingID": "D86CD7C4-C886-5847-B2CD-D0FA47743A42",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.617Z",
+      "checksum": "9069e7d009e015d34f5fda244bf4b9b758b27961e4a0e8a2d1076528cea8898a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44B00872-8064-55CD-A642-93C91DFFC2FE"
+    },
+    "fields": {
+      "MeetingID": "D86CD7C4-C886-5847-B2CD-D0FA47743A42",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.621Z",
+      "checksum": "90f22888af44aef13fd0c599b80e7100048a09084b8efe19c782e126fed0d282"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D772E721-E67E-5DEC-9DD1-AF48E85ED8DE"
+    },
+    "fields": {
+      "MeetingID": "D86CD7C4-C886-5847-B2CD-D0FA47743A42",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.625Z",
+      "checksum": "489466d33cca38b0d1f14cc7c3cb9205154b67c3e438836f44d09bb6853d409f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DE2619F4-16FB-54F1-B9F2-7871CAF5882E"
+    },
+    "fields": {
+      "MeetingID": "D86CD7C4-C886-5847-B2CD-D0FA47743A42",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.630Z",
+      "checksum": "b50cdd6c24ac03a80b21fd1f238a92903abd93f4a78b844291456cd35835186f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6FFB9391-3D1E-5B0E-8A95-2AAEA8C3B364"
+    },
+    "fields": {
+      "MeetingID": "45FC0C2A-8C8A-5EE9-8F40-F6D6AC194624",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.634Z",
+      "checksum": "44f56dd5660d539a631cbc82abf3cc11f45f26db2c5282ee24ba366632ddccee"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D444FF1B-B7F0-5729-AFC6-FCEEC5EAF90A"
+    },
+    "fields": {
+      "MeetingID": "45FC0C2A-8C8A-5EE9-8F40-F6D6AC194624",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.638Z",
+      "checksum": "db99e7df2a12db88f6d95e0c3383739f9549a59fa2fe93b63d12a800c0fdb0d2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8EF9406E-E161-5F6D-88AC-4E7855D44BCD"
+    },
+    "fields": {
+      "MeetingID": "45FC0C2A-8C8A-5EE9-8F40-F6D6AC194624",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.645Z",
+      "checksum": "9321b30344312590fc5d5a641d8615323280161ec21bfa489cccd5527812a3f7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "342D3DED-1280-5F15-B1E4-19472786454D"
+    },
+    "fields": {
+      "MeetingID": "45FC0C2A-8C8A-5EE9-8F40-F6D6AC194624",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.656Z",
+      "checksum": "9dac5e8b6be84fc93eb3ca2b2b0a8711b4f85516f6b5e09eb66ff45e6764c1a6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A983D393-7533-5B86-94FF-1F9B92E34A1F"
+    },
+    "fields": {
+      "MeetingID": "A9D37828-DF1E-58C7-BFF5-8605FCAAC043",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.660Z",
+      "checksum": "979bd640336b435cd01d43a7ed6d5976eb1af69e4508f729056e6d542b14fb74"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9C442AEE-4239-5EE0-B4EC-7A355A2D2A54"
+    },
+    "fields": {
+      "MeetingID": "A9D37828-DF1E-58C7-BFF5-8605FCAAC043",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.665Z",
+      "checksum": "c6bb3bcb16cf53307c3ab89b7cc32774830f056d07d5e84b76c38d4d30f46fd8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3DAB7998-7470-5F52-A01B-F8AFAE3A9459"
+    },
+    "fields": {
+      "MeetingID": "A9D37828-DF1E-58C7-BFF5-8605FCAAC043",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.670Z",
+      "checksum": "ea83c9494c4d226563d3c24bbbc41d616ed6c400abc1b6e9b069b40fa6021c5c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A65B15F4-77E5-5933-9803-78EB993FEBEE"
+    },
+    "fields": {
+      "MeetingID": "A9D37828-DF1E-58C7-BFF5-8605FCAAC043",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.675Z",
+      "checksum": "ea1c4d179baa04f7437ce6994d045a1c6ecc119a6b53745500e73489f347b325"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB3AAF3A-BA83-56AA-A141-30F98149E85F"
+    },
+    "fields": {
+      "MeetingID": "0D012F2E-5B55-5FA6-A6AF-CAF108414621",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.679Z",
+      "checksum": "b338c39d7ec07e95983a2bfa2c5610239e55ca30c69445a3b3a004dcde3d68d6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9E4ECA33-A889-5EE4-919D-AB8B62B95D69"
+    },
+    "fields": {
+      "MeetingID": "0D012F2E-5B55-5FA6-A6AF-CAF108414621",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.683Z",
+      "checksum": "6a7f0956f88d249889bae6af290c239674e708af646d13c95dc8f6fd45b82ec4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ABB1670F-31D4-5B87-85A2-BDE2D95401FD"
+    },
+    "fields": {
+      "MeetingID": "0D012F2E-5B55-5FA6-A6AF-CAF108414621",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.687Z",
+      "checksum": "1b278e9c12a77b30d317b2ab41e7fed8a8ec93988b33dd22d7162bb80ad7c4f6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4BA32AFE-2330-56D5-8206-FCB99A37B44D"
+    },
+    "fields": {
+      "MeetingID": "0D012F2E-5B55-5FA6-A6AF-CAF108414621",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.691Z",
+      "checksum": "152b5b8fe5613db0760248469d338e5f3341633e9737253b00d3fc2e00dc88e7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "319D4C7E-E9AD-5E2B-8E21-33017C1BA0AE"
+    },
+    "fields": {
+      "MeetingID": "E15BEBF9-DF6B-521E-81EA-CDD1C4316729",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.693Z",
+      "checksum": "9123881d2be8b9cdb70cbc8316b4ef8f71fc5f5781f8265b75fe346c0a79cdc8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9376E6EC-32E4-521A-936B-84A8D4E45EA9"
+    },
+    "fields": {
+      "MeetingID": "E15BEBF9-DF6B-521E-81EA-CDD1C4316729",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.704Z",
+      "checksum": "43c21501ce31c7be72eb04fbc14270d5b7d7d7bbb2a30e65143483d66114bca7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AEF6BC1-394E-56A0-83FD-BFA084AEBAB0"
+    },
+    "fields": {
+      "MeetingID": "E15BEBF9-DF6B-521E-81EA-CDD1C4316729",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.712Z",
+      "checksum": "bf136ae167d4045aeefeac64dd94efdda4dd080f0d52a6fac527920c54a68ca8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0DAD7A38-721A-5354-8ACF-0AE1C459C031"
+    },
+    "fields": {
+      "MeetingID": "E15BEBF9-DF6B-521E-81EA-CDD1C4316729",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.708Z",
+      "checksum": "c62537cf8619f34f52cd66ad1900f49d65c33a1a5cfdd6001d1b82ababecb111"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F59D51EF-DAB2-5DCF-9544-7961A6189BD2"
+    },
+    "fields": {
+      "MeetingID": "0D67A300-117F-5775-9290-D921A3D5AA33",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.716Z",
+      "checksum": "cecd6905f191aeee5c449d7494709df185c67a143cbc7988fa30789136753198"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A2D3C72B-8DEC-5A2E-AD53-3148780CC72C"
+    },
+    "fields": {
+      "MeetingID": "0D67A300-117F-5775-9290-D921A3D5AA33",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.721Z",
+      "checksum": "d40fed02c8e3aa84ec226ec2fa3a611fdfec85246b45cfa562065c0d98a085ae"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B9CB5D74-F9AA-59D8-B7C9-822D200DEE37"
+    },
+    "fields": {
+      "MeetingID": "0D67A300-117F-5775-9290-D921A3D5AA33",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.725Z",
+      "checksum": "e6961387ecd6086942261390c4d5ebf378afd8247a9611592470bad1fe21f346"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F4D09512-A4C8-58C0-88AD-993A089875DE"
+    },
+    "fields": {
+      "MeetingID": "0D67A300-117F-5775-9290-D921A3D5AA33",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.729Z",
+      "checksum": "c6c6cc3fea131c64e89bd7acadb876b38c7895a643dfa688da9c55e5e29c48f4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6C9CD357-3657-5CE2-8EA8-6F395EEF8075"
+    },
+    "fields": {
+      "MeetingID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.734Z",
+      "checksum": "87bc2203fb57a134e4af254a048258cec04bdec1348b8888dc77a458ebd4c3b0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01D5401F-F523-5FFF-A7B2-3987BA25CA96"
+    },
+    "fields": {
+      "MeetingID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.738Z",
+      "checksum": "d529d673eea176462864f49576931190c320cd220048714bd02d526a2067e11b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04094B98-4C16-5A17-AF61-73C0A36D1669"
+    },
+    "fields": {
+      "MeetingID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.741Z",
+      "checksum": "81367be64c49f35f5da64b68336c15a6c77cd2263e7f32bfedd9b19f11278659"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59A9486B-3640-5EA7-A91F-553098AA5C92"
+    },
+    "fields": {
+      "MeetingID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.753Z",
+      "checksum": "112feb2e5c3bd856acdb26f4b189bd937e31865842181140998b41d9553db2ff"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60CE6BB4-2499-5D63-81E4-8A3CD50DB58A"
+    },
+    "fields": {
+      "MeetingID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F",
+      "Sequence": 5,
+      "Name": "Motion: Publish the draft guidance document",
+      "PresenterPersonID": "6EB548E6-BE0D-56A1-A61F-0F5001C0FE27",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.757Z",
+      "checksum": "f293ac079c952219a0d82cb5e1d56854daf8e1575927f41acda88cb87e8074f1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5024B96A-1EC2-5746-86DF-EB5745BE3AC3"
+    },
+    "fields": {
+      "MeetingID": "4079E7FD-8CCD-5FC5-851D-53B6F6B917B5",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.762Z",
+      "checksum": "83c44b1561b3575e78cd395761f8a38a006c85d96f400e3adb925f3d381b4433"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E6BDBCF5-BB04-5C1E-BABC-C5D44895D27F"
+    },
+    "fields": {
+      "MeetingID": "4079E7FD-8CCD-5FC5-851D-53B6F6B917B5",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.767Z",
+      "checksum": "fc9f5c99eefcb761cbda087e0951ba9087330383cedba384c656e6b28fc3a4a2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BBC68AC0-F2E5-5D6B-967A-1A6397C62DC6"
+    },
+    "fields": {
+      "MeetingID": "4079E7FD-8CCD-5FC5-851D-53B6F6B917B5",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.771Z",
+      "checksum": "245104b5f1c8794541b0afab2dad3bc9580657b7a42cabb528d5356d96418b22"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "387A71E8-80DC-5DA7-92C4-BBFA634C1BE9"
+    },
+    "fields": {
+      "MeetingID": "4079E7FD-8CCD-5FC5-851D-53B6F6B917B5",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.776Z",
+      "checksum": "02e6d1e5ffeda862eee1538c2e7647126c6f686bf80f4aff04a9f8045992b584"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E265131C-BB02-5647-B1EF-36A87E1A53CF"
+    },
+    "fields": {
+      "MeetingID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.780Z",
+      "checksum": "1ca0b46874f692aa96cfc43e87e9654df027eae1ba02372c38e97185773d6602"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C51E9056-7F37-5154-865F-E28EEA5AE0ED"
+    },
+    "fields": {
+      "MeetingID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.785Z",
+      "checksum": "fcbdd7fd4cea0ddea3bb83cfe72e9e0b4a1de6fcfb8aaca18c41f2edb3b5002b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EAE6E7F7-9747-5099-9635-8BD670FB8BC4"
+    },
+    "fields": {
+      "MeetingID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.789Z",
+      "checksum": "581621ffb54946d549c4d2bda4bbd2547d6f26dd0c769907bb3768aca52a3e0c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "780C147C-9231-5979-A972-2A6194A21E65"
+    },
+    "fields": {
+      "MeetingID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.791Z",
+      "checksum": "c317a0f479a739b794557d2547fb64ed6f20e49bf8d7a028a8d8e024f24365ad"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A6B4CA91-CE1A-5623-B926-3FE2497BB89B"
+    },
+    "fields": {
+      "MeetingID": "3C0CD206-DB41-5936-8E69-0812577D8A14",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.802Z",
+      "checksum": "e31e9b671132eee5105b812040d8e26a27d41a3e1479ccfffc3c52d3dd0ff956"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0B4F5FAD-F809-5D5D-B666-41ADF0BB32B3"
+    },
+    "fields": {
+      "MeetingID": "3C0CD206-DB41-5936-8E69-0812577D8A14",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.807Z",
+      "checksum": "fa745300c74b0510af860a6bd5089bf1f29035e1dc131eb5f31147b26dd6f04e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C500AB30-313F-5EF6-8AD5-FDD28A5F9A54"
+    },
+    "fields": {
+      "MeetingID": "3C0CD206-DB41-5936-8E69-0812577D8A14",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.812Z",
+      "checksum": "3775a960ec963359c8e0cf84c2dd83f71cc0d1f7664e37fc7d6b9a9d5e1e8d28"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AEF7FB9-6714-5170-95DC-D1868B87B059"
+    },
+    "fields": {
+      "MeetingID": "3C0CD206-DB41-5936-8E69-0812577D8A14",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.816Z",
+      "checksum": "0967407fa0602cf926c12ad6764be2e7e37452eb55067850b1917fef967edb20"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93B1AA06-E320-57FC-9938-86700824CA70"
+    },
+    "fields": {
+      "MeetingID": "3C0CD206-DB41-5936-8E69-0812577D8A14",
+      "Sequence": 5,
+      "Name": "Motion: Publish the draft guidance document",
+      "PresenterPersonID": "0085D456-ED84-548F-A3B0-E06566F60778",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.821Z",
+      "checksum": "27012f1945999e2d4d4b6c09a0d31ad683df55b263d115364acd88e0eda48932"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7DFE90A9-EB8D-5AAC-B1C2-CA4349833DAB"
+    },
+    "fields": {
+      "MeetingID": "B4CDD851-EE66-5D22-A034-2A44B4EB087D",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.830Z",
+      "checksum": "adbc6f104948a2b91bcfc80e17c0cd3216cb04808592121a266a00468738d713"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9A8A7A3A-CF4D-562D-BBC1-711FADBCA414"
+    },
+    "fields": {
+      "MeetingID": "B4CDD851-EE66-5D22-A034-2A44B4EB087D",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.826Z",
+      "checksum": "5a52b3416916542fc97fca70253517c4483c825177a16240db93dcdf0fe19960"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FA361790-43F9-54B5-8079-5CB3362EA9B6"
+    },
+    "fields": {
+      "MeetingID": "B4CDD851-EE66-5D22-A034-2A44B4EB087D",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.834Z",
+      "checksum": "7754439e7a34ca6103d17d1cbe4cdd1fdea400ccff0ded67dd1cfa4677f62275"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F429353D-9835-5A5C-81A0-4FB91EDCA0F8"
+    },
+    "fields": {
+      "MeetingID": "B4CDD851-EE66-5D22-A034-2A44B4EB087D",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.839Z",
+      "checksum": "a8da188c0b7dba36be42c00cff6b197e73f22a1488115438a015ab5cdd8a9497"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5D11A068-3129-5166-B68D-9FBB51AD1CCB"
+    },
+    "fields": {
+      "MeetingID": "D03F7A25-7A0C-5887-940B-A7B89CD47B08",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.841Z",
+      "checksum": "83aeb26c7aa8bc66c5ff4e5482568311689cc86caf9f1a394a91ef4fe5f5932e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "992AB331-1D75-58DE-ACF6-D01D87EB8901"
+    },
+    "fields": {
+      "MeetingID": "D03F7A25-7A0C-5887-940B-A7B89CD47B08",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.853Z",
+      "checksum": "0461b95ffb35ee18267bdbd8c35fec03fce12075ee836c4f3e039bc63c4ed5c6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C13CEA9D-3B2C-565A-BBD0-D5E7FB4FB7A4"
+    },
+    "fields": {
+      "MeetingID": "D03F7A25-7A0C-5887-940B-A7B89CD47B08",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.857Z",
+      "checksum": "0eda133be85e61e47d280b6a0c0a41ffc840b922a612ab42f1cfd9d1d7c9443b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E5AE9C94-229A-5EE9-82BB-00BFB3B6F57C"
+    },
+    "fields": {
+      "MeetingID": "D03F7A25-7A0C-5887-940B-A7B89CD47B08",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.862Z",
+      "checksum": "f8c80468dc465d1f76e099fc872c7e739fa66a202c70f4ccd6755663e1a2099f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "585FC314-BC5F-5090-B1CF-C4F4B1A1DE86"
+    },
+    "fields": {
+      "MeetingID": "1DAE5825-63D0-5285-9143-8DC111A3BA83",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.866Z",
+      "checksum": "dcd70a7738a2866cbd9ef3b528810981fbc40af9b5647351ec2d407870b52905"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01198689-68E1-5880-9DFB-EDA93BB9C8A9"
+    },
+    "fields": {
+      "MeetingID": "1DAE5825-63D0-5285-9143-8DC111A3BA83",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.871Z",
+      "checksum": "3492444b672e9a5c509d9547ea70cf9b7685016dd9b893fa0ef3184c53de2a05"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E74C0934-7845-5C2B-AE4B-E1D03604F42F"
+    },
+    "fields": {
+      "MeetingID": "1DAE5825-63D0-5285-9143-8DC111A3BA83",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.875Z",
+      "checksum": "5fb6e5381d245dfd76ac2420d5073079b9bf5ae855345989e4d982fcad80297c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40D6504F-6231-5926-8C7F-9B3FA44F3D7C"
+    },
+    "fields": {
+      "MeetingID": "1DAE5825-63D0-5285-9143-8DC111A3BA83",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.879Z",
+      "checksum": "b1d5d53aee45620c37546675fb927b4630f01f7d7975bfe4d492d12c9a75a25b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C94AE88F-7210-5BF4-A369-106B6B70CC34"
+    },
+    "fields": {
+      "MeetingID": "0758EAEE-60D3-509F-B695-6AFB473C38D4",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.883Z",
+      "checksum": "5263ef8fdde2acc046be3e8a2ad9b8e788881d72b3e3f8991525263c4dfb176e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83955812-04DD-5BD9-B56A-4F5356D8F6CC"
+    },
+    "fields": {
+      "MeetingID": "0758EAEE-60D3-509F-B695-6AFB473C38D4",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.888Z",
+      "checksum": "c9420d1a4ae4956cace523e46233c9416f477a9479ebd6828b66f7533f1c0478"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3AFDBFE0-EDBB-596A-8FAD-06D001924373"
+    },
+    "fields": {
+      "MeetingID": "0758EAEE-60D3-509F-B695-6AFB473C38D4",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.890Z",
+      "checksum": "e38ec816cc02bbfe2203ca47919b25966de5c5cc692ca098e0bb94f0718e5d1f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E65EE90B-84BE-5C61-8AB7-D3AE49E15BBA"
+    },
+    "fields": {
+      "MeetingID": "0758EAEE-60D3-509F-B695-6AFB473C38D4",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.901Z",
+      "checksum": "1f48ee688c3be2e79af6bf27eb51fb61e18126abddb5d2b6df0cc6805f006b9f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F093E1AE-86A2-5276-80E0-E2AE3495717D"
+    },
+    "fields": {
+      "MeetingID": "5FE5D906-011F-56AE-88AA-1CC6C241604F",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.906Z",
+      "checksum": "6d57b183efa2021320ad87e0e6388445f63fdf084dede72bae9b9fb7ff8956b3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1A0E1D2-3C9C-52A1-95B1-E04A12E44087"
+    },
+    "fields": {
+      "MeetingID": "5FE5D906-011F-56AE-88AA-1CC6C241604F",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.919Z",
+      "checksum": "9ba9bf290982e097f001a1ccfc6bc81263d3a2554c64ea2aa4e237a4008624e6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2AC88395-85EE-5789-97B6-2992A3DD228D"
+    },
+    "fields": {
+      "MeetingID": "5FE5D906-011F-56AE-88AA-1CC6C241604F",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.911Z",
+      "checksum": "1e39e400402e1fb3eb1487f0d890a18e4f84ebe63d0b8347bc4074385054d0ef"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D408F4C9-82ED-592D-BD16-6E72275927AD"
+    },
+    "fields": {
+      "MeetingID": "5FE5D906-011F-56AE-88AA-1CC6C241604F",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.915Z",
+      "checksum": "e19b93218f865b7e01e6007ac036ac6088815b2a3fadfb69f98d407d683c0bb5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4CB1695F-E2CE-5786-BF53-A8D5948F5288"
+    },
+    "fields": {
+      "MeetingID": "5FE5D906-011F-56AE-88AA-1CC6C241604F",
+      "Sequence": 5,
+      "Name": "Motion: Form a working group on member feedback",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.924Z",
+      "checksum": "c277f405d91a2b4b98aa475907b1658c2bc7849ccf5d8c01fd02021e24e42d05"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C9D71678-B9F4-50CF-8DB1-813AF2A3F0B3"
+    },
+    "fields": {
+      "MeetingID": "5FF76945-DC92-54A6-BF6D-31E889C22514",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.929Z",
+      "checksum": "fe2aeacc32231e83cffe48ffd1299eeadb6ab1e8a5bcd10a82ea176502007ebb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3B089DE-7D92-518F-8664-DBFFA57AA1E1"
+    },
+    "fields": {
+      "MeetingID": "5FF76945-DC92-54A6-BF6D-31E889C22514",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.933Z",
+      "checksum": "6ced3cac2f00343c29ddba67e4eb555f42c5a66895cbb40bcfb4f3c4b0b7c393"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7904D7FE-A6BB-50E4-AB12-9B8B1D7BE4BA"
+    },
+    "fields": {
+      "MeetingID": "5FF76945-DC92-54A6-BF6D-31E889C22514",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.937Z",
+      "checksum": "1fb04ea166c89bcc4e210b84ca93be652869fe7df93776decfb89537514251ad"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1E91222F-952F-5B9A-9498-142E7706D120"
+    },
+    "fields": {
+      "MeetingID": "5FF76945-DC92-54A6-BF6D-31E889C22514",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.939Z",
+      "checksum": "37d1a9db5d461280312879b4eeec674608619d9212455d3cdeebef7c569f67ea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9045CC0F-B3EC-5963-B54B-393F568C76DB"
+    },
+    "fields": {
+      "MeetingID": "5FF76945-DC92-54A6-BF6D-31E889C22514",
+      "Sequence": 5,
+      "Name": "Motion: Approve the speaker honorarium policy",
+      "PresenterPersonID": "ACB443AB-E853-56DD-990C-2749FDB643D0",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.951Z",
+      "checksum": "0a868c8c6c6bbaa5d2452ead2dad81e447114dda3ed20f7346c434c3b73e5a10"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "275CFAC9-5891-5338-BB76-F5FE56644EF0"
+    },
+    "fields": {
+      "MeetingID": "E4985F01-8143-5B17-B574-483366371589",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.964Z",
+      "checksum": "44a5bd46241a6a0b883ffdb20f16707a99824f35543e2c1d53e8d35791f1b7dc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "045CDBBD-546D-5788-8418-D689286DED0C"
+    },
+    "fields": {
+      "MeetingID": "E4985F01-8143-5B17-B574-483366371589",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.955Z",
+      "checksum": "57bd1defe15fe6ea7d466ac3345c1f192dfa6d738f4abbf73abc65d368f4a5e3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F128371-F9ED-57BC-A529-A0FA02BB1C24"
+    },
+    "fields": {
+      "MeetingID": "E4985F01-8143-5B17-B574-483366371589",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.960Z",
+      "checksum": "958cc218fb45ebf9b6af5393141a2bce982c8d9791f914a39bc1542a0a8748d4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "38FCFE3D-40B8-53B9-8C0C-716D60E228ED"
+    },
+    "fields": {
+      "MeetingID": "E4985F01-8143-5B17-B574-483366371589",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.969Z",
+      "checksum": "ad2e148be248f3f700db9a519920136792f5bcd0a50ab5092da2fbf91f56e70b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98AEE34F-0C3F-5D94-8B48-09BA7ACF711D"
+    },
+    "fields": {
+      "MeetingID": "E4985F01-8143-5B17-B574-483366371589",
+      "Sequence": 5,
+      "Name": "Motion: Endorse the proposed program changes",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.973Z",
+      "checksum": "f502d5d1db5dba2d5878eff696bc38a17831e5afdaf3b03268afc588df8c56d3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C0CBE18F-72B8-53DD-A8C5-AFDBD93C7BDE"
+    },
+    "fields": {
+      "MeetingID": "338A3F91-5DD4-5DA8-BF83-9C54BBF7BB05",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.978Z",
+      "checksum": "fdb0578926fc64d85f2421cffdfc435abcfee45b182e77012b6d906cc26b3daf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "460B8114-61D8-5068-8947-62DC3B31E93F"
+    },
+    "fields": {
+      "MeetingID": "338A3F91-5DD4-5DA8-BF83-9C54BBF7BB05",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.982Z",
+      "checksum": "c179357f69f4d3165f2d0b64f6b91255e2b80cb3ed1d4df7995464b06f8de45e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "284A1AF0-F3E8-5DEB-BBA0-91D3B861BF52"
+    },
+    "fields": {
+      "MeetingID": "338A3F91-5DD4-5DA8-BF83-9C54BBF7BB05",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.990Z",
+      "checksum": "cf0bf5783a31c68801e7ccadac34e5bb4e902d47149ab365c381d68fce54d3d7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C71584AA-4315-5169-B194-880409DFC5A1"
+    },
+    "fields": {
+      "MeetingID": "338A3F91-5DD4-5DA8-BF83-9C54BBF7BB05",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:49.986Z",
+      "checksum": "242e22f892a4a45816f7bfed24e6a4d144f05e8d507611a2cd208039565f1cc3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C6EE79FE-8358-5CB6-909C-94CD45162827"
+    },
+    "fields": {
+      "MeetingID": "75240340-0122-5ECC-A4AC-3B0CB26D5708",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.001Z",
+      "checksum": "1d836f9cfbe32e02e930f44739cde3b66eefcc81d4f6dae1beab0a4b49f3ef71"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31A67B1F-219D-51C5-B887-68C6FF4FE709"
+    },
+    "fields": {
+      "MeetingID": "75240340-0122-5ECC-A4AC-3B0CB26D5708",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.006Z",
+      "checksum": "b63c4e4646e2efef88e34c491a90beadbd05ec482e75e3f49010c3a8091cde20"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B043D718-4C47-559E-A6BB-C1772EE08D9F"
+    },
+    "fields": {
+      "MeetingID": "75240340-0122-5ECC-A4AC-3B0CB26D5708",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.010Z",
+      "checksum": "4304a34889768a042fc18cee10522d63bd2fa3c4d19b5f5dd348193bcce3f564"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1BC8FC63-9984-5278-ACD1-30A55CE06BFF"
+    },
+    "fields": {
+      "MeetingID": "75240340-0122-5ECC-A4AC-3B0CB26D5708",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.026Z",
+      "checksum": "f9da35d062e0d6fdf8da65ed6a7441f44329644cf014d547f039070943123cf7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB12DD64-4136-5A32-B1E3-10B6A0BD5F28"
+    },
+    "fields": {
+      "MeetingID": "75240340-0122-5ECC-A4AC-3B0CB26D5708",
+      "Sequence": 5,
+      "Name": "Motion: Adopt the updated meeting cadence",
+      "PresenterPersonID": "346BE678-4FB4-52EC-8F91-05D7976784E4",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.014Z",
+      "checksum": "04bfcd38a502b03b2241f9dc0215f8a0c3ee82dfa22d88b38e5632a3869d7d22"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FD938D9-9148-5A9F-9FC8-1F8A9D898CC9"
+    },
+    "fields": {
+      "MeetingID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.018Z",
+      "checksum": "a9e7e633c1390914bbe74b6865af27474457b06c2447dc4ab2d178b8bf9de4f4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FF2485EE-B606-58DC-9D03-7A815DEAE938"
+    },
+    "fields": {
+      "MeetingID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.022Z",
+      "checksum": "0a6193ef48c048d2158bab41a87f5a552ac0e59649b13b7a535e2f4c41718a20"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "722F6DAB-547A-5A53-A5DC-D1EBC0C82E59"
+    },
+    "fields": {
+      "MeetingID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.031Z",
+      "checksum": "7fcf0f5351c2de6bb0d085f8661ec984f957aed8a485c4d6d88d7fe17d26f792"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75E1A9E9-FC6B-5EFB-B2CD-925AF8E243A3"
+    },
+    "fields": {
+      "MeetingID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.038Z",
+      "checksum": "54bdeee4b59c5e05206b496e60a125f28cd11c0d4438e3c2d24f9a32068a32ea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9E3E2B02-21F7-5543-8C1B-9B1DFD4FBC00"
+    },
+    "fields": {
+      "MeetingID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1",
+      "Sequence": 5,
+      "Name": "Motion: Form a working group on member feedback",
+      "PresenterPersonID": "ACB443AB-E853-56DD-990C-2749FDB643D0",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.035Z",
+      "checksum": "020e65c9c50d5cb742045cb3d971dd2f806d1fd015f02efba0316a5fdd59d7f1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FF342AF-88C4-5CD2-AF15-D66C0BB175B9"
+    },
+    "fields": {
+      "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.050Z",
+      "checksum": "d6ad134f51a7ba93f5fddfc77121e2448e3840e6a9d0b0cb5ec882be7891f2a0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B87210BF-5268-5888-A345-BF223C34E901"
+    },
+    "fields": {
+      "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.064Z",
+      "checksum": "56ab04f31c4fa60403539296b290ab0c665b847a3c42042aedc5a5e747ebf3a1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93EC5169-BC33-576C-B6C3-BF8BFE0D8E9C"
+    },
+    "fields": {
+      "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.059Z",
+      "checksum": "3898e9230301657df8ac98027f8ab308652564ebf779b504fe0ddc274c2f68a0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "35203561-18D8-5E63-8955-1A0C64CF20B4"
+    },
+    "fields": {
+      "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.054Z",
+      "checksum": "b75668f171cdc322b13c373c7b2b80b1ff1daa35ab92f921bb03cc4ef03fab12"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5789F360-ADB7-52E1-92E5-8DD46E44345A"
+    },
+    "fields": {
+      "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
+      "Sequence": 5,
+      "Name": "Motion: Approve co-hosting the regional workshop",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.073Z",
+      "checksum": "d7136dfbd3358d4c015fad4bdd43ee16615fd5c6a0791ca3996aa721a0133982"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D61FF00C-5B60-58F6-9D78-68336769C920"
+    },
+    "fields": {
+      "MeetingID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.068Z",
+      "checksum": "b1d297c917944c79f0a4aadb00a65012c8f9cc4fa684130e0735ec380181451a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5EC1C9D3-FD1F-5B67-81B1-46C31C603796"
+    },
+    "fields": {
+      "MeetingID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.077Z",
+      "checksum": "d18a6905bbdbb092a1a803532781917308bbfa37ebc3b320cabb20d2ec7a77b2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "89444D33-867C-571F-B405-976DFD15CE95"
+    },
+    "fields": {
+      "MeetingID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.081Z",
+      "checksum": "ae22b76a235dd061e474bd780b97bae2575e9c5f08849bb5e86e0d38f7e5b35b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7A91094A-833A-5A12-B900-071A88FF83A3"
+    },
+    "fields": {
+      "MeetingID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.085Z",
+      "checksum": "3a52ee83e6b35b47190bee36e341e04d090af01c133449641396d4c6ee2ab4ce"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "577941BE-174E-5D67-B6B2-01943DFF80C1"
+    },
+    "fields": {
+      "MeetingID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.088Z",
+      "checksum": "8286a962d57f419f138cc92e2b870908d06c32ea4b84c7ec1c06217e0b2084d2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5461B300-8AA8-5B32-A2EF-1AE933EED6C1"
+    },
+    "fields": {
+      "MeetingID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.135Z",
+      "checksum": "11af92e67f806f30e9997257af5bab63ff041897ddafc5e2cc13cae18ebe8844"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E3C0D1A9-4E56-5B81-A4F8-F3585E6A510A"
+    },
+    "fields": {
+      "MeetingID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.100Z",
+      "checksum": "bfa26678612282929291a239e80ddce688db10cbe8f051ee93db64fe70d4e14d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C96591BC-3417-5CB0-9EE8-EF6B84D2209A"
+    },
+    "fields": {
+      "MeetingID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.138Z",
+      "checksum": "2ef771627853739982e6fb1ed7ecb6fdbce404b0080c994a8df994ed3e885908"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "395807D4-1BDD-5462-9A66-4D63EDF1775C"
+    },
+    "fields": {
+      "MeetingID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.104Z",
+      "checksum": "7c0e5be8eec676c7865fedc706730db6dcec85c1df9787d8352b6d31b1cd0e1e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "109375DA-7251-5982-86FA-072C80A238E2"
+    },
+    "fields": {
+      "MeetingID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.108Z",
+      "checksum": "1052b374bf2fca643efe69bc837313eded3977612f3e2e0f7c41b37bf7323624"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "789F7A26-A2B0-5CC6-9D16-58047B613367"
+    },
+    "fields": {
+      "MeetingID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.113Z",
+      "checksum": "1943cc6c81067f24656aed7539077df4c0761457354d5d25a52b918d356353b4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3DE6B117-BBD6-54C8-B2E8-D7218E6213DD"
+    },
+    "fields": {
+      "MeetingID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.117Z",
+      "checksum": "a3390d7d7b81eb289dc17568e436d611e7d9f64c20d7b5cc2300389d40c20ba7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91FDE528-56C5-5129-8AC5-D35B985563ED"
+    },
+    "fields": {
+      "MeetingID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.121Z",
+      "checksum": "c63a41ea0a4f0a2584be8d2e2f63fafde0bc8d379b01742d43dd65a00db858f1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C1C23FC3-4733-5486-B00E-2E309B9F2349"
+    },
+    "fields": {
+      "MeetingID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.126Z",
+      "checksum": "7defbbd62d7d5099dae289e52d43d5fae27749cbbb28362a25c2062217c4929b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "107B7CDE-7B53-59CD-AC30-2AC507D2395B"
+    },
+    "fields": {
+      "MeetingID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.131Z",
+      "checksum": "fef3ae6ca67e428a431199d48fb737015131ec78872a6b88718a1d4f928a92e2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1A771AE-1529-5CE5-8E9B-88679CB823A8"
+    },
+    "fields": {
+      "MeetingID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.150Z",
+      "checksum": "c23de45be8b86bcdc30c6ee0e88e8ed07c4c7a8e861f0caea88cfcad3ddb2a54"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "19CB306F-7012-516D-AD7E-0C0D2A512234"
+    },
+    "fields": {
+      "MeetingID": "81934060-2910-5B3F-A680-4263BBC91FFA",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.154Z",
+      "checksum": "e6026e16f07dabdddada12d87fea088ff07414f90c1e73b03cd0a81813f5a39a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CA798C1B-BA7A-5433-B79D-3BEBAD95BA18"
+    },
+    "fields": {
+      "MeetingID": "81934060-2910-5B3F-A680-4263BBC91FFA",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.159Z",
+      "checksum": "d3e8f1d07e06c1ef5fdb7693ab1c15c040a3c959c280d6e2bdc0aa7b2d421e34"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "749049EE-24AC-586C-AED3-79A65DF9DEDB"
+    },
+    "fields": {
+      "MeetingID": "81934060-2910-5B3F-A680-4263BBC91FFA",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.164Z",
+      "checksum": "4efabcabbad8cbd5dc473b6ea319fe1fa337df14ce8c3c5eeee38d818c46b34f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C0D27277-4839-5092-9E4D-53B384EAC953"
+    },
+    "fields": {
+      "MeetingID": "81934060-2910-5B3F-A680-4263BBC91FFA",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.173Z",
+      "checksum": "b7763b61091fedd9f86f086af1c3c6228c812de290edd0426250750e8d46a49e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2BFB3602-BC4C-54A4-B89D-D96C6748B9CD"
+    },
+    "fields": {
+      "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
+      "Sequence": 1,
+      "Name": "Call to order & minutes approval",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 5,
+      "ItemType": "Information",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.169Z",
+      "checksum": "19eabb72cfce238f613c9e7c0b535ad9512b6382096e0b51620bf32b35708546"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BD68984-ED2F-5651-BA00-69B02E04C899"
+    },
+    "fields": {
+      "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
+      "Sequence": 2,
+      "Name": "Chair's report",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Report",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.176Z",
+      "checksum": "2413eb0227425175b54371f2e6ce5ea55e35de0f5bb39a0ea701c9ee8b140aae"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A27D5A1B-F345-5946-BEF0-44DEF6269794"
+    },
+    "fields": {
+      "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
+      "Sequence": 3,
+      "Name": "Old business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 20,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.181Z",
+      "checksum": "b601ebd8e894311fbc63ff73c78cdc981e050ab55304e633cc0efefec8696441"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B79451C2-F15C-51A9-B484-9CC9A79373D7"
+    },
+    "fields": {
+      "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
+      "Sequence": 4,
+      "Name": "New business",
+      "PresenterPersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "DurationMinutes": 15,
+      "ItemType": "Discussion",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.185Z",
+      "checksum": "bfb2b2431a33072656d74eb6ae908a914842df654e9dd231cd1708139227419e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F53EBE13-E653-5603-AF34-BC95A5073CB5"
+    },
+    "fields": {
+      "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
+      "Sequence": 5,
+      "Name": "Motion: Publish the draft guidance document",
+      "PresenterPersonID": "87FCCAAF-DF34-50A3-9FB7-3E3C0C13597D",
+      "DurationMinutes": 10,
+      "ItemType": "Vote",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:50.188Z",
+      "checksum": "9b4423453e59c6acc886ddc591e3112138ecc4f73f62d0788bf9a50bbfb61d34"
+    }
+  }
+]

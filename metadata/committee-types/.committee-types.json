@@ -1,0 +1,30 @@
+[
+  {
+    "primaryKey": {
+      "ID": "D079B344-B897-57D0-94CB-927CF6E825AF"
+    },
+    "fields": {
+      "Name": "Standing",
+      "IsStandards": false,
+      "DefaultTermMonths": 24
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:45.281Z",
+      "checksum": "c3ce25291b7cfd05ce51aed91dd329510cdeab0764af4323810001f3bcf684c5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97B1E92D-DBF0-5A37-BC04-963E511C198D"
+    },
+    "fields": {
+      "Name": "Technical Standards",
+      "IsStandards": true,
+      "DefaultTermMonths": 24
+    },
+    "sync": {
+      "lastModified": "2026-07-17T15:59:45.279Z",
+      "checksum": "0fe80dcac8d3d4ae657bfb533bc7b4b97b8d5d6767e9e9b5743eef47d993150c"
+    }
+  }
+]

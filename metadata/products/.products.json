@@ -1,0 +1,98 @@
+[
+  {
+    "primaryKey": {
+      "ID": "736DDC26-30BF-5357-8F5E-9BB946B3B415"
+    },
+    "fields": {
+      "ProductKey": "PROD-MEM-ENTHUSIAST",
+      "Name": "Enthusiast Membership (annual)",
+      "ProductType": "Membership",
+      "UnitPrice": 150,
+      "IsSharedDemo": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T16:01:12.372Z",
+      "checksum": "013f64dd2803466e92609a158345f8fca443ceaac2028d1723115f0e0804393d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "67FBE689-6598-536D-BC8D-09D25B63F982"
+    },
+    "fields": {
+      "ProductKey": "PROD-MEM-INDIVIDUAL",
+      "Name": "Individual Membership (annual)",
+      "ProductType": "Membership",
+      "UnitPrice": 175,
+      "IsSharedDemo": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T16:01:12.383Z",
+      "checksum": "8f60e8cf42875c47a5d42b8616ad63999570080a743317c672d710cad5e7d351"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0F37A3CC-2D70-54FB-8474-C9A7D4AE73F1"
+    },
+    "fields": {
+      "ProductKey": "PROD-MEM-SMALLBUSINESS",
+      "Name": "SmallBusiness Membership (annual)",
+      "ProductType": "Membership",
+      "UnitPrice": 400,
+      "IsSharedDemo": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T16:01:12.375Z",
+      "checksum": "21e59133273d98f085268d154a78f21190a3d84eef80d47e59f6654668ef5089"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "23C8BE1D-3AE0-5413-AC7D-D7C779647A31"
+    },
+    "fields": {
+      "ProductKey": "PROD-MEM-CORPORATE",
+      "Name": "Corporate Membership (annual)",
+      "ProductType": "Membership",
+      "UnitPrice": 1000,
+      "IsSharedDemo": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T16:01:12.377Z",
+      "checksum": "7463d77faa37a202c2aceef1730fc41ecc2a461c289e8cd1fe44eef52582cf3a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9AA3136D-3DC7-5B78-8E46-C949083E5EB0"
+    },
+    "fields": {
+      "ProductKey": "PROD-EVT-CONFERENCE",
+      "Name": "Conference Registration",
+      "ProductType": "Event",
+      "UnitPrice": 450,
+      "IsSharedDemo": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T16:01:12.379Z",
+      "checksum": "c405385fe401e6ba9be839b96581b2f7fd0fcc42cd0e72e0b1969d5c6f82fabf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24ABF9A9-C12F-56EE-8B06-A4081BD24475"
+    },
+    "fields": {
+      "ProductKey": "PROD-EVT-WORKSHOP",
+      "Name": "Workshop Registration",
+      "ProductType": "Event",
+      "UnitPrice": 150,
+      "IsSharedDemo": true
+    },
+    "sync": {
+      "lastModified": "2026-07-17T16:01:12.382Z",
+      "checksum": "42bf1ddb60033bb50876e1ce867a3f98204d17d47bb78f7f11a8df8fea4140ad"
+    }
+  }
+]

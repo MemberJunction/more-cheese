@@ -30,7 +30,6 @@ module.exports = {
       options: [{ name: 'maxComponentsPerModule', value: 20 }],
     },
     { type: 'GraphQLServer', directory: './packages/Server/src/generated' },
-    { type: 'ActionSubclasses', directory: './packages/Actions/src/generated' },
     { type: 'EntitySubclasses', directory: './packages/Entities/src/generated' },
     { type: 'DBSchemaJSON', directory: './Schema Files' },
   ],
@@ -39,7 +38,6 @@ module.exports = {
   // so the generated TypeScript is compiled and committed alongside its source.
   commands: [
     { workingDirectory: './packages/Entities', command: 'npm', args: ['run', 'build'], when: 'after' },
-    { workingDirectory: './packages/Actions', command: 'npm', args: ['run', 'build'], when: 'after' },
     { workingDirectory: './packages/Server', command: 'npm', args: ['run', 'build'], when: 'after' },
     { workingDirectory: './packages/Angular', command: 'npm', args: ['run', 'build'], when: 'after' },
   ],

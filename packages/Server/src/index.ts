@@ -15,13 +15,10 @@
  * Pattern mirrors bizapps-common's Server bootstrap.
  */
 
-// Import entity and action packages to trigger @RegisterClass decorators
+// Import the entities package to trigger @RegisterClass decorators.
+// (This app ships no custom Actions or server-side entity overrides — the
+// Actions + CoreEntitiesServer packages were dropped as empty; see mj-app.json.)
 import '@mj-more-cheese-demo/entities';
-import '@mj-more-cheese-demo/actions';
-
-// Server-side entity subclasses — must come after the entities package so
-// @RegisterClass auto-increment gives these higher priority
-import '@mj-more-cheese-demo/core-entities-server';
 
 // Import generated GraphQL resolvers (registers them with type-graphql)
 import './generated/generated.js';

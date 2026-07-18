@@ -279,7 +279,7 @@ for (const m of MAPPING) {
   for (let i = 0; i < rows.length; i += CHUNK) chunks.push(rows.slice(i, i + CHUNK));
   chunks.forEach((chunk, i) => {
     const name = chunks.length === 1 ? `.${m.dir}.json` : `.${m.dir}.part-${String(i + 1).padStart(2, '0')}.json`;
-    writeFileSync(join(dir, name), JSON.stringify(chunk, null, 1));
+    writeFileSync(join(dir, name), JSON.stringify(chunk, null, 2));
   });
   summary.push({ dir: m.dir, entity: m.entity, rows: rows.length, files: chunks.length });
 }
