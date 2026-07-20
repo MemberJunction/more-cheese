@@ -196,6 +196,32 @@
  },
  {
   "primaryKey": {
+   "ID": "660FF8DC-25E1-5C39-B0D0-4F6BAB70F3C1"
+  },
+  "fields": {
+   "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+   "Name": "Standards Committee — Q4 2026 meeting",
+   "StartDateTime": "2026-10-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C293B302-9900-53C7-A99F-4F0BBDEAC109"
+  },
+  "fields": {
+   "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+   "Name": "Standards Committee — Q1 2027 meeting",
+   "StartDateTime": "2027-01-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "1615C1D2-DA18-588B-BECF-B0CF54ED9D26"
   },
   "fields": {
@@ -387,6 +413,32 @@
    "TimeZone": "UTC",
    "LocationType": "Virtual",
    "Status": "Completed"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "23E5CF8C-DE36-5ABF-A35B-C4D66B44ED29"
+  },
+  "fields": {
+   "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+   "Name": "Food Safety Committee — Q4 2026 meeting",
+   "StartDateTime": "2026-10-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "2D615B91-D152-5BB6-939F-CC833E65341B"
+  },
+  "fields": {
+   "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+   "Name": "Food Safety Committee — Q1 2027 meeting",
+   "StartDateTime": "2027-01-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
   }
  },
  {
@@ -586,6 +638,32 @@
  },
  {
   "primaryKey": {
+   "ID": "7BBF3C88-8501-571D-94E0-55EF2C566A57"
+  },
+  "fields": {
+   "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+   "Name": "Education Committee — Q4 2026 meeting",
+   "StartDateTime": "2026-10-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "BBB64666-9595-5B12-84F5-975BB92C57B0"
+  },
+  "fields": {
+   "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+   "Name": "Education Committee — Q1 2027 meeting",
+   "StartDateTime": "2027-01-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "1DAE5825-63D0-5285-9143-8DC111A3BA83"
   },
   "fields": {
@@ -777,6 +855,32 @@
    "TimeZone": "UTC",
    "LocationType": "Virtual",
    "Status": "Completed"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "ABEB7509-9159-5BF7-B965-D9449C9E5948"
+  },
+  "fields": {
+   "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+   "Name": "Membership & Outreach Committee — Q4 2026 meeting",
+   "StartDateTime": "2026-10-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "C4C1DCFD-0BE7-5926-9FC6-1C6178F417D4"
+  },
+  "fields": {
+   "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+   "Name": "Membership & Outreach Committee — Q1 2027 meeting",
+   "StartDateTime": "2027-01-15T15:00:00Z",
+   "TimeZone": "UTC",
+   "LocationType": "Virtual",
+   "Status": "Scheduled"
   }
  }
 ]

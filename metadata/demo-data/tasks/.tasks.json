@@ -91,6 +91,21 @@
  },
  {
   "primaryKey": {
+   "ID": "51359834-7018-5201-8E28-D89AF9F21571"
+  },
+  "fields": {
+   "Name": "Circulate the meeting summary to members",
+   "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+   "Status": "Open",
+   "Priority": "Medium",
+   "DueAt": "2026-11-14T17:00:00Z",
+   "CompletedAt": null,
+   "PercentComplete": 0,
+   "CreatedByPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "9333D8D2-AAE0-550E-AD7F-9EE8FA30B23F"
   },
   "fields": {
@@ -421,6 +436,21 @@
  },
  {
   "primaryKey": {
+   "ID": "7CEA07BB-310A-580F-94FB-43EF4B12632C"
+  },
+  "fields": {
+   "Name": "Collect comments on the draft standard",
+   "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+   "Status": "InProgress",
+   "Priority": "Medium",
+   "DueAt": "2026-11-14T17:00:00Z",
+   "CompletedAt": null,
+   "PercentComplete": 50,
+   "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+  }
+ },
+ {
+  "primaryKey": {
    "ID": "06966348-DB35-5E01-AF42-8C556340002F"
   },
   "fields": {
@@ -671,6 +701,21 @@
    "DueAt": "2026-08-14T17:00:00Z",
    "CompletedAt": null,
    "PercentComplete": 0,
+   "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+  }
+ },
+ {
+  "primaryKey": {
+   "ID": "16472B1F-0064-5D94-A2CA-8142B7EE0548"
+  },
+  "fields": {
+   "Name": "Collect comments on the draft standard",
+   "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+   "Status": "InProgress",
+   "Priority": "Medium",
+   "DueAt": "2026-11-14T17:00:00Z",
+   "CompletedAt": null,
+   "PercentComplete": 50,
    "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
   }
  },
