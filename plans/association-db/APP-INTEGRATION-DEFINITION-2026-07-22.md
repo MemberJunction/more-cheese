@@ -1,170 +1,195 @@
-# What "integration with the other apps" actually means — definitions, status, open questions
+# Non-bizapp integrations — what they mean for MoreCheese, precisely
 
 **Date:** 2026-07-22 · **Author:** datagen workstream (Barnatt + Claude)
-**Why this doc:** "integration" has been used in this workstream to mean at least five
-different things, and plans built on an overloaded word can't be binary. This pins down the
-levels, the evidence standard for each ("done" must be checkable, not vibes), where
-MoreCheese stands today, and the questions that still need team answers.
+**Scope of this doc:** everything *except* the bizapps. Bizapp integration (schemas, data
+through their views, install, their UIs) is defined and tracked elsewhere
+(`datagen/BIZAPPS-COVERAGE.md`, `datagen/INTEGRATION-RUNBOOK.md`) and is essentially done.
+This doc is about the layer above: **the Blue Cypress SaaS products and MJ core's own
+intelligence features consuming MoreCheese data.**
+
+**The framing decision that shapes everything** (Barnatt, 2026-07-14): the demo story is
+**MJ-native** — data born in MJ, no external ingestion pipelines. So for every product
+below, "integration" does NOT mean connectors, syncs, or APIs to build. It means:
+
+> **the product, pointed at the MoreCheese database, produces credible results — because
+> the data has the right shape, signals, and stories in it.**
+
+Our deliverable is therefore *data readiness + a proof run*, per product. Config belongs
+to each product's team; pipelines don't exist by design.
 
 ---
 
-## The five integration levels (a ladder — each builds on the one below)
+## 1. Skip — the AI data analyst
 
-### L1 — Schema-level: the tables coexist
-**Definition:** MoreCheese's schema and every dependency app's schema install into one
-database without collision; cross-schema references resolve.
-**Evidence standard:** all apps' migrations apply green on one DB; FKs and soft references
-resolve; CHECK constraints hold under our data.
-**Status: ✅ DONE, proven twice** (2026-07-15 spike, 2026-07-17 re-run on `MC_Integration_V2`):
-21 dependency migrations + ours apply green; our rows satisfy their constraints.
-**Not included:** anything running — this is purely "the furniture fits."
+**What integration means here:** Skip converses over MJ entities/queries (via MJAPI — the
+`ASK_SKIP_*` wiring, Skip-Client-Open-App). Integration = Skip answering real analytical
+questions about the federation and being *right*, because the answers are discoverably in
+the data.
 
-### L2 — Data-level: our data flows through THEIR machinery
-**Definition:** the dependency apps' *own generated layer* (views, stored procedures,
-entities, lookups) serves MoreCheese rows correctly — not raw table reads.
-**Evidence standard:** query their generated views / entity API and get our rows back with
-their computed columns, their seeded lookups (F6 name resolution), their FK trust intact.
-**Status: ✅ DONE, proven** — e.g. Gwen's attendance renders through committees'
-`vwAttendances` with THEIR DisplayName computed column and THEIR seeded Chair role; issue
-statuses resolve by name into their workflow; verified again through a **live MJAPI**
-(their resolvers, not SQL) on 2026-07-17.
-**Not included:** UIs, install reproducibility.
+**What the data already provides:** the whole causal engine. "Who looks like churn risk
+and why?" has a real, multi-signal answer (Bob: NPS 7→7→5, "not returning," declining
+registrations, an open billing dispute, an unanswered secure-message thread). Engagement,
+revenue, and satisfaction all ride one hidden dial, so correlations Skip surfaces are
+genuine, not coincidental.
 
-### L3 — Install-level: one reproducible command
-**Definition:** a fresh environment reaches L1+L2 through the *supported tooling* — no
-hand-applied SQL, no bespoke clone.
-**Evidence standard:** `mj app install <MoreCheese repo>` on a clean MJ host pulls the
-dependency apps **leaf-first** (mj-app.json `dependencies`, incl. `mj-secure-messaging`),
-applies schema + CodeGen + the 10 seed data migrations, and the world is queryable — with
-exact row counts, no manual steps.
-**Status: ✅ ARCHITECTED AND VALIDATED** on `morecheese-datagen-install` (now the branch of
-record): data ships as Skyway seed migrations (`Seed_01..10`), CodeGen is a captured
-migration, install is migrations-only (colleague's run: 14 migrations, 69s, exact counts —
-pre-messaging; the 10-seed set re-emitted 2026-07-22 has not yet had a from-scratch install
-run → see Q1).
-**Not included:** the UIs and the AI features.
+**Evidence standard (binary):** a captured Skip conversation transcript where it (a)
+identifies at-risk members and names the right ones, (b) explains *why* using signals we
+engineered, (c) aggregates correctly (renewal rates by year/segment match our gates).
 
-### L4 — UI-level: their apps render our data
-**Definition:** the dependency apps' *actual Explorer UIs* (not the generic entity browser)
-run in one Explorer over the shared DB and render MoreCheese data sensibly.
-**Evidence standard:** mount the app's published `-ng` package (npm install +
-`dynamicPackages.client` + Explorer rebuild), open its screens, and the data reads as a
-living system — no empty flagship tabs, no nonsense values.
-**Status: 🟡 PROVEN FOR ONE APP (committees), method established.** The committees UI
-mounted cleanly via published npm packages (2026-07-17) and directly drove two data
-enrichments (upcoming meetings, failing motions). Forms/tasks/issues/secure-messaging UIs
-have **not** been mounted yet; the *data-side* gaps their UIs would expose were addressed
-proactively (anonymous intake, triage matrix, assignees, message threads) but not
-visually confirmed. Note: bizapps-forms' UI currently **crashes MJAPI at boot** when
-dev-linked (manifest generator pulls the Angular client into Node — stopgap PR
-MemberJunction/bizapps-forms#9 open; durable fix belongs in MJ's manifest generator).
-**Not included:** AI/analytical features.
+**Gaps / questions:**
+- Barnatt's ruling: "not really any extra work" — agreed on data. The open item is purely
+  the **proof run** (nobody has asked Skip these questions yet) and whether we should
+  author a few **saved queries / data contexts** to make Skip's entry points demo-smooth.
+- Which MJAPI instance is Skip pointed at for the demo (the environment-of-record question)?
 
-### L5 — Feature-level: the platform's intelligence runs on the data
-**Definition:** MJ core features and the Blue Cypress SaaS family *operate* on MoreCheese
-data and produce credible results — the dataset powers capability demos, not just CRUD.
-**Evidence standard (per feature, binary):**
-- **Sonar** scores our members and the component breakdown reflects the engineered signals
-  (advocacy/committees/certs/attendance) — *a scoring run has actually executed*.
-- **Skip** answers analytical questions ("who looks like churn risk and why?") with the
-  discoverable answers (Bob's NPS trail) — *a real conversation transcript exists*.
-- **Predictive Studio** trains a renewal-risk model that converges and rank-orders risk
-  (Bob above Victor) — *a training run with holdout metrics exists*. This is the deepest
-  fit: the dataset's trainability gates were built for exactly this claim.
-- **Record Set Processing / dedup** fixes defects and is *graded against DataQualityLabel*
-  (the answer sheet exists precisely for this).
-- **Betty / Knowledge Hub** answer from association knowledge — blocked on the prose
-  corpus question (see Q4), unless Betty truly needs nothing (per Barnatt 2026-07-22).
-**Status: 🔴 ENGINEERED-FOR BUT UNPROVEN.** The data was *designed* to pass every one of
-these (hidden engagement dial, causal arrows, labeled defects, trainability gates), but no
-feature-level run has actually been executed against it. Every L5 claim is currently a
-well-founded prediction, not evidence.
-
-### Orthogonal axis — cross-app narrative
-Not a level but a quality bar that cuts across L2–L5: can one persona be walked through
-*every* app? **✅ DONE and gated** for the four flagship heroes (Elena, Bob, Gwen, Tom):
-membership → events → learning → orders → committees → forms → issues → secure messaging,
-enforced by `pins.issueMin`/`pins.formResponse` + the messaging hero-thread gate. (Tasks
-footprint for Bob/Tom deferred — needs a third task derivation.)
+**Readiness: 🟢 data ready · ⬜ proof run not executed**
 
 ---
 
-## Per-app status matrix
+## 2. Betty — the knowledge assistant
 
-| App | L1 schema | L2 data | L3 install | L4 UI | Notes |
-|---|---|---|---|---|---|
-| bizapps-common | ✅ | ✅ | ✅ | — (no bespoke UI beyond widgets) | identity backbone |
-| bizapps-committees | ✅ | ✅ | ✅ | ✅ proven 07-17 | the L4 method-setter |
-| bizapps-forms | ✅ | ✅ | ✅ | ⬜ blocked-ish (PR #9 boot fix) | anonymous intake data ready |
-| bizapps-tasks | ✅ | ✅ | ✅ | ⬜ not mounted | data already healthy |
-| bizapps-issues | ✅ | ✅ | ✅ | ⬜ not mounted (near-headless anyway) | triage matrix + assignees ready |
-| bizapps-secure-messaging | ✅ | ✅ (soft refs land) | ✅ (Seed_10) | ⬜ not mounted | in scope per 2026-07-22 ruling |
-| bizapps-sonar | ✅ coexists | n/a (consumer) | ✅ | ✅ has own UI | L5 scoring run not yet executed |
-| bizapps-orders / -accounting | — | — | — | — | **ELIMINATED** (2026-07-22 ruling; stand-in stays) |
-| bizapps-caliber | — | — | — | — | repo live 2026-07-22, **zero migrations** — out until baseline ships |
+**What integration means here:** Betty answers members' questions from association
+knowledge. Barnatt's ruling (2026-07-22): Betty is already built and requires **zero extra
+work** from MoreCheese.
 
-## The SaaS family (what "integration" means per product)
+**The one thing to pin down (Q — the only open Betty question):** what does Betty *ingest*
+in this demo?
+- If Betty answers over **entity data / configured content Betty-side** → truly zero work;
+  close the question and write that here.
+- If Betty needs **documents** (handbooks, FAQs, policies) → the prose-corpus question
+  returns (see §7) — MoreCheese generates rows, not prose, and no corpus exists anywhere.
 
-| Product | Integration = | Readiness | Owner of proof |
+**Evidence standard (binary):** a captured Betty session answering member-plausible
+questions in the demo environment.
+
+**Readiness: 🟢 per ruling (zero work) · ⚠ contingent on the ingestion answer**
+
+---
+
+## 3. Predictive Studio — train retention models on the members
+
+**What integration means here:** MJ core's train-models-on-your-data feature (member
+retention/lapse scoring) pointed at MoreCheese members. This is the **deepest engineered
+fit in the entire dataset**: the generator's central design goal was honest trainability —
+hidden engagement dial, causal arrows with recoverable sign AND size, realistic fog
+(proxies, omitted variables), and explicit trainability gates (rank-ordering lift).
+
+**What the data already provides:** 2,500 members with renewal histories, behavioral
+features (registrations, enrollments, committee service, advocacy, certs, payments, NPS),
+and ground truth the validator already trains against. A renewal-risk model *should*
+converge, calibrate, and rank Bob (declining, high-value) above Victor (auto-renewing
+ghost) — that exact contrast is authored into the world.
+
+**Evidence standard (binary):** a Predictive Studio training run on the demo DB — feature
+assembly over our entities, holdout metrics recorded, and a scored member list whose top
+decile contains the engineered at-risk personas. Screenshot/metrics captured in `plans/`.
+
+**Gaps / questions:**
+- Nobody has run it. This is the highest-value unexecuted proof in the workstream — it
+  converts our core marketing claim ("a model trained on this data works") from a gated
+  prediction into a witnessed fact.
+- Point-in-time correctness: Predictive Studio's as-of feature assembly should be fed
+  renewal decisions with pre-decision features only — our data supports this (periods,
+  dated events), but the feature-definition session hasn't happened. Who defines the
+  feature set, and who runs it?
+
+**Readiness: 🟢 data purpose-built · ⬜ never executed (highest-leverage proof to run)**
+
+---
+
+## 4. Knowledge Hub — two very different halves
+
+**What integration means here:** MJ core's AI/RAG + classification suite. Critically, KH
+splits into halves with opposite readiness:
+
+**4a. The row-based half — ready today.**
+- **Duplicates tab / dedup:** our `DataQualityLabel` answer sheet (25 duplicate-person
+  labels incl. injected dup records, stale employers, typo emails) exists *specifically*
+  so dedup can be demonstrated AND graded. Evidence standard: KH (or a Record Set
+  Processing cleanup — §5) finds the dups, and the result is scored against the labels.
+- **Vectors/clustering over entity records** (EntityDocument → per-record text snapshots):
+  configurable over existing entities; embeddings must be computed live by the pipeline
+  (never pre-generated — they're model-specific).
+
+**4b. The prose half — blocked on the corpus question.**
+Classify, semantic search, RAG all operate on real text (`ContentItem.Text`). MoreCheese
+has no corpus, and lorem-ipsum would classify/cluster meaninglessly. Options from the
+2026-07-16 one-pager (`KNOWLEDGE-HUB-ONE-PAGER-2026-07-16.md`):
+- **Option A (cheap):** fatten 3–4 existing prose fields (issue bodies, event/course
+  descriptions) so KH's Entity source has real text — config-only demo after that.
+- **Option B (richer):** generate a 100–300-doc corpus (handbook chapters, guidance,
+  minutes, FAQs) — a new asset class for the generator (text-as-checked-in-data, like the
+  name banks).
+
+**Readiness: 4a 🟢 ready (proof run pending) · 4b 🔴 blocked on Option A/B decision (§7)**
+
+---
+
+## 5. Record Set Processing / data-quality operations
+
+**What integration means here:** MJ's bulk-operations substrate (Record Processes) running
+a *graded* cleanup demo: a process that fixes stale employers or merges duplicates, scored
+against `DataQualityLabel` — "the demo where the platform cleans data and we can prove it
+got the right answers," which no hand-waved demo dataset can do.
+
+**Evidence standard (binary):** one Record Process executed on the demo DB with a
+before/after diff scored against the answer sheet (e.g. 10/11 stale employers corrected,
+0 false positives).
+
+**Readiness: 🟢 answer sheet purpose-built · ⬜ no process authored/run yet**
+
+---
+
+## 6. rasa.io and Izzy — deprioritized, defined for completeness
+
+- **rasa.io** (newsletter personalization): would consume members + emails + interest
+  signals. People/segments/topics exist (emails are deliberately fake `example.com` — fine
+  for demo, prevents real sends). What's missing for a *convincing* rasa demo is a
+  content-engagement stream (sends/opens/clicks) — a new interaction-stream pattern for
+  the generator. **Deprioritized per 2026-07-22 ruling; revisit only if a rasa demo is
+  scheduled.**
+- **Izzy:** data shape unknown to this workstream. **Deprioritized; needs a definition
+  from the Izzy team before anything can be said.**
+
+---
+
+## 7. The one shared asset the AI products keep pointing at: a prose corpus
+
+Betty (if document-fed), Knowledge Hub's classify/search/RAG, and eventually Caliber's
+conversations all consume **generated text** — the single asset class MoreCheese doesn't
+produce. One well-built corpus (KH Option B) would serve all of them at once; Option A
+(fatten existing fields) unlocks only the entity-sourced subset.
+
+**This is a strategic build-or-don't decision, not a July-31 item** — parked unless Betty's
+ingestion answer (§2) forces it.
+
+---
+
+## Summary matrix
+
+| Integration | Data readiness | Proof run executed? | Blocking question |
 |---|---|---|---|
-| **Skip** | consumes MJ entities/queries as AI analyst | data ready; "no extra work" (Barnatt) — but see Q2 | ? |
-| **Sonar** | scores members from engagement components | data engineered for it; run not executed | ? |
-| **Betty** | answers from association knowledge | "already built, zero extra work" (Barnatt) — see Q4 | ? |
-| **Predictive Studio** | trains retention models on our members | strongest engineered fit; never run | ? |
-| **rasa.io** | newsletter personalization from members+interests | deprioritized; would want a content-engagement stream | deferred |
-| **Izzy** | unknown data shape | deprioritized; needs definition | deferred |
-| **Caliber** | intake conversations + assessments | blocked upstream (no schema) | their team |
+| Skip | 🟢 purpose-fit | ⬜ | env-of-record; saved queries? |
+| Betty | 🟢 per ruling | ⬜ | what does it ingest? |
+| Predictive Studio | 🟢 purpose-built | ⬜ **highest value** | who defines features + runs it? |
+| KH — dedup/vectors | 🟢 answer sheet ready | ⬜ | — |
+| KH — prose/RAG | 🔴 no corpus | — | Option A/B |
+| Record Processes (graded cleanup) | 🟢 | ⬜ | who authors the process? |
+| rasa.io | 🟡 members yes, engagement stream no | — | deprioritized |
+| Izzy | ❓ | — | deprioritized; undefined |
 
----
+**The pattern across the whole table:** data readiness is green almost everywhere —
+by design, since the generator was built around these exact claims. What's uniformly
+missing is **executed proof**. Every green cell is a prediction until someone presses the
+button; each proof is roughly an hour-scale session, not a project.
 
-## Open questions (the ones that decide what "integrated" means for July 31)
+## Proposed next step (single highest-leverage move)
 
-**Q1 — Has the 10-seed install been run from scratch?** The colleague validated the 9-seed
-set (69s, exact counts). The re-emitted 10-seed set (renamed band `2341..2350` +
-Seed_10_messaging + enriched forms/issues) has **not** had a clean-DB install run. Also:
-instances built from the old seed filenames (e.g. `morecheese-fullsize`) need a
-wipe-and-remigrate — who coordinates that?
-
-**Q2 — Is L5 in the July-31 definition of done, and who runs the proofs?** The dataset's
-whole premise is that Sonar/Skip/Predictive Studio work on it — but nobody has pressed the
-button. Each proof is probably an hour, not a project. If the demo script includes "Sonar
-flags Bob," someone must have *seen* Sonar flag Bob first. Proposed: one proof session per
-feature, results captured as transcripts/screenshots in `plans/`.
-
-**Q3 — What Explorer configuration is the demo-of-record?** L4 requires choosing which
-`-ng` packages are mounted in the demo Explorer (committees proven; forms blocked on the
-boot fix; sonar's own?). Who owns the demo environment (host, DB, ports), and is it built
-via `mj app install` (L3) so it's reproducible?
-
-**Q4 — Betty's knowledge source.** Ruling says zero extra work — confirm what Betty
-actually ingests in this demo. If it consumes documents, the prose-corpus question returns
-(one corpus would serve Betty + Knowledge Hub + future Caliber conversations). If it works
-over entity data as-is, say so explicitly and close the question.
-
-**Q5 — Seed immutability at first publish.** Pre-release we rewrite seed files freely.
-The moment MoreCheese publishes a version, the PUBLISH_NO_BREAK policy applies — data
-changes then ship as *new* migrations under the next version. Decide the cut point and
-whether CI should enforce the "emit + fail-on-diff" check (designed for, not wired).
-
-**Q6 — The forms boot fix.** L4 for forms depends on either merging the stopgap
-(bizapps-forms PR #9) or the durable MJ manifest-generator fix. Who picks it up, and does
-forms' UI make the July-31 demo or not?
-
-**Q7 — Caliber trigger.** When their baseline migration ships, MoreCheese owes a standard
-new-pack pass (~one session, per the committees/forms/issues/messaging track record). Who
-watches for it, and is it in scope the moment it exists or explicitly next-release?
-
----
-
-## The binary integration checklist (proposed)
-
-"MoreCheese is integrated" for July 31 **iff**:
-1. ✅ L1–L3 hold (they do — pending the Q1 from-scratch 10-seed run to re-confirm L3).
-2. ⬜ L4 for the demo's chosen app set (minimum: committees ✅ + whichever of
-   forms/sonar the script needs — Q3/Q6).
-3. ⬜ L5 proof runs executed for the features the demo script claims (Q2) — each captured
-   as evidence, not asserted.
-4. ✅ Cross-app narrative gates green (they are).
-
-Everything else (rasa/Izzy streams, Caliber, prose corpus, accounting/orders) is
-*explicitly out*, by ruling — listed here so the boundary is inspectable.
+Run the **L5 proof sessions** against the demo DB, in this order:
+1. **Predictive Studio** training run (the flagship claim),
+2. **Sonar** scoring run (bizapp, but the scoring product story — listed for completeness),
+3. **Skip** Q&A transcript,
+4. **Graded dedup** Record Process vs DataQualityLabel.
+Capture each as a transcript/screenshot/metrics file in `plans/association-db/proofs/`.
+After that, every integration row in this doc flips from "engineered-for" to "witnessed,"
+and the demo script can quote evidence instead of intentions.
