@@ -54,7 +54,7 @@ VALUES
   ('FF9D18C3-871E-5D2F-A95A-D5C1499FCEB3', '1DC90877-629A-5B99-8F40-C4DF0BE6981B', N'ICF 2024 post-conference survey', N'Email', N'Closed', '2024-07-16T09:00:00Z', '2024-08-15T23:59:59Z', NULL, 102, 0, 0),
   ('4EC48D1E-CECC-5D25-AFF1-B7E0F847FD38', '1DC90877-629A-5B99-8F40-C4DF0BE6981B', N'ICF 2025 post-conference survey', N'Email', N'Closed', '2025-07-16T09:00:00Z', '2025-08-15T23:59:59Z', NULL, 114, 0, 0),
   ('A1A683C3-A2D8-598C-A37E-BE8038D52723', '1DC90877-629A-5B99-8F40-C4DF0BE6981B', N'ICF 2026 post-conference survey', N'Email', N'Closed', '2026-07-16T09:00:00Z', '2026-08-15T23:59:59Z', NULL, 134, 0, 0),
-  ('99535F2E-EC49-5ECD-BC1B-3E96F1552FEE', 'BFB4B471-6EBF-5DA5-9337-0C7E85B21270', N'Membership application — public link', N'PublicLink', N'Open', '2024-01-01T09:00:00Z', NULL, NULL, 79, 0, 1);
+  ('99535F2E-EC49-5ECD-BC1B-3E96F1552FEE', 'BFB4B471-6EBF-5DA5-9337-0C7E85B21270', N'Membership application — public link', N'PublicLink', N'Active', '2024-01-01T09:00:00Z', NULL, NULL, 79, 0, 1);
 
 -- [__mj_BizAppsForms].[FormQuestionOption]: 5 rows
 INSERT INTO [__mj_BizAppsForms].[FormQuestionOption] ([ID], [QuestionID], [Label], [Value], [DisplayOrder], [IsDefault])

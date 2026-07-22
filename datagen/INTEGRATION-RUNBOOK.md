@@ -86,3 +86,21 @@ SELECT i.IssueNumber, s.Name FROM __mj_BizAppsIssues.Issue i
 JOIN __mj_BizAppsIssues.IssueStatus s ON i.StatusID=s.ID
 WHERE i.Title LIKE '%Duplicate%';                                    -- MC-#### in THEIR workflow
 ```
+
+## Addendum 2026-07-22 — from-scratch install of the CURRENT seed set: VERIFIED
+
+Fresh v5.45 clone → 22 dependency migrations (now incl. bizapps-secure-messaging) → our 15
+(baseline + 3 hand + CodeGen + 10 seeds): **ALL GREEN in ~12m41s**, every row count exact vs
+the canonical packs (Person 2028, periods 8050, meetings 68 w/ 8 Scheduled, responses 727
+w/ 79 anonymous, issues 108 w/ 83 assigned, messaging 43/217/43, DataQualityLabel 48).
+
+Two findings:
+- **F8 — dependency `main` branches restructure post-publish** (committees' migrations
+  briefly appeared missing from a fresh clone). Hand-replayed installs from `main` are
+  fragile; use `mj app install` with pinned versions (release artifacts) instead.
+- **F9 — their CHECK constraints are the law, and our gates didn't know them.** The
+  Membership Application distribution shipped `Status='Open'`; bizapps-forms allows only
+  Draft/Active/Closed → seed failed on real DDL only. Fixed to 'Active' and added a
+  validation gate asserting distribution Status/ChannelType against their CHECK lists
+  (gate #107). Pattern: when generating into a dependency's table, mirror its CHECK value
+  lists in a gate.

@@ -162,7 +162,9 @@ export function buildForms(cfg, people, events, registrations) {
   const relYear = release.getUTCFullYear();
   const appDist = {
     DistributionKey: `${APP_KEY}:public`, FormKey: APP_KEY, Name: 'Membership application — public link',
-    ChannelType: APP.distribution.channel, Status: 'Open',
+    // 'Active' per their CK_FormDistribution_Status (Draft|Active|Closed) — caught by the
+    // 2026-07-22 from-scratch install run; 'Open' is not a legal value in their schema
+    ChannelType: APP.distribution.channel, Status: 'Active',
     OpenAt: `${appSinceYear}-01-01T09:00:00Z`, CloseAt: null,
     ResponseCount: 0, IsSharedDemo: true,
   };

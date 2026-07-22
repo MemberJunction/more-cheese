@@ -487,6 +487,9 @@ function checkComposedApps() {
   const fDistributions = load('forms', 'form_distributions');
   const badCount = fDistributions.filter((d) => d.ResponseCount !== fResponses.filter((x) => x.DistributionKey === d.DistributionKey).length).length;
   check('forms: distribution ResponseCount matches actual response rows', badCount === 0, `${fDistributions.length} distributions`);
+  // their CHECK constraints are the law (caught live 2026-07-22: 'Open' isn't a legal Status)
+  const badDistVals = fDistributions.filter((d) => !['Draft', 'Active', 'Closed'].includes(d.Status) || !['PublicLink', 'Embed', 'QR', 'Email'].includes(d.ChannelType)).length;
+  check('forms: distribution Status/ChannelType within their CHECK constraints', badDistVals === 0, `${badDistVals} illegal`);
   // issues: severity/priority form a real triage matrix, not a wall of Medium
   const II = R.issues;
   const typeShare = new Map(II.types.map((t) => [t.name, issues.filter((x) => x.TypeKey === t.name).length / Math.max(1, issues.length)]));
