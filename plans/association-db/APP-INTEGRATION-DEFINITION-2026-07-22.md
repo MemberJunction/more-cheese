@@ -174,14 +174,41 @@ before/after diff scored against the answer sheet (e.g. 10/11 stale employers co
 
 ---
 
-## 6. rasa.io and Izzy — deprioritized, defined for completeness
+## 6. rasa.io — half-built already (revised 2026-07-22 after reading the rasa repos)
 
-- **rasa.io** (newsletter personalization): would consume members + emails + interest
-  signals. People/segments/topics exist (emails are deliberately fake `example.com` — fine
-  for demo, prevents real sends). What's missing for a *convincing* rasa demo is a
-  content-engagement stream (sends/opens/clicks) — a new interaction-stream pattern for
-  the generator. **Deprioritized per 2026-07-22 ruling; revisit only if a rasa demo is
-  scheduled.**
+Earlier drafts said "no visible wiring" — **wrong on the rasa side.** Findings from the
+local rasa workspace (`/Users/barnattwu/Rasa`):
+
+**What integration means for rasa:** MJ becomes the **26th system in rasa's existing
+`integrations-runner` connector fleet** — the exact seat iMIS/Impexium (the other AMSes)
+occupy. Bidirectional by design:
+- **MJ → rasa:** members → contacts/subscriptions (Email, First/Last, Status, MemberID as
+  external_id) via rasa's standard 11-method connector contract.
+- **rasa → MJ (the interesting half):** rasa's reconcile loop pushes **engagement
+  analytics back to the source system** — last_open, last_click, unique opens/clicks,
+  deliveries, topics, LLM-generated interest summaries, plus subscription/unsubscribe
+  status. That is precisely the member-engagement stream MoreCheese doesn't generate —
+  arriving as real data instead, consumable by Sonar and Predictive Studio as retention
+  signal.
+
+**What already exists on rasa's side:** campaigns backend has MJ config endpoints
+(`campaigns/apps/backend/src/system/memberjunction/`) AND an MJ GraphQL client wrapper,
+and spark_streaming has an MJ embedding loader. **What's missing:** the
+`integrations-runner` connector itself — est. 300–400 lines of Python against the standard
+`ISubscriberSynchronizerTarget` contract (Mailchimp connector is the template), plus DB
+registration rows. All of it lives in rasa's repo; **MoreCheese contributes zero code**.
+
+**MoreCheese-side items (small):**
+1. ✅ Email realism — emails now vary across org-domain work addresses and invented
+   consumer providers, all on the RFC-2606-reserved `.example` TLD (never deliverable —
+   a rasa demo still requires test/suppression mode, by design).
+2. ⬜ A landing place for the pushed-back analytics (e.g. `LastEmailOpenDate`/
+   `LastEmailClickDate` on MemberProfile) — a small additive migration + CodeGen
+   re-capture, only worth doing when a rasa connector actually exists to fill it.
+
+**Status: deprioritized per ruling, but the cost picture changed** — rasa integration is
+one connector in their repo away, not a greenfield project.
+
 - **Izzy:** data shape unknown to this workstream. **Deprioritized; needs a definition
   from the Izzy team before anything can be said.**
 

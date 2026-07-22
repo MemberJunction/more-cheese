@@ -38,11 +38,22 @@ export function buildOrgs(cfg) {
   return orgs;
 }
 
-/** Deterministic demo email — RFC 2606 reserved domain, PURE derivation (no dice: adding
- * Email re-rolls nothing). Unique per member via the member-number digits. */
-export function emailFor(first, last, memberNumber) {
+/** Deterministic demo emails — every domain sits on the RFC 2606-reserved `.example` TLD
+ * (never deliverable; a real send is impossible by construction), but the ADDRESSES read
+ * like a real membership roster: employed members mostly carry work emails at their org's
+ * domain, everyone else uses one of a handful of invented consumer providers. PURE
+ * derivation (a tiny string hash, no dice) — adding or changing Email re-rolls nothing. */
+const EMAIL_PROVIDERS = ['mailhaven.example', 'postfield.example', 'bluebarn.example', 'homestead.example', 'lakemail.example', 'quillpost.example'];
+const WORK_EMAIL_SHARE = 0.6; // employed members with an org-domain address (the rest use personal mail at work, like real people)
+const strHash = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0; return h >>> 0; };
+export const consumerDomainFor = (key) => EMAIL_PROVIDERS[strHash(`prov:${key}`) % EMAIL_PROVIDERS.length];
+const orgDomainFor = (orgName) => `${orgName.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 24)}.example`;
+
+export function emailFor(first, last, memberNumber, orgName = null) {
   const name = `${first}.${last}`.toLowerCase().replace(/[^a-z0-9.]/g, '');
-  return `${name}.${memberNumber.replace(/\D/g, '')}@example.com`;
+  const work = orgName && (strHash(`work:${memberNumber}`) % 100) < WORK_EMAIL_SHARE * 100;
+  const domain = work ? orgDomainFor(orgName) : consumerDomainFor(memberNumber);
+  return `${name}.${memberNumber.replace(/\D/g, '')}@${domain}`;
 }
 
 /** Join dates: growth-weighted intake (~15%/yr) — attrition then builds the tenure pyramid honestly. */
@@ -91,7 +102,7 @@ export function buildPeople(cfg, orgs) {
     // origin-consistent authored name from the member's own name stream (region-weighted buckets)
     const nm = personNameFor(seed, key, region);
     people.push({
-      MemberNumber: key, FirstName: nm.first, LastName: nm.last, MiddleName: nm.middle, PreferredName: nm.preferred, Email: emailFor(nm.first, nm.last, key), Title: titleFor(seed, key, segment),
+      MemberNumber: key, FirstName: nm.first, LastName: nm.last, MiddleName: nm.middle, PreferredName: nm.preferred, Email: emailFor(nm.first, nm.last, key, org?.Name), Title: titleFor(seed, key, segment),
       Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
       _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit
@@ -118,7 +129,7 @@ export function buildPeople(cfg, orgs) {
     }
     const idx = R.heroes.indexOf(h);
     people[idx] = {
-      MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, MiddleName: null, PreferredName: h.preferred ?? null, Email: emailFor(h.first, h.last, h.memberNumber), Title: h.title ?? null,
+      MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, MiddleName: null, PreferredName: h.preferred ?? null, Email: emailFor(h.first, h.last, h.memberNumber, heroOrg?.Name), Title: h.title ?? null,
       Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
       OrgKey: heroOrg?.OrgKey ?? null, JoinDate: joinDate,
       _theta: h.theta, _thetaPath: h.thetaByYear ?? null, _phi: h.phi, // pinned level — or a pinned ARC (thetaByYear); never drawn drift
