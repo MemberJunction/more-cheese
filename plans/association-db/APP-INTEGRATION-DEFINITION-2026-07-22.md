@@ -7,15 +7,49 @@ through their views, install, their UIs) is defined and tracked elsewhere
 This doc is about the layer above: **the Blue Cypress SaaS products and MJ core's own
 intelligence features consuming MoreCheese data.**
 
-**The framing decision that shapes everything** (Barnatt, 2026-07-14): the demo story is
-**MJ-native** — data born in MJ, no external ingestion pipelines. So for every product
-below, "integration" does NOT mean connectors, syncs, or APIs to build. It means:
+---
 
-> **the product, pointed at the MoreCheese database, produces credible results — because
-> the data has the right shape, signals, and stories in it.**
+## §0 — What "integration" means in MJ, and then in MoreCheese (read this first)
 
-Our deliverable is therefore *data readiness + a proof run*, per product. Config belongs
-to each product's team; pipelines don't exist by design.
+Traditional integration is point-to-point: N systems × M connections, ETL jobs, webhooks,
+sync pipelines. **MJ's architecture deliberately replaces that with a hub: the shared
+metadata graph.** Nothing in MJ integrates *with* anything else — everything plugs *into*
+one database + entity-metadata layer and gets everything else for free. Integration in MJ
+is therefore **participation in that graph**, at four depths:
+
+1. **Tables in the database** — the data physically coexists.
+2. **Entities registered in metadata** (`__mj.Entity` + generated views/APIs) — the magic
+   moment: once registered, every metadata-driven consumer sees the data — Explorer,
+   RunView, dashboards, search, agents, Skip — none of which know "MoreCheese" exists.
+3. **Linked into the shared graph** — FKs into the common spine (Person, Organization), so
+   one identity threads across every app's data.
+4. **Semantics supplied** — descriptions, value lists, relationships — so *machine*
+   consumers (LLMs, Skip agents, Predictive Studio feature assembly) understand what
+   columns MEAN, not just that they exist.
+
+**The operational test** that resolves every fuzzy integration conversation:
+
+> **Does the product read MJ metadata? → integration is CONFIGURATION (keys, org IDs,
+> pointing it at the instance). Does it not? → integration is a CONNECTOR, and that
+> connector is the product team's asset to build/own — never MoreCheese's.**
+
+Metadata-native (config-only): Skip, Predictive Studio, Knowledge Hub, Sonar, MJ agents/
+search/dashboards. Outside the fabric (connector question, owned by their teams): Betty,
+rasa.io, Izzy.
+
+**And what MoreCheese adds on top** — the workstream's actual thesis: being *in* the graph
+makes data **visible**; it doesn't make it **credible**. A fully-registered dataset can
+still be demo garbage (flat distributions, no causality, nothing for a model to find). So:
+
+> **MoreCheese integration = full citizenship in the metadata graph (depths 1–4 — DONE)
+> + engineered signal in the data so everything consuming the graph produces TRUE results
+> (done, but unproven per product — hence the proof runs below).**
+
+This is also why the MJ-native ruling (Barnatt, 2026-07-14 — data born in MJ, no external
+ingestion) shapes everything: we never build pipes; we make the data worth pointing things
+at. Every remaining "integration task" in this doc reduces to one of three shapes:
+**a config/keys exercise** (metadata-native products), **a question to a product team**
+(external products), or **a proof run** (witnessing the engineered signal perform).
 
 ---
 
