@@ -39,7 +39,7 @@ const c = (name, type, opt = {}) => ({ name, type, nullable: !!opt.null, pk: !!o
 // __mj_BizAppsCommon is a STAND-IN: IF-guarded, real column shapes (copied from
 // bizapps-common migrations/B202602271452) — when the real app is installed first, the
 // guards skip and our INSERTs land in the genuine tables.
-const SCHEMAS = ['__mj_BizAppsCommon', '__mj_BizAppsCommittees', '__mj_BizAppsForms', '__mj_BizAppsTasks', '__mj_BizAppsIssues', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
+const SCHEMAS = ['__mj_BizAppsCommon', '__mj_BizAppsCommittees', '__mj_BizAppsForms', '__mj_BizAppsTasks', '__mj_BizAppsIssues', '__mj_BizAppsSecureMessaging', 'morecheese_members', 'morecheese_events', 'morecheese_learning', 'morecheese_orders'];
 const TABLES = [
   // bizapps-common stand-ins — REAL shapes (B202602271452), minus their FKs to tables we
   // don't stand in (__mj.User, OrganizationType); columns we don't fill stay nullable
@@ -105,11 +105,32 @@ const TABLES = [
     c('StatusID', UID, { fk: '[__mj_BizAppsIssues].[IssueStatus]' }),
     c('Severity', s(20)), c('Priority', s(20)),
     c('ReporterPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('AssigneeEntityID', UID, { null: true }), c('AssigneeRecordID', s(450), { null: true }),
     c('SourceEntityID', UID, { null: true }), c('SourceRecordID', s(450), { null: true }),
     c('ResolvedAt', 'DATETIMEOFFSET', { null: true }), c('ClosedAt', 'DATETIMEOFFSET', { null: true }),
   ] },
   { schema: '__mj_BizAppsIssues', table: 'IssueNumberSequence', cols: [
     c('ScopeCode', s(50), { pk: true }), c('NextSequenceNumber', INT),
+  ] },
+  // bizapps-secure-messaging stand-ins — REAL shapes (V202607201423); ContactID/PersonID
+  // are soft references in their design (no cross-schema FK), mirrored here
+  { schema: '__mj_BizAppsSecureMessaging', table: 'PortalSession', cols: [
+    c('ID', UID, { pk: true }), c('ContactID', UID), c('TokenHash', s(128)), c('Status', s(20)),
+    c('ExpiresAt', 'DATETIMEOFFSET'), c('LastAccessedAt', 'DATETIMEOFFSET'),
+  ] },
+  { schema: '__mj_BizAppsSecureMessaging', table: 'SecureThread', cols: [
+    c('ID', UID, { pk: true }), c('ContactID', UID), c('Subject', s(500)), c('Status', s(20)),
+    c('SourceChannel', s(50), { null: true }), c('CreatedByUserID', UID, { null: true }),
+    c('LastMessageAt', 'DATETIMEOFFSET', { null: true }), c('IsDeleted', BIT),
+  ] },
+  { schema: '__mj_BizAppsSecureMessaging', table: 'SecureMessage', cols: [
+    c('ID', UID, { pk: true }),
+    c('PortalSessionID', UID, { fk: '[__mj_BizAppsSecureMessaging].[PortalSession]' }),
+    c('ThreadID', UID, { fk: '[__mj_BizAppsSecureMessaging].[SecureThread]' }),
+    c('PersonID', UID, { null: true }), c('Direction', s(20)), c('Sender', s(255)), c('Recipient', s(255)),
+    c('Subject', s(255), { null: true }), c('Content', 'NVARCHAR(MAX)'), c('IsSecure', BIT),
+    c('Status', s(20)), c('ExternalMessageID', UID, { null: true }), c('ReceivedAt', 'DATETIMEOFFSET'),
+    c('IsStarred', BIT), c('IsImported', BIT), c('SourceChannel', s(50), { null: true }),
   ] },
   // OUR extension profiles (memo §2.3 shape convention) — member/org-specific fields,
   // hard FKs into the dependency schema (Marcelo's linking ruling)
@@ -193,6 +214,10 @@ const TABLES = [
     c('PageID', UID, { null: true, fk: '[__mj_BizAppsForms].[FormPage]' }),
     c('QuestionType', s(50)), c('Prompt', 'NVARCHAR(MAX)'), c('IsRequired', BIT), c('DisplayOrder', INT),
   ] },
+  { schema: '__mj_BizAppsForms', table: 'FormQuestionOption', cols: [
+    c('ID', UID, { pk: true }), c('QuestionID', UID, { fk: '[__mj_BizAppsForms].[FormQuestion]' }),
+    c('Label', s(500)), c('Value', s(500), { null: true }), c('DisplayOrder', INT), c('IsDefault', BIT),
+  ] },
   { schema: '__mj_BizAppsForms', table: 'FormDistribution', cols: [
     c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
     c('Name', s(255)), c('ChannelType', s(20)), c('Status', s(20)),
@@ -202,11 +227,15 @@ const TABLES = [
   { schema: '__mj_BizAppsForms', table: 'FormResponse', cols: [
     c('ID', UID, { pk: true }), c('FormID', UID, { fk: '[__mj_BizAppsForms].[Form]' }),
     c('FormVersionID', UID, { fk: '[__mj_BizAppsForms].[FormVersion]' }), c('Status', s(20)),
-    c('RespondentPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }), c('SubmittedAt', 'DATETIMEOFFSET', { null: true }),
+    c('AnonymousSessionID', s(255), { null: true }),
+    c('RespondentPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('StartedAt', 'DATETIMEOFFSET', { null: true }), c('SubmittedAt', 'DATETIMEOFFSET', { null: true }),
+    c('SourceMetadata', 'NVARCHAR(MAX)', { null: true }),
   ] },
   { schema: '__mj_BizAppsForms', table: 'FormResponseAnswer', cols: [
     c('ID', UID, { pk: true }), c('ResponseID', UID, { fk: '[__mj_BizAppsForms].[FormResponse]' }),
     c('QuestionID', UID, { fk: '[__mj_BizAppsForms].[FormQuestion]' }),
+    c('TextValue', 'NVARCHAR(MAX)', { null: true }),
     c('NumericValue', 'DECIMAL(18,4)', { null: true }), c('BooleanValue', BIT, { null: true }),
   ] },
   { schema: 'morecheese_learning', table: 'Certification', cols: [

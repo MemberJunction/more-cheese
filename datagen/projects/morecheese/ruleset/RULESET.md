@@ -52,11 +52,11 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 
 ## The pinned people (heroes)
 
-- **Elena Rodriguez** (`ICF-000101`) — Producer, Petaluma. Pins: {"status":"Active","minRegistrationsPerYear":2,"committeeSeat":"Standards Committee"}.
+- **Elena Rodriguez** (`ICF-000101`) — Producer, Petaluma. Pins: {"status":"Active","minRegistrationsPerYear":2,"committeeSeat":"Standards Committee","issueMin":1,"formResponse":true}.
 - **Marcus Chen** (`ICF-000102`) — Retailer, Seattle. Pins: {"status":"PendingRenewal","endDateWithinDaysOfRelease":[14,28]}.
 - **Danielle Okafor** (`ICF-000103`) — Producer, Brattleboro. Pins: {"status":"Lapsed","employerDissolved":2025,"cancellationReasonContains":"employer"}.
 - **Priya Natarajan** (`ICF-000104`) — Producer, Madison. Pins: {"status":"Active"}.
-- **Bob Kowalski** (`ICF-000105`) — Supplier, Chicago. Pins: {"status":"Active","employerAcquired":2023}.
+- **Bob Kowalski** (`ICF-000105`) — Supplier, Chicago. Pins: {"status":"Active","employerAcquired":2023,"issueMin":1,"formResponse":true}.
 - **Henri Dubois** (`ICF-000107`) — Producer, Poligny. Pins: {"status":"Active","tier":"Corporate","competitionGold":2025}.
 - **Kate O'Leary** (`ICF-000111`) — Retailer, Madison. Pins: {"status":"Active","duplicateOf":null}.
 - **Kathy OLeary** (`ICF-000287`) — Retailer, Madison. Pins: {"status":"Active","duplicateOf":"ICF-000111"}.
@@ -64,9 +64,9 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 - **Victor Sandoval** (`ICF-000114`) — Supplier, Austin. Pins: {"status":"Active","tier":"Corporate"}.
 - **Nia Thompson** (`ICF-000115`) — Retailer, Brooklyn. Pins: {"status":"Active","joinedDaysBeforeRelease":14}.
 - **Charlie Mason** (`ICF-000116`) — Producer, Hobart. Pins: {"status":"Active","tier":"SmallBusiness"}.
-- **Gwen Whitfield** (`ICF-000108`) — Educator, Chicago. Pins: {"status":"Active","committeeSeat":"Food Safety Committee","committeeRole":"Chair"}.
+- **Gwen Whitfield** (`ICF-000108`) — Educator, Chicago. Pins: {"status":"Active","committeeSeat":"Food Safety Committee","committeeRole":"Chair","issueMin":1,"formResponse":true}.
 - **Sofia Marchetti** (`ICF-000106`) — Retailer, Brooklyn. Pins: {"status":"Active","certStatus":"InProgress"}.
-- **Tom Reyes** (`ICF-000109`) — Producer, Ithaca. Pins: {"status":"Active","advocacyMin":30,"testimonies":2}.
+- **Tom Reyes** (`ICF-000109`) — Producer, Ithaca. Pins: {"status":"Active","advocacyMin":30,"testimonies":2,"issueMin":1,"formResponse":true}.
 - **Aisha Bell** (`ICF-000110`) — Producer, Petaluma. Pins: {"status":"Active","defect":"StaleEmployer"}.
 
 ## How to author a rule (the three vocabularies)

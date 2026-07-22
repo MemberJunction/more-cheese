@@ -1,0 +1,49 @@
+{
+  "$comment": "MESSAGING MODULE (pack: messaging) — targets bizapps-secure-messaging (baseline V202607201423, schema __mj_BizAppsSecureMessaging, entity prefix 'MJ_BizApps_SecureMessaging: ', published by Ian 2026-07-21; in scope per Barnatt 2026-07-22). Threads DERIVE from issues — support conversations get a secure channel — and every hero-authored issue always gets one (cross-app footprint). ContactID/PersonID are SOFT references in their schema (no cross-schema FK), so our deterministic person UUIDs land cleanly. Generated slice: SecureThread/SecureMessage/PortalSession (a session per thread — SecureMessage.PortalSessionID is NOT NULL). NOT generated, by design: PortalMagicLink (runtime auth artifact — fabricating it would be wrong) and MessageFile/FileRequest (need real file blobs).",
+  "messaging": {
+    "threadSharePerIssue": 0.45,
+    "tolerance": 0.1,
+    "$note": "ESTIMATE — share of support issues whose conversation runs over the secure portal rather than plain email; hero-authored issues ALWAYS get a thread",
+    "followUpPairsMax": 2,
+    "replyDelayHoursMax": 72,
+    "staffFallbackSender": "ICF Member Services",
+    "starredShare": 0.06,
+    "openers": {
+      "Billing": [
+        "Hi — I received an overdue notice but I believe this invoice was already paid. Could you check on your end?",
+        "Our AP contact changed and I think the invoice went to the wrong inbox. Can you resend the current statement?",
+        "I'd like to sort out the outstanding balance on my account before renewal — what exactly is still open?"
+      ],
+      "Data Correction": [
+        "My employer information is out of date in the member directory — could you update the record?",
+        "The roster still shows my old affiliation. What do you need from me to correct it?",
+        "I noticed my organization's listing has stale details. Happy to provide the current information."
+      ],
+      "Events": [
+        "I registered and paid but couldn't attend — could you let me know the refund options?",
+        "I can't find the session materials from the event in my portal. Are they available somewhere?",
+        "Quick question about my event registration — can it be transferred to a colleague?"
+      ],
+      "General": [
+        "I have a question about member benefits — who is the right person to talk to?",
+        "Could you point me to the process for getting involved with federation programs?",
+        "I'd like some guidance on how to make the most of my membership this year."
+      ]
+    },
+    "replies": [
+      "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "Thanks for flagging this. I've pulled up your account and I'm reviewing it now."
+    ],
+    "followUps": [
+      "Thanks — just checking in on where this stands.",
+      "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "Thank you! Let me know if you need anything else from me."
+    ],
+    "closers": [
+      "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "Good news — this has been taken care of. Closing the thread, but reply any time to reopen."
+    ]
+  }
+}

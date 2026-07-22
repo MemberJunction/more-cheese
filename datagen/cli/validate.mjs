@@ -47,6 +47,9 @@ const memberCerts = load('learning', 'member_certifications');
 const compEntries = load('events', 'competition_entries');
 const advocacy = load('membership', 'advocacy_actions');
 const dqLabels = load('membership', 'data_quality_labels');
+const smThreads = load('messaging', 'secure_threads');
+const smMessages = load('messaging', 'secure_messages');
+const smSessions = load('messaging', 'portal_sessions');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -91,12 +94,20 @@ function checkPacks() {
   const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
   check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
   const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
-  const badResp = fResponses.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  // member responses must resolve to people; anonymous ones must carry a session id instead
+  const badResp = fResponses.filter((x) => x.MemberNumber != null ? !peopleKeys.has(x.MemberNumber) : !x.AnonymousSessionID).length;
   const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
-  check('pack refs: forms→common + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
+  check('pack refs: forms→common (anon: session id) + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
   const badRel = relationships.filter((x) => (x.FromMemberNumber && !peopleKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !peopleKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
-  const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length;
+  const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length
+    + issues.filter((x) => x.AssigneeMemberNumber && !peopleKeys.has(x.AssigneeMemberNumber)).length;
   check('pack refs: relationships/tasks/issues→common', badRel + badTask === 0, `${badRel}+${badTask} dangling`);
+  const threadKeys = new Set(smThreads.map((x) => x.ThreadKey));
+  const sessionKeys = new Set(smSessions.map((x) => x.SessionKey));
+  const badMsg = smThreads.filter((x) => !peopleKeys.has(x.MemberNumber)).length
+    + smSessions.filter((x) => !peopleKeys.has(x.MemberNumber)).length
+    + smMessages.filter((x) => !threadKeys.has(x.ThreadKey) || !sessionKeys.has(x.SessionKey)).length;
+  check('pack refs: messaging→common + messages→threads/sessions', badMsg === 0, `${badMsg} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -449,11 +460,13 @@ function checkComposedApps() {
   const attRate = cAttendance.length ? present / cAttendance.length : 0;
   const attAllow = CC.meetings.attendance.tolerance + 1.5 * Math.sqrt((CC.meetings.attendance.presentTarget * (1 - CC.meetings.attendance.presentTarget)) / Math.max(1, cAttendance.length));
   check(`committees: meeting attendance ${(attRate * 100).toFixed(1)}% vs ${CC.meetings.attendance.presentTarget * 100}% ±${(attAllow * 100).toFixed(1)}`, Math.abs(attRate - CC.meetings.attendance.presentTarget) <= attAllow, `${cAttendance.length} attendance rows`);
-  // survey response rate (pooled over distributions) + NPS mean band
+  // survey response rate (pooled over distributions) + NPS mean band — SURVEY responses only
+  // (the membership application is a separate, anonymous funnel with its own gates below)
+  const surveyResponses = fResponses.filter((x) => x.FormKey === 'post-conf-survey');
   const attendees = regs.filter((x) => x.Attended === true && events.find((e) => e.EventKey === x.EventKey)?.EventType === 'Conference').length;
-  const respRate = attendees ? fResponses.length / attendees : 0;
+  const respRate = attendees ? surveyResponses.length / attendees : 0;
   const respAllow = FF.response.tolerance + 1.5 * Math.sqrt((FF.response.rateTarget * (1 - FF.response.rateTarget)) / Math.max(1, attendees));
-  check(`forms: survey response rate ${(respRate * 100).toFixed(1)}% vs ${FF.response.rateTarget * 100}% ±${(respAllow * 100).toFixed(1)}`, Math.abs(respRate - FF.response.rateTarget) <= respAllow, `${fResponses.length} responses / ${attendees} attendees`);
+  check(`forms: survey response rate ${(respRate * 100).toFixed(1)}% vs ${FF.response.rateTarget * 100}% ±${(respAllow * 100).toFixed(1)}`, Math.abs(respRate - FF.response.rateTarget) <= respAllow, `${surveyResponses.length} responses / ${attendees} attendees`);
   // NPS gate on NON-covid years (the covid dip is gated separately as regime expression)
   const covidDists = new Set(R.regimes.covid.years.map((y) => `post-conf-survey:${y}`));
   const respDist = new Map(fResponses.map((x) => [x.ResponseKey, x.DistributionKey]));
@@ -464,6 +477,33 @@ function checkComposedApps() {
   const npsAllow = FF.answers.nps.meanTolerance + 1.5 * (1.9 / Math.sqrt(Math.max(1, npsN.length)));
   check(`forms: mean NPS (non-covid) ${mean(npsN).toFixed(2)} vs ${FF.answers.nps.base} ±${npsAllow.toFixed(2)}`, Math.abs(mean(npsN) - FF.answers.nps.base) <= npsAllow, `${npsN.length} answers`);
   if (npsC.length >= 20) check(`regime: covid NPS dip expressed (${mean(npsC).toFixed(2)} < ${mean(npsN).toFixed(2)})`, mean(npsC) < mean(npsN), `${npsC.length} covid-year answers`);
+  // membership application: the ANONYMOUS intake funnel (bizapps-forms' flagship feature)
+  const appResp = fResponses.filter((x) => x.FormKey === 'membership-application');
+  const badAnonShape = appResp.filter((x) => x.MemberNumber != null || !x.AnonymousSessionID).length;
+  check(`forms: membership-application responses are anonymous (null member + session id)`, appResp.length > 0 && badAnonShape === 0, `${appResp.length} responses, ${badAnonShape} malformed`);
+  const appYears = FF.application.distribution.sinceYearsBeforeRelease;
+  const [appLo, appHi] = [appYears * FF.application.volume.perYearMin, appYears * FF.application.volume.perYearMax];
+  check(`forms: application volume ${appResp.length} within [${appLo}, ${appHi}] (release-year partial ok)`, appResp.length >= appLo * 0.5 && appResp.length <= appHi, `${appYears}y window`);
+  const fDistributions = load('forms', 'form_distributions');
+  const badCount = fDistributions.filter((d) => d.ResponseCount !== fResponses.filter((x) => x.DistributionKey === d.DistributionKey).length).length;
+  check('forms: distribution ResponseCount matches actual response rows', badCount === 0, `${fDistributions.length} distributions`);
+  // issues: severity/priority form a real triage matrix, not a wall of Medium
+  const II = R.issues;
+  const typeShare = new Map(II.types.map((t) => [t.name, issues.filter((x) => x.TypeKey === t.name).length / Math.max(1, issues.length)]));
+  for (const level of ['Critical', 'High', 'Medium', 'Low']) {
+    const want = II.types.reduce((s2, t) => s2 + (typeShare.get(t.name) ?? 0) * ((II.severity.byType[t.name].find(([l]) => l === level)?.[1]) ?? 0), 0);
+    const got = issues.filter((x) => x.Severity === level).length / Math.max(1, issues.length);
+    const allow = II.severity.tolerance + 3 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
+    check(`issues: severity ${level} ${(got * 100).toFixed(1)}% vs ${(want * 100).toFixed(1)}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${issues.length} issues`);
+  }
+  check('issues: severity and priority are decoupled (differ on some issues)', issues.some((x) => x.Severity !== x.Priority), `${issues.filter((x) => x.Severity !== x.Priority).length} differ`);
+  // issues: assignment coverage rides the declared share; assignees are committee officers
+  const assigned = issues.filter((x) => x.AssigneeMemberNumber);
+  const aShare = assigned.length / Math.max(1, issues.length);
+  const aAllow = II.assignment.tolerance + 1.5 * Math.sqrt(II.assignment.share * (1 - II.assignment.share) / Math.max(1, issues.length));
+  check(`issues: ${(aShare * 100).toFixed(1)}% assigned vs ${II.assignment.share * 100}% ±${(aAllow * 100).toFixed(1)}`, Math.abs(aShare - II.assignment.share) <= aAllow, `${assigned.length}/${issues.length}`);
+  const officerSet = new Set(cMemberships.filter((m) => m.TermKey.endsWith(`:${R.committees.terms.at(-1).start}`) && ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
+  check('issues: every assignee is an active-term committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
   // programs: pursuit + advocate shares land (over their real pools)
   const PRG = R.programs;
   const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
@@ -574,6 +614,14 @@ function checkHeroes() {
     if (h.pins.defect) {
       if (!dqLabels.some((l) => l.MemberNumber === h.memberNumber && l.DefectKind === h.pins.defect)) problems.push(`no ${h.pins.defect} label`);
     }
+    // cross-app footprint: flagship heroes must be walkable through issues + forms
+    if (h.pins.issueMin) {
+      const n = issues.filter((x) => x.ReporterMemberNumber === h.memberNumber).length;
+      if (n < h.pins.issueMin) problems.push(`issues ${n}<${h.pins.issueMin}`);
+    }
+    if (h.pins.formResponse) {
+      if (!fResponses.some((x) => x.MemberNumber === h.memberNumber)) problems.push('no form response');
+    }
     if (h.pins.advocacyMin) {
       const acts = advocacy.filter((x) => x.MemberNumber === h.memberNumber);
       if (acts.length < h.pins.advocacyMin) problems.push(`advocacy ${acts.length}<${h.pins.advocacyMin}`);
@@ -644,6 +692,38 @@ function checkDefects() {
   check('defects: every label verifiable against the data', problems.length === 0, problems.slice(0, 3).join('; ') || `${dqLabels.length} labels`);
 }
 
+// ---------- secure messaging: threads derive from issues, message flow is coherent ----------
+function checkMessaging() {
+  const MM = R.messaging;
+  // volume: declared share of issues + all hero issues (which always thread)
+  const heroIssues = issues.filter((x) => x.IssueKey.startsWith('hero:'));
+  const want = MM.threadSharePerIssue;
+  const got = (smThreads.length - heroIssues.length) / Math.max(1, issues.length - heroIssues.length);
+  const allow = MM.tolerance + 1.5 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
+  check(`messaging: ${(got * 100).toFixed(1)}% of crowd issues have a secure thread vs ${want * 100}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${smThreads.length} threads / ${issues.length} issues`);
+  const heroMissing = heroIssues.filter((x) => !smThreads.some((t) => t.IssueKey === x.IssueKey));
+  check('messaging: every hero-authored issue has a secure thread', heroMissing.length === 0, heroMissing.map((x) => x.IssueKey).join(', ') || `${heroIssues.length} hero issues`);
+  // integrity: thread state mirrors its issue; message flow is coherent and inside history
+  const issueByKey = new Map(issues.map((x) => [x.IssueKey, x]));
+  const msgsByThread = new Map();
+  for (const m of smMessages) { (msgsByThread.get(m.ThreadKey) ?? msgsByThread.set(m.ThreadKey, []).get(m.ThreadKey)).push(m); }
+  const problems = [];
+  for (const t of smThreads) {
+    const iss = issueByKey.get(t.IssueKey);
+    const ms = msgsByThread.get(t.ThreadKey) ?? [];
+    const terminal = iss && (iss.StatusKey === 'Resolved' || iss.StatusKey === 'Closed');
+    if (!iss) { problems.push(`${t.ThreadKey}: no issue`); continue; }
+    if (terminal !== (t.Status !== 'Active')) problems.push(`${t.ThreadKey}: status ${t.Status} vs issue ${iss.StatusKey}`);
+    if (!ms.length) { problems.push(`${t.ThreadKey}: no messages`); continue; }
+    if (ms[0].Direction !== 'Inbound') problems.push(`${t.ThreadKey}: opener not inbound`);
+    if (t.LastMessageAt !== ms[ms.length - 1].ReceivedAt) problems.push(`${t.ThreadKey}: LastMessageAt mismatch`);
+    for (let i = 1; i < ms.length; i++) if (ms[i].ReceivedAt < ms[i - 1].ReceivedAt) problems.push(`${t.ThreadKey}: time order`);
+    if (ms.some((m) => m.Direction === 'Outbound' && m.Status !== 'Sent')) problems.push(`${t.ThreadKey}: outbound status`);
+    if (ms.some((m) => m.ReceivedAt > `${run.releaseDate}T23:59:59Z`)) problems.push(`${t.ThreadKey}: message after release`);
+  }
+  check('messaging: thread/message integrity (state mirrors issue, coherent flow, inside history)', problems.length === 0, problems.slice(0, 3).join('; ') || `${smMessages.length} messages in ${smThreads.length} threads`);
+}
+
 // ---------- motifs: every stamped archetype actually expresses ----------
 function checkMotifs() {
   const { registry, meta } = JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8'));
@@ -699,6 +779,7 @@ checkHeroes();
 checkStatusMix();
 checkDefects();
 checkMotifs();
+checkMessaging();
 
 let failed = 0;
 for (const r of results) {

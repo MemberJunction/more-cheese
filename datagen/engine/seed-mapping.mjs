@@ -298,6 +298,8 @@ export const MAPPING = {
         IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlVar({ New: '@IS_New', 'In Progress': '@IS_InProgress', Resolved: '@IS_Resolved', Closed: '@IS_Closed' }[r.StatusKey]),
         Severity: sqlStr(r.Severity), Priority: sqlStr(r.Priority),
         ReporterPersonID: sqlId(uuidFor('person', r.ReporterMemberNumber)),
+        AssigneeEntityID: r.AssigneeMemberNumber ? sqlVar('@E_People') : sqlId(null),
+        AssigneeRecordID: sqlId(r.AssigneeMemberNumber ? uuidFor('person', r.AssigneeMemberNumber) : null),
         SourceEntityID: sqlVar({ 'MoreCheese: Orders': '@E_Orders', 'MJ_BizApps_Common: Organizations': '@E_Orgs', 'MoreCheese: Event Registrations': '@E_Regs', 'MJ_BizApps_Common: People': '@E_People' }[r.SourceEntityName]),
         SourceRecordID: sqlId({ order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind]),
         ResolvedAt: sqlDate(r.ResolvedAt), ClosedAt: sqlDate(r.ClosedAt),
@@ -338,18 +340,62 @@ export const MAPPING = {
       }),
     },
     {
+      json: 'form_question_options', table: '[__mj_BizAppsForms].[FormQuestionOption]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('formqopt', r.OptionKey)), QuestionID: sqlId(uuidFor('formq', r.QuestionKey)),
+        Label: sqlStr(r.Label), Value: sqlStr(r.Value), DisplayOrder: sqlNum(r.DisplayOrder), IsDefault: sqlBit(r.IsDefault),
+      }),
+    },
+    {
       json: 'form_responses', table: '[__mj_BizAppsForms].[FormResponse]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formresp', r.ResponseKey)), FormID: sqlId(uuidFor('form', r.FormKey)),
         FormVersionID: sqlId(uuidFor('formver', r.VersionKey)), Status: sqlStr(r.Status),
-        RespondentPersonID: sqlId(uuidFor('person', r.MemberNumber)), SubmittedAt: sqlDate(r.SubmittedAt),
+        // anonymous intake: null member → null person FK, session id carries the identity-less trail
+        RespondentPersonID: sqlId(r.MemberNumber ? uuidFor('person', r.MemberNumber) : null),
+        AnonymousSessionID: sqlStr(r.AnonymousSessionID ?? null), SourceMetadata: sqlStr(r.SourceMetadata ?? null),
+        StartedAt: sqlDate(r.StartedAt ?? null), SubmittedAt: sqlDate(r.SubmittedAt),
       }),
     },
     {
       json: 'form_answers', table: '[__mj_BizAppsForms].[FormResponseAnswer]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formans', r.AnswerKey)), ResponseID: sqlId(uuidFor('formresp', r.ResponseKey)),
-        QuestionID: sqlId(uuidFor('formq', r.QuestionKey)), NumericValue: sqlNum(r.NumericValue ?? null), BooleanValue: sqlBit(r.BooleanValue ?? null),
+        QuestionID: sqlId(uuidFor('formq', r.QuestionKey)), TextValue: sqlStr(r.TextValue ?? null),
+        NumericValue: sqlNum(r.NumericValue ?? null), BooleanValue: sqlBit(r.BooleanValue ?? null),
+      }),
+    },
+  ],
+  messaging: [
+    // bizapps-secure-messaging's REAL shapes (V202607201423). ContactID/PersonID are SOFT
+    // references (their design: no cross-schema FK), so person UUIDs land directly.
+    // Session before message: SecureMessage.PortalSessionID is NOT NULL.
+    {
+      json: 'portal_sessions', table: '[__mj_BizAppsSecureMessaging].[PortalSession]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('psession', r.SessionKey)), ContactID: sqlId(uuidFor('person', r.MemberNumber)),
+        TokenHash: sqlStr(r.TokenHash), Status: sqlStr(r.Status),
+        ExpiresAt: sqlDate(r.ExpiresAt), LastAccessedAt: sqlDate(r.LastAccessedAt),
+      }),
+    },
+    {
+      json: 'secure_threads', table: '[__mj_BizAppsSecureMessaging].[SecureThread]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('thread', r.ThreadKey)), ContactID: sqlId(uuidFor('person', r.MemberNumber)),
+        Subject: sqlStr(r.Subject), Status: sqlStr(r.Status), SourceChannel: sqlStr(r.SourceChannel),
+        CreatedByUserID: sqlId(null), LastMessageAt: sqlDate(r.LastMessageAt), IsDeleted: sqlBit(r.IsDeleted),
+      }),
+    },
+    {
+      json: 'secure_messages', table: '[__mj_BizAppsSecureMessaging].[SecureMessage]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('secmsg', r.MessageKey)), PortalSessionID: sqlId(uuidFor('psession', r.SessionKey)),
+        ThreadID: sqlId(uuidFor('thread', r.ThreadKey)),
+        PersonID: sqlId(r.MemberNumber ? uuidFor('person', r.MemberNumber) : null),
+        Direction: sqlStr(r.Direction), Sender: sqlStr(r.Sender), Recipient: sqlStr(r.Recipient),
+        Subject: sqlStr(r.Subject), Content: sqlStr(r.Content), IsSecure: sqlBit(r.IsSecure),
+        Status: sqlStr(r.Status), ExternalMessageID: sqlId(null), ReceivedAt: sqlDate(r.ReceivedAt),
+        IsStarred: sqlBit(r.IsStarred), IsImported: sqlBit(r.IsImported), SourceChannel: sqlStr(r.SourceChannel),
       }),
     },
   ],
@@ -385,7 +431,7 @@ export const MAPPING = {
 
 // ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
 export const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
-export const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues']; // the pack pyramid
+export const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues', 'messaging']; // the pack pyramid
 // polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
 export const PREAMBLE = {
   committees: [

@@ -21,8 +21,18 @@
       "pins": {
         "status": "Active",
         "minRegistrationsPerYear": 2,
-        "committeeSeat": "Standards Committee"
+        "committeeSeat": "Standards Committee",
+        "issueMin": 1,
+        "formResponse": true
       },
+      "issues": [
+        {
+          "type": "Events",
+          "title": "Session recordings missing from attendee portal",
+          "daysBeforeRelease": 12
+        }
+      ],
+      "$issuesNote": "cross-app footprint (2026-07-21): flagship heroes each carry an authored issue + a guaranteed survey response so a persona walks across every app. Tasks footprint deferred — Bob pins Active (no outreach task possible), Tom has no committee.",
       "committees": [
         {
           "committee": "Standards Committee",
@@ -146,8 +156,17 @@
       },
       "pins": {
         "status": "Active",
-        "employerAcquired": 2023
+        "employerAcquired": 2023,
+        "issueMin": 1,
+        "formResponse": true
       },
+      "issues": [
+        {
+          "type": "Billing",
+          "title": "Invoice went to old Ostergaard AP contact after acquisition",
+          "daysBeforeRelease": 30
+        }
+      ],
       "title": "Regional Sales Director"
     },
     {
@@ -364,8 +383,17 @@
       "pins": {
         "status": "Active",
         "committeeSeat": "Food Safety Committee",
-        "committeeRole": "Chair"
+        "committeeRole": "Chair",
+        "issueMin": 1,
+        "formResponse": true
       },
+      "issues": [
+        {
+          "type": "Data Correction",
+          "title": "Food Safety Committee roster shows outdated affiliation",
+          "daysBeforeRelease": 18
+        }
+      ],
       "title": "Principal"
     },
     {
@@ -421,10 +449,19 @@
         "testimonies": 2,
         "topic": "Raw-milk aging rules"
       },
+      "issues": [
+        {
+          "type": "General",
+          "title": "How do I submit written testimony through the federation?",
+          "daysBeforeRelease": 45
+        }
+      ],
       "pins": {
         "status": "Active",
         "advocacyMin": 30,
-        "testimonies": 2
+        "testimonies": 2,
+        "issueMin": 1,
+        "formResponse": true
       }
     },
     {

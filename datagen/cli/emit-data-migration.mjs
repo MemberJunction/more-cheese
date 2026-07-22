@@ -44,10 +44,12 @@ const MIGRATIONS_DIR = args['migrations-out'] ? resolve(args['migrations-out']) 
 const HOME_SCHEMA = 'morecheese_members';
 const toPlaceholder = (tableRef) => tableRef.replace(`[${HOME_SCHEMA}]`, '[${flyway:defaultSchema}]');
 
-// Deterministic, sort-last timestamp: <releaseYYYYMMDD>235<packIndex>. Reserved late band so a
-// release's data always applies AFTER that release's baseline + codegen + hand V* migrations.
+// Deterministic, sort-last timestamp: <releaseYYYYMMDD>23<40+packIndex>. Reserved late band so
+// a release's data always applies AFTER that release's baseline + codegen + hand V* migrations.
+// (Band starts at :41 so two-digit minutes survive past pack 9 — the old `235${i}` scheme
+// produced a 13-digit version at pack 10.)
 const ymd = String(run.releaseDate).replace(/-/g, '');           // 2026-07-31 -> 20260731
-const seedTs = (packIndex) => `${ymd}235${packIndex}`;            // packIndex 1..9 -> ...2351..2359
+const seedTs = (packIndex) => `${ymd}23${40 + packIndex}`;        // packIndex 1..19 -> ...2341..2359
 
 mkdirSync(MIGRATIONS_DIR, { recursive: true });
 const summary = [];

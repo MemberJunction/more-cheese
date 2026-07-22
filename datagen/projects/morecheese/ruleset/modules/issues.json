@@ -65,6 +65,26 @@
       "$note": "one per member whose employer had a lifecycle event while they were active (incl. Danielle)"
     },
     "recencyOpenDays": 75,
-    "numberPrefix": "MC"
+    "numberPrefix": "MC",
+    "severity": {
+      "$note": "severity = IMPACT, drawn per type; priority = URGENCY, derived from the type default with a severity bump (priorityRule) — decoupled so boards show a real matrix instead of a wall of Medium. ESTIMATE distributions.",
+      "byType": {
+        "Billing": [["Critical", 0.1], ["High", 0.45], ["Medium", 0.35], ["Low", 0.1]],
+        "Data Correction": [["High", 0.1], ["Medium", 0.55], ["Low", 0.35]],
+        "Events": [["High", 0.15], ["Medium", 0.6], ["Low", 0.25]],
+        "General": [["Medium", 0.35], ["Low", 0.65]]
+      },
+      "tolerance": 0.06
+    },
+    "priorityRule": {
+      "$note": "start from the type's default priority; bump one rung when severity >= bumpIfSeverityAtLeast; independently drop one rung for a small noise share (real triage is imperfect)",
+      "bumpIfSeverityAtLeast": "High",
+      "noiseDownShare": 0.15
+    },
+    "assignment": {
+      "share": 0.75,
+      "tolerance": 0.08,
+      "$note": "assigned issues go to committee OFFICERS (active-term Chairs/Vice-Chairs) — the renewal-outreach-to-chair precedent; New issues are more often still unassigned"
+    }
   }
 }

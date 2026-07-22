@@ -31,6 +31,70 @@
         "closesDaysAfter": 31
       }
     },
+    "application": {
+      "name": "Membership Application",
+      "description": "Public intake form on the ICF website — prospective members apply here.",
+      "page": "Tell us about yourself",
+      "$note": "the ANONYMOUS story (bizapps-forms' flagship feature): applicants are NOT members — responses carry MemberNumber null + AnonymousSessionID, identity lives only in answer text (no Person rows). Names come from the cleared banks via personName streams.",
+      "questions": [
+        {
+          "key": "name",
+          "type": "ShortText",
+          "prompt": "Your full name",
+          "required": true
+        },
+        {
+          "key": "email",
+          "type": "Email",
+          "prompt": "Email address",
+          "required": true
+        },
+        {
+          "key": "segment",
+          "type": "SingleChoice",
+          "prompt": "Which best describes you?",
+          "required": true,
+          "options": ["Producer", "Retailer", "Supplier", "Educator", "Enthusiast"]
+        },
+        {
+          "key": "operation",
+          "type": "LongText",
+          "prompt": "Tell us about your operation or interest in cheese",
+          "required": false
+        },
+        {
+          "key": "newsletter",
+          "type": "YesNo",
+          "prompt": "Subscribe to the ICF newsletter?",
+          "required": false
+        }
+      ],
+      "distribution": {
+        "channel": "PublicLink",
+        "sinceYearsBeforeRelease": 3
+      },
+      "volume": {
+        "perYearMin": 20,
+        "perYearMax": 40,
+        "partialShare": 0.15,
+        "$note": "modest public-intake trickle — ESTIMATE; partials run higher than the member survey (anonymous funnels leak more)"
+      },
+      "segmentMix": [
+        ["Producer", 0.35],
+        ["Retailer", 0.25],
+        ["Enthusiast", 0.22],
+        ["Supplier", 0.1],
+        ["Educator", 0.08]
+      ],
+      "operationTemplates": [
+        "Small {segment} operation in {toponym}; looking to connect with the wider community.",
+        "Family-run for two generations — hoping the federation can help us with food-safety guidance.",
+        "Just getting started as a {segment} and want access to the courses and the annual conference.",
+        "We run a farmers-market stall and are exploring wholesale; joining for the standards resources.",
+        "Longtime home cheesemaker turning professional; interested in certification down the road."
+      ],
+      "referrers": ["icf-website", "search", "conference-page", "newsletter", "member-referral"]
+    },
     "response": {
       "rateTarget": 0.28,
       "tolerance": 0.08,

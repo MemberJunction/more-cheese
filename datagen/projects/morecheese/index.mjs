@@ -18,6 +18,7 @@ import { buildTasks } from './tasks.mjs';
 import { buildIssues } from './issues.mjs';
 import { buildPrograms } from './programs.mjs';
 import { buildDefects } from './defects.mjs';
+import { buildMessaging } from './messaging.mjs';
 import { applyMotifs } from './motifs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
@@ -53,19 +54,21 @@ export function buildWorld(cfg) {
   const forms = buildForms(cfg, people, events, registrations);
   const relationships = buildRelationships(cfg, people, orgs);
   const tasks = buildTasks(cfg, people, periods, committees);
-  const issues = buildIssues(cfg, people, orgs, events, registrations, money);
+  const issues = buildIssues(cfg, people, orgs, events, registrations, money, committees);
   const programs = buildPrograms(cfg, people, periods, learning);
+  // secure messaging: support threads derive from issues (hero issues always get one)
+  const messaging = buildMessaging(cfg, people, issues);
 
   // defects LAST: labeled record corruption over the finished world (mutates emails,
   // appends duplicate contact records and true-employer relationship edges)
   const defects = buildDefects(cfg, people, orgs, relationships);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, defects, motifs };
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, motifs };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, defects } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
     common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
@@ -74,8 +77,9 @@ export function buildPacks(world) {
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },
     committees: { dependsOn: ['common', 'membership'], tables: { committee_types: committees.types, committee_roles: committees.roles, committees: committees.committees, committee_terms: committees.terms, committee_memberships: committees.memberships, committee_meetings: committees.meetings, committee_attendance: committees.attendance, committee_agenda_items: committees.agendaItems, committee_motions: committees.motions, committee_votes: committees.votes } },
-    forms: { dependsOn: ['common', 'events'], tables: { forms: forms.forms, form_versions: forms.formVersions, form_pages: forms.formPages, form_questions: forms.formQuestions, form_distributions: forms.formDistributions, form_responses: forms.formResponses, form_answers: forms.formAnswers } },
+    forms: { dependsOn: ['common', 'events'], tables: { forms: forms.forms, form_versions: forms.formVersions, form_pages: forms.formPages, form_questions: forms.formQuestions, form_question_options: forms.formQuestionOptions, form_distributions: forms.formDistributions, form_responses: forms.formResponses, form_answers: forms.formAnswers } },
     tasks: { dependsOn: ['common', 'membership', 'committees'], tables: { task_types: tasks.taskTypes, tasks: tasks.tasks, task_assignments: tasks.taskAssignments, task_links: tasks.taskLinks } },
     issues: { dependsOn: ['common', 'events', 'orders'], tables: { issue_types: issues.issueTypes, issue_statuses: issues.issueStatuses, issues: issues.issues, issue_sequences: issues.issueSequences } },
+    messaging: { dependsOn: ['common', 'issues'], tables: { portal_sessions: messaging.sessions, secure_threads: messaging.threads, secure_messages: messaging.messages } },
   };
 }

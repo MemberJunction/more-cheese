@@ -1,12 +1,19 @@
 // Forms — targets bizapps-forms' real shapes (slice: Form/FormVersion/FormPage/FormQuestion/
-// FormDistribution/FormResponse/FormResponseAnswer). One authored post-conference survey,
-// distributed per conference year; ATTENDEES answer at a calibrated response rate (theta
-// arrow), and their satisfaction answers ride the same engagement dial as renewal — so
-// "NPS predicts churn" demos work because both share the cause.
+// FormQuestionOption/FormDistribution/FormResponse/FormResponseAnswer). Two authored forms:
+//
+// 1. The post-conference survey, distributed per conference year; ATTENDEES answer at a
+//    calibrated response rate (theta arrow), and their satisfaction answers ride the same
+//    engagement dial as renewal — so "NPS predicts churn" demos work because both share
+//    the cause. Flagship heroes carry a guaranteed response (cross-app footprint).
+// 2. The Membership Application — bizapps-forms' flagship ANONYMOUS story: a public intake
+//    whose respondents are prospective members (MemberNumber null, AnonymousSessionID set);
+//    applicant identity lives only in answer text, never as Person rows.
 
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { personNameFor, TOPONYMS } from './banks.mjs';
+import { emailFor } from './world.mjs';
 
 export function buildForms(cfg, people, events, registrations) {
   const { R, seed, release } = cfg;
@@ -21,6 +28,25 @@ export function buildForms(cfg, people, events, registrations) {
     QuestionKey: `post-conf-survey:${q.key}`, FormKey: 'post-conf-survey', PageKey: 'post-conf-survey:p1',
     QuestionType: q.type, Prompt: q.prompt, IsRequired: q.required, DisplayOrder: i, IsSharedDemo: true,
   }));
+
+  // ---------- authored fixtures: the Membership Application (the anonymous intake) ----------
+  const APP = F.application;
+  const APP_KEY = 'membership-application';
+  forms.push({ FormKey: APP_KEY, Name: APP.name, Description: APP.description, Status: 'Published', RenderMode: 'Scroll', IsSharedDemo: true });
+  const appSinceYear = release.getUTCFullYear() - (APP.distribution.sinceYearsBeforeRelease - 1);
+  formVersions.push({ VersionKey: `${APP_KEY}:1`, FormKey: APP_KEY, VersionNumber: 1, Status: 'Published', PublishedAt: `${appSinceYear}-01-01T00:00:00Z`, IsSharedDemo: true });
+  formPages.push({ PageKey: `${APP_KEY}:p1`, FormKey: APP_KEY, Title: APP.page, DisplayOrder: 0, IsSharedDemo: true });
+  const formQuestionOptions = [];
+  APP.questions.forEach((q, i) => {
+    formQuestions.push({
+      QuestionKey: `${APP_KEY}:${q.key}`, FormKey: APP_KEY, PageKey: `${APP_KEY}:p1`,
+      QuestionType: q.type, Prompt: q.prompt, IsRequired: q.required, DisplayOrder: i, IsSharedDemo: true,
+    });
+    (q.options ?? []).forEach((opt, j) => formQuestionOptions.push({
+      OptionKey: `${APP_KEY}:${q.key}:${j}`, QuestionKey: `${APP_KEY}:${q.key}`,
+      Label: opt, Value: opt, DisplayOrder: j, IsDefault: false, IsSharedDemo: true,
+    }));
+  });
 
   const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
   const confByYear = new Map(events.filter((e) => e.EventType === 'Conference').map((e) => [e.Year, e]));
@@ -68,21 +94,54 @@ export function buildForms(cfg, people, events, registrations) {
     });
   }
 
+  // ---------- flagship heroes: a GUARANTEED survey response each (cross-app footprint) ----------
+  // Declared facts placed after the crowd draw, like committee seats: anchor to the hero's
+  // most recent attended conference; skip if the crowd draw already selected them (same
+  // ResponseKey). Never Partial — a flagship demo response must be complete.
+  const distByKey = new Map(formDistributions.map((d) => [d.DistributionKey, d]));
+  const responseKeys = new Set(formResponses.map((x) => x.ResponseKey));
+  for (const h of R.heroes.filter((x) => x.pins?.formResponse)) {
+    const distYears = [...confByYear.entries()].sort((a, b) => b[0] - a[0]).filter(([year]) => distByKey.has(`post-conf-survey:${year}`));
+    const attended = distYears.find(([, conf]) =>
+      registrations.some((x) => x.EventKey === conf.EventKey && x.MemberNumber === h.memberNumber && x.Attended === true));
+    // fallback: a hero with no attended conference at this seed still responds to the most
+    // recent survey (real email links leak past the attendee list; the metadata says so)
+    const [year, conf] = attended ?? distYears[0] ?? [];
+    if (!conf) continue; // no distributions at all — gate reports it
+    const distKey = `post-conf-survey:${year}`;
+    const respKey = `${distKey}:${h.memberNumber}`;
+    if (responseKeys.has(respKey)) continue; // crowd draw already selected them
+    const p = personByKey.get(h.memberNumber);
+    const r = rng(seed, `formresp-hero:${h.memberNumber}`);
+    const opens = addDays(parseDate(conf.Date), S.distribution.opensDaysAfter);
+    formResponses.push({
+      ResponseKey: respKey, FormKey: 'post-conf-survey', VersionKey: 'post-conf-survey:1',
+      DistributionKey: distKey, MemberNumber: h.memberNumber, Status: 'Complete',
+      SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T12:00:00Z`,
+      ...(attended ? {} : { SourceMetadata: JSON.stringify({ channel: 'email', note: 'responded via forwarded link (not on the attendee list)' }) }),
+      IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta, _covid: R.regimes.covid.years.includes(year), _hero: true,
+    });
+    distByKey.get(distKey).ResponseCount += 1;
+  }
+
   // ---------- answers: SECOND pass over the actual respondent pool ----------
   // Respondents are engagement-selected TWICE (attend, then respond), so the naive base
   // overshoots the target mean — the selection-effect lesson (spec §7 lesson #1). Calibrate
   // the base linearly over the real pool: base' = target − β·mean(θ_respondents). Each
-  // response draws its answers from its OWN stream.
+  // response draws its answers from its OWN stream. The pool EXCLUDES hero-guaranteed rows
+  // so crowd answer values stay byte-identical to pre-footprint builds.
   const A = F.answers;
-  const meanTheta = formResponses.length ? formResponses.reduce((s2, x) => s2 + x._theta, 0) / formResponses.length : 0;
+  const crowdResponses = formResponses.filter((x) => !x._hero);
+  const meanTheta = crowdResponses.length ? crowdResponses.reduce((s2, x) => s2 + x._theta, 0) / crowdResponses.length : 0;
   const npsBase = A.nps.base - A.nps.engagementBeta * meanTheta;
   const overallBase = A.overall.base - A.overall.engagementBeta * meanTheta;
   const clampRound = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(v)));
   for (const resp of formResponses) {
     const r = rng(seed, `formans:${resp.ResponseKey}`);
     const theta = resp._theta;
-    // real funnels leak: a slice of responses start but never submit (first answer only)
-    if (r.bernoulli(F.response.partialShare)) {
+    // real funnels leak: a slice of responses start but never submit (first answer only) —
+    // hero-guaranteed rows are exempt (a flagship footprint response must be Complete)
+    if (!resp._hero && r.bernoulli(F.response.partialShare)) {
       resp.Status = 'Partial';
       resp.StartedAt = resp.SubmittedAt; resp.SubmittedAt = null;
       formAnswers.push({ AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: Math.max(A.nps.min, Math.min(A.nps.max, Math.round(npsBase + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd)))), IsSharedDemo: true });
@@ -94,7 +153,55 @@ export function buildForms(cfg, people, events, registrations) {
       { AnswerKey: `${resp.ResponseKey}:returning`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:returning', BooleanValue: r.bernoulli(1 / (1 + Math.exp(-(A.returning.baseLogit + A.returning.engagementBeta * theta)))), IsSharedDemo: true },
     );
   }
-  for (const resp of formResponses) { delete resp._theta; delete resp._covid; } // latents — never ship
+  for (const resp of formResponses) { delete resp._theta; delete resp._covid; delete resp._hero; } // latents — never ship
 
-  return { forms, formVersions, formPages, formQuestions, formDistributions, formResponses, formAnswers };
+  // ---------- the Membership Application: anonymous public-intake responses ----------
+  // Applicants are NOT members: MemberNumber null, AnonymousSessionID set, identity lives
+  // only inside answer text (cleared name banks; deterministic example.com emails). One
+  // always-open PublicLink distribution; volume is a modest per-year trickle.
+  const relYear = release.getUTCFullYear();
+  const appDist = {
+    DistributionKey: `${APP_KEY}:public`, FormKey: APP_KEY, Name: 'Membership application — public link',
+    ChannelType: APP.distribution.channel, Status: 'Open',
+    OpenAt: `${appSinceYear}-01-01T09:00:00Z`, CloseAt: null,
+    ResponseCount: 0, IsSharedDemo: true,
+  };
+  formDistributions.push(appDist);
+  const hex = (r, n) => Array.from({ length: n }, () => '0123456789abcdef'[r.int(0, 15)]).join('');
+  for (let year = appSinceYear; year <= relYear; year++) {
+    const ry = rng(seed, `formapp:${year}`);
+    const count = ry.int(APP.volume.perYearMin, APP.volume.perYearMax);
+    for (let i = 0; i < count; i++) {
+      const key = `formapp:${year}:${i}`;
+      const r = rng(seed, key);
+      const when = addDays(new Date(Date.UTC(year, 0, 1)), r.int(0, 364));
+      if (iso(when) > releaseIso) continue; // current year: only up to the release date
+      const respKey = `${APP_KEY}:public:${year}:${i}`;
+      const partial = r.bernoulli(APP.volume.partialShare);
+      const resp = {
+        ResponseKey: respKey, FormKey: APP_KEY, VersionKey: `${APP_KEY}:1`,
+        DistributionKey: appDist.DistributionKey, MemberNumber: null,
+        AnonymousSessionID: `anon-${hex(r, 16)}`,
+        SourceMetadata: JSON.stringify({ channel: 'web', referrer: r.pick(APP.referrers) }),
+        Status: partial ? 'Partial' : 'Complete',
+        StartedAt: `${iso(when)}T12:00:00Z`,
+        SubmittedAt: partial ? null : `${iso(when)}T12:00:00Z`,
+        IsSharedDemo: true,
+      };
+      formResponses.push(resp);
+      appDist.ResponseCount += 1;
+      // answers: identity + segment + free text, from the same per-applicant stream
+      const nm = personNameFor(seed, key, 'NA');
+      const push = (qkey, fields) => formAnswers.push({ AnswerKey: `${respKey}:${qkey}`, ResponseKey: respKey, QuestionKey: `${APP_KEY}:${qkey}`, ...fields, IsSharedDemo: true });
+      push('name', { TextValue: `${nm.first} ${nm.last}` });
+      if (partial) continue; // leaky funnel: first answer only
+      const segment = r.pickWeighted(APP.segmentMix);
+      push('email', { TextValue: emailFor(nm.first, nm.last, respKey) });
+      push('segment', { TextValue: segment });
+      push('operation', { TextValue: r.pick(APP.operationTemplates).replace('{segment}', segment.toLowerCase()).replace('{toponym}', r.pick(TOPONYMS)) });
+      push('newsletter', { BooleanValue: r.bernoulli(0.6) });
+    }
+  }
+
+  return { forms, formVersions, formPages, formQuestions, formQuestionOptions, formDistributions, formResponses, formAnswers };
 }
