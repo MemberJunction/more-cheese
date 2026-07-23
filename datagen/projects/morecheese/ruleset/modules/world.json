@@ -1,0 +1,13 @@
+{
+  "$comment": "WORLD MODULE: organizations and geography — the exogenous drivers (pack: common).",
+  "orgs": {
+    "ratioToMembers": 0.25,
+    "producerShare": 0.45,
+    "lifecycleEventRatePerYear": 0.02,
+    "$note": "lifecycle events (dissolved/acquired/program-cut) feed arrow 1.15 and the Anna/Bob/Danielle-class churn stories"
+  },
+  "geography": {
+    "mix": [["NA", 0.60], ["EU", 0.25], ["RoW", 0.15]],
+    "$note": "cities carry pre-baked coordinates (GAP-11a); dairy-belt weighting inside NA"
+  }
+}

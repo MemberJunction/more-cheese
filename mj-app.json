@@ -1,23 +1,23 @@
 {
   "$schema": "https://schema.memberjunction.org/mj-app/v1.json",
   "manifestVersion": 1,
-  "name": "mj-sample-app",
-  "displayName": "MJ Sample Open App (Template)",
-  "description": "A fill-in-the-blanks template for building MemberJunction Open Apps. Clone it, rename it, and replace the samples with your app.",
+  "name": "more-cheese-demo",
+  "displayName": "MoreCheese Demo",
+  "description": "The MoreCheese demo association (International Cheese Federation): a generated, causally-consistent dataset demonstrating the MJ platform across composed BizApps.",
   "version": "1.0.0",
-  "license": "<Set-this>",
-  "icon": "fa-solid fa-cube",
-  "color": "#264FAF",
+  "license": "ISC",
+  "icon": "fa-solid fa-cheese",
+  "color": "#E8A33D",
   "publisher": {
-    "name": "MemberJunction",
-    "email": "dev@memberjunction.com",
-    "url": "https://memberjunction.com"
+    "name": "Blue Cypress",
+    "email": "marcelo.torres@bluecypress.io"
   },
-  "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2.git",
-  "mjVersionRange": ">=5.0.0 <6.0.0",
+  "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2",
+  "mjVersionRange": ">=5.43.0 <6.0.0",
   "schema": {
-    "name": "sample_app",
-    "createIfNotExists": true
+    "name": "morecheese_members",
+    "createIfNotExists": true,
+    "entityPackage": "@mj-more-cheese-demo/entities"
   },
   "migrations": {
     "directory": "migrations",
@@ -26,28 +26,50 @@
   "metadata": {
     "directory": "metadata"
   },
+  "dependencies": {
+    "mj-bizapps-common": {
+      "version": ">=5.30.0 <6.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-common"
+    },
+    "mj-committees": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-committees"
+    },
+    "mj-bizapps-forms": {
+      "version": ">=0.1.0 <1.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-forms"
+    },
+    "mj-bizapps-tasks": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-tasks"
+    },
+    "mj-bizapps-issues": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-issues"
+    },
+    "mj-secure-messaging": {
+      "version": ">=1.0.0 <2.0.0",
+      "repository": "https://github.com/MemberJunction/bizapps-secure-messaging"
+    }
+  },
   "packages": {
     "server": [
       {
         "name": "@mj-more-cheese-demo/server",
         "role": "bootstrap",
-        "startupExport": "LoadSampleAppServer"
+        "startupExport": "LoadMoreCheeseDemoServer"
       }
     ],
     "client": [
       {
         "name": "@mj-more-cheese-demo/ng",
         "role": "bootstrap",
-        "startupExport": "LoadSampleAppClient"
+        "startupExport": "LoadMoreCheeseDemoClient"
       }
     ],
     "shared": [
       {
         "name": "@mj-more-cheese-demo/entities",
-        "role": "library"
-      },
-      {
-        "name": "@mj-more-cheese-demo/actions",
         "role": "library"
       }
     ]
@@ -56,6 +78,13 @@
     "visibility": "public",
     "sourceDirectory": "packages"
   },
-  "categories": ["Template"],
-  "tags": ["template", "sample", "starter"]
+  "categories": [
+    "Demo"
+  ],
+  "tags": [
+    "demo",
+    "association",
+    "morecheese",
+    "international-cheese-federation"
+  ]
 }

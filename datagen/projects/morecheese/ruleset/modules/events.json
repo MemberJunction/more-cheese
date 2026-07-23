@@ -1,0 +1,17 @@
+{
+  "$comment": "EVENTS MODULE: conferences, workshops, webinars + registration behavior (pack: events).",
+  "events": {
+    "perYear": { "workshops": 5, "webinars": 6 },
+    "conference": { "memberAttendanceTarget": 0.35, "tolerance": 0.10 },
+    "registrationRatePerYear": { "base": 1.7, "engagementBeta": 0.6, "dispersionK": 1.4 },
+    "arrows": {
+      "conferenceEngagement": { "beta": 1.0, "label": "strong", "note": "engaged members show up (causal map 2.1); strong per the R7 attendance analysis" },
+      "conferenceInternational": { "beta": -0.6, "label": "med", "note": "distance arrow 2.10, binary form" }
+    },
+    "noShow": {
+      "paidInPerson": { "target": 0.08, "tolerance": 0.04, "holdout": true, "$note": "BLIND benchmark — stripped from the authoring view (spec \u00a77); the validator still gates it" },
+      "freeWebinar": { "target": 0.55, "tolerance": 0.08 },
+      "engagementBeta": -0.4
+    }
+  }
+}

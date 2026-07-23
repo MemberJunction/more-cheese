@@ -1,0 +1,45 @@
+{
+  "$comment": "TASKS MODULE (pack: tasks) — targets bizapps-tasks (B202604011500, schema __mj_BizAppsTasks, prefix 'MJ_BizApps_Tasks: '). Slice: TaskType/Task/TaskAssignment/TaskLink. Committee meetings spawn action items (their own migration replaced committee ActionItems with Tasks); PendingRenewal members get a renewal-outreach task assigned to the Membership & Outreach chair. Assignees use the POLYMORPHIC pattern (AssigneeEntityID → __mj.Entity by NAME at load time, RecordID = person UUID).",
+  "tasks": {
+    "types": [
+      {
+        "name": "Committee Action Item",
+        "priority": "Medium",
+        "description": "Follow-up work items arising from committee meetings"
+      },
+      {
+        "name": "Renewal Outreach",
+        "priority": "High",
+        "description": "Staff outreach to members whose renewal is due"
+      }
+    ],
+    "committeeActions": {
+      "ratePerMeeting": 0.5,
+      "maxPerMeeting": 2,
+      "dueDays": 30,
+      "completion": {
+        "target": 0.7,
+        "tolerance": 0.08,
+        "arrows": {
+          "engagement": {
+            "beta": 0.5,
+            "note": "engaged assignees finish their action items"
+          }
+        }
+      },
+      "actionBank": [
+        "Draft the guidance revision",
+        "Circulate the meeting summary to members",
+        "Follow up with speaker candidates",
+        "Prepare budget figures for next quarter",
+        "Review the member feedback digest",
+        "Coordinate venue logistics for the workshop",
+        "Collect comments on the draft standard",
+        "Update the committee charter page"
+      ]
+    },
+    "renewalOutreach": {
+      "$note": "one Open task per PendingRenewal member at release, due at their period end — the outreach queue in task form (Marcus gets one)"
+    }
+  }
+}

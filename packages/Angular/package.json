@@ -11,20 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MemberJunction/mj-sample-open-app"
+    "url": "https://github.com/BlueCypress/More-Cheese-Demo-V2"
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-more-cheese-demo/entities": "1.0.0"
+    "@mj-more-cheese-demo/entities": "^1.0.0"
   },
   "peerDependencies": {
     "@angular/common": ">=21.0.0 <22.0.0",
     "@angular/core": ">=21.0.0 <22.0.0",
     "@angular/forms": ">=21.0.0 <22.0.0",
-    "@memberjunction/global": "^5.44.0",
-    "@memberjunction/ng-base-forms": "^5.44.0",
-    "@memberjunction/ng-entity-viewer": "^5.44.0",
-    "@memberjunction/ng-link-directives": "^5.44.0"
+    "@memberjunction/global": "^5.43.0",
+    "@memberjunction/ng-base-forms": "^5.43.0",
+    "@memberjunction/ng-entity-viewer": "^5.43.0",
+    "@memberjunction/ng-link-directives": "^5.43.0"
   },
   "devDependencies": {
     "@angular/compiler": "21.1.3",

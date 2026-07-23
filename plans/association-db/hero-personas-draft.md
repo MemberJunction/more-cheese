@@ -1,5 +1,8 @@
 # Hero Personas — Draft v0.3 (for team review)
 
+> **Employer names revised 2026-07-13 (clearance):** original draft employer names collided with real businesses (e.g. Great Lakes Cheese, Continental) — replaced throughout with names from the cleared bank (`datagen/projects/morecheese/banks/orgs.json` `reserved[]`), same policy as Sierra Vista → Crowfeather. Person names unchanged.
+
+
 **Status: DRAFT.** Heroes are team-owned, quality-gated content (v2 plan §7.0) — this draft exists so the team edits instead of starting from blank. **Names are placeholders until the team blesses them; after that they're permanent** (renames break demo scripts and need explicit sign-off).
 
 Roster: 22 now (20 members + 2 staff) → 50–100 by release. Every release re-verifies each hero loads with their storyline intact (release blocker).
@@ -102,28 +105,28 @@ vs the 60/25/15 target; acceptable for heroes (the generated long tail carries t
 ---
 
 ### Elena Rodriguez `ICF-000101` — the flagship member
-**43 · Head Cheesemaker, Sierra Vista Creamery (mid-size, Petaluma CA) · Producer/Cheesemaking · joined 2022 · Professional, Active · θ high, φ med-high**
-Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen years working up through Sierra Vista's make room to head cheesemaker in 2019. **Join trigger:** in 2022 she launched the creamery's first raw-milk alpine-style ("Sierra Vista Reserve") and needed the federation's aging-standards network and food-safety guidance. Earned her CCP in 2024. Sits on the Standards Committee — she pushed for the raw-milk aging guidance doc. Answers make-room questions in the forum with the patience of someone who's trained a dozen assistants. **Mentors Priya Natarajan** (met at the 2025 conference affinage workshop).
+**43 · Head Cheesemaker, Crowfeather Creamery (mid-size, Petaluma CA) · Producer/Cheesemaking · joined 2022 · Professional, Active · θ high, φ med-high**
+Grew up on her family's dairy outside Petaluma; Cal Poly dairy science; fifteen years working up through Crowfeather's make room to head cheesemaker in 2019. **Join trigger:** in 2022 she launched the creamery's first raw-milk alpine-style ("Crowfeather Reserve") and needed the federation's aging-standards network and food-safety guidance. Earned her CCP in 2024. Sits on the Standards Committee — she pushed for the raw-milk aging guidance doc. Answers make-room questions in the forum with the patience of someone who's trained a dozen assistants. **Mentors Priya Natarajan** (met at the 2025 conference affinage workshop).
 *Pins: Standards Committee seat 2023–, CCP 2024, 3 consecutive conference attendances, top-decile Sonar.*
 
 ### Marcus Chen `ICF-000102` — the renewal nudge
-**38 · Specialty Cheese Buyer, Puget Provisions (8-store grocer, Seattle WA) · Retailer · joined 2021 · Professional, Active — renewal due in ~3 weeks · θ med, φ med**
+**38 · Specialty Cheese Buyer, Mongers' Row (8-store grocer, Seattle WA) · Retailer · joined 2021 · Professional, Active — renewal due in ~3 weeks · θ med, φ med**
 Started behind the counter at a Pike Place cheese shop in 2012; now buys for eight stores. **Join trigger:** 2021 supply-chain chaos — the federation's distributor forum was where buyers were actually finding stock. Solid but busy member: regional chapter meetings yes, July flagship conference never (retail can't leave in summer — a *pattern* the data should show, not a flaw). Opened both renewal emails, clicked neither. Not disengaged — swamped. Exactly the member a renewal-outreach queue exists for.
 *Pins: EndDate ≈ release+21d, 2 renewal-campaign opens / 0 clicks, chapter-meeting-only attendance pattern. ⚠ D6/GAP-12 (2026-07-07): the release-relative EndDate requires the proposed anniversary cohort — Marcus goes in it with auto-renew OFF (an auto-payer would get no reminders); pending team ratification.*
 
 ### Danielle Okafor `ICF-000103` — the diagnosable lapse
-**27 · Assistant Cheesemaker, formerly Meadowbrook Dairy (Brattleboro VT, closed) · Producer/Cheesemaking · joined 2024 · was Individual, Lapsed · θ was med, φ low**
-UVM food-science grad, first real job at Meadowbrook in 2024. **Join trigger:** Meadowbrook's owner paid federation dues for junior staff — an employer perk. Meadowbrook lost its co-packing contract in late 2025 and folded within months (the small-creamery death spiral: one distributor is 70% of revenue). Her membership lapsed with her paycheck. Now decorating cakes at a bakery and posting occasionally in the forum from her free account — she wants back in. **The diagnosis is in the data:** employer org status = Dissolved; `CancellationReason` = non-payment / employer closed (she never *chose* to leave — the reason field carries that nuance). Prime win-back target.
+**27 · Assistant Cheesemaker, formerly Mistlebrook Dairy (Brattleboro VT, closed) · Producer/Cheesemaking · joined 2024 · was Individual, Lapsed · θ was med, φ low**
+UVM food-science grad, first real job at Mistlebrook in 2024. **Join trigger:** Mistlebrook's owner paid federation dues for junior staff — an employer perk. Mistlebrook lost its co-packing contract in late 2025 and folded within months (the small-creamery death spiral: one distributor is 70% of revenue). Her membership lapsed with her paycheck. Now decorating cakes at a bakery and posting occasionally in the forum from her free account — she wants back in. **The diagnosis is in the data:** employer org status = Dissolved; `CancellationReason` = non-payment / employer closed (she never *chose* to leave — the reason field carries that nuance). Prime win-back target.
 *Pins: employer org Dissolved 2025, EndDate ~4 months past, CancellationDate = EndDate + 2mo grace with CancellationReason 'non-payment — employer dissolved' (revised 2026-07-06 to the team's ruling: every lapse past grace gets a termination date), residual forum logins.*
 
 ### Priya Natarajan `ICF-000104` — the rising star
-**31 · Affinage Apprentice, Driftless Caves (cave-aging operation, Viroqua WI) · Producer/Affinage · joined 2025 · Individual (early-career rate), Active · θ high and rising, φ low**
-Was a microbiologist at a Madison food-testing lab; a weekend course on rind ecology rerouted her life. Took the Driftless Caves apprenticeship in 2024 at a serious pay cut. **Join trigger:** her employer required it — cave crews need the food-safety training track. Her lab background makes her forum posts on rind microflora unusually rigorous; they collect "Helpful" reactions at triple the average. First conference in 2025, where **Elena took her under her wing**; now working toward the sensory-evaluation credential. Sonar trend: steepest positive slope in her cohort.
+**31 · Affinage Apprentice, Larkhollow Creamery (cave-aging operation, Viroqua WI) · Producer/Affinage · joined 2025 · Individual (early-career rate), Active · θ high and rising, φ low**
+Was a microbiologist at a Madison food-testing lab; a weekend course on rind ecology rerouted her life. Took the Larkhollow Creamery apprenticeship in 2024 at a serious pay cut. **Join trigger:** her employer required it — cave crews need the food-safety training track. Her lab background makes her forum posts on rind microflora unusually rigorous; they collect "Helpful" reactions at triple the average. First conference in 2025, where **Elena took her under her wing**; now working toward the sensory-evaluation credential. Sonar trend: steepest positive slope in her cohort.
 *Pins: sharply rising ScoreHistory, 2 completed courses with high scores, high reactions-received rate, mentor link to Elena.*
 
 ### Bob Kowalski `ICF-000105` — the churn save
-**61 · Regional Sales Director, Great Lakes Cheese Distribution (Cleveland OH; acquired 2023 by Continental Food Group) · Distribution · joined 2008 · Professional, Active · θ med and declining 3 years, φ med-high**
-Thirty years in dairy distribution. **Join trigger:** his 2008 promotion to regional director — the federation *was* his customer network, and for fifteen years he worked it hard: booth sponsorships, brought his whole team to conferences, chapter golf outings. **The cause of the decline is in the data:** Continental Food Group acquired his employer in 2023; cheese went from his whole book to one line item, half his old accounts moved to a national team, and he's two years from retirement. No conference since 2023; email opens fading. Enormous lifetime value, top-decile lapse risk — the exact member the retention play is designed for. (His new corporate parent is **Victor Sandoval's** employer — the acquisition connects two heroes.)
+**61 · Regional Sales Director, Ostergaard & Sons Dairy Supply (Cleveland OH; acquired 2023 by Reedmere Dairy Systems) · Distribution · joined 2008 · Professional, Active · θ med and declining 3 years, φ med-high**
+Thirty years in dairy distribution. **Join trigger:** his 2008 promotion to regional director — the federation *was* his customer network, and for fifteen years he worked it hard: booth sponsorships, brought his whole team to conferences, chapter golf outings. **The cause of the decline is in the data:** Reedmere Dairy Systems acquired his employer in 2023; cheese went from his whole book to one line item, half his old accounts moved to a national team, and he's two years from retirement. No conference since 2023; email opens fading. Enormous lifetime value, top-decile lapse risk — the exact member the retention play is designed for. (His new corporate parent is **Victor Sandoval's** employer — the acquisition connects two heroes.)
 *Pins: employer org renamed/re-parented 2023, last conference 2023, 3-year declining ScoreHistory, high LTV, top-decile lapse-risk score.*
 
 ### Sofia Marchetti `ICF-000106` — the certification journey
@@ -132,7 +135,7 @@ Third generation behind the counter; came back after a hospitality degree to mod
 *Pins: 2 completed prerequisite enrollments with scores, exam registration at flagship conference, cert record In Progress.*
 
 ### Henri Dubois `ICF-000107` — the international medalist
-**55 · Affineur & Owner, Caves Dubois (third-generation aging caves, Poligny, Jura, France) · Producer/Affinage · joined 2019 · Organizational, Active · θ med, φ high**
+**55 · Affineur & Owner, Fromagerie Saint-Rémille (third-generation aging caves, Poligny, Jura, France) · Producer/Affinage · joined 2019 · Organizational, Active · θ med, φ high**
 His grandfather dug the caves; Henri grew the business into export. **Join trigger:** met American mongers at a 2018 trade fair and realized the US specialty market was his growth path — took the organizational membership specifically because **only member organizations may enter the competition** (the eligibility gate, pinned). Enters ~8 wheels a year; his 18-month alpine took **Gold in 2025**. Flies over exactly once a year for the flagship conference, stacking US buyer meetings around it — otherwise engages entirely on-demand (7 hours ahead). The distance arrows, wearing a medal.
 *Pins: org-tier membership, Gold 2025 + 8 entries/yr, one conference trip/yr, on-demand-only webinar pattern.*
 
@@ -152,7 +155,7 @@ Solid, quiet member — pays dues, takes a course a year, attends the NorCal cha
 *Pins: stale Employment row (labeled defect), ground-truth employer stored, otherwise-normal activity.*
 
 ### Kate O'Leary `ICF-000111` + duplicate `ICF-000287` — the dedup pair
-**45 · Cheese Program Director, Harvest Table Co-op Markets (30-store co-op chain, Minneapolis MN) · Retailer · joined 2015 / dup created 2023 · Active ×2 · θ med, φ med**
+**45 · Cheese Program Director, Orchardmere Cheese & Provisions (30-store co-op chain, Minneapolis MN) · Retailer · joined 2015 / dup created 2023 · Active ×2 · θ med, φ med**
 The duplicate has a *realistic mechanism*, because that's how real dupes are born: her original 2015 record uses her personal email. In 2023 her assistant registered her for the conference through the org portal with her work email — and the system minted "Kathy OLeary," a second person. Since then her history is split: events accrue to the work-email record, courses and forum to the personal one. Neither looks very engaged; **merged, she's clearly a strong member** — which is the whole point of the dedup demo.
 *Pins: two Person/MemberProfile sets with labeled duplicate link, activity split by source system, merge = visibly better member.*
 
@@ -167,17 +170,17 @@ Started making mozzarella in an apartment kitchen during lockdown; the blog now 
 *Pins: top-decile posts + downloads + opens, lowest tier, ~zero non-dues spend.*
 
 ### Victor Sandoval `ICF-000114` — the auto-renewing ghost
-**57 · VP Procurement, Continental Food Group (national foodservice distributor, Dallas TX) · Distribution · joined 2017 · Organizational (employer-paid), Active, auto-renew · θ very low, φ high**
+**57 · VP Procurement, Reedmere Dairy Systems (national foodservice distributor, Dallas TX) · Distribution · joined 2017 · Organizational (employer-paid), Active, auto-renew · θ very low, φ high**
 Continental holds the org membership for market intelligence and competition sponsorship visibility; Victor is the named contact because procurement owns the budget line. He has never opened a newsletter — **his analyst reads everything under her own login** (the realistic mechanism behind a "dead" high-value member). Auto-renew on a corporate card, unbroken since 2017. **Tests that the churn model learns employer-paid + auto-renew as protective factors** — by engagement alone he'd look like maximum risk, and he isn't. (His company acquired **Bob Kowalski's** employer in 2023.)
 *Pins: auto-renew, org-paid tier, near-zero personal Sonar components, unbroken renewals, corporate link to Bob's employer.*
 
 ### Nia Thompson `ICF-000115` — the cold start
-**24 · Junior Cheesemonger, Marble & Rind (cheese shop, Brooklyn NY) · Retailer · joined 2 weeks before release · Individual, Active (new) · θ unknown (priors only), φ low**
-Culinary school, then the counter at Marble & Rind, where the owner — a fifteen-year federation member — puts every new hire on a membership in their first month ("it's cheaper than the mistakes"). Two weeks in: welcome email opened, one intro webinar registered, nothing else yet. **The models must score her on priors, not history** — and the first-year cliff says this moment is exactly when the association wins or loses her.
+**24 · Junior Cheesemonger, The Quiet Curd (cheese shop, Brooklyn NY) · Retailer · joined 2 weeks before release · Individual, Active (new) · θ unknown (priors only), φ low**
+Culinary school, then the counter at The Quiet Curd, where the owner — a fifteen-year federation member — puts every new hire on a membership in their first month ("it's cheaper than the mistakes"). Two weeks in: welcome email opened, one intro webinar registered, nothing else yet. **The models must score her on priors, not history** — and the first-year cliff says this moment is exactly when the association wins or loses her.
 *Pins: JoinDate = release−14d, 1 registration + welcome-campaign engagement, employer link to a long-tenured member org.*
 
 ### Charlie Mason `ICF-000116` — rest-of-world
-**39 · Cheesemaker & Co-owner, Southern Cross Dairy (sheep dairy, Tasmania, Australia) · Producer/Cheesemaking · joined 2021 · Organizational, Active · θ med, φ med**
+**39 · Cheesemaker & Co-owner, Winterfen Dairy (sheep dairy, Tasmania, Australia) · Producer/Cheesemaking · joined 2021 · Organizational, Active · θ med, φ med**
 She and her husband converted her family's sheep operation to farmstead cheese in 2015 — cool-climate cloth-wrapped wheels. **Join trigger:** a US importer told her a federation medal is what moves Australian cheese in American shops; the org membership makes her eligible to enter. Ships wheels 9,000 miles for the competition (**Silver, 2024**); everything else is on-demand from 17 hours ahead — even Lars has it easy by comparison.
 *Pins: org-tier membership, Silver 2024 + 4 entries/yr, zero in-person events, extreme on-demand pattern.*
 
@@ -234,6 +237,9 @@ Owns renewals and the health of the membership funnel. Demo use: the **Membershi
 
 ## 7. Asks for the team
 
-1. **Bless or edit the names** (permanent afterward).
+1. **Bless or edit the names** (permanent afterward). ⚠ Gate first (review 2026-07-08): run a
+   name/entity collision check — hero and org names (Crowfeather Creamery, Northgate Market
+   Group, …) against real people and businesses in this small, real industry — and add a
+   one-line "calibration, not depiction" note re: the identifiable ACS.
 2. Check storylines against real demo scripts (every §0 scenario now has an anchor — event-ROI is Dale Peterson).
 3. Who owns hero authoring going forward (OQ-7)?
