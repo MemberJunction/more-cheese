@@ -1,0 +1,70 @@
+[
+  {
+    "primaryKey": {
+      "ID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6"
+    },
+    "fields": {
+      "Name": "Standards Committee",
+      "TypeID": "97B1E92D-DBF0-5A37-BC04-963E511C198D",
+      "MissionStatement": "Aging, labeling, and raw-milk production standards for member producers.",
+      "Status": "Active",
+      "IsPublic": true,
+      "FormationDate": "2015-03-01"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:20:41.968Z",
+      "checksum": "df82032c2803032687be65686d00999fde961302e7af97098f9b895f7e3e8942"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39"
+    },
+    "fields": {
+      "Name": "Food Safety Committee",
+      "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
+      "MissionStatement": "FSMA compliance guidance, recall readiness, and the quarterly food-safety webinar series.",
+      "Status": "Active",
+      "IsPublic": true,
+      "FormationDate": "2014-06-01"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:20:41.981Z",
+      "checksum": "4abc2ec465079f2cb5f62577575850f2dfce9948e8da0db1fe79da33256a2f25"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7"
+    },
+    "fields": {
+      "Name": "Education Committee",
+      "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
+      "MissionStatement": "Course catalog, certification pathways, and the conference workshop program.",
+      "Status": "Active",
+      "IsPublic": true,
+      "FormationDate": "2016-01-15"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:20:41.993Z",
+      "checksum": "b55b9999db645982465d16983a3df4a4066723894ab6e11227e6373caa49c291"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA"
+    },
+    "fields": {
+      "Name": "Membership & Outreach Committee",
+      "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
+      "MissionStatement": "Recruitment, retention programs, and chapter development.",
+      "Status": "Active",
+      "IsPublic": true,
+      "FormationDate": "2017-09-01"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:20:42.004Z",
+      "checksum": "238f65fbf16ec637e9daea1c43341de97e09b34f34805a436aee94dcc06e381d"
+    }
+  }
+]

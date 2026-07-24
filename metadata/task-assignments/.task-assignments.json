@@ -1,0 +1,1472 @@
+[
+  {
+    "primaryKey": {
+      "ID": "54D9EC53-43E9-5D36-B55E-0DDE7935C64A"
+    },
+    "fields": {
+      "TaskID": "533876F9-D650-59CD-9C7D-1B32165641CB",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "87A37AE8-711D-5D63-9C79-8D7A1FB54F9C",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.383Z",
+      "checksum": "6cb3b1ddb049c29a65b0a54e1a15cd7816c157ba8f2aacce1a4fe6d639c3851b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FF0946DE-F6C3-58DB-B0BB-44C8FF45DF0C"
+    },
+    "fields": {
+      "TaskID": "F49CD6F8-08F5-5194-852D-75B9AC2D2E08",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.396Z",
+      "checksum": "75840c18462ff8cab662776b0b73c039e315aa34c650845e636df904fbe7bae0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F8F5074-A1B3-5CE7-83C6-7B9767B2DBF5"
+    },
+    "fields": {
+      "TaskID": "59BE9E3F-9747-5076-9C94-D46D0388AC9A",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.408Z",
+      "checksum": "7b270f720fec57a19154bf3c2fe41a4897a54bfe7368699fdd9107cff261ebb3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E510126C-091D-5B86-94C6-E7EBEC3E424C"
+    },
+    "fields": {
+      "TaskID": "046233EE-ADB8-5420-8D47-2163490F9C60",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "87A37AE8-711D-5D63-9C79-8D7A1FB54F9C",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.423Z",
+      "checksum": "287bcc687cf476aead827053c16a109be557148a10531de01d826e3934b104ab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E1CD411-97BD-53BF-A485-AD7A918A045E"
+    },
+    "fields": {
+      "TaskID": "6AA3C118-CC29-5EE3-8F1F-69A95E74C540",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.437Z",
+      "checksum": "f22a77e7fb84965057526a8229158810d0b306cc0ebcb2265e0c96ef2059b4d2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CF485C58-402A-5B1A-9229-3C18ABE44534"
+    },
+    "fields": {
+      "TaskID": "0E28D0BF-063C-5CF4-BEA7-529321E119DE",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.450Z",
+      "checksum": "0fb680239bd1926bc545b7895e3c94eef201e856dab1780e9bf5757cd3d3b139"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65FA3BCE-24BF-5B1A-B8F9-0B72B98142B8"
+    },
+    "fields": {
+      "TaskID": "51359834-7018-5201-8E28-D89AF9F21571",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.463Z",
+      "checksum": "c713531e61f5a3daaa0e73c465b9b08d772776c6c82d7bc3c4b9adbf66a46458"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "80A0AE18-5518-5EC3-A8E7-10973B77B882"
+    },
+    "fields": {
+      "TaskID": "9333D8D2-AAE0-550E-AD7F-9EE8FA30B23F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "428B287D-C6A8-51EC-A12D-B731FBB6D825",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.476Z",
+      "checksum": "9696e1a9bad2716b71d33da52dc2cccd13c5800510b1322b75290dfcdad41850"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7F3F2D2-3D7D-5DEA-A53A-2851610B3EBD"
+    },
+    "fields": {
+      "TaskID": "91A462D4-B3FE-5EDE-BB62-193B577CBB25",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.489Z",
+      "checksum": "7d4d7db3d11b0a36e6415f017aaac9a4adb49585147c199932ce6fbc981f3c6f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F2B041B0-1CDE-59BC-8E9B-C8D7177FB116"
+    },
+    "fields": {
+      "TaskID": "6ECBE243-4DF5-5EDC-B209-94984BC7E64D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.500Z",
+      "checksum": "ab676b0501364c9aab0d7452ef1a785352b001742a1f0391ddfb971c694adc38"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F4F618F-CE17-528B-82DF-BC4C00F6AD4F"
+    },
+    "fields": {
+      "TaskID": "E0CDF9A3-4F5A-50F6-90A9-D10037161740",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "428B287D-C6A8-51EC-A12D-B731FBB6D825",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.524Z",
+      "checksum": "d81c00ed5767ef2e485df6818f5ded8ad111168f4bae45d7490839a9c27793ca"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72252C90-A42E-5089-BFF2-4D35FC778574"
+    },
+    "fields": {
+      "TaskID": "C83F7C1A-F314-55FD-A272-DE8EB17B457B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "71D79854-CEBE-54C2-AAB4-77F79BC69892",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.535Z",
+      "checksum": "516de128105ec8f4eb37310862f7b156672d7d57c86fe949923575e0efc841bb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "74FE4540-37FF-5EF7-9C39-6AB79E0A08F0"
+    },
+    "fields": {
+      "TaskID": "88D25791-4523-571B-B6A9-F50807C5896F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "F5B13498-FFB6-5BBC-B2B2-3D57B57F87B1",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.546Z",
+      "checksum": "f6a993162e52654df71ff8f9ebc2c71eb85613c08f6a523693a2b743c9398ec1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92DF2920-C554-549D-9BC8-562C1E00BAF7"
+    },
+    "fields": {
+      "TaskID": "A8FB4E13-116B-5269-9E3B-8BEFA2ED92BF",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.558Z",
+      "checksum": "6adbbb9416a7510d9cd78de00bbe33389bb63d431b85160e8affd652742456ec"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "45870348-6F99-5490-8473-FE51BE1E198D"
+    },
+    "fields": {
+      "TaskID": "A27ACA35-CF56-5F9D-B4F8-8D1294FE04AD",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C32AC7DC-3260-5F8C-90F9-4D734070A951",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.568Z",
+      "checksum": "f000762bcefe3a08fd3ab659ef29083ab536fb3a6776ae9bb4cc40aa93712ea0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B3563C6-EDF0-5AA5-BD23-D5693F138A44"
+    },
+    "fields": {
+      "TaskID": "7031ACCB-6FC9-5DCD-970F-8BE8478721EE",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "E535DD86-20AD-5841-A5D8-DCA26A3C1038",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.581Z",
+      "checksum": "241880c9d2e5cef8df271119ef5d0d18ea187e8d214ad1d21a339ccc6ee8b9ba"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EA99DEFA-1F6E-580F-90D8-DB3615749E67"
+    },
+    "fields": {
+      "TaskID": "AA162F49-0AE3-5F1D-8A56-B3BD3D6A90AF",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "02508426-9885-5339-A60A-17E16C1AF7EE",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.592Z",
+      "checksum": "28023344c9487482bdb53c18c1d7c668fdd104c47c5c5fcd754d80e2a9bda093"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D53937CE-348E-5B69-82B8-2665CD73FAB5"
+    },
+    "fields": {
+      "TaskID": "E6DF7DC9-885A-5FA0-8867-83C2E14650C3",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.603Z",
+      "checksum": "468bcdaa802cf95d7ea7caa8da6d21cde85afc7208214776c967316601c08488"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72A0526C-0F21-5A3B-8F58-F084B6F28021"
+    },
+    "fields": {
+      "TaskID": "0946CC32-ACBB-593F-8E30-BDC2E370E3A5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "4EA6CC93-E783-592C-8C4C-B74C4E1331EE",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.613Z",
+      "checksum": "e2d8a654a952ef2e78f17f1ea5fb306c259f1984f5f03ced5bdfe6891fb340ad"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C6179BC0-22B1-54A2-B84D-8A82B36ABC2C"
+    },
+    "fields": {
+      "TaskID": "A3480A31-5EBF-54E4-88E9-C71E769737CF",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "0C7964B4-6A26-5D45-B05A-D8C99EA826B5",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.622Z",
+      "checksum": "0f96194b7832158d9d2e7f139923e26b17436990085b30d1e87ee9636087fecd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "23EE8DC7-4F8F-564E-BB5E-653C5C34862B"
+    },
+    "fields": {
+      "TaskID": "2E594DF8-DD2F-5148-8A63-67116CA6AC57",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "81776B1F-5D80-509D-81A4-37E56A6936A3",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.644Z",
+      "checksum": "24e75803602c2b85a90aa79a759961e86a09ed48ab512f9d35b437c8bbcf2bd1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C21F533E-2BC7-501C-93D9-5FB71FAA23BE"
+    },
+    "fields": {
+      "TaskID": "A7D13CAF-FA36-5B72-8424-E0B68836AC5F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "E4313B6C-F512-518B-99E8-01433EAE7ADA",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.655Z",
+      "checksum": "5ec42be381e397ce3fdc7daa47bc3c0a845f178e09d79ba001fc8f55deb6872a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E1EBB73-CFC2-53DD-AD49-EACB0627E6F7"
+    },
+    "fields": {
+      "TaskID": "B4F7AEEF-021C-5D2C-BD7D-F0E731FC1D2A",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "BA581A9A-64B6-5CE1-9618-38C09AE040D6",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.665Z",
+      "checksum": "e12a6634e88a7c0203809d705feac75532ee468adc09bc834231cb8cbf07dc8b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FC6A2A8D-6696-5432-802C-511EC1DBDE61"
+    },
+    "fields": {
+      "TaskID": "CE8FA756-DB53-580E-8EE2-A78793DBCD0B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.675Z",
+      "checksum": "6d7caa315210f8e9c100a6d169288291f05eb7d7b7a3eda741d255f7801f755e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "28E7B6E1-0B60-560D-B313-6383859AB5F6"
+    },
+    "fields": {
+      "TaskID": "EF8EFB42-2F83-5113-8FF6-1EA2AA3155C4",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "89F1CB57-8635-5136-BE1C-4A0ECE48FCA9",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.687Z",
+      "checksum": "4f8042ff9c53dc3598ec44127e0b696760f58215b0f5eb3b00316146927c5897"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "29B54311-36D6-5B28-8B4F-E6AF674F1760"
+    },
+    "fields": {
+      "TaskID": "BDE57904-5DE1-5C71-ACEC-AF91C2E74B73",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "15B3FB99-3484-5847-94C8-1FFF8C578C91",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.700Z",
+      "checksum": "2a3ae9121b840aad555c31cd44beb9d88837591742a692114e112dfe636c48a2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D63CAC54-2A55-548B-8B3A-4B75E182CA11"
+    },
+    "fields": {
+      "TaskID": "DF0482CE-CBDF-5787-AB3C-89EDBB10D84E",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "89F1CB57-8635-5136-BE1C-4A0ECE48FCA9",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.711Z",
+      "checksum": "8aa7c4a28c21b5aa7c6f95947d4cfd68f9e189dc228a99b80f161732e415f761"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "88F89118-527B-5A6A-9203-D7E3D8A6748B"
+    },
+    "fields": {
+      "TaskID": "2CB7D343-1C06-5B6D-8D33-AD1A7C37EB85",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "0085D456-ED84-548F-A3B0-E06566F60778",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.723Z",
+      "checksum": "dab9ab5305e41bc3757cfffd791667c414e52964a79d27732427760ed000c2a1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9B31BF10-1F9D-53AC-999E-D727D01B72C1"
+    },
+    "fields": {
+      "TaskID": "2DAB1584-AFA5-5C56-A883-548B4835C08B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.733Z",
+      "checksum": "d6cfceea9245d7ba4b122aca9a48ac24561e884716442d73de8bbcb6876a9cae"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "53E419B3-951D-50DC-8B40-FF9CCAEB38E1"
+    },
+    "fields": {
+      "TaskID": "7CEA07BB-310A-580F-94FB-43EF4B12632C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "856688F8-C895-5E8E-91F2-CDF18AA68503",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.742Z",
+      "checksum": "db4ed93bd134e11c3d6c123669e28b90e618e2a732cebc75488904fbb151ec0f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFBA43DA-06B6-52AF-A59C-2752E55F0516"
+    },
+    "fields": {
+      "TaskID": "06966348-DB35-5E01-AF42-8C556340002F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.770Z",
+      "checksum": "9042c38b29cc3910ac8b78e2c719432b0a17b89bcb3d549a78cbb360d131eedc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D8F95440-08E6-593D-A0F2-A2E78E924BFB"
+    },
+    "fields": {
+      "TaskID": "02E07D94-B390-50DE-8138-D550DA27657F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "ACB443AB-E853-56DD-990C-2749FDB643D0",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.782Z",
+      "checksum": "dddacc0f77cbe4de72160a3abbf14d8f3ef9cbb0c69030e5e56c7792599b7c8c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1BFAC29-0329-589C-B2A5-8405210A40FC"
+    },
+    "fields": {
+      "TaskID": "CBD87BC2-7875-531F-AE7D-F69E7AB2D968",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "E0343322-6B12-5B7F-B87E-E32340983D41",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.794Z",
+      "checksum": "e602c2081203be9b63361bbc52f66e146c2a6c6625d9566c1dd3cfebbdd83e74"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "05CE97D2-3C4B-528F-AF15-253FF4D0B26B"
+    },
+    "fields": {
+      "TaskID": "81FBE475-3A36-58D5-8B72-1AFB006000E7",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.806Z",
+      "checksum": "ebba5fffcc09b659de37531e3828451fb7b98911577918c63e3c5381ed3dbcbd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65DE5945-B1F9-5511-86EA-CA546A714C89"
+    },
+    "fields": {
+      "TaskID": "6BADB6DC-81C9-5EBA-890D-236E2461C6B9",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "5A2B2472-DF21-55F4-A89E-54B16497E62D",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.818Z",
+      "checksum": "48406c2c4f36a59e9b6811cb4575f6c1a0ae45b02bc857567e15c2c4ee150f87"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "985359C8-AEA1-5F2F-85BF-0809947DB582"
+    },
+    "fields": {
+      "TaskID": "871372E4-52B7-5F65-8DB6-BDB1782DA2C4",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "5A2B2472-DF21-55F4-A89E-54B16497E62D",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.830Z",
+      "checksum": "081cd54f69640f87420f36f85015fecd1cc1898e7c848d8e98b1dab228c2a9e9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C60771B-C679-5249-B608-5C5ACC92AA15"
+    },
+    "fields": {
+      "TaskID": "5653D4EF-B653-585E-B010-F87FC5203B80",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A75FC351-9913-5229-A277-277BB1984ACA",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.842Z",
+      "checksum": "8c55f860f416ee15814e932da04059cd4bbd52e7110fc61309ac522706709414"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "96E6A4BA-809A-5660-85BC-7836624A66D1"
+    },
+    "fields": {
+      "TaskID": "1943CB3A-4F04-5FCC-B5EA-BD85D34C168D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "50C4B479-7320-5314-A525-F03017ED9411",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.854Z",
+      "checksum": "d8dbc51bb895c269262a5657d41d8d0d74cf1b5a0a8e4369423f1e4fa88f4c6a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "41095144-B3D6-59A0-8B37-E1EEA71B8EF5"
+    },
+    "fields": {
+      "TaskID": "4105058F-3B3E-58DC-AA25-46D032A08288",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "4BBB9EBD-2817-50E2-88DB-3B04A506A5A2",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.865Z",
+      "checksum": "db7d8dbb127ade04f812f0cd240786316ffdf7dcf3656ce89bce06eb7d950ab1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0D48FF7C-4DBA-5175-A6E5-E018FDCFA343"
+    },
+    "fields": {
+      "TaskID": "CCCD3E7A-7742-5B90-B939-494212DAB11B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "82ADEE0B-7298-509D-AB8A-6C1A83ECD502",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.877Z",
+      "checksum": "460890767b303a49ab7249ecec4cf72cb8fc3daec199943891a2710ed6b45748"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AFED0C2-3154-55BF-80E9-310781F59539"
+    },
+    "fields": {
+      "TaskID": "A7D45234-2F42-5329-9F89-5AF666782C2B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "82ADEE0B-7298-509D-AB8A-6C1A83ECD502",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.904Z",
+      "checksum": "8af3fa80579b28e4167c18e50bb311024bf45465516ee8d295001563adf20894"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A76CE796-8537-5A35-AAE5-739A1B70A596"
+    },
+    "fields": {
+      "TaskID": "FD6FCCC4-D539-5CD8-9ACB-7BB8670E7BEC",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "B5B922EA-B7F4-5FB0-97A4-C7CD1601E396",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.917Z",
+      "checksum": "8155324b187795dbdd3ea41c15477be43a7e6e01bf445caf13312347de2ab080"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1F67CE75-4B63-53E0-A4A8-7E2395DB0124"
+    },
+    "fields": {
+      "TaskID": "7E16E381-7378-55B8-88ED-FC737A16401C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.928Z",
+      "checksum": "6130a3c4adeceb1ce7726113aadd35a139b6fe9b76d7093f8f8cf396d0a293ab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB254A7E-3A1F-5108-A572-2F9FB3EE1D59"
+    },
+    "fields": {
+      "TaskID": "92BB414D-B6A7-53C7-9733-14785373551C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "82ADEE0B-7298-509D-AB8A-6C1A83ECD502",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.938Z",
+      "checksum": "1944989e00fd3dff91ae5d85f7e51d6a0e5ef5c47876e9abe5cdd6515a67162d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3501F1B-8B99-5147-AF8D-19EF1982840B"
+    },
+    "fields": {
+      "TaskID": "9FBD0479-5AF4-56AF-9DF5-DEE97C30C0FC",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "7D868A84-0297-5CD2-8D36-BFCEE85D4A1D",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.948Z",
+      "checksum": "f4db57693b3abd70ce8932d365cfc485c65c08c98387a735d2b7fed019d3abd6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F72B1BF-9D51-5779-BFB8-FB7D2D6433FA"
+    },
+    "fields": {
+      "TaskID": "4DB65CD4-C91D-5215-A267-CB851924FC54",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "B253E680-3869-5D3B-8349-57E1D2424E02",
+      "Status": "Completed"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.958Z",
+      "checksum": "bd345f6c362ba30dc8bcb26775a4780efd25aad4c6f6f22d390729407f261afa"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1ADA767B-E6E8-5D6B-8986-89AD66B8309C"
+    },
+    "fields": {
+      "TaskID": "3BD400A7-E66F-5CD8-ACC4-501AC759CBB7",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FEDB24D2-F31A-5907-B65D-1FFA73ACE3F7",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.968Z",
+      "checksum": "305335365e8af4e20c57951e2535c83ff1a5305c597d398f4bf279f2e3e086df"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3753312C-1788-5F7A-8C45-13A66E093BFD"
+    },
+    "fields": {
+      "TaskID": "16472B1F-0064-5D94-A2CA-8142B7EE0548",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.978Z",
+      "checksum": "fbfcb85ca00a24bd2c42502161a024c4dc8026ef6c8d14d6773d0c64b3376b87"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD1283EE-0D69-57BC-AFAC-5F01F676573B"
+    },
+    "fields": {
+      "TaskID": "B36AC43C-6E1F-5AC7-9E55-9EB51A69FBB1",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.989Z",
+      "checksum": "a40d10a4704ba4a4a8e541d6e15819357703f79c0b550d1705f855e7286e797c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8605FC16-B014-5315-9ECF-FCC449F673FB"
+    },
+    "fields": {
+      "TaskID": "ECC011FA-72A3-5DBC-ABC4-F4462F1DD08A",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.997Z",
+      "checksum": "9b580b2ed79040ee9aa11f3cf9635b722ff706f156dce139393fabbeb1d2e764"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EFC01301-7073-56E5-BC30-DC4550369E1B"
+    },
+    "fields": {
+      "TaskID": "0779591F-60B6-5C9D-85D5-C24555FB9B70",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.023Z",
+      "checksum": "7166d56c25884a363fdb152e221aeb601c44b7b72c29ecf478ef922bd8a50a08"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9E4FB922-CFE7-55FC-BB60-90D652A4B841"
+    },
+    "fields": {
+      "TaskID": "2C0A83A5-10BE-59B4-A79C-010F9BAB3BD4",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.033Z",
+      "checksum": "7c7ef7180c9cc42ec38c4eb390d9bd9d29ff28ac6823d54bc07f266879e68ca4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "184CC968-A431-5BB6-84EF-11B242C8D445"
+    },
+    "fields": {
+      "TaskID": "3A4AF38D-251D-5146-B035-35904D301678",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.042Z",
+      "checksum": "6841e280304eb3278723e219995c3b22adb1924667d05ae2589fdbe9c67b8713"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DB3671D3-E1B9-55D0-A5E2-BEB909F63491"
+    },
+    "fields": {
+      "TaskID": "F97A947F-0A2E-530D-888D-D034CDE98AB7",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.052Z",
+      "checksum": "7ab1e51344ce76debf1e170adaba693de1a4380f4cd7119e8e78086d949d1d84"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0AA0984-DCA6-5ABB-8256-3AAB39807974"
+    },
+    "fields": {
+      "TaskID": "658D321C-F3A6-56CA-914A-3A21705E465B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.061Z",
+      "checksum": "1599317779583d11e52ce1919e6bb171d0fb550eca1cf53efcd87e967c345a35"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7704D230-FD7B-546B-A004-1E1954BC3FD6"
+    },
+    "fields": {
+      "TaskID": "0654D510-B113-541A-A169-4B23079C8C5E",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.071Z",
+      "checksum": "2b3a180e014a66d7bc1560dd4fe962275830033285160e5149c8e8e278e5ee28"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A567A6B5-C9BA-570D-B26D-004C71ECBDA4"
+    },
+    "fields": {
+      "TaskID": "98AFFA38-B69C-5211-A7D1-5AE3A3D9F891",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.081Z",
+      "checksum": "db281dc49a377064a412656575c8b7f15e04a37d091c072e79a9a4789154776b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DB1DB924-8CB0-5578-A564-B8EE2ED2E201"
+    },
+    "fields": {
+      "TaskID": "42903146-16C2-512D-AB5B-67FFD75782F1",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.092Z",
+      "checksum": "b2bb5e076a6c69bd7bb3e73e5439eaaa4413163fbb92c052c589942398f44db3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB4E5295-DAE7-52B8-88FB-DB2576703514"
+    },
+    "fields": {
+      "TaskID": "B19F0733-EF1C-55F1-BD85-4CF9D65B9EE5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.103Z",
+      "checksum": "85626efee33162b98b30cda7ba9db81505c5fc0101877d22a2b65dcb16e817eb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CDEB362D-53FA-5471-ACE2-C0826C1C58C3"
+    },
+    "fields": {
+      "TaskID": "8E959DDA-0504-5FBB-8F95-01EB799574E5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.112Z",
+      "checksum": "e2816975ec01faa9b7fc9c979db062ddd798c7908ff654642a726f73d9458956"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "146601A5-B7E5-57AA-A5B7-5CF21AA13743"
+    },
+    "fields": {
+      "TaskID": "7D091880-47BD-577F-8887-47B0AE423823",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.139Z",
+      "checksum": "a61fd42053bba556b8f9683d78914843abdfd71bca193df035b61be9f6e9a638"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "76EEEF03-BE00-58D1-9075-D012ACB338E3"
+    },
+    "fields": {
+      "TaskID": "D7B0553D-02A7-5641-BA85-C2289835C3E3",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.150Z",
+      "checksum": "d4e0ac103046f3de336881208828f29c3a06551bb692e024962c40c5eb591da3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF5BAAA2-13DF-567F-86B4-0B17E44BED0A"
+    },
+    "fields": {
+      "TaskID": "2E297300-8DB1-5999-B459-8478044274B7",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.163Z",
+      "checksum": "cecfb46f57b63a6dd0b72ca1611883a2d37006961de33c1fa50ee03194d8e99a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BBAD8180-4AAF-555A-B9E4-9F9D9140B9B5"
+    },
+    "fields": {
+      "TaskID": "63F6D07A-C83D-5938-84ED-F9F5A488474F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.173Z",
+      "checksum": "b2358a400062d1eaf602a43f5c5bb88f57d03a13bf8153d43eace702f7d3b5bc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60CEC276-BF78-501B-B83D-9185E2497C52"
+    },
+    "fields": {
+      "TaskID": "DBBBF4EB-6511-5AA6-A106-1708FEF2C6A2",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.184Z",
+      "checksum": "54d728a3e0d3eb4c91f16eda49cdcd671ef46694df908d6e3991e189305d9c3e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FE4DA1B5-208D-560B-9C98-AF22C96706EF"
+    },
+    "fields": {
+      "TaskID": "1E19772D-9241-5E52-A0A3-62936A2474EA",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.195Z",
+      "checksum": "76923aaea8eed3bd5a67aef1116d64bf1c7e7b9a8725e9a771343b08b49e5106"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F12EAC4-A81F-55FC-9F45-2DC38733AC0B"
+    },
+    "fields": {
+      "TaskID": "DBEFBA09-3E7E-56AB-A139-94298639C695",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.206Z",
+      "checksum": "f207802b848467168a71015fc590cd4a71197f02207fbc7139a081472a5a1281"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A7C0C044-1CB2-51C6-A5DE-219CC9E94488"
+    },
+    "fields": {
+      "TaskID": "33E80CAE-1197-5DA5-A5FF-27F902110290",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.217Z",
+      "checksum": "63d16b11d86d5b447cf44e94465175801fafec4a0d9a5020c15f162eb85a35e7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A298CEC4-00CA-5575-92E1-E463311FD6DD"
+    },
+    "fields": {
+      "TaskID": "6008D34D-6A2E-5392-9B13-BE5FE2EF9C16",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.230Z",
+      "checksum": "b7db8ea5f67af7e117e0cdba47eac6b7bce89aaf4009370390770227416df686"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D98A049-06A9-5B84-8D97-D3BA6508C5F9"
+    },
+    "fields": {
+      "TaskID": "9D065B73-675F-5825-A56A-D3E0BDE39D9E",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.239Z",
+      "checksum": "14ad1669cc45adb2ad0dd9e89a442b5ef48d69402f57b6ecd187a6f6abbded6e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B05E62BA-EEEF-58DA-B05F-B35DBB9C0709"
+    },
+    "fields": {
+      "TaskID": "5C363228-0064-5BC4-BA3F-E461CC8FA8A3",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.265Z",
+      "checksum": "e6e2d99167568b858392bde373213f6a1451bf729da193c4af7dc1b865d5730d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31476D7C-CDC3-5023-8564-13BABB76EF7B"
+    },
+    "fields": {
+      "TaskID": "539CEC08-7F34-53CF-935B-293BC2B25585",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.276Z",
+      "checksum": "efc25c86f6054e92fa22ca525a25b08c63fc6dbf2785f06bce5307ff20c7a2c2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1CB65357-8AAB-5017-9706-49660967D6B3"
+    },
+    "fields": {
+      "TaskID": "DC4B5D75-1431-5C3D-B812-74A4CF4753E1",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.286Z",
+      "checksum": "d5c6e41b23008a88dd7e22e5c7b7770c37c26d94571f9dc956103ba9b617c41b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1CA6706B-D2C0-5AB2-882F-D2BC8253D8A6"
+    },
+    "fields": {
+      "TaskID": "BCA67D6E-9D92-5698-A391-A88C05857708",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.297Z",
+      "checksum": "169bf904085e2ff6090483f40c98442e0634e5a92af823c2e230082b8e54d106"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C7A188BE-2ECA-5B39-98A2-B0F2524DAB35"
+    },
+    "fields": {
+      "TaskID": "24F8025A-2A6E-515F-8304-7CB995A991E9",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.309Z",
+      "checksum": "d6de8eb7f60fe0437bc54b0d1e505211b76a2e75ef1e2a811bcf7b738353bbcd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9522C762-5DD2-5FF7-B8B8-C8F4419FF4E2"
+    },
+    "fields": {
+      "TaskID": "B147158C-5DAC-5EB0-8847-DB9CD6C4BCE9",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.320Z",
+      "checksum": "84b3016805d28dc1430a8cd380a6b9869bea4cbfdaa3d4859301bcdf1cf29111"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5D0C400E-3982-55AA-9753-3B35BEB77B36"
+    },
+    "fields": {
+      "TaskID": "59207C95-706F-56A7-92A4-F20774132E58",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.331Z",
+      "checksum": "29b356f5de4cefee182856c8b762bc07092bb6a2cc90b95b678dcf5564aeeb56"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B452C64F-A60C-5AD2-A471-54D34DA8A6BB"
+    },
+    "fields": {
+      "TaskID": "D6EA2994-9E78-5708-A565-DCA14BDB990C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.343Z",
+      "checksum": "4cb1956007d401eabaea1de63f9c732e0d08d3b7d9ec84eba966ff1607ad42df"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "19BDA302-AD5D-5F3F-98C8-AB7F8B5CA329"
+    },
+    "fields": {
+      "TaskID": "783D9175-B4F2-54A0-A83F-600A45991882",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.355Z",
+      "checksum": "1684b1a97550a98be67630271db376d0c2e86b818ebd4a362c01e20940e811b1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0522FCF0-38E0-5BED-90FE-BAE79F33D8C1"
+    },
+    "fields": {
+      "TaskID": "5CFBBB30-EF71-5AC4-9432-260974908CAF",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.366Z",
+      "checksum": "c8e975b220f33fc440ee8179a601fd691d11d1822e8e589fae54f7813449af39"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C113D36-7211-5320-B1D2-56E99118D81E"
+    },
+    "fields": {
+      "TaskID": "F8814C90-612A-5D4D-8F24-24479C7AC5AD",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.391Z",
+      "checksum": "36bf2e14fe9027f15529162b5cbb4589d6deb9e298755dd64b45633051c80948"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3531831E-EA14-5C61-AD49-40F5DA32443E"
+    },
+    "fields": {
+      "TaskID": "A977335F-EBC0-5D5C-8468-C286BAE38920",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.403Z",
+      "checksum": "677a9d0b09228e49bd3de48a07fd019fe3d28e6116c15bcc1bbe31c23110b8ea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1414A168-F618-5D4E-9C3F-714082DA08C8"
+    },
+    "fields": {
+      "TaskID": "FB9E4E52-B10A-5D7F-BF65-07A54270CEFD",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.416Z",
+      "checksum": "f26dcd95a67f755ccf9422401e33ab5647bb38c72da151968218260cb10529c1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A38AE5E4-4ACA-52E3-9278-F1FD0BCF76EC"
+    },
+    "fields": {
+      "TaskID": "D5F830D4-7CAB-5820-A442-07AEDA90DBEF",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.428Z",
+      "checksum": "1b490c3cc191474bbfd9342a6a6047cf4467044d13bdd8bea54f55fcc00f3af0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B048F038-FF57-5C0E-9912-DED3329CA655"
+    },
+    "fields": {
+      "TaskID": "B7EC7E27-0FC3-54C1-A312-63CB4074E5A8",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.440Z",
+      "checksum": "57c047b63bd58f3a234dd82bd1640125342b7ddb986b98d3277e5d7c150d0243"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AA245F0-A303-5BA5-8D17-3715DEF91D33"
+    },
+    "fields": {
+      "TaskID": "B6CE72A6-C3E3-5EA0-9EE9-CC6698D48856",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.453Z",
+      "checksum": "0848434136073cd79ef564a944143cab55b52dcf76f1e932ab473fa97b1b69c2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D4878C4-671C-59BC-9AF5-EE884D14EC70"
+    },
+    "fields": {
+      "TaskID": "92FEFDDD-889D-5E76-A563-98CA574D1C23",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.467Z",
+      "checksum": "07b36714bf83e425c333c4d3875314066806b4a04836d82d85b50ba523e69657"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2C12D853-2093-5854-9ED6-194553E1712D"
+    },
+    "fields": {
+      "TaskID": "68110C2F-4B4D-5B33-A4E1-457EE812C90D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.479Z",
+      "checksum": "52bf0994ecdca7796b2447cd2dc0c3c4e4d35b7a7713560a3cc5965cd043fc5a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E3B169AB-5C6B-51B7-9385-D86BEFA0C581"
+    },
+    "fields": {
+      "TaskID": "BCD01E8F-D1BE-5F79-AF32-9BEA241CDAEA",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.491Z",
+      "checksum": "2ce3869aec025ea47fd5edfe30aea1ddc4f0ac78a8a7f885567a43148a4226c7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ADCB2D04-CA2A-5B80-9CBD-D184883670DF"
+    },
+    "fields": {
+      "TaskID": "46B4ED01-8F15-56A7-8334-CE709E705109",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.501Z",
+      "checksum": "bff6b9017a73c84c0f8e8f9b24fe004e51ab44cae008efcd66e8c44d1e557be7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AE66236B-30FB-56FA-817D-17477E24C3AE"
+    },
+    "fields": {
+      "TaskID": "6FBB45E5-8790-5D1E-BF6B-D6640DAF29CE",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.524Z",
+      "checksum": "42c12755b0c2e15011c723d358f78ea3e6e5044108030434e8a0a88ec90317ac"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5AE671BF-1C1D-575B-A920-BB697D8B148A"
+    },
+    "fields": {
+      "TaskID": "B836A153-733B-5312-BE0B-B5833127225F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.534Z",
+      "checksum": "c4c31e182f52b503e0fa3fd4aa880f11977eda61da96ca70ef0f347f60efbf14"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AB2583CE-E7D0-54DF-B8E8-2DA8937DEDBE"
+    },
+    "fields": {
+      "TaskID": "8548C199-62A4-557F-9022-B21DFF99BD36",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.544Z",
+      "checksum": "5d73717de4fa9eba1caedc2ba5e1e84791f9ed3269ea2713507a6a7b058a092d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B576ED8B-E7EA-5E3A-8864-013D2686A234"
+    },
+    "fields": {
+      "TaskID": "33468206-5B5A-534A-928E-53E3A9E3B6A5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.556Z",
+      "checksum": "49dcd8322d33a39bbabda85b23e50ca2bf9854be259a8e466ce5428413610ca6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5061DBCE-7FB4-566B-B21F-489B79C1D027"
+    },
+    "fields": {
+      "TaskID": "A845E3D1-CC2D-5E86-8FF7-0EFB6D0E7A98",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.567Z",
+      "checksum": "d7666497da97cf0f589caad9d3896e1208468fd6ed0cc7dbf22fbabb3cbb3a60"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5309C9B4-A3D5-5304-A3DD-39FB8E5984A4"
+    },
+    "fields": {
+      "TaskID": "3456799C-DC77-5358-B573-119C6FEE5FED",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.577Z",
+      "checksum": "610fcc0ee2e030acd49a2a5ef3939877f37221a485321bb4cbb0ac8dbacb2f20"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6A0FC117-7FC1-5979-9DC8-64542AFB2A09"
+    },
+    "fields": {
+      "TaskID": "3245C2D4-2850-59A7-AD2E-CCBBF7176848",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.588Z",
+      "checksum": "161be6bc4c01d16d3db7a6a31ea27a5b9b76e09c05ee4fab55b6f729df270886"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E8456ADE-69D8-5FE1-944D-2006997C341B"
+    },
+    "fields": {
+      "TaskID": "186E6721-68C0-5DDC-AD89-9D21D33A0AA5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Status": "InProgress"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:04.597Z",
+      "checksum": "55621d9c7878b3a20d42dd94aba980440ad428660091e46a5444ab5b4612f14b"
+    }
+  }
+]
