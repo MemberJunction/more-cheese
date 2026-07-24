@@ -142,14 +142,14 @@ const MAPPING = [
   { pack: 'tasks', json: 'tasks', dir: 'tasks', entity: 'MJ_BizApps_Tasks: Tasks',
     record: (r) => ({ primaryKey: { ID: uuidFor('task', r.TaskKey) }, fields: { Name: r.Name, TypeID: uuidFor('tasktype', r.TypeKey), Status: r.Status, Priority: r.Priority, DueAt: r.DueAt, CompletedAt: r.CompletedAt ?? null, PercentComplete: r.PercentComplete ?? 0, CreatedByPersonID: r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null } }) },
   { pack: 'tasks', json: 'task_assignments', dir: 'task-assignments', entity: 'MJ_BizApps_Tasks: Task Assignments',
-    record: (r) => ({ primaryKey: { ID: uuidFor('taskassign', r.AssignKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), AssigneeEntityID: `@lookup:Entities.Name=${r.AssigneeEntityName}`, AssigneeRecordID: uuidFor('person', r.AssigneeMemberNumber), Status: r.Status } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('taskassign', r.AssignKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), AssigneeEntityID: `@lookup:MJ: Entities.Name=${r.AssigneeEntityName}`, AssigneeRecordID: uuidFor('person', r.AssigneeMemberNumber), Status: r.Status } }) },
   { pack: 'tasks', json: 'task_links', dir: 'task-links', entity: 'MJ_BizApps_Tasks: Task Links',
-    record: (r) => ({ primaryKey: { ID: uuidFor('tasklink', r.LinkKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), EntityID: `@lookup:Entities.Name=${r.EntityName}`, RecordID: r.RefKind === 'meeting' ? uuidFor('meeting', r.RefKey) : uuidFor('person', r.RefKey) } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('tasklink', r.LinkKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), EntityID: `@lookup:MJ: Entities.Name=${r.EntityName}`, RecordID: r.RefKind === 'meeting' ? uuidFor('meeting', r.RefKey) : uuidFor('person', r.RefKey) } }) },
   // issues pack → bizapps-issues entities
   { pack: 'issues', json: 'issue_types', dir: 'issue-types', entity: 'MJ_BizApps_Issues: Issue Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('issuetype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, DefaultPriority: r.DefaultPriority, IsActive: r.IsActive } }) },
   { pack: 'issues', json: 'issues', dir: 'issues', entity: 'MJ_BizApps_Issues: Issues',
-    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: `@lookup:MJ_BizApps_Issues: Issue Statuses.Name=${r.StatusKey}`, Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), AssigneeEntityID: r.AssigneeMemberNumber ? `@lookup:Entities.Name=${r.AssigneeEntityName}` : null, AssigneeRecordID: r.AssigneeMemberNumber ? uuidFor('person', r.AssigneeMemberNumber) : null, SourceEntityID: `@lookup:Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: `@lookup:MJ_BizApps_Issues: Issue Status.Name=${r.StatusKey}`, Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), AssigneeEntityID: r.AssigneeMemberNumber ? `@lookup:MJ: Entities.Name=${r.AssigneeEntityName}` : null, AssigneeRecordID: r.AssigneeMemberNumber ? uuidFor('person', r.AssigneeMemberNumber) : null, SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
   { pack: 'issues', json: 'issue_sequences', dir: 'issue-sequences', entity: 'MJ_BizApps_Issues: Issue Number Sequences',
     record: (r) => ({ primaryKey: { ScopeCode: r.ScopeCode }, fields: { NextSequenceNumber: r.NextSequenceNumber } }) },
   // messaging pack → bizapps-secure-messaging entities (soft person refs — plain UUIDs)
@@ -236,7 +236,7 @@ const MAPPING = [
     record: (r) => ({
       primaryKey: { ID: uuidFor('line', r.LineKey) },
       fields: {
-        LineKey: r.LineKey, OrderID: uuidFor('order', r.OrderKey), ProductID: uuidFor('product', r.ProductKey),
+        OrderID: uuidFor('order', r.OrderKey), ProductID: uuidFor('product', r.ProductKey),
         Quantity: r.Quantity, UnitPrice: r.UnitPrice, LineTotal: r.LineTotal, IsSharedDemo: r.IsSharedDemo,
       },
     }),
@@ -246,7 +246,7 @@ const MAPPING = [
     record: (r) => ({
       primaryKey: { ID: uuidFor('payment', r.PaymentKey) },
       fields: {
-        PaymentKey: r.PaymentKey, OrderID: uuidFor('order', r.OrderKey), Amount: r.Amount,
+        OrderID: uuidFor('order', r.OrderKey), Amount: r.Amount,
         PaymentDate: r.PaymentDate, Method: r.Method, Status: r.Status, IsSharedDemo: r.IsSharedDemo,
       },
     }),
