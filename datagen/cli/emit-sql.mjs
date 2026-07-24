@@ -12,7 +12,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { INSTALL_ORDER, PREAMBLE, packSqlLines } from '../engine/seed-mapping.mjs';
+import { INSTALL_ORDER, PREAMBLE, POSTAMBLE, packSqlLines } from '../engine/seed-mapping.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -36,7 +36,7 @@ for (const pack of INSTALL_ORDER) {
     ...(PREAMBLE[pack] ? [''] : []),
   ];
   const { lines: bodyLines, summary: packSummary } = packSqlLines(pack, load);
-  lines.push(...bodyLines);
+  lines.push(...bodyLines, ...(POSTAMBLE[pack] ?? []));
   for (const s of packSummary) summary.push({ pack, ...s });
   writeFileSync(join(OUT, 'sql', `${String(packIndex).padStart(2, '0')}_${pack}.sql`), lines.join('\n'));
 }

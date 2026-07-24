@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { logisticFit } from '../engine/stats.mjs';
 import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../engine/dates.mjs';
 import { loadRuleset } from '../engine/config.mjs';
+import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -50,6 +51,24 @@ const dqLabels = load('membership', 'data_quality_labels');
 const smThreads = load('messaging', 'secure_threads');
 const smMessages = load('messaging', 'secure_messages');
 const smSessions = load('messaging', 'portal_sessions');
+const pUsers = load('platform', 'mj_users');
+const pViews = load('platform', 'user_views');
+const pQueries = load('platform', 'queries');
+const pConvs = load('platform', 'conversations');
+const pConvDetails = load('platform', 'conversation_details');
+const pFavs = load('platform', 'user_favorites');
+const pListDetails = load('platform', 'list_details');
+const pListsP = load('platform', 'lists');
+const pNotifs = load('platform', 'user_notifications');
+const pRecordChanges = load('platform', 'record_changes');
+const snModelFactors = load('sonar', 'model_factors');
+const snBands = load('sonar', 'score_bands');
+const snFactors = load('sonar', 'factors');
+const snScores = load('sonar', 'scores');
+const snContribs = load('sonar', 'score_contributions');
+const snHistory = load('sonar', 'score_history');
+const snTransitions = load('sonar', 'band_transitions');
+const snRuns = load('sonar', 'recompute_runs');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -108,6 +127,32 @@ function checkPacks() {
     + smSessions.filter((x) => !peopleKeys.has(x.MemberNumber)).length
     + smMessages.filter((x) => !threadKeys.has(x.ThreadKey) || !sessionKeys.has(x.SessionKey)).length;
   check('pack refs: messaging→common + messages→threads/sessions', badMsg === 0, `${badMsg} dangling`);
+  // platform: staff-owned artifacts resolve to staff users; audit/favorite/list refs resolve to real records
+  const staffKeys = new Set(pUsers.map((u) => u.UserKey));
+  const issueKeySet = new Set(issues.map((x) => x.IssueKey));
+  const taskKeySet = new Set(tTasks.map((x) => x.TaskKey));
+  const periodKeySet = new Set(periods.map((x) => x.PeriodKey));
+  const relKeySet = new Set(relationships.map((x) => x.RelKey));
+  const refOk = (x) => x.RefKind === 'issue' ? issueKeySet.has(x.RefKey)
+    : x.RefKind === 'task' ? taskKeySet.has(x.RefKey)
+    : x.RefKind === 'period' ? periodKeySet.has(x.RefKey)
+    : x.RefKind === 'memberprofile' || x.RefKind === 'person' ? peopleKeys.has(x.RefKey)
+    : x.RefKind === 'rel' ? relKeySet.has(x.RefKey) : false;
+  const badPlat = [...pViews, ...pConvs, ...pListsP, ...pNotifs].filter((x) => !staffKeys.has(x.UserKey)).length
+    + pConvDetails.filter((x) => x.UserKey && !staffKeys.has(x.UserKey)).length
+    + [...pFavs, ...pRecordChanges].filter((x) => !staffKeys.has(x.UserKey) || !RECORD_PREFIX[x.RefKind] || !refOk(x)).length
+    + pListDetails.filter((x) => !RECORD_PREFIX[x.RefKind] || !refOk(x)).length;
+  check('pack refs: platform→staff users + audit/favorites/lists→real records', badPlat === 0, `${badPlat} dangling`);
+  // sonar: scores/history/transitions anchor real people; contributions resolve to scores+factors
+  const scoreKeys = new Set(snScores.map((x) => x.ScoreKey));
+  const factorKeys = new Set(snFactors.map((x) => x.FactorKey));
+  const bandKeys = new Set(snBands.map((x) => x.BandKey));
+  const badSonar = [...snScores, ...snHistory, ...snTransitions].filter((x) => !peopleKeys.has(x.MemberNumber)).length
+    + snContribs.filter((x) => !scoreKeys.has(x.ScoreKey) || !factorKeys.has(x.FactorKey)).length
+    + snScores.filter((x) => !bandKeys.has(x.BandKey) || !bandKeys.has(x.PreviousBandKey)).length
+    + snHistory.filter((x) => !bandKeys.has(x.BandKey)).length
+    + snTransitions.filter((x) => !bandKeys.has(x.FromBandKey) || !bandKeys.has(x.ToBandKey)).length;
+  check('pack refs: sonar→common + contributions→scores/factors + bands resolve', badSonar === 0, `${badSonar} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -728,6 +773,161 @@ function checkMessaging() {
 }
 
 // ---------- motifs: every stamped archetype actually expresses ----------
+// ---------- platform residue: __mj usage artifacts derive from real timelines ----------
+function checkPlatform() {
+  const PP = R.platform;
+  const releaseMs = new Date(`${run.releaseDate}T23:59:59Z`).getTime();
+
+  const domainBad = pUsers.filter((u) => !u.Email.endsWith(`@${PP.emailDomain}`)).length
+    + (PP.emailDomain.endsWith('.example') ? 0 : 1);
+  check('platform: staff emails on the reserved .example domain', domainBad === 0, pUsers.map((u) => u.Email).join(', '));
+
+  // conversations: every token substituted, User speaks first, clock increases, inside history
+  const convProblems = [];
+  for (const c of pConvs) {
+    const msgs = pConvDetails.filter((m) => m.ConvKey === c.ConvKey);
+    if (msgs.length < 2) convProblems.push(`${c.ConvKey}: <2 turns`);
+    if (msgs[0]?.Role !== 'User') convProblems.push(`${c.ConvKey}: first turn not User`);
+    let prev = 0;
+    for (const m of msgs) {
+      if (/\{(N|HERO):/.test(m.Message)) convProblems.push(`${m.MsgKey}: unresolved token`);
+      const t = new Date(m.CreatedAtTs).getTime();
+      if (t <= prev) convProblems.push(`${m.MsgKey}: clock not increasing`);
+      if (t > releaseMs) convProblems.push(`${m.MsgKey}: after release`);
+      prev = t;
+    }
+  }
+  check('platform: conversations coherent (tokens resolved, User-first, increasing clock, inside history)',
+    convProblems.length === 0, convProblems.slice(0, 3).join('; ') || `${pConvDetails.length} turns in ${pConvs.length} conversations`);
+
+  // audit rows mirror pack timelines EXACTLY (derive-never-invent, and the counts must match)
+  const issueByKey = new Map(issues.map((x) => [x.IssueKey, x]));
+  const taskByKey = new Map(tTasks.map((x) => [x.TaskKey, x]));
+  const periodByKey = new Map(periods.map((x) => [x.PeriodKey, x]));
+  const personByKey = new Map(people.map((x) => [x.MemberNumber, x]));
+  const relByKey = new Map(relationships.map((x) => [x.RelKey, x]));
+  const rcProblems = [];
+  for (const rc of pRecordChanges) {
+    try { JSON.parse(rc.ChangesJSON); JSON.parse(rc.FullRecordJSON); } catch { rcProblems.push(`${rc.ChangeKey}: bad JSON`); }
+    if (new Date(rc.ChangedAt).getTime() > releaseMs) rcProblems.push(`${rc.ChangeKey}: after release`);
+    const expected = rc.ChangeKey.endsWith(':resolved') ? issueByKey.get(rc.RefKey)?.ResolvedAt
+      : rc.ChangeKey.endsWith(':closed') ? issueByKey.get(rc.RefKey)?.ClosedAt
+      : rc.RefKind === 'task' ? taskByKey.get(rc.RefKey)?.CompletedAt
+      : rc.RefKind === 'period' ? `${periodByKey.get(rc.RefKey)?.StartDate}T09:00:00Z`
+      : rc.RefKind === 'memberprofile' ? `${personByKey.get(rc.RefKey)?.JoinDate}T09:30:00Z`
+      : rc.RefKind === 'rel' ? (rc.Type === 'Create' ? `${relByKey.get(rc.RefKey)?.StartDate}T11:05:00Z` : `${relByKey.get(rc.RefKey)?.EndDate}T11:00:00Z`)
+      : undefined;
+    // (rows whose source timestamp ran past release are clamped by the generator — skip equality there)
+    if (expected && new Date(expected).getTime() <= releaseMs && rc.ChangedAt !== expected)
+      rcProblems.push(`${rc.ChangeKey}: ChangedAt ${rc.ChangedAt} != source ${expected}`);
+  }
+  const heroNums = new Set(R.heroes.map((h) => h.memberNumber));
+  const expCounts = {
+    issue: issues.filter((x) => x.ResolvedAt).length + issues.filter((x) => x.ClosedAt).length,
+    task: tTasks.filter((x) => x.CompletedAt).length,
+    memberprofile: [...heroNums].filter((m) => personByKey.has(m)).length,
+    period: periods.filter((x) => heroNums.has(x.MemberNumber)).length,
+    rel: relationships.filter((x) => x.RelKey.startsWith('emp-true:')).reduce((n, nu) => {
+      const member = nu.RelKey.slice('emp-true:'.length);
+      const old = relationships.find((x) => x.RelKey.startsWith('emp:') && x.FromMemberNumber === member && x.Status === 'Ended' && x.EndDate === nu.StartDate);
+      return n + 1 + (old ? 1 : 0);
+    }, 0),
+  };
+  for (const [kind, exp] of Object.entries(expCounts)) {
+    const got = pRecordChanges.filter((x) => x.RefKind === kind).length;
+    if (got !== exp) rcProblems.push(`${kind}: ${got} audit rows vs ${exp} timeline facts`);
+  }
+  check('platform: audit backfill mirrors pack timelines (counts + timestamps + valid JSON)',
+    rcProblems.length === 0, rcProblems.slice(0, 3).join('; ') || `${pRecordChanges.length} audit rows`);
+
+  // shared views + reusable queries: known entities, non-empty predicates/SQL, and a real
+  // column layout (GridState mirrors what the UI writes; a layoutless view renders blank)
+  const gridOk = (v) => {
+    try {
+      const g = JSON.parse(v.GridState); JSON.parse(v.FilterState);
+      return (g.columnSettings ?? []).filter((c) => !c.hidden).length >= 3;
+    } catch { return false; }
+  };
+  const badView = pViews.filter((v) => !MJ_ENTITY_VAR[v.EntityName] || !v.WhereClause?.trim() || !gridOk(v)).length;
+  const badQuery = pQueries.filter((q) => !q.SQL?.toUpperCase().includes('SELECT') || !q.Name).length;
+  check('platform: shared views + queries well-formed (known entities, real SQL, column layout)', badView + badQuery === 0,
+    `${pViews.length} views, ${pQueries.length} queries`);
+
+  // the renewal-outreach list holds EXACTLY the pending-renewal members (derived, not invented)
+  const pending = [...lastPeriod.values()].filter((per) => per.Status === 'PendingRenewal').length;
+  const listRows = pListDetails.filter((d) => d.ListKey === 'renewal-outreach').length;
+  check('platform: renewal-outreach list == pending-renewal members', listRows === pending, `${listRows} vs ${pending}`);
+
+  const badNotif = pNotifs.filter((n) => (n.Unread ? n.ReadAt != null : n.ReadAt == null)).length;
+  check('platform: notification read-state coherent', badNotif === 0, `${pNotifs.length} notifications`);
+}
+
+// ---------- sonar: scores re-derive from the packs, signal is honest ----------
+function checkSonar() {
+  const SS = R.sonar;
+  const problems = [];
+
+  const weightSum = snModelFactors.reduce((a, x) => a + x.Weight, 0);
+  check('sonar: factor weights sum to 100', weightSum === 100, `${weightSum}`);
+
+  const sorted = [...snBands].sort((a, b) => a.MinScore - b.MinScore);
+  const contiguous = sorted[0].MinScore === 0 && sorted[sorted.length - 1].MaxScore === 100
+    && sorted.every((b, i) => i === 0 || sorted[i - 1].MaxScore === b.MinScore);
+  check('sonar: bands tile 0..100 with no gaps', contiguous, sorted.map((b) => `${b.Label} ${b.MinScore}-${b.MaxScore}`).join(', '));
+
+  // per-score internal consistency: contributions sum to the score, delta/trend/band agree
+  const contribsByScore = new Map();
+  for (const c of snContribs) (contribsByScore.get(c.ScoreKey) ?? contribsByScore.set(c.ScoreKey, []).get(c.ScoreKey)).push(c);
+  const bandFor = (s) => sorted.find((b) => s < b.MaxScore || b.MaxScore === 100).BandKey;
+  for (const s of snScores) {
+    const parts = contribsByScore.get(s.ScoreKey) ?? [];
+    if (parts.length !== snModelFactors.length) problems.push(`${s.ScoreKey}: ${parts.length} contributions`);
+    const sum = Math.round(parts.reduce((a, c) => a + c.WeightedContribution, 0) * 100) / 100;
+    if (Math.abs(sum - s.NormalizedScore) > 0.05) problems.push(`${s.ScoreKey}: contribs ${sum} != score ${s.NormalizedScore}`);
+    if (Math.abs((s.NormalizedScore - s.PreviousNormalizedScore) - s.Delta) > 0.011) problems.push(`${s.ScoreKey}: delta drift`);
+    const expTrend = Math.abs(s.Delta) < SS.flatDeltaThreshold ? 'Flat' : s.Delta > 0 ? 'Up' : 'Down';
+    if (s.TrendDirection !== expTrend) problems.push(`${s.ScoreKey}: trend ${s.TrendDirection} != ${expTrend}`);
+    if (s.BandKey !== bandFor(s.NormalizedScore)) problems.push(`${s.ScoreKey}: band mismatch`);
+  }
+  check('sonar: every score internally consistent (contribs sum, delta, trend, band)', problems.length === 0,
+    problems.slice(0, 3).join('; ') || `${snScores.length} scores × ${snModelFactors.length} factors`);
+
+  // history/transitions/runs mirror the snapshot math exactly
+  const nSnap = SS.snapshots.offsetsDaysBeforeRelease.length;
+  check('sonar: history = members × snapshots', snHistory.length === snScores.length * nSnap, `${snHistory.length} vs ${snScores.length}×${nSnap}`);
+  const histByMember = new Map();
+  for (const h of snHistory) (histByMember.get(h.MemberNumber) ?? histByMember.set(h.MemberNumber, []).get(h.MemberNumber)).push(h);
+  let expTrans = 0;
+  for (const rows of histByMember.values()) {
+    rows.sort((a, b) => (a.AsOfDate < b.AsOfDate ? -1 : 1));
+    for (let i = 1; i < rows.length; i++) if (rows[i].BandKey !== rows[i - 1].BandKey) expTrans++;
+  }
+  check('sonar: band transitions == history band changes', snTransitions.length === expTrans, `${snTransitions.length} vs ${expTrans}`);
+  const runsOk = snRuns.length === nSnap && snRuns.every((r) => r.Status === 'Succeeded' && r.RecordsScored === snScores.length)
+    && snRuns.reduce((a, r) => a + r.BandTransitions, 0) === snTransitions.length;
+  check('sonar: recompute runs coherent (count, scored, transition totals)', runsOk, `${snRuns.length} runs`);
+
+  // the signal is honest: disengaged members really score lower, and the flagship contrast holds
+  const scoreByMember = new Map(snScores.map((s) => [s.MemberNumber, s]));
+  const lapsed = [], active = [];
+  for (const [m, st] of lastStatus) {
+    const s = scoreByMember.get(m); if (!s) continue;
+    if (st === 'Lapsed') lapsed.push(s.NormalizedScore); else if (st === 'Active') active.push(s.NormalizedScore);
+  }
+  const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
+  const gap = mean(active) - mean(lapsed);
+  check(`sonar: engagement→retention signal (active mean − lapsed mean = ${gap.toFixed(1)} ≥ 3)`, gap >= 3,
+    `active ${mean(active).toFixed(1)} (n=${active.length}) vs lapsed ${mean(lapsed).toFixed(1)} (n=${lapsed.length})`);
+  // Bob's decline is a multi-YEAR arc — his 90-day trend direction legitimately jitters
+  // by seed (a sliding window can catch one extra event), so the binary claims are the
+  // rank gap and that he never reads as a top-band member.
+  const elena = scoreByMember.get('ICF-000101');
+  const bob = scoreByMember.get('ICF-000105');
+  check('sonar: flagship contrast (Elena ≥ Bob + 10, Bob below Engaged)',
+    !!elena && !!bob && elena.NormalizedScore >= bob.NormalizedScore + 10 && bob.BandKey !== 'engaged',
+    `Elena ${elena?.NormalizedScore} (${elena?.BandKey}) vs Bob ${bob?.NormalizedScore} (${bob?.BandKey}, ${bob?.TrendDirection})`);
+}
+
 function checkMotifs() {
   const { registry, meta } = JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8'));
   for (const [name, m] of Object.entries(meta)) {
@@ -783,6 +983,8 @@ checkStatusMix();
 checkDefects();
 checkMotifs();
 checkMessaging();
+checkPlatform();
+checkSonar();
 
 let failed = 0;
 for (const r of results) {

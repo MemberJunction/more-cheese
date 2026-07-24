@@ -1,11 +1,16 @@
 # Non-bizapp integrations — what they mean for MoreCheese, precisely
 
-**Date:** 2026-07-22 · **Author:** datagen workstream (Barnatt + Claude)
+**Date:** 2026-07-22 · **Revised:** 2026-07-23 · **Author:** datagen workstream
 **Scope of this doc:** everything *except* the bizapps. Bizapp integration (schemas, data
 through their views, install, their UIs) is defined and tracked elsewhere
 (`datagen/BIZAPPS-COVERAGE.md`, `datagen/INTEGRATION-RUNBOOK.md`) and is essentially done.
 This doc is about the layer above: **the Blue Cypress SaaS products and MJ core's own
 intelligence features consuming MoreCheese data.**
+
+> **SCOPE RULING (2026-07-23): only Skip (§1) and Betty (§2) are in scope.**
+> Everything else in this doc — Predictive Studio, Knowledge Hub, Record Set Processing,
+> rasa.io, Izzy, the prose-corpus question — is **descoped** for MoreCheese. Those sections
+> are retained below as reference (the analysis is done and correct), not as work items.
 
 ---
 
@@ -45,7 +50,7 @@ still be demo garbage (flat distributions, no causality, nothing for a model to 
 > + engineered signal in the data so everything consuming the graph produces TRUE results
 > (done, but unproven per product — hence the proof runs below).**
 
-This is also why the MJ-native ruling (Barnatt, 2026-07-14 — data born in MJ, no external
+This is also why the MJ-native ruling (2026-07-14 — data born in MJ, no external
 ingestion) shapes everything: we never build pipes; we make the data worth pointing things
 at. Every remaining "integration task" in this doc reduces to one of three shapes:
 **a config/keys exercise** (metadata-native products), **a question to a product team**
@@ -71,7 +76,7 @@ identifies at-risk members and names the right ones, (b) explains *why* using si
 engineered, (c) aggregates correctly (renewal rates by year/segment match our gates).
 
 **Gaps / questions:**
-- Barnatt's ruling: "not really any extra work" — agreed on data. The open item is purely
+- Team ruling: "not really any extra work" — agreed on data. The open item is purely
   the **proof run** (nobody has asked Skip these questions yet) and whether we should
   author a few **saved queries / data contexts** to make Skip's entry points demo-smooth.
 - Which MJAPI instance is Skip pointed at for the demo (the environment-of-record question)?
@@ -83,7 +88,7 @@ engineered, (c) aggregates correctly (renewal rates by year/segment match our ga
 ## 2. Betty — the knowledge assistant
 
 **What integration means here:** Betty answers members' questions from association
-knowledge. Barnatt's ruling (2026-07-22): Betty is already built and requires **zero extra
+knowledge. Team ruling (2026-07-22): Betty is already built and requires **zero extra
 work** from MoreCheese.
 
 **The one thing to pin down (Q — the only open Betty question):** what does Betty *ingest*
@@ -100,7 +105,7 @@ questions in the demo environment.
 
 ---
 
-## 3. Predictive Studio — train retention models on the members
+## 3. Predictive Studio — train retention models on the members *(DESCOPED 2026-07-23)*
 
 **What integration means here:** MJ core's train-models-on-your-data feature (member
 retention/lapse scoring) pointed at MoreCheese members. This is the **deepest engineered
@@ -131,7 +136,7 @@ decile contains the engineered at-risk personas. Screenshot/metrics captured in 
 
 ---
 
-## 4. Knowledge Hub — two very different halves
+## 4. Knowledge Hub — two very different halves *(DESCOPED 2026-07-23)*
 
 **What integration means here:** MJ core's AI/RAG + classification suite. Critically, KH
 splits into halves with opposite readiness:
@@ -159,7 +164,7 @@ has no corpus, and lorem-ipsum would classify/cluster meaninglessly. Options fro
 
 ---
 
-## 5. Record Set Processing / data-quality operations
+## 5. Record Set Processing / data-quality operations *(DESCOPED 2026-07-23)*
 
 **What integration means here:** MJ's bulk-operations substrate (Record Processes) running
 a *graded* cleanup demo: a process that fixes stale employers or merges duplicates, scored
@@ -174,10 +179,10 @@ before/after diff scored against the answer sheet (e.g. 10/11 stale employers co
 
 ---
 
-## 6. rasa.io — half-built already (revised 2026-07-22 after reading the rasa repos)
+## 6. rasa.io — half-built already *(DESCOPED 2026-07-23; analysis retained)*
 
 Earlier drafts said "no visible wiring" — **wrong on the rasa side.** Findings from the
-local rasa workspace (`/Users/barnattwu/Rasa`):
+local rasa workspace checkout:
 
 **What integration means for rasa:** MJ becomes the **26th system in rasa's existing
 `integrations-runner` connector fleet** — the exact seat iMIS/Impexium (the other AMSes)
@@ -214,7 +219,7 @@ one connector in their repo away, not a greenfield project.
 
 ---
 
-## 7. The one shared asset the AI products keep pointing at: a prose corpus
+## 7. The one shared asset the AI products keep pointing at: a prose corpus *(DESCOPED — revives only if Betty's ingestion answer is "documents")*
 
 Betty (if document-fed), Knowledge Hub's classify/search/RAG, and eventually Caliber's
 conversations all consume **generated text** — the single asset class MoreCheese doesn't
@@ -228,29 +233,29 @@ ingestion answer (§2) forces it.
 
 ## Summary matrix
 
-| Integration | Data readiness | Proof run executed? | Blocking question |
-|---|---|---|---|
-| Skip | 🟢 purpose-fit | ⬜ | env-of-record; saved queries? |
-| Betty | 🟢 per ruling | ⬜ | what does it ingest? |
-| Predictive Studio | 🟢 purpose-built | ⬜ **highest value** | who defines features + runs it? |
-| KH — dedup/vectors | 🟢 answer sheet ready | ⬜ | — |
-| KH — prose/RAG | 🔴 no corpus | — | Option A/B |
-| Record Processes (graded cleanup) | 🟢 | ⬜ | who authors the process? |
-| rasa.io | 🟡 members yes, engagement stream no | — | deprioritized |
-| Izzy | ❓ | — | deprioritized; undefined |
+| Integration | In scope? | Data readiness | Proof run executed? | Blocking question |
+|---|---|---|---|---|
+| Skip | ✅ | 🟢 purpose-fit | ⬜ | env-of-record; saved queries? |
+| Betty | ✅ | 🟢 per ruling | ⬜ | what does it ingest? |
+| Predictive Studio | ❌ descoped | 🟢 purpose-built | — | — |
+| KH — dedup/vectors | ❌ descoped | 🟢 answer sheet ready | — | — |
+| KH — prose/RAG | ❌ descoped | 🔴 no corpus | — | — |
+| Record Processes (graded cleanup) | ❌ descoped | 🟢 | — | — |
+| rasa.io | ❌ descoped | 🟡 members yes, engagement stream no | — | — |
+| Izzy | ❌ descoped | ❓ | — | — |
 
-**The pattern across the whole table:** data readiness is green almost everywhere —
-by design, since the generator was built around these exact claims. What's uniformly
-missing is **executed proof**. Every green cell is a prediction until someone presses the
-button; each proof is roughly an hour-scale session, not a project.
+Descoped rows lose nothing permanent: the data readiness they'd rely on (trainability
+gates, DataQualityLabel answer sheet, email realism) ships regardless, so any of them can
+be revived later as a config/proof session with zero rework.
 
-## Proposed next step (single highest-leverage move)
+## Remaining work (binary, per the 2026-07-23 ruling)
 
-Run the **L5 proof sessions** against the demo DB, in this order:
-1. **Predictive Studio** training run (the flagship claim),
-2. **Sonar** scoring run (bizapp, but the scoring product story — listed for completeness),
-3. **Skip** Q&A transcript,
-4. **Graded dedup** Record Process vs DataQualityLabel.
-Capture each as a transcript/screenshot/metrics file in `plans/association-db/proofs/`.
-After that, every integration row in this doc flips from "engineered-for" to "witnessed,"
-and the demo script can quote evidence instead of intentions.
+1. **Skip proof run** — a captured transcript against the demo DB meeting §1's evidence
+   standard (right members, right reasons, right aggregates). Optionally author 2–3 saved
+   queries/data contexts for demo smoothness. Pin the env-of-record.
+2. **Betty ingestion question** — one ask to the Betty team: entity data / Betty-side
+   content (→ zero work, close it) or documents (→ decision needed, see §7). Then a
+   captured Betty session as evidence.
+
+That is the entire non-bizapp integration surface. Done = both captures exist in
+`plans/association-db/proofs/`.

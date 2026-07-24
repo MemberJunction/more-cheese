@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { INSTALL_ORDER, PREAMBLE, packSqlLines } from '../engine/seed-mapping.mjs';
+import { INSTALL_ORDER, PREAMBLE, POSTAMBLE, packSqlLines, deliveryOf } from '../engine/seed-mapping.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');                 // datagen/
@@ -53,10 +53,14 @@ const seedTs = (packIndex) => `${ymd}23${40 + packIndex}`;        // packIndex 1
 
 mkdirSync(MIGRATIONS_DIR, { recursive: true });
 const summary = [];
-let packIndex = 0;
 const written = [];
-for (const pack of INSTALL_ORDER) {
-  packIndex++;
+for (let i = 0; i < INSTALL_ORDER.length; i++) {
+  const pack = INSTALL_ORDER[i];
+  if (deliveryOf(pack) !== 'insert') continue; // 'metadata' packs ship via the MetadataSync emitter, not here
+  // Seed number/band comes from the pack's FIXED position in INSTALL_ORDER (not a running
+  // count of emitted packs) — so a pack's migration name is stable regardless of which other
+  // packs are metadata-skipped (e.g. platform stays Seed_11 even when it's the only insert pack).
+  const packIndex = i + 1;
   const header = [
     `-- ================================================================================`,
     `-- GENERATED — do not edit. MoreCheese demo seed DATA migration.`,
@@ -73,7 +77,7 @@ for (const pack of INSTALL_ORDER) {
   const { lines: bodyLines, summary: packSummary } = packSqlLines(pack, load, { transformTable: toPlaceholder });
   for (const s of packSummary) summary.push({ pack, ...s });
   const fname = `V${seedTs(packIndex)}__v${version}_Seed_${String(packIndex).padStart(2, '0')}_${pack}.sql`;
-  writeFileSync(join(MIGRATIONS_DIR, fname), header.concat(bodyLines).join('\n'));
+  writeFileSync(join(MIGRATIONS_DIR, fname), header.concat(bodyLines, POSTAMBLE[pack] ?? []).join('\n'));
   written.push(fname);
 }
 

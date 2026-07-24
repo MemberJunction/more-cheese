@@ -1,0 +1,170 @@
+{
+  "$comment": "PLATFORM MODULE (pack: platform) — MJ CORE usage residue (team requirement 2026-07-23; plan: plans/association-db/MJ-PLATFORM-RESIDUE-PLAN-2026-07-23.md). Seeds __mj APPLICATION data (never entity-definition rows — CodeGen owns those) so the instance looks actively used: 3 staff users, shared saved views (IsShared=1, visible to every viewer), reusable Approved queries (double as Skip entry points), RecordChange audit backfill DERIVED from timelines other packs already generate (issue resolutions, task completions, hero profile/period creation, stale-employer relationship edits — derive, never invent), plus per-staff Skip-style conversations, favorites, lists, notifications (demos log in as a staff persona — team ruling 2026-07-23). All enum values and column shapes verified against a real v5.45 __mj schema incl. CHECK constraints (F9): ConversationDetail.Role is 'User'|'AI', List.RefreshMode 'Sync'|'Additive', Query.Status 'Approved', RecordChange Type/Source/Status value lists. EnvironmentID and SQLDialectID are OMITTED on insert — their column DEFAULTs are the Default environment / T-SQL dialect constants. Conversation texts may embed {N:FACT} / {HERO:memberNumber} tokens — the generator substitutes COMPUTED numbers from the same world, so every claim in a seeded transcript is true for the build.",
+  "platform": {
+    "emailDomain": "morecheesefederation.example",
+    "$emailNote": "staff emails ride the reserved .example TLD like all generated emails — never deliverable by construction",
+    "staff": [
+      { "key": "membership-director", "first": "Priya", "last": "Raghunathan", "title": "Membership Director" },
+      { "key": "events-coordinator", "first": "Marcus", "last": "Oduya", "title": "Events & Programs Coordinator" },
+      { "key": "ops-analyst", "first": "Helena", "last": "Kovacs", "title": "Membership Operations Analyst" }
+    ],
+    "sharedViews": [
+      {
+        "key": "lapsed-2025",
+        "owner": "membership-director",
+        "entityName": "MoreCheese: Membership Periods",
+        "name": "Lapsed 2025 — win-back",
+        "description": "Memberships that lapsed during 2025 — the win-back outreach pool.",
+        "whereClause": "Status='Lapsed' AND EndDate >= '2025-01-01' AND EndDate < '2026-01-01'",
+        "sort": { "field": "EndDate", "dir": "desc" },
+        "columns": [
+          { "name": "Person", "width": 220 },
+          { "name": "MembershipTier", "width": 140 },
+          { "name": "Status", "width": 120 },
+          { "name": "StartDate", "width": 130 },
+          { "name": "EndDate", "width": 130 },
+          { "name": "DuesAmount", "width": 120 }
+        ]
+      },
+      {
+        "key": "open-billing-issues",
+        "owner": "membership-director",
+        "entityName": "MJ_BizApps_Issues: Issues",
+        "name": "Open billing issues",
+        "description": "Billing tickets still open — check before any renewal conversation.",
+        "whereClause": "IssueType='Billing' AND Status NOT IN ('Resolved','Closed')",
+        "sort": { "field": "IssueNumber", "dir": "asc" },
+        "columns": [
+          { "name": "IssueNumber", "width": 140 },
+          { "name": "Title", "width": 320 },
+          { "name": "Severity", "width": 110 },
+          { "name": "Priority", "width": 110 },
+          { "name": "Status", "width": 120 },
+          { "name": "ReporterPerson", "displayName": "Reporter", "width": 200 }
+        ]
+      },
+      {
+        "key": "new-members-ytd",
+        "owner": "ops-analyst",
+        "entityName": "MoreCheese: Member Profiles",
+        "name": "New members — this year",
+        "description": "Profiles created since January 1 — onboarding cohort.",
+        "whereClause": "JoinDate >= '2026-01-01'",
+        "sort": { "field": "JoinDate", "dir": "desc" },
+        "columns": [
+          { "name": "MemberNumber", "width": 140 },
+          { "name": "Person", "width": 220 },
+          { "name": "Segment", "width": 130 },
+          { "name": "Region", "width": 140 },
+          { "name": "City", "width": 140 },
+          { "name": "State", "width": 80 },
+          { "name": "JoinDate", "width": 120 }
+        ]
+      },
+      {
+        "key": "gold-winners-2025",
+        "owner": "events-coordinator",
+        "entityName": "MoreCheese: Competition Entries",
+        "name": "Gold award winners 2025",
+        "description": "Gold results from the 2025 competition — press release shortlist.",
+        "whereClause": "Result='Gold' AND EntryYear=2025",
+        "sort": { "field": "EntryYear", "dir": "desc" },
+        "columns": [
+          { "name": "EntryYear", "width": 100 },
+          { "name": "Category", "width": 170 },
+          { "name": "ProductName", "width": 240 },
+          { "name": "Person", "width": 220 },
+          { "name": "Result", "width": 100 }
+        ]
+      }
+    ],
+    "$viewStateNote": "columns reference REAL generated-view fields (incl. FK display columns like Person/ReporterPerson — verified against the CodeGen migration). GridState/FilterState mirror what Explorer itself writes when a user saves a view; without them a seeded view carries no column layout.",
+    "queries": [
+      {
+        "key": "members-by-segment-region",
+        "name": "Members by segment and region",
+        "userQuestion": "How are our members distributed across segments and regions?",
+        "description": "Member profile counts grouped by segment and region.",
+        "sql": "SELECT Segment, Region, COUNT(*) AS Members FROM [morecheese_members].[vwMemberProfiles] GROUP BY Segment, Region ORDER BY Members DESC"
+      },
+      {
+        "key": "open-issues-by-type-severity",
+        "name": "Open issues by type and severity",
+        "userQuestion": "What support issues are open right now, and how severe are they?",
+        "description": "Open ticket counts by issue type and severity.",
+        "sql": "SELECT IssueType, Severity, COUNT(*) AS OpenIssues FROM [__mj_BizAppsIssues].[vwIssues] WHERE Status NOT IN ('Resolved','Closed') GROUP BY IssueType, Severity ORDER BY OpenIssues DESC"
+      },
+      {
+        "key": "lapsed-by-year",
+        "name": "Lapsed memberships by year",
+        "userQuestion": "How many memberships lapsed each year?",
+        "description": "Lapse counts by the year the membership period ended.",
+        "sql": "SELECT YEAR(EndDate) AS YearEnded, COUNT(*) AS Lapsed FROM [morecheese_members].[vwMembershipPeriods] WHERE Status='Lapsed' GROUP BY YEAR(EndDate) ORDER BY YearEnded"
+      }
+    ],
+    "conversations": [
+      {
+        "key": "at-risk-review",
+        "owner": "membership-director",
+        "name": "At-risk members review",
+        "daysBeforeRelease": 6,
+        "turns": [
+          { "role": "User", "text": "Which members look at risk of not renewing this cycle?" },
+          { "role": "AI", "text": "Looking across renewal status, satisfaction and open support items: {N:PENDING_RENEWALS} memberships are pending renewal right now, and {N:LAPSED_2025} lapsed during 2025. The clearest individual risk signal is {HERO:ICF-000105} — declining survey scores across three conferences, reduced event participation, and an open billing dispute that also has an unanswered secure-message thread. I'd prioritize resolving the billing issue before the renewal conversation." },
+          { "role": "User", "text": "What about billing issues generally — how many are open?" },
+          { "role": "AI", "text": "There are {N:OPEN_BILLING} open billing issues. Members with an unresolved billing dispute at renewal time lapse at a visibly higher rate in this dataset, so the open ones are worth triaging this week." }
+        ]
+      },
+      {
+        "key": "segment-mix",
+        "owner": "ops-analyst",
+        "name": "Segment mix check",
+        "daysBeforeRelease": 13,
+        "turns": [
+          { "role": "User", "text": "Give me a quick read on the membership base composition." },
+          { "role": "AI", "text": "The federation currently has {N:MEMBER_COUNT} member profiles. The largest segment is {N:TOP_SEGMENT} with {N:TOP_SEGMENT_COUNT} members. I saved the full segment-by-region breakdown as the reusable query \"Members by segment and region\" if you want the complete table." }
+        ]
+      },
+      {
+        "key": "conference-recap",
+        "owner": "events-coordinator",
+        "name": "Conference attendance recap",
+        "daysBeforeRelease": 20,
+        "turns": [
+          { "role": "User", "text": "How did attendance look for the most recent annual conference?" },
+          { "role": "AI", "text": "The {N:CONF_YEAR} conference drew {N:CONF_REGS} registrations, of which {N:CONF_ATTENDED} attended — a {N:CONF_ATTEND_PCT}% attendance rate. No-shows are concentrated in first-time registrants, which matches the historical pattern in this dataset." }
+        ]
+      }
+    ],
+    "favorites": {
+      "owner": "membership-director",
+      "memberNumbers": ["ICF-000101", "ICF-000105", "ICF-000108", "ICF-000109"],
+      "$note": "the flagship personas the director keeps one click away"
+    },
+    "lists": [
+      {
+        "key": "renewal-outreach",
+        "owner": "membership-director",
+        "entityName": "MoreCheese: Member Profiles",
+        "name": "Renewal outreach — current cycle",
+        "description": "Members with a pending renewal being worked by the outreach queue.",
+        "source": "renewal-outreach-tasks",
+        "$note": "ListDetail rows = exactly the members the tasks pack's Renewal Outreach tasks target — derived, not invented"
+      }
+    ],
+    "notifications": [
+      { "owner": "membership-director", "title": "Renewal outreach queue updated", "message": "New pending renewals were added to the outreach queue overnight.", "unread": true, "daysBeforeRelease": 1 },
+      { "owner": "membership-director", "title": "Weekly at-risk digest", "message": "Your weekly at-risk member digest is ready.", "unread": false, "daysBeforeRelease": 4 },
+      { "owner": "events-coordinator", "title": "Post-conference survey closing", "message": "The post-conference survey distribution closes at the end of the week.", "unread": true, "daysBeforeRelease": 2 },
+      { "owner": "ops-analyst", "title": "Data quality review scheduled", "message": "Quarterly duplicate/stale-record review is on the calendar for next Monday.", "unread": false, "daysBeforeRelease": 7 }
+    ],
+    "recordChanges": {
+      "issueTransitions": true,
+      "taskCompletions": true,
+      "heroProfileCreates": true,
+      "heroPeriodCreates": true,
+      "staleEmployerRelEdits": true,
+      "$note": "every RecordChange row mirrors a timeline fact another pack already generated — ChangedAt always falls inside the subject record's real date window (gated)"
+    }
+  }
+}

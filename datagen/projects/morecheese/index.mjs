@@ -19,6 +19,8 @@ import { buildIssues } from './issues.mjs';
 import { buildPrograms } from './programs.mjs';
 import { buildDefects } from './defects.mjs';
 import { buildMessaging } from './messaging.mjs';
+import { buildPlatform } from './platform.mjs';
+import { buildSonar } from './sonar.mjs';
 import { applyMotifs } from './motifs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
@@ -63,12 +65,20 @@ export function buildWorld(cfg) {
   // appends duplicate contact records and true-employer relationship edges)
   const defects = buildDefects(cfg, people, orgs, relationships);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, motifs };
+  // platform residue AFTER defects: its RecordChange rows mirror timelines everywhere
+  // above, including the employment edges the defects module just rewrote
+  const platform = buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships });
+
+  // sonar rides the same facts: engagement scores recomputed from the packs above at
+  // quarterly snapshots — the scoring product's residue, honest by construction
+  const sonar = buildSonar(cfg, { people, events, registrations, learning, programs, money, committees, forms });
+
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, platform, sonar } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
     common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
@@ -81,5 +91,7 @@ export function buildPacks(world) {
     tasks: { dependsOn: ['common', 'membership', 'committees'], tables: { task_types: tasks.taskTypes, tasks: tasks.tasks, task_assignments: tasks.taskAssignments, task_links: tasks.taskLinks } },
     issues: { dependsOn: ['common', 'events', 'orders'], tables: { issue_types: issues.issueTypes, issue_statuses: issues.issueStatuses, issues: issues.issues, issue_sequences: issues.issueSequences } },
     messaging: { dependsOn: ['common', 'issues'], tables: { portal_sessions: messaging.sessions, secure_threads: messaging.threads, secure_messages: messaging.messages } },
+    platform: { dependsOn: ['common', 'membership', 'events', 'tasks', 'issues'], tables: { mj_users: platform.users, mj_user_roles: platform.userRoles, user_views: platform.views, queries: platform.queries, conversations: platform.conversations, conversation_details: platform.conversationDetails, user_favorites: platform.favorites, lists: platform.lists, list_details: platform.listDetails, user_notifications: platform.notifications, record_changes: platform.recordChanges } },
+    sonar: { dependsOn: ['common', 'events', 'learning', 'orders', 'committees', 'forms', 'platform'], tables: { score_band_sets: [sonar.bandSet], score_bands: sonar.bands, time_windows: sonar.timeWindows, score_models: [sonar.model], score_model_versions: [sonar.version], model_related_entities: sonar.relatedEntities, factors: sonar.factors, model_factors: sonar.modelFactors, recompute_runs: sonar.runs, scores: sonar.scores, score_contributions: sonar.contributions, score_history: sonar.history, band_transitions: sonar.transitions, audit_events: sonar.auditEvents } },
   };
 }

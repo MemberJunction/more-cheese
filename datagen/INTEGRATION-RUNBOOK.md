@@ -104,3 +104,16 @@ Two findings:
   validation gate asserting distribution Status/ChannelType against their CHECK lists
   (gate #107). Pattern: when generating into a dependency's table, mirror its CHECK value
   lists in a gate.
+- **F10 — F9 generalized into an automatic contract (2026-07-24).** Hand-mirroring CHECK
+  lists per F9 doesn't scale and can't catch moved/renamed/new-required columns. The
+  **schema contract** (`datagen/SCHEMA-CONTRACT.md`) extracts our assumptions from
+  `seed-mapping.mjs` automatically and diffs them against a captured snapshot of the real
+  schema (`contract/schema-contract.json`, refreshed via `cli/capture-contract.mjs` on a
+  dependency bump). Suite gate 6d fails in ms on: a dropped column, a new NOT-NULL/no-default
+  column, a value outside a CHECK, or a renamed lookup — the drift classes that previously
+  only surfaced at install. It's the fast first line; the full install stays the backstop.
+  Capture gotchas learned building it: `sqlcmd -y 0` (needed so long CHECK definitions
+  aren't truncated at 256 chars) is incompatible with BOTH `-W` and `-h -1` → use a
+  `'ROW'+CHAR(1)` row sentinel and filter in JS; introspect columns via `sys.columns` not
+  `INFORMATION_SCHEMA` so computed columns (e.g. `Person.DisplayName`, NOT NULL + no default
+  but uninsertable) can be flagged `is_computed` and excluded from the required-column check.

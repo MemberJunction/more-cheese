@@ -9,6 +9,8 @@ import { execFileSync } from 'node:child_process';
 import { rmSync, readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { extractClaims, checkClaims } from './engine/contract.mjs';
+import { MAPPING, PREAMBLE } from './engine/seed-mapping.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const QUICK = process.argv.includes('--quick');
@@ -70,7 +72,11 @@ step('emitters: sql + schema + mjsync + explain', () => {
 });
 
 // 6b. schema/insert drift guard: every column an INSERT writes must exist in the CREATE TABLE
-// (the provisional DDL and the seed INSERTs share assumed shapes — they must never disagree)
+// (the provisional DDL and the seed INSERTs share assumed shapes — they must never disagree).
+// SCOPE: only the playground packs (01–10) have stand-in DDL in emit-schema's shim. The
+// platform (11) + sonar (12) packs write to real __mj core / __mj_BizAppsSonar tables the
+// shim deliberately does NOT stand in (integration-grade, real-install only) — those are
+// covered by the schema-contract gate (6d), which checks the REAL captured schema.
 step('schema DDL covers every INSERT column', () => {
   const sqlDir = join(HERE, 'out', 'sql');
   const ddl = readFileSync(join(sqlDir, '00_schema.sql'), 'utf8');
@@ -121,6 +127,20 @@ step('frozen migration matches generator shapes (morecheese tables)', () => {
     if (!migT[t]) problems.push(`generator table ${t} has no frozen migration (write a V* file!)`);
   }
   if (problems.length) throw new Error('❌ migration/shim drift:\n' + problems.map((x) => '  ' + x).join('\n'));
+});
+
+// 6d. schema-contract gate: our assumptions about tables we DON'T own (__mj core,
+// __mj_BizApps*) checked against a captured snapshot of the real schema. Catches a moved
+// column, a new required column, a tightened CHECK, or a renamed lookup — in milliseconds,
+// instead of at a 13-minute install. Refresh the snapshot on a dependency bump:
+//   MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <reference-install>
+// See datagen/SCHEMA-CONTRACT.md.
+step('seed assumptions match the dependency-schema contract', () => {
+  const contract = JSON.parse(readFileSync(join(HERE, 'contract', 'schema-contract.json'), 'utf8'));
+  const load = (pack, table) => JSON.parse(readFileSync(join(HERE, 'out', 'packs', pack, `${table}.json`), 'utf8'));
+  const claims = extractClaims({ MAPPING, PREAMBLE, load });
+  const problems = checkClaims(claims, contract);
+  if (problems.length) throw new Error(`❌ schema-contract drift (snapshot captured ${contract.capturedAt} from ${contract.database}):\n` + problems.map((x) => '  ' + x).join('\n') + '\n  → if a dependency was bumped, re-capture: MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <install>');
 });
 
 for (const d of ['out-test', 'out-test2']) rmSync(join(HERE, d), { recursive: true, force: true });
