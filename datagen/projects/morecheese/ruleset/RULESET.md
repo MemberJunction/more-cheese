@@ -46,6 +46,28 @@ Every billable fact becomes an **order** (one renewal order per membership cycle
 - Business tiers pay on **net-30 terms**: ~45% pay late (median ~12 days — the sourced Atradius/CRF curve, thin tail).
 - A payment dated after release day *hasn't happened yet* — those orders sit Unpaid or Overdue (real A/R aging), and every pending-renewal member carries an **open renewal order** (the outreach queue).
 
+## The platform-residue rules (pack: platform)
+
+The `__mj` core gets **usage residue** so the instance reads as lived-in — application data only, never entity definitions (CodeGen owns those). Two laws govern the pack:
+
+1. **Derive, never invent** — every `RecordChange` audit row mirrors a timeline fact another pack generated (issue resolutions at their exact `ResolvedAt`, task completions, hero profile/period creation, the stale-employer relationship edits). A gate re-derives every timestamp and count.
+2. **True transcripts** — seeded Skip conversations carry `{N:FACT}` tokens the generator replaces with numbers **computed from the same build**, so every claim is true for the seed that shipped it (gated: no unresolved tokens).
+
+- 3 staff personas own everything (`@morecheesefederation.example` — reserved .example TLD, never deliverable). Demos log in AS a staff persona (team ruling 2026-07-23).
+- 4 shared saved views (`IsShared=1`, visible to every viewer) with real column layouts (GridState mirrors what Explorer writes; gate requires ≥3 visible columns); 3 Approved+Reusable queries — these double as Skip's entry points.
+- Per-persona residue: 3 conversations, favorites on the flagship personas, a renewal-outreach list that equals the pending-renewal member set EXACTLY (gated), 4 notifications.
+
+## The engagement-score rules (pack: sonar)
+
+One Sonar model — **Member Engagement Score** (`morecheese-engagement`, Active) — scores every member on the MJ_BizApps_Common: People spine. Constraints are concise and gated:
+
+- **Weights sum to exactly 100**: event attendance 25 · committee service 15 · learning activity 15 · payment health 15 · survey sentiment 15 · advocacy participation 15.
+- **Bands tile 0..100 with no gaps**: At Risk 0–35 · Watch 35–55 · Stable 55–75 · Engaged 75–100.
+- **Factors derive from generated facts** in windows relative to each snapshot date — nothing is invented: Event Attendance (cap 3, 12m window); Committee Service (cap 1, as-of); Learning Activity (cap 2, 12m window); Payment Health (cap 2, inverted, 12m window); Survey Sentiment (0–10 ×10, 24m window); Advocacy Participation (cap 2, 24m window). Missing data → neutral midpoint 50 (flagged, never silent).
+- **Quarterly recompute history**: snapshots at 270/180/90/0 days before release; the previous snapshot feeds Delta/Trend (|Δ| < 2 reads Flat); band crossings become first-class ScoreBandTransition rows tied to their recompute run.
+- **Internal consistency is gated per score**: factor contributions sum to the score, delta/trend/band agree, history = members × snapshots, transitions = history band changes, run totals reconcile.
+- **The signal is honest**: scores ride the same hidden engagement dial as everything else — active members outscore lapsed ones (gated ≥3pt gap) and the flagship contrast holds at every seed (Elena ≥ Bob + 10, Bob never Engaged). Because the score is derived, Sonar's live recompute over this data should land in the same neighborhood — the engineered proof for the scoring story.
+
 ## Scenarios
 
 A scenario is a **parameter overlay on the same causal model** (`ruleset/scenarios/`): `--scenario decliningOrg` rebuilds the whole world at ~78% renewal with hobbyists bleeding hardest — calibrated to real craft-food decline curves. The compiler re-solves every human-authored effect against the scenario's targets; the validator judges against them too. Same machinery, different universe, deterministic.

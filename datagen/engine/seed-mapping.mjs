@@ -15,6 +15,26 @@ export const sqlDate = (v) => v == null ? 'NULL' : `'${v}'`;
 export const sqlId = (v) => v == null ? 'NULL' : `'${v}'`;
 export const sqlVar = (v) => v; // raw expression (e.g. a DECLAREd @Entity variable) — polymorphic refs resolve by NAME at load time
 
+// platform pack: entity name → the preamble DECLARE that resolves it, and RefKind → the
+// uuidFor prefix that reconstructs the referenced record's deterministic PK
+export const MJ_ENTITY_VAR = {
+  'MJ_BizApps_Common: People': '@E_People',
+  'MJ_BizApps_Common: Relationships': '@E_Relationships',
+  'MJ_BizApps_Issues: Issues': '@E_Issues',
+  'MJ_BizApps_Tasks: Tasks': '@E_Tasks',
+  'MoreCheese: Member Profiles': '@E_MemberProfiles',
+  'MoreCheese: Membership Periods': '@E_Periods',
+  'MoreCheese: Competition Entries': '@E_CompEntries',
+  // sonar factor sources
+  'MoreCheese: Event Registrations': '@E_Regs',
+  'Committees: Memberships': '@E_CommMemberships',
+  'MoreCheese: Course Enrollments': '@E_Enrollments',
+  'MoreCheese: Payments': '@E_Payments',
+  'MJ_BizApps_Forms: Form Response Answers': '@E_FormAnswers',
+  'MoreCheese: Advocacy Actions': '@E_Advocacy',
+};
+export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person' };
+
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
 // THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
 // to bizapps-common's tables (their REAL columns, from bizapps-common
@@ -399,6 +419,252 @@ export const MAPPING = {
       }),
     },
   ],
+  platform: [
+    // __mj CORE application data — usage residue (plan: MJ-PLATFORM-RESIDUE-PLAN-2026-07-23).
+    // Shapes + CHECK value lists verified against a real v5.45 __mj schema (F9 discipline).
+    // EnvironmentID / SQLDialectID are omitted on purpose: their column DEFAULTs are the
+    // Default environment and the T-SQL dialect. Never __mj entity-DEFINITION rows here.
+    {
+      json: 'mj_users', table: '[__mj].[User]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('mjuser', r.UserKey)), Name: sqlStr(r.Name),
+        FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), Title: sqlStr(r.Title),
+        Email: sqlStr(r.Email), Type: sqlStr('User'), IsActive: sqlBit(true), LinkedRecordType: sqlStr('None'),
+      }),
+    },
+    {
+      json: 'mj_user_roles', table: '[__mj].[UserRole]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('mjuserrole', r.RoleKey)), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        RoleID: sqlVar('@MJRole_UI'),
+      }),
+    },
+    {
+      json: 'user_views', table: '[__mj].[UserView]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('uview', r.ViewKey)), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        EntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), Name: sqlStr(r.Name), Description: sqlStr(r.Description),
+        IsShared: sqlBit(true), IsDefault: sqlBit(false),
+        WhereClause: sqlStr(r.WhereClause), CustomWhereClause: sqlBit(true),
+        GridState: sqlStr(r.GridState), FilterState: sqlStr(r.FilterState),
+        CustomFilterState: sqlBit(false), SmartFilterEnabled: sqlBit(false),
+      }),
+    },
+    {
+      json: 'queries', table: '[__mj].[Query]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('query', r.QueryKey)), Name: sqlStr(r.Name),
+        UserQuestion: sqlStr(r.UserQuestion), Description: sqlStr(r.Description), SQL: sqlStr(r.SQL),
+        Status: sqlStr('Approved'), Reusable: sqlBit(true),
+        CacheEnabled: sqlBit(false), AuditQueryRuns: sqlBit(false), UsesTemplate: sqlBit(false),
+      }),
+    },
+    {
+      json: 'conversations', table: '[__mj].[Conversation]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('conv', r.ConvKey)), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        Name: sqlStr(r.Name), Type: sqlStr('Skip'), Status: sqlStr('Available'),
+        IsArchived: sqlBit(false), IsPinned: sqlBit(false), ApplicationScope: sqlStr('Global'),
+        // authored timeline: __mj timestamps set explicitly so the thread predates the install
+        ['__mj_CreatedAt']: sqlDate(r.CreatedAtTs), ['__mj_UpdatedAt']: sqlDate(r.CreatedAtTs),
+      }),
+    },
+    {
+      json: 'conversation_details', table: '[__mj].[ConversationDetail]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('convmsg', r.MsgKey)), ConversationID: sqlId(uuidFor('conv', r.ConvKey)),
+        Role: sqlStr(r.Role), Message: sqlStr(r.Message), Status: sqlStr('Complete'),
+        HiddenToUser: sqlBit(false), IsPinned: sqlBit(false), OriginalMessageChanged: sqlBit(false),
+        UserID: sqlId(r.UserKey ? uuidFor('mjuser', r.UserKey) : null),
+        ['__mj_CreatedAt']: sqlDate(r.CreatedAtTs), ['__mj_UpdatedAt']: sqlDate(r.CreatedAtTs),
+      }),
+    },
+    {
+      json: 'user_favorites', table: '[__mj].[UserFavorite]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('fav', r.FavKey)), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        EntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), RecordID: sqlId(uuidFor(RECORD_PREFIX[r.RefKind], r.RefKey)),
+      }),
+    },
+    {
+      json: 'lists', table: '[__mj].[List]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('list', r.ListKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description),
+        EntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        RefreshMode: sqlStr('Additive'), UseSnapshot: sqlBit(false),
+      }),
+    },
+    {
+      json: 'list_details', table: '[__mj].[ListDetail]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('listitem', r.ItemKey)), ListID: sqlId(uuidFor('list', r.ListKey)),
+        RecordID: sqlId(uuidFor(RECORD_PREFIX[r.RefKind], r.RefKey)), Sequence: sqlNum(r.Sequence), Status: sqlStr('Active'),
+      }),
+    },
+    {
+      json: 'user_notifications', table: '[__mj].[UserNotification]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('notif', r.NotifKey)), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        Title: sqlStr(r.Title), Message: sqlStr(r.Message), Unread: sqlBit(r.Unread), ReadAt: sqlDate(r.ReadAt),
+      }),
+    },
+    {
+      json: 'record_changes', table: '[__mj].[RecordChange]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('recchg', r.ChangeKey)), EntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]),
+        RecordID: sqlId(uuidFor(RECORD_PREFIX[r.RefKind], r.RefKey)), UserID: sqlId(uuidFor('mjuser', r.UserKey)),
+        Type: sqlStr(r.Type), Source: sqlStr('Internal'), ChangedAt: sqlDate(r.ChangedAt),
+        ChangesJSON: sqlStr(r.ChangesJSON), ChangesDescription: sqlStr(r.ChangesDescription),
+        FullRecordJSON: sqlStr(r.FullRecordJSON), Status: sqlStr('Complete'),
+        CreatedAt: sqlDate(r.ChangedAt), UpdatedAt: sqlDate(r.ChangedAt),
+      }),
+    },
+  ],
+  sonar: [
+    // bizapps-sonar's REAL shapes (V202606121005 Initial_Schema) — engagement scoring
+    // residue. CHECK value lists read from the migration itself (F9). Like platform,
+    // integration-grade: the preamble resolves __mj.Entity IDs, so real installs only.
+    {
+      json: 'score_band_sets', table: '[__mj_BizAppsSonar].[ScoreBandSet]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarbandset', r.BandSetKey)), Name: sqlStr(r.Name),
+        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), Description: sqlStr(r.Description),
+      }),
+    },
+    {
+      json: 'score_bands', table: '[__mj_BizAppsSonar].[ScoreBand]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarband', r.BandKey)), BandSetID: sqlId(uuidFor('sonarbandset', r.BandSetKey)),
+        Label: sqlStr(r.Label), MinScore: sqlNum(r.MinScore), MaxScore: sqlNum(r.MaxScore),
+        Severity: sqlNum(r.Severity), ColorHex: sqlStr(r.ColorHex), IsTerminal: sqlBit(r.IsTerminal), Description: sqlStr(r.Description),
+      }),
+    },
+    {
+      json: 'time_windows', table: '[__mj_BizAppsSonar].[TimeWindow]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarwindow', r.WindowKey)), Name: sqlStr(r.Name),
+        WindowType: sqlStr(r.WindowType), LengthMonths: sqlNum(r.LengthMonths),
+      }),
+    },
+    {
+      json: 'score_models', table: '[__mj_BizAppsSonar].[ScoreModel]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarmodel', r.ModelKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
+        Description: sqlStr(r.Description), AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]),
+        Status: sqlStr(r.Status), ScoreScaleMin: sqlNum(0), ScoreScaleMax: sqlNum(100),
+        CombineStrategy: sqlStr(r.CombineStrategy), BandSetID: sqlId(uuidFor('sonarbandset', 'engagement-bands')),
+        RecomputeMode: sqlStr(r.RecomputeMode), RecomputeCron: sqlStr(r.RecomputeCron),
+        TrendWindowDays: sqlNum(r.TrendWindowDays), OwnerUserID: sqlId(uuidFor('mjuser', r.OwnerStaffKey)),
+        EffectiveFrom: sqlDate(r.EffectiveFrom),
+        // CurrentVersionID is set by the pack POSTAMBLE (circular FK with ScoreModelVersion)
+      }),
+    },
+    {
+      json: 'score_model_versions', table: '[__mj_BizAppsSonar].[ScoreModelVersion]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarver', r.VersionKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        VersionNumber: sqlNum(r.VersionNumber), VersionLabel: sqlStr(r.VersionLabel),
+        ConfigSnapshotJSON: sqlStr(r.ConfigSnapshotJSON), ChangeSummary: sqlStr(r.ChangeSummary),
+        PublishedByUserID: sqlId(uuidFor('mjuser', r.PublishedByStaffKey)), PublishedAt: sqlDate(r.PublishedAt),
+        IsCurrent: sqlBit(r.IsCurrent),
+      }),
+    },
+    {
+      json: 'model_related_entities', table: '[__mj_BizAppsSonar].[ModelRelatedEntity]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarmre', r.RelatedKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        RelatedEntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), Alias: sqlStr(r.Alias),
+        RelationshipPath: sqlStr(r.RelationshipPath), JoinType: sqlStr(r.JoinType),
+      }),
+    },
+    {
+      json: 'factors', table: '[__mj_BizAppsSonar].[Factor]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
+        Description: sqlStr(r.Description), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), FactorType: sqlStr(r.FactorType),
+        SourceEntityID: sqlVar(MJ_ENTITY_VAR[r.SourceEntityName]), Aggregation: sqlStr(r.Aggregation),
+        TimeWindowID: sqlId(r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null),
+        RawDataType: sqlStr(r.RawDataType), NormalizationMethod: sqlStr(r.NormalizationMethod),
+        NormalizationParamsJSON: sqlStr(r.NormalizationParamsJSON),
+        OutputMin: sqlNum(r.OutputMin), OutputMax: sqlNum(r.OutputMax),
+        HigherIsBetter: sqlBit(r.HigherIsBetter), PromotionState: sqlStr(r.PromotionState),
+      }),
+    },
+    {
+      json: 'model_factors', table: '[__mj_BizAppsSonar].[ModelFactor]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarmf', r.ModelFactorKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Weight: sqlNum(r.Weight),
+        WeightMode: sqlStr(r.WeightMode), MissingDataPolicy: sqlStr(r.MissingDataPolicy),
+        IsRequired: sqlBit(r.IsRequired), DisplayLabel: sqlStr(r.DisplayLabel), DisplayOrder: sqlNum(r.DisplayOrder),
+      }),
+    },
+    {
+      json: 'recompute_runs', table: '[__mj_BizAppsSonar].[ScoreRecomputeRun]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarrun', r.RunKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)), TriggerType: sqlStr(r.TriggerType),
+        Scope: sqlStr(r.Scope), StartedAt: sqlDate(r.StartedAt), CompletedAt: sqlDate(r.CompletedAt),
+        Status: sqlStr(r.Status), RecordsScored: sqlNum(r.RecordsScored), RecordsChanged: sqlNum(r.RecordsChanged),
+        BandTransitions: sqlNum(r.BandTransitions), DurationMs: sqlNum(r.DurationMs), CostUnitsConsumed: sqlNum(r.CostUnitsConsumed),
+      }),
+    },
+    {
+      json: 'scores', table: '[__mj_BizAppsSonar].[Score]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarscore', r.ScoreKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)),
+        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
+        RawScore: sqlNum(r.RawScore), NormalizedScore: sqlNum(r.NormalizedScore),
+        BandID: sqlId(uuidFor('sonarband', r.BandKey)),
+        PreviousNormalizedScore: sqlNum(r.PreviousNormalizedScore), PreviousBandID: sqlId(uuidFor('sonarband', r.PreviousBandKey)),
+        Delta: sqlNum(r.Delta), TrendDirection: sqlStr(r.TrendDirection), TrendSlope: sqlNum(r.TrendSlope),
+        Confidence: sqlNum(r.Confidence), DataCompleteness: sqlNum(r.DataCompleteness),
+        ComputedAt: sqlDate(r.ComputedAt), AsOfDate: sqlDate(r.AsOfDate), IsStale: sqlBit(r.IsStale),
+        NextRecomputeAt: sqlDate(r.NextRecomputeAt), ExplanationSummary: sqlStr(r.ExplanationSummary),
+      }),
+    },
+    {
+      json: 'score_contributions', table: '[__mj_BizAppsSonar].[ScoreFactorContribution]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarcontrib', r.ContribKey)), ScoreID: sqlId(uuidFor('sonarscore', r.ScoreKey)),
+        ModelFactorID: sqlId(uuidFor('sonarmf', r.ModelFactorKey)), FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)),
+        RawValue: sqlNum(r.RawValue), NormalizedValue: sqlNum(r.NormalizedValue),
+        WeightedContribution: sqlNum(r.WeightedContribution), PercentOfTotal: sqlNum(r.PercentOfTotal),
+        ContributionDelta: sqlNum(r.ContributionDelta), HadData: sqlBit(r.HadData), MissingDataApplied: sqlBit(r.MissingDataApplied),
+      }),
+    },
+    {
+      json: 'score_history', table: '[__mj_BizAppsSonar].[ScoreHistory]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarhist', r.HistKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)),
+        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
+        NormalizedScore: sqlNum(r.NormalizedScore), BandID: sqlId(uuidFor('sonarband', r.BandKey)),
+        AsOfDate: sqlDate(r.AsOfDate), ComputedAt: sqlDate(r.ComputedAt),
+        DataCompleteness: sqlNum(r.DataCompleteness), Confidence: sqlNum(r.Confidence),
+      }),
+    },
+    {
+      json: 'band_transitions', table: '[__mj_BizAppsSonar].[ScoreBandTransition]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonartrans', r.TransKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
+        FromBandID: sqlId(uuidFor('sonarband', r.FromBandKey)), ToBandID: sqlId(uuidFor('sonarband', r.ToBandKey)),
+        Direction: sqlStr(r.Direction), OccurredAt: sqlDate(r.OccurredAt),
+        RecomputeRunID: sqlId(uuidFor('sonarrun', r.RunKey)), Handled: sqlBit(r.Handled),
+      }),
+    },
+    {
+      json: 'audit_events', table: '[__mj_BizAppsSonar].[ScoreModelAuditEvent]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonaraudit', r.AuditKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
+        EntityChanged: sqlStr(r.EntityChanged), ChangeType: sqlStr(r.ChangeType),
+        ChangedByUserID: sqlId(uuidFor('mjuser', r.StaffKey)), ChangedAt: sqlDate(r.ChangedAt),
+      }),
+    },
+  ],
   events: [
     {
       json: 'events', table: '[morecheese_events].[Event]',
@@ -431,7 +697,22 @@ export const MAPPING = {
 
 // ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
 export const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
-export const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues', 'messaging']; // the pack pyramid
+export const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues', 'messaging', 'platform', 'sonar']; // the pack pyramid; platform after everything it audits, sonar last (its model owner is a platform staff user)
+
+// DELIVERY MECHANISM per pack (hybrid ruling, 2026-07-24). Two ways demo data can ship:
+//   'insert'   — Skyway INSERT data migrations (emit-data-migration.mjs → Seed_NN_*.sql)
+//   'metadata' — MJ MetadataSync push through the entity SPs (emit-mjsync.mjs tree, applied
+//                as MetadataSync migrations — the approach in PR #3)
+// DEFAULT is 'metadata' on this (metadata-era) branch: all domain + sonar data ships through
+// the entity SPs via emit-mjsync.mjs → MetadataSync migrations (PR #3's approach). The INSERT
+// path (emit-data-migration.mjs) is now the EXCEPTION, used only by 'platform'.
+// 'platform' is PINNED to 'insert' FOREVER: it forges state the entity layer refuses to forge —
+// direct __mj.RecordChange audit rows and back-dated Conversation __mj_CreatedAt timestamps —
+// which a push through the SPs would reject or re-stamp "now", destroying the "someone has used
+// this instance" effect that is the pack's whole purpose. emit-data-migration.mjs emits only
+// 'insert' packs (→ Seed_NN); everything else is the metadata emitter's job.
+export const DELIVERY = { platform: 'insert' };
+export const deliveryOf = (pack) => DELIVERY[pack] ?? 'metadata';
 // polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
 export const PREAMBLE = {
   committees: [
@@ -444,6 +725,27 @@ export const PREAMBLE = {
     "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
     "DECLARE @E_Meetings UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'Committees: Meetings');",
   ],
+  platform: [
+    "-- MJ core lookups resolve BY NAME (F6). EnvironmentID/SQLDialectID ride column DEFAULTs.",
+    "DECLARE @MJRole_UI UNIQUEIDENTIFIER = (SELECT ID FROM [__mj].[Role] WHERE Name = N'UI');",
+    "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
+    "DECLARE @E_Relationships UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Relationships');",
+    "DECLARE @E_Issues UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Issues: Issues');",
+    "DECLARE @E_Tasks UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Tasks: Tasks');",
+    "DECLARE @E_MemberProfiles UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Member Profiles');",
+    "DECLARE @E_Periods UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Membership Periods');",
+    "DECLARE @E_CompEntries UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Competition Entries');",
+  ],
+  sonar: [
+    "-- MJ entity lookups resolve BY NAME (F6)",
+    "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
+    "DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');",
+    "DECLARE @E_CommMemberships UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'Committees: Memberships');",
+    "DECLARE @E_Enrollments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Course Enrollments');",
+    "DECLARE @E_Payments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Payments');",
+    "DECLARE @E_FormAnswers UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Response Answers');",
+    "DECLARE @E_Advocacy UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Advocacy Actions');",
+  ],
   issues: [
     "-- app-seeded lookups resolve BY NAME (F6)",
     "DECLARE @IS_New UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsIssues].[IssueStatus] WHERE Name = N'New');",
@@ -454,6 +756,15 @@ export const PREAMBLE = {
     "DECLARE @E_Orders UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Orders');",
     "DECLARE @E_Orgs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Organizations');",
     "DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');",
+  ],
+};
+
+// POSTAMBLE: statements appended AFTER a pack's INSERTs — for circular FKs that can't be
+// satisfied in insert order. UUIDs here are uuidv5 constants (stable forever by design).
+export const POSTAMBLE = {
+  sonar: [
+    "-- circular FK (ScoreModel ⇄ ScoreModelVersion): point the model at v1 now both exist",
+    `UPDATE [__mj_BizAppsSonar].[ScoreModel] SET CurrentVersionID = '${uuidFor('sonarver', 'morecheese-engagement:1')}' WHERE ID = '${uuidFor('sonarmodel', 'morecheese-engagement')}';`,
   ],
 };
 
