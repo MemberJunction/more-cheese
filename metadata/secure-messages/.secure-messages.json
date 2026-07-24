@@ -1,0 +1,5427 @@
+[
+  {
+    "primaryKey": {
+      "ID": "358AF5C6-A195-5336-9E8F-EA42FFEB5B11"
+    },
+    "fields": {
+      "PortalSessionID": "2CA5DDA3-CD59-5732-AF76-4D866DF52B59",
+      "ThreadID": "2A0A843E-11AD-5E9C-8C55-F5503B732B2A",
+      "PersonID": "D424AF0B-F9C3-5245-BD00-E80B882D7876",
+      "Direction": "Inbound",
+      "Sender": "Grace Ellison",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Fernholt Cheese & Provisions",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2015-10-12T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.799Z",
+      "checksum": "e4f7fd57e8d4d03b5f1fde98085024f9e417162a18abb765f2d07d578f09697e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26FF0EAE-FB64-5134-AD27-8132AB629978"
+    },
+    "fields": {
+      "PortalSessionID": "2CA5DDA3-CD59-5732-AF76-4D866DF52B59",
+      "ThreadID": "2A0A843E-11AD-5E9C-8C55-F5503B732B2A",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Grace Ellison",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-10-14T17:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.813Z",
+      "checksum": "793d0c73b77897ec97712b9b403f17ca52dadfc255c482a814f5f2be1d40ea98"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CA2B272F-ACAF-5E51-A7FF-C55C91D6CF9A"
+    },
+    "fields": {
+      "PortalSessionID": "2CA5DDA3-CD59-5732-AF76-4D866DF52B59",
+      "ThreadID": "2A0A843E-11AD-5E9C-8C55-F5503B732B2A",
+      "PersonID": "D424AF0B-F9C3-5245-BD00-E80B882D7876",
+      "Direction": "Inbound",
+      "Sender": "Grace Ellison",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2015-10-17T16:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.827Z",
+      "checksum": "9e50158476a294478c71e51fdd6c2c17fc19504a9a1b03ca6424f94ce8ccd6c8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "801A97FF-B1B9-543E-AC5F-57522BB00BB0"
+    },
+    "fields": {
+      "PortalSessionID": "2CA5DDA3-CD59-5732-AF76-4D866DF52B59",
+      "ThreadID": "2A0A843E-11AD-5E9C-8C55-F5503B732B2A",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Grace Ellison",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-10-19T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.840Z",
+      "checksum": "59280ed9170976aec4d7aae2be35f6b0dfc1a23df2f997a19282d78d3db0027d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F439B72F-524B-59E5-8E17-DD21F453E798"
+    },
+    "fields": {
+      "PortalSessionID": "2CA5DDA3-CD59-5732-AF76-4D866DF52B59",
+      "ThreadID": "2A0A843E-11AD-5E9C-8C55-F5503B732B2A",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Grace Ellison",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-10-19T21:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.854Z",
+      "checksum": "d116ceeaf9fa9da164f00257e6b9aab7a3cab626785fde7921523131a16a4137"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5889205C-CDAA-56CA-A643-7E6268268355"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": "6B0CED66-CFE3-59A6-8DE8-B88501BBCBEF",
+      "Direction": "Inbound",
+      "Sender": "Mary Hollis",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Quillbrook Fine Cheese",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2015-10-23T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.868Z",
+      "checksum": "5f798ed27e3ac800518a46121a64b1aab7c2cd4384186a61ed797808765c0c12"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "871F42DF-B264-5771-996F-AF6A206AB435"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Mary Hollis",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-10-26T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.883Z",
+      "checksum": "f6db28ccd751b08269defd26ad0b263defa5964d72634b8a4f20468bb033e894"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "78895E13-F400-5CDB-8CAC-394D5D0427E8"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": "6B0CED66-CFE3-59A6-8DE8-B88501BBCBEF",
+      "Direction": "Inbound",
+      "Sender": "Mary Hollis",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2015-10-29T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.897Z",
+      "checksum": "53d15f364cdcd206bda4a6ee53c331631eb41ace811fe9be89cfa72f191ab6c0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7C1E44F-9941-5A51-A1EE-532781AC3E9F"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Mary Hollis",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-10-30T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.910Z",
+      "checksum": "23402afe47f00c2e413880c8d7e8f8840d8ebec968523034391c67ff63cd36ab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "981BD948-3EA2-5FC7-AF4F-AF1DEF539425"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": "6B0CED66-CFE3-59A6-8DE8-B88501BBCBEF",
+      "Direction": "Inbound",
+      "Sender": "Mary Hollis",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2015-11-01T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.921Z",
+      "checksum": "4be4ff0586925bb9aee7961d3e0bb3be84652cbea1286b80870a298fad1bcc47"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C3793249-5F29-5900-85D4-7718AFAD30BF"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Mary Hollis",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-11-03T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.954Z",
+      "checksum": "d5dff253b655b43dd986b28651e95bbc7ca0e3bbc85d1145dcb5b1b928ae1777"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "046222E8-5394-5F64-B07C-F321C50858FF"
+    },
+    "fields": {
+      "PortalSessionID": "28398088-C846-5418-B219-63B41705BEF9",
+      "ThreadID": "372CB7BC-FE17-5DEA-873C-862625AB8DA4",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Mary Hollis",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2015-11-06T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.968Z",
+      "checksum": "6a911274bfddc5bfda50be86bf6bbfa4fd2bf5f090bb04916bce78bb529b6796"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A2021998-B727-5E16-90B9-2405DA8EB3B4"
+    },
+    "fields": {
+      "PortalSessionID": "0C368DC9-B187-5B14-BBCB-DA9FEDB1D3A8",
+      "ThreadID": "DEA6BC33-8CD6-5AE7-A153-7FF6D3B5D2B6",
+      "PersonID": "D84D2FF9-9939-5E89-B8C7-AC63EC4567A7",
+      "Direction": "Inbound",
+      "Sender": "Brian Bramley",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Pinebarrow Dairy",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2016-12-14T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.981Z",
+      "checksum": "b23a6a582a17bac1a24fa3acbe2fe4c484a078a5107cb98a37d4820fac785555"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "475E5814-707A-5C12-A7A9-ADD5345ADF56"
+    },
+    "fields": {
+      "PortalSessionID": "0C368DC9-B187-5B14-BBCB-DA9FEDB1D3A8",
+      "ThreadID": "DEA6BC33-8CD6-5AE7-A153-7FF6D3B5D2B6",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Brian Bramley",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2016-12-16T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:08.994Z",
+      "checksum": "c4612b2bebf48d3eaa929709b16eed8911fe01c2da9ae335fa463d6ee8298801"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BFE428B3-1945-5C74-9013-FA9BE48BE1A4"
+    },
+    "fields": {
+      "PortalSessionID": "0C368DC9-B187-5B14-BBCB-DA9FEDB1D3A8",
+      "ThreadID": "DEA6BC33-8CD6-5AE7-A153-7FF6D3B5D2B6",
+      "PersonID": "D84D2FF9-9939-5E89-B8C7-AC63EC4567A7",
+      "Direction": "Inbound",
+      "Sender": "Brian Bramley",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2016-12-16T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.006Z",
+      "checksum": "ea87404bd02a8a601f0a51c1926a05eef48facfac3bf4a2eaa05b94d60f84b12"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F83356C-AEA4-5CAD-B5C8-8E33756E0A61"
+    },
+    "fields": {
+      "PortalSessionID": "0C368DC9-B187-5B14-BBCB-DA9FEDB1D3A8",
+      "ThreadID": "DEA6BC33-8CD6-5AE7-A153-7FF6D3B5D2B6",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Brian Bramley",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2016-12-18T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.018Z",
+      "checksum": "9371957a52a8475158af5072d3af54f96c664a2440f102b423e745c1c0f38323"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08350CF0-CBDE-56CA-9DAD-38588B799ADE"
+    },
+    "fields": {
+      "PortalSessionID": "0C368DC9-B187-5B14-BBCB-DA9FEDB1D3A8",
+      "ThreadID": "DEA6BC33-8CD6-5AE7-A153-7FF6D3B5D2B6",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Brian Bramley",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2016-12-20T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.030Z",
+      "checksum": "e896e3c379e4e69d71070d1341d34eb0cc371b45de013b1647dc95f4597db5ca"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B29FED6A-8416-5415-A593-A00FA329E862"
+    },
+    "fields": {
+      "PortalSessionID": "39960D63-3FE2-5161-B32C-7F9EAAB3985F",
+      "ThreadID": "5F257871-B2B3-5735-B974-E0DF8B0C2F0B",
+      "PersonID": "434E6F96-1516-51D5-9138-16E272D403B6",
+      "Direction": "Inbound",
+      "Sender": "Astrid Lund",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Bellows & Brine Creamery",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2016-12-07T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.043Z",
+      "checksum": "c1af2fdea8d7c19d6afd7bc7071964cd4e6d537f84c9af80bec0d0a30c791a28"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E9712203-5520-59F2-A1DB-E026C5A857A0"
+    },
+    "fields": {
+      "PortalSessionID": "39960D63-3FE2-5161-B32C-7F9EAAB3985F",
+      "ThreadID": "5F257871-B2B3-5735-B974-E0DF8B0C2F0B",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Astrid Lund",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2016-12-08T11:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.054Z",
+      "checksum": "13fe5649f47fbe86d871aeca059c4bde2502cf7e6739da19dfa3562bdc08d8d9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "179920F6-DF5F-5ACE-BEDB-9E2CD188207E"
+    },
+    "fields": {
+      "PortalSessionID": "39960D63-3FE2-5161-B32C-7F9EAAB3985F",
+      "ThreadID": "5F257871-B2B3-5735-B974-E0DF8B0C2F0B",
+      "PersonID": "434E6F96-1516-51D5-9138-16E272D403B6",
+      "Direction": "Inbound",
+      "Sender": "Astrid Lund",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2016-12-11T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.065Z",
+      "checksum": "06e5dadbdb488db3d2f5368857c10ea4a4a4288c42671a525eed1a63c951a66f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CB77974B-250E-5B73-8E86-F7F14E535251"
+    },
+    "fields": {
+      "PortalSessionID": "39960D63-3FE2-5161-B32C-7F9EAAB3985F",
+      "ThreadID": "5F257871-B2B3-5735-B974-E0DF8B0C2F0B",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Astrid Lund",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2016-12-13T14:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.097Z",
+      "checksum": "2b0e790cf60375f8b60a97854a5f17183c6b319016328302ad39c367d653357b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60C1A3F6-BBD2-5B3A-AC32-3A3A9FEDD177"
+    },
+    "fields": {
+      "PortalSessionID": "39960D63-3FE2-5161-B32C-7F9EAAB3985F",
+      "ThreadID": "5F257871-B2B3-5735-B974-E0DF8B0C2F0B",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Astrid Lund",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2016-12-16T13:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.108Z",
+      "checksum": "615d8fe2c027ee4643a382d6e06f1ad03809fcc066a353336d871c73042fd0c2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6951F2DD-232E-5A45-B2D0-88E5F3831449"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "D236DB58-55DB-5D1B-AB90-A74167F71B6C",
+      "Direction": "Inbound",
+      "Sender": "Liv Groen",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Wrenfield Creamery",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-09-18T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.120Z",
+      "checksum": "8c3799bc88d952e71e0f24aa206051f689914b2bc11a586c1d3428c35e143fa7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D09CC40-497D-5440-BF0E-0C5498F984F1"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Liv Groen",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-09-21T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.132Z",
+      "checksum": "5f7cfac1d18e9a02144166d818ee35ecb2846d474d3f35abe956ce1c986acf05"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1BE65322-5D4D-53BE-B0D9-EB336AC1243C"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "D236DB58-55DB-5D1B-AB90-A74167F71B6C",
+      "Direction": "Inbound",
+      "Sender": "Liv Groen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-09-21T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.145Z",
+      "checksum": "0c1ecf670cf815efea7cb696b6ce8b8febcde51572b2754925cc72a37ea9d32f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "20CC265C-CDF7-5F84-A42D-013C9F7B0156"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Liv Groen",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-09-23T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.158Z",
+      "checksum": "0a64ffc121ec74bbd6eec1a7a7775f96a0c6ea02b69976071f40a1181d72afb3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "705CBAE5-ECB4-5987-814B-71DEF80D9CB6"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "D236DB58-55DB-5D1B-AB90-A74167F71B6C",
+      "Direction": "Inbound",
+      "Sender": "Liv Groen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-09-24T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.170Z",
+      "checksum": "2bb1fd3bfcd9e427ca159384d76d504de68b2354c7e516b3ba95ffe4f1e23c0c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D63D961C-84DF-5BC2-AAB8-4612B5AA4220"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Liv Groen",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-09-27T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.183Z",
+      "checksum": "43c17267d933c58591ec2049bcd19b6937749d45a769407685f0dcef41c5f3dd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3807CD35-ED85-5886-990A-107C25B4DD84"
+    },
+    "fields": {
+      "PortalSessionID": "BB34A3A4-8290-553A-A46F-97D206F0DB4B",
+      "ThreadID": "DFA28158-31C6-5BB8-A70B-4FA06CC6B49E",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Liv Groen",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-09-28T05:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.197Z",
+      "checksum": "225767569c72b08d763ea2652766e007fd4b03d29bf3f914ed95503f751cc3e1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F701EE01-BD38-5FC3-B96A-FBB2FAFDDE57"
+    },
+    "fields": {
+      "PortalSessionID": "1D85E772-9870-53CB-9F83-853CBE990388",
+      "ThreadID": "AA88592F-A69C-55EC-B248-1A93DFB744CD",
+      "PersonID": "428B287D-C6A8-51EC-A12D-B731FBB6D825",
+      "Direction": "Inbound",
+      "Sender": "Hannah Shin",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Quernstone Cheese Co.",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-10-30T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.207Z",
+      "checksum": "95c60cea194ad9e90a0cb6c3da93bc105ebab6b05d5d31bdd1d95f0e053e6291"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "896245A6-82B5-5C69-B8FA-C48E8A4443CE"
+    },
+    "fields": {
+      "PortalSessionID": "1D85E772-9870-53CB-9F83-853CBE990388",
+      "ThreadID": "AA88592F-A69C-55EC-B248-1A93DFB744CD",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Hannah Shin",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-01T16:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.236Z",
+      "checksum": "44fbefd772a065fe992845572a69ea91ca8b553e03baf25a9c44c650a564575f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6BF169B9-3FF0-5337-A6E9-522774825622"
+    },
+    "fields": {
+      "PortalSessionID": "1D85E772-9870-53CB-9F83-853CBE990388",
+      "ThreadID": "AA88592F-A69C-55EC-B248-1A93DFB744CD",
+      "PersonID": "428B287D-C6A8-51EC-A12D-B731FBB6D825",
+      "Direction": "Inbound",
+      "Sender": "Hannah Shin",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-11-04T05:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.248Z",
+      "checksum": "461d1d6715fa379d890c77d720a2c229fcf7eaf8233465ecc31da5df835e520c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "745B6085-5F8B-54B5-8E60-436B702643FF"
+    },
+    "fields": {
+      "PortalSessionID": "1D85E772-9870-53CB-9F83-853CBE990388",
+      "ThreadID": "AA88592F-A69C-55EC-B248-1A93DFB744CD",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Hannah Shin",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-06T09:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.261Z",
+      "checksum": "ec220edc98bdcf4d7f4096ff21ffb6c5556bc9b51bc29bf3e33fe6cbd64c656f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD960ED1-C95D-545E-A7A8-C39A765D604F"
+    },
+    "fields": {
+      "PortalSessionID": "1D85E772-9870-53CB-9F83-853CBE990388",
+      "ThreadID": "AA88592F-A69C-55EC-B248-1A93DFB744CD",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Hannah Shin",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-09T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.274Z",
+      "checksum": "40989afbb677628a15bd52aa85aa92796763941513e40ee38807e51a1078fd53"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8DCF7C89-B0E8-526E-A61C-7A16B896647A"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "F79A2D02-8626-50E2-999C-FA6E17322140",
+      "Direction": "Inbound",
+      "Sender": "Alec Wexford",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Rind Retailing",
+      "Content": "Quick question about my event registration — can it be transferred to a colleague?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-11-06T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.287Z",
+      "checksum": "79ace1c98a611e96b68a60cbad3fc1396966982cc8ec9301802bf9d9798ec2bb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "763C4F8A-A341-559D-99A2-1B3CB8244F26"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Alec Wexford",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-07T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.300Z",
+      "checksum": "770b5cf4a640725aa99669a212fb0276738aa403137bf52294697b81eef11e4e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94C028A0-E238-5DA2-B61A-DE289F44C180"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "F79A2D02-8626-50E2-999C-FA6E17322140",
+      "Direction": "Inbound",
+      "Sender": "Alec Wexford",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-11-07T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.313Z",
+      "checksum": "6677b94e0b2a4c208038ee266ec2e903d951117519e822ad3589fc1e8350aa34"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "160F6FB4-E511-5769-B680-1168DBCDB7E3"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Alec Wexford",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-09T13:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.325Z",
+      "checksum": "fb24dd7670c7875c8a261a1f72d96881284502423ecf700ba49ae93bcd9e1ca5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C8A0957D-0EB1-592F-935C-DA601D5299F3"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "F79A2D02-8626-50E2-999C-FA6E17322140",
+      "Direction": "Inbound",
+      "Sender": "Alec Wexford",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-11-09T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.338Z",
+      "checksum": "2671cb006dcb237f53b1b286eb6791716f35f73b2b310819d992bab1a7d571de"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F8289ED-FF00-55F3-AB5A-1ED21F4F71C2"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Alec Wexford",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-11T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.349Z",
+      "checksum": "7b9802459e194c8cbf8cc60b1b85deb4566be8f9ef400a536912b8bdf17cfbea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "854FD517-471B-5A5B-B042-E79B780841D1"
+    },
+    "fields": {
+      "PortalSessionID": "191B83E8-A15B-5B19-A3BB-00D02DB181CB",
+      "ThreadID": "D4163B73-1309-5706-BC67-865995E5BB45",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Alec Wexford",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-11-14T02:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.379Z",
+      "checksum": "b160837b76f5200a4f36a645e825f700f89404200c8c59b93f0707abd7e28272"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "79C714A7-299A-5EA2-9732-2E3C755AC743"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "34F4FAF9-1E7D-56A9-A210-A8A52C5B430F",
+      "Direction": "Inbound",
+      "Sender": "Renata Cabrera",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Quernstone Cheese Co.",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-12-08T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.393Z",
+      "checksum": "3ffd9d39189838bca1df818897584c9118d76db061b9fba07b14177824766e99"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CED3FCC0-508E-52A4-9DD5-702D8636FB9F"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Renata Cabrera",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-12-08T21:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.407Z",
+      "checksum": "2ca4965aaa39dbf3e8364c8978b1c54e34ec58aaee8017a80946a19adf85b08d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CD13BB77-FB4E-57BE-BCA4-E675332D0798"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "34F4FAF9-1E7D-56A9-A210-A8A52C5B430F",
+      "Direction": "Inbound",
+      "Sender": "Renata Cabrera",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-12-11T17:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.420Z",
+      "checksum": "274492a3cc9257f53c5c59c2b747c9ed80094e97e0239c1944bf4d9d2980dced"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF38BE75-2174-5392-9825-B0A281F21C46"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Renata Cabrera",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-12-14T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.434Z",
+      "checksum": "f6fdafd682e568609db9e7cf8b41ddf505efd6aad65000ebec5f22435f384c21"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B4D5B6AA-AD57-5EC5-B36F-C23DB1CC4012"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "34F4FAF9-1E7D-56A9-A210-A8A52C5B430F",
+      "Direction": "Inbound",
+      "Sender": "Renata Cabrera",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-12-14T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.447Z",
+      "checksum": "b05a17ae87b2f62aa83ea07ee68ab41a1237a941430d5693992f04a3b03b7d1f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6457F276-B422-5010-8EC7-BF625A4D13DC"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Renata Cabrera",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-12-16T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.461Z",
+      "checksum": "84c23e2ee2d213c26396b497617addc69e964960c6cdf812dfdf2292fe9c9fbd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F9EE285-9ECD-5F9D-BD85-BB4C9CF09B8F"
+    },
+    "fields": {
+      "PortalSessionID": "B51CF157-878C-55F2-9054-F91EB12E2463",
+      "ThreadID": "EF36ACC0-5438-572F-8547-41C2980B52A9",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Renata Cabrera",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2017-12-17T17:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.477Z",
+      "checksum": "0ef90e5522f9e9dcfed14ae734e9e456626e8a662f7337d119fc39e975060588"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "33EBD7F4-59AA-57A4-B74E-5FBCA5F35487"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "6DB48FFF-A87D-53CE-8DE6-559B2AA8466E",
+      "Direction": "Inbound",
+      "Sender": "Abena Balogun-Achebe",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Briarholt Dairy Institute",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2017-12-30T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.492Z",
+      "checksum": "1b17463b338ad5e8723a7e283f094f6bf4e2c9f9fb56ebaab247d0e095bee029"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC0ED004-7935-528F-885C-EB3ED9710D39"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Abena Balogun-Achebe",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-01-01T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.503Z",
+      "checksum": "3434af342c310a9d2c90c02f1a0ad109f7c365ca38dd4e42f2502cf4a9559ddd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C261393-EFE4-5BE4-AD78-D166F66B7D00"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "6DB48FFF-A87D-53CE-8DE6-559B2AA8466E",
+      "Direction": "Inbound",
+      "Sender": "Abena Balogun-Achebe",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-01-02T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.535Z",
+      "checksum": "987f5115eca11248cb39fa4981ca9c7735988914a2ffad784d9c4ee901e2767c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EDD98990-B0C5-5BCC-9DB1-192AA7A70A1D"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Abena Balogun-Achebe",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-01-04T16:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.552Z",
+      "checksum": "13bc558bc10f22a9135b9aa353f16e13bfe1c2546fa8f8e79276b60fe4148be2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "58779CE4-B538-5686-AB05-B4CEAA1FAA42"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "6DB48FFF-A87D-53CE-8DE6-559B2AA8466E",
+      "Direction": "Inbound",
+      "Sender": "Abena Balogun-Achebe",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-01-05T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.566Z",
+      "checksum": "f7d3792238ed3fdc70e5554165aa09bc7a4e91a7628329a50080e7f549ed4dd3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3737E406-CF23-5010-93F7-B32B06158794"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Abena Balogun-Achebe",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-01-06T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.579Z",
+      "checksum": "dac4a11d8910e2af65d4defedb7032bb8456d85cd913b02c3cb738deef40f28e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "45B98290-1FD7-5442-87B3-91BE43102FA8"
+    },
+    "fields": {
+      "PortalSessionID": "B62118B4-86D3-5C21-9EA9-AE548BDD3395",
+      "ThreadID": "7993823B-3D86-54FF-8FC2-44A32751764D",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Abena Balogun-Achebe",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-01-08T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.591Z",
+      "checksum": "5a9131bb0bc005e27201f407ddaea85384e7c85ced0b051722d02ee0f2968404"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "417836C1-29A8-5BF6-82E3-29D588440F13"
+    },
+    "fields": {
+      "PortalSessionID": "7D7301B0-80DA-5D8C-825B-D0E04842EAB7",
+      "ThreadID": "6B7C83BF-53E9-5A83-9759-9851C017E0B6",
+      "PersonID": "B8EFB2D0-DC87-5DB8-B9E7-CC899877F945",
+      "Direction": "Inbound",
+      "Sender": "Robert Brigham",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Clover Affinage",
+      "Content": "I registered and paid but couldn't attend — could you let me know the refund options?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-10-19T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.604Z",
+      "checksum": "eb3826625db456c2f27a60c891537b5b6edc9f7b4a833704065f71e2bdedb8c8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD3AB143-199A-5D4E-B551-F387DE7C66CD"
+    },
+    "fields": {
+      "PortalSessionID": "7D7301B0-80DA-5D8C-825B-D0E04842EAB7",
+      "ThreadID": "6B7C83BF-53E9-5A83-9759-9851C017E0B6",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Robert Brigham",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-20T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.616Z",
+      "checksum": "80591b83cd8263a6912100e47481f766520411dfa020a4ec8af0e6c1ae24b089"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0E6F1FD-7287-51DB-A001-EC26557B8BD7"
+    },
+    "fields": {
+      "PortalSessionID": "7D7301B0-80DA-5D8C-825B-D0E04842EAB7",
+      "ThreadID": "6B7C83BF-53E9-5A83-9759-9851C017E0B6",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Robert Brigham",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-23T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.629Z",
+      "checksum": "23d74191f987f0355262898f3e621abc23e9b9b8d8a34eb20facfaa310b474c4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "38FBCB91-D52A-50FC-85BA-4729B14B307E"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "ACFA72D7-3339-5B16-A826-69B08B85C8F2",
+      "Direction": "Inbound",
+      "Sender": "Gunnar Weiss",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Kilnbrook Fine Cheese",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-10-23T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.641Z",
+      "checksum": "6ad1c9a311e3646dd5a3a9bf22e84a06064658a515dc41a24f14d36842d45244"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EA2DED0A-45D3-5C42-943F-C3165265FD08"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Gunnar Weiss",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-24T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.651Z",
+      "checksum": "7f1769ca5b6757be022197a19f49af56248d321f75a3bbf0e60f6a6331493a22"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4721FAB8-490B-54E5-8449-9A36C1CF02EE"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "ACFA72D7-3339-5B16-A826-69B08B85C8F2",
+      "Direction": "Inbound",
+      "Sender": "Gunnar Weiss",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-10-26T14:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.679Z",
+      "checksum": "b210948f3a3d58dc99428a9fad58a2eeba200994b7824f27d983a21da1931602"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D35C559F-9C1B-562F-957D-EC7708D1388F"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Gunnar Weiss",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-27T13:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.692Z",
+      "checksum": "175df6b8d73e39238f1c99be9628ce27804f625091ed3cfbec7229cabde67680"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "38C1012C-9BAA-5D62-B066-DA282C5399CE"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "ACFA72D7-3339-5B16-A826-69B08B85C8F2",
+      "Direction": "Inbound",
+      "Sender": "Gunnar Weiss",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-10-27T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.703Z",
+      "checksum": "17bd1e8c4c37354193c55f23324aa199b845602d10de415f496424d0b6f30887"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "706D87EC-7397-5267-8BC1-E5158BEDFD1E"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Gunnar Weiss",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-29T04:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.715Z",
+      "checksum": "8f01f8891473de1687f25a687005584aabb46c837f9eee1835359a6d9244b774"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A872DC4A-D229-5B29-BEFC-279397BEEC78"
+    },
+    "fields": {
+      "PortalSessionID": "EC4338EE-5C63-53FD-A840-F589CEBE7C8C",
+      "ThreadID": "95BF6172-EF9C-5151-943C-775DEDF666D1",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Gunnar Weiss",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-31T12:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.728Z",
+      "checksum": "edf826ac7639031de0a1fd44f44238cfe9480f95b2b4a74a7c5829473222e7de"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49138934-2F31-5FCC-A420-4833880065D2"
+    },
+    "fields": {
+      "PortalSessionID": "496492F1-8DB6-5029-A19F-4BF66E7CB92B",
+      "ThreadID": "C99491F3-34CE-561A-9549-409E5FF648E5",
+      "PersonID": "DA38FF1C-60B6-555B-A0F4-45B1C1C10DAB",
+      "Direction": "Inbound",
+      "Sender": "Binta Battaglia",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Speltmoor Fine Cheese",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-10-26T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.741Z",
+      "checksum": "8acca63a00e907c1b14c265f056f85e0c983e8fd3104baedcfbb5604638400ad"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0065CC15-C537-5F20-8F37-552BA4C525CA"
+    },
+    "fields": {
+      "PortalSessionID": "496492F1-8DB6-5029-A19F-4BF66E7CB92B",
+      "ThreadID": "C99491F3-34CE-561A-9549-409E5FF648E5",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Binta Battaglia",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-28T21:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.753Z",
+      "checksum": "f7f46358bea137cdcfe9814742607c29fcb3110a28711e71f180777c6cc7bb81"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F38076B3-0833-596B-B26C-854F16D348E0"
+    },
+    "fields": {
+      "PortalSessionID": "496492F1-8DB6-5029-A19F-4BF66E7CB92B",
+      "ThreadID": "C99491F3-34CE-561A-9549-409E5FF648E5",
+      "PersonID": "DA38FF1C-60B6-555B-A0F4-45B1C1C10DAB",
+      "Direction": "Inbound",
+      "Sender": "Binta Battaglia",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-10-29T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.764Z",
+      "checksum": "a8467d060589564218453c63b8aff1b656f6041b2914fcece9f548ae59ecb29a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CC20DE0B-8CB5-564C-932F-A622F2648000"
+    },
+    "fields": {
+      "PortalSessionID": "496492F1-8DB6-5029-A19F-4BF66E7CB92B",
+      "ThreadID": "C99491F3-34CE-561A-9549-409E5FF648E5",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Binta Battaglia",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-10-30T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.776Z",
+      "checksum": "8e5c7e3bfab754869bd296e4c46930dfff31bd2d3b4eab845504501f85e22fa5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "344B2763-1C16-5C68-A60A-F8DE3D8DDD52"
+    },
+    "fields": {
+      "PortalSessionID": "496492F1-8DB6-5029-A19F-4BF66E7CB92B",
+      "ThreadID": "C99491F3-34CE-561A-9549-409E5FF648E5",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Binta Battaglia",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-11-01T11:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.787Z",
+      "checksum": "f9777ed95f744a5ee31b5b41e1afc5b0db7f466d42337d1ede77b155181069b2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CAFAB89C-31EC-52CE-BFB7-EACF5F796CE5"
+    },
+    "fields": {
+      "PortalSessionID": "287FBEB2-D4D2-536F-ADF4-185254AC79EC",
+      "ThreadID": "C47FB9C6-B0CB-54E3-AF02-4D28041567A3",
+      "PersonID": "EA36130D-B3E1-56A8-8BEE-00C0B93CF010",
+      "Direction": "Inbound",
+      "Sender": "Antoine Quintal",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Womack Farmstead",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-11-28T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.819Z",
+      "checksum": "358ef6b00699959337ca1af523c1bd96d4c9f38255cbb19d226d0622e0370ebe"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BCA31981-F6E3-5112-A8D5-05BEBF04757F"
+    },
+    "fields": {
+      "PortalSessionID": "287FBEB2-D4D2-536F-ADF4-185254AC79EC",
+      "ThreadID": "C47FB9C6-B0CB-54E3-AF02-4D28041567A3",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Antoine Quintal",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-01T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.831Z",
+      "checksum": "d3267168239e0badd1db836ccfcf81853ca0629c32e4fcdf55b92e4d74648e77"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E3BBBC2A-73D6-57D0-A95D-00FE19922219"
+    },
+    "fields": {
+      "PortalSessionID": "287FBEB2-D4D2-536F-ADF4-185254AC79EC",
+      "ThreadID": "C47FB9C6-B0CB-54E3-AF02-4D28041567A3",
+      "PersonID": "EA36130D-B3E1-56A8-8BEE-00C0B93CF010",
+      "Direction": "Inbound",
+      "Sender": "Antoine Quintal",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-12-02T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.845Z",
+      "checksum": "424cd504212e27c13da54e98e82bbd8e07351b050bd38652504dc858872f986e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08EA31ED-8D56-57DE-AEDB-898A9164BE25"
+    },
+    "fields": {
+      "PortalSessionID": "287FBEB2-D4D2-536F-ADF4-185254AC79EC",
+      "ThreadID": "C47FB9C6-B0CB-54E3-AF02-4D28041567A3",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Antoine Quintal",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-05T17:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.858Z",
+      "checksum": "82d78be62229190a6914c4d7c8e2d5d7e80c886bd2922902b2b5a706887964f7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7E32757E-08A5-5EDE-B24F-E112E8F4E033"
+    },
+    "fields": {
+      "PortalSessionID": "287FBEB2-D4D2-536F-ADF4-185254AC79EC",
+      "ThreadID": "C47FB9C6-B0CB-54E3-AF02-4D28041567A3",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Antoine Quintal",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-07T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.871Z",
+      "checksum": "2494b23df98d7bd1a8a5858ee3e5132a1ac15c86be80ad13a23711a8752ef0b3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE657D29-988D-5468-AF3F-4F07485634BD"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "7E0ADF2A-A35B-560D-B38E-89CE8905F56E",
+      "Direction": "Inbound",
+      "Sender": "Heidi Dietrich",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Mistlebrook Dairy Institute",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-12-12T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.883Z",
+      "checksum": "35b394b8a6a9bbb793b689ea9736685bdf100b46a2d8f372a93a2569dd0d5ad0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D746E8C4-86D7-58E8-B268-6D661EFD1495"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Heidi Dietrich",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-13T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.895Z",
+      "checksum": "0f93f6e26562f2f4adc218704024b432c26f6b2f68f477ad08a30fe7ccc4c460"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44773DE7-DFC4-5F1A-994E-94084C10524F"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "7E0ADF2A-A35B-560D-B38E-89CE8905F56E",
+      "Direction": "Inbound",
+      "Sender": "Heidi Dietrich",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-12-14T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.908Z",
+      "checksum": "156a43f369f986d74ed28218d998e994e0cc0f7f7fce134bc1f5625d795ff479"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "67FBFEBF-2580-5901-BB83-F433AD145166"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Heidi Dietrich",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-15T02:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.920Z",
+      "checksum": "750b3df6e082d760f516d5eed9d997c35b6edab7c0274b87c244e7d2a137df9f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B34F3C8-5107-5422-B57D-48F409A456AE"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "7E0ADF2A-A35B-560D-B38E-89CE8905F56E",
+      "Direction": "Inbound",
+      "Sender": "Heidi Dietrich",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2018-12-16T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.930Z",
+      "checksum": "51bbeaaaa069435bf21d8e44663f0ba7d6791dd5b9673fa1449b034269b2e49c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ADEE7653-1332-5C06-9B57-E55F37B11A51"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Heidi Dietrich",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-18T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.962Z",
+      "checksum": "19613dfc27a422a18f4956976c7dd2fbbc152665e676ce76dd3db7c63c7e1792"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DBF7AEB5-9A20-531E-A6B3-B49D54F6D114"
+    },
+    "fields": {
+      "PortalSessionID": "5A33A92A-D92C-596D-8EC3-0FD2D7FC5E8A",
+      "ThreadID": "8F197943-50DA-5B81-A9FD-F7DCA4393FBC",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Heidi Dietrich",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2018-12-19T14:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.975Z",
+      "checksum": "72da603e2be57241b6458a0a55bdc93cefb65b69e724fb4fbeae9b948ea9e30e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "58262FAC-2F8B-5764-B196-F0FBCC199D7F"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
+      "Direction": "Inbound",
+      "Sender": "Grace Sutton",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Vandermolen Cultures Co.",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2021-09-25T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.988Z",
+      "checksum": "243a8177ed5e208ce23fcef10953f0d736d62be5ddad8803d8b20eaaf7db07eb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "78AA1306-E14E-5F12-B4C6-E79AFB349AE2"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Grace Sutton",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-09-28T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:09.999Z",
+      "checksum": "0d6cb0ba5aef16fd03494b41722060dc48aa55da9db612282b36386ae8b26975"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2A7B14E9-C5FD-5411-A2DC-D401BFE5F360"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
+      "Direction": "Inbound",
+      "Sender": "Grace Sutton",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2021-09-29T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.012Z",
+      "checksum": "bdd953fcfdf03aa3352b10badd91f19ec13a7684a12c400d89ef8407eda2a6d8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8F36675F-E2B1-53AF-ABDC-DC8BDC415C48"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Grace Sutton",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-10-01T10:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.025Z",
+      "checksum": "4632cbccd1b8c3181d55e2473d89136e0bade80d9d2978f97af787b9a5de3d71"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C3F1047F-FDF7-507C-A464-D594C1ED4EE7"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
+      "Direction": "Inbound",
+      "Sender": "Grace Sutton",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2021-10-03T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.036Z",
+      "checksum": "09cc56915c22a873cb937e171bf13344ef68916be62ccbbe453a5d95c5afbecd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF5D1E8E-5AB6-59CE-86A6-CDC72B68F1C0"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Grace Sutton",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-10-04T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.049Z",
+      "checksum": "beb103c9cb32200e302b7c77897116f6ef4259a430cca37e9fdde3b804459726"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DB20E16D-6E0E-5F3C-A98E-AADD0F6D9CF7"
+    },
+    "fields": {
+      "PortalSessionID": "99ADC68E-A49D-58FB-A20F-1CEC804DA7DF",
+      "ThreadID": "82D63657-916E-5FF4-A26E-75299965E417",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Grace Sutton",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-10-06T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.062Z",
+      "checksum": "d24dd3db430427f43624c7ab2fe36eb239246166b23e48e7a860ee64345b5356"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "108BA7EF-BD25-5D02-B15F-5952D90B2758"
+    },
+    "fields": {
+      "PortalSessionID": "27CFC206-9151-516F-9F36-A039691E0E55",
+      "ThreadID": "DDBE3F85-269E-57CF-9A84-ACD3BEBC0D0F",
+      "PersonID": "E2C611B9-A72B-5B05-AFA0-4347FD4D6306",
+      "Direction": "Inbound",
+      "Sender": "Catarina Teixeira",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Hazelcombe Cheese Co.",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2021-11-09T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.072Z",
+      "checksum": "4cee6d1d0703fd440588f447317484612fe340dfe3da4ab662a94febf992ff6b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "21832037-D779-5785-ABED-54BD16A9BFEF"
+    },
+    "fields": {
+      "PortalSessionID": "27CFC206-9151-516F-9F36-A039691E0E55",
+      "ThreadID": "DDBE3F85-269E-57CF-9A84-ACD3BEBC0D0F",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Catarina Teixeira",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-11-11T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.105Z",
+      "checksum": "9e0232e33d3fcc7d8f88db7b528e3c6c1d96193858f8cd210405c0b0d50fd220"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "280DB06F-F4CB-5498-80B1-2700A59E6D8F"
+    },
+    "fields": {
+      "PortalSessionID": "27CFC206-9151-516F-9F36-A039691E0E55",
+      "ThreadID": "DDBE3F85-269E-57CF-9A84-ACD3BEBC0D0F",
+      "PersonID": "E2C611B9-A72B-5B05-AFA0-4347FD4D6306",
+      "Direction": "Inbound",
+      "Sender": "Catarina Teixeira",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2021-11-13T05:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.118Z",
+      "checksum": "c6ea272c5e3eef686cc33576c8aa179aa9c7f46787a7891a5457b1db78099fb6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC697E14-59B9-5F92-9151-174A352E4387"
+    },
+    "fields": {
+      "PortalSessionID": "27CFC206-9151-516F-9F36-A039691E0E55",
+      "ThreadID": "DDBE3F85-269E-57CF-9A84-ACD3BEBC0D0F",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Catarina Teixeira",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-11-14T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.131Z",
+      "checksum": "a0984846327c33af480deef4d0849f51102df9e440e3a91292f0ceb02238c502"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3FE05DA4-723C-51EA-A139-96CA3E9B24CE"
+    },
+    "fields": {
+      "PortalSessionID": "27CFC206-9151-516F-9F36-A039691E0E55",
+      "ThreadID": "DDBE3F85-269E-57CF-9A84-ACD3BEBC0D0F",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Catarina Teixeira",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2021-11-15T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.143Z",
+      "checksum": "472fc2b55fd5d0a736b64434aed45eedb2704f7dc1d5861e067cc48c15494b43"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0D1FFB14-EF01-5A0B-9C84-2DA1BFB55CEB"
+    },
+    "fields": {
+      "PortalSessionID": "4E1E16AA-4599-52C8-8DC1-51BC559BF059",
+      "ThreadID": "5E112F91-24A9-532A-ACC2-43630F1B1515",
+      "PersonID": "1842ABB0-3196-5145-A1E9-4FFEC642ED52",
+      "Direction": "Inbound",
+      "Sender": "Li Chen",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Vandermolen Cultures Co.",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-01-04T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.156Z",
+      "checksum": "5e0c54477585762dfcf5d3f21ab99168a476b25025f184eec844d502975f25ad"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A505248A-8C4E-571D-9C4E-9EE21A29F52F"
+    },
+    "fields": {
+      "PortalSessionID": "4E1E16AA-4599-52C8-8DC1-51BC559BF059",
+      "ThreadID": "5E112F91-24A9-532A-ACC2-43630F1B1515",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Li Chen",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-01-06T13:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.172Z",
+      "checksum": "2b9bee5fad588eea89813775bd39862a64d5c2b27b82ca48a80c22d0c9fa9613"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED3E75E0-8ACE-577E-898E-40EA64FAD67F"
+    },
+    "fields": {
+      "PortalSessionID": "4E1E16AA-4599-52C8-8DC1-51BC559BF059",
+      "ThreadID": "5E112F91-24A9-532A-ACC2-43630F1B1515",
+      "PersonID": "1842ABB0-3196-5145-A1E9-4FFEC642ED52",
+      "Direction": "Inbound",
+      "Sender": "Li Chen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-01-08T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.186Z",
+      "checksum": "9ebfc5f33114966758fa3b2dc92eddd55eaf9b2bf20219a1e4c0cbb3dccfee44"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0772AB6E-9286-5041-B982-93BE135EB202"
+    },
+    "fields": {
+      "PortalSessionID": "4E1E16AA-4599-52C8-8DC1-51BC559BF059",
+      "ThreadID": "5E112F91-24A9-532A-ACC2-43630F1B1515",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Li Chen",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-01-08T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.200Z",
+      "checksum": "d6714e93f85abc88be0b0aaadc8db0439de4df97908769542da48f9391d5b3bb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3315CD08-8DB4-5862-8A3B-E60DBDC3B745"
+    },
+    "fields": {
+      "PortalSessionID": "4E1E16AA-4599-52C8-8DC1-51BC559BF059",
+      "ThreadID": "5E112F91-24A9-532A-ACC2-43630F1B1515",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Li Chen",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-01-10T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.213Z",
+      "checksum": "53bcfd946f44a8ea631f4394fc77189e82cce771afcd1e56111c4a9595014586"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39720FC0-4DC2-5C7A-B6F7-0E6F02ACE2B5"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": "2980EAB2-2260-5C34-9828-158B1EE2C44D",
+      "Direction": "Inbound",
+      "Sender": "Chiara Neves",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Brook Affinage",
+      "Content": "Quick question about my event registration — can it be transferred to a colleague?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-05-14T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.225Z",
+      "checksum": "0fb97f89da99b29f5ec275d6addfb3f894745e2661b184b20aa923d166e006ed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3E4AA9AA-2FBD-5874-93F9-E2B60B7A2F38"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Chiara Neves",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-05-15T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.256Z",
+      "checksum": "5a15c5c00f3db708acc7bd13058ad6ec861311f570a2ab3d68fe7b8b73acfafb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "36905697-1CFA-5BDF-8FD9-C193629C1917"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": "2980EAB2-2260-5C34-9828-158B1EE2C44D",
+      "Direction": "Inbound",
+      "Sender": "Chiara Neves",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-05-17T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.270Z",
+      "checksum": "63959caea03ed94b47436eb4341dfcfbc56670c430d23c4b8130df57168348dc"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77EE2BC7-8019-5BBD-A89E-7DEF894D3D2C"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Chiara Neves",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-05-18T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.285Z",
+      "checksum": "427adbde6db603fc521c63bdcc103d7097857ed77a00603f4768e86dab8fc304"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D9328E3E-2298-5ECE-876F-2517C36AEC9E"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": "2980EAB2-2260-5C34-9828-158B1EE2C44D",
+      "Direction": "Inbound",
+      "Sender": "Chiara Neves",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-05-19T05:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.299Z",
+      "checksum": "0b414e41b5d5a594b9d00f23a5f51372e17c55aa657c0b542c7f02071dcb8b26"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44C63A01-839B-55E0-94BD-90932D6E0AE2"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Chiara Neves",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-05-20T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.313Z",
+      "checksum": "6e75dbfe3052b9e88c0b13fabc78055fcebbe8c707de7688229547016541faff"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24B272B0-C5E7-59A7-A14C-B128C3637EA3"
+    },
+    "fields": {
+      "PortalSessionID": "D2C348A4-09D4-58D1-87C8-66FD1C1C55B7",
+      "ThreadID": "04BD9255-7A1B-5388-A80C-843B861CC56E",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Chiara Neves",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-05-23T02:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.325Z",
+      "checksum": "4189e950151206abae8875143448ffe988392e99576b042b3be22e31aab75f4c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5BABEB3-1A62-50AB-8B06-C9FDBAB0C56F"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "5825F04A-0ADD-5B52-854B-245294D3F54B",
+      "Direction": "Inbound",
+      "Sender": "Emily Hale",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — ICF Annual Conference 2022",
+      "Content": "Quick question about my event registration — can it be transferred to a colleague?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-07-23T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.337Z",
+      "checksum": "ab37bc689ff417d21e0d3a1eb4e271861635b801036562d91ae68cd3128408e3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B9690B22-B370-5AD0-BAC3-561D857EB901"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Emily Hale",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-07-24T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.349Z",
+      "checksum": "ff47a97ae18f886ffd61f4606b50ddb45ecb1167eff47bceab13f479de416b4a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1490A3C9-977E-5177-A656-8EB1CD879843"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "5825F04A-0ADD-5B52-854B-245294D3F54B",
+      "Direction": "Inbound",
+      "Sender": "Emily Hale",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-07-25T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.361Z",
+      "checksum": "5594292bf875393ad4971c97ca35d8b8f6005e39f94206f5b3f6cbbe763ab1e9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CCD73C71-7CEE-5565-928F-CE1C44EA36C1"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Emily Hale",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-07-27T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.371Z",
+      "checksum": "315e9f77f7babd6302571c51d9b45ea8a095c5278b0e24516ea7af1c68520b2a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47266995-D2EF-5639-9DB0-28DD09F38EA7"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "5825F04A-0ADD-5B52-854B-245294D3F54B",
+      "Direction": "Inbound",
+      "Sender": "Emily Hale",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-07-29T11:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.404Z",
+      "checksum": "c9d42d40f6ceaa6717886b0084954aea3f96f40d72dabd4164e8b60280254693"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98315A6E-8EC3-594B-8156-714B21660508"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Emily Hale",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-07-31T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.417Z",
+      "checksum": "448c773f77e152f8de2448bdb4df0bf1b3d5fa52a89276c9b6f5557a33e67f37"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E0059BC-E84E-5A8B-B6A6-F3E57C115884"
+    },
+    "fields": {
+      "PortalSessionID": "FC75D721-6733-5F31-A0E2-A9467A758BE4",
+      "ThreadID": "F9D1E8B9-9DF1-5F68-A9E3-FC19990722E0",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Emily Hale",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-08-02T02:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.430Z",
+      "checksum": "c5a0312265bb50264432c4ce10c78ef922607278f61e89c9584c00bb47c3cedd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C6232C6A-9C45-57EF-A0F0-5F639BCB82CD"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": "13BED78F-D242-5B94-AFC6-22F28ADEC2E8",
+      "Direction": "Inbound",
+      "Sender": "Frida Andersen",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — ICF Annual Conference 2022",
+      "Content": "Quick question about my event registration — can it be transferred to a colleague?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-08-02T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.443Z",
+      "checksum": "d60b276cc069356f983d6b7ed26b611ef3d7ac97dca6218f4ada4bd38e449b7d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8432123D-E45E-5C51-8BF0-A7237C9C5863"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Frida Andersen",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-08-04T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.455Z",
+      "checksum": "dd262e7716ef11dc5c4b3d26ca9a626c7210fd1b966a6529a31da389191722de"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5DD16D3D-F342-59EC-8C81-F837A2D30CA5"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": "13BED78F-D242-5B94-AFC6-22F28ADEC2E8",
+      "Direction": "Inbound",
+      "Sender": "Frida Andersen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-08-07T02:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.468Z",
+      "checksum": "d752331cc9fe49f56c0acc53a477f91aa9fb65e516c06f8c66d3596485be8994"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AE554533-DEEA-595F-808F-3CE7156462FE"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Frida Andersen",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-08-09T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.480Z",
+      "checksum": "6d1a90ef57918db88810e6fe4c13e9255b7342c9e485686bce1a3367fda76240"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E8ECE9D7-0AAD-5ADA-8381-4605D7FF2571"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": "13BED78F-D242-5B94-AFC6-22F28ADEC2E8",
+      "Direction": "Inbound",
+      "Sender": "Frida Andersen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-08-11T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.492Z",
+      "checksum": "ed0f1fcf93b4305da079b9bc28585b0e1974d478991718c818d8e389f884e141"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BCE87733-F4D1-59D3-9C6E-16E7D52EE46B"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Frida Andersen",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-08-12T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.505Z",
+      "checksum": "f2aab983bf9fa7265d12f1f9f273c519c0ad8c47616bb97d202902630336b938"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6B2E10CD-5A3A-5D0C-8B91-9CD05D0D4375"
+    },
+    "fields": {
+      "PortalSessionID": "49316378-F4B4-561C-991B-1FDC61375137",
+      "ThreadID": "05BFF957-FE74-5309-BEE3-2F0528C0B022",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Frida Andersen",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-08-13T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.515Z",
+      "checksum": "8e846d617c91afb5f29ddee7e27af124dd8debe7635375d2c17ce834649f6de4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8CE136E9-E5A8-57B8-B883-8E7E7669DCDB"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "2475108E-5E76-5D1A-A37C-A26DDFBF967F",
+      "Direction": "Inbound",
+      "Sender": "Daniel Ashcroft",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Heathercombe Creamery",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-11-21T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.544Z",
+      "checksum": "b8135bd84c1efcfdd56ab4c2c43808428ad596d5e6f6a53e57760e390d81206f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C22A4F03-C3A7-5DD8-914D-CE874A462686"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Daniel Ashcroft",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-11-24T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.556Z",
+      "checksum": "729c2d1626f741d0aedce19e0b7d5d3396d1f95dfae3d1a26af5a9f1f25756a0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0F91CF2C-9365-5AE3-B722-405C1235E298"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "2475108E-5E76-5D1A-A37C-A26DDFBF967F",
+      "Direction": "Inbound",
+      "Sender": "Daniel Ashcroft",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-11-26T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.569Z",
+      "checksum": "713365463f4984b75072356f06905e8fab2bab7e76844849450760d6b7dc8f4e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98353C17-6C2A-512F-88B4-E2F1B6FD0A85"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Daniel Ashcroft",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-11-27T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.581Z",
+      "checksum": "be877b42504c43d89f651a525d57f67eeaaff32d2bf56454ac0ef013af06dd9e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8F30B84E-FD3A-5CB7-9155-B961538D7D2C"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "2475108E-5E76-5D1A-A37C-A26DDFBF967F",
+      "Direction": "Inbound",
+      "Sender": "Daniel Ashcroft",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-11-28T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.593Z",
+      "checksum": "10ed6f365aadf29830c43a183e58d765bf0f3399e3b774b4a01daa0f5e9ba641"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0D73088B-C572-5783-99D1-E56CD8A3C55C"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Daniel Ashcroft",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-11-29T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.606Z",
+      "checksum": "214775fcb33d097d802401a3ca2b310112881e2050926a335dadb89f7b87fc8c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1628327-878A-5C40-AA69-E8FFF5DE2663"
+    },
+    "fields": {
+      "PortalSessionID": "91869159-DA35-5558-82DB-5CE648855D7E",
+      "ThreadID": "7D5267E2-2FFC-5AB5-8BA8-9A5A381310EF",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Daniel Ashcroft",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-12-01T21:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.618Z",
+      "checksum": "c5193373e58f8441e9804bab79ff1fbe950a35a1cf76419d983a3462171eee41"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D0F57D99-99D8-504C-BF16-C0CD9C3CE641"
+    },
+    "fields": {
+      "PortalSessionID": "CC608821-189C-5A48-A17C-AC169230E291",
+      "ThreadID": "AB2EC3A1-A51C-5BDB-B0D2-455940937F1C",
+      "PersonID": "1C05CD71-2B48-5B53-AB40-961F7B48773E",
+      "Direction": "Inbound",
+      "Sender": "Rina Nakamura",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Bramblewick Cheese & Provisions",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-11-28T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.629Z",
+      "checksum": "569beb4e09ff332bfefae5f13218b85a18e39b1a0c506149b84e99d05798d894"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F8C15B1-896D-5990-9630-3DC7D163E5DE"
+    },
+    "fields": {
+      "PortalSessionID": "CC608821-189C-5A48-A17C-AC169230E291",
+      "ThreadID": "AB2EC3A1-A51C-5BDB-B0D2-455940937F1C",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Rina Nakamura",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-11-30T11:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.641Z",
+      "checksum": "83c578857fbb53fac806bdd008aecf3754c147f7aa484f664b7816099ca6d233"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C4B3B95-E576-5F9B-A4E5-76FFA2FA3BD8"
+    },
+    "fields": {
+      "PortalSessionID": "CC608821-189C-5A48-A17C-AC169230E291",
+      "ThreadID": "AB2EC3A1-A51C-5BDB-B0D2-455940937F1C",
+      "PersonID": "1C05CD71-2B48-5B53-AB40-961F7B48773E",
+      "Direction": "Inbound",
+      "Sender": "Rina Nakamura",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2022-12-03T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.652Z",
+      "checksum": "44058378ccbb7fb1855d3c9517a12d26f9c841955914691b5175a152bd626d4f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "878BFE78-7A56-5806-A87A-260D6956D2D8"
+    },
+    "fields": {
+      "PortalSessionID": "CC608821-189C-5A48-A17C-AC169230E291",
+      "ThreadID": "AB2EC3A1-A51C-5BDB-B0D2-455940937F1C",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Rina Nakamura",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-12-05T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.683Z",
+      "checksum": "e9c0a2d4a08639383f55fd5dadd49183ddf0a1f366f2df6b95c804082d230a27"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83A82862-4589-5647-B363-A99E67E7E05E"
+    },
+    "fields": {
+      "PortalSessionID": "CC608821-189C-5A48-A17C-AC169230E291",
+      "ThreadID": "AB2EC3A1-A51C-5BDB-B0D2-455940937F1C",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Rina Nakamura",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2022-12-07T20:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.695Z",
+      "checksum": "cac34954aa2a3293d528b1fa78aafef6b2839a4afa4d02103b1004516c84547a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "187EC2D5-1D3B-545E-A264-8B76D9996D23"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "697542DE-3AAB-545B-BCA2-191D4FB7DCBC",
+      "Direction": "Inbound",
+      "Sender": "Daniel Colton",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Cave Sensory",
+      "Content": "I registered and paid but couldn't attend — could you let me know the refund options?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-02-11T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.709Z",
+      "checksum": "b0847b169f943e79f443a378e91bc0734b6eb7eb0f2ece0a174e8aa1c8da5100"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A9691654-C349-5FDC-B856-25B5A170DB10"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Daniel Colton",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-02-12T13:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.721Z",
+      "checksum": "52fe525514ffded3e8a01326538b3f4484dde7f8c56aad72202d802174f7689b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFC48302-2D21-5AAC-AC87-7B9FC4F32806"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "697542DE-3AAB-545B-BCA2-191D4FB7DCBC",
+      "Direction": "Inbound",
+      "Sender": "Daniel Colton",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-02-12T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.733Z",
+      "checksum": "7d88879eb8ad5f6cc0c53f8b87caae6a2ac9429b38ad7d94f64468534e9fe2e6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8432DEBF-3A9D-5C36-A7E8-0704EEEDD0AF"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Daniel Colton",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-02-15T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.746Z",
+      "checksum": "d3114b8cd196acf89f00c91696db0487614b9aa5cc3890c99b62302bc71eaef0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E8B17BBB-5C6E-597B-9461-836C4A028F30"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "697542DE-3AAB-545B-BCA2-191D4FB7DCBC",
+      "Direction": "Inbound",
+      "Sender": "Daniel Colton",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-02-16T05:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.758Z",
+      "checksum": "07b44f6c9750d137fe3ffac19d67a063e1717f6918671c14c2e6ef022a3ef7c1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB700B8A-CB9B-50D9-A86F-B8486661D469"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Daniel Colton",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-02-16T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.771Z",
+      "checksum": "d98937a24a8b3214c6297c9d86a20fad182298c06ff9f54edbc2fd31216aafe0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E2935C64-B873-577F-AABD-F03C2AF37BBF"
+    },
+    "fields": {
+      "PortalSessionID": "1CE87224-F8B2-5E8B-B2AC-6B7628509786",
+      "ThreadID": "C5667CC4-8ED8-5876-99AF-4DADA6E570DF",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Daniel Colton",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-02-18T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.783Z",
+      "checksum": "4b1febc97c2a5070b1261065e4dcf96c754c5dc77333aec8c656249d6f7f1c58"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FCF7C926-80A3-58DD-928C-ECA04CD12FE9"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": "2A63553B-4A88-5374-9C87-2309ECAB08BD",
+      "Direction": "Inbound",
+      "Sender": "Quentin Lacroix",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Nettlewick Farm",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-11-16T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.794Z",
+      "checksum": "f3b0761a76594348801a1c5f340b6a48aeb0df639f5628ad6f794101bfc9004f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "58433957-790E-5797-9A09-5D52ED1BEAED"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Quentin Lacroix",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-11-18T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.825Z",
+      "checksum": "4962eb7f324732ffcd993ebf03ecc643eac02a53fec6248b7d47a6551d81054c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7EFD2835-C5CB-5FDE-9DA2-969EBDFD1425"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": "2A63553B-4A88-5374-9C87-2309ECAB08BD",
+      "Direction": "Inbound",
+      "Sender": "Quentin Lacroix",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-11-19T09:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.838Z",
+      "checksum": "f5939a49409d093658e5768c37fdafed51f6e1b95d5fae93b41832878fd4ff5d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "389EC17B-003E-553C-BEFE-18014D559C18"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Quentin Lacroix",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-11-21T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.850Z",
+      "checksum": "4035ba51b12cb0d5ee0839d6734bd0e1555eb25754cac6a6983b911f13f990bd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "803667E9-0F3F-57B4-B6BE-ACE557C37236"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": "2A63553B-4A88-5374-9C87-2309ECAB08BD",
+      "Direction": "Inbound",
+      "Sender": "Quentin Lacroix",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-11-24T13:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.863Z",
+      "checksum": "228c1e3503a8700d2fdf36261ca4fba73647df2040a60812eed4de3e0da7b74a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C293104-6ACA-5ABA-81A2-1C7178165EAD"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Quentin Lacroix",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-11-25T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.876Z",
+      "checksum": "60db4a1ce1252b7b4e17a849239b30edd58a42e68eb5d69330e921027caf66c6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D4B5323-B24F-5CD7-A413-08F7EA3E277D"
+    },
+    "fields": {
+      "PortalSessionID": "E43A997E-DE74-56DB-A769-59F92BA7FF8D",
+      "ThreadID": "07ACFF45-2641-5BBD-83CE-E1D0E14A164F",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Quentin Lacroix",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-11-26T09:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.888Z",
+      "checksum": "9b3b11b2588f3e5bbdf5e1bb4335d349509a059bccefdcde0735838ae8a8ae05"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5369EF3-3327-5058-9C7A-6933B3D645B2"
+    },
+    "fields": {
+      "PortalSessionID": "9034A02F-56A8-5466-B311-940D1302EC93",
+      "ThreadID": "7895EACB-98DB-5812-97AF-2533FC0255C9",
+      "PersonID": "9EF4B88C-E141-52DC-850C-40358E48EBA3",
+      "Direction": "Inbound",
+      "Sender": "Daniel Ashworth",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Willow Sensory",
+      "Content": "I can't find the session materials from the event in my portal. Are they available somewhere?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2023-11-09T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.901Z",
+      "checksum": "3c8df6c2cd57e0c8d66fd8550e21980ef39f6f91839ef1d5ee9a15f0a6fb8a2e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA6E14D9-E375-55AF-9B5D-D20F70D9C630"
+    },
+    "fields": {
+      "PortalSessionID": "9034A02F-56A8-5466-B311-940D1302EC93",
+      "ThreadID": "7895EACB-98DB-5812-97AF-2533FC0255C9",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Daniel Ashworth",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-11-12T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.913Z",
+      "checksum": "443eb59bcc83881579f8b3de8a12206c218b83f25d48ee3dfe96a98be5cadcef"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9C7D3C5E-6D55-5558-948A-F7C08F4AB106"
+    },
+    "fields": {
+      "PortalSessionID": "9034A02F-56A8-5466-B311-940D1302EC93",
+      "ThreadID": "7895EACB-98DB-5812-97AF-2533FC0255C9",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Daniel Ashworth",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2023-11-12T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.927Z",
+      "checksum": "14d55175eee2fa2f1407ee9ae1bbb5b99b05c94ca641ecd5d1f4d69c4aa856b0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FA353710-3317-5F2B-917B-12822ED43B3D"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "1857953A-EA7A-5227-9FC2-3C75AFD1A953",
+      "Direction": "Inbound",
+      "Sender": "Manish Agarwal",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Birch Sensory",
+      "Content": "I can't find the session materials from the event in my portal. Are they available somewhere?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-02-22T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.937Z",
+      "checksum": "5d4ddb25fec8d8b68a6935335aec0cc91ad1a06585a85dbdf49046401c5c26c1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CBB06DB2-F665-577C-B863-5F0CBA9FB6B5"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Manish Agarwal",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-02-24T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.969Z",
+      "checksum": "0810627e7308a69c553ecb369cf2755b7d2021d00375de6e4e65c72fabd41977"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EDED7875-5E93-5EE3-BE42-B2E10F8495E5"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "1857953A-EA7A-5227-9FC2-3C75AFD1A953",
+      "Direction": "Inbound",
+      "Sender": "Manish Agarwal",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-02-25T11:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.983Z",
+      "checksum": "56a60ba12e1538112a775fec83c71511665f80a3401859666aba00fbe0f0d660"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16B6F837-F411-587B-AB2D-39C022E90066"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Manish Agarwal",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-02-25T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:10.995Z",
+      "checksum": "5cf247150ecb3d6ff01081ffee5ffa335507c8571727ac7b32656246c79eaeab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F10290B0-B2BD-5318-8D14-0AFEC9477DEC"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "1857953A-EA7A-5227-9FC2-3C75AFD1A953",
+      "Direction": "Inbound",
+      "Sender": "Manish Agarwal",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-02-26T06:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.007Z",
+      "checksum": "c6b0f63f87402277b530c0adbec79be891340ffdba55398fe01e6bd064cadc15"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A369BEFD-83E4-5284-B136-C89B7E249881"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Manish Agarwal",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-02-28T18:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.019Z",
+      "checksum": "5f5fe50a2432eddc8a989fc69f8faa28fab4e485e190a1d7cc4e9b9cb2b43b9a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "54AD34B1-7E9B-5F3F-9A2B-A93B66B8A4C8"
+    },
+    "fields": {
+      "PortalSessionID": "6D1EC1C2-8856-5C44-98FE-C12382ADF08B",
+      "ThreadID": "28BC9FAF-2242-50F5-AC7E-84A41731F2AD",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Manish Agarwal",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-02-29T21:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.032Z",
+      "checksum": "4407106b2bd906d04d366f6f5a0167b92215ad357fb05104f14bad03f31859b4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA9B4B09-EC13-59FA-BFD5-75BFB4D1E5C7"
+    },
+    "fields": {
+      "PortalSessionID": "9CAD23BE-3DA6-574C-B9EE-EFE561245BCA",
+      "ThreadID": "86A98E0A-BDBC-5CD6-AB8C-36D2038C12BB",
+      "PersonID": "7E0ADF2A-A35B-560D-B38E-89CE8905F56E",
+      "Direction": "Inbound",
+      "Sender": "Heidi Dietrich",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Cedar Food Safety",
+      "Content": "I can't find the session materials from the event in my portal. Are they available somewhere?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-08-26T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.045Z",
+      "checksum": "7087525993a146798c2030bd28e12147fb0ce2b64bdc370d5a73827a603f422b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7E6DAB1C-0DF6-573F-8797-3A2A5A97E438"
+    },
+    "fields": {
+      "PortalSessionID": "9CAD23BE-3DA6-574C-B9EE-EFE561245BCA",
+      "ThreadID": "86A98E0A-BDBC-5CD6-AB8C-36D2038C12BB",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Heidi Dietrich",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-08-26T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.056Z",
+      "checksum": "de27a303adbbee8a39dab4c1bf9cb1df98a90b05b84d27514b9cb609277f6837"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A137C020-493D-57EB-A978-A36C2EC86E5F"
+    },
+    "fields": {
+      "PortalSessionID": "9CAD23BE-3DA6-574C-B9EE-EFE561245BCA",
+      "ThreadID": "86A98E0A-BDBC-5CD6-AB8C-36D2038C12BB",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Heidi Dietrich",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-08-27T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.069Z",
+      "checksum": "62be37ceb3a892ba4101d68708af072b6f595f5170edd4f9063797a37b04cc66"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "764D3ED5-297B-5188-9444-76C6C9724A39"
+    },
+    "fields": {
+      "PortalSessionID": "9B873262-1FF9-5C8A-80CA-AE42E8D79D1D",
+      "ThreadID": "3B1F845D-63E3-5E07-B602-197FF5DDE8E2",
+      "PersonID": "A420938B-651F-5A1B-A187-019CE67775CE",
+      "Direction": "Inbound",
+      "Sender": "David Ives",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Kilnbrook Cheese & Provisions",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-11-12T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.079Z",
+      "checksum": "542ac561ac0a3b98539c5d77bfd707e4b771bf8cfd665a8ee3b977ed5f590792"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1CB28A2B-7BA4-5883-AD57-C399838D56A1"
+    },
+    "fields": {
+      "PortalSessionID": "9B873262-1FF9-5C8A-80CA-AE42E8D79D1D",
+      "ThreadID": "3B1F845D-63E3-5E07-B602-197FF5DDE8E2",
+      "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Direction": "Outbound",
+      "Sender": "Leif Falk",
+      "Recipient": "David Ives",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-14T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.108Z",
+      "checksum": "92acd706b54bb2d07dfc7874bf644040a0ce7213c0be1a95ef2548e43a79e0ae"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18705BE6-904F-5351-8A61-C294C6018330"
+    },
+    "fields": {
+      "PortalSessionID": "9B873262-1FF9-5C8A-80CA-AE42E8D79D1D",
+      "ThreadID": "3B1F845D-63E3-5E07-B602-197FF5DDE8E2",
+      "PersonID": "A420938B-651F-5A1B-A187-019CE67775CE",
+      "Direction": "Inbound",
+      "Sender": "David Ives",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-11-15T06:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.120Z",
+      "checksum": "1dd3af28dfd6dacd3ecb4cf19871640d43e331499e473bdb873ce3bd5b5fea09"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "78A0CD18-CC8D-5D07-8335-A351C9FA5AF1"
+    },
+    "fields": {
+      "PortalSessionID": "9B873262-1FF9-5C8A-80CA-AE42E8D79D1D",
+      "ThreadID": "3B1F845D-63E3-5E07-B602-197FF5DDE8E2",
+      "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Direction": "Outbound",
+      "Sender": "Leif Falk",
+      "Recipient": "David Ives",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-18T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.134Z",
+      "checksum": "05c31d7b2eec51e514bd56b7a9da0ee6ed6bd647edcbd8d4132bdd6d9acf5f1b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4842E914-C66F-5C76-9804-691D4C0D75E4"
+    },
+    "fields": {
+      "PortalSessionID": "9B873262-1FF9-5C8A-80CA-AE42E8D79D1D",
+      "ThreadID": "3B1F845D-63E3-5E07-B602-197FF5DDE8E2",
+      "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Direction": "Outbound",
+      "Sender": "Leif Falk",
+      "Recipient": "David Ives",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-18T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.148Z",
+      "checksum": "648cd0720f437e979354e803c9f424cccd92ab79b2a4427f77313c387a6f4d22"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5960329D-24CA-59F2-A1DD-B017B6E7410A"
+    },
+    "fields": {
+      "PortalSessionID": "E5410087-00AB-5B08-9109-7CA8C1B0512F",
+      "ThreadID": "C340F004-1F05-5BD3-ADCB-D66091F2674F",
+      "PersonID": "02CC3CD5-9ADF-5DCB-974D-4FCDBD2969E3",
+      "Direction": "Inbound",
+      "Sender": "Andres Herrera",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Aldermere Cheese School",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-11-20T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.162Z",
+      "checksum": "6848069e93bdceb91d97948ca8bf365e3f3d59c0de7aa3c70ac25a6ce4239d5e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6C2B6C87-5C35-52CC-949F-60AB50C572FA"
+    },
+    "fields": {
+      "PortalSessionID": "E5410087-00AB-5B08-9109-7CA8C1B0512F",
+      "ThreadID": "C340F004-1F05-5BD3-ADCB-D66091F2674F",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Andres Herrera",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-23T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.175Z",
+      "checksum": "5fa4046d90d4f60a6938accc4ea924a033ee7f76aa64b89aa2dc9017364d5a6a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2850A3B5-8559-504C-85A6-47B79B5FC64A"
+    },
+    "fields": {
+      "PortalSessionID": "E5410087-00AB-5B08-9109-7CA8C1B0512F",
+      "ThreadID": "C340F004-1F05-5BD3-ADCB-D66091F2674F",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Andres Herrera",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-26T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.188Z",
+      "checksum": "b7b2b6394c62b1896aa827357e6f363c851c15c1af856471533f4f4d8c6f2537"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93C47A03-5144-5A40-9695-8989936A17AA"
+    },
+    "fields": {
+      "PortalSessionID": "251E91A2-CAFC-52C4-AFBF-18099AFA4191",
+      "ThreadID": "944BB2B3-3F16-5DD5-805A-FD11B15FF4B0",
+      "PersonID": "6FDDF5AB-8E81-59AA-9B7B-D97715370668",
+      "Direction": "Inbound",
+      "Sender": "David Ludlow",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Aldermere Cheese School",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-11-25T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.202Z",
+      "checksum": "2d2520fb1687069d40d9b3afdaed51c0f100b624c4671c68b9f7202fbb5af38b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "993FBAE6-5E38-592A-8B32-E5A40ACD91AF"
+    },
+    "fields": {
+      "PortalSessionID": "251E91A2-CAFC-52C4-AFBF-18099AFA4191",
+      "ThreadID": "944BB2B3-3F16-5DD5-805A-FD11B15FF4B0",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "David Ludlow",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-26T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.216Z",
+      "checksum": "a1fa83454c1859734489d34c3c6350a140dd847c82b90bcb4f99579b0f71b5fe"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F933919B-467A-538E-AE31-BF27DBE7FA88"
+    },
+    "fields": {
+      "PortalSessionID": "251E91A2-CAFC-52C4-AFBF-18099AFA4191",
+      "ThreadID": "944BB2B3-3F16-5DD5-805A-FD11B15FF4B0",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "David Ludlow",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-27T19:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.227Z",
+      "checksum": "f06da0ccd521be840edd15483d073f63547405c39eb2e421a31a5e44c9ce29ea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60D0B767-296F-5232-A786-643AD33F81CE"
+    },
+    "fields": {
+      "PortalSessionID": "D68BB3DE-74EB-595D-ADDE-F274790D2B84",
+      "ThreadID": "994F7A84-C72D-5244-A97B-E55B10575E98",
+      "PersonID": "2316E84B-EEFC-5D5A-B582-5AA12A01714D",
+      "Direction": "Inbound",
+      "Sender": "Esteban Luna",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Kilnbrook Dairy",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-11-24T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.258Z",
+      "checksum": "7270d426bc0c44c3b0c82287d412b837e8098ac2d37c1442cfdf5780d870d22f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "66B0B236-74FE-5FDD-B055-9C2AC9CF6240"
+    },
+    "fields": {
+      "PortalSessionID": "D68BB3DE-74EB-595D-ADDE-F274790D2B84",
+      "ThreadID": "994F7A84-C72D-5244-A97B-E55B10575E98",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Esteban Luna",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-26T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.271Z",
+      "checksum": "6d7e2118b8b1a941fe1f11e6fc1cdb23f1be709d456f6a4f0437a163e7559449"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "52BFB020-688B-5CE2-84A7-5E327C25ACA0"
+    },
+    "fields": {
+      "PortalSessionID": "D68BB3DE-74EB-595D-ADDE-F274790D2B84",
+      "ThreadID": "994F7A84-C72D-5244-A97B-E55B10575E98",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Esteban Luna",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-11-28T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.285Z",
+      "checksum": "2c9c18ef5791e03b1494c3fae0329e0322e287ce4d64e6638603975b480ec5f2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E993545-C62A-52D7-8D92-EFF50B992A2A"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": "A25301FB-735B-50DE-99CE-3FC7C1FF701F",
+      "Direction": "Inbound",
+      "Sender": "Elke Iversen",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Aldermere Cheese School",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-12-12T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.300Z",
+      "checksum": "8f36a221f6d7f34f5ec0b24db68fe88dd563b6a1403e736e27921ed7108be98e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24C82D8D-A314-5A51-B21F-9EBF6323ED77"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Elke Iversen",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-12-14T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.312Z",
+      "checksum": "22a621687d02a1cfc5617bb58811c5a98c5b26ba35c9e2b1b59d6baf2bfe7839"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D1FF1E56-D0D3-5FE2-AB71-9B1D44B35C5D"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": "A25301FB-735B-50DE-99CE-3FC7C1FF701F",
+      "Direction": "Inbound",
+      "Sender": "Elke Iversen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-12-15T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.325Z",
+      "checksum": "ba9c89ed5c12c4d2e10f585755cb6abd70ce47a0eb8556d033514e0967208df3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1FD567DA-B318-5746-959C-80529D12660C"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Elke Iversen",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-12-16T14:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.336Z",
+      "checksum": "2bb2dfab9406b8f810813be331c0a76145370b29171c70cc3383aacccfb4608e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "66DAF47A-57A3-57AC-9BC5-689F324D134B"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": "A25301FB-735B-50DE-99CE-3FC7C1FF701F",
+      "Direction": "Inbound",
+      "Sender": "Elke Iversen",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thank you! Let me know if you need anything else from me.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2024-12-17T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.348Z",
+      "checksum": "d303cddb71dfb4f9101efcfa075a9db155d22a6666306b014f6dfcf1383d6542"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4B91AB2E-DF04-5CDD-8803-F5470FF11F91"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Elke Iversen",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-12-19T16:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.361Z",
+      "checksum": "5bd5f8793aa6eea3bab32dc2da1f1603e0a6882f99313e9633b60bfae789fe40"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "469177A6-1E46-5F95-9AE9-EA2835CF2B0C"
+    },
+    "fields": {
+      "PortalSessionID": "0493F5D4-D5D1-5B62-9897-F3C207E8D84B",
+      "ThreadID": "0677DCC8-3074-59FE-AB17-61763351ADD2",
+      "PersonID": null,
+      "Direction": "Outbound",
+      "Sender": "ICF Member Services",
+      "Recipient": "Elke Iversen",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2024-12-19T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.371Z",
+      "checksum": "e69bee4529a50f46220c8985adbcca19ddb28f1342737caa595d954da381cf9e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D376A20-9E36-5470-8F94-BBA72061781A"
+    },
+    "fields": {
+      "PortalSessionID": "738D5705-113D-5281-A889-2F8B25256FFC",
+      "ThreadID": "33BF13A2-EE25-5997-9184-6F367E18867D",
+      "PersonID": "63B30718-A642-543B-94CC-932B52809832",
+      "Direction": "Inbound",
+      "Sender": "Grace Brigham",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Wheel Sensory",
+      "Content": "I can't find the session materials from the event in my portal. Are they available somewhere?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-07-07T15:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.402Z",
+      "checksum": "46b66a95a0ec34976e38ccf6a166a9394bc68ff6d2199e713402e41ff211f9a2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7981FE09-44CF-580B-9A29-2D0C87A5CFE1"
+    },
+    "fields": {
+      "PortalSessionID": "738D5705-113D-5281-A889-2F8B25256FFC",
+      "ThreadID": "33BF13A2-EE25-5997-9184-6F367E18867D",
+      "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Direction": "Outbound",
+      "Sender": "Leif Falk",
+      "Recipient": "Grace Brigham",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-07-10T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.413Z",
+      "checksum": "292f1c527089a94a88e93bd8dfe9e784262011c307c8ddb1a733e18b2d0c3bda"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D15FDD89-756A-5F99-945B-00178B278430"
+    },
+    "fields": {
+      "PortalSessionID": "738D5705-113D-5281-A889-2F8B25256FFC",
+      "ThreadID": "33BF13A2-EE25-5997-9184-6F367E18867D",
+      "PersonID": "63B30718-A642-543B-94CC-932B52809832",
+      "Direction": "Inbound",
+      "Sender": "Grace Brigham",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-07-11T05:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.426Z",
+      "checksum": "6440b390621c734e489fdbae090dccd06475a3670ee17a9530ec419e2e68b1bf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3BE2E4A1-7D49-59E9-A9E7-26D1E4DFFE6F"
+    },
+    "fields": {
+      "PortalSessionID": "738D5705-113D-5281-A889-2F8B25256FFC",
+      "ThreadID": "33BF13A2-EE25-5997-9184-6F367E18867D",
+      "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Direction": "Outbound",
+      "Sender": "Leif Falk",
+      "Recipient": "Grace Brigham",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-07-12T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.437Z",
+      "checksum": "bac29b9b419a45cc0686f5070ed6ba149378b90a86f4960aa7e103b968b827fe"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0D4A76B3-2099-58E9-B23F-219F7136F2F8"
+    },
+    "fields": {
+      "PortalSessionID": "738D5705-113D-5281-A889-2F8B25256FFC",
+      "ThreadID": "33BF13A2-EE25-5997-9184-6F367E18867D",
+      "PersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "Direction": "Outbound",
+      "Sender": "Leif Falk",
+      "Recipient": "Grace Brigham",
+      "Subject": null,
+      "Content": "Good news — this has been taken care of. Closing the thread, but reply any time to reopen.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-07-15T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.450Z",
+      "checksum": "bb91d917a1d0ad21a426647c2cbd799d2ff3d5a613cbda4ad35966d5b674c4fa"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "10D01DCB-2FBA-5F54-AF77-7AC00E9697BA"
+    },
+    "fields": {
+      "PortalSessionID": "5B552824-B2E7-5A89-9928-BC986B6D9EA5",
+      "ThreadID": "9992F029-16D6-57E3-8F34-4CA674FC91DA",
+      "PersonID": "5522B1A4-9AA7-5F5B-AEFA-300213709BCA",
+      "Direction": "Inbound",
+      "Sender": "Cesar Cabrera",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Curd Sensory",
+      "Content": "I registered and paid but couldn't attend — could you let me know the refund options?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-09-05T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.463Z",
+      "checksum": "cebd7414794be1c01610b8f21bed7afb7c98659eb87e3d590e3ba4bfee9876cd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6518D467-C27C-561C-BA0E-D3C48E4E70F3"
+    },
+    "fields": {
+      "PortalSessionID": "5B552824-B2E7-5A89-9928-BC986B6D9EA5",
+      "ThreadID": "9992F029-16D6-57E3-8F34-4CA674FC91DA",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Cesar Cabrera",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-09-06T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.475Z",
+      "checksum": "76eb48f680003ddd2e3f5273062434fb6134c7d47491bf8ef4c5345937b9cddf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "933E2DEC-B21B-5BEE-938A-262A25F693D2"
+    },
+    "fields": {
+      "PortalSessionID": "5B552824-B2E7-5A89-9928-BC986B6D9EA5",
+      "ThreadID": "9992F029-16D6-57E3-8F34-4CA674FC91DA",
+      "PersonID": "5522B1A4-9AA7-5F5B-AEFA-300213709BCA",
+      "Direction": "Inbound",
+      "Sender": "Cesar Cabrera",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-09-07T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.488Z",
+      "checksum": "87f774be57a70949e2d6a8a5953d61f0d02559badfbb9566425690b33b4bfebb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0091A5A3-7E49-50D2-AF01-E1AA15999BDC"
+    },
+    "fields": {
+      "PortalSessionID": "5B552824-B2E7-5A89-9928-BC986B6D9EA5",
+      "ThreadID": "9992F029-16D6-57E3-8F34-4CA674FC91DA",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Cesar Cabrera",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-09-10T07:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.499Z",
+      "checksum": "05bf2f87a37575f6f21607c7487925ecc497ac60a1041ecf0af415244f5ec8eb"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "22AB5EF1-F440-5452-A2DC-CC9D34CFE2BD"
+    },
+    "fields": {
+      "PortalSessionID": "5B552824-B2E7-5A89-9928-BC986B6D9EA5",
+      "ThreadID": "9992F029-16D6-57E3-8F34-4CA674FC91DA",
+      "PersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "Direction": "Outbound",
+      "Sender": "Duarte Carvalho",
+      "Recipient": "Cesar Cabrera",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-09-11T04:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.510Z",
+      "checksum": "1786f12155a498fc3f05275bbbe5f449a90be36ca25f0135fc3d11e8eab4a658"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "25B6259C-105F-522D-B617-23164613559C"
+    },
+    "fields": {
+      "PortalSessionID": "027DD7EF-1BB5-5485-8D84-3D1830D44686",
+      "ThreadID": "57E09F40-CDA5-5141-85EE-6CE84FB71CD5",
+      "PersonID": "3DC650C8-27D1-5CAA-B760-F8938048B235",
+      "Direction": "Inbound",
+      "Sender": "Adriana Maldonado",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Loamfield Fine Cheese",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-10-17T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.538Z",
+      "checksum": "562088bed9637b6d67ef967ebf60935d71b029987f7f5ff7467f6b4c849c8647"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F460026B-246B-508D-8E88-ADB7D42DA4D7"
+    },
+    "fields": {
+      "PortalSessionID": "027DD7EF-1BB5-5485-8D84-3D1830D44686",
+      "ThreadID": "57E09F40-CDA5-5141-85EE-6CE84FB71CD5",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Adriana Maldonado",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-10-18T21:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.551Z",
+      "checksum": "46db34be162277e4c0e548b3204dd94ea5dfd1b80723c557dcf9ba9ea3af4d25"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "28F109CE-D528-5AC8-9646-C629D20F14E4"
+    },
+    "fields": {
+      "PortalSessionID": "027DD7EF-1BB5-5485-8D84-3D1830D44686",
+      "ThreadID": "57E09F40-CDA5-5141-85EE-6CE84FB71CD5",
+      "PersonID": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+      "Direction": "Outbound",
+      "Sender": "June Fenwick-Ludlow",
+      "Recipient": "Adriana Maldonado",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-10-19T14:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.566Z",
+      "checksum": "a6959141e8771c40dae4d53c8efe4cb5a068c789328b944b33ff81fea9994864"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4EC29A85-097F-5B72-A109-611C3D7C6DBA"
+    },
+    "fields": {
+      "PortalSessionID": "5B1700A5-2F89-5D89-BFA3-96D022057891",
+      "ThreadID": "773F4123-874D-536D-9B65-38CFFFA3C5A2",
+      "PersonID": "0C34716B-7CB9-5CAD-A331-F62CD9DDE8FB",
+      "Direction": "Inbound",
+      "Sender": "Tomasz Baran-Nagy",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Reedmere Creamery",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-11-30T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.578Z",
+      "checksum": "10027d4b63d936022831361388062c64cf05ba00e90c83b78b51aa0d1e70329f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F10C6BD8-FF42-5F92-B945-2E908B296D50"
+    },
+    "fields": {
+      "PortalSessionID": "5B1700A5-2F89-5D89-BFA3-96D022057891",
+      "ThreadID": "773F4123-874D-536D-9B65-38CFFFA3C5A2",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Tomasz Baran-Nagy",
+      "Subject": null,
+      "Content": "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-12-03T09:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.589Z",
+      "checksum": "14da362d0b26aac9d78982072752fc95e54d674ab4358a6f1244d3383224a407"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "853B3AA2-2015-5EE5-8382-FF6A6C126F14"
+    },
+    "fields": {
+      "PortalSessionID": "5B1700A5-2F89-5D89-BFA3-96D022057891",
+      "ThreadID": "773F4123-874D-536D-9B65-38CFFFA3C5A2",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Tomasz Baran-Nagy",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-12-04T22:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.601Z",
+      "checksum": "09f7ac6e70bccb6420cab7e181e9912c8a1bb2c5655c78778da94e989ea54fcf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "234CD3E8-45DD-5EA2-A12B-D7F670DB05CF"
+    },
+    "fields": {
+      "PortalSessionID": "6724487D-48BD-54F8-9FB6-FFCACDE05742",
+      "ThreadID": "B7F7E69E-E694-567A-927A-41E2FA395FB2",
+      "PersonID": "9DE343E8-A72A-558A-9FC3-F7110F73B75D",
+      "Direction": "Inbound",
+      "Sender": "Danielle Okafor",
+      "Recipient": "ICF Member Services",
+      "Subject": "Employer record out of date — Mistlebrook Dairy",
+      "Content": "The roster still shows my old affiliation. What do you need from me to correct it?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2025-12-21T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.613Z",
+      "checksum": "9058078a26fab060020f8dbeea2b8fcf97faf146615a3702f8e38336342f70f2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "941992C8-9AAD-5437-9D21-04CDFCB2CAD5"
+    },
+    "fields": {
+      "PortalSessionID": "6724487D-48BD-54F8-9FB6-FFCACDE05742",
+      "ThreadID": "B7F7E69E-E694-567A-927A-41E2FA395FB2",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Danielle Okafor",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-12-22T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.624Z",
+      "checksum": "1741c6251c2ed471867970b447743cc8f6434c12cf698cf444ceeb8737d11a9e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6DCF4669-78B4-5C3F-8F4E-1391339F475B"
+    },
+    "fields": {
+      "PortalSessionID": "6724487D-48BD-54F8-9FB6-FFCACDE05742",
+      "ThreadID": "B7F7E69E-E694-567A-927A-41E2FA395FB2",
+      "PersonID": "1C01EEFE-690E-512A-AE94-4DF93501B708",
+      "Direction": "Outbound",
+      "Sender": "Catarina Parisi",
+      "Recipient": "Danielle Okafor",
+      "Subject": null,
+      "Content": "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2025-12-23T20:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.635Z",
+      "checksum": "252848369dd676ef1614abfb43bf2e1152984cbb2a33dde29fcba1495c09902c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E9DE92A-6625-5005-A6CC-B8BB88A02B01"
+    },
+    "fields": {
+      "PortalSessionID": "594D2890-C01A-596C-B548-6F83F300385A",
+      "ThreadID": "A3FF7E74-F41D-5EBC-81F0-427DD1944BBB",
+      "PersonID": "D5E58D77-0401-58BF-B4E0-78D472994CFE",
+      "Direction": "Inbound",
+      "Sender": "Anders Wagner",
+      "Recipient": "ICF Member Services",
+      "Subject": "Refund request — Workshop: Cedar Retailing",
+      "Content": "Quick question about my event registration — can it be transferred to a colleague?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2026-01-23T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.645Z",
+      "checksum": "11f68a5737f210506162b008cb3d822f6d3b1ed3781f323e7333afd751e11ce7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "85113643-FE69-56A2-B901-58D9EDB34DB8"
+    },
+    "fields": {
+      "PortalSessionID": "594D2890-C01A-596C-B548-6F83F300385A",
+      "ThreadID": "A3FF7E74-F41D-5EBC-81F0-427DD1944BBB",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Anders Wagner",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-01-24T17:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.674Z",
+      "checksum": "337ca8d66bdf490bbdfd71725c52c9a5a5dee240cf930b8062ff98cce99e37ce"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FE4B3B2E-102B-5A50-9A52-A0D2B2057CD5"
+    },
+    "fields": {
+      "PortalSessionID": "594D2890-C01A-596C-B548-6F83F300385A",
+      "ThreadID": "A3FF7E74-F41D-5EBC-81F0-427DD1944BBB",
+      "PersonID": "D5E58D77-0401-58BF-B4E0-78D472994CFE",
+      "Direction": "Inbound",
+      "Sender": "Anders Wagner",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2026-01-25T01:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.687Z",
+      "checksum": "5f4549c5916405067716319c8fc0d5a87f3a422ed3048714f55c6126daa7bfab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6F080ACE-3A15-5232-A357-1C03ACED2492"
+    },
+    "fields": {
+      "PortalSessionID": "594D2890-C01A-596C-B548-6F83F300385A",
+      "ThreadID": "A3FF7E74-F41D-5EBC-81F0-427DD1944BBB",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Anders Wagner",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-01-27T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.699Z",
+      "checksum": "e0cfcfe989a4284c0d12338ec0efad1039a6fa55b7e47354f9a0c58ff014a95f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C2F4A9BB-D607-59B8-947D-11B7ED948B26"
+    },
+    "fields": {
+      "PortalSessionID": "594D2890-C01A-596C-B548-6F83F300385A",
+      "ThreadID": "A3FF7E74-F41D-5EBC-81F0-427DD1944BBB",
+      "PersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "Direction": "Outbound",
+      "Sender": "Lars Mikkelsen",
+      "Recipient": "Anders Wagner",
+      "Subject": null,
+      "Content": "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-01-28T03:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.711Z",
+      "checksum": "0d9d9119cbb543c5fc664cf0f1216a22fa309c2279acedc566ba2f281a41ea2b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "14CF4022-5AE4-5524-9D40-52C4F59B4652"
+    },
+    "fields": {
+      "PortalSessionID": "144CEA0E-2800-5DE2-BCD9-791E52391481",
+      "ThreadID": "FC6CE062-C627-585B-850A-7E721FFA492F",
+      "PersonID": "8A87AB15-2766-52DB-8B17-10F08727BE37",
+      "Direction": "Inbound",
+      "Sender": "Tom Reyes",
+      "Recipient": "ICF Member Services",
+      "Subject": "How do I submit written testimony through the federation?",
+      "Content": "I'd like some guidance on how to make the most of my membership this year.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2026-06-20T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.722Z",
+      "checksum": "3d901bf7d316b4662bff69f0a66a2dbf99929faf6fd7f1b5e6e65104ae676717"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "737059DD-AC0B-5E39-95CD-E845E1C099D8"
+    },
+    "fields": {
+      "PortalSessionID": "144CEA0E-2800-5DE2-BCD9-791E52391481",
+      "ThreadID": "FC6CE062-C627-585B-850A-7E721FFA492F",
+      "PersonID": "93975800-1B25-54DC-88B2-144A70F901E7",
+      "Direction": "Outbound",
+      "Sender": "Mai Pham",
+      "Recipient": "Tom Reyes",
+      "Subject": null,
+      "Content": "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-06-21T08:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.734Z",
+      "checksum": "c1cbb453f0067f41ad95d4f409fb9e57c4b4e3dabdfb2d77606cd17743666fb2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA9D39EE-C800-5237-B745-584CE4C91FC4"
+    },
+    "fields": {
+      "PortalSessionID": "144CEA0E-2800-5DE2-BCD9-791E52391481",
+      "ThreadID": "FC6CE062-C627-585B-850A-7E721FFA492F",
+      "PersonID": "8A87AB15-2766-52DB-8B17-10F08727BE37",
+      "Direction": "Inbound",
+      "Sender": "Tom Reyes",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "New",
+      "ReceivedAt": "2026-06-22T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.746Z",
+      "checksum": "f680869f395c21b6557fbc8a97ad42c9301ba2926c9cad17f3831e001bf29d7a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BCD5AD76-09F0-5CCF-9AE6-CA0E2FB1081F"
+    },
+    "fields": {
+      "PortalSessionID": "1F26B671-4EED-5142-BE93-764B4E74298B",
+      "ThreadID": "5FE6C838-6415-58E0-8584-7B8B3180497B",
+      "PersonID": "8090D46F-6D4D-54FE-B90B-8541EEF33569",
+      "Direction": "Inbound",
+      "Sender": "Bob Kowalski",
+      "Recipient": "ICF Member Services",
+      "Subject": "Invoice went to old Ostergaard AP contact after acquisition",
+      "Content": "Our AP contact changed and I think the invoice went to the wrong inbox. Can you resend the current statement?",
+      "IsSecure": true,
+      "Status": "New",
+      "ReceivedAt": "2026-07-26T00:00:00Z",
+      "IsStarred": true,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.758Z",
+      "checksum": "2563b146d4dcbfc4f27e3f67c7991edec064c3ddf48e755b415c263789cc4438"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FC8D6D01-EDC3-5B62-9FA4-B4349F6A2EA6"
+    },
+    "fields": {
+      "PortalSessionID": "DDA0EDED-C71B-5577-AFF6-CB5CD12E2290",
+      "ThreadID": "07E180E8-1A2B-5905-89A3-9E6D8DDA6FD0",
+      "PersonID": "1D0FED47-F850-561A-9CFB-649953199664",
+      "Direction": "Inbound",
+      "Sender": "Kate O'Leary",
+      "Recipient": "ICF Member Services",
+      "Subject": "Duplicate member records — Kate O'Leary appears twice",
+      "Content": "My employer information is out of date in the member directory — could you update the record?",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2026-07-25T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.771Z",
+      "checksum": "89c95ac635271a76ce151954b11f1ca5be457156bd2d68b0a647c1068fe559c9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6C6A00A4-E161-5BF1-8885-DBC7163B6923"
+    },
+    "fields": {
+      "PortalSessionID": "DDA0EDED-C71B-5577-AFF6-CB5CD12E2290",
+      "ThreadID": "07E180E8-1A2B-5905-89A3-9E6D8DDA6FD0",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Kate O'Leary",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-07-25T15:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.781Z",
+      "checksum": "49720e3f58e7eb2be13e40314eff9dcc3fe7dfde546478c5d85c072734b36518"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40C2DF0A-452E-54A8-82AE-F9EB4A5B97DE"
+    },
+    "fields": {
+      "PortalSessionID": "DDA0EDED-C71B-5577-AFF6-CB5CD12E2290",
+      "ThreadID": "07E180E8-1A2B-5905-89A3-9E6D8DDA6FD0",
+      "PersonID": "1D0FED47-F850-561A-9CFB-649953199664",
+      "Direction": "Inbound",
+      "Sender": "Kate O'Leary",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2026-07-27T23:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.805Z",
+      "checksum": "aaf7eca79e0aa89dced48cfef5accf7d6c73410e8a17643f4d5c27756db4a4d8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04DFB6DC-F3AA-5279-A7DA-7A982DFD2828"
+    },
+    "fields": {
+      "PortalSessionID": "DDA0EDED-C71B-5577-AFF6-CB5CD12E2290",
+      "ThreadID": "07E180E8-1A2B-5905-89A3-9E6D8DDA6FD0",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Outbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "Kate O'Leary",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-07-29T11:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.817Z",
+      "checksum": "ad79bae8fa59355244d67f151615ca04f95038c2eec6e4763745ca553027d4a4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "21F10AA2-919B-57A0-81BF-6B9A8297A70F"
+    },
+    "fields": {
+      "PortalSessionID": "DDA0EDED-C71B-5577-AFF6-CB5CD12E2290",
+      "ThreadID": "07E180E8-1A2B-5905-89A3-9E6D8DDA6FD0",
+      "PersonID": "1D0FED47-F850-561A-9CFB-649953199664",
+      "Direction": "Inbound",
+      "Sender": "Kate O'Leary",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
+      "IsSecure": true,
+      "Status": "New",
+      "ReceivedAt": "2026-07-30T23:30:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.828Z",
+      "checksum": "c8e690789862e9ebf257d63917b690a23a604346ac84b04cdcabcb6f4f064164"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1070B8E-9668-5391-8394-921404290157"
+    },
+    "fields": {
+      "PortalSessionID": "392E62BC-1AA3-521D-A6BE-63B1DD7826CA",
+      "ThreadID": "D1AE67C3-1B1D-53E4-AA54-26603A0F957F",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Inbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "ICF Member Services",
+      "Subject": "Food Safety Committee roster shows outdated affiliation",
+      "Content": "I noticed my organization's listing has stale details. Happy to provide the current information.",
+      "IsSecure": true,
+      "Status": "Replied",
+      "ReceivedAt": "2026-06-10T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.841Z",
+      "checksum": "f0c2f8651906d80bce0a6ccab60fd78c339a9c67788e568ddbfb12e7c020cfa5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "05BE48F4-CE4C-53F0-8D61-26701EECE479"
+    },
+    "fields": {
+      "PortalSessionID": "392E62BC-1AA3-521D-A6BE-63B1DD7826CA",
+      "ThreadID": "D1AE67C3-1B1D-53E4-AA54-26603A0F957F",
+      "PersonID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "Direction": "Outbound",
+      "Sender": "Bianca Fonseca",
+      "Recipient": "Gwen Whitfield",
+      "Subject": null,
+      "Content": "Got it, thanks for the details. Let me check with the team and get back to you.",
+      "IsSecure": true,
+      "Status": "Sent",
+      "ReceivedAt": "2026-06-11T21:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.854Z",
+      "checksum": "c2b5005209f556bcc110adaae41240145ae765f49f9659d9f3f96a98f7e48e25"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "402C00CA-6D8A-5FC4-8E68-1F78BCD9A94F"
+    },
+    "fields": {
+      "PortalSessionID": "392E62BC-1AA3-521D-A6BE-63B1DD7826CA",
+      "ThreadID": "D1AE67C3-1B1D-53E4-AA54-26603A0F957F",
+      "PersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "Direction": "Inbound",
+      "Sender": "Gwen Whitfield",
+      "Recipient": "ICF Member Services",
+      "Subject": null,
+      "Content": "Thanks — just checking in on where this stands.",
+      "IsSecure": true,
+      "Status": "Read",
+      "ReceivedAt": "2026-06-12T10:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.867Z",
+      "checksum": "e2d8215ae98170cea992f3bd0c557f3117ef8fba323f613de68de4f754957890"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5B02CA91-DA34-504F-84C0-510F220D0FF4"
+    },
+    "fields": {
+      "PortalSessionID": "6098CAC3-6AEC-5C3C-80DA-E7091086D4C2",
+      "ThreadID": "57D718FA-DEA2-5EDC-A8E4-A97215FFD5F8",
+      "PersonID": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+      "Direction": "Inbound",
+      "Sender": "Elena Rodriguez",
+      "Recipient": "ICF Member Services",
+      "Subject": "Session recordings missing from attendee portal",
+      "Content": "Quick question about my event registration — can it be transferred to a colleague?",
+      "IsSecure": true,
+      "Status": "New",
+      "ReceivedAt": "2026-06-25T00:00:00Z",
+      "IsStarred": false,
+      "IsImported": false,
+      "SourceChannel": "Portal"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:11.877Z",
+      "checksum": "7f7ab827636bd8c733c882d473e3c8f40beeb200820a41a5f800c6f1879ac467"
+    }
+  }
+]

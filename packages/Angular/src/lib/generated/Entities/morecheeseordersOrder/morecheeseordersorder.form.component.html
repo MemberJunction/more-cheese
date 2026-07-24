@@ -78,7 +78,7 @@
             [Record]="record"
             [ShowLabel]="true"
             FieldName="PaymentStatus"
-            Type="textbox"
+            Type="select"
             [EditMode]="EditMode"
             [FormContext]="formContext"
         ></mj-form-field>
@@ -115,31 +115,6 @@
          RELATED ENTITY PANELS
          ======================================== -->
 
-    <!-- Order Lines Section -->
-    <mj-collapsible-panel
-        SectionKey="moreCheeseOrderLines"
-        SectionName="Order Lines"
-        Icon="fa fa-table"
-        Variant="related-entity"
-        [Form]="this"
-        [FormContext]="formContext"
-        [BadgeCount]="GetSectionRowCount('moreCheeseOrderLines')"
-        [DefaultExpanded]="false">
-        @if (record.IsSaved) {
-        <div>
-            <mj-explorer-entity-data-grid
-                [Params]="BuildRelationshipViewParamsByEntityName('MoreCheese: Order Lines','OrderID')"
-                [NewRecordValues]="NewRecordValues('MoreCheese: Order Lines')"
-                [AllowLoad]="IsSectionExpanded('moreCheeseOrderLines')"
-                [ShowToolbar]="false"
-                (Navigate)="OnFormNavigate($event)"
-                (AfterDataLoad)="SetSectionRowCount('moreCheeseOrderLines', $event.totalRowCount)"
-                >
-            </mj-explorer-entity-data-grid>
-        </div>
-        }
-    </mj-collapsible-panel>
-
     <!-- Payments Section -->
     <mj-collapsible-panel
         SectionKey="moreCheesePayments"
@@ -159,6 +134,31 @@
                 [ShowToolbar]="false"
                 (Navigate)="OnFormNavigate($event)"
                 (AfterDataLoad)="SetSectionRowCount('moreCheesePayments', $event.totalRowCount)"
+                >
+            </mj-explorer-entity-data-grid>
+        </div>
+        }
+    </mj-collapsible-panel>
+
+    <!-- Order Lines Section -->
+    <mj-collapsible-panel
+        SectionKey="moreCheeseOrderLines"
+        SectionName="Order Lines"
+        Icon="fa fa-table"
+        Variant="related-entity"
+        [Form]="this"
+        [FormContext]="formContext"
+        [BadgeCount]="GetSectionRowCount('moreCheeseOrderLines')"
+        [DefaultExpanded]="false">
+        @if (record.IsSaved) {
+        <div>
+            <mj-explorer-entity-data-grid
+                [Params]="BuildRelationshipViewParamsByEntityName('MoreCheese: Order Lines','OrderID')"
+                [NewRecordValues]="NewRecordValues('MoreCheese: Order Lines')"
+                [AllowLoad]="IsSectionExpanded('moreCheeseOrderLines')"
+                [ShowToolbar]="false"
+                (Navigate)="OnFormNavigate($event)"
+                (AfterDataLoad)="SetSectionRowCount('moreCheeseOrderLines', $event.totalRowCount)"
                 >
             </mj-explorer-entity-data-grid>
         </div>

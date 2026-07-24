@@ -17,8 +17,8 @@ export class morecheeseordersOrderFormComponent extends BaseFormComponent {
         await super.ngOnInit();
         this.initSections([
             { sectionKey: 'details', sectionName: 'Details', isExpanded: true },
-            { sectionKey: 'moreCheeseOrderLines', sectionName: 'Order Lines', isExpanded: false },
-            { sectionKey: 'moreCheesePayments', sectionName: 'Payments', isExpanded: false }
+            { sectionKey: 'moreCheesePayments', sectionName: 'Payments', isExpanded: false },
+            { sectionKey: 'moreCheeseOrderLines', sectionName: 'Order Lines', isExpanded: false }
         ]);
     }
 }

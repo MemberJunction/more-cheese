@@ -1,0 +1,1864 @@
+[
+  {
+    "primaryKey": {
+      "ID": "533876F9-D650-59CD-9C7D-1B32165641CB"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Open",
+      "Priority": "Medium",
+      "DueAt": "2023-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.778Z",
+      "checksum": "eca9b9c06d4e220e5f0d95248f3b249d1831589e9375c381663db8be9921ef43"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F49CD6F8-08F5-5194-852D-75B9AC2D2E08"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2023-11-14T17:00:00Z",
+      "CompletedAt": "2023-11-13T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.792Z",
+      "checksum": "26d8e46ff7349ddf9d789f531ea57105a77f973478d460a41004286dc8c3b78c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59BE9E3F-9747-5076-9C94-D46D0388AC9A"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-05-15T17:00:00Z",
+      "CompletedAt": "2024-05-08T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.805Z",
+      "checksum": "a2521a8551881fddff77b6b828fb0b3d7c2128ab6eec07df591f35af886e3a61"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "046233EE-ADB8-5420-8D47-2163490F9C60"
+    },
+    "fields": {
+      "Name": "Draft the guidance revision",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-11-14T17:00:00Z",
+      "CompletedAt": "2024-11-05T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "D98A4CDF-6B27-5271-9B21-6836C456BA5E"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.817Z",
+      "checksum": "9f90fb7da830def4becf76ff00c3604c542d9f818332c9e9a9462e94120c4cd7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6AA3C118-CC29-5EE3-8F1F-69A95E74C540"
+    },
+    "fields": {
+      "Name": "Prepare budget figures for next quarter",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-05-15T17:00:00Z",
+      "CompletedAt": "2025-05-07T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.830Z",
+      "checksum": "92d6c2b3bdacea35a06b1878b96f0fb91ed8d0dcc0e34494333270efe9a9104c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E28D0BF-063C-5CF4-BEA7-529321E119DE"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2026-05-15T17:00:00Z",
+      "CompletedAt": "2026-05-10T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.847Z",
+      "checksum": "78801f6e699f5b1a33d0226558554e4db9339233c9f36fa565b6b71bc7d49a51"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51359834-7018-5201-8E28-D89AF9F21571"
+    },
+    "fields": {
+      "Name": "Circulate the meeting summary to members",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Open",
+      "Priority": "Medium",
+      "DueAt": "2026-11-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": "5544CB6B-86DC-58AE-B998-01B75615B1B0"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.859Z",
+      "checksum": "ef60041cf202ef5585416d2702d944f32fdd6cd37dc1a03e25194e8924579ad7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9333D8D2-AAE0-550E-AD7F-9EE8FA30B23F"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2023-11-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.872Z",
+      "checksum": "bf096f782b863802938b1921eaaee189b0e5638d698f7da341d79e65c9c2cb6d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91A462D4-B3FE-5EDE-BB62-193B577CBB25"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-02-14T17:00:00Z",
+      "CompletedAt": "2024-02-13T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.885Z",
+      "checksum": "14d7ebd2ac8cdcdcc82306e84642dbc9351e65ba194e5f324d731703fdc289f5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6ECBE243-4DF5-5EDC-B209-94984BC7E64D"
+    },
+    "fields": {
+      "Name": "Update the committee charter page",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2024-05-15T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.896Z",
+      "checksum": "97635626a2ebe264500a33d07c4eb9be8f1f136fe9a45036f46612caf32d96ad"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E0CDF9A3-4F5A-50F6-90A9-D10037161740"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-05-15T17:00:00Z",
+      "CompletedAt": "2024-05-11T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.932Z",
+      "checksum": "f0bc5d5bba6d6bb2df1bea9961fb898ffc8f9c804be37ff25ec5fa0794f1841d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C83F7C1A-F314-55FD-A272-DE8EB17B457B"
+    },
+    "fields": {
+      "Name": "Circulate the meeting summary to members",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-08-14T17:00:00Z",
+      "CompletedAt": "2024-08-10T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.948Z",
+      "checksum": "c16973da1aef268a96f98c0dbd1cf5e6ae314ba0f60cbfe1e908f89d7d4ae753"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "88D25791-4523-571B-B6A9-F50807C5896F"
+    },
+    "fields": {
+      "Name": "Circulate the meeting summary to members",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-11-14T17:00:00Z",
+      "CompletedAt": "2024-11-14T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "62031C6C-6A0F-56D4-8214-04013B0245F1"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.961Z",
+      "checksum": "143633a557325668f517ca33c99fb347044e4ae89f5813026672a4e9a525151c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A8FB4E13-116B-5269-9E3B-8BEFA2ED92BF"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-02-14T17:00:00Z",
+      "CompletedAt": "2025-02-08T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.976Z",
+      "checksum": "196ef34b33b7c780e0821f49ab2524960411b295ed6cf2f083493e0e9b4ca679"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A27ACA35-CF56-5F9D-B4F8-8D1294FE04AD"
+    },
+    "fields": {
+      "Name": "Update the committee charter page",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Open",
+      "Priority": "Medium",
+      "DueAt": "2025-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:01.989Z",
+      "checksum": "09abe9341e1af74c54517b4e0be313b7ba76a23fdd978ecc8645eda4e682499d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7031ACCB-6FC9-5DCD-970F-8BE8478721EE"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-11-14T17:00:00Z",
+      "CompletedAt": "2025-11-07T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.003Z",
+      "checksum": "b756103d6bc5aab5dbb709c8727ae6f1961244add6a0c539d93bc68eb1b92b2b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA162F49-0AE3-5F1D-8A56-B3BD3D6A90AF"
+    },
+    "fields": {
+      "Name": "Update the committee charter page",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2026-05-15T17:00:00Z",
+      "CompletedAt": "2026-05-13T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.017Z",
+      "checksum": "e089bd27636ef6fbcaf7e20bc16be6cdbfb14c8172b63b264084d1f36cd2c313"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E6DF7DC9-885A-5FA0-8867-83C2E14650C3"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2023-05-15T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.029Z",
+      "checksum": "04a725e119b036fa12998de73ff5559ec38c5916550e3cf82f1bed75fe6c2dcf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0946CC32-ACBB-593F-8E30-BDC2E370E3A5"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2023-05-15T17:00:00Z",
+      "CompletedAt": "2023-05-12T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.043Z",
+      "checksum": "05e29972f89f12084c035c3b4a5f6ec213722e6c1cc3f6f1c07544040987160a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A3480A31-5EBF-54E4-88E9-C71E769737CF"
+    },
+    "fields": {
+      "Name": "Prepare budget figures for next quarter",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2023-08-14T17:00:00Z",
+      "CompletedAt": "2023-08-08T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.054Z",
+      "checksum": "4ec27af6f9add1ef9735622a8de7667187ea56c81b57d26ee0bbceb517589058"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E594DF8-DD2F-5148-8A63-67116CA6AC57"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-05-15T17:00:00Z",
+      "CompletedAt": "2024-05-07T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.090Z",
+      "checksum": "46d9f41ee798c91e434f88051f75009524b6ea8a14ddde488d79bdf480a5ad36"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A7D13CAF-FA36-5B72-8424-E0B68836AC5F"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-08-14T17:00:00Z",
+      "CompletedAt": "2024-08-06T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.103Z",
+      "checksum": "8fe67cc73f9e90c456f11b3f8dff6ac4b26db06b08295b16d542507c1c4b1261"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B4F7AEEF-021C-5D2C-BD7D-F0E731FC1D2A"
+    },
+    "fields": {
+      "Name": "Update the committee charter page",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-02-14T17:00:00Z",
+      "CompletedAt": "2025-02-12T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.117Z",
+      "checksum": "5cef72ecc95397cd9bbea46a5d32827ef72152db0963f6bfce7e611fe91d590e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE8FA756-DB53-580E-8EE2-A78793DBCD0B"
+    },
+    "fields": {
+      "Name": "Prepare budget figures for next quarter",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-05-15T17:00:00Z",
+      "CompletedAt": "2025-05-05T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.130Z",
+      "checksum": "1123947e6799fb54102a6c1601730802fb3199345c31b1ad3079bf9714e3d754"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF8EFB42-2F83-5113-8FF6-1EA2AA3155C4"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-08-14T17:00:00Z",
+      "CompletedAt": "2025-08-05T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.145Z",
+      "checksum": "34cd52109033ce014fcc338f92f0e0079b9c6aea19cea1dd616b24a36621d815"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BDE57904-5DE1-5C71-ACEC-AF91C2E74B73"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Open",
+      "Priority": "Medium",
+      "DueAt": "2025-11-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.159Z",
+      "checksum": "baf4cf0cb12fb18fdb1dc9bc6750214efe9dfe2ed147921a7128c338b561bb97"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF0482CE-CBDF-5787-AB3C-89EDBB10D84E"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-11-14T17:00:00Z",
+      "CompletedAt": "2025-11-14T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.172Z",
+      "checksum": "a5d63c499b3c058c5cdb244347d4065ff40a22ca93f9cfd896b37899528133f9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2CB7D343-1C06-5B6D-8D33-AD1A7C37EB85"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2026-02-14T17:00:00Z",
+      "CompletedAt": "2026-02-04T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.185Z",
+      "checksum": "34135addc8c338d3a6afcd9f000654b63742c67b3801fb3496b7f2deb53973cd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2DAB1584-AFA5-5C56-A883-548B4835C08B"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Open",
+      "Priority": "Medium",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.199Z",
+      "checksum": "734c53db7341c824461f000d474ba8c9b8c190ed5d1d4565914eb20b80bec0d9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7CEA07BB-310A-580F-94FB-43EF4B12632C"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2026-11-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "A4DE38AD-0012-5BCE-9D57-FFB006465087"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.212Z",
+      "checksum": "cb922f7c12f4c63ca54e44988102dc34d97909f51697337b4b60f86a778b87ea"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "06966348-DB35-5E01-AF42-8C556340002F"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2023-02-14T17:00:00Z",
+      "CompletedAt": "2023-02-13T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.249Z",
+      "checksum": "4f7bacee7fb054e0eb8af23dce364decc51a5a88d22d3d7193bdfccfdc2906d2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02E07D94-B390-50DE-8138-D550DA27657F"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2023-05-15T17:00:00Z",
+      "CompletedAt": "2023-05-08T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.264Z",
+      "checksum": "99637eb01367d292a52f545af730eb4ef261c23c9846de6f1d0f1f8e636381b9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CBD87BC2-7875-531F-AE7D-F69E7AB2D968"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2023-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.279Z",
+      "checksum": "940927466b9ed520bafbf831a70d23cc64ca65af0b8409007ff646ef6a00a3c7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "81FBE475-3A36-58D5-8B72-1AFB006000E7"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-02-14T17:00:00Z",
+      "CompletedAt": "2024-02-12T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.293Z",
+      "checksum": "5534fb33424351a8474554d0b4f9cf6ee7ddaee17b35ab88bb5077105d44642a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6BADB6DC-81C9-5EBA-890D-236E2461C6B9"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-02-14T17:00:00Z",
+      "CompletedAt": "2024-02-10T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.308Z",
+      "checksum": "5796835194d431bfa34063119ce3d1f442dac40b64ca5844302e085c0aab8a16"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "871372E4-52B7-5F65-8DB6-BDB1782DA2C4"
+    },
+    "fields": {
+      "Name": "Prepare budget figures for next quarter",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2024-08-14T17:00:00Z",
+      "CompletedAt": "2024-08-12T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.323Z",
+      "checksum": "e0caf320df6523ed0843e091d0084070975f5b662e2fa3c4107b241e4d8e997a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5653D4EF-B653-585E-B010-F87FC5203B80"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-02-14T17:00:00Z",
+      "CompletedAt": "2025-02-06T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.339Z",
+      "checksum": "0b77c768bd63d045beb3dedd1381f5f036b55dfe4a5cae49e8d4123785d58ec5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1943CB3A-4F04-5FCC-B5EA-BD85D34C168D"
+    },
+    "fields": {
+      "Name": "Circulate the meeting summary to members",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-02-14T17:00:00Z",
+      "CompletedAt": "2025-02-10T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.355Z",
+      "checksum": "912634df0caf814994cb443f073f7e71558cfade4465a643874768fd28e4e4d9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4105058F-3B3E-58DC-AA25-46D032A08288"
+    },
+    "fields": {
+      "Name": "Draft the guidance revision",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2025-05-15T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.368Z",
+      "checksum": "f4d2d5239e5b6b19aed1f791cf5e904dfe70ef6f9a691bd26741f38c206fc346"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CCCD3E7A-7742-5B90-B939-494212DAB11B"
+    },
+    "fields": {
+      "Name": "Draft the guidance revision",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-08-14T17:00:00Z",
+      "CompletedAt": "2025-08-11T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.379Z",
+      "checksum": "b88f7dc086080f69540c73a288539b84ef98bfec5d80a0efbea34109f569afaf"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A7D45234-2F42-5329-9F89-5AF666782C2B"
+    },
+    "fields": {
+      "Name": "Draft the guidance revision",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-08-14T17:00:00Z",
+      "CompletedAt": "2025-08-05T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.415Z",
+      "checksum": "b35c12a6748a70d29c6b42a17d99bd1ba02be85fb0fb543cd47a99d87334e560"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FD6FCCC4-D539-5CD8-9ACB-7BB8670E7BEC"
+    },
+    "fields": {
+      "Name": "Follow up with speaker candidates",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2025-11-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.429Z",
+      "checksum": "bea4691c132154bb62c6fe9abbd0bd7940d0a28b60619133dbe4f46f84f4fd79"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7E16E381-7378-55B8-88ED-FC737A16401C"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2025-11-14T17:00:00Z",
+      "CompletedAt": "2025-11-09T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.443Z",
+      "checksum": "4194956590a722bcfd89546d7e3d0acd1b6748e849e819ad2b90ee9f900a4566"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92BB414D-B6A7-53C7-9733-14785373551C"
+    },
+    "fields": {
+      "Name": "Review the member feedback digest",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2026-02-14T17:00:00Z",
+      "CompletedAt": "2026-02-08T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.458Z",
+      "checksum": "1e979487b9eacb054e87214f45861144304f0d60c263a6a3f05607e003151079"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9FBD0479-5AF4-56AF-9DF5-DEE97C30C0FC"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2026-05-15T17:00:00Z",
+      "CompletedAt": "2026-05-08T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.472Z",
+      "checksum": "46fe2d731c36ade1852a1f5a93d0742acf041346ad83b2e5927927266fb6f526"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4DB65CD4-C91D-5215-A267-CB851924FC54"
+    },
+    "fields": {
+      "Name": "Coordinate venue logistics for the workshop",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Completed",
+      "Priority": "Medium",
+      "DueAt": "2026-05-15T17:00:00Z",
+      "CompletedAt": "2026-05-14T17:00:00Z",
+      "PercentComplete": 100,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.485Z",
+      "checksum": "a30e081ac68d4ff3337372b33ed3d66ce16a1d8fca2aa76ae3abe3d36d02e990"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3BD400A7-E66F-5CD8-ACC4-501AC759CBB7"
+    },
+    "fields": {
+      "Name": "Draft the guidance revision",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "Open",
+      "Priority": "Medium",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.498Z",
+      "checksum": "55caece6435bc901307c4140004d208f4647a57dbb40e06c8ae1381794e9507b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16472B1F-0064-5D94-A2CA-8142B7EE0548"
+    },
+    "fields": {
+      "Name": "Collect comments on the draft standard",
+      "TypeID": "07688EBB-89F2-58C5-8B6A-659E6A799727",
+      "Status": "InProgress",
+      "Priority": "Medium",
+      "DueAt": "2026-11-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 50,
+      "CreatedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.511Z",
+      "checksum": "7dc2d8dfe121b5a94d7e98697c42d19972878b1344e6f0273e62227510dc95b1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B36AC43C-6E1F-5AC7-9E55-9EB51A69FBB1"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Marcus Chen (ICF-000102)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-21T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.524Z",
+      "checksum": "2128f45b3c913380632a054ab5ff8f3c0fe845122445a02bef811cd690a4936b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ECC011FA-72A3-5DBC-ABC4-F4462F1DD08A"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Alessia Gallo (ICF-100064)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-07T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.536Z",
+      "checksum": "981c32923703c2a82785ea547f01059d967c718a8f546615b8d8f9e3974e60d5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0779591F-60B6-5C9D-85D5-C24555FB9B70"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Owen Hollis (ICF-100091)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-16T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.577Z",
+      "checksum": "5fd40e7975e142a355e2ba37efd6ef41091b17ed737bc75e6fc8fb461b52553c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2C0A83A5-10BE-59B4-A79C-010F9BAB3BD4"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Leif Falk (ICF-100105)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-17T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.591Z",
+      "checksum": "ae466041b22c69bef488212bf6dd02d6317c67c4ae5c144acb23bdd99b772387"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3A4AF38D-251D-5146-B035-35904D301678"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Gonzalo Maldonado (ICF-100134)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-09T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.605Z",
+      "checksum": "b0ea01f3a81c4c3a4d2a4cf2163a27ccc900aa6d80ae82c0eb458d59792e3878"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F97A947F-0A2E-530D-888D-D034CDE98AB7"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Li Wang (ICF-100152)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-01T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.619Z",
+      "checksum": "77c2a95237b1476175f13e48b232b6a51779fac90eb745a1ca57c993c57897a5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "658D321C-F3A6-56CA-914A-3A21705E465B"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Bram Brandt (ICF-100179)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-05T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.632Z",
+      "checksum": "f2d2ec4bc1507e6f0a034f958b64ba84bb1485263ac94327dc84daafcada5117"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0654D510-B113-541A-A169-4B23079C8C5E"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Obi Kone (ICF-100216)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-03T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.647Z",
+      "checksum": "a47ee5ea6486a8f445a300087bc6769600768f90c9f264f5a8b140d5de3e875e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98AFFA38-B69C-5211-A7D1-5AE3A3D9F891"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Karan Chowdhury (ICF-100288)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-28T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.661Z",
+      "checksum": "7cebb3b83875cf47d830b9d20a618424a0af636b39af397f91569740c610bc5c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42903146-16C2-512D-AB5B-67FFD75782F1"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Satoshi Kobayashi (ICF-100364)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-01T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.675Z",
+      "checksum": "f0ad6bad7fb15761f59f4229f5e2729bb680a4338e683044f2ad4c71e2af5898"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B19F0733-EF1C-55F1-BD85-4CF9D65B9EE5"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Charlotte Bramley (ICF-100417)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-23T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.688Z",
+      "checksum": "b30f879e0790d62287d7afb8742fcb59d56d79f8c8ceadde2a9367ddbebc0174"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E959DDA-0504-5FBB-8F95-01EB799574E5"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Claire Arnaud (ICF-100503)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-03T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.699Z",
+      "checksum": "46229d7ac45e359f390468f7b69947a4bf3e6e892f874e249bc0cf760f44c9d0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D091880-47BD-577F-8887-47B0AE423823"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Enzo Valentini (ICF-100620)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-10T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.736Z",
+      "checksum": "352cbb1cad045fd8a8df44b7e68d5d913577f45820b62c0c87f6c4f795baff90"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D7B0553D-02A7-5641-BA85-C2289835C3E3"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Cole Pace (ICF-100629)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-24T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.749Z",
+      "checksum": "1fa25df0343cb57f8a46c6f8ea847578dd3cde5940b0ff5078a1551efcdc290d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2E297300-8DB1-5999-B459-8478044274B7"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Alejandra Maldonado (ICF-100630)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-19T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.764Z",
+      "checksum": "a0e8b6ddc5314f4d598aaad7644feef605abc69f57f3e4fa32ae3bfc07b2f10a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "63F6D07A-C83D-5938-84ED-F9F5A488474F"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Fiona Marsh (ICF-100860)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.778Z",
+      "checksum": "6b387367be87fc69a4a85739bd0359b6beb029cfd525a0d79b8326f0dee817f0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DBBBF4EB-6511-5AA6-A106-1708FEF2C6A2"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Emil Adamczyk (ICF-100861)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-11T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.791Z",
+      "checksum": "d045820fc86d9de7171c123182a1799d65777607de7f957b06104ad26dc0e7c1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1E19772D-9241-5E52-A0A3-62936A2474EA"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Nadege Takahashi-Cloutier (ICF-100999)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-05T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.804Z",
+      "checksum": "3c9948d4e00687ca834ed8e2fb7a2f7a8f66d73ebf9bbf92b8502495f8abd8c7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DBEFBA09-3E7E-56AB-A139-94298639C695"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Adriana Chavez (ICF-101094)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-09T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.817Z",
+      "checksum": "72e2a465cf10d8982542dc4d33c1987b280981e5a170fa06c045d5aca2e2483d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "33E80CAE-1197-5DA5-A5FF-27F902110290"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Joaquin Huerta (ICF-101164)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-01T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.831Z",
+      "checksum": "fb12da5459bb5ba9644e5d45d3894d30951a86535836ef2e07cd4bcb623a8c59"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6008D34D-6A2E-5392-9B13-BE5FE2EF9C16"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Joaquin Beckett (ICF-101365)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-27T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.844Z",
+      "checksum": "f37cf052077b18a4ab7247a7ab792e94acb5f8961ffd44d4bcfba7b87a0e5698"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D065B73-675F-5825-A56A-D3E0BDE39D9E"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Daniel Bramley (ICF-101404)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-01T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.857Z",
+      "checksum": "cb0f89c4b5fe3a94004c7e029c2ddd1db62450e998e45e959cc0612223b58d80"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5C363228-0064-5BC4-BA3F-E461CC8FA8A3"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Carlos Torres (ICF-101477)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.893Z",
+      "checksum": "6a79c6fb3d0c353bff9b3f19f1339ac422ecdb725f11cbb91901c07ab6d8d6c3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "539CEC08-7F34-53CF-935B-293BC2B25585"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Margot Ganguly (ICF-101555)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-12T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.907Z",
+      "checksum": "3580d3f668362554b816ea8cb97a3b996b78a18c5ddc84cd40ba6d11faf74d9a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DC4B5D75-1431-5C3D-B812-74A4CF4753E1"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Felipe Cabrera-Castillo (ICF-101558)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-18T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.920Z",
+      "checksum": "ba7d84fc238be5dd39f10a2c5368a6d2eb76efbb68ebff3eacaf2dc26e8f3b1c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BCA67D6E-9D92-5698-A391-A88C05857708"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Marcel Almeida (ICF-101582)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-07T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.934Z",
+      "checksum": "72fd0a2a00ab19fbf59c08278c92fe525225ee92a43f8f6029bd6c944bcdb239"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24F8025A-2A6E-515F-8304-7CB995A991E9"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Grace Poirier (ICF-101686)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-10T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.948Z",
+      "checksum": "7c77f46c7698b119ee40c38775e802793c7b80308edc39dd9af7a17051e8e371"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B147158C-5DAC-5EB0-8847-DB9CD6C4BCE9"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Daichi Sato (ICF-101734)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-27T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.962Z",
+      "checksum": "2f765f9e7a624b944b6cbb28243ec380c2ae56ea862901e498ffc1e160a09c73"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59207C95-706F-56A7-92A4-F20774132E58"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Lanre Mwangi (ICF-101759)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-18T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.976Z",
+      "checksum": "74f5996f63cce20e5e852fb8cf05e3907f0ffef4ca3f4368aa820ebf5bdfe776"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D6EA2994-9E78-5708-A565-DCA14BDB990C"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Freya Fischer (ICF-101804)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-26T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:02.989Z",
+      "checksum": "54ef910d91d856d2153dd0f1c09765fed73e3f16a029648d2575f9530763014b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "783D9175-B4F2-54A0-A83F-600A45991882"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Remi Dubois (ICF-101814)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-22T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.003Z",
+      "checksum": "db5044657a97dbb1324e1e90ca447dcbba815242e0f363fd922359bd883752e0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5CFBBB30-EF71-5AC4-9432-260974908CAF"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Lea Baillargeon (ICF-101848)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-11T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.015Z",
+      "checksum": "a74bd2a273e3a95dbc99a2de20968b0daaab97ea29a89222ebb9f570bff6b150"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F8814C90-612A-5D4D-8F24-24479C7AC5AD"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Emilio Luna (ICF-101860)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-19T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.055Z",
+      "checksum": "d6b803993b312ce254e2408e46ad7796b85631707d226d1d9abc56fc202e53e6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A977335F-EBC0-5D5C-8468-C286BAE38920"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Lucia Rosales (ICF-101862)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.070Z",
+      "checksum": "d82c46c669b34c9094288949a624e684c91b4f79f3ec5e08ae95f2c4bc06ba99"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB9E4E52-B10A-5D7F-BF65-07A54270CEFD"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Henrik Groen (ICF-101931)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.083Z",
+      "checksum": "95c2f5466e31b51f3814ac7130e5df8f338bd92f5e0e336faf8c45bd48021267"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5F830D4-7CAB-5820-A442-07AEDA90DBEF"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Lourdes Figueroa (ICF-101951)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-02T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.096Z",
+      "checksum": "6102161daec498007e5369cf9d036bd5f5452aca91e7bbf3a33fb211f007b451"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7EC7E27-0FC3-54C1-A312-63CB4074E5A8"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Soyeon Shin (ICF-101989)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-22T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.111Z",
+      "checksum": "2bb4857e982a5670d127f550c9c78cd4d09b41b08dfd329194217d8bac564309"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B6CE72A6-C3E3-5EA0-9EE9-CC6698D48856"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Aurelie Pelletier (ICF-102005)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-22T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.125Z",
+      "checksum": "5e5a5a366d8abcd130888ad9c5e7fed538e198b57ccb89d7d3121f63d1b7f2b2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92FEFDDD-889D-5E76-A563-98CA574D1C23"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Tomasz Baran-Nagy (ICF-102021)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-25T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.137Z",
+      "checksum": "6400072ab5033bee9b2998d66ea0a245a2b6a26bdd4ddffbc96fc5f90b49111c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "68110C2F-4B4D-5B33-A4E1-457EE812C90D"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Robert Ashcroft (ICF-102036)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-25T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.151Z",
+      "checksum": "c52396e3803cbf4ef9db970cf4ef08cee0615d6dbda0e484630fafd371067861"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BCD01E8F-D1BE-5F79-AF32-9BEA241CDAEA"
+    },
+    "fields": {
+      "Name": "Renewal outreach — June Ravn (ICF-102068)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-09T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.166Z",
+      "checksum": "5461c93069cfd58d637a1d22b3b1da65a154dcf54cfc9bd3d9e4966c70e420f0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46B4ED01-8F15-56A7-8334-CE709E705109"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Owen Harmon (ICF-102107)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-16T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.177Z",
+      "checksum": "77eefc22c36b880294233b3528bf629a650b1a10700ff901d3860b58a9dedb1b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6FBB45E5-8790-5D1E-BF6B-D6640DAF29CE"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Esteban Luna (ICF-102121)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-01T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.210Z",
+      "checksum": "33b6147896d4386f6e1b5af579a290c0b33da1121bbae5b66f8df6fc6ce05930"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B836A153-733B-5312-BE0B-B5833127225F"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Elisa Palacios (ICF-102126)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-07T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.224Z",
+      "checksum": "48f0d3f2bc6afa3be54ec63a41876d8a832dc4b02efdb30170961eda32b6fab1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8548C199-62A4-557F-9022-B21DFF99BD36"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Laura Marsh (ICF-102152)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-08T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.237Z",
+      "checksum": "08a2a784fb66274968c9171a74e0fc73033baf9eea1b7da4317f10706f94ae8c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "33468206-5B5A-534A-928E-53E3A9E3B6A5"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Amelia Brigham (ICF-102159)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-09T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.250Z",
+      "checksum": "43f288e2624161f7d28b5df3ebde889af6eb17bf7b659d4bece0f3efeaab21f7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A845E3D1-CC2D-5E86-8FF7-0EFB6D0E7A98"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Elisa Oliveira (ICF-102161)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-14T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.265Z",
+      "checksum": "20022c8533b8c372cef8a9826abe7a851737d0f2ea8363d9474ecf9198cf2927"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3456799C-DC77-5358-B573-119C6FEE5FED"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Rohan Agarwal (ICF-102261)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-06T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.279Z",
+      "checksum": "9ba55c0456baa5a8e67a6341093b9032a2cf4b98f9796c86d614ce81fc391196"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3245C2D4-2850-59A7-AD2E-CCBBF7176848"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Nathan Ackerley (ICF-102300)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "Open",
+      "Priority": "High",
+      "DueAt": "2026-08-09T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 0,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.292Z",
+      "checksum": "4f964710ef62fcd6ee321bc0ccf46dfd588382e82e7cbe2de1b2891efe22595e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "186E6721-68C0-5DDC-AD89-9D21D33A0AA5"
+    },
+    "fields": {
+      "Name": "Renewal outreach — Laura Ferrier-Mabry (ICF-102487)",
+      "TypeID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8",
+      "Status": "InProgress",
+      "Priority": "High",
+      "DueAt": "2026-08-25T17:00:00Z",
+      "CompletedAt": null,
+      "PercentComplete": 25,
+      "CreatedByPersonID": null
+    },
+    "sync": {
+      "lastModified": "2026-07-24T05:21:03.303Z",
+      "checksum": "dd43bbc96f0b1d7b4cfa26ed99430d30b46182ad0ed4138be2c28e4942b69a0d"
+    }
+  }
+]
