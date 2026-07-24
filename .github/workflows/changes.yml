@@ -62,8 +62,23 @@ jobs:
           steps.migration_check.outputs.has_migrations == 'true' &&
           github.base_ref == 'next'
         run: |
-          # PRERELEASE OVERRIDE (2026-07-24): the app is unpublished and stays at 1.0.0 through
-          # the prerelease phase, so per-migration changeset/version bumps for behind-the-scenes
-          # work no consumer pulls are intentionally waived. Re-enable this gate (require a
-          # >= minor changeset for migration PRs) when cutting the first published 1.0.0 release.
-          echo "Changeset requirement waived during the 1.0.0 prerelease phase (see comment above)."
+          CHANGESET_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -E '^\.changeset/.*\.md$' | grep -v 'README.md' || true)
+          if [ -z "$CHANGESET_FILES" ]; then
+            echo "::error::Migrations were added but no changeset found. Run 'npx changeset' to create one with at least a 'minor' bump."
+            exit 1
+          fi
+
+          # Check that at least one changeset has 'minor' or 'major' bump
+          HAS_SUFFICIENT_BUMP=false
+          for f in $CHANGESET_FILES; do
+            if grep -qE "minor|major" "$f"; then
+              HAS_SUFFICIENT_BUMP=true
+              break
+            fi
+          done
+
+          if [ "$HAS_SUFFICIENT_BUMP" = false ]; then
+            echo "::error::Migrations require at least a 'minor' version bump in the changeset."
+            exit 1
+          fi
+          echo "Valid changeset with minor or major bump found"
