@@ -34,6 +34,7 @@ jobs:
           node-version: 24
           cache: 'npm'
           cache-dependency-path: 'package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Validate package-lock.json case-sensitivity
         run: ./.github/scripts/validate-package-lock-case.sh
@@ -155,6 +156,8 @@ jobs:
       - name: Publish to npm
         if: steps.changeset_check.outputs.pending != '0'
         run: npx changeset publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Get version and create tag
         if: steps.changeset_check.outputs.pending != '0'
