@@ -92,6 +92,6 @@ export function buildPacks(world) {
     messaging: { dependsOn: ['common', 'issues'], tables: { portal_sessions: messaging.sessions, secure_threads: messaging.threads, secure_messages: messaging.messages } },
     platform: { dependsOn: ['common', 'membership', 'events', 'tasks', 'issues'], tables: { mj_users: platform.users, mj_user_roles: platform.userRoles, user_views: platform.views, queries: platform.queries, conversations: platform.conversations, conversation_details: platform.conversationDetails, user_favorites: platform.favorites, lists: platform.lists, list_details: platform.listDetails, user_notifications: platform.notifications, record_changes: platform.recordChanges } },
     // DEFINITIONS ONLY — Sonar's engine computes scores/contributions/history/transitions live
-    sonar: { dependsOn: ['common', 'events', 'learning', 'committees', 'forms', 'platform'], tables: { score_band_sets: [sonar.bandSet], score_bands: sonar.bands, score_models: [sonar.model], score_model_versions: [sonar.version], model_related_entities: sonar.relatedEntities, factors: sonar.factors, model_factors: sonar.modelFactors } },
+    sonar: { dependsOn: ['common', 'events', 'learning', 'committees', 'forms', 'platform'], tables: { score_band_sets: [sonar.bandSet], score_bands: sonar.bands, time_windows: sonar.timeWindows, score_models: [sonar.model], score_model_versions: [sonar.version], model_related_entities: sonar.relatedEntities, factors: sonar.factors, model_factors: sonar.modelFactors } },
   };
 }

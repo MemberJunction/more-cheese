@@ -885,7 +885,7 @@ function checkSonar() {
     if (!rel) { problems.push(`${f.Slug}: SourceRelatedKey unresolved (would be "no data source")`); continue; }
     try { const p = JSON.parse(rel.RelationshipPath); if (!Array.isArray(p)) problems.push(`${f.Slug}: RelationshipPath not a JSON array`); }
     catch { problems.push(`${f.Slug}: RelationshipPath not valid JSON ('${rel.RelationshipPath}')`); }
-    if ((f.Aggregation === 'Sum' || f.Aggregation === 'Avg' || f.Aggregation === 'Min' || f.Aggregation === 'Max') && !f.AggregateFieldName)
+    if (['Sum', 'Avg', 'Min', 'Max', 'Recency'].includes(f.Aggregation) && !f.AggregateFieldName)
       problems.push(`${f.Slug}: ${f.Aggregation} needs AggregateFieldName`);
   }
   check('sonar: every factor is executable (Declarative, agg, linked related entity, JSON path)',

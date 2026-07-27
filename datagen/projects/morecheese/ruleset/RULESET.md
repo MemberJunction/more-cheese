@@ -61,8 +61,8 @@ The `__mj` core gets **usage residue** so the instance reads as lived-in — app
 
 One Sonar model — **Member Engagement Score** (`morecheese-engagement`, Active) — scores every member on the MJ_BizApps_Common: People spine. **Definitions only**: Sonar's FactorCompiler compiles the factors to SQL and computes the scores live, so we ship the model, not pre-computed numbers.
 
-- **5 executable factors**, each a Declarative `Count` over a related entity linked by SourceRelatedEntityID (RelationshipPath `[]` → the compiler auto-resolves the FK path to the anchor): Event Participation · Committee Service · Learning Activity · Advocacy Participation · Survey Participation.
-- **Bands tile 0..100 with no gaps**: At Risk 0–35 · Watch 35–55 · Stable 55–75 · Engaged 75–100.
+- **8 executable factors**, each a Declarative `Count` over a related entity linked by SourceRelatedEntityID (RelationshipPath `[]` → the compiler auto-resolves the FK path to the anchor): Event Participation · Committee Service · Certifications · Learning Activity · Advocacy Participation · Competition Entries · Event Recency · Survey Participation.
+- **Bands tile 0..100 with no gaps**: At Risk 0–10 · Watch 10–20 · Stable 20–35 · Engaged 35–100.
 - **MinMax normalization + equal additive weights, WeightedSum** — mirrors the working demo models; Sonar derives each factor's min/max across the member population.
 - **Sonar computes the scores** (a recompute after install): a declining member lands below an active one because the engine counts the member's actual rows — honest by construction, no pre-pinned scores. The Bob-below-Elena contrast is witnessed live in the app, not gated here.
 

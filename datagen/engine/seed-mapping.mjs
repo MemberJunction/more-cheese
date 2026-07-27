@@ -31,6 +31,7 @@ export const MJ_ENTITY_VAR = {
   'MoreCheese: Course Enrollments': '@E_Enrollments',
   'MoreCheese: Advocacy Actions': '@E_Advocacy',
   'MJ_BizApps_Forms: Form Responses': '@E_FormResponses',
+  'MoreCheese: Member Certifications': '@E_MemberCerts',
 };
 export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person' };
 
@@ -539,6 +540,13 @@ export const MAPPING = {
       }),
     },
     {
+      json: 'time_windows', table: '[__mj_BizAppsSonar].[TimeWindow]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('sonarwindow', r.WindowKey)), Name: sqlStr(r.Name),
+        WindowType: sqlStr(r.WindowType), LengthMonths: sqlNum(r.LengthMonths), LengthDays: sqlNum(r.LengthDays),
+      }),
+    },
+    {
       json: 'score_models', table: '[__mj_BizAppsSonar].[ScoreModel]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmodel', r.ModelKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
@@ -576,6 +584,8 @@ export const MAPPING = {
         // the data source the FactorCompiler traverses — link to the ModelRelatedEntity (was missing)
         SourceRelatedEntityID: sqlId(uuidFor('sonarmre', r.SourceRelatedKey)),
         SourceEntityID: sqlVar(MJ_ENTITY_VAR[r.SourceEntityName]), Aggregation: sqlStr(r.Aggregation),
+        AggregateFieldName: sqlStr(r.AggregateFieldName),
+        DateField: sqlStr(r.DateField), TimeWindowID: sqlId(r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null),
         NormalizationMethod: sqlStr(r.NormalizationMethod),
         HigherIsBetter: sqlBit(r.HigherIsBetter), PromotionState: sqlStr(r.PromotionState),
       }),
@@ -669,6 +679,8 @@ export const PREAMBLE = {
     "DECLARE @E_Enrollments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Course Enrollments');",
     "DECLARE @E_Advocacy UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Advocacy Actions');",
     "DECLARE @E_FormResponses UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Responses');",
+    "DECLARE @E_CompEntries UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Competition Entries');",
+    "DECLARE @E_MemberCerts UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Member Certifications');",
   ],
   issues: [
     "-- app-seeded lookups resolve BY NAME (F6)",

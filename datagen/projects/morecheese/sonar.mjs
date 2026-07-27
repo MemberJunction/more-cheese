@@ -48,6 +48,11 @@ export function buildSonar(cfg) {
     PublishedAt: publishedAt, IsCurrent: true,
   };
 
+  // reusable Rolling windows; a factor's window date column comes from Factor.DateField
+  const timeWindows = (S.timeWindows ?? []).map((w) => ({
+    WindowKey: w.key, Name: w.name, WindowType: w.windowType, LengthMonths: w.lengthMonths ?? null, LengthDays: w.lengthDays ?? null,
+  }));
+
   // one related entity + one factor + one model-factor per configured signal
   const relatedEntities = S.factors.map((f) => ({
     RelatedKey: `${S.model.key}:${f.alias}`, ModelKey: S.model.key, EntityName: f.sourceEntityName,
@@ -57,13 +62,19 @@ export function buildSonar(cfg) {
     FactorKey: f.key, Name: f.name, Slug: f.slug, Description: f.description, ModelKey: S.model.key,
     AnchorEntityName: S.model.anchorEntityName, FactorType: 'Declarative',
     SourceRelatedKey: `${S.model.key}:${f.alias}`, SourceEntityName: f.sourceEntityName,
-    Aggregation: 'Count', NormalizationMethod: 'MinMax', HigherIsBetter: true, PromotionState: 'Approved',
+    Aggregation: f.aggregation ?? 'Count', AggregateFieldName: f.aggregateFieldName ?? null,
+    DateField: f.dateField ?? null, WindowKey: f.windowKey ?? null,
+    // Percentile spreads the population by rank (MinMax compressed everything to the bottom
+    // because counts are long-tailed); verified live against the FactorCompiler.
+    NormalizationMethod: 'Percentile', HigherIsBetter: f.higherIsBetter ?? true, PromotionState: 'Approved',
   }));
   const modelFactors = S.factors.map((f, i) => ({
     ModelFactorKey: `${S.model.key}:${f.key}`, ModelKey: S.model.key, FactorKey: f.key,
-    Weight: f.weight, WeightMode: 'Additive', MissingDataPolicy: 'ModelDefault',
+    // missing→Zero: absence of an activity is a LOW engagement signal (NeutralMidpoint wrongly
+    // credited inactive members to the middle band).
+    Weight: f.weight, WeightMode: 'Additive', MissingDataPolicy: 'Zero',
     IsRequired: false, DisplayLabel: f.displayLabel, DisplayOrder: i + 1,
   }));
 
-  return { bandSet, bands, model, version, relatedEntities, factors, modelFactors };
+  return { bandSet, bands, model, version, timeWindows, relatedEntities, factors, modelFactors };
 }
