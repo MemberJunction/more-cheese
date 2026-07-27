@@ -24,7 +24,10 @@ export function buildLearning(cfg, people, periods) {
     years.push(y);
     const rC = rng(seed, `courses:${y}`);
     for (let i = 0; i < L.coursesPerYear; i++) {
-      const start = new Date(Date.UTC(y, rC.int(0, 10), rC.int(1, 28)));
+      // any month (December included — int(0,10) left a visible hole in the calendar) and
+      // any real day of that month, not just the 1st-28th
+      const mo = rC.int(0, 11);
+      const start = new Date(Date.UTC(y, mo, rC.int(1, new Date(Date.UTC(y, mo + 1, 0)).getUTCDate())));
       if (start > release) continue;
       courses.push({ CourseKey: `CRS-${y}-${i + 1}`, Name: `${rC.pick(TOPICS)} (${rC.pick(CHEESE_WORDS)} cohort)`, Year: y, StartDate: iso(start), DurationWeeks: rC.int(4, 10), IsSharedDemo: true });
     }
@@ -72,8 +75,17 @@ export function buildLearning(cfg, people, periods) {
     decide: (e, p, r) => {
       const courseEnd = addDays(parseDate(e._endBase), e._weeks * 7);
       if (courseEnd > release) { e.Status = 'InProgress'; }
-      else if (r.bernoulli(p)) { e.Status = 'Completed'; e.CompletedOn = iso(courseEnd); }
-      else { e.Status = 'Dropped'; }
+      else if (r.bernoulli(p)) {
+        // learners finish when they finish: most near the cohort end, some racing ahead,
+        // a tail trickling in afterwards. Every completion landing exactly on the course
+        // end date collapsed 3,365 completions onto ~100 dates.
+        const band = r.pickWeighted([['early', 0.18], ['onTime', 0.5], ['late', 0.32]]);
+        const offset = band === 'early' ? -r.int(3, Math.max(4, e._weeks * 3))
+          : band === 'onTime' ? r.int(-2, 2) : r.int(3, 45);
+        const done = addDays(courseEnd, offset);
+        e.Status = 'Completed';
+        e.CompletedOn = iso(done > release ? release : done);
+      } else { e.Status = 'Dropped'; }
     },
   });
 

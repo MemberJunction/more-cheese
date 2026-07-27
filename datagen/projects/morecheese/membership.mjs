@@ -112,7 +112,12 @@ export function runRenewalUnroll(cfg, people, orgs) {
     },
     onNo: (c) => {
       const cancellation = addDays(c.st.end, Math.round(M.gracePeriodMonths * 30.44));
-      const reason = c.employerEvent ? 'non-payment — employer event' : 'non-payment — lapsed past grace';
+      // employer-event lapses keep their DERIVED reason; the rest draw from the declared
+      // churn mix (every lapse used to read "non-payment", so the reason column was
+      // useless for the why-are-we-losing-members demo)
+      const reason = c.employerEvent ? 'non-payment — employer event'
+        : (M.churnReasons ? rng(seed, `churnreason:${c.p.MemberNumber}:${c.st.end}`).pickWeighted(M.churnReasons.weights)
+          : 'non-payment — lapsed past grace');
       pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
       c.st.alive = false;
     },

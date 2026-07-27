@@ -55,6 +55,6 @@
       0.02
     ],
     "tolerance": 0.08,
-    "$note": "Active/Lapsed/Cancelled/PendingRenewal at release; loose check at N=500"
+    "$note": "Active-ish (Active + PendingRenewal at release) is the only value the gate reads: target[0] + 0.02. The remaining entries are indicative only. NOTE the emitted Status domain is Renewed/Active/Lapsed/PendingRenewal — there is deliberately NO 'Cancelled' status (a lapse carries CancellationDate + CancellationReason instead); the old note named a bucket that never existed in the data."
   }
 }

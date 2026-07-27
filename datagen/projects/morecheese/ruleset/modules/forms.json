@@ -54,7 +54,13 @@
           "type": "SingleChoice",
           "prompt": "Which best describes you?",
           "required": true,
-          "options": ["Producer", "Retailer", "Supplier", "Educator", "Enthusiast"]
+          "options": [
+            "Producer",
+            "Retailer",
+            "Supplier",
+            "Educator",
+            "Enthusiast"
+          ]
         },
         {
           "key": "operation",
@@ -80,11 +86,26 @@
         "$note": "modest public-intake trickle — ESTIMATE; partials run higher than the member survey (anonymous funnels leak more)"
       },
       "segmentMix": [
-        ["Producer", 0.35],
-        ["Retailer", 0.25],
-        ["Enthusiast", 0.22],
-        ["Supplier", 0.1],
-        ["Educator", 0.08]
+        [
+          "Producer",
+          0.35
+        ],
+        [
+          "Retailer",
+          0.25
+        ],
+        [
+          "Enthusiast",
+          0.22
+        ],
+        [
+          "Supplier",
+          0.1
+        ],
+        [
+          "Educator",
+          0.08
+        ]
       ],
       "operationTemplates": [
         "Small {segment} operation in {toponym}; looking to connect with the wider community.",
@@ -93,7 +114,13 @@
         "We run a farmers-market stall and are exploring wholesale; joining for the standards resources.",
         "Longtime home cheesemaker turning professional; interested in certification down the road."
       ],
-      "referrers": ["icf-website", "search", "conference-page", "newsletter", "member-referral"]
+      "referrers": [
+        "icf-website",
+        "search",
+        "conference-page",
+        "newsletter",
+        "member-referral"
+      ]
     },
     "response": {
       "rateTarget": 0.28,
@@ -118,7 +145,9 @@
         "min": 0,
         "max": 10,
         "meanTolerance": 0.5,
-        "$source": "SOURCED 2026-07-16 (confidence: high): Explori benchmark across thousands of events puts conference-attendee NPS at +35.4 (explori.com/blog/nps_for_events; medium.com/@erikfabian NPS-for-events; retently.com benchmarks: 20-40 average, 30-50 excellent for B2B events). The old 7.2 mean computed to NPS ~ -10 - materially wrong; a mean of ~8.3 yields computed NPS ~ +25-40."
+        "$source": "SOURCED 2026-07-16 (confidence: high): Explori benchmark across thousands of events puts conference-attendee NPS at +35.4 (explori.com/blog/nps_for_events; medium.com/@erikfabian NPS-for-events; retently.com benchmarks: 20-40 average, 30-50 excellent for B2B events). The old 7.2 mean computed to NPS ~ -10 - materially wrong; a mean of ~8.3 yields computed NPS ~ +25-40.",
+        "detractorShare": 0.025,
+        "$detractorNote": "A gaussian around 8.3 never produces a 0-2: the canonical build had ZERO scores below 3 in 648 responses, so the detractor tail every real survey carries was missing. A small share of respondents had a bad experience (travel, a cancelled session, a billing mix-up) and score 0-2 largely independent of their engagement dial; low-engagement members are likelier to be among them. Share kept small so the sourced mean stays in band."
       },
       "overall": {
         "base": 3.9,

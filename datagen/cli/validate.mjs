@@ -65,6 +65,7 @@ const snModelFactors = load('sonar', 'model_factors');
 const snBands = load('sonar', 'score_bands');
 const snFactors = load('sonar', 'factors');
 const snModels = load('sonar', 'score_models');
+const snVersions = load('sonar', 'score_model_versions');
 const snRelated = load('sonar', 'model_related_entities');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
@@ -180,6 +181,13 @@ function checkTemporal() {
   check('periods: never start before JoinDate', badStart === 0, `${badStart} bad`);
   check('periods: EndDate > StartDate', badOrder === 0, `${badOrder} bad`);
   check('lapse ⟹ CancellationDate set (the team rule)', lapsedNoCancel === 0, `${lapsedNoCancel} missing`);
+  // churn is not all non-payment — the reason column has to be worth reporting on
+  const reasons = periods.filter((x) => x.CancellationReason).reduce((a, x) => (a[x.CancellationReason] = (a[x.CancellationReason] ?? 0) + 1, a), {});
+  const reasonCount = Object.keys(reasons).length;
+  const nonPay = Object.entries(reasons).filter(([k]) => k.startsWith('non-payment')).reduce((s, [, v]) => s + v, 0);
+  const totalReasons = Object.values(reasons).reduce((s, v) => s + v, 0);
+  check(`membership: churn reasons varied (${reasonCount} kinds, non-payment ${totalReasons ? Math.round(nonPay / totalReasons * 100) : 0}%)`,
+    reasonCount >= 5 && (!totalReasons || nonPay / totalReasons < 0.75), 'voluntary churn must appear');
   check('CancellationDate ≥ EndDate (grace runs after)', cancelBeforeEnd === 0, `${cancelBeforeEnd} bad`);
   check('renewals back-date: no gaps between periods', gaps === 0, `${gaps} gaps`);
   check('registrations covered by a membership period', regOutside === 0, `${regOutside} outside`);
@@ -242,6 +250,26 @@ function checkBenchmarks() {
   const NS = R.events.noShow;
   check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.paidInPerson.target * 100}% ±${NS.paidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.paidInPerson.target) <= NS.paidInPerson.tolerance, `${paid.length} regs`);
   check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.freeWebinar.target * 100}% ±${NS.freeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.freeWebinar.target) <= NS.freeWebinar.tolerance, `${webinar.length} regs`);
+
+  // learners don't all finish on the cohort end date, and the calendar has no blind months
+  const done = enrollments.filter((e) => e.CompletedOn);
+  const onEnd = done.filter((e) => { const c = courses.find((x) => x.CourseKey === e.CourseKey); return c && e.CompletedOn === iso2(addDays2(parseDate2(c.StartDate), c.DurationWeeks * 7)); }).length;
+  check(`learning: completions spread off the cohort end (${done.length - onEnd}/${done.length} off-date, ${new Set(done.map((e) => e.CompletedOn)).size} distinct dates)`,
+    !done.length || onEnd / done.length < 0.35, 'not every learner finishes the same day');
+  check(`learning: courses start in every month (${new Set(courses.map((c) => +c.StartDate.slice(5, 7))).size}/12)`, new Set(courses.map((c) => +c.StartDate.slice(5, 7))).size >= 11, 'no blind months');
+
+  // survey scores carry a detractor tail — a pure gaussian never produces an angry 0-2
+  const npsVals = fAnswers.filter((a) => a.QuestionKey === 'post-conf-survey:nps' && a.NumericValue != null).map((a) => a.NumericValue);
+  if (npsVals.length > 100) {
+    // only assert the tail once enough responses exist for it to be reliably non-empty —
+    // at pilot scale a 2.5% share legitimately yields zero on some seeds (the suite sweeps
+    // 7 of them, so a bare "> 0" false-reds a few percent of the time)
+    const det = npsVals.filter((v) => v <= 2).length;
+    const expected = npsVals.length * (R.forms.answers.nps.detractorShare ?? 0);
+    if (expected >= 3) check(`forms: NPS has a detractor tail (${det} scores ≤2 of ${npsVals.length}, expected ~${expected.toFixed(1)})`, det > 0, 'real surveys have angry zeros');
+    const hours = new Set(fResponses.filter((r2) => r2.SubmittedAt).map((r2) => r2.SubmittedAt.slice(11, 13)));
+    check(`forms: submissions spread across the day (${hours.size} distinct hours)`, hours.size >= 8, 'not one bar at noon');
+  }
 
   // registration hygiene: one row per member+event; upcoming events aren't an empty grid,
   // and their registrations are outcome-free and booked before the release
@@ -998,7 +1026,18 @@ function checkSonar() {
   // model-factors: one per factor, positive weight
   const mfFactorKeys = new Set(snModelFactors.map((x) => x.FactorKey));
   const allBound = snFactors.every((f) => mfFactorKeys.has(f.FactorKey)) && snModelFactors.every((mf) => mf.Weight > 0);
-  check('sonar: every factor bound into the model with a positive weight', allBound,
+  // the published snapshot must reproduce the live config (it used to hardcode every
+  // factor as Count, contradicting the Recency factor) and a model can't be effective
+  // before the configuration that defines it was published
+  {
+    const ver = snVersions[0], mdl = snModels[0];
+    const snap = JSON.parse(ver?.ConfigSnapshotJSON ?? '{}');
+    const byslug = new Map((snap.factors ?? []).map((f) => [f.slug, f]));
+    const mismatched = snFactors.filter((f) => byslug.get(f.Slug)?.aggregation !== f.Aggregation);
+    check(`sonar: published snapshot reproduces the live factors (${(snap.factors ?? []).length})`, mismatched.length === 0, mismatched.map((f) => f.Slug).join(', ') || 'aggregations agree');
+    check('sonar: model effective on/after its published version', !mdl?.EffectiveFrom || !ver?.PublishedAt || mdl.EffectiveFrom >= ver.PublishedAt, `${mdl?.EffectiveFrom} vs ${ver?.PublishedAt}`);
+  }
+  check('sonar: every factor bound into the model with a positive weight',allBound,
     `${snModelFactors.length} model-factors / ${snFactors.length} factors`);
 }
 
