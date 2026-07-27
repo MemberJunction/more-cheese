@@ -10,40 +10,116 @@
     "starredShare": 0.06,
     "openers": {
       "Billing": [
-        "Hi — I received an overdue notice but I believe this invoice was already paid. Could you check on your end?",
-        "Our AP contact changed and I think the invoice went to the wrong inbox. Can you resend the current statement?",
-        "I'd like to sort out the outstanding balance on my account before renewal — what exactly is still open?"
+        "Hi — I received a past-due notice but I'm fairly sure this was already paid. Could someone take a look?",
+        "I'm seeing an outstanding balance on my account that doesn't look right. Can you help me sort it out?",
+        "My card was charged twice for what I think is the same invoice. Could you check?",
+        "I'd like to understand what this dues charge covers before I pay it.",
+        "The invoice I received lists the wrong tier — I downgraded last renewal. Can this be corrected?",
+        "Payment failed on my end and I'm not sure whether it went through. Can you confirm the status?"
       ],
       "Data Correction": [
-        "My employer information is out of date in the member directory — could you update the record?",
-        "The roster still shows my old affiliation. What do you need from me to correct it?",
-        "I noticed my organization's listing has stale details. Happy to provide the current information."
+        "My employer changed a while back and my profile still shows the old organization. Can you update it?",
+        "The directory has me listed at a company I left — could someone correct the record?",
+        "I noticed my member record has outdated employment information. How do I get that fixed?",
+        "My name is spelled incorrectly in the directory listing. Could you amend it?",
+        "There appear to be two records for me in the system — mailings arrive twice.",
+        "My region is set incorrectly, which is affecting which chapter events I see."
       ],
       "Events": [
-        "I registered and paid but couldn't attend — could you let me know the refund options?",
-        "I can't find the session materials from the event in my portal. Are they available somewhere?",
-        "Quick question about my event registration — can it be transferred to a colleague?"
+        "I registered for this event but couldn't attend in the end. Is a refund possible?",
+        "I had to miss the session I signed up for — could the fee be credited toward a future event?",
+        "Something came up and I wasn't able to join. What are my options on the registration fee?",
+        "I registered twice by mistake and would like one of the charges reversed.",
+        "Is there a recording available for the session I registered for but missed?",
+        "I'd like to transfer my registration to a colleague — is that allowed?"
       ],
       "General": [
-        "I have a question about member benefits — who is the right person to talk to?",
-        "Could you point me to the process for getting involved with federation programs?",
-        "I'd like some guidance on how to make the most of my membership this year."
+        "Quick question about what my membership tier includes — are webinar recordings part of it?",
+        "I can't sign in to the member portal; the password reset email never arrives.",
+        "I've stopped receiving the newsletter since changing my email address. Can you check?",
+        "How do I update how my name appears in the public directory?",
+        "The certificate download link on my profile returns an error.",
+        "Where can I find recordings of past webinars I registered for?"
       ]
     },
-    "replies": [
-      "Thanks for reaching out — I'm looking into this now and will follow up shortly.",
-      "Got it, thanks for the details. Let me check with the team and get back to you.",
-      "Thanks for flagging this. I've pulled up your account and I'm reviewing it now."
-    ],
-    "followUps": [
-      "Thanks — just checking in on where this stands.",
-      "Appreciate it. One more detail that might help: the notice is dated earlier this year.",
-      "Thank you! Let me know if you need anything else from me."
-    ],
-    "closers": [
-      "This is resolved on our end — you should see the correction reflected within a day. Thanks for your patience!",
-      "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
-      "Good news — this has been taken care of. Closing the thread, but reply any time to reopen."
-    ]
+    "replies": {
+      "Billing": [
+        "Thanks for reaching out — I'm pulling up the invoice history on your account now.",
+        "Got it. Let me trace the payment against the order and confirm what actually posted.",
+        "Thanks for flagging this. I've asked our finance contact to verify the transaction.",
+        "I can see the charge you're describing. Checking whether a duplicate was captured.",
+        "Appreciate the details — I'll reconcile this against what we have on file and follow up."
+      ],
+      "Data Correction": [
+        "Thanks for letting us know — I'm opening your record to update the employment details.",
+        "Understood. I'll correct the organization on your profile and re-check the directory listing.",
+        "Thanks for catching that. I've flagged the record for correction.",
+        "I can see the outdated entry. I'll get it amended and confirm once it's live.",
+        "Appreciate you reporting it — checking whether the old affiliation needs to be end-dated too."
+      ],
+      "Events": [
+        "Thanks for getting in touch — let me look up the registration and our refund policy for that event.",
+        "Sorry you couldn't make it. I'm checking what credit options are available.",
+        "Got it. I'll confirm the registration status and what we can do about the fee.",
+        "Thanks — I can see the registration. Let me check with the events team.",
+        "Understood. Looking into whether a transfer or credit applies here."
+      ],
+      "General": [
+        "Thanks for reaching out — let me look into this and get back to you.",
+        "Got it, thanks for the details. I'll check with the team.",
+        "Thanks for flagging this. I've pulled up your account and I'm reviewing it now.",
+        "Happy to help — checking the settings on your profile now.",
+        "Appreciate the report. Let me confirm what's happening on our side."
+      ]
+    },
+    "followUps": {
+      "Billing": [
+        "Thanks — just checking in on where this stands.",
+        "One more detail: the payment was made by card on the date shown in my statement.",
+        "Any update? I'd like to get this cleared before the next renewal.",
+        "Happy to forward the receipt if that helps."
+      ],
+      "Data Correction": [
+        "Thanks — just checking in on where this stands.",
+        "For reference, the change took effect at the start of last year.",
+        "Let me know if you need anything from me to verify the new employer.",
+        "Appreciate it — the directory still shows the old entry as of today."
+      ],
+      "Events": [
+        "Thanks — just checking in on where this stands.",
+        "For what it's worth, I did let the organizers know in advance.",
+        "A credit toward a future event would be fine if a refund isn't possible.",
+        "Any word on this one?"
+      ],
+      "General": [
+        "Thanks — just checking in on where this stands.",
+        "Thank you! Let me know if you need anything else from me.",
+        "Still seeing the same behaviour on my end.",
+        "No rush — just wanted to make sure it didn't get lost."
+      ]
+    },
+    "closers": {
+      "Billing": [
+        "This is resolved — the balance has been corrected and you should see it reflected within a day. Thanks for your patience!",
+        "All set. The duplicate charge has been reversed; refunds usually post in a few business days.",
+        "Good news — the payment was located and applied to the right order. Closing this out."
+      ],
+      "Data Correction": [
+        "Updated — your profile now shows the correct organization. Thanks for letting us know!",
+        "All set. I've corrected the record and confirmed the directory listing looks right.",
+        "This is done on our end; the old affiliation has been end-dated. Reply any time if anything still looks off."
+      ],
+      "Events": [
+        "Sorted — the refund has been approved and will be processed on the original payment method.",
+        "All set: a credit has been applied to your account for use toward a future event.",
+        "This is taken care of. Thanks for your patience, and sorry you had to miss it."
+      ],
+      "General": [
+        "This is resolved on our end — thanks for your patience!",
+        "All set! I've updated the record and confirmed everything looks right. Don't hesitate to reach out again.",
+        "Good news — this has been taken care of. Closing the thread, but reply any time to reopen."
+      ]
+    },
+    "$vocabNote": "Banks are TYPE-AWARE: replies/followUps/closers key on the issue type so a Data Correction thread never talks about invoices. Sized so a 200+ message corpus doesn't visibly loop (was 17 distinct strings)."
   }
 }

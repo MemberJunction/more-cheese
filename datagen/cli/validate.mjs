@@ -229,15 +229,42 @@ function checkBenchmarks() {
   const floorAdj = M.yoyStdFloor * Math.sqrt((CHI2_05[Math.min(df, 12)] ?? df * 0.5) / df);
   check(`texture: YoY renewal std ${(stdYears * 100).toFixed(2)}pt ≥ floor ${(floorAdj * 100).toFixed(2)}pt (anti-smoothness, χ²-adjusted for ${normal.length} yrs)`, stdYears >= floorAdj, 'variance floor');
 
+  // no-show rates are over PAST events only — upcoming-event registrations carry
+  // Attended=null by construction (the outcome hasn't happened) and would read as no-shows
   const web = new Set(events.filter((e) => e.EventType === 'Webinar').map((e) => e.EventKey));
-  const paid = regs.filter((x) => !web.has(x.EventKey));
-  const webinar = regs.filter((x) => web.has(x.EventKey));
+  const evDateOf = new Map(events.map((e) => [e.EventKey, e.Date]));
+  const releaseIso = run.releaseDate;
+  const pastRegs = regs.filter((x) => (evDateOf.get(x.EventKey) ?? '') <= releaseIso);
+  const paid = pastRegs.filter((x) => !web.has(x.EventKey));
+  const webinar = pastRegs.filter((x) => web.has(x.EventKey));
   const nsPaid = paid.filter((x) => !x.Attended).length / paid.length;
   const nsWeb = webinar.filter((x) => !x.Attended).length / webinar.length;
   const NS = R.events.noShow;
   check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.paidInPerson.target * 100}% ±${NS.paidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.paidInPerson.target) <= NS.paidInPerson.tolerance, `${paid.length} regs`);
   check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.freeWebinar.target * 100}% ±${NS.freeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.freeWebinar.target) <= NS.freeWebinar.tolerance, `${webinar.length} regs`);
+
+  // registration hygiene: one row per member+event; upcoming events aren't an empty grid,
+  // and their registrations are outcome-free and booked before the release
+  const pairSeen = new Set(); let dupPairs = 0;
+  for (const x of regs) { const k = `${x.MemberNumber}|${x.EventKey}`; if (pairSeen.has(k)) dupPairs++; else pairSeen.add(k); }
+  check('registrations: one per member+event (no duplicate pairs)', dupPairs === 0, `${dupPairs} duplicate pairs`);
+  const upcomingEvents = events.filter((e) => e.Date > releaseIso);
+  const futureRegs = regs.filter((x) => (evDateOf.get(x.EventKey) ?? '') > releaseIso);
+  const badFuture = futureRegs.filter((x) => x.Attended !== null || x.RegisteredOn > releaseIso).length;
+  if (upcomingEvents.length) {
+    // the grid must not be empty; at pilot scale a far-out event can legitimately have
+    // nobody signed up yet, so require the nearest ones to be populated, not all of them
+    const withRegs = upcomingEvents.filter((e) => futureRegs.some((x) => x.EventKey === e.EventKey)).length;
+    check(`upcoming events have early registrations (${withRegs}/${upcomingEvents.length} events, ${futureRegs.length} regs)`, futureRegs.length > 0 && withRegs >= Math.max(1, Math.floor(upcomingEvents.length * 0.4)), 'the upcoming grid must not be empty');
+    check('future-event registrations: Attended null, booked on/before release', badFuture === 0, `${badFuture} bad`);
+  }
+  // lead-time texture: the fixed −14/−45 offsets are gone; demand a real spread
+  const leads = pastRegs.map((x) => (parseDateMs(evDateOf.get(x.EventKey)) - parseDateMs(x.RegisteredOn)) / 86400000).filter((d) => d >= 0);
+  const distinctLeads = new Set(leads).size;
+  const sameDay = leads.filter((d) => d === 0).length / (leads.length || 1);
+  check(`registration lead times vary (${distinctLeads} distinct, ${(sameDay * 100).toFixed(1)}% same-day)`, distinctLeads >= 40 && sameDay > 0.01 && sameDay < 0.30, 'no single-offset comb');
 }
+const parseDateMs = (s) => new Date(`${s}T00:00:00Z`).getTime();
 
 // ---------- arrow recovery (§7.3): every causal rule re-detected, right sign and size ----------
 function checkArrows() {
@@ -423,6 +450,14 @@ function checkMoney() {
   const openRenewals = new Set(orders.filter((x) => x.OrderKey.startsWith('ORD-R-') && x.PaymentStatus !== 'Paid').map((x) => x.MemberNumber));
   const missing = pendingMembers.filter((m) => !openRenewals.has(m)).length;
   check(`money: every PendingRenewal member has an open renewal order (incl. Marcus)`, missing === 0 && openRenewals.has('ICF-000102'), `${pendingMembers.length} pending, ${missing} missing`);
+
+  // temporal integrity: a payment can't precede the bill it settles (2,386 rows did, 2026-07-27)
+  const orderDateOf = new Map(orders.map((o) => [o.OrderKey, o.OrderDate]));
+  const timeTravelers = payments.filter((p) => p.PaymentDate < orderDateOf.get(p.OrderKey)).length;
+  check('money: no payment dated before its order', timeTravelers === 0, `${timeTravelers} payments predate their order`);
+  // renewal bills post ahead of the cycle (the notice), first-period bills on the join date
+  const preBilled = duesOrders.filter((o) => { const per = perByKey.get(o.OrderKey); return per && o.OrderDate < per.StartDate; }).length;
+  check(`money: renewal bills post ahead of the period (${preBilled}/${duesOrders.length} pre-billed)`, preBilled > duesOrders.length * 0.5, 'renewal notices go out early');
 }
 
 // ---------- engagement dynamics: decline must PRECEDE lapse (found 2026-07-10) ----------
@@ -547,8 +582,29 @@ function checkComposedApps() {
   const aShare = assigned.length / Math.max(1, issues.length);
   const aAllow = II.assignment.tolerance + 1.5 * Math.sqrt(II.assignment.share * (1 - II.assignment.share) / Math.max(1, issues.length));
   check(`issues: ${(aShare * 100).toFixed(1)}% assigned vs ${II.assignment.share * 100}% ±${(aAllow * 100).toFixed(1)}`, Math.abs(aShare - II.assignment.share) <= aAllow, `${assigned.length}/${issues.length}`);
-  const officerSet = new Set(cMemberships.filter((m) => m.TermKey.endsWith(`:${R.committees.terms.at(-1).start}`) && ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
-  check('issues: every assignee is an active-term committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
+  const officerSet = new Set(cMemberships.filter((m) => ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
+  check('issues: every assignee is a committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
+  // an assignee must already be a member when the ticket was worked (26 issues used to be
+  // resolved before their assignee's JoinDate — current-term officers on 2015 tickets)
+  const joinBy = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
+  const anachronistic = assigned.filter((x) => { const t = x.ResolvedAt ?? x.ClosedAt; return t && (joinBy.get(x.AssigneeMemberNumber) ?? '9999') > t.slice(0, 10); }).length;
+  check('issues: no assignee predates their own join date', anachronistic === 0, `${anachronistic} anachronistic`);
+  // resolution time is heavy-tailed with a same-day mass — not a uniform block.
+  // The Issue table has no created column; the reported date is stated in the description.
+  const reportedOn = (x) => x.Description?.match(/Reported (\d{4}-\d{2}-\d{2})/)?.[1] ?? null;
+  const resDays = issues.filter((x) => x.ResolvedAt && reportedOn(x)).map((x) => Math.round((new Date(x.ResolvedAt.slice(0, 10)) - new Date(reportedOn(x))) / 86400000)).filter((d) => d >= 0);
+  const sameDayShare = resDays.filter((d) => d === 0).length / Math.max(1, resDays.length);
+  const longTail = resDays.filter((d) => d > 45).length;
+  check(`issues: resolution heavy-tailed (${(sameDayShare * 100).toFixed(0)}% same-day, ${longTail} over 45d, max ${Math.max(0, ...resDays)}d)`, sameDayShare >= 0.05 && longTail >= 1, 'not a uniform 3–21 block');
+  // the board reads like a real queue: every type present, titles not one template
+  const typeCounts = issues.reduce((a, x) => (a[x.TypeKey] = (a[x.TypeKey] ?? 0) + 1, a), {});
+  const titleShare = Math.max(...Object.values(issues.reduce((a, x) => (a[x.Title.replace(/—.*$/, '').trim()] = (a[x.Title.replace(/—.*$/, '').trim()] ?? 0) + 1, a), {}))) / Math.max(1, issues.length);
+  // every swimlane carries rows; the floor scales with N (Billing derives from the rare
+  // overdue-order population, so a pilot-scale run legitimately has only one or two)
+  const typeFloor = Math.max(1, Math.round(issues.length * 0.02));
+  check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
+  check(`issues: no single title template dominates (${(titleShare * 100).toFixed(0)}% max)`, titleShare < 0.45, 'title variety');
+  check('issues: descriptions present (the created date lives in the narrative)', issues.every((x) => x.Description && x.Description.length > 40), `${issues.filter((x) => x.Description).length}/${issues.length}`);
   // programs: pursuit + advocate shares land (over their real pools)
   const PRG = R.programs;
   const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
@@ -609,6 +665,22 @@ function checkComposedApps() {
   const outreach = new Set(tTasks.filter((t) => t.TypeKey === 'Renewal Outreach').map((t) => t.TaskKey));
   const missingOutreach = pendingMembers.filter((m2) => !outreach.has(`otask:${m2}`)).length;
   check(`tasks: renewal-outreach task per PendingRenewal member (${pendingMembers.length})`, missingOutreach === 0, `${tTasks.length} tasks total`);
+  // the board isn't one person's queue: no assignee may hold more than a third of it
+  const perAssignee = tAssignments.reduce((a, x) => (a[x.AssigneeMemberNumber] = (a[x.AssigneeMemberNumber] ?? 0) + 1, a), {});
+  const topShare = Math.max(0, ...Object.values(perAssignee)) / Math.max(1, tAssignments.length);
+  check(`tasks: workload spread (top assignee holds ${(topShare * 100).toFixed(0)}%, ${Object.keys(perAssignee).length} assignees)`, topShare <= 0.34, 'no single-owner board');
+  // task rows carry the fields a board renders: description, real completion states, hours
+  const withDesc = tTasks.filter((t) => t.Description && t.Description.length > 30).length;
+  check(`tasks: descriptions present (${withDesc}/${tTasks.length})`, withDesc === tTasks.length, 'a task board needs body text');
+  const pctVals = new Set(tTasks.map((t) => t.PercentComplete ?? 0));
+  check(`tasks: progress is granular (${pctVals.size} distinct PercentComplete values)`, pctVals.size >= 6, 'not just 0/25/50/100');
+  const started = tTasks.filter((t) => t.StartedAt).length;
+  const badOrder2 = tTasks.filter((t) => t.StartedAt && t.CompletedAt && t.StartedAt > t.CompletedAt).length;
+  check(`tasks: StartedAt on worked tasks (${started}), never after completion`, started > 0 && badOrder2 === 0, `${badOrder2} inverted`);
+  // creation isn't a single release-day batch
+  const assignDays = new Set(tAssignments.map((a) => a.AssignedAt.slice(0, 10)));
+  const topDay = Math.max(0, ...Object.values(tAssignments.reduce((a, x) => (a[x.AssignedAt.slice(0, 10)] = (a[x.AssignedAt.slice(0, 10)] ?? 0) + 1, a), {})));
+  check(`tasks: assignment dates spread (${assignDays.size} distinct days, biggest ${topDay})`, topDay / Math.max(1, tAssignments.length) < 0.25, 'no release-day pile-up');
   // issues: numbering dense + unique
   const nums = new Set(issues.map((x) => x.IssueNumber));
   check(`issues: ${issues.length} tickets, numbering dense + unique`, nums.size === issues.length && issues.length > 0, `${[...nums].slice(0, 2)}…`);
@@ -767,6 +839,17 @@ function checkMessaging() {
     if (ms.some((m) => m.ReceivedAt > `${run.releaseDate}T23:59:59Z`)) problems.push(`${t.ThreadKey}: message after release`);
   }
   check('messaging: thread/message integrity (state mirrors issue, coherent flow, inside history)', problems.length === 0, problems.slice(0, 3).join('; ') || `${smMessages.length} messages in ${smThreads.length} threads`);
+  // staff answer during the working week; members write whenever (the rhythm is the tell)
+  const outbound = smMessages.filter((x) => x.Direction === 'Outbound');
+  const offHours = outbound.filter((x) => { const d = new Date(x.ReceivedAt); return [0, 6].includes(d.getUTCDay()) || d.getUTCHours() < 8 || d.getUTCHours() > 18; }).length;
+  check(`messaging: staff replies inside business hours (${offHours}/${outbound.length} off-hours)`, offHours <= Math.max(2, outbound.length * 0.03), 'no 3am Sunday replies from the desk');
+  // the corpus must not visibly loop, and the wording must fit the ticket type
+  const distinctContent = new Set(smMessages.map((x) => x.Content)).size;
+  check(`messaging: message wording varies (${distinctContent} distinct of ${smMessages.length})`, distinctContent >= Math.min(30, smMessages.length * 0.3), 'type-aware banks, not 17 strings on a loop');
+  const issueTypeOf = new Map(issues.map((x) => [x.IssueKey, x.TypeKey]));
+  const misfit = smThreads.filter((t) => issueTypeOf.get(t.IssueKey) === 'Data Correction'
+    && smMessages.some((x) => x.ThreadKey === t.ThreadKey && /invoice|refund|payment|balance|charge/i.test(x.Content))).length;
+  check('messaging: wording matches the ticket type (no invoice talk on data-correction threads)', misfit === 0, `${misfit} mismatched threads`);
 }
 
 // ---------- motifs: every stamped archetype actually expresses ----------
@@ -796,6 +879,27 @@ function checkPlatform() {
   }
   check('platform: conversations coherent (tokens resolved, User-first, increasing clock, inside history)',
     convProblems.length === 0, convProblems.slice(0, 3).join('; ') || `${pConvDetails.length} turns in ${pConvs.length} conversations`);
+
+  // TRANSCRIPT TRUTH: numbers a seeded Skip answer states must match the SHIPPED pack.
+  // The transcript points the user at a query that would disprove it, so any drift here
+  // is the most legible falsehood in the dataset (it quoted a pre-defects member count).
+  const shippedPeople = people.length;
+  const segCounts = people.reduce((a, p) => (a[p.Segment] = (a[p.Segment] ?? 0) + 1, a), {});
+  const topSeg = Object.entries(segCounts).sort((a, b) => b[1] - a[1])[0] ?? ['—', 0];
+  // anchor on the claim WORDING, not bare numbers — a transcript mentioning "2025" means
+  // the year, not the roster size
+  const claimProblems = [];
+  for (const m of pConvDetails) {
+    const roster = m.Message.match(/([\d,]+)\s+(?:member profiles|members\b)/i);
+    if (roster) { const n = Number(roster[1].replace(/,/g, '')); if (n !== shippedPeople) claimProblems.push(`${m.MsgKey}: says ${n} members, pack ships ${shippedPeople}`); }
+    const seg = m.Message.match(/segment is (\w[\w -]*?) with ([\d,]+)/i);
+    if (seg) {
+      const n = Number(seg[2].replace(/,/g, ''));
+      if (seg[1].trim() !== topSeg[0] || n !== topSeg[1]) claimProblems.push(`${m.MsgKey}: says ${seg[1].trim()} ${n}, pack ships ${topSeg[0]} ${topSeg[1]}`);
+    }
+  }
+  check(`platform: transcript counts are true against the shipped pack (${shippedPeople} people, top segment ${topSeg[0]} ${topSeg[1]})`,
+    claimProblems.length === 0, claimProblems.slice(0, 2).join('; ') || 'no false claims');
 
   // audit rows mirror pack timelines EXACTLY (derive-never-invent, and the counts must match)
   const issueByKey = new Map(issues.map((x) => [x.IssueKey, x]));

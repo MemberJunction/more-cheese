@@ -66,8 +66,13 @@ export function buildWorld(cfg) {
   const defects = buildDefects(cfg, people, orgs, relationships);
 
   // platform residue AFTER defects: its RecordChange rows mirror timelines everywhere
-  // above, including the employment edges the defects module just rewrote
-  const platform = buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships });
+  // above, including the employment edges the defects module just rewrote.
+  // It must see the SAME roster the common pack ships (people + the duplicate-record
+  // shells defects injected) — the seeded Skip transcripts quote counts computed from
+  // this list, and quoting a pre-defects count made the transcript false against the
+  // very query it points the user at.
+  const shippedPeople = [...people, ...defects.extraPeople];
+  const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
   const sonar = buildSonar(cfg);
@@ -82,7 +87,7 @@ export function buildPacks(world) {
   return {
     common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
     membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
-    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta']), competition_entries: programs.competitionEntries } },
+    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta', '_future']), competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },
     committees: { dependsOn: ['common', 'membership'], tables: { committee_types: committees.types, committee_roles: committees.roles, committees: committees.committees, committee_terms: committees.terms, committee_memberships: committees.memberships, committee_meetings: committees.meetings, committee_attendance: committees.attendance, committee_agenda_items: committees.agendaItems, committee_motions: committees.motions, committee_votes: committees.votes } },

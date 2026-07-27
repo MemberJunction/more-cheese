@@ -233,8 +233,9 @@ export const MAPPING = {
       json: 'committee_meetings', table: '[__mj_BizAppsCommittees].[Meeting]',
       columns: (r) => ({
         ID: sqlId(uuidFor('meeting', r.MeetingKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
-        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), TimeZone: sqlStr('UTC'),
-        LocationType: sqlStr(r.LocationType), Status: sqlStr(r.Status),
+        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), EndDateTime: sqlDate(r.EndDateTime ?? null),
+        TimeZone: sqlStr('UTC'),
+        LocationType: sqlStr(r.LocationType), LocationText: sqlStr(r.LocationText ?? null), Status: sqlStr(r.Status),
       }),
     },
     {
@@ -282,9 +283,11 @@ export const MAPPING = {
     {
       json: 'tasks', table: '[__mj_BizAppsTasks].[Task]',
       columns: (r) => ({
-        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
-        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt), CompletedAt: sqlDate(r.CompletedAt ?? null),
+        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
+        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt),
+        StartedAt: sqlDate(r.StartedAt ?? null), CompletedAt: sqlDate(r.CompletedAt ?? null),
         PercentComplete: sqlNum(r.PercentComplete ?? 0),
+        HoursEstimated: sqlNum(r.HoursEstimated ?? null), HoursActual: sqlNum(r.HoursActual ?? null),
         CreatedByPersonID: sqlId(r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null),
       }),
     },
@@ -315,6 +318,7 @@ export const MAPPING = {
       json: 'issues', table: '[__mj_BizAppsIssues].[Issue]',
       columns: (r) => ({
         ID: sqlId(uuidFor('issue', r.IssueKey)), IssueNumber: sqlStr(r.IssueNumber), Title: sqlStr(r.Title),
+        Description: sqlStr(r.Description),
         IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlVar({ New: '@IS_New', 'In Progress': '@IS_InProgress', Resolved: '@IS_Resolved', Closed: '@IS_Closed' }[r.StatusKey]),
         Severity: sqlStr(r.Severity), Priority: sqlStr(r.Priority),
         ReporterPersonID: sqlId(uuidFor('person', r.ReporterMemberNumber)),

@@ -11,6 +11,9 @@ import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
 
+/** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
+const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
+
 export function buildCommittees(cfg, people, periods) {
   const { R, seed, release } = cfg;
   const C = R.committees;
@@ -87,11 +90,32 @@ export function buildCommittees(cfg, people, periods) {
     for (let y = C.meetings.startYear; y <= release.getUTCFullYear() + 1; y++) {
       for (let q = 0; q < C.meetings.cadencePerYear; q++) {
         const month = q * 3 + 1; // Jan/Apr/Jul/Oct
-        const dt = `${y}-${String(month).padStart(2, '0')}-${String(C.meetings.dayOfMonth).padStart(2, '0')}`;
+        // Each committee keeps its own rhythm: a preferred week-of-month and hour, jittered
+        // per meeting and nudged onto a weekday. Previously all four committees met on the
+        // 15th at 15:00Z forever — identical inter-meeting gaps, one location type, no end
+        // times, no minutes. A meeting list is the first governance screen anyone opens.
+        const rM = rng(seed, `meetingslot:${c.name}:${y}:${q}`);
+        const anchor = 3 + ((hashish(c.name) + q) % 3) * 7; // committee-specific week of the month
+        const dmax = new Date(Date.UTC(y, month, 0)).getUTCDate();
+        let day = Math.min(dmax, Math.max(1, anchor + rM.int(-2, 3)));
+        let dd = new Date(Date.UTC(y, month - 1, day));
+        if (dd.getUTCDay() === 0) dd = new Date(dd.getTime() + 86400000);
+        if (dd.getUTCDay() === 6) dd = new Date(dd.getTime() + 2 * 86400000);
+        const dt = iso(dd);
+        const startHour = 13 + (hashish(c.name) % 4) + rM.int(0, 1); // 13:00–17:00Z band, per committee
+        const startMin = rM.pick([0, 0, 15, 30]);
+        const durationMin = rM.pick([60, 60, 90, 90, 120]);
+        const endMs = Date.UTC(y, month - 1, dd.getUTCDate(), startHour, startMin) + durationMin * 60000;
+        // most governance is virtual, but quarterly in-person/hybrid sessions happen
+        const locType = rM.pickWeighted([['Virtual', 0.68], ['InPerson', 0.2], ['Hybrid', 0.12]]);
         const base = {
           MeetingKey: `${c.name}:${dt}`, CommitteeKey: c.name, Name: `${c.name} — Q${q + 1} ${y} meeting`,
-          StartDateTime: `${dt}T${String(C.meetings.hourUTC).padStart(2, '0')}:00:00Z`,
-          LocationType: 'Virtual', IsSharedDemo: true,
+          StartDateTime: `${dt}T${String(startHour).padStart(2, '0')}:${String(startMin).padStart(2, '0')}:00Z`,
+          EndDateTime: new Date(endMs).toISOString().replace(/\.\d{3}Z$/, 'Z'),
+          TimeZone: 'UTC',
+          LocationType: locType,
+          LocationText: locType === 'Virtual' ? null : `${C.meetings.venueCity ?? 'Madison, WI'} — ${rM.pick(['Board Room', 'Conference Room A', 'Guild Hall', 'Annex Room 2'])}`,
+          IsSharedDemo: true,
         };
         if (dt > releaseIso) {
           // future meeting: a Scheduled placeholder, capped per committee — no attendance/motions yet

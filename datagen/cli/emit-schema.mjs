@@ -77,9 +77,12 @@ const TABLES = [
     c('DefaultPriority', s(20)), c('IsActive', BIT),
   ] },
   { schema: '__mj_BizAppsTasks', table: 'Task', cols: [
-    c('ID', UID, { pk: true }), c('Name', s(255)), c('TypeID', UID, { fk: '[__mj_BizAppsTasks].[TaskType]' }),
+    c('ID', UID, { pk: true }), c('Name', s(255)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('TypeID', UID, { fk: '[__mj_BizAppsTasks].[TaskType]' }),
     c('Status', s(50)), c('Priority', s(20)), c('DueAt', 'DATETIMEOFFSET', { null: true }),
+    c('StartedAt', 'DATETIMEOFFSET', { null: true }),
     c('CompletedAt', 'DATETIMEOFFSET', { null: true }), c('PercentComplete', INT),
+    c('HoursEstimated', 'DECIMAL(9,2)', { null: true }), c('HoursActual', 'DECIMAL(9,2)', { null: true }),
     c('CreatedByPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
   ] },
   { schema: '__mj_BizAppsTasks', table: 'TaskAssignment', cols: [
@@ -101,6 +104,7 @@ const TABLES = [
   ] },
   { schema: '__mj_BizAppsIssues', table: 'Issue', cols: [
     c('ID', UID, { pk: true }), c('IssueNumber', s(50), { null: true }), c('Title', s(500)),
+    c('Description', 'NVARCHAR(MAX)', { null: true }),
     c('IssueTypeID', UID, { fk: '[__mj_BizAppsIssues].[IssueType]' }),
     c('StatusID', UID, { fk: '[__mj_BizAppsIssues].[IssueStatus]' }),
     c('Severity', s(20)), c('Priority', s(20)),
@@ -171,8 +175,9 @@ const TABLES = [
   ] },
   { schema: '__mj_BizAppsCommittees', table: 'Meeting', cols: [
     c('ID', UID, { pk: true }), c('CommitteeID', UID, { fk: '[__mj_BizAppsCommittees].[Committee]' }),
-    c('Name', s(255)), c('StartDateTime', 'DATETIMEOFFSET'), c('TimeZone', s(50)),
-    c('LocationType', s(50)), c('Status', s(50)),
+    c('Name', s(255)), c('StartDateTime', 'DATETIMEOFFSET'), c('EndDateTime', 'DATETIMEOFFSET', { null: true }),
+    c('TimeZone', s(50)),
+    c('LocationType', s(50)), c('LocationText', s(255), { null: true }), c('Status', s(50)),
   ] },
   { schema: '__mj_BizAppsCommittees', table: 'Attendance', cols: [
     c('ID', UID, { pk: true }), c('MeetingID', UID, { fk: '[__mj_BizAppsCommittees].[Meeting]' }),

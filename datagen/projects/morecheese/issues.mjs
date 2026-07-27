@@ -21,6 +21,37 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
 
   const drafts = []; // { key, type, title, reporter, sourceEntityName, sourceRefKind, sourceRefKey, created, priority }
 
+  // Titles rotate through per-kind phrasings (a board that is 68% one repeated template
+  // reads as generated in seconds); descriptions carry the reported date + specifics —
+  // the Issue table has no created-date column, so the date lives in the narrative text
+  // and in the platform pack's RecordChange backfill.
+  const titleOf = (r, kind, x) => r.pick({
+    billing: [
+      `Overdue dues question — order ${x.order}`, `Dues invoice ${x.order} still showing unpaid`,
+      `Payment not reflected on order ${x.order}`, `Question about a past-due balance (${x.order})`,
+    ],
+    datafix: [
+      `Employer record out of date — ${x.org}`, `Please update my employer — ${x.org} no longer current`,
+      `Change of employment: profile still lists ${x.org}`, `Directory shows the wrong employer (${x.org})`,
+      `Employer listing needs correction after changes at ${x.org}`,
+    ],
+    refund: [
+      `Refund request — ${x.event}`, `Couldn't attend ${x.event} — refund options?`,
+      `Missed ${x.event}; is a credit possible?`, `No-show refund policy question (${x.event})`,
+    ],
+    general: [
+      'Question about membership benefits', 'Directory listing update request',
+      'Trouble logging into the member portal', 'Newsletter not arriving',
+      'How do I access past webinar recordings?', 'Certificate download link broken',
+    ],
+  }[kind]);
+  const descOf = (kind, x, created) => ({
+    billing: `Reported ${created} via the member portal. Member asks about order ${x.order}, which was due ${x.due} and is showing past due. Wants to confirm the balance and whether a payment already sent has been applied.`,
+    datafix: `Reported ${created}. Member's profile still lists ${x.org} as employer; the organization record had a ${x.evKind ?? 'lifecycle'} event in ${x.evYear}. Requesting the employment record be corrected.`,
+    refund: `Reported ${created}. Member registered for ${x.event} (${x.evDate}) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.`,
+    general: `Reported ${created} via the member portal. ${x.detail}`,
+  }[kind]);
+
   // billing: members with an overdue order sometimes file a ticket
   const overdueByMember = new Map();
   for (const o of money.orders) {
@@ -29,11 +60,13 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   for (const [memberNumber, order] of [...overdueByMember.entries()].sort()) {
     const r = rng(seed, `issue-billing:${memberNumber}`);
     if (!r.bernoulli(I.billing.sharePerOverdueMember)) continue;
+    const created = iso(addDays(parseDate(order.DueDate), r.int(3, 20)));
     drafts.push({
       key: `billing:${memberNumber}`, type: 'Billing', priority: 'High',
-      title: `Overdue dues question — order ${order.OrderKey}`,
+      title: titleOf(r, 'billing', { order: order.OrderKey }),
+      description: descOf('billing', { order: order.OrderKey, due: order.DueDate }, created),
       reporter: memberNumber, sourceEntityName: 'MoreCheese: Orders', sourceRefKind: 'order', sourceRefKey: order.OrderKey,
-      created: iso(addDays(parseDate(order.DueDate), r.int(3, 20))),
+      created,
     });
   }
 
@@ -43,11 +76,14 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     if (!ev) continue;
     const r = rng(seed, `issue-datafix:${p.MemberNumber}`);
     if (!r.bernoulli(0.25)) continue;
+    const created = iso(addDays(new Date(Date.UTC(ev.year, 11, 31)), -r.int(0, 120)));
+    const org = orgByKey.get(p.OrgKey).Name;
     drafts.push({
       key: `datafix:${p.MemberNumber}`, type: 'Data Correction', priority: 'Medium',
-      title: `Employer record out of date — ${orgByKey.get(p.OrgKey).Name}`,
+      title: titleOf(r, 'datafix', { org }),
+      description: descOf('datafix', { org, evKind: ev.kind, evYear: ev.year }, created),
       reporter: p.MemberNumber, sourceEntityName: 'MJ_BizApps_Common: Organizations', sourceRefKind: 'org', sourceRefKey: p.OrgKey,
-      created: iso(addDays(new Date(Date.UTC(ev.year, 11, 31)), -r.int(0, 120))),
+      created,
     });
   }
 
@@ -58,30 +94,63 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     if (reg.Attended !== false || !ev?.IsPaid) continue;
     const r = rng(seed, `issue-refund:${reg.RegKey}`);
     if (!r.bernoulli(I.refunds.sharePerPaidNoShow)) continue;
+    const created = iso(addDays(parseDate(ev.Date), r.int(1, 10)));
     drafts.push({
       key: `refund:${reg.RegKey}`, type: 'Events', priority: 'Medium',
-      title: `Refund request — ${ev.Name}`,
+      title: titleOf(r, 'refund', { event: ev.Name }),
+      description: descOf('refund', { event: ev.Name, evDate: ev.Date }, created),
       reporter: reg.MemberNumber, sourceEntityName: 'MoreCheese: Event Registrations', sourceRefKind: 'reg', sourceRefKey: reg.RegKey,
-      created: iso(addDays(parseDate(ev.Date), r.int(1, 10))),
+      created,
+    });
+  }
+
+  // general inquiries: a thin, fact-free stream every real support queue has — portal
+  // logins, newsletters, directory updates. Small share of members, anywhere in coverage.
+  const generalDetails = [
+    'Member asks which benefits apply at their tier and whether webinar recordings are included.',
+    'Member requests an update to how their name appears in the public directory.',
+    'Member cannot sign in to the portal; password reset email reportedly never arrives.',
+    'Member reports the monthly newsletter stopped arriving after an email change.',
+    'Member asks where to find recordings of past webinars they registered for.',
+    'Member reports the certificate download link on their profile returns an error.',
+  ];
+  for (const p of people) {
+    if (p._hero) continue;
+    const r = rng(seed, `issue-general:${p.MemberNumber}`);
+    if (!r.bernoulli(I.general?.sharePerMember ?? 0.012)) continue;
+    const daysBack = r.int(10, 1400);
+    const created = iso(addDays(release, -daysBack));
+    if (created < p.JoinDate) continue;
+    const idx = r.int(0, generalDetails.length - 1);
+    drafts.push({
+      key: `general:${p.MemberNumber}`, type: 'General', priority: 'Low',
+      title: titleOf(r, 'general', {}),
+      description: descOf('general', { detail: generalDetails[idx] }, created),
+      reporter: p.MemberNumber, sourceEntityName: 'MJ_BizApps_Common: People', sourceRefKind: 'person', sourceRefKey: p.MemberNumber,
+      created,
     });
   }
 
   // authored: the dedup paper trail (Kate reports the duplicate; source = the dup record)
+  const dedupCreated = iso(addDays(release, -21));
   drafts.push({
     key: 'dedup:ICF-000111', type: 'Data Correction', priority: 'Medium',
     title: "Duplicate member records — Kate O'Leary appears twice",
+    description: `Reported ${dedupCreated}. Member reports two records under variants of her name (Kate / Kathy O'Leary), causing duplicate mailings and a split event history. Requesting the records be merged and the surviving record verified.`,
     reporter: 'ICF-000111', sourceEntityName: 'MJ_BizApps_Common: People', sourceRefKind: 'person', sourceRefKey: 'ICF-000287',
-    created: iso(addDays(release, -21)),
+    created: dedupCreated,
   });
 
   // authored: flagship-hero issues (cross-app footprint) — declared facts, like Kate's report
   for (const h of R.heroes) {
     (h.issues ?? []).forEach((it, i) => {
+      const created = iso(addDays(release, -it.daysBeforeRelease));
       drafts.push({
         key: `hero:${h.memberNumber}:${i}`, type: it.type, priority: typeDefault.get(it.type) ?? 'Medium',
         title: it.title,
+        description: `Reported ${created} by ${h.firstName ?? 'the member'} via the member portal. ${it.detail ?? it.title}`,
         reporter: h.memberNumber, sourceEntityName: 'MJ_BizApps_Common: People', sourceRefKind: 'person', sourceRefKey: h.memberNumber,
-        created: iso(addDays(release, -it.daysBeforeRelease)),
+        created,
       });
     });
   }
@@ -91,10 +160,24 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   // (active-term Chairs/Vice-Chairs) — no invented staff records.
   const LADDER = ['Low', 'Medium', 'High', 'Critical'];
   const clampRung = (i) => LADDER[Math.max(0, Math.min(LADDER.length - 1, i))];
-  const activeTerm = R.committees.terms.at(-1);
-  const officers = committees.memberships
-    .filter((m) => m.TermKey.endsWith(`:${activeTerm.start}`) && ['Chair', 'Vice Chair'].includes(m.RoleKey))
+  // TERM-AWARE officer pool: an issue is routed to someone who was actually serving when
+  // it was filed. Drawing from the current term only put 2015 tickets on officers who
+  // hadn't joined yet (26 issues resolved before their assignee's JoinDate).
+  const joinOf = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
+  const termByKey = new Map((committees.terms ?? []).map((t) => [t.TermKey, t]));
+  const allOfficers = committees.memberships
+    .filter((m) => ['Chair', 'Vice Chair'].includes(m.RoleKey))
     .sort((a, b) => a.MembershipKey < b.MembershipKey ? -1 : 1);
+  const officersOn = (dateIso) => {
+    const serving = allOfficers.filter((m) => {
+      const t = termByKey.get(m.TermKey);
+      if (!t) return false;
+      if (!(t.StartDate <= dateIso && dateIso <= t.EndDate)) return false;
+      return (joinOf.get(m.MemberNumber) ?? '9999') <= dateIso;
+    });
+    // before the first term (early history) fall back to anyone already a member then
+    return serving.length ? serving : allOfficers.filter((m) => (joinOf.get(m.MemberNumber) ?? '9999') <= dateIso);
+  };
   const assignShareByStatus = { New: 0.4, 'In Progress': 0.95, Resolved: 0.77, Closed: 0.77 };
 
   // number + status: deterministic order (created, then key), recency drives openness
@@ -116,21 +199,32 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     if (rt.bernoulli(I.priorityRule.noiseDownShare)) rung -= 1;
     const priority = clampRung(rung);
 
-    // assignment: New issues often still sit unassigned; worked/terminal ones mostly routed
+    // assignment: New issues often still sit unassigned; worked/terminal ones mostly routed.
+    // Pool is the officers serving on the day the ticket was filed.
     const ra = rng(seed, `issue-assign:${d.key}`);
-    const assignee = officers.length && ra.bernoulli(assignShareByStatus[status] ?? 0.75)
-      ? officers[ra.int(0, officers.length - 1)] : null;
+    const pool = officersOn(d.created);
+    const assignee = pool.length && ra.bernoulli(assignShareByStatus[status] ?? 0.75)
+      ? pool[ra.int(0, pool.length - 1)] : null;
+
+    // resolution time is heavy-tailed, not a uniform 3–21 block: a large same/next-day
+    // mass, a few-day median, and a thin tail that sits for months. Urgent tickets move
+    // faster (severity actually matters). Times of day spread across the workday.
+    const sevRush = { Critical: 0.35, High: 0.55, Medium: 1, Low: 1.6 }[severity] ?? 1;
+    const band = r.pickWeighted([['same', 0.22], ['fast', 0.38], ['normal', 0.28], ['slow', 0.10], ['stale', 0.02]]);
+    const rawDays = band === 'same' ? 0 : band === 'fast' ? r.int(1, 4) : band === 'normal' ? r.int(5, 18) : band === 'slow' ? r.int(19, 60) : r.int(61, 220);
+    const resolveDays = Math.max(0, Math.round(rawDays * sevRush));
+    const workHour = (rr) => `${String(rr.int(8, 17)).padStart(2, '0')}:${String(rr.int(0, 59)).padStart(2, '0')}:00Z`;
 
     return {
       IssueKey: d.key, IssueNumber: `${I.numberPrefix}-${String(i + 1).padStart(4, '0')}`,
-      Title: d.title, TypeKey: d.type, StatusKey: status,
+      Title: d.title, Description: d.description ?? null, TypeKey: d.type, StatusKey: status,
       Severity: severity, Priority: priority,
       ReporterMemberNumber: d.reporter,
       AssigneeEntityName: assignee ? 'MJ_BizApps_Common: People' : null,
       AssigneeMemberNumber: assignee ? assignee.MemberNumber : null,
       SourceEntityName: d.sourceEntityName, SourceRefKind: d.sourceRefKind, SourceRefKey: d.sourceRefKey,
-      ResolvedAt: terminal ? `${iso(addDays(parseDate(d.created), r.int(3, 21)))}T15:00:00Z` : null,
-      ClosedAt: status === 'Closed' ? `${iso(addDays(parseDate(d.created), r.int(21, 45)))}T15:00:00Z` : null,
+      ResolvedAt: terminal ? `${iso(addDays(parseDate(d.created), resolveDays))}T${workHour(r)}` : null,
+      ClosedAt: status === 'Closed' ? `${iso(addDays(parseDate(d.created), resolveDays + r.int(1, 30)))}T${workHour(r)}` : null,
       IsSharedDemo: true,
     };
   });

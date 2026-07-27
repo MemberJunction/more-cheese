@@ -69,9 +69,16 @@ export function buildMoney(cfg, people, periods, events, registrations) {
     },
     emit: (per, t) => {
       const start = parseDate(per.StartDate);
-      const orderDate = start; // the bill posts at period start
+      // renewal bills go out ahead of the cycle (the renewal notice); the FIRST period's
+      // bill is part of joining, so it posts on the join date itself. Early payers pay
+      // between bill arrival and the due date — never before the bill exists (the old
+      // post-at-start version let the manual profile's early offsets produce 2,386
+      // payments dated before their order).
+      const isFirst = personByKey.get(per.MemberNumber)?.JoinDate === per.StartDate;
+      const orderDate = isFirst ? start : addDays(start, -O.renewalBilledDaysAhead);
       const dueDate = addDays(start, t.termsDays);
-      const paymentDate = addDays(dueDate, t.offsetDays);
+      let paymentDate = addDays(dueDate, t.offsetDays);
+      if (paymentDate < orderDate) paymentDate = orderDate; // early payers pay when the bill arrives
       pushOrder(`ORD-D-${per.PeriodKey}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, per.DuesAmount, orderDate, dueDate, paymentDate, t.method);
 
       // PendingRenewal: the NEXT cycle's renewal order is already open and unpaid —

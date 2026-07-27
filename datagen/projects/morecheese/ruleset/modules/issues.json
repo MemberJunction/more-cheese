@@ -61,6 +61,10 @@
       "sharePerPaidNoShow": 0.04,
       "$note": "ESTIMATE — share of paid no-shows who ask about refunds"
     },
+    "general": {
+      "sharePerMember": 0.012,
+      "$note": "ESTIMATE — thin stream of fact-free portal inquiries (logins, newsletter, directory) every real support queue carries; gives the General type real volume instead of 1 row"
+    },
     "dataCorrection": {
       "$note": "one per member whose employer had a lifecycle event while they were active (incl. Danielle)"
     },
@@ -69,10 +73,62 @@
     "severity": {
       "$note": "severity = IMPACT, drawn per type; priority = URGENCY, derived from the type default with a severity bump (priorityRule) — decoupled so boards show a real matrix instead of a wall of Medium. ESTIMATE distributions.",
       "byType": {
-        "Billing": [["Critical", 0.1], ["High", 0.45], ["Medium", 0.35], ["Low", 0.1]],
-        "Data Correction": [["High", 0.1], ["Medium", 0.55], ["Low", 0.35]],
-        "Events": [["High", 0.15], ["Medium", 0.6], ["Low", 0.25]],
-        "General": [["Medium", 0.35], ["Low", 0.65]]
+        "Billing": [
+          [
+            "Critical",
+            0.1
+          ],
+          [
+            "High",
+            0.45
+          ],
+          [
+            "Medium",
+            0.35
+          ],
+          [
+            "Low",
+            0.1
+          ]
+        ],
+        "Data Correction": [
+          [
+            "High",
+            0.1
+          ],
+          [
+            "Medium",
+            0.55
+          ],
+          [
+            "Low",
+            0.35
+          ]
+        ],
+        "Events": [
+          [
+            "High",
+            0.15
+          ],
+          [
+            "Medium",
+            0.6
+          ],
+          [
+            "Low",
+            0.25
+          ]
+        ],
+        "General": [
+          [
+            "Medium",
+            0.35
+          ],
+          [
+            "Low",
+            0.65
+          ]
+        ]
       },
       "tolerance": 0.06
     },

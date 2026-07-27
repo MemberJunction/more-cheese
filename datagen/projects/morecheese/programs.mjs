@@ -32,20 +32,35 @@ export function buildPrograms(cfg, people, periods, learning) {
     streamKey: (p) => `cert:${p.MemberNumber}`,
     decide: (p, prob, r) => {
       if (!r.bernoulli(prob)) return;
-      const cert = r.pick(PR.certifications.catalog);
-      // enrolled sometime in the last ~3 years of their membership
-      const enrolled = addDays(release, -r.int(90, 1100));
-      if (iso(enrolled) < p.JoinDate) return;
-      const awarded = r.bernoulli(PR.certifications.awardShare) && iso(addDays(enrolled, 180)) < releaseIso;
-      const awardedOn = awarded ? addDays(enrolled, r.int(120, 360)) : null;
-      const expiresOn = awardedOn ? addYears(awardedOn, cert.validYears) : null;
-      const expired = expiresOn && iso(expiresOn) < releaseIso;
-      memberCertifications.push({
-        MemberCertKey: `${p.MemberNumber}:${cert.key}`, MemberNumber: p.MemberNumber, CertKey: cert.key,
-        Status: awarded ? (expired ? 'Expired' : 'Awarded') : 'InProgress',
-        EnrolledOn: iso(enrolled), AwardedOn: awardedOn ? iso(awardedOn) : null,
-        ExpiresOn: expiresOn ? iso(expiresOn) : null, IsSharedDemo: true,
-      });
+      // credential history spans the whole membership, not just the last 3 years — long
+      // tenures produce awards old enough that ValidYears runs out (Expired appears, and
+      // with it the recertification story). A smaller share pursue a SECOND credential
+      // after the first award — real programs have multi-credential members.
+      const daysSinceJoin = Math.max(120, Math.round((release - parseDate(p.JoinDate)) / 86400000) - 30);
+      const emitCert = (cert, enrolled) => {
+        // the award draw and the eligibility check use the SAME horizon: an award that
+        // would land after release means the pursuit is still InProgress (the old guard
+        // checked +180d but drew up to +360d — certs got awarded in the future)
+        const awardDays = r.int(120, 360);
+        const awarded = r.bernoulli(PR.certifications.awardShare) && iso(addDays(enrolled, awardDays)) <= releaseIso;
+        const awardedOn = awarded ? addDays(enrolled, awardDays) : null;
+        const expiresOn = awardedOn ? addYears(awardedOn, cert.validYears) : null;
+        const expired = expiresOn && iso(expiresOn) < releaseIso;
+        memberCertifications.push({
+          MemberCertKey: `${p.MemberNumber}:${cert.key}`, MemberNumber: p.MemberNumber, CertKey: cert.key,
+          Status: awarded ? (expired ? 'Expired' : 'Awarded') : 'InProgress',
+          EnrolledOn: iso(enrolled), AwardedOn: awardedOn ? iso(awardedOn) : null,
+          ExpiresOn: expiresOn ? iso(expiresOn) : null, IsSharedDemo: true,
+        });
+        return awardedOn;
+      };
+      const first = r.pick(PR.certifications.catalog);
+      const firstAwarded = emitCert(first, addDays(release, -r.int(90, daysSinceJoin)));
+      if (firstAwarded && r.bernoulli(0.2)) {
+        const second = r.pick(PR.certifications.catalog.filter((c) => c.key !== first.key));
+        const gap = r.int(180, 900);
+        if (second && iso(addDays(firstAwarded, gap)) < releaseIso) emitCert(second, addDays(firstAwarded, gap));
+      }
     },
   });
   // hero declarations (Sofia's in-progress CCP)
@@ -114,9 +129,20 @@ export function buildPrograms(cfg, people, periods, learning) {
   }
 
   function actionRow(member, y, i, kind, topic, r) {
+    // advocacy is campaign-spiky, not uniform: mass actions (letters, petitions) cluster
+    // into a shared per-year-per-topic campaign window — hundreds of members act within
+    // days of each other around a vote. Individual acts (testimony, meetings) stay spread.
+    let date;
+    if (kind === 'LetterCampaign' || kind === 'PetitionSignature') {
+      const rc = rng(seed, `campaign:${y}:${topic}`);
+      const campaignStart = new Date(Date.UTC(y, rc.int(0, 11), rc.int(1, 25)));
+      date = addDays(campaignStart, r.int(0, 4));
+    } else {
+      date = new Date(Date.UTC(y, r.int(0, 11), r.int(1, 28)));
+    }
     return {
       ActionKey: `${member}:${y}:${i}`, MemberNumber: member,
-      ActionDate: iso(new Date(Date.UTC(y, r.int(0, 11), r.int(1, 28)))),
+      ActionDate: iso(date),
       Kind: kind, Topic: topic, IsSharedDemo: true,
     };
   }
