@@ -25,13 +25,12 @@ export const MJ_ENTITY_VAR = {
   'MoreCheese: Member Profiles': '@E_MemberProfiles',
   'MoreCheese: Membership Periods': '@E_Periods',
   'MoreCheese: Competition Entries': '@E_CompEntries',
-  // sonar factor sources
+  // sonar factor sources (all single-hop to the People anchor)
   'MoreCheese: Event Registrations': '@E_Regs',
   'Committees: Memberships': '@E_CommMemberships',
   'MoreCheese: Course Enrollments': '@E_Enrollments',
-  'MoreCheese: Payments': '@E_Payments',
-  'MJ_BizApps_Forms: Form Response Answers': '@E_FormAnswers',
   'MoreCheese: Advocacy Actions': '@E_Advocacy',
+  'MJ_BizApps_Forms: Form Responses': '@E_FormResponses',
 };
 export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person' };
 
@@ -521,9 +520,9 @@ export const MAPPING = {
     },
   ],
   sonar: [
-    // bizapps-sonar's REAL shapes (V202606121005 Initial_Schema) — engagement scoring
-    // residue. CHECK value lists read from the migration itself (F9). Like platform,
-    // integration-grade: the preamble resolves __mj.Entity IDs, so real installs only.
+    // bizapps-sonar's REAL shapes (V202606121005 Initial_Schema) — engagement scoring MODEL
+    // DEFINITION ONLY (Sonar's FactorCompiler computes scores/contributions/history live, so we
+    // never pre-emit those rows). Integration-grade: the preamble resolves __mj.Entity IDs.
     {
       json: 'score_band_sets', table: '[__mj_BizAppsSonar].[ScoreBandSet]',
       columns: (r) => ({
@@ -540,22 +539,13 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'time_windows', table: '[__mj_BizAppsSonar].[TimeWindow]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarwindow', r.WindowKey)), Name: sqlStr(r.Name),
-        WindowType: sqlStr(r.WindowType), LengthMonths: sqlNum(r.LengthMonths),
-      }),
-    },
-    {
       json: 'score_models', table: '[__mj_BizAppsSonar].[ScoreModel]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmodel', r.ModelKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
         Description: sqlStr(r.Description), AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]),
         Status: sqlStr(r.Status), ScoreScaleMin: sqlNum(0), ScoreScaleMax: sqlNum(100),
         CombineStrategy: sqlStr(r.CombineStrategy), BandSetID: sqlId(uuidFor('sonarbandset', 'engagement-bands')),
-        RecomputeMode: sqlStr(r.RecomputeMode), RecomputeCron: sqlStr(r.RecomputeCron),
-        TrendWindowDays: sqlNum(r.TrendWindowDays), OwnerUserID: sqlId(uuidFor('mjuser', r.OwnerStaffKey)),
-        EffectiveFrom: sqlDate(r.EffectiveFrom),
+        OwnerUserID: sqlId(uuidFor('mjuser', r.OwnerStaffKey)), EffectiveFrom: sqlDate(r.EffectiveFrom),
         // CurrentVersionID is set by the pack POSTAMBLE (circular FK with ScoreModelVersion)
       }),
     },
@@ -574,7 +564,7 @@ export const MAPPING = {
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmre', r.RelatedKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         RelatedEntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), Alias: sqlStr(r.Alias),
-        RelationshipPath: sqlStr(r.RelationshipPath), JoinType: sqlStr(r.JoinType),
+        RelationshipPath: sqlStr(r.RelationshipPath), JoinType: sqlStr(r.JoinType), // '[]' → compiler auto-resolves FK path
       }),
     },
     {
@@ -583,11 +573,10 @@ export const MAPPING = {
         ID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
         Description: sqlStr(r.Description), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), FactorType: sqlStr(r.FactorType),
+        // the data source the FactorCompiler traverses — link to the ModelRelatedEntity (was missing)
+        SourceRelatedEntityID: sqlId(uuidFor('sonarmre', r.SourceRelatedKey)),
         SourceEntityID: sqlVar(MJ_ENTITY_VAR[r.SourceEntityName]), Aggregation: sqlStr(r.Aggregation),
-        TimeWindowID: sqlId(r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null),
-        RawDataType: sqlStr(r.RawDataType), NormalizationMethod: sqlStr(r.NormalizationMethod),
-        NormalizationParamsJSON: sqlStr(r.NormalizationParamsJSON),
-        OutputMin: sqlNum(r.OutputMin), OutputMax: sqlNum(r.OutputMax),
+        NormalizationMethod: sqlStr(r.NormalizationMethod),
         HigherIsBetter: sqlBit(r.HigherIsBetter), PromotionState: sqlStr(r.PromotionState),
       }),
     },
@@ -598,70 +587,6 @@ export const MAPPING = {
         FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Weight: sqlNum(r.Weight),
         WeightMode: sqlStr(r.WeightMode), MissingDataPolicy: sqlStr(r.MissingDataPolicy),
         IsRequired: sqlBit(r.IsRequired), DisplayLabel: sqlStr(r.DisplayLabel), DisplayOrder: sqlNum(r.DisplayOrder),
-      }),
-    },
-    {
-      json: 'recompute_runs', table: '[__mj_BizAppsSonar].[ScoreRecomputeRun]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarrun', r.RunKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)), TriggerType: sqlStr(r.TriggerType),
-        Scope: sqlStr(r.Scope), StartedAt: sqlDate(r.StartedAt), CompletedAt: sqlDate(r.CompletedAt),
-        Status: sqlStr(r.Status), RecordsScored: sqlNum(r.RecordsScored), RecordsChanged: sqlNum(r.RecordsChanged),
-        BandTransitions: sqlNum(r.BandTransitions), DurationMs: sqlNum(r.DurationMs), CostUnitsConsumed: sqlNum(r.CostUnitsConsumed),
-      }),
-    },
-    {
-      json: 'scores', table: '[__mj_BizAppsSonar].[Score]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarscore', r.ScoreKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)),
-        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
-        RawScore: sqlNum(r.RawScore), NormalizedScore: sqlNum(r.NormalizedScore),
-        BandID: sqlId(uuidFor('sonarband', r.BandKey)),
-        PreviousNormalizedScore: sqlNum(r.PreviousNormalizedScore), PreviousBandID: sqlId(uuidFor('sonarband', r.PreviousBandKey)),
-        Delta: sqlNum(r.Delta), TrendDirection: sqlStr(r.TrendDirection), TrendSlope: sqlNum(r.TrendSlope),
-        Confidence: sqlNum(r.Confidence), DataCompleteness: sqlNum(r.DataCompleteness),
-        ComputedAt: sqlDate(r.ComputedAt), AsOfDate: sqlDate(r.AsOfDate), IsStale: sqlBit(r.IsStale),
-        NextRecomputeAt: sqlDate(r.NextRecomputeAt), ExplanationSummary: sqlStr(r.ExplanationSummary),
-      }),
-    },
-    {
-      json: 'score_contributions', table: '[__mj_BizAppsSonar].[ScoreFactorContribution]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarcontrib', r.ContribKey)), ScoreID: sqlId(uuidFor('sonarscore', r.ScoreKey)),
-        ModelFactorID: sqlId(uuidFor('sonarmf', r.ModelFactorKey)), FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)),
-        RawValue: sqlNum(r.RawValue), NormalizedValue: sqlNum(r.NormalizedValue),
-        WeightedContribution: sqlNum(r.WeightedContribution), PercentOfTotal: sqlNum(r.PercentOfTotal),
-        ContributionDelta: sqlNum(r.ContributionDelta), HadData: sqlBit(r.HadData), MissingDataApplied: sqlBit(r.MissingDataApplied),
-      }),
-    },
-    {
-      json: 'score_history', table: '[__mj_BizAppsSonar].[ScoreHistory]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarhist', r.HistKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)),
-        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
-        NormalizedScore: sqlNum(r.NormalizedScore), BandID: sqlId(uuidFor('sonarband', r.BandKey)),
-        AsOfDate: sqlDate(r.AsOfDate), ComputedAt: sqlDate(r.ComputedAt),
-        DataCompleteness: sqlNum(r.DataCompleteness), Confidence: sqlNum(r.Confidence),
-      }),
-    },
-    {
-      json: 'band_transitions', table: '[__mj_BizAppsSonar].[ScoreBandTransition]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonartrans', r.TransKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
-        FromBandID: sqlId(uuidFor('sonarband', r.FromBandKey)), ToBandID: sqlId(uuidFor('sonarband', r.ToBandKey)),
-        Direction: sqlStr(r.Direction), OccurredAt: sqlDate(r.OccurredAt),
-        RecomputeRunID: sqlId(uuidFor('sonarrun', r.RunKey)), Handled: sqlBit(r.Handled),
-      }),
-    },
-    {
-      json: 'audit_events', table: '[__mj_BizAppsSonar].[ScoreModelAuditEvent]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonaraudit', r.AuditKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        EntityChanged: sqlStr(r.EntityChanged), ChangeType: sqlStr(r.ChangeType),
-        ChangedByUserID: sqlId(uuidFor('mjuser', r.StaffKey)), ChangedAt: sqlDate(r.ChangedAt),
       }),
     },
   ],
@@ -742,9 +667,8 @@ export const PREAMBLE = {
     "DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');",
     "DECLARE @E_CommMemberships UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'Committees: Memberships');",
     "DECLARE @E_Enrollments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Course Enrollments');",
-    "DECLARE @E_Payments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Payments');",
-    "DECLARE @E_FormAnswers UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Response Answers');",
     "DECLARE @E_Advocacy UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Advocacy Actions');",
+    "DECLARE @E_FormResponses UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Responses');",
   ],
   issues: [
     "-- app-seeded lookups resolve BY NAME (F6)",

@@ -64,11 +64,8 @@ const pRecordChanges = load('platform', 'record_changes');
 const snModelFactors = load('sonar', 'model_factors');
 const snBands = load('sonar', 'score_bands');
 const snFactors = load('sonar', 'factors');
-const snScores = load('sonar', 'scores');
-const snContribs = load('sonar', 'score_contributions');
-const snHistory = load('sonar', 'score_history');
-const snTransitions = load('sonar', 'band_transitions');
-const snRuns = load('sonar', 'recompute_runs');
+const snModels = load('sonar', 'score_models');
+const snRelated = load('sonar', 'model_related_entities');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -144,15 +141,15 @@ function checkPacks() {
     + pListDetails.filter((x) => !RECORD_PREFIX[x.RefKind] || !refOk(x)).length;
   check('pack refs: platform→staff users + audit/favorites/lists→real records', badPlat === 0, `${badPlat} dangling`);
   // sonar: scores/history/transitions anchor real people; contributions resolve to scores+factors
-  const scoreKeys = new Set(snScores.map((x) => x.ScoreKey));
+  // sonar is DEFINITIONS ONLY (Sonar computes scores live): factors link to a model + a
+  // related entity; model-factors link factor↔model; bands belong to the band set.
+  const modelKeys = new Set(snModels.map((x) => x.ModelKey));
   const factorKeys = new Set(snFactors.map((x) => x.FactorKey));
-  const bandKeys = new Set(snBands.map((x) => x.BandKey));
-  const badSonar = [...snScores, ...snHistory, ...snTransitions].filter((x) => !peopleKeys.has(x.MemberNumber)).length
-    + snContribs.filter((x) => !scoreKeys.has(x.ScoreKey) || !factorKeys.has(x.FactorKey)).length
-    + snScores.filter((x) => !bandKeys.has(x.BandKey) || !bandKeys.has(x.PreviousBandKey)).length
-    + snHistory.filter((x) => !bandKeys.has(x.BandKey)).length
-    + snTransitions.filter((x) => !bandKeys.has(x.FromBandKey) || !bandKeys.has(x.ToBandKey)).length;
-  check('pack refs: sonar→common + contributions→scores/factors + bands resolve', badSonar === 0, `${badSonar} dangling`);
+  const relatedKeys = new Set(snRelated.map((x) => x.RelatedKey));
+  const badSonar = snFactors.filter((x) => !modelKeys.has(x.ModelKey) || !relatedKeys.has(x.SourceRelatedKey)).length
+    + snModelFactors.filter((x) => !modelKeys.has(x.ModelKey) || !factorKeys.has(x.FactorKey)).length
+    + snRelated.filter((x) => !modelKeys.has(x.ModelKey)).length;
+  check('pack refs: sonar factors→model+relatedEntity, model-factors→factor', badSonar === 0, `${badSonar} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -864,68 +861,41 @@ function checkPlatform() {
 
 // ---------- sonar: scores re-derive from the packs, signal is honest ----------
 function checkSonar() {
-  const SS = R.sonar;
-  const problems = [];
-
-  const weightSum = snModelFactors.reduce((a, x) => a + x.Weight, 0);
-  check('sonar: factor weights sum to 100', weightSum === 100, `${weightSum}`);
+  // DEFINITIONS ONLY — Sonar's engine computes the scores, so the gate validates that the
+  // model is well-formed and each factor is EXECUTABLE by the FactorCompiler (the "no data
+  // source" class of failure). Score correctness / the Bob<Elena contrast is witnessed live
+  // in Sonar after a recompute, not here.
+  check('sonar: one Active WeightedSum model', snModels.length === 1 && snModels[0].Status === 'Active' && snModels[0].CombineStrategy === 'WeightedSum',
+    `${snModels.length} model(s)`);
 
   const sorted = [...snBands].sort((a, b) => a.MinScore - b.MinScore);
-  const contiguous = sorted[0].MinScore === 0 && sorted[sorted.length - 1].MaxScore === 100
+  const contiguous = sorted.length >= 2 && sorted[0].MinScore === 0 && sorted[sorted.length - 1].MaxScore === 100
     && sorted.every((b, i) => i === 0 || sorted[i - 1].MaxScore === b.MinScore);
   check('sonar: bands tile 0..100 with no gaps', contiguous, sorted.map((b) => `${b.Label} ${b.MinScore}-${b.MaxScore}`).join(', '));
 
-  // per-score internal consistency: contributions sum to the score, delta/trend/band agree
-  const contribsByScore = new Map();
-  for (const c of snContribs) (contribsByScore.get(c.ScoreKey) ?? contribsByScore.set(c.ScoreKey, []).get(c.ScoreKey)).push(c);
-  const bandFor = (s) => sorted.find((b) => s < b.MaxScore || b.MaxScore === 100).BandKey;
-  for (const s of snScores) {
-    const parts = contribsByScore.get(s.ScoreKey) ?? [];
-    if (parts.length !== snModelFactors.length) problems.push(`${s.ScoreKey}: ${parts.length} contributions`);
-    const sum = Math.round(parts.reduce((a, c) => a + c.WeightedContribution, 0) * 100) / 100;
-    if (Math.abs(sum - s.NormalizedScore) > 0.05) problems.push(`${s.ScoreKey}: contribs ${sum} != score ${s.NormalizedScore}`);
-    if (Math.abs((s.NormalizedScore - s.PreviousNormalizedScore) - s.Delta) > 0.011) problems.push(`${s.ScoreKey}: delta drift`);
-    const expTrend = Math.abs(s.Delta) < SS.flatDeltaThreshold ? 'Flat' : s.Delta > 0 ? 'Up' : 'Down';
-    if (s.TrendDirection !== expTrend) problems.push(`${s.ScoreKey}: trend ${s.TrendDirection} != ${expTrend}`);
-    if (s.BandKey !== bandFor(s.NormalizedScore)) problems.push(`${s.ScoreKey}: band mismatch`);
+  // every factor is executable: Declarative + a supported aggregation + a linked source
+  // related entity + an anchor; the related entity has an auto-resolve ('[]') or JSON path.
+  const relByKey = new Map(snRelated.map((r) => [r.RelatedKey, r]));
+  const AGG = new Set(['Count', 'Sum', 'Avg', 'Min', 'Max', 'DistinctCount', 'Exists', 'Recency', 'RatePerPeriod', 'TrendSlope']);
+  const problems = [];
+  for (const f of snFactors) {
+    if (f.FactorType !== 'Declarative') problems.push(`${f.Slug}: FactorType ${f.FactorType}`);
+    if (!AGG.has(f.Aggregation)) problems.push(`${f.Slug}: unsupported aggregation ${f.Aggregation}`);
+    const rel = relByKey.get(f.SourceRelatedKey);
+    if (!rel) { problems.push(`${f.Slug}: SourceRelatedKey unresolved (would be "no data source")`); continue; }
+    try { const p = JSON.parse(rel.RelationshipPath); if (!Array.isArray(p)) problems.push(`${f.Slug}: RelationshipPath not a JSON array`); }
+    catch { problems.push(`${f.Slug}: RelationshipPath not valid JSON ('${rel.RelationshipPath}')`); }
+    if ((f.Aggregation === 'Sum' || f.Aggregation === 'Avg' || f.Aggregation === 'Min' || f.Aggregation === 'Max') && !f.AggregateFieldName)
+      problems.push(`${f.Slug}: ${f.Aggregation} needs AggregateFieldName`);
   }
-  check('sonar: every score internally consistent (contribs sum, delta, trend, band)', problems.length === 0,
-    problems.slice(0, 3).join('; ') || `${snScores.length} scores × ${snModelFactors.length} factors`);
+  check('sonar: every factor is executable (Declarative, agg, linked related entity, JSON path)',
+    problems.length === 0, problems.slice(0, 4).join('; ') || `${snFactors.length} factors`);
 
-  // history/transitions/runs mirror the snapshot math exactly
-  const nSnap = SS.snapshots.offsetsDaysBeforeRelease.length;
-  check('sonar: history = members × snapshots', snHistory.length === snScores.length * nSnap, `${snHistory.length} vs ${snScores.length}×${nSnap}`);
-  const histByMember = new Map();
-  for (const h of snHistory) (histByMember.get(h.MemberNumber) ?? histByMember.set(h.MemberNumber, []).get(h.MemberNumber)).push(h);
-  let expTrans = 0;
-  for (const rows of histByMember.values()) {
-    rows.sort((a, b) => (a.AsOfDate < b.AsOfDate ? -1 : 1));
-    for (let i = 1; i < rows.length; i++) if (rows[i].BandKey !== rows[i - 1].BandKey) expTrans++;
-  }
-  check('sonar: band transitions == history band changes', snTransitions.length === expTrans, `${snTransitions.length} vs ${expTrans}`);
-  const runsOk = snRuns.length === nSnap && snRuns.every((r) => r.Status === 'Succeeded' && r.RecordsScored === snScores.length)
-    && snRuns.reduce((a, r) => a + r.BandTransitions, 0) === snTransitions.length;
-  check('sonar: recompute runs coherent (count, scored, transition totals)', runsOk, `${snRuns.length} runs`);
-
-  // the signal is honest: disengaged members really score lower, and the flagship contrast holds
-  const scoreByMember = new Map(snScores.map((s) => [s.MemberNumber, s]));
-  const lapsed = [], active = [];
-  for (const [m, st] of lastStatus) {
-    const s = scoreByMember.get(m); if (!s) continue;
-    if (st === 'Lapsed') lapsed.push(s.NormalizedScore); else if (st === 'Active') active.push(s.NormalizedScore);
-  }
-  const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
-  const gap = mean(active) - mean(lapsed);
-  check(`sonar: engagement→retention signal (active mean − lapsed mean = ${gap.toFixed(1)} ≥ 3)`, gap >= 3,
-    `active ${mean(active).toFixed(1)} (n=${active.length}) vs lapsed ${mean(lapsed).toFixed(1)} (n=${lapsed.length})`);
-  // Bob's decline is a multi-YEAR arc — his 90-day trend direction legitimately jitters
-  // by seed (a sliding window can catch one extra event), so the binary claims are the
-  // rank gap and that he never reads as a top-band member.
-  const elena = scoreByMember.get('ICF-000101');
-  const bob = scoreByMember.get('ICF-000105');
-  check('sonar: flagship contrast (Elena ≥ Bob + 10, Bob below Engaged)',
-    !!elena && !!bob && elena.NormalizedScore >= bob.NormalizedScore + 10 && bob.BandKey !== 'engaged',
-    `Elena ${elena?.NormalizedScore} (${elena?.BandKey}) vs Bob ${bob?.NormalizedScore} (${bob?.BandKey}, ${bob?.TrendDirection})`);
+  // model-factors: one per factor, positive weight
+  const mfFactorKeys = new Set(snModelFactors.map((x) => x.FactorKey));
+  const allBound = snFactors.every((f) => mfFactorKeys.has(f.FactorKey)) && snModelFactors.every((mf) => mf.Weight > 0);
+  check('sonar: every factor bound into the model with a positive weight', allBound,
+    `${snModelFactors.length} model-factors / ${snFactors.length} factors`);
 }
 
 function checkMotifs() {

@@ -251,41 +251,30 @@ const MAPPING = [
       },
     }),
   },
-  // ---- sonar pack → bizapps-sonar entities (METADATA delivery: engagement scoring loaded
-  // through the entity SPs). Core-entity refs use 'MJ: Entities' by name (NOT 'Entities');
-  // staff-user refs are literal pinned mjuser UUIDs (created earlier by the platform INSERT
-  // pack). The circular FK ScoreModel.CurrentVersionID → ScoreModelVersion is expressed as a
-  // deferred @lookup: it fails on pass 1 (version not yet created), so the model is created
-  // with it null, and PushService PHASE 2.5 sets it once the version exists — the metadata-
-  // world equivalent of the INSERT path's POSTAMBLE UPDATE. Order below is parent-before-child.
+  // ---- sonar pack → bizapps-sonar entities: engagement scoring MODEL DEFINITION ONLY.
+  // Sonar's FactorCompiler computes scores/contributions/history live, so we ship definitions
+  // (bandset, bands, model, version, related-entities, factors, model-factors) and never emit
+  // score rows. Core-entity refs use 'MJ: Entities' by name; staff-user refs are literal pinned
+  // mjuser UUIDs (created by the platform INSERT pack). Factors are executable: FactorType
+  // Declarative + Count over a related entity linked by SourceRelatedEntityID; the related
+  // entity's RelationshipPath '[]' lets the compiler auto-resolve the FK path to the anchor.
+  // The circular FK ScoreModel.CurrentVersionID → ScoreModelVersion is a deferred @lookup:
+  // it fails on pass 1 (version not yet created) so the model is created with it null, and
+  // PushService PHASE 2.5 sets it once the version exists. Order = parent-before-child.
   { pack: 'sonar', json: 'score_band_sets', dir: 'sonar-score-band-sets', entity: 'MJ_BizApps_Sonar: Score Band Sets',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarbandset', r.BandSetKey) }, fields: { Name: r.Name, AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, Description: r.Description } }) },
   { pack: 'sonar', json: 'score_bands', dir: 'sonar-score-bands', entity: 'MJ_BizApps_Sonar: Score Bands',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarband', r.BandKey) }, fields: { BandSetID: uuidFor('sonarbandset', r.BandSetKey), Label: r.Label, MinScore: r.MinScore, MaxScore: r.MaxScore, Severity: r.Severity, ColorHex: r.ColorHex, IsTerminal: r.IsTerminal, Description: r.Description } }) },
-  { pack: 'sonar', json: 'time_windows', dir: 'sonar-time-windows', entity: 'MJ_BizApps_Sonar: Time Windows',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarwindow', r.WindowKey) }, fields: { Name: r.Name, WindowType: r.WindowType, LengthMonths: r.LengthMonths } }) },
   { pack: 'sonar', json: 'score_models', dir: 'sonar-score-models', entity: 'MJ_BizApps_Sonar: Score Models',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarmodel', r.ModelKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, Status: r.Status, ScoreScaleMin: 0, ScoreScaleMax: 100, CombineStrategy: r.CombineStrategy, BandSetID: uuidFor('sonarbandset', 'engagement-bands'), RecomputeMode: r.RecomputeMode, RecomputeCron: r.RecomputeCron, TrendWindowDays: r.TrendWindowDays, OwnerUserID: uuidFor('mjuser', r.OwnerStaffKey), EffectiveFrom: r.EffectiveFrom, CurrentVersionID: `@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=${uuidFor('sonarver', r.ModelKey + ':1')}?allowDefer` } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('sonarmodel', r.ModelKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, Status: r.Status, ScoreScaleMin: 0, ScoreScaleMax: 100, CombineStrategy: r.CombineStrategy, BandSetID: uuidFor('sonarbandset', 'engagement-bands'), OwnerUserID: uuidFor('mjuser', r.OwnerStaffKey), EffectiveFrom: r.EffectiveFrom, CurrentVersionID: `@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=${uuidFor('sonarver', r.ModelKey + ':1')}?allowDefer` } }) },
   { pack: 'sonar', json: 'score_model_versions', dir: 'sonar-score-model-versions', entity: 'MJ_BizApps_Sonar: Score Model Versions',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarver', r.VersionKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), VersionNumber: r.VersionNumber, VersionLabel: r.VersionLabel, ConfigSnapshotJSON: r.ConfigSnapshotJSON, ChangeSummary: r.ChangeSummary, PublishedByUserID: uuidFor('mjuser', r.PublishedByStaffKey), PublishedAt: r.PublishedAt, IsCurrent: r.IsCurrent } }) },
   { pack: 'sonar', json: 'model_related_entities', dir: 'sonar-model-related-entities', entity: 'MJ_BizApps_Sonar: Model Related Entities',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarmre', r.RelatedKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), RelatedEntityID: `@lookup:MJ: Entities.Name=${r.EntityName}`, Alias: r.Alias, RelationshipPath: r.RelationshipPath, JoinType: r.JoinType } }) },
   { pack: 'sonar', json: 'factors', dir: 'sonar-factors', entity: 'MJ_BizApps_Sonar: Factors',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarfactor', r.FactorKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, ScoreModelID: uuidFor('sonarmodel', r.ModelKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, FactorType: r.FactorType, SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, Aggregation: r.Aggregation, TimeWindowID: r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null, RawDataType: r.RawDataType, NormalizationMethod: r.NormalizationMethod, NormalizationParamsJSON: r.NormalizationParamsJSON, OutputMin: r.OutputMin, OutputMax: r.OutputMax, HigherIsBetter: r.HigherIsBetter, PromotionState: r.PromotionState } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('sonarfactor', r.FactorKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, ScoreModelID: uuidFor('sonarmodel', r.ModelKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, FactorType: r.FactorType, SourceRelatedEntityID: uuidFor('sonarmre', r.SourceRelatedKey), SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, Aggregation: r.Aggregation, NormalizationMethod: r.NormalizationMethod, HigherIsBetter: r.HigherIsBetter, PromotionState: r.PromotionState } }) },
   { pack: 'sonar', json: 'model_factors', dir: 'sonar-model-factors', entity: 'MJ_BizApps_Sonar: Model Factors',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarmf', r.ModelFactorKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), FactorID: uuidFor('sonarfactor', r.FactorKey), Weight: r.Weight, WeightMode: r.WeightMode, MissingDataPolicy: r.MissingDataPolicy, IsRequired: r.IsRequired, DisplayLabel: r.DisplayLabel, DisplayOrder: r.DisplayOrder } }) },
-  { pack: 'sonar', json: 'recompute_runs', dir: 'sonar-recompute-runs', entity: 'MJ_BizApps_Sonar: Score Recompute Runs',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarrun', r.RunKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), ScoreModelVersionID: uuidFor('sonarver', r.VersionKey), TriggerType: r.TriggerType, Scope: r.Scope, StartedAt: r.StartedAt, CompletedAt: r.CompletedAt, Status: r.Status, RecordsScored: r.RecordsScored, RecordsChanged: r.RecordsChanged, BandTransitions: r.BandTransitions, DurationMs: r.DurationMs, CostUnitsConsumed: r.CostUnitsConsumed } }) },
-  { pack: 'sonar', json: 'scores', dir: 'sonar-scores', entity: 'MJ_BizApps_Sonar: Scores',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarscore', r.ScoreKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), ScoreModelVersionID: uuidFor('sonarver', r.VersionKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, AnchorRecordID: uuidFor('person', r.MemberNumber), RawScore: r.RawScore, NormalizedScore: r.NormalizedScore, BandID: uuidFor('sonarband', r.BandKey), PreviousNormalizedScore: r.PreviousNormalizedScore, PreviousBandID: uuidFor('sonarband', r.PreviousBandKey), Delta: r.Delta, TrendDirection: r.TrendDirection, TrendSlope: r.TrendSlope, Confidence: r.Confidence, DataCompleteness: r.DataCompleteness, ComputedAt: r.ComputedAt, AsOfDate: r.AsOfDate, IsStale: r.IsStale, NextRecomputeAt: r.NextRecomputeAt, ExplanationSummary: r.ExplanationSummary } }) },
-  { pack: 'sonar', json: 'score_contributions', dir: 'sonar-score-contributions', entity: 'MJ_BizApps_Sonar: Score Factor Contributions',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarcontrib', r.ContribKey) }, fields: { ScoreID: uuidFor('sonarscore', r.ScoreKey), ModelFactorID: uuidFor('sonarmf', r.ModelFactorKey), FactorID: uuidFor('sonarfactor', r.FactorKey), RawValue: r.RawValue, NormalizedValue: r.NormalizedValue, WeightedContribution: r.WeightedContribution, PercentOfTotal: r.PercentOfTotal, ContributionDelta: r.ContributionDelta, HadData: r.HadData, MissingDataApplied: r.MissingDataApplied } }) },
-  { pack: 'sonar', json: 'score_history', dir: 'sonar-score-history', entity: 'MJ_BizApps_Sonar: Score Histories',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarhist', r.HistKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), ScoreModelVersionID: uuidFor('sonarver', r.VersionKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, AnchorRecordID: uuidFor('person', r.MemberNumber), NormalizedScore: r.NormalizedScore, BandID: uuidFor('sonarband', r.BandKey), AsOfDate: r.AsOfDate, ComputedAt: r.ComputedAt, DataCompleteness: r.DataCompleteness, Confidence: r.Confidence } }) },
-  { pack: 'sonar', json: 'band_transitions', dir: 'sonar-band-transitions', entity: 'MJ_BizApps_Sonar: Score Band Transitions',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonartrans', r.TransKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), AnchorRecordID: uuidFor('person', r.MemberNumber), FromBandID: uuidFor('sonarband', r.FromBandKey), ToBandID: uuidFor('sonarband', r.ToBandKey), Direction: r.Direction, OccurredAt: r.OccurredAt, RecomputeRunID: uuidFor('sonarrun', r.RunKey), Handled: r.Handled } }) },
-  { pack: 'sonar', json: 'audit_events', dir: 'sonar-audit-events', entity: 'MJ_BizApps_Sonar: Score Model Audit Events',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonaraudit', r.AuditKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), EntityChanged: r.EntityChanged, ChangeType: r.ChangeType, ChangedByUserID: uuidFor('mjuser', r.StaffKey), ChangedAt: r.ChangedAt } }) },
 ];
 
 // ---------- emit the tree ----------

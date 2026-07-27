@@ -1,187 +1,30 @@
 {
-  "$comment": "SONAR MODULE (pack: sonar) — targets bizapps-sonar (schema __mj_BizAppsSonar, entity prefix 'MJ_BizApps_Sonar: ', shapes + CHECK lists read from its migrations V202606121005 Initial_Schema). Seeds ONE engagement score model over the member spine so the Sonar app opens onto lived-in data: model + published version + band set + time windows + 6 factors + per-member Scores with factor contributions, quarterly ScoreHistory, band-crossing transitions, and recompute runs. DERIVE-NEVER-INVENT: every raw factor value is computed from facts other packs generated (attended registrations, active committee terms, enrollments+cert pursuits, failed/denied payments, NPS answers, advocacy actions) evaluated in windows relative to each snapshot date — so scores ride the same hidden engagement dial as everything else and rank-order truthfully (Bob scores below Elena by construction, not by pin). Slug is 'morecheese-engagement' — the Sonar demo clone already owns 'member-engagement-score'/'cheese-member-engagement'/'engagement' and ScoreModel.Slug is UNIQUE. Like the platform pack this is integration-grade data (__mj.Entity lookups in the preamble): it loads on real installs, not bare playgrounds. Model/version owner + publisher are the platform pack's staff users, so INSTALL_ORDER puts sonar AFTER platform.",
+  "$comment": "SONAR MODULE (pack: sonar) — targets bizapps-sonar (schema __mj_BizAppsSonar). DEFINITIONS ONLY: Sonar is a live scoring engine (FactorCompiler compiles factors to SQL and computes scores), so we ship the model + published version + bands + related entities + factors + weights, and let Sonar recompute scores/contributions/history after install (do NOT pre-compute score rows — they can't match the engine and a Declarative factor without an executable definition won't compile). Factors mirror the working demo models: Declarative + Count over a single-hop related entity, RelationshipPath '[]' (compiler auto-resolves the FK path to the People anchor), MinMax normalization (engine derives min/max over the population), equal additive weights, WeightedSum → 0..100. Engagement = breadth/volume of real participation; a declining member scores below an active one because Sonar counts the actual rows. Slug 'morecheese-engagement' (unique; the demo clone owns other engagement slugs). Integration-grade: model owner is a platform-pack staff user, so INSTALL_ORDER puts sonar after platform.",
   "sonar": {
     "model": {
       "key": "morecheese-engagement",
       "name": "Member Engagement Score",
       "slug": "morecheese-engagement",
-      "description": "Composite engagement score for federation members: participation, service, learning, payment health, sentiment, and advocacy — the retention early-warning dial.",
+      "description": "Composite engagement score for federation members — breadth of participation across events, governance, learning, advocacy, and surveys. The retention early-warning dial, computed live by Sonar.",
       "anchorEntityName": "MJ_BizApps_Common: People",
       "status": "Active",
-      "combineStrategy": "WeightedSum",
-      "recomputeMode": "Scheduled",
-      "recomputeCron": "0 2 * * 1",
-      "trendWindowDays": 90,
       "ownerStaffKey": "ops-analyst",
       "createdDaysBeforeRelease": 300,
       "publishedDaysBeforeRelease": 280
     },
     "bands": [
-      {
-        "key": "at-risk",
-        "label": "At Risk",
-        "min": 0,
-        "max": 35,
-        "severity": 3,
-        "color": "#D9534F",
-        "description": "Disengaged — renewal is in doubt without intervention."
-      },
-      {
-        "key": "watch",
-        "label": "Watch",
-        "min": 35,
-        "max": 55,
-        "severity": 2,
-        "color": "#F0AD4E",
-        "description": "Below-average engagement — worth a touchpoint."
-      },
-      {
-        "key": "stable",
-        "label": "Stable",
-        "min": 55,
-        "max": 75,
-        "severity": 1,
-        "color": "#5BC0DE",
-        "description": "Healthy, steady participation."
-      },
-      {
-        "key": "engaged",
-        "label": "Engaged",
-        "min": 75,
-        "max": 100,
-        "severity": 0,
-        "color": "#5CB85C",
-        "description": "Highly engaged — advocates and volunteers live here."
-      }
+      { "key": "at-risk", "label": "At Risk", "min": 0, "max": 35, "severity": 3, "color": "#D9534F", "description": "Disengaged — renewal is in doubt without intervention." },
+      { "key": "watch", "label": "Watch", "min": 35, "max": 55, "severity": 2, "color": "#F0AD4E", "description": "Below-average engagement — worth a touchpoint." },
+      { "key": "stable", "label": "Stable", "min": 55, "max": 75, "severity": 1, "color": "#5BC0DE", "description": "Healthy, steady participation." },
+      { "key": "engaged", "label": "Engaged", "min": 75, "max": 100, "severity": 0, "color": "#5CB85C", "description": "Highly engaged — advocates and volunteers live here." }
     ],
-    "timeWindows": [
-      {
-        "key": "w12m",
-        "name": "Trailing 12 Months (MoreCheese)",
-        "windowType": "Rolling",
-        "lengthMonths": 12
-      },
-      {
-        "key": "w24m",
-        "name": "Trailing 24 Months (MoreCheese)",
-        "windowType": "Rolling",
-        "lengthMonths": 24
-      }
-    ],
+    "$factorNote": "each factor = Count over a single-hop related entity (its PersonID/RespondentPersonID FK auto-resolves to the People anchor). Equal additive weights; Sonar's MinMax normalizes each factor over the member population, WeightedSum combines. All-time volume in v1 — recency windows (Factor.DateField + Rolling TimeWindow) are an easy follow-up.",
     "factors": [
-      {
-        "key": "event-attendance",
-        "name": "Event Attendance",
-        "slug": "morecheese-event-attendance",
-        "description": "Attended event registrations in the trailing 12 months.",
-        "sourceEntityName": "MoreCheese: Event Registrations",
-        "alias": "registrations",
-        "relationshipPath": "Person → EventRegistration.PersonID",
-        "aggregation": "Count",
-        "windowKey": "w12m",
-        "windowMonths": 12,
-        "cap": 3,
-        "invert": false,
-        "weight": 25,
-        "displayLabel": "Event attendance (12m)"
-      },
-      {
-        "key": "committee-service",
-        "name": "Committee Service",
-        "slug": "morecheese-committee-service",
-        "description": "Active committee memberships as of the score date.",
-        "sourceEntityName": "Committees: Memberships",
-        "alias": "committees",
-        "relationshipPath": "Person → Committees.Membership.PersonID",
-        "aggregation": "Count",
-        "windowKey": null,
-        "windowMonths": null,
-        "cap": 1,
-        "invert": false,
-        "weight": 15,
-        "displayLabel": "Committee service"
-      },
-      {
-        "key": "learning-activity",
-        "name": "Learning Activity",
-        "slug": "morecheese-learning-activity",
-        "description": "Course enrollments plus certification pursuits started in the trailing 12 months.",
-        "sourceEntityName": "MoreCheese: Course Enrollments",
-        "alias": "enrollments",
-        "relationshipPath": "Person → CourseEnrollment.PersonID",
-        "aggregation": "Count",
-        "windowKey": "w12m",
-        "windowMonths": 12,
-        "cap": 2,
-        "invert": false,
-        "weight": 15,
-        "displayLabel": "Learning activity (12m)"
-      },
-      {
-        "key": "payment-health",
-        "name": "Payment Health",
-        "slug": "morecheese-payment-health",
-        "description": "Failed or denied payments in the trailing 12 months (inverted — fewer problems scores higher).",
-        "sourceEntityName": "MoreCheese: Payments",
-        "alias": "payments",
-        "relationshipPath": "Person → Order.PersonID → Payment.OrderID",
-        "aggregation": "Count",
-        "windowKey": "w12m",
-        "windowMonths": 12,
-        "cap": 2,
-        "invert": true,
-        "weight": 15,
-        "displayLabel": "Payment health (12m)"
-      },
-      {
-        "key": "survey-sentiment",
-        "name": "Survey Sentiment",
-        "slug": "morecheese-survey-sentiment",
-        "description": "Mean post-conference NPS response over the trailing 24 months (0–10 scaled to 0–100).",
-        "sourceEntityName": "MJ_BizApps_Forms: Form Response Answers",
-        "alias": "surveyAnswers",
-        "relationshipPath": "Person → FormResponse.RespondentPersonID → FormResponseAnswer.ResponseID",
-        "aggregation": "Avg",
-        "windowKey": "w24m",
-        "windowMonths": 24,
-        "cap": null,
-        "scale": 10,
-        "invert": false,
-        "weight": 15,
-        "displayLabel": "Survey sentiment (24m)"
-      },
-      {
-        "key": "advocacy-participation",
-        "name": "Advocacy Participation",
-        "slug": "morecheese-advocacy-participation",
-        "description": "Advocacy actions taken in the trailing 24 months.",
-        "sourceEntityName": "MoreCheese: Advocacy Actions",
-        "alias": "advocacy",
-        "relationshipPath": "Person → AdvocacyAction.PersonID",
-        "aggregation": "Count",
-        "windowKey": "w24m",
-        "windowMonths": 24,
-        "cap": 2,
-        "invert": false,
-        "weight": 15,
-        "displayLabel": "Advocacy (24m)"
-      }
-    ],
-    "$factorNote": "weights sum to 100; normalized factor = min(raw, cap)/cap*100 (invert flips it; survey-sentiment uses scale ×10 instead of a cap). Missing data → NeutralMidpoint 50 with MissingDataApplied=1.",
-    "neutralMidpoint": 50,
-    "snapshots": {
-      "offsetsDaysBeforeRelease": [
-        270,
-        180,
-        90,
-        0
-      ],
-      "$note": "quarterly recompute history; the last snapshot IS the current Score, the one before it feeds PreviousNormalizedScore/Delta/Trend"
-    },
-    "flatDeltaThreshold": 2,
-    "runs": {
-      "hourUtc": 2,
-      "costUnitsPerRecord": 0.01
-    }
+      { "key": "event-attendance", "name": "Event Participation", "slug": "morecheese-event-participation", "description": "How many events the member has registered for.", "sourceEntityName": "MoreCheese: Event Registrations", "alias": "registrations", "weight": 1, "displayLabel": "Event participation" },
+      { "key": "committee-service", "name": "Committee Service", "slug": "morecheese-committee-service", "description": "How many committee memberships the member holds.", "sourceEntityName": "Committees: Memberships", "alias": "committees", "weight": 1, "displayLabel": "Committee service" },
+      { "key": "learning-activity", "name": "Learning Activity", "slug": "morecheese-learning-activity", "description": "How many courses the member has enrolled in.", "sourceEntityName": "MoreCheese: Course Enrollments", "alias": "enrollments", "weight": 1, "displayLabel": "Learning activity" },
+      { "key": "advocacy-participation", "name": "Advocacy Participation", "slug": "morecheese-advocacy-participation", "description": "How many advocacy actions the member has taken.", "sourceEntityName": "MoreCheese: Advocacy Actions", "alias": "advocacy", "weight": 1, "displayLabel": "Advocacy" },
+      { "key": "survey-participation", "name": "Survey Participation", "slug": "morecheese-survey-participation", "description": "How many surveys the member has responded to.", "sourceEntityName": "MJ_BizApps_Forms: Form Responses", "alias": "surveyResponses", "weight": 1, "displayLabel": "Survey participation" }
+    ]
   }
 }
