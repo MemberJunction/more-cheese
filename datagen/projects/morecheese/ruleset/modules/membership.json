@@ -25,6 +25,18 @@
     "yoyStdFloor": 0.008,
     "gracePeriodMonths": 2,
     "lateRenewalShare": 0.25,
+    "churnReasons": {
+      "$note": "Every lapse used to record a non-payment reason, so the column was useless for a why-are-we-losing-members demo. Real associations lose members for reasons staff record and report on. Non-payment stays the plurality; the employer-event reason is still DERIVED (not drawn) when the member's employer had a lifecycle event.",
+      "weights": [
+        ["non-payment — lapsed past grace", 0.42],
+        ["cost — dues no longer justified", 0.16],
+        ["left the industry / changed employer", 0.14],
+        ["retired", 0.10],
+        ["consolidated under an organizational membership", 0.07],
+        ["dissatisfied with member benefits", 0.06],
+        ["relocated outside the region", 0.05]
+      ]
+    },
     "arrows": {
       "tenure": { "beta": 0.55, "label": "med", "note": "per 1 SD of tenure at decision" },
       "engagement": { "beta": 1.10, "label": "strong", "note": "latent theta; validated via behavioral proxy (attenuated)" },

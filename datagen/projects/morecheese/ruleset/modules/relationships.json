@@ -19,8 +19,33 @@
         "forward": "is duplicate of",
         "reverse": "has duplicate",
         "description": "Demo-owned type: labeled ground truth for the dedup demo"
+      },
+      {
+        "name": "Referred By",
+        "category": "PersonToPerson",
+        "forward": "was referred by",
+        "reverse": "referred",
+        "description": "Demo-owned type: member-get-a-member referrals — a real acquisition channel, and the edge a retention team wants to see"
+      },
+      {
+        "name": "Supplier Of",
+        "category": "OrganizationToOrganization",
+        "forward": "supplies",
+        "reverse": "is supplied by",
+        "description": "Demo-owned type: trade relationships between supplier organizations and the creameries they serve"
       }
     ],
+    "$derivedNote": "NEVER add Employee or Subsidiary here — those are bizapps-common's own SEEDED rows (see seededTypeIDs above), and app-seeded lookups collide BY NAME at install (runbook F6). Demo-owned types only.",
+    "derived": {
+      "referral": {
+        "shareOfJoiners": 0.18,
+        "$note": "ESTIMATE (confidence: low — no published association referral-rate benchmark found). Referrer must already be a member on the joiner's JoinDate and share their employer or city, which is how word-of-mouth actually travels."
+      },
+      "supplierOf": {
+        "edgesPerSupplier": { "min": 1, "max": 5 },
+        "$note": "supplier orgs serve a handful of producer orgs each; region-preferring so the trade graph reads geographically"
+      }
+    },
     "authored": [
       {
         "type": "Mentor",

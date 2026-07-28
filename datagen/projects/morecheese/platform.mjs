@@ -17,7 +17,7 @@ import { rng } from '../../engine/rng.mjs';
 
 const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
 
-export function buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships }) {
+export function buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships, competitionEntries: programsEntries }) {
   const { R, seed, release } = cfg;
   const P = R.platform;
   const releaseMs = release.getTime();
@@ -95,15 +95,24 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   }
 
   // ---------- favorites + lists (per-staff residue; demos log in as staff) ----------
-  const favorites = P.favorites.memberNumbers.map((m) => ({
-    FavKey: `fav:${m}`, UserKey: P.favorites.owner,
+  // per-owner: a demo logs in AS a persona, so each needs their own residue
+  const favGroups = P.favorites.byOwner ?? [{ owner: P.favorites.owner, memberNumbers: P.favorites.memberNumbers }];
+  const favorites = favGroups.flatMap((g) => g.memberNumbers.map((m) => ({
+    FavKey: `fav:${g.owner}:${m}`, UserKey: g.owner,
     EntityName: 'MoreCheese: Member Profiles', RefKind: 'memberprofile', RefKey: m,
-  }));
+  })));
   const lists = [];
   const listDetails = [];
   for (const l of P.lists) {
     lists.push({ ListKey: l.key, UserKey: l.owner, EntityName: l.entityName, Name: l.name, Description: l.description });
-    if (l.source === 'renewal-outreach-tasks') {
+    if (l.source === 'competition-medalists') {
+      // recent medalists — exactly who an events coordinator shortlists to speak
+      const medalists = [...new Set((programsEntries ?? []).filter((e) => e.Result !== 'None' && e.EntryYear >= release.getUTCFullYear() - 3).map((e) => e.MemberNumber))].sort().slice(0, 12);
+      medalists.forEach((m, i) => listDetails.push({ ItemKey: `${l.key}:${m}`, ListKey: l.key, RefKind: 'memberprofile', RefKey: m, Sequence: i + 1 }));
+    } else if (l.source === 'lapsed-high-value') {
+      const recent = periods.filter((x) => x.Status === 'Lapsed').sort((a, b) => (b.DuesAmount - a.DuesAmount) || (a.MemberNumber < b.MemberNumber ? -1 : 1)).slice(0, 15);
+      recent.forEach((x, i) => listDetails.push({ ItemKey: `${l.key}:${x.MemberNumber}`, ListKey: l.key, RefKind: 'memberprofile', RefKey: x.MemberNumber, Sequence: i + 1 }));
+    } else if (l.source === 'renewal-outreach-tasks') {
       pendingMembers.forEach((m, i) => listDetails.push({
         ItemKey: `${l.key}:${m}`, ListKey: l.key, RefKind: 'memberprofile', RefKey: m, Sequence: i + 1,
       }));

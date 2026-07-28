@@ -1,68 +1,200 @@
 [
   {
     "primaryKey": {
-      "ID": "CDAAE9D7-8E33-5C1E-B835-6AE0677308E8"
+      "ID": "DE50055C-F8C1-57DE-B6B8-FD73815AF8A9"
     },
     "fields": {
-      "MeetingID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6",
-      "AgendaItemID": "0B2EA185-8974-5CCE-9960-8F5760BC34E1",
+      "MeetingID": "4F1BDDE2-4BFD-58ED-BCE8-E4C2E547D1ED",
+      "AgendaItemID": "2116BBBC-4C13-5DC6-9F8D-1761E33A6745",
+      "Sequence": 1,
+      "Name": "Approve co-hosting the regional workshop",
+      "MovedByMembershipID": "09CE704D-8E20-5300-8547-2FCBA314933B",
+      "SecondedByMembershipID": "DC869EE3-5A6F-55D6-8739-90B3B9AE88B3",
+      "Result": "Passed",
+      "ResultSummary": "1–0, 1 abstaining",
+      "YesCount": 1,
+      "NoCount": 0,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ADFC3199-9259-541D-BD72-5578D8711FC4"
+    },
+    "fields": {
+      "MeetingID": "DF33F8A8-4F29-523A-B737-8DE1D6ABF64A",
+      "AgendaItemID": "88C9200E-E99B-5B3F-B876-99E88BC751BC",
       "Sequence": 1,
       "Name": "Endorse the proposed program changes",
-      "MovedByMembershipID": "E407CE29-6428-5649-B374-3B8BDCAC8889",
-      "SecondedByMembershipID": "BB66D64F-4E2D-5592-A782-5F9611E14476",
-      "Result": "Passed",
-      "ResultSummary": "7–1, 0 abstaining",
-      "YesCount": 7,
+      "MovedByMembershipID": "DC869EE3-5A6F-55D6-8739-90B3B9AE88B3",
+      "SecondedByMembershipID": "09CE704D-8E20-5300-8547-2FCBA314933B",
+      "Result": "Failed",
+      "ResultSummary": "1–1, 0 abstaining",
+      "YesCount": 1,
       "NoCount": 1,
       "AbstainCount": 0
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.227Z",
-      "checksum": "7c835669dc3d0a1ef7d4e4657c49f309611831b73e8dcaa6468f084ee778ec7f"
     }
   },
   {
     "primaryKey": {
-      "ID": "463F3AA4-DF33-5687-A8F8-F26B6AD52542"
+      "ID": "30EAB753-890D-514D-BA9D-E65BDDEC94E0"
     },
     "fields": {
-      "MeetingID": "2E624942-D52D-5536-8C74-80D8EDA16EA2",
-      "AgendaItemID": "3421FE48-3EA6-5B3F-98DF-DE23D10FA4BB",
+      "MeetingID": "AF76EF15-E226-5F24-8FAD-527F89B35EAF",
+      "AgendaItemID": "08424255-8ECD-5ADB-8BD4-91125ECE0B88",
       "Sequence": 1,
-      "Name": "Form a working group on member feedback",
-      "MovedByMembershipID": "98723F43-4BC1-5176-95C6-456C51D230E5",
-      "SecondedByMembershipID": "AF7B44E4-7665-57BA-9C51-70BB7B7814D9",
-      "Result": "Passed",
-      "ResultSummary": "3–1, 1 abstaining",
-      "YesCount": 3,
-      "NoCount": 1,
-      "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.239Z",
-      "checksum": "6e2e482978a384450c4c6e59d7694b81c56df911de6d105bd261359f01dc913b"
+      "Name": "Approve the speaker honorarium policy",
+      "MovedByMembershipID": "09CE704D-8E20-5300-8547-2FCBA314933B",
+      "SecondedByMembershipID": "DC869EE3-5A6F-55D6-8739-90B3B9AE88B3",
+      "Result": "Failed",
+      "ResultSummary": "0–2, 0 abstaining",
+      "YesCount": 0,
+      "NoCount": 2,
+      "AbstainCount": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "DAB8B6FA-5346-54F8-8A4D-11C591EDA4AD"
+      "ID": "9CD1AE50-FAAF-51DC-8650-945399C6E43A"
     },
     "fields": {
-      "MeetingID": "C3309E1B-3378-56A2-A680-3EC2CA009962",
-      "AgendaItemID": "20E000AF-AA76-5510-A625-C96CFA30F95D",
+      "MeetingID": "B0AF12A3-EAA0-5AC3-9E57-D874FC08675F",
+      "AgendaItemID": "91A2D3A0-AC7F-53ED-A039-AC003AB671CA",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "6586881C-648E-5D9B-935B-FFD0E759F5F8",
+      "SecondedByMembershipID": "3CCC0C63-C15D-5EEC-90B8-7DC720C83FA7",
+      "Result": "Failed",
+      "ResultSummary": "1–1, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 1,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F54A259-2EB5-5B85-9689-B979786D925D"
+    },
+    "fields": {
+      "MeetingID": "3588E7CE-3EBB-5E90-92A6-9CDFB29E1271",
+      "AgendaItemID": "9D1C50FA-3796-59E6-AC9F-8D420A177AF6",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "410F2175-73E5-5BAA-AC1C-89BD0C54718C",
+      "SecondedByMembershipID": "AF9D91EC-1505-53BB-931A-1C24EC1FF81B",
+      "Result": "Passed",
+      "ResultSummary": "3–0, 1 abstaining",
+      "YesCount": 3,
+      "NoCount": 0,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "87AD0067-36B3-5FC5-AF32-97A86848C795"
+    },
+    "fields": {
+      "MeetingID": "064D075E-9BDE-5767-9116-7B42C04E2C80",
+      "AgendaItemID": "CB3BC012-3B45-53CB-B78B-FA8FC718BCCD",
       "Sequence": 1,
       "Name": "Approve the quarterly budget request",
-      "MovedByMembershipID": "486AAC16-7BCE-5378-AF63-05AA5A0F5C1E",
-      "SecondedByMembershipID": "7E067F55-EAC9-53FF-8325-D458047ADAA1",
+      "MovedByMembershipID": "D35188DD-3B87-5A89-9853-0CD0D303B3F6",
+      "SecondedByMembershipID": "ACF74D04-E3BB-5476-8A70-D7A24BEC9A86",
       "Result": "Passed",
-      "ResultSummary": "6–1, 0 abstaining",
-      "YesCount": 6,
+      "ResultSummary": "5–1, 0 abstaining",
+      "YesCount": 5,
       "NoCount": 1,
       "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01785E85-D22C-57FA-816E-A29E251086C2"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.252Z",
-      "checksum": "753f98870231642b97dfcb8ddebdebfc7dd164c983d5ffd1e5154dfbda4345bd"
+    "fields": {
+      "MeetingID": "E70182B2-717F-5D33-AB44-2234182ADF39",
+      "AgendaItemID": "0A308049-C1AD-55C9-AC6B-EA84C8A9AD5E",
+      "Sequence": 1,
+      "Name": "Endorse the proposed program changes",
+      "MovedByMembershipID": "ACF74D04-E3BB-5476-8A70-D7A24BEC9A86",
+      "SecondedByMembershipID": "553601F3-FB24-5C13-B5B9-F1BEB3BAE794",
+      "Result": "Passed",
+      "ResultSummary": "6–0, 0 abstaining",
+      "YesCount": 6,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "169D48DC-CDC6-5270-8594-376C74BBB061"
+    },
+    "fields": {
+      "MeetingID": "2205DA8A-82EE-5780-95A3-069E98489D46",
+      "AgendaItemID": "BAC5610A-7C18-5994-BEA3-6CC4DB21A064",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "02BC64CC-8639-5DF5-AA63-790156FE50A7",
+      "SecondedByMembershipID": "F82C0A52-1F30-5387-AE16-38627002724F",
+      "Result": "Passed",
+      "ResultSummary": "9–1, 1 abstaining",
+      "YesCount": 9,
+      "NoCount": 1,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F60B524B-2279-5E52-A4C1-EE546909DBD7"
+    },
+    "fields": {
+      "MeetingID": "E3D36619-7CDD-5396-91AB-82190FF25232",
+      "AgendaItemID": "990EE7E6-ED18-5233-9B72-9E9C952B7391",
+      "Sequence": 1,
+      "Name": "Endorse the proposed program changes",
+      "MovedByMembershipID": "E764E08F-3A9F-5CC8-9D5A-1DA0F77699BA",
+      "SecondedByMembershipID": "BB66D64F-4E2D-5592-A782-5F9611E14476",
+      "Result": "Passed",
+      "ResultSummary": "7–0, 1 abstaining",
+      "YesCount": 7,
+      "NoCount": 0,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ABA0F813-4C72-5CE2-A584-93ADB78F18EF"
+    },
+    "fields": {
+      "MeetingID": "00A2211A-3E03-50A7-BBC0-AB33579C1CA0",
+      "AgendaItemID": "8DE45098-57EF-5E87-9DFC-5908F9791038",
+      "Sequence": 1,
+      "Name": "Adopt the updated meeting cadence",
+      "MovedByMembershipID": "913A7358-8CA7-5E6B-8C49-72C8941D9FE9",
+      "SecondedByMembershipID": "1F8980CB-757B-5C4F-9DE1-3048E53557BC",
+      "Result": "Passed",
+      "ResultSummary": "10–1, 0 abstaining",
+      "YesCount": 10,
+      "NoCount": 1,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "581C9878-E2E0-5240-BB9F-AB35C384D869"
+    },
+    "fields": {
+      "MeetingID": "DF8E67BC-1792-5616-9961-5BC16C926693",
+      "AgendaItemID": "6FEE15CE-A3F4-516A-86D7-AE6298DC11B3",
+      "Sequence": 1,
+      "Name": "Approve co-hosting the regional workshop",
+      "MovedByMembershipID": "AF7B44E4-7665-57BA-9C51-70BB7B7814D9",
+      "SecondedByMembershipID": "6EDF3A12-0D3B-58B7-9762-8F0C3C546A22",
+      "Result": "Passed",
+      "ResultSummary": "8–2, 2 abstaining",
+      "YesCount": 8,
+      "NoCount": 2,
+      "AbstainCount": 2
     }
   },
   {
@@ -77,256 +209,640 @@
       "MovedByMembershipID": "AF7B44E4-7665-57BA-9C51-70BB7B7814D9",
       "SecondedByMembershipID": "486AAC16-7BCE-5378-AF63-05AA5A0F5C1E",
       "Result": "Passed",
-      "ResultSummary": "6–0, 1 abstaining",
-      "YesCount": 6,
+      "ResultSummary": "10–0, 2 abstaining",
+      "YesCount": 10,
       "NoCount": 0,
-      "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.264Z",
-      "checksum": "2fbaa9a05391c0e2b9b651cab6a4fecd689ccc0619f6e742422dbea18de75ed2"
+      "AbstainCount": 2
     }
   },
   {
     "primaryKey": {
-      "ID": "94D068BF-DBFF-575A-B869-CE9E8D66CA1B"
+      "ID": "3A4C3B9F-8FB8-565F-8152-67383458DDBB"
     },
     "fields": {
-      "MeetingID": "3EF5F09F-F578-570F-99CF-BD018E75A767",
-      "AgendaItemID": "D111224F-2F05-5392-B565-2584DD55C056",
+      "MeetingID": "D7D07425-1556-5401-9106-CAEEF3960377",
+      "AgendaItemID": "EC724C17-B153-5D0D-B6B2-B0C75B9B5221",
       "Sequence": 1,
-      "Name": "Approve the quarterly budget request",
-      "MovedByMembershipID": "7DCF84C4-361E-5EEA-A2D9-11ECEE68A186",
+      "Name": "Adopt the updated meeting cadence",
+      "MovedByMembershipID": "715B1108-771F-5C74-8243-C89EC067A1ED",
+      "SecondedByMembershipID": "7E067F55-EAC9-53FF-8325-D458047ADAA1",
+      "Result": "Passed",
+      "ResultSummary": "9–1, 1 abstaining",
+      "YesCount": 9,
+      "NoCount": 1,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3F7F52EE-C0ED-5B99-BCA0-4F0EBF230723"
+    },
+    "fields": {
+      "MeetingID": "8C7CF8E4-16A2-5C1F-A55D-A81113EE1513",
+      "AgendaItemID": "4762547E-64AD-52CA-B0F8-C3630985B7CF",
+      "Sequence": 1,
+      "Name": "Approve the speaker honorarium policy",
+      "MovedByMembershipID": "6D08B919-CA40-56BC-83F2-89D31A731239",
+      "SecondedByMembershipID": "ACA8BAB2-6031-5040-B4D8-A18E0461D7CB",
+      "Result": "Failed",
+      "ResultSummary": "0–1, 1 abstaining",
+      "YesCount": 0,
+      "NoCount": 1,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7334BDF9-0EC3-56C7-8A29-C423B333CFEB"
+    },
+    "fields": {
+      "MeetingID": "471844F2-1D9A-5144-A08D-A92B14737A69",
+      "AgendaItemID": "C95873AD-4A6B-5E85-8643-FE8AEA054E3F",
+      "Sequence": 1,
+      "Name": "Adopt the updated meeting cadence",
+      "MovedByMembershipID": "E00A2F01-39DA-516B-8D23-A8F7D04A3DB3",
+      "SecondedByMembershipID": "FF7D4DE0-35A4-5FAE-A33C-0F0FACCDA242",
+      "Result": "Passed",
+      "ResultSummary": "2–0, 0 abstaining",
+      "YesCount": 2,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF21E1D6-0A53-58E4-BB80-5B368E020FC8"
+    },
+    "fields": {
+      "MeetingID": "656A685D-2ADC-50EA-BA83-C47120DCD55A",
+      "AgendaItemID": "031DC284-16AF-5FA7-AAE5-BEE10CDC2FFD",
+      "Sequence": 1,
+      "Name": "Approve the speaker honorarium policy",
+      "MovedByMembershipID": "E00A2F01-39DA-516B-8D23-A8F7D04A3DB3",
+      "SecondedByMembershipID": "FF7D4DE0-35A4-5FAE-A33C-0F0FACCDA242",
+      "Result": "Failed",
+      "ResultSummary": "1–2, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 2,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EF7F2B46-3C47-51BE-AAED-5071BB39E95A"
+    },
+    "fields": {
+      "MeetingID": "7B633929-1908-5D05-9F72-EEAC2A1CB2A8",
+      "AgendaItemID": "5BD9C9B8-3EB1-5D76-A7AD-0A8ECBE6BF91",
+      "Sequence": 1,
+      "Name": "Adopt the updated meeting cadence",
+      "MovedByMembershipID": "4659E761-0168-58BF-9BCC-6C9B4858FD7D",
+      "SecondedByMembershipID": "10653CE0-8798-5CDB-83AF-D810D8B3B322",
+      "Result": "Failed",
+      "ResultSummary": "0–2, 0 abstaining",
+      "YesCount": 0,
+      "NoCount": 2,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2772EF54-70C9-52B2-9908-FE95C1034606"
+    },
+    "fields": {
+      "MeetingID": "2C3D979C-ECF6-5FAD-A8D0-6B408C7F52F2",
+      "AgendaItemID": "0657852D-652F-5BB7-BF23-4BF09797E8CA",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "4659E761-0168-58BF-9BCC-6C9B4858FD7D",
+      "SecondedByMembershipID": "8EA08774-353B-5CC3-AD22-B052F3D61752",
+      "Result": "Failed",
+      "ResultSummary": "1–3, 1 abstaining",
+      "YesCount": 1,
+      "NoCount": 3,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49AEAB97-083F-5014-AC56-014C52C8D6DD"
+    },
+    "fields": {
+      "MeetingID": "A6981890-CB0C-5941-BB07-FDE1586C8162",
+      "AgendaItemID": "9776248B-1B5F-5173-8C3A-E7C7456E8ECD",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "ADB322CD-00D2-5043-942C-61E9539B412D",
       "SecondedByMembershipID": "5E7D400E-E73B-5BC5-9C58-90B28C1C969C",
       "Result": "Passed",
       "ResultSummary": "9–1, 1 abstaining",
       "YesCount": 9,
       "NoCount": 1,
       "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.278Z",
-      "checksum": "c7fca138d45122167fcb4ea5fec960d4bc278da02d92f6d06cfcb28e6c4807d8"
     }
   },
   {
     "primaryKey": {
-      "ID": "D7E08F50-2710-5DC8-B194-F9C871FA2C80"
+      "ID": "02E3B262-EF14-5FE3-B303-E0F06850615C"
     },
     "fields": {
-      "MeetingID": "853B5323-FCF6-5DA8-956D-B7EB2760306A",
-      "AgendaItemID": "F5227A23-CB76-59E4-810F-1E7FCBF399EC",
+      "MeetingID": "45122C0E-C53B-5578-A218-9CFB5220807D",
+      "AgendaItemID": "5185EFF8-C7C7-56A1-BF45-1452DD8DE0B6",
       "Sequence": 1,
-      "Name": "Endorse the proposed program changes",
-      "MovedByMembershipID": "25EF5801-220F-5CEE-8E77-7C0BA4825331",
-      "SecondedByMembershipID": "76569F61-117E-5F11-B727-4DC0358472D3",
+      "Name": "Adopt the updated meeting cadence",
+      "MovedByMembershipID": "272098E9-B6BD-5736-9035-7554E8B5B94E",
+      "SecondedByMembershipID": "5E7D400E-E73B-5BC5-9C58-90B28C1C969C",
       "Result": "Failed",
-      "ResultSummary": "1–8, 2 abstaining",
-      "YesCount": 1,
-      "NoCount": 8,
-      "AbstainCount": 2
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.292Z",
-      "checksum": "ff436dde4bbaa22c9c930a33d593d110709d4dee6708aa4c85a2dbcfc23579a9"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "C34C1E85-635C-57F8-8BC3-D8A106F7A2F8"
-    },
-    "fields": {
-      "MeetingID": "07508716-B8C2-5F46-B770-58AA53F5BF24",
-      "AgendaItemID": "F6C58C60-160A-5034-A086-965F53EFAF9F",
-      "Sequence": 1,
-      "Name": "Adopt the updated meeting cadence",
-      "MovedByMembershipID": "AAD9795A-C4FB-5F21-A4F8-2559C6139BE1",
-      "SecondedByMembershipID": "76569F61-117E-5F11-B727-4DC0358472D3",
-      "Result": "Passed",
-      "ResultSummary": "5–3, 4 abstaining",
-      "YesCount": 5,
-      "NoCount": 3,
-      "AbstainCount": 4
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.306Z",
-      "checksum": "3d21eb5d01db888f42011ba755610d345ad6e62ae6e2fa415c2491e8faa3c73f"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "6DE3F6EE-9515-51F7-AD48-91431BC5D6AD"
-    },
-    "fields": {
-      "MeetingID": "519E1137-C2BB-56C1-9C82-1F29887D17E8",
-      "AgendaItemID": "264CA6B0-AFF0-51DD-9473-8C38DD8A7673",
-      "Sequence": 1,
-      "Name": "Adopt the updated meeting cadence",
-      "MovedByMembershipID": "E0FE9805-88AC-5405-8A97-14448F2CC5F6",
-      "SecondedByMembershipID": "6C18EDAC-4345-502F-93C6-407412C6F7E2",
-      "Result": "Passed",
-      "ResultSummary": "13–2, 0 abstaining",
-      "YesCount": 13,
-      "NoCount": 2,
-      "AbstainCount": 0
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.320Z",
-      "checksum": "aa9a48435f6093776d50964bbd27050561d7a5e127153b6cb2201a398cb08059"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "1E37061F-3918-52BA-A5C6-3AAB1E53D198"
-    },
-    "fields": {
-      "MeetingID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A",
-      "AgendaItemID": "DFBB7142-9F01-5A66-94CC-752644B69665",
-      "Sequence": 1,
-      "Name": "Adopt the updated meeting cadence",
-      "MovedByMembershipID": "08201C4D-D208-5BD0-9B30-BAFE5A150DD1",
-      "SecondedByMembershipID": "1FA4DAAB-F91E-57D3-B316-4CCF62A07586",
-      "Result": "Passed",
-      "ResultSummary": "12–0, 3 abstaining",
-      "YesCount": 12,
-      "NoCount": 0,
-      "AbstainCount": 3
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.334Z",
-      "checksum": "86ef9ca90748420cafd0ff842cb4fda5a77adb1d4b7d734e3c78ff83ba025a10"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "A84DCA12-B8A3-5684-A3AA-0C5D4A1E0116"
-    },
-    "fields": {
-      "MeetingID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181",
-      "AgendaItemID": "AFADF435-7E60-55E2-98F0-4A3EFD4EFC24",
-      "Sequence": 1,
-      "Name": "Approve the speaker honorarium policy",
-      "MovedByMembershipID": "D2A57811-EB15-561B-B528-4CE97A07928C",
-      "SecondedByMembershipID": "9C97549F-1A5B-5139-92C2-08DDC7990CFD",
-      "Result": "Passed",
-      "ResultSummary": "13–2, 1 abstaining",
-      "YesCount": 13,
-      "NoCount": 2,
-      "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.348Z",
-      "checksum": "aa313e0e852760171a385d9a951baf4ea68a59c5aaa9138c6c23fc3082d0e702"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "AE9289E0-632A-5AAC-BE21-D40022DB9B33"
-    },
-    "fields": {
-      "MeetingID": "F18BBA60-3973-5228-A30A-B6347AA5C77A",
-      "AgendaItemID": "24ED2A61-4D74-5BA5-A6D2-12302E52CFF7",
-      "Sequence": 1,
-      "Name": "Publish the draft guidance document",
-      "MovedByMembershipID": "C6D32D33-84CD-52EE-AF18-2D4A6638FD89",
-      "SecondedByMembershipID": "11EF0892-FA0E-5DD6-9F81-C970B7B8AAAE",
-      "Result": "Passed",
-      "ResultSummary": "6–0, 1 abstaining",
-      "YesCount": 6,
-      "NoCount": 0,
-      "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.377Z",
-      "checksum": "e7ce4c26ac31687f7ee0691d4dacffbeb54405ca3faeda0f6572f42ba3a6a492"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "428016D8-2A39-51B2-87FD-DBA893E592C3"
-    },
-    "fields": {
-      "MeetingID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F",
-      "AgendaItemID": "60CE6BB4-2499-5D63-81E4-8A3CD50DB58A",
-      "Sequence": 1,
-      "Name": "Form a working group on member feedback",
-      "MovedByMembershipID": "6EEDBB4D-C87A-5A30-91E2-208997FB5E4C",
-      "SecondedByMembershipID": "84585B5A-4602-5D77-9BB0-99C809F538ED",
-      "Result": "Failed",
-      "ResultSummary": "3–10, 1 abstaining",
+      "ResultSummary": "3–3, 3 abstaining",
       "YesCount": 3,
-      "NoCount": 10,
-      "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.391Z",
-      "checksum": "836a397e711bcc7596a4abd8b6bd4f3ba34b3fe441d74db3c0801ab3aad5c669"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "FB884347-B4B4-532E-B82A-9C2B20CC07D7"
-    },
-    "fields": {
-      "MeetingID": "3C0CD206-DB41-5936-8E69-0812577D8A14",
-      "AgendaItemID": "93B1AA06-E320-57FC-9938-86700824CA70",
-      "Sequence": 1,
-      "Name": "Approve the quarterly budget request",
-      "MovedByMembershipID": "84585B5A-4602-5D77-9BB0-99C809F538ED",
-      "SecondedByMembershipID": "D856C103-BF5A-57C1-A24F-C9E7BD1AB399",
-      "Result": "Failed",
-      "ResultSummary": "1–8, 3 abstaining",
-      "YesCount": 1,
-      "NoCount": 8,
+      "NoCount": 3,
       "AbstainCount": 3
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.405Z",
-      "checksum": "412558219419e59ddda2e5d0f91207aa7bab4ea37129d53059963ff86f451c10"
     }
   },
   {
     "primaryKey": {
-      "ID": "42A9BEE0-EE37-5B19-8929-ABA02B91FD51"
+      "ID": "02EE0637-461E-58E9-8E90-6FE1B6614F0C"
     },
     "fields": {
-      "MeetingID": "5FE5D906-011F-56AE-88AA-1CC6C241604F",
-      "AgendaItemID": "4CB1695F-E2CE-5786-BF53-A8D5948F5288",
+      "MeetingID": "3B51C612-4EA1-5D78-B826-269015AAE555",
+      "AgendaItemID": "2C8C8D7B-98D2-514B-8008-9BFCDFF391CF",
       "Sequence": 1,
       "Name": "Adopt the revised charter language",
-      "MovedByMembershipID": "463C3114-4C32-5860-9811-0B243DD9F0D6",
-      "SecondedByMembershipID": "8ED46206-06AF-5078-9DA6-8F5E3B12C65A",
+      "MovedByMembershipID": "2E7051BB-AE2C-51D0-8812-2DF18C3775E1",
+      "SecondedByMembershipID": "ADB322CD-00D2-5043-942C-61E9539B412D",
       "Result": "Passed",
-      "ResultSummary": "8–0, 1 abstaining",
-      "YesCount": 8,
-      "NoCount": 0,
+      "ResultSummary": "9–1, 1 abstaining",
+      "YesCount": 9,
+      "NoCount": 1,
       "AbstainCount": 1
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.418Z",
-      "checksum": "fc0c220f4d290b9d79aff1333fd14631e47a547e45ce0ead1faf31a83d5eb090"
     }
   },
   {
     "primaryKey": {
-      "ID": "BCF59753-A0DF-5EAB-BAD0-6B8126F1BC2C"
+      "ID": "C18BD3B1-63C6-5C36-8F17-2AF10ABF9822"
     },
     "fields": {
-      "MeetingID": "5FF76945-DC92-54A6-BF6D-31E889C22514",
-      "AgendaItemID": "9045CC0F-B3EC-5963-B54B-393F568C76DB",
+      "MeetingID": "74A5ADD6-25E6-5DE0-A506-8A3FD60080E4",
+      "AgendaItemID": "1D38CAF6-B4C3-59BF-B64D-41C8C8D9C4A2",
       "Sequence": 1,
       "Name": "Endorse the proposed program changes",
-      "MovedByMembershipID": "47129F1C-C622-5AC5-AF48-15CA8E22B31A",
-      "SecondedByMembershipID": "C976097B-AF5C-5818-A940-039DEEC98107",
+      "MovedByMembershipID": "9C97549F-1A5B-5139-92C2-08DDC7990CFD",
+      "SecondedByMembershipID": "60C2E336-F799-57B8-AD46-225DD435A489",
+      "Result": "Failed",
+      "ResultSummary": "3–9, 1 abstaining",
+      "YesCount": 3,
+      "NoCount": 9,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8DDA7EF9-B96A-597F-9EB2-F8DBAC14BAC7"
+    },
+    "fields": {
+      "MeetingID": "2EFF8749-2AC3-5C5C-A2E9-43C72688F407",
+      "AgendaItemID": "6F86252B-22A8-5EBB-BB31-1DAA7C1C377E",
+      "Sequence": 1,
+      "Name": "Approve co-hosting the regional workshop",
+      "MovedByMembershipID": "3F21568D-BBDC-5ED4-B62D-A4A0CEC16AAE",
+      "SecondedByMembershipID": "6CB70693-F4E8-5A81-AC60-10D7050B31F8",
       "Result": "Passed",
-      "ResultSummary": "7–0, 0 abstaining",
-      "YesCount": 7,
+      "ResultSummary": "4–0, 0 abstaining",
+      "YesCount": 4,
       "NoCount": 0,
       "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "114CF071-BED3-5911-8C18-5D72F2B5EC5A"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.430Z",
-      "checksum": "b8b3e4c82e13800ab72f099c61a63c33db4c1067d858990c07e3c16d4588b77a"
+    "fields": {
+      "MeetingID": "385C4095-F1F4-5CB0-A8BE-CC469B24190F",
+      "AgendaItemID": "4620EC3F-A510-5A6C-8335-6767E756D34D",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "490EAE09-6A4D-5747-8DB3-E1C192F68277",
+      "SecondedByMembershipID": "BF4537A9-D630-578B-911B-A0516E2F154C",
+      "Result": "Passed",
+      "ResultSummary": "3–0, 0 abstaining",
+      "YesCount": 3,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9BF52DB8-B2A3-5D4D-B237-4459B37E89F1"
+    },
+    "fields": {
+      "MeetingID": "5E8D284A-CD86-5341-AB47-54579A136768",
+      "AgendaItemID": "F92DD877-69C0-5D21-904A-D4D745CF6E20",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "BF4537A9-D630-578B-911B-A0516E2F154C",
+      "SecondedByMembershipID": "490EAE09-6A4D-5747-8DB3-E1C192F68277",
+      "Result": "Failed",
+      "ResultSummary": "1–3, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 3,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2680300B-7B45-5B1F-93A5-F4BEA33D7A73"
+    },
+    "fields": {
+      "MeetingID": "8BF1A0DC-F046-5782-AC6D-A4A416B3D9F6",
+      "AgendaItemID": "5C4D95D7-B66A-58C8-B52F-EFE34DCD9A77",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "BF4537A9-D630-578B-911B-A0516E2F154C",
+      "SecondedByMembershipID": "490EAE09-6A4D-5747-8DB3-E1C192F68277",
+      "Result": "Passed",
+      "ResultSummary": "3–1, 0 abstaining",
+      "YesCount": 3,
+      "NoCount": 1,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC1B6C1A-8B1B-5997-87C2-A13DD7FEED83"
+    },
+    "fields": {
+      "MeetingID": "DA8DD229-3ADF-54CB-830B-EE79E5E637F0",
+      "AgendaItemID": "3ECC9F83-EB35-5DF7-862A-766DCE733A4B",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "490EAE09-6A4D-5747-8DB3-E1C192F68277",
+      "SecondedByMembershipID": "BF4537A9-D630-578B-911B-A0516E2F154C",
+      "Result": "Failed",
+      "ResultSummary": "1–2, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 2,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FAA922C-1CC9-5C42-BAD3-04F0AA3B83CF"
+    },
+    "fields": {
+      "MeetingID": "5BD6EB77-CAF4-599C-8EA0-0944C8AA3868",
+      "AgendaItemID": "8B4F411E-3EB2-5AAA-B74E-FD1C85E9D508",
+      "Sequence": 1,
+      "Name": "Endorse the proposed program changes",
+      "MovedByMembershipID": "490EAE09-6A4D-5747-8DB3-E1C192F68277",
+      "SecondedByMembershipID": "994FE266-522E-5150-AE78-A7D1326FCD41",
+      "Result": "Passed",
+      "ResultSummary": "2–0, 0 abstaining",
+      "YesCount": 2,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B971F658-A5EE-53AB-827D-8BED6BC44E33"
+    },
+    "fields": {
+      "MeetingID": "A04BB2B4-23FA-5C3F-88E1-5E28F539205B",
+      "AgendaItemID": "3395C969-7342-5BC5-B8DB-5C0CADD37E1E",
+      "Sequence": 1,
+      "Name": "Approve the speaker honorarium policy",
+      "MovedByMembershipID": "95185FC1-472E-5192-8C89-970A9DF4D034",
+      "SecondedByMembershipID": "1A5A18E6-0FD3-50A1-BEBE-725F092BDBA8",
+      "Result": "Passed",
+      "ResultSummary": "4–0, 1 abstaining",
+      "YesCount": 4,
+      "NoCount": 0,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5B47D94E-F07A-5537-979E-816BB0C1913F"
+    },
+    "fields": {
+      "MeetingID": "C89B8F1A-EE8A-59AC-B33A-801409AEED58",
+      "AgendaItemID": "94D6E86A-589A-599E-9188-DE6715502B0C",
+      "Sequence": 1,
+      "Name": "Approve the speaker honorarium policy",
+      "MovedByMembershipID": "5131148B-3E70-58F4-A325-9DC8EB8392C0",
+      "SecondedByMembershipID": "95185FC1-472E-5192-8C89-970A9DF4D034",
+      "Result": "Passed",
+      "ResultSummary": "3–0, 0 abstaining",
+      "YesCount": 3,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BFFED1AC-2BAA-5087-B6F0-AB814EF5A694"
+    },
+    "fields": {
+      "MeetingID": "8B41FC7F-EA98-5833-B623-95BDE00DD977",
+      "AgendaItemID": "9EA5461C-2512-5A08-B08B-55D03F737818",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "2B10998F-01E4-50DC-87A9-F25DB2D2F208",
+      "SecondedByMembershipID": "5131148B-3E70-58F4-A325-9DC8EB8392C0",
+      "Result": "Passed",
+      "ResultSummary": "2–1, 2 abstaining",
+      "YesCount": 2,
+      "NoCount": 1,
+      "AbstainCount": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E51B58C-875E-589A-9069-07E47E764F25"
+    },
+    "fields": {
+      "MeetingID": "1DF999DA-FDD5-58AB-ADB1-5F41C3CB934E",
+      "AgendaItemID": "26CE3883-1ACC-508D-BE2B-FED2C479D736",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "1A5A18E6-0FD3-50A1-BEBE-725F092BDBA8",
+      "SecondedByMembershipID": "2B10998F-01E4-50DC-87A9-F25DB2D2F208",
+      "Result": "Passed",
+      "ResultSummary": "2–1, 0 abstaining",
+      "YesCount": 2,
+      "NoCount": 1,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2AE7ED67-FF5A-514A-9A5F-B4756C20966D"
+    },
+    "fields": {
+      "MeetingID": "32BD4B6D-FC34-5EFD-B29C-A2203C759C12",
+      "AgendaItemID": "1E335B4B-4CE6-5244-9119-D3BA59A08859",
+      "Sequence": 1,
+      "Name": "Approve the speaker honorarium policy",
+      "MovedByMembershipID": "EFFCD6A4-2ABE-5158-B383-5AFFCF1294FC",
+      "SecondedByMembershipID": "1DC24300-4AFF-51F6-BF49-1F64568EA948",
+      "Result": "Failed",
+      "ResultSummary": "1–6, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 6,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3B1A3F10-0170-5048-B73A-B6E1D8F684D5"
+    },
+    "fields": {
+      "MeetingID": "8F0F9282-296A-58A5-8E3D-81D483121A31",
+      "AgendaItemID": "967A1174-6D79-5E09-B8E5-793E154BD5C5",
+      "Sequence": 1,
+      "Name": "Endorse the proposed program changes",
+      "MovedByMembershipID": "C6D32D33-84CD-52EE-AF18-2D4A6638FD89",
+      "SecondedByMembershipID": "1DC24300-4AFF-51F6-BF49-1F64568EA948",
+      "Result": "Passed",
+      "ResultSummary": "5–0, 0 abstaining",
+      "YesCount": 5,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "601883AC-A10C-53EE-B80B-62174160199B"
+    },
+    "fields": {
+      "MeetingID": "D3EADECE-97CB-5A58-B71C-CEBFC831CE1C",
+      "AgendaItemID": "B47010EB-5393-5FFE-8BAD-52683E5F3B42",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "5082B146-88CD-57FA-807F-CE3B27867C31",
+      "SecondedByMembershipID": "11EF0892-FA0E-5DD6-9F81-C970B7B8AAAE",
+      "Result": "Failed",
+      "ResultSummary": "1–4, 1 abstaining",
+      "YesCount": 1,
+      "NoCount": 4,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F453C07-F65E-55F1-BBAA-0E4A6449311A"
+    },
+    "fields": {
+      "MeetingID": "18A872C5-9BB1-572A-842C-6A3C61359C3D",
+      "AgendaItemID": "755BE0B0-8DD3-55C2-8AA6-DF42FEBD04F5",
+      "Sequence": 1,
+      "Name": "Endorse the proposed program changes",
+      "MovedByMembershipID": "14CEEAE3-0516-5198-A15E-B4F907D5E991",
+      "SecondedByMembershipID": "D012A03C-8327-579C-B711-0DB3CF58635C",
+      "Result": "Failed",
+      "ResultSummary": "3–13, 3 abstaining",
+      "YesCount": 3,
+      "NoCount": 13,
+      "AbstainCount": 3
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB566671-9157-57AE-9FB8-351098221BE9"
+    },
+    "fields": {
+      "MeetingID": "2F039ADA-ED6B-51B4-975D-8F5B5419C043",
+      "AgendaItemID": "1A839C9B-C931-5F7E-AB1F-BFFF615489BF",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "449660E1-7D4B-5280-B305-B2ACB0B3E983",
+      "SecondedByMembershipID": "382163D6-AC91-5E03-B0C4-E992818C1AA9",
+      "Result": "Passed",
+      "ResultSummary": "2–0, 0 abstaining",
+      "YesCount": 2,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C4B542F7-23EF-50BC-84F0-1F051A4F553A"
+    },
+    "fields": {
+      "MeetingID": "141D781C-25C7-523A-97DF-97D5CA3A56A6",
+      "AgendaItemID": "3A93EA49-3847-5395-B486-455CC7579ECB",
+      "Sequence": 1,
+      "Name": "Approve co-hosting the regional workshop",
+      "MovedByMembershipID": "449660E1-7D4B-5280-B305-B2ACB0B3E983",
+      "SecondedByMembershipID": "5A469554-2A4C-5A46-956C-B7504CF5BC46",
+      "Result": "Failed",
+      "ResultSummary": "0–2, 0 abstaining",
+      "YesCount": 0,
+      "NoCount": 2,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D6E7D13-0217-5AAA-AD9E-C3A35F869961"
+    },
+    "fields": {
+      "MeetingID": "3D3D3AB1-AA8D-5756-AA15-882BB08A33E4",
+      "AgendaItemID": "211AC27F-BFCB-54CC-87FD-B090A1A74DDE",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "F42BA197-8596-5601-9005-5E21CC3EC2FC",
+      "SecondedByMembershipID": "24461592-C427-540C-8CBA-15407DF6A2AC",
+      "Result": "Failed",
+      "ResultSummary": "1–3, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 3,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A275116F-4815-53AA-B027-03934C68A509"
+    },
+    "fields": {
+      "MeetingID": "4A4EDB3C-E143-53D3-B6F0-78855FEC90AC",
+      "AgendaItemID": "49E65876-9436-5E27-9EA6-5DFF197ABFC7",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "24461592-C427-540C-8CBA-15407DF6A2AC",
+      "SecondedByMembershipID": "F42BA197-8596-5601-9005-5E21CC3EC2FC",
+      "Result": "Failed",
+      "ResultSummary": "1–2, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 2,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1783BDE5-7EA5-56C1-A169-1275588D6802"
+    },
+    "fields": {
+      "MeetingID": "BD084C98-B925-579E-8FBA-0E35E823CC23",
+      "AgendaItemID": "8FE44688-D3D7-580B-9C64-6E33B2CC71E2",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "FF64ED36-EE3E-51C2-AFD2-A98859261CAC",
+      "SecondedByMembershipID": "35EE7092-8722-524C-A4A2-FCAD28D34804",
+      "Result": "Passed",
+      "ResultSummary": "4–0, 0 abstaining",
+      "YesCount": 4,
+      "NoCount": 0,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DC57C929-9DEF-50A6-A04D-F9B68FE940CD"
+    },
+    "fields": {
+      "MeetingID": "19C74951-D240-53C5-9698-22BD7650F89B",
+      "AgendaItemID": "08C0025F-18E5-539F-9966-74158997A73A",
+      "Sequence": 1,
+      "Name": "Form a working group on member feedback",
+      "MovedByMembershipID": "B9E7969E-2290-5F16-87AA-9D4AA1FF18CC",
+      "SecondedByMembershipID": "BFF43114-ADC5-56CC-B90C-37D52F25179B",
+      "Result": "Passed",
+      "ResultSummary": "5–0, 1 abstaining",
+      "YesCount": 5,
+      "NoCount": 0,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8D4C620C-8DF2-5E39-BCAE-CDE94A92728A"
+    },
+    "fields": {
+      "MeetingID": "25E574E2-D5EE-5AC8-AE5D-662A4FB12EA1",
+      "AgendaItemID": "6F19EB27-3FB4-52D5-8A7D-727A2AC0D8F3",
+      "Sequence": 1,
+      "Name": "Approve the quarterly budget request",
+      "MovedByMembershipID": "B9E7969E-2290-5F16-87AA-9D4AA1FF18CC",
+      "SecondedByMembershipID": "C3D93DF1-6A94-53F8-A100-436A7FFCFBFD",
+      "Result": "Failed",
+      "ResultSummary": "3–4, 0 abstaining",
+      "YesCount": 3,
+      "NoCount": 4,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E3E2E370-487D-5B1E-B5E1-263D64D461CB"
+    },
+    "fields": {
+      "MeetingID": "C5928FB3-55CD-5B7C-AF13-9592E9254059",
+      "AgendaItemID": "3F597D5E-21DE-5B37-BE0C-875080BF135C",
+      "Sequence": 1,
+      "Name": "Approve the quarterly budget request",
+      "MovedByMembershipID": "D3C50F01-1E21-53C3-9DD8-C9155ADEFE30",
+      "SecondedByMembershipID": "C3D93DF1-6A94-53F8-A100-436A7FFCFBFD",
+      "Result": "Passed",
+      "ResultSummary": "4–2, 0 abstaining",
+      "YesCount": 4,
+      "NoCount": 2,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B73503E7-207E-5A79-8D17-83F2E2D70000"
+    },
+    "fields": {
+      "MeetingID": "9DF85DC0-F1B8-5CBF-A6B2-705043E0CACC",
+      "AgendaItemID": "624C49BF-14FF-5942-91BF-64C4F7E39D4D",
+      "Sequence": 1,
+      "Name": "Adopt the updated meeting cadence",
+      "MovedByMembershipID": "C3D93DF1-6A94-53F8-A100-436A7FFCFBFD",
+      "SecondedByMembershipID": "D3C50F01-1E21-53C3-9DD8-C9155ADEFE30",
+      "Result": "Passed",
+      "ResultSummary": "3–0, 1 abstaining",
+      "YesCount": 3,
+      "NoCount": 0,
+      "AbstainCount": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47CB465F-B4CC-5296-AF3A-2E36EC63A6F4"
+    },
+    "fields": {
+      "MeetingID": "55CA6679-B6BF-557E-BD8C-A66DDAF808AD",
+      "AgendaItemID": "FD04A5BD-8D56-5CC8-8FB1-E69BEED09AAC",
+      "Sequence": 1,
+      "Name": "Adopt the revised charter language",
+      "MovedByMembershipID": "C3D93DF1-6A94-53F8-A100-436A7FFCFBFD",
+      "SecondedByMembershipID": "D3C50F01-1E21-53C3-9DD8-C9155ADEFE30",
+      "Result": "Failed",
+      "ResultSummary": "1–5, 0 abstaining",
+      "YesCount": 1,
+      "NoCount": 5,
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "175F1D4C-4B5B-5E48-9DF5-6F1692402BA9"
+    },
+    "fields": {
+      "MeetingID": "4F1C5D78-0FE1-5303-8755-AE815478468F",
+      "AgendaItemID": "50011933-4201-58D3-91F7-46D2E0182E2B",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "8BC2112C-42CC-5251-9125-774EC23F9C24",
+      "SecondedByMembershipID": "A36C2198-10AE-595E-95E5-518A9F63CA8D",
+      "Result": "Passed",
+      "ResultSummary": "8–0, 0 abstaining",
+      "YesCount": 8,
+      "NoCount": 0,
+      "AbstainCount": 0
     }
   },
   {
@@ -338,105 +854,85 @@
       "AgendaItemID": "98AEE34F-0C3F-5D94-8B48-09BA7ACF711D",
       "Sequence": 1,
       "Name": "Adopt the revised charter language",
-      "MovedByMembershipID": "95627CAE-B4F3-5EE2-866C-7861E2005165",
-      "SecondedByMembershipID": "6BF63414-1203-5413-BE99-A3800C934AC9",
+      "MovedByMembershipID": "A36C2198-10AE-595E-95E5-518A9F63CA8D",
+      "SecondedByMembershipID": "87D689CE-C94B-5FEA-9B5B-139AEA63ED76",
       "Result": "Passed",
-      "ResultSummary": "5–1, 0 abstaining",
+      "ResultSummary": "5–0, 0 abstaining",
       "YesCount": 5,
-      "NoCount": 1,
-      "AbstainCount": 0
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.442Z",
-      "checksum": "85782dd734f7b26fec66a71a4aad5066531ac1bb594e5ca3ec924e00eb95bfe0"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "A94ED61A-8B7F-5C61-96D8-0B5E3E3400A1"
-    },
-    "fields": {
-      "MeetingID": "75240340-0122-5ECC-A4AC-3B0CB26D5708",
-      "AgendaItemID": "EB12DD64-4136-5A32-B1E3-10B6A0BD5F28",
-      "Sequence": 1,
-      "Name": "Approve the quarterly budget request",
-      "MovedByMembershipID": "6BF63414-1203-5413-BE99-A3800C934AC9",
-      "SecondedByMembershipID": "DB3B37AE-FBCB-5172-B50F-A7697F74546B",
-      "Result": "Passed",
-      "ResultSummary": "8–0, 2 abstaining",
-      "YesCount": 8,
-      "NoCount": 0,
-      "AbstainCount": 2
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.453Z",
-      "checksum": "0a452b3f88c9fab878f4ba66e3b30ddfac7bcb4e5824fbe0a02d7b74111b873d"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "0B91EABB-6ED1-5046-AD64-F01FC6908335"
-    },
-    "fields": {
-      "MeetingID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1",
-      "AgendaItemID": "9E3E2B02-21F7-5543-8C1B-9B1DFD4FBC00",
-      "Sequence": 1,
-      "Name": "Approve co-hosting the regional workshop",
-      "MovedByMembershipID": "6459E38E-38E4-57C2-A8EC-E2478AFF647A",
-      "SecondedByMembershipID": "DB3B37AE-FBCB-5172-B50F-A7697F74546B",
-      "Result": "Passed",
-      "ResultSummary": "9–0, 0 abstaining",
-      "YesCount": 9,
       "NoCount": 0,
       "AbstainCount": 0
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.466Z",
-      "checksum": "9e83cbae07bf2da7680896812b09801fe32576cf717ebefd08bd7fb94992d36c"
     }
   },
   {
     "primaryKey": {
-      "ID": "F5B44B67-2384-50F1-A68C-FF74130990C6"
+      "ID": "0C74B405-D2AD-5B71-AF5E-A3A2D33C3C0F"
     },
     "fields": {
-      "MeetingID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3",
-      "AgendaItemID": "5789F360-ADB7-52E1-92E5-8DD46E44345A",
-      "Sequence": 1,
-      "Name": "Adopt the revised charter language",
-      "MovedByMembershipID": "3967C848-F402-596E-993F-024FB5AE163E",
-      "SecondedByMembershipID": "72E01752-6E15-5E42-916B-09BABC7A2DA4",
-      "Result": "Passed",
-      "ResultSummary": "13–2, 0 abstaining",
-      "YesCount": 13,
-      "NoCount": 2,
-      "AbstainCount": 0
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.478Z",
-      "checksum": "82a637a1679febb5fbc1ecf0aa847ffe0fb979e8d9da7cb59567cf88131d1777"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "41A3E623-FF96-5FE1-A82F-915BE7A165A7"
-    },
-    "fields": {
-      "MeetingID": "671700DA-0498-55B2-86A7-B5AD260E3E6C",
-      "AgendaItemID": "F53EBE13-E653-5603-AF34-BC95A5073CB5",
+      "MeetingID": "9D64275D-A1E9-5BB5-91E6-B66BEE202BF8",
+      "AgendaItemID": "A00B3C23-5850-5685-A3E5-6B27229903CD",
       "Sequence": 1,
       "Name": "Form a working group on member feedback",
-      "MovedByMembershipID": "AD1C482B-7AF5-53F7-8B8C-A9386CFD446E",
-      "SecondedByMembershipID": "03686725-F64F-575D-962F-32CA2AE02215",
+      "MovedByMembershipID": "2E2E0E28-7700-566D-A1CE-7A2038C30282",
+      "SecondedByMembershipID": "C976097B-AF5C-5818-A940-039DEEC98107",
       "Result": "Passed",
-      "ResultSummary": "16–2, 1 abstaining",
-      "YesCount": 16,
+      "ResultSummary": "7–2, 0 abstaining",
+      "YesCount": 7,
       "NoCount": 2,
-      "AbstainCount": 1
+      "AbstainCount": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FDA1486E-0306-52BC-9992-988ADC49E43B"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:58.487Z",
-      "checksum": "4cfbafdf9c048a6604cd46c5a3be657a13310f2c62bc4844b22502f269e00da7"
+    "fields": {
+      "MeetingID": "2F2762FB-22D3-5DAD-973B-A68DC2A08D2D",
+      "AgendaItemID": "9D4B11BD-7C30-5287-A21F-286ACA85C0CD",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "8BC2112C-42CC-5251-9125-774EC23F9C24",
+      "SecondedByMembershipID": "0EA990AD-3684-5983-A33E-ABA20F9D7E06",
+      "Result": "Failed",
+      "ResultSummary": "1–5, 2 abstaining",
+      "YesCount": 1,
+      "NoCount": 5,
+      "AbstainCount": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BF6FFF86-4B74-5998-B63C-FE68239745C0"
+    },
+    "fields": {
+      "MeetingID": "8520DD96-3C47-5619-85E9-A011F18DB9A9",
+      "AgendaItemID": "AF587DE0-6C89-50AC-A9B9-97E3B22332C2",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "87D689CE-C94B-5FEA-9B5B-139AEA63ED76",
+      "SecondedByMembershipID": "DB3B37AE-FBCB-5172-B50F-A7697F74546B",
+      "Result": "Failed",
+      "ResultSummary": "3–3, 2 abstaining",
+      "YesCount": 3,
+      "NoCount": 3,
+      "AbstainCount": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7C9058A0-A0D2-59CA-8227-5499163854EF"
+    },
+    "fields": {
+      "MeetingID": "2E70BCE3-8691-5C29-91B6-B60425C7D4D4",
+      "AgendaItemID": "AB793337-51C8-5D73-A911-12215B3B7FAB",
+      "Sequence": 1,
+      "Name": "Publish the draft guidance document",
+      "MovedByMembershipID": "6AAE5035-386F-5D5C-B79C-588A36569E5D",
+      "SecondedByMembershipID": "5AED5C6D-ED18-5495-906A-3846646137BB",
+      "Result": "Failed",
+      "ResultSummary": "3–8, 1 abstaining",
+      "YesCount": 3,
+      "NoCount": 8,
+      "AbstainCount": 1
     }
   }
 ]

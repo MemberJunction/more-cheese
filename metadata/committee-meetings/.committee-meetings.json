@@ -1,223 +1,677 @@
 [
   {
     "primaryKey": {
-      "ID": "0A8175F6-CA09-5BD8-AAC4-70C954722764"
+      "ID": "68B23DF5-9385-5325-A345-0C1E1C55BAA4"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2015 meeting",
+      "StartDateTime": "2015-01-12T17:00:00Z",
+      "EndDateTime": "2015-01-12T19:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FB265F55-4821-5AFC-9EF1-7425A4E3AFAC"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2015 meeting",
+      "StartDateTime": "2015-04-15T16:30:00Z",
+      "EndDateTime": "2015-04-15T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3576D73-55F2-5D7E-8C82-4EB8843EF82A"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2015 meeting",
+      "StartDateTime": "2015-07-06T16:00:00Z",
+      "EndDateTime": "2015-07-06T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "333BBE05-4A0C-5ACD-B16B-D26C2A8EFEF4"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2015 meeting",
+      "StartDateTime": "2015-10-12T16:15:00Z",
+      "EndDateTime": "2015-10-12T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5573B421-C6D1-512A-BBE1-5E4876CE056E"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2016 meeting",
+      "StartDateTime": "2016-01-13T16:00:00Z",
+      "EndDateTime": "2016-01-13T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6F66D029-E3BF-5091-B72D-503E06A5BC36"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2016 meeting",
+      "StartDateTime": "2016-04-20T16:30:00Z",
+      "EndDateTime": "2016-04-20T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F14EB250-A7BA-529A-9327-A864D0823DA9"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2016 meeting",
+      "StartDateTime": "2016-07-04T16:15:00Z",
+      "EndDateTime": "2016-07-04T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F4B3E893-57DF-53C9-BF80-9402B0030E84"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2016 meeting",
+      "StartDateTime": "2016-10-10T17:00:00Z",
+      "EndDateTime": "2016-10-10T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7C58FBBF-8A44-581D-9696-50275C04F78A"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2017 meeting",
+      "StartDateTime": "2017-01-13T17:30:00Z",
+      "EndDateTime": "2017-01-13T19:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F4E79BAF-102B-5EFF-89D2-B473E452998A"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2017 meeting",
+      "StartDateTime": "2017-04-17T16:00:00Z",
+      "EndDateTime": "2017-04-17T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E321C8A7-AE37-5CA7-AEC3-CDE09DFEF589"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2017 meeting",
+      "StartDateTime": "2017-07-06T17:00:00Z",
+      "EndDateTime": "2017-07-06T19:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B2A2D902-E4FC-59E0-AB00-6B559FEED12B"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2017 meeting",
+      "StartDateTime": "2017-10-09T16:00:00Z",
+      "EndDateTime": "2017-10-09T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F1BDDE2-4BFD-58ED-BCE8-E4C2E547D1ED"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2018 meeting",
+      "StartDateTime": "2018-01-10T17:00:00Z",
+      "EndDateTime": "2018-01-10T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D07F5B7B-5286-5CCA-BFD3-41AF17552338"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2018 meeting",
+      "StartDateTime": "2018-04-20T17:00:00Z",
+      "EndDateTime": "2018-04-20T18:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF33F8A8-4F29-523A-B737-8DE1D6ABF64A"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2018 meeting",
+      "StartDateTime": "2018-07-05T17:00:00Z",
+      "EndDateTime": "2018-07-05T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AF76EF15-E226-5F24-8FAD-527F89B35EAF"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2018 meeting",
+      "StartDateTime": "2018-10-10T16:00:00Z",
+      "EndDateTime": "2018-10-10T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0AF12A3-EAA0-5AC3-9E57-D874FC08675F"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2019 meeting",
+      "StartDateTime": "2019-01-09T17:00:00Z",
+      "EndDateTime": "2019-01-09T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC97E661-09C6-5DA9-AC5E-2D6DE4371D8B"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2019 meeting",
+      "StartDateTime": "2019-04-17T16:00:00Z",
+      "EndDateTime": "2019-04-17T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9ABE4FA6-0C5C-5892-87C4-D6658545391B"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2019 meeting",
+      "StartDateTime": "2019-07-05T16:00:00Z",
+      "EndDateTime": "2019-07-05T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16357E74-6BDE-5F37-B9A1-A70A4767E079"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2019 meeting",
+      "StartDateTime": "2019-10-14T16:30:00Z",
+      "EndDateTime": "2019-10-14T18:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9DB062A6-FBD4-5A02-B445-13B2D8E70333"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2020 meeting",
+      "StartDateTime": "2020-01-13T17:00:00Z",
+      "EndDateTime": "2020-01-13T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3588E7CE-3EBB-5E90-92A6-9CDFB29E1271"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2020 meeting",
+      "StartDateTime": "2020-04-20T16:00:00Z",
+      "EndDateTime": "2020-04-20T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E23D7D3C-3DFB-5471-8B65-9EF73D620C93"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2020 meeting",
+      "StartDateTime": "2020-07-06T16:30:00Z",
+      "EndDateTime": "2020-07-06T18:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39182A82-F812-512E-8FC4-5DD32F12EA8C"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2020 meeting",
+      "StartDateTime": "2020-10-13T17:00:00Z",
+      "EndDateTime": "2020-10-13T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA674F0E-ACA8-53A6-8F20-478DD3BFD59B"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2021 meeting",
+      "StartDateTime": "2021-01-11T16:30:00Z",
+      "EndDateTime": "2021-01-11T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6B3AFDA3-D86C-5953-87C2-86A9A5BF18D6"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2021 meeting",
+      "StartDateTime": "2021-04-19T16:15:00Z",
+      "EndDateTime": "2021-04-19T18:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB0C5021-4354-5D25-80BA-DCD0CC690278"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2021 meeting",
+      "StartDateTime": "2021-07-06T17:15:00Z",
+      "EndDateTime": "2021-07-06T18:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26794B71-5D3E-5C8B-A423-1603C8BE9204"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2021 meeting",
+      "StartDateTime": "2021-10-08T17:00:00Z",
+      "EndDateTime": "2021-10-08T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "064D075E-9BDE-5767-9116-7B42C04E2C80"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q1 2022 meeting",
+      "StartDateTime": "2022-01-10T16:30:00Z",
+      "EndDateTime": "2022-01-10T18:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09F3A69C-8C49-5D0F-B662-8D10E69CD80C"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q2 2022 meeting",
+      "StartDateTime": "2022-04-15T17:15:00Z",
+      "EndDateTime": "2022-04-15T18:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BE0A6560-DD0E-51A5-A221-BFC051C31429"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q3 2022 meeting",
+      "StartDateTime": "2022-07-06T16:15:00Z",
+      "EndDateTime": "2022-07-06T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E70182B2-717F-5D33-AB44-2234182ADF39"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "Name": "Standards Committee — Q4 2022 meeting",
+      "StartDateTime": "2022-10-12T16:15:00Z",
+      "EndDateTime": "2022-10-12T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C6E77642-2F3C-5521-9291-FF642B2B5F01"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q1 2023 meeting",
-      "StartDateTime": "2023-01-15T15:00:00Z",
+      "StartDateTime": "2023-01-09T17:00:00Z",
+      "EndDateTime": "2023-01-09T18:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.685Z",
-      "checksum": "4e4cd686a1661fda0edb5d4a50182b6cd8ebc43975f680a98411082f3730f643"
     }
   },
   {
     "primaryKey": {
-      "ID": "1EAEA972-7DC9-544F-A8A5-826AAE703FA6"
+      "ID": "2205DA8A-82EE-5780-95A3-069E98489D46"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q2 2023 meeting",
-      "StartDateTime": "2023-04-15T15:00:00Z",
+      "StartDateTime": "2023-04-17T17:30:00Z",
+      "EndDateTime": "2023-04-17T19:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.699Z",
-      "checksum": "5bea2e715282c977297ec6f323662a5af89dc02e6b9be624baa402339bc25ea9"
     }
   },
   {
     "primaryKey": {
-      "ID": "624F6C3C-2A27-591D-B8E3-C5499A4EE9A1"
+      "ID": "E3D36619-7CDD-5396-91AB-82190FF25232"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q3 2023 meeting",
-      "StartDateTime": "2023-07-15T15:00:00Z",
+      "StartDateTime": "2023-07-05T17:30:00Z",
+      "EndDateTime": "2023-07-05T18:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.712Z",
-      "checksum": "d37c7b9be6aeb640f5a6824a1abebaa4a6d4649123fd4de7374dbcbdb1a6c80d"
     }
   },
   {
     "primaryKey": {
-      "ID": "E9307B3D-28D4-5C7D-AF59-15D1F70EE066"
+      "ID": "00A2211A-3E03-50A7-BBC0-AB33579C1CA0"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q4 2023 meeting",
-      "StartDateTime": "2023-10-15T15:00:00Z",
+      "StartDateTime": "2023-10-11T17:00:00Z",
+      "EndDateTime": "2023-10-11T19:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.727Z",
-      "checksum": "648d6b45f6c7620b63db319d0a1a16e4a1e8e2a6e2d12910d1e9d653e7b4c88c"
     }
   },
   {
     "primaryKey": {
-      "ID": "F1019ACF-2DA0-5C2D-BF71-59450A596CDC"
+      "ID": "DEE8221E-DFBA-51D1-9C55-1E6B6A8CFF6A"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q1 2024 meeting",
-      "StartDateTime": "2024-01-15T15:00:00Z",
+      "StartDateTime": "2024-01-09T16:30:00Z",
+      "EndDateTime": "2024-01-09T18:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.741Z",
-      "checksum": "558ab0b73859c33ee7dc93666469701da4a3486a2a3aa644976cdf0d6bc336fc"
     }
   },
   {
     "primaryKey": {
-      "ID": "B2933EEB-7A28-5077-BD81-4F3A0B20F654"
+      "ID": "CCF73D9F-1DDC-572B-9A1E-FCF3534AE18B"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q2 2024 meeting",
-      "StartDateTime": "2024-04-15T15:00:00Z",
+      "StartDateTime": "2024-04-22T17:15:00Z",
+      "EndDateTime": "2024-04-22T18:15:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.754Z",
-      "checksum": "a03b3943afd49e881d134c6138858966a774ecd973c48de87c2f501f4b27f1bb"
     }
   },
   {
     "primaryKey": {
-      "ID": "5555B99F-0F65-554B-84E2-03B7334942E4"
+      "ID": "9037DDDF-6319-5699-A225-E4BDDA301740"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q3 2024 meeting",
-      "StartDateTime": "2024-07-15T15:00:00Z",
+      "StartDateTime": "2024-07-03T16:30:00Z",
+      "EndDateTime": "2024-07-03T17:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.766Z",
-      "checksum": "c60bf1e0c01714b990d12cf5c4bee445a89202b2cdd21f26034673a9478ec91b"
     }
   },
   {
     "primaryKey": {
-      "ID": "79636F02-BF6F-5DDB-A078-B6A78121DDA0"
+      "ID": "53173069-AF31-57F6-917A-3E2619AACCF0"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q4 2024 meeting",
-      "StartDateTime": "2024-10-15T15:00:00Z",
+      "StartDateTime": "2024-10-14T16:00:00Z",
+      "EndDateTime": "2024-10-14T17:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.781Z",
-      "checksum": "bfa4b38eea98cfb2c5dc777809ced7ebde246aca5b4faed5d05d7f76321c2ad6"
     }
   },
   {
     "primaryKey": {
-      "ID": "2E624942-D52D-5536-8C74-80D8EDA16EA2"
+      "ID": "79DD652D-9C81-5311-976B-DAE20B887243"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q1 2025 meeting",
-      "StartDateTime": "2025-01-15T15:00:00Z",
+      "StartDateTime": "2025-01-13T16:30:00Z",
+      "EndDateTime": "2025-01-13T18:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.796Z",
-      "checksum": "c780351f4d1ca2157f459c05b6600f6cb22f9dab32efc724e7d1c3d81fa5a7c1"
     }
   },
   {
     "primaryKey": {
-      "ID": "C3309E1B-3378-56A2-A680-3EC2CA009962"
+      "ID": "DF8E67BC-1792-5616-9961-5BC16C926693"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q2 2025 meeting",
-      "StartDateTime": "2025-04-15T15:00:00Z",
+      "StartDateTime": "2025-04-21T16:15:00Z",
+      "EndDateTime": "2025-04-21T18:15:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.809Z",
-      "checksum": "a4107d7754199ef41add1001d846f03d870cd44a32a126527092f8f0d6f6a835"
     }
   },
   {
     "primaryKey": {
-      "ID": "9E06D402-39BE-5E22-BFC9-AAE5C68031F6"
+      "ID": "E8744BF8-0ACF-5319-BDDA-409BBB901632"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q3 2025 meeting",
-      "StartDateTime": "2025-07-15T15:00:00Z",
+      "StartDateTime": "2025-07-03T17:00:00Z",
+      "EndDateTime": "2025-07-03T18:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.844Z",
-      "checksum": "425405c19a0c3078af21327f72c995a632f86a6e79e35dfd63fb3acac3ff5d30"
     }
   },
   {
     "primaryKey": {
-      "ID": "51E95386-496E-58B9-8AA2-E715ECE1FFDD"
+      "ID": "F32C77F7-DBA0-5113-AD9A-2F116A654193"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q4 2025 meeting",
-      "StartDateTime": "2025-10-15T15:00:00Z",
+      "StartDateTime": "2025-10-13T16:15:00Z",
+      "EndDateTime": "2025-10-13T17:45:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.858Z",
-      "checksum": "e3bfd81e458087e97d38ca5bba0e1a8be5ac1dd6a94c8eed4a5b4e82dcc56d61"
     }
   },
   {
     "primaryKey": {
-      "ID": "3409B637-743F-50E3-B546-3181DBE1F26B"
+      "ID": "57BAF384-2209-5C53-99C5-6D291C62E223"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q1 2026 meeting",
-      "StartDateTime": "2026-01-15T15:00:00Z",
+      "StartDateTime": "2026-01-09T16:15:00Z",
+      "EndDateTime": "2026-01-09T17:45:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.873Z",
-      "checksum": "01652cf4530fd56f54e19c7e53a20da9d11010718712c3d1f82837c6d6742d2e"
     }
   },
   {
@@ -227,711 +681,2067 @@
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q2 2026 meeting",
-      "StartDateTime": "2026-04-15T15:00:00Z",
+      "StartDateTime": "2026-04-15T16:30:00Z",
+      "EndDateTime": "2026-04-15T17:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.888Z",
-      "checksum": "78401bdf794204b5be8606406f6fed8f59ea5f2848548f7859f17ffd1b546de3"
     }
   },
   {
     "primaryKey": {
-      "ID": "70B2F31B-FCA2-5361-B3C2-B154378F168D"
+      "ID": "D7D07425-1556-5401-9106-CAEEF3960377"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q3 2026 meeting",
-      "StartDateTime": "2026-07-15T15:00:00Z",
+      "StartDateTime": "2026-07-02T16:30:00Z",
+      "EndDateTime": "2026-07-02T17:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.902Z",
-      "checksum": "a76313c3b966c9e4cc802f140beb1927bb0e918e9e9c547eb0af7c506a2cff8d"
     }
   },
   {
     "primaryKey": {
-      "ID": "660FF8DC-25E1-5C39-B0D0-4F6BAB70F3C1"
+      "ID": "2E8BCEF2-393B-50CC-987F-A5409B346DCE"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q4 2026 meeting",
-      "StartDateTime": "2026-10-15T15:00:00Z",
+      "StartDateTime": "2026-10-08T16:00:00Z",
+      "EndDateTime": "2026-10-08T17:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.923Z",
-      "checksum": "c9f4c3ef8ed1251e0a291e58efbfd4f7d231e9cf8861398a39d0aa6aaf205340"
     }
   },
   {
     "primaryKey": {
-      "ID": "C293B302-9900-53C7-A99F-4F0BBDEAC109"
+      "ID": "425A3558-FA5C-562C-981C-81DFBEF6E293"
     },
     "fields": {
       "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
       "Name": "Standards Committee — Q1 2027 meeting",
-      "StartDateTime": "2027-01-15T15:00:00Z",
+      "StartDateTime": "2027-01-08T16:30:00Z",
+      "EndDateTime": "2027-01-08T17:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.939Z",
-      "checksum": "cc14f303731ea4de3a8fe947b7e2b2cd0d14a0412c1f8088ca04b1cdf12656dc"
     }
   },
   {
     "primaryKey": {
-      "ID": "1615C1D2-DA18-588B-BECF-B0CF54ED9D26"
+      "ID": "1316822B-4AA3-5372-AE42-DCB307D384F5"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2015 meeting",
+      "StartDateTime": "2015-01-05T15:15:00Z",
+      "EndDateTime": "2015-01-05T16:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E0EEA36D-5555-56C0-99BC-61A230DFA2EE"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2015 meeting",
+      "StartDateTime": "2015-04-13T15:30:00Z",
+      "EndDateTime": "2015-04-13T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "03CA1CCC-502D-50D7-931B-60AE76777D47"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2015 meeting",
+      "StartDateTime": "2015-07-15T15:00:00Z",
+      "EndDateTime": "2015-07-15T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2AE474A0-212E-5D3E-81BD-8862411F34EC"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2015 meeting",
+      "StartDateTime": "2015-10-05T14:00:00Z",
+      "EndDateTime": "2015-10-05T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5F542F01-248D-5191-BAF8-EA6E5EAE2F5F"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2016 meeting",
+      "StartDateTime": "2016-01-06T14:00:00Z",
+      "EndDateTime": "2016-01-06T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "99E7652A-980A-505E-9BC7-34C16EB3FFF6"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2016 meeting",
+      "StartDateTime": "2016-04-08T14:30:00Z",
+      "EndDateTime": "2016-04-08T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2233376B-7DC9-5E9F-8170-0E9134F781D6"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2016 meeting",
+      "StartDateTime": "2016-07-18T15:00:00Z",
+      "EndDateTime": "2016-07-18T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8DCA101C-BB36-5AD2-A0CE-ABC593F97E55"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2016 meeting",
+      "StartDateTime": "2016-10-03T14:00:00Z",
+      "EndDateTime": "2016-10-03T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CA0EFE04-B766-5EEF-A4FA-DE7209B4D55F"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2017 meeting",
+      "StartDateTime": "2017-01-05T15:30:00Z",
+      "EndDateTime": "2017-01-05T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C65CA62A-5C53-5CE4-939B-133C93E70A92"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2017 meeting",
+      "StartDateTime": "2017-04-12T15:00:00Z",
+      "EndDateTime": "2017-04-12T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DDACD724-61BC-543C-9FF2-BE96931C1F20"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2017 meeting",
+      "StartDateTime": "2017-07-19T15:15:00Z",
+      "EndDateTime": "2017-07-19T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "95125DD2-600F-5667-89FF-9F450A626399"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2017 meeting",
+      "StartDateTime": "2017-10-05T14:30:00Z",
+      "EndDateTime": "2017-10-05T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "11BF82C3-4FF7-594D-8E9C-9766BE7479F9"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2018 meeting",
+      "StartDateTime": "2018-01-04T15:30:00Z",
+      "EndDateTime": "2018-01-04T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3202ABCE-EE38-500F-B184-8F0EC8EC27F6"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2018 meeting",
+      "StartDateTime": "2018-04-09T15:00:00Z",
+      "EndDateTime": "2018-04-09T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8C7CF8E4-16A2-5C1F-A55D-A81113EE1513"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2018 meeting",
+      "StartDateTime": "2018-07-17T15:00:00Z",
+      "EndDateTime": "2018-07-17T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72239EF8-A911-5E33-9902-A0A5B22ADCB1"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2018 meeting",
+      "StartDateTime": "2018-10-04T15:30:00Z",
+      "EndDateTime": "2018-10-04T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AF2E0D94-C41B-5065-ABD7-CB6693990026"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2019 meeting",
+      "StartDateTime": "2019-01-01T15:00:00Z",
+      "EndDateTime": "2019-01-01T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F95FB550-3B4A-558A-A12E-E1CC06BAFB80"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2019 meeting",
+      "StartDateTime": "2019-04-11T15:30:00Z",
+      "EndDateTime": "2019-04-11T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "471844F2-1D9A-5144-A08D-A92B14737A69"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2019 meeting",
+      "StartDateTime": "2019-07-16T15:00:00Z",
+      "EndDateTime": "2019-07-16T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F58781E2-7688-5C09-8515-1DB663A1F73A"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2019 meeting",
+      "StartDateTime": "2019-10-03T15:15:00Z",
+      "EndDateTime": "2019-10-03T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0E63980-F368-539A-ADB6-093218DC398F"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2020 meeting",
+      "StartDateTime": "2020-01-01T14:15:00Z",
+      "EndDateTime": "2020-01-01T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1BE70B63-3DA9-5D81-B1D1-CAD4D90DE2EB"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2020 meeting",
+      "StartDateTime": "2020-04-09T14:30:00Z",
+      "EndDateTime": "2020-04-09T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7D0D21F-AB27-5D02-961C-6F1F6BF56186"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2020 meeting",
+      "StartDateTime": "2020-07-20T15:15:00Z",
+      "EndDateTime": "2020-07-20T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "656A685D-2ADC-50EA-BA83-C47120DCD55A"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2020 meeting",
+      "StartDateTime": "2020-10-05T14:15:00Z",
+      "EndDateTime": "2020-10-05T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B6CDEDD3-D880-5E51-865E-3EC332F679D9"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2021 meeting",
+      "StartDateTime": "2021-01-05T15:30:00Z",
+      "EndDateTime": "2021-01-05T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7B633929-1908-5D05-9F72-EEAC2A1CB2A8"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2021 meeting",
+      "StartDateTime": "2021-04-09T15:00:00Z",
+      "EndDateTime": "2021-04-09T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6ABC8DD3-88C4-5B9B-B1AE-E2EA0F60A359"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2021 meeting",
+      "StartDateTime": "2021-07-19T15:30:00Z",
+      "EndDateTime": "2021-07-19T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "370523AA-71E9-5F3C-883B-8509C6DBEB4A"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2021 meeting",
+      "StartDateTime": "2021-10-04T15:00:00Z",
+      "EndDateTime": "2021-10-04T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0B77E1FB-E6A3-50FF-8E8A-C56CB3B0480C"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q1 2022 meeting",
+      "StartDateTime": "2022-01-04T14:15:00Z",
+      "EndDateTime": "2022-01-04T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2C3D979C-ECF6-5FAD-A8D0-6B408C7F52F2"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q2 2022 meeting",
+      "StartDateTime": "2022-04-08T14:15:00Z",
+      "EndDateTime": "2022-04-08T15:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C7996F15-66CC-5F97-BE28-12D92D3702A0"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q3 2022 meeting",
+      "StartDateTime": "2022-07-18T15:00:00Z",
+      "EndDateTime": "2022-07-18T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "141D0519-91F5-5114-A9DF-3367FBFCC093"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "Name": "Food Safety Committee — Q4 2022 meeting",
+      "StartDateTime": "2022-10-03T15:15:00Z",
+      "EndDateTime": "2022-10-03T16:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A6981890-CB0C-5941-BB07-FDE1586C8162"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q1 2023 meeting",
-      "StartDateTime": "2023-01-15T15:00:00Z",
+      "StartDateTime": "2023-01-06T14:30:00Z",
+      "EndDateTime": "2023-01-06T15:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.953Z",
-      "checksum": "79038615c2755b3e2ad262c6afc77ba3602510a56cb8425bf6429d146b9d3b61"
     }
   },
   {
     "primaryKey": {
-      "ID": "135B9AFA-4440-50EE-AFD0-A82453579A3F"
+      "ID": "45122C0E-C53B-5578-A218-9CFB5220807D"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q2 2023 meeting",
-      "StartDateTime": "2023-04-15T15:00:00Z",
+      "StartDateTime": "2023-04-10T14:15:00Z",
+      "EndDateTime": "2023-04-10T16:15:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.965Z",
-      "checksum": "881829ecc42a5aba114e8bceca4c900044c1c9a2e7d41f9f09107945a2d385c0"
     }
   },
   {
     "primaryKey": {
-      "ID": "3EF5F09F-F578-570F-99CF-BD018E75A767"
+      "ID": "7AB98031-2235-5C4D-8074-75AD9F7C0589"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q3 2023 meeting",
-      "StartDateTime": "2023-07-15T15:00:00Z",
+      "StartDateTime": "2023-07-17T15:00:00Z",
+      "EndDateTime": "2023-07-17T16:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:43.975Z",
-      "checksum": "d1fd65870cfdebeae39344cd03fae35fc7ce2b96610d554171ea2bc705b6f94c"
     }
   },
   {
     "primaryKey": {
-      "ID": "853B5323-FCF6-5DA8-956D-B7EB2760306A"
+      "ID": "B17F3ED7-6FB5-5456-9EE6-1B936075A151"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q4 2023 meeting",
-      "StartDateTime": "2023-10-15T15:00:00Z",
+      "StartDateTime": "2023-10-05T15:30:00Z",
+      "EndDateTime": "2023-10-05T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.006Z",
-      "checksum": "6d7c9fbc907f2b43f01ea759eb3670ce21234a8b2745cbe55f989b03b84bc5bf"
     }
   },
   {
     "primaryKey": {
-      "ID": "30CC4BFD-6D87-5E54-8EC1-412DD51CBF96"
+      "ID": "93E5A03D-6717-589A-9EB2-CA52AB8CE885"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q1 2024 meeting",
-      "StartDateTime": "2024-01-15T15:00:00Z",
+      "StartDateTime": "2024-01-02T14:00:00Z",
+      "EndDateTime": "2024-01-02T15:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.019Z",
-      "checksum": "935312e26125e158876c6502915e00ccb576e56e1a4f3216d155c53034024678"
     }
   },
   {
     "primaryKey": {
-      "ID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3"
+      "ID": "2184A628-62CD-52C9-BAED-F426DE80452F"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q2 2024 meeting",
-      "StartDateTime": "2024-04-15T15:00:00Z",
+      "StartDateTime": "2024-04-12T15:00:00Z",
+      "EndDateTime": "2024-04-12T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.033Z",
-      "checksum": "6889708630e4552fb4398b29972c2e5ae3ef9ad1e2ff405f4d571aa2d9e17321"
     }
   },
   {
     "primaryKey": {
-      "ID": "69516A4D-37D6-5AC8-984C-ACD4F2F85F90"
+      "ID": "3B51C612-4EA1-5D78-B826-269015AAE555"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q3 2024 meeting",
-      "StartDateTime": "2024-07-15T15:00:00Z",
+      "StartDateTime": "2024-07-18T15:15:00Z",
+      "EndDateTime": "2024-07-18T17:15:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.047Z",
-      "checksum": "6555ca2d8604cfc2b4ca442fac71c713f498715d32368fdfa255ce7e049fc967"
     }
   },
   {
     "primaryKey": {
-      "ID": "07508716-B8C2-5F46-B770-58AA53F5BF24"
+      "ID": "C942C8BA-5B55-52C3-807C-DF3CD14F8A44"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q4 2024 meeting",
-      "StartDateTime": "2024-10-15T15:00:00Z",
+      "StartDateTime": "2024-10-07T14:00:00Z",
+      "EndDateTime": "2024-10-07T15:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.060Z",
-      "checksum": "aa8ded810a1eac15e78f7f9f7cceb7bf34fa98da5cfbfac78b7bea777e79716a"
     }
   },
   {
     "primaryKey": {
-      "ID": "519E1137-C2BB-56C1-9C82-1F29887D17E8"
+      "ID": "71547360-C70E-5253-84FF-5F701F325B57"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q1 2025 meeting",
-      "StartDateTime": "2025-01-15T15:00:00Z",
+      "StartDateTime": "2025-01-06T15:00:00Z",
+      "EndDateTime": "2025-01-06T16:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.073Z",
-      "checksum": "126075c7b548ee43e5c9928bfb08b17d6527ffc38d8d71007cd80876e3d12af4"
     }
   },
   {
     "primaryKey": {
-      "ID": "0A4242E3-5863-50F2-A005-0166824C9B32"
+      "ID": "20DA3F8F-F450-581F-B176-84CD098E1D51"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q2 2025 meeting",
-      "StartDateTime": "2025-04-15T15:00:00Z",
+      "StartDateTime": "2025-04-09T15:00:00Z",
+      "EndDateTime": "2025-04-09T16:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.086Z",
-      "checksum": "e07bb02a935d33d1be14d68a20c9e0d3c710dfddf997de727398e180d00e84e9"
     }
   },
   {
     "primaryKey": {
-      "ID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A"
+      "ID": "157A8A0D-6349-52EA-8F32-A66AB314466A"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q3 2025 meeting",
-      "StartDateTime": "2025-07-15T15:00:00Z",
+      "StartDateTime": "2025-07-17T14:00:00Z",
+      "EndDateTime": "2025-07-17T15:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.098Z",
-      "checksum": "5477e2e7d265fc9e66a3d91c76fe371c0e59bcf9694cca5659810ccfc6d26fa5"
     }
   },
   {
     "primaryKey": {
-      "ID": "2A55C348-66E7-5878-B636-B7E7159D6EBF"
+      "ID": "74A5ADD6-25E6-5DE0-A506-8A3FD60080E4"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q4 2025 meeting",
-      "StartDateTime": "2025-10-15T15:00:00Z",
+      "StartDateTime": "2025-10-06T14:30:00Z",
+      "EndDateTime": "2025-10-06T16:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.110Z",
-      "checksum": "8334a72ceb5b77685024475c984dfeded97ab6176775b6f9f616270bcfd3f661"
     }
   },
   {
     "primaryKey": {
-      "ID": "8C0B8E53-DBBF-5D2B-BB74-9AA9F921C181"
+      "ID": "50933ED9-C690-5C79-B2E5-7A65FC2462F5"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q1 2026 meeting",
-      "StartDateTime": "2026-01-15T15:00:00Z",
+      "StartDateTime": "2026-01-05T15:00:00Z",
+      "EndDateTime": "2026-01-05T16:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.121Z",
-      "checksum": "8f4a4883d09096a55ac3a76a2164d7cc3e9905702d05f0f18ad1c35582205e4a"
     }
   },
   {
     "primaryKey": {
-      "ID": "DA3903E1-2E59-51AA-B66B-3F4D93F42D79"
+      "ID": "53663FFD-251D-55CF-8613-E36150F308AF"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q2 2026 meeting",
-      "StartDateTime": "2026-04-15T15:00:00Z",
+      "StartDateTime": "2026-04-13T15:00:00Z",
+      "EndDateTime": "2026-04-13T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.155Z",
-      "checksum": "d51b5f2e9672453ddbdfad05e005187db3bebfdee9a58afa57e52fcc1a67fb2a"
     }
   },
   {
     "primaryKey": {
-      "ID": "1CEBD69F-B704-5771-AEC1-2F95ACA3CD13"
+      "ID": "F0C82A59-A036-5313-9E10-FD055001EA25"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q3 2026 meeting",
-      "StartDateTime": "2026-07-15T15:00:00Z",
+      "StartDateTime": "2026-07-16T15:00:00Z",
+      "EndDateTime": "2026-07-16T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.168Z",
-      "checksum": "67768f5631caeff731c934ffd693f8c447e47b3f7094874d23c59cc5f374ae22"
     }
   },
   {
     "primaryKey": {
-      "ID": "23E5CF8C-DE36-5ABF-A35B-C4D66B44ED29"
+      "ID": "0644A719-6A52-5A5B-A8D1-7F91F0956CB1"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q4 2026 meeting",
-      "StartDateTime": "2026-10-15T15:00:00Z",
+      "StartDateTime": "2026-10-06T15:00:00Z",
+      "EndDateTime": "2026-10-06T16:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.181Z",
-      "checksum": "96a1ce823797e8a07607427164c0401920d36ddd213c0db3c56e2ece211e0b3c"
     }
   },
   {
     "primaryKey": {
-      "ID": "2D615B91-D152-5BB6-939F-CC833E65341B"
+      "ID": "DDA2697A-DB17-5BAA-91A5-F6579E8C5DF4"
     },
     "fields": {
       "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
       "Name": "Food Safety Committee — Q1 2027 meeting",
-      "StartDateTime": "2027-01-15T15:00:00Z",
+      "StartDateTime": "2027-01-06T15:15:00Z",
+      "EndDateTime": "2027-01-06T16:15:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.193Z",
-      "checksum": "90ea0b5dd6356825a606fccba89663a5d074060631f6f1ade274581074e473ab"
     }
   },
   {
     "primaryKey": {
-      "ID": "DCE3C72C-F4D2-58BC-AA77-9229676505E4"
+      "ID": "588CA335-5A60-5B40-B9DC-19509ED73764"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2015 meeting",
+      "StartDateTime": "2015-01-19T14:30:00Z",
+      "EndDateTime": "2015-01-19T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "370B5147-09B8-5CBE-8AAC-B602A59A0BA6"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2015 meeting",
+      "StartDateTime": "2015-04-02T14:00:00Z",
+      "EndDateTime": "2015-04-02T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0D997793-2979-5FC8-832E-B73A6FA8F4D2"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2015 meeting",
+      "StartDateTime": "2015-07-10T14:00:00Z",
+      "EndDateTime": "2015-07-10T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "117B027B-1EB2-5D49-BFAB-8CA987A0B77B"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2015 meeting",
+      "StartDateTime": "2015-10-16T15:00:00Z",
+      "EndDateTime": "2015-10-16T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "95DC8C65-AEBB-52F7-9754-C6A8B354C760"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2016 meeting",
+      "StartDateTime": "2016-01-19T14:00:00Z",
+      "EndDateTime": "2016-01-19T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9C705D1A-B421-54EB-86D0-F2521D48A3E5"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2016 meeting",
+      "StartDateTime": "2016-04-04T15:00:00Z",
+      "EndDateTime": "2016-04-04T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49DD1021-58CA-525F-8B33-BA333758D9FC"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2016 meeting",
+      "StartDateTime": "2016-07-11T15:00:00Z",
+      "EndDateTime": "2016-07-11T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "03A2067F-04ED-506D-86D7-1B742D5A9B7C"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2016 meeting",
+      "StartDateTime": "2016-10-19T14:00:00Z",
+      "EndDateTime": "2016-10-19T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D268FEA0-7CC4-5E81-A3D6-EC3489861997"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2017 meeting",
+      "StartDateTime": "2017-01-16T14:15:00Z",
+      "EndDateTime": "2017-01-16T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "075EB12D-2BE6-5DEC-866C-771EE9B01BB3"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2017 meeting",
+      "StartDateTime": "2017-04-03T14:15:00Z",
+      "EndDateTime": "2017-04-03T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F1D2D6E-0616-5444-8C4B-20F54CBE5D3A"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2017 meeting",
+      "StartDateTime": "2017-07-13T15:00:00Z",
+      "EndDateTime": "2017-07-13T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D18CAC4C-6E35-5917-B7F3-2CF3EDE9B097"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2017 meeting",
+      "StartDateTime": "2017-10-20T15:00:00Z",
+      "EndDateTime": "2017-10-20T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B25B83B6-0C55-5A3A-BCD7-BEFFB70A17FD"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2018 meeting",
+      "StartDateTime": "2018-01-22T15:00:00Z",
+      "EndDateTime": "2018-01-22T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4333417D-6150-55DB-A759-8DB3F48E05C1"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2018 meeting",
+      "StartDateTime": "2018-04-06T15:15:00Z",
+      "EndDateTime": "2018-04-06T16:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B209DEAD-CB8B-5772-B06B-FC43F3F0A2F5"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2018 meeting",
+      "StartDateTime": "2018-07-09T14:30:00Z",
+      "EndDateTime": "2018-07-09T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2EFF8749-2AC3-5C5C-A2E9-43C72688F407"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2018 meeting",
+      "StartDateTime": "2018-10-16T15:30:00Z",
+      "EndDateTime": "2018-10-16T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "385C4095-F1F4-5CB0-A8BE-CC469B24190F"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2019 meeting",
+      "StartDateTime": "2019-01-21T15:00:00Z",
+      "EndDateTime": "2019-01-21T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5E8D284A-CD86-5341-AB47-54579A136768"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2019 meeting",
+      "StartDateTime": "2019-04-01T14:00:00Z",
+      "EndDateTime": "2019-04-01T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8BF1A0DC-F046-5782-AC6D-A4A416B3D9F6"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2019 meeting",
+      "StartDateTime": "2019-07-11T14:00:00Z",
+      "EndDateTime": "2019-07-11T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DA8DD229-3ADF-54CB-830B-EE79E5E637F0"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2019 meeting",
+      "StartDateTime": "2019-10-15T14:30:00Z",
+      "EndDateTime": "2019-10-15T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BE8E8C85-7A66-5E4B-B8F5-36F83A15A790"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2020 meeting",
+      "StartDateTime": "2020-01-20T15:00:00Z",
+      "EndDateTime": "2020-01-20T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED97401C-D5BF-56EA-9663-B3294FC2A804"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2020 meeting",
+      "StartDateTime": "2020-04-06T14:30:00Z",
+      "EndDateTime": "2020-04-06T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4D90EA9B-3C4F-58EE-BDC4-8582B8596BA2"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2020 meeting",
+      "StartDateTime": "2020-07-09T15:30:00Z",
+      "EndDateTime": "2020-07-09T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BD6EB77-CAF4-599C-8EA0-0944C8AA3868"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2020 meeting",
+      "StartDateTime": "2020-10-19T15:00:00Z",
+      "EndDateTime": "2020-10-19T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A04BB2B4-23FA-5C3F-88E1-5E28F539205B"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2021 meeting",
+      "StartDateTime": "2021-01-18T14:30:00Z",
+      "EndDateTime": "2021-01-18T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C89B8F1A-EE8A-59AC-B33A-801409AEED58"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2021 meeting",
+      "StartDateTime": "2021-04-05T15:15:00Z",
+      "EndDateTime": "2021-04-05T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8B41FC7F-EA98-5833-B623-95BDE00DD977"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2021 meeting",
+      "StartDateTime": "2021-07-12T14:15:00Z",
+      "EndDateTime": "2021-07-12T15:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26F398AF-BABE-543E-853C-122194FBB13C"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2021 meeting",
+      "StartDateTime": "2021-10-19T15:00:00Z",
+      "EndDateTime": "2021-10-19T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59A259EB-771D-509F-B878-6F0F4CB6F0A4"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q1 2022 meeting",
+      "StartDateTime": "2022-01-17T15:15:00Z",
+      "EndDateTime": "2022-01-17T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7687966D-77B6-5B28-9817-91261BD5EEA8"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q2 2022 meeting",
+      "StartDateTime": "2022-04-04T15:00:00Z",
+      "EndDateTime": "2022-04-04T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1DF999DA-FDD5-58AB-ADB1-5F41C3CB934E"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q3 2022 meeting",
+      "StartDateTime": "2022-07-11T14:30:00Z",
+      "EndDateTime": "2022-07-11T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "882A7931-D2A9-5D49-B440-37D35BCBD572"
+    },
+    "fields": {
+      "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
+      "Name": "Education Committee — Q4 2022 meeting",
+      "StartDateTime": "2022-10-20T14:00:00Z",
+      "EndDateTime": "2022-10-20T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8C3AA3DC-F612-5793-8D35-47CAE58FCBF3"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q1 2023 meeting",
-      "StartDateTime": "2023-01-15T15:00:00Z",
+      "StartDateTime": "2023-01-19T14:00:00Z",
+      "EndDateTime": "2023-01-19T15:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.206Z",
-      "checksum": "12bbb99eb4e936af735538acc2574c1f56cf4a22f437b1a5dcada814c3c693f7"
     }
   },
   {
     "primaryKey": {
-      "ID": "A71368DE-B67A-50E9-9A52-07FA382BC139"
+      "ID": "BA0A0B4C-475C-56C2-B27E-E2674D64F7FC"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q2 2023 meeting",
-      "StartDateTime": "2023-04-15T15:00:00Z",
+      "StartDateTime": "2023-04-03T14:15:00Z",
+      "EndDateTime": "2023-04-03T16:15:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.219Z",
-      "checksum": "b140fdcfd8985244597a8c824cc2d1050bf13142e710447c5e3f6276e15dc56b"
     }
   },
   {
     "primaryKey": {
-      "ID": "F18BBA60-3973-5228-A30A-B6347AA5C77A"
+      "ID": "16D27DEB-A921-5939-85C6-C955C28042EB"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q3 2023 meeting",
-      "StartDateTime": "2023-07-15T15:00:00Z",
+      "StartDateTime": "2023-07-10T14:30:00Z",
+      "EndDateTime": "2023-07-10T16:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.232Z",
-      "checksum": "8d8c96feac2925c7ce3ea1768af410661b5ccc9a82dc9ce84e7fc7e16509a6ba"
     }
   },
   {
     "primaryKey": {
-      "ID": "D86CD7C4-C886-5847-B2CD-D0FA47743A42"
+      "ID": "32BD4B6D-FC34-5EFD-B29C-A2203C759C12"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q4 2023 meeting",
-      "StartDateTime": "2023-10-15T15:00:00Z",
+      "StartDateTime": "2023-10-17T14:30:00Z",
+      "EndDateTime": "2023-10-17T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.245Z",
-      "checksum": "ffb41230d348312cb40d009e51c7cae1fa6e26876789daa534ea37959b2c8f60"
     }
   },
   {
     "primaryKey": {
-      "ID": "45FC0C2A-8C8A-5EE9-8F40-F6D6AC194624"
+      "ID": "816EB2C2-5287-50F6-9E6D-270D4A470689"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q1 2024 meeting",
-      "StartDateTime": "2024-01-15T15:00:00Z",
+      "StartDateTime": "2024-01-19T15:00:00Z",
+      "EndDateTime": "2024-01-19T16:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.259Z",
-      "checksum": "a5d19f62131f47e75e3d02e4db044db047283f0b7c820af1ec52b6e9d51ae142"
     }
   },
   {
     "primaryKey": {
-      "ID": "A9D37828-DF1E-58C7-BFF5-8605FCAAC043"
+      "ID": "617EA42D-189E-55D6-ADC1-C88130FEEBBD"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q2 2024 meeting",
-      "StartDateTime": "2024-04-15T15:00:00Z",
+      "StartDateTime": "2024-04-02T14:00:00Z",
+      "EndDateTime": "2024-04-02T15:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.269Z",
-      "checksum": "7f391167de977184d5b4c9fe2444e5a5c50acbf593da85b2fd1587b3f4d4577f"
     }
   },
   {
     "primaryKey": {
-      "ID": "0D012F2E-5B55-5FA6-A6AF-CAF108414621"
+      "ID": "8F0F9282-296A-58A5-8E3D-81D483121A31"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q3 2024 meeting",
-      "StartDateTime": "2024-07-15T15:00:00Z",
+      "StartDateTime": "2024-07-12T15:00:00Z",
+      "EndDateTime": "2024-07-12T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.304Z",
-      "checksum": "3dbc6b3038b98de7ea5a7196cd6341e9ee1fe98db09d590ce1ce14eb6f2b2fa3"
     }
   },
   {
     "primaryKey": {
-      "ID": "E15BEBF9-DF6B-521E-81EA-CDD1C4316729"
+      "ID": "D3EADECE-97CB-5A58-B71C-CEBFC831CE1C"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q4 2024 meeting",
-      "StartDateTime": "2024-10-15T15:00:00Z",
+      "StartDateTime": "2024-10-18T14:15:00Z",
+      "EndDateTime": "2024-10-18T16:15:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.317Z",
-      "checksum": "37bd8e85c143a02dedbb1ae956184fc30054222c4be7ce3a34296558ca7afc6e"
     }
   },
   {
     "primaryKey": {
-      "ID": "0D67A300-117F-5775-9290-D921A3D5AA33"
+      "ID": "C70FEC6F-3436-52B0-A39A-3684F77BEDC8"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q1 2025 meeting",
-      "StartDateTime": "2025-01-15T15:00:00Z",
+      "StartDateTime": "2025-01-20T15:30:00Z",
+      "EndDateTime": "2025-01-20T17:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.331Z",
-      "checksum": "98609edb924d05c533b9a11f47cca9c7408d1b290f7447e86e006c78014226b4"
     }
   },
   {
     "primaryKey": {
-      "ID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F"
+      "ID": "3489225C-C844-5963-865E-0F5A14A90DC4"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q2 2025 meeting",
-      "StartDateTime": "2025-04-15T15:00:00Z",
+      "StartDateTime": "2025-04-07T15:30:00Z",
+      "EndDateTime": "2025-04-07T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.347Z",
-      "checksum": "0f85cdbdcdfe7de413aad9cf07e4c6db14036763374a88e46ad9327ffac1f6bc"
     }
   },
   {
     "primaryKey": {
-      "ID": "4079E7FD-8CCD-5FC5-851D-53B6F6B917B5"
+      "ID": "EC5F1D59-E41F-56C2-880D-14D473946DFE"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q3 2025 meeting",
-      "StartDateTime": "2025-07-15T15:00:00Z",
+      "StartDateTime": "2025-07-10T14:00:00Z",
+      "EndDateTime": "2025-07-10T16:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.365Z",
-      "checksum": "aecbe95c7633f4e40ca03b262357d30e6efbe553370ca14f45109202bf2ea888"
     }
   },
   {
     "primaryKey": {
-      "ID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5"
+      "ID": "F832C47D-7DFD-572C-AF1D-B0A82271F3EC"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q4 2025 meeting",
-      "StartDateTime": "2025-10-15T15:00:00Z",
+      "StartDateTime": "2025-10-20T15:00:00Z",
+      "EndDateTime": "2025-10-20T16:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.380Z",
-      "checksum": "4e87c636877e379312789f359f1625510706c153cde5c144d082644f27499906"
     }
   },
   {
     "primaryKey": {
-      "ID": "3C0CD206-DB41-5936-8E69-0812577D8A14"
+      "ID": "311C592E-75BB-523B-9091-4ADA316121F0"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q1 2026 meeting",
-      "StartDateTime": "2026-01-15T15:00:00Z",
+      "StartDateTime": "2026-01-19T15:00:00Z",
+      "EndDateTime": "2026-01-19T17:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.395Z",
-      "checksum": "f0ee9a908836a65ee1cef36a8fe6c20e4969ff78e2676084101c267232948d97"
     }
   },
   {
     "primaryKey": {
-      "ID": "B4CDD851-EE66-5D22-A034-2A44B4EB087D"
+      "ID": "EFC23CA0-D6BA-5FAA-9FDB-A3A88A8FA0FC"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q2 2026 meeting",
-      "StartDateTime": "2026-04-15T15:00:00Z",
+      "StartDateTime": "2026-04-03T15:00:00Z",
+      "EndDateTime": "2026-04-03T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.409Z",
-      "checksum": "98fbe996935a35f7f125dc6d232037bd5c63e262c7f377e22096919d66d16fa0"
     }
   },
   {
     "primaryKey": {
-      "ID": "D03F7A25-7A0C-5887-940B-A7B89CD47B08"
+      "ID": "18A872C5-9BB1-572A-842C-6A3C61359C3D"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q3 2026 meeting",
-      "StartDateTime": "2026-07-15T15:00:00Z",
+      "StartDateTime": "2026-07-10T14:00:00Z",
+      "EndDateTime": "2026-07-10T15:30:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.424Z",
-      "checksum": "bdd07b6962cb4ac3cbdad75400cc9a6f42ab4936d094f130fc01e7dcfdf7bf7c"
     }
   },
   {
     "primaryKey": {
-      "ID": "7BBF3C88-8501-571D-94E0-55EF2C566A57"
+      "ID": "472141CA-7D44-5CB4-A598-9E9BDD7B40A2"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q4 2026 meeting",
-      "StartDateTime": "2026-10-15T15:00:00Z",
+      "StartDateTime": "2026-10-19T14:00:00Z",
+      "EndDateTime": "2026-10-19T15:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.437Z",
-      "checksum": "4c84ff6c98235a3d3e14930ea77a800c6df469eebc6952c67061872fc923db50"
     }
   },
   {
     "primaryKey": {
-      "ID": "BBB64666-9595-5B12-84F5-975BB92C57B0"
+      "ID": "78E70BD0-014B-5898-970D-9C6F32BA1DFD"
     },
     "fields": {
       "CommitteeID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7",
       "Name": "Education Committee — Q1 2027 meeting",
-      "StartDateTime": "2027-01-15T15:00:00Z",
+      "StartDateTime": "2027-01-18T15:30:00Z",
+      "EndDateTime": "2027-01-18T17:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.472Z",
-      "checksum": "97fc3694117b9281d94a102ec0027f0271727ff9b07a95cc0ba487d059422748"
     }
   },
   {
     "primaryKey": {
-      "ID": "1DAE5825-63D0-5285-9143-8DC111A3BA83"
+      "ID": "D66B3490-6565-53A6-B6A9-978EA3558741"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2015 meeting",
+      "StartDateTime": "2015-01-12T16:30:00Z",
+      "EndDateTime": "2015-01-12T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0834B76C-CA62-51BA-8B71-35C02B2A675A"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2015 meeting",
+      "StartDateTime": "2015-04-15T16:30:00Z",
+      "EndDateTime": "2015-04-15T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "615ABBAE-EA04-5CC8-8943-B81257E75EC9"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2015 meeting",
+      "StartDateTime": "2015-07-06T15:00:00Z",
+      "EndDateTime": "2015-07-06T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1F5A2DB8-13B9-52AF-B959-D3FC23AE0234"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2015 meeting",
+      "StartDateTime": "2015-10-12T16:00:00Z",
+      "EndDateTime": "2015-10-12T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A5DA7A95-2CAC-5803-9D4D-13D67AA54A22"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2016 meeting",
+      "StartDateTime": "2016-01-11T15:30:00Z",
+      "EndDateTime": "2016-01-11T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9EBC7081-0850-5E01-B299-FE43EB108F67"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2016 meeting",
+      "StartDateTime": "2016-04-19T15:00:00Z",
+      "EndDateTime": "2016-04-19T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F63E1EC5-6FDA-5B32-9BE3-C52B87B05372"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2016 meeting",
+      "StartDateTime": "2016-07-06T16:30:00Z",
+      "EndDateTime": "2016-07-06T18:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "67ECC5A7-AF84-5A54-9C38-C65D26C7CA73"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2016 meeting",
+      "StartDateTime": "2016-10-13T15:30:00Z",
+      "EndDateTime": "2016-10-13T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6375FE52-B5D1-5D8E-9163-E9D537447A28"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2017 meeting",
+      "StartDateTime": "2017-01-09T16:30:00Z",
+      "EndDateTime": "2017-01-09T18:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D0209144-025E-5A47-9652-2768B5FCF8EB"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2017 meeting",
+      "StartDateTime": "2017-04-19T16:15:00Z",
+      "EndDateTime": "2017-04-19T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F039ADA-ED6B-51B4-975D-8F5B5419C043"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2017 meeting",
+      "StartDateTime": "2017-07-05T16:15:00Z",
+      "EndDateTime": "2017-07-05T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "781BB44E-AA45-5FD0-BC70-7932EC8C7FF1"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2017 meeting",
+      "StartDateTime": "2017-10-09T15:00:00Z",
+      "EndDateTime": "2017-10-09T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CA6A4433-B7D6-5AB2-AD53-DAFD37CB278D"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2018 meeting",
+      "StartDateTime": "2018-01-11T16:15:00Z",
+      "EndDateTime": "2018-01-11T18:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F4C97489-B4C9-5891-9E53-42DDFAFEEB50"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2018 meeting",
+      "StartDateTime": "2018-04-16T16:30:00Z",
+      "EndDateTime": "2018-04-16T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "141D781C-25C7-523A-97DF-97D5CA3A56A6"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2018 meeting",
+      "StartDateTime": "2018-07-05T15:00:00Z",
+      "EndDateTime": "2018-07-05T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD1480D1-85AB-55D9-93ED-E334AEC7E530"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2018 meeting",
+      "StartDateTime": "2018-10-09T16:30:00Z",
+      "EndDateTime": "2018-10-09T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D3D3AB1-AA8D-5756-AA15-882BB08A33E4"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2019 meeting",
+      "StartDateTime": "2019-01-10T16:15:00Z",
+      "EndDateTime": "2019-01-10T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4219C581-20F0-5F6F-A97C-906EE537EED4"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2019 meeting",
+      "StartDateTime": "2019-04-17T15:30:00Z",
+      "EndDateTime": "2019-04-17T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39A8B8C1-B0C6-50E7-A0EA-DD7D6A77A8EE"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2019 meeting",
+      "StartDateTime": "2019-07-01T16:15:00Z",
+      "EndDateTime": "2019-07-01T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D9026E8-C830-5079-A7DE-7B0BB3B8E8AA"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2019 meeting",
+      "StartDateTime": "2019-10-08T16:15:00Z",
+      "EndDateTime": "2019-10-08T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C986CD48-2E60-57A0-9926-F62549EDDE93"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2020 meeting",
+      "StartDateTime": "2020-01-09T16:30:00Z",
+      "EndDateTime": "2020-01-09T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4A4EDB3C-E143-53D3-B6F0-78855FEC90AC"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2020 meeting",
+      "StartDateTime": "2020-04-16T15:00:00Z",
+      "EndDateTime": "2020-04-16T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0819843E-C0A8-5F3B-884E-FEF3CF964262"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2020 meeting",
+      "StartDateTime": "2020-07-01T16:15:00Z",
+      "EndDateTime": "2020-07-01T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BD084C98-B925-579E-8FBA-0E35E823CC23"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2020 meeting",
+      "StartDateTime": "2020-10-13T15:00:00Z",
+      "EndDateTime": "2020-10-13T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "19C74951-D240-53C5-9698-22BD7650F89B"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2021 meeting",
+      "StartDateTime": "2021-01-11T15:30:00Z",
+      "EndDateTime": "2021-01-11T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16B22896-3264-5715-A912-00AAB8AA4A86"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2021 meeting",
+      "StartDateTime": "2021-04-19T15:30:00Z",
+      "EndDateTime": "2021-04-19T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C7B85608-4B3B-5739-894A-F6AC212D43BD"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2021 meeting",
+      "StartDateTime": "2021-07-01T16:15:00Z",
+      "EndDateTime": "2021-07-01T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "25E574E2-D5EE-5AC8-AE5D-662A4FB12EA1"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2021 meeting",
+      "StartDateTime": "2021-10-11T16:00:00Z",
+      "EndDateTime": "2021-10-11T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C5928FB3-55CD-5B7C-AF13-9592E9254059"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q1 2022 meeting",
+      "StartDateTime": "2022-01-10T15:30:00Z",
+      "EndDateTime": "2022-01-10T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "076A3B6B-15F7-5381-AC6D-54D39FC32FE9"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q2 2022 meeting",
+      "StartDateTime": "2022-04-18T15:00:00Z",
+      "EndDateTime": "2022-04-18T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9DF85DC0-F1B8-5CBF-A6B2-705043E0CACC"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q3 2022 meeting",
+      "StartDateTime": "2022-07-05T15:00:00Z",
+      "EndDateTime": "2022-07-05T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "55CA6679-B6BF-557E-BD8C-A66DDAF808AD"
+    },
+    "fields": {
+      "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
+      "Name": "Membership & Outreach Committee — Q4 2022 meeting",
+      "StartDateTime": "2022-10-11T16:00:00Z",
+      "EndDateTime": "2022-10-11T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F1C5D78-0FE1-5303-8755-AE815478468F"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q1 2023 meeting",
-      "StartDateTime": "2023-01-15T15:00:00Z",
+      "StartDateTime": "2023-01-13T15:00:00Z",
+      "EndDateTime": "2023-01-13T16:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.486Z",
-      "checksum": "8cd24308fd2985fe35f8e8b7591b8d3a43b631525802caa457676b8c135163ba"
     }
   },
   {
     "primaryKey": {
-      "ID": "0758EAEE-60D3-509F-B695-6AFB473C38D4"
+      "ID": "8BC6A922-522F-5CBE-A801-73E06A75E0C8"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q2 2023 meeting",
-      "StartDateTime": "2023-04-15T15:00:00Z",
+      "StartDateTime": "2023-04-17T15:00:00Z",
+      "EndDateTime": "2023-04-17T16:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.500Z",
-      "checksum": "79b9d0529d3e9cb6dac0595b1bcbae68bb468a75c5a3a4e5d9c19fadfea65865"
     }
   },
   {
     "primaryKey": {
-      "ID": "5FE5D906-011F-56AE-88AA-1CC6C241604F"
+      "ID": "CC74BAEA-BA94-5136-B49B-535C91B64D6F"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q3 2023 meeting",
-      "StartDateTime": "2023-07-15T15:00:00Z",
+      "StartDateTime": "2023-07-06T16:15:00Z",
+      "EndDateTime": "2023-07-06T17:15:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.513Z",
-      "checksum": "54225331f744114b4832117e69196456888d19c39165510816f9aefb489ed85f"
     }
   },
   {
     "primaryKey": {
-      "ID": "5FF76945-DC92-54A6-BF6D-31E889C22514"
+      "ID": "9D98F0AA-7338-53B8-9D56-743AF88D80D1"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q4 2023 meeting",
-      "StartDateTime": "2023-10-15T15:00:00Z",
+      "StartDateTime": "2023-10-12T15:30:00Z",
+      "EndDateTime": "2023-10-12T17:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.526Z",
-      "checksum": "f3019ca45b415631224606416bfa952a1dc3fe93dbaab5cf3ec1578efccc5a84"
     }
   },
   {
@@ -942,149 +2752,131 @@
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q1 2024 meeting",
       "StartDateTime": "2024-01-15T15:00:00Z",
+      "EndDateTime": "2024-01-15T16:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.539Z",
-      "checksum": "7021986163d5f87d0ff76ea8b86a82c95657725113fbc38843b6a5e64f5e1bb7"
     }
   },
   {
     "primaryKey": {
-      "ID": "338A3F91-5DD4-5DA8-BF83-9C54BBF7BB05"
+      "ID": "9D64275D-A1E9-5BB5-91E6-B66BEE202BF8"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q2 2024 meeting",
-      "StartDateTime": "2024-04-15T15:00:00Z",
+      "StartDateTime": "2024-04-16T16:15:00Z",
+      "EndDateTime": "2024-04-16T17:45:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.552Z",
-      "checksum": "f4604679446b86f503b788b8c12a6af8aa57903567c58de67bc7c7c5e004d2fa"
     }
   },
   {
     "primaryKey": {
-      "ID": "75240340-0122-5ECC-A4AC-3B0CB26D5708"
+      "ID": "2F2762FB-22D3-5DAD-973B-A68DC2A08D2D"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q3 2024 meeting",
-      "StartDateTime": "2024-07-15T15:00:00Z",
+      "StartDateTime": "2024-07-08T16:00:00Z",
+      "EndDateTime": "2024-07-08T17:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.566Z",
-      "checksum": "d6d122b4b52ec00f65c38bf00ec0272cb75bd8022ecb1b2698bfa814495a5fe9"
     }
   },
   {
     "primaryKey": {
-      "ID": "231A58CA-13D2-577B-8404-9DFADEFDF7D1"
+      "ID": "8520DD96-3C47-5619-85E9-A011F18DB9A9"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q4 2024 meeting",
-      "StartDateTime": "2024-10-15T15:00:00Z",
+      "StartDateTime": "2024-10-14T16:00:00Z",
+      "EndDateTime": "2024-10-14T17:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.579Z",
-      "checksum": "7dc1dc34b9187be8b938749faad5684427545de7f269274a96c249a43a522e62"
     }
   },
   {
     "primaryKey": {
-      "ID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3"
+      "ID": "CD9EB6D2-9F2C-5548-BAA3-2CDE59933B20"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q1 2025 meeting",
-      "StartDateTime": "2025-01-15T15:00:00Z",
+      "StartDateTime": "2025-01-13T16:00:00Z",
+      "EndDateTime": "2025-01-13T17:30:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.589Z",
-      "checksum": "0070e4adf6bb18a898ad778f5d220b65c17fd3b4f6e568a132a3117cd0c4bebf"
     }
   },
   {
     "primaryKey": {
-      "ID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE"
+      "ID": "2E70BCE3-8691-5C29-91B6-B60425C7D4D4"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q2 2025 meeting",
-      "StartDateTime": "2025-04-15T15:00:00Z",
+      "StartDateTime": "2025-04-21T15:30:00Z",
+      "EndDateTime": "2025-04-21T17:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.616Z",
-      "checksum": "9d122c28d1ea8c0fba0c51458ee316d7b44f559354c6186de2bb7b8ab8316048"
     }
   },
   {
     "primaryKey": {
-      "ID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3"
+      "ID": "BB79E900-BD8C-535B-A2ED-ACAA7C3C83B7"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q3 2025 meeting",
-      "StartDateTime": "2025-07-15T15:00:00Z",
+      "StartDateTime": "2025-07-03T16:30:00Z",
+      "EndDateTime": "2025-07-03T18:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.630Z",
-      "checksum": "61aa15c731722c5ef207c75d17ae97420468ed5e10fb0f0445b9a17a748322d9"
     }
   },
   {
     "primaryKey": {
-      "ID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B"
+      "ID": "C5520F5F-D6DE-54CE-A536-72F80D70D0D0"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q4 2025 meeting",
-      "StartDateTime": "2025-10-15T15:00:00Z",
+      "StartDateTime": "2025-10-08T15:00:00Z",
+      "EndDateTime": "2025-10-08T16:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.643Z",
-      "checksum": "6f8641af03c429f216266005b9352c86455fd4e14ada2707c38f05d909bd0f0d"
     }
   },
   {
     "primaryKey": {
-      "ID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6"
+      "ID": "FCD1FCA7-012C-5217-8D8F-88AAF24014F6"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q1 2026 meeting",
-      "StartDateTime": "2026-01-15T15:00:00Z",
+      "StartDateTime": "2026-01-09T16:30:00Z",
+      "EndDateTime": "2026-01-09T18:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.658Z",
-      "checksum": "752443096d37f1beffaf89a03c76ae6f614f95f4705a271d56ad2f6058f82f08"
     }
   },
   {
@@ -1094,65 +2886,57 @@
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q2 2026 meeting",
-      "StartDateTime": "2026-04-15T15:00:00Z",
+      "StartDateTime": "2026-04-15T15:30:00Z",
+      "EndDateTime": "2026-04-15T17:00:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.671Z",
-      "checksum": "eb1e94378c4d80fbac8a7e44aadb9900e10bf31c3333c65a6259aefb4d643412"
     }
   },
   {
     "primaryKey": {
-      "ID": "671700DA-0498-55B2-86A7-B5AD260E3E6C"
+      "ID": "E94DA471-DF73-5E4F-8476-25D7EF40E5E6"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q3 2026 meeting",
-      "StartDateTime": "2026-07-15T15:00:00Z",
+      "StartDateTime": "2026-07-06T15:15:00Z",
+      "EndDateTime": "2026-07-06T16:15:00Z",
       "TimeZone": "UTC",
-      "LocationType": "Virtual",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Annex Room 2",
       "Status": "Completed"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.684Z",
-      "checksum": "63f862f74dbbd3ee9753120830418369c177d6790dcfad5eaa9fb014a1a6e12d"
     }
   },
   {
     "primaryKey": {
-      "ID": "ABEB7509-9159-5BF7-B965-D9449C9E5948"
+      "ID": "3158EA8D-6A96-501F-AF4B-F65BB5C5FF22"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q4 2026 meeting",
-      "StartDateTime": "2026-10-15T15:00:00Z",
+      "StartDateTime": "2026-10-12T16:00:00Z",
+      "EndDateTime": "2026-10-12T17:00:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.696Z",
-      "checksum": "ba7bd94de7a82d9f650edc5d0dd146868bec75dbefc44fece363663f055e15af"
     }
   },
   {
     "primaryKey": {
-      "ID": "C4C1DCFD-0BE7-5926-9FC6-1C6178F417D4"
+      "ID": "016FBD30-86C8-5705-A192-3A857C0A87C0"
     },
     "fields": {
       "CommitteeID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA",
       "Name": "Membership & Outreach Committee — Q1 2027 meeting",
-      "StartDateTime": "2027-01-15T15:00:00Z",
+      "StartDateTime": "2027-01-13T15:15:00Z",
+      "EndDateTime": "2027-01-13T16:45:00Z",
       "TimeZone": "UTC",
       "LocationType": "Virtual",
+      "LocationText": null,
       "Status": "Scheduled"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:44.707Z",
-      "checksum": "86da53c5d14fa6ac2070e6258ba6f28c773b0c4b4f2a3563b9a65594cda33088"
     }
   }
 ]

@@ -1,72 +1,272 @@
 [
   {
     "primaryKey": {
-      "ID": "2993F6B8-6468-5F88-B4F4-A1D3DEDD1078"
+      "ID": "19807458-C3B6-51A4-A471-2967D3D91618"
     },
     "fields": {
-      "TaskID": "533876F9-D650-59CD-9C7D-1B32165641CB",
+      "TaskID": "57BDDFFC-4CD7-5096-A0BB-A85B441883F8",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "624F6C3C-2A27-591D-B8E3-C5499A4EE9A1"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.658Z",
-      "checksum": "fa593b07d994bfba3d60b19f0f81baf5a3f35b10b23fa929936357e22b15ea91"
+      "RecordID": "FB265F55-4821-5AFC-9EF1-7425A4E3AFAC"
     }
   },
   {
     "primaryKey": {
-      "ID": "92680780-8AD3-5168-AA22-2CD33B43D942"
+      "ID": "E9317A10-04AD-51A4-ACEE-DA4E3FBA8746"
     },
     "fields": {
-      "TaskID": "F49CD6F8-08F5-5194-852D-75B9AC2D2E08",
+      "TaskID": "849E8E03-B41C-5E01-AB7F-A3B60841C214",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "E9307B3D-28D4-5C7D-AF59-15D1F70EE066"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.706Z",
-      "checksum": "a17d4158ad6dbc140feb6bacfc89ac58fe2fe1196a8b40b2baea6be21c24c454"
+      "RecordID": "FB265F55-4821-5AFC-9EF1-7425A4E3AFAC"
     }
   },
   {
     "primaryKey": {
-      "ID": "5237C1ED-0C71-559E-AF5E-CBBC50BC761A"
+      "ID": "293F90F0-415B-52A0-94BD-0BDAEAC1A3A6"
     },
     "fields": {
-      "TaskID": "59BE9E3F-9747-5076-9C94-D46D0388AC9A",
+      "TaskID": "512B3AD9-122E-5E64-8BFA-EBD721624489",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "B2933EEB-7A28-5077-BD81-4F3A0B20F654"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.717Z",
-      "checksum": "e2f3b0190412262d25f46ab9ffdcd995bc2beda21473010d018abab135edbe4c"
+      "RecordID": "333BBE05-4A0C-5ACD-B16B-D26C2A8EFEF4"
     }
   },
   {
     "primaryKey": {
-      "ID": "DC4F57D0-2E8C-535E-B336-9868461FC555"
+      "ID": "7760EC08-C104-5AB4-8B2E-0265214A3B09"
     },
     "fields": {
-      "TaskID": "046233EE-ADB8-5420-8D47-2163490F9C60",
+      "TaskID": "8B625155-03A3-51FA-A7BD-19E3F9F6FEAE",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "79636F02-BF6F-5DDB-A078-B6A78121DDA0"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.728Z",
-      "checksum": "c45bbbcd1543e7fc7578463895a3daae7ada5ae0cfaf4991ff81b04ff833455d"
+      "RecordID": "333BBE05-4A0C-5ACD-B16B-D26C2A8EFEF4"
     }
   },
   {
     "primaryKey": {
-      "ID": "EEF7149D-27B9-5A6A-9DF2-71B94D9B98C8"
+      "ID": "A265BA4B-953E-5E16-A81D-4029FAC06AE8"
     },
     "fields": {
-      "TaskID": "6AA3C118-CC29-5EE3-8F1F-69A95E74C540",
+      "TaskID": "6EB47F85-A721-56F6-AE0C-33A77DA4E567",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "C3309E1B-3378-56A2-A680-3EC2CA009962"
+      "RecordID": "F14EB250-A7BA-529A-9327-A864D0823DA9"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F6E551D8-3374-51CD-B6FF-D13EDE020C9B"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.740Z",
-      "checksum": "792d7d3b63aeeefa93c672e94e07ad3721f4e955a041f1864b9abdc6eed3d193"
+    "fields": {
+      "TaskID": "2B9C5B43-0A43-5784-94F3-D87E6CBC9B7F",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "F4B3E893-57DF-53C9-BF80-9402B0030E84"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "523D1FC1-6A76-57E2-8FC4-92A67978B45A"
+    },
+    "fields": {
+      "TaskID": "12358FCB-AD76-56E5-BE98-1816FAF4AED7",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "7C58FBBF-8A44-581D-9696-50275C04F78A"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "669BE8FD-4EB8-52D5-9D5E-E06496AF44DF"
+    },
+    "fields": {
+      "TaskID": "2D0C9896-CFD7-55A2-ADEC-55D634C0E83C",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "B2A2D902-E4FC-59E0-AB00-6B559FEED12B"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A85C627E-3B38-5FDC-8A38-02752AF951C8"
+    },
+    "fields": {
+      "TaskID": "472A57AE-84DF-5ABD-977D-A7A5FC4B66E1",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "B2A2D902-E4FC-59E0-AB00-6B559FEED12B"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A583D6B3-9D61-53F4-A1CA-CF4FFEED2F3D"
+    },
+    "fields": {
+      "TaskID": "21ACD3D6-4C82-54DE-BBFC-FF15CB8440C0",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D07F5B7B-5286-5CCA-BFD3-41AF17552338"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "06A6F93D-44E9-5226-AB2C-440A8F168208"
+    },
+    "fields": {
+      "TaskID": "E4700140-85B1-5995-9FF2-DFF1E1BAC624",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "AF76EF15-E226-5F24-8FAD-527F89B35EAF"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C7FE7E7D-AAFB-51F8-9C15-EF0CBA934F69"
+    },
+    "fields": {
+      "TaskID": "1DCA9E25-B6AA-508D-8912-38C07DAEA5B9",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "9DB062A6-FBD4-5A02-B445-13B2D8E70333"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "079DE4A5-79BB-58CF-90A2-CDD75CB437AA"
+    },
+    "fields": {
+      "TaskID": "1AE71B1D-CCF2-5FFE-B41D-EF5A5ADD0F1D",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "3588E7CE-3EBB-5E90-92A6-9CDFB29E1271"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C53DDAF-225B-5CA1-A415-270D6FB0816E"
+    },
+    "fields": {
+      "TaskID": "09F4EBD3-6DCD-548B-AC8F-5D12DA734B08",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "3588E7CE-3EBB-5E90-92A6-9CDFB29E1271"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "30D0D393-7A75-554F-A726-B7CAFC6647B3"
+    },
+    "fields": {
+      "TaskID": "889526B1-D6CD-5801-BDD1-E7067AF98B47",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "EB0C5021-4354-5D25-80BA-DCD0CC690278"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BE507BA5-197D-55D4-BD26-0417FFB85105"
+    },
+    "fields": {
+      "TaskID": "46FA2DA3-985D-59BF-AAF1-CFCD57C3FD43",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "EB0C5021-4354-5D25-80BA-DCD0CC690278"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D51F5FD0-E5DD-5A44-95D2-71312AF1550F"
+    },
+    "fields": {
+      "TaskID": "9835C323-F43C-5F24-BBBB-29FB26A66B9F",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "26794B71-5D3E-5C8B-A423-1603C8BE9204"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EA2DB4B0-F37B-51B4-9577-CECF66F8E0CD"
+    },
+    "fields": {
+      "TaskID": "70318AF2-0654-5965-9F70-271CB8840C60",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "064D075E-9BDE-5767-9116-7B42C04E2C80"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2C9CA422-D9C6-5D66-88EA-8FADF74C3ABF"
+    },
+    "fields": {
+      "TaskID": "2486F593-AF09-51C7-9C1B-799E5B86FB7A",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "09F3A69C-8C49-5D0F-B662-8D10E69CD80C"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B0BED46A-48B2-5CE1-8C61-725204267DDB"
+    },
+    "fields": {
+      "TaskID": "2B1594DC-8358-5105-9073-E7EDC8D191F1",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "09F3A69C-8C49-5D0F-B662-8D10E69CD80C"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F774663F-D276-5D1B-8D6F-92EEA111C52A"
+    },
+    "fields": {
+      "TaskID": "551DA083-A1E9-5F77-8A67-49828BC2642E",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "BE0A6560-DD0E-51A5-A221-BFC051C31429"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2BB8BD09-C242-5DA2-9AD2-8AA89DBE8A93"
+    },
+    "fields": {
+      "TaskID": "04EC63E5-CF62-5F82-A758-3DEC4E213623",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "E3D36619-7CDD-5396-91AB-82190FF25232"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D466392-EA39-56A0-AC8B-41B69FB7E3A5"
+    },
+    "fields": {
+      "TaskID": "8EAFA402-38FA-5B37-922F-906DD562EE8F",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "9037DDDF-6319-5699-A225-E4BDDA301740"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "274DE6A0-629D-5CFF-BD34-FAC8964E9816"
+    },
+    "fields": {
+      "TaskID": "7BF2FBA1-38E8-5667-B004-B884C8E4C7E3",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "9037DDDF-6319-5699-A225-E4BDDA301740"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4BB5FBB0-B7FA-54D1-920E-EC0A1FC68EED"
+    },
+    "fields": {
+      "TaskID": "445921D6-B833-5C21-BFCA-ED5F220DB781",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "53173069-AF31-57F6-917A-3E2619AACCF0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9C8A3CFE-CF07-5CA5-8867-506E633A597C"
+    },
+    "fields": {
+      "TaskID": "FDBA033F-DB83-5755-BCBD-FC65F76B69CA",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "F32C77F7-DBA0-5113-AD9A-2F116A654193"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC4614CA-3ADB-54A5-AF9A-98E135B3B318"
+    },
+    "fields": {
+      "TaskID": "CC37509A-33CD-5568-B159-E3BECABE9D26",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "F32C77F7-DBA0-5113-AD9A-2F116A654193"
     }
   },
   {
@@ -77,388 +277,756 @@
       "TaskID": "0E28D0BF-063C-5CF4-BEA7-529321E119DE",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
       "RecordID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.752Z",
-      "checksum": "a63715ff3759df7ba2231a6a9c530f6cb540cc928d0e4e581f55ea3e88152e93"
     }
   },
   {
     "primaryKey": {
-      "ID": "5DB4E429-B009-5237-BF4D-DB12916750D8"
+      "ID": "D8FBD861-0D40-55E8-AF78-ADECF49ABA9D"
     },
     "fields": {
-      "TaskID": "51359834-7018-5201-8E28-D89AF9F21571",
+      "TaskID": "65D8FA30-FDC9-5420-B2B3-F6334F1E561E",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "660FF8DC-25E1-5C39-B0D0-4F6BAB70F3C1"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.763Z",
-      "checksum": "8171103330dfb2ab6267dcea62e6a719f2bea4c8f28e190181ecca40386bc86d"
+      "RecordID": "2E8BCEF2-393B-50CC-987F-A5409B346DCE"
     }
   },
   {
     "primaryKey": {
-      "ID": "628D96A9-3553-57AE-8AF5-D71CCAE3B8CF"
+      "ID": "BB9B34CF-06C2-5379-9D36-3AA7EEA6EA3D"
     },
     "fields": {
-      "TaskID": "9333D8D2-AAE0-550E-AD7F-9EE8FA30B23F",
+      "TaskID": "8916D28B-7D20-52DD-A5CB-4C6AA78999F7",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "853B5323-FCF6-5DA8-956D-B7EB2760306A"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.773Z",
-      "checksum": "978cad37db39c64e9a27a6a6a22d9f13e300403a8e576155bebe7c480c8ef237"
+      "RecordID": "2E8BCEF2-393B-50CC-987F-A5409B346DCE"
     }
   },
   {
     "primaryKey": {
-      "ID": "F8BD84CC-2E2F-55AD-B6D9-3EA3F32B1A0D"
+      "ID": "F943B363-6BFD-53A5-84B6-3DCDA145C62A"
     },
     "fields": {
-      "TaskID": "91A462D4-B3FE-5EDE-BB62-193B577CBB25",
+      "TaskID": "E05642A6-13B1-5D52-9A1C-65FF845FAC00",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "30CC4BFD-6D87-5E54-8EC1-412DD51CBF96"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.784Z",
-      "checksum": "97c3085a79c73618be6f221ee855683d57b20f048f39b6926b23e4594cc70695"
+      "RecordID": "2233376B-7DC9-5E9F-8170-0E9134F781D6"
     }
   },
   {
     "primaryKey": {
-      "ID": "C1427C63-136C-542A-B322-A532E16090B6"
+      "ID": "711B31C2-FA9A-52D0-B303-4B40423B24C8"
     },
     "fields": {
-      "TaskID": "6ECBE243-4DF5-5EDC-B209-94984BC7E64D",
+      "TaskID": "270758AD-F96D-5801-A00D-10E5CD0B5197",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.794Z",
-      "checksum": "d1e251e3cc68c81c125dc13bdc4acf57da8c38b51650bb1aa5cf5c7e63f7aea8"
+      "RecordID": "8DCA101C-BB36-5AD2-A0CE-ABC593F97E55"
     }
   },
   {
     "primaryKey": {
-      "ID": "9A597BDE-E3CC-564D-965D-6E37494214E8"
+      "ID": "CCEFF861-D267-55A1-B1D2-F5725A9F448B"
     },
     "fields": {
-      "TaskID": "E0CDF9A3-4F5A-50F6-90A9-D10037161740",
+      "TaskID": "03AAC1AD-5B01-5DDD-ADFC-282F2013E290",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "2196C14B-7B3C-5E2E-B2CD-796177BB32C3"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.818Z",
-      "checksum": "a7e5454bc7117c0fdd2bd036da0bdf2eceaacc13f8edc75f84d88bb1a9924575"
+      "RecordID": "CA0EFE04-B766-5EEF-A4FA-DE7209B4D55F"
     }
   },
   {
     "primaryKey": {
-      "ID": "C0D67170-DC83-57A2-BF53-403738E9F599"
+      "ID": "BA73B3D7-9B7D-52BE-937B-B6B4ED0785CF"
     },
     "fields": {
-      "TaskID": "C83F7C1A-F314-55FD-A272-DE8EB17B457B",
+      "TaskID": "7224487D-D4BC-588C-A0BF-78F17A3CB127",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "69516A4D-37D6-5AC8-984C-ACD4F2F85F90"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.827Z",
-      "checksum": "1b437dca6de9e73e11443c7a211e19f5dbb241e8f5c123461293945f1450b29b"
+      "RecordID": "C65CA62A-5C53-5CE4-939B-133C93E70A92"
     }
   },
   {
     "primaryKey": {
-      "ID": "D4D916BA-E45E-5F18-A81F-F122EE380C46"
+      "ID": "BD0D1023-F08F-5372-9BF7-AC0DAB85EB06"
     },
     "fields": {
-      "TaskID": "88D25791-4523-571B-B6A9-F50807C5896F",
+      "TaskID": "939225BE-C7A5-5061-86C3-2A4A02DC5F2C",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "07508716-B8C2-5F46-B770-58AA53F5BF24"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.836Z",
-      "checksum": "9919d0e8e3b03e1776b11fc396ab06536b18ca3d3097d901fceb1a74a8a2ce9f"
+      "RecordID": "95125DD2-600F-5667-89FF-9F450A626399"
     }
   },
   {
     "primaryKey": {
-      "ID": "9E397081-55C8-532A-A897-2B3F7DD067E8"
+      "ID": "F83E4DC2-7622-5917-873B-E8431F9D92BF"
     },
     "fields": {
-      "TaskID": "A8FB4E13-116B-5269-9E3B-8BEFA2ED92BF",
+      "TaskID": "7FF589B4-0390-5E83-A893-79189DAF7C98",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "519E1137-C2BB-56C1-9C82-1F29887D17E8"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.845Z",
-      "checksum": "7f4c37015b50086b0f88647c29c0ac577033b3df68891e86a07456a6b29986af"
+      "RecordID": "11BF82C3-4FF7-594D-8E9C-9766BE7479F9"
     }
   },
   {
     "primaryKey": {
-      "ID": "CC6D5289-7566-5B3B-9681-5CB9B6AEED09"
+      "ID": "8C4E164E-F59B-5C98-B6A0-E069FA7A18ED"
     },
     "fields": {
-      "TaskID": "A27ACA35-CF56-5F9D-B4F8-8D1294FE04AD",
+      "TaskID": "3BAC353C-26F9-57BD-9A8A-ACF2F7FF4C09",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "5C9C5DA0-E4BD-511F-BEF2-33C04DD34B3A"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.854Z",
-      "checksum": "2a283990c09d097a29ae07236575f3993dc83cf0658c5a8e416649ebf1f270eb"
+      "RecordID": "3202ABCE-EE38-500F-B184-8F0EC8EC27F6"
     }
   },
   {
     "primaryKey": {
-      "ID": "56674FB2-1F81-52E3-8E39-FF8B0E04D206"
+      "ID": "AB65BBE7-2C64-548A-A379-C36D611BCF8B"
     },
     "fields": {
-      "TaskID": "7031ACCB-6FC9-5DCD-970F-8BE8478721EE",
+      "TaskID": "BF6AF6B7-0D1A-5352-893B-A6B464509196",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "2A55C348-66E7-5878-B636-B7E7159D6EBF"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.863Z",
-      "checksum": "f63358b2874eff37c154bbe4691936299f9f6eadad03b3d6dadfcb70004853fe"
+      "RecordID": "8C7CF8E4-16A2-5C1F-A55D-A81113EE1513"
     }
   },
   {
     "primaryKey": {
-      "ID": "7B447337-9E02-54FE-A4E3-3AF95ED611ED"
+      "ID": "903A2726-E6C8-561C-9F57-992C67707140"
     },
     "fields": {
-      "TaskID": "AA162F49-0AE3-5F1D-8A56-B3BD3D6A90AF",
+      "TaskID": "5940112F-FBBB-5773-89B6-4FA5311D34A4",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "DA3903E1-2E59-51AA-B66B-3F4D93F42D79"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.873Z",
-      "checksum": "d6f50b9df1cb4d9f5c925aea8485795788cda3ad2c14dabdb08c68ab5d3b9f45"
+      "RecordID": "8C7CF8E4-16A2-5C1F-A55D-A81113EE1513"
     }
   },
   {
     "primaryKey": {
-      "ID": "3C758A2D-4848-5224-B992-1ABB3A7A969C"
+      "ID": "1FFBD0DD-4712-5554-BF4A-3B00802FACF4"
     },
     "fields": {
-      "TaskID": "E6DF7DC9-885A-5FA0-8867-83C2E14650C3",
+      "TaskID": "4D809862-0AA1-578D-B308-1679FA73D0B6",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "A71368DE-B67A-50E9-9A52-07FA382BC139"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.885Z",
-      "checksum": "25ac2423002caa4bb6c43b6bea449bc6dffd462eead11297624b4f2486c0851d"
+      "RecordID": "72239EF8-A911-5E33-9902-A0A5B22ADCB1"
     }
   },
   {
     "primaryKey": {
-      "ID": "8D9448C0-AFC1-53B5-A42C-D0445A26EC1F"
+      "ID": "4F9DD481-B52D-5A74-909C-73B3F0ADC1AA"
     },
     "fields": {
-      "TaskID": "0946CC32-ACBB-593F-8E30-BDC2E370E3A5",
+      "TaskID": "0324104F-9C44-55F4-9E5D-F99167A370F1",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "A71368DE-B67A-50E9-9A52-07FA382BC139"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.896Z",
-      "checksum": "318c46a7b27e0f42f0165db15162fdc54dc4671d1a4fcb4a0d71c0558103e2b1"
+      "RecordID": "471844F2-1D9A-5144-A08D-A92B14737A69"
     }
   },
   {
     "primaryKey": {
-      "ID": "E8D43E9C-513B-5797-AF31-9A3A7568EC02"
+      "ID": "C0C3EE51-C1D7-5D0A-8E64-5E764DFB9585"
     },
     "fields": {
-      "TaskID": "A3480A31-5EBF-54E4-88E9-C71E769737CF",
+      "TaskID": "49245515-5E12-57FB-AFED-1E59314CC1A8",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "F18BBA60-3973-5228-A30A-B6347AA5C77A"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.906Z",
-      "checksum": "1c9370d37a7b1d27d87272aaf186c7aa1c42428fc61338d5b76d1da2a0a845b1"
+      "RecordID": "F58781E2-7688-5C09-8515-1DB663A1F73A"
     }
   },
   {
     "primaryKey": {
-      "ID": "94A315C9-E734-539F-B88C-41EF9D5AC24A"
+      "ID": "83D1240E-49AF-58D8-8395-14C581BB23CB"
     },
     "fields": {
-      "TaskID": "2E594DF8-DD2F-5148-8A63-67116CA6AC57",
+      "TaskID": "B407AD30-D3FA-5284-A62F-D88B8A7A0CA6",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "A9D37828-DF1E-58C7-BFF5-8605FCAAC043"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.926Z",
-      "checksum": "26944ae21163bb6bfabd0fbd218535bda2985d5ea8a5c92ca9613cccecae1868"
+      "RecordID": "B0E63980-F368-539A-ADB6-093218DC398F"
     }
   },
   {
     "primaryKey": {
-      "ID": "9049D8F1-0810-5B63-9AF5-C171A6DC76BA"
+      "ID": "1932BAEF-A1F0-5C8A-BE5E-9A97556AE529"
     },
     "fields": {
-      "TaskID": "A7D13CAF-FA36-5B72-8424-E0B68836AC5F",
+      "TaskID": "37B4895F-5EE4-5C0A-84CE-A9100A10B076",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "0D012F2E-5B55-5FA6-A6AF-CAF108414621"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.935Z",
-      "checksum": "c316d3a95615fa907ec235451f269c31f5d273e38ba6a1eead5903928aa4b41d"
+      "RecordID": "B6CDEDD3-D880-5E51-865E-3EC332F679D9"
     }
   },
   {
     "primaryKey": {
-      "ID": "52744650-FD7F-5696-AB82-ADBC291BF3BE"
+      "ID": "6B34953E-8353-5BB6-B8DA-559A78712D2B"
     },
     "fields": {
-      "TaskID": "B4F7AEEF-021C-5D2C-BD7D-F0E731FC1D2A",
+      "TaskID": "2E63006C-EE78-57CB-8E2F-CF78875D4219",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "0D67A300-117F-5775-9290-D921A3D5AA33"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.945Z",
-      "checksum": "bf5099db422abd5856ff344591f14fd12150dea3d60ec335357d72928b0ccd0c"
+      "RecordID": "B6CDEDD3-D880-5E51-865E-3EC332F679D9"
     }
   },
   {
     "primaryKey": {
-      "ID": "9920D3FC-F0EB-53C0-B5D6-4CBF6812088B"
+      "ID": "37E0529C-5320-581D-AC50-41C867F11AC7"
     },
     "fields": {
-      "TaskID": "CE8FA756-DB53-580E-8EE2-A78793DBCD0B",
+      "TaskID": "4343D522-D6D7-5581-823B-4FE13A0F076A",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "F7BB2AA3-D390-5F9F-BD18-CE31CFC6209F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.954Z",
-      "checksum": "8280808d6ef920e160cfc8790e6783a80f737f3046a02b3edab01c3aec6cd725"
+      "RecordID": "7B633929-1908-5D05-9F72-EEAC2A1CB2A8"
     }
   },
   {
     "primaryKey": {
-      "ID": "110412EE-DA7F-53A5-AD07-76D2C76A3AF9"
+      "ID": "2FD6E3E8-DF0B-54E2-873A-53597B96E7B9"
     },
     "fields": {
-      "TaskID": "EF8EFB42-2F83-5113-8FF6-1EA2AA3155C4",
+      "TaskID": "02B0AFD1-B24E-5B1A-958B-43230F979EBC",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "4079E7FD-8CCD-5FC5-851D-53B6F6B917B5"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.963Z",
-      "checksum": "0b9553eff3bcbee78403ef3be9d492ab388698011c9db43ea1dadeeca2b180fc"
+      "RecordID": "6ABC8DD3-88C4-5B9B-B1AE-E2EA0F60A359"
     }
   },
   {
     "primaryKey": {
-      "ID": "7D024A35-C05E-56D1-B0B7-9244D0CCF909"
+      "ID": "B8EBADCA-FBE8-5C84-82B8-066F243C07DB"
     },
     "fields": {
-      "TaskID": "BDE57904-5DE1-5C71-ACEC-AF91C2E74B73",
+      "TaskID": "53B2DE8B-A93D-5DDE-9068-03E850814A71",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.975Z",
-      "checksum": "1fb5953a694033f7b19cfa4a3393c904663f62e53caa5afe2542f9b6cb33c6b3"
+      "RecordID": "6ABC8DD3-88C4-5B9B-B1AE-E2EA0F60A359"
     }
   },
   {
     "primaryKey": {
-      "ID": "58A518CD-F999-5046-8C34-BC845FF6FD8A"
+      "ID": "02AE8764-1517-5AA2-B020-A92D06056C0B"
     },
     "fields": {
-      "TaskID": "DF0482CE-CBDF-5787-AB3C-89EDBB10D84E",
+      "TaskID": "2B82D569-F07E-518A-BAD9-4F9174D1597F",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "BE19A069-23DC-5731-AFA7-6B7B55018EF5"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.986Z",
-      "checksum": "15c5dbda4b35a2289b32c120e31c3dceffe9037f0c3ab3327b945facf035c2c4"
+      "RecordID": "370523AA-71E9-5F3C-883B-8509C6DBEB4A"
     }
   },
   {
     "primaryKey": {
-      "ID": "762C4F3F-1D16-5E57-A06E-8993217563CD"
+      "ID": "9CBCC78F-EBD4-588C-8DF8-528910594669"
     },
     "fields": {
-      "TaskID": "2CB7D343-1C06-5B6D-8D33-AD1A7C37EB85",
+      "TaskID": "D2F35A36-3709-5B2C-80F6-1CDFEC1B4B4C",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "3C0CD206-DB41-5936-8E69-0812577D8A14"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:04.998Z",
-      "checksum": "e66d6b55eb435bf4583ac3ddb77623b995324b7ab1fb00938f36868e9a6ff3d1"
+      "RecordID": "45122C0E-C53B-5578-A218-9CFB5220807D"
     }
   },
   {
     "primaryKey": {
-      "ID": "D8DF86EF-2D1F-5B0B-8D8F-5DDF08D825DC"
+      "ID": "0C6A5B56-29D0-53A4-9FEC-3008E1F4A272"
     },
     "fields": {
-      "TaskID": "2DAB1584-AFA5-5C56-A883-548B4835C08B",
+      "TaskID": "40248916-BE32-5596-9D03-97B51CB6267F",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "D03F7A25-7A0C-5887-940B-A7B89CD47B08"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.008Z",
-      "checksum": "e3ef5a5dfb58f38e77776b10e9b6d45caac352a9dfb3151c8721a723b69ae044"
+      "RecordID": "7AB98031-2235-5C4D-8074-75AD9F7C0589"
     }
   },
   {
     "primaryKey": {
-      "ID": "F66B9B6F-F2C0-544B-B5D6-2DC67B4ABFF9"
+      "ID": "751AFB9D-1DCE-5EE2-8FB6-D916C44C6F08"
     },
     "fields": {
-      "TaskID": "7CEA07BB-310A-580F-94FB-43EF4B12632C",
+      "TaskID": "14EDCBEE-C9E2-5C7A-8DF9-A313E3DDB791",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "7BBF3C88-8501-571D-94E0-55EF2C566A57"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.017Z",
-      "checksum": "ce4dd344ed1eed4a211f0143ddf188d11d34acce12887337fb4f0909456abcdd"
+      "RecordID": "3B51C612-4EA1-5D78-B826-269015AAE555"
     }
   },
   {
     "primaryKey": {
-      "ID": "1FF8E95C-7F2F-51A4-870D-BE5F3FF47B35"
+      "ID": "79106EA8-34B4-58EE-BEC4-2D470315DB4D"
     },
     "fields": {
-      "TaskID": "06966348-DB35-5E01-AF42-8C556340002F",
+      "TaskID": "B302980B-3DE1-53D7-88E1-4BF9C0C90E5A",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "1DAE5825-63D0-5285-9143-8DC111A3BA83"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.037Z",
-      "checksum": "f23baf5846321450a924b1d637aea883412fe305fbda89dd1a9294531f26095d"
+      "RecordID": "C942C8BA-5B55-52C3-807C-DF3CD14F8A44"
     }
   },
   {
     "primaryKey": {
-      "ID": "2CE70D0E-A26B-53B7-9B03-C5275C0B2ED2"
+      "ID": "E609AB7C-7614-52B6-B094-E81C304A6AEB"
     },
     "fields": {
-      "TaskID": "02E07D94-B390-50DE-8138-D550DA27657F",
+      "TaskID": "7A3999A2-76F2-5609-95E5-BBAF51364F0F",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "0758EAEE-60D3-509F-B695-6AFB473C38D4"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.046Z",
-      "checksum": "3c373a09d05ea5cae2fb145ca53f51f14f64f171523f003c2ede108c3ad5a120"
+      "RecordID": "C942C8BA-5B55-52C3-807C-DF3CD14F8A44"
     }
   },
   {
     "primaryKey": {
-      "ID": "525E2131-079C-52AB-832F-C063D16A3DC8"
+      "ID": "A26BB42B-45FC-543C-ACB0-B41648DA4904"
     },
     "fields": {
-      "TaskID": "CBD87BC2-7875-531F-AE7D-F69E7AB2D968",
+      "TaskID": "65119B9F-3AF2-5CB7-B95E-6E805ACE72EE",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "5FE5D906-011F-56AE-88AA-1CC6C241604F"
+      "RecordID": "50933ED9-C690-5C79-B2E5-7A65FC2462F5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DBDC33F8-5326-5D41-B3AA-6696D3D6ED9E"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.055Z",
-      "checksum": "967265addcb56ceddbdf27b1fd46738084e2eb6fd691279b5142c480fa6c70ec"
+    "fields": {
+      "TaskID": "E6DF263F-2704-57BD-A0F1-4A54A1BAF7B9",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "F0C82A59-A036-5313-9E10-FD055001EA25"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7341ED47-3DF4-54E1-BA35-8FF6D1E21D6E"
+    },
+    "fields": {
+      "TaskID": "0E310C89-5036-59EC-B622-0AA23EFB0D32",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "588CA335-5A60-5B40-B9DC-19509ED73764"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2CD6B008-8361-5A50-BC42-E74CCDF70E81"
+    },
+    "fields": {
+      "TaskID": "0A7F88DD-512C-5CFB-B905-5AC647769C18",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "9C705D1A-B421-54EB-86D0-F2521D48A3E5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BA6C02BB-84A1-5713-8C20-2CA3484B44D8"
+    },
+    "fields": {
+      "TaskID": "FD3F6E11-65B0-5063-9532-9D3922AB341C",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "49DD1021-58CA-525F-8B33-BA333758D9FC"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D0E8A0D5-9C51-5F8D-88D9-E7D140F5EB94"
+    },
+    "fields": {
+      "TaskID": "699B0A1B-856A-50F7-8BAE-96D33D324353",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "49DD1021-58CA-525F-8B33-BA333758D9FC"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1440BA57-167B-5F5A-8D4A-7682676CCA9C"
+    },
+    "fields": {
+      "TaskID": "04B85595-2B30-552A-B38B-D62E9085299E",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "03A2067F-04ED-506D-86D7-1B742D5A9B7C"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2A3FEA42-8FC1-5BDD-9FFD-7AAB38C31595"
+    },
+    "fields": {
+      "TaskID": "6E3EF293-BA4F-53D5-A5AB-6FAEA4393590",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D268FEA0-7CC4-5E81-A3D6-EC3489861997"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8F58D364-8039-55C5-94C7-B2CF21F134E1"
+    },
+    "fields": {
+      "TaskID": "E6358563-44ED-5406-9264-11CFB7467AB3",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D268FEA0-7CC4-5E81-A3D6-EC3489861997"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7C9A17C6-C6A1-54AD-A5A7-ACABF467802A"
+    },
+    "fields": {
+      "TaskID": "56FB013E-3C74-528F-9C22-D9A14DCBE962",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "075EB12D-2BE6-5DEC-866C-771EE9B01BB3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7377AB70-90A0-52BA-B8A7-3EEB6C2CCFBD"
+    },
+    "fields": {
+      "TaskID": "FAA7F96C-5C87-5DD6-95AA-BA94CD0150D7",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "7F1D2D6E-0616-5444-8C4B-20F54CBE5D3A"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D9132FEF-1C68-5FF6-BC25-1655DA693621"
+    },
+    "fields": {
+      "TaskID": "63EDFAC6-5D25-5466-A326-6BB0A5B84507",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D18CAC4C-6E35-5917-B7F3-2CF3EDE9B097"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D92F1621-2864-56DC-BAB8-5629E664F469"
+    },
+    "fields": {
+      "TaskID": "421BC525-9464-5CD7-8999-E2B156C5DAD3",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D18CAC4C-6E35-5917-B7F3-2CF3EDE9B097"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "71DB7775-FBF6-5012-B262-7A3228B5A36F"
+    },
+    "fields": {
+      "TaskID": "5A6041B8-F3EA-5DC3-9E25-C506DBEEA977",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "B25B83B6-0C55-5A3A-BCD7-BEFFB70A17FD"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "62FA6B9C-C88A-5D60-BD0D-256905D868CA"
+    },
+    "fields": {
+      "TaskID": "D94C2A11-8172-59F1-AF78-C6D03B73BA7E",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "4333417D-6150-55DB-A759-8DB3F48E05C1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8A534C22-A45B-55C9-9AD0-47EB174D77D3"
+    },
+    "fields": {
+      "TaskID": "E6043689-35F8-5C43-9C35-6E44FFB9B32D",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "B209DEAD-CB8B-5772-B06B-FC43F3F0A2F5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "004CF59D-5A00-5BD7-991C-2EBB40E2946A"
+    },
+    "fields": {
+      "TaskID": "3C4A92DA-32D5-5094-BA05-D4352995CAF9",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "385C4095-F1F4-5CB0-A8BE-CC469B24190F"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D0E7DB0D-F326-5C8D-AAD7-5340CCF0868C"
+    },
+    "fields": {
+      "TaskID": "086B76C3-4DFA-532F-B00F-83E0C2697CC2",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "BE8E8C85-7A66-5E4B-B8F5-36F83A15A790"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2FB90C25-8FD8-5CA9-A53E-73051C70E518"
+    },
+    "fields": {
+      "TaskID": "CD300796-46AB-58C4-9559-FB2B5FE1435F",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "BE8E8C85-7A66-5E4B-B8F5-36F83A15A790"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7A0D1B0D-48F1-58B0-9B15-808DA39E1AC3"
+    },
+    "fields": {
+      "TaskID": "9DBBF4C8-5691-5155-AA73-1C50BA71661B",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "ED97401C-D5BF-56EA-9663-B3294FC2A804"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2C0A878F-9A7C-517E-B880-22732703B555"
+    },
+    "fields": {
+      "TaskID": "FA9EE526-E63C-51D0-AC96-D7AB05604EBE",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "4D90EA9B-3C4F-58EE-BDC4-8582B8596BA2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7DB27FF9-0256-59B7-B26D-A660E22A15C5"
+    },
+    "fields": {
+      "TaskID": "4ECF0B76-AED6-547A-A592-465BBAC74B33",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "5BD6EB77-CAF4-599C-8EA0-0944C8AA3868"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3F531E3-9012-5503-A792-3D11F98FDBF3"
+    },
+    "fields": {
+      "TaskID": "58CAE5B9-6391-573F-8193-5C8998564B84",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "7687966D-77B6-5B28-9817-91261BD5EEA8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49DEAB79-3A55-5335-89DE-D7B2849F33EC"
+    },
+    "fields": {
+      "TaskID": "26E6877E-7F70-5178-863C-67943C5A4590",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "8C3AA3DC-F612-5793-8D35-47CAE58FCBF3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E395F857-B164-5182-A70A-853BEB719EB9"
+    },
+    "fields": {
+      "TaskID": "2504FAA8-0D8E-521B-9CF7-6FB085375C9F",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "8C3AA3DC-F612-5793-8D35-47CAE58FCBF3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3B7EDD88-6A20-5A9D-BEEB-D12C6204E371"
+    },
+    "fields": {
+      "TaskID": "1F3D8FF0-EB12-5C14-8E0A-17F7DF1DCBA1",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "BA0A0B4C-475C-56C2-B27E-E2674D64F7FC"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6431AF27-3738-5FF5-8FDC-813853F00EA9"
+    },
+    "fields": {
+      "TaskID": "BDE46CE7-03BE-594F-B114-4234CB2C309B",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "BA0A0B4C-475C-56C2-B27E-E2674D64F7FC"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "95835FDA-8E23-546C-99C1-036D6315F4F6"
+    },
+    "fields": {
+      "TaskID": "5354A032-4BD9-5508-9508-F21BD47E29F2",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "16D27DEB-A921-5939-85C6-C955C28042EB"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4DA2B612-E8B0-51AA-B7F5-18CE1277D4D3"
+    },
+    "fields": {
+      "TaskID": "868E4A73-690B-5F11-8509-B2BC0605933E",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "816EB2C2-5287-50F6-9E6D-270D4A470689"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "73971775-8C60-5587-8285-D58BBBA8A4CD"
+    },
+    "fields": {
+      "TaskID": "CA911DFB-7BE6-532C-9332-707E434B555D",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D3EADECE-97CB-5A58-B71C-CEBFC831CE1C"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EE58BECB-B579-5F90-AE94-801B1B74C1F7"
+    },
+    "fields": {
+      "TaskID": "F84A7335-2A52-54DF-AEE1-B029E3618864",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "D3EADECE-97CB-5A58-B71C-CEBFC831CE1C"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94914410-743F-5592-8319-291ADB914F6E"
+    },
+    "fields": {
+      "TaskID": "9D78A871-085E-54BB-A0F1-EC740A8EF1C2",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "EFC23CA0-D6BA-5FAA-9FDB-A3A88A8FA0FC"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6774F669-F078-50DC-8DB4-580EAE4EBE18"
+    },
+    "fields": {
+      "TaskID": "3702A6FD-7C53-5E9B-A0F9-5703824CA877",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "6375FE52-B5D1-5D8E-9163-E9D537447A28"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "994CCB1B-C9C6-510C-8D5A-233C8773D7AF"
+    },
+    "fields": {
+      "TaskID": "F2443760-40D4-5478-8A94-586ED142EBAA",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "2F039ADA-ED6B-51B4-975D-8F5B5419C043"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8FC1537F-CA4C-56A4-A148-FAB9469A97A9"
+    },
+    "fields": {
+      "TaskID": "0E64E9D3-7BE1-5518-9D47-0C105685B1ED",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "781BB44E-AA45-5FD0-BC70-7932EC8C7FF1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E2BD418-7891-548B-8BED-E2EAA8B43529"
+    },
+    "fields": {
+      "TaskID": "4ABAA9F0-423F-520E-A228-27F9127FAA95",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "141D781C-25C7-523A-97DF-97D5CA3A56A6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BDBFC1BD-8F6F-5F01-960B-BD148950CC58"
+    },
+    "fields": {
+      "TaskID": "99AF12BF-44B0-5B66-BEA8-1887176C5D60",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "141D781C-25C7-523A-97DF-97D5CA3A56A6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6F78EC20-F96C-5201-999F-FA16AF55EDD1"
+    },
+    "fields": {
+      "TaskID": "1D15B9A9-05EB-570B-AE74-D66E2CAAD4CE",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "AD1480D1-85AB-55D9-93ED-E334AEC7E530"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F1FBEAB8-6361-5859-8A51-CE8E7F6AC370"
+    },
+    "fields": {
+      "TaskID": "59E50DB3-C688-5B47-A4A6-E8D431B448A5",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "AD1480D1-85AB-55D9-93ED-E334AEC7E530"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9C438051-8C02-598D-8935-16773EDE9A3F"
+    },
+    "fields": {
+      "TaskID": "08CCC9D9-7F41-5E21-8B8C-79385A6A32C6",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "3D3D3AB1-AA8D-5756-AA15-882BB08A33E4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "031FB2B6-4AE4-563C-AE06-21FFDEA4CF43"
+    },
+    "fields": {
+      "TaskID": "19FF9571-5F9F-5190-94F5-A072CC3D86D8",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "3D3D3AB1-AA8D-5756-AA15-882BB08A33E4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "14E31D10-4A87-569B-BFFB-44111C167A7C"
+    },
+    "fields": {
+      "TaskID": "683BDDB0-A404-50F3-8000-9A2517ED2EE6",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "0819843E-C0A8-5F3B-884E-FEF3CF964262"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4EE878F7-D042-501C-8061-D8A69B023BF9"
+    },
+    "fields": {
+      "TaskID": "8D746CEE-72D1-5F60-B563-AD5375958581",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "BD084C98-B925-579E-8FBA-0E35E823CC23"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B4D62BD7-56FE-5EA2-9D3F-32FF83DF09AA"
+    },
+    "fields": {
+      "TaskID": "1BFCA6B2-85F8-5ACD-869A-60AD58687A8E",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "19C74951-D240-53C5-9698-22BD7650F89B"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "48153701-80CC-5470-831B-7EE4CE204EFA"
+    },
+    "fields": {
+      "TaskID": "12C65EC9-0772-5259-A6F2-8E29008B44DB",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "C7B85608-4B3B-5739-894A-F6AC212D43BD"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "116BE9CD-322A-538A-A42E-CAB291ABDF7C"
+    },
+    "fields": {
+      "TaskID": "FEAF4F67-6983-5A22-99C1-6988799DE051",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "C7B85608-4B3B-5739-894A-F6AC212D43BD"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "15E60B33-5D43-564E-8808-9DA82EA63EB6"
+    },
+    "fields": {
+      "TaskID": "5F054E58-6FDC-5576-AC4E-5F5395AF9380",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "9DF85DC0-F1B8-5CBF-A6B2-705043E0CACC"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3749C0AF-4C0F-5CBC-93F6-4A7812AF67C4"
+    },
+    "fields": {
+      "TaskID": "C8E8FA84-3A6D-5D68-A042-A6B31142C774",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "55CA6679-B6BF-557E-BD8C-A66DDAF808AD"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1FAF3516-1353-52FD-9881-AF60BA2A429B"
+    },
+    "fields": {
+      "TaskID": "F13E696A-472D-5D6A-BA51-218878DF4222",
+      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
+      "RecordID": "CC74BAEA-BA94-5136-B49B-535C91B64D6F"
     }
   },
   {
@@ -469,10 +1037,6 @@
       "TaskID": "81FBE475-3A36-58D5-8B72-1AFB006000E7",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
       "RecordID": "E4985F01-8143-5B17-B574-483366371589"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.064Z",
-      "checksum": "5582e582bc7ebeff86e83ca40dc19e7c4fb2dce9dc57b6e99e54fb1d1b79da41"
     }
   },
   {
@@ -483,136 +1047,86 @@
       "TaskID": "6BADB6DC-81C9-5EBA-890D-236E2461C6B9",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
       "RecordID": "E4985F01-8143-5B17-B574-483366371589"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.077Z",
-      "checksum": "7a5916cb0dc3d6b9837d64eb154535e92930fc1c56a11310f1c079dc32af29cf"
     }
   },
   {
     "primaryKey": {
-      "ID": "FCC1D5A9-1923-5D87-9EB1-F676106AA7C2"
+      "ID": "D9B57701-660E-519F-AC7C-6DE3B3E72F22"
     },
     "fields": {
-      "TaskID": "871372E4-52B7-5F65-8DB6-BDB1782DA2C4",
+      "TaskID": "C90C0A8D-27D1-5DC1-ABB2-14269E3B51EA",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "75240340-0122-5ECC-A4AC-3B0CB26D5708"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.091Z",
-      "checksum": "d478f2587d2a7982ce102f0a23533d619758400135c3a891054d2d2c92a5c0fa"
+      "RecordID": "9D64275D-A1E9-5BB5-91E6-B66BEE202BF8"
     }
   },
   {
     "primaryKey": {
-      "ID": "F608FC4C-B87C-52F5-B4A6-1DABFCC4164D"
+      "ID": "43AF3802-1B90-518F-B689-E8C3840B12DC"
     },
     "fields": {
-      "TaskID": "5653D4EF-B653-585E-B010-F87FC5203B80",
+      "TaskID": "F866B64B-0673-5DE4-ABE3-2A4DF0F69799",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.102Z",
-      "checksum": "14b909d0f290a7b52ea1058eed19375f481c1d4dd2c4dc38cb7ce37e7896c9c0"
+      "RecordID": "9D64275D-A1E9-5BB5-91E6-B66BEE202BF8"
     }
   },
   {
     "primaryKey": {
-      "ID": "655305EE-86C2-58CE-826C-4FF46195AD1A"
+      "ID": "418F7987-A3CF-56FD-9DD7-390C44CAA940"
     },
     "fields": {
-      "TaskID": "1943CB3A-4F04-5FCC-B5EA-BD85D34C168D",
+      "TaskID": "109B8630-15EB-5FE8-8251-B7CD0B458665",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "FD4A151C-D6CC-5471-896C-BB49D5AD77C3"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.116Z",
-      "checksum": "f19c9cf408fdf122265c8c02b077ae747451db193457450ab5f85b21685c0abe"
+      "RecordID": "8520DD96-3C47-5619-85E9-A011F18DB9A9"
     }
   },
   {
     "primaryKey": {
-      "ID": "97F399F2-1641-543D-A0D3-F2C398EE6DC5"
+      "ID": "5E16BC1C-45D0-5838-AEE4-3E87DF71BA2F"
     },
     "fields": {
-      "TaskID": "4105058F-3B3E-58DC-AA25-46D032A08288",
+      "TaskID": "19F24CD1-ACDB-51DF-BFCF-A0DA9DF5E778",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "ED37231C-9FC2-5FD8-B1A1-72FA66CEF7DE"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.128Z",
-      "checksum": "a7ecd22ee32fbf0f1ef09e5193bb376c10e6f55788d39d164afe1608ae03f008"
+      "RecordID": "2E70BCE3-8691-5C29-91B6-B60425C7D4D4"
     }
   },
   {
     "primaryKey": {
-      "ID": "5D724B3C-1911-50AB-8A42-23A56D118D9A"
+      "ID": "E1B8AD97-CED1-55F0-AE0B-DF745B2CDE36"
     },
     "fields": {
-      "TaskID": "CCCD3E7A-7742-5B90-B939-494212DAB11B",
+      "TaskID": "0FE3CE4C-41BF-55E8-B29F-28B36BD3CA2C",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.139Z",
-      "checksum": "fccd092694ab4e5130f9084bd0f41456685998ad231c31dffda755749669ce71"
+      "RecordID": "BB79E900-BD8C-535B-A2ED-ACAA7C3C83B7"
     }
   },
   {
     "primaryKey": {
-      "ID": "EF435105-30E6-5D8D-8514-F66070583065"
+      "ID": "66709B46-CC83-5B89-8E66-3755C40D04BA"
     },
     "fields": {
-      "TaskID": "A7D45234-2F42-5329-9F89-5AF666782C2B",
+      "TaskID": "00134983-F87C-5F87-89FF-1EB3A3021231",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "9CB497A7-F843-5D8C-B318-D19EEB4AFBE3"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.164Z",
-      "checksum": "47f42118cf0a79cd25fcec705fb6cd6add702e8c38157847ed7f9e081d9f91e6"
+      "RecordID": "BB79E900-BD8C-535B-A2ED-ACAA7C3C83B7"
     }
   },
   {
     "primaryKey": {
-      "ID": "A6AEC5C2-ECA4-5FE9-95BD-74067CB6EB21"
+      "ID": "130B4A38-03E7-5669-B5DD-A46D4EB3E59D"
     },
     "fields": {
-      "TaskID": "FD6FCCC4-D539-5CD8-9ACB-7BB8670E7BEC",
+      "TaskID": "3A264DA8-46D8-5D6C-8E1B-C42B053952B6",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.174Z",
-      "checksum": "746f76ab8433d71862798c6846090a2c50025d9f8656347d676927b6eae18d7c"
+      "RecordID": "C5520F5F-D6DE-54CE-A536-72F80D70D0D0"
     }
   },
   {
     "primaryKey": {
-      "ID": "1F6AA6DB-C30C-5B7B-BDD4-FC3F0962D0CC"
+      "ID": "4B75ADEB-D804-5460-88E3-C33E799EB82E"
     },
     "fields": {
-      "TaskID": "7E16E381-7378-55B8-88ED-FC737A16401C",
+      "TaskID": "3A32A784-3E2D-5344-9060-A87256C73192",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "98F2A74B-F466-5A1A-AEFC-C87DA3A9901B"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.186Z",
-      "checksum": "37742a8058bf46cdc467e5372890a8303c80f5a61c9d2cd9ebcdf29c0e6382a0"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "4B773D38-917C-5A27-8C3F-C974FADCA407"
-    },
-    "fields": {
-      "TaskID": "92BB414D-B6A7-53C7-9733-14785373551C",
-      "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "0E5BD72B-6BD5-5709-8997-9C4955DE57F6"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.196Z",
-      "checksum": "0df757c9bbfae12672950d38f9491781ae4a4240eceb8584c2148a3448d0957d"
+      "RecordID": "FCD1FCA7-012C-5217-8D8F-88AAF24014F6"
     }
   },
   {
@@ -623,10 +1137,6 @@
       "TaskID": "9FBD0479-5AF4-56AF-9DF5-DEE97C30C0FC",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
       "RecordID": "81934060-2910-5B3F-A680-4263BBC91FFA"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.206Z",
-      "checksum": "44cc09624670d9892443d721ebea1cf62fa988981ab11829cea4b66614ba7dc7"
     }
   },
   {
@@ -637,38 +1147,26 @@
       "TaskID": "4DB65CD4-C91D-5215-A267-CB851924FC54",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
       "RecordID": "81934060-2910-5B3F-A680-4263BBC91FFA"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.219Z",
-      "checksum": "741e5b0585ac8e9b3772c1a43482fe065e411c02bc05db6a0eb8b8552103c442"
     }
   },
   {
     "primaryKey": {
-      "ID": "FA13A4B7-57F2-59EC-8EA8-9192073FD074"
+      "ID": "70A01DAA-20A1-58CF-AF77-4D5F3E620220"
     },
     "fields": {
-      "TaskID": "3BD400A7-E66F-5CD8-ACC4-501AC759CBB7",
+      "TaskID": "94B01BF4-FD5D-57AB-B649-63C29A0CA022",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "671700DA-0498-55B2-86A7-B5AD260E3E6C"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.231Z",
-      "checksum": "4194d33a31e32e547fb6a05e63d1c759d1835c1b012d298ce0d2016f973ed826"
+      "RecordID": "3158EA8D-6A96-501F-AF4B-F65BB5C5FF22"
     }
   },
   {
     "primaryKey": {
-      "ID": "70C5A245-73E4-556F-A94B-E5EEDA44C0CD"
+      "ID": "036C68D8-9EBB-506C-8BE5-CECC0F14A0B6"
     },
     "fields": {
-      "TaskID": "16472B1F-0064-5D94-A2CA-8142B7EE0548",
+      "TaskID": "8AD7A0E2-F503-5A87-9920-C8D13DC15CD6",
       "EntityID": "@lookup:MJ: Entities.Name=Committees: Meetings",
-      "RecordID": "ABEB7509-9159-5BF7-B965-D9449C9E5948"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.243Z",
-      "checksum": "0eca8db2d15ac79941e274e8e8abddedb7d4324606739338cef46d27ca6f1862"
+      "RecordID": "3158EA8D-6A96-501F-AF4B-F65BB5C5FF22"
     }
   },
   {
@@ -679,10 +1177,6 @@
       "TaskID": "B36AC43C-6E1F-5AC7-9E55-9EB51A69FBB1",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "1B9C43A3-7290-522E-B8B2-0DF886F32ED1"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.252Z",
-      "checksum": "ed5a3d10cb4a846685bbdf10cc9092aee04b692c4ab08e7c9af8a96b9973f88f"
     }
   },
   {
@@ -693,10 +1187,6 @@
       "TaskID": "ECC011FA-72A3-5DBC-ABC4-F4462F1DD08A",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "272F3F74-01AD-537F-BC1C-E1D47460EBDA"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.262Z",
-      "checksum": "aad168d549dbdfdb691e76e97c2ddc6c072328becc98c19dd927dd866d1c6a43"
     }
   },
   {
@@ -707,10 +1197,6 @@
       "TaskID": "0779591F-60B6-5C9D-85D5-C24555FB9B70",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "1E46E0A7-5F99-5040-94AB-C0AD702940B9"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.286Z",
-      "checksum": "4a0bcf1121cac18da9db0b87d243264e5c2e4af093312005f781fc05a934dde4"
     }
   },
   {
@@ -721,10 +1207,6 @@
       "TaskID": "2C0A83A5-10BE-59B4-A79C-010F9BAB3BD4",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.296Z",
-      "checksum": "f86f55409ac5013aeec028ba16b357e7757f41bf4dd74594f4f87d4a8baba004"
     }
   },
   {
@@ -735,10 +1217,6 @@
       "TaskID": "3A4AF38D-251D-5146-B035-35904D301678",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "883775AA-E134-5A62-872B-A178D0FFA945"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.305Z",
-      "checksum": "4414294074853c8e0aaeea50970ea487258b81243072896a4d1c1be00b87c010"
     }
   },
   {
@@ -749,10 +1227,6 @@
       "TaskID": "F97A947F-0A2E-530D-888D-D034CDE98AB7",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "0FA575D5-F0A8-5B1A-B008-12DE5B88761D"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.314Z",
-      "checksum": "1b83a44eab95927bca38626e7e2fd2b67ba687fa0101b00ae37f8a71abcd224d"
     }
   },
   {
@@ -763,10 +1237,6 @@
       "TaskID": "658D321C-F3A6-56CA-914A-3A21705E465B",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "BD816A95-0553-5ACA-A2BF-96F088C1C88B"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.324Z",
-      "checksum": "d64d2a8f721d25d89706c1c6386d0c9fbd48c0ad79d95e795de45ca90759b986"
     }
   },
   {
@@ -777,10 +1247,6 @@
       "TaskID": "0654D510-B113-541A-A169-4B23079C8C5E",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "459759C2-7083-5C88-ADF4-14B00F4AA3CD"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.333Z",
-      "checksum": "780ac74e63d6d26be15d3b07be1200d5bea7970f33b539f38c68cf67167fc989"
     }
   },
   {
@@ -791,10 +1257,6 @@
       "TaskID": "98AFFA38-B69C-5211-A7D1-5AE3A3D9F891",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "A4FB5DED-12D5-5616-95C1-5C5F57622B80"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.344Z",
-      "checksum": "8659cc18e6485b7e2251a4136751d7ef232b982cdcfd6df6dc8aae5b2071f04b"
     }
   },
   {
@@ -805,10 +1267,6 @@
       "TaskID": "42903146-16C2-512D-AB5B-67FFD75782F1",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "0FF56533-CA50-5A2F-9DD0-C6085EE96835"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.356Z",
-      "checksum": "1565cb767245dcd84e60e14055fcd8dd4c9a0052bb6e211e4859396bd5a661e2"
     }
   },
   {
@@ -819,10 +1277,6 @@
       "TaskID": "B19F0733-EF1C-55F1-BD85-4CF9D65B9EE5",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "820AA130-FF14-5869-9E7F-F10A5E28D5C1"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.365Z",
-      "checksum": "3bc7cc48019b63a0fe556bf42d19dc71e1fcbc7b5716dcde868cc3b14bc87ad7"
     }
   },
   {
@@ -833,10 +1287,6 @@
       "TaskID": "8E959DDA-0504-5FBB-8F95-01EB799574E5",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "89FDC3FE-CA79-579E-A211-F80AFC265756"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.375Z",
-      "checksum": "4184ac108aeb2c9cd79c12405ba5b21f66ce9ddeffbcca3d01646654ca0cf336"
     }
   },
   {
@@ -847,10 +1297,6 @@
       "TaskID": "7D091880-47BD-577F-8887-47B0AE423823",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "6F27EF0D-83CB-5400-8E1F-91005ED2223B"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.399Z",
-      "checksum": "e54958abd410d0d00de78bba629f5f4ceebddcc423ecbb4a39134ef107a30177"
     }
   },
   {
@@ -861,10 +1307,6 @@
       "TaskID": "D7B0553D-02A7-5641-BA85-C2289835C3E3",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "7181B812-5155-59DD-9F32-3820FFD03551"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.409Z",
-      "checksum": "be13d8757849b7fbf23d4ca4c606d7db213e512b3a8fe5dc032f5b944ffc7140"
     }
   },
   {
@@ -875,10 +1317,6 @@
       "TaskID": "2E297300-8DB1-5999-B459-8478044274B7",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "D192DFE8-AC55-58BC-A1C3-72F376C2E84B"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.419Z",
-      "checksum": "8083e1a904d1ac8557b7fa3da4f3653aa05adf75fa8c78c1bdadc5ea995b52c9"
     }
   },
   {
@@ -889,10 +1327,6 @@
       "TaskID": "63F6D07A-C83D-5938-84ED-F9F5A488474F",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "BB0FB051-3A4A-5A84-885A-9F86CC000A2F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.429Z",
-      "checksum": "ed479df0e85950be8571d4c7508b35ac590734491060ecd7a4c8ca8e2e254299"
     }
   },
   {
@@ -903,10 +1337,6 @@
       "TaskID": "DBBBF4EB-6511-5AA6-A106-1708FEF2C6A2",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "80A9A93B-35AE-5022-B56E-BEFF804E499F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.438Z",
-      "checksum": "2ecd063647872a0c4eb27a38b1f32de77c7d7a075510b945e1c95ebd63f1d406"
     }
   },
   {
@@ -917,10 +1347,6 @@
       "TaskID": "1E19772D-9241-5E52-A0A3-62936A2474EA",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "A24E47A9-5B5B-5FB9-B6E8-152D99EF5092"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.448Z",
-      "checksum": "0ddf773a5a068c49ec863f62183d0e769d85b8450fb4e7e12a819561f0e2d27f"
     }
   },
   {
@@ -931,10 +1357,6 @@
       "TaskID": "DBEFBA09-3E7E-56AB-A139-94298639C695",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "EB68C800-C7A0-5B94-A1E9-1A937F6B77C0"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.457Z",
-      "checksum": "b416102ba56a48ad5dcfb41a6e8565a04bb08bd223f8081ea697f07c51b6ec8b"
     }
   },
   {
@@ -945,10 +1367,6 @@
       "TaskID": "33E80CAE-1197-5DA5-A5FF-27F902110290",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "E0A7CF94-940D-54EC-9A4D-85047727B37F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.467Z",
-      "checksum": "74def69ff0e6ac163ff980f745d33271dbb0340620423c51fa915292ac10fae2"
     }
   },
   {
@@ -959,10 +1377,6 @@
       "TaskID": "6008D34D-6A2E-5392-9B13-BE5FE2EF9C16",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "3A9B968A-0FF7-51BC-981E-6FA4505C057D"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.478Z",
-      "checksum": "74c2568d585e93471d73511b1d570fa69216e0005776bd6ad5b84c60266e9d2e"
     }
   },
   {
@@ -973,10 +1387,6 @@
       "TaskID": "9D065B73-675F-5825-A56A-D3E0BDE39D9E",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "E35CDACD-1306-50FA-996B-110BDCE73AD4"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.486Z",
-      "checksum": "918cbb4b4015c98733b411ab953ea5499c25c994f978389d7337e7b6f14bf982"
     }
   },
   {
@@ -987,10 +1397,6 @@
       "TaskID": "5C363228-0064-5BC4-BA3F-E461CC8FA8A3",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "7213C984-5C54-551A-A763-7FE04852FE23"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.506Z",
-      "checksum": "db96604f0191a2415e5b49359bd103874477d693cb47b43bb2f156816f5e56e7"
     }
   },
   {
@@ -1001,10 +1407,6 @@
       "TaskID": "539CEC08-7F34-53CF-935B-293BC2B25585",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "0CFE7732-B295-51C0-B39E-D1295E4AEAB8"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.515Z",
-      "checksum": "a9c2093983c85287c06e8b20389f3e1347d7623e20b98b8c8f33264f627583bf"
     }
   },
   {
@@ -1015,10 +1417,6 @@
       "TaskID": "DC4B5D75-1431-5C3D-B812-74A4CF4753E1",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "03135959-9B3E-5C3A-85A5-B27956AEE4C1"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.525Z",
-      "checksum": "e6f09ff0496042304bb9c96f789249100653d04eeb5c1bbb7b20c4954f442fff"
     }
   },
   {
@@ -1029,10 +1427,6 @@
       "TaskID": "BCA67D6E-9D92-5698-A391-A88C05857708",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "AE339AEE-ADAF-5429-BB19-D61A82B0A1F8"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.535Z",
-      "checksum": "5cb6071200d6a11263274c9a8dc781b6d822162fb3cc9f50de586c14351b278e"
     }
   },
   {
@@ -1043,10 +1437,6 @@
       "TaskID": "24F8025A-2A6E-515F-8304-7CB995A991E9",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "20C2D8C6-FE99-55A9-B40B-45A0385BA68F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.545Z",
-      "checksum": "31d2b96fcaa202818286971e50d66f9a04c4f3f7b2adba724eb43c013dd9ea36"
     }
   },
   {
@@ -1057,10 +1447,6 @@
       "TaskID": "B147158C-5DAC-5EB0-8847-DB9CD6C4BCE9",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "07A1FEBA-F9D2-5FA0-AC52-AAE64A4E0136"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.557Z",
-      "checksum": "65856c5cc06810997e14d6c04857986c44f567af58b3bc1ab65f655730fcd5b6"
     }
   },
   {
@@ -1071,10 +1457,6 @@
       "TaskID": "59207C95-706F-56A7-92A4-F20774132E58",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "12BB2335-BD8E-5248-B75F-BBFFED7B09A4"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.566Z",
-      "checksum": "6e59b41e7917db008279cd3b5a3287898854402c4b6f756cad5d8bfccecd2b00"
     }
   },
   {
@@ -1085,10 +1467,6 @@
       "TaskID": "D6EA2994-9E78-5708-A565-DCA14BDB990C",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "28C130FE-EB16-5D78-833B-D7607FC5A92F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.575Z",
-      "checksum": "4ff82ec1accf8305b4c06e1f19e1e9b2447c9e89eb8ee7c3e765966bdacac431"
     }
   },
   {
@@ -1099,10 +1477,6 @@
       "TaskID": "783D9175-B4F2-54A0-A83F-600A45991882",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "04B5F5B0-9B4F-5B3F-9DE8-186E1AA81EAA"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.584Z",
-      "checksum": "f9f1a6ad2155ef720fdd4d177be04bebaa97269f31b5652c891366fd9819669f"
     }
   },
   {
@@ -1113,10 +1487,6 @@
       "TaskID": "5CFBBB30-EF71-5AC4-9432-260974908CAF",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "14CC2530-6A69-5149-B4F3-94715E7F1C00"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.592Z",
-      "checksum": "5509cc0bd6689b063964f51096d796df27d14b0be4bb1b843646d35d9d7e8faa"
     }
   },
   {
@@ -1127,10 +1497,6 @@
       "TaskID": "F8814C90-612A-5D4D-8F24-24479C7AC5AD",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "E99D7E41-AAFC-5839-BFE3-031DF285E9BE"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.609Z",
-      "checksum": "072f3a8d64f39277f61f941af64e0f4ce64f33c2510a4d071da3e641927f14d5"
     }
   },
   {
@@ -1141,10 +1507,6 @@
       "TaskID": "A977335F-EBC0-5D5C-8468-C286BAE38920",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "115E6D19-1DF0-54AB-8CCB-2EC6925889EF"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.618Z",
-      "checksum": "32697b855a66b3787f18f029a9dabbfe857069411ae9f9eb5cf1e75b8b4b8723"
     }
   },
   {
@@ -1155,10 +1517,6 @@
       "TaskID": "FB9E4E52-B10A-5D7F-BF65-07A54270CEFD",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "97D861B0-507E-5E7D-952E-AF9B91F6914F"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.626Z",
-      "checksum": "d8acd7031f4993daa2915c72fe86b283e4d62e53499bea5c57a5b7a94b90fc6e"
     }
   },
   {
@@ -1169,10 +1527,6 @@
       "TaskID": "D5F830D4-7CAB-5820-A442-07AEDA90DBEF",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "44FA6C2D-2264-511A-A06B-75F85D1E324C"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.635Z",
-      "checksum": "3a686e9d6a294e1648bd02b0b593202470b3ed0dd8e5242139beb3cc2a06d816"
     }
   },
   {
@@ -1183,10 +1537,6 @@
       "TaskID": "B7EC7E27-0FC3-54C1-A312-63CB4074E5A8",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "2D77AF7D-0C54-5CFC-9B48-67F135EF7AA5"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.643Z",
-      "checksum": "8be1eae9b1ffcfe36489656a5873f7b20d6bd83e48676195a3ea9939b5ce835d"
     }
   },
   {
@@ -1197,10 +1547,6 @@
       "TaskID": "B6CE72A6-C3E3-5EA0-9EE9-CC6698D48856",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "8600E3D5-733D-580B-A828-3DFC9FC3159D"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.651Z",
-      "checksum": "3e1524a5efae65d605a6894dffecd45310f7062c59c384093da75ef6798963f8"
     }
   },
   {
@@ -1211,10 +1557,6 @@
       "TaskID": "92FEFDDD-889D-5E76-A563-98CA574D1C23",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "0C34716B-7CB9-5CAD-A331-F62CD9DDE8FB"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.660Z",
-      "checksum": "710ae3d3f7f7b4e88dab752ed941098e38314e16ce4e191dd8008433f8f7e89b"
     }
   },
   {
@@ -1225,10 +1567,6 @@
       "TaskID": "68110C2F-4B4D-5B33-A4E1-457EE812C90D",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "3E97E06E-CE15-56C5-8A9F-7ACB02375D78"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.669Z",
-      "checksum": "45462aed8a5e23a851fdc162f270869551bc897616f4823356f63c87c0b13ee5"
     }
   },
   {
@@ -1239,10 +1577,6 @@
       "TaskID": "BCD01E8F-D1BE-5F79-AF32-9BEA241CDAEA",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "D9E59E08-852F-5633-AC3A-2456E205D728"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.678Z",
-      "checksum": "2ac7b03f36f71bce1db5fcf5193df94e05f4d4e3b930686f27fc42f765c68772"
     }
   },
   {
@@ -1253,24 +1587,6 @@
       "TaskID": "46B4ED01-8F15-56A7-8334-CE709E705109",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "CEACC3C5-B30A-5D25-8FF1-614CA299AB27"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.686Z",
-      "checksum": "a37adeeb44ea062a0d823aa59c124659507f4228a9fdc1e5bebbd5872f9efe64"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "E6330E5D-2B7A-53E6-BA3B-CCCF70910433"
-    },
-    "fields": {
-      "TaskID": "6FBB45E5-8790-5D1E-BF6B-D6640DAF29CE",
-      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
-      "RecordID": "2316E84B-EEFC-5D5A-B582-5AA12A01714D"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.703Z",
-      "checksum": "43f81736c501ff52fb350daab46447b0bcab96a60f13a25bab4fc5404e69b03d"
     }
   },
   {
@@ -1281,10 +1597,16 @@
       "TaskID": "B836A153-733B-5312-BE0B-B5833127225F",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "0F82B0A0-5895-55A2-817A-03BE597C4E91"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC8FB09A-3B96-5BEC-A91F-58FCBCD9DED3"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.712Z",
-      "checksum": "79d470bb73646a1148b76857a46397fed2f117987d8d74a22e231920d4498319"
+    "fields": {
+      "TaskID": "37608288-0506-5C98-9774-795EB17E6232",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1A9580BC-2009-59D6-98FA-4DA50ED4719A"
     }
   },
   {
@@ -1295,10 +1617,6 @@
       "TaskID": "8548C199-62A4-557F-9022-B21DFF99BD36",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "D4FA056D-74DB-548B-80A7-821ABEFA3726"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.721Z",
-      "checksum": "bc59fcd8a42c24ed60e2d6acda77a9c5b01c60e3dcb606d7f3f962ff823e85c3"
     }
   },
   {
@@ -1309,10 +1627,6 @@
       "TaskID": "33468206-5B5A-534A-928E-53E3A9E3B6A5",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "F0F0B055-1AAC-5A6C-8077-537B4FB7CA23"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.729Z",
-      "checksum": "693991005b1a31851b72f44f301a89282192f58ba216d5a023302800eb2736d6"
     }
   },
   {
@@ -1323,10 +1637,6 @@
       "TaskID": "A845E3D1-CC2D-5E86-8FF7-0EFB6D0E7A98",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "761EBBC6-CBE0-5669-8912-94CAAF317B13"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.739Z",
-      "checksum": "ecdf7e9235870dd9281e762a165609adf2636904a6858130b405afb787e0e7f2"
     }
   },
   {
@@ -1337,10 +1647,6 @@
       "TaskID": "3456799C-DC77-5358-B573-119C6FEE5FED",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "61A63E93-975B-5943-88E3-69B11E195CC1"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.748Z",
-      "checksum": "36321eabb2c31c2a1dd169a213b7add4c553022178d6fd88c449fe993352ed5e"
     }
   },
   {
@@ -1351,10 +1657,6 @@
       "TaskID": "3245C2D4-2850-59A7-AD2E-CCBBF7176848",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "10388392-25EF-5DCC-9496-4CD9D9225E18"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.757Z",
-      "checksum": "3567e79c437601ef295b0defbb2058d62a60d99cba43381a8f0792293d9db52c"
     }
   },
   {
@@ -1365,10 +1667,6 @@
       "TaskID": "186E6721-68C0-5DDC-AD89-9D21D33A0AA5",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "RecordID": "4D962747-2D84-5631-8809-E4772A3C5552"
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:21:05.766Z",
-      "checksum": "e0e21934c955c0df5003624a7bd06fb7557826997f7e6b65244f99fa8a06b689"
     }
   }
 ]

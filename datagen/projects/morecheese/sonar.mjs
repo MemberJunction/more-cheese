@@ -35,13 +35,21 @@ export function buildSonar(cfg) {
   const model = {
     ModelKey: S.model.key, Name: S.model.name, Slug: S.model.slug, Description: S.model.description,
     AnchorEntityName: S.model.anchorEntityName, Status: S.model.status, CombineStrategy: 'WeightedSum',
-    OwnerStaffKey: S.model.ownerStaffKey, EffectiveFrom: createdAt,
+    // a model becomes effective when its configuration is published, never before
+    OwnerStaffKey: S.model.ownerStaffKey, EffectiveFrom: publishedAt,
   };
   const version = {
     VersionKey: `${S.model.key}:1`, ModelKey: S.model.key, VersionNumber: 1, VersionLabel: 'v1',
+    // the snapshot must REPRODUCE the model: hardcoding aggregation 'Count' contradicted
+    // the Recency factor, and omitting normalization/window/missing-data policy meant the
+    // published config couldn't rebuild what actually runs
     ConfigSnapshotJSON: JSON.stringify({
       slug: S.model.slug, combine: 'WeightedSum', scale: [0, 100],
-      factors: S.factors.map((f) => ({ slug: f.slug, source: f.sourceEntityName, aggregation: 'Count', weight: f.weight })),
+      factors: S.factors.map((f) => ({
+        slug: f.slug, source: f.sourceEntityName, aggregation: f.aggregation, weight: f.weight,
+        aggregateField: f.aggregateFieldName ?? null, window: f.windowKey ?? null,
+        normalization: 'Percentile', missingData: 'Zero', higherIsBetter: f.higherIsBetter !== false,
+      })),
       bands: S.bands.map((b) => ({ label: b.label, min: b.min, max: b.max })),
     }),
     ChangeSummary: 'Initial published configuration.', PublishedByStaffKey: S.model.ownerStaffKey,

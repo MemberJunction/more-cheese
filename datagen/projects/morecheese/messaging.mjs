@@ -39,39 +39,52 @@ export function buildMessaging(cfg, people, issues) {
     const opened = issue.ResolvedAt ? new Date(issue.ResolvedAt).getTime() - r.int(4, 20) * 86400000
       : releaseMs - r.int(2, Math.max(3, R.issues.recencyOpenDays)) * 86400000;
     let clock = Math.min(opened, releaseMs - 3600000);
-    const msgAt = () => new Date(clock).toISOString().replace(/\.\d{3}Z$/, 'Z');
+    // OUTBOUND (staff) messages land in the working week: no 3am Sunday replies from the
+    // member-services desk. Members write whenever — evenings and weekends included, which
+    // is what makes the staff/member rhythm read as real.
+    // forward-only, and it MOVES the clock (never stamps behind an earlier message)
+    const businessify = () => {
+      const d = new Date(clock);
+      if (d.getUTCHours() > 17) { d.setUTCDate(d.getUTCDate() + 1); d.setUTCHours(9 + (d.getUTCMinutes() % 3)); }
+      else if (d.getUTCHours() < 9) d.setUTCHours(9 + (d.getUTCMinutes() % 3));
+      const dow = d.getUTCDay();
+      if (dow === 6) d.setUTCDate(d.getUTCDate() + 2);
+      else if (dow === 0) d.setUTCDate(d.getUTCDate() + 1);
+      clock = Math.max(clock, Math.min(d.getTime(), releaseMs - 1800000));
+    };
+    const msgAt = (dir) => { if (dir === 'Outbound') businessify(); return new Date(clock).toISOString().replace(/\.\d{3}Z$/, 'Z'); };
     const push = (i, dir, content, status) => messages.push({
       MessageKey: `${threadKey}:${i}`, ThreadKey: threadKey, SessionKey: threadKey,
       MemberNumber: dir === 'Inbound' ? issue.ReporterMemberNumber : (issue.AssigneeMemberNumber ?? null),
       Direction: dir, Sender: dir === 'Inbound' ? memberName : staffName,
       Recipient: dir === 'Inbound' ? M.staffFallbackSender : memberName,
       Subject: i === 0 ? issue.Title : null, Content: content, IsSecure: true,
-      Status: status, ReceivedAt: msgAt(),
+      Status: status, ReceivedAt: msgAt(dir),
       IsStarred: r.bernoulli(M.starredShare), IsImported: false, SourceChannel: 'Portal', IsSharedDemo: true,
     });
     const advance = () => { clock = Math.min(clock + (1 + r.int(1, M.replyDelayHoursMax)) * 3600000, releaseMs - 1800000); };
 
-    // opener (Inbound). Its status resolves AFTER we know whether staff ever replied.
-    const opener = r.pick(M.openers[issue.TypeKey] ?? M.openers.General);
+    // type-aware banks: a Data Correction thread never talks about invoices
+    const bank = (b) => (M[b][issue.TypeKey] ?? M[b].General ?? M[b]);
     const replied = issue.StatusKey !== 'New';
-    push(0, 'Inbound', opener, replied ? 'Replied' : 'New');
+    push(0, 'Inbound', r.pick(bank('openers')), replied ? 'Replied' : 'New');
     let idx = 1;
     if (replied) {
       advance();
-      push(idx++, 'Outbound', r.pick(M.replies), 'Sent');
+      push(idx++, 'Outbound', r.pick(bank('replies')), 'Sent');
       for (let k = r.int(0, M.followUpPairsMax); k > 0; k--) {
         advance();
-        push(idx++, 'Inbound', r.pick(M.followUps), 'Replied');
+        push(idx++, 'Inbound', r.pick(bank('followUps')), 'Replied');
         advance();
-        push(idx++, 'Outbound', r.pick(M.replies), 'Sent');
+        push(idx++, 'Outbound', r.pick(bank('replies')), 'Sent');
       }
       if (terminal) {
         advance();
-        push(idx++, 'Outbound', r.pick(M.closers), 'Sent');
+        push(idx++, 'Outbound', r.pick(bank('closers')), 'Sent');
       } else {
         // open thread: the member had the last word, still waiting on staff
         advance();
-        push(idx++, 'Inbound', r.pick(M.followUps), r.bernoulli(0.5) ? 'Read' : 'New');
+        push(idx++, 'Inbound', r.pick(bank('followUps')), r.bernoulli(0.5) ? 'Read' : 'New');
       }
     }
 

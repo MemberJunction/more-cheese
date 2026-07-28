@@ -49,6 +49,8 @@ export const MAPPING = {
       json: 'organizations', table: '[__mj_BizAppsCommon].[Organization]',
       columns: (r) => ({
         ID: sqlId(uuidFor('org', r.OrgKey)), Name: sqlStr(r.Name),
+        LegalName: sqlStr(r.LegalName ?? null), Website: sqlStr(r.Website ?? null),
+        Phone: sqlStr(r.Phone ?? null), FoundedDate: sqlDate(r.FoundedDate ?? null),
         // their Status CHECK: Active|Inactive|Dissolved — our dissolution stories map straight on
         Status: sqlStr(r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active'),
       }),
@@ -57,7 +59,7 @@ export const MAPPING = {
       json: 'organizations', table: '[morecheese_members].[OrganizationProfile]',
       columns: (r) => ({
         ID: sqlId(uuidFor('orgprofile', r.OrgKey)), OrganizationID: sqlId(uuidFor('org', r.OrgKey)),
-        OrgKey: sqlStr(r.OrgKey), Type: sqlStr(r.Type), Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
+        OrgKey: sqlStr(r.OrgKey), Type: sqlStr(r.Type), Region: sqlStr(r.Region), Country: sqlStr(r.Country ?? null), CountryName: sqlStr(r.CountryName ?? null), City: sqlStr(r.City), State: sqlStr(r.State), AddressLine1: sqlStr(r.AddressLine1 ?? null), PostalCode: sqlStr(r.PostalCode ?? null),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
         LifecycleEventKind: sqlStr(r.LifecycleEvent?.kind ?? null), LifecycleEventYear: sqlNum(r.LifecycleEvent?.year ?? null),
         IsSharedDemo: sqlBit(r.IsSharedDemo),
@@ -76,6 +78,8 @@ export const MAPPING = {
       columns: (r) => ({
         ID: sqlId(uuidFor('person', r.MemberNumber)),
         FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), MiddleName: sqlStr(r.MiddleName), PreferredName: sqlStr(r.PreferredName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
+        Prefix: sqlStr(r.Prefix ?? null), Suffix: sqlStr(r.Suffix ?? null), Phone: sqlStr(r.Phone ?? null),
+        Gender: sqlStr(r.Gender ?? null), DateOfBirth: sqlDate(r.DateOfBirth ?? null),
         Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
       }),
     },
@@ -85,9 +89,14 @@ export const MAPPING = {
         ID: sqlId(uuidFor('memberprofile', r.MemberNumber)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
         OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null),
         MemberNumber: sqlStr(r.MemberNumber), Segment: sqlStr(r.Segment),
-        Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
+        Region: sqlStr(r.Region), Country: sqlStr(r.Country ?? null), CountryName: sqlStr(r.CountryName ?? null),
+        City: sqlStr(r.City), State: sqlStr(r.State),
+        AddressLine1: sqlStr(r.AddressLine1 ?? null), AddressLine2: sqlStr(r.AddressLine2 ?? null), PostalCode: sqlStr(r.PostalCode ?? null),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
-        JoinDate: sqlDate(r.JoinDate), IsSharedDemo: sqlBit(r.IsSharedDemo),
+        JoinDate: sqlDate(r.JoinDate),
+        RaceEthnicity: sqlStr(r.RaceEthnicity ?? null), EthnicityHispanic: sqlStr(r.EthnicityHispanic ?? null),
+        PronounSet: sqlStr(r.PronounSet ?? null), PrimaryLanguage: sqlStr(r.PrimaryLanguage ?? null),
+        IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
     {
@@ -139,7 +148,7 @@ export const MAPPING = {
   learning: [
     {
       json: 'certifications', table: '[morecheese_learning].[Certification]',
-      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
+      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
     },
     {
       json: 'member_certifications', table: '[morecheese_learning].[MemberCertification]',
@@ -233,8 +242,9 @@ export const MAPPING = {
       json: 'committee_meetings', table: '[__mj_BizAppsCommittees].[Meeting]',
       columns: (r) => ({
         ID: sqlId(uuidFor('meeting', r.MeetingKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
-        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), TimeZone: sqlStr('UTC'),
-        LocationType: sqlStr(r.LocationType), Status: sqlStr(r.Status),
+        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), EndDateTime: sqlDate(r.EndDateTime ?? null),
+        TimeZone: sqlStr('UTC'),
+        LocationType: sqlStr(r.LocationType), LocationText: sqlStr(r.LocationText ?? null), Status: sqlStr(r.Status),
       }),
     },
     {
@@ -282,9 +292,11 @@ export const MAPPING = {
     {
       json: 'tasks', table: '[__mj_BizAppsTasks].[Task]',
       columns: (r) => ({
-        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
-        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt), CompletedAt: sqlDate(r.CompletedAt ?? null),
+        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
+        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt),
+        StartedAt: sqlDate(r.StartedAt ?? null), CompletedAt: sqlDate(r.CompletedAt ?? null),
         PercentComplete: sqlNum(r.PercentComplete ?? 0),
+        HoursEstimated: sqlNum(r.HoursEstimated ?? null), HoursActual: sqlNum(r.HoursActual ?? null),
         CreatedByPersonID: sqlId(r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null),
       }),
     },
@@ -315,6 +327,7 @@ export const MAPPING = {
       json: 'issues', table: '[__mj_BizAppsIssues].[Issue]',
       columns: (r) => ({
         ID: sqlId(uuidFor('issue', r.IssueKey)), IssueNumber: sqlStr(r.IssueNumber), Title: sqlStr(r.Title),
+        Description: sqlStr(r.Description),
         IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlVar({ New: '@IS_New', 'In Progress': '@IS_InProgress', Resolved: '@IS_Resolved', Closed: '@IS_Closed' }[r.StatusKey]),
         Severity: sqlStr(r.Severity), Priority: sqlStr(r.Priority),
         ReporterPersonID: sqlId(uuidFor('person', r.ReporterMemberNumber)),
@@ -323,6 +336,14 @@ export const MAPPING = {
         SourceEntityID: sqlVar({ 'MoreCheese: Orders': '@E_Orders', 'MJ_BizApps_Common: Organizations': '@E_Orgs', 'MoreCheese: Event Registrations': '@E_Regs', 'MJ_BizApps_Common: People': '@E_People' }[r.SourceEntityName]),
         SourceRecordID: sqlId({ order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind]),
         ResolvedAt: sqlDate(r.ResolvedAt), ClosedAt: sqlDate(r.ClosedAt),
+      }),
+    },
+    {
+      json: 'issue_comments', table: '[__mj_BizAppsIssues].[IssueComment]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('issuecomment', r.CommentKey)), IssueID: sqlId(uuidFor('issue', r.IssueKey)),
+        Body: sqlStr(r.Body), Source: sqlStr(r.Source),
+        AuthorPersonID: sqlId(r.AuthorMemberNumber ? uuidFor('person', r.AuthorMemberNumber) : null),
       }),
     },
     {

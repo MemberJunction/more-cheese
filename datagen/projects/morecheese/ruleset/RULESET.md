@@ -25,9 +25,9 @@ Who differs, and by how much:
 |---|---|---|---|
 | Longer-tenured members renew more | **+4.1pt** per extra “standard deviation” of tenure | β 0.55 (expert form) → compiled β 0.55 | per 1 SD of tenure at decision |
 | Engaged members renew more | **+7.0pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
-| Auto-renew members stick around | **+12.1pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.721 | MGI: +10-15pt |
+| Auto-renew members stick around | **+12.0pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.705 | MGI: +10-15pt |
 | Employer trouble drives churn | **-8.6pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows |
-| The enthusiast tier churns hardest | **-23.2pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.948 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
+| The enthusiast tier churns hardest | **-23.8pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.989 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
 
 ## The event rules
 
@@ -61,8 +61,8 @@ The `__mj` core gets **usage residue** so the instance reads as lived-in — app
 
 One Sonar model — **Member Engagement Score** (`morecheese-engagement`, Active) — scores every member on the MJ_BizApps_Common: People spine. **Definitions only**: Sonar's FactorCompiler compiles the factors to SQL and computes the scores live, so we ship the model, not pre-computed numbers.
 
-- **8 executable factors**, each a Declarative `Count` over a related entity linked by SourceRelatedEntityID (RelationshipPath `[]` → the compiler auto-resolves the FK path to the anchor): Event Participation · Committee Service · Certifications · Learning Activity · Advocacy Participation · Competition Entries · Event Recency · Survey Participation.
-- **Bands tile 0..100 with no gaps**: At Risk 0–10 · Watch 10–20 · Stable 20–35 · Engaged 35–100.
+- **10 executable factors**, each a Declarative `Count` over a related entity linked by SourceRelatedEntityID (RelationshipPath `[]` → the compiler auto-resolves the FK path to the anchor): Event Participation · Committee Service · Certifications · Learning Activity · Advocacy Participation · Competition Entries · Event Recency · Survey Participation · Member Spend · Membership Tenure.
+- **Bands tile 0..100 with no gaps**: At Risk 0–22 · Watch 22–33 · Stable 33–46 · Engaged 46–100.
 - **MinMax normalization + equal additive weights, WeightedSum** — mirrors the working demo models; Sonar derives each factor's min/max across the member population.
 - **Sonar computes the scores** (a recompute after install): a declining member lands below an active one because the engine counts the member's actual rows — honest by construction, no pre-pinned scores. The Bob-below-Elena contrast is witnessed live in the app, not gated here.
 

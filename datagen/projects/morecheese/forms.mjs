@@ -15,6 +15,14 @@ import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { personNameFor, TOPONYMS } from './banks.mjs';
 import { emailFor } from './world.mjs';
 
+/** survey/application submissions cluster in waking hours with a lunchtime and evening
+ *  bump — a single 12:00Z stamp made the time-of-day chart one bar */
+const submitTime = (r) => {
+  const h = r.pickWeighted([[8, 6], [9, 9], [10, 11], [11, 10], [12, 12], [13, 11], [14, 9], [15, 8], [16, 8], [17, 7], [18, 6], [19, 6], [20, 5], [21, 4], [22, 2], [7, 3], [23, 1]]);
+  return `${String(h).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
+};
+
+
 export function buildForms(cfg, people, events, registrations) {
   const { R, seed, release } = cfg;
   const F = R.forms;
@@ -86,7 +94,7 @@ export function buildForms(cfg, people, events, registrations) {
         formResponses.push({
           ResponseKey: respKey, FormKey: 'post-conf-survey', VersionKey: 'post-conf-survey:1',
           DistributionKey: distKey, MemberNumber: x.MemberNumber, Status: 'Complete',
-          SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T12:00:00Z`,
+          SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T${submitTime(r)}`,
           IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta, _covid: covid,
         });
         dist.ResponseCount += 1;
@@ -117,7 +125,7 @@ export function buildForms(cfg, people, events, registrations) {
     formResponses.push({
       ResponseKey: respKey, FormKey: 'post-conf-survey', VersionKey: 'post-conf-survey:1',
       DistributionKey: distKey, MemberNumber: h.memberNumber, Status: 'Complete',
-      SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T12:00:00Z`,
+      SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T${submitTime(r)}`,
       ...(attended ? {} : { SourceMetadata: JSON.stringify({ channel: 'email', note: 'responded via forwarded link (not on the attendee list)' }) }),
       IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta, _covid: R.regimes.covid.years.includes(year), _hero: true,
     });
@@ -136,6 +144,14 @@ export function buildForms(cfg, people, events, registrations) {
   const npsBase = A.nps.base - A.nps.engagementBeta * meanTheta;
   const overallBase = A.overall.base - A.overall.engagementBeta * meanTheta;
   const clampRound = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(v)));
+  // a gaussian around the sourced mean never yields a 0-2, so the detractor tail every
+  // real survey carries was absent. A small share had a bad experience and score low
+  // largely regardless of engagement (low-theta members are likelier to be among them).
+  const npsScore = (theta, covidShift, r) => {
+    const pBad = A.nps.detractorShare * (theta < 0 ? 1.8 : 0.6);
+    if (A.nps.detractorShare && r.bernoulli(Math.min(0.12, pBad))) return r.pickWeighted([[0, 0.2], [1, 0.3], [2, 0.5]]);
+    return clampRound(npsBase + covidShift + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd), A.nps.min, A.nps.max);
+  };
   for (const resp of formResponses) {
     const r = rng(seed, `formans:${resp.ResponseKey}`);
     const theta = resp._theta;
@@ -144,11 +160,11 @@ export function buildForms(cfg, people, events, registrations) {
     if (!resp._hero && r.bernoulli(F.response.partialShare)) {
       resp.Status = 'Partial';
       resp.StartedAt = resp.SubmittedAt; resp.SubmittedAt = null;
-      formAnswers.push({ AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: Math.max(A.nps.min, Math.min(A.nps.max, Math.round(npsBase + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd)))), IsSharedDemo: true });
+      formAnswers.push({ AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: npsScore(theta, 0, r), IsSharedDemo: true });
       continue;
     }
     formAnswers.push(
-      { AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: clampRound(npsBase + (resp._covid ? R.regimes.covid.npsShift : 0) + A.nps.engagementBeta * theta + r.normal(0, A.nps.noiseSd), A.nps.min, A.nps.max), IsSharedDemo: true },
+      { AnswerKey: `${resp.ResponseKey}:nps`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:nps', NumericValue: npsScore(theta, resp._covid ? R.regimes.covid.npsShift : 0, r), IsSharedDemo: true },
       { AnswerKey: `${resp.ResponseKey}:overall`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:overall', NumericValue: clampRound(overallBase + A.overall.engagementBeta * theta + r.normal(0, A.overall.noiseSd), A.overall.min, A.overall.max), IsSharedDemo: true },
       { AnswerKey: `${resp.ResponseKey}:returning`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:returning', BooleanValue: r.bernoulli(1 / (1 + Math.exp(-(A.returning.baseLogit + A.returning.engagementBeta * theta)))), IsSharedDemo: true },
     );
@@ -186,8 +202,8 @@ export function buildForms(cfg, people, events, registrations) {
         AnonymousSessionID: `anon-${hex(r, 16)}`,
         SourceMetadata: JSON.stringify({ channel: 'web', referrer: r.pick(APP.referrers) }),
         Status: partial ? 'Partial' : 'Complete',
-        StartedAt: `${iso(when)}T12:00:00Z`,
-        SubmittedAt: partial ? null : `${iso(when)}T12:00:00Z`,
+        StartedAt: `${iso(when)}T${submitTime(r)}`,
+        SubmittedAt: partial ? null : `${iso(when)}T${submitTime(r)}`,
         IsSharedDemo: true,
       };
       formResponses.push(resp);
@@ -200,7 +216,14 @@ export function buildForms(cfg, people, events, registrations) {
       const segment = r.pickWeighted(APP.segmentMix);
       push('email', { TextValue: emailFor(nm.first, nm.last, respKey) });
       push('segment', { TextValue: segment });
-      push('operation', { TextValue: r.pick(APP.operationTemplates).replace('{segment}', segment.toLowerCase()).replace('{toponym}', r.pick(TOPONYMS)) });
+      // "a enthusiast" / "a educator" were visible in the answers grid — the article
+      // has to agree with the segment word that follows it
+      push('operation', {
+        TextValue: r.pick(APP.operationTemplates)
+          .replace(/\ba (?=\{segment\})/, /^[aeiou]/i.test(segment) ? 'an ' : 'a ')
+          .replace('{segment}', segment.toLowerCase())
+          .replace('{toponym}', r.pick(TOPONYMS)),
+      });
       push('newsletter', { BooleanValue: r.bernoulli(0.6) });
     }
   }

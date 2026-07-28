@@ -19,7 +19,7 @@ export function buildPrograms(cfg, people, periods, learning) {
 
   // ---------- certifications ----------
   const certifications = PR.certifications.catalog.map((c) => ({
-    CertKey: c.key, Name: c.name, ValidYears: c.validYears, IsSharedDemo: true,
+    CertKey: c.key, Name: c.name, Description: c.description ?? null, ValidYears: c.validYears, IsSharedDemo: true,
   }));
   const completers = [...new Set(learning.enrollments.filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber))]
     .map((m) => people.find((p) => p.MemberNumber === m)).filter((p) => p && !p._hero);
@@ -32,31 +32,73 @@ export function buildPrograms(cfg, people, periods, learning) {
     streamKey: (p) => `cert:${p.MemberNumber}`,
     decide: (p, prob, r) => {
       if (!r.bernoulli(prob)) return;
-      const cert = r.pick(PR.certifications.catalog);
-      // enrolled sometime in the last ~3 years of their membership
-      const enrolled = addDays(release, -r.int(90, 1100));
-      if (iso(enrolled) < p.JoinDate) return;
-      const awarded = r.bernoulli(PR.certifications.awardShare) && iso(addDays(enrolled, 180)) < releaseIso;
-      const awardedOn = awarded ? addDays(enrolled, r.int(120, 360)) : null;
-      const expiresOn = awardedOn ? addYears(awardedOn, cert.validYears) : null;
-      const expired = expiresOn && iso(expiresOn) < releaseIso;
-      memberCertifications.push({
-        MemberCertKey: `${p.MemberNumber}:${cert.key}`, MemberNumber: p.MemberNumber, CertKey: cert.key,
-        Status: awarded ? (expired ? 'Expired' : 'Awarded') : 'InProgress',
-        EnrolledOn: iso(enrolled), AwardedOn: awardedOn ? iso(awardedOn) : null,
-        ExpiresOn: expiresOn ? iso(expiresOn) : null, IsSharedDemo: true,
-      });
+      // credential history spans the whole membership, not just the last 3 years — long
+      // tenures produce awards old enough that ValidYears runs out (Expired appears, and
+      // with it the recertification story). A smaller share pursue a SECOND credential
+      // after the first award — real programs have multi-credential members.
+      const daysSinceJoin = Math.max(120, Math.round((release - parseDate(p.JoinDate)) / 86400000) - 30);
+      const emitCert = (cert, enrolled) => {
+        // the award draw and the eligibility check use the SAME horizon: an award that
+        // would land after release means the pursuit is still InProgress (the old guard
+        // checked +180d but drew up to +360d — certs got awarded in the future)
+        const awardDays = r.int(120, 360);
+        const awarded = r.bernoulli(PR.certifications.awardShare) && iso(addDays(enrolled, awardDays)) <= releaseIso;
+        const awardedOn = awarded ? addDays(enrolled, awardDays) : null;
+        const expiresOn = awardedOn ? addYears(awardedOn, cert.validYears) : null;
+        const expired = expiresOn && iso(expiresOn) < releaseIso;
+        memberCertifications.push({
+          MemberCertKey: `${p.MemberNumber}:${cert.key}`, MemberNumber: p.MemberNumber, CertKey: cert.key,
+          Status: awarded ? (expired ? 'Expired' : 'Awarded') : 'InProgress',
+          EnrolledOn: iso(enrolled), AwardedOn: awardedOn ? iso(awardedOn) : null,
+          ExpiresOn: expiresOn ? iso(expiresOn) : null, IsSharedDemo: true,
+        });
+        return awardedOn;
+      };
+      // credentials LADDER: the first one pursued is always one with no prerequisite,
+      // weighted so foundation credentials dominate. A member who earns one may go on to
+      // a credential whose prerequisite they now hold — so an advanced certificate never
+      // appears on someone who never earned the rung below it.
+      const catalog = PR.certifications.catalog;
+      const weightOf = (c) => c.weight ?? 1;
+      const openTo = (held) => catalog.filter((c) => !held.has(c.key) && (!c.prerequisite || held.has(c.prerequisite)));
+      const held = new Set();
+      const entry = openTo(held).filter((c) => !c.prerequisite);
+      if (!entry.length) return;
+      const first = r.pickWeighted(entry.map((c) => [c, weightOf(c)]));
+      const firstAwarded = emitCert(first, addDays(release, -r.int(90, daysSinceJoin)));
+      if (!firstAwarded) return;
+      held.add(first.key);
+      // each further rung is rarer than the last
+      let when = firstAwarded;
+      for (let step = 0; step < 2; step++) {
+        if (!r.bernoulli(step === 0 ? 0.2 : 0.08)) break;
+        const next = openTo(held);
+        if (!next.length) break;
+        const pickNext = r.pickWeighted(next.map((c) => [c, weightOf(c)]));
+        const gap = r.int(180, 900);
+        if (iso(addDays(when, gap)) >= releaseIso) break;
+        const awarded = emitCert(pickNext, addDays(when, gap));
+        held.add(pickNext.key);
+        if (!awarded) break;
+        when = awarded;
+      }
     },
   });
-  // hero declarations (Sofia's in-progress CCP)
+  // hero declarations — authored facts. `certifications` (plural) lets a persona carry a
+  // whole ladder; the older singular `certification` still works.
   for (const h of R.heroes) {
-    if (!h.certification) continue;
-    const cert = PR.certifications.catalog.find((c) => c.key === h.certification.key);
-    memberCertifications.push({
-      MemberCertKey: `${h.memberNumber}:${h.certification.key}`, MemberNumber: h.memberNumber,
-      CertKey: h.certification.key, Status: h.certification.status,
-      EnrolledOn: h.certification.enrolledOn, AwardedOn: null, ExpiresOn: null, IsSharedDemo: true,
-    });
+    const declared = h.certifications ?? (h.certification ? [h.certification] : []);
+    for (const d of declared) {
+      const cert = PR.certifications.catalog.find((c) => c.key === d.key);
+      const awardedOn = d.awardedOn ?? null;
+      memberCertifications.push({
+        MemberCertKey: `${h.memberNumber}:${d.key}`, MemberNumber: h.memberNumber,
+        CertKey: d.key, Status: d.status,
+        EnrolledOn: d.enrolledOn, AwardedOn: awardedOn,
+        ExpiresOn: awardedOn && cert ? iso(addYears(parseDate(awardedOn), cert.validYears)) : null,
+        IsSharedDemo: true,
+      });
+    }
   }
 
   // ---------- competition entries (producers with orgs; org membership = eligibility) ----------
@@ -68,7 +110,10 @@ export function buildPrograms(cfg, people, periods, learning) {
     const pinned = R.heroes.find((h) => h.memberNumber === p.MemberNumber)?.competition;
     for (const y of memberYears.get(p.MemberNumber) ?? []) {
       const r = rng(seed, `compentry:${p.MemberNumber}:${y}`);
-      const n = pinned ? pinned.entriesPerYear : (r.bernoulli(PR.competition.entryRatePerYear) ? 1 + (r.bernoulli(0.25) ? 1 : 0) : 0);
+      // judging is a physical activity — the pandemic competition was curtailed
+      const CV = R.regimes.covid;
+      const compRate = PR.competition.entryRatePerYear * (CV.years.includes(y) ? (CV.competitionMultiplier ?? 1) : 1);
+      const n = pinned ? pinned.entriesPerYear : (r.bernoulli(compRate) ? 1 + (r.bernoulli(0.25) ? 1 : 0) : 0);
       for (let i = 0; i < Math.min(n, pinned ? n : PR.competition.maxPerYear); i++) {
         let result = r.pickWeighted(Object.entries(PR.competition.medalWeights));
         if (pinned?.pinnedResults?.[y] && i === 0) result = pinned.pinnedResults[y]; // Henri's Gold is a fact
@@ -94,7 +139,11 @@ export function buildPrograms(cfg, people, periods, learning) {
     decide: (p, prob, r) => {
       if (!r.bernoulli(prob)) return;
       for (const y of (memberYears.get(p.MemberNumber) ?? [])) {
-        const k = r.negbin(PR.advocacy.actionsPerYearMean, PR.advocacy.dispersionK);
+        // the one thing that goes UP: emergency relief and market-access lobbying, so the
+        // era is not a uniform dip
+        const CV2 = R.regimes.covid;
+        const advMean = PR.advocacy.actionsPerYearMean * (CV2.years.includes(y) ? (CV2.advocacyMultiplier ?? 1) : 1);
+        const k = r.negbin(advMean, PR.advocacy.dispersionK);
         for (let i = 0; i < k; i++) {
           advocacyActions.push(actionRow(p.MemberNumber, y, i, r.pickWeighted(Object.entries(PR.advocacy.kindWeights)), r.pick(PR.advocacy.topics), r));
         }
@@ -114,9 +163,20 @@ export function buildPrograms(cfg, people, periods, learning) {
   }
 
   function actionRow(member, y, i, kind, topic, r) {
+    // advocacy is campaign-spiky, not uniform: mass actions (letters, petitions) cluster
+    // into a shared per-year-per-topic campaign window — hundreds of members act within
+    // days of each other around a vote. Individual acts (testimony, meetings) stay spread.
+    let date;
+    if (kind === 'LetterCampaign' || kind === 'PetitionSignature') {
+      const rc = rng(seed, `campaign:${y}:${topic}`);
+      const campaignStart = new Date(Date.UTC(y, rc.int(0, 11), rc.int(1, 25)));
+      date = addDays(campaignStart, r.int(0, 4));
+    } else {
+      date = new Date(Date.UTC(y, r.int(0, 11), r.int(1, 28)));
+    }
     return {
       ActionKey: `${member}:${y}:${i}`, MemberNumber: member,
-      ActionDate: iso(new Date(Date.UTC(y, r.int(0, 11), r.int(1, 28)))),
+      ActionDate: iso(date),
       Kind: kind, Topic: topic, IsSharedDemo: true,
     };
   }

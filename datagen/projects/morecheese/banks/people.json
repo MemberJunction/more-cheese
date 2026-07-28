@@ -999,5 +999,202 @@
     "Katarzyna": "Kasia",
     "Margaux": "Margot",
     "Etienne": "Eti"
-  }
+  },
+  "countryWeights": {
+    "usa": {
+      "anglo": 0.42,
+      "germanicNordic": 0.14,
+      "hispanic": 0.15,
+      "italianIberian": 0.08,
+      "franco": 0.04,
+      "southAsian": 0.04,
+      "westAfrican": 0.05,
+      "slavic": 0.03,
+      "japanese": 0.02,
+      "chinese": 0.02,
+      "korean": 0.005,
+      "vietnamese": 0.005
+    },
+    "canada": {
+      "anglo": 0.46,
+      "franco": 0.12,
+      "germanicNordic": 0.08,
+      "italianIberian": 0.06,
+      "southAsian": 0.1,
+      "chinese": 0.06,
+      "hispanic": 0.04,
+      "slavic": 0.04,
+      "westAfrican": 0.02,
+      "japanese": 0.01,
+      "korean": 0.005,
+      "vietnamese": 0.005
+    },
+    "quebec": {
+      "franco": 0.66,
+      "anglo": 0.14,
+      "italianIberian": 0.06,
+      "hispanic": 0.04,
+      "westAfrican": 0.04,
+      "slavic": 0.02,
+      "southAsian": 0.02,
+      "germanicNordic": 0.02
+    },
+    "mexico": {
+      "hispanic": 0.82,
+      "italianIberian": 0.06,
+      "anglo": 0.05,
+      "germanicNordic": 0.03,
+      "franco": 0.02,
+      "japanese": 0.01,
+      "westAfrican": 0.01
+    },
+    "france": {
+      "franco": 0.7,
+      "italianIberian": 0.08,
+      "westAfrican": 0.07,
+      "germanicNordic": 0.05,
+      "hispanic": 0.04,
+      "anglo": 0.03,
+      "slavic": 0.02,
+      "vietnamese": 0.01
+    },
+    "italy": {
+      "italianIberian": 0.8,
+      "franco": 0.05,
+      "germanicNordic": 0.04,
+      "slavic": 0.04,
+      "westAfrican": 0.03,
+      "anglo": 0.02,
+      "hispanic": 0.02
+    },
+    "spain": {
+      "hispanic": 0.52,
+      "italianIberian": 0.34,
+      "franco": 0.04,
+      "westAfrican": 0.04,
+      "anglo": 0.03,
+      "germanicNordic": 0.03
+    },
+    "portugal": {
+      "italianIberian": 0.72,
+      "hispanic": 0.14,
+      "westAfrican": 0.06,
+      "franco": 0.03,
+      "anglo": 0.03,
+      "germanicNordic": 0.02
+    },
+    "netherlands": {
+      "germanicNordic": 0.74,
+      "anglo": 0.06,
+      "franco": 0.04,
+      "italianIberian": 0.04,
+      "westAfrican": 0.04,
+      "southAsian": 0.03,
+      "slavic": 0.03,
+      "chinese": 0.02
+    },
+    "denmark": {
+      "germanicNordic": 0.82,
+      "anglo": 0.05,
+      "slavic": 0.04,
+      "franco": 0.03,
+      "italianIberian": 0.03,
+      "southAsian": 0.02,
+      "westAfrican": 0.01
+    },
+    "germany": {
+      "germanicNordic": 0.76,
+      "slavic": 0.07,
+      "italianIberian": 0.05,
+      "franco": 0.04,
+      "anglo": 0.03,
+      "westAfrican": 0.03,
+      "vietnamese": 0.02
+    },
+    "austria": {
+      "germanicNordic": 0.8,
+      "slavic": 0.08,
+      "italianIberian": 0.05,
+      "franco": 0.03,
+      "anglo": 0.02,
+      "westAfrican": 0.02
+    },
+    "switzerland": {
+      "germanicNordic": 0.52,
+      "franco": 0.24,
+      "italianIberian": 0.14,
+      "anglo": 0.04,
+      "hispanic": 0.03,
+      "slavic": 0.03
+    },
+    "uk": {
+      "anglo": 0.74,
+      "southAsian": 0.09,
+      "westAfrican": 0.05,
+      "italianIberian": 0.03,
+      "franco": 0.03,
+      "germanicNordic": 0.03,
+      "slavic": 0.03
+    },
+    "ireland": {
+      "anglo": 0.84,
+      "franco": 0.03,
+      "italianIberian": 0.03,
+      "slavic": 0.04,
+      "germanicNordic": 0.03,
+      "southAsian": 0.03
+    },
+    "greece": {
+      "italianIberian": 0.62,
+      "slavic": 0.14,
+      "anglo": 0.08,
+      "germanicNordic": 0.06,
+      "franco": 0.05,
+      "westAfrican": 0.05
+    },
+    "poland": {
+      "slavic": 0.86,
+      "germanicNordic": 0.06,
+      "anglo": 0.03,
+      "italianIberian": 0.02,
+      "franco": 0.02,
+      "vietnamese": 0.01
+    },
+    "australia": {
+      "anglo": 0.6,
+      "italianIberian": 0.08,
+      "chinese": 0.08,
+      "southAsian": 0.08,
+      "germanicNordic": 0.05,
+      "franco": 0.03,
+      "vietnamese": 0.03,
+      "hispanic": 0.03,
+      "japanese": 0.02
+    },
+    "newzealand": {
+      "anglo": 0.68,
+      "southAsian": 0.08,
+      "chinese": 0.07,
+      "italianIberian": 0.05,
+      "germanicNordic": 0.04,
+      "franco": 0.03,
+      "hispanic": 0.03,
+      "japanese": 0.02
+    },
+    "argentina": {
+      "hispanic": 0.56,
+      "italianIberian": 0.34,
+      "germanicNordic": 0.04,
+      "franco": 0.03,
+      "slavic": 0.03
+    },
+    "japan": {
+      "japanese": 0.9,
+      "korean": 0.04,
+      "chinese": 0.03,
+      "anglo": 0.02,
+      "vietnamese": 0.01
+    }
+  },
+  "$countryNote": "Names used to key off three super-regions (NA/EU/RoW), so every European city drew the SAME mix — Poligny came out 29% Nordic/Germanic against 27% French, Bern 27% Slavic with no Spanish at all (the EU vector had no hispanic key), Somerset only 11% anglo. Weights are now per country, with a deliberate but modest diaspora share. regionWeights is retained as the fallback for any city without a country origin."
 }

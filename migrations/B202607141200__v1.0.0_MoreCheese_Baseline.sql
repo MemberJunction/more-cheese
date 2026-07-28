@@ -55,8 +55,12 @@ CREATE TABLE ${flyway:defaultSchema}.OrganizationProfile (
     OrgKey NVARCHAR(50) NOT NULL,
     Type NVARCHAR(50) NOT NULL,
     Region NVARCHAR(50) NOT NULL,
+    Country NVARCHAR(2) NULL,
+    CountryName NVARCHAR(100) NULL,
     City NVARCHAR(100) NOT NULL,
     State NVARCHAR(50) NOT NULL,
+    AddressLine1 NVARCHAR(200) NULL,
+    PostalCode NVARCHAR(20) NULL,
     Latitude DECIMAL(9,6) NOT NULL,
     Longitude DECIMAL(9,6) NOT NULL,
     LifecycleEventKind NVARCHAR(50) NULL,
@@ -82,11 +86,22 @@ CREATE TABLE ${flyway:defaultSchema}.MemberProfile (
     MemberNumber NVARCHAR(50) NOT NULL,
     Segment NVARCHAR(50) NOT NULL,
     Region NVARCHAR(50) NOT NULL,
+    Country NVARCHAR(2) NULL,
+    CountryName NVARCHAR(100) NULL,
     City NVARCHAR(100) NOT NULL,
     State NVARCHAR(50) NOT NULL,
+    AddressLine1 NVARCHAR(200) NULL,
+    AddressLine2 NVARCHAR(200) NULL,
+    PostalCode NVARCHAR(20) NULL,
     Latitude DECIMAL(9,6) NOT NULL,
     Longitude DECIMAL(9,6) NOT NULL,
     JoinDate DATE NOT NULL,
+    -- voluntary self-identified demographics: blank is a real and common answer, and
+    -- 'Prefer not to say' is a DIFFERENT answer from never having responded
+    RaceEthnicity NVARCHAR(200) NULL,
+    EthnicityHispanic NVARCHAR(30) NULL,
+    PronounSet NVARCHAR(50) NULL,
+    PrimaryLanguage NVARCHAR(50) NULL,
     IsSharedDemo BIT NOT NULL DEFAULT 1,
     CONSTRAINT PK_MemberProfile PRIMARY KEY (ID),
     CONSTRAINT UQ_MemberProfile_MemberNumber UNIQUE (MemberNumber),
@@ -215,7 +230,7 @@ CREATE TABLE morecheese_orders.Product (
     IsSharedDemo BIT NOT NULL DEFAULT 1,
     CONSTRAINT PK_Product PRIMARY KEY (ID),
     CONSTRAINT UQ_Product_ProductKey UNIQUE (ProductKey),
-    CONSTRAINT CK_Product_ProductType CHECK (ProductType IN ('Membership', 'Event'))
+    CONSTRAINT CK_Product_ProductType CHECK (ProductType IN ('Membership', 'Event', 'Certification', 'Competition', 'Publication', 'Sponsorship', 'JobPosting', 'Merchandise', 'Donation'))
 );
 GO
 

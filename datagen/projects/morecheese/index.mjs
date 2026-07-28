@@ -21,6 +21,7 @@ import { buildDefects } from './defects.mjs';
 import { buildMessaging } from './messaging.mjs';
 import { buildPlatform } from './platform.mjs';
 import { buildSonar } from './sonar.mjs';
+import { identityFor, orgIdentityFor } from './identity.mjs';
 import { applyMotifs } from './motifs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
@@ -47,8 +48,12 @@ export function buildWorld(cfg) {
   // §5.4b: learning — same pattern, third domain
   const learning = buildLearning(cfg, people, periods);
 
+  // programs (certifications, competition entries, advocacy) BEFORE money: credentials
+  // and competition entries are billable facts, so the money chain has to see them
+  const programs = buildPrograms(cfg, people, periods, learning);
+
   // §5.5: the money chain — one order per billable fact, timing per declared paymentProfiles
-  const money = buildMoney(cfg, people, periods, events, registrations);
+  const money = buildMoney(cfg, people, periods, events, registrations, programs);
 
   // composed bizapps slices: committees (governance), forms (D10 survey), relationships
   // (identity graph), tasks (action items + outreach), issues (support tickets)
@@ -57,7 +62,6 @@ export function buildWorld(cfg) {
   const relationships = buildRelationships(cfg, people, orgs);
   const tasks = buildTasks(cfg, people, periods, committees);
   const issues = buildIssues(cfg, people, orgs, events, registrations, money, committees);
-  const programs = buildPrograms(cfg, people, periods, learning);
   // secure messaging: support threads derive from issues (hero issues always get one)
   const messaging = buildMessaging(cfg, people, issues);
 
@@ -66,8 +70,21 @@ export function buildWorld(cfg) {
   const defects = buildDefects(cfg, people, orgs, relationships);
 
   // platform residue AFTER defects: its RecordChange rows mirror timelines everywhere
-  // above, including the employment edges the defects module just rewrote
-  const platform = buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships });
+  // above, including the employment edges the defects module just rewrote.
+  // It must see the SAME roster the common pack ships (people + the duplicate-record
+  // shells defects injected) — the seeded Skip transcripts quote counts computed from
+  // this list, and quoting a pre-defects count made the transcript false against the
+  // very query it points the user at.
+  const shippedPeople = [...people, ...defects.extraPeople];
+
+  // contact details + voluntary self-ID demographics, applied as ONE post-pass over the
+  // finished roster. Person/organization rows are hand-constructed in five places (crowd,
+  // hero, duplicate shell, crowd org, hero org, defect true-employer) and a field added to
+  // only some of them ships `undefined`; doing it here makes that impossible. Every value
+  // rides its own stream key, so nothing above this line moves.
+  for (const p of shippedPeople) Object.assign(p, identityFor(cfg.seed, p, cfg.release));
+  for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear));
+  const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
   const sonar = buildSonar(cfg);
@@ -82,13 +99,13 @@ export function buildPacks(world) {
   return {
     common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
     membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
-    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta']), competition_entries: programs.competitionEntries } },
+    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta', '_future']), competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },
     committees: { dependsOn: ['common', 'membership'], tables: { committee_types: committees.types, committee_roles: committees.roles, committees: committees.committees, committee_terms: committees.terms, committee_memberships: committees.memberships, committee_meetings: committees.meetings, committee_attendance: committees.attendance, committee_agenda_items: committees.agendaItems, committee_motions: committees.motions, committee_votes: committees.votes } },
     forms: { dependsOn: ['common', 'events'], tables: { forms: forms.forms, form_versions: forms.formVersions, form_pages: forms.formPages, form_questions: forms.formQuestions, form_question_options: forms.formQuestionOptions, form_distributions: forms.formDistributions, form_responses: forms.formResponses, form_answers: forms.formAnswers } },
     tasks: { dependsOn: ['common', 'membership', 'committees'], tables: { task_types: tasks.taskTypes, tasks: tasks.tasks, task_assignments: tasks.taskAssignments, task_links: tasks.taskLinks } },
-    issues: { dependsOn: ['common', 'events', 'orders'], tables: { issue_types: issues.issueTypes, issue_statuses: issues.issueStatuses, issues: issues.issues, issue_sequences: issues.issueSequences } },
+    issues: { dependsOn: ['common', 'events', 'orders'], tables: { issue_types: issues.issueTypes, issue_statuses: issues.issueStatuses, issues: issues.issues, issue_comments: issues.issueComments, issue_sequences: issues.issueSequences } },
     messaging: { dependsOn: ['common', 'issues'], tables: { portal_sessions: messaging.sessions, secure_threads: messaging.threads, secure_messages: messaging.messages } },
     platform: { dependsOn: ['common', 'membership', 'events', 'tasks', 'issues'], tables: { mj_users: platform.users, mj_user_roles: platform.userRoles, user_views: platform.views, queries: platform.queries, conversations: platform.conversations, conversation_details: platform.conversationDetails, user_favorites: platform.favorites, lists: platform.lists, list_details: platform.listDetails, user_notifications: platform.notifications, record_changes: platform.recordChanges } },
     // DEFINITIONS ONLY — Sonar's engine computes scores/contributions/history/transitions live
