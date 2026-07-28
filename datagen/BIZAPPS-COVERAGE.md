@@ -94,3 +94,30 @@ ships; a standard new-pack exercise then).
 - **Committees/forms benchmark targets are labeled ESTIMATEs** in the ruleset (6% serve,
   75% attendance, 35% response) pending real sources — unlike the membership numbers,
   which trace to verified 990s/benchmarks.
+
+## Who is in `Person` — members and non-members (2026-07-28)
+
+`Person` holds everyone the federation knows; `MemberProfile` holds only the members. At the
+canonical build that is **3,058 people against 2,109 member profiles** — 949 non-members:
+prospects, free-webinar attendees, colleagues of members. A non-member is simply a Person with
+no MemberProfile (no flag, no schema change — see DATA-CONTRACT.md §"Members and non-members
+share the Person namespace"), and the MemberProfile mappings skip them via an `only:` filter
+on both emitters.
+
+They are not decoration: they are the **denominator of the membership funnel**. Recent joiners
+carry the history they would have had — a free webinar or two before their start date and a
+named membership application on the way in — so a conversion rate is computable without adding
+a single member to the roster:
+
+> of everyone who attended a free webinar, **24%** were members within the window
+> (184 who joined, 585 who did not)
+
+The 79 anonymous applications keep their own meaning — people who applied and did not join, or
+have not yet. Deliberately NOT modelled: converting a prospect into a NEW member (it would move
+every retention, revenue and engagement benchmark, and needs its own pass), and paid non-member
+ticket pricing (needs the money chain to price a non-member seat).
+
+Contact details live where their owning app expects them: `ContactMethod`, `Address` and
+`AddressLink` (2,377 addresses, 6,736 contact methods), with `ContactType`/`AddressType`
+referenced BY NAME because bizapps-common seeds them (finding F6) — the exact strings are
+`Mobile Phone` and `Work Phone`, with spaces.

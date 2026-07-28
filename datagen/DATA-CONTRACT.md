@@ -33,10 +33,13 @@ must mint its own).
 
 | Prefix | Business key format | Example key | Lands in |
 |---|---|---|---|
-| `person` | MemberNumber | `ICF-100217` | `__mj_BizAppsCommon.Person` |
+| `person` | MemberNumber (members) \| `NM-2xxxxx` (non-members) | `ICF-100217`, `NM-200042` | `__mj_BizAppsCommon.Person` |
 | `org` | OrgKey | `ORG-0042` (heroes: `ORG-H101`) | `__mj_BizAppsCommon.Organization` |
 | `rel` | `emp:<member>` \| `story:<type>:<from>` | `emp:ICF-100217` | `__mj_BizAppsCommon.Relationship` |
 | `reltype` | demo type name | `Mentor` | `__mj_BizAppsCommon.RelationshipType` (demo-owned rows only) |
+| `address` | `person:<member>` \| `org:<orgKey>` | `person:ICF-100217` | `__mj_BizAppsCommon.Address` |
+| `addresslink` | same key as its address | `org:ORG-0042` | `__mj_BizAppsCommon.AddressLink` (polymorphic owner) |
+| `contactmethod` | `<owner>:<ContactType name>` | `person:ICF-100217:Mobile Phone` | `__mj_BizAppsCommon.ContactMethod` |
 | `memberprofile` | MemberNumber | `ICF-100217` | `morecheese_members.MemberProfile` |
 | `orgprofile` | OrgKey | `ORG-0042` | `morecheese_members.OrganizationProfile` |
 | `period` | PeriodKey `<member>-P<n>` | `ICF-100217-P3` | `morecheese_members.MembershipPeriod` |
@@ -56,6 +59,26 @@ must mint its own).
 | `taskassign` / `tasklink` | `<task>:<member>` / `<task>:link` | — | `…TaskAssignment/TaskLink` |
 | `issuetype` / `issuestatus` | name | `Billing` (statuses: see §5) | `__mj_BizAppsIssues.IssueType/IssueStatus` |
 | `issue` | `billing:<member>` \| `datafix:<member>` \| `refund:<reg>` \| `dedup:<member>` | `dedup:ICF-000111` | `…Issue` |
+
+### Members and non-members share the Person namespace
+
+A **member** is a Person WITH a `morecheese_members.MemberProfile` row. A **non-member** —
+prospect, free-webinar attendee, colleague of a member — is a Person with **no MemberProfile**.
+There is no flag and no schema change: the v2 identity/membership split already carries the
+distinction, and the emitters honour it with an `only:` filter on the MemberProfile mappings
+(`IsProspect` exists only inside the packs, never in a database column).
+
+Consequences worth knowing before writing a query or a gate:
+
+- `Person` count > `MemberProfile` count, always. At the canonical build: 3,058 vs 2,109.
+- Non-member person keys are `NM-2xxxxx`, so they never collide with a member number.
+- Non-members carry identity (name, email, address, contact methods, an employment
+  Relationship edge) and almost no voluntary self-ID — they never filled in a member profile.
+- Nothing membership-shaped may reference one: no MembershipPeriod, no order, no paid event
+  registration. Free-event registrations are the exception, and they are the funnel.
+- The validator names the two populations apart at load (`people`/`regs` mean MEMBERS,
+  `prospects`/`prospectRegs` mean non-members) so every membership benchmark keeps its
+  original meaning.
 
 ## 3. The packs (load order, dependencies, canonical volumes @ seed 42 / n=2500)
 
