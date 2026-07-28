@@ -1184,6 +1184,19 @@ function checkPlatform() {
   check(`platform: transcript counts are true against the shipped pack (${shippedPeople} people, top segment ${topSeg[0]} ${topSeg[1]})`,
     claimProblems.length === 0, claimProblems.slice(0, 2).join('; ') || 'no false claims');
 
+  // every staff persona has residue: a demo LOGS IN as one of them, and an empty
+  // Favourites tray and Lists node is the first thing they'd see
+  {
+    const favs = load('platform', 'user_favorites');
+    const lists = load('platform', 'lists');
+    const details = load('platform', 'list_details');
+    const thin = pUsers.filter((u) => !favs.some((f) => f.UserKey === u.UserKey) || !lists.some((l) => l.UserKey === u.UserKey)
+      || !pViews.some((v) => v.UserKey === u.UserKey));
+    check(`platform: every staff persona has views, favourites and a list (${pUsers.length} personas)`, thin.length === 0, thin.map((u) => u.UserKey).join(', ') || 'no empty Explorer on login');
+    const emptyLists = lists.filter((l) => !details.some((d) => d.ListKey === l.ListKey));
+    check(`platform: no empty list (${lists.length} lists, ${details.length} items)`, emptyLists.length === 0, emptyLists.map((l) => l.Name).join(', ') || 'all populated');
+  }
+
   // audit rows mirror pack timelines EXACTLY (derive-never-invent, and the counts must match)
   const issueByKey = new Map(issues.map((x) => [x.IssueKey, x]));
   const taskByKey = new Map(tTasks.map((x) => [x.TaskKey, x]));

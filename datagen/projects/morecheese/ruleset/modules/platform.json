@@ -4,9 +4,24 @@
     "emailDomain": "morecheesefederation.example",
     "$emailNote": "staff emails ride the reserved .example TLD like all generated emails — never deliverable by construction",
     "staff": [
-      { "key": "membership-director", "first": "Priya", "last": "Raghunathan", "title": "Membership Director" },
-      { "key": "events-coordinator", "first": "Marcus", "last": "Oduya", "title": "Events & Programs Coordinator" },
-      { "key": "ops-analyst", "first": "Helena", "last": "Kovacs", "title": "Membership Operations Analyst" }
+      {
+        "key": "membership-director",
+        "first": "Priya",
+        "last": "Raghunathan",
+        "title": "Membership Director"
+      },
+      {
+        "key": "events-coordinator",
+        "first": "Marcus",
+        "last": "Oduya",
+        "title": "Events & Programs Coordinator"
+      },
+      {
+        "key": "ops-analyst",
+        "first": "Helena",
+        "last": "Kovacs",
+        "title": "Membership Operations Analyst"
+      }
     ],
     "sharedViews": [
       {
@@ -16,14 +31,35 @@
         "name": "Lapsed 2025 — win-back",
         "description": "Memberships that lapsed during 2025 — the win-back outreach pool.",
         "whereClause": "Status='Lapsed' AND EndDate >= '2025-01-01' AND EndDate < '2026-01-01'",
-        "sort": { "field": "EndDate", "dir": "desc" },
+        "sort": {
+          "field": "EndDate",
+          "dir": "desc"
+        },
         "columns": [
-          { "name": "Person", "width": 220 },
-          { "name": "MembershipTier", "width": 140 },
-          { "name": "Status", "width": 120 },
-          { "name": "StartDate", "width": 130 },
-          { "name": "EndDate", "width": 130 },
-          { "name": "DuesAmount", "width": 120 }
+          {
+            "name": "Person",
+            "width": 220
+          },
+          {
+            "name": "MembershipTier",
+            "width": 140
+          },
+          {
+            "name": "Status",
+            "width": 120
+          },
+          {
+            "name": "StartDate",
+            "width": 130
+          },
+          {
+            "name": "EndDate",
+            "width": 130
+          },
+          {
+            "name": "DuesAmount",
+            "width": 120
+          }
         ]
       },
       {
@@ -33,14 +69,36 @@
         "name": "Open billing issues",
         "description": "Billing tickets still open — check before any renewal conversation.",
         "whereClause": "IssueType='Billing' AND Status NOT IN ('Resolved','Closed')",
-        "sort": { "field": "IssueNumber", "dir": "asc" },
+        "sort": {
+          "field": "IssueNumber",
+          "dir": "asc"
+        },
         "columns": [
-          { "name": "IssueNumber", "width": 140 },
-          { "name": "Title", "width": 320 },
-          { "name": "Severity", "width": 110 },
-          { "name": "Priority", "width": 110 },
-          { "name": "Status", "width": 120 },
-          { "name": "ReporterPerson", "displayName": "Reporter", "width": 200 }
+          {
+            "name": "IssueNumber",
+            "width": 140
+          },
+          {
+            "name": "Title",
+            "width": 320
+          },
+          {
+            "name": "Severity",
+            "width": 110
+          },
+          {
+            "name": "Priority",
+            "width": 110
+          },
+          {
+            "name": "Status",
+            "width": 120
+          },
+          {
+            "name": "ReporterPerson",
+            "displayName": "Reporter",
+            "width": 200
+          }
         ]
       },
       {
@@ -50,15 +108,39 @@
         "name": "New members — this year",
         "description": "Profiles created since January 1 — onboarding cohort.",
         "whereClause": "JoinDate >= '2026-01-01'",
-        "sort": { "field": "JoinDate", "dir": "desc" },
+        "sort": {
+          "field": "JoinDate",
+          "dir": "desc"
+        },
         "columns": [
-          { "name": "MemberNumber", "width": 140 },
-          { "name": "Person", "width": 220 },
-          { "name": "Segment", "width": 130 },
-          { "name": "Region", "width": 140 },
-          { "name": "City", "width": 140 },
-          { "name": "State", "width": 80 },
-          { "name": "JoinDate", "width": 120 }
+          {
+            "name": "MemberNumber",
+            "width": 140
+          },
+          {
+            "name": "Person",
+            "width": 220
+          },
+          {
+            "name": "Segment",
+            "width": 130
+          },
+          {
+            "name": "Region",
+            "width": 140
+          },
+          {
+            "name": "City",
+            "width": 140
+          },
+          {
+            "name": "State",
+            "width": 80
+          },
+          {
+            "name": "JoinDate",
+            "width": 120
+          }
         ]
       },
       {
@@ -68,13 +150,31 @@
         "name": "Gold award winners 2025",
         "description": "Gold results from the 2025 competition — press release shortlist.",
         "whereClause": "Result='Gold' AND EntryYear=2025",
-        "sort": { "field": "EntryYear", "dir": "desc" },
+        "sort": {
+          "field": "EntryYear",
+          "dir": "desc"
+        },
         "columns": [
-          { "name": "EntryYear", "width": 100 },
-          { "name": "Category", "width": 170 },
-          { "name": "ProductName", "width": 240 },
-          { "name": "Person", "width": 220 },
-          { "name": "Result", "width": 100 }
+          {
+            "name": "EntryYear",
+            "width": 100
+          },
+          {
+            "name": "Category",
+            "width": 170
+          },
+          {
+            "name": "ProductName",
+            "width": 240
+          },
+          {
+            "name": "Person",
+            "width": 220
+          },
+          {
+            "name": "Result",
+            "width": 100
+          }
         ]
       }
     ],
@@ -109,10 +209,22 @@
         "name": "At-risk members review",
         "daysBeforeRelease": 6,
         "turns": [
-          { "role": "User", "text": "Which members look at risk of not renewing this cycle?" },
-          { "role": "AI", "text": "Looking across renewal status, satisfaction and open support items: {N:PENDING_RENEWALS} memberships are pending renewal right now, and {N:LAPSED_2025} lapsed during 2025. The clearest individual risk signal is {HERO:ICF-000105} — declining survey scores across three conferences, reduced event participation, and an open billing dispute that also has an unanswered secure-message thread. I'd prioritize resolving the billing issue before the renewal conversation." },
-          { "role": "User", "text": "What about billing issues generally — how many are open?" },
-          { "role": "AI", "text": "There are {N:OPEN_BILLING} open billing issues. Members with an unresolved billing dispute at renewal time lapse at a visibly higher rate in this dataset, so the open ones are worth triaging this week." }
+          {
+            "role": "User",
+            "text": "Which members look at risk of not renewing this cycle?"
+          },
+          {
+            "role": "AI",
+            "text": "Looking across renewal status, satisfaction and open support items: {N:PENDING_RENEWALS} memberships are pending renewal right now, and {N:LAPSED_2025} lapsed during 2025. The clearest individual risk signal is {HERO:ICF-000105} — declining survey scores across three conferences, reduced event participation, and an open billing dispute that also has an unanswered secure-message thread. I'd prioritize resolving the billing issue before the renewal conversation."
+          },
+          {
+            "role": "User",
+            "text": "What about billing issues generally — how many are open?"
+          },
+          {
+            "role": "AI",
+            "text": "There are {N:OPEN_BILLING} open billing issues. Members with an unresolved billing dispute at renewal time lapse at a visibly higher rate in this dataset, so the open ones are worth triaging this week."
+          }
         ]
       },
       {
@@ -121,8 +233,14 @@
         "name": "Segment mix check",
         "daysBeforeRelease": 13,
         "turns": [
-          { "role": "User", "text": "Give me a quick read on the membership base composition." },
-          { "role": "AI", "text": "The federation currently has {N:MEMBER_COUNT} member profiles. The largest segment is {N:TOP_SEGMENT} with {N:TOP_SEGMENT_COUNT} members. I saved the full segment-by-region breakdown as the reusable query \"Members by segment and region\" if you want the complete table." }
+          {
+            "role": "User",
+            "text": "Give me a quick read on the membership base composition."
+          },
+          {
+            "role": "AI",
+            "text": "The federation currently has {N:MEMBER_COUNT} member profiles. The largest segment is {N:TOP_SEGMENT} with {N:TOP_SEGMENT_COUNT} members. I saved the full segment-by-region breakdown as the reusable query \"Members by segment and region\" if you want the complete table."
+          }
         ]
       },
       {
@@ -131,15 +249,45 @@
         "name": "Conference attendance recap",
         "daysBeforeRelease": 20,
         "turns": [
-          { "role": "User", "text": "How did attendance look for the most recent annual conference?" },
-          { "role": "AI", "text": "The {N:CONF_YEAR} conference drew {N:CONF_REGS} registrations, of which {N:CONF_ATTENDED} attended — a {N:CONF_ATTEND_PCT}% attendance rate. No-shows are concentrated in first-time registrants, which matches the historical pattern in this dataset." }
+          {
+            "role": "User",
+            "text": "How did attendance look for the most recent annual conference?"
+          },
+          {
+            "role": "AI",
+            "text": "The {N:CONF_YEAR} conference drew {N:CONF_REGS} registrations, of which {N:CONF_ATTENDED} attended — a {N:CONF_ATTEND_PCT}% attendance rate. No-shows are concentrated in first-time registrants, which matches the historical pattern in this dataset."
+          }
         ]
       }
     ],
     "favorites": {
-      "owner": "membership-director",
-      "memberNumbers": ["ICF-000101", "ICF-000105", "ICF-000108", "ICF-000109"],
-      "$note": "the flagship personas the director keeps one click away"
+      "$note": "Per-staff, because a demo LOGS IN as a persona. Only the membership director had favourites, so signing in as the events coordinator or the ops analyst showed an empty Favourites tray in the first ten seconds.",
+      "byOwner": [
+        {
+          "owner": "membership-director",
+          "memberNumbers": [
+            "ICF-000101",
+            "ICF-000105",
+            "ICF-000108",
+            "ICF-000109"
+          ]
+        },
+        {
+          "owner": "events-coordinator",
+          "memberNumbers": [
+            "ICF-000107",
+            "ICF-000101",
+            "ICF-000116"
+          ]
+        },
+        {
+          "owner": "ops-analyst",
+          "memberNumbers": [
+            "ICF-000105",
+            "ICF-000103"
+          ]
+        }
+      ]
     },
     "lists": [
       {
@@ -150,13 +298,55 @@
         "description": "Members with a pending renewal being worked by the outreach queue.",
         "source": "renewal-outreach-tasks",
         "$note": "ListDetail rows = exactly the members the tasks pack's Renewal Outreach tasks target — derived, not invented"
+      },
+      {
+        "key": "conference-speakers",
+        "owner": "events-coordinator",
+        "entityName": "MoreCheese: Member Profiles",
+        "name": "Speaker shortlist — next conference",
+        "description": "Members invited or under consideration to speak at the coming annual conference.",
+        "source": "competition-medalists",
+        "$note": "derived: recent competition medalists, who are exactly who an events coordinator would shortlist"
+      },
+      {
+        "key": "at-risk-watch",
+        "owner": "ops-analyst",
+        "entityName": "MoreCheese: Member Profiles",
+        "name": "Retention watch list",
+        "description": "High-value members whose engagement has been sliding — the manual watch list behind the score.",
+        "source": "lapsed-high-value",
+        "$note": "derived: members who lapsed most recently, highest dues first"
       }
     ],
     "notifications": [
-      { "owner": "membership-director", "title": "Renewal outreach queue updated", "message": "New pending renewals were added to the outreach queue overnight.", "unread": true, "daysBeforeRelease": 1 },
-      { "owner": "membership-director", "title": "Weekly at-risk digest", "message": "Your weekly at-risk member digest is ready.", "unread": false, "daysBeforeRelease": 4 },
-      { "owner": "events-coordinator", "title": "Post-conference survey closing", "message": "The post-conference survey distribution closes at the end of the week.", "unread": true, "daysBeforeRelease": 2 },
-      { "owner": "ops-analyst", "title": "Data quality review scheduled", "message": "Quarterly duplicate/stale-record review is on the calendar for next Monday.", "unread": false, "daysBeforeRelease": 7 }
+      {
+        "owner": "membership-director",
+        "title": "Renewal outreach queue updated",
+        "message": "New pending renewals were added to the outreach queue overnight.",
+        "unread": true,
+        "daysBeforeRelease": 1
+      },
+      {
+        "owner": "membership-director",
+        "title": "Weekly at-risk digest",
+        "message": "Your weekly at-risk member digest is ready.",
+        "unread": false,
+        "daysBeforeRelease": 4
+      },
+      {
+        "owner": "events-coordinator",
+        "title": "Post-conference survey closing",
+        "message": "The post-conference survey distribution closes at the end of the week.",
+        "unread": true,
+        "daysBeforeRelease": 2
+      },
+      {
+        "owner": "ops-analyst",
+        "title": "Data quality review scheduled",
+        "message": "Quarterly duplicate/stale-record review is on the calendar for next Monday.",
+        "unread": false,
+        "daysBeforeRelease": 7
+      }
     ],
     "recordChanges": {
       "issueTransitions": true,

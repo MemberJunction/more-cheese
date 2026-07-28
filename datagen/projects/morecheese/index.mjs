@@ -84,7 +84,7 @@ export function buildWorld(cfg) {
   // rides its own stream key, so nothing above this line moves.
   for (const p of shippedPeople) Object.assign(p, identityFor(cfg.seed, p, cfg.release));
   for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear));
-  const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships });
+  const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
   const sonar = buildSonar(cfg);
