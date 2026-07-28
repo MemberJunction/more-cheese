@@ -189,12 +189,36 @@ function checkPacks() {
     const badOrder = orders.filter((o) => prospectKeys.has(o.MemberNumber)).length;
     check('prospects: the money chain never bills a non-member', badOrder === 0, `${badOrder} orders`);
   }
+  // THE FUNNEL: the point of holding non-members at all. These gates assert the conversion
+  // question is answerable — attended a free webinar, then joined — and that the prologue is
+  // genuinely a prologue (every pre-membership fact strictly precedes the join date).
+  {
+    const freeSet = new Set(events.filter((e) => !e.IsPaid).map((e) => e.EventKey));
+    const evDate = new Map(events.map((e) => [e.EventKey, e.Date]));
+    const priorRegs = regs.filter((x) => freeSet.has(x.EventKey) && evDate.get(x.EventKey) < joinOf.get(x.MemberNumber));
+    const converted = new Set(priorRegs.map((x) => x.MemberNumber));
+    check(`funnel: ${converted.size} members attended a free webinar before joining (${priorRegs.length} registrations)`,
+      converted.size > 0, 'without a prologue there is no conversion rate');
+    const late = priorRegs.filter((x) => x.RegisteredOn >= joinOf.get(x.MemberNumber)).length;
+    check('funnel: every pre-membership registration precedes the join date', late === 0, `${late} booked after joining`);
+    // the named application is the other half of the prologue
+    const namedApp = fResponses.filter((x) => x.FormKey === 'membership-application' && x.MemberNumber != null);
+    const badWhen = namedApp.filter((x) => x.SubmittedAt && x.SubmittedAt.slice(0, 10) >= joinOf.get(x.MemberNumber)).length;
+    check(`funnel: ${namedApp.length} members applied before their start date`, namedApp.length > 0 && badWhen === 0, `${badWhen} applied after joining`);
+    // and the denominator: non-members who came to a webinar and did NOT join
+    const nonConverting = new Set(prospectRegs.map((x) => x.MemberNumber));
+    const rate = nonConverting.size + converted.size ? converted.size / (nonConverting.size + converted.size) : 0;
+    check(`funnel: webinar-to-member conversion is ${(rate * 100).toFixed(0)}% (${converted.size} joined, ${nonConverting.size} did not)`,
+      rate > 0.03 && rate < 0.35, 'association benchmarks put webinar-to-member in the teens; a majority would mean the webinar list IS the member list');
+  }
   const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
   // member responses must resolve to people; anonymous ones must carry a session id instead
   const badResp = fResponses.filter((x) => x.MemberNumber != null ? !peopleKeys.has(x.MemberNumber) : !x.AnonymousSessionID).length;
   const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
   check('pack refs: forms→common (anon: session id) + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
-  const badRel = relationships.filter((x) => (x.FromMemberNumber && !peopleKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !peopleKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
+  // an employment edge belongs to any PERSON we know — members and non-members alike
+  const anyPersonKeys = new Set(allPeople.map((x) => x.MemberNumber));
+  const badRel = relationships.filter((x) => (x.FromMemberNumber && !anyPersonKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !anyPersonKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
   const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length
     + issues.filter((x) => x.AssigneeMemberNumber && !peopleKeys.has(x.AssigneeMemberNumber)).length;
   check('pack refs: relationships/tasks/issues→common', badRel + badTask === 0, `${badRel}+${badTask} dangling`);
@@ -269,7 +293,16 @@ function checkTemporal() {
     reasonCount >= 5 && (!totalReasons || nonPay / totalReasons < 0.75), 'voluntary churn must appear');
   check('CancellationDate ≥ EndDate (grace runs after)', cancelBeforeEnd === 0, `${cancelBeforeEnd} bad`);
   check('renewals back-date: no gaps between periods', gaps === 0, `${gaps} gaps`);
-  check('registrations covered by a membership period', regOutside === 0, `${regOutside} outside`);
+  // THE FUNNEL EXCEPTION: a free webinar attended BEFORE joining is the whole point of
+  // funnel.mjs — the prologue to a membership, not a coverage bug. Paid seats and anything
+  // after the join date stay strictly inside a period.
+  const freeKeys = new Set(events.filter((e) => !e.IsPaid).map((e) => e.EventKey));
+  const preJoin = regs.filter((x) => {
+    const evDate = eventDate.get(x.EventKey);
+    return freeKeys.has(x.EventKey) && evDate < joinOf.get(x.MemberNumber);
+  }).length;
+  check('registrations covered by a membership period (free pre-join webinars exempt)', regOutside - preJoin === 0,
+    `${regOutside} outside, ${preJoin} of them pre-membership webinars`);
 }
 
 // ---------- benchmark means + variance floors (§7.1–7.2) ----------
@@ -733,11 +766,16 @@ function checkComposedApps() {
   if (npsC.length >= 20) check(`regime: covid NPS dip expressed (${mean(npsC).toFixed(2)} < ${mean(npsN).toFixed(2)})`, mean(npsC) < mean(npsN), `${npsC.length} covid-year answers`);
   // membership application: the ANONYMOUS intake funnel (bizapps-forms' flagship feature)
   const appResp = fResponses.filter((x) => x.FormKey === 'membership-application');
-  const badAnonShape = appResp.filter((x) => x.MemberNumber != null || !x.AnonymousSessionID).length;
-  check(`forms: membership-application responses are anonymous (null member + session id)`, appResp.length > 0 && badAnonShape === 0, `${appResp.length} responses, ${badAnonShape} malformed`);
+  // two legitimate shapes now: anonymous public intake (session id, no member) and the named
+  // application a member filled in on their way IN (member, no session id). Never both/neither.
+  const anonApps = appResp.filter((x) => x.MemberNumber == null);
+  const namedApps = appResp.filter((x) => x.MemberNumber != null);
+  const badAnonShape = anonApps.filter((x) => !x.AnonymousSessionID).length + namedApps.filter((x) => x.AnonymousSessionID).length;
+  check(`forms: applications are anonymous intake (${anonApps.length}) or named on the way in (${namedApps.length})`,
+    anonApps.length > 0 && badAnonShape === 0, `${badAnonShape} malformed`);
   const appYears = FF.application.distribution.sinceYearsBeforeRelease;
   const [appLo, appHi] = [appYears * FF.application.volume.perYearMin, appYears * FF.application.volume.perYearMax];
-  check(`forms: application volume ${appResp.length} within [${appLo}, ${appHi}] (release-year partial ok)`, appResp.length >= appLo * 0.5 && appResp.length <= appHi, `${appYears}y window`);
+  check(`forms: anonymous application volume ${anonApps.length} within [${appLo}, ${appHi}] (release-year partial ok)`, anonApps.length >= appLo * 0.5 && anonApps.length <= appHi, `${appYears}y window`);
   const fDistributions = load('forms', 'form_distributions');
   const badCount = fDistributions.filter((d) => d.ResponseCount !== fResponses.filter((x) => x.DistributionKey === d.DistributionKey).length).length;
   check('forms: distribution ResponseCount matches actual response rows', badCount === 0, `${fDistributions.length} distributions`);
@@ -983,7 +1021,9 @@ function checkComposedApps() {
   // Ended is legitimate for a dissolved employer OR a labeled stale-employer job switch (the emp-true: edge)
   const switched = new Set(relationships.filter((r2) => r2.RelKey.startsWith('emp-true:')).map((r2) => r2.FromMemberNumber));
   const endedOk = empRels.every((r2) => (r2.Status === 'Ended') === (orgByKeyG(r2.ToOrgKey)?.LifecycleEvent?.kind === 'Dissolved' || switched.has(r2.FromMemberNumber)));
-  check(`relationships: employment edges ${empRels.length} = employed members ${employed}, dissolution-consistent`, empRels.length === employed && endedOk, `${relationships.length} total relationships`);
+  const employedProspects = prospects.filter((x) => x.OrgKey).length;
+  check(`relationships: employment edges ${empRels.length} = ${employed} employed members + ${employedProspects} employed non-members, dissolution-consistent`,
+    empRels.length === employed + employedProspects && endedOk, `${relationships.length} total relationships`);
   // motions: stored tallies match the vote rows; votes consistent with attendance (Absent ⇔ not Present)
   let tallyBad = 0;
   const votesByMotion = new Map();

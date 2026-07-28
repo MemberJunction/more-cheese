@@ -16,16 +16,19 @@
 // paid non-member event pricing (needs the money chain to price a non-member seat).
 
 import { rng } from '../../engine/rng.mjs';
-import { CITIES, personNameFor } from './banks.mjs';
+import { CITIES, personNameFor, titleFor, SEGMENTS } from './banks.mjs';
 import { emailFor } from './world.mjs';
 import { iso, addDays } from '../../engine/dates.mjs';
 
-export function buildProspects(cfg, orgs, events) {
+export function buildProspects(cfg, orgs, events, memberCount) {
   const { R, seed, release } = cfg;
   const P = R.prospects;
   const prospects = [];
   const registrations = [];
-  const n = Math.round(cfg.n * P.ratioToMembers);
+  // sized against the roster we ACTUALLY ship, not the requested n: the declining-org
+  // scenario archives members away, and a count pinned to cfg.n made non-members a bigger
+  // share of a smaller association — the ratio has to hold in every world
+  const n = Math.round(memberCount * P.ratioToMembers);
 
   for (let i = 0; i < n; i++) {
     const key = `NM-${String(200001 + i)}`;
@@ -42,7 +45,10 @@ export function buildProspects(cfg, orgs, events) {
       MemberNumber: key, // the PERSON business key — prospects have no member number of their own
       IsProspect: true,
       FirstName: nm.first, LastName: nm.last, MiddleName: nm.middle, PreferredName: nm.preferred,
-      Email: emailFor(nm.first, nm.last, key, org?.Name), Title: null,
+      Email: emailFor(nm.first, nm.last, key, org?.Name),
+      // a non-member has a job like anyone else — a blank title column that lines up
+      // exactly with 'not a member' is an artefact, not a fact about the world
+      Title: titleFor(seed, `prospect-title:${key}`, r.pickWeighted(SEGMENTS)),
       Region: region, Country: country, CountryName: countryName, City: city, State: state,
       Latitude: lat, Longitude: lon, OrgKey: org?.OrgKey ?? null,
       JoinDate: iso(firstSeen), // NOT a membership date — the identity pass reads it for completeness only
