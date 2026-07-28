@@ -278,6 +278,18 @@ function checkBenchmarks() {
     // and heroes are facts that deliberately do not respond to regimes. At pilot scale his
     // eight swamp the crowd's dip entirely, which is what made this gate false-red.
     const heroNums = new Set(R.heroes.map((h) => h.memberNumber));
+    // RETENTION: the pandemic's effect on churn must be findable in the shipped data, not
+    // only in the validator's private event log. The archive rule used to swallow the whole
+    // 2020-21 lapse cohort, so this is the trace that was missing entirely.
+    const lapsesIn = (y) => periods.filter((x) => x.Status === 'Lapsed' && x.EndDate.startsWith(String(y))).length;
+    const cohortFloor = Math.max(3, Math.round(people.length * 0.008));
+    check(`covid: the lapse cohort survives archiving (${cy.map(lapsesIn).join('/')} retained, floor ${cohortFloor})`, cy.every((y) => lapsesIn(y) >= cohortFloor), 'the era must be visible in membership history');
+    const pandemicLapses = periods.filter((x) => x.CancellationReason === CV.churnReason).length;
+    const eraLapses = cy.reduce((n, y) => n + lapsesIn(y), 0);
+    check(`covid: ${pandemicLapses} lapses attributed to the pandemic (${Math.round(pandemicLapses / Math.max(1, eraLapses) * 100)}% of era churn)`,
+      pandemicLapses > 0 && pandemicLapses < eraLapses, 'an era-specific reason, not a relabel of everything');
+    const outside = periods.filter((x) => x.CancellationReason === CV.churnReason && !cy.includes(+x.EndDate.slice(0, 4))).length;
+    check('covid: the pandemic reason appears ONLY in the pandemic years', outside === 0, `${outside} outside the era`);
     const compIn = (y) => compEntries.filter((e) => e.EntryYear === y && !heroNums.has(e.MemberNumber)).length;
     if (compIn(pre) >= 6) check(`covid: competition curtailed, crowd entries (${compIn(pre)} before vs ${cy.map(compIn).join('/')})`, cy.every((y) => compIn(y) < compIn(pre)), 'judging is a physical activity');
   }
@@ -992,10 +1004,21 @@ function checkStatusMix() {
   // distribution gate must not count them (they'd bias the mix by construction)
   const pinnedLapse = new Set(JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8')).registry
     .filter((x) => x.LapseYear != null).map((x) => x.MemberNumber));
+  // Same reasoning, generalised: ANY member kept past the archive rule is there because we
+  // wanted the story, not because they represent current composition. A lapsed member whose
+  // cancellation predates the 3-year cutoff is by definition one the rule would have removed
+  // — heroes, stamped motifs, and the retained COVID cohort. This gate measures the
+  // archive-ELIGIBLE population, so the era stays visible in the data without the pandemic
+  // rewriting the federation's headline composition.
+  const archiveCutoff = iso2(addDays2(new Date(run.releaseDate), -3 * 365 - 1));
+  const keptPastArchive = new Set(periods
+    .filter((x) => x.Status === 'Lapsed' && x.CancellationDate && x.CancellationDate < archiveCutoff)
+    .map((x) => x.MemberNumber));
+  const excluded = (m) => pinnedLapse.has(m) || keptPastArchive.has(m);
   const counts = { Active: 0, Lapsed: 0, Cancelled: 0, PendingRenewal: 0 };
-  for (const [m, s] of lastStatus) { if (!pinnedLapse.has(m)) counts[s] = (counts[s] ?? 0) + 1; }
+  for (const [m, s] of lastStatus) { if (!excluded(m)) counts[s] = (counts[s] ?? 0) + 1; }
   // injected contact-duplicates (ICF-D*) are records, not members — they carry no periods
-  const total = people.filter((p) => !p.MemberNumber.startsWith('ICF-D') && !pinnedLapse.has(p.MemberNumber)).length;
+  const total = people.filter((p) => !p.MemberNumber.startsWith('ICF-D') && !excluded(p.MemberNumber)).length;
   const active = (counts.Active + counts.PendingRenewal) / total;
   const [tA] = R.statusMix.target;
   check(`status mix: active-ish ${(active * 100).toFixed(0)}% vs ~${(tA + 0.02) * 100}% ±${R.statusMix.tolerance * 100}`, Math.abs(active - (tA + 0.02)) <= R.statusMix.tolerance, JSON.stringify(counts));

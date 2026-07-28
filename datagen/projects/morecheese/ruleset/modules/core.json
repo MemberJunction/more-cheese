@@ -53,7 +53,9 @@
       "churnReason": "operations disrupted — reduced trading during the pandemic",
       "churnReasonWeight": 0.35,
       "$churnNote": "a distinct, era-specific lapse reason so the churn breakdown shows WHY 2020-21 differs, rather than just showing more of the usual.",
-      "$archiveCaveat": "IMPORTANT and non-obvious: the renewal dip and the era-specific churn reason are REAL in generation but almost invisible in the shipped data, because the 3-year archive rule removes members who lapsed that long before release — the whole 2020-21 churn cohort is archived away (4 surviving lapses across 2018-2022, all motif members exempted from archiving). The renewal shift is still verified, but through renewalEvents in the validator rather than through membership_periods. COVID's DURABLE traces in shipped data are the ones below: the channel flip in event attendance, the online learning spike, the NPS dip, worse payment lateness, virtual committee meetings, the advocacy surge, the curtailed competition, and the notch in the join-year curve."
+      "$archiveCaveat": "The 3-year archive rule was swallowing the ENTIRE 2020-21 lapse cohort, so the pandemic's effect on retention — the most consequential thing it did to this federation — left no trace in shipped data at all; the renewal dip existed only in the validator's private event log. COVID-era lapses are now retained at retainLapsedShare, the same 'pointable stories must survive' exemption heroes and stamped motif members already get. Not all of them are kept, or the era would look artificially over-represented against every other year in the history.",
+      "retainLapsedShare": 0.45,
+      "$retainNote": "Tuned against statusMix: every retained lapse adds a non-active member to the roster, so retaining the whole cohort pushed active-ish below its documented ~80% target. 0.45 keeps the era clearly visible (roughly 30-40 pandemic-attributed lapses at canonical scale, the leading reason in those years) without reshaping the world's headline composition."
     }
   },
   "texture": {
