@@ -1194,14 +1194,21 @@ export const morecheeseordersProductSchema = z.object({
         * * Display Name: Name
         * * SQL Data Type: nvarchar(200)
         * * Description: Product display name`),
-    ProductType: z.union([z.literal('Event'), z.literal('Membership')]).describe(`
+    ProductType: z.union([z.literal('Certification'), z.literal('Competition'), z.literal('Donation'), z.literal('Event'), z.literal('JobPosting'), z.literal('Membership'), z.literal('Merchandise'), z.literal('Publication'), z.literal('Sponsorship')]).describe(`
         * * Field Name: ProductType
         * * Display Name: Product Type
         * * SQL Data Type: nvarchar(50)
     * * Value List Type: List
     * * Possible Values 
+    *   * Certification
+    *   * Competition
+    *   * Donation
     *   * Event
+    *   * JobPosting
     *   * Membership
+    *   * Merchandise
+    *   * Publication
+    *   * Sponsorship
         * * Description: Membership (annual dues per tier) or Event (registration)`),
     UnitPrice: z.number().describe(`
         * * Field Name: UnitPrice
@@ -4256,14 +4263,21 @@ export class morecheeseordersProductEntity extends BaseEntity<morecheeseordersPr
     * * SQL Data Type: nvarchar(50)
     * * Value List Type: List
     * * Possible Values 
+    *   * Certification
+    *   * Competition
+    *   * Donation
     *   * Event
+    *   * JobPosting
     *   * Membership
+    *   * Merchandise
+    *   * Publication
+    *   * Sponsorship
     * * Description: Membership (annual dues per tier) or Event (registration)
     */
-    get ProductType(): 'Event' | 'Membership' {
+    get ProductType(): 'Certification' | 'Competition' | 'Donation' | 'Event' | 'JobPosting' | 'Membership' | 'Merchandise' | 'Publication' | 'Sponsorship' {
         return this.Get('ProductType');
     }
-    set ProductType(value: 'Event' | 'Membership') {
+    set ProductType(value: 'Certification' | 'Competition' | 'Donation' | 'Event' | 'JobPosting' | 'Membership' | 'Merchandise' | 'Publication' | 'Sponsorship') {
         this.Set('ProductType', value);
     }
 
