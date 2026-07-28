@@ -69,9 +69,8 @@ export function buildWorld(cfg) {
   // above, including the employment edges the defects module just rewrote
   const platform = buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships });
 
-  // sonar rides the same facts: engagement scores recomputed from the packs above at
-  // quarterly snapshots — the scoring product's residue, honest by construction
-  const sonar = buildSonar(cfg, { people, events, registrations, learning, programs, money, committees, forms });
+  // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
+  const sonar = buildSonar(cfg);
 
   return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
 }
@@ -92,6 +91,7 @@ export function buildPacks(world) {
     issues: { dependsOn: ['common', 'events', 'orders'], tables: { issue_types: issues.issueTypes, issue_statuses: issues.issueStatuses, issues: issues.issues, issue_sequences: issues.issueSequences } },
     messaging: { dependsOn: ['common', 'issues'], tables: { portal_sessions: messaging.sessions, secure_threads: messaging.threads, secure_messages: messaging.messages } },
     platform: { dependsOn: ['common', 'membership', 'events', 'tasks', 'issues'], tables: { mj_users: platform.users, mj_user_roles: platform.userRoles, user_views: platform.views, queries: platform.queries, conversations: platform.conversations, conversation_details: platform.conversationDetails, user_favorites: platform.favorites, lists: platform.lists, list_details: platform.listDetails, user_notifications: platform.notifications, record_changes: platform.recordChanges } },
-    sonar: { dependsOn: ['common', 'events', 'learning', 'orders', 'committees', 'forms', 'platform'], tables: { score_band_sets: [sonar.bandSet], score_bands: sonar.bands, time_windows: sonar.timeWindows, score_models: [sonar.model], score_model_versions: [sonar.version], model_related_entities: sonar.relatedEntities, factors: sonar.factors, model_factors: sonar.modelFactors, recompute_runs: sonar.runs, scores: sonar.scores, score_contributions: sonar.contributions, score_history: sonar.history, band_transitions: sonar.transitions, audit_events: sonar.auditEvents } },
+    // DEFINITIONS ONLY — Sonar's engine computes scores/contributions/history/transitions live
+    sonar: { dependsOn: ['common', 'events', 'learning', 'committees', 'forms', 'platform'], tables: { score_band_sets: [sonar.bandSet], score_bands: sonar.bands, time_windows: sonar.timeWindows, score_models: [sonar.model], score_model_versions: [sonar.version], model_related_entities: sonar.relatedEntities, factors: sonar.factors, model_factors: sonar.modelFactors } },
   };
 }
