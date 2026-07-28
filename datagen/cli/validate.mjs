@@ -19,6 +19,7 @@ import { logisticFit } from '../engine/stats.mjs';
 import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../engine/dates.mjs';
 import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
+import { CITIES } from '../projects/morecheese/banks.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -635,6 +636,40 @@ function checkComposedApps() {
   check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
   check(`issues: no single title template dominates (${(titleShare * 100).toFixed(0)}% max)`, titleShare < 0.45, 'title variety');
   check('issues: descriptions present (the created date lives in the narrative)', issues.every((x) => x.Description && x.Description.length > 40), `${issues.filter((x) => x.Description).length}/${issues.length}`);
+  // ---------- geography + name coherence ----------
+  {
+    const crowdP = people.filter((p) => !p._dup);
+    const countries = new Set(crowdP.map((p) => p.Country).filter(Boolean));
+    const cities = new Set(crowdP.map((p) => p.City));
+    check(`geography: ${countries.size} countries, ${cities.size} cities represented`, countries.size >= 12 && cities.size >= 25, 'an international federation needs an international roster');
+    // the subdivision code must name its own country, so no group-by can merge California
+    // with Canada (both were plain 'CA' before)
+    const badSub = crowdP.filter((p) => p.Country && p.State && !String(p.State).startsWith(`${p.Country}-`)).length;
+    check('geography: subdivision codes are country-prefixed (no CA/California vs CA/Canada clash)', badSub === 0, `${badSub} ambiguous`);
+    const euCountries = new Set(crowdP.filter((p) => p.Region === 'EU').map((p) => p.Country));
+    check(`geography: Europe spans ${euCountries.size} countries`, euCountries.size >= 8, 'not just France/Denmark/Netherlands/Switzerland/UK');
+    // NAMES match their country. Surnames are globally unambiguous per origin bucket, so
+    // the expected origin is recoverable and checkable.
+    const peopleBank = JSON.parse(readFileSync(join(ROOT, 'projects', 'morecheese', 'banks', 'people.json'), 'utf8'));
+    const originOfSurname = new Map();
+    for (const [b, v] of Object.entries(peopleBank.buckets)) for (const l of v.last) originOfSurname.set(l, b);
+    const cityOrigin = new Map();
+    for (const list of Object.values(CITIES)) for (const c of list) cityOrigin.set(c[0], c[7]);
+    const misfits = [];
+    for (const [origin, w] of Object.entries(peopleBank.countryWeights ?? {})) {
+      const grp = crowdP.filter((p) => cityOrigin.get(p.City) === origin);
+      if (grp.length < 30) continue;
+      const dominant = Object.entries(w).sort((a, b) => b[1] - a[1])[0][0];
+      const got = grp.filter((p) => originOfSurname.get(String(p.LastName).split('-')[0]) === dominant).length / grp.length;
+      if (got < w[dominant] * 0.55) misfits.push(`${origin}: ${dominant} ${(got * 100).toFixed(0)}% vs declared ${(w[dominant] * 100).toFixed(0)}%`);
+    }
+    check('names: match the country they live in', misfits.length === 0, misfits.slice(0, 2).join('; ') || 'per-country weights express');
+    // emails: accents transliterated, not deleted; domains cut on a word boundary
+    const stripped = crowdP.filter((p) => /[^ -]/.test(`${p.FirstName}${p.LastName}`))
+      .filter((p) => { const local = p.Email.split('@')[0]; return !/[a-z]/.test(local.replace(/[.\d]/g, '')) || /(?:strm|grber|rmille)/.test(local); }).length;
+    check('emails: accented names transliterated (not silently deleted)', stripped === 0, `${stripped} mangled`);
+  }
+
   // ---------- contact + voluntary self-ID demographics ----------
   // Blank rates are calibrated to associations that publish theirs (ASHA 2024/25, AIA 2024,
   // APA). The load-bearing gate is the LAST one: values must not predict outcomes.

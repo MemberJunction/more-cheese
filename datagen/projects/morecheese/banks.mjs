@@ -56,6 +56,9 @@ export function titleFor(seed, key, segment) {
 
 /** Frequency-weighted pick: earlier entries are more common (Zipf-ish) — uniform sampling
  * over-represents rare names and reads fake (name-bank research §2). */
+// English initial frequencies, roughly — a uniform A-Z draw put X/Q/Z on par with J/M
+const INITIALS = 'AAAABBBCCCDDDEEEFFGGHHHIIJJKKLLLMMMMNNOOPPRRRSSSSTTTTVWWY'.split('');
+
 function namePick(r, arr) {
   return r.pickWeighted(arr.map((v, i) => [v, arr.length - i]));
 }
@@ -64,10 +67,14 @@ function namePick(r, arr) {
  * v2 robustness: Zipf-weighted picks, controlled mixed-heritage surnames (first from one
  * origin + surname from another — common in NA/RoW), hyphenated surnames, middle initials,
  * and nicknames as PreferredName. */
-export function personNameFor(seed, key, region) {
+export function personNameFor(seed, key, region, origin = null) {
   const r = rng(seed, `personname:${key}`);
   const S = PEOPLE_BANK.structure;
-  const weights = PEOPLE_BANK.regionWeights[region] ?? PEOPLE_BANK.regionWeights.NA;
+  // per-COUNTRY weights when the city supplies an origin; the three super-region vectors
+  // remain the fallback. Keying names to NA/EU/RoW made every European city statistically
+  // identical — Poligny read 29% Nordic against 27% French.
+  const weights = (origin && PEOPLE_BANK.countryWeights?.[origin])
+    ?? PEOPLE_BANK.regionWeights[region] ?? PEOPLE_BANK.regionWeights.NA;
   const bucket = PEOPLE_BANK.buckets[r.pickWeighted(Object.entries(weights))];
   const first = namePick(r, bucket.first);
   let last;
@@ -81,7 +88,13 @@ export function personNameFor(seed, key, region) {
     const second = namePick(r, bucket.last);
     if (second !== last) last = `${last}-${second}`;
   }
-  const middle = r.bernoulli(S.middleInitialShare) ? String.fromCharCode(65 + r.int(0, 25)) + '.' : null;
+  // Hispanic and Iberian naming carries a MATERNAL SURNAME, not an initial. Elsewhere the
+  // middle is an initial — but drawn from a realistic letter frequency, since a uniform
+  // A-Z made X, Q and Z as common as J and M.
+  const maternalOrigins = ['mexico', 'spain', 'portugal', 'argentina'];
+  const middle = maternalOrigins.includes(origin) && r.bernoulli(0.7)
+    ? namePick(r, bucket.last)
+    : r.bernoulli(S.middleInitialShare) ? INITIALS[r.int(0, INITIALS.length - 1)] + '.' : null;
   const nick = PEOPLE_BANK.nicknames[first];
   const preferred = nick && r.bernoulli(S.preferredNameShare) ? nick : null;
   return { first, last, middle, preferred };
@@ -96,9 +109,75 @@ export const CHEESE_WORDS = ['Alpine','Meadow','Cave','Wheel','Rind','Curd','Bro
 // coordinates, no live geocoding). Real cities are correct here — LOCATIONS should be real;
 // it's business NAMES that must be invented.
 export const CITIES = {
-  NA: [['Madison','WI',43.0731,-89.4012,3],['Green Bay','WI',44.5133,-88.0133,2],['Petaluma','CA',38.2324,-122.6367,3],['Sonoma','CA',38.2919,-122.458,2],['Burlington','VT',44.4759,-73.2121,2],['Brattleboro','VT',42.8509,-72.5579,1],['Portland','OR',45.5152,-122.6784,2],['Seattle','WA',47.6062,-122.3321,2],['Brooklyn','NY',40.6782,-73.9442,2],['Ithaca','NY',42.4440,-76.5019,1],['Chicago','IL',41.8781,-87.6298,1],['Denver','CO',39.7392,-104.9903,1],['Austin','TX',30.2672,-97.7431,1],['Asheville','NC',35.5951,-82.5515,1]],
-  EU: [['Poligny','FR',46.8367,5.7075,2],['Aarhus','DK',56.1629,10.2039,1],['Amsterdam','NL',52.3676,4.9041,1],['Bern','CH',46.9480,7.4474,1],['Somerset','UK',51.0577,-2.7183,1]],
-  RoW: [['Hobart','AU',-42.8821,147.3272,1],['Auckland','NZ',-36.8509,174.7645,1],['Guelph','CA-ON',43.5448,-80.2482,1],['Oaxaca','MX',17.0732,-96.7266,1]],
+  // [city, subdivision (ISO 3166-2 style), lat, lon, weight, countryISO2, countryName, nameOrigin]
+  // Subdivisions are prefixed with the country ('US-CA', 'FR-39') so the field is
+  // UNAMBIGUOUS — it previously held 'CA' for California AND 'CA-ON' for Canada, so any
+  // group-by silently merged them. Country is now explicit rather than inferred.
+  // `nameOrigin` keys the per-country name weights (banks/people.json regionWeights):
+  // a member in Poligny should read French, not the old flat EU average.
+  NA: [
+    ['Madison','US-WI',43.0731,-89.4012,3,'US','United States','usa'],
+    ['Green Bay','US-WI',44.5133,-88.0133,2,'US','United States','usa'],
+    ['Petaluma','US-CA',38.2324,-122.6367,3,'US','United States','usa'],
+    ['Sonoma','US-CA',38.2919,-122.458,2,'US','United States','usa'],
+    ['Point Reyes Station','US-CA',38.0682,-122.8064,1,'US','United States','usa'],
+    ['Burlington','US-VT',44.4759,-73.2121,2,'US','United States','usa'],
+    ['Brattleboro','US-VT',42.8509,-72.5579,1,'US','United States','usa'],
+    ['Greensboro','US-VT',44.5906,-72.2929,1,'US','United States','usa'],
+    ['Portland','US-OR',45.5152,-122.6784,2,'US','United States','usa'],
+    ['Seattle','US-WA',47.6062,-122.3321,2,'US','United States','usa'],
+    ['Brooklyn','US-NY',40.6782,-73.9442,2,'US','United States','usa'],
+    ['Ithaca','US-NY',42.4440,-76.5019,1,'US','United States','usa'],
+    ['Chicago','US-IL',41.8781,-87.6298,1,'US','United States','usa'],
+    ['Denver','US-CO',39.7392,-104.9903,1,'US','United States','usa'],
+    ['Austin','US-TX',30.2672,-97.7431,1,'US','United States','usa'],
+    ['Asheville','US-NC',35.5951,-82.5515,1,'US','United States','usa'],
+    ['Boise','US-ID',43.6150,-116.2023,1,'US','United States','usa'],
+    ['Lancaster','US-PA',40.0379,-76.3055,1,'US','United States','usa'],
+    ['Guelph','CA-ON',43.5448,-80.2482,1,'CA','Canada','canada'],
+    ['Saint-Hyacinthe','CA-QC',45.6300,-72.9570,1,'CA','Canada','quebec'],
+    ['Courtenay','CA-BC',49.6877,-124.9936,1,'CA','Canada','canada'],
+    ['Oaxaca','MX-OAX',17.0732,-96.7266,1,'MX','Mexico','mexico'],
+    ['Querétaro','MX-QUE',20.5888,-100.3899,1,'MX','Mexico','mexico'],
+  ],
+  EU: [
+    ['Poligny','FR-39',46.8367,5.7075,2,'FR','France','france'],
+    ['Rodez','FR-12',44.3506,2.5730,1,'FR','France','france'],
+    ['Annecy','FR-74',45.8992,6.1294,1,'FR','France','france'],
+    ['Saint-Lô','FR-50',49.1157,-1.0910,1,'FR','France','france'],
+    ['Parma','IT-PR',44.8015,10.3279,2,'IT','Italy','italy'],
+    ['Reggio Emilia','IT-RE',44.6983,10.6310,1,'IT','Italy','italy'],
+    ['Bra','IT-CN',44.6980,7.8580,1,'IT','Italy','italy'],
+    ['Sassari','IT-SS',40.7259,8.5557,1,'IT','Italy','italy'],
+    ['Gouda','NL-ZH',52.0115,4.7104,1,'NL','Netherlands','netherlands'],
+    ['Alkmaar','NL-NH',52.6324,4.7534,1,'NL','Netherlands','netherlands'],
+    ['Aarhus','DK-82',56.1629,10.2039,1,'DK','Denmark','denmark'],
+    ['Nykøbing Mors','DK-81',56.7940,8.8570,1,'DK','Denmark','denmark'],
+    ['Bern','CH-BE',46.9480,7.4474,1,'CH','Switzerland','switzerland'],
+    ['Gruyères','CH-FR',46.5836,7.0822,1,'CH','Switzerland','switzerland'],
+    ['Emmental','CH-BE',47.0500,7.7500,1,'CH','Switzerland','switzerland'],
+    ['Somerset','GB-SOM',51.0577,-2.7183,1,'GB','United Kingdom','uk'],
+    ['Ludlow','GB-SHR',52.3680,-2.7180,1,'GB','United Kingdom','uk'],
+    ['Ayrshire','GB-SAY',55.4586,-4.6292,1,'GB','United Kingdom','uk'],
+    ['Allgäu','DE-BY',47.5800,10.2200,2,'DE','Germany','germany'],
+    ['Münster','DE-NW',51.9607,7.6261,1,'DE','Germany','germany'],
+    ['Bregenz','AT-8',47.5031,9.7471,1,'AT','Austria','austria'],
+    ['Idiazabal','ES-PV',43.0500,-2.2500,1,'ES','Spain','spain'],
+    ['Cabrales','ES-AS',43.3000,-4.8500,1,'ES','Spain','spain'],
+    ['Serpa','PT-07',37.9430,-7.5960,1,'PT','Portugal','portugal'],
+    ['Kilkenny','IE-KK',52.6541,-7.2448,1,'IE','Ireland','ireland'],
+    ['Cork','IE-CO',51.8985,-8.4756,1,'IE','Ireland','ireland'],
+    ['Trikala','GR-E4',39.5556,21.7679,1,'GR','Greece','greece'],
+    ['Kraków','PL-MA',50.0647,19.9450,1,'PL','Poland','poland'],
+  ],
+  RoW: [
+    ['Hobart','AU-TAS',-42.8821,147.3272,1,'AU','Australia','australia'],
+    ['Bega','AU-NSW',-36.6741,149.8409,1,'AU','Australia','australia'],
+    ['Auckland','NZ-AUK',-36.8509,174.7645,1,'NZ','New Zealand','newzealand'],
+    ['Oamaru','NZ-OTA',-45.0975,170.9714,1,'NZ','New Zealand','newzealand'],
+    ['Tandil','AR-B',-37.3217,-59.1332,1,'AR','Argentina','argentina'],
+    ['Hokkaido','JP-01',43.0642,141.3469,1,'JP','Japan','japan'],
+  ],
 };
 
 export const SEGMENTS = [['Producer',0.38],['Retailer',0.27],['Supplier',0.12],['Educator',0.08],['Enthusiast',0.15]];

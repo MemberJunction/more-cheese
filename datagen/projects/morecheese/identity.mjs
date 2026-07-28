@@ -19,6 +19,7 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
+import { orgDomainFor } from './world.mjs';
 
 /** national phone shapes — keyed off the (overloaded) State field until Country exists */
 const PHONE = {
@@ -85,13 +86,14 @@ export function identityFor(seed, p, release) {
 /** Organization contact/profile fields — all pre-existing upstream columns. */
 export function orgIdentityFor(seed, o, releaseYear) {
   const r = rng(seed, `orgmeta:${o.OrgKey}`);
-  const slug = o.Name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 24);
   const suffixByCountry = { FR: 'SARL', DK: 'ApS', NL: 'B.V.', CH: 'AG', UK: 'Ltd', MX: 'S.A. de C.V.', AU: 'Pty Ltd', NZ: 'Ltd' };
   const legalSuffix = suffixByCountry[o.State] ?? (o.Type === 'Producer' ? 'LLC' : 'Inc.');
   const founded = releaseYear - r.int(3, 80);
   return {
     LegalName: `${o.Name} ${legalSuffix}`,
-    Website: r.bernoulli(0.72) ? `https://www.${slug}.example` : null,
+    // same slug as the work-email domain, so a member's address and their employer's
+    // website agree instead of disagreeing on the truncation
+    Website: r.bernoulli(0.72) ? `https://www.${orgDomainFor(o.Name)}` : null,
     Phone: r.bernoulli(0.66) ? (PHONE[o.State] ?? usPhone)(r) : null,
     FoundedDate: `${founded}-${String(r.int(1, 12)).padStart(2, '0')}-${String(r.int(1, 28)).padStart(2, '0')}`,
   };

@@ -11,7 +11,7 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays } from '../../engine/dates.mjs';
-import { consumerDomainFor } from './world.mjs';
+import { consumerDomainFor, deaccent } from './world.mjs';
 
 const EMPLOYEE_TYPE_ID = '27CFD031-5663-4000-A7AB-8AC87DB88C1D'; // bizapps-common's seeded Employee type
 
@@ -37,7 +37,9 @@ export function buildDefects(cfg, people, orgs, relationships) {
       MiddleName: null, PreferredName: null, Title: p.Title,
       // dup carries a DIFFERENT-shaped address on a personal provider — vs the canonical's
       // (often work-domain) email, exactly how portal dupes evade naive email matching
-      Email: `${(first[0] + p.LastName).toLowerCase().replace(/[^a-z0-9]/g, '')}.${p.MemberNumber.replace(/\D/g, '')}@${consumerDomainFor(dupNumber)}`,
+      // transliterate like emailFor does — building this by hand used to DELETE accents
+      // (Grüber -> grber), which is a different defect from the one we intend to seed
+      Email: `${deaccent(first[0] + p.LastName).toLowerCase().replace(/[^a-z0-9]/g, '')}.${p.MemberNumber.replace(/\D/g, '')}@${consumerDomainFor(dupNumber)}`,
       Segment: p.Segment, Region: p.Region, City: p.City, State: p.State, Latitude: p.Latitude, Longitude: p.Longitude,
       OrgKey: null, JoinDate: iso(addDays(release, -rDup.int(30, 700))), IsSharedDemo: true, _dup: true,
     });
