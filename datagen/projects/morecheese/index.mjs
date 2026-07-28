@@ -14,6 +14,7 @@ import { buildLearning } from './learning.mjs';
 import { buildCommittees } from './committees.mjs';
 import { buildForms } from './forms.mjs';
 import { buildRelationships } from './relationships.mjs';
+import { buildContacts } from './contacts.mjs';
 import { buildTasks } from './tasks.mjs';
 import { buildIssues } from './issues.mjs';
 import { buildPrograms } from './programs.mjs';
@@ -84,20 +85,24 @@ export function buildWorld(cfg) {
   // rides its own stream key, so nothing above this line moves.
   for (const p of shippedPeople) Object.assign(p, identityFor(cfg.seed, p, cfg.release));
   for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear));
+  // …and then the same facts as FIRST-CLASS bizapps-common rows (that app owns the domain
+  // and its UI reads these tables, not our MemberProfile columns). Must run after the
+  // identity pass — it projects the addresses that pass just wrote.
+  const contacts = buildContacts(cfg, shippedPeople, orgs);
   const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
   const sonar = buildSonar(cfg);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, contacts, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, platform, sonar } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, contacts, tasks, issues, programs, messaging, defects, platform, sonar } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
-    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
+    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships, addresses: contacts.addresses, address_links: contacts.addressLinks, contact_methods: contacts.contactMethods } },
     membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
     events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta', '_future']), competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },

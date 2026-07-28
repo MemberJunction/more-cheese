@@ -20,6 +20,7 @@ export const sqlVar = (v) => v; // raw expression (e.g. a DECLAREd @Entity varia
 export const MJ_ENTITY_VAR = {
   'MJ_BizApps_Common: People': '@E_People',
   'MJ_BizApps_Common: Relationships': '@E_Relationships',
+  'MJ_BizApps_Common: Organizations': '@E_Organizations',
   'MJ_BizApps_Issues: Issues': '@E_Issues',
   'MJ_BizApps_Tasks: Tasks': '@E_Tasks',
   'MoreCheese: Member Profiles': '@E_MemberProfiles',
@@ -33,7 +34,15 @@ export const MJ_ENTITY_VAR = {
   'MJ_BizApps_Forms: Form Responses': '@E_FormResponses',
   'MoreCheese: Member Certifications': '@E_MemberCerts',
 };
-export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person' };
+export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person', org: 'org' };
+
+// bizapps-common SEEDS its ContactType and AddressType rows (finding F6) — we reference them
+// by name through these preamble DECLAREs and never emit the lookup rows ourselves
+export const CONTACT_TYPE_VAR = {
+  Email: '@CT_Email', 'Mobile Phone': '@CT_Mobile', 'Work Phone': '@CT_Work',
+  LinkedIn: '@CT_LinkedIn', Website: '@CT_Website',
+};
+export const ADDRESS_TYPE_VAR = { Home: '@AT_Home', Work: '@AT_Work', Mailing: '@AT_Mailing' };
 
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
 // THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
@@ -71,6 +80,36 @@ export const MAPPING = {
         ID: sqlId(uuidFor('reltype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description),
         Category: sqlStr(r.Category), IsDirectional: sqlBit(r.IsDirectional), ForwardLabel: sqlStr(r.ForwardLabel),
         ReverseLabel: sqlStr(r.ReverseLabel), IsActive: sqlBit(r.IsActive),
+      }),
+    },
+    {
+      json: 'addresses', table: '[__mj_BizAppsCommon].[Address]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('address', r.AddressKey)),
+        Line1: sqlStr(r.Line1), Line2: sqlStr(r.Line2), City: sqlStr(r.City),
+        StateProvince: sqlStr(r.StateProvince), PostalCode: sqlStr(r.PostalCode), Country: sqlStr(r.Country),
+        Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
+      }),
+    },
+    {
+      json: 'address_links', table: '[__mj_BizAppsCommon].[AddressLink]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('addresslink', r.LinkKey)), AddressID: sqlId(uuidFor('address', r.AddressKey)),
+        // polymorphic owner: entity resolved by NAME in the preamble, record by pinned uuid
+        EntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]),
+        RecordID: sqlId(uuidFor(RECORD_PREFIX[r.RecordKind], r.RecordKey)),
+        AddressTypeID: sqlVar(ADDRESS_TYPE_VAR[r.AddressTypeName]),
+        IsPrimary: sqlBit(r.IsPrimary), Rank: sqlNum(r.Rank),
+      }),
+    },
+    {
+      json: 'contact_methods', table: '[__mj_BizAppsCommon].[ContactMethod]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('contactmethod', r.MethodKey)),
+        PersonID: sqlId(r.OwnerKind === 'person' ? uuidFor('person', r.OwnerKey) : null),
+        OrganizationID: sqlId(r.OwnerKind === 'org' ? uuidFor('org', r.OwnerKey) : null),
+        ContactTypeID: sqlVar(CONTACT_TYPE_VAR[r.ContactTypeName]),
+        Value: sqlStr(r.Value), Label: sqlStr(r.Label), IsPrimary: sqlBit(r.IsPrimary),
       }),
     },
     {
@@ -671,6 +710,19 @@ export const DELIVERY = { platform: 'insert' };
 export const deliveryOf = (pack) => DELIVERY[pack] ?? 'metadata';
 // polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
 export const PREAMBLE = {
+  common: [
+    "-- app-seeded lookups resolve BY NAME (the owning app ships these rows; integration finding F6)",
+    "DECLARE @CT_Email UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Email');",
+    "DECLARE @CT_Mobile UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Mobile Phone');",
+    "DECLARE @CT_Work UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Work Phone');",
+    "DECLARE @CT_LinkedIn UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'LinkedIn');",
+    "DECLARE @CT_Website UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Website');",
+    "DECLARE @AT_Home UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Home');",
+    "DECLARE @AT_Work UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Work');",
+    "DECLARE @AT_Mailing UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Mailing');",
+    "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
+    "DECLARE @E_Organizations UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Organizations');",
+  ],
   committees: [
     "-- app-seeded lookups resolve BY NAME (the owning app ships these rows; integration finding F6)",
     "DECLARE @Role_Chair UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommittees].[Role] WHERE Name = N'Chair');",

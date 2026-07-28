@@ -20,6 +20,7 @@ import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../en
 import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 import { CITIES } from '../projects/morecheese/banks.mjs';
+import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -34,6 +35,9 @@ const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
 const regs = load('events', 'event_registrations');
+const addresses = load('common', 'addresses');
+const addressLinks = load('common', 'address_links');
+const contactMethods = load('common', 'contact_methods');
 const cMemberships = load('committees', 'committee_memberships');
 const cTerms = load('committees', 'committee_terms');
 const cCommittees = load('committees', 'committees');
@@ -122,6 +126,35 @@ function checkPacks() {
   const badTermC = cTerms.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
   const badMeetC = cMeetings.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
   check('pack refs: memberships→terms + terms/meetings→committees', badMemTerm + badTermC + badMeetC === 0, `${badMemTerm}+${badTermC}+${badMeetC} dangling`);
+  // contact/address rows are bizapps-common's OWN tables — every owner must resolve, and the
+  // TYPE names must be ones that app seeds (we reference them by name and never emit them: F6)
+  {
+    const orgKeys = new Set(orgs.map((o) => o.OrgKey));
+    const addrKeys = new Set(addresses.map((a) => a.AddressKey));
+    const badCm = contactMethods.filter((c) => c.OwnerKind === 'person' ? !peopleKeys.has(c.OwnerKey) : !orgKeys.has(c.OwnerKey)).length;
+    const badLink = addressLinks.filter((l) => !addrKeys.has(l.AddressKey)
+      || (l.RecordKind === 'person' ? !peopleKeys.has(l.RecordKey) : !orgKeys.has(l.RecordKey))).length;
+    check('pack refs: contact methods + address links → people/orgs/addresses', badCm + badLink === 0, `${badCm}+${badLink} dangling`);
+    const badType = contactMethods.filter((c) => !CONTACT_TYPES.includes(c.ContactTypeName)).length;
+    const badAType = addressLinks.filter((l) => !ADDRESS_TYPES.includes(l.AddressTypeName)).length;
+    check('contacts: every type name is one the app seeds (F6)', badType + badAType === 0, `${badType}+${badAType} unseeded`);
+  }
+  // the whole point of the module: the app's tables carry what MemberProfile carries. A member
+  // with a street address on their profile and no Address row is the empty-UI bug returning.
+  {
+    const linkedPeople = new Set(addressLinks.filter((l) => l.RecordKind === 'person').map((l) => l.RecordKey));
+    const missing = people.filter((p) => p.AddressLine1 && !linkedPeople.has(p.MemberNumber)).length;
+    check('contacts: every profile address is also a bizapps-common Address', missing === 0, `${addresses.length} addresses, ${missing} missing`);
+    const emailed = new Set(contactMethods.filter((c) => c.ContactTypeName === 'Email' && c.OwnerKind === 'person').map((c) => c.OwnerKey));
+    const noEmail = people.filter((p) => p.Email && !emailed.has(p.MemberNumber)).length;
+    check('contacts: every member email is a ContactMethod row', noEmail === 0, `${emailed.size} people with an email method`);
+    // one primary per channel — a UI that renders "the" phone picks the primary and must find one
+    const dupPrimary = [...contactMethods.filter((c) => c.IsPrimary).reduce((m, c) => {
+      const k = `${c.OwnerKind}:${c.OwnerKey}:${c.ContactTypeName === 'Email' ? 'email' : c.ContactTypeName === 'Website' ? 'web' : 'phone'}`;
+      return m.set(k, (m.get(k) ?? 0) + 1);
+    }, new Map()).values()].filter((n) => n > 1).length;
+    check('contacts: at most one primary per owner and channel', dupPrimary === 0, `${dupPrimary} owners with two primaries`);
+  }
   const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
   // member responses must resolve to people; anonymous ones must carry a session id instead
   const badResp = fResponses.filter((x) => x.MemberNumber != null ? !peopleKeys.has(x.MemberNumber) : !x.AnonymousSessionID).length;

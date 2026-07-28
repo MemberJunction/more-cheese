@@ -7,7 +7,27 @@
     "$note": "lifecycle events (dissolved/acquired/program-cut) feed arrow 1.15 and the Anna/Bob/Danielle-class churn stories"
   },
   "geography": {
-    "mix": [["NA", 0.60], ["EU", 0.25], ["RoW", 0.15]],
+    "mix": [
+      [
+        "NA",
+        0.6
+      ],
+      [
+        "EU",
+        0.25
+      ],
+      [
+        "RoW",
+        0.15
+      ]
+    ],
     "$note": "cities carry pre-baked coordinates (GAP-11a); dairy-belt weighting inside NA"
+  },
+  "contacts": {
+    "$note": "ESTIMATE — contact methods and addresses are FIRST-CLASS rows in bizapps-common (ContactMethod, Address, AddressLink), which owns the domain. MemberProfile keeps its denormalised copy for segmentation; these rows are what the app's own UI reads. Types are referenced BY NAME — bizapps-common seeds them (finding F6).",
+    "secondPhoneShare": 0.22,
+    "linkedInShare": 0.18,
+    "mobileFirstShare": 0.62,
+    "orgPhoneShare": 0.7
   }
 }
