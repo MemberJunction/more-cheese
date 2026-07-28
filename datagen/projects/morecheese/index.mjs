@@ -48,8 +48,12 @@ export function buildWorld(cfg) {
   // §5.4b: learning — same pattern, third domain
   const learning = buildLearning(cfg, people, periods);
 
+  // programs (certifications, competition entries, advocacy) BEFORE money: credentials
+  // and competition entries are billable facts, so the money chain has to see them
+  const programs = buildPrograms(cfg, people, periods, learning);
+
   // §5.5: the money chain — one order per billable fact, timing per declared paymentProfiles
-  const money = buildMoney(cfg, people, periods, events, registrations);
+  const money = buildMoney(cfg, people, periods, events, registrations, programs);
 
   // composed bizapps slices: committees (governance), forms (D10 survey), relationships
   // (identity graph), tasks (action items + outreach), issues (support tickets)
@@ -58,7 +62,6 @@ export function buildWorld(cfg) {
   const relationships = buildRelationships(cfg, people, orgs);
   const tasks = buildTasks(cfg, people, periods, committees);
   const issues = buildIssues(cfg, people, orgs, events, registrations, money, committees);
-  const programs = buildPrograms(cfg, people, periods, learning);
   // secure messaging: support threads derive from issues (hero issues always get one)
   const messaging = buildMessaging(cfg, people, issues);
 

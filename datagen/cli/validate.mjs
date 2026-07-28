@@ -493,7 +493,9 @@ function checkMoney() {
 
   // the 3-part timing mixture, measured
   const perByKey = new Map(periods.map((x) => [`ORD-D-${x.PeriodKey}`, x]));
-  const payDate = new Map(payments.map((p) => [p.OrderKey, p.PaymentDate]));
+  // the SETTLING payment only: a refund is a later negative row against the same order and
+  // would otherwise read as "this order was paid late"
+  const payDate = new Map(payments.filter((p) => p.Amount > 0 && p.Status !== 'Refunded').map((p) => [p.OrderKey, p.PaymentDate]));
   const cls = { auto: [], manual: [], net: [] };
   for (const o of duesOrders) {
     if (!payDate.has(o.OrderKey)) continue; // unpaid orders age instead
@@ -521,6 +523,34 @@ function checkMoney() {
   const openRenewals = new Set(orders.filter((x) => x.OrderKey.startsWith('ORD-R-') && x.PaymentStatus !== 'Paid').map((x) => x.MemberNumber));
   const missing = pendingMembers.filter((m) => !openRenewals.has(m)).length;
   check(`money: every PendingRenewal member has an open renewal order (incl. Marcus)`, missing === 0 && openRenewals.has('ICF-000102'), `${pendingMembers.length} pending, ${missing} missing`);
+
+  // ---------- the money model sells more than dues and tickets ----------
+  {
+    const prodTypes = new Set(products.map((p) => p.ProductType));
+    check(`money: ${products.length} products across ${prodTypes.size} types (${[...prodTypes].join(', ')})`, prodTypes.size >= 6, 'an association sells more than membership and event tickets');
+    // billable facts that used to generate nothing
+    const certOrders = orders.filter((o) => o.OrderKey.startsWith('ORD-C')).length;
+    const compOrders = orders.filter((o) => o.OrderKey.startsWith('ORD-X-')).length;
+    check(`money: credentials and competitions are billed (${certOrders} certification, ${compOrders} competition orders)`, certOrders > 0 && compOrders > 0, 'these were free before');
+    // orders bundle
+    const linesPerOrder = orderLines.reduce((a, l) => (a[l.OrderKey] = (a[l.OrderKey] ?? 0) + 1, a), {});
+    const multi = Object.values(linesPerOrder).filter((n) => n > 1).length;
+    check(`money: ${multi} multi-line orders of ${orders.length}`, multi > 0, 'real orders bundle');
+    // every order's TotalGross equals the sum of its lines
+    const sums = orderLines.reduce((a, l) => (a[l.OrderKey] = (a[l.OrderKey] ?? 0) + l.LineTotal, a), {});
+    const badTotals = orders.filter((o) => Math.abs((sums[o.OrderKey] ?? 0) - o.TotalGross) > 0.005).length;
+    check('money: order totals equal the sum of their lines', badTotals === 0, `${badTotals} mismatched`);
+    // prices move with time
+    const duesLines = orderLines.filter((l) => l.ProductKey === 'PROD-MEM-INDIVIDUAL');
+    const priceByYear = new Map();
+    for (const l of duesLines) { const o = orders.find((x) => x.OrderKey === l.OrderKey); if (o) priceByYear.set(o.OrderDate.slice(0, 4), l.UnitPrice); }
+    const yrs = [...priceByYear.keys()].sort();
+    if (yrs.length > 4) check(`money: prices move over time (Individual dues ${priceByYear.get(yrs[0])} in ${yrs[0]} -> ${priceByYear.get(yrs[yrs.length - 1])} in ${yrs[yrs.length - 1]})`,
+      priceByYear.get(yrs[yrs.length - 1]) > priceByYear.get(yrs[0]), 'thirteen years of frozen prices is not a revenue story');
+    // refunds exist and are negative
+    const refs = payments.filter((p) => p.Status === 'Refunded');
+    check(`money: ${refs.length} refunds, all negative against a paid order`, refs.length > 0 && refs.every((p) => p.Amount < 0), 'refunds are a ledger line, not a deletion');
+  }
 
   // temporal integrity: a payment can't precede the bill it settles (2,386 rows did, 2026-07-27)
   const orderDateOf = new Map(orders.map((o) => [o.OrderKey, o.OrderDate]));

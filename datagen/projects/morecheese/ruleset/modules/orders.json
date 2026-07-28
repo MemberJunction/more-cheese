@@ -99,6 +99,92 @@
       "deniedShareOfFailed": 0.3,
       "retryDaysMax": 6,
       "inProgressWindowDays": 3
+    },
+    "$revenueNote": "The federation used to sell exactly two things. Certifications and competition entries — real billable facts already in the data — generated NO revenue at all, every order had exactly one line of quantity one, and prices had not moved in thirteen years, so a revenue-by-year chart was pure volume with no price effect. Catalogue prices below are CURRENT (release-year); an order line is charged the price of ITS year via priceIndex, which is how a historical order actually reads.",
+    "catalogue": [
+      {
+        "key": "PROD-CERT-EXAM",
+        "name": "Certification exam fee",
+        "type": "Certification",
+        "price": 425
+      },
+      {
+        "key": "PROD-CERT-RECERT",
+        "name": "Recertification fee",
+        "type": "Certification",
+        "price": 195
+      },
+      {
+        "key": "PROD-COMP-ENTRY",
+        "name": "Competition entry (per cheese)",
+        "type": "Competition",
+        "price": 65
+      },
+      {
+        "key": "PROD-PUB-JOURNAL",
+        "name": "Journal of Artisan Cheese (annual)",
+        "type": "Publication",
+        "price": 85
+      },
+      {
+        "key": "PROD-PUB-STANDARDS",
+        "name": "Standards handbook",
+        "type": "Publication",
+        "price": 140
+      },
+      {
+        "key": "PROD-SPON-EXPO",
+        "name": "Conference exhibitor booth",
+        "type": "Sponsorship",
+        "price": 2400
+      },
+      {
+        "key": "PROD-JOB-POST",
+        "name": "Job board posting (30 days)",
+        "type": "JobPosting",
+        "price": 250
+      },
+      {
+        "key": "PROD-MERCH-APRON",
+        "name": "Federation apron",
+        "type": "Merchandise",
+        "price": 38
+      },
+      {
+        "key": "PROD-MERCH-BOOK",
+        "name": "Cheese atlas",
+        "type": "Merchandise",
+        "price": 52
+      },
+      {
+        "key": "PROD-DONATION",
+        "name": "Education fund donation",
+        "type": "Donation",
+        "price": 100
+      }
+    ],
+    "priceIndex": {
+      "annualInflation": 0.027,
+      "$note": "ESTIMATE (confidence: medium) — long-run consumer inflation over the simulated window, applied so an order line carries the price of its own year. Rounded to whole currency units, as a real price list is."
+    },
+    "certificationFees": {
+      "examShare": 1.0,
+      "recertShare": 0.8,
+      "$note": "every credential pursuit is billed an exam fee; most renewals of an expiring credential are billed a recertification fee"
+    },
+    "competitionFees": {
+      "share": 1.0,
+      "$note": "every entry pays an entry fee — this is how competitions fund themselves"
+    },
+    "addOns": {
+      "conferenceMerchShare": 0.22,
+      "journalShare": 0.12,
+      "donationShare": 0.05,
+      "$note": "multi-line orders: conference registrations often pick up merchandise, and some dues renewals add the journal or a donation. Fixes the strict 1 order = 1 line shape."
+    },
+    "refunds": {
+      "shareOfPaidNoShows": 0.35,
+      "$note": "a share of paid no-shows are actually refunded — Payment.Status already permits 'Refunded', so this needs no schema change. The refund is a NEGATIVE payment against the original order, which is how an AMS records it."
     }
   }
 }

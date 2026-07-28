@@ -230,7 +230,7 @@ CREATE TABLE morecheese_orders.Product (
     IsSharedDemo BIT NOT NULL DEFAULT 1,
     CONSTRAINT PK_Product PRIMARY KEY (ID),
     CONSTRAINT UQ_Product_ProductKey UNIQUE (ProductKey),
-    CONSTRAINT CK_Product_ProductType CHECK (ProductType IN ('Membership', 'Event'))
+    CONSTRAINT CK_Product_ProductType CHECK (ProductType IN ('Membership', 'Event', 'Certification', 'Competition', 'Publication', 'Sponsorship', 'JobPosting', 'Merchandise', 'Donation'))
 );
 GO
 
