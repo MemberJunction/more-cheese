@@ -176,11 +176,17 @@ change.
   F6). We must never re-create them.)* The correct move is to add **demo-owned** types that
   cannot collide — referred-by, supplier-of, board sponsor, household — and derive edges
   for each from facts we already have, so a relationship viewer shows more than one type.
-- Committee roles: + Secretary, Treasurer, Staff Liaison, Ex-Officio.
+- **Which dictionaries are actually ours** *(checked during implementation — an earlier
+  draft got this wrong twice)*. We CREATE the rows for: committee **Types**, committee
+  **Terms**, **IssueType**, **TaskType**. Those are safe to extend.
+  We do NOT own committee **Roles** or **IssueStatus** — the owning apps seed those and we
+  reference them BY NAME (F6); our dev shim only stands in for them in a bare playground.
+  Adding "Secretary" or "On Hold" there would pass locally and **fail on a real install**,
+  exactly like the Employee/Subsidiary mistake above. Extending those needs the upstream
+  app to seed the row first, so it is out of scope here.
 - Committee types: + Task Force, Working Group, Advisory Council.
-- Issue statuses: + On Hold, Waiting on Member, Escalated, Duplicate, Reopened (requires
-  moving the hardcoded status bernoulli into the ruleset).
-- Task types: + Onboarding, Follow-up, Content Review, Certification, Sponsorship.
+- Task types: + Onboarding, Follow-up, Content Review, Certification, Sponsorship —
+  each needs a derivation that actually emits tasks of that type, or it ships an empty row.
 
 **1d. Back-fill committee history** 2015–2022. Each term owns its own stream, so existing
 terms are untouched — this is additive. Closes the "formed 2014, data starts 2023" hole

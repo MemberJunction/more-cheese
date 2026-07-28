@@ -34,6 +34,8 @@ const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
 const regs = load('events', 'event_registrations');
 const cMemberships = load('committees', 'committee_memberships');
+const cTerms = load('committees', 'committee_terms');
+const cCommittees = load('committees', 'committees');
 const cMeetings = load('committees', 'committee_meetings');
 const cAttendance = load('committees', 'committee_attendance');
 const fResponses = load('forms', 'form_responses');
@@ -780,6 +782,25 @@ function checkComposedApps() {
   const wantUpcoming = CC.list.length * CC.meetings.upcomingPerCommittee;
   const futureNoAtt = scheduled.every((m) => !cAttendance.some((a) => a.MeetingKey === m.MeetingKey));
   check(`committees: upcoming Scheduled meetings = ${wantUpcoming} (each committee schedules ahead), no attendance yet`, scheduled.length === wantUpcoming && futureNoAtt, `${scheduled.length} scheduled`);
+  // governance has HISTORY and CONTINUITY: terms reach back toward formation, and rosters
+  // are not wiped clean every cycle (they used to carry ~4% over, against a real 50-70%)
+  {
+    const termYears = [...new Set(cTerms.map((t) => t.StartDate.slice(0, 4)))].sort();
+    const earliestFormed = cCommittees.map((c) => c.FormationDate).sort()[0]?.slice(0, 4);
+    check(`committees: history spans ${termYears.length} terms from ${termYears[0]} (earliest formed ${earliestFormed})`, termYears.length >= 4, 'governance must not start yesterday');
+    const noTermBeforeFormed = cTerms.filter((t) => { const c = cCommittees.find((x) => x.CommitteeKey === t.CommitteeKey); return c && t.EndDate < c.FormationDate; }).length;
+    check('committees: no term predates its committee formation', noTermBeforeFormed === 0, `${noTermBeforeFormed} bad`);
+    const byTerm = new Map();
+    for (const m of cMemberships) { const y = m.TermKey.split(':')[1]; if (!byTerm.has(y)) byTerm.set(y, new Set()); byTerm.get(y).add(m.MemberNumber); }
+    const ys = [...byTerm.keys()].sort();
+    let carried = 0, seats = 0;
+    for (let i = 1; i < ys.length; i++) {
+      const prev = byTerm.get(ys[i - 1]), cur = byTerm.get(ys[i]);
+      carried += [...cur].filter((m) => prev.has(m)).length; seats += cur.size;
+    }
+    const rate = seats ? carried / seats : 0;
+    if (seats > 40) check(`committees: roster continuity ${(rate * 100).toFixed(0)}% across terms (incumbents return)`, rate >= 0.2, 'rosters must not reset every cycle');
+  }
   // tasks: every PendingRenewal member carries an outreach task
   const pendingMembers = [...lastStatus.entries()].filter(([, st]) => st === 'PendingRenewal').map(([m2]) => m2);
   const outreach = new Set(tTasks.filter((t) => t.TypeKey === 'Renewal Outreach').map((t) => t.TaskKey));

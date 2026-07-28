@@ -26,26 +26,43 @@ export function buildCommittees(cfg, people, periods) {
   const committees = C.list.map((c) => ({ CommitteeKey: c.name, Name: c.name, TypeKey: c.type, MissionStatement: c.mission, Status: 'Active', FormationDate: c.formed, IsSharedDemo: true }));
   const terms = [];
   for (const c of C.list) for (const t of C.terms) {
+    // a committee has no term before it existed — the Education Committee (formed 2016)
+    // must not appear in the back-filled 2015 term
+    if (t.end < c.formed) continue;
     terms.push({ TermKey: `${c.name}:${t.start}`, CommitteeKey: c.name, Name: t.name, StartDate: t.start, EndDate: t.end, Status: t.end < iso(release) ? 'Completed' : 'Active', IsSharedDemo: true });
   }
 
   // ---------- memberships: per term, engaged members volunteer ----------
   const memberships = [];
   const rosterByTerm = new Map(); // `${committee}:${termStart}` → [person]
+  // INCUMBENCY: committees don't re-staff from scratch every two years. A member who
+  // served last term is far likelier to serve again, and usually on the SAME committee.
+  // The bonus enters the volunteer SCORE, so childOutcome still calibrates to
+  // shareOfEligible — total participation is unchanged; only who fills the seats becomes
+  // continuous. Without this, back-filling history just produced six terms of total churn.
+  let servedLastTerm = new Map(); // MemberNumber → committee name
   for (const t of C.terms) {
     const eligible = people.filter((p) => !p._hero && coveredOn(p.MemberNumber, t.start));
+    const incumbents = servedLastTerm;
+    const servingNow = new Map();
     childOutcome({
       seed,
       items: eligible,
-      scoreOf: (p) => C.participation.arrows.engagement.beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta),
+      scoreOf: (p) => C.participation.arrows.engagement.beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
+        + (incumbents.has(p.MemberNumber) ? (C.participation.incumbencyBeta ?? 0) : 0),
       target: C.participation.shareOfEligible,
       streamKey: (p) => `committee-serve:${p.MemberNumber}:${t.start}`,
       decide: (p, prob, r) => {
         if (!r.bernoulli(prob)) return;
-        const committee = r.pick(C.list).name; // which committee: the member's own dice
+        const prior = incumbents.get(p.MemberNumber);
+        const committee = prior && r.bernoulli(C.participation.sameCommitteeShare ?? 0)
+          ? prior                      // returning members usually keep their seat
+          : r.pick(C.list).name;       // otherwise the member's own dice
         pushMembership(p, committee, t, 'Member');
+        servingNow.set(p.MemberNumber, committee);
       },
     });
+    servedLastTerm = servingNow;
   }
   // hero seats: declared facts (roles included), placed after the crowd draw
   for (const h of R.heroes) {

@@ -61,6 +61,26 @@
     ],
     "terms": [
       {
+        "name": "2015–16 Term",
+        "start": "2015-01-01",
+        "end": "2016-12-31"
+      },
+      {
+        "name": "2017–18 Term",
+        "start": "2017-01-01",
+        "end": "2018-12-31"
+      },
+      {
+        "name": "2019–20 Term",
+        "start": "2019-01-01",
+        "end": "2020-12-31"
+      },
+      {
+        "name": "2021–22 Term",
+        "start": "2021-01-01",
+        "end": "2022-12-31"
+      },
+      {
         "name": "2023–24 Term",
         "start": "2023-01-01",
         "end": "2024-12-31"
@@ -81,11 +101,14 @@
           "label": "med-strong",
           "note": "volunteering is an engagement behavior"
         }
-      }
+      },
+      "incumbencyBeta": 3.8,
+      "sameCommitteeShare": 0.85,
+      "$continuityNote": "Rosters used to be wiped clean every term — 4% carryover, where real committees run 50-70% with staggered seats. Incumbency enters the volunteer score, so serving members are far likelier to serve again, and a returning member usually returns to the SAME committee. childOutcome still calibrates to shareOfEligible, so total participation is unchanged; only WHO fills the seats becomes continuous. ESTIMATE (confidence: low) — no published association committee-continuity benchmark found; 2.3 was chosen to land carryover in the 45-65% band."
     },
     "meetings": {
       "cadencePerYear": 4,
-      "startYear": 2023,
+      "startYear": 2015,
       "dayOfMonth": 15,
       "hourUTC": 15,
       "upcomingPerCommittee": 2,
@@ -152,6 +175,7 @@
           "Approve the speaker honorarium policy"
         ]
       }
-    }
+    },
+    "$historyNote": "Governance used to start in 2023 while the committees claim formation dates from 2014-2017 — eight years of missing history, so every roster looked newly minted and no committee had a past. Terms now run biennially from 2015. Each term owns its own per-person stream (committee-serve:<member>:<termStart>) and its own meeting slots, so back-filling is ADDITIVE: the 2023-24 and 2025-26 terms and everything derived from them are untouched. A committee only gets terms after it was formed."
   }
 }
