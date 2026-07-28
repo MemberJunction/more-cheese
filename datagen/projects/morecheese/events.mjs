@@ -48,7 +48,9 @@ export function buildEvents(cfg) {
     let confDate = new Date(Date.UTC(y, R.history.conferenceMonth - 1, Math.max(8, Math.min(22, R.history.conferenceDay + rConf.int(-5, 6)))));
     while (confDate.getUTCDay() !== 2) confDate = addDays(confDate, 1);
     if (confDate <= addDays(release, 365)) {
-      const [city, state_, lat, lon] = y % 3 === 0 ? ['Louisville', 'KY', 38.2527, -85.7585] : y % 3 === 1 ? ['Des Moines', 'IA', 41.5868, -93.625] : ['Sacramento', 'CA', 38.5816, -121.4944];
+      // host city rotates through the declared list (was a hardcoded 3 on y % 3)
+      const hc = E.conferenceCities[y % E.conferenceCities.length];
+      const [city, state_, lat, lon] = [hc.city, hc.state, hc.lat, hc.lon];
       events.push({ EventKey: `EVT-${y}-CONF`, Name: `ICF Annual Conference ${y}`, EventType: 'Conference', Year: y, Date: iso(confDate), IsVirtual: covid, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
     }
     const rEv = rng(seed, `events:${y}`);
@@ -58,12 +60,12 @@ export function buildEvents(cfg) {
       const [city, state_, lat, lon] = rEv.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
       const d = drawEventDate(rEv, y, 'Workshop');
       if (d > addDays(release, 365)) continue;
-      events.push({ EventKey: `EVT-${y}-W${i + 1}`, Name: `Workshop: ${rEv.pick(CHEESE_WORDS)} ${rEv.pick(['Affinage', 'Food Safety', 'Retailing', 'Sensory'])}`, EventType: 'Workshop', Year: y, Date: iso(d), IsVirtual: false, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
+      events.push({ EventKey: `EVT-${y}-W${i + 1}`, Name: `Workshop: ${rEv.pick(CHEESE_WORDS)} ${rEv.pick(E.workshopSubjects)}`, EventType: 'Workshop', Year: y, Date: iso(d), IsVirtual: false, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
     }
     for (let i = 0; i < E.perYear.webinars; i++) {
       const d = drawEventDate(rEv, y, 'Webinar');
       if (d > addDays(release, 365)) continue;
-      events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(['Raw Milk Rules', 'Cave Management', 'Counter Culture', 'Label Law'])} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
+      events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(E.webinarTopics)} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
     }
   }
   return events;

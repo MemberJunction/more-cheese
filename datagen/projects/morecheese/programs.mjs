@@ -19,7 +19,7 @@ export function buildPrograms(cfg, people, periods, learning) {
 
   // ---------- certifications ----------
   const certifications = PR.certifications.catalog.map((c) => ({
-    CertKey: c.key, Name: c.name, ValidYears: c.validYears, IsSharedDemo: true,
+    CertKey: c.key, Name: c.name, Description: c.description ?? null, ValidYears: c.validYears, IsSharedDemo: true,
   }));
   const completers = [...new Set(learning.enrollments.filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber))]
     .map((m) => people.find((p) => p.MemberNumber === m)).filter((p) => p && !p._hero);
@@ -54,24 +54,51 @@ export function buildPrograms(cfg, people, periods, learning) {
         });
         return awardedOn;
       };
-      const first = r.pick(PR.certifications.catalog);
+      // credentials LADDER: the first one pursued is always one with no prerequisite,
+      // weighted so foundation credentials dominate. A member who earns one may go on to
+      // a credential whose prerequisite they now hold — so an advanced certificate never
+      // appears on someone who never earned the rung below it.
+      const catalog = PR.certifications.catalog;
+      const weightOf = (c) => c.weight ?? 1;
+      const openTo = (held) => catalog.filter((c) => !held.has(c.key) && (!c.prerequisite || held.has(c.prerequisite)));
+      const held = new Set();
+      const entry = openTo(held).filter((c) => !c.prerequisite);
+      if (!entry.length) return;
+      const first = r.pickWeighted(entry.map((c) => [c, weightOf(c)]));
       const firstAwarded = emitCert(first, addDays(release, -r.int(90, daysSinceJoin)));
-      if (firstAwarded && r.bernoulli(0.2)) {
-        const second = r.pick(PR.certifications.catalog.filter((c) => c.key !== first.key));
+      if (!firstAwarded) return;
+      held.add(first.key);
+      // each further rung is rarer than the last
+      let when = firstAwarded;
+      for (let step = 0; step < 2; step++) {
+        if (!r.bernoulli(step === 0 ? 0.2 : 0.08)) break;
+        const next = openTo(held);
+        if (!next.length) break;
+        const pickNext = r.pickWeighted(next.map((c) => [c, weightOf(c)]));
         const gap = r.int(180, 900);
-        if (second && iso(addDays(firstAwarded, gap)) < releaseIso) emitCert(second, addDays(firstAwarded, gap));
+        if (iso(addDays(when, gap)) >= releaseIso) break;
+        const awarded = emitCert(pickNext, addDays(when, gap));
+        held.add(pickNext.key);
+        if (!awarded) break;
+        when = awarded;
       }
     },
   });
-  // hero declarations (Sofia's in-progress CCP)
+  // hero declarations — authored facts. `certifications` (plural) lets a persona carry a
+  // whole ladder; the older singular `certification` still works.
   for (const h of R.heroes) {
-    if (!h.certification) continue;
-    const cert = PR.certifications.catalog.find((c) => c.key === h.certification.key);
-    memberCertifications.push({
-      MemberCertKey: `${h.memberNumber}:${h.certification.key}`, MemberNumber: h.memberNumber,
-      CertKey: h.certification.key, Status: h.certification.status,
-      EnrolledOn: h.certification.enrolledOn, AwardedOn: null, ExpiresOn: null, IsSharedDemo: true,
-    });
+    const declared = h.certifications ?? (h.certification ? [h.certification] : []);
+    for (const d of declared) {
+      const cert = PR.certifications.catalog.find((c) => c.key === d.key);
+      const awardedOn = d.awardedOn ?? null;
+      memberCertifications.push({
+        MemberCertKey: `${h.memberNumber}:${d.key}`, MemberNumber: h.memberNumber,
+        CertKey: d.key, Status: d.status,
+        EnrolledOn: d.enrolledOn, AwardedOn: awardedOn,
+        ExpiresOn: awardedOn && cert ? iso(addYears(parseDate(awardedOn), cert.validYears)) : null,
+        IsSharedDemo: true,
+      });
+    }
   }
 
   // ---------- competition entries (producers with orgs; org membership = eligibility) ----------

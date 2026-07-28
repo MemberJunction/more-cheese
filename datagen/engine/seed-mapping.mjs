@@ -139,7 +139,7 @@ export const MAPPING = {
   learning: [
     {
       json: 'certifications', table: '[morecheese_learning].[Certification]',
-      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
+      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
     },
     {
       json: 'member_certifications', table: '[morecheese_learning].[MemberCertification]',

@@ -90,7 +90,7 @@ const MAPPING = [
   { pack: 'events', json: 'competition_entries', dir: 'competition-entries', entity: 'MoreCheese: Competition Entries',
     record: (r) => ({ primaryKey: { ID: uuidFor('compentry', r.EntryKey) }, fields: { EntryKey: r.EntryKey, PersonID: uuidFor('person', r.MemberNumber), OrganizationID: r.OrgKey ? uuidFor('org', r.OrgKey) : null, EntryYear: r.EntryYear, Category: r.Category, ProductName: r.ProductName, Result: r.Result, IsSharedDemo: r.IsSharedDemo } }) },
   { pack: 'learning', json: 'certifications', dir: 'certifications', entity: 'MoreCheese: Certifications',
-    record: (r) => ({ primaryKey: { ID: uuidFor('cert', r.CertKey) }, fields: { CertKey: r.CertKey, Name: r.Name, ValidYears: r.ValidYears, IsSharedDemo: r.IsSharedDemo } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('cert', r.CertKey) }, fields: { CertKey: r.CertKey, Name: r.Name, Description: r.Description ?? null, ValidYears: r.ValidYears, IsSharedDemo: r.IsSharedDemo } }) },
   { pack: 'learning', json: 'member_certifications', dir: 'member-certifications', entity: 'MoreCheese: Member Certifications',
     record: (r) => ({ primaryKey: { ID: uuidFor('membercert', r.MemberCertKey) }, fields: { MemberCertKey: r.MemberCertKey, PersonID: uuidFor('person', r.MemberNumber), CertificationID: uuidFor('cert', r.CertKey), Status: r.Status, EnrolledOn: r.EnrolledOn, AwardedOn: r.AwardedOn, ExpiresOn: r.ExpiresOn, IsSharedDemo: r.IsSharedDemo } }) },
     {

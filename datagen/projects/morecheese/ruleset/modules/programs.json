@@ -2,21 +2,73 @@
   "$comment": "PROGRAMS MODULE (2026-07-16 'more tables' enrichment): certifications (learning pack), competition entries (events pack), advocacy actions (membership pack). Unlocks Sofia Marchetti (cert journey), Henri's Gold medal, Tom Reyes (advocacy-shaped engagement — Sonar's component-breakdown demo). Targets are ESTIMATEs pending sources.",
   "programs": {
     "certifications": {
+      "$catalogNote": "Was three flat credentials picked uniformly, which is not what a real association credential programme looks like: real ones ladder (foundation -> professional -> advanced), gate the upper rungs behind the lower ones, and vary in how long they stay valid. `level` and `prerequisite` are honoured by the generator today; they are NOT yet emitted as columns (Certification is a table we own and new columns need a migration — planned separately), so for now the ladder shows up as which credentials members actually hold and in what order. `weight` biases which credential a pursuer goes for — foundation credentials are far more common than advanced ones.",
       "catalog": [
         {
-          "key": "CERT-CCP",
-          "name": "Certified Cheese Professional (CCP)",
-          "validYears": 3
-        },
-        {
-          "key": "CERT-SENSORY",
-          "name": "Sensory Evaluation Certificate",
-          "validYears": 3
+          "key": "CERT-FOUNDATION",
+          "name": "Cheese Foundations Certificate",
+          "level": 1,
+          "track": "craft",
+          "validYears": 5,
+          "weight": 0.3,
+          "description": "Entry-level credential covering milk handling, basic make procedures, hygiene and cheese styles. No prerequisite; the usual first step into the federation's credential ladder."
         },
         {
           "key": "CERT-FOODSAFETY",
           "name": "Food Safety & HACCP Certificate",
-          "validYears": 2
+          "level": 1,
+          "track": "safety",
+          "validYears": 2,
+          "weight": 0.22,
+          "description": "Hazard analysis, environmental monitoring and recall readiness for small and mid-sized creameries. Shortest validity in the programme: food-safety practice moves, so holders recertify every two years."
+        },
+        {
+          "key": "CERT-MONGER",
+          "name": "Certified Cheesemonger",
+          "level": 1,
+          "track": "business",
+          "validYears": 4,
+          "weight": 0.14,
+          "description": "Counter-side credential: cut and wrap, storage and rotation, customer guidance, and building a balanced case. Popular with retail members."
+        },
+        {
+          "key": "CERT-CCP",
+          "name": "Certified Cheese Professional (CCP)",
+          "level": 2,
+          "track": "craft",
+          "validYears": 3,
+          "weight": 0.16,
+          "prerequisite": "CERT-FOUNDATION",
+          "description": "The federation's flagship professional credential. Requires documented working hours and a foundation certificate, and covers make procedures, affinage, safety and business practice end to end."
+        },
+        {
+          "key": "CERT-SENSORY",
+          "name": "Sensory Evaluation Certificate",
+          "level": 2,
+          "track": "sensory",
+          "validYears": 3,
+          "weight": 0.1,
+          "description": "Structured tasting, defect identification and scoring against style standards. The usual route onto a competition judging panel."
+        },
+        {
+          "key": "CERT-AFFINAGE",
+          "name": "Advanced Affinage Certificate",
+          "level": 3,
+          "track": "affinage",
+          "validYears": 3,
+          "weight": 0.05,
+          "prerequisite": "CERT-CCP",
+          "description": "Advanced maturation practice: rind management, cave environment control and maturation planning across styles. Open to CCP holders."
+        },
+        {
+          "key": "CERT-JUDGE",
+          "name": "Competition Judge Accreditation",
+          "level": 3,
+          "track": "sensory",
+          "validYears": 2,
+          "weight": 0.03,
+          "prerequisite": "CERT-SENSORY",
+          "description": "Accreditation to judge federation competitions. Requires the sensory certificate plus supervised panel experience, and lapses quickly without active judging."
         }
       ],
       "pursuitShareOfCompleters": 0.1,

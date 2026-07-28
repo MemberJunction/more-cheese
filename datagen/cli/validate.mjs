@@ -633,6 +633,43 @@ function checkComposedApps() {
   check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
   check(`issues: no single title template dominates (${(titleShare * 100).toFixed(0)}% max)`, titleShare < 0.45, 'title variety');
   check('issues: descriptions present (the created date lives in the narrative)', issues.every((x) => x.Description && x.Description.length > 40), `${issues.filter((x) => x.Description).length}/${issues.length}`);
+  // the relationship graph shows more than employment: every demo-owned type carries
+  // edges, and referrals are causally sound (the referrer joined first)
+  {
+    const relTypes = load('common', 'relationship_types');
+    const byType = relationships.reduce((a, x) => { const k = x.TypeKey ?? '(seeded)'; a[k] = (a[k] ?? 0) + 1; return a; }, {});
+    const empty = relTypes.filter((t) => !(byType[t.TypeKey] > 0)).map((t) => t.TypeKey);
+    check(`relationships: ${relTypes.length} demo types, all carrying edges (${Object.entries(byType).map(([k, v]) => k + ' ' + v).join(', ')})`, empty.length === 0, empty.join(', ') || 'no empty type');
+    const joinOf2 = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
+    const badRef = relationships.filter((x) => x.TypeKey === 'Referred By')
+      .filter((x) => (joinOf2.get(x.ToMemberNumber) ?? '9999') > (joinOf2.get(x.FromMemberNumber) ?? '')).length;
+    check('relationships: every referrer joined before the member they referred', badRef === 0, `${badRef} impossible referrals`);
+    // demo-owned types must never re-create bizapps-common's seeded ones (runbook F6:
+    // app-seeded lookups collide BY NAME at install)
+    const seededNames = Object.keys(R.relationships.seededTypeIDs ?? {});
+    const collide = relTypes.filter((t) => seededNames.includes(t.TypeKey)).map((t) => t.TypeKey);
+    check('relationships: no demo type collides with a bizapps-seeded type name (F6)', collide.length === 0, collide.join(', ') || `avoids ${seededNames.join('/')}`);
+  }
+  // credentials form a LADDER: nobody holds a credential whose prerequisite they lack,
+  // and the catalogue is deep enough that a credentials page isn't three rows
+  {
+    const cat = load('learning', 'certifications');
+    const declared = new Map(R.programs.certifications.catalog.map((c) => [c.key, c]));
+    const heldBy = new Map();
+    for (const mc of memberCerts) {
+      if (!heldBy.has(mc.MemberNumber)) heldBy.set(mc.MemberNumber, new Set());
+      heldBy.get(mc.MemberNumber).add(mc.CertKey);
+    }
+    const broken = [];
+    for (const [m, set] of heldBy) {
+      for (const k of set) {
+        const pre = declared.get(k)?.prerequisite;
+        if (pre && !set.has(pre)) broken.push(`${m}:${k} lacks ${pre}`);
+      }
+    }
+    check(`certifications: ${cat.length} in the catalogue, every prerequisite satisfied`, cat.length >= 5 && broken.length === 0, broken.slice(0, 2).join('; ') || `${heldBy.size} holders`);
+    check('certifications: catalogue rows carry a description', cat.every((c) => c.Description && c.Description.length > 30), `${cat.filter((c) => c.Description).length}/${cat.length}`);
+  }
   // programs: pursuit + advocate shares land (over their real pools)
   const PRG = R.programs;
   const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
@@ -750,8 +787,12 @@ function checkHeroes() {
     }
     if (p && h.employerName && orgByKey.get(p.OrgKey)?.Name !== h.employerName) problems.push(`employer=${orgByKey.get(p.OrgKey)?.Name}`);
     if (h.pins.certStatus) {
-      const mc = memberCerts.find((x) => x.MemberNumber === h.memberNumber);
-      if (!mc || mc.Status !== h.pins.certStatus) problems.push(`cert=${mc?.Status}≠${h.pins.certStatus}`);
+      // a persona can hold a LADDER of credentials, so the pin is about the one the
+      // persona is defined by — the last declared — not merely "any cert they hold"
+      const declared = h.certifications ?? (h.certification ? [h.certification] : []);
+      const focusKey = h.pins.certKey ?? declared[declared.length - 1]?.key;
+      const mc = memberCerts.find((x) => x.MemberNumber === h.memberNumber && (!focusKey || x.CertKey === focusKey));
+      if (!mc || mc.Status !== h.pins.certStatus) problems.push(`cert ${focusKey ?? ''}=${mc?.Status}≠${h.pins.certStatus}`);
     }
     if (h.pins.competitionGold) {
       if (!compEntries.some((x) => x.MemberNumber === h.memberNumber && x.EntryYear === h.pins.competitionGold && x.Result === 'Gold')) problems.push(`no Gold ${h.pins.competitionGold}`);

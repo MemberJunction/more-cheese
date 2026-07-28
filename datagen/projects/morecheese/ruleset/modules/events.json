@@ -2,6 +2,33 @@
   "$comment": "EVENTS MODULE: conferences, workshops, webinars + registration behavior (pack: events).",
   "events": {
     "perYear": { "workshops": 5, "webinars": 6 },
+    "$bankNote": "Event naming banks were hardcoded in events.mjs: FOUR webinar topics covering 84 webinars ('Webinar: Label Law 2024' appeared six times) and four workshop subjects. Declared here and widened. Rename-in-place: pick() costs one draw at any size and EventKey is year+index, so all 16,827 registrations and their orders keep their keys.",
+    "webinarTopics": [
+      "Raw Milk Rules", "Cave Management", "Counter Culture", "Label Law",
+      "Listeria Control", "Export Paperwork", "Starter Culture Basics", "Costing a Make",
+      "Farmers' Market Sales", "Cut & Wrap Efficiency", "Whey Management", "Herd Health & Milk Quality",
+      "Allergen Labelling", "Environmental Monitoring", "Judging Standards", "Cheese Photography",
+      "Small-Room Affinage", "Cheese & Cider Pairing", "Wholesale Negotiation", "Packaging Sustainability",
+      "Seasonal Milk Variation", "Recall Readiness", "Insurance for Creameries", "Farm Shop Design",
+      "Digital Storefronts", "Apprenticeship Programmes", "Water Activity & Shelf Life", "Rennet Alternatives",
+      "Regenerative Dairy", "Cheese Tourism"
+    ],
+    "workshopSubjects": [
+      "Affinage", "Food Safety", "Retailing", "Sensory",
+      "Cheesemaking", "Blue Styles", "Alpine Styles", "Bloomy Rinds",
+      "Pasta Filata", "Goat & Sheep Milk", "Cut & Wrap", "Cave Design",
+      "Defect Diagnosis", "Competition Prep", "Costing", "Packaging",
+      "Milk Handling", "Rind Washing", "Export Readiness", "Farm Shop Retail"
+    ],
+    "conferenceCities": [
+      { "city": "Louisville", "state": "KY", "lat": 38.2527, "lon": -85.7585 },
+      { "city": "Des Moines", "state": "IA", "lat": 41.5868, "lon": -93.625 },
+      { "city": "Sacramento", "state": "CA", "lat": 38.5816, "lon": -121.4944 },
+      { "city": "Madison", "state": "WI", "lat": 43.0731, "lon": -89.4012 },
+      { "city": "Portland", "state": "OR", "lat": 45.5152, "lon": -122.6784 },
+      { "city": "Burlington", "state": "VT", "lat": 44.4759, "lon": -73.2121 },
+      { "city": "Asheville", "state": "NC", "lat": 35.5951, "lon": -82.5515 }
+    ],
     "conference": { "memberAttendanceTarget": 0.35, "tolerance": 0.10 },
     "registrationRatePerYear": { "base": 1.7, "engagementBeta": 0.6, "dispersionK": 1.4 },
     "arrows": {

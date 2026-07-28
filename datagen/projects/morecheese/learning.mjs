@@ -11,7 +11,8 @@ import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
 
-const TOPICS = ['Affinage Fundamentals', 'Cheese Chemistry', 'Sensory Foundations', 'Food Safety & HACCP', 'Counter Culture: Retailing', 'Raw Milk Practices', 'Cave Management', 'Dairy Microbiology'];
+// topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
+// hardcoded 8, which is why 111 courses produced only 81 distinct names
 
 export function buildLearning(cfg, people, periods) {
   const { R, seed, release, releaseYear } = cfg;
@@ -29,7 +30,15 @@ export function buildLearning(cfg, people, periods) {
       const mo = rC.int(0, 11);
       const start = new Date(Date.UTC(y, mo, rC.int(1, new Date(Date.UTC(y, mo + 1, 0)).getUTCDate())));
       if (start > release) continue;
-      courses.push({ CourseKey: `CRS-${y}-${i + 1}`, Name: `${rC.pick(TOPICS)} (${rC.pick(CHEESE_WORDS)} cohort)`, Year: y, StartDate: iso(start), DurationWeeks: rC.int(4, 10), IsSharedDemo: true });
+      const topic = rC.pick(L.topics);
+      // Topic/TrackKey ride in the pack but are NOT emitted yet — Course is a table we own
+      // and new columns need a migration (planned separately). They already let the gates
+      // check track balance, and make that migration a pure emitter change later.
+      courses.push({
+        CourseKey: `CRS-${y}-${i + 1}`, Name: `${topic.name} (${rC.pick(CHEESE_WORDS)} cohort)`,
+        Topic: topic.name, TrackKey: topic.track,
+        Year: y, StartDate: iso(start), DurationWeeks: rC.int(4, 10), IsSharedDemo: true,
+      });
     }
   }
   const coursesByYear = new Map();
