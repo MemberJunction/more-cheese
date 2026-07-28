@@ -633,6 +633,61 @@ function checkComposedApps() {
   check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
   check(`issues: no single title template dominates (${(titleShare * 100).toFixed(0)}% max)`, titleShare < 0.45, 'title variety');
   check('issues: descriptions present (the created date lives in the narrative)', issues.every((x) => x.Description && x.Description.length > 40), `${issues.filter((x) => x.Description).length}/${issues.length}`);
+  // ---------- contact + voluntary self-ID demographics ----------
+  // Blank rates are calibrated to associations that publish theirs (ASHA 2024/25, AIA 2024,
+  // APA). The load-bearing gate is the LAST one: values must not predict outcomes.
+  {
+    const crowd = people.filter((p) => !p._dup);
+    const share = (f) => crowd.filter(f).length / Math.max(1, crowd.length);
+    const gBlank = share((p) => !p.Gender), dBlank = share((p) => !p.DateOfBirth), phBlank = share((p) => !p.Phone);
+    check(`demographics: gender blank ${(gBlank * 100).toFixed(1)}% (published 8-11%, allow 5-15)`, gBlank >= 0.05 && gBlank <= 0.15, `${crowd.length} people`);
+    check(`demographics: birthdate blank ${(dBlank * 100).toFixed(1)}% (published 5-21%, allow 5-25)`, dBlank >= 0.05 && dBlank <= 0.25, 'completeness varies by tenure');
+    check(`contact: phone blank ${(phBlank * 100).toFixed(1)}% (allow 5-25)`, phBlank >= 0.05 && phBlank <= 0.25, `${crowd.filter((p) => p.Phone).length} with a phone`);
+    // two distinct nulls: never-answered (blank) and an explicit refusal, which behave
+    // differently in every published series
+    const pns = crowd.filter((p) => p.Gender === 'Prefer not to say').length / Math.max(1, crowd.length);
+    check(`demographics: explicit "Prefer not to say" present and small (${(pns * 100).toFixed(1)}%)`, pns > 0.005 && pns < 0.06, 'modelled separately from blank');
+    // completeness rises with tenure (APA: Fellows 5.6% blank vs Associates 45.5%)
+    const relIso = run.releaseDate;
+    const yrs = (p) => (new Date(relIso) - new Date(p.JoinDate)) / (365.25 * 86400000);
+    const newer = crowd.filter((p) => yrs(p) < 3), older = crowd.filter((p) => yrs(p) >= 8);
+    if (newer.length > 30 && older.length > 30) {
+      const bN = newer.filter((p) => !p.Gender).length / newer.length, bO = older.filter((p) => !p.Gender).length / older.length;
+      check(`demographics: recent joiners less complete than long-tenured (${(bN * 100).toFixed(0)}% vs ${(bO * 100).toFixed(0)}% blank)`, bN > bO, 'the documented real pattern');
+    }
+    // DECORRELATION — the rule that keeps this data honest. Whether someone answered may
+    // track tenure; WHAT they answered must not predict any outcome, or a demo "discovers"
+    // a disparity we fabricated.
+    const lastStatusOf = new Map();
+    for (const [m, list] of periodsByMember) lastStatusOf.set(m, list[list.length - 1].Status);
+    const popLapsed = crowd.filter((p) => lastStatusOf.get(p.MemberNumber) === 'Lapsed').length / Math.max(1, crowd.length);
+    // engagement must be measured on something OBSERVABLE — the latent theta is stripped
+    // from the shipped pack, so reading it here silently compares zeroes (this gate failed
+    // its own negative test that way). Registrations per member is the visible proxy.
+    const regCount = new Map();
+    for (const x of regs) regCount.set(x.MemberNumber, (regCount.get(x.MemberNumber) ?? 0) + 1);
+    const actOf = (p) => regCount.get(p.MemberNumber) ?? 0;
+    const popAct = crowd.reduce((s, p) => s + actOf(p), 0) / Math.max(1, crowd.length);
+    const actSd = Math.sqrt(crowd.reduce((s, p) => s + (actOf(p) - popAct) ** 2, 0) / Math.max(1, crowd.length));
+    const skews = [];
+    for (const g of ['Female', 'Male', 'Non-binary', 'Prefer not to say']) {
+      const grp = crowd.filter((p) => p.Gender === g);
+      // only assert where there is power to detect a real effect. A 65-person group on a
+      // ~20% base rate has a ±10pt binomial swing of its own; asserting there reports noise
+      // as a disparity (it false-redded the N=2500 build on "Prefer not to say").
+      // 3·SE, not 2, because four groups are tested at once — the repo's standing
+      // multiple-comparisons budget.
+      if (grp.length < 120) continue;
+      const lapsed = grp.filter((p) => lastStatusOf.get(p.MemberNumber) === 'Lapsed').length / grp.length;
+      const seL = Math.sqrt(popLapsed * (1 - popLapsed) / grp.length);
+      if (Math.abs(lapsed - popLapsed) > 0.03 + 3 * seL) skews.push(`${g} lapse ${(lapsed * 100).toFixed(0)}% vs ${(popLapsed * 100).toFixed(0)}%`);
+      const act = grp.reduce((s, p) => s + actOf(p), 0) / grp.length;
+      const seA = actSd / Math.sqrt(grp.length);
+      if (Math.abs(act - popAct) > 2.5 * seA) skews.push(`${g} activity ${act.toFixed(2)} vs ${popAct.toFixed(2)}`);
+    }
+    check('demographics: values do NOT predict outcomes (no authored disparity)', skews.length === 0, skews.join('; ') || `lapse and activity flat across groups (pop ${(popLapsed * 100).toFixed(0)}% lapsed, ${popAct.toFixed(2)} regs)`);
+  }
+
   // the relationship graph shows more than employment: every demo-owned type carries
   // edges, and referrals are causally sound (the referrer joined first)
   {

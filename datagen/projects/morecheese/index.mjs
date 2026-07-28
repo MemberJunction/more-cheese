@@ -21,6 +21,7 @@ import { buildDefects } from './defects.mjs';
 import { buildMessaging } from './messaging.mjs';
 import { buildPlatform } from './platform.mjs';
 import { buildSonar } from './sonar.mjs';
+import { identityFor, orgIdentityFor } from './identity.mjs';
 import { applyMotifs } from './motifs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
@@ -72,6 +73,14 @@ export function buildWorld(cfg) {
   // this list, and quoting a pre-defects count made the transcript false against the
   // very query it points the user at.
   const shippedPeople = [...people, ...defects.extraPeople];
+
+  // contact details + voluntary self-ID demographics, applied as ONE post-pass over the
+  // finished roster. Person/organization rows are hand-constructed in five places (crowd,
+  // hero, duplicate shell, crowd org, hero org, defect true-employer) and a field added to
+  // only some of them ships `undefined`; doing it here makes that impossible. Every value
+  // rides its own stream key, so nothing above this line moves.
+  for (const p of shippedPeople) Object.assign(p, identityFor(cfg.seed, p, cfg.release));
+  for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear));
   const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live

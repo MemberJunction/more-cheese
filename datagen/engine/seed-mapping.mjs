@@ -49,6 +49,8 @@ export const MAPPING = {
       json: 'organizations', table: '[__mj_BizAppsCommon].[Organization]',
       columns: (r) => ({
         ID: sqlId(uuidFor('org', r.OrgKey)), Name: sqlStr(r.Name),
+        LegalName: sqlStr(r.LegalName ?? null), Website: sqlStr(r.Website ?? null),
+        Phone: sqlStr(r.Phone ?? null), FoundedDate: sqlDate(r.FoundedDate ?? null),
         // their Status CHECK: Active|Inactive|Dissolved — our dissolution stories map straight on
         Status: sqlStr(r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active'),
       }),
@@ -76,6 +78,8 @@ export const MAPPING = {
       columns: (r) => ({
         ID: sqlId(uuidFor('person', r.MemberNumber)),
         FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), MiddleName: sqlStr(r.MiddleName), PreferredName: sqlStr(r.PreferredName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
+        Prefix: sqlStr(r.Prefix ?? null), Suffix: sqlStr(r.Suffix ?? null), Phone: sqlStr(r.Phone ?? null),
+        Gender: sqlStr(r.Gender ?? null), DateOfBirth: sqlDate(r.DateOfBirth ?? null),
         Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
       }),
     },
