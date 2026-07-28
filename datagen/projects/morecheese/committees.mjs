@@ -55,9 +55,14 @@ export function buildCommittees(cfg, people, periods) {
       decide: (p, prob, r) => {
         if (!r.bernoulli(prob)) return;
         const prior = incumbents.get(p.MemberNumber);
-        const committee = prior && r.bernoulli(C.participation.sameCommitteeShare ?? 0)
+        // you can only sit on a committee that exists in this term — the same guard the
+        // term list uses. Without it a member could be seated on the Membership &
+        // Outreach Committee (formed 2017) in the back-filled 2015 term, and the
+        // membership's TermKey then pointed at a term that was never emitted.
+        const open = C.list.filter((c) => t.end >= c.formed);
+        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(C.participation.sameCommitteeShare ?? 0)
           ? prior                      // returning members usually keep their seat
-          : r.pick(C.list).name;       // otherwise the member's own dice
+          : r.pick(open).name;         // otherwise the member's own dice
         pushMembership(p, committee, t, 'Member');
         servingNow.set(p.MemberNumber, committee);
       },
@@ -70,7 +75,9 @@ export function buildCommittees(cfg, people, periods) {
       for (const termName of seat.terms) {
         const t = C.terms.find((x) => x.name === termName);
         const p = people.find((x) => x.MemberNumber === h.memberNumber);
-        if (t && p) pushMembership(p, seat.committee, t, seat.role);
+        const c = C.list.find((x) => x.name === seat.committee);
+        // a declared seat still can't predate the committee (the term wouldn't exist)
+        if (t && p && c && t.end >= c.formed) pushMembership(p, seat.committee, t, seat.role);
       }
     }
   }

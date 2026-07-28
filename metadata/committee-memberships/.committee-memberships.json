@@ -27,12 +27,12 @@
   },
   {
     "primaryKey": {
-      "ID": "E3AF0D7B-C6E2-554D-AE84-81CD3A857919"
+      "ID": "A5C49F76-A00A-50EF-A46A-27B67F5B14E4"
     },
     "fields": {
       "PersonID": "C42B12B4-04E1-57C0-A286-962978C71D08",
       "RoleID": "@lookup:Committees: Roles.Name=Chair",
-      "TermID": "B875DB51-5DAB-514D-8EAD-368393EC3579",
+      "TermID": "34054356-A670-5992-B6E6-9525FD6D4163",
       "StartDate": "2015-01-01",
       "EndDate": "2016-12-31",
       "Status": "Ended"
@@ -118,12 +118,12 @@
   },
   {
     "primaryKey": {
-      "ID": "8ACC807B-707A-56B0-8D4A-771E432814F5"
+      "ID": "115561A6-E3C2-5839-BE01-87AC0FF52A83"
     },
     "fields": {
       "PersonID": "C42B12B4-04E1-57C0-A286-962978C71D08",
-      "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
-      "TermID": "1A3596A5-2F64-5E5D-A4FF-D0E054330962",
+      "RoleID": "@lookup:Committees: Roles.Name=Member",
+      "TermID": "7231F978-06BE-5C6A-8562-E4730060870D",
       "StartDate": "2017-01-01",
       "EndDate": "2018-12-31",
       "Status": "Ended"
@@ -161,7 +161,7 @@
     },
     "fields": {
       "PersonID": "36C673F0-5EEA-5607-8040-1EDA127803F4",
-      "RoleID": "@lookup:Committees: Roles.Name=Member",
+      "RoleID": "@lookup:Committees: Roles.Name=Vice Chair",
       "TermID": "1A3596A5-2F64-5E5D-A4FF-D0E054330962",
       "StartDate": "2017-01-01",
       "EndDate": "2018-12-31",

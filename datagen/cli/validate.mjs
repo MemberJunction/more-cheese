@@ -113,6 +113,15 @@ function checkPacks() {
   const badCm = cMemberships.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
   const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
   check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
+  // memberships → the term and committee they claim. A membership on a term that was never
+  // emitted is invisible in the packs (the seat still looks fine) and only fails at install,
+  // where the real FK rejects it — exactly how the 2015 Membership & Outreach seat surfaced.
+  const termKeys = new Set(cTerms.map((x) => x.TermKey));
+  const committeeKeys = new Set(cCommittees.map((x) => x.CommitteeKey));
+  const badMemTerm = cMemberships.filter((x) => !termKeys.has(x.TermKey) || !committeeKeys.has(x.CommitteeKey)).length;
+  const badTermC = cTerms.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
+  const badMeetC = cMeetings.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
+  check('pack refs: memberships→terms + terms/meetings→committees', badMemTerm + badTermC + badMeetC === 0, `${badMemTerm}+${badTermC}+${badMeetC} dangling`);
   const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
   // member responses must resolve to people; anonymous ones must carry a session id instead
   const badResp = fResponses.filter((x) => x.MemberNumber != null ? !peopleKeys.has(x.MemberNumber) : !x.AnonymousSessionID).length;
@@ -937,6 +946,10 @@ function checkComposedApps() {
     check(`committees: history spans ${termYears.length} terms from ${termYears[0]} (earliest formed ${earliestFormed})`, termYears.length >= 4, 'governance must not start yesterday');
     const noTermBeforeFormed = cTerms.filter((t) => { const c = cCommittees.find((x) => x.CommitteeKey === t.CommitteeKey); return c && t.EndDate < c.FormationDate; }).length;
     check('committees: no term predates its committee formation', noTermBeforeFormed === 0, `${noTermBeforeFormed} bad`);
+    // and no SEAT predates it either — the term guard alone left members serving on
+    // committees that did not exist yet
+    const seatBeforeFormed = cMemberships.filter((m) => { const c = cCommittees.find((x) => x.CommitteeKey === m.CommitteeKey); return c && m.EndDate < c.FormationDate; }).length;
+    check('committees: no seat predates its committee formation', seatBeforeFormed === 0, `${seatBeforeFormed} bad`);
     const byTerm = new Map();
     for (const m of cMemberships) { const y = m.TermKey.split(':')[1]; if (!byTerm.has(y)) byTerm.set(y, new Set()); byTerm.get(y).add(m.MemberNumber); }
     const ys = [...byTerm.keys()].sort();
