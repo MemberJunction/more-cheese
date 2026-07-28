@@ -107,11 +107,31 @@ step('frozen migration matches generator shapes (morecheese tables)', () => {
     .map((f) => readFileSync(join(migDir, f), 'utf8')).join('\n');
   const shim = readFileSync(join(HERE, 'out', 'sql', '00_schema.sql'), 'utf8');
   const cols = (body) => new Set([...body.matchAll(/^\s+\[?(\w+)\]? /gm)].map((x) => x[1]).filter((c) => c !== 'CONSTRAINT'));
+  // Migrations are IMMUTABLE once applied, so a new column arrives as `ALTER TABLE … ADD`
+  // in a follow-on V* file, never as an edit to the original CREATE. Parsing only CREATE
+  // made every such column invisible here and the gate then reported it as "in shim, not
+  // in migration" — i.e. the drift guard blocked the very change it was meant to police.
   const parse = (sql, resolve) => {
     const out = {};
     for (const m of sql.matchAll(/CREATE TABLE (\S+?)\.(\[?\w+\]?) \(([\s\S]*?)\n\);/g)) {
       const schema = resolve(m[1].replace(/[\[\]]/g, ''));
       out[`${schema}.${m[2].replace(/[\[\]]/g, '')}`] = cols(m[3]);
+    }
+    // then fold in later ADDs/DROPs, in file order, so the set reflects the CURRENT shape
+    for (const m of sql.matchAll(/ALTER TABLE\s+(\S+?)\.(\[?\w+\]?)\s+ADD\s+([\s\S]*?);/gi)) {
+      const key = `${resolve(m[1].replace(/[\[\]]/g, ''))}.${m[2].replace(/[\[\]]/g, '')}`;
+      if (!out[key]) continue; // ALTER on a table we don't track (dependency schema)
+      for (const part of m[3].split(',')) {
+        const name = part.trim().match(/^\[?(\w+)\]?\s+\w/);           // "Col TYPE …"
+        // skip constraints, and skip CodeGen's own audit columns: the baseline adds
+        // __mj_CreatedAt/__mj_UpdatedAt by ALTER, but the shim deliberately models none
+        // of what CodeGen owns, so folding them in would report drift that isn't real
+        if (name && !/^CONSTRAINT$/i.test(name[1]) && !name[1].startsWith('__mj_')) out[key].add(name[1]);
+      }
+    }
+    for (const m of sql.matchAll(/ALTER TABLE\s+(\S+?)\.(\[?\w+\]?)\s+DROP COLUMN\s+\[?(\w+)\]?/gi)) {
+      const key = `${resolve(m[1].replace(/[\[\]]/g, ''))}.${m[2].replace(/[\[\]]/g, '')}`;
+      out[key]?.delete(m[3]);
     }
     return out;
   };
