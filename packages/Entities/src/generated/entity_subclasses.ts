@@ -703,6 +703,42 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Display Name: Updated At
         * * SQL Data Type: datetimeoffset
         * * Default Value: getutcdate()`),
+    Country: z.string().nullable().describe(`
+        * * Field Name: Country
+        * * Display Name: Country
+        * * SQL Data Type: nvarchar(2)`),
+    CountryName: z.string().nullable().describe(`
+        * * Field Name: CountryName
+        * * Display Name: Country Name
+        * * SQL Data Type: nvarchar(100)`),
+    AddressLine1: z.string().nullable().describe(`
+        * * Field Name: AddressLine1
+        * * Display Name: Address Line 1
+        * * SQL Data Type: nvarchar(200)`),
+    AddressLine2: z.string().nullable().describe(`
+        * * Field Name: AddressLine2
+        * * Display Name: Address Line 2
+        * * SQL Data Type: nvarchar(200)`),
+    PostalCode: z.string().nullable().describe(`
+        * * Field Name: PostalCode
+        * * Display Name: Postal Code
+        * * SQL Data Type: nvarchar(20)`),
+    RaceEthnicity: z.string().nullable().describe(`
+        * * Field Name: RaceEthnicity
+        * * Display Name: Race Ethnicity
+        * * SQL Data Type: nvarchar(200)`),
+    EthnicityHispanic: z.string().nullable().describe(`
+        * * Field Name: EthnicityHispanic
+        * * Display Name: Ethnicity Hispanic
+        * * SQL Data Type: nvarchar(30)`),
+    PronounSet: z.string().nullable().describe(`
+        * * Field Name: PronounSet
+        * * Display Name: Pronoun Set
+        * * SQL Data Type: nvarchar(50)`),
+    PrimaryLanguage: z.string().nullable().describe(`
+        * * Field Name: PrimaryLanguage
+        * * Display Name: Primary Language
+        * * SQL Data Type: nvarchar(50)`),
     Person: z.string().describe(`
         * * Field Name: Person
         * * Display Name: Person
@@ -1047,6 +1083,22 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
         * * Display Name: Updated At
         * * SQL Data Type: datetimeoffset
         * * Default Value: getutcdate()`),
+    Country: z.string().nullable().describe(`
+        * * Field Name: Country
+        * * Display Name: Country
+        * * SQL Data Type: nvarchar(2)`),
+    CountryName: z.string().nullable().describe(`
+        * * Field Name: CountryName
+        * * Display Name: Country Name
+        * * SQL Data Type: nvarchar(100)`),
+    AddressLine1: z.string().nullable().describe(`
+        * * Field Name: AddressLine1
+        * * Display Name: Address Line 1
+        * * SQL Data Type: nvarchar(200)`),
+    PostalCode: z.string().nullable().describe(`
+        * * Field Name: PostalCode
+        * * Display Name: Postal Code
+        * * SQL Data Type: nvarchar(20)`),
     Organization: z.string().describe(`
         * * Field Name: Organization
         * * Display Name: Organization
@@ -2964,6 +3016,114 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     }
 
     /**
+    * * Field Name: Country
+    * * Display Name: Country
+    * * SQL Data Type: nvarchar(2)
+    */
+    get Country(): string | null {
+        return this.Get('Country');
+    }
+    set Country(value: string | null) {
+        this.Set('Country', value);
+    }
+
+    /**
+    * * Field Name: CountryName
+    * * Display Name: Country Name
+    * * SQL Data Type: nvarchar(100)
+    */
+    get CountryName(): string | null {
+        return this.Get('CountryName');
+    }
+    set CountryName(value: string | null) {
+        this.Set('CountryName', value);
+    }
+
+    /**
+    * * Field Name: AddressLine1
+    * * Display Name: Address Line 1
+    * * SQL Data Type: nvarchar(200)
+    */
+    get AddressLine1(): string | null {
+        return this.Get('AddressLine1');
+    }
+    set AddressLine1(value: string | null) {
+        this.Set('AddressLine1', value);
+    }
+
+    /**
+    * * Field Name: AddressLine2
+    * * Display Name: Address Line 2
+    * * SQL Data Type: nvarchar(200)
+    */
+    get AddressLine2(): string | null {
+        return this.Get('AddressLine2');
+    }
+    set AddressLine2(value: string | null) {
+        this.Set('AddressLine2', value);
+    }
+
+    /**
+    * * Field Name: PostalCode
+    * * Display Name: Postal Code
+    * * SQL Data Type: nvarchar(20)
+    */
+    get PostalCode(): string | null {
+        return this.Get('PostalCode');
+    }
+    set PostalCode(value: string | null) {
+        this.Set('PostalCode', value);
+    }
+
+    /**
+    * * Field Name: RaceEthnicity
+    * * Display Name: Race Ethnicity
+    * * SQL Data Type: nvarchar(200)
+    */
+    get RaceEthnicity(): string | null {
+        return this.Get('RaceEthnicity');
+    }
+    set RaceEthnicity(value: string | null) {
+        this.Set('RaceEthnicity', value);
+    }
+
+    /**
+    * * Field Name: EthnicityHispanic
+    * * Display Name: Ethnicity Hispanic
+    * * SQL Data Type: nvarchar(30)
+    */
+    get EthnicityHispanic(): string | null {
+        return this.Get('EthnicityHispanic');
+    }
+    set EthnicityHispanic(value: string | null) {
+        this.Set('EthnicityHispanic', value);
+    }
+
+    /**
+    * * Field Name: PronounSet
+    * * Display Name: Pronoun Set
+    * * SQL Data Type: nvarchar(50)
+    */
+    get PronounSet(): string | null {
+        return this.Get('PronounSet');
+    }
+    set PronounSet(value: string | null) {
+        this.Set('PronounSet', value);
+    }
+
+    /**
+    * * Field Name: PrimaryLanguage
+    * * Display Name: Primary Language
+    * * SQL Data Type: nvarchar(50)
+    */
+    get PrimaryLanguage(): string | null {
+        return this.Get('PrimaryLanguage');
+    }
+    set PrimaryLanguage(value: string | null) {
+        this.Set('PrimaryLanguage', value);
+    }
+
+    /**
     * * Field Name: Person
     * * Display Name: Person
     * * SQL Data Type: nvarchar(201)
@@ -3802,6 +3962,54 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
     */
     get __mj_UpdatedAt(): Date {
         return this.Get('__mj_UpdatedAt');
+    }
+
+    /**
+    * * Field Name: Country
+    * * Display Name: Country
+    * * SQL Data Type: nvarchar(2)
+    */
+    get Country(): string | null {
+        return this.Get('Country');
+    }
+    set Country(value: string | null) {
+        this.Set('Country', value);
+    }
+
+    /**
+    * * Field Name: CountryName
+    * * Display Name: Country Name
+    * * SQL Data Type: nvarchar(100)
+    */
+    get CountryName(): string | null {
+        return this.Get('CountryName');
+    }
+    set CountryName(value: string | null) {
+        this.Set('CountryName', value);
+    }
+
+    /**
+    * * Field Name: AddressLine1
+    * * Display Name: Address Line 1
+    * * SQL Data Type: nvarchar(200)
+    */
+    get AddressLine1(): string | null {
+        return this.Get('AddressLine1');
+    }
+    set AddressLine1(value: string | null) {
+        this.Set('AddressLine1', value);
+    }
+
+    /**
+    * * Field Name: PostalCode
+    * * Display Name: Postal Code
+    * * SQL Data Type: nvarchar(20)
+    */
+    get PostalCode(): string | null {
+        return this.Get('PostalCode');
+    }
+    set PostalCode(value: string | null) {
+        this.Set('PostalCode', value);
     }
 
     /**
