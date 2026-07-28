@@ -113,6 +113,11 @@ const TABLES = [
     c('SourceEntityID', UID, { null: true }), c('SourceRecordID', s(450), { null: true }),
     c('ResolvedAt', 'DATETIMEOFFSET', { null: true }), c('ClosedAt', 'DATETIMEOFFSET', { null: true }),
   ] },
+  { schema: '__mj_BizAppsIssues', table: 'IssueComment', cols: [
+    c('ID', UID, { pk: true }), c('IssueID', UID, { fk: '[__mj_BizAppsIssues].[Issue]' }),
+    c('Body', 'NVARCHAR(MAX)'), c('Source', s(20)),
+    c('AuthorPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+  ] },
   { schema: '__mj_BizAppsIssues', table: 'IssueNumberSequence', cols: [
     c('ScopeCode', s(50), { pk: true }), c('NextSequenceNumber', INT),
   ] },

@@ -339,6 +339,14 @@ export const MAPPING = {
       }),
     },
     {
+      json: 'issue_comments', table: '[__mj_BizAppsIssues].[IssueComment]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('issuecomment', r.CommentKey)), IssueID: sqlId(uuidFor('issue', r.IssueKey)),
+        Body: sqlStr(r.Body), Source: sqlStr(r.Source),
+        AuthorPersonID: sqlId(r.AuthorMemberNumber ? uuidFor('person', r.AuthorMemberNumber) : null),
+      }),
+    },
+    {
       json: 'issue_sequences', table: '[__mj_BizAppsIssues].[IssueNumberSequence]',
       columns: (r) => ({ ScopeCode: sqlStr(r.ScopeCode), NextSequenceNumber: sqlNum(r.NextSequenceNumber) }),
     },

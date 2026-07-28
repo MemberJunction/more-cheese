@@ -817,6 +817,26 @@ function checkComposedApps() {
     check(`demographics: ${langs.size} primary languages follow the country`, langs.size >= 6, 'not all English');
   }
 
+  // issue comments: a readable activity feed, in order, with legal Source values
+  {
+    const comments = load('issues', 'issue_comments');
+    const SRC = new Set(['inbound', 'outbound', 'internal']);
+    check(`issues: ${comments.length} comments across ${new Set(comments.map((c) => c.IssueKey)).size} tickets`, comments.length > 0, 'every ticket used to have an empty activity feed');
+    check('issues: comment Source values are legal (inbound/outbound/internal)', comments.every((c) => SRC.has(c.Source)), 'CHECK-constrained upstream');
+    const byIssue = new Map();
+    for (const c of comments) { if (!byIssue.has(c.IssueKey)) byIssue.set(c.IssueKey, []); byIssue.get(c.IssueKey).push(c); }
+    let backwards = 0;
+    for (const [, list] of byIssue) {
+      const dates = list.sort((a, b) => a.Sequence - b.Sequence).map((c) => c.Body.slice(1, 11));
+      for (let i = 1; i < dates.length; i++) if (dates[i] < dates[i - 1]) backwards++;
+    }
+    // the table has no author-settable timestamp, so the date is in the body — it still
+    // has to read forward (the first version resolved a ticket before its own triage note)
+    check('issues: comment threads read forward in time', backwards === 0, `${backwards} out of order`);
+    const orphan = comments.filter((c) => !issues.some((i2) => i2.IssueKey === c.IssueKey)).length;
+    check('issues: every comment belongs to a real ticket', orphan === 0, `${orphan} orphaned`);
+  }
+
   // the relationship graph shows more than employment: every demo-owned type carries
   // edges, and referrals are causally sound (the referrer joined first)
   {

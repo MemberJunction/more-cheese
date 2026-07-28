@@ -73,10 +73,62 @@
     "severity": {
       "$note": "severity = IMPACT, drawn per type; priority = URGENCY, derived from the type default with a severity bump (priorityRule) — decoupled so boards show a real matrix instead of a wall of Medium. ESTIMATE distributions.",
       "byType": {
-        "Billing": [["Critical", 0.1], ["High", 0.45], ["Medium", 0.35], ["Low", 0.1]],
-        "Data Correction": [["High", 0.1], ["Medium", 0.55], ["Low", 0.35]],
-        "Events": [["High", 0.15], ["Medium", 0.6], ["Low", 0.25]],
-        "General": [["Medium", 0.35], ["Low", 0.65]]
+        "Billing": [
+          [
+            "Critical",
+            0.1
+          ],
+          [
+            "High",
+            0.45
+          ],
+          [
+            "Medium",
+            0.35
+          ],
+          [
+            "Low",
+            0.1
+          ]
+        ],
+        "Data Correction": [
+          [
+            "High",
+            0.1
+          ],
+          [
+            "Medium",
+            0.55
+          ],
+          [
+            "Low",
+            0.35
+          ]
+        ],
+        "Events": [
+          [
+            "High",
+            0.15
+          ],
+          [
+            "Medium",
+            0.6
+          ],
+          [
+            "Low",
+            0.25
+          ]
+        ],
+        "General": [
+          [
+            "Medium",
+            0.35
+          ],
+          [
+            "Low",
+            0.65
+          ]
+        ]
       },
       "tolerance": 0.06
     },
@@ -89,6 +141,37 @@
       "share": 0.75,
       "tolerance": 0.08,
       "$note": "assigned issues go to committee OFFICERS (active-term Chairs/Vice-Chairs) — the renewal-outreach-to-chair precedent; New issues are more often still unassigned"
+    },
+    "comments": {
+      "$note": "Every ticket used to have an empty activity feed. Comments derive from the ticket's own state: a triage note when it was picked up, member replies, and a resolution note on terminal tickets. Source is CHECK-constrained to inbound/outbound/internal. NOTE the table has NO author-settable timestamp — only the system __mj_CreatedAt, which the entity SPs re-stamp on a metadata push — so each body opens with its own date, the same workaround the issue Description already uses.",
+      "sharePerIssue": 0.62,
+      "triage": [
+        "Picked this up — checking the account now.",
+        "Acknowledged. Pulling the record to see what happened.",
+        "Taking a look; I'll confirm shortly.",
+        "Assigned to me. Reviewing the history on this one."
+      ],
+      "internal": [
+        "Confirmed against the order history — the charge did post twice.",
+        "Directory record is stale; the employment edge was never end-dated.",
+        "No refund policy exception applies here, but it's within the goodwill threshold.",
+        "Checked with the events team — recordings were published late.",
+        "Duplicate of an earlier report from the same member.",
+        "Member's tier changed mid-cycle, which explains the amount."
+      ],
+      "memberReply": [
+        "Thanks — anything else you need from me?",
+        "That matches what I'm seeing on my side.",
+        "Appreciate the quick response.",
+        "Still showing the old details when I log in.",
+        "No rush, just wanted to make sure it was logged."
+      ],
+      "resolution": [
+        "Corrected and confirmed with the member. Closing.",
+        "Resolved — the adjustment has been applied.",
+        "Fixed on our side; the member has been notified.",
+        "Sorted. Record updated and verified."
+      ]
     }
   }
 }

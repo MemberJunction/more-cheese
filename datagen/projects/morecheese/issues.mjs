@@ -229,6 +229,40 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     };
   });
 
+  // ---------- comments: the activity feed every ticket lacked ----------
+  // Derived from the ticket's own state, so a resolved ticket reads like one. The table has
+  // no author-settable timestamp (only the system __mj_CreatedAt, which the entity SPs
+  // re-stamp), so each body opens with its own date — the same workaround Description uses.
+  const issueComments = [];
+  const CM = I.comments;
+  if (CM) {
+    for (const x of issues) {
+      const d = drafts.find((y) => y.key === x.IssueKey);
+      if (!d) continue;
+      const r = rng(seed, `issuecomment:${x.IssueKey}`);
+      if (!r.bernoulli(CM.sharePerIssue)) continue;
+      const worked = x.StatusKey !== 'New';
+      const terminal = x.StatusKey === 'Resolved' || x.StatusKey === 'Closed';
+      const at = (days) => iso(addDays(parseDate(d.created), days));
+      let n = 0;
+      // the feed must read forward: each entry is at least as late as the one before it
+      let clock = 0;
+      const push = (body, source, day) => { clock = Math.max(clock, day); return issueComments.push({
+        CommentKey: `${x.IssueKey}:c${n}`, IssueKey: x.IssueKey, Sequence: n++,
+        Body: `[${at(clock)}] ${body}`, Source: source,
+        AuthorMemberNumber: source === 'inbound' ? x.ReporterMemberNumber : (x.AssigneeMemberNumber ?? null),
+        IsSharedDemo: true,
+      }); };
+      if (worked) push(r.pick(CM.triage), 'outbound', r.int(0, 2));
+      if (worked && r.bernoulli(0.7)) push(r.pick(CM.internal), 'internal', r.int(1, 5));
+      if (worked && r.bernoulli(0.55)) push(r.pick(CM.memberReply), 'inbound', r.int(2, 9));
+      if (terminal) {
+        const resolvedDay = x.ResolvedAt ? Math.round((parseDate(x.ResolvedAt.slice(0, 10)) - parseDate(d.created)) / 86400000) : 6;
+        push(r.pick(CM.resolution), 'outbound', Math.max(clock + 1, resolvedDay));
+      }
+    }
+  }
+
   const issueSequences = [{ ScopeCode: I.numberPrefix, NextSequenceNumber: issues.length + 1, IsSharedDemo: true }];
-  return { issueTypes, issueStatuses, issues, issueSequences };
+  return { issueTypes, issueStatuses, issues, issueSequences, issueComments };
 }
