@@ -124,6 +124,8 @@ export const MAPPING = {
     },
     {
       json: 'people', table: '[morecheese_members].[MemberProfile]',
+      only: (r) => !r.IsProspect, // non-members are Person rows with no membership extension
+
       columns: (r) => ({
         ID: sqlId(uuidFor('memberprofile', r.MemberNumber)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
         OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null),
@@ -784,7 +786,7 @@ export function packSqlLines(pack, load, { transformTable = (t) => t } = {}) {
   const lines = [];
   const summary = [];
   for (const t of MAPPING[pack]) {
-    const rows = load(pack, t.json);
+    const rows = load(pack, t.json).filter(t.only ?? (() => true));
     const table = transformTable(t.table);
     if (rows.length === 0) {
       lines.push(`-- ${table}: 0 rows`, '');

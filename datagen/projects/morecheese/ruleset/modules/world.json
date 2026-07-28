@@ -1,5 +1,5 @@
 {
-  "$comment": "WORLD MODULE: organizations and geography — the exogenous drivers (pack: common).",
+  "$comment": "WORLD MODULE: organizations and geography \u2014 the exogenous drivers (pack: common).",
   "orgs": {
     "ratioToMembers": 0.25,
     "producerShare": 0.45,
@@ -24,10 +24,20 @@
     "$note": "cities carry pre-baked coordinates (GAP-11a); dairy-belt weighting inside NA"
   },
   "contacts": {
-    "$note": "ESTIMATE — contact methods and addresses are FIRST-CLASS rows in bizapps-common (ContactMethod, Address, AddressLink), which owns the domain. MemberProfile keeps its denormalised copy for segmentation; these rows are what the app's own UI reads. Types are referenced BY NAME — bizapps-common seeds them (finding F6).",
+    "$note": "ESTIMATE \u2014 contact methods and addresses are FIRST-CLASS rows in bizapps-common (ContactMethod, Address, AddressLink), which owns the domain. MemberProfile keeps its denormalised copy for segmentation; these rows are what the app's own UI reads. Types are referenced BY NAME \u2014 bizapps-common seeds them (finding F6).",
     "secondPhoneShare": 0.22,
     "linkedInShare": 0.18,
     "mobileFirstShare": 0.62,
     "orgPhoneShare": 0.7
+  },
+  "prospects": {
+    "$note": "ESTIMATE \u2014 non-members the federation knows: enquiries, free-webinar attendees, colleagues of members. A Person with NO MemberProfile (the v2 identity/membership split already models this). Conversion to membership and paid non-member pricing are deliberately out of scope for this pass.",
+    "ratioToMembers": 0.22,
+    "orgAffiliatedShare": 0.5,
+    "firstSeenMaxDaysAgo": 1460,
+    "webinarsPerProspectMean": 1.4,
+    "dispersionK": 1.1,
+    "maxWebinarsPerProspect": 5,
+    "attendShare": 0.52
   }
 }

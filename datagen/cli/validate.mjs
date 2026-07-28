@@ -30,11 +30,20 @@ const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 const R = await loadRuleset(run.scenario, run.project); // the validator judges against the SAME world (project + scenario) the run was built for
 
-const people = load('common', 'people');
+// NON-MEMBERS: the common pack's people table carries both members and prospects (a prospect
+// is a Person with no MemberProfile). Every gate below was written about MEMBERS, so `people`
+// and `regs` keep meaning exactly that and the non-member rows get their own names — adding
+// contacts to the roster must not silently move a single membership benchmark.
+const allPeople = load('common', 'people');
+const people = allPeople.filter((p) => !p.IsProspect);
+const prospects = allPeople.filter((p) => p.IsProspect);
+const prospectKeys = new Set(prospects.map((p) => p.MemberNumber));
 const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
-const regs = load('events', 'event_registrations');
+const allRegs = load('events', 'event_registrations');
+const regs = allRegs.filter((r) => !prospectKeys.has(r.MemberNumber));
+const prospectRegs = allRegs.filter((r) => prospectKeys.has(r.MemberNumber));
 const addresses = load('common', 'addresses');
 const addressLinks = load('common', 'address_links');
 const contactMethods = load('common', 'contact_methods');
@@ -131,9 +140,11 @@ function checkPacks() {
   {
     const orgKeys = new Set(orgs.map((o) => o.OrgKey));
     const addrKeys = new Set(addresses.map((a) => a.AddressKey));
-    const badCm = contactMethods.filter((c) => c.OwnerKind === 'person' ? !peopleKeys.has(c.OwnerKey) : !orgKeys.has(c.OwnerKey)).length;
+    // contact details belong to every PERSON we know, member or not
+    const anyPersonKeys = new Set(allPeople.map((p) => p.MemberNumber));
+    const badCm = contactMethods.filter((c) => c.OwnerKind === 'person' ? !anyPersonKeys.has(c.OwnerKey) : !orgKeys.has(c.OwnerKey)).length;
     const badLink = addressLinks.filter((l) => !addrKeys.has(l.AddressKey)
-      || (l.RecordKind === 'person' ? !peopleKeys.has(l.RecordKey) : !orgKeys.has(l.RecordKey))).length;
+      || (l.RecordKind === 'person' ? !anyPersonKeys.has(l.RecordKey) : !orgKeys.has(l.RecordKey))).length;
     check('pack refs: contact methods + address links → people/orgs/addresses', badCm + badLink === 0, `${badCm}+${badLink} dangling`);
     const badType = contactMethods.filter((c) => !CONTACT_TYPES.includes(c.ContactTypeName)).length;
     const badAType = addressLinks.filter((l) => !ADDRESS_TYPES.includes(l.AddressTypeName)).length;
@@ -143,10 +154,10 @@ function checkPacks() {
   // with a street address on their profile and no Address row is the empty-UI bug returning.
   {
     const linkedPeople = new Set(addressLinks.filter((l) => l.RecordKind === 'person').map((l) => l.RecordKey));
-    const missing = people.filter((p) => p.AddressLine1 && !linkedPeople.has(p.MemberNumber)).length;
+    const missing = allPeople.filter((p) => p.AddressLine1 && !linkedPeople.has(p.MemberNumber)).length;
     check('contacts: every profile address is also a bizapps-common Address', missing === 0, `${addresses.length} addresses, ${missing} missing`);
     const emailed = new Set(contactMethods.filter((c) => c.ContactTypeName === 'Email' && c.OwnerKind === 'person').map((c) => c.OwnerKey));
-    const noEmail = people.filter((p) => p.Email && !emailed.has(p.MemberNumber)).length;
+    const noEmail = allPeople.filter((p) => p.Email && !emailed.has(p.MemberNumber)).length;
     check('contacts: every member email is a ContactMethod row', noEmail === 0, `${emailed.size} people with an email method`);
     // one primary per channel — a UI that renders "the" phone picks the primary and must find one
     const dupPrimary = [...contactMethods.filter((c) => c.IsPrimary).reduce((m, c) => {
@@ -154,6 +165,29 @@ function checkPacks() {
       return m.set(k, (m.get(k) ?? 0) + 1);
     }, new Map()).values()].filter((n) => n > 1).length;
     check('contacts: at most one primary per owner and channel', dupPrimary === 0, `${dupPrimary} owners with two primaries`);
+  }
+  // NON-MEMBERS: a prospect is a Person with NO MemberProfile. The whole design rests on
+  // that, so assert it from both directions — no membership artefact may reference one, and
+  // they must still be real contacts (identity, email, a place in the world).
+  {
+    const periodKeys = new Set(periods.map((x) => x.MemberNumber));
+    const leaked = prospects.filter((p) => periodKeys.has(p.MemberNumber)).length;
+    check('prospects: no non-member has a membership period', leaked === 0, `${prospects.length} prospects, ${leaked} with membership`);
+    const share = allPeople.length ? prospects.length / allPeople.length : 0;
+    const want = R.prospects.ratioToMembers / (1 + R.prospects.ratioToMembers);
+    check(`prospects: ${(share * 100).toFixed(1)}% of known people are non-members vs ${(want * 100).toFixed(1)}% ±4`,
+      Math.abs(share - want) <= 0.04, 'an association knows more people than it has members');
+    const nameless = prospects.filter((p) => !p.FirstName || !p.LastName || !p.Email).length;
+    check('prospects: every non-member is a real contact (name + email)', nameless === 0, `${nameless} incomplete`);
+    // free webinars only — a paid seat needs an order, and non-member pricing is not modelled yet
+    const paidKeys = new Set(events.filter((e) => e.IsPaid).map((e) => e.EventKey));
+    const paidReg = prospectRegs.filter((r) => paidKeys.has(r.EventKey)).length;
+    check('prospects: non-member registrations are free events only', paidReg === 0, `${prospectRegs.length} registrations, ${paidReg} paid`);
+    const withReg = new Set(prospectRegs.map((r) => r.MemberNumber)).size;
+    check(`prospects: ${withReg} of ${prospects.length} came to a webinar`, prospectRegs.length > 0 && withReg > 0, `${prospectRegs.length} registrations`);
+    // and no order may ever reference one (the money chain is membership-only today)
+    const badOrder = orders.filter((o) => prospectKeys.has(o.MemberNumber)).length;
+    check('prospects: the money chain never bills a non-member', badOrder === 0, `${badOrder} orders`);
   }
   const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
   // member responses must resolve to people; anonymous ones must carry a session id instead

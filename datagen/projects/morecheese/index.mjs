@@ -15,6 +15,7 @@ import { buildCommittees } from './committees.mjs';
 import { buildForms } from './forms.mjs';
 import { buildRelationships } from './relationships.mjs';
 import { buildContacts } from './contacts.mjs';
+import { buildProspects } from './prospects.mjs';
 import { buildTasks } from './tasks.mjs';
 import { buildIssues } from './issues.mjs';
 import { buildPrograms } from './programs.mjs';
@@ -76,7 +77,10 @@ export function buildWorld(cfg) {
   // shells defects injected) — the seeded Skip transcripts quote counts computed from
   // this list, and quoting a pre-defects count made the transcript false against the
   // very query it points the user at.
-  const shippedPeople = [...people, ...defects.extraPeople];
+  // non-members: Person rows with no MemberProfile (see prospects.mjs). They join the
+  // shipped roster so identity, contact methods and addresses treat them like anyone else.
+  const prospects = buildProspects(cfg, orgs, events);
+  const shippedPeople = [...people, ...defects.extraPeople, ...prospects.prospects];
 
   // contact details + voluntary self-ID demographics, applied as ONE post-pass over the
   // finished roster. Person/organization rows are hand-constructed in five places (crowd,
@@ -89,22 +93,24 @@ export function buildWorld(cfg) {
   // and its UI reads these tables, not our MemberProfile columns). Must run after the
   // identity pass — it projects the addresses that pass just wrote.
   const contacts = buildContacts(cfg, shippedPeople, orgs);
-  const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
+  // platform residue is MEMBER-facing: its lists, favourites and the seeded Skip transcript
+  // all quote membership counts, so prospects must not be in the roster it sees
+  const platform = buildPlatform(cfg, { people: shippedPeople.filter((p) => !p.IsProspect), periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
   const sonar = buildSonar(cfg);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, contacts, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, contacts, prospects, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, contacts, tasks, issues, programs, messaging, defects, platform, sonar } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, contacts, prospects, tasks, issues, programs, messaging, defects, platform, sonar } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
-    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships, addresses: contacts.addresses, address_links: contacts.addressLinks, contact_methods: contacts.contactMethods } },
+    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople, ...prospects.prospects], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships, addresses: contacts.addresses, address_links: contacts.addressLinks, contact_methods: contacts.contactMethods } },
     membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
-    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta', '_future']), competition_entries: programs.competitionEntries } },
+    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: [...strip(registrations, ['_class', '_theta', '_future']), ...prospects.registrations], competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },
     committees: { dependsOn: ['common', 'membership'], tables: { committee_types: committees.types, committee_roles: committees.roles, committees: committees.committees, committee_terms: committees.terms, committee_memberships: committees.memberships, committee_meetings: committees.meetings, committee_attendance: committees.attendance, committee_agenda_items: committees.agendaItems, committee_motions: committees.motions, committee_votes: committees.votes } },

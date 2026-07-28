@@ -74,6 +74,8 @@ const MAPPING = [
   },
   {
     pack: 'common', json: 'people', dir: 'member-profiles', entity: 'MoreCheese: Member Profiles',
+    only: (r) => !r.IsProspect, // non-members are Person rows with no membership extension
+
     record: (r) => ({
       primaryKey: { ID: uuidFor('memberprofile', r.MemberNumber) },
       fields: {
@@ -342,7 +344,7 @@ for (const m of MAPPING) {
   rmSync(dir, { recursive: true, force: true }); // clear only OUR entity dir — never siblings
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, '.mj-sync.json'), JSON.stringify({ entity: m.entity, filePattern: '**/.*.json' }, null, 2));
-  const rows = load(m.pack, m.json).map(m.record);
+  const rows = load(m.pack, m.json).filter(m.only ?? (() => true)).map(m.record);
   const chunks = [];
   for (let i = 0; i < rows.length; i += CHUNK) chunks.push(rows.slice(i, i + CHUNK));
   chunks.forEach((chunk, i) => {
