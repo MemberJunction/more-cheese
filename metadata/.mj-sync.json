@@ -31,6 +31,7 @@
     "task-links",
     "issue-types",
     "issues",
+    "issue-comments",
     "issue-sequences",
     "portal-sessions",
     "secure-threads",
@@ -50,11 +51,14 @@
     "products",
     "orders",
     "order-lines",
-    "payments"
-  ],
-  "sqlLogging": {
-    "enabled": true,
-    "outputDirectory": "../migrations",
-    "formatAsMigration": true
-  }
+    "payments",
+    "sonar-score-band-sets",
+    "sonar-score-bands",
+    "sonar-time-windows",
+    "sonar-score-models",
+    "sonar-score-model-versions",
+    "sonar-model-related-entities",
+    "sonar-factors",
+    "sonar-model-factors"
+  ]
 }

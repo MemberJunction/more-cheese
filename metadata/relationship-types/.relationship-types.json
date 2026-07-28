@@ -11,10 +11,6 @@
       "ForwardLabel": "mentors",
       "ReverseLabel": "is mentored by",
       "IsActive": true
-    },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:20.438Z",
-      "checksum": "a73d2156b1bddb660522d82b904525eb3262c1366b725be49fda5df93d2439fb"
     }
   },
   {
@@ -29,10 +25,34 @@
       "ForwardLabel": "is duplicate of",
       "ReverseLabel": "has duplicate",
       "IsActive": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "370C5AFE-D4AD-54BE-89DA-D0F7B90CF329"
     },
-    "sync": {
-      "lastModified": "2026-07-24T05:20:20.448Z",
-      "checksum": "2ec2bdff0095cd5daa28c5705e5fc00fc50243c7a60d310cbfca4e2f4a12db8a"
+    "fields": {
+      "Name": "Referred By",
+      "Description": "Demo-owned type: member-get-a-member referrals — a real acquisition channel, and the edge a retention team wants to see",
+      "Category": "PersonToPerson",
+      "IsDirectional": true,
+      "ForwardLabel": "was referred by",
+      "ReverseLabel": "referred",
+      "IsActive": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CF8F060A-470D-5FA7-971D-08C640800BC8"
+    },
+    "fields": {
+      "Name": "Supplier Of",
+      "Description": "Demo-owned type: trade relationships between supplier organizations and the creameries they serve",
+      "Category": "OrganizationToOrganization",
+      "IsDirectional": true,
+      "ForwardLabel": "supplies",
+      "ReverseLabel": "is supplied by",
+      "IsActive": true
     }
   }
 ]
