@@ -71,7 +71,13 @@ export function emailFor(first, last, memberNumber, orgName = null) {
 function joinDateFor(r, cfg) {
   const { R, releaseYear } = cfg;
   const weights = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) weights.push([y, Math.pow(1.15, y - R.history.startYear)]);
+  const CV = R.regimes?.covid;
+  for (let y = R.history.startYear; y <= releaseYear; y++) {
+    // acquisition dips in the covid years: a trade body loses its in-person recruiting
+    // surface, so the growth curve has a visible notch rather than climbing through it
+    const covidDamp = CV?.years?.includes(y) ? (CV.joinRateMultiplier ?? 1) : 1;
+    weights.push([y, Math.pow(1.15, y - R.history.startYear) * covidDamp]);
+  }
   const y = r.pickWeighted(weights);
   const d = new Date(Date.UTC(y, r.int(0, 11), r.int(1, 28)));
   return d > cfg.release ? addYears(d, -1) : d;

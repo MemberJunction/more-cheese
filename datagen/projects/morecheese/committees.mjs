@@ -124,7 +124,10 @@ export function buildCommittees(cfg, people, periods) {
         const durationMin = rM.pick([60, 60, 90, 90, 120]);
         const endMs = Date.UTC(y, month - 1, dd.getUTCDate(), startHour, startMin) + durationMin * 60000;
         // most governance is virtual, but quarterly in-person/hybrid sessions happen
-        const locType = rM.pickWeighted([['Virtual', 0.68], ['InPerson', 0.2], ['Hybrid', 0.12]]);
+        // governance kept meeting through the pandemic, but online — an in-person
+        // committee meeting in April 2020 is the kind of detail that breaks a demo
+        const covidYear = (C.regimes ?? R.regimes).covid.years.includes(y);
+        const locType = covidYear ? 'Virtual' : rM.pickWeighted([['Virtual', 0.68], ['InPerson', 0.2], ['Hybrid', 0.12]]);
         const base = {
           MeetingKey: `${c.name}:${dt}`, CommitteeKey: c.name, Name: `${c.name} — Q${q + 1} ${y} meeting`,
           StartDateTime: `${dt}T${String(startHour).padStart(2, '0')}:${String(startMin).padStart(2, '0')}:00Z`,

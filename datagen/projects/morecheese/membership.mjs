@@ -115,9 +115,16 @@ export function runRenewalUnroll(cfg, people, orgs) {
       // employer-event lapses keep their DERIVED reason; the rest draw from the declared
       // churn mix (every lapse used to read "non-payment", so the reason column was
       // useless for the why-are-we-losing-members demo)
-      const reason = c.employerEvent ? 'non-payment — employer event'
-        : (M.churnReasons ? rng(seed, `churnreason:${c.p.MemberNumber}:${c.st.end}`).pickWeighted(M.churnReasons.weights)
-          : 'non-payment — lapsed past grace');
+      const CV = R.regimes.covid;
+      const lapseYear = parseDate(c.st.end).getUTCFullYear();
+      const rReason = rng(seed, `churnreason:${c.p.MemberNumber}:${c.st.end}`);
+      let reason;
+      if (c.employerEvent) reason = 'non-payment — employer event';
+      else if (CV.years.includes(lapseYear) && CV.churnReason && rReason.bernoulli(CV.churnReasonWeight ?? 0)) {
+        // era-specific reason, so the churn breakdown shows WHY 2020-21 differs rather
+        // than just showing more of the usual
+        reason = CV.churnReason;
+      } else reason = M.churnReasons ? rReason.pickWeighted(M.churnReasons.weights) : 'non-payment — lapsed past grace';
       pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
       c.st.alive = false;
     },

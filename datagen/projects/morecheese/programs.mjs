@@ -110,7 +110,10 @@ export function buildPrograms(cfg, people, periods, learning) {
     const pinned = R.heroes.find((h) => h.memberNumber === p.MemberNumber)?.competition;
     for (const y of memberYears.get(p.MemberNumber) ?? []) {
       const r = rng(seed, `compentry:${p.MemberNumber}:${y}`);
-      const n = pinned ? pinned.entriesPerYear : (r.bernoulli(PR.competition.entryRatePerYear) ? 1 + (r.bernoulli(0.25) ? 1 : 0) : 0);
+      // judging is a physical activity — the pandemic competition was curtailed
+      const CV = R.regimes.covid;
+      const compRate = PR.competition.entryRatePerYear * (CV.years.includes(y) ? (CV.competitionMultiplier ?? 1) : 1);
+      const n = pinned ? pinned.entriesPerYear : (r.bernoulli(compRate) ? 1 + (r.bernoulli(0.25) ? 1 : 0) : 0);
       for (let i = 0; i < Math.min(n, pinned ? n : PR.competition.maxPerYear); i++) {
         let result = r.pickWeighted(Object.entries(PR.competition.medalWeights));
         if (pinned?.pinnedResults?.[y] && i === 0) result = pinned.pinnedResults[y]; // Henri's Gold is a fact
@@ -136,7 +139,11 @@ export function buildPrograms(cfg, people, periods, learning) {
     decide: (p, prob, r) => {
       if (!r.bernoulli(prob)) return;
       for (const y of (memberYears.get(p.MemberNumber) ?? [])) {
-        const k = r.negbin(PR.advocacy.actionsPerYearMean, PR.advocacy.dispersionK);
+        // the one thing that goes UP: emergency relief and market-access lobbying, so the
+        // era is not a uniform dip
+        const CV2 = R.regimes.covid;
+        const advMean = PR.advocacy.actionsPerYearMean * (CV2.years.includes(y) ? (CV2.advocacyMultiplier ?? 1) : 1);
+        const k = r.negbin(advMean, PR.advocacy.dispersionK);
         for (let i = 0; i < k; i++) {
           advocacyActions.push(actionRow(p.MemberNumber, y, i, r.pickWeighted(Object.entries(PR.advocacy.kindWeights)), r.pick(PR.advocacy.topics), r));
         }

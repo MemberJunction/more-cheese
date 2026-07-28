@@ -254,6 +254,34 @@ function checkBenchmarks() {
   check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.paidInPerson.target * 100}% ±${NS.paidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.paidInPerson.target) <= NS.paidInPerson.tolerance, `${paid.length} regs`);
   check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.freeWebinar.target * 100}% ±${NS.freeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.freeWebinar.target) <= NS.freeWebinar.tolerance, `${webinar.length} regs`);
 
+  // ---------- COVID expresses as a causal era, not just a renewal footnote ----------
+  // Only traces that SURVIVE into shipped data are asserted here. The renewal dip is real
+  // but its cohort is archived away (see regimes.covid.$archiveCaveat), so it is checked
+  // through renewalEvents by the regime gate above, not through membership_periods.
+  {
+    const CV = R.regimes.covid, cy = CV.years;
+    const pre = cy[0] - 1;
+    const evOf = new Map(events.map((e) => [e.EventKey, e]));
+    const regsIn = (y, type) => regs.filter((x) => { const e = evOf.get(x.EventKey); return e && e.Year === y && (type === 'web' ? e.EventType === 'Webinar' : e.EventType !== 'Webinar'); }).length;
+    const ratio = (y) => regsIn(y, 'web') / Math.max(1, regsIn(y, 'inp'));
+    const flipped = cy.every((y) => ratio(y) > ratio(pre) * 1.8);
+    check(`covid: attendance flips to virtual (webinar:in-person ${ratio(pre).toFixed(2)} before, ${cy.map((y) => ratio(y).toFixed(2)).join('/')} during)`,
+      flipped, 'online attendance surged while in-person collapsed');
+    const webSched = (y) => events.filter((e) => e.Year === y && e.EventType === 'Webinar').length;
+    check(`covid: more webinars scheduled (${webSched(pre)} before vs ${cy.map(webSched).join('/')})`, cy.every((y) => webSched(y) > webSched(pre)), 'programming pivots online');
+    const mtgIn = (y) => cMeetings.filter((m) => m.StartDateTime.startsWith(String(y)));
+    const allVirtual = cy.every((y) => { const m = mtgIn(y); return m.length && m.every((x) => x.LocationType === 'Virtual'); });
+    check('covid: committee meetings all virtual in the pandemic years', allVirtual, 'governance kept meeting, but online');
+    const advIn = (y) => advocacy.filter((a) => a.ActionDate.startsWith(String(y))).length;
+    check(`covid: advocacy surges (${advIn(pre)} before vs ${cy.map(advIn).join('/')})`, cy.some((y) => advIn(y) > advIn(pre) * 1.5), 'relief and market-access lobbying — the era is not a uniform dip');
+    // CROWD entries only: Henri is a pinned persona who enters eight a year by declaration,
+    // and heroes are facts that deliberately do not respond to regimes. At pilot scale his
+    // eight swamp the crowd's dip entirely, which is what made this gate false-red.
+    const heroNums = new Set(R.heroes.map((h) => h.memberNumber));
+    const compIn = (y) => compEntries.filter((e) => e.EntryYear === y && !heroNums.has(e.MemberNumber)).length;
+    if (compIn(pre) >= 6) check(`covid: competition curtailed, crowd entries (${compIn(pre)} before vs ${cy.map(compIn).join('/')})`, cy.every((y) => compIn(y) < compIn(pre)), 'judging is a physical activity');
+  }
+
   // learners don't all finish on the cohort end date, and the calendar has no blind months
   const done = enrollments.filter((e) => e.CompletedOn);
   const onEnd = done.filter((e) => { const c = courses.find((x) => x.CourseKey === e.CourseKey); return c && e.CompletedOn === iso2(addDays2(parseDate2(c.StartDate), c.DurationWeeks * 7)); }).length;

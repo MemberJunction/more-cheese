@@ -42,7 +42,8 @@ export function buildEvents(cfg) {
   const E = R.events;
   const events = [];
   for (let y = R.history.startYear; y <= releaseYear; y++) {
-    const covid = R.regimes.covid.years.includes(y) && R.regimes.covid.virtualConference;
+    const covidYear = R.regimes.covid.years.includes(y);
+    const covid = covidYear && R.regimes.covid.virtualConference;
     // conference drifts around the ruleset anchor day and lands on a Tuesday
     const rConf = rng(seed, `confday:${y}`);
     let confDate = new Date(Date.UTC(y, R.history.conferenceMonth - 1, Math.max(8, Math.min(22, R.history.conferenceDay + rConf.int(-5, 6)))));
@@ -62,7 +63,10 @@ export function buildEvents(cfg) {
       if (d > addDays(release, 365)) continue;
       events.push({ EventKey: `EVT-${y}-W${i + 1}`, Name: `Workshop: ${rEv.pick(CHEESE_WORDS)} ${rEv.pick(E.workshopSubjects)}`, EventType: 'Workshop', Year: y, Date: iso(d), IsVirtual: false, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
     }
-    for (let i = 0; i < E.perYear.webinars; i++) {
+    // the federation pivots its programming online: fewer in-person workshops (above),
+    // MORE webinars
+    const nWeb = covidYear ? Math.round(E.perYear.webinars * (R.regimes.covid.webinarScheduleMultiplier ?? 1)) : E.perYear.webinars;
+    for (let i = 0; i < nWeb; i++) {
       const d = drawEventDate(rEv, y, 'Webinar');
       if (d > addDays(release, 365)) continue;
       events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(E.webinarTopics)} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
@@ -132,13 +136,20 @@ export function buildRegistrations(cfg, people, periods, events) {
     // contradictory Attended flags once the outcome pass rolled each copy separately.
     for (const p of activeThisYear) {
       const r = rng(seed, `regs:${p.MemberNumber}:${y}`);
-      const covid = R.regimes.covid.years.includes(y) ? R.regimes.covid.eventVolumeMultiplier : 1;
-      const mean = E.registrationRatePerYear.base * Math.exp(E.registrationRatePerYear.engagementBeta * (p._thetaPath?.[y] ?? p._theta)) * covid;
+      // COVID moves the two channels in OPPOSITE directions. The old code multiplied the
+      // whole rate by 0.5, which quietly cut webinar attendance in the year everyone went
+      // online. Volume now holds roughly steady while the MIX swings hard to virtual.
+      const CV = R.regimes.covid;
+      const isCovid = CV.years.includes(y);
+      const chanW = (ev) => !isCovid ? 1 : (ev.EventType === 'Webinar' ? (CV.virtualMultiplier ?? 1) : (CV.inPersonMultiplier ?? 1));
+      const mean = E.registrationRatePerYear.base * Math.exp(E.registrationRatePerYear.engagementBeta * (p._thetaPath?.[y] ?? p._theta));
       const k = r.negbin(mean, E.registrationRatePerYear.dispersionK);
       const pool = eventsByYear.get(y).filter((e) => e.EventType !== 'Conference');
       const taken = new Set();
       for (let i = 0; i < Math.min(k, pool.length); i++) {
-        const ev = r.pick(pool.filter((e) => !taken.has(e.EventKey)));
+        const avail = pool.filter((e) => !taken.has(e.EventKey));
+        if (!avail.length) break;
+        const ev = r.pickWeighted(avail.map((e) => [e, chanW(e)]));
         if (!ev) break;
         taken.add(ev.EventKey);
         if (!coveredOn(p.MemberNumber, ev.Date)) continue;
