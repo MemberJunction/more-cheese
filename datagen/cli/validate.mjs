@@ -723,6 +723,28 @@ function checkComposedApps() {
       if (Math.abs(act - popAct) > 2.5 * seA) skews.push(`${g} activity ${act.toFixed(2)} vs ${popAct.toFixed(2)}`);
     }
     check('demographics: values do NOT predict outcomes (no authored disparity)', skews.length === 0, skews.join('; ') || `lapse and activity flat across groups (pop ${(popLapsed * 100).toFixed(0)}% lapsed, ${popAct.toFixed(2)} regs)`);
+    // race/ethnicity follows the same voluntary rules, and blanks run HIGHER than gender
+    // in every published series (ASHA: race 17% vs gender 10%)
+    const rBlank = share((p) => !p.RaceEthnicity);
+    check(`demographics: race/ethnicity blank ${(rBlank * 100).toFixed(1)}% (published 15-17%, allow 10-26) and blanker than gender`, rBlank >= 0.10 && rBlank <= 0.26 && rBlank > gBlank, 'race is less complete than gender everywhere it is published');
+    check('demographics: Hispanic origin asked as its own question', crowd.some((p) => p.EthnicityHispanic) && crowd.some((p) => p.RaceEthnicity && !p.EthnicityHispanic), 'separate instrument, separate blanks');
+    // the same decorrelation rule applies to race — this is the one that matters most
+    const raceSkews = [];
+    for (const v of ['White', 'Asian', 'Black or African American', 'Prefer not to say']) {
+      const grp = crowd.filter((p) => p.RaceEthnicity === v);
+      if (grp.length < 120) continue;
+      const lapsed = grp.filter((p) => lastStatusOf.get(p.MemberNumber) === 'Lapsed').length / grp.length;
+      if (Math.abs(lapsed - popLapsed) > 0.03 + 3 * Math.sqrt(popLapsed * (1 - popLapsed) / grp.length)) raceSkews.push(`${v} lapse ${(lapsed * 100).toFixed(0)}%`);
+      const act = grp.reduce((s, p) => s + actOf(p), 0) / grp.length;
+      if (Math.abs(act - popAct) > 2.5 * (actSd / Math.sqrt(grp.length))) raceSkews.push(`${v} activity ${act.toFixed(2)}`);
+    }
+    check('demographics: race/ethnicity does NOT predict outcomes', raceSkews.length === 0, raceSkews.join('; ') || 'flat across groups');
+    // addresses are country-shaped, not all US ZIPs
+    const withAddr = crowd.filter((p) => p.AddressLine1);
+    const postalShapes = new Set(withAddr.map((p) => String(p.PostalCode).replace(/[0-9]/g, '9').replace(/[A-Za-z]/g, 'A')));
+    check(`addresses: ${withAddr.length} present, ${postalShapes.size} distinct postal formats`, postalShapes.size >= 6, 'a French code is not a US ZIP');
+    const langs = new Set(crowd.map((p) => p.PrimaryLanguage));
+    check(`demographics: ${langs.size} primary languages follow the country`, langs.size >= 6, 'not all English');
   }
 
   // the relationship graph shows more than employment: every demo-owned type carries

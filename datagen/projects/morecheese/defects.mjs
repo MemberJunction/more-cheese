@@ -40,7 +40,7 @@ export function buildDefects(cfg, people, orgs, relationships) {
       // transliterate like emailFor does — building this by hand used to DELETE accents
       // (Grüber -> grber), which is a different defect from the one we intend to seed
       Email: `${deaccent(first[0] + p.LastName).toLowerCase().replace(/[^a-z0-9]/g, '')}.${p.MemberNumber.replace(/\D/g, '')}@${consumerDomainFor(dupNumber)}`,
-      Segment: p.Segment, Region: p.Region, City: p.City, State: p.State, Latitude: p.Latitude, Longitude: p.Longitude,
+      Segment: p.Segment, Region: p.Region, Country: p.Country, CountryName: p.CountryName, City: p.City, State: p.State, Latitude: p.Latitude, Longitude: p.Longitude,
       OrgKey: null, JoinDate: iso(addDays(release, -rDup.int(30, 700))), IsSharedDemo: true, _dup: true,
     });
     labels.push({

@@ -21,17 +21,28 @@ import { rng } from '../../engine/rng.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
 import { orgDomainFor } from './world.mjs';
 
-/** national phone shapes — keyed off the (overloaded) State field until Country exists */
+/** national phone shapes, keyed off Country (ISO2) */
 const PHONE = {
   FR: (r) => `+33 ${r.int(1, 9)} ${d2(r)} ${d2(r)} ${d2(r)} ${d2(r)}`,
   DK: (r) => `+45 ${d2(r)} ${d2(r)} ${d2(r)} ${d2(r)}`,
   NL: (r) => `+31 ${d2(r)} ${d3(r)} ${d4(r)}`,
   CH: (r) => `+41 ${d2(r)} ${d3(r)} ${d2(r)} ${d2(r)}`,
-  UK: (r) => `+44 ${d4(r)} ${d3(r)}${d3(r)}`,
+  GB: (r) => `+44 ${d4(r)} ${d3(r)}${d3(r)}`,
+  IE: (r) => `+353 ${r.int(1, 99)} ${d3(r)} ${d4(r)}`,
+  IT: (r) => `+39 ${d3(r)} ${d3(r)} ${d4(r)}`,
+  ES: (r) => `+34 ${d3(r)} ${d3(r)} ${d3(r)}`,
+  PT: (r) => `+351 ${d3(r)} ${d3(r)} ${d3(r)}`,
+  DE: (r) => `+49 ${d3(r)} ${d4(r)}${d3(r)}`,
+  AT: (r) => `+43 ${d3(r)} ${d3(r)}${d4(r)}`,
+  GR: (r) => `+30 ${d3(r)} ${d3(r)} ${d4(r)}`,
+  PL: (r) => `+48 ${d3(r)} ${d3(r)} ${d3(r)}`,
+  AR: (r) => `+54 ${d2(r)} ${d4(r)}-${d4(r)}`,
+  JP: (r) => `+81 ${d2(r)} ${d4(r)} ${d4(r)}`,
+  CA: (r) => `+1 (${r.int(226, 905)}) ${d3(r)}-${d4(r)}`,
+  US: (r) => `+1 (${r.int(201, 989)}) ${d3(r)}-${d4(r)}`,
   MX: (r) => `+52 ${d2(r)} ${d4(r)} ${d4(r)}`,
   AU: (r) => `+61 ${r.int(2, 8)} ${d4(r)} ${d4(r)}`,
   NZ: (r) => `+64 ${r.int(3, 9)} ${d3(r)} ${d4(r)}`,
-  'CA-ON': (r) => `+1 (${r.int(226, 905)}) ${d3(r)}-${d4(r)}`,
 };
 const d2 = (r) => String(r.int(0, 99)).padStart(2, '0');
 const d3 = (r) => String(r.int(0, 999)).padStart(3, '0');
@@ -54,7 +65,7 @@ export function identityFor(seed, p, release) {
   const tenure = Math.max(0, (release - parseDate(p.JoinDate)) / (365.25 * 86400000));
 
   // --- phone: national format, sometimes absent
-  const fmt = PHONE[p.State] ?? usPhone;
+  const fmt = PHONE[p.Country] ?? usPhone;
   const Phone = rc.bernoulli(answeredShare(0.09, tenure)) ? fmt(rc) : null;
 
   // --- prefix/suffix: occupational, not demographic (an educator is likelier to be Dr.)
@@ -80,21 +91,100 @@ export function identityFor(seed, p, release) {
     DateOfBirth = iso(new Date(Date.UTC(yr, mo, rd.int(1, new Date(Date.UTC(yr, mo + 1, 0)).getUTCDate()))));
   }
 
-  return { Prefix, Suffix, Phone, Gender, DateOfBirth };
+  // --- postal address, in the destination country's own shape
+  const addr = addressFor(rc, p);
+
+  // --- race / ethnicity: same voluntary-self-ID rules as gender. Blank rates run higher
+  // than gender in every published series (ASHA: race 17% vs gender 10%), and the
+  // Hispanic-origin question is asked SEPARATELY, as real instruments do.
+  const answeredRace = rd.bernoulli(answeredShare(0.095, tenure));
+  const RaceEthnicity = answeredRace
+    ? rd.pickWeighted([
+      ['White', 0.62], ['Asian', 0.09], ['Black or African American', 0.07],
+      ['American Indian or Alaska Native', 0.01], ['Native Hawaiian or Pacific Islander', 0.005],
+      ['Two or more races', 0.045], ['Prefer not to say', 0.16],
+    ])
+    : null;
+  const EthnicityHispanic = rd.bernoulli(answeredShare(0.11, tenure))
+    ? rd.pickWeighted([['Not Hispanic or Latino', 0.83], ['Hispanic or Latino', 0.14], ['Prefer not to say', 0.03]])
+    : null;
+  const PronounSet = rd.bernoulli(answeredShare(0.55, tenure))   // far less commonly filled
+    ? rd.pickWeighted([['she/her', 0.46], ['he/him', 0.46], ['they/them', 0.06], ['she/they', 0.01], ['he/they', 0.01]])
+    : null;
+  const PrimaryLanguage = LANGUAGE[p.Country] ?? 'English';
+
+  return { Prefix, Suffix, Phone, Gender, DateOfBirth, RaceEthnicity, EthnicityHispanic, PronounSet, PrimaryLanguage, ...addr };
+}
+
+/** primary language follows the country, not the person's name origin */
+const LANGUAGE = {
+  US: 'English', CA: 'English', GB: 'English', IE: 'English', AU: 'English', NZ: 'English',
+  FR: 'French', IT: 'Italian', ES: 'Spanish', PT: 'Portuguese', MX: 'Spanish', AR: 'Spanish',
+  NL: 'Dutch', DK: 'Danish', DE: 'German', AT: 'German', CH: 'German', GR: 'Greek',
+  PL: 'Polish', JP: 'Japanese',
+};
+
+/** national postal formats — a French code is not a US ZIP, and the ordering differs too */
+const STREETS = ['Mill', 'Church', 'Orchard', 'Station', 'Market', 'Meadow', 'Bridge', 'High', 'Cave', 'Dairy', 'Creamery', 'Spring'];
+const SUFFIX_BY_COUNTRY = {
+  US: ['St', 'Ave', 'Rd', 'Ln', 'Way'], CA: ['St', 'Ave', 'Rd'], GB: ['Street', 'Road', 'Lane'],
+  IE: ['Street', 'Road'], AU: ['St', 'Rd'], NZ: ['St', 'Rd'],
+  FR: ['Rue', 'Avenue', 'Chemin'], IT: ['Via', 'Viale'], ES: ['Calle', 'Avenida'], PT: ['Rua'],
+  MX: ['Calle', 'Avenida'], AR: ['Calle'], NL: ['straat', 'weg'], DK: ['gade', 'vej'],
+  DE: ['straße', 'weg'], AT: ['straße'], CH: ['strasse'], GR: ['Odos'], PL: ['ulica'], JP: ['Chome'],
+};
+function addressFor(r, p) {
+  const c = p.Country ?? 'US';
+  const num = r.int(1, 240);
+  const street = r.pick(STREETS);
+  const sfx = r.pick(SUFFIX_BY_COUNTRY[c] ?? ['St']);
+  // romance/germanic ordering puts the number after the street name
+  const numberLast = ['FR', 'IT', 'ES', 'PT', 'MX', 'AR', 'NL', 'DK', 'DE', 'AT', 'CH', 'GR', 'PL'].includes(c);
+  const joined = ['NL', 'DK', 'DE', 'AT', 'CH'].includes(c); // Millstraat, not Mill straat
+  const line = joined ? `${street}${sfx} ${num}`
+    : numberLast ? `${sfx} ${street} ${num}` : `${num} ${street} ${sfx}`;
+  const postal = {
+    US: () => String(r.int(1001, 99950)).padStart(5, '0'),
+    CA: () => `${r.pick(['K', 'L', 'M', 'N', 'V'])}${r.int(0, 9)}${r.pick(['A', 'B', 'C', 'J', 'R'])} ${r.int(0, 9)}${r.pick(['A', 'B', 'X', 'Z'])}${r.int(0, 9)}`,
+    GB: () => `${r.pick(['BA', 'TA', 'SY', 'KA'])}${r.int(1, 20)} ${r.int(1, 9)}${r.pick(['AA', 'BQ', 'HX', 'PT'])}`,
+    IE: () => `${r.pick(['R95', 'T12', 'D02'])} ${r.pick(['XY', 'AB', 'K4'])}${r.int(10, 99)}`,
+    FR: () => String(r.int(1000, 98999)).padStart(5, '0'),
+    IT: () => String(r.int(10, 98999)).padStart(5, '0'),
+    ES: () => String(r.int(1000, 52999)).padStart(5, '0'),
+    PT: () => `${String(r.int(1000, 9999))}-${String(r.int(0, 999)).padStart(3, '0')}`,
+    MX: () => String(r.int(1000, 99999)).padStart(5, '0'),
+    AR: () => `${r.pick(['B', 'C', 'X'])}${r.int(1000, 9999)}${r.pick(['ABC', 'XYZ', 'DEF'])}`,
+    NL: () => `${r.int(1000, 9999)} ${r.pick(['AB', 'CD', 'JK', 'ZX'])}`,
+    DK: () => String(r.int(1000, 9990)),
+    DE: () => String(r.int(1000, 99998)).padStart(5, '0'),
+    AT: () => String(r.int(1000, 9992)),
+    CH: () => String(r.int(1000, 9658)),
+    GR: () => `${r.int(100, 999)} ${r.int(10, 99)}`,
+    PL: () => `${String(r.int(0, 99)).padStart(2, '0')}-${String(r.int(0, 999)).padStart(3, '0')}`,
+    JP: () => `${String(r.int(0, 999)).padStart(3, '0')}-${String(r.int(0, 9999)).padStart(4, '0')}`,
+  }[c] ?? (() => String(r.int(10000, 99999)));
+  // addresses are less complete than phones in every AMS that publishes fill rates
+  if (!r.bernoulli(0.86)) return { AddressLine1: null, AddressLine2: null, PostalCode: null };
+  return {
+    AddressLine1: line,
+    AddressLine2: r.bernoulli(0.14) ? `${r.pick(['Unit', 'Apt', 'Suite'])} ${r.int(1, 40)}` : null,
+    PostalCode: postal(),
+  };
 }
 
 /** Organization contact/profile fields — all pre-existing upstream columns. */
 export function orgIdentityFor(seed, o, releaseYear) {
   const r = rng(seed, `orgmeta:${o.OrgKey}`);
-  const suffixByCountry = { FR: 'SARL', DK: 'ApS', NL: 'B.V.', CH: 'AG', UK: 'Ltd', MX: 'S.A. de C.V.', AU: 'Pty Ltd', NZ: 'Ltd' };
-  const legalSuffix = suffixByCountry[o.State] ?? (o.Type === 'Producer' ? 'LLC' : 'Inc.');
+  const suffixByCountry = { FR: 'SARL', DK: 'ApS', NL: 'B.V.', CH: 'AG', GB: 'Ltd', IE: 'Ltd', IT: 'S.r.l.', ES: 'S.L.', PT: 'Lda', DE: 'GmbH', AT: 'GmbH', GR: 'EPE', PL: 'Sp. z o.o.', MX: 'S.A. de C.V.', AR: 'S.A.', AU: 'Pty Ltd', NZ: 'Ltd', JP: 'K.K.', CA: 'Inc.' };
+  const legalSuffix = suffixByCountry[o.Country] ?? (o.Type === 'Producer' ? 'LLC' : 'Inc.');
   const founded = releaseYear - r.int(3, 80);
   return {
     LegalName: `${o.Name} ${legalSuffix}`,
     // same slug as the work-email domain, so a member's address and their employer's
     // website agree instead of disagreeing on the truncation
     Website: r.bernoulli(0.72) ? `https://www.${orgDomainFor(o.Name)}` : null,
-    Phone: r.bernoulli(0.66) ? (PHONE[o.State] ?? usPhone)(r) : null,
+    Phone: r.bernoulli(0.66) ? (PHONE[o.Country] ?? usPhone)(r) : null,
     FoundedDate: `${founded}-${String(r.int(1, 12)).padStart(2, '0')}-${String(r.int(1, 28)).padStart(2, '0')}`,
+    ...(() => { const a = addressFor(r, o); return { AddressLine1: a.AddressLine1, PostalCode: a.PostalCode }; })(),
   };
 }

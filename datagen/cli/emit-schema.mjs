@@ -140,15 +140,15 @@ const TABLES = [
   // hard FKs into the dependency schema (Marcelo's linking ruling)
   { schema: 'morecheese_members', table: 'OrganizationProfile', cols: [
     c('ID', UID, { pk: true }), c('OrganizationID', UID, { fk: '[__mj_BizAppsCommon].[Organization]' }),
-    c('OrgKey', s(50)), c('Type', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
+    c('OrgKey', s(50)), c('Type', s(50)), c('Region', s(50)), c('Country', s(2), { null: true }), c('CountryName', s(100), { null: true }), c('City', s(100)), c('State', s(50)), c('AddressLine1', s(200), { null: true }), c('PostalCode', s(20), { null: true }),
     c('Latitude', GEO), c('Longitude', GEO),
     c('LifecycleEventKind', s(50), { null: true }), c('LifecycleEventYear', INT, { null: true }), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_members', table: 'MemberProfile', cols: [
     c('ID', UID, { pk: true }), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
-    c('MemberNumber', s(50)), c('Segment', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
-    c('Latitude', GEO), c('Longitude', GEO), c('JoinDate', DATE), c('IsSharedDemo', BIT),
+    c('MemberNumber', s(50)), c('Segment', s(50)), c('Region', s(50)), c('Country', s(2), { null: true }), c('CountryName', s(100), { null: true }), c('City', s(100)), c('State', s(50)), c('AddressLine1', s(200), { null: true }), c('AddressLine2', s(200), { null: true }), c('PostalCode', s(20), { null: true }),
+    c('Latitude', GEO), c('Longitude', GEO), c('JoinDate', DATE), c('RaceEthnicity', s(200), { null: true }), c('EthnicityHispanic', s(30), { null: true }), c('PronounSet', s(50), { null: true }), c('PrimaryLanguage', s(50), { null: true }), c('IsSharedDemo', BIT),
   ] },
   // bizapps-committees stand-ins (B202602151200) — same IF-guard convention
   { schema: '__mj_BizAppsCommittees', table: 'Type', cols: [

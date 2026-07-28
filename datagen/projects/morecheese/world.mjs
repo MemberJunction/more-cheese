@@ -141,7 +141,11 @@ export function buildPeople(cfg, orgs) {
     const idx = R.heroes.indexOf(h);
     people[idx] = {
       MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, MiddleName: null, PreferredName: h.preferred ?? null, Email: emailFor(h.first, h.last, h.memberNumber, heroOrg?.Name), Title: h.title ?? null,
-      Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
+      Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region,
+      // heroes pin their city; look the country up from the bank so a pinned persona is
+      // not the one record in the roster with no country
+      ...(() => { const hit = (CITIES[h.region] ?? []).find((c) => c[0] === h.city); return { Country: hit?.[5] ?? null, CountryName: hit?.[6] ?? null }; })(),
+      City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
       OrgKey: heroOrg?.OrgKey ?? null, JoinDate: joinDate,
       _theta: h.theta, _thetaPath: h.thetaByYear ?? null, _phi: h.phi, // pinned level — or a pinned ARC (thetaByYear); never drawn drift
       _lapseYear: h.lapseYear ?? null,
