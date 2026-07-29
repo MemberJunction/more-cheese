@@ -74,6 +74,8 @@ const MAPPING = [
   },
   {
     pack: 'common', json: 'people', dir: 'member-profiles', entity: 'MoreCheese: Member Profiles',
+    only: (r) => !r.IsProspect, // non-members are Person rows with no membership extension
+
     record: (r) => ({
       primaryKey: { ID: uuidFor('memberprofile', r.MemberNumber) },
       fields: {
@@ -124,6 +126,29 @@ const MAPPING = [
       ToPersonID: r.ToMemberNumber ? uuidFor('person', r.ToMemberNumber) : null,
       ToOrganizationID: r.ToOrgKey ? uuidFor('org', r.ToOrgKey) : null,
       Title: r.Title ?? null, StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status, Notes: r.Notes ?? null,
+    } }) },
+  // contact/address rows live in bizapps-common's OWN tables — that app owns the domain and
+  // its UI reads these, not our MemberProfile columns. ContactType/AddressType are SEEDED by
+  // the app, so they resolve BY NAME (@lookup), never by a pinned id we invent (finding F6).
+  { pack: 'common', json: 'addresses', dir: 'addresses', entity: 'MJ_BizApps_Common: Addresses',
+    record: (r) => ({ primaryKey: { ID: uuidFor('address', r.AddressKey) }, fields: {
+      Line1: r.Line1, Line2: r.Line2, City: r.City, StateProvince: r.StateProvince,
+      PostalCode: r.PostalCode, Country: r.Country, Latitude: r.Latitude, Longitude: r.Longitude,
+    } }) },
+  { pack: 'common', json: 'address_links', dir: 'address-links', entity: 'MJ_BizApps_Common: Address Links',
+    record: (r) => ({ primaryKey: { ID: uuidFor('addresslink', r.LinkKey) }, fields: {
+      AddressID: uuidFor('address', r.AddressKey),
+      EntityID: `@lookup:Entities.Name=${r.EntityName}`,
+      RecordID: uuidFor(r.RecordKind === 'org' ? 'org' : 'person', r.RecordKey),
+      AddressTypeID: `@lookup:MJ_BizApps_Common: Address Types.Name=${r.AddressTypeName}`,
+      IsPrimary: r.IsPrimary, Rank: r.Rank,
+    } }) },
+  { pack: 'common', json: 'contact_methods', dir: 'contact-methods', entity: 'MJ_BizApps_Common: Contact Methods',
+    record: (r) => ({ primaryKey: { ID: uuidFor('contactmethod', r.MethodKey) }, fields: {
+      PersonID: r.OwnerKind === 'person' ? uuidFor('person', r.OwnerKey) : null,
+      OrganizationID: r.OwnerKind === 'org' ? uuidFor('org', r.OwnerKey) : null,
+      ContactTypeID: `@lookup:MJ_BizApps_Common: Contact Types.Name=${r.ContactTypeName}`,
+      Value: r.Value, Label: r.Label, IsPrimary: r.IsPrimary,
     } }) },
     // committees pack → bizapps-committees entities (their prefix 'Committees: '); no IsSharedDemo
   { pack: 'committees', json: 'committee_types', dir: 'committee-types', entity: 'Committees: Types',
@@ -319,7 +344,7 @@ for (const m of MAPPING) {
   rmSync(dir, { recursive: true, force: true }); // clear only OUR entity dir — never siblings
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, '.mj-sync.json'), JSON.stringify({ entity: m.entity, filePattern: '**/.*.json' }, null, 2));
-  const rows = load(m.pack, m.json).map(m.record);
+  const rows = load(m.pack, m.json).filter(m.only ?? (() => true)).map(m.record);
   const chunks = [];
   for (let i = 0; i < rows.length; i += CHUNK) chunks.push(rows.slice(i, i + CHUNK));
   chunks.forEach((chunk, i) => {

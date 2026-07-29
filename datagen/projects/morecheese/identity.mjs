@@ -50,6 +50,9 @@ const d4 = (r) => String(r.int(0, 9999)).padStart(4, '0');
 const usPhone = (r) => `+1 (${r.int(201, 989)}) ${d3(r)}-${d4(r)}`;
 
 /** completeness rises with tenure; newest joiners are about twice as blank (AIA 2024) */
+/** non-members answer almost no profile questions — they were never asked */
+const R_PROSPECT_SELF_ID = 0.06;
+
 function answeredShare(baseBlank, tenureYears) {
   const blank = baseBlank * (tenureYears < 2 ? 2.0 : tenureYears < 5 ? 1.3 : tenureYears < 10 ? 0.85 : 0.6);
   return 1 - Math.min(0.6, blank);
@@ -63,6 +66,10 @@ export function identityFor(seed, p, release) {
   const rc = rng(seed, `contact:${p.MemberNumber}`);
   const rd = rng(seed, `demo:${p.MemberNumber}`);
   const tenure = Math.max(0, (release - parseDate(p.JoinDate)) / (365.25 * 86400000));
+  // VOLUNTARY self-ID comes from a member profile form. A non-member never filled one in, so
+  // they have contact details and almost no demographics — 480 of 550 prospects carrying a
+  // self-reported gender was the profile pass treating a webinar signup like a ten-year member.
+  const selfIdScale = p.IsProspect ? (R_PROSPECT_SELF_ID) : 1;
 
   // --- phone: national format, sometimes absent
   const fmt = PHONE[p.Country] ?? usPhone;
@@ -78,13 +85,13 @@ export function identityFor(seed, p, release) {
   // --- gender: VOLUNTARY self-ID. Values are independent of segment, engagement and every
   // outcome; only the response RATE varies (with tenure). "Prefer not to say" is a real
   // answer and is modelled separately from never having answered (null).
-  const Gender = rd.bernoulli(answeredShare(0.065, tenure))
+  const Gender = rd.bernoulli(answeredShare(0.065, tenure) * selfIdScale)
     ? rd.pickWeighted([['Female', 0.475], ['Male', 0.475], ['Non-binary', 0.012], ['Self-described', 0.004], ['Prefer not to say', 0.034]])
     : null;
 
   // --- birthdate: working-age spread, no correlation with anything
   let DateOfBirth = null;
-  if (rd.bernoulli(answeredShare(0.105, tenure))) {
+  if (rd.bernoulli(answeredShare(0.105, tenure) * selfIdScale)) {
     const age = rd.pickWeighted([[[22, 29], 0.13], [[30, 39], 0.26], [[40, 49], 0.24], [[50, 59], 0.21], [[60, 69], 0.12], [[70, 78], 0.04]]);
     const yr = release.getUTCFullYear() - rd.int(age[0], age[1]);
     const mo = rd.int(0, 11);
@@ -97,7 +104,7 @@ export function identityFor(seed, p, release) {
   // --- race / ethnicity: same voluntary-self-ID rules as gender. Blank rates run higher
   // than gender in every published series (ASHA: race 17% vs gender 10%), and the
   // Hispanic-origin question is asked SEPARATELY, as real instruments do.
-  const answeredRace = rd.bernoulli(answeredShare(0.095, tenure));
+  const answeredRace = rd.bernoulli(answeredShare(0.095, tenure) * selfIdScale);
   const RaceEthnicity = answeredRace
     ? rd.pickWeighted([
       ['White', 0.62], ['Asian', 0.09], ['Black or African American', 0.07],
@@ -105,10 +112,10 @@ export function identityFor(seed, p, release) {
       ['Two or more races', 0.045], ['Prefer not to say', 0.16],
     ])
     : null;
-  const EthnicityHispanic = rd.bernoulli(answeredShare(0.11, tenure))
+  const EthnicityHispanic = rd.bernoulli(answeredShare(0.11, tenure) * selfIdScale)
     ? rd.pickWeighted([['Not Hispanic or Latino', 0.83], ['Hispanic or Latino', 0.14], ['Prefer not to say', 0.03]])
     : null;
-  const PronounSet = rd.bernoulli(answeredShare(0.55, tenure))   // far less commonly filled
+  const PronounSet = rd.bernoulli(answeredShare(0.55, tenure) * selfIdScale)   // far less commonly filled
     ? rd.pickWeighted([['she/her', 0.46], ['he/him', 0.46], ['they/them', 0.06], ['she/they', 0.01], ['he/they', 0.01]])
     : null;
   const PrimaryLanguage = LANGUAGE[p.Country] ?? 'English';

@@ -14,6 +14,9 @@ import { buildLearning } from './learning.mjs';
 import { buildCommittees } from './committees.mjs';
 import { buildForms } from './forms.mjs';
 import { buildRelationships } from './relationships.mjs';
+import { buildContacts } from './contacts.mjs';
+import { buildProspects } from './prospects.mjs';
+import { buildFunnel } from './funnel.mjs';
 import { buildTasks } from './tasks.mjs';
 import { buildIssues } from './issues.mjs';
 import { buildPrograms } from './programs.mjs';
@@ -25,6 +28,8 @@ import { identityFor, orgIdentityFor } from './identity.mjs';
 import { applyMotifs } from './motifs.mjs';
 
 export { morecheeseHooks as hooks } from './hooks.mjs';
+
+const R_APP_REFERRERS = (cfg) => cfg.R.forms.application.referrers;
 
 export function buildWorld(cfg) {
   // §5.1–2: the world and its drivers
@@ -75,7 +80,25 @@ export function buildWorld(cfg) {
   // shells defects injected) — the seeded Skip transcripts quote counts computed from
   // this list, and quoting a pre-defects count made the transcript false against the
   // very query it points the user at.
-  const shippedPeople = [...people, ...defects.extraPeople];
+  // non-members: Person rows with no MemberProfile (see prospects.mjs). They join the
+  // shipped roster so identity, contact methods and addresses treat them like anyone else.
+  const prospects = buildProspects(cfg, orgs, events, people.length + defects.extraPeople.length);
+  // the funnel: recent joiners get the pre-membership history they would have had, and the
+  // non-members get an employer edge. Adds no members — only the prologue to existing ones.
+  const funnel = buildFunnel(cfg, {
+    people, prospects: prospects.prospects, orgs, events, periods,
+    application: { formKey: 'membership-application', distributionKey: 'membership-application:public', referrers: R_APP_REFERRERS(cfg) },
+  });
+  relationships.relationships.push(...funnel.employmentEdges);
+  forms.formResponses.push(...funnel.responses);
+  forms.formAnswers.push(...funnel.answers);
+  // the named applications land on the SAME public distribution, so its counter has to move
+  // with them — a distribution whose ResponseCount disagrees with its rows is a live bug in
+  // any UI that renders the number instead of counting
+  const appDist = forms.formDistributions.find((d) => d.DistributionKey === 'membership-application:public');
+  if (appDist) appDist.ResponseCount += funnel.responses.length;
+
+  const shippedPeople = [...people, ...defects.extraPeople, ...prospects.prospects];
 
   // contact details + voluntary self-ID demographics, applied as ONE post-pass over the
   // finished roster. Person/organization rows are hand-constructed in five places (crowd,
@@ -84,22 +107,28 @@ export function buildWorld(cfg) {
   // rides its own stream key, so nothing above this line moves.
   for (const p of shippedPeople) Object.assign(p, identityFor(cfg.seed, p, cfg.release));
   for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear));
-  const platform = buildPlatform(cfg, { people: shippedPeople, periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
+  // …and then the same facts as FIRST-CLASS bizapps-common rows (that app owns the domain
+  // and its UI reads these tables, not our MemberProfile columns). Must run after the
+  // identity pass — it projects the addresses that pass just wrote.
+  const contacts = buildContacts(cfg, shippedPeople, orgs);
+  // platform residue is MEMBER-facing: its lists, favourites and the seeded Skip transcript
+  // all quote membership counts, so prospects must not be in the roster it sees
+  const platform = buildPlatform(cfg, { people: shippedPeople.filter((p) => !p.IsProspect), periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });
 
   // sonar = engagement model DEFINITION only; Sonar's engine computes the scores live
   const sonar = buildSonar(cfg);
 
-  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
+  return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, contacts, prospects, funnel, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
 }
 
 /** The pack map (D9: cook once, portion last) — the project owns what ships where. */
 export function buildPacks(world) {
-  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, tasks, issues, programs, messaging, defects, platform, sonar } = world;
+  const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, contacts, prospects, funnel, tasks, issues, programs, messaging, defects, platform, sonar } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
-    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships } },
+    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople, ...prospects.prospects], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships, addresses: contacts.addresses, address_links: contacts.addressLinks, contact_methods: contacts.contactMethods } },
     membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
-    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: strip(registrations, ['_class', '_theta', '_future']), competition_entries: programs.competitionEntries } },
+    events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: [...strip(registrations, ['_class', '_theta', '_future']), ...prospects.registrations, ...funnel.preRegistrations], competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },
     orders: { dependsOn: ['common', 'membership', 'events'], tables: { products: money.products, orders: money.orders, order_lines: money.orderLines, payments: money.payments } },
     committees: { dependsOn: ['common', 'membership'], tables: { committee_types: committees.types, committee_roles: committees.roles, committees: committees.committees, committee_terms: committees.terms, committee_memberships: committees.memberships, committee_meetings: committees.meetings, committee_attendance: committees.attendance, committee_agenda_items: committees.agendaItems, committee_motions: committees.motions, committee_votes: committees.votes } },

@@ -29,7 +29,7 @@ install wins and the same seed files load into it). Where it doesn't, we keep a 
 
 | App | Schema | Entity prefix | Tables generated | What's in them |
 |---|---|---|---|---|
-| **bizapps-common** | `__mj_BizAppsCommon` | `MJ_BizApps_Common: ` | **4 of 10** — Person, Organization, Relationship, RelationshipType | 1,998 identity rows (name, TITLE, deterministic email) + 637 orgs + ~1,600 RELATIONSHIPS: an Employee edge per employed member (their seeded type IDs; ended on dissolution — Danielle's third witness), Elena→Priya mentorship, the Kate/Kathy duplicate ground truth, the Bob↔Victor acquisition (Subsidiary). Demo-owned types (Mentor, Duplicate Of) carry our pinned IDs |
+| **bizapps-common** | `__mj_BizAppsCommon` | `MJ_BizApps_Common: ` | **7 of 10** — Person, Organization, Relationship, RelationshipType, Address, AddressLink, ContactMethod | 1,998 identity rows (name, TITLE, deterministic email) + 637 orgs + ~1,600 RELATIONSHIPS: an Employee edge per employed member (their seeded type IDs; ended on dissolution — Danielle's third witness), Elena→Priya mentorship, the Kate/Kathy duplicate ground truth, the Bob↔Victor acquisition (Subsidiary). Demo-owned types (Mentor, Duplicate Of) carry our pinned IDs |
 | **bizapps-committees** | `__mj_BizAppsCommittees` | `Committees: ` | **10 of 17** — + AgendaItem, Motion, Vote | 4 authored committees, θ-driven volunteering, quarterly meetings with calibrated 75% attendance, standing AGENDAS, and MOTIONS with per-member VOTES that are attendance-consistent by construction (absent members vote Absent); Gwen chairs Food Safety |
 | **bizapps-forms** | `__mj_BizAppsForms` | `MJ_BizApps_Forms: ` | **7 of 10** — Form, FormVersion, FormPage, FormQuestion, FormDistribution, FormResponse, FormResponseAnswer | The post-conference survey (D10 optional pack): per-year Email distributions, 28% calibrated response rate (sourced 2026-07-16), NPS/Rating/YesNo answers riding the engagement dial (mean 8.3 → computed NPS ≈ +30, per Explori event benchmarks) |
 | **bizapps-orders** | *(not targeted)* | — | **0** — app is pre-implementation | `morecheese_orders` is the **sanctioned stand-in** (Marcelo memo §2.4): Product/Order/OrderLine/Payment in our shapes until their Subscription + renewal-Order tables exist; then period rows decompose into their model |
@@ -94,3 +94,30 @@ ships; a standard new-pack exercise then).
 - **Committees/forms benchmark targets are labeled ESTIMATEs** in the ruleset (6% serve,
   75% attendance, 35% response) pending real sources — unlike the membership numbers,
   which trace to verified 990s/benchmarks.
+
+## Who is in `Person` — members and non-members (2026-07-28)
+
+`Person` holds everyone the federation knows; `MemberProfile` holds only the members. At the
+canonical build that is **3,058 people against 2,109 member profiles** — 949 non-members:
+prospects, free-webinar attendees, colleagues of members. A non-member is simply a Person with
+no MemberProfile (no flag, no schema change — see DATA-CONTRACT.md §"Members and non-members
+share the Person namespace"), and the MemberProfile mappings skip them via an `only:` filter
+on both emitters.
+
+They are not decoration: they are the **denominator of the membership funnel**. Recent joiners
+carry the history they would have had — a free webinar or two before their start date and a
+named membership application on the way in — so a conversion rate is computable without adding
+a single member to the roster:
+
+> of everyone who attended a free webinar, **24%** were members within the window
+> (184 who joined, 585 who did not)
+
+The 79 anonymous applications keep their own meaning — people who applied and did not join, or
+have not yet. Deliberately NOT modelled: converting a prospect into a NEW member (it would move
+every retention, revenue and engagement benchmark, and needs its own pass), and paid non-member
+ticket pricing (needs the money chain to price a non-member seat).
+
+Contact details live where their owning app expects them: `ContactMethod`, `Address` and
+`AddressLink` (2,377 addresses, 6,736 contact methods), with `ContactType`/`AddressType`
+referenced BY NAME because bizapps-common seeds them (finding F6) — the exact strings are
+`Mobile Phone` and `Work Phone`, with spaces.

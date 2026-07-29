@@ -58,6 +58,29 @@ const TABLES = [
     c('PhotoURL', s(1000), { null: true }), c('Bio', 'NVARCHAR(MAX)', { null: true }),
     c('LinkedUserID', UID, { null: true }), c('Status', s(50)),
   ] },
+  { schema: '__mj_BizAppsCommon', table: 'ContactType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'AddressType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'ContactMethod', cols: [
+    c('ID', UID, { pk: true }), c('PersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('ContactTypeID', UID, { fk: '[__mj_BizAppsCommon].[ContactType]' }),
+    c('Value', s(500)), c('Label', s(100), { null: true }), c('IsPrimary', BIT),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'Address', cols: [
+    c('ID', UID, { pk: true }), c('Line1', s(255)), c('Line2', s(255), { null: true }), c('Line3', s(255), { null: true }),
+    c('City', s(100)), c('StateProvince', s(100), { null: true }), c('PostalCode', s(20), { null: true }),
+    c('Country', s(100)), c('Latitude', 'DECIMAL(9,6)', { null: true }), c('Longitude', 'DECIMAL(9,6)', { null: true }),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'AddressLink', cols: [
+    c('ID', UID, { pk: true }), c('AddressID', UID, { fk: '[__mj_BizAppsCommon].[Address]' }),
+    c('EntityID', UID), c('RecordID', s(750)),
+    c('AddressTypeID', UID, { fk: '[__mj_BizAppsCommon].[AddressType]' }),
+    c('IsPrimary', BIT), c('Rank', 'INT', { null: true }),
+  ] },
   { schema: '__mj_BizAppsCommon', table: 'RelationshipType', cols: [
     c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
     c('Category', s(50)), c('IsDirectional', BIT), c('ForwardLabel', s(100), { null: true }),
@@ -372,6 +395,18 @@ for (const [id, name, cat, fwd, rev] of REL_TYPE_SEEDS) {
 // playground seeds for APP-OWNED lookups our data references by name (real installs ship
 // their own — the name guards keep this inert there; integration finding F6)
 const LOOKUP_SEEDS = [
+  ['[__mj_BizAppsCommon].[ContactType]', '(ID, Name)', [
+    ["'CA0071DB-C59A-5E5F-98E7-AAABAFF46505'", "N'Email'"],
+    ["'7989C047-9A3C-5BE2-B26F-CE279FFC6701'", "N'Mobile Phone'"],
+    ["'61F5D63E-F30D-52FE-9DB5-0DDAFFEB1C2B'", "N'Work Phone'"],
+    ["'C623F0CD-6629-53B9-82C0-E8CDEAEF4EF2'", "N'LinkedIn'"],
+    ["'968721EC-D9F2-5BEC-9381-A93403C96F39'", "N'Website'"],
+  ]],
+  ['[__mj_BizAppsCommon].[AddressType]', '(ID, Name)', [
+    ["'6CA48BD0-3878-5B3C-932B-B543382CBAF0'", "N'Home'"],
+    ["'D0E43C17-3CAA-546A-B32E-5DFC5D096BE9'", "N'Work'"],
+    ["'72022FF8-8E3C-51A7-AE41-E01EE058B428'", "N'Mailing'"],
+  ]],
   ['[__mj_BizAppsCommittees].[Role]', '(ID, Name, IsOfficer, IsVotingRole, Sequence)', [
     ["'FF49949F-D6EE-5D20-858D-B6606DAF070A'", "N'Chair'", 1, 1, 1],
     ["'9C9BB0CE-0144-5F75-97C3-6C8463C08B51'", "N'Vice Chair'", 1, 1, 2],

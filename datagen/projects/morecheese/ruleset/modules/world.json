@@ -1,5 +1,5 @@
 {
-  "$comment": "WORLD MODULE: organizations and geography — the exogenous drivers (pack: common).",
+  "$comment": "WORLD MODULE: organizations and geography \u2014 the exogenous drivers (pack: common).",
   "orgs": {
     "ratioToMembers": 0.25,
     "producerShare": 0.45,
@@ -7,7 +7,47 @@
     "$note": "lifecycle events (dissolved/acquired/program-cut) feed arrow 1.15 and the Anna/Bob/Danielle-class churn stories"
   },
   "geography": {
-    "mix": [["NA", 0.60], ["EU", 0.25], ["RoW", 0.15]],
+    "mix": [
+      [
+        "NA",
+        0.6
+      ],
+      [
+        "EU",
+        0.25
+      ],
+      [
+        "RoW",
+        0.15
+      ]
+    ],
     "$note": "cities carry pre-baked coordinates (GAP-11a); dairy-belt weighting inside NA"
+  },
+  "contacts": {
+    "$note": "ESTIMATE \u2014 contact methods and addresses are FIRST-CLASS rows in bizapps-common (ContactMethod, Address, AddressLink), which owns the domain. MemberProfile keeps its denormalised copy for segmentation; these rows are what the app's own UI reads. Types are referenced BY NAME \u2014 bizapps-common seeds them (finding F6).",
+    "secondPhoneShare": 0.22,
+    "linkedInShare": 0.18,
+    "mobileFirstShare": 0.62,
+    "orgPhoneShare": 0.7
+  },
+  "prospects": {
+    "$note": "ESTIMATE \u2014 non-members the federation knows: enquiries, free-webinar attendees, colleagues of members. A Person with NO MemberProfile (the v2 identity/membership split already models this). Conversion to membership and paid non-member pricing are deliberately out of scope for this pass. Sized so the people who came and did NOT join outnumber the ones who did \u2014 the denominator is the whole point.",
+    "ratioToMembers": 0.45,
+    "orgAffiliatedShare": 0.5,
+    "firstSeenMaxDaysAgo": 1460,
+    "webinarsPerProspectMean": 2.0,
+    "dispersionK": 1.1,
+    "maxWebinarsPerProspect": 5,
+    "attendShare": 0.52
+  },
+  "funnel": {
+    "$note": "ESTIMATE \u2014 the BEFORE half of membership. Recent joiners get the pre-membership history they would have had (a free webinar or two, an application) so a conversion rate is computable WITHOUT adding a single member: the roster is untouched, only its prologue is filled in. knownBeforeJoiningShare is deliberately small: most members arrive without a traceable prior touch, and a webinar-to-member rate in the teens is what association benchmarks report \u2014 70% would mean the webinar list WAS the member list.",
+    "lookbackYears": 4,
+    "knownBeforeJoiningShare": 0.12,
+    "priorWindowDays": 540,
+    "maxPriorWebinars": 2,
+    "priorAttendShare": 0.68,
+    "applicationShare": 0.8,
+    "applicationLeadDays": 60
   }
 }
