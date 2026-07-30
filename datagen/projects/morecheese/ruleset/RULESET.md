@@ -25,9 +25,9 @@ Who differs, and by how much:
 |---|---|---|---|
 | Longer-tenured members renew more | **+4.1pt** per extra “standard deviation” of tenure | β 0.55 (expert form) → compiled β 0.55 | per 1 SD of tenure at decision |
 | Engaged members renew more | **+7.0pt** per step of the hidden engagement dial | β 1.1 (expert form) → compiled β 1.1 | latent theta; validated via behavioral proxy (attenuated) |
-| Auto-renew members stick around | **+12.1pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.721 | MGI: +10-15pt |
+| Auto-renew members stick around | **+12.0pt** vs members who renew by hand (the group lands at ~95%) | "+12 points" (human form) → compiled β 1.705 | MGI: +10-15pt |
 | Employer trouble drives churn | **-8.6pt** when a member’s employer dissolves / is acquired / cuts the program (causal arrow 1.15) (the group lands at ~79%) | β -0.9 (expert form) → compiled β -0.9 | arrow 1.15 — dissolution/acquisition in the decision year. BUILT-IN driver (computed: org lifecycle × decision-year window) — richer than feature grammar v1; migrates when the grammar earns cross-entity time windows |
-| The enthusiast tier churns hardest | **-23.2pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.948 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
+| The enthusiast tier churns hardest | **-23.8pt** hobbyists vs professional tiers (the group lands at ~67%) | "lands at 65%" (human form) → compiled β -1.989 | hobbyist churn is real (AHA analog); benchmarks renewal_rate_enthusiast_tier |
 
 ## The event rules
 
@@ -54,19 +54,17 @@ The `__mj` core gets **usage residue** so the instance reads as lived-in — app
 2. **True transcripts** — seeded Skip conversations carry `{N:FACT}` tokens the generator replaces with numbers **computed from the same build**, so every claim is true for the seed that shipped it (gated: no unresolved tokens).
 
 - 3 staff personas own everything (`@morecheesefederation.example` — reserved .example TLD, never deliverable). Demos log in AS a staff persona (team ruling 2026-07-23).
-- 4 shared saved views (`IsShared=1`, visible to every viewer) with real column layouts (GridState mirrors what Explorer writes; gate requires ≥3 visible columns); 3 Approved+Reusable queries — these double as Skip's entry points.
-- Per-persona residue: 3 conversations, favorites on the flagship personas, a renewal-outreach list that equals the pending-renewal member set EXACTLY (gated), 4 notifications.
+- 8 shared saved views (`IsShared=1`, visible to every viewer) with real column layouts (GridState mirrors what Explorer writes; gate requires ≥3 visible columns); 7 Approved+Reusable queries — these double as Skip's entry points.
+- Per-persona residue: 3 conversations, favorites on the flagship personas, a renewal-outreach list that equals the pending-renewal member set EXACTLY (gated), 8 notifications.
 
-## The engagement-score rules (pack: sonar)
+## The engagement-score model (pack: sonar)
 
-One Sonar model — **Member Engagement Score** (`morecheese-engagement`, Active) — scores every member on the MJ_BizApps_Common: People spine. Constraints are concise and gated:
+One Sonar model — **Member Engagement Score** (`morecheese-engagement`, Active) — scores every member on the MJ_BizApps_Common: People spine. **Definitions only**: Sonar's FactorCompiler compiles the factors to SQL and computes the scores live, so we ship the model, not pre-computed numbers.
 
-- **Weights sum to exactly 100**: event attendance 25 · committee service 15 · learning activity 15 · payment health 15 · survey sentiment 15 · advocacy participation 15.
-- **Bands tile 0..100 with no gaps**: At Risk 0–35 · Watch 35–55 · Stable 55–75 · Engaged 75–100.
-- **Factors derive from generated facts** in windows relative to each snapshot date — nothing is invented: Event Attendance (cap 3, 12m window); Committee Service (cap 1, as-of); Learning Activity (cap 2, 12m window); Payment Health (cap 2, inverted, 12m window); Survey Sentiment (0–10 ×10, 24m window); Advocacy Participation (cap 2, 24m window). Missing data → neutral midpoint 50 (flagged, never silent).
-- **Quarterly recompute history**: snapshots at 270/180/90/0 days before release; the previous snapshot feeds Delta/Trend (|Δ| < 2 reads Flat); band crossings become first-class ScoreBandTransition rows tied to their recompute run.
-- **Internal consistency is gated per score**: factor contributions sum to the score, delta/trend/band agree, history = members × snapshots, transitions = history band changes, run totals reconcile.
-- **The signal is honest**: scores ride the same hidden engagement dial as everything else — active members outscore lapsed ones (gated ≥3pt gap) and the flagship contrast holds at every seed (Elena ≥ Bob + 10, Bob never Engaged). Because the score is derived, Sonar's live recompute over this data should land in the same neighborhood — the engineered proof for the scoring story.
+- **10 executable factors**, each a Declarative `Count` over a related entity linked by SourceRelatedEntityID (RelationshipPath `[]` → the compiler auto-resolves the FK path to the anchor): Event Participation · Committee Service · Certifications · Learning Activity · Advocacy Participation · Competition Entries · Event Recency · Survey Participation · Member Spend · Membership Tenure.
+- **Bands tile 0..100 with no gaps**: At Risk 0–22 · Watch 22–33 · Stable 33–46 · Engaged 46–100.
+- **MinMax normalization + equal additive weights, WeightedSum** — mirrors the working demo models; Sonar derives each factor's min/max across the member population.
+- **Sonar computes the scores** (a recompute after install): a declining member lands below an active one because the engine counts the member's actual rows — honest by construction, no pre-pinned scores. The Bob-below-Elena contrast is witnessed live in the app, not gated here.
 
 ## Scenarios
 

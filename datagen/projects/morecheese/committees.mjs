@@ -11,6 +11,9 @@ import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
 
+/** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
+const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
+
 export function buildCommittees(cfg, people, periods) {
   const { R, seed, release } = cfg;
   const C = R.committees;
@@ -23,26 +26,48 @@ export function buildCommittees(cfg, people, periods) {
   const committees = C.list.map((c) => ({ CommitteeKey: c.name, Name: c.name, TypeKey: c.type, MissionStatement: c.mission, Status: 'Active', FormationDate: c.formed, IsSharedDemo: true }));
   const terms = [];
   for (const c of C.list) for (const t of C.terms) {
+    // a committee has no term before it existed — the Education Committee (formed 2016)
+    // must not appear in the back-filled 2015 term
+    if (t.end < c.formed) continue;
     terms.push({ TermKey: `${c.name}:${t.start}`, CommitteeKey: c.name, Name: t.name, StartDate: t.start, EndDate: t.end, Status: t.end < iso(release) ? 'Completed' : 'Active', IsSharedDemo: true });
   }
 
   // ---------- memberships: per term, engaged members volunteer ----------
   const memberships = [];
   const rosterByTerm = new Map(); // `${committee}:${termStart}` → [person]
+  // INCUMBENCY: committees don't re-staff from scratch every two years. A member who
+  // served last term is far likelier to serve again, and usually on the SAME committee.
+  // The bonus enters the volunteer SCORE, so childOutcome still calibrates to
+  // shareOfEligible — total participation is unchanged; only who fills the seats becomes
+  // continuous. Without this, back-filling history just produced six terms of total churn.
+  let servedLastTerm = new Map(); // MemberNumber → committee name
   for (const t of C.terms) {
     const eligible = people.filter((p) => !p._hero && coveredOn(p.MemberNumber, t.start));
+    const incumbents = servedLastTerm;
+    const servingNow = new Map();
     childOutcome({
       seed,
       items: eligible,
-      scoreOf: (p) => C.participation.arrows.engagement.beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta),
+      scoreOf: (p) => C.participation.arrows.engagement.beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
+        + (incumbents.has(p.MemberNumber) ? (C.participation.incumbencyBeta ?? 0) : 0),
       target: C.participation.shareOfEligible,
       streamKey: (p) => `committee-serve:${p.MemberNumber}:${t.start}`,
       decide: (p, prob, r) => {
         if (!r.bernoulli(prob)) return;
-        const committee = r.pick(C.list).name; // which committee: the member's own dice
+        const prior = incumbents.get(p.MemberNumber);
+        // you can only sit on a committee that exists in this term — the same guard the
+        // term list uses. Without it a member could be seated on the Membership &
+        // Outreach Committee (formed 2017) in the back-filled 2015 term, and the
+        // membership's TermKey then pointed at a term that was never emitted.
+        const open = C.list.filter((c) => t.end >= c.formed);
+        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(C.participation.sameCommitteeShare ?? 0)
+          ? prior                      // returning members usually keep their seat
+          : r.pick(open).name;         // otherwise the member's own dice
         pushMembership(p, committee, t, 'Member');
+        servingNow.set(p.MemberNumber, committee);
       },
     });
+    servedLastTerm = servingNow;
   }
   // hero seats: declared facts (roles included), placed after the crowd draw
   for (const h of R.heroes) {
@@ -50,10 +75,34 @@ export function buildCommittees(cfg, people, periods) {
       for (const termName of seat.terms) {
         const t = C.terms.find((x) => x.name === termName);
         const p = people.find((x) => x.MemberNumber === h.memberNumber);
-        if (t && p) pushMembership(p, seat.committee, t, seat.role);
+        const c = C.list.find((x) => x.name === seat.committee);
+        // a declared seat still can't predate the committee (the term wouldn't exist)
+        if (t && p && c && t.end >= c.formed) pushMembership(p, seat.committee, t, seat.role);
       }
     }
   }
+  // roster floor: a committee-term below the bylaws minimum is topped up from the most engaged
+  // eligible members not already serving it. Deterministic (theta order, member number as the
+  // tie-break), runs before officers are promoted so a chair always has a real committee.
+  {
+    const min = C.participation.minRosterPerTerm ?? 0;
+    if (min > 0) {
+      for (const t of C.terms) {
+        for (const c of C.list) {
+          if (t.end < c.formed) continue; // the term does not exist for this committee
+          const key = `${c.name}:${t.start}`;
+          const roster = rosterByTerm.get(key) ?? [];
+          if (roster.length >= min) continue;
+          const serving = new Set(roster.map((m) => m.p.MemberNumber));
+          const pool = people
+            .filter((p) => !p._hero && coveredOn(p.MemberNumber, t.start) && !serving.has(p.MemberNumber))
+            .sort((a, b) => (b._theta - a._theta) || (a.MemberNumber < b.MemberNumber ? -1 : 1));
+          for (const p of pool.slice(0, min - roster.length)) pushMembership(p, c.name, t, 'Member');
+        }
+      }
+    }
+  }
+
   // officers: any committee-term without a pinned Chair/Vice Chair promotes its
   // longest-standing members (deterministic: lowest member number = earliest joiner block)
   for (const [key, roster] of rosterByTerm) {
@@ -87,11 +136,35 @@ export function buildCommittees(cfg, people, periods) {
     for (let y = C.meetings.startYear; y <= release.getUTCFullYear() + 1; y++) {
       for (let q = 0; q < C.meetings.cadencePerYear; q++) {
         const month = q * 3 + 1; // Jan/Apr/Jul/Oct
-        const dt = `${y}-${String(month).padStart(2, '0')}-${String(C.meetings.dayOfMonth).padStart(2, '0')}`;
+        // Each committee keeps its own rhythm: a preferred week-of-month and hour, jittered
+        // per meeting and nudged onto a weekday. Previously all four committees met on the
+        // 15th at 15:00Z forever — identical inter-meeting gaps, one location type, no end
+        // times, no minutes. A meeting list is the first governance screen anyone opens.
+        const rM = rng(seed, `meetingslot:${c.name}:${y}:${q}`);
+        const anchor = 3 + ((hashish(c.name) + q) % 3) * 7; // committee-specific week of the month
+        const dmax = new Date(Date.UTC(y, month, 0)).getUTCDate();
+        let day = Math.min(dmax, Math.max(1, anchor + rM.int(-2, 3)));
+        let dd = new Date(Date.UTC(y, month - 1, day));
+        if (dd.getUTCDay() === 0) dd = new Date(dd.getTime() + 86400000);
+        if (dd.getUTCDay() === 6) dd = new Date(dd.getTime() + 2 * 86400000);
+        const dt = iso(dd);
+        const startHour = 13 + (hashish(c.name) % 4) + rM.int(0, 1); // 13:00–17:00Z band, per committee
+        const startMin = rM.pick([0, 0, 15, 30]);
+        const durationMin = rM.pick([60, 60, 90, 90, 120]);
+        const endMs = Date.UTC(y, month - 1, dd.getUTCDate(), startHour, startMin) + durationMin * 60000;
+        // most governance is virtual, but quarterly in-person/hybrid sessions happen
+        // governance kept meeting through the pandemic, but online — an in-person
+        // committee meeting in April 2020 is the kind of detail that breaks a demo
+        const covidYear = (C.regimes ?? R.regimes).covid.years.includes(y);
+        const locType = covidYear ? 'Virtual' : rM.pickWeighted([['Virtual', 0.68], ['InPerson', 0.2], ['Hybrid', 0.12]]);
         const base = {
           MeetingKey: `${c.name}:${dt}`, CommitteeKey: c.name, Name: `${c.name} — Q${q + 1} ${y} meeting`,
-          StartDateTime: `${dt}T${String(C.meetings.hourUTC).padStart(2, '0')}:00:00Z`,
-          LocationType: 'Virtual', IsSharedDemo: true,
+          StartDateTime: `${dt}T${String(startHour).padStart(2, '0')}:${String(startMin).padStart(2, '0')}:00Z`,
+          EndDateTime: new Date(endMs).toISOString().replace(/\.\d{3}Z$/, 'Z'),
+          TimeZone: 'UTC',
+          LocationType: locType,
+          LocationText: locType === 'Virtual' ? null : `${C.meetings.venueCity ?? 'Madison, WI'} — ${rM.pick(['Board Room', 'Conference Room A', 'Guild Hall', 'Annex Room 2'])}`,
+          IsSharedDemo: true,
         };
         if (dt > releaseIso) {
           // future meeting: a Scheduled placeholder, capped per committee — no attendance/motions yet

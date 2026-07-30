@@ -19,6 +19,8 @@ import { logisticFit } from '../engine/stats.mjs';
 import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../engine/dates.mjs';
 import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
+import { CITIES } from '../projects/morecheese/banks.mjs';
+import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -28,12 +30,31 @@ const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 const R = await loadRuleset(run.scenario, run.project); // the validator judges against the SAME world (project + scenario) the run was built for
 
-const people = load('common', 'people');
+// NON-MEMBERS: the common pack's people table carries both members and prospects (a prospect
+// is a Person with no MemberProfile). Every gate below was written about MEMBERS, so `people`
+// and `regs` keep meaning exactly that and the non-member rows get their own names — adding
+// contacts to the roster must not silently move a single membership benchmark.
+const allPeople = load('common', 'people');
+const people = allPeople.filter((p) => !p.IsProspect);
+const prospects = allPeople.filter((p) => p.IsProspect);
+const prospectKeys = new Set(prospects.map((p) => p.MemberNumber));
+// A membership can end two ways: LAPSED (silence — the renewal never arrived) or CANCELLED (the
+// member told us mid-term). Both are terminal, so every gate that means "left" must count both;
+// gates that specifically mean "lapsed" still say Lapsed.
+const ENDED = new Set(['Lapsed', 'Cancelled']);
+const hasEnded = (status) => ENDED.has(status);
 const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
-const regs = load('events', 'event_registrations');
+const allRegs = load('events', 'event_registrations');
+const regs = allRegs.filter((r) => !prospectKeys.has(r.MemberNumber));
+const prospectRegs = allRegs.filter((r) => prospectKeys.has(r.MemberNumber));
+const addresses = load('common', 'addresses');
+const addressLinks = load('common', 'address_links');
+const contactMethods = load('common', 'contact_methods');
 const cMemberships = load('committees', 'committee_memberships');
+const cTerms = load('committees', 'committee_terms');
+const cCommittees = load('committees', 'committees');
 const cMeetings = load('committees', 'committee_meetings');
 const cAttendance = load('committees', 'committee_attendance');
 const fResponses = load('forms', 'form_responses');
@@ -64,11 +85,9 @@ const pRecordChanges = load('platform', 'record_changes');
 const snModelFactors = load('sonar', 'model_factors');
 const snBands = load('sonar', 'score_bands');
 const snFactors = load('sonar', 'factors');
-const snScores = load('sonar', 'scores');
-const snContribs = load('sonar', 'score_contributions');
-const snHistory = load('sonar', 'score_history');
-const snTransitions = load('sonar', 'band_transitions');
-const snRuns = load('sonar', 'recompute_runs');
+const snModels = load('sonar', 'score_models');
+const snVersions = load('sonar', 'score_model_versions');
+const snRelated = load('sonar', 'model_related_entities');
 const products = load('orders', 'products');
 const orders = load('orders', 'orders');
 const orderLines = load('orders', 'order_lines');
@@ -112,12 +131,151 @@ function checkPacks() {
   const badCm = cMemberships.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
   const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
   check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
+  // memberships → the term and committee they claim. A membership on a term that was never
+  // emitted is invisible in the packs (the seat still looks fine) and only fails at install,
+  // where the real FK rejects it — exactly how the 2015 Membership & Outreach seat surfaced.
+  const termKeys = new Set(cTerms.map((x) => x.TermKey));
+  const committeeKeys = new Set(cCommittees.map((x) => x.CommitteeKey));
+  const badMemTerm = cMemberships.filter((x) => !termKeys.has(x.TermKey) || !committeeKeys.has(x.CommitteeKey)).length;
+  const badTermC = cTerms.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
+  const badMeetC = cMeetings.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
+  check('pack refs: memberships→terms + terms/meetings→committees', badMemTerm + badTermC + badMeetC === 0, `${badMemTerm}+${badTermC}+${badMeetC} dangling`);
+  // ADDRESS REALISM — all three of these were found by opening bizapps-common's address grid,
+  // not by any gate. They are invisible in the packs and obvious on screen.
+  {
+    const prefixed = addresses.filter((a) => /^[A-Z]{2}-/.test(a.StateProvince ?? '')).length;
+    check('addresses: StateProvince has no country prefix (NY, not US-NY)', prefixed === 0,
+      prefixed ? `${prefixed} addresses read like 'Brooklyn, US-NY'` : `${addresses.length} addresses`);
+    // US ZIPs must sit in their state's real band — Brooklyn reading 82173 (Wyoming) is a tell
+    const BAND = { 'US-CA': [900, 961], 'US-CO': [800, 816], 'US-ID': [832, 838], 'US-IL': [600, 629],
+      'US-NC': [270, 289], 'US-NY': [100, 149], 'US-OR': [970, 979], 'US-PA': [150, 196],
+      'US-TX': [750, 799], 'US-VT': [50, 59], 'US-WA': [980, 994], 'US-WI': [530, 549] };
+    const usPeople = new Map(allPeople.filter((x) => x.Country === 'US').map((x) => [x.MemberNumber, x.State]));
+    const usAddrs = addresses.filter((a) => a.Country === 'United States' && a.PostalCode);
+    const offBand = usAddrs.filter((a) => {
+      const st = usPeople.get(String(a.AddressKey).replace(/^person:/, ''));
+      const band = BAND[st];
+      if (!band) return false;
+      const z3 = Number(String(a.PostalCode).slice(0, 3));
+      return z3 < band[0] || z3 > band[1];
+    }).length;
+    check('addresses: US ZIP prefixes match their state', offBand === 0,
+      offBand ? `${offBand} of ${usAddrs.length} US ZIPs outside the state band` : `${usAddrs.length} US addresses`);
+    // a localised street word must not be bolted to an English name ("Calle Mill", "Rue Dairy")
+    const ENGLISH = /\b(Mill|Church|Orchard|Market|Meadow|Bridge|High|Cave|Dairy|Creamery|Spring)\b/;
+    const romance = new Set(['France', 'Italy', 'Spain', 'Portugal', 'Mexico', 'Argentina']);
+    const mixed = addresses.filter((a) => romance.has(a.Country) && ENGLISH.test(a.Line1 ?? '')).length;
+    check('addresses: street names are in the street\'s own language', mixed === 0,
+      mixed ? `${mixed} like 'Calle Mill' / 'Rue Dairy'` : `${addresses.filter((a) => romance.has(a.Country)).length} romance-language addresses`);
+  }
+  // blank columns are how generated data gives itself away: the legal-structure FK sat NULL on
+  // every organization, and Person.Bio on every person. Both are app-owned fields their UIs show.
+  {
+    const structures = new Set(Object.values(R.orgs.legalStructure.byType).flat().map(([n]) => n));
+    const withType = orgs.filter((o) => o.OrganizationTypeName);
+    const badName = withType.filter((o) => !structures.has(o.OrganizationTypeName)).length;
+    check(`orgs: all ${orgs.length} carry a legal structure from the app's seeded list`,
+      withType.length === orgs.length && badName === 0, `${withType.length}/${orgs.length} set, ${badName} off-list`);
+    // and it must not simply mirror our business Type — they are orthogonal dimensions
+    const perType = new Map();
+    for (const o of withType) {
+      if (!perType.has(o.Type)) perType.set(o.Type, new Set());
+      perType.get(o.Type).add(o.OrganizationTypeName);
+    }
+    const collapsed = [...perType].filter(([, set]) => set.size < 2).map(([t]) => t);
+    check('orgs: legal structure varies within each business type (not a relabelled Type)',
+      collapsed.length === 0, collapsed.length ? `single structure for: ${collapsed.join(', ')}` : `${perType.size} business types`);
+    const bios = allPeople.filter((x) => x.Bio);
+    const share = bios.length / Math.max(1, allPeople.length);
+    check(`people: ${bios.length} bios written (${(share * 100).toFixed(0)}% of profiles)`,
+      bios.length > 0 && share < 0.75, 'a minority write one; nobody having one is the tell');
+    check('people: bios are distinct prose, not one template', new Set(bios.map((x) => x.Bio)).size > Math.min(20, bios.length * 0.5),
+      `${new Set(bios.map((x) => x.Bio)).size} distinct of ${bios.length}`);
+  }
+  // contact/address rows are bizapps-common's OWN tables — every owner must resolve, and the
+  // TYPE names must be ones that app seeds (we reference them by name and never emit them: F6)
+  {
+    const orgKeys = new Set(orgs.map((o) => o.OrgKey));
+    const addrKeys = new Set(addresses.map((a) => a.AddressKey));
+    // contact details belong to every PERSON we know, member or not
+    const anyPersonKeys = new Set(allPeople.map((p) => p.MemberNumber));
+    const badCm = contactMethods.filter((c) => c.OwnerKind === 'person' ? !anyPersonKeys.has(c.OwnerKey) : !orgKeys.has(c.OwnerKey)).length;
+    const badLink = addressLinks.filter((l) => !addrKeys.has(l.AddressKey)
+      || (l.RecordKind === 'person' ? !anyPersonKeys.has(l.RecordKey) : !orgKeys.has(l.RecordKey))).length;
+    check('pack refs: contact methods + address links → people/orgs/addresses', badCm + badLink === 0, `${badCm}+${badLink} dangling`);
+    const badType = contactMethods.filter((c) => !CONTACT_TYPES.includes(c.ContactTypeName)).length;
+    const badAType = addressLinks.filter((l) => !ADDRESS_TYPES.includes(l.AddressTypeName)).length;
+    check('contacts: every type name is one the app seeds (F6)', badType + badAType === 0, `${badType}+${badAType} unseeded`);
+  }
+  // the whole point of the module: the app's tables carry what MemberProfile carries. A member
+  // with a street address on their profile and no Address row is the empty-UI bug returning.
+  {
+    const linkedPeople = new Set(addressLinks.filter((l) => l.RecordKind === 'person').map((l) => l.RecordKey));
+    const missing = allPeople.filter((p) => p.AddressLine1 && !linkedPeople.has(p.MemberNumber)).length;
+    check('contacts: every profile address is also a bizapps-common Address', missing === 0, `${addresses.length} addresses, ${missing} missing`);
+    const emailed = new Set(contactMethods.filter((c) => c.ContactTypeName === 'Email' && c.OwnerKind === 'person').map((c) => c.OwnerKey));
+    const noEmail = allPeople.filter((p) => p.Email && !emailed.has(p.MemberNumber)).length;
+    check('contacts: every member email is a ContactMethod row', noEmail === 0, `${emailed.size} people with an email method`);
+    // one primary per channel — a UI that renders "the" phone picks the primary and must find one
+    const dupPrimary = [...contactMethods.filter((c) => c.IsPrimary).reduce((m, c) => {
+      const k = `${c.OwnerKind}:${c.OwnerKey}:${c.ContactTypeName === 'Email' ? 'email' : c.ContactTypeName === 'Website' ? 'web' : 'phone'}`;
+      return m.set(k, (m.get(k) ?? 0) + 1);
+    }, new Map()).values()].filter((n) => n > 1).length;
+    check('contacts: at most one primary per owner and channel', dupPrimary === 0, `${dupPrimary} owners with two primaries`);
+  }
+  // NON-MEMBERS: a prospect is a Person with NO MemberProfile. The whole design rests on
+  // that, so assert it from both directions — no membership artefact may reference one, and
+  // they must still be real contacts (identity, email, a place in the world).
+  {
+    const periodKeys = new Set(periods.map((x) => x.MemberNumber));
+    const leaked = prospects.filter((p) => periodKeys.has(p.MemberNumber)).length;
+    check('prospects: no non-member has a membership period', leaked === 0, `${prospects.length} prospects, ${leaked} with membership`);
+    const share = allPeople.length ? prospects.length / allPeople.length : 0;
+    const want = R.prospects.ratioToMembers / (1 + R.prospects.ratioToMembers);
+    check(`prospects: ${(share * 100).toFixed(1)}% of known people are non-members vs ${(want * 100).toFixed(1)}% ±4`,
+      Math.abs(share - want) <= 0.04, 'an association knows more people than it has members');
+    const nameless = prospects.filter((p) => !p.FirstName || !p.LastName || !p.Email).length;
+    check('prospects: every non-member is a real contact (name + email)', nameless === 0, `${nameless} incomplete`);
+    // free webinars only — a paid seat needs an order, and non-member pricing is not modelled yet
+    const paidKeys = new Set(events.filter((e) => e.IsPaid).map((e) => e.EventKey));
+    const paidReg = prospectRegs.filter((r) => paidKeys.has(r.EventKey)).length;
+    check('prospects: non-member registrations are free events only', paidReg === 0, `${prospectRegs.length} registrations, ${paidReg} paid`);
+    const withReg = new Set(prospectRegs.map((r) => r.MemberNumber)).size;
+    check(`prospects: ${withReg} of ${prospects.length} came to a webinar`, prospectRegs.length > 0 && withReg > 0, `${prospectRegs.length} registrations`);
+    // and no order may ever reference one (the money chain is membership-only today)
+    const badOrder = orders.filter((o) => prospectKeys.has(o.MemberNumber)).length;
+    check('prospects: the money chain never bills a non-member', badOrder === 0, `${badOrder} orders`);
+  }
+  // THE FUNNEL: the point of holding non-members at all. These gates assert the conversion
+  // question is answerable — attended a free webinar, then joined — and that the prologue is
+  // genuinely a prologue (every pre-membership fact strictly precedes the join date).
+  {
+    const freeSet = new Set(events.filter((e) => !e.IsPaid).map((e) => e.EventKey));
+    const evDate = new Map(events.map((e) => [e.EventKey, e.Date]));
+    const priorRegs = regs.filter((x) => freeSet.has(x.EventKey) && evDate.get(x.EventKey) < joinOf.get(x.MemberNumber));
+    const converted = new Set(priorRegs.map((x) => x.MemberNumber));
+    check(`funnel: ${converted.size} members attended a free webinar before joining (${priorRegs.length} registrations)`,
+      converted.size > 0, 'without a prologue there is no conversion rate');
+    const late = priorRegs.filter((x) => x.RegisteredOn >= joinOf.get(x.MemberNumber)).length;
+    check('funnel: every pre-membership registration precedes the join date', late === 0, `${late} booked after joining`);
+    // the named application is the other half of the prologue
+    const namedApp = fResponses.filter((x) => x.FormKey === 'membership-application' && x.MemberNumber != null);
+    const badWhen = namedApp.filter((x) => x.SubmittedAt && x.SubmittedAt.slice(0, 10) >= joinOf.get(x.MemberNumber)).length;
+    check(`funnel: ${namedApp.length} members applied before their start date`, namedApp.length > 0 && badWhen === 0, `${badWhen} applied after joining`);
+    // and the denominator: non-members who came to a webinar and did NOT join
+    const nonConverting = new Set(prospectRegs.map((x) => x.MemberNumber));
+    const rate = nonConverting.size + converted.size ? converted.size / (nonConverting.size + converted.size) : 0;
+    check(`funnel: webinar-to-member conversion is ${(rate * 100).toFixed(0)}% (${converted.size} joined, ${nonConverting.size} did not)`,
+      rate > 0.03 && rate < 0.35, 'association benchmarks put webinar-to-member in the teens; a majority would mean the webinar list IS the member list');
+  }
   const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
   // member responses must resolve to people; anonymous ones must carry a session id instead
   const badResp = fResponses.filter((x) => x.MemberNumber != null ? !peopleKeys.has(x.MemberNumber) : !x.AnonymousSessionID).length;
   const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
   check('pack refs: forms→common (anon: session id) + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
-  const badRel = relationships.filter((x) => (x.FromMemberNumber && !peopleKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !peopleKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
+  // an employment edge belongs to any PERSON we know — members and non-members alike
+  const anyPersonKeys = new Set(allPeople.map((x) => x.MemberNumber));
+  const badRel = relationships.filter((x) => (x.FromMemberNumber && !anyPersonKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !anyPersonKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
   const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length
     + issues.filter((x) => x.AssigneeMemberNumber && !peopleKeys.has(x.AssigneeMemberNumber)).length;
   check('pack refs: relationships/tasks/issues→common', badRel + badTask === 0, `${badRel}+${badTask} dangling`);
@@ -144,15 +302,15 @@ function checkPacks() {
     + pListDetails.filter((x) => !RECORD_PREFIX[x.RefKind] || !refOk(x)).length;
   check('pack refs: platform→staff users + audit/favorites/lists→real records', badPlat === 0, `${badPlat} dangling`);
   // sonar: scores/history/transitions anchor real people; contributions resolve to scores+factors
-  const scoreKeys = new Set(snScores.map((x) => x.ScoreKey));
+  // sonar is DEFINITIONS ONLY (Sonar computes scores live): factors link to a model + a
+  // related entity; model-factors link factor↔model; bands belong to the band set.
+  const modelKeys = new Set(snModels.map((x) => x.ModelKey));
   const factorKeys = new Set(snFactors.map((x) => x.FactorKey));
-  const bandKeys = new Set(snBands.map((x) => x.BandKey));
-  const badSonar = [...snScores, ...snHistory, ...snTransitions].filter((x) => !peopleKeys.has(x.MemberNumber)).length
-    + snContribs.filter((x) => !scoreKeys.has(x.ScoreKey) || !factorKeys.has(x.FactorKey)).length
-    + snScores.filter((x) => !bandKeys.has(x.BandKey) || !bandKeys.has(x.PreviousBandKey)).length
-    + snHistory.filter((x) => !bandKeys.has(x.BandKey)).length
-    + snTransitions.filter((x) => !bandKeys.has(x.FromBandKey) || !bandKeys.has(x.ToBandKey)).length;
-  check('pack refs: sonar→common + contributions→scores/factors + bands resolve', badSonar === 0, `${badSonar} dangling`);
+  const relatedKeys = new Set(snRelated.map((x) => x.RelatedKey));
+  const badSonar = snFactors.filter((x) => !modelKeys.has(x.ModelKey) || !relatedKeys.has(x.SourceRelatedKey)).length
+    + snModelFactors.filter((x) => !modelKeys.has(x.ModelKey) || !factorKeys.has(x.FactorKey)).length
+    + snRelated.filter((x) => !modelKeys.has(x.ModelKey)).length;
+  check('pack refs: sonar factors→model+relatedEntity, model-factors→factor', badSonar === 0, `${badSonar} dangling`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -163,8 +321,13 @@ function checkPacks() {
 function checkTemporal() {
   const badStart = periods.filter((x) => x.StartDate < joinOf.get(x.MemberNumber)).length;
   const badOrder = periods.filter((x) => x.EndDate <= x.StartDate).length;
-  const lapsedNoCancel = periods.filter((x) => x.Status === 'Lapsed' && x.CancellationDate === null && x.EndDate < run.releaseDate).length;
-  const cancelBeforeEnd = periods.filter((x) => x.CancellationDate && x.CancellationDate < x.EndDate).length;
+  const lapsedNoCancel = periods.filter((x) => hasEnded(x.Status) && x.CancellationDate === null && x.EndDate < run.releaseDate).length;
+  // grace runs AFTER the term for a lapse; notice is given BEFORE the term ends for a cancellation,
+  // and cannot predate the term it cancels
+  const cancelBeforeEnd = periods.filter((x) => x.CancellationDate
+    && (x.Status === 'Cancelled'
+      ? (x.CancellationDate > x.EndDate || x.CancellationDate < x.StartDate)
+      : x.CancellationDate < x.EndDate)).length;
   let gaps = 0;
   for (const list of periodsByMember.values()) {
     list.sort((a, b) => a.StartDate.localeCompare(b.StartDate));
@@ -183,9 +346,41 @@ function checkTemporal() {
   check('periods: never start before JoinDate', badStart === 0, `${badStart} bad`);
   check('periods: EndDate > StartDate', badOrder === 0, `${badOrder} bad`);
   check('lapse ⟹ CancellationDate set (the team rule)', lapsedNoCancel === 0, `${lapsedNoCancel} missing`);
+  // churn is not all non-payment — the reason column has to be worth reporting on
+  const reasons = periods.filter((x) => x.CancellationReason).reduce((a, x) => (a[x.CancellationReason] = (a[x.CancellationReason] ?? 0) + 1, a), {});
+  const reasonCount = Object.keys(reasons).length;
+  const nonPay = Object.entries(reasons).filter(([k]) => k.startsWith('non-payment')).reduce((s, [, v]) => s + v, 0);
+  const totalReasons = Object.values(reasons).reduce((s, v) => s + v, 0);
+  check(`membership: churn reasons varied (${reasonCount} kinds, non-payment ${totalReasons ? Math.round(nonPay / totalReasons * 100) : 0}%)`,
+    reasonCount >= 5 && (!totalReasons || nonPay / totalReasons < 0.75), 'voluntary churn must appear');
   check('CancellationDate ≥ EndDate (grace runs after)', cancelBeforeEnd === 0, `${cancelBeforeEnd} bad`);
+  // PRESENCE FLOOR (same lesson as issue severity): the schema's CHECK allows five period
+  // statuses and we shipped four — 8,024 periods and not one Cancelled — while every share-based
+  // gate stayed green, because no gate asserted the bucket existed. Any status the CHECK permits
+  // and the generator can produce must actually appear.
+  {
+    const produced = ['Active', 'Renewed', 'Lapsed', 'PendingRenewal', 'Cancelled'];
+    const missing = produced.filter((st) => !periods.some((x) => x.Status === st));
+    check(`periods: every producible status appears (${produced.length} of the CHECK's values)`, missing.length === 0,
+      missing.length ? `never produced: ${missing.join(', ')}` : produced.map((st) => `${st}=${periods.filter((x) => x.Status === st).length}`).join(' '));
+    // and the two terminal kinds must be distinguishable, not one relabelled
+    const cancelled = periods.filter((x) => x.Status === 'Cancelled');
+    const passive = new Set(R.membership.cancellation?.passiveReasons ?? []);
+    const wrongReason = cancelled.filter((x) => passive.has(x.CancellationReason)).length;
+    check(`periods: ${cancelled.length} cancellations all carry an active-decision reason`, wrongReason === 0,
+      `${wrongReason} cancelled with a non-payment reason (nobody phones in to announce one)`);
+  }
   check('renewals back-date: no gaps between periods', gaps === 0, `${gaps} gaps`);
-  check('registrations covered by a membership period', regOutside === 0, `${regOutside} outside`);
+  // THE FUNNEL EXCEPTION: a free webinar attended BEFORE joining is the whole point of
+  // funnel.mjs — the prologue to a membership, not a coverage bug. Paid seats and anything
+  // after the join date stay strictly inside a period.
+  const freeKeys = new Set(events.filter((e) => !e.IsPaid).map((e) => e.EventKey));
+  const preJoin = regs.filter((x) => {
+    const evDate = eventDate.get(x.EventKey);
+    return freeKeys.has(x.EventKey) && evDate < joinOf.get(x.MemberNumber);
+  }).length;
+  check('registrations covered by a membership period (free pre-join webinars exempt)', regOutside - preJoin === 0,
+    `${regOutside} outside, ${preJoin} of them pre-membership webinars`);
 }
 
 // ---------- benchmark means + variance floors (§7.1–7.2) ----------
@@ -232,15 +427,102 @@ function checkBenchmarks() {
   const floorAdj = M.yoyStdFloor * Math.sqrt((CHI2_05[Math.min(df, 12)] ?? df * 0.5) / df);
   check(`texture: YoY renewal std ${(stdYears * 100).toFixed(2)}pt ≥ floor ${(floorAdj * 100).toFixed(2)}pt (anti-smoothness, χ²-adjusted for ${normal.length} yrs)`, stdYears >= floorAdj, 'variance floor');
 
+  // no-show rates are over PAST events only — upcoming-event registrations carry
+  // Attended=null by construction (the outcome hasn't happened) and would read as no-shows
   const web = new Set(events.filter((e) => e.EventType === 'Webinar').map((e) => e.EventKey));
-  const paid = regs.filter((x) => !web.has(x.EventKey));
-  const webinar = regs.filter((x) => web.has(x.EventKey));
+  const evDateOf = new Map(events.map((e) => [e.EventKey, e.Date]));
+  const releaseIso = run.releaseDate;
+  const pastRegs = regs.filter((x) => (evDateOf.get(x.EventKey) ?? '') <= releaseIso);
+  const paid = pastRegs.filter((x) => !web.has(x.EventKey));
+  const webinar = pastRegs.filter((x) => web.has(x.EventKey));
   const nsPaid = paid.filter((x) => !x.Attended).length / paid.length;
   const nsWeb = webinar.filter((x) => !x.Attended).length / webinar.length;
   const NS = R.events.noShow;
   check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.paidInPerson.target * 100}% ±${NS.paidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.paidInPerson.target) <= NS.paidInPerson.tolerance, `${paid.length} regs`);
   check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.freeWebinar.target * 100}% ±${NS.freeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.freeWebinar.target) <= NS.freeWebinar.tolerance, `${webinar.length} regs`);
+
+  // ---------- COVID expresses as a causal era, not just a renewal footnote ----------
+  // Only traces that SURVIVE into shipped data are asserted here. The renewal dip is real
+  // but its cohort is archived away (see regimes.covid.$archiveCaveat), so it is checked
+  // through renewalEvents by the regime gate above, not through membership_periods.
+  {
+    const CV = R.regimes.covid, cy = CV.years;
+    const pre = cy[0] - 1;
+    const evOf = new Map(events.map((e) => [e.EventKey, e]));
+    const regsIn = (y, type) => regs.filter((x) => { const e = evOf.get(x.EventKey); return e && e.Year === y && (type === 'web' ? e.EventType === 'Webinar' : e.EventType !== 'Webinar'); }).length;
+    const ratio = (y) => regsIn(y, 'web') / Math.max(1, regsIn(y, 'inp'));
+    const flipped = cy.every((y) => ratio(y) > ratio(pre) * 1.8);
+    check(`covid: attendance flips to virtual (webinar:in-person ${ratio(pre).toFixed(2)} before, ${cy.map((y) => ratio(y).toFixed(2)).join('/')} during)`,
+      flipped, 'online attendance surged while in-person collapsed');
+    const webSched = (y) => events.filter((e) => e.Year === y && e.EventType === 'Webinar').length;
+    check(`covid: more webinars scheduled (${webSched(pre)} before vs ${cy.map(webSched).join('/')})`, cy.every((y) => webSched(y) > webSched(pre)), 'programming pivots online');
+    const mtgIn = (y) => cMeetings.filter((m) => m.StartDateTime.startsWith(String(y)));
+    const allVirtual = cy.every((y) => { const m = mtgIn(y); return m.length && m.every((x) => x.LocationType === 'Virtual'); });
+    check('covid: committee meetings all virtual in the pandemic years', allVirtual, 'governance kept meeting, but online');
+    const advIn = (y) => advocacy.filter((a) => a.ActionDate.startsWith(String(y))).length;
+    check(`covid: advocacy surges (${advIn(pre)} before vs ${cy.map(advIn).join('/')})`, cy.some((y) => advIn(y) > advIn(pre) * 1.5), 'relief and market-access lobbying — the era is not a uniform dip');
+    // CROWD entries only: Henri is a pinned persona who enters eight a year by declaration,
+    // and heroes are facts that deliberately do not respond to regimes. At pilot scale his
+    // eight swamp the crowd's dip entirely, which is what made this gate false-red.
+    const heroNums = new Set(R.heroes.map((h) => h.memberNumber));
+    // RETENTION: the pandemic's effect on churn must be findable in the shipped data, not
+    // only in the validator's private event log. The archive rule used to swallow the whole
+    // 2020-21 lapse cohort, so this is the trace that was missing entirely.
+    const lapsesIn = (y) => periods.filter((x) => hasEnded(x.Status) && x.EndDate.startsWith(String(y))).length;
+    const cohortFloor = Math.max(3, Math.round(people.length * 0.008));
+    check(`covid: the lapse cohort survives archiving (${cy.map(lapsesIn).join('/')} retained, floor ${cohortFloor})`, cy.every((y) => lapsesIn(y) >= cohortFloor), 'the era must be visible in membership history');
+    const pandemicLapses = periods.filter((x) => x.CancellationReason === CV.churnReason).length;
+    const eraLapses = cy.reduce((n, y) => n + lapsesIn(y), 0);
+    check(`covid: ${pandemicLapses} lapses attributed to the pandemic (${Math.round(pandemicLapses / Math.max(1, eraLapses) * 100)}% of era churn)`,
+      pandemicLapses > 0 && pandemicLapses < eraLapses, 'an era-specific reason, not a relabel of everything');
+    const outside = periods.filter((x) => x.CancellationReason === CV.churnReason && !cy.includes(+x.EndDate.slice(0, 4))).length;
+    check('covid: the pandemic reason appears ONLY in the pandemic years', outside === 0, `${outside} outside the era`);
+    const compIn = (y) => compEntries.filter((e) => e.EntryYear === y && !heroNums.has(e.MemberNumber)).length;
+    if (compIn(pre) >= 6) check(`covid: competition curtailed, crowd entries (${compIn(pre)} before vs ${cy.map(compIn).join('/')})`, cy.every((y) => compIn(y) < compIn(pre)), 'judging is a physical activity');
+  }
+
+  // learners don't all finish on the cohort end date, and the calendar has no blind months
+  const done = enrollments.filter((e) => e.CompletedOn);
+  const onEnd = done.filter((e) => { const c = courses.find((x) => x.CourseKey === e.CourseKey); return c && e.CompletedOn === iso2(addDays2(parseDate2(c.StartDate), c.DurationWeeks * 7)); }).length;
+  check(`learning: completions spread off the cohort end (${done.length - onEnd}/${done.length} off-date, ${new Set(done.map((e) => e.CompletedOn)).size} distinct dates)`,
+    !done.length || onEnd / done.length < 0.35, 'not every learner finishes the same day');
+  check(`learning: courses start in every month (${new Set(courses.map((c) => +c.StartDate.slice(5, 7))).size}/12)`, new Set(courses.map((c) => +c.StartDate.slice(5, 7))).size >= 11, 'no blind months');
+
+  // survey scores carry a detractor tail — a pure gaussian never produces an angry 0-2
+  const npsVals = fAnswers.filter((a) => a.QuestionKey === 'post-conf-survey:nps' && a.NumericValue != null).map((a) => a.NumericValue);
+  if (npsVals.length > 100) {
+    // only assert the tail once enough responses exist for it to be reliably non-empty —
+    // at pilot scale a 2.5% share legitimately yields zero on some seeds (the suite sweeps
+    // 7 of them, so a bare "> 0" false-reds a few percent of the time)
+    const det = npsVals.filter((v) => v <= 2).length;
+    const expected = npsVals.length * (R.forms.answers.nps.detractorShare ?? 0);
+    if (expected >= 3) check(`forms: NPS has a detractor tail (${det} scores ≤2 of ${npsVals.length}, expected ~${expected.toFixed(1)})`, det > 0, 'real surveys have angry zeros');
+    const hours = new Set(fResponses.filter((r2) => r2.SubmittedAt).map((r2) => r2.SubmittedAt.slice(11, 13)));
+    check(`forms: submissions spread across the day (${hours.size} distinct hours)`, hours.size >= 8, 'not one bar at noon');
+  }
+
+  // registration hygiene: one row per member+event; upcoming events aren't an empty grid,
+  // and their registrations are outcome-free and booked before the release
+  const pairSeen = new Set(); let dupPairs = 0;
+  for (const x of regs) { const k = `${x.MemberNumber}|${x.EventKey}`; if (pairSeen.has(k)) dupPairs++; else pairSeen.add(k); }
+  check('registrations: one per member+event (no duplicate pairs)', dupPairs === 0, `${dupPairs} duplicate pairs`);
+  const upcomingEvents = events.filter((e) => e.Date > releaseIso);
+  const futureRegs = regs.filter((x) => (evDateOf.get(x.EventKey) ?? '') > releaseIso);
+  const badFuture = futureRegs.filter((x) => x.Attended !== null || x.RegisteredOn > releaseIso).length;
+  if (upcomingEvents.length) {
+    // the grid must not be empty; at pilot scale a far-out event can legitimately have
+    // nobody signed up yet, so require the nearest ones to be populated, not all of them
+    const withRegs = upcomingEvents.filter((e) => futureRegs.some((x) => x.EventKey === e.EventKey)).length;
+    check(`upcoming events have early registrations (${withRegs}/${upcomingEvents.length} events, ${futureRegs.length} regs)`, futureRegs.length > 0 && withRegs >= Math.max(1, Math.floor(upcomingEvents.length * 0.4)), 'the upcoming grid must not be empty');
+    check('future-event registrations: Attended null, booked on/before release', badFuture === 0, `${badFuture} bad`);
+  }
+  // lead-time texture: the fixed −14/−45 offsets are gone; demand a real spread
+  const leads = pastRegs.map((x) => (parseDateMs(evDateOf.get(x.EventKey)) - parseDateMs(x.RegisteredOn)) / 86400000).filter((d) => d >= 0);
+  const distinctLeads = new Set(leads).size;
+  const sameDay = leads.filter((d) => d === 0).length / (leads.length || 1);
+  check(`registration lead times vary (${distinctLeads} distinct, ${(sameDay * 100).toFixed(1)}% same-day)`, distinctLeads >= 40 && sameDay > 0.01 && sameDay < 0.30, 'no single-offset comb');
 }
+const parseDateMs = (s) => new Date(`${s}T00:00:00Z`).getTime();
 
 // ---------- arrow recovery (§7.3): every causal rule re-detected, right sign and size ----------
 function checkArrows() {
@@ -398,7 +680,9 @@ function checkMoney() {
 
   // the 3-part timing mixture, measured
   const perByKey = new Map(periods.map((x) => [`ORD-D-${x.PeriodKey}`, x]));
-  const payDate = new Map(payments.map((p) => [p.OrderKey, p.PaymentDate]));
+  // the SETTLING payment only: a refund is a later negative row against the same order and
+  // would otherwise read as "this order was paid late"
+  const payDate = new Map(payments.filter((p) => p.Amount > 0 && p.Status !== 'Refunded').map((p) => [p.OrderKey, p.PaymentDate]));
   const cls = { auto: [], manual: [], net: [] };
   for (const o of duesOrders) {
     if (!payDate.has(o.OrderKey)) continue; // unpaid orders age instead
@@ -426,6 +710,42 @@ function checkMoney() {
   const openRenewals = new Set(orders.filter((x) => x.OrderKey.startsWith('ORD-R-') && x.PaymentStatus !== 'Paid').map((x) => x.MemberNumber));
   const missing = pendingMembers.filter((m) => !openRenewals.has(m)).length;
   check(`money: every PendingRenewal member has an open renewal order (incl. Marcus)`, missing === 0 && openRenewals.has('ICF-000102'), `${pendingMembers.length} pending, ${missing} missing`);
+
+  // ---------- the money model sells more than dues and tickets ----------
+  {
+    const prodTypes = new Set(products.map((p) => p.ProductType));
+    check(`money: ${products.length} products across ${prodTypes.size} types (${[...prodTypes].join(', ')})`, prodTypes.size >= 6, 'an association sells more than membership and event tickets');
+    // billable facts that used to generate nothing
+    const certOrders = orders.filter((o) => o.OrderKey.startsWith('ORD-C')).length;
+    const compOrders = orders.filter((o) => o.OrderKey.startsWith('ORD-X-')).length;
+    check(`money: credentials and competitions are billed (${certOrders} certification, ${compOrders} competition orders)`, certOrders > 0 && compOrders > 0, 'these were free before');
+    // orders bundle
+    const linesPerOrder = orderLines.reduce((a, l) => (a[l.OrderKey] = (a[l.OrderKey] ?? 0) + 1, a), {});
+    const multi = Object.values(linesPerOrder).filter((n) => n > 1).length;
+    check(`money: ${multi} multi-line orders of ${orders.length}`, multi > 0, 'real orders bundle');
+    // every order's TotalGross equals the sum of its lines
+    const sums = orderLines.reduce((a, l) => (a[l.OrderKey] = (a[l.OrderKey] ?? 0) + l.LineTotal, a), {});
+    const badTotals = orders.filter((o) => Math.abs((sums[o.OrderKey] ?? 0) - o.TotalGross) > 0.005).length;
+    check('money: order totals equal the sum of their lines', badTotals === 0, `${badTotals} mismatched`);
+    // prices move with time
+    const duesLines = orderLines.filter((l) => l.ProductKey === 'PROD-MEM-INDIVIDUAL');
+    const priceByYear = new Map();
+    for (const l of duesLines) { const o = orders.find((x) => x.OrderKey === l.OrderKey); if (o) priceByYear.set(o.OrderDate.slice(0, 4), l.UnitPrice); }
+    const yrs = [...priceByYear.keys()].sort();
+    if (yrs.length > 4) check(`money: prices move over time (Individual dues ${priceByYear.get(yrs[0])} in ${yrs[0]} -> ${priceByYear.get(yrs[yrs.length - 1])} in ${yrs[yrs.length - 1]})`,
+      priceByYear.get(yrs[yrs.length - 1]) > priceByYear.get(yrs[0]), 'thirteen years of frozen prices is not a revenue story');
+    // refunds exist and are negative
+    const refs = payments.filter((p) => p.Status === 'Refunded');
+    check(`money: ${refs.length} refunds, all negative against a paid order`, refs.length > 0 && refs.every((p) => p.Amount < 0), 'refunds are a ledger line, not a deletion');
+  }
+
+  // temporal integrity: a payment can't precede the bill it settles (2,386 rows did, 2026-07-27)
+  const orderDateOf = new Map(orders.map((o) => [o.OrderKey, o.OrderDate]));
+  const timeTravelers = payments.filter((p) => p.PaymentDate < orderDateOf.get(p.OrderKey)).length;
+  check('money: no payment dated before its order', timeTravelers === 0, `${timeTravelers} payments predate their order`);
+  // renewal bills post ahead of the cycle (the notice), first-period bills on the join date
+  const preBilled = duesOrders.filter((o) => { const per = perByKey.get(o.OrderKey); return per && o.OrderDate < per.StartDate; }).length;
+  check(`money: renewal bills post ahead of the period (${preBilled}/${duesOrders.length} pre-billed)`, preBilled > duesOrders.length * 0.5, 'renewal notices go out early');
 }
 
 // ---------- engagement dynamics: decline must PRECEDE lapse (found 2026-07-10) ----------
@@ -444,7 +764,7 @@ function checkEngagementDynamics() {
   let finalSum = 0, earlierSum = 0, members = 0;
   for (const [m, list] of periodsByMember) {
     const last = list[list.length - 1];
-    if (last.Status !== 'Lapsed') continue;
+    if (!hasEnded(last.Status)) continue;
     const joinYear = +list[0].StartDate.slice(0, 4);
     const lastYear = +last.EndDate.slice(0, 4);
     if (isCovid(lastYear)) continue;
@@ -524,11 +844,16 @@ function checkComposedApps() {
   if (npsC.length >= 20) check(`regime: covid NPS dip expressed (${mean(npsC).toFixed(2)} < ${mean(npsN).toFixed(2)})`, mean(npsC) < mean(npsN), `${npsC.length} covid-year answers`);
   // membership application: the ANONYMOUS intake funnel (bizapps-forms' flagship feature)
   const appResp = fResponses.filter((x) => x.FormKey === 'membership-application');
-  const badAnonShape = appResp.filter((x) => x.MemberNumber != null || !x.AnonymousSessionID).length;
-  check(`forms: membership-application responses are anonymous (null member + session id)`, appResp.length > 0 && badAnonShape === 0, `${appResp.length} responses, ${badAnonShape} malformed`);
+  // two legitimate shapes now: anonymous public intake (session id, no member) and the named
+  // application a member filled in on their way IN (member, no session id). Never both/neither.
+  const anonApps = appResp.filter((x) => x.MemberNumber == null);
+  const namedApps = appResp.filter((x) => x.MemberNumber != null);
+  const badAnonShape = anonApps.filter((x) => !x.AnonymousSessionID).length + namedApps.filter((x) => x.AnonymousSessionID).length;
+  check(`forms: applications are anonymous intake (${anonApps.length}) or named on the way in (${namedApps.length})`,
+    anonApps.length > 0 && badAnonShape === 0, `${badAnonShape} malformed`);
   const appYears = FF.application.distribution.sinceYearsBeforeRelease;
   const [appLo, appHi] = [appYears * FF.application.volume.perYearMin, appYears * FF.application.volume.perYearMax];
-  check(`forms: application volume ${appResp.length} within [${appLo}, ${appHi}] (release-year partial ok)`, appResp.length >= appLo * 0.5 && appResp.length <= appHi, `${appYears}y window`);
+  check(`forms: anonymous application volume ${anonApps.length} within [${appLo}, ${appHi}] (release-year partial ok)`, anonApps.length >= appLo * 0.5 && anonApps.length <= appHi, `${appYears}y window`);
   const fDistributions = load('forms', 'form_distributions');
   const badCount = fDistributions.filter((d) => d.ResponseCount !== fResponses.filter((x) => x.DistributionKey === d.DistributionKey).length).length;
   check('forms: distribution ResponseCount matches actual response rows', badCount === 0, `${fDistributions.length} distributions`);
@@ -544,14 +869,214 @@ function checkComposedApps() {
     const allow = II.severity.tolerance + 3 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
     check(`issues: severity ${level} ${(got * 100).toFixed(1)}% vs ${(want * 100).toFixed(1)}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${issues.length} issues`);
   }
+  // PRESENCE FLOOR — the share gates above cannot see an empty bucket: a level whose expected
+  // share is 0.5% passes its ±6pt band at exactly zero rows. That is how a support demo shipped
+  // with no Critical ticket in it while every gate stayed green. Any severity the ruleset gives a
+  // positive weight must actually appear.
+  {
+    const declared = ['Critical', 'High', 'Medium', 'Low']
+      .filter((lvl) => II.types.some((t) => ((II.severity.byType[t.name] ?? []).find(([l]) => l === lvl)?.[1] ?? 0) > 0));
+    const missing = declared.filter((lvl) => !issues.some((x) => x.Severity === lvl));
+    check(`issues: every declared severity actually appears (${declared.length} levels)`, missing.length === 0,
+      missing.length ? `never drawn: ${missing.join(', ')}` : declared.map((l) => `${l}=${issues.filter((x) => x.Severity === l).length}`).join(' '));
+  }
   check('issues: severity and priority are decoupled (differ on some issues)', issues.some((x) => x.Severity !== x.Priority), `${issues.filter((x) => x.Severity !== x.Priority).length} differ`);
   // issues: assignment coverage rides the declared share; assignees are committee officers
   const assigned = issues.filter((x) => x.AssigneeMemberNumber);
   const aShare = assigned.length / Math.max(1, issues.length);
   const aAllow = II.assignment.tolerance + 1.5 * Math.sqrt(II.assignment.share * (1 - II.assignment.share) / Math.max(1, issues.length));
   check(`issues: ${(aShare * 100).toFixed(1)}% assigned vs ${II.assignment.share * 100}% ±${(aAllow * 100).toFixed(1)}`, Math.abs(aShare - II.assignment.share) <= aAllow, `${assigned.length}/${issues.length}`);
-  const officerSet = new Set(cMemberships.filter((m) => m.TermKey.endsWith(`:${R.committees.terms.at(-1).start}`) && ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
-  check('issues: every assignee is an active-term committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
+  const officerSet = new Set(cMemberships.filter((m) => ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
+  check('issues: every assignee is a committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
+  // an assignee must already be a member when the ticket was worked (26 issues used to be
+  // resolved before their assignee's JoinDate — current-term officers on 2015 tickets)
+  const joinBy = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
+  const anachronistic = assigned.filter((x) => { const t = x.ResolvedAt ?? x.ClosedAt; return t && (joinBy.get(x.AssigneeMemberNumber) ?? '9999') > t.slice(0, 10); }).length;
+  check('issues: no assignee predates their own join date', anachronistic === 0, `${anachronistic} anachronistic`);
+  // resolution time is heavy-tailed with a same-day mass — not a uniform block.
+  // The Issue table has no created column; the reported date is stated in the description.
+  const reportedOn = (x) => x.Description?.match(/Reported (\d{4}-\d{2}-\d{2})/)?.[1] ?? null;
+  const resDays = issues.filter((x) => x.ResolvedAt && reportedOn(x)).map((x) => Math.round((new Date(x.ResolvedAt.slice(0, 10)) - new Date(reportedOn(x))) / 86400000)).filter((d) => d >= 0);
+  const sameDayShare = resDays.filter((d) => d === 0).length / Math.max(1, resDays.length);
+  const longTail = resDays.filter((d) => d > 45).length;
+  check(`issues: resolution heavy-tailed (${(sameDayShare * 100).toFixed(0)}% same-day, ${longTail} over 45d, max ${Math.max(0, ...resDays)}d)`, sameDayShare >= 0.05 && longTail >= 1, 'not a uniform 3–21 block');
+  // the board reads like a real queue: every type present, titles not one template
+  const typeCounts = issues.reduce((a, x) => (a[x.TypeKey] = (a[x.TypeKey] ?? 0) + 1, a), {});
+  const titleShare = Math.max(...Object.values(issues.reduce((a, x) => (a[x.Title.replace(/—.*$/, '').trim()] = (a[x.Title.replace(/—.*$/, '').trim()] ?? 0) + 1, a), {}))) / Math.max(1, issues.length);
+  // every swimlane carries rows; the floor scales with N (Billing derives from the rare
+  // overdue-order population, so a pilot-scale run legitimately has only one or two)
+  const typeFloor = Math.max(1, Math.round(issues.length * 0.02));
+  check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
+  check(`issues: no single title template dominates (${(titleShare * 100).toFixed(0)}% max)`, titleShare < 0.45, 'title variety');
+  check('issues: descriptions present (the created date lives in the narrative)', issues.every((x) => x.Description && x.Description.length > 40), `${issues.filter((x) => x.Description).length}/${issues.length}`);
+  // ---------- geography + name coherence ----------
+  {
+    const crowdP = people.filter((p) => !p._dup);
+    const countries = new Set(crowdP.map((p) => p.Country).filter(Boolean));
+    const cities = new Set(crowdP.map((p) => p.City));
+    check(`geography: ${countries.size} countries, ${cities.size} cities represented`, countries.size >= 12 && cities.size >= 25, 'an international federation needs an international roster');
+    // the subdivision code must name its own country, so no group-by can merge California
+    // with Canada (both were plain 'CA' before)
+    const badSub = crowdP.filter((p) => p.Country && p.State && !String(p.State).startsWith(`${p.Country}-`)).length;
+    check('geography: subdivision codes are country-prefixed (no CA/California vs CA/Canada clash)', badSub === 0, `${badSub} ambiguous`);
+    const euCountries = new Set(crowdP.filter((p) => p.Region === 'EU').map((p) => p.Country));
+    check(`geography: Europe spans ${euCountries.size} countries`, euCountries.size >= 8, 'not just France/Denmark/Netherlands/Switzerland/UK');
+    // NAMES match their country. Surnames are globally unambiguous per origin bucket, so
+    // the expected origin is recoverable and checkable.
+    const peopleBank = JSON.parse(readFileSync(join(ROOT, 'projects', 'morecheese', 'banks', 'people.json'), 'utf8'));
+    const originOfSurname = new Map();
+    for (const [b, v] of Object.entries(peopleBank.buckets)) for (const l of v.last) originOfSurname.set(l, b);
+    const cityOrigin = new Map();
+    for (const list of Object.values(CITIES)) for (const c of list) cityOrigin.set(c[0], c[7]);
+    const misfits = [];
+    for (const [origin, w] of Object.entries(peopleBank.countryWeights ?? {})) {
+      const grp = crowdP.filter((p) => cityOrigin.get(p.City) === origin);
+      if (grp.length < 30) continue;
+      const dominant = Object.entries(w).sort((a, b) => b[1] - a[1])[0][0];
+      const got = grp.filter((p) => originOfSurname.get(String(p.LastName).split('-')[0]) === dominant).length / grp.length;
+      if (got < w[dominant] * 0.55) misfits.push(`${origin}: ${dominant} ${(got * 100).toFixed(0)}% vs declared ${(w[dominant] * 100).toFixed(0)}%`);
+    }
+    check('names: match the country they live in', misfits.length === 0, misfits.slice(0, 2).join('; ') || 'per-country weights express');
+    // emails: accents transliterated, not deleted; domains cut on a word boundary
+    const stripped = crowdP.filter((p) => /[^ -]/.test(`${p.FirstName}${p.LastName}`))
+      .filter((p) => { const local = p.Email.split('@')[0]; return !/[a-z]/.test(local.replace(/[.\d]/g, '')) || /(?:strm|grber|rmille)/.test(local); }).length;
+    check('emails: accented names transliterated (not silently deleted)', stripped === 0, `${stripped} mangled`);
+  }
+
+  // ---------- contact + voluntary self-ID demographics ----------
+  // Blank rates are calibrated to associations that publish theirs (ASHA 2024/25, AIA 2024,
+  // APA). The load-bearing gate is the LAST one: values must not predict outcomes.
+  {
+    const crowd = people.filter((p) => !p._dup);
+    const share = (f) => crowd.filter(f).length / Math.max(1, crowd.length);
+    const gBlank = share((p) => !p.Gender), dBlank = share((p) => !p.DateOfBirth), phBlank = share((p) => !p.Phone);
+    check(`demographics: gender blank ${(gBlank * 100).toFixed(1)}% (published 8-11%, allow 5-15)`, gBlank >= 0.05 && gBlank <= 0.15, `${crowd.length} people`);
+    check(`demographics: birthdate blank ${(dBlank * 100).toFixed(1)}% (published 5-21%, allow 5-25)`, dBlank >= 0.05 && dBlank <= 0.25, 'completeness varies by tenure');
+    check(`contact: phone blank ${(phBlank * 100).toFixed(1)}% (allow 5-25)`, phBlank >= 0.05 && phBlank <= 0.25, `${crowd.filter((p) => p.Phone).length} with a phone`);
+    // two distinct nulls: never-answered (blank) and an explicit refusal, which behave
+    // differently in every published series
+    const pns = crowd.filter((p) => p.Gender === 'Prefer not to say').length / Math.max(1, crowd.length);
+    check(`demographics: explicit "Prefer not to say" present and small (${(pns * 100).toFixed(1)}%)`, pns > 0.005 && pns < 0.06, 'modelled separately from blank');
+    // completeness rises with tenure (APA: Fellows 5.6% blank vs Associates 45.5%)
+    const relIso = run.releaseDate;
+    const yrs = (p) => (new Date(relIso) - new Date(p.JoinDate)) / (365.25 * 86400000);
+    const newer = crowd.filter((p) => yrs(p) < 3), older = crowd.filter((p) => yrs(p) >= 8);
+    if (newer.length > 30 && older.length > 30) {
+      const bN = newer.filter((p) => !p.Gender).length / newer.length, bO = older.filter((p) => !p.Gender).length / older.length;
+      check(`demographics: recent joiners less complete than long-tenured (${(bN * 100).toFixed(0)}% vs ${(bO * 100).toFixed(0)}% blank)`, bN > bO, 'the documented real pattern');
+    }
+    // DECORRELATION — the rule that keeps this data honest. Whether someone answered may
+    // track tenure; WHAT they answered must not predict any outcome, or a demo "discovers"
+    // a disparity we fabricated.
+    const lastStatusOf = new Map();
+    for (const [m, list] of periodsByMember) lastStatusOf.set(m, list[list.length - 1].Status);
+    const popLapsed = crowd.filter((p) => hasEnded(lastStatusOf.get(p.MemberNumber))).length / Math.max(1, crowd.length);
+    // engagement must be measured on something OBSERVABLE — the latent theta is stripped
+    // from the shipped pack, so reading it here silently compares zeroes (this gate failed
+    // its own negative test that way). Registrations per member is the visible proxy.
+    const regCount = new Map();
+    for (const x of regs) regCount.set(x.MemberNumber, (regCount.get(x.MemberNumber) ?? 0) + 1);
+    const actOf = (p) => regCount.get(p.MemberNumber) ?? 0;
+    const popAct = crowd.reduce((s, p) => s + actOf(p), 0) / Math.max(1, crowd.length);
+    const actSd = Math.sqrt(crowd.reduce((s, p) => s + (actOf(p) - popAct) ** 2, 0) / Math.max(1, crowd.length));
+    const skews = [];
+    for (const g of ['Female', 'Male', 'Non-binary', 'Prefer not to say']) {
+      const grp = crowd.filter((p) => p.Gender === g);
+      // only assert where there is power to detect a real effect. A 65-person group on a
+      // ~20% base rate has a ±10pt binomial swing of its own; asserting there reports noise
+      // as a disparity (it false-redded the N=2500 build on "Prefer not to say").
+      // 3·SE, not 2, because four groups are tested at once — the repo's standing
+      // multiple-comparisons budget.
+      if (grp.length < 120) continue;
+      const lapsed = grp.filter((p) => hasEnded(lastStatusOf.get(p.MemberNumber))).length / grp.length;
+      const seL = Math.sqrt(popLapsed * (1 - popLapsed) / grp.length);
+      if (Math.abs(lapsed - popLapsed) > 0.03 + 3 * seL) skews.push(`${g} lapse ${(lapsed * 100).toFixed(0)}% vs ${(popLapsed * 100).toFixed(0)}%`);
+      const act = grp.reduce((s, p) => s + actOf(p), 0) / grp.length;
+      const seA = actSd / Math.sqrt(grp.length);
+      if (Math.abs(act - popAct) > 2.5 * seA) skews.push(`${g} activity ${act.toFixed(2)} vs ${popAct.toFixed(2)}`);
+    }
+    check('demographics: values do NOT predict outcomes (no authored disparity)', skews.length === 0, skews.join('; ') || `lapse and activity flat across groups (pop ${(popLapsed * 100).toFixed(0)}% lapsed, ${popAct.toFixed(2)} regs)`);
+    // race/ethnicity follows the same voluntary rules, and blanks run HIGHER than gender
+    // in every published series (ASHA: race 17% vs gender 10%)
+    const rBlank = share((p) => !p.RaceEthnicity);
+    check(`demographics: race/ethnicity blank ${(rBlank * 100).toFixed(1)}% (published 15-17%, allow 10-26) and blanker than gender`, rBlank >= 0.10 && rBlank <= 0.26 && rBlank > gBlank, 'race is less complete than gender everywhere it is published');
+    check('demographics: Hispanic origin asked as its own question', crowd.some((p) => p.EthnicityHispanic) && crowd.some((p) => p.RaceEthnicity && !p.EthnicityHispanic), 'separate instrument, separate blanks');
+    // the same decorrelation rule applies to race — this is the one that matters most
+    const raceSkews = [];
+    for (const v of ['White', 'Asian', 'Black or African American', 'Prefer not to say']) {
+      const grp = crowd.filter((p) => p.RaceEthnicity === v);
+      if (grp.length < 120) continue;
+      const lapsed = grp.filter((p) => hasEnded(lastStatusOf.get(p.MemberNumber))).length / grp.length;
+      if (Math.abs(lapsed - popLapsed) > 0.03 + 3 * Math.sqrt(popLapsed * (1 - popLapsed) / grp.length)) raceSkews.push(`${v} lapse ${(lapsed * 100).toFixed(0)}%`);
+      const act = grp.reduce((s, p) => s + actOf(p), 0) / grp.length;
+      if (Math.abs(act - popAct) > 2.5 * (actSd / Math.sqrt(grp.length))) raceSkews.push(`${v} activity ${act.toFixed(2)}`);
+    }
+    check('demographics: race/ethnicity does NOT predict outcomes', raceSkews.length === 0, raceSkews.join('; ') || 'flat across groups');
+    // addresses are country-shaped, not all US ZIPs
+    const withAddr = crowd.filter((p) => p.AddressLine1);
+    const postalShapes = new Set(withAddr.map((p) => String(p.PostalCode).replace(/[0-9]/g, '9').replace(/[A-Za-z]/g, 'A')));
+    check(`addresses: ${withAddr.length} present, ${postalShapes.size} distinct postal formats`, postalShapes.size >= 6, 'a French code is not a US ZIP');
+    const langs = new Set(crowd.map((p) => p.PrimaryLanguage));
+    check(`demographics: ${langs.size} primary languages follow the country`, langs.size >= 6, 'not all English');
+  }
+
+  // issue comments: a readable activity feed, in order, with legal Source values
+  {
+    const comments = load('issues', 'issue_comments');
+    const SRC = new Set(['inbound', 'outbound', 'internal']);
+    check(`issues: ${comments.length} comments across ${new Set(comments.map((c) => c.IssueKey)).size} tickets`, comments.length > 0, 'every ticket used to have an empty activity feed');
+    check('issues: comment Source values are legal (inbound/outbound/internal)', comments.every((c) => SRC.has(c.Source)), 'CHECK-constrained upstream');
+    const byIssue = new Map();
+    for (const c of comments) { if (!byIssue.has(c.IssueKey)) byIssue.set(c.IssueKey, []); byIssue.get(c.IssueKey).push(c); }
+    let backwards = 0;
+    for (const [, list] of byIssue) {
+      const dates = list.sort((a, b) => a.Sequence - b.Sequence).map((c) => c.Body.slice(1, 11));
+      for (let i = 1; i < dates.length; i++) if (dates[i] < dates[i - 1]) backwards++;
+    }
+    // the table has no author-settable timestamp, so the date is in the body — it still
+    // has to read forward (the first version resolved a ticket before its own triage note)
+    check('issues: comment threads read forward in time', backwards === 0, `${backwards} out of order`);
+    const orphan = comments.filter((c) => !issues.some((i2) => i2.IssueKey === c.IssueKey)).length;
+    check('issues: every comment belongs to a real ticket', orphan === 0, `${orphan} orphaned`);
+  }
+
+  // the relationship graph shows more than employment: every demo-owned type carries
+  // edges, and referrals are causally sound (the referrer joined first)
+  {
+    const relTypes = load('common', 'relationship_types');
+    const byType = relationships.reduce((a, x) => { const k = x.TypeKey ?? '(seeded)'; a[k] = (a[k] ?? 0) + 1; return a; }, {});
+    const empty = relTypes.filter((t) => !(byType[t.TypeKey] > 0)).map((t) => t.TypeKey);
+    check(`relationships: ${relTypes.length} demo types, all carrying edges (${Object.entries(byType).map(([k, v]) => k + ' ' + v).join(', ')})`, empty.length === 0, empty.join(', ') || 'no empty type');
+    const joinOf2 = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
+    const badRef = relationships.filter((x) => x.TypeKey === 'Referred By')
+      .filter((x) => (joinOf2.get(x.ToMemberNumber) ?? '9999') > (joinOf2.get(x.FromMemberNumber) ?? '')).length;
+    check('relationships: every referrer joined before the member they referred', badRef === 0, `${badRef} impossible referrals`);
+    // demo-owned types must never re-create bizapps-common's seeded ones (runbook F6:
+    // app-seeded lookups collide BY NAME at install)
+    const seededNames = Object.keys(R.relationships.seededTypeIDs ?? {});
+    const collide = relTypes.filter((t) => seededNames.includes(t.TypeKey)).map((t) => t.TypeKey);
+    check('relationships: no demo type collides with a bizapps-seeded type name (F6)', collide.length === 0, collide.join(', ') || `avoids ${seededNames.join('/')}`);
+  }
+  // credentials form a LADDER: nobody holds a credential whose prerequisite they lack,
+  // and the catalogue is deep enough that a credentials page isn't three rows
+  {
+    const cat = load('learning', 'certifications');
+    const declared = new Map(R.programs.certifications.catalog.map((c) => [c.key, c]));
+    const heldBy = new Map();
+    for (const mc of memberCerts) {
+      if (!heldBy.has(mc.MemberNumber)) heldBy.set(mc.MemberNumber, new Set());
+      heldBy.get(mc.MemberNumber).add(mc.CertKey);
+    }
+    const broken = [];
+    for (const [m, set] of heldBy) {
+      for (const k of set) {
+        const pre = declared.get(k)?.prerequisite;
+        if (pre && !set.has(pre)) broken.push(`${m}:${k} lacks ${pre}`);
+      }
+    }
+    check(`certifications: ${cat.length} in the catalogue, every prerequisite satisfied`, cat.length >= 5 && broken.length === 0, broken.slice(0, 2).join('; ') || `${heldBy.size} holders`);
+    check('certifications: catalogue rows carry a description', cat.every((c) => c.Description && c.Description.length > 30), `${cat.filter((c) => c.Description).length}/${cat.length}`);
+  }
   // programs: pursuit + advocate shares land (over their real pools)
   const PRG = R.programs;
   const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
@@ -585,7 +1110,9 @@ function checkComposedApps() {
   // Ended is legitimate for a dissolved employer OR a labeled stale-employer job switch (the emp-true: edge)
   const switched = new Set(relationships.filter((r2) => r2.RelKey.startsWith('emp-true:')).map((r2) => r2.FromMemberNumber));
   const endedOk = empRels.every((r2) => (r2.Status === 'Ended') === (orgByKeyG(r2.ToOrgKey)?.LifecycleEvent?.kind === 'Dissolved' || switched.has(r2.FromMemberNumber)));
-  check(`relationships: employment edges ${empRels.length} = employed members ${employed}, dissolution-consistent`, empRels.length === employed && endedOk, `${relationships.length} total relationships`);
+  const employedProspects = prospects.filter((x) => x.OrgKey).length;
+  check(`relationships: employment edges ${empRels.length} = ${employed} employed members + ${employedProspects} employed non-members, dissolution-consistent`,
+    empRels.length === employed + employedProspects && endedOk, `${relationships.length} total relationships`);
   // motions: stored tallies match the vote rows; votes consistent with attendance (Absent ⇔ not Present)
   let tallyBad = 0;
   const votesByMotion = new Map();
@@ -607,11 +1134,61 @@ function checkComposedApps() {
   const wantUpcoming = CC.list.length * CC.meetings.upcomingPerCommittee;
   const futureNoAtt = scheduled.every((m) => !cAttendance.some((a) => a.MeetingKey === m.MeetingKey));
   check(`committees: upcoming Scheduled meetings = ${wantUpcoming} (each committee schedules ahead), no attendance yet`, scheduled.length === wantUpcoming && futureNoAtt, `${scheduled.length} scheduled`);
+  // governance has HISTORY and CONTINUITY: terms reach back toward formation, and rosters
+  // are not wiped clean every cycle (they used to carry ~4% over, against a real 50-70%)
+  {
+    const termYears = [...new Set(cTerms.map((t) => t.StartDate.slice(0, 4)))].sort();
+    const earliestFormed = cCommittees.map((c) => c.FormationDate).sort()[0]?.slice(0, 4);
+    check(`committees: history spans ${termYears.length} terms from ${termYears[0]} (earliest formed ${earliestFormed})`, termYears.length >= 4, 'governance must not start yesterday');
+    // roster floor: a committee-term below the bylaws minimum has no quorum and no believable
+    // vote. This is the tail the volunteer draw alone leaves behind, so assert it directly rather
+    // than trusting the participation average.
+    {
+      const min = CC.participation.minRosterPerTerm ?? 0;
+      const byTerm = new Map();
+      for (const m of cMemberships) byTerm.set(m.TermKey, (byTerm.get(m.TermKey) ?? 0) + 1);
+      const short = [...byTerm].filter(([, n]) => n < min);
+      check(`committees: every term meets the ${min}-member minimum (${byTerm.size} terms, smallest ${Math.min(...byTerm.values())})`,
+        min === 0 || short.length === 0, short.length ? short.map(([k, n]) => `${k}=${n}`).join(', ') : 'no under-quorum committee-terms');
+    }
+    const noTermBeforeFormed = cTerms.filter((t) => { const c = cCommittees.find((x) => x.CommitteeKey === t.CommitteeKey); return c && t.EndDate < c.FormationDate; }).length;
+    check('committees: no term predates its committee formation', noTermBeforeFormed === 0, `${noTermBeforeFormed} bad`);
+    // and no SEAT predates it either — the term guard alone left members serving on
+    // committees that did not exist yet
+    const seatBeforeFormed = cMemberships.filter((m) => { const c = cCommittees.find((x) => x.CommitteeKey === m.CommitteeKey); return c && m.EndDate < c.FormationDate; }).length;
+    check('committees: no seat predates its committee formation', seatBeforeFormed === 0, `${seatBeforeFormed} bad`);
+    const byTerm = new Map();
+    for (const m of cMemberships) { const y = m.TermKey.split(':')[1]; if (!byTerm.has(y)) byTerm.set(y, new Set()); byTerm.get(y).add(m.MemberNumber); }
+    const ys = [...byTerm.keys()].sort();
+    let carried = 0, seats = 0;
+    for (let i = 1; i < ys.length; i++) {
+      const prev = byTerm.get(ys[i - 1]), cur = byTerm.get(ys[i]);
+      carried += [...cur].filter((m) => prev.has(m)).length; seats += cur.size;
+    }
+    const rate = seats ? carried / seats : 0;
+    if (seats > 40) check(`committees: roster continuity ${(rate * 100).toFixed(0)}% across terms (incumbents return)`, rate >= 0.2, 'rosters must not reset every cycle');
+  }
   // tasks: every PendingRenewal member carries an outreach task
   const pendingMembers = [...lastStatus.entries()].filter(([, st]) => st === 'PendingRenewal').map(([m2]) => m2);
   const outreach = new Set(tTasks.filter((t) => t.TypeKey === 'Renewal Outreach').map((t) => t.TaskKey));
   const missingOutreach = pendingMembers.filter((m2) => !outreach.has(`otask:${m2}`)).length;
   check(`tasks: renewal-outreach task per PendingRenewal member (${pendingMembers.length})`, missingOutreach === 0, `${tTasks.length} tasks total`);
+  // the board isn't one person's queue: no assignee may hold more than a third of it
+  const perAssignee = tAssignments.reduce((a, x) => (a[x.AssigneeMemberNumber] = (a[x.AssigneeMemberNumber] ?? 0) + 1, a), {});
+  const topShare = Math.max(0, ...Object.values(perAssignee)) / Math.max(1, tAssignments.length);
+  check(`tasks: workload spread (top assignee holds ${(topShare * 100).toFixed(0)}%, ${Object.keys(perAssignee).length} assignees)`, topShare <= 0.34, 'no single-owner board');
+  // task rows carry the fields a board renders: description, real completion states, hours
+  const withDesc = tTasks.filter((t) => t.Description && t.Description.length > 30).length;
+  check(`tasks: descriptions present (${withDesc}/${tTasks.length})`, withDesc === tTasks.length, 'a task board needs body text');
+  const pctVals = new Set(tTasks.map((t) => t.PercentComplete ?? 0));
+  check(`tasks: progress is granular (${pctVals.size} distinct PercentComplete values)`, pctVals.size >= 6, 'not just 0/25/50/100');
+  const started = tTasks.filter((t) => t.StartedAt).length;
+  const badOrder2 = tTasks.filter((t) => t.StartedAt && t.CompletedAt && t.StartedAt > t.CompletedAt).length;
+  check(`tasks: StartedAt on worked tasks (${started}), never after completion`, started > 0 && badOrder2 === 0, `${badOrder2} inverted`);
+  // creation isn't a single release-day batch
+  const assignDays = new Set(tAssignments.map((a) => a.AssignedAt.slice(0, 10)));
+  const topDay = Math.max(0, ...Object.values(tAssignments.reduce((a, x) => (a[x.AssignedAt.slice(0, 10)] = (a[x.AssignedAt.slice(0, 10)] ?? 0) + 1, a), {})));
+  check(`tasks: assignment dates spread (${assignDays.size} distinct days, biggest ${topDay})`, topDay / Math.max(1, tAssignments.length) < 0.25, 'no release-day pile-up');
   // issues: numbering dense + unique
   const nums = new Set(issues.map((x) => x.IssueNumber));
   check(`issues: ${issues.length} tickets, numbering dense + unique`, nums.size === issues.length && issues.length > 0, `${[...nums].slice(0, 2)}…`);
@@ -653,8 +1230,12 @@ function checkHeroes() {
     }
     if (p && h.employerName && orgByKey.get(p.OrgKey)?.Name !== h.employerName) problems.push(`employer=${orgByKey.get(p.OrgKey)?.Name}`);
     if (h.pins.certStatus) {
-      const mc = memberCerts.find((x) => x.MemberNumber === h.memberNumber);
-      if (!mc || mc.Status !== h.pins.certStatus) problems.push(`cert=${mc?.Status}≠${h.pins.certStatus}`);
+      // a persona can hold a LADDER of credentials, so the pin is about the one the
+      // persona is defined by — the last declared — not merely "any cert they hold"
+      const declared = h.certifications ?? (h.certification ? [h.certification] : []);
+      const focusKey = h.pins.certKey ?? declared[declared.length - 1]?.key;
+      const mc = memberCerts.find((x) => x.MemberNumber === h.memberNumber && (!focusKey || x.CertKey === focusKey));
+      if (!mc || mc.Status !== h.pins.certStatus) problems.push(`cert ${focusKey ?? ''}=${mc?.Status}≠${h.pins.certStatus}`);
     }
     if (h.pins.competitionGold) {
       if (!compEntries.some((x) => x.MemberNumber === h.memberNumber && x.EntryYear === h.pins.competitionGold && x.Result === 'Gold')) problems.push(`no Gold ${h.pins.competitionGold}`);
@@ -693,10 +1274,21 @@ function checkStatusMix() {
   // distribution gate must not count them (they'd bias the mix by construction)
   const pinnedLapse = new Set(JSON.parse(readFileSync(join(OUT, 'motifs.json'), 'utf8')).registry
     .filter((x) => x.LapseYear != null).map((x) => x.MemberNumber));
+  // Same reasoning, generalised: ANY member kept past the archive rule is there because we
+  // wanted the story, not because they represent current composition. A lapsed member whose
+  // cancellation predates the 3-year cutoff is by definition one the rule would have removed
+  // — heroes, stamped motifs, and the retained COVID cohort. This gate measures the
+  // archive-ELIGIBLE population, so the era stays visible in the data without the pandemic
+  // rewriting the federation's headline composition.
+  const archiveCutoff = iso2(addDays2(new Date(run.releaseDate), -3 * 365 - 1));
+  const keptPastArchive = new Set(periods
+    .filter((x) => hasEnded(x.Status) && x.CancellationDate && x.CancellationDate < archiveCutoff)
+    .map((x) => x.MemberNumber));
+  const excluded = (m) => pinnedLapse.has(m) || keptPastArchive.has(m);
   const counts = { Active: 0, Lapsed: 0, Cancelled: 0, PendingRenewal: 0 };
-  for (const [m, s] of lastStatus) { if (!pinnedLapse.has(m)) counts[s] = (counts[s] ?? 0) + 1; }
+  for (const [m, s] of lastStatus) { if (!excluded(m)) counts[s] = (counts[s] ?? 0) + 1; }
   // injected contact-duplicates (ICF-D*) are records, not members — they carry no periods
-  const total = people.filter((p) => !p.MemberNumber.startsWith('ICF-D') && !pinnedLapse.has(p.MemberNumber)).length;
+  const total = people.filter((p) => !p.MemberNumber.startsWith('ICF-D') && !excluded(p.MemberNumber)).length;
   const active = (counts.Active + counts.PendingRenewal) / total;
   const [tA] = R.statusMix.target;
   check(`status mix: active-ish ${(active * 100).toFixed(0)}% vs ~${(tA + 0.02) * 100}% ±${R.statusMix.tolerance * 100}`, Math.abs(active - (tA + 0.02)) <= R.statusMix.tolerance, JSON.stringify(counts));
@@ -770,6 +1362,17 @@ function checkMessaging() {
     if (ms.some((m) => m.ReceivedAt > `${run.releaseDate}T23:59:59Z`)) problems.push(`${t.ThreadKey}: message after release`);
   }
   check('messaging: thread/message integrity (state mirrors issue, coherent flow, inside history)', problems.length === 0, problems.slice(0, 3).join('; ') || `${smMessages.length} messages in ${smThreads.length} threads`);
+  // staff answer during the working week; members write whenever (the rhythm is the tell)
+  const outbound = smMessages.filter((x) => x.Direction === 'Outbound');
+  const offHours = outbound.filter((x) => { const d = new Date(x.ReceivedAt); return [0, 6].includes(d.getUTCDay()) || d.getUTCHours() < 8 || d.getUTCHours() > 18; }).length;
+  check(`messaging: staff replies inside business hours (${offHours}/${outbound.length} off-hours)`, offHours <= Math.max(2, outbound.length * 0.03), 'no 3am Sunday replies from the desk');
+  // the corpus must not visibly loop, and the wording must fit the ticket type
+  const distinctContent = new Set(smMessages.map((x) => x.Content)).size;
+  check(`messaging: message wording varies (${distinctContent} distinct of ${smMessages.length})`, distinctContent >= Math.min(30, smMessages.length * 0.3), 'type-aware banks, not 17 strings on a loop');
+  const issueTypeOf = new Map(issues.map((x) => [x.IssueKey, x.TypeKey]));
+  const misfit = smThreads.filter((t) => issueTypeOf.get(t.IssueKey) === 'Data Correction'
+    && smMessages.some((x) => x.ThreadKey === t.ThreadKey && /invoice|refund|payment|balance|charge/i.test(x.Content))).length;
+  check('messaging: wording matches the ticket type (no invoice talk on data-correction threads)', misfit === 0, `${misfit} mismatched threads`);
 }
 
 // ---------- motifs: every stamped archetype actually expresses ----------
@@ -799,6 +1402,40 @@ function checkPlatform() {
   }
   check('platform: conversations coherent (tokens resolved, User-first, increasing clock, inside history)',
     convProblems.length === 0, convProblems.slice(0, 3).join('; ') || `${pConvDetails.length} turns in ${pConvs.length} conversations`);
+
+  // TRANSCRIPT TRUTH: numbers a seeded Skip answer states must match the SHIPPED pack.
+  // The transcript points the user at a query that would disprove it, so any drift here
+  // is the most legible falsehood in the dataset (it quoted a pre-defects member count).
+  const shippedPeople = people.length;
+  const segCounts = people.reduce((a, p) => (a[p.Segment] = (a[p.Segment] ?? 0) + 1, a), {});
+  const topSeg = Object.entries(segCounts).sort((a, b) => b[1] - a[1])[0] ?? ['—', 0];
+  // anchor on the claim WORDING, not bare numbers — a transcript mentioning "2025" means
+  // the year, not the roster size
+  const claimProblems = [];
+  for (const m of pConvDetails) {
+    const roster = m.Message.match(/([\d,]+)\s+(?:member profiles|members\b)/i);
+    if (roster) { const n = Number(roster[1].replace(/,/g, '')); if (n !== shippedPeople) claimProblems.push(`${m.MsgKey}: says ${n} members, pack ships ${shippedPeople}`); }
+    const seg = m.Message.match(/segment is (\w[\w -]*?) with ([\d,]+)/i);
+    if (seg) {
+      const n = Number(seg[2].replace(/,/g, ''));
+      if (seg[1].trim() !== topSeg[0] || n !== topSeg[1]) claimProblems.push(`${m.MsgKey}: says ${seg[1].trim()} ${n}, pack ships ${topSeg[0]} ${topSeg[1]}`);
+    }
+  }
+  check(`platform: transcript counts are true against the shipped pack (${shippedPeople} people, top segment ${topSeg[0]} ${topSeg[1]})`,
+    claimProblems.length === 0, claimProblems.slice(0, 2).join('; ') || 'no false claims');
+
+  // every staff persona has residue: a demo LOGS IN as one of them, and an empty
+  // Favourites tray and Lists node is the first thing they'd see
+  {
+    const favs = load('platform', 'user_favorites');
+    const lists = load('platform', 'lists');
+    const details = load('platform', 'list_details');
+    const thin = pUsers.filter((u) => !favs.some((f) => f.UserKey === u.UserKey) || !lists.some((l) => l.UserKey === u.UserKey)
+      || !pViews.some((v) => v.UserKey === u.UserKey));
+    check(`platform: every staff persona has views, favourites and a list (${pUsers.length} personas)`, thin.length === 0, thin.map((u) => u.UserKey).join(', ') || 'no empty Explorer on login');
+    const emptyLists = lists.filter((l) => !details.some((d) => d.ListKey === l.ListKey));
+    check(`platform: no empty list (${lists.length} lists, ${details.length} items)`, emptyLists.length === 0, emptyLists.map((l) => l.Name).join(', ') || 'all populated');
+  }
 
   // audit rows mirror pack timelines EXACTLY (derive-never-invent, and the counts must match)
   const issueByKey = new Map(issues.map((x) => [x.IssueKey, x]));
@@ -856,6 +1493,17 @@ function checkPlatform() {
   // the renewal-outreach list holds EXACTLY the pending-renewal members (derived, not invented)
   const pending = [...lastPeriod.values()].filter((per) => per.Status === 'PendingRenewal').length;
   const listRows = pListDetails.filter((d) => d.ListKey === 'renewal-outreach').length;
+  // volume, per persona: a demo logs in AS someone, and one saved view is not a workspace.
+  // (The gate above only proves each persona has at least one of each artefact.)
+  {
+    const perOwner = new Map();
+    for (const v of pViews) perOwner.set(v.UserKey, (perOwner.get(v.UserKey) ?? 0) + 1);
+    const thin = [...perOwner].filter(([, n]) => n < 2).map(([o]) => o);
+    check(`platform: every persona has 2+ saved views (${pViews.length} views, ${perOwner.size} personas)`,
+      thin.length === 0, thin.length ? `only one view for: ${thin.join(', ')}` : [...perOwner].map(([o, n]) => `${o}=${n}`).join(' '));
+    check(`platform: ${pQueries.length} reusable queries (a query library, not a sample)`, pQueries.length >= 5,
+      pQueries.map((q) => q.Name).slice(0, 3).join(' | '));
+  }
   check('platform: renewal-outreach list == pending-renewal members', listRows === pending, `${listRows} vs ${pending}`);
 
   const badNotif = pNotifs.filter((n) => (n.Unread ? n.ReadAt != null : n.ReadAt == null)).length;
@@ -864,68 +1512,52 @@ function checkPlatform() {
 
 // ---------- sonar: scores re-derive from the packs, signal is honest ----------
 function checkSonar() {
-  const SS = R.sonar;
-  const problems = [];
-
-  const weightSum = snModelFactors.reduce((a, x) => a + x.Weight, 0);
-  check('sonar: factor weights sum to 100', weightSum === 100, `${weightSum}`);
+  // DEFINITIONS ONLY — Sonar's engine computes the scores, so the gate validates that the
+  // model is well-formed and each factor is EXECUTABLE by the FactorCompiler (the "no data
+  // source" class of failure). Score correctness / the Bob<Elena contrast is witnessed live
+  // in Sonar after a recompute, not here.
+  check('sonar: one Active WeightedSum model', snModels.length === 1 && snModels[0].Status === 'Active' && snModels[0].CombineStrategy === 'WeightedSum',
+    `${snModels.length} model(s)`);
 
   const sorted = [...snBands].sort((a, b) => a.MinScore - b.MinScore);
-  const contiguous = sorted[0].MinScore === 0 && sorted[sorted.length - 1].MaxScore === 100
+  const contiguous = sorted.length >= 2 && sorted[0].MinScore === 0 && sorted[sorted.length - 1].MaxScore === 100
     && sorted.every((b, i) => i === 0 || sorted[i - 1].MaxScore === b.MinScore);
   check('sonar: bands tile 0..100 with no gaps', contiguous, sorted.map((b) => `${b.Label} ${b.MinScore}-${b.MaxScore}`).join(', '));
 
-  // per-score internal consistency: contributions sum to the score, delta/trend/band agree
-  const contribsByScore = new Map();
-  for (const c of snContribs) (contribsByScore.get(c.ScoreKey) ?? contribsByScore.set(c.ScoreKey, []).get(c.ScoreKey)).push(c);
-  const bandFor = (s) => sorted.find((b) => s < b.MaxScore || b.MaxScore === 100).BandKey;
-  for (const s of snScores) {
-    const parts = contribsByScore.get(s.ScoreKey) ?? [];
-    if (parts.length !== snModelFactors.length) problems.push(`${s.ScoreKey}: ${parts.length} contributions`);
-    const sum = Math.round(parts.reduce((a, c) => a + c.WeightedContribution, 0) * 100) / 100;
-    if (Math.abs(sum - s.NormalizedScore) > 0.05) problems.push(`${s.ScoreKey}: contribs ${sum} != score ${s.NormalizedScore}`);
-    if (Math.abs((s.NormalizedScore - s.PreviousNormalizedScore) - s.Delta) > 0.011) problems.push(`${s.ScoreKey}: delta drift`);
-    const expTrend = Math.abs(s.Delta) < SS.flatDeltaThreshold ? 'Flat' : s.Delta > 0 ? 'Up' : 'Down';
-    if (s.TrendDirection !== expTrend) problems.push(`${s.ScoreKey}: trend ${s.TrendDirection} != ${expTrend}`);
-    if (s.BandKey !== bandFor(s.NormalizedScore)) problems.push(`${s.ScoreKey}: band mismatch`);
+  // every factor is executable: Declarative + a supported aggregation + a linked source
+  // related entity + an anchor; the related entity has an auto-resolve ('[]') or JSON path.
+  const relByKey = new Map(snRelated.map((r) => [r.RelatedKey, r]));
+  const AGG = new Set(['Count', 'Sum', 'Avg', 'Min', 'Max', 'DistinctCount', 'Exists', 'Recency', 'RatePerPeriod', 'TrendSlope']);
+  const problems = [];
+  for (const f of snFactors) {
+    if (f.FactorType !== 'Declarative') problems.push(`${f.Slug}: FactorType ${f.FactorType}`);
+    if (!AGG.has(f.Aggregation)) problems.push(`${f.Slug}: unsupported aggregation ${f.Aggregation}`);
+    const rel = relByKey.get(f.SourceRelatedKey);
+    if (!rel) { problems.push(`${f.Slug}: SourceRelatedKey unresolved (would be "no data source")`); continue; }
+    try { const p = JSON.parse(rel.RelationshipPath); if (!Array.isArray(p)) problems.push(`${f.Slug}: RelationshipPath not a JSON array`); }
+    catch { problems.push(`${f.Slug}: RelationshipPath not valid JSON ('${rel.RelationshipPath}')`); }
+    if (['Sum', 'Avg', 'Min', 'Max', 'Recency'].includes(f.Aggregation) && !f.AggregateFieldName)
+      problems.push(`${f.Slug}: ${f.Aggregation} needs AggregateFieldName`);
   }
-  check('sonar: every score internally consistent (contribs sum, delta, trend, band)', problems.length === 0,
-    problems.slice(0, 3).join('; ') || `${snScores.length} scores × ${snModelFactors.length} factors`);
+  check('sonar: every factor is executable (Declarative, agg, linked related entity, JSON path)',
+    problems.length === 0, problems.slice(0, 4).join('; ') || `${snFactors.length} factors`);
 
-  // history/transitions/runs mirror the snapshot math exactly
-  const nSnap = SS.snapshots.offsetsDaysBeforeRelease.length;
-  check('sonar: history = members × snapshots', snHistory.length === snScores.length * nSnap, `${snHistory.length} vs ${snScores.length}×${nSnap}`);
-  const histByMember = new Map();
-  for (const h of snHistory) (histByMember.get(h.MemberNumber) ?? histByMember.set(h.MemberNumber, []).get(h.MemberNumber)).push(h);
-  let expTrans = 0;
-  for (const rows of histByMember.values()) {
-    rows.sort((a, b) => (a.AsOfDate < b.AsOfDate ? -1 : 1));
-    for (let i = 1; i < rows.length; i++) if (rows[i].BandKey !== rows[i - 1].BandKey) expTrans++;
+  // model-factors: one per factor, positive weight
+  const mfFactorKeys = new Set(snModelFactors.map((x) => x.FactorKey));
+  const allBound = snFactors.every((f) => mfFactorKeys.has(f.FactorKey)) && snModelFactors.every((mf) => mf.Weight > 0);
+  // the published snapshot must reproduce the live config (it used to hardcode every
+  // factor as Count, contradicting the Recency factor) and a model can't be effective
+  // before the configuration that defines it was published
+  {
+    const ver = snVersions[0], mdl = snModels[0];
+    const snap = JSON.parse(ver?.ConfigSnapshotJSON ?? '{}');
+    const byslug = new Map((snap.factors ?? []).map((f) => [f.slug, f]));
+    const mismatched = snFactors.filter((f) => byslug.get(f.Slug)?.aggregation !== f.Aggregation);
+    check(`sonar: published snapshot reproduces the live factors (${(snap.factors ?? []).length})`, mismatched.length === 0, mismatched.map((f) => f.Slug).join(', ') || 'aggregations agree');
+    check('sonar: model effective on/after its published version', !mdl?.EffectiveFrom || !ver?.PublishedAt || mdl.EffectiveFrom >= ver.PublishedAt, `${mdl?.EffectiveFrom} vs ${ver?.PublishedAt}`);
   }
-  check('sonar: band transitions == history band changes', snTransitions.length === expTrans, `${snTransitions.length} vs ${expTrans}`);
-  const runsOk = snRuns.length === nSnap && snRuns.every((r) => r.Status === 'Succeeded' && r.RecordsScored === snScores.length)
-    && snRuns.reduce((a, r) => a + r.BandTransitions, 0) === snTransitions.length;
-  check('sonar: recompute runs coherent (count, scored, transition totals)', runsOk, `${snRuns.length} runs`);
-
-  // the signal is honest: disengaged members really score lower, and the flagship contrast holds
-  const scoreByMember = new Map(snScores.map((s) => [s.MemberNumber, s]));
-  const lapsed = [], active = [];
-  for (const [m, st] of lastStatus) {
-    const s = scoreByMember.get(m); if (!s) continue;
-    if (st === 'Lapsed') lapsed.push(s.NormalizedScore); else if (st === 'Active') active.push(s.NormalizedScore);
-  }
-  const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
-  const gap = mean(active) - mean(lapsed);
-  check(`sonar: engagement→retention signal (active mean − lapsed mean = ${gap.toFixed(1)} ≥ 3)`, gap >= 3,
-    `active ${mean(active).toFixed(1)} (n=${active.length}) vs lapsed ${mean(lapsed).toFixed(1)} (n=${lapsed.length})`);
-  // Bob's decline is a multi-YEAR arc — his 90-day trend direction legitimately jitters
-  // by seed (a sliding window can catch one extra event), so the binary claims are the
-  // rank gap and that he never reads as a top-band member.
-  const elena = scoreByMember.get('ICF-000101');
-  const bob = scoreByMember.get('ICF-000105');
-  check('sonar: flagship contrast (Elena ≥ Bob + 10, Bob below Engaged)',
-    !!elena && !!bob && elena.NormalizedScore >= bob.NormalizedScore + 10 && bob.BandKey !== 'engaged',
-    `Elena ${elena?.NormalizedScore} (${elena?.BandKey}) vs Bob ${bob?.NormalizedScore} (${bob?.BandKey}, ${bob?.TrendDirection})`);
+  check('sonar: every factor bound into the model with a positive weight',allBound,
+    `${snModelFactors.length} model-factors / ${snFactors.length} factors`);
 }
 
 function checkMotifs() {
@@ -935,7 +1567,7 @@ function checkMotifs() {
   }
   // employerCollapseLapse: the member really lapsed, at (or after) the stamped year
   const collapseBad = registry.filter((x) => x.Motif === 'employerCollapseLapse')
-    .filter((x) => lastStatus.get(x.MemberNumber) !== 'Lapsed');
+    .filter((x) => !hasEnded(lastStatus.get(x.MemberNumber)));
   check('motifs: employerCollapseLapse members all Lapsed', collapseBad.length === 0, collapseBad.map((x) => x.MemberNumber).join(', ') || 'all lapsed');
   // authored arcs express through behavior: activity (registrations + course enrollments)
   // late-in-arc vs early-in-arc — one signal alone is too thin at 6 members

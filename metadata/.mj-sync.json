@@ -16,6 +16,9 @@
     "membership-periods",
     "relationship-types",
     "relationships",
+    "addresses",
+    "address-links",
+    "contact-methods",
     "committee-types",
     "committees",
     "committee-terms",
@@ -31,6 +34,7 @@
     "task-links",
     "issue-types",
     "issues",
+    "issue-comments",
     "issue-sequences",
     "portal-sessions",
     "secure-threads",
@@ -51,13 +55,16 @@
     "orders",
     "order-lines",
     "payments",
+    "sonar-score-band-sets",
+    "sonar-score-bands",
+    "sonar-time-windows",
+    "sonar-score-models",
+    "sonar-score-model-versions",
+    "sonar-model-related-entities",
+    "sonar-factors",
+    "sonar-model-factors",
     "ai-vendors",
     "ai-models",
     "ai-model-vendors"
-  ],
-  "sqlLogging": {
-    "enabled": true,
-    "outputDirectory": "../migrations",
-    "formatAsMigration": true
-  }
+  ]
 }

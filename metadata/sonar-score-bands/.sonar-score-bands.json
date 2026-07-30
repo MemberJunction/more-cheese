@@ -1,0 +1,62 @@
+[
+  {
+    "primaryKey": {
+      "ID": "4B51BE35-94A0-5760-AAB5-F7803EC1C22B"
+    },
+    "fields": {
+      "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
+      "Label": "At Risk",
+      "MinScore": 0,
+      "MaxScore": 22,
+      "Severity": 3,
+      "ColorHex": "#D9534F",
+      "IsTerminal": false,
+      "Description": "Disengaged — renewal is in doubt without intervention."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CD02E66D-C02F-5BC7-BC62-5DA43A65E10F"
+    },
+    "fields": {
+      "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
+      "Label": "Watch",
+      "MinScore": 22,
+      "MaxScore": 33,
+      "Severity": 2,
+      "ColorHex": "#F0AD4E",
+      "IsTerminal": false,
+      "Description": "Below-average engagement — worth a touchpoint."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED587C74-F495-5AF6-8E7A-1F0D892AB80E"
+    },
+    "fields": {
+      "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
+      "Label": "Stable",
+      "MinScore": 33,
+      "MaxScore": 46,
+      "Severity": 1,
+      "ColorHex": "#5BC0DE",
+      "IsTerminal": false,
+      "Description": "Healthy, steady participation."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "36C432E5-EE8F-57F8-8BF6-808EC147C339"
+    },
+    "fields": {
+      "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
+      "Label": "Engaged",
+      "MinScore": 46,
+      "MaxScore": 100,
+      "Severity": 0,
+      "ColorHex": "#5CB85C",
+      "IsTerminal": false,
+      "Description": "Highly engaged — advocates and volunteers live here."
+    }
+  }
+]

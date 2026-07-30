@@ -37,7 +37,25 @@
       "formsResponseLogitShift": -0.5,
       "npsShift": -0.7,
       "paymentLateMultiplier": 1.5,
-      "$amplify": "regime expression across MORE domains (feedback 2026-07-16): lockdown SPIKES online learning, dents survey response + NPS (virtual conference), worsens payment lateness — every shift applied post-calibration (tide, not boats)"
+      "$amplify": "regime expression across MORE domains. Every shift is applied POST-calibration (tide, not boats): a shared shift folded inside a calibrated score gets solved away, which is the 2026-07-10 lesson.",
+      "inPersonMultiplier": 0.2,
+      "virtualMultiplier": 1.7,
+      "webinarScheduleMultiplier": 1.5,
+      "$channelNote": "eventVolumeMultiplier used to scale the WHOLE registration rate, so webinar attendance fell in 2020 — the opposite of what happened. Programming and attendance now move in OPPOSITE directions by channel: in-person workshops all but stop, the federation schedules more webinars, and online attendance surges. eventVolumeMultiplier is retained and still governs how many in-person workshops get scheduled.",
+      "joinRateMultiplier": 0.55,
+      "$joinNote": "acquisition dips: trade bodies lost their in-person recruiting surface in 2020-21.",
+      "competitionMultiplier": 0.25,
+      "$competitionNote": "judging is a physical activity — the 2020 competition was effectively curtailed.",
+      "advocacyMultiplier": 2.2,
+      "$advocacyNote": "the one thing that goes UP: emergency relief, labour rules and market-access lobbying. Gives the era a positive signal too, so COVID is not a uniform dip.",
+      "committeesVirtual": true,
+      "$committeeNote": "governance kept meeting, but online — committee meetings in 2020-21 are Virtual regardless of the usual location mix.",
+      "churnReason": "operations disrupted — reduced trading during the pandemic",
+      "churnReasonWeight": 0.35,
+      "$churnNote": "a distinct, era-specific lapse reason so the churn breakdown shows WHY 2020-21 differs, rather than just showing more of the usual.",
+      "$archiveCaveat": "The 3-year archive rule was swallowing the ENTIRE 2020-21 lapse cohort, so the pandemic's effect on retention — the most consequential thing it did to this federation — left no trace in shipped data at all; the renewal dip existed only in the validator's private event log. COVID-era lapses are now retained at retainLapsedShare, the same 'pointable stories must survive' exemption heroes and stamped motif members already get. Not all of them are kept, or the era would look artificially over-represented against every other year in the history.",
+      "retainLapsedShare": 0.45,
+      "$retainNote": "Tuned against statusMix: every retained lapse adds a non-active member to the roster, so retaining the whole cohort pushed active-ish below its documented ~80% target. 0.45 keeps the era clearly visible (roughly 30-40 pandemic-attributed lapses at canonical scale, the leading reason in those years) without reshaping the world's headline composition."
     }
   },
   "texture": {
@@ -55,6 +73,6 @@
       0.02
     ],
     "tolerance": 0.08,
-    "$note": "Active/Lapsed/Cancelled/PendingRenewal at release; loose check at N=500"
+    "$note": "Active-ish (Active + PendingRenewal at release) is the only value the gate reads: target[0] + 0.02. The remaining entries are indicative only. NOTE the emitted Status domain is Renewed/Active/Lapsed/PendingRenewal — there is deliberately NO 'Cancelled' status (a lapse carries CancellationDate + CancellationReason instead); the old note named a bucket that never existed in the data."
   }
 }

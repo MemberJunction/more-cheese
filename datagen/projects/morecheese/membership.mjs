@@ -112,8 +112,35 @@ export function runRenewalUnroll(cfg, people, orgs) {
     },
     onNo: (c) => {
       const cancellation = addDays(c.st.end, Math.round(M.gracePeriodMonths * 30.44));
-      const reason = c.employerEvent ? 'non-payment — employer event' : 'non-payment — lapsed past grace';
-      pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
+      // employer-event lapses keep their DERIVED reason; the rest draw from the declared
+      // churn mix (every lapse used to read "non-payment", so the reason column was
+      // useless for the why-are-we-losing-members demo)
+      const CV = R.regimes.covid;
+      const lapseYear = c.st.end.getUTCFullYear(); // st.end is already a Date — parseDate() would yield NaN
+      const rReason = rng(seed, `churnreason:${c.p.MemberNumber}:${c.st.end}`);
+      let reason;
+      if (c.employerEvent) reason = 'non-payment — employer event';
+      else if (CV.years.includes(lapseYear) && CV.churnReason && rReason.bernoulli(CV.churnReasonWeight ?? 0)) {
+        // era-specific reason, so the churn breakdown shows WHY 2020-21 differs rather
+        // than just showing more of the usual
+        reason = CV.churnReason;
+      } else reason = M.churnReasons ? rReason.pickWeighted(M.churnReasons.weights) : 'non-payment — lapsed past grace';
+      // LAPSE vs CANCELLATION: a lapse is silence (the renewal never gets paid, grace runs out,
+      // staff infer the reason later). A cancellation is a member who TOLD us mid-term — the churn
+      // a retention team could have worked. Only active-decision reasons qualify; nobody phones in
+      // to announce a non-payment. Heroes are excluded so their pinned statuses hold.
+      const CAN = M.cancellation;
+      const activeDecision = CAN && !CAN.passiveReasons.includes(reason);
+      const toldUs = activeDecision && !c.p._hero && rReason.bernoulli(CAN.toldUsShareOfActiveReasons);
+      if (toldUs) {
+        const [lo, hi] = CAN.noticeDaysBeforeEnd;
+        const notice = addDays(c.st.end, -rReason.int(lo, hi));
+        // notice cannot predate the term it cancels
+        const noticeDate = notice < c.st.start ? c.st.start : notice;
+        pushPeriod(c.p, c.st.start, c.st.end, 'Cancelled', noticeDate, reason);
+      } else {
+        pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
+      }
       c.st.alive = false;
     },
   });
@@ -141,11 +168,25 @@ export function applyArchiveRule(cfg, people, periods) {
   const cutoff = iso(addYears(cfg.release, -3));
   const archived = new Set();
   for (const [m, per] of lastPer) {
-    if (per.Status === 'Lapsed' && per.CancellationDate && per.CancellationDate < cutoff) archived.add(m);
+    if ((per.Status === 'Lapsed' || per.Status === 'Cancelled') && per.CancellationDate && per.CancellationDate < cutoff) archived.add(m);
   }
   for (const h of cfg.R.heroes) archived.delete(h.memberNumber);
   // stamped motif members are pointable stories — they must survive in the DB, like heroes
   for (const p of people) if (p._motif) archived.delete(p.MemberNumber);
+  // COVID-era churn is a pointable story too. Archiving swallowed the entire 2020-21
+  // lapse cohort, so the pandemic's effect on RETENTION — the most consequential thing it
+  // did to this federation — left no trace a viewer could find: the renewal dip existed
+  // only in the validator's private event log. A retained share (not all of them, or the
+  // era would look artificially over-represented against every other year) keeps the
+  // cohort and its era-specific cancellation reasons visible.
+  const CV = cfg.R.regimes?.covid;
+  if (CV?.retainLapsedShare) {
+    for (const [m, per] of lastPer) {
+      if (!archived.has(m)) continue;
+      if (!CV.years.includes(parseDate(per.EndDate).getUTCFullYear())) continue;
+      if (rng(cfg.seed, `covid-retain:${m}`).bernoulli(CV.retainLapsedShare)) archived.delete(m);
+    }
+  }
   return {
     people: people.filter((p) => !archived.has(p.MemberNumber)),
     periods: periods.filter((x) => !archived.has(x.MemberNumber)),

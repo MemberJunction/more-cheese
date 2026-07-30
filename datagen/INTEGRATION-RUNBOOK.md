@@ -117,3 +117,59 @@ Two findings:
   `'ROW'+CHAR(1)` row sentinel and filter in JS; introspect columns via `sys.columns` not
   `INFORMATION_SCHEMA` so computed columns (e.g. `Person.DisplayName`, NOT NULL + no default
   but uninsertable) can be flagged `is_computed` and excluded from the required-column check.
+
+## Addendum 2026-07-28 — re-capturing the MetadataSync data migrations
+
+The two `MetadataSync_p01/p02` migrations are **not generated** — they are the SQL log of a
+real `mj sync push`, so they go stale silently whenever the generator changes (they did:
+they were a week behind the tree until this capture). The loop:
+
+1. **Rebuild and re-emit** — deterministic, no database:
+   ```sh
+   node datagen/cli/build.mjs --n 2500 --seed 42 --release 2026-07-31   # must be GREEN
+   node datagen/cli/emit-mjsync.mjs --metadata-out ../metadata
+   node datagen/cli/emit-data-migration.mjs                             # platform pack (INSERT delivery)
+   ```
+2. **Dry-run the push first.** `mj sync push --dry-run --ci` from `metadata/` validates every
+   entity, field and dependency CHECK against a real database in ~4 minutes and writes nothing.
+   It does NOT execute the SPs, so it cannot catch an FK violation — see F12.
+3. **The target must be EMPTY of demo data**, or the SPs emit `spUpdate` and the migration
+   won't install on a fresh database. Purge in reverse `directoryOrder`, children first, with
+   two strategies (the distinction is finding F6):
+   - our four `morecheese_*` schemas and the dependency apps' CONTENT tables → delete all;
+   - lookup tables the apps seed themselves (`Common.RelationshipType`, `Committees.Type`,
+     `Tasks.TaskType`, `Issues.IssueType`, and all of `__mj_BizAppsSonar`, which ships its own
+     sample model) → delete ONLY our pinned ids, or you destroy rows their migrations installed.
+   - **F11 — Sonar's model tables are circularly referenced.** `ScoreModel.CurrentVersionID` →
+     `ScoreModelVersion` → `ScoreModel`, plus `ScoreModel.BandSetID` → `ScoreBandSet`. No delete
+     order resolves it: null `CurrentVersionID` first, then version, model, band set. The same
+     cycle makes the push defer one `spUpdateScoreModel` — that single update is expected in the
+     capture; any other non-create means the target wasn't clean.
+4. **Enable SQL logging** in `metadata/.mj-sync.json` (root config only — subdirectories do not
+   inherit it), push, then REMOVE the block so ordinary pushes don't write 100+ MB:
+   ```json
+   "sqlLogging": { "enabled": true, "outputDirectory": "./.sql-log-push", "formatAsMigration": true }
+   ```
+   Note the emitter rewrites this file, so add the block AFTER `emit-mjsync`, not before.
+5. **Split at GO boundaries** into balanced parts under GitHub's 100 MiB blob ceiling, keeping
+   the `p01..pNN` filenames and order. Never cut inside a batch — each record is DECLAREs, SETs
+   and an EXEC, and a cut would strand the variables. Balance the parts rather than filling the
+   first to the ceiling, or the next re-capture overflows while the last file sits half empty.
+6. **Verify before committing**: every mutation is an `spCreate` (bar the deferred Sonar update),
+   the create count equals the tree's record count, all 56 entity folders appear, and the parts
+   rejoin to the capture body exactly.
+
+Budget ~18 minutes for the push (102,395 records; the SPs run one at a time, and orders alone
+took 186s). Note the capture targets schemas **literally** — `${flyway:defaultSchema}` never
+appears, so the seed is pinned to these schema names. That matches the previously published
+p01/p02, so it is the contract rather than a defect, but it is worth knowing before anyone
+installs the app under a different schema name.
+
+- **F12 — a dry-run push cannot catch a bad FK.** The 2026-07-28 re-capture failed on
+  `FK_Membership_Term`: one committee seat referenced a term that was correctly never emitted,
+  because the term guard ("no term before the committee was formed") had no counterpart on seat
+  assignment. Packs looked clean, 190 gates passed, and the dry run was green — real DDL caught
+  it. The push is one transaction, so the whole 102k-record load rolled back. Two gates now
+  cover it (`pack refs: memberships→terms`, `committees: no seat predates its committee
+  formation`), and the general lesson is F9's: for every FK we emit, the validator needs the
+  same check the database will make.

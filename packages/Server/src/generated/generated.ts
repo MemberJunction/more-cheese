@@ -1964,6 +1964,42 @@ export class morecheesemembersMemberProfile_ {
     @Field() 
     _mj__UpdatedAt: Date;
         
+    @Field({nullable: true}) 
+    @MaxLength(2)
+    Country?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(100)
+    CountryName?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(200)
+    AddressLine1?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(200)
+    AddressLine2?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(20)
+    PostalCode?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(200)
+    RaceEthnicity?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(30)
+    EthnicityHispanic?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(50)
+    PronounSet?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(50)
+    PrimaryLanguage?: string;
+        
     @Field() 
     @MaxLength(201)
     Person: string;
@@ -2015,6 +2051,33 @@ export class CreatemorecheesemembersMemberProfileInput {
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
 
+    @Field({ nullable: true })
+    Country: string | null;
+
+    @Field({ nullable: true })
+    CountryName: string | null;
+
+    @Field({ nullable: true })
+    AddressLine1: string | null;
+
+    @Field({ nullable: true })
+    AddressLine2: string | null;
+
+    @Field({ nullable: true })
+    PostalCode: string | null;
+
+    @Field({ nullable: true })
+    RaceEthnicity: string | null;
+
+    @Field({ nullable: true })
+    EthnicityHispanic: string | null;
+
+    @Field({ nullable: true })
+    PronounSet: string | null;
+
+    @Field({ nullable: true })
+    PrimaryLanguage: string | null;
+
     @Field(() => RestoreContextInput, { nullable: true })
     RestoreContext___?: RestoreContextInput;
 }
@@ -2060,6 +2123,33 @@ export class UpdatemorecheesemembersMemberProfileInput {
 
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
+
+    @Field({ nullable: true })
+    Country?: string | null;
+
+    @Field({ nullable: true })
+    CountryName?: string | null;
+
+    @Field({ nullable: true })
+    AddressLine1?: string | null;
+
+    @Field({ nullable: true })
+    AddressLine2?: string | null;
+
+    @Field({ nullable: true })
+    PostalCode?: string | null;
+
+    @Field({ nullable: true })
+    RaceEthnicity?: string | null;
+
+    @Field({ nullable: true })
+    EthnicityHispanic?: string | null;
+
+    @Field({ nullable: true })
+    PronounSet?: string | null;
+
+    @Field({ nullable: true })
+    PrimaryLanguage?: string | null;
 
     @Field(() => [KeyValuePairInput], { nullable: true })
     OldValues___?: KeyValuePairInput[];
@@ -2895,6 +2985,22 @@ export class morecheesemembersOrganizationProfile_ {
     @Field() 
     _mj__UpdatedAt: Date;
         
+    @Field({nullable: true}) 
+    @MaxLength(2)
+    Country?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(100)
+    CountryName?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(200)
+    AddressLine1?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(20)
+    PostalCode?: string;
+        
     @Field() 
     @MaxLength(255)
     Organization: string;
@@ -2942,6 +3048,18 @@ export class CreatemorecheesemembersOrganizationProfileInput {
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
 
+    @Field({ nullable: true })
+    Country: string | null;
+
+    @Field({ nullable: true })
+    CountryName: string | null;
+
+    @Field({ nullable: true })
+    AddressLine1: string | null;
+
+    @Field({ nullable: true })
+    PostalCode: string | null;
+
     @Field(() => RestoreContextInput, { nullable: true })
     RestoreContext___?: RestoreContextInput;
 }
@@ -2987,6 +3105,18 @@ export class UpdatemorecheesemembersOrganizationProfileInput {
 
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
+
+    @Field({ nullable: true })
+    Country?: string | null;
+
+    @Field({ nullable: true })
+    CountryName?: string | null;
+
+    @Field({ nullable: true })
+    AddressLine1?: string | null;
+
+    @Field({ nullable: true })
+    PostalCode?: string | null;
 
     @Field(() => [KeyValuePairInput], { nullable: true })
     OldValues___?: KeyValuePairInput[];

@@ -16,6 +16,9 @@ import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
 const MEETINGS_ENTITY = 'Committees: Meetings';
 
+/** a time inside the working day — staff don't file everything at exactly 17:00Z */
+const workTime = (r) => `${String(r.int(8, 17)).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
+
 export function buildTasks(cfg, people, periods, committees) {
   const { R, seed, release } = cfg;
   const T = R.tasks;
@@ -61,11 +64,15 @@ export function buildTasks(cfg, people, periods, committees) {
     const n = r.bernoulli(CA.ratePerMeeting) ? 1 + (r.bernoulli(0.3) ? 1 : 0) : 0;
     for (let i = 0; i < Math.min(n, CA.maxPerMeeting); i++) {
       const assignee = r.pick(roster);
-      const due = addDays(parseDate(dt), CA.dueDays);
+      // due dates vary by the work item (not a fixed +30 for everything)
+      const due = addDays(parseDate(dt), CA.dueDays + r.int(-10, 30));
+      const action = r.pick(CA.actionBank);
       const task = pushTask({
-        TaskKey: `ctask:${meeting.MeetingKey}:${i}`, Name: r.pick(CA.actionBank),
-        TypeKey: 'Committee Action Item', Priority: 'Medium',
-        DueAt: `${iso(due)}T17:00:00Z`, _created: `${dt}T17:00:00Z`,
+        TaskKey: `ctask:${meeting.MeetingKey}:${i}`, Name: `${action} (${meeting.CommitteeKey.replace(' Committee', '')})`,
+        Description: `Action item recorded at the ${meeting.CommitteeKey} meeting on ${dt}. ${action}. Owner reports back at the next scheduled meeting.`,
+        TypeKey: 'Committee Action Item', Priority: r.pickWeighted([['Low', 0.15], ['Medium', 0.6], ['High', 0.22], ['Critical', 0.03]]),
+        HoursEstimated: r.pick([1, 2, 2, 3, 4, 6, 8]),
+        DueAt: `${iso(due)}T${workTime(r)}`, _created: `${dt}T${workTime(r)}`,
         CreatedByMemberNumber: roster.find((m) => m.RoleKey === 'Chair')?.MemberNumber ?? null,
         _assignee: assignee.MemberNumber, _dueIso: iso(due), IsSharedDemo: true,
       });
@@ -83,16 +90,25 @@ export function buildTasks(cfg, people, periods, committees) {
     streamKey: (t) => `ctask-done:${t.TaskKey}`,
     decide: (t, prob, r) => {
       if (r.bernoulli(prob)) {
+        // some finish early, some run past the deadline — and record the hours actually spent
         t.Status = 'Completed'; t.PercentComplete = 100;
-        t.CompletedAt = `${iso(addDays(parseDate(t._dueIso), -r.int(0, 10)))}T17:00:00Z`;
+        t.CompletedAt = `${iso(addDays(parseDate(t._dueIso), r.int(-14, 12)))}T${workTime(r)}`;
+        t.StartedAt = `${iso(addDays(parseDate(t.CompletedAt.slice(0, 10)), -r.int(1, 21)))}T${workTime(r)}`;
+        t.HoursActual = Math.max(0.5, Math.round((t.HoursEstimated * (0.6 + r.int(0, 10) / 10)) * 2) / 2);
       } else {
         t.Status = r.bernoulli(0.5) ? 'InProgress' : 'Open'; // past due and unfinished — genuinely overdue rows
-        t.PercentComplete = t.Status === 'InProgress' ? 50 : 0;
+        t.PercentComplete = t.Status === 'InProgress' ? r.pick([10, 20, 25, 40, 50, 60, 75, 80, 90]) : 0;
+        if (t.Status === 'InProgress') t.StartedAt = `${iso(addDays(parseDate(t._dueIso), -r.int(5, 30)))}T${workTime(r)}`;
       }
     },
   });
   for (const t of actionTasks) {
-    if (!t.Status) { const r = rng(seed, `ctask-open:${t.TaskKey}`); t.Status = r.bernoulli(0.5) ? 'InProgress' : 'Open'; t.PercentComplete = t.Status === 'InProgress' ? 50 : 0; }
+    if (!t.Status) {
+      const r = rng(seed, `ctask-open:${t.TaskKey}`);
+      t.Status = r.bernoulli(0.5) ? 'InProgress' : 'Open';
+      t.PercentComplete = t.Status === 'InProgress' ? r.pick([10, 25, 40, 50, 60, 75]) : 0;
+      if (t.Status === 'InProgress') t.StartedAt = `${iso(addDays(parseDate(t._dueIso), -r.int(5, 25)))}T${workTime(r)}`;
+    }
     assign(t, t._assignee, t.Status === 'Completed' ? 'Completed' : 'InProgress');
   }
 
@@ -100,20 +116,35 @@ export function buildTasks(cfg, people, periods, committees) {
   const lastPeriod = new Map();
   for (const per of periods) lastPeriod.set(per.MemberNumber, per);
   const activeTerm = R.committees.terms[R.committees.terms.length - 1];
-  const moChair = (rosterByTerm.get(`Membership & Outreach Committee:${activeTerm.start}`) ?? []).find((m) => m.RoleKey === 'Chair');
+  // the whole M&O roster works the queue, chair-weighted — not one person holding 51 of 98
+  // tasks. Outreach is also staged (calls go out as each renewal approaches), so the
+  // created dates spread instead of stacking 50 rows on release day.
+  const moRoster = (rosterByTerm.get(`Membership & Outreach Committee:${activeTerm.start}`) ?? []);
+  const moChair = moRoster.find((m) => m.RoleKey === 'Chair');
+  const outreachPool = moRoster.length ? moRoster : [];
   for (const [memberNumber, per] of [...lastPeriod.entries()].sort()) {
     if (per.Status !== 'PendingRenewal') continue;
     const p = personByNum.get(memberNumber);
     const r = rng(seed, `otask:${memberNumber}`);
+    const created = iso(addDays(parseDate(per.EndDate), -r.int(10, 75)));
     const task = pushTask({
       TaskKey: `otask:${memberNumber}`, Name: `Renewal outreach — ${p.FirstName} ${p.LastName} (${memberNumber})`,
-      TypeKey: 'Renewal Outreach', Priority: 'High',
+      Description: `${p.FirstName} ${p.LastName} (${memberNumber}, ${per.MembershipTier}) is pending renewal with a period ending ${per.EndDate}. Contact by phone or email, confirm intent to renew, and note the outcome.`,
+      TypeKey: 'Renewal Outreach', Priority: r.pickWeighted([['Medium', 0.3], ['High', 0.6], ['Critical', 0.1]]),
       Status: r.bernoulli(0.4) ? 'InProgress' : 'Open',
-      DueAt: `${per.EndDate}T17:00:00Z`, _created: `${releaseIso}T09:00:00Z`,
-      CreatedByMemberNumber: null, IsSharedDemo: true,
+      HoursEstimated: r.pick([0.5, 0.5, 1, 1, 2]),
+      DueAt: `${per.EndDate}T${workTime(r)}`,
+      _created: `${created > releaseIso ? releaseIso : created}T${workTime(r)}`,
+      CreatedByMemberNumber: moChair ? moChair.MemberNumber : null, IsSharedDemo: true,
     });
-    task.PercentComplete = task.Status === 'InProgress' ? 25 : 0;
-    if (moChair) assign(task, moChair.MemberNumber, 'InProgress');
+    task.PercentComplete = task.Status === 'InProgress' ? r.pick([10, 25, 40, 50]) : 0;
+    if (task.Status === 'InProgress') task.StartedAt = task._created;
+    if (outreachPool.length) {
+      // chair carries more of the load, but the committee shares it
+      const idx = r.pickWeighted(outreachPool.map((m, i) => [i, m.RoleKey === 'Chair' ? 3 : m.RoleKey === 'Vice Chair' ? 2 : 1]));
+      // TaskAssignment.Status CHECK allows only Completed/InProgress/Pending (contract gate)
+      assign(task, outreachPool[idx].MemberNumber, task.Status === 'InProgress' ? 'InProgress' : 'Pending');
+    }
     link(task, PEOPLE_ENTITY, 'person', memberNumber);
   }
 

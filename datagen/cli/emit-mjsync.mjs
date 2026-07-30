@@ -48,7 +48,8 @@ const MAPPING = [
     pack: 'common', json: 'organizations', dir: 'organizations', entity: 'MJ_BizApps_Common: Organizations',
     record: (r) => ({
       primaryKey: { ID: uuidFor('org', r.OrgKey) },
-      fields: { Name: r.Name, Status: r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active' },
+      fields: { OrganizationTypeID: r.OrganizationTypeName ? `@lookup:MJ_BizApps_Common: Organization Types.Name=${r.OrganizationTypeName}` : null,
+        Name: r.Name, LegalName: r.LegalName ?? null, Website: r.Website ?? null, Phone: r.Phone ?? null, FoundedDate: r.FoundedDate ?? null, Status: r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active' },
     }),
   },
   {
@@ -57,7 +58,9 @@ const MAPPING = [
       primaryKey: { ID: uuidFor('orgprofile', r.OrgKey) },
       fields: {
         OrganizationID: uuidFor('org', r.OrgKey), OrgKey: r.OrgKey, Type: r.Type,
-        Region: r.Region, City: r.City, State: r.State, Latitude: r.Latitude, Longitude: r.Longitude,
+        Region: r.Region, Country: r.Country ?? null, CountryName: r.CountryName ?? null,
+        City: r.City, State: r.State, AddressLine1: r.AddressLine1 ?? null, PostalCode: r.PostalCode ?? null,
+        Latitude: r.Latitude, Longitude: r.Longitude,
         LifecycleEventKind: r.LifecycleEvent?.kind ?? null, LifecycleEventYear: r.LifecycleEvent?.year ?? null,
         IsSharedDemo: r.IsSharedDemo,
       },
@@ -67,19 +70,27 @@ const MAPPING = [
     pack: 'common', json: 'people', dir: 'people', entity: 'MJ_BizApps_Common: People',
     record: (r) => ({
       primaryKey: { ID: uuidFor('person', r.MemberNumber) },
-      fields: { FirstName: r.FirstName, LastName: r.LastName, MiddleName: r.MiddleName, PreferredName: r.PreferredName, Title: r.Title, Email: r.Email, Status: 'Active' },
+      fields: { Bio: r.Bio ?? null, FirstName: r.FirstName, LastName: r.LastName, MiddleName: r.MiddleName, PreferredName: r.PreferredName, Title: r.Title, Email: r.Email, Prefix: r.Prefix ?? null, Suffix: r.Suffix ?? null, Phone: r.Phone ?? null, Gender: r.Gender ?? null, DateOfBirth: r.DateOfBirth ?? null, Status: 'Active' },
     }),
   },
   {
     pack: 'common', json: 'people', dir: 'member-profiles', entity: 'MoreCheese: Member Profiles',
+    only: (r) => !r.IsProspect, // non-members are Person rows with no membership extension
+
     record: (r) => ({
       primaryKey: { ID: uuidFor('memberprofile', r.MemberNumber) },
       fields: {
         PersonID: uuidFor('person', r.MemberNumber),
         OrganizationID: r.OrgKey ? uuidFor('org', r.OrgKey) : null,
         MemberNumber: r.MemberNumber, Segment: r.Segment,
-        Region: r.Region, City: r.City, State: r.State, Latitude: r.Latitude, Longitude: r.Longitude,
-        JoinDate: r.JoinDate, IsSharedDemo: r.IsSharedDemo,
+        Region: r.Region, Country: r.Country ?? null, CountryName: r.CountryName ?? null,
+        City: r.City, State: r.State,
+        AddressLine1: r.AddressLine1 ?? null, AddressLine2: r.AddressLine2 ?? null, PostalCode: r.PostalCode ?? null,
+        Latitude: r.Latitude, Longitude: r.Longitude,
+        JoinDate: r.JoinDate,
+        RaceEthnicity: r.RaceEthnicity ?? null, EthnicityHispanic: r.EthnicityHispanic ?? null,
+        PronounSet: r.PronounSet ?? null, PrimaryLanguage: r.PrimaryLanguage ?? null,
+        IsSharedDemo: r.IsSharedDemo,
       },
     }),
   },
@@ -90,7 +101,7 @@ const MAPPING = [
   { pack: 'events', json: 'competition_entries', dir: 'competition-entries', entity: 'MoreCheese: Competition Entries',
     record: (r) => ({ primaryKey: { ID: uuidFor('compentry', r.EntryKey) }, fields: { EntryKey: r.EntryKey, PersonID: uuidFor('person', r.MemberNumber), OrganizationID: r.OrgKey ? uuidFor('org', r.OrgKey) : null, EntryYear: r.EntryYear, Category: r.Category, ProductName: r.ProductName, Result: r.Result, IsSharedDemo: r.IsSharedDemo } }) },
   { pack: 'learning', json: 'certifications', dir: 'certifications', entity: 'MoreCheese: Certifications',
-    record: (r) => ({ primaryKey: { ID: uuidFor('cert', r.CertKey) }, fields: { CertKey: r.CertKey, Name: r.Name, ValidYears: r.ValidYears, IsSharedDemo: r.IsSharedDemo } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('cert', r.CertKey) }, fields: { CertKey: r.CertKey, Name: r.Name, Description: r.Description ?? null, ValidYears: r.ValidYears, IsSharedDemo: r.IsSharedDemo } }) },
   { pack: 'learning', json: 'member_certifications', dir: 'member-certifications', entity: 'MoreCheese: Member Certifications',
     record: (r) => ({ primaryKey: { ID: uuidFor('membercert', r.MemberCertKey) }, fields: { MemberCertKey: r.MemberCertKey, PersonID: uuidFor('person', r.MemberNumber), CertificationID: uuidFor('cert', r.CertKey), Status: r.Status, EnrolledOn: r.EnrolledOn, AwardedOn: r.AwardedOn, ExpiresOn: r.ExpiresOn, IsSharedDemo: r.IsSharedDemo } }) },
     {
@@ -117,6 +128,29 @@ const MAPPING = [
       ToOrganizationID: r.ToOrgKey ? uuidFor('org', r.ToOrgKey) : null,
       Title: r.Title ?? null, StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status, Notes: r.Notes ?? null,
     } }) },
+  // contact/address rows live in bizapps-common's OWN tables — that app owns the domain and
+  // its UI reads these, not our MemberProfile columns. ContactType/AddressType are SEEDED by
+  // the app, so they resolve BY NAME (@lookup), never by a pinned id we invent (finding F6).
+  { pack: 'common', json: 'addresses', dir: 'addresses', entity: 'MJ_BizApps_Common: Addresses',
+    record: (r) => ({ primaryKey: { ID: uuidFor('address', r.AddressKey) }, fields: {
+      Line1: r.Line1, Line2: r.Line2, City: r.City, StateProvince: r.StateProvince,
+      PostalCode: r.PostalCode, Country: r.Country, Latitude: r.Latitude, Longitude: r.Longitude,
+    } }) },
+  { pack: 'common', json: 'address_links', dir: 'address-links', entity: 'MJ_BizApps_Common: Address Links',
+    record: (r) => ({ primaryKey: { ID: uuidFor('addresslink', r.LinkKey) }, fields: {
+      AddressID: uuidFor('address', r.AddressKey),
+      EntityID: `@lookup:MJ: Entities.Name=${r.EntityName}`,
+      RecordID: uuidFor(r.RecordKind === 'org' ? 'org' : 'person', r.RecordKey),
+      AddressTypeID: `@lookup:MJ_BizApps_Common: Address Types.Name=${r.AddressTypeName}`,
+      IsPrimary: r.IsPrimary, Rank: r.Rank,
+    } }) },
+  { pack: 'common', json: 'contact_methods', dir: 'contact-methods', entity: 'MJ_BizApps_Common: Contact Methods',
+    record: (r) => ({ primaryKey: { ID: uuidFor('contactmethod', r.MethodKey) }, fields: {
+      PersonID: r.OwnerKind === 'person' ? uuidFor('person', r.OwnerKey) : null,
+      OrganizationID: r.OwnerKind === 'org' ? uuidFor('org', r.OwnerKey) : null,
+      ContactTypeID: `@lookup:MJ_BizApps_Common: Contact Types.Name=${r.ContactTypeName}`,
+      Value: r.Value, Label: r.Label, IsPrimary: r.IsPrimary,
+    } }) },
     // committees pack → bizapps-committees entities (their prefix 'Committees: '); no IsSharedDemo
   { pack: 'committees', json: 'committee_types', dir: 'committee-types', entity: 'Committees: Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('ctype', r.TypeKey) }, fields: { Name: r.Name, IsStandards: r.IsStandards, DefaultTermMonths: r.DefaultTermMonths } }) },
@@ -127,7 +161,7 @@ const MAPPING = [
   { pack: 'committees', json: 'committee_memberships', dir: 'committee-memberships', entity: 'Committees: Memberships',
     record: (r) => ({ primaryKey: { ID: uuidFor('cmembership', r.MembershipKey) }, fields: { PersonID: uuidFor('person', r.MemberNumber), RoleID: `@lookup:Committees: Roles.Name=${r.RoleKey}`, TermID: uuidFor('cterm', r.TermKey), StartDate: r.StartDate, EndDate: r.EndDate, Status: r.Status } }) },
   { pack: 'committees', json: 'committee_meetings', dir: 'committee-meetings', entity: 'Committees: Meetings',
-    record: (r) => ({ primaryKey: { ID: uuidFor('meeting', r.MeetingKey) }, fields: { CommitteeID: uuidFor('committee', r.CommitteeKey), Name: r.Name, StartDateTime: r.StartDateTime, TimeZone: 'UTC', LocationType: r.LocationType, Status: r.Status } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('meeting', r.MeetingKey) }, fields: { CommitteeID: uuidFor('committee', r.CommitteeKey), Name: r.Name, StartDateTime: r.StartDateTime, EndDateTime: r.EndDateTime ?? null, TimeZone: 'UTC', LocationType: r.LocationType, LocationText: r.LocationText ?? null, Status: r.Status } }) },
   { pack: 'committees', json: 'committee_attendance', dir: 'committee-attendance', entity: 'Committees: Attendances',
     record: (r) => ({ primaryKey: { ID: uuidFor('att', r.AttendanceKey) }, fields: { MeetingID: uuidFor('meeting', r.MeetingKey), PersonID: uuidFor('person', r.MemberNumber), AttendanceStatus: r.AttendanceStatus } }) },
   { pack: 'committees', json: 'committee_agenda_items', dir: 'committee-agenda-items', entity: 'Committees: Agenda Items',
@@ -140,7 +174,7 @@ const MAPPING = [
   { pack: 'tasks', json: 'task_types', dir: 'task-types', entity: 'MJ_BizApps_Tasks: Task Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('tasktype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, DefaultPriority: r.DefaultPriority, IsActive: r.IsActive } }) },
   { pack: 'tasks', json: 'tasks', dir: 'tasks', entity: 'MJ_BizApps_Tasks: Tasks',
-    record: (r) => ({ primaryKey: { ID: uuidFor('task', r.TaskKey) }, fields: { Name: r.Name, TypeID: uuidFor('tasktype', r.TypeKey), Status: r.Status, Priority: r.Priority, DueAt: r.DueAt, CompletedAt: r.CompletedAt ?? null, PercentComplete: r.PercentComplete ?? 0, CreatedByPersonID: r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('task', r.TaskKey) }, fields: { Name: r.Name, Description: r.Description ?? null, TypeID: uuidFor('tasktype', r.TypeKey), Status: r.Status, Priority: r.Priority, DueAt: r.DueAt, StartedAt: r.StartedAt ?? null, CompletedAt: r.CompletedAt ?? null, PercentComplete: r.PercentComplete ?? 0, HoursEstimated: r.HoursEstimated ?? null, HoursActual: r.HoursActual ?? null, CreatedByPersonID: r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null } }) },
   { pack: 'tasks', json: 'task_assignments', dir: 'task-assignments', entity: 'MJ_BizApps_Tasks: Task Assignments',
     record: (r) => ({ primaryKey: { ID: uuidFor('taskassign', r.AssignKey) }, fields: { TaskID: uuidFor('task', r.TaskKey), AssigneeEntityID: `@lookup:MJ: Entities.Name=${r.AssigneeEntityName}`, AssigneeRecordID: uuidFor('person', r.AssigneeMemberNumber), Status: r.Status } }) },
   { pack: 'tasks', json: 'task_links', dir: 'task-links', entity: 'MJ_BizApps_Tasks: Task Links',
@@ -149,7 +183,9 @@ const MAPPING = [
   { pack: 'issues', json: 'issue_types', dir: 'issue-types', entity: 'MJ_BizApps_Issues: Issue Types',
     record: (r) => ({ primaryKey: { ID: uuidFor('issuetype', r.TypeKey) }, fields: { Name: r.Name, Description: r.Description, DefaultPriority: r.DefaultPriority, IsActive: r.IsActive } }) },
   { pack: 'issues', json: 'issues', dir: 'issues', entity: 'MJ_BizApps_Issues: Issues',
-    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: `@lookup:MJ_BizApps_Issues: Issue Status.Name=${r.StatusKey}`, Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), AssigneeEntityID: r.AssigneeMemberNumber ? `@lookup:MJ: Entities.Name=${r.AssigneeEntityName}` : null, AssigneeRecordID: r.AssigneeMemberNumber ? uuidFor('person', r.AssigneeMemberNumber) : null, SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('issue', r.IssueKey) }, fields: { IssueNumber: r.IssueNumber, Title: r.Title, Description: r.Description ?? null, IssueTypeID: uuidFor('issuetype', r.TypeKey), StatusID: `@lookup:MJ_BizApps_Issues: Issue Status.Name=${r.StatusKey}`, Severity: r.Severity, Priority: r.Priority, ReporterPersonID: uuidFor('person', r.ReporterMemberNumber), AssigneeEntityID: r.AssigneeMemberNumber ? `@lookup:MJ: Entities.Name=${r.AssigneeEntityName}` : null, AssigneeRecordID: r.AssigneeMemberNumber ? uuidFor('person', r.AssigneeMemberNumber) : null, SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, SourceRecordID: { order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind], ResolvedAt: r.ResolvedAt, ClosedAt: r.ClosedAt } }) },
+  { pack: 'issues', json: 'issue_comments', dir: 'issue-comments', entity: 'MJ_BizApps_Issues: Issue Comments',
+    record: (r) => ({ primaryKey: { ID: uuidFor('issuecomment', r.CommentKey) }, fields: { IssueID: uuidFor('issue', r.IssueKey), Body: r.Body, Source: r.Source, AuthorPersonID: r.AuthorMemberNumber ? uuidFor('person', r.AuthorMemberNumber) : null } }) },
   { pack: 'issues', json: 'issue_sequences', dir: 'issue-sequences', entity: 'MJ_BizApps_Issues: Issue Number Sequences',
     record: (r) => ({ primaryKey: { ScopeCode: r.ScopeCode }, fields: { NextSequenceNumber: r.NextSequenceNumber } }) },
   // messaging pack → bizapps-secure-messaging entities (soft person refs — plain UUIDs)
@@ -251,41 +287,32 @@ const MAPPING = [
       },
     }),
   },
-  // ---- sonar pack → bizapps-sonar entities (METADATA delivery: engagement scoring loaded
-  // through the entity SPs). Core-entity refs use 'MJ: Entities' by name (NOT 'Entities');
-  // staff-user refs are literal pinned mjuser UUIDs (created earlier by the platform INSERT
-  // pack). The circular FK ScoreModel.CurrentVersionID → ScoreModelVersion is expressed as a
-  // deferred @lookup: it fails on pass 1 (version not yet created), so the model is created
-  // with it null, and PushService PHASE 2.5 sets it once the version exists — the metadata-
-  // world equivalent of the INSERT path's POSTAMBLE UPDATE. Order below is parent-before-child.
+  // ---- sonar pack → bizapps-sonar entities: engagement scoring MODEL DEFINITION ONLY.
+  // Sonar's FactorCompiler computes scores/contributions/history live, so we ship definitions
+  // (bandset, bands, model, version, related-entities, factors, model-factors) and never emit
+  // score rows. Core-entity refs use 'MJ: Entities' by name; staff-user refs are literal pinned
+  // mjuser UUIDs (created by the platform INSERT pack). Factors are executable: FactorType
+  // Declarative + Count over a related entity linked by SourceRelatedEntityID; the related
+  // entity's RelationshipPath '[]' lets the compiler auto-resolve the FK path to the anchor.
+  // The circular FK ScoreModel.CurrentVersionID → ScoreModelVersion is a deferred @lookup:
+  // it fails on pass 1 (version not yet created) so the model is created with it null, and
+  // PushService PHASE 2.5 sets it once the version exists. Order = parent-before-child.
   { pack: 'sonar', json: 'score_band_sets', dir: 'sonar-score-band-sets', entity: 'MJ_BizApps_Sonar: Score Band Sets',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarbandset', r.BandSetKey) }, fields: { Name: r.Name, AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, Description: r.Description } }) },
   { pack: 'sonar', json: 'score_bands', dir: 'sonar-score-bands', entity: 'MJ_BizApps_Sonar: Score Bands',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarband', r.BandKey) }, fields: { BandSetID: uuidFor('sonarbandset', r.BandSetKey), Label: r.Label, MinScore: r.MinScore, MaxScore: r.MaxScore, Severity: r.Severity, ColorHex: r.ColorHex, IsTerminal: r.IsTerminal, Description: r.Description } }) },
   { pack: 'sonar', json: 'time_windows', dir: 'sonar-time-windows', entity: 'MJ_BizApps_Sonar: Time Windows',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarwindow', r.WindowKey) }, fields: { Name: r.Name, WindowType: r.WindowType, LengthMonths: r.LengthMonths } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('sonarwindow', r.WindowKey) }, fields: { Name: r.Name, WindowType: r.WindowType, LengthMonths: r.LengthMonths, LengthDays: r.LengthDays } }) },
   { pack: 'sonar', json: 'score_models', dir: 'sonar-score-models', entity: 'MJ_BizApps_Sonar: Score Models',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarmodel', r.ModelKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, Status: r.Status, ScoreScaleMin: 0, ScoreScaleMax: 100, CombineStrategy: r.CombineStrategy, BandSetID: uuidFor('sonarbandset', 'engagement-bands'), RecomputeMode: r.RecomputeMode, RecomputeCron: r.RecomputeCron, TrendWindowDays: r.TrendWindowDays, OwnerUserID: uuidFor('mjuser', r.OwnerStaffKey), EffectiveFrom: r.EffectiveFrom, CurrentVersionID: `@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=${uuidFor('sonarver', r.ModelKey + ':1')}?allowDefer` } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('sonarmodel', r.ModelKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, Status: r.Status, ScoreScaleMin: 0, ScoreScaleMax: 100, CombineStrategy: r.CombineStrategy, BandSetID: uuidFor('sonarbandset', 'engagement-bands'), OwnerUserID: uuidFor('mjuser', r.OwnerStaffKey), EffectiveFrom: r.EffectiveFrom, CurrentVersionID: `@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=${uuidFor('sonarver', r.ModelKey + ':1')}?allowDefer` } }) },
   { pack: 'sonar', json: 'score_model_versions', dir: 'sonar-score-model-versions', entity: 'MJ_BizApps_Sonar: Score Model Versions',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarver', r.VersionKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), VersionNumber: r.VersionNumber, VersionLabel: r.VersionLabel, ConfigSnapshotJSON: r.ConfigSnapshotJSON, ChangeSummary: r.ChangeSummary, PublishedByUserID: uuidFor('mjuser', r.PublishedByStaffKey), PublishedAt: r.PublishedAt, IsCurrent: r.IsCurrent } }) },
   { pack: 'sonar', json: 'model_related_entities', dir: 'sonar-model-related-entities', entity: 'MJ_BizApps_Sonar: Model Related Entities',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarmre', r.RelatedKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), RelatedEntityID: `@lookup:MJ: Entities.Name=${r.EntityName}`, Alias: r.Alias, RelationshipPath: r.RelationshipPath, JoinType: r.JoinType } }) },
   { pack: 'sonar', json: 'factors', dir: 'sonar-factors', entity: 'MJ_BizApps_Sonar: Factors',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarfactor', r.FactorKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, ScoreModelID: uuidFor('sonarmodel', r.ModelKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, FactorType: r.FactorType, SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, Aggregation: r.Aggregation, TimeWindowID: r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null, RawDataType: r.RawDataType, NormalizationMethod: r.NormalizationMethod, NormalizationParamsJSON: r.NormalizationParamsJSON, OutputMin: r.OutputMin, OutputMax: r.OutputMax, HigherIsBetter: r.HigherIsBetter, PromotionState: r.PromotionState } }) },
+    record: (r) => ({ primaryKey: { ID: uuidFor('sonarfactor', r.FactorKey) }, fields: { Name: r.Name, Slug: r.Slug, Description: r.Description, ScoreModelID: uuidFor('sonarmodel', r.ModelKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, FactorType: r.FactorType, SourceRelatedEntityID: uuidFor('sonarmre', r.SourceRelatedKey), SourceEntityID: `@lookup:MJ: Entities.Name=${r.SourceEntityName}`, Aggregation: r.Aggregation, AggregateFieldName: r.AggregateFieldName, DateField: r.DateField, TimeWindowID: r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null, NormalizationMethod: r.NormalizationMethod, HigherIsBetter: r.HigherIsBetter, PromotionState: r.PromotionState } }) },
   { pack: 'sonar', json: 'model_factors', dir: 'sonar-model-factors', entity: 'MJ_BizApps_Sonar: Model Factors',
     record: (r) => ({ primaryKey: { ID: uuidFor('sonarmf', r.ModelFactorKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), FactorID: uuidFor('sonarfactor', r.FactorKey), Weight: r.Weight, WeightMode: r.WeightMode, MissingDataPolicy: r.MissingDataPolicy, IsRequired: r.IsRequired, DisplayLabel: r.DisplayLabel, DisplayOrder: r.DisplayOrder } }) },
-  { pack: 'sonar', json: 'recompute_runs', dir: 'sonar-recompute-runs', entity: 'MJ_BizApps_Sonar: Score Recompute Runs',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarrun', r.RunKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), ScoreModelVersionID: uuidFor('sonarver', r.VersionKey), TriggerType: r.TriggerType, Scope: r.Scope, StartedAt: r.StartedAt, CompletedAt: r.CompletedAt, Status: r.Status, RecordsScored: r.RecordsScored, RecordsChanged: r.RecordsChanged, BandTransitions: r.BandTransitions, DurationMs: r.DurationMs, CostUnitsConsumed: r.CostUnitsConsumed } }) },
-  { pack: 'sonar', json: 'scores', dir: 'sonar-scores', entity: 'MJ_BizApps_Sonar: Scores',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarscore', r.ScoreKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), ScoreModelVersionID: uuidFor('sonarver', r.VersionKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, AnchorRecordID: uuidFor('person', r.MemberNumber), RawScore: r.RawScore, NormalizedScore: r.NormalizedScore, BandID: uuidFor('sonarband', r.BandKey), PreviousNormalizedScore: r.PreviousNormalizedScore, PreviousBandID: uuidFor('sonarband', r.PreviousBandKey), Delta: r.Delta, TrendDirection: r.TrendDirection, TrendSlope: r.TrendSlope, Confidence: r.Confidence, DataCompleteness: r.DataCompleteness, ComputedAt: r.ComputedAt, AsOfDate: r.AsOfDate, IsStale: r.IsStale, NextRecomputeAt: r.NextRecomputeAt, ExplanationSummary: r.ExplanationSummary } }) },
-  { pack: 'sonar', json: 'score_contributions', dir: 'sonar-score-contributions', entity: 'MJ_BizApps_Sonar: Score Factor Contributions',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarcontrib', r.ContribKey) }, fields: { ScoreID: uuidFor('sonarscore', r.ScoreKey), ModelFactorID: uuidFor('sonarmf', r.ModelFactorKey), FactorID: uuidFor('sonarfactor', r.FactorKey), RawValue: r.RawValue, NormalizedValue: r.NormalizedValue, WeightedContribution: r.WeightedContribution, PercentOfTotal: r.PercentOfTotal, ContributionDelta: r.ContributionDelta, HadData: r.HadData, MissingDataApplied: r.MissingDataApplied } }) },
-  { pack: 'sonar', json: 'score_history', dir: 'sonar-score-history', entity: 'MJ_BizApps_Sonar: Score Histories',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonarhist', r.HistKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), ScoreModelVersionID: uuidFor('sonarver', r.VersionKey), AnchorEntityID: `@lookup:MJ: Entities.Name=${r.AnchorEntityName}`, AnchorRecordID: uuidFor('person', r.MemberNumber), NormalizedScore: r.NormalizedScore, BandID: uuidFor('sonarband', r.BandKey), AsOfDate: r.AsOfDate, ComputedAt: r.ComputedAt, DataCompleteness: r.DataCompleteness, Confidence: r.Confidence } }) },
-  { pack: 'sonar', json: 'band_transitions', dir: 'sonar-band-transitions', entity: 'MJ_BizApps_Sonar: Score Band Transitions',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonartrans', r.TransKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), AnchorRecordID: uuidFor('person', r.MemberNumber), FromBandID: uuidFor('sonarband', r.FromBandKey), ToBandID: uuidFor('sonarband', r.ToBandKey), Direction: r.Direction, OccurredAt: r.OccurredAt, RecomputeRunID: uuidFor('sonarrun', r.RunKey), Handled: r.Handled } }) },
-  { pack: 'sonar', json: 'audit_events', dir: 'sonar-audit-events', entity: 'MJ_BizApps_Sonar: Score Model Audit Events',
-    record: (r) => ({ primaryKey: { ID: uuidFor('sonaraudit', r.AuditKey) }, fields: { ScoreModelID: uuidFor('sonarmodel', r.ModelKey), EntityChanged: r.EntityChanged, ChangeType: r.ChangeType, ChangedByUserID: uuidFor('mjuser', r.StaffKey), ChangedAt: r.ChangedAt } }) },
 ];
 
 // ---------- emit the tree ----------
@@ -318,7 +345,7 @@ for (const m of MAPPING) {
   rmSync(dir, { recursive: true, force: true }); // clear only OUR entity dir — never siblings
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, '.mj-sync.json'), JSON.stringify({ entity: m.entity, filePattern: '**/.*.json' }, null, 2));
-  const rows = load(m.pack, m.json).map(m.record);
+  const rows = load(m.pack, m.json).filter(m.only ?? (() => true)).map(m.record);
   const chunks = [];
   for (let i = 0; i < rows.length; i += CHUNK) chunks.push(rows.slice(i, i + CHUNK));
   chunks.forEach((chunk, i) => {

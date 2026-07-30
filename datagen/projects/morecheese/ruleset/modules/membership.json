@@ -24,7 +24,31 @@
     "enthusiastRenewal": { "target": 0.65, "tolerance": 0.08, "$note": "mirrors benchmarks renewal_rate_enthusiast_tier — the new rule must land this WITHOUT moving the 87% overall (calibration absorbs it)" },
     "yoyStdFloor": 0.008,
     "gracePeriodMonths": 2,
+    "cancellation": {
+      "$note": "ESTIMATE — the two ways a membership ends. A LAPSE is silence: the renewal never gets paid, grace runs out, staff infer the reason afterwards. A CANCELLATION is a member who TOLD us, mid-term, that they are leaving — the churn a retention team could have worked. Only active-decision reasons qualify (nobody phones in to announce a non-payment), and heroes are excluded so their pinned statuses hold. Before this, all 8,024 periods were Lapsed and the Cancelled value in our own CHECK constraint was never used.",
+      "toldUsShareOfActiveReasons": 0.35,
+      "passiveReasons": [
+        "non-payment — lapsed past grace",
+        "non-payment — employer event"
+      ],
+      "noticeDaysBeforeEnd": [
+        15,
+        120
+      ]
+    },
     "lateRenewalShare": 0.25,
+    "churnReasons": {
+      "$note": "Every lapse used to record a non-payment reason, so the column was useless for a why-are-we-losing-members demo. Real associations lose members for reasons staff record and report on. Non-payment stays the plurality; the employer-event reason is still DERIVED (not drawn) when the member's employer had a lifecycle event.",
+      "weights": [
+        ["non-payment — lapsed past grace", 0.42],
+        ["cost — dues no longer justified", 0.16],
+        ["left the industry / changed employer", 0.14],
+        ["retired", 0.10],
+        ["consolidated under an organizational membership", 0.07],
+        ["dissatisfied with member benefits", 0.06],
+        ["relocated outside the region", 0.05]
+      ]
+    },
     "arrows": {
       "tenure": { "beta": 0.55, "label": "med", "note": "per 1 SD of tenure at decision" },
       "engagement": { "beta": 1.10, "label": "strong", "note": "latent theta; validated via behavioral proxy (attenuated)" },

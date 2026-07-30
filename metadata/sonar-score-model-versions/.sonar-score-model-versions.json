@@ -1,0 +1,17 @@
+[
+  {
+    "primaryKey": {
+      "ID": "9EC51FE5-B002-564E-9C7E-7B8E4954CC5B"
+    },
+    "fields": {
+      "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
+      "VersionNumber": 1,
+      "VersionLabel": "v1",
+      "ConfigSnapshotJSON": "{\"slug\":\"morecheese-engagement\",\"combine\":\"WeightedSum\",\"scale\":[0,100],\"factors\":[{\"slug\":\"morecheese-event-participation\",\"source\":\"MoreCheese: Event Registrations\",\"aggregation\":\"Count\",\"weight\":3,\"aggregateField\":null,\"window\":\"w12m\",\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-committee-service\",\"source\":\"Committees: Memberships\",\"aggregation\":\"Count\",\"weight\":1,\"aggregateField\":null,\"window\":null,\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-certifications\",\"source\":\"MoreCheese: Member Certifications\",\"aggregation\":\"Count\",\"weight\":1,\"aggregateField\":null,\"window\":null,\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-learning-activity\",\"source\":\"MoreCheese: Course Enrollments\",\"aggregation\":\"Count\",\"weight\":2,\"aggregateField\":null,\"window\":\"w12m\",\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-advocacy-participation\",\"source\":\"MoreCheese: Advocacy Actions\",\"aggregation\":\"Count\",\"weight\":1,\"aggregateField\":null,\"window\":\"w24m\",\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-competition-entries\",\"source\":\"MoreCheese: Competition Entries\",\"aggregation\":\"Count\",\"weight\":1,\"aggregateField\":null,\"window\":null,\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-event-recency\",\"source\":\"MoreCheese: Event Registrations\",\"aggregation\":\"Recency\",\"weight\":2,\"aggregateField\":\"RegisteredOn\",\"window\":null,\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":false},{\"slug\":\"morecheese-survey-participation\",\"source\":\"MJ_BizApps_Forms: Form Responses\",\"aggregation\":\"Count\",\"weight\":1,\"aggregateField\":null,\"window\":\"w24m\",\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-member-spend\",\"source\":\"MoreCheese: Orders\",\"aggregation\":\"Sum\",\"weight\":3,\"aggregateField\":\"TotalGross\",\"window\":\"w24m\",\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":true},{\"slug\":\"morecheese-tenure\",\"source\":\"MoreCheese: Member Profiles\",\"aggregation\":\"Recency\",\"weight\":2,\"aggregateField\":\"JoinDate\",\"window\":null,\"normalization\":\"Percentile\",\"missingData\":\"Zero\",\"higherIsBetter\":false}],\"bands\":[{\"label\":\"At Risk\",\"min\":0,\"max\":22},{\"label\":\"Watch\",\"min\":22,\"max\":33},{\"label\":\"Stable\",\"min\":33,\"max\":46},{\"label\":\"Engaged\",\"min\":46,\"max\":100}]}",
+      "ChangeSummary": "Initial published configuration.",
+      "PublishedByUserID": "C6309AFC-F5DE-5794-8865-FC99D5DD82F4",
+      "PublishedAt": "2025-10-24T14:00:00Z",
+      "IsCurrent": true
+    }
+  }
+]

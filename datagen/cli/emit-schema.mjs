@@ -58,6 +58,32 @@ const TABLES = [
     c('PhotoURL', s(1000), { null: true }), c('Bio', 'NVARCHAR(MAX)', { null: true }),
     c('LinkedUserID', UID, { null: true }), c('Status', s(50)),
   ] },
+  { schema: '__mj_BizAppsCommon', table: 'OrganizationType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'ContactType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'AddressType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'ContactMethod', cols: [
+    c('ID', UID, { pk: true }), c('PersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
+    c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
+    c('ContactTypeID', UID, { fk: '[__mj_BizAppsCommon].[ContactType]' }),
+    c('Value', s(500)), c('Label', s(100), { null: true }), c('IsPrimary', BIT),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'Address', cols: [
+    c('ID', UID, { pk: true }), c('Line1', s(255)), c('Line2', s(255), { null: true }), c('Line3', s(255), { null: true }),
+    c('City', s(100)), c('StateProvince', s(100), { null: true }), c('PostalCode', s(20), { null: true }),
+    c('Country', s(100)), c('Latitude', 'DECIMAL(9,6)', { null: true }), c('Longitude', 'DECIMAL(9,6)', { null: true }),
+  ] },
+  { schema: '__mj_BizAppsCommon', table: 'AddressLink', cols: [
+    c('ID', UID, { pk: true }), c('AddressID', UID, { fk: '[__mj_BizAppsCommon].[Address]' }),
+    c('EntityID', UID), c('RecordID', s(750)),
+    c('AddressTypeID', UID, { fk: '[__mj_BizAppsCommon].[AddressType]' }),
+    c('IsPrimary', BIT), c('Rank', 'INT', { null: true }),
+  ] },
   { schema: '__mj_BizAppsCommon', table: 'RelationshipType', cols: [
     c('ID', UID, { pk: true }), c('Name', s(100)), c('Description', 'NVARCHAR(MAX)', { null: true }),
     c('Category', s(50)), c('IsDirectional', BIT), c('ForwardLabel', s(100), { null: true }),
@@ -77,9 +103,12 @@ const TABLES = [
     c('DefaultPriority', s(20)), c('IsActive', BIT),
   ] },
   { schema: '__mj_BizAppsTasks', table: 'Task', cols: [
-    c('ID', UID, { pk: true }), c('Name', s(255)), c('TypeID', UID, { fk: '[__mj_BizAppsTasks].[TaskType]' }),
+    c('ID', UID, { pk: true }), c('Name', s(255)), c('Description', 'NVARCHAR(MAX)', { null: true }),
+    c('TypeID', UID, { fk: '[__mj_BizAppsTasks].[TaskType]' }),
     c('Status', s(50)), c('Priority', s(20)), c('DueAt', 'DATETIMEOFFSET', { null: true }),
+    c('StartedAt', 'DATETIMEOFFSET', { null: true }),
     c('CompletedAt', 'DATETIMEOFFSET', { null: true }), c('PercentComplete', INT),
+    c('HoursEstimated', 'DECIMAL(9,2)', { null: true }), c('HoursActual', 'DECIMAL(9,2)', { null: true }),
     c('CreatedByPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
   ] },
   { schema: '__mj_BizAppsTasks', table: 'TaskAssignment', cols: [
@@ -101,6 +130,7 @@ const TABLES = [
   ] },
   { schema: '__mj_BizAppsIssues', table: 'Issue', cols: [
     c('ID', UID, { pk: true }), c('IssueNumber', s(50), { null: true }), c('Title', s(500)),
+    c('Description', 'NVARCHAR(MAX)', { null: true }),
     c('IssueTypeID', UID, { fk: '[__mj_BizAppsIssues].[IssueType]' }),
     c('StatusID', UID, { fk: '[__mj_BizAppsIssues].[IssueStatus]' }),
     c('Severity', s(20)), c('Priority', s(20)),
@@ -108,6 +138,11 @@ const TABLES = [
     c('AssigneeEntityID', UID, { null: true }), c('AssigneeRecordID', s(450), { null: true }),
     c('SourceEntityID', UID, { null: true }), c('SourceRecordID', s(450), { null: true }),
     c('ResolvedAt', 'DATETIMEOFFSET', { null: true }), c('ClosedAt', 'DATETIMEOFFSET', { null: true }),
+  ] },
+  { schema: '__mj_BizAppsIssues', table: 'IssueComment', cols: [
+    c('ID', UID, { pk: true }), c('IssueID', UID, { fk: '[__mj_BizAppsIssues].[Issue]' }),
+    c('Body', 'NVARCHAR(MAX)'), c('Source', s(20)),
+    c('AuthorPersonID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Person]' }),
   ] },
   { schema: '__mj_BizAppsIssues', table: 'IssueNumberSequence', cols: [
     c('ScopeCode', s(50), { pk: true }), c('NextSequenceNumber', INT),
@@ -136,15 +171,15 @@ const TABLES = [
   // hard FKs into the dependency schema (Marcelo's linking ruling)
   { schema: 'morecheese_members', table: 'OrganizationProfile', cols: [
     c('ID', UID, { pk: true }), c('OrganizationID', UID, { fk: '[__mj_BizAppsCommon].[Organization]' }),
-    c('OrgKey', s(50)), c('Type', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
+    c('OrgKey', s(50)), c('Type', s(50)), c('Region', s(50)), c('Country', s(2), { null: true }), c('CountryName', s(100), { null: true }), c('City', s(100)), c('State', s(50)), c('AddressLine1', s(200), { null: true }), c('PostalCode', s(20), { null: true }),
     c('Latitude', GEO), c('Longitude', GEO),
     c('LifecycleEventKind', s(50), { null: true }), c('LifecycleEventYear', INT, { null: true }), c('IsSharedDemo', BIT),
   ] },
   { schema: 'morecheese_members', table: 'MemberProfile', cols: [
     c('ID', UID, { pk: true }), c('PersonID', UID, { fk: '[__mj_BizAppsCommon].[Person]' }),
     c('OrganizationID', UID, { null: true, fk: '[__mj_BizAppsCommon].[Organization]' }),
-    c('MemberNumber', s(50)), c('Segment', s(50)), c('Region', s(50)), c('City', s(100)), c('State', s(50)),
-    c('Latitude', GEO), c('Longitude', GEO), c('JoinDate', DATE), c('IsSharedDemo', BIT),
+    c('MemberNumber', s(50)), c('Segment', s(50)), c('Region', s(50)), c('Country', s(2), { null: true }), c('CountryName', s(100), { null: true }), c('City', s(100)), c('State', s(50)), c('AddressLine1', s(200), { null: true }), c('AddressLine2', s(200), { null: true }), c('PostalCode', s(20), { null: true }),
+    c('Latitude', GEO), c('Longitude', GEO), c('JoinDate', DATE), c('RaceEthnicity', s(200), { null: true }), c('EthnicityHispanic', s(30), { null: true }), c('PronounSet', s(50), { null: true }), c('PrimaryLanguage', s(50), { null: true }), c('IsSharedDemo', BIT),
   ] },
   // bizapps-committees stand-ins (B202602151200) — same IF-guard convention
   { schema: '__mj_BizAppsCommittees', table: 'Type', cols: [
@@ -171,8 +206,9 @@ const TABLES = [
   ] },
   { schema: '__mj_BizAppsCommittees', table: 'Meeting', cols: [
     c('ID', UID, { pk: true }), c('CommitteeID', UID, { fk: '[__mj_BizAppsCommittees].[Committee]' }),
-    c('Name', s(255)), c('StartDateTime', 'DATETIMEOFFSET'), c('TimeZone', s(50)),
-    c('LocationType', s(50)), c('Status', s(50)),
+    c('Name', s(255)), c('StartDateTime', 'DATETIMEOFFSET'), c('EndDateTime', 'DATETIMEOFFSET', { null: true }),
+    c('TimeZone', s(50)),
+    c('LocationType', s(50)), c('LocationText', s(255), { null: true }), c('Status', s(50)),
   ] },
   { schema: '__mj_BizAppsCommittees', table: 'Attendance', cols: [
     c('ID', UID, { pk: true }), c('MeetingID', UID, { fk: '[__mj_BizAppsCommittees].[Meeting]' }),
@@ -362,6 +398,27 @@ for (const [id, name, cat, fwd, rev] of REL_TYPE_SEEDS) {
 // playground seeds for APP-OWNED lookups our data references by name (real installs ship
 // their own — the name guards keep this inert there; integration finding F6)
 const LOOKUP_SEEDS = [
+  ['[__mj_BizAppsCommon].[OrganizationType]', '(ID, Name)', [
+    ["'B17B8944-8B53-5765-B80E-58649DAF5F4B'", "N'Sole Proprietorship'"],
+    ["'B059E177-FCC5-5DDA-8E2E-85388315B971'", "N'LLC'"],
+    ["'2C43B175-2652-588A-B713-E581839C77A2'", "N'Partnership'"],
+    ["'7A60C984-E74C-5981-9C6E-FE4A225B1476'", "N'Corporation'"],
+    ["'E5869F17-98F1-5E08-91EB-C83526B766C3'", "N'Non-Profit'"],
+    ["'0A37DCE8-4D7A-5F52-AD78-0DEE0881B09F'", "N'Educational Institution'"],
+    ["'B60A9721-55A3-502D-8EB0-CEECD8B63F16'", "N'Association'"],
+  ]],
+  ['[__mj_BizAppsCommon].[ContactType]', '(ID, Name)', [
+    ["'CA0071DB-C59A-5E5F-98E7-AAABAFF46505'", "N'Email'"],
+    ["'7989C047-9A3C-5BE2-B26F-CE279FFC6701'", "N'Mobile Phone'"],
+    ["'61F5D63E-F30D-52FE-9DB5-0DDAFFEB1C2B'", "N'Work Phone'"],
+    ["'C623F0CD-6629-53B9-82C0-E8CDEAEF4EF2'", "N'LinkedIn'"],
+    ["'968721EC-D9F2-5BEC-9381-A93403C96F39'", "N'Website'"],
+  ]],
+  ['[__mj_BizAppsCommon].[AddressType]', '(ID, Name)', [
+    ["'6CA48BD0-3878-5B3C-932B-B543382CBAF0'", "N'Home'"],
+    ["'D0E43C17-3CAA-546A-B32E-5DFC5D096BE9'", "N'Work'"],
+    ["'72022FF8-8E3C-51A7-AE41-E01EE058B428'", "N'Mailing'"],
+  ]],
   ['[__mj_BizAppsCommittees].[Role]', '(ID, Name, IsOfficer, IsVotingRole, Sequence)', [
     ["'FF49949F-D6EE-5D20-858D-B6606DAF070A'", "N'Chair'", 1, 1, 1],
     ["'9C9BB0CE-0144-5F75-97C3-6C8463C08B51'", "N'Vice Chair'", 1, 1, 2],

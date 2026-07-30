@@ -22,7 +22,7 @@ export function buildOrgs(cfg) {
   for (let i = 0; i < nOrgs; i++) {
     const r = rng(seed, `org:${i}`);
     const region = r.pickWeighted(R.geography.mix);
-    const [city, state, lat, lon] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
+    const [city, state, lat, lon, , country, countryName] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
     const type = r.pickWeighted([['Producer', R.orgs.producerShare], ['Retailer', 0.30], ['Supplier', 0.15], ['Educator', 0.10]]);
     const name = dealName(type);
     // small chance per history year of a dissolution/acquisition/program-cut
@@ -33,7 +33,7 @@ export function buildOrgs(cfg) {
         break;
       }
     }
-    orgs.push({ OrgKey: `ORG-${String(i + 1).padStart(4, '0')}`, Name: name, Type: type, Region: region, City: city, State: state, Latitude: lat, Longitude: lon, LifecycleEvent: event, IsSharedDemo: true });
+    orgs.push({ OrgKey: `ORG-${String(i + 1).padStart(4, '0')}`, Name: name, Type: type, Region: region, Country: country, CountryName: countryName, City: city, State: state, Latitude: lat, Longitude: lon, LifecycleEvent: event, IsSharedDemo: true });
   }
   return orgs;
 }
@@ -47,10 +47,21 @@ const EMAIL_PROVIDERS = ['mailhaven.example', 'postfield.example', 'bluebarn.exa
 const WORK_EMAIL_SHARE = 0.6; // employed members with an org-domain address (the rest use personal mail at work, like real people)
 const strHash = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0; return h >>> 0; };
 export const consumerDomainFor = (key) => EMAIL_PROVIDERS[strHash(`prov:${key}`) % EMAIL_PROVIDERS.length];
-const orgDomainFor = (orgName) => `${orgName.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 24)}.example`;
+// accents are TRANSLITERATED, not deleted: Nordström became nordstrm and Quesería became
+// queseravaldeluna. Truncation also cut mid-word at a hard 24 chars
+// (beauchampfarmsteadcreame.example), so it now stops on a word boundary.
+export const deaccent = (v) => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
+  .replace(/Æ/g, 'Ae').replace(/Ø/g, 'Oe').replace(/Å/g, 'Aa');
+export const orgDomainFor = (orgName) => {
+  const words = deaccent(orgName).toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean);
+  let slug = '';
+  for (const w of words) { if (slug && (slug + w).length > 24) break; slug += w; }
+  return `${(slug || words.join('').slice(0, 24)).slice(0, 30)}.example`;
+};
 
 export function emailFor(first, last, memberNumber, orgName = null) {
-  const name = `${first}.${last}`.toLowerCase().replace(/[^a-z0-9.]/g, '');
+  const name = deaccent(`${first}.${last}`).toLowerCase().replace(/[^a-z0-9.]/g, '');
   const work = orgName && (strHash(`work:${memberNumber}`) % 100) < WORK_EMAIL_SHARE * 100;
   const domain = work ? orgDomainFor(orgName) : consumerDomainFor(memberNumber);
   return `${name}.${memberNumber.replace(/\D/g, '')}@${domain}`;
@@ -60,7 +71,13 @@ export function emailFor(first, last, memberNumber, orgName = null) {
 function joinDateFor(r, cfg) {
   const { R, releaseYear } = cfg;
   const weights = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) weights.push([y, Math.pow(1.15, y - R.history.startYear)]);
+  const CV = R.regimes?.covid;
+  for (let y = R.history.startYear; y <= releaseYear; y++) {
+    // acquisition dips in the covid years: a trade body loses its in-person recruiting
+    // surface, so the growth curve has a visible notch rather than climbing through it
+    const covidDamp = CV?.years?.includes(y) ? (CV.joinRateMultiplier ?? 1) : 1;
+    weights.push([y, Math.pow(1.15, y - R.history.startYear) * covidDamp]);
+  }
   const y = r.pickWeighted(weights);
   const d = new Date(Date.UTC(y, r.int(0, 11), r.int(1, 28)));
   return d > cfg.release ? addYears(d, -1) : d;
@@ -91,7 +108,7 @@ export function buildPeople(cfg, orgs) {
     const key = `ICF-${String(100001 + i)}`;
     const r = rng(seed, `person:${key}`);
     const region = r.pickWeighted(R.geography.mix);
-    const [city, state, lat, lon] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
+    const [city, state, lat, lon, , country, countryName, nameOrigin] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
     const [thetaZ, phi] = r.copulaPair(R.latents.copulaRho);
     const { anchor: theta, path: thetaPath } = thetaProcess(cfg, key, thetaZ);
     const org = r.bernoulli(0.8) ? orgs[r.int(0, orgs.length - 1)] : null;
@@ -100,10 +117,10 @@ export function buildPeople(cfg, orgs) {
     // tier assignment: DECLARED rules (ruleset membership.tiers.assign) via core staticAssignment
     const tier = staticAssignment(R.membership.tiers.assign, { Segment: segment, hasOrganization: !!org, phi });
     // origin-consistent authored name from the member's own name stream (region-weighted buckets)
-    const nm = personNameFor(seed, key, region);
+    const nm = personNameFor(seed, key, region, nameOrigin);
     people.push({
       MemberNumber: key, FirstName: nm.first, LastName: nm.last, MiddleName: nm.middle, PreferredName: nm.preferred, Email: emailFor(nm.first, nm.last, key, org?.Name), Title: titleFor(seed, key, segment),
-      Segment: segment, MembershipTier: tier, Region: region, City: city, State: state, Latitude: lat, Longitude: lon,
+      Segment: segment, MembershipTier: tier, Region: region, Country: country, CountryName: countryName, City: city, State: state, Latitude: lat, Longitude: lon,
       OrgKey: org?.OrgKey ?? null, JoinDate: iso(joinDateFor(r, cfg)),
       _theta: theta, _thetaPath: thetaPath, _phi: phi, // latents: generator-internal, stripped before emit
       CycleType: anniversary ? 'anniversary' : 'calendar',
@@ -130,7 +147,11 @@ export function buildPeople(cfg, orgs) {
     const idx = R.heroes.indexOf(h);
     people[idx] = {
       MemberNumber: h.memberNumber, FirstName: h.first, LastName: h.last, MiddleName: null, PreferredName: h.preferred ?? null, Email: emailFor(h.first, h.last, h.memberNumber, heroOrg?.Name), Title: h.title ?? null,
-      Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region, City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
+      Segment: h.segment, MembershipTier: h.tier ?? 'Individual', Region: h.region,
+      // heroes pin their city; look the country up from the bank so a pinned persona is
+      // not the one record in the roster with no country
+      ...(() => { const hit = (CITIES[h.region] ?? []).find((c) => c[0] === h.city); return { Country: hit?.[5] ?? null, CountryName: hit?.[6] ?? null }; })(),
+      City: h.city, State: h.state, Latitude: h.lat, Longitude: h.lon,
       OrgKey: heroOrg?.OrgKey ?? null, JoinDate: joinDate,
       _theta: h.theta, _thetaPath: h.thetaByYear ?? null, _phi: h.phi, // pinned level — or a pinned ARC (thetaByYear); never drawn drift
       _lapseYear: h.lapseYear ?? null,

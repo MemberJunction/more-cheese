@@ -118,6 +118,8 @@
         "min": 0,
         "max": 10,
         "meanTolerance": 0.5,
+        "detractorShare": 0.025,
+        "$detractorNote": "A gaussian around 8.3 never produces a 0-2: the canonical build had ZERO scores below 3 in 648 responses, so the detractor tail every real survey carries was missing. A small share of respondents had a bad experience (travel, a cancelled session, a billing mix-up) and score 0-2 largely independent of their engagement dial; low-engagement members are likelier to be among them. Share kept small so the sourced mean stays in band.",
         "$source": "SOURCED 2026-07-16 (confidence: high): Explori benchmark across thousands of events puts conference-attendee NPS at +35.4 (explori.com/blog/nps_for_events; medium.com/@erikfabian NPS-for-events; retently.com benchmarks: 20-40 average, 30-50 excellent for B2B events). The old 7.2 mean computed to NPS ~ -10 - materially wrong; a mean of ~8.3 yields computed NPS ~ +25-40."
       },
       "overall": {

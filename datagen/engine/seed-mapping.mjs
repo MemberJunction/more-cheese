@@ -20,20 +20,35 @@ export const sqlVar = (v) => v; // raw expression (e.g. a DECLAREd @Entity varia
 export const MJ_ENTITY_VAR = {
   'MJ_BizApps_Common: People': '@E_People',
   'MJ_BizApps_Common: Relationships': '@E_Relationships',
+  'MJ_BizApps_Common: Organizations': '@E_Organizations',
   'MJ_BizApps_Issues: Issues': '@E_Issues',
   'MJ_BizApps_Tasks: Tasks': '@E_Tasks',
   'MoreCheese: Member Profiles': '@E_MemberProfiles',
   'MoreCheese: Membership Periods': '@E_Periods',
   'MoreCheese: Competition Entries': '@E_CompEntries',
-  // sonar factor sources
+  // sonar factor sources (all single-hop to the People anchor)
   'MoreCheese: Event Registrations': '@E_Regs',
   'Committees: Memberships': '@E_CommMemberships',
   'MoreCheese: Course Enrollments': '@E_Enrollments',
-  'MoreCheese: Payments': '@E_Payments',
-  'MJ_BizApps_Forms: Form Response Answers': '@E_FormAnswers',
   'MoreCheese: Advocacy Actions': '@E_Advocacy',
+  'MJ_BizApps_Forms: Form Responses': '@E_FormResponses',
+  'MoreCheese: Member Certifications': '@E_MemberCerts',
 };
-export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person' };
+export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person', org: 'org' };
+
+// bizapps-common SEEDS its ContactType and AddressType rows (finding F6) — we reference them
+// by name through these preamble DECLAREs and never emit the lookup rows ourselves
+export const CONTACT_TYPE_VAR = {
+  Email: '@CT_Email', 'Mobile Phone': '@CT_Mobile', 'Work Phone': '@CT_Work',
+  LinkedIn: '@CT_LinkedIn', Website: '@CT_Website',
+};
+export const ADDRESS_TYPE_VAR = { Home: '@AT_Home', Work: '@AT_Work', Mailing: '@AT_Mailing' };
+/** bizapps-common seeds OrganizationType (legal structure) — referenced by NAME (F6) */
+export const ORG_TYPE_VAR = {
+  'Sole Proprietorship': '@OT_Sole', LLC: '@OT_LLC', Partnership: '@OT_Partnership',
+  Corporation: '@OT_Corp', 'Non-Profit': '@OT_NonProfit',
+  'Educational Institution': '@OT_EduInst', Association: '@OT_Association',
+};
 
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
 // THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
@@ -49,6 +64,9 @@ export const MAPPING = {
       json: 'organizations', table: '[__mj_BizAppsCommon].[Organization]',
       columns: (r) => ({
         ID: sqlId(uuidFor('org', r.OrgKey)), Name: sqlStr(r.Name),
+        OrganizationTypeID: sqlVar(r.OrganizationTypeName ? ORG_TYPE_VAR[r.OrganizationTypeName] : 'NULL'),
+        LegalName: sqlStr(r.LegalName ?? null), Website: sqlStr(r.Website ?? null),
+        Phone: sqlStr(r.Phone ?? null), FoundedDate: sqlDate(r.FoundedDate ?? null),
         // their Status CHECK: Active|Inactive|Dissolved — our dissolution stories map straight on
         Status: sqlStr(r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active'),
       }),
@@ -57,7 +75,7 @@ export const MAPPING = {
       json: 'organizations', table: '[morecheese_members].[OrganizationProfile]',
       columns: (r) => ({
         ID: sqlId(uuidFor('orgprofile', r.OrgKey)), OrganizationID: sqlId(uuidFor('org', r.OrgKey)),
-        OrgKey: sqlStr(r.OrgKey), Type: sqlStr(r.Type), Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
+        OrgKey: sqlStr(r.OrgKey), Type: sqlStr(r.Type), Region: sqlStr(r.Region), Country: sqlStr(r.Country ?? null), CountryName: sqlStr(r.CountryName ?? null), City: sqlStr(r.City), State: sqlStr(r.State), AddressLine1: sqlStr(r.AddressLine1 ?? null), PostalCode: sqlStr(r.PostalCode ?? null),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
         LifecycleEventKind: sqlStr(r.LifecycleEvent?.kind ?? null), LifecycleEventYear: sqlNum(r.LifecycleEvent?.year ?? null),
         IsSharedDemo: sqlBit(r.IsSharedDemo),
@@ -72,22 +90,62 @@ export const MAPPING = {
       }),
     },
     {
+      json: 'addresses', table: '[__mj_BizAppsCommon].[Address]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('address', r.AddressKey)),
+        Line1: sqlStr(r.Line1), Line2: sqlStr(r.Line2), City: sqlStr(r.City),
+        StateProvince: sqlStr(r.StateProvince), PostalCode: sqlStr(r.PostalCode), Country: sqlStr(r.Country),
+        Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
+      }),
+    },
+    {
+      json: 'address_links', table: '[__mj_BizAppsCommon].[AddressLink]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('addresslink', r.LinkKey)), AddressID: sqlId(uuidFor('address', r.AddressKey)),
+        // polymorphic owner: entity resolved by NAME in the preamble, record by pinned uuid
+        EntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]),
+        RecordID: sqlId(uuidFor(RECORD_PREFIX[r.RecordKind], r.RecordKey)),
+        AddressTypeID: sqlVar(ADDRESS_TYPE_VAR[r.AddressTypeName]),
+        IsPrimary: sqlBit(r.IsPrimary), Rank: sqlNum(r.Rank),
+      }),
+    },
+    {
+      json: 'contact_methods', table: '[__mj_BizAppsCommon].[ContactMethod]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('contactmethod', r.MethodKey)),
+        PersonID: sqlId(r.OwnerKind === 'person' ? uuidFor('person', r.OwnerKey) : null),
+        OrganizationID: sqlId(r.OwnerKind === 'org' ? uuidFor('org', r.OwnerKey) : null),
+        ContactTypeID: sqlVar(CONTACT_TYPE_VAR[r.ContactTypeName]),
+        Value: sqlStr(r.Value), Label: sqlStr(r.Label), IsPrimary: sqlBit(r.IsPrimary),
+      }),
+    },
+    {
       json: 'people', table: '[__mj_BizAppsCommon].[Person]',
       columns: (r) => ({
         ID: sqlId(uuidFor('person', r.MemberNumber)),
         FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), MiddleName: sqlStr(r.MiddleName), PreferredName: sqlStr(r.PreferredName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
+        Prefix: sqlStr(r.Prefix ?? null), Suffix: sqlStr(r.Suffix ?? null), Phone: sqlStr(r.Phone ?? null),
+        Bio: sqlStr(r.Bio ?? null),
+        Gender: sqlStr(r.Gender ?? null), DateOfBirth: sqlDate(r.DateOfBirth ?? null),
         Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
       }),
     },
     {
       json: 'people', table: '[morecheese_members].[MemberProfile]',
+      only: (r) => !r.IsProspect, // non-members are Person rows with no membership extension
+
       columns: (r) => ({
         ID: sqlId(uuidFor('memberprofile', r.MemberNumber)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
         OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null),
         MemberNumber: sqlStr(r.MemberNumber), Segment: sqlStr(r.Segment),
-        Region: sqlStr(r.Region), City: sqlStr(r.City), State: sqlStr(r.State),
+        Region: sqlStr(r.Region), Country: sqlStr(r.Country ?? null), CountryName: sqlStr(r.CountryName ?? null),
+        City: sqlStr(r.City), State: sqlStr(r.State),
+        AddressLine1: sqlStr(r.AddressLine1 ?? null), AddressLine2: sqlStr(r.AddressLine2 ?? null), PostalCode: sqlStr(r.PostalCode ?? null),
         Latitude: sqlNum(r.Latitude), Longitude: sqlNum(r.Longitude),
-        JoinDate: sqlDate(r.JoinDate), IsSharedDemo: sqlBit(r.IsSharedDemo),
+        JoinDate: sqlDate(r.JoinDate),
+        RaceEthnicity: sqlStr(r.RaceEthnicity ?? null), EthnicityHispanic: sqlStr(r.EthnicityHispanic ?? null),
+        PronounSet: sqlStr(r.PronounSet ?? null), PrimaryLanguage: sqlStr(r.PrimaryLanguage ?? null),
+        IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
     {
@@ -139,7 +197,7 @@ export const MAPPING = {
   learning: [
     {
       json: 'certifications', table: '[morecheese_learning].[Certification]',
-      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
+      columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
     },
     {
       json: 'member_certifications', table: '[morecheese_learning].[MemberCertification]',
@@ -233,8 +291,9 @@ export const MAPPING = {
       json: 'committee_meetings', table: '[__mj_BizAppsCommittees].[Meeting]',
       columns: (r) => ({
         ID: sqlId(uuidFor('meeting', r.MeetingKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
-        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), TimeZone: sqlStr('UTC'),
-        LocationType: sqlStr(r.LocationType), Status: sqlStr(r.Status),
+        Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), EndDateTime: sqlDate(r.EndDateTime ?? null),
+        TimeZone: sqlStr('UTC'),
+        LocationType: sqlStr(r.LocationType), LocationText: sqlStr(r.LocationText ?? null), Status: sqlStr(r.Status),
       }),
     },
     {
@@ -282,9 +341,11 @@ export const MAPPING = {
     {
       json: 'tasks', table: '[__mj_BizAppsTasks].[Task]',
       columns: (r) => ({
-        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
-        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt), CompletedAt: sqlDate(r.CompletedAt ?? null),
+        ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
+        Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt),
+        StartedAt: sqlDate(r.StartedAt ?? null), CompletedAt: sqlDate(r.CompletedAt ?? null),
         PercentComplete: sqlNum(r.PercentComplete ?? 0),
+        HoursEstimated: sqlNum(r.HoursEstimated ?? null), HoursActual: sqlNum(r.HoursActual ?? null),
         CreatedByPersonID: sqlId(r.CreatedByMemberNumber ? uuidFor('person', r.CreatedByMemberNumber) : null),
       }),
     },
@@ -315,6 +376,7 @@ export const MAPPING = {
       json: 'issues', table: '[__mj_BizAppsIssues].[Issue]',
       columns: (r) => ({
         ID: sqlId(uuidFor('issue', r.IssueKey)), IssueNumber: sqlStr(r.IssueNumber), Title: sqlStr(r.Title),
+        Description: sqlStr(r.Description),
         IssueTypeID: sqlId(uuidFor('issuetype', r.TypeKey)), StatusID: sqlVar({ New: '@IS_New', 'In Progress': '@IS_InProgress', Resolved: '@IS_Resolved', Closed: '@IS_Closed' }[r.StatusKey]),
         Severity: sqlStr(r.Severity), Priority: sqlStr(r.Priority),
         ReporterPersonID: sqlId(uuidFor('person', r.ReporterMemberNumber)),
@@ -323,6 +385,14 @@ export const MAPPING = {
         SourceEntityID: sqlVar({ 'MoreCheese: Orders': '@E_Orders', 'MJ_BizApps_Common: Organizations': '@E_Orgs', 'MoreCheese: Event Registrations': '@E_Regs', 'MJ_BizApps_Common: People': '@E_People' }[r.SourceEntityName]),
         SourceRecordID: sqlId({ order: uuidFor('order', r.SourceRefKey), org: uuidFor('org', r.SourceRefKey), reg: uuidFor('reg', r.SourceRefKey), person: uuidFor('person', r.SourceRefKey) }[r.SourceRefKind]),
         ResolvedAt: sqlDate(r.ResolvedAt), ClosedAt: sqlDate(r.ClosedAt),
+      }),
+    },
+    {
+      json: 'issue_comments', table: '[__mj_BizAppsIssues].[IssueComment]',
+      columns: (r) => ({
+        ID: sqlId(uuidFor('issuecomment', r.CommentKey)), IssueID: sqlId(uuidFor('issue', r.IssueKey)),
+        Body: sqlStr(r.Body), Source: sqlStr(r.Source),
+        AuthorPersonID: sqlId(r.AuthorMemberNumber ? uuidFor('person', r.AuthorMemberNumber) : null),
       }),
     },
     {
@@ -521,9 +591,9 @@ export const MAPPING = {
     },
   ],
   sonar: [
-    // bizapps-sonar's REAL shapes (V202606121005 Initial_Schema) — engagement scoring
-    // residue. CHECK value lists read from the migration itself (F9). Like platform,
-    // integration-grade: the preamble resolves __mj.Entity IDs, so real installs only.
+    // bizapps-sonar's REAL shapes (V202606121005 Initial_Schema) — engagement scoring MODEL
+    // DEFINITION ONLY (Sonar's FactorCompiler computes scores/contributions/history live, so we
+    // never pre-emit those rows). Integration-grade: the preamble resolves __mj.Entity IDs.
     {
       json: 'score_band_sets', table: '[__mj_BizAppsSonar].[ScoreBandSet]',
       columns: (r) => ({
@@ -543,7 +613,7 @@ export const MAPPING = {
       json: 'time_windows', table: '[__mj_BizAppsSonar].[TimeWindow]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarwindow', r.WindowKey)), Name: sqlStr(r.Name),
-        WindowType: sqlStr(r.WindowType), LengthMonths: sqlNum(r.LengthMonths),
+        WindowType: sqlStr(r.WindowType), LengthMonths: sqlNum(r.LengthMonths), LengthDays: sqlNum(r.LengthDays),
       }),
     },
     {
@@ -553,9 +623,7 @@ export const MAPPING = {
         Description: sqlStr(r.Description), AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]),
         Status: sqlStr(r.Status), ScoreScaleMin: sqlNum(0), ScoreScaleMax: sqlNum(100),
         CombineStrategy: sqlStr(r.CombineStrategy), BandSetID: sqlId(uuidFor('sonarbandset', 'engagement-bands')),
-        RecomputeMode: sqlStr(r.RecomputeMode), RecomputeCron: sqlStr(r.RecomputeCron),
-        TrendWindowDays: sqlNum(r.TrendWindowDays), OwnerUserID: sqlId(uuidFor('mjuser', r.OwnerStaffKey)),
-        EffectiveFrom: sqlDate(r.EffectiveFrom),
+        OwnerUserID: sqlId(uuidFor('mjuser', r.OwnerStaffKey)), EffectiveFrom: sqlDate(r.EffectiveFrom),
         // CurrentVersionID is set by the pack POSTAMBLE (circular FK with ScoreModelVersion)
       }),
     },
@@ -574,7 +642,7 @@ export const MAPPING = {
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmre', r.RelatedKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         RelatedEntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), Alias: sqlStr(r.Alias),
-        RelationshipPath: sqlStr(r.RelationshipPath), JoinType: sqlStr(r.JoinType),
+        RelationshipPath: sqlStr(r.RelationshipPath), JoinType: sqlStr(r.JoinType), // '[]' → compiler auto-resolves FK path
       }),
     },
     {
@@ -583,11 +651,12 @@ export const MAPPING = {
         ID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
         Description: sqlStr(r.Description), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), FactorType: sqlStr(r.FactorType),
+        // the data source the FactorCompiler traverses — link to the ModelRelatedEntity (was missing)
+        SourceRelatedEntityID: sqlId(uuidFor('sonarmre', r.SourceRelatedKey)),
         SourceEntityID: sqlVar(MJ_ENTITY_VAR[r.SourceEntityName]), Aggregation: sqlStr(r.Aggregation),
-        TimeWindowID: sqlId(r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null),
-        RawDataType: sqlStr(r.RawDataType), NormalizationMethod: sqlStr(r.NormalizationMethod),
-        NormalizationParamsJSON: sqlStr(r.NormalizationParamsJSON),
-        OutputMin: sqlNum(r.OutputMin), OutputMax: sqlNum(r.OutputMax),
+        AggregateFieldName: sqlStr(r.AggregateFieldName),
+        DateField: sqlStr(r.DateField), TimeWindowID: sqlId(r.WindowKey ? uuidFor('sonarwindow', r.WindowKey) : null),
+        NormalizationMethod: sqlStr(r.NormalizationMethod),
         HigherIsBetter: sqlBit(r.HigherIsBetter), PromotionState: sqlStr(r.PromotionState),
       }),
     },
@@ -598,70 +667,6 @@ export const MAPPING = {
         FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Weight: sqlNum(r.Weight),
         WeightMode: sqlStr(r.WeightMode), MissingDataPolicy: sqlStr(r.MissingDataPolicy),
         IsRequired: sqlBit(r.IsRequired), DisplayLabel: sqlStr(r.DisplayLabel), DisplayOrder: sqlNum(r.DisplayOrder),
-      }),
-    },
-    {
-      json: 'recompute_runs', table: '[__mj_BizAppsSonar].[ScoreRecomputeRun]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarrun', r.RunKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)), TriggerType: sqlStr(r.TriggerType),
-        Scope: sqlStr(r.Scope), StartedAt: sqlDate(r.StartedAt), CompletedAt: sqlDate(r.CompletedAt),
-        Status: sqlStr(r.Status), RecordsScored: sqlNum(r.RecordsScored), RecordsChanged: sqlNum(r.RecordsChanged),
-        BandTransitions: sqlNum(r.BandTransitions), DurationMs: sqlNum(r.DurationMs), CostUnitsConsumed: sqlNum(r.CostUnitsConsumed),
-      }),
-    },
-    {
-      json: 'scores', table: '[__mj_BizAppsSonar].[Score]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarscore', r.ScoreKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)),
-        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
-        RawScore: sqlNum(r.RawScore), NormalizedScore: sqlNum(r.NormalizedScore),
-        BandID: sqlId(uuidFor('sonarband', r.BandKey)),
-        PreviousNormalizedScore: sqlNum(r.PreviousNormalizedScore), PreviousBandID: sqlId(uuidFor('sonarband', r.PreviousBandKey)),
-        Delta: sqlNum(r.Delta), TrendDirection: sqlStr(r.TrendDirection), TrendSlope: sqlNum(r.TrendSlope),
-        Confidence: sqlNum(r.Confidence), DataCompleteness: sqlNum(r.DataCompleteness),
-        ComputedAt: sqlDate(r.ComputedAt), AsOfDate: sqlDate(r.AsOfDate), IsStale: sqlBit(r.IsStale),
-        NextRecomputeAt: sqlDate(r.NextRecomputeAt), ExplanationSummary: sqlStr(r.ExplanationSummary),
-      }),
-    },
-    {
-      json: 'score_contributions', table: '[__mj_BizAppsSonar].[ScoreFactorContribution]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarcontrib', r.ContribKey)), ScoreID: sqlId(uuidFor('sonarscore', r.ScoreKey)),
-        ModelFactorID: sqlId(uuidFor('sonarmf', r.ModelFactorKey)), FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)),
-        RawValue: sqlNum(r.RawValue), NormalizedValue: sqlNum(r.NormalizedValue),
-        WeightedContribution: sqlNum(r.WeightedContribution), PercentOfTotal: sqlNum(r.PercentOfTotal),
-        ContributionDelta: sqlNum(r.ContributionDelta), HadData: sqlBit(r.HadData), MissingDataApplied: sqlBit(r.MissingDataApplied),
-      }),
-    },
-    {
-      json: 'score_history', table: '[__mj_BizAppsSonar].[ScoreHistory]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonarhist', r.HistKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        ScoreModelVersionID: sqlId(uuidFor('sonarver', r.VersionKey)),
-        AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
-        NormalizedScore: sqlNum(r.NormalizedScore), BandID: sqlId(uuidFor('sonarband', r.BandKey)),
-        AsOfDate: sqlDate(r.AsOfDate), ComputedAt: sqlDate(r.ComputedAt),
-        DataCompleteness: sqlNum(r.DataCompleteness), Confidence: sqlNum(r.Confidence),
-      }),
-    },
-    {
-      json: 'band_transitions', table: '[__mj_BizAppsSonar].[ScoreBandTransition]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonartrans', r.TransKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        AnchorRecordID: sqlId(uuidFor('person', r.MemberNumber)),
-        FromBandID: sqlId(uuidFor('sonarband', r.FromBandKey)), ToBandID: sqlId(uuidFor('sonarband', r.ToBandKey)),
-        Direction: sqlStr(r.Direction), OccurredAt: sqlDate(r.OccurredAt),
-        RecomputeRunID: sqlId(uuidFor('sonarrun', r.RunKey)), Handled: sqlBit(r.Handled),
-      }),
-    },
-    {
-      json: 'audit_events', table: '[__mj_BizAppsSonar].[ScoreModelAuditEvent]',
-      columns: (r) => ({
-        ID: sqlId(uuidFor('sonaraudit', r.AuditKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
-        EntityChanged: sqlStr(r.EntityChanged), ChangeType: sqlStr(r.ChangeType),
-        ChangedByUserID: sqlId(uuidFor('mjuser', r.StaffKey)), ChangedAt: sqlDate(r.ChangedAt),
       }),
     },
   ],
@@ -715,6 +720,26 @@ export const DELIVERY = { platform: 'insert' };
 export const deliveryOf = (pack) => DELIVERY[pack] ?? 'metadata';
 // polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
 export const PREAMBLE = {
+  common: [
+    "-- app-seeded lookups resolve BY NAME (the owning app ships these rows; integration finding F6)",
+    "DECLARE @CT_Email UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Email');",
+    "DECLARE @CT_Mobile UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Mobile Phone');",
+    "DECLARE @CT_Work UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Work Phone');",
+    "DECLARE @CT_LinkedIn UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'LinkedIn');",
+    "DECLARE @CT_Website UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[ContactType] WHERE Name = N'Website');",
+    "DECLARE @AT_Home UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Home');",
+    "DECLARE @AT_Work UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Work');",
+    "DECLARE @AT_Mailing UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Mailing');",
+    "DECLARE @OT_Sole UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Sole Proprietorship');",
+    "DECLARE @OT_LLC UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'LLC');",
+    "DECLARE @OT_Partnership UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Partnership');",
+    "DECLARE @OT_Corp UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Corporation');",
+    "DECLARE @OT_NonProfit UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Non-Profit');",
+    "DECLARE @OT_EduInst UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Educational Institution');",
+    "DECLARE @OT_Association UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Association');",
+    "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
+    "DECLARE @E_Organizations UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Organizations');",
+  ],
   committees: [
     "-- app-seeded lookups resolve BY NAME (the owning app ships these rows; integration finding F6)",
     "DECLARE @Role_Chair UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommittees].[Role] WHERE Name = N'Chair');",
@@ -742,9 +767,10 @@ export const PREAMBLE = {
     "DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');",
     "DECLARE @E_CommMemberships UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'Committees: Memberships');",
     "DECLARE @E_Enrollments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Course Enrollments');",
-    "DECLARE @E_Payments UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Payments');",
-    "DECLARE @E_FormAnswers UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Response Answers');",
     "DECLARE @E_Advocacy UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Advocacy Actions');",
+    "DECLARE @E_FormResponses UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Responses');",
+    "DECLARE @E_CompEntries UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Competition Entries');",
+    "DECLARE @E_MemberCerts UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Member Certifications');",
   ],
   issues: [
     "-- app-seeded lookups resolve BY NAME (F6)",
@@ -775,7 +801,7 @@ export function packSqlLines(pack, load, { transformTable = (t) => t } = {}) {
   const lines = [];
   const summary = [];
   for (const t of MAPPING[pack]) {
-    const rows = load(pack, t.json);
+    const rows = load(pack, t.json).filter(t.only ?? (() => true));
     const table = transformTable(t.table);
     if (rows.length === 0) {
       lines.push(`-- ${table}: 0 rows`, '');
