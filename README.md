@@ -43,6 +43,7 @@ docs below still apply.
 | `.github/workflows/` | CI: `build`, `changes` (migration + changeset gates), `publish` (npm via OIDC) | Recommended |
 | `.changeset/` + `ci/` | Fixed versioning + release pipeline helpers | Recommended |
 | `docs/template-docs/` + `plans/TEMPLATE-SPEC.md` | The deep-dive docs + the full required/optional inventory | Recommended |
+| `docs/skip-integration.md` | Running **Skip** against this app's data — install, the required registry override, and four undocumented gotchas | If demoing Skip |
 
 Each package is deliberately minimal — a `package.json` (showing the
 dependency conventions), a `tsconfig.json`, and one commented source file that
