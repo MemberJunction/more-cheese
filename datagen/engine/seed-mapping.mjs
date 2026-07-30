@@ -43,6 +43,12 @@ export const CONTACT_TYPE_VAR = {
   LinkedIn: '@CT_LinkedIn', Website: '@CT_Website',
 };
 export const ADDRESS_TYPE_VAR = { Home: '@AT_Home', Work: '@AT_Work', Mailing: '@AT_Mailing' };
+/** bizapps-common seeds OrganizationType (legal structure) — referenced by NAME (F6) */
+export const ORG_TYPE_VAR = {
+  'Sole Proprietorship': '@OT_Sole', LLC: '@OT_LLC', Partnership: '@OT_Partnership',
+  Corporation: '@OT_Corp', 'Non-Profit': '@OT_NonProfit',
+  'Educational Institution': '@OT_EduInst', Association: '@OT_Association',
+};
 
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
 // THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
@@ -58,6 +64,7 @@ export const MAPPING = {
       json: 'organizations', table: '[__mj_BizAppsCommon].[Organization]',
       columns: (r) => ({
         ID: sqlId(uuidFor('org', r.OrgKey)), Name: sqlStr(r.Name),
+        OrganizationTypeID: sqlVar(r.OrganizationTypeName ? ORG_TYPE_VAR[r.OrganizationTypeName] : 'NULL'),
         LegalName: sqlStr(r.LegalName ?? null), Website: sqlStr(r.Website ?? null),
         Phone: sqlStr(r.Phone ?? null), FoundedDate: sqlDate(r.FoundedDate ?? null),
         // their Status CHECK: Active|Inactive|Dissolved — our dissolution stories map straight on
@@ -118,6 +125,7 @@ export const MAPPING = {
         ID: sqlId(uuidFor('person', r.MemberNumber)),
         FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), MiddleName: sqlStr(r.MiddleName), PreferredName: sqlStr(r.PreferredName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
         Prefix: sqlStr(r.Prefix ?? null), Suffix: sqlStr(r.Suffix ?? null), Phone: sqlStr(r.Phone ?? null),
+        Bio: sqlStr(r.Bio ?? null),
         Gender: sqlStr(r.Gender ?? null), DateOfBirth: sqlDate(r.DateOfBirth ?? null),
         Status: sqlStr('Active'), // member-lifecycle states live on MembershipPeriod, never here (memo §2.2)
       }),
@@ -722,6 +730,13 @@ export const PREAMBLE = {
     "DECLARE @AT_Home UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Home');",
     "DECLARE @AT_Work UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Work');",
     "DECLARE @AT_Mailing UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[AddressType] WHERE Name = N'Mailing');",
+    "DECLARE @OT_Sole UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Sole Proprietorship');",
+    "DECLARE @OT_LLC UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'LLC');",
+    "DECLARE @OT_Partnership UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Partnership');",
+    "DECLARE @OT_Corp UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Corporation');",
+    "DECLARE @OT_NonProfit UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Non-Profit');",
+    "DECLARE @OT_EduInst UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Educational Institution');",
+    "DECLARE @OT_Association UNIQUEIDENTIFIER = (SELECT ID FROM [__mj_BizAppsCommon].[OrganizationType] WHERE Name = N'Association');",
     "DECLARE @E_People UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: People');",
     "DECLARE @E_Organizations UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Common: Organizations');",
   ],

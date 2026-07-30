@@ -48,7 +48,8 @@ const MAPPING = [
     pack: 'common', json: 'organizations', dir: 'organizations', entity: 'MJ_BizApps_Common: Organizations',
     record: (r) => ({
       primaryKey: { ID: uuidFor('org', r.OrgKey) },
-      fields: { Name: r.Name, LegalName: r.LegalName ?? null, Website: r.Website ?? null, Phone: r.Phone ?? null, FoundedDate: r.FoundedDate ?? null, Status: r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active' },
+      fields: { OrganizationTypeID: r.OrganizationTypeName ? `@lookup:MJ_BizApps_Common: Organization Types.Name=${r.OrganizationTypeName}` : null,
+        Name: r.Name, LegalName: r.LegalName ?? null, Website: r.Website ?? null, Phone: r.Phone ?? null, FoundedDate: r.FoundedDate ?? null, Status: r.LifecycleEvent?.kind === 'Dissolved' ? 'Dissolved' : 'Active' },
     }),
   },
   {
@@ -69,7 +70,7 @@ const MAPPING = [
     pack: 'common', json: 'people', dir: 'people', entity: 'MJ_BizApps_Common: People',
     record: (r) => ({
       primaryKey: { ID: uuidFor('person', r.MemberNumber) },
-      fields: { FirstName: r.FirstName, LastName: r.LastName, MiddleName: r.MiddleName, PreferredName: r.PreferredName, Title: r.Title, Email: r.Email, Prefix: r.Prefix ?? null, Suffix: r.Suffix ?? null, Phone: r.Phone ?? null, Gender: r.Gender ?? null, DateOfBirth: r.DateOfBirth ?? null, Status: 'Active' },
+      fields: { Bio: r.Bio ?? null, FirstName: r.FirstName, LastName: r.LastName, MiddleName: r.MiddleName, PreferredName: r.PreferredName, Title: r.Title, Email: r.Email, Prefix: r.Prefix ?? null, Suffix: r.Suffix ?? null, Phone: r.Phone ?? null, Gender: r.Gender ?? null, DateOfBirth: r.DateOfBirth ?? null, Status: 'Active' },
     }),
   },
   {
@@ -138,7 +139,7 @@ const MAPPING = [
   { pack: 'common', json: 'address_links', dir: 'address-links', entity: 'MJ_BizApps_Common: Address Links',
     record: (r) => ({ primaryKey: { ID: uuidFor('addresslink', r.LinkKey) }, fields: {
       AddressID: uuidFor('address', r.AddressKey),
-      EntityID: `@lookup:Entities.Name=${r.EntityName}`,
+      EntityID: `@lookup:MJ: Entities.Name=${r.EntityName}`,
       RecordID: uuidFor(r.RecordKind === 'org' ? 'org' : 'person', r.RecordKey),
       AddressTypeID: `@lookup:MJ_BizApps_Common: Address Types.Name=${r.AddressTypeName}`,
       IsPrimary: r.IsPrimary, Rank: r.Rank,

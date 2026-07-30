@@ -125,7 +125,22 @@ export function runRenewalUnroll(cfg, people, orgs) {
         // than just showing more of the usual
         reason = CV.churnReason;
       } else reason = M.churnReasons ? rReason.pickWeighted(M.churnReasons.weights) : 'non-payment — lapsed past grace';
-      pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
+      // LAPSE vs CANCELLATION: a lapse is silence (the renewal never gets paid, grace runs out,
+      // staff infer the reason later). A cancellation is a member who TOLD us mid-term — the churn
+      // a retention team could have worked. Only active-decision reasons qualify; nobody phones in
+      // to announce a non-payment. Heroes are excluded so their pinned statuses hold.
+      const CAN = M.cancellation;
+      const activeDecision = CAN && !CAN.passiveReasons.includes(reason);
+      const toldUs = activeDecision && !c.p._hero && rReason.bernoulli(CAN.toldUsShareOfActiveReasons);
+      if (toldUs) {
+        const [lo, hi] = CAN.noticeDaysBeforeEnd;
+        const notice = addDays(c.st.end, -rReason.int(lo, hi));
+        // notice cannot predate the term it cancels
+        const noticeDate = notice < c.st.start ? c.st.start : notice;
+        pushPeriod(c.p, c.st.start, c.st.end, 'Cancelled', noticeDate, reason);
+      } else {
+        pushPeriod(c.p, c.st.start, c.st.end, 'Lapsed', cancellation, reason);
+      }
       c.st.alive = false;
     },
   });
@@ -153,7 +168,7 @@ export function applyArchiveRule(cfg, people, periods) {
   const cutoff = iso(addYears(cfg.release, -3));
   const archived = new Set();
   for (const [m, per] of lastPer) {
-    if (per.Status === 'Lapsed' && per.CancellationDate && per.CancellationDate < cutoff) archived.add(m);
+    if ((per.Status === 'Lapsed' || per.Status === 'Cancelled') && per.CancellationDate && per.CancellationDate < cutoff) archived.add(m);
   }
   for (const h of cfg.R.heroes) archived.delete(h.memberNumber);
   // stamped motif members are pointable stories — they must survive in the DB, like heroes

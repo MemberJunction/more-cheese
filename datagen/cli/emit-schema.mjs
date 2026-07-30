@@ -58,6 +58,9 @@ const TABLES = [
     c('PhotoURL', s(1000), { null: true }), c('Bio', 'NVARCHAR(MAX)', { null: true }),
     c('LinkedUserID', UID, { null: true }), c('Status', s(50)),
   ] },
+  { schema: '__mj_BizAppsCommon', table: 'OrganizationType', cols: [
+    c('ID', UID, { pk: true }), c('Name', s(100)),
+  ] },
   { schema: '__mj_BizAppsCommon', table: 'ContactType', cols: [
     c('ID', UID, { pk: true }), c('Name', s(100)),
   ] },
@@ -395,6 +398,15 @@ for (const [id, name, cat, fwd, rev] of REL_TYPE_SEEDS) {
 // playground seeds for APP-OWNED lookups our data references by name (real installs ship
 // their own — the name guards keep this inert there; integration finding F6)
 const LOOKUP_SEEDS = [
+  ['[__mj_BizAppsCommon].[OrganizationType]', '(ID, Name)', [
+    ["'B17B8944-8B53-5765-B80E-58649DAF5F4B'", "N'Sole Proprietorship'"],
+    ["'B059E177-FCC5-5DDA-8E2E-85388315B971'", "N'LLC'"],
+    ["'2C43B175-2652-588A-B713-E581839C77A2'", "N'Partnership'"],
+    ["'7A60C984-E74C-5981-9C6E-FE4A225B1476'", "N'Corporation'"],
+    ["'E5869F17-98F1-5E08-91EB-C83526B766C3'", "N'Non-Profit'"],
+    ["'0A37DCE8-4D7A-5F52-AD78-0DEE0881B09F'", "N'Educational Institution'"],
+    ["'B60A9721-55A3-502D-8EB0-CEECD8B63F16'", "N'Association'"],
+  ]],
   ['[__mj_BizAppsCommon].[ContactType]', '(ID, Name)', [
     ["'CA0071DB-C59A-5E5F-98E7-AAABAFF46505'", "N'Email'"],
     ["'7989C047-9A3C-5BE2-B26F-CE279FFC6701'", "N'Mobile Phone'"],

@@ -47,7 +47,8 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   const facts = {
     MEMBER_COUNT: people.length,
     PENDING_RENEWALS: pendingMembers.length,
-    LAPSED_2025: periods.filter((x) => x.Status === 'Lapsed' && String(x.EndDate).startsWith('2025')).length,
+    // "lost in 2025" means both ways a membership ends — lapsed (silence) and cancelled (they told us)
+    LAPSED_2025: periods.filter((x) => (x.Status === 'Lapsed' || x.Status === 'Cancelled') && String(x.EndDate).startsWith('2025')).length,
     OPEN_BILLING: issues.issues.filter((i) => i.TypeKey === 'Billing' && openIssue(i)).length,
     TOP_SEGMENT: topSegment[0],
     TOP_SEGMENT_COUNT: topSegment[1],

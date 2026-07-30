@@ -229,6 +229,30 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     };
   });
 
+  // ---------- presence floor: Critical must exist ----------
+  // Critical is rare by design and lives only on Billing and Events. At demo scale the Billing
+  // population is ~5 tickets, so 10% Critical means the DRAW yields none about half the time —
+  // and the severity gate's tolerance band happily passes on zero, so nobody notices that a
+  // support demo has no critical ticket in it. Promote the highest-impact eligible ticket
+  // instead: deterministic, consumes no randomness, and only fires when the draws came up dry.
+  {
+    const want = I.severity.criticalFloor ?? 0;
+    const have = issues.filter((x) => x.Severity === 'Critical').length;
+    if (want > have) {
+      const eligible = issues
+        .filter((x) => (I.severity.byType[x.TypeKey] ?? []).some(([lvl, w]) => lvl === 'Critical' && w > 0))
+        .filter((x) => x.Severity !== 'Critical')
+        // worst first: highest severity already assigned, then oldest (a long-running
+        // escalation is the believable candidate), then key for a total order
+        .sort((a, b) => (LADDER.indexOf(b.Severity) - LADDER.indexOf(a.Severity))
+          || String(a.IssueNumber).localeCompare(String(b.IssueNumber)));
+      for (const row of eligible.slice(0, want - have)) {
+        row.Severity = 'Critical';
+        if (LADDER.indexOf(row.Priority) < LADDER.indexOf('High')) row.Priority = 'High';
+      }
+    }
+  }
+
   // ---------- comments: the activity feed every ticket lacked ----------
   // Derived from the ticket's own state, so a resolved ticket reads like one. The table has
   // no author-settable timestamp (only the system __mj_CreatedAt, which the entity SPs

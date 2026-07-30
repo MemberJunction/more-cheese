@@ -4,6 +4,15 @@
     "ratioToMembers": 0.25,
     "producerShare": 0.45,
     "lifecycleEventRatePerYear": 0.02,
+    "legalStructure": {
+      "$note": "ESTIMATE — bizapps-common's OrganizationType is LEGAL STRUCTURE, orthogonal to our business Type (a creamery can be an LLC or a partnership). That FK sat NULL on all 641 organizations, so the column rendered blank in their org grids. Names are the app's own seeded values (finding F6) — 'Educational Institution' and 'Sole Proprietorship' carry spaces.",
+      "byType": {
+        "Producer": [["Sole Proprietorship", 0.34], ["LLC", 0.33], ["Partnership", 0.18], ["Corporation", 0.15]],
+        "Retailer": [["LLC", 0.42], ["Corporation", 0.3], ["Sole Proprietorship", 0.28]],
+        "Supplier": [["Corporation", 0.55], ["LLC", 0.35], ["Partnership", 0.1]],
+        "Educator": [["Educational Institution", 0.62], ["Non-Profit", 0.26], ["Association", 0.12]]
+      }
+    },
     "$note": "lifecycle events (dissolved/acquired/program-cut) feed arrow 1.15 and the Anna/Bob/Danielle-class churn stories"
   },
   "geography": {
