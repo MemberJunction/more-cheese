@@ -139,7 +139,7 @@ const MAPPING = [
   { pack: 'common', json: 'address_links', dir: 'address-links', entity: 'MJ_BizApps_Common: Address Links',
     record: (r) => ({ primaryKey: { ID: uuidFor('addresslink', r.LinkKey) }, fields: {
       AddressID: uuidFor('address', r.AddressKey),
-      EntityID: `@lookup:Entities.Name=${r.EntityName}`,
+      EntityID: `@lookup:MJ: Entities.Name=${r.EntityName}`,
       RecordID: uuidFor(r.RecordKind === 'org' ? 'org' : 'person', r.RecordKey),
       AddressTypeID: `@lookup:MJ_BizApps_Common: Address Types.Name=${r.AddressTypeName}`,
       IsPrimary: r.IsPrimary, Rank: r.Rank,
