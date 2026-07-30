@@ -86,16 +86,30 @@ Two documented rules do not fit a generated app, and we knowingly diverge:
   additive migration instead.
 - **"Push, then capture."** Correct at hand-authored scale, the weakest link at ours.
 
-## Recommended next step
+## This is settled
 
-Replace the capture with a **generated** metadata migration — an `emit-metadata-migration.mjs`
-that renders the same `spCreate` calls from the packs. That would:
+Metadata-first through the entity SPs is the approach, and the capture is how it ships. The
+alternative — rendering the SQL ourselves from the packs — was considered and **rejected**: it
+would mean this app writing its own version of calls that belong to the dependency apps'
+procedures, and drifting the moment those procedures change. The INSERT path stays what it is
+today: `platform` only, for state the SPs refuse to forge.
 
-- keep the metadata-first ruling exactly as it is;
-- make the shipped seed reproducible in seconds instead of 20 minutes;
-- allow CI to verify it with an emit-and-diff check, so it can never silently rot;
-- be provable: regenerate the OLD data with it and diff byte-for-byte against the committed
-  capture.
+So the capture's cost is accepted rather than engineered away. What that means in practice:
 
-Until that exists, the seed's currency has to be checked by hand — which is the single largest
-source of process friction in this repo.
+- **~22 minutes, by hand, on a database prepared exactly as described above.** Not runnable in CI.
+- **It goes stale silently.** Nothing fails when the generator moves ahead of the shipped seed;
+  it has drifted five times, most recently by 19,823 rows. Until a gate compares the capture's
+  `Total Statements` footer against the tree's record count, checking currency is a manual step —
+  do it before any release PR.
+- **Re-capture after any generator change that alters row counts or shapes**, following
+  `INTEGRATION-RUNBOOK.md` (addendum 2026-07-28) step by step. Steps 3–5 there — the F6 lookup
+  rules, F11's Sonar FK cycle, and enabling `sqlLogging` only AFTER the emit — are the ones that
+  bite; all three bit again on 2026-07-30 despite being written down.
+
+## A hazard worth remembering
+
+A migration that hand-creates rows the capture also creates will collide on the pinned ID and
+**fail a fresh install** — nothing catches it, because it cannot fail on an existing database.
+`MetadataSync_Sonar.sql` did exactly this once Sonar moved to metadata delivery, and was deleted
+2026-07-30. Before adding any hand-authored metadata migration, check the capture does not already
+carry those rows.
