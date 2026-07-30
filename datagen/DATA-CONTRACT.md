@@ -8,6 +8,9 @@ release 2026-07-31). Companion docs: `INTEGRATION-RUNBOOK.md` (install sequence 
 
 ---
 
+> Delivery: how these rows reach a database — the metadata-first ruling, the pinned `platform`
+> exception, and which artefacts are generated vs captured — is in [`DELIVERY.md`](DELIVERY.md).
+
 ## 1. The generation model, in four sentences
 
 Generation is a **pure function of (ruleset, seed, scale, releaseDate)** — no clock, no
