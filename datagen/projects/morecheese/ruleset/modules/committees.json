@@ -53,6 +53,18 @@
         "mission": "Course catalog, certification pathways, and the conference workshop program."
       },
       {
+        "name": "Awards & Competition Committee",
+        "type": "Standing",
+        "formed": "2015-01-01",
+        "mission": "Judging protocol, category definitions, and stewardship of the annual cheese competition."
+      },
+      {
+        "name": "Events Committee",
+        "type": "Standing",
+        "formed": "2016-09-01",
+        "mission": "Annual conference program, regional workshops, and the webinar calendar."
+      },
+      {
         "name": "Membership & Outreach Committee",
         "type": "Standing",
         "formed": "2017-09-01",
@@ -92,7 +104,9 @@
       }
     ],
     "participation": {
-      "shareOfEligible": 0.06,
+      "shareOfEligible": 0.105,
+      "minRosterPerTerm": 3,
+      "$rosterNote": "Committees are CONSTITUTED, not just volunteered for: bylaws set a minimum and a chair does not run a committee of one. The volunteer draw alone left 7 of 35 committee-terms below three members — the early years and the newly-formed committees, where the eligible pool was smallest. Short terms are topped up from the most engaged eligible members who are not already serving, which strengthens rather than weakens the engagement arrow.",
       "tolerance": 0.02,
       "$note": "share of term-start-covered members who serve on a committee; engaged members volunteer (theta arrow). ESTIMATE (confidence: low, researched 2026-07-16 - no direct published benchmark exists): consistent with ASAE Foundation's Decision to Volunteer study (Gazley & Dignam 2008, 26,305 respondents) finding 30% of members have EVER volunteered in any capacity - current committee service is a small subset of that. MGI benchmarking reports publish no members-on-committees share.",
       "arrows": {

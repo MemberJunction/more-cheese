@@ -33,7 +33,12 @@ export function buildContacts(cfg, people, orgs) {
     if (!row.AddressLine1 || !row.City || !row.Country) return;
     addresses.push({
       AddressKey: key, Line1: row.AddressLine1, Line2: row.AddressLine2 ?? null,
-      City: row.City, StateProvince: row.State ?? null, PostalCode: row.PostalCode ?? null,
+      City: row.City,
+      // MemberProfile.State keeps the ISO subdivision code (US-NY) — right for a profile field
+      // and for segmentation. On an ADDRESS line it reads wrong: a real address says 'Brooklyn,
+      // NY', never 'Brooklyn, US-NY'. Strip the country prefix here only.
+      StateProvince: row.State ? String(row.State).replace(/^[A-Z]{2}-/, '') : null,
+      PostalCode: row.PostalCode ?? null,
       Country: row.CountryName ?? row.Country, Latitude: row.Latitude ?? null, Longitude: row.Longitude ?? null,
     });
     addressLinks.push({

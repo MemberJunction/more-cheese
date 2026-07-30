@@ -40,6 +40,32 @@
   },
   {
     "primaryKey": {
+      "ID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E"
+    },
+    "fields": {
+      "Name": "Awards & Competition Committee",
+      "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
+      "MissionStatement": "Judging protocol, category definitions, and stewardship of the annual cheese competition.",
+      "Status": "Active",
+      "IsPublic": true,
+      "FormationDate": "2015-01-01"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842"
+    },
+    "fields": {
+      "Name": "Events Committee",
+      "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
+      "MissionStatement": "Annual conference program, regional workshops, and the webinar calendar.",
+      "Status": "Active",
+      "IsPublic": true,
+      "FormationDate": "2016-09-01"
+    }
+  },
+  {
+    "primaryKey": {
       "ID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA"
     },
     "fields": {

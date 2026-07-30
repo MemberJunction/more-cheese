@@ -81,6 +81,28 @@ export function buildCommittees(cfg, people, periods) {
       }
     }
   }
+  // roster floor: a committee-term below the bylaws minimum is topped up from the most engaged
+  // eligible members not already serving it. Deterministic (theta order, member number as the
+  // tie-break), runs before officers are promoted so a chair always has a real committee.
+  {
+    const min = C.participation.minRosterPerTerm ?? 0;
+    if (min > 0) {
+      for (const t of C.terms) {
+        for (const c of C.list) {
+          if (t.end < c.formed) continue; // the term does not exist for this committee
+          const key = `${c.name}:${t.start}`;
+          const roster = rosterByTerm.get(key) ?? [];
+          if (roster.length >= min) continue;
+          const serving = new Set(roster.map((m) => m.p.MemberNumber));
+          const pool = people
+            .filter((p) => !p._hero && coveredOn(p.MemberNumber, t.start) && !serving.has(p.MemberNumber))
+            .sort((a, b) => (b._theta - a._theta) || (a.MemberNumber < b.MemberNumber ? -1 : 1));
+          for (const p of pool.slice(0, min - roster.length)) pushMembership(p, c.name, t, 'Member');
+        }
+      }
+    }
+  }
+
   // officers: any committee-term without a pinned Chair/Vice Chair promotes its
   // longest-standing members (deterministic: lowest member number = earliest joiner block)
   for (const [key, roster] of rosterByTerm) {

@@ -38,6 +38,11 @@ const allPeople = load('common', 'people');
 const people = allPeople.filter((p) => !p.IsProspect);
 const prospects = allPeople.filter((p) => p.IsProspect);
 const prospectKeys = new Set(prospects.map((p) => p.MemberNumber));
+// A membership can end two ways: LAPSED (silence — the renewal never arrived) or CANCELLED (the
+// member told us mid-term). Both are terminal, so every gate that means "left" must count both;
+// gates that specifically mean "lapsed" still say Lapsed.
+const ENDED = new Set(['Lapsed', 'Cancelled']);
+const hasEnded = (status) => ENDED.has(status);
 const orgs = load('common', 'organizations');
 const periods = load('membership', 'membership_periods');
 const events = load('events', 'events');
@@ -135,6 +140,58 @@ function checkPacks() {
   const badTermC = cTerms.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
   const badMeetC = cMeetings.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
   check('pack refs: memberships→terms + terms/meetings→committees', badMemTerm + badTermC + badMeetC === 0, `${badMemTerm}+${badTermC}+${badMeetC} dangling`);
+  // ADDRESS REALISM — all three of these were found by opening bizapps-common's address grid,
+  // not by any gate. They are invisible in the packs and obvious on screen.
+  {
+    const prefixed = addresses.filter((a) => /^[A-Z]{2}-/.test(a.StateProvince ?? '')).length;
+    check('addresses: StateProvince has no country prefix (NY, not US-NY)', prefixed === 0,
+      prefixed ? `${prefixed} addresses read like 'Brooklyn, US-NY'` : `${addresses.length} addresses`);
+    // US ZIPs must sit in their state's real band — Brooklyn reading 82173 (Wyoming) is a tell
+    const BAND = { 'US-CA': [900, 961], 'US-CO': [800, 816], 'US-ID': [832, 838], 'US-IL': [600, 629],
+      'US-NC': [270, 289], 'US-NY': [100, 149], 'US-OR': [970, 979], 'US-PA': [150, 196],
+      'US-TX': [750, 799], 'US-VT': [50, 59], 'US-WA': [980, 994], 'US-WI': [530, 549] };
+    const usPeople = new Map(allPeople.filter((x) => x.Country === 'US').map((x) => [x.MemberNumber, x.State]));
+    const usAddrs = addresses.filter((a) => a.Country === 'United States' && a.PostalCode);
+    const offBand = usAddrs.filter((a) => {
+      const st = usPeople.get(String(a.AddressKey).replace(/^person:/, ''));
+      const band = BAND[st];
+      if (!band) return false;
+      const z3 = Number(String(a.PostalCode).slice(0, 3));
+      return z3 < band[0] || z3 > band[1];
+    }).length;
+    check('addresses: US ZIP prefixes match their state', offBand === 0,
+      offBand ? `${offBand} of ${usAddrs.length} US ZIPs outside the state band` : `${usAddrs.length} US addresses`);
+    // a localised street word must not be bolted to an English name ("Calle Mill", "Rue Dairy")
+    const ENGLISH = /\b(Mill|Church|Orchard|Market|Meadow|Bridge|High|Cave|Dairy|Creamery|Spring)\b/;
+    const romance = new Set(['France', 'Italy', 'Spain', 'Portugal', 'Mexico', 'Argentina']);
+    const mixed = addresses.filter((a) => romance.has(a.Country) && ENGLISH.test(a.Line1 ?? '')).length;
+    check('addresses: street names are in the street\'s own language', mixed === 0,
+      mixed ? `${mixed} like 'Calle Mill' / 'Rue Dairy'` : `${addresses.filter((a) => romance.has(a.Country)).length} romance-language addresses`);
+  }
+  // blank columns are how generated data gives itself away: the legal-structure FK sat NULL on
+  // every organization, and Person.Bio on every person. Both are app-owned fields their UIs show.
+  {
+    const structures = new Set(Object.values(R.orgs.legalStructure.byType).flat().map(([n]) => n));
+    const withType = orgs.filter((o) => o.OrganizationTypeName);
+    const badName = withType.filter((o) => !structures.has(o.OrganizationTypeName)).length;
+    check(`orgs: all ${orgs.length} carry a legal structure from the app's seeded list`,
+      withType.length === orgs.length && badName === 0, `${withType.length}/${orgs.length} set, ${badName} off-list`);
+    // and it must not simply mirror our business Type — they are orthogonal dimensions
+    const perType = new Map();
+    for (const o of withType) {
+      if (!perType.has(o.Type)) perType.set(o.Type, new Set());
+      perType.get(o.Type).add(o.OrganizationTypeName);
+    }
+    const collapsed = [...perType].filter(([, set]) => set.size < 2).map(([t]) => t);
+    check('orgs: legal structure varies within each business type (not a relabelled Type)',
+      collapsed.length === 0, collapsed.length ? `single structure for: ${collapsed.join(', ')}` : `${perType.size} business types`);
+    const bios = allPeople.filter((x) => x.Bio);
+    const share = bios.length / Math.max(1, allPeople.length);
+    check(`people: ${bios.length} bios written (${(share * 100).toFixed(0)}% of profiles)`,
+      bios.length > 0 && share < 0.75, 'a minority write one; nobody having one is the tell');
+    check('people: bios are distinct prose, not one template', new Set(bios.map((x) => x.Bio)).size > Math.min(20, bios.length * 0.5),
+      `${new Set(bios.map((x) => x.Bio)).size} distinct of ${bios.length}`);
+  }
   // contact/address rows are bizapps-common's OWN tables — every owner must resolve, and the
   // TYPE names must be ones that app seeds (we reference them by name and never emit them: F6)
   {
@@ -264,8 +321,13 @@ function checkPacks() {
 function checkTemporal() {
   const badStart = periods.filter((x) => x.StartDate < joinOf.get(x.MemberNumber)).length;
   const badOrder = periods.filter((x) => x.EndDate <= x.StartDate).length;
-  const lapsedNoCancel = periods.filter((x) => x.Status === 'Lapsed' && x.CancellationDate === null && x.EndDate < run.releaseDate).length;
-  const cancelBeforeEnd = periods.filter((x) => x.CancellationDate && x.CancellationDate < x.EndDate).length;
+  const lapsedNoCancel = periods.filter((x) => hasEnded(x.Status) && x.CancellationDate === null && x.EndDate < run.releaseDate).length;
+  // grace runs AFTER the term for a lapse; notice is given BEFORE the term ends for a cancellation,
+  // and cannot predate the term it cancels
+  const cancelBeforeEnd = periods.filter((x) => x.CancellationDate
+    && (x.Status === 'Cancelled'
+      ? (x.CancellationDate > x.EndDate || x.CancellationDate < x.StartDate)
+      : x.CancellationDate < x.EndDate)).length;
   let gaps = 0;
   for (const list of periodsByMember.values()) {
     list.sort((a, b) => a.StartDate.localeCompare(b.StartDate));
@@ -292,6 +354,22 @@ function checkTemporal() {
   check(`membership: churn reasons varied (${reasonCount} kinds, non-payment ${totalReasons ? Math.round(nonPay / totalReasons * 100) : 0}%)`,
     reasonCount >= 5 && (!totalReasons || nonPay / totalReasons < 0.75), 'voluntary churn must appear');
   check('CancellationDate ≥ EndDate (grace runs after)', cancelBeforeEnd === 0, `${cancelBeforeEnd} bad`);
+  // PRESENCE FLOOR (same lesson as issue severity): the schema's CHECK allows five period
+  // statuses and we shipped four — 8,024 periods and not one Cancelled — while every share-based
+  // gate stayed green, because no gate asserted the bucket existed. Any status the CHECK permits
+  // and the generator can produce must actually appear.
+  {
+    const produced = ['Active', 'Renewed', 'Lapsed', 'PendingRenewal', 'Cancelled'];
+    const missing = produced.filter((st) => !periods.some((x) => x.Status === st));
+    check(`periods: every producible status appears (${produced.length} of the CHECK's values)`, missing.length === 0,
+      missing.length ? `never produced: ${missing.join(', ')}` : produced.map((st) => `${st}=${periods.filter((x) => x.Status === st).length}`).join(' '));
+    // and the two terminal kinds must be distinguishable, not one relabelled
+    const cancelled = periods.filter((x) => x.Status === 'Cancelled');
+    const passive = new Set(R.membership.cancellation?.passiveReasons ?? []);
+    const wrongReason = cancelled.filter((x) => passive.has(x.CancellationReason)).length;
+    check(`periods: ${cancelled.length} cancellations all carry an active-decision reason`, wrongReason === 0,
+      `${wrongReason} cancelled with a non-payment reason (nobody phones in to announce one)`);
+  }
   check('renewals back-date: no gaps between periods', gaps === 0, `${gaps} gaps`);
   // THE FUNNEL EXCEPTION: a free webinar attended BEFORE joining is the whole point of
   // funnel.mjs — the prologue to a membership, not a coverage bug. Paid seats and anything
@@ -390,7 +468,7 @@ function checkBenchmarks() {
     // RETENTION: the pandemic's effect on churn must be findable in the shipped data, not
     // only in the validator's private event log. The archive rule used to swallow the whole
     // 2020-21 lapse cohort, so this is the trace that was missing entirely.
-    const lapsesIn = (y) => periods.filter((x) => x.Status === 'Lapsed' && x.EndDate.startsWith(String(y))).length;
+    const lapsesIn = (y) => periods.filter((x) => hasEnded(x.Status) && x.EndDate.startsWith(String(y))).length;
     const cohortFloor = Math.max(3, Math.round(people.length * 0.008));
     check(`covid: the lapse cohort survives archiving (${cy.map(lapsesIn).join('/')} retained, floor ${cohortFloor})`, cy.every((y) => lapsesIn(y) >= cohortFloor), 'the era must be visible in membership history');
     const pandemicLapses = periods.filter((x) => x.CancellationReason === CV.churnReason).length;
@@ -686,7 +764,7 @@ function checkEngagementDynamics() {
   let finalSum = 0, earlierSum = 0, members = 0;
   for (const [m, list] of periodsByMember) {
     const last = list[list.length - 1];
-    if (last.Status !== 'Lapsed') continue;
+    if (!hasEnded(last.Status)) continue;
     const joinYear = +list[0].StartDate.slice(0, 4);
     const lastYear = +last.EndDate.slice(0, 4);
     if (isCovid(lastYear)) continue;
@@ -791,6 +869,17 @@ function checkComposedApps() {
     const allow = II.severity.tolerance + 3 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
     check(`issues: severity ${level} ${(got * 100).toFixed(1)}% vs ${(want * 100).toFixed(1)}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${issues.length} issues`);
   }
+  // PRESENCE FLOOR — the share gates above cannot see an empty bucket: a level whose expected
+  // share is 0.5% passes its ±6pt band at exactly zero rows. That is how a support demo shipped
+  // with no Critical ticket in it while every gate stayed green. Any severity the ruleset gives a
+  // positive weight must actually appear.
+  {
+    const declared = ['Critical', 'High', 'Medium', 'Low']
+      .filter((lvl) => II.types.some((t) => ((II.severity.byType[t.name] ?? []).find(([l]) => l === lvl)?.[1] ?? 0) > 0));
+    const missing = declared.filter((lvl) => !issues.some((x) => x.Severity === lvl));
+    check(`issues: every declared severity actually appears (${declared.length} levels)`, missing.length === 0,
+      missing.length ? `never drawn: ${missing.join(', ')}` : declared.map((l) => `${l}=${issues.filter((x) => x.Severity === l).length}`).join(' '));
+  }
   check('issues: severity and priority are decoupled (differ on some issues)', issues.some((x) => x.Severity !== x.Priority), `${issues.filter((x) => x.Severity !== x.Priority).length} differ`);
   // issues: assignment coverage rides the declared share; assignees are committee officers
   const assigned = issues.filter((x) => x.AssigneeMemberNumber);
@@ -881,7 +970,7 @@ function checkComposedApps() {
     // a disparity we fabricated.
     const lastStatusOf = new Map();
     for (const [m, list] of periodsByMember) lastStatusOf.set(m, list[list.length - 1].Status);
-    const popLapsed = crowd.filter((p) => lastStatusOf.get(p.MemberNumber) === 'Lapsed').length / Math.max(1, crowd.length);
+    const popLapsed = crowd.filter((p) => hasEnded(lastStatusOf.get(p.MemberNumber))).length / Math.max(1, crowd.length);
     // engagement must be measured on something OBSERVABLE — the latent theta is stripped
     // from the shipped pack, so reading it here silently compares zeroes (this gate failed
     // its own negative test that way). Registrations per member is the visible proxy.
@@ -899,7 +988,7 @@ function checkComposedApps() {
       // 3·SE, not 2, because four groups are tested at once — the repo's standing
       // multiple-comparisons budget.
       if (grp.length < 120) continue;
-      const lapsed = grp.filter((p) => lastStatusOf.get(p.MemberNumber) === 'Lapsed').length / grp.length;
+      const lapsed = grp.filter((p) => hasEnded(lastStatusOf.get(p.MemberNumber))).length / grp.length;
       const seL = Math.sqrt(popLapsed * (1 - popLapsed) / grp.length);
       if (Math.abs(lapsed - popLapsed) > 0.03 + 3 * seL) skews.push(`${g} lapse ${(lapsed * 100).toFixed(0)}% vs ${(popLapsed * 100).toFixed(0)}%`);
       const act = grp.reduce((s, p) => s + actOf(p), 0) / grp.length;
@@ -917,7 +1006,7 @@ function checkComposedApps() {
     for (const v of ['White', 'Asian', 'Black or African American', 'Prefer not to say']) {
       const grp = crowd.filter((p) => p.RaceEthnicity === v);
       if (grp.length < 120) continue;
-      const lapsed = grp.filter((p) => lastStatusOf.get(p.MemberNumber) === 'Lapsed').length / grp.length;
+      const lapsed = grp.filter((p) => hasEnded(lastStatusOf.get(p.MemberNumber))).length / grp.length;
       if (Math.abs(lapsed - popLapsed) > 0.03 + 3 * Math.sqrt(popLapsed * (1 - popLapsed) / grp.length)) raceSkews.push(`${v} lapse ${(lapsed * 100).toFixed(0)}%`);
       const act = grp.reduce((s, p) => s + actOf(p), 0) / grp.length;
       if (Math.abs(act - popAct) > 2.5 * (actSd / Math.sqrt(grp.length))) raceSkews.push(`${v} activity ${act.toFixed(2)}`);
@@ -1051,6 +1140,17 @@ function checkComposedApps() {
     const termYears = [...new Set(cTerms.map((t) => t.StartDate.slice(0, 4)))].sort();
     const earliestFormed = cCommittees.map((c) => c.FormationDate).sort()[0]?.slice(0, 4);
     check(`committees: history spans ${termYears.length} terms from ${termYears[0]} (earliest formed ${earliestFormed})`, termYears.length >= 4, 'governance must not start yesterday');
+    // roster floor: a committee-term below the bylaws minimum has no quorum and no believable
+    // vote. This is the tail the volunteer draw alone leaves behind, so assert it directly rather
+    // than trusting the participation average.
+    {
+      const min = CC.participation.minRosterPerTerm ?? 0;
+      const byTerm = new Map();
+      for (const m of cMemberships) byTerm.set(m.TermKey, (byTerm.get(m.TermKey) ?? 0) + 1);
+      const short = [...byTerm].filter(([, n]) => n < min);
+      check(`committees: every term meets the ${min}-member minimum (${byTerm.size} terms, smallest ${Math.min(...byTerm.values())})`,
+        min === 0 || short.length === 0, short.length ? short.map(([k, n]) => `${k}=${n}`).join(', ') : 'no under-quorum committee-terms');
+    }
     const noTermBeforeFormed = cTerms.filter((t) => { const c = cCommittees.find((x) => x.CommitteeKey === t.CommitteeKey); return c && t.EndDate < c.FormationDate; }).length;
     check('committees: no term predates its committee formation', noTermBeforeFormed === 0, `${noTermBeforeFormed} bad`);
     // and no SEAT predates it either — the term guard alone left members serving on
@@ -1182,7 +1282,7 @@ function checkStatusMix() {
   // rewriting the federation's headline composition.
   const archiveCutoff = iso2(addDays2(new Date(run.releaseDate), -3 * 365 - 1));
   const keptPastArchive = new Set(periods
-    .filter((x) => x.Status === 'Lapsed' && x.CancellationDate && x.CancellationDate < archiveCutoff)
+    .filter((x) => hasEnded(x.Status) && x.CancellationDate && x.CancellationDate < archiveCutoff)
     .map((x) => x.MemberNumber));
   const excluded = (m) => pinnedLapse.has(m) || keptPastArchive.has(m);
   const counts = { Active: 0, Lapsed: 0, Cancelled: 0, PendingRenewal: 0 };
@@ -1393,6 +1493,17 @@ function checkPlatform() {
   // the renewal-outreach list holds EXACTLY the pending-renewal members (derived, not invented)
   const pending = [...lastPeriod.values()].filter((per) => per.Status === 'PendingRenewal').length;
   const listRows = pListDetails.filter((d) => d.ListKey === 'renewal-outreach').length;
+  // volume, per persona: a demo logs in AS someone, and one saved view is not a workspace.
+  // (The gate above only proves each persona has at least one of each artefact.)
+  {
+    const perOwner = new Map();
+    for (const v of pViews) perOwner.set(v.UserKey, (perOwner.get(v.UserKey) ?? 0) + 1);
+    const thin = [...perOwner].filter(([, n]) => n < 2).map(([o]) => o);
+    check(`platform: every persona has 2+ saved views (${pViews.length} views, ${perOwner.size} personas)`,
+      thin.length === 0, thin.length ? `only one view for: ${thin.join(', ')}` : [...perOwner].map(([o, n]) => `${o}=${n}`).join(' '));
+    check(`platform: ${pQueries.length} reusable queries (a query library, not a sample)`, pQueries.length >= 5,
+      pQueries.map((q) => q.Name).slice(0, 3).join(' | '));
+  }
   check('platform: renewal-outreach list == pending-renewal members', listRows === pending, `${listRows} vs ${pending}`);
 
   const badNotif = pNotifs.filter((n) => (n.Unread ? n.ReadAt != null : n.ReadAt == null)).length;
@@ -1456,7 +1567,7 @@ function checkMotifs() {
   }
   // employerCollapseLapse: the member really lapsed, at (or after) the stamped year
   const collapseBad = registry.filter((x) => x.Motif === 'employerCollapseLapse')
-    .filter((x) => lastStatus.get(x.MemberNumber) !== 'Lapsed');
+    .filter((x) => !hasEnded(lastStatus.get(x.MemberNumber)));
   check('motifs: employerCollapseLapse members all Lapsed', collapseBad.length === 0, collapseBad.map((x) => x.MemberNumber).join(', ') || 'all lapsed');
   // authored arcs express through behavior: activity (registrations + course enrollments)
   // late-in-arc vs early-in-arc — one signal alone is too thin at 6 members

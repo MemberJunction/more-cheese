@@ -105,8 +105,12 @@ export function buildWorld(cfg) {
   // hero, duplicate shell, crowd org, hero org, defect true-employer) and a field added to
   // only some of them ships `undefined`; doing it here makes that impossible. Every value
   // rides its own stream key, so nothing above this line moves.
-  for (const p of shippedPeople) Object.assign(p, identityFor(cfg.seed, p, cfg.release));
-  for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear));
+  const orgNameByKey = new Map(orgs.map((o) => [o.OrgKey, o.Name]));
+  for (const p of shippedPeople) {
+    p._orgName = p.OrgKey ? (orgNameByKey.get(p.OrgKey) ?? null) : null; // generator-internal, stripped before emit
+    Object.assign(p, identityFor(cfg.seed, p, cfg.release));
+  }
+  for (const o of orgs) Object.assign(o, orgIdentityFor(cfg.seed, o, cfg.releaseYear, cfg.R));
   // …and then the same facts as FIRST-CLASS bizapps-common rows (that app owns the domain
   // and its UI reads these tables, not our MemberProfile columns). Must run after the
   // identity pass — it projects the addresses that pass just wrote.
@@ -126,7 +130,7 @@ export function buildPacks(world) {
   const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, contacts, prospects, funnel, tasks, issues, programs, messaging, defects, platform, sonar } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });
   return {
-    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople, ...prospects.prospects], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships, addresses: contacts.addresses, address_links: contacts.addressLinks, contact_methods: contacts.contactMethods } },
+    common: { dependsOn: [], tables: { people: strip([...people, ...defects.extraPeople, ...prospects.prospects], ['_theta', '_thetaPath', '_phi', '_hero', '_lapseYear', '_dup', '_motif', '_renewAlways', '_orgName', 'CycleType', 'AutoRenew', 'MembershipTier']), organizations: orgs, relationship_types: relationships.relationshipTypes, relationships: relationships.relationships, addresses: contacts.addresses, address_links: contacts.addressLinks, contact_methods: contacts.contactMethods } },
     membership: { dependsOn: ['common'], tables: { membership_periods: periods, advocacy_actions: programs.advocacyActions, data_quality_labels: defects.labels } },
     events: { dependsOn: ['common', 'membership'], tables: { events, event_registrations: [...strip(registrations, ['_class', '_theta', '_future']), ...prospects.registrations, ...funnel.preRegistrations], competition_entries: programs.competitionEntries } },
     learning: { dependsOn: ['common', 'membership'], tables: { courses: learning.courses, enrollments: strip(learning.enrollments, ['_theta', '_endBase', '_weeks']), certifications: programs.certifications, member_certifications: programs.memberCertifications } },

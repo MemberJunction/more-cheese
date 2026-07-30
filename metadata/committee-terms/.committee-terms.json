@@ -217,6 +217,150 @@
   },
   {
     "primaryKey": {
+      "ID": "4576B143-0FFC-5DB3-9F1C-732FE0244E9F"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "2015–16 Term",
+      "StartDate": "2015-01-01",
+      "EndDate": "2016-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98950EC4-EFE7-5EF2-BC6D-274BDA8B6B2D"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "2017–18 Term",
+      "StartDate": "2017-01-01",
+      "EndDate": "2018-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "341F9A9A-E615-53EC-9FD2-E9C89C68B58B"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "2019–20 Term",
+      "StartDate": "2019-01-01",
+      "EndDate": "2020-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "405E299C-49A3-5AC3-B4ED-CEFCC633D7F2"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "2021–22 Term",
+      "StartDate": "2021-01-01",
+      "EndDate": "2022-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F8BCE894-F0FA-59B0-8403-85CE2E4C8C7C"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "2023–24 Term",
+      "StartDate": "2023-01-01",
+      "EndDate": "2024-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FD1F1325-4EC7-506A-BD38-4CD9D83F0767"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "2025–26 Term",
+      "StartDate": "2025-01-01",
+      "EndDate": "2026-12-31",
+      "Status": "Active"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F75729F0-A24B-5BBA-BAF8-EE34825FC73F"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "2015–16 Term",
+      "StartDate": "2015-01-01",
+      "EndDate": "2016-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1D66B25D-3B13-55A9-9960-885BFA23265B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "2017–18 Term",
+      "StartDate": "2017-01-01",
+      "EndDate": "2018-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6A2E9B01-BD44-5940-AE79-3FEA0EAA40F9"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "2019–20 Term",
+      "StartDate": "2019-01-01",
+      "EndDate": "2020-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "086429CC-93F7-5D69-A570-613AE70E2774"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "2021–22 Term",
+      "StartDate": "2021-01-01",
+      "EndDate": "2022-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D10D313-C851-56EA-9F20-B8F109A1B257"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "2023–24 Term",
+      "StartDate": "2023-01-01",
+      "EndDate": "2024-12-31",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E348687F-49A1-58DF-9632-C2B6BF7E562B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "2025–26 Term",
+      "StartDate": "2025-01-01",
+      "EndDate": "2026-12-31",
+      "Status": "Active"
+    }
+  },
+  {
+    "primaryKey": {
       "ID": "1A3596A5-2F64-5E5D-A4FF-D0E054330962"
     },
     "fields": {

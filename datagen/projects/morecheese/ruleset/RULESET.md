@@ -54,8 +54,8 @@ The `__mj` core gets **usage residue** so the instance reads as lived-in — app
 2. **True transcripts** — seeded Skip conversations carry `{N:FACT}` tokens the generator replaces with numbers **computed from the same build**, so every claim is true for the seed that shipped it (gated: no unresolved tokens).
 
 - 3 staff personas own everything (`@morecheesefederation.example` — reserved .example TLD, never deliverable). Demos log in AS a staff persona (team ruling 2026-07-23).
-- 4 shared saved views (`IsShared=1`, visible to every viewer) with real column layouts (GridState mirrors what Explorer writes; gate requires ≥3 visible columns); 3 Approved+Reusable queries — these double as Skip's entry points.
-- Per-persona residue: 3 conversations, favorites on the flagship personas, a renewal-outreach list that equals the pending-renewal member set EXACTLY (gated), 4 notifications.
+- 8 shared saved views (`IsShared=1`, visible to every viewer) with real column layouts (GridState mirrors what Explorer writes; gate requires ≥3 visible columns); 7 Approved+Reusable queries — these double as Skip's entry points.
+- Per-persona residue: 3 conversations, favorites on the flagship personas, a renewal-outreach list that equals the pending-renewal member set EXACTLY (gated), 8 notifications.
 
 ## The engagement-score model (pack: sonar)
 

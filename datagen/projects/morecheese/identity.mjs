@@ -120,8 +120,34 @@ export function identityFor(seed, p, release) {
     : null;
   const PrimaryLanguage = LANGUAGE[p.Country] ?? 'English';
 
-  return { Prefix, Suffix, Phone, Gender, DateOfBirth, RaceEthnicity, EthnicityHispanic, PronounSet, PrimaryLanguage, ...addr };
+  const Bio = bioFor(rng(seed, `bio:${p.MemberNumber}`), p, tenure, p._orgName ?? null);
+  return { Prefix, Suffix, Phone, Bio, Gender, DateOfBirth, RaceEthnicity, EthnicityHispanic, PronounSet, PrimaryLanguage, ...addr };
 }
+
+/**
+ * A short professional bio. Person.Bio was null for all 3,058 people, which is the most visible
+ * blank on a member-360 screen. Only a minority of members ever write one, and completeness rises
+ * with tenure exactly like the other self-entered fields.
+ */
+function bioFor(r, p, tenure, orgName) {
+  if (!r.bernoulli(answeredShare(0.62, tenure))) return null; // most profiles have no bio
+  // non-members carry a Title but no Segment — both have to work here
+  const role = p.Title ? p.Title.toLowerCase() : (p.Segment ? p.Segment.toLowerCase() : 'cheese professional');
+  const years = Math.max(2, Math.round(tenure) + r.int(0, 9));
+  const where = orgName ? ` at ${orgName}` : '';
+  const focus = r.pick([
+    'raw-milk cheeses', 'alpine styles', 'washed-rind development', 'farmstead production',
+    'aged goudas', 'blue cheese affinage', 'sheep-milk cheeses', 'cave-aged tommes',
+    'small-batch chèvre', 'traditional cheddar', 'regional PDO styles', 'seasonal creamery work',
+  ]);
+  return r.pick([
+    `${cap(role)}${where}. ${years} years in the trade, mostly ${focus}.`,
+    `Works on ${focus}${where}. ${cap(role)} for the last ${years} years.`,
+    `${years} years in cheese, currently ${role}${where}. Particular interest in ${focus}.`,
+    `${cap(role)}${where}, focused on ${focus}. Federation member since joining the industry.`,
+  ]);
+}
+const cap = (v) => v.charAt(0).toUpperCase() + v.slice(1);
 
 /** primary language follows the country, not the person's name origin */
 const LANGUAGE = {
@@ -133,6 +159,33 @@ const LANGUAGE = {
 
 /** national postal formats — a French code is not a US ZIP, and the ordering differs too */
 const STREETS = ['Mill', 'Church', 'Orchard', 'Station', 'Market', 'Meadow', 'Bridge', 'High', 'Cave', 'Dairy', 'Creamery', 'Spring'];
+// A localised suffix bolted onto an English name produced "Calle Mill" and "Rue Dairy" — not a
+// plausible street in either language. Seen in bizapps-common's own address grid, which is the
+// only place it shows. The name has to be in the same language as the word in front of it.
+const STREETS_BY_COUNTRY = {
+  FR: ['Moulin', 'Église', 'Verger', 'Gare', 'Marché', 'Pré', 'Pont', 'Source', 'Laiterie'],
+  IT: ['Molino', 'Chiesa', 'Frutteto', 'Stazione', 'Mercato', 'Prato', 'Ponte', 'Fonte', 'Latteria'],
+  ES: ['Molino', 'Iglesia', 'Huerta', 'Estación', 'Mercado', 'Prado', 'Puente', 'Fuente', 'Lechería'],
+  MX: ['Molino', 'Iglesia', 'Huerta', 'Estación', 'Mercado', 'Prado', 'Puente', 'Fuente'],
+  AR: ['Molino', 'Iglesia', 'Huerta', 'Estación', 'Mercado', 'Prado', 'Puente', 'Fuente'],
+  PT: ['Moinho', 'Igreja', 'Pomar', 'Estação', 'Mercado', 'Prado', 'Ponte', 'Fonte'],
+  NL: ['Molen', 'Kerk', 'Boomgaard', 'Station', 'Markt', 'Wei', 'Brug', 'Bron'],
+  DK: ['Mølle', 'Kirke', 'Have', 'Station', 'Marked', 'Eng', 'Bro', 'Kilde'],
+  DE: ['Mühl', 'Kirch', 'Garten', 'Bahnhof', 'Markt', 'Wiesen', 'Brück', 'Quell'],
+  AT: ['Mühl', 'Kirch', 'Garten', 'Bahnhof', 'Markt', 'Wiesen', 'Brück'],
+  CH: ['Mühl', 'Kirch', 'Garten', 'Bahnhof', 'Markt', 'Wiesen'],
+  PL: ['Młyńska', 'Kościelna', 'Ogrodowa', 'Dworcowa', 'Targowa', 'Łąkowa', 'Mostowa'],
+  GR: ['Mylou', 'Ekklisias', 'Stathmou', 'Agoras', 'Pigis'],
+};
+/** US ZIP and CA postal prefixes that match the subdivision — a Brooklyn address reading 82173
+ *  (a Wyoming range) is the kind of thing only someone who knows ZIPs notices, which at a
+ *  member conference is everyone. */
+const US_ZIP3 = {
+  'US-CA': [900, 961], 'US-CO': [800, 816], 'US-ID': [832, 838], 'US-IL': [600, 629],
+  'US-NC': [270, 289], 'US-NY': [100, 149], 'US-OR': [970, 979], 'US-PA': [150, 196],
+  'US-TX': [750, 799], 'US-VT': [50, 59], 'US-WA': [980, 994], 'US-WI': [530, 549],
+};
+const CA_POSTAL_LETTER = { 'CA-BC': 'V', 'CA-ON': ['K', 'L', 'M', 'N', 'P'], 'CA-QC': ['G', 'H', 'J'] };
 const SUFFIX_BY_COUNTRY = {
   US: ['St', 'Ave', 'Rd', 'Ln', 'Way'], CA: ['St', 'Ave', 'Rd'], GB: ['Street', 'Road', 'Lane'],
   IE: ['Street', 'Road'], AU: ['St', 'Rd'], NZ: ['St', 'Rd'],
@@ -143,7 +196,7 @@ const SUFFIX_BY_COUNTRY = {
 function addressFor(r, p) {
   const c = p.Country ?? 'US';
   const num = r.int(1, 240);
-  const street = r.pick(STREETS);
+  const street = r.pick(STREETS_BY_COUNTRY[c] ?? STREETS);
   const sfx = r.pick(SUFFIX_BY_COUNTRY[c] ?? ['St']);
   // romance/germanic ordering puts the number after the street name
   const numberLast = ['FR', 'IT', 'ES', 'PT', 'MX', 'AR', 'NL', 'DK', 'DE', 'AT', 'CH', 'GR', 'PL'].includes(c);
@@ -151,8 +204,16 @@ function addressFor(r, p) {
   const line = joined ? `${street}${sfx} ${num}`
     : numberLast ? `${sfx} ${street} ${num}` : `${num} ${street} ${sfx}`;
   const postal = {
-    US: () => String(r.int(1001, 99950)).padStart(5, '0'),
-    CA: () => `${r.pick(['K', 'L', 'M', 'N', 'V'])}${r.int(0, 9)}${r.pick(['A', 'B', 'C', 'J', 'R'])} ${r.int(0, 9)}${r.pick(['A', 'B', 'X', 'Z'])}${r.int(0, 9)}`,
+    US: () => {
+      const band = US_ZIP3[p.State];
+      const z3 = band ? r.int(band[0], band[1]) : r.int(100, 999);
+      return `${String(z3).padStart(3, '0')}${String(r.int(0, 99)).padStart(2, '0')}`;
+    },
+    CA: () => {
+      const l = CA_POSTAL_LETTER[p.State] ?? ['K', 'L', 'M', 'N', 'V'];
+      const first = Array.isArray(l) ? r.pick(l) : l;
+      return `${first}${r.int(0, 9)}${r.pick(['A', 'B', 'C', 'J', 'R'])} ${r.int(0, 9)}${r.pick(['A', 'B', 'X', 'Z'])}${r.int(0, 9)}`;
+    },
     GB: () => `${r.pick(['BA', 'TA', 'SY', 'KA'])}${r.int(1, 20)} ${r.int(1, 9)}${r.pick(['AA', 'BQ', 'HX', 'PT'])}`,
     IE: () => `${r.pick(['R95', 'T12', 'D02'])} ${r.pick(['XY', 'AB', 'K4'])}${r.int(10, 99)}`,
     FR: () => String(r.int(1000, 98999)).padStart(5, '0'),
@@ -180,12 +241,18 @@ function addressFor(r, p) {
 }
 
 /** Organization contact/profile fields — all pre-existing upstream columns. */
-export function orgIdentityFor(seed, o, releaseYear) {
+export function orgIdentityFor(seed, o, releaseYear, R) {
   const r = rng(seed, `orgmeta:${o.OrgKey}`);
+  // legal structure lives on the app's own OrganizationType lookup — its own stream so adding
+  // it does not shift a single draw above this line
+  const rl = rng(seed, `orglegal:${o.OrgKey}`);
   const suffixByCountry = { FR: 'SARL', DK: 'ApS', NL: 'B.V.', CH: 'AG', GB: 'Ltd', IE: 'Ltd', IT: 'S.r.l.', ES: 'S.L.', PT: 'Lda', DE: 'GmbH', AT: 'GmbH', GR: 'EPE', PL: 'Sp. z o.o.', MX: 'S.A. de C.V.', AR: 'S.A.', AU: 'Pty Ltd', NZ: 'Ltd', JP: 'K.K.', CA: 'Inc.' };
   const legalSuffix = suffixByCountry[o.Country] ?? (o.Type === 'Producer' ? 'LLC' : 'Inc.');
   const founded = releaseYear - r.int(3, 80);
+  const structures = R?.orgs?.legalStructure?.byType?.[o.Type];
   return {
+    // referenced BY NAME: bizapps-common seeds these rows (F6)
+    OrganizationTypeName: structures ? rl.pickWeighted(structures) : null,
     LegalName: `${o.Name} ${legalSuffix}`,
     // same slug as the work-email domain, so a member's address and their employer's
     // website agree instead of disagreeing on the truncation
