@@ -140,6 +140,34 @@ function checkPacks() {
   const badTermC = cTerms.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
   const badMeetC = cMeetings.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
   check('pack refs: memberships→terms + terms/meetings→committees', badMemTerm + badTermC + badMeetC === 0, `${badMemTerm}+${badTermC}+${badMeetC} dangling`);
+  // ADDRESS REALISM — all three of these were found by opening bizapps-common's address grid,
+  // not by any gate. They are invisible in the packs and obvious on screen.
+  {
+    const prefixed = addresses.filter((a) => /^[A-Z]{2}-/.test(a.StateProvince ?? '')).length;
+    check('addresses: StateProvince has no country prefix (NY, not US-NY)', prefixed === 0,
+      prefixed ? `${prefixed} addresses read like 'Brooklyn, US-NY'` : `${addresses.length} addresses`);
+    // US ZIPs must sit in their state's real band — Brooklyn reading 82173 (Wyoming) is a tell
+    const BAND = { 'US-CA': [900, 961], 'US-CO': [800, 816], 'US-ID': [832, 838], 'US-IL': [600, 629],
+      'US-NC': [270, 289], 'US-NY': [100, 149], 'US-OR': [970, 979], 'US-PA': [150, 196],
+      'US-TX': [750, 799], 'US-VT': [50, 59], 'US-WA': [980, 994], 'US-WI': [530, 549] };
+    const usPeople = new Map(allPeople.filter((x) => x.Country === 'US').map((x) => [x.MemberNumber, x.State]));
+    const usAddrs = addresses.filter((a) => a.Country === 'United States' && a.PostalCode);
+    const offBand = usAddrs.filter((a) => {
+      const st = usPeople.get(String(a.AddressKey).replace(/^person:/, ''));
+      const band = BAND[st];
+      if (!band) return false;
+      const z3 = Number(String(a.PostalCode).slice(0, 3));
+      return z3 < band[0] || z3 > band[1];
+    }).length;
+    check('addresses: US ZIP prefixes match their state', offBand === 0,
+      offBand ? `${offBand} of ${usAddrs.length} US ZIPs outside the state band` : `${usAddrs.length} US addresses`);
+    // a localised street word must not be bolted to an English name ("Calle Mill", "Rue Dairy")
+    const ENGLISH = /\b(Mill|Church|Orchard|Market|Meadow|Bridge|High|Cave|Dairy|Creamery|Spring)\b/;
+    const romance = new Set(['France', 'Italy', 'Spain', 'Portugal', 'Mexico', 'Argentina']);
+    const mixed = addresses.filter((a) => romance.has(a.Country) && ENGLISH.test(a.Line1 ?? '')).length;
+    check('addresses: street names are in the street\'s own language', mixed === 0,
+      mixed ? `${mixed} like 'Calle Mill' / 'Rue Dairy'` : `${addresses.filter((a) => romance.has(a.Country)).length} romance-language addresses`);
+  }
   // blank columns are how generated data gives itself away: the legal-structure FK sat NULL on
   // every organization, and Person.Bio on every person. Both are app-owned fields their UIs show.
   {

@@ -159,6 +159,33 @@ const LANGUAGE = {
 
 /** national postal formats — a French code is not a US ZIP, and the ordering differs too */
 const STREETS = ['Mill', 'Church', 'Orchard', 'Station', 'Market', 'Meadow', 'Bridge', 'High', 'Cave', 'Dairy', 'Creamery', 'Spring'];
+// A localised suffix bolted onto an English name produced "Calle Mill" and "Rue Dairy" — not a
+// plausible street in either language. Seen in bizapps-common's own address grid, which is the
+// only place it shows. The name has to be in the same language as the word in front of it.
+const STREETS_BY_COUNTRY = {
+  FR: ['Moulin', 'Église', 'Verger', 'Gare', 'Marché', 'Pré', 'Pont', 'Source', 'Laiterie'],
+  IT: ['Molino', 'Chiesa', 'Frutteto', 'Stazione', 'Mercato', 'Prato', 'Ponte', 'Fonte', 'Latteria'],
+  ES: ['Molino', 'Iglesia', 'Huerta', 'Estación', 'Mercado', 'Prado', 'Puente', 'Fuente', 'Lechería'],
+  MX: ['Molino', 'Iglesia', 'Huerta', 'Estación', 'Mercado', 'Prado', 'Puente', 'Fuente'],
+  AR: ['Molino', 'Iglesia', 'Huerta', 'Estación', 'Mercado', 'Prado', 'Puente', 'Fuente'],
+  PT: ['Moinho', 'Igreja', 'Pomar', 'Estação', 'Mercado', 'Prado', 'Ponte', 'Fonte'],
+  NL: ['Molen', 'Kerk', 'Boomgaard', 'Station', 'Markt', 'Wei', 'Brug', 'Bron'],
+  DK: ['Mølle', 'Kirke', 'Have', 'Station', 'Marked', 'Eng', 'Bro', 'Kilde'],
+  DE: ['Mühl', 'Kirch', 'Garten', 'Bahnhof', 'Markt', 'Wiesen', 'Brück', 'Quell'],
+  AT: ['Mühl', 'Kirch', 'Garten', 'Bahnhof', 'Markt', 'Wiesen', 'Brück'],
+  CH: ['Mühl', 'Kirch', 'Garten', 'Bahnhof', 'Markt', 'Wiesen'],
+  PL: ['Młyńska', 'Kościelna', 'Ogrodowa', 'Dworcowa', 'Targowa', 'Łąkowa', 'Mostowa'],
+  GR: ['Mylou', 'Ekklisias', 'Stathmou', 'Agoras', 'Pigis'],
+};
+/** US ZIP and CA postal prefixes that match the subdivision — a Brooklyn address reading 82173
+ *  (a Wyoming range) is the kind of thing only someone who knows ZIPs notices, which at a
+ *  member conference is everyone. */
+const US_ZIP3 = {
+  'US-CA': [900, 961], 'US-CO': [800, 816], 'US-ID': [832, 838], 'US-IL': [600, 629],
+  'US-NC': [270, 289], 'US-NY': [100, 149], 'US-OR': [970, 979], 'US-PA': [150, 196],
+  'US-TX': [750, 799], 'US-VT': [50, 59], 'US-WA': [980, 994], 'US-WI': [530, 549],
+};
+const CA_POSTAL_LETTER = { 'CA-BC': 'V', 'CA-ON': ['K', 'L', 'M', 'N', 'P'], 'CA-QC': ['G', 'H', 'J'] };
 const SUFFIX_BY_COUNTRY = {
   US: ['St', 'Ave', 'Rd', 'Ln', 'Way'], CA: ['St', 'Ave', 'Rd'], GB: ['Street', 'Road', 'Lane'],
   IE: ['Street', 'Road'], AU: ['St', 'Rd'], NZ: ['St', 'Rd'],
@@ -169,7 +196,7 @@ const SUFFIX_BY_COUNTRY = {
 function addressFor(r, p) {
   const c = p.Country ?? 'US';
   const num = r.int(1, 240);
-  const street = r.pick(STREETS);
+  const street = r.pick(STREETS_BY_COUNTRY[c] ?? STREETS);
   const sfx = r.pick(SUFFIX_BY_COUNTRY[c] ?? ['St']);
   // romance/germanic ordering puts the number after the street name
   const numberLast = ['FR', 'IT', 'ES', 'PT', 'MX', 'AR', 'NL', 'DK', 'DE', 'AT', 'CH', 'GR', 'PL'].includes(c);
@@ -177,8 +204,16 @@ function addressFor(r, p) {
   const line = joined ? `${street}${sfx} ${num}`
     : numberLast ? `${sfx} ${street} ${num}` : `${num} ${street} ${sfx}`;
   const postal = {
-    US: () => String(r.int(1001, 99950)).padStart(5, '0'),
-    CA: () => `${r.pick(['K', 'L', 'M', 'N', 'V'])}${r.int(0, 9)}${r.pick(['A', 'B', 'C', 'J', 'R'])} ${r.int(0, 9)}${r.pick(['A', 'B', 'X', 'Z'])}${r.int(0, 9)}`,
+    US: () => {
+      const band = US_ZIP3[p.State];
+      const z3 = band ? r.int(band[0], band[1]) : r.int(100, 999);
+      return `${String(z3).padStart(3, '0')}${String(r.int(0, 99)).padStart(2, '0')}`;
+    },
+    CA: () => {
+      const l = CA_POSTAL_LETTER[p.State] ?? ['K', 'L', 'M', 'N', 'V'];
+      const first = Array.isArray(l) ? r.pick(l) : l;
+      return `${first}${r.int(0, 9)}${r.pick(['A', 'B', 'C', 'J', 'R'])} ${r.int(0, 9)}${r.pick(['A', 'B', 'X', 'Z'])}${r.int(0, 9)}`;
+    },
     GB: () => `${r.pick(['BA', 'TA', 'SY', 'KA'])}${r.int(1, 20)} ${r.int(1, 9)}${r.pick(['AA', 'BQ', 'HX', 'PT'])}`,
     IE: () => `${r.pick(['R95', 'T12', 'D02'])} ${r.pick(['XY', 'AB', 'K4'])}${r.int(10, 99)}`,
     FR: () => String(r.int(1000, 98999)).padStart(5, '0'),
