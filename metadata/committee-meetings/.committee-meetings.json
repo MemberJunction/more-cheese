@@ -2206,6 +2206,1476 @@
   },
   {
     "primaryKey": {
+      "ID": "906288B3-7E51-50B2-9420-C8A37E32D266"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2015 meeting",
+      "StartDateTime": "2015-01-01T13:00:00Z",
+      "EndDateTime": "2015-01-01T14:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5E2208CA-EC8B-5BD4-B257-39F8F6A65629"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2015 meeting",
+      "StartDateTime": "2015-04-09T13:15:00Z",
+      "EndDateTime": "2015-04-09T14:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "79CA78E8-E4B2-5DAE-BA95-56763EBAEFC3"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2015 meeting",
+      "StartDateTime": "2015-07-20T14:00:00Z",
+      "EndDateTime": "2015-07-20T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8FFBFBA2-D098-5DBE-B846-DC90630B9D47"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2015 meeting",
+      "StartDateTime": "2015-10-05T14:30:00Z",
+      "EndDateTime": "2015-10-05T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A6A36673-5D79-5869-BC68-537ABE8ABC53"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2016 meeting",
+      "StartDateTime": "2016-01-06T13:00:00Z",
+      "EndDateTime": "2016-01-06T14:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ADD62FB1-F8E9-5168-AA0F-2D5AA0ECAF17"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2016 meeting",
+      "StartDateTime": "2016-04-11T14:15:00Z",
+      "EndDateTime": "2016-04-11T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F61B0C2-6E39-5270-8A96-DC9C420216D7"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2016 meeting",
+      "StartDateTime": "2016-07-15T14:30:00Z",
+      "EndDateTime": "2016-07-15T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F5D2F524-7574-5BE0-8448-EA60920A1FF1"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2016 meeting",
+      "StartDateTime": "2016-10-03T14:30:00Z",
+      "EndDateTime": "2016-10-03T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DB6C495C-6A26-56BD-9849-240092D1709F"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2017 meeting",
+      "StartDateTime": "2017-01-05T14:00:00Z",
+      "EndDateTime": "2017-01-05T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4571B1F3-31E5-56BE-9AB1-1CE948895EAD"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2017 meeting",
+      "StartDateTime": "2017-04-10T13:30:00Z",
+      "EndDateTime": "2017-04-10T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CB1AD1E3-7830-5DC5-A827-66CC187C5DCD"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2017 meeting",
+      "StartDateTime": "2017-07-17T13:30:00Z",
+      "EndDateTime": "2017-07-17T14:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "23F418A7-C4BC-5F60-ABF7-85E8E84A7E04"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2017 meeting",
+      "StartDateTime": "2017-10-03T13:15:00Z",
+      "EndDateTime": "2017-10-03T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DFE6149B-D11A-53DC-BA04-EAD7D8E8B7A2"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2018 meeting",
+      "StartDateTime": "2018-01-05T13:30:00Z",
+      "EndDateTime": "2018-01-05T14:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC9BD1A1-B35C-5204-AC8A-A593A1DD312C"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2018 meeting",
+      "StartDateTime": "2018-04-12T14:15:00Z",
+      "EndDateTime": "2018-04-12T15:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EEC92668-E279-5185-989A-373ABE7918FF"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2018 meeting",
+      "StartDateTime": "2018-07-16T14:30:00Z",
+      "EndDateTime": "2018-07-16T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D6628AA-DE8F-5637-941F-81ED67E23E19"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2018 meeting",
+      "StartDateTime": "2018-10-03T13:00:00Z",
+      "EndDateTime": "2018-10-03T14:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BAA91CC6-418D-5384-AC72-F9F4126BC477"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2019 meeting",
+      "StartDateTime": "2019-01-03T13:30:00Z",
+      "EndDateTime": "2019-01-03T14:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "78B9F6DE-E15B-540A-8DC4-D26DD7BE9DFF"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2019 meeting",
+      "StartDateTime": "2019-04-11T14:00:00Z",
+      "EndDateTime": "2019-04-11T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DF466A15-3A8B-5255-B632-808EDF348771"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2019 meeting",
+      "StartDateTime": "2019-07-16T14:00:00Z",
+      "EndDateTime": "2019-07-16T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6D742E50-DCAD-55B7-B429-D2E179F81805"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2019 meeting",
+      "StartDateTime": "2019-10-07T14:00:00Z",
+      "EndDateTime": "2019-10-07T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "80239F0C-A5C0-5AFF-B249-9126DF4078DD"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2020 meeting",
+      "StartDateTime": "2020-01-06T14:30:00Z",
+      "EndDateTime": "2020-01-06T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B81DC63A-9F7D-55F0-BA6E-1A40CA235D1F"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2020 meeting",
+      "StartDateTime": "2020-04-13T13:30:00Z",
+      "EndDateTime": "2020-04-13T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9170EA59-C80E-5180-B7D2-6DC014F35E8C"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2020 meeting",
+      "StartDateTime": "2020-07-20T13:00:00Z",
+      "EndDateTime": "2020-07-20T14:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9F015932-6794-5C86-BF7C-7DD7E5A8A346"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2020 meeting",
+      "StartDateTime": "2020-10-02T14:00:00Z",
+      "EndDateTime": "2020-10-02T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1AC90005-B7BC-5765-A313-0BD48C762A26"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2021 meeting",
+      "StartDateTime": "2021-01-06T14:00:00Z",
+      "EndDateTime": "2021-01-06T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5E57DEC2-EC06-5E73-82A3-2A338CA931BA"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2021 meeting",
+      "StartDateTime": "2021-04-12T13:15:00Z",
+      "EndDateTime": "2021-04-12T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E5B04F91-5DE2-5BA9-8260-48913A0697D3"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2021 meeting",
+      "StartDateTime": "2021-07-15T14:00:00Z",
+      "EndDateTime": "2021-07-15T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E608CB5E-3E77-5AF7-93D0-AD8294EEF40E"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2021 meeting",
+      "StartDateTime": "2021-10-04T13:15:00Z",
+      "EndDateTime": "2021-10-04T14:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E809DCA6-85FD-5C2E-A42A-543CBD1EA2BF"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2022 meeting",
+      "StartDateTime": "2022-01-06T13:00:00Z",
+      "EndDateTime": "2022-01-06T14:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FF5B72E7-5172-594A-9F61-F062F991FD74"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2022 meeting",
+      "StartDateTime": "2022-04-11T14:00:00Z",
+      "EndDateTime": "2022-04-11T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFB38AFB-9F9A-5B85-824D-7117724318DF"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2022 meeting",
+      "StartDateTime": "2022-07-18T14:15:00Z",
+      "EndDateTime": "2022-07-18T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F0379F9-A141-50E1-BCCC-B79556417879"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2022 meeting",
+      "StartDateTime": "2022-10-03T14:30:00Z",
+      "EndDateTime": "2022-10-03T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5767F534-210C-5763-BF72-399618FA2108"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2023 meeting",
+      "StartDateTime": "2023-01-04T13:00:00Z",
+      "EndDateTime": "2023-01-04T14:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77D17D30-9021-50FC-BC4D-9BD7DA8D1084"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2023 meeting",
+      "StartDateTime": "2023-04-12T14:15:00Z",
+      "EndDateTime": "2023-04-12T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "322A35CF-F9DD-512D-8286-C396AD7F7A5C"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2023 meeting",
+      "StartDateTime": "2023-07-20T14:15:00Z",
+      "EndDateTime": "2023-07-20T15:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9225472E-A8E0-50FF-BCF7-AFBFC05858A9"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2023 meeting",
+      "StartDateTime": "2023-10-04T14:00:00Z",
+      "EndDateTime": "2023-10-04T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3A25E0B-6CBB-5B46-8715-057E610C29CE"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2024 meeting",
+      "StartDateTime": "2024-01-04T14:30:00Z",
+      "EndDateTime": "2024-01-04T15:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F4403D1B-C19D-56F9-8D2F-C42B8FAC2EC5"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2024 meeting",
+      "StartDateTime": "2024-04-09T14:00:00Z",
+      "EndDateTime": "2024-04-09T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C32BB4BF-1181-540D-8A97-05FE35DDE4D4"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2024 meeting",
+      "StartDateTime": "2024-07-15T13:00:00Z",
+      "EndDateTime": "2024-07-15T14:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0C1E37D7-0E40-504F-9BDE-17655AB700AD"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2024 meeting",
+      "StartDateTime": "2024-10-01T14:00:00Z",
+      "EndDateTime": "2024-10-01T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3088E728-55BE-5C90-B06D-32A772A4E3EC"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2025 meeting",
+      "StartDateTime": "2025-01-02T14:00:00Z",
+      "EndDateTime": "2025-01-02T15:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D2B55C0-530D-556D-8F7F-75D8FA6D5835"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2025 meeting",
+      "StartDateTime": "2025-04-14T13:15:00Z",
+      "EndDateTime": "2025-04-14T14:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "576B2DA7-23EE-5A64-AEC9-2CFD84EE76BF"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2025 meeting",
+      "StartDateTime": "2025-07-15T14:15:00Z",
+      "EndDateTime": "2025-07-15T15:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED36592C-BB9B-5BAB-AAC4-DC688FB2D3C4"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2025 meeting",
+      "StartDateTime": "2025-10-03T13:00:00Z",
+      "EndDateTime": "2025-10-03T14:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8798E837-A300-5B7F-A3CF-C19A8C70AEA2"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2026 meeting",
+      "StartDateTime": "2026-01-01T13:15:00Z",
+      "EndDateTime": "2026-01-01T14:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5B88F5EB-6F9F-51A3-A2BB-57AFA6960059"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q2 2026 meeting",
+      "StartDateTime": "2026-04-09T14:00:00Z",
+      "EndDateTime": "2026-04-09T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "43DB466E-F422-5F6C-AF2A-05CFE920D83A"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q3 2026 meeting",
+      "StartDateTime": "2026-07-17T14:15:00Z",
+      "EndDateTime": "2026-07-17T15:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3A8160C3-2E75-585B-8228-06F5076769E0"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q4 2026 meeting",
+      "StartDateTime": "2026-10-05T14:15:00Z",
+      "EndDateTime": "2026-10-05T15:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Scheduled"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D7723891-0FD6-509F-957F-3143A66FF3D8"
+    },
+    "fields": {
+      "CommitteeID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E",
+      "Name": "Awards & Competition Committee — Q1 2027 meeting",
+      "StartDateTime": "2027-01-04T14:30:00Z",
+      "EndDateTime": "2027-01-04T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Scheduled"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C5944A6B-AD80-51E5-9EB4-1F9AE73AFB7B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2015 meeting",
+      "StartDateTime": "2015-01-02T16:15:00Z",
+      "EndDateTime": "2015-01-02T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B2579DB8-1CA7-5BDB-B1C9-C944ED40A5A7"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2015 meeting",
+      "StartDateTime": "2015-04-13T15:00:00Z",
+      "EndDateTime": "2015-04-13T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DCD9ACB0-0E06-5790-B2E8-5020A3C985B0"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2015 meeting",
+      "StartDateTime": "2015-07-20T16:30:00Z",
+      "EndDateTime": "2015-07-20T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2DE5D149-3F8A-5474-9B08-4111B355C956"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2015 meeting",
+      "StartDateTime": "2015-10-05T15:15:00Z",
+      "EndDateTime": "2015-10-05T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B43CE703-0421-5012-9689-977DB07727DF"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2016 meeting",
+      "StartDateTime": "2016-01-05T15:00:00Z",
+      "EndDateTime": "2016-01-05T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6AA2EC19-C88F-5E6B-840D-084470A020E3"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2016 meeting",
+      "StartDateTime": "2016-04-12T16:00:00Z",
+      "EndDateTime": "2016-04-12T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4C8A7796-3098-52B2-8230-98B9CE242F5B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2016 meeting",
+      "StartDateTime": "2016-07-18T16:00:00Z",
+      "EndDateTime": "2016-07-18T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3580658C-058B-5E6A-AD0E-84F78F20DCBA"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2016 meeting",
+      "StartDateTime": "2016-10-04T16:00:00Z",
+      "EndDateTime": "2016-10-04T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D4EBC36D-F161-54C0-85B2-76CF6540EC10"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2017 meeting",
+      "StartDateTime": "2017-01-05T15:00:00Z",
+      "EndDateTime": "2017-01-05T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C05BF89D-25D9-5EE3-A0F1-7913FF0519E6"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2017 meeting",
+      "StartDateTime": "2017-04-10T16:30:00Z",
+      "EndDateTime": "2017-04-10T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60136C4A-4B3E-51E1-92E9-7D723865E9CE"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2017 meeting",
+      "StartDateTime": "2017-07-19T15:30:00Z",
+      "EndDateTime": "2017-07-19T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "553ECEE1-D5B0-5F59-B137-DB301E3E0DAB"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2017 meeting",
+      "StartDateTime": "2017-10-06T16:00:00Z",
+      "EndDateTime": "2017-10-06T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "76C1DF0B-93F5-539C-A8B5-93218DC3C155"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2018 meeting",
+      "StartDateTime": "2018-01-03T16:30:00Z",
+      "EndDateTime": "2018-01-03T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AE7626B0-9A84-5677-BFBC-496A3318C546"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2018 meeting",
+      "StartDateTime": "2018-04-13T16:00:00Z",
+      "EndDateTime": "2018-04-13T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BA235B39-6256-5035-AB45-5BE69F3E3665"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2018 meeting",
+      "StartDateTime": "2018-07-19T16:15:00Z",
+      "EndDateTime": "2018-07-19T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Annex Room 2",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B6F4A7C1-0588-563A-886E-722C707D41A6"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2018 meeting",
+      "StartDateTime": "2018-10-02T15:15:00Z",
+      "EndDateTime": "2018-10-02T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46A3DCF0-1F94-5B6A-B8F0-80788EF7699F"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2019 meeting",
+      "StartDateTime": "2019-01-07T15:00:00Z",
+      "EndDateTime": "2019-01-07T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7760FD2-6E85-5135-A89B-3A7A08240E1E"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2019 meeting",
+      "StartDateTime": "2019-04-11T16:30:00Z",
+      "EndDateTime": "2019-04-11T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4265C509-16CF-5C65-9E2F-D99ACF9C596B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2019 meeting",
+      "StartDateTime": "2019-07-18T16:15:00Z",
+      "EndDateTime": "2019-07-18T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31DB177D-9BDD-5ABD-8546-0821AEC835CA"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2019 meeting",
+      "StartDateTime": "2019-10-07T15:00:00Z",
+      "EndDateTime": "2019-10-07T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FF3D085D-CD2F-5183-825E-F08E98169B58"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2020 meeting",
+      "StartDateTime": "2020-01-06T16:15:00Z",
+      "EndDateTime": "2020-01-06T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "43A20FF6-A7AB-5F82-A7BF-45922555194B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2020 meeting",
+      "StartDateTime": "2020-04-09T15:15:00Z",
+      "EndDateTime": "2020-04-09T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A388F4F2-2AB0-56E2-887A-931C6EF7E198"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2020 meeting",
+      "StartDateTime": "2020-07-15T15:00:00Z",
+      "EndDateTime": "2020-07-15T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "291C7748-D6D4-55D2-838A-D59A618C176A"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2020 meeting",
+      "StartDateTime": "2020-10-05T15:00:00Z",
+      "EndDateTime": "2020-10-05T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DE4065A0-21D2-57B4-9D0D-FF8977D1D3F2"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2021 meeting",
+      "StartDateTime": "2021-01-04T16:00:00Z",
+      "EndDateTime": "2021-01-04T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A6BCE334-6AE9-5D39-8921-8B11748779D0"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2021 meeting",
+      "StartDateTime": "2021-04-08T15:30:00Z",
+      "EndDateTime": "2021-04-08T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2F6532AE-F77E-533C-97DD-5AA24252554B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2021 meeting",
+      "StartDateTime": "2021-07-20T16:30:00Z",
+      "EndDateTime": "2021-07-20T18:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49D2FDA2-401A-5F74-B970-7D5ABF6BC116"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2021 meeting",
+      "StartDateTime": "2021-10-04T16:00:00Z",
+      "EndDateTime": "2021-10-04T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C66B09D0-9E7C-57ED-BA74-4F688DF057CE"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2022 meeting",
+      "StartDateTime": "2022-01-04T15:00:00Z",
+      "EndDateTime": "2022-01-04T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A571BD58-7D9C-561F-9FD8-9028EC75F9A3"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2022 meeting",
+      "StartDateTime": "2022-04-13T15:00:00Z",
+      "EndDateTime": "2022-04-13T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ECD561E6-CF8D-5B15-9552-FBD0A4942532"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2022 meeting",
+      "StartDateTime": "2022-07-18T15:30:00Z",
+      "EndDateTime": "2022-07-18T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7735B878-8A61-5590-8A2D-7D5BF0BD29A5"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2022 meeting",
+      "StartDateTime": "2022-10-03T15:00:00Z",
+      "EndDateTime": "2022-10-03T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CDD9B05F-5319-516D-8061-4E6461C97F2E"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2023 meeting",
+      "StartDateTime": "2023-01-03T15:30:00Z",
+      "EndDateTime": "2023-01-03T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Conference Room A",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B9B71397-2321-5CC5-9DCA-F24244A97F3E"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2023 meeting",
+      "StartDateTime": "2023-04-10T15:00:00Z",
+      "EndDateTime": "2023-04-10T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D53C869D-B1F4-55D9-A800-E3B95018E1C7"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2023 meeting",
+      "StartDateTime": "2023-07-18T16:00:00Z",
+      "EndDateTime": "2023-07-18T17:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E225AA8-088C-5D6A-A3AC-A243B3682ADA"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2023 meeting",
+      "StartDateTime": "2023-10-03T15:00:00Z",
+      "EndDateTime": "2023-10-03T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B36156C1-E02C-5ED0-97DE-97626E12544D"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2024 meeting",
+      "StartDateTime": "2024-01-03T15:15:00Z",
+      "EndDateTime": "2024-01-03T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Hybrid",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4EFCFAAE-F45D-5C6D-B612-39A78F3490B8"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2024 meeting",
+      "StartDateTime": "2024-04-10T15:15:00Z",
+      "EndDateTime": "2024-04-10T16:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "740F01F9-04A4-5594-93AF-4A014A23E855"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2024 meeting",
+      "StartDateTime": "2024-07-18T15:00:00Z",
+      "EndDateTime": "2024-07-18T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "35BB76BD-EA58-51C2-8B9B-CEE6FD9EA681"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2024 meeting",
+      "StartDateTime": "2024-10-02T15:30:00Z",
+      "EndDateTime": "2024-10-02T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CA253A0F-78A9-5FDA-94BB-571BCC43E0B2"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2025 meeting",
+      "StartDateTime": "2025-01-01T15:00:00Z",
+      "EndDateTime": "2025-01-01T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E447B50A-DC45-5EF3-A4C4-F2FE7227F045"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2025 meeting",
+      "StartDateTime": "2025-04-08T16:00:00Z",
+      "EndDateTime": "2025-04-08T17:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB1CBD15-227E-5425-9444-6C7931ED29E2"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2025 meeting",
+      "StartDateTime": "2025-07-16T16:15:00Z",
+      "EndDateTime": "2025-07-16T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6DB18C31-5D86-505B-B06A-C02BD1415A10"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2025 meeting",
+      "StartDateTime": "2025-10-01T16:15:00Z",
+      "EndDateTime": "2025-10-01T17:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CD15187F-4FA0-5976-AAD5-546C585EDB8B"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2026 meeting",
+      "StartDateTime": "2026-01-01T15:00:00Z",
+      "EndDateTime": "2026-01-01T16:00:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D9F2D33F-EE66-5E1F-B2A4-D373F1F93763"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q2 2026 meeting",
+      "StartDateTime": "2026-04-13T15:15:00Z",
+      "EndDateTime": "2026-04-13T16:45:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Board Room",
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5BF36EA9-C0F7-5C9C-A566-3305C1869ACC"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q3 2026 meeting",
+      "StartDateTime": "2026-07-15T15:00:00Z",
+      "EndDateTime": "2026-07-15T16:30:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Completed"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2EF38F9C-3218-5694-A5ED-E26050E4D69C"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q4 2026 meeting",
+      "StartDateTime": "2026-10-01T15:15:00Z",
+      "EndDateTime": "2026-10-01T16:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "Virtual",
+      "LocationText": null,
+      "Status": "Scheduled"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A2B8DC07-7C7A-593B-94B5-3DA73880582A"
+    },
+    "fields": {
+      "CommitteeID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842",
+      "Name": "Events Committee — Q1 2027 meeting",
+      "StartDateTime": "2027-01-04T16:15:00Z",
+      "EndDateTime": "2027-01-04T17:15:00Z",
+      "TimeZone": "UTC",
+      "LocationType": "InPerson",
+      "LocationText": "Madison, WI — Guild Hall",
+      "Status": "Scheduled"
+    }
+  },
+  {
+    "primaryKey": {
       "ID": "D66B3490-6565-53A6-B6A9-978EA3558741"
     },
     "fields": {

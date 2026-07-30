@@ -1112,6 +1112,17 @@ function checkComposedApps() {
     const termYears = [...new Set(cTerms.map((t) => t.StartDate.slice(0, 4)))].sort();
     const earliestFormed = cCommittees.map((c) => c.FormationDate).sort()[0]?.slice(0, 4);
     check(`committees: history spans ${termYears.length} terms from ${termYears[0]} (earliest formed ${earliestFormed})`, termYears.length >= 4, 'governance must not start yesterday');
+    // roster floor: a committee-term below the bylaws minimum has no quorum and no believable
+    // vote. This is the tail the volunteer draw alone leaves behind, so assert it directly rather
+    // than trusting the participation average.
+    {
+      const min = CC.participation.minRosterPerTerm ?? 0;
+      const byTerm = new Map();
+      for (const m of cMemberships) byTerm.set(m.TermKey, (byTerm.get(m.TermKey) ?? 0) + 1);
+      const short = [...byTerm].filter(([, n]) => n < min);
+      check(`committees: every term meets the ${min}-member minimum (${byTerm.size} terms, smallest ${Math.min(...byTerm.values())})`,
+        min === 0 || short.length === 0, short.length ? short.map(([k, n]) => `${k}=${n}`).join(', ') : 'no under-quorum committee-terms');
+    }
     const noTermBeforeFormed = cTerms.filter((t) => { const c = cCommittees.find((x) => x.CommitteeKey === t.CommitteeKey); return c && t.EndDate < c.FormationDate; }).length;
     check('committees: no term predates its committee formation', noTermBeforeFormed === 0, `${noTermBeforeFormed} bad`);
     // and no SEAT predates it either — the term guard alone left members serving on
