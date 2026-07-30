@@ -1465,6 +1465,17 @@ function checkPlatform() {
   // the renewal-outreach list holds EXACTLY the pending-renewal members (derived, not invented)
   const pending = [...lastPeriod.values()].filter((per) => per.Status === 'PendingRenewal').length;
   const listRows = pListDetails.filter((d) => d.ListKey === 'renewal-outreach').length;
+  // volume, per persona: a demo logs in AS someone, and one saved view is not a workspace.
+  // (The gate above only proves each persona has at least one of each artefact.)
+  {
+    const perOwner = new Map();
+    for (const v of pViews) perOwner.set(v.UserKey, (perOwner.get(v.UserKey) ?? 0) + 1);
+    const thin = [...perOwner].filter(([, n]) => n < 2).map(([o]) => o);
+    check(`platform: every persona has 2+ saved views (${pViews.length} views, ${perOwner.size} personas)`,
+      thin.length === 0, thin.length ? `only one view for: ${thin.join(', ')}` : [...perOwner].map(([o, n]) => `${o}=${n}`).join(' '));
+    check(`platform: ${pQueries.length} reusable queries (a query library, not a sample)`, pQueries.length >= 5,
+      pQueries.map((q) => q.Name).slice(0, 3).join(' | '));
+  }
   check('platform: renewal-outreach list == pending-renewal members', listRows === pending, `${listRows} vs ${pending}`);
 
   const badNotif = pNotifs.filter((n) => (n.Unread ? n.ReadAt != null : n.ReadAt == null)).length;
