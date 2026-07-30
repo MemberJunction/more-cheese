@@ -120,8 +120,34 @@ export function identityFor(seed, p, release) {
     : null;
   const PrimaryLanguage = LANGUAGE[p.Country] ?? 'English';
 
-  return { Prefix, Suffix, Phone, Gender, DateOfBirth, RaceEthnicity, EthnicityHispanic, PronounSet, PrimaryLanguage, ...addr };
+  const Bio = bioFor(rng(seed, `bio:${p.MemberNumber}`), p, tenure, p._orgName ?? null);
+  return { Prefix, Suffix, Phone, Bio, Gender, DateOfBirth, RaceEthnicity, EthnicityHispanic, PronounSet, PrimaryLanguage, ...addr };
 }
+
+/**
+ * A short professional bio. Person.Bio was null for all 3,058 people, which is the most visible
+ * blank on a member-360 screen. Only a minority of members ever write one, and completeness rises
+ * with tenure exactly like the other self-entered fields.
+ */
+function bioFor(r, p, tenure, orgName) {
+  if (!r.bernoulli(answeredShare(0.62, tenure))) return null; // most profiles have no bio
+  // non-members carry a Title but no Segment — both have to work here
+  const role = p.Title ? p.Title.toLowerCase() : (p.Segment ? p.Segment.toLowerCase() : 'cheese professional');
+  const years = Math.max(2, Math.round(tenure) + r.int(0, 9));
+  const where = orgName ? ` at ${orgName}` : '';
+  const focus = r.pick([
+    'raw-milk cheeses', 'alpine styles', 'washed-rind development', 'farmstead production',
+    'aged goudas', 'blue cheese affinage', 'sheep-milk cheeses', 'cave-aged tommes',
+    'small-batch chèvre', 'traditional cheddar', 'regional PDO styles', 'seasonal creamery work',
+  ]);
+  return r.pick([
+    `${cap(role)}${where}. ${years} years in the trade, mostly ${focus}.`,
+    `Works on ${focus}${where}. ${cap(role)} for the last ${years} years.`,
+    `${years} years in cheese, currently ${role}${where}. Particular interest in ${focus}.`,
+    `${cap(role)}${where}, focused on ${focus}. Federation member since joining the industry.`,
+  ]);
+}
+const cap = (v) => v.charAt(0).toUpperCase() + v.slice(1);
 
 /** primary language follows the country, not the person's name origin */
 const LANGUAGE = {
@@ -180,12 +206,18 @@ function addressFor(r, p) {
 }
 
 /** Organization contact/profile fields — all pre-existing upstream columns. */
-export function orgIdentityFor(seed, o, releaseYear) {
+export function orgIdentityFor(seed, o, releaseYear, R) {
   const r = rng(seed, `orgmeta:${o.OrgKey}`);
+  // legal structure lives on the app's own OrganizationType lookup — its own stream so adding
+  // it does not shift a single draw above this line
+  const rl = rng(seed, `orglegal:${o.OrgKey}`);
   const suffixByCountry = { FR: 'SARL', DK: 'ApS', NL: 'B.V.', CH: 'AG', GB: 'Ltd', IE: 'Ltd', IT: 'S.r.l.', ES: 'S.L.', PT: 'Lda', DE: 'GmbH', AT: 'GmbH', GR: 'EPE', PL: 'Sp. z o.o.', MX: 'S.A. de C.V.', AR: 'S.A.', AU: 'Pty Ltd', NZ: 'Ltd', JP: 'K.K.', CA: 'Inc.' };
   const legalSuffix = suffixByCountry[o.Country] ?? (o.Type === 'Producer' ? 'LLC' : 'Inc.');
   const founded = releaseYear - r.int(3, 80);
+  const structures = R?.orgs?.legalStructure?.byType?.[o.Type];
   return {
+    // referenced BY NAME: bizapps-common seeds these rows (F6)
+    OrganizationTypeName: structures ? rl.pickWeighted(structures) : null,
     LegalName: `${o.Name} ${legalSuffix}`,
     // same slug as the work-email domain, so a member's address and their employer's
     // website agree instead of disagreeing on the truncation

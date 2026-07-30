@@ -107,12 +107,16 @@
         ],
         "Events": [
           [
+            "Critical",
+            0.04
+          ],
+          [
             "High",
-            0.15
+            0.13
           ],
           [
             "Medium",
-            0.6
+            0.58
           ],
           [
             "Low",
@@ -130,7 +134,9 @@
           ]
         ]
       },
-      "tolerance": 0.06
+      "tolerance": 0.06,
+      "criticalFloor": 1,
+      "$floorNote": "Critical is rare by design and only Billing and Events carry weight for it. Billing is ~5 tickets at demo scale, so the DRAW yields zero about half the time — and a share gate with a tolerance band passes happily on zero. If the draws come up dry, the highest-impact eligible ticket is promoted deterministically (see issues.mjs). A support queue with no critical ticket in 13 years is not a support queue."
     },
     "priorityRule": {
       "$note": "start from the type's default priority; bump one rung when severity >= bumpIfSeverityAtLeast; independently drop one rung for a small noise share (real triage is imperfect)",

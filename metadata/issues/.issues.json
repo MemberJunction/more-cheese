@@ -2025,15 +2025,15 @@
       "Description": "Reported 2025-05-01. Member registered for Workshop: Prairie Costing (2025-04-29) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
       "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
       "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
-      "Severity": "High",
+      "Severity": "Critical",
       "Priority": "High",
       "ReporterPersonID": "F6AA6408-C465-578E-9B77-A92E8722A59B",
       "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "AssigneeRecordID": "71BBDF70-8C62-5113-9B59-5E680181CAFA",
       "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
       "SourceRecordID": "DCF7D464-02AC-58A2-BC44-DFDD409A932C",
-      "ResolvedAt": "2025-05-03T12:09:00Z",
-      "ClosedAt": "2025-05-27T08:35:00Z"
+      "ResolvedAt": "2025-05-02T12:09:00Z",
+      "ClosedAt": "2025-05-26T08:35:00Z"
     }
   },
   {
