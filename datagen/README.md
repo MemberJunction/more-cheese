@@ -50,7 +50,9 @@ project (NegBin volume, event fixtures, hero pinning).
    dice; the domain owns eligibility, scoring, and the state machine.
 5. **Then the contract:** [`../plans/association-db/ruleset-spec.md`](../plans/association-db/ruleset-spec.md)
    — why it's built this way (calibration rule, determinism, texture, the gates).
-6. Everything else via the code map below, in order.
+6. **Changing the data?** [`AUTHORING.md`](AUTHORING.md) — the cookbook: tune a number,
+   extend a domain, add a domain end-to-end, with the gotchas that actually bit.
+7. Everything else via the code map below, in order.
 
 ## Run
 
