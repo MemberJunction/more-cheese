@@ -83,7 +83,7 @@ exists in people's heads instead of in a schema.
 | `Rate` | number | expected occurrences per opportunity (may exceed 1); feeds count draws | ~8 |
 | `Target` | `{target, tolerance, se?}` | a number the VALIDATOR holds the output to; `se` names the cushion multiplier (today it varies 0/1.5/2/3 with no stated reason) | ~28 |
 | `Arrow` | existing object | causal rule: exactly one authoring form + evidence. **Absorbs the 7 bare betas**; lint walks *all* depths | 9 blocks + 7 bare |
-| `Mix` | `[[value, weight], …]` | weighted options; weights positive finite. **One canonical syntax**; object-map and named-field forms migrate | ~17 |
+| `Mix` | `{option: weight, …}` | weighted options; weights positive finite. Canonical form decided 2026-07-31 (object-map); pair-array and named-field forms migrate | ~17 |
 | `Bank` | `[string, …]` | strings to draw from; optional `{placeholders}` declared next to it (`{t}`, `{segment}`) so templates are checkable | ~33 |
 | `Catalog` | `[{key, name?, …}, …]` | named things the generator CREATES; `key` is identity (canonical), `name` is display; cross-refs point at `key` | ~24 |
 | `Window` | number + unit-suffixed key (`…Days`, `…Months`, `…Years`) | duration; the unit is the suffix, enforced | ~38 |
@@ -148,9 +148,11 @@ payoff — before any new authoring happens.
 
 ## Open questions for review (the veto list)
 
-1. `Mix` canonical syntax: pair-array (proposed) or object-map? Pair-array preserves
-   author-controlled order and non-string values; object-map reads better for splits
-   like `voteSplit`. Pick one; the other migrates.
+1. ~~`Mix` canonical syntax~~ **DECIDED 2026-07-31: object-map** (`{"Gold": 0.05, …}`).
+   Every ruleset-level mix has string options, and two mixes already use this form, so
+   this canonicalises toward existing practice. Pair-arrays remain a code-level idiom
+   (`rng.pickWeighted`'s input), where non-string options genuinely occur; generators
+   adapt via `Object.entries`. Seven mixes migrate, byte-identity provable.
 2. Rename the 7 target aliases to `target`, or keep the domain flavour
    (`shareOfEligible`) and mark them `Target` by schema annotation instead? Rename is
    proposed (predictability wins), but it touches ~11 generator lines.
