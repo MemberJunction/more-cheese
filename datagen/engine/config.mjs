@@ -50,12 +50,22 @@ export async function loadRuleset(scenario, project = DEFAULT_PROJECT) {
   const index = JSON.parse(readFileSync(join(dir, 'index.json'), 'utf8'));
   const ruleset = {};
   for (const name of index.modules) {
-    const mod = JSON.parse(readFileSync(join(dir, `${name}.json`), 'utf8'));
+    let mod;
+    try {
+      mod = JSON.parse(readFileSync(join(dir, `${name}.json`), 'utf8'));
+    } catch (e) {
+      throw new Error(`ruleset module '${name}.json' is not valid JSON: ${e.message}`);
+    }
     delete mod.$comment; // module-level commentary isn't part of the composed recipe
     Object.assign(ruleset, mod);
   }
   if (scenario) {
-    const overlay = JSON.parse(readFileSync(join(projectDir(project), `ruleset/scenarios/${scenario}.json`), 'utf8'));
+    let overlay;
+    try {
+      overlay = JSON.parse(readFileSync(join(projectDir(project), `ruleset/scenarios/${scenario}.json`), 'utf8'));
+    } catch (e) {
+      throw new Error(`scenario '${scenario}.json' is not valid JSON: ${e.message}`);
+    }
     delete overlay.$comment;
     // overlays may only override, never invent — a typo'd key would merge silently otherwise
     const unknown = findUnknownOverlayKeys(ruleset, overlay);

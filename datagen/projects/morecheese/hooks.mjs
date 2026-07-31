@@ -57,6 +57,26 @@ export const morecheeseHooks = {
     ]) {
       if (v == null) problems.push(`${path}: missing tolerance — the validator can't gate a target without one`);
     }
+    // CROSS-REFERENCES: authored names must point at things that exist. A typo'd committee
+    // or certification key on a hero doesn't error anywhere — the seat or credential just
+    // silently never materialises, and a pinned demo fact quietly vanishes.
+    {
+      const committees = new Set((R.committees?.list ?? []).map((c) => c.name));
+      const certs = new Set((R.programs?.certifications?.catalog ?? []).map((c) => c.key));
+      for (const h of R.heroes ?? []) {
+        for (const seat of h.committees ?? []) {
+          if (!committees.has(seat.committee)) problems.push(`heroes.${h.memberNumber}: committee "${seat.committee}" is not in committees.list`);
+        }
+        const declared = h.certifications ?? (h.certification ? [h.certification] : []);
+        for (const d of declared) {
+          if (!certs.has(d.key)) problems.push(`heroes.${h.memberNumber}: certification "${d.key}" is not in programs.certifications.catalog`);
+        }
+      }
+      // a credential ladder rung must stand on a rung that exists
+      for (const c of R.programs?.certifications?.catalog ?? []) {
+        if (c.prerequisite && !certs.has(c.prerequisite)) problems.push(`programs.certifications.catalog.${c.key}: prerequisite "${c.prerequisite}" is not in the catalog`);
+      }
+    }
     return problems;
   },
 };

@@ -39,7 +39,9 @@ grid full of "Calle Mill" street names. Do not skip 3 and 4 for anything user-vi
    bands encode team rulings (renewal 87%±2, statusMix, variance floors). A red gate
    usually means your number contradicts an authored fact elsewhere.
 
-That's it. No code. This tier is safe for anyone.
+That's it. No code. This tier is safe for anyone — and a typo'd edit (a share of 15
+instead of 0.15, a broken bracket) now fails at LOAD time with the offending path or file
+named, not mid-generation with a stack trace.
 
 **Gotcha — calibrated shares:** many shares (committee participation, certification
 pursuit) pass through `childOutcome`, which *calibrates to the target over the eligible
@@ -148,7 +150,11 @@ a too-large share of a smaller world (this failed once, in `test.mjs`, exactly t
    way: a missing `MJ_ENTITY_VAR` entry that had been rendering an EMPTY value slot in the
    sonar SQL, and a root-file rewrite that silently dropped the hand-added Betty dirs from
    the push order.
-2. The ruleset has **no schema** — a typo fails mid-generation, not at edit time. A JSON
-   Schema + lint step in `test.mjs` would catch it in seconds.
+2. ~~The ruleset has no schema.~~ **Fixed 2026-07-31**: the lint that already ran on every
+   load (`engine/lint.mjs`) now also catches the human typo classes — a share of 1.4, a
+   negative weight in a weighted list, a zero tolerance, a hero pointing at a committee or
+   credential that doesn't exist, and a broken module now names its FILE instead of dying
+   with a bare 'Unexpected token'. Negative-tested in `test.mjs`: five planted defects must
+   each be caught BY NAME, and the clean ruleset must stay quiet.
 3. `validate.mjs` is 1,600+ lines of bespoke checks; ~5 patterns repeat. A small helper
    library (shareBand, presenceFloor, fkResolves) would make new gates copy-paste.

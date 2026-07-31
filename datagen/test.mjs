@@ -18,14 +18,39 @@ const SEEDS = QUICK ? ['42', '7'] : ['7', '42', '99', '2026', '555', '13', '88']
 const RELEASE = '2026-07-31';
 
 let failures = 0;
+const pending = [];
 const CLI = join(HERE, 'cli');
 const run = (script, args) => execFileSync(process.execPath, [join(CLI, script), ...args], { encoding: 'utf8' });
 const step = (name, fn) => {
-  try { fn(); console.log(`✅ ${name}`); }
+  try { const r = fn(); if (r?.then) { pending.push(r.then(() => console.log(`✅ ${name}`)).catch((e) => { failures++; console.log(`❌ ${name}`); console.log(String(e.message ?? e).split('\n').slice(0, 4).join('\n')); })); return; } console.log(`✅ ${name}`); }
   catch (e) { failures++; console.log(`❌ ${name}`); console.log((e.stdout ?? String(e)).split('\n').filter((l) => l.startsWith('❌')).join('\n')); }
 };
 
 console.log(`datagen regression suite ${QUICK ? '(quick)' : ''}\n`);
+
+// 0. the ruleset lint catches what a human editing JSON actually breaks — negative-tested
+// (a lint that only ever passes is decoration). Synthetic rulesets, no generation needed.
+step('ruleset lint catches planted typos (share, weight, cross-refs) and stays quiet on clean input', async () => {
+  const { lintRuleset } = await import('./engine/lint.mjs');
+  const { morecheeseHooks } = await import('./projects/morecheese/hooks.mjs');
+  const expectCatch = (R, mustMention) => {
+    try { lintRuleset(R, morecheeseHooks.domainLint); }
+    catch (e) {
+      if (!String(e.message).includes(mustMention)) throw new Error(`lint fired but without "${mustMention}": ${e.message.split('\n')[1] ?? e.message}`);
+      return;
+    }
+    throw new Error(`lint MISSED a planted defect (expected mention of "${mustMention}")`);
+  };
+  const tol = { membership: { renewalTolerance: 0.02 }, learning: { participation: { tolerance: 0.05 }, completion: { tolerance: 0.05 } } };
+  expectCatch({ ...tol, world: { attendShare: 1.4 } }, 'attendShare');                                      // a share of 140%
+  expectCatch({ ...tol, events: { mix: [['Conference', 0.5], ['Webinar', -0.2]] } }, 'weight -0.2');        // a negative weight
+  expectCatch({ ...tol, funnel: { tolerance: 0 } }, 'tolerance');                                           // a tolerance of zero
+  expectCatch({ ...tol, committees: { list: [{ name: 'Standards Committee' }] },
+    heroes: [{ memberNumber: 'ICF-000101', committees: [{ committee: 'Standrads Committee', terms: [] }] }] }, 'Standrads');  // the classic transposition
+  expectCatch({ ...tol, programs: { certifications: { catalog: [{ key: 'ccp', prerequisite: 'ccp-basic' }] } } }, 'prerequisite');
+  lintRuleset({ ...tol, world: { attendShare: 0.6, mix: [['a', 1]] } }, morecheeseHooks.domainLint);        // and clean input passes
+});
+
 
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
@@ -164,5 +189,6 @@ step('seed assumptions match the dependency-schema contract', () => {
 });
 
 for (const d of ['out-test', 'out-test2']) rmSync(join(HERE, d), { recursive: true, force: true });
+await Promise.all(pending);
 console.log(`\n${failures === 0 ? '✔ ALL GREEN' : `✋ ${failures} step(s) failed`}`);
 process.exit(failures ? 1 : 0);
