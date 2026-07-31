@@ -92,6 +92,70 @@ exists in people's heads instead of in a schema.
 | `Regime` | `{years, <name>LogitShift…, <name>Multiplier…, flags}` | an era overlay applied post-calibration (tide, not boats) | 1 (covid) |
 | `Ref` | string | a cross-reference to a `Catalog` key or an app-seeded name; **every Ref family is schema-checked** (this is where the 9 unlinted reference families get their lint) | ~15 families |
 
+### Behavior blocks — the second half of the vocabulary
+
+Leaf types answer *"what is this value?"*. They do **not** answer the question a reviewer
+asked and this proposal originally missed:
+
+> "`meetings` and `participation` are two different objects with different rules. How is
+> someone expected to author something like that on their own? It makes sense reading it
+> but writing all that makes no sense."
+
+Correct, and leaf types alone don't fix it. You cannot write `participation` from a blank
+file, because its *composition* is dictated by what `committees.mjs` consumes. But the
+census shows those compositions are not bespoke. Put the seven calibrated blocks side by
+side:
+
+```
+committees.participation           = { shareOfEligible + tolerance + arrows }
+committees.meetings.attendance     = { presentTarget   + tolerance + arrows }
+forms.response                     = { rateTarget      + tolerance + arrows }
+learning.participation             = { target          + tolerance + arrows }
+learning.completion                = { target          + tolerance + arrows }
+programs.advocacy                  = { advocateShare   + tolerance + arrows }
+tasks.committeeActions.completion  = { target          + tolerance + arrows }
+```
+
+**It is the same object seven times**, spelled seven ways (the alias problem, again).
+Structurally: *a population decision, calibrated to a Target, shaped by Arrows*.
+
+And the shapes are not arbitrary — there are exactly as many as the engine has pattern
+executors (`engine/patterns.mjs`: `childOutcome`, `recurringDecision`,
+`annualParticipation`, `derivedTransaction`, `staticAssignment`). **Five executors, five
+block shapes.** A ruleset block is an *instantiation of a behavior*, not a freehand object:
+
+| block | authored slots | engine executor | instances today |
+|---|---|---|---|
+| `Decision` | `Target` + `Arrow`s (+ optional `Regime` shift) | `childOutcome` / `recurringDecision` / `annualParticipation` | 11 |
+| `CountProcess` | mean + `dispersionK` + cap (+ optional `Arrow`) | `negbin` draws | 3 |
+| `TimingProfile` | `lateShare` + late/onTime distributions + methods | `derivedTransaction` | 4 profiles |
+| `Assignment` | ordered `when`/`whenAbove` → `value` rules | `staticAssignment` | 1 |
+| `EventStream` | `Volume` + `Bank`s + `Mix`es + calendar anchors | plain generator loops | meetings, motions, events, … |
+
+The authoring answer, then: **you never compose an object freehand — you instantiate a
+block.** "Committee participation is a `Decision`: target 10.5% ±2pt, shaped by engagement
+β 0.9." Three typed slots. `meetings` is an `EventStream` (a `Volume`, some `Bank`s, a
+`Mix` for vote splits, a calendar anchor) with two `Decision`s nested inside it — that is
+genuinely all it is, and once you can see the five shapes you can read any block on sight.
+
+Consequences for the enforcement layers:
+
+- the **schema** ships each block as a snippet, so instantiating one is completion-driven
+  rather than recall-driven, and flags a block missing a required slot (a `Decision` with
+  no `Target` is inert; a `tolerance` with no partner is the `issues.severity` bug);
+- the **d.ts** types the executor options, so the generator side and the spec side of a
+  block are described by one vocabulary;
+- `AUTHORING.md` Recipe 3 gains a step-zero: *which of the five behaviors does this
+  domain need?* — the design question, asked before any JSON exists.
+
+**The honest limit.** Blocks make *instantiating known behaviors* writable. Deciding
+*which* behaviors a new domain needs — that committees hold meetings which have attendance
+— stays design work, and it lives in the generator: a block nobody consumes does nothing.
+The spec can never be the primary artifact for a genuinely new behavior. What blocks buy
+is that a new module's spec becomes **composition of five known shapes instead of
+invention**, and that a Tier 1/2 author can parse any existing block because there are
+only five to learn.
+
 ### Expert types (named, documented, not simplified)
 
 `DistParams` (`{mean, dispersionK}` — negbin; today the mean has three names),
@@ -162,7 +226,11 @@ payoff — before any new authoring happens.
    pins? (Proposed: delete; the facts are already asserted via `h.committees`.)
 5. Should `Target.se` (the SE-cushion multiplier) be authored at all, or standardised to
    one value validator-wide? Today's 0/1.5/2/3 spread looks accidental.
-6. Does the `Regime` type stay covid-shaped (`years` + shifts + multipliers), or
+6. Behavior blocks: adopt the five names as proposed (`Decision`, `CountProcess`,
+   `TimingProfile`, `Assignment`, `EventStream`)? `TimingProfile` currently appears in
+   both the expert-types list and the block list — it is genuinely both (a block whose
+   slots are expert-tier). Fold or keep the duplication?
+7. Does the `Regime` type stay covid-shaped (`years` + shifts + multipliers), or
    generalise now to support a second era in some future project?
 
 ## What this does NOT do
