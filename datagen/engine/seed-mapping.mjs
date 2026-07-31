@@ -760,6 +760,12 @@ export const PREAMBLE = {
     "DECLARE @E_MemberProfiles UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Member Profiles');",
     "DECLARE @E_Periods UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Membership Periods');",
     "DECLARE @E_CompEntries UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Competition Entries');",
+    // The "Registered but didn't attend" saved view targets Event Registrations. This DECLARE
+    // was missing while the row referencing it shipped, so the platform migration failed on a
+    // real install with 'Must declare the scalar variable "@E_Regs"' — the whole pack is one
+    // batch, so a single undeclared variable takes the entire file down. Found only by an
+    // install: suite gate 6b scopes the drift guard to packs 01-10 and excludes platform.
+    "DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');",
   ],
   sonar: [
     "-- MJ entity lookups resolve BY NAME (F6)",
