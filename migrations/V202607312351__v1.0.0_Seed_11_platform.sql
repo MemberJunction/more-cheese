@@ -16,6 +16,7 @@ DECLARE @E_Tasks UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'M
 DECLARE @E_MemberProfiles UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Member Profiles');
 DECLARE @E_Periods UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Membership Periods');
 DECLARE @E_CompEntries UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Competition Entries');
+DECLARE @E_Regs UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Event Registrations');
 
 -- [__mj].[User]: 3 rows
 INSERT INTO [__mj].[User] ([ID], [Name], [FirstName], [LastName], [Title], [Email], [Type], [IsActive], [LinkedRecordType])

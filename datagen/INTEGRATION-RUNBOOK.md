@@ -173,3 +173,50 @@ installs the app under a different schema name.
   cover it (`pack refs: memberships→terms`, `committees: no seat predates its committee
   formation`), and the general lesson is F9's: for every FK we emit, the validator needs the
   same check the database will make.
+
+## Addendum 2026-07-31 — the recapture TARGET is part of the contract (verified end-to-end)
+
+The 2026-07-28 capture installed fine on the database it was recorded against and **nowhere
+else**. Root cause: a MetadataSync capture is a SQL *log*, so every `@lookup:` it resolves is
+frozen as a literal id. Entity ids for OUR entities are minted by CodeGen, and the shipped
+baseline PINS them — so a capture taken against any database whose ids differ embeds ids that
+exist on no fresh install. 16 entities diverged (all `MoreCheese: *`); core and dependency ids
+matched, because their owners pin them.
+
+Step 3's "target must be EMPTY of demo data" is necessary but **not sufficient**. The target
+must also be:
+
+- **built from the shipped migrations** (baseline + CodeGen + platform), so its entity ids ARE
+  the pinned ones. A hand-replayed or long-lived playground database will not be — the old
+  source also carried 66 entities from unrelated demos.
+- **CodeGen'd** (`mj codegen --skipfiles`), or the push fails validation with hundreds of
+  `Field "X" does not exist on entity "Y"`. `CodeGen_IdentityColumns` regenerates views and
+  procs but deliberately omits the recurring `spUpdateExistingEntityFieldsFromSchema` calls, so
+  between `mj migrate` and `mj codegen` the tables carry the identity columns and
+  `__mj.EntityField` does not.
+- **CodeGen'd with dependency schemas EXCLUDED** (F5). The shipped `mj.config.cjs` is in
+  PLAYGROUND mode: `excludeSchemas` omits every `__mj_BizApps*` schema, so a plain run would
+  re-register entities whose owners pin their ids. Add them for the duration, then revert.
+
+Three more things the loop does that are easy to miss:
+
+- **The logger writes CORE procs under the app placeholder.** Any core `__mj` entity in the tree
+  (the three `ai-*` dirs) is emitted as `EXEC [${flyway:defaultSchema}].spCreateAIVendor`, which
+  resolves to the app schema and fails with "Could not find stored procedure". Post-process those
+  to `${mjSchema}` after splitting. App schemas are emitted literally and are fine.
+- **The push writes back into the tree** — a `sync` block (lastModified + checksum) on all ~122k
+  records. Never commit it: discard and re-emit, or use `mj sync file-reset`.
+- **One expected non-create.** `Created 122,221 / Updated 1 / Deferred 1` — the single update is
+  Sonar's deferred `spUpdateScoreModel` (F11). Any other non-create means the target wasn't clean.
+
+**F13 — anything CodeGen generates must be looked up, never pinned.** F6 said this for
+app-seeded lookup rows; it applies one level down to CodeGen's own metadata. The ProductTypes
+migration hardcoded an `EntityField.ID` and failed everywhere but its origin database with
+`FK_EntityFieldValue_EntityField`. It now resolves the field BY NAME in a single batch (a `GO`
+would end the DECLARE's scope) and THROWs if absent.
+
+**Verified 2026-07-31:** fresh database → core (15 migrations) → 7 dependency apps at pinned
+versions → our 6 migrations = **ALL GREEN in 96.2s**, 12/12 row counts exact against the
+canonical packs, Betty's vendor/model rows present, Sonar weights summing to 1.0000.
+Note `mj app install <dep-repo>` installs THAT repo's default-branch version, not the version
+your manifest's range resolves to — pin with `--version` when rebuilding a target by hand.

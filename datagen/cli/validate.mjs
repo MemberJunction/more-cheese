@@ -1558,6 +1558,17 @@ function checkSonar() {
   }
   check('sonar: every factor bound into the model with a positive weight',allBound,
     `${snModelFactors.length} model-factors / ${snFactors.length} factors`);
+  // Sonar renders ModelFactor.Weight as a PERCENTAGE (1.0 = 100%), so the weights are
+  // fractions of one and must total 1.0 across the model. They shipped as integers 1-3
+  // summing to 17, which the Sonar UI drew as 200%/300% weights — visible only on screen,
+  // because the old gate above only asserted Weight > 0. Team ruling 2026-07-30: max 100%.
+  {
+    const sum = snModelFactors.reduce((a, mf) => a + Number(mf.Weight), 0);
+    const over = snModelFactors.filter((mf) => Number(mf.Weight) > 1);
+    check('sonar: factor weights sum to 1.0 (Weight is a fraction, 1.0 = 100%)',
+      Math.abs(sum - 1) < 1e-6 && over.length === 0,
+      `sum=${sum.toFixed(4)}${over.length ? `, ${over.length} weight(s) > 1.0` : ''}`);
+  }
 }
 
 function checkMotifs() {
