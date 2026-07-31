@@ -20,6 +20,7 @@ import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../en
 import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 import { CITIES } from '../projects/morecheese/banks.mjs';
+import { makeGateHelpers } from '../engine/gates.mjs';
 import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -101,6 +102,10 @@ const renewalEvents = JSON.parse(readFileSync(join(OUT, 'validation-events.json'
 const results = [];
 const check = (name, ok, detail) => results.push({ name, ok, detail });
 
+// gate helpers live in engine/gates.mjs so they can be unit-tested (negative-tested in
+// the suite, like the lint) and reused by any future validator
+const { dangling, fkResolves, shareBand, presenceFloor, distinctAtLeast } = makeGateHelpers(check);
+
 // shared lookups
 const joinOf = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
 const periodsByMember = new Map();
@@ -114,21 +119,22 @@ function checkPacks() {
   const peopleKeys = new Set(people.map((p) => p.MemberNumber));
   const orgKeys = new Set(orgs.map((o) => o.OrgKey));
   const eventKeys = new Set(events.map((e) => e.EventKey));
-  const badEmployer = people.filter((p) => p.OrgKey && !orgKeys.has(p.OrgKey)).length;
-  const badPeriod = periods.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
-  const badRegP = regs.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
-  const badRegE = regs.filter((x) => !eventKeys.has(x.EventKey)).length;
-  check('pack refs: people→orgs (within common)', badEmployer === 0, `${badEmployer} dangling`);
-  check('pack refs: membership→common', badPeriod === 0, `${badPeriod} dangling`);
-  check('pack refs: events→common+events', badRegP + badRegE === 0, `${badRegP}+${badRegE} dangling`);
+  fkResolves('pack refs: people→orgs (within common)', [[people, (p) => p.OrgKey, orgKeys]]);
+  fkResolves('pack refs: membership→common', [[periods, (x) => x.MemberNumber, peopleKeys]]);
+  fkResolves('pack refs: events→common+events', [
+    [regs, (x) => x.MemberNumber, peopleKeys],
+    [regs, (x) => x.EventKey, eventKeys],
+  ]);
   const productKeys = new Set(products.map((x) => x.ProductKey));
   const orderKeys = new Set(orders.map((x) => x.OrderKey));
-  const badOrderM = orders.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  // note: a two-column check like "line→order AND line→product" is two relations on the
+  // same rows — the helper reports them the way the old combined counter did
   const badLine = orderLines.filter((x) => !orderKeys.has(x.OrderKey) || !productKeys.has(x.ProductKey)).length;
-  const badPay = payments.filter((x) => !orderKeys.has(x.OrderKey)).length;
+  const badOrderM = dangling(orders, (x) => x.MemberNumber, peopleKeys);
+  const badPay = dangling(payments, (x) => x.OrderKey, orderKeys);
   check('pack refs: orders→common + lines→products + payments→orders', badOrderM + badLine + badPay === 0, `${badOrderM}+${badLine}+${badPay} dangling`);
   const meetingKeys = new Set(cMeetings.map((x) => x.MeetingKey));
-  const badCm = cMemberships.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badCm = dangling(cMemberships, (x) => x.MemberNumber, peopleKeys);
   const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
   check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
   // memberships → the term and committee they claim. A membership on a term that was never

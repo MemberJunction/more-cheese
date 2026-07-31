@@ -237,3 +237,6 @@ migrations/v*/*__RSU_*.sql
 # explicitly un-ignore this one subtree.
 !/templates/claude-pack/dist/
 !/templates/claude-pack/dist/**
+
+# any datagen scratch build dir (out-simp, out-g3, ...)
+datagen/out-*/

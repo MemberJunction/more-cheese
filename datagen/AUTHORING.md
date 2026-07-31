@@ -109,10 +109,12 @@ This is the tier that today needs care. The checklist, in order:
    order — the emitter fails loudly if the list and the mapping disagree.
    `cli/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
    carries column types the mapping doesn't, and the DDL-drift gate polices it.
-5. **Gates** — minimum set for a new domain: FK resolution both directions, share bands
-   for anything drawn from a weighted list **plus presence floors for rare categories**,
-   and one gate asserting the domain's reason-to-exist (the funnel's conversion-rate gate
-   is the model: it asserts the *question the domain answers* is answerable).
+5. **Gates** — minimum set for a new domain, each a one-line helper call from
+   `engine/gates.mjs`: `fkResolves` both directions, `shareBand` for anything drawn from a
+   weighted list **plus `presenceFloor` for rare categories** (a share band passes happily
+   on zero), and one bespoke gate asserting the domain's reason-to-exist (the funnel's
+   conversion-rate gate is the model: it asserts the *question the domain answers* is
+   answerable).
 6. **Contract** — if you touch a dependency app's table, re-capture:
    `MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <install>`.
 7. **Verify up the whole ladder** (build → test.mjs → push → render). Then re-emit what
@@ -156,5 +158,8 @@ a too-large share of a smaller world (this failed once, in `test.mjs`, exactly t
    credential that doesn't exist, and a broken module now names its FILE instead of dying
    with a bare 'Unexpected token'. Negative-tested in `test.mjs`: five planted defects must
    each be caught BY NAME, and the clean ruleset must stay quiet.
-3. `validate.mjs` is 1,600+ lines of bespoke checks; ~5 patterns repeat. A small helper
-   library (shareBand, presenceFloor, fkResolves) would make new gates copy-paste.
+3. ~~validate.mjs is 1,600+ lines of bespoke checks.~~ **Fixed 2026-07-31**: the five
+   repeating shapes live in `engine/gates.mjs` (`fkResolves`, `shareBand`, `presenceFloor`,
+   `distinctAtLeast`, `dangling`), negative-tested in the suite. New gates should be a
+   helper call; the six pack-refs FK gates are the converted exemplars (report-identical).
+   Existing prose-style gates were deliberately left — their wording carries the story.

@@ -52,6 +52,34 @@ step('ruleset lint catches planted typos (share, weight, cross-refs) and stays q
 });
 
 
+// 0b. gate helpers: each must catch its planted defect and stay quiet on clean input
+step('gate helpers catch planted defects (fk, share, presence, distinct) and pass clean input', async () => {
+  const { makeGateHelpers } = await import('./engine/gates.mjs');
+  const results = [];
+  const h = makeGateHelpers((name, ok, detail) => results.push({ name, ok, detail }));
+  const failed = () => results.splice(0).filter((r) => !r.ok);
+
+  h.fkResolves('fk', [[[{ k: 'A' }, { k: 'MISSING' }], (r) => r.k, new Set(['A'])]]);
+  if (failed().length !== 1) throw new Error('fkResolves missed a dangling ref');
+  h.fkResolves('fk', [[[{ k: 'A' }, { k: null }], (r) => r.k, new Set(['A'])]]);
+  if (failed().length !== 0) throw new Error('fkResolves must allow null keys (optional FKs)');
+
+  h.shareBand('share', 0.50, { target: 0.10, tolerance: 0.05 });
+  if (failed().length !== 1) throw new Error('shareBand missed a wildly off share');
+  h.shareBand('share', 0.12, { target: 0.10, tolerance: 0.05 });
+  if (failed().length !== 0) throw new Error('shareBand false-positived inside tolerance');
+
+  h.presenceFloor('floor', { Critical: 0, High: 17 });
+  if (failed().length !== 1) throw new Error('presenceFloor missed an empty bucket');
+  h.presenceFloor('floor', { Critical: 2, High: 17 });
+  if (failed().length !== 0) throw new Error('presenceFloor false-positived');
+
+  h.distinctAtLeast('distinct', ['a', 'a', 'a'], 3);
+  if (failed().length !== 1) throw new Error('distinctAtLeast missed visible repetition');
+  h.distinctAtLeast('distinct', ['a', 'b', 'c'], 3);
+  if (failed().length !== 0) throw new Error('distinctAtLeast false-positived');
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {
