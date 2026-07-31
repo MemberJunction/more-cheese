@@ -91,13 +91,22 @@ This is the tier that today needs care. The checklist, in order:
      `uuidFor(prefix, key)` — register the prefix in DATA-CONTRACT.md's table
 3. **Wire into `index.mjs`** — call in pipeline order (§5 of ruleset-spec: a domain must
    be built after everything it reads), add tables to the pack map.
-4. **Emitters — all three, and this is the current sore spot:**
-   - `engine/seed-mapping.mjs` — SQL INSERT mapping (+ PREAMBLE DECLAREs for any
-     by-name lookups)
-   - `cli/emit-mjsync.mjs` — its own duplicate MAPPING (metadata path; `@lookup:` for
-     seeded rows — and the entity for polymorphic refs is `MJ: Entities`, not `Entities`;
-     that one wrong word failed 3,191 records)
-   - `cli/emit-schema.mjs` — the playground shim DDL (+ its own lookup seeds if F6 applies)
+4. **The mapping — ONE entry in `engine/seed-mapping.mjs`** (consolidated 2026-07-31; the
+   same tables were previously mapped again inside emit-mjsync, and the copies drifted —
+   one wrong word there once failed 3,191 records at push). Each entry carries:
+   - `json`, `table` and a `columns(r)` projection — the formatters are dual-mode, so the
+     SAME entry renders SQL literals *and* the MetadataSync record (`renderRecord`)
+   - `dir` + `entity` — the MetadataSync folder and entity name (omit both for an
+     INSERT-only pack like platform)
+   - by-name lookups (F6): the `sqlVar('@X')` you write resolves on the SQL path via a
+     PREAMBLE DECLARE and on the sync path via `VAR_TO_LOOKUP` — add your variable to
+     BOTH, or the emit throws with the variable's name
+   - delivery quirks, spelled on the entry: `syncPk` (non-ID primary key), `syncOmit`
+     (SQL-only columns), `syncOverride` (e.g. Sonar's deferred circular FK)
+   Then add the new `dir`s to `DIRECTORY_ORDER` in `cli/emit-mjsync.mjs` in FK-safe push
+   order — the emitter fails loudly if the list and the mapping disagree.
+   `cli/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
+   carries column types the mapping doesn't, and the DDL-drift gate polices it.
 5. **Gates** — minimum set for a new domain: FK resolution both directions, share bands
    for anything drawn from a weighted list **plus presence floors for rare categories**,
    and one gate asserting the domain's reason-to-exist (the funnel's conversion-rate gate
@@ -132,8 +141,13 @@ a too-large share of a smaller world (this failed once, in `test.mjs`, exactly t
 
 ## Known sharp edges (candidates for the next simplification pass)
 
-1. The emitter mapping exists **three times** (step 4 above). Collapsing it to one source
-   of truth is the single biggest authoring simplification available.
+1. ~~The emitter mapping exists three times.~~ **Fixed 2026-07-31**: one mapping in
+   `seed-mapping.mjs`, rendered to both delivery paths (see Recipe 3 step 4). The refactor
+   was proven by byte-diffing the SQL outputs and semantically diffing all 122k metadata
+   records against pre-consolidation baselines — and it surfaced two latent bugs on the
+   way: a missing `MJ_ENTITY_VAR` entry that had been rendering an EMPTY value slot in the
+   sonar SQL, and a root-file rewrite that silently dropped the hand-added Betty dirs from
+   the push order.
 2. The ruleset has **no schema** — a typo fails mid-generation, not at edit time. A JSON
    Schema + lint step in `test.mjs` would catch it in seconds.
 3. `validate.mjs` is 1,600+ lines of bespoke checks; ~5 patterns repeat. A small helper
