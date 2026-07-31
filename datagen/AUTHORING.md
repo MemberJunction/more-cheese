@@ -1,5 +1,8 @@
 # Authoring MoreCheese data — the cookbook
 
+> Struggling to picture the system at all? Read [`TOUR.md`](TOUR.md) first — the same
+> material as a plain-English factory tour, with the protections and a slow worked example.
+
 The other docs explain what this system **is** (FRAMEWORK, HOW-IT-WORKS) and how it
 **ships** (DELIVERY, INTEGRATION-RUNBOOK). This one explains how to **change the data** —
 the thing you actually came here to do.

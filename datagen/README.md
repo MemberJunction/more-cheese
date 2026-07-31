@@ -37,6 +37,10 @@ project (NegBin volume, event fixtures, hero pinning).
 
 ## New here? The 30-minute path
 
+0. **Never seen this system before?** [`TOUR.md`](TOUR.md) — the whole factory in plain
+   English, no jargon: the five stations, the replay property, the three protections, and
+   one worked change at each tier. Read this first if AUTHORING.md feels dense.
+
 1. **Run it first** (the build command, below) — watching the full gate battery go green beats reading.
 2. **Read the recipe in English:** [`projects/morecheese/ruleset/RULESET.md`](projects/morecheese/ruleset/RULESET.md) — every rule as
    a sentence with its effect in percentage points. Then the concepts:
