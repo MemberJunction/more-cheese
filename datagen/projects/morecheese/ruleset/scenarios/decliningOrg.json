@@ -1,11 +1,14 @@
 {
   "$comment": "The declining-association scenario (benchmarks-draft.json scenarios.decliningOrg): same causal model, overlay parameters calibrated to REAL craft-food decline (Mead Makers −78% dues since 2019; CA Artisan Cheese Guild six straight down years; FCIA −16% and cutting dues to retain). Renewal ~78%, hobbyists bleeding hardest. Run: node build.mjs --scenario decliningOrg. Sales use: dramatic churn/retention demos. NOTE (FEEDBACK §7.5, open): hero pins are verified against the healthy baseline; this scenario keeps Marcus/Elena pinned (conditioned outcomes survive any overlay) but their stories read differently in a dying org — scenario-composition rules are a ruleset-spec §9 workshop item.",
+  "$paths": "Follows the four-part shape (params / effects), like the base ruleset. An overlay may only override keys the base already has, so a stale path here fails the build loudly instead of silently doing nothing.",
   "membership": {
-    "renewalTarget": 0.78,
-    "yearlyBand": [0.73, 0.83],
-    "enthusiastRenewal": { "target": 0.55 },
-    "arrows": {
-      "enthusiastTier": { "groupTarget": 0.55, "note": "hobbyists bleed first in a declining org (AHA/Mead Makers pattern)" }
+    "params": {
+      "renewal": { "target": 0.78 },
+      "yearlyBand": [0.73, 0.83],
+      "enthusiastRenewal": { "target": 0.55 }
+    },
+    "effects": {
+      "renewal.enthusiastTier": { "groupTarget": 0.55, "note": "hobbyists bleed first in a declining org (AHA/Mead Makers pattern)" }
     }
   },
   "statusMix": { "target": [0.60, 0.32, 0.05, 0.03], "tolerance": 0.12, "$note": "heavier lapsed share — a shrinking org carries more recent ex-members" }

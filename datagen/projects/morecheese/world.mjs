@@ -15,20 +15,20 @@ import { orgNameDealer, personNameFor, titleFor, CITIES, SEGMENTS } from './bank
 export function buildOrgs(cfg) {
   const { R, seed, releaseYear } = cfg;
   const orgs = [];
-  const nOrgs = Math.round(cfg.n * R.orgs.ratioToMembers);
+  const nOrgs = Math.round(cfg.n * R.orgs.params.ratioToMembers);
   // AUTHORED names, dealt without replacement from the bank's own dice streams —
   // dice assign names, they never compose them (the mad-libs lesson)
   const dealName = orgNameDealer(seed);
   for (let i = 0; i < nOrgs; i++) {
     const r = rng(seed, `org:${i}`);
-    const region = r.pickWeighted(R.geography.mix);
+    const region = r.pickWeighted(Object.entries(R.geography.mixes.region));
     const [city, state, lat, lon, , country, countryName] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
-    const type = r.pickWeighted([['Producer', R.orgs.producerShare], ['Retailer', 0.30], ['Supplier', 0.15], ['Educator', 0.10]]);
+    const type = r.pickWeighted([['Producer', R.orgs.params.producerShare], ['Retailer', 0.30], ['Supplier', 0.15], ['Educator', 0.10]]);
     const name = dealName(type);
     // small chance per history year of a dissolution/acquisition/program-cut
     let event = null;
     for (let y = R.history.startYear + 2; y <= releaseYear; y++) {
-      if (r.bernoulli(R.orgs.lifecycleEventRatePerYear)) {
+      if (r.bernoulli(R.orgs.params.lifecycleEventRatePerYear)) {
         event = { year: y, kind: r.pick(['Dissolved', 'Acquired', 'ProgramCut']) };
         break;
       }
@@ -107,7 +107,7 @@ export function buildPeople(cfg, orgs) {
   for (let i = 0; i < cfg.n; i++) {
     const key = `ICF-${String(100001 + i)}`;
     const r = rng(seed, `person:${key}`);
-    const region = r.pickWeighted(R.geography.mix);
+    const region = r.pickWeighted(Object.entries(R.geography.mixes.region));
     const [city, state, lat, lon, , country, countryName, nameOrigin] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
     const [thetaZ, phi] = r.copulaPair(R.latents.copulaRho);
     const { anchor: theta, path: thetaPath } = thetaProcess(cfg, key, thetaZ);
@@ -115,7 +115,7 @@ export function buildPeople(cfg, orgs) {
     const anniversary = r.bernoulli(R.cohorts.anniversaryShare); // ASSUMPTION: D6 pending
     const segment = r.pickWeighted(SEGMENTS);
     // tier assignment: DECLARED rules (ruleset membership.tiers.assign) via core staticAssignment
-    const tier = staticAssignment(R.membership.tiers.assign, { Segment: segment, hasOrganization: !!org, phi });
+    const tier = staticAssignment(R.membership.catalog.tierAssignment, { Segment: segment, hasOrganization: !!org, phi });
     // origin-consistent authored name from the member's own name stream (region-weighted buckets)
     const nm = personNameFor(seed, key, region, nameOrigin);
     people.push({

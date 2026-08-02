@@ -18,7 +18,7 @@ export function buildPrograms(cfg, people, periods, learning) {
   const releaseIso = iso(release);
 
   // ---------- certifications ----------
-  const certifications = PR.certifications.catalog.map((c) => ({
+  const certifications = PR.catalog.certifications.map((c) => ({
     CertKey: c.key, Name: c.name, Description: c.description ?? null, ValidYears: c.validYears, IsSharedDemo: true,
   }));
   const completers = [...new Set(learning.enrollments.filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber))]
@@ -27,8 +27,8 @@ export function buildPrograms(cfg, people, periods, learning) {
   childOutcome({
     seed,
     items: completers,
-    scoreOf: (p) => PR.certifications.arrows.engagement.beta * p._theta,
-    target: PR.certifications.pursuitShareOfCompleters,
+    scoreOf: (p) => PR.effects['certification.engagement'].beta * p._theta,
+    target: PR.params.certificationPursuit.target,
     streamKey: (p) => `cert:${p.MemberNumber}`,
     decide: (p, prob, r) => {
       if (!r.bernoulli(prob)) return;
@@ -42,7 +42,7 @@ export function buildPrograms(cfg, people, periods, learning) {
         // would land after release means the pursuit is still InProgress (the old guard
         // checked +180d but drew up to +360d — certs got awarded in the future)
         const awardDays = r.int(120, 360);
-        const awarded = r.bernoulli(PR.certifications.awardShare) && iso(addDays(enrolled, awardDays)) <= releaseIso;
+        const awarded = r.bernoulli(PR.params.certificationAwardShare) && iso(addDays(enrolled, awardDays)) <= releaseIso;
         const awardedOn = awarded ? addDays(enrolled, awardDays) : null;
         const expiresOn = awardedOn ? addYears(awardedOn, cert.validYears) : null;
         const expired = expiresOn && iso(expiresOn) < releaseIso;
@@ -58,7 +58,7 @@ export function buildPrograms(cfg, people, periods, learning) {
       // weighted so foundation credentials dominate. A member who earns one may go on to
       // a credential whose prerequisite they now hold — so an advanced certificate never
       // appears on someone who never earned the rung below it.
-      const catalog = PR.certifications.catalog;
+      const catalog = PR.catalog.certifications;
       const weightOf = (c) => c.weight ?? 1;
       const openTo = (held) => catalog.filter((c) => !held.has(c.key) && (!c.prerequisite || held.has(c.prerequisite)));
       const held = new Set();
@@ -89,7 +89,7 @@ export function buildPrograms(cfg, people, periods, learning) {
   for (const h of R.heroes) {
     const declared = h.certifications ?? (h.certification ? [h.certification] : []);
     for (const d of declared) {
-      const cert = PR.certifications.catalog.find((c) => c.key === d.key);
+      const cert = PR.catalog.certifications.find((c) => c.key === d.key);
       const awardedOn = d.awardedOn ?? null;
       memberCertifications.push({
         MemberCertKey: `${h.memberNumber}:${d.key}`, MemberNumber: h.memberNumber,
@@ -104,7 +104,7 @@ export function buildPrograms(cfg, people, periods, learning) {
   // ---------- competition entries (producers with orgs; org membership = eligibility) ----------
   const competitionEntries = [];
   const memberYears = yearsCovered(periods, R.history.startYear, release.getUTCFullYear());
-  const productName = (r) => r.pick(PR.competition.productForms).replace('{t}', r.pick(TOPONYMS));
+  const productName = (r) => r.pick(PR.catalog.competitionProductForms).replace('{t}', r.pick(TOPONYMS));
   for (const p of people) {
     if (p.Segment !== 'Producer' || !p.OrgKey) continue;
     const pinned = R.heroes.find((h) => h.memberNumber === p.MemberNumber)?.competition;
@@ -112,14 +112,14 @@ export function buildPrograms(cfg, people, periods, learning) {
       const r = rng(seed, `compentry:${p.MemberNumber}:${y}`);
       // judging is a physical activity — the pandemic competition was curtailed
       const CV = R.regimes.covid;
-      const compRate = PR.competition.entryRatePerYear * (CV.years.includes(y) ? (CV.competitionMultiplier ?? 1) : 1);
+      const compRate = PR.params.competitionEntryRatePerYear * (CV.years.includes(y) ? (CV.competitionMultiplier ?? 1) : 1);
       const n = pinned ? pinned.entriesPerYear : (r.bernoulli(compRate) ? 1 + (r.bernoulli(0.25) ? 1 : 0) : 0);
-      for (let i = 0; i < Math.min(n, pinned ? n : PR.competition.maxPerYear); i++) {
-        let result = r.pickWeighted(Object.entries(PR.competition.medalWeights));
+      for (let i = 0; i < Math.min(n, pinned ? n : PR.params.competitionMaxPerYear); i++) {
+        let result = r.pickWeighted(Object.entries(PR.mixes.medal));
         if (pinned?.pinnedResults?.[y] && i === 0) result = pinned.pinnedResults[y]; // Henri's Gold is a fact
         competitionEntries.push({
           EntryKey: `${p.MemberNumber}:${y}:${i}`, MemberNumber: p.MemberNumber, OrgKey: p.OrgKey,
-          EntryYear: y, Category: pinned?.category && i === 0 ? pinned.category : r.pick(PR.competition.categories),
+          EntryYear: y, Category: pinned?.category && i === 0 ? pinned.category : r.pick(PR.catalog.competitionCategories),
           ProductName: pinned?.productName && i === 0 ? pinned.productName : productName(r),
           Result: result, IsSharedDemo: true,
         });
@@ -133,8 +133,8 @@ export function buildPrograms(cfg, people, periods, learning) {
   childOutcome({
     seed,
     items: crowd,
-    scoreOf: (p) => PR.advocacy.arrows.engagement.beta * p._theta,
-    target: PR.advocacy.advocateShare,
+    scoreOf: (p) => PR.effects['advocacy.engagement'].beta * p._theta,
+    target: PR.params.advocateShare.target,
     streamKey: (p) => `advocate:${p.MemberNumber}`,
     decide: (p, prob, r) => {
       if (!r.bernoulli(prob)) return;
@@ -142,10 +142,10 @@ export function buildPrograms(cfg, people, periods, learning) {
         // the one thing that goes UP: emergency relief and market-access lobbying, so the
         // era is not a uniform dip
         const CV2 = R.regimes.covid;
-        const advMean = PR.advocacy.actionsPerYearMean * (CV2.years.includes(y) ? (CV2.advocacyMultiplier ?? 1) : 1);
-        const k = r.negbin(advMean, PR.advocacy.dispersionK);
+        const advMean = PR.params.advocacyActionsPerYearMean * (CV2.years.includes(y) ? (CV2.advocacyMultiplier ?? 1) : 1);
+        const k = r.negbin(advMean, PR.params.advocacyDispersionK);
         for (let i = 0; i < k; i++) {
-          advocacyActions.push(actionRow(p.MemberNumber, y, i, r.pickWeighted(Object.entries(PR.advocacy.kindWeights)), r.pick(PR.advocacy.topics), r));
+          advocacyActions.push(actionRow(p.MemberNumber, y, i, r.pickWeighted(Object.entries(PR.mixes.advocacyKind)), r.pick(PR.catalog.advocacyTopics), r));
         }
       }
     },

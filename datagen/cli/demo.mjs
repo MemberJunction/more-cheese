@@ -215,11 +215,11 @@ function renderMember(m) {
   const rate = (rows) => rows.length ? (rows.reduce((s, e) => s + e.renewed, 0) / rows.length) : NaN;
   const ev = D.renewalEvents;
   const splits = [
-    ['auto-renew ON', rate(ev.filter((e) => e.autoRenew)), 'auto-renew OFF', rate(ev.filter((e) => !e.autoRenew)), 'authored β ' + ${JSON.stringify(R.membership.arrows.autoRenew.beta)}],
-    ['employer event', rate(ev.filter((e) => e.employerEvent)), 'no employer event', rate(ev.filter((e) => !e.employerEvent)), 'authored β ' + ${JSON.stringify(R.membership.arrows.employerEvent.beta)}],
-    ['enthusiast tier', rate(ev.filter((e) => e.enthusiastTier)), 'professional tiers', rate(ev.filter((e) => !e.enthusiastTier)), 'authored β ' + ${JSON.stringify(R.membership.arrows.enthusiastTier.beta)}],
-    ['tenure above median', rate(ev.filter((e) => e.tenureZ > 0)), 'tenure below median', rate(ev.filter((e) => e.tenureZ <= 0)), 'authored β ' + ${JSON.stringify(R.membership.arrows.tenure.beta)}],
-    ['θ top third', rate(ev.filter((e) => e.theta > 0.43)), 'θ bottom third', rate(ev.filter((e) => e.theta < -0.43)), 'authored β ' + ${JSON.stringify(R.membership.arrows.engagement.beta)}],
+    ['auto-renew ON', rate(ev.filter((e) => e.autoRenew)), 'auto-renew OFF', rate(ev.filter((e) => !e.autoRenew)), 'authored β ' + ${JSON.stringify(R.membership.effects['renewal.autoRenew'].beta)}],
+    ['employer event', rate(ev.filter((e) => e.employerEvent)), 'no employer event', rate(ev.filter((e) => !e.employerEvent)), 'authored β ' + ${JSON.stringify(R.membership.effects['renewal.employerEvent'].beta)}],
+    ['enthusiast tier', rate(ev.filter((e) => e.enthusiastTier)), 'professional tiers', rate(ev.filter((e) => !e.enthusiastTier)), 'authored β ' + ${JSON.stringify(R.membership.effects['renewal.enthusiastTier'].beta)}],
+    ['tenure above median', rate(ev.filter((e) => e.tenureZ > 0)), 'tenure below median', rate(ev.filter((e) => e.tenureZ <= 0)), 'authored β ' + ${JSON.stringify(R.membership.effects['renewal.tenure'].beta)}],
+    ['θ top third', rate(ev.filter((e) => e.theta > 0.43)), 'θ bottom third', rate(ev.filter((e) => e.theta < -0.43)), 'authored β ' + ${JSON.stringify(R.membership.effects['renewal.engagement'].beta)}],
   ];
   const splitRows = splits.map(([la, va, lb, vb, note]) => '<tr><td>' + la + '</td><td class="num ok">' + (va * 100).toFixed(1) + '%</td><td>' + lb + '</td><td class="num">' + (vb * 100).toFixed(1) + '%</td><td class="num ' + (va - vb >= 0 ? 'ok' : 'bad') + '">' + ((va - vb) * 100).toFixed(1) + 'pt</td><td class="hint">' + note + '</td></tr>').join('');
 

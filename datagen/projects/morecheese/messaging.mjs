@@ -26,18 +26,18 @@ export function buildMessaging(cfg, people, issues) {
 
   for (const issue of issues.issues) {
     const r = rng(seed, `msgthread:${issue.IssueKey}`);
-    if (!heroIssueKeys.has(issue.IssueKey) && !r.bernoulli(M.threadSharePerIssue)) continue;
+    if (!heroIssueKeys.has(issue.IssueKey) && !r.bernoulli(M.params.threadSharePerIssue.target)) continue;
     const reporter = personByKey.get(issue.ReporterMemberNumber);
     if (!reporter) continue;
 
     const threadKey = `thread:${issue.IssueKey}`;
     const memberName = fullName(issue.ReporterMemberNumber);
-    const staffName = (issue.AssigneeMemberNumber && fullName(issue.AssigneeMemberNumber)) || M.staffFallbackSender;
+    const staffName = (issue.AssigneeMemberNumber && fullName(issue.AssigneeMemberNumber)) || M.params.staffFallbackSender;
     const terminal = issue.StatusKey === 'Resolved' || issue.StatusKey === 'Closed';
 
     // message timeline: opener → (reply → follow-up pairs) → closer, clock never passes release
     const opened = issue.ResolvedAt ? new Date(issue.ResolvedAt).getTime() - r.int(4, 20) * 86400000
-      : releaseMs - r.int(2, Math.max(3, R.issues.recencyOpenDays)) * 86400000;
+      : releaseMs - r.int(2, Math.max(3, R.issues.params.recencyOpenDays)) * 86400000;
     let clock = Math.min(opened, releaseMs - 3600000);
     // OUTBOUND (staff) messages land in the working week: no 3am Sunday replies from the
     // member-services desk. Members write whenever — evenings and weekends included, which
@@ -57,22 +57,22 @@ export function buildMessaging(cfg, people, issues) {
       MessageKey: `${threadKey}:${i}`, ThreadKey: threadKey, SessionKey: threadKey,
       MemberNumber: dir === 'Inbound' ? issue.ReporterMemberNumber : (issue.AssigneeMemberNumber ?? null),
       Direction: dir, Sender: dir === 'Inbound' ? memberName : staffName,
-      Recipient: dir === 'Inbound' ? M.staffFallbackSender : memberName,
+      Recipient: dir === 'Inbound' ? M.params.staffFallbackSender : memberName,
       Subject: i === 0 ? issue.Title : null, Content: content, IsSecure: true,
       Status: status, ReceivedAt: msgAt(dir),
-      IsStarred: r.bernoulli(M.starredShare), IsImported: false, SourceChannel: 'Portal', IsSharedDemo: true,
+      IsStarred: r.bernoulli(M.params.starredShare), IsImported: false, SourceChannel: 'Portal', IsSharedDemo: true,
     });
-    const advance = () => { clock = Math.min(clock + (1 + r.int(1, M.replyDelayHoursMax)) * 3600000, releaseMs - 1800000); };
+    const advance = () => { clock = Math.min(clock + (1 + r.int(1, M.params.replyDelayHoursMax)) * 3600000, releaseMs - 1800000); };
 
     // type-aware banks: a Data Correction thread never talks about invoices
-    const bank = (b) => (M[b][issue.TypeKey] ?? M[b].General ?? M[b]);
+    const bank = (b) => (M.catalog[b][issue.TypeKey] ?? M.catalog[b].General ?? M.catalog[b]);
     const replied = issue.StatusKey !== 'New';
     push(0, 'Inbound', r.pick(bank('openers')), replied ? 'Replied' : 'New');
     let idx = 1;
     if (replied) {
       advance();
       push(idx++, 'Outbound', r.pick(bank('replies')), 'Sent');
-      for (let k = r.int(0, M.followUpPairsMax); k > 0; k--) {
+      for (let k = r.int(0, M.params.followUpPairsMax); k > 0; k--) {
         advance();
         push(idx++, 'Inbound', r.pick(bank('followUps')), 'Replied');
         advance();

@@ -38,6 +38,14 @@ export function lintRuleset(R, domainLint) {
       return;
     }
     if (node && typeof node === 'object') {
+      // A `target` is a promise about the generated data, and the validator cannot check a
+      // promise without knowing how much drift is acceptable. Recognised by SHAPE rather than
+      // by a list of known paths, so it covers every module — including ones that don't exist
+      // yet — and survives any regrouping. (Replaced a hardcoded list of three paths that had
+      // to be edited by hand every time a key moved.)
+      if ('target' in node && !('tolerance' in node)) {
+        problems.push(`${path || '<root>'}: has a target but no tolerance — the validator can't gate a target without knowing the acceptable drift`);
+      }
       for (const [k, v] of Object.entries(node)) {
         const kp = path ? `${path}.${k}` : k;
         if (typeof v === 'number') {

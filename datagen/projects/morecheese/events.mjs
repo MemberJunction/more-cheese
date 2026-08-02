@@ -50,26 +50,26 @@ export function buildEvents(cfg) {
     while (confDate.getUTCDay() !== 2) confDate = addDays(confDate, 1);
     if (confDate <= addDays(release, 365)) {
       // host city rotates through the declared list (was a hardcoded 3 on y % 3)
-      const hc = E.conferenceCities[y % E.conferenceCities.length];
+      const hc = E.catalog.conferenceCities[y % E.catalog.conferenceCities.length];
       const [city, state_, lat, lon] = [hc.city, hc.state, hc.lat, hc.lon];
       events.push({ EventKey: `EVT-${y}-CONF`, Name: `ICF Annual Conference ${y}`, EventType: 'Conference', Year: y, Date: iso(confDate), IsVirtual: covid, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
     }
     const rEv = rng(seed, `events:${y}`);
-    const nW = covid ? Math.round(E.perYear.workshops * R.regimes.covid.eventVolumeMultiplier) : E.perYear.workshops;
+    const nW = covid ? Math.round(E.params.workshopsPerYear * R.regimes.covid.eventVolumeMultiplier) : E.params.workshopsPerYear;
     for (let i = 0; i < nW; i++) {
-      const region = rEv.pickWeighted(cfg.R.geography.mix.map(([k, w]) => [k, k === 'NA' ? w * 2 : w]));
+      const region = rEv.pickWeighted(Object.entries(cfg.R.geography.mixes.region).map(([k, w]) => [k, k === 'NA' ? w * 2 : w]));
       const [city, state_, lat, lon] = rEv.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
       const d = drawEventDate(rEv, y, 'Workshop');
       if (d > addDays(release, 365)) continue;
-      events.push({ EventKey: `EVT-${y}-W${i + 1}`, Name: `Workshop: ${rEv.pick(CHEESE_WORDS)} ${rEv.pick(E.workshopSubjects)}`, EventType: 'Workshop', Year: y, Date: iso(d), IsVirtual: false, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
+      events.push({ EventKey: `EVT-${y}-W${i + 1}`, Name: `Workshop: ${rEv.pick(CHEESE_WORDS)} ${rEv.pick(E.catalog.workshopSubjects)}`, EventType: 'Workshop', Year: y, Date: iso(d), IsVirtual: false, IsPaid: true, City: city, State: state_, Latitude: lat, Longitude: lon, IsSharedDemo: true });
     }
     // the federation pivots its programming online: fewer in-person workshops (above),
     // MORE webinars
-    const nWeb = covidYear ? Math.round(E.perYear.webinars * (R.regimes.covid.webinarScheduleMultiplier ?? 1)) : E.perYear.webinars;
+    const nWeb = covidYear ? Math.round(E.params.webinarsPerYear * (R.regimes.covid.webinarScheduleMultiplier ?? 1)) : E.params.webinarsPerYear;
     for (let i = 0; i < nWeb; i++) {
       const d = drawEventDate(rEv, y, 'Webinar');
       if (d > addDays(release, 365)) continue;
-      events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(E.webinarTopics)} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
+      events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(E.catalog.webinarTopics)} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
     }
   }
   return events;
@@ -113,8 +113,8 @@ export function buildRegistrations(cfg, people, periods, events) {
   const confRegs = annualParticipation({
     seed, years, minPool: 6,
     poolOf: (y) => (confOf(y) ? activeOn(y) : []),
-    scoreOf: (p, y) => E.arrows.conferenceEngagement.beta * (p._thetaPath?.[y] ?? p._theta) + E.arrows.conferenceInternational.beta * (p.Region === 'NA' ? 0 : 1),
-    target: E.conference.memberAttendanceTarget,
+    scoreOf: (p, y) => E.effects['conferenceAttendance.engagement'].beta * (p._thetaPath?.[y] ?? p._theta) + E.effects['conferenceAttendance.international'].beta * (p.Region === 'NA' ? 0 : 1),
+    target: E.params.conferenceAttendance.target,
     streamKey: (p, y) => `conf:${p.MemberNumber}:${y}`,
     spawn: (r, p, y) => {
       const conf = confOf(y);
@@ -142,8 +142,8 @@ export function buildRegistrations(cfg, people, periods, events) {
       const CV = R.regimes.covid;
       const isCovid = CV.years.includes(y);
       const chanW = (ev) => !isCovid ? 1 : (ev.EventType === 'Webinar' ? (CV.virtualMultiplier ?? 1) : (CV.inPersonMultiplier ?? 1));
-      const mean = E.registrationRatePerYear.base * Math.exp(E.registrationRatePerYear.engagementBeta * (p._thetaPath?.[y] ?? p._theta));
-      const k = r.negbin(mean, E.registrationRatePerYear.dispersionK);
+      const mean = E.params.registrationsPerYear * Math.exp(E.effects['registrations.engagement'].beta * (p._thetaPath?.[y] ?? p._theta));
+      const k = r.negbin(mean, E.params.registrationDispersionK);
       const pool = eventsByYear.get(y).filter((e) => e.EventType !== 'Conference');
       const taken = new Set();
       for (let i = 0; i < Math.min(k, pool.length); i++) {
@@ -173,7 +173,7 @@ export function buildRegistrations(cfg, people, periods, events) {
       const r = rng(seed, `upcoming:${p.MemberNumber}:${ev.EventKey}`);
       // the closer the event, the more of its eventual crowd has signed up by now
       const horizon = Math.max(0.15, 1 - daysOut / 150);
-      if (!r.bernoulli(pBase * Math.exp(E.registrationRatePerYear.engagementBeta * (p._thetaPath?.[releaseYear] ?? p._theta)) * horizon)) continue;
+      if (!r.bernoulli(pBase * Math.exp(E.effects['registrations.engagement'].beta * (p._thetaPath?.[releaseYear] ?? p._theta)) * horizon)) continue;
       registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(release, -r.int(0, 30))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _future: true, _theta: p._thetaPath?.[releaseYear] ?? p._theta, IsSharedDemo: true });
     }
   }
@@ -186,8 +186,8 @@ export function buildRegistrations(cfg, people, periods, events) {
     if (!pool.length) continue;
     childOutcome({
       seed, items: pool,
-      scoreOf: (x) => E.noShow.engagementBeta * x._theta,
-      target: cls === 'paid' ? E.noShow.paidInPerson.target : E.noShow.freeWebinar.target,
+      scoreOf: (x) => E.effects['noShow.engagement'].beta * x._theta,
+      target: cls === 'paid' ? E.params.noShowPaidInPerson.target : E.params.noShowFreeWebinar.target,
       streamKey: (x) => `noshow:${x.RegKey}`,
       decide: (x, p, r) => { x.Attended = !r.bernoulli(p); },
     });

@@ -21,7 +21,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   const P = O.paymentProfiles;
 
   // ---------- products: one Membership product per tier + the event products ----------
-  const products = R.membership.tiers.list.map((t) => ({
+  const products = R.membership.catalog.tiers.map((t) => ({
     ProductKey: `PROD-MEM-${t.name.toUpperCase()}`, Name: `${t.name} Membership (annual)`,
     ProductType: 'Membership', UnitPrice: t.dues, IsSharedDemo: true,
   }));

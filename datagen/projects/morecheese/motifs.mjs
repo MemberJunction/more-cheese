@@ -42,7 +42,7 @@ export function applyMotifs(cfg, people, orgs) {
       const ev = p.OrgKey && orgByKey.get(p.OrgKey)?.LifecycleEvent;
       return ev && ev.kind === 'Dissolved' && parseDate(p.JoinDate).getUTCFullYear() < ev.year && ev.year <= releaseYear - 2 && !p._motif;
     }),
-    M.employerCollapseLapse.count,
+    M.params.employerCollapseLapse.count,
     (p) => {
       const evYear = orgByKey.get(p.OrgKey).LifecycleEvent.year;
       p._lapseYear = evYear + 1;
@@ -55,10 +55,10 @@ export function applyMotifs(cfg, people, orgs) {
   // is the point of the story.
   const arc = (name, renewPinned) => stamp(name,
     crowd.filter((p) => parseDate(p.JoinDate).getUTCFullYear() <= releaseYear - 4 && !p._motif && p._lapseYear == null),
-    M[name].count,
+    M.params[name].count,
     (p) => {
       const y0 = parseDate(p.JoinDate).getUTCFullYear();
-      const { startTheta, endTheta } = M[name];
+      const { startTheta, endTheta } = M.params[name];
       const path = {};
       for (let y = y0; y <= releaseYear; y++) path[y] = +(startTheta + (endTheta - startTheta) * ((y - y0) / (releaseYear - y0))).toFixed(4);
       p._thetaPath = path;

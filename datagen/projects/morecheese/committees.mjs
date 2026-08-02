@@ -16,16 +16,20 @@ const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 
 
 export function buildCommittees(cfg, people, periods) {
   const { R, seed, release } = cfg;
+  // four-section ruleset shape: C.catalog (what exists) · P (every scalar) · C.effects · C.mixes
   const C = R.committees;
+  const P = C.params;
 
   const coveredOn = memberCoverage(periods);
 
   // ---------- fixtures: types, roles, committees, terms (authored, not drawn) ----------
-  const types = C.types.map((t) => ({ TypeKey: t.name, Name: t.name, IsStandards: t.isStandards, DefaultTermMonths: t.termMonths, IsSharedDemo: true }));
-  const roles = C.roles.map((r) => ({ RoleKey: r.name, Name: r.name, IsOfficer: r.isOfficer, IsVotingRole: r.isVoting, Sequence: r.sequence, IsSharedDemo: true }));
-  const committees = C.list.map((c) => ({ CommitteeKey: c.name, Name: c.name, TypeKey: c.type, MissionStatement: c.mission, Status: 'Active', FormationDate: c.formed, IsSharedDemo: true }));
+  const types = C.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, IsStandards: t.isStandards, DefaultTermMonths: t.termMonths, IsSharedDemo: true }));
+  const roles = C.catalog.roles.map((r) => ({ RoleKey: r.name, Name: r.name, IsOfficer: r.isOfficer, IsVotingRole: r.isVoting, Sequence: r.sequence, IsSharedDemo: true }));
+  // c.type is a REFERENCE to a catalog.types entry, not a string to be matched — so a
+  // mistyped type is a load-time crash, not a committee that quietly gets no type.
+  const committees = C.catalog.committees.map((c) => ({ CommitteeKey: c.name, Name: c.name, TypeKey: c.type.name, MissionStatement: c.mission, Status: 'Active', FormationDate: c.formed, IsSharedDemo: true }));
   const terms = [];
-  for (const c of C.list) for (const t of C.terms) {
+  for (const c of C.catalog.committees) for (const t of C.catalog.terms) {
     // a committee has no term before it existed — the Education Committee (formed 2016)
     // must not appear in the back-filled 2015 term
     if (t.end < c.formed) continue;
@@ -41,16 +45,16 @@ export function buildCommittees(cfg, people, periods) {
   // shareOfEligible — total participation is unchanged; only who fills the seats becomes
   // continuous. Without this, back-filling history just produced six terms of total churn.
   let servedLastTerm = new Map(); // MemberNumber → committee name
-  for (const t of C.terms) {
+  for (const t of C.catalog.terms) {
     const eligible = people.filter((p) => !p._hero && coveredOn(p.MemberNumber, t.start));
     const incumbents = servedLastTerm;
     const servingNow = new Map();
     childOutcome({
       seed,
       items: eligible,
-      scoreOf: (p) => C.participation.arrows.engagement.beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
-        + (incumbents.has(p.MemberNumber) ? (C.participation.incumbencyBeta ?? 0) : 0),
-      target: C.participation.shareOfEligible,
+      scoreOf: (p) => C.effects['volunteer.engagement'].beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
+        + (incumbents.has(p.MemberNumber) ? (C.effects['volunteer.incumbency'].beta ?? 0) : 0),
+      target: P.volunteerShare.target,
       streamKey: (p) => `committee-serve:${p.MemberNumber}:${t.start}`,
       decide: (p, prob, r) => {
         if (!r.bernoulli(prob)) return;
@@ -59,8 +63,8 @@ export function buildCommittees(cfg, people, periods) {
         // term list uses. Without it a member could be seated on the Membership &
         // Outreach Committee (formed 2017) in the back-filled 2015 term, and the
         // membership's TermKey then pointed at a term that was never emitted.
-        const open = C.list.filter((c) => t.end >= c.formed);
-        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(C.participation.sameCommitteeShare ?? 0)
+        const open = C.catalog.committees.filter((c) => t.end >= c.formed);
+        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(P.sameCommitteeShare ?? 0)
           ? prior                      // returning members usually keep their seat
           : r.pick(open).name;         // otherwise the member's own dice
         pushMembership(p, committee, t, 'Member');
@@ -73,9 +77,9 @@ export function buildCommittees(cfg, people, periods) {
   for (const h of R.heroes) {
     for (const seat of h.committees ?? []) {
       for (const termName of seat.terms) {
-        const t = C.terms.find((x) => x.name === termName);
+        const t = C.catalog.terms.find((x) => x.name === termName);
         const p = people.find((x) => x.MemberNumber === h.memberNumber);
-        const c = C.list.find((x) => x.name === seat.committee);
+        const c = C.catalog.committees.find((x) => x.name === seat.committee);
         // a declared seat still can't predate the committee (the term wouldn't exist)
         if (t && p && c && t.end >= c.formed) pushMembership(p, seat.committee, t, seat.role);
       }
@@ -85,10 +89,10 @@ export function buildCommittees(cfg, people, periods) {
   // eligible members not already serving it. Deterministic (theta order, member number as the
   // tie-break), runs before officers are promoted so a chair always has a real committee.
   {
-    const min = C.participation.minRosterPerTerm ?? 0;
+    const min = P.minRosterPerTerm ?? 0;
     if (min > 0) {
-      for (const t of C.terms) {
-        for (const c of C.list) {
+      for (const t of C.catalog.terms) {
+        for (const c of C.catalog.committees) {
           if (t.end < c.formed) continue; // the term does not exist for this committee
           const key = `${c.name}:${t.start}`;
           const roster = rosterByTerm.get(key) ?? [];
@@ -131,10 +135,10 @@ export function buildCommittees(cfg, people, periods) {
   const attendance = [];
   const attByMeeting = new Map(); // MeetingKey → [{membership row, status}] — votes stay consistent with attendance
   const releaseIso = iso(release);
-  for (const c of C.list) {
+  for (const c of C.catalog.committees) {
     let upcoming = 0; // committees schedule a few meetings ahead — populates the app's "upcoming" view
-    for (let y = C.meetings.startYear; y <= release.getUTCFullYear() + 1; y++) {
-      for (let q = 0; q < C.meetings.cadencePerYear; q++) {
+    for (let y = P.meetingsStartYear; y <= release.getUTCFullYear() + 1; y++) {
+      for (let q = 0; q < P.meetingsPerYear; q++) {
         const month = q * 3 + 1; // Jan/Apr/Jul/Oct
         // Each committee keeps its own rhythm: a preferred week-of-month and hour, jittered
         // per meeting and nudged onto a weekday. Previously all four committees met on the
@@ -163,33 +167,32 @@ export function buildCommittees(cfg, people, periods) {
           EndDateTime: new Date(endMs).toISOString().replace(/\.\d{3}Z$/, 'Z'),
           TimeZone: 'UTC',
           LocationType: locType,
-          LocationText: locType === 'Virtual' ? null : `${C.meetings.venueCity ?? 'Madison, WI'} — ${rM.pick(['Board Room', 'Conference Room A', 'Guild Hall', 'Annex Room 2'])}`,
+          LocationText: locType === 'Virtual' ? null : `${'Madison, WI'} — ${rM.pick(['Board Room', 'Conference Room A', 'Guild Hall', 'Annex Room 2'])}`,
           IsSharedDemo: true,
         };
         if (dt > releaseIso) {
           // future meeting: a Scheduled placeholder, capped per committee — no attendance/motions yet
-          if (upcoming >= C.meetings.upcomingPerCommittee) continue;
+          if (upcoming >= P.upcomingPerCommittee) continue;
           upcoming++;
           meetings.push({ ...base, Status: 'Scheduled' });
           continue;
         }
-        const term = C.terms.find((t) => t.start <= dt && dt <= t.end);
+        const term = C.catalog.terms.find((t) => t.start <= dt && dt <= t.end);
         if (!term) continue;
         const meeting = { ...base, Status: 'Completed' };
         meetings.push(meeting);
         const roster = (rosterByTerm.get(`${c.name}:${term.start}`) ?? []);
         if (!roster.length) continue;
-        const A = C.meetings.attendance;
         childOutcome({
           seed,
           items: roster,
-          scoreOf: (m) => A.arrows.engagement.beta * (m.p._thetaPath?.[y] ?? m.p._theta),
-          target: A.presentTarget,
+          scoreOf: (m) => C.effects['attendance.engagement'].beta * (m.p._thetaPath?.[y] ?? m.p._theta),
+          target: P.attendPresent.target,
           streamKey: (m) => `committee-att:${m.p.MemberNumber}:${meeting.MeetingKey}`,
           decide: (m, prob, r) => {
             // hero attendance pin (Gwen: "high meeting attendance") is a fact, not a draw
             const present = m.p._hero && seatPinned(m.p.MemberNumber, c.name) ? true : r.bernoulli(prob);
-            const status = present ? 'Present' : r.bernoulli(A.excusedShareOfAbsent) ? 'Excused' : 'Absent';
+            const status = present ? 'Present' : r.bernoulli(P.excusedShareOfAbsent) ? 'Excused' : 'Absent';
             attendance.push({ AttendanceKey: `${m.p.MemberNumber}:${meeting.MeetingKey}`, MeetingKey: meeting.MeetingKey, MemberNumber: m.p.MemberNumber, AttendanceStatus: status, IsSharedDemo: true });
             if (!attByMeeting.has(meeting.MeetingKey)) attByMeeting.set(meeting.MeetingKey, []);
             attByMeeting.get(meeting.MeetingKey).push({ membership: m.row, status });
@@ -210,29 +213,27 @@ export function buildCommittees(cfg, people, periods) {
   const agendaItems = [];
   const motions = [];
   const votes = [];
-  const AG = C.meetings.agenda;
-  const MO = C.meetings.motions;
   for (const meeting of meetings) {
     const roster = attByMeeting.get(meeting.MeetingKey) ?? [];
     if (!roster.length) continue;
     const chair = roster.find((x) => x.membership.RoleKey === 'Chair') ?? roster[0];
-    AG.standingItems.forEach((item, i) => agendaItems.push({
+    C.catalog.standingAgenda.forEach((item, i) => agendaItems.push({
       AgendaKey: `${meeting.MeetingKey}:${i + 1}`, MeetingKey: meeting.MeetingKey, Sequence: i + 1,
       Name: item.name, ItemType: item.type, DurationMinutes: item.minutes,
       PresenterMemberNumber: chair.membership.MemberNumber, Status: 'Completed', IsSharedDemo: true,
     }));
     const r = rng(seed, `motion:${meeting.MeetingKey}`);
     const present = roster.filter((x) => x.status === 'Present');
-    if (!r.bernoulli(MO.ratePerMeeting) || present.length < 2) continue;
+    if (!r.bernoulli(P.motionsPerMeeting) || present.length < 2) continue;
     // some motions are contentious (tighter/against split → they can FAIL); outcome stays derived from the tally
-    const split = r.bernoulli(MO.contentiousShare) ? MO.contentiousVoteSplit : MO.voteSplit;
-    const topic = r.pick(MO.topics);
+    const split = r.bernoulli(P.contentiousShare) ? C.mixes.voteContentious : C.mixes.vote;
+    const topic = r.pick(C.catalog.motionTopics);
     const moverIdx = r.int(0, present.length - 1);
     let secondIdx = r.int(0, present.length - 2);
     if (secondIdx >= moverIdx) secondIdx += 1;
-    const agendaKey = `${meeting.MeetingKey}:${AG.standingItems.length + 1}`;
+    const agendaKey = `${meeting.MeetingKey}:${C.catalog.standingAgenda.length + 1}`;
     agendaItems.push({
-      AgendaKey: agendaKey, MeetingKey: meeting.MeetingKey, Sequence: AG.standingItems.length + 1,
+      AgendaKey: agendaKey, MeetingKey: meeting.MeetingKey, Sequence: C.catalog.standingAgenda.length + 1,
       Name: `Motion: ${topic}`, ItemType: 'Vote', DurationMinutes: 10,
       PresenterMemberNumber: present[moverIdx].membership.MemberNumber, Status: 'Completed', IsSharedDemo: true,
     });

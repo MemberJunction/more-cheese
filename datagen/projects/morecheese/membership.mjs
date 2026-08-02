@@ -36,7 +36,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
     state.set(p.MemberNumber, { start: join, end: firstEnd, n: 0, alive: true });
   }
 
-  const duesOf = new Map(M.tiers.list.map((t) => [t.name, t.dues]));
+  const duesOf = new Map(M.catalog.tiers.map((t) => [t.name, t.dues]));
 
   function pushPeriod(p, start, end, status, cancellationDate, reason) {
     const st = state.get(p.MemberNumber);
@@ -55,14 +55,14 @@ export function runRenewalUnroll(cfg, people, orgs) {
   // named dice); this domain owns eligibility, scoring inputs, the state machine, and the
   // event record. BUILT-IN drivers (standardized tenure, the drifting latent, the employer-
   // event window) + DECLARED-FEATURE factors read straight from the ruleset.
-  const declared = featureArrows(M.arrows);
+  const declared = featureArrows(M.effects);
   recurringDecision({
     seed, years,
     streamKey: (c, y) => `renew:${c.p.MemberNumber}:${y}`,
     // pin conditioning: outcomes are facts — a declared lapseYear (hero story OR stamped
     // motif) renews until that year then lapses; heroes without one always renew
     pinnedDecision: (c, y) => (c.p._lapseYear != null ? y < c.p._lapseYear : (c.p._hero || c.p._renewAlways ? true : undefined)),
-    target: Math.min(0.97, Math.max(0.5, M.renewalTarget)),
+    target: Math.min(0.97, Math.max(0.5, M.params.renewal.target)),
     // regime shifts and texture apply AFTER calibration — tide, not boats (a shared shift
     // inside the calibrated scores gets solved away, erasing the dip)
     baselineShift: (y) => (yearWobble.get(y) ?? 0) + (R.regimes.covid.years.includes(y) ? R.regimes.covid.renewalLogitShift : 0),
@@ -87,9 +87,9 @@ export function runRenewalUnroll(cfg, people, orgs) {
       return { meanT, sdT };
     },
     scoreOf: (c, y, { meanT, sdT }) =>
-      M.arrows.tenure.beta * ((c.tenureYrs - meanT) / sdT) +
-      M.arrows.engagement.beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting; heroes pinned)
-      M.arrows.employerEvent.beta * c.employerEvent +
+      M.effects['renewal.tenure'].beta * ((c.tenureYrs - meanT) / sdT) +
+      M.effects['renewal.engagement'].beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting; heroes pinned)
+      M.effects['renewal.employerEvent'].beta * c.employerEvent +
       declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0),
 
     record: (c, y, { meanT, sdT }, renewed) => {
@@ -98,9 +98,12 @@ export function runRenewalUnroll(cfg, people, orgs) {
         year: y, tenureZ: (c.tenureYrs - meanT) / sdT,
         theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta,
         employerEvent: c.employerEvent,
-        // declared-feature factors record under their ARROW names — the validator derives
-        // its recovery gates from the same declarations (contract projection #2)
-        ...Object.fromEntries(declared.map((fa) => [fa.name, fa.fn(c.p)])),
+        // Declared-feature factors record under their DRIVER name — the part of the effect key
+        // after the dot. The validator and the compiler's refinement step both read these
+        // fields (e.autoRenew, e.enthusiastTier), so the recorded name must stay the driver
+        // even though the effect is now keyed 'renewal.autoRenew'. Getting this wrong is
+        // silent: the group filters simply match nothing and every solved effect goes NaN.
+        ...Object.fromEntries(declared.map((fa) => [fa.name.split('.').pop(), fa.fn(c.p)])),
         renewed: renewed ? 1 : 0,
       });
     },
@@ -111,7 +114,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
       c.st.end = nextEnd;
     },
     onNo: (c) => {
-      const cancellation = addDays(c.st.end, Math.round(M.gracePeriodMonths * 30.44));
+      const cancellation = addDays(c.st.end, Math.round(M.params.gracePeriodMonths * 30.44));
       // employer-event lapses keep their DERIVED reason; the rest draw from the declared
       // churn mix (every lapse used to read "non-payment", so the reason column was
       // useless for the why-are-we-losing-members demo)
@@ -124,16 +127,15 @@ export function runRenewalUnroll(cfg, people, orgs) {
         // era-specific reason, so the churn breakdown shows WHY 2020-21 differs rather
         // than just showing more of the usual
         reason = CV.churnReason;
-      } else reason = M.churnReasons ? rReason.pickWeighted(M.churnReasons.weights) : 'non-payment — lapsed past grace';
+      } else reason = rReason.pickWeighted(Object.entries(M.mixes.churnReason));
       // LAPSE vs CANCELLATION: a lapse is silence (the renewal never gets paid, grace runs out,
       // staff infer the reason later). A cancellation is a member who TOLD us mid-term — the churn
       // a retention team could have worked. Only active-decision reasons qualify; nobody phones in
       // to announce a non-payment. Heroes are excluded so their pinned statuses hold.
-      const CAN = M.cancellation;
-      const activeDecision = CAN && !CAN.passiveReasons.includes(reason);
-      const toldUs = activeDecision && !c.p._hero && rReason.bernoulli(CAN.toldUsShareOfActiveReasons);
+      const activeDecision = !M.catalog.cancellationPassiveReasons.includes(reason);
+      const toldUs = activeDecision && !c.p._hero && rReason.bernoulli(M.params.cancellationToldUsShareOfActiveReasons);
       if (toldUs) {
-        const [lo, hi] = CAN.noticeDaysBeforeEnd;
+        const [lo, hi] = M.params.cancellationNoticeDaysBeforeEnd;
         const notice = addDays(c.st.end, -rReason.int(lo, hi));
         // notice cannot predate the term it cancels
         const noticeDate = notice < c.st.start ? c.st.start : notice;

@@ -29,7 +29,7 @@ export function buildDefects(cfg, people, orgs, relationships) {
 
   // ---------- duplicate people: shallow contact records ----------
   const rDup = rng(seed, 'defect:duplicates');
-  for (const p of pickDistinct(rDup, crowd.filter((x) => x.Email), D.duplicatePerson.count)) {
+  for (const p of pickDistinct(rDup, crowd.filter((x) => x.Email), D.params.duplicatePersonCount)) {
     const dupNumber = `ICF-D${p.MemberNumber.slice(-5)}`;
     const first = p.PreferredName ?? p.FirstName; // dupes are often minted under the informal name
     extraPeople.push({
@@ -66,7 +66,7 @@ export function buildDefects(cfg, people, orgs, relationships) {
   const empRelByMember = new Map(relationships.relationships.filter((x) => x.RelKey.startsWith('emp:')).map((x) => [x.FromMemberNumber, x]));
   const rStale = rng(seed, 'defect:stale-employer');
   const staleCandidates = crowd.filter((p) => p.OrgKey && empRelByMember.get(p.MemberNumber)?.Status === 'Active');
-  for (const p of pickDistinct(rStale, staleCandidates, D.staleEmployer.count)) {
+  for (const p of pickDistinct(rStale, staleCandidates, D.params.staleEmployerCount)) {
     let trueOrgKey = orgKeys[rStale.int(0, orgKeys.length - 1)];
     if (trueOrgKey === p.OrgKey) trueOrgKey = orgKeys[(orgKeys.indexOf(trueOrgKey) + 1) % orgKeys.length];
     applyStale(p, p.OrgKey, trueOrgKey, rStale.int(3, 14));
@@ -106,7 +106,7 @@ export function buildDefects(cfg, people, orgs, relationships) {
   // ---------- typo'd emails ----------
   const rTypo = rng(seed, 'defect:typo-email');
   const typoPool = crowd.filter((p) => p.Email && !labels.some((l) => l.MemberNumber === p.MemberNumber));
-  for (const p of pickDistinct(rTypo, typoPool, D.typoEmail.count)) {
+  for (const p of pickDistinct(rTypo, typoPool, D.params.typoEmailCount)) {
     const [local, domain] = p.Email.split('@');
     // scan from a drawn start for an adjacent pair that actually differs (a.k.a. 'll' won't transpose)
     const start = rTypo.int(1, Math.max(1, local.length - 2));

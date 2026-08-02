@@ -66,14 +66,14 @@ export function buildContacts(cfg, people, orgs) {
     push('Email', p.Email, true, 'Work');
     if (p.Phone) {
       // one number on file: most people give a mobile, the rest a desk line
-      const primaryType = r.bernoulli(C.mobileFirstShare) ? 'Mobile Phone' : 'Work Phone';
+      const primaryType = r.bernoulli(C.params.mobileFirstShare) ? 'Mobile Phone' : 'Work Phone';
       push(primaryType, p.Phone, true, primaryType === 'Mobile Phone' ? 'Mobile' : 'Work');
-      if (r.bernoulli(C.secondPhoneShare)) {
+      if (r.bernoulli(C.params.secondPhoneShare)) {
         const other = primaryType === 'Mobile Phone' ? 'Work Phone' : 'Mobile Phone';
         push(other, altPhone(r, p.Phone), false, other === 'Mobile Phone' ? 'Mobile' : 'Work');
       }
     }
-    if (r.bernoulli(C.linkedInShare)) {
+    if (r.bernoulli(C.params.linkedInShare)) {
       const slug = `${deaccent(p.FirstName)}-${deaccent(p.LastName)}`.toLowerCase().replace(/[^a-z-]/g, '');
       push('LinkedIn', `https://www.linkedin.com/in/${slug}`, false, null);
     }
@@ -92,7 +92,7 @@ export function buildContacts(cfg, people, orgs) {
       });
     };
     push('Website', o.Website, true);
-    if (r.bernoulli(C.orgPhoneShare)) push('Work Phone', o.Phone, o.Website ? false : true);
+    if (r.bernoulli(C.params.orgPhoneShare)) push('Work Phone', o.Phone, o.Website ? false : true);
   }
 
   return { addresses, addressLinks, contactMethods };
