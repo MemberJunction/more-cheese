@@ -1,9 +1,45 @@
 # Proposal: a type vocabulary for the ruleset
 
-**Status: PROPOSAL — awaiting review.** Nothing here is implemented; the point of this
-document is to be vetoed. Evidence comes from a full census of the composed ruleset
-(29 blocks, 1,777 scalar leaves) joined with a call-site survey of how every value is
-consumed across the 23 generator modules, the engine, and the validator.
+**Status (2026-07-31): SPLIT IN TWO. Half shipped, half deliberately deferred.**
+
+This document originally proposed one thing. Review separated it into two goals that turned
+out to have very different justifications:
+
+| | goal | status |
+|---|---|---|
+| **A** | **Make *this* system authorable by a human** — describe the format that exists, in a machine-readable way an editor can read | **SHIPPED 2026-07-31.** `engine/ruleset.schema.json` + `.vscode/settings.json` + `engine/types.d.ts`, executed in the suite by `cli/check-ruleset-schema.mjs`. Zero ruleset keys renamed. |
+| **B** | **Make datagen a reusable framework** — one canonical vocabulary, enforced conventions, the renames | **DEFERRED.** Everything below from *The proposed vocabulary* onwards. |
+
+**Why B is deferred, and it is not squeamishness.** There is exactly **one** project. The
+twelve types below were derived from a census of that one project, which means the sample
+size for "what is general" is one. That is precisely how a framework ends up enshrining one
+project's accidents as universal law — `Regime` is named after a single covid block, and
+nobody can currently say whether project #2 would want that word or three different ones.
+
+**Team ruling (2026-07-31): stage 2/3 waits until a second project exists.** Then the
+vocabulary generalises from two data points instead of being guessed from one. Goal A pays
+off with one project and is therefore not gated on anything; goal B pays off only if reuse
+actually happens, and costs a nineteen-module key migration to find out.
+
+**What A did NOT fix** — worth being blunt, because the editor support can look like more
+than it is. The vocabulary is still a dialect. `target` / `presentTarget` /
+`shareOfEligible` still name one concept; a Mix is still sometimes an object map and
+sometimes a pair-array (and `rng.pickWeighted` still takes only pairs); `statusMix` is still
+not a Mix. The schema now *documents* each of those traps at the point of use, including the
+name trap on `statusMix`. Documenting a trap is worth a lot and is not the same as removing it.
+
+**What writing the schema paid for immediately:** it found three causal arrows —
+`programs.certifications`, `programs.advocacy`, `committees.meetings.attendance` — carrying
+magnitudes with **no stated reason at all**. The house convention has always required
+evidence on an arrow; nothing had ever enforced it, and the existing lint only walked
+top-level `arrows` blocks. All three now carry notes marked ESTIMATE, and the output is
+byte-identical (verified at N=500 and N=2500), because a reason is not a number.
+
+---
+
+Evidence below comes from a full census of the composed ruleset (29 blocks, 1,777 scalar
+leaves) joined with a call-site survey of how every value is consumed across the 23 generator
+modules, the engine, and the validator.
 
 ## The problem, in one sentence
 
@@ -183,13 +219,26 @@ status visible.
 ## Enforcement, in three layers
 
 1. **JSON Schema** (`ruleset.schema.json` + `.vscode` wiring) — autocomplete, hover docs
-   and red squiggles *while typing* in any `ruleset/modules/*.json`. Core types get
-   full validation; dialect keys get shape-level checks (Share ranges, Mix weights).
+   and red squiggles *while typing* in any `ruleset/modules/*.json`.
+   **SHIPPED (goal A).** Key-name rules apply at every depth via a recursive `node`
+   definition — the first draft only checked the top level of each file and therefore
+   caught nothing real, which is worth remembering: `patternProperties` at the root of a
+   schema does not walk the tree.
 2. **The load-time lint** (already exists) — gains the type rules so CI enforces exactly
-   what the editor shows. Fixes the nested-arrows gap as part of absorbing `Arrow`.
-3. **`engine/types.d.ts` + JSDoc** — the same vocabulary as types for module authors:
-   `Cfg`, `Rng` (draw-costs documented on hover), `childOutcome` options, `MappingEntry`,
-   the gate helpers. The editor becomes the documentation.
+   what the editor shows. **PART SHIPPED:** rather than duplicating rules into the lint,
+   the schema itself is executed in the suite (`cli/check-ruleset-schema.mjs`, with a
+   zero-dep draft-07 subset validator in `engine/schema-check.mjs`) against all 19 real
+   modules, plus eleven planted-mistake cases that must each be caught by name. One source
+   of truth, both audiences. The lint's nested-`arrows` gap is now covered by the schema;
+   absorbing `Arrow` into the lint itself is still stage 2/3 work.
+3. **`engine/types.d.ts` + JSDoc** — the same vocabulary as types for module authors.
+   **SHIPPED (goal A):** `Config`, `Rng` (all 13 draw methods), the five pattern option
+   bags, `GateHelpers`, `Arrow`, `Hero`, `Ruleset`. Wired into the engine with
+   `@param`/`@returns` JSDoc, so it surfaces at call sites and not merely in the `.d.ts`.
+   Proven by a probe of deliberate misuse — five wrong usages that must each be rejected,
+   and one correct usage that must not be. Writing it corrected two things I had assumed
+   about the engine rather than checked: the dice method is `pickWeighted` (pairs only, no
+   object-map form) not `weighted`, and `cfg.release` is a `Date`, not a string.
 
 ## What the schema would flag on day one
 

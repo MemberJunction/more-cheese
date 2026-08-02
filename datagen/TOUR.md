@@ -1,8 +1,9 @@
 # The datagen system, explained like a factory
 
 This is the no-jargon tour. It exists for the person inheriting this system who wants to
-understand what it *is* before reading how to change it (that's [AUTHORING.md](AUTHORING.md))
-or how it works mathematically (that's [HOW-IT-WORKS.md](HOW-IT-WORKS.md)).
+understand what it *is* before reading the rules for changing it (that's
+[CONTRACT.md](CONTRACT.md)), the recipes (that's [AUTHORING.md](AUTHORING.md)), or how it works
+mathematically (that's [HOW-IT-WORKS.md](HOW-IT-WORKS.md)).
 
 ## The one-paragraph version
 

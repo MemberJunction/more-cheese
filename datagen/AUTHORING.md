@@ -1,5 +1,9 @@
 # Authoring MoreCheese data — the cookbook
 
+> **Start with [`CONTRACT.md`](CONTRACT.md)** — the four sections every block uses, where each
+> kind of thing goes, and the one rule the file format imposes. It is the short document; this
+> one is the recipes and the scars.
+>
 > Struggling to picture the system at all? Read [`TOUR.md`](TOUR.md) first — the same
 > material as a plain-English factory tour, with the protections and a slow worked example.
 
@@ -9,6 +13,32 @@ the thing you actually came here to do.
 
 Every recipe below was executed for real at least once; the gotchas are things that
 actually bit, not things that might.
+
+## Before you start: let the editor answer your questions
+
+Open the repository at its root in VS Code (or any editor that reads `json.schemas`) and the
+ruleset becomes self-describing. You do not have to hold this document in your head:
+
+| what you do | what you get |
+|---|---|
+| `Ctrl`/`Cmd`+`Space` on a blank line at the top of a module | the list of blocks — `membership`, `events`, `committees`, … each with a one-line description |
+| hover any key | what it means, in prose, plus the trap if it has one |
+| type `attendShare: 45` | an immediate red squiggle: *45 is above the maximum 1* |
+| write an `arrows` entry | it insists on exactly one effect form **and** a stated reason |
+
+That comes from [`engine/ruleset.schema.json`](engine/ruleset.schema.json), wired up in
+[`.vscode/settings.json`](../.vscode/settings.json). The same schema is **executed** by
+`node cli/check-ruleset-schema.mjs` in the suite, so what the editor promises and what the
+build enforces cannot drift apart.
+
+The generator side is typed too: hovering `cfg`, `R` or a dice handle inside a
+`projects/*/**.mjs` file gives you the real shape, and opening a pattern's options object
+lists the options it takes. Those declarations live in
+[`engine/types.d.ts`](engine/types.d.ts) and cost nothing at runtime — datagen still ships as
+plain `.mjs` with no build step and no dependencies.
+
+Neither of these replaces reading the recipes below. They just mean you can start typing
+before you have finished reading.
 
 ## The one rule that keeps you safe
 
@@ -166,3 +196,20 @@ a too-large share of a smaller world (this failed once, in `test.mjs`, exactly t
    `distinctAtLeast`, `dangling`), negative-tested in the suite. New gates should be a
    helper call; the six pack-refs FK gates are the converted exemplars (report-identical).
    Existing prose-style gates were deliberately left — their wording carries the story.
+4. ~~You cannot author without already knowing the format.~~ **Partly fixed 2026-07-31**: the
+   ruleset now has a machine-readable, editor-wired schema and the engine has type
+   declarations (see *Before you start*, above), so the format answers questions itself
+   instead of requiring a reader of `engine/`. Writing the schema immediately paid for
+   itself — it found three causal arrows carrying magnitudes with **no stated reason at all**
+   (certification, advocacy, meeting attendance), which the house convention requires and no
+   check had ever enforced.
+
+   What is **not** fixed: the vocabulary is still a dialect rather than a standard. The same
+   idea is spelled `target` / `presentTarget` / `shareOfEligible` in different blocks, a Mix
+   may be an object map or a pair-array, `statusMix` is not a Mix at all, and
+   `rng.pickWeighted` accepts only the pair form. The schema *describes* that inconsistency
+   honestly (including the traps) but does not remove it. Removing it means renaming keys
+   across nineteen modules, which is a migration, not a description — proposed, with the open
+   decisions, in [`TYPES-PROPOSAL.md`](TYPES-PROPOSAL.md). **Team ruling (2026-07-31): that
+   migration waits for a second project to exist**, so the vocabulary is generalised from two
+   data points instead of guessed from one.
