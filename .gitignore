@@ -240,3 +240,6 @@ migrations/v*/*__RSU_*.sql
 
 # any datagen scratch build dir (out-simp, out-g3, ...)
 datagen/out-*/
+# transient probes written and removed by test.mjs
+datagen/.types-probe.mjs
+datagen/projects/*/ruleset/modules/zz-probe.mjs

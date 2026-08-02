@@ -28,7 +28,10 @@ function sfc32(a, b, c, d) {
   };
 }
 
-/** A substream keyed by (masterSeed, streamKey) — e.g. rng(seed, 'person:ICF-000101'). */
+/**
+ * A substream keyed by (masterSeed, streamKey) — e.g. rng(seed, 'person:ICF-000101').
+ * @returns {import('./types.js').Rng}
+ */
 export function rng(masterSeed, streamKey) {
   const h = xmur3(`${masterSeed}::${streamKey}`);
   const next = sfc32(h(), h(), h(), h());

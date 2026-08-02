@@ -1,0 +1,261 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://memberjunction.org/datagen/ruleset.schema.json",
+  "title": "datagen ruleset module",
+  "description": "One module of a datagen ruleset — the spec sheet the generators read. This schema DESCRIBES the format as it exists (2026-07-31): permissive about domain keys (any module may invent its own vocabulary) but strict about the value shapes the framework recognises everywhere, at any depth. Hover a key for its meaning. Recipes: datagen/AUTHORING.md. Where this vocabulary is heading: datagen/TYPES-PROPOSAL.md.",
+  "type": "object",
+  "propertyNames": { "not": { "pattern": "^\\s|\\s$" } },
+  "allOf": [{ "$ref": "#/$defs/node" }],
+  "properties": {
+    "version": { "type": "string", "description": "Ruleset version, stamped into every build's run.json." },
+    "scale": {
+      "description": "How big the generated world is. `members` is the default population when --n is not passed.",
+      "type": "object",
+      "properties": { "members": { "type": "integer", "minimum": 1 } }
+    },
+    "history": {
+      "description": "The calendar the world lives on: how far back history goes, and the flagship event's anchor date.",
+      "type": "object",
+      "properties": {
+        "startYear": { "type": "integer", "description": "First year of generated history. The most-shared value in the ruleset — many modules read it, so moving it moves everything." },
+        "conferenceMonth": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "conferenceDay": { "type": "integer", "minimum": 1, "maximum": 31 }
+      }
+    },
+    "statusMix": {
+      "description": "Target distribution of member statuses, with its tolerance. Validator-only — nothing generates from it.\n\nNAME TRAP: despite the -Mix suffix this is a Target (target[] + tolerance), NOT a Mix (weighted options for a dice roll). It is the one key whose suffix lies, which is why the schema special-cases it. Rename candidate — see TYPES-PROPOSAL.md.",
+      "type": "object",
+      "properties": {
+        "target": { "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 1 }, "description": "Shares per status. Only target[0] (active-ish) is gated; the rest are indicative." },
+        "tolerance": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    },
+    "latents": { "description": "Parameters of the hidden per-member dials (engagement, affluence) and how they drift year to year. EXPERT: changing these re-shapes every downstream behaviour at once." },
+    "texture": { "description": "Year-to-year wobble that keeps aggregate series from looking machine-smooth. EXPERT." },
+    "regimes": { "description": "Eras that bend the world while active (e.g. covid). Applied AFTER calibration, so an era cannot be averaged away — the tide, not the boats." },
+    "cohorts": { "description": "Renewal-cycle composition: what share of members sit on anniversary cycles rather than the calendar year, and how many auto-renew." },
+    "geography": { "description": "Regional composition of the membership, and the city/state banks members are drawn from." },
+    "orgs": { "description": "Employer organisations: how many exist relative to members, and their lifecycle events (acquisition, closure) which feed causal arrows." },
+    "prospects": { "description": "Non-members the association knows about — a Person row with no membership extension." },
+    "funnel": { "description": "The pre-membership history of recent joiners, so a conversion rate is computable from the data." },
+    "membership": { "description": "The renewal engine: the population target and its band, tiers, dues, cancellation rules, and the causal arrows that decide who renews." },
+    "events": { "description": "Conferences, workshops and webinars: how many, how well attended, and no-show behaviour." },
+    "learning": { "description": "Courses, enrolment and completion." },
+    "orders": { "description": "The money chain: products, prices, payment timing profiles, refunds." },
+    "committees": { "description": "Governance: the committee catalog, terms, volunteering, seats, meetings, motions and votes." },
+    "forms": { "description": "Surveys and the public membership application, including the model that answers them." },
+    "tasks": { "description": "Action items spawned by committee meetings and renewal outreach." },
+    "issues": { "description": "Support tickets: types, statuses, severity/priority mixes, assignment and comment threads." },
+    "messaging": { "description": "Secure member↔staff message threads derived from issues." },
+    "relationships": { "description": "The identity graph: employment edges and authored story edges." },
+    "programs": { "description": "Certifications, competition entries and advocacy actions." },
+    "contacts": { "description": "Contact methods and addresses as first-class bizapps-common rows, including the per-country street/city/postal banks that keep addresses from reading as fake." },
+    "platform": { "description": "MJ platform residue: staff users, saved views, queries, lists, notifications, seeded conversations." },
+    "sonar": { "description": "The engagement scoring model: factors, weights, bands and time windows. Definitions only — Sonar's own engine computes the scores." },
+    "defects": { "description": "Deliberate, labelled data-quality defects with ground truth, so a demo can show finding them." },
+    "motifs": { "description": "Authored member archetypes (rising star, quiet fade) stamped onto the anonymous crowd." },
+    "heroes": {
+      "description": "The pinned people whose stories a demo script can rely on. APPEND-ONLY: position is load-bearing, because heroes overwrite crowd slots by index — reordering this array rewrites unrelated people.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/hero" }
+    }
+  },
+  "$defs": {
+    "node": {
+      "description": "Applied at EVERY depth: the value-shape rules keyed by name, plus recursion into objects and arrays. This is what makes `events.registration.attendShare: 45` an error and not just a number.",
+      "patternProperties": {
+        "^\\$": {
+          "description": "Commentary — any key starting with $ is ignored by the generator. $note (why this value is what it is), $comment (module-level), $source / $evidence (provenance), $assumption, $persona. House rule: every authored constant carries one, and a guess says ESTIMATE."
+        },
+        "^(?!statusMix$).*([Ww]eights|[Mm]ix)$": {
+          "description": "Mix — weighted options for one dice roll. Weights must be positive and need not sum to 1. Canonical form is an object map { \"Gold\": 0.05, \"Silver\": 0.1 } (decided 2026-07-31); the older pair-array form [[\"Gold\", 0.05], …] still appears and is still accepted. A $note may sit alongside the options.",
+          "anyOf": [
+            {
+              "type": "object",
+              "patternProperties": {
+                "^\\$": {},
+                "^[^$]": { "type": "number", "exclusiveMinimum": 0 }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": [{}, { "type": "number", "exclusiveMinimum": 0 }]
+              }
+            }
+          ]
+        },
+        "^(?!.*([Dd]ays|[Cc]ount|[Ww]eight|[Yy]ears)).*[Ss]hare$": {
+          "description": "Share — a population fraction in [0, 1]. If you meant a percentage, divide by 100: 0.105, not 10.5.\n\nTwo legal forms, and the difference is meaningful:\n • a bare number — the generator uses it, nothing checks the result\n • { target, tolerance } — the generator uses it AND the validator gates the generated data against it. Write this form whenever the number is a promise about the output.",
+          "anyOf": [
+            { "type": "number", "minimum": 0, "maximum": 1 },
+            { "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 1 }, "description": "A vector of shares, when the thing has several categories." },
+            { "type": "object", "required": ["target", "tolerance"] }
+          ]
+        },
+        "^catalog$": {
+          "description": "CATALOG — what exists in this domain. Lists only: the committees, the products, the courses, the standing agenda, the text banks a generator picks from. If it is a thing rather than a quantity, it goes here.\n\nOne of the four sections every block uses: catalog · params · effects · mixes.\n\n(An ARRAY here is the pre-restructure meaning of the word — `programs.certifications.catalog` is a plain list. That resolves itself when a block moves to the four-section shape, where it becomes `catalog.certifications`.)",
+          "type": ["object", "array"]
+        },
+        "^params$": {
+          "description": "PARAMS — every scalar the generator reads for this domain, flat and in one place, so you can see all the knobs at once and a dead one stands out.\n\nA bare number is used but unchecked; a { target, tolerance } pair is used AND gated by the validator. Put a $note beside anything a reader would otherwise have to guess at.\n\nOne of the four sections every block uses: catalog · params · effects · mixes.",
+          "type": "object"
+        },
+        "^effects$": {
+          "description": "EFFECTS — who differs from the average, and by how much. Flat keys of the form <decision>.<driver> (e.g. \"attendance.engagement\"), so every effect in a domain is visible on one screen instead of buried inside the decision it modifies.\n\nEach effect declares exactly ONE magnitude form and states a reason. Same rules as the older `arrows` blocks, which this replaces.\n\nOne of the four sections every block uses: catalog · params · effects · mixes.",
+          "type": "object",
+          "patternProperties": {
+            "^\\$": {},
+            "^[^$]": { "$ref": "#/$defs/arrow" }
+          }
+        },
+        "^mixes$": {
+          "description": "MIXES — weighted options, one dice roll each. Object maps only: { \"yes\": 0.8, \"no\": 0.1 }. Weights must be positive and need not sum to 1.\n\nOne of the four sections every block uses: catalog · params · effects · mixes.",
+          "type": "object",
+          "patternProperties": {
+            "^\\$": {},
+            "^[^$]": {
+              "type": "object",
+              "patternProperties": {
+                "^\\$": {},
+                "^[^$]": { "type": "number", "exclusiveMinimum": 0 }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        ".*[Tt]olerance$": {
+          "description": "Tolerance — how far the validator lets a generated value drift from its target, in the target's own units (0.02 = two percentage points for a share). Half of a Target pair; the other half is the target-ish sibling. Zero is never right — it would fail on ordinary sampling noise.",
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        ".*[Mm]ultiplier$": {
+          "description": "Multiplier — scales a value while a regime is active (0.5 halves it, 1.7 raises it by 70%). Applied after calibration.",
+          "type": "number",
+          "minimum": 0
+        },
+        ".*([Dd]ays|[Mm]onths|[Hh]ours|[Yy]ears)([Mm]ax|[Mm]in|[Aa]go|[Aa]head|[Bb]efore[A-Za-z]*|[Aa]fter[A-Za-z]*)?$": {
+          "description": "Window — a duration whose UNIT IS IN THE KEY NAME (…Days / …Months / …Hours / …Years), so no duration is ever ambiguous. A single number, or a two-element [lo, hi] range the generator draws inside.",
+          "anyOf": [
+            { "type": "number" },
+            { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+          ]
+        },
+        ".*[Bb]eta$": {
+          "description": "Beta — the strength of a causal effect, in log-odds per standard deviation of the driver (0.55 ≈ +4 points at a 50% base rate). Prefer declaring effects inside an `arrows` block, where evidence is required.",
+          "type": "number"
+        },
+        ".*[Cc]ount$": {
+          "description": "Count — an exact number of rows the generator must stamp (usually an authored defect or motif population). Treated as 'up to' where the eligible pool is smaller.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "^arrows$": {
+          "description": "Arrows — the causal rules of this block: who differs from the population average, and by how much. Each arrow declares exactly ONE effect form and carries its evidence.",
+          "type": "object",
+          "patternProperties": {
+            "^\\$": {},
+            "^[^$]": { "$ref": "#/$defs/arrow" }
+          }
+        },
+        "^years$": {
+          "description": "The calendar years a regime is active.",
+          "type": "array",
+          "items": { "type": "integer" }
+        }
+      },
+      "additionalProperties": { "$ref": "#/$defs/node" },
+      "items": { "$ref": "#/$defs/node" },
+      "anyOf": [
+        { "not": { "required": ["target", "tolerance"] } },
+        {
+          "description": "A TARGET PAIR, recognised by its shape rather than its name: any object carrying both `target` and `tolerance` is a promise the validator checks. This is why the four-section shape writes gated numbers as pairs — the structure says 'this is enforced' without depending on what it is called.",
+          "properties": {
+            "tolerance": {
+              "description": "How far the generated data may drift from `target`, in the target's own units. Never 0 — that fails on ordinary sampling noise.",
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1
+            },
+            "n": { "type": "integer", "description": "Draw-pool size, which enables the validator's standard-error cushion." },
+            "se": { "type": "number", "description": "How many standard errors of cushion to allow. Default 3." }
+          }
+        }
+      ]
+    },
+    "arrow": {
+      "description": "One causal rule. Declare exactly ONE effect form, plus evidence:\n • liftPts — 'this group is N percentage points higher' (the human form)\n • groupTarget — 'this group lands at N%' (the human form)\n • strength + sign — qualitative ('med', '+')\n • beta — log-odds per SD (the expert form)\n • logitShift — a raw additive shift\nThe compiler solves the human forms into a beta against the population target, so authoring in points is not a lesser option — it is the recommended one.",
+      "type": "object",
+      "properties": {
+        "liftPts": { "type": "number", "description": "Percentage points this group differs by, measured at the population base rate. Negative for a drag." },
+        "groupTarget": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1, "description": "The rate this group should land at, as a probability (0.62, not 62)." },
+        "strength": { "enum": ["weak", "med", "strong"], "description": "Qualitative magnitude. Requires `sign`." },
+        "sign": { "enum": ["+", "-"], "description": "Direction of a qualitative arrow. Requires `strength`." },
+        "beta": { "type": "number", "description": "Log-odds per standard deviation of the driver. The expert form — prefer liftPts unless you think in log-odds." },
+        "logitShift": { "type": "number", "description": "A raw additive shift in log-odds space." },
+        "share": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "description": "Prevalence of the affected group, used to solve a human form into a beta. Required in practice whenever liftPts or groupTarget is used." },
+        "feature": { "description": "Declarative driver — { from: 'self', field } or { from: 'self', where: {…} } — naming what this arrow keys off." },
+        "note": { "type": "string", "description": "Why this effect exists and why this size. One of note / evidence / $note is required: an arrow without a stated reason is an unfalsifiable claim about the world." },
+        "evidence": { "type": "string", "description": "Provenance for the magnitude. Say ESTIMATE plainly when it is a guess." },
+        "label": { "type": "string", "description": "Plain-language restatement of the magnitude ('med', 'med-strong') recorded alongside a beta, so a reader who doesn't think in log-odds can still tell how big the claim is. Documentation only — nothing reads it." }
+      },
+      "oneOf": [
+        { "required": ["liftPts"] },
+        { "required": ["groupTarget"] },
+        { "required": ["strength", "sign"] },
+        { "required": ["beta"] },
+        { "required": ["logitShift"] }
+      ],
+      "anyOf": [
+        { "required": ["note"] },
+        { "required": ["evidence"] },
+        { "required": ["$note"] }
+      ]
+    },
+    "hero": {
+      "description": "A pinned person: authored facts that survive every dice roll, plus `pins` the validator asserts on their generated data.",
+      "type": "object",
+      "required": ["memberNumber", "first", "last"],
+      "properties": {
+        "memberNumber": { "type": "string", "description": "Identity key, e.g. ICF-000101. Every generator that pins this hero looks them up by it." },
+        "first": { "type": "string" },
+        "last": { "type": "string" },
+        "title": { "type": ["string", "null"], "description": "Job title. null is legal and meaningful — an independent or unemployed hero." },
+        "employerName": { "type": ["string", "null"], "description": "null means this hero has no employer, and no organisation row is created for them." },
+        "segment": { "type": "string", "description": "Producer / Retailer / Supplier / Educator / Enthusiast." },
+        "region": { "type": "string", "description": "NA / EU / RoW — must match a region in geography.mix." },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "lat": { "type": "number" },
+        "lon": { "type": "number" },
+        "theta": { "type": "number", "description": "Pinned engagement dial — never drawn. Higher means more of everything (renewals, attendance, volunteering)." },
+        "phi": { "type": "number", "description": "Pinned affluence dial — drives spend." },
+        "thetaByYear": { "type": "object", "description": "A pinned engagement ARC keyed by year string, for heroes whose story is a trajectory rather than a level (a rising star, a quiet fade)." },
+        "tier": { "type": "string" },
+        "cycleType": { "enum": ["calendar", "anniversary"] },
+        "autoRenew": { "type": "boolean" },
+        "joinDate": { "type": "string", "description": "Absolute join date. Declare exactly one of joinDate / joinYearsAgo / joinDaysBeforeRelease." },
+        "joinYearsAgo": { "type": "number", "description": "Join date relative to the release, in years (pairs with anniversaryOffsetDays)." },
+        "anniversaryOffsetDays": { "type": "integer" },
+        "joinDaysBeforeRelease": { "type": "integer", "description": "Release-relative join, so a cold-start story survives any release date." },
+        "lapseYear": { "type": "integer", "description": "Pins a NO at that year's renewal decision." },
+        "employerEvent": { "type": "object", "description": "{ year, kind } — a lifecycle event on this hero's employer, which is what feeds the employerEvent arrow." },
+        "committees": { "type": "array", "description": "Declared seats: { committee, role, terms[] }. `committee` must name an entry in committees.list — the linter checks the spelling, because a typo silently produced no seat at all." },
+        "issues": { "type": "array", "description": "Authored support tickets: { type, title, daysBeforeRelease, detail? }." },
+        "certifications": { "type": "array", "description": "Declared credentials: { key, status, enrolledOn, awardedOn? }. `key` must exist in programs.certifications.catalog." },
+        "competition": { "type": "object", "description": "{ entriesPerYear, pinnedResults{year:medal}, category, productName }." },
+        "advocacy": { "type": "object", "description": "{ totalActions, testimonies, topic }." },
+        "staleEmployer": { "type": "object", "description": "{ trueEmployerName, monthsAgo } — deliberately creates a labelled stale-employer defect on this hero." },
+        "pins": {
+          "type": "object",
+          "description": "Assertions the VALIDATOR enforces on this hero's generated data — a promise a demo script can rely on. (Two are also read by generators: formResponse and duplicateOf.) Add a pin for every fact your demo will say out loud."
+        }
+      }
+    }
+  }
+}

@@ -3,6 +3,10 @@
 // the house style. Negative-tested in test.mjs: each must CATCH its planted defect and
 // stay quiet on clean input — an unexercised helper is decoration.
 
+/**
+ * @param {(name: string, ok: boolean, detail?: string) => void} check the validator's own reporter
+ * @returns {import('./types.js').GateHelpers}
+ */
 export function makeGateHelpers(check) {
   /** rows whose keyFn(row) is non-null and absent from the parent key set */
   const dangling = (rows, keyFn, parents) => rows.filter((r) => { const k = keyFn(r); return k != null && !parents.has(k); }).length;

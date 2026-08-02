@@ -1,0 +1,26 @@
+{
+  "$comment": [
+    "Editor support only. datagen has no build step and no node_modules — nothing here runs,",
+    "and nothing here is required to run the generator. It exists so that opening a generator",
+    "in an editor gives you autocomplete on the pattern option bags and hover docs on cfg,",
+    "R, and the dice, instead of `any`.",
+    "",
+    "checkJs is OFF deliberately: the generators are untyped JS and turning it on would bury",
+    "real signal under hundreds of inference complaints. The types are here to ANSWER",
+    "questions, not to police the code. To check the declarations themselves against the",
+    "engine, run: npx tsc -p datagen --noEmit"
+  ],
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "checkJs": false,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "lib": ["es2023"],
+    "types": []
+  },
+  "include": ["engine/**/*", "cli/**/*", "projects/**/*.mjs", "*.mjs"],
+  "exclude": ["out", "out-*", "node_modules"]
+}
