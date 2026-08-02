@@ -671,7 +671,7 @@ function checkLearning() {
 
 // ---------- the money chain: order-per-cycle, 3-part payment timing, reconciliation ----------
 function checkMoney() {
-  const G = R.orders.gates;
+  const G = R.orders.params;
   // BO-D40 verbatim: one dues order per membership period
   const duesOrders = orders.filter((x) => x.OrderKey.startsWith('ORD-D-'));
   check('money: one dues order per membership period (order-per-cycle)', duesOrders.length === periods.length, `${duesOrders.length} orders / ${periods.length} periods`);
@@ -702,9 +702,9 @@ function checkMoney() {
   const rate = (a) => a.reduce((s, x) => s + x, 0) / a.length;
   const se = (p, n) => Math.sqrt(p * (1 - p) / n);
   const netLate = rate(cls.net), manualLate = rate(cls.manual), autoOn = rate(cls.auto);
-  check(`money: net-terms late share ${(netLate * 100).toFixed(1)}% vs ${G.netTermsLate.target * 100}% ±${(G.netTermsLate.tolerance * 100).toFixed(0)}+SE (Atradius/CRF)`, Math.abs(netLate - G.netTermsLate.target) <= G.netTermsLate.tolerance + 1.5 * se(G.netTermsLate.target, cls.net.length), `${cls.net.length} net-terms payments`);
-  check(`money: manual dues late share ${(manualLate * 100).toFixed(1)}% vs ${G.manualLate.target * 100}% ±${(G.manualLate.tolerance * 100).toFixed(0)}+SE (mirrors late_renewal_share)`, Math.abs(manualLate - G.manualLate.target) <= G.manualLate.tolerance + 1.5 * se(G.manualLate.target, cls.manual.length), `${cls.manual.length} manual payments`);
-  check(`money: auto-pay lands ON the due date ${(autoOn * 100).toFixed(1)}% (≥${G.autopayOnDueMin * 100}%)`, autoOn >= G.autopayOnDueMin, `${cls.auto.length} auto-payments`);
+  check(`money: net-terms late share ${(netLate * 100).toFixed(1)}% vs ${G.gateNetTermsLate.target * 100}% ±${(G.gateNetTermsLate.tolerance * 100).toFixed(0)}+SE (Atradius/CRF)`, Math.abs(netLate - G.gateNetTermsLate.target) <= G.gateNetTermsLate.tolerance + 1.5 * se(G.gateNetTermsLate.target, cls.net.length), `${cls.net.length} net-terms payments`);
+  check(`money: manual dues late share ${(manualLate * 100).toFixed(1)}% vs ${G.gateManualLate.target * 100}% ±${(G.gateManualLate.tolerance * 100).toFixed(0)}+SE (mirrors late_renewal_share)`, Math.abs(manualLate - G.gateManualLate.target) <= G.gateManualLate.tolerance + 1.5 * se(G.gateManualLate.target, cls.manual.length), `${cls.manual.length} manual payments`);
+  check(`money: auto-pay lands ON the due date ${(autoOn * 100).toFixed(1)}% (≥${G.gateAutopayOnDueMin * 100}%)`, autoOn >= G.gateAutopayOnDueMin, `${cls.auto.length} auto-payments`);
 
   // event orders: card-at-checkout = paid same day, always
   const evOrders = orders.filter((x) => x.OrderKey.startsWith('ORD-E-'));
@@ -1098,18 +1098,18 @@ function checkComposedApps() {
   check(`programs: advocates ${(advShare * 100).toFixed(1)}% vs ${PRG.params.advocateShare.target * 100}% ±${(advAllow * 100).toFixed(1)}`, Math.abs(advShare - PRG.params.advocateShare.target) <= advAllow, `${advocates} advocates`);
 
   // payment lifecycle: failure mix is part causal (low-phi), part noise — the ratio must express
-  const PO2 = R.orders.paymentOutcomes;
+  const PO2 = R.orders.params;
   const latents2 = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
   const phiOf = new Map(latents2.map((x) => [x.m, x.phi]));
   const orderMember = new Map(orders.map((o) => [o.OrderKey, o.MemberNumber]));
   const cardPays = payments.filter((x) => x.Method === 'CreditCard');
   const failed = cardPays.filter((x) => x.Status === 'Failed' || x.Status === 'Denied');
-  const isLow = (x) => (phiOf.get(orderMember.get(x.OrderKey)) ?? 0) < PO2.lowPhiCut;
+  const isLow = (x) => (phiOf.get(orderMember.get(x.OrderKey)) ?? 0) < PO2.paymentLowPhiCut;
   const lowN = cardPays.filter(isLow).length, lowF = failed.filter(isLow).length;
   const restN = cardPays.length - lowN, restF = failed.length - lowF;
   const rLow = lowF / Math.max(1, lowN), rRest = restF / Math.max(1, restN);
   check(`payments: card-failure causality expressed — low-φ ${(rLow * 100).toFixed(1)}% > rest ${(rRest * 100).toFixed(1)}% (noise floor)`, failed.length > 0 && rLow > rRest * 1.8, `${failed.length} failed/denied of ${cardPays.length} card payments`);
-  const badInflight = payments.filter((x) => x.Status === 'InProgress' && x.PaymentDate < iso2(addDays2(parseDate2(run.releaseDate), -PO2.inProgressWindowDays))).length;
+  const badInflight = payments.filter((x) => x.Status === 'InProgress' && x.PaymentDate < iso2(addDays2(parseDate2(run.releaseDate), -PO2.paymentInProgressWindowDays))).length;
   check('payments: InProgress only inside the settlement window', badInflight === 0, `${payments.filter((x) => x.Status === 'InProgress').length} in-flight`);
   // relationships: every employed member has exactly one Employee edge; dissolved employers end it
   const employed = people.filter((p) => p.OrgKey).length;

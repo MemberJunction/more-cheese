@@ -213,21 +213,21 @@ You don't need these to make changes. You'll see them, so here's what they mean.
 
 ## Where things stand
 
-**Done this way (13 files):** `committees`, `platform`, `events`, `learning`, `issues`, `sonar`,
-`programs`, `messaging`, `relationships`, `tasks`, `world`, `defects`, `motifs`.
+**Done this way (15 files):** `committees`, `platform`, `events`, `learning`, `issues`, `sonar`,
+`programs`, `messaging`, `relationships`, `tasks`, `world`, `orders`, `membership`, `defects`,
+`motifs`.
 
 Every one was verified the same way: regenerate and confirm the output is **byte-for-byte
 identical** to what the old files produced. Nothing about the data changed — only where you
 find things.
 
-**Four files are not converted, for four different reasons:**
+**Three files are deliberately left alone:**
 
 | file | why |
 |---|---|
-| `membership` | not yet done. Its effect names are wired into the calibration machinery, so it needs care rather than a mechanical pass |
-| `orders` | not yet done. Largest remaining, but straightforward |
-| `forms` | **the shape does not fit.** A form is one coherent thing — its name, its page, its questions, how it is distributed, how many come in. The four parts would scatter that across three sections and make it harder to read, not easier. Left alone deliberately |
-| `core` | **the shape does not apply.** This is not a domain, it is the shared substrate every other file reads (`scale`, `history`, `cohorts`, `regimes`). It is already flat, and restructuring it would touch every module for no gain |
+| `heroes` | a plain list of the named people. Nothing to put in three of the four parts |
+| `forms` | **the shape does not fit.** A form is one coherent thing — its name, its page, its questions, how it is distributed, how many come in. The four parts would scatter that across three sections and make it harder to read, not easier |
+| `core` | **the shape does not apply.** Not a domain: the shared substrate every other file reads (`scale`, `history`, `cohorts`, `regimes`). Already flat, and restructuring it would touch every module for no gain |
 
 Mixed formats work indefinitely: the loader takes `.mjs` or `.json` per file, so converting is
 optional and can stop at any point.
