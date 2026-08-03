@@ -72,7 +72,8 @@ export default {
   tickets: {
     catalog: { types: [...], statuses: [...] },        // the things
     params:  { filedShare: { target: 0.3, tolerance: 0.05 } },   // the numbers
-    effects: { 'file.engagement': { liftPts: 8, share: 0.3, note: '…', evidence: 'ESTIMATE' } },
+    // beta, NOT liftPts — see the trap at the bottom of this page
+    effects: { 'file.engagement': { beta: 0.5, label: 'med', note: '…', evidence: 'ESTIMATE' } },
     mixes:   { severityBilling: { High: 0.5, Medium: 0.4, Low: 0.1 } },
   },
 };
