@@ -234,6 +234,37 @@ step('derived presence floors catch a missing category (the Critical-severity fa
   }
 });
 
+// 0g. THE new-domain trap. A human-form effect (liftPts/groupTarget/strength) is only solved for
+// the block hooks.compile.arrowsOf points at. Authored anywhere else it keeps beta: undefined,
+// every score goes NaN, every draw is false, and the domain generates ZERO ROWS with all gates
+// green. That is what happened the first time someone added a domain by following the docs.
+step('a human-form effect outside the compiled block fails loudly (not silently at zero rows)', async () => {
+  const { compileRuleset } = await import('./engine/compile.mjs');
+  const hooks = {
+    compile: {
+      arrowsOf: (C) => C.membership.effects,
+      overallTarget: () => 0.87,
+      features: { 'renewal.x': 'x' },
+      syntheticPop: (C, r, n) => Array.from({ length: n }, () => ({ x: r.normal() })),
+    },
+  };
+  const C = {
+    membership: { effects: { 'renewal.x': { beta: 0.5 } } },
+    // a second domain, authored the way CONTRACT.md recommends — and never solved
+    speakers: { effects: { 'speak.engagement': { liftPts: 9, share: 0.2, note: 'x' } } },
+  };
+  try {
+    compileRuleset(C, hooks);
+    throw new Error('compile ACCEPTED an unsolved human-form effect — the zero-rows trap is open again');
+  } catch (e) {
+    const m = String(e.message);
+    if (m.includes('trap is open')) throw e;
+    if (!m.includes('speakers.effects.speak.engagement')) {
+      throw new Error(`compile failed, but did not name the offending effect: ${m.split('\n')[0]}`);
+    }
+  }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

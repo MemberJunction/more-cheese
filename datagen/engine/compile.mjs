@@ -104,6 +104,47 @@ export function compileRuleset(R, hooks) {
     if (worst < 0.015) break; // within 1.5pt — the validator gates the rest
   }
   for (const [, a] of solved) a.compiledFrom += ' + empirical refinement (spec: author → measure → adjust, automated)';
+  // THE TRAP THIS CLOSES. `liftPts` / `groupTarget` / `strength` are the human forms, and the docs
+  // rightly recommend them — but only the arrows returned by hooks.compile.arrowsOf get SOLVED into
+  // a beta. An effect authored in a human form anywhere else keeps `beta: undefined`, and then:
+  //
+  //     undefined * theta  →  NaN  →  sigmoid(NaN)  →  bernoulli(NaN) is always false
+  //
+  // …so the domain silently produces ZERO ROWS, with every gate green. That is exactly what
+  // happened the first time someone added a domain by following the documentation: an effect with
+  // `liftPts: 9`, a build that passed, and no data at all.
+  //
+  // Found by walking datagen/ADDING-A-DOMAIN.md as a newcomer would.
+  {
+    const unsolved = [];
+    const walk = (node, path) => {
+      if (!node || typeof node !== 'object' || Array.isArray(node)) return;
+      for (const [k, v] of Object.entries(node)) {
+        if (k.startsWith('$')) continue;
+        const p = path ? `${path}.${k}` : k;
+        if (k === 'effects' && v && typeof v === 'object') {
+          for (const [name, e] of Object.entries(v)) {
+            if (name.startsWith('$') || !e || typeof e !== 'object') continue;
+            const human = e.liftPts != null || e.groupTarget != null || e.strength != null;
+            if (human && e.beta == null) unsolved.push(`${p}.${name}`);
+          }
+        } else walk(v, p);
+      }
+    };
+    walk(C, '');
+    if (unsolved.length) {
+      throw new Error(
+        `effect(s) authored in a human form but never solved into a beta:\n  - ${unsolved.join('\n  - ')}\n\n`
+        + `Only the effects returned by hooks.compile.arrowsOf() are solved. Everywhere else the beta\n`
+        + `stays undefined, which makes every score NaN and every draw false — the domain generates\n`
+        + `NOTHING, with all gates green.\n\n`
+        + `Fix by either (a) authoring \`beta\` directly for these, or (b) extending arrowsOf() and the\n`
+        + `feature map to cover this block. (a) is right unless the effect needs calibrating against a\n`
+        + `population target.`,
+      );
+    }
+  }
+
   return C;
 }
 
