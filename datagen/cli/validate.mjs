@@ -21,7 +21,7 @@ import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 import { CITIES } from '../projects/morecheese/banks.mjs';
 import { makeGateHelpers } from '../engine/gates.mjs';
-import { runTargetChecks } from '../engine/checks.mjs';
+import { runTargetChecks, runRefChecks } from '../engine/checks.mjs';
 import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -114,6 +114,15 @@ for (const x of periods) { (periodsByMember.get(x.MemberNumber) ?? periodsByMemb
 const lastStatus = new Map();
 const lastPeriod = new Map();
 for (const per of periods) { lastStatus.set(per.MemberNumber, per.Status); lastPeriod.set(per.MemberNumber, per); }
+
+// ---------- the DECLARED reference graph (projects/<name>/refs.mjs) ----------
+// Generated from data, not written: see engine/checks.mjs. The prose gates below still say
+// things a generated one cannot (they carry the story of a real bug), so both run.
+async function checkDeclaredRefs() {
+  const { refs } = await import('../projects/' + run.project + '/refs.mjs');
+  runRefChecks(refs, load, check);
+  return refs.length;
+}
 
 // ---------- packs (§7.8) ----------
 function checkPacks() {
@@ -1615,6 +1624,7 @@ function checkMotifs() {
 // If any pack-reference gate fails, causal/benchmark gates are meaningless (they'd
 // measure a broken world) — report the referential failures alone and hard-fail.
 checkPacks();
+await checkDeclaredRefs();   // declared graph: same phase, before the bailout
 if (results.some((r) => !r.ok)) {
   for (const r of results) console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);
   console.log('\n✋ FK-first: referential gates failed — causal gates not run');

@@ -195,6 +195,26 @@ step('engine/types.d.ts matches the engine and surfaces at call sites (needs tsc
   } finally { rmSync(probe, { force: true }); }
 });
 
+// 0e. checks DERIVED from declarations must actually catch a planted defect, and must run in the
+// RIGHT PHASE. The reference gates are generated from projects/<name>/refs.mjs; when they were
+// first wired in after the validator's FK-first bailout, a dangling reference stopped the run
+// before they ever executed — they reported green on a broken world by never running at all.
+step('derived reference gates catch a planted dangling ref (and run before the FK-first bailout)', () => {
+  run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/committees/committee_memberships.json');
+  const rows = JSON.parse(readFileSync(f, 'utf8'));
+  const original = rows[3].TermKey;
+  rows[3].TermKey = 'BOGUS:1999-01-01';   // a term that was never emitted
+  writeFileSync(f, JSON.stringify(rows, null, 1));
+  let out = '';
+  try { run('validate.mjs', ['--out', 'out-test']); }
+  catch (e) { out = String(e.stdout ?? ''); }
+  finally { rows[3].TermKey = original; writeFileSync(f, JSON.stringify(rows, null, 1)); }
+  if (!out.includes('ref: committee_memberships.TermKey → committee_terms.TermKey')) {
+    throw new Error('the DERIVED reference gate did not fire — check it runs inside the referential phase');
+  }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

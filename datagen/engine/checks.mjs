@@ -85,3 +85,43 @@ export function runTargetChecks(R, measurements, check, ctx) {
   }
   return { ran, skipped, unmeasured };
 }
+
+/**
+ * A declared reference: a child column that must point at an existing parent key.
+ * @typedef {{ from: [pack: string, table: string, column: string],
+ *             to:   [pack: string, table: string, column: string],
+ *             note?: string }} Ref
+ */
+
+/**
+ * Run every declared reference. The relation is DATA — child column → parent key — so the check
+ * is generated rather than written, and a new project declares its graph instead of hand-rolling
+ * a dangling counter per edge.
+ *
+ * Null and undefined child values PASS: an optional reference is not a broken one. That rule
+ * lives here once, rather than being remembered at each of a dozen call sites.
+ *
+ * @param {readonly Ref[]} refs
+ * @param {(pack: string, table: string) => any[]} load
+ * @param {(name: string, ok: boolean, detail?: string) => void} check
+ * @param {Record<string, (rows: any[]) => any[]>} [filters] per-"pack.table" row filter, for the
+ *        cases where only a subset participates (e.g. prospects excluded from member references)
+ */
+export function runRefChecks(refs, load, check, filters = {}) {
+  const rowsOf = (spec) => {
+    const [pack, table] = spec;
+    const key = `${pack}.${table}`;
+    const rows = load(pack, table);
+    return filters[key] ? filters[key](rows) : rows;
+  };
+  for (const ref of refs) {
+    const child = rowsOf(ref.from);
+    const parentKeys = new Set(rowsOf(ref.to).map((r) => r[ref.to[2]]));
+    const bad = child.filter((r) => {
+      const v = r[ref.from[2]];
+      return v != null && !parentKeys.has(v);
+    });
+    const name = `ref: ${ref.from[1]}.${ref.from[2]} → ${ref.to[1]}.${ref.to[2]}`;
+    check(name, bad.length === 0, bad.length ? `${bad.length} dangling of ${child.length}` : `${child.length} rows`);
+  }
+}
