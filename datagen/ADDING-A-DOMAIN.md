@@ -141,6 +141,16 @@ invisibly.
 **Never reorder draws inside a stream.** Adding a draw in the middle re-rolls everything after it,
 which surfaces as a diff in data you didn't touch.
 
+Then wire it into `buildWorld` and the pack map in `projects/<project>/index.mjs`. Where in the
+order? [PIPELINE.md](PIPELINE.md) shows the 22 stages as a graph — put yours after everything it
+reads.
+
+**If your stage MUTATES something an existing stage reads** — writing a field onto people, say —
+that ordering is invisible in the argument lists and nothing will enforce it. Declare the edge in
+`projects/<project>/pipeline.mjs` and the suite will hold it. Swapping two such calls otherwise
+compiles, runs, and quietly changes the data: verified, by swapping two lines and watching
+committee memberships, attendance and motions all move.
+
 ## Step 6 — Declare the checks (don't write them)
 
 Three of the four rule kinds generate their own gates. You write **declarations**, not gates:

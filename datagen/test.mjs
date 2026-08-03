@@ -265,6 +265,33 @@ step('a human-form effect outside the compiled block fails loudly (not silently 
   }
 });
 
+// 0h. THE PIPELINE GRAPH. Most stage ordering is self-enforcing — you cannot consume what does not
+// exist. The dangerous edges are the ones where a stage MUTATES something a later stage reads: the
+// argument lists look identical either way, so swapping two calls compiles, runs, and quietly
+// produces different data. Verified: swapping applyMotifs and runRenewalUnroll changes committee
+// memberships, attendance and motions. Those edges are declared, and checked here.
+step('pipeline: declared ordering edges hold, and a violation is caught', async () => {
+  const { extractPipeline, checkPipeline } = await import('./engine/pipeline.mjs');
+  const { mustPrecede } = await import('./projects/morecheese/pipeline.mjs');
+  const stages = extractPipeline(readFileSync(join(HERE, 'projects/morecheese/index.mjs'), 'utf8'));
+  if (stages.length < 20) throw new Error(`extracted only ${stages.length} stages — the parser has drifted from buildWorld`);
+
+  const fails = [];
+  checkPipeline(stages, mustPrecede, (name, ok) => { if (!ok) fails.push(name); });
+  if (fails.length) throw new Error(`declared ordering edge(s) violated: ${fails.join('; ')}`);
+
+  // and the check must actually catch a violation — swap the first declared edge's two stages
+  const edge = mustPrecede[0];
+  const a = stages.findIndex((s) => s.name === edge.before);
+  const b = stages.findIndex((s) => s.name === edge.after);
+  const swapped = stages.map((s, i) => ({ ...s, order: i === a ? stages[b].order : i === b ? stages[a].order : s.order }));
+  let caught = false;
+  checkPipeline(swapped, [edge], (name, ok) => { if (!ok) caught = true; });
+  if (!caught) throw new Error('checkPipeline MISSED a violated ordering edge');
+});
+
+step('PIPELINE.md matches the code', () => run('emit-pipeline.mjs', ['--check']));
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {
