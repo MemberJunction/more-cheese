@@ -13,7 +13,18 @@ const project = process.argv.includes('--project') ? process.argv[process.argv.i
 
 const schema = JSON.parse(readFileSync(join(ROOT, 'engine/ruleset.schema.json'), 'utf8'));
 const modDir = join(ROOT, 'projects', project, 'ruleset/modules');
-const files = readdirSync(modDir).filter((f) => f.endsWith('.json')).sort();
+// index.json is the composition MANIFEST, not a ruleset module — it declares load order and has
+// nothing the ruleset schema describes. Validating it would pass vacuously and report a green
+// check for work not done, which is worse than reporting nothing.
+const files = readdirSync(modDir).filter((f) => f.endsWith('.json') && f !== 'index.json').sort();
+
+if (!files.length) {
+  console.log(`no JSON ruleset modules in '${project}' — every module is .mjs, checked instead by`);
+  console.log('cli/check-ruleset.mjs (data-only) and `npx tsc -p datagen --noEmit` (types).');
+  console.log('\nThis schema still describes the format, and still serves any project that keeps');
+  console.log('its modules as JSON.');
+  process.exit(0);
+}
 
 let failed = 0;
 for (const f of files) {

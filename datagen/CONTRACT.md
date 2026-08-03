@@ -213,24 +213,24 @@ You don't need these to make changes. You'll see them, so here's what they mean.
 
 ## Where things stand
 
-**Done this way (15 files):** `committees`, `platform`, `events`, `learning`, `issues`, `sonar`,
-`programs`, `messaging`, `relationships`, `tasks`, `world`, `orders`, `membership`, `defects`,
-`motifs`.
+**Every module is now a .mjs file with comments** — all 18 of them. Fifteen also use the four
+sections; three keep their own arrangement because the sections would not help them.
 
 Every one was verified the same way: regenerate and confirm the output is **byte-for-byte
 identical** to what the old files produced. Nothing about the data changed — only where you
 find things.
 
-**Three files are deliberately left alone:**
+**Three files keep their own arrangement:**
 
 | file | why |
 |---|---|
-| `heroes` | a plain list of the named people. Nothing to put in three of the four parts |
+| `heroes` | a plain list of the named people. Nothing to put in three of the four parts — but each person now opens with a comment saying what they exist to demonstrate, which is the most useful thing in the file |
 | `forms` | **the shape does not fit.** A form is one coherent thing — its name, its page, its questions, how it is distributed, how many come in. The four parts would scatter that across three sections and make it harder to read, not easier |
 | `core` | **the shape does not apply.** Not a domain: the shared substrate every other file reads (`scale`, `history`, `cohorts`, `regimes`). Already flat, and restructuring it would touch every module for no gain |
 
-Mixed formats work indefinitely: the loader takes `.mjs` or `.json` per file, so converting is
-optional and can stop at any point.
+Mixed formats still work: the loader takes `.mjs` or `.json` per file. Nothing forces a new
+project to use `.mjs`, and `engine/ruleset.schema.json` still describes the JSON form for any
+that does — it is just no longer needed by this project.
 
 **Deliberately not done:** tidying up the names across all files (the same idea is currently
 called `target`, `presentTarget` and `shareOfEligible` in different places). That waits until
