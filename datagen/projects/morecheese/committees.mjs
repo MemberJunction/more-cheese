@@ -244,7 +244,7 @@ export function buildCommittees(cfg, people, periods) {
       if (x.status !== 'Present') value = 'Absent';
       else {
         const vr = rng(seed, `vote:${motionKey}:${x.membership.MembershipKey}`);
-        value = vr.pickWeighted([['Yes', split.yes], ['No', split.no], ['Abstain', split.abstain]]);
+        value = vr.pickWeighted(Object.entries(split));
       }
       if (value === 'Yes') yes++; else if (value === 'No') no++; else if (value === 'Abstain') abstain++;
       votes.push({ VoteKey: `${motionKey}:${x.membership.MembershipKey}`, MotionKey: motionKey, MembershipKey: x.membership.MembershipKey, VoteValue: value, IsSharedDemo: true });

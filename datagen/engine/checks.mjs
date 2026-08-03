@@ -125,3 +125,97 @@ export function runRefChecks(refs, load, check, filters = {}) {
     check(name, bad.length === 0, bad.length ? `${bad.length} dangling of ${child.length}` : `${child.length} rows`);
   }
 }
+
+/**
+ * Every declared mix (a map of category → positive weight), by dotted path.
+ * Recognised by shape and position — anything under a `mixes` key.
+ * @returns {{ path: string, categories: string[] }[]}
+ */
+export function declaredMixes(R) {
+  const out = [];
+  const walk = (node, path) => {
+    if (!node || typeof node !== 'object' || Array.isArray(node)) return;
+    for (const [k, v] of Object.entries(node)) {
+      if (k.startsWith('$')) continue;
+      const p = path ? `${path}.${k}` : k;
+      if (k === 'mixes' && v && typeof v === 'object') {
+        for (const [name, mix] of Object.entries(v)) {
+          if (name.startsWith('$') || !mix || typeof mix !== 'object' || Array.isArray(mix)) continue;
+          const opts = Object.entries(mix).filter(([c]) => !c.startsWith('$'));
+          out.push({
+            path: `${p}.${name}`,
+            categories: opts.filter(([, w]) => w > 0).map(([c]) => c),
+            weights: Object.fromEntries(opts),
+          });
+        }
+      } else walk(v, p);
+    }
+  };
+  walk(R, '');
+  return out;
+}
+
+/**
+ * PRESENCE FLOORS, derived. Every category a mix gives positive weight must actually APPEAR in
+ * the data. A share gate cannot do this job: a category whose expected share is 0.5% passes a
+ * ±6-point band at exactly zero rows. That is not hypothetical — Critical-severity tickets sat at
+ * zero for weeks while every gate stayed green, because no percentage check can notice an
+ * entirely missing category.
+ *
+ * The project declares only WHERE each mix lands; the categories come from the declaration, so a
+ * new option added to a mix is automatically required to appear.
+ *
+ * @param {object} R
+ * @param {Record<string, { at: [pack: string, table: string, column: string], absentAs?: string[] }>} landings
+ *        mix path → the column its draw lands in. `absentAs` lists categories modelled as the
+ *        ABSENCE of a row or value (e.g. a competition 'None' result), which cannot be looked for.
+ * @param {(pack: string, table: string) => any[]} load
+ * @param {(name: string, ok: boolean, detail?: string) => void} check
+ * @returns {{ ran: number, unlanded: string[] }}
+ */
+export function runPresenceChecks(R, landings, load, check) {
+  const mixes = declaredMixes(R);
+  const unlanded = [];
+  let ran = 0;
+  const seen = new Map();
+  const valuesAt = ([pack, table, column]) => {
+    const key = `${pack}.${table}.${column}`;
+    if (!seen.has(key)) seen.set(key, new Set(load(pack, table).map((r) => r[column])));
+    return seen.get(key);
+  };
+
+  for (const m of mixes) {
+    const landing = landings[m.path];
+    if (!landing) { unlanded.push(m.path); continue; }
+    const ignore = new Set(landing.absentAs ?? []);
+    const present = valuesAt(landing.at);
+
+    // A category can only be REQUIRED to appear when enough rows were drawn for it to be likely.
+    // The denominator is the project's to state: a mix often applies to a SUBSET of the landing
+    // table (the Educator legal structures apply only to educator organisations), and an engine
+    // cannot know which. Without `poolOf` the whole table is used.
+    //
+    // Same lesson as target denominators, learned the same way: a 12%-weight option over eight
+    // eligible rows is expected about once, so demanding it fails two seeds in seven on luck
+    // alone — a correct build called broken.
+    const rows = load(landing.at[0], landing.at[1]);
+    const pool = landing.poolOf ? landing.poolOf(rows).length : rows.length;
+    const threshold = landing.expectAtLeast ?? 3;
+    const candidates = m.categories.filter((c) => !ignore.has(c));
+    const required = candidates.filter((c) => (m.weights?.[c] ?? 0) * pool >= threshold);
+    const tooRare = candidates.filter((c) => !required.includes(c));
+    const missing = required.filter((c) => !present.has(c));
+
+    const detail = missing.length
+      ? `MISSING: ${missing.join(', ')}`
+      : `${required.length} required present of ${pool} rows`
+        + (tooRare.length ? `; too rare at this scale: ${tooRare.join(', ')}` : '');
+    check(
+      `presence: every option of ${m.path} appears in ${landing.at[1]}.${landing.at[2]}`,
+      missing.length === 0,
+      detail,
+    );
+    ran++;
+  }
+  return { ran, unlanded };
+}

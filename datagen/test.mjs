@@ -215,6 +215,25 @@ step('derived reference gates catch a planted dangling ref (and run before the F
   }
 });
 
+// 0f. the derived PRESENCE floors must catch the failure that motivated them: Critical-severity
+// tickets sat at zero for weeks while every gate stayed green, because a category whose expected
+// share is 0.5% passes a ±6-point band at exactly zero rows. Reproduce it exactly.
+step('derived presence floors catch a missing category (the Critical-severity failure)', () => {
+  run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/issues/issues.json');
+  const rows = JSON.parse(readFileSync(f, 'utf8'));
+  const original = rows.map((r) => r.Severity);
+  for (const r of rows) if (r.Severity === 'Critical') r.Severity = 'High';
+  writeFileSync(f, JSON.stringify(rows, null, 1));
+  let out = '';
+  try { run('validate.mjs', ['--out', 'out-test']); }
+  catch (e) { out = String(e.stdout ?? ''); }
+  finally { rows.forEach((r, i) => { r.Severity = original[i]; }); writeFileSync(f, JSON.stringify(rows, null, 1)); }
+  if (!out.includes('MISSING: Critical')) {
+    throw new Error('the derived presence floor did not name the missing category');
+  }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

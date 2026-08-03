@@ -192,11 +192,14 @@ export default {
       },
     },
 
-    // Weighted options, one dice roll each. Votes stay CONSISTENT with attendance by
+    // Weighted options, one dice roll each. The KEYS are the values that land in the data —
+    // they used to be lowercase while the generator hardcoded `Yes`/`No`/`Abstain`, so this mix
+    // looked like it declared the options when it only supplied their weights.
+    // Votes stay CONSISTENT with attendance by
     // construction: a member absent from the meeting votes 'Absent', never one of these.
     mixes: {
-      vote: { yes: 0.8, no: 0.1, abstain: 0.1 },
-      voteContentious: { yes: 0.25, no: 0.6, abstain: 0.15 },
+      vote: { Yes: 0.8, No: 0.1, Abstain: 0.1 },
+      voteContentious: { Yes: 0.25, No: 0.6, Abstain: 0.15 },
     },
   },
 };
