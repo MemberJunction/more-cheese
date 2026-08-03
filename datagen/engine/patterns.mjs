@@ -19,7 +19,8 @@ import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
  *   seed, years: [..],
  *   poolOf(year)        → eligible members for that year (empty/short pools are skipped)
  *   scoreOf(member, y)  → the member's arrow score
- *   target              → participation rate the cohort calibrates to
+ *   target              → participation rate PER YEAR (share of THAT year's pool, never a
+ *                         lifetime share — see types.d.ts; misreading this is easy)
  *   streamKey(m, y)     → dice stream for this member-year decision
  *   spawn(r, member, y) → called ONLY for participants; does its own draws in declared order
  *   minPool?            → skip years with fewer eligible (default 5)
@@ -76,7 +77,7 @@ export function staticAssignment(rules, ctx) {
  *   cohortOf(y)             → items due to decide this cycle (may be empty)
  *   prepare(cohort, y)      → per-cohort context (e.g. tenure standardization stats)
  *   scoreOf(item, y, ctx)   → arrow score
- *   target                  → the rate the cohort calibrates to
+ *   target                  → the rate PER CYCLE (share of the cohort deciding that cycle)
  *   baselineShift(y)        → applied AFTER calibration (texture wobble + regime shifts)
  *   streamKey(item, y)      → dice stream for this decision
  *   pinnedDecision(item, y) → a boolean makes the outcome a FACT (hero conditioning: a
@@ -164,7 +165,7 @@ function drawOffsetDays(r, spec) {
  * opts: {
  *   seed, items,
  *   scoreOf(item)       → arrow score
- *   target              → outcome rate over the pool
+ *   target              → outcome rate over the ITEMS PASSED IN (selection effect included)
  *   streamKey(item)     → dice stream per item
  *   decide(item, p, r)  → applies the outcome; receives the calibrated probability and the
  *                         item's dice (branching/extra draws are the domain's, in its order)

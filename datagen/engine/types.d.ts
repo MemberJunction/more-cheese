@@ -73,7 +73,12 @@ export interface AnnualParticipationOpts<M = any, R = any> {
   poolOf(year: number): readonly M[];
   /** This member's arrow score for the year, in log-odds. */
   scoreOf(member: M, year: number): number;
-  /** The participation rate the cohort calibrates to (a probability). */
+ /**
+   * The participation rate, PER YEAR — the share of each year's eligible pool that takes part
+   * in THAT year. Not a lifetime share: at 0.62 a year over eight years, nearly every member
+   * participates at least once, so a cumulative measurement will read far higher and look
+   * broken when it is correct. State the denominator in any gate you write against this.
+   */
   target: number;
   /** Dice stream for this member-year decision. Must be unique per decision. */
   streamKey(member: M, year: number): string;
@@ -166,7 +171,12 @@ export interface ChildOutcomeOpts<T = any> {
   seed: string | number;
   items: readonly T[];
   scoreOf(item: T): number;
-  /** The outcome rate over the pool (a probability). */
+ /**
+   * The outcome rate over the pool THAT WAS PASSED IN — items, not the whole population.
+   * Because calibration runs over the actual items, the selection effect is already inside
+   * it: course completers are self-selected, so this is higher than the same rate measured
+   * across everyone. A gate must use the same denominator.
+   */
   target: number;
   streamKey(item: T): string;
   /** Applies the outcome. `p` is the calibrated probability; `r` is this item's dice. */

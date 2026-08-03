@@ -57,10 +57,32 @@ datagen/
   test.mjs              ← the regression suite (drives the cli)
 ```
 
-The **plugin contract** is exactly two exports from a project's `index.mjs`: `hooks` (what the
-engine's compiler/linter/pack-assembler need) and `buildWorld(cfg)` (the causal pipeline). No
-command and no engine file names a project — `cli/*` loads `projects/<--project>/index.mjs`
-dynamically. That is the whole extension surface.
+The **plugin contract** is **three** exports from a project's `index.mjs`:
+
+| export | what it is |
+|---|---|
+| `hooks` | what the engine's compiler and linter need — see the table below |
+| `buildWorld(cfg)` | the causal pipeline: what exists, in what order. Returns a world object |
+| `buildPacks(world)` | the pack map: `{ <packName>: { tables: { <tableName>: rows[] }, dependsOn: [] } }` |
+
+`hooks` must supply:
+
+| hook | required | purpose |
+|---|---|---|
+| `compile.arrowsOf(C)` | yes | the effects map the compiler solves |
+| `compile.overallTarget(C)` | yes | the target those effects negotiate with |
+| `compile.features` | yes | effect key → synthetic-population field name |
+| `compile.syntheticPop(C, r, n)` | yes | the solver's world model. Draw order is part of the determinism contract |
+| `compile.refineMeasure(C)` | only if any effect uses a human form (`liftPts` / `groupTarget`) | runs the real machinery and reports measured group rates |
+| `domainLint(R)` | yes | checks the generic lint cannot know about |
+
+No command and no engine file names a project — `cli/*` loads `projects/<--project>/index.mjs`
+dynamically.
+
+> **This section was wrong until 2026-08-03.** It claimed "exactly two exports" and did not
+> mention `buildPacks` or the pack-map shape at all, so a newcomer following the documentation
+> got a `TypeError` from inside the engine. The tables above were written by building a throwaway
+> second project against this file and recording every place it lied.
 
 **The extraction rule:** if a file mentions cheese, members, renewal, or any table name, it
 goes in `projects/<name>/`. If it would survive unchanged in an accounting-demo world, it goes in
@@ -70,9 +92,17 @@ world were domain knowledge embedded in engine code; rung 2 inverts that into in
 **The namespace rule (identity safety):** deterministic UUIDs are minted as
 `uuidv5(namespace, "entity:businessKey")`. Accidental collision is a non-issue (~10⁻²⁴);
 the real hazard is a cloned domain reusing a namespace with overlapping keys — same UUIDs
-by construction. So: **every domain mints its own namespace constant** (uuidgen once,
-frozen forever). The `9b1dcbf2…` constant in `engine/ids.mjs` belongs to MoreCheese; a second
-domain passes its own (a hooks field, now that projects are directories).
+by construction. So: **every project registers its own namespace constant** (uuidgen once,
+frozen forever) in the `NAMESPACES` map in `engine/ids.mjs`. The loader binds it from the project
+name before anything can mint an ID, so a project cannot forget to do it and cannot borrow
+another project's space. A project with no registered namespace **fails loudly at load** with
+instructions, rather than silently minting someone else's IDs.
+
+> **This rule was unenforceable until 2026-08-03.** The text said a second domain "passes its own
+> (a hooks field)" — but the namespace was a single module-level const and `uuidFor()` took no
+> namespace argument. There was no way to pass one. A second project would have silently minted
+> MoreCheese's ID space: precisely the hazard this paragraph warns about, in the file warning
+> about it. Now the promise and the code agree, and MoreCheese's IDs are unchanged.
 
 ## The pattern vocabulary (rung 3)
 

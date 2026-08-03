@@ -859,11 +859,17 @@ export const PREAMBLE = {
 
 // POSTAMBLE: statements appended AFTER a pack's INSERTs — for circular FKs that can't be
 // satisfied in insert order. UUIDs here are uuidv5 constants (stable forever by design).
+// LAZY on purpose: an ID may not be minted at module-evaluation time. The project's UUID
+// namespace is bound by the loader (engine/ids.mjs), and ES imports are evaluated before any
+// top-level await — so a module-scope uuidFor() ran before the binding existed and threw. A
+// getter defers it to first read, which is after the loader has run.
 export const POSTAMBLE = {
-  sonar: [
-    "-- circular FK (ScoreModel ⇄ ScoreModelVersion): point the model at v1 now both exist",
-    `UPDATE [__mj_BizAppsSonar].[ScoreModel] SET CurrentVersionID = '${uuidFor('sonarver', 'morecheese-engagement:1')}' WHERE ID = '${uuidFor('sonarmodel', 'morecheese-engagement')}';`,
-  ],
+  get sonar() {
+    return [
+      '-- circular FK (ScoreModel ⇄ ScoreModelVersion): point the model at v1 now both exist',
+      `UPDATE [__mj_BizAppsSonar].[ScoreModel] SET CurrentVersionID = '${uuidFor('sonarver', 'morecheese-engagement:1')}' WHERE ID = '${uuidFor('sonarmodel', 'morecheese-engagement')}';`,
+    ];
+  },
 };
 
 // ---- Shared pack → INSERT-lines generator (empty-table-safe; the crash emit-sql had) ----

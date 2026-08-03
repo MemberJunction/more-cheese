@@ -6,6 +6,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { compileRuleset } from './compile.mjs';
 import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from './lint.mjs';
+import { useNamespace } from './ids.mjs';
 
 export const DATAGEN_DIR = dirname(dirname(fileURLToPath(import.meta.url)));
 export { DAY, iso, addDays, addYears, endOfYear, parseDate } from './dates.mjs';
@@ -45,6 +46,9 @@ export async function loadProject(project = DEFAULT_PROJECT) {
 }
 
 export async function loadRuleset(scenario, project = DEFAULT_PROJECT) {
+  // Bind the ID namespace from the project name before anything can mint an ID. Done here, in
+  // the loader, so a project cannot forget to do it and cannot borrow another project's space.
+  useNamespace(project);
   const { hooks } = await loadProject(project);
   const dir = join(projectDir(project), 'ruleset/modules');
   const index = JSON.parse(readFileSync(join(dir, 'index.json'), 'utf8'));

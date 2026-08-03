@@ -21,6 +21,7 @@ import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 import { CITIES } from '../projects/morecheese/banks.mjs';
 import { makeGateHelpers } from '../engine/gates.mjs';
+import { runTargetChecks } from '../engine/checks.mjs';
 import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -1635,6 +1636,70 @@ checkMotifs();
 checkMessaging();
 checkPlatform();
 checkSonar();
+
+// ---------- gates DERIVED from declarations (engine/checks.mjs) ----------
+// A { target, tolerance } pair means "a check enforces this". Until now that was a convention
+// held up by hand: two authored pairs — the conference attendance rate and the committee-action
+// completion rate — shipped with NOTHING verifying them, because adding a pair does not add a
+// gate. This block inverts that: the engine finds every declared pair, the project supplies only
+// the measurement, and anything left unmeasured is REPORTED rather than silently unchecked.
+//
+// Most pairs are still gated by the bespoke checks above, which say more than a band can (they
+// carry the story of a real bug). Those are listed as measured-elsewhere so the report is honest
+// about what this block does and does not cover.
+{
+  const MEASURED_ELSEWHERE = new Set([
+    'statusMix', 'membership.params.renewal', 'membership.params.enthusiastRenewal',
+    'events.params.noShowPaidInPerson', 'events.params.noShowFreeWebinar',
+    'orders.params.gateNetTermsLate', 'orders.params.gateManualLate',
+    'learning.params.enrollment', 'learning.params.completion',
+    'committees.params.volunteerShare', 'committees.params.attendPresent',
+    'issues.params.assignment', 'programs.params.certificationPursuit',
+    'programs.params.advocateShare', 'messaging.params.threadSharePerIssue',
+  ]);
+
+  const measurements = {
+    // Was declared and never checked — the flagship number of the whole dataset. Denominator
+    // matched to the generator EXACTLY: per year, members covered on 1 July of that year (see
+    // events.mjs). Guessing a denominator is how a correct calibration gets called broken.
+    'events.params.conferenceAttendance': () => {
+      const confs = events.filter((e) => e.EventType === 'Conference');
+      if (!confs.length) return null;
+      const coveredOn = (m, d) => periods.some((p) => p.MemberNumber === m && p.StartDate <= d && d <= p.EndDate);
+      const members = [...new Set(periods.map((p) => p.MemberNumber))];
+      let pool = 0, attended = 0;
+      for (const conf of confs) {
+        const y = String(conf.Year);
+        const july1 = y + '-07-01';
+        const eligible = members.filter((m) => coveredOn(m, july1));
+        if (eligible.length < 6) continue;   // generator skips short pools (minPool 6)
+        const regd = new Set(regs.filter((r) => r.EventKey === conf.EventKey).map((r) => r.MemberNumber));
+        pool += eligible.length;
+        attended += eligible.filter((m) => regd.has(m)).length;
+      }
+      return pool ? { observed: attended / pool, of: pool, detail: confs.length + ' conferences, ' + pool + ' member-years' } : null;
+    },
+    // Was declared and never checked. Action items exist to be finished; if the completion rate
+    // drifts, a task board either looks abandoned or implausibly tidy.
+    'tasks.params.committeeActionCompletion': () => {
+      const actions = tTasks.filter((t) => t.TypeKey === 'Committee Action Item');
+      if (!actions.length) return null;
+      return {
+        observed: actions.filter((t) => t.CompletedAt).length / actions.length,
+        of: actions.length,
+        detail: `${actions.length} committee action items`,
+      };
+    },
+  };
+
+  const { ran, unmeasured } = runTargetChecks(R, measurements, check, null);
+  const genuinelyUnmeasured = unmeasured.filter((p) => !MEASURED_ELSEWHERE.has(p));
+  check(
+    `every declared target has a check (${ran} derived, ${MEASURED_ELSEWHERE.size} bespoke)`,
+    genuinelyUnmeasured.length === 0,
+    genuinelyUnmeasured.length ? `UNCHECKED: ${genuinelyUnmeasured.join(', ')}` : 'no target ships unverified',
+  );
+}
 
 let failed = 0;
 for (const r of results) {
