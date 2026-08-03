@@ -107,7 +107,7 @@ export function renderRecord(entry, row) {
 }
 
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
-// THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
+// THE PERSON/ORG SPLIT (the schema owner's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
 // to bizapps-common's tables (their REAL columns, from bizapps-common
 // migrations/B202602271452); everything member-ish becomes an extension-profile row in OUR
 // morecheese_members schema carrying the PersonID/OrganizationID. The pinned uuidv5 IDs make

@@ -1,6 +1,6 @@
 # GAP-3 public-docs stopgap — HubSpot & Higher Logic object models
 
-**Status: 📦 BACKLOGGED (2026-07-06, Marcelo)** — integration modeling dropped for this demo;
+**Status: 📦 BACKLOGGED (2026-07-06, the schema owner)** — integration modeling dropped for this demo;
 the marketing/community schemas ship as the simple baseline. This survey is RETAINED as the
 pickup material for `DEMO-BACKLOG.md` BL-1 (raise in a later meeting). Do not apply the
 recommendations below in the current release.

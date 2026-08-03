@@ -1,6 +1,6 @@
 # R12 — Size attenuation for the large (15k) preset · was GAP-5 candidate sources
 
-**Status: ✅ REVIEWED & FITTED (Marcelo, 2026-07-06).** Ruling: *"All sources from actual
+**Status: ✅ REVIEWED & FITTED (the schema owner, 2026-07-06).** Ruling: *"All sources from actual
 associations are within the realm of acceptable. I leave it to you to select the applicable and
 accurate ones"* — selection below, relevance-weighted (ACF highest: food-craft domain, right
 size band). Fitted results live in `benchmarks-draft.json` `scalingLaws.sizeAttenuation`
@@ -9,7 +9,7 @@ size band). Fitted results live in `benchmarks-draft.json` `scalingLaws.sizeAtte
 retained for NON-conference rates only; revenue-at-large ≈ $4M (ACF's real 990).
 *(An earlier α-derived "13% of members (~1,950)" appears in the adopted-earlier section below —
 superseded by the revision.)*
-**Standing constraint (Marcelo): DATA POINTS ONLY — none of these orgs' subject matter
+**Standing constraint (the schema owner): DATA POINTS ONLY — none of these orgs' subject matter
 (programs, topics, industry content) enters the cheese demo. Numbers in; domains out.**
 
 ## The data points (member-conference orgs) — fit verdicts
@@ -46,9 +46,9 @@ be modeled as member participation.
 Committee counts and staff FTE not reliably findable from ProPublica summaries — needs full
 990 XML pulls (ACF/SNA/ASA/AIHA) if we want size curves for committees/staff too. Optional.
 
-## 2026-07-06 REVISION — conference sizing switched from α-scaling to REAL turnouts (Marcelo)
+## 2026-07-06 REVISION — conference sizing switched from α-scaling to REAL turnouts (the schema owner)
 
-Marcelo's ruling: *"don't use scaling for conferences — use real data on conference size /
+the schema owner's ruling: *"don't use scaling for conferences — use real data on conference size /
 reported turnouts for organizations of similar sizes."* New real data points gathered
 (main-level search, 2026-07-06):
 

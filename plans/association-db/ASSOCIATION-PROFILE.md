@@ -22,11 +22,11 @@ source are tagged **(estimate)**.
 >
 > **One known open item (GAP-12 / D6):** §3's calendar-year rule conflicts with three hero
 > storylines pinned to *release-relative* renewal dates (Marcus, Danielle, Anna — marked ⚠ in
-> §7). **Proposed resolution (pending Robert/Amith sign-off):** calendar-year stays dominant,
+> §7). **Proposed resolution (pending the domain lead/the demo lead sign-off):** calendar-year stays dominant,
 > plus a ~25–30% anniversary cohort — auto-pay members bill on their join anniversary, with an
 > optional grandfathered cohort from a 2022 policy switch. Details: DESIGN-REVIEW D6.
 >
-> Also still ahead: the schema reconciliation with Marcelo
+> Also still ahead: the schema reconciliation with the schema owner
 > ([RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)) and the causal-map workshop. Everything
 > else in this profile is settled.
 
@@ -58,7 +58,7 @@ educators, and a tail of serious enthusiasts.
 | Disciplines | cheesemaking, affinage, mongering/retail, QA/food safety, education, distribution | persona/schema lists |
 | Employer organizations | ~625 ⚠ *pending sign-off (D4)* — mostly small creameries and shops; ~280 producers, ~210 of them enter the competition | competition math |
 | Chapters | 15 regional chapters (NA-East, NA-Central, NA-West, EU, APAC, Other) | plan + schema |
-| Engagement mix | 50% engaged / 40% casual / 10% ghost | team ground truth (Robert) |
+| Engagement mix | 50% engaged / 40% casual / 10% ghost | team ground truth (the domain lead) |
 | Member status mix | 78% Active · 15% Lapsed · 5% Cancelled · 2% Pending-Renewal (seasonal — peaks Nov–Jan) | v1 intent, revised v0.8 |
 
 **Membership tiers** (annual dues — the real ACS lattice, verified at source):

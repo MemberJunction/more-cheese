@@ -51,7 +51,7 @@ engagement score — because **cross-system unification is the product demo**. A
 | Secure messaging | Member↔staff and board threads | staff-volume calibrated |
 | Awards & competition | Products (cheeses), annual competition, entries (~1,575/yr from ~210 member companies), judges, scores, medals (25% medal rate — judged scores and medals actually agree) | ~110 products, 5 competitions |
 | Advocacy / legislative | Bodies, issues (raw-milk rules, labeling, FSMA…), positions, member advocacy actions | 12 issues, ~150 actions |
-| Money chain (orders → payments → accounting) | Every dues renewal, event registration, enrollment, entry fee, product purchase **and donation** becomes an **order → payment → balanced journal entry**; payments land early/on-time/late against due dates with per-member payer habits — card-at-checkout mass, an auto-pay due-date spike, and a sourced B2B late curve for net-terms invoices (Atradius/CRF-calibrated; module switches on when the orders app ships). Donations ride Orders as **post-install configuration** (donation products/categories/GL accounts shipped as demo seed config, per Robert's ruling) | every dollar reconciles |
+| Money chain (orders → payments → accounting) | Every dues renewal, event registration, enrollment, entry fee, product purchase **and donation** becomes an **order → payment → balanced journal entry**; payments land early/on-time/late against due dates with per-member payer habits — card-at-checkout mass, an auto-pay due-date spike, and a sourced B2B late curve for net-terms invoices (Atradius/CRF-calibrated; module switches on when the orders app ships). Donations ride Orders as **post-install configuration** (donation products/categories/GL accounts shipped as demo seed config, per the domain lead's ruling) | every dollar reconciles |
 | Engagement scoring (Sonar) | Signals computed **from the actual generated behavior** (not invented): event, course, forum, committee, advocacy, payment-recency components → composite scores, history, bands (50% engaged / 40% casual / 10% ghost) | 1 score + history per member |
 | Analytics | The 108 curated queries ported from v1 — each guaranteed a meaningful, non-degenerate answer | 108 queries |
 
@@ -67,7 +67,7 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 | Dues share of revenue | **22%** (events/programs ~78%) | ACS FY2024 IRS-990 |
 | Email engagement | 34% open / 3% click | Higher Logic association benchmark |
 | Competition | ~7.5 entries per entering company, 25% medal rate | ACS 2025 actuals |
-| Engagement mix | 50/40/10 engaged/casual/ghost | Team ground truth (Robert), coupled to renewal 95/82/67 |
+| Engagement mix | 50/40/10 engaged/casual/ghost | Team ground truth (the domain lead), coupled to renewal 95/82/67 |
 
 ## 5. How we control the structure (why this won't be "random data that looks off")
 
@@ -141,7 +141,7 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 > **[DESIGN-REVIEW.md](DESIGN-REVIEW.md) §1** (the design review). The items below are the
 > same asks in summary form.
 
-1. Sign off **renewal 87%** and **conference 35%** (evidence packet vs Robert's 89/25 priors).
+1. Sign off **renewal 87%** and **conference 35%** (evidence packet vs the domain lead's 89/25 priors).
 2. Confirm **grace period = 2 months** and **org count ~625** at medium (deviation from the
    master plan's ~25 — needed for a credible competition).
 3. Choose the **default preset for the hosted demo** (recommend large 15k per the "10k+" ask —

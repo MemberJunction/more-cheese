@@ -97,7 +97,7 @@ See [BIZAPPS-COVERAGE.md](BIZAPPS-COVERAGE.md) for the full per-app matrix + ver
 - The `morecheese_*` shapes are FROZEN in the baseline migration
   (`migrations/B202607141200`); `emit-schema` is a dev shim drift-guarded against it.
   Entity names are verified (CodeGen minted exactly the names the emitters assume).
-- The Person/Organization SPLIT IS LANDED (Marcelo's memo §2.2/2.3): identity rows live in
+- The Person/Organization SPLIT IS LANDED (the schema owner's memo §2.2/2.3): identity rows live in
   `__mj_BizAppsCommon.Person/Organization` (stand-in tables with their REAL column shapes,
   IF-guarded — a genuine bizapps-common install wins) and member/org-specific fields live in
   `morecheese_members.MemberProfile/OrganizationProfile` with hard FKs. Emails are

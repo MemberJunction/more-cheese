@@ -8,7 +8,7 @@ generated and checked (§5), and what's already decided (§6).
 **Status: OPEN FOR REVIEW** · Drafted 2026-07-07 · §1 is where input is needed. §6 is
 settled, with the evidence cited — please don't re-open it.
 **2026-07-08:** review feedback received ([DESIGN-REVIEW-FEEDBACK.md](DESIGN-REVIEW-FEEDBACK.md),
-Robert — concurs on D1–D8) and its accepted findings folded in: D9/D10 added, D5/D7/D8
+the domain lead — concurs on D1–D8) and its accepted findings folded in: D9/D10 added, D5/D7/D8
 amended, ruleset-spec step added to §7, pilot gate and safety nets upgraded in §5.
 
 Companions: [ASSOCIATION-PROFILE.md](ASSOCIATION-PROFILE.md) (the fictional association,
@@ -28,10 +28,10 @@ behind them is in §2–§5, and the full evidence trail is in the reading map (
 | D3 | Grace period = **2 months** | Adopt | It's the industry's most common policy (48% of associations, MGI survey). |
 | D4 | **~625 organizations** at default scale (plan said ~25) | Adopt 625 | The competition needs ~210 entering companies to look real; 25 orgs can't carry it. |
 | D5 | Default hosted-demo size | **Large (15,000 members)** — with two conditions (review 2026-07-08): (a) a **volume budget** before sign-off (large ≈ 5M+ email-send rows over 5 years, plus pre-computed embeddings — get install-time and package-size numbers); (b) at least **one full large-preset generation** before launch, not just the 500-pilot | Meets the "10k+ credibility" ask, and it's now honestly sized from real same-size associations (~2,000-person flagship, ~$4M revenue) — but large is the least-validated preset. |
-| D6 | Renewal cycle: pure calendar-year, or calendar-year **plus a ~25–30% anniversary cohort** (GAP-12) | **The mixed policy** *(Barnatt's pick, 2026-07-07)*: auto-pay members bill on their join anniversary (that's how subscription billing really works — and it exercises the subscription machinery in bizapps-orders), optionally plus members grandfathered from a 2022 policy switch. December still dominates. *(2026-07-10: bizapps-orders' published design models NO cycle alignment — zero upstream constraint on this decision.)* | Pure calendar-year empties the "who's about to renew?" demo — and bunches all lapses around March — for most of the year. Half of individual-member associations really do run anniversary cycles, so the mix is honest. Also fixes three hero storylines. Detail: Marcus Chen goes in the anniversary cohort with auto-renew OFF (his story needs reminder emails); org-tier cycle to be specified at ratification. *(If adopted: ASSOCIATION-PROFILE §3, the §6 calendar row here, and the JSON cycle note get updated — flagged in each.)* |
+| D6 | Renewal cycle: pure calendar-year, or calendar-year **plus a ~25–30% anniversary cohort** (GAP-12) | **The mixed policy** *(the workstream lead's pick, 2026-07-07)*: auto-pay members bill on their join anniversary (that's how subscription billing really works — and it exercises the subscription machinery in bizapps-orders), optionally plus members grandfathered from a 2022 policy switch. December still dominates. *(2026-07-10: bizapps-orders' published design models NO cycle alignment — zero upstream constraint on this decision.)* | Pure calendar-year empties the "who's about to renew?" demo — and bunches all lapses around March — for most of the year. Half of individual-member associations really do run anniversary cycles, so the mix is honest. Also fixes three hero storylines. Detail: Marcus Chen goes in the anniversary cohort with auto-renew OFF (his story needs reminder emails); org-tier cycle to be specified at ratification. *(If adopted: ASSOCIATION-PROFILE §3, the §6 calendar row here, and the JSON cycle note get updated — flagged in each.)* |
 | D7 | Bless the hero names (permanent afterward) | Review via [PERSONAS-REVIEW.md](PERSONAS-REVIEW.md) — with one gate first (review 2026-07-08): a **name/entity collision check** (hero and org names vs. real people/businesses in this small, real industry) and a one-line "calibration, not depiction" note re: the identifiable ACS | Two names are already fixed by prior team use (Elena Rodriguez, Anna Brown). |
 | D8 | Who owns hero authoring from here (OQ-7) | **Name an owner now — and formally re-scope the July-31 hero target to ~25** (roughly the current cast), letting quarterly refreshes grow toward 50–100 (review 2026-07-08) | Hero content is hand-written, quality-gated, and release-blocking; 22 exist, the owner is unassigned, and the ship date is July 31. Deliberate scoping now beats week-5 triage. |
-| D9 | **Per-app data packs** — one installable data pack per composed bizapps app (common → tasks → issues → committees → …), rolling up to the full dataset *(proposed 2026-07-08 from Amith's comments)* | Adopt, with the **generate-once / partition-into-packs** principle fixed now, a pack dependency pyramid mirroring the app graph, and a handful of **named, tested bundles** rather than arbitrary combinations | Amith's ask, and it's the BizApps-suite sales story — but the causal generator cannot run per-pack (one hidden dial drives a person's registrations *and* posts *and* payments), so generation stays monolithic and packaging becomes the final partitioning step. Additive if decided before the generator's output format is designed; a rewrite after. |
+| D9 | **Per-app data packs** — one installable data pack per composed bizapps app (common → tasks → issues → committees → …), rolling up to the full dataset *(proposed 2026-07-08 from the demo lead's comments)* | Adopt, with the **generate-once / partition-into-packs** principle fixed now, a pack dependency pyramid mirroring the app graph, and a handful of **named, tested bundles** rather than arbitrary combinations | the demo lead's ask, and it's the BizApps-suite sales story — but the causal generator cannot run per-pack (one hidden dial drives a person's registrations *and* posts *and* payments), so generation stays monolithic and packaging becomes the final partitioning step. Additive if decided before the generator's output format is designed; a rewrite after. |
 | D10 | **bizapps-forms as composed app #11** — forms + responses (session evaluations, post-event surveys, membership applications) *(proposed 2026-07-08)* | Adopt as an **optional pack** — the readiness concern resolved itself (2026-07-10): forms Phase 1 is **build complete** (audited 07-01; schema migrated, codegen'd, 396 tests; `FormResponse`/`FormResponseAnswer` shapes known). Still not a July-31 blocker: the forms *data* module (response-rate benchmarks, arrows 4.11/4.12) stays post-pilot work | Plugs a real hole (Dale Peterson's "great reviews" currently have no table to live in; event-ROI gains a satisfaction signal) — and it turned out to be the *most* frozen of the newer apps, not the least. |
 
 ---
@@ -158,9 +158,9 @@ v2's design makes each of those **impossible to store**, not just unlikely:
    engagement score or an invoice balance is produced from the underlying rows at the end,
    with arithmetic checks so it can't silently go stale.
 
-**Still to confirm with Marcelo** (tracked in [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)
+**Still to confirm with the schema owner** (tracked in [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)
 — see its **2026-07-10 findings banner**: the composed apps' public design docs were read, and
-the Subscription/order-line questions are now answered at design level; the session confirms
+The Subscription/order-line questions are now answered at design level; the session confirms
 rather than discovers). What remains genuinely open: the **individual-member pattern**
 (their Order/Subscription design requires a customer *organization* — B2B-shaped), the
 **`MembershipProduct` extension fields** (exists by name, zero fields defined — we propose,
@@ -247,7 +247,7 @@ engaged!") nor contradict the member's generated behavior.
    benchmarks are deliberately held out as blind checks — and the blindness has a mechanism
    (review 2026-07-08): holdouts live in a named list that is **stripped from anything the
    ruleset-authoring AI reads**, and the isolation is verified at the pilot.
-2. **Texture, enforced both directions** (Amith's anti-smoothness ask, made checkable): the
+2. **Texture, enforced both directions** (the demo lead's anti-smoothness ask, made checkable): the
    averages must be right *and* organically noisy. Yearly renewal wanders in a band (~84–90%
    around the 87% mean — calibrated to the real year-over-year jitter in the verified 990s),
    monthly activity has autocorrelated wobble, money distributions are lumpy mixtures, and
@@ -281,7 +281,7 @@ require discriminative lift appropriate to N≈500 — the data's whole point is
 trained on it work. Every in-slice benchmark lands within tolerance (including the variance
 floors), and the in-slice heroes load with their pins intact. **On failure:** the ruleset
 gets fixed and re-run; a flipped sign goes back to the causal-map workshop rather than being
-patched quietly. **Who calls it:** Barnatt (data workstream), with Madhav confirming the
+patched quietly. **Who calls it:** the workstream lead (data workstream), with the generative-data lead confirming the
 method held. Only after a green pilot do we generate the full dataset — plus, per D5, at
 least one full large-preset dry run before launch. The pilot also validates the D9 pack
 mechanism: the slice spans three packs (common, membership, orders/events), emitted and
@@ -292,26 +292,26 @@ installed layer by layer.
 | Decision | Evidence / authority |
 |---|---|
 | Professional society; individuals are members | morecheese site; team 2026-07-02 |
-| US-lean metrics; 60/25/15 geo mix; single USD; US-hosted flagship; no honorific grades | Barnatt 2026-07-02 |
+| US-lean metrics; 60/25/15 geo mix; single USD; US-hosted flagship; no honorific grades | the workstream lead 2026-07-02 |
 | Calendar-year memberships as the **dominant** cycle (December renewal spike) — *whether a minority anniversary cohort exists alongside is open as D6* | real ACS ground truth (R8) |
 | CancellationDate = termination (quit AND lapse-past-grace); late renewals back-date; stored member status banned | team Q&A 2026-07-02 |
 | Sonar scores come from running Sonar's real engine at release — never faked | design rec. D |
-| Donations flow through Orders as post-install configuration (no Fundraising app) | Robert, 2026-07-06 |
-| Team-named heroes are always carried (Elena, Anna Brown); this roster is the single roster of record | Marcelo, 2026-07-06 |
-| HubSpot/Higher Logic lookalike schemas deferred; simple baselines ship | Marcelo, 2026-07-06 → backlog BL-1 |
-| Payment timing modeled as a 3-part mixture (checkout / auto-pay spike / corporate late curve) with approved sources | Marcelo, 2026-07-06 |
-| Support-ticket realism is estimate-led (no real data exists; Izzy data confidential) | Marcelo, 2026-07-06 |
+| Donations flow through Orders as post-install configuration (no Fundraising app) | the domain lead, 2026-07-06 |
+| Team-named heroes are always carried (Elena, Anna Brown); this roster is the single roster of record | the schema owner, 2026-07-06 |
+| HubSpot/Higher Logic lookalike schemas deferred; simple baselines ship | the schema owner, 2026-07-06 → backlog BL-1 |
+| Payment timing modeled as a 3-part mixture (checkout / auto-pay spike / corporate late curve) with approved sources | the schema owner, 2026-07-06 |
+| Support-ticket realism is estimate-led (no real data exists; Izzy data confidential) | the schema owner, 2026-07-06 |
 | All load-bearing benchmark figures verified against primary sources | 2026-07-07, JSON `$v091` |
 
 ## 7. What happens next (the sequence)
 
 | Step | Who | Output |
 |---|---|---|
-| 1. Schema reconciliation session (agenda: [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)) | Barnatt + Marcelo (needs his BizApps survey) | Final table shapes for the vertical slice; B1–B9 answered; pack layout + IsA/overlay rule agreed (D9) |
-| 2. Causal-map workshop | Barnatt, Marcelo, Madhav, Robert | Every arrow direction agreed — **1.15 (employer events) walked first**, it's load-bearing for the churn stories; D6 mechanism ratified; the ruleset's first-draft edge list |
-| 3. **Ruleset spec v0.1** *(added per review 2026-07-08)* | Barnatt + Madhav | The executable contract: file format + versioning; how ~50 effects combine on one outcome (and how interactions and regime gates apply); the texture/noise model and its amplitudes; the no-live-AI rule; the windowing mechanism; the "non-degenerate query" definition; executor + validation-harness design |
-| 4. Ruleset v0.1 | Barnatt | The vertical slice (member → subscription → event registration), authored and runnable |
-| 5. N≈500 pilot | Barnatt (Madhav confirms method) | Pass/fail against the §5 gate (signs + magnitudes + texture + trainability + pack install); fixes looped until green |
+| 1. Schema reconciliation session (agenda: [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md)) | the workstream lead + the schema owner (needs his BizApps survey) | Final table shapes for the vertical slice; B1–B9 answered; pack layout + IsA/overlay rule agreed (D9) |
+| 2. Causal-map workshop | the workstream lead, the schema owner, the generative-data lead, the domain lead | Every arrow direction agreed — **1.15 (employer events) walked first**, it's load-bearing for the churn stories; D6 mechanism ratified; the ruleset's first-draft edge list |
+| 3. **Ruleset spec v0.1** *(added per review 2026-07-08)* | the workstream lead + the generative-data lead | The executable contract: file format + versioning; how ~50 effects combine on one outcome (and how interactions and regime gates apply); the texture/noise model and its amplitudes; the no-live-AI rule; the windowing mechanism; the "non-degenerate query" definition; executor + validation-harness design |
+| 4. Ruleset v0.1 | the workstream lead | The vertical slice (member → subscription → event registration), authored and runnable |
+| 5. N≈500 pilot | the workstream lead (the generative-data lead confirms method) | Pass/fail against the §5 gate (signs + magnitudes + texture + trainability + pack install); fixes looped until green |
 | 6. Full generation | data workstream | All three presets (incl. the D5 large dry run), full benchmark check, heroes verified, packs emitted |
 
 Rough effort and calendar (ship date July 31): see [work-breakdown.md](work-breakdown.md) —
@@ -326,7 +326,7 @@ the generator is the hardest engineering in the project, hero content is the lon
   on 07-08 (AccountingPeriod removed; batch-lock redesign). **The money chain cannot ride
   real orders tables by July 31** — membership data ships on our `MembershipPeriod` shape
   and decomposes into Subscription+Orders later (see §4). Conversely, `bizapps-forms` is
-  build-complete and `bizapps-common` is stable. Owner: Marcelo confirms the rest.
+  build-complete and `bizapps-common` is stable. Owner: the schema owner confirms the rest.
 - **⏱ Hero pipeline** — 22 of 50–100 written, authoring owner unassigned (D8),
   release-blocking.
 - **The seams between apps** — where one app's tables meet another's assumptions is where
@@ -347,7 +347,7 @@ the generator is the hardest engineering in the project, hero content is the lon
 
 | Want… | Read |
 |---|---|
-| The review feedback this version folds in | [DESIGN-REVIEW-FEEDBACK.md](DESIGN-REVIEW-FEEDBACK.md) (Robert, 2026-07-08) |
+| The review feedback this version folds in | [DESIGN-REVIEW-FEEDBACK.md](DESIGN-REVIEW-FEEDBACK.md) (the domain lead, 2026-07-08) |
 | The association as a story + all headline numbers | [ASSOCIATION-PROFILE.md](ASSOCIATION-PROFILE.md) |
 | What sales approves | [DATA-SUMMARY.md](DATA-SUMMARY.md) |
 | What the data is engineered to show off, in priority order | [FEATURES-REVIEW.md](FEATURES-REVIEW.md) |
@@ -358,4 +358,4 @@ the generator is the hardest engineering in the project, hero content is the lon
 | The cause-and-effect map the generator uses | `research/causal-map-draft.md` |
 | The heroes | [hero-personas-draft.md](hero-personas-draft.md) + [PERSONAS-REVIEW.md](PERSONAS-REVIEW.md) |
 | Decision audit trail | [gaps-to-fill.md](gaps-to-fill.md) |
-| The Marcelo session agenda | [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md) |
+| The schema owner session agenda | [RECONCILIATION-ASKS.md](RECONCILIATION-ASKS.md) |
