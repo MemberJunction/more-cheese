@@ -90,7 +90,7 @@ function leadDaysFor(r, kind) {
   return r.int(lo, hi);
 }
 
-export function buildRegistrations(cfg, people, periods, events) {
+export function buildRegistrations(cfg, { people, periods, events }) {
   const { R, seed, release, releaseYear } = cfg;
   const E = R.events;
   const registrations = [];

@@ -15,7 +15,7 @@ import { consumerDomainFor, deaccent } from './world.mjs';
 
 const EMPLOYEE_TYPE_ID = '27CFD031-5663-4000-A7AB-8AC87DB88C1D'; // bizapps-common's seeded Employee type
 
-export function buildDefects(cfg, people, orgs, relationships) {
+export function buildDefects(cfg, { people, orgs, relationships }) {
   const { R, seed, release } = cfg;
   const D = R.defects;
   const labels = [];

@@ -108,15 +108,36 @@ identical UUIDs for overlapping keys.
 
 ## Step 5 — Write the generator
 
-One file, `projects/<project>/tickets.mjs`. The house shape:
+One file, `projects/<project>/tickets.mjs`.
+
+**THE GENERATOR CONTRACT.** The ruleset has four named sections; a generator has four too, and the
+same reason: you always know where to look. `node cli/check-generators.mjs` enforces the
+structural half.
+
+| | |
+|---|---|
+| **signature** | `build<Domain>(cfg, deps)` — deps is ALWAYS an object, never positional |
+| **inputs** | bind the ruleset sections and the upstream data |
+| **fixtures** | catalog → rows. No dice |
+| **decisions** | one pattern call per decision, in causal order |
+| **shape** | assemble, strip internals |
+| **return** | `{ <tableName>: rows }` — named tables, nothing else |
+
+The object signature is not style. `buildIssues` took seven positional parameters, four of them
+arrays of rows: transpose two and you get confidently wrong data, no error, and a call site that
+tells you nothing about what it passes. All nineteen generators were normalised in one pass with
+byte-identical output.
+
+The house shape:
 
 ```js
-export function buildTickets(cfg, people, periods) {
+export function buildTickets(cfg, { people, periods }) {
   const { R, seed, release } = cfg;
+  // ── inputs ──
   const T = R.tickets;
   const P = T.params;                       // scalars behind one alias
 
-  // one pattern call per decision from Step 1, in causal order
+  // ── decisions ── one pattern call per decision from Step 1, in causal order
   const tickets = annualParticipation({
     seed, years,
     poolOf: (y) => people.filter(…),
@@ -126,6 +147,8 @@ export function buildTickets(cfg, people, periods) {
     spawn: (r, p, y) => ({ … }),            // draws happen here, in a fixed order
   });
 
+  // ── shape ──
+  stripInternals(tickets);
   return { tickets };
 }
 ```

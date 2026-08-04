@@ -11,7 +11,7 @@
 
 import { rng } from '../../engine/rng.mjs';
 
-export function buildMessaging(cfg, people, issues) {
+export function buildMessaging(cfg, { people, issues }) {
   const { R, seed, release } = cfg;
   const M = R.messaging;
   const releaseMs = release.getTime();

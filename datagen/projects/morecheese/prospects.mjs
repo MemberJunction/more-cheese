@@ -20,7 +20,7 @@ import { CITIES, personNameFor, titleFor, SEGMENTS } from './banks.mjs';
 import { emailFor } from './world.mjs';
 import { iso, addDays } from '../../engine/dates.mjs';
 
-export function buildProspects(cfg, orgs, events, memberCount) {
+export function buildProspects(cfg, { orgs, events, memberCount }) {
   const { R, seed, release } = cfg;
   const P = R.prospects;
   const prospects = [];

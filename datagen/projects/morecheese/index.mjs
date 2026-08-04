@@ -34,45 +34,45 @@ const R_APP_REFERRERS = (cfg) => cfg.R.forms.application.referrers;
 export function buildWorld(cfg) {
   // §5.1–2: the world and its drivers
   const orgs = buildOrgs(cfg);
-  let people = buildPeople(cfg, orgs); // note: appends hero employers to orgs
+  let people = buildPeople(cfg, { orgs }); // note: appends hero employers to orgs
 
   // motifs BEFORE the unroll: stamped archetypes pin renewal outcomes (_lapseYear) and
   // author engagement arcs (_thetaPath) that every downstream domain reads
-  const motifs = applyMotifs(cfg, people, orgs);
+  const motifs = applyMotifs(cfg, { people, orgs });
 
   // §5.3: membership — the renewal unroll, then archive old lapsed records
-  const { periods: allPeriods, renewalEvents } = runRenewalUnroll(cfg, people, orgs);
-  const archived = applyArchiveRule(cfg, people, allPeriods);
+  const { periods: allPeriods, renewalEvents } = runRenewalUnroll(cfg, { people, orgs });
+  const archived = applyArchiveRule(cfg, { people, periods: allPeriods });
   people = archived.people;
   const periods = archived.periods;
 
   // §5.4: events + registrations (only ever inside valid membership windows)
   const events = buildEvents(cfg);
-  const registrations = buildRegistrations(cfg, people, periods, events);
+  const registrations = buildRegistrations(cfg, { people, periods, events });
 
   // §5.4b: learning — same pattern, third domain
-  const learning = buildLearning(cfg, people, periods);
+  const learning = buildLearning(cfg, { people, periods });
 
   // programs (certifications, competition entries, advocacy) BEFORE money: credentials
   // and competition entries are billable facts, so the money chain has to see them
-  const programs = buildPrograms(cfg, people, periods, learning);
+  const programs = buildPrograms(cfg, { people, periods, learning });
 
   // §5.5: the money chain — one order per billable fact, timing per declared paymentProfiles
-  const money = buildMoney(cfg, people, periods, events, registrations, programs);
+  const money = buildMoney(cfg, { people, periods, events, registrations, programs });
 
   // composed bizapps slices: committees (governance), forms (D10 survey), relationships
   // (identity graph), tasks (action items + outreach), issues (support tickets)
-  const committees = buildCommittees(cfg, people, periods);
-  const forms = buildForms(cfg, people, events, registrations);
-  const relationships = buildRelationships(cfg, people, orgs);
-  const tasks = buildTasks(cfg, people, periods, committees);
-  const issues = buildIssues(cfg, people, orgs, events, registrations, money, committees);
+  const committees = buildCommittees(cfg, { people, periods });
+  const forms = buildForms(cfg, { people, events, registrations });
+  const relationships = buildRelationships(cfg, { people, orgs });
+  const tasks = buildTasks(cfg, { people, periods, committees });
+  const issues = buildIssues(cfg, { people, orgs, events, registrations, money, committees });
   // secure messaging: support threads derive from issues (hero issues always get one)
-  const messaging = buildMessaging(cfg, people, issues);
+  const messaging = buildMessaging(cfg, { people, issues });
 
   // defects LAST: labeled record corruption over the finished world (mutates emails,
   // appends duplicate contact records and true-employer relationship edges)
-  const defects = buildDefects(cfg, people, orgs, relationships);
+  const defects = buildDefects(cfg, { people, orgs, relationships });
 
   // platform residue AFTER defects: its RecordChange rows mirror timelines everywhere
   // above, including the employment edges the defects module just rewrote.
@@ -82,7 +82,7 @@ export function buildWorld(cfg) {
   // very query it points the user at.
   // non-members: Person rows with no MemberProfile (see prospects.mjs). They join the
   // shipped roster so identity, contact methods and addresses treat them like anyone else.
-  const prospects = buildProspects(cfg, orgs, events, people.length + defects.extraPeople.length);
+  const prospects = buildProspects(cfg, { orgs, events, memberCount: people.length + defects.extraPeople.length });
   // the funnel: recent joiners get the pre-membership history they would have had, and the
   // non-members get an employer edge. Adds no members — only the prologue to existing ones.
   const funnel = buildFunnel(cfg, {
@@ -114,7 +114,7 @@ export function buildWorld(cfg) {
   // …and then the same facts as FIRST-CLASS bizapps-common rows (that app owns the domain
   // and its UI reads these tables, not our MemberProfile columns). Must run after the
   // identity pass — it projects the addresses that pass just wrote.
-  const contacts = buildContacts(cfg, shippedPeople, orgs);
+  const contacts = buildContacts(cfg, { people: shippedPeople, orgs });
   // platform residue is MEMBER-facing: its lists, favourites and the seeded Skip transcript
   // all quote membership counts, so prospects must not be in the roster it sees
   const platform = buildPlatform(cfg, { people: shippedPeople.filter((p) => !p.IsProspect), periods, events, registrations, tasks, issues, relationships, competitionEntries: programs.competitionEntries });

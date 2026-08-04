@@ -15,7 +15,7 @@ import { rng } from '../../engine/rng.mjs';
 import { derivedTransaction } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
-export function buildMoney(cfg, people, periods, events, registrations, programs) {
+export function buildMoney(cfg, { people, periods, events, registrations, programs }) {
   const { R, seed, release } = cfg;
   const O = R.orders;
   const P = O.catalog.paymentProfiles;

@@ -14,7 +14,7 @@ import { CHEESE_WORDS } from './banks.mjs';
 // topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
 // hardcoded 8, which is why 111 courses produced only 81 distinct names
 
-export function buildLearning(cfg, people, periods) {
+export function buildLearning(cfg, { people, periods }) {
   const { R, seed, release, releaseYear } = cfg;
   const L = R.learning;
 

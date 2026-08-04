@@ -13,7 +13,7 @@ import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 // severityDataCorrection), so each mix stays a flat map of level → weight
 const severityKey = (type) => 'severity' + String(type).replace(/\s+/g, '');
 
-export function buildIssues(cfg, people, orgs, events, registrations, money, committees) {
+export function buildIssues(cfg, { people, orgs, events, registrations, money, committees }) {
   const { R, seed, release } = cfg;
   const I = R.issues;
   const releaseIso = iso(release);

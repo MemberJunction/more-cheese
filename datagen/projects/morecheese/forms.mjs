@@ -23,7 +23,7 @@ const submitTime = (r) => {
 };
 
 
-export function buildForms(cfg, people, events, registrations) {
+export function buildForms(cfg, { people, events, registrations }) {
   const { R, seed, release } = cfg;
   const F = R.forms;
   const S = F.survey;

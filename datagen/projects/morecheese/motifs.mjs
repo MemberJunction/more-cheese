@@ -13,7 +13,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { parseDate } from '../../engine/dates.mjs';
 
-export function applyMotifs(cfg, people, orgs) {
+export function applyMotifs(cfg, { people, orgs }) {
   const { R, seed, release } = cfg;
   const M = R.motifs;
   const releaseYear = release.getUTCFullYear();

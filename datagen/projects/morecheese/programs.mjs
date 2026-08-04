@@ -12,7 +12,7 @@ import { childOutcome } from '../../engine/patterns.mjs';
 import { TOPONYMS } from './banks.mjs';
 import { iso, addDays, addYears, parseDate } from '../../engine/dates.mjs';
 
-export function buildPrograms(cfg, people, periods, learning) {
+export function buildPrograms(cfg, { people, periods, learning }) {
   const { R, seed, release } = cfg;
   const PR = R.programs;
   const releaseIso = iso(release);

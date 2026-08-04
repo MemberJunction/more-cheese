@@ -22,7 +22,7 @@ import { deaccent } from './world.mjs';
 export const CONTACT_TYPES = ['Email', 'Mobile Phone', 'Work Phone', 'LinkedIn', 'Website'];
 export const ADDRESS_TYPES = ['Home', 'Work', 'Mailing'];
 
-export function buildContacts(cfg, people, orgs) {
+export function buildContacts(cfg, { people, orgs }) {
   const { R, seed } = cfg;
   const C = R.contacts;
   const addresses = [];

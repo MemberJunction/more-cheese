@@ -339,6 +339,21 @@ step('derived checks run standalone (and its exit code reflects failures)', () =
   if (!exited) throw new Error('check-declared printed a failure but exited 0 — a green exit on a broken world');
 });
 
+// 0k. THE GENERATOR CONTRACT. The ruleset got a named shape that is documented and checked; the
+// generators had no shape at all — 21 entry signatures, no two alike, up to seven positional
+// parameters. Two same-typed arrays transposed is silent wrong data with no error.
+step('generator contract holds (and a positional signature is caught)', () => {
+  run('check-generators.mjs', []);
+  const f = join(HERE, 'projects/morecheese/tasks.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    writeFileSync(f, original.replace('export function buildTasks(cfg, { people, periods, committees })', 'export function buildTasks(cfg, people, periods, committees)'));
+    let caught = false;
+    try { run('check-generators.mjs', []); } catch { caught = true; }
+    if (!caught) throw new Error('check-generators MISSED a positional dependency list');
+  } finally { writeFileSync(f, original); }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

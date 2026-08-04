@@ -15,6 +15,7 @@ graph TD
   buildPeople --> runRenewalUnroll
   buildOrgs --> runRenewalUnroll
   buildPeople --> applyArchiveRule
+  runRenewalUnroll --> applyArchiveRule
   buildEvents
   buildPeople --> buildRegistrations
   runRenewalUnroll --> buildRegistrations
@@ -59,6 +60,7 @@ graph TD
   buildOrgs --> buildFunnel
   buildEvents --> buildFunnel
   runRenewalUnroll --> buildFunnel
+  buildPeople --> buildContacts
   buildOrgs --> buildContacts
   buildPeople --> buildPlatform
   runRenewalUnroll --> buildPlatform

@@ -108,17 +108,19 @@ import { uuidFor } from '../../engine/ids.mjs';
 
 /**
  * @param {import('../../engine/types.js').Config} cfg
- * @param {any[]} people
- * @param {any[]} periods membership periods, for the eligibility lookup
+ * @param {{ people: any[], periods: any[] }} deps — ALWAYS an object. Positional dependency
+ *        lists are how two same-typed arrays get transposed into silently wrong data.
  */
-export function build${Cap}(cfg, people, periods) {
+export function build${Cap}(cfg, { people, periods }) {
+  // ── inputs ──
   const { R, seed, release } = cfg;
   const D = R.${name};
   const P = D.params;                       // every scalar behind one alias
   const years = yearsOf(cfg);
   const covered = coverageOf(periods);      // indexed: (memberNumber, dateIso) => boolean
 
-  // ---------- decision 1: who takes part, per year ----------
+  // ── decisions ──
+  // decision 1: who takes part, per year
   // target is PER YEAR — the share of THAT year's eligible pool. Not a lifetime share.
   const rows = annualParticipation({
     seed,
@@ -158,6 +160,7 @@ export function build${Cap}(cfg, people, periods) {
   //   decide: (x, prob, r) => { x.Status = r.bernoulli(prob) ? 'Done' : 'NotDone'; },
   // });
 
+  // ── shape ──
   stripInternals(rows);
   return { ${name}: rows };
 }

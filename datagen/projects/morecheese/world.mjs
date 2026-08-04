@@ -101,7 +101,7 @@ function thetaProcess(cfg, key, anchorZ) {
   return { anchor, path };
 }
 
-export function buildPeople(cfg, orgs) {
+export function buildPeople(cfg, { orgs }) {
   const { R, seed } = cfg;
   const people = [];
   for (let i = 0; i < cfg.n; i++) {

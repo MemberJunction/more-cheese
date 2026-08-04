@@ -19,7 +19,7 @@ const MEETINGS_ENTITY = 'Committees: Meetings';
 /** a time inside the working day — staff don't file everything at exactly 17:00Z */
 const workTime = (r) => `${String(r.int(8, 17)).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
 
-export function buildTasks(cfg, people, periods, committees) {
+export function buildTasks(cfg, { people, periods, committees }) {
   const { R, seed, release } = cfg;
   const T = R.tasks;
   const releaseIso = iso(release);

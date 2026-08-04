@@ -15,7 +15,7 @@ import { coverageOf, yearsOf } from '../../engine/authoring.mjs';
 /** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
 const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
 
-export function buildCommittees(cfg, people, periods) {
+export function buildCommittees(cfg, { people, periods }) {
   const { R, seed, release } = cfg;
   // four-section ruleset shape: C.catalog (what exists) · P (every scalar) · C.effects · C.mixes
   const C = R.committees;

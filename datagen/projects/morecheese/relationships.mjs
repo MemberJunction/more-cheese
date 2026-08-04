@@ -9,7 +9,7 @@
 
 import { rng } from '../../engine/rng.mjs';
 
-export function buildRelationships(cfg, people, orgs) {
+export function buildRelationships(cfg, { people, orgs }) {
   const { R } = cfg;
   const REL = R.relationships;
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));

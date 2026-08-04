@@ -16,7 +16,7 @@ import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../engine/
 import { yearsOf } from '../../engine/authoring.mjs';
 import { featureArrows } from '../../engine/features.mjs';
 
-export function runRenewalUnroll(cfg, people, orgs) {
+export function runRenewalUnroll(cfg, { people, orgs }) {
   const { R, seed, release, releaseYear } = cfg;
   const M = R.membership;
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
@@ -166,7 +166,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
  * hygiene; keeps the status mix near the documented ~78% active). Heroes never archive.
  * Archived members' renewal events STAY in the validation set — history stats are unaffected.
  */
-export function applyArchiveRule(cfg, people, periods) {
+export function applyArchiveRule(cfg, { people, periods }) {
   const lastPer = new Map();
   for (const per of periods) lastPer.set(per.MemberNumber, per);
   const cutoff = iso(addYears(cfg.release, -3));
