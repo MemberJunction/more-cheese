@@ -523,6 +523,23 @@ step('engine boundary holds (static import and a project-named value are both ca
   }, 'static import from projects/', 'a static import of project code');
 });
 
+// 0m-iv. THE SECOND PROJECT — the framework claim, made falsifiable.
+//
+// Every abstraction in engine/ was extracted from ONE project, so any of them could be
+// MoreCheese-shaped without anybody noticing. This builds projects/fixture/ — 50 invented members,
+// one decision — and requires it to generate and pass its own derived gates. Standing it up the
+// first time found three engine bugs and two documentation gaps (projects/fixture/FINDINGS.md);
+// this step is what stops them coming back. An engine change that re-couples the engine to
+// MoreCheese fails HERE, not in six months when somebody tries a second project for real.
+step('the second project builds and passes its own derived gates (zero engine edits)', () => {
+  run('generate.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture']);
+  const out = run('check-declared.mjs', ['--out', 'out-fixture']);
+  if (!/derived gates pass/.test(out)) throw new Error(`fixture derived gates did not pass:\n${out.slice(0, 400)}`);
+  // determinism holds for it too — same seed, byte-identical
+  run('generate.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture2']);
+  execFileSync('diff', ['-r', join(HERE, 'out-fixture'), join(HERE, 'out-fixture2')], { encoding: 'utf8' });
+});
+
 // 0n. THE FRAMEWORK METRIC — advisory. Prints declarations:code so the trend is visible in every
 // suite run instead of being a claim in a document. The step fails only if the tool itself
 // crashes; the ratio is information, not a gate — gating on it would invite gaming the classifier.

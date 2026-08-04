@@ -19,7 +19,9 @@ nothing in the engine needs to know it exists.
 | `buildWorld(cfg)` | `index.mjs` | the pipeline: build every domain, in causal order, return named bags |
 | `buildPacks(world)` | `index.mjs` | the pack map — `dependsOn` + `tables` per installable pack |
 | `UUID_NAMESPACE` | `index.mjs` | 32 hex chars, `uuidgen` once, **frozen forever** |
-| `hooks` | `index.mjs` | the compile feature map, refinement measure, domain lint |
+| `hooks` | `index.mjs` | `compile.arrowsOf(C)` (may return `{}`) and `domainLint(R)` — **which must return an ARRAY** of problem strings; returning nothing dies as "not iterable" |
+| `scale.members` | any ruleset module | the engine's default for `cfg.n` when `--n` is not passed |
+| `history.startYear` | any ruleset module | the first year `yearsOf(cfg)` walks |
 | `ruleset/modules/*.mjs` + `index.json` | `ruleset/` | the authored declarations: `catalog` · `params` · `effects` · `mixes` |
 
 | optional — each one *earns* checks | where | what you get |
@@ -30,6 +32,9 @@ nothing in the engine needs to know it exists.
 | `measurements.mjs` | project root | derived target bands from `{ target, tolerance }` pairs |
 | `pipeline.mjs` | project root | declared mutation-order edges the argument lists can't show |
 | `seed-mapping.mjs` | project root | how packs become SQL / MetadataSync |
+| `LATENTS_OF(world)` | `index.mjs` | writes `validation-latents.json` — WHICH hidden dials exist is your model, not the engine's |
+| `RUN_EXTRAS(cfg)` | `index.mjs` | extra facts recorded in `run.json` (MoreCheese records its covid years) |
+| `SUMMARY_OF(world)` | `index.mjs` | the lines printed after a build; without it the engine just counts rows |
 
 A project with none of the optional files still generates and still gets the coverage gates — which
 will tell it what it's missing. That's the right first message on day one.
@@ -70,3 +75,9 @@ procedure:
 
 If any step forces an engine change, that's a MoreCheese-shaped assumption in the engine and it is
 a bug in the engine — not in your project.
+
+**This has been done.** `projects/fixture/` is a second project built exactly this way, and
+[its FINDINGS.md](../projects/fixture/FINDINGS.md) lists the six things that had to change before it
+worked: three engine bugs and two documentation gaps, none of which were visible from inside
+MoreCheese. The suite now builds it on every run, so an engine change that re-couples the engine to
+one project fails immediately instead of silently.

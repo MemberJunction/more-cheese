@@ -165,6 +165,34 @@ export const NOT_SHIPPED = {
   'funnel.employmentEdges': 'merged into relationships.relationships — ships inside the common pack',
 };
 
+/** The per-member latents the validator and inspector read (never installed). WHICH dials exist
+ *  is this project's model, so the projection lives here — the engine used to hardcode it. */
+export const LATENTS_OF = (world) => world.people.map((p) => ({
+  m: p.MemberNumber, theta: +p._theta.toFixed(4), phi: +p._phi.toFixed(4),
+  tier: p.MembershipTier, hero: !!p._hero,
+}));
+
+/** Extra facts this project wants recorded in run.json. The covid years are a MoreCheese regime;
+ *  the engine has no business knowing they exist. */
+export const RUN_EXTRAS = (cfg) => ({ covidYears: cfg.R.regimes.covid.years });
+
+/** The run summary this project wants printed. Domain reporting: a status mix and a renewal curve
+ *  mean nothing to the engine, which can only count rows. Returns lines, printed in order. */
+export const SUMMARY_OF = (world) => {
+  const { people, orgs, periods, events, registrations, renewalEvents } = world;
+  const lastStatus = new Map();
+  for (const per of periods) lastStatus.set(per.MemberNumber, per.Status);
+  const mix = { Active: 0, Lapsed: 0, Cancelled: 0, PendingRenewal: 0, Renewed: 0 };
+  for (const s of lastStatus.values()) mix[s] = (mix[s] ?? 0) + 1;
+  const byYear = {};
+  for (const e of renewalEvents) { (byYear[e.year] ??= { n: 0, r: 0 }); byYear[e.year].n++; byYear[e.year].r += e.renewed; }
+  return [
+    `generated: ${people.length} people, ${orgs.length} orgs, ${periods.length} periods, ${events.length} events, ${registrations.length} registrations`,
+    `status mix @release: ${JSON.stringify(mix)}`,
+    `renewal by year: ${JSON.stringify(Object.fromEntries(Object.entries(byYear).map(([y, v]) => [y, (v.r / v.n).toFixed(3)])))}`,
+  ];
+};
+
 export function buildPacks(world) {
   const { people, orgs, periods, events, registrations, money, learning, committees, forms, relationships, contacts, prospects, funnel, tasks, issues, programs, messaging, defects, platform, sonar } = world;
   const strip = (rows, keys) => rows.map((r) => { const c = { ...r }; for (const k of keys) delete c[k]; return c; });

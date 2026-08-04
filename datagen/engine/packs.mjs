@@ -60,7 +60,7 @@ export function unshippedTables(world, project, notShipped = {}) {
 
 /** Emit the project's packs. The PACK MAP comes from the project (its buildPacks(world)) —
  * the engine only deals rows into folders and writes the harness-private files. */
-export function emitPacks(cfg, { packs, world, people, renewalEvents, registries, notShipped }) {
+export function emitPacks(cfg, { packs, world, latents, renewalEvents, registries, notShipped, runExtras }) {
   if (world) {
     const missing = unshippedTables(world, cfg.project, notShipped);
     if (missing.length) {
@@ -99,14 +99,30 @@ export function emitPacks(cfg, { packs, world, people, renewalEvents, registries
     }
     writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ name, version: cfg.R.version, seed: cfg.seed, releaseDate: iso(cfg.release), dependsOn: pack.dependsOn, rowCounts }, null, 2));
   }
-  writeFileSync(join(cfg.outDir, 'validation-events.json'), JSON.stringify(renewalEvents));
+  // THE THREE HARNESS-PRIVATE FILES BELOW ARE OPTIONAL, and they did not used to be.
+  //
+  // All three assumed MoreCheese's shape: a renewal decision producing renewalEvents, a latent
+  // model with _theta/_phi/_hero on every person, and a covid regime in the ruleset. Standing up
+  // the second project hit them one after another — the first as `JSON.stringify(undefined)`
+  // reaching writeFileSync, which is a spectacularly unhelpful error for "your project has no
+  // renewals". A project without a renewal decision, without latents, or without regimes is not
+  // misconfigured; the engine was.
+  if (renewalEvents) {
+    writeFileSync(join(cfg.outDir, 'validation-events.json'), JSON.stringify(renewalEvents));
+  }
   // harness-private registries (e.g. the motif registry) — ground truth the project wants
   // written next to the packs but never installed
   for (const [name, value] of Object.entries(registries ?? {})) {
     writeFileSync(join(cfg.outDir, `${name}.json`), JSON.stringify(value, null, 1));
   }
   // per-member latents — validator/inspector-private, NEVER installed: lets an engineer
-  // verify the hidden dials actually expressed through behavior
-  writeFileSync(join(cfg.outDir, 'validation-latents.json'), JSON.stringify(people.map((p) => ({ m: p.MemberNumber, theta: +p._theta.toFixed(4), phi: +p._phi.toFixed(4), tier: p.MembershipTier, hero: !!p._hero }))));
-  writeFileSync(join(cfg.outDir, 'run.json'), JSON.stringify({ project: cfg.project, seed: cfg.seed, n: cfg.n, releaseDate: iso(cfg.release), ruleset: cfg.R.version, scenario: cfg.scenario ?? null, covidYears: cfg.R.regimes.covid.years }, null, 2));
+  // verify the hidden dials actually expressed through behavior. The PROJECTION is the project's,
+  // because which dials exist is the project's model, not the engine's.
+  if (latents) {
+    writeFileSync(join(cfg.outDir, 'validation-latents.json'), JSON.stringify(latents));
+  }
+  // run.json: the engine's five facts, plus whatever the project wants recorded about this run
+  // (MoreCheese records its covid years; the fixture records nothing). Project keys go LAST so
+  // the file's key order is stable.
+  writeFileSync(join(cfg.outDir, 'run.json'), JSON.stringify({ project: cfg.project, seed: cfg.seed, n: cfg.n, releaseDate: iso(cfg.release), ruleset: cfg.R.version, scenario: cfg.scenario ?? null, ...(runExtras ?? {}) }, null, 2));
 }
