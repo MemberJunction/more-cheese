@@ -68,21 +68,21 @@ gates (run `node cli/check-declared.mjs --out out`) and none of the domain wisdo
 for now — those gates carry real knowledge — but it means "framework" is true of the engine and not
 yet of the checking.
 
-**`gatedElsewhere` in `projects/morecheese/measurements.mjs` is a hand-maintained list** of the
-targets gated by bespoke checks rather than derived ones. It was 15; six have been migrated and it
-is now 9. Add a bespoke gate for a new target and you
-must add its path there too, or the coverage gate says the target ships unverified.
+**`gatedElsewhere` in `projects/morecheese/measurements.mjs` is down to 3, and that is the floor.**
+It began at 15 hand-gated targets; twelve now derive from their declarations. The three that remain
+each compare against something a `{ target, tolerance }` band cannot express — a vector target with
+a deliberate +0.02 offset, a mean-standard-error across years rather than a binomial one, and a
+target that is composition-adjusted in logit space before comparison. Every reason is written out
+next to the list. **Do not migrate these to hit zero**; each would silently change the band it
+replaces, and the adjustment in the third one IS the knowledge that gate carries.
 
-An earlier version of this document said the fix was to retire the reference gates duplicated by
-`refs.mjs`. **That was wrong** — those gates were duplicated and are now gone, and it did not touch
-this list, because this list is about *targets* and those were about *references*. Two different rule
-kinds. The actual fix is to move each measurement into `measurements.mjs` so the derived target gate
-covers it, then delete the bespoke gate. **The verification step is the important part and it is
-cheap:** add the measurement first and run the validator, which then reports the derived gate and the
-bespoke gate side by side over the same build. The observed value, the ± band and the detail string
-must match to the digit before you delete anything. All six migrated this way matched exactly, which
-is also how you find out that the bespoke gate's hand-rolled cushion was 1.5×SE and not the 3×SE
-default — that number is now declared as `se` beside the target instead of buried in a `Math.sqrt`.
+The migration recipe, if a fourth target ever needs it: add the measurement first and run the
+validator, which then prints the derived gate and the bespoke gate side by side over the same
+build. The observed value, the ± band and the detail string must match to the digit before you
+delete anything. That step is not ceremony — it caught a real defect on the very last batch: the
+no-show measurement counted prospect registrations that the bespoke gate excluded, moving the
+webinar denominator from 1,702 rows to 1,962. Both numbers passed the band, so a single-gate check
+would have looked correct while measuring a different population than the target was set for.
 
 **`TYPES-PROPOSAL.md` is a proposal, not a plan.** It describes a canonical vocabulary — the same
 idea is currently spelled `target`, `presentTarget` and `shareOfEligible` in different files.

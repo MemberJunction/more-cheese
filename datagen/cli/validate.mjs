@@ -392,8 +392,6 @@ function checkBenchmarks() {
   const nsPaid = paid.filter((x) => !x.Attended).length / paid.length;
   const nsWeb = webinar.filter((x) => !x.Attended).length / webinar.length;
   const NS = R.events.params;
-  check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.noShowPaidInPerson.target * 100}% ±${NS.noShowPaidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.noShowPaidInPerson.target) <= NS.noShowPaidInPerson.tolerance, `${paid.length} regs`);
-  check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.noShowFreeWebinar.target * 100}% ±${NS.noShowFreeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.noShowFreeWebinar.target) <= NS.noShowFreeWebinar.tolerance, `${webinar.length} regs`);
 
   // ---------- COVID expresses as a causal era, not just a renewal footnote ----------
   // Only traces that SURVIVE into shipped data are asserted here. The renewal dip is real
@@ -566,38 +564,15 @@ function checkTiers() {
 function checkLearning() {
   const L = R.learning;
 
-  // participation: members with ≥1 enrollment per eligible year ≈ 50%. Eligible = covered
-  // mid-year — the same pool the generator calibrates on; counting raw period-years instead
-  // double-counts anniversary members and dilutes with partial years (measurement artifact).
-  const courseYear = new Map(courses.map((c) => [c.CourseKey, c.Year]));
-  const participated = new Set(enrollments.map((e) => `${e.MemberNumber}:${courseYear.get(e.CourseKey)}`));
-  let activeYears = 0, partYears = 0;
-  const lastYear = +run.releaseDate.slice(0, 4);
-  for (const [m, list] of periodsByMember) {
-    const seen = new Set();
-    for (const per of list) {
-      const y0 = +per.StartDate.slice(0, 4), y1 = Math.min(+per.EndDate.slice(0, 4), lastYear);
-      for (let y = y0; y <= y1; y++) {
-        if (seen.has(y)) continue;
-        const mid = `${y}-06-15`;
-        if (!(per.StartDate <= mid && mid <= per.EndDate) && !list.some((p2) => p2.StartDate <= mid && mid <= p2.EndDate)) continue;
-        seen.add(y);
-        activeYears++;
-        if (participated.has(`${m}:${y}`)) partYears++;
-      }
-    }
-  }
-  const partRate = partYears / activeYears;
-  const partAllow = L.params.enrollment.tolerance + 1.5 * Math.sqrt(L.params.enrollment.target * (1 - L.params.enrollment.target) / activeYears);
-  check(`learning: participation ${(partRate * 100).toFixed(1)}% vs ${L.params.enrollment.target * 100}% ±${(partAllow * 100).toFixed(1)}`, Math.abs(partRate - L.params.enrollment.target) <= partAllow, `${activeYears} member-years`);
+  // participation and completion are DERIVED now — declared in the ruleset with their
+  // measurements in projects/morecheese/measurements.mjs, including the member-year denominator
+  // the old walk built here by hand. What stays below is what a band cannot say.
 
-  // completion among terminal enrollments ≈ 72%
+  // engagement expresses through completion (observable proxy: anchor quartiles). This gate is
+  // NOT a band — it asserts an ORDERING between quartiles, which no { target, tolerance } pair can
+  // state — so it stays, and it still needs the terminal-enrolment set the derived gate now
+  // measures independently.
   const terminal = enrollments.filter((e) => e.Status !== 'InProgress');
-  const compRate = terminal.filter((e) => e.Status === 'Completed').length / terminal.length;
-  const compAllow = L.params.completion.tolerance + 1.5 * Math.sqrt(L.params.completion.target * (1 - L.params.completion.target) / terminal.length);
-  check(`learning: completion ${(compRate * 100).toFixed(1)}% vs ${L.params.completion.target * 100}% ±${(compAllow * 100).toFixed(1)}`, Math.abs(compRate - L.params.completion.target) <= compAllow, `${terminal.length} terminal enrollments`);
-
-  // engagement expresses through completion (observable proxy: anchor quartiles)
   const latents = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
   const anchorOf = new Map(latents.map((l) => [l.m, l.theta]));
   const withAnchor = terminal.filter((e) => anchorOf.has(e.MemberNumber));
@@ -647,8 +622,8 @@ function checkMoney() {
   const rate = (a) => a.reduce((s, x) => s + x, 0) / a.length;
   const se = (p, n) => Math.sqrt(p * (1 - p) / n);
   const netLate = rate(cls.net), manualLate = rate(cls.manual), autoOn = rate(cls.auto);
-  check(`money: net-terms late share ${(netLate * 100).toFixed(1)}% vs ${G.gateNetTermsLate.target * 100}% ±${(G.gateNetTermsLate.tolerance * 100).toFixed(0)}+SE (Atradius/CRF)`, Math.abs(netLate - G.gateNetTermsLate.target) <= G.gateNetTermsLate.tolerance + 1.5 * se(G.gateNetTermsLate.target, cls.net.length), `${cls.net.length} net-terms payments`);
-  check(`money: manual dues late share ${(manualLate * 100).toFixed(1)}% vs ${G.gateManualLate.target * 100}% ±${(G.gateManualLate.tolerance * 100).toFixed(0)}+SE (mirrors late_renewal_share)`, Math.abs(manualLate - G.gateManualLate.target) <= G.gateManualLate.tolerance + 1.5 * se(G.gateManualLate.target, cls.manual.length), `${cls.manual.length} manual payments`);
+  // the two LATE-SHARE bands are derived; the auto-pay gate below stays — it is a floor, not a
+  // band, so no { target, tolerance } pair describes it
   check(`money: auto-pay lands ON the due date ${(autoOn * 100).toFixed(1)}% (≥${G.gateAutopayOnDueMin * 100}%)`, autoOn >= G.gateAutopayOnDueMin, `${cls.auto.length} auto-payments`);
 
   // event orders: card-at-checkout = paid same day, always
@@ -1534,7 +1509,7 @@ checkPacks();
 // REFERENTIAL phase: before the fail-fast bailout, because a broken reference graph makes every
 // causal measurement below meaningless. Wiring these AFTER the bailout once meant a dangling
 // reference stopped the run before they executed — they reported green by never running.
-await runDerivedChecks({ project: run.project, R, load, check, packs: PACK_NAMES }, 'referential');
+await runDerivedChecks({ project: run.project, R, load, check, packs: PACK_NAMES, run }, 'referential');
 if (results.some((r) => !r.ok)) {
   for (const r of results) console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);
   console.log('\n✋ FK-first: referential gates failed — causal gates not run');
@@ -1560,7 +1535,7 @@ checkSonar();
 // Declaration-derived TARGET gates — final phase, once the world is known referentially sound.
 // The project supplies only the measurements (projects/<name>/measurements.mjs); the band, the
 // cushion and the coverage gate are derived. A declared target with no measurement is REPORTED.
-await runDerivedChecks({ project: run.project, R, load, check, packs: PACK_NAMES }, 'final');
+await runDerivedChecks({ project: run.project, R, load, check, packs: PACK_NAMES, run }, 'final');
 let failed = 0;
 for (const r of results) {
   console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);

@@ -31,11 +31,12 @@ const optional = async (spec) => {
  * @param {object} opts.R composed ruleset
  * @param {(pack: string, table: string) => any[]} opts.load
  * @param {string[]} [opts.packs] every emitted pack name, if the caller can enumerate them
+ * @param {object} [opts.run] the build's run.json — release date, seed, scenario
  * @param {(name: string, ok: boolean, detail?: string) => void} opts.check
  * @param {'referential'|'final'} phase
  * @returns {Promise<{kinds: string[], counts: Record<string, number>}>}
  */
-export async function runDerivedChecks({ project, R, load, check, packs }, phase) {
+export async function runDerivedChecks({ project, R, load, check, packs, run }, phase) {
   const { runRefChecks, runPresenceChecks, runTargetChecks, runInstallOrderChecks, runDiscriminatorChecks } = await import('./checks.mjs');
   const base = `../projects/${project}/`;
   const kinds = [];
@@ -74,7 +75,7 @@ export async function runDerivedChecks({ project, R, load, check, packs }, phase
   const measurements = mMod?.measurements ?? {};
   const gatedElsewhere = mMod?.gatedElsewhere ?? new Set();
 
-  const { ran, unmeasured } = runTargetChecks(R, measurements, check, { load, R });
+  const { ran, unmeasured } = runTargetChecks(R, measurements, check, { load, R, run });
   const missing = unmeasured.filter((p) => !gatedElsewhere.has(p));
   check(
     `every declared target has a check (${ran} derived, ${gatedElsewhere.size} bespoke)`,

@@ -36,9 +36,9 @@ const check = (name, ok, detail) => results.push({ name, ok, detail });
 // Referential first, and stop if it fails: a broken reference graph makes every measurement below
 // meaningless, and reporting fifty red gates when the real problem is one missing key wastes the
 // reader's time.
-const ref = await runDerivedChecks({ project, R, load, check, packs: PACK_NAMES }, 'referential');
+const ref = await runDerivedChecks({ project, R, load, check, packs: PACK_NAMES, run }, 'referential');
 const refBroken = results.some((r) => !r.ok);
-const fin = refBroken ? { kinds: [], counts: {} } : await runDerivedChecks({ project, R, load, check, packs: PACK_NAMES }, 'final');
+const fin = refBroken ? { kinds: [], counts: {} } : await runDerivedChecks({ project, R, load, check, packs: PACK_NAMES, run }, 'final');
 
 let failed = 0;
 for (const r of results) {

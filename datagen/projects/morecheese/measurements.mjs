@@ -17,17 +17,36 @@
 // calibration gets called broken — measuring an annual participation rate over a member's lifetime
 // reads 96% against a 62% target and looks like a bug when nothing is wrong.
 
-/** Targets gated by the BESPOKE checks in cli/validate.mjs, which say more than a band can. */
+/**
+ * Targets gated by the BESPOKE checks in cli/validate.mjs, which say more than a band can.
+ *
+ * This list was 15. Twelve have migrated, and the three left are not leftovers — each compares
+ * against something the derived runner cannot express, and the reason is recorded so nobody spends
+ * a morning rediscovering it:
+ *
+ *   statusMix                     the target is a VECTOR and the gate compares the observed
+ *                                 active share against target[0] + 0.02, a deliberate offset
+ *                                 (the documented world counts a grace-period member as
+ *                                 "active-ish"). The runner compares to target[0] exactly.
+ *   membership.params.renewal     the band is tolerance + 2 × (stdev of the YEARLY rates / √years)
+ *                                 — a standard error of a mean across years, not the binomial SE
+ *                                 of one pooled share. Different statistic, so a migration would
+ *                                 silently widen or narrow the gate.
+ *   membership.params.enthusiastRenewal
+ *                                 the target is COMPOSITION-ADJUSTED before comparison: the gate
+ *                                 shifts it in logit space by the effect betas times the enthusiast
+ *                                 cohort's mean difference in tenure, engagement and employer
+ *                                 events, because that cohort genuinely differs on the drivers.
+ *                                 Comparing to the raw declared target would be wrong, not just
+ *                                 imprecise. That adjustment IS the knowledge the gate carries.
+ *
+ * If a fourth ever joins them, it needs a paragraph here too. A list of paths with no reasons is
+ * how "temporarily bespoke" becomes permanent.
+ */
 export const gatedElsewhere = new Set([
   'statusMix',
   'membership.params.renewal',
   'membership.params.enthusiastRenewal',
-  'events.params.noShowPaidInPerson',
-  'events.params.noShowFreeWebinar',
-  'orders.params.gateNetTermsLate',
-  'orders.params.gateManualLate',
-  'learning.params.enrollment',
-  'learning.params.completion',
 ]);
 
 /** @type {Record<string, (ctx: { load: (pack: string, table: string) => any[] }) => {observed: number, of?: number, detail?: string} | null>} */
@@ -151,4 +170,105 @@ export const measurements = {
       detail: `${threads.length} threads / ${issues.length} issues`,
     };
   },
+  // ─────────────────────────────────────────────────────────────────────────────────────────────
+  // SECOND MIGRATION BATCH. Same recipe as above: add the measurement, run the validator, confirm
+  // the derived gate reproduces the bespoke gate's observed value AND its ± band to the digit,
+  // then delete the bespoke gate. Each of these matched exactly before its old gate came out.
+  // ─────────────────────────────────────────────────────────────────────────────────────────────
+
+  // Participation is per MEMBER-YEAR over the pool the generator calibrates on: members covered
+  // at mid-year. Counting raw period-years instead double-counts anniversary members and dilutes
+  // with partial years — a measurement artefact, not a data problem. se 1.5 declared in the ruleset.
+  'learning.params.enrollment': ({ load, run }) => {
+    const enrollments = load('learning', 'enrollments');
+    const courseYear = new Map(load('learning', 'courses').map((c) => [c.CourseKey, c.Year]));
+    const participated = new Set(enrollments.map((e) => `${e.MemberNumber}:${courseYear.get(e.CourseKey)}`));
+    const byMember = new Map();
+    for (const per of load('membership', 'membership_periods')) {
+      if (!byMember.has(per.MemberNumber)) byMember.set(per.MemberNumber, []);
+      byMember.get(per.MemberNumber).push(per);
+    }
+    const lastYear = +run.releaseDate.slice(0, 4);
+    let activeYears = 0, partYears = 0;
+    for (const [m, list] of byMember) {
+      const seen = new Set();
+      for (const per of list) {
+        const y0 = +per.StartDate.slice(0, 4), y1 = Math.min(+per.EndDate.slice(0, 4), lastYear);
+        for (let y = y0; y <= y1; y++) {
+          if (seen.has(y)) continue;
+          const mid = `${y}-06-15`;
+          if (!list.some((p2) => p2.StartDate <= mid && mid <= p2.EndDate)) continue;
+          seen.add(y);
+          activeYears++;
+          if (participated.has(`${m}:${y}`)) partYears++;
+        }
+      }
+    }
+    return activeYears ? { observed: partYears / activeYears, of: activeYears, detail: `${activeYears} member-years` } : null;
+  },
+
+  // over TERMINAL enrolments only — an in-progress course has not decided yet
+  'learning.params.completion': ({ load }) => {
+    const terminal = load('learning', 'enrollments').filter((e) => e.Status !== 'InProgress');
+    if (!terminal.length) return null;
+    return {
+      observed: terminal.filter((e) => e.Status === 'Completed').length / terminal.length,
+      of: terminal.length,
+      detail: `${terminal.length} terminal enrollments`,
+    };
+  },
+
+  // The two no-show rates carry NO standard-error cushion — the bespoke gates compared against
+  // the bare tolerance, so these return no `of`, which makes the derived cushion exactly zero.
+  // Omitting `of` is how a measurement says "this band is a flat tolerance, not a sampling band".
+  'events.params.noShowPaidInPerson': ({ load, run }) => noShow(load, run, false),
+  'events.params.noShowFreeWebinar': ({ load, run }) => noShow(load, run, true),
+
+  // Dues payment timeliness, split the way the money chain bills: net-terms tiers get an invoice
+  // (late = paid after the due date), everyone else pays manually. Auto-pay is checked separately
+  // by a bespoke gate — "lands ON the due date" is a floor, not a band, so no target pair exists.
+  'orders.params.gateNetTermsLate': ({ load }) => duesLate(load, 'net'),
+  'orders.params.gateManualLate': ({ load }) => duesLate(load, 'manual'),
 };
+
+/** No-show share among registrations for events that have already happened, MEMBERS ONLY.
+ *
+ *  The prospect filter is not incidental. Free webinars are the top of the funnel, so non-members
+ *  register for them in numbers — including them moved the webinar denominator from 1,702 rows to
+ *  1,962 and the rate from 55.3% to 54.5%. Both still passed the band, which is the point: the
+ *  gate would have been quietly measuring a different population than the one the target was set
+ *  for, and only the side-by-side comparison against the bespoke gate caught it. The paid-event
+ *  rate was unaffected (prospects cannot buy a seat yet), so a single-gate check would have
+ *  looked fine. */
+function noShow(load, run, webinars) {
+  const events = load('events', 'events');
+  const isWebinar = new Set(events.filter((e) => e.EventType === 'Webinar').map((e) => e.EventKey));
+  const dateOf = new Map(events.map((e) => [e.EventKey, e.Date]));
+  const prospects = new Set(load('common', 'people').filter((p) => p.IsProspect).map((p) => p.MemberNumber));
+  const rows = load('events', 'event_registrations').filter((x) => !prospects.has(x.MemberNumber)
+    && (dateOf.get(x.EventKey) ?? '') <= run.releaseDate
+    && isWebinar.has(x.EventKey) === webinars);
+  if (!rows.length) return null;
+  return { observed: rows.filter((x) => !x.Attended).length / rows.length, detail: `${rows.length} regs` };
+}
+
+/** late-payment share for one dues billing class. The order→period join is a key convention
+ *  (ORD-D-<PeriodKey>), which is also why the class lives on the PERIOD row and not the order. */
+function duesLate(load, want) {
+  const periods = load('membership', 'membership_periods');
+  const perByKey = new Map(periods.map((x) => [`ORD-D-${x.PeriodKey}`, x]));
+  const paid = new Map(load('orders', 'payments').filter((p) => p.Amount > 0 && p.Status !== 'Refunded').map((p) => [p.OrderKey, p.PaymentDate]));
+  const flags = [];
+  for (const o of load('orders', 'orders').filter((x) => x.OrderKey.startsWith('ORD-D-'))) {
+    if (!paid.has(o.OrderKey)) continue; // unpaid orders age instead of counting as late
+    const per = perByKey.get(o.OrderKey);
+    const cls = ['SmallBusiness', 'Corporate'].includes(per.MembershipTier) ? 'net' : (per.AutoRenew ? 'auto' : 'manual');
+    if (cls === want) flags.push(paid.get(o.OrderKey) > o.DueDate ? 1 : 0);
+  }
+  if (!flags.length) return null;
+  return {
+    observed: flags.reduce((a, b) => a + b, 0) / flags.length,
+    of: flags.length,
+    detail: `${flags.length} ${want}-terms payments`,
+  };
+}
