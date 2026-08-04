@@ -82,12 +82,11 @@ export function buildEvents(cfg) {
 // late deciders, and a walk-up/last-minute mass — heavier last-minute for free
 // webinars, longer planning horizon for the conference. (Replaces the fixed
 // −45/−14 offsets that made every "registrations over time" chart a comb.)
-function leadDaysFor(r, kind) {
-  const bands = kind === 'Conference'
-    ? [[[60, 120], 0.20], [[14, 59], 0.50], [[3, 13], 0.25], [[0, 2], 0.05]]
-    : kind === 'Workshop'
-      ? [[[30, 60], 0.10], [[7, 29], 0.55], [[1, 6], 0.25], [[0, 0], 0.10]]
-      : [[[21, 45], 0.05], [[7, 20], 0.40], [[1, 6], 0.35], [[0, 0], 0.20]];
+// The band TABLES are declared (events.catalog.leadDayBands); which table applies is selected
+// here, because selection by event type is a conditional and conditionals stay in code. Draw
+// order is unchanged: one pickWeighted over the bands, then one int inside the chosen band.
+function leadDaysFor(r, kind, bandsByKind) {
+  const bands = bandsByKind[kind] ?? bandsByKind.Other;
   const [lo, hi] = r.pickWeighted(bands);
   return r.int(lo, hi);
 }
@@ -123,7 +122,7 @@ export function buildRegistrations(cfg, { people, periods, events }) {
     spawn: (r, p, y) => {
       const conf = confOf(y);
       if (!coveredOn(p.MemberNumber, conf.Date)) return null; // active July 1 ≠ covered July 15 — anniversary lapses in the gap
-      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -leadDaysFor(r, 'Conference'))), Attended: null, _class: 'paid', _theta: thetaAt(p, y), IsSharedDemo: true };
+      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -leadDaysFor(r, 'Conference', E.catalog.leadDayBands))), Attended: null, _class: 'paid', _theta: thetaAt(p, y), IsSharedDemo: true };
     },
   });
 
@@ -157,7 +156,7 @@ export function buildRegistrations(cfg, { people, periods, events }) {
         if (!ev) break;
         taken.add(ev.EventKey);
         if (!coveredOn(p.MemberNumber, ev.Date)) continue;
-        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -leadDaysFor(r, ev.EventType))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: thetaAt(p, y), IsSharedDemo: true });
+        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -leadDaysFor(r, ev.EventType, E.catalog.leadDayBands))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: thetaAt(p, y), IsSharedDemo: true });
       }
     }
   }
