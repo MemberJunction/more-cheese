@@ -15,6 +15,7 @@ import { rng } from '../../engine/rng.mjs';
 import { derivedTransaction } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { projectRows } from '../../engine/row-template.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 // ── row templates ── the catalogue products; the tier/event products stay handwritten because
 // their keys are COMPUTED (toUpperCase) and expressions in templates are the DSL-creep line
@@ -49,8 +50,8 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
   const releaseYear = release.getUTCFullYear();
   const atYear = (amount, year) => Math.round(amount / Math.pow(1 + infl, releaseYear - year));
 
-  const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
-  const eventByKey = new Map(events.map((e) => [e.EventKey, e]));
+  const personByKey = indexBy(people, 'MemberNumber');
+  const eventByKey = indexBy(events, 'EventKey');
   const orders = [];
   const orderLines = [];
   const payments = [];
@@ -201,7 +202,7 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
   // AMS records it — a NEGATIVE payment against the original order with Status 'Refunded'
   // (the status was already permitted by the schema and had never been used).
   const refunds = [];
-  const orderByKey = new Map(orders.map((o) => [o.OrderKey, o]));
+  const orderByKey = indexBy(orders, 'OrderKey');
   for (const reg of registrations) {
     if (reg.Attended !== false) continue;
     const key = `ORD-E-${reg.RegKey}`;

@@ -12,7 +12,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
-import { stripInternals } from '../../engine/authoring.mjs';
+import { indexBy, stripInternals } from '../../engine/authoring.mjs';
 import { projectRows } from '../../engine/row-template.mjs';
 
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
@@ -33,7 +33,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
   const { R, seed, release } = cfg;
   const T = R.tasks;
   const releaseIso = iso(release);
-  const personByNum = new Map(people.map((p) => [p.MemberNumber, p]));
+  const personByKey = indexBy(people, 'MemberNumber');
 
   const taskTypes = projectRows(TASK_TYPE_ROW, T.catalog.types);
 
@@ -93,7 +93,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
   childOutcome({
     seed,
     items: pastDue,
-    scoreOf: (t) => T.effects['completion.engagement'].beta * (personByNum.get(t._assignee)?._theta ?? 0),
+    scoreOf: (t) => T.effects['completion.engagement'].beta * (personByKey.get(t._assignee)?._theta ?? 0),
     target: P.committeeActionCompletion.target,
     streamKey: (t) => `ctask-done:${t.TaskKey}`,
     decide: (t, prob, r) => {
@@ -132,7 +132,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
   const outreachPool = moRoster.length ? moRoster : [];
   for (const [memberNumber, per] of [...lastPeriod.entries()].sort()) {
     if (per.Status !== 'PendingRenewal') continue;
-    const p = personByNum.get(memberNumber);
+    const p = personByKey.get(memberNumber);
     const r = rng(seed, `otask:${memberNumber}`);
     const created = iso(addDays(parseDate(per.EndDate), -r.int(10, 75)));
     const task = pushTask({

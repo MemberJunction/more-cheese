@@ -9,6 +9,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { projectRows } from '../../engine/row-template.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 // severity mixes are keyed by ticket type with spaces removed ('Data Correction' →
 // severityDataCorrection), so each mix stays a flat map of level → weight
@@ -31,7 +32,7 @@ export function buildIssues(cfg, { people, orgs, events, registrations, money, c
   const { R, seed, release } = cfg;
   const I = R.issues;
   const releaseIso = iso(release);
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
   const typeDefault = new Map(I.catalog.types.map((t) => [t.name, t.priority]));
 
   const issueTypes = projectRows(ISSUE_TYPE_ROW, I.catalog.types);
@@ -106,7 +107,7 @@ export function buildIssues(cfg, { people, orgs, events, registrations, money, c
   }
 
   // refunds: paid-event no-shows occasionally ask
-  const eventByKey = new Map(events.map((e) => [e.EventKey, e]));
+  const eventByKey = indexBy(events, 'EventKey');
   for (const reg of registrations) {
     const ev = eventByKey.get(reg.EventKey);
     if (reg.Attended !== false || !ev?.IsPaid) continue;

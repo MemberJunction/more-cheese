@@ -14,7 +14,7 @@ import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { personNameFor, TOPONYMS } from './banks.mjs';
 import { emailFor } from './world.mjs';
-import { stripInternals, thetaAt } from '../../engine/authoring.mjs';
+import { indexBy, stripInternals, thetaAt } from '../../engine/authoring.mjs';
 import { projectRows } from '../../engine/row-template.mjs';
 
 /** survey/application submissions cluster in waking hours with a lunchtime and evening
@@ -62,7 +62,7 @@ export function buildForms(cfg, { people, events, registrations }) {
     }));
   });
 
-  const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
+  const personByKey = indexBy(people, 'MemberNumber');
   const confByYear = new Map(events.filter((e) => e.EventType === 'Conference').map((e) => [e.Year, e]));
 
   // ── decisions ── per conference year: a distribution + attendee responses
@@ -112,7 +112,7 @@ export function buildForms(cfg, { people, events, registrations }) {
   // Declared facts placed after the crowd draw, like committee seats: anchor to the hero's
   // most recent attended conference; skip if the crowd draw already selected them (same
   // ResponseKey). Never Partial — a flagship demo response must be complete.
-  const distByKey = new Map(formDistributions.map((d) => [d.DistributionKey, d]));
+  const distByKey = indexBy(formDistributions, 'DistributionKey');
   const responseKeys = new Set(formResponses.map((x) => x.ResponseKey));
   for (const h of R.heroes.filter((x) => x.pins?.formResponse)) {
     const distYears = [...confByYear.entries()].sort((a, b) => b[0] - a[0]).filter(([year]) => distByKey.has(`post-conf-survey:${year}`));

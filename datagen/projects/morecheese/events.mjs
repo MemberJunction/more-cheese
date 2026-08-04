@@ -15,7 +15,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
-import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 // Calendar realism: draw any day of the month (incl. 29–31), then shape the weekday —
@@ -100,12 +100,7 @@ export function buildRegistrations(cfg, { people, periods, events }) {
   const years = yearsOf(cfg);
   const eventsByYear = new Map(years.map((y) => [y, events.filter((e) => e.Year === y && parseDate(e.Date) <= release)]));
 
-  const memberPeriods = new Map();
-  for (const per of periods) {
-    if (!memberPeriods.has(per.MemberNumber)) memberPeriods.set(per.MemberNumber, []);
-    memberPeriods.get(per.MemberNumber).push(per);
-  }
-  const coveredOn = (memberNumber, dateIso) => (memberPeriods.get(memberNumber) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
+  const coveredOn = coverageOf(periods); // indexed; committees already used this helper
   const clampToJoin = (p, d) => iso(new Date(Math.max(d.getTime(), parseDate(p.JoinDate).getTime())));
 
   // flagship: core's annualParticipation — calibrated so ~35% of members attend;

@@ -10,7 +10,7 @@ import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
-import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { renderRow } from '../../engine/row-template.mjs';
 
 // topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
@@ -65,9 +65,7 @@ export function buildLearning(cfg, { people, periods }) {
   const coursesByYear = new Map();
   for (const c of courses) { (coursesByYear.get(c.Year) ?? coursesByYear.set(c.Year, []).get(c.Year)).push(c); }
 
-  const memberPeriods = new Map();
-  for (const per of periods) { (memberPeriods.get(per.MemberNumber) ?? memberPeriods.set(per.MemberNumber, []).get(per.MemberNumber)).push(per); }
-  const coveredOn = (m, dateIso) => (memberPeriods.get(m) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
+  const coveredOn = coverageOf(periods); // indexed; committees already used this helper
 
   // pattern 1: who enrolls each year — core owns the calibration; we own the shapes
   // ── decisions ── one pattern call per decision, in causal order

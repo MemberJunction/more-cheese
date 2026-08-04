@@ -26,6 +26,33 @@ export function yearsOf(cfg) {
 }
 
 /**
+ * Index rows by a key column — `indexBy(people, 'MemberNumber').get('ICF-000101')`.
+ *
+ * Measured before writing this: fifteen generators built exactly this Map inline, and the same
+ * index was spelled two different ways — `personByKey` in four files and `personByNum` in two.
+ * Two names for one thing is how a reader loses the thread, and `orgByKey` appeared five times.
+ *
+ * This is NOT derived from refs.mjs, and that was a deliberate reversal of the plan. The
+ * reference graph declares which columns are parent keys, so a registry of every parent index
+ * COULD be generated — but of the 44 index sites in this project, 29 build domain-specific
+ * groupings (a roster by committee-term, attendance by meeting, overdue counts by member) that
+ * encode judgement and cannot be derived at all. The remaining 15 are one clear line each.
+ * Replacing a clear line with a lookup into a 30-entry generated registry trades clarity for
+ * indirection and makes handwriting harder, which is the opposite of the goal. Naming the
+ * operation is the whole win; the registry would have been abstraction for its own sake.
+ *
+ * @template T
+ * @param {readonly T[]} rows
+ * @param {string} key the column to key on — last row wins on a duplicate, as an inline Map did
+ * @returns {Map<any, T>}
+ */
+export function indexBy(rows, key) {
+  const out = new Map();
+  for (const row of rows) out.set(row[key], row);
+  return out;
+}
+
+/**
  * A person's engagement level IN A GIVEN YEAR.
  *
  * This is the most-written expression in the whole project. Fifteen sites, all spelled out by hand:

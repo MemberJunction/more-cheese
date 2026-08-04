@@ -15,6 +15,7 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { projectRows } from '../../engine/row-template.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
 
@@ -35,7 +36,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   // four-part ruleset shape: only catalog + params — this domain rolls no dice
   const P = R.platform;
   const releaseMs = release.getTime();
-  const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
+  const personByKey = indexBy(people, 'MemberNumber');
   const fullName = (m) => { const p = personByKey.get(m); return p ? `${p.FirstName} ${p.LastName}` : m; };
 
   // ── fixtures ── staff users (the personas demos log in as)

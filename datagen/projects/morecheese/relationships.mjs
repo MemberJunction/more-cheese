@@ -8,13 +8,14 @@
 // carry uuidFor-pinned IDs; bizapps-common's own seed types are never emitted by us.
 
 import { rng } from '../../engine/rng.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 export function buildRelationships(cfg, { people, orgs }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R } = cfg;
   const REL = R.relationships;
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
-  const personByNum = new Map(people.map((p) => [p.MemberNumber, p]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
+  const personByKey = indexBy(people, 'MemberNumber');
 
   const relationshipTypes = REL.catalog.demoTypes.map((t) => ({
     TypeKey: t.name, Name: t.name, Category: t.category,
@@ -49,8 +50,8 @@ export function buildRelationships(cfg, { people, orgs }) {
       IsSharedDemo: true,
     };
     if (a.fromOrgOf) { // org-to-org via the heroes' employers
-      row.FromOrgKey = personByNum.get(a.fromOrgOf)?.OrgKey;
-      row.ToOrgKey = personByNum.get(a.toOrgOf)?.OrgKey;
+      row.FromOrgKey = personByKey.get(a.fromOrgOf)?.OrgKey;
+      row.ToOrgKey = personByKey.get(a.toOrgOf)?.OrgKey;
     } else {
       row.FromMemberNumber = a.from;
       row.ToMemberNumber = a.to;

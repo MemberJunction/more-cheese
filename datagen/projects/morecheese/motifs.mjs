@@ -12,13 +12,14 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { parseDate } from '../../engine/dates.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 export function applyMotifs(cfg, { people, orgs }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const M = R.motifs;
   const releaseYear = release.getUTCFullYear();
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
   const crowd = people.filter((p) => !p._hero);
   const registry = [];
   const meta = {};

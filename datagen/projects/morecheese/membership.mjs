@@ -13,14 +13,14 @@
 import { rng, sigmoid, calibrateIntercept } from '../../engine/rng.mjs';
 import { recurringDecision } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../engine/dates.mjs';
-import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { indexBy, thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { featureArrows } from '../../engine/features.mjs';
 
 export function runRenewalUnroll(cfg, { people, orgs }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const M = R.membership;
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
 
   const years = yearsOf(cfg);
 

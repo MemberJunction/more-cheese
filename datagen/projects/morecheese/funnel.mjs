@@ -22,6 +22,7 @@ import { rng } from '../../engine/rng.mjs';
 import { titleFor } from './banks.mjs';
 import { emailFor } from './world.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 export function buildFunnel(cfg, { people, prospects, orgs, events, periods, application }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -96,7 +97,7 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
   // ── decisions ── B. non-members are people too: employer and title
   // A prospect's OrgKey was generated and then emitted nowhere — Person has no organisation
   // column, so for members employment is a Relationship edge. Non-members get the same edge.
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
   for (const p of prospects) {
     if (!p.OrgKey) continue;
     const org = orgByKey.get(p.OrgKey);
