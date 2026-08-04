@@ -21,7 +21,7 @@ import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 import { CITIES } from '../projects/morecheese/banks.mjs';
 import { makeGateHelpers } from '../engine/gates.mjs';
-import { runTargetChecks, runRefChecks, runPresenceChecks } from '../engine/checks.mjs';
+import { runDerivedChecks } from '../engine/derived-checks.mjs';
 import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -114,25 +114,6 @@ for (const x of periods) { (periodsByMember.get(x.MemberNumber) ?? periodsByMemb
 const lastStatus = new Map();
 const lastPeriod = new Map();
 for (const per of periods) { lastStatus.set(per.MemberNumber, per.Status); lastPeriod.set(per.MemberNumber, per); }
-
-// ---------- the DECLARED reference graph (projects/<name>/refs.mjs) ----------
-// Generated from data, not written: see engine/checks.mjs. The prose gates below still say
-// things a generated one cannot (they carry the story of a real bug), so both run.
-async function checkDeclaredPresence() {
-  const { mixLandings } = await import('../projects/' + run.project + '/presence.mjs');
-  const { unlanded } = runPresenceChecks(R, mixLandings, load, check);
-  check(
-    `every declared mix has a landing site (${Object.keys(mixLandings).length} declared)`,
-    unlanded.length === 0,
-    unlanded.length ? `NO LANDING: ${unlanded.join(', ')}` : 'no mix ships unchecked',
-  );
-}
-
-async function checkDeclaredRefs() {
-  const { refs } = await import('../projects/' + run.project + '/refs.mjs');
-  runRefChecks(refs, load, check);
-  return refs.length;
-}
 
 // ---------- packs (§7.8) ----------
 function checkPacks() {
@@ -1634,8 +1615,11 @@ function checkMotifs() {
 // If any pack-reference gate fails, causal/benchmark gates are meaningless (they'd
 // measure a broken world) — report the referential failures alone and hard-fail.
 checkPacks();
-await checkDeclaredRefs();       // declared graph: same phase, before the bailout
-await checkDeclaredPresence();   // presence floors, derived from the declared mixes
+// Declaration-derived gates, run by the project-generic runner (engine/derived-checks.mjs).
+// REFERENTIAL phase: before the fail-fast bailout, because a broken reference graph makes every
+// causal measurement below meaningless. Wiring these AFTER the bailout once meant a dangling
+// reference stopped the run before they executed — they reported green by never running.
+await runDerivedChecks({ project: run.project, R, load, check }, 'referential');
 if (results.some((r) => !r.ok)) {
   for (const r of results) console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);
   console.log('\n✋ FK-first: referential gates failed — causal gates not run');
@@ -1658,70 +1642,10 @@ checkMessaging();
 checkPlatform();
 checkSonar();
 
-// ---------- gates DERIVED from declarations (engine/checks.mjs) ----------
-// A { target, tolerance } pair means "a check enforces this". Until now that was a convention
-// held up by hand: two authored pairs — the conference attendance rate and the committee-action
-// completion rate — shipped with NOTHING verifying them, because adding a pair does not add a
-// gate. This block inverts that: the engine finds every declared pair, the project supplies only
-// the measurement, and anything left unmeasured is REPORTED rather than silently unchecked.
-//
-// Most pairs are still gated by the bespoke checks above, which say more than a band can (they
-// carry the story of a real bug). Those are listed as measured-elsewhere so the report is honest
-// about what this block does and does not cover.
-{
-  const MEASURED_ELSEWHERE = new Set([
-    'statusMix', 'membership.params.renewal', 'membership.params.enthusiastRenewal',
-    'events.params.noShowPaidInPerson', 'events.params.noShowFreeWebinar',
-    'orders.params.gateNetTermsLate', 'orders.params.gateManualLate',
-    'learning.params.enrollment', 'learning.params.completion',
-    'committees.params.volunteerShare', 'committees.params.attendPresent',
-    'issues.params.assignment', 'programs.params.certificationPursuit',
-    'programs.params.advocateShare', 'messaging.params.threadSharePerIssue',
-  ]);
-
-  const measurements = {
-    // Was declared and never checked — the flagship number of the whole dataset. Denominator
-    // matched to the generator EXACTLY: per year, members covered on 1 July of that year (see
-    // events.mjs). Guessing a denominator is how a correct calibration gets called broken.
-    'events.params.conferenceAttendance': () => {
-      const confs = events.filter((e) => e.EventType === 'Conference');
-      if (!confs.length) return null;
-      const coveredOn = (m, d) => periods.some((p) => p.MemberNumber === m && p.StartDate <= d && d <= p.EndDate);
-      const members = [...new Set(periods.map((p) => p.MemberNumber))];
-      let pool = 0, attended = 0;
-      for (const conf of confs) {
-        const y = String(conf.Year);
-        const july1 = y + '-07-01';
-        const eligible = members.filter((m) => coveredOn(m, july1));
-        if (eligible.length < 6) continue;   // generator skips short pools (minPool 6)
-        const regd = new Set(regs.filter((r) => r.EventKey === conf.EventKey).map((r) => r.MemberNumber));
-        pool += eligible.length;
-        attended += eligible.filter((m) => regd.has(m)).length;
-      }
-      return pool ? { observed: attended / pool, of: pool, detail: confs.length + ' conferences, ' + pool + ' member-years' } : null;
-    },
-    // Was declared and never checked. Action items exist to be finished; if the completion rate
-    // drifts, a task board either looks abandoned or implausibly tidy.
-    'tasks.params.committeeActionCompletion': () => {
-      const actions = tTasks.filter((t) => t.TypeKey === 'Committee Action Item');
-      if (!actions.length) return null;
-      return {
-        observed: actions.filter((t) => t.CompletedAt).length / actions.length,
-        of: actions.length,
-        detail: `${actions.length} committee action items`,
-      };
-    },
-  };
-
-  const { ran, unmeasured } = runTargetChecks(R, measurements, check, null);
-  const genuinelyUnmeasured = unmeasured.filter((p) => !MEASURED_ELSEWHERE.has(p));
-  check(
-    `every declared target has a check (${ran} derived, ${MEASURED_ELSEWHERE.size} bespoke)`,
-    genuinelyUnmeasured.length === 0,
-    genuinelyUnmeasured.length ? `UNCHECKED: ${genuinelyUnmeasured.join(', ')}` : 'no target ships unverified',
-  );
-}
-
+// Declaration-derived TARGET gates — final phase, once the world is known referentially sound.
+// The project supplies only the measurements (projects/<name>/measurements.mjs); the band, the
+// cushion and the coverage gate are derived. A declared target with no measurement is REPORTED.
+await runDerivedChecks({ project: run.project, R, load, check }, 'final');
 let failed = 0;
 for (const r of results) {
   console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);

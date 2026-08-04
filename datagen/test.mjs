@@ -317,6 +317,28 @@ step('no defensive reads of declared ruleset values (and a planted one is caught
   } finally { writeFileSync(f, original); }
 });
 
+// 0j. The derived checks must run STANDALONE, for any project. That is the difference between a
+// framework and one project's validator: cli/validate.mjs is 1,600 lines of MoreCheese and runs
+// nowhere else, so until now a second project inherited no gates at all.
+step('derived checks run standalone (and its exit code reflects failures)', () => {
+  run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const out = run('check-declared.mjs', ['--out', 'out-test']);
+  for (const kind of ['references', 'presence floors', 'targets']) {
+    if (!out.includes(kind)) throw new Error(`standalone runner did not report the ${kind} kind`);
+  }
+  // and a broken world must make it exit non-zero, not merely print a red line
+  const f = join(HERE, 'out-test/packs/issues/issues.json');
+  const rows = JSON.parse(readFileSync(f, 'utf8'));
+  const original = rows.map((r) => r.Severity);
+  for (const r of rows) if (r.Severity === 'Critical') r.Severity = 'High';
+  writeFileSync(f, JSON.stringify(rows, null, 1));
+  let exited = 0;
+  try { run('check-declared.mjs', ['--out', 'out-test']); }
+  catch { exited = 1; }
+  finally { rows.forEach((r, i) => { r.Severity = original[i]; }); writeFileSync(f, JSON.stringify(rows, null, 1)); }
+  if (!exited) throw new Error('check-declared printed a failure but exited 0 — a green exit on a broken world');
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {
