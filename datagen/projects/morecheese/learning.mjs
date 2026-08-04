@@ -10,7 +10,7 @@ import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
-import { yearsOf } from '../../engine/authoring.mjs';
+import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
 
 // topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
 // hardcoded 8, which is why 111 courses produced only 81 distinct names
@@ -57,7 +57,7 @@ export function buildLearning(cfg, { people, periods }) {
     // lockdown SPIKED online learning — post-calibration regime shift (tide, not boats)
     baselineShift: (y) => (R.regimes.covid.years.includes(y) ? R.regimes.covid.learningLogitBoost : 0), years,
     poolOf: (y) => coursesByYear.get(y)?.length ? people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 5, 15))))) : null,
-    scoreOf: (p, y) => L.effects['enroll.engagement'].beta * (p._thetaPath?.[y] ?? p._theta),
+    scoreOf: (p, y) => L.effects['enroll.engagement'].beta * thetaAt(p, y),
     target: L.params.enrollment.target,
     streamKey: (p, y) => `learn:${p.MemberNumber}:${y}`,
     spawn: (r, p, y) => {
@@ -70,7 +70,7 @@ export function buildLearning(cfg, { people, periods }) {
         out.push({
           EnrollKey: `ENR-${p.MemberNumber}-${course.CourseKey}-${k}`, MemberNumber: p.MemberNumber, CourseKey: course.CourseKey,
           EnrolledOn: iso(addDays(parseDate(course.StartDate), -r.int(3, 21))),
-          Status: null, CompletedOn: null, _theta: p._thetaPath?.[y] ?? p._theta,
+          Status: null, CompletedOn: null, _theta: thetaAt(p, y),
           _endBase: course.StartDate, _weeks: course.DurationWeeks, IsSharedDemo: true,
         });
       }

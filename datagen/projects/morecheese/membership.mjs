@@ -13,7 +13,7 @@
 import { rng, sigmoid, calibrateIntercept } from '../../engine/rng.mjs';
 import { recurringDecision } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../engine/dates.mjs';
-import { yearsOf } from '../../engine/authoring.mjs';
+import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { featureArrows } from '../../engine/features.mjs';
 
 export function runRenewalUnroll(cfg, { people, orgs }) {
@@ -90,7 +90,7 @@ export function runRenewalUnroll(cfg, { people, orgs }) {
     },
     scoreOf: (c, y, { meanT, sdT }) =>
       M.effects['renewal.tenure'].beta * ((c.tenureYrs - meanT) / sdT) +
-      M.effects['renewal.engagement'].beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting; heroes pinned)
+      M.effects['renewal.engagement'].beta * thetaAt(c.p, y) + // THIS year's engagement (drifting; heroes pinned)
       M.effects['renewal.employerEvent'].beta * c.employerEvent +
       declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0),
 
@@ -98,7 +98,7 @@ export function runRenewalUnroll(cfg, { people, orgs }) {
       if (c.p._hero || c.p._lapseYear != null || c.p._renewAlways) return; // pinned outcomes never train the arrows
       renewalEvents.push({
         year: y, tenureZ: (c.tenureYrs - meanT) / sdT,
-        theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta,
+        theta: thetaAt(c.p, y), prevTheta: thetaAt(c.p, y - 1), anchor: c.p._theta,
         employerEvent: c.employerEvent,
         // Declared-feature factors record under their DRIVER name — the part of the effect key
         // after the dot. The validator and the compiler's refinement step both read these

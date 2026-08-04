@@ -12,6 +12,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { stripInternals } from '../../engine/authoring.mjs';
 
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
 const MEETINGS_ENTITY = 'Committees: Meetings';
@@ -149,7 +150,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
     link(task, PEOPLE_ENTITY, 'person', memberNumber);
   }
 
-  for (const t of tasks) { delete t._assignee; delete t._dueIso; delete t._created; }
+  stripInternals(tasks); // generator-internals — never ship
   // ── shape ── assemble the named tables this domain owns
   return { taskTypes, tasks, taskAssignments, taskLinks };
 }

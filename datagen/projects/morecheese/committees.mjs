@@ -10,7 +10,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
-import { coverageOf, yearsOf } from '../../engine/authoring.mjs';
+import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
 
 /** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
 const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
@@ -54,7 +54,7 @@ export function buildCommittees(cfg, { people, periods }) {
     childOutcome({
       seed,
       items: eligible,
-      scoreOf: (p) => C.effects['volunteer.engagement'].beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
+      scoreOf: (p) => C.effects['volunteer.engagement'].beta * (thetaAt(p, parseDate(t.start).getUTCFullYear()))
         + (incumbents.has(p.MemberNumber) ? C.effects['volunteer.incumbency'].beta : 0),
       target: P.volunteerShare.target,
       streamKey: (p) => `committee-serve:${p.MemberNumber}:${t.start}`,
@@ -188,7 +188,7 @@ export function buildCommittees(cfg, { people, periods }) {
         childOutcome({
           seed,
           items: roster,
-          scoreOf: (m) => C.effects['attendance.engagement'].beta * (m.p._thetaPath?.[y] ?? m.p._theta),
+          scoreOf: (m) => C.effects['attendance.engagement'].beta * thetaAt(m.p, y),
           target: P.attendPresent.target,
           streamKey: (m) => `committee-att:${m.p.MemberNumber}:${meeting.MeetingKey}`,
           decide: (m, prob, r) => {

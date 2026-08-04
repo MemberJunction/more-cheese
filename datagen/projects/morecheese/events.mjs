@@ -15,7 +15,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
-import { yearsOf } from '../../engine/authoring.mjs';
+import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 // Calendar realism: draw any day of the month (incl. 29–31), then shape the weekday —
@@ -117,13 +117,13 @@ export function buildRegistrations(cfg, { people, periods, events }) {
   const confRegs = annualParticipation({
     seed, years, minPool: 6,
     poolOf: (y) => (confOf(y) ? activeOn(y) : []),
-    scoreOf: (p, y) => E.effects['conferenceAttendance.engagement'].beta * (p._thetaPath?.[y] ?? p._theta) + E.effects['conferenceAttendance.international'].beta * (p.Region === 'NA' ? 0 : 1),
+    scoreOf: (p, y) => E.effects['conferenceAttendance.engagement'].beta * thetaAt(p, y) + E.effects['conferenceAttendance.international'].beta * (p.Region === 'NA' ? 0 : 1),
     target: E.params.conferenceAttendance.target,
     streamKey: (p, y) => `conf:${p.MemberNumber}:${y}`,
     spawn: (r, p, y) => {
       const conf = confOf(y);
       if (!coveredOn(p.MemberNumber, conf.Date)) return null; // active July 1 ≠ covered July 15 — anniversary lapses in the gap
-      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -leadDaysFor(r, 'Conference'))), Attended: null, _class: 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true };
+      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -leadDaysFor(r, 'Conference'))), Attended: null, _class: 'paid', _theta: thetaAt(p, y), IsSharedDemo: true };
     },
   });
 
@@ -146,7 +146,7 @@ export function buildRegistrations(cfg, { people, periods, events }) {
       const CV = R.regimes.covid;
       const isCovid = CV.years.includes(y);
       const chanW = (ev) => !isCovid ? 1 : (ev.EventType === 'Webinar' ? (CV.virtualMultiplier ?? 1) : (CV.inPersonMultiplier ?? 1));
-      const mean = E.params.registrationsPerYear * Math.exp(E.effects['registrations.engagement'].beta * (p._thetaPath?.[y] ?? p._theta));
+      const mean = E.params.registrationsPerYear * Math.exp(E.effects['registrations.engagement'].beta * thetaAt(p, y));
       const k = r.negbin(mean, E.params.registrationDispersionK);
       const pool = eventsByYear.get(y).filter((e) => e.EventType !== 'Conference');
       const taken = new Set();
@@ -157,7 +157,7 @@ export function buildRegistrations(cfg, { people, periods, events }) {
         if (!ev) break;
         taken.add(ev.EventKey);
         if (!coveredOn(p.MemberNumber, ev.Date)) continue;
-        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -leadDaysFor(r, ev.EventType))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true });
+        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -leadDaysFor(r, ev.EventType))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: thetaAt(p, y), IsSharedDemo: true });
       }
     }
   }
@@ -177,8 +177,8 @@ export function buildRegistrations(cfg, { people, periods, events }) {
       const r = rng(seed, `upcoming:${p.MemberNumber}:${ev.EventKey}`);
       // the closer the event, the more of its eventual crowd has signed up by now
       const horizon = Math.max(0.15, 1 - daysOut / 150);
-      if (!r.bernoulli(pBase * Math.exp(E.effects['registrations.engagement'].beta * (p._thetaPath?.[releaseYear] ?? p._theta)) * horizon)) continue;
-      registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(release, -r.int(0, 30))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _future: true, _theta: p._thetaPath?.[releaseYear] ?? p._theta, IsSharedDemo: true });
+      if (!r.bernoulli(pBase * Math.exp(E.effects['registrations.engagement'].beta * thetaAt(p, releaseYear)) * horizon)) continue;
+      registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(release, -r.int(0, 30))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _future: true, _theta: thetaAt(p, releaseYear), IsSharedDemo: true });
     }
   }
 

@@ -81,7 +81,24 @@ for (const f of files) {
   }
 }
 
+// 4. A HANDWRITING HELPER WITH NO USERS is the failure mode this whole file exists to prevent, and
+// it has now happened twice. First: coverageOf lived private inside committees.mjs, so writing two
+// new domains I reinvented it twice as a slower linear scan. Second, worse: I extracted thetaAt and
+// adopted it at 16 sites, then a `git checkout --` while redoing something else silently reverted
+// every call site — leaving the helper exported, documented, committed, and called by nothing. The
+// suite stayed green and the output stayed byte-identical, because reverting to the original code
+// reproduces the original data exactly. Nothing could have caught it except this.
+const helperSrc = readFileSync(join(ROOT, 'engine', 'authoring.mjs'), 'utf8');
+const helpers = [...helperSrc.matchAll(/export function (\w+)/g)].map((m) => m[1]);
+const allGenerators = files.map((f) => readFileSync(join(DIR, f), 'utf8')).join('\n');
+const unused = helpers.filter((h) => !new RegExp(`\\b${h}\\(`).test(allGenerators));
+
 console.log(`generator contract — ${files.length} generators in '${project}'\n`);
+if (unused.length) {
+  console.log(`○ engine/authoring.mjs exports ${unused.length} helper(s) no generator calls: ${unused.join(', ')}`);
+  console.log('  Either adopt them or delete them. An unused helper is one somebody will rebuild worse,');
+  console.log('  and a helper whose call sites vanished is a change that never actually landed.\n');
+}
 if (hard.length) {
   console.log('❌ contract violations:\n');
   for (const h of hard) console.log(`  ${h}`);

@@ -14,6 +14,7 @@ import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { personNameFor, TOPONYMS } from './banks.mjs';
 import { emailFor } from './world.mjs';
+import { stripInternals, thetaAt } from '../../engine/authoring.mjs';
 
 /** survey/application submissions cluster in waking hours with a lunchtime and evening
  *  bump — a single 12:00Z stamp made the time-of-day chart one bar */
@@ -85,7 +86,7 @@ export function buildForms(cfg, { people, events, registrations }) {
       seed,
       items: attendees,
       baselineShift: covid ? R.regimes.covid.formsResponseLogitShift : 0, // virtual-year fatigue
-      scoreOf: (x) => F.response.arrows.engagement.beta * (personByKey.get(x.MemberNumber)._thetaPath?.[year] ?? personByKey.get(x.MemberNumber)._theta),
+      scoreOf: (x) => F.response.arrows.engagement.beta * thetaAt(personByKey.get(x.MemberNumber), year),
       target: F.response.rateTarget,
       streamKey: (x) => `formresp:${x.RegKey}`,
       decide: (x, prob, r) => {
@@ -96,7 +97,7 @@ export function buildForms(cfg, { people, events, registrations }) {
           ResponseKey: respKey, FormKey: 'post-conf-survey', VersionKey: 'post-conf-survey:1',
           DistributionKey: distKey, MemberNumber: x.MemberNumber, Status: 'Complete',
           SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T${submitTime(r)}`,
-          IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta, _covid: covid,
+          IsSharedDemo: true, _theta: thetaAt(p, year), _covid: covid,
         });
         dist.ResponseCount += 1;
       },
@@ -128,7 +129,7 @@ export function buildForms(cfg, { people, events, registrations }) {
       DistributionKey: distKey, MemberNumber: h.memberNumber, Status: 'Complete',
       SubmittedAt: `${iso(addDays(opens, r.int(1, F.response.submitDelayDaysMax)))}T${submitTime(r)}`,
       ...(attended ? {} : { SourceMetadata: JSON.stringify({ channel: 'email', note: 'responded via forwarded link (not on the attendee list)' }) }),
-      IsSharedDemo: true, _theta: p._thetaPath?.[year] ?? p._theta, _covid: R.regimes.covid.years.includes(year), _hero: true,
+      IsSharedDemo: true, _theta: thetaAt(p, year), _covid: R.regimes.covid.years.includes(year), _hero: true,
     });
     distByKey.get(distKey).ResponseCount += 1;
   }
@@ -170,7 +171,7 @@ export function buildForms(cfg, { people, events, registrations }) {
       { AnswerKey: `${resp.ResponseKey}:returning`, ResponseKey: resp.ResponseKey, QuestionKey: 'post-conf-survey:returning', BooleanValue: r.bernoulli(1 / (1 + Math.exp(-(A.returning.baseLogit + A.returning.engagementBeta * theta)))), IsSharedDemo: true },
     );
   }
-  for (const resp of formResponses) { delete resp._theta; delete resp._covid; delete resp._hero; } // latents — never ship
+  stripInternals(formResponses); // latents — never ship; the emitter refuses any that survive
 
   // ── decisions ── the Membership Application: anonymous public-intake responses
   // Applicants are NOT members: MemberNumber null, AnonymousSessionID set, identity lives
