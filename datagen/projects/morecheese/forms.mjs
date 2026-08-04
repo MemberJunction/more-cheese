@@ -15,6 +15,7 @@ import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { personNameFor, TOPONYMS } from './banks.mjs';
 import { emailFor } from './world.mjs';
 import { stripInternals, thetaAt } from '../../engine/authoring.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 /** survey/application submissions cluster in waking hours with a lunchtime and evening
  *  bump — a single 12:00Z stamp made the time-of-day chart one bar */
@@ -23,6 +24,15 @@ const submitTime = (r) => {
   return `${String(h).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
 };
 
+
+// ── row templates ── one template serves BOTH forms: the survey and the application differ only
+// in which form/page the questions belong to, which is scope, not shape. formQuestionOptions stays
+// handwritten — it is a nested projection over `q.options ?? []`, and that fallback is real.
+export const FORM_QUESTION_ROW = { row: {
+  QuestionKey: { fmt: '{formKey}:{item.key}' }, FormKey: { from: 'formKey' }, PageKey: { from: 'pageKey' },
+  QuestionType: { from: 'item.type' }, Prompt: { from: 'item.prompt' },
+  IsRequired: { from: 'item.required' }, DisplayOrder: { from: 'i' }, IsSharedDemo: true,
+} };
 
 export function buildForms(cfg, { people, events, registrations }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -34,10 +44,7 @@ export function buildForms(cfg, { people, events, registrations }) {
   const forms = [{ FormKey: 'post-conf-survey', Name: S.name, Description: S.description, Status: 'Published', RenderMode: 'Scroll', IsSharedDemo: true }];
   const formVersions = [{ VersionKey: 'post-conf-survey:1', FormKey: 'post-conf-survey', VersionNumber: 1, Status: 'Published', PublishedAt: `${R.history.startYear}-06-01T00:00:00Z`, IsSharedDemo: true }];
   const formPages = [{ PageKey: 'post-conf-survey:p1', FormKey: 'post-conf-survey', Title: S.page, DisplayOrder: 0, IsSharedDemo: true }];
-  const formQuestions = S.questions.map((q, i) => ({
-    QuestionKey: `post-conf-survey:${q.key}`, FormKey: 'post-conf-survey', PageKey: 'post-conf-survey:p1',
-    QuestionType: q.type, Prompt: q.prompt, IsRequired: q.required, DisplayOrder: i, IsSharedDemo: true,
-  }));
+  const formQuestions = projectRows(FORM_QUESTION_ROW, S.questions, { formKey: 'post-conf-survey', pageKey: 'post-conf-survey:p1' });
 
   // ── fixtures ── authored fixtures: the Membership Application (the anonymous intake)
   const APP = F.application;
@@ -48,10 +55,7 @@ export function buildForms(cfg, { people, events, registrations }) {
   formPages.push({ PageKey: `${APP_KEY}:p1`, FormKey: APP_KEY, Title: APP.page, DisplayOrder: 0, IsSharedDemo: true });
   const formQuestionOptions = [];
   APP.questions.forEach((q, i) => {
-    formQuestions.push({
-      QuestionKey: `${APP_KEY}:${q.key}`, FormKey: APP_KEY, PageKey: `${APP_KEY}:p1`,
-      QuestionType: q.type, Prompt: q.prompt, IsRequired: q.required, DisplayOrder: i, IsSharedDemo: true,
-    });
+    formQuestions.push(...projectRows(FORM_QUESTION_ROW, [q], { i, formKey: APP_KEY, pageKey: `${APP_KEY}:p1` }));
     (q.options ?? []).forEach((opt, j) => formQuestionOptions.push({
       OptionKey: `${APP_KEY}:${q.key}:${j}`, QuestionKey: `${APP_KEY}:${q.key}`,
       Label: opt, Value: opt, DisplayOrder: j, IsDefault: false, IsSharedDemo: true,

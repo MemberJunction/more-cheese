@@ -33,7 +33,7 @@ const NOT_A_GENERATOR = new Set([
   'index.mjs', 'hooks.mjs', 'banks.mjs', 'identity.mjs',
   'refs.mjs', 'presence.mjs', 'measurements.mjs', 'pipeline.mjs', 'seed-mapping.mjs',
 ]);
-const TAGS = ['const', 'from', 'fmt', 'pick', 'mix', 'chance', 'int', 'date', 'seq'];
+const TAGS = ['const', 'from', 'fromOptional', 'fmt', 'pick', 'mix', 'chance', 'int', 'date', 'seq'];
 const problems = [];
 let templates = 0;
 

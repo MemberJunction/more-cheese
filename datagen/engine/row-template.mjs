@@ -16,6 +16,9 @@
 //   'literal' / 42 / true / null          the value itself
 //   { const: v }                          the value itself, when it is an object/looks like a tag
 //   { from: 'member.MemberNumber' }       copy from scope via dot-path (undefined → throw)
+//   { fromOptional: 'item.lengthMonths' } copy, or null when absent — for columns that are
+//                                         NULLABLE BY DESIGN (a Rolling window has months or
+//                                         days, never both; an address has no Line2)
 //   { fmt: 'ENR-{member.MemberNumber}-{k}' }  interpolation; tokens are dot-paths ONLY
 //   { pick: 'ctx.pool' }                  r.pick over a scope array               (1 draw)
 //   { mix: 'ctx.mixes.kind' }             r.pickWeighted over a declared mix      (1 draw)
@@ -50,7 +53,7 @@
 
 import { iso, addDays, parseDate } from './dates.mjs';
 
-const TAGS = ['const', 'from', 'fmt', 'pick', 'mix', 'chance', 'int', 'date', 'seq'];
+const TAGS = ['const', 'from', 'fromOptional', 'fmt', 'pick', 'mix', 'chance', 'int', 'date', 'seq'];
 
 /** Render one row from a template, consuming draws from `r` in declaration order. */
 export function renderRow(r, spec, scope) {
@@ -83,6 +86,15 @@ function evalField(r, fs, s, at) {
   switch (tags[0]) {
     case 'const': return fs.const;
     case 'from': return resolve(s, fs.from, at);
+    // fromOptional is NOT a relaxation of the strict read — it is a DECLARATION that this column
+    // is nullable, which is a different statement. `?? null` scattered through code is invisible;
+    // a declared-nullable column is greppable, and every one of them can be listed. It stays
+    // narrow on purpose: absent → null. It cannot supply a non-null DEFAULT, because a defaulted
+    // read (`f.aggregation ?? 'Count'`) is domain judgement, and that row stays handwritten.
+    case 'fromOptional': {
+      const v = fs.fromOptional.split('.').reduce((o, k) => o?.[k], s);
+      return v === undefined ? null : v;
+    }
     case 'seq': return resolve(s, fs.seq, at);
     case 'fmt': return fs.fmt.replace(/\{([^}]+)\}/g, (_, p) => String(resolve(s, p, at)));
     case 'pick': return r.pick(resolve(s, fs.pick, at));
