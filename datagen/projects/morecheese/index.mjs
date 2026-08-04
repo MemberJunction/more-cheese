@@ -125,6 +125,21 @@ export function buildWorld(cfg) {
   return { people, orgs, periods, events, registrations, renewalEvents, money, learning, committees, forms, relationships, contacts, prospects, funnel, tasks, issues, programs, messaging, defects, motifs, platform, sonar };
 }
 
+/**
+ * THIS PROJECT'S UUID NAMESPACE — generated once with `uuidgen`, frozen forever.
+ *
+ * Deterministic IDs mean the same business key always mints the same UUID, which is what lets
+ * parent and child rows derive foreign keys independently with no lookups. The flip side is that
+ * two projects sharing a namespace would mint IDENTICAL UUIDs for overlapping keys, so each owns
+ * its own and never changes it: changing it changes every ID this project has ever shipped.
+ *
+ * It lives HERE, not in the engine. It used to be an entry in a NAMESPACES table inside
+ * engine/ids.mjs, which meant adding a project required editing the engine — and the engine's own
+ * error message said exactly that. A framework whose engine carries a list of its consumers is
+ * not a framework.
+ */
+export const UUID_NAMESPACE = '9b1dcbf2c05341e8a2f4d40e11ce66a1';
+
 // ─── THE PACK MAP (D9: cook once, portion last) ───────────────────────────────────────────────
 //
 // The world is cooked as one batch; this deals the finished rows into one folder per installable

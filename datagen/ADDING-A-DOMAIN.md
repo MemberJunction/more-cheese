@@ -101,10 +101,17 @@ the single most expensive mistake available to you, and the reason this document
 
 ## Step 4 — Register a UUID namespace *(new projects only)*
 
-Skip if you're adding a domain to MoreCheese. If this is a whole new project, add one line to
-`NAMESPACES` in `engine/ids.mjs` — `uuidgen` once, frozen forever. The loader binds it from the
-project name and **fails loudly** if it's missing, because two projects sharing a namespace mint
-identical UUIDs for overlapping keys.
+Skip if you're adding a domain to MoreCheese. If this is a whole new project, `uuidgen` once, strip
+the dashes, and export it from your project's `index.mjs`:
+
+```js
+export const UUID_NAMESPACE = '…32 hex chars…';   // frozen forever
+```
+
+The loader reads it from your project and **fails loudly** if it's missing or malformed, because two
+projects sharing a namespace mint identical UUIDs for overlapping keys. It lives in your project, not
+the engine — see [engine/README.md](engine/README.md) for the full list of what a project owes the
+engine and what it gets back.
 
 ## Step 5 — Write the generator
 

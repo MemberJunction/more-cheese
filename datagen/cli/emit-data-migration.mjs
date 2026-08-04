@@ -32,6 +32,10 @@ const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 // The MAPPING is the PROJECT's, not the engine's — loaded by name so this command knows no domain.
+// IDs are minted from business keys here, and nothing has composed a ruleset — bind the
+// project's own UUID namespace explicitly (see engine/config.mjs bindNamespace).
+const { bindNamespace } = await import('../engine/config.mjs');
+await bindNamespace(run.project);
 const { MAPPING, INSTALL_ORDER, PREAMBLE, POSTAMBLE, deliveryOf } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 
 // version: explicit --version, else the app's mj-app.json version (the shipped version of record).

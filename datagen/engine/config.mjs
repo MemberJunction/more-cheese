@@ -45,11 +45,29 @@ export async function loadProject(project = DEFAULT_PROJECT) {
   return await import(`../projects/${project}/index.mjs`);
 }
 
+/**
+ * Bind a project's UUID namespace WITHOUT composing its ruleset.
+ *
+ * The emitters read finished packs and mint IDs from business keys; they never load a ruleset, so
+ * they never went through loadRuleset's binding. That used to be covered by a fallback in
+ * engine/ids.mjs — "if exactly one namespace is registered, use it" — which only worked because the
+ * engine held the registry. Moving the namespace to the project (correctly) removed the thing that
+ * fallback read, and every emitter broke at once with the error telling them to call this.
+ *
+ * @param {string} project
+ */
+export async function bindNamespace(project = DEFAULT_PROJECT) {
+  const mod = await loadProject(project);
+  useNamespace(project, mod.UUID_NAMESPACE);
+}
+
 export async function loadRuleset(scenario, project = DEFAULT_PROJECT) {
-  // Bind the ID namespace from the project name before anything can mint an ID. Done here, in
-  // the loader, so a project cannot forget to do it and cannot borrow another project's space.
-  useNamespace(project);
-  const { hooks } = await loadProject(project);
+  // Bind the ID namespace before anything can mint an ID, from the value THE PROJECT declares.
+  // Done here, in the loader, so a project cannot forget to and cannot borrow another's space —
+  // and the engine never holds a table of which namespace belongs to whom.
+  const mod = await loadProject(project);
+  useNamespace(project, mod.UUID_NAMESPACE);
+  const { hooks } = mod;
   const dir = join(projectDir(project), 'ruleset/modules');
   const index = JSON.parse(readFileSync(join(dir, 'index.json'), 'utf8'));
   const ruleset = {};

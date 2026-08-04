@@ -11,37 +11,43 @@ import { createHash } from 'node:crypto';
 // hazard is procedural: deterministic IDs mean a cloned app reusing a namespace with
 // overlapping business keys would mint the SAME UUIDs by construction.
 //
-// Framework rule: **one namespace per project.** A project registers its own constant here
-// (uuidgen once) and never changes it after first push — changing it changes every ID it has
-// ever shipped.
+// Framework rule: **one namespace per project**, and THE PROJECT OWNS IT. A project exports
+// `UUID_NAMESPACE` from its index.mjs (uuidgen once) and never changes it after first push —
+// changing it changes every ID it has ever shipped.
 //
-// This used to be a single module-level const, which made the rule unenforceable: FRAMEWORK.md
-// promised that "a second domain passes its own", and there was no parameter to pass it
-// through. A second project would silently mint MoreCheese's ID space — exactly the hazard
-// described above, in the file warning about it.
-const NAMESPACES = {
-  // Belongs to MoreCheese, forever. Do not reuse, do not change.
-  morecheese: '9b1dcbf2c05341e8a2f4d40e11ce66a1',
-};
+// It used to be a registry in THIS FILE, keyed by project name, and that was wrong in a way worth
+// recording: the engine held a table of every project's ID space, so standing up a second project
+// meant editing the engine — and this module's own error message said so, instructing authors to
+// "add it to NAMESPACES in engine/ids.mjs". An engine that must be edited to add a consumer is not
+// a framework, it is a library with a hardcoded caller list. The registry was itself the fix for an
+// earlier version that had one module-level const; both versions kept the value on the wrong side
+// of the boundary.
+//
+// The hazard the rule guards against is unchanged: deterministic IDs mean two projects sharing a
+// namespace mint the SAME UUIDs for overlapping business keys.
 
+/** namespaces bound this run, project → Buffer. Populated by useNamespace, never by the engine. */
+const bound = new Map();
 let active = null;
 
 /**
- * Bind the ID namespace for this run, from the project name. The loader calls this, so a project
- * cannot forget to; entry points that mint IDs without loading a ruleset (the emitters) may call
- * it too.
+ * Bind the ID namespace for this run. The loader calls this with the project's own declared
+ * namespace, so a project cannot forget to and cannot borrow another project's space.
  * @param {string} project
+ * @param {string} hex 32 hex chars — the project's `UUID_NAMESPACE`
  */
-export function useNamespace(project) {
-  const hex = NAMESPACES[project];
-  if (!hex) {
+export function useNamespace(project, hex) {
+  if (!hex || !/^[0-9a-fA-F]{32}$/.test(hex)) {
     throw new Error(
-      `project '${project}' has no UUID namespace. Deterministic IDs mean two projects sharing a `
-      + `namespace mint the SAME UUIDs for overlapping business keys. Generate one with \`uuidgen\`, `
-      + `add it to NAMESPACES in engine/ids.mjs, and never change it after the first push.`,
+      `project '${project}' did not declare a valid UUID_NAMESPACE (got ${hex === undefined ? 'nothing' : `'${hex}'`}). `
+      + 'Deterministic IDs mean two projects sharing a namespace mint the SAME UUIDs for overlapping '
+      + `business keys. Generate one with \`uuidgen\` (strip the dashes), export it as UUID_NAMESPACE `
+      + `from projects/${project}/index.mjs, and never change it after the first push.`,
     );
   }
-  active = Buffer.from(hex, 'hex');
+  const buf = Buffer.from(hex, 'hex');
+  bound.set(project, buf);
+  active = buf;
 }
 
 /**
@@ -56,12 +62,15 @@ export function useNamespace(project) {
  */
 function resolve() {
   if (active) return active;
-  const names = Object.keys(NAMESPACES);
-  if (names.length === 1) return Buffer.from(NAMESPACES[names[0]], 'hex');
+  if (bound.size === 1) return [...bound.values()][0];
   throw new Error(
-    `uuidFor called with no namespace bound, and ${names.length} projects are registered `
-    + `(${names.join(', ')}). Whichever entry point reached here must call useNamespace(project) `
-    + `first — guessing would mint another project's IDs.`,
+    bound.size === 0
+      ? 'uuidFor called before any namespace was bound. The entry point that reached here must load '
+        + 'a project (which binds it) or call useNamespace(project, hex) itself — there is nothing to '
+        + 'guess from, and guessing would mint IDs in the wrong space.'
+      : `uuidFor called with no namespace bound, and ${bound.size} projects are bound this run `
+        + `(${[...bound.keys()].join(', ')}). Whichever entry point reached here must call `
+        + 'useNamespace(project, hex) first — guessing would mint another project\'s IDs.',
   );
 }
 

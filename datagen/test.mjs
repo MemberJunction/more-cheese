@@ -495,6 +495,34 @@ step('row templates: fixture dice, dead paths, multi-tag and integer keys are al
   } finally { writeFileSync(f, original); }
 });
 
+// 0m-iii. THE ENGINE BOUNDARY — the claim "engine/ is reusable" made falsifiable. Both planted
+// defects are ones this repo actually had or nearly had: a static import of project code, and a
+// project-specific VALUE living in the engine (engine/ids.mjs held a table of every project's UUID
+// namespace, and told new authors to add theirs to it). The second is the one a plain import lint
+// would miss, which is why the checker looks for project names in code too.
+step('engine boundary holds (static import and a project-named value are both caught)', () => {
+  run('check-engine-boundary.mjs', []);
+  const probe = (file, mutate, mention, what) => {
+    const f = join(HERE, 'engine', file);
+    const original = readFileSync(f, 'utf8');
+    try {
+      writeFileSync(f, mutate(original));
+      let out = '';
+      try { run('check-engine-boundary.mjs', []); } catch (e) { out = String(e.stdout ?? ''); }
+      if (!out.includes(mention)) throw new Error(`${what} was NOT caught. Looked for: ${mention}`);
+    } finally { writeFileSync(f, original); }
+  };
+  probe('ids.mjs', (s) => s.replace('const bound = new Map();',
+    "const bound = new Map();\nconst NAMESPACES = { morecheese: '9b1dcbf2c05341e8a2f4d40e11ce66a1' };"),
+  "names the project 'morecheese' in code", 'a project value in the engine');
+  probe('packs.mjs', (s) => {
+    const lines = s.split('\n');
+    const i = lines.reduce((acc, l, j) => (l.startsWith('import ') ? j : acc), 0);
+    lines.splice(i + 1, 0, "import { NOT_SHIPPED } from '../projects/morecheese/index.mjs';");
+    return lines.join('\n');
+  }, 'static import from projects/', 'a static import of project code');
+});
+
 // 0n. THE FRAMEWORK METRIC — advisory. Prints declarations:code so the trend is visible in every
 // suite run instead of being a claim in a document. The step fails only if the tool itself
 // crashes; the ratio is information, not a gate — gating on it would invite gaming the classifier.
@@ -634,6 +662,9 @@ step('frozen migration matches generator shapes (morecheese tables)', () => {
 //   MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <reference-install>
 // See datagen/SCHEMA-CONTRACT.md.
 step('seed assumptions match the dependency-schema contract', async () => {
+  // the mapping mints IDs, and nothing here composes a ruleset — bind the project's own namespace
+  const { bindNamespace } = await import('./engine/config.mjs');
+  await bindNamespace('morecheese');
   const { MAPPING, PREAMBLE } = await import('./projects/morecheese/seed-mapping.mjs');
   const contract = JSON.parse(readFileSync(join(HERE, 'contract', 'schema-contract.json'), 'utf8'));
   const load = (pack, table) => JSON.parse(readFileSync(join(HERE, 'out', 'packs', pack, `${table}.json`), 'utf8'));
