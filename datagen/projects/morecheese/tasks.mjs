@@ -13,12 +13,20 @@ import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { stripInternals } from '../../engine/authoring.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
 const MEETINGS_ENTITY = 'Committees: Meetings';
 
 /** a time inside the working day — staff don't file everything at exactly 17:00Z */
 const workTime = (r) => `${String(r.int(8, 17)).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
+
+// ── row templates ── pure data; column order is pack serialization order (byte identity)
+export const TASK_TYPE_ROW = { row: {
+  TypeKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  Description: { from: 'item.description' }, DefaultPriority: { from: 'item.priority' },
+  IsActive: true, IsSharedDemo: true,
+} };
 
 export function buildTasks(cfg, { people, periods, committees }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -27,9 +35,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
   const releaseIso = iso(release);
   const personByNum = new Map(people.map((p) => [p.MemberNumber, p]));
 
-  const taskTypes = T.catalog.types.map((t) => ({
-    TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true,
-  }));
+  const taskTypes = projectRows(TASK_TYPE_ROW, T.catalog.types);
 
   // roster lookup: committee-term key → membership rows
   const rosterByTerm = new Map();

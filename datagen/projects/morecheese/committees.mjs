@@ -11,9 +11,29 @@ import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
 import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 /** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
 const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
+
+// ── row templates ── pure data; column order is pack serialization order (byte identity)
+export const COMMITTEE_TYPE_ROW = { row: {
+  TypeKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  IsStandards: { from: 'item.isStandards' }, DefaultTermMonths: { from: 'item.termMonths' },
+  IsSharedDemo: true,
+} };
+export const COMMITTEE_ROLE_ROW = { row: {
+  RoleKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  IsOfficer: { from: 'item.isOfficer' }, IsVotingRole: { from: 'item.isVoting' },
+  Sequence: { from: 'item.sequence' }, IsSharedDemo: true,
+} };
+// item.type is a REFERENCE to a catalog.types entry (not a matched string), so 'item.type.name'
+// on a mistyped type is a loud template-path throw, keeping the original crash-not-silence rule
+export const COMMITTEE_ROW = { row: {
+  CommitteeKey: { from: 'item.name' }, Name: { from: 'item.name' }, TypeKey: { from: 'item.type.name' },
+  MissionStatement: { from: 'item.mission' }, Status: 'Active', FormationDate: { from: 'item.formed' },
+  IsSharedDemo: true,
+} };
 
 export function buildCommittees(cfg, { people, periods }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -25,11 +45,11 @@ export function buildCommittees(cfg, { people, periods }) {
   const coveredOn = coverageOf(periods);
 
   // ── fixtures ── fixtures: types, roles, committees, terms (authored, not drawn)
-  const types = C.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, IsStandards: t.isStandards, DefaultTermMonths: t.termMonths, IsSharedDemo: true }));
-  const roles = C.catalog.roles.map((r) => ({ RoleKey: r.name, Name: r.name, IsOfficer: r.isOfficer, IsVotingRole: r.isVoting, Sequence: r.sequence, IsSharedDemo: true }));
+  const types = projectRows(COMMITTEE_TYPE_ROW, C.catalog.types);
+  const roles = projectRows(COMMITTEE_ROLE_ROW, C.catalog.roles);
   // c.type is a REFERENCE to a catalog.types entry, not a string to be matched — so a
   // mistyped type is a load-time crash, not a committee that quietly gets no type.
-  const committees = C.catalog.committees.map((c) => ({ CommitteeKey: c.name, Name: c.name, TypeKey: c.type.name, MissionStatement: c.mission, Status: 'Active', FormationDate: c.formed, IsSharedDemo: true }));
+  const committees = projectRows(COMMITTEE_ROW, C.catalog.committees);
   const terms = [];
   for (const c of C.catalog.committees) for (const t of C.catalog.terms) {
     // a committee has no term before it existed — the Education Committee (formed 2016)

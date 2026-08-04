@@ -462,6 +462,49 @@ step('every dice stream belongs to one decision (and a shared stream is caught)'
   } finally { writeFileSync(f, original); }
 });
 
+// 0m-ii. ROW TEMPLATES. The executor's guarantees are structural, and each one is proven here by
+// planting its violation: a fixture template that tries to draw, a template path that no longer
+// resolves (the moved-key trap, made loud), a multi-tag spec (ambiguous draw order), and — via
+// the lint — an integer-like key, which JS silently sorts FIRST, reordering columns with no error.
+step('row templates: fixture dice, dead paths, multi-tag and integer keys are all caught', async () => {
+  const { renderRow, projectRows } = await import('./engine/row-template.mjs');
+  const { rng } = await import('./engine/rng.mjs');
+  const r = rng('42', 'template-probe');
+
+  // clean render works, in declared column order
+  const row = renderRow(r, { row: { AKey: { fmt: 'A-{item.id}' }, Name: { from: 'item.name' }, Fixed: true } }, { item: { id: 7, name: 'x' } });
+  if (row.AKey !== 'A-7' || row.Name !== 'x' || Object.keys(row).join() !== 'AKey,Name,Fixed') throw new Error('clean render broken');
+
+  const mustThrow = (what, fn, mention) => {
+    try { fn(); } catch (e) { if (!String(e.message).includes(mention)) throw new Error(`${what}: wrong message: ${e.message}`); return; }
+    throw new Error(`${what} was NOT caught`);
+  };
+  mustThrow('a fixture that draws', () => projectRows({ row: { K: { int: [1, 2] } } }, [{}]), 'has no dice');
+  mustThrow('a dead template path', () => renderRow(r, { row: { K: { from: 'item.gone' } } }, { item: {} }), 'resolved to undefined');
+  mustThrow('a multi-tag spec', () => renderRow(r, { row: { K: { from: 'item.id', int: [1, 2] } } }, { item: { id: 1 } }), 'exactly one tag');
+  mustThrow('a computed int bound', () => renderRow(r, { row: { K: { int: [1, 'item.n'] } } }, { item: { n: 3 } }), 'CONSTANTS');
+
+  // the lint: plant a template with an integer-like key in a real generator, expect the check to name it
+  const f = join(HERE, 'projects/morecheese/tasks.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    writeFileSync(f, original.replace("export const TASK_TYPE_ROW = { row: {", "export const ZZ_PROBE_ROW = { row: { '0': true, } };\nexport const TASK_TYPE_ROW = { row: {"));
+    let out = '';
+    try { run('check-row-templates.mjs', []); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!out.includes('integer-like key')) throw new Error('the template lint MISSED an integer-like key');
+  } finally { writeFileSync(f, original); }
+});
+
+// 0n. THE FRAMEWORK METRIC — advisory. Prints declarations:code so the trend is visible in every
+// suite run instead of being a claim in a document. The step fails only if the tool itself
+// crashes; the ratio is information, not a gate — gating on it would invite gaming the classifier.
+step('framework metric (advisory: declarations : code)', () => {
+  const out = run('measure-framework.mjs', []);
+  const line = out.split('\n').find((l) => l.includes('declarations : code'));
+  if (!line) throw new Error('measure-framework.mjs produced no ratio line');
+  console.log(`   ${line.trim()}`);
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

@@ -11,6 +11,14 @@ import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { TOPONYMS } from './banks.mjs';
 import { iso, addDays, addYears, parseDate } from '../../engine/dates.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
+
+// ── row templates ── strict reads: the old `description ?? null` was dead code (every cert has
+// one), and dead fallbacks are how renames become silent nulls — the template read throws instead
+export const CERT_ROW = { row: {
+  CertKey: { from: 'item.key' }, Name: { from: 'item.name' },
+  Description: { from: 'item.description' }, ValidYears: { from: 'item.validYears' }, IsSharedDemo: true,
+} };
 
 export function buildPrograms(cfg, { people, periods, learning }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -19,9 +27,7 @@ export function buildPrograms(cfg, { people, periods, learning }) {
   const releaseIso = iso(release);
 
   // ── fixtures ── certifications
-  const certifications = PR.catalog.certifications.map((c) => ({
-    CertKey: c.key, Name: c.name, Description: c.description ?? null, ValidYears: c.validYears, IsSharedDemo: true,
-  }));
+  const certifications = projectRows(CERT_ROW, PR.catalog.certifications);
   const completers = [...new Set(learning.enrollments.filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber))]
     .map((m) => people.find((p) => p.MemberNumber === m)).filter((p) => p && !p._hero);
   const memberCertifications = [];

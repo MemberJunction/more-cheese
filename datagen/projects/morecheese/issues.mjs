@@ -8,10 +8,23 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 // severity mixes are keyed by ticket type with spaces removed ('Data Correction' →
 // severityDataCorrection), so each mix stays a flat map of level → weight
 const severityKey = (type) => 'severity' + String(type).replace(/\s+/g, '');
+
+// ── row templates ── pure data; column order is pack serialization order (byte identity)
+export const ISSUE_TYPE_ROW = { row: {
+  TypeKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  Description: { from: 'item.description' }, DefaultPriority: { from: 'item.priority' },
+  IsActive: true, IsSharedDemo: true,
+} };
+export const ISSUE_STATUS_ROW = { row: {
+  StatusKey: { from: 'item.name' }, Name: { from: 'item.name' }, Sequence: { from: 'item.sequence' },
+  IsDefault: { from: 'item.isDefault' }, IsTerminal: { from: 'item.isTerminal' },
+  ColorCode: { from: 'item.color' }, IsSharedDemo: true,
+} };
 
 export function buildIssues(cfg, { people, orgs, events, registrations, money, committees }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -21,8 +34,8 @@ export function buildIssues(cfg, { people, orgs, events, registrations, money, c
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
   const typeDefault = new Map(I.catalog.types.map((t) => [t.name, t.priority]));
 
-  const issueTypes = I.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true }));
-  const issueStatuses = I.catalog.statuses.map((s) => ({ StatusKey: s.name, Name: s.name, Sequence: s.sequence, IsDefault: s.isDefault, IsTerminal: s.isTerminal, ColorCode: s.color, IsSharedDemo: true }));
+  const issueTypes = projectRows(ISSUE_TYPE_ROW, I.catalog.types);
+  const issueStatuses = projectRows(ISSUE_STATUS_ROW, I.catalog.statuses);
 
   const drafts = []; // { key, type, title, reporter, sourceEntityName, sourceRefKind, sourceRefKey, created, priority }
 

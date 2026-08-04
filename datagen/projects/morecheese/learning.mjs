@@ -11,9 +11,28 @@ import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
 import { thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { renderRow } from '../../engine/row-template.mjs';
 
 // topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
 // hardcoded 8, which is why 111 courses produced only 81 distinct names
+
+// ── row templates ── the enrollment row. The course PICK stays in the closure, deliberately:
+// the handwritten order is pick → coverage guard → date draw, so a filtered-out course consumes
+// the pick and NOT the date. A template rendering the whole row would draw the date for rows the
+// guard then discards, shifting every later draw on the stream — byte identity is why the draw
+// that feeds a guard cannot move into the template.
+export const ENROLLMENT_ROW = { row: {
+  EnrollKey: { fmt: 'ENR-{member.MemberNumber}-{course.CourseKey}-{k}' },
+  MemberNumber: { from: 'member.MemberNumber' },
+  CourseKey: { from: 'course.CourseKey' },
+  EnrolledOn: { date: { anchor: 'course.StartDate', offset: { dist: 'uniformDays', min: 3, max: 21, sign: -1 } } },
+  Status: null,
+  CompletedOn: null,
+  _theta: { from: 'theta' },
+  _endBase: { from: 'course.StartDate' },
+  _weeks: { from: 'course.DurationWeeks' },
+  IsSharedDemo: true,
+} };
 
 export function buildLearning(cfg, { people, periods }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -67,12 +86,7 @@ export function buildLearning(cfg, { people, periods }) {
       for (let k = 0; k < n; k++) {
         const course = r.pick(pool);
         if (!coveredOn(p.MemberNumber, course.StartDate)) continue;
-        out.push({
-          EnrollKey: `ENR-${p.MemberNumber}-${course.CourseKey}-${k}`, MemberNumber: p.MemberNumber, CourseKey: course.CourseKey,
-          EnrolledOn: iso(addDays(parseDate(course.StartDate), -r.int(3, 21))),
-          Status: null, CompletedOn: null, _theta: thetaAt(p, y),
-          _endBase: course.StartDate, _weeks: course.DurationWeeks, IsSharedDemo: true,
-        });
+        out.push(renderRow(r, ENROLLMENT_ROW, { member: p, course, k, theta: thetaAt(p, y) }));
       }
       return out;
     },

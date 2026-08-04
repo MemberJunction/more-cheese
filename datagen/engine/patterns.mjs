@@ -10,6 +10,7 @@
 // byte-for-byte. That equality is the migration gate for every module that moves here.
 
 import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
+import { drawOffsetDays } from './row-template.mjs';
 
 /**
  * annualParticipation — per year: an eligible pool faces a calibrated yes/no; participants
@@ -142,20 +143,9 @@ export function derivedTransaction(opts) {
   }
 }
 
-function drawOffsetDays(r, spec) {
-  switch (spec.dist) {
-    case 'const':
-      return spec.days ?? 0;
-    case 'uniformDays':
-      return (spec.sign ?? 1) * r.int(spec.min, spec.max);
-    case 'lognormalDays': {
-      const raw = Math.round(r.lognormal(Math.log(spec.medianDays), spec.sigma));
-      return Math.min(spec.capDays ?? Infinity, Math.max(spec.minDays ?? 1, raw));
-    }
-    default:
-      throw new Error(`derivedTransaction: unknown offset dist '${spec.dist}'`);
-  }
-}
+// drawOffsetDays moved to row-template.mjs: the timing vocabulary and the template vocabulary
+// are the SAME interpreter on purpose — two copies would drift, and a Math.round moving between
+// them would silently shift every payment date. The move was byte-gated like any refactor.
 
 /**
  * childOutcome — per existing row: a calibrated outcome. (Instances: course completion +

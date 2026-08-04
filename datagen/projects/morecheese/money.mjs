@@ -14,6 +14,14 @@
 import { rng } from '../../engine/rng.mjs';
 import { derivedTransaction } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
+
+// ── row templates ── the catalogue products; the tier/event products stay handwritten because
+// their keys are COMPUTED (toUpperCase) and expressions in templates are the DSL-creep line
+export const PRODUCT_ROW = { row: {
+  ProductKey: { from: 'item.key' }, Name: { from: 'item.name' },
+  ProductType: { from: 'item.type' }, UnitPrice: { from: 'item.price' }, IsSharedDemo: true,
+} };
 
 export function buildMoney(cfg, { people, periods, events, registrations, programs }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -31,9 +39,7 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
   }
   // the rest of what an association actually sells — exam fees, competition entries,
   // publications, sponsorship, merchandise, the job board, donations
-  for (const c of O.catalog.products) {
-    products.push({ ProductKey: c.key, Name: c.name, ProductType: c.type, UnitPrice: c.price, IsSharedDemo: true });
-  }
+  products.push(...projectRows(PRODUCT_ROW, O.catalog.products));
   const priceOf = new Map(products.map((p) => [p.ProductKey, p.UnitPrice]));
 
   // Catalogue prices are CURRENT. A line is charged the price of ITS year, so a 2014 order

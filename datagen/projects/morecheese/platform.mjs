@@ -14,8 +14,20 @@
 // notifications, record changes. Never __mj entity-definition rows (CodeGen owns those).
 
 import { rng } from '../../engine/rng.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
+
+// ── row templates ── the staff USER row stays handwritten: its Email is computed
+// (lowercase + strip), and computed values are generator work, not template work
+export const USER_ROLE_ROW = { row: {
+  RoleKey: { fmt: '{item.key}:UI' }, UserKey: { from: 'item.key' },
+} };
+export const QUERY_ROW = { row: {
+  QueryKey: { from: 'item.key' }, Name: { from: 'item.name' },
+  UserQuestion: { from: 'item.userQuestion' }, Description: { from: 'item.description' },
+  SQL: { from: 'item.sql' },
+} };
 
 export function buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships, competitionEntries: programsEntries }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -32,7 +44,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     Name: `${s.first} ${s.last}`,
     Email: `${s.first}.${s.last}`.toLowerCase().replace(/[^a-z0-9.]/g, '') + `@${P.params.emailDomain}`,
   }));
-  const userRoles = P.catalog.staff.map((s) => ({ RoleKey: `${s.key}:UI`, UserKey: s.key }));
+  const userRoles = projectRows(USER_ROLE_ROW, P.catalog.staff);
 
   // ── decisions ── computed facts (the tokens conversations may cite)
   const lastPeriod = new Map();
@@ -75,9 +87,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     }),
     FilterState: JSON.stringify({ logic: 'and', filters: [] }),
   }));
-  const queries = P.catalog.queries.map((q) => ({
-    QueryKey: q.key, Name: q.name, UserQuestion: q.userQuestion, Description: q.description, SQL: q.sql,
-  }));
+  const queries = projectRows(QUERY_ROW, P.catalog.queries);
 
   // ── decisions ── conversations (Skip-style; the assistant only says computed truths)
   const conversations = [];
