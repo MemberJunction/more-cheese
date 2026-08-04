@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MAPPING, PREAMBLE } from '../engine/seed-mapping.mjs';
+
 import { extractClaims, parseCheckValues } from '../engine/contract.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -27,6 +27,11 @@ if (!DB) throw new Error('--db <database> is required');
 if (!PASSWORD) throw new Error('set MJ_SA_PASSWORD in the environment (never hard-code it)');
 
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
+
+// The MAPPING is the PROJECT's — the claims we make about a dependency schema are ours, not the
+// engine's.
+const project = args.project ?? 'morecheese';
+const { MAPPING, PREAMBLE } = await import(`../projects/${project}/seed-mapping.mjs`);
 const claims = extractClaims({ MAPPING, PREAMBLE, load });
 
 // which tables + lookups to introspect — exactly what we depend on, nothing more

@@ -7,6 +7,10 @@
 //
 // The two halves of the authoring surface are typed in two different places, on purpose:
 //   • the ruleset (JSON)  → engine/ruleset.schema.json, live in the editor via .vscode
+//
+// DOMAIN types live with their project (projects/<name>/types.d.ts). This file used to carry
+// MoreCheese's CommitteeBlock, PlatformBlock and Hero, which is the same violation as the seed
+// mapping: a shape naming committees and member numbers is not framework.
 //   • the generators (JS) → this file, via JSDoc @param annotations in engine/*.mjs
 //
 // Keep both honest: ruleset.schema.json is executed against all real modules by
@@ -261,53 +265,6 @@ export interface Arrow {
   label?: string;
 }
 
-/** A pinned person whose story a demo script can rely on. */
-export interface Hero {
-  memberNumber: string;
-  first: string;
-  last: string;
-  title?: string | null;
-  employerName?: string | null;
-  segment?: string;
-  region?: string;
-  city?: string;
-  state?: string;
-  lat?: number;
-  lon?: number;
-  /** Pinned engagement dial — never drawn. */
-  theta?: number;
-  /** Pinned affluence dial. */
-  phi?: number;
-  /** A pinned engagement ARC keyed by year, for a story that is a trajectory. */
-  thetaByYear?: Record<string, number>;
-  tier?: string;
-  cycleType?: 'calendar' | 'anniversary';
-  autoRenew?: boolean;
-  joinDate?: string;
-  joinYearsAgo?: number;
-  anniversaryOffsetDays?: number;
-  joinDaysBeforeRelease?: number;
-  lapseYear?: number;
-  employerEvent?: { year: number; kind: string };
-  committees?: { committee: string; role?: string; terms: readonly string[] }[];
-  issues?: { type: string; title: string; daysBeforeRelease: number; detail?: string }[];
-  certifications?: { key: string; status: string; enrolledOn?: string; awardedOn?: string }[];
-  competition?: Record<string, unknown>;
-  advocacy?: Record<string, unknown>;
-  staleEmployer?: { trueEmployerName: string; monthsAgo: number };
-  /** Assertions the VALIDATOR enforces. Add one for every fact your demo says out loud. */
-  pins?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// The four-section shape, for ruleset modules written as .mjs.
-//
-// This is the framework contract a block author works against. It answers, without reading
-// any generator source: what sections exist, what goes in each, which fields a thing must
-// have, and which numbers the validator will hold you to.
-// ─────────────────────────────────────────────────────────────────────────────
-
 /**
  * A number the VALIDATOR enforces. Writing the pair instead of a bare number is how you say
  * "this is a promise about the output, not just a knob" — and it is visible on the page,
@@ -341,101 +298,6 @@ export interface Block<Catalog = Record<string, unknown[]>, Params = Record<stri
   mixes?: Record<string, Mix>;
 }
 
-export interface CommitteeType {
-  name: string;
-  /** Standards bodies get the technical-review treatment in the app. */
-  isStandards: boolean;
-  termMonths: number;
-}
-
-export interface CommitteeRole {
-  name: string;
-  /** Officers are the pool issues get assigned to. */
-  isOfficer: boolean;
-  isVotingRole?: boolean;
-  isVoting: boolean;
-  /** Display order on a roster. Member sits at 100 so officer roles can be added above it. */
-  sequence: number;
-}
-
-export interface Committee {
-  name: string;
-  /** A REFERENCE to a catalog.types entry — not a string to be matched. */
-  type: CommitteeType;
-  /** Load-bearing: a committee gets no terms and no meetings before it existed. */
-  formed: string;
-  mission: string;
-}
-
-export interface Term {
-  name: string;
-  start: string;
-  end: string;
-}
-
-export interface AgendaItem {
-  name: string;
-  type: 'Information' | 'Report' | 'Discussion' | 'Vote';
-  minutes: number;
-}
-
-/**
- * The platform block — the worked example of a block that uses only TWO of the four parts.
- * Nothing here is decided by dice, so `effects` and `mixes` are simply absent. Note that
- * `params` carries a string and a group of flags: a param is anything you set, not only
- * anything you count.
- */
-export type PlatformBlock = Block<
-  {
-    staff: { key: string; first: string; last: string; title: string }[];
-    sharedViews: Record<string, unknown>[];
-    queries: Record<string, unknown>[];
-    conversations: Record<string, unknown>[];
-    /** One entry per staff persona — a demo signs in as one of them. */
-    favorites: { owner: string; memberNumbers: string[] }[];
-    lists: Record<string, unknown>[];
-    notifications: Record<string, unknown>[];
-  },
-  {
-    /** Reserved .example TLD — undeliverable by construction. */
-    emailDomain: string;
-    /** Which back-dated audit trails to forge. */
-    recordChanges: Record<string, boolean>;
-  }
->;
-
-/** The committees block — the worked example of the four-section shape. */
-export type CommitteeBlock = Block<
-  {
-    types: CommitteeType[];
-    roles: CommitteeRole[];
-    committees: Committee[];
-    terms: Term[];
-    standingAgenda: AgendaItem[];
-    motionTopics: string[];
-  },
-  {
-    /** Share of covered members who serve. Enforced. */
-    volunteerShare: TargetPair;
-    /** Bylaw floor: a chair does not run a committee of one. */
-    minRosterPerTerm: number;
-    /** A returning member usually returns to the same committee. */
-    sameCommitteeShare: number;
-    meetingsStartYear: number;
-    meetingsPerYear: number;
-    /** Future Scheduled meetings per committee, so the app's "upcoming" view isn't empty. */
-    upcomingPerCommittee: number;
-    /** Meeting attendance rate. Enforced. */
-    attendPresent: TargetPair;
-    excusedShareOfAbsent: number;
-    motionsPerMeeting: number;
-    contentiousShare: number;
-  }
-> & {
-  effects: Record<'volunteer.engagement' | 'volunteer.incumbency' | 'attendance.engagement', Arrow>;
-  mixes: { vote: Mix; voteContentious: Mix };
-};
-
 /**
  * The composed ruleset: every module merged, `$comment` keys stripped, scenario overrides
  * applied. Blocks are typed loosely here on purpose — a block gains a real type when it
@@ -446,7 +308,9 @@ export interface Ruleset {
   version?: string;
   scale?: { members: number };
   history?: { startYear: number; conferenceMonth?: number; conferenceDay?: number };
-  heroes?: Hero[];
+  /** Pinned entities, if the project has them. Their SHAPE is the project's — see
+   * projects/<name>/types.d.ts. */
+  heroes?: Record<string, any>[];
   statusMix?: Target & { target: number[] };
   [block: string]: any;
 }

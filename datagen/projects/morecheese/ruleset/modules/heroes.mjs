@@ -15,7 +15,7 @@
 //
 // See datagen/CONTRACT.md. Values only — no clock, no randomness, no I/O, no functions.
 
-/** @type {{ heroes: import('../../../../engine/types.js').Hero[] }} */
+/** @type {{ heroes: import('../../types.js').Hero[] }} */
 export default {
   heroes: [
     // issuesNote: cross-app footprint (2026-07-21): flagship heroes each carry an authored issue + a

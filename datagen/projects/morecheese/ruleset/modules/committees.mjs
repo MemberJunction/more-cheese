@@ -21,7 +21,7 @@
 // Math.random(). Same spec + same seed must always produce byte-identical output, and
 // `node cli/check-ruleset.mjs` fails the build if this file can do anything else.
 
-/** @typedef {import('../../../../engine/types.js').CommitteeBlock} CommitteeBlock */
+/** @typedef {import('../../types.js').CommitteeBlock} CommitteeBlock */
 
 // Committee types. Referenced below by identity, not by re-typing the name — a typo becomes
 // a crash at load instead of a committee that silently never gets seats.

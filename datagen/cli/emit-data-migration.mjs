@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { INSTALL_ORDER, PREAMBLE, POSTAMBLE, packSqlLines, deliveryOf } from '../engine/seed-mapping.mjs';
+import { packSqlLines } from '../engine/seed-render.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');                 // datagen/
@@ -31,6 +31,8 @@ const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.star
 const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
+// The MAPPING is the PROJECT's, not the engine's — loaded by name so this command knows no domain.
+const { MAPPING, INSTALL_ORDER, PREAMBLE, POSTAMBLE, deliveryOf } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 
 // version: explicit --version, else the app's mj-app.json version (the shipped version of record).
 const manifestVersion = (() => {
@@ -74,7 +76,7 @@ for (let i = 0; i < INSTALL_ORDER.length; i++) {
     ...(PREAMBLE[pack] ?? []),
     ...(PREAMBLE[pack] ? [''] : []),
   ];
-  const { lines: bodyLines, summary: packSummary } = packSqlLines(pack, load, { transformTable: toPlaceholder });
+  const { lines: bodyLines, summary: packSummary } = packSqlLines(MAPPING, pack, load, { transformTable: toPlaceholder });
   for (const s of packSummary) summary.push({ pack, ...s });
   const fname = `V${seedTs(packIndex)}__v${version}_Seed_${String(packIndex).padStart(2, '0')}_${pack}.sql`;
   writeFileSync(join(MIGRATIONS_DIR, fname), header.concat(bodyLines, POSTAMBLE[pack] ?? []).join('\n'));

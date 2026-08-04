@@ -12,7 +12,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { INSTALL_ORDER, PREAMBLE, POSTAMBLE, packSqlLines } from '../engine/seed-mapping.mjs';
+import { packSqlLines } from '../engine/seed-render.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -20,6 +20,8 @@ const ROOT = join(HERE, '..');
 const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
+// The MAPPING is the PROJECT's, not the engine's — loaded by name so this command knows no domain.
+const { MAPPING, INSTALL_ORDER, PREAMBLE, POSTAMBLE } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 
 mkdirSync(join(OUT, 'sql'), { recursive: true });
 const summary = [];
@@ -35,7 +37,7 @@ for (const pack of INSTALL_ORDER) {
     ...(PREAMBLE[pack] ?? []),
     ...(PREAMBLE[pack] ? [''] : []),
   ];
-  const { lines: bodyLines, summary: packSummary } = packSqlLines(pack, load);
+  const { lines: bodyLines, summary: packSummary } = packSqlLines(MAPPING, pack, load);
   lines.push(...bodyLines, ...(POSTAMBLE[pack] ?? []));
   for (const s of packSummary) summary.push({ pack, ...s });
   writeFileSync(join(OUT, 'sql', `${String(packIndex).padStart(2, '0')}_${pack}.sql`), lines.join('\n'));

@@ -10,7 +10,7 @@ import { rmSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractClaims, checkClaims } from './engine/contract.mjs';
-import { MAPPING, PREAMBLE } from './engine/seed-mapping.mjs';
+
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const QUICK = process.argv.includes('--quick');
@@ -467,7 +467,8 @@ step('frozen migration matches generator shapes (morecheese tables)', () => {
 // instead of at a 13-minute install. Refresh the snapshot on a dependency bump:
 //   MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <reference-install>
 // See datagen/SCHEMA-CONTRACT.md.
-step('seed assumptions match the dependency-schema contract', () => {
+step('seed assumptions match the dependency-schema contract', async () => {
+  const { MAPPING, PREAMBLE } = await import('./projects/morecheese/seed-mapping.mjs');
   const contract = JSON.parse(readFileSync(join(HERE, 'contract', 'schema-contract.json'), 'utf8'));
   const load = (pack, table) => JSON.parse(readFileSync(join(HERE, 'out', 'packs', pack, `${table}.json`), 'utf8'));
   const claims = extractClaims({ MAPPING, PREAMBLE, load });

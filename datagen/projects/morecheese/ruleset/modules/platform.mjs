@@ -19,7 +19,7 @@
 // Values only. No reading files, no clock, no randomness, no functions — the same inputs must
 // always produce the same data. cli/check-ruleset.mjs fails the build otherwise.
 
-/** @type {{ platform: import('../../../../engine/types.js').PlatformBlock }} */
+/** @type {{ platform: import('../../types.js').PlatformBlock }} */
 export default {
   platform: {
     catalog: {

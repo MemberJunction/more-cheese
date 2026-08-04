@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { logisticFit } from '../engine/stats.mjs';
 import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../engine/dates.mjs';
 import { loadRuleset } from '../engine/config.mjs';
-import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
+
 import { CITIES } from '../projects/morecheese/banks.mjs';
 import { makeGateHelpers } from '../engine/gates.mjs';
 import { runDerivedChecks } from '../engine/derived-checks.mjs';
@@ -30,6 +30,8 @@ const ROOT = join(HERE, '..');
 const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
+// The MAPPING is the PROJECT's, not the engine's — loaded by name so this command knows no domain.
+const { MJ_ENTITY_VAR, RECORD_PREFIX } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 const R = await loadRuleset(run.scenario, run.project); // the validator judges against the SAME world (project + scenario) the run was built for
 
 // NON-MEMBERS: the common pack's people table carries both members and prospects (a prospect

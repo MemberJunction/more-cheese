@@ -24,7 +24,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MAPPING, renderRecord } from '../engine/seed-mapping.mjs';
+import { renderRecord } from '../engine/seed-render.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
@@ -32,6 +32,8 @@ const PKG = join(HERE, '..');
 const OUT = join(PKG, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
+// The MAPPING is the PROJECT's, not the engine's — loaded by name so this command knows no domain.
+const { MAPPING } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 
 const CHUNK = 5000; // records per file; big tables split across .part-N.json files
 
