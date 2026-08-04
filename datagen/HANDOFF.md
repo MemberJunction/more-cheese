@@ -28,12 +28,12 @@ to add something, [TOUR.md](TOUR.md) if you want the plain-English tour first.
 
 ## ⚠ The state of the work, and the first thing to do
 
-**28 commits sit unlanded in two branches, and the second is stacked on the first.**
+**37 commits sit unlanded in two branches, and the second is stacked on the first.**
 
 | branch | commits | status |
 |---|---|---|
 | `morecheese-datagen-simplify` (PR #14) | 13 | open, CI green, **never reviewed** |
-| `morecheese-datagen-framework` | 15 | pushed, **no PR**, and it sits on top of PR #14 |
+| `morecheese-datagen-framework` | 24 | pushed, **no PR**, and it sits on top of PR #14 |
 
 **Merge order is forced: PR #14 first, then the framework branch.** They cannot go in the other
 order, and the second will not rebase cleanly onto `next` without the first.
@@ -42,7 +42,7 @@ order, and the second will not rebase cleanly onto `next` without the first.
 of it is landed, so none of it protects anyone yet. Reviewing and merging these two is worth more
 than any further improvement to them. If you read one thing and act on one thing, make it this.
 
-Both branches are green: `node test.mjs` runs 33 steps and every one passes.
+Both branches are green: `node test.mjs` runs 37 steps and every one passes.
 
 ---
 
@@ -58,15 +58,30 @@ Both branches are green: `node test.mjs` runs 33 steps and every one passes.
   final branch failed closed. Eleven bespoke reference gates are gone; nothing hand-counts a dangling
   reference any more.
 - **The traps are loud.** Everything in the list below used to be silent.
-- **The engine no longer contains this project.** 19 lines of domain code in `engine/`, down from
-  155 in one file.
+- **The engine no longer contains this project, and that is now CHECKED.**
+  `cli/check-engine-boundary.mjs` fails if any engine module statically imports project code or
+  names a project in code. It found a real leak when it was written: `engine/ids.mjs` held a table
+  of every project's UUID namespace and told new authors to add theirs to it.
+- **A SECOND PROJECT EXISTS and the suite builds it.** `projects/fixture/` — 50 invented members,
+  one decision, CI-only, never shipped. Standing it up found three engine bugs and two
+  documentation gaps ([projects/fixture/FINDINGS.md](projects/fixture/FINDINGS.md)). It is the only
+  reason the word "framework" is defensible here, and the suite step is what stops the engine
+  quietly re-coupling to MoreCheese.
+- **Row shapes can be declared.** `engine/row-template.mjs` renders a row from data; 17 templates
+  across 9 generators. Rows that need conditionals, computed keys or cross-row state stay
+  handwritten **on purpose** — each refusal is recorded in the code that hit it.
+- **There is a metric, and it runs every suite pass.** `cli/measure-framework.mjs` prints
+  declarations:code. MoreCheese is 1.41 : 1 (from 1.35); the fixture, built with the framework
+  rather than retrofitted into it, is 1.57 : 1.
 
 ## What is half-finished, and what to do about it
 
-**`validate.mjs` still holds ~200 bespoke MoreCheese gates.** A second project gets the derived
-gates (run `node cli/check-declared.mjs --out out`) and none of the domain wisdom. That is correct
-for now — those gates carry real knowledge — but it means "framework" is true of the engine and not
-yet of the checking.
+**`validate.mjs` still holds ~175 bespoke MoreCheese gates.** A second project gets the derived
+gates (references, install order, presence floors, target bands — the fixture gets 8 of them) and
+none of the domain wisdom. That is correct: those gates carry knowledge a declaration cannot state
+(an ordering between engagement quartiles, votes consistent with attendance by construction). But it
+means "framework" is true of the engine, the declarations and the checks DERIVED from them — not of
+the domain-specific checking, and it never will be.
 
 **`gatedElsewhere` in `projects/morecheese/measurements.mjs` is down to 3, and that is the floor.**
 It began at 15 hand-gated targets; twelve now derive from their declarations. The three that remain
@@ -101,7 +116,7 @@ clean push, and were caught by looking at a rendered grid.
 
 ---
 
-## The three coupling points, and the shape each one now has
+## The four coupling points, and the shape each one now has
 
 Everything a new domain has to touch is one of these. Each had the same problem — a shape that
 existed in somebody's head and was enforced nowhere — and each now has a named contract:
@@ -110,10 +125,16 @@ existed in somebody's head and was enforced nowhere — and each now has a named
 |---|---|---|
 | a ruleset block | `catalog` · `params` · `effects` · `mixes` | `cli/check-ruleset.mjs`, and declaring earns you gates |
 | a generator | `build<Domain>(cfg, deps)`, deps an object; four sections (all 19 carry them); returns named tables | `cli/check-generators.mjs`, `cli/check-streams.mjs` |
+| a row shape | a template: single-tag field specs, draws in declaration order | `cli/check-row-templates.mjs` |
 | a pack entry | `dependsOn` (true, acyclic) · `tables` · `NOT_SHIPPED` with reasons | `engine/packs.mjs` at emit, plus the install-order gates |
 
 The order they were done in is not the order that mattered. The ruleset came first and is the one
-people noticed; the pack map came last and was hiding the most expensive failure of the three.
+people noticed; the pack map came fourth and was hiding the most expensive failure of the set.
+
+**And one boundary, which is the framework claim itself:** the engine may not name a project or
+import project code (`cli/check-engine-boundary.mjs`), and a second project must build with zero
+engine edits (the `fixture` suite step). Both are checks, not intentions — see
+[engine/README.md](engine/README.md) for what a project owes the engine and what it gets back.
 
 ## The six things that will bite you
 
@@ -162,12 +183,16 @@ change, then `diff -r`. If output moved and you did not mean it to, stop.
 Not reading. Doing. If any step surprises you, the documentation is wrong and fixing it is your
 first contribution.
 
-1. `node test.mjs` — 33 steps, all green. If not, stop and find out why before anything else.
+1. `node test.mjs` — 37 steps, all green. If not, stop and find out why before anything else.
 2. Open `projects/morecheese/ruleset/modules/committees.mjs`, change `meetingsPerYear` from 4 to 6,
    and run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Read whatever it says.
    Change it back.
 3. `node cli/new-domain.mjs trials` — scaffold a domain, follow the three printed wiring steps, and
    generate. It should produce rows on the first run. Then delete the three files and the wiring.
+3b. `node cli/generate.mjs --project fixture --n 50 --seed 42 --release 2026-07-31 --out out-fx`
+   then `node cli/check-declared.mjs --out out-fx`. That is the SECOND project — 50 invented
+   members, one decision. Read [projects/fixture/FINDINGS.md](projects/fixture/FINDINGS.md) after:
+   it is the shortest honest account of where the framework claim holds and where it did not.
 4. Break something on purpose: in any pack under `out/packs/`, change one foreign key to a bogus
    value and run `node cli/check-declared.mjs --out out`. It must name the edge.
 
