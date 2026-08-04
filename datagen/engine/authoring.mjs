@@ -1,0 +1,70 @@
+// THE HANDWRITING HELPERS — the setup every generator writes before it can start.
+//
+// The five patterns cover the DECISIONS. They do not cover the scaffolding around a decision, and
+// that scaffolding is where a new domain actually stalls: a years loop, an eligibility lookup, and
+// stripping the internal fields before rows ship.
+//
+// Measured before writing this: the years loop appears verbatim in 4 generators, an
+// eligibility/coverage scan in 5. And the good coverage implementation — indexed by key, so lookups
+// are constant time — was PRIVATE to committees.mjs. Writing two new domains today, I reinvented it
+// twice as a naive linear scan, slower and subtly different, having written the documentation
+// myself. That is the handwriting problem in miniature: the right version exists, nobody can find
+// it, everyone rebuilds it worse.
+//
+// Nothing here is required. A generator that wants its own loop writes its own loop.
+
+/**
+ * The years this world covers, inclusive of the release year.
+ * Every generator that walks history needs exactly this, and four of them wrote it out.
+ * @param {{ R: any, releaseYear: number }} cfg
+ * @returns {number[]}
+ */
+export function yearsOf(cfg) {
+  const out = [];
+  for (let y = cfg.R.history.startYear; y <= cfg.releaseYear; y++) out.push(y);
+  return out;
+}
+
+/**
+ * An INDEXED "was this entity covered on this date" lookup, built once from interval rows.
+ *
+ * The naive version — `rows.some(r => r.key === k && r.start <= d && d <= r.end)` — is a full scan
+ * per call, and a generator asking it once per member per year does that thousands of times. This
+ * groups first, so each lookup touches only that entity's own intervals.
+ *
+ * Field names are options because a project's intervals are its own: membership periods here,
+ * enrolments or leases elsewhere.
+ *
+ * @param {readonly any[]} rows
+ * @param {{ key?: string, start?: string, end?: string }} [fields]
+ * @returns {(key: string, dateIso: string) => boolean}
+ */
+export function coverageOf(rows, fields = {}) {
+  const { key = 'MemberNumber', start = 'StartDate', end = 'EndDate' } = fields;
+  const byKey = new Map();
+  for (const r of rows) {
+    const k = r[key];
+    if (!byKey.has(k)) byKey.set(k, []);
+    byKey.get(k).push(r);
+  }
+  return (k, dateIso) => (byKey.get(k) ?? []).some((r) => r[start] <= dateIso && dateIso <= r[end]);
+}
+
+/**
+ * Drop generator-internal fields (anything `_`-prefixed) from rows before they ship.
+ *
+ * Internals are how a generator carries a person or a latent alongside a row while it works. They
+ * must not reach a pack: they are not columns, and one leaking through is a row that fails to load
+ * with a message about an unknown field. Doing it in one place beats remembering a `delete` per
+ * field per module — which is the current arrangement, and it has already missed some.
+ *
+ * @template T
+ * @param {readonly T[]} rows
+ * @returns {T[]} the same rows, mutated in place and returned for chaining
+ */
+export function stripInternals(rows) {
+  for (const row of rows) {
+    for (const k of Object.keys(row)) if (k.startsWith('_')) delete row[k];
+  }
+  return rows;
+}

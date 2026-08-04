@@ -10,6 +10,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
+import { coverageOf, yearsOf } from '../../engine/authoring.mjs';
 
 /** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
 const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
@@ -20,7 +21,7 @@ export function buildCommittees(cfg, people, periods) {
   const C = R.committees;
   const P = C.params;
 
-  const coveredOn = memberCoverage(periods);
+  const coveredOn = coverageOf(periods);
 
   // ---------- fixtures: types, roles, committees, terms (authored, not drawn) ----------
   const types = C.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, IsStandards: t.isStandards, DefaultTermMonths: t.termMonths, IsSharedDemo: true }));
@@ -261,12 +262,3 @@ export function buildCommittees(cfg, people, periods) {
   return { types, roles, committees, terms, memberships, meetings, attendance, agendaItems, motions, votes };
 }
 
-/** membership-period coverage lookup (same rule the events module uses) */
-function memberCoverage(periods) {
-  const byMember = new Map();
-  for (const per of periods) {
-    if (!byMember.has(per.MemberNumber)) byMember.set(per.MemberNumber, []);
-    byMember.get(per.MemberNumber).push(per);
-  }
-  return (memberNumber, dateIso) => (byMember.get(memberNumber) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
-}

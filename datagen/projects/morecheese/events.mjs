@@ -15,6 +15,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { yearsOf } from '../../engine/authoring.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 // Calendar realism: draw any day of the month (incl. 29–31), then shape the weekday —
@@ -94,8 +95,7 @@ export function buildRegistrations(cfg, people, periods, events) {
   const E = R.events;
   const registrations = [];
 
-  const years = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) years.push(y);
+  const years = yearsOf(cfg);
   const eventsByYear = new Map(years.map((y) => [y, events.filter((e) => e.Year === y && parseDate(e.Date) <= release)]));
 
   const memberPeriods = new Map();

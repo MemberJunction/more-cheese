@@ -13,6 +13,7 @@
 import { rng, sigmoid, calibrateIntercept } from '../../engine/rng.mjs';
 import { recurringDecision } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../engine/dates.mjs';
+import { yearsOf } from '../../engine/authoring.mjs';
 import { featureArrows } from '../../engine/features.mjs';
 
 export function runRenewalUnroll(cfg, people, orgs) {
@@ -20,8 +21,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
   const M = R.membership;
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
 
-  const years = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) years.push(y);
+  const years = yearsOf(cfg);
 
   // texture: each year's renewal target wobbles (AR(1) on the logit) — real data is lumpy
   const wobble = rng(seed, 'texture:renewal-yoy').ar1(years.length, R.texture.yearlyLogitWobble.rho, R.texture.yearlyLogitWobble.sigma);
