@@ -240,7 +240,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   // support demo has no critical ticket in it. Promote the highest-impact eligible ticket
   // instead: deterministic, consumes no randomness, and only fires when the draws came up dry.
   {
-    const want = I.params.severityCriticalFloor ?? 0;
+    const want = I.params.severityCriticalFloor;
     const have = issues.filter((x) => x.Severity === 'Critical').length;
     if (want > have) {
       const eligible = issues

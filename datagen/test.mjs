@@ -21,9 +21,17 @@ let failures = 0;
 const pending = [];
 const CLI = join(HERE, 'cli');
 const run = (script, args) => execFileSync(process.execPath, [join(CLI, script), ...args], { encoding: 'utf8' });
+/** Any error shape → printable lines. A Buffer stdout used to make the reporter itself throw,
+ *  which killed the run instead of reporting the failure it was handed. */
+const detail = (e) => {
+  const raw = e?.stdout != null ? String(e.stdout) : String(e?.message ?? e);
+  const flagged = raw.split('\n').filter((l) => l.startsWith('❌'));
+  return (flagged.length ? flagged : raw.split('\n').slice(0, 4)).join('\n');
+};
+
 const step = (name, fn) => {
   try { const r = fn(); if (r?.then) { pending.push(r.then(() => console.log(`✅ ${name}`)).catch((e) => { failures++; console.log(`❌ ${name}`); console.log(String(e.message ?? e).split('\n').slice(0, 4).join('\n')); })); return; } console.log(`✅ ${name}`); }
-  catch (e) { failures++; console.log(`❌ ${name}`); console.log((e.stdout ?? String(e)).split('\n').filter((l) => l.startsWith('❌')).join('\n')); }
+  catch (e) { failures++; console.log(`❌ ${name}`); console.log(detail(e)); }
 };
 
 console.log(`datagen regression suite ${QUICK ? '(quick)' : ''}\n`);
@@ -292,6 +300,23 @@ step('pipeline: declared ordering edges hold, and a violation is caught', async 
 
 step('PIPELINE.md matches the code', () => run('emit-pipeline.mjs', ['--check']));
 
+// 0i. NO DEFENSIVE READS OF THE RULESET. `P.someShare ?? 0` on a declared value is dead code that
+// becomes a silent bug the moment the key moves. That happened four times in one day — 146
+// relationship edges gone, every cancellation reason collapsed, every organisation's legal
+// structure nulled, every optional-purchase rate zeroed — and no gate, lint, schema or type check
+// caught any of them.
+step('no defensive reads of declared ruleset values (and a planted one is caught)', () => {
+  run('check-reads.mjs', []);
+  const f = join(HERE, 'projects/morecheese/committees.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    writeFileSync(f, original.replace('const min = P.minRosterPerTerm;', 'const min = P.minRosterPerTerm ?? 0;'));
+    let caught = false;
+    try { run('check-reads.mjs', []); } catch { caught = true; }
+    if (!caught) throw new Error('check-reads MISSED a planted `?? 0` on a declared param');
+  } finally { writeFileSync(f, original); }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {
@@ -304,7 +329,7 @@ for (const s of SEEDS) {
 step('determinism: byte-identical regeneration', () => {
   run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
   run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test2']);
-  execFileSync('diff', ['-r', join(HERE, 'out-test'), join(HERE, 'out-test2')]);
+  execFileSync('diff', ['-r', join(HERE, 'out-test'), join(HERE, 'out-test2')], { encoding: 'utf8' });
 });
 
 // 3. windowing: an October re-bake keeps Marcus pending

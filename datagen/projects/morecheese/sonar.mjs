@@ -57,7 +57,7 @@ export function buildSonar(cfg) {
   };
 
   // reusable Rolling windows; a factor's window date column comes from Factor.DateField
-  const timeWindows = (S.catalog.timeWindows ?? []).map((w) => ({
+  const timeWindows = S.catalog.timeWindows.map((w) => ({
     WindowKey: w.key, Name: w.name, WindowType: w.windowType, LengthMonths: w.lengthMonths ?? null, LengthDays: w.lengthDays ?? null,
   }));
 

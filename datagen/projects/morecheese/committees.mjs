@@ -53,7 +53,7 @@ export function buildCommittees(cfg, people, periods) {
       seed,
       items: eligible,
       scoreOf: (p) => C.effects['volunteer.engagement'].beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
-        + (incumbents.has(p.MemberNumber) ? (C.effects['volunteer.incumbency'].beta ?? 0) : 0),
+        + (incumbents.has(p.MemberNumber) ? C.effects['volunteer.incumbency'].beta : 0),
       target: P.volunteerShare.target,
       streamKey: (p) => `committee-serve:${p.MemberNumber}:${t.start}`,
       decide: (p, prob, r) => {
@@ -64,7 +64,7 @@ export function buildCommittees(cfg, people, periods) {
         // Outreach Committee (formed 2017) in the back-filled 2015 term, and the
         // membership's TermKey then pointed at a term that was never emitted.
         const open = C.catalog.committees.filter((c) => t.end >= c.formed);
-        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(P.sameCommitteeShare ?? 0)
+        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(P.sameCommitteeShare)
           ? prior                      // returning members usually keep their seat
           : r.pick(open).name;         // otherwise the member's own dice
         pushMembership(p, committee, t, 'Member');
@@ -89,7 +89,7 @@ export function buildCommittees(cfg, people, periods) {
   // eligible members not already serving it. Deterministic (theta order, member number as the
   // tie-break), runs before officers are promoted so a chair always has a real committee.
   {
-    const min = P.minRosterPerTerm ?? 0;
+    const min = P.minRosterPerTerm;
     if (min > 0) {
       for (const t of C.catalog.terms) {
         for (const c of C.catalog.committees) {
@@ -159,7 +159,7 @@ export function buildCommittees(cfg, people, periods) {
         // most governance is virtual, but quarterly in-person/hybrid sessions happen
         // governance kept meeting through the pandemic, but online — an in-person
         // committee meeting in April 2020 is the kind of detail that breaks a demo
-        const covidYear = (C.regimes ?? R.regimes).covid.years.includes(y);
+        const covidYear = R.regimes.covid.years.includes(y);
         const locType = covidYear ? 'Virtual' : rM.pickWeighted([['Virtual', 0.68], ['InPerson', 0.2], ['Hybrid', 0.12]]);
         const base = {
           MeetingKey: `${c.name}:${dt}`, CommitteeKey: c.name, Name: `${c.name} — Q${q + 1} ${y} meeting`,

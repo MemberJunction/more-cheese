@@ -30,7 +30,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   }
   // the rest of what an association actually sells — exam fees, competition entries,
   // publications, sponsorship, merchandise, the job board, donations
-  for (const c of O.catalog.products ?? []) {
+  for (const c of O.catalog.products) {
     products.push({ ProductKey: c.key, Name: c.name, ProductType: c.type, UnitPrice: c.price, IsSharedDemo: true });
   }
   const priceOf = new Map(products.map((p) => [p.ProductKey, p.UnitPrice]));

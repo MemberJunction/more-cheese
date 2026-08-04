@@ -123,7 +123,9 @@ export function runRenewalUnroll(cfg, people, orgs) {
       const rReason = rng(seed, `churnreason:${c.p.MemberNumber}:${c.st.end}`);
       let reason;
       if (c.employerEvent) reason = 'non-payment — employer event';
-      else if (CV.years.includes(lapseYear) && CV.churnReason && rReason.bernoulli(CV.churnReasonWeight ?? 0)) {
+      // No default on the weight: an era that declares a churn reason MUST say how often it
+      // applies. `?? 0` would mean the reason is declared and never used — a silent no-op.
+      else if (CV.years.includes(lapseYear) && CV.churnReason && rReason.bernoulli(CV.churnReasonWeight)) {
         // era-specific reason, so the churn breakdown shows WHY 2020-21 differs rather
         // than just showing more of the usual
         reason = CV.churnReason;
