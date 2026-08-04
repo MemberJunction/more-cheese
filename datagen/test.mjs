@@ -389,6 +389,24 @@ step('pack contract holds (an unshipped table and a lying dependsOn are both cau
   } finally { writeFileSync(f, original); }
 });
 
+// 0m. ONE DICE STREAM PER DECISION. Two decisions sharing a stream become correlated, and the data
+// stays plausible while they are — no distribution gate can see it. Held perfectly today (49,603
+// distinct streams, none from two call sites), so the negative test is the only proof the checker
+// works: it plants a key that another site genuinely produces.
+step('every dice stream belongs to one decision (and a shared stream is caught)', () => {
+  run('check-streams.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE]);
+  const f = join(HERE, 'projects/morecheese/messaging.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    const planted = original.replace('rng(seed, `msgthread:${issue.IssueKey}`)', 'rng(seed, `person:ICF-100001`)');
+    if (planted === original) throw new Error('stream plant anchor moved — this negative test is now vacuous');
+    writeFileSync(f, planted);
+    let caught = false;
+    try { run('check-streams.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE]); } catch { caught = true; }
+    if (!caught) throw new Error('check-streams MISSED two decisions drawing from one stream');
+  } finally { writeFileSync(f, original); }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

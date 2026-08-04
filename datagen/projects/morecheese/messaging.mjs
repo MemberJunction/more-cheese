@@ -12,6 +12,7 @@
 import { rng } from '../../engine/rng.mjs';
 
 export function buildMessaging(cfg, { people, issues }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const M = R.messaging;
   const releaseMs = release.getTime();
@@ -24,6 +25,7 @@ export function buildMessaging(cfg, { people, issues }) {
   const hex = (r, n) => Array.from({ length: n }, () => '0123456789abcdef'[r.int(0, 15)]).join('');
   const fullName = (m) => { const p = personByKey.get(m); return p ? `${p.FirstName} ${p.LastName}` : null; };
 
+  // ── decisions ── one thread per issue that earned one, then its messages
   for (const issue of issues.issues) {
     const r = rng(seed, `msgthread:${issue.IssueKey}`);
     if (!heroIssueKeys.has(issue.IssueKey) && !r.bernoulli(M.params.threadSharePerIssue.target)) continue;
@@ -103,5 +105,6 @@ export function buildMessaging(cfg, { people, issues }) {
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { threads, messages, sessions };
 }

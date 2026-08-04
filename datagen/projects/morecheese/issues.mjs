@@ -14,6 +14,7 @@ import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 const severityKey = (type) => 'severity' + String(type).replace(/\s+/g, '');
 
 export function buildIssues(cfg, { people, orgs, events, registrations, money, committees }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const I = R.issues;
   const releaseIso = iso(release);
@@ -233,7 +234,7 @@ export function buildIssues(cfg, { people, orgs, events, registrations, money, c
     };
   });
 
-  // ---------- presence floor: Critical must exist ----------
+  // ── decisions ── presence floor: Critical must exist
   // Critical is rare by design and lives only on Billing and Events. At demo scale the Billing
   // population is ~5 tickets, so 10% Critical means the DRAW yields none about half the time —
   // and the severity gate's tolerance band happily passes on zero, so nobody notices that a
@@ -257,7 +258,7 @@ export function buildIssues(cfg, { people, orgs, events, registrations, money, c
     }
   }
 
-  // ---------- comments: the activity feed every ticket lacked ----------
+  // ── decisions ── comments: the activity feed every ticket lacked
   // Derived from the ticket's own state, so a resolved ticket reads like one. The table has
   // no author-settable timestamp (only the system __mj_CreatedAt, which the entity SPs
   // re-stamp), so each body opens with its own date — the same workaround Description uses.
@@ -292,5 +293,6 @@ export function buildIssues(cfg, { people, orgs, events, registrations, money, c
   }
 
   const issueSequences = [{ ScopeCode: I.params.numberPrefix, NextSequenceNumber: issues.length + 1, IsSharedDemo: true }];
+  // ── shape ── assemble the named tables this domain owns
   return { issueTypes, issueStatuses, issues, issueSequences, issueComments };
 }

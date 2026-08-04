@@ -39,10 +39,11 @@ function drawEventDate(rEv, y, kind) {
 }
 
 export function buildEvents(cfg) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const E = R.events;
   const events = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) {
+  for (const y of yearsOf(cfg)) {
     const covidYear = R.regimes.covid.years.includes(y);
     const covid = covidYear && R.regimes.covid.virtualConference;
     // conference drifts around the ruleset anchor day and lands on a Tuesday
@@ -73,6 +74,7 @@ export function buildEvents(cfg) {
       events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(E.catalog.webinarTopics)} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
     }
   }
+  // ── shape ── assemble the named tables this domain owns
   return events;
 }
 
@@ -91,6 +93,7 @@ function leadDaysFor(r, kind) {
 }
 
 export function buildRegistrations(cfg, { people, periods, events }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const E = R.events;
   const registrations = [];
@@ -110,6 +113,7 @@ export function buildRegistrations(cfg, { people, periods, events }) {
   // engagement pulls in, distance pushes out. minPool 6 preserves the original ">5" skip.
   const confOf = (y) => eventsByYear.get(y).find((e) => e.EventType === 'Conference');
   const activeOn = (y) => people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 6, 1)))));
+  // ── decisions ── one pattern call per decision, in causal order
   const confRegs = annualParticipation({
     seed, years, minPool: 6,
     poolOf: (y) => (confOf(y) ? activeOn(y) : []),
@@ -193,5 +197,6 @@ export function buildRegistrations(cfg, { people, periods, events }) {
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return registrations;
 }

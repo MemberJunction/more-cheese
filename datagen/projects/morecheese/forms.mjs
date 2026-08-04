@@ -24,11 +24,12 @@ const submitTime = (r) => {
 
 
 export function buildForms(cfg, { people, events, registrations }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const F = R.forms;
   const S = F.survey;
 
-  // ---------- authored fixtures: the survey, its version/page/questions ----------
+  // ── fixtures ── authored fixtures: the survey, its version/page/questions
   const forms = [{ FormKey: 'post-conf-survey', Name: S.name, Description: S.description, Status: 'Published', RenderMode: 'Scroll', IsSharedDemo: true }];
   const formVersions = [{ VersionKey: 'post-conf-survey:1', FormKey: 'post-conf-survey', VersionNumber: 1, Status: 'Published', PublishedAt: `${R.history.startYear}-06-01T00:00:00Z`, IsSharedDemo: true }];
   const formPages = [{ PageKey: 'post-conf-survey:p1', FormKey: 'post-conf-survey', Title: S.page, DisplayOrder: 0, IsSharedDemo: true }];
@@ -37,7 +38,7 @@ export function buildForms(cfg, { people, events, registrations }) {
     QuestionType: q.type, Prompt: q.prompt, IsRequired: q.required, DisplayOrder: i, IsSharedDemo: true,
   }));
 
-  // ---------- authored fixtures: the Membership Application (the anonymous intake) ----------
+  // ── fixtures ── authored fixtures: the Membership Application (the anonymous intake)
   const APP = F.application;
   const APP_KEY = 'membership-application';
   forms.push({ FormKey: APP_KEY, Name: APP.name, Description: APP.description, Status: 'Published', RenderMode: 'Scroll', IsSharedDemo: true });
@@ -59,7 +60,7 @@ export function buildForms(cfg, { people, events, registrations }) {
   const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
   const confByYear = new Map(events.filter((e) => e.EventType === 'Conference').map((e) => [e.Year, e]));
 
-  // ---------- per conference year: a distribution + attendee responses ----------
+  // ── decisions ── per conference year: a distribution + attendee responses
   const formDistributions = [];
   const formResponses = [];
   const formAnswers = [];
@@ -102,7 +103,7 @@ export function buildForms(cfg, { people, events, registrations }) {
     });
   }
 
-  // ---------- flagship heroes: a GUARANTEED survey response each (cross-app footprint) ----------
+  // ── decisions ── flagship heroes: a GUARANTEED survey response each (cross-app footprint)
   // Declared facts placed after the crowd draw, like committee seats: anchor to the hero's
   // most recent attended conference; skip if the crowd draw already selected them (same
   // ResponseKey). Never Partial — a flagship demo response must be complete.
@@ -132,7 +133,7 @@ export function buildForms(cfg, { people, events, registrations }) {
     distByKey.get(distKey).ResponseCount += 1;
   }
 
-  // ---------- answers: SECOND pass over the actual respondent pool ----------
+  // ── decisions ── answers: SECOND pass over the actual respondent pool
   // Respondents are engagement-selected TWICE (attend, then respond), so the naive base
   // overshoots the target mean — the selection-effect lesson (spec §7 lesson #1). Calibrate
   // the base linearly over the real pool: base' = target − β·mean(θ_respondents). Each
@@ -171,7 +172,7 @@ export function buildForms(cfg, { people, events, registrations }) {
   }
   for (const resp of formResponses) { delete resp._theta; delete resp._covid; delete resp._hero; } // latents — never ship
 
-  // ---------- the Membership Application: anonymous public-intake responses ----------
+  // ── decisions ── the Membership Application: anonymous public-intake responses
   // Applicants are NOT members: MemberNumber null, AnonymousSessionID set, identity lives
   // only inside answer text (cleared name banks; deterministic example.com emails). One
   // always-open PublicLink distribution; volume is a modest per-year trickle.
@@ -228,5 +229,6 @@ export function buildForms(cfg, { people, events, registrations }) {
     }
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { forms, formVersions, formPages, formQuestions, formQuestionOptions, formDistributions, formResponses, formAnswers };
 }

@@ -128,9 +128,14 @@ arrays of rows: transpose two and you get confidently wrong data, no error, and 
 tells you nothing about what it passes. All nineteen generators were normalised in one pass with
 byte-identical output.
 
+All nineteen generators carry these four headers, so the shape is something you can rely on when
+reading an unfamiliar one — not just advice for new files.
+
 The house shape:
 
 ```js
+import { yearsOf, thetaAt, stripInternals } from '../../engine/authoring.mjs';
+
 export function buildTickets(cfg, { people, periods }) {
   const { R, seed, release } = cfg;
   // ── inputs ──
@@ -139,9 +144,9 @@ export function buildTickets(cfg, { people, periods }) {
 
   // ── decisions ── one pattern call per decision from Step 1, in causal order
   const tickets = annualParticipation({
-    seed, years,
+    seed, years: yearsOf(cfg),
     poolOf: (y) => people.filter(…),
-    scoreOf: (p, y) => T.effects['file.engagement'].beta * p._theta,
+    scoreOf: (p, y) => T.effects['file.engagement'].beta * thetaAt(p, y),
     target: P.filedShare.target,
     streamKey: (p, y) => `ticket:${p.MemberNumber}:${y}`,   // unique per decision
     spawn: (r, p, y) => ({ … }),            // draws happen here, in a fixed order
@@ -156,11 +161,22 @@ export function buildTickets(cfg, { people, periods }) {
 Read paths say what kind of thing they are, which is the point: `T.catalog.` is authored content,
 `P.` is a tuned scalar, `T.effects[…]` is a causal claim, `T.mixes.` is a weighted draw.
 
+**Use the helpers in `engine/authoring.mjs` — they are the setup, not the decisions:**
+
+| | |
+|---|---|
+| `yearsOf(cfg)` | the years this world covers. Four generators wrote the loop out |
+| `thetaAt(p, y)` | how engaged this person was in year `y`. **The most-written expression here** — sixteen sites spelled it `p._thetaPath?.[y] ?? p._theta`, which is mechanism, not meaning, and one chance per site to reference the wrong year |
+| `coverageOf(rows)` | an indexed "was this member covered on this date" lookup |
+| `stripInternals(rows)` | drop every `_`-prefixed field before returning. The emitter **refuses** any that survive, so you cannot ship one by forgetting a `delete` |
+
 **Two rules that are not style:**
 
 **One dice stream per decision**, named for it. `rng(seed, 'ticket:ICF-000101:2019')`. Streams are
 why the same seed reproduces the same world; sharing one between two decisions couples them
-invisibly.
+invisibly — both get plausible numbers, and the two decisions silently become correlated, which no
+distribution gate can see. `node cli/check-streams.mjs` now catches it and names both call sites.
+Reach for an obvious prefix (`renewal:`, `order:`) and it will tell you if it is taken.
 
 **Never reorder draws inside a stream.** Adding a draw in the middle re-rolls everything after it,
 which surfaces as a diff in data you didn't touch.

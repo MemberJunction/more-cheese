@@ -16,6 +16,7 @@ import { coverageOf, yearsOf } from '../../engine/authoring.mjs';
 const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
 
 export function buildCommittees(cfg, { people, periods }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   // four-section ruleset shape: C.catalog (what exists) · P (every scalar) · C.effects · C.mixes
   const C = R.committees;
@@ -23,7 +24,7 @@ export function buildCommittees(cfg, { people, periods }) {
 
   const coveredOn = coverageOf(periods);
 
-  // ---------- fixtures: types, roles, committees, terms (authored, not drawn) ----------
+  // ── fixtures ── fixtures: types, roles, committees, terms (authored, not drawn)
   const types = C.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, IsStandards: t.isStandards, DefaultTermMonths: t.termMonths, IsSharedDemo: true }));
   const roles = C.catalog.roles.map((r) => ({ RoleKey: r.name, Name: r.name, IsOfficer: r.isOfficer, IsVotingRole: r.isVoting, Sequence: r.sequence, IsSharedDemo: true }));
   // c.type is a REFERENCE to a catalog.types entry, not a string to be matched — so a
@@ -37,7 +38,7 @@ export function buildCommittees(cfg, { people, periods }) {
     terms.push({ TermKey: `${c.name}:${t.start}`, CommitteeKey: c.name, Name: t.name, StartDate: t.start, EndDate: t.end, Status: t.end < iso(release) ? 'Completed' : 'Active', IsSharedDemo: true });
   }
 
-  // ---------- memberships: per term, engaged members volunteer ----------
+  // ── decisions ── memberships: per term, engaged members volunteer
   const memberships = [];
   const rosterByTerm = new Map(); // `${committee}:${termStart}` → [person]
   // INCUMBENCY: committees don't re-staff from scratch every two years. A member who
@@ -131,7 +132,7 @@ export function buildCommittees(cfg, { people, periods }) {
     rosterByTerm.get(key).push({ p, row });
   }
 
-  // ---------- meetings: quarterly per committee; attendance over the term's actual roster ----------
+  // ── decisions ── meetings: quarterly per committee; attendance over the term's actual roster
   const meetings = [];
   const attendance = [];
   const attByMeeting = new Map(); // MeetingKey → [{membership row, status}] — votes stay consistent with attendance
@@ -208,7 +209,7 @@ export function buildCommittees(cfg, { people, periods }) {
     return (h?.committees ?? []).some((s) => s.committee === committee);
   }
 
-  // ---------- meeting CONTENT: agenda items, and sometimes a motion with real votes ----------
+  // ── decisions ── meeting CONTENT: agenda items, and sometimes a motion with real votes
   // Votes are CONSISTENT with attendance by construction: members absent from the meeting
   // vote 'Absent' — a data-quality property no independent roll could guarantee.
   const agendaItems = [];
@@ -259,6 +260,7 @@ export function buildCommittees(cfg, { people, periods }) {
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { types, roles, committees, terms, memberships, meetings, attendance, agendaItems, motions, votes };
 }
 

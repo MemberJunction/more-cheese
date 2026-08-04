@@ -10,18 +10,20 @@ import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
+import { yearsOf } from '../../engine/authoring.mjs';
 
 // topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
 // hardcoded 8, which is why 111 courses produced only 81 distinct names
 
 export function buildLearning(cfg, { people, periods }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const L = R.learning;
 
   // domain data shape: the course catalog (a stable set per year)
   const courses = [];
   const years = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) {
+  for (const y of yearsOf(cfg)) {
     years.push(y);
     const rC = rng(seed, `courses:${y}`);
     for (let i = 0; i < L.params.coursesPerYear; i++) {
@@ -49,6 +51,7 @@ export function buildLearning(cfg, { people, periods }) {
   const coveredOn = (m, dateIso) => (memberPeriods.get(m) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
 
   // pattern 1: who enrolls each year — core owns the calibration; we own the shapes
+  // ── decisions ── one pattern call per decision, in causal order
   const enrollments = annualParticipation({
     seed,
     // lockdown SPIKED online learning — post-calibration regime shift (tide, not boats)
@@ -98,5 +101,6 @@ export function buildLearning(cfg, { people, periods }) {
     },
   });
 
+  // ── shape ── assemble the named tables this domain owns
   return { courses, enrollments };
 }

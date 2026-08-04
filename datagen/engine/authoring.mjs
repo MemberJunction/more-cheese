@@ -26,6 +26,34 @@ export function yearsOf(cfg) {
 }
 
 /**
+ * A person's engagement level IN A GIVEN YEAR.
+ *
+ * This is the most-written expression in the whole project. Fifteen sites, all spelled out by hand:
+ *
+ *   scoreOf: (p, y) => E.effects['x.engagement'].beta * (p._thetaPath?.[y] ?? p._theta)
+ *
+ * It appears inside `scoreOf`, which is the one callback every pattern takes and therefore the line
+ * every author writes. Three things were wrong with leaving it spelled out:
+ *
+ *   1. It does not say what it means. `_thetaPath?.[y] ?? _theta` is mechanism; "how engaged this
+ *      person was in 2019" is the idea, and the idea is what an author is reasoning about.
+ *   2. It is an optional chain with a numeric fallback — the exact shape that produced four separate
+ *      silent corruptions in this codebase. Here the fallback is LOAD-BEARING (a hero with no pinned
+ *      arc has `_thetaPath: null`), so it cannot simply be deleted, which is precisely why it wants
+ *      to be written once, correctly, where the reason can be recorded.
+ *   3. Spelled out fifteen times, it is fifteen chances to write `?.[y]` against the wrong year
+ *      variable — and using last year's engagement instead of this year's is a plausible number in
+ *      the right range, which no gate can catch.
+ *
+ * @param {{ _theta: number, _thetaPath?: Record<number, number> | null }} person
+ * @param {number} year
+ * @returns {number} the pinned arc's value for that year, or the person's fixed level
+ */
+export function thetaAt(person, year) {
+  return person._thetaPath?.[year] ?? person._theta;
+}
+
+/**
  * An INDEXED "was this entity covered on this date" lookup, built once from interval rows.
  *
  * The naive version — `rows.some(r => r.key === k && r.start <= d && d <= r.end)` — is a full scan

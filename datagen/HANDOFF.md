@@ -42,7 +42,7 @@ order, and the second will not rebase cleanly onto `next` without the first.
 of it is landed, so none of it protects anyone yet. Reviewing and merging these two is worth more
 than any further improvement to them. If you read one thing and act on one thing, make it this.
 
-Both branches are green: `node test.mjs` runs 30 steps and every one passes.
+Both branches are green: `node test.mjs` runs 31 steps and every one passes.
 
 ---
 
@@ -94,7 +94,7 @@ existed in somebody's head and was enforced nowhere — and each now has a named
 | you are writing | the shape | enforced by |
 |---|---|---|
 | a ruleset block | `catalog` · `params` · `effects` · `mixes` | `cli/check-ruleset.mjs`, and declaring earns you gates |
-| a generator | `build<Domain>(cfg, deps)`, deps an object; four sections; returns named tables | `cli/check-generators.mjs` |
+| a generator | `build<Domain>(cfg, deps)`, deps an object; four sections (all 19 carry them); returns named tables | `cli/check-generators.mjs`, `cli/check-streams.mjs` |
 | a pack entry | `dependsOn` (true, acyclic) · `tables` · `NOT_SHIPPED` with reasons | `engine/packs.mjs` at emit, plus the install-order gates |
 
 The order they were done in is not the order that mattered. The ruleset came first and is the one
@@ -147,7 +147,7 @@ change, then `diff -r`. If output moved and you did not mean it to, stop.
 Not reading. Doing. If any step surprises you, the documentation is wrong and fixing it is your
 first contribution.
 
-1. `node test.mjs` — 30 steps, all green. If not, stop and find out why before anything else.
+1. `node test.mjs` — 31 steps, all green. If not, stop and find out why before anything else.
 2. Open `projects/morecheese/ruleset/modules/committees.mjs`, change `meetingsPerYear` from 4 to 6,
    and run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Read whatever it says.
    Change it back.

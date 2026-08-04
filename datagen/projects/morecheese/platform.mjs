@@ -18,6 +18,7 @@ import { rng } from '../../engine/rng.mjs';
 const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
 
 export function buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships, competitionEntries: programsEntries }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   // four-part ruleset shape: only catalog + params — this domain rolls no dice
   const P = R.platform;
@@ -25,7 +26,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
   const fullName = (m) => { const p = personByKey.get(m); return p ? `${p.FirstName} ${p.LastName}` : m; };
 
-  // ---------- staff users (the personas demos log in as) ----------
+  // ── fixtures ── staff users (the personas demos log in as)
   const users = P.catalog.staff.map((s) => ({
     UserKey: s.key, FirstName: s.first, LastName: s.last, Title: s.title,
     Name: `${s.first} ${s.last}`,
@@ -33,7 +34,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   }));
   const userRoles = P.catalog.staff.map((s) => ({ RoleKey: `${s.key}:UI`, UserKey: s.key }));
 
-  // ---------- computed facts (the tokens conversations may cite) ----------
+  // ── decisions ── computed facts (the tokens conversations may cite)
   const lastPeriod = new Map();
   for (const per of periods) lastPeriod.set(per.MemberNumber, per);
   const pendingMembers = [...lastPeriod.entries()].filter(([, per]) => per.Status === 'PendingRenewal').map(([m]) => m).sort();
@@ -62,7 +63,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     .replace(/\{N:([A-Z_0-9]+)\}/g, (_, k) => String(facts[k] ?? `{N:${k}}`))
     .replace(/\{HERO:([A-Z0-9-]+)\}/g, (_, m) => fullName(m));
 
-  // ---------- shared views + reusable queries (all-viewer-visible residue) ----------
+  // ── decisions ── shared views + reusable queries (all-viewer-visible residue)
   // GridState/FilterState mirror what Explorer writes when a user saves a view — a seeded
   // view without them has no column layout. Shapes copied from organic v5.45 rows.
   const views = P.catalog.sharedViews.map((v) => ({
@@ -78,7 +79,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     QueryKey: q.key, Name: q.name, UserQuestion: q.userQuestion, Description: q.description, SQL: q.sql,
   }));
 
-  // ---------- conversations (Skip-style; the assistant only says computed truths) ----------
+  // ── decisions ── conversations (Skip-style; the assistant only says computed truths)
   const conversations = [];
   const conversationDetails = [];
   for (const c of P.catalog.conversations) {
@@ -96,7 +97,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     });
   }
 
-  // ---------- favorites + lists (per-staff residue; demos log in as staff) ----------
+  // ── decisions ── favorites + lists (per-staff residue; demos log in as staff)
   // per-owner: a demo logs in AS a persona, so each needs their own residue
   const favGroups = P.catalog.favorites;
   const favorites = favGroups.flatMap((g) => g.memberNumbers.map((m) => ({
@@ -121,13 +122,13 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     }
   }
 
-  // ---------- notifications ----------
+  // ── decisions ── notifications
   const notifications = P.catalog.notifications.map((n, i) => ({
     NotifKey: `notif:${i}`, UserKey: n.owner, Title: n.title, Message: n.message,
     Unread: n.unread, ReadAt: n.unread ? null : ts(releaseMs - n.daysBeforeRelease * 86400000 + 6 * 3600000),
   }));
 
-  // ---------- RecordChange audit backfill — every row mirrors a generated timeline ----------
+  // ── decisions ── RecordChange audit backfill — every row mirrors a generated timeline
   const RC = P.params.recordChanges;
   const recordChanges = [];
   const staffPick = (key) => P.catalog.staff[rng(seed, `platform-attr:${key}`).int(0, P.catalog.staff.length - 1)].key;
@@ -198,5 +199,6 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   // clamp: audit rows never post-date the release
   for (const rc of recordChanges) if (new Date(rc.ChangedAt).getTime() > releaseMs) rc.ChangedAt = ts(releaseMs - 3600000);
 
+  // ── shape ── assemble the named tables this domain owns
   return { users, userRoles, views, queries, conversations, conversationDetails, favorites, lists, listDetails, notifications, recordChanges };
 }

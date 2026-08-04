@@ -79,6 +79,21 @@ export function emitPacks(cfg, { packs, world, people, renewalEvents, registries
     mkdirSync(dir, { recursive: true });
     const rowCounts = {};
     for (const [table, rows] of Object.entries(pack.tables)) {
+      // INTERNALS MUST NOT SHIP. A generator carries `_`-prefixed fields alongside a row while it
+      // works — the latent dials, the person a row belongs to — and one leaking through is a row
+      // that fails to load, at install, with a message about an unknown column.
+      //
+      // Nothing checked this. It was held by three hand-maintained field lists in the pack map plus
+      // a `delete` per field in two generators: add a fourth internal to a row and you must
+      // remember all of it, or it ships. Now the emitter remembers instead of you.
+      const leaked = [...new Set(rows.flatMap((r) => (r && typeof r === 'object' ? Object.keys(r).filter((k) => k.startsWith('_')) : [])))];
+      if (leaked.length) {
+        throw new Error(
+          `${name}/${table} would ship generator-internal field(s): ${leaked.join(', ')}\n`
+          + 'Strip them before returning — stripInternals(rows) from engine/authoring.mjs drops every\n'
+          + '`_`-prefixed field at once, which is safer than a delete per field.',
+        );
+      }
       writeFileSync(join(dir, `${table}.json`), JSON.stringify(rows, null, 1));
       rowCounts[table] = rows.length;
     }

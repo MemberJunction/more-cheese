@@ -24,6 +24,7 @@ import { emailFor } from './world.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
 export function buildFunnel(cfg, { people, prospects, orgs, events, periods, application }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const F = R.funnel;
   const releaseIso = iso(release);
@@ -43,7 +44,7 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
 
   const freeEvents = events.filter((e) => !e.IsPaid && e.Date <= releaseIso);
 
-  // ---------- A. recent joiners get the history that preceded them ----------
+  // ── decisions ── A. recent joiners get the history that preceded them
   const recent = people.filter((p) => {
     const start = firstStart.get(p.MemberNumber);
     return start && relYear - parseDate(start).getUTCFullYear() <= F.params.lookbackYears;
@@ -92,7 +93,7 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
     push('newsletter', { BooleanValue: r.bernoulli(0.72) });
   }
 
-  // ---------- B. non-members are people too: employer and title ----------
+  // ── decisions ── B. non-members are people too: employer and title
   // A prospect's OrgKey was generated and then emitted nowhere — Person has no organisation
   // column, so for members employment is a Relationship edge. Non-members get the same edge.
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
@@ -110,6 +111,7 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { preRegistrations, responses, answers, employmentEdges };
 }
 

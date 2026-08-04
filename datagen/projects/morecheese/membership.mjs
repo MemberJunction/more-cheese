@@ -17,6 +17,7 @@ import { yearsOf } from '../../engine/authoring.mjs';
 import { featureArrows } from '../../engine/features.mjs';
 
 export function runRenewalUnroll(cfg, { people, orgs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const M = R.membership;
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
@@ -56,6 +57,7 @@ export function runRenewalUnroll(cfg, { people, orgs }) {
   // event record. BUILT-IN drivers (standardized tenure, the drifting latent, the employer-
   // event window) + DECLARED-FEATURE factors read straight from the ruleset.
   const declared = featureArrows(M.effects);
+  // ── decisions ── one pattern call per decision, in causal order
   recurringDecision({
     seed, years,
     streamKey: (c, y) => `renew:${c.p.MemberNumber}:${y}`,
@@ -158,6 +160,7 @@ export function runRenewalUnroll(cfg, { people, orgs }) {
     pushPeriod(p, st.start, st.end, status, null, null);
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { periods, renewalEvents };
 }
 

@@ -17,6 +17,7 @@ const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
 const DAY = 86400000;
 
 export function buildSonar(cfg) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, release } = cfg;
   const S = R.sonar;
   const releaseMs = release.getTime();
@@ -84,5 +85,6 @@ export function buildSonar(cfg) {
     IsRequired: false, DisplayLabel: f.displayLabel, DisplayOrder: i + 1,
   }));
 
+  // ── shape ── assemble the named tables this domain owns
   return { bandSet, bands, model, version, timeWindows, relatedEntities, factors, modelFactors };
 }

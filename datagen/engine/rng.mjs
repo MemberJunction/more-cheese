@@ -28,11 +28,34 @@ function sfc32(a, b, c, d) {
   };
 }
 
+// STREAM AUDIT — off unless a caller turns it on, because it captures a stack per call and a pilot
+// build asks for ~50,000 streams. "One dice stream per decision" is a load-bearing rule that
+// nothing could check: sharing a stream between two decisions couples them invisibly, and the
+// coupling shows up as plausible data. cli/check-streams.mjs turns this on and reports violations.
+//
+// Switched by a function rather than an env var on purpose: reading `process` here put an untyped
+// global into the engine's most-imported module, which broke type inference for the whole file and
+// silently stopped the misuse probe from catching anything. The suite's type step caught it.
+//
+// This block sits ABOVE rng's doc comment, not between it and the function. Putting it in between
+// detached `@returns {Rng}` from what it annotates, rng's return type went to inferred, and the two
+// rng misuse probes stopped firing — a type surface that quietly stopped typing anything.
+let AUDIT = false;
+/** @type {Map<string, Set<string>>} stream key → the call sites that asked for it */
+export const streamAudit = new Map();
+/** Turn the stream audit on. Call before generating; costs a stack capture per stream. */
+export function enableStreamAudit() { AUDIT = true; }
+
 /**
  * A substream keyed by (masterSeed, streamKey) — e.g. rng(seed, 'person:ICF-000101').
  * @returns {import('./types.js').Rng}
  */
 export function rng(masterSeed, streamKey) {
+  if (AUDIT) {
+    const site = (new Error().stack.split('\n')[2] ?? '').trim().replace(/.*\/(projects|engine)\//, '$1/');
+    if (!streamAudit.has(streamKey)) streamAudit.set(streamKey, new Set());
+    streamAudit.get(streamKey).add(site);
+  }
   const h = xmur3(`${masterSeed}::${streamKey}`);
   const next = sfc32(h(), h(), h(), h());
   for (let i = 0; i < 12; i++) next(); // warm up

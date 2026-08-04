@@ -13,11 +13,12 @@ import { TOPONYMS } from './banks.mjs';
 import { iso, addDays, addYears, parseDate } from '../../engine/dates.mjs';
 
 export function buildPrograms(cfg, { people, periods, learning }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const PR = R.programs;
   const releaseIso = iso(release);
 
-  // ---------- certifications ----------
+  // ── fixtures ── certifications
   const certifications = PR.catalog.certifications.map((c) => ({
     CertKey: c.key, Name: c.name, Description: c.description ?? null, ValidYears: c.validYears, IsSharedDemo: true,
   }));
@@ -101,7 +102,7 @@ export function buildPrograms(cfg, { people, periods, learning }) {
     }
   }
 
-  // ---------- competition entries (producers with orgs; org membership = eligibility) ----------
+  // ── decisions ── competition entries (producers with orgs; org membership = eligibility)
   const competitionEntries = [];
   const memberYears = yearsCovered(periods, R.history.startYear, release.getUTCFullYear());
   const productName = (r) => r.pick(PR.catalog.competitionProductForms).replace('{t}', r.pick(TOPONYMS));
@@ -127,7 +128,7 @@ export function buildPrograms(cfg, { people, periods, learning }) {
     }
   }
 
-  // ---------- advocacy actions ----------
+  // ── decisions ── advocacy actions
   const advocacyActions = [];
   const crowd = people.filter((p) => !p._hero);
   childOutcome({
@@ -181,6 +182,7 @@ export function buildPrograms(cfg, { people, periods, learning }) {
     };
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { certifications, memberCertifications, competitionEntries, advocacyActions };
 }
 

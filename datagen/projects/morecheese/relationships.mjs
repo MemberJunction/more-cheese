@@ -10,6 +10,7 @@
 import { rng } from '../../engine/rng.mjs';
 
 export function buildRelationships(cfg, { people, orgs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R } = cfg;
   const REL = R.relationships;
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
@@ -57,11 +58,12 @@ export function buildRelationships(cfg, { people, orgs }) {
     relationships.push(row);
   }
 
-  // ---------- derived demo-owned edges ----------
+  // ── decisions ── derived demo-owned edges
   // The graph used to be 1,593 employment edges and 3 authored story links, so a
   // relationship viewer had nothing to view. These derive from facts we already have
   // (no new person/org rows, no re-roll: relationships is downstream-terminal).
   const D = REL.params;
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { seed } = cfg;
 
   // REFERRALS: a joiner was referred by someone who was ALREADY a member on their join
@@ -114,5 +116,6 @@ export function buildRelationships(cfg, { people, orgs }) {
     }
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { relationshipTypes, relationships };
 }

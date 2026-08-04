@@ -20,6 +20,7 @@ const MEETINGS_ENTITY = 'Committees: Meetings';
 const workTime = (r) => `${String(r.int(8, 17)).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
 
 export function buildTasks(cfg, { people, periods, committees }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const T = R.tasks;
   const releaseIso = iso(release);
@@ -52,7 +53,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
     EntityName: entityName, RefKind: refKind, RefKey: refKey, IsSharedDemo: true,
   });
 
-  // ---------- committee action items: spawned by completed meetings ----------
+  // ── decisions ── committee action items: spawned by completed meetings
   const P = T.params;
   const actionTasks = [];
   for (const meeting of committees.meetings) {
@@ -112,7 +113,7 @@ export function buildTasks(cfg, { people, periods, committees }) {
     assign(t, t._assignee, t.Status === 'Completed' ? 'Completed' : 'InProgress');
   }
 
-  // ---------- renewal outreach: the PendingRenewal queue, assigned to the M&O chair ----------
+  // ── decisions ── renewal outreach: the PendingRenewal queue, assigned to the M&O chair
   const lastPeriod = new Map();
   for (const per of periods) lastPeriod.set(per.MemberNumber, per);
   const activeTerm = R.committees.catalog.terms[R.committees.catalog.terms.length - 1];
@@ -149,5 +150,6 @@ export function buildTasks(cfg, { people, periods, committees }) {
   }
 
   for (const t of tasks) { delete t._assignee; delete t._dueIso; delete t._created; }
+  // ── shape ── assemble the named tables this domain owns
   return { taskTypes, tasks, taskAssignments, taskLinks };
 }

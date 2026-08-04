@@ -102,7 +102,7 @@ writeFileSync(generatorPath, `// ${Cap} — TODO: one line on what this generate
 
 import { rng } from '../../engine/rng.mjs';
 import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
-import { yearsOf, coverageOf, stripInternals } from '../../engine/authoring.mjs';
+import { yearsOf, thetaAt, coverageOf, stripInternals } from '../../engine/authoring.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { uuidFor } from '../../engine/ids.mjs';
 
@@ -126,7 +126,7 @@ export function build${Cap}(cfg, { people, periods }) {
     seed,
     years,
     poolOf: (y) => people.filter((p) => !p._dup && covered(p.MemberNumber, \`\${y}-07-01\`)),
-    scoreOf: (p, y) => D.effects['${name}.engagement'].beta * (p._thetaPath?.[y] ?? p._theta),
+    scoreOf: (p, y) => D.effects['${name}.engagement'].beta * thetaAt(p, y),   // how engaged, that year
     target: P.participation.target,
     // one stream per decision, named for it. NEVER reorder draws inside a stream:
     // adding one in the middle re-rolls everything after it.

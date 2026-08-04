@@ -16,6 +16,7 @@ import { consumerDomainFor, deaccent } from './world.mjs';
 const EMPLOYEE_TYPE_ID = '27CFD031-5663-4000-A7AB-8AC87DB88C1D'; // bizapps-common's seeded Employee type
 
 export function buildDefects(cfg, { people, orgs, relationships }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const D = R.defects;
   const labels = [];
@@ -27,7 +28,7 @@ export function buildDefects(cfg, { people, orgs, relationships }) {
     return [...idx].map((i) => pool[i]);
   };
 
-  // ---------- duplicate people: shallow contact records ----------
+  // ── decisions ── duplicate people: shallow contact records
   const rDup = rng(seed, 'defect:duplicates');
   for (const p of pickDistinct(rDup, crowd.filter((x) => x.Email), D.params.duplicatePersonCount)) {
     const dupNumber = `ICF-D${p.MemberNumber.slice(-5)}`;
@@ -61,7 +62,7 @@ export function buildDefects(cfg, { people, orgs, relationships }) {
     });
   }
 
-  // ---------- stale employers: profile lies, relationships tell the truth ----------
+  // ── decisions ── stale employers: profile lies, relationships tell the truth
   const orgKeys = orgs.filter((o) => !o.OrgKey.startsWith('ORG-H') && !o.OrgKey.startsWith('ORG-T')).map((o) => o.OrgKey);
   const empRelByMember = new Map(relationships.relationships.filter((x) => x.RelKey.startsWith('emp:')).map((x) => [x.FromMemberNumber, x]));
   const rStale = rng(seed, 'defect:stale-employer');
@@ -103,7 +104,7 @@ export function buildDefects(cfg, { people, orgs, relationships }) {
     });
   }
 
-  // ---------- typo'd emails ----------
+  // ── decisions ── typo'd emails
   const rTypo = rng(seed, 'defect:typo-email');
   const typoPool = crowd.filter((p) => p.Email && !labels.some((l) => l.MemberNumber === p.MemberNumber));
   for (const p of pickDistinct(rTypo, typoPool, D.params.typoEmailCount)) {
@@ -125,5 +126,6 @@ export function buildDefects(cfg, { people, orgs, relationships }) {
     p.Email = typo;
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { labels, extraPeople };
 }

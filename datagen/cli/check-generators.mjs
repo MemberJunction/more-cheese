@@ -67,8 +67,18 @@ for (const f of files) {
   }
 
   // 3. the readable half: are the sections there?
+  //
+  // Reported, never failed — a build that breaks over a comment is theatre. But the report is
+  // specific rather than a count: what matters is a generator that MAKES DECISIONS without saying
+  // where they are, because that is the part a reader has to find. A pure-fixtures generator with
+  // no `decisions` header is correct, not incomplete, and counting headers cannot tell them apart.
   const present = SECTIONS.filter((s) => new RegExp(`──\\s*${s}\\s*──`, 'i').test(src));
-  if (present.length < 2) soft.push(`${f}: ${present.length}/4 section headers`);
+  const decides = /\brng\(/.test(src) || /\b(annualParticipation|recurringDecision|childOutcome|derivedTransaction|staticAssignment)\(/.test(src);
+  if (present.length < 2) {
+    soft.push(`${f}: only ${present.length}/4 sections (${present.join(', ') || 'none'})`);
+  } else if (decides && !present.includes('decisions')) {
+    soft.push(`${f}: draws or calls a pattern, but has no '── decisions ──' header — the reader has to find them`);
+  }
 }
 
 console.log(`generator contract — ${files.length} generators in '${project}'\n`);

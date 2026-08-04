@@ -16,11 +16,12 @@ import { derivedTransaction } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
 export function buildMoney(cfg, { people, periods, events, registrations, programs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const O = R.orders;
   const P = O.catalog.paymentProfiles;
 
-  // ---------- products: one Membership product per tier + the event products ----------
+  // ── fixtures ── products: one Membership product per tier + the event products
   const products = R.membership.catalog.tiers.map((t) => ({
     ProductKey: `PROD-MEM-${t.name.toUpperCase()}`, Name: `${t.name} Membership (annual)`,
     ProductType: 'Membership', UnitPrice: t.dues, IsSharedDemo: true,
@@ -73,7 +74,7 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
     }
   };
 
-  // ---------- dues: one order per membership period (order-per-cycle, BO-D40 verbatim) ----------
+  // ── decisions ── dues: one order per membership period (order-per-cycle, BO-D40 verbatim)
   // Expressed through core's derivedTransaction: the timing mixture is DECLARED in the
   // ruleset (orders.paymentProfiles); this domain only picks the profile per period and
   // shapes the rows. Draw order (method pick → late bernoulli → offset) is the pattern's
@@ -118,7 +119,7 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
     },
   });
 
-  // ---------- event registrations: card-at-checkout (declared `checkout` profile) ----------
+  // ── decisions ── event registrations: card-at-checkout (declared `checkout` profile)
   derivedTransaction({
     seed,
     parents: registrations,
@@ -138,7 +139,7 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
     },
   });
 
-  // ---------- certifications and competitions: real billable facts that used to be free ----------
+  // ── fixtures ── certifications and competitions: real billable facts that used to be free
   // 124 credentials and 445 competition entries generated no revenue at all.
   for (const mc of programs?.memberCertifications ?? []) {
     const rC = rng(seed, `certfee:${mc.MemberCertKey}`);
@@ -220,5 +221,6 @@ export function buildMoney(cfg, { people, periods, events, registrations, progra
     if (pay.Status === 'Captured' && pay.PaymentDate >= inflightCut) pay.Status = 'InProgress';
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { products, orders, orderLines, payments: finalPayments };
 }
