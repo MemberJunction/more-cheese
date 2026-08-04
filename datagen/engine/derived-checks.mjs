@@ -30,12 +30,13 @@ const optional = async (spec) => {
  * @param {string} opts.project
  * @param {object} opts.R composed ruleset
  * @param {(pack: string, table: string) => any[]} opts.load
+ * @param {string[]} [opts.packs] every emitted pack name, if the caller can enumerate them
  * @param {(name: string, ok: boolean, detail?: string) => void} opts.check
  * @param {'referential'|'final'} phase
  * @returns {Promise<{kinds: string[], counts: Record<string, number>}>}
  */
-export async function runDerivedChecks({ project, R, load, check }, phase) {
-  const { runRefChecks, runPresenceChecks, runTargetChecks } = await import('./checks.mjs');
+export async function runDerivedChecks({ project, R, load, check, packs }, phase) {
+  const { runRefChecks, runPresenceChecks, runTargetChecks, runInstallOrderChecks } = await import('./checks.mjs');
   const base = `../projects/${project}/`;
   const kinds = [];
   const counts = {};
@@ -46,6 +47,10 @@ export async function runDerivedChecks({ project, R, load, check }, phase) {
       runRefChecks(refsMod.refs, load, check);
       kinds.push('references');
       counts.references = refsMod.refs.length;
+      // the same declarations, read for a different claim: the packs' install order
+      runInstallOrderChecks(refsMod.refs, load, check, packs);
+      kinds.push('install order');
+      counts.installOrder = 2;
     }
 
     const presenceMod = await optional(`${base}presence.mjs`);

@@ -53,4 +53,21 @@ export const refs = [
 
   // ---- tasks ----
   { from: ['tasks', 'tasks', 'CreatedByMemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+
+  // ---- the roster edges, every pack that names a person ----
+  // Found by inference, not by memory: every *Key/*Number column in the emitted packs was tested
+  // against every unique-key column, and these ten held in the data while being declared nowhere.
+  // Each was a missing dangling-reference gate; they also make the install-order check mean
+  // something, which on eight declared cross-pack edges it did not.
+  { from: ['membership', 'advocacy_actions', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['membership', 'data_quality_labels', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['events', 'competition_entries', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['events', 'competition_entries', 'OrgKey'], to: ['common', 'organizations', 'OrgKey'] },
+  { from: ['learning', 'enrollments', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['learning', 'member_certifications', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['forms', 'form_responses', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'],
+    note: 'nullable BY DESIGN: the public application form takes anonymous respondents' },
+  { from: ['messaging', 'portal_sessions', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['messaging', 'secure_threads', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
+  { from: ['messaging', 'secure_messages', 'MemberNumber'], to: ['common', 'people', 'MemberNumber'] },
 ];

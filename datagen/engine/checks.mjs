@@ -127,6 +127,71 @@ export function runRefChecks(refs, load, check, filters = {}) {
 }
 
 /**
+ * INSTALL ORDER, derived from the reference graph.
+ *
+ * Every pack's manifest declares `dependsOn` — the packs an installer must load first. That is a
+ * claim, and until now nothing checked it: the only gate asserted `Array.isArray(dependsOn)`, so
+ * removing a real dependency (orders → events) passed 257 of 257 gates and shipped a manifest
+ * telling the installer the wrong order. The failure lands at install time, on a foreign key, in
+ * somebody else's terminal.
+ *
+ * It does not need a new declaration, because refs.mjs already carries pack membership in every
+ * edge: a reference from pack A to pack B IS a dependency of A on B. Transitive counts — `sonar`
+ * may reach `common` through `events` — but a cycle does not, because "load bottom-up" stops
+ * meaning anything.
+ *
+ * @param {readonly {from: [string,string,string], to: [string,string,string]}[]} refs
+ * @param {(pack: string, table: string) => any} load  called as load(pack, 'manifest')
+ * @param {(name: string, ok: boolean, detail?: string) => void} check
+ * @param {string[]} [allPacks] every emitted pack name — required for the cycle check to be complete
+ */
+export function runInstallOrderChecks(refs, load, check, allPacks) {
+  // Seed from the packs the reference graph names, then FOLLOW dependsOn to discover the rest.
+  // Seeding alone is not enough: a pack with no declared references (platform, sonar) would never
+  // have its manifest read, and a cycle running through it reported green — which is exactly what
+  // happened when this check was first negative-tested against a planted platform↔messaging cycle.
+  const deps = new Map();
+  // allPacks, when the caller can enumerate them, is what makes this COMPLETE: a pack nothing
+  // points at (platform, sonar are leaves) is otherwise never discovered, and a cycle confined to
+  // two such packs stays invisible.
+  const queue = allPacks?.length ? [...allPacks] : [...new Set(refs.flatMap((r) => [r.from[0], r.to[0]]))];
+  while (queue.length) {
+    const p = queue.shift();
+    if (deps.has(p)) continue;
+    let dependsOn;
+    try { dependsOn = load(p, 'manifest').dependsOn ?? []; } catch { continue; } // not emitted; the ref gates say so
+    deps.set(p, dependsOn);
+    queue.push(...dependsOn);
+  }
+
+  const reaches = (from, to, seen = new Set()) => {
+    if (seen.has(from)) return false;                       // cycle: stop, and report it separately
+    seen.add(from);
+    const direct = deps.get(from) ?? [];
+    return direct.includes(to) || direct.some((d) => reaches(d, to, seen));
+  };
+
+  const cross = refs.filter((r) => r.from[0] !== r.to[0] && deps.has(r.from[0]));
+  // report per PACK PAIR, not per edge: three columns in membership pointing at common is one
+  // missing dependency, and saying it three times just makes the message harder to read.
+  const uncovered = [...new Set(cross.filter((r) => !reaches(r.from[0], r.to[0])).map((r) => `${r.from[0]} → ${r.to[0]}`))];
+  check(
+    `install order: every cross-pack reference is covered by dependsOn (${cross.length} edges)`,
+    uncovered.length === 0,
+    uncovered.length
+      ? uncovered.map((pair) => `'${pair.split(' → ')[0]}' references '${pair.split(' → ')[1]}' but does not depend on it`).join('; ')
+      : `${deps.size} packs, order is honest`,
+  );
+
+  const cyclic = [...deps.keys()].filter((p) => reaches(p, p));
+  check(
+    'install order: dependsOn is acyclic',
+    cyclic.length === 0,
+    cyclic.length ? `CYCLE through: ${cyclic.join(', ')} — nothing can be installed first` : 'bottom-up load is possible',
+  );
+}
+
+/**
  * Every declared mix (a map of category → positive weight), by dotted path.
  * Recognised by shape and position — anything under a `mixes` key.
  * @returns {{ path: string, categories: string[] }[]}

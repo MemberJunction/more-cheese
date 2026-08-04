@@ -174,9 +174,15 @@ Three wiring steps, then it runs:
   1. add '${name}' to projects/${project}/ruleset/modules/index.json
   2. in projects/${project}/index.mjs:
        import { build${Cap} } from './${name}.mjs';
-       const ${name} = build${Cap}(cfg, people, periods);     // place it after what it reads
+       const ${name} = build${Cap}(cfg, { people, periods });   // deps are ONE OBJECT — the contract
        …return { …, ${name} };
-       …and a pack entry: ${name}: { dependsOn: ['common'], tables: { ${name}: world.${name}.${name} } }
+       …and a pack entry, one table per line:
+           ${name}: {
+             dependsOn: ['common'],          // checked against refs.mjs, so it must be true
+             tables: { ${name}: ${name}.${name} },
+           },
+       Forget the pack entry and the build now STOPS: rows that ship nowhere used to be
+       invisible — a green build and no data.
   3. node cli/build.mjs --n 500 --seed 42 --release 2026-07-31
 
 Then the declarations, which is what earns you checks (all optional, each pays):

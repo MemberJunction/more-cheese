@@ -354,6 +354,41 @@ step('generator contract holds (and a positional signature is caught)', () => {
   } finally { writeFileSync(f, original); }
 });
 
+// 0l. THE PACK CONTRACT — the third and last coupling point to get a named shape.
+//
+// A pack declares what ships and what must install first. Both claims were unchecked, and both
+// were measured wrong-and-green before this existed:
+//
+//   * a domain wired into buildWorld but left out of the pack map generated rows and shipped
+//     NOTHING, with 257 of 257 gates passing. It is the last of three wiring steps and it was the
+//     only one nothing chased you about.
+//   * dependsOn could say anything. The one gate on it asserted Array.isArray(). Deleting a real
+//     dependency was green, and the failure lands at install time on a foreign key.
+step('pack contract holds (an unshipped table and a lying dependsOn are both caught)', () => {
+  const f = join(HERE, 'projects/morecheese/index.mjs');
+  const original = readFileSync(f, 'utf8');
+  const gen = () => run('generate.mjs', ['--n', '300', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  try {
+    // (a) a whole domain left out of the pack map
+    const from = original.indexOf('    messaging: {\n      dependsOn:');
+    const to = original.indexOf('    platform: {\n      dependsOn:');
+    if (from < 0 || to < 0) throw new Error('pack map anchors moved — this negative test is now vacuous');
+    writeFileSync(f, original.slice(0, from) + original.slice(to));
+    let out = '';
+    try { gen(); } catch (e) { out = String(e.stdout ?? '') + String(e.stderr ?? '') + String(e.message ?? ''); }
+    if (!/ship NOWHERE/.test(out) || !/messaging\.messages/.test(out)) {
+      throw new Error(`emitPacks MISSED a domain that ships nowhere. Got: ${out.slice(0, 400)}`);
+    }
+
+    // (b) dependsOn omitting a dependency the reference graph proves is real
+    writeFileSync(f, original.replace("    membership: {\n      dependsOn: ['common'],", '    membership: {\n      dependsOn: [],'));
+    gen();
+    let caught = false;
+    try { run('check-declared.mjs', ['--out', 'out-test']); } catch { caught = true; }
+    if (!caught) throw new Error('the install-order gate MISSED a dependsOn that omits a real dependency');
+  } finally { writeFileSync(f, original); }
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {

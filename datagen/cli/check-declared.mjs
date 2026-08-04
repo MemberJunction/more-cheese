@@ -13,7 +13,7 @@
 // first message for a project on day one, and considerably better than the nothing it got before.
 //
 //   node cli/check-declared.mjs --out out [--project morecheese]
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadRuleset } from '../engine/config.mjs';
@@ -28,6 +28,7 @@ const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 const project = arg('--project', run.project);
 const R = await loadRuleset(run.scenario, project);
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
+const PACK_NAMES = readdirSync(join(OUT, 'packs'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 
 const results = [];
 const check = (name, ok, detail) => results.push({ name, ok, detail });
@@ -35,9 +36,9 @@ const check = (name, ok, detail) => results.push({ name, ok, detail });
 // Referential first, and stop if it fails: a broken reference graph makes every measurement below
 // meaningless, and reporting fifty red gates when the real problem is one missing key wastes the
 // reader's time.
-const ref = await runDerivedChecks({ project, R, load, check }, 'referential');
+const ref = await runDerivedChecks({ project, R, load, check, packs: PACK_NAMES }, 'referential');
 const refBroken = results.some((r) => !r.ok);
-const fin = refBroken ? { kinds: [], counts: {} } : await runDerivedChecks({ project, R, load, check }, 'final');
+const fin = refBroken ? { kinds: [], counts: {} } : await runDerivedChecks({ project, R, load, check, packs: PACK_NAMES }, 'final');
 
 let failed = 0;
 for (const r of results) {

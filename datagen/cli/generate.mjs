@@ -13,12 +13,14 @@ import { emitPacks } from '../engine/packs.mjs';
 import { join } from 'node:path';
 
 const cfg = await loadConfig(process.argv.slice(2));
-const { buildWorld, buildPacks } = await loadProject(cfg.project);
+const { buildWorld, buildPacks, NOT_SHIPPED } = await loadProject(cfg.project);
 
 const world = buildWorld(cfg);
 
-// §8: pack emission — the project supplies the pack map, the engine deals the rows
-emitPacks(cfg, { packs: buildPacks(world), people: world.people, renewalEvents: world.renewalEvents, registries: world.motifs ? { motifs: world.motifs } : undefined });
+// §8: pack emission — the project supplies the pack map, the engine deals the rows.
+// `world` and NOT_SHIPPED are passed so the emitter can enforce the pack contract: a table that
+// is generated and appears in no pack ships nothing, and used to do so with a green build.
+emitPacks(cfg, { packs: buildPacks(world), world, notShipped: NOT_SHIPPED, people: world.people, renewalEvents: world.renewalEvents, registries: world.motifs ? { motifs: world.motifs } : undefined });
 
 // run summary
 const { people, orgs, periods, events, registrations, renewalEvents } = world;

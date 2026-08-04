@@ -28,12 +28,12 @@ to add something, [TOUR.md](TOUR.md) if you want the plain-English tour first.
 
 ## ⚠ The state of the work, and the first thing to do
 
-**23 commits sit unlanded in two branches, and the second is stacked on the first.**
+**25 commits sit unlanded in two branches, and the second is stacked on the first.**
 
 | branch | commits | status |
 |---|---|---|
 | `morecheese-datagen-simplify` (PR #14) | 13 | open, CI green, **never reviewed** |
-| `morecheese-datagen-framework` | 10 | pushed, **no PR**, and it sits on top of PR #14 |
+| `morecheese-datagen-framework` | 12 | pushed, **no PR**, and it sits on top of PR #14 |
 
 **Merge order is forced: PR #14 first, then the framework branch.** They cannot go in the other
 order, and the second will not rebase cleanly onto `next` without the first.
@@ -42,7 +42,7 @@ order, and the second will not rebase cleanly onto `next` without the first.
 of it is landed, so none of it protects anyone yet. Reviewing and merging these two is worth more
 than any further improvement to them. If you read one thing and act on one thing, make it this.
 
-Both branches are green: `node test.mjs` runs 28 steps and every one passes.
+Both branches are green: `node test.mjs` runs 30 steps and every one passes.
 
 ---
 
@@ -86,7 +86,21 @@ clean push, and were caught by looking at a rendered grid.
 
 ---
 
-## The five things that will bite you
+## The three coupling points, and the shape each one now has
+
+Everything a new domain has to touch is one of these. Each had the same problem — a shape that
+existed in somebody's head and was enforced nowhere — and each now has a named contract:
+
+| you are writing | the shape | enforced by |
+|---|---|---|
+| a ruleset block | `catalog` · `params` · `effects` · `mixes` | `cli/check-ruleset.mjs`, and declaring earns you gates |
+| a generator | `build<Domain>(cfg, deps)`, deps an object; four sections; returns named tables | `cli/check-generators.mjs` |
+| a pack entry | `dependsOn` (true, acyclic) · `tables` · `NOT_SHIPPED` with reasons | `engine/packs.mjs` at emit, plus the install-order gates |
+
+The order they were done in is not the order that mattered. The ruleset came first and is the one
+people noticed; the pack map came last and was hiding the most expensive failure of the three.
+
+## The six things that will bite you
 
 Every one of these shipped wrong data with **green gates**. They are why the checks exist in the
 shape they do.
@@ -112,7 +126,13 @@ never ran; a test reporter that crashed on the failure it was handed; and a comm
 failure and exited 0. **When you add a check, plant the defect and require your gate to fire by
 name.** A checker that has never caught anything is decoration.
 
-**5. Mutation-order dependencies.** Some stages must run before others for reasons no argument list
+**5. A domain that ships nowhere.** Wire a generator into `buildWorld`, forget the pack entry, and
+it produces rows into memory and writes none. Measured: 257 of 257 gates green, output empty. The
+pack entry was the last of three wiring steps and the only one nothing chased you about. The
+emitter now refuses, naming the tables — and `NOT_SHIPPED` is where a deliberate non-shipper goes,
+with a reason, so that it stops looking like forgetting.
+
+**6. Mutation-order dependencies.** Some stages must run before others for reasons no argument list
 shows. Swapping two lines compiles, runs, and changes the data — verified. The load-bearing ones are
 declared in `projects/morecheese/pipeline.mjs`; see [PIPELINE.md](PIPELINE.md) for the graph.
 
@@ -127,7 +147,7 @@ change, then `diff -r`. If output moved and you did not mean it to, stop.
 Not reading. Doing. If any step surprises you, the documentation is wrong and fixing it is your
 first contribution.
 
-1. `node test.mjs` — 28 steps, all green. If not, stop and find out why before anything else.
+1. `node test.mjs` — 30 steps, all green. If not, stop and find out why before anything else.
 2. Open `projects/morecheese/ruleset/modules/committees.mjs`, change `meetingsPerYear` from 4 to 6,
    and run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Read whatever it says.
    Change it back.

@@ -169,6 +169,24 @@ Then wire it into `buildWorld` and the pack map in `projects/<project>/index.mjs
 order? [PIPELINE.md](PIPELINE.md) shows the 22 stages as a graph — put yours after everything it
 reads.
 
+**THE PACK CONTRACT.** The pack map is how rows become installable folders. Each entry declares
+two things, and each is a claim:
+
+| | |
+|---|---|
+| `dependsOn` | the packs an installer must load first — **checked** against `refs.mjs`, transitively, and for cycles |
+| `tables` | table name → the rows that ship. One table per line |
+| `NOT_SHIPPED` | anything generated that deliberately ships nowhere, **with a reason per entry** |
+
+**This step used to be the easiest one to skip and the most expensive.** A domain wired into
+`buildWorld` but left out of the pack map generates its rows and ships **nothing** — measured: 257
+of 257 gates passed and the output was empty. It is the last of three wiring steps and it was the
+only one nothing chased you about. Now the build stops and names the tables.
+
+That is also why `NOT_SHIPPED` exists. Not shipping something is legitimate — validator-private
+ground truth, or rows folded into another pack's table — but it is a *decision*, and without
+writing it down it looks exactly like forgetting.
+
 **If your stage MUTATES something an existing stage reads** — writing a field onto people, say —
 that ordering is invisible in the argument lists and nothing will enforce it. Declare the edge in
 `projects/<project>/pipeline.mjs` and the suite will hold it. Swapping two such calls otherwise

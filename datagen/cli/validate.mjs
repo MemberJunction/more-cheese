@@ -12,7 +12,7 @@
 //   heroes       — the pinned people load with their stories intact
 //   statusMix    — the member-status split looks like the documented world
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logisticFit } from '../engine/stats.mjs';
@@ -29,6 +29,7 @@ const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.star
 const ROOT = join(HERE, '..');
 const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
+const PACK_NAMES = readdirSync(join(OUT, 'packs'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 // The MAPPING is the PROJECT's, not the engine's — loaded by name so this command knows no domain.
 const { MJ_ENTITY_VAR, RECORD_PREFIX } = await import(`../projects/${run.project}/seed-mapping.mjs`);
@@ -1621,7 +1622,7 @@ checkPacks();
 // REFERENTIAL phase: before the fail-fast bailout, because a broken reference graph makes every
 // causal measurement below meaningless. Wiring these AFTER the bailout once meant a dangling
 // reference stopped the run before they executed — they reported green by never running.
-await runDerivedChecks({ project: run.project, R, load, check }, 'referential');
+await runDerivedChecks({ project: run.project, R, load, check, packs: PACK_NAMES }, 'referential');
 if (results.some((r) => !r.ok)) {
   for (const r of results) console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);
   console.log('\n✋ FK-first: referential gates failed — causal gates not run');
@@ -1647,7 +1648,7 @@ checkSonar();
 // Declaration-derived TARGET gates — final phase, once the world is known referentially sound.
 // The project supplies only the measurements (projects/<name>/measurements.mjs); the band, the
 // cushion and the coverage gate are derived. A declared target with no measurement is REPORTED.
-await runDerivedChecks({ project: run.project, R, load, check }, 'final');
+await runDerivedChecks({ project: run.project, R, load, check, packs: PACK_NAMES }, 'final');
 let failed = 0;
 for (const r of results) {
   console.log(`${r.ok ? '✅' : '❌'} ${r.name}${r.detail ? `  — ${r.detail}` : ''}`);

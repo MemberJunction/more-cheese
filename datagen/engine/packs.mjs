@@ -6,13 +6,73 @@
 // always. Latent dials (_theta/_phi) are stripped here — they exist only inside the kitchen;
 // the validator gets its own private file (validation-events.json) that is never installed.
 
-import { writeFileSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { iso } from './dates.mjs';
+
+// ─────────────────────────────────────────────────────────────────────────────────────────────
+// THE PACK CONTRACT
+//
+// A pack declares three things, and each is a claim somebody can be wrong about:
+//
+//   dependsOn   which packs must be installed first     — checked against the reference graph
+//   tables      table name → the rows that ship         — every world table must appear in one
+//   notShipped  what deliberately ships nowhere         — with a reason, per entry
+//
+// The middle claim is the expensive one. A domain can generate rows and be left out of the pack
+// map entirely, and then it ships NOTHING — with a green build. Measured, not supposed: a
+// scaffolded domain wired into buildWorld but not into the pack map passed 257 of 257 gates and
+// wrote zero rows. The pack entry is the last of three wiring steps and it was the only one
+// nothing chased you about.
+//
+// So `notShipped` exists. Not shipping a table is legitimate — validator-private ground truth,
+// harness registries, rows folded into another pack's table — but it is a DECISION, and this
+// makes you write it down with a reason instead of it being indistinguishable from forgetting.
+// ─────────────────────────────────────────────────────────────────────────────────────────────
+
+/** Every array in the world that no pack ships. Read statically from the project's buildPacks,
+ * because rows are re-derived on the way out (stripped, concatenated) and identity is lost. */
+export function unshippedTables(world, project, notShipped = {}) {
+  const src = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'projects', project, 'index.mjs'), 'utf8');
+  // from the `return {` only: buildPacks destructures every world key on one line, so scanning
+  // the whole function would match names it never actually ships.
+  const fn = src.slice(src.indexOf('export function buildPacks'));
+  // `...` first: a spread puts a dot immediately before the name, which would otherwise look
+  // like a property access to the lookbehind and hide every table that ships via concatenation.
+  const body = fn.slice(fn.indexOf('return {')).replace(/\.\.\./g, ' ');
+  const mentions = (path) => new RegExp(`(?<![\\w.])${path.replace('.', '\\.')}\\b`).test(body);
+  const missing = [];
+  for (const [key, val] of Object.entries(world)) {
+    if (notShipped[key]) continue;
+    if (Array.isArray(val)) {
+      if (!mentions(key)) missing.push(key);
+    } else if (val && typeof val === 'object') {
+      for (const [sub, rows] of Object.entries(val)) {
+        if (!Array.isArray(rows) || !rows.length) continue;
+        if (notShipped[`${key}.${sub}`]) continue;
+        if (!mentions(`${key}.${sub}`)) missing.push(`${key}.${sub}`);
+      }
+    }
+  }
+  return missing;
+}
 
 /** Emit the project's packs. The PACK MAP comes from the project (its buildPacks(world)) —
  * the engine only deals rows into folders and writes the harness-private files. */
-export function emitPacks(cfg, { packs, people, renewalEvents, registries }) {
+export function emitPacks(cfg, { packs, world, people, renewalEvents, registries, notShipped }) {
+  if (world) {
+    const missing = unshippedTables(world, cfg.project, notShipped);
+    if (missing.length) {
+      throw new Error(
+        `${missing.length} table(s) are generated and ship NOWHERE:\n`
+        + missing.map((m) => `  ${m}`).join('\n')
+        + `\n\nAdd each to a pack's tables in projects/${cfg.project}/index.mjs, or — if it truly`
+        + ` should not ship — to NOT_SHIPPED there WITH A REASON.\nRows that ship nowhere are`
+        + ` invisible: the build passes, every gate passes, and the data is simply absent.`,
+      );
+    }
+  }
   mkdirSync(join(cfg.outDir, 'packs'), { recursive: true });
   for (const [name, pack] of Object.entries(packs)) {
     const dir = join(cfg.outDir, 'packs', name);
