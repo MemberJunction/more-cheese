@@ -756,12 +756,9 @@ function checkTrainability() {
 function checkComposedApps() {
   const CC = R.committees; const FF = R.forms;
   // committee participation share (over the ACTIVE term's eligible crowd — heroes excluded from the draw)
-  const activeTerm = CC.catalog.terms[CC.catalog.terms.length - 1];
-  const served = new Set(cMemberships.filter((m) => m.TermKey.endsWith(activeTerm.start)).map((m) => m.MemberNumber));
-  const eligible = people.filter((p) => periods.some((per) => per.MemberNumber === p.MemberNumber && per.StartDate <= activeTerm.start && activeTerm.start <= per.EndDate));
-  const share = eligible.length ? [...served].filter((m) => eligible.some((p) => p.MemberNumber === m)).length / eligible.length : 0;
-  const shareAllow = CC.params.volunteerShare.tolerance + 3 * Math.sqrt((CC.params.volunteerShare.target * (1 - CC.params.volunteerShare.target)) / Math.max(1, eligible.length)); // 3×SE: multiple comparisons across seeds+terms (arrow-gate precedent)
-  check(`committees: ${(share * 100).toFixed(1)}% of eligible serve vs ${CC.params.volunteerShare.target * 100}% ±${(shareAllow * 100).toFixed(1)}`, Math.abs(share - CC.params.volunteerShare.target) <= shareAllow, `${served.size} serving / ${eligible.length} eligible`);
+  // The share bands for volunteering and attendance are DERIVED now — declared in the ruleset with
+  // their measurements in projects/morecheese/measurements.mjs. What stays here is what a
+  // declaration cannot say.
   // every committee-term has exactly one Chair
   const chairs = new Map();
   const populated = new Set(cMemberships.map((m) => m.TermKey));
@@ -771,11 +768,6 @@ function checkComposedApps() {
   const crowdPopulated = new Set(cMemberships.filter((m) => !R.heroes.some((h) => h.memberNumber === m.MemberNumber)).map((m) => m.TermKey));
   const badChair = [...crowdPopulated].filter((t) => (chairs.get(t) ?? 0) !== 1).length;
   check('committees: exactly one Chair per crowd-populated committee-term', badChair === 0, `${chairs.size} chaired / ${crowdPopulated.size} crowd-populated terms`);
-  // meeting attendance rate
-  const present = cAttendance.filter((a) => a.AttendanceStatus === 'Present').length;
-  const attRate = cAttendance.length ? present / cAttendance.length : 0;
-  const attAllow = CC.params.attendPresent.tolerance + 1.5 * Math.sqrt((CC.params.attendPresent.target * (1 - CC.params.attendPresent.target)) / Math.max(1, cAttendance.length));
-  check(`committees: meeting attendance ${(attRate * 100).toFixed(1)}% vs ${CC.params.attendPresent.target * 100}% ±${(attAllow * 100).toFixed(1)}`, Math.abs(attRate - CC.params.attendPresent.target) <= attAllow, `${cAttendance.length} attendance rows`);
   // survey response rate (pooled over distributions) + NPS mean band — SURVEY responses only
   // (the membership application is a separate, anonymous funnel with its own gates below)
   const surveyResponses = fResponses.filter((x) => x.FormKey === 'post-conf-survey');
@@ -833,11 +825,9 @@ function checkComposedApps() {
       missing.length ? `never drawn: ${missing.join(', ')}` : declared.map((l) => `${l}=${issues.filter((x) => x.Severity === l).length}`).join(' '));
   }
   check('issues: severity and priority are decoupled (differ on some issues)', issues.some((x) => x.Severity !== x.Priority), `${issues.filter((x) => x.Severity !== x.Priority).length} differ`);
-  // issues: assignment coverage rides the declared share; assignees are committee officers
+  // issues: the assignment SHARE is derived; that every assignee is an officer is not — no
+  // reference edge or target band can say "and it must be one of these people".
   const assigned = issues.filter((x) => x.AssigneeMemberNumber);
-  const aShare = assigned.length / Math.max(1, issues.length);
-  const aAllow = II.params.assignment.tolerance + 1.5 * Math.sqrt(II.params.assignment.target * (1 - II.params.assignment.target) / Math.max(1, issues.length));
-  check(`issues: ${(aShare * 100).toFixed(1)}% assigned vs ${II.params.assignment.target * 100}% ±${(aAllow * 100).toFixed(1)}`, Math.abs(aShare - II.params.assignment.target) <= aAllow, `${assigned.length}/${issues.length}`);
   const officerSet = new Set(cMemberships.filter((m) => ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
   check('issues: every assignee is a committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
   // an assignee must already be a member when the ticket was worked (26 issues used to be
@@ -1027,18 +1017,6 @@ function checkComposedApps() {
     check(`certifications: ${cat.length} in the catalogue, every prerequisite satisfied`, cat.length >= 5 && broken.length === 0, broken.slice(0, 2).join('; ') || `${heldBy.size} holders`);
     check('certifications: catalogue rows carry a description', cat.every((c) => c.Description && c.Description.length > 30), `${cat.filter((c) => c.Description).length}/${cat.length}`);
   }
-  // programs: pursuit + advocate shares land (over their real pools)
-  const PRG = R.programs;
-  const completerSet = new Set(load('learning', 'enrollments').filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber));
-  const crowdCompleters = [...completerSet].filter((m) => !R.heroes.some((h) => h.memberNumber === m)).length;
-  const crowdCerts = memberCerts.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).length;
-  const certShare = crowdCerts / Math.max(1, crowdCompleters);
-  const certAllow = PRG.params.certificationPursuit.tolerance + 3 * Math.sqrt(PRG.params.certificationPursuit.target * (1 - PRG.params.certificationPursuit.target) / Math.max(1, crowdCompleters));
-  check(`programs: cert pursuit ${(certShare * 100).toFixed(1)}% of completers vs ${PRG.params.certificationPursuit.target * 100}% ±${(certAllow * 100).toFixed(1)}`, Math.abs(certShare - PRG.params.certificationPursuit.target) <= certAllow, `${crowdCerts} certs / ${crowdCompleters} completers`);
-  const advocates = new Set(advocacy.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).map((x) => x.MemberNumber)).size;
-  const advShare = advocates / Math.max(1, people.length);
-  const advAllow = PRG.params.advocateShare.tolerance + 3 * Math.sqrt(PRG.params.advocateShare.target * (1 - PRG.params.advocateShare.target) / Math.max(1, people.length));
-  check(`programs: advocates ${(advShare * 100).toFixed(1)}% vs ${PRG.params.advocateShare.target * 100}% ±${(advAllow * 100).toFixed(1)}`, Math.abs(advShare - PRG.params.advocateShare.target) <= advAllow, `${advocates} advocates`);
 
   // payment lifecycle: failure mix is part causal (low-phi), part noise — the ratio must express
   const PO2 = R.orders.params;
@@ -1284,13 +1262,8 @@ function checkDefects() {
 
 // ---------- secure messaging: threads derive from issues, message flow is coherent ----------
 function checkMessaging() {
-  const MM = R.messaging;
   // volume: declared share of issues + all hero issues (which always thread)
   const heroIssues = issues.filter((x) => x.IssueKey.startsWith('hero:'));
-  const want = MM.params.threadSharePerIssue.target;
-  const got = (smThreads.length - heroIssues.length) / Math.max(1, issues.length - heroIssues.length);
-  const allow = MM.params.threadSharePerIssue.tolerance + 1.5 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
-  check(`messaging: ${(got * 100).toFixed(1)}% of crowd issues have a secure thread vs ${want * 100}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${smThreads.length} threads / ${issues.length} issues`);
   const heroMissing = heroIssues.filter((x) => !smThreads.some((t) => t.IssueKey === x.IssueKey));
   check('messaging: every hero-authored issue has a secure thread', heroMissing.length === 0, heroMissing.map((x) => x.IssueKey).join(', ') || `${heroIssues.length} hero issues`);
   // integrity: thread state mirrors its issue; message flow is coherent and inside history

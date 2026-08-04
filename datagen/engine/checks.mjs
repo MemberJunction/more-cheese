@@ -53,7 +53,9 @@ export function declaredTargets(R) {
  *        standard-error cushion — a small pilot build must not fail on ordinary sampling noise.
  *        Returning null means "not applicable to this build" (skipped, not failed).
  * @param {(name: string, ok: boolean, detail?: string) => void} check the validator's reporter
- * @param {any} ctx               whatever the measurements need (loaded packs, usually)
+ * @param {any} ctx               whatever the measurements need — { load, R } here: the packs to
+ *        read, and the ruleset, because a pool is often defined by an authored catalog (which term
+ *        is current, who the heroes are) and not by the rows alone
  * @returns {{ ran: number, skipped: string[], unmeasured: string[] }}
  */
 export function runTargetChecks(R, measurements, check, ctx) {

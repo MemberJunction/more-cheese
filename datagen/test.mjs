@@ -258,6 +258,26 @@ step('polymorphic reference edges catch a bad parent AND an undeclared discrimin
   } finally { writeFileSync(f, original); }
 });
 
+// 0e-iii. A DERIVED target band must catch a broken share. Six of these were hand-written bands in
+// the validator until their measurements moved into the project; the migration was verified by
+// running derived and bespoke side by side and matching every digit, but a gate that has never been
+// seen to fail is still unproven, so one gets its data broken here.
+step('a derived target band catches a broken share', () => {
+  run('generate.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/issues/issues.json');
+  const original = readFileSync(f, 'utf8');
+  try {
+    const rows = JSON.parse(original);
+    for (const r of rows) delete r.AssigneeMemberNumber;   // 0% assigned against a declared 75%
+    writeFileSync(f, JSON.stringify(rows, null, 1));
+    let out = '';
+    try { run('check-declared.mjs', ['--out', 'out-test']); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!/issues\.params\.assignment: 0\.0% vs 75\.0%/.test(out)) {
+      throw new Error(`the derived target gate did not fire on a 0% share. Got: ${out.slice(0, 300)}`);
+    }
+  } finally { writeFileSync(f, original); }
+});
+
 // 0f. the derived PRESENCE floors must catch the failure that motivated them: Critical-severity
 // tickets sat at zero for weeks while every gate stayed green, because a category whose expected
 // share is 0.5% passes a ±6-point band at exactly zero rows. Reproduce it exactly.

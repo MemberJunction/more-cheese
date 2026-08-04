@@ -157,7 +157,9 @@ export default {
       // rate; boardeffect.com attendance trends). The SEC/public-company norm is directors
       // attending >=75% of board and committee meetings (lexology.com 75%-attendance-test).
       // 75% ±6 spans the moderate band up to the strong threshold.
-      attendPresent: { target: 0.75, tolerance: 0.06 },
+      // se: 1.5 — one measure over one big pool of attendance rows, so the cushion the old
+      // bespoke gate used was 1.5×SE, not the 3×SE reserved for many-comparison gates.
+      attendPresent: { target: 0.75, tolerance: 0.06, se: 1.5 },
 
       excusedShareOfAbsent: 0.4, // of those absent, this share are formally Excused
 

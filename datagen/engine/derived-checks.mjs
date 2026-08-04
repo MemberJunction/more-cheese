@@ -74,7 +74,7 @@ export async function runDerivedChecks({ project, R, load, check, packs }, phase
   const measurements = mMod?.measurements ?? {};
   const gatedElsewhere = mMod?.gatedElsewhere ?? new Set();
 
-  const { ran, unmeasured } = runTargetChecks(R, measurements, check, { load });
+  const { ran, unmeasured } = runTargetChecks(R, measurements, check, { load, R });
   const missing = unmeasured.filter((p) => !gatedElsewhere.has(p));
   check(
     `every declared target has a check (${ran} derived, ${gatedElsewhere.size} bespoke)`,
