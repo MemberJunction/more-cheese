@@ -88,8 +88,27 @@ export function runTargetChecks(R, measurements, check, ctx) {
 
 /**
  * A declared reference: a child column that must point at an existing parent key.
+ *
+ * `when` exists for POLYMORPHIC references — one column whose parent table depends on a sibling
+ * discriminator column, which is how audit rows, favourites, list members and task links all work
+ * here (`RefKind: 'issue' | 'task' | 'period' | …`). Without it those could not be declared at all
+ * and stayed a hand-written switch in the validator: five parent sets built by hand, one conditional
+ * chain, and a `: false` fallback that silently FAILED CLOSED on any kind nobody added to the chain.
+ *
+ * `when` is DATA — `{ RefKind: 'issue' }`, or `{ RefKind: ['memberprofile', 'person'] }` — and not a
+ * predicate function, which is what makes the real check possible. A predicate is opaque: all you can
+ * ask is whether it matched anything, and "matched nothing" cannot distinguish a renamed discriminator
+ * from a kind that is simply rare at this seed. Measured: requiring a non-empty subset failed 3 of 7
+ * seeds, because at N=500 some seeds have no billing issue sourced from an order at all.
+ *
+ * Stated as data, the discriminator column and its values are both known, so the question inverts
+ * into one with no false positives — see runDiscriminatorChecks: every value PRESENT in the data must
+ * be covered by some declared edge. A renamed kind appears as a value nobody declared; a rare kind
+ * simply has no rows, which is not a defect.
+ *
  * @typedef {{ from: [pack: string, table: string, column: string],
  *             to:   [pack: string, table: string, column: string],
+ *             when?: Record<string, string | readonly string[]>,
  *             note?: string }} Ref
  */
 
@@ -115,14 +134,65 @@ export function runRefChecks(refs, load, check, filters = {}) {
     return filters[key] ? filters[key](rows) : rows;
   };
   for (const ref of refs) {
-    const child = rowsOf(ref.from);
+    const all = rowsOf(ref.from);
+    const child = ref.when ? all.filter((r) => matchesWhen(r, ref.when)) : all;
     const parentKeys = new Set(rowsOf(ref.to).map((r) => r[ref.to[2]]));
     const bad = child.filter((r) => {
       const v = r[ref.from[2]];
       return v != null && !parentKeys.has(v);
     });
-    const name = `ref: ${ref.from[1]}.${ref.from[2]} → ${ref.to[1]}.${ref.to[2]}`;
+    const label = ref.when ? ` [${Object.entries(ref.when).map(([k, v]) => `${k}=${[v].flat().join('|')}`).join(' ')}]` : '';
+    const name = `ref: ${ref.from[1]}.${ref.from[2]}${label} → ${ref.to[1]}.${ref.to[2]}`;
+    // An empty subset is NOT failed here. A rare discriminator value legitimately has no rows at a
+    // given seed and scale; the renamed-value case is caught by runDiscriminatorChecks instead,
+    // which asks the question that has no false positives.
     check(name, bad.length === 0, bad.length ? `${bad.length} dangling of ${child.length}` : `${child.length} rows`);
+  }
+}
+
+/** Does a row match a declared `when`? Values may be a single value or a list. */
+function matchesWhen(row, when) {
+  return Object.entries(when).every(([col, want]) => [want].flat().includes(row[col]));
+}
+
+/**
+ * EVERY POLYMORPHIC KIND IS HANDLED — the question that replaced "did this subset match anything".
+ *
+ * A polymorphic reference column has a sibling discriminator, and each of its values needs its own
+ * declared edge. The failure that matters is a value PRESENT IN THE DATA that no edge covers: a kind
+ * renamed, or a new kind added by a generator and never declared. Its rows then point at nothing
+ * anybody checks, which is precisely what the validator's old `: false` fallback did — silently.
+ *
+ * This direction has no false positives, which the obvious direction did: requiring each declared
+ * subset to be non-empty failed 3 of 7 seeds on issues sourced from an order, a kind that is real but
+ * rare enough to be absent at N=500. Absence of rows is not a defect; an unclaimed value is.
+ *
+ * @param {readonly Ref[]} refs
+ * @param {(pack: string, table: string) => any[]} load
+ * @param {(name: string, ok: boolean, detail?: string) => void} check
+ */
+export function runDiscriminatorChecks(refs, load, check) {
+  // (pack.table.discriminatorColumn) → the values some declared edge claims
+  const claimed = new Map();
+  for (const ref of refs) {
+    if (!ref.when) continue;
+    for (const [col, want] of Object.entries(ref.when)) {
+      const key = `${ref.from[0]}.${ref.from[1]}.${col}`;
+      if (!claimed.has(key)) claimed.set(key, new Set());
+      for (const v of [want].flat()) claimed.get(key).add(v);
+    }
+  }
+  for (const [key, values] of claimed) {
+    const [pack, table, col] = key.split('.');
+    const present = new Set(load(pack, table).map((r) => r[col]).filter((v) => v != null));
+    const unclaimed = [...present].filter((v) => !values.has(v));
+    check(
+      `every ${table}.${col} value has a declared reference (${values.size} declared)`,
+      unclaimed.length === 0,
+      unclaimed.length
+        ? `UNDECLARED: ${unclaimed.join(', ')} — rows with this value reference nothing that is checked`
+        : `${present.size} in use of ${values.size} declared`,
+    );
   }
 }
 

@@ -212,7 +212,6 @@ export interface GateHelpers {
    * Does every reference point at something that exists? Null keys pass — an optional FK is
    * not a dangling one. Takes several relations at once so one gate can cover a whole pack.
    */
-  fkResolves(name: string, relations: readonly FkRelation[]): void;
   /**
    * Is this observed share within tolerance of its target? Pass `n` (the draw pool size) to
    * add an SE cushion, so a small pilot build isn't failed by ordinary sampling noise.
@@ -230,7 +229,7 @@ export interface GateHelpers {
   presenceFloor(name: string, countsByCategory: Record<string, number>, min?: number): void;
   /** Is there enough variety that repetition isn't visible on one screen? */
   distinctAtLeast(name: string, values: readonly unknown[], min: number, detail?: string): void;
-  /** The count of rows whose key is non-null and missing from the parent set. Building block for fkResolves. */
+  /** The count of rows whose key is non-null and missing from the parent set. Building block for the reference gates. */
   dangling(rows: readonly any[], keyFn: (row: any) => string | null | undefined, parents: Set<string>): number;
 }
 

@@ -28,12 +28,12 @@ to add something, [TOUR.md](TOUR.md) if you want the plain-English tour first.
 
 ## ⚠ The state of the work, and the first thing to do
 
-**25 commits sit unlanded in two branches, and the second is stacked on the first.**
+**27 commits sit unlanded in two branches, and the second is stacked on the first.**
 
 | branch | commits | status |
 |---|---|---|
 | `morecheese-datagen-simplify` (PR #14) | 13 | open, CI green, **never reviewed** |
-| `morecheese-datagen-framework` | 12 | pushed, **no PR**, and it sits on top of PR #14 |
+| `morecheese-datagen-framework` | 14 | pushed, **no PR**, and it sits on top of PR #14 |
 
 **Merge order is forced: PR #14 first, then the framework branch.** They cannot go in the other
 order, and the second will not rebase cleanly onto `next` without the first.
@@ -42,7 +42,7 @@ order, and the second will not rebase cleanly onto `next` without the first.
 of it is landed, so none of it protects anyone yet. Reviewing and merging these two is worth more
 than any further improvement to them. If you read one thing and act on one thing, make it this.
 
-Both branches are green: `node test.mjs` runs 31 steps and every one passes.
+Both branches are green: `node test.mjs` runs 32 steps and every one passes.
 
 ---
 
@@ -53,6 +53,10 @@ Both branches are green: `node test.mjs` runs 31 steps and every one passes.
   comments instead of prose smuggled into fake JSON keys.
 - **Declaring earns you checks.** A `{ target, tolerance }` pair fails the build until you say how
   to measure it. A reference edge, a mix landing, an effect — each generates its own gate.
+- **The reference graph is complete and declared.** All 100 edges live in `projects/morecheese/refs.mjs`,
+  including the polymorphic ones (`RefKind`/`OwnerKind`), which used to be a hand-written switch whose
+  final branch failed closed. Eleven bespoke reference gates are gone; nothing hand-counts a dangling
+  reference any more.
 - **The traps are loud.** Everything in the list below used to be silent.
 - **The engine no longer contains this project.** 19 lines of domain code in `engine/`, down from
   155 in one file.
@@ -64,10 +68,16 @@ gates (run `node cli/check-declared.mjs --out out`) and none of the domain wisdo
 for now — those gates carry real knowledge — but it means "framework" is true of the engine and not
 yet of the checking.
 
-**`MEASURED_ELSEWHERE` in `projects/morecheese/measurements.mjs` is a hand-maintained list** of the
-15 targets gated by bespoke checks. Add a bespoke gate for a new target and you must add its path
-there too. The honest fix is to retire the prose reference gates now duplicated by `refs.mjs`, which
-would let the list go entirely.
+**`gatedElsewhere` in `projects/morecheese/measurements.mjs` is a hand-maintained list** of the 15
+targets gated by bespoke checks rather than derived ones. Add a bespoke gate for a new target and you
+must add its path there too, or the coverage gate says the target ships unverified.
+
+An earlier version of this document said the fix was to retire the reference gates duplicated by
+`refs.mjs`. **That was wrong** — those gates were duplicated and are now gone, and it did not touch
+this list, because this list is about *targets* and those were about *references*. Two different rule
+kinds. The actual fix is to move each of the 15 measurements into `measurements.mjs` so the derived
+target gate covers it, and delete the bespoke gate — one at a time, each verified by watching the
+derived gate reproduce the bespoke gate's number before the bespoke one goes.
 
 **`TYPES-PROPOSAL.md` is a proposal, not a plan.** It describes a canonical vocabulary — the same
 idea is currently spelled `target`, `presentTarget` and `shareOfEligible` in different files.
@@ -147,7 +157,7 @@ change, then `diff -r`. If output moved and you did not mean it to, stop.
 Not reading. Doing. If any step surprises you, the documentation is wrong and fixing it is your
 first contribution.
 
-1. `node test.mjs` — 31 steps, all green. If not, stop and find out why before anything else.
+1. `node test.mjs` — 32 steps, all green. If not, stop and find out why before anything else.
 2. Open `projects/morecheese/ruleset/modules/committees.mjs`, change `meetingsPerYear` from 4 to 6,
    and run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Read whatever it says.
    Change it back.

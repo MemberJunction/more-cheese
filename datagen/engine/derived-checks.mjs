@@ -36,7 +36,7 @@ const optional = async (spec) => {
  * @returns {Promise<{kinds: string[], counts: Record<string, number>}>}
  */
 export async function runDerivedChecks({ project, R, load, check, packs }, phase) {
-  const { runRefChecks, runPresenceChecks, runTargetChecks, runInstallOrderChecks } = await import('./checks.mjs');
+  const { runRefChecks, runPresenceChecks, runTargetChecks, runInstallOrderChecks, runDiscriminatorChecks } = await import('./checks.mjs');
   const base = `../projects/${project}/`;
   const kinds = [];
   const counts = {};
@@ -47,6 +47,8 @@ export async function runDerivedChecks({ project, R, load, check, packs }, phase
       runRefChecks(refsMod.refs, load, check);
       kinds.push('references');
       counts.references = refsMod.refs.length;
+      // every polymorphic kind present in the data must have a declared edge
+      runDiscriminatorChecks(refsMod.refs, load, check);
       // the same declarations, read for a different claim: the packs' install order
       runInstallOrderChecks(refsMod.refs, load, check, packs);
       kinds.push('install order');

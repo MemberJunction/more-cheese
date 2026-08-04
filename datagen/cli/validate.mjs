@@ -108,7 +108,7 @@ const check = (name, ok, detail) => results.push({ name, ok, detail });
 
 // gate helpers live in engine/gates.mjs so they can be unit-tested (negative-tested in
 // the suite, like the lint) and reused by any future validator
-const { dangling, fkResolves, shareBand, presenceFloor, distinctAtLeast } = makeGateHelpers(check);
+const { dangling, shareBand, presenceFloor, distinctAtLeast } = makeGateHelpers(check);
 
 // shared lookups
 const joinOf = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
@@ -122,34 +122,10 @@ for (const per of periods) { lastStatus.set(per.MemberNumber, per.Status); lastP
 function checkPacks() {
   const peopleKeys = new Set(people.map((p) => p.MemberNumber));
   const orgKeys = new Set(orgs.map((o) => o.OrgKey));
-  const eventKeys = new Set(events.map((e) => e.EventKey));
-  fkResolves('pack refs: people→orgs (within common)', [[people, (p) => p.OrgKey, orgKeys]]);
-  fkResolves('pack refs: membership→common', [[periods, (x) => x.MemberNumber, peopleKeys]]);
-  fkResolves('pack refs: events→common+events', [
-    [regs, (x) => x.MemberNumber, peopleKeys],
-    [regs, (x) => x.EventKey, eventKeys],
-  ]);
-  const productKeys = new Set(products.map((x) => x.ProductKey));
-  const orderKeys = new Set(orders.map((x) => x.OrderKey));
-  // note: a two-column check like "line→order AND line→product" is two relations on the
-  // same rows — the helper reports them the way the old combined counter did
-  const badLine = orderLines.filter((x) => !orderKeys.has(x.OrderKey) || !productKeys.has(x.ProductKey)).length;
-  const badOrderM = dangling(orders, (x) => x.MemberNumber, peopleKeys);
-  const badPay = dangling(payments, (x) => x.OrderKey, orderKeys);
-  check('pack refs: orders→common + lines→products + payments→orders', badOrderM + badLine + badPay === 0, `${badOrderM}+${badLine}+${badPay} dangling`);
-  const meetingKeys = new Set(cMeetings.map((x) => x.MeetingKey));
-  const badCm = dangling(cMemberships, (x) => x.MemberNumber, peopleKeys);
-  const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
-  check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
-  // memberships → the term and committee they claim. A membership on a term that was never
-  // emitted is invisible in the packs (the seat still looks fine) and only fails at install,
-  // where the real FK rejects it — exactly how the 2015 Membership & Outreach seat surfaced.
-  const termKeys = new Set(cTerms.map((x) => x.TermKey));
-  const committeeKeys = new Set(cCommittees.map((x) => x.CommitteeKey));
-  const badMemTerm = cMemberships.filter((x) => !termKeys.has(x.TermKey) || !committeeKeys.has(x.CommitteeKey)).length;
-  const badTermC = cTerms.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
-  const badMeetC = cMeetings.filter((x) => !committeeKeys.has(x.CommitteeKey)).length;
-  check('pack refs: memberships→terms + terms/meetings→committees', badMemTerm + badTermC + badMeetC === 0, `${badMemTerm}+${badTermC}+${badMeetC} dangling`);
+  // REFERENCE INTEGRITY IS DECLARED, NOT WRITTEN HERE. Every edge these gates used to count by
+  // hand now lives in projects/morecheese/refs.mjs — 100 declarations, each generating its own
+  // named gate, including the polymorphic ones (RefKind/OwnerKind) that could not be expressed
+  // before. What stays below is what a declaration CANNOT say.
   // ADDRESS REALISM — all three of these were found by opening bizapps-common's address grid,
   // not by any gate. They are invisible in the packs and obvious on screen.
   {
@@ -278,49 +254,17 @@ function checkPacks() {
     check(`funnel: webinar-to-member conversion is ${(rate * 100).toFixed(0)}% (${converted.size} joined, ${nonConverting.size} did not)`,
       rate > 0.03 && rate < 0.35, 'association benchmarks put webinar-to-member in the teens; a majority would mean the webinar list IS the member list');
   }
-  const respKeys = new Set(fResponses.map((x) => x.ResponseKey));
-  // member responses must resolve to people; anonymous ones must carry a session id instead
-  const badResp = fResponses.filter((x) => x.MemberNumber != null ? !peopleKeys.has(x.MemberNumber) : !x.AnonymousSessionID).length;
-  const badAns = fAnswers.filter((x) => !respKeys.has(x.ResponseKey)).length;
-  check('pack refs: forms→common (anon: session id) + answers→responses', badResp + badAns === 0, `${badResp}+${badAns} dangling`);
-  // an employment edge belongs to any PERSON we know — members and non-members alike
-  const anyPersonKeys = new Set(allPeople.map((x) => x.MemberNumber));
-  const badRel = relationships.filter((x) => (x.FromMemberNumber && !anyPersonKeys.has(x.FromMemberNumber)) || (x.ToMemberNumber && !anyPersonKeys.has(x.ToMemberNumber)) || (x.FromOrgKey && !orgKeys.has(x.FromOrgKey)) || (x.ToOrgKey && !orgKeys.has(x.ToOrgKey))).length;
-  const badTask = tAssignments.filter((x) => !peopleKeys.has(x.AssigneeMemberNumber)).length + issues.filter((x) => !peopleKeys.has(x.ReporterMemberNumber)).length
-    + issues.filter((x) => x.AssigneeMemberNumber && !peopleKeys.has(x.AssigneeMemberNumber)).length;
-  check('pack refs: relationships/tasks/issues→common', badRel + badTask === 0, `${badRel}+${badTask} dangling`);
-  const threadKeys = new Set(smThreads.map((x) => x.ThreadKey));
-  const sessionKeys = new Set(smSessions.map((x) => x.SessionKey));
-  const badMsg = smThreads.filter((x) => !peopleKeys.has(x.MemberNumber)).length
-    + smSessions.filter((x) => !peopleKeys.has(x.MemberNumber)).length
-    + smMessages.filter((x) => !threadKeys.has(x.ThreadKey) || !sessionKeys.has(x.SessionKey)).length;
-  check('pack refs: messaging→common + messages→threads/sessions', badMsg === 0, `${badMsg} dangling`);
+  // The refs are declared; what is left is the CONDITIONAL, which no reference edge can state:
+  // a response with no member must carry an anonymous session id instead. Neither column is
+  // required on its own — it is the pair that must hold, or a public submission is unattributable.
+  const badAnon = fResponses.filter((x) => x.MemberNumber == null && !x.AnonymousSessionID).length;
+  check('forms: every response has a member OR an anonymous session id', badAnon === 0, `${badAnon} attributable to nobody`);
   // platform: staff-owned artifacts resolve to staff users; audit/favorite/list refs resolve to real records
-  const staffKeys = new Set(pUsers.map((u) => u.UserKey));
-  const issueKeySet = new Set(issues.map((x) => x.IssueKey));
-  const taskKeySet = new Set(tTasks.map((x) => x.TaskKey));
-  const periodKeySet = new Set(periods.map((x) => x.PeriodKey));
-  const relKeySet = new Set(relationships.map((x) => x.RelKey));
-  const refOk = (x) => x.RefKind === 'issue' ? issueKeySet.has(x.RefKey)
-    : x.RefKind === 'task' ? taskKeySet.has(x.RefKey)
-    : x.RefKind === 'period' ? periodKeySet.has(x.RefKey)
-    : x.RefKind === 'memberprofile' || x.RefKind === 'person' ? peopleKeys.has(x.RefKey)
-    : x.RefKind === 'rel' ? relKeySet.has(x.RefKey) : false;
-  const badPlat = [...pViews, ...pConvs, ...pListsP, ...pNotifs].filter((x) => !staffKeys.has(x.UserKey)).length
-    + pConvDetails.filter((x) => x.UserKey && !staffKeys.has(x.UserKey)).length
-    + [...pFavs, ...pRecordChanges].filter((x) => !staffKeys.has(x.UserKey) || !RECORD_PREFIX[x.RefKind] || !refOk(x)).length
-    + pListDetails.filter((x) => !RECORD_PREFIX[x.RefKind] || !refOk(x)).length;
-  check('pack refs: platform→staff users + audit/favorites/lists→real records', badPlat === 0, `${badPlat} dangling`);
-  // sonar: scores/history/transitions anchor real people; contributions resolve to scores+factors
-  // sonar is DEFINITIONS ONLY (Sonar computes scores live): factors link to a model + a
-  // related entity; model-factors link factor↔model; bands belong to the band set.
-  const modelKeys = new Set(snModels.map((x) => x.ModelKey));
-  const factorKeys = new Set(snFactors.map((x) => x.FactorKey));
-  const relatedKeys = new Set(snRelated.map((x) => x.RelatedKey));
-  const badSonar = snFactors.filter((x) => !modelKeys.has(x.ModelKey) || !relatedKeys.has(x.SourceRelatedKey)).length
-    + snModelFactors.filter((x) => !modelKeys.has(x.ModelKey) || !factorKeys.has(x.FactorKey)).length
-    + snRelated.filter((x) => !modelKeys.has(x.ModelKey)).length;
-  check('pack refs: sonar factors→model+relatedEntity, model-factors→factor', badSonar === 0, `${badSonar} dangling`);
+  // The refs — including every polymorphic RefKind — are declared. What remains is the claim a
+  // reference edge cannot make: every RefKind must have an entity prefix in the seed mapping, or
+  // the row emits a lookup against no entity at all.
+  const unmapped = [...new Set([...pFavs, ...pRecordChanges, ...pListDetails].map((x) => x.RefKind).filter((k) => !RECORD_PREFIX[k]))];
+  check('platform: every RefKind maps to a real entity in the seed mapping', unmapped.length === 0, unmapped.length ? `UNMAPPED: ${unmapped.join(', ')}` : `${Object.keys(RECORD_PREFIX).length} kinds mapped`);
   for (const pack of ['common', 'membership', 'events', 'orders']) {
     const m = JSON.parse(readFileSync(join(OUT, 'packs', pack, 'manifest.json'), 'utf8'));
     check(`manifest: ${pack}`, m.name === pack && Array.isArray(m.dependsOn), `dependsOn=[${m.dependsOn}]`);
@@ -621,9 +565,6 @@ function checkTiers() {
 // ---------- learning: participation + completion, engagement expressing (3rd domain) ----------
 function checkLearning() {
   const L = R.learning;
-  const courseKeys = new Set(courses.map((c) => c.CourseKey));
-  const badRefs = enrollments.filter((e) => !courseKeys.has(e.CourseKey) || !joinOf.has(e.MemberNumber)).length;
-  check('pack refs: learning→common+courses', badRefs === 0, `${badRefs} dangling`);
 
   // participation: members with ≥1 enrollment per eligible year ≈ 50%. Eligible = covered
   // mid-year — the same pool the generator calibrates on; counting raw period-years instead
@@ -1047,8 +988,6 @@ function checkComposedApps() {
     // the table has no author-settable timestamp, so the date is in the body — it still
     // has to read forward (the first version resolved a ticket before its own triage note)
     check('issues: comment threads read forward in time', backwards === 0, `${backwards} out of order`);
-    const orphan = comments.filter((c) => !issues.some((i2) => i2.IssueKey === c.IssueKey)).length;
-    check('issues: every comment belongs to a real ticket', orphan === 0, `${orphan} orphaned`);
   }
 
   // the relationship graph shows more than employment: every demo-owned type carries

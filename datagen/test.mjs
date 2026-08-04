@@ -70,10 +70,8 @@ step('gate helpers catch planted defects (fk, share, presence, distinct) and pas
   const h = makeGateHelpers((name, ok, detail) => results.push({ name, ok, detail }));
   const failed = () => results.splice(0).filter((r) => !r.ok);
 
-  h.fkResolves('fk', [[[{ k: 'A' }, { k: 'MISSING' }], (r) => r.k, new Set(['A'])]]);
-  if (failed().length !== 1) throw new Error('fkResolves missed a dangling ref');
-  h.fkResolves('fk', [[[{ k: 'A' }, { k: null }], (r) => r.k, new Set(['A'])]]);
-  if (failed().length !== 0) throw new Error('fkResolves must allow null keys (optional FKs)');
+  if (h.dangling([{ k: 'A' }, { k: 'MISSING' }], (r) => r.k, new Set(['A'])) !== 1) throw new Error('dangling missed a broken ref');
+  if (h.dangling([{ k: 'A' }, { k: null }], (r) => r.k, new Set(['A'])) !== 0) throw new Error('dangling must allow null keys (optional FKs)');
 
   h.shareBand('share', 0.50, { target: 0.10, tolerance: 0.05 });
   if (failed().length !== 1) throw new Error('shareBand missed a wildly off share');
@@ -221,6 +219,43 @@ step('derived reference gates catch a planted dangling ref (and run before the F
   if (!out.includes('ref: committee_memberships.TermKey → committee_terms.TermKey')) {
     throw new Error('the DERIVED reference gate did not fire — check it runs inside the referential phase');
   }
+});
+
+// 0e-ii. POLYMORPHIC reference edges — one column whose parent table depends on a sibling
+// discriminator. These could not be declared at all before `when`, so they stayed as a hand-written
+// switch in the validator whose last branch was `: false`: a RefKind nobody added to the chain
+// failed closed as an unnamed dangling count. Two things must hold now, and both are planted here.
+//
+// The second plant is the one that taught me something. My first version required each declared
+// subset to be NON-EMPTY, reasoning that a subset matching nothing meant its discriminator had been
+// renamed. That failed 3 of 7 seeds: at N=500 some seeds have no billing issue sourced from an order,
+// a kind that is real but rare. Absence of rows is not a defect. Asking the inverse — is every value
+// PRESENT in the data claimed by some declared edge — catches the rename, catches a brand-new kind a
+// generator starts emitting, and has no false positives. That is only possible because `when` is
+// data; a predicate function can only tell you whether it matched.
+step('polymorphic reference edges catch a bad parent AND an undeclared discriminator value', () => {
+  run('generate.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/platform/record_changes.json');
+  const original = readFileSync(f, 'utf8');
+  const fire = (mutate, expect, what) => {
+    const rows = JSON.parse(original);
+    mutate(rows);
+    writeFileSync(f, JSON.stringify(rows, null, 1));
+    let out = '';
+    try { run('check-declared.mjs', ['--out', 'out-test']); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!out.includes(expect)) throw new Error(`${what} was NOT caught. Looked for: ${expect}`);
+  };
+  try {
+    // (a) an audit row pointing at an issue that does not exist
+    fire((rows) => { rows[rows.findIndex((r) => r.RefKind === 'issue')].RefKey = 'ISS-NOPE'; },
+      'ref: record_changes.RefKey [RefKind=issue] → issues.IssueKey', 'a dangling polymorphic ref');
+    // (b) a discriminator value nobody declared — whether renamed or newly emitted. These rows
+    // reference something no gate looks at, which is exactly what the old `: false` fallback did.
+    fire((rows) => { for (const r of rows) if (r.RefKind === 'task') r.RefKind = 'taskItem'; },
+      'UNDECLARED: taskItem', 'a renamed discriminator value');
+    fire((rows) => { rows[0].RefKind = 'invoice'; },
+      'UNDECLARED: invoice', 'a brand-new discriminator value');
+  } finally { writeFileSync(f, original); }
 });
 
 // 0f. the derived PRESENCE floors must catch the failure that motivated them: Critical-severity
