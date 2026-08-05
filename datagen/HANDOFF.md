@@ -99,6 +99,14 @@ no-show measurement counted prospect registrations that the bespoke gate exclude
 webinar denominator from 1,702 rows to 1,962. Both numbers passed the band, so a single-gate check
 would have looked correct while measuring a different population than the target was set for.
 
+**The framework metric runs DEGRADED, and its number is approximate.** `cli/measure-framework.mjs`
+wants `acorn` for exact AST spans. The dependency is declared in the root `package.json` but has never
+been installed, so the tool falls back to a line classifier — it says so in its own output every run,
+and every ratio quoted anywhere (1.41 : 1 for MoreCheese, 1.59 : 1 for the fixture) comes from the
+fallback. One `npm install` at the REPO ROOT fixes it; do not install inside `datagen/` or any
+subfolder of a linked MJ workspace (rule 5, the single-copy invariant). Expect the numbers to shift
+slightly when it runs properly — the trend is what the tool is for, not the third digit.
+
 **`TYPES-PROPOSAL.md` is a proposal, not a plan.** It describes a canonical vocabulary — the same
 idea is currently spelled `target`, `presentTarget` and `shareOfEligible` in different files.
 **Team ruling (2026-07-31): it waits for a second project to exist**, so the vocabulary generalises
@@ -175,6 +183,39 @@ declared in `projects/morecheese/pipeline.mjs`; see [PIPELINE.md](PIPELINE.md) f
 **The single technique that caught all of the above:** regenerate and diff the bytes.
 `node cli/generate.mjs --n 500 --seed 42 --release 2026-07-31 --out out-x` before and after any
 change, then `diff -r`. If output moved and you did not mean it to, stop.
+
+### Do it against COMMITTED code, and mind the three ways it lies
+
+Three mistakes I made with this technique in one session, each of which produced a green diff that
+meant nothing:
+
+**1. Comparing post-change against post-change.** Generate the baseline BEFORE editing, or from
+committed code:
+
+```sh
+git archive <commit> datagen | tar -x -C /tmp/pre     # a clean pre-change tree
+(cd /tmp/pre/datagen && node cli/generate.mjs --n 500 --seed 42 --release 2026-07-31 --out out-ref)
+node cli/generate.mjs --n 500 --seed 42 --release 2026-07-31 --out out-now
+diff -r /tmp/pre/datagen/out-ref out-now
+```
+
+**2. Gating each commit against its own parent, and never end to end.** Two changes can cancel out,
+or a late one can drift while every individual diff passed. Whole stacks of work want one final diff
+against the commit before the stack. Ten framework commits were verified that way on 2026-08-05:
+byte-identical across five seeds (42, 7, 99, 2026, 13) at n=500 AND n=2500, for packs, run.json,
+validation-latents, validation-events, motifs, all 12 SQL files, and the whole MetadataSync tree.
+Multiple seeds matter — a change can be invisible on one draw sequence.
+
+**3. Diffing only the packs.** `out/` also holds run.json and the validator-private files, and the
+install artifacts are produced separately. Anything that touches the emitters or the pack contract
+needs `emit-sql.mjs` and `emit-mjsync.mjs` run from both trees and diffed too.
+
+**And the thing it fundamentally cannot see: a change that did not happen.** A stray
+`git checkout -- projects/` reverted sixteen `thetaAt` call sites mid-session; the output stayed
+byte-identical BECAUSE the code had reverted, the suite stayed green, and a commit message claimed
+work the tree did not contain. `node cli/check-generators.mjs` now reports any engine/authoring.mjs
+helper that no project's generators call, which is what would have caught it. **A byte-diff proves
+you did not break anything. It does not prove you did anything.**
 
 ---
 

@@ -22,6 +22,11 @@
 //
 //   node cli/measure-framework.mjs [--project morecheese] [--json]
 //
+// ⚠ AS OF 2026-08-05 THIS RUNS DEGRADED. acorn is declared in the root package.json but has never
+// been installed, so every ratio quoted anywhere comes from the fallback line classifier, not the
+// AST pass. That is why the tool prints its parser on every run. One `npm install` at the REPO ROOT
+// fixes it — never inside datagen/ or any subfolder of a linked MJ workspace (rule 5).
+//
 // PARSER: uses acorn when it can be found; this repo deliberately has no node_modules of its
 // own and rule 5 forbids npm install inside a linked MJ workspace, so resolution is a chain:
 // a bare import (works once a root install provides it), then the conventional linked-MJ

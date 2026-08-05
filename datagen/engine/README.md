@@ -54,6 +54,24 @@ will tell it what it's missing. That's the right first message on day one.
 | `compile.mjs` | solves human-authored effects into coefficients |
 | `ids.mjs`, `dates.mjs`, `lint.mjs`, `gates.mjs`, `schema-check.mjs` | the rest of the surface |
 
+## The run context every generator receives
+
+`cfg` is built once by `loadConfig` and passed to every generator. Eight fields, and the first four
+are the determinism contract — same `R` + same `seed` + same `release` → byte-identical output.
+
+| field | what it is |
+|---|---|
+| `R` | the **composed, compiled** ruleset: modules merged, any scenario overlay applied, human effect forms solved into betas. Conventionally destructured as `R` |
+| `seed` | the master seed, a **string** (`'42'`), combined with every stream key |
+| `n` | population size — `--n`, else `ruleset.scale.members` |
+| `release` | the generated world's "today", as a `Date`. **There is no wall clock anywhere in datagen** — every "days ago" measures from here, which is why last week's build and today's are identical |
+| `releaseYear` | `release.getUTCFullYear()`, precomputed because nearly every generator needs it |
+| `project` | which project is being built |
+| `scenario` | the overlay name, or `null` |
+| `outDir` | where output goes. **The emitter's business — no generator should touch it**, and none does |
+
+Full types in `engine/types.d.ts` (`interface Config`).
+
 ## The invariants the engine enforces on every project
 
 1. **Determinism.** Same spec + same seed → byte-identical output. Everything else is subordinate.
