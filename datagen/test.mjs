@@ -555,6 +555,11 @@ step('engine boundary holds (static import and a project-named value are both ca
 // this step is what stops them coming back. An engine change that re-couples the engine to
 // MoreCheese fails HERE, not in six months when somebody tries a second project for real.
 step('the second project builds and passes its own derived gates (zero engine edits)', () => {
+  // SELF-CLEANING, learned the hard way: this step dirties out-fixture AFTER its own determinism
+  // diff (build.mjs adds validation-report.txt, the emitters add sql/ and metadata/), so a stale
+  // dir from the previous run fails the NEXT run's diff. A step must not depend on the caller
+  // having rm -rf'd its leftovers.
+  for (const d of ['out-fixture', 'out-fixture2', 'out-fixture-sc']) rmSync(join(HERE, d), { recursive: true, force: true });
   run('generate.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture']);
   const out = run('check-declared.mjs', ['--out', 'out-fixture']);
   if (!/derived gates pass/.test(out)) throw new Error(`fixture derived gates did not pass:\n${out.slice(0, 400)}`);

@@ -743,13 +743,10 @@ function checkComposedApps() {
   const crowdPopulated = new Set(cMemberships.filter((m) => !R.heroes.some((h) => h.memberNumber === m.MemberNumber)).map((m) => m.TermKey));
   const badChair = [...crowdPopulated].filter((t) => (chairs.get(t) ?? 0) !== 1).length;
   check('committees: exactly one Chair per crowd-populated committee-term', badChair === 0, `${chairs.size} chaired / ${crowdPopulated.size} crowd-populated terms`);
-  // survey response rate (pooled over distributions) + NPS mean band — SURVEY responses only
-  // (the membership application is a separate, anonymous funnel with its own gates below)
+  // The survey response RATE is derived now (forms.response.rate + measurements.mjs) — matched to
+  // the digit before the bespoke line was deleted, including the member-only, conference-attendee
+  // denominator. The NPS band and detractor-tail gates below stay: distribution shape, not a rate.
   const surveyResponses = fResponses.filter((x) => x.FormKey === 'post-conf-survey');
-  const attendees = regs.filter((x) => x.Attended === true && events.find((e) => e.EventKey === x.EventKey)?.EventType === 'Conference').length;
-  const respRate = attendees ? surveyResponses.length / attendees : 0;
-  const respAllow = FF.response.tolerance + 1.5 * Math.sqrt((FF.response.rateTarget * (1 - FF.response.rateTarget)) / Math.max(1, attendees));
-  check(`forms: survey response rate ${(respRate * 100).toFixed(1)}% vs ${FF.response.rateTarget * 100}% ±${(respAllow * 100).toFixed(1)}`, Math.abs(respRate - FF.response.rateTarget) <= respAllow, `${surveyResponses.length} responses / ${attendees} attendees`);
   // NPS gate on NON-covid years (the covid dip is gated separately as regime expression)
   const covidDists = new Set(R.regimes.covid.years.map((y) => `post-conf-survey:${y}`));
   const respDist = new Map(fResponses.map((x) => [x.ResponseKey, x.DistributionKey]));
@@ -1103,10 +1100,14 @@ function checkHeroes() {
   const elena = people.find((p) => p.MemberNumber === 'ICF-000101');
   const elenaRegs = regs.filter((x) => x.MemberNumber === 'ICF-000101').length;
   const elenaYears = Math.max(1, Math.ceil((new Date(run.releaseDate) - new Date(elena.JoinDate)) / (365.25 * 86400000)));
-  check('hero Elena: exists, Active, high activity', elena && ['Active', 'PendingRenewal'].includes(lastStatus.get('ICF-000101')) && elenaRegs / elenaYears >= R.heroes[0].pins.minRegistrationsPerYear, `status=${lastStatus.get('ICF-000101')}, ${elenaRegs} regs / ${elenaYears} yrs`);
+  // heroes addressed by MEMBER NUMBER, never by index: the roster is documented append-only
+  // precisely because position is load-bearing for crowd-slot overwrites — which makes an
+  // index-addressed PIN a booby trap for the first person who inserts a hero mid-list.
+  const heroByNum = new Map(R.heroes.map((h) => [h.memberNumber, h]));
+  check('hero Elena: exists, Active, high activity', elena && ['Active', 'PendingRenewal'].includes(lastStatus.get('ICF-000101')) && elenaRegs / elenaYears >= heroByNum.get('ICF-000101').pins.minRegistrationsPerYear, `status=${lastStatus.get('ICF-000101')}, ${elenaRegs} regs / ${elenaYears} yrs`);
   const marcus = lastPeriod.get('ICF-000102');
   const dTo = (new Date(`${marcus.EndDate}T00:00:00Z`) - new Date(`${run.releaseDate}T00:00:00Z`)) / 86400000;
-  const [dLo, dHi] = R.heroes[1].pins.endDateWithinDaysOfRelease;
+  const [dLo, dHi] = heroByNum.get('ICF-000102').pins.endDateWithinDaysOfRelease;
   check(`hero Marcus: PendingRenewal, EndDate release+${dTo}d ∈ [${dLo},${dHi}], autoRenew off`, marcus.Status === 'PendingRenewal' && dTo >= dLo && dTo <= dHi && marcus.AutoRenew === false, `status=${marcus.Status}`);
 
   // generic pin gates: EVERY hero loads with its declared pins intact (driven by heroes.json,

@@ -242,17 +242,19 @@ in the repo.
 
 ---
 
-## Open questions with no owner
+## Open questions — most now ANSWERED (2026-08-05)
 
-These need a decision from whoever inherits this, and none of them has one:
-
-- **Merge and land the two branches.** See above. Everything else is secondary.
-- **Should the ~200 bespoke gates move behind declarations?** Some carry knowledge a generated gate
-  cannot express. Some are just old.
-- **Does a second project actually exist in the plan?** Several deferred decisions — the canonical
-  vocabulary, whether `Regime` generalises, what belongs in the engine — are waiting on it. If the
-  answer is no, close them as won't-do rather than leaving them open forever.
-- **Who looks at the app UIs?** The data has never been seen rendered in the apps it targets.
+- **Merge and land the two branches.** STILL OPEN, still first. PR #14 (unreviewed) then PR #15.
+- ~~Should the bespoke gates move behind declarations?~~ **ANSWERED.** Every migratable target
+  moved: 15 derived, 3 bespoke, and the three that remain each carry a written paragraph on why a
+  band cannot express them (`measurements.mjs`). Do not migrate those three to reach zero.
+- ~~Does a second project exist?~~ **YES** — `projects/fixture/` (2026-08-04), built to prove the
+  engine and kept as a CI fixture. That unblocked and settled the deferred vocabulary decisions:
+  see the 2026-08-05 status block at the top of `TYPES-PROPOSAL.md` for all seven veto-list
+  answers (mix form, target renames, catalog identity, dead pins, `se`, behavior blocks, Regime).
+- **Who looks at the app UIs?** STILL OPEN and still nobody's. The data has never been seen
+  rendered in the apps it targets, and the two worst defects of the last month were only ever
+  caught by a person looking at a grid.
 
 ---
 

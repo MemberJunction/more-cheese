@@ -106,28 +106,16 @@ export default {
         // Share of responses that start and never submit — first answer only. Real funnels leak.
         partialShare: 0.15
       },
-      segmentMix: [
-        [
-          "Producer",
-          0.35
-        ],
-        [
-          "Retailer",
-          0.25
-        ],
-        [
-          "Enthusiast",
-          0.22
-        ],
-        [
-          "Supplier",
-          0.1
-        ],
-        [
-          "Educator",
-          0.08
-        ]
-      ],
+      // Object-map, the canonical Mix form (decided 2026-07-31). This was the last pair-array in
+      // the ruleset. KEY ORDER IS THE DRAW ORDER — pickWeighted consumes Object.entries, and
+      // insertion order is what keeps this byte-identical with the pair-array it replaced.
+      segmentMix: {
+        Producer: 0.35,
+        Retailer: 0.25,
+        Enthusiast: 0.22,
+        Supplier: 0.1,
+        Educator: 0.08
+      },
       operationTemplates: [
         "Small {segment} operation in {toponym}; looking to connect with the wider community.",
         "Family-run for two generations — hoping the federation can help us with food-safety guidance.",
@@ -147,12 +135,18 @@ export default {
     // 10-20%, with 20-30% typical across the event industry and 30-40% aspirational for
     // paid conferences.
     response: {
-      rateTarget: 0.28,
-      tolerance: 0.08,
+      // The canonical pair: declaring it is a promise a check enforces it, and the coverage gate
+      // chases the promise. This was `rateTarget` + a SIBLING `tolerance` — the pre-canonical
+      // spelling, invisible to the declared-target coverage because it is not a pair.
+      rate: { target: 0.28, tolerance: 0.08, se: 1.5 },
       // How long after receiving it a member may take to respond.
       submitDelayDaysMax: 14,
-      arrows: {
-        engagement: {
+      // `effects`, not `arrows`. The spelling is load-bearing: the zero-rows guard
+      // (assertEverySolved) walks keys named `effects` at ANY depth, so a human-form typo in an
+      // `arrows` block would silently generate NOTHING — the exact trap the guard exists for,
+      // unguarded here for as long as this block kept the old name.
+      effects: {
+        "respond.engagement": {
           beta: 0.7,
           label: "med",
           note: "engaged attendees answer surveys"

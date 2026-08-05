@@ -90,8 +90,8 @@ export function buildForms(cfg, { people, events, registrations }) {
       seed,
       items: attendees,
       baselineShift: covid ? R.regimes.covid.formsResponseLogitShift : 0, // virtual-year fatigue
-      scoreOf: (x) => F.response.arrows.engagement.beta * thetaAt(personByKey.get(x.MemberNumber), year),
-      target: F.response.rateTarget,
+      scoreOf: (x) => F.response.effects['respond.engagement'].beta * thetaAt(personByKey.get(x.MemberNumber), year),
+      target: F.response.rate.target,
       streamKey: (x) => `formresp:${x.RegKey}`,
       decide: (x, prob, r) => {
         if (!r.bernoulli(prob)) return;
@@ -219,7 +219,7 @@ export function buildForms(cfg, { people, events, registrations }) {
       const push = (qkey, fields) => formAnswers.push({ AnswerKey: `${respKey}:${qkey}`, ResponseKey: respKey, QuestionKey: `${APP_KEY}:${qkey}`, ...fields, IsSharedDemo: true });
       push('name', { TextValue: `${nm.first} ${nm.last}` });
       if (partial) continue; // leaky funnel: first answer only
-      const segment = r.pickWeighted(APP.segmentMix);
+      const segment = r.pickWeighted(Object.entries(APP.segmentMix)); // entries order = declared order = old pair order
       push('email', { TextValue: emailFor(nm.first, nm.last, respKey) });
       push('segment', { TextValue: segment });
       // "a enthusiast" / "a educator" were visible in the answers grid — the article

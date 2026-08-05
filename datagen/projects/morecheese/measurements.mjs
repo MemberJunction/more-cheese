@@ -218,6 +218,21 @@ export const measurements = {
     };
   },
 
+  // Survey response rate: SURVEY responses only over members who actually attended a conference —
+  // the membership application is a separate anonymous funnel with its own gates, and prospects
+  // register for events but cannot receive the survey. Same population as the bespoke gate this
+  // replaced, matched to the digit before that gate was deleted. se 1.5 is declared on the pair.
+  'forms.response.rate': ({ load }) => {
+    const responses = load('forms', 'form_responses').filter((x) => x.FormKey === 'post-conf-survey');
+    const events = load('events', 'events');
+    const isConf = new Set(events.filter((e) => e.EventType === 'Conference').map((e) => e.EventKey));
+    const prospects = new Set(load('common', 'people').filter((p) => p.IsProspect).map((p) => p.MemberNumber));
+    const attendees = load('events', 'event_registrations')
+      .filter((x) => !prospects.has(x.MemberNumber) && x.Attended === true && isConf.has(x.EventKey)).length;
+    if (!attendees) return null;
+    return { observed: responses.length / attendees, of: attendees, detail: `${responses.length} responses / ${attendees} attendees` };
+  },
+
   // The two no-show rates carry NO standard-error cushion — the bespoke gates compared against
   // the bare tolerance, so these return no `of`, which makes the derived cushion exactly zero.
   // Omitting `of` is how a measurement says "this band is a flat tolerance, not a sampling band".

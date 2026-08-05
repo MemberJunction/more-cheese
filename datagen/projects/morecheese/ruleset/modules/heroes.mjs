@@ -41,7 +41,9 @@ export default {
       pins: {
         status: "Active",
         minRegistrationsPerYear: 2,
-        committeeSeat: "Standards Committee",
+        // committeeSeat was declared here for years and ASSERTED BY NOTHING — a dead pin. The
+        // seat itself is a fact in `committees:` above, which the generator honours and the lint
+        // cross-references; a pin that promises a check nobody wrote is worse than no pin.
         issueMin: 1,
         formResponse: true
       },
@@ -421,8 +423,8 @@ export default {
       ],
       pins: {
         status: "Active",
-        committeeSeat: "Food Safety Committee",
-        committeeRole: "Chair",
+        // committeeSeat / committeeRole deleted — dead pins, asserted by nothing (the facts live
+        // in `committees:` above; see the same note on Elena)
         issueMin: 1,
         formResponse: true
       },

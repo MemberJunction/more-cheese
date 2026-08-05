@@ -13,7 +13,9 @@ import { rng } from '../../engine/rng.mjs';
 import { iso, addDays } from '../../engine/dates.mjs';
 import { consumerDomainFor, deaccent } from './world.mjs';
 
-const EMPLOYEE_TYPE_ID = '27CFD031-5663-4000-A7AB-8AC87DB88C1D'; // bizapps-common's seeded Employee type
+// bizapps-common's seeded Employee type — read from the DECLARED value in
+// relationships.params.seededTypeIDs rather than a second copy of the UUID here. Two copies of a
+// seeded ID is how one gets bumped and the other silently keeps minting edges against the old type.
 
 export function buildDefects(cfg, { people, orgs, relationships }) {
   // ── inputs ── the ruleset sections this domain reads, and the upstream rows
@@ -90,7 +92,7 @@ export function buildDefects(cfg, { people, orgs, relationships }) {
     const oldRel = empRelByMember.get(p.MemberNumber);
     if (oldRel) { oldRel.Status = 'Ended'; oldRel.EndDate = switched; }
     relationships.relationships.push({
-      RelKey: `emp-true:${p.MemberNumber}`, TypeKey: null, TypeID: EMPLOYEE_TYPE_ID,
+      RelKey: `emp-true:${p.MemberNumber}`, TypeKey: null, TypeID: R.relationships.params.seededTypeIDs.Employee,
       FromMemberNumber: p.MemberNumber, ToOrgKey: trueOrgKey, Title: p.Title ?? null,
       StartDate: switched, EndDate: null, Status: 'Active', IsSharedDemo: true,
     });
