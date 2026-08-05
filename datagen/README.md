@@ -72,7 +72,7 @@ individually too:
 ```sh
 node datagen/cli/generate.mjs --n 500 --seed 42 --release 2026-07-31
 node datagen/cli/validate.mjs      # exit 0 = all gates pass
-node datagen/cli/demo.mjs          # → out/dashboard.html (self-contained, works offline)
+node datagen/projects/morecheese/demo.mjs          # → out/dashboard.html (self-contained, works offline)
 ```
 
 Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
@@ -100,7 +100,7 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `cli/validate.mjs` | **The inspector** — seven named gate groups (packs, temporal, benchmarks, arrows, trainability, heroes, status mix). |
 | `cli/build.mjs` | **The pipeline** — generate → validate on staging → promote to `out/` only on green; red runs park in `out-failed/`. |
 | `cli/emit-sql.mjs` | **SQL seed emitter** — packs → per-pack `.sql` `INSERT`s with **deterministic real UUIDs** (uuidv5 of the business key; FKs derived independently by parent and child). Pure inserts; assumes the tables exist. Table names are ASSUMED shapes until the reconciliation. |
-| `cli/emit-schema.mjs` | **Provisional schema emitter** — `CREATE SCHEMA` + `CREATE TABLE` DDL (→ `out/sql/00_schema.sql`, runs before the seed packs) so you can stand up a **standalone throwaway demo DB** without waiting on the schema owner's authoritative migrations. Assumed shapes, clearly labeled; no `__mj_*` columns. A `test.mjs` guard asserts the DDL covers every column `emit-sql` inserts, so the two can't drift. |
+| `projects/morecheese/emit-schema.mjs` | **Provisional schema emitter** — `CREATE SCHEMA` + `CREATE TABLE` DDL (→ `out/sql/00_schema.sql`, runs before the seed packs) so you can stand up a **standalone throwaway demo DB** without waiting on the schema owner's authoritative migrations. Assumed shapes, clearly labeled; no `__mj_*` columns. A `test.mjs` guard asserts the DDL covers every column `emit-sql` inserts, so the two can't drift. |
 | `cli/emit-mjsync.mjs` | **mj-sync emitter** — packs → an MJ metadata tree (per `docs/template-docs/metadata.md`): folder per entity, records with **pinned primaryKeys**, directoryOrder = the pack pyramid. Same UUIDs as the SQL emitter, so either load path fills identical rows. Defaults to `out/metadata/`; **`--metadata-out <dir>`** writes into the repo's live `metadata/` tree (e.g. a dedicated `metadata/demo-data/`) for a real `mj sync` — only its own entity folders are cleared on regen, so a sibling like `schema-info/` is safe. Entity names ASSUMED; ⚠ `mj sync push` full-reconciles — dev DBs only. |
 | `engine/ids.mjs` | Deterministic UUIDv5 from business keys — shared by both emitters. |
 | `engine/rng.mjs` | The dice: content-addressed substreams, distributions, the intercept solver. |

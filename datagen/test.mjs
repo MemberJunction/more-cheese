@@ -21,6 +21,10 @@ let failures = 0;
 const pending = [];
 const CLI = join(HERE, 'cli');
 const run = (script, args) => execFileSync(process.execPath, [join(CLI, script), ...args], { encoding: 'utf8' });
+/** a PROJECT-owned script (an inspector, a dev shim, a project's own validator) — these used to sit
+ *  in cli/ and be reachable through run(), which is exactly why the engine-boundary checker had to
+ *  allowlist three of them. */
+const runProject = (script, args) => execFileSync(process.execPath, [join(HERE, 'projects', 'morecheese', script), ...args], { encoding: 'utf8' });
 /** Any error shape → printable lines. A Buffer stdout used to make the reporter itself throw,
  *  which killed the run instead of reporting the failure it was handed. */
 const detail = (e) => {
@@ -637,7 +641,7 @@ step('scenario: decliningOrg builds and validates against its own targets', () =
 step('emitters: sql + schema + mjsync + explain', () => {
   if (QUICK) run('build.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE]);
   run('emit-sql.mjs', []);
-  run('emit-schema.mjs', []);
+  runProject('emit-schema.mjs', []);
   run('emit-mjsync.mjs', []);
   run('explain.mjs', []);
 });

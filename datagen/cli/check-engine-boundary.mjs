@@ -24,9 +24,15 @@
 // rewrite, and eight files each spelled out the default project name inline. Found by sweeping by
 // hand, which is exactly what a checker is supposed to make unnecessary.
 //
-// Three cli files are PROJECT-OWNED and allowlisted with reasons below. They are a real wart, not a
-// clean result: they live in engine space because history put them there, and each one names what it
-// would take to move it.
+// ONE cli file is PROJECT-OWNED and allowlisted below, down from three. demo.mjs (an inspector
+// written against MoreCheese's tables and personas) and emit-schema.mjs (a dev shim listing
+// MoreCheese's schemas) moved to projects/morecheese/ on 2026-08-05, and build.mjs resolves both
+// project-locally the way it already resolved the validator.
+//
+// cli/validate.mjs stays, and the reason is cost rather than principle: 1,545 lines referenced from
+// seven documents and forty call sites, and it BLOCKS NOTHING — a new project writes
+// projects/<name>/validate.mjs and declares it, which the fixture does. Moving it would be tidiness
+// paid for in churn. Recorded here so the next person decides on facts rather than discovering it.
 //
 //   node cli/check-engine-boundary.mjs
 import { readFileSync, readdirSync } from 'node:fs';
@@ -45,8 +51,6 @@ const ALLOWED = [
   { file: 'config.mjs', needle: 'DEFAULT_PROJECT', why: 'the ONE literal: the default for a bare CLI call. Every entry point accepts --project, and they all read it through argvProject() rather than repeating the name' },
   // ── project-owned files sitting in engine space. A wart, recorded rather than hidden. ──
   { file: 'validate.mjs', needle: '', why: "MoreCheese's own validator, ~175 bespoke gates. Declared via VALIDATOR. A new project writes projects/<name>/validate.mjs instead (build.mjs resolves project-local first) — moving this one would churn the suite and every doc reference for no behavioural gain" },
-  { file: 'emit-schema.mjs', needle: '', why: 'a DEV SHIM that never ships: provisional DDL for throwaway demo databases, listing MoreCheese schemas. Would move to projects/morecheese/ if a second project ever needed standalone DDL' },
-  { file: 'demo.mjs', needle: '', why: "the HTML inspector, written against MoreCheese's packs. Project-specific reporting, like SUMMARY_OF" },
 ];
 
 const hard = [];

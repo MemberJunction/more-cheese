@@ -140,7 +140,7 @@ This is the tier that today needs care. The checklist, in order:
      (SQL-only columns), `syncOverride` (e.g. Sonar's deferred circular FK)
    Then add the new `dir`s to `DIRECTORY_ORDER` in `cli/emit-mjsync.mjs` in FK-safe push
    order — the emitter fails loudly if the list and the mapping disagree.
-   `cli/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
+   `projects/morecheese/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
    carries column types the mapping doesn't, and the DDL-drift gate polices it.
 5. **Gates** — minimum set for a new domain, each a one-line helper call from
    `engine/gates.mjs`: `fkResolves` both directions, `shareBand` for anything drawn from a

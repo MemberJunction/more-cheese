@@ -171,6 +171,10 @@ export const NOT_SHIPPED = {
  *  runs every gate derived from declarations and knows no domain. */
 export const VALIDATOR = 'validate.mjs';
 
+/** This project's HTML inspector, for `build.mjs --demo`. Project-specific reporting: it names this
+ *  project's tables, personas and gates. Lives in this directory as of 2026-08-05. */
+export const INSPECTOR = 'demo.mjs';
+
 /** The per-member latents the validator and inspector read (never installed). WHICH dials exist
  *  is this project's model, so the projection lives here — the engine used to hardcode it. */
 export const LATENTS_OF = (world) => world.people.map((p) => ({

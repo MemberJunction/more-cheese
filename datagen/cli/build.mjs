@@ -60,7 +60,7 @@ const runScript = (name, args) => execFileSync(process.execPath, [resolveScript(
 // So a project DECLARES its validator, and the default is the generic one: check-declared.mjs runs
 // every gate that derives from declarations (references, install order, presence floors, target
 // bands) and knows no domain. A new project gets real validation on day one without writing any.
-const { VALIDATOR } = await import(`../projects/${project}/index.mjs`);
+const { VALIDATOR, INSPECTOR } = await import(`../projects/${project}/index.mjs`);
 const validator = VALIDATOR ?? 'check-declared.mjs';
 
 console.log('▸ generate → staging');
@@ -94,5 +94,7 @@ console.log(`\n✔ GREEN — promoted to ${FINAL}/ (validation report included).
 
 if (wantDemo) {
   console.log('▸ inspector');
-  console.log(run('demo.mjs', ['--out', FINAL]).trim());
+  // resolved project-locally, like the validator: an inspector is written against ONE project's
+  // packs — it names that project's tables and personas — so it is reporting, not engine.
+  console.log(runScript(INSPECTOR ?? 'demo.mjs', ['--out', FINAL]).trim());
 }
