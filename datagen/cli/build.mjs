@@ -12,10 +12,21 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+const DEFAULT_PROJECT = 'morecheese'; // the historic default; every entry point accepts --project
+const RAW = process.argv.slice(2);
+const project = RAW.includes('--project') ? RAW[RAW.indexOf('--project') + 1] : DEFAULT_PROJECT;
 const ROOT = join(HERE, '..'); // output dirs live at the datagen root, not under cli/
-const STAGING = 'out-staging';
-const FAILED = 'out-failed';
-const FINAL = 'out';
+// OUTPUT DIRS ARE PER-PROJECT, and were not. Every project staged into out-staging/ and promoted to
+// out/, so building the second project silently REPLACED the first's last good build — the one thing
+// this pipeline exists to protect ("a red run leaves out/ exactly as it was"). Found by running the
+// documented step 6 for the fixture and watching MoreCheese's promoted output disappear.
+//
+// The default project keeps the historic paths so every doc, emitter and suite step still works;
+// any other project gets its own suffixed set.
+const suffix = project === DEFAULT_PROJECT ? '' : `-${project}`;
+const STAGING = `out-staging${suffix}`;
+const FAILED = `out-failed${suffix}`;
+const FINAL = `out${suffix}`;
 
 // forward user args; --out is the pipeline's to control
 const fwd = [];
@@ -29,14 +40,27 @@ for (let i = 0; i < argv.length; i++) {
 
 const run = (script, args) => execFileSync(process.execPath, [join(HERE, script), ...args], { encoding: 'utf8' });
 
+// WHICH VALIDATOR? The pipeline (stage → validate → promote) is the engine's; WHAT counts as valid
+// is the project's. cli/validate.mjs is 1,600 lines of MoreCheese — it even imports that project's
+// seed-mapping.mjs — so running it unconditionally made this command work for exactly one project.
+// engine/README.md's own "standing up a new project" step 6 said to run `build.mjs --project <name>`,
+// and doing that for the second project died on ERR_MODULE_NOT_FOUND for a seed mapping it has no
+// reason to own. A framework's release pipeline cannot be the pipeline of one of its consumers.
+//
+// So a project DECLARES its validator, and the default is the generic one: check-declared.mjs runs
+// every gate that derives from declarations (references, install order, presence floors, target
+// bands) and knows no domain. A new project gets real validation on day one without writing any.
+const { VALIDATOR } = await import(`../projects/${project}/index.mjs`);
+const validator = VALIDATOR ?? 'check-declared.mjs';
+
 console.log('▸ generate → staging');
 rmSync(join(ROOT, STAGING), { recursive: true, force: true });
 console.log(run('generate.mjs', [...fwd, '--out', STAGING]).trim());
 
-console.log('▸ validate (staging)');
+console.log(`▸ validate (staging) — ${validator}`);
 let report, green;
 try {
-  report = run('validate.mjs', ['--out', STAGING]);
+  report = run(validator, ['--out', STAGING]);
   green = true;
 } catch (e) {
   report = e.stdout ?? String(e);

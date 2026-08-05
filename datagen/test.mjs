@@ -538,6 +538,15 @@ step('the second project builds and passes its own derived gates (zero engine ed
   // determinism holds for it too — same seed, byte-identical
   run('generate.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture2']);
   execFileSync('diff', ['-r', join(HERE, 'out-fixture'), join(HERE, 'out-fixture2')], { encoding: 'utf8' });
+
+  // …and the INSTALL path, which is where the engine turned out to be far less project-blind: the
+  // documented `build.mjs --project <name>` could not run at all, and the MetadataSync emitter held
+  // a hardcoded list of 59 MoreCheese directories. Generating is only half the pipeline.
+  run('build.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE]);
+  const sql = run('emit-sql.mjs', ['--out', 'out-fixture']);
+  if (!/fixture_circle/.test(sql)) throw new Error(`the SQL emitter produced no fixture tables:\n${sql.slice(0, 300)}`);
+  const sync = run('emit-mjsync.mjs', ['--out', 'out-fixture']);
+  if (!/Fixture: Members/.test(sync)) throw new Error(`the MetadataSync emitter produced no fixture records:\n${sync.slice(0, 300)}`);
 });
 
 // 0n. THE FRAMEWORK METRIC — advisory. Prints declarations:code so the trend is visible in every

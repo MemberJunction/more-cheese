@@ -22,6 +22,7 @@ nothing in the engine needs to know it exists.
 | `hooks` | `index.mjs` | `compile.arrowsOf(C)` (may return `{}`) and `domainLint(R)` — **which must return an ARRAY** of problem strings; returning nothing dies as "not iterable" |
 | `scale.members` | any ruleset module | the engine's default for `cfg.n` when `--n` is not passed |
 | `history.startYear` | any ruleset module | the first year `yearsOf(cfg)` walks |
+| `version` | any ruleset module | written into every pack manifest and generated header |
 | `ruleset/modules/*.mjs` + `index.json` | `ruleset/` | the authored declarations: `catalog` · `params` · `effects` · `mixes` |
 
 | optional — each one *earns* checks | where | what you get |
@@ -31,7 +32,8 @@ nothing in the engine needs to know it exists.
 | `presence.mjs` | project root | a floor per mix option — every declared category must actually appear |
 | `measurements.mjs` | project root | derived target bands from `{ target, tolerance }` pairs |
 | `pipeline.mjs` | project root | declared mutation-order edges the argument lists can't show |
-| `seed-mapping.mjs` | project root | how packs become SQL / MetadataSync |
+| `seed-mapping.mjs` | project root | how packs become SQL / MetadataSync. Exports `MAPPING`, `INSTALL_ORDER`, `PREAMBLE`, `POSTAMBLE`, **`PUSH_ORDER`** (directory push order, parents first — separate from INSTALL_ORDER) and **`DISPLAY_NAME`** |
+| `VALIDATOR` | `index.mjs` | the cli script `build.mjs` runs to validate. **Default: `check-declared.mjs`**, which runs every gate derived from your declarations and knows no domain — you get real validation without writing any |
 | `LATENTS_OF(world)` | `index.mjs` | writes `validation-latents.json` — WHICH hidden dials exist is your model, not the engine's |
 | `RUN_EXTRAS(cfg)` | `index.mjs` | extra facts recorded in `run.json` (MoreCheese records its covid years) |
 | `SUMMARY_OF(world)` | `index.mjs` | the lines printed after a build; without it the engine just counts rows |
@@ -71,7 +73,9 @@ procedure:
 3. Write `ruleset/modules/<domain>.mjs` blocks in the four-section shape, and an `index.json`.
 4. Write thin generators: one pattern call per decision, row templates for the shapes.
 5. Add declarations as you want the checks: `refs.mjs`, `presence.mjs`, `measurements.mjs`.
-6. `node cli/build.mjs --project <name> --n 100 --seed 42 --release <date>`
+6. `node cli/build.mjs --project <name> --n 100 --seed 42 --release <date>` — stages, validates with
+   `check-declared.mjs`, promotes to `out-<name>/` (the default project keeps plain `out/`).
+7. Optional, to install: add `seed-mapping.mjs`, then `emit-sql.mjs` / `emit-mjsync.mjs --out out-<name>`.
 
 If any step forces an engine change, that's a MoreCheese-shaped assumption in the engine and it is
 a bug in the engine — not in your project.

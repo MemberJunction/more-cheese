@@ -37,35 +37,22 @@ const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 // project's own UUID namespace explicitly (see engine/config.mjs bindNamespace).
 const { bindNamespace } = await import('../engine/config.mjs');
 await bindNamespace(run.project);
-const { MAPPING } = await import(`../projects/${run.project}/seed-mapping.mjs`);
+const { MAPPING, PUSH_ORDER } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 
 const CHUNK = 5000; // records per file; big tables split across .part-N.json files
 
-// PUSH ORDER — every parent before its children THROUGH THE ENTITY SPs. This interleaves
-// packs (e.g. relationship types push after membership periods) and is deliberately not
-// the SQL INSTALL_ORDER. A new domain's dirs must be added here in FK order; the assertion
-// below fails the build if a mapped dir is missing or unknown.
-const DIRECTORY_ORDER = [
-  'organizations', 'organization-profiles', 'people',
-  'member-profiles', 'data-quality-labels', 'advocacy-actions',
-  'competition-entries', 'certifications', 'member-certifications',
-  'membership-periods', 'relationship-types', 'relationships',
-  'addresses', 'address-links', 'contact-methods',
-  'committee-types', 'committees', 'committee-terms',
-  'committee-memberships', 'committee-meetings', 'committee-attendance',
-  'committee-agenda-items', 'committee-motions', 'committee-votes',
-  'task-types', 'tasks', 'task-assignments',
-  'task-links', 'issue-types', 'issues',
-  'issue-comments', 'issue-sequences', 'portal-sessions',
-  'secure-threads', 'secure-messages', 'forms',
-  'form-versions', 'form-pages', 'form-questions',
-  'form-question-options', 'form-distributions', 'form-responses',
-  'form-answers', 'events', 'event-registrations',
-  'courses', 'enrollments', 'products',
-  'orders', 'order-lines', 'payments',
-  'sonar-score-band-sets', 'sonar-score-bands', 'sonar-time-windows',
-  'sonar-score-models', 'sonar-score-model-versions', 'sonar-model-related-entities',
-  'sonar-factors', 'sonar-model-factors',];
+// PUSH ORDER is the PROJECT's. Every parent must push before its children through the entity SPs,
+// which interleaves packs and is deliberately NOT the SQL INSTALL_ORDER — so it is a statement about
+// one project's foreign keys, and it lived here as a hardcoded list of 59 MoreCheese directories.
+// The second project could not run this emitter at all: the assertion below correctly reported that
+// every one of those 59 was missing from its mapping. The check is good; the list was on the wrong
+// side of the boundary.
+const DIRECTORY_ORDER = PUSH_ORDER;
+if (!Array.isArray(DIRECTORY_ORDER)) {
+  throw new Error(`projects/${run.project}/seed-mapping.mjs must export PUSH_ORDER: the directory push `
+    + 'order for MetadataSync, every parent before its children. It is separate from INSTALL_ORDER '
+    + 'because the sync path pushes per directory and can interleave packs.');
+}
 
 // resolve the unified entries in push order, loudly
 const byDir = new Map(Object.entries(MAPPING).flatMap(([pack, defs]) => defs.filter((e) => e.dir).map((e) => [e.dir, { pack, ...e }])));

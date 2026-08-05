@@ -165,6 +165,12 @@ export const NOT_SHIPPED = {
   'funnel.employmentEdges': 'merged into relationships.relationships — ships inside the common pack',
 };
 
+/** This project's validator. cli/validate.mjs holds ~175 bespoke MoreCheese gates and imports this
+ *  project's seed-mapping — it is OURS, not the engine's, and declaring it here is what lets
+ *  cli/build.mjs stay project-blind. A project that declares nothing gets check-declared.mjs, which
+ *  runs every gate derived from declarations and knows no domain. */
+export const VALIDATOR = 'validate.mjs';
+
 /** The per-member latents the validator and inspector read (never installed). WHICH dials exist
  *  is this project's model, so the projection lives here — the engine used to hardcode it. */
 export const LATENTS_OF = (world) => world.people.map((p) => ({

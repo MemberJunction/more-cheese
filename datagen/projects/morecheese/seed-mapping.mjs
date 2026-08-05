@@ -14,6 +14,11 @@
 import { uuidFor } from '../../engine/ids.mjs';
 import { sqlStr, sqlNum, sqlBit, sqlDate, sqlId, mode } from '../../engine/seed-render.mjs';
 
+/** How this project is named in generated SQL/migration headers. The directory slug ('morecheese')
+ *  is for paths; this is for humans reading a seed file. Declared rather than hardcoded in the
+ *  emitters, which used to write "MoreCheese demo seed" into every project's output. */
+export const DISPLAY_NAME = 'MoreCheese';
+
 export const MJ_ENTITY_VAR = {
   'MJ_BizApps_Common: People': '@E_People',
   'MJ_BizApps_Common: Relationships': '@E_Relationships',
@@ -836,3 +841,31 @@ export const POSTAMBLE = {
 // ---- Shared pack → INSERT-lines generator (empty-table-safe; the crash emit-sql had) ----
 // load(pack, jsonName) → rows[]. transformTable rewrites a SQL table ref (e.g. home schema →
 // ${flyway:defaultSchema} for a migration). Returns { lines, summary }.
+
+/** PUSH ORDER for MetadataSync — every parent before its children THROUGH THE ENTITY SPs. This
+ *  interleaves packs (relationship types push after membership periods) and is deliberately NOT the
+ *  SQL INSTALL_ORDER. It is a statement about THIS project's foreign keys, so it lives here; it used
+ *  to be a hardcoded list inside cli/emit-mjsync.mjs, which made that emitter unusable by any other
+ *  project. A new domain's dirs go here in FK order, and the emitter fails loudly if a mapped dir is
+ *  missing or unknown. */
+export const PUSH_ORDER = [
+  'organizations', 'organization-profiles', 'people',
+  'member-profiles', 'data-quality-labels', 'advocacy-actions',
+  'competition-entries', 'certifications', 'member-certifications',
+  'membership-periods', 'relationship-types', 'relationships',
+  'addresses', 'address-links', 'contact-methods',
+  'committee-types', 'committees', 'committee-terms',
+  'committee-memberships', 'committee-meetings', 'committee-attendance',
+  'committee-agenda-items', 'committee-motions', 'committee-votes',
+  'task-types', 'tasks', 'task-assignments',
+  'task-links', 'issue-types', 'issues',
+  'issue-comments', 'issue-sequences', 'portal-sessions',
+  'secure-threads', 'secure-messages', 'forms',
+  'form-versions', 'form-pages', 'form-questions',
+  'form-question-options', 'form-distributions', 'form-responses',
+  'form-answers', 'events', 'event-registrations',
+  'courses', 'enrollments', 'products',
+  'orders', 'order-lines', 'payments',
+  'sonar-score-band-sets', 'sonar-score-bands', 'sonar-time-windows',
+  'sonar-score-models', 'sonar-score-model-versions', 'sonar-model-related-entities',
+  'sonar-factors', 'sonar-model-factors',];
