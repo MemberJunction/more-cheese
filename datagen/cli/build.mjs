@@ -40,6 +40,17 @@ for (let i = 0; i < argv.length; i++) {
 
 const run = (script, args) => execFileSync(process.execPath, [join(HERE, script), ...args], { encoding: 'utf8' });
 
+// A VALIDATOR MAY BE THE PROJECT'S OWN FILE. This resolved only against cli/ — engine space — which
+// is precisely why cli/validate.mjs holds 1,600 lines of MoreCheese: there was nowhere else to put
+// it. A project could declare a validator but not own one. Project-local wins, so a new project
+// writes projects/<name>/validate.mjs and declares it; naming a cli/ script still works, which is
+// how MoreCheese keeps its historic path without a 1,600-line move.
+const resolveScript = (name) => {
+  const local = join(ROOT, 'projects', project, name);
+  return existsSync(local) ? local : join(HERE, name);
+};
+const runScript = (name, args) => execFileSync(process.execPath, [resolveScript(name), ...args], { encoding: 'utf8' });
+
 // WHICH VALIDATOR? The pipeline (stage → validate → promote) is the engine's; WHAT counts as valid
 // is the project's. cli/validate.mjs is 1,600 lines of MoreCheese — it even imports that project's
 // seed-mapping.mjs — so running it unconditionally made this command work for exactly one project.
@@ -60,7 +71,7 @@ console.log(run('generate.mjs', [...fwd, '--out', STAGING]).trim());
 console.log(`▸ validate (staging) — ${validator}`);
 let report, green;
 try {
-  report = run(validator, ['--out', STAGING]);
+  report = runScript(validator, ['--out', STAGING]);
   green = true;
 } catch (e) {
   report = e.stdout ?? String(e);

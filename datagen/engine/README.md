@@ -33,7 +33,7 @@ nothing in the engine needs to know it exists.
 | `measurements.mjs` | project root | derived target bands from `{ target, tolerance }` pairs |
 | `pipeline.mjs` | project root | declared mutation-order edges the argument lists can't show |
 | `seed-mapping.mjs` | project root | how packs become SQL / MetadataSync. Exports `MAPPING`, `INSTALL_ORDER`, `PREAMBLE`, `POSTAMBLE`, **`PUSH_ORDER`** (directory push order, parents first — separate from INSTALL_ORDER) and **`DISPLAY_NAME`** |
-| `VALIDATOR` | `index.mjs` | the cli script `build.mjs` runs to validate. **Default: `check-declared.mjs`**, which runs every gate derived from your declarations and knows no domain — you get real validation without writing any |
+| `VALIDATOR` | `index.mjs` | what `build.mjs` runs to validate. **Resolved in your project directory first**, so write `projects/<name>/validate.mjs` and declare it — see `projects/fixture/validate.mjs` for the pattern (engine's derived gates + only what a declaration cannot say). A `cli/` script name also works. **Default: `check-declared.mjs`**, so you get references, install order, presence floors and target bands without writing a gate |
 | `LATENTS_OF(world)` | `index.mjs` | writes `validation-latents.json` — WHICH hidden dials exist is your model, not the engine's |
 | `RUN_EXTRAS(cfg)` | `index.mjs` | extra facts recorded in `run.json` (MoreCheese records its covid years) |
 | `SUMMARY_OF(world)` | `index.mjs` | the lines printed after a build; without it the engine just counts rows |
@@ -76,6 +76,8 @@ procedure:
 6. `node cli/build.mjs --project <name> --n 100 --seed 42 --release <date>` — stages, validates with
    `check-declared.mjs`, promotes to `out-<name>/` (the default project keeps plain `out/`).
 7. Optional, to install: add `seed-mapping.mjs`, then `emit-sql.mjs` / `emit-mjsync.mjs --out out-<name>`.
+8. Optional: `ruleset/scenarios/<name>.json` overlays, run with `--scenario <name>`. They may only
+   OVERRIDE keys the base ruleset already has — a typo is rejected, never merged.
 
 If any step forces an engine change, that's a MoreCheese-shaped assumption in the engine and it is
 a bug in the engine — not in your project.

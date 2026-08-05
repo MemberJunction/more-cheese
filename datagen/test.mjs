@@ -547,6 +547,26 @@ step('the second project builds and passes its own derived gates (zero engine ed
   if (!/fixture_circle/.test(sql)) throw new Error(`the SQL emitter produced no fixture tables:\n${sql.slice(0, 300)}`);
   const sync = run('emit-mjsync.mjs', ['--out', 'out-fixture']);
   if (!/Fixture: Members/.test(sync)) throw new Error(`the MetadataSync emitter produced no fixture records:\n${sync.slice(0, 300)}`);
+
+  // …a SCENARIO overlay, which needed no engine change at all — participation halves and the target
+  // gate follows the overlaid declaration…
+  const sc = run('generate.mjs', ['--project', 'fixture', '--scenario', 'quiet-years', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture-sc']);
+  if (!/circle: /.test(sc)) throw new Error(`the fixture scenario build produced nothing:\n${sc.slice(0, 300)}`);
+
+  // …and the project's OWN bespoke gate must fire when its claim is broken. Before this, a project
+  // could declare a validator but not own one: build.mjs resolved only against cli/, which is why
+  // 1,600 lines of MoreCheese live there.
+  const f = join(HERE, 'out-fixture/packs/circle/outings.json');
+  const original = readFileSync(f, 'utf8');
+  try {
+    const rows = JSON.parse(original);
+    rows[0].Year = 2019;                                  // before anybody joined
+    writeFileSync(f, JSON.stringify(rows, null, 1));
+    let out = '';
+    try { execFileSync(process.execPath, [join(HERE, 'projects/fixture/validate.mjs'), '--out', 'out-fixture'], { encoding: 'utf8' }); }
+    catch (e) { out = String(e.stdout ?? ''); }
+    if (!/no outing predates/.test(out)) throw new Error(`the fixture's own bespoke gate did not fire:\n${out.slice(0, 300)}`);
+  } finally { writeFileSync(f, original); }
 });
 
 // 0n. THE FRAMEWORK METRIC — advisory. Prints declarations:code so the trend is visible in every

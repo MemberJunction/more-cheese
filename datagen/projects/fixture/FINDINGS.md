@@ -41,7 +41,23 @@ untested, and it was worse:
 Plus two more required-and-undocumented ruleset keys found the same way: `version` (written into
 every pack manifest and generated header).
 
-**Ten findings, seven of them engine bugs.** The install path was less project-blind than the
+## And the last two claims — one more leak
+
+| # | what happened | side | fix |
+|---|---|---|---|
+| 11 | `build.mjs` resolved the declared validator **only against `cli/`** — engine space. A project could declare a validator but not own one, which is precisely why `cli/validate.mjs` holds 1,600 lines of MoreCheese: there was nowhere else to put it. | **engine** | project-local resolves first; naming a `cli/` script still works, so MoreCheese keeps its historic path without a 1,600-line move |
+
+**Scenario overlays needed no change at all.** `--scenario quiet-years` on the fixture halved
+participation (104 → 78 rows) and the target gate followed the overlaid declaration on the first
+try; a typo'd key in the overlay is still rejected rather than merged, which is the property that
+makes overlays safe to hand to someone who does not read code.
+
+**A project-owned validator now works**, and `projects/fixture/validate.mjs` is the pattern a second
+project should copy: call the engine's `runDerivedChecks` for everything derivable, then add only
+what a declaration cannot state. Its one bespoke gate — *no outing predates its member's join year* —
+is negative-tested, because a gate nobody has watched fail is decoration.
+
+**Eleven findings, eight of them engine bugs.** The install path was less project-blind than the
 generation path by a wide margin — which is exactly what you would expect, since the generation
 path is where the abstractions were designed and the install path is where they were assumed.
 
@@ -84,10 +100,12 @@ Fifty invented members, one decision, five years. It is **not shipped, not insta
 represent any real organisation** — it is a CI fixture, and `[fixture_circle]` is an invented schema
 that exists nowhere.
 
-It has no scenario overlays and no bespoke gates. Those are the two claims still untested: whether
-scenario overlays generalise, and whether a project's own bespoke validator slots in cleanly. It DOES
-now have a seed mapping and runs both emitters, because "the generation path generalises" turned out
-to be a much weaker statement than it sounded — four of the ten findings were on the install path,
-and they were the worst of the set.
+It now exercises the whole pipeline — generate, validate (with its own validator), promote, SQL,
+MetadataSync, and a scenario overlay — because each stage I left untested turned out to hide leaks.
+"The generation path generalises" was a much weaker statement than it sounded: five of the eleven
+findings were past that point, and they were the worst of the set.
+
+What it still does not have, and does not need: a real schema, emitters that load, or a second
+domain. Those would test the app, not the framework.
 
 If you are looking for the real dataset it is [projects/morecheese/](../morecheese/).

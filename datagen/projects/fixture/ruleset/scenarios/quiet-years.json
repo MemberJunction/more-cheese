@@ -1,0 +1,8 @@
+{
+  "$comment": "A quieter circle: participation halves. Overlays may only OVERRIDE keys the base ruleset already has — a typo'd key is rejected rather than merged silently, which is the whole reason this mechanism is safe to hand to a non-programmer.",
+  "outings": {
+    "params": {
+      "participation": { "target": 0.2, "tolerance": 0.08, "se": 3 }
+    }
+  }
+}
