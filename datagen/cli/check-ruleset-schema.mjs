@@ -7,9 +7,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate } from '../engine/schema-check.mjs';
+import { argvProject } from '../engine/config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const project = process.argv.includes('--project') ? process.argv[process.argv.indexOf('--project') + 1] : 'morecheese';
+const project = argvProject(process.argv);
 
 const schema = JSON.parse(readFileSync(join(ROOT, 'engine/ruleset.schema.json'), 'utf8'));
 const modDir = join(ROOT, 'projects', project, 'ruleset/modules');

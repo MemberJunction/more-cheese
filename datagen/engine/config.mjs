@@ -31,7 +31,13 @@ function deepMerge(base, overlay) {
  * human-authored effect against the scenario's targets. Same machinery, different world;
  * each scenario build is its own deterministic universe.
  */
-const DEFAULT_PROJECT = 'morecheese';
+export const DEFAULT_PROJECT = 'morecheese';
+
+/** The --project flag, or the default. Exported because EIGHT cli entry points each spelled this
+ *  out with the literal 'morecheese' inline — eight copies of the one name the engine is allowed to
+ *  know, which is eight places to miss when it changes and eight hits for the boundary checker to
+ *  have to forgive. One function, one literal, one allowlist entry. */
+export const argvProject = (argv) => (argv.includes('--project') ? argv[argv.indexOf('--project') + 1] : DEFAULT_PROJECT);
 
 /** A PROJECT is one generated universe: `projects/<name>/` holds its domain modules,
  * hooks, name banks, and ruleset. The engine (`core/`, entrypoints) is shared; everything

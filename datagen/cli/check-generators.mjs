@@ -28,10 +28,11 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { argvProject } from '../engine/config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv;
-const project = argv.includes('--project') ? argv[argv.indexOf('--project') + 1] : 'morecheese';
+const project = argvProject(process.argv);
 const DIR = join(ROOT, 'projects', project);
 
 // Files that are not domain generators: shared banks, the pipeline itself, declarations.

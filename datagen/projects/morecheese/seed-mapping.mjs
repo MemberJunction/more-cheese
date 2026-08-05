@@ -19,6 +19,11 @@ import { sqlStr, sqlNum, sqlBit, sqlDate, sqlId, mode } from '../../engine/seed-
  *  emitters, which used to write "MoreCheese demo seed" into every project's output. */
 export const DISPLAY_NAME = 'MoreCheese';
 
+/** This project's OWN schema — the one a Flyway migration rewrites to ${flyway:defaultSchema} so the
+ *  same migration installs into any target schema. Dependency schemas (the bizapps ones) are left
+ *  alone. It was a hardcoded 'morecheese_members' inside cli/emit-data-migration.mjs. */
+export const HOME_SCHEMA = 'morecheese_members';
+
 export const MJ_ENTITY_VAR = {
   'MJ_BizApps_Common: People': '@E_People',
   'MJ_BizApps_Common: Relationships': '@E_Relationships',

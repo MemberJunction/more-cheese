@@ -23,10 +23,11 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { argvProject } from '../engine/config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
-const project = argv.includes('--project') ? argv[argv.indexOf('--project') + 1] : 'morecheese';
+const project = argvProject(process.argv);
 const DIR = join(ROOT, 'projects', project);
 
 const NOT_A_GENERATOR = new Set([

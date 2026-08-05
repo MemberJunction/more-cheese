@@ -16,6 +16,9 @@ import { sqlStr, sqlNum, sqlBit, sqlDate, sqlId } from '../../engine/seed-render
 /** How this project is named in generated artifacts (the directory slug is 'fixture'). */
 export const DISPLAY_NAME = 'Fixture Circle';
 
+/** This project's own schema, rewritten to the Flyway placeholder in a data migration. */
+export const HOME_SCHEMA = 'fixture_circle';
+
 export const MJ_ENTITY_VAR = {
   'Fixture: Members': '@E_Members',
 };

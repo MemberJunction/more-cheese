@@ -30,7 +30,7 @@ const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `
 
 // The MAPPING is the PROJECT's — the claims we make about a dependency schema are ours, not the
 // engine's.
-const project = args.project ?? 'morecheese';
+const project = args.project ?? DEFAULT_PROJECT;
 const { MAPPING, PREAMBLE } = await import(`../projects/${project}/seed-mapping.mjs`);
 const claims = extractClaims({ MAPPING, PREAMBLE, load });
 

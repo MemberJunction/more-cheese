@@ -10,11 +10,10 @@ import { execFileSync } from 'node:child_process';
 import { rmSync, renameSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { argvProject, DEFAULT_PROJECT } from '../engine/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_PROJECT = 'morecheese'; // the historic default; every entry point accepts --project
-const RAW = process.argv.slice(2);
-const project = RAW.includes('--project') ? RAW[RAW.indexOf('--project') + 1] : DEFAULT_PROJECT;
+const project = argvProject(process.argv);
 const ROOT = join(HERE, '..'); // output dirs live at the datagen root, not under cli/
 // OUTPUT DIRS ARE PER-PROJECT, and were not. Every project staged into out-staging/ and promoted to
 // out/, so building the second project silently REPLACED the first's last good build — the one thing

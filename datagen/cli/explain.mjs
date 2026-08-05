@@ -8,10 +8,10 @@
 
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { loadRuleset, loadProject, projectDir } from '../engine/config.mjs';
+import { argvProject, loadProject, loadRuleset, projectDir } from '../engine/config.mjs';
 import { describeEffectPts } from '../engine/compile.mjs';
 
-const PROJECT = process.argv.includes('--project') ? process.argv[process.argv.indexOf('--project') + 1] : 'morecheese';
+const PROJECT = argvProject(process.argv);
 const { hooks } = await loadProject(PROJECT);
 const R = await loadRuleset(undefined, PROJECT);
 

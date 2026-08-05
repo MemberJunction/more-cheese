@@ -7,10 +7,11 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractPipeline, pipelineMermaid } from '../engine/pipeline.mjs';
+import { argvProject } from '../engine/config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv;
-const project = argv.includes('--project') ? argv[argv.indexOf('--project') + 1] : 'morecheese';
+const project = argvProject(process.argv);
 
 const source = readFileSync(join(ROOT, 'projects', project, 'index.mjs'), 'utf8');
 const stages = extractPipeline(source);

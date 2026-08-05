@@ -36,7 +36,7 @@ const run = JSON.parse(readFileSync(join(OUT, 'run.json'), 'utf8'));
 // project's own UUID namespace explicitly (see engine/config.mjs bindNamespace).
 const { bindNamespace } = await import('../engine/config.mjs');
 await bindNamespace(run.project);
-const { MAPPING, INSTALL_ORDER, PREAMBLE, POSTAMBLE, deliveryOf, DISPLAY_NAME } = await import(`../projects/${run.project}/seed-mapping.mjs`);
+const { MAPPING, INSTALL_ORDER, PREAMBLE, POSTAMBLE, deliveryOf, DISPLAY_NAME, HOME_SCHEMA } = await import(`../projects/${run.project}/seed-mapping.mjs`);
 
 // version: explicit --version, else the app's mj-app.json version (the shipped version of record).
 const manifestVersion = (() => {
@@ -47,7 +47,10 @@ const version = args.version ?? manifestVersion ?? '0.0.0';
 const MIGRATIONS_DIR = args['migrations-out'] ? resolve(args['migrations-out']) : join(APP_ROOT, 'migrations');
 
 // Home schema → Flyway default-schema placeholder (only morecheese_members; the rest stay literal).
-const HOME_SCHEMA = 'morecheese_members';
+// the project's OWN schema, declared by the project: a data migration rewrites it to the Flyway
+// placeholder so the same file installs into any target schema, and leaves dependency schemas alone.
+// This was hardcoded here, which meant a second project's migration would rewrite nothing.
+if (!HOME_SCHEMA) throw new Error(`projects/${run.project}/seed-mapping.mjs must export HOME_SCHEMA — the project's own schema, rewritten to \${flyway:defaultSchema} in the migration.`);
 const toPlaceholder = (tableRef) => tableRef.replace(`[${HOME_SCHEMA}]`, '[${flyway:defaultSchema}]');
 
 // Deterministic, sort-last timestamp: <releaseYYYYMMDD>23<40+packIndex>. Reserved late band so

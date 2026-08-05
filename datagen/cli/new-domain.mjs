@@ -22,7 +22,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const name = argv.find((a) => !a.startsWith('--'));
-const project = argv.includes('--project') ? argv[argv.indexOf('--project') + 1] : 'morecheese';
+const project = argvProject(process.argv);
 
 if (!name || !/^[a-z][a-zA-Z]*$/.test(name)) {
   console.log('usage: node cli/new-domain.mjs <domainName> [--project morecheese]');
@@ -105,6 +105,7 @@ import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { yearsOf, thetaAt, coverageOf, stripInternals } from '../../engine/authoring.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { uuidFor } from '../../engine/ids.mjs';
+import { argvProject } from '../engine/config.mjs';
 
 /**
  * @param {import('../../engine/types.js').Config} cfg
