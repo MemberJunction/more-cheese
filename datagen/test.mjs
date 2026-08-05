@@ -657,7 +657,7 @@ step('emitters: sql + schema + mjsync + explain', () => {
   run('emit-sql.mjs', []);
   runProject('emit-schema.mjs', []);
   run('emit-mjsync.mjs', []);
-  run('explain.mjs', []);
+  runProject('explain.mjs', []);
 });
 
 // 6b. schema/insert drift guard: every column an INSERT writes must exist in the CREATE TABLE

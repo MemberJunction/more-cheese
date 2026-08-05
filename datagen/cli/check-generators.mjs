@@ -44,7 +44,7 @@ const NOT_A_GENERATOR = new Set([
   // demo.mjs + emit-schema.mjs moved into morecheese and read as 581 lines of it (1.41 → 1.08) —
   // both times the framework "went backwards" because a project gained a tool. If a third kind of
   // project-owned tool ever appears, it belongs here, not in the generator count.
-  'validate.mjs', 'demo.mjs', 'emit-schema.mjs',
+  'validate.mjs', 'demo.mjs', 'emit-schema.mjs', 'explain.mjs',
 ]);
 const SECTIONS = ['inputs', 'fixtures', 'decisions', 'shape'];
 

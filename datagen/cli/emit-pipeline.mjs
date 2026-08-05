@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractPipeline, pipelineMermaid } from '../engine/pipeline.mjs';
-import { argvProject } from '../engine/config.mjs';
+import { argvProject, DEFAULT_PROJECT } from '../engine/config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv;
@@ -15,7 +15,11 @@ const project = argvProject(process.argv);
 
 const source = readFileSync(join(ROOT, 'projects', project, 'index.mjs'), 'utf8');
 const stages = extractPipeline(source);
-const { mustPrecede } = await import(`../projects/${project}/pipeline.mjs`);
+// pipeline.mjs is OPTIONAL (engine/README.md says so) — it declares mutation-order edges the
+// argument lists cannot show, and a project with no such edges legitimately has no file. This
+// import used to be unconditional, so running the tool against the fixture crashed on
+// ERR_MODULE_NOT_FOUND for a declaration it never owed. Optional means optional everywhere.
+const { mustPrecede } = await import(`../projects/${project}/pipeline.mjs`).catch(() => ({ mustPrecede: [] }));
 
 const doc = `# The pipeline
 
@@ -49,15 +53,18 @@ ${mustPrecede.map((e) => `**\`${e.before}\` → \`${e.after}\`**\n${e.why}\n`).j
 object to — changes committee memberships, attendance, motions and more. The check names it.)*
 `;
 
-const out = join(ROOT, 'PIPELINE.md');
+// per-project output, same convention as build.mjs' out dirs: the default project keeps the
+// historic datagen/PIPELINE.md (every doc links to it); any other project gets its own file
+// instead of silently OVERWRITING the default project's committed graph.
+const out = join(ROOT, project === DEFAULT_PROJECT ? 'PIPELINE.md' : `PIPELINE-${project}.md`);
 if (argv.includes('--check')) {
   const current = readFileSync(out, 'utf8');
   if (current !== doc) {
-    console.log('❌ PIPELINE.md is stale — run: node cli/emit-pipeline.mjs');
+    console.log(`❌ ${out.split('/').pop()} is stale — run: node cli/emit-pipeline.mjs --project ${project}`);
     process.exit(1);
   }
-  console.log(`✅ PIPELINE.md matches ${project}'s buildWorld (${stages.length} stages)`);
+  console.log(`✅ ${out.split('/').pop()} matches ${project}'s buildWorld (${stages.length} stages)`);
 } else {
   writeFileSync(out, doc);
-  console.log(`→ PIPELINE.md (${stages.length} stages, ${mustPrecede.length} declared edges)`);
+  console.log(`→ ${out.split('/').pop()} (${stages.length} stages, ${mustPrecede.length} declared edges)`);
 }
