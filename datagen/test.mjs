@@ -407,6 +407,25 @@ step('generator contract holds (and a positional signature is caught)', () => {
     try { run('check-generators.mjs', []); } catch { caught = true; }
     if (!caught) throw new Error('check-generators MISSED a positional dependency list');
   } finally { writeFileSync(f, original); }
+
+  // A HELPER WITH NO CALL SITES ANYWHERE. This is the check that would have caught a `git checkout`
+  // silently reverting every thetaAt call site while the helper stayed exported and committed — the
+  // suite green and the output byte-identical, because reverting to the original code reproduces the
+  // original data. It counts across ALL projects: a small project not needing indexBy is not a
+  // finding, and the fixture proved that the day it existed.
+  const files = ['events', 'committees', 'forms', 'learning', 'membership'].map((n) => join(HERE, `projects/morecheese/${n}.mjs`));
+  const originals = files.map((f) => readFileSync(f, 'utf8'));
+  try {
+    for (const [i, f] of files.entries()) {
+      writeFileSync(f, originals[i]
+        .replace(/thetaAt\(([^,)]+), ([^)]+)\)/g, '($1._thetaPath?.[$2] ?? $1._theta)')
+        .replace('thetaAt(personByKey.get(x.MemberNumber), year)', '(personByKey.get(x.MemberNumber)._theta)'));
+    }
+    const out = run('check-generators.mjs', []);
+    if (!/helper\(s\) NO project's generators call: .*thetaAt/.test(out)) {
+      throw new Error(`the unused-helper check did not name thetaAt after every call site was removed:\n${out.slice(0, 300)}`);
+    }
+  } finally { files.forEach((f, i) => writeFileSync(f, originals[i])); }
 });
 
 // 0l. THE PACK CONTRACT — the third and last coupling point to get a named shape.

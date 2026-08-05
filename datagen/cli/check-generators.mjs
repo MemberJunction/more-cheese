@@ -39,6 +39,10 @@ const DIR = join(ROOT, 'projects', project);
 const NOT_A_GENERATOR = new Set([
   'index.mjs', 'hooks.mjs', 'banks.mjs', 'identity.mjs',
   'refs.mjs', 'presence.mjs', 'measurements.mjs', 'pipeline.mjs', 'seed-mapping.mjs',
+  // a PROJECT-OWNED VALIDATOR is not a generator. Added when the fixture got one and the metric
+  // read its 40 lines as generator code — dropping that project's ratio from 1.57 to 0.91 and
+  // making the framework look like it had gone backwards when a validator had been added.
+  'validate.mjs',
 ]);
 const SECTIONS = ['inputs', 'fixtures', 'decisions', 'shape'];
 
@@ -89,14 +93,24 @@ for (const f of files) {
 // every call site — leaving the helper exported, documented, committed, and called by nothing. The
 // suite stayed green and the output stayed byte-identical, because reverting to the original code
 // reproduces the original data exactly. Nothing could have caught it except this.
+// Scanned across EVERY project, not just the one being checked. A helper is unused when NOBODY
+// calls it; a small project not needing indexBy is not a finding, and reporting it as one is how a
+// useful check becomes noise people learn to scroll past. This fired on the fixture the moment that
+// project existed, naming three helpers it has no reason to want.
 const helperSrc = readFileSync(join(ROOT, 'engine', 'authoring.mjs'), 'utf8');
 const helpers = [...helperSrc.matchAll(/export function (\w+)/g)].map((m) => m[1]);
-const allGenerators = files.map((f) => readFileSync(join(DIR, f), 'utf8')).join('\n');
-const unused = helpers.filter((h) => !new RegExp(`\\b${h}\\(`).test(allGenerators));
+const everyGenerator = readdirSync(join(ROOT, 'projects'), { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .flatMap((d) => {
+    const dir = join(ROOT, 'projects', d.name);
+    return readdirSync(dir).filter((f) => f.endsWith('.mjs') && !NOT_A_GENERATOR.has(f))
+      .map((f) => readFileSync(join(dir, f), 'utf8'));
+  }).join('\n');
+const unused = helpers.filter((h) => !new RegExp(`\\b${h}\\(`).test(everyGenerator));
 
 console.log(`generator contract — ${files.length} generators in '${project}'\n`);
 if (unused.length) {
-  console.log(`○ engine/authoring.mjs exports ${unused.length} helper(s) no generator calls: ${unused.join(', ')}`);
+  console.log(`○ engine/authoring.mjs exports ${unused.length} helper(s) NO project's generators call: ${unused.join(', ')}`);
   console.log('  Either adopt them or delete them. An unused helper is one somebody will rebuild worse,');
   console.log('  and a helper whose call sites vanished is a change that never actually landed.\n');
 }

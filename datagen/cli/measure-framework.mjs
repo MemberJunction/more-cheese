@@ -40,6 +40,10 @@ const asJson = argv.includes('--json');
 const NOT_A_GENERATOR = new Set([
   'index.mjs', 'hooks.mjs', 'banks.mjs', 'identity.mjs',
   'refs.mjs', 'presence.mjs', 'measurements.mjs', 'pipeline.mjs', 'seed-mapping.mjs',
+  // a PROJECT-OWNED VALIDATOR is not a generator. Added when the fixture got one and the metric
+  // read its 40 lines as generator code — dropping that project's ratio from 1.57 to 0.91 and
+  // making the framework look like it had gone backwards when a validator had been added.
+  'validate.mjs',
 ]);
 
 // Ruleset module → the generator that consumes it, where the names differ. `money` reads the
