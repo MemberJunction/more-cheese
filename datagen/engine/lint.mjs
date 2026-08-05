@@ -7,18 +7,28 @@ const AUTHORING_FORMS = ['beta', 'liftPts', 'groupTarget', 'strength', 'logitShi
 export function lintRuleset(R, domainLint) {
   const problems = [];
 
-  // GENERIC: every arrow must have exactly one authoring form, and evidence or a note
-  for (const [domain, block] of Object.entries(R)) {
-    if (!block || typeof block !== 'object' || !block.arrows) continue;
-    for (const [name, a] of Object.entries(block.arrows)) {
-      const forms = AUTHORING_FORMS.filter((f) => a[f] != null);
-      if (forms.length !== 1) problems.push(`${domain}.arrows.${name}: needs exactly ONE of ${AUTHORING_FORMS.join('|')} (found: ${forms.join(', ') || 'none'})`);
-      if (a.strength && !['weak', 'med', 'strong'].includes(a.strength)) problems.push(`${domain}.arrows.${name}: unknown strength "${a.strength}"`);
-      if (a.strength && !a.sign) problems.push(`${domain}.arrows.${name}: qualitative form needs a "sign" (+/-)`);
-      if (a.groupTarget != null && (a.groupTarget <= 0 || a.groupTarget >= 1)) problems.push(`${domain}.arrows.${name}: groupTarget must be a probability (0..1)`);
-      if (!a.note && !a.evidence && !a.$note) problems.push(`${domain}.arrows.${name}: no evidence/note — every rule carries its why`);
-    }
-  }
+  // GENERIC: every effect must have exactly one authoring form, and evidence or a note.
+  //
+  // HISTORY, because this rule was dead for a while and nothing noticed: it originally walked
+  // `block.arrows` at the TOP level of each domain block. Then two things happened to it. The
+  // four-section restructure renamed `arrows` → `effects`, and nested effect blocks
+  // (forms.response.effects, committees.participation.effects) were never reachable from the top
+  // level anyway — a gap the 2026-07-31 census called out. After the rename the loop matched
+  // NOTHING: exactly-one-form and evidence-required were enforced by no code at all, and the
+  // suite's lint tests never covered them, so the dead rule stayed green. Found by reading the
+  // lint while tightening it (TYPES-PROPOSAL stage 3), which is not a detection method — the
+  // negative tests below in test.mjs are.
+  //
+  // The rule now rides the recursive walk: any object under a key named `effects`, at ANY depth,
+  // in any module, in any project.
+  const lintEffect = (name, a, at) => {
+    const forms = AUTHORING_FORMS.filter((f) => a[f] != null);
+    if (forms.length !== 1) problems.push(`${at}: needs exactly ONE of ${AUTHORING_FORMS.join('|')} (found: ${forms.join(', ') || 'none'})`);
+    if (a.strength && !['weak', 'med', 'strong'].includes(a.strength)) problems.push(`${at}: unknown strength "${a.strength}"`);
+    if (a.strength && !a.sign) problems.push(`${at}: qualitative form needs a "sign" (+/-)`);
+    if (a.groupTarget != null && (a.groupTarget <= 0 || a.groupTarget >= 1)) problems.push(`${at}: groupTarget must be a probability (0..1)`);
+    if (!a.note && !a.evidence && !a.$note) problems.push(`${at}: no evidence/note — every rule carries its why`);
+  };
 
   // GENERIC: structural typo classes a human editing JSON actually produces. Each rule
   // exists because the failure it prevents was otherwise a stack trace from deep inside
@@ -48,6 +58,12 @@ export function lintRuleset(R, domainLint) {
       }
       for (const [k, v] of Object.entries(node)) {
         const kp = path ? `${path}.${k}` : k;
+        if (k === 'effects' && v && typeof v === 'object' && !Array.isArray(v)) {
+          for (const [name, e] of Object.entries(v)) {
+            if (name.startsWith('$') || !e || typeof e !== 'object') continue;
+            lintEffect(name, e, `${kp}.${name}`);
+          }
+        }
         if (typeof v === 'number') {
           // shares and tolerances are probabilities; a '15' where '0.15' was meant is the
           // classic edit and it detonates far from here

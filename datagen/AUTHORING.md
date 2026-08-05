@@ -24,7 +24,7 @@ ruleset becomes self-describing. You do not have to hold this document in your h
 | `Ctrl`/`Cmd`+`Space` on a blank line at the top of a module | the list of blocks — `membership`, `events`, `committees`, … each with a one-line description |
 | hover any key | what it means, in prose, plus the trap if it has one |
 | type `attendShare: 45` | an immediate red squiggle: *45 is above the maximum 1* |
-| write an `arrows` entry | it insists on exactly one effect form **and** a stated reason |
+| write an `effects` entry | it insists on exactly one effect form **and** a stated reason |
 
 That comes from [`engine/ruleset.schema.json`](engine/ruleset.schema.json), wired up in
 [`.vscode/settings.json`](../.vscode/settings.json). The same schema is **executed** by

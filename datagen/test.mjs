@@ -63,6 +63,15 @@ step('ruleset lint catches planted typos (share, weight, cross-refs) and stays q
   expectCatch({ ...tol, programs: { catalog: { certifications: [{ key: 'ccp', prerequisite: 'ccp-basic' }] } } }, 'prerequisite');
   // a target with no tolerance, caught by SHAPE at any depth — no path list to maintain
   expectCatch({ ...tol, anyNewDomain: { params: { whatever: { target: 0.7 } } } }, 'target but no tolerance');
+  // THE EFFECT-QUALITY RULES, which were DEAD for five days and nothing noticed: the rule walked
+  // `block.arrows` at the top level, the four-section restructure renamed the key to `effects`,
+  // and the loop matched nothing from then on — exactly-one-form and evidence-required were
+  // enforced by no code while every lint test stayed green, because none of them covered these
+  // rules. These three do, and the third plants its effect at DEPTH (the nested blocks the old
+  // rule never reached even when it was alive).
+  expectCatch({ ...tol, zz: { effects: { 'x.y': { beta: 0.5, liftPts: 9, note: 'two forms' } } } }, 'exactly ONE');
+  expectCatch({ ...tol, zz: { effects: { 'x.y': { beta: 0.5 } } } }, 'no evidence/note');
+  expectCatch({ ...tol, zz: { deep: { nested: { effects: { 'x.y': { beta: 0.5 } } } } } }, 'no evidence/note');
   lintRuleset({ ...tol, world: { attendShare: 0.6, mix: [['a', 1]] } }, morecheeseHooks.domainLint);        // and clean input passes
 });
 

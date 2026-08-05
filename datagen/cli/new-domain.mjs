@@ -18,6 +18,7 @@
 import { writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { argvProject } from '../engine/config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -105,7 +106,6 @@ import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { yearsOf, thetaAt, coverageOf, stripInternals } from '../../engine/authoring.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { uuidFor } from '../../engine/ids.mjs';
-import { argvProject } from '../engine/config.mjs';
 
 /**
  * @param {import('../../engine/types.js').Config} cfg
@@ -177,7 +177,9 @@ Three wiring steps, then it runs:
        import { build${Cap} } from './${name}.mjs';
        const ${name} = build${Cap}(cfg, { people, periods });   // deps are ONE OBJECT — the contract
        …return { …, ${name} };
-       …and a pack entry, one table per line:
+       …and a pack entry, one table per line — TWO edits in buildPacks: add ${name} to its
+       destructure line (const { …, ${name} } = world), then the entry (walking this exact list
+       once produced 'ReferenceError: trials is not defined' because this line was missing):
            ${name}: {
              dependsOn: ['common'],          // checked against refs.mjs, so it must be true
              tables: { ${name}: ${name}.${name} },
