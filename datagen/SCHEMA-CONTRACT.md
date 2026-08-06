@@ -3,7 +3,7 @@
 ## The problem
 
 The generator inserts into tables it **does not own**: MJ core (`__mj.*`) and the composed
-BizApps (`__mj_BizApps*`). Our `engine/seed-mapping.mjs` quietly *assumes* their shape —
+BizApps (`__mj_BizApps*`). Our `projects/<p>/seed-mapping.mjs` quietly *assumes* their shape —
 which columns exist, which values a CHECK allows, which seeded lookup names resolve. When
 one of those apps changes its data model, our assumptions rot **silently**: the suite stays
 green and only a real ~13-minute install fails. That's exactly how the `FormDistribution.Status='Open'`

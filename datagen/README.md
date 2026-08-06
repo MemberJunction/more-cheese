@@ -1,18 +1,26 @@
-# datagen — walking-skeleton generator (prototype)
+# datagen — the demo-data engine, and the projects built on it
 
-**What this is:** the prototype implementation of
-[ruleset-spec.md](../plans/association-db/ruleset-spec.md), covering the vertical slice (member → membership periods → event registrations → orders → payments). It exists to prove the architecture —
-calibrated causal generation, deterministic substreams, texture with variance floors,
-per-app pack emission, and the validation harness — **before** the reconciliation and
-causal-map sessions, so their outputs land in a running machine instead of a document.
+**What this is:** a deterministic generator for believable demo data. It implements
+[ruleset-spec.md](../plans/association-db/ruleset-spec.md) — calibrated causal generation,
+deterministic substreams, texture with variance floors, per-app pack emission, and a validation
+harness where every declared rule earns its own check.
 
-**What this is NOT:** production code. Zero dependencies, plain Node (≥ 20), deliberately
+It is no longer a walking skeleton or a prototype of one. `engine/` generates data for **any**
+project — a claim that is checked rather than asserted (`cli/check-engine-boundary.mjs`, plus a
+second project the suite builds on every run). What that cost to establish, and where it does not
+hold, is in [`projects/fixture/FINDINGS.md`](projects/fixture/FINDINGS.md).
+
+> **New to this, or picking it up from someone else? Start with
+> [`HANDOFF.md`](HANDOFF.md)** — the state of the work, what is half-finished, and the six things
+> that will bite you. It is the one document written for a reader who cannot ask questions.
+
+**What this is NOT:** production code. Near-zero dependencies, plain Node (≥ 20), deliberately
 outside `packages/*` (no workspace/publishing ceremony while the design moves). The
 `morecheese_*` shapes are FROZEN into the app's baseline migration (2026-07-14); the
 bizapps dependencies are declared in `mj-app.json`.
 
-**Structure (framework rungs 2–3 — see [FRAMEWORK.md](FRAMEWORK.md)):** three roles, three
-directories.
+**Structure** — three roles, three directories. What a project owes the engine and what it gets
+back is the contract in [`engine/README.md`](engine/README.md).
 
 ```
 datagen/
@@ -34,6 +42,28 @@ The engine is the reusable part; a project plugs into it by exporting two things
 staticAssignment, derivedTransaction) — each migration proven byte-identical to the
 hand-written version it replaced. Only genuinely non-pattern code stays hand-written in the
 project (NegBin volume, event fixtures, hero pinning).
+
+## Which document answers which question
+
+| I want to… | read |
+|---|---|
+| pick this up from someone else | [`HANDOFF.md`](HANDOFF.md) — state, half-finished work, the six traps |
+| understand the system's shape, no statistics | [`TOUR.md`](TOUR.md) |
+| understand why the data is *believable* | [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md) |
+| change a number or a list | [`CONTRACT.md`](CONTRACT.md) |
+| add a whole new domain | [`ADDING-A-DOMAIN.md`](ADDING-A-DOMAIN.md) |
+| start a new **project** on the engine | [`engine/README.md`](engine/README.md) |
+| know where the framework claim holds — and where it broke | [`projects/fixture/FINDINGS.md`](projects/fixture/FINDINGS.md) |
+| know how the data reaches a database | [`DELIVERY.md`](DELIVERY.md), then [`SCHEMA-CONTRACT.md`](SCHEMA-CONTRACT.md) |
+| see per-app coverage | [`BIZAPPS-COVERAGE.md`](BIZAPPS-COVERAGE.md) |
+| stand up a throwaway demo DB | [`PLAYGROUND.md`](PLAYGROUND.md), [`INTEGRATION-RUNBOOK.md`](INTEGRATION-RUNBOOK.md) |
+| know why a key is spelled the way it is | [`TYPES-PROPOSAL.md`](TYPES-PROPOSAL.md) — a decision record |
+| read the recipe as English sentences | [`projects/morecheese/ruleset/RULESET.md`](projects/morecheese/ruleset/RULESET.md) — generated |
+| see the build order as a graph | [`PIPELINE.md`](PIPELINE.md) — generated |
+| trace the history of the framework claim | [`FRAMEWORK.md`](FRAMEWORK.md) — kept as record |
+
+`AUTHORING.md` and `DATA-CONTRACT.md` predate `CONTRACT.md` and `DELIVERY.md` and overlap them;
+where they disagree, the newer document wins.
 
 ## New here? The 30-minute path
 

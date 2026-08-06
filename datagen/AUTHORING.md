@@ -126,7 +126,7 @@ This is the tier that today needs care. The checklist, in order:
      `uuidFor(prefix, key)` — register the prefix in DATA-CONTRACT.md's table
 3. **Wire into `index.mjs`** — call in pipeline order (§5 of ruleset-spec: a domain must
    be built after everything it reads), add tables to the pack map.
-4. **The mapping — ONE entry in `engine/seed-mapping.mjs`** (consolidated 2026-07-31; the
+4. **The mapping — ONE entry in `projects/<p>/seed-mapping.mjs`** (consolidated 2026-07-31; the
    same tables were previously mapped again inside emit-mjsync, and the copies drifted —
    one wrong word there once failed 3,191 records at push). Each entry carries:
    - `json`, `table` and a `columns(r)` projection — the formatters are dual-mode, so the

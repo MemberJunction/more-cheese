@@ -1,5 +1,10 @@
 # How the Generator Works, in Plain Language
 
+> **Scope: the CAUSAL MODEL** — why the data is believable rather than merely well-formed:
+> causality by construction, the calibration guessing-game, what β and the baseline mean, and an
+> honest account of what "trainable" does and does not buy. For the system's shape — the parts, the
+> commands, the protections — read [`TOUR.md`](TOUR.md) first.
+
 The concepts behind `datagen/`, written for anyone on the team — no statistics background
 assumed. The executable truth lives in [the ruleset](projects/morecheese/ruleset/RULESET.md) and
 [ruleset-spec.md](../plans/association-db/ruleset-spec.md); this is the companion that

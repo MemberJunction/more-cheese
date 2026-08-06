@@ -1,4 +1,10 @@
-# Proposal: a type vocabulary for the ruleset
+# Decision record: the ruleset type vocabulary
+
+> **This is no longer a proposal.** Goal A shipped 2026-07-31, goal B (the canonicalisation) shipped
+> 2026-08-05 once its second-project precondition was met, and all seven veto-list questions are
+> answered in the status block immediately below. Only **stage 3 (tighten the schema from
+> "describe" to "require")** remains open. Kept in full because the census and the reasoning are
+> the argument for every rename that happened — and for the ones that deliberately did not.
 
 **Status (2026-08-05): stage 2 (canonicalise) SHIPPED. Stage 3 (enforce) remains open.**
 

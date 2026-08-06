@@ -5,9 +5,31 @@ MJ app team gets calibrated, causal, deterministic demo data by *authoring rules
 not by writing generators. The formula is the generative-data lead's `Generate(X, S, seed, scale)`; MoreCheese
 is the running proof of the bottom half.
 
-**The test that defines "framework":** can a second domain (say, bizapps-accounting demo
-data) be added with ruleset declarations + minimal hooks, no new pipeline code? Every rung
-below moves toward a "yes."
+**The test that defines "framework":** can a second project be added with ruleset declarations +
+minimal hooks, no new pipeline code?
+
+> ## ✅ ANSWERED 2026-08-04 — and the answer cost thirteen fixes
+>
+> `projects/fixture/` is that second project: ~120 lines, one decision, CI-only, never shipped. It
+> now runs the WHOLE pipeline — generate → validate (its own validator) → promote → SQL →
+> MetadataSync → a scenario overlay — and the suite builds it on every run, so the claim cannot
+> quietly rot.
+>
+> **Standing it up failed thirteen times**, eight of them engine bugs invisible from inside
+> MoreCheese because from inside MoreCheese each was simply true: the documented
+> `build.mjs --project <name>` could not run at all; output dirs were global, so building it
+> destroyed MoreCheese's promoted build; an emitter held a hardcoded list of 59 MoreCheese
+> directories. The full account, including what did NOT break (the five patterns, row templates,
+> derived checks and the pack contract all worked unchanged on first use), is
+> [`projects/fixture/FINDINGS.md`](projects/fixture/FINDINGS.md).
+>
+> **What "framework" is now true of**, all machine-checked: the engine names no project and imports
+> none (`cli/check-engine-boundary.mjs`); a second project needs zero engine edits (the suite);
+> declarations earn their own gates. **What it is not true of, and never will be:** the ~175 bespoke
+> validator gates carrying domain knowledge no declaration can state, and the ~45% of generator code
+> that is irreducible judgement. Both are documented where they live.
+>
+> The rungs below are kept as the record of how it got here. Read them as history, not as a plan.
 
 ---
 
