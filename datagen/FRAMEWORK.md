@@ -203,19 +203,32 @@ the payment lifecycle, the programs domains (certifications/competition/advocacy
 v1** (stamped story templates + `out/motifs.json` registry), FK-first validation phasing,
 and benchmark sourcing folded into the rulesets (every target now carries
 source + confidence + tolerance; NPS was the one materially wrong number — fixed 7.2 → 8.3).
-Full suite green across 7 seeds; 96 gates.
+Full suite green across 7 seeds; 96 gates *(the count at that milestone — this document is a
+dated progress record, not a description of today. Current is 335; `node cli/validate.mjs` is
+always the authority)*.
 
-Open, in rough effort-to-payoff order for July 31:
+Open, in rough effort-to-payoff order (revised 2026-08-06):
 
 | Item | State |
 |---|---|
-| **Knowledge Hub** | Researched, decision pending — see `plans/association-db/KNOWLEDGE-HUB-ONE-PAGER-2026-07-16.md`. Option A (fatten 3–4 existing prose fields; KH demos with config only) vs Option B (generated document corpus). Recommend A. |
-| **Dashboard catch-up** | `out/dashboard.html` doesn't know the newer packs (programs, defects, motifs). |
-| **Accounting pack** | bizapps-accounting's 28-table baseline exists; GL/journal entries derived from our orders/payments — designed, deferred as its own batch. Biggest fillable coverage gap. |
-| **Ops** | `setup-playground.sh` (one-command playground rebuild) and CI running `node test.mjs`. |
-| **Orders decomposition** | BLOCKED upstream — waits on bizapps-orders' Subscription/renewal-Order tables (their phasing lands past July 31). `morecheese_orders` stays the sanctioned stand-in. |
+| **CI does not run the datagen suite** | **The largest gap, and it undercuts this document.** No workflow references `datagen` or `test.mjs` — the only check on a PR is `changes_and_migrations`. So 37 suite steps, 335 gates, the engine-boundary checker, the generator contract and the fixture build all run *only when somebody remembers to type the command*. Every claim on this page is enforced by habit. One workflow file; the suite takes ~15 minutes. |
+| **Who looks at the app UIs?** | Still nobody's, and still the honest hole. The data has never been seen rendered in the apps it targets. Both of the worst defects to date passed every gate and a clean push, and were caught by a person reading a grid. |
+| **Knowledge Hub** | Researched, decision pending — see `plans/association-db/KNOWLEDGE-HUB-ONE-PAGER-2026-07-16.md`. Option A (fatten 3–4 existing prose fields; KH demos with config only) vs Option B (generated document corpus). Recommend A. Needs a decision, not code. |
+| **Vocabulary migration — TYPES-PROPOSAL stage 3** | Stage 2 (canonicalise) SHIPPED 2026-08-05; stage 3 (enforce the canonical spellings from the schema) is open. The "wait for a second project" precondition is met. This is the remaining work on the readability goal — `target` / `presentTarget` / `shareOfEligible` are still three spellings of one idea. |
+| **Ops** | `setup-playground.sh` (one-command playground rebuild) does not exist. |
+| **Orders decomposition** | BLOCKED upstream — waits on bizapps-orders' Subscription/renewal-Order tables. `morecheese_orders` stays the sanctioned stand-in. |
 | **Team integration session** | Real installs + their Explorer apps + Sonar over our data. The path is proven (INTEGRATION-RUNBOOK.md, findings F1–F7); needs team time. |
-| **Rung 4 / Rung 5 / second project** | Parked deliberately — rung 4 blocked on real entities, rung 5 is design work, a second project should wait for a genuine second dataset need. |
+| **Rung 4 / Rung 5** | Parked deliberately — rung 4 blocked on real entities, rung 5 is design work. |
+
+Closed since the July 31 revision of this table:
+
+- ~~**Second project**~~ — `projects/fixture/` exists (2026-08-04) and the suite builds it every run. It
+  also settled the vocabulary decisions that were waiting on it.
+- ~~**Dashboard catch-up**~~ — the inspector had drifted further than this table recorded: it carried a
+  hand-written list of three packs and eleven tables while the build shipped twelve packs and seventy
+  tables. It now derives both from the packs on disk, ordered by the pack pyramid, and a suite step
+  asserts every emitted pack is visible.
+- **Accounting pack** — removed from this backlog; not part of this workstream.
 
 ## Migration policy
 

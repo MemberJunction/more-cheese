@@ -718,6 +718,29 @@ step('emitters: sql + schema + mjsync + explain', () => {
   runProject('explain.mjs', []);
 });
 
+// 6a-ii. THE INSPECTOR SHOWS THE WHOLE BUILD.
+//
+// Nothing exercised demo.mjs, and that is precisely how it fell seven packs behind without anyone
+// noticing: it carried a hand-written list of three packs and eleven tables while the build shipped
+// twelve packs and seventy tables. More than half the data was invisible in the only tool anyone
+// uses to LOOK at it — and looking is not optional here. The two worst data defects of the last
+// month ("Calle Mill" street names, ZIPs that did not match their state) passed every gate and a
+// clean push, and were caught by a person reading a rendered grid.
+//
+// The list is derived from the packs on disk now, so this asserts the property rather than the
+// list: every pack the build emitted must appear in the embedded tables. A new pack is covered the
+// day it exists, and no one has to remember anything.
+step('inspector covers every pack in the build (no pack invisible to the only tool that shows data)', () => {
+  runProject('demo.mjs', []);
+  const html = readFileSync(join(HERE, 'out', 'dashboard.html'), 'utf8');
+  const packs = readdirSync(join(HERE, 'out', 'packs'), { withFileTypes: true })
+    .filter((d) => d.isDirectory()).map((d) => d.name);
+  const missing = packs.filter((p) => !html.includes(`"${p}/`));
+  if (missing.length) {
+    throw new Error(`the inspector does not show ${missing.length} of ${packs.length} packs: ${missing.join(', ')}`);
+  }
+});
+
 // 6b. schema/insert drift guard: every column an INSERT writes must exist in the CREATE TABLE
 // (the provisional DDL and the seed INSERTs share assumed shapes — they must never disagree).
 // SCOPE: only the playground packs (01–10) have stand-in DDL in emit-schema's shim. The
