@@ -10,7 +10,7 @@ import { rmSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractClaims, checkClaims } from './engine/contract.mjs';
-import { MAPPING, PREAMBLE } from './engine/seed-mapping.mjs';
+
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const QUICK = process.argv.includes('--quick');
@@ -21,9 +21,21 @@ let failures = 0;
 const pending = [];
 const CLI = join(HERE, 'cli');
 const run = (script, args) => execFileSync(process.execPath, [join(CLI, script), ...args], { encoding: 'utf8' });
+/** a PROJECT-owned script (an inspector, a dev shim, a project's own validator) — these used to sit
+ *  in cli/ and be reachable through run(), which is exactly why the engine-boundary checker had to
+ *  allowlist three of them. */
+const runProject = (script, args) => execFileSync(process.execPath, [join(HERE, 'projects', 'morecheese', script), ...args], { encoding: 'utf8' });
+/** Any error shape → printable lines. A Buffer stdout used to make the reporter itself throw,
+ *  which killed the run instead of reporting the failure it was handed. */
+const detail = (e) => {
+  const raw = e?.stdout != null ? String(e.stdout) : String(e?.message ?? e);
+  const flagged = raw.split('\n').filter((l) => l.startsWith('❌'));
+  return (flagged.length ? flagged : raw.split('\n').slice(0, 4)).join('\n');
+};
+
 const step = (name, fn) => {
   try { const r = fn(); if (r?.then) { pending.push(r.then(() => console.log(`✅ ${name}`)).catch((e) => { failures++; console.log(`❌ ${name}`); console.log(String(e.message ?? e).split('\n').slice(0, 4).join('\n')); })); return; } console.log(`✅ ${name}`); }
-  catch (e) { failures++; console.log(`❌ ${name}`); console.log((e.stdout ?? String(e)).split('\n').filter((l) => l.startsWith('❌')).join('\n')); }
+  catch (e) { failures++; console.log(`❌ ${name}`); console.log(detail(e)); }
 };
 
 console.log(`datagen regression suite ${QUICK ? '(quick)' : ''}\n`);
@@ -51,6 +63,15 @@ step('ruleset lint catches planted typos (share, weight, cross-refs) and stays q
   expectCatch({ ...tol, programs: { catalog: { certifications: [{ key: 'ccp', prerequisite: 'ccp-basic' }] } } }, 'prerequisite');
   // a target with no tolerance, caught by SHAPE at any depth — no path list to maintain
   expectCatch({ ...tol, anyNewDomain: { params: { whatever: { target: 0.7 } } } }, 'target but no tolerance');
+  // THE EFFECT-QUALITY RULES, which were DEAD for five days and nothing noticed: the rule walked
+  // `block.arrows` at the top level, the four-section restructure renamed the key to `effects`,
+  // and the loop matched nothing from then on — exactly-one-form and evidence-required were
+  // enforced by no code while every lint test stayed green, because none of them covered these
+  // rules. These three do, and the third plants its effect at DEPTH (the nested blocks the old
+  // rule never reached even when it was alive).
+  expectCatch({ ...tol, zz: { effects: { 'x.y': { beta: 0.5, liftPts: 9, note: 'two forms' } } } }, 'exactly ONE');
+  expectCatch({ ...tol, zz: { effects: { 'x.y': { beta: 0.5 } } } }, 'no evidence/note');
+  expectCatch({ ...tol, zz: { deep: { nested: { effects: { 'x.y': { beta: 0.5 } } } } } }, 'no evidence/note');
   lintRuleset({ ...tol, world: { attendShare: 0.6, mix: [['a', 1]] } }, morecheeseHooks.domainLint);        // and clean input passes
 });
 
@@ -62,10 +83,8 @@ step('gate helpers catch planted defects (fk, share, presence, distinct) and pas
   const h = makeGateHelpers((name, ok, detail) => results.push({ name, ok, detail }));
   const failed = () => results.splice(0).filter((r) => !r.ok);
 
-  h.fkResolves('fk', [[[{ k: 'A' }, { k: 'MISSING' }], (r) => r.k, new Set(['A'])]]);
-  if (failed().length !== 1) throw new Error('fkResolves missed a dangling ref');
-  h.fkResolves('fk', [[[{ k: 'A' }, { k: null }], (r) => r.k, new Set(['A'])]]);
-  if (failed().length !== 0) throw new Error('fkResolves must allow null keys (optional FKs)');
+  if (h.dangling([{ k: 'A' }, { k: 'MISSING' }], (r) => r.k, new Set(['A'])) !== 1) throw new Error('dangling missed a broken ref');
+  if (h.dangling([{ k: 'A' }, { k: null }], (r) => r.k, new Set(['A'])) !== 0) throw new Error('dangling must allow null keys (optional FKs)');
 
   h.shareBand('share', 0.50, { target: 0.10, tolerance: 0.05 });
   if (failed().length !== 1) throw new Error('shareBand missed a wildly off share');
@@ -195,6 +214,408 @@ step('engine/types.d.ts matches the engine and surfaces at call sites (needs tsc
   } finally { rmSync(probe, { force: true }); }
 });
 
+// 0e. checks DERIVED from declarations must actually catch a planted defect, and must run in the
+// RIGHT PHASE. The reference gates are generated from projects/<name>/refs.mjs; when they were
+// first wired in after the validator's FK-first bailout, a dangling reference stopped the run
+// before they ever executed — they reported green on a broken world by never running at all.
+step('derived reference gates catch a planted dangling ref (and run before the FK-first bailout)', () => {
+  run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/committees/committee_memberships.json');
+  const rows = JSON.parse(readFileSync(f, 'utf8'));
+  const original = rows[3].TermKey;
+  rows[3].TermKey = 'BOGUS:1999-01-01';   // a term that was never emitted
+  writeFileSync(f, JSON.stringify(rows, null, 1));
+  let out = '';
+  try { run('validate.mjs', ['--out', 'out-test']); }
+  catch (e) { out = String(e.stdout ?? ''); }
+  finally { rows[3].TermKey = original; writeFileSync(f, JSON.stringify(rows, null, 1)); }
+  if (!out.includes('ref: committee_memberships.TermKey → committee_terms.TermKey')) {
+    throw new Error('the DERIVED reference gate did not fire — check it runs inside the referential phase');
+  }
+});
+
+// 0e-ii. POLYMORPHIC reference edges — one column whose parent table depends on a sibling
+// discriminator. These could not be declared at all before `when`, so they stayed as a hand-written
+// switch in the validator whose last branch was `: false`: a RefKind nobody added to the chain
+// failed closed as an unnamed dangling count. Two things must hold now, and both are planted here.
+//
+// The second plant is the one that taught me something. My first version required each declared
+// subset to be NON-EMPTY, reasoning that a subset matching nothing meant its discriminator had been
+// renamed. That failed 3 of 7 seeds: at N=500 some seeds have no billing issue sourced from an order,
+// a kind that is real but rare. Absence of rows is not a defect. Asking the inverse — is every value
+// PRESENT in the data claimed by some declared edge — catches the rename, catches a brand-new kind a
+// generator starts emitting, and has no false positives. That is only possible because `when` is
+// data; a predicate function can only tell you whether it matched.
+step('polymorphic reference edges catch a bad parent AND an undeclared discriminator value', () => {
+  run('generate.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/platform/record_changes.json');
+  const original = readFileSync(f, 'utf8');
+  const fire = (mutate, expect, what) => {
+    const rows = JSON.parse(original);
+    mutate(rows);
+    writeFileSync(f, JSON.stringify(rows, null, 1));
+    let out = '';
+    try { run('check-declared.mjs', ['--out', 'out-test']); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!out.includes(expect)) throw new Error(`${what} was NOT caught. Looked for: ${expect}`);
+  };
+  try {
+    // (a) an audit row pointing at an issue that does not exist
+    fire((rows) => { rows[rows.findIndex((r) => r.RefKind === 'issue')].RefKey = 'ISS-NOPE'; },
+      'ref: record_changes.RefKey [RefKind=issue] → issues.IssueKey', 'a dangling polymorphic ref');
+    // (b) a discriminator value nobody declared — whether renamed or newly emitted. These rows
+    // reference something no gate looks at, which is exactly what the old `: false` fallback did.
+    fire((rows) => { for (const r of rows) if (r.RefKind === 'task') r.RefKind = 'taskItem'; },
+      'UNDECLARED: taskItem', 'a renamed discriminator value');
+    fire((rows) => { rows[0].RefKind = 'invoice'; },
+      'UNDECLARED: invoice', 'a brand-new discriminator value');
+  } finally { writeFileSync(f, original); }
+});
+
+// 0e-iii. A DERIVED target band must catch a broken share. Six of these were hand-written bands in
+// the validator until their measurements moved into the project; the migration was verified by
+// running derived and bespoke side by side and matching every digit, but a gate that has never been
+// seen to fail is still unproven, so one gets its data broken here.
+step('a derived target band catches a broken share', () => {
+  run('generate.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/issues/issues.json');
+  const original = readFileSync(f, 'utf8');
+  try {
+    const rows = JSON.parse(original);
+    for (const r of rows) delete r.AssigneeMemberNumber;   // 0% assigned against a declared 75%
+    writeFileSync(f, JSON.stringify(rows, null, 1));
+    let out = '';
+    try { run('check-declared.mjs', ['--out', 'out-test']); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!/issues\.params\.assignment: 0\.0% vs 75\.0%/.test(out)) {
+      throw new Error(`the derived target gate did not fire on a 0% share. Got: ${out.slice(0, 300)}`);
+    }
+  } finally { writeFileSync(f, original); }
+});
+
+// 0f. the derived PRESENCE floors must catch the failure that motivated them: Critical-severity
+// tickets sat at zero for weeks while every gate stayed green, because a category whose expected
+// share is 0.5% passes a ±6-point band at exactly zero rows. Reproduce it exactly.
+step('derived presence floors catch a missing category (the Critical-severity failure)', () => {
+  run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const f = join(HERE, 'out-test/packs/issues/issues.json');
+  const rows = JSON.parse(readFileSync(f, 'utf8'));
+  const original = rows.map((r) => r.Severity);
+  for (const r of rows) if (r.Severity === 'Critical') r.Severity = 'High';
+  writeFileSync(f, JSON.stringify(rows, null, 1));
+  let out = '';
+  try { run('validate.mjs', ['--out', 'out-test']); }
+  catch (e) { out = String(e.stdout ?? ''); }
+  finally { rows.forEach((r, i) => { r.Severity = original[i]; }); writeFileSync(f, JSON.stringify(rows, null, 1)); }
+  if (!out.includes('MISSING: Critical')) {
+    throw new Error('the derived presence floor did not name the missing category');
+  }
+});
+
+// 0g. THE new-domain trap. A human-form effect (liftPts/groupTarget/strength) is only solved for
+// the block hooks.compile.arrowsOf points at. Authored anywhere else it keeps beta: undefined,
+// every score goes NaN, every draw is false, and the domain generates ZERO ROWS with all gates
+// green. That is what happened the first time someone added a domain by following the docs.
+step('a human-form effect outside the compiled block fails loudly (not silently at zero rows)', async () => {
+  const { compileRuleset } = await import('./engine/compile.mjs');
+  const hooks = {
+    compile: {
+      arrowsOf: (C) => C.membership.effects,
+      overallTarget: () => 0.87,
+      features: { 'renewal.x': 'x' },
+      syntheticPop: (C, r, n) => Array.from({ length: n }, () => ({ x: r.normal() })),
+    },
+  };
+  const C = {
+    membership: { effects: { 'renewal.x': { beta: 0.5 } } },
+    // a second domain, authored the way CONTRACT.md recommends — and never solved
+    speakers: { effects: { 'speak.engagement': { liftPts: 9, share: 0.2, note: 'x' } } },
+  };
+  try {
+    compileRuleset(C, hooks);
+    throw new Error('compile ACCEPTED an unsolved human-form effect — the zero-rows trap is open again');
+  } catch (e) {
+    const m = String(e.message);
+    if (m.includes('trap is open')) throw e;
+    if (!m.includes('speakers.effects.speak.engagement')) {
+      throw new Error(`compile failed, but did not name the offending effect: ${m.split('\n')[0]}`);
+    }
+  }
+});
+
+// 0h. THE PIPELINE GRAPH. Most stage ordering is self-enforcing — you cannot consume what does not
+// exist. The dangerous edges are the ones where a stage MUTATES something a later stage reads: the
+// argument lists look identical either way, so swapping two calls compiles, runs, and quietly
+// produces different data. Verified: swapping applyMotifs and runRenewalUnroll changes committee
+// memberships, attendance and motions. Those edges are declared, and checked here.
+step('pipeline: declared ordering edges hold, and a violation is caught', async () => {
+  const { extractPipeline, checkPipeline } = await import('./engine/pipeline.mjs');
+  const { mustPrecede } = await import('./projects/morecheese/pipeline.mjs');
+  const stages = extractPipeline(readFileSync(join(HERE, 'projects/morecheese/index.mjs'), 'utf8'));
+  if (stages.length < 20) throw new Error(`extracted only ${stages.length} stages — the parser has drifted from buildWorld`);
+
+  const fails = [];
+  checkPipeline(stages, mustPrecede, (name, ok) => { if (!ok) fails.push(name); });
+  if (fails.length) throw new Error(`declared ordering edge(s) violated: ${fails.join('; ')}`);
+
+  // and the check must actually catch a violation — swap the first declared edge's two stages
+  const edge = mustPrecede[0];
+  const a = stages.findIndex((s) => s.name === edge.before);
+  const b = stages.findIndex((s) => s.name === edge.after);
+  const swapped = stages.map((s, i) => ({ ...s, order: i === a ? stages[b].order : i === b ? stages[a].order : s.order }));
+  let caught = false;
+  checkPipeline(swapped, [edge], (name, ok) => { if (!ok) caught = true; });
+  if (!caught) throw new Error('checkPipeline MISSED a violated ordering edge');
+});
+
+step('PIPELINE.md matches the code', () => run('emit-pipeline.mjs', ['--check']));
+
+// 0i. NO DEFENSIVE READS OF THE RULESET. `P.someShare ?? 0` on a declared value is dead code that
+// becomes a silent bug the moment the key moves. That happened four times in one day — 146
+// relationship edges gone, every cancellation reason collapsed, every organisation's legal
+// structure nulled, every optional-purchase rate zeroed — and no gate, lint, schema or type check
+// caught any of them.
+step('no defensive reads of declared ruleset values (and a planted one is caught)', () => {
+  run('check-reads.mjs', []);
+  const f = join(HERE, 'projects/morecheese/committees.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    writeFileSync(f, original.replace('const min = P.minRosterPerTerm;', 'const min = P.minRosterPerTerm ?? 0;'));
+    let caught = false;
+    try { run('check-reads.mjs', []); } catch { caught = true; }
+    if (!caught) throw new Error('check-reads MISSED a planted `?? 0` on a declared param');
+  } finally { writeFileSync(f, original); }
+});
+
+// 0j. The derived checks must run STANDALONE, for any project. That is the difference between a
+// framework and one project's validator: cli/validate.mjs is 1,600 lines of MoreCheese and runs
+// nowhere else, so until now a second project inherited no gates at all.
+step('derived checks run standalone (and its exit code reflects failures)', () => {
+  run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  const out = run('check-declared.mjs', ['--out', 'out-test']);
+  for (const kind of ['references', 'presence floors', 'targets']) {
+    if (!out.includes(kind)) throw new Error(`standalone runner did not report the ${kind} kind`);
+  }
+  // and a broken world must make it exit non-zero, not merely print a red line
+  const f = join(HERE, 'out-test/packs/issues/issues.json');
+  const rows = JSON.parse(readFileSync(f, 'utf8'));
+  const original = rows.map((r) => r.Severity);
+  for (const r of rows) if (r.Severity === 'Critical') r.Severity = 'High';
+  writeFileSync(f, JSON.stringify(rows, null, 1));
+  let exited = 0;
+  try { run('check-declared.mjs', ['--out', 'out-test']); }
+  catch { exited = 1; }
+  finally { rows.forEach((r, i) => { r.Severity = original[i]; }); writeFileSync(f, JSON.stringify(rows, null, 1)); }
+  if (!exited) throw new Error('check-declared printed a failure but exited 0 — a green exit on a broken world');
+});
+
+// 0k. THE GENERATOR CONTRACT. The ruleset got a named shape that is documented and checked; the
+// generators had no shape at all — 21 entry signatures, no two alike, up to seven positional
+// parameters. Two same-typed arrays transposed is silent wrong data with no error.
+step('generator contract holds (and a positional signature is caught)', () => {
+  run('check-generators.mjs', []);
+  const f = join(HERE, 'projects/morecheese/tasks.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    writeFileSync(f, original.replace('export function buildTasks(cfg, { people, periods, committees })', 'export function buildTasks(cfg, people, periods, committees)'));
+    let caught = false;
+    try { run('check-generators.mjs', []); } catch { caught = true; }
+    if (!caught) throw new Error('check-generators MISSED a positional dependency list');
+  } finally { writeFileSync(f, original); }
+
+  // A HELPER WITH NO CALL SITES ANYWHERE. This is the check that would have caught a `git checkout`
+  // silently reverting every thetaAt call site while the helper stayed exported and committed — the
+  // suite green and the output byte-identical, because reverting to the original code reproduces the
+  // original data. It counts across ALL projects: a small project not needing indexBy is not a
+  // finding, and the fixture proved that the day it existed.
+  const files = ['events', 'committees', 'forms', 'learning', 'membership'].map((n) => join(HERE, `projects/morecheese/${n}.mjs`));
+  const originals = files.map((f) => readFileSync(f, 'utf8'));
+  try {
+    for (const [i, f] of files.entries()) {
+      writeFileSync(f, originals[i]
+        .replace(/thetaAt\(([^,)]+), ([^)]+)\)/g, '($1._thetaPath?.[$2] ?? $1._theta)')
+        .replace('thetaAt(personByKey.get(x.MemberNumber), year)', '(personByKey.get(x.MemberNumber)._theta)'));
+    }
+    const out = run('check-generators.mjs', []);
+    if (!/helper\(s\) NO project's generators call: .*thetaAt/.test(out)) {
+      throw new Error(`the unused-helper check did not name thetaAt after every call site was removed:\n${out.slice(0, 300)}`);
+    }
+  } finally { files.forEach((f, i) => writeFileSync(f, originals[i])); }
+});
+
+// 0l. THE PACK CONTRACT — the third and last coupling point to get a named shape.
+//
+// A pack declares what ships and what must install first. Both claims were unchecked, and both
+// were measured wrong-and-green before this existed:
+//
+//   * a domain wired into buildWorld but left out of the pack map generated rows and shipped
+//     NOTHING, with 257 of 257 gates passing. It is the last of three wiring steps and it was the
+//     only one nothing chased you about.
+//   * dependsOn could say anything. The one gate on it asserted Array.isArray(). Deleting a real
+//     dependency was green, and the failure lands at install time on a foreign key.
+step('pack contract holds (an unshipped table and a lying dependsOn are both caught)', () => {
+  const f = join(HERE, 'projects/morecheese/index.mjs');
+  const original = readFileSync(f, 'utf8');
+  const gen = () => run('generate.mjs', ['--n', '300', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
+  try {
+    // (a) a whole domain left out of the pack map
+    const from = original.indexOf('    messaging: {\n      dependsOn:');
+    const to = original.indexOf('    platform: {\n      dependsOn:');
+    if (from < 0 || to < 0) throw new Error('pack map anchors moved — this negative test is now vacuous');
+    writeFileSync(f, original.slice(0, from) + original.slice(to));
+    let out = '';
+    try { gen(); } catch (e) { out = String(e.stdout ?? '') + String(e.stderr ?? '') + String(e.message ?? ''); }
+    if (!/ship NOWHERE/.test(out) || !/messaging\.messages/.test(out)) {
+      throw new Error(`emitPacks MISSED a domain that ships nowhere. Got: ${out.slice(0, 400)}`);
+    }
+
+    // (b) dependsOn omitting a dependency the reference graph proves is real
+    writeFileSync(f, original.replace("    membership: {\n      dependsOn: ['common'],", '    membership: {\n      dependsOn: [],'));
+    gen();
+    let caught = false;
+    try { run('check-declared.mjs', ['--out', 'out-test']); } catch { caught = true; }
+    if (!caught) throw new Error('the install-order gate MISSED a dependsOn that omits a real dependency');
+  } finally { writeFileSync(f, original); }
+});
+
+// 0m. ONE DICE STREAM PER DECISION. Two decisions sharing a stream become correlated, and the data
+// stays plausible while they are — no distribution gate can see it. Held perfectly today (49,603
+// distinct streams, none from two call sites), so the negative test is the only proof the checker
+// works: it plants a key that another site genuinely produces.
+step('every dice stream belongs to one decision (and a shared stream is caught)', () => {
+  run('check-streams.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE]);
+  const f = join(HERE, 'projects/morecheese/messaging.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    const planted = original.replace('rng(seed, `msgthread:${issue.IssueKey}`)', 'rng(seed, `person:ICF-100001`)');
+    if (planted === original) throw new Error('stream plant anchor moved — this negative test is now vacuous');
+    writeFileSync(f, planted);
+    let caught = false;
+    try { run('check-streams.mjs', ['--n', '400', '--seed', '42', '--release', RELEASE]); } catch { caught = true; }
+    if (!caught) throw new Error('check-streams MISSED two decisions drawing from one stream');
+  } finally { writeFileSync(f, original); }
+});
+
+// 0m-ii. ROW TEMPLATES. The executor's guarantees are structural, and each one is proven here by
+// planting its violation: a fixture template that tries to draw, a template path that no longer
+// resolves (the moved-key trap, made loud), a multi-tag spec (ambiguous draw order), and — via
+// the lint — an integer-like key, which JS silently sorts FIRST, reordering columns with no error.
+step('row templates: fixture dice, dead paths, multi-tag and integer keys are all caught', async () => {
+  const { renderRow, projectRows } = await import('./engine/row-template.mjs');
+  const { rng } = await import('./engine/rng.mjs');
+  const r = rng('42', 'template-probe');
+
+  // clean render works, in declared column order
+  const row = renderRow(r, { row: { AKey: { fmt: 'A-{item.id}' }, Name: { from: 'item.name' }, Fixed: true } }, { item: { id: 7, name: 'x' } });
+  if (row.AKey !== 'A-7' || row.Name !== 'x' || Object.keys(row).join() !== 'AKey,Name,Fixed') throw new Error('clean render broken');
+
+  const mustThrow = (what, fn, mention) => {
+    try { fn(); } catch (e) { if (!String(e.message).includes(mention)) throw new Error(`${what}: wrong message: ${e.message}`); return; }
+    throw new Error(`${what} was NOT caught`);
+  };
+  mustThrow('a fixture that draws', () => projectRows({ row: { K: { int: [1, 2] } } }, [{}]), 'has no dice');
+  mustThrow('a dead template path', () => renderRow(r, { row: { K: { from: 'item.gone' } } }, { item: {} }), 'resolved to undefined');
+  mustThrow('a multi-tag spec', () => renderRow(r, { row: { K: { from: 'item.id', int: [1, 2] } } }, { item: { id: 1 } }), 'exactly one tag');
+  mustThrow('a computed int bound', () => renderRow(r, { row: { K: { int: [1, 'item.n'] } } }, { item: { n: 3 } }), 'CONSTANTS');
+
+  // the lint: plant a template with an integer-like key in a real generator, expect the check to name it
+  const f = join(HERE, 'projects/morecheese/tasks.mjs');
+  const original = readFileSync(f, 'utf8');
+  try {
+    writeFileSync(f, original.replace("export const TASK_TYPE_ROW = { row: {", "export const ZZ_PROBE_ROW = { row: { '0': true, } };\nexport const TASK_TYPE_ROW = { row: {"));
+    let out = '';
+    try { run('check-row-templates.mjs', []); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!out.includes('integer-like key')) throw new Error('the template lint MISSED an integer-like key');
+  } finally { writeFileSync(f, original); }
+});
+
+// 0m-iii. THE ENGINE BOUNDARY — the claim "engine/ is reusable" made falsifiable. Both planted
+// defects are ones this repo actually had or nearly had: a static import of project code, and a
+// project-specific VALUE living in the engine (engine/ids.mjs held a table of every project's UUID
+// namespace, and told new authors to add theirs to it). The second is the one a plain import lint
+// would miss, which is why the checker looks for project names in code too.
+step('engine boundary holds (static import and a project-named value are both caught)', () => {
+  run('check-engine-boundary.mjs', []);
+  const probe = (file, mutate, mention, what) => {
+    const f = join(HERE, 'engine', file);
+    const original = readFileSync(f, 'utf8');
+    try {
+      writeFileSync(f, mutate(original));
+      let out = '';
+      try { run('check-engine-boundary.mjs', []); } catch (e) { out = String(e.stdout ?? ''); }
+      if (!out.includes(mention)) throw new Error(`${what} was NOT caught. Looked for: ${mention}`);
+    } finally { writeFileSync(f, original); }
+  };
+  probe('ids.mjs', (s) => s.replace('const bound = new Map();',
+    "const bound = new Map();\nconst NAMESPACES = { morecheese: '9b1dcbf2c05341e8a2f4d40e11ce66a1' };"),
+  "names the project 'morecheese' in code", 'a project value in the engine');
+  probe('packs.mjs', (s) => {
+    const lines = s.split('\n');
+    const i = lines.reduce((acc, l, j) => (l.startsWith('import ') ? j : acc), 0);
+    lines.splice(i + 1, 0, "import { NOT_SHIPPED } from '../projects/morecheese/index.mjs';");
+    return lines.join('\n');
+  }, 'static import from projects/', 'a static import of project code');
+});
+
+// 0m-iv. THE SECOND PROJECT — the framework claim, made falsifiable.
+//
+// Every abstraction in engine/ was extracted from ONE project, so any of them could be
+// MoreCheese-shaped without anybody noticing. This builds projects/fixture/ — 50 invented members,
+// one decision — and requires it to generate and pass its own derived gates. Standing it up the
+// first time found three engine bugs and two documentation gaps (projects/fixture/FINDINGS.md);
+// this step is what stops them coming back. An engine change that re-couples the engine to
+// MoreCheese fails HERE, not in six months when somebody tries a second project for real.
+step('the second project builds and passes its own derived gates (zero engine edits)', () => {
+  // SELF-CLEANING, learned the hard way: this step dirties out-fixture AFTER its own determinism
+  // diff (build.mjs adds validation-report.txt, the emitters add sql/ and metadata/), so a stale
+  // dir from the previous run fails the NEXT run's diff. A step must not depend on the caller
+  // having rm -rf'd its leftovers.
+  for (const d of ['out-fixture', 'out-fixture2', 'out-fixture-sc']) rmSync(join(HERE, d), { recursive: true, force: true });
+  run('generate.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture']);
+  const out = run('check-declared.mjs', ['--out', 'out-fixture']);
+  if (!/derived gates pass/.test(out)) throw new Error(`fixture derived gates did not pass:\n${out.slice(0, 400)}`);
+  // determinism holds for it too — same seed, byte-identical
+  run('generate.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture2']);
+  execFileSync('diff', ['-r', join(HERE, 'out-fixture'), join(HERE, 'out-fixture2')], { encoding: 'utf8' });
+
+  // …and the INSTALL path, which is where the engine turned out to be far less project-blind: the
+  // documented `build.mjs --project <name>` could not run at all, and the MetadataSync emitter held
+  // a hardcoded list of 59 MoreCheese directories. Generating is only half the pipeline.
+  run('build.mjs', ['--project', 'fixture', '--n', '50', '--seed', '42', '--release', RELEASE]);
+  const sql = run('emit-sql.mjs', ['--out', 'out-fixture']);
+  if (!/fixture_circle/.test(sql)) throw new Error(`the SQL emitter produced no fixture tables:\n${sql.slice(0, 300)}`);
+  const sync = run('emit-mjsync.mjs', ['--out', 'out-fixture']);
+  if (!/Fixture: Members/.test(sync)) throw new Error(`the MetadataSync emitter produced no fixture records:\n${sync.slice(0, 300)}`);
+
+  // …a SCENARIO overlay, which needed no engine change at all — participation halves and the target
+  // gate follows the overlaid declaration…
+  const sc = run('generate.mjs', ['--project', 'fixture', '--scenario', 'quiet-years', '--n', '50', '--seed', '42', '--release', RELEASE, '--out', 'out-fixture-sc']);
+  if (!/circle: /.test(sc)) throw new Error(`the fixture scenario build produced nothing:\n${sc.slice(0, 300)}`);
+
+  // …and the project's OWN bespoke gate must fire when its claim is broken. Before this, a project
+  // could declare a validator but not own one: build.mjs resolved only against cli/, which is why
+  // 1,600 lines of MoreCheese live there.
+  const f = join(HERE, 'out-fixture/packs/circle/outings.json');
+  const original = readFileSync(f, 'utf8');
+  try {
+    const rows = JSON.parse(original);
+    rows[0].Year = 2019;                                  // before anybody joined
+    writeFileSync(f, JSON.stringify(rows, null, 1));
+    let out = '';
+    try { execFileSync(process.execPath, [join(HERE, 'projects/fixture/validate.mjs'), '--out', 'out-fixture'], { encoding: 'utf8' }); }
+    catch (e) { out = String(e.stdout ?? ''); }
+    if (!/no outing predates/.test(out)) throw new Error(`the fixture's own bespoke gate did not fire:\n${out.slice(0, 300)}`);
+  } finally { writeFileSync(f, original); }
+});
+
+// 0n. THE FRAMEWORK METRIC — advisory. Prints declarations:code so the trend is visible in every
+// suite run instead of being a claim in a document. The step fails only if the tool itself
+// crashes; the ratio is information, not a gate — gating on it would invite gaming the classifier.
+step('framework metric (advisory: declarations : code)', () => {
+  const out = run('measure-framework.mjs', []);
+  const line = out.split('\n').find((l) => l.includes('declarations : code'));
+  if (!line) throw new Error('measure-framework.mjs produced no ratio line');
+  console.log(`   ${line.trim()}`);
+});
+
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
   step(`seed ${s} @ N=500: generate + validate`, () => {
@@ -207,7 +628,7 @@ for (const s of SEEDS) {
 step('determinism: byte-identical regeneration', () => {
   run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test']);
   run('generate.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE, '--out', 'out-test2']);
-  execFileSync('diff', ['-r', join(HERE, 'out-test'), join(HERE, 'out-test2')]);
+  execFileSync('diff', ['-r', join(HERE, 'out-test'), join(HERE, 'out-test2')], { encoding: 'utf8' });
 });
 
 // 3. windowing: an October re-bake keeps Marcus pending
@@ -234,9 +655,9 @@ step('scenario: decliningOrg builds and validates against its own targets', () =
 step('emitters: sql + schema + mjsync + explain', () => {
   if (QUICK) run('build.mjs', ['--n', '500', '--seed', '42', '--release', RELEASE]);
   run('emit-sql.mjs', []);
-  run('emit-schema.mjs', []);
+  runProject('emit-schema.mjs', []);
   run('emit-mjsync.mjs', []);
-  run('explain.mjs', []);
+  runProject('explain.mjs', []);
 });
 
 // 6b. schema/insert drift guard: every column an INSERT writes must exist in the CREATE TABLE
@@ -323,7 +744,11 @@ step('frozen migration matches generator shapes (morecheese tables)', () => {
 // instead of at a 13-minute install. Refresh the snapshot on a dependency bump:
 //   MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <reference-install>
 // See datagen/SCHEMA-CONTRACT.md.
-step('seed assumptions match the dependency-schema contract', () => {
+step('seed assumptions match the dependency-schema contract', async () => {
+  // the mapping mints IDs, and nothing here composes a ruleset — bind the project's own namespace
+  const { bindNamespace } = await import('./engine/config.mjs');
+  await bindNamespace('morecheese');
+  const { MAPPING, PREAMBLE } = await import('./projects/morecheese/seed-mapping.mjs');
   const contract = JSON.parse(readFileSync(join(HERE, 'contract', 'schema-contract.json'), 'utf8'));
   const load = (pack, table) => JSON.parse(readFileSync(join(HERE, 'out', 'packs', pack, `${table}.json`), 'utf8'));
   const claims = extractClaims({ MAPPING, PREAMBLE, load });

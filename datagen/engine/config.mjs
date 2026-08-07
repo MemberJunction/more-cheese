@@ -6,6 +6,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { compileRuleset } from './compile.mjs';
 import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from './lint.mjs';
+import { useNamespace } from './ids.mjs';
 
 export const DATAGEN_DIR = dirname(dirname(fileURLToPath(import.meta.url)));
 export { DAY, iso, addDays, addYears, endOfYear, parseDate } from './dates.mjs';
@@ -30,7 +31,13 @@ function deepMerge(base, overlay) {
  * human-authored effect against the scenario's targets. Same machinery, different world;
  * each scenario build is its own deterministic universe.
  */
-const DEFAULT_PROJECT = 'morecheese';
+export const DEFAULT_PROJECT = 'morecheese';
+
+/** The --project flag, or the default. Exported because EIGHT cli entry points each spelled this
+ *  out with the literal 'morecheese' inline — eight copies of the one name the engine is allowed to
+ *  know, which is eight places to miss when it changes and eight hits for the boundary checker to
+ *  have to forgive. One function, one literal, one allowlist entry. */
+export const argvProject = (argv) => (argv.includes('--project') ? argv[argv.indexOf('--project') + 1] : DEFAULT_PROJECT);
 
 /** A PROJECT is one generated universe: `projects/<name>/` holds its domain modules,
  * hooks, name banks, and ruleset. The engine (`core/`, entrypoints) is shared; everything
@@ -44,8 +51,29 @@ export async function loadProject(project = DEFAULT_PROJECT) {
   return await import(`../projects/${project}/index.mjs`);
 }
 
+/**
+ * Bind a project's UUID namespace WITHOUT composing its ruleset.
+ *
+ * The emitters read finished packs and mint IDs from business keys; they never load a ruleset, so
+ * they never went through loadRuleset's binding. That used to be covered by a fallback in
+ * engine/ids.mjs — "if exactly one namespace is registered, use it" — which only worked because the
+ * engine held the registry. Moving the namespace to the project (correctly) removed the thing that
+ * fallback read, and every emitter broke at once with the error telling them to call this.
+ *
+ * @param {string} project
+ */
+export async function bindNamespace(project = DEFAULT_PROJECT) {
+  const mod = await loadProject(project);
+  useNamespace(project, mod.UUID_NAMESPACE);
+}
+
 export async function loadRuleset(scenario, project = DEFAULT_PROJECT) {
-  const { hooks } = await loadProject(project);
+  // Bind the ID namespace before anything can mint an ID, from the value THE PROJECT declares.
+  // Done here, in the loader, so a project cannot forget to and cannot borrow another's space —
+  // and the engine never holds a table of which namespace belongs to whom.
+  const mod = await loadProject(project);
+  useNamespace(project, mod.UUID_NAMESPACE);
+  const { hooks } = mod;
   const dir = join(projectDir(project), 'ruleset/modules');
   const index = JSON.parse(readFileSync(join(dir, 'index.json'), 'utf8'));
   const ruleset = {};

@@ -19,8 +19,23 @@ import { rng } from '../../engine/rng.mjs';
 import { CITIES, personNameFor, titleFor, SEGMENTS } from './banks.mjs';
 import { emailFor } from './world.mjs';
 import { iso, addDays } from '../../engine/dates.mjs';
+import { renderRow } from '../../engine/row-template.mjs';
 
-export function buildProspects(cfg, orgs, events, memberCount) {
+// ── row templates ── the free-webinar registration. Two draws, in column order: the lead-day
+// offset then the attendance chance — exactly the handwritten order, which is why they can sit
+// in the row block rather than needing a `let`. The PROSPECT PERSON row stays handwritten: its
+// name, email and title come from bank functions that draw on their own streams.
+export const PROSPECT_REG_ROW = { row: {
+  RegKey: { fmt: 'REG-{person.MemberNumber}-{ev.EventKey}' },
+  MemberNumber: { from: 'person.MemberNumber' },
+  EventKey: { from: 'ev.EventKey' },
+  RegisteredOn: { date: { anchor: 'ev.Date', offset: { dist: 'uniformDays', min: 1, max: 30, sign: -1 } } },
+  Attended: { chance: 'attendShare' },
+  IsSharedDemo: true,
+} };
+
+export function buildProspects(cfg, { orgs, events, memberCount }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const P = R.prospects;
   const prospects = [];
@@ -30,6 +45,7 @@ export function buildProspects(cfg, orgs, events, memberCount) {
   // share of a smaller association — the ratio has to hold in every world
   const n = Math.round(memberCount * P.params.ratioToMembers);
 
+  // ── decisions ── build each prospect, then decide which free events they register for
   for (let i = 0; i < n; i++) {
     const key = `NM-${String(200001 + i)}`;
     const r = rng(seed, `prospect:${key}`);
@@ -73,13 +89,10 @@ export function buildProspects(cfg, orgs, events, memberCount) {
       const ev = r.pick(open);
       if (taken.has(ev.EventKey)) continue; // a repeat draw just means one fewer webinar
       taken.add(ev.EventKey);
-      registrations.push({
-        RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey,
-        RegisteredOn: iso(addDays(new Date(ev.Date), -r.int(1, 30))),
-        Attended: r.bernoulli(P.params.attendShare), IsSharedDemo: true,
-      });
+      registrations.push(renderRow(r, PROSPECT_REG_ROW, { person: p, ev, attendShare: P.params.attendShare }));
     }
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { prospects, registrations };
 }

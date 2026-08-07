@@ -1,7 +1,7 @@
 # How demo data ships — the delivery model
 
 The ruling is **metadata-first**, decided 2026-07-24, and it lives in code as
-`DELIVERY` / `deliveryOf()` in `engine/seed-mapping.mjs`. This document exists because that
+`DELIVERY` / `deliveryOf()` in `projects/<p>/seed-mapping.mjs`. This document exists because that
 ruling was only readable as a comment inside the emitter, which is not where anyone looks when
 asking "is the install seed current?".
 

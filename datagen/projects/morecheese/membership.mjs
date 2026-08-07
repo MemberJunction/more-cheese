@@ -13,15 +13,16 @@
 import { rng, sigmoid, calibrateIntercept } from '../../engine/rng.mjs';
 import { recurringDecision } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears, endOfYear, parseDate, DAY } from '../../engine/dates.mjs';
+import { indexBy, thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { featureArrows } from '../../engine/features.mjs';
 
-export function runRenewalUnroll(cfg, people, orgs) {
+export function runRenewalUnroll(cfg, { people, orgs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const M = R.membership;
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
 
-  const years = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) years.push(y);
+  const years = yearsOf(cfg);
 
   // texture: each year's renewal target wobbles (AR(1) on the logit) — real data is lumpy
   const wobble = rng(seed, 'texture:renewal-yoy').ar1(years.length, R.texture.yearlyLogitWobble.rho, R.texture.yearlyLogitWobble.sigma);
@@ -56,6 +57,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
   // event record. BUILT-IN drivers (standardized tenure, the drifting latent, the employer-
   // event window) + DECLARED-FEATURE factors read straight from the ruleset.
   const declared = featureArrows(M.effects);
+  // ── decisions ── one pattern call per decision, in causal order
   recurringDecision({
     seed, years,
     streamKey: (c, y) => `renew:${c.p.MemberNumber}:${y}`,
@@ -88,7 +90,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
     },
     scoreOf: (c, y, { meanT, sdT }) =>
       M.effects['renewal.tenure'].beta * ((c.tenureYrs - meanT) / sdT) +
-      M.effects['renewal.engagement'].beta * (c.p._thetaPath?.[y] ?? c.p._theta) + // THIS year's engagement (drifting; heroes pinned)
+      M.effects['renewal.engagement'].beta * thetaAt(c.p, y) + // THIS year's engagement (drifting; heroes pinned)
       M.effects['renewal.employerEvent'].beta * c.employerEvent +
       declared.reduce((s, fa) => s + fa.beta * fa.fn(c.p), 0),
 
@@ -96,7 +98,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
       if (c.p._hero || c.p._lapseYear != null || c.p._renewAlways) return; // pinned outcomes never train the arrows
       renewalEvents.push({
         year: y, tenureZ: (c.tenureYrs - meanT) / sdT,
-        theta: c.p._thetaPath?.[y] ?? c.p._theta, prevTheta: c.p._thetaPath?.[y - 1] ?? c.p._theta, anchor: c.p._theta,
+        theta: thetaAt(c.p, y), prevTheta: thetaAt(c.p, y - 1), anchor: c.p._theta,
         employerEvent: c.employerEvent,
         // Declared-feature factors record under their DRIVER name — the part of the effect key
         // after the dot. The validator and the compiler's refinement step both read these
@@ -123,7 +125,9 @@ export function runRenewalUnroll(cfg, people, orgs) {
       const rReason = rng(seed, `churnreason:${c.p.MemberNumber}:${c.st.end}`);
       let reason;
       if (c.employerEvent) reason = 'non-payment — employer event';
-      else if (CV.years.includes(lapseYear) && CV.churnReason && rReason.bernoulli(CV.churnReasonWeight ?? 0)) {
+      // No default on the weight: an era that declares a churn reason MUST say how often it
+      // applies. `?? 0` would mean the reason is declared and never used — a silent no-op.
+      else if (CV.years.includes(lapseYear) && CV.churnReason && rReason.bernoulli(CV.churnReasonWeight)) {
         // era-specific reason, so the churn breakdown shows WHY 2020-21 differs rather
         // than just showing more of the usual
         reason = CV.churnReason;
@@ -156,6 +160,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
     pushPeriod(p, st.start, st.end, status, null, null);
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { periods, renewalEvents };
 }
 
@@ -164,7 +169,7 @@ export function runRenewalUnroll(cfg, people, orgs) {
  * hygiene; keeps the status mix near the documented ~78% active). Heroes never archive.
  * Archived members' renewal events STAY in the validation set — history stats are unaffected.
  */
-export function applyArchiveRule(cfg, people, periods) {
+export function applyArchiveRule(cfg, { people, periods }) {
   const lastPer = new Map();
   for (const per of periods) lastPer.set(per.MemberNumber, per);
   const cutoff = iso(addYears(cfg.release, -3));

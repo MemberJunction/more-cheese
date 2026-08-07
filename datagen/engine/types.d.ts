@@ -7,6 +7,10 @@
 //
 // The two halves of the authoring surface are typed in two different places, on purpose:
 //   • the ruleset (JSON)  → engine/ruleset.schema.json, live in the editor via .vscode
+//
+// DOMAIN types live with their project (projects/<name>/types.d.ts). This file used to carry
+// MoreCheese's CommitteeBlock, PlatformBlock and Hero, which is the same violation as the seed
+// mapping: a shape naming committees and member numbers is not framework.
 //   • the generators (JS) → this file, via JSDoc @param annotations in engine/*.mjs
 //
 // Keep both honest: ruleset.schema.json is executed against all real modules by
@@ -73,7 +77,12 @@ export interface AnnualParticipationOpts<M = any, R = any> {
   poolOf(year: number): readonly M[];
   /** This member's arrow score for the year, in log-odds. */
   scoreOf(member: M, year: number): number;
-  /** The participation rate the cohort calibrates to (a probability). */
+ /**
+   * The participation rate, PER YEAR — the share of each year's eligible pool that takes part
+   * in THAT year. Not a lifetime share: at 0.62 a year over eight years, nearly every member
+   * participates at least once, so a cumulative measurement will read far higher and look
+   * broken when it is correct. State the denominator in any gate you write against this.
+   */
   target: number;
   /** Dice stream for this member-year decision. Must be unique per decision. */
   streamKey(member: M, year: number): string;
@@ -166,7 +175,12 @@ export interface ChildOutcomeOpts<T = any> {
   seed: string | number;
   items: readonly T[];
   scoreOf(item: T): number;
-  /** The outcome rate over the pool (a probability). */
+ /**
+   * The outcome rate over the pool THAT WAS PASSED IN — items, not the whole population.
+   * Because calibration runs over the actual items, the selection effect is already inside
+   * it: course completers are self-selected, so this is higher than the same rate measured
+   * across everyone. A gate must use the same denominator.
+   */
   target: number;
   streamKey(item: T): string;
   /** Applies the outcome. `p` is the calibrated probability; `r` is this item's dice. */
@@ -198,7 +212,6 @@ export interface GateHelpers {
    * Does every reference point at something that exists? Null keys pass — an optional FK is
    * not a dangling one. Takes several relations at once so one gate can cover a whole pack.
    */
-  fkResolves(name: string, relations: readonly FkRelation[]): void;
   /**
    * Is this observed share within tolerance of its target? Pass `n` (the draw pool size) to
    * add an SE cushion, so a small pilot build isn't failed by ordinary sampling noise.
@@ -216,7 +229,7 @@ export interface GateHelpers {
   presenceFloor(name: string, countsByCategory: Record<string, number>, min?: number): void;
   /** Is there enough variety that repetition isn't visible on one screen? */
   distinctAtLeast(name: string, values: readonly unknown[], min: number, detail?: string): void;
-  /** The count of rows whose key is non-null and missing from the parent set. Building block for fkResolves. */
+  /** The count of rows whose key is non-null and missing from the parent set. Building block for the reference gates. */
   dangling(rows: readonly any[], keyFn: (row: any) => string | null | undefined, parents: Set<string>): number;
 }
 
@@ -251,53 +264,6 @@ export interface Arrow {
   label?: string;
 }
 
-/** A pinned person whose story a demo script can rely on. */
-export interface Hero {
-  memberNumber: string;
-  first: string;
-  last: string;
-  title?: string | null;
-  employerName?: string | null;
-  segment?: string;
-  region?: string;
-  city?: string;
-  state?: string;
-  lat?: number;
-  lon?: number;
-  /** Pinned engagement dial — never drawn. */
-  theta?: number;
-  /** Pinned affluence dial. */
-  phi?: number;
-  /** A pinned engagement ARC keyed by year, for a story that is a trajectory. */
-  thetaByYear?: Record<string, number>;
-  tier?: string;
-  cycleType?: 'calendar' | 'anniversary';
-  autoRenew?: boolean;
-  joinDate?: string;
-  joinYearsAgo?: number;
-  anniversaryOffsetDays?: number;
-  joinDaysBeforeRelease?: number;
-  lapseYear?: number;
-  employerEvent?: { year: number; kind: string };
-  committees?: { committee: string; role?: string; terms: readonly string[] }[];
-  issues?: { type: string; title: string; daysBeforeRelease: number; detail?: string }[];
-  certifications?: { key: string; status: string; enrolledOn?: string; awardedOn?: string }[];
-  competition?: Record<string, unknown>;
-  advocacy?: Record<string, unknown>;
-  staleEmployer?: { trueEmployerName: string; monthsAgo: number };
-  /** Assertions the VALIDATOR enforces. Add one for every fact your demo says out loud. */
-  pins?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// The four-section shape, for ruleset modules written as .mjs.
-//
-// This is the framework contract a block author works against. It answers, without reading
-// any generator source: what sections exist, what goes in each, which fields a thing must
-// have, and which numbers the validator will hold you to.
-// ─────────────────────────────────────────────────────────────────────────────
-
 /**
  * A number the VALIDATOR enforces. Writing the pair instead of a bare number is how you say
  * "this is a promise about the output, not just a knob" — and it is visible on the page,
@@ -331,101 +297,6 @@ export interface Block<Catalog = Record<string, unknown[]>, Params = Record<stri
   mixes?: Record<string, Mix>;
 }
 
-export interface CommitteeType {
-  name: string;
-  /** Standards bodies get the technical-review treatment in the app. */
-  isStandards: boolean;
-  termMonths: number;
-}
-
-export interface CommitteeRole {
-  name: string;
-  /** Officers are the pool issues get assigned to. */
-  isOfficer: boolean;
-  isVotingRole?: boolean;
-  isVoting: boolean;
-  /** Display order on a roster. Member sits at 100 so officer roles can be added above it. */
-  sequence: number;
-}
-
-export interface Committee {
-  name: string;
-  /** A REFERENCE to a catalog.types entry — not a string to be matched. */
-  type: CommitteeType;
-  /** Load-bearing: a committee gets no terms and no meetings before it existed. */
-  formed: string;
-  mission: string;
-}
-
-export interface Term {
-  name: string;
-  start: string;
-  end: string;
-}
-
-export interface AgendaItem {
-  name: string;
-  type: 'Information' | 'Report' | 'Discussion' | 'Vote';
-  minutes: number;
-}
-
-/**
- * The platform block — the worked example of a block that uses only TWO of the four parts.
- * Nothing here is decided by dice, so `effects` and `mixes` are simply absent. Note that
- * `params` carries a string and a group of flags: a param is anything you set, not only
- * anything you count.
- */
-export type PlatformBlock = Block<
-  {
-    staff: { key: string; first: string; last: string; title: string }[];
-    sharedViews: Record<string, unknown>[];
-    queries: Record<string, unknown>[];
-    conversations: Record<string, unknown>[];
-    /** One entry per staff persona — a demo signs in as one of them. */
-    favorites: { owner: string; memberNumbers: string[] }[];
-    lists: Record<string, unknown>[];
-    notifications: Record<string, unknown>[];
-  },
-  {
-    /** Reserved .example TLD — undeliverable by construction. */
-    emailDomain: string;
-    /** Which back-dated audit trails to forge. */
-    recordChanges: Record<string, boolean>;
-  }
->;
-
-/** The committees block — the worked example of the four-section shape. */
-export type CommitteeBlock = Block<
-  {
-    types: CommitteeType[];
-    roles: CommitteeRole[];
-    committees: Committee[];
-    terms: Term[];
-    standingAgenda: AgendaItem[];
-    motionTopics: string[];
-  },
-  {
-    /** Share of covered members who serve. Enforced. */
-    volunteerShare: TargetPair;
-    /** Bylaw floor: a chair does not run a committee of one. */
-    minRosterPerTerm: number;
-    /** A returning member usually returns to the same committee. */
-    sameCommitteeShare: number;
-    meetingsStartYear: number;
-    meetingsPerYear: number;
-    /** Future Scheduled meetings per committee, so the app's "upcoming" view isn't empty. */
-    upcomingPerCommittee: number;
-    /** Meeting attendance rate. Enforced. */
-    attendPresent: TargetPair;
-    excusedShareOfAbsent: number;
-    motionsPerMeeting: number;
-    contentiousShare: number;
-  }
-> & {
-  effects: Record<'volunteer.engagement' | 'volunteer.incumbency' | 'attendance.engagement', Arrow>;
-  mixes: { vote: Mix; voteContentious: Mix };
-};
-
 /**
  * The composed ruleset: every module merged, `$comment` keys stripped, scenario overrides
  * applied. Blocks are typed loosely here on purpose — a block gains a real type when it
@@ -436,7 +307,9 @@ export interface Ruleset {
   version?: string;
   scale?: { members: number };
   history?: { startYear: number; conferenceMonth?: number; conferenceDay?: number };
-  heroes?: Hero[];
+  /** Pinned entities, if the project has them. Their SHAPE is the project's — see
+   * projects/<name>/types.d.ts. */
+  heroes?: Record<string, any>[];
   statusMix?: Target & { target: number[] };
   [block: string]: any;
 }

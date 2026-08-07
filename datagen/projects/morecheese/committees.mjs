@@ -10,24 +10,46 @@
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, parseDate } from '../../engine/dates.mjs';
+import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 /** tiny deterministic string hash — gives each committee a stable meeting slot of its own */
 const hashish = (s) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
 
-export function buildCommittees(cfg, people, periods) {
+// ── row templates ── pure data; column order is pack serialization order (byte identity)
+export const COMMITTEE_TYPE_ROW = { row: {
+  TypeKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  IsStandards: { from: 'item.isStandards' }, DefaultTermMonths: { from: 'item.termMonths' },
+  IsSharedDemo: true,
+} };
+export const COMMITTEE_ROLE_ROW = { row: {
+  RoleKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  IsOfficer: { from: 'item.isOfficer' }, IsVotingRole: { from: 'item.isVoting' },
+  Sequence: { from: 'item.sequence' }, IsSharedDemo: true,
+} };
+// item.type is a REFERENCE to a catalog.types entry (not a matched string), so 'item.type.name'
+// on a mistyped type is a loud template-path throw, keeping the original crash-not-silence rule
+export const COMMITTEE_ROW = { row: {
+  CommitteeKey: { from: 'item.name' }, Name: { from: 'item.name' }, TypeKey: { from: 'item.type.name' },
+  MissionStatement: { from: 'item.mission' }, Status: 'Active', FormationDate: { from: 'item.formed' },
+  IsSharedDemo: true,
+} };
+
+export function buildCommittees(cfg, { people, periods }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   // four-section ruleset shape: C.catalog (what exists) · P (every scalar) · C.effects · C.mixes
   const C = R.committees;
   const P = C.params;
 
-  const coveredOn = memberCoverage(periods);
+  const coveredOn = coverageOf(periods);
 
-  // ---------- fixtures: types, roles, committees, terms (authored, not drawn) ----------
-  const types = C.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, IsStandards: t.isStandards, DefaultTermMonths: t.termMonths, IsSharedDemo: true }));
-  const roles = C.catalog.roles.map((r) => ({ RoleKey: r.name, Name: r.name, IsOfficer: r.isOfficer, IsVotingRole: r.isVoting, Sequence: r.sequence, IsSharedDemo: true }));
+  // ── fixtures ── fixtures: types, roles, committees, terms (authored, not drawn)
+  const types = projectRows(COMMITTEE_TYPE_ROW, C.catalog.types);
+  const roles = projectRows(COMMITTEE_ROLE_ROW, C.catalog.roles);
   // c.type is a REFERENCE to a catalog.types entry, not a string to be matched — so a
   // mistyped type is a load-time crash, not a committee that quietly gets no type.
-  const committees = C.catalog.committees.map((c) => ({ CommitteeKey: c.name, Name: c.name, TypeKey: c.type.name, MissionStatement: c.mission, Status: 'Active', FormationDate: c.formed, IsSharedDemo: true }));
+  const committees = projectRows(COMMITTEE_ROW, C.catalog.committees);
   const terms = [];
   for (const c of C.catalog.committees) for (const t of C.catalog.terms) {
     // a committee has no term before it existed — the Education Committee (formed 2016)
@@ -36,7 +58,7 @@ export function buildCommittees(cfg, people, periods) {
     terms.push({ TermKey: `${c.name}:${t.start}`, CommitteeKey: c.name, Name: t.name, StartDate: t.start, EndDate: t.end, Status: t.end < iso(release) ? 'Completed' : 'Active', IsSharedDemo: true });
   }
 
-  // ---------- memberships: per term, engaged members volunteer ----------
+  // ── decisions ── memberships: per term, engaged members volunteer
   const memberships = [];
   const rosterByTerm = new Map(); // `${committee}:${termStart}` → [person]
   // INCUMBENCY: committees don't re-staff from scratch every two years. A member who
@@ -52,8 +74,8 @@ export function buildCommittees(cfg, people, periods) {
     childOutcome({
       seed,
       items: eligible,
-      scoreOf: (p) => C.effects['volunteer.engagement'].beta * (p._thetaPath?.[parseDate(t.start).getUTCFullYear()] ?? p._theta)
-        + (incumbents.has(p.MemberNumber) ? (C.effects['volunteer.incumbency'].beta ?? 0) : 0),
+      scoreOf: (p) => C.effects['volunteer.engagement'].beta * (thetaAt(p, parseDate(t.start).getUTCFullYear()))
+        + (incumbents.has(p.MemberNumber) ? C.effects['volunteer.incumbency'].beta : 0),
       target: P.volunteerShare.target,
       streamKey: (p) => `committee-serve:${p.MemberNumber}:${t.start}`,
       decide: (p, prob, r) => {
@@ -64,7 +86,7 @@ export function buildCommittees(cfg, people, periods) {
         // Outreach Committee (formed 2017) in the back-filled 2015 term, and the
         // membership's TermKey then pointed at a term that was never emitted.
         const open = C.catalog.committees.filter((c) => t.end >= c.formed);
-        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(P.sameCommitteeShare ?? 0)
+        const committee = prior && open.some((c) => c.name === prior) && r.bernoulli(P.sameCommitteeShare)
           ? prior                      // returning members usually keep their seat
           : r.pick(open).name;         // otherwise the member's own dice
         pushMembership(p, committee, t, 'Member');
@@ -89,7 +111,7 @@ export function buildCommittees(cfg, people, periods) {
   // eligible members not already serving it. Deterministic (theta order, member number as the
   // tie-break), runs before officers are promoted so a chair always has a real committee.
   {
-    const min = P.minRosterPerTerm ?? 0;
+    const min = P.minRosterPerTerm;
     if (min > 0) {
       for (const t of C.catalog.terms) {
         for (const c of C.catalog.committees) {
@@ -130,7 +152,7 @@ export function buildCommittees(cfg, people, periods) {
     rosterByTerm.get(key).push({ p, row });
   }
 
-  // ---------- meetings: quarterly per committee; attendance over the term's actual roster ----------
+  // ── decisions ── meetings: quarterly per committee; attendance over the term's actual roster
   const meetings = [];
   const attendance = [];
   const attByMeeting = new Map(); // MeetingKey → [{membership row, status}] — votes stay consistent with attendance
@@ -159,7 +181,7 @@ export function buildCommittees(cfg, people, periods) {
         // most governance is virtual, but quarterly in-person/hybrid sessions happen
         // governance kept meeting through the pandemic, but online — an in-person
         // committee meeting in April 2020 is the kind of detail that breaks a demo
-        const covidYear = (C.regimes ?? R.regimes).covid.years.includes(y);
+        const covidYear = R.regimes.covid.years.includes(y);
         const locType = covidYear ? 'Virtual' : rM.pickWeighted([['Virtual', 0.68], ['InPerson', 0.2], ['Hybrid', 0.12]]);
         const base = {
           MeetingKey: `${c.name}:${dt}`, CommitteeKey: c.name, Name: `${c.name} — Q${q + 1} ${y} meeting`,
@@ -186,7 +208,7 @@ export function buildCommittees(cfg, people, periods) {
         childOutcome({
           seed,
           items: roster,
-          scoreOf: (m) => C.effects['attendance.engagement'].beta * (m.p._thetaPath?.[y] ?? m.p._theta),
+          scoreOf: (m) => C.effects['attendance.engagement'].beta * thetaAt(m.p, y),
           target: P.attendPresent.target,
           streamKey: (m) => `committee-att:${m.p.MemberNumber}:${meeting.MeetingKey}`,
           decide: (m, prob, r) => {
@@ -207,7 +229,7 @@ export function buildCommittees(cfg, people, periods) {
     return (h?.committees ?? []).some((s) => s.committee === committee);
   }
 
-  // ---------- meeting CONTENT: agenda items, and sometimes a motion with real votes ----------
+  // ── decisions ── meeting CONTENT: agenda items, and sometimes a motion with real votes
   // Votes are CONSISTENT with attendance by construction: members absent from the meeting
   // vote 'Absent' — a data-quality property no independent roll could guarantee.
   const agendaItems = [];
@@ -244,7 +266,7 @@ export function buildCommittees(cfg, people, periods) {
       if (x.status !== 'Present') value = 'Absent';
       else {
         const vr = rng(seed, `vote:${motionKey}:${x.membership.MembershipKey}`);
-        value = vr.pickWeighted([['Yes', split.yes], ['No', split.no], ['Abstain', split.abstain]]);
+        value = vr.pickWeighted(Object.entries(split));
       }
       if (value === 'Yes') yes++; else if (value === 'No') no++; else if (value === 'Abstain') abstain++;
       votes.push({ VoteKey: `${motionKey}:${x.membership.MembershipKey}`, MotionKey: motionKey, MembershipKey: x.membership.MembershipKey, VoteValue: value, IsSharedDemo: true });
@@ -258,15 +280,7 @@ export function buildCommittees(cfg, people, periods) {
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { types, roles, committees, terms, memberships, meetings, attendance, agendaItems, motions, votes };
 }
 
-/** membership-period coverage lookup (same rule the events module uses) */
-function memberCoverage(periods) {
-  const byMember = new Map();
-  for (const per of periods) {
-    if (!byMember.has(per.MemberNumber)) byMember.set(per.MemberNumber, []);
-    byMember.get(per.MemberNumber).push(per);
-  }
-  return (memberNumber, dateIso) => (byMember.get(memberNumber) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
-}

@@ -12,16 +12,19 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { parseDate } from '../../engine/dates.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
-export function applyMotifs(cfg, people, orgs) {
+export function applyMotifs(cfg, { people, orgs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const M = R.motifs;
   const releaseYear = release.getUTCFullYear();
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
   const crowd = people.filter((p) => !p._hero);
   const registry = [];
   const meta = {};
 
+  // ── decisions ── each motif stamps k members from its own pool, on its own stream
   const stamp = (name, pool, k, apply) => {
     const r = rng(seed, `motif:${name}`);
     const picked = [];
@@ -68,5 +71,6 @@ export function applyMotifs(cfg, people, orgs) {
   arc('risingStar', true);
   arc('quietFade', false);
 
+  // ── shape ── assemble the named tables this domain owns
   return { registry, meta };
 }

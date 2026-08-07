@@ -22,6 +22,54 @@ import { rng, sigmoid, calibrateIntercept, logit } from './rng.mjs';
 const BAND_MIDPOINT = { weak: 0.28, med: 0.65, strong: 1.35 };
 const clamp01 = (x) => Math.min(0.995, Math.max(0.005, x));
 
+/**
+ * EVERY HUMAN-AUTHORED EFFECT MUST HAVE BECOME A BETA.
+ *
+ * Lifted out of compileRuleset so BOTH exits run it — the normal one and the early return taken by
+ * a project with no human forms to solve. A project that authors only `beta` can still typo a
+ * `liftPts` into a block nobody calibrates, and that is the most expensive mistake available here,
+ * so the guard cannot live on one path only.
+ *
+ * Only the effects returned by hooks.compile.arrowsOf() are solved. Anywhere else a human form
+ * keeps `beta: undefined`, and then:
+ *
+ *     undefined * theta  →  NaN  →  sigmoid(NaN)  →  bernoulli(NaN) is always false
+ *
+ * …so the domain silently produces ZERO ROWS with every gate green. That is exactly what happened
+ * the first time someone added a domain by following the documentation: an effect with
+ * `liftPts: 9`, a build that passed, and no data at all. Found by walking ADDING-A-DOMAIN.md as a
+ * newcomer would.
+ */
+function assertEverySolved(C) {
+  const unsolved = [];
+  const walk = (node, path) => {
+    if (!node || typeof node !== 'object' || Array.isArray(node)) return;
+    for (const [k, v] of Object.entries(node)) {
+      if (k.startsWith('$')) continue;
+      const p = path ? `${path}.${k}` : k;
+      if (k === 'effects' && v && typeof v === 'object') {
+        for (const [name, e] of Object.entries(v)) {
+          if (name.startsWith('$') || !e || typeof e !== 'object') continue;
+          const human = e.liftPts != null || e.groupTarget != null || e.strength != null;
+          if (human && e.beta == null) unsolved.push(`${p}.${name}`);
+        }
+      } else walk(v, p);
+    }
+  };
+  walk(C, '');
+  if (unsolved.length) {
+    throw new Error(
+      `effect(s) authored in a human form but never solved into a beta:\n  - ${unsolved.join('\n  - ')}\n\n`
+      + `Only the effects returned by hooks.compile.arrowsOf() are solved. Everywhere else the beta\n`
+      + `stays undefined, which makes every score NaN and every draw false — the domain generates\n`
+      + `NOTHING, with all gates green.\n\n`
+      + `Fix by either (a) authoring \`beta\` directly for these, or (b) extending arrowsOf() and the\n`
+      + `feature map to cover this block. (a) is right unless the effect needs calibrating against a\n`
+      + `population target.`,
+    );
+  }
+}
+
 export function compileRuleset(R, hooks) {
   const H = hooks.compile;
   const C = structuredClone(R);
@@ -32,6 +80,23 @@ export function compileRuleset(R, hooks) {
     if (a.beta != null) { a.compiledFrom = 'beta (authored directly)'; continue; }
     if (a.logitShift != null) { a.compiledFrom = 'logitShift (regime gate)'; continue; }
     if (a.strength) { a.beta = (a.sign === '-' ? -1 : 1) * BAND_MIDPOINT[a.strength]; a.compiledFrom = `strength:${a.strength} → band midpoint`; }
+  }
+
+  // NOTHING LEFT TO SOLVE → stop here, before the calibration machinery.
+  //
+  // Everything below exists to solve HUMAN-AUTHORED effect forms (liftPts, groupTarget) into betas
+  // against a synthetic population. A project that authors every effect directly as `beta` — which
+  // ADDING-A-DOMAIN.md tells new domains to do — has nothing for any of it to do, and used to be
+  // required to supply syntheticPop, overallTarget, features and refineMeasure anyway, purely to
+  // get past this line. Found by standing up the second project: the very first thing it hit after
+  // the linter was `H.syntheticPop is not a function`, for machinery it has no use for.
+  //
+  // Returning early is not a shortcut — with no unsolved arrows every pass below is a no-op over an
+  // empty map, so this changes nothing for a project that does use them (byte-identity gated).
+  const unsolvedForms = Object.values(arrows).some((a) => a.liftPts != null || a.groupTarget != null);
+  if (!unsolvedForms) {
+    assertEverySolved(C);
+    return C;
   }
 
   // synthetic population mirroring the generator's latent structure (seeded — deterministic)
@@ -104,6 +169,19 @@ export function compileRuleset(R, hooks) {
     if (worst < 0.015) break; // within 1.5pt — the validator gates the rest
   }
   for (const [, a] of solved) a.compiledFrom += ' + empirical refinement (spec: author → measure → adjust, automated)';
+  // THE TRAP THIS CLOSES. `liftPts` / `groupTarget` / `strength` are the human forms, and the docs
+  // rightly recommend them — but only the arrows returned by hooks.compile.arrowsOf get SOLVED into
+  // a beta. An effect authored in a human form anywhere else keeps `beta: undefined`, and then:
+  //
+  //     undefined * theta  →  NaN  →  sigmoid(NaN)  →  bernoulli(NaN) is always false
+  //
+  // …so the domain silently produces ZERO ROWS, with every gate green. That is exactly what
+  // happened the first time someone added a domain by following the documentation: an effect with
+  // `liftPts: 9`, a build that passed, and no data at all.
+  //
+  // Found by walking datagen/ADDING-A-DOMAIN.md as a newcomer would.
+  assertEverySolved(C);
+
   return C;
 }
 

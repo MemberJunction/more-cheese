@@ -17,12 +17,25 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { deaccent } from './world.mjs';
+import { renderRow } from '../../engine/row-template.mjs';
 
 /** the seeded type names we reference — a gate asserts these against the schema contract */
 export const CONTACT_TYPES = ['Email', 'Mobile Phone', 'Work Phone', 'LinkedIn', 'Website'];
 export const ADDRESS_TYPES = ['Home', 'Work', 'Mailing'];
 
-export function buildContacts(cfg, people, orgs) {
+// ── row templates ── the LINK row is a clean projection. The ADDRESS row is NOT and stays
+// handwritten: StateProvince strips a country prefix by regex and Country falls back through
+// CountryName — a computed field and a real fallback, neither of which belongs in a template.
+export const ADDRESS_LINK_ROW = { row: {
+  LinkKey: { from: 'key' }, AddressKey: { from: 'key' }, EntityName: { from: 'entityName' },
+  RecordKind: { from: 'recordKind' }, RecordKey: { from: 'recordKey' },
+  AddressTypeName: { from: 'addressType' }, IsPrimary: true, Rank: 1,
+} };
+/** this row draws nothing; the sentinel makes that a hard error rather than a convention */
+const NO_DRAWS = new Proxy({}, { get(_, k) { throw new Error(`ADDRESS_LINK_ROW must not draw ('${String(k)}')`); } });
+
+export function buildContacts(cfg, { people, orgs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed } = cfg;
   const C = R.contacts;
   const addresses = [];
@@ -41,13 +54,10 @@ export function buildContacts(cfg, people, orgs) {
       PostalCode: row.PostalCode ?? null,
       Country: row.CountryName ?? row.Country, Latitude: row.Latitude ?? null, Longitude: row.Longitude ?? null,
     });
-    addressLinks.push({
-      LinkKey: key, AddressKey: key, EntityName: entityName, RecordKind: recordKind, RecordKey: recordKey,
-      AddressTypeName: addressType, IsPrimary: true, Rank: 1,
-    });
+    addressLinks.push(renderRow(NO_DRAWS, ADDRESS_LINK_ROW, { key, entityName, recordKind, recordKey, addressType }));
   };
 
-  // ---------- people ----------
+  // ── decisions ── people
   for (const p of people) {
     // a member who gave us a street address gets one on file; where they work decides
     // whether it reads as a work or a home address
@@ -79,7 +89,7 @@ export function buildContacts(cfg, people, orgs) {
     }
   }
 
-  // ---------- organizations ----------
+  // ── decisions ── organizations
   for (const o of orgs) {
     pushAddress(`org:${o.OrgKey}`, o, 'MJ_BizApps_Common: Organizations', 'org', o.OrgKey, 'Mailing');
 
@@ -95,6 +105,7 @@ export function buildContacts(cfg, people, orgs) {
     if (r.bernoulli(C.params.orgPhoneShare)) push('Work Phone', o.Phone, o.Website ? false : true);
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { addresses, addressLinks, contactMethods };
 }
 

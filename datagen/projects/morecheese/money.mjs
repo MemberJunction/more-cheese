@@ -14,13 +14,23 @@
 import { rng } from '../../engine/rng.mjs';
 import { derivedTransaction } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
-export function buildMoney(cfg, people, periods, events, registrations, programs) {
+// ── row templates ── the catalogue products; the tier/event products stay handwritten because
+// their keys are COMPUTED (toUpperCase) and expressions in templates are the DSL-creep line
+export const PRODUCT_ROW = { row: {
+  ProductKey: { from: 'item.key' }, Name: { from: 'item.name' },
+  ProductType: { from: 'item.type' }, UnitPrice: { from: 'item.price' }, IsSharedDemo: true,
+} };
+
+export function buildMoney(cfg, { people, periods, events, registrations, programs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const O = R.orders;
   const P = O.catalog.paymentProfiles;
 
-  // ---------- products: one Membership product per tier + the event products ----------
+  // ── fixtures ── products: one Membership product per tier + the event products
   const products = R.membership.catalog.tiers.map((t) => ({
     ProductKey: `PROD-MEM-${t.name.toUpperCase()}`, Name: `${t.name} Membership (annual)`,
     ProductType: 'Membership', UnitPrice: t.dues, IsSharedDemo: true,
@@ -30,9 +40,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   }
   // the rest of what an association actually sells — exam fees, competition entries,
   // publications, sponsorship, merchandise, the job board, donations
-  for (const c of O.catalog.products ?? []) {
-    products.push({ ProductKey: c.key, Name: c.name, ProductType: c.type, UnitPrice: c.price, IsSharedDemo: true });
-  }
+  products.push(...projectRows(PRODUCT_ROW, O.catalog.products));
   const priceOf = new Map(products.map((p) => [p.ProductKey, p.UnitPrice]));
 
   // Catalogue prices are CURRENT. A line is charged the price of ITS year, so a 2014 order
@@ -42,8 +50,8 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   const releaseYear = release.getUTCFullYear();
   const atYear = (amount, year) => Math.round(amount / Math.pow(1 + infl, releaseYear - year));
 
-  const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
-  const eventByKey = new Map(events.map((e) => [e.EventKey, e]));
+  const personByKey = indexBy(people, 'MemberNumber');
+  const eventByKey = indexBy(events, 'EventKey');
   const orders = [];
   const orderLines = [];
   const payments = [];
@@ -73,7 +81,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     }
   };
 
-  // ---------- dues: one order per membership period (order-per-cycle, BO-D40 verbatim) ----------
+  // ── decisions ── dues: one order per membership period (order-per-cycle, BO-D40 verbatim)
   // Expressed through core's derivedTransaction: the timing mixture is DECLARED in the
   // ruleset (orders.paymentProfiles); this domain only picks the profile per period and
   // shapes the rows. Draw order (method pick → late bernoulli → offset) is the pattern's
@@ -118,7 +126,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     },
   });
 
-  // ---------- event registrations: card-at-checkout (declared `checkout` profile) ----------
+  // ── decisions ── event registrations: card-at-checkout (declared `checkout` profile)
   derivedTransaction({
     seed,
     parents: registrations,
@@ -138,7 +146,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     },
   });
 
-  // ---------- certifications and competitions: real billable facts that used to be free ----------
+  // ── fixtures ── certifications and competitions: real billable facts that used to be free
   // 124 credentials and 445 competition entries generated no revenue at all.
   for (const mc of programs?.memberCertifications ?? []) {
     const rC = rng(seed, `certfee:${mc.MemberCertKey}`);
@@ -194,7 +202,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   // AMS records it — a NEGATIVE payment against the original order with Status 'Refunded'
   // (the status was already permitted by the schema and had never been used).
   const refunds = [];
-  const orderByKey = new Map(orders.map((o) => [o.OrderKey, o]));
+  const orderByKey = indexBy(orders, 'OrderKey');
   for (const reg of registrations) {
     if (reg.Attended !== false) continue;
     const key = `ORD-E-${reg.RegKey}`;
@@ -220,5 +228,6 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     if (pay.Status === 'Captured' && pay.PaymentDate >= inflightCut) pay.Status = 'InProgress';
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { products, orders, orderLines, payments: finalPayments };
 }

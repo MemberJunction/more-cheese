@@ -21,7 +21,7 @@
 // Math.random(). Same spec + same seed must always produce byte-identical output, and
 // `node cli/check-ruleset.mjs` fails the build if this file can do anything else.
 
-/** @typedef {import('../../../../engine/types.js').CommitteeBlock} CommitteeBlock */
+/** @typedef {import('../../types.js').CommitteeBlock} CommitteeBlock */
 
 // Committee types. Referenced below by identity, not by re-typing the name — a typo becomes
 // a crash at load instead of a committee that silently never gets seats.
@@ -157,7 +157,9 @@ export default {
       // rate; boardeffect.com attendance trends). The SEC/public-company norm is directors
       // attending >=75% of board and committee meetings (lexology.com 75%-attendance-test).
       // 75% ±6 spans the moderate band up to the strong threshold.
-      attendPresent: { target: 0.75, tolerance: 0.06 },
+      // se: 1.5 — one measure over one big pool of attendance rows, so the cushion the old
+      // bespoke gate used was 1.5×SE, not the 3×SE reserved for many-comparison gates.
+      attendPresent: { target: 0.75, tolerance: 0.06, se: 1.5 },
 
       excusedShareOfAbsent: 0.4, // of those absent, this share are formally Excused
 
@@ -192,11 +194,14 @@ export default {
       },
     },
 
-    // Weighted options, one dice roll each. Votes stay CONSISTENT with attendance by
+    // Weighted options, one dice roll each. The KEYS are the values that land in the data —
+    // they used to be lowercase while the generator hardcoded `Yes`/`No`/`Abstain`, so this mix
+    // looked like it declared the options when it only supplied their weights.
+    // Votes stay CONSISTENT with attendance by
     // construction: a member absent from the meeting votes 'Absent', never one of these.
     mixes: {
-      vote: { yes: 0.8, no: 0.1, abstain: 0.1 },
-      voteContentious: { yes: 0.25, no: 0.6, abstain: 0.15 },
+      vote: { Yes: 0.8, No: 0.1, Abstain: 0.1 },
+      voteContentious: { Yes: 0.25, No: 0.6, Abstain: 0.15 },
     },
   },
 };

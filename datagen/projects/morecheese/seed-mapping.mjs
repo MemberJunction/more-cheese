@@ -1,38 +1,29 @@
-// ==== SHARED SEED MAPPING (extracted from emit-sql.mjs so the SQL-seed emitter and the
-// data-migration emitter can NEVER drift) ====
+// THE MORECHEESE SEED MAPPING — which pack table becomes which database table.
 //
-// Pure data + functions (no file I/O, no execution): the JSON-pack → SQL-table MAPPING, the
-// per-table column projections (with deterministic uuidv5 IDs via uuidFor), the polymorphic-ref
-// PREAMBLE, the pack INSTALL_ORDER (the dependency pyramid), and the VALUES batch size + SQL value
-// formatters. Both emitters import from here; each owns only its OWN output concern (out/sql vs
-// migrations/). See emit-sql.mjs / emit-data-migration.mjs.
-import { uuidFor } from './ids.mjs';
+// Moved out of engine/ on 2026-08-03. It was 780 lines of this project's tables sitting in a
+// directory whose own documentation says "NOTHING in here knows about cheese". A second project
+// inherited the rendering machinery and then had to fork this file to ship anything.
+//
+// The machinery is now engine/seed-render.mjs; this is the part that is irreducibly ours: the
+// table names, the column projections, the @variable preambles that resolve seeded lookups by
+// name, and which packs ship as INSERTs rather than through MetadataSync.
+//
+// ⚠ TABLE AND COLUMN NAMES ARE ASSUMED SHAPES for tables this project does not own. The schema
+// contract (engine/contract.mjs) checks those assumptions against a captured real schema.
 
-// ---- dual-mode field formatters (the 2026-07-31 consolidation) ----
-// The SAME columns() functions below render BOTH delivery paths. Mode 'sql' (the default,
-// and the only mode until renderRecord() flips it for one call) produces SQL literals
-// exactly as it always did — that path is byte-diffed against a pre-consolidation baseline.
-// Mode 'sync' returns the raw JSON value the MetadataSync tree carries; preamble @variables
-// translate to '@lookup:' references through VAR_TO_LOOKUP, so the F6 by-name rule is
-// spelled ONCE. Before this, emit-mjsync.mjs carried its own duplicate 59-entry mapping —
-// the copy where 'MJ: Entities' was once misspelled and 3,191 records failed at push.
-let MODE = 'sql';
-export const sqlStr = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : `N'${String(v).replace(/'/g, "''")}'`;
-export const sqlNum = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : String(v);
-export const sqlBit = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : v ? '1' : '0';
-export const sqlDate = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : `'${v}'`;
-export const sqlId = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : `'${v}'`;
-// raw expression (a DECLAREd @variable) on the SQL path; its @lookup twin on the sync path
-export const sqlVar = (v) => {
-  if (MODE !== 'sync') return v;
-  if (v == null || v === 'NULL') return null;
-  const l = VAR_TO_LOOKUP[v];
-  if (l === undefined) throw new Error(`sqlVar '${v}' has no @lookup translation — add it to VAR_TO_LOOKUP in seed-mapping.mjs`);
-  return l;
-};
+import { uuidFor } from '../../engine/ids.mjs';
+import { sqlStr, sqlNum, sqlBit, sqlDate, sqlId, mode } from '../../engine/seed-render.mjs';
 
-// platform pack: entity name → the preamble DECLARE that resolves it, and RefKind → the
-// uuidFor prefix that reconstructs the referenced record's deterministic PK
+/** How this project is named in generated SQL/migration headers. The directory slug ('morecheese')
+ *  is for paths; this is for humans reading a seed file. Declared rather than hardcoded in the
+ *  emitters, which used to write "MoreCheese demo seed" into every project's output. */
+export const DISPLAY_NAME = 'MoreCheese';
+
+/** This project's OWN schema — the one a Flyway migration rewrites to ${flyway:defaultSchema} so the
+ *  same migration installs into any target schema. Dependency schemas (the bizapps ones) are left
+ *  alone. It was a hardcoded 'morecheese_members' inside cli/emit-data-migration.mjs. */
+export const HOME_SCHEMA = 'morecheese_members';
+
 export const MJ_ENTITY_VAR = {
   'MJ_BizApps_Common: People': '@E_People',
   'MJ_BizApps_Common: Relationships': '@E_Relationships',
@@ -67,6 +58,16 @@ export const ORG_TYPE_VAR = {
   'Educational Institution': '@OT_EduInst', Association: '@OT_Association',
 };
 
+export const sqlVar = (v) => {
+  if (mode() !== 'sync') return v;
+  if (v == null || v === 'NULL') return null;
+  const l = VAR_TO_LOOKUP[v];
+  if (l === undefined) throw new Error(`sqlVar '${v}' has no @lookup translation — add it to VAR_TO_LOOKUP in seed-mapping.mjs`);
+  return l;
+};
+
+// platform pack: entity name → the preamble DECLARE that resolves it, and RefKind → the
+
 // ---- @variable → @lookup translation (sync mode) ----
 // Every DECLAREd variable the SQL preambles resolve BY NAME has exactly one MetadataSync
 // spelling. Built from the same var maps, so adding a seeded lookup is still one edit.
@@ -91,29 +92,6 @@ const VAR_TO_LOOKUP = {
   '@IS_Closed': LOOKUP('MJ_BizApps_Issues: Issue Status', 'Closed'),
 };
 
-/** Render one row as a MetadataSync record — the sync twin of columns(). Entries that ship
- *  via MetadataSync carry dir + entity; syncPk overrides the primary-key column (default ID,
- *  e.g. IssueNumberSequence keys on ScopeCode); syncOmit lists SQL-only columns. */
-export function renderRecord(entry, row) {
-  MODE = 'sync';
-  try {
-    const cols = entry.columns(row);
-    const pkName = entry.syncPk ?? 'ID';
-    const { [pkName]: pk, ...fields } = cols;
-    if (entry.syncOmit) for (const k of entry.syncOmit) delete fields[k];
-    if (entry.syncOverride) for (const [k, fn] of Object.entries(entry.syncOverride)) fields[k] = fn(row);
-    return { primaryKey: { [pkName]: pk }, fields };
-  } finally { MODE = 'sql'; }
-}
-
-// ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
-// THE PERSON/ORG SPLIT (the schema owner's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
-// to bizapps-common's tables (their REAL columns, from bizapps-common
-// migrations/B202602271452); everything member-ish becomes an extension-profile row in OUR
-// morecheese_members schema carrying the PersonID/OrganizationID. The pinned uuidv5 IDs make
-// the FK pairs line up by construction — parent and child derive them independently.
-// IsSharedDemo never goes on bizapps-common tables (not ours to alter — memo §2.5); demo
-// rows are identifiable through their profile row.
 export const MAPPING = {
   common: [
     {
@@ -765,25 +743,17 @@ export const MAPPING = {
   ],
 };
 
-// ---------- emit: one .sql per pack, batched multi-row INSERTs, pack order = install order ----------
-export const BATCH = 500; // SQL Server allows 1000 rows per VALUES; stay comfortably under
+// the pack pyramid: platform after everything it audits, sonar last (its model owner is a
+// platform staff user)
 export const INSTALL_ORDER = ['common', 'membership', 'events', 'learning', 'orders', 'committees', 'forms', 'tasks', 'issues', 'messaging', 'platform', 'sonar']; // the pack pyramid; platform after everything it audits, sonar last (its model owner is a platform staff user)
-
 // DELIVERY MECHANISM per pack (hybrid ruling, 2026-07-24). Two ways demo data can ship:
-//   'insert'   — Skyway INSERT data migrations (emit-data-migration.mjs → Seed_NN_*.sql)
-//   'metadata' — MJ MetadataSync push through the entity SPs (emit-mjsync.mjs tree, applied
-//                as MetadataSync migrations — the approach in PR #3)
 // DEFAULT is 'metadata' on this (metadata-era) branch: all domain + sonar data ships through
-// the entity SPs via emit-mjsync.mjs → MetadataSync migrations (PR #3's approach). The INSERT
-// path (emit-data-migration.mjs) is now the EXCEPTION, used only by 'platform'.
-// 'platform' is PINNED to 'insert' FOREVER: it forges state the entity layer refuses to forge —
-// direct __mj.RecordChange audit rows and back-dated Conversation __mj_CreatedAt timestamps —
-// which a push through the SPs would reject or re-stamp "now", destroying the "someone has used
-// this instance" effect that is the pack's whole purpose. emit-data-migration.mjs emits only
 // 'insert' packs (→ Seed_NN); everything else is the metadata emitter's job.
 export const DELIVERY = { platform: 'insert' };
+
+// Which mechanism a pack ships by. A domain policy, not engine machinery.
 export const deliveryOf = (pack) => DELIVERY[pack] ?? 'metadata';
-// polymorphic packs resolve entity NAMES to this database's __mj.Entity IDs up front
+
 export const PREAMBLE = {
   common: [
     "-- app-seeded lookups resolve BY NAME (the owning app ships these rows; integration finding F6)",
@@ -857,39 +827,50 @@ export const PREAMBLE = {
   ],
 };
 
+
 // POSTAMBLE: statements appended AFTER a pack's INSERTs — for circular FKs that can't be
 // satisfied in insert order. UUIDs here are uuidv5 constants (stable forever by design).
+// LAZY on purpose: an ID may not be minted at module-evaluation time. The project's UUID
+// namespace is bound by the loader (engine/ids.mjs), and ES imports are evaluated before any
+// top-level await — so a module-scope uuidFor() ran before the binding existed and threw. A
+// getter defers it to first read, which is after the loader has run.
 export const POSTAMBLE = {
-  sonar: [
-    "-- circular FK (ScoreModel ⇄ ScoreModelVersion): point the model at v1 now both exist",
-    `UPDATE [__mj_BizAppsSonar].[ScoreModel] SET CurrentVersionID = '${uuidFor('sonarver', 'morecheese-engagement:1')}' WHERE ID = '${uuidFor('sonarmodel', 'morecheese-engagement')}';`,
-  ],
+  get sonar() {
+    return [
+      '-- circular FK (ScoreModel ⇄ ScoreModelVersion): point the model at v1 now both exist',
+      `UPDATE [__mj_BizAppsSonar].[ScoreModel] SET CurrentVersionID = '${uuidFor('sonarver', 'morecheese-engagement:1')}' WHERE ID = '${uuidFor('sonarmodel', 'morecheese-engagement')}';`,
+    ];
+  },
 };
 
 // ---- Shared pack → INSERT-lines generator (empty-table-safe; the crash emit-sql had) ----
 // load(pack, jsonName) → rows[]. transformTable rewrites a SQL table ref (e.g. home schema →
 // ${flyway:defaultSchema} for a migration). Returns { lines, summary }.
-export function packSqlLines(pack, load, { transformTable = (t) => t } = {}) {
-  const lines = [];
-  const summary = [];
-  for (const t of MAPPING[pack]) {
-    const rows = load(pack, t.json).filter(t.only ?? (() => true));
-    const table = transformTable(t.table);
-    if (rows.length === 0) {
-      lines.push(`-- ${table}: 0 rows`, '');
-      summary.push({ table: t.table, rows: 0 });
-      continue;
-    }
-    const cols = Object.keys(t.columns(rows[0]));
-    lines.push(`-- ${table}: ${rows.length} rows`);
-    for (let i = 0; i < rows.length; i += BATCH) {
-      const batch = rows.slice(i, i + BATCH);
-      lines.push(`INSERT INTO ${table} (${cols.map((c) => `[${c}]`).join(', ')})`);
-      lines.push('VALUES');
-      lines.push(batch.map((r) => `  (${Object.values(t.columns(r)).join(', ')})`).join(',\n') + ';');
-      lines.push('');
-    }
-    summary.push({ table: t.table, rows: rows.length });
-  }
-  return { lines, summary };
-}
+
+/** PUSH ORDER for MetadataSync — every parent before its children THROUGH THE ENTITY SPs. This
+ *  interleaves packs (relationship types push after membership periods) and is deliberately NOT the
+ *  SQL INSTALL_ORDER. It is a statement about THIS project's foreign keys, so it lives here; it used
+ *  to be a hardcoded list inside cli/emit-mjsync.mjs, which made that emitter unusable by any other
+ *  project. A new domain's dirs go here in FK order, and the emitter fails loudly if a mapped dir is
+ *  missing or unknown. */
+export const PUSH_ORDER = [
+  'organizations', 'organization-profiles', 'people',
+  'member-profiles', 'data-quality-labels', 'advocacy-actions',
+  'competition-entries', 'certifications', 'member-certifications',
+  'membership-periods', 'relationship-types', 'relationships',
+  'addresses', 'address-links', 'contact-methods',
+  'committee-types', 'committees', 'committee-terms',
+  'committee-memberships', 'committee-meetings', 'committee-attendance',
+  'committee-agenda-items', 'committee-motions', 'committee-votes',
+  'task-types', 'tasks', 'task-assignments',
+  'task-links', 'issue-types', 'issues',
+  'issue-comments', 'issue-sequences', 'portal-sessions',
+  'secure-threads', 'secure-messages', 'forms',
+  'form-versions', 'form-pages', 'form-questions',
+  'form-question-options', 'form-distributions', 'form-responses',
+  'form-answers', 'events', 'event-registrations',
+  'courses', 'enrollments', 'products',
+  'orders', 'order-lines', 'payments',
+  'sonar-score-band-sets', 'sonar-score-bands', 'sonar-time-windows',
+  'sonar-score-models', 'sonar-score-model-versions', 'sonar-model-related-entities',
+  'sonar-factors', 'sonar-model-factors',];

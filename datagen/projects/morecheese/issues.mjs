@@ -8,20 +8,35 @@
 
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 // severity mixes are keyed by ticket type with spaces removed ('Data Correction' →
 // severityDataCorrection), so each mix stays a flat map of level → weight
 const severityKey = (type) => 'severity' + String(type).replace(/\s+/g, '');
 
-export function buildIssues(cfg, people, orgs, events, registrations, money, committees) {
+// ── row templates ── pure data; column order is pack serialization order (byte identity)
+export const ISSUE_TYPE_ROW = { row: {
+  TypeKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  Description: { from: 'item.description' }, DefaultPriority: { from: 'item.priority' },
+  IsActive: true, IsSharedDemo: true,
+} };
+export const ISSUE_STATUS_ROW = { row: {
+  StatusKey: { from: 'item.name' }, Name: { from: 'item.name' }, Sequence: { from: 'item.sequence' },
+  IsDefault: { from: 'item.isDefault' }, IsTerminal: { from: 'item.isTerminal' },
+  ColorCode: { from: 'item.color' }, IsSharedDemo: true,
+} };
+
+export function buildIssues(cfg, { people, orgs, events, registrations, money, committees }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const I = R.issues;
   const releaseIso = iso(release);
-  const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
+  const orgByKey = indexBy(orgs, 'OrgKey');
   const typeDefault = new Map(I.catalog.types.map((t) => [t.name, t.priority]));
 
-  const issueTypes = I.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true }));
-  const issueStatuses = I.catalog.statuses.map((s) => ({ StatusKey: s.name, Name: s.name, Sequence: s.sequence, IsDefault: s.isDefault, IsTerminal: s.isTerminal, ColorCode: s.color, IsSharedDemo: true }));
+  const issueTypes = projectRows(ISSUE_TYPE_ROW, I.catalog.types);
+  const issueStatuses = projectRows(ISSUE_STATUS_ROW, I.catalog.statuses);
 
   const drafts = []; // { key, type, title, reporter, sourceEntityName, sourceRefKind, sourceRefKey, created, priority }
 
@@ -92,7 +107,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   }
 
   // refunds: paid-event no-shows occasionally ask
-  const eventByKey = new Map(events.map((e) => [e.EventKey, e]));
+  const eventByKey = indexBy(events, 'EventKey');
   for (const reg of registrations) {
     const ev = eventByKey.get(reg.EventKey);
     if (reg.Attended !== false || !ev?.IsPaid) continue;
@@ -233,14 +248,14 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     };
   });
 
-  // ---------- presence floor: Critical must exist ----------
+  // ── decisions ── presence floor: Critical must exist
   // Critical is rare by design and lives only on Billing and Events. At demo scale the Billing
   // population is ~5 tickets, so 10% Critical means the DRAW yields none about half the time —
   // and the severity gate's tolerance band happily passes on zero, so nobody notices that a
   // support demo has no critical ticket in it. Promote the highest-impact eligible ticket
   // instead: deterministic, consumes no randomness, and only fires when the draws came up dry.
   {
-    const want = I.params.severityCriticalFloor ?? 0;
+    const want = I.params.severityCriticalFloor;
     const have = issues.filter((x) => x.Severity === 'Critical').length;
     if (want > have) {
       const eligible = issues
@@ -257,7 +272,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     }
   }
 
-  // ---------- comments: the activity feed every ticket lacked ----------
+  // ── decisions ── comments: the activity feed every ticket lacked
   // Derived from the ticket's own state, so a resolved ticket reads like one. The table has
   // no author-settable timestamp (only the system __mj_CreatedAt, which the entity SPs
   // re-stamp), so each body opens with its own date — the same workaround Description uses.
@@ -292,5 +307,6 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   }
 
   const issueSequences = [{ ScopeCode: I.params.numberPrefix, NextSequenceNumber: issues.length + 1, IsSharedDemo: true }];
+  // ── shape ── assemble the named tables this domain owns
   return { issueTypes, issueStatuses, issues, issueSequences, issueComments };
 }

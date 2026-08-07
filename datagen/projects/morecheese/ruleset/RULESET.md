@@ -72,7 +72,7 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 
 ## The pinned people (heroes)
 
-- **Elena Rodriguez** (`ICF-000101`) — Producer, Petaluma. Pins: {"status":"Active","minRegistrationsPerYear":2,"committeeSeat":"Standards Committee","issueMin":1,"formResponse":true}.
+- **Elena Rodriguez** (`ICF-000101`) — Producer, Petaluma. Pins: {"status":"Active","minRegistrationsPerYear":2,"issueMin":1,"formResponse":true}.
 - **Marcus Chen** (`ICF-000102`) — Retailer, Seattle. Pins: {"status":"PendingRenewal","endDateWithinDaysOfRelease":[14,28]}.
 - **Danielle Okafor** (`ICF-000103`) — Producer, Brattleboro. Pins: {"status":"Lapsed","employerDissolved":2025,"cancellationReasonContains":"employer"}.
 - **Priya Natarajan** (`ICF-000104`) — Producer, Madison. Pins: {"status":"Active"}.
@@ -84,7 +84,7 @@ A scenario is a **parameter overlay on the same causal model** (`ruleset/scenari
 - **Victor Sandoval** (`ICF-000114`) — Supplier, Austin. Pins: {"status":"Active","tier":"Corporate"}.
 - **Nia Thompson** (`ICF-000115`) — Retailer, Brooklyn. Pins: {"status":"Active","joinedDaysBeforeRelease":14}.
 - **Charlie Mason** (`ICF-000116`) — Producer, Hobart. Pins: {"status":"Active","tier":"SmallBusiness"}.
-- **Gwen Whitfield** (`ICF-000108`) — Educator, Chicago. Pins: {"status":"Active","committeeSeat":"Food Safety Committee","committeeRole":"Chair","issueMin":1,"formResponse":true}.
+- **Gwen Whitfield** (`ICF-000108`) — Educator, Chicago. Pins: {"status":"Active","issueMin":1,"formResponse":true}.
 - **Sofia Marchetti** (`ICF-000106`) — Retailer, Brooklyn. Pins: {"status":"Active","certStatus":"InProgress"}.
 - **Tom Reyes** (`ICF-000109`) — Producer, Ithaca. Pins: {"status":"Active","advocacyMin":30,"testimonies":2,"issueMin":1,"formResponse":true}.
 - **Aisha Bell** (`ICF-000110`) — Producer, Petaluma. Pins: {"status":"Active","defect":"StaleEmployer"}.

@@ -14,26 +14,40 @@
 // notifications, record changes. Never __mj entity-definition rows (CodeGen owns those).
 
 import { rng } from '../../engine/rng.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
 const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
 
+// ── row templates ── the staff USER row stays handwritten: its Email is computed
+// (lowercase + strip), and computed values are generator work, not template work
+export const USER_ROLE_ROW = { row: {
+  RoleKey: { fmt: '{item.key}:UI' }, UserKey: { from: 'item.key' },
+} };
+export const QUERY_ROW = { row: {
+  QueryKey: { from: 'item.key' }, Name: { from: 'item.name' },
+  UserQuestion: { from: 'item.userQuestion' }, Description: { from: 'item.description' },
+  SQL: { from: 'item.sql' },
+} };
+
 export function buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships, competitionEntries: programsEntries }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   // four-part ruleset shape: only catalog + params — this domain rolls no dice
   const P = R.platform;
   const releaseMs = release.getTime();
-  const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
+  const personByKey = indexBy(people, 'MemberNumber');
   const fullName = (m) => { const p = personByKey.get(m); return p ? `${p.FirstName} ${p.LastName}` : m; };
 
-  // ---------- staff users (the personas demos log in as) ----------
+  // ── fixtures ── staff users (the personas demos log in as)
   const users = P.catalog.staff.map((s) => ({
     UserKey: s.key, FirstName: s.first, LastName: s.last, Title: s.title,
     Name: `${s.first} ${s.last}`,
     Email: `${s.first}.${s.last}`.toLowerCase().replace(/[^a-z0-9.]/g, '') + `@${P.params.emailDomain}`,
   }));
-  const userRoles = P.catalog.staff.map((s) => ({ RoleKey: `${s.key}:UI`, UserKey: s.key }));
+  const userRoles = projectRows(USER_ROLE_ROW, P.catalog.staff);
 
-  // ---------- computed facts (the tokens conversations may cite) ----------
+  // ── decisions ── computed facts (the tokens conversations may cite)
   const lastPeriod = new Map();
   for (const per of periods) lastPeriod.set(per.MemberNumber, per);
   const pendingMembers = [...lastPeriod.entries()].filter(([, per]) => per.Status === 'PendingRenewal').map(([m]) => m).sort();
@@ -62,7 +76,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     .replace(/\{N:([A-Z_0-9]+)\}/g, (_, k) => String(facts[k] ?? `{N:${k}}`))
     .replace(/\{HERO:([A-Z0-9-]+)\}/g, (_, m) => fullName(m));
 
-  // ---------- shared views + reusable queries (all-viewer-visible residue) ----------
+  // ── decisions ── shared views + reusable queries (all-viewer-visible residue)
   // GridState/FilterState mirror what Explorer writes when a user saves a view — a seeded
   // view without them has no column layout. Shapes copied from organic v5.45 rows.
   const views = P.catalog.sharedViews.map((v) => ({
@@ -74,11 +88,9 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     }),
     FilterState: JSON.stringify({ logic: 'and', filters: [] }),
   }));
-  const queries = P.catalog.queries.map((q) => ({
-    QueryKey: q.key, Name: q.name, UserQuestion: q.userQuestion, Description: q.description, SQL: q.sql,
-  }));
+  const queries = projectRows(QUERY_ROW, P.catalog.queries);
 
-  // ---------- conversations (Skip-style; the assistant only says computed truths) ----------
+  // ── decisions ── conversations (Skip-style; the assistant only says computed truths)
   const conversations = [];
   const conversationDetails = [];
   for (const c of P.catalog.conversations) {
@@ -96,7 +108,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     });
   }
 
-  // ---------- favorites + lists (per-staff residue; demos log in as staff) ----------
+  // ── decisions ── favorites + lists (per-staff residue; demos log in as staff)
   // per-owner: a demo logs in AS a persona, so each needs their own residue
   const favGroups = P.catalog.favorites;
   const favorites = favGroups.flatMap((g) => g.memberNumbers.map((m) => ({
@@ -121,13 +133,13 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     }
   }
 
-  // ---------- notifications ----------
+  // ── decisions ── notifications
   const notifications = P.catalog.notifications.map((n, i) => ({
     NotifKey: `notif:${i}`, UserKey: n.owner, Title: n.title, Message: n.message,
     Unread: n.unread, ReadAt: n.unread ? null : ts(releaseMs - n.daysBeforeRelease * 86400000 + 6 * 3600000),
   }));
 
-  // ---------- RecordChange audit backfill — every row mirrors a generated timeline ----------
+  // ── decisions ── RecordChange audit backfill — every row mirrors a generated timeline
   const RC = P.params.recordChanges;
   const recordChanges = [];
   const staffPick = (key) => P.catalog.staff[rng(seed, `platform-attr:${key}`).int(0, P.catalog.staff.length - 1)].key;
@@ -198,5 +210,6 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   // clamp: audit rows never post-date the release
   for (const rc of recordChanges) if (new Date(rc.ChangedAt).getTime() > releaseMs) rc.ChangedAt = ts(releaseMs - 3600000);
 
+  // ── shape ── assemble the named tables this domain owns
   return { users, userRoles, views, queries, conversations, conversationDetails, favorites, lists, listDetails, notifications, recordChanges };
 }

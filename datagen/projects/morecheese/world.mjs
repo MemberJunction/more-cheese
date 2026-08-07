@@ -11,8 +11,10 @@ import { rng } from '../../engine/rng.mjs';
 import { staticAssignment } from '../../engine/patterns.mjs';
 import { iso, addDays, addYears } from '../../engine/dates.mjs';
 import { orgNameDealer, personNameFor, titleFor, CITIES, SEGMENTS } from './banks.mjs';
+import { yearsOf } from '../../engine/authoring.mjs';
 
 export function buildOrgs(cfg) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, releaseYear } = cfg;
   const orgs = [];
   const nOrgs = Math.round(cfg.n * R.orgs.params.ratioToMembers);
@@ -35,6 +37,7 @@ export function buildOrgs(cfg) {
     }
     orgs.push({ OrgKey: `ORG-${String(i + 1).padStart(4, '0')}`, Name: name, Type: type, Region: region, Country: country, CountryName: countryName, City: city, State: state, Latitude: lat, Longitude: lon, LifecycleEvent: event, IsSharedDemo: true });
   }
+  // ── shape ── assemble the named tables this domain owns
   return orgs;
 }
 
@@ -72,7 +75,7 @@ function joinDateFor(r, cfg) {
   const { R, releaseYear } = cfg;
   const weights = [];
   const CV = R.regimes?.covid;
-  for (let y = R.history.startYear; y <= releaseYear; y++) {
+  for (const y of yearsOf(cfg)) {
     // acquisition dips in the covid years: a trade body loses its in-person recruiting
     // surface, so the growth curve has a visible notch rather than climbing through it
     const covidDamp = CV?.years?.includes(y) ? (CV.joinRateMultiplier ?? 1) : 1;
@@ -101,9 +104,11 @@ function thetaProcess(cfg, key, anchorZ) {
   return { anchor, path };
 }
 
-export function buildPeople(cfg, orgs) {
+export function buildPeople(cfg, { orgs }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed } = cfg;
   const people = [];
+  // ── decisions ── per person: segment, latents, tier. One stream each, order fixed.
   for (let i = 0; i < cfg.n; i++) {
     const key = `ICF-${String(100001 + i)}`;
     const r = rng(seed, `person:${key}`);
@@ -158,5 +163,6 @@ export function buildPeople(cfg, orgs) {
       CycleType: h.cycleType, AutoRenew: h.autoRenew, IsSharedDemo: true, _hero: true,
     };
   }
+  // ── shape ── assemble the named tables this domain owns
   return people;
 }

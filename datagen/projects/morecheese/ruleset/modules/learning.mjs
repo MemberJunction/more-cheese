@@ -199,14 +199,16 @@ export default {
       // (Was called `participation`, which said nothing about who or what.)
       enrollment: {
         target: 0.5,
-        tolerance: 0.06
+        tolerance: 0.06,
+        se: 1.5, // one share over many member-years — the cushion the bespoke gate used
       },
       // Share of enrolments that reach completion. Enforced. Measured over people who
       // actually enrolled — a self-selected group, so this is higher than it would be
       // across the whole membership.
       completion: {
         target: 0.72,
-        tolerance: 0.06
+        tolerance: 0.06,
+        se: 1.5,
       },
       extraEnrollmentShare: 0.35
     },

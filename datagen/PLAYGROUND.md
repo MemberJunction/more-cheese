@@ -78,7 +78,7 @@ tab, the gate report) over the same build.
 ```sh
 # 1. regenerate + emit (deterministic — same seed, same bytes)
 node datagen/cli/build.mjs --n 2500 --seed 42 --release 2026-07-31 --demo
-node datagen/cli/emit-sql.mjs && node datagen/cli/emit-schema.mjs && node datagen/cli/emit-mjsync.mjs
+node datagen/cli/emit-sql.mjs && node datagen/projects/morecheese/emit-schema.mjs && node datagen/cli/emit-mjsync.mjs
 
 # 2. clone the MJ DB (inside the sql container) + install:
 #    RESTORE ... AS MoreCheese_Playground, then run out/sql/00_schema.sql, 01..07_*.sql in order

@@ -15,6 +15,7 @@
 import { rng } from '../../engine/rng.mjs';
 import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
 import { CHEESE_WORDS, CITIES } from './banks.mjs';
 
 // Calendar realism: draw any day of the month (incl. 29–31), then shape the weekday —
@@ -38,10 +39,11 @@ function drawEventDate(rEv, y, kind) {
 }
 
 export function buildEvents(cfg) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const E = R.events;
   const events = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) {
+  for (const y of yearsOf(cfg)) {
     const covidYear = R.regimes.covid.years.includes(y);
     const covid = covidYear && R.regimes.covid.virtualConference;
     // conference drifts around the ruleset anchor day and lands on a Tuesday
@@ -72,6 +74,7 @@ export function buildEvents(cfg) {
       events.push({ EventKey: `EVT-${y}-WEB${i + 1}`, Name: `Webinar: ${rEv.pick(E.catalog.webinarTopics)} ${y}`, EventType: 'Webinar', Year: y, Date: iso(d), IsVirtual: true, IsPaid: false, City: null, State: null, Latitude: null, Longitude: null, IsSharedDemo: true });
     }
   }
+  // ── shape ── assemble the named tables this domain owns
   return events;
 }
 
@@ -79,47 +82,42 @@ export function buildEvents(cfg) {
 // late deciders, and a walk-up/last-minute mass — heavier last-minute for free
 // webinars, longer planning horizon for the conference. (Replaces the fixed
 // −45/−14 offsets that made every "registrations over time" chart a comb.)
-function leadDaysFor(r, kind) {
-  const bands = kind === 'Conference'
-    ? [[[60, 120], 0.20], [[14, 59], 0.50], [[3, 13], 0.25], [[0, 2], 0.05]]
-    : kind === 'Workshop'
-      ? [[[30, 60], 0.10], [[7, 29], 0.55], [[1, 6], 0.25], [[0, 0], 0.10]]
-      : [[[21, 45], 0.05], [[7, 20], 0.40], [[1, 6], 0.35], [[0, 0], 0.20]];
+// The band TABLES are declared (events.catalog.leadDayBands); which table applies is selected
+// here, because selection by event type is a conditional and conditionals stay in code. Draw
+// order is unchanged: one pickWeighted over the bands, then one int inside the chosen band.
+function leadDaysFor(r, kind, bandsByKind) {
+  const bands = bandsByKind[kind] ?? bandsByKind.Other;
   const [lo, hi] = r.pickWeighted(bands);
   return r.int(lo, hi);
 }
 
-export function buildRegistrations(cfg, people, periods, events) {
+export function buildRegistrations(cfg, { people, periods, events }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const E = R.events;
   const registrations = [];
 
-  const years = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) years.push(y);
+  const years = yearsOf(cfg);
   const eventsByYear = new Map(years.map((y) => [y, events.filter((e) => e.Year === y && parseDate(e.Date) <= release)]));
 
-  const memberPeriods = new Map();
-  for (const per of periods) {
-    if (!memberPeriods.has(per.MemberNumber)) memberPeriods.set(per.MemberNumber, []);
-    memberPeriods.get(per.MemberNumber).push(per);
-  }
-  const coveredOn = (memberNumber, dateIso) => (memberPeriods.get(memberNumber) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
+  const coveredOn = coverageOf(periods); // indexed; committees already used this helper
   const clampToJoin = (p, d) => iso(new Date(Math.max(d.getTime(), parseDate(p.JoinDate).getTime())));
 
   // flagship: core's annualParticipation — calibrated so ~35% of members attend;
   // engagement pulls in, distance pushes out. minPool 6 preserves the original ">5" skip.
   const confOf = (y) => eventsByYear.get(y).find((e) => e.EventType === 'Conference');
   const activeOn = (y) => people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 6, 1)))));
+  // ── decisions ── one pattern call per decision, in causal order
   const confRegs = annualParticipation({
     seed, years, minPool: 6,
     poolOf: (y) => (confOf(y) ? activeOn(y) : []),
-    scoreOf: (p, y) => E.effects['conferenceAttendance.engagement'].beta * (p._thetaPath?.[y] ?? p._theta) + E.effects['conferenceAttendance.international'].beta * (p.Region === 'NA' ? 0 : 1),
+    scoreOf: (p, y) => E.effects['conferenceAttendance.engagement'].beta * thetaAt(p, y) + E.effects['conferenceAttendance.international'].beta * (p.Region === 'NA' ? 0 : 1),
     target: E.params.conferenceAttendance.target,
     streamKey: (p, y) => `conf:${p.MemberNumber}:${y}`,
     spawn: (r, p, y) => {
       const conf = confOf(y);
       if (!coveredOn(p.MemberNumber, conf.Date)) return null; // active July 1 ≠ covered July 15 — anniversary lapses in the gap
-      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -leadDaysFor(r, 'Conference'))), Attended: null, _class: 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true };
+      return { RegKey: `REG-${p.MemberNumber}-${conf.EventKey}`, MemberNumber: p.MemberNumber, EventKey: conf.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(conf.Date), -leadDaysFor(r, 'Conference', E.catalog.leadDayBands))), Attended: null, _class: 'paid', _theta: thetaAt(p, y), IsSharedDemo: true };
     },
   });
 
@@ -142,7 +140,7 @@ export function buildRegistrations(cfg, people, periods, events) {
       const CV = R.regimes.covid;
       const isCovid = CV.years.includes(y);
       const chanW = (ev) => !isCovid ? 1 : (ev.EventType === 'Webinar' ? (CV.virtualMultiplier ?? 1) : (CV.inPersonMultiplier ?? 1));
-      const mean = E.params.registrationsPerYear * Math.exp(E.effects['registrations.engagement'].beta * (p._thetaPath?.[y] ?? p._theta));
+      const mean = E.params.registrationsPerYear * Math.exp(E.effects['registrations.engagement'].beta * thetaAt(p, y));
       const k = r.negbin(mean, E.params.registrationDispersionK);
       const pool = eventsByYear.get(y).filter((e) => e.EventType !== 'Conference');
       const taken = new Set();
@@ -153,7 +151,7 @@ export function buildRegistrations(cfg, people, periods, events) {
         if (!ev) break;
         taken.add(ev.EventKey);
         if (!coveredOn(p.MemberNumber, ev.Date)) continue;
-        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -leadDaysFor(r, ev.EventType))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: p._thetaPath?.[y] ?? p._theta, IsSharedDemo: true });
+        registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(parseDate(ev.Date), -leadDaysFor(r, ev.EventType, E.catalog.leadDayBands))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _theta: thetaAt(p, y), IsSharedDemo: true });
       }
     }
   }
@@ -173,8 +171,8 @@ export function buildRegistrations(cfg, people, periods, events) {
       const r = rng(seed, `upcoming:${p.MemberNumber}:${ev.EventKey}`);
       // the closer the event, the more of its eventual crowd has signed up by now
       const horizon = Math.max(0.15, 1 - daysOut / 150);
-      if (!r.bernoulli(pBase * Math.exp(E.effects['registrations.engagement'].beta * (p._thetaPath?.[releaseYear] ?? p._theta)) * horizon)) continue;
-      registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(release, -r.int(0, 30))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _future: true, _theta: p._thetaPath?.[releaseYear] ?? p._theta, IsSharedDemo: true });
+      if (!r.bernoulli(pBase * Math.exp(E.effects['registrations.engagement'].beta * thetaAt(p, releaseYear)) * horizon)) continue;
+      registrations.push({ RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey, RegisteredOn: clampToJoin(p, addDays(release, -r.int(0, 30))), Attended: null, _class: ev.EventType === 'Webinar' ? 'webinar' : 'paid', _future: true, _theta: thetaAt(p, releaseYear), IsSharedDemo: true });
     }
   }
 
@@ -193,5 +191,6 @@ export function buildRegistrations(cfg, people, periods, events) {
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return registrations;
 }

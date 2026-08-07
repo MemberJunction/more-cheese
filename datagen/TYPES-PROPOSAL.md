@@ -1,4 +1,42 @@
-# Proposal: a type vocabulary for the ruleset
+# Decision record: the ruleset type vocabulary
+
+> **This is no longer a proposal.** Goal A shipped 2026-07-31, goal B (the canonicalisation) shipped
+> 2026-08-05 once its second-project precondition was met, and all seven veto-list questions are
+> answered in the status block immediately below. Only **stage 3 (tighten the schema from
+> "describe" to "require")** remains open. Kept in full because the census and the reasoning are
+> the argument for every rename that happened — and for the ones that deliberately did not.
+
+**Status (2026-08-05): stage 2 (canonicalise) SHIPPED. Stage 3 (enforce) remains open.**
+
+The precondition for goal B — "wait until a second project exists" — was met on 2026-08-04
+(`projects/fixture/`, see its FINDINGS.md). The canonicalisation pass then turned out to be far
+smaller than this document projected, because the four-section restructure had already collapsed
+most of it: the seven target aliases were down to ONE (`forms.response.rateTarget`), the three mix
+syntaxes to one pair-array, and the nested-arrows gap to one block. All migrated 2026-08-05,
+byte-identical:
+
+- `forms.response`: `rateTarget` + sibling `tolerance` → a canonical `rate: {target, tolerance, se}`
+  pair (now visible to target coverage, measured, its bespoke gate deleted — 15 derived / 3 bespoke),
+  and `arrows` → `effects` (the old spelling ESCAPED the zero-rows guard, which walks keys named
+  `effects` — a live hazard, not style).
+- The last pair-array mix (`application.segmentMix`) → the object-map form decided 2026-07-31.
+- The two dead pins (`committeeSeat`, `committeeRole`) deleted, with reasons in place.
+- The two index-addressed hero pins → memberNumber addressing (the roster is append-only precisely
+  because position is load-bearing — an index-addressed pin was a booby trap).
+- The Employee seeded-type UUID single-sourced (was declared in the ruleset AND hardcoded in
+  defects.mjs).
+
+**The veto-list answers**, so nobody re-litigates them: (1) Mix = object-map, done. (2) target
+aliases renamed, done. (3) catalog identity: BOTH stay legal — `key` where added, `name`-as-key
+where the name is the identity (committees); the crash-not-silence rule covers the rename hazard
+either way. (4) dead pins deleted. (5) `Target.se` is AUTHORED, per target, with a reason — the
+0/1.5/2/3 spread was not accidental, it encoded how noisy each measure is, and it is now declared
+next to each target instead of buried in a Math.sqrt (settled during the 2026-08-04 gate
+migration). (6) behavior-block names: still open, needed only when the schema tightens. (7)
+`Regime` stays covid-shaped — the second project needed no regime at all, so generalising it now
+would be guessing again.
+
+---
 
 **Status (2026-07-31): SPLIT IN TWO. Half shipped, half deliberately deferred.**
 

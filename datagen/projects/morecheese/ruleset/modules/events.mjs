@@ -13,6 +13,23 @@
 export default {
   events: {
     catalog: {
+      // REGISTRATION LEAD TIME, per event type: how far ahead people sign up. Each entry is
+      // [[minDays, maxDays], weight] — an early-bird block, a main wave, late deciders, and a
+      // walk-up mass. Free webinars skew last-minute; the conference has a planning horizon.
+      // (These replaced fixed −45/−14 offsets that made every registrations-over-time chart a
+      // comb, and they lived hardcoded in events.mjs until they were declared here.)
+      //
+      // Under `catalog`, not `mixes`: a mix is a weighted draw whose CATEGORY lands in a column
+      // and is then required to appear there. What this draws is a day offset, so it has no
+      // landing site, and declaring it as a mix would owe the presence gate a promise it cannot
+      // keep. The generator still SELECTS which band set applies — selection by event type is a
+      // conditional, and conditionals stay in code.
+      leadDayBands: {
+        Conference: [[[60, 120], 0.20], [[14, 59], 0.50], [[3, 13], 0.25], [[0, 2], 0.05]],
+        Workshop: [[[30, 60], 0.10], [[7, 29], 0.55], [[1, 6], 0.25], [[0, 0], 0.10]],
+        // the default for everything else, webinars included
+        Other: [[[21, 45], 0.05], [[7, 20], 0.40], [[1, 6], 0.35], [[0, 0], 0.20]],
+      },
       webinarTopics: [
         "Raw Milk Rules",
         "Cave Management",

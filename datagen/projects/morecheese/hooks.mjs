@@ -38,8 +38,8 @@ export const morecheeseHooks = {
     refineMeasure(C) {
       const cfg = { seed: 'compile-refine', n: 3000, release: parseDate('2026-12-31'), releaseYear: 2026, R: C };
       const orgs = buildOrgs(cfg);
-      const ppl = buildPeople(cfg, orgs);
-      const { renewalEvents } = runRenewalUnroll(cfg, ppl, orgs);
+      const ppl = buildPeople(cfg, { orgs });
+      const { renewalEvents } = runRenewalUnroll(cfg, { people: ppl, orgs });
       const rate = (rows) => rows.reduce((s, e) => s + e.renewed, 0) / rows.length;
       return {
         'renewal.enthusiastTier': { group: rate(renewalEvents.filter((e) => e.enthusiastTier)), rest: rate(renewalEvents.filter((e) => !e.enthusiastTier)) },

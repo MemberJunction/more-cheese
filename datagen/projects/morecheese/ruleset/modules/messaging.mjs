@@ -125,7 +125,8 @@ export default {
       // to it, with nothing saying they belonged together. Now they visibly do.
       threadSharePerIssue: {
         target: 0.45,
-        tolerance: 0.1
+        tolerance: 0.1,
+        se: 1.5, // as the bespoke gate had it: one share, cushioned against the issue count
       },
       followUpPairsMax: 2,
       replyDelayHoursMax: 72,

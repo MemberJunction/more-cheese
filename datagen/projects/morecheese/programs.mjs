@@ -11,16 +11,23 @@ import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { TOPONYMS } from './banks.mjs';
 import { iso, addDays, addYears, parseDate } from '../../engine/dates.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
-export function buildPrograms(cfg, people, periods, learning) {
+// ── row templates ── strict reads: the old `description ?? null` was dead code (every cert has
+// one), and dead fallbacks are how renames become silent nulls — the template read throws instead
+export const CERT_ROW = { row: {
+  CertKey: { from: 'item.key' }, Name: { from: 'item.name' },
+  Description: { from: 'item.description' }, ValidYears: { from: 'item.validYears' }, IsSharedDemo: true,
+} };
+
+export function buildPrograms(cfg, { people, periods, learning }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const PR = R.programs;
   const releaseIso = iso(release);
 
-  // ---------- certifications ----------
-  const certifications = PR.catalog.certifications.map((c) => ({
-    CertKey: c.key, Name: c.name, Description: c.description ?? null, ValidYears: c.validYears, IsSharedDemo: true,
-  }));
+  // ── fixtures ── certifications
+  const certifications = projectRows(CERT_ROW, PR.catalog.certifications);
   const completers = [...new Set(learning.enrollments.filter((e) => e.Status === 'Completed').map((e) => e.MemberNumber))]
     .map((m) => people.find((p) => p.MemberNumber === m)).filter((p) => p && !p._hero);
   const memberCertifications = [];
@@ -101,7 +108,7 @@ export function buildPrograms(cfg, people, periods, learning) {
     }
   }
 
-  // ---------- competition entries (producers with orgs; org membership = eligibility) ----------
+  // ── decisions ── competition entries (producers with orgs; org membership = eligibility)
   const competitionEntries = [];
   const memberYears = yearsCovered(periods, R.history.startYear, release.getUTCFullYear());
   const productName = (r) => r.pick(PR.catalog.competitionProductForms).replace('{t}', r.pick(TOPONYMS));
@@ -127,7 +134,7 @@ export function buildPrograms(cfg, people, periods, learning) {
     }
   }
 
-  // ---------- advocacy actions ----------
+  // ── decisions ── advocacy actions
   const advocacyActions = [];
   const crowd = people.filter((p) => !p._hero);
   childOutcome({
@@ -181,6 +188,7 @@ export function buildPrograms(cfg, people, periods, learning) {
     };
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { certifications, memberCertifications, competitionEntries, advocacyActions };
 }
 

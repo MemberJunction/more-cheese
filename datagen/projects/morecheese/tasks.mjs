@@ -12,6 +12,8 @@
 import { rng } from '../../engine/rng.mjs';
 import { childOutcome } from '../../engine/patterns.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
+import { indexBy, stripInternals } from '../../engine/authoring.mjs';
+import { projectRows } from '../../engine/row-template.mjs';
 
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
 const MEETINGS_ENTITY = 'Committees: Meetings';
@@ -19,15 +21,21 @@ const MEETINGS_ENTITY = 'Committees: Meetings';
 /** a time inside the working day — staff don't file everything at exactly 17:00Z */
 const workTime = (r) => `${String(r.int(8, 17)).padStart(2, '0')}:${String(r.int(0, 59)).padStart(2, '0')}:00Z`;
 
-export function buildTasks(cfg, people, periods, committees) {
+// ── row templates ── pure data; column order is pack serialization order (byte identity)
+export const TASK_TYPE_ROW = { row: {
+  TypeKey: { from: 'item.name' }, Name: { from: 'item.name' },
+  Description: { from: 'item.description' }, DefaultPriority: { from: 'item.priority' },
+  IsActive: true, IsSharedDemo: true,
+} };
+
+export function buildTasks(cfg, { people, periods, committees }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const T = R.tasks;
   const releaseIso = iso(release);
-  const personByNum = new Map(people.map((p) => [p.MemberNumber, p]));
+  const personByKey = indexBy(people, 'MemberNumber');
 
-  const taskTypes = T.catalog.types.map((t) => ({
-    TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true,
-  }));
+  const taskTypes = projectRows(TASK_TYPE_ROW, T.catalog.types);
 
   // roster lookup: committee-term key → membership rows
   const rosterByTerm = new Map();
@@ -52,7 +60,7 @@ export function buildTasks(cfg, people, periods, committees) {
     EntityName: entityName, RefKind: refKind, RefKey: refKey, IsSharedDemo: true,
   });
 
-  // ---------- committee action items: spawned by completed meetings ----------
+  // ── decisions ── committee action items: spawned by completed meetings
   const P = T.params;
   const actionTasks = [];
   for (const meeting of committees.meetings) {
@@ -85,7 +93,7 @@ export function buildTasks(cfg, people, periods, committees) {
   childOutcome({
     seed,
     items: pastDue,
-    scoreOf: (t) => T.effects['completion.engagement'].beta * (personByNum.get(t._assignee)?._theta ?? 0),
+    scoreOf: (t) => T.effects['completion.engagement'].beta * (personByKey.get(t._assignee)?._theta ?? 0),
     target: P.committeeActionCompletion.target,
     streamKey: (t) => `ctask-done:${t.TaskKey}`,
     decide: (t, prob, r) => {
@@ -112,7 +120,7 @@ export function buildTasks(cfg, people, periods, committees) {
     assign(t, t._assignee, t.Status === 'Completed' ? 'Completed' : 'InProgress');
   }
 
-  // ---------- renewal outreach: the PendingRenewal queue, assigned to the M&O chair ----------
+  // ── decisions ── renewal outreach: the PendingRenewal queue, assigned to the M&O chair
   const lastPeriod = new Map();
   for (const per of periods) lastPeriod.set(per.MemberNumber, per);
   const activeTerm = R.committees.catalog.terms[R.committees.catalog.terms.length - 1];
@@ -124,7 +132,7 @@ export function buildTasks(cfg, people, periods, committees) {
   const outreachPool = moRoster.length ? moRoster : [];
   for (const [memberNumber, per] of [...lastPeriod.entries()].sort()) {
     if (per.Status !== 'PendingRenewal') continue;
-    const p = personByNum.get(memberNumber);
+    const p = personByKey.get(memberNumber);
     const r = rng(seed, `otask:${memberNumber}`);
     const created = iso(addDays(parseDate(per.EndDate), -r.int(10, 75)));
     const task = pushTask({
@@ -148,6 +156,7 @@ export function buildTasks(cfg, people, periods, committees) {
     link(task, PEOPLE_ENTITY, 'person', memberNumber);
   }
 
-  for (const t of tasks) { delete t._assignee; delete t._dueIso; delete t._created; }
+  stripInternals(tasks); // generator-internals — never ship
+  // ── shape ── assemble the named tables this domain owns
   return { taskTypes, tasks, taskAssignments, taskLinks };
 }

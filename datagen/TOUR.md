@@ -1,5 +1,10 @@
 # The datagen system, explained like a factory
 
+> **Scope: the SHAPE of the system** — what the parts are, how a change travels through them, and
+> what each protection exists to prevent. For *why the numbers come out believable* — causality,
+> calibration, what β means — read [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md) instead. The two are
+> deliberately separate: this one you can read without caring about statistics.
+
 This is the no-jargon tour. It exists for the person inheriting this system who wants to
 understand what it *is* before reading the rules for changing it (that's
 [CONTRACT.md](CONTRACT.md)), the recipes (that's [AUTHORING.md](AUTHORING.md)), or how it works
@@ -38,7 +43,7 @@ raw SQL (`emit-sql` / `emit-data-migration` — for direct database installs) an
 MetadataSync tree (`emit-mjsync` — for MJ's own sync tool, which loads data through the
 app's stored procedures). One warehouse, two kinds of truck. The **packing instructions** —
 which JSON field goes in which database column, how IDs are derived — live in ONE place:
-`engine/seed-mapping.mjs`.
+`projects/<p>/seed-mapping.mjs`.
 
 **5. The inspectors** — `cli/validate.mjs`, 219 gates. Every build is checked before it's
 allowed to ship: do all the references point at things that exist, are the percentages
@@ -92,7 +97,7 @@ the build fails. Checkers that have never seen a defect are decoration.
 
 ### Tier 1 — turn a knob (anyone, five minutes)
 
-Say webinars should be better attended. Find the number in `ruleset/modules/events.json`,
+Say webinars should be better attended. Find the number in `ruleset/modules/events.mjs`,
 change it, run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Three outcomes:
 
 - **green** — done; the diff of `out/` shows exactly what moved;

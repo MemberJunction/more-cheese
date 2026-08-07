@@ -24,7 +24,7 @@ ruleset becomes self-describing. You do not have to hold this document in your h
 | `Ctrl`/`Cmd`+`Space` on a blank line at the top of a module | the list of blocks — `membership`, `events`, `committees`, … each with a one-line description |
 | hover any key | what it means, in prose, plus the trap if it has one |
 | type `attendShare: 45` | an immediate red squiggle: *45 is above the maximum 1* |
-| write an `arrows` entry | it insists on exactly one effect form **and** a stated reason |
+| write an `effects` entry | it insists on exactly one effect form **and** a stated reason |
 
 That comes from [`engine/ruleset.schema.json`](engine/ruleset.schema.json), wired up in
 [`.vscode/settings.json`](../.vscode/settings.json). The same schema is **executed** by
@@ -126,7 +126,7 @@ This is the tier that today needs care. The checklist, in order:
      `uuidFor(prefix, key)` — register the prefix in DATA-CONTRACT.md's table
 3. **Wire into `index.mjs`** — call in pipeline order (§5 of ruleset-spec: a domain must
    be built after everything it reads), add tables to the pack map.
-4. **The mapping — ONE entry in `engine/seed-mapping.mjs`** (consolidated 2026-07-31; the
+4. **The mapping — ONE entry in `projects/<p>/seed-mapping.mjs`** (consolidated 2026-07-31; the
    same tables were previously mapped again inside emit-mjsync, and the copies drifted —
    one wrong word there once failed 3,191 records at push). Each entry carries:
    - `json`, `table` and a `columns(r)` projection — the formatters are dual-mode, so the
@@ -140,7 +140,7 @@ This is the tier that today needs care. The checklist, in order:
      (SQL-only columns), `syncOverride` (e.g. Sonar's deferred circular FK)
    Then add the new `dir`s to `DIRECTORY_ORDER` in `cli/emit-mjsync.mjs` in FK-safe push
    order — the emitter fails loudly if the list and the mapping disagree.
-   `cli/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
+   `projects/morecheese/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
    carries column types the mapping doesn't, and the DDL-drift gate polices it.
 5. **Gates** — minimum set for a new domain, each a one-line helper call from
    `engine/gates.mjs`: `fkResolves` both directions, `shareBand` for anything drawn from a

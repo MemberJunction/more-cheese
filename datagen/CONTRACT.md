@@ -140,8 +140,17 @@ are slightly lower, and the average lands where you said.
 is just a number somebody typed. Writing this rule down found three of them already in here.
 
 *(You will see some effects written with `beta:` instead of `liftPts:`. That's the same idea in
-the maths' own units — see the word list at the bottom. Prefer `liftPts`; it's the recommended
-form, not a beginner's version.)*
+the maths' own units — see the word list at the bottom.)*
+
+**One catch, and it bites hard.** `liftPts` is only converted for the block the calibration
+machinery is pointed at — today that is `membership` and nothing else. Written anywhere else it is
+never converted, and then every draw that uses it silently produces **nothing**: no rows, no
+error, all checks green. That is not hypothetical; it is what happened the first time someone added
+a domain by following this page.
+
+The build now stops with a message naming the effect. But the rule is: **outside `membership`,
+write `beta:` directly.** Adding a whole new domain? Read
+[ADDING-A-DOMAIN.md](ADDING-A-DOMAIN.md) — it exists because of exactly this.
 
 ---
 

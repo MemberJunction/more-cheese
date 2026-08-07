@@ -10,18 +10,39 @@ import { annualParticipation, childOutcome } from '../../engine/patterns.mjs';
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 import { CHEESE_WORDS } from './banks.mjs';
+import { coverageOf, thetaAt, yearsOf } from '../../engine/authoring.mjs';
+import { renderRow } from '../../engine/row-template.mjs';
 
 // topics + tracks are DECLARED (ruleset/modules/learning.json) — they used to be a flat
 // hardcoded 8, which is why 111 courses produced only 81 distinct names
 
-export function buildLearning(cfg, people, periods) {
+// ── row templates ── the enrollment row. The course PICK stays in the closure, deliberately:
+// the handwritten order is pick → coverage guard → date draw, so a filtered-out course consumes
+// the pick and NOT the date. A template rendering the whole row would draw the date for rows the
+// guard then discards, shifting every later draw on the stream — byte identity is why the draw
+// that feeds a guard cannot move into the template.
+export const ENROLLMENT_ROW = { row: {
+  EnrollKey: { fmt: 'ENR-{member.MemberNumber}-{course.CourseKey}-{k}' },
+  MemberNumber: { from: 'member.MemberNumber' },
+  CourseKey: { from: 'course.CourseKey' },
+  EnrolledOn: { date: { anchor: 'course.StartDate', offset: { dist: 'uniformDays', min: 3, max: 21, sign: -1 } } },
+  Status: null,
+  CompletedOn: null,
+  _theta: { from: 'theta' },
+  _endBase: { from: 'course.StartDate' },
+  _weeks: { from: 'course.DurationWeeks' },
+  IsSharedDemo: true,
+} };
+
+export function buildLearning(cfg, { people, periods }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release, releaseYear } = cfg;
   const L = R.learning;
 
   // domain data shape: the course catalog (a stable set per year)
   const courses = [];
   const years = [];
-  for (let y = R.history.startYear; y <= releaseYear; y++) {
+  for (const y of yearsOf(cfg)) {
     years.push(y);
     const rC = rng(seed, `courses:${y}`);
     for (let i = 0; i < L.params.coursesPerYear; i++) {
@@ -44,17 +65,16 @@ export function buildLearning(cfg, people, periods) {
   const coursesByYear = new Map();
   for (const c of courses) { (coursesByYear.get(c.Year) ?? coursesByYear.set(c.Year, []).get(c.Year)).push(c); }
 
-  const memberPeriods = new Map();
-  for (const per of periods) { (memberPeriods.get(per.MemberNumber) ?? memberPeriods.set(per.MemberNumber, []).get(per.MemberNumber)).push(per); }
-  const coveredOn = (m, dateIso) => (memberPeriods.get(m) ?? []).some((per) => per.StartDate <= dateIso && dateIso <= per.EndDate);
+  const coveredOn = coverageOf(periods); // indexed; committees already used this helper
 
   // pattern 1: who enrolls each year — core owns the calibration; we own the shapes
+  // ── decisions ── one pattern call per decision, in causal order
   const enrollments = annualParticipation({
     seed,
     // lockdown SPIKED online learning — post-calibration regime shift (tide, not boats)
     baselineShift: (y) => (R.regimes.covid.years.includes(y) ? R.regimes.covid.learningLogitBoost : 0), years,
     poolOf: (y) => coursesByYear.get(y)?.length ? people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 5, 15))))) : null,
-    scoreOf: (p, y) => L.effects['enroll.engagement'].beta * (p._thetaPath?.[y] ?? p._theta),
+    scoreOf: (p, y) => L.effects['enroll.engagement'].beta * thetaAt(p, y),
     target: L.params.enrollment.target,
     streamKey: (p, y) => `learn:${p.MemberNumber}:${y}`,
     spawn: (r, p, y) => {
@@ -64,12 +84,7 @@ export function buildLearning(cfg, people, periods) {
       for (let k = 0; k < n; k++) {
         const course = r.pick(pool);
         if (!coveredOn(p.MemberNumber, course.StartDate)) continue;
-        out.push({
-          EnrollKey: `ENR-${p.MemberNumber}-${course.CourseKey}-${k}`, MemberNumber: p.MemberNumber, CourseKey: course.CourseKey,
-          EnrolledOn: iso(addDays(parseDate(course.StartDate), -r.int(3, 21))),
-          Status: null, CompletedOn: null, _theta: p._thetaPath?.[y] ?? p._theta,
-          _endBase: course.StartDate, _weeks: course.DurationWeeks, IsSharedDemo: true,
-        });
+        out.push(renderRow(r, ENROLLMENT_ROW, { member: p, course, k, theta: thetaAt(p, y) }));
       }
       return out;
     },
@@ -98,5 +113,6 @@ export function buildLearning(cfg, people, periods) {
     },
   });
 
+  // ── shape ── assemble the named tables this domain owns
   return { courses, enrollments };
 }

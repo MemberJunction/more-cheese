@@ -10,6 +10,7 @@
 // byte-for-byte. That equality is the migration gate for every module that moves here.
 
 import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
+import { drawOffsetDays } from './row-template.mjs';
 
 /**
  * annualParticipation — per year: an eligible pool faces a calibrated yes/no; participants
@@ -19,7 +20,8 @@ import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
  *   seed, years: [..],
  *   poolOf(year)        → eligible members for that year (empty/short pools are skipped)
  *   scoreOf(member, y)  → the member's arrow score
- *   target              → participation rate the cohort calibrates to
+ *   target              → participation rate PER YEAR (share of THAT year's pool, never a
+ *                         lifetime share — see types.d.ts; misreading this is easy)
  *   streamKey(m, y)     → dice stream for this member-year decision
  *   spawn(r, member, y) → called ONLY for participants; does its own draws in declared order
  *   minPool?            → skip years with fewer eligible (default 5)
@@ -76,7 +78,7 @@ export function staticAssignment(rules, ctx) {
  *   cohortOf(y)             → items due to decide this cycle (may be empty)
  *   prepare(cohort, y)      → per-cohort context (e.g. tenure standardization stats)
  *   scoreOf(item, y, ctx)   → arrow score
- *   target                  → the rate the cohort calibrates to
+ *   target                  → the rate PER CYCLE (share of the cohort deciding that cycle)
  *   baselineShift(y)        → applied AFTER calibration (texture wobble + regime shifts)
  *   streamKey(item, y)      → dice stream for this decision
  *   pinnedDecision(item, y) → a boolean makes the outcome a FACT (hero conditioning: a
@@ -141,20 +143,9 @@ export function derivedTransaction(opts) {
   }
 }
 
-function drawOffsetDays(r, spec) {
-  switch (spec.dist) {
-    case 'const':
-      return spec.days ?? 0;
-    case 'uniformDays':
-      return (spec.sign ?? 1) * r.int(spec.min, spec.max);
-    case 'lognormalDays': {
-      const raw = Math.round(r.lognormal(Math.log(spec.medianDays), spec.sigma));
-      return Math.min(spec.capDays ?? Infinity, Math.max(spec.minDays ?? 1, raw));
-    }
-    default:
-      throw new Error(`derivedTransaction: unknown offset dist '${spec.dist}'`);
-  }
-}
+// drawOffsetDays moved to row-template.mjs: the timing vocabulary and the template vocabulary
+// are the SAME interpreter on purpose — two copies would drift, and a Math.round moving between
+// them would silently shift every payment date. The move was byte-gated like any refactor.
 
 /**
  * childOutcome — per existing row: a calibrated outcome. (Instances: course completion +
@@ -164,7 +155,7 @@ function drawOffsetDays(r, spec) {
  * opts: {
  *   seed, items,
  *   scoreOf(item)       → arrow score
- *   target              → outcome rate over the pool
+ *   target              → outcome rate over the ITEMS PASSED IN (selection effect included)
  *   streamKey(item)     → dice stream per item
  *   decide(item, p, r)  → applies the outcome; receives the calibrated probability and the
  *                         item's dice (branching/extra draws are the domain's, in its order)

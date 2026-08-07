@@ -1,18 +1,26 @@
-# datagen — walking-skeleton generator (prototype)
+# datagen — the demo-data engine, and the projects built on it
 
-**What this is:** the prototype implementation of
-[ruleset-spec.md](../plans/association-db/ruleset-spec.md), covering the vertical slice (member → membership periods → event registrations → orders → payments). It exists to prove the architecture —
-calibrated causal generation, deterministic substreams, texture with variance floors,
-per-app pack emission, and the validation harness — **before** the reconciliation and
-causal-map sessions, so their outputs land in a running machine instead of a document.
+**What this is:** a deterministic generator for believable demo data. It implements
+[ruleset-spec.md](../plans/association-db/ruleset-spec.md) — calibrated causal generation,
+deterministic substreams, texture with variance floors, per-app pack emission, and a validation
+harness where every declared rule earns its own check.
 
-**What this is NOT:** production code. Zero dependencies, plain Node (≥ 20), deliberately
+It is no longer a walking skeleton or a prototype of one. `engine/` generates data for **any**
+project — a claim that is checked rather than asserted (`cli/check-engine-boundary.mjs`, plus a
+second project the suite builds on every run). What that cost to establish, and where it does not
+hold, is in [`projects/fixture/FINDINGS.md`](projects/fixture/FINDINGS.md).
+
+> **New to this, or picking it up from someone else? Start with
+> [`HANDOFF.md`](HANDOFF.md)** — the state of the work, what is half-finished, and the six things
+> that will bite you. It is the one document written for a reader who cannot ask questions.
+
+**What this is NOT:** production code. Near-zero dependencies, plain Node (≥ 20), deliberately
 outside `packages/*` (no workspace/publishing ceremony while the design moves). The
 `morecheese_*` shapes are FROZEN into the app's baseline migration (2026-07-14); the
 bizapps dependencies are declared in `mj-app.json`.
 
-**Structure (framework rungs 2–3 — see [FRAMEWORK.md](FRAMEWORK.md)):** three roles, three
-directories.
+**Structure** — three roles, three directories. What a project owes the engine and what it gets
+back is the contract in [`engine/README.md`](engine/README.md).
 
 ```
 datagen/
@@ -34,6 +42,28 @@ The engine is the reusable part; a project plugs into it by exporting two things
 staticAssignment, derivedTransaction) — each migration proven byte-identical to the
 hand-written version it replaced. Only genuinely non-pattern code stays hand-written in the
 project (NegBin volume, event fixtures, hero pinning).
+
+## Which document answers which question
+
+| I want to… | read |
+|---|---|
+| pick this up from someone else | [`HANDOFF.md`](HANDOFF.md) — state, half-finished work, the six traps |
+| understand the system's shape, no statistics | [`TOUR.md`](TOUR.md) |
+| understand why the data is *believable* | [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md) |
+| change a number or a list | [`CONTRACT.md`](CONTRACT.md) |
+| add a whole new domain | [`ADDING-A-DOMAIN.md`](ADDING-A-DOMAIN.md) |
+| start a new **project** on the engine | [`engine/README.md`](engine/README.md) |
+| know where the framework claim holds — and where it broke | [`projects/fixture/FINDINGS.md`](projects/fixture/FINDINGS.md) |
+| know how the data reaches a database | [`DELIVERY.md`](DELIVERY.md), then [`SCHEMA-CONTRACT.md`](SCHEMA-CONTRACT.md) |
+| see per-app coverage | [`BIZAPPS-COVERAGE.md`](BIZAPPS-COVERAGE.md) |
+| stand up a throwaway demo DB | [`PLAYGROUND.md`](PLAYGROUND.md), [`INTEGRATION-RUNBOOK.md`](INTEGRATION-RUNBOOK.md) |
+| know why a key is spelled the way it is | [`TYPES-PROPOSAL.md`](TYPES-PROPOSAL.md) — a decision record |
+| read the recipe as English sentences | [`projects/morecheese/ruleset/RULESET.md`](projects/morecheese/ruleset/RULESET.md) — generated |
+| see the build order as a graph | [`PIPELINE.md`](PIPELINE.md) — generated |
+| trace the history of the framework claim | [`FRAMEWORK.md`](FRAMEWORK.md) — kept as record |
+
+`AUTHORING.md` and `DATA-CONTRACT.md` predate `CONTRACT.md` and `DELIVERY.md` and overlap them;
+where they disagree, the newer document wins.
 
 ## New here? The 30-minute path
 
@@ -72,7 +102,7 @@ individually too:
 ```sh
 node datagen/cli/generate.mjs --n 500 --seed 42 --release 2026-07-31
 node datagen/cli/validate.mjs      # exit 0 = all gates pass
-node datagen/cli/demo.mjs          # → out/dashboard.html (self-contained, works offline)
+node datagen/projects/morecheese/demo.mjs          # → out/dashboard.html (self-contained, works offline)
 ```
 
 Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
@@ -82,7 +112,7 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | File | What it does |
 |---|---|
 | `projects/<p>/ruleset/modules/` | **The recipe, modular** — one module per app domain (`core` = shared substrate: latents, cohorts, texture; then one module per domain through `programs`, `defects` — labeled record corruption with a DataQualityLabel answer sheet, `motifs` — stamped story templates, and `heroes`), composed in the order `index.json` declares. Mirrors the D9 pack pyramid: adding a new app (e.g. forms) = adding one module. Rules can be authored in **human units** (`"liftPts": 12`, `"groupTarget": 0.65`), qualitative bands, or raw β; factors can DECLARE their feature (`"feature": {"from": "self", ...}`) and the validator auto-derives their recovery gates; tier rules (`tiers.assign`) and payment timing (`paymentProfiles`) are authored here too, not coded. |
-| `projects/<p>/ruleset/RULESET.md` | **The recipe in plain English** — auto-generated by `explain.mjs`; every effect in percentage points with its authored form and evidence. Regenerate after module changes; never hand-edit. |
+| `projects/<p>/ruleset/RULESET.md` | **The recipe in plain English** — auto-generated by `projects/morecheese/explain.mjs`; every effect in percentage points with its authored form and evidence. Regenerate after module changes; never hand-edit. |
 | [`DELIVERY.md`](DELIVERY.md) | **How the data ships** — the metadata-first ruling and its one pinned exception (`platform`), which artefacts are generated vs CAPTURED, which check answers which question, and where we knowingly diverge from the template docs. Read this before asking "is the install seed current?". |
 | `BIZAPPS-COVERAGE.md` | **What ships into which bizapps schema** — the per-app coverage matrix, shape sources (their baseline migrations), verification evidence (install, FK trust, CHECK conformance, entity names, sync round-trip), and the known limits. |
 | `HOW-IT-WORKS.md` | **The concepts, explained simply** — causality by construction, the calibration guessing-game, what β and the baseline mean, heroes-as-conditioning, and the recovery-not-discovery honesty about trainability. |
@@ -100,7 +130,7 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `cli/validate.mjs` | **The inspector** — seven named gate groups (packs, temporal, benchmarks, arrows, trainability, heroes, status mix). |
 | `cli/build.mjs` | **The pipeline** — generate → validate on staging → promote to `out/` only on green; red runs park in `out-failed/`. |
 | `cli/emit-sql.mjs` | **SQL seed emitter** — packs → per-pack `.sql` `INSERT`s with **deterministic real UUIDs** (uuidv5 of the business key; FKs derived independently by parent and child). Pure inserts; assumes the tables exist. Table names are ASSUMED shapes until the reconciliation. |
-| `cli/emit-schema.mjs` | **Provisional schema emitter** — `CREATE SCHEMA` + `CREATE TABLE` DDL (→ `out/sql/00_schema.sql`, runs before the seed packs) so you can stand up a **standalone throwaway demo DB** without waiting on the schema owner's authoritative migrations. Assumed shapes, clearly labeled; no `__mj_*` columns. A `test.mjs` guard asserts the DDL covers every column `emit-sql` inserts, so the two can't drift. |
+| `projects/morecheese/emit-schema.mjs` | **Provisional schema emitter** — `CREATE SCHEMA` + `CREATE TABLE` DDL (→ `out/sql/00_schema.sql`, runs before the seed packs) so you can stand up a **standalone throwaway demo DB** without waiting on the schema owner's authoritative migrations. Assumed shapes, clearly labeled; no `__mj_*` columns. A `test.mjs` guard asserts the DDL covers every column `emit-sql` inserts, so the two can't drift. |
 | `cli/emit-mjsync.mjs` | **mj-sync emitter** — packs → an MJ metadata tree (per `docs/template-docs/metadata.md`): folder per entity, records with **pinned primaryKeys**, directoryOrder = the pack pyramid. Same UUIDs as the SQL emitter, so either load path fills identical rows. Defaults to `out/metadata/`; **`--metadata-out <dir>`** writes into the repo's live `metadata/` tree (e.g. a dedicated `metadata/demo-data/`) for a real `mj sync` — only its own entity folders are cleared on regen, so a sibling like `schema-info/` is safe. Entity names ASSUMED; ⚠ `mj sync push` full-reconciles — dev DBs only. |
 | `engine/ids.mjs` | Deterministic UUIDv5 from business keys — shared by both emitters. |
 | `engine/rng.mjs` | The dice: content-addressed substreams, distributions, the intercept solver. |

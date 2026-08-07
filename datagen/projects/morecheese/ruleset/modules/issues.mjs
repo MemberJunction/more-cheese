@@ -132,7 +132,8 @@ export default {
       // (Was `share` + `tolerance` as separate sibling keys.)
       assignment: {
         target: 0.75,
-        tolerance: 0.08
+        tolerance: 0.08,
+        se: 1.5, // one share over every ticket — the cushion the bespoke gate used before it was derived
       }
     },
     mixes: {

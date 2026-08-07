@@ -10,12 +10,14 @@
 // strictly increasing and never pass the release date.
 
 import { rng } from '../../engine/rng.mjs';
+import { indexBy } from '../../engine/authoring.mjs';
 
-export function buildMessaging(cfg, people, issues) {
+export function buildMessaging(cfg, { people, issues }) {
+  // ── inputs ── the ruleset sections this domain reads, and the upstream rows
   const { R, seed, release } = cfg;
   const M = R.messaging;
   const releaseMs = release.getTime();
-  const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
+  const personByKey = indexBy(people, 'MemberNumber');
   const heroIssueKeys = new Set(issues.issues.filter((x) => x.IssueKey.startsWith('hero:')).map((x) => x.IssueKey));
 
   const threads = [];
@@ -24,6 +26,7 @@ export function buildMessaging(cfg, people, issues) {
   const hex = (r, n) => Array.from({ length: n }, () => '0123456789abcdef'[r.int(0, 15)]).join('');
   const fullName = (m) => { const p = personByKey.get(m); return p ? `${p.FirstName} ${p.LastName}` : null; };
 
+  // ── decisions ── one thread per issue that earned one, then its messages
   for (const issue of issues.issues) {
     const r = rng(seed, `msgthread:${issue.IssueKey}`);
     if (!heroIssueKeys.has(issue.IssueKey) && !r.bernoulli(M.params.threadSharePerIssue.target)) continue;
@@ -103,5 +106,6 @@ export function buildMessaging(cfg, people, issues) {
     });
   }
 
+  // ── shape ── assemble the named tables this domain owns
   return { threads, messages, sessions };
 }

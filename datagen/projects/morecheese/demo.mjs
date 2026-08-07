@@ -10,16 +10,21 @@
 //                  renewal by tenure/auto-renew/employer-event/tier, no-show splits)
 // All data embedded; opens from a file, offline. Latents come from validator-private
 // files that are never part of an install.
+//
+// MOVED OUT OF cli/ (2026-08-05). This inspector is written against MoreCheese's packs — it names
+// this project's tables, personas and gates — so it is project-specific REPORTING, the same category
+// as SUMMARY_OF. It sat in engine space only because that is where it was first written, and the
+// engine-boundary checker had to allowlist it. cli/build.mjs --demo resolves it project-locally.
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadRuleset } from '../engine/config.mjs';
+import { loadRuleset } from '../../engine/config.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean));
-const ROOT = join(HERE, '..');
+const ROOT = join(HERE, '..', '..'); // projects/<name>/ → datagen/
 const OUT = join(ROOT, args.out ?? 'out');
 const load = (pack, table) => JSON.parse(readFileSync(join(OUT, 'packs', pack, `${table}.json`), 'utf8'));
 
@@ -29,7 +34,7 @@ const R = await loadRuleset(run.scenario, run.project); // the inspector shows t
 // run the real validator and embed its verdicts (single source of truth)
 let gateLines;
 try {
-  gateLines = execFileSync(process.execPath, [join(HERE, 'validate.mjs'), '--out', args.out ?? 'out'], { encoding: 'utf8' });
+  gateLines = execFileSync(process.execPath, [join(ROOT, 'cli', 'validate.mjs'), '--out', args.out ?? 'out'], { encoding: 'utf8' });
 } catch (e) {
   gateLines = e.stdout ?? 'validator failed to run';
 }

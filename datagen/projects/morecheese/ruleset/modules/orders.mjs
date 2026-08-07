@@ -198,11 +198,13 @@ export default {
       // check rather than buried in the validator.
       gateNetTermsLate: {
         target: 0.45,
-        tolerance: 0.1
+        tolerance: 0.1,
+        se: 1.5, // as the bespoke gate had it: tolerance + 1.5×SE over the paid net-terms orders
       },
       gateManualLate: {
         target: 0.25,
-        tolerance: 0.1
+        tolerance: 0.1,
+        se: 1.5,
       },
       gateAutopayOnDueMin: 0.9
     }
