@@ -28,21 +28,39 @@ to add something, [TOUR.md](TOUR.md) if you want the plain-English tour first.
 
 ## ⚠ The state of the work, and the first thing to do
 
-**37 commits sit unlanded in two branches, and the second is stacked on the first.**
+**Both branches landed on 2026-08-07** — PR #14 then PR #15, in the forced order. The framework
+work, the four coupling points, the second project and the derived checks are all on `next`. What
+this section used to say — that 37 commits sat unlanded and that merging them mattered more than
+improving them — is done.
 
-| branch | commits | status |
+**What is NOT landed is this branch.** A review pass after those PRs were opened found four
+defects; the fixes were committed but not pushed before the merge went through, so the merged PR
+description promises work that is not in `next`:
+
+| commit | what it fixes | changes data? |
 |---|---|---|
-| `morecheese-datagen-simplify` (PR #14) | 13 | open, CI green, **never reviewed** |
-| `morecheese-datagen-framework` | 24 | pushed, **no PR**, and it sits on top of PR #14 |
+| two checks wider than what they verified | `check-generators` covered 8 of 22 build functions while printing a universal ✅; `check-engine-boundary` let `'<project>_members'` through; `fromOptional` silently nulled a misspelled path | no |
+| the docs said nine packs | twelve ship; also gates, heroes, fixture findings, and 25 missing UUID prefixes | no |
+| a support thread cannot happen in one second | the messaging timeline saturated at the release ceiling — six messages at one instant | **YES** — three messaging tables |
+| the inspector was showing less than half the data | `demo.mjs` showed 3 of 12 packs | no (dashboard only) |
 
-**Merge order is forced: PR #14 first, then the framework branch.** They cannot go in the other
-order, and the second will not rebase cleanly onto `next` without the first.
+**Land this branch first.** Until it does, `next` still has a boundary checker that misses the leak
+class it was written for, a generator contract covering a third of its population, and an inspector
+blind to seven packs — while the PR text on #15 says otherwise. Green: `node test.mjs` runs
+**38 steps** and every one passes.
 
-**This is the single biggest risk in the handover.** The work is done, tested and green — and none
-of it is landed, so none of it protects anyone yet. Reviewing and merging these two is worth more
-than any further improvement to them. If you read one thing and act on one thing, make it this.
+**Then the real first thing: CI does not run any of this.** Nothing in `.github/workflows/`
+references `datagen` or `test.mjs`. The only check on a datagen PR is `changes_and_migrations`. So
+38 suite steps, 335 gates, the engine boundary, the generator contract and the fixture build all
+run *only when somebody remembers to type the command* — which is exactly how the four defects
+above survived review. Every guarantee this directory advertises is currently enforced by habit.
+One workflow file; the suite takes about fifteen minutes. **If you do one thing after landing this
+branch, make it that.**
 
-Both branches are green: `node test.mjs` runs 37 steps and every one passes.
+One consequence to schedule, not to rush: the messaging fix changes generated data, and the shipped
+`MetadataSync_p01` migration is applied history carrying four boundary-collapsed messages. Rule 3
+forbids editing it, so the fix reaches a database only on the next seed re-capture — which must run
+*after* this branch lands, or it re-ships the defect.
 
 ---
 
@@ -226,7 +244,7 @@ you did not break anything. It does not prove you did anything.**
 Not reading. Doing. If any step surprises you, the documentation is wrong and fixing it is your
 first contribution.
 
-1. `node test.mjs` — 37 steps, all green. If not, stop and find out why before anything else.
+1. `node test.mjs` — 38 steps, all green. If not, stop and find out why before anything else.
 2. Open `projects/morecheese/ruleset/modules/committees.mjs`, change `meetingsPerYear` from 4 to 6,
    and run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Read whatever it says.
    Change it back.
@@ -246,7 +264,9 @@ in the repo.
 
 ## Open questions — most now ANSWERED (2026-08-05)
 
-- **Merge and land the two branches.** STILL OPEN, still first. PR #14 (unreviewed) then PR #15.
+- ~~Merge and land the two branches.~~ **DONE 2026-08-07** — PR #14 then PR #15, both merged to
+  `next`. Replaced at the top of this document by two successors: land the review-fix branch, then
+  put the suite in CI so nothing else lands unverified again.
 - ~~Should the bespoke gates move behind declarations?~~ **ANSWERED.** Every migratable target
   moved: 15 derived, 3 bespoke, and the three that remain each carry a written paragraph on why a
   band cannot express them (`measurements.mjs`). Do not migrate those three to reach zero.
