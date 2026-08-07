@@ -212,7 +212,7 @@ Open, in rough effort-to-payoff order (revised 2026-08-06):
 | Item | State |
 |---|---|
 | **CI does not run the datagen suite** | **The largest gap, and it undercuts this document.** No workflow references `datagen` or `test.mjs` — the only check on a PR is `changes_and_migrations`. So 37 suite steps, 335 gates, the engine-boundary checker, the generator contract and the fixture build all run *only when somebody remembers to type the command*. Every claim on this page is enforced by habit. One workflow file; the suite takes ~15 minutes. |
-| **Who looks at the app UIs?** | Still nobody's, and still the honest hole. The data has never been seen rendered in the apps it targets. Both of the worst defects to date passed every gate and a clean push, and were caught by a person reading a grid. |
+| **Quarterly re-roll** | The world is anchored to `--release` and there is no wall clock, so it ages: left alone, "recent" activity drifts into the past and the demo stops demonstrating recency. Each quarter, regenerate against a new release date, run the full ladder, and re-capture the seed as a NEW additive migration. See HANDOFF's *Keeping it alive*. |
 | **Knowledge Hub** | Researched, decision pending — see `plans/association-db/KNOWLEDGE-HUB-ONE-PAGER-2026-07-16.md`. Option A (fatten 3–4 existing prose fields; KH demos with config only) vs Option B (generated document corpus). Recommend A. Needs a decision, not code. |
 | **Vocabulary migration — TYPES-PROPOSAL stage 3** | Stage 2 (canonicalise) SHIPPED 2026-08-05; stage 3 (enforce the canonical spellings from the schema) is open. The "wait for a second project" precondition is met. This is the remaining work on the readability goal — `target` / `presentTarget` / `shareOfEligible` are still three spellings of one idea. |
 | **Ops** | `setup-playground.sh` (one-command playground rebuild) does not exist. |
@@ -222,6 +222,10 @@ Open, in rough effort-to-payoff order (revised 2026-08-06):
 
 Closed since the July 31 revision of this table:
 
+- ~~**Who looks at the app UIs?**~~ — **2026-08-07**: the data has been loaded and reviewed in the
+  apps it targets. The longest-standing hole in the workstream, and the first time rung 4 of the
+  verification ladder has been walked. The question is retired; the habit is not — it catches a
+  class of defect no gate can, and it has to be repeated per change rather than per project.
 - ~~**Second project**~~ — `projects/fixture/` exists (2026-08-04) and the suite builds it every run. It
   also settled the vocabulary decisions that were waiting on it.
 - ~~**Dashboard catch-up**~~ — the inspector had drifted further than this table recorded: it carried a
