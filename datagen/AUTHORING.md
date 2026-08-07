@@ -1,15 +1,14 @@
 # Authoring MoreCheese data — the cookbook
 
-> **Start with [`CONTRACT.md`](CONTRACT.md)** — the four sections every block uses, where each
-> kind of thing goes, and the one rule the file format imposes. It is the short document; this
-> one is the recipes and the scars.
+> **This document is the scars.** The other three authoring docs are the paths:
+> [`CONTRACT.md`](CONTRACT.md) to change a number or a list,
+> [`ADDING-A-DOMAIN.md`](ADDING-A-DOMAIN.md) to add a whole domain,
+> [`TOUR.md`](TOUR.md) if you cannot picture the system yet.
 >
-> Struggling to picture the system at all? Read [`TOUR.md`](TOUR.md) first — the same
-> material as a plain-English factory tour, with the protections and a slow worked example.
-
-The other docs explain what this system **is** (FRAMEWORK, HOW-IT-WORKS) and how it
-**ships** (DELIVERY, INTEGRATION-RUNBOOK). This one explains how to **change the data** —
-the thing you actually came here to do.
+> What lives *here* and nowhere else: the editor setup that makes the ruleset self-describing,
+> the verification ladder and why steps 3 and 4 are not optional, the gotchas each recipe
+> actually hit, the delivery steps a new domain owes once it generates, and the style rules that
+> decide whether the data reads as real or as generated.
 
 Every recipe below was executed for real at least once; the gotchas are things that
 actually bit, not things that might.
@@ -107,26 +106,26 @@ severity), grep the validator for every gate that partitions by that field, and 
 **presence floor** (`count >= 1`), not just a share band. Share-with-tolerance gates pass
 happily on zero — `Critical: 0.0% vs 1.7% ±12.2 ✅` was green while the bucket was empty.
 
-## Recipe 3 — add a new domain (the full loop)
+## Recipe 3 — ship a new domain (the delivery half)
+
+> **The generation half is [`ADDING-A-DOMAIN.md`](ADDING-A-DOMAIN.md)** — is it a domain, which of
+> the five patterns each decision is, the ruleset block, the generator contract, declaring the
+> checks. Walk that document first; it was executed end to end before it was written down.
+>
+> What follows is what it does not cover: **getting the rows out of the packs and into a
+> database.** A domain that generates perfectly and is mapped nowhere is invisible — the build
+> passes, every gate passes, and the data simply is not there.
 
 *Examples that exist to copy: `contacts.mjs` (projection domain), `prospects.mjs`
 (population domain), `funnel.mjs` (history-backfill domain), `programs.mjs` (multi-table).*
 
-This is the tier that today needs care. The checklist, in order:
+Picking up from ADDING-A-DOMAIN.md's step 7, with your generator written and its gates declared:
 
-1. **Ruleset block** — a new key in the right module (or a new module registered in
-   `index.json`), constants marked `ESTIMATE`, one `$note` per constant.
-2. **Generator module** — copy the closest existing one. House idioms that are load-bearing:
-   - one rng stream per decision, keyed by business key: `rng(seed, 'thing:' + key)`
-   - `pick`/`pickWeighted`/`bernoulli`/`int` cost **one draw each regardless of list size**;
-     never make draw COUNT depend on data, or every seed downstream shifts
-   - engagement-driven participation goes through `childOutcome` (it calibrates the share)
-   - internal fields start with `_` — they're stripped before emit
-   - business keys are strings with a stable format; they become UUIDs via
-     `uuidFor(prefix, key)` — register the prefix in DATA-CONTRACT.md's table
-3. **Wire into `index.mjs`** — call in pipeline order (§5 of ruleset-spec: a domain must
-   be built after everything it reads), add tables to the pack map.
-4. **The mapping — ONE entry in `projects/<p>/seed-mapping.mjs`** (consolidated 2026-07-31; the
+1. **Business keys become UUIDs** via `uuidFor(prefix, key)`. Pick a prefix nothing else uses and
+   **add it to [`DATA-CONTRACT.md`](DATA-CONTRACT.md)'s identity table** with its key format — that
+   table is the promise that an integrator can compute any row's ID without reading this code, and
+   a prefix missing from it silently breaks that promise for your whole domain.
+2. **The mapping — ONE entry in `projects/<p>/seed-mapping.mjs`** (consolidated 2026-07-31; the
    same tables were previously mapped again inside emit-mjsync, and the copies drifted —
    one wrong word there once failed 3,191 records at push). Each entry carries:
    - `json`, `table` and a `columns(r)` projection — the formatters are dual-mode, so the
@@ -142,15 +141,9 @@ This is the tier that today needs care. The checklist, in order:
    order — the emitter fails loudly if the list and the mapping disagree.
    `projects/morecheese/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
    carries column types the mapping doesn't, and the DDL-drift gate polices it.
-5. **Gates** — minimum set for a new domain, each a one-line helper call from
-   `engine/gates.mjs`: `fkResolves` both directions, `shareBand` for anything drawn from a
-   weighted list **plus `presenceFloor` for rare categories** (a share band passes happily
-   on zero), and one bespoke gate asserting the domain's reason-to-exist (the funnel's
-   conversion-rate gate is the model: it asserts the *question the domain answers* is
-   answerable).
-6. **Contract** — if you touch a dependency app's table, re-capture:
+3. **Contract** — if you touch a dependency app's table, re-capture:
    `MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <install>`.
-7. **Verify up the whole ladder** (build → test.mjs → push → render). Then re-emit what
+4. **Verify up the whole ladder** (build → test.mjs → push → render). Then re-emit what
    ships: `emit-mjsync --metadata-out ../metadata` and `emit-data-migration.mjs`, and
    note that the big MetadataSync p01/p02 migrations are a *captured push*, not generated
    — they go stale silently (INTEGRATION-RUNBOOK, addendum 2026-07-28, has the loop).
@@ -176,40 +169,25 @@ a too-large share of a smaller world (this failed once, in `test.mjs`, exactly t
 - **Fake URLs are worse than none**: `PhotoURL` stays null on purpose — broken images
   read worse than blanks.
 
-## Known sharp edges (candidates for the next simplification pass)
+## The sharp edge that is still sharp
 
-1. ~~The emitter mapping exists three times.~~ **Fixed 2026-07-31**: one mapping in
-   `seed-mapping.mjs`, rendered to both delivery paths (see Recipe 3 step 4). The refactor
-   was proven by byte-diffing the SQL outputs and semantically diffing all 122k metadata
-   records against pre-consolidation baselines — and it surfaced two latent bugs on the
-   way: a missing `MJ_ENTITY_VAR` entry that had been rendering an EMPTY value slot in the
-   sonar SQL, and a root-file rewrite that silently dropped the hand-added Betty dirs from
-   the push order.
-2. ~~The ruleset has no schema.~~ **Fixed 2026-07-31**: the lint that already ran on every
-   load (`engine/lint.mjs`) now also catches the human typo classes — a share of 1.4, a
-   negative weight in a weighted list, a zero tolerance, a hero pointing at a committee or
-   credential that doesn't exist, and a broken module now names its FILE instead of dying
-   with a bare 'Unexpected token'. Negative-tested in `test.mjs`: five planted defects must
-   each be caught BY NAME, and the clean ruleset must stay quiet.
-3. ~~validate.mjs is 1,600+ lines of bespoke checks.~~ **Fixed 2026-07-31**: the five
-   repeating shapes live in `engine/gates.mjs` (`fkResolves`, `shareBand`, `presenceFloor`,
-   `distinctAtLeast`, `dangling`), negative-tested in the suite. New gates should be a
-   helper call; the six pack-refs FK gates are the converted exemplars (report-identical).
-   Existing prose-style gates were deliberately left — their wording carries the story.
-4. ~~You cannot author without already knowing the format.~~ **Partly fixed 2026-07-31**: the
-   ruleset now has a machine-readable, editor-wired schema and the engine has type
-   declarations (see *Before you start*, above), so the format answers questions itself
-   instead of requiring a reader of `engine/`. Writing the schema immediately paid for
-   itself — it found three causal arrows carrying magnitudes with **no stated reason at all**
-   (certification, advocacy, meeting attendance), which the house convention requires and no
-   check had ever enforced.
+Four were listed here. Three are fixed and their entries have been removed — a document is not a
+changelog, and `git log` keeps that history better than a page of struck-through text does. What
+was fixed, briefly, so the names still mean something: the emitter mapping was consolidated into
+one `seed-mapping.mjs` entry per table, the ruleset gained a machine-readable editor-wired schema
+plus load-time lint, and `validate.mjs`'s five repeating gate shapes moved into `engine/gates.mjs`.
 
-   What is **not** fixed: the vocabulary is still a dialect rather than a standard. The same
-   idea is spelled `target` / `presentTarget` / `shareOfEligible` in different blocks, a Mix
-   may be an object map or a pair-array, `statusMix` is not a Mix at all, and
-   `rng.pickWeighted` accepts only the pair form. The schema *describes* that inconsistency
-   honestly (including the traps) but does not remove it. Removing it means renaming keys
-   across nineteen modules, which is a migration, not a description — proposed, with the open
-   decisions, in [`TYPES-PROPOSAL.md`](TYPES-PROPOSAL.md). **Team ruling (2026-07-31): that
-   migration waits for a second project to exist**, so the vocabulary is generalised from two
-   data points instead of guessed from one.
+**The vocabulary is still a dialect rather than a standard.** The same idea is spelled `target` /
+`presentTarget` / `shareOfEligible` in different blocks, a Mix may be an object map or a pair-array,
+`statusMix` is not a Mix at all, and `rng.pickWeighted` accepts only the pair form.
+[`engine/ruleset.schema.json`](engine/ruleset.schema.json) *describes* that inconsistency honestly,
+traps included, but describing is not removing. Removing it means renaming keys across nineteen
+modules — a migration, not a description — proposed with its open decisions in
+[`TYPES-PROPOSAL.md`](TYPES-PROPOSAL.md).
+
+**Team ruling (2026-07-31): that migration waits for a second project to exist**, so the vocabulary
+is generalised from two data points instead of guessed from one. That precondition is now met —
+`projects/fixture/` exists — and **stage 2 (canonicalise) shipped 2026-08-05**. Stage 3 (enforce
+the canonical spellings from the schema) remains open, which is why the dialect described above is
+still what you will meet in the modules. Current status is tracked in TYPES-PROPOSAL's own status
+block, not here, so the two cannot drift.

@@ -63,16 +63,18 @@ Both branches are green: `node test.mjs` runs 37 steps and every one passes.
   names a project in code. It found a real leak when it was written: `engine/ids.mjs` held a table
   of every project's UUID namespace and told new authors to add theirs to it.
 - **A SECOND PROJECT EXISTS and the suite builds it.** `projects/fixture/` — 50 invented members,
-  one decision, CI-only, never shipped. Standing it up found three engine bugs and two
-  documentation gaps ([projects/fixture/FINDINGS.md](projects/fixture/FINDINGS.md)). It is the only
+  one decision, CI-only, never shipped. Standing it up found **eleven** problems — eight engine
+  bugs and three documentation gaps
+  ([projects/fixture/FINDINGS.md](projects/fixture/FINDINGS.md)). It is the only
   reason the word "framework" is defensible here, and the suite step is what stops the engine
   quietly re-coupling to MoreCheese.
 - **Row shapes can be declared.** `engine/row-template.mjs` renders a row from data; 17 templates
-  across 9 generators. Rows that need conditionals, computed keys or cross-row state stay
+  across 11 generators. Rows that need conditionals, computed keys or cross-row state stay
   handwritten **on purpose** — each refusal is recorded in the code that hit it.
 - **There is a metric, and it runs every suite pass.** `cli/measure-framework.mjs` prints
-  declarations:code. MoreCheese is 1.41 : 1 (from 1.35); the fixture, built with the framework
-  rather than retrofitted into it, is 1.57 : 1.
+  declarations:code. MoreCheese is 1.40 : 1 (from 1.35); the fixture, built with the framework
+  rather than retrofitted into it, is 1.59 : 1. Both numbers move when a project gains or loses
+  project-owned tooling, so read them as a trend, never as a target.
 
 ## What is half-finished, and what to do about it
 
@@ -102,7 +104,7 @@ would have looked correct while measuring a different population than the target
 **The framework metric runs DEGRADED, and its number is approximate.** `cli/measure-framework.mjs`
 wants `acorn` for exact AST spans. The dependency is declared in the root `package.json` but has never
 been installed, so the tool falls back to a line classifier — it says so in its own output every run,
-and every ratio quoted anywhere (1.41 : 1 for MoreCheese, 1.59 : 1 for the fixture) comes from the
+and every ratio quoted anywhere (1.40 : 1 for MoreCheese, 1.59 : 1 for the fixture) comes from the
 fallback. One `npm install` at the REPO ROOT fixes it; do not install inside `datagen/` or any
 subfolder of a linked MJ workspace (rule 5, the single-copy invariant). Expect the numbers to shift
 slightly when it runs properly — the trend is what the tool is for, not the third digit.

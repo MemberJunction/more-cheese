@@ -52,6 +52,8 @@ project (NegBin volume, event fixtures, hero pinning).
 | understand why the data is *believable* | [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md) |
 | change a number or a list | [`CONTRACT.md`](CONTRACT.md) |
 | add a whole new domain | [`ADDING-A-DOMAIN.md`](ADDING-A-DOMAIN.md) |
+| the recipes and the scars behind those two | [`AUTHORING.md`](AUTHORING.md) — the editor setup, the verification ladder, the delivery steps a new domain owes, and the style rules that make data read as real |
+| consume the data from outside — IDs, packs, load order | [`DATA-CONTRACT.md`](DATA-CONTRACT.md) — the integration-facing reference: derive any row's UUID yourself, pack volumes, the load rules that bite |
 | start a new **project** on the engine | [`engine/README.md`](engine/README.md) |
 | know where the framework claim holds — and where it broke | [`projects/fixture/FINDINGS.md`](projects/fixture/FINDINGS.md) |
 | know how the data reaches a database | [`DELIVERY.md`](DELIVERY.md), then [`SCHEMA-CONTRACT.md`](SCHEMA-CONTRACT.md) |
@@ -62,8 +64,10 @@ project (NegBin volume, event fixtures, hero pinning).
 | see the build order as a graph | [`PIPELINE.md`](PIPELINE.md) — generated |
 | trace the history of the framework claim | [`FRAMEWORK.md`](FRAMEWORK.md) — kept as record |
 
-`AUTHORING.md` and `DATA-CONTRACT.md` predate `CONTRACT.md` and `DELIVERY.md` and overlap them;
-where they disagree, the newer document wins.
+Each document above has one job and is current. Where two would say the same thing, one of them
+points at the other instead — `AUTHORING.md`'s "add a domain" recipe is the generation half of
+[`ADDING-A-DOMAIN.md`](ADDING-A-DOMAIN.md) and defers to it, keeping only the delivery steps that
+document does not cover.
 
 ## New here? The 30-minute path
 
@@ -128,6 +132,7 @@ Same `--seed` + `--release` → byte-identical output (`out/` is git-ignored).
 | `projects/<p>/ruleset/scenarios/` | **Parameter overlays on the same causal model** — `--scenario decliningOrg` rebuilds the world at ~78% renewal (real craft-food decline curves); compiler and validator re-target automatically. |
 | `engine/packs.mjs` | Step 8: deal finished rows into per-app packs with manifests; strip the latents. |
 | `cli/validate.mjs` | **The inspector** — seven named gate groups (packs, temporal, benchmarks, arrows, trainability, heroes, status mix). |
+| `cli/check-*.mjs` | **The contract checkers**, one per coupling point — `check-ruleset` (block shape), `check-generators` (signature + return shape), `check-row-templates` (single-tag pure data), `check-streams` (one stream per decision), `check-reads` (no defensive ruleset reads), `check-engine-boundary` (the engine names no project). Each runs standalone and in `test.mjs`, each is negative-tested, and each **states the size of the population it visited** — see [`engine/README.md`](engine/README.md) invariant 7 for why that sentence is load-bearing. |
 | `cli/build.mjs` | **The pipeline** — generate → validate on staging → promote to `out/` only on green; red runs park in `out-failed/`. |
 | `cli/emit-sql.mjs` | **SQL seed emitter** — packs → per-pack `.sql` `INSERT`s with **deterministic real UUIDs** (uuidv5 of the business key; FKs derived independently by parent and child). Pure inserts; assumes the tables exist. Table names are ASSUMED shapes until the reconciliation. |
 | `projects/morecheese/emit-schema.mjs` | **Provisional schema emitter** — `CREATE SCHEMA` + `CREATE TABLE` DDL (→ `out/sql/00_schema.sql`, runs before the seed packs) so you can stand up a **standalone throwaway demo DB** without waiting on the schema owner's authoritative migrations. Assumed shapes, clearly labeled; no `__mj_*` columns. A `test.mjs` guard asserts the DDL covers every column `emit-sql` inserts, so the two can't drift. |
@@ -142,7 +147,8 @@ determinism means "byte-identical or you broke something."
 
 ## What it produces
 
-`out/packs/{common,membership,events,learning,orders,committees,forms,tasks,issues}/` — one folder per app pack (D9: cook once, portion
+`out/packs/{common,membership,events,learning,orders,committees,forms,tasks,issues,messaging,platform,sonar}/`
+— **twelve** folders, one per app pack (D9: cook once, portion
 at the end), each with table JSON files + a `manifest.json` declaring `dependsOn`. The
 validator checks referential closure per pack layer, exactly like the future install-time
 check. Harness-private files sit next to the packs and are never installed:
