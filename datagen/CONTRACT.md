@@ -208,7 +208,7 @@ You don't need these to make changes. You'll see them, so here's what they mean.
 
 | word | plain meaning |
 |---|---|
-| **gate** | a check. "219 gates pass" = 219 checks passed |
+| **gate** | a check. "335 gates pass" = 335 checks passed |
 | **seed** | the number that decides all the random choices. Same seed, same data, every time |
 | **pack** | one output file — all the meetings, all the members |
 | **calibrate** | nudge everyone's odds until the overall rate hits the target you asked for |

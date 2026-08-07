@@ -91,8 +91,28 @@ function evalField(r, fs, s, at) {
     // a declared-nullable column is greppable, and every one of them can be listed. It stays
     // narrow on purpose: absent → null. It cannot supply a non-null DEFAULT, because a defaulted
     // read (`f.aggregation ?? 'Count'`) is domain judgement, and that row stays handwritten.
+    //
+    // ONLY THE LAST SEGMENT MAY BE ABSENT, and the prefix must resolve to an object. Declaring a
+    // column nullable says "this FIELD is sometimes missing" — it does not say "this path might
+    // be nonsense". Without the prefix check, `{ fromOptional: 'itme.lengthMonths' }` returns
+    // null for every row, forever, silently: a whole column of nulls that no gate can distinguish
+    // from a column legitimately empty. That is the defensive-read trap this codebase bans
+    // everywhere else — check-reads.mjs exists to forbid the same shape in the ruleset, and
+    // `from` throws on undefined for precisely this reason. A nullable column should still be
+    // spelled correctly, and a rename that orphans one should be loud.
     case 'fromOptional': {
-      const v = fs.fromOptional.split('.').reduce((o, k) => o?.[k], s);
+      const path = fs.fromOptional.split('.');
+      const leaf = path.pop();
+      let cursor = s;
+      for (const [depth, k] of path.entries()) {
+        cursor = cursor?.[k];
+        if (cursor === null || typeof cursor !== 'object') {
+          throw new Error(`template field '${at}': fromOptional path '${fs.fromOptional}' broke at `
+            + `'${path.slice(0, depth + 1).join('.')}' — only the FINAL segment may be absent. `
+            + 'A nullable column is a declaration about one field, not permission for the path to be wrong.');
+        }
+      }
+      const v = cursor[leaf];
       return v === undefined ? null : v;
     }
     case 'seq': return resolve(s, fs.seq, at);

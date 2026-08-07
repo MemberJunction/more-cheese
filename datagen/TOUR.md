@@ -23,7 +23,7 @@ delivery. Everything below is just naming the stations.
 ```
  spec sheet          machines              warehouse         shipping           inspectors
  ruleset/*.json  →   projects/*.mjs    →   out/packs/    →   emitters       →   validate.mjs
- (numbers, knobs)    (the generators)      (finished JSON)   (2 box formats)    (219 gates)
+ (numbers, knobs)    (the generators)      (finished JSON)   (2 box formats)    (335 gates)
 ```
 
 **1. The spec sheet** — `ruleset/modules/*.json`. Plain JSON files full of numbers and
@@ -45,7 +45,7 @@ app's stored procedures). One warehouse, two kinds of truck. The **packing instr
 which JSON field goes in which database column, how IDs are derived — live in ONE place:
 `projects/<p>/seed-mapping.mjs`.
 
-**5. The inspectors** — `cli/validate.mjs`, 219 gates. Every build is checked before it's
+**5. The inspectors** — `cli/validate.mjs`, 335 gates. Every build is checked before it's
 allowed to ship: do all the references point at things that exist, are the percentages
 where the spec says, does every category actually appear, do the causal rules show up in
 the data they were supposed to shape. A red gate rejects the build.

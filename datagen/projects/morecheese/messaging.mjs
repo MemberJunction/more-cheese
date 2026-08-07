@@ -41,31 +41,51 @@ export function buildMessaging(cfg, { people, issues }) {
     // message timeline: opener → (reply → follow-up pairs) → closer, clock never passes release
     const opened = issue.ResolvedAt ? new Date(issue.ResolvedAt).getTime() - r.int(4, 20) * 86400000
       : releaseMs - r.int(2, Math.max(3, R.issues.params.recencyOpenDays)) * 86400000;
-    let clock = Math.min(opened, releaseMs - 3600000);
     // OUTBOUND (staff) messages land in the working week: no 3am Sunday replies from the
     // member-services desk. Members write whenever — evenings and weekends included, which
     // is what makes the staff/member rhythm read as real.
-    // forward-only, and it MOVES the clock (never stamps behind an earlier message)
-    const businessify = () => {
-      const d = new Date(clock);
+    //
+    // WHY THIS IS TWO PASSES rather than a clock stamped as it goes. Both the old clamps —
+    // `advance()` and the business-hours fixup — ended in `Math.min(…, releaseMs - 1800000)`,
+    // so a conversation that reached the ceiling SATURATED there: every remaining message got
+    // the same instant, 30 minutes before release, with no business-hours property left. It
+    // surfaced as an off-hours gate failure at n=2500 seed 99 (7 of 136 staff replies at
+    // 23:30 on a Thursday), but the off-hours part was the smaller half — one thread had SIX
+    // messages stamped at the identical second, which no gate covered and which reads as
+    // obviously fabricated the moment anyone opens the thread.
+    //
+    // A conversation cannot be squeezed into less time than it takes, so the fix is to give it
+    // the time: collect the shape first with RELATIVE gaps, then anchor it late enough to look
+    // recent and early enough to fit. The draw sequence is untouched — every r.int / r.pick /
+    // r.bernoulli happens in the same order it did before, because stamping consumes no dice.
+    const items = [];
+    let gap = 0;
+    const businessifyAt = (ms) => {
+      const d = new Date(ms);
       if (d.getUTCHours() > 17) { d.setUTCDate(d.getUTCDate() + 1); d.setUTCHours(9 + (d.getUTCMinutes() % 3)); }
       else if (d.getUTCHours() < 9) d.setUTCHours(9 + (d.getUTCMinutes() % 3));
       const dow = d.getUTCDay();
       if (dow === 6) d.setUTCDate(d.getUTCDate() + 2);
       else if (dow === 0) d.setUTCDate(d.getUTCDate() + 1);
-      clock = Math.max(clock, Math.min(d.getTime(), releaseMs - 1800000));
+      return Math.max(ms, d.getTime());   // forward-only; never stamps behind an earlier message
     };
-    const msgAt = (dir) => { if (dir === 'Outbound') businessify(); return new Date(clock).toISOString().replace(/\.\d{3}Z$/, 'Z'); };
-    const push = (i, dir, content, status) => messages.push({
-      MessageKey: `${threadKey}:${i}`, ThreadKey: threadKey, SessionKey: threadKey,
-      MemberNumber: dir === 'Inbound' ? issue.ReporterMemberNumber : (issue.AssigneeMemberNumber ?? null),
-      Direction: dir, Sender: dir === 'Inbound' ? memberName : staffName,
-      Recipient: dir === 'Inbound' ? M.params.staffFallbackSender : memberName,
-      Subject: i === 0 ? issue.Title : null, Content: content, IsSecure: true,
-      Status: status, ReceivedAt: msgAt(dir),
-      IsStarred: r.bernoulli(M.params.starredShare), IsImported: false, SourceChannel: 'Portal', IsSharedDemo: true,
-    });
-    const advance = () => { clock = Math.min(clock + (1 + r.int(1, M.params.replyDelayHoursMax)) * 3600000, releaseMs - 1800000); };
+    const push = (i, dir, content, status) => {
+      items.push({
+        dir,
+        gapMs: gap,
+        row: {
+          MessageKey: `${threadKey}:${i}`, ThreadKey: threadKey, SessionKey: threadKey,
+          MemberNumber: dir === 'Inbound' ? issue.ReporterMemberNumber : (issue.AssigneeMemberNumber ?? null),
+          Direction: dir, Sender: dir === 'Inbound' ? memberName : staffName,
+          Recipient: dir === 'Inbound' ? M.params.staffFallbackSender : memberName,
+          Subject: i === 0 ? issue.Title : null, Content: content, IsSecure: true,
+          Status: status, ReceivedAt: null,
+          IsStarred: r.bernoulli(M.params.starredShare), IsImported: false, SourceChannel: 'Portal', IsSharedDemo: true,
+        },
+      });
+      gap = 0;
+    };
+    const advance = () => { gap = (1 + r.int(1, M.params.replyDelayHoursMax)) * 3600000; };
 
     // type-aware banks: a Data Correction thread never talks about invoices
     const bank = (b) => (M.catalog[b][issue.TypeKey] ?? M.catalog[b].General ?? M.catalog[b]);
@@ -90,6 +110,33 @@ export function buildMessaging(cfg, { people, issues }) {
         push(idx++, 'Inbound', r.pick(bank('followUps')), r.bernoulli(0.5) ? 'Read' : 'New');
       }
     }
+
+    // ── stamp ── walk the collected gaps from a candidate start, snapping staff replies into
+    // the working week. Snapping only ever moves a message FORWARD, so the true span is not
+    // known until it has been applied — hence solve rather than compute: lay the timeline out,
+    // and if its last message overruns the ceiling, start the whole conversation that much
+    // earlier and lay it out again. Each pass moves every unsnapped time back by the overrun
+    // and snapping cannot claw all of it forward, so this converges in a pass or two; the bound
+    // is there so a pathological thread degrades to a clamp instead of spinning.
+    const CEILING = releaseMs - 1800000;
+    const layout = (startMs) => {
+      let c = startMs;
+      return items.map((it) => {
+        c += it.gapMs;
+        if (it.dir === 'Outbound') c = businessifyAt(c);
+        return c;
+      });
+    };
+    let start = Math.min(opened, releaseMs - 3600000);
+    let times = layout(start);
+    for (let pass = 0; pass < 8 && times[times.length - 1] > CEILING; pass++) {
+      start -= times[times.length - 1] - CEILING;
+      times = layout(start);
+    }
+    items.forEach((it, i) => {
+      it.row.ReceivedAt = new Date(Math.min(times[i], CEILING)).toISOString().replace(/\.\d{3}Z$/, 'Z');
+      messages.push(it.row);
+    });
 
     const lastAt = messages[messages.length - 1].ReceivedAt;
     threads.push({

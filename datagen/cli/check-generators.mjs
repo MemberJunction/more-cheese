@@ -49,8 +49,104 @@ const NOT_A_GENERATOR = new Set([
 const SECTIONS = ['inputs', 'fixtures', 'decisions', 'shape'];
 
 const files = readdirSync(DIR).filter((f) => f.endsWith('.mjs') && !NOT_A_GENERATOR.has(f));
+// ── A SMALL, HONEST SCANNER ───────────────────────────────────────────────────────────────────
+// Not a parser. acorn is declared in the root package.json for exactly this kind of job, but
+// datagen deliberately carries no node_modules of its own, so anything that must FAIL A BUILD has
+// to work without it. What these three functions buy over a regex is the one property the regex
+// lacked: they either find the construct or say they could not, and never quietly match nothing.
+
+/**
+ * A per-character map of "this index is CODE" — false inside strings, template literals, line
+ * comments, block comments and regex literals. Brace counting without this is how a `}` inside an
+ * error message ends a function eighty lines early.
+ */
+function codeMask(src) {
+  const mask = new Array(src.length).fill(false);
+  let prev = '';
+  for (let i = 0; i < src.length;) {
+    const c = src[i], d = src[i + 1];
+    if (c === '/' && d === '/') { while (i < src.length && src[i] !== '\n') i++; continue; }
+    if (c === '/' && d === '*') { i += 2; while (i < src.length && !(src[i] === '*' && src[i + 1] === '/')) i++; i += 2; continue; }
+    if (c === "'" || c === '"' || c === '`') {
+      i++;
+      while (i < src.length && src[i] !== c) { if (src[i] === '\\') i++; i++; }
+      i++; prev = 'x'; continue;
+    }
+    // a `/` in operand position starts a regex literal; in operator position it is division
+    if (c === '/' && /[([{,;:=!&|?+\-*%~^<>]/.test(prev)) {
+      i++;
+      while (i < src.length && src[i] !== '/') {
+        if (src[i] === '\\') i++;
+        else if (src[i] === '[') { while (i < src.length && src[i] !== ']') { if (src[i] === '\\') i++; i++; } }
+        i++;
+      }
+      i++; prev = 'x'; continue;
+    }
+    mask[i] = true;
+    if (!/\s/.test(c)) prev = c;
+    i++;
+  }
+  return mask;
+}
+
+/** The index of the delimiter matching the one at `from`, or -1 if the source never balances. */
+function matchDelim(src, mask, from, open, close) {
+  let depth = 0;
+  for (let i = from; i < src.length; i++) {
+    if (!mask[i]) continue;
+    if (src[i] === open) depth++;
+    else if (src[i] === close && --depth === 0) return i;
+  }
+  return -1;
+}
+
+/**
+ * Every exported `build|run|apply…` in a file, with the span of its body.
+ * `start === -1` means the body could not be located — reported, never skipped.
+ */
+function exportedBuilders(src, mask) {
+  const out = [];
+  for (const m of src.matchAll(/export function ((?:build|run|apply)[A-Za-z]+)\s*\(/g)) {
+    const sigOpen = m.index + m[0].length - 1;                   // the '(' of the parameter list
+    const sigClose = matchDelim(src, mask, sigOpen, '(', ')');   // skips destructuring braces
+    const bodyOpen = sigClose === -1 ? -1 : src.indexOf('{', sigClose);
+    const bodyClose = bodyOpen === -1 ? -1 : matchDelim(src, mask, bodyOpen, '{', '}');
+    out.push(bodyClose === -1
+      ? { fn: m[1], start: -1, end: -1 }
+      : { fn: m[1], start: bodyOpen + 1, end: bodyClose });
+  }
+  return out;
+}
+
+/** The return expressions at the function's own level — not those of nested callbacks, which are
+ *  a `spawn:` building one row and say nothing about the generator's shape. */
+function topLevelReturns(src, mask, start, end) {
+  const out = [];
+  let depth = 0;
+  for (let i = start; i < end; i++) {
+    if (!mask[i]) continue;
+    const c = src[i];
+    if (c === '{' || c === '(' || c === '[') { depth++; continue; }
+    if (c === '}' || c === ')' || c === ']') { depth--; continue; }
+    if (depth !== 0 || !src.startsWith('return', i)) continue;
+    if (/[\w$]/.test(src[i - 1] ?? '') || /[\w$]/.test(src[i + 6] ?? '')) continue;
+    let j = i + 6, inner = 0;
+    for (; j < end; j++) {
+      if (!mask[j]) continue;
+      const k = src[j];
+      if (k === '{' || k === '(' || k === '[') inner++;
+      else if (k === '}' || k === ')' || k === ']') inner--;
+      else if (k === ';' && inner === 0) break;
+    }
+    out.push(src.slice(i + 6, j).trim());
+    i = j;
+  }
+  return out;
+}
+
 const hard = [];
 const soft = [];
+let analysed = 0;
 
 for (const f of files) {
   const src = readFileSync(join(DIR, f), 'utf8');
@@ -65,11 +161,36 @@ for (const f of files) {
     }
   }
 
-  // 2. it returns named tables, not a bare array
-  for (const m of src.matchAll(/export function ((?:build|run|apply)[A-Za-z]+)[\s\S]{0,4000}?\n  return ([^;]+);/g)) {
-    const [, fn, ret] = m;
-    if (ret.trim().startsWith('[')) {
-      hard.push(`${f}: ${fn} returns a bare array — return { <tableName>: rows } so the pack map and the reader both know what it is.`);
+  // 2. it returns named tables, not a bare array.
+  //
+  // Found by the function's OWN BODY, matched by brace balance. The first version of this rule
+  // scanned `[\s\S]{0,4000}?` forward from the signature to the first `\n  return`, and a
+  // generator whose body ran past that window simply produced no match — no error, no mention,
+  // just silence. Measured on this project: it covered 8 of 22 exported build functions, and the
+  // 14 it skipped were every large one — committees, money, membership's renewal unroll, issues —
+  // which are precisely the ones a reader most needs the guarantee for. The checker then printed
+  // '✅ every generator … returns named tables', a claim over a population it had never seen.
+  // That is the failure mode this repo names elsewhere: reporting green by never running.
+  //
+  // So coverage is now ACCOUNTED FOR rather than assumed: a function whose body or return cannot
+  // be located is reported as unanalysable instead of passing quietly.
+  const mask = codeMask(src);
+  for (const { fn, start, end } of exportedBuilders(src, mask)) {
+    analysed++;
+    if (start === -1) {
+      hard.push(`${f}: ${fn} — could not locate the function body to check its return shape. `
+        + 'Unparseable is not the same as correct; the checker will not pass what it cannot read.');
+      continue;
+    }
+    const returns = topLevelReturns(src, mask, start, end);
+    if (!returns.length) {
+      hard.push(`${f}: ${fn} — no top-level return found. A generator must return { <tableName>: rows }.`);
+      continue;
+    }
+    for (const ret of returns) {
+      if (ret.startsWith('[')) {
+        hard.push(`${f}: ${fn} returns a bare array — return { <tableName>: rows } so the pack map and the reader both know what it is.`);
+      }
     }
   }
 
@@ -120,7 +241,9 @@ if (hard.length) {
   console.log('❌ contract violations:\n');
   for (const h of hard) console.log(`  ${h}`);
 } else {
-  console.log(`✅ every generator takes (cfg, deps) with deps as an object, and returns named tables`);
+  // The count is part of the claim. '✅ every generator …' over a population the checker never
+  // actually visited is how the 4,000-char window hid 14 of 22 functions for as long as it existed.
+  console.log(`✅ all ${analysed} exported build functions take (cfg, deps) with deps as an object, and return named tables`);
 }
 if (soft.length) {
   console.log(`\n○ ${soft.length} of ${files.length} generators lack the section headers (advisory — the readable`);

@@ -28,21 +28,39 @@ to add something, [TOUR.md](TOUR.md) if you want the plain-English tour first.
 
 ## ⚠ The state of the work, and the first thing to do
 
-**37 commits sit unlanded in two branches, and the second is stacked on the first.**
+**Both branches landed on 2026-08-07** — PR #14 then PR #15, in the forced order. The framework
+work, the four coupling points, the second project and the derived checks are all on `next`. What
+this section used to say — that 37 commits sat unlanded and that merging them mattered more than
+improving them — is done.
 
-| branch | commits | status |
+**What is NOT landed is this branch.** A review pass after those PRs were opened found four
+defects; the fixes were committed but not pushed before the merge went through, so the merged PR
+description promises work that is not in `next`:
+
+| commit | what it fixes | changes data? |
 |---|---|---|
-| `morecheese-datagen-simplify` (PR #14) | 13 | open, CI green, **never reviewed** |
-| `morecheese-datagen-framework` | 24 | pushed, **no PR**, and it sits on top of PR #14 |
+| two checks wider than what they verified | `check-generators` covered 8 of 22 build functions while printing a universal ✅; `check-engine-boundary` let `'<project>_members'` through; `fromOptional` silently nulled a misspelled path | no |
+| the docs said nine packs | twelve ship; also gates, heroes, fixture findings, and 25 missing UUID prefixes | no |
+| a support thread cannot happen in one second | the messaging timeline saturated at the release ceiling — six messages at one instant | **YES** — three messaging tables |
+| the inspector was showing less than half the data | `demo.mjs` showed 3 of 12 packs | no (dashboard only) |
 
-**Merge order is forced: PR #14 first, then the framework branch.** They cannot go in the other
-order, and the second will not rebase cleanly onto `next` without the first.
+**Land this branch first.** Until it does, `next` still has a boundary checker that misses the leak
+class it was written for, a generator contract covering a third of its population, and an inspector
+blind to seven packs — while the PR text on #15 says otherwise. Green: `node test.mjs` runs
+**38 steps** and every one passes.
 
-**This is the single biggest risk in the handover.** The work is done, tested and green — and none
-of it is landed, so none of it protects anyone yet. Reviewing and merging these two is worth more
-than any further improvement to them. If you read one thing and act on one thing, make it this.
+**Then the real first thing: CI does not run any of this.** Nothing in `.github/workflows/`
+references `datagen` or `test.mjs`. The only check on a datagen PR is `changes_and_migrations`. So
+38 suite steps, 335 gates, the engine boundary, the generator contract and the fixture build all
+run *only when somebody remembers to type the command* — which is exactly how the four defects
+above survived review. Every guarantee this directory advertises is currently enforced by habit.
+One workflow file; the suite takes about fifteen minutes. **If you do one thing after landing this
+branch, make it that.**
 
-Both branches are green: `node test.mjs` runs 37 steps and every one passes.
+One consequence to schedule, not to rush: the messaging fix changes generated data, and the shipped
+`MetadataSync_p01` migration is applied history carrying four boundary-collapsed messages. Rule 3
+forbids editing it, so the fix reaches a database only on the next seed re-capture — which must run
+*after* this branch lands, or it re-ships the defect.
 
 ---
 
@@ -63,16 +81,18 @@ Both branches are green: `node test.mjs` runs 37 steps and every one passes.
   names a project in code. It found a real leak when it was written: `engine/ids.mjs` held a table
   of every project's UUID namespace and told new authors to add theirs to it.
 - **A SECOND PROJECT EXISTS and the suite builds it.** `projects/fixture/` — 50 invented members,
-  one decision, CI-only, never shipped. Standing it up found three engine bugs and two
-  documentation gaps ([projects/fixture/FINDINGS.md](projects/fixture/FINDINGS.md)). It is the only
+  one decision, CI-only, never shipped. Standing it up found **eleven** problems — eight engine
+  bugs and three documentation gaps
+  ([projects/fixture/FINDINGS.md](projects/fixture/FINDINGS.md)). It is the only
   reason the word "framework" is defensible here, and the suite step is what stops the engine
   quietly re-coupling to MoreCheese.
 - **Row shapes can be declared.** `engine/row-template.mjs` renders a row from data; 17 templates
-  across 9 generators. Rows that need conditionals, computed keys or cross-row state stay
+  across 11 generators. Rows that need conditionals, computed keys or cross-row state stay
   handwritten **on purpose** — each refusal is recorded in the code that hit it.
 - **There is a metric, and it runs every suite pass.** `cli/measure-framework.mjs` prints
-  declarations:code. MoreCheese is 1.41 : 1 (from 1.35); the fixture, built with the framework
-  rather than retrofitted into it, is 1.57 : 1.
+  declarations:code. MoreCheese is 1.40 : 1 (from 1.35); the fixture, built with the framework
+  rather than retrofitted into it, is 1.59 : 1. Both numbers move when a project gains or loses
+  project-owned tooling, so read them as a trend, never as a target.
 
 ## What is half-finished, and what to do about it
 
@@ -102,7 +122,7 @@ would have looked correct while measuring a different population than the target
 **The framework metric runs DEGRADED, and its number is approximate.** `cli/measure-framework.mjs`
 wants `acorn` for exact AST spans. The dependency is declared in the root `package.json` but has never
 been installed, so the tool falls back to a line classifier — it says so in its own output every run,
-and every ratio quoted anywhere (1.41 : 1 for MoreCheese, 1.59 : 1 for the fixture) comes from the
+and every ratio quoted anywhere (1.40 : 1 for MoreCheese, 1.59 : 1 for the fixture) comes from the
 fallback. One `npm install` at the REPO ROOT fixes it; do not install inside `datagen/` or any
 subfolder of a linked MJ workspace (rule 5, the single-copy invariant). Expect the numbers to shift
 slightly when it runs properly — the trend is what the tool is for, not the third digit.
@@ -116,11 +136,14 @@ from two examples instead of being guessed from one. Do not start it on one proj
 the code does not honour, that is a bug in the document, and the fix is to make the code true or the
 document honest — not to leave both.
 
-**The BizApps app UIs have never been opened over this data.** Five `@mj-biz-apps/*-ng` client
-packages were never bundled. Everything upstream of the database is checked mechanically; everything
-downstream is checked by a human noticing. The two worst data defects of the last month — street
-names like "Calle Mill", and ZIP codes that did not match their state — passed every gate and a
-clean push, and were caught by looking at a rendered grid.
+**~~The BizApps app UIs have never been opened over this data.~~ DONE (2026-08-07):** the data has
+been loaded and reviewed in the app UIs. That was the longest-standing hole in this workstream and
+it is closed — but keep the reason it mattered. Everything upstream of the database is checked
+mechanically; everything downstream is checked by a human noticing, and the two worst data defects
+of the whole project — street names like "Calle Mill", and ZIP codes that did not match their state
+— passed every gate and a clean push before somebody looked at a rendered grid. Rung 4 of the
+ladder stays mandatory for anything user-visible. Having done it once does not make the next change
+safe.
 
 ---
 
@@ -143,6 +166,89 @@ people noticed; the pack map came fourth and was hiding the most expensive failu
 import project code (`cli/check-engine-boundary.mjs`), and a second project must build with zero
 engine edits (the `fixture` suite step). Both are checks, not intentions — see
 [engine/README.md](engine/README.md) for what a project owes the engine and what it gets back.
+
+---
+
+## How the numbers got their values — the method
+
+[HOW-IT-WORKS.md](HOW-IT-WORKS.md) explains the *mechanism*. This is the **method** — how the work
+was actually done, which is not written down anywhere else and is the part hardest to reconstruct
+from the code.
+
+**Causality is the basis, and it came first.** Not "sample each column from a plausible
+distribution" — every observable fact descends from hidden per-member dials (engagement, affluence)
+through declared causal arrows. That decision is upstream of everything: it is why cross-app signals
+agree about who the engaged members are, and it is what makes the data worth scoring rather than
+just worth looking at. Adopt a shortcut that breaks it and the dataset stops being the thing it was
+built to be.
+
+**The loop: research → generate → find where it reads fake → tighten.**
+
+1. Research real associations for published figures — an AI research pass (Fable) over public
+   sources, with every adopted number carrying its source and confidence into the ruleset `$note`.
+2. Generate against those numbers.
+3. **Name the gap.** Look at the output and say specifically where it stops being believable. This
+   step is the whole method, and it is a human judgement — no gate produces it.
+4. Research *that gap* narrowly and tighten it.
+
+Then repeat. The corpus behind step 1 and step 4 is in `plans/association-db/`; when a `$note` cites
+a figure you do not recognise, its provenance is there.
+
+**The worked example — the people.** The first pass assembled a person by drawing independently
+from a set of demographics, a country, and a name bank. Every field was individually plausible and
+the result was obviously fake, because the fields did not agree with each other: a name that did not
+belong to the country, demographics that did not match the region. The fix was narrower research —
+demographics per country and per US area, and name banks restricted by ethnicity — so that a
+person's name, origin and location cohere.
+
+**The lesson generalises, and it is the most useful thing on this page: realism failures are almost
+always CORRELATION failures, not distribution failures.** Every marginal can be right while the
+joint distribution is nonsense. "Calle Mill" was this — a Spanish street prefix on an English street
+name, each half defensible. So was every-non-member-has-a-null-Title. When something reads fake,
+stop checking whether each column is individually plausible and start asking which two fields
+disagree.
+
+**When authoring packs, follow the conventions.** Copy the nearest existing module rather than
+inventing idiom. The house shapes exist because a reader should be able to open an unfamiliar domain
+and know where to look — that is worth more than any local cleverness.
+
+### An honest limit of the "framework"
+
+It generates data for use cases **shaped like MoreCheese** — an association with members, a renewal
+cycle, events, money, and engagement driving participation. Point it at something similar and the
+declarations carry you. **Deviate far and you are writing custom authoring**, and that is a real
+limitation of the current state, not a gap in the documentation.
+
+Be precise about what the second project proved: `projects/fixture/` shows a *simple* project needs
+zero engine edits. It does not show an *unlike* one does — it has one decision, no calibration, no
+scenarios, no heroes, no money chain. The generation path generalised; everything downstream of it
+had to be fixed to make even that work (eleven findings). Treat "a second project needs no engine
+edits" as proven for the easy case and open for the hard one.
+
+---
+
+## Keeping it alive
+
+**Adding a domain or a pack** — the path is [ADDING-A-DOMAIN.md](ADDING-A-DOMAIN.md), walked end to
+end before it was written down, and then [AUTHORING.md](AUTHORING.md) Recipe 3 for the delivery half
+(the `uuidFor` prefix and its row in DATA-CONTRACT's identity table, the one `seed-mapping.mjs`
+entry, push order). The order in that document is the whole trick; each step exists because doing it
+later costs more than doing it now.
+
+**The quarterly re-roll.** The world is anchored to `--release`, and there is no wall clock anywhere
+in datagen — which is what makes it deterministic, and also what makes it *age*. Left alone, "recent"
+activity drifts steadily into the past: open tickets stop looking open, the renewal window Marcus
+sits in stops being this month, and the demo quietly stops demonstrating recency. So, each quarter:
+
+1. Regenerate against a new `--release` date.
+2. Run the full ladder — gates, `test.mjs`, load, and **look at it in the app UIs**.
+3. **Re-capture the seed migration** as a NEW additive migration (never edit an applied one), so
+   what ships matches what the generator produces. A re-roll without a re-capture means the shipped
+   data and the generator have silently diverged, which is the failure mode `DELIVERY.md` exists to
+   describe.
+
+Changing `--release` changes every date in the world, so expect a large diff and judge it by the
+gates rather than by eye. That is the intended behaviour, not a regression.
 
 ## The six things that will bite you
 
@@ -224,7 +330,7 @@ you did not break anything. It does not prove you did anything.**
 Not reading. Doing. If any step surprises you, the documentation is wrong and fixing it is your
 first contribution.
 
-1. `node test.mjs` — 37 steps, all green. If not, stop and find out why before anything else.
+1. `node test.mjs` — 38 steps, all green. If not, stop and find out why before anything else.
 2. Open `projects/morecheese/ruleset/modules/committees.mjs`, change `meetingsPerYear` from 4 to 6,
    and run `node cli/build.mjs --n 500 --seed 42 --release 2026-07-31`. Read whatever it says.
    Change it back.
@@ -244,7 +350,9 @@ in the repo.
 
 ## Open questions — most now ANSWERED (2026-08-05)
 
-- **Merge and land the two branches.** STILL OPEN, still first. PR #14 (unreviewed) then PR #15.
+- ~~Merge and land the two branches.~~ **DONE 2026-08-07** — PR #14 then PR #15, both merged to
+  `next`. Replaced at the top of this document by two successors: land the review-fix branch, then
+  put the suite in CI so nothing else lands unverified again.
 - ~~Should the bespoke gates move behind declarations?~~ **ANSWERED.** Every migratable target
   moved: 15 derived, 3 bespoke, and the three that remain each carry a written paragraph on why a
   band cannot express them (`measurements.mjs`). Do not migrate those three to reach zero.
@@ -252,9 +360,9 @@ in the repo.
   engine and kept as a CI fixture. That unblocked and settled the deferred vocabulary decisions:
   see the 2026-08-05 status block at the top of `TYPES-PROPOSAL.md` for all seven veto-list
   answers (mix form, target renames, catalog identity, dead pins, `se`, behavior blocks, Regime).
-- **Who looks at the app UIs?** STILL OPEN and still nobody's. The data has never been seen
-  rendered in the apps it targets, and the two worst defects of the last month were only ever
-  caught by a person looking at a grid.
+- ~~Who looks at the app UIs?~~ **ANSWERED 2026-08-07** — the data has been loaded and reviewed in
+  the apps it targets. The question is retired; the *habit* is not. Rung 4 catches a class of defect
+  no gate can, and it has to be repeated per change, not per project.
 
 ---
 

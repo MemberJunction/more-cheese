@@ -80,6 +80,24 @@ Full types in `engine/types.d.ts` (`interface Config`).
 4. **No generator-internal field reaches a pack** — `_`-prefixed fields are refused at emit.
 5. **Declaring earns a check.** A `{ target, tolerance }` pair fails the build until measured.
 6. **The engine holds no project's values.** Checked by `cli/check-engine-boundary.mjs`.
+7. **A check states the size of the population it visited.** Not an engine behaviour — a rule for
+   whoever writes the next `cli/check-*.mjs`, and the most expensive lesson here so far.
+
+### Why rule 7 exists
+
+Two checkers shipped green while examining a fraction of what they claimed. `check-generators.mjs`
+scanned a fixed 4,000-character window for each function's return, so anything longer produced no
+match and no mention — 8 of 22 build functions covered, every large one skipped, under the banner
+`✅ every generator … returns named tables`. `check-engine-boundary.mjs` matched a project name
+only as a whole quoted token, so `'morecheese_members'` — the leak its own header credits it with
+catching — walked through, and its negative test planted the form that already worked.
+
+Same defect twice, and `derived-checks.mjs` names it in its own header for a third: *"they reported
+green by never running."* A check whose coverage is narrower than its claim is worse than no check,
+because it turns an open question into a false answer.
+
+So: **count what you visited, print the count, fail on a shortfall.** Unanalysable is not the same
+as correct. And plant the negative test in the case that historically escaped, not the easy one.
 
 ## Standing up a new project
 
@@ -101,7 +119,12 @@ If any step forces an engine change, that's a MoreCheese-shaped assumption in th
 a bug in the engine — not in your project.
 
 **This has been done.** `projects/fixture/` is a second project built exactly this way, and
-[its FINDINGS.md](../projects/fixture/FINDINGS.md) lists the six things that had to change before it
-worked: three engine bugs and two documentation gaps, none of which were visible from inside
-MoreCheese. The suite now builds it on every run, so an engine change that re-couples the engine to
-one project fails immediately instead of silently.
+[its FINDINGS.md](../projects/fixture/FINDINGS.md) lists the **eleven** things that had to change
+before it worked: eight engine bugs and three documentation gaps, none of which were visible from
+inside MoreCheese. The suite now builds it on every run, so an engine change that re-couples the
+engine to one project fails immediately instead of silently.
+
+Note what the split says. The generation path — patterns, row templates, derived checks, the pack
+contract — generalised on first use. Everything downstream of it did not. That is not luck: the
+generation abstractions were *designed* for a second consumer, and the install path was *extracted*
+from one. The parts you design for two consumers work for two consumers.

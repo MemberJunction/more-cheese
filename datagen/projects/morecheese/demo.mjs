@@ -16,7 +16,7 @@
 // as SUMMARY_OF. It sat in engine space only because that is where it was first written, and the
 // engine-boundary checker had to allowlist it. cli/build.mjs --demo resolves it project-locally.
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -39,23 +39,44 @@ try {
   gateLines = e.stdout ?? 'validator failed to run';
 }
 
+// EVERY pack on disk, and every table in it — read from the build, never a list kept by hand.
+//
+// The previous version named three packs and eleven tables inline. The build ships TWELVE packs,
+// and by the time anyone checked, `committees`, `forms`, `tasks`, `issues`, `messaging`,
+// `platform` and `sonar` were all invisible here — more than half the data, absent from the only
+// tool anyone uses to LOOK at it. That matters more than it sounds: the two worst data defects of
+// the last month ("Calle Mill" street names, ZIPs that didn't match their state) passed every gate
+// and were caught by a person looking at a rendered grid. Data the inspector cannot show is data
+// nobody eyeballs.
+//
+// A hand-kept list was always going to drift, so there isn't one any more. This is the same move
+// the rest of datagen makes everywhere else: derive from the declaration rather than restate it.
+const packNames = readdirSync(join(OUT, 'packs'), { withFileTypes: true })
+  .filter((d) => d.isDirectory()).map((d) => d.name);
+const manifests = Object.fromEntries(packNames.map((p) => [p, JSON.parse(readFileSync(join(OUT, 'packs', p, 'manifest.json'), 'utf8'))]));
+
+// Reading order is the PACK PYRAMID, derived from each manifest's dependsOn — common first, then
+// what builds on it. Alphabetical would open the inspector on `committees/committee_agenda_items`,
+// which tells a first-time reader nothing about how this world is put together.
+const depthOf = (p, seen = new Set()) => {
+  if (seen.has(p)) return 0;                                   // a cycle is the pack gates' problem, not the inspector's
+  const deps = manifests[p]?.dependsOn ?? [];
+  return deps.length ? 1 + Math.max(...deps.map((d) => depthOf(d, new Set([...seen, p])))) : 0;
+};
+const ordered = packNames.slice().sort((a, b) => depthOf(a) - depthOf(b) || a.localeCompare(b));
+
+const tables = {};
+for (const p of ordered) {
+  for (const f of readdirSync(join(OUT, 'packs', p)).filter((f) => f.endsWith('.json') && f !== 'manifest.json').sort()) {
+    tables[`${p}/${f.replace(/\.json$/, '')}`] = load(p, f.replace(/\.json$/, ''));
+  }
+}
+
 const DATA = {
   run, ruleVersion: R.version,
   gates: gateLines.trim().split('\n'),
-  manifests: Object.fromEntries(['common', 'membership', 'events'].map((p) => [p, JSON.parse(readFileSync(join(OUT, 'packs', p, 'manifest.json'), 'utf8'))])),
-  tables: {
-    'common/people': load('common', 'people'),
-    'common/organizations': load('common', 'organizations'),
-    'membership/membership_periods': load('membership', 'membership_periods'),
-    'events/events': load('events', 'events'),
-    'events/event_registrations': load('events', 'event_registrations'),
-    'learning/courses': load('learning', 'courses'),
-    'learning/enrollments': load('learning', 'enrollments'),
-    'orders/products': load('orders', 'products'),
-    'orders/orders': load('orders', 'orders'),
-    'orders/order_lines': load('orders', 'order_lines'),
-    'orders/payments': load('orders', 'payments'),
-  },
+  manifests,
+  tables,
   latents: JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8')),
   renewalEvents: JSON.parse(readFileSync(join(OUT, 'validation-events.json'), 'utf8')),
 };

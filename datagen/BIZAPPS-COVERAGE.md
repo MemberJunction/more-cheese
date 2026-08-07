@@ -63,7 +63,12 @@ ships; a standard new-pack exercise then).
    nullability); stand-ins omit only their FKs to tables we don't stand in (`__mj.User`,
    lookup tables).
 2. **Install** — all 7 packs load green onto a cloned real MJ database; **every FK
-   constraint reports trusted** (SQL Server validated each row).
+   constraint reports trusted** (SQL Server validated each row). That was the 2026-07-14
+   verification, covering the 7 packs shipping then; **twelve** ship now (`messaging`,
+   `platform` and `sonar` arrived later, and `common` gained addresses and contact methods).
+   **Re-verified 2026-08-07:** the current dataset has been loaded and reviewed in the app
+   UIs — which also closes rung 4 of the verification ladder for the first time. The
+   per-constraint FK detail below is still the 2026-07-14 capture; the load itself is current.
 3. **CHECK conformance** — our stand-ins don't enforce their CHECK constraints, so this is
    verified out-of-band: all 15 applicable CHECKs (Person/Org/Committee/Term/Membership/
    Meeting/Attendance/Form/Version/Question/Distribution/Response statuses and enums)

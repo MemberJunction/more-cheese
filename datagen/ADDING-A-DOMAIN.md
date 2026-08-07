@@ -245,6 +245,19 @@ mj sync push                                               # does it LOAD?
 Each rung catches what the one below can't. Steps 1–2 passed on the day step 3 failed with 3,191
 errors, and again on the day the app rendered the street name "Calle Mill". Don't skip 3 and 4.
 
+## Step 8 — Ship it
+
+Your domain now generates and is gated. It still reaches no database: packs are JSON, and nothing
+maps them to tables yet. That half is [`AUTHORING.md`](AUTHORING.md) Recipe 3 — the `uuidFor`
+prefix and its entry in [`DATA-CONTRACT.md`](DATA-CONTRACT.md)'s identity table, the one
+`seed-mapping.mjs` entry that renders both the SQL and the MetadataSync record, `DIRECTORY_ORDER`,
+and re-capturing the schema contract if you touched a dependency app's table.
+
+**This step is where a domain goes quiet rather than wrong.** Generating perfectly and mapping
+nowhere is a build that passes with every gate green and the data simply absent — which is why the
+emitter refuses a table that ships nowhere unless the project declares it in `NOT_SHIPPED` with a
+reason.
+
 ---
 
 ## The trap that eats a whole afternoon
