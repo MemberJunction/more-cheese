@@ -9,9 +9,9 @@ Roster: 22 now (20 members + 2 staff) → 50–100 by release. Every release re-
 
 > **This document is the SINGLE roster of record** (decided 2026-07-06): the earlier 8-candidate
 > stub at `mj/plans/association-db/morecheese-v2-hero-personas.md` is superseded by this doc and
-> banner-marked as such. **Carry-over rule (Marcelo, 2026-07-06): personas the TEAM has named
+> banner-marked as such. **Carry-over rule (the schema owner, 2026-07-06): personas the TEAM has named
 > directly are always carried — familiarity wins in demos.** Carried: **Elena Rodriguez**
-> (named throughout Amith's v2-plan) and **Anna Brown** (Robert's named example in the Q&A
+> (named throughout the demo lead's v2-plan) and **Anna Brown** (the domain lead's named example in the Q&A
 > thread, cited in v2-plan §7.0), her story revamped below to the causal pinned-facts style.
 > Personas only the stub proposed are not carried; their demo-script anchors are — see §0.
 > Two similar personas may coexist when they cover distinct asked-for pitch flows.
@@ -27,8 +27,8 @@ stub, the "carried from" column shows the mapping so no script anchor is lost.
 
 | Demo script / scenario | Anchor persona | Carried from superseded stub | Status |
 |---|---|---|---|
-| Flagship "great member" / member-360 / "tell me about X" semantic search | Elena Rodriguez | Elena Rodriguez (originates in Amith's v2-plan §7.0 — name must stay) | ✅ |
-| **Post-lapse churn diagnosis — "why did she churn?" (Robert's named script)** | **Anna Brown** | Anna Brown — **CARRIED (team-named; story revamped 2026-07-06 to the causal style)** | ✅ |
+| Flagship "great member" / member-360 / "tell me about X" semantic search | Elena Rodriguez | Elena Rodriguez (originates in the demo lead's v2-plan §7.0 — name must stay) | ✅ |
+| **Post-lapse churn diagnosis — "why did she churn?" (the domain lead's named script)** | **Anna Brown** | Anna Brown — **CARRIED (team-named; story revamped 2026-07-06 to the causal style)** | ✅ |
 | Churn save — long decline, still Active, high LTV | Bob Kowalski | — (new; distinct pitch flow from Anna's: intervene *before* the lapse) | ✅ |
 | Lapse with a sympathetic external cause / win-back | Danielle Okafor | — (new; distinct flow: employer collapsed, she never chose to leave) | ✅ |
 | Renewal-at-risk / pending renewal / reminder cadence | Marcus Chen | Marcus Feld | ✅ |
@@ -227,7 +227,7 @@ Owns renewals and the health of the membership funnel. Demo use: the **Membershi
 
 ## 6. Governance
 
-- **Team-named personas are always carried** (Marcelo, 2026-07-06): if the team uses a name in
+- **Team-named personas are always carried** (the schema owner, 2026-07-06): if the team uses a name in
   scripts/threads/plans (Elena, Anna Brown), that persona exists in every release — familiarity
   wins. If a team-named persona conflicts with a newer one, **revamp the old persona's story**
   to fit the causal-data style and keep both only when they cover distinct pitch flows.

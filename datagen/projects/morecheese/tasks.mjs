@@ -25,7 +25,7 @@ export function buildTasks(cfg, people, periods, committees) {
   const releaseIso = iso(release);
   const personByNum = new Map(people.map((p) => [p.MemberNumber, p]));
 
-  const taskTypes = T.types.map((t) => ({
+  const taskTypes = T.catalog.types.map((t) => ({
     TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true,
   }));
 
@@ -35,7 +35,7 @@ export function buildTasks(cfg, people, periods, committees) {
     if (!rosterByTerm.has(m.TermKey)) rosterByTerm.set(m.TermKey, []);
     rosterByTerm.get(m.TermKey).push(m);
   }
-  const termOf = (dt) => R.committees.terms.find((t) => t.start <= dt && dt <= t.end);
+  const termOf = (dt) => R.committees.catalog.terms.find((t) => t.start <= dt && dt <= t.end);
 
   const tasks = [];
   const taskAssignments = [];
@@ -53,7 +53,7 @@ export function buildTasks(cfg, people, periods, committees) {
   });
 
   // ---------- committee action items: spawned by completed meetings ----------
-  const CA = T.committeeActions;
+  const P = T.params;
   const actionTasks = [];
   for (const meeting of committees.meetings) {
     const dt = meeting.StartDateTime.slice(0, 10);
@@ -61,12 +61,12 @@ export function buildTasks(cfg, people, periods, committees) {
     const roster = term ? (rosterByTerm.get(`${meeting.CommitteeKey}:${term.start}`) ?? []) : [];
     if (!roster.length) continue;
     const r = rng(seed, `ctask:${meeting.MeetingKey}`);
-    const n = r.bernoulli(CA.ratePerMeeting) ? 1 + (r.bernoulli(0.3) ? 1 : 0) : 0;
-    for (let i = 0; i < Math.min(n, CA.maxPerMeeting); i++) {
+    const n = r.bernoulli(P.committeeActionRatePerMeeting) ? 1 + (r.bernoulli(0.3) ? 1 : 0) : 0;
+    for (let i = 0; i < Math.min(n, P.committeeActionMaxPerMeeting); i++) {
       const assignee = r.pick(roster);
       // due dates vary by the work item (not a fixed +30 for everything)
-      const due = addDays(parseDate(dt), CA.dueDays + r.int(-10, 30));
-      const action = r.pick(CA.actionBank);
+      const due = addDays(parseDate(dt), P.committeeActionDueDays + r.int(-10, 30));
+      const action = r.pick(T.catalog.committeeActionBank);
       const task = pushTask({
         TaskKey: `ctask:${meeting.MeetingKey}:${i}`, Name: `${action} (${meeting.CommitteeKey.replace(' Committee', '')})`,
         Description: `Action item recorded at the ${meeting.CommitteeKey} meeting on ${dt}. ${action}. Owner reports back at the next scheduled meeting.`,
@@ -85,8 +85,8 @@ export function buildTasks(cfg, people, periods, committees) {
   childOutcome({
     seed,
     items: pastDue,
-    scoreOf: (t) => CA.completion.arrows.engagement.beta * (personByNum.get(t._assignee)?._theta ?? 0),
-    target: CA.completion.target,
+    scoreOf: (t) => T.effects['completion.engagement'].beta * (personByNum.get(t._assignee)?._theta ?? 0),
+    target: P.committeeActionCompletion.target,
     streamKey: (t) => `ctask-done:${t.TaskKey}`,
     decide: (t, prob, r) => {
       if (r.bernoulli(prob)) {
@@ -115,7 +115,7 @@ export function buildTasks(cfg, people, periods, committees) {
   // ---------- renewal outreach: the PendingRenewal queue, assigned to the M&O chair ----------
   const lastPeriod = new Map();
   for (const per of periods) lastPeriod.set(per.MemberNumber, per);
-  const activeTerm = R.committees.terms[R.committees.terms.length - 1];
+  const activeTerm = R.committees.catalog.terms[R.committees.catalog.terms.length - 1];
   // the whole M&O roster works the queue, chair-weighted — not one person holding 51 of 98
   // tasks. Outreach is also staged (calls go out as each renewal approaches), so the
   // created dates spread instead of stacking 50 rows on release day.

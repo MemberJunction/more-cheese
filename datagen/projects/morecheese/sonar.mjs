@@ -20,64 +20,64 @@ export function buildSonar(cfg) {
   const { R, release } = cfg;
   const S = R.sonar;
   const releaseMs = release.getTime();
-  const createdAt = ts(releaseMs - S.model.createdDaysBeforeRelease * DAY + 10 * 3600000);
-  const publishedAt = ts(releaseMs - S.model.publishedDaysBeforeRelease * DAY + 14 * 3600000);
+  const createdAt = ts(releaseMs - S.params.model.createdDaysBeforeRelease * DAY + 10 * 3600000);
+  const publishedAt = ts(releaseMs - S.params.model.publishedDaysBeforeRelease * DAY + 14 * 3600000);
 
   const bandSet = {
     BandSetKey: 'engagement-bands', Name: 'MoreCheese Engagement Bands',
-    AnchorEntityName: S.model.anchorEntityName, Description: 'Qualitative engagement bands for the member score.',
+    AnchorEntityName: S.params.model.anchorEntityName, Description: 'Qualitative engagement bands for the member score.',
   };
-  const bands = S.bands.map((b) => ({
+  const bands = S.catalog.bands.map((b) => ({
     BandKey: b.key, BandSetKey: bandSet.BandSetKey, Label: b.label, MinScore: b.min, MaxScore: b.max,
     Severity: b.severity, ColorHex: b.color, IsTerminal: false, Description: b.description,
   }));
 
   const model = {
-    ModelKey: S.model.key, Name: S.model.name, Slug: S.model.slug, Description: S.model.description,
-    AnchorEntityName: S.model.anchorEntityName, Status: S.model.status, CombineStrategy: 'WeightedSum',
+    ModelKey: S.params.model.key, Name: S.params.model.name, Slug: S.params.model.slug, Description: S.params.model.description,
+    AnchorEntityName: S.params.model.anchorEntityName, Status: S.params.model.status, CombineStrategy: 'WeightedSum',
     // a model becomes effective when its configuration is published, never before
-    OwnerStaffKey: S.model.ownerStaffKey, EffectiveFrom: publishedAt,
+    OwnerStaffKey: S.params.model.ownerStaffKey, EffectiveFrom: publishedAt,
   };
   const version = {
-    VersionKey: `${S.model.key}:1`, ModelKey: S.model.key, VersionNumber: 1, VersionLabel: 'v1',
+    VersionKey: `${S.params.model.key}:1`, ModelKey: S.params.model.key, VersionNumber: 1, VersionLabel: 'v1',
     // the snapshot must REPRODUCE the model: hardcoding aggregation 'Count' contradicted
     // the Recency factor, and omitting normalization/window/missing-data policy meant the
     // published config couldn't rebuild what actually runs
     ConfigSnapshotJSON: JSON.stringify({
-      slug: S.model.slug, combine: 'WeightedSum', scale: [0, 100],
-      factors: S.factors.map((f) => ({
+      slug: S.params.model.slug, combine: 'WeightedSum', scale: [0, 100],
+      factors: S.catalog.factors.map((f) => ({
         slug: f.slug, source: f.sourceEntityName, aggregation: f.aggregation, weight: f.weight,
         aggregateField: f.aggregateFieldName ?? null, window: f.windowKey ?? null,
         normalization: 'Percentile', missingData: 'Zero', higherIsBetter: f.higherIsBetter !== false,
       })),
-      bands: S.bands.map((b) => ({ label: b.label, min: b.min, max: b.max })),
+      bands: S.catalog.bands.map((b) => ({ label: b.label, min: b.min, max: b.max })),
     }),
-    ChangeSummary: 'Initial published configuration.', PublishedByStaffKey: S.model.ownerStaffKey,
+    ChangeSummary: 'Initial published configuration.', PublishedByStaffKey: S.params.model.ownerStaffKey,
     PublishedAt: publishedAt, IsCurrent: true,
   };
 
   // reusable Rolling windows; a factor's window date column comes from Factor.DateField
-  const timeWindows = (S.timeWindows ?? []).map((w) => ({
+  const timeWindows = (S.catalog.timeWindows ?? []).map((w) => ({
     WindowKey: w.key, Name: w.name, WindowType: w.windowType, LengthMonths: w.lengthMonths ?? null, LengthDays: w.lengthDays ?? null,
   }));
 
   // one related entity + one factor + one model-factor per configured signal
-  const relatedEntities = S.factors.map((f) => ({
-    RelatedKey: `${S.model.key}:${f.alias}`, ModelKey: S.model.key, EntityName: f.sourceEntityName,
+  const relatedEntities = S.catalog.factors.map((f) => ({
+    RelatedKey: `${S.params.model.key}:${f.alias}`, ModelKey: S.params.model.key, EntityName: f.sourceEntityName,
     Alias: f.alias, RelationshipPath: '[]', JoinType: 'Left', // [] → compiler auto-resolves the FK path to the anchor
   }));
-  const factors = S.factors.map((f) => ({
-    FactorKey: f.key, Name: f.name, Slug: f.slug, Description: f.description, ModelKey: S.model.key,
-    AnchorEntityName: S.model.anchorEntityName, FactorType: 'Declarative',
-    SourceRelatedKey: `${S.model.key}:${f.alias}`, SourceEntityName: f.sourceEntityName,
+  const factors = S.catalog.factors.map((f) => ({
+    FactorKey: f.key, Name: f.name, Slug: f.slug, Description: f.description, ModelKey: S.params.model.key,
+    AnchorEntityName: S.params.model.anchorEntityName, FactorType: 'Declarative',
+    SourceRelatedKey: `${S.params.model.key}:${f.alias}`, SourceEntityName: f.sourceEntityName,
     Aggregation: f.aggregation ?? 'Count', AggregateFieldName: f.aggregateFieldName ?? null,
     DateField: f.dateField ?? null, WindowKey: f.windowKey ?? null,
     // Percentile spreads the population by rank (MinMax compressed everything to the bottom
     // because counts are long-tailed); verified live against the FactorCompiler.
     NormalizationMethod: 'Percentile', HigherIsBetter: f.higherIsBetter ?? true, PromotionState: 'Approved',
   }));
-  const modelFactors = S.factors.map((f, i) => ({
-    ModelFactorKey: `${S.model.key}:${f.key}`, ModelKey: S.model.key, FactorKey: f.key,
+  const modelFactors = S.catalog.factors.map((f, i) => ({
+    ModelFactorKey: `${S.params.model.key}:${f.key}`, ModelKey: S.params.model.key, FactorKey: f.key,
     // missing→Zero: absence of an activity is a LOW engagement signal (NeutralMidpoint wrongly
     // credited inactive members to the middle band).
     Weight: f.weight, WeightMode: 'Additive', MissingDataPolicy: 'Zero',

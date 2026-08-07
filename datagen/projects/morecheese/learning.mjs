@@ -24,13 +24,13 @@ export function buildLearning(cfg, people, periods) {
   for (let y = R.history.startYear; y <= releaseYear; y++) {
     years.push(y);
     const rC = rng(seed, `courses:${y}`);
-    for (let i = 0; i < L.coursesPerYear; i++) {
+    for (let i = 0; i < L.params.coursesPerYear; i++) {
       // any month (December included — int(0,10) left a visible hole in the calendar) and
       // any real day of that month, not just the 1st-28th
       const mo = rC.int(0, 11);
       const start = new Date(Date.UTC(y, mo, rC.int(1, new Date(Date.UTC(y, mo + 1, 0)).getUTCDate())));
       if (start > release) continue;
-      const topic = rC.pick(L.topics);
+      const topic = rC.pick(L.catalog.topics);
       // Topic/TrackKey ride in the pack but are NOT emitted yet — Course is a table we own
       // and new columns need a migration (planned separately). They already let the gates
       // check track balance, and make that migration a pure emitter change later.
@@ -54,13 +54,13 @@ export function buildLearning(cfg, people, periods) {
     // lockdown SPIKED online learning — post-calibration regime shift (tide, not boats)
     baselineShift: (y) => (R.regimes.covid.years.includes(y) ? R.regimes.covid.learningLogitBoost : 0), years,
     poolOf: (y) => coursesByYear.get(y)?.length ? people.filter((p) => coveredOn(p.MemberNumber, iso(new Date(Date.UTC(y, 5, 15))))) : null,
-    scoreOf: (p, y) => L.arrows.enrollEngagement.beta * (p._thetaPath?.[y] ?? p._theta),
-    target: L.participation.target,
+    scoreOf: (p, y) => L.effects['enroll.engagement'].beta * (p._thetaPath?.[y] ?? p._theta),
+    target: L.params.enrollment.target,
     streamKey: (p, y) => `learn:${p.MemberNumber}:${y}`,
     spawn: (r, p, y) => {
       const pool = coursesByYear.get(y);
       const out = [];
-      const n = 1 + (r.bernoulli(L.extraEnrollmentShare) ? 1 : 0);
+      const n = 1 + (r.bernoulli(L.params.extraEnrollmentShare) ? 1 : 0);
       for (let k = 0; k < n; k++) {
         const course = r.pick(pool);
         if (!coveredOn(p.MemberNumber, course.StartDate)) continue;
@@ -78,8 +78,8 @@ export function buildLearning(cfg, people, periods) {
   // pattern 2: does each enrollment finish — calibrated over the ACTUAL enrollee pool
   childOutcome({
     seed, items: enrollments,
-    scoreOf: (e) => L.arrows.completionEngagement.beta * e._theta,
-    target: L.completion.target,
+    scoreOf: (e) => L.effects['completion.engagement'].beta * e._theta,
+    target: L.params.completion.target,
     streamKey: (e) => `complete:${e.EnrollKey}`,
     decide: (e, p, r) => {
       const courseEnd = addDays(parseDate(e._endBase), e._weeks * 7);

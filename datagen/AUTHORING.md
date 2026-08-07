@@ -1,11 +1,44 @@
 # Authoring MoreCheese data — the cookbook
 
+> **Start with [`CONTRACT.md`](CONTRACT.md)** — the four sections every block uses, where each
+> kind of thing goes, and the one rule the file format imposes. It is the short document; this
+> one is the recipes and the scars.
+>
+> Struggling to picture the system at all? Read [`TOUR.md`](TOUR.md) first — the same
+> material as a plain-English factory tour, with the protections and a slow worked example.
+
 The other docs explain what this system **is** (FRAMEWORK, HOW-IT-WORKS) and how it
 **ships** (DELIVERY, INTEGRATION-RUNBOOK). This one explains how to **change the data** —
 the thing you actually came here to do.
 
 Every recipe below was executed for real at least once; the gotchas are things that
 actually bit, not things that might.
+
+## Before you start: let the editor answer your questions
+
+Open the repository at its root in VS Code (or any editor that reads `json.schemas`) and the
+ruleset becomes self-describing. You do not have to hold this document in your head:
+
+| what you do | what you get |
+|---|---|
+| `Ctrl`/`Cmd`+`Space` on a blank line at the top of a module | the list of blocks — `membership`, `events`, `committees`, … each with a one-line description |
+| hover any key | what it means, in prose, plus the trap if it has one |
+| type `attendShare: 45` | an immediate red squiggle: *45 is above the maximum 1* |
+| write an `arrows` entry | it insists on exactly one effect form **and** a stated reason |
+
+That comes from [`engine/ruleset.schema.json`](engine/ruleset.schema.json), wired up in
+[`.vscode/settings.json`](../.vscode/settings.json). The same schema is **executed** by
+`node cli/check-ruleset-schema.mjs` in the suite, so what the editor promises and what the
+build enforces cannot drift apart.
+
+The generator side is typed too: hovering `cfg`, `R` or a dice handle inside a
+`projects/*/**.mjs` file gives you the real shape, and opening a pattern's options object
+lists the options it takes. Those declarations live in
+[`engine/types.d.ts`](engine/types.d.ts) and cost nothing at runtime — datagen still ships as
+plain `.mjs` with no build step and no dependencies.
+
+Neither of these replaces reading the recipes below. They just mean you can start typing
+before you have finished reading.
 
 ## The one rule that keeps you safe
 
@@ -39,7 +72,9 @@ grid full of "Calle Mill" street names. Do not skip 3 and 4 for anything user-vi
    bands encode team rulings (renewal 87%±2, statusMix, variance floors). A red gate
    usually means your number contradicts an authored fact elsewhere.
 
-That's it. No code. This tier is safe for anyone.
+That's it. No code. This tier is safe for anyone — and a typo'd edit (a share of 15
+instead of 0.15, a broken bracket) now fails at LOAD time with the offending path or file
+named, not mid-generation with a stack trace.
 
 **Gotcha — calibrated shares:** many shares (committee participation, certification
 pursuit) pass through `childOutcome`, which *calibrates to the target over the eligible
@@ -91,17 +126,28 @@ This is the tier that today needs care. The checklist, in order:
      `uuidFor(prefix, key)` — register the prefix in DATA-CONTRACT.md's table
 3. **Wire into `index.mjs`** — call in pipeline order (§5 of ruleset-spec: a domain must
    be built after everything it reads), add tables to the pack map.
-4. **Emitters — all three, and this is the current sore spot:**
-   - `engine/seed-mapping.mjs` — SQL INSERT mapping (+ PREAMBLE DECLAREs for any
-     by-name lookups)
-   - `cli/emit-mjsync.mjs` — its own duplicate MAPPING (metadata path; `@lookup:` for
-     seeded rows — and the entity for polymorphic refs is `MJ: Entities`, not `Entities`;
-     that one wrong word failed 3,191 records)
-   - `cli/emit-schema.mjs` — the playground shim DDL (+ its own lookup seeds if F6 applies)
-5. **Gates** — minimum set for a new domain: FK resolution both directions, share bands
-   for anything drawn from a weighted list **plus presence floors for rare categories**,
-   and one gate asserting the domain's reason-to-exist (the funnel's conversion-rate gate
-   is the model: it asserts the *question the domain answers* is answerable).
+4. **The mapping — ONE entry in `engine/seed-mapping.mjs`** (consolidated 2026-07-31; the
+   same tables were previously mapped again inside emit-mjsync, and the copies drifted —
+   one wrong word there once failed 3,191 records at push). Each entry carries:
+   - `json`, `table` and a `columns(r)` projection — the formatters are dual-mode, so the
+     SAME entry renders SQL literals *and* the MetadataSync record (`renderRecord`)
+   - `dir` + `entity` — the MetadataSync folder and entity name (omit both for an
+     INSERT-only pack like platform)
+   - by-name lookups (F6): the `sqlVar('@X')` you write resolves on the SQL path via a
+     PREAMBLE DECLARE and on the sync path via `VAR_TO_LOOKUP` — add your variable to
+     BOTH, or the emit throws with the variable's name
+   - delivery quirks, spelled on the entry: `syncPk` (non-ID primary key), `syncOmit`
+     (SQL-only columns), `syncOverride` (e.g. Sonar's deferred circular FK)
+   Then add the new `dir`s to `DIRECTORY_ORDER` in `cli/emit-mjsync.mjs` in FK-safe push
+   order — the emitter fails loudly if the list and the mapping disagree.
+   `cli/emit-schema.mjs` (the playground shim DDL) is still separate on purpose: it
+   carries column types the mapping doesn't, and the DDL-drift gate polices it.
+5. **Gates** — minimum set for a new domain, each a one-line helper call from
+   `engine/gates.mjs`: `fkResolves` both directions, `shareBand` for anything drawn from a
+   weighted list **plus `presenceFloor` for rare categories** (a share band passes happily
+   on zero), and one bespoke gate asserting the domain's reason-to-exist (the funnel's
+   conversion-rate gate is the model: it asserts the *question the domain answers* is
+   answerable).
 6. **Contract** — if you touch a dependency app's table, re-capture:
    `MJ_SA_PASSWORD=… node cli/capture-contract.mjs --db <install>`.
 7. **Verify up the whole ladder** (build → test.mjs → push → render). Then re-emit what
@@ -132,9 +178,38 @@ a too-large share of a smaller world (this failed once, in `test.mjs`, exactly t
 
 ## Known sharp edges (candidates for the next simplification pass)
 
-1. The emitter mapping exists **three times** (step 4 above). Collapsing it to one source
-   of truth is the single biggest authoring simplification available.
-2. The ruleset has **no schema** — a typo fails mid-generation, not at edit time. A JSON
-   Schema + lint step in `test.mjs` would catch it in seconds.
-3. `validate.mjs` is 1,600+ lines of bespoke checks; ~5 patterns repeat. A small helper
-   library (shareBand, presenceFloor, fkResolves) would make new gates copy-paste.
+1. ~~The emitter mapping exists three times.~~ **Fixed 2026-07-31**: one mapping in
+   `seed-mapping.mjs`, rendered to both delivery paths (see Recipe 3 step 4). The refactor
+   was proven by byte-diffing the SQL outputs and semantically diffing all 122k metadata
+   records against pre-consolidation baselines — and it surfaced two latent bugs on the
+   way: a missing `MJ_ENTITY_VAR` entry that had been rendering an EMPTY value slot in the
+   sonar SQL, and a root-file rewrite that silently dropped the hand-added Betty dirs from
+   the push order.
+2. ~~The ruleset has no schema.~~ **Fixed 2026-07-31**: the lint that already ran on every
+   load (`engine/lint.mjs`) now also catches the human typo classes — a share of 1.4, a
+   negative weight in a weighted list, a zero tolerance, a hero pointing at a committee or
+   credential that doesn't exist, and a broken module now names its FILE instead of dying
+   with a bare 'Unexpected token'. Negative-tested in `test.mjs`: five planted defects must
+   each be caught BY NAME, and the clean ruleset must stay quiet.
+3. ~~validate.mjs is 1,600+ lines of bespoke checks.~~ **Fixed 2026-07-31**: the five
+   repeating shapes live in `engine/gates.mjs` (`fkResolves`, `shareBand`, `presenceFloor`,
+   `distinctAtLeast`, `dangling`), negative-tested in the suite. New gates should be a
+   helper call; the six pack-refs FK gates are the converted exemplars (report-identical).
+   Existing prose-style gates were deliberately left — their wording carries the story.
+4. ~~You cannot author without already knowing the format.~~ **Partly fixed 2026-07-31**: the
+   ruleset now has a machine-readable, editor-wired schema and the engine has type
+   declarations (see *Before you start*, above), so the format answers questions itself
+   instead of requiring a reader of `engine/`. Writing the schema immediately paid for
+   itself — it found three causal arrows carrying magnitudes with **no stated reason at all**
+   (certification, advocacy, meeting attendance), which the house convention requires and no
+   check had ever enforced.
+
+   What is **not** fixed: the vocabulary is still a dialect rather than a standard. The same
+   idea is spelled `target` / `presentTarget` / `shareOfEligible` in different blocks, a Mix
+   may be an object map or a pair-array, `statusMix` is not a Mix at all, and
+   `rng.pickWeighted` accepts only the pair form. The schema *describes* that inconsistency
+   honestly (including the traps) but does not remove it. Removing it means renaming keys
+   across nineteen modules, which is a migration, not a description — proposed, with the open
+   decisions, in [`TYPES-PROPOSAL.md`](TYPES-PROPOSAL.md). **Team ruling (2026-07-31): that
+   migration waits for a second project to exist**, so the vocabulary is generalised from two
+   data points instead of guessed from one.

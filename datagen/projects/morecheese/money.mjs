@@ -18,19 +18,19 @@ import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 export function buildMoney(cfg, people, periods, events, registrations, programs) {
   const { R, seed, release } = cfg;
   const O = R.orders;
-  const P = O.paymentProfiles;
+  const P = O.catalog.paymentProfiles;
 
   // ---------- products: one Membership product per tier + the event products ----------
-  const products = R.membership.tiers.list.map((t) => ({
+  const products = R.membership.catalog.tiers.map((t) => ({
     ProductKey: `PROD-MEM-${t.name.toUpperCase()}`, Name: `${t.name} Membership (annual)`,
     ProductType: 'Membership', UnitPrice: t.dues, IsSharedDemo: true,
   }));
-  for (const [type, price] of Object.entries(O.eventPrices)) {
+  for (const [type, price] of Object.entries(O.params.eventPrices)) {
     products.push({ ProductKey: `PROD-EVT-${type.toUpperCase()}`, Name: `${type} Registration`, ProductType: 'Event', UnitPrice: price, IsSharedDemo: true });
   }
   // the rest of what an association actually sells — exam fees, competition entries,
   // publications, sponsorship, merchandise, the job board, donations
-  for (const c of O.catalogue ?? []) {
+  for (const c of O.catalog.products ?? []) {
     products.push({ ProductKey: c.key, Name: c.name, ProductType: c.type, UnitPrice: c.price, IsSharedDemo: true });
   }
   const priceOf = new Map(products.map((p) => [p.ProductKey, p.UnitPrice]));
@@ -38,7 +38,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   // Catalogue prices are CURRENT. A line is charged the price of ITS year, so a 2014 order
   // does not read at 2026 money and a revenue-by-year chart shows a price effect as well as
   // a volume effect.
-  const infl = O.priceIndex?.annualInflation ?? 0;
+  const infl = O.params.annualInflation;
   const releaseYear = release.getUTCFullYear();
   const atYear = (amount, year) => Math.round(amount / Math.pow(1 + infl, releaseYear - year));
 
@@ -98,22 +98,22 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
       // post-at-start version let the manual profile's early offsets produce 2,386
       // payments dated before their order).
       const isFirst = personByKey.get(per.MemberNumber)?.JoinDate === per.StartDate;
-      const orderDate = isFirst ? start : addDays(start, -O.renewalBilledDaysAhead);
+      const orderDate = isFirst ? start : addDays(start, -O.params.renewalBilledDaysAhead);
       const dueDate = addDays(start, t.termsDays);
       let paymentDate = addDays(dueDate, t.offsetDays);
       if (paymentDate < orderDate) paymentDate = orderDate; // early payers pay when the bill arrives
       // dues at the price of their own year, plus the odd journal subscription or donation
       const rAdd = rng(seed, `addon:${per.PeriodKey}`);
       const extras = [];
-      if (rAdd.bernoulli(O.addOns?.journalShare ?? 0)) extras.push({ productKey: 'PROD-PUB-JOURNAL' });
-      if (rAdd.bernoulli(O.addOns?.donationShare ?? 0)) extras.push({ productKey: 'PROD-DONATION' });
+      if (rAdd.bernoulli(O.params.addOnJournalShare)) extras.push({ productKey: 'PROD-PUB-JOURNAL' });
+      if (rAdd.bernoulli(O.params.addOnDonationShare)) extras.push({ productKey: 'PROD-DONATION' });
       pushOrder(`ORD-D-${per.PeriodKey}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, atYear(per.DuesAmount, start.getUTCFullYear()), orderDate, dueDate, paymentDate, t.method, extras);
 
       // PendingRenewal: the NEXT cycle's renewal order is already open and unpaid —
       // the renewal-outreach queue, visible in the money data
       if (per.Status === 'PendingRenewal') {
         const nextDue = addDays(parseDate(per.EndDate), 1);
-        pushOrder(`ORD-R-${per.MemberNumber}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, atYear(per.DuesAmount, nextDue.getUTCFullYear()), addDays(nextDue, -O.renewalBilledDaysAhead), nextDue, null, null);
+        pushOrder(`ORD-R-${per.MemberNumber}`, per.MemberNumber, `PROD-MEM-${per.MembershipTier.toUpperCase()}`, atYear(per.DuesAmount, nextDue.getUTCFullYear()), addDays(nextDue, -O.params.renewalBilledDaysAhead), nextDue, null, null);
       }
     },
   });
@@ -125,16 +125,16 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     streamKey: (reg) => `pay:${reg.RegKey}`,
     profileOf: (reg) => {
       const ev = eventByKey.get(reg.EventKey);
-      return ev?.IsPaid && O.eventPrices[ev.EventType] ? P.checkout : null;
+      return ev?.IsPaid && O.params.eventPrices[ev.EventType] ? P.checkout : null;
     },
     emit: (reg, t) => {
       const ev = eventByKey.get(reg.EventKey);
       const d = parseDate(reg.RegisteredOn);
       // conference registrations often pick up merchandise at the same checkout
       const rM = rng(seed, `addon:${reg.RegKey}`);
-      const extras = ev.EventType === 'Conference' && rM.bernoulli(O.addOns?.conferenceMerchShare ?? 0)
+      const extras = ev.EventType === 'Conference' && rM.bernoulli(O.params.addOnConferenceMerchShare)
         ? [{ productKey: rM.pick(['PROD-MERCH-APRON', 'PROD-MERCH-BOOK']) }] : [];
-      pushOrder(`ORD-E-${reg.RegKey}`, reg.MemberNumber, `PROD-EVT-${ev.EventType.toUpperCase()}`, atYear(O.eventPrices[ev.EventType], d.getUTCFullYear()), d, addDays(d, t.offsetDays), addDays(d, t.offsetDays), t.method, extras);
+      pushOrder(`ORD-E-${reg.RegKey}`, reg.MemberNumber, `PROD-EVT-${ev.EventType.toUpperCase()}`, atYear(O.params.eventPrices[ev.EventType], d.getUTCFullYear()), d, addDays(d, t.offsetDays), addDays(d, t.offsetDays), t.method, extras);
     },
   });
 
@@ -142,19 +142,19 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   // 124 credentials and 445 competition entries generated no revenue at all.
   for (const mc of programs?.memberCertifications ?? []) {
     const rC = rng(seed, `certfee:${mc.MemberCertKey}`);
-    if (!rC.bernoulli(O.certificationFees?.examShare ?? 0)) continue;
+    if (!rC.bernoulli(O.params.certificationExamShare)) continue;
     const d = parseDate(mc.EnrolledOn);
     const yr = d.getUTCFullYear();
     pushOrder(`ORD-C-${mc.MemberCertKey}`, mc.MemberNumber, 'PROD-CERT-EXAM', atYear(priceOf.get('PROD-CERT-EXAM'), yr), d, addDays(d, 14), addDays(d, rC.int(0, 10)), 'CreditCard');
     // an expired credential that was renewed pays a recertification fee
-    if (mc.Status === 'Expired' && rC.bernoulli(O.certificationFees?.recertShare ?? 0)) {
+    if (mc.Status === 'Expired' && rC.bernoulli(O.params.certificationRecertShare)) {
       const rd = parseDate(mc.ExpiresOn);
       if (rd <= release) pushOrder(`ORD-CR-${mc.MemberCertKey}`, mc.MemberNumber, 'PROD-CERT-RECERT', atYear(priceOf.get('PROD-CERT-RECERT'), rd.getUTCFullYear()), rd, addDays(rd, 14), addDays(rd, rC.int(0, 12)), 'CreditCard');
     }
   }
   for (const e of programs?.competitionEntries ?? []) {
     const rE = rng(seed, `compfee:${e.EntryKey}`);
-    if (!rE.bernoulli(O.competitionFees?.share ?? 0)) continue;
+    if (!rE.bernoulli(O.params.competitionFeeShare)) continue;
     // entries are lodged ahead of the July judging
     const d = new Date(Date.UTC(e.EntryYear, 4, 1 + rE.int(0, 40)));
     if (d > release) continue;
@@ -165,7 +165,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
   // in-flight payments. DELIBERATE causal-vs-noise mix: base failure rate is pure noise;
   // low-affluence members' cards fail MORE (the causal component an analyst can find).
   // A retry that would land after release hasn't happened — the order goes back to aging.
-  const PO = O.paymentOutcomes;
+  const PO = O.params;
   const failedAttempts = [];
   const dropCaptured = new Set();
   for (const pay of payments) {
@@ -173,14 +173,14 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     const person = personByKey.get(orders.find((o) => o.OrderKey === pay.OrderKey)?.MemberNumber);
     if (!person) continue;
     const r = rng(seed, `payfail:${pay.PaymentKey}`);
-    const pFail = PO.noiseFailShare + (person._phi < PO.lowPhiCut ? PO.lowPhiFailBonus : 0);
+    const pFail = PO.paymentNoiseFailShare + (person._phi < PO.paymentLowPhiCut ? PO.paymentLowPhiFailBonus : 0);
     if (!r.bernoulli(pFail)) continue;
-    const denied = r.bernoulli(PO.deniedShareOfFailed);
+    const denied = r.bernoulli(PO.paymentDeniedShareOfFailed);
     failedAttempts.push({
       PaymentKey: `${pay.PaymentKey}-F1`, OrderKey: pay.OrderKey, Amount: pay.Amount,
       PaymentDate: pay.PaymentDate, Method: pay.Method, Status: denied ? 'Denied' : 'Failed', IsSharedDemo: true,
     });
-    const retry = addDays(parseDate(pay.PaymentDate), 1 + r.int(0, PO.retryDaysMax - 1));
+    const retry = addDays(parseDate(pay.PaymentDate), 1 + r.int(0, PO.paymentRetryDaysMax - 1));
     if (retry > release) {
       // the retry hasn't happened yet — order returns to aging (the failed card IS the story)
       dropCaptured.add(pay.PaymentKey);
@@ -201,7 +201,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
     const ord = orderByKey.get(key);
     if (!ord || ord.PaymentStatus !== 'Paid') continue;
     const rR = rng(seed, `refund:${reg.RegKey}`);
-    if (!rR.bernoulli(O.refunds?.shareOfPaidNoShows ?? 0)) continue;
+    if (!rR.bernoulli(O.params.refundShareOfPaidNoShows)) continue;
     const paidOn = payments.find((x) => x.OrderKey === key)?.PaymentDate;
     if (!paidOn) continue;
     const when = addDays(parseDate(paidOn), rR.int(5, 45));
@@ -215,7 +215,7 @@ export function buildMoney(cfg, people, periods, events, registrations, programs
 
   const finalPayments = payments.filter((x) => !dropCaptured.has(x.PaymentKey)).concat(failedAttempts).concat(refunds);
   // in-flight: captures within the settlement window of release are still InProgress
-  const inflightCut = iso(addDays(release, -PO.inProgressWindowDays));
+  const inflightCut = iso(addDays(release, -PO.paymentInProgressWindowDays));
   for (const pay of finalPayments) {
     if (pay.Status === 'Captured' && pay.PaymentDate >= inflightCut) pay.Status = 'InProgress';
   }

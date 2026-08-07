@@ -46,17 +46,17 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
   // ---------- A. recent joiners get the history that preceded them ----------
   const recent = people.filter((p) => {
     const start = firstStart.get(p.MemberNumber);
-    return start && relYear - parseDate(start).getUTCFullYear() <= F.lookbackYears;
+    return start && relYear - parseDate(start).getUTCFullYear() <= F.params.lookbackYears;
   });
 
   for (const p of recent) {
     const r = rng(seed, `funnel:${p.MemberNumber}`);
-    if (!r.bernoulli(F.knownBeforeJoiningShare)) continue; // the rest arrived cold
+    if (!r.bernoulli(F.params.knownBeforeJoiningShare)) continue; // the rest arrived cold
     const start = firstStart.get(p.MemberNumber);
 
     // webinars they sat in on while still a non-member
-    const window = freeEvents.filter((e) => e.Date < start && e.Date >= iso(addDays(parseDate(start), -F.priorWindowDays)));
-    const wanted = Math.min(r.int(1, F.maxPriorWebinars), window.length);
+    const window = freeEvents.filter((e) => e.Date < start && e.Date >= iso(addDays(parseDate(start), -F.params.priorWindowDays)));
+    const wanted = Math.min(r.int(1, F.params.maxPriorWebinars), window.length);
     const taken = new Set();
     for (let i = 0; i < wanted; i++) {
       const ev = r.pick(window);
@@ -65,14 +65,14 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
       preRegistrations.push({
         RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey,
         RegisteredOn: iso(addDays(parseDate(ev.Date), -r.int(1, 21))),
-        Attended: r.bernoulli(F.priorAttendShare), IsSharedDemo: true,
+        Attended: r.bernoulli(F.params.priorAttendShare), IsSharedDemo: true,
       });
     }
 
     // and the application they filled in on the way — a NAMED response (the anonymous ones
     // in forms.mjs are the people who applied and never joined, or haven't yet)
-    if (!r.bernoulli(F.applicationShare)) continue;
-    const when = addDays(parseDate(start), -r.int(3, F.applicationLeadDays));
+    if (!r.bernoulli(F.params.applicationShare)) continue;
+    const when = addDays(parseDate(start), -r.int(3, F.params.applicationLeadDays));
     if (iso(when) < `${R.history.startYear}-01-01`) continue;
     const respKey = `${application.formKey}:member:${p.MemberNumber}`;
     responses.push({
@@ -101,7 +101,7 @@ export function buildFunnel(cfg, { people, prospects, orgs, events, periods, app
     const org = orgByKey.get(p.OrgKey);
     const dissolved = org?.LifecycleEvent?.kind === 'Dissolved';
     employmentEdges.push({
-      RelKey: `emp:${p.MemberNumber}`, TypeKey: null, TypeID: R.relationships.seededTypeIDs.Employee,
+      RelKey: `emp:${p.MemberNumber}`, TypeKey: null, TypeID: R.relationships.params.seededTypeIDs.Employee,
       FromMemberNumber: p.MemberNumber, ToOrgKey: p.OrgKey,
       Title: p.Title ?? null, StartDate: p.JoinDate,
       EndDate: dissolved ? `${org.LifecycleEvent.year}-12-31` : null,

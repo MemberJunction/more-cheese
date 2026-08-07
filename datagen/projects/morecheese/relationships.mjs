@@ -15,7 +15,7 @@ export function buildRelationships(cfg, people, orgs) {
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
   const personByNum = new Map(people.map((p) => [p.MemberNumber, p]));
 
-  const relationshipTypes = REL.demoTypes.map((t) => ({
+  const relationshipTypes = REL.catalog.demoTypes.map((t) => ({
     TypeKey: t.name, Name: t.name, Category: t.category,
     ForwardLabel: t.forward, ReverseLabel: t.reverse, Description: t.description,
     IsDirectional: true, IsActive: true, IsSharedDemo: true,
@@ -29,7 +29,7 @@ export function buildRelationships(cfg, people, orgs) {
     const org = orgByKey.get(p.OrgKey);
     const dissolved = org?.LifecycleEvent?.kind === 'Dissolved';
     relationships.push({
-      RelKey: `emp:${p.MemberNumber}`, TypeKey: null, TypeID: REL.seededTypeIDs.Employee,
+      RelKey: `emp:${p.MemberNumber}`, TypeKey: null, TypeID: REL.params.seededTypeIDs.Employee,
       FromMemberNumber: p.MemberNumber, ToOrgKey: p.OrgKey,
       Title: p.Title ?? null, StartDate: p.JoinDate,
       EndDate: dissolved ? `${org.LifecycleEvent.year}-12-31` : null,
@@ -39,11 +39,11 @@ export function buildRelationships(cfg, people, orgs) {
   }
 
   // authored story links (heroes)
-  for (const a of REL.authored) {
-    const demoType = REL.demoTypes.find((t) => t.name === a.type);
+  for (const a of REL.catalog.authored) {
+    const demoType = REL.catalog.demoTypes.find((t) => t.name === a.type);
     const row = {
       RelKey: `story:${a.type}:${a.from ?? a.fromOrgOf}`,
-      TypeKey: demoType ? a.type : null, TypeID: demoType ? null : REL.seededTypeIDs[a.type],
+      TypeKey: demoType ? a.type : null, TypeID: demoType ? null : REL.params.seededTypeIDs[a.type],
       StartDate: a.start ?? null, EndDate: null, Status: 'Active', Notes: a.note ?? null,
       IsSharedDemo: true,
     };
@@ -61,17 +61,17 @@ export function buildRelationships(cfg, people, orgs) {
   // The graph used to be 1,593 employment edges and 3 authored story links, so a
   // relationship viewer had nothing to view. These derive from facts we already have
   // (no new person/org rows, no re-roll: relationships is downstream-terminal).
-  const D = REL.derived ?? {};
+  const D = REL.params;
   const { seed } = cfg;
 
   // REFERRALS: a joiner was referred by someone who was ALREADY a member on their join
   // date and shares their employer or city — which is how word of mouth actually travels.
-  if (D.referral) {
+  if (D.referralShareOfJoiners) {
     const byJoin = [...people].filter((p) => !p._dup).sort((a, b) => (a.JoinDate < b.JoinDate ? -1 : a.JoinDate > b.JoinDate ? 1 : a.MemberNumber < b.MemberNumber ? -1 : 1));
     for (let i = 0; i < byJoin.length; i++) {
       const p = byJoin[i];
       const r = rng(seed, `referral:${p.MemberNumber}`);
-      if (!r.bernoulli(D.referral.shareOfJoiners)) continue;
+      if (!r.bernoulli(D.referralShareOfJoiners)) continue;
       // candidates: earlier joiners at the same employer, else the same city
       const earlier = byJoin.slice(0, i);
       const sameOrg = p.OrgKey ? earlier.filter((q) => q.OrgKey === p.OrgKey) : [];
@@ -90,7 +90,7 @@ export function buildRelationships(cfg, people, orgs) {
 
   // SUPPLIER-OF: supplier organizations serve a handful of producer creameries each,
   // preferring their own region so the trade graph reads geographically.
-  if (D.supplierOf) {
+  if (D.supplierEdgesPerSupplier) {
     const suppliers = orgs.filter((o) => o.Type === 'Supplier');
     const producers = orgs.filter((o) => o.Type === 'Producer');
     for (const s of suppliers) {
@@ -98,7 +98,7 @@ export function buildRelationships(cfg, people, orgs) {
       const local = producers.filter((o) => o.Region === s.Region);
       const pool = local.length >= 3 ? local : producers;
       if (!pool.length) continue;
-      const n = r.int(D.supplierOf.edgesPerSupplier.min, D.supplierOf.edgesPerSupplier.max);
+      const n = r.int(D.supplierEdgesPerSupplier.min, D.supplierEdgesPerSupplier.max);
       const taken = new Set();
       for (let k = 0; k < n; k++) {
         const pick = pool[r.int(0, pool.length - 1)];

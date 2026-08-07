@@ -8,12 +8,28 @@
 // migrations/). See emit-sql.mjs / emit-data-migration.mjs.
 import { uuidFor } from './ids.mjs';
 
-export const sqlStr = (v) => v == null ? 'NULL' : `N'${String(v).replace(/'/g, "''")}'`;
-export const sqlNum = (v) => v == null ? 'NULL' : String(v);
-export const sqlBit = (v) => v == null ? 'NULL' : v ? '1' : '0';
-export const sqlDate = (v) => v == null ? 'NULL' : `'${v}'`;
-export const sqlId = (v) => v == null ? 'NULL' : `'${v}'`;
-export const sqlVar = (v) => v; // raw expression (e.g. a DECLAREd @Entity variable) — polymorphic refs resolve by NAME at load time
+// ---- dual-mode field formatters (the 2026-07-31 consolidation) ----
+// The SAME columns() functions below render BOTH delivery paths. Mode 'sql' (the default,
+// and the only mode until renderRecord() flips it for one call) produces SQL literals
+// exactly as it always did — that path is byte-diffed against a pre-consolidation baseline.
+// Mode 'sync' returns the raw JSON value the MetadataSync tree carries; preamble @variables
+// translate to '@lookup:' references through VAR_TO_LOOKUP, so the F6 by-name rule is
+// spelled ONCE. Before this, emit-mjsync.mjs carried its own duplicate 59-entry mapping —
+// the copy where 'MJ: Entities' was once misspelled and 3,191 records failed at push.
+let MODE = 'sql';
+export const sqlStr = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : `N'${String(v).replace(/'/g, "''")}'`;
+export const sqlNum = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : String(v);
+export const sqlBit = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : v ? '1' : '0';
+export const sqlDate = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : `'${v}'`;
+export const sqlId = (v) => MODE === 'sync' ? (v ?? null) : v == null ? 'NULL' : `'${v}'`;
+// raw expression (a DECLAREd @variable) on the SQL path; its @lookup twin on the sync path
+export const sqlVar = (v) => {
+  if (MODE !== 'sync') return v;
+  if (v == null || v === 'NULL') return null;
+  const l = VAR_TO_LOOKUP[v];
+  if (l === undefined) throw new Error(`sqlVar '${v}' has no @lookup translation — add it to VAR_TO_LOOKUP in seed-mapping.mjs`);
+  return l;
+};
 
 // platform pack: entity name → the preamble DECLARE that resolves it, and RefKind → the
 // uuidFor prefix that reconstructs the referenced record's deterministic PK
@@ -33,6 +49,7 @@ export const MJ_ENTITY_VAR = {
   'MoreCheese: Advocacy Actions': '@E_Advocacy',
   'MJ_BizApps_Forms: Form Responses': '@E_FormResponses',
   'MoreCheese: Member Certifications': '@E_MemberCerts',
+  'MoreCheese: Orders': '@E_Orders', // spend factor source — was MISSING, and sqlVar(undefined) rendered an empty value slot in the sonar SQL
 };
 export const RECORD_PREFIX = { memberprofile: 'memberprofile', period: 'period', issue: 'issue', task: 'task', rel: 'rel', person: 'person', org: 'org' };
 
@@ -50,8 +67,47 @@ export const ORG_TYPE_VAR = {
   'Educational Institution': '@OT_EduInst', Association: '@OT_Association',
 };
 
+// ---- @variable → @lookup translation (sync mode) ----
+// Every DECLAREd variable the SQL preambles resolve BY NAME has exactly one MetadataSync
+// spelling. Built from the same var maps, so adding a seeded lookup is still one edit.
+// Entity names verified against the legacy emit-mjsync mapping (incl. the singular
+// 'MJ_BizApps_Issues: Issue Status'). Platform-only vars (@MJRole_UI) are deliberately
+// absent: the platform pack never ships via MetadataSync, and an unknown var THROWS.
+const LOOKUP = (entity, name) => `@lookup:${entity}.Name=${name}`;
+const VAR_TO_LOOKUP = {
+  ...Object.fromEntries(Object.entries(MJ_ENTITY_VAR).map(([name, v]) => [v, LOOKUP('MJ: Entities', name)])),
+  '@E_Meetings': LOOKUP('MJ: Entities', 'Committees: Meetings'),
+  '@E_Orders': LOOKUP('MJ: Entities', 'MoreCheese: Orders'),
+  '@E_Orgs': LOOKUP('MJ: Entities', 'MJ_BizApps_Common: Organizations'),
+  ...Object.fromEntries(Object.entries(CONTACT_TYPE_VAR).map(([n, v]) => [v, LOOKUP('MJ_BizApps_Common: Contact Types', n)])),
+  ...Object.fromEntries(Object.entries(ADDRESS_TYPE_VAR).map(([n, v]) => [v, LOOKUP('MJ_BizApps_Common: Address Types', n)])),
+  ...Object.fromEntries(Object.entries(ORG_TYPE_VAR).map(([n, v]) => [v, LOOKUP('MJ_BizApps_Common: Organization Types', n)])),
+  '@Role_Chair': LOOKUP('Committees: Roles', 'Chair'),
+  '@Role_ViceChair': LOOKUP('Committees: Roles', 'Vice Chair'),
+  '@Role_Member': LOOKUP('Committees: Roles', 'Member'),
+  '@IS_New': LOOKUP('MJ_BizApps_Issues: Issue Status', 'New'),
+  '@IS_InProgress': LOOKUP('MJ_BizApps_Issues: Issue Status', 'In Progress'),
+  '@IS_Resolved': LOOKUP('MJ_BizApps_Issues: Issue Status', 'Resolved'),
+  '@IS_Closed': LOOKUP('MJ_BizApps_Issues: Issue Status', 'Closed'),
+};
+
+/** Render one row as a MetadataSync record — the sync twin of columns(). Entries that ship
+ *  via MetadataSync carry dir + entity; syncPk overrides the primary-key column (default ID,
+ *  e.g. IssueNumberSequence keys on ScopeCode); syncOmit lists SQL-only columns. */
+export function renderRecord(entry, row) {
+  MODE = 'sync';
+  try {
+    const cols = entry.columns(row);
+    const pkName = entry.syncPk ?? 'ID';
+    const { [pkName]: pk, ...fields } = cols;
+    if (entry.syncOmit) for (const k of entry.syncOmit) delete fields[k];
+    if (entry.syncOverride) for (const [k, fn] of Object.entries(entry.syncOverride)) fields[k] = fn(row);
+    return { primaryKey: { [pkName]: pk }, fields };
+  } finally { MODE = 'sql'; }
+}
+
 // ---------- the mapping: JSON pack tables → SQL tables (ASSUMED shapes) ----------
-// THE PERSON/ORG SPLIT (Marcelo's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
+// THE PERSON/ORG SPLIT (the schema owner's v2-plan §4.2 ruling, landed 2026-07-14): identity rows go
 // to bizapps-common's tables (their REAL columns, from bizapps-common
 // migrations/B202602271452); everything member-ish becomes an extension-profile row in OUR
 // morecheese_members schema carrying the PersonID/OrganizationID. The pinned uuidv5 IDs make
@@ -61,7 +117,7 @@ export const ORG_TYPE_VAR = {
 export const MAPPING = {
   common: [
     {
-      json: 'organizations', table: '[__mj_BizAppsCommon].[Organization]',
+      json: 'organizations', dir: 'organizations', entity: 'MJ_BizApps_Common: Organizations', table: '[__mj_BizAppsCommon].[Organization]',
       columns: (r) => ({
         ID: sqlId(uuidFor('org', r.OrgKey)), Name: sqlStr(r.Name),
         OrganizationTypeID: sqlVar(r.OrganizationTypeName ? ORG_TYPE_VAR[r.OrganizationTypeName] : 'NULL'),
@@ -72,7 +128,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'organizations', table: '[morecheese_members].[OrganizationProfile]',
+      json: 'organizations', dir: 'organization-profiles', entity: 'MoreCheese: Organization Profiles', table: '[morecheese_members].[OrganizationProfile]',
       columns: (r) => ({
         ID: sqlId(uuidFor('orgprofile', r.OrgKey)), OrganizationID: sqlId(uuidFor('org', r.OrgKey)),
         OrgKey: sqlStr(r.OrgKey), Type: sqlStr(r.Type), Region: sqlStr(r.Region), Country: sqlStr(r.Country ?? null), CountryName: sqlStr(r.CountryName ?? null), City: sqlStr(r.City), State: sqlStr(r.State), AddressLine1: sqlStr(r.AddressLine1 ?? null), PostalCode: sqlStr(r.PostalCode ?? null),
@@ -82,7 +138,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'relationship_types', table: '[__mj_BizAppsCommon].[RelationshipType]',
+      json: 'relationship_types', dir: 'relationship-types', entity: 'MJ_BizApps_Common: Relationship Types', table: '[__mj_BizAppsCommon].[RelationshipType]',
       columns: (r) => ({
         ID: sqlId(uuidFor('reltype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description),
         Category: sqlStr(r.Category), IsDirectional: sqlBit(r.IsDirectional), ForwardLabel: sqlStr(r.ForwardLabel),
@@ -90,7 +146,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'addresses', table: '[__mj_BizAppsCommon].[Address]',
+      json: 'addresses', dir: 'addresses', entity: 'MJ_BizApps_Common: Addresses', table: '[__mj_BizAppsCommon].[Address]',
       columns: (r) => ({
         ID: sqlId(uuidFor('address', r.AddressKey)),
         Line1: sqlStr(r.Line1), Line2: sqlStr(r.Line2), City: sqlStr(r.City),
@@ -99,7 +155,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'address_links', table: '[__mj_BizAppsCommon].[AddressLink]',
+      json: 'address_links', dir: 'address-links', entity: 'MJ_BizApps_Common: Address Links', table: '[__mj_BizAppsCommon].[AddressLink]',
       columns: (r) => ({
         ID: sqlId(uuidFor('addresslink', r.LinkKey)), AddressID: sqlId(uuidFor('address', r.AddressKey)),
         // polymorphic owner: entity resolved by NAME in the preamble, record by pinned uuid
@@ -110,7 +166,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'contact_methods', table: '[__mj_BizAppsCommon].[ContactMethod]',
+      json: 'contact_methods', dir: 'contact-methods', entity: 'MJ_BizApps_Common: Contact Methods', table: '[__mj_BizAppsCommon].[ContactMethod]',
       columns: (r) => ({
         ID: sqlId(uuidFor('contactmethod', r.MethodKey)),
         PersonID: sqlId(r.OwnerKind === 'person' ? uuidFor('person', r.OwnerKey) : null),
@@ -120,7 +176,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'people', table: '[__mj_BizAppsCommon].[Person]',
+      json: 'people', dir: 'people', entity: 'MJ_BizApps_Common: People', table: '[__mj_BizAppsCommon].[Person]',
       columns: (r) => ({
         ID: sqlId(uuidFor('person', r.MemberNumber)),
         FirstName: sqlStr(r.FirstName), LastName: sqlStr(r.LastName), MiddleName: sqlStr(r.MiddleName), PreferredName: sqlStr(r.PreferredName), Title: sqlStr(r.Title), Email: sqlStr(r.Email),
@@ -131,7 +187,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'people', table: '[morecheese_members].[MemberProfile]',
+      json: 'people', dir: 'member-profiles', entity: 'MoreCheese: Member Profiles', table: '[morecheese_members].[MemberProfile]',
       only: (r) => !r.IsProspect, // non-members are Person rows with no membership extension
 
       columns: (r) => ({
@@ -149,7 +205,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'relationships', table: '[__mj_BizAppsCommon].[Relationship]',
+      json: 'relationships', dir: 'relationships', entity: 'MJ_BizApps_Common: Relationships', table: '[__mj_BizAppsCommon].[Relationship]',
       columns: (r) => ({
         ID: sqlId(uuidFor('rel', r.RelKey)),
         RelationshipTypeID: sqlId(r.TypeID ?? uuidFor('reltype', r.TypeKey)),
@@ -164,7 +220,7 @@ export const MAPPING = {
   ],
   membership: [
     {
-      json: 'data_quality_labels', table: '[morecheese_members].[DataQualityLabel]',
+      json: 'data_quality_labels', dir: 'data-quality-labels', entity: 'MoreCheese: Data Quality Labels', table: '[morecheese_members].[DataQualityLabel]',
       columns: (r) => ({
         ID: sqlId(uuidFor('dqlabel', r.LabelKey)), LabelKey: sqlStr(r.LabelKey), DefectKind: sqlStr(r.DefectKind),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)),
@@ -175,7 +231,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'advocacy_actions', table: '[morecheese_members].[AdvocacyAction]',
+      json: 'advocacy_actions', dir: 'advocacy-actions', entity: 'MoreCheese: Advocacy Actions', table: '[morecheese_members].[AdvocacyAction]',
       columns: (r) => ({
         ID: sqlId(uuidFor('advocacy', r.ActionKey)), ActionKey: sqlStr(r.ActionKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), ActionDate: sqlDate(r.ActionDate),
@@ -183,7 +239,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'membership_periods', table: '[morecheese_members].[MembershipPeriod]',
+      json: 'membership_periods', dir: 'membership-periods', entity: 'MoreCheese: Membership Periods', table: '[morecheese_members].[MembershipPeriod]',
       columns: (r) => ({
         ID: sqlId(uuidFor('period', r.PeriodKey)), PeriodKey: sqlStr(r.PeriodKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)),
@@ -196,11 +252,11 @@ export const MAPPING = {
   ],
   learning: [
     {
-      json: 'certifications', table: '[morecheese_learning].[Certification]',
+      json: 'certifications', dir: 'certifications', entity: 'MoreCheese: Certifications', table: '[morecheese_learning].[Certification]',
       columns: (r) => ({ ID: sqlId(uuidFor('cert', r.CertKey)), CertKey: sqlStr(r.CertKey), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), ValidYears: sqlNum(r.ValidYears), IsSharedDemo: sqlBit(r.IsSharedDemo) }),
     },
     {
-      json: 'member_certifications', table: '[morecheese_learning].[MemberCertification]',
+      json: 'member_certifications', dir: 'member-certifications', entity: 'MoreCheese: Member Certifications', table: '[morecheese_learning].[MemberCertification]',
       columns: (r) => ({
         ID: sqlId(uuidFor('membercert', r.MemberCertKey)), MemberCertKey: sqlStr(r.MemberCertKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), CertificationID: sqlId(uuidFor('cert', r.CertKey)),
@@ -209,14 +265,14 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'courses', table: '[morecheese_learning].[Course]',
+      json: 'courses', dir: 'courses', entity: 'MoreCheese: Courses', table: '[morecheese_learning].[Course]',
       columns: (r) => ({
         ID: sqlId(uuidFor('course', r.CourseKey)), CourseKey: sqlStr(r.CourseKey), Name: sqlStr(r.Name),
         StartDate: sqlDate(r.StartDate), DurationWeeks: sqlNum(r.DurationWeeks), IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
     {
-      json: 'enrollments', table: '[morecheese_learning].[CourseEnrollment]',
+      json: 'enrollments', dir: 'enrollments', entity: 'MoreCheese: Course Enrollments', table: '[morecheese_learning].[CourseEnrollment]',
       columns: (r) => ({
         ID: sqlId(uuidFor('enroll', r.EnrollKey)), EnrollKey: sqlStr(r.EnrollKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), CourseID: sqlId(uuidFor('course', r.CourseKey)),
@@ -227,14 +283,14 @@ export const MAPPING = {
   ],
   orders: [
     {
-      json: 'products', table: '[morecheese_orders].[Product]',
+      json: 'products', dir: 'products', entity: 'MoreCheese: Products', table: '[morecheese_orders].[Product]',
       columns: (r) => ({
         ID: sqlId(uuidFor('product', r.ProductKey)), ProductKey: sqlStr(r.ProductKey), Name: sqlStr(r.Name),
         ProductType: sqlStr(r.ProductType), UnitPrice: sqlNum(r.UnitPrice), IsSharedDemo: sqlBit(r.IsSharedDemo),
       }),
     },
     {
-      json: 'orders', table: '[morecheese_orders].[Order]',
+      json: 'orders', dir: 'orders', entity: 'MoreCheese: Orders', table: '[morecheese_orders].[Order]',
       columns: (r) => ({
         ID: sqlId(uuidFor('order', r.OrderKey)), OrderKey: sqlStr(r.OrderKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), OrderType: sqlStr(r.OrderType), Status: sqlStr(r.Status),
@@ -243,7 +299,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'order_lines', table: '[morecheese_orders].[OrderLine]',
+      json: 'order_lines', dir: 'order-lines', entity: 'MoreCheese: Order Lines', table: '[morecheese_orders].[OrderLine]',
       columns: (r) => ({
         ID: sqlId(uuidFor('line', r.LineKey)), OrderID: sqlId(uuidFor('order', r.OrderKey)),
         ProductID: sqlId(uuidFor('product', r.ProductKey)), Quantity: sqlNum(r.Quantity),
@@ -251,7 +307,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'payments', table: '[morecheese_orders].[Payment]',
+      json: 'payments', dir: 'payments', entity: 'MoreCheese: Payments', table: '[morecheese_orders].[Payment]',
       columns: (r) => ({
         ID: sqlId(uuidFor('payment', r.PaymentKey)), OrderID: sqlId(uuidFor('order', r.OrderKey)),
         Amount: sqlNum(r.Amount), PaymentDate: sqlDate(r.PaymentDate), Method: sqlStr(r.Method),
@@ -262,25 +318,25 @@ export const MAPPING = {
   committees: [
     // bizapps-committees' REAL shapes (B202602151200) — no IsSharedDemo (their tables, §2.5 logic)
     {
-      json: 'committee_types', table: '[__mj_BizAppsCommittees].[Type]',
+      json: 'committee_types', dir: 'committee-types', entity: 'Committees: Types', table: '[__mj_BizAppsCommittees].[Type]',
       columns: (r) => ({ ID: sqlId(uuidFor('ctype', r.TypeKey)), Name: sqlStr(r.Name), IsStandards: sqlBit(r.IsStandards), DefaultTermMonths: sqlNum(r.DefaultTermMonths) }),
     },
     {
-      json: 'committees', table: '[__mj_BizAppsCommittees].[Committee]',
+      json: 'committees', dir: 'committees', entity: 'Committees: Committees', table: '[__mj_BizAppsCommittees].[Committee]',
       columns: (r) => ({
         ID: sqlId(uuidFor('committee', r.CommitteeKey)), Name: sqlStr(r.Name), TypeID: sqlId(uuidFor('ctype', r.TypeKey)),
         MissionStatement: sqlStr(r.MissionStatement), Status: sqlStr(r.Status), IsPublic: sqlBit(true), FormationDate: sqlDate(r.FormationDate),
       }),
     },
     {
-      json: 'committee_terms', table: '[__mj_BizAppsCommittees].[Term]',
+      json: 'committee_terms', dir: 'committee-terms', entity: 'Committees: Terms', table: '[__mj_BizAppsCommittees].[Term]',
       columns: (r) => ({
         ID: sqlId(uuidFor('cterm', r.TermKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
         Name: sqlStr(r.Name), StartDate: sqlDate(r.StartDate), EndDate: sqlDate(r.EndDate), Status: sqlStr(r.Status === 'Completed' ? 'Completed' : 'Active'),
       }),
     },
     {
-      json: 'committee_memberships', table: '[__mj_BizAppsCommittees].[Membership]',
+      json: 'committee_memberships', dir: 'committee-memberships', entity: 'Committees: Memberships', table: '[__mj_BizAppsCommittees].[Membership]',
       columns: (r) => ({
         ID: sqlId(uuidFor('cmembership', r.MembershipKey)), PersonID: sqlId(uuidFor('person', r.MemberNumber)),
         RoleID: sqlVar({ Chair: '@Role_Chair', 'Vice Chair': '@Role_ViceChair', Member: '@Role_Member' }[r.RoleKey]), TermID: sqlId(uuidFor('cterm', r.TermKey)),
@@ -288,7 +344,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'committee_meetings', table: '[__mj_BizAppsCommittees].[Meeting]',
+      json: 'committee_meetings', dir: 'committee-meetings', entity: 'Committees: Meetings', table: '[__mj_BizAppsCommittees].[Meeting]',
       columns: (r) => ({
         ID: sqlId(uuidFor('meeting', r.MeetingKey)), CommitteeID: sqlId(uuidFor('committee', r.CommitteeKey)),
         Name: sqlStr(r.Name), StartDateTime: sqlDate(r.StartDateTime), EndDateTime: sqlDate(r.EndDateTime ?? null),
@@ -297,14 +353,14 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'committee_attendance', table: '[__mj_BizAppsCommittees].[Attendance]',
+      json: 'committee_attendance', dir: 'committee-attendance', entity: 'Committees: Attendances', table: '[__mj_BizAppsCommittees].[Attendance]',
       columns: (r) => ({
         ID: sqlId(uuidFor('att', r.AttendanceKey)), MeetingID: sqlId(uuidFor('meeting', r.MeetingKey)),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), AttendanceStatus: sqlStr(r.AttendanceStatus),
       }),
     },
     {
-      json: 'committee_agenda_items', table: '[__mj_BizAppsCommittees].[AgendaItem]',
+      json: 'committee_agenda_items', dir: 'committee-agenda-items', entity: 'Committees: Agenda Items', table: '[__mj_BizAppsCommittees].[AgendaItem]',
       columns: (r) => ({
         ID: sqlId(uuidFor('agenda', r.AgendaKey)), MeetingID: sqlId(uuidFor('meeting', r.MeetingKey)),
         Sequence: sqlNum(r.Sequence), Name: sqlStr(r.Name),
@@ -313,7 +369,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'committee_motions', table: '[__mj_BizAppsCommittees].[Motion]',
+      json: 'committee_motions', dir: 'committee-motions', entity: 'Committees: Motions', table: '[__mj_BizAppsCommittees].[Motion]',
       columns: (r) => ({
         ID: sqlId(uuidFor('motion', r.MotionKey)), MeetingID: sqlId(uuidFor('meeting', r.MeetingKey)),
         AgendaItemID: sqlId(uuidFor('agenda', r.AgendaKey)), Sequence: sqlNum(r.Sequence), Name: sqlStr(r.Name),
@@ -324,7 +380,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'committee_votes', table: '[__mj_BizAppsCommittees].[Vote]',
+      json: 'committee_votes', dir: 'committee-votes', entity: 'Committees: Votes', table: '[__mj_BizAppsCommittees].[Vote]',
       columns: (r) => ({
         ID: sqlId(uuidFor('vote', r.VoteKey)), MotionID: sqlId(uuidFor('motion', r.MotionKey)),
         MembershipID: sqlId(uuidFor('cmembership', r.MembershipKey)), VoteValue: sqlStr(r.VoteValue),
@@ -335,11 +391,11 @@ export const MAPPING = {
     // bizapps-tasks' REAL shapes (B202604011500). Polymorphic assignee/link references
     // resolve by ENTITY NAME through the pack preamble's DECLAREd variables.
     {
-      json: 'task_types', table: '[__mj_BizAppsTasks].[TaskType]',
+      json: 'task_types', dir: 'task-types', entity: 'MJ_BizApps_Tasks: Task Types', table: '[__mj_BizAppsTasks].[TaskType]',
       columns: (r) => ({ ID: sqlId(uuidFor('tasktype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), DefaultPriority: sqlStr(r.DefaultPriority), IsActive: sqlBit(r.IsActive) }),
     },
     {
-      json: 'tasks', table: '[__mj_BizAppsTasks].[Task]',
+      json: 'tasks', dir: 'tasks', entity: 'MJ_BizApps_Tasks: Tasks', table: '[__mj_BizAppsTasks].[Task]',
       columns: (r) => ({
         ID: sqlId(uuidFor('task', r.TaskKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description ?? null), TypeID: sqlId(uuidFor('tasktype', r.TypeKey)),
         Status: sqlStr(r.Status), Priority: sqlStr(r.Priority), DueAt: sqlDate(r.DueAt),
@@ -350,7 +406,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'task_assignments', table: '[__mj_BizAppsTasks].[TaskAssignment]',
+      json: 'task_assignments', dir: 'task-assignments', entity: 'MJ_BizApps_Tasks: Task Assignments', table: '[__mj_BizAppsTasks].[TaskAssignment]',
       columns: (r) => ({
         ID: sqlId(uuidFor('taskassign', r.AssignKey)), TaskID: sqlId(uuidFor('task', r.TaskKey)),
         AssigneeEntityID: sqlVar('@E_People'), AssigneeRecordID: sqlId(uuidFor('person', r.AssigneeMemberNumber)),
@@ -358,7 +414,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'task_links', table: '[__mj_BizAppsTasks].[TaskLink]',
+      json: 'task_links', dir: 'task-links', entity: 'MJ_BizApps_Tasks: Task Links', table: '[__mj_BizAppsTasks].[TaskLink]',
       columns: (r) => ({
         ID: sqlId(uuidFor('tasklink', r.LinkKey)), TaskID: sqlId(uuidFor('task', r.TaskKey)),
         EntityID: sqlVar(r.EntityName === 'Committees: Meetings' ? '@E_Meetings' : '@E_People'),
@@ -369,11 +425,11 @@ export const MAPPING = {
   issues: [
     // bizapps-issues' REAL shapes (B202606091000). Source references are polymorphic.
     {
-      json: 'issue_types', table: '[__mj_BizAppsIssues].[IssueType]',
+      json: 'issue_types', dir: 'issue-types', entity: 'MJ_BizApps_Issues: Issue Types', table: '[__mj_BizAppsIssues].[IssueType]',
       columns: (r) => ({ ID: sqlId(uuidFor('issuetype', r.TypeKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), DefaultPriority: sqlStr(r.DefaultPriority), IsActive: sqlBit(r.IsActive) }),
     },
     {
-      json: 'issues', table: '[__mj_BizAppsIssues].[Issue]',
+      json: 'issues', dir: 'issues', entity: 'MJ_BizApps_Issues: Issues', table: '[__mj_BizAppsIssues].[Issue]',
       columns: (r) => ({
         ID: sqlId(uuidFor('issue', r.IssueKey)), IssueNumber: sqlStr(r.IssueNumber), Title: sqlStr(r.Title),
         Description: sqlStr(r.Description),
@@ -388,7 +444,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'issue_comments', table: '[__mj_BizAppsIssues].[IssueComment]',
+      json: 'issue_comments', dir: 'issue-comments', entity: 'MJ_BizApps_Issues: Issue Comments', table: '[__mj_BizAppsIssues].[IssueComment]',
       columns: (r) => ({
         ID: sqlId(uuidFor('issuecomment', r.CommentKey)), IssueID: sqlId(uuidFor('issue', r.IssueKey)),
         Body: sqlStr(r.Body), Source: sqlStr(r.Source),
@@ -396,33 +452,35 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'issue_sequences', table: '[__mj_BizAppsIssues].[IssueNumberSequence]',
+      json: 'issue_sequences', dir: 'issue-sequences', entity: 'MJ_BizApps_Issues: Issue Number Sequences', syncPk: 'ScopeCode', table: '[__mj_BizAppsIssues].[IssueNumberSequence]',
       columns: (r) => ({ ScopeCode: sqlStr(r.ScopeCode), NextSequenceNumber: sqlNum(r.NextSequenceNumber) }),
     },
   ],
   forms: [
     // bizapps-forms' REAL shapes (B202606281200) — the D10 optional pack
     {
-      json: 'forms', table: '[__mj_BizAppsForms].[Form]',
+      json: 'forms', dir: 'forms', entity: 'MJ_BizApps_Forms: Forms', table: '[__mj_BizAppsForms].[Form]',
       columns: (r) => ({ ID: sqlId(uuidFor('form', r.FormKey)), Name: sqlStr(r.Name), Description: sqlStr(r.Description), Status: sqlStr(r.Status), RenderMode: sqlStr(r.RenderMode) }),
     },
     {
-      json: 'form_versions', table: '[__mj_BizAppsForms].[FormVersion]',
+      json: 'form_versions', dir: 'form-versions', entity: 'MJ_BizApps_Forms: Form Versions', table: '[__mj_BizAppsForms].[FormVersion]',
       columns: (r) => ({ ID: sqlId(uuidFor('formver', r.VersionKey)), FormID: sqlId(uuidFor('form', r.FormKey)), VersionNumber: sqlNum(r.VersionNumber), Status: sqlStr(r.Status), PublishedAt: sqlDate(r.PublishedAt) }),
     },
     {
-      json: 'form_pages', table: '[__mj_BizAppsForms].[FormPage]',
+      json: 'form_pages', dir: 'form-pages', entity: 'MJ_BizApps_Forms: Form Pages', table: '[__mj_BizAppsForms].[FormPage]',
       columns: (r) => ({ ID: sqlId(uuidFor('formpage', r.PageKey)), FormID: sqlId(uuidFor('form', r.FormKey)), Title: sqlStr(r.Title), DisplayOrder: sqlNum(r.DisplayOrder) }),
     },
     {
-      json: 'form_questions', table: '[__mj_BizAppsForms].[FormQuestion]',
+      json: 'form_questions', dir: 'form-questions', entity: 'MJ_BizApps_Forms: Form Questions', table: '[__mj_BizAppsForms].[FormQuestion]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formq', r.QuestionKey)), FormID: sqlId(uuidFor('form', r.FormKey)), PageID: sqlId(uuidFor('formpage', r.PageKey)),
         QuestionType: sqlStr(r.QuestionType), Prompt: sqlStr(r.Prompt), IsRequired: sqlBit(r.IsRequired), DisplayOrder: sqlNum(r.DisplayOrder),
       }),
     },
     {
-      json: 'form_distributions', table: '[__mj_BizAppsForms].[FormDistribution]',
+      json: 'form_distributions', dir: 'form-distributions', entity: 'MJ_BizApps_Forms: Form Distributions',
+      syncOmit: ['MaxResponses'], // the INSERT needs the explicit NULL column; the SP path always omitted it
+      table: '[__mj_BizAppsForms].[FormDistribution]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formdist', r.DistributionKey)), FormID: sqlId(uuidFor('form', r.FormKey)), Name: sqlStr(r.Name),
         ChannelType: sqlStr(r.ChannelType), Status: sqlStr(r.Status), OpenAt: sqlDate(r.OpenAt), CloseAt: sqlDate(r.CloseAt),
@@ -430,14 +488,14 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'form_question_options', table: '[__mj_BizAppsForms].[FormQuestionOption]',
+      json: 'form_question_options', dir: 'form-question-options', entity: 'MJ_BizApps_Forms: Form Question Options', table: '[__mj_BizAppsForms].[FormQuestionOption]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formqopt', r.OptionKey)), QuestionID: sqlId(uuidFor('formq', r.QuestionKey)),
         Label: sqlStr(r.Label), Value: sqlStr(r.Value), DisplayOrder: sqlNum(r.DisplayOrder), IsDefault: sqlBit(r.IsDefault),
       }),
     },
     {
-      json: 'form_responses', table: '[__mj_BizAppsForms].[FormResponse]',
+      json: 'form_responses', dir: 'form-responses', entity: 'MJ_BizApps_Forms: Form Responses', table: '[__mj_BizAppsForms].[FormResponse]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formresp', r.ResponseKey)), FormID: sqlId(uuidFor('form', r.FormKey)),
         FormVersionID: sqlId(uuidFor('formver', r.VersionKey)), Status: sqlStr(r.Status),
@@ -448,7 +506,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'form_answers', table: '[__mj_BizAppsForms].[FormResponseAnswer]',
+      json: 'form_answers', dir: 'form-answers', entity: 'MJ_BizApps_Forms: Form Response Answers', table: '[__mj_BizAppsForms].[FormResponseAnswer]',
       columns: (r) => ({
         ID: sqlId(uuidFor('formans', r.AnswerKey)), ResponseID: sqlId(uuidFor('formresp', r.ResponseKey)),
         QuestionID: sqlId(uuidFor('formq', r.QuestionKey)), TextValue: sqlStr(r.TextValue ?? null),
@@ -461,7 +519,7 @@ export const MAPPING = {
     // references (their design: no cross-schema FK), so person UUIDs land directly.
     // Session before message: SecureMessage.PortalSessionID is NOT NULL.
     {
-      json: 'portal_sessions', table: '[__mj_BizAppsSecureMessaging].[PortalSession]',
+      json: 'portal_sessions', dir: 'portal-sessions', entity: 'MJ_BizApps_SecureMessaging: Portal Sessions', table: '[__mj_BizAppsSecureMessaging].[PortalSession]',
       columns: (r) => ({
         ID: sqlId(uuidFor('psession', r.SessionKey)), ContactID: sqlId(uuidFor('person', r.MemberNumber)),
         TokenHash: sqlStr(r.TokenHash), Status: sqlStr(r.Status),
@@ -469,7 +527,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'secure_threads', table: '[__mj_BizAppsSecureMessaging].[SecureThread]',
+      json: 'secure_threads', dir: 'secure-threads', entity: 'MJ_BizApps_SecureMessaging: Secure Threads', table: '[__mj_BizAppsSecureMessaging].[SecureThread]',
       columns: (r) => ({
         ID: sqlId(uuidFor('thread', r.ThreadKey)), ContactID: sqlId(uuidFor('person', r.MemberNumber)),
         Subject: sqlStr(r.Subject), Status: sqlStr(r.Status), SourceChannel: sqlStr(r.SourceChannel),
@@ -477,7 +535,9 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'secure_messages', table: '[__mj_BizAppsSecureMessaging].[SecureMessage]',
+      json: 'secure_messages', dir: 'secure-messages', entity: 'MJ_BizApps_SecureMessaging: Secure Messages',
+      syncOmit: ['ExternalMessageID'], // always-null on the INSERT path; the SP path never sent it
+      table: '[__mj_BizAppsSecureMessaging].[SecureMessage]',
       columns: (r) => ({
         ID: sqlId(uuidFor('secmsg', r.MessageKey)), PortalSessionID: sqlId(uuidFor('psession', r.SessionKey)),
         ThreadID: sqlId(uuidFor('thread', r.ThreadKey)),
@@ -595,14 +655,14 @@ export const MAPPING = {
     // DEFINITION ONLY (Sonar's FactorCompiler computes scores/contributions/history live, so we
     // never pre-emit those rows). Integration-grade: the preamble resolves __mj.Entity IDs.
     {
-      json: 'score_band_sets', table: '[__mj_BizAppsSonar].[ScoreBandSet]',
+      json: 'score_band_sets', dir: 'sonar-score-band-sets', entity: 'MJ_BizApps_Sonar: Score Band Sets', table: '[__mj_BizAppsSonar].[ScoreBandSet]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarbandset', r.BandSetKey)), Name: sqlStr(r.Name),
         AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]), Description: sqlStr(r.Description),
       }),
     },
     {
-      json: 'score_bands', table: '[__mj_BizAppsSonar].[ScoreBand]',
+      json: 'score_bands', dir: 'sonar-score-bands', entity: 'MJ_BizApps_Sonar: Score Bands', table: '[__mj_BizAppsSonar].[ScoreBand]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarband', r.BandKey)), BandSetID: sqlId(uuidFor('sonarbandset', r.BandSetKey)),
         Label: sqlStr(r.Label), MinScore: sqlNum(r.MinScore), MaxScore: sqlNum(r.MaxScore),
@@ -610,14 +670,19 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'time_windows', table: '[__mj_BizAppsSonar].[TimeWindow]',
+      json: 'time_windows', dir: 'sonar-time-windows', entity: 'MJ_BizApps_Sonar: Time Windows', table: '[__mj_BizAppsSonar].[TimeWindow]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarwindow', r.WindowKey)), Name: sqlStr(r.Name),
         WindowType: sqlStr(r.WindowType), LengthMonths: sqlNum(r.LengthMonths), LengthDays: sqlNum(r.LengthDays),
       }),
     },
     {
-      json: 'score_models', table: '[__mj_BizAppsSonar].[ScoreModel]',
+      json: 'score_models', dir: 'sonar-score-models', entity: 'MJ_BizApps_Sonar: Score Models',
+      // the circular FK (ScoreModel ⇄ ScoreModelVersion) is deferred on BOTH paths, each in its
+      // own idiom: the INSERT path nulls it and closes the loop in POSTAMBLE.sonar; the SP path
+      // uses a deferred @lookup that PushService resolves once the version exists (phase 2.5)
+      syncOverride: { CurrentVersionID: (r) => `@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=${uuidFor('sonarver', r.ModelKey + ':1')}?allowDefer` },
+      table: '[__mj_BizAppsSonar].[ScoreModel]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmodel', r.ModelKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
         Description: sqlStr(r.Description), AnchorEntityID: sqlVar(MJ_ENTITY_VAR[r.AnchorEntityName]),
@@ -628,7 +693,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'score_model_versions', table: '[__mj_BizAppsSonar].[ScoreModelVersion]',
+      json: 'score_model_versions', dir: 'sonar-score-model-versions', entity: 'MJ_BizApps_Sonar: Score Model Versions', table: '[__mj_BizAppsSonar].[ScoreModelVersion]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarver', r.VersionKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         VersionNumber: sqlNum(r.VersionNumber), VersionLabel: sqlStr(r.VersionLabel),
@@ -638,7 +703,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'model_related_entities', table: '[__mj_BizAppsSonar].[ModelRelatedEntity]',
+      json: 'model_related_entities', dir: 'sonar-model-related-entities', entity: 'MJ_BizApps_Sonar: Model Related Entities', table: '[__mj_BizAppsSonar].[ModelRelatedEntity]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmre', r.RelatedKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         RelatedEntityID: sqlVar(MJ_ENTITY_VAR[r.EntityName]), Alias: sqlStr(r.Alias),
@@ -646,7 +711,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'factors', table: '[__mj_BizAppsSonar].[Factor]',
+      json: 'factors', dir: 'sonar-factors', entity: 'MJ_BizApps_Sonar: Factors', table: '[__mj_BizAppsSonar].[Factor]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Name: sqlStr(r.Name), Slug: sqlStr(r.Slug),
         Description: sqlStr(r.Description), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
@@ -661,7 +726,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'model_factors', table: '[__mj_BizAppsSonar].[ModelFactor]',
+      json: 'model_factors', dir: 'sonar-model-factors', entity: 'MJ_BizApps_Sonar: Model Factors', table: '[__mj_BizAppsSonar].[ModelFactor]',
       columns: (r) => ({
         ID: sqlId(uuidFor('sonarmf', r.ModelFactorKey)), ScoreModelID: sqlId(uuidFor('sonarmodel', r.ModelKey)),
         FactorID: sqlId(uuidFor('sonarfactor', r.FactorKey)), Weight: sqlNum(r.Weight),
@@ -672,7 +737,7 @@ export const MAPPING = {
   ],
   events: [
     {
-      json: 'events', table: '[morecheese_events].[Event]',
+      json: 'events', dir: 'events', entity: 'MoreCheese: Events', table: '[morecheese_events].[Event]',
       columns: (r) => ({
         ID: sqlId(uuidFor('event', r.EventKey)), EventKey: sqlStr(r.EventKey), Name: sqlStr(r.Name),
         EventType: sqlStr(r.EventType), EventDate: sqlDate(r.Date), IsVirtual: sqlBit(r.IsVirtual), IsPaid: sqlBit(r.IsPaid),
@@ -681,7 +746,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'competition_entries', table: '[morecheese_events].[CompetitionEntry]',
+      json: 'competition_entries', dir: 'competition-entries', entity: 'MoreCheese: Competition Entries', table: '[morecheese_events].[CompetitionEntry]',
       columns: (r) => ({
         ID: sqlId(uuidFor('compentry', r.EntryKey)), EntryKey: sqlStr(r.EntryKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), OrganizationID: sqlId(r.OrgKey ? uuidFor('org', r.OrgKey) : null),
@@ -690,7 +755,7 @@ export const MAPPING = {
       }),
     },
     {
-      json: 'event_registrations', table: '[morecheese_events].[EventRegistration]',
+      json: 'event_registrations', dir: 'event-registrations', entity: 'MoreCheese: Event Registrations', table: '[morecheese_events].[EventRegistration]',
       columns: (r) => ({
         ID: sqlId(uuidFor('reg', r.RegKey)), RegKey: sqlStr(r.RegKey),
         PersonID: sqlId(uuidFor('person', r.MemberNumber)), EventID: sqlId(uuidFor('event', r.EventKey)),
@@ -776,6 +841,7 @@ export const PREAMBLE = {
     "DECLARE @E_Advocacy UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Advocacy Actions');",
     "DECLARE @E_FormResponses UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MJ_BizApps_Forms: Form Responses');",
     "DECLARE @E_CompEntries UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Competition Entries');",
+    "DECLARE @E_Orders UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Orders');",
     "DECLARE @E_MemberCerts UNIQUEIDENTIFIER = (SELECT ID FROM __mj.Entity WHERE Name = N'MoreCheese: Member Certifications');",
   ],
   issues: [

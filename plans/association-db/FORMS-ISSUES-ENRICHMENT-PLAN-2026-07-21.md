@@ -13,7 +13,7 @@ generic entity browser never showed. A data audit of the canonical N=2500 build 
   through every app — almost no hero has an issue or form response.
 - **Tasks** is already healthy — untouched.
 
-Scope agreed with Barnatt: forms + issues enrichment, cross-app narrative check, **no accounting**,
+Scope agreed with the workstream lead: forms + issues enrichment, cross-app narrative check, **no accounting**,
 **issue comments deferred**. Key exploration finding: **zero migrations needed** — the real
 schemas already support everything (nullable `RespondentPersonID` + `AnonymousSessionID` +
 `SourceMetadata` on FormResponse; `AssigneeEntityID/RecordID` + Low→Critical CHECKs on Issue).
@@ -141,7 +141,7 @@ New gates:
 
 ### 9. Record the plan in-repo
 Copy this plan to `plans/association-db/FORMS-ISSUES-ENRICHMENT-PLAN-2026-07-21.md` (per
-Barnatt's request to have the plan on a markdown file) and commit it with the change.
+the workstream lead's request to have the plan on a markdown file) and commit it with the change.
 
 ## Verification
 

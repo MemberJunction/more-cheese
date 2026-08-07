@@ -249,10 +249,10 @@ export function orgIdentityFor(seed, o, releaseYear, R) {
   const suffixByCountry = { FR: 'SARL', DK: 'ApS', NL: 'B.V.', CH: 'AG', GB: 'Ltd', IE: 'Ltd', IT: 'S.r.l.', ES: 'S.L.', PT: 'Lda', DE: 'GmbH', AT: 'GmbH', GR: 'EPE', PL: 'Sp. z o.o.', MX: 'S.A. de C.V.', AR: 'S.A.', AU: 'Pty Ltd', NZ: 'Ltd', JP: 'K.K.', CA: 'Inc.' };
   const legalSuffix = suffixByCountry[o.Country] ?? (o.Type === 'Producer' ? 'LLC' : 'Inc.');
   const founded = releaseYear - r.int(3, 80);
-  const structures = R?.orgs?.legalStructure?.byType?.[o.Type];
+  const structures = R?.orgs?.mixes?.[`legalStructure${o.Type}`];
   return {
     // referenced BY NAME: bizapps-common seeds these rows (F6)
-    OrganizationTypeName: structures ? rl.pickWeighted(structures) : null,
+    OrganizationTypeName: structures ? rl.pickWeighted(Object.entries(structures)) : null,
     LegalName: `${o.Name} ${legalSuffix}`,
     // same slug as the work-email domain, so a member's address and their employer's
     // website agree instead of disagreeing on the truncation

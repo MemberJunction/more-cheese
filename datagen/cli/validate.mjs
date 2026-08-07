@@ -20,6 +20,7 @@ import { iso as iso2, addDays as addDays2, parseDate as parseDate2 } from '../en
 import { loadRuleset } from '../engine/config.mjs';
 import { MJ_ENTITY_VAR, RECORD_PREFIX } from '../engine/seed-mapping.mjs';
 import { CITIES } from '../projects/morecheese/banks.mjs';
+import { makeGateHelpers } from '../engine/gates.mjs';
 import { CONTACT_TYPES, ADDRESS_TYPES } from '../projects/morecheese/contacts.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -101,6 +102,10 @@ const renewalEvents = JSON.parse(readFileSync(join(OUT, 'validation-events.json'
 const results = [];
 const check = (name, ok, detail) => results.push({ name, ok, detail });
 
+// gate helpers live in engine/gates.mjs so they can be unit-tested (negative-tested in
+// the suite, like the lint) and reused by any future validator
+const { dangling, fkResolves, shareBand, presenceFloor, distinctAtLeast } = makeGateHelpers(check);
+
 // shared lookups
 const joinOf = new Map(people.map((p) => [p.MemberNumber, p.JoinDate]));
 const periodsByMember = new Map();
@@ -114,21 +119,22 @@ function checkPacks() {
   const peopleKeys = new Set(people.map((p) => p.MemberNumber));
   const orgKeys = new Set(orgs.map((o) => o.OrgKey));
   const eventKeys = new Set(events.map((e) => e.EventKey));
-  const badEmployer = people.filter((p) => p.OrgKey && !orgKeys.has(p.OrgKey)).length;
-  const badPeriod = periods.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
-  const badRegP = regs.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
-  const badRegE = regs.filter((x) => !eventKeys.has(x.EventKey)).length;
-  check('pack refs: people→orgs (within common)', badEmployer === 0, `${badEmployer} dangling`);
-  check('pack refs: membership→common', badPeriod === 0, `${badPeriod} dangling`);
-  check('pack refs: events→common+events', badRegP + badRegE === 0, `${badRegP}+${badRegE} dangling`);
+  fkResolves('pack refs: people→orgs (within common)', [[people, (p) => p.OrgKey, orgKeys]]);
+  fkResolves('pack refs: membership→common', [[periods, (x) => x.MemberNumber, peopleKeys]]);
+  fkResolves('pack refs: events→common+events', [
+    [regs, (x) => x.MemberNumber, peopleKeys],
+    [regs, (x) => x.EventKey, eventKeys],
+  ]);
   const productKeys = new Set(products.map((x) => x.ProductKey));
   const orderKeys = new Set(orders.map((x) => x.OrderKey));
-  const badOrderM = orders.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  // note: a two-column check like "line→order AND line→product" is two relations on the
+  // same rows — the helper reports them the way the old combined counter did
   const badLine = orderLines.filter((x) => !orderKeys.has(x.OrderKey) || !productKeys.has(x.ProductKey)).length;
-  const badPay = payments.filter((x) => !orderKeys.has(x.OrderKey)).length;
+  const badOrderM = dangling(orders, (x) => x.MemberNumber, peopleKeys);
+  const badPay = dangling(payments, (x) => x.OrderKey, orderKeys);
   check('pack refs: orders→common + lines→products + payments→orders', badOrderM + badLine + badPay === 0, `${badOrderM}+${badLine}+${badPay} dangling`);
   const meetingKeys = new Set(cMeetings.map((x) => x.MeetingKey));
-  const badCm = cMemberships.filter((x) => !peopleKeys.has(x.MemberNumber)).length;
+  const badCm = dangling(cMemberships, (x) => x.MemberNumber, peopleKeys);
   const badAtt = cAttendance.filter((x) => !peopleKeys.has(x.MemberNumber) || !meetingKeys.has(x.MeetingKey)).length;
   check('pack refs: committees→common + attendance→meetings', badCm + badAtt === 0, `${badCm}+${badAtt} dangling`);
   // memberships → the term and committee they claim. A membership on a term that was never
@@ -171,7 +177,7 @@ function checkPacks() {
   // blank columns are how generated data gives itself away: the legal-structure FK sat NULL on
   // every organization, and Person.Bio on every person. Both are app-owned fields their UIs show.
   {
-    const structures = new Set(Object.values(R.orgs.legalStructure.byType).flat().map(([n]) => n));
+    const structures = new Set(Object.values(R.orgs.mixes).flatMap((m) => Object.keys(m)));
     const withType = orgs.filter((o) => o.OrganizationTypeName);
     const badName = withType.filter((o) => !structures.has(o.OrganizationTypeName)).length;
     check(`orgs: all ${orgs.length} carry a legal structure from the app's seeded list`,
@@ -231,7 +237,7 @@ function checkPacks() {
     const leaked = prospects.filter((p) => periodKeys.has(p.MemberNumber)).length;
     check('prospects: no non-member has a membership period', leaked === 0, `${prospects.length} prospects, ${leaked} with membership`);
     const share = allPeople.length ? prospects.length / allPeople.length : 0;
-    const want = R.prospects.ratioToMembers / (1 + R.prospects.ratioToMembers);
+    const want = R.prospects.params.ratioToMembers / (1 + R.prospects.params.ratioToMembers);
     check(`prospects: ${(share * 100).toFixed(1)}% of known people are non-members vs ${(want * 100).toFixed(1)}% ±4`,
       Math.abs(share - want) <= 0.04, 'an association knows more people than it has members');
     const nameless = prospects.filter((p) => !p.FirstName || !p.LastName || !p.Email).length;
@@ -365,7 +371,7 @@ function checkTemporal() {
       missing.length ? `never produced: ${missing.join(', ')}` : produced.map((st) => `${st}=${periods.filter((x) => x.Status === st).length}`).join(' '));
     // and the two terminal kinds must be distinguishable, not one relabelled
     const cancelled = periods.filter((x) => x.Status === 'Cancelled');
-    const passive = new Set(R.membership.cancellation?.passiveReasons ?? []);
+    const passive = new Set(R.membership.params?.passiveReasons ?? []);
     const wrongReason = cancelled.filter((x) => passive.has(x.CancellationReason)).length;
     check(`periods: ${cancelled.length} cancellations all carry an active-decision reason`, wrongReason === 0,
       `${wrongReason} cancelled with a non-payment reason (nobody phones in to announce one)`);
@@ -397,15 +403,15 @@ function checkBenchmarks() {
   // small-sample allowance: the mean of a few wobbled years has its own SE (vanishes at
   // scale). 2×SE, not 1.5: the suite sweeps this gate across 7 seeds — at 1.5× a marginal
   // seed false-reds ~13% of sweeps (multiple comparisons; the arrow-gate lesson).
-  const meanAllow = M.renewalTolerance + 2 * (stdYears / Math.sqrt(normal.length));
-  check(`renewal mean ${(pooled * 100).toFixed(1)}% vs ${M.renewalTarget * 100}% ±${(meanAllow * 100).toFixed(1)} (tol + mean-SE at ${normal.length} yrs)`, Math.abs(pooled - M.renewalTarget) <= meanAllow, `${normal.length} non-covid yrs`);
+  const meanAllow = M.params.renewal.tolerance + 2 * (stdYears / Math.sqrt(normal.length));
+  check(`renewal mean ${(pooled * 100).toFixed(1)}% vs ${M.params.renewal.target * 100}% ±${(meanAllow * 100).toFixed(1)} (tol + mean-SE at ${normal.length} yrs)`, Math.abs(pooled - M.params.renewal.target) <= meanAllow, `${normal.length} non-covid yrs`);
 
   // each year's band widens by its own sampling error (converges to the pure band at scale)
   const inBand = normal.filter((x) => {
-    const se = Math.sqrt((M.renewalTarget * (1 - M.renewalTarget)) / x.n);
-    return x.rate >= M.yearlyBand[0] - 1.5 * se && x.rate <= M.yearlyBand[1] + 1.5 * se;
+    const se = Math.sqrt((M.params.renewal.target * (1 - M.params.renewal.target)) / x.n);
+    return x.rate >= M.params.yearlyBand[0] - 1.5 * se && x.rate <= M.params.yearlyBand[1] + 1.5 * se;
   }).length;
-  check(`yearly renewal in [${M.yearlyBand}] (±1.5·SE at pilot n) for ≥75% of years`, inBand / normal.length >= 0.75, `${inBand}/${normal.length} in band`);
+  check(`yearly renewal in [${M.params.yearlyBand}] (±1.5·SE at pilot n) for ≥75% of years`, inBand / normal.length >= 0.75, `${inBand}/${normal.length} in band`);
 
   // anti-smoothness floor with a chi-square small-sample discount: a sample std over few
   // years is itself noisy — only reject if it's below the 5% quantile of a true-at-floor std.
@@ -418,13 +424,13 @@ function checkBenchmarks() {
     const nCovid = covidYears.reduce((s, x) => s + x.n, 0);
     const nNorm = normal.reduce((s, x) => s + x.n, 0);
     // one-sided with sampling allowance (binomial SE of the difference; strict at scale)
-    const seDiff = Math.sqrt(M.renewalTarget * (1 - M.renewalTarget) * (1 / nCovid + 1 / nNorm));
+    const seDiff = Math.sqrt(M.params.renewal.target * (1 - M.params.renewal.target) * (1 / nCovid + 1 / nNorm));
     check(`regime: COVID renewal ${(covidMean * 100).toFixed(1)}% sits below normal ${(pooled * 100).toFixed(1)}% (−0.5pt required, +${(1.5 * seDiff * 100).toFixed(1)}pt SE allowance)`, covidMean < pooled - 0.005 + 1.5 * seDiff, 'regime must express, not calibrate away');
   }
 
   const CHI2_05 = { 1: 0.0039, 2: 0.103, 3: 0.352, 4: 0.711, 5: 1.145, 6: 1.635, 7: 2.167, 8: 2.733, 9: 3.325, 10: 3.940, 11: 4.575, 12: 5.226 };
   const df = Math.max(1, normal.length - 1);
-  const floorAdj = M.yoyStdFloor * Math.sqrt((CHI2_05[Math.min(df, 12)] ?? df * 0.5) / df);
+  const floorAdj = M.params.yoyStdFloor * Math.sqrt((CHI2_05[Math.min(df, 12)] ?? df * 0.5) / df);
   check(`texture: YoY renewal std ${(stdYears * 100).toFixed(2)}pt ≥ floor ${(floorAdj * 100).toFixed(2)}pt (anti-smoothness, χ²-adjusted for ${normal.length} yrs)`, stdYears >= floorAdj, 'variance floor');
 
   // no-show rates are over PAST events only — upcoming-event registrations carry
@@ -437,9 +443,9 @@ function checkBenchmarks() {
   const webinar = pastRegs.filter((x) => web.has(x.EventKey));
   const nsPaid = paid.filter((x) => !x.Attended).length / paid.length;
   const nsWeb = webinar.filter((x) => !x.Attended).length / webinar.length;
-  const NS = R.events.noShow;
-  check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.paidInPerson.target * 100}% ±${NS.paidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.paidInPerson.target) <= NS.paidInPerson.tolerance, `${paid.length} regs`);
-  check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.freeWebinar.target * 100}% ±${NS.freeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.freeWebinar.target) <= NS.freeWebinar.tolerance, `${webinar.length} regs`);
+  const NS = R.events.params;
+  check(`no-show paid ${(nsPaid * 100).toFixed(1)}% vs ${NS.noShowPaidInPerson.target * 100}% ±${NS.noShowPaidInPerson.tolerance * 100}`, Math.abs(nsPaid - NS.noShowPaidInPerson.target) <= NS.noShowPaidInPerson.tolerance, `${paid.length} regs`);
+  check(`no-show webinar ${(nsWeb * 100).toFixed(1)}% vs ${NS.noShowFreeWebinar.target * 100}% ±${NS.noShowFreeWebinar.tolerance * 100}`, Math.abs(nsWeb - NS.noShowFreeWebinar.target) <= NS.noShowFreeWebinar.tolerance, `${webinar.length} regs`);
 
   // ---------- COVID expresses as a causal era, not just a renewal footnote ----------
   // Only traces that SURVIVE into shipped data are asserted here. The renewal dip is real
@@ -533,9 +539,9 @@ function checkArrows() {
   // CONTRACT PROJECTION #2: the built-in drivers are gated by name; every DECLARED-FEATURE
   // factor in the ruleset auto-gains a column and a recovery gate — author a factor, get
   // its check, no validator edit.
-  const A = R.membership.arrows;
+  const A = R.membership.effects;
   const declaredNames = Object.entries(A).filter(([, a]) => a.feature).map(([k]) => k);
-  const X = renewalEvents.map((e) => [1, e.tenureZ, e.theta, e.anchor ?? e.theta, e.prevTheta ?? e.theta, e.employerEvent, ...declaredNames.map((k) => e[k] ?? 0)]);
+  const X = renewalEvents.map((e) => [1, e.tenureZ, e.theta, e.anchor ?? e.theta, e.prevTheta ?? e.theta, e.employerEvent, ...declaredNames.map((k) => e[k.split('.').pop()] ?? 0)]);
   const y = renewalEvents.map((e) => e.renewed);
   const { beta, se } = logisticFit(X, y);
   const [, bTenure, bTheta, , , bEmployer, ...bDeclared] = beta;
@@ -550,10 +556,10 @@ function checkArrows() {
     const ok = okSign && ((ratio >= 0.5 && ratio <= 2.0) || Math.abs(got - authored) <= 3 * seV);
     check(`arrow ${name}: recovered β=${got.toFixed(2)}±${seV.toFixed(2)} vs authored ${authored} (×${ratio.toFixed(2)})`, ok, okSign ? 'sign ok' : 'SIGN FLIP');
   };
-  gate('tenure→renewal', bTenure, seTenure, A.tenure.beta);
-  gate('engagement→renewal', bTheta, seTheta, A.engagement.beta);
-  gate('employerEvent→renewal (1.15)', bEmployer, seEmployer, A.employerEvent.beta);
-  declaredNames.forEach((k, i) => gate(`${k}→renewal [declared feature]`, bDeclared[i], seDeclared[i], A[k].beta));
+  gate('tenure→renewal', bTenure, seTenure, A['renewal.tenure'].beta);
+  gate('engagement→renewal', bTheta, seTheta, A['renewal.engagement'].beta);
+  gate('employerEvent→renewal (1.15)', bEmployer, seEmployer, A['renewal.employerEvent'].beta);
+  declaredNames.forEach((k, i) => gate(`${k.split('.').pop()}→renewal [declared feature]`, bDeclared[i], seDeclared[i], A[k].beta));
 
   // the enthusiast rule's own benchmark: ~65% tier renewal while overall stays 87%.
   // COMPOSITION-ADJUSTED: the 65% is a claim about a composition-typical cohort — in a
@@ -565,10 +571,10 @@ function checkArrows() {
   const enth = renewalEvents.filter((e) => e.enthusiastTier === 1);
   const rest = renewalEvents.filter((e) => e.enthusiastTier !== 1);
   const enthRate = enth.reduce((s, e) => s + e.renewed, 0) / enth.length;
-  const EB = R.membership.enthusiastRenewal;
+  const EB = R.membership.params.enthusiastRenewal;
   const meanOf = (rows, f) => rows.reduce((s, e) => s + e[f], 0) / rows.length;
-  const compShift = [['tenure', 'tenureZ'], ['engagement', 'theta'], ['employerEvent', 'employerEvent']]
-    .reduce((s, [arrow, f]) => s + A[arrow].beta * (meanOf(enth, f) - meanOf(rest, f)), 0);
+  const compShift = [['renewal.tenure', 'tenureZ'], ['renewal.engagement', 'theta'], ['renewal.employerEvent', 'employerEvent']]
+    .reduce((s, [effect, f]) => s + A[effect].beta * (meanOf(enth, f) - meanOf(rest, f)), 0);
   const adjTarget = 1 / (1 + Math.exp(-(Math.log(EB.target / (1 - EB.target)) + compShift)));
   const enthAllow = EB.tolerance + 1.5 * Math.sqrt((adjTarget * (1 - adjTarget)) / enth.length);
   check(`enthusiast-tier renewal ${(enthRate * 100).toFixed(1)}% vs ${(adjTarget * 100).toFixed(1)}% (target ${EB.target * 100}%, composition-adjusted ${(compShift >= 0 ? '+' : '')}${compShift.toFixed(2)} logit) ±${(enthAllow * 100).toFixed(1)}`, Math.abs(enthRate - adjTarget) <= enthAllow, `${enth.length} decisions`);
@@ -591,11 +597,11 @@ function checkArrows() {
 // ---------- tiers & dues: the affluence dial made observable ----------
 function checkTiers() {
   const latents = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
-  const duesOf = new Map(R.membership.tiers.list.map((t) => [t.name, t.dues]));
+  const duesOf = new Map(R.membership.catalog.tiers.map((t) => [t.name, t.dues]));
   const badDues = periods.filter((x) => x.DuesAmount !== duesOf.get(x.MembershipTier)).length;
   check('dues: every period carries its tier\'s exact dues', badDues === 0, `${badDues} mismatched`);
   const indiv = periods.filter((x) => x.MembershipTier === 'Individual');
-  check(`dues: Individual tier = $${R.membership.tiers.individualDuesTarget} exactly (the verified ACS rate)`, indiv.every((x) => x.DuesAmount === R.membership.tiers.individualDuesTarget), `${indiv.length} periods`);
+  check(`dues: Individual tier = $${R.membership.params.individualDuesTarget} exactly (the verified ACS rate)`, indiv.every((x) => x.DuesAmount === R.membership.params.individualDuesTarget), `${indiv.length} periods`);
   // φ must be monotone across paid tiers — the copula's second dial expressing through money
   const phiOf = (tier) => {
     const rows = latents.filter((l) => !l.hero && l.tier === tier);
@@ -637,14 +643,14 @@ function checkLearning() {
     }
   }
   const partRate = partYears / activeYears;
-  const partAllow = L.participation.tolerance + 1.5 * Math.sqrt(L.participation.target * (1 - L.participation.target) / activeYears);
-  check(`learning: participation ${(partRate * 100).toFixed(1)}% vs ${L.participation.target * 100}% ±${(partAllow * 100).toFixed(1)}`, Math.abs(partRate - L.participation.target) <= partAllow, `${activeYears} member-years`);
+  const partAllow = L.params.enrollment.tolerance + 1.5 * Math.sqrt(L.params.enrollment.target * (1 - L.params.enrollment.target) / activeYears);
+  check(`learning: participation ${(partRate * 100).toFixed(1)}% vs ${L.params.enrollment.target * 100}% ±${(partAllow * 100).toFixed(1)}`, Math.abs(partRate - L.params.enrollment.target) <= partAllow, `${activeYears} member-years`);
 
   // completion among terminal enrollments ≈ 72%
   const terminal = enrollments.filter((e) => e.Status !== 'InProgress');
   const compRate = terminal.filter((e) => e.Status === 'Completed').length / terminal.length;
-  const compAllow = L.completion.tolerance + 1.5 * Math.sqrt(L.completion.target * (1 - L.completion.target) / terminal.length);
-  check(`learning: completion ${(compRate * 100).toFixed(1)}% vs ${L.completion.target * 100}% ±${(compAllow * 100).toFixed(1)}`, Math.abs(compRate - L.completion.target) <= compAllow, `${terminal.length} terminal enrollments`);
+  const compAllow = L.params.completion.tolerance + 1.5 * Math.sqrt(L.params.completion.target * (1 - L.params.completion.target) / terminal.length);
+  check(`learning: completion ${(compRate * 100).toFixed(1)}% vs ${L.params.completion.target * 100}% ±${(compAllow * 100).toFixed(1)}`, Math.abs(compRate - L.params.completion.target) <= compAllow, `${terminal.length} terminal enrollments`);
 
   // engagement expresses through completion (observable proxy: anchor quartiles)
   const latents = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
@@ -665,7 +671,7 @@ function checkLearning() {
 
 // ---------- the money chain: order-per-cycle, 3-part payment timing, reconciliation ----------
 function checkMoney() {
-  const G = R.orders.gates;
+  const G = R.orders.params;
   // BO-D40 verbatim: one dues order per membership period
   const duesOrders = orders.filter((x) => x.OrderKey.startsWith('ORD-D-'));
   check('money: one dues order per membership period (order-per-cycle)', duesOrders.length === periods.length, `${duesOrders.length} orders / ${periods.length} periods`);
@@ -696,9 +702,9 @@ function checkMoney() {
   const rate = (a) => a.reduce((s, x) => s + x, 0) / a.length;
   const se = (p, n) => Math.sqrt(p * (1 - p) / n);
   const netLate = rate(cls.net), manualLate = rate(cls.manual), autoOn = rate(cls.auto);
-  check(`money: net-terms late share ${(netLate * 100).toFixed(1)}% vs ${G.netTermsLate.target * 100}% ±${(G.netTermsLate.tolerance * 100).toFixed(0)}+SE (Atradius/CRF)`, Math.abs(netLate - G.netTermsLate.target) <= G.netTermsLate.tolerance + 1.5 * se(G.netTermsLate.target, cls.net.length), `${cls.net.length} net-terms payments`);
-  check(`money: manual dues late share ${(manualLate * 100).toFixed(1)}% vs ${G.manualLate.target * 100}% ±${(G.manualLate.tolerance * 100).toFixed(0)}+SE (mirrors late_renewal_share)`, Math.abs(manualLate - G.manualLate.target) <= G.manualLate.tolerance + 1.5 * se(G.manualLate.target, cls.manual.length), `${cls.manual.length} manual payments`);
-  check(`money: auto-pay lands ON the due date ${(autoOn * 100).toFixed(1)}% (≥${G.autopayOnDueMin * 100}%)`, autoOn >= G.autopayOnDueMin, `${cls.auto.length} auto-payments`);
+  check(`money: net-terms late share ${(netLate * 100).toFixed(1)}% vs ${G.gateNetTermsLate.target * 100}% ±${(G.gateNetTermsLate.tolerance * 100).toFixed(0)}+SE (Atradius/CRF)`, Math.abs(netLate - G.gateNetTermsLate.target) <= G.gateNetTermsLate.tolerance + 1.5 * se(G.gateNetTermsLate.target, cls.net.length), `${cls.net.length} net-terms payments`);
+  check(`money: manual dues late share ${(manualLate * 100).toFixed(1)}% vs ${G.gateManualLate.target * 100}% ±${(G.gateManualLate.tolerance * 100).toFixed(0)}+SE (mirrors late_renewal_share)`, Math.abs(manualLate - G.gateManualLate.target) <= G.gateManualLate.tolerance + 1.5 * se(G.gateManualLate.target, cls.manual.length), `${cls.manual.length} manual payments`);
+  check(`money: auto-pay lands ON the due date ${(autoOn * 100).toFixed(1)}% (≥${G.gateAutopayOnDueMin * 100}%)`, autoOn >= G.gateAutopayOnDueMin, `${cls.auto.length} auto-payments`);
 
   // event orders: card-at-checkout = paid same day, always
   const evOrders = orders.filter((x) => x.OrderKey.startsWith('ORD-E-'));
@@ -805,12 +811,12 @@ function checkTrainability() {
 function checkComposedApps() {
   const CC = R.committees; const FF = R.forms;
   // committee participation share (over the ACTIVE term's eligible crowd — heroes excluded from the draw)
-  const activeTerm = CC.terms[CC.terms.length - 1];
+  const activeTerm = CC.catalog.terms[CC.catalog.terms.length - 1];
   const served = new Set(cMemberships.filter((m) => m.TermKey.endsWith(activeTerm.start)).map((m) => m.MemberNumber));
   const eligible = people.filter((p) => periods.some((per) => per.MemberNumber === p.MemberNumber && per.StartDate <= activeTerm.start && activeTerm.start <= per.EndDate));
   const share = eligible.length ? [...served].filter((m) => eligible.some((p) => p.MemberNumber === m)).length / eligible.length : 0;
-  const shareAllow = CC.participation.tolerance + 3 * Math.sqrt((CC.participation.shareOfEligible * (1 - CC.participation.shareOfEligible)) / Math.max(1, eligible.length)); // 3×SE: multiple comparisons across seeds+terms (arrow-gate precedent)
-  check(`committees: ${(share * 100).toFixed(1)}% of eligible serve vs ${CC.participation.shareOfEligible * 100}% ±${(shareAllow * 100).toFixed(1)}`, Math.abs(share - CC.participation.shareOfEligible) <= shareAllow, `${served.size} serving / ${eligible.length} eligible`);
+  const shareAllow = CC.params.volunteerShare.tolerance + 3 * Math.sqrt((CC.params.volunteerShare.target * (1 - CC.params.volunteerShare.target)) / Math.max(1, eligible.length)); // 3×SE: multiple comparisons across seeds+terms (arrow-gate precedent)
+  check(`committees: ${(share * 100).toFixed(1)}% of eligible serve vs ${CC.params.volunteerShare.target * 100}% ±${(shareAllow * 100).toFixed(1)}`, Math.abs(share - CC.params.volunteerShare.target) <= shareAllow, `${served.size} serving / ${eligible.length} eligible`);
   // every committee-term has exactly one Chair
   const chairs = new Map();
   const populated = new Set(cMemberships.map((m) => m.TermKey));
@@ -823,8 +829,8 @@ function checkComposedApps() {
   // meeting attendance rate
   const present = cAttendance.filter((a) => a.AttendanceStatus === 'Present').length;
   const attRate = cAttendance.length ? present / cAttendance.length : 0;
-  const attAllow = CC.meetings.attendance.tolerance + 1.5 * Math.sqrt((CC.meetings.attendance.presentTarget * (1 - CC.meetings.attendance.presentTarget)) / Math.max(1, cAttendance.length));
-  check(`committees: meeting attendance ${(attRate * 100).toFixed(1)}% vs ${CC.meetings.attendance.presentTarget * 100}% ±${(attAllow * 100).toFixed(1)}`, Math.abs(attRate - CC.meetings.attendance.presentTarget) <= attAllow, `${cAttendance.length} attendance rows`);
+  const attAllow = CC.params.attendPresent.tolerance + 1.5 * Math.sqrt((CC.params.attendPresent.target * (1 - CC.params.attendPresent.target)) / Math.max(1, cAttendance.length));
+  check(`committees: meeting attendance ${(attRate * 100).toFixed(1)}% vs ${CC.params.attendPresent.target * 100}% ±${(attAllow * 100).toFixed(1)}`, Math.abs(attRate - CC.params.attendPresent.target) <= attAllow, `${cAttendance.length} attendance rows`);
   // survey response rate (pooled over distributions) + NPS mean band — SURVEY responses only
   // (the membership application is a separate, anonymous funnel with its own gates below)
   const surveyResponses = fResponses.filter((x) => x.FormKey === 'post-conf-survey');
@@ -861,12 +867,13 @@ function checkComposedApps() {
   const badDistVals = fDistributions.filter((d) => !['Draft', 'Active', 'Closed'].includes(d.Status) || !['PublicLink', 'Embed', 'QR', 'Email'].includes(d.ChannelType)).length;
   check('forms: distribution Status/ChannelType within their CHECK constraints', badDistVals === 0, `${badDistVals} illegal`);
   // issues: severity/priority form a real triage matrix, not a wall of Medium
+  const severityKey = (type) => 'severity' + String(type).replace(/\s+/g, '');
   const II = R.issues;
-  const typeShare = new Map(II.types.map((t) => [t.name, issues.filter((x) => x.TypeKey === t.name).length / Math.max(1, issues.length)]));
+  const typeShare = new Map(II.catalog.types.map((t) => [t.name, issues.filter((x) => x.TypeKey === t.name).length / Math.max(1, issues.length)]));
   for (const level of ['Critical', 'High', 'Medium', 'Low']) {
-    const want = II.types.reduce((s2, t) => s2 + (typeShare.get(t.name) ?? 0) * ((II.severity.byType[t.name].find(([l]) => l === level)?.[1]) ?? 0), 0);
+    const want = II.catalog.types.reduce((s2, t) => s2 + (typeShare.get(t.name) ?? 0) * ((II.mixes[severityKey(t.name)]?.[level]) ?? 0), 0);
     const got = issues.filter((x) => x.Severity === level).length / Math.max(1, issues.length);
-    const allow = II.severity.tolerance + 3 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
+    const allow = II.params.severityTolerance + 3 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
     check(`issues: severity ${level} ${(got * 100).toFixed(1)}% vs ${(want * 100).toFixed(1)}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${issues.length} issues`);
   }
   // PRESENCE FLOOR — the share gates above cannot see an empty bucket: a level whose expected
@@ -875,7 +882,7 @@ function checkComposedApps() {
   // positive weight must actually appear.
   {
     const declared = ['Critical', 'High', 'Medium', 'Low']
-      .filter((lvl) => II.types.some((t) => ((II.severity.byType[t.name] ?? []).find(([l]) => l === lvl)?.[1] ?? 0) > 0));
+      .filter((lvl) => II.catalog.types.some((t) => (II.mixes[severityKey(t.name)]?.[lvl] ?? 0) > 0));
     const missing = declared.filter((lvl) => !issues.some((x) => x.Severity === lvl));
     check(`issues: every declared severity actually appears (${declared.length} levels)`, missing.length === 0,
       missing.length ? `never drawn: ${missing.join(', ')}` : declared.map((l) => `${l}=${issues.filter((x) => x.Severity === l).length}`).join(' '));
@@ -884,8 +891,8 @@ function checkComposedApps() {
   // issues: assignment coverage rides the declared share; assignees are committee officers
   const assigned = issues.filter((x) => x.AssigneeMemberNumber);
   const aShare = assigned.length / Math.max(1, issues.length);
-  const aAllow = II.assignment.tolerance + 1.5 * Math.sqrt(II.assignment.share * (1 - II.assignment.share) / Math.max(1, issues.length));
-  check(`issues: ${(aShare * 100).toFixed(1)}% assigned vs ${II.assignment.share * 100}% ±${(aAllow * 100).toFixed(1)}`, Math.abs(aShare - II.assignment.share) <= aAllow, `${assigned.length}/${issues.length}`);
+  const aAllow = II.params.assignment.tolerance + 1.5 * Math.sqrt(II.params.assignment.target * (1 - II.params.assignment.target) / Math.max(1, issues.length));
+  check(`issues: ${(aShare * 100).toFixed(1)}% assigned vs ${II.params.assignment.target * 100}% ±${(aAllow * 100).toFixed(1)}`, Math.abs(aShare - II.params.assignment.target) <= aAllow, `${assigned.length}/${issues.length}`);
   const officerSet = new Set(cMemberships.filter((m) => ['Chair', 'Vice Chair'].includes(m.RoleKey)).map((m) => m.MemberNumber));
   check('issues: every assignee is a committee officer', assigned.every((x) => officerSet.has(x.AssigneeMemberNumber)), `${officerSet.size} officers`);
   // an assignee must already be a member when the ticket was worked (26 issues used to be
@@ -906,7 +913,7 @@ function checkComposedApps() {
   // every swimlane carries rows; the floor scales with N (Billing derives from the rare
   // overdue-order population, so a pilot-scale run legitimately has only one or two)
   const typeFloor = Math.max(1, Math.round(issues.length * 0.02));
-  check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
+  check(`issues: every type has volume, floor ${typeFloor} (${Object.entries(typeCounts).map(([k, v]) => k + ' ' + v).join(', ')})`, R.issues.catalog.types.every((t) => (typeCounts[t.name] ?? 0) >= typeFloor), 'no empty swimlane');
   check(`issues: no single title template dominates (${(titleShare * 100).toFixed(0)}% max)`, titleShare < 0.45, 'title variety');
   check('issues: descriptions present (the created date lives in the narrative)', issues.every((x) => x.Description && x.Description.length > 40), `${issues.filter((x) => x.Description).length}/${issues.length}`);
   // ---------- geography + name coherence ----------
@@ -1053,7 +1060,7 @@ function checkComposedApps() {
     check('relationships: every referrer joined before the member they referred', badRef === 0, `${badRef} impossible referrals`);
     // demo-owned types must never re-create bizapps-common's seeded ones (runbook F6:
     // app-seeded lookups collide BY NAME at install)
-    const seededNames = Object.keys(R.relationships.seededTypeIDs ?? {});
+    const seededNames = Object.keys(R.relationships.params.seededTypeIDs ?? {});
     const collide = relTypes.filter((t) => seededNames.includes(t.TypeKey)).map((t) => t.TypeKey);
     check('relationships: no demo type collides with a bizapps-seeded type name (F6)', collide.length === 0, collide.join(', ') || `avoids ${seededNames.join('/')}`);
   }
@@ -1061,7 +1068,7 @@ function checkComposedApps() {
   // and the catalogue is deep enough that a credentials page isn't three rows
   {
     const cat = load('learning', 'certifications');
-    const declared = new Map(R.programs.certifications.catalog.map((c) => [c.key, c]));
+    const declared = new Map(R.programs.catalog.certifications.map((c) => [c.key, c]));
     const heldBy = new Map();
     for (const mc of memberCerts) {
       if (!heldBy.has(mc.MemberNumber)) heldBy.set(mc.MemberNumber, new Set());
@@ -1083,26 +1090,26 @@ function checkComposedApps() {
   const crowdCompleters = [...completerSet].filter((m) => !R.heroes.some((h) => h.memberNumber === m)).length;
   const crowdCerts = memberCerts.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).length;
   const certShare = crowdCerts / Math.max(1, crowdCompleters);
-  const certAllow = PRG.certifications.tolerance + 3 * Math.sqrt(PRG.certifications.pursuitShareOfCompleters * (1 - PRG.certifications.pursuitShareOfCompleters) / Math.max(1, crowdCompleters));
-  check(`programs: cert pursuit ${(certShare * 100).toFixed(1)}% of completers vs ${PRG.certifications.pursuitShareOfCompleters * 100}% ±${(certAllow * 100).toFixed(1)}`, Math.abs(certShare - PRG.certifications.pursuitShareOfCompleters) <= certAllow, `${crowdCerts} certs / ${crowdCompleters} completers`);
+  const certAllow = PRG.params.certificationPursuit.tolerance + 3 * Math.sqrt(PRG.params.certificationPursuit.target * (1 - PRG.params.certificationPursuit.target) / Math.max(1, crowdCompleters));
+  check(`programs: cert pursuit ${(certShare * 100).toFixed(1)}% of completers vs ${PRG.params.certificationPursuit.target * 100}% ±${(certAllow * 100).toFixed(1)}`, Math.abs(certShare - PRG.params.certificationPursuit.target) <= certAllow, `${crowdCerts} certs / ${crowdCompleters} completers`);
   const advocates = new Set(advocacy.filter((x) => !R.heroes.some((h) => h.memberNumber === x.MemberNumber)).map((x) => x.MemberNumber)).size;
   const advShare = advocates / Math.max(1, people.length);
-  const advAllow = PRG.advocacy.tolerance + 3 * Math.sqrt(PRG.advocacy.advocateShare * (1 - PRG.advocacy.advocateShare) / Math.max(1, people.length));
-  check(`programs: advocates ${(advShare * 100).toFixed(1)}% vs ${PRG.advocacy.advocateShare * 100}% ±${(advAllow * 100).toFixed(1)}`, Math.abs(advShare - PRG.advocacy.advocateShare) <= advAllow, `${advocates} advocates`);
+  const advAllow = PRG.params.advocateShare.tolerance + 3 * Math.sqrt(PRG.params.advocateShare.target * (1 - PRG.params.advocateShare.target) / Math.max(1, people.length));
+  check(`programs: advocates ${(advShare * 100).toFixed(1)}% vs ${PRG.params.advocateShare.target * 100}% ±${(advAllow * 100).toFixed(1)}`, Math.abs(advShare - PRG.params.advocateShare.target) <= advAllow, `${advocates} advocates`);
 
   // payment lifecycle: failure mix is part causal (low-phi), part noise — the ratio must express
-  const PO2 = R.orders.paymentOutcomes;
+  const PO2 = R.orders.params;
   const latents2 = JSON.parse(readFileSync(join(OUT, 'validation-latents.json'), 'utf8'));
   const phiOf = new Map(latents2.map((x) => [x.m, x.phi]));
   const orderMember = new Map(orders.map((o) => [o.OrderKey, o.MemberNumber]));
   const cardPays = payments.filter((x) => x.Method === 'CreditCard');
   const failed = cardPays.filter((x) => x.Status === 'Failed' || x.Status === 'Denied');
-  const isLow = (x) => (phiOf.get(orderMember.get(x.OrderKey)) ?? 0) < PO2.lowPhiCut;
+  const isLow = (x) => (phiOf.get(orderMember.get(x.OrderKey)) ?? 0) < PO2.paymentLowPhiCut;
   const lowN = cardPays.filter(isLow).length, lowF = failed.filter(isLow).length;
   const restN = cardPays.length - lowN, restF = failed.length - lowF;
   const rLow = lowF / Math.max(1, lowN), rRest = restF / Math.max(1, restN);
   check(`payments: card-failure causality expressed — low-φ ${(rLow * 100).toFixed(1)}% > rest ${(rRest * 100).toFixed(1)}% (noise floor)`, failed.length > 0 && rLow > rRest * 1.8, `${failed.length} failed/denied of ${cardPays.length} card payments`);
-  const badInflight = payments.filter((x) => x.Status === 'InProgress' && x.PaymentDate < iso2(addDays2(parseDate2(run.releaseDate), -PO2.inProgressWindowDays))).length;
+  const badInflight = payments.filter((x) => x.Status === 'InProgress' && x.PaymentDate < iso2(addDays2(parseDate2(run.releaseDate), -PO2.paymentInProgressWindowDays))).length;
   check('payments: InProgress only inside the settlement window', badInflight === 0, `${payments.filter((x) => x.Status === 'InProgress').length} in-flight`);
   // relationships: every employed member has exactly one Employee edge; dissolved employers end it
   const employed = people.filter((p) => p.OrgKey).length;
@@ -1131,7 +1138,7 @@ function checkComposedApps() {
   check('committees: motion tallies match votes; votes consistent with attendance', tallyBad + attBad === 0, `${cMotions.length} motions, ${cVotes.length} votes`);
   // upcoming meetings: each committee schedules ahead so the app's forward view is populated; future meetings carry no attendance
   const scheduled = cMeetings.filter((m) => m.Status === 'Scheduled');
-  const wantUpcoming = CC.list.length * CC.meetings.upcomingPerCommittee;
+  const wantUpcoming = CC.catalog.committees.length * CC.params.upcomingPerCommittee;
   const futureNoAtt = scheduled.every((m) => !cAttendance.some((a) => a.MeetingKey === m.MeetingKey));
   check(`committees: upcoming Scheduled meetings = ${wantUpcoming} (each committee schedules ahead), no attendance yet`, scheduled.length === wantUpcoming && futureNoAtt, `${scheduled.length} scheduled`);
   // governance has HISTORY and CONTINUITY: terms reach back toward formation, and rosters
@@ -1144,7 +1151,7 @@ function checkComposedApps() {
     // vote. This is the tail the volunteer draw alone leaves behind, so assert it directly rather
     // than trusting the participation average.
     {
-      const min = CC.participation.minRosterPerTerm ?? 0;
+      const min = CC.params.minRosterPerTerm ?? 0;
       const byTerm = new Map();
       for (const m of cMemberships) byTerm.set(m.TermKey, (byTerm.get(m.TermKey) ?? 0) + 1);
       const short = [...byTerm].filter(([, n]) => n < min);
@@ -1258,7 +1265,7 @@ function checkHeroes() {
     }
     for (const seat of h.committees ?? []) {
       for (const termName of seat.terms) {
-        const t = R.committees.terms.find((x) => x.name === termName);
+        const t = R.committees.catalog.terms.find((x) => x.name === termName);
         const row = t && cMemberships.find((m) => m.MemberNumber === h.memberNumber && m.CommitteeKey === seat.committee && m.TermKey === `${seat.committee}:${t.start}`);
         if (!row) problems.push(`no ${seat.committee} seat (${termName})`);
         else if (row.RoleKey !== seat.role) problems.push(`${seat.committee} role=${row.RoleKey}≠${seat.role}`);
@@ -1302,11 +1309,11 @@ function checkDefects() {
   const orgByKey2 = new Map(orgs.map((o) => [o.OrgKey, o]));
 
   // declared counts: crowd injections + persona-declared exemplars
-  const wantDup = D.duplicatePerson.count + R.heroes.filter((h) => h.pins?.duplicateOf).length;
-  const wantStale = D.staleEmployer.count + R.heroes.filter((h) => h.staleEmployer).length;
+  const wantDup = D.params.duplicatePersonCount + R.heroes.filter((h) => h.pins?.duplicateOf).length;
+  const wantStale = D.params.staleEmployerCount + R.heroes.filter((h) => h.staleEmployer).length;
   check(`defects: DuplicatePerson labels = ${wantDup}`, byKind('DuplicatePerson').length === wantDup, `${byKind('DuplicatePerson').length}`);
   check(`defects: StaleEmployer labels = ${wantStale}`, byKind('StaleEmployer').length === wantStale, `${byKind('StaleEmployer').length}`);
-  check(`defects: TypoEmail labels = ${D.typoEmail.count}`, byKind('TypoEmail').length === D.typoEmail.count, `${byKind('TypoEmail').length}`);
+  check(`defects: TypoEmail labels = ${D.params.typoEmailCount}`, byKind('TypoEmail').length === D.params.typoEmailCount, `${byKind('TypoEmail').length}`);
 
   // every label points at real records and describes a defect that is actually present
   const problems = [];
@@ -1337,9 +1344,9 @@ function checkMessaging() {
   const MM = R.messaging;
   // volume: declared share of issues + all hero issues (which always thread)
   const heroIssues = issues.filter((x) => x.IssueKey.startsWith('hero:'));
-  const want = MM.threadSharePerIssue;
+  const want = MM.params.threadSharePerIssue.target;
   const got = (smThreads.length - heroIssues.length) / Math.max(1, issues.length - heroIssues.length);
-  const allow = MM.tolerance + 1.5 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
+  const allow = MM.params.threadSharePerIssue.tolerance + 1.5 * Math.sqrt(want * (1 - want) / Math.max(1, issues.length));
   check(`messaging: ${(got * 100).toFixed(1)}% of crowd issues have a secure thread vs ${want * 100}% ±${(allow * 100).toFixed(1)}`, Math.abs(got - want) <= allow, `${smThreads.length} threads / ${issues.length} issues`);
   const heroMissing = heroIssues.filter((x) => !smThreads.some((t) => t.IssueKey === x.IssueKey));
   check('messaging: every hero-authored issue has a secure thread', heroMissing.length === 0, heroMissing.map((x) => x.IssueKey).join(', ') || `${heroIssues.length} hero issues`);
@@ -1381,8 +1388,8 @@ function checkPlatform() {
   const PP = R.platform;
   const releaseMs = new Date(`${run.releaseDate}T23:59:59Z`).getTime();
 
-  const domainBad = pUsers.filter((u) => !u.Email.endsWith(`@${PP.emailDomain}`)).length
-    + (PP.emailDomain.endsWith('.example') ? 0 : 1);
+  const domainBad = pUsers.filter((u) => !u.Email.endsWith(`@${PP.params.emailDomain}`)).length
+    + (PP.params.emailDomain.endsWith('.example') ? 0 : 1);
   check('platform: staff emails on the reserved .example domain', domainBad === 0, pUsers.map((u) => u.Email).join(', '));
 
   // conversations: every token substituted, User speaks first, clock increases, inside history

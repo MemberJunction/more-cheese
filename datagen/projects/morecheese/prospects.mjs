@@ -28,19 +28,19 @@ export function buildProspects(cfg, orgs, events, memberCount) {
   // sized against the roster we ACTUALLY ship, not the requested n: the declining-org
   // scenario archives members away, and a count pinned to cfg.n made non-members a bigger
   // share of a smaller association — the ratio has to hold in every world
-  const n = Math.round(memberCount * P.ratioToMembers);
+  const n = Math.round(memberCount * P.params.ratioToMembers);
 
   for (let i = 0; i < n; i++) {
     const key = `NM-${String(200001 + i)}`;
     const r = rng(seed, `prospect:${key}`);
-    const region = r.pickWeighted(R.geography.mix);
+    const region = r.pickWeighted(Object.entries(R.geography.mixes.region));
     const [city, state, lat, lon, , country, countryName, nameOrigin] = r.pickWeighted(CITIES[region].map((c) => [c, c[4]]));
     // about half work somewhere we already know — a colleague of a member, or a producer
     // whose organisation is already on file
-    const org = r.bernoulli(P.orgAffiliatedShare) && orgs.length ? orgs[r.int(0, orgs.length - 1)] : null;
+    const org = r.bernoulli(P.params.orgAffiliatedShare) && orgs.length ? orgs[r.int(0, orgs.length - 1)] : null;
     const nm = personNameFor(seed, key, region, nameOrigin);
     // first contact: when they entered the CRM. Drives nothing but their own timeline.
-    const firstSeen = addDays(release, -r.int(30, P.firstSeenMaxDaysAgo));
+    const firstSeen = addDays(release, -r.int(30, P.params.firstSeenMaxDaysAgo));
     prospects.push({
       MemberNumber: key, // the PERSON business key — prospects have no member number of their own
       IsProspect: true,
@@ -67,7 +67,7 @@ export function buildProspects(cfg, orgs, events, memberCount) {
     const open = freeEvents.filter((e) => e.Date >= p.JoinDate);
     if (!open.length) continue;
     const r = rng(seed, `prospectreg:${p.MemberNumber}`);
-    const k = Math.min(r.negbin(P.webinarsPerProspectMean, P.dispersionK), P.maxWebinarsPerProspect, open.length);
+    const k = Math.min(r.negbin(P.params.webinarsPerProspectMean, P.params.dispersionK), P.params.maxWebinarsPerProspect, open.length);
     const taken = new Set();
     for (let j = 0; j < k; j++) {
       const ev = r.pick(open);
@@ -76,7 +76,7 @@ export function buildProspects(cfg, orgs, events, memberCount) {
       registrations.push({
         RegKey: `REG-${p.MemberNumber}-${ev.EventKey}`, MemberNumber: p.MemberNumber, EventKey: ev.EventKey,
         RegisteredOn: iso(addDays(new Date(ev.Date), -r.int(1, 30))),
-        Attended: r.bernoulli(P.attendShare), IsSharedDemo: true,
+        Attended: r.bernoulli(P.params.attendShare), IsSharedDemo: true,
       });
     }
   }

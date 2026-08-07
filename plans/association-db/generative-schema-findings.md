@@ -1,7 +1,7 @@
 # Generative-Dataset Schema Findings — Association Data × Causal Generation
 
-**Author:** Barnatt (with Claude) · **Date:** 2026-07-01
-**Division of labor:** Marcelo researches the existing data schema with BizApps + existing Cheese Association data. Barnatt works Madhav's *Generative Dataset* (causal, LLM-optimal data generation) document into schema requirements from the generation angle. This doc is the generation-angle half, ready for reconciliation.
+**Author:** the workstream lead (with Claude) · **Date:** 2026-07-01
+**Division of labor:** the schema owner researches the existing data schema with BizApps + existing Cheese Association data. the workstream lead works the generative-data lead's *Generative Dataset* (causal, LLM-optimal data generation) document into schema requirements from the generation angle. This doc is the generation-angle half, ready for reconciliation.
 
 **Working setup:** worktree at `/Users/barnattwu/Member Junction Main Repo/MJ-morecheese` on branch `claude/review-associationdb-v2-plan-UTO7v` (the MoreCheese branch — v2 plan + v1 demo DB + morecheese.org mockup).
 
@@ -22,7 +22,7 @@ Also relevant and real today:
 
 - **bizapps-common** (`/Users/barnattwu/Blue Cypress/Sonar Dev/bizapps-common`, schema `__mj_BizAppsCommon`): `Person`, `Organization` (self-ref hierarchy), `Relationship` (typed, directional, with Start/EndDate), `ContactMethod`, `Address` + polymorphic `AddressLink`, plus 4 type lookups. Baseline migration + 5 incremental — **fairly stable**.
 - **bizapps-sonar** is at **v0.1** (2 migrations, `Factor.DateField` just added 2026-06-24) — **not frozen**.
-- The other 8 composed apps (orders, payments, subscriptions, accounting, committees, tasks, issues, secure-messaging) — **repos not present on this machine**; readiness is the v2 plan's OQ-11 and squarely in Marcelo's lane.
+- The other 8 composed apps (orders, payments, subscriptions, accounting, committees, tasks, issues, secure-messaging) — **repos not present on this machine**; readiness is the v2 plan's OQ-11 and squarely in the schema owner's lane.
 
 ---
 
@@ -46,7 +46,7 @@ Source: `plans/association-db/v2-plan.md` (+ `work-breakdown.md`, `kickoff-agend
 Key structural decisions already made by the plan:
 
 - **Member is a profile, not an identity**: `MemberProfile.PersonID → bizapps-common.Person`; membership *status* lives on `subscriptions.Subscription`, not on the member row.
-- **Date semantics fixed** (Robert's v1 pain): `EndDate` = contractual end of current paid period; `RenewalDate` = operational renewal action (last/next). Both always meaningful on active rows.
+- **Date semantics fixed** (the domain lead's v1 pain): `EndDate` = contractual end of current paid period; `RenewalDate` = operational renewal action (last/next). Both always meaningful on active rows.
 - **Status invariants** enforced at generation + install-time integrity check (`Active ⟹ EndDate ≥ today`, `Canceled ⟹ CancellationDate NOT NULL`, `Completed event ⟹ EndDate < today`, …).
 - **Scale presets**: small ~500 / medium ~2,500 (default) / large ~15,000 persons.
 - **50–100 hand-authored hero personas** with stable identities + storylines; generator builds the population *around* them; hero integrity is a release blocker.
@@ -58,7 +58,7 @@ Key structural decisions already made by the plan:
 
 ## 3. What the Generative Dataset doc demands of a schema
 
-Madhav's doc defines `Generate(X, S, seed, scale)`: the LLM authors a causal program (`X` = priors, DAG, templates), code executes it in the **joined space** in topological order, with constraints reparameterized so violations are unrepresentable. The schema `S` is fed *into* the authoring prompts from `EntityInfo`/`EntityFieldInfo`. That flips the usual relationship: **the schema is an input contract to the generator**, and its quality directly caps generated-data quality. Extracted requirements:
+the generative-data lead's doc defines `Generate(X, S, seed, scale)`: the LLM authors a causal program (`X` = priors, DAG, templates), code executes it in the **joined space** in topological order, with constraints reparameterized so violations are unrepresentable. The schema `S` is fed *into* the authoring prompts from `EntityInfo`/`EntityFieldInfo`. That flips the usual relationship: **the schema is an input contract to the generator**, and its quality directly caps generated-data quality. Extracted requirements:
 
 | # | Generator mechanism | What it needs from the schema |
 |---|---|---|
@@ -83,7 +83,7 @@ Madhav's doc defines `Generate(X, S, seed, scale)`: the LLM authors a causal pro
 
 ### v1 `AssociationDemo` (58 tables) — surprisingly good bones, four structural sins
 
-**What v1 already gets right** (worth telling Marcelo — much of v1's *shape* is reusable):
+**What v1 already gets right** (worth telling the schema owner — much of v1's *shape* is reusable):
 - Rich driver columns exist: `Member.City/State/Country`, `Industry`, `JobFunction`, `YearsInProfession`, `JoinDate`; `Organization` type/size implied; `Chapter.Type` (Geographic/Special Interest/Industry).
 - CHECK-constraint enums everywhere (Membership.Status, Event.Status, Invoice.Status, Certification.Status…) — exactly what gates F3/F8 want.
 - Junctions are real-FK base relations (EventRegistration, ChapterMembership, CommitteeMembership, CampaignMember).
@@ -134,13 +134,13 @@ The schema must let the true causal story of an association express itself. This
 - engagement → forum posts/reactions; posts cluster by discipline (text templates per cluster)
 - everything above → **Sonar Score** (strict sink) → the 7 predictive models
 
-**Why this matters for reconciliation:** any schema field Marcelo finds in BizApps/v1 that doesn't sit on one of these chains is either (a) a driver we should keep, (b) flavor text we template, or (c) dead weight. And any chain above *missing* its columns in v2 is a schema gap to raise.
+**Why this matters for reconciliation:** any schema field the schema owner finds in BizApps/v1 that doesn't sit on one of these chains is either (a) a driver we should keep, (b) flavor text we template, or (c) dead weight. And any chain above *missing* its columns in v2 is a schema gap to raise.
 
 ---
 
 ## 6. Recommendations — the schema asks (generation angle)
 
-These are the concrete asks to bring to the reconciliation with Marcelo, ordered by leverage:
+These are the concrete asks to bring to the reconciliation with the schema owner, ordered by leverage:
 
 **A. Make the v1 bug class unrepresentable, in the schema itself.**
 Status columns on lifecycle tables get CHECK constraints binding them to their dates (or become computed). Per the Generative doc's shipping gate, the seed migration then *self-verifies*: `Status='Active' AND EndDate < GETDATE()` simply cannot load. Cheap, and it protects every future data author, not just our generator.
@@ -174,9 +174,9 @@ Bio next to JoinDate/segment/tier; TastingNotes next to MilkSource/AgeMonths/IsO
 
 ---
 
-## 7. Open questions / gaps (for the reconciliation with Marcelo)
+## 7. Open questions / gaps (for the reconciliation with the schema owner)
 
-1. **Readiness of the other 8 composed apps** (orders, payments, subscriptions, accounting, committees, tasks, issues, secure-messaging): repos aren't on this machine; only bizapps-common (stable) and bizapps-sonar (v0.1, moving) were inspectable. The v2 plan's whole timeline hangs on OQ-11 — Marcelo's BizApps survey should answer schema-by-schema.
+1. **Readiness of the other 8 composed apps** (orders, payments, subscriptions, accounting, committees, tasks, issues, secure-messaging): repos aren't on this machine; only bizapps-common (stable) and bizapps-sonar (v0.1, moving) were inspectable. The v2 plan's whole timeline hangs on OQ-11 — the schema owner's BizApps survey should answer schema-by-schema.
 2. **Subscription table shape**: the entire membership-status story now lives on `subscriptions.Subscription`. We need its actual columns (Status values? Start/End/CancellationDate? tier-change history?) before the invariant CHECKs and the renewal unroll can be designed.
 3. **Orders/payments/accounting join semantics**: dues → Order → Transaction → JournalEntry is the accounting-identity chain (Tier-2 repair constraints). Need the real FK shapes.
 4. **Does generation target v2-composed schemas only, or also refresh v1?** Recommendation: v2 only; v1 is frozen as the benchmark/mapping source (its 58 tables → `V1_TO_V2_ENTITY_MAPPING.md`).
@@ -190,7 +190,7 @@ Bio next to JoinDate/segment/tier; TastingNotes next to MilkSource/AgeMonths/IsO
 
 | Artifact | Location |
 |---|---|
-| Generative Dataset strategy (Madhav) | provided doc (this analysis's §3 extracts it) |
+| Generative Dataset strategy (the generative-data lead) | provided doc (this analysis's §3 extracts it) |
 | MoreCheese v2 plan | `MJ-morecheese/plans/association-db/v2-plan.md` |
 | Work breakdown / kickoff | `MJ/plans/association-db/{work-breakdown,kickoff-agenda}.md` |
 | v1 AssociationDB schema | `MJ-morecheese/Demos/AssociationDB/schema/V001–V008*.sql` |

@@ -2,7 +2,7 @@
 
 **The idea:** what MoreCheese proved as one application becomes a reusable engine — any
 MJ app team gets calibrated, causal, deterministic demo data by *authoring ruleset modules*,
-not by writing generators. The formula is Madhav's `Generate(X, S, seed, scale)`; MoreCheese
+not by writing generators. The formula is the generative-data lead's `Generate(X, S, seed, scale)`; MoreCheese
 is the running proof of the bottom half.
 
 **The test that defines "framework":** can a second domain (say, bizapps-accounting demo
@@ -108,7 +108,7 @@ A **factor** is the atom a domain author writes — one cause, its strength, and
 Everything else is a projection of this artifact: the executor reads it forward (a score
 term), the validator reads it backward (an auto-derived recovery gate), the schema layer
 reads it sideways (do the referenced fields exist?), RULESET.md renders it in English, and
-the AI authoring loop is constrained to writing exactly this shape.
+The AI authoring loop is constrained to writing exactly this shape.
 
 **Feature grammar v1** (deliberately tiny — standardize observed needs, not imagined ones):
 

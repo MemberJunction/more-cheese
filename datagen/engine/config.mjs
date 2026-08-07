@@ -1,9 +1,9 @@
 // Shared plumbing: CLI args, the ruleset, and date arithmetic.
 // Everything downstream receives one `cfg` object — no globals, no wall clock.
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { compileRuleset } from './compile.mjs';
 import { lintRuleset, findUnknownOverlayKeys, stripHoldouts } from './lint.mjs';
 
@@ -50,12 +50,38 @@ export async function loadRuleset(scenario, project = DEFAULT_PROJECT) {
   const index = JSON.parse(readFileSync(join(dir, 'index.json'), 'utf8'));
   const ruleset = {};
   for (const name of index.modules) {
-    const mod = JSON.parse(readFileSync(join(dir, `${name}.json`), 'utf8'));
+    // A module may be .mjs or .json. .mjs is preferred for new work: it gets real comments
+    // (the old ruleset carried ~40 KB of prose in fake "$note" keys purely because JSON has
+    // none), real references between catalogs instead of matching strings, and editor types
+    // with no schema. It must still be DATA — literals and local constants only. No I/O, no
+    // Date.now(), no Math.random(): the replay property depends on it, and `npm run
+    // check:ruleset` enforces it.
+    let mod;
+    const mjs = join(dir, `${name}.mjs`);
+    if (existsSync(mjs)) {
+      const loaded = await import(pathToFileURL(mjs).href);
+      mod = loaded.default ?? loaded[name];
+      if (!mod || typeof mod !== 'object') {
+        throw new Error(`ruleset module '${name}.mjs' must export default (or a named export '${name}') holding the block object`);
+      }
+      mod = { ...mod };
+    } else {
+      try {
+        mod = JSON.parse(readFileSync(join(dir, `${name}.json`), 'utf8'));
+      } catch (e) {
+        throw new Error(`ruleset module '${name}.json' is not valid JSON: ${e.message}`);
+      }
+    }
     delete mod.$comment; // module-level commentary isn't part of the composed recipe
     Object.assign(ruleset, mod);
   }
   if (scenario) {
-    const overlay = JSON.parse(readFileSync(join(projectDir(project), `ruleset/scenarios/${scenario}.json`), 'utf8'));
+    let overlay;
+    try {
+      overlay = JSON.parse(readFileSync(join(projectDir(project), `ruleset/scenarios/${scenario}.json`), 'utf8'));
+    } catch (e) {
+      throw new Error(`scenario '${scenario}.json' is not valid JSON: ${e.message}`);
+    }
     delete overlay.$comment;
     // overlays may only override, never invent — a typo'd key would merge silently otherwise
     const unknown = findUnknownOverlayKeys(ruleset, overlay);
@@ -74,7 +100,11 @@ export async function loadAuthoringView(scenario, project = DEFAULT_PROJECT) {
   return stripHoldouts(full);
 }
 
-/** Parse `--flag value` pairs; returns the run configuration + the composed ruleset. */
+/**
+ * Parse `--flag value` pairs; returns the run configuration + the composed ruleset.
+ * @param {readonly string[]} argv
+ * @returns {Promise<import('./types.js').Config>}
+ */
 export async function loadConfig(argv) {
   const args = Object.fromEntries(
     argv.map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1]] : null)).filter(Boolean)

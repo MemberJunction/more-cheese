@@ -9,15 +9,19 @@
 import { rng } from '../../engine/rng.mjs';
 import { iso, addDays, parseDate } from '../../engine/dates.mjs';
 
+// severity mixes are keyed by ticket type with spaces removed ('Data Correction' →
+// severityDataCorrection), so each mix stays a flat map of level → weight
+const severityKey = (type) => 'severity' + String(type).replace(/\s+/g, '');
+
 export function buildIssues(cfg, people, orgs, events, registrations, money, committees) {
   const { R, seed, release } = cfg;
   const I = R.issues;
   const releaseIso = iso(release);
   const orgByKey = new Map(orgs.map((o) => [o.OrgKey, o]));
-  const typeDefault = new Map(I.types.map((t) => [t.name, t.priority]));
+  const typeDefault = new Map(I.catalog.types.map((t) => [t.name, t.priority]));
 
-  const issueTypes = I.types.map((t) => ({ TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true }));
-  const issueStatuses = I.statuses.map((s) => ({ StatusKey: s.name, Name: s.name, Sequence: s.sequence, IsDefault: s.isDefault, IsTerminal: s.isTerminal, ColorCode: s.color, IsSharedDemo: true }));
+  const issueTypes = I.catalog.types.map((t) => ({ TypeKey: t.name, Name: t.name, Description: t.description, DefaultPriority: t.priority, IsActive: true, IsSharedDemo: true }));
+  const issueStatuses = I.catalog.statuses.map((s) => ({ StatusKey: s.name, Name: s.name, Sequence: s.sequence, IsDefault: s.isDefault, IsTerminal: s.isTerminal, ColorCode: s.color, IsSharedDemo: true }));
 
   const drafts = []; // { key, type, title, reporter, sourceEntityName, sourceRefKind, sourceRefKey, created, priority }
 
@@ -59,7 +63,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   }
   for (const [memberNumber, order] of [...overdueByMember.entries()].sort()) {
     const r = rng(seed, `issue-billing:${memberNumber}`);
-    if (!r.bernoulli(I.billing.sharePerOverdueMember)) continue;
+    if (!r.bernoulli(I.params.billingSharePerOverdueMember)) continue;
     const created = iso(addDays(parseDate(order.DueDate), r.int(3, 20)));
     drafts.push({
       key: `billing:${memberNumber}`, type: 'Billing', priority: 'High',
@@ -93,7 +97,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     const ev = eventByKey.get(reg.EventKey);
     if (reg.Attended !== false || !ev?.IsPaid) continue;
     const r = rng(seed, `issue-refund:${reg.RegKey}`);
-    if (!r.bernoulli(I.refunds.sharePerPaidNoShow)) continue;
+    if (!r.bernoulli(I.params.refundSharePerPaidNoShow)) continue;
     const created = iso(addDays(parseDate(ev.Date), r.int(1, 10)));
     drafts.push({
       key: `refund:${reg.RegKey}`, type: 'Events', priority: 'Medium',
@@ -117,7 +121,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   for (const p of people) {
     if (p._hero) continue;
     const r = rng(seed, `issue-general:${p.MemberNumber}`);
-    if (!r.bernoulli(I.general?.sharePerMember ?? 0.012)) continue;
+    if (!r.bernoulli(I.params.generalSharePerMember)) continue;
     const daysBack = r.int(10, 1400);
     const created = iso(addDays(release, -daysBack));
     if (created < p.JoinDate) continue;
@@ -182,7 +186,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
 
   // number + status: deterministic order (created, then key), recency drives openness
   drafts.sort((a, b) => (a.created + a.key) < (b.created + b.key) ? -1 : 1);
-  const openCut = iso(addDays(release, -I.recencyOpenDays));
+  const openCut = iso(addDays(release, -I.params.recencyOpenDays));
   const issues = drafts.map((d, i) => {
     const r = rng(seed, `issue-status:${d.key}`);
     const recent = d.created >= openCut;
@@ -193,10 +197,10 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     // severity, occasionally mis-triaged down) — decoupled, own stream so status draws
     // stay byte-identical per key
     const rt = rng(seed, `issue-sevprio:${d.key}`);
-    const severity = rt.pickWeighted(I.severity.byType[d.type]);
+    const severity = rt.pickWeighted(Object.entries(I.mixes[severityKey(d.type)]));
     let rung = LADDER.indexOf(d.priority);
-    if (LADDER.indexOf(severity) >= LADDER.indexOf(I.priorityRule.bumpIfSeverityAtLeast)) rung += 1;
-    if (rt.bernoulli(I.priorityRule.noiseDownShare)) rung -= 1;
+    if (LADDER.indexOf(severity) >= LADDER.indexOf(I.params.priorityBumpIfSeverityAtLeast)) rung += 1;
+    if (rt.bernoulli(I.params.priorityNoiseDownShare)) rung -= 1;
     const priority = clampRung(rung);
 
     // assignment: New issues often still sit unassigned; worked/terminal ones mostly routed.
@@ -216,7 +220,7 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
     const workHour = (rr) => `${String(rr.int(8, 17)).padStart(2, '0')}:${String(rr.int(0, 59)).padStart(2, '0')}:00Z`;
 
     return {
-      IssueKey: d.key, IssueNumber: `${I.numberPrefix}-${String(i + 1).padStart(4, '0')}`,
+      IssueKey: d.key, IssueNumber: `${I.params.numberPrefix}-${String(i + 1).padStart(4, '0')}`,
       Title: d.title, Description: d.description ?? null, TypeKey: d.type, StatusKey: status,
       Severity: severity, Priority: priority,
       ReporterMemberNumber: d.reporter,
@@ -236,11 +240,11 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   // support demo has no critical ticket in it. Promote the highest-impact eligible ticket
   // instead: deterministic, consumes no randomness, and only fires when the draws came up dry.
   {
-    const want = I.severity.criticalFloor ?? 0;
+    const want = I.params.severityCriticalFloor ?? 0;
     const have = issues.filter((x) => x.Severity === 'Critical').length;
     if (want > have) {
       const eligible = issues
-        .filter((x) => (I.severity.byType[x.TypeKey] ?? []).some(([lvl, w]) => lvl === 'Critical' && w > 0))
+        .filter((x) => ((I.mixes[severityKey(x.TypeKey)] ?? {}).Critical ?? 0) > 0)
         .filter((x) => x.Severity !== 'Critical')
         // worst first: highest severity already assigned, then oldest (a long-running
         // escalation is the believable candidate), then key for a total order
@@ -258,13 +262,13 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
   // no author-settable timestamp (only the system __mj_CreatedAt, which the entity SPs
   // re-stamp), so each body opens with its own date — the same workaround Description uses.
   const issueComments = [];
-  const CM = I.comments;
+  const CM = I.catalog;
   if (CM) {
     for (const x of issues) {
       const d = drafts.find((y) => y.key === x.IssueKey);
       if (!d) continue;
       const r = rng(seed, `issuecomment:${x.IssueKey}`);
-      if (!r.bernoulli(CM.sharePerIssue)) continue;
+      if (!r.bernoulli(I.params.commentSharePerIssue)) continue;
       const worked = x.StatusKey !== 'New';
       const terminal = x.StatusKey === 'Resolved' || x.StatusKey === 'Closed';
       const at = (days) => iso(addDays(parseDate(d.created), days));
@@ -277,16 +281,16 @@ export function buildIssues(cfg, people, orgs, events, registrations, money, com
         AuthorMemberNumber: source === 'inbound' ? x.ReporterMemberNumber : (x.AssigneeMemberNumber ?? null),
         IsSharedDemo: true,
       }); };
-      if (worked) push(r.pick(CM.triage), 'outbound', r.int(0, 2));
-      if (worked && r.bernoulli(0.7)) push(r.pick(CM.internal), 'internal', r.int(1, 5));
-      if (worked && r.bernoulli(0.55)) push(r.pick(CM.memberReply), 'inbound', r.int(2, 9));
+      if (worked) push(r.pick(CM.commentTriage), 'outbound', r.int(0, 2));
+      if (worked && r.bernoulli(0.7)) push(r.pick(CM.commentInternal), 'internal', r.int(1, 5));
+      if (worked && r.bernoulli(0.55)) push(r.pick(CM.commentMemberReply), 'inbound', r.int(2, 9));
       if (terminal) {
         const resolvedDay = x.ResolvedAt ? Math.round((parseDate(x.ResolvedAt.slice(0, 10)) - parseDate(d.created)) / 86400000) : 6;
-        push(r.pick(CM.resolution), 'outbound', Math.max(clock + 1, resolvedDay));
+        push(r.pick(CM.commentResolution), 'outbound', Math.max(clock + 1, resolvedDay));
       }
     }
   }
 
-  const issueSequences = [{ ScopeCode: I.numberPrefix, NextSequenceNumber: issues.length + 1, IsSharedDemo: true }];
+  const issueSequences = [{ ScopeCode: I.params.numberPrefix, NextSequenceNumber: issues.length + 1, IsSharedDemo: true }];
   return { issueTypes, issueStatuses, issues, issueSequences, issueComments };
 }

@@ -6,7 +6,7 @@
 // This is what CI runs when datagen graduates to a package.
 
 import { execFileSync } from 'node:child_process';
-import { rmSync, readFileSync, readdirSync } from 'node:fs';
+import { rmSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractClaims, checkClaims } from './engine/contract.mjs';
@@ -18,14 +18,182 @@ const SEEDS = QUICK ? ['42', '7'] : ['7', '42', '99', '2026', '555', '13', '88']
 const RELEASE = '2026-07-31';
 
 let failures = 0;
+const pending = [];
 const CLI = join(HERE, 'cli');
 const run = (script, args) => execFileSync(process.execPath, [join(CLI, script), ...args], { encoding: 'utf8' });
 const step = (name, fn) => {
-  try { fn(); console.log(`✅ ${name}`); }
+  try { const r = fn(); if (r?.then) { pending.push(r.then(() => console.log(`✅ ${name}`)).catch((e) => { failures++; console.log(`❌ ${name}`); console.log(String(e.message ?? e).split('\n').slice(0, 4).join('\n')); })); return; } console.log(`✅ ${name}`); }
   catch (e) { failures++; console.log(`❌ ${name}`); console.log((e.stdout ?? String(e)).split('\n').filter((l) => l.startsWith('❌')).join('\n')); }
 };
 
 console.log(`datagen regression suite ${QUICK ? '(quick)' : ''}\n`);
+
+// 0. the ruleset lint catches what a human editing JSON actually breaks — negative-tested
+// (a lint that only ever passes is decoration). Synthetic rulesets, no generation needed.
+step('ruleset lint catches planted typos (share, weight, cross-refs) and stays quiet on clean input', async () => {
+  const { lintRuleset } = await import('./engine/lint.mjs');
+  const { morecheeseHooks } = await import('./projects/morecheese/hooks.mjs');
+  const expectCatch = (R, mustMention) => {
+    try { lintRuleset(R, morecheeseHooks.domainLint); }
+    catch (e) {
+      if (!String(e.message).includes(mustMention)) throw new Error(`lint fired but without "${mustMention}": ${e.message.split('\n')[1] ?? e.message}`);
+      return;
+    }
+    throw new Error(`lint MISSED a planted defect (expected mention of "${mustMention}")`);
+  };
+  const tol = { membership: { renewalTolerance: 0.02 }, learning: { participation: { tolerance: 0.05 }, completion: { tolerance: 0.05 } } };
+  expectCatch({ ...tol, world: { attendShare: 1.4 } }, 'attendShare');                                      // a share of 140%
+  expectCatch({ ...tol, events: { mix: [['Conference', 0.5], ['Webinar', -0.2]] } }, 'weight -0.2');        // a negative weight
+  expectCatch({ ...tol, funnel: { tolerance: 0 } }, 'tolerance');                                           // a tolerance of zero
+  // four-part shape: catalogs live under `catalog`, so the cross-reference checks look there
+  expectCatch({ ...tol, committees: { catalog: { committees: [{ name: 'Standards Committee' }] } },
+    heroes: [{ memberNumber: 'ICF-000101', committees: [{ committee: 'Standrads Committee', terms: [] }] }] }, 'Standrads');  // the classic transposition
+  expectCatch({ ...tol, programs: { catalog: { certifications: [{ key: 'ccp', prerequisite: 'ccp-basic' }] } } }, 'prerequisite');
+  // a target with no tolerance, caught by SHAPE at any depth — no path list to maintain
+  expectCatch({ ...tol, anyNewDomain: { params: { whatever: { target: 0.7 } } } }, 'target but no tolerance');
+  lintRuleset({ ...tol, world: { attendShare: 0.6, mix: [['a', 1]] } }, morecheeseHooks.domainLint);        // and clean input passes
+});
+
+
+// 0b. gate helpers: each must catch its planted defect and stay quiet on clean input
+step('gate helpers catch planted defects (fk, share, presence, distinct) and pass clean input', async () => {
+  const { makeGateHelpers } = await import('./engine/gates.mjs');
+  const results = [];
+  const h = makeGateHelpers((name, ok, detail) => results.push({ name, ok, detail }));
+  const failed = () => results.splice(0).filter((r) => !r.ok);
+
+  h.fkResolves('fk', [[[{ k: 'A' }, { k: 'MISSING' }], (r) => r.k, new Set(['A'])]]);
+  if (failed().length !== 1) throw new Error('fkResolves missed a dangling ref');
+  h.fkResolves('fk', [[[{ k: 'A' }, { k: null }], (r) => r.k, new Set(['A'])]]);
+  if (failed().length !== 0) throw new Error('fkResolves must allow null keys (optional FKs)');
+
+  h.shareBand('share', 0.50, { target: 0.10, tolerance: 0.05 });
+  if (failed().length !== 1) throw new Error('shareBand missed a wildly off share');
+  h.shareBand('share', 0.12, { target: 0.10, tolerance: 0.05 });
+  if (failed().length !== 0) throw new Error('shareBand false-positived inside tolerance');
+
+  h.presenceFloor('floor', { Critical: 0, High: 17 });
+  if (failed().length !== 1) throw new Error('presenceFloor missed an empty bucket');
+  h.presenceFloor('floor', { Critical: 2, High: 17 });
+  if (failed().length !== 0) throw new Error('presenceFloor false-positived');
+
+  h.distinctAtLeast('distinct', ['a', 'a', 'a'], 3);
+  if (failed().length !== 1) throw new Error('distinctAtLeast missed visible repetition');
+  h.distinctAtLeast('distinct', ['a', 'b', 'c'], 3);
+  if (failed().length !== 0) throw new Error('distinctAtLeast false-positived');
+});
+
+// 0c. the ruleset schema — the one the editor shows authors — must agree with every real
+// module AND catch planted mistakes. A schema nobody executes drifts from reality, and then
+// the editor promises one thing while the build enforces another.
+step('ruleset schema matches every JSON module', () => run('check-ruleset-schema.mjs', []));
+
+// 0c-ii. .mjs ruleset modules buy comments and references — and the ability to misbehave.
+// They must stay DATA: no wall clock, no unseeded randomness, no I/O, no functions.
+step('.mjs ruleset modules are pure data (no clock, randomness, I/O or behaviour)', () => {
+  run('check-ruleset.mjs', []);
+  const probe = join(HERE, 'projects/morecheese/ruleset/modules/zz-probe.mjs');
+  const hazards = [
+    ['new Date()', 'export default { zz: { numbers: { y: new Date().getFullYear() } } };'],
+    ['Math.random', 'export default { zz: { numbers: { y: Math.random() } } };'],
+    ['I/O', "import { readFileSync } from 'node:fs';\nexport default { zz: { catalog: readFileSync('a') } };"],
+    ['process.env', 'export default { zz: { numbers: { y: process.env.N } } };'],
+    ['a function', 'export function build() { return 1; }\nexport default { zz: {} };'],
+    ['a code import', "import { rng } from '../../../../engine/rng.mjs';\nexport default { zz: {} };"],
+  ];
+  try {
+    for (const [what, src] of hazards) {
+      writeFileSync(probe, src);
+      let caught = false;
+      try { run('check-ruleset.mjs', []); } catch { caught = true; }
+      if (!caught) throw new Error(`the data-only guard MISSED ${what} in a ruleset module`);
+    }
+  } finally { rmSync(probe, { force: true }); }
+});
+
+step('ruleset schema catches planted mistakes (share, unit, arrow form, mix, hero key)', async () => {
+  const { validate } = await import('./engine/schema-check.mjs');
+  const schema = JSON.parse(readFileSync(join(HERE, 'engine/ruleset.schema.json'), 'utf8'));
+  const expectCatch = (doc, mustMention) => {
+    const errs = validate(doc, schema);
+    if (!errs.length) throw new Error(`schema MISSED a planted defect (expected mention of "${mustMention}")`);
+    if (!errs.join('\n').includes(mustMention)) throw new Error(`schema fired but without "${mustMention}": ${errs[0]}`);
+  };
+  expectCatch({ events: { attendShare: 45 } }, 'attendShare');                             // a percentage where a share belongs
+  expectCatch({ membership: { renewalTolerance: 0 } }, 'renewalTolerance');                // a tolerance of zero
+  expectCatch({ events: { noticeDays: 'two weeks' } }, 'noticeDays');                      // prose where a number belongs
+  expectCatch({ programs: { medalWeights: { Gold: -0.2 } } }, 'medalWeights');             // a negative weight
+  expectCatch({ membership: { arrows: { a: { note: 'x' } } } }, 'exactly one of');         // an arrow with no effect declared
+  expectCatch({ membership: { arrows: { a: { beta: 0.5, liftPts: 4, note: 'x' } } } }, 'mutually exclusive');
+  expectCatch({ membership: { arrows: { a: { beta: 0.5 } } } }, 'note');                   // an arrow with no evidence
+  expectCatch({ heroes: [{ first: 'A', last: 'B' }] }, 'memberNumber');                    // a hero with no identity
+  expectCatch({ heroes: [{ memberNumber: 'ICF-1', first: 'A', last: 'B', cycleType: 'monthly' }] }, 'cycleType');
+  expectCatch({ 'scale ': { members: 10 } }, 'legal property name');                       // a trailing space in a key
+
+  // and clean input stays quiet
+  const clean = {
+    scale: { members: 2500 },
+    history: { startYear: 2013, conferenceMonth: 6, conferenceDay: 12 },
+    statusMix: { target: [0.78, 0.15], tolerance: 0.08 },
+    events: { attendShare: 0.45, noticeDays: [7, 45], mix: [['Conference', 0.5]] },
+    programs: { medalWeights: { Gold: 0.05, $note: 'rare on purpose' } },
+    membership: { arrows: { a: { liftPts: 4, share: 0.2, evidence: 'ESTIMATE' } } },
+    heroes: [{ memberNumber: 'ICF-000101', first: 'A', last: 'B', title: null, cycleType: 'calendar' }],
+    $comment: 'commentary is always allowed',
+  };
+  const errs = validate(clean, schema);
+  if (errs.length) throw new Error(`schema false-positived on clean input: ${errs.join('; ')}`);
+});
+
+// 0d. the type declarations must describe the ENGINE THAT EXISTS, and must actually reach a
+// call site (a .d.ts that lies is worse than none). Needs a TypeScript compiler, which
+// datagen does not depend on — skipped, loudly, when there isn't one.
+step('engine/types.d.ts matches the engine and surfaces at call sites (needs tsc)', () => {
+  const tsc = (args) => {
+    try { return { out: execFileSync('npx', ['--no-install', 'tsc', ...args], { cwd: HERE, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }), code: 0 }; }
+    catch (e) { if (e.code === 'ENOENT' || /not found|could not determine/i.test(String(e.stderr ?? ''))) return null; return { out: String(e.stdout ?? '') + String(e.stderr ?? ''), code: 1 }; }
+  };
+  if (tsc(['--version']) === null) { console.log('   ⚠️  no tsc available — type declarations NOT verified this run'); return; }
+
+  // (a) the declarations are self-consistent and agree with the engine they annotate
+  const decl = tsc(['-p', 'jsconfig.json', '--noEmit']);
+  if (decl.code !== 0) throw new Error(`types.d.ts does not typecheck:\n${decl.out.split('\n').slice(0, 6).join('\n')}`);
+
+  // (b) a probe of DELIBERATE misuse — each line must be rejected, or the types aren't reaching
+  // authors' editors at all. Written and removed here so the repo holds no broken-on-purpose file.
+  const probe = join(HERE, '.types-probe.mjs');
+  writeFileSync(probe, [
+    '// @ts-check',
+    "import { childOutcome } from './engine/patterns.mjs';",
+    "import { rng } from './engine/rng.mjs';",
+    "import { loadConfig } from './engine/config.mjs';",
+    "const r = rng('42', 'probe');",
+    "r.pickWeighted([['Gold', 0.05]]);",         // legal — must NOT error
+    'r.weighted({ Gold: 0.05 });',                // no such method
+    'r.int(1);',                                  // needs two args
+    "childOutcome({ seed: '42', items: [], scoreOf: () => 0, target: 'most', streamKey: () => 'k', decide: () => {} });",
+    "childOutcome({ seed: '42', items: [], scoreOf: () => 0, streamKey: () => 'k', decide: () => {} });",
+    'const cfg = await loadConfig([]);',
+    'cfg.relaseYear;',                            // typo
+  ].join('\n'));
+  try {
+    const res = tsc(['--noEmit', '--allowJs', '--checkJs', '--target', 'es2022', '--module', 'es2022',
+      '--moduleResolution', 'bundler', '--strict', 'false', '.types-probe.mjs']);
+    const lines = res.out.split('\n').filter((l) => l.includes('.types-probe.mjs'));
+    const caught = (frag) => lines.some((l) => l.includes(frag));
+    const expected = [
+      ["Property 'weighted' does not exist", 'an rng method that does not exist'],
+      ['Expected 2 arguments', 'a wrong-arity dice call'],
+      ["Type 'string' is not assignable to type 'number'", 'prose where a probability belongs'],
+      ["Property 'target' is missing", 'a pattern option bag missing a required option'],
+      ["Did you mean 'releaseYear'", 'a typo on the config object'],
+    ];
+    const missed = expected.filter(([frag]) => !caught(frag)).map(([, what]) => what);
+    if (missed.length) throw new Error(`types did NOT reach the call site — missed: ${missed.join('; ')}`);
+    const spurious = lines.filter((l) => l.includes('(6,'));  // the legal pickWeighted line
+    if (spurious.length) throw new Error(`types false-positived on legal code: ${spurious[0]}`);
+  } finally { rmSync(probe, { force: true }); }
+});
 
 // 1. multi-seed validation sweep at pilot scale
 for (const s of SEEDS) {
@@ -164,5 +332,6 @@ step('seed assumptions match the dependency-schema contract', () => {
 });
 
 for (const d of ['out-test', 'out-test2']) rmSync(join(HERE, d), { recursive: true, force: true });
+await Promise.all(pending);
 console.log(`\n${failures === 0 ? '✔ ALL GREEN' : `✋ ${failures} step(s) failed`}`);
 process.exit(failures ? 1 : 0);

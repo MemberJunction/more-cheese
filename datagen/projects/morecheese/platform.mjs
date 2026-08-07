@@ -19,18 +19,19 @@ const ts = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
 
 export function buildPlatform(cfg, { people, periods, events, registrations, tasks, issues, relationships, competitionEntries: programsEntries }) {
   const { R, seed, release } = cfg;
+  // four-part ruleset shape: only catalog + params — this domain rolls no dice
   const P = R.platform;
   const releaseMs = release.getTime();
   const personByKey = new Map(people.map((p) => [p.MemberNumber, p]));
   const fullName = (m) => { const p = personByKey.get(m); return p ? `${p.FirstName} ${p.LastName}` : m; };
 
   // ---------- staff users (the personas demos log in as) ----------
-  const users = P.staff.map((s) => ({
+  const users = P.catalog.staff.map((s) => ({
     UserKey: s.key, FirstName: s.first, LastName: s.last, Title: s.title,
     Name: `${s.first} ${s.last}`,
-    Email: `${s.first}.${s.last}`.toLowerCase().replace(/[^a-z0-9.]/g, '') + `@${P.emailDomain}`,
+    Email: `${s.first}.${s.last}`.toLowerCase().replace(/[^a-z0-9.]/g, '') + `@${P.params.emailDomain}`,
   }));
-  const userRoles = P.staff.map((s) => ({ RoleKey: `${s.key}:UI`, UserKey: s.key }));
+  const userRoles = P.catalog.staff.map((s) => ({ RoleKey: `${s.key}:UI`, UserKey: s.key }));
 
   // ---------- computed facts (the tokens conversations may cite) ----------
   const lastPeriod = new Map();
@@ -64,7 +65,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   // ---------- shared views + reusable queries (all-viewer-visible residue) ----------
   // GridState/FilterState mirror what Explorer writes when a user saves a view — a seeded
   // view without them has no column layout. Shapes copied from organic v5.45 rows.
-  const views = P.sharedViews.map((v) => ({
+  const views = P.catalog.sharedViews.map((v) => ({
     ViewKey: v.key, UserKey: v.owner, EntityName: v.entityName,
     Name: v.name, Description: v.description, WhereClause: v.whereClause,
     GridState: JSON.stringify({
@@ -73,14 +74,14 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     }),
     FilterState: JSON.stringify({ logic: 'and', filters: [] }),
   }));
-  const queries = P.queries.map((q) => ({
+  const queries = P.catalog.queries.map((q) => ({
     QueryKey: q.key, Name: q.name, UserQuestion: q.userQuestion, Description: q.description, SQL: q.sql,
   }));
 
   // ---------- conversations (Skip-style; the assistant only says computed truths) ----------
   const conversations = [];
   const conversationDetails = [];
-  for (const c of P.conversations) {
+  for (const c of P.catalog.conversations) {
     const r = rng(seed, `platform-conv:${c.key}`);
     let clock = releaseMs - c.daysBeforeRelease * 86400000;
     clock -= clock % 3600000; // top of the hour; per-turn minutes advance below
@@ -97,14 +98,14 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
 
   // ---------- favorites + lists (per-staff residue; demos log in as staff) ----------
   // per-owner: a demo logs in AS a persona, so each needs their own residue
-  const favGroups = P.favorites.byOwner ?? [{ owner: P.favorites.owner, memberNumbers: P.favorites.memberNumbers }];
+  const favGroups = P.catalog.favorites;
   const favorites = favGroups.flatMap((g) => g.memberNumbers.map((m) => ({
     FavKey: `fav:${g.owner}:${m}`, UserKey: g.owner,
     EntityName: 'MoreCheese: Member Profiles', RefKind: 'memberprofile', RefKey: m,
   })));
   const lists = [];
   const listDetails = [];
-  for (const l of P.lists) {
+  for (const l of P.catalog.lists) {
     lists.push({ ListKey: l.key, UserKey: l.owner, EntityName: l.entityName, Name: l.name, Description: l.description });
     if (l.source === 'competition-medalists') {
       // recent medalists — exactly who an events coordinator shortlists to speak
@@ -121,15 +122,15 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
   }
 
   // ---------- notifications ----------
-  const notifications = P.notifications.map((n, i) => ({
+  const notifications = P.catalog.notifications.map((n, i) => ({
     NotifKey: `notif:${i}`, UserKey: n.owner, Title: n.title, Message: n.message,
     Unread: n.unread, ReadAt: n.unread ? null : ts(releaseMs - n.daysBeforeRelease * 86400000 + 6 * 3600000),
   }));
 
   // ---------- RecordChange audit backfill — every row mirrors a generated timeline ----------
-  const RC = P.recordChanges;
+  const RC = P.params.recordChanges;
   const recordChanges = [];
-  const staffPick = (key) => P.staff[rng(seed, `platform-attr:${key}`).int(0, P.staff.length - 1)].key;
+  const staffPick = (key) => P.catalog.staff[rng(seed, `platform-attr:${key}`).int(0, P.catalog.staff.length - 1)].key;
   const push = (key, entityName, refKind, refKey, type, at, changes, description, fullRecord, staffKey) =>
     recordChanges.push({
       ChangeKey: key, EntityName: entityName, RefKind: refKind, RefKey: refKey,
@@ -183,7 +184,7 @@ export function buildPlatform(cfg, { people, periods, events, registrations, tas
     for (const nu of rels.filter((x) => x.RelKey.startsWith('emp-true:'))) {
       const member = nu.RelKey.slice('emp-true:'.length);
       const old = rels.find((x) => x.RelKey.startsWith('emp:') && x.FromMemberNumber === member && x.Status === 'Ended' && x.EndDate === nu.StartDate);
-      const analyst = P.staff.find((s) => s.key === 'ops-analyst')?.key;
+      const analyst = P.catalog.staff.find((s) => s.key === 'ops-analyst')?.key;
       if (old) push(`rc:rel:${old.RelKey}`, 'MJ_BizApps_Common: Relationships', 'rel', old.RelKey,
         'Update', `${old.EndDate}T11:00:00Z`,
         { Status: { oldValue: 'Active', newValue: 'Ended' }, EndDate: { oldValue: null, newValue: old.EndDate } },

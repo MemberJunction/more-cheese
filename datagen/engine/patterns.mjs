@@ -26,6 +26,7 @@ import { rng, sigmoid, calibrateIntercept } from './rng.mjs';
  *   baselineShift?(y)   → applied AFTER calibration (regime shifts: tide, not boats)
  * }
  */
+/** @param {import('./types.js').AnnualParticipationOpts} opts */
 export function annualParticipation(opts) {
   const out = [];
   for (const y of opts.years) {
@@ -48,6 +49,10 @@ export function annualParticipation(opts) {
  * (Instance: membership tier from segment/affluence.) First matching rule wins; a rule
  * with no conditions is the default. Conditions: `when` (equalities) and `whenAbove`
  * (strict numeric >) — both ANDed. No dice: pure function of the context.
+ */
+/**
+ * @param {readonly import('./types.js').AssignmentRule[]} rules ordered; first match wins
+ * @param {Record<string, any>} ctx the drivers matched against
  */
 export function staticAssignment(rules, ctx) {
   for (const rule of rules) {
@@ -80,6 +85,7 @@ export function staticAssignment(rules, ctx) {
  *   record(item, y, ctx, decided) / onYes(item, y) / onNo(item, y)
  * }
  */
+/** @param {import('./types.js').RecurringDecisionOpts} opts */
 export function recurringDecision(opts) {
   for (const y of opts.years) {
     const cohort = opts.cohortOf(y);
@@ -122,6 +128,7 @@ export function recurringDecision(opts) {
  *   emit(parent, { method, late, offsetDays, termsDays }, r) → domain pushes its rows
  * }
  */
+/** @param {import('./types.js').DerivedTransactionOpts} opts */
 export function derivedTransaction(opts) {
   for (const parent of opts.parents) {
     const profile = opts.profileOf(parent);
@@ -164,6 +171,7 @@ function drawOffsetDays(r, spec) {
  *   baselineShift?      → scalar applied AFTER calibration (regime shifts: tide, not boats)
  * }
  */
+/** @param {import('./types.js').ChildOutcomeOpts} opts */
 export function childOutcome(opts) {
   const scores = opts.items.map((e) => opts.scoreOf(e));
   const b0 = calibrateIntercept(scores, opts.target) + (opts.baselineShift ?? 0);
