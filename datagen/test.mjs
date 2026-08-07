@@ -410,7 +410,7 @@ step('derived checks run standalone (and its exit code reflects failures)', () =
 // 0k. THE GENERATOR CONTRACT. The ruleset got a named shape that is documented and checked; the
 // generators had no shape at all — 21 entry signatures, no two alike, up to seven positional
 // parameters. Two same-typed arrays transposed is silent wrong data with no error.
-step('generator contract holds (and a positional signature is caught)', () => {
+step('generator contract holds (positional signature, bare-array return, and full coverage)', () => {
   run('check-generators.mjs', []);
   const f = join(HERE, 'projects/morecheese/tasks.mjs');
   const original = readFileSync(f, 'utf8');
@@ -420,6 +420,38 @@ step('generator contract holds (and a positional signature is caught)', () => {
     try { run('check-generators.mjs', []); } catch { caught = true; }
     if (!caught) throw new Error('check-generators MISSED a positional dependency list');
   } finally { writeFileSync(f, original); }
+
+  // THE RETURN SHAPE, PLANTED IN A BIG GENERATOR ON PURPOSE.
+  //
+  // The rule used to scan a fixed 4,000-character window forward from the signature, so any
+  // generator whose body ran past it produced no match and was never checked — 14 of 22 functions,
+  // every large one, while the tool printed '✅ every generator …'. money.mjs was one of them, so
+  // it is the one this plants in: a violation here passed silently for as long as the window did.
+  // The count in the success line is now part of the claim, and is asserted below.
+  const big = join(HERE, 'projects/morecheese/money.mjs');
+  const bigOriginal = readFileSync(big, 'utf8');
+  try {
+    const i = bigOriginal.indexOf('export function buildMoney');
+    const j = bigOriginal.lastIndexOf('\n  return ', bigOriginal.indexOf('\n}', i));
+    const k = bigOriginal.indexOf(';', j);
+    writeFileSync(big, `${bigOriginal.slice(0, j)}\n  return [orders];${bigOriginal.slice(k + 1)}`);
+    let out = '';
+    try { run('check-generators.mjs', []); } catch (e) { out = String(e.stdout ?? ''); }
+    if (!/buildMoney returns a bare array/.test(out)) {
+      throw new Error(`a bare-array return in a LARGE generator was not caught — the return rule is not reaching the whole population:\n${out.slice(0, 400)}`);
+    }
+  } finally { writeFileSync(big, bigOriginal); }
+
+  // …and the coverage claim itself. The tool must SAY how many functions it analysed, because a
+  // checker permitted to be silent about what it skipped is exactly the defect above: the window
+  // version reached 8 of this project's 22 and still printed a universal ✅. The floor is 20
+  // rather than an exact count so that adding or retiring a generator is not a test edit — what
+  // it guards is a collapse back to partial coverage, which is the thing that actually happened.
+  const claim = run('check-generators.mjs', []).match(/✅ all (\d+) exported build functions/);
+  if (!claim) throw new Error('check-generators no longer states how many build functions it analysed');
+  if (+claim[1] < 20) {
+    throw new Error(`check-generators analysed only ${claim[1]} build functions — this project has 22, so coverage has gone silently partial again`);
+  }
 
   // A HELPER WITH NO CALL SITES ANYWHERE. This is the check that would have caught a `git checkout`
   // silently reverting every thetaAt call site while the helper stayed exported and committed — the
@@ -532,7 +564,7 @@ step('row templates: fixture dice, dead paths, multi-tag and integer keys are al
 // project-specific VALUE living in the engine (engine/ids.mjs held a table of every project's UUID
 // namespace, and told new authors to add theirs to it). The second is the one a plain import lint
 // would miss, which is why the checker looks for project names in code too.
-step('engine boundary holds (static import and a project-named value are both caught)', () => {
+step('engine boundary holds (static import, bare/suffixed/path-segment project names all caught)', () => {
   run('check-engine-boundary.mjs', []);
   const probe = (file, mutate, mention, what) => {
     const f = join(HERE, 'engine', file);
@@ -547,6 +579,32 @@ step('engine boundary holds (static import and a project-named value are both ca
   probe('ids.mjs', (s) => s.replace('const bound = new Map();',
     "const bound = new Map();\nconst NAMESPACES = { morecheese: '9b1dcbf2c05341e8a2f4d40e11ce66a1' };"),
   "names the project 'morecheese' in code", 'a project value in the engine');
+  // The SUFFIXED form, planted separately because it is the one that historically escaped. The
+  // checker's own header credits it with catching emit-data-migration.mjs's 'morecheese_members',
+  // but the rule matched only whole quoted tokens, so that exact leak — and a 'projects/<name>/…'
+  // path — walked straight through while this test passed on the easy form. A negative test that
+  // only plants the case the rule already handles is a green light for the case it does not.
+  probe('ids.mjs', (s) => s.replace('const bound = new Map();',
+    "const bound = new Map();\nconst SCHEMA = 'morecheese_members';"),
+  "names the project 'morecheese' in code", 'a project name glued to a suffix');
+  probe('ids.mjs', (s) => s.replace('const bound = new Map();',
+    "const bound = new Map();\nconst BANKS = 'projects/morecheese/banks';"),
+  "names the project 'morecheese' in code", 'a project name as a path segment');
+  // …and the false positives that shaped the rule: a project named after an ordinary word must not
+  // make every use of that word a violation, or the check becomes noise people scroll past.
+  const quiet = (file, mutate, what) => {
+    const f = join(HERE, 'engine', file);
+    const original = readFileSync(f, 'utf8');
+    try {
+      writeFileSync(f, mutate(original));
+      try { run('check-engine-boundary.mjs', []); } catch (e) {
+        throw new Error(`${what} was flagged as a leak — it is not one.\n${String(e.stdout ?? '')}`);
+      }
+    } finally { writeFileSync(f, original); }
+  };
+  quiet('ids.mjs', (s) => s.replace('const bound = new Map();',
+    "const bound = new Map();\nconst SECTIONS = ['inputs', 'fixtures', 'decisions'];\nconst MSG = 'a fixture has no dice';"),
+  "the word 'fixtures' and prose using 'fixture'");
   probe('packs.mjs', (s) => {
     const lines = s.split('\n');
     const i = lines.reduce((acc, l, j) => (l.startsWith('import ') ? j : acc), 0);

@@ -55,13 +55,13 @@ export function buildWorld(cfg) {
   return { members, outings };
 }
 
-/** Nothing generated here ships nowhere, so this is empty — but it must EXIST, because the
- *  emitter's unshipped-table check reads it. An empty object is the honest declaration. */
 /** This project's own validator, in this project's directory. It runs the engine's derived gates
  *  and adds the one claim no declaration can state. Naming a cli/ script also works — that is how
  *  MoreCheese keeps cli/validate.mjs — but a project should own its validation. */
 export const VALIDATOR = 'validate.mjs';
 
+/** Everything generated here ships, so this is empty — but it must EXIST, because the emitter's
+ *  unshipped-table check reads it. An empty object is the honest declaration. */
 export const NOT_SHIPPED = {};
 
 export function buildPacks(world) {

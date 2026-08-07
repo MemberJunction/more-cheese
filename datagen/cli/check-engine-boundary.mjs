@@ -53,6 +53,41 @@ const ALLOWED = [
   { file: 'validate.mjs', needle: '', why: "MoreCheese's own validator, ~175 bespoke gates. Declared via VALIDATOR. A new project writes projects/<name>/validate.mjs instead (build.mjs resolves project-local first) — moving this one would churn the suite and every doc reference for no behavioural gain" },
 ];
 
+/**
+ * Strip a `//` line comment — but only when the `//` is genuinely outside a string.
+ *
+ * The naive `line.replace(/\/\/.*$/, '')` cuts a URL in half (`'https://…'` → `'https:`), which
+ * both discards the rest of the line unscanned and leaves an unterminated literal for the
+ * substring rule below. A leak hiding after a URL on the same line would have been invisible.
+ */
+function stripLineComment(line) {
+  let quote = null;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (quote) {
+      if (c === '\\') { i++; continue; }
+      if (c === quote) quote = null;
+    } else if (c === "'" || c === '"' || c === '`') {
+      quote = c;
+    } else if (c === '/' && line[i + 1] === '/') {
+      return line.slice(0, i);
+    }
+  }
+  return line;
+}
+
+/** Does `name` appear in `value` as a whole segment — delimited by _ - / \ . or the string ends?
+ *  `morecheese_members` yes, `projects/morecheese/banks` yes, `fixtures` no. */
+function isSegment(value, name) {
+  const DELIM = /[_\-/\\.]/;
+  for (let i = value.indexOf(name); i !== -1; i = value.indexOf(name, i + 1)) {
+    const before = i === 0 ? '' : value[i - 1];
+    const after = value[i + name.length] ?? '';
+    if ((before === '' || DELIM.test(before)) && (after === '' || DELIM.test(after))) return true;
+  }
+  return false;
+}
+
 const hard = [];
 // engine/ AND cli/: both are engine space. A project-blind entry point that names a project is the
 // same defect as an engine module that does.
@@ -72,7 +107,7 @@ for (const { f, dir, label } of files) {
     // doc comment explaining the allowlist counted as a violation of it.
     const t = line.trim();
     if (t.startsWith('*') || t.startsWith('/*') || t.startsWith('*/')) return;
-    const code = line.replace(/\/\/.*$/, '');
+    const code = stripLineComment(line);
     if (!code.trim()) return;
 
     // (1) a static import of project code
@@ -81,10 +116,40 @@ for (const { f, dir, label } of files) {
         + '      A dynamic, parameterised import is the correct shape: import(`../projects/${project}/index.mjs`)');
     }
 
-    // (2) a project NAME used as a literal — the data-shaped leak
+    // (2) a project NAME used as a literal — the data-shaped leak.
+    //
+    // The original rule matched the name only as a WHOLE quoted token (`'morecheese'`), and that
+    // is how it missed the exact leak the header above credits it with catching:
+    // emit-data-migration.mjs held `'morecheese_members'` — the name glued to a suffix — and
+    // `'projects/morecheese/banks'` walked past it too. Both were found by sweeping by hand,
+    // twice, which is what a checker exists to make unnecessary. A project name is a leak
+    // wherever it sits in a value: suffixed, prefixed, or as a path segment. Each one is an edit
+    // the engine would need in order to gain a second consumer, which is the claim being defended.
+    //
+    // The rule is deliberately two-part, because the loose version does not survive contact with
+    // a project named after an ordinary word. Plain substring matching flagged `'fixtures'` (a
+    // section name in the generator contract) and the sentence "a fixture has no dice" — noise,
+    // and noise is how a checker gets ignored. So a hit requires BOTH:
+    //
+    //   a. the literal is a VALUE, not a message — no whitespace in it. Identifiers, schema
+    //      names and paths have none; error text and usage strings do.
+    //   b. the name sits at a SEGMENT boundary inside that value — delimited by _ - / \ . or by
+    //      the ends of the literal. So `morecheese_members` and `projects/morecheese/banks` hit,
+    //      while `fixtures` does not, because `fixture` there is a word with a suffix.
+    //
+    // KNOWN LIMIT, stated rather than discovered later: a name buried in a message with spaces
+    // ('table morecheese_members is missing') is not flagged. That is prose, not a value that
+    // drives behaviour, and widening to catch it costs more in false positives than it earns.
+    //
+    // A parameterised path is correctly NOT a hit: the literal's text is `../projects/${project}/…`
+    // and the name never appears in it. That is the distinction this whole rule exists to draw.
+    const literals = [...code.matchAll(/'([^'\\]*(?:\\.[^'\\]*)*)'|"([^"\\]*(?:\\.[^"\\]*)*)"|`([^`\\]*(?:\\.[^`\\]*)*)`/g)]
+      .map((m) => m[1] ?? m[2] ?? m[3] ?? '');
     for (const p of projects) {
-      if (!new RegExp(`['"\`]${p}['"\`]|\\b${p}\\s*:`).test(code)) continue;
-      if (ALLOWED.some((a) => f === a.file && code.includes(a.needle))) continue;
+      const inLiteral = literals.some((s) => !/\s/.test(s) && isSegment(s, p));
+      const asKey = new RegExp(`\\b${p}\\s*:`).test(code);
+      if (!inLiteral && !asKey) continue;
+      if (ALLOWED.some((a) => f === a.file && a.needle && code.includes(a.needle))) continue;
       hard.push(`${at}: names the project '${p}' in code — a project-specific value in the engine means `
         + 'standing up another project requires editing the engine.\n'
         + '      Move it to the project and have it declare the value (see UUID_NAMESPACE for the pattern).');
