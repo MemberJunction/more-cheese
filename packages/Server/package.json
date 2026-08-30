@@ -1,6 +1,6 @@
 {
   "name": "@mj-more-cheese-demo/server",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "description": "Server bootstrap package - loaded by MJAPI at startup via the manifest's startupExport. TODO(template): rename.",
   "main": "dist/index.js",
@@ -15,15 +15,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-more-cheese-demo/entities": "^1.0.0",
+    "@mj-more-cheese-demo/entities": "^1.1.0",
     "class-validator": "^0.14.3"
   },
   "peerDependencies": {
-    "@memberjunction/ai-betty-bot": "^5.43.0",
-    "@memberjunction/core": "^5.43.0",
-    "@memberjunction/global": "^5.43.0",
-    "@memberjunction/server": "^5.43.0",
-    "@memberjunction/sqlserver-dataprovider": "^5.43.0"
+    "@memberjunction/ai-betty-bot": "^6.1.0-edge.4",
+    "@memberjunction/core": "^6.1.0-edge.4",
+    "@memberjunction/global": "^6.1.0-edge.4",
+    "@memberjunction/server": "^6.1.0-edge.4",
+    "@memberjunction/sqlserver-dataprovider": "^6.1.0-edge.4"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
