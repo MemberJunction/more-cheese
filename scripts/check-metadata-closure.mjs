@@ -70,7 +70,16 @@ const FIELD_TARGET_DIR_MAP = new Map([
   ['PaymentHeaderID', 'payments'],
   ['EventID', 'events'],
   ['CourseID', 'courses'],
-  ['CertificationID', 'certifications']
+  ['CertificationID', 'certifications'],
+  ['ActivityID', 'activities'],
+  ['MeetingID', 'committee-meetings'],
+  ['CommitteeID', 'committees'],
+  ['AgendaItemID', 'committee-agenda-items'],
+  ['TaskID', 'tasks'],
+  ['ThreadID', 'secure-threads'],
+  ['SecureMessageID', 'secure-messages'],
+  ['GLAccountID', 'gl-accounts'],
+  ['TagID', 'task-tags']
 ]);
 
 // 3. Explicit, documented exclusion list for known external cross-repo references

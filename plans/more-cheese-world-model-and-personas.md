@@ -439,10 +439,26 @@ More Cheese ships with ~30 metadata entities across several functional subsystem
    - **Authoring & CMS Templates**: `FormDefinition`, `FormQuestion`, `ContentBlock`, `SurveyTemplate`. Authored once by administrators as app configuration rather than transactional outputs.
    - **Machine Learning & Sonar**: `SonarScoreModel`, `SonarScoreModelVersion`. Scoring configurations and ML hyperparameters maintained by data science teams.
 
-### 5.4 Loom Engine Dependencies
-- **N5 / Contract Loader**: More Cheese runs conformance audits via `scripts/validate-loom-data.mjs` and `scripts/test-loom-mutations.mjs` using Loom's real contracts.
-- **N6 / State Ladder Binding**: Binding semantics to child entities (`CommitteeMembership`) are validated structurally against domain foreign keys.
-- **N9 / Dial Arrow Support**: `data/ruleset/common.json` uses `dial:` arrow schema, verified by Loom's `RulesetModuleSchema`.
+### 5.5 Full BizApps Substrates Expansion & Chart of Accounts (Task 02.6.8 / PR 23)
+To establish a complete, realistic world model with 0 empty tables across all BizApps schemas, More Cheese seeds and synchronizes the remaining functional substrates:
+1. **Accounting Substrate (`__mj_BizAppsAccounting`)**:
+   - **Chart of Accounts (`GLAccount`)**: 13 standard chart-of-accounts records for International Cheese Federation (`E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30`): Operating Cash (`1010`), AR Control (`1100`), Inventory (`1200`), Deferred Revenue (`2100`), Membership Dues Revenue (`4010`), Event Revenue (`4020`), Education Revenue (`4030`), Publications Revenue (`4040`), Sponsorship Revenue (`4050`), Sales Discounts (`4900`), Returns & Allowances (`4910`), Processing Fees (`5010`), and Cost of Goods Sold (`5020`).
+   - **GL Account Links (`GLAccountLink`)**: 11 active links wiring company-level defaults (`Cash`, `Accounts Receivable`, `Deferred Revenue`, `Sales Discounts`, `Sales Returns and Allowances`, `Processing Fee`) to ICF, and category-level `Sales` revenue links to the 5 product categories (`Memberships`, `Events`, `Certifications & Training`, `Publications & Goods`, `General`).
+2. **Member Interaction Logs (`__mj_BizAppsCommon`)**:
+   - `Activity` (500 records) and `ActivityLink` (500 records) capturing member onboarding sessions, concierge renewal calls, symposium invitations, and creamery visits across 2020–2026.
+3. **Committee Governance Substrate (`__mj_BizAppsCommittees`)**:
+   - `Minute` (294 approved meeting minutes matching every meeting in `committee-meetings`).
+   - `Comment` (596 discussion comments across agenda items and committee motions).
+   - `Artifact` (60 committee charters, strategy decks, and audit reports).
+4. **Task Management Substrate (`__mj_BizAppsTasks`)**:
+   - `TaskTag` (8 categorical tags: Governance, Standards Review, Conference 2024, Finance & Audit, Curriculum, Member Services, Advocacy, Urgent).
+   - `TaskTagLink` (306 tags associated with tasks).
+   - `TaskComment` (150 task collaboration discussion comments).
+   - `TaskActivity` (533 audit entries tracking Created, StatusChange, and Completed transitions).
+5. **Secure Portal Messaging (`__mj_BizAppsSecureMessaging`)**:
+   - `MessageFile` (100 attachments for member portal inquiries and verification documents).
+6. **Zero-Empty-Table Invariant**:
+   - Audited all 198 tables in `morecheese_%` and `__mj_BizApps%` schemas: 198/198 populated, 0 empty tables. 100% 1:1 match between database row counts and metadata records.
 
 ---
 

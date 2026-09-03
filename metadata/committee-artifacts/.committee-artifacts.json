@@ -1,0 +1,1382 @@
+[
+  {
+    "primaryKey": {
+      "ID": "1E561292-0507-5DD8-9F88-0FD0104177ED"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "68B23DF5-9385-5325-A345-0C1E1C55BAA4",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 1",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/1e561292-0507-5dd8-9f88-0fd0104177ed.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1048576,
+      "UploadedByPersonID": "CCFA1913-AF56-545A-B63A-3916FFA4318B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.361Z",
+      "checksum": "f72f9b43d348ab57180d48d031982e20e661f0ef2c80a17a68bd7a8ebb07e64b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B679C0C9-CD65-5F7E-B10F-646C1693FD7F"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "FB265F55-4821-5AFC-9EF1-7425A4E3AFAC",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 2",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/b679c0c9-cd65-5f7e-b10f-646c1693fd7f.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 1114112,
+      "UploadedByPersonID": "1B9C43A3-7290-522E-B8B2-0DF886F32ED1"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.370Z",
+      "checksum": "e2fbae906b1892381858fd665f11da77f2659bd300df074c18c6b79b900386d8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A65DCB3E-58A8-548E-B79A-0B93C98F1F62"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "B3576D73-55F2-5D7E-8C82-4EB8843EF82A",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 3",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/a65dcb3e-58a8-548e-b79a-0b93c98f1f62.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 1179648,
+      "UploadedByPersonID": "9DE343E8-A72A-558A-9FC3-F7110F73B75D"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.379Z",
+      "checksum": "bfd86843c9d9aed24a4149c907519ba908c0cbf2f060bf567a32285abf3e249a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8313074B-BD55-5F3F-A86E-37AA8193E2D6"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "333BBE05-4A0C-5ACD-B16B-D26C2A8EFEF4",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 4",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/8313074b-bd55-5f3f-a86e-37aa8193e2d6.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1245184,
+      "UploadedByPersonID": "77DA4FA9-8A69-5051-82D2-D4B49335EC6B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.387Z",
+      "checksum": "7ae72ca2be934fa21c8ec26a3db3f763d558f1c20c4f1f74817e8c7512c69abd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C3E2D8AE-B401-5770-81CB-98C0BDEB1F38"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "5573B421-C6D1-512A-BBE1-5E4876CE056E",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 5",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c3e2d8ae-b401-5770-81cb-98c0bdeb1f38.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1310720,
+      "UploadedByPersonID": "8090D46F-6D4D-54FE-B90B-8541EEF33569"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.396Z",
+      "checksum": "e5f5671647254271568c404c978936a8bbb0855ce4d30c06ec4263ad75937af2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DDB9968C-FFDC-5F55-A976-C038143ED426"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "6F66D029-E3BF-5091-B72D-503E06A5BC36",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 6",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/ddb9968c-ffdc-5f55-a976-c038143ed426.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 1376256,
+      "UploadedByPersonID": "3C33BD05-03EC-5EEE-9EBF-F2F5F8815E99"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.405Z",
+      "checksum": "e54d3ab070233ce7820ce961b1b66bbabc38965100b2cdc2be629e9229908bd7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E712250B-C824-55B4-873D-F47FF4D4DB40"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "F14EB250-A7BA-529A-9327-A864D0823DA9",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 7",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/e712250b-c824-55b4-873d-f47ff4d4db40.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 1441792,
+      "UploadedByPersonID": "1D0FED47-F850-561A-9CFB-649953199664"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.415Z",
+      "checksum": "37656c492000d992e457d674210d963bdb5f62567f3730e4d087569f0b962a54"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4F8AA79B-0C4D-5B60-A12B-495ADC2CF1EB"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "F4B3E893-57DF-53C9-BF80-9402B0030E84",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 8",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/4f8aa79b-0c4d-5b60-a12b-495adc2cf1eb.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1507328,
+      "UploadedByPersonID": "D8FE5D60-508F-52FA-8FA5-53CA1E3E101B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.424Z",
+      "checksum": "a76ef28e294de51b577a3ab9031dce228464b107766e250a5e0b6c1b32f952e4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C741BD46-B397-5ED9-8686-467BA7D94052"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "7C58FBBF-8A44-581D-9696-50275C04F78A",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 9",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c741bd46-b397-5ed9-8686-467ba7d94052.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1572864,
+      "UploadedByPersonID": "F9DD7A28-C34E-5E68-B0A8-37A1F939E862"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.434Z",
+      "checksum": "8b53619e156047357b1aacbce3389c6ed40b94f6608da781bd0ad557114d97ab"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24A79F88-C1C0-5029-B36C-AD08C4F65EB3"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "F4E79BAF-102B-5EFF-89D2-B473E452998A",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 10",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/24a79f88-c1c0-5029-b36c-ad08c4f65eb3.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 1638400,
+      "UploadedByPersonID": "4AE7D208-DB44-5910-A44A-82FAE6520415"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.443Z",
+      "checksum": "6f605c74dfabd73f624d17f9c86ccd433b91950668030484fe61bc411d27bef6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "485FF1C7-9418-5F66-9E87-036439FD38A1"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "E321C8A7-AE37-5CA7-AEC3-CDE09DFEF589",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 11",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/485ff1c7-9418-5f66-9e87-036439fd38a1.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 1703936,
+      "UploadedByPersonID": "E5275DC0-22AE-5D19-8624-B8835F048FE6"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.458Z",
+      "checksum": "b498f46fd29f6f038d5c0e3e77ebac70ae730c178cd83d65efe630688d205b9c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7D3360F2-DE60-534A-ABD3-4EDA90E867ED"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "B2A2D902-E4FC-59E0-AB00-6B559FEED12B",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 12",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/7d3360f2-de60-534a-abd3-4eda90e867ed.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1769472,
+      "UploadedByPersonID": "37BED2EF-F5CD-5266-9FCC-F366A15299AA"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.466Z",
+      "checksum": "35e537feaa15ff8969fcc20d4fea93f01fb63bb6cb58a8b75f472a9d7bd9f2ac"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1DE29A93-B959-578A-94BC-B0B71978DB97"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "4F1BDDE2-4BFD-58ED-BCE8-E4C2E547D1ED",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 13",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/1de29a93-b959-578a-94bc-b0b71978db97.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 1835008,
+      "UploadedByPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.475Z",
+      "checksum": "eb05e9742ee5723a02b92373b9c3fb251d203509529eb64fa00acb7988c7035c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EABC52C7-C0BD-59BE-A5E4-22B5D866A77A"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "D07F5B7B-5286-5CCA-BFD3-41AF17552338",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 14",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/eabc52c7-c0bd-59be-a5e4-22b5d866a77a.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 1900544,
+      "UploadedByPersonID": "0D2B1994-E693-5F50-8B9C-0336EC93E5C6"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.484Z",
+      "checksum": "d1285a116ebf8683aea01c73f25eb9abbf0fde2d45f40bafd8b2d1c19340e6c6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0504F322-116C-577B-925B-EB2A4BE87BBD"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "DF33F8A8-4F29-523A-B737-8DE1D6ABF64A",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 15",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/0504f322-116c-577b-925b-eb2a4be87bbd.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 1966080,
+      "UploadedByPersonID": "8A87AB15-2766-52DB-8B17-10F08727BE37"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.493Z",
+      "checksum": "7293f4a42e0f39fa39a6240b8578e88a2fc63892c70ed7a868eb2e0285801a11"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC5E0CB6-A2FA-5A54-980F-369EED9BEDE6"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "AF76EF15-E226-5F24-8FAD-527F89B35EAF",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 16",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/ec5e0cb6-a2fa-5a54-980f-369eed9bede6.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2031616,
+      "UploadedByPersonID": "66F3B60D-6222-50BB-95DB-2E11F1C1C7F5"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.503Z",
+      "checksum": "0eec2fc99e7492c03ce1db4e31e735f62956a9543f01f74bc4a623b91bb66957"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DE88760A-E234-5990-9FD0-720B6F2C3423"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "B0AF12A3-EAA0-5AC3-9E57-D874FC08675F",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 17",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/de88760a-e234-5990-9fd0-720b6f2c3423.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2097152,
+      "UploadedByPersonID": "BB0A06BF-A3AA-5359-A266-D4514ACE018E"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.513Z",
+      "checksum": "e44720c147ba46f3642cb8ec68401956969904e09ed2589353a0db45f17cda5d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2CAD9E98-259E-54C5-8225-EFC0F7EF36E9"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "EC97E661-09C6-5DA9-AC5E-2D6DE4371D8B",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 18",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/2cad9e98-259e-54c5-8225-efc0f7ef36e9.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 2162688,
+      "UploadedByPersonID": "71A863C5-6539-5099-B0D5-A10FE5F74F0F"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.521Z",
+      "checksum": "cbebf9df6bb9326212e0379d3c19e7c5814eda3bd82a8e92b3fac6e2c11a6a92"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0F39CC18-C046-577C-B71C-68C839A475B5"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "9ABE4FA6-0C5C-5892-87C4-D6658545391B",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 19",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/0f39cc18-c046-577c-b71c-68c839a475b5.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 2228224,
+      "UploadedByPersonID": "18514560-40CA-5819-A3D6-B162641141CF"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.530Z",
+      "checksum": "3c7c341818dab63338d9f1e8e7fd4d6ea5f27e0bed4bb801a37b19b3d55c319e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "25A953DD-4943-58B0-B8CD-9B724D71CCCE"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "16357E74-6BDE-5F37-B9A1-A70A4767E079",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 20",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/25a953dd-4943-58b0-b8cd-9b724d71ccce.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2293760,
+      "UploadedByPersonID": "D4650E5F-B923-502B-BACB-79216B3ED3F7"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.539Z",
+      "checksum": "a3dd4e3696304dda52f999916beb8db35bed6fa058e30ece4e2ee9ef859903d6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7491F8FD-3839-5606-A2AC-1B9377B8A49D"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "9DB062A6-FBD4-5A02-B445-13B2D8E70333",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 21",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/7491f8fd-3839-5606-a2ac-1b9377b8a49d.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2359296,
+      "UploadedByPersonID": "75E2DD35-160D-5E76-ADAF-FCCEE7541A39"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.554Z",
+      "checksum": "2b33181f3ed303bfebc7026e4056d6a7a48f5bf2ae1c53125469179e8d7fe3e6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FF4451F-CD3A-5DE7-AB39-B979CA0457F4"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "3588E7CE-3EBB-5E90-92A6-9CDFB29E1271",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 22",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/0ff4451f-cd3a-5de7-ab39-b979ca0457f4.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 2424832,
+      "UploadedByPersonID": "CF159B28-585C-5074-9E43-F825F4B62512"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.563Z",
+      "checksum": "477ab30763f7fd512694bfc731c200c1edbe946786c4d8dc36d1faefcc9c692e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2545339D-8419-5A2E-8AB7-5F757733CBD7"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "E23D7D3C-3DFB-5471-8B65-9EF73D620C93",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 23",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/2545339d-8419-5a2e-8ab7-5f757733cbd7.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 2490368,
+      "UploadedByPersonID": "0E8011CA-08EB-55BC-A091-324A240AFD08"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.571Z",
+      "checksum": "05ea3324e35445b4638874b1ea07ddf46b6a328c11c3846f174e6a17036b0721"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BE79A81E-E699-5FD5-AFC5-524D93B417EE"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "39182A82-F812-512E-8FC4-5DD32F12EA8C",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 24",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/be79a81e-e699-5fd5-afc5-524d93b417ee.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2555904,
+      "UploadedByPersonID": "1DEF8894-B083-5BB9-92AD-0C624625744F"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.580Z",
+      "checksum": "792a1e187c07f368d6d299e4db3c8123ef0fbed734258a3822397a4b6a716716"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "017F3E59-0773-5316-B623-AF4AB7EA01E9"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "AA674F0E-ACA8-53A6-8F20-478DD3BFD59B",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 25",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/017f3e59-0773-5316-b623-af4ab7ea01e9.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2621440,
+      "UploadedByPersonID": "A82DD4FF-A7EB-5F0D-9F1A-83D425EA235C"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.588Z",
+      "checksum": "550cafba7d10980fc6d65a333d667c4f47ab79d21d479121e21c6934aeb64700"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "057332B4-B1A4-5C37-8902-CABC6A9319E2"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "6B3AFDA3-D86C-5953-87C2-86A9A5BF18D6",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 26",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/057332b4-b1a4-5c37-8902-cabc6a9319e2.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 2686976,
+      "UploadedByPersonID": "8E50537B-176D-5709-AADA-F3D0C1DEEB70"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.597Z",
+      "checksum": "523d96965dc7eb18a18cc94b8ba51b5d344674bdb5a5319e2110ca722e99be80"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "769A7E28-E8C3-5D12-9DE1-47D09EA19127"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "EB0C5021-4354-5D25-80BA-DCD0CC690278",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 27",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/769a7e28-e8c3-5d12-9de1-47d09ea19127.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 2752512,
+      "UploadedByPersonID": "673E1770-551C-54E6-9A95-82F93ED35FA1"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.606Z",
+      "checksum": "85663895c3b3c3d6746c1c344091c0cb70033ec5f392bfcee5dc0a6f70a16e40"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D289035D-08C4-5528-91AD-18F6FF7A4FB6"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "26794B71-5D3E-5C8B-A423-1603C8BE9204",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 28",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/d289035d-08c4-5528-91ad-18f6ff7a4fb6.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2818048,
+      "UploadedByPersonID": "3FC34C81-1CD9-5E31-B90C-F48DDC11B4E7"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.616Z",
+      "checksum": "04cc9ff1bc90ba647da52abe51e028274fe12bb1597319d93c692af90b6317a6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E7E6E9C-2154-58D9-B4CA-E1137FA60E64"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "064D075E-9BDE-5767-9116-7B42C04E2C80",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 29",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/0e7e6e9c-2154-58d9-b4ca-e1137fa60e64.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 2883584,
+      "UploadedByPersonID": "120F89AB-56FF-5C12-9F08-E29E99DCCF19"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.625Z",
+      "checksum": "9b41d02ebd6b34d3abd043a71b53cbff8c80e408c94d878874b73534d493c0fd"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18FE1D45-8C6B-51B2-BEAE-8CDA34DDBDB2"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "09F3A69C-8C49-5D0F-B662-8D10E69CD80C",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 30",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/18fe1d45-8c6b-51b2-beae-8cda34ddbdb2.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 2949120,
+      "UploadedByPersonID": "F6AA6408-C465-578E-9B77-A92E8722A59B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.635Z",
+      "checksum": "57ef80ab2bf176dd6a08e006cfbc5df8f3951bced9b016e53927b8ded3f46b2c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A00DB396-5B19-5E2A-860B-2223385E2A1F"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "BE0A6560-DD0E-51A5-A221-BFC051C31429",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 31",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/a00db396-5b19-5e2a-860b-2223385e2a1f.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 3014656,
+      "UploadedByPersonID": "E81C0B49-4001-58A2-BB58-5F9D19F24067"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.650Z",
+      "checksum": "2f9846f2cc623228e191534308cce02fc5541c47c2e984e20229ace0aba3e61c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FC315117-D998-53C2-A218-B95C451D52E1"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "E70182B2-717F-5D33-AB44-2234182ADF39",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 32",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/fc315117-d998-53c2-a218-b95c451d52e1.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3080192,
+      "UploadedByPersonID": "57F2257C-F91E-52BC-A644-25A8D4C02B03"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.659Z",
+      "checksum": "6c1dc3944488c90132b7c20b0c86f90c22d9655db7f62cbcbfc56f5d653ba4e4"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C9FF2B90-9419-54D5-9122-A32816E6D8C0"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "C6E77642-2F3C-5521-9291-FF642B2B5F01",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 33",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c9ff2b90-9419-54d5-9122-a32816e6d8c0.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3145728,
+      "UploadedByPersonID": "183F4FA3-8730-520A-85BD-B56B5CDC5784"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.669Z",
+      "checksum": "fc90aaeb4ffb276d2d0d4086382a48924979816fe148c60ef3339e02fe88d9ac"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "509413B5-4A11-5E5B-A60A-2AA20C6BAC72"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "2205DA8A-82EE-5780-95A3-069E98489D46",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 34",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/509413b5-4a11-5e5b-a60a-2aa20c6bac72.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 3211264,
+      "UploadedByPersonID": "550909F0-527A-539C-AF82-4603AD448838"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.679Z",
+      "checksum": "3e30eca307180a982dc76594f54e724ba2116f5d26d901018d8f5040a76d21fa"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC976A82-A93B-591E-9B54-688C7C89E1F5"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "E3D36619-7CDD-5396-91AB-82190FF25232",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 35",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/bc976a82-a93b-591e-9b54-688c7c89e1f5.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 3276800,
+      "UploadedByPersonID": "11314CE9-CE9B-5102-8D1D-B418A5843AF0"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.687Z",
+      "checksum": "1dc5b2aea3ab48783d05fda2f6a0c8d28703809df5db25cca03c0746db367ed7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49A08104-A49A-5886-A817-44BEEF15E016"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "00A2211A-3E03-50A7-BBC0-AB33579C1CA0",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 36",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/49a08104-a49a-5886-a817-44beef15e016.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3342336,
+      "UploadedByPersonID": "59F134C7-5626-53C6-9BEB-1B193FF0E845"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.697Z",
+      "checksum": "5ec3ce304f8e5c8bd817332fe98651dfbc1c8b57770a977162253fe617c45117"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F1FEF609-9046-559F-8679-4A9E52529A03"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "DEE8221E-DFBA-51D1-9C55-1E6B6A8CFF6A",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 37",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/f1fef609-9046-559f-8679-4a9e52529a03.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3407872,
+      "UploadedByPersonID": "99E0BDB0-D33E-52D6-92A3-072E2BFC6961"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.706Z",
+      "checksum": "f6708e4088fcb4f0b0364a6b288e13504cb4e46b965265aa80653353b9a6852f"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1959169E-0283-51BD-A64A-BA2EB16AD722"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "CCF73D9F-1DDC-572B-9A1E-FCF3534AE18B",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 38",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/1959169e-0283-51bd-a64a-ba2eb16ad722.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 3473408,
+      "UploadedByPersonID": "C70D8E9D-6386-5747-9B71-5F6B43B59205"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.715Z",
+      "checksum": "f8138c53f974dcb16412d40c0ce350b881d79869f3fc1cafa4e3918e0ddb3f51"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CCF88355-CF3B-574D-8DD2-29C5E5F505D3"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "9037DDDF-6319-5699-A225-E4BDDA301740",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 39",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/ccf88355-cf3b-574d-8dd2-29c5e5f505d3.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 3538944,
+      "UploadedByPersonID": "BF1A781C-0604-5388-89DE-C838923203D5"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.723Z",
+      "checksum": "f8fd1d416bf016d34ac4b39736d54302f756a359bd1678c4fe97cca722617169"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E9958412-1D0E-5C01-A90B-736966CE9756"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "53173069-AF31-57F6-917A-3E2619AACCF0",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 40",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/e9958412-1d0e-5c01-a90b-736966ce9756.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3604480,
+      "UploadedByPersonID": "8010857E-9CEF-56E7-8879-A72AE72E6B3C"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.733Z",
+      "checksum": "91e5b1eb2cb5024dacd740238b8af2fcad3d56d7cd9fb5ade89836caeca2bde7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E152722F-2931-5AD8-A0AA-C7CBD31284F2"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "79DD652D-9C81-5311-976B-DAE20B887243",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 41",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/e152722f-2931-5ad8-a0aa-c7cbd31284f2.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3670016,
+      "UploadedByPersonID": "28BCF3D4-32D4-549B-B1E5-DDAB47D091B9"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.749Z",
+      "checksum": "9294421e69bddfd7ceb81a4413bea96ef7ff42c26ae83be1c1041853fab7f5c6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E47B5E37-58A7-55C0-B849-60E454AB7BD7"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "DF8E67BC-1792-5616-9961-5BC16C926693",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 42",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/e47b5e37-58a7-55c0-b849-60e454ab7bd7.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 3735552,
+      "UploadedByPersonID": "42E41651-434E-5CB7-A5E4-022A41AF3EC5"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.758Z",
+      "checksum": "9105dbd568f20b549b551684a8e3ca92d2beffb77f13fd03339ca3b63b6cc14e"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F67DC279-789D-58A4-BF30-B3771A649A26"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "E8744BF8-0ACF-5319-BDDA-409BBB901632",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 43",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/f67dc279-789d-58a4-bf30-b3771a649a26.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 3801088,
+      "UploadedByPersonID": "F63D638B-A734-5ADF-8C2A-96A6E8459A38"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.768Z",
+      "checksum": "f6376fb798ddf38e5dd21c30b0879e2030aa4aedbe6ef9f2ba0c931d151d9cc3"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2DD65D1C-6F22-5BB3-8153-F2BAC77DC656"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "F32C77F7-DBA0-5113-AD9A-2F116A654193",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 44",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/2dd65d1c-6f22-5bb3-8153-f2bac77dc656.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3866624,
+      "UploadedByPersonID": "3927F0D5-2693-51BD-B367-E416CDDA1C4F"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.777Z",
+      "checksum": "29a20f08a107dd2878f83d51f563c048a1d482f9a72eb8f6dd05d8b3ea3ab3b7"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "29CFD938-931F-5003-94D1-112DC594C7C4"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "57BAF384-2209-5C53-99C5-6D291C62E223",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 45",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/29cfd938-931f-5003-94d1-112dc594c7c4.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 3932160,
+      "UploadedByPersonID": "F76F4724-1286-55AE-AFC1-DA5B7AB8B350"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.791Z",
+      "checksum": "f4519dcde0f2debd5594bbbdac3f9fb5af68c7cbf4be5e5319c076cd800396be"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C70B3D6E-DDA9-5738-BC70-2EEFB9C4B00B"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "A871C0EF-45C6-5CE4-8C02-B8EA1D028505",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 46",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c70b3d6e-dda9-5738-bc70-2eefb9c4b00b.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 3997696,
+      "UploadedByPersonID": "C4219B4F-578C-5ED5-B6B9-D40AFF3133E4"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.802Z",
+      "checksum": "ddf9d3c3880dc251a57428537e579b912a1f429a7b758629303152761bf710d0"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "23AA87B5-DA06-5C71-B251-F8B539686056"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "D7D07425-1556-5401-9106-CAEEF3960377",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 47",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/23aa87b5-da06-5c71-b251-f8b539686056.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 4063232,
+      "UploadedByPersonID": "B7A26597-C4D5-53DB-90B3-52C94AB6F948"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.812Z",
+      "checksum": "03c9e654952e1d1356a1808f96961ffa6d6dbe26854c0d50d00f0b22d0eed762"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BEA9866E-6691-5CFB-A411-F03FCCD2171B"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "2E8BCEF2-393B-50CC-987F-A5409B346DCE",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 48",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/bea9866e-6691-5cfb-a411-f03fccd2171b.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4128768,
+      "UploadedByPersonID": "EC5CA0FD-D6AA-5DA5-A53A-BD66188C60C4"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.822Z",
+      "checksum": "07ea8924b2cfc0079802f38d3ca21ecc37dbf6ba7d7bd9662698bf92956b404a"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7644305A-4D45-5299-BD1F-174B68737651"
+    },
+    "fields": {
+      "CommitteeID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+      "MeetingID": "425A3558-FA5C-562C-981C-81DFBEF6E293",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 49",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/7644305a-4d45-5299-bd1f-174b68737651.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4194304,
+      "UploadedByPersonID": "45EDD94C-6D2C-57D9-A60D-B7F1517CF641"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.832Z",
+      "checksum": "fc279f78dba3302e639337cb6da37aa21bd250c5a3e8c55dff36e62f9110ba65"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "15313DA6-F4DD-51DA-9317-C2D8202D9915"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "1316822B-4AA3-5372-AE42-DCB307D384F5",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 50",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/15313da6-f4dd-51da-9317-c2d8202d9915.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 4259840,
+      "UploadedByPersonID": "7FEC8ED2-ED7D-59B3-A3AF-7DA39CE47D65"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.842Z",
+      "checksum": "9a0742a9fdfb7afbd5d01bf14909ce1cf3b5a6ccd1b4fd686a10604c2acbcd31"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C254944-F3C4-587D-825D-7655332AE5A0"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "E0EEA36D-5555-56C0-99BC-61A230DFA2EE",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 51",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/1c254944-f3c4-587d-825d-7655332ae5a0.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 4325376,
+      "UploadedByPersonID": "CCFA1913-AF56-545A-B63A-3916FFA4318B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.859Z",
+      "checksum": "d6d3b701988a0705e68ef31da321260c898a750faab8278fddb5f4198f82e7b1"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D580441A-6230-5F08-B187-63CFFC0DB602"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "03CA1CCC-502D-50D7-931B-60AE76777D47",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 52",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/d580441a-6230-5f08-b187-63cffc0db602.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4390912,
+      "UploadedByPersonID": "1B9C43A3-7290-522E-B8B2-0DF886F32ED1"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.869Z",
+      "checksum": "6cd8783f781b4aab2f4935b4ac4b58fb8efa085b8073f90d5bbb2709b6d6a1f8"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77F9FEC1-B8A2-55F3-B02D-9C33588A0E10"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "2AE474A0-212E-5D3E-81BD-8862411F34EC",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 53",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/77f9fec1-b8a2-55f3-b02d-9c33588a0e10.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4456448,
+      "UploadedByPersonID": "9DE343E8-A72A-558A-9FC3-F7110F73B75D"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.878Z",
+      "checksum": "80899ce6a2ef7eaab8a412cde306429a5b04dece4a5fac303fe7f72789e496ff"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C9E25A89-90AB-5964-9672-C9AA040D3CDC"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "5F542F01-248D-5191-BAF8-EA6E5EAE2F5F",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 54",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c9e25a89-90ab-5964-9672-c9aa040d3cdc.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 4521984,
+      "UploadedByPersonID": "77DA4FA9-8A69-5051-82D2-D4B49335EC6B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.887Z",
+      "checksum": "c0b38e0dae2b5f6606f4170e8620bdbac204563244afaed11c55d78f4060ffb6"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4B021A91-8F90-5ACB-A4F3-CC53AC121AE0"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "99E7652A-980A-505E-9BC7-34C16EB3FFF6",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 55",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/4b021a91-8f90-5acb-a4f3-cc53ac121ae0.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 4587520,
+      "UploadedByPersonID": "8090D46F-6D4D-54FE-B90B-8541EEF33569"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.897Z",
+      "checksum": "9dd953212da8fc0c0991838d8a3c47350a60fe6a7c82b0142d84f01808de6a9b"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C12C6D02-7488-5C38-9C4B-811B871B6632"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "2233376B-7DC9-5E9F-8170-0E9134F781D6",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 56",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c12c6d02-7488-5c38-9c4b-811b871b6632.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4653056,
+      "UploadedByPersonID": "3C33BD05-03EC-5EEE-9EBF-F2F5F8815E99"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.907Z",
+      "checksum": "fe9715aa571b297fe49e4cc4eebe5ba8473ea8fe6f098b2a1a454c8262719219"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C918B0FE-B3C8-5C30-825C-FACCE38F9D38"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "8DCA101C-BB36-5AD2-A0CE-ABC593F97E55",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Document",
+      "Name": "Committee Charter & Bylaws — Session 57",
+      "Description": "Governing charter and voting procedure bylaws.",
+      "URL": "https://archive.internationalcheese.org/artifacts/c918b0fe-b3c8-5c30-825c-facce38f9d38.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4718592,
+      "UploadedByPersonID": "1D0FED47-F850-561A-9CFB-649953199664"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.916Z",
+      "checksum": "2778be625cb39449e841c77517705cfd44df202245aacac674406f1ca75502ca"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1A663AD5-3AA9-5EEC-BB0B-2CC3D3C78ED7"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "CA0EFE04-B766-5EEF-A4FA-DE7209B4D55F",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Presentation",
+      "Name": "Annual Strategy Presentation — Session 58",
+      "Description": "Strategic priorities, budget allocation, and goals deck.",
+      "URL": "https://archive.internationalcheese.org/artifacts/1a663ad5-3aa9-5eec-bb0b-2cc3d3c78ed7.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-powerpoint",
+      "FileSize": 4784128,
+      "UploadedByPersonID": "D8FE5D60-508F-52FA-8FA5-53CA1E3E101B"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.925Z",
+      "checksum": "3772de1cf044ebb48919d083d8f29ef900eb2c88b3ee6d2d15aba35c2cb427e5"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A156623A-0E3C-5BC1-B9C7-8A2FA8D73160"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "C65CA62A-5C53-5CE4-939B-133C93E70A92",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Spreadsheet",
+      "Name": "Standards Audit Summary Report — Session 59",
+      "Description": "Quantitative audit findings from regional creamery visits.",
+      "URL": "https://archive.internationalcheese.org/artifacts/a156623a-0e3c-5bc1-b9c7-8a2fa8d73160.pdf",
+      "Provider": "URL",
+      "MimeType": "application/vnd.ms-excel",
+      "FileSize": 4849664,
+      "UploadedByPersonID": "F9DD7A28-C34E-5E68-B0A8-37A1F939E862"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.934Z",
+      "checksum": "17c592e40f3452e1395023d26f90693e5ae57b11ca1517d79441744aaa8d10f2"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "84ADF6FC-F482-551A-B033-CA5AC1A9D791"
+    },
+    "fields": {
+      "CommitteeID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39",
+      "MeetingID": "DDACD724-61BC-543C-9FF2-BE96931C1F20",
+      "AgendaItemID": null,
+      "TaskID": null,
+      "ArtifactTypeID": "@lookup:Committees: Artifact Types.Name=Agenda",
+      "Name": "Meeting Agenda Packet — Session 60",
+      "Description": "Compiled agenda items, officer reports, and background memorandums.",
+      "URL": "https://archive.internationalcheese.org/artifacts/84adf6fc-f482-551a-b033-ca5ac1a9d791.pdf",
+      "Provider": "URL",
+      "MimeType": "application/pdf",
+      "FileSize": 4915200,
+      "UploadedByPersonID": "4AE7D208-DB44-5910-A44A-82FAE6520415"
+    },
+    "sync": {
+      "lastModified": "2026-09-03T21:38:31.943Z",
+      "checksum": "c7b1c8816e12d0374267f5f620b2b9b63ea53f466f5720bde0414d84d0998686"
+    }
+  }
+]

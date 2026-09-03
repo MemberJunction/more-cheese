@@ -254,6 +254,218 @@
         }
       },
       "isImmutable": false
+    },
+    "GLAccount": {
+      "name": "GLAccount",
+      "entityName": "MJ_BizApps_Accounting: GL Accounts",
+      "targetTable": "GLAccount",
+      "schema": "__mj_BizAppsAccounting",
+      "pack": "commerce",
+      "businessKey": ["CompanyID", "Code"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "CompanyID": { "name": "CompanyID", "type": "uuid" },
+        "Code": { "name": "Code", "type": "string" },
+        "Name": { "name": "Name", "type": "string" },
+        "AccountType": { "name": "AccountType", "type": "string" }
+      },
+      "foreignKeys": {
+        "CompanyID": { "targetEntity": "Company", "targetField": "ID" }
+      },
+      "isImmutable": true
+    },
+    "GLAccountLink": {
+      "name": "GLAccountLink",
+      "entityName": "MJ_BizApps_Accounting: GL Account Links",
+      "targetTable": "GLAccountLink",
+      "schema": "__mj_BizAppsAccounting",
+      "pack": "commerce",
+      "businessKey": ["GLAccountID", "RecordID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "GLAccountID": { "name": "GLAccountID", "type": "uuid" },
+        "GLAccountRoleID": { "name": "GLAccountRoleID", "type": "string" },
+        "EntityID": { "name": "EntityID", "type": "string" },
+        "RecordID": { "name": "RecordID", "type": "string" },
+        "Status": { "name": "Status", "type": "string" }
+      },
+      "foreignKeys": {
+        "GLAccountID": { "targetEntity": "GLAccount", "targetField": "ID" }
+      },
+      "isImmutable": false
+    },
+    "Activity": {
+      "name": "Activity",
+      "entityName": "MJ_BizApps_Common: Activities",
+      "targetTable": "Activity",
+      "schema": "__mj_BizAppsCommon",
+      "pack": "core",
+      "businessKey": ["Title", "StartedAt"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "ActivityTypeID": { "name": "ActivityTypeID", "type": "string" },
+        "StartedAt": { "name": "StartedAt", "type": "date" },
+        "Title": { "name": "Title", "type": "string" },
+        "Direction": { "name": "Direction", "type": "string" },
+        "Status": { "name": "Status", "type": "string" }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "ActivityLink": {
+      "name": "ActivityLink",
+      "entityName": "MJ_BizApps_Common: Activity Links",
+      "targetTable": "ActivityLink",
+      "schema": "__mj_BizAppsCommon",
+      "pack": "core",
+      "businessKey": ["ActivityID", "RecordID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "ActivityID": { "name": "ActivityID", "type": "uuid" },
+        "Role": { "name": "Role", "type": "string" },
+        "EntityID": { "name": "EntityID", "type": "string" },
+        "RecordID": { "name": "RecordID", "type": "string" }
+      },
+      "foreignKeys": {
+        "ActivityID": { "targetEntity": "Activity", "targetField": "ID" }
+      },
+      "isImmutable": false
+    },
+    "Minute": {
+      "name": "Minute",
+      "entityName": "Committees: Minutes",
+      "targetTable": "Minute",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "businessKey": ["MeetingID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "MeetingID": { "name": "MeetingID", "type": "uuid" },
+        "Content": { "name": "Content", "type": "string" },
+        "ApprovalStatus": { "name": "ApprovalStatus", "type": "string" }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "Comment": {
+      "name": "Comment",
+      "entityName": "Committees: Comments",
+      "targetTable": "Comment",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "businessKey": ["CommitteeID", "PersonID", "CommentText"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "CommitteeID": { "name": "CommitteeID", "type": "uuid" },
+        "PersonID": { "name": "PersonID", "type": "uuid" },
+        "CommentText": { "name": "CommentText", "type": "string" },
+        "IsResolved": { "name": "IsResolved", "type": "boolean" }
+      },
+      "foreignKeys": {
+        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
+      },
+      "isImmutable": false
+    },
+    "Artifact": {
+      "name": "Artifact",
+      "entityName": "Committees: Artifacts",
+      "targetTable": "Artifact",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "businessKey": ["Name", "URL"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "ArtifactTypeID": { "name": "ArtifactTypeID", "type": "string" },
+        "Name": { "name": "Name", "type": "string" },
+        "Provider": { "name": "Provider", "type": "string" },
+        "URL": { "name": "URL", "type": "string" }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "TaskTag": {
+      "name": "TaskTag",
+      "entityName": "MJ_BizApps_Tasks: Task Tags",
+      "targetTable": "TaskTag",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "businessKey": ["Name"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "Name": { "name": "Name", "type": "string" },
+        "ColorCode": { "name": "ColorCode", "type": "string" }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "TaskTagLink": {
+      "name": "TaskTagLink",
+      "entityName": "MJ_BizApps_Tasks: Task Tag Links",
+      "targetTable": "TaskTagLink",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "businessKey": ["TaskID", "TagID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "TaskID": { "name": "TaskID", "type": "uuid" },
+        "TagID": { "name": "TagID", "type": "uuid" }
+      },
+      "foreignKeys": {
+        "TagID": { "targetEntity": "TaskTag", "targetField": "ID" }
+      },
+      "isImmutable": false
+    },
+    "TaskComment": {
+      "name": "TaskComment",
+      "entityName": "MJ_BizApps_Tasks: Task Comments",
+      "targetTable": "TaskComment",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "businessKey": ["TaskID", "PersonID", "Content"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "TaskID": { "name": "TaskID", "type": "uuid" },
+        "PersonID": { "name": "PersonID", "type": "uuid" },
+        "Content": { "name": "Content", "type": "string" }
+      },
+      "foreignKeys": {
+        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
+      },
+      "isImmutable": false
+    },
+    "TaskActivity": {
+      "name": "TaskActivity",
+      "entityName": "MJ_BizApps_Tasks: Task Activities",
+      "targetTable": "TaskActivity",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "businessKey": ["TaskID", "ActivityType", "Description"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "TaskID": { "name": "TaskID", "type": "uuid" },
+        "ActivityType": { "name": "ActivityType", "type": "string" },
+        "Description": { "name": "Description", "type": "string" }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "MessageFile": {
+      "name": "MessageFile",
+      "entityName": "MJ_BizApps_SecureMessaging: Message Files",
+      "targetTable": "MessageFile",
+      "schema": "__mj_BizAppsSecureMessaging",
+      "pack": "community",
+      "businessKey": ["SecureMessageID", "Filename"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "SecureMessageID": { "name": "SecureMessageID", "type": "uuid" },
+        "ThreadID": { "name": "ThreadID", "type": "uuid" },
+        "Filename": { "name": "Filename", "type": "string" },
+        "ContentType": { "name": "ContentType", "type": "string" },
+        "Size": { "name": "Size", "type": "number" }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
     }
   }
 }
