@@ -22,6 +22,7 @@
   "entities": {
     "Organization": {
       "name": "Organization",
+      "entityName": "MJ_BizApps_Common: Organizations",
       "targetTable": "Organization",
       "schema": "__mj_BizAppsCommon",
       "pack": "core",
@@ -41,6 +42,7 @@
     },
     "Person": {
       "name": "Person",
+      "entityName": "MJ_BizApps_Common: People",
       "targetTable": "Person",
       "schema": "__mj_BizAppsCommon",
       "pack": "core",
@@ -56,8 +58,44 @@
       "foreignKeys": {},
       "isImmutable": false
     },
+    "Company": {
+      "name": "Company",
+      "entityName": "MJ: Companies",
+      "targetTable": "Company",
+      "schema": "__mj",
+      "pack": "core",
+      "businessKey": ["Name"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "Name": { "name": "Name", "type": "string" },
+        "Description": { "name": "Description", "type": "string", "nullable": true },
+        "Website": { "name": "Website", "type": "string", "nullable": true },
+        "Domain": { "name": "Domain", "type": "string", "nullable": true }
+      },
+      "foreignKeys": {},
+      "isImmutable": true
+    },
+    "ProductCategory": {
+      "name": "ProductCategory",
+      "entityName": "MJ_BizApps_Orders: Product Categories",
+      "targetTable": "ProductCategory",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "businessKey": ["Name"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "CompanyID": { "name": "CompanyID", "type": "uuid" },
+        "Name": { "name": "Name", "type": "string" },
+        "Description": { "name": "Description", "type": "string", "nullable": true }
+      },
+      "foreignKeys": {
+        "CompanyID": { "targetEntity": "Company", "targetField": "ID" }
+      },
+      "isImmutable": true
+    },
     "Product": {
       "name": "Product",
+      "entityName": "MJ_BizApps_Orders: Products",
       "targetTable": "Product",
       "schema": "__mj_BizAppsOrders",
       "pack": "commerce",
@@ -75,12 +113,14 @@
         "IsTaxable": { "name": "IsTaxable", "type": "boolean" }
       },
       "foreignKeys": {
-        "CompanyID": { "targetEntity": "Organization", "targetField": "ID" }
+        "CompanyID": { "targetEntity": "Company", "targetField": "ID" },
+        "ProductCategoryID": { "targetEntity": "ProductCategory", "targetField": "ID" }
       },
       "isImmutable": false
     },
     "MembershipPeriod": {
       "name": "MembershipPeriod",
+      "entityName": "MoreCheese: Membership Periods",
       "targetTable": "MembershipPeriod",
       "schema": "morecheese_members",
       "pack": "community",
@@ -112,6 +152,7 @@
     },
     "EventRegistration": {
       "name": "EventRegistration",
+      "entityName": "MoreCheese: Event Registrations",
       "targetTable": "EventRegistration",
       "schema": "morecheese_members",
       "pack": "community",
@@ -137,6 +178,7 @@
     },
     "CourseEnrollment": {
       "name": "CourseEnrollment",
+      "entityName": "MoreCheese: Course Enrollments",
       "targetTable": "CourseEnrollment",
       "schema": "morecheese_members",
       "pack": "community",
@@ -163,6 +205,7 @@
     },
     "AdvocacyAction": {
       "name": "AdvocacyAction",
+      "entityName": "MoreCheese: Advocacy Actions",
       "targetTable": "AdvocacyAction",
       "schema": "morecheese_members",
       "pack": "community",
@@ -188,6 +231,7 @@
     },
     "CommitteeMembership": {
       "name": "CommitteeMembership",
+      "entityName": "Committees: Members",
       "targetTable": "Member",
       "schema": "__mj_BizAppsCommittees",
       "pack": "community",

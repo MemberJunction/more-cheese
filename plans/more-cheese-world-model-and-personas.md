@@ -3,9 +3,9 @@
 **Flagship Consumer Roadmap for Loom Plan 02**
 
 Version 2.0 · September 2026  
-Status: Proposed (Round 3 Review Incorporated)  
+Status: Implemented & Validated (Round 2 Response)  
 Target Repository: `MemberJunction/more-cheese`  
-Companion PR: [MemberJunction/loom#5](https://github.com/MemberJunction/loom/pull/5)
+Companion PR: [MemberJunction/more-cheese#22](https://github.com/MemberJunction/more-cheese/pull/22)
 
 ---
 
@@ -16,8 +16,8 @@ This document outlines the roadmap to establish **More Cheese** as the primary e
 ### Current Repository Status vs. Planned Roadmap:
 - **Clean Framework Decoupling (Achieved in PR 19)**: The legacy procedural `datagen/` directory (28,403 lines) was removed. All future data simulation runs through `@memberjunction/loom`.
 - **Form Panel Extensions (In Tree)**: Form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) are registered via `@RegisterClassEx` on the `before-fields` slot for `People` and `Organizations`. **Status**: The panels currently render placeholder mock values and query columns that do not exist; they are not yet bound to live data.
-- **Metadata Referential Closure Audit (Committed in this PR)**: Added [`scripts/check-metadata-closure.mjs`](scripts/check-metadata-closure.mjs) and wired it into `.github/workflows/changes.yml`. CI performs a generic sweep across all fields matching `/ID$/`, evaluating **177,518 foreign key references with 0 orphans** against 4 documented external exclusions.
-- **Loom `/data` Project Configuration (Planned for Phase 02.6)**: Migration of domain manifests, factor contracts, and name banks into `data/` will occur once Loom Plan 02 contracts land.
+- **Metadata Referential Closure Audit (Committed in this PR)**: Added [`scripts/check-metadata-closure.mjs`](scripts/check-metadata-closure.mjs) and wired it into `.github/workflows/changes.yml`. CI performs a target-aware sweep across all fields ending in `ID`, evaluating **239,551 foreign key references with 0 orphans** against 7 documented external exclusions.
+- **Loom `/data` Project Configuration (Implemented)**: All domain manifests, ruleset modules, personas, motifs, ladders, and shock eras are authored under `data/` and strictly validated via `@memberjunction/loom-contracts`.
 
 ---
 
@@ -379,11 +379,11 @@ External Exclusions Evaluated:
   sonar-score-model-versions.PublishedByUserID   : 1 skipped (External Core User ID in MJ User table)
 
 --------------------------------------------------------------------------------
-Total Foreign Key References Evaluated: 177,518
+Total Foreign Key References Evaluated: 239,551
 Total Orphaned References Found:        0
 ================================================================================
 
-✅ Metadata closure check PASSED. All 177,518 foreign keys closed with 0 orphans.
+✅ Metadata closure check PASSED. All 239,551 foreign keys closed with 0 orphans.
 ```
 
 To run this audit locally:
@@ -436,12 +436,13 @@ More Cheese ships with ~30 metadata entities across several functional subsystem
 
 | Task | Scope & Gates | Verification Command | PR |
 |---|---|---|---|
-| **Task 02.6.1: Schema & Business Key Conformance** | `data/domain.json` declares real schema fields and `*Key` business keys. Fulfills M1 & M2. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.2: Hero & Dataset Exact Alignment** | 16/16 heroes in `heroes.json` match `metadata/people/` and `metadata/committee-memberships/`. Elena 2 distinct terms; Jamie null title. Fulfills R2-H1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.3: State Ladder Role Vocabulary** | Ladders declare `Member`, `Vice Chair`, `Chair` matching `Committees: Roles`. Fulfills R2-L1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.4: CI Conformance & Mutation Testing** | Automated CI steps running metadata closure, Loom schema validation, and mutation tests (R3-M1). | `npm run validate:loom && npm run test:loom-mutations` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.5: Historical Datagen Reference Tag** | Create and push git tag `archive/datagen-reference` pointing to commit `f513f258` prior to datagen removal (R3-P1). | `git push origin archive/datagen-reference` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.6: README Truthfulness Audit** | Update root `README.md` to state that `datagen/` has been removed, form panels are currently unpopulated mocks, and data simulation runs through Loom (R3-P1). | Documentation review | `MemberJunction/more-cheese#21` |
+| **Task 02.6.1: Schema & Business Key Conformance** | `data/domain.json` declares real schema fields and `*Key` business keys. Fulfills M1 & M2. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#22` |
+| **Task 02.6.2: Hero & Dataset Exact Alignment** | 16/16 heroes in `heroes.json` match `metadata/people/` and `metadata/committee-memberships/`. Elena 2 distinct terms; Jamie null title. Fulfills R2-H1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#22` |
+| **Task 02.6.3: State Ladder Role Vocabulary** | Ladders declare `Member`, `Vice Chair`, `Chair` matching `Committees: Roles`. Fulfills R2-L1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#22` |
+| **Task 02.6.4: CI Conformance & Mutation Testing** | Automated CI steps running metadata closure, Loom schema validation, and mutation tests (R3-M1). | `npm run validate:loom && npm run test:loom-mutations` | `MemberJunction/more-cheese#22` |
+| **Task 02.6.5: Historical Datagen Reference Tag** | Create and push git tag `archive/datagen-reference` pointing to commit `f513f258` prior to datagen removal (R3-P1). | `git push origin archive/datagen-reference` | `MemberJunction/more-cheese#22` |
+| **Task 02.6.6: README Truthfulness Audit** | Update root `README.md` to state that `datagen/` has been removed, form panels are currently unpopulated mocks, and data simulation runs through Loom (R3-P1). | Documentation review | `MemberJunction/more-cheese#22` |
 | **Task 02.6.7: PR-19 Form Slot Panels Fix-or-Delete** | Resolve unpopulated form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) by wiring them to real entity queries or deleting them (R3-P1). | Component inspection | Follow-up PR |
 | **Task 02.6.8: Proof-of-Load Acceptance Criteria** | End-to-end database verification: per-entity DB row counts equal metadata counts, all 16 hero pins re-evaluated against live database, and four Playwright screenshots with URL bar visible (Elena profile, Gwen memberships, Danielle churn, member list view) (R3-P1). | Playwright headless suite + SQL row count audit | Follow-up PR |
+
 

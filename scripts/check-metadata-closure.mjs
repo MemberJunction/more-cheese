@@ -18,8 +18,9 @@ function findJsonFiles(dir) {
   return results;
 }
 
-// 1. Index all primary keys and load all records
+// 1. Index primary keys globally and per target directory
 const allPrimaryKeys = new Set();
+const primaryKeysByDir = new Map();
 const records = [];
 
 const files = findJsonFiles(METADATA_DIR);
@@ -32,9 +33,16 @@ for (const file of files) {
     const relPath = relative(METADATA_DIR, file);
     const dir = relPath.split(sep)[0];
 
+    if (!primaryKeysByDir.has(dir)) {
+      primaryKeysByDir.set(dir, new Set());
+    }
+    const dirKeys = primaryKeysByDir.get(dir);
+
     for (const r of parsed) {
       if (r?.primaryKey?.ID) {
-        allPrimaryKeys.add(r.primaryKey.ID.toUpperCase());
+        const pk = r.primaryKey.ID.toUpperCase();
+        allPrimaryKeys.add(pk);
+        dirKeys.add(pk);
       }
       if (r?.fields) {
         records.push({ dir, fields: r.fields });
@@ -45,7 +53,26 @@ for (const file of files) {
   }
 }
 
-// 2. Explicit, documented exclusion list for known external cross-repo references
+// 2. Directory target map: enforce target-aware referential resolution
+const FIELD_TARGET_DIR_MAP = new Map([
+  ['CompanyID', 'companies'],
+  ['ReceivingCompanyID', 'companies'],
+  ['PersonID', 'people'],
+  ['BillToPersonID', 'people'],
+  ['OrganizationID', 'organizations'],
+  ['BillToOrganizationID', 'organizations'],
+  ['ProductID', 'products'],
+  ['ProductCategoryID', 'product-categories'],
+  ['OrderHeaderID', 'orders'],
+  ['OrderID', 'orders'],
+  ['OrderLineID', 'order-lines'],
+  ['PaymentHeaderID', 'payments'],
+  ['EventID', 'events'],
+  ['CourseID', 'courses'],
+  ['CertificationID', 'certifications']
+]);
+
+// 3. Explicit, documented exclusion list for known external cross-repo references
 // Each exclusion tracks hit counts; an exclusion that matches 0 records will fail the build to catch stale exclusions.
 const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['relationships.RelationshipTypeID', { reason: 'Points to @memberjunction/bizapps-common seeded types', hits: 0 }],
@@ -53,15 +80,14 @@ const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['sonar-score-models.OwnerUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
   ['sonar-score-model-versions.PublishedByUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
   ['products.ProductTypeID', { reason: 'Points to @mj-biz-apps/orders seeded product types', hits: 0 }],
-  ['products.ProductCategoryID', { reason: 'Points to @mj-biz-apps/orders seeded categories', hits: 0 }],
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
   ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }]
 ]);
 
 console.log('='.repeat(80));
-console.log('       GENERIC METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT       ');
+console.log('       TARGET-AWARE METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT       ');
 console.log('='.repeat(80));
-console.log(`Indexed ${allPrimaryKeys.size.toLocaleString()} unique Primary Keys across ${records.length.toLocaleString()} records.\n`);
+console.log(`Indexed ${allPrimaryKeys.size.toLocaleString()} unique Primary Keys across ${primaryKeysByDir.size} directories and ${records.length.toLocaleString()} records.\n`);
 
 let evaluatedCount = 0;
 const orphanMap = new Map();
@@ -81,9 +107,22 @@ for (const r of records) {
       }
 
       evaluatedCount++;
-      if (!allPrimaryKeys.has(val.toUpperCase())) {
-        if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
-        orphanMap.get(qualifiedKey).push(val);
+      const valUpper = val.toUpperCase();
+
+      // Target-aware check if target directory is known
+      const targetDir = FIELD_TARGET_DIR_MAP.get(fieldName);
+      if (targetDir) {
+        const targetKeys = primaryKeysByDir.get(targetDir);
+        if (!targetKeys || !targetKeys.has(valUpper)) {
+          if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
+          orphanMap.get(qualifiedKey).push(`${val} (expected in metadata/${targetDir})`);
+        }
+      } else {
+        // Fallback global closure check
+        if (!allPrimaryKeys.has(valUpper)) {
+          if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
+          orphanMap.get(qualifiedKey).push(val);
+        }
       }
     }
   }

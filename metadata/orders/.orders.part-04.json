@@ -1,434 +1,62 @@
 [
   {
     "primaryKey": {
-      "ID": "E4C122FC-AC09-53E7-B0D8-A1066991B292"
+      "ID": "6A780F4B-8E80-5E17-8842-F1BEDE8D74F0"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102129-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-101550-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "395697EF-EE56-56DD-B7D6-BA419BEB1A3D",
       "OrderDate": "2026-07-21",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "F016A8B5-7242-5755-91D1-D20DED74F686",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-21",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:33.999Z",
-      "checksum": "20cda8a628583b92b67e13f055b737f230fff7d00153de6092643f7f4427abc8"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "FF81DFB7-142D-529E-9635-B53A626E4944"
+      "ID": "FF83B70B-505A-5BB3-85D2-F591F20446E3"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102368-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-101317-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "F43524F3-3C28-504F-9601-18139CB87784",
       "OrderDate": "2026-07-21",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "9732E62E-F7C2-557F-9FB2-6C577C8C06A7",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-21",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.039Z",
-      "checksum": "8869cd90d019e28b5653afde0d8d5b73a6e6e73074b9547a686a7c55e830dc2e"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "056A3886-07D7-598F-A9E4-73AB4909CC56"
+      "ID": "1A2DADCB-958B-5531-8186-FCB60D41ED0B"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102388-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-101741-EVT-2026-CONF",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "905C32FC-C41E-596C-87CD-1FED71E693FC",
       "OrderDate": "2026-07-21",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "27508C4A-16F9-5AB3-9B98-619B20F408B6",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-21",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.013Z",
-      "checksum": "fcaa25da0269275b9bb732c6404284863d189167116caf49bd143f5126eba129"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "6BD0B768-D0DD-5FBB-A114-84901DBB6BE2"
+      "ID": "8C334ACF-4296-5DD9-AFB5-FF109440EFB9"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100376-EVT-2026-W2",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-101275-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "8B91B7F8-4067-5E5F-91A2-181018350486",
       "OrderDate": "2026-07-21",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "A828D4CF-C2B5-5E39-97A1-2858E71400D7",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-21",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.026Z",
-      "checksum": "9dce1dd6e24242b86e38661dd73b8a2f935c590dda9440d889d933f6c733e531"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "132636D5-B212-5191-910B-B9932BF5FB6D"
-    },
-    "fields": {
-      "OrderNumber": "ORD-D-ICF-100459-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "D1B62727-CF12-5B4E-BB94-C89A64CCB717",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.053Z",
-      "checksum": "cffd9593c935f47187dc5ad1db44ec88cb7ff1b79d85802709cad22792281937"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "0FF20C69-D821-56EC-881A-EC5B961F934A"
-    },
-    "fields": {
-      "OrderNumber": "ORD-D-ICF-102277-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "6B952540-9451-5322-87D8-B62AC4DB309B",
-      "TotalGross": 175,
-      "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.067Z",
-      "checksum": "2d4e517949bee1ee860d1652e460463a1e2831c5a0d32f8a584651cf5c38497c"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "46A7B5C4-48AE-54AF-8179-C562A7D90E8A"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100091-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "1E46E0A7-5F99-5040-94AB-C0AD702940B9",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.080Z",
-      "checksum": "1141416ced3e09642976df9b372aec5c6f2ad688666fd1749cdfd758e623bfab"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "3C4545CD-8701-5EAB-9FA2-0ABE96EC1BDA"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100105-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.094Z",
-      "checksum": "fb49fb22b289f5f52c35525c323019bd0ea909a2428d758904b4dfa94c1dc155"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "2BFDE19E-96AA-5B5D-9192-C10286DF3D7F"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100124-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "72777CB5-AA0B-54DE-9B62-6AA262C711A1",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.110Z",
-      "checksum": "328c5f5aff8d5af3b2894339cee325d5daab282cd45732b201da663f7d74fa43"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "39116337-0E45-5819-AC6E-BF185AE1FC0E"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100187-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "FADA4274-BDE0-5400-93F4-3FB514BF82B5",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.129Z",
-      "checksum": "adb6cbdd108307e4d9033fe2d65dc66aaeaf1576880a23ef3edd0f6106b34c95"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "F28B1AD8-6D7D-51A2-952D-8D85052E32C6"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100191-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "2B92402D-268F-55EC-B137-6EDB838E5AAB",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.297Z",
-      "checksum": "79899cb337b7b18957183efe1c24e64f3f9d88cf6618b89e2db1fe617bc84fba"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "2D423297-8441-5E27-814E-8965552D4814"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100253-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "E857E6EF-B70B-5891-A814-2E746D105664",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.156Z",
-      "checksum": "9e281af3e903405561aaf0674f3219417465eb01a817db7db78b404357af8b73"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "BC460207-76F8-5C36-8174-3E35B76BB0EC"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100293-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "92E30246-47F2-5BE7-81C6-F8CB10B44A48",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.173Z",
-      "checksum": "3750452aa73296fb56d5c600b5c1bfcfe63ab7944bcd1c091c3744cc96cb57b5"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "B3F59972-BE00-5C16-BE8F-2CF3B5EABC6F"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100421-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "F990ACA2-5CD1-518F-BE14-2CBC452DAD18",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.282Z",
-      "checksum": "9e63cd5023d65cd62308ba155b90e1d6eaf674f4f3681a1ba0ee43e8d8ff7b0b"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "12F60450-0676-5F32-8E78-B932B3D4E75C"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100487-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "D5E58D77-0401-58BF-B4E0-78D472994CFE",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.206Z",
-      "checksum": "db817143e089a4ff22eca8918e4d3665d2127738508f075c646ce490906e371a"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "83AC8BF6-816D-56BC-9DAC-DCAEE4CB458A"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100505-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "39AA803B-E87A-587A-88BD-88E1567727CD",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.189Z",
-      "checksum": "0bcd87462140d9a7f9aab28a2f723779663535293014fde66e845cb7b9a751ff"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "E0CD3612-1D85-5172-BFAE-5513EBE9DBB0"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100551-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "65D40948-FA0D-5DB6-9F63-6AB60342F182",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.222Z",
-      "checksum": "bd7cb85715d7806968970e608652509426569296c625ba9e96c504ca18419d33"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "86E59358-E74E-53E5-90B2-BB6CF66772AA"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100555-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "02CC3CD5-9ADF-5DCB-974D-4FCDBD2969E3",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.236Z",
-      "checksum": "2559bf497fac00a732a0dde7122a82209a51139d2b2d6c0cd6487d90d1c15a13"
+      "Balance": 0
     }
   },
   {
@@ -437,118 +65,28 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-100572-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "BE410620-7627-56FB-9EF9-0D08D729C08D",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.252Z",
-      "checksum": "764ae1cdba269909ae491e9dc7107e8790fbbdac03a5b910a88a129530d4d0ba"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "ABE0E06B-09D9-585C-AA85-7CE631D06CF7"
+      "ID": "3C4545CD-8701-5EAB-9FA2-0ABE96EC1BDA"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100652-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-100105-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
       "OrderDate": "2026-07-22",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "4A63543E-99B3-5CA3-A99A-52395A0439FD",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.267Z",
-      "checksum": "fab354b822aaa0e65edf5f6157a4d62e72ba98c7b606129cb5010fc1be6f29ca"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "86F1943B-B351-565B-ACC0-82FA64A72774"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100743-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "2EAC14CD-5552-5A89-AC5B-BB0D92DB4D3E",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.336Z",
-      "checksum": "356e0b66286aec438ae00204f2a1f88e773badca20843228d6ec6ef47ac90017"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "E8B87122-0431-5C28-8D19-359AE823CF85"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100802-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "9A52C824-13BD-5962-9EFE-23CBC177BF0C",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.322Z",
-      "checksum": "48fb0a329abba496d7d17b12bde0dfdc3f48fe457990b5bad205eafb77e7205d"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "C341CF5E-7E9D-5B18-8F9F-76FCD85F437F"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100827-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "A93AF7D8-78BB-53A8-BA92-DFFFB1EBB72C",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.457Z",
-      "checksum": "fd96b4c0e48b02697bbe82118ecd3c0d4667a7c34f4b7e762cdc66a12e14c88c"
+      "Balance": 0
     }
   },
   {
@@ -557,310 +95,28 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-100837-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "461E5FE0-3553-596A-830E-DF7F2E0A4DB4",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.366Z",
-      "checksum": "f6667f6a41ba3a6436189d92378d21676820df077dabaa0e3c75c239a97c3da4"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "87CD03C7-9D00-5B0E-8DCE-A8B2FA7D3C94"
+      "ID": "B3F59972-BE00-5C16-BE8F-2CF3B5EABC6F"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100912-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-100421-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "F990ACA2-5CD1-518F-BE14-2CBC452DAD18",
       "OrderDate": "2026-07-22",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "697542DE-3AAB-545B-BCA2-191D4FB7DCBC",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.351Z",
-      "checksum": "2952373ca0a37c3d30b214e6b564fb7e339ab4903dc20b9180bc87ea62399683"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "44B25DF7-B67E-51F7-A844-E1F7444DB580"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100947-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "66774500-60D9-58E7-BF53-31C105B650A0",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.381Z",
-      "checksum": "6d4f5d15180c2c0d5f956d23cd1f71194432b800b57defe7314ac3cff06b6bb4"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "100D40DE-4848-5400-86C3-753A59CA6B72"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-100979-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "D22C88C1-7443-5C9F-A293-70E261102281",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.401Z",
-      "checksum": "2a8efddcd8342352d5192c39b1801beea6b955b1af120d88e543c18db207fed0"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "013894F7-F8CE-52AD-BC4F-6ED84A3F7927"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101051-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "50E47786-BC69-53BB-9A71-82B9B62DC2B8",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.415Z",
-      "checksum": "c0d843f221b092920cd46228b44fbc6d9f74633da8236fc01df735378b7b4120"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "493C7800-C765-5D8F-80A9-D269E785E628"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101154-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "E9DF753D-CAA1-51E9-955E-5FE79F1DD4FE",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.430Z",
-      "checksum": "1cc1cd13e6fe38af0be6ded4879599bfb25bc0f3ea0a94359b8eac651bc6564d"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "879253E5-7DCD-561C-84AE-B2BDC1798447"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101197-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "DBBD089C-F6EA-5AF6-AEFE-5DD8A4FEB7F1",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.443Z",
-      "checksum": "2e7cd8c33a32db0ebaf808a8c7acf4c8ddb017fed4ad96c84554b1c1ce3c2fe4"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "BE296ED6-A8C1-5BCD-9DFF-F7FA6F3A690B"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101214-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "F38CE90C-BB7E-5144-88B6-FF00E6D6A6D5",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.508Z",
-      "checksum": "a1e05cabc628b9480b2f60d7fd92638d15ac6ddfdc88285ba640f8517d47553a"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "58602156-8E68-5470-8AD0-800956EA02C6"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101219-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "B27676E0-6E7B-53CB-86B4-E6C09F4521A0",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.613Z",
-      "checksum": "b66adb9c485e60e7d86d635d961158c6ce701c9b51335804eae86c2171d69346"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "1DC2E143-8F11-5447-8BC1-E490CDDB2B7D"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101232-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "7FB6D5AE-96DD-5A56-B944-FF1499F04C99",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.480Z",
-      "checksum": "c851c184f5cad3d289e1d81b1a7c54e7a5e54196df1f20c0d8ce23e0331e8404"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "EB876258-0694-5E65-AC43-5FB8BA177736"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101311-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "75B4F179-30FC-5336-97C0-AE76DF4217C4",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.522Z",
-      "checksum": "3c51883d725cda8bf4a9a6b1a573aca31137923d34ced64ce7f85cf8ecad1232"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "D61842AC-69E7-547D-8F2A-CEE9C8CE80B4"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101314-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "098A74FC-0D65-59AD-B4FD-4848E8810B72",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.494Z",
-      "checksum": "166d085de1078b4463408831e734ccaab513a2d91002399bcce86b3e8a3db48f"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "B7E4B2ED-F7AD-5002-903A-BBBC61C861C9"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101333-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "A4D46224-C45B-5295-9DA3-0EF183A5DC9B",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.537Z",
-      "checksum": "1c6a9f94d1f5b4b1414aa39945a55aed3b953be01b28ec322110dc03796ced54"
+      "Balance": 0
     }
   },
   {
@@ -869,190 +125,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-101421-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "6B4BF43A-4C16-5DAD-9EA3-F3EDB4093873",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.568Z",
-      "checksum": "bdf6bcddd17e225661d72f20f4dfdbfff388edb5b673613b7c8b87c19302b4a1"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "D5F32A50-6C1D-5CE3-997D-8F4A66D9F032"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101473-EVT-2026-W1",
-      "OrderType": "Sale",
       "OrderDate": "2026-07-22",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "3233D4A6-A216-5294-99B2-F2F0193ACD29",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.553Z",
-      "checksum": "0320352753f1e625455692097d4c038c6325a447f14774145a10ebc73af9aba6"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "4493D78E-641A-5EB0-8FC8-64819284C0AE"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101613-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "1D942FA5-284D-50F9-9F94-11A871C27C1A",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.583Z",
-      "checksum": "58f4f28493b66f7ada46edc213ccbc959f71a790c312126449d40c023b0cb550"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "8E5B60F1-F6B0-5E8D-B24A-43787EDE50B3"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101623-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "9A63D5B2-BDB1-5C70-BE7F-786922F5D47D",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.598Z",
-      "checksum": "acd30afdd58afd1f65be5f8acd75d04b5c59d02932ca3fe0ddb2e56ba2408ff2"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "B3DE9126-6A82-51E5-8B66-3649EDCD9490"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101713-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "3BCD01BB-7F42-5662-91D5-92A6250B4058",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.667Z",
-      "checksum": "e90ecd74827beb8b4b271fa4bb000fd6fda3280858ce6d131b4bb1fa70f759db"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "C7421B4D-4707-5477-AAB9-600E03926A5C"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101714-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "49DCB9E5-E49E-5903-B00F-1E8C41DCE2FB",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.639Z",
-      "checksum": "b06f60e69d8591d682891808b14aec36a038cbe6805e5ad7b5a0fb7cba137337"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "ED890F5F-CBF9-5852-974E-D5EF5FCE860D"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101716-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "EF64CAD8-A034-5979-B212-5C3E618904BE",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.755Z",
-      "checksum": "136ae24d474a1611f4be8022ebd03e9659014d6672c7bf9c9d2c17d8d51c9f1a"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "4E13B1C1-AC45-5999-B828-9D952817E223"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101759-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "12BB2335-BD8E-5248-B75F-BBFFED7B09A4",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.653Z",
-      "checksum": "93002e9204b80b5f8dae08fb682715233be9a8fa2eace81e04b097c658d0ad37"
+      "Balance": 0
     }
   },
   {
@@ -1061,286 +140,43 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-101814-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "04B5F5B0-9B4F-5B3F-9DE8-186E1AA81EAA",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.682Z",
-      "checksum": "a111110993e3c7caf579310ddfb2bcf6d215f2f86c1278d4bb6ef753b23ca342"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "9D7370A6-9D78-539D-A17D-FA0AB9203C5A"
+      "ID": "E8B87122-0431-5C28-8D19-359AE823CF85"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101866-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-100802-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "9A52C824-13BD-5962-9EFE-23CBC177BF0C",
       "OrderDate": "2026-07-22",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "F6DCA4C5-795D-58E6-93BE-64F7676CEB08",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.712Z",
-      "checksum": "74b791928df3cbcc0fc6f136e6a54e353a39acec5323f1ff6fac6f1d513b683a"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "FA306153-C5C6-57D5-BED1-C92157E631F9"
+      "ID": "B3DE9126-6A82-51E5-8B66-3649EDCD9490"
     },
     "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-101984-EVT-2026-W1",
-      "OrderType": "Sale",
+      "OrderNumber": "ORD-E-REG-ICF-101713-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "3BCD01BB-7F42-5662-91D5-92A6250B4058",
       "OrderDate": "2026-07-22",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "F1D7D14B-C981-5D84-B38A-328D02153AA8",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.697Z",
-      "checksum": "7d76206bcf6e2bb7c3bb6ae2a34f41fa667be43dddc321a298460e6d16b7d7bb"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "89D18BE2-8751-55C3-9390-EF849C7F5D2B"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102006-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "C42B12B4-04E1-57C0-A286-962978C71D08",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.770Z",
-      "checksum": "b45a95c03b49afb3129df516a261a93a27497a925c50840fc7fd223790de8f42"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "3932B065-D38E-59B9-91C0-A9F6E221B412"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102022-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "7B0BA561-D7D8-5CE3-82A4-0FF36B295287",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.726Z",
-      "checksum": "298784449beaebb2e20c2fc7a48009c32414808dad2022ee2e43c5d27d4e76ab"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "EEB8CA9B-4012-55C7-B24C-C78F956FDB0D"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102074-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "6C75BE62-3A10-5467-857F-58BAD48FB088",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.741Z",
-      "checksum": "ed0cabd21881a7bfe54f33e939496f3333ea88b8187e7459704fe237ea458df2"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "A17B5725-0A1E-526B-A523-B8C5A428AA19"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102096-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "E62F4FA1-53B4-5DB2-B328-1794B3FB7605",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.866Z",
-      "checksum": "eff9a551bb44829c4e4c693cf3af518ac2e00d6337ee3a0ae1add171e72d9a93"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "1FBBB9B7-AC84-5BDD-8ED4-B3AA7576F90F"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102119-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "EEF7EE8A-8EBB-53F8-966C-16DA5B7BCAB5",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.794Z",
-      "checksum": "26ed8c78dde852e837ef1ebde31aefe9d6069737f33f5dfa05240f7d1852cd6b"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "1BDD94C9-27F8-5FEB-8174-9F0E74D2FB28"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102124-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "05EEF8D9-EC1C-597E-B61A-95148B1231CA",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.935Z",
-      "checksum": "5cb475dee43f41cfb38a6cc8ff836155fd36ad30007a8c27314b9490a83adb4f"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "EA6C1956-A4FA-5D9B-B3D7-915C66E1FF62"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102314-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "977DA27B-57D5-5951-8A0A-A5788F7F01AD",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.808Z",
-      "checksum": "bc26f9fae087b28f669585b375c16071ed33876c9128ecb8999327616b0e381a"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "864C778B-225A-50AE-8EA0-ACB84B502ABD"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102320-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "1CEAB292-47F7-55E5-A956-0FEF2C7D62A9",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.821Z",
-      "checksum": "a237bed72701d62b09c3985c3c39620ffe97c0a949bbbd78ca7f103fedaed89a"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "56329BC3-3734-5868-8DB3-7381077634D4"
-    },
-    "fields": {
-      "OrderNumber": "ORD-E-REG-ICF-102398-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "6CC1882A-089B-545D-A994-69E0711418AC",
-      "TotalGross": 150,
-      "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.837Z",
-      "checksum": "55559959dea64463280fb3ef60391476ee8b756da5832538254cec628fcb0b4f"
+      "Balance": 0
     }
   },
   {
@@ -1349,22 +185,673 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-102447-EVT-2026-W1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-22",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "A8F9ABF9-89DD-57DC-997A-8B034CF75CFD",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC460207-76F8-5C36-8174-3E35B76BB0EC"
     },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.851Z",
-      "checksum": "9cff21f598f5f8f0c06c0a31a42735d556d73fdd6b6f845dae1c66af63d950dc"
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100293-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "92E30246-47F2-5BE7-81C6-F8CB10B44A48",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E5B60F1-F6B0-5E8D-B24A-43787EDE50B3"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101623-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "9A63D5B2-BDB1-5C70-BE7F-786922F5D47D",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E0CD3612-1D85-5172-BFAE-5513EBE9DBB0"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100551-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "65D40948-FA0D-5DB6-9F63-6AB60342F182",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EB876258-0694-5E65-AC43-5FB8BA177736"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101311-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "75B4F179-30FC-5336-97C0-AE76DF4217C4",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C7421B4D-4707-5477-AAB9-600E03926A5C"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101714-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "49DCB9E5-E49E-5903-B00F-1E8C41DCE2FB",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4493D78E-641A-5EB0-8FC8-64819284C0AE"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101613-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "1D942FA5-284D-50F9-9F94-11A871C27C1A",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "013894F7-F8CE-52AD-BC4F-6ED84A3F7927"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101051-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "50E47786-BC69-53BB-9A71-82B9B62DC2B8",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "56329BC3-3734-5868-8DB3-7381077634D4"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102398-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "6CC1882A-089B-545D-A994-69E0711418AC",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "100D40DE-4848-5400-86C3-753A59CA6B72"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100979-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "D22C88C1-7443-5C9F-A293-70E261102281",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C341CF5E-7E9D-5B18-8F9F-76FCD85F437F"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100827-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "A93AF7D8-78BB-53A8-BA92-DFFFB1EBB72C",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ABE0E06B-09D9-585C-AA85-7CE631D06CF7"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100652-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "4A63543E-99B3-5CA3-A99A-52395A0439FD",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "58602156-8E68-5470-8AD0-800956EA02C6"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101219-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "B27676E0-6E7B-53CB-86B4-E6C09F4521A0",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "86F1943B-B351-565B-ACC0-82FA64A72774"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100743-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "2EAC14CD-5552-5A89-AC5B-BB0D92DB4D3E",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2D423297-8441-5E27-814E-8965552D4814"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100253-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "E857E6EF-B70B-5891-A814-2E746D105664",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F28B1AD8-6D7D-51A2-952D-8D85052E32C6"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100191-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "2B92402D-268F-55EC-B137-6EDB838E5AAB",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D5F32A50-6C1D-5CE3-997D-8F4A66D9F032"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101473-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "3233D4A6-A216-5294-99B2-F2F0193ACD29",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EA6C1956-A4FA-5D9B-B3D7-915C66E1FF62"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102314-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "977DA27B-57D5-5951-8A0A-A5788F7F01AD",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E13B1C1-AC45-5999-B828-9D952817E223"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101759-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "12BB2335-BD8E-5248-B75F-BBFFED7B09A4",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1BDD94C9-27F8-5FEB-8174-9F0E74D2FB28"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102124-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "05EEF8D9-EC1C-597E-B61A-95148B1231CA",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "87CD03C7-9D00-5B0E-8DCE-A8B2FA7D3C94"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100912-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "697542DE-3AAB-545B-BCA2-191D4FB7DCBC",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3932B065-D38E-59B9-91C0-A9F6E221B412"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102022-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "7B0BA561-D7D8-5CE3-82A4-0FF36B295287",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "864C778B-225A-50AE-8EA0-ACB84B502ABD"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102320-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "1CEAB292-47F7-55E5-A956-0FEF2C7D62A9",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "879253E5-7DCD-561C-84AE-B2BDC1798447"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101197-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "DBBD089C-F6EA-5AF6-AEFE-5DD8A4FEB7F1",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1FBBB9B7-AC84-5BDD-8ED4-B3AA7576F90F"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102119-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "EEF7EE8A-8EBB-53F8-966C-16DA5B7BCAB5",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A17B5725-0A1E-526B-A523-B8C5A428AA19"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102096-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "E62F4FA1-53B4-5DB2-B328-1794B3FB7605",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "12F60450-0676-5F32-8E78-B932B3D4E75C"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100487-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "D5E58D77-0401-58BF-B4E0-78D472994CFE",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "132636D5-B212-5191-910B-B9932BF5FB6D"
+    },
+    "fields": {
+      "OrderNumber": "ORD-D-ICF-100459-P1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "D1B62727-CF12-5B4E-BB94-C89A64CCB717",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "86E59358-E74E-53E5-90B2-BB6CF66772AA"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100555-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "02CC3CD5-9ADF-5DCB-974D-4FCDBD2969E3",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B7E4B2ED-F7AD-5002-903A-BBBC61C861C9"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101333-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "A4D46224-C45B-5295-9DA3-0EF183A5DC9B",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39116337-0E45-5819-AC6E-BF185AE1FC0E"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100187-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "FADA4274-BDE0-5400-93F4-3FB514BF82B5",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2BFDE19E-96AA-5B5D-9192-C10286DF3D7F"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100124-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "72777CB5-AA0B-54DE-9B62-6AA262C711A1",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46A7B5C4-48AE-54AF-8179-C562A7D90E8A"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100091-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "1E46E0A7-5F99-5040-94AB-C0AD702940B9",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EEB8CA9B-4012-55C7-B24C-C78F956FDB0D"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102074-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "6C75BE62-3A10-5467-857F-58BAD48FB088",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FA306153-C5C6-57D5-BED1-C92157E631F9"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101984-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "F1D7D14B-C981-5D84-B38A-328D02153AA8",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D61842AC-69E7-547D-8F2A-CEE9C8CE80B4"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101314-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "098A74FC-0D65-59AD-B4FD-4848E8810B72",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "493C7800-C765-5D8F-80A9-D269E785E628"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101154-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "E9DF753D-CAA1-51E9-955E-5FE79F1DD4FE",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ED890F5F-CBF9-5852-974E-D5EF5FCE860D"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101716-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "EF64CAD8-A034-5979-B212-5C3E618904BE",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83AC8BF6-816D-56BC-9DAC-DCAEE4CB458A"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100505-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "39AA803B-E87A-587A-88BD-88E1567727CD",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44B25DF7-B67E-51F7-A844-E1F7444DB580"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-100947-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "66774500-60D9-58E7-BF53-31C105B650A0",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1DC2E143-8F11-5447-8BC1-E490CDDB2B7D"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101232-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "7FB6D5AE-96DD-5A56-B944-FF1499F04C99",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0FF20C69-D821-56EC-881A-EC5B961F934A"
+    },
+    "fields": {
+      "OrderNumber": "ORD-D-ICF-102277-P1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "6B952540-9451-5322-87D8-B62AC4DB309B",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "89D18BE2-8751-55C3-9390-EF849C7F5D2B"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-102006-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "C42B12B4-04E1-57C0-A286-962978C71D08",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BE296ED6-A8C1-5BCD-9DFF-F7FA6F3A690B"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101214-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "F38CE90C-BB7E-5144-88B6-FF00E6D6A6D5",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D7370A6-9D78-539D-A17D-FA0AB9203C5A"
+    },
+    "fields": {
+      "OrderNumber": "ORD-E-REG-ICF-101866-EVT-2026-W1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "F6DCA4C5-795D-58E6-93BE-64F7676CEB08",
+      "OrderDate": "2026-07-22",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
     }
   },
   {
@@ -1373,22 +860,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-000102",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-23",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1B9C43A3-7290-522E-B8B2-0DF886F32ED1",
-      "TotalGross": 175,
+      "OrderDate": "2026-07-23",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-22",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.886Z",
-      "checksum": "642611c24de47cae09c9852198cd156849251fa0218cb73c6ab9b081ba349e61"
+      "Balance": 0
     }
   },
   {
@@ -1397,94 +875,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101287-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-23",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "12A9DF03-1A19-592F-8AF2-48AED723A1F7",
-      "TotalGross": 175,
-      "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-07-23",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.903Z",
-      "checksum": "5eedfed68c467baa45b2398dfffe4bbe9cb3ee901f1c750b61dc91f9ebb60a28"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "88E4A279-442B-52B4-B1EE-CCDD0B4CFFBD"
-    },
-    "fields": {
-      "OrderNumber": "ORD-D-ICF-100869-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-24",
+      "OrderDate": "2026-07-23",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "620847B8-51C6-5207-9317-7A562B28194E",
-      "TotalGross": 175,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-07-24",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.919Z",
-      "checksum": "b7e153fbcf7d56dfa923024d26a19d741f12f0aaad1224259b7b317142150d1d"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "66760165-1065-5C0C-8E9F-53A9A9EED01D"
-    },
-    "fields": {
-      "OrderNumber": "ORD-R-ICF-101814",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-24",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "04B5F5B0-9B4F-5B3F-9DE8-186E1AA81EAA",
-      "TotalGross": 175,
-      "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-23",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.963Z",
-      "checksum": "b7d43ca05ca1d5441abb5f83d4470556d5879fda296605005dd57a6accc2a6e3"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "4DD886B5-BB93-5EA2-899D-5B3E83E48A15"
-    },
-    "fields": {
-      "OrderNumber": "ORD-R-ICF-101989",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-24",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "2D77AF7D-0C54-5CFC-9B48-67F135EF7AA5",
-      "TotalGross": 175,
-      "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-23",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.977Z",
-      "checksum": "179eb0429876c311070b0f93ce8006e3ca627977fea22c7ff18c7fb9fb781ee7"
+      "Balance": 0
     }
   },
   {
@@ -1493,22 +890,43 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-102005",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-24",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "8600E3D5-733D-580B-A828-3DFC9FC3159D",
-      "TotalGross": 1000,
+      "OrderDate": "2026-07-24",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 1000,
-      "DueDate": "2026-08-23",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "66760165-1065-5C0C-8E9F-53A9A9EED01D"
     },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.023Z",
-      "checksum": "0781d3b770fc825d8a26abe096030cd94b360887ba9e4c349d2ecd44e91037fd"
+    "fields": {
+      "OrderNumber": "ORD-R-ICF-101814",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "04B5F5B0-9B4F-5B3F-9DE8-186E1AA81EAA",
+      "OrderDate": "2026-07-24",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4DD886B5-BB93-5EA2-899D-5B3E83E48A15"
+    },
+    "fields": {
+      "OrderNumber": "ORD-R-ICF-101989",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "2D77AF7D-0C54-5CFC-9B48-67F135EF7AA5",
+      "OrderDate": "2026-07-24",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
     }
   },
   {
@@ -1517,94 +935,28 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-100282-EVT-2026-W5",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-24",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "93BC564D-4C25-5720-A772-83AB6D420586",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-24",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-24",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:34.992Z",
-      "checksum": "2ffa7ed2309992323b88044f0b716a01f68f862c843c1f3eb87950ee34ecf7c5"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "892AB4F2-0996-5521-B183-F0DAA3B96FB1"
+      "ID": "88E4A279-442B-52B4-B1EE-CCDD0B4CFFBD"
     },
     "fields": {
-      "OrderNumber": "ORD-D-ICF-100399-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-25",
-      "Status": "Draft",
+      "OrderNumber": "ORD-D-ICF-100869-P1",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "920348FE-7997-5C81-BAB2-1C12479FE3AA",
-      "TotalGross": 260,
-      "AmountPaid": 0,
-      "Balance": 260,
-      "DueDate": "2026-07-25",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.007Z",
-      "checksum": "9bb3d4870e38e00a7b575b0ae0090b39c1d136fa9b6acd7feadb810723fde661"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "4107E5AC-B357-545D-A9B5-CAFB78C7719B"
-    },
-    "fields": {
-      "OrderNumber": "ORD-R-ICF-100417",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-25",
+      "BillToPersonID": "620847B8-51C6-5207-9317-7A562B28194E",
+      "OrderDate": "2026-07-24",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "820AA130-FF14-5869-9E7F-F10A5E28D5C1",
-      "TotalGross": 150,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-08-24",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.038Z",
-      "checksum": "522d9569fb5a06c0e6f9430ce9acbb63e8c94c192da25e72bfbe5627b9a21a97"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "6717E1C2-04C1-57FE-9350-DE90951849C8"
-    },
-    "fields": {
-      "OrderNumber": "ORD-D-ICF-101335-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-25",
-      "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "220EC1B3-D193-59DC-9C2E-0386C4AD9B80",
-      "TotalGross": 175,
-      "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-07-25",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.054Z",
-      "checksum": "24dda36906ad5ceb3c70d3abe8847e563e3e4587a6a3a97a7d277676a7c5c81e"
+      "Balance": 0
     }
   },
   {
@@ -1613,22 +965,58 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-100897-EVT-2026-W5",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-25",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "A31FE0CD-1759-50C0-9D91-0EB5D17239B2",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-25",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-25",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4107E5AC-B357-545D-A9B5-CAFB78C7719B"
     },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.070Z",
-      "checksum": "aaca374713a64663bf3bff5b4b079a313d09e480f6755e81f8881a10dc252569"
+    "fields": {
+      "OrderNumber": "ORD-R-ICF-100417",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "820AA130-FF14-5869-9E7F-F10A5E28D5C1",
+      "OrderDate": "2026-07-25",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6717E1C2-04C1-57FE-9350-DE90951849C8"
+    },
+    "fields": {
+      "OrderNumber": "ORD-D-ICF-101335-P1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "220EC1B3-D193-59DC-9C2E-0386C4AD9B80",
+      "OrderDate": "2026-07-25",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "892AB4F2-0996-5521-B183-F0DAA3B96FB1"
+    },
+    "fields": {
+      "OrderNumber": "ORD-D-ICF-100399-P1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "920348FE-7997-5C81-BAB2-1C12479FE3AA",
+      "OrderDate": "2026-07-25",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
     }
   },
   {
@@ -1637,46 +1025,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-100629",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-26",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "7181B812-5155-59DD-9F32-3820FFD03551",
-      "TotalGross": 175,
-      "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-25",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.085Z",
-      "checksum": "d95349e45d6ad53df26bd0e17652fef7ac5f4ce54c946cb828f67ade75243241"
-    }
-  },
-  {
-    "primaryKey": {
-      "ID": "12DBE7E4-C771-5E21-9F2F-FB6D7C8410D7"
-    },
-    "fields": {
-      "OrderNumber": "ORD-R-ICF-102132",
-      "OrderType": "Sale",
       "OrderDate": "2026-07-26",
       "Status": "Draft",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "1A9580BC-2009-59D6-98FA-4DA50ED4719A",
-      "TotalGross": 1000,
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 1000,
-      "DueDate": "2026-08-25",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.099Z",
-      "checksum": "c3d35839f8c7754194e626272172b11c75fb691a7acccb4e0aa20c0230a2943f"
+      "Balance": 0
     }
   },
   {
@@ -1685,46 +1040,28 @@
     },
     "fields": {
       "OrderNumber": "ORD-E-REG-ICF-102020-EVT-2026-W5",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-26",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C37ED65A-3CC0-529A-AB23-E5FFDC823832",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-26",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-07-26",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.251Z",
-      "checksum": "2b08f98dee4966fbba9ef531ba1b67837c55eb1dba86b11b626c70d38b928334"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "AC2734F7-95B1-50ED-9C1F-D1DE37AA07CE"
+      "ID": "12DBE7E4-C771-5E21-9F2F-FB6D7C8410D7"
     },
     "fields": {
-      "OrderNumber": "ORD-R-ICF-102021",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-27",
-      "Status": "Draft",
+      "OrderNumber": "ORD-R-ICF-102132",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "0C34716B-7CB9-5CAD-A331-F62CD9DDE8FB",
-      "TotalGross": 175,
+      "BillToPersonID": "1A9580BC-2009-59D6-98FA-4DA50ED4719A",
+      "OrderDate": "2026-07-26",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-26",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.124Z",
-      "checksum": "e9821c5819a5728fc9f2003d4a9134decf7a801f3d6989c6837e4935b5afcc98"
+      "Balance": 0
     }
   },
   {
@@ -1733,22 +1070,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-102036",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-27",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3E97E06E-CE15-56C5-8A9F-7ACB02375D78",
-      "TotalGross": 175,
+      "OrderDate": "2026-07-27",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-26",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.170Z",
-      "checksum": "243bb622c76b98f1920d2c5017eeec71603eb23ac006079c658c069f975a15d7"
+      "Balance": 0
     }
   },
   {
@@ -1757,46 +1085,28 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-102487",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-27",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "4D962747-2D84-5631-8809-E4772A3C5552",
-      "TotalGross": 150,
+      "OrderDate": "2026-07-27",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 150,
-      "DueDate": "2026-08-26",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.234Z",
-      "checksum": "740bcaa803a28a024e59586d65c6ccc54fb7b3156033273489eeef72cab011aa"
+      "Balance": 0
     }
   },
   {
     "primaryKey": {
-      "ID": "91A76485-AB52-5561-8A22-C4E373AA4DA8"
+      "ID": "AC2734F7-95B1-50ED-9C1F-D1DE37AA07CE"
     },
     "fields": {
-      "OrderNumber": "ORD-D-ICF-101346-P1",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-28",
-      "Status": "Draft",
+      "OrderNumber": "ORD-R-ICF-102021",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
-      "BillToPersonID": "3EDC55F4-6AF4-587E-BE85-7E078AC761F2",
-      "TotalGross": 235,
+      "BillToPersonID": "0C34716B-7CB9-5CAD-A331-F62CD9DDE8FB",
+      "OrderDate": "2026-07-27",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 235,
-      "DueDate": "2026-07-28",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.140Z",
-      "checksum": "d6d9fcf329ff2a1011d1996c5cdc673fd6f5147fcfb12bb45da3ed97655a6700"
+      "Balance": 0
     }
   },
   {
@@ -1805,22 +1115,28 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-101804",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-28",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "28C130FE-EB16-5D78-833B-D7607FC5A92F",
-      "TotalGross": 1000,
+      "OrderDate": "2026-07-28",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 1000,
-      "DueDate": "2026-08-27",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
+      "Balance": 0
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91A76485-AB52-5561-8A22-C4E373AA4DA8"
     },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.156Z",
-      "checksum": "cc77ef7da8e11a683bd34daee871d5a03318a5a983fec57dcb3a0d736e51a85a"
+    "fields": {
+      "OrderNumber": "ORD-D-ICF-101346-P1",
+      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "BillToPersonID": "3EDC55F4-6AF4-587E-BE85-7E078AC761F2",
+      "OrderDate": "2026-07-28",
+      "Status": "Draft",
+      "TotalGross": 0,
+      "AmountPaid": 0,
+      "Balance": 0
     }
   },
   {
@@ -1829,22 +1145,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-101365",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-29",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3A9B968A-0FF7-51BC-981E-6FA4505C057D",
-      "TotalGross": 175,
+      "OrderDate": "2026-07-29",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-28",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.186Z",
-      "checksum": "9e8b714f897c412d4e7600e52c7b325161b221115b2cb706dd4f28a0a81a2a65"
+      "Balance": 0
     }
   },
   {
@@ -1853,22 +1160,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-101734",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-29",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "07A1FEBA-F9D2-5FA0-AC52-AAE64A4E0136",
-      "TotalGross": 175,
+      "OrderDate": "2026-07-29",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-28",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.202Z",
-      "checksum": "3df1c4df69173e2e5bdb62aaf5eb060288e428ab79d53068620a2d336d56f884"
+      "Balance": 0
     }
   },
   {
@@ -1877,22 +1175,13 @@
     },
     "fields": {
       "OrderNumber": "ORD-R-ICF-100288",
-      "OrderType": "Sale",
-      "OrderDate": "2026-07-30",
-      "Status": "Draft",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "A4FB5DED-12D5-5616-95C1-5C5F57622B80",
-      "TotalGross": 175,
+      "OrderDate": "2026-07-30",
+      "Status": "Draft",
+      "TotalGross": 0,
       "AmountPaid": 0,
-      "Balance": 175,
-      "DueDate": "2026-08-29",
-      "Origin": "Online",
-      "FulfillmentStatus": "Pending",
-      "InitialPaymentAmount": 0
-    },
-    "sync": {
-      "lastModified": "2026-09-03T18:51:35.218Z",
-      "checksum": "b056eb726cba5e988ba25d6ff5738f368e3417eca9c47ce0daef695771c8b1fe"
+      "Balance": 0
     }
   }
 ]

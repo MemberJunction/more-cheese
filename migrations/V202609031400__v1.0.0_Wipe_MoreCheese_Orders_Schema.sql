@@ -3,6 +3,15 @@
 -- Description: Completely wipes and retires morecheese_orders schema and tables.
 -- Commercial primitives (Products, Orders, Order Lines, Payments) have migrated
 -- to upstream @mj-biz-apps/orders (__mj_BizAppsOrders).
+--
+-- UPSTREAM DEPENDENCIES (HARD PREREQUISITE):
+--   Requires @mj-biz-apps/orders schema migrations (V202607061432+ / __mj_BizAppsOrders)
+--   to be applied prior to executing this script.
+--
+-- BREAKING CHANGE POLICY STATEMENT:
+--   Per architectural directive, no backward compatibility shims or dual-schema
+--   redundancies are retained. Duplicate commercial entities are completely wiped,
+--   and all commerce metadata is delivered exclusively through @mj-biz-apps/orders.
 -- =============================================================================
 
 -- 1. Drop Foreign Key Constraints

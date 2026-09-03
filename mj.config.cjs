@@ -71,7 +71,7 @@ module.exports = {
   // against MJ core (__mj) or system schemas from an app repo.
   // Include schemas for dependencies to avoid generating duplicate entities for 
   // them. See docs/template-docs/codegen-and-metadata-migrations.md.
-  excludeSchemas: ['sys', 'staging', 'dbo', '__mj', '__mj_UDT', 'sample_app', 'AssociationDemo', 'Bookstore'],
+  includeSchemas: ['morecheese_members', 'morecheese_events', 'morecheese_learning'],
 
   // ==========================================================================
   // SQL output for migrations — RECOMMENDED
