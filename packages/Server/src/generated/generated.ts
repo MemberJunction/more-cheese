@@ -7,7 +7,7 @@
 *   >>> THE NEXT TIME THIS FILE IS GENERATED
 *
 **********************************************************************************/
-import { Arg, Ctx, Int, Query, Resolver, Field, Float, ObjectType, FieldResolver, Root, InputType, Mutation,
+import { Arg, Ctx, Int, Query, Resolver, Field, Float, ObjectType, InputType, Mutation,
             PubSub, PubSubEngine, ResolverBase, RunViewByIDInput, RunViewByNameInput, RunDynamicViewInput,
             AppContext, KeyValuePairInput, DeleteOptionsInput, GraphQLTimestamp as Timestamp,
             GetReadOnlyProvider, GetReadWriteProvider, RestoreContextInput } from '@memberjunction/server';
@@ -17,7 +17,7 @@ import { MaxLength } from 'class-validator';
 import * as mj_core_schema_server_object_types from '@memberjunction/server'
 
 
-import { morecheesemembersAdvocacyActionEntity, morecheeselearningCertificationEntity, morecheeseeventsCompetitionEntryEntity, morecheeselearningCourseEnrollmentEntity, morecheeselearningCourseEntity, morecheesemembersDataQualityLabelEntity, morecheeseeventsEventRegistrationEntity, morecheeseeventsEventEntity, morecheeselearningMemberCertificationEntity, morecheesemembersMemberProfileEntity, morecheesemembersMembershipPeriodEntity, morecheeseordersOrderLineEntity, morecheeseordersOrderEntity, morecheesemembersOrganizationProfileEntity, morecheeseordersPaymentEntity, morecheeseordersProductEntity } from '@mj-more-cheese-demo/entities';
+import { morecheesemembersAdvocacyActionEntity, morecheeselearningCertificationEntity, morecheeseeventsCompetitionEntryEntity, morecheeselearningCourseEnrollmentEntity, morecheeselearningCourseEntity, morecheesemembersDataQualityLabelEntity, morecheeseeventsEventRegistrationEntity, morecheeseeventsEventEntity, morecheeselearningMemberCertificationEntity, morecheesemembersMemberProfileEntity, morecheesemembersMembershipPeriodEntity, morecheesemembersOrganizationProfileEntity } from '@mj-more-cheese-demo/entities';
     
 
 //****************************************************************************
@@ -245,9 +245,6 @@ export class morecheeselearningCertification_ {
     @Field() 
     _mj__UpdatedAt: Date;
         
-    @Field(() => [morecheeselearningMemberCertification_])
-    morecheeselearningMoreCheese_MemberCertifications_CertificationIDArray: morecheeselearningMemberCertification_[]; // Link to morecheeselearningMoreCheese_MemberCertifications
-    
 }
 
 //****************************************************************************
@@ -365,16 +362,6 @@ export class morecheeselearningCertificationResolver extends ResolverBase {
         return result;
     }
     
-    @FieldResolver(() => [morecheeselearningMemberCertification_])
-    async morecheeselearningMoreCheese_MemberCertifications_CertificationIDArray(@Root() morecheeselearningcertification_: morecheeselearningCertification_, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        this.CheckUserReadPermissions('MoreCheese: Member Certifications', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_learning', 'vwMemberCertifications')} WHERE ${provider.QuoteIdentifier('CertificationID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Member Certifications', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [morecheeselearningcertification_.ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.ArrayMapFieldNamesToCodeNames('MoreCheese: Member Certifications', rows, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-        
     @Mutation(() => morecheeselearningCertification_)
     async CreatemorecheeselearningCertification(
         @Arg('input', () => CreatemorecheeselearningCertificationInput) input: CreatemorecheeselearningCertificationInput,
@@ -859,9 +846,6 @@ export class morecheeselearningCourse_ {
     @Field() 
     _mj__UpdatedAt: Date;
         
-    @Field(() => [morecheeselearningCourseEnrollment_])
-    morecheeselearningMoreCheese_CourseEnrollments_CourseIDArray: morecheeselearningCourseEnrollment_[]; // Link to morecheeselearningMoreCheese_CourseEnrollments
-    
 }
 
 //****************************************************************************
@@ -979,16 +963,6 @@ export class morecheeselearningCourseResolver extends ResolverBase {
         return result;
     }
     
-    @FieldResolver(() => [morecheeselearningCourseEnrollment_])
-    async morecheeselearningMoreCheese_CourseEnrollments_CourseIDArray(@Root() morecheeselearningcourse_: morecheeselearningCourse_, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        this.CheckUserReadPermissions('MoreCheese: Course Enrollments', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_learning', 'vwCourseEnrollments')} WHERE ${provider.QuoteIdentifier('CourseID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Course Enrollments', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [morecheeselearningcourse_.ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.ArrayMapFieldNamesToCodeNames('MoreCheese: Course Enrollments', rows, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-        
     @Mutation(() => morecheeselearningCourse_)
     async CreatemorecheeselearningCourse(
         @Arg('input', () => CreatemorecheeselearningCourseInput) input: CreatemorecheeselearningCourseInput,
@@ -1499,9 +1473,6 @@ export class morecheeseeventsEvent_ {
     @Field() 
     _mj__UpdatedAt: Date;
         
-    @Field(() => [morecheeseeventsEventRegistration_])
-    morecheeseeventsMoreCheese_EventRegistrations_EventIDArray: morecheeseeventsEventRegistration_[]; // Link to morecheeseeventsMoreCheese_EventRegistrations
-    
 }
 
 //****************************************************************************
@@ -1655,16 +1626,6 @@ export class morecheeseeventsEventResolver extends ResolverBase {
         return result;
     }
     
-    @FieldResolver(() => [morecheeseeventsEventRegistration_])
-    async morecheeseeventsMoreCheese_EventRegistrations_EventIDArray(@Root() morecheeseeventsevent_: morecheeseeventsEvent_, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        this.CheckUserReadPermissions('MoreCheese: Event Registrations', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_events', 'vwEventRegistrations')} WHERE ${provider.QuoteIdentifier('EventID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Event Registrations', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [morecheeseeventsevent_.ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.ArrayMapFieldNamesToCodeNames('MoreCheese: Event Registrations', rows, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-        
     @Mutation(() => morecheeseeventsEvent_)
     async CreatemorecheeseeventsEvent(
         @Arg('input', () => CreatemorecheeseeventsEventInput) input: CreatemorecheeseeventsEventInput,
@@ -1938,32 +1899,6 @@ export class morecheesemembersMemberProfile_ {
     @MaxLength(50)
     Region: string;
         
-    @Field({description: `Member city (real city; drives the member map)`}) 
-    @MaxLength(100)
-    City: string;
-        
-    @Field({description: `Member state/country code`}) 
-    @MaxLength(50)
-    State: string;
-        
-    @Field(() => Float, {description: `Member latitude, pre-baked for the map`}) 
-    Latitude: number;
-        
-    @Field(() => Float, {description: `Member longitude, pre-baked for the map`}) 
-    Longitude: number;
-        
-    @Field({description: `Date the member first joined the federation`}) 
-    JoinDate: Date;
-        
-    @Field(() => Boolean, {description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
-    IsSharedDemo: boolean;
-        
-    @Field() 
-    _mj__CreatedAt: Date;
-        
-    @Field() 
-    _mj__UpdatedAt: Date;
-        
     @Field({nullable: true}) 
     @MaxLength(2)
     Country?: string;
@@ -1971,6 +1906,14 @@ export class morecheesemembersMemberProfile_ {
     @Field({nullable: true}) 
     @MaxLength(100)
     CountryName?: string;
+        
+    @Field({description: `Member city (real city; drives the member map)`}) 
+    @MaxLength(100)
+    City: string;
+        
+    @Field({description: `Member state/country code`}) 
+    @MaxLength(50)
+    State: string;
         
     @Field({nullable: true}) 
     @MaxLength(200)
@@ -1983,6 +1926,15 @@ export class morecheesemembersMemberProfile_ {
     @Field({nullable: true}) 
     @MaxLength(20)
     PostalCode?: string;
+        
+    @Field(() => Float, {description: `Member latitude, pre-baked for the map`}) 
+    Latitude: number;
+        
+    @Field(() => Float, {description: `Member longitude, pre-baked for the map`}) 
+    Longitude: number;
+        
+    @Field({description: `Date the member first joined the federation`}) 
+    JoinDate: Date;
         
     @Field({nullable: true}) 
     @MaxLength(200)
@@ -2000,6 +1952,15 @@ export class morecheesemembersMemberProfile_ {
     @MaxLength(50)
     PrimaryLanguage?: string;
         
+    @Field(() => Boolean, {description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
+    IsSharedDemo: boolean;
+        
+    @Field() 
+    _mj__CreatedAt: Date;
+        
+    @Field() 
+    _mj__UpdatedAt: Date;
+        
     @Field() 
     @MaxLength(201)
     Person: string;
@@ -2007,6 +1968,12 @@ export class morecheesemembersMemberProfile_ {
     @Field({nullable: true}) 
     @MaxLength(255)
     Organization?: string;
+        
+    @Field(() => Float) 
+    _mj__Latitude: number;
+        
+    @Field(() => Float) 
+    _mj__Longitude: number;
         
 }
 
@@ -2034,28 +2001,16 @@ export class CreatemorecheesemembersMemberProfileInput {
     Region?: string;
 
     @Field({ nullable: true })
-    City?: string;
-
-    @Field({ nullable: true })
-    State?: string;
-
-    @Field(() => Float, { nullable: true })
-    Latitude?: number;
-
-    @Field(() => Float, { nullable: true })
-    Longitude?: number;
-
-    @Field({ nullable: true })
-    JoinDate?: Date;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field({ nullable: true })
     Country: string | null;
 
     @Field({ nullable: true })
     CountryName: string | null;
+
+    @Field({ nullable: true })
+    City?: string;
+
+    @Field({ nullable: true })
+    State?: string;
 
     @Field({ nullable: true })
     AddressLine1: string | null;
@@ -2065,6 +2020,15 @@ export class CreatemorecheesemembersMemberProfileInput {
 
     @Field({ nullable: true })
     PostalCode: string | null;
+
+    @Field(() => Float, { nullable: true })
+    Latitude?: number;
+
+    @Field(() => Float, { nullable: true })
+    Longitude?: number;
+
+    @Field({ nullable: true })
+    JoinDate?: Date;
 
     @Field({ nullable: true })
     RaceEthnicity: string | null;
@@ -2077,6 +2041,9 @@ export class CreatemorecheesemembersMemberProfileInput {
 
     @Field({ nullable: true })
     PrimaryLanguage: string | null;
+
+    @Field(() => Boolean, { nullable: true })
+    IsSharedDemo?: boolean;
 
     @Field(() => RestoreContextInput, { nullable: true })
     RestoreContext___?: RestoreContextInput;
@@ -2107,28 +2074,16 @@ export class UpdatemorecheesemembersMemberProfileInput {
     Region?: string;
 
     @Field({ nullable: true })
-    City?: string;
-
-    @Field({ nullable: true })
-    State?: string;
-
-    @Field(() => Float, { nullable: true })
-    Latitude?: number;
-
-    @Field(() => Float, { nullable: true })
-    Longitude?: number;
-
-    @Field({ nullable: true })
-    JoinDate?: Date;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field({ nullable: true })
     Country?: string | null;
 
     @Field({ nullable: true })
     CountryName?: string | null;
+
+    @Field({ nullable: true })
+    City?: string;
+
+    @Field({ nullable: true })
+    State?: string;
 
     @Field({ nullable: true })
     AddressLine1?: string | null;
@@ -2138,6 +2093,15 @@ export class UpdatemorecheesemembersMemberProfileInput {
 
     @Field({ nullable: true })
     PostalCode?: string | null;
+
+    @Field(() => Float, { nullable: true })
+    Latitude?: number;
+
+    @Field(() => Float, { nullable: true })
+    Longitude?: number;
+
+    @Field({ nullable: true })
+    JoinDate?: Date;
 
     @Field({ nullable: true })
     RaceEthnicity?: string | null;
@@ -2150,6 +2114,9 @@ export class UpdatemorecheesemembersMemberProfileInput {
 
     @Field({ nullable: true })
     PrimaryLanguage?: string | null;
+
+    @Field(() => Boolean, { nullable: true })
+    IsSharedDemo?: boolean;
 
     @Field(() => [KeyValuePairInput], { nullable: true })
     OldValues___?: KeyValuePairInput[];
@@ -2493,444 +2460,6 @@ export class morecheesemembersMembershipPeriodResolver extends ResolverBase {
 }
 
 //****************************************************************************
-// ENTITY CLASS for MoreCheese: Order Lines
-//****************************************************************************
-@ObjectType({ description: `Product-typed order lines` })
-export class morecheeseordersOrderLine_ {
-    @Field() 
-    @MaxLength(36)
-    ID: string;
-        
-    @Field() 
-    @MaxLength(36)
-    OrderID: string;
-        
-    @Field() 
-    @MaxLength(36)
-    ProductID: string;
-        
-    @Field(() => Int, {description: `Line quantity (1 in the demo slice)`}) 
-    Quantity: number;
-        
-    @Field(() => Float, {description: `Line unit price in USD`}) 
-    UnitPrice: number;
-        
-    @Field(() => Float, {description: `Quantity × UnitPrice, in USD`}) 
-    LineTotal: number;
-        
-    @Field(() => Boolean, {description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
-    IsSharedDemo: boolean;
-        
-    @Field() 
-    _mj__CreatedAt: Date;
-        
-    @Field() 
-    _mj__UpdatedAt: Date;
-        
-    @Field() 
-    @MaxLength(200)
-    Product: string;
-        
-}
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Order Lines
-//****************************************************************************
-@InputType()
-export class CreatemorecheeseordersOrderLineInput {
-    @Field({ nullable: true })
-    ID?: string;
-
-    @Field({ nullable: true })
-    OrderID?: string;
-
-    @Field({ nullable: true })
-    ProductID?: string;
-
-    @Field(() => Int, { nullable: true })
-    Quantity?: number;
-
-    @Field(() => Float, { nullable: true })
-    UnitPrice?: number;
-
-    @Field(() => Float, { nullable: true })
-    LineTotal?: number;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Order Lines
-//****************************************************************************
-@InputType()
-export class UpdatemorecheeseordersOrderLineInput {
-    @Field()
-    ID: string;
-
-    @Field({ nullable: true })
-    OrderID?: string;
-
-    @Field({ nullable: true })
-    ProductID?: string;
-
-    @Field(() => Int, { nullable: true })
-    Quantity?: number;
-
-    @Field(() => Float, { nullable: true })
-    UnitPrice?: number;
-
-    @Field(() => Float, { nullable: true })
-    LineTotal?: number;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => [KeyValuePairInput], { nullable: true })
-    OldValues___?: KeyValuePairInput[];
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-//****************************************************************************
-// RESOLVER for MoreCheese: Order Lines
-//****************************************************************************
-@ObjectType()
-export class RunmorecheeseordersOrderLineViewResult {
-    @Field(() => [morecheeseordersOrderLine_])
-    Results: morecheeseordersOrderLine_[];
-
-    @Field(() => String, {nullable: true})
-    UserViewRunID?: string;
-
-    @Field(() => Int, {nullable: true})
-    RowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    TotalRowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    ExecutionTime: number;
-
-    @Field({nullable: true})
-    ErrorMessage?: string;
-
-    @Field(() => Boolean, {nullable: false})
-    Success: boolean;
-}
-
-@Resolver(morecheeseordersOrderLine_)
-export class morecheeseordersOrderLineResolver extends ResolverBase {
-    @Query(() => RunmorecheeseordersOrderLineViewResult)
-    async RunmorecheeseordersOrderLineViewByID(@Arg('input', () => RunViewByIDInput) input: RunViewByIDInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByIDGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersOrderLineViewResult)
-    async RunmorecheeseordersOrderLineViewByName(@Arg('input', () => RunViewByNameInput) input: RunViewByNameInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByNameGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersOrderLineViewResult)
-    async RunmorecheeseordersOrderLineDynamicView(@Arg('input', () => RunDynamicViewInput) input: RunDynamicViewInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        input.EntityName = 'MoreCheese: Order Lines';
-        return super.RunDynamicViewGeneric(input, provider, userPayload, pubSub);
-    }
-    @Query(() => morecheeseordersOrderLine_, { nullable: true })
-    async morecheeseordersOrderLine(@Arg('ID', () => String) ID: string, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine): Promise<morecheeseordersOrderLine_ | null> {
-        this.CheckUserReadPermissions('MoreCheese: Order Lines', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwOrderLines')} WHERE ${provider.QuoteIdentifier('ID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Order Lines', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.MapFieldNamesToCodeNames('MoreCheese: Order Lines', rows && rows.length > 0 ? rows[0] : null, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-    
-    @Mutation(() => morecheeseordersOrderLine_)
-    async CreatemorecheeseordersOrderLine(
-        @Arg('input', () => CreatemorecheeseordersOrderLineInput) input: CreatemorecheeseordersOrderLineInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.CreateRecord('MoreCheese: Order Lines', input, provider, userPayload, pubSub)
-    }
-        
-    @Mutation(() => morecheeseordersOrderLine_)
-    async UpdatemorecheeseordersOrderLine(
-        @Arg('input', () => UpdatemorecheeseordersOrderLineInput) input: UpdatemorecheeseordersOrderLineInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.UpdateRecord('MoreCheese: Order Lines', input, provider, userPayload, pubSub);
-    }
-    
-    @Mutation(() => morecheeseordersOrderLine_)
-    async DeletemorecheeseordersOrderLine(@Arg('ID', () => String) ID: string, @Arg('options___', () => DeleteOptionsInput) options: DeleteOptionsInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadWriteProvider(providers);
-        const key = new CompositeKey([{FieldName: 'ID', Value: ID}]);
-        return this.DeleteRecord('MoreCheese: Order Lines', key, options, provider, userPayload, pubSub);
-    }
-    
-}
-
-//****************************************************************************
-// ENTITY CLASS for MoreCheese: Orders
-//****************************************************************************
-@ObjectType({ description: `One order per billable fact (order-per-cycle; the posted order IS the bill). Stand-in for bizapps-orders` })
-export class morecheeseordersOrder_ {
-    @Field() 
-    @MaxLength(36)
-    ID: string;
-        
-    @Field({description: `Business key (ORD-D-* dues, ORD-R-* open renewal, ORD-E-* event); UUIDs derive from it`}) 
-    @MaxLength(50)
-    OrderKey: string;
-        
-    @Field() 
-    @MaxLength(36)
-    PersonID: string;
-        
-    @Field({description: `Always Sale in the demo slice`}) 
-    @MaxLength(50)
-    OrderType: string;
-        
-    @Field({description: `Always Posted — the posted order IS the bill (no invoices, per bizapps-orders design)`}) 
-    @MaxLength(50)
-    Status: string;
-        
-    @Field({description: `Date the order posted (dues post at period start; event orders at registration)`}) 
-    OrderDate: Date;
-        
-    @Field({description: `Payment due date (period start, or +30 days on business-tier net terms)`}) 
-    DueDate: Date;
-        
-    @Field(() => Float, {description: `Order total in USD`}) 
-    TotalGross: number;
-        
-    @Field({description: `Paid, Unpaid, or Overdue — a payment dated after release has not happened yet, so orders age (real A/R)`}) 
-    @MaxLength(50)
-    PaymentStatus: string;
-        
-    @Field(() => Boolean, {description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
-    IsSharedDemo: boolean;
-        
-    @Field() 
-    _mj__CreatedAt: Date;
-        
-    @Field() 
-    _mj__UpdatedAt: Date;
-        
-    @Field() 
-    @MaxLength(201)
-    Person: string;
-        
-    @Field(() => [morecheeseordersPayment_])
-    morecheeseordersMoreCheese_Payments_OrderIDArray: morecheeseordersPayment_[]; // Link to morecheeseordersMoreCheese_Payments
-    
-    @Field(() => [morecheeseordersOrderLine_])
-    morecheeseordersMoreCheese_OrderLines_OrderIDArray: morecheeseordersOrderLine_[]; // Link to morecheeseordersMoreCheese_OrderLines
-    
-}
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Orders
-//****************************************************************************
-@InputType()
-export class CreatemorecheeseordersOrderInput {
-    @Field({ nullable: true })
-    ID?: string;
-
-    @Field({ nullable: true })
-    OrderKey?: string;
-
-    @Field({ nullable: true })
-    PersonID?: string;
-
-    @Field({ nullable: true })
-    OrderType?: string;
-
-    @Field({ nullable: true })
-    Status?: string;
-
-    @Field({ nullable: true })
-    OrderDate?: Date;
-
-    @Field({ nullable: true })
-    DueDate?: Date;
-
-    @Field(() => Float, { nullable: true })
-    TotalGross?: number;
-
-    @Field({ nullable: true })
-    PaymentStatus?: string;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Orders
-//****************************************************************************
-@InputType()
-export class UpdatemorecheeseordersOrderInput {
-    @Field()
-    ID: string;
-
-    @Field({ nullable: true })
-    OrderKey?: string;
-
-    @Field({ nullable: true })
-    PersonID?: string;
-
-    @Field({ nullable: true })
-    OrderType?: string;
-
-    @Field({ nullable: true })
-    Status?: string;
-
-    @Field({ nullable: true })
-    OrderDate?: Date;
-
-    @Field({ nullable: true })
-    DueDate?: Date;
-
-    @Field(() => Float, { nullable: true })
-    TotalGross?: number;
-
-    @Field({ nullable: true })
-    PaymentStatus?: string;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => [KeyValuePairInput], { nullable: true })
-    OldValues___?: KeyValuePairInput[];
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-//****************************************************************************
-// RESOLVER for MoreCheese: Orders
-//****************************************************************************
-@ObjectType()
-export class RunmorecheeseordersOrderViewResult {
-    @Field(() => [morecheeseordersOrder_])
-    Results: morecheeseordersOrder_[];
-
-    @Field(() => String, {nullable: true})
-    UserViewRunID?: string;
-
-    @Field(() => Int, {nullable: true})
-    RowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    TotalRowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    ExecutionTime: number;
-
-    @Field({nullable: true})
-    ErrorMessage?: string;
-
-    @Field(() => Boolean, {nullable: false})
-    Success: boolean;
-}
-
-@Resolver(morecheeseordersOrder_)
-export class morecheeseordersOrderResolver extends ResolverBase {
-    @Query(() => RunmorecheeseordersOrderViewResult)
-    async RunmorecheeseordersOrderViewByID(@Arg('input', () => RunViewByIDInput) input: RunViewByIDInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByIDGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersOrderViewResult)
-    async RunmorecheeseordersOrderViewByName(@Arg('input', () => RunViewByNameInput) input: RunViewByNameInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByNameGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersOrderViewResult)
-    async RunmorecheeseordersOrderDynamicView(@Arg('input', () => RunDynamicViewInput) input: RunDynamicViewInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        input.EntityName = 'MoreCheese: Orders';
-        return super.RunDynamicViewGeneric(input, provider, userPayload, pubSub);
-    }
-    @Query(() => morecheeseordersOrder_, { nullable: true })
-    async morecheeseordersOrder(@Arg('ID', () => String) ID: string, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine): Promise<morecheeseordersOrder_ | null> {
-        this.CheckUserReadPermissions('MoreCheese: Orders', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwOrders')} WHERE ${provider.QuoteIdentifier('ID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Orders', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.MapFieldNamesToCodeNames('MoreCheese: Orders', rows && rows.length > 0 ? rows[0] : null, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-    
-    @FieldResolver(() => [morecheeseordersPayment_])
-    async morecheeseordersMoreCheese_Payments_OrderIDArray(@Root() morecheeseordersorder_: morecheeseordersOrder_, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        this.CheckUserReadPermissions('MoreCheese: Payments', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwPayments')} WHERE ${provider.QuoteIdentifier('OrderID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Payments', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [morecheeseordersorder_.ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.ArrayMapFieldNamesToCodeNames('MoreCheese: Payments', rows, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-        
-    @FieldResolver(() => [morecheeseordersOrderLine_])
-    async morecheeseordersMoreCheese_OrderLines_OrderIDArray(@Root() morecheeseordersorder_: morecheeseordersOrder_, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        this.CheckUserReadPermissions('MoreCheese: Order Lines', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwOrderLines')} WHERE ${provider.QuoteIdentifier('OrderID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Order Lines', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [morecheeseordersorder_.ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.ArrayMapFieldNamesToCodeNames('MoreCheese: Order Lines', rows, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-        
-    @Mutation(() => morecheeseordersOrder_)
-    async CreatemorecheeseordersOrder(
-        @Arg('input', () => CreatemorecheeseordersOrderInput) input: CreatemorecheeseordersOrderInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.CreateRecord('MoreCheese: Orders', input, provider, userPayload, pubSub)
-    }
-        
-    @Mutation(() => morecheeseordersOrder_)
-    async UpdatemorecheeseordersOrder(
-        @Arg('input', () => UpdatemorecheeseordersOrderInput) input: UpdatemorecheeseordersOrderInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.UpdateRecord('MoreCheese: Orders', input, provider, userPayload, pubSub);
-    }
-    
-    @Mutation(() => morecheeseordersOrder_)
-    async DeletemorecheeseordersOrder(@Arg('ID', () => String) ID: string, @Arg('options___', () => DeleteOptionsInput) options: DeleteOptionsInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadWriteProvider(providers);
-        const key = new CompositeKey([{FieldName: 'ID', Value: ID}]);
-        return this.DeleteRecord('MoreCheese: Orders', key, options, provider, userPayload, pubSub);
-    }
-    
-}
-
-//****************************************************************************
 // ENTITY CLASS for MoreCheese: Organization Profiles
 //****************************************************************************
 @ObjectType({ description: `Org-specific extension of bizapps-common Organization: demo geography and the lifecycle events (dissolution/acquisition/program cut) that drive employer-related churn` })
@@ -2955,6 +2484,14 @@ export class morecheesemembersOrganizationProfile_ {
     @MaxLength(50)
     Region: string;
         
+    @Field({nullable: true}) 
+    @MaxLength(2)
+    Country?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(100)
+    CountryName?: string;
+        
     @Field({description: `Headquarters city (real city, invented business name)`}) 
     @MaxLength(100)
     City: string;
@@ -2962,6 +2499,14 @@ export class morecheesemembersOrganizationProfile_ {
     @Field({description: `Headquarters state/country code`}) 
     @MaxLength(50)
     State: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(200)
+    AddressLine1?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(20)
+    PostalCode?: string;
         
     @Field(() => Float, {description: `Headquarters latitude, pre-baked for the map (no live geocoding)`}) 
     Latitude: number;
@@ -2985,25 +2530,15 @@ export class morecheesemembersOrganizationProfile_ {
     @Field() 
     _mj__UpdatedAt: Date;
         
-    @Field({nullable: true}) 
-    @MaxLength(2)
-    Country?: string;
-        
-    @Field({nullable: true}) 
-    @MaxLength(100)
-    CountryName?: string;
-        
-    @Field({nullable: true}) 
-    @MaxLength(200)
-    AddressLine1?: string;
-        
-    @Field({nullable: true}) 
-    @MaxLength(20)
-    PostalCode?: string;
-        
     @Field() 
     @MaxLength(255)
     Organization: string;
+        
+    @Field(() => Float) 
+    _mj__Latitude: number;
+        
+    @Field(() => Float) 
+    _mj__Longitude: number;
         
 }
 
@@ -3028,10 +2563,22 @@ export class CreatemorecheesemembersOrganizationProfileInput {
     Region?: string;
 
     @Field({ nullable: true })
+    Country: string | null;
+
+    @Field({ nullable: true })
+    CountryName: string | null;
+
+    @Field({ nullable: true })
     City?: string;
 
     @Field({ nullable: true })
     State?: string;
+
+    @Field({ nullable: true })
+    AddressLine1: string | null;
+
+    @Field({ nullable: true })
+    PostalCode: string | null;
 
     @Field(() => Float, { nullable: true })
     Latitude?: number;
@@ -3047,18 +2594,6 @@ export class CreatemorecheesemembersOrganizationProfileInput {
 
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
-
-    @Field({ nullable: true })
-    Country: string | null;
-
-    @Field({ nullable: true })
-    CountryName: string | null;
-
-    @Field({ nullable: true })
-    AddressLine1: string | null;
-
-    @Field({ nullable: true })
-    PostalCode: string | null;
 
     @Field(() => RestoreContextInput, { nullable: true })
     RestoreContext___?: RestoreContextInput;
@@ -3086,10 +2621,22 @@ export class UpdatemorecheesemembersOrganizationProfileInput {
     Region?: string;
 
     @Field({ nullable: true })
+    Country?: string | null;
+
+    @Field({ nullable: true })
+    CountryName?: string | null;
+
+    @Field({ nullable: true })
     City?: string;
 
     @Field({ nullable: true })
     State?: string;
+
+    @Field({ nullable: true })
+    AddressLine1?: string | null;
+
+    @Field({ nullable: true })
+    PostalCode?: string | null;
 
     @Field(() => Float, { nullable: true })
     Latitude?: number;
@@ -3105,18 +2652,6 @@ export class UpdatemorecheesemembersOrganizationProfileInput {
 
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
-
-    @Field({ nullable: true })
-    Country?: string | null;
-
-    @Field({ nullable: true })
-    CountryName?: string | null;
-
-    @Field({ nullable: true })
-    AddressLine1?: string | null;
-
-    @Field({ nullable: true })
-    PostalCode?: string | null;
 
     @Field(() => [KeyValuePairInput], { nullable: true })
     OldValues___?: KeyValuePairInput[];
@@ -3207,386 +2742,6 @@ export class morecheesemembersOrganizationProfileResolver extends ResolverBase {
         const provider = GetReadWriteProvider(providers);
         const key = new CompositeKey([{FieldName: 'ID', Value: ID}]);
         return this.DeleteRecord('MoreCheese: Organization Profiles', key, options, provider, userPayload, pubSub);
-    }
-    
-}
-
-//****************************************************************************
-// ENTITY CLASS for MoreCheese: Payments
-//****************************************************************************
-@ObjectType({ description: `Payments against orders, timed by the declared payment profiles (a payment dated after release has not happened yet — orders age instead)` })
-export class morecheeseordersPayment_ {
-    @Field() 
-    @MaxLength(36)
-    ID: string;
-        
-    @Field() 
-    @MaxLength(36)
-    OrderID: string;
-        
-    @Field(() => Float, {description: `Payment amount in USD (full payment; no partials in the demo slice)`}) 
-    Amount: number;
-        
-    @Field({description: `Date the payment landed, per the declared payment-timing profiles`}) 
-    PaymentDate: Date;
-        
-    @Field({description: `CreditCard, ACH, Check, or Wire (business tiers pay on net terms)`}) 
-    @MaxLength(50)
-    Method: string;
-        
-    @Field({description: `Captured (Failed/Refunded reserved for future stories)`}) 
-    @MaxLength(50)
-    Status: string;
-        
-    @Field(() => Boolean, {description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
-    IsSharedDemo: boolean;
-        
-    @Field() 
-    _mj__CreatedAt: Date;
-        
-    @Field() 
-    _mj__UpdatedAt: Date;
-        
-}
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Payments
-//****************************************************************************
-@InputType()
-export class CreatemorecheeseordersPaymentInput {
-    @Field({ nullable: true })
-    ID?: string;
-
-    @Field({ nullable: true })
-    OrderID?: string;
-
-    @Field(() => Float, { nullable: true })
-    Amount?: number;
-
-    @Field({ nullable: true })
-    PaymentDate?: Date;
-
-    @Field({ nullable: true })
-    Method?: string;
-
-    @Field({ nullable: true })
-    Status?: string;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Payments
-//****************************************************************************
-@InputType()
-export class UpdatemorecheeseordersPaymentInput {
-    @Field()
-    ID: string;
-
-    @Field({ nullable: true })
-    OrderID?: string;
-
-    @Field(() => Float, { nullable: true })
-    Amount?: number;
-
-    @Field({ nullable: true })
-    PaymentDate?: Date;
-
-    @Field({ nullable: true })
-    Method?: string;
-
-    @Field({ nullable: true })
-    Status?: string;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => [KeyValuePairInput], { nullable: true })
-    OldValues___?: KeyValuePairInput[];
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-//****************************************************************************
-// RESOLVER for MoreCheese: Payments
-//****************************************************************************
-@ObjectType()
-export class RunmorecheeseordersPaymentViewResult {
-    @Field(() => [morecheeseordersPayment_])
-    Results: morecheeseordersPayment_[];
-
-    @Field(() => String, {nullable: true})
-    UserViewRunID?: string;
-
-    @Field(() => Int, {nullable: true})
-    RowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    TotalRowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    ExecutionTime: number;
-
-    @Field({nullable: true})
-    ErrorMessage?: string;
-
-    @Field(() => Boolean, {nullable: false})
-    Success: boolean;
-}
-
-@Resolver(morecheeseordersPayment_)
-export class morecheeseordersPaymentResolver extends ResolverBase {
-    @Query(() => RunmorecheeseordersPaymentViewResult)
-    async RunmorecheeseordersPaymentViewByID(@Arg('input', () => RunViewByIDInput) input: RunViewByIDInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByIDGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersPaymentViewResult)
-    async RunmorecheeseordersPaymentViewByName(@Arg('input', () => RunViewByNameInput) input: RunViewByNameInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByNameGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersPaymentViewResult)
-    async RunmorecheeseordersPaymentDynamicView(@Arg('input', () => RunDynamicViewInput) input: RunDynamicViewInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        input.EntityName = 'MoreCheese: Payments';
-        return super.RunDynamicViewGeneric(input, provider, userPayload, pubSub);
-    }
-    @Query(() => morecheeseordersPayment_, { nullable: true })
-    async morecheeseordersPayment(@Arg('ID', () => String) ID: string, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine): Promise<morecheeseordersPayment_ | null> {
-        this.CheckUserReadPermissions('MoreCheese: Payments', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwPayments')} WHERE ${provider.QuoteIdentifier('ID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Payments', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.MapFieldNamesToCodeNames('MoreCheese: Payments', rows && rows.length > 0 ? rows[0] : null, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-    
-    @Mutation(() => morecheeseordersPayment_)
-    async CreatemorecheeseordersPayment(
-        @Arg('input', () => CreatemorecheeseordersPaymentInput) input: CreatemorecheeseordersPaymentInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.CreateRecord('MoreCheese: Payments', input, provider, userPayload, pubSub)
-    }
-        
-    @Mutation(() => morecheeseordersPayment_)
-    async UpdatemorecheeseordersPayment(
-        @Arg('input', () => UpdatemorecheeseordersPaymentInput) input: UpdatemorecheeseordersPaymentInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.UpdateRecord('MoreCheese: Payments', input, provider, userPayload, pubSub);
-    }
-    
-    @Mutation(() => morecheeseordersPayment_)
-    async DeletemorecheeseordersPayment(@Arg('ID', () => String) ID: string, @Arg('options___', () => DeleteOptionsInput) options: DeleteOptionsInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadWriteProvider(providers);
-        const key = new CompositeKey([{FieldName: 'ID', Value: ID}]);
-        return this.DeleteRecord('MoreCheese: Payments', key, options, provider, userPayload, pubSub);
-    }
-    
-}
-
-//****************************************************************************
-// ENTITY CLASS for MoreCheese: Products
-//****************************************************************************
-@ObjectType({ description: `Sellable products: membership tiers and event registrations` })
-export class morecheeseordersProduct_ {
-    @Field() 
-    @MaxLength(36)
-    ID: string;
-        
-    @Field({description: `Business key (e.g. PROD-MEM-INDIVIDUAL); UUIDs derive from it`}) 
-    @MaxLength(50)
-    ProductKey: string;
-        
-    @Field({description: `Product display name`}) 
-    @MaxLength(200)
-    Name: string;
-        
-    @Field({description: `Membership (annual dues per tier) or Event (registration)`}) 
-    @MaxLength(50)
-    ProductType: string;
-        
-    @Field(() => Float, {description: `List price in USD`}) 
-    UnitPrice: number;
-        
-    @Field(() => Boolean, {description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
-    IsSharedDemo: boolean;
-        
-    @Field() 
-    _mj__CreatedAt: Date;
-        
-    @Field() 
-    _mj__UpdatedAt: Date;
-        
-    @Field(() => [morecheeseordersOrderLine_])
-    morecheeseordersMoreCheese_OrderLines_ProductIDArray: morecheeseordersOrderLine_[]; // Link to morecheeseordersMoreCheese_OrderLines
-    
-}
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Products
-//****************************************************************************
-@InputType()
-export class CreatemorecheeseordersProductInput {
-    @Field({ nullable: true })
-    ID?: string;
-
-    @Field({ nullable: true })
-    ProductKey?: string;
-
-    @Field({ nullable: true })
-    Name?: string;
-
-    @Field({ nullable: true })
-    ProductType?: string;
-
-    @Field(() => Float, { nullable: true })
-    UnitPrice?: number;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-
-//****************************************************************************
-// INPUT TYPE for MoreCheese: Products
-//****************************************************************************
-@InputType()
-export class UpdatemorecheeseordersProductInput {
-    @Field()
-    ID: string;
-
-    @Field({ nullable: true })
-    ProductKey?: string;
-
-    @Field({ nullable: true })
-    Name?: string;
-
-    @Field({ nullable: true })
-    ProductType?: string;
-
-    @Field(() => Float, { nullable: true })
-    UnitPrice?: number;
-
-    @Field(() => Boolean, { nullable: true })
-    IsSharedDemo?: boolean;
-
-    @Field(() => [KeyValuePairInput], { nullable: true })
-    OldValues___?: KeyValuePairInput[];
-
-    @Field(() => RestoreContextInput, { nullable: true })
-    RestoreContext___?: RestoreContextInput;
-}
-    
-//****************************************************************************
-// RESOLVER for MoreCheese: Products
-//****************************************************************************
-@ObjectType()
-export class RunmorecheeseordersProductViewResult {
-    @Field(() => [morecheeseordersProduct_])
-    Results: morecheeseordersProduct_[];
-
-    @Field(() => String, {nullable: true})
-    UserViewRunID?: string;
-
-    @Field(() => Int, {nullable: true})
-    RowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    TotalRowCount: number;
-
-    @Field(() => Int, {nullable: true})
-    ExecutionTime: number;
-
-    @Field({nullable: true})
-    ErrorMessage?: string;
-
-    @Field(() => Boolean, {nullable: false})
-    Success: boolean;
-}
-
-@Resolver(morecheeseordersProduct_)
-export class morecheeseordersProductResolver extends ResolverBase {
-    @Query(() => RunmorecheeseordersProductViewResult)
-    async RunmorecheeseordersProductViewByID(@Arg('input', () => RunViewByIDInput) input: RunViewByIDInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByIDGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersProductViewResult)
-    async RunmorecheeseordersProductViewByName(@Arg('input', () => RunViewByNameInput) input: RunViewByNameInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        return super.RunViewByNameGeneric(input, provider, userPayload, pubSub);
-    }
-
-    @Query(() => RunmorecheeseordersProductViewResult)
-    async RunmorecheeseordersProductDynamicView(@Arg('input', () => RunDynamicViewInput) input: RunDynamicViewInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        input.EntityName = 'MoreCheese: Products';
-        return super.RunDynamicViewGeneric(input, provider, userPayload, pubSub);
-    }
-    @Query(() => morecheeseordersProduct_, { nullable: true })
-    async morecheeseordersProduct(@Arg('ID', () => String) ID: string, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine): Promise<morecheeseordersProduct_ | null> {
-        this.CheckUserReadPermissions('MoreCheese: Products', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwProducts')} WHERE ${provider.QuoteIdentifier('ID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Products', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.MapFieldNamesToCodeNames('MoreCheese: Products', rows && rows.length > 0 ? rows[0] : null, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-    
-    @FieldResolver(() => [morecheeseordersOrderLine_])
-    async morecheeseordersMoreCheese_OrderLines_ProductIDArray(@Root() morecheeseordersproduct_: morecheeseordersProduct_, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        this.CheckUserReadPermissions('MoreCheese: Order Lines', userPayload);
-        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
-        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_orders', 'vwOrderLines')} WHERE ${provider.QuoteIdentifier('ProductID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Order Lines', userPayload, EntityPermissionType.Read, 'AND');
-        const rows = await provider.ExecuteSQL(sSQL, [morecheeseordersproduct_.ID], undefined, this.GetUserFromPayload(userPayload));
-        const result = await this.ArrayMapFieldNamesToCodeNames('MoreCheese: Order Lines', rows, this.GetUserFromPayload(userPayload));
-        return result;
-    }
-        
-    @Mutation(() => morecheeseordersProduct_)
-    async CreatemorecheeseordersProduct(
-        @Arg('input', () => CreatemorecheeseordersProductInput) input: CreatemorecheeseordersProductInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.CreateRecord('MoreCheese: Products', input, provider, userPayload, pubSub)
-    }
-        
-    @Mutation(() => morecheeseordersProduct_)
-    async UpdatemorecheeseordersProduct(
-        @Arg('input', () => UpdatemorecheeseordersProductInput) input: UpdatemorecheeseordersProductInput,
-        @Ctx() { providers, userPayload }: AppContext,
-        @PubSub() pubSub: PubSubEngine
-    ) {
-        const provider = GetReadWriteProvider(providers);
-        return this.UpdateRecord('MoreCheese: Products', input, provider, userPayload, pubSub);
-    }
-    
-    @Mutation(() => morecheeseordersProduct_)
-    async DeletemorecheeseordersProduct(@Arg('ID', () => String) ID: string, @Arg('options___', () => DeleteOptionsInput) options: DeleteOptionsInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
-        const provider = GetReadWriteProvider(providers);
-        const key = new CompositeKey([{FieldName: 'ID', Value: ID}]);
-        return this.DeleteRecord('MoreCheese: Products', key, options, provider, userPayload, pubSub);
     }
     
 }

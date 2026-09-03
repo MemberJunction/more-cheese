@@ -70,7 +70,7 @@ try {
   console.log('Running Mutation 3: Field on wrong entity...');
   fs.writeFileSync(laddersPath, origLadders, 'utf8'); // restore
   const mutatedDomain3 = JSON.parse(origDomain);
-  mutatedDomain3.entities.Product.fields.Bio = { name: 'Bio', type: 'string' };
+  mutatedDomain3.entities.MembershipPeriod.fields.Bio = { name: 'Bio', type: 'string' };
   fs.writeFileSync(domainPath, JSON.stringify(mutatedDomain3, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 3: field on wrong entity', 'field on wrong entity');
 
@@ -91,8 +91,16 @@ try {
   fs.writeFileSync(heroesPath, JSON.stringify(mutatedHeroes5, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 5: wrong title', 'disagrees with committed dataset');
 
+  // Mutation 6: Declared field on non-members schema missing from metadata records (V1)
+  console.log('Running Mutation 6: Non-members schema declared field missing from metadata...');
+  fs.writeFileSync(heroesPath, origHeroes, 'utf8'); // restore
+  const mutatedDomain6 = JSON.parse(origDomain);
+  mutatedDomain6.entities.Product.fields.Bio = { name: 'Bio', type: 'string' };
+  fs.writeFileSync(domainPath, JSON.stringify(mutatedDomain6, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 6: non-members field missing from metadata', "missing from record #0");
+
   console.log('\n================================================================================');
-  console.log('✅ ALL 5 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (R3-M1)');
+  console.log('✅ ALL 6 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (R3-M1, V1)');
   console.log('================================================================================');
 } finally {
   // Always restore originals

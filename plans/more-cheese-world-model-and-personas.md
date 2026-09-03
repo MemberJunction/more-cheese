@@ -3,9 +3,9 @@
 **Flagship Consumer Roadmap for Loom Plan 02**
 
 Version 2.0 · September 2026  
-Status: Proposed (Round 3 Review Incorporated)  
+Status: Implemented & Validated (Round 2 Response)  
 Target Repository: `MemberJunction/more-cheese`  
-Companion PR: [MemberJunction/loom#5](https://github.com/MemberJunction/loom/pull/5)
+Companion PR: [MemberJunction/more-cheese#22](https://github.com/MemberJunction/more-cheese/pull/22)
 
 ---
 
@@ -16,8 +16,8 @@ This document outlines the roadmap to establish **More Cheese** as the primary e
 ### Current Repository Status vs. Planned Roadmap:
 - **Clean Framework Decoupling (Achieved in PR 19)**: The legacy procedural `datagen/` directory (28,403 lines) was removed. All future data simulation runs through `@memberjunction/loom`.
 - **Form Panel Extensions (In Tree)**: Form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) are registered via `@RegisterClassEx` on the `before-fields` slot for `People` and `Organizations`. **Status**: The panels currently render placeholder mock values and query columns that do not exist; they are not yet bound to live data.
-- **Metadata Referential Closure Audit (Committed in this PR)**: Added [`scripts/check-metadata-closure.mjs`](scripts/check-metadata-closure.mjs) and wired it into `.github/workflows/changes.yml`. CI performs a generic sweep across all fields matching `/ID$/`, evaluating **177,518 foreign key references with 0 orphans** against 4 documented external exclusions.
-- **Loom `/data` Project Configuration (Planned for Phase 02.6)**: Migration of domain manifests, factor contracts, and name banks into `data/` will occur once Loom Plan 02 contracts land.
+- **Metadata Referential Closure Audit (Committed in this PR)**: Added [`scripts/check-metadata-closure.mjs`](scripts/check-metadata-closure.mjs) and wired it into `.github/workflows/changes.yml`. CI performs a target-aware sweep across all fields ending in `ID`, evaluating **239,551 foreign key references with 0 orphans** against 7 documented external exclusions.
+- **Loom `/data` Project Configuration (Implemented)**: All domain manifests, ruleset modules, personas, motifs, ladders, and shock eras are authored under `data/` and strictly validated via `@memberjunction/loom-contracts`.
 
 ---
 
@@ -379,11 +379,11 @@ External Exclusions Evaluated:
   sonar-score-model-versions.PublishedByUserID   : 1 skipped (External Core User ID in MJ User table)
 
 --------------------------------------------------------------------------------
-Total Foreign Key References Evaluated: 177,518
+Total Foreign Key References Evaluated: 239,551
 Total Orphaned References Found:        0
 ================================================================================
 
-✅ Metadata closure check PASSED. All 177,518 foreign keys closed with 0 orphans.
+✅ Metadata closure check PASSED. All 239,551 foreign keys closed with 0 orphans.
 ```
 
 To run this audit locally:
@@ -396,10 +396,24 @@ node scripts/check-metadata-closure.mjs
 ## 5. Architectural Decisions & Scope
 
 ### 5.1 Source of Truth Decision (heroes.json vs Committed Dataset)
-The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`.
+The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`. Members with a `JoinDate` before 2019 are recorded with their historical association tenure as an opening state, while billing and commerce history begins at the unified 2019-01-01 baseline.
 - **Automated Conformance Gate (R2-H1)**: `scripts/validate-loom-data.mjs` verifies in CI that 100% of heroes in `data/ruleset/heroes.json` match the committed metadata records byte-for-byte.
 
-### 5.2 State Ladder Vocabulary Decision (R2-L1)
+### 5.2 Seeded Historical Orders Booking Bypass & Fulfillment Model (R7-1, R7-5, R8-3)
+Seeded demo history represents static simulated historical accounting pushed directly via metadata sync into the `@mj-biz-apps/orders` schema.
+1. **Push Mechanism**: The `mj sync push` plugin initializes only a data provider and registers no `@mj-biz-apps/orders` entity servers (no `dynamicPackages` load anywhere under `MetadataSync` or the `sync` commands), so saves go through the generated CRUD stored procedures, and the rollup triggers find `LineTotalGross` present.
+2. **Push Boundary & Operational Consequences**:
+   - `trg_OrderLine_ImmutableAfterConfirm` refuses updates to financial columns on lines of Confirmed orders, so a differential re-push that edits a booked line fails at the database level by design.
+   - Any host that runs the push inside a process where the orders servers are registered gets the R7-1 refusals back.
+   - All financial fields (`LineTotalNet`, `LineTotalGross`, `TotalGross`, `AmountPaid`, `Balance`) are pre-materialized deterministically in metadata and verified via automated closure gates (`scripts/check-metadata-closure.mjs`). Proof-of-load in #23 will document the push log with per-directory inserted counts, and `SELECT COUNT(*), SUM(TotalGross), SUM(AmountPaid) FROM __mj_BizAppsOrders.OrderHeader` against the JSON sums.
+3. **Status & Fulfillment Shape**:
+   - Orders with `Status IN ('Draft', 'Quoted', 'Voided')` carry `FulfillmentStatus = 'Pending'`.
+   - Orders with `OrderType = 'Cancellation'` carry `FulfillmentStatus = 'Returned'`.
+   - Orders with `Status = 'Confirmed'` where all lines are non-physical (memberships, conference registrations, exam fees, donations) carry `FulfillmentStatus = 'NotApplicable'`.
+   - Orders with physical goods carry `FulfillmentStatus = 'Fulfilled'` when paid in full (`AmountPaid >= TotalGross`), or `'Pending'` when unpaid.
+   - The 50 unclaimed membership Sale orders dated July 2026 are explicit upcoming renewal draft invoices (`ORD-R-ICF-...`, `Status = 'Draft'`, `AmountPaid = 0`, `FulfillmentStatus = 'Pending'`) for members whose annual terms expire in August 2026 and have not yet paid/renewed.
+
+### 5.3 State Ladder Vocabulary Decision (R2-L1)
 The state ladder for governance leadership (`governance-leadership-ladder`) binds to `CommitteeMembership.RoleID`. Its states are strictly named after the real roles existing in the `Committees: Roles` catalog:
 1. `Member` (duration 2 cycles)
 2. `Vice Chair` (duration 2 cycles, capacity 35, prerequisite: `Member`)
@@ -442,6 +456,8 @@ More Cheese ships with ~30 metadata entities across several functional subsystem
 | **Task 02.6.4: CI Conformance & Mutation Testing** | Automated CI steps running metadata closure, Loom schema validation, and mutation tests (R3-M1). | `npm run validate:loom && npm run test:loom-mutations` | `MemberJunction/more-cheese#21` |
 | **Task 02.6.5: Historical Datagen Reference Tag** | Create and push git tag `archive/datagen-reference` pointing to commit `f513f258` prior to datagen removal (R3-P1). | `git push origin archive/datagen-reference` | `MemberJunction/more-cheese#21` |
 | **Task 02.6.6: README Truthfulness Audit** | Update root `README.md` to state that `datagen/` has been removed, form panels are currently unpopulated mocks, and data simulation runs through Loom (R3-P1). | Documentation review | `MemberJunction/more-cheese#21` |
-| **Task 02.6.7: PR-19 Form Slot Panels Fix-or-Delete** | Resolve unpopulated form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) by wiring them to real entity queries or deleting them (R3-P1). | Component inspection | Follow-up PR |
-| **Task 02.6.8: Proof-of-Load Acceptance Criteria** | End-to-end database verification: per-entity DB row counts equal metadata counts, all 16 hero pins re-evaluated against live database, and four Playwright screenshots with URL bar visible (Elena profile, Gwen memberships, Danielle churn, member list view) (R3-P1). | Playwright headless suite + SQL row count audit | Follow-up PR |
+| **Task 02.6.7: Orders Stand-in Schema Retirement & Native BizApps Integration** | Retire stand-in `morecheese_orders` tables, migrate to `@mj-biz-apps/orders` natively, seed Company & Product Categories, allocate payments, and enforce target-aware closure. | `node scripts/check-metadata-closure.mjs` | `MemberJunction/more-cheese#22` |
+| **Task 02.6.8: PR-19 Form Slot Panels Fix-or-Delete** | Resolve unpopulated form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) by wiring them to real entity queries or deleting them (R3-P1). | Component inspection | `MemberJunction/more-cheese#23` |
+| **Task 02.6.9: Proof-of-Load Acceptance Criteria** | End-to-end database verification: per-entity DB row counts equal metadata counts, all 16 hero pins re-evaluated against live database, and four Playwright screenshots with URL bar visible (Elena profile, Gwen memberships, Danielle churn, member list view) (R3-P1). | Playwright headless suite + SQL row count audit | `MemberJunction/more-cheese#23` |
+
 

@@ -1,5 +1,8 @@
 # Appendix — Pack Schemas (per-table column reference)
 
+> [!NOTE]
+> **Historical Reference**: The `morecheese_orders` stand-in schema was retired in PR #22 and replaced by native `@mj-biz-apps/orders` tables.
+
 Companion to `SCHEMA-BRIEF-2026-07-16.md`. Shapes are extracted from the live DDL
 (drift-guarded against the frozen baseline migration; dependency tables show the
 columns relevant to our data — their apps own additional nullable columns and the

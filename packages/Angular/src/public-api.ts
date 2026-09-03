@@ -30,10 +30,6 @@ export { morecheesemembersDataQualityLabelFormComponent } from './lib/generated/
 export { morecheesemembersMemberProfileFormComponent } from './lib/generated/Entities/morecheesemembersMemberProfile/morecheesemembersmemberprofile.form.component';
 export { morecheesemembersMembershipPeriodFormComponent } from './lib/generated/Entities/morecheesemembersMembershipPeriod/morecheesemembersmembershipperiod.form.component';
 export { morecheesemembersOrganizationProfileFormComponent } from './lib/generated/Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component';
-export { morecheeseordersOrderFormComponent } from './lib/generated/Entities/morecheeseordersOrder/morecheeseordersorder.form.component';
-export { morecheeseordersOrderLineFormComponent } from './lib/generated/Entities/morecheeseordersOrderLine/morecheeseordersorderline.form.component';
-export { morecheeseordersPaymentFormComponent } from './lib/generated/Entities/morecheeseordersPayment/morecheeseorderspayment.form.component';
-export { morecheeseordersProductFormComponent } from './lib/generated/Entities/morecheeseordersProduct/morecheeseordersproduct.form.component';
 
 // Dynamic Form Extension Panels (BaseFormPanel slot system)
 import './lib/panels/member-community/member-community.panel';

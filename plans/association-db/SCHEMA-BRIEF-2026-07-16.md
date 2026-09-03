@@ -1,5 +1,8 @@
 # MoreCheese — Schema & Migrations Brief (meeting, 2026-07-16)
 
+> [!NOTE]
+> **Historical Reference**: The `morecheese_orders` stand-in schema was retired in PR #22 and replaced by native `@mj-biz-apps/orders` tables.
+
 One-page answers first; supporting detail after. Everything here is **verified against a
 running database** (`MC_Integration` on the dev SQL Server — the full stack installed from
 the apps' real migrations on 2026-07-15), not design intent.

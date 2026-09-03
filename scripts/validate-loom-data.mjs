@@ -11,20 +11,29 @@ function fail(msg) {
   process.exit(1);
 }
 
-// 0. Load Loom's real Zod schemas
+// 0. Load Loom's real Zod schemas (R5-1: single honest mode, fail if unavailable)
 let LoomContracts;
 try {
   LoomContracts = await import('@memberjunction/loom-contracts');
 } catch {
   try {
     LoomContracts = await import('../../loom/packages/contracts/dist/index.js');
-  } catch (err) {
-    fail(`Could not load Loom schemas from @memberjunction/loom-contracts or ../../loom/packages/contracts: ${err.message}`);
+  } catch {
+    try {
+      LoomContracts = await import('../loom/packages/contracts/dist/index.js');
+    } catch {
+      try {
+        LoomContracts = await import('./loom/packages/contracts/dist/index.js');
+      } catch (err) {
+        fail(`Could not load Loom schemas from @memberjunction/loom-contracts, ../../loom, or ./loom: ${err.message}`);
+      }
+    }
   }
 }
 
 console.log('================================================================================');
 console.log('            LOOM DATA PROJECT & DOMAIN CONFORMANCE AUDIT                        ');
+console.log('            Mode: LoomContracts Zod Schemas (Strict)                            ');
 console.log('================================================================================');
 
 // 1. Validate data/project.json against ProjectManifestSchema
@@ -59,6 +68,22 @@ const subclassesPath = path.join(rootDir, 'packages/Entities/src/generated/entit
 if (!fs.existsSync(subclassesPath)) fail('Generated entity subclasses missing at packages/Entities/src/generated/entity_subclasses.ts');
 const subclasses = fs.readFileSync(subclassesPath, 'utf8');
 
+// Build mapping of entityName -> metadata directory from metadata/**/.mj-sync.json
+const metadataRootDir = path.join(rootDir, 'metadata');
+const metaDirs = fs.readdirSync(metadataRootDir, { withFileTypes: true }).filter((d) => d.isDirectory());
+const entityNameToMetaDir = new Map();
+for (const md of metaDirs) {
+  const syncFile = path.join(metadataRootDir, md.name, '.mj-sync.json');
+  if (fs.existsSync(syncFile)) {
+    try {
+      const s = JSON.parse(fs.readFileSync(syncFile, 'utf8'));
+      if (s.entity) {
+        entityNameToMetaDir.set(s.entity, md.name);
+      }
+    } catch {}
+  }
+}
+
 for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
   if (!domain.packs[entityCfg.pack]) {
     fail(`Entity '${entityName}' declares pack '${entityCfg.pack}' not found in domain.packs`);
@@ -92,8 +117,40 @@ for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
       }
     }
   }
+
+  // V1: For EVERY domain entity, assert declared fields are a subset of keys present across EVERY record in EVERY file of the directory (R4-2)
+  const metaDir = entityNameToMetaDir.get(entityCfg.entityName);
+  if (!metaDir) {
+    fail(`Entity '${entityName}' (${entityCfg.entityName}) does not match any metadata directory via .mj-sync.json`);
+  }
+  const dirPath = path.join(metadataRootDir, metaDir);
+  const dataFiles = fs.readdirSync(dirPath).filter((f) => f.endsWith('.json') && !f.startsWith('.mj-sync'));
+  if (dataFiles.length === 0) {
+    fail(`Metadata directory '${metaDir}' for entity '${entityName}' contains no JSON data files`);
+  }
+
+  const declaredFieldNames = Object.keys(entityCfg.fields ?? {});
+  for (const file of dataFiles) {
+    const fileContent = JSON.parse(fs.readFileSync(path.join(dirPath, file), 'utf8'));
+    const records = Array.isArray(fileContent) ? fileContent : (fileContent.records ? fileContent.records : [fileContent]);
+    for (let idx = 0; idx < records.length; idx++) {
+      const rec = records[idx];
+      const recFields = rec.fields || rec;
+      const recKeys = new Set(Object.keys(recFields));
+      if (rec.primaryKey) {
+        for (const k of Object.keys(rec.primaryKey)) recKeys.add(k);
+      }
+      for (const declaredField of declaredFieldNames) {
+        if (!recKeys.has(declaredField)) {
+          fail(
+            `Declared field '${entityName}.${declaredField}' in domain.json is missing from record #${idx} in '${path.join(metaDir, file)}' (field on wrong entity or partial record loss)`
+          );
+        }
+      }
+    }
+  }
 }
-console.log('✓ data/domain.json conforms to Loom DomainConfigSchema & generated entity_subclasses.ts');
+console.log('✓ data/domain.json conforms to Loom DomainConfigSchema, generated entity_subclasses.ts & all committed metadata records');
 
 // 4. Heroes vs Committed Dataset Conformance (R2-H1)
 const heroesPath = path.join(rootDir, 'data/ruleset/heroes.json');
@@ -138,7 +195,6 @@ for (const hero of heroes.heroes) {
     const personCms = cms.filter((x) => x.fields && x.fields.PersonID === pid);
     for (const le of hero.ladderEntries) {
       if (le.ladderKey === 'governance-leadership-ladder') {
-        // Find corresponding committee membership matching role and year span
         const matchingCm = personCms.find((c) => {
           const roleMatch = c.fields.RoleID && c.fields.RoleID.includes(`Name=${le.state}`);
           const startYear = parseInt(c.fields.StartDate?.slice(0, 4), 10);

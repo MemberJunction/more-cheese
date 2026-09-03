@@ -26,11 +26,7 @@ import { morecheeseeventsEventFormComponent } from "./Entities/morecheeseeventsE
 import { morecheeselearningMemberCertificationFormComponent } from "./Entities/morecheeselearningMemberCertification/morecheeselearningmembercertification.form.component";
 import { morecheesemembersMemberProfileFormComponent } from "./Entities/morecheesemembersMemberProfile/morecheesemembersmemberprofile.form.component";
 import { morecheesemembersMembershipPeriodFormComponent } from "./Entities/morecheesemembersMembershipPeriod/morecheesemembersmembershipperiod.form.component";
-import { morecheeseordersOrderLineFormComponent } from "./Entities/morecheeseordersOrderLine/morecheeseordersorderline.form.component";
-import { morecheeseordersOrderFormComponent } from "./Entities/morecheeseordersOrder/morecheeseordersorder.form.component";
 import { morecheesemembersOrganizationProfileFormComponent } from "./Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component";
-import { morecheeseordersPaymentFormComponent } from "./Entities/morecheeseordersPayment/morecheeseorderspayment.form.component";
-import { morecheeseordersProductFormComponent } from "./Entities/morecheeseordersProduct/morecheeseordersproduct.form.component";
    
 
 @NgModule({
@@ -46,11 +42,7 @@ declarations: [
     morecheeselearningMemberCertificationFormComponent,
     morecheesemembersMemberProfileFormComponent,
     morecheesemembersMembershipPeriodFormComponent,
-    morecheeseordersOrderLineFormComponent,
-    morecheeseordersOrderFormComponent,
-    morecheesemembersOrganizationProfileFormComponent,
-    morecheeseordersPaymentFormComponent,
-    morecheeseordersProductFormComponent],
+    morecheesemembersOrganizationProfileFormComponent],
 imports: [
     CommonModule,
     FormsModule,

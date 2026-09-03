@@ -1,4 +1,4 @@
-import { BaseEntity, EntitySaveOptions, EntityDeleteOptions, CompositeKey, ValidationResult, ValidationErrorInfo, ValidationErrorType, Metadata, ProviderType, DatabaseProviderBase } from "@memberjunction/core";
+import { BaseEntity, EntitySaveOptions, EntityDeleteOptions, CompositeKey, ValidationResult, ValidationErrorInfo, ValidationErrorType, Metadata, ProviderType, DatabaseProviderBase, RunView } from "@memberjunction/core";
 import { RegisterClass } from "@memberjunction/global";
 import { z } from "zod";
 
@@ -627,12 +627,12 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Default Value: newsequentialid()`),
     PersonID: z.string().describe(`
         * * Field Name: PersonID
-        * * Display Name: Person ID
+        * * Display Name: Person
         * * SQL Data Type: uniqueidentifier
         * * Related Entity/Foreign Key: MJ_BizApps_Common: People (vwPeople.ID)`),
     OrganizationID: z.string().nullable().describe(`
         * * Field Name: OrganizationID
-        * * Display Name: Organization ID
+        * * Display Name: Organization
         * * SQL Data Type: uniqueidentifier
         * * Related Entity/Foreign Key: MJ_BizApps_Common: Organizations (vwOrganizations.ID)`),
     MemberNumber: z.string().describe(`
@@ -662,6 +662,14 @@ export const morecheesemembersMemberProfileSchema = z.object({
     *   * NA
     *   * RoW
         * * Description: Coarse geography bucket: NA, EU, or RoW`),
+    Country: z.string().nullable().describe(`
+        * * Field Name: Country
+        * * Display Name: Country
+        * * SQL Data Type: nvarchar(2)`),
+    CountryName: z.string().nullable().describe(`
+        * * Field Name: CountryName
+        * * Display Name: Country Name
+        * * SQL Data Type: nvarchar(100)`),
     City: z.string().describe(`
         * * Field Name: City
         * * Display Name: City
@@ -672,6 +680,18 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Display Name: State
         * * SQL Data Type: nvarchar(50)
         * * Description: Member state/country code`),
+    AddressLine1: z.string().nullable().describe(`
+        * * Field Name: AddressLine1
+        * * Display Name: Address Line 1
+        * * SQL Data Type: nvarchar(200)`),
+    AddressLine2: z.string().nullable().describe(`
+        * * Field Name: AddressLine2
+        * * Display Name: Address Line 2
+        * * SQL Data Type: nvarchar(200)`),
+    PostalCode: z.string().nullable().describe(`
+        * * Field Name: PostalCode
+        * * Display Name: Postal Code
+        * * SQL Data Type: nvarchar(20)`),
     Latitude: z.number().describe(`
         * * Field Name: Latitude
         * * Display Name: Latitude
@@ -687,6 +707,22 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Display Name: Join Date
         * * SQL Data Type: date
         * * Description: Date the member first joined the federation`),
+    RaceEthnicity: z.string().nullable().describe(`
+        * * Field Name: RaceEthnicity
+        * * Display Name: Race Ethnicity
+        * * SQL Data Type: nvarchar(200)`),
+    EthnicityHispanic: z.string().nullable().describe(`
+        * * Field Name: EthnicityHispanic
+        * * Display Name: Hispanic Ethnicity
+        * * SQL Data Type: nvarchar(30)`),
+    PronounSet: z.string().nullable().describe(`
+        * * Field Name: PronounSet
+        * * Display Name: Pronouns
+        * * SQL Data Type: nvarchar(50)`),
+    PrimaryLanguage: z.string().nullable().describe(`
+        * * Field Name: PrimaryLanguage
+        * * Display Name: Primary Language
+        * * SQL Data Type: nvarchar(50)`),
     IsSharedDemo: z.boolean().describe(`
         * * Field Name: IsSharedDemo
         * * Display Name: Is Shared Demo
@@ -703,42 +739,6 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Display Name: Updated At
         * * SQL Data Type: datetimeoffset
         * * Default Value: getutcdate()`),
-    Country: z.string().nullable().describe(`
-        * * Field Name: Country
-        * * Display Name: Country
-        * * SQL Data Type: nvarchar(2)`),
-    CountryName: z.string().nullable().describe(`
-        * * Field Name: CountryName
-        * * Display Name: Country Name
-        * * SQL Data Type: nvarchar(100)`),
-    AddressLine1: z.string().nullable().describe(`
-        * * Field Name: AddressLine1
-        * * Display Name: Address Line 1
-        * * SQL Data Type: nvarchar(200)`),
-    AddressLine2: z.string().nullable().describe(`
-        * * Field Name: AddressLine2
-        * * Display Name: Address Line 2
-        * * SQL Data Type: nvarchar(200)`),
-    PostalCode: z.string().nullable().describe(`
-        * * Field Name: PostalCode
-        * * Display Name: Postal Code
-        * * SQL Data Type: nvarchar(20)`),
-    RaceEthnicity: z.string().nullable().describe(`
-        * * Field Name: RaceEthnicity
-        * * Display Name: Race Ethnicity
-        * * SQL Data Type: nvarchar(200)`),
-    EthnicityHispanic: z.string().nullable().describe(`
-        * * Field Name: EthnicityHispanic
-        * * Display Name: Ethnicity Hispanic
-        * * SQL Data Type: nvarchar(30)`),
-    PronounSet: z.string().nullable().describe(`
-        * * Field Name: PronounSet
-        * * Display Name: Pronoun Set
-        * * SQL Data Type: nvarchar(50)`),
-    PrimaryLanguage: z.string().nullable().describe(`
-        * * Field Name: PrimaryLanguage
-        * * Display Name: Primary Language
-        * * SQL Data Type: nvarchar(50)`),
     Person: z.string().describe(`
         * * Field Name: Person
         * * Display Name: Person
@@ -747,6 +747,14 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Field Name: Organization
         * * Display Name: Organization
         * * SQL Data Type: nvarchar(255)`),
+    __mj_Latitude: z.number().describe(`
+        * * Field Name: __mj_Latitude
+        * * Display Name: Mj Latitude
+        * * SQL Data Type: decimal(9, 6)`),
+    __mj_Longitude: z.number().describe(`
+        * * Field Name: __mj_Longitude
+        * * Display Name: Mj Longitude
+        * * SQL Data Type: decimal(9, 6)`),
 });
 
 export type morecheesemembersMemberProfileEntityType = z.infer<typeof morecheesemembersMemberProfileSchema>;
@@ -854,145 +862,6 @@ export const morecheesemembersMembershipPeriodSchema = z.object({
 export type morecheesemembersMembershipPeriodEntityType = z.infer<typeof morecheesemembersMembershipPeriodSchema>;
 
 /**
- * zod schema definition for the entity MoreCheese: Order Lines
- */
-export const morecheeseordersOrderLineSchema = z.object({
-    ID: z.string().describe(`
-        * * Field Name: ID
-        * * Display Name: ID
-        * * SQL Data Type: uniqueidentifier
-        * * Default Value: newsequentialid()`),
-    OrderID: z.string().describe(`
-        * * Field Name: OrderID
-        * * Display Name: Order ID
-        * * SQL Data Type: uniqueidentifier
-        * * Related Entity/Foreign Key: MoreCheese: Orders (vwOrders.ID)`),
-    ProductID: z.string().describe(`
-        * * Field Name: ProductID
-        * * Display Name: Product ID
-        * * SQL Data Type: uniqueidentifier
-        * * Related Entity/Foreign Key: MoreCheese: Products (vwProducts.ID)`),
-    Quantity: z.number().describe(`
-        * * Field Name: Quantity
-        * * Display Name: Quantity
-        * * SQL Data Type: int
-        * * Default Value: 1
-        * * Description: Line quantity (1 in the demo slice)`),
-    UnitPrice: z.number().describe(`
-        * * Field Name: UnitPrice
-        * * Display Name: Unit Price
-        * * SQL Data Type: decimal(10, 2)
-        * * Description: Line unit price in USD`),
-    LineTotal: z.number().describe(`
-        * * Field Name: LineTotal
-        * * Display Name: Line Total
-        * * SQL Data Type: decimal(10, 2)
-        * * Description: Quantity × UnitPrice, in USD`),
-    IsSharedDemo: z.boolean().describe(`
-        * * Field Name: IsSharedDemo
-        * * Display Name: Is Shared Demo
-        * * SQL Data Type: bit
-        * * Default Value: 1
-        * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary`),
-    __mj_CreatedAt: z.date().describe(`
-        * * Field Name: __mj_CreatedAt
-        * * Display Name: Created At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-    __mj_UpdatedAt: z.date().describe(`
-        * * Field Name: __mj_UpdatedAt
-        * * Display Name: Updated At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-    Product: z.string().describe(`
-        * * Field Name: Product
-        * * Display Name: Product
-        * * SQL Data Type: nvarchar(200)`),
-});
-
-export type morecheeseordersOrderLineEntityType = z.infer<typeof morecheeseordersOrderLineSchema>;
-
-/**
- * zod schema definition for the entity MoreCheese: Orders
- */
-export const morecheeseordersOrderSchema = z.object({
-    ID: z.string().describe(`
-        * * Field Name: ID
-        * * Display Name: ID
-        * * SQL Data Type: uniqueidentifier
-        * * Default Value: newsequentialid()`),
-    OrderKey: z.string().describe(`
-        * * Field Name: OrderKey
-        * * Display Name: Order Key
-        * * SQL Data Type: nvarchar(50)
-        * * Description: Business key (ORD-D-* dues, ORD-R-* open renewal, ORD-E-* event); UUIDs derive from it`),
-    PersonID: z.string().describe(`
-        * * Field Name: PersonID
-        * * Display Name: Person ID
-        * * SQL Data Type: uniqueidentifier
-        * * Related Entity/Foreign Key: MJ_BizApps_Common: People (vwPeople.ID)`),
-    OrderType: z.string().describe(`
-        * * Field Name: OrderType
-        * * Display Name: Order Type
-        * * SQL Data Type: nvarchar(50)
-        * * Default Value: Sale
-        * * Description: Always Sale in the demo slice`),
-    Status: z.string().describe(`
-        * * Field Name: Status
-        * * Display Name: Status
-        * * SQL Data Type: nvarchar(50)
-        * * Default Value: Posted
-        * * Description: Always Posted — the posted order IS the bill (no invoices, per bizapps-orders design)`),
-    OrderDate: z.date().describe(`
-        * * Field Name: OrderDate
-        * * Display Name: Order Date
-        * * SQL Data Type: date
-        * * Description: Date the order posted (dues post at period start; event orders at registration)`),
-    DueDate: z.date().describe(`
-        * * Field Name: DueDate
-        * * Display Name: Due Date
-        * * SQL Data Type: date
-        * * Description: Payment due date (period start, or +30 days on business-tier net terms)`),
-    TotalGross: z.number().describe(`
-        * * Field Name: TotalGross
-        * * Display Name: Total Gross
-        * * SQL Data Type: decimal(10, 2)
-        * * Description: Order total in USD`),
-    PaymentStatus: z.union([z.literal('Overdue'), z.literal('Paid'), z.literal('Unpaid')]).describe(`
-        * * Field Name: PaymentStatus
-        * * Display Name: Payment Status
-        * * SQL Data Type: nvarchar(50)
-    * * Value List Type: List
-    * * Possible Values 
-    *   * Overdue
-    *   * Paid
-    *   * Unpaid
-        * * Description: Paid, Unpaid, or Overdue — a payment dated after release has not happened yet, so orders age (real A/R)`),
-    IsSharedDemo: z.boolean().describe(`
-        * * Field Name: IsSharedDemo
-        * * Display Name: Is Shared Demo
-        * * SQL Data Type: bit
-        * * Default Value: 1
-        * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary`),
-    __mj_CreatedAt: z.date().describe(`
-        * * Field Name: __mj_CreatedAt
-        * * Display Name: Created At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-    __mj_UpdatedAt: z.date().describe(`
-        * * Field Name: __mj_UpdatedAt
-        * * Display Name: Updated At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-    Person: z.string().describe(`
-        * * Field Name: Person
-        * * Display Name: Person
-        * * SQL Data Type: nvarchar(201)`),
-});
-
-export type morecheeseordersOrderEntityType = z.infer<typeof morecheeseordersOrderSchema>;
-
-/**
  * zod schema definition for the entity MoreCheese: Organization Profiles
  */
 export const morecheesemembersOrganizationProfileSchema = z.object({
@@ -1008,7 +877,7 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
         * * Related Entity/Foreign Key: MJ_BizApps_Common: Organizations (vwOrganizations.ID)`),
     OrgKey: z.string().describe(`
         * * Field Name: OrgKey
-        * * Display Name: Org Key
+        * * Display Name: Organization Key
         * * SQL Data Type: nvarchar(50)
         * * Description: Business key for the organization (e.g. ORG-0042); UUIDs derive from it`),
     Type: z.union([z.literal('Educator'), z.literal('Producer'), z.literal('Retailer'), z.literal('Supplier')]).describe(`
@@ -1032,6 +901,14 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
     *   * NA
     *   * RoW
         * * Description: Coarse geography bucket: NA, EU, or RoW`),
+    Country: z.string().nullable().describe(`
+        * * Field Name: Country
+        * * Display Name: Country Code
+        * * SQL Data Type: nvarchar(2)`),
+    CountryName: z.string().nullable().describe(`
+        * * Field Name: CountryName
+        * * Display Name: Country Name
+        * * SQL Data Type: nvarchar(100)`),
     City: z.string().describe(`
         * * Field Name: City
         * * Display Name: City
@@ -1042,6 +919,14 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
         * * Display Name: State
         * * SQL Data Type: nvarchar(50)
         * * Description: Headquarters state/country code`),
+    AddressLine1: z.string().nullable().describe(`
+        * * Field Name: AddressLine1
+        * * Display Name: Address Line 1
+        * * SQL Data Type: nvarchar(200)`),
+    PostalCode: z.string().nullable().describe(`
+        * * Field Name: PostalCode
+        * * Display Name: Postal Code
+        * * SQL Data Type: nvarchar(20)`),
     Latitude: z.number().describe(`
         * * Field Name: Latitude
         * * Display Name: Latitude
@@ -1054,7 +939,7 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
         * * Description: Headquarters longitude, pre-baked for the map (no live geocoding)`),
     LifecycleEventKind: z.union([z.literal('Acquired'), z.literal('Dissolved'), z.literal('ProgramCut')]).nullable().describe(`
         * * Field Name: LifecycleEventKind
-        * * Display Name: Lifecycle Event Kind
+        * * Display Name: Lifecycle Event
         * * SQL Data Type: nvarchar(50)
     * * Value List Type: List
     * * Possible Values 
@@ -1064,7 +949,7 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
         * * Description: The org-level shock, if any: Dissolved, Acquired, or ProgramCut — the driver behind employer-related churn`),
     LifecycleEventYear: z.number().nullable().describe(`
         * * Field Name: LifecycleEventYear
-        * * Display Name: Lifecycle Event Year
+        * * Display Name: Event Year
         * * SQL Data Type: int
         * * Description: Year the lifecycle event happened`),
     IsSharedDemo: z.boolean().describe(`
@@ -1083,157 +968,21 @@ export const morecheesemembersOrganizationProfileSchema = z.object({
         * * Display Name: Updated At
         * * SQL Data Type: datetimeoffset
         * * Default Value: getutcdate()`),
-    Country: z.string().nullable().describe(`
-        * * Field Name: Country
-        * * Display Name: Country
-        * * SQL Data Type: nvarchar(2)`),
-    CountryName: z.string().nullable().describe(`
-        * * Field Name: CountryName
-        * * Display Name: Country Name
-        * * SQL Data Type: nvarchar(100)`),
-    AddressLine1: z.string().nullable().describe(`
-        * * Field Name: AddressLine1
-        * * Display Name: Address Line 1
-        * * SQL Data Type: nvarchar(200)`),
-    PostalCode: z.string().nullable().describe(`
-        * * Field Name: PostalCode
-        * * Display Name: Postal Code
-        * * SQL Data Type: nvarchar(20)`),
     Organization: z.string().describe(`
         * * Field Name: Organization
-        * * Display Name: Organization
+        * * Display Name: Organization Name
         * * SQL Data Type: nvarchar(255)`),
+    __mj_Latitude: z.number().describe(`
+        * * Field Name: __mj_Latitude
+        * * Display Name: Mj Latitude
+        * * SQL Data Type: decimal(9, 6)`),
+    __mj_Longitude: z.number().describe(`
+        * * Field Name: __mj_Longitude
+        * * Display Name: Mj Longitude
+        * * SQL Data Type: decimal(9, 6)`),
 });
 
 export type morecheesemembersOrganizationProfileEntityType = z.infer<typeof morecheesemembersOrganizationProfileSchema>;
-
-/**
- * zod schema definition for the entity MoreCheese: Payments
- */
-export const morecheeseordersPaymentSchema = z.object({
-    ID: z.string().describe(`
-        * * Field Name: ID
-        * * Display Name: ID
-        * * SQL Data Type: uniqueidentifier
-        * * Default Value: newsequentialid()`),
-    OrderID: z.string().describe(`
-        * * Field Name: OrderID
-        * * Display Name: Order ID
-        * * SQL Data Type: uniqueidentifier
-        * * Related Entity/Foreign Key: MoreCheese: Orders (vwOrders.ID)`),
-    Amount: z.number().describe(`
-        * * Field Name: Amount
-        * * Display Name: Amount
-        * * SQL Data Type: decimal(10, 2)
-        * * Description: Payment amount in USD (full payment; no partials in the demo slice)`),
-    PaymentDate: z.date().describe(`
-        * * Field Name: PaymentDate
-        * * Display Name: Payment Date
-        * * SQL Data Type: date
-        * * Description: Date the payment landed, per the declared payment-timing profiles`),
-    Method: z.union([z.literal('ACH'), z.literal('Check'), z.literal('CreditCard'), z.literal('Wire')]).describe(`
-        * * Field Name: Method
-        * * Display Name: Method
-        * * SQL Data Type: nvarchar(50)
-    * * Value List Type: List
-    * * Possible Values 
-    *   * ACH
-    *   * Check
-    *   * CreditCard
-    *   * Wire
-        * * Description: CreditCard, ACH, Check, or Wire (business tiers pay on net terms)`),
-    Status: z.union([z.literal('Captured'), z.literal('Denied'), z.literal('Failed'), z.literal('InProgress'), z.literal('Refunded')]).describe(`
-        * * Field Name: Status
-        * * Display Name: Status
-        * * SQL Data Type: nvarchar(50)
-        * * Default Value: Captured
-    * * Value List Type: List
-    * * Possible Values 
-    *   * Captured
-    *   * Denied
-    *   * Failed
-    *   * InProgress
-    *   * Refunded
-        * * Description: Captured (Failed/Refunded reserved for future stories)`),
-    IsSharedDemo: z.boolean().describe(`
-        * * Field Name: IsSharedDemo
-        * * Display Name: Is Shared Demo
-        * * SQL Data Type: bit
-        * * Default Value: 1
-        * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary`),
-    __mj_CreatedAt: z.date().describe(`
-        * * Field Name: __mj_CreatedAt
-        * * Display Name: Created At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-    __mj_UpdatedAt: z.date().describe(`
-        * * Field Name: __mj_UpdatedAt
-        * * Display Name: Updated At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-});
-
-export type morecheeseordersPaymentEntityType = z.infer<typeof morecheeseordersPaymentSchema>;
-
-/**
- * zod schema definition for the entity MoreCheese: Products
- */
-export const morecheeseordersProductSchema = z.object({
-    ID: z.string().describe(`
-        * * Field Name: ID
-        * * Display Name: ID
-        * * SQL Data Type: uniqueidentifier
-        * * Default Value: newsequentialid()`),
-    ProductKey: z.string().describe(`
-        * * Field Name: ProductKey
-        * * Display Name: Product Key
-        * * SQL Data Type: nvarchar(50)
-        * * Description: Business key (e.g. PROD-MEM-INDIVIDUAL); UUIDs derive from it`),
-    Name: z.string().describe(`
-        * * Field Name: Name
-        * * Display Name: Name
-        * * SQL Data Type: nvarchar(200)
-        * * Description: Product display name`),
-    ProductType: z.union([z.literal('Certification'), z.literal('Competition'), z.literal('Donation'), z.literal('Event'), z.literal('JobPosting'), z.literal('Membership'), z.literal('Merchandise'), z.literal('Publication'), z.literal('Sponsorship')]).describe(`
-        * * Field Name: ProductType
-        * * Display Name: Product Type
-        * * SQL Data Type: nvarchar(50)
-    * * Value List Type: List
-    * * Possible Values 
-    *   * Certification
-    *   * Competition
-    *   * Donation
-    *   * Event
-    *   * JobPosting
-    *   * Membership
-    *   * Merchandise
-    *   * Publication
-    *   * Sponsorship
-        * * Description: Membership (annual dues per tier) or Event (registration)`),
-    UnitPrice: z.number().describe(`
-        * * Field Name: UnitPrice
-        * * Display Name: Unit Price
-        * * SQL Data Type: decimal(10, 2)
-        * * Description: List price in USD`),
-    IsSharedDemo: z.boolean().describe(`
-        * * Field Name: IsSharedDemo
-        * * Display Name: Is Shared Demo
-        * * SQL Data Type: bit
-        * * Default Value: 1
-        * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary`),
-    __mj_CreatedAt: z.date().describe(`
-        * * Field Name: __mj_CreatedAt
-        * * Display Name: Created At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-    __mj_UpdatedAt: z.date().describe(`
-        * * Field Name: __mj_UpdatedAt
-        * * Display Name: Updated At
-        * * SQL Data Type: datetimeoffset
-        * * Default Value: getutcdate()`),
-});
-
-export type morecheeseordersProductEntityType = z.infer<typeof morecheeseordersProductSchema>;
  
  
 
@@ -2848,7 +2597,7 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
 
     /**
     * * Field Name: PersonID
-    * * Display Name: Person ID
+    * * Display Name: Person
     * * SQL Data Type: uniqueidentifier
     * * Related Entity/Foreign Key: MJ_BizApps_Common: People (vwPeople.ID)
     */
@@ -2861,7 +2610,7 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
 
     /**
     * * Field Name: OrganizationID
-    * * Display Name: Organization ID
+    * * Display Name: Organization
     * * SQL Data Type: uniqueidentifier
     * * Related Entity/Foreign Key: MJ_BizApps_Common: Organizations (vwOrganizations.ID)
     */
@@ -2924,6 +2673,30 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     }
 
     /**
+    * * Field Name: Country
+    * * Display Name: Country
+    * * SQL Data Type: nvarchar(2)
+    */
+    get Country(): string | null {
+        return this.Get('Country');
+    }
+    set Country(value: string | null) {
+        this.Set('Country', value);
+    }
+
+    /**
+    * * Field Name: CountryName
+    * * Display Name: Country Name
+    * * SQL Data Type: nvarchar(100)
+    */
+    get CountryName(): string | null {
+        return this.Get('CountryName');
+    }
+    set CountryName(value: string | null) {
+        this.Set('CountryName', value);
+    }
+
+    /**
     * * Field Name: City
     * * Display Name: City
     * * SQL Data Type: nvarchar(100)
@@ -2947,6 +2720,42 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     }
     set State(value: string) {
         this.Set('State', value);
+    }
+
+    /**
+    * * Field Name: AddressLine1
+    * * Display Name: Address Line 1
+    * * SQL Data Type: nvarchar(200)
+    */
+    get AddressLine1(): string | null {
+        return this.Get('AddressLine1');
+    }
+    set AddressLine1(value: string | null) {
+        this.Set('AddressLine1', value);
+    }
+
+    /**
+    * * Field Name: AddressLine2
+    * * Display Name: Address Line 2
+    * * SQL Data Type: nvarchar(200)
+    */
+    get AddressLine2(): string | null {
+        return this.Get('AddressLine2');
+    }
+    set AddressLine2(value: string | null) {
+        this.Set('AddressLine2', value);
+    }
+
+    /**
+    * * Field Name: PostalCode
+    * * Display Name: Postal Code
+    * * SQL Data Type: nvarchar(20)
+    */
+    get PostalCode(): string | null {
+        return this.Get('PostalCode');
+    }
+    set PostalCode(value: string | null) {
+        this.Set('PostalCode', value);
     }
 
     /**
@@ -2989,6 +2798,54 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     }
 
     /**
+    * * Field Name: RaceEthnicity
+    * * Display Name: Race Ethnicity
+    * * SQL Data Type: nvarchar(200)
+    */
+    get RaceEthnicity(): string | null {
+        return this.Get('RaceEthnicity');
+    }
+    set RaceEthnicity(value: string | null) {
+        this.Set('RaceEthnicity', value);
+    }
+
+    /**
+    * * Field Name: EthnicityHispanic
+    * * Display Name: Hispanic Ethnicity
+    * * SQL Data Type: nvarchar(30)
+    */
+    get EthnicityHispanic(): string | null {
+        return this.Get('EthnicityHispanic');
+    }
+    set EthnicityHispanic(value: string | null) {
+        this.Set('EthnicityHispanic', value);
+    }
+
+    /**
+    * * Field Name: PronounSet
+    * * Display Name: Pronouns
+    * * SQL Data Type: nvarchar(50)
+    */
+    get PronounSet(): string | null {
+        return this.Get('PronounSet');
+    }
+    set PronounSet(value: string | null) {
+        this.Set('PronounSet', value);
+    }
+
+    /**
+    * * Field Name: PrimaryLanguage
+    * * Display Name: Primary Language
+    * * SQL Data Type: nvarchar(50)
+    */
+    get PrimaryLanguage(): string | null {
+        return this.Get('PrimaryLanguage');
+    }
+    set PrimaryLanguage(value: string | null) {
+        this.Set('PrimaryLanguage', value);
+    }
+
+    /**
     * * Field Name: IsSharedDemo
     * * Display Name: Is Shared Demo
     * * SQL Data Type: bit
@@ -3023,114 +2880,6 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     }
 
     /**
-    * * Field Name: Country
-    * * Display Name: Country
-    * * SQL Data Type: nvarchar(2)
-    */
-    get Country(): string | null {
-        return this.Get('Country');
-    }
-    set Country(value: string | null) {
-        this.Set('Country', value);
-    }
-
-    /**
-    * * Field Name: CountryName
-    * * Display Name: Country Name
-    * * SQL Data Type: nvarchar(100)
-    */
-    get CountryName(): string | null {
-        return this.Get('CountryName');
-    }
-    set CountryName(value: string | null) {
-        this.Set('CountryName', value);
-    }
-
-    /**
-    * * Field Name: AddressLine1
-    * * Display Name: Address Line 1
-    * * SQL Data Type: nvarchar(200)
-    */
-    get AddressLine1(): string | null {
-        return this.Get('AddressLine1');
-    }
-    set AddressLine1(value: string | null) {
-        this.Set('AddressLine1', value);
-    }
-
-    /**
-    * * Field Name: AddressLine2
-    * * Display Name: Address Line 2
-    * * SQL Data Type: nvarchar(200)
-    */
-    get AddressLine2(): string | null {
-        return this.Get('AddressLine2');
-    }
-    set AddressLine2(value: string | null) {
-        this.Set('AddressLine2', value);
-    }
-
-    /**
-    * * Field Name: PostalCode
-    * * Display Name: Postal Code
-    * * SQL Data Type: nvarchar(20)
-    */
-    get PostalCode(): string | null {
-        return this.Get('PostalCode');
-    }
-    set PostalCode(value: string | null) {
-        this.Set('PostalCode', value);
-    }
-
-    /**
-    * * Field Name: RaceEthnicity
-    * * Display Name: Race Ethnicity
-    * * SQL Data Type: nvarchar(200)
-    */
-    get RaceEthnicity(): string | null {
-        return this.Get('RaceEthnicity');
-    }
-    set RaceEthnicity(value: string | null) {
-        this.Set('RaceEthnicity', value);
-    }
-
-    /**
-    * * Field Name: EthnicityHispanic
-    * * Display Name: Ethnicity Hispanic
-    * * SQL Data Type: nvarchar(30)
-    */
-    get EthnicityHispanic(): string | null {
-        return this.Get('EthnicityHispanic');
-    }
-    set EthnicityHispanic(value: string | null) {
-        this.Set('EthnicityHispanic', value);
-    }
-
-    /**
-    * * Field Name: PronounSet
-    * * Display Name: Pronoun Set
-    * * SQL Data Type: nvarchar(50)
-    */
-    get PronounSet(): string | null {
-        return this.Get('PronounSet');
-    }
-    set PronounSet(value: string | null) {
-        this.Set('PronounSet', value);
-    }
-
-    /**
-    * * Field Name: PrimaryLanguage
-    * * Display Name: Primary Language
-    * * SQL Data Type: nvarchar(50)
-    */
-    get PrimaryLanguage(): string | null {
-        return this.Get('PrimaryLanguage');
-    }
-    set PrimaryLanguage(value: string | null) {
-        this.Set('PrimaryLanguage', value);
-    }
-
-    /**
     * * Field Name: Person
     * * Display Name: Person
     * * SQL Data Type: nvarchar(201)
@@ -3146,6 +2895,24 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     */
     get Organization(): string | null {
         return this.Get('Organization');
+    }
+
+    /**
+    * * Field Name: __mj_Latitude
+    * * Display Name: Mj Latitude
+    * * SQL Data Type: decimal(9, 6)
+    */
+    get __mj_Latitude(): number {
+        return this.Get('__mj_Latitude');
+    }
+
+    /**
+    * * Field Name: __mj_Longitude
+    * * Display Name: Mj Longitude
+    * * SQL Data Type: decimal(9, 6)
+    */
+    get __mj_Longitude(): number {
+        return this.Get('__mj_Longitude');
     }
 }
 
@@ -3396,359 +3163,6 @@ export class morecheesemembersMembershipPeriodEntity extends BaseEntity<morechee
 
 
 /**
- * MoreCheese: Order Lines - strongly typed entity sub-class
- * * Schema: morecheese_orders
- * * Base Table: OrderLine
- * * Base View: vwOrderLines
- * * @description Product-typed order lines
- * * Primary Key: ID
- * @extends {BaseEntity}
- * @class
- * @public
- */
-@RegisterClass(BaseEntity, 'MoreCheese: Order Lines')
-export class morecheeseordersOrderLineEntity extends BaseEntity<morecheeseordersOrderLineEntityType> {
-    /**
-    * Loads the MoreCheese: Order Lines record from the database
-    * @param ID: string - primary key value to load the MoreCheese: Order Lines record.
-    * @param EntityRelationshipsToLoad - (optional) the relationships to load
-    * @returns {Promise<boolean>} - true if successful, false otherwise
-    * @public
-    * @async
-    * @memberof morecheeseordersOrderLineEntity
-    * @method
-    * @override
-    */
-    public async Load(ID: string, EntityRelationshipsToLoad?: string[]) : Promise<boolean> {
-        const compositeKey: CompositeKey = new CompositeKey();
-        compositeKey.KeyValuePairs.push({ FieldName: 'ID', Value: ID });
-        return await super.InnerLoad(compositeKey, EntityRelationshipsToLoad);
-    }
-
-    /**
-    * * Field Name: ID
-    * * Display Name: ID
-    * * SQL Data Type: uniqueidentifier
-    * * Default Value: newsequentialid()
-    */
-    get ID(): string {
-        return this.Get('ID');
-    }
-    set ID(value: string) {
-        this.Set('ID', value);
-    }
-
-    /**
-    * * Field Name: OrderID
-    * * Display Name: Order ID
-    * * SQL Data Type: uniqueidentifier
-    * * Related Entity/Foreign Key: MoreCheese: Orders (vwOrders.ID)
-    */
-    get OrderID(): string {
-        return this.Get('OrderID');
-    }
-    set OrderID(value: string) {
-        this.Set('OrderID', value);
-    }
-
-    /**
-    * * Field Name: ProductID
-    * * Display Name: Product ID
-    * * SQL Data Type: uniqueidentifier
-    * * Related Entity/Foreign Key: MoreCheese: Products (vwProducts.ID)
-    */
-    get ProductID(): string {
-        return this.Get('ProductID');
-    }
-    set ProductID(value: string) {
-        this.Set('ProductID', value);
-    }
-
-    /**
-    * * Field Name: Quantity
-    * * Display Name: Quantity
-    * * SQL Data Type: int
-    * * Default Value: 1
-    * * Description: Line quantity (1 in the demo slice)
-    */
-    get Quantity(): number {
-        return this.Get('Quantity');
-    }
-    set Quantity(value: number) {
-        this.Set('Quantity', value);
-    }
-
-    /**
-    * * Field Name: UnitPrice
-    * * Display Name: Unit Price
-    * * SQL Data Type: decimal(10, 2)
-    * * Description: Line unit price in USD
-    */
-    get UnitPrice(): number {
-        return this.Get('UnitPrice');
-    }
-    set UnitPrice(value: number) {
-        this.Set('UnitPrice', value);
-    }
-
-    /**
-    * * Field Name: LineTotal
-    * * Display Name: Line Total
-    * * SQL Data Type: decimal(10, 2)
-    * * Description: Quantity × UnitPrice, in USD
-    */
-    get LineTotal(): number {
-        return this.Get('LineTotal');
-    }
-    set LineTotal(value: number) {
-        this.Set('LineTotal', value);
-    }
-
-    /**
-    * * Field Name: IsSharedDemo
-    * * Display Name: Is Shared Demo
-    * * SQL Data Type: bit
-    * * Default Value: 1
-    * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary
-    */
-    get IsSharedDemo(): boolean {
-        return this.Get('IsSharedDemo');
-    }
-    set IsSharedDemo(value: boolean) {
-        this.Set('IsSharedDemo', value);
-    }
-
-    /**
-    * * Field Name: __mj_CreatedAt
-    * * Display Name: Created At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_CreatedAt(): Date {
-        return this.Get('__mj_CreatedAt');
-    }
-
-    /**
-    * * Field Name: __mj_UpdatedAt
-    * * Display Name: Updated At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_UpdatedAt(): Date {
-        return this.Get('__mj_UpdatedAt');
-    }
-
-    /**
-    * * Field Name: Product
-    * * Display Name: Product
-    * * SQL Data Type: nvarchar(200)
-    */
-    get Product(): string {
-        return this.Get('Product');
-    }
-}
-
-
-/**
- * MoreCheese: Orders - strongly typed entity sub-class
- * * Schema: morecheese_orders
- * * Base Table: Order
- * * Base View: vwOrders
- * * @description One order per billable fact (order-per-cycle; the posted order IS the bill). Stand-in for bizapps-orders
- * * Primary Key: ID
- * @extends {BaseEntity}
- * @class
- * @public
- */
-@RegisterClass(BaseEntity, 'MoreCheese: Orders')
-export class morecheeseordersOrderEntity extends BaseEntity<morecheeseordersOrderEntityType> {
-    /**
-    * Loads the MoreCheese: Orders record from the database
-    * @param ID: string - primary key value to load the MoreCheese: Orders record.
-    * @param EntityRelationshipsToLoad - (optional) the relationships to load
-    * @returns {Promise<boolean>} - true if successful, false otherwise
-    * @public
-    * @async
-    * @memberof morecheeseordersOrderEntity
-    * @method
-    * @override
-    */
-    public async Load(ID: string, EntityRelationshipsToLoad?: string[]) : Promise<boolean> {
-        const compositeKey: CompositeKey = new CompositeKey();
-        compositeKey.KeyValuePairs.push({ FieldName: 'ID', Value: ID });
-        return await super.InnerLoad(compositeKey, EntityRelationshipsToLoad);
-    }
-
-    /**
-    * * Field Name: ID
-    * * Display Name: ID
-    * * SQL Data Type: uniqueidentifier
-    * * Default Value: newsequentialid()
-    */
-    get ID(): string {
-        return this.Get('ID');
-    }
-    set ID(value: string) {
-        this.Set('ID', value);
-    }
-
-    /**
-    * * Field Name: OrderKey
-    * * Display Name: Order Key
-    * * SQL Data Type: nvarchar(50)
-    * * Description: Business key (ORD-D-* dues, ORD-R-* open renewal, ORD-E-* event); UUIDs derive from it
-    */
-    get OrderKey(): string {
-        return this.Get('OrderKey');
-    }
-    set OrderKey(value: string) {
-        this.Set('OrderKey', value);
-    }
-
-    /**
-    * * Field Name: PersonID
-    * * Display Name: Person ID
-    * * SQL Data Type: uniqueidentifier
-    * * Related Entity/Foreign Key: MJ_BizApps_Common: People (vwPeople.ID)
-    */
-    get PersonID(): string {
-        return this.Get('PersonID');
-    }
-    set PersonID(value: string) {
-        this.Set('PersonID', value);
-    }
-
-    /**
-    * * Field Name: OrderType
-    * * Display Name: Order Type
-    * * SQL Data Type: nvarchar(50)
-    * * Default Value: Sale
-    * * Description: Always Sale in the demo slice
-    */
-    get OrderType(): string {
-        return this.Get('OrderType');
-    }
-    set OrderType(value: string) {
-        this.Set('OrderType', value);
-    }
-
-    /**
-    * * Field Name: Status
-    * * Display Name: Status
-    * * SQL Data Type: nvarchar(50)
-    * * Default Value: Posted
-    * * Description: Always Posted — the posted order IS the bill (no invoices, per bizapps-orders design)
-    */
-    get Status(): string {
-        return this.Get('Status');
-    }
-    set Status(value: string) {
-        this.Set('Status', value);
-    }
-
-    /**
-    * * Field Name: OrderDate
-    * * Display Name: Order Date
-    * * SQL Data Type: date
-    * * Description: Date the order posted (dues post at period start; event orders at registration)
-    */
-    get OrderDate(): Date {
-        return this.Get('OrderDate');
-    }
-    set OrderDate(value: Date) {
-        this.Set('OrderDate', value);
-    }
-
-    /**
-    * * Field Name: DueDate
-    * * Display Name: Due Date
-    * * SQL Data Type: date
-    * * Description: Payment due date (period start, or +30 days on business-tier net terms)
-    */
-    get DueDate(): Date {
-        return this.Get('DueDate');
-    }
-    set DueDate(value: Date) {
-        this.Set('DueDate', value);
-    }
-
-    /**
-    * * Field Name: TotalGross
-    * * Display Name: Total Gross
-    * * SQL Data Type: decimal(10, 2)
-    * * Description: Order total in USD
-    */
-    get TotalGross(): number {
-        return this.Get('TotalGross');
-    }
-    set TotalGross(value: number) {
-        this.Set('TotalGross', value);
-    }
-
-    /**
-    * * Field Name: PaymentStatus
-    * * Display Name: Payment Status
-    * * SQL Data Type: nvarchar(50)
-    * * Value List Type: List
-    * * Possible Values 
-    *   * Overdue
-    *   * Paid
-    *   * Unpaid
-    * * Description: Paid, Unpaid, or Overdue — a payment dated after release has not happened yet, so orders age (real A/R)
-    */
-    get PaymentStatus(): 'Overdue' | 'Paid' | 'Unpaid' {
-        return this.Get('PaymentStatus');
-    }
-    set PaymentStatus(value: 'Overdue' | 'Paid' | 'Unpaid') {
-        this.Set('PaymentStatus', value);
-    }
-
-    /**
-    * * Field Name: IsSharedDemo
-    * * Display Name: Is Shared Demo
-    * * SQL Data Type: bit
-    * * Default Value: 1
-    * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary
-    */
-    get IsSharedDemo(): boolean {
-        return this.Get('IsSharedDemo');
-    }
-    set IsSharedDemo(value: boolean) {
-        this.Set('IsSharedDemo', value);
-    }
-
-    /**
-    * * Field Name: __mj_CreatedAt
-    * * Display Name: Created At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_CreatedAt(): Date {
-        return this.Get('__mj_CreatedAt');
-    }
-
-    /**
-    * * Field Name: __mj_UpdatedAt
-    * * Display Name: Updated At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_UpdatedAt(): Date {
-        return this.Get('__mj_UpdatedAt');
-    }
-
-    /**
-    * * Field Name: Person
-    * * Display Name: Person
-    * * SQL Data Type: nvarchar(201)
-    */
-    get Person(): string {
-        return this.Get('Person');
-    }
-}
-
-
-/**
  * MoreCheese: Organization Profiles - strongly typed entity sub-class
  * * Schema: morecheese_members
  * * Base Table: OrganizationProfile
@@ -3806,7 +3220,7 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
 
     /**
     * * Field Name: OrgKey
-    * * Display Name: Org Key
+    * * Display Name: Organization Key
     * * SQL Data Type: nvarchar(50)
     * * Description: Business key for the organization (e.g. ORG-0042); UUIDs derive from it
     */
@@ -3855,6 +3269,30 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
     }
 
     /**
+    * * Field Name: Country
+    * * Display Name: Country Code
+    * * SQL Data Type: nvarchar(2)
+    */
+    get Country(): string | null {
+        return this.Get('Country');
+    }
+    set Country(value: string | null) {
+        this.Set('Country', value);
+    }
+
+    /**
+    * * Field Name: CountryName
+    * * Display Name: Country Name
+    * * SQL Data Type: nvarchar(100)
+    */
+    get CountryName(): string | null {
+        return this.Get('CountryName');
+    }
+    set CountryName(value: string | null) {
+        this.Set('CountryName', value);
+    }
+
+    /**
     * * Field Name: City
     * * Display Name: City
     * * SQL Data Type: nvarchar(100)
@@ -3878,6 +3316,30 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
     }
     set State(value: string) {
         this.Set('State', value);
+    }
+
+    /**
+    * * Field Name: AddressLine1
+    * * Display Name: Address Line 1
+    * * SQL Data Type: nvarchar(200)
+    */
+    get AddressLine1(): string | null {
+        return this.Get('AddressLine1');
+    }
+    set AddressLine1(value: string | null) {
+        this.Set('AddressLine1', value);
+    }
+
+    /**
+    * * Field Name: PostalCode
+    * * Display Name: Postal Code
+    * * SQL Data Type: nvarchar(20)
+    */
+    get PostalCode(): string | null {
+        return this.Get('PostalCode');
+    }
+    set PostalCode(value: string | null) {
+        this.Set('PostalCode', value);
     }
 
     /**
@@ -3908,7 +3370,7 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
 
     /**
     * * Field Name: LifecycleEventKind
-    * * Display Name: Lifecycle Event Kind
+    * * Display Name: Lifecycle Event
     * * SQL Data Type: nvarchar(50)
     * * Value List Type: List
     * * Possible Values 
@@ -3926,7 +3388,7 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
 
     /**
     * * Field Name: LifecycleEventYear
-    * * Display Name: Lifecycle Event Year
+    * * Display Name: Event Year
     * * SQL Data Type: int
     * * Description: Year the lifecycle event happened
     */
@@ -3972,359 +3434,29 @@ export class morecheesemembersOrganizationProfileEntity extends BaseEntity<morec
     }
 
     /**
-    * * Field Name: Country
-    * * Display Name: Country
-    * * SQL Data Type: nvarchar(2)
-    */
-    get Country(): string | null {
-        return this.Get('Country');
-    }
-    set Country(value: string | null) {
-        this.Set('Country', value);
-    }
-
-    /**
-    * * Field Name: CountryName
-    * * Display Name: Country Name
-    * * SQL Data Type: nvarchar(100)
-    */
-    get CountryName(): string | null {
-        return this.Get('CountryName');
-    }
-    set CountryName(value: string | null) {
-        this.Set('CountryName', value);
-    }
-
-    /**
-    * * Field Name: AddressLine1
-    * * Display Name: Address Line 1
-    * * SQL Data Type: nvarchar(200)
-    */
-    get AddressLine1(): string | null {
-        return this.Get('AddressLine1');
-    }
-    set AddressLine1(value: string | null) {
-        this.Set('AddressLine1', value);
-    }
-
-    /**
-    * * Field Name: PostalCode
-    * * Display Name: Postal Code
-    * * SQL Data Type: nvarchar(20)
-    */
-    get PostalCode(): string | null {
-        return this.Get('PostalCode');
-    }
-    set PostalCode(value: string | null) {
-        this.Set('PostalCode', value);
-    }
-
-    /**
     * * Field Name: Organization
-    * * Display Name: Organization
+    * * Display Name: Organization Name
     * * SQL Data Type: nvarchar(255)
     */
     get Organization(): string {
         return this.Get('Organization');
     }
-}
 
-
-/**
- * MoreCheese: Payments - strongly typed entity sub-class
- * * Schema: morecheese_orders
- * * Base Table: Payment
- * * Base View: vwPayments
- * * @description Payments against orders, timed by the declared payment profiles (a payment dated after release has not happened yet — orders age instead)
- * * Primary Key: ID
- * @extends {BaseEntity}
- * @class
- * @public
- */
-@RegisterClass(BaseEntity, 'MoreCheese: Payments')
-export class morecheeseordersPaymentEntity extends BaseEntity<morecheeseordersPaymentEntityType> {
     /**
-    * Loads the MoreCheese: Payments record from the database
-    * @param ID: string - primary key value to load the MoreCheese: Payments record.
-    * @param EntityRelationshipsToLoad - (optional) the relationships to load
-    * @returns {Promise<boolean>} - true if successful, false otherwise
-    * @public
-    * @async
-    * @memberof morecheeseordersPaymentEntity
-    * @method
-    * @override
+    * * Field Name: __mj_Latitude
+    * * Display Name: Mj Latitude
+    * * SQL Data Type: decimal(9, 6)
     */
-    public async Load(ID: string, EntityRelationshipsToLoad?: string[]) : Promise<boolean> {
-        const compositeKey: CompositeKey = new CompositeKey();
-        compositeKey.KeyValuePairs.push({ FieldName: 'ID', Value: ID });
-        return await super.InnerLoad(compositeKey, EntityRelationshipsToLoad);
+    get __mj_Latitude(): number {
+        return this.Get('__mj_Latitude');
     }
 
     /**
-    * * Field Name: ID
-    * * Display Name: ID
-    * * SQL Data Type: uniqueidentifier
-    * * Default Value: newsequentialid()
+    * * Field Name: __mj_Longitude
+    * * Display Name: Mj Longitude
+    * * SQL Data Type: decimal(9, 6)
     */
-    get ID(): string {
-        return this.Get('ID');
-    }
-    set ID(value: string) {
-        this.Set('ID', value);
-    }
-
-    /**
-    * * Field Name: OrderID
-    * * Display Name: Order ID
-    * * SQL Data Type: uniqueidentifier
-    * * Related Entity/Foreign Key: MoreCheese: Orders (vwOrders.ID)
-    */
-    get OrderID(): string {
-        return this.Get('OrderID');
-    }
-    set OrderID(value: string) {
-        this.Set('OrderID', value);
-    }
-
-    /**
-    * * Field Name: Amount
-    * * Display Name: Amount
-    * * SQL Data Type: decimal(10, 2)
-    * * Description: Payment amount in USD (full payment; no partials in the demo slice)
-    */
-    get Amount(): number {
-        return this.Get('Amount');
-    }
-    set Amount(value: number) {
-        this.Set('Amount', value);
-    }
-
-    /**
-    * * Field Name: PaymentDate
-    * * Display Name: Payment Date
-    * * SQL Data Type: date
-    * * Description: Date the payment landed, per the declared payment-timing profiles
-    */
-    get PaymentDate(): Date {
-        return this.Get('PaymentDate');
-    }
-    set PaymentDate(value: Date) {
-        this.Set('PaymentDate', value);
-    }
-
-    /**
-    * * Field Name: Method
-    * * Display Name: Method
-    * * SQL Data Type: nvarchar(50)
-    * * Value List Type: List
-    * * Possible Values 
-    *   * ACH
-    *   * Check
-    *   * CreditCard
-    *   * Wire
-    * * Description: CreditCard, ACH, Check, or Wire (business tiers pay on net terms)
-    */
-    get Method(): 'ACH' | 'Check' | 'CreditCard' | 'Wire' {
-        return this.Get('Method');
-    }
-    set Method(value: 'ACH' | 'Check' | 'CreditCard' | 'Wire') {
-        this.Set('Method', value);
-    }
-
-    /**
-    * * Field Name: Status
-    * * Display Name: Status
-    * * SQL Data Type: nvarchar(50)
-    * * Default Value: Captured
-    * * Value List Type: List
-    * * Possible Values 
-    *   * Captured
-    *   * Denied
-    *   * Failed
-    *   * InProgress
-    *   * Refunded
-    * * Description: Captured (Failed/Refunded reserved for future stories)
-    */
-    get Status(): 'Captured' | 'Denied' | 'Failed' | 'InProgress' | 'Refunded' {
-        return this.Get('Status');
-    }
-    set Status(value: 'Captured' | 'Denied' | 'Failed' | 'InProgress' | 'Refunded') {
-        this.Set('Status', value);
-    }
-
-    /**
-    * * Field Name: IsSharedDemo
-    * * Display Name: Is Shared Demo
-    * * SQL Data Type: bit
-    * * Default Value: 1
-    * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary
-    */
-    get IsSharedDemo(): boolean {
-        return this.Get('IsSharedDemo');
-    }
-    set IsSharedDemo(value: boolean) {
-        this.Set('IsSharedDemo', value);
-    }
-
-    /**
-    * * Field Name: __mj_CreatedAt
-    * * Display Name: Created At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_CreatedAt(): Date {
-        return this.Get('__mj_CreatedAt');
-    }
-
-    /**
-    * * Field Name: __mj_UpdatedAt
-    * * Display Name: Updated At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_UpdatedAt(): Date {
-        return this.Get('__mj_UpdatedAt');
-    }
-}
-
-
-/**
- * MoreCheese: Products - strongly typed entity sub-class
- * * Schema: morecheese_orders
- * * Base Table: Product
- * * Base View: vwProducts
- * * @description Sellable products: membership tiers and event registrations
- * * Primary Key: ID
- * @extends {BaseEntity}
- * @class
- * @public
- */
-@RegisterClass(BaseEntity, 'MoreCheese: Products')
-export class morecheeseordersProductEntity extends BaseEntity<morecheeseordersProductEntityType> {
-    /**
-    * Loads the MoreCheese: Products record from the database
-    * @param ID: string - primary key value to load the MoreCheese: Products record.
-    * @param EntityRelationshipsToLoad - (optional) the relationships to load
-    * @returns {Promise<boolean>} - true if successful, false otherwise
-    * @public
-    * @async
-    * @memberof morecheeseordersProductEntity
-    * @method
-    * @override
-    */
-    public async Load(ID: string, EntityRelationshipsToLoad?: string[]) : Promise<boolean> {
-        const compositeKey: CompositeKey = new CompositeKey();
-        compositeKey.KeyValuePairs.push({ FieldName: 'ID', Value: ID });
-        return await super.InnerLoad(compositeKey, EntityRelationshipsToLoad);
-    }
-
-    /**
-    * * Field Name: ID
-    * * Display Name: ID
-    * * SQL Data Type: uniqueidentifier
-    * * Default Value: newsequentialid()
-    */
-    get ID(): string {
-        return this.Get('ID');
-    }
-    set ID(value: string) {
-        this.Set('ID', value);
-    }
-
-    /**
-    * * Field Name: ProductKey
-    * * Display Name: Product Key
-    * * SQL Data Type: nvarchar(50)
-    * * Description: Business key (e.g. PROD-MEM-INDIVIDUAL); UUIDs derive from it
-    */
-    get ProductKey(): string {
-        return this.Get('ProductKey');
-    }
-    set ProductKey(value: string) {
-        this.Set('ProductKey', value);
-    }
-
-    /**
-    * * Field Name: Name
-    * * Display Name: Name
-    * * SQL Data Type: nvarchar(200)
-    * * Description: Product display name
-    */
-    get Name(): string {
-        return this.Get('Name');
-    }
-    set Name(value: string) {
-        this.Set('Name', value);
-    }
-
-    /**
-    * * Field Name: ProductType
-    * * Display Name: Product Type
-    * * SQL Data Type: nvarchar(50)
-    * * Value List Type: List
-    * * Possible Values 
-    *   * Certification
-    *   * Competition
-    *   * Donation
-    *   * Event
-    *   * JobPosting
-    *   * Membership
-    *   * Merchandise
-    *   * Publication
-    *   * Sponsorship
-    * * Description: Membership (annual dues per tier) or Event (registration)
-    */
-    get ProductType(): 'Certification' | 'Competition' | 'Donation' | 'Event' | 'JobPosting' | 'Membership' | 'Merchandise' | 'Publication' | 'Sponsorship' {
-        return this.Get('ProductType');
-    }
-    set ProductType(value: 'Certification' | 'Competition' | 'Donation' | 'Event' | 'JobPosting' | 'Membership' | 'Merchandise' | 'Publication' | 'Sponsorship') {
-        this.Set('ProductType', value);
-    }
-
-    /**
-    * * Field Name: UnitPrice
-    * * Display Name: Unit Price
-    * * SQL Data Type: decimal(10, 2)
-    * * Description: List price in USD
-    */
-    get UnitPrice(): number {
-        return this.Get('UnitPrice');
-    }
-    set UnitPrice(value: number) {
-        this.Set('UnitPrice', value);
-    }
-
-    /**
-    * * Field Name: IsSharedDemo
-    * * Display Name: Is Shared Demo
-    * * SQL Data Type: bit
-    * * Default Value: 1
-    * * Description: Marks generated shared-demo rows; the wipe-and-recreate boundary
-    */
-    get IsSharedDemo(): boolean {
-        return this.Get('IsSharedDemo');
-    }
-    set IsSharedDemo(value: boolean) {
-        this.Set('IsSharedDemo', value);
-    }
-
-    /**
-    * * Field Name: __mj_CreatedAt
-    * * Display Name: Created At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_CreatedAt(): Date {
-        return this.Get('__mj_CreatedAt');
-    }
-
-    /**
-    * * Field Name: __mj_UpdatedAt
-    * * Display Name: Updated At
-    * * SQL Data Type: datetimeoffset
-    * * Default Value: getutcdate()
-    */
-    get __mj_UpdatedAt(): Date {
-        return this.Get('__mj_UpdatedAt');
+    get __mj_Longitude(): number {
+        return this.Get('__mj_Longitude');
     }
 }
