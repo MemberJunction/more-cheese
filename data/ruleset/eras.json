@@ -1,0 +1,40 @@
+{
+  "$schema": "https://memberjunction.org/schemas/loom/eras.v1.json",
+  "eras": [
+    {
+      "eraKey": "era-post-covid-boom",
+      "scope": "all",
+      "cycles": [2021, 2022],
+      "factorAdjustments": [
+        {
+          "factor": "factor-membership-renewal",
+          "deltaIntercept": 0.35
+        }
+      ],
+      "volumeMultipliers": [
+        {
+          "entity": "CourseEnrollment",
+          "multiplier": 1.40
+        },
+        {
+          "entity": "EventRegistration",
+          "multiplier": 1.30
+        }
+      ],
+      "description": "Post-pandemic surge in culinary education, sourdough/cheesemaking enthusiasm, and digital event participation"
+    },
+    {
+      "eraKey": "era-creamery-closures-2025",
+      "scope": "tagged",
+      "cycles": [2025],
+      "factorAdjustments": [
+        {
+          "factor": "factor-membership-renewal",
+          "deltaIntercept": -0.65
+        }
+      ],
+      "volumeMultipliers": [],
+      "description": "Regional feed and energy cost inflation driving small farmstead creamery distress"
+    }
+  ]
+}

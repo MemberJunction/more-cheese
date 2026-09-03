@@ -1,0 +1,68 @@
+{
+  "$schema": "https://memberjunction.org/schemas/loom/ladders.v1.json",
+  "ladders": [
+    {
+      "ladderKey": "icf-governance-ladder",
+      "entity": "Person",
+      "binding": {
+        "mode": "childEntity",
+        "childEntity": "CommitteeMembership",
+        "foreignKey": "PersonID",
+        "stateField": "Role",
+        "termField": "TermID"
+      },
+      "cohortShare": 0.05,
+      "states": [
+        {
+          "name": "CommitteeMember",
+          "durationCycles": 2,
+          "effects": [
+            {
+              "factor": "factor-annual-conference-attendance",
+              "beta": 0.40
+            }
+          ],
+          "exitEffects": []
+        },
+        {
+          "name": "BoardDirector",
+          "capacity": 15,
+          "durationCycles": 2,
+          "prerequisites": {
+            "priorState": "CommitteeMember",
+            "minCyclesSinceBirth": 2
+          },
+          "effects": [
+            {
+              "factor": "factor-annual-conference-attendance",
+              "beta": 0.80
+            }
+          ],
+          "exitEffects": []
+        },
+        {
+          "name": "BoardChair",
+          "capacity": 1,
+          "durationCycles": 2,
+          "prerequisites": {
+            "priorState": "BoardDirector",
+            "minCyclesSinceBirth": 4
+          },
+          "effects": [
+            {
+              "factor": "factor-annual-conference-attendance",
+              "beta": 1.20
+            }
+          ],
+          "exitEffects": [
+            {
+              "dial": "theta",
+              "delta": 0.50
+            }
+          ]
+        }
+      ],
+      "description": "ICF Governance Ladder tracking progression from Committee Member to Board Director and Board Chair"
+    }
+  ]
+}

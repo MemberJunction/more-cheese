@@ -1,0 +1,54 @@
+{
+  "$schema": "https://memberjunction.org/schemas/loom/motifs.v1.json",
+  "motifs": [
+    {
+      "motifKey": "rising-star-cheesemaker",
+      "targetEntity": "Person",
+      "quota": { "mode": "percentage", "value": 5, "rounding": "round" },
+      "latentTrajectory": {
+        "dial": "theta",
+        "deltaPerCycle": 0.35
+      },
+      "childRates": [
+        {
+          "entity": "CourseEnrollment",
+          "perCycle": { "min": 1, "max": 3 }
+        }
+      ],
+      "description": "Apprentice and junior cheesemakers on steep upward professional development paths"
+    },
+    {
+      "motifKey": "corporate-ghost-autorenew",
+      "targetEntity": "MembershipPeriod",
+      "quota": { "mode": "percentage", "value": 8, "rounding": "round" },
+      "fixedFields": {
+        "AutoRenew": true
+      },
+      "childRates": [],
+      "description": "Corporate-funded memberships with silent auto-renewal"
+    },
+    {
+      "motifKey": "grassroots-advocate",
+      "targetEntity": "Person",
+      "quota": { "mode": "percentage", "value": 4, "rounding": "round" },
+      "childRates": [
+        {
+          "entity": "AdvocacyAction",
+          "perCycle": { "min": 3, "max": 8 }
+        }
+      ],
+      "description": "Activist farmstead producers engaged in legislative and raw-milk rulemaking"
+    },
+    {
+      "motifKey": "diagnosable-lapse",
+      "targetEntity": "Person",
+      "quota": { "mode": "percentage", "value": 6, "rounding": "round" },
+      "latentTrajectory": {
+        "dial": "theta",
+        "deltaPerCycle": -0.40
+      },
+      "childRates": [],
+      "description": "Members experiencing disengagement leading to non-renewal"
+    }
+  ]
+}
