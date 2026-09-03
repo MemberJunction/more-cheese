@@ -187,7 +187,7 @@
       "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "FactorType": "Declarative",
       "SourceRelatedEntityID": "5A171835-2878-55B9-9172-D71434FC2E58",
-      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Orders",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
       "Aggregation": "Sum",
       "AggregateFieldName": "TotalGross",
       "DateField": null,

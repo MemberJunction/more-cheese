@@ -101,7 +101,7 @@
     },
     "fields": {
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
-      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Orders",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
       "Alias": "orders",
       "RelationshipPath": "[]",
       "JoinType": "Left"
