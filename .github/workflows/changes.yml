@@ -24,6 +24,9 @@ jobs:
       - name: Validate metadata referential integrity closure
         run: node scripts/check-metadata-closure.mjs
 
+      - name: Validate Loom data project & schema conformance
+        run: node scripts/validate-loom-data.mjs
+
       - name: Check for migration file changes
         id: migration_check
         run: |

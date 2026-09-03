@@ -5,10 +5,9 @@
   "uuidNamespace": "8d3e9117-2b36-4078-a6fe-4c60144f8101",
   "description": "International Cheese Foundation world model, hero personas, motifs, and retrospective simulation configuration",
   "rulesetPath": "./ruleset",
-  "banksPath": "./banks",
   "output": {
-    "metadataDir": "../metadata",
-    "migrationsDir": "../migrations",
+    "metadataDir": "./output/metadata",
+    "migrationsDir": "./output/migrations",
     "sqlDialect": "sqlserver"
   }
 }

@@ -8,7 +8,7 @@
         "mode": "childEntity",
         "childEntity": "CommitteeMembership",
         "foreignKey": "PersonID",
-        "stateField": "Role",
+        "stateField": "RoleID",
         "termField": "TermID"
       },
       "cohortShare": 0.05,

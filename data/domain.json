@@ -29,8 +29,11 @@
       "fields": {
         "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
         "Name": { "name": "Name", "type": "string" },
-        "LegalName": { "name": "LegalName", "type": "string" },
-        "Website": { "name": "Website", "type": "string" },
+        "OrganizationTypeID": { "name": "OrganizationTypeID", "type": "string", "nullable": true },
+        "LegalName": { "name": "LegalName", "type": "string", "nullable": true },
+        "Website": { "name": "Website", "type": "string", "nullable": true },
+        "Phone": { "name": "Phone", "type": "string", "nullable": true },
+        "FoundedDate": { "name": "FoundedDate", "type": "date", "nullable": true },
         "Status": { "name": "Status", "type": "string" }
       },
       "foreignKeys": {},
@@ -47,7 +50,7 @@
         "FirstName": { "name": "FirstName", "type": "string" },
         "LastName": { "name": "LastName", "type": "string" },
         "Email": { "name": "Email", "type": "string" },
-        "Title": { "name": "Title", "type": "string" },
+        "Title": { "name": "Title", "type": "string", "nullable": true },
         "Status": { "name": "Status", "type": "string" }
       },
       "foreignKeys": {},
@@ -75,16 +78,29 @@
       "targetTable": "MembershipPeriod",
       "schema": "morecheese_members",
       "pack": "community",
-      "businessKey": ["PersonID", "PeriodNumber"],
+      "businessKey": ["PeriodKey"],
       "fields": {
         "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "PeriodKey": { "name": "PeriodKey", "type": "string" },
         "PersonID": { "name": "PersonID", "type": "uuid" },
-        "PeriodNumber": { "name": "PeriodNumber", "type": "number" },
+        "MembershipTier": { "name": "MembershipTier", "type": "string" },
+        "DuesAmount": { "name": "DuesAmount", "type": "number" },
+        "StartDate": { "name": "StartDate", "type": "date" },
+        "EndDate": { "name": "EndDate", "type": "date" },
+        "RenewalDate": { "name": "RenewalDate", "type": "date", "nullable": true },
         "Status": { "name": "Status", "type": "string" },
-        "AutoRenew": { "name": "AutoRenew", "type": "boolean" }
+        "CancellationDate": { "name": "CancellationDate", "type": "date", "nullable": true },
+        "CancellationReason": { "name": "CancellationReason", "type": "string", "nullable": true },
+        "AutoRenew": { "name": "AutoRenew", "type": "boolean" },
+        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
       },
       "foreignKeys": {
-        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
+        "PersonID": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
       },
       "isImmutable": false
     },
@@ -93,16 +109,23 @@
       "targetTable": "EventRegistration",
       "schema": "morecheese_members",
       "pack": "community",
-      "businessKey": ["PersonID", "EventID"],
+      "businessKey": ["RegKey"],
       "fields": {
         "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "RegKey": { "name": "RegKey", "type": "string" },
         "PersonID": { "name": "PersonID", "type": "uuid" },
         "EventID": { "name": "EventID", "type": "uuid" },
+        "RegisteredOn": { "name": "RegisteredOn", "type": "date" },
         "Attended": { "name": "Attended", "type": "boolean" },
-        "Status": { "name": "Status", "type": "string" }
+        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
       },
       "foreignKeys": {
-        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
+        "PersonID": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
       },
       "isImmutable": false
     },
@@ -111,35 +134,24 @@
       "targetTable": "CourseEnrollment",
       "schema": "morecheese_members",
       "pack": "community",
-      "businessKey": ["PersonID", "CourseID"],
+      "businessKey": ["EnrollKey"],
       "fields": {
         "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "EnrollKey": { "name": "EnrollKey", "type": "string" },
         "PersonID": { "name": "PersonID", "type": "uuid" },
         "CourseID": { "name": "CourseID", "type": "uuid" },
-        "Completed": { "name": "Completed", "type": "boolean" },
-        "Status": { "name": "Status", "type": "string" }
+        "EnrolledOn": { "name": "EnrolledOn", "type": "date" },
+        "Status": { "name": "Status", "type": "string" },
+        "CompletedOn": { "name": "CompletedOn", "type": "date", "nullable": true },
+        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
       },
       "foreignKeys": {
-        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
-      },
-      "isImmutable": false
-    },
-    "CommitteeMembership": {
-      "name": "CommitteeMembership",
-      "targetTable": "Member",
-      "schema": "__mj_BizAppsCommittees",
-      "pack": "community",
-      "businessKey": ["PersonID", "CommitteeID", "TermID"],
-      "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "PersonID": { "name": "PersonID", "type": "uuid" },
-        "CommitteeID": { "name": "CommitteeID", "type": "uuid" },
-        "TermID": { "name": "TermID", "type": "uuid" },
-        "Role": { "name": "Role", "type": "string" },
-        "Status": { "name": "Status", "type": "string" }
-      },
-      "foreignKeys": {
-        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
+        "PersonID": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
       },
       "isImmutable": false
     },
@@ -148,16 +160,48 @@
       "targetTable": "AdvocacyAction",
       "schema": "morecheese_members",
       "pack": "community",
-      "businessKey": ["PersonID", "ActionDate", "CampaignKey"],
+      "businessKey": ["ActionKey"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
+        "ActionKey": { "name": "ActionKey", "type": "string" },
+        "PersonID": { "name": "PersonID", "type": "uuid" },
+        "ActionDate": { "name": "ActionDate", "type": "date" },
+        "Kind": { "name": "Kind", "type": "string" },
+        "Topic": { "name": "Topic", "type": "string" },
+        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      },
+      "isImmutable": false
+    },
+    "CommitteeMembership": {
+      "name": "CommitteeMembership",
+      "targetTable": "Member",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "businessKey": ["PersonID", "RoleID", "TermID"],
       "fields": {
         "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
         "PersonID": { "name": "PersonID", "type": "uuid" },
-        "ActionDate": { "name": "ActionDate", "type": "date" },
-        "CampaignKey": { "name": "CampaignKey", "type": "string" },
-        "ActionType": { "name": "ActionType", "type": "string" }
+        "RoleID": { "name": "RoleID", "type": "string" },
+        "TermID": { "name": "TermID", "type": "uuid" },
+        "StartDate": { "name": "StartDate", "type": "date" },
+        "EndDate": { "name": "EndDate", "type": "date" },
+        "Status": { "name": "Status", "type": "string" }
       },
       "foreignKeys": {
-        "PersonID": { "targetEntity": "Person", "targetField": "ID" }
+        "PersonID": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
       },
       "isImmutable": false
     }
