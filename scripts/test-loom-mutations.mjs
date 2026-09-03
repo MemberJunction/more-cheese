@@ -91,8 +91,16 @@ try {
   fs.writeFileSync(heroesPath, JSON.stringify(mutatedHeroes5, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 5: wrong title', 'disagrees with committed dataset');
 
+  // Mutation 6: Declared field on non-members schema missing from metadata records (V1)
+  console.log('Running Mutation 6: Non-members schema declared field missing from metadata...');
+  fs.writeFileSync(heroesPath, origHeroes, 'utf8'); // restore
+  const mutatedDomain6 = JSON.parse(origDomain);
+  mutatedDomain6.entities.Product.fields.Bio = { name: 'Bio', type: 'string' };
+  fs.writeFileSync(domainPath, JSON.stringify(mutatedDomain6, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 6: non-members field missing from metadata', "missing from metadata records in 'products'");
+
   console.log('\n================================================================================');
-  console.log('✅ ALL 5 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (R3-M1)');
+  console.log('✅ ALL 6 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (R3-M1, V1)');
   console.log('================================================================================');
 } finally {
   // Always restore originals

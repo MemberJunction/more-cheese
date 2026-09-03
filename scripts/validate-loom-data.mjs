@@ -59,6 +59,22 @@ const subclassesPath = path.join(rootDir, 'packages/Entities/src/generated/entit
 if (!fs.existsSync(subclassesPath)) fail('Generated entity subclasses missing at packages/Entities/src/generated/entity_subclasses.ts');
 const subclasses = fs.readFileSync(subclassesPath, 'utf8');
 
+// Build mapping of entityName -> metadata directory from metadata/**/.mj-sync.json
+const metadataRootDir = path.join(rootDir, 'metadata');
+const metaDirs = fs.readdirSync(metadataRootDir, { withFileTypes: true }).filter((d) => d.isDirectory());
+const entityNameToMetaDir = new Map();
+for (const md of metaDirs) {
+  const syncFile = path.join(metadataRootDir, md.name, '.mj-sync.json');
+  if (fs.existsSync(syncFile)) {
+    try {
+      const s = JSON.parse(fs.readFileSync(syncFile, 'utf8'));
+      if (s.entity) {
+        entityNameToMetaDir.set(s.entity, md.name);
+      }
+    } catch {}
+  }
+}
+
 for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
   if (!domain.packs[entityCfg.pack]) {
     fail(`Entity '${entityName}' declares pack '${entityCfg.pack}' not found in domain.packs`);
@@ -92,8 +108,34 @@ for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
       }
     }
   }
+
+  // V1: For EVERY domain entity, assert declared fields are a subset of keys present in its metadata records
+  const metaDir = entityNameToMetaDir.get(entityCfg.entityName);
+  if (!metaDir) {
+    fail(`Entity '${entityName}' (${entityCfg.entityName}) does not match any metadata directory via .mj-sync.json`);
+  }
+  const dirPath = path.join(metadataRootDir, metaDir);
+  const dataFiles = fs.readdirSync(dirPath).filter((f) => f.endsWith('.json') && !f.startsWith('.mj-sync'));
+  if (dataFiles.length === 0) {
+    fail(`Metadata directory '${metaDir}' for entity '${entityName}' contains no JSON data files`);
+  }
+  const sampleContent = JSON.parse(fs.readFileSync(path.join(dirPath, dataFiles[0]), 'utf8'));
+  const firstRec = Array.isArray(sampleContent) ? sampleContent[0] : (sampleContent.records ? sampleContent.records[0] : sampleContent);
+  if (!firstRec) {
+    fail(`Metadata file '${dataFiles[0]}' for entity '${entityName}' contains no records`);
+  }
+  const recFields = firstRec.fields || firstRec;
+  const recKeys = new Set(Object.keys(recFields));
+  if (firstRec.primaryKey) {
+    for (const k of Object.keys(firstRec.primaryKey)) recKeys.add(k);
+  }
+  for (const declaredField of Object.keys(entityCfg.fields ?? {})) {
+    if (!recKeys.has(declaredField)) {
+      fail(`Declared field '${entityName}.${declaredField}' in domain.json is missing from metadata records in '${metaDir}' (field on wrong entity)`);
+    }
+  }
 }
-console.log('✓ data/domain.json conforms to Loom DomainConfigSchema & generated entity_subclasses.ts');
+console.log('✓ data/domain.json conforms to Loom DomainConfigSchema, generated entity_subclasses.ts & committed metadata fields');
 
 // 4. Heroes vs Committed Dataset Conformance (R2-H1)
 const heroesPath = path.join(rootDir, 'data/ruleset/heroes.json');
