@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MemberJunction/loom
-          ref: 432ec92f03f360ec1513e9a5840d2a8a1eb292d3
+          ref: 432ec9225b7338d8987e450ce71c2e362c8a1833
           path: loom
 
       - name: Build Loom Contracts
