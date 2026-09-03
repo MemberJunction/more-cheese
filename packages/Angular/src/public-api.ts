@@ -35,6 +35,12 @@ export { morecheeseordersOrderLineFormComponent } from './lib/generated/Entities
 export { morecheeseordersPaymentFormComponent } from './lib/generated/Entities/morecheeseordersPayment/morecheeseorderspayment.form.component';
 export { morecheeseordersProductFormComponent } from './lib/generated/Entities/morecheeseordersProduct/morecheeseordersproduct.form.component';
 
+// Dynamic Form Extension Panels (BaseFormPanel slot system)
+import './lib/panels/member-community/member-community.panel';
+import './lib/panels/organization-guild/organization-guild.panel';
+export { MemberCommunityPanel } from './lib/panels/member-community/member-community.panel';
+export { OrganizationCheeseGuildPanel } from './lib/panels/organization-guild/organization-guild.panel';
+
 /**
  * Bootstrap function named by mj-app.json "startupExport" for the client.
  * The static imports above handle all registration; this function ensures
