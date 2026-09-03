@@ -15,7 +15,11 @@ export class morecheesemembersMemberProfileFormComponent extends BaseFormCompone
     override async ngOnInit() {
         await super.ngOnInit();
         this.initSections([
-            { sectionKey: 'details', sectionName: 'Details', isExpanded: true }
+            { sectionKey: 'memberIdentity', sectionName: 'Member Identity', isExpanded: true },
+            { sectionKey: 'memberProfile', sectionName: 'Member Profile', isExpanded: true },
+            { sectionKey: 'locationDetails', sectionName: 'Location Details', isExpanded: true },
+            { sectionKey: 'details', sectionName: 'Details', isExpanded: true },
+            { sectionKey: 'systemMetadata', sectionName: 'System Metadata', isExpanded: false }
         ]);
     }
 }

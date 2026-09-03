@@ -1,6 +1,8 @@
 # CodeGen scratch output (fold what you need into migrations/, then discard)
 codegen.output.log
 migrations/codegen/
+packages/Angular/src/lib/generated/
+packages/*/src/generated/
 SQL Scripts/
 Schema Files/
 temp_sql_scripts/
