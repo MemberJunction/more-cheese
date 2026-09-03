@@ -6,13 +6,13 @@
     "fields": {
       "Name": "Enthusiast Membership (annual)",
       "SKU": "PROD-MEM-ENTHUSIAST",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "9A783463-F0E6-450E-B7AD-DD3EFD1F0DAF",
       "ProductCategoryID": "E1FE16E4-7AD2-4791-96A5-6A1043623772",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F02",
       "Status": "Active",
       "StandaloneSellingPrice": 150,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Enthusiast Membership (annual)"
     }
   },
@@ -23,13 +23,13 @@
     "fields": {
       "Name": "Individual Membership (annual)",
       "SKU": "PROD-MEM-INDIVIDUAL",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "9A783463-F0E6-450E-B7AD-DD3EFD1F0DAF",
       "ProductCategoryID": "E1FE16E4-7AD2-4791-96A5-6A1043623772",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F02",
       "Status": "Active",
       "StandaloneSellingPrice": 175,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Individual Membership (annual)"
     }
   },
@@ -40,13 +40,13 @@
     "fields": {
       "Name": "SmallBusiness Membership (annual)",
       "SKU": "PROD-MEM-SMALLBUSINESS",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "9A783463-F0E6-450E-B7AD-DD3EFD1F0DAF",
       "ProductCategoryID": "E1FE16E4-7AD2-4791-96A5-6A1043623772",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F02",
       "Status": "Active",
       "StandaloneSellingPrice": 400,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "SmallBusiness Membership (annual)"
     }
   },
@@ -57,13 +57,13 @@
     "fields": {
       "Name": "Corporate Membership (annual)",
       "SKU": "PROD-MEM-CORPORATE",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "9A783463-F0E6-450E-B7AD-DD3EFD1F0DAF",
       "ProductCategoryID": "E1FE16E4-7AD2-4791-96A5-6A1043623772",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F02",
       "Status": "Active",
       "StandaloneSellingPrice": 1000,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Corporate Membership (annual)"
     }
   },
@@ -74,13 +74,13 @@
     "fields": {
       "Name": "Conference Registration",
       "SKU": "PROD-EVT-CONFERENCE",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "9EFE875F-C8BE-47A6-8E7B-633FA2587094",
       "ProductCategoryID": "C304CC99-F9F2-43E0-BE1D-26CA75C3C42C",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F03",
       "Status": "Active",
       "StandaloneSellingPrice": 450,
-      "IsTaxable": 1,
+      "IsTaxable": true,
       "Description": "Conference Registration"
     }
   },
@@ -91,13 +91,13 @@
     "fields": {
       "Name": "Workshop Registration",
       "SKU": "PROD-EVT-WORKSHOP",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "9EFE875F-C8BE-47A6-8E7B-633FA2587094",
       "ProductCategoryID": "C304CC99-F9F2-43E0-BE1D-26CA75C3C42C",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F03",
       "Status": "Active",
       "StandaloneSellingPrice": 150,
-      "IsTaxable": 1,
+      "IsTaxable": true,
       "Description": "Workshop Registration"
     }
   },
@@ -108,13 +108,13 @@
     "fields": {
       "Name": "Certification exam fee",
       "SKU": "PROD-CERT-EXAM",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0BAC2F28-FB02-461E-9A1A-AD9DE1F46AB9",
       "ProductCategoryID": "856D4AE0-3EA6-4E1D-882E-6B28107A39BA",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 425,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Certification exam fee"
     }
   },
@@ -125,13 +125,13 @@
     "fields": {
       "Name": "Recertification fee",
       "SKU": "PROD-CERT-RECERT",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0BAC2F28-FB02-461E-9A1A-AD9DE1F46AB9",
       "ProductCategoryID": "856D4AE0-3EA6-4E1D-882E-6B28107A39BA",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 195,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Recertification fee"
     }
   },
@@ -142,13 +142,13 @@
     "fields": {
       "Name": "Competition entry (per cheese)",
       "SKU": "PROD-COMP-ENTRY",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0BAC2F28-FB02-461E-9A1A-AD9DE1F46AB9",
       "ProductCategoryID": "C304CC99-F9F2-43E0-BE1D-26CA75C3C42C",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 65,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Competition entry (per cheese)"
     }
   },
@@ -159,13 +159,13 @@
     "fields": {
       "Name": "Journal of Artisan Cheese (annual)",
       "SKU": "PROD-PUB-JOURNAL",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0AFB4A94-E2B4-4D99-AA16-8295C7DDE935",
       "ProductCategoryID": "E204ABAF-59E4-4DEA-8283-5678D7EA4470",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 85,
-      "IsTaxable": 1,
+      "IsTaxable": true,
       "Description": "Journal of Artisan Cheese (annual)"
     }
   },
@@ -176,13 +176,13 @@
     "fields": {
       "Name": "Standards handbook",
       "SKU": "PROD-PUB-STANDARDS",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0AFB4A94-E2B4-4D99-AA16-8295C7DDE935",
       "ProductCategoryID": "E204ABAF-59E4-4DEA-8283-5678D7EA4470",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 140,
-      "IsTaxable": 1,
+      "IsTaxable": true,
       "Description": "Standards handbook"
     }
   },
@@ -193,13 +193,13 @@
     "fields": {
       "Name": "Conference exhibitor booth",
       "SKU": "PROD-SPON-EXPO",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0BAC2F28-FB02-461E-9A1A-AD9DE1F46AB9",
       "ProductCategoryID": "25399F75-0322-484A-ADDE-E5B1070DC95B",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 2400,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Conference exhibitor booth"
     }
   },
@@ -210,13 +210,13 @@
     "fields": {
       "Name": "Job board posting (30 days)",
       "SKU": "PROD-JOB-POST",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0BAC2F28-FB02-461E-9A1A-AD9DE1F46AB9",
       "ProductCategoryID": "25399F75-0322-484A-ADDE-E5B1070DC95B",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 250,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Job board posting (30 days)"
     }
   },
@@ -227,13 +227,13 @@
     "fields": {
       "Name": "Federation apron",
       "SKU": "PROD-MERCH-APRON",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0AFB4A94-E2B4-4D99-AA16-8295C7DDE935",
       "ProductCategoryID": "E204ABAF-59E4-4DEA-8283-5678D7EA4470",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 38,
-      "IsTaxable": 1,
+      "IsTaxable": true,
       "Description": "Federation apron"
     }
   },
@@ -244,13 +244,13 @@
     "fields": {
       "Name": "Cheese atlas",
       "SKU": "PROD-MERCH-BOOK",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "0AFB4A94-E2B4-4D99-AA16-8295C7DDE935",
       "ProductCategoryID": "E204ABAF-59E4-4DEA-8283-5678D7EA4470",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 52,
-      "IsTaxable": 1,
+      "IsTaxable": true,
       "Description": "Cheese atlas"
     }
   },
@@ -261,13 +261,13 @@
     "fields": {
       "Name": "Education fund donation",
       "SKU": "PROD-DONATION",
-      "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "ProductTypeID": "BB82ECBC-3501-4F58-9D7F-C92858AD0B78",
       "ProductCategoryID": "25399F75-0322-484A-ADDE-E5B1070DC95B",
       "RevenueRecognitionTypeID": "A1D4E7B0-3C62-4F85-9A17-2B3C4D5E6F01",
       "Status": "Active",
       "StandaloneSellingPrice": 100,
-      "IsTaxable": 0,
+      "IsTaxable": false,
       "Description": "Education fund donation"
     }
   }

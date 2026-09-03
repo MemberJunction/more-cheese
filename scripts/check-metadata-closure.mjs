@@ -45,7 +45,7 @@ for (const file of files) {
         dirKeys.add(pk);
       }
       if (r?.fields) {
-        records.push({ dir, fields: r.fields });
+        records.push({ dir, primaryKey: r.primaryKey, fields: r.fields });
       }
     }
   } catch (err) {
@@ -163,5 +163,92 @@ if (orphanMap.size > 0) {
   process.exit(1);
 }
 
-console.log(`\n✅ Metadata closure check PASSED. All ${evaluatedCount.toLocaleString()} foreign keys closed with 0 orphans.`);
+// 4. Directory coverage audit: Every directory containing .mj-sync.json must be in root .mj-sync.json directoryOrder
+console.log('\n--- Directory Coverage Audit ---');
+const rootSyncConfig = JSON.parse(readFileSync(join(METADATA_DIR, '.mj-sync.json'), 'utf-8'));
+const declaredDirs = new Set(rootSyncConfig.directoryOrder ?? []);
+const actualSyncDirs = [];
+for (const entry of readdirSync(METADATA_DIR)) {
+  const full = join(METADATA_DIR, entry);
+  if (statSync(full).isDirectory() && !entry.startsWith('.')) {
+    if (readdirSync(full).includes('.mj-sync.json')) {
+      actualSyncDirs.push(entry);
+    }
+  }
+}
+const missingFromOrder = actualSyncDirs.filter((d) => !declaredDirs.has(d));
+if (missingFromOrder.length > 0) {
+  console.error(`\n❌ DIRECTORY ORDER AUDIT FAILED: The following ${missingFromOrder.length} entity directories are missing from metadata/.mj-sync.json directoryOrder:`);
+  for (const d of missingFromOrder) console.error(`  - ${d}`);
+  process.exit(1);
+}
+console.log(`✓ All ${actualSyncDirs.length} entity directories declared in root .mj-sync.json directoryOrder.`);
+
+// 5. Cross-directory Primary Key Uniqueness audit
+console.log('\n--- Cross-Directory Primary Key Uniqueness Audit ---');
+const pkOwnerMap = new Map();
+let duplicatePks = 0;
+for (const [dir, pks] of primaryKeysByDir.entries()) {
+  for (const pk of pks) {
+    if (pkOwnerMap.has(pk)) {
+      console.error(`❌ PK COLLISION: Primary Key ${pk} exists in both '${pkOwnerMap.get(pk)}' and '${dir}'!`);
+      duplicatePks++;
+    } else {
+      pkOwnerMap.set(pk, dir);
+    }
+  }
+}
+if (duplicatePks > 0) {
+  console.error(`\n❌ PK UNIQUENESS AUDIT FAILED: ${duplicatePks} cross-directory primary key collision(s) found.`);
+  process.exit(1);
+}
+console.log(`✓ Zero cross-directory Primary Key collisions across ${pkOwnerMap.size.toLocaleString()} unique PKs.`);
+
+// 6. Order Financial Integrity audit (TotalGross == line sum, Balance == TotalGross - AmountPaid, 0 overpaid)
+console.log('\n--- Order Financial Integrity Audit ---');
+const orderLines = records.filter((r) => r.dir === 'order-lines');
+const lineSums = new Map();
+for (const ol of orderLines) {
+  const oid = ol.fields.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
+  if (!oid) continue;
+  const lineTotal =
+    (Number(ol.fields.Quantity) || 1) * (Number(ol.fields.UnitPrice) || 0) -
+    (Number(ol.fields.DiscountAmount) || 0) +
+    (Number(ol.fields.ChargeAmount) || 0) +
+    (Number(ol.fields.LineTax) || 0);
+  lineSums.set(oid, (lineSums.get(oid) ?? 0) + lineTotal);
+}
+
+const orders = records.filter((r) => r.dir === 'orders');
+let grossMismatches = 0;
+let balanceMismatches = 0;
+let overpaidOrders = 0;
+
+for (const o of orders) {
+  const oid = o.primaryKey?.ID ? String(o.primaryKey.ID).toUpperCase() : null;
+  const f = o.fields;
+  const lineTotal = lineSums.get(oid);
+  if (lineTotal !== undefined && Math.abs(f.TotalGross - lineTotal) > 0.01) {
+    grossMismatches++;
+  }
+  const expectedBalance = Math.round((f.TotalGross - f.AmountPaid) * 100) / 100;
+  if (Math.abs(f.Balance - expectedBalance) > 0.01) {
+    balanceMismatches++;
+  }
+  if (f.AmountPaid > f.TotalGross + 0.01) {
+    overpaidOrders++;
+  }
+}
+
+if (grossMismatches > 0 || balanceMismatches > 0 || overpaidOrders > 0) {
+  console.error(
+    `\n❌ ORDER FINANCIAL AUDIT FAILED: Gross mismatches: ${grossMismatches}, Balance mismatches: ${balanceMismatches}, Overpaid orders: ${overpaidOrders}`
+  );
+  process.exit(1);
+}
+console.log(
+  `✓ All ${orders.length.toLocaleString()} orders pass financial integrity (TotalGross matches lines, Balance = TotalGross - AmountPaid, 0 overpaid).`
+);
+
+console.log(`\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Order Financials).`);
 process.exit(0);
