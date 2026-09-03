@@ -75,15 +75,15 @@ The following declarative configurations demonstrate how More Cheese will author
       },
       "ladderEntries": [
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "CommitteeMember",
-          "enterCycle": 2022,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Member",
+          "enterCycle": 2023,
           "exitCycle": 2024
         },
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "BoardDirector",
-          "enterCycle": 2024,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Member",
+          "enterCycle": 2025,
           "exitCycle": 2026
         }
       ],
@@ -196,22 +196,16 @@ The following declarative configurations demonstrate how More Cheese will author
       },
       "ladderEntries": [
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "CommitteeMember",
-          "enterCycle": 2022,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Member",
+          "enterCycle": 2023,
           "exitCycle": 2024
         },
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "BoardDirector",
-          "enterCycle": 2024,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Chair",
+          "enterCycle": 2025,
           "exitCycle": 2026
-        },
-        {
-          "ladderKey": "icf-governance-ladder",
-          "state": "BoardChair",
-          "enterCycle": 2026,
-          "exitCycle": 2028
         }
       ],
       "pins": [
@@ -301,7 +295,7 @@ Bound to the child entity `CommitteeMembership` (`committee-memberships`):
   "$schema": "https://memberjunction.org/schemas/loom/ladders.v1.json",
   "ladders": [
     {
-      "ladderKey": "icf-governance-ladder",
+      "ladderKey": "governance-leadership-ladder",
       "entity": "Person",
       "binding": {
         "mode": "childEntity",
@@ -310,44 +304,54 @@ Bound to the child entity `CommitteeMembership` (`committee-memberships`):
         "stateField": "RoleID",
         "termField": "TermID"
       },
-      "cohortShare": 0.5,
+      "cohortShare": 0.05,
       "states": [
         {
-          "name": "CommitteeMember",
-          "capacity": 60,
+          "name": "Member",
           "durationCycles": 2,
-          "prerequisites": {
-            "minCyclesSinceBirth": 1,
-            "dials": { "theta": { "min": 0.8 } }
-          },
           "effects": [
-            { "factor": "factor-membership-renewal", "beta": 1.2 }
-          ]
+            {
+              "factor": "factor-annual-conference-attendance",
+              "beta": 0.40
+            }
+          ],
+          "exitEffects": []
         },
         {
-          "name": "BoardDirector",
-          "capacity": 12,
+          "name": "Vice Chair",
+          "capacity": 35,
           "durationCycles": 2,
           "prerequisites": {
-            "priorState": "CommitteeMember",
-            "dials": { "theta": { "min": 1.2 } }
+            "priorState": "Member",
+            "minCyclesSinceBirth": 2
           },
           "effects": [
-            { "factor": "factor-membership-renewal", "beta": 3.0 }
-          ]
+            {
+              "factor": "factor-annual-conference-attendance",
+              "beta": 0.80
+            }
+          ],
+          "exitEffects": []
         },
         {
-          "name": "BoardChair",
-          "capacity": 1,
+          "name": "Chair",
+          "capacity": 35,
           "durationCycles": 2,
           "prerequisites": {
-            "priorState": "BoardDirector"
+            "priorState": "Vice Chair",
+            "minCyclesSinceBirth": 4
           },
           "effects": [
-            { "factor": "factor-membership-renewal", "beta": 4.5 }
+            {
+              "factor": "factor-annual-conference-attendance",
+              "beta": 1.20
+            }
           ],
           "exitEffects": [
-            { "dial": "theta", "delta": 0.5 }
+            {
+              "dial": "theta",
+              "delta": 0.50
+            }
           ]
         }
       ]
@@ -402,16 +406,29 @@ The state ladder for governance leadership (`governance-leadership-ladder`) bind
 3. `Chair` (duration 2 cycles, capacity 35, prerequisite: `Vice Chair`)
 This guarantees that any simulated ladder transitions resolve directly to existing `@lookup:Committees: Roles.Name=...` records without schema type mismatch or foreign key breaks.
 
-### 5.3 Loom Coverage Scope (R2-M2)
-Loom's generation scope in Phase 02 covers the primary member ecosystem:
-- Core identity: `Person`, `Organization`
-- Commerce & Catalog: `Product`
-- Community & Engagement: `MembershipPeriod`, `EventRegistration`, `CourseEnrollment`, `AdvocacyAction`, `CommitteeMembership`
+### 5.3 Loom Coverage Scope & Entity Ownership (R2-M2)
+More Cheese ships with ~30 metadata entities across several functional subsystems. Loom owns the generative world simulation for the active dynamic member ecosystem (8 primary entities), while the remaining ~22 entities are maintained as static/hand-shipped reference metadata:
+
+1. **Loom-Owned Generative Core (8 Entities)**:
+   - **Core Identity**: `Person` (member individuals, personas, latent dials), `Organization` (farmsteads, creameries, retail mongers).
+   - **Catalog & Products**: `Product` (membership dues, conference registrations, exam fees).
+   - **Lifecycles & Transactions**: `MembershipPeriod` (tenure and dues renewal status), `EventRegistration` (annual conference and symposium attendance), `CourseEnrollment` (education and credentialing progress), `AdvocacyAction` (grassroots regulatory comments).
+   - **Governance Structure**: `CommitteeMembership` (officer ladders, term appointments). Typed as **real foreign keys** to domain entities:
+     - `PersonID` $\to$ `Person.ID`
+     - `CommitteeID` $\to$ `Committee.ID`
+     - `RoleID` $\to$ `@lookup:Committees: Roles.Name=...`
+     - `TermID` $\to$ `CommitteeTerm.ID`
+     - Declares real schema fields: `StartDate`, `EndDate`, `Status`.
+
+2. **Hand-Shipped Reference & Governance Scaffolding (~22 Entities)**:
+   - **Institutional Reference**: `Committee`, `CommitteeRole`, `CommitteeTerm`, `OrganizationType`, `RelationshipType`, `EventVenue`, `Course`, `CertificationDefinition`. These represent organizational bylaws, committees, and catalog offerings that are structurally invariant across simulation cycles.
+   - **Authoring & CMS Templates**: `FormDefinition`, `FormQuestion`, `ContentBlock`, `SurveyTemplate`. Authored once by administrators as app configuration rather than transactional outputs.
+   - **Machine Learning & Sonar**: `SonarScoreModel`, `SonarScoreModelVersion`. Scoring configurations and ML hyperparameters maintained by data science teams.
 
 ### 5.4 Loom Engine Dependencies
-- **N5 / Contract Loader**: More Cheese runs conformance audits via `scripts/validate-loom-data.mjs` until Loom CLI's unified project loader lands.
+- **N5 / Contract Loader**: More Cheese runs conformance audits via `scripts/validate-loom-data.mjs` and `scripts/test-loom-mutations.mjs` using Loom's real contracts.
 - **N6 / State Ladder Binding**: Binding semantics to child entities (`CommitteeMembership`) are validated structurally against domain foreign keys.
-- **Child Rate Fixed Fields**: Future motif enhancement to assign specific child field values (e.g. `AutoRenew: true` on child `MembershipPeriod` records).
+- **N9 / Dial Arrow Support**: `data/ruleset/common.json` uses `dial:` arrow schema, verified by Loom's `RulesetModuleSchema`.
 
 ---
 
@@ -420,8 +437,11 @@ Loom's generation scope in Phase 02 covers the primary member ecosystem:
 | Task | Scope & Gates | Verification Command | PR |
 |---|---|---|---|
 | **Task 02.6.1: Schema & Business Key Conformance** | `data/domain.json` declares real schema fields and `*Key` business keys. Fulfills M1 & M2. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.2: Hero & Dataset Exact Alignment** | 16/16 heroes in `heroes.json` match `metadata/people/` and `metadata/committee-memberships/`. Fulfills R2-H1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.2: Hero & Dataset Exact Alignment** | 16/16 heroes in `heroes.json` match `metadata/people/` and `metadata/committee-memberships/`. Elena 2 distinct terms; Jamie null title. Fulfills R2-H1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
 | **Task 02.6.3: State Ladder Role Vocabulary** | Ladders declare `Member`, `Vice Chair`, `Chair` matching `Committees: Roles`. Fulfills R2-L1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.4: CI Conformance Step** | Automated CI step in `.github/workflows/changes.yml` running both closure and Loom validation. | `node scripts/check-metadata-closure.mjs && node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
-| **Task 02.6.5: End-to-End Proof (M6)** | Run `loom build`, push to local database, verify row counts, capture Playwright screenshots of Explorer (Elena's form, Gwen's memberships, Danielle's churn, list view). | Playwright headless test script | Follow-up PR |
+| **Task 02.6.4: CI Conformance & Mutation Testing** | Automated CI steps running metadata closure, Loom schema validation, and mutation tests (R3-M1). | `npm run validate:loom && npm run test:loom-mutations` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.5: Historical Datagen Reference Tag** | Create and push git tag `archive/datagen-reference` pointing to commit `f513f258` prior to datagen removal (R3-P1). | `git push origin archive/datagen-reference` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.6: README Truthfulness Audit** | Update root `README.md` to state that `datagen/` has been removed, form panels are currently unpopulated mocks, and data simulation runs through Loom (R3-P1). | Documentation review | `MemberJunction/more-cheese#21` |
+| **Task 02.6.7: PR-19 Form Slot Panels Fix-or-Delete** | Resolve unpopulated form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) by wiring them to real entity queries or deleting them (R3-P1). | Component inspection | Follow-up PR |
+| **Task 02.6.8: Proof-of-Load Acceptance Criteria** | End-to-end database verification: per-entity DB row counts equal metadata counts, all 16 hero pins re-evaluated against live database, and four Playwright screenshots with URL bar visible (Elena profile, Gwen memberships, Danielle churn, member list view) (R3-P1). | Playwright headless suite + SQL row count audit | Follow-up PR |
 

@@ -22,6 +22,12 @@
           "ladderKey": "governance-leadership-ladder",
           "state": "Member",
           "enterCycle": 2023,
+          "exitCycle": 2024
+        },
+        {
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Member",
+          "enterCycle": 2025,
           "exitCycle": 2026
         }
       ],
@@ -404,8 +410,7 @@
       },
       "fixedFields": {
         "FirstName": "Jamie",
-        "LastName": "Fuller",
-        "Title": "Artisan Cheese Blogger"
+        "LastName": "Fuller"
       },
       "birthCycle": 2023,
       "latentDials": {

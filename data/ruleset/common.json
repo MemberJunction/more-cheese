@@ -27,12 +27,12 @@
       },
       "arrows": {
         "theta": {
-          "name": "theta",
+          "dial": "theta",
           "beta": 0.75,
           "description": "Engagement increases retention probability"
         },
         "phi": {
-          "name": "phi",
+          "dial": "phi",
           "beta": 0.25,
           "description": "Affluence moderates price-sensitivity"
         }
@@ -56,12 +56,12 @@
       },
       "arrows": {
         "theta": {
-          "name": "theta",
+          "dial": "theta",
           "beta": 0.80,
           "description": "Engaged members travel to conference"
         },
         "phi": {
-          "name": "phi",
+          "dial": "phi",
           "beta": 0.40,
           "description": "Higher travel budget enables conference travel"
         }
@@ -85,7 +85,7 @@
       },
       "arrows": {
         "theta": {
-          "name": "theta",
+          "dial": "theta",
           "beta": 0.65,
           "description": "Engaged artisans pursue professional credentials"
         }
@@ -109,7 +109,7 @@
       },
       "arrows": {
         "theta": {
-          "name": "theta",
+          "dial": "theta",
           "beta": 0.50,
           "description": "Dedicated farmsteads participate heavily in policy actions"
         }
