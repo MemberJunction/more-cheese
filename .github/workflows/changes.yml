@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Validate metadata referential integrity closure
+        run: node scripts/check-metadata-closure.mjs
+
       - name: Check for migration file changes
         id: migration_check
         run: |
