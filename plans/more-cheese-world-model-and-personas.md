@@ -137,7 +137,8 @@ The following declarative configurations demonstrate how More Cheese will author
             "aggregation": "exists"
           },
           "op": "eq",
-          "value": true
+          "value": 1,
+          "description": "Pending renewal period exists. Note: Anniversary grace-window check (withinCyclesOfAsOf: [0, 1] on EndDate) is scheduled as a Phase 02.2 feature query variant."
         }
       ]
     },
@@ -167,7 +168,7 @@ The following declarative configurations demonstrate how More Cheese will author
             "aggregation": "exists"
           },
           "op": "eq",
-          "value": true
+          "value": 1
         },
         {
           "kind": "outcome",
