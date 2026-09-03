@@ -16,7 +16,9 @@ export class morecheeselearningCourseFormComponent extends BaseFormComponent {
     override async ngOnInit() {
         await super.ngOnInit();
         this.initSections([
-            { sectionKey: 'details', sectionName: 'Details', isExpanded: true },
+            { sectionKey: 'courseDetails', sectionName: 'Course Details', isExpanded: true },
+            { sectionKey: 'courseSchedule', sectionName: 'Course Schedule', isExpanded: true },
+            { sectionKey: 'systemMetadata', sectionName: 'System Metadata', isExpanded: false },
             { sectionKey: 'moreCheeseCourseEnrollments', sectionName: 'Course Enrollments', isExpanded: false }
         ]);
     }

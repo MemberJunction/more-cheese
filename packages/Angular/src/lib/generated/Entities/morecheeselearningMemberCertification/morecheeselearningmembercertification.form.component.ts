@@ -15,7 +15,10 @@ export class morecheeselearningMemberCertificationFormComponent extends BaseForm
     override async ngOnInit() {
         await super.ngOnInit();
         this.initSections([
-            { sectionKey: 'details', sectionName: 'Details', isExpanded: true }
+            { sectionKey: 'certificationDetails', sectionName: 'Certification Details', isExpanded: true },
+            { sectionKey: 'memberInformation', sectionName: 'Member Information', isExpanded: true },
+            { sectionKey: 'certificationStatus', sectionName: 'Certification Status', isExpanded: true },
+            { sectionKey: 'systemMetadata', sectionName: 'System Metadata', isExpanded: false }
         ]);
     }
 }

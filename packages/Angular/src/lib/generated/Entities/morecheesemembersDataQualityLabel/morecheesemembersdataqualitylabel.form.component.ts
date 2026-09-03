@@ -15,7 +15,10 @@ export class morecheesemembersDataQualityLabelFormComponent extends BaseFormComp
     override async ngOnInit() {
         await super.ngOnInit();
         this.initSections([
-            { sectionKey: 'details', sectionName: 'Details', isExpanded: true }
+            { sectionKey: 'dataQualityLabel', sectionName: 'Data Quality Label', isExpanded: true },
+            { sectionKey: 'recordContext', sectionName: 'Record Context', isExpanded: true },
+            { sectionKey: 'defectDetails', sectionName: 'Defect Details', isExpanded: true },
+            { sectionKey: 'systemMetadata', sectionName: 'System Metadata', isExpanded: false }
         ]);
     }
 }

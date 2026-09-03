@@ -66,7 +66,15 @@ try {
 // 3. Domain vs Generated Entities and Metadata Schema Conformance (R2-M1, R2-M2)
 const subclassesPath = path.join(rootDir, 'packages/Entities/src/generated/entity_subclasses.ts');
 if (!fs.existsSync(subclassesPath)) fail('Generated entity subclasses missing at packages/Entities/src/generated/entity_subclasses.ts');
-const subclasses = fs.readFileSync(subclassesPath, 'utf8');
+let subclasses = fs.readFileSync(subclassesPath, 'utf8');
+const entitiesDir = path.join(rootDir, 'packages/Entities/src/generated/entities');
+if (fs.existsSync(entitiesDir)) {
+  for (const f of fs.readdirSync(entitiesDir)) {
+    if (f.endsWith('.ts')) {
+      subclasses += '\n' + fs.readFileSync(path.join(entitiesDir, f), 'utf8');
+    }
+  }
+}
 
 // Build mapping of entityName -> metadata directory from metadata/**/.mj-sync.json
 const metadataRootDir = path.join(rootDir, 'metadata');

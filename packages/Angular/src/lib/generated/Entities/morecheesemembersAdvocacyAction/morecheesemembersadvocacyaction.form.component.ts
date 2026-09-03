@@ -15,7 +15,9 @@ export class morecheesemembersAdvocacyActionFormComponent extends BaseFormCompon
     override async ngOnInit() {
         await super.ngOnInit();
         this.initSections([
-            { sectionKey: 'details', sectionName: 'Details', isExpanded: true }
+            { sectionKey: 'actionDetails', sectionName: 'Action Details', isExpanded: true },
+            { sectionKey: 'actionContext', sectionName: 'Action Context', isExpanded: true },
+            { sectionKey: 'systemMetadata', sectionName: 'System Metadata', isExpanded: false }
         ]);
     }
 }

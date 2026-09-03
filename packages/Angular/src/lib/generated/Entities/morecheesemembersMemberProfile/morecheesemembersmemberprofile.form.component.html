@@ -10,11 +10,11 @@
     <!-- ========================================
          FIELD PANELS
          ======================================== -->
-    <!-- Relationships Section -->
+    <!-- Member Identity Section -->
     <mj-collapsible-panel
-        SectionKey="relationships"
-        SectionName="Relationships"
-        Icon="fa fa-link"
+        SectionKey="memberIdentity"
+        SectionName="Member Identity"
+        Icon="fa fa-id-card"
         [Form]="this"
         [FormContext]="formContext">
         <mj-form-field 
@@ -35,16 +35,6 @@
             [FormContext]="formContext"
             LinkType="Record"
         ></mj-form-field>
-
-    </mj-collapsible-panel>
-
-    <!-- Membership Details Section -->
-    <mj-collapsible-panel
-        SectionKey="membershipDetails"
-        SectionName="Membership Details"
-        Icon="fa fa-id-card"
-        [Form]="this"
-        [FormContext]="formContext">
         <mj-form-field 
             [Record]="record"
             [ShowLabel]="true"
@@ -53,6 +43,16 @@
             [EditMode]="EditMode"
             [FormContext]="formContext"
         ></mj-form-field>
+
+    </mj-collapsible-panel>
+
+    <!-- Member Details Section -->
+    <mj-collapsible-panel
+        SectionKey="memberDetails"
+        SectionName="Member Details"
+        Icon="fa fa-info-circle"
+        [Form]="this"
+        [FormContext]="formContext">
         <mj-form-field 
             [Record]="record"
             [ShowLabel]="true"
@@ -69,13 +69,21 @@
             [EditMode]="EditMode"
             [FormContext]="formContext"
         ></mj-form-field>
+        <mj-form-field 
+            [Record]="record"
+            [ShowLabel]="true"
+            FieldName="IsSharedDemo"
+            Type="checkbox"
+            [EditMode]="EditMode"
+            [FormContext]="formContext"
+        ></mj-form-field>
 
     </mj-collapsible-panel>
 
-    <!-- Location Information Section -->
+    <!-- Geography and Location Section -->
     <mj-collapsible-panel
-        SectionKey="locationInformation"
-        SectionName="Location Information"
+        SectionKey="geographyAndLocation"
+        SectionName="Geography and Location"
         Icon="fa fa-map-marker-alt"
         [Form]="this"
         [FormContext]="formContext">
@@ -162,10 +170,10 @@
 
     </mj-collapsible-panel>
 
-    <!-- Demographic Information Section -->
+    <!-- Demographics Section -->
     <mj-collapsible-panel
-        SectionKey="demographicInformation"
-        SectionName="Demographic Information"
+        SectionKey="demographics"
+        SectionName="Demographics"
         Icon="fa fa-users"
         [Form]="this"
         [FormContext]="formContext">
@@ -237,14 +245,6 @@
         Icon="fa fa-cog"
         [Form]="this"
         [FormContext]="formContext">
-        <mj-form-field 
-            [Record]="record"
-            [ShowLabel]="true"
-            FieldName="IsSharedDemo"
-            Type="checkbox"
-            [EditMode]="EditMode"
-            [FormContext]="formContext"
-        ></mj-form-field>
         <mj-form-field 
             [Record]="record"
             [ShowLabel]="true"
