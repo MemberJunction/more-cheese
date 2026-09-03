@@ -70,7 +70,7 @@ try {
   console.log('Running Mutation 3: Field on wrong entity...');
   fs.writeFileSync(laddersPath, origLadders, 'utf8'); // restore
   const mutatedDomain3 = JSON.parse(origDomain);
-  mutatedDomain3.entities.Product.fields.Bio = { name: 'Bio', type: 'string' };
+  mutatedDomain3.entities.MembershipPeriod.fields.Bio = { name: 'Bio', type: 'string' };
   fs.writeFileSync(domainPath, JSON.stringify(mutatedDomain3, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 3: field on wrong entity', 'field on wrong entity');
 

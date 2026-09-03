@@ -37,8 +37,8 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
    │  • MemberCommunityPanel   │                                 │  • morecheese_members     │
    │  • OrganizationGuildPanel │                                 │  • morecheese_events      │
    │  (Mounted into Upstream   │                                 │  • morecheese_learning    │
-   │   People & Org Forms)     │                                 │  • morecheese_orders      │
-   └───────────────────────────┘                                 └───────────────────────────┘
+   │   People & Org Forms)     │                                 └───────────────────────────┘
+   └───────────────────────────┘                                 
 ```
 
 ### Key Domain Capabilities

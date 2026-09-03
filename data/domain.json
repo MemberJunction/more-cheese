@@ -59,18 +59,24 @@
     "Product": {
       "name": "Product",
       "targetTable": "Product",
-      "schema": "morecheese_members",
+      "schema": "__mj_BizAppsOrders",
       "pack": "commerce",
-      "businessKey": ["ProductKey"],
+      "businessKey": ["SKU"],
       "fields": {
         "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "ProductKey": { "name": "ProductKey", "type": "string" },
+        "SKU": { "name": "SKU", "type": "string" },
         "Name": { "name": "Name", "type": "string" },
-        "ProductType": { "name": "ProductType", "type": "string" },
-        "UnitPrice": { "name": "UnitPrice", "type": "number" },
-        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
+        "CompanyID": { "name": "CompanyID", "type": "uuid" },
+        "ProductTypeID": { "name": "ProductTypeID", "type": "uuid" },
+        "ProductCategoryID": { "name": "ProductCategoryID", "type": "uuid" },
+        "RevenueRecognitionTypeID": { "name": "RevenueRecognitionTypeID", "type": "uuid" },
+        "Status": { "name": "Status", "type": "string" },
+        "StandaloneSellingPrice": { "name": "StandaloneSellingPrice", "type": "number" },
+        "IsTaxable": { "name": "IsTaxable", "type": "boolean" }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "CompanyID": { "targetEntity": "Organization", "targetField": "ID" }
+      },
       "isImmutable": false
     },
     "MembershipPeriod": {
