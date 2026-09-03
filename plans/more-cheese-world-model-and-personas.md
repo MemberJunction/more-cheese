@@ -3,7 +3,7 @@
 **Flagship Consumer Roadmap for Loom Plan 02**
 
 Version 2.0 · September 2026  
-Status: Proposed (Round 2 Review Incorporated)  
+Status: Proposed (Round 3 Review Incorporated)  
 Target Repository: `MemberJunction/more-cheese`  
 Companion PR: [MemberJunction/loom#5](https://github.com/MemberJunction/loom/pull/5)
 
@@ -50,6 +50,8 @@ The 16 heroes below are the exact individuals committed in `metadata/people/.peo
 
 The following declarative configurations demonstrate how More Cheese will author its world model using **exclusively generic Loom Plan 02 contract keys**, with domain concepts appearing purely as **values**.
 
+> **Note on Entity Mapping**: In the More Cheese Loom project, `data/domain.json` maps short entity names (`Person`, `MembershipPeriod`, `EventRegistration`, `CommitteeMembership`) directly to their underlying MemberJunction entity names (`MJ_BizApps_Common: People`, `MoreCheese: Membership Periods`, `MoreCheese: Event Registrations`, `MoreCheese: Committee Memberships`).
+
 ### 3.1 Authored Hero Configuration (`data/ruleset/heroes.json`)
 ```json
 {
@@ -64,8 +66,7 @@ The following declarative configurations demonstrate how More Cheese will author
       "fixedFields": {
         "FirstName": "Elena",
         "LastName": "Rodriguez",
-        "Title": "Head Cheesemaker",
-        "Status": "Active"
+        "Title": "Head Cheesemaker"
       },
       "birthCycle": 2022,
       "latentDials": {
@@ -97,7 +98,7 @@ The following declarative configurations demonstrate how More Cheese will author
           "kind": "feature",
           "feature": {
             "from": "EventRegistration",
-            "where": { "Cycle": 2025 },
+            "where": { "Attended": true },
             "aggregation": "count"
           },
           "op": "gte",
@@ -114,8 +115,7 @@ The following declarative configurations demonstrate how More Cheese will author
       "fixedFields": {
         "FirstName": "Marcus",
         "LastName": "Chen",
-        "Title": "Specialty Cheese Buyer",
-        "Status": "Active"
+        "Title": "Specialty Cheese Buyer"
       },
       "birthCycle": 2021,
       "latentDials": {
@@ -149,8 +149,7 @@ The following declarative configurations demonstrate how More Cheese will author
       "fixedFields": {
         "FirstName": "Danielle",
         "LastName": "Okafor",
-        "Title": "Assistant Cheesemaker",
-        "Status": "Lapsed"
+        "Title": "Assistant Cheesemaker"
       },
       "birthCycle": 2024,
       "latentDials": {
@@ -160,8 +159,11 @@ The following declarative configurations demonstrate how More Cheese will author
       "eras": ["era-creamery-closures-2025"],
       "pins": [
         {
-          "kind": "field",
-          "field": "Status",
+          "kind": "feature",
+          "feature": {
+            "from": "MembershipPeriod",
+            "field": "Status"
+          },
           "op": "eq",
           "value": "Lapsed"
         },
@@ -182,8 +184,7 @@ The following declarative configurations demonstrate how More Cheese will author
       "fixedFields": {
         "FirstName": "Gwen",
         "LastName": "Whitfield",
-        "Title": "Principal",
-        "Status": "Active"
+        "Title": "Principal"
       },
       "birthCycle": 2014,
       "latentDials": {
@@ -228,8 +229,7 @@ The following declarative configurations demonstrate how More Cheese will author
       "fixedFields": {
         "FirstName": "Tom",
         "LastName": "Reyes",
-        "Title": "Owner",
-        "Status": "Active"
+        "Title": "Owner"
       },
       "birthCycle": 2016,
       "latentDials": {
