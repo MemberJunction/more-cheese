@@ -254,11 +254,19 @@ console.log(
 console.log('\n--- Membership Period Dues Order Coverage Audit (R4-1) ---');
 const periods = records.filter((r) => r.dir === 'membership-periods');
 const products = records.filter((r) => r.dir === 'products');
+const categories = records.filter((r) => r.dir === 'product-categories');
+const membershipCategory = categories.find((c) => c.fields?.Name === 'Memberships');
+if (!membershipCategory) {
+  console.error("\n❌ DUES COVERAGE AUDIT FAILED: 'Memberships' category not found in metadata/product-categories");
+  process.exit(1);
+}
+const membershipCategoryID = String(membershipCategory.primaryKey?.ID).toUpperCase();
+
 const memProdIds = new Set(
   products
     .filter((p) => {
-      const cat = p.fields?.ProductCategoryID || '';
-      return cat.includes('Category: Memberships') || (p.fields?.Name && p.fields.Name.includes('Membership'));
+      const catId = p.fields?.ProductCategoryID ? String(p.fields.ProductCategoryID).toUpperCase() : null;
+      return catId === membershipCategoryID;
     })
     .map((p) => String(p.primaryKey?.ID).toUpperCase())
 );
