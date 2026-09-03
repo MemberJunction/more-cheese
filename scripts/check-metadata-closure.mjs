@@ -213,10 +213,11 @@ let lineTotalGrossMismatches = 0;
 for (const ol of orderLines) {
   const q = Number(ol.fields?.Quantity) || 1;
   const p = Number(ol.fields?.UnitPrice) || 0;
+  const discountPct = Number(ol.fields?.DiscountPct) || 0;
   const d = Number(ol.fields?.DiscountAmount) || 0;
   const c = Number(ol.fields?.ChargeAmount) || 0;
   const t = Number(ol.fields?.LineTax) || 0;
-  const expNet = Math.round(((q * p) - d) * 100) / 100;
+  const expNet = Math.round(((q * p * (1 - discountPct)) - d) * 100) / 100;
   const expGross = Math.round((expNet + c + t) * 100) / 100;
 
   if (ol.fields?.LineTotalNet === undefined || Math.abs(ol.fields.LineTotalNet - expNet) > 0.01) {
@@ -403,18 +404,54 @@ console.log(
   `✓ Exactly ${unclaimedOrders.length} residual membership Sale orders verified as upcoming unpaid renewal drafts (ORD-R-* Draft/Pending).`
 );
 
-// 8. Order & Line Status Shape Audit (R7-5)
-console.log('\n--- Order & Line Status Shape Audit (R7-5) ---');
+// 8. Order & Line Status Shape Audit (R7-5, R8-1)
+console.log('\n--- Order & Line Status Shape Audit (R7-5, R8-1) ---');
+const physicalCategory = categories.find((c) => c.fields?.Name === 'Publications & Goods');
+if (!physicalCategory) {
+  console.error("\n❌ STATUS SHAPE AUDIT FAILED: 'Publications & Goods' category not found in metadata/product-categories");
+  process.exit(1);
+}
+const physicalCategoryID = String(physicalCategory.primaryKey?.ID).toUpperCase();
+const physicalProductIds = new Set(
+  products
+    .filter((p) => String(p.fields?.ProductCategoryID).toUpperCase() === physicalCategoryID)
+    .map((p) => String(p.primaryKey?.ID).toUpperCase())
+);
+
+const linesByOrderId = new Map();
+for (const ol of orderLines) {
+  const oid = ol.fields?.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
+  if (!oid) continue;
+  if (!linesByOrderId.has(oid)) linesByOrderId.set(oid, []);
+  linesByOrderId.get(oid).push(ol);
+}
+
 let invalidOrderStatusCount = 0;
 for (const o of orders) {
+  const oid = String(o.primaryKey?.ID).toUpperCase();
   const s = o.fields?.Status;
   const f = o.fields?.FulfillmentStatus;
   const t = o.fields?.OrderType;
+  const lines = linesByOrderId.get(oid) || [];
+  const hasPhysical = lines.some((l) => physicalProductIds.has(String(l.fields?.ProductID).toUpperCase()));
+
   if (['Draft', 'Quoted', 'Voided'].includes(s) && f === 'Fulfilled') {
     invalidOrderStatusCount++;
   }
-  if (t === 'Cancellation' && f !== 'Returned') {
-    invalidOrderStatusCount++;
+  if (t === 'Cancellation') {
+    if (f !== 'Returned') {
+      invalidOrderStatusCount++;
+    }
+  } else if (s === 'Confirmed') {
+    if (!hasPhysical && f !== 'NotApplicable') {
+      invalidOrderStatusCount++;
+    } else if (hasPhysical) {
+      if ((o.fields?.AmountPaid || 0) >= (o.fields?.TotalGross || 0) && f !== 'Fulfilled') {
+        invalidOrderStatusCount++;
+      } else if ((o.fields?.AmountPaid || 0) === 0 && f !== 'Pending') {
+        invalidOrderStatusCount++;
+      }
+    }
   }
 }
 

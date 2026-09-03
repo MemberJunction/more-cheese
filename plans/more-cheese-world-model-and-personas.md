@@ -399,10 +399,14 @@ node scripts/check-metadata-closure.mjs
 The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`. Members with a `JoinDate` before 2019 are recorded with their historical association tenure as an opening state, while billing and commerce history begins at the unified 2019-01-01 baseline.
 - **Automated Conformance Gate (R2-H1)**: `scripts/validate-loom-data.mjs` verifies in CI that 100% of heroes in `data/ruleset/heroes.json` match the committed metadata records byte-for-byte.
 
-### 5.2 Seeded Historical Orders Booking Bypass & Fulfillment Model (R7-1, R7-5)
+### 5.2 Seeded Historical Orders Booking Bypass & Fulfillment Model (R7-1, R7-5, R8-3)
 Seeded demo history represents static simulated historical accounting pushed directly via metadata sync into the `@mj-biz-apps/orders` schema.
-1. **Engine Bypass**: Pushing historical orders directly into the database bypasses runtime entity server confirmation workflows (`OrderEntityServer` / `OrderLineEntityServer` booking of GL journal entries and dynamic creation of membership terms). All financial fields (`LineTotalNet`, `LineTotalGross`, `TotalGross`, `AmountPaid`, `Balance`) are pre-materialized deterministically in metadata and verified via automated closure gates (`scripts/check-metadata-closure.mjs`).
-2. **Status & Fulfillment Shape**:
+1. **Push Mechanism**: The `mj sync push` plugin initializes only a data provider and registers no `@mj-biz-apps/orders` entity servers (no `dynamicPackages` load anywhere under `MetadataSync` or the `sync` commands), so saves go through the generated CRUD stored procedures, and the rollup triggers find `LineTotalGross` present.
+2. **Push Boundary & Operational Consequences**:
+   - `trg_OrderLine_ImmutableAfterConfirm` refuses updates to financial columns on lines of Confirmed orders, so a differential re-push that edits a booked line fails at the database level by design.
+   - Any host that runs the push inside a process where the orders servers are registered gets the R7-1 refusals back.
+   - All financial fields (`LineTotalNet`, `LineTotalGross`, `TotalGross`, `AmountPaid`, `Balance`) are pre-materialized deterministically in metadata and verified via automated closure gates (`scripts/check-metadata-closure.mjs`). Proof-of-load in #23 will document the push log with per-directory inserted counts, and `SELECT COUNT(*), SUM(TotalGross), SUM(AmountPaid) FROM __mj_BizAppsOrders.OrderHeader` against the JSON sums.
+3. **Status & Fulfillment Shape**:
    - Orders with `Status IN ('Draft', 'Quoted', 'Voided')` carry `FulfillmentStatus = 'Pending'`.
    - Orders with `OrderType = 'Cancellation'` carry `FulfillmentStatus = 'Returned'`.
    - Orders with `Status = 'Confirmed'` where all lines are non-physical (memberships, conference registrations, exam fees, donations) carry `FulfillmentStatus = 'NotApplicable'`.
