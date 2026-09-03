@@ -1,104 +1,167 @@
-# MoreCheese Demo — `more-cheese-demo`
+# 🧀 MoreCheese — International Cheese Federation (ICF) Demo
 
-The **MoreCheese demo open app** for
-[MemberJunction](https://github.com/MemberJunction/MJ): the fictional
-**International Cheese Federation (ICF)** association demo. It composes the
-BizApps open-app catalog with custom association-domain schemas — members,
-events, learning, forums, resources, awards, legislative, marketing (the
-`morecheese_*` schemas; home schema `morecheese_common`) — the
-way a real customer environment composes multiple source systems. Dataset
-plans, benchmarks, and hero personas live in `plans/association-db/`; the
-data generator lives in `datagen/` (engine / projects/morecheese / cli).
+[![MemberJunction OpenApp](https://img.shields.io/badge/MemberJunction-OpenApp-blue.svg)](https://github.com/MemberJunction/MJ)
+[![Angular](https://img.shields.io/badge/Angular-21-dd0031.svg)](https://angular.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6.svg)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Built from the `mj-sample-open-app` template — the template's structure and
-docs below still apply.
-
-> **What an Open App is:** its manifest (`mj-app.json`) plus whatever optional
-> blocks it declares — a database schema + migrations, mj-sync metadata,
-> server packages loaded by MJAPI, and client packages bundled into
-> MJExplorer. Everything is additive; a manifest-only app is valid.
+> **The Definitive OpenApp Reference Implementation for MemberJunction**
 >
-> **The authoritative format reference** is MemberJunction's own Open App
-> README — read it alongside this template:
-> - GitHub: <https://github.com/MemberJunction/MJ/blob/next/packages/OpenApp/README.md>
-> - In an MJ checkout (current path): `packages/OpenApp/README.md`
->
-> The annotated manifest reference is copied into this repo as
-> [`mj-app.reference.jsonc`](mj-app.reference.jsonc).
+> MoreCheese models the fictional **International Cheese Federation (ICF)** — a global trade and professional association of artisan cheesemakers, creameries, affineurs, and industry partners. It showcases how domain-specific applications cleanly compose upstream MemberJunction BizApps catalogs (`@mj-biz-apps/*`) with custom association schemas, dynamic form slot extensions, and causally-generated synthetic universes.
 
-## What's in the box
+---
 
-| Path | Purpose | Required? |
-|---|---|---|
-| `mj-app.json` | THE app manifest (identity, schema, migrations, packages) | **Required** |
-| `mj-app.reference.jsonc` | Fully-annotated manifest reference — every block explained | reference |
-| `migrations/` | Skyway migrations for your schema — **starts empty**; inert example skeleton + README inside | With a schema |
-| `metadata/` | mj-sync metadata. `schema-info/` registers your schema and **requires fill-out** (ships as an inert `.template` — see its README). Authoring guide: `docs/template-docs/metadata.md` | Optional |
-| `packages/Entities` | CodeGen entity subclasses land here (placeholder until your first codegen) | With a schema |
-| `packages/CoreEntitiesServer` | Server-side entity overrides (validation, save hooks) | Optional |
-| `packages/Actions` | MJ Actions — agent/workflow integration points | Optional |
-| `packages/Server` | Server bootstrap — MJAPI imports it at startup and calls its `startupExport` | With server code |
-| `packages/Angular` | Client bootstrap — MJExplorer bundles it; your components + generated forms | With UI |
-| `mj.config.cjs` | CodeGen/migrate configuration for this repo | **Required** for codegen |
-| `.github/workflows/` | CI: `build`, `changes` (migration + changeset gates), `publish` (npm via OIDC) | Recommended |
-| `.changeset/` + `ci/` | Fixed versioning + release pipeline helpers | Recommended |
-| `docs/template-docs/` + `plans/TEMPLATE-SPEC.md` | The deep-dive docs + the full required/optional inventory | Recommended |
-| `docs/skip-integration.md` | Running **Skip** against this app's data — install, the required registry override, and four undocumented gotchas | If demoing Skip |
+## 🏛️ Architectural Overview
 
-Each package is deliberately minimal — a `package.json` (showing the
-dependency conventions), a `tsconfig.json`, and one commented source file that
-explains what belongs there. All five build out of the box:
+MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than building monolithic applications or hardcoding forks of core schemas, MoreCheese sits as an independent, additive downstream extension on top of MemberJunction core and BizApps foundations.
 
-```sh
-npm install && npm run build:packages     # no MJ checkout or DB needed
+```
+                           ┌─────────────────────────────────────────┐
+                           │      MemberJunction Core Framework      │
+                           │  (@memberjunction/core, server, ng)     │
+                           └────────────────────┬────────────────────┘
+                                                │
+                           ┌────────────────────▼────────────────────┐
+                           │       Upstream BizApps Foundations      │
+                           │  (@mj-biz-apps/common, /orders, etc.)   │
+                           │   • People                              │
+                           │   • Organizations                       │
+                           │   • Invoicing & Line Items              │
+                           └────────────────────┬────────────────────┘
+                                                │
+                 ┌──────────────────────────────┴──────────────────────────────┐
+                 │                                                             │
+   ┌─────────────▼─────────────┐                                 ┌─────────────▼─────────────┐
+   │ Dynamic Form Slot Panels  │                                 │ Downstream Domain Schemas │
+   │ (BaseFormPanel Injection) │                                 │ (morecheese_* Schemas)    │
+   │  • MemberCommunityPanel   │                                 │  • morecheese_members     │
+   │  • OrganizationGuildPanel │                                 │  • morecheese_events      │
+   │  (Mounted into Upstream   │                                 │  • morecheese_learning    │
+   │   People & Org Forms)     │                                 │  • morecheese_orders      │
+   └───────────────────────────┘                                 └───────────────────────────┘
 ```
 
-## Getting started
+### Key Domain Capabilities
 
-1. **Setup script — already run.** This repo's identity was set with
-   `npm run init` (id `more-cheese-demo`, scope `@mj-more-cheese-demo/*`,
-   schema `morecheese_common`, prefix `MoreCheese: `). The script is
-   re-runnable if a value must change before first publish — see
-   [docs/template-docs/getting-started.md](docs/template-docs/getting-started.md).
-2. **Create your repo + branches** — `next` (default, integration) and `main`
-   (release): [docs/template-docs/repo-setup.md](docs/template-docs/repo-setup.md).
-3. **Link into a MemberJunction checkout** — development happens inside MJ;
-   the step-by-step worktree method (and exactly when you need a database) is
-   [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md).
-4. **Build your app** using the workflow below.
+- **Artisan Cheesemaker Profiles**: Extends standard CRM persons with primary cheese focus (Alpine, Washed Rind, Farmstead Blue, Bloomy Rind), milk types (Cow, Goat, Sheep, Water Buffalo), and guild certifications.
+- **Creamery & Producer Guild Standing**: Extends organizations with facility accreditation (Grade A Artisan Certified), annual production volume, and wholesale distribution tiers.
+- **Cheese Competitions & Sensory Scoring**: World Cheese Cup events, entry submissions, blind judging rounds, and medal awards.
+- **Continuing Education & Master Certification**: Academy coursework, affineur apprenticeships, and food safety credentials.
+- **Advocacy & Legislative Coalitions**: Grassroots dairy campaigns, raw-milk regulation monitoring, and legislative testimonies.
 
-## Development workflow (the loop you'll live in)
+---
 
-All commands run from the **MJ repo root** with this app linked
-(see [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md)); `<app>` is this repo's
-folder under `packages/dev-apps/`.
+## 🧩 Dynamic Forms Architecture (`BaseFormPanel` Slot System)
 
-| You want to… | Do this | Details |
+A premier feature of MemberJunction's UI architecture is the **BaseFormPanel Dynamic Slot System**. In downstream applications like MoreCheese, you frequently need to enrich upstream records (such as `MJ_BizApps_Common: People` or `MJ_BizApps_Common: Organizations`) with downstream domain intelligence without modifying upstream templates or touching core repositories.
+
+MoreCheese implements this via `BaseFormPanel` decorators:
+
+```typescript
+import { BaseFormPanel } from '@memberjunction/ng-base-forms';
+import { RegisterClassEx } from '@memberjunction/global';
+
+@RegisterClassEx(BaseFormPanel, {
+  key: 'more-cheese:member-community-panel',
+  skipNullKeyWarning: true,
+  metadata: {
+    entity: 'MJ_BizApps_Common: People', // Targets upstream BizApps Person entity
+    slot: 'after-fields',                // Dynamically injected after primary form fields
+    sortKey: 100,
+  },
+})
+@Component({
+  selector: 'mj-morecheese-member-community-panel',
+  standalone: true,
+  template: `...`,
+})
+export class MemberCommunityPanel extends BaseFormPanel<BaseEntity> {
+  // Panel lifecycle, reactive RunView queries, and domain visualization
+}
+```
+
+### Supported Injection Slots
+
+| Slot Name | Placement | Typical Use Case |
 |---|---|---|
-| **Add a table / schema change** | Write `migrations/V<YYYYMMDDHHMM>__v<ver>_<Desc>.sql` (copy the `EXAMPLE_*.sql.example` skeleton), then run migrations + codegen (below) | [migrations/_README.md](migrations/_README.md), [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
-| **Run your migrations** | `npx mj migrate --schema morecheese_common --dir packages/dev-apps/<app>/migrations` | [docs/template-docs/linking-to-mj.md](docs/template-docs/linking-to-mj.md) §5 |
-| **Run CodeGen** (after every schema/metadata change) | `npx mj codegen` — generates entity classes, resolvers, and forms into `packages/*/src/generated/`; **commit the generated code with its migration** | [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
-| **Capture a CodeGen migration** | Fold the SQL CodeGen emitted for YOUR objects (from `migrations/codegen/`, gitignored scratch) into a `V*` migration; never fold the `__mj_*` system plumbing — CodeGen re-applies that everywhere itself | [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md) |
-| **Add / change metadata** (apps, nav items, lookup seeds, actions) | Add an entity folder under `metadata/`, `npx mj sync push --dir=<app>/metadata --format=json`, then capture the SQL as a `V*_Metadata_Sync.sql` migration | [docs/template-docs/metadata.md](docs/template-docs/metadata.md) |
-| **Add server code** (entity overrides, engines, resolvers) | `packages/CoreEntitiesServer` / `packages/Server` — wire new modules into `Server/src/index.ts` so the bootstrap loads them | comments in those files |
-| **Add an Action** | `packages/Actions` — `@RegisterClass(BaseAction, 'MoreCheese Demo: <Name>')` + an action metadata record + migration | comments in `packages/Actions/src/index.ts` |
-| **Add UI** (components / dashboards) | `packages/Angular` — components under `src/lib/`, exported from `public-api.ts`; nav items via an application metadata record | comments in `packages/Angular/src/public-api.ts` |
-| **Build** | `npx turbo build --filter="@more-cheese-demo/*"` (or `npm run build:packages` standalone) | — |
-| **Ship a change** | Changeset (`npx changeset`, ≥ minor if it adds a migration) → PR to `next` | [docs/template-docs/branching.md](docs/template-docs/branching.md) |
-| **Release / publish to npm** | Merge the release PR `next` → `main`; the publish workflow does the rest | [docs/template-docs/publishing.md](docs/template-docs/publishing.md) |
+| `top-area` | Header banner above form tabs | Critical warning banners, VIP status alerts, accreditation shields |
+| `before-fields` | Above standard entity fields | High-level summary metrics, quick KPIs |
+| `after-fields` | Below primary fields, above related tabs | Domain community cards, custom attribute grids, specialized meters |
+| `after-related` | Below related entity grids | Cross-system audit logs, external CRM timeline feeds |
+| `after-everything` | Footer of entire form layout | Regulatory notices, signature stamps |
 
-**Managing migrations, the rules that matter:** never edit an applied
-migration (add a new one); timestamps must increase; no `__mj_*` columns or FK
-indexes in your SQL (CodeGen owns those); additive-only within a published
-major version. Full rationale: [docs/template-docs/codegen-and-metadata-migrations.md](docs/template-docs/codegen-and-metadata-migrations.md)
-and [docs/template-docs/publishing.md](docs/template-docs/publishing.md).
+---
 
-## Documentation index
+## 🧵 Data Generation & Synthetic Worlds with Loom
 
-Everything above in depth: [docs/template-docs/README.md](docs/template-docs/README.md).
-The **MemberJunction development guide** — critical rules, entity/data
-patterns, CodeGen + migration rules, Angular conventions, style, testing —
-is [docs/claude/](docs/claude/README.md) (topic docs with a TOC, referenced
-from [CLAUDE.md](CLAUDE.md)). The complete
-what-belongs-in-an-app inventory (required vs optional, with the shipped
-first-party apps as exemplars): [plans/complete/TEMPLATE-SPEC.md](plans/complete/TEMPLATE-SPEC.md).
+Synthetic data for MoreCheese is designed and generated using **[Loom](https://github.com/MemberJunction/loom)** (`@memberjunction/loom`), MemberJunction's framework for causal, calibrated, and deterministic synthetic universes.
+
+- **Causally Correlated**: Member join dates, event attendance, certification progress, order amounts, and churn risk are drawn from joint causal graphs, not isolated pseudo-random generators.
+- **Referentially Closed**: 100% referential integrity across 4 tiers of foreign keys with guaranteed topological migration ordering.
+- **Idempotent & Additive**: Generates initial baseline snapshots (`V*__Baseline.sql`) and consecutive weekly delta cycles (`V*__Delta_Cycle_*.sql`) with strictly monotonic ID persistence and zero unwanted mutations.
+
+---
+
+## 📦 Monorepo Package Inventory
+
+| Package | Scope | Description |
+|---|---|---|
+| [`packages/Entities`](packages/Entities) | `@mj-more-cheese-demo/entities` | Strongly-typed TypeScript entity subclasses generated by CodeGen. |
+| [`packages/CoreEntitiesServer`](packages/CoreEntitiesServer) | `@mj-more-cheese-demo/core-entities-server` | Server-side entity overrides, business logic validation, and database save pipelines. |
+| [`packages/Actions`](packages/Actions) | `@mj-more-cheese-demo/actions` | Deterministic MemberJunction Actions invokable by workflows, agents, and APIs. |
+| [`packages/Server`](packages/Server) | `@mj-more-cheese-demo/server` | Server bootstrap package loaded by MJAPI at startup via `startupExport`. |
+| [`packages/Angular`](packages/Angular) | `@mj-more-cheese-demo/ng` | Angular client package bundled into MJExplorer; provides generated entity forms and `BaseFormPanel` slot extensions. |
+
+---
+
+## 🛠️ Development Workflow
+
+### Prerequisites
+- Node.js ≥ 20
+- npm ≥ 10
+- MemberJunction CLI (`@memberjunction/cli`)
+
+### Setup & Local Builds
+
+```sh
+# Install workspace dependencies
+npm install
+
+# Build all packages across the monorepo
+npm run build:packages
+
+# Run test suites
+npm run test
+```
+
+### Managing Migrations & Schema Evolution
+
+MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
+1. All database migrations live in `migrations/` as timestamped Skyway scripts (`V<YYYYMMDDHHMM>__<description>.sql`).
+2. Run migrations against your target database:
+   ```sh
+   npx mj migrate --schema morecheese_members --dir ./migrations
+   ```
+3. Regenerate strongly-typed entity classes and Angular forms:
+   ```sh
+   npx mj codegen
+   ```
+4. Push application metadata (apps, navigation items, entity permissions):
+   ```sh
+   npx mj sync push --dir ./metadata --format=json
+   ```
+
+---
+
+## 📜 Standards & Guidelines
+
+- **Zero `any` Types**: Strict adherence to complete TypeScript typing; no `any`, `unknown` shortcuts, or dynamic `.Get()`/`.Set()` bypasses.
+- **BaseSingleton Architecture**: All singleton services extend `BaseSingleton<T>` to guarantee global isolation across multi-bundle environments.
+- **Server-Persisted User Preferences**: UI preferences and state persist via `UserInfoEngine` server-side settings, never ephemeral browser `localStorage`.
+- **Modern Angular**: Standalone components, `@if`/`@for`/`@switch` template block syntax, and modern `inject()` dependency injection.
+
+---
+
+## 📄 License
+
+MIT © MemberJunction / Blue Cypress
