@@ -65,6 +65,7 @@ const FIELD_TARGET_DIR_MAP = new Map([
   ['ProductCategoryID', 'product-categories'],
   ['OrderHeaderID', 'orders'],
   ['OrderID', 'orders'],
+  ['ReversesOrderHeaderID', 'orders'],
   ['OrderLineID', 'order-lines'],
   ['PaymentHeaderID', 'payments'],
   ['EventID', 'events'],
