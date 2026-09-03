@@ -1,0 +1,14 @@
+{
+  "name": "morecheese",
+  "version": "1.1.0",
+  "domain": "morecheese",
+  "uuidNamespace": "e4d8f1e2-5a7c-4f9b-8d3e-2b1a0c9f8e7d",
+  "description": "Synthetic universe data generator configuration for MoreCheese / International Cheese Federation (ICF) using Loom",
+  "entrypoint": "./index.ts",
+  "rulesetPath": "./ruleset",
+  "output": {
+    "metadataDir": "../metadata",
+    "migrationsDir": "../migrations",
+    "sqlDialect": "sqlserver"
+  }
+}

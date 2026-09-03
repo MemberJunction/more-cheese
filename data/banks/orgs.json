@@ -1,0 +1,192 @@
+{
+  "$comment": "AUTHORED org-name bank (see plans/association-db/research/name-banks-research.md). Names are composed from CLEARED components using real industry morphology: [invented toponym] + generic, [surname] + farmstead form, plus fully-authored one-offs. Components are safety-cleared once (web + USPTO on the distinctive core); the `cleared` stamp is the audit trail. Expansion order is part of determinism: pools expand forms-major in authored order, then a seeded shuffle assigns names to org slots without replacement.",
+  "cleared": {
+    "web": "2026-07-13",
+    "by": "claude+agents",
+    "note": "component-level clearance; flagged components removed at authoring time"
+  },
+  "toponyms": [
+    "Stonewick",
+    "Fernholt",
+    "Aldermere",
+    "Thistlemere",
+    "Rowanbrook",
+    "Larkhollow",
+    "Bramblewick",
+    "Cindervale",
+    "Foxcombe",
+    "Harrowfen",
+    "Mossgate",
+    "Nettlewick",
+    "Pinebarrow",
+    "Quillbrook",
+    "Reedmere",
+    "Saltfen",
+    "Tarnwick",
+    "Wrenfield",
+    "Yarrowdale",
+    "Birchmoor",
+    "Cloverholt",
+    "Dapplewick",
+    "Elderfen",
+    "Gorsemere",
+    "Hazelcombe",
+    "Kestrelmoor",
+    "Lindenfen",
+    "Mistlebrook",
+    "Ottermere",
+    "Pippinvale",
+    "Quincewick",
+    "Rushfen",
+    "Sorrelgate",
+    "Umberfen",
+    "Alderwick",
+    "Brackenfell",
+    "Corbiemoor",
+    "Dovetarn",
+    "Emberlea",
+    "Fallowfen",
+    "Gildermere",
+    "Heathercombe",
+    "Kilnbrook",
+    "Loamfield",
+    "Briarholt",
+    "Damsonwick",
+    "Garnetmoor",
+    "Ivywick",
+    "Juniperfen",
+    "Lambswick",
+    "Maplefen",
+    "Nornbrook",
+    "Orchardmere",
+    "Plumgate",
+    "Quernstone",
+    "Rimefield",
+    "Speltmoor",
+    "Winterfen",
+    "Aspenholt"
+  ],
+  "surnames": [
+    "Verhoeven",
+    "Bakhuizen",
+    "Steenwyk",
+    "Grunewald",
+    "Holzhauser",
+    "Marchetti",
+    "Vandermolen",
+    "Tenbroek",
+    "Ostergaard",
+    "Norgaard",
+    "Dubois",
+    "Beauchamp",
+    "Okonkwo",
+    "Mensah",
+    "Nakagawa",
+    "Herrera",
+    "Pellegrini",
+    "Dvorak",
+    "Novacek",
+    "Iversen",
+    "Bergstrom",
+    "Womack",
+    "Ashby",
+    "Ferran"
+  ],
+  "registers": {
+    "Producer": {
+      "toponymForms": [
+        "{t} Creamery",
+        "{t} Cheese Co.",
+        "{t} Dairy",
+        "{t} Farm",
+        "{t} Creamery Cooperative"
+      ],
+      "surnameForms": [
+        "{s} Farmstead",
+        "{s} Family Dairy",
+        "{s} Farmstead Creamery"
+      ],
+      "oneOffs": [
+        "Whistling Doe Dairy",
+        "Velvet Antler Dairy",
+        "Humble Yoke Creamery",
+        "Bent Willow Creamery",
+        "Old Quern Creamery",
+        "Stray Sock Cheese Co.",
+        "Hidden Bell Farmstead",
+        "Slowfield Dairy",
+        "Bellows & Brine Creamery",
+        "Hofkäserei Grunefeld",
+        "Käserei Almwind",
+        "Caseificio Valdorna",
+        "Caseificio Montefiora",
+        "Kaasboerderij Wilgenhof",
+        "Quesería Valdeluna"
+      ]
+    },
+    "Retailer": {
+      "toponymForms": [
+        "{t} Cheesemonger",
+        "{t} Cheese & Provisions",
+        "{t} Fine Cheese"
+      ],
+      "surnameForms": [
+        "{s}'s Cheese Shop",
+        "{s} & Daughters Fine Cheese"
+      ],
+      "oneOffs": [
+        "Curd & Cellar",
+        "The Cave Door",
+        "The Brined Board",
+        "Split Ash Cheese Shop",
+        "The Paraffin Wheel",
+        "Cellar & Cloth"
+      ]
+    },
+    "Supplier": {
+      "toponymForms": [
+        "{t} Cheesemaking Supply",
+        "{t} Dairy Systems"
+      ],
+      "surnameForms": [
+        "{s} Cultures Co.",
+        "{s} & Sons Dairy Supply"
+      ],
+      "oneOffs": [
+        "Curdsmith Equipment"
+      ]
+    },
+    "Educator": {
+      "toponymForms": [
+        "{t} Cheese School",
+        "{t} Dairy Institute",
+        "{t} Center for Cheese Studies"
+      ],
+      "surnameForms": [],
+      "oneOffs": [
+        "Center for Artisan Dairy Arts",
+        "The Affinage Workshop",
+        "Curd Craft Academy"
+      ]
+    }
+  },
+  "$heroReserved": "reserved[] = cleared names RESERVED for hero employers (heroes.json) — excluded from the dealt pools so no crowd org duplicates them. All composed from cleared components or individually cleared one-offs.",
+  "$headroom": "pool sizes {'Producer': 383, 'Retailer': 232, 'Supplier': 167, 'Educator': 180} — supports ~n=3000 members (org ratio 0.25; retailer register binds first); extend toponyms to raise the ceiling",
+  "reserved": [
+    "Crowfeather Creamery",
+    "Mongers' Row",
+    "Mistlebrook Dairy",
+    "Larkhollow Creamery",
+    "Ostergaard & Sons Dairy Supply",
+    "Fromagerie Saint-Rémille",
+    "Orchardmere Cheese & Provisions",
+    "The Quiet Curd",
+    "Reedmere Dairy Systems",
+    "Winterfen Dairy",
+    "Whitfield Food Safety Training",
+    "Marchetti's Salumeria & Formaggio",
+    "Speltmoor Farmstead",
+    "Quincewick Creamery",
+    "Fernholt Creamery"
+  ]
+}

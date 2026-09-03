@@ -1,0 +1,424 @@
+{
+  "name": "morecheese",
+  "namespace": "e4d8f1e2-5a7c-4f9b-8d3e-2b1a0c9f8e7d",
+  "description": "International Cheese Federation (ICF) domain schema covering members, events, sensory competitions, learning academy, and commerce orders",
+  "packs": {
+    "core": {
+      "name": "core",
+      "dependsOn": [],
+      "description": "Core organization, person, and member profile entities"
+    },
+    "advocacy": {
+      "name": "advocacy",
+      "dependsOn": ["core"],
+      "description": "Legislative and grassroots advocacy campaigns"
+    },
+    "events": {
+      "name": "events",
+      "dependsOn": ["core"],
+      "description": "World Cheese Cup events, registrations, and sensory judging competition entries"
+    },
+    "learning": {
+      "name": "learning",
+      "dependsOn": ["core"],
+      "description": "ICF Academy courses, enrollments, and master cheesemaker certifications"
+    },
+    "commerce": {
+      "name": "commerce",
+      "dependsOn": ["core"],
+      "description": "Artisan merchandise, competition entry fees, and wholesale orders"
+    }
+  },
+  "entities": {
+    "Organization": {
+      "name": "Organization",
+      "targetTable": "Organization",
+      "schema": "morecheese_common",
+      "pack": "core",
+      "businessKey": ["Name"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "Name": { "name": "Name", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "CreatedAt": { "name": "CreatedAt", "type": "date", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {}
+    },
+    "Person": {
+      "name": "Person",
+      "targetTable": "Person",
+      "schema": "morecheese_common",
+      "pack": "core",
+      "businessKey": ["Email"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "OrganizationID": { "name": "OrganizationID", "type": "uuid", "nullable": true, "isPrimaryKey": false },
+        "FirstName": { "name": "FirstName", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "LastName": { "name": "LastName", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Email": { "name": "Email", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Title": { "name": "Title", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "CreatedAt": { "name": "CreatedAt", "type": "date", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_Person_Organization": {
+          "fieldName": "OrganizationID",
+          "targetEntity": "Organization",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "OrganizationProfile": {
+      "name": "OrganizationProfile",
+      "targetTable": "OrganizationProfile",
+      "schema": "morecheese_members",
+      "pack": "core",
+      "businessKey": ["OrganizationID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "OrganizationID": { "name": "OrganizationID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "ProductionVolume": { "name": "ProductionVolume", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "GuildStatus": { "name": "GuildStatus", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "FacilityCount": { "name": "FacilityCount", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "DistributionReach": { "name": "DistributionReach", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_OrgProfile_Org": {
+          "fieldName": "OrganizationID",
+          "targetEntity": "Organization",
+          "targetField": "ID",
+          "cardinality": "one-to-one"
+        }
+      }
+    },
+    "MemberProfile": {
+      "name": "MemberProfile",
+      "targetTable": "MemberProfile",
+      "schema": "morecheese_members",
+      "pack": "core",
+      "businessKey": ["PersonID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "PrimaryCheeseFocus": { "name": "PrimaryCheeseFocus", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "PreferredMilkType": { "name": "PreferredMilkType", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "GuildStanding": { "name": "GuildStanding", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "EngagementScore": { "name": "EngagementScore", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "AdvocacyCount": { "name": "AdvocacyCount", "type": "number", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_MemberProfile_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "one-to-one"
+        }
+      }
+    },
+    "MembershipPeriod": {
+      "name": "MembershipPeriod",
+      "targetTable": "MembershipPeriod",
+      "schema": "morecheese_members",
+      "pack": "core",
+      "businessKey": ["PersonID", "StartDate"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "MembershipType": { "name": "MembershipType", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "StartDate": { "name": "StartDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "EndDate": { "name": "EndDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "AutoRenew": { "name": "AutoRenew", "type": "boolean", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_MembershipPeriod_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "AdvocacyAction": {
+      "name": "AdvocacyAction",
+      "targetTable": "AdvocacyAction",
+      "schema": "morecheese_members",
+      "pack": "advocacy",
+      "businessKey": ["PersonID", "CampaignName"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "CampaignName": { "name": "CampaignName", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "ActionType": { "name": "ActionType", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "ActionDate": { "name": "ActionDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_AdvocacyAction_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "Event": {
+      "name": "Event",
+      "targetTable": "Event",
+      "schema": "morecheese_events",
+      "pack": "events",
+      "businessKey": ["Name", "StartDate"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "Name": { "name": "Name", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "EventType": { "name": "EventType", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "StartDate": { "name": "StartDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "EndDate": { "name": "EndDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "Location": { "name": "Location", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Capacity": { "name": "Capacity", "type": "number", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {}
+    },
+    "EventRegistration": {
+      "name": "EventRegistration",
+      "targetTable": "EventRegistration",
+      "schema": "morecheese_events",
+      "pack": "events",
+      "businessKey": ["EventID", "PersonID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "EventID": { "name": "EventID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "RegistrationDate": { "name": "RegistrationDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "TicketType": { "name": "TicketType", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_EventReg_Event": {
+          "fieldName": "EventID",
+          "targetEntity": "Event",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        },
+        "FK_EventReg_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "CompetitionEntry": {
+      "name": "CompetitionEntry",
+      "targetTable": "CompetitionEntry",
+      "schema": "morecheese_events",
+      "pack": "events",
+      "businessKey": ["EventID", "OrganizationID", "CheeseName"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "EventID": { "name": "EventID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "OrganizationID": { "name": "OrganizationID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "CheeseName": { "name": "CheeseName", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Category": { "name": "Category", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "MilkType": { "name": "MilkType", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Score": { "name": "Score", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "Medal": { "name": "Medal", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_CompEntry_Event": {
+          "fieldName": "EventID",
+          "targetEntity": "Event",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        },
+        "FK_CompEntry_Org": {
+          "fieldName": "OrganizationID",
+          "targetEntity": "Organization",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "Course": {
+      "name": "Course",
+      "targetTable": "Course",
+      "schema": "morecheese_learning",
+      "pack": "learning",
+      "businessKey": ["CourseCode"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "Title": { "name": "Title", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "CourseCode": { "name": "CourseCode", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Level": { "name": "Level", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Credits": { "name": "Credits", "type": "number", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {}
+    },
+    "CourseEnrollment": {
+      "name": "CourseEnrollment",
+      "targetTable": "CourseEnrollment",
+      "schema": "morecheese_learning",
+      "pack": "learning",
+      "businessKey": ["CourseID", "PersonID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "CourseID": { "name": "CourseID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "EnrollmentDate": { "name": "EnrollmentDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "CompletionDate": { "name": "CompletionDate", "type": "date", "nullable": true, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_Enrollment_Course": {
+          "fieldName": "CourseID",
+          "targetEntity": "Course",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        },
+        "FK_Enrollment_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "Certification": {
+      "name": "Certification",
+      "targetTable": "Certification",
+      "schema": "morecheese_learning",
+      "pack": "learning",
+      "businessKey": ["Code"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "Name": { "name": "Name", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Code": { "name": "Code", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "ValidityMonths": { "name": "ValidityMonths", "type": "number", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {}
+    },
+    "MemberCertification": {
+      "name": "MemberCertification",
+      "targetTable": "MemberCertification",
+      "schema": "morecheese_learning",
+      "pack": "learning",
+      "businessKey": ["CertificationID", "PersonID"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "CertificationID": { "name": "CertificationID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "IssueDate": { "name": "IssueDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "ExpirationDate": { "name": "ExpirationDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_MemberCert_Cert": {
+          "fieldName": "CertificationID",
+          "targetEntity": "Certification",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        },
+        "FK_MemberCert_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "Product": {
+      "name": "Product",
+      "targetTable": "Product",
+      "schema": "morecheese_orders",
+      "pack": "commerce",
+      "businessKey": ["SKU"],
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "SKU": { "name": "SKU", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Name": { "name": "Name", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Category": { "name": "Category", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Price": { "name": "Price", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "IsActive": { "name": "IsActive", "type": "boolean", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {}
+    },
+    "Order": {
+      "name": "Order",
+      "targetTable": "Order",
+      "schema": "morecheese_orders",
+      "pack": "commerce",
+      "businessKey": ["OrderNumber"],
+      "isImmutable": true,
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "PersonID": { "name": "PersonID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "OrderNumber": { "name": "OrderNumber", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "OrderDate": { "name": "OrderDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "TotalAmount": { "name": "TotalAmount", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_Order_Person": {
+          "fieldName": "PersonID",
+          "targetEntity": "Person",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "OrderLine": {
+      "name": "OrderLine",
+      "targetTable": "OrderLine",
+      "schema": "morecheese_orders",
+      "pack": "commerce",
+      "businessKey": ["OrderID", "ProductID"],
+      "isImmutable": true,
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "OrderID": { "name": "OrderID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "ProductID": { "name": "ProductID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "Quantity": { "name": "Quantity", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "UnitPrice": { "name": "UnitPrice", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "ExtendedPrice": { "name": "ExtendedPrice", "type": "number", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_OrderLine_Order": {
+          "fieldName": "OrderID",
+          "targetEntity": "Order",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        },
+        "FK_OrderLine_Product": {
+          "fieldName": "ProductID",
+          "targetEntity": "Product",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    },
+    "Payment": {
+      "name": "Payment",
+      "targetTable": "Payment",
+      "schema": "morecheese_orders",
+      "pack": "commerce",
+      "businessKey": ["OrderID", "PaymentDate"],
+      "isImmutable": true,
+      "fields": {
+        "ID": { "name": "ID", "type": "uuid", "nullable": false, "isPrimaryKey": true },
+        "OrderID": { "name": "OrderID", "type": "uuid", "nullable": false, "isPrimaryKey": false },
+        "PaymentMethod": { "name": "PaymentMethod", "type": "string", "nullable": false, "isPrimaryKey": false },
+        "Amount": { "name": "Amount", "type": "number", "nullable": false, "isPrimaryKey": false },
+        "PaymentDate": { "name": "PaymentDate", "type": "date", "nullable": false, "isPrimaryKey": false },
+        "Status": { "name": "Status", "type": "string", "nullable": false, "isPrimaryKey": false }
+      },
+      "foreignKeys": {
+        "FK_Payment_Order": {
+          "fieldName": "OrderID",
+          "targetEntity": "Order",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
+        }
+      }
+    }
+  }
+}

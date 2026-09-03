@@ -96,9 +96,21 @@ export class MemberCommunityPanel extends BaseFormPanel<BaseEntity> {
 
 Synthetic data for MoreCheese is designed and generated using **[Loom](https://github.com/MemberJunction/loom)** (`@memberjunction/loom`), MemberJunction's framework for causal, calibrated, and deterministic synthetic universes.
 
-- **Causally Correlated**: Member join dates, event attendance, certification progress, order amounts, and churn risk are drawn from joint causal graphs, not isolated pseudo-random generators.
-- **Referentially Closed**: 100% referential integrity across 4 tiers of foreign keys with guaranteed topological migration ordering.
-- **Idempotent & Additive**: Generates initial baseline snapshots (`V*__Baseline.sql`) and consecutive weekly delta cycles (`V*__Delta_Cycle_*.sql`) with strictly monotonic ID persistence and zero unwanted mutations.
+All MoreCheese-specific generative configurations live cleanly in the **[`data/`](data/)** directory:
+- **`data/project.json`**: Project manifest configuring output paths to `../metadata` and `../migrations`.
+- **`data/domain.json`**: Schema declarations for 17 entities across 5 packs (`core`, `advocacy`, `events`, `learning`, `commerce`).
+- **`data/ruleset/`**: Real-world association benchmarks and empirical factor contracts.
+- **`data/banks/`**: Curated artisan creameries, dairies, and cheesemaker personas.
+
+### Data Generation Commands:
+
+```sh
+npm run data:build       # Generate baseline world into metadata/ and migrations/
+npm run data:accumulate  # Advance simulation by weekly cycles
+npm run data:validate    # Validate referential closure & factor gates
+```
+
+See **[`data/README.md`](data/README.md)** for full documentation on the domain schema, factor gates, and simulation lifecycle.
 
 ---
 

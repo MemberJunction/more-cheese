@@ -1,0 +1,51 @@
+{
+  "name": "common",
+  "domain": "morecheese",
+  "catalog": {},
+  "params": {
+    "baseRenewalTarget": 0.82,
+    "autoRenewTarget": 0.70,
+    "eventAttendanceTarget": 0.35,
+    "courseCompletionTarget": 0.60,
+    "creameryAccreditationTarget": 0.40
+  },
+  "effects": {
+    "factor-membership-renewal": {
+      "id": "factor-membership-renewal",
+      "effect": "MembershipPeriod",
+      "target": 0.82,
+      "tolerance": 0.08,
+      "evidence": {
+        "source": "ICF Annual Member Benchmark 2026",
+        "confidence": "high",
+        "notes": "Annual member retention target across all membership tiers"
+      },
+      "outcome": {
+        "from": "self",
+        "where": {
+          "Status": "Active"
+        }
+      },
+      "arrows": {}
+    },
+    "factor-autorenew-rate": {
+      "id": "factor-autorenew-rate",
+      "effect": "MembershipPeriod",
+      "target": 0.70,
+      "tolerance": 0.10,
+      "evidence": {
+        "source": "Association Recurring Revenue Study",
+        "confidence": "high",
+        "notes": "Proportion of memberships enrolled in automated recurring billing"
+      },
+      "outcome": {
+        "from": "self",
+        "where": {
+          "AutoRenew": true
+        }
+      },
+      "arrows": {}
+    }
+  },
+  "mixes": {}
+}
