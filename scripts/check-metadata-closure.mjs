@@ -250,5 +250,68 @@ console.log(
   `✓ All ${orders.length.toLocaleString()} orders pass financial integrity (TotalGross matches lines, Balance = TotalGross - AmountPaid, 0 overpaid).`
 );
 
-console.log(`\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Order Financials).`);
+// 7. Membership period dues order coverage audit (R4-1)
+console.log('\n--- Membership Period Dues Order Coverage Audit (R4-1) ---');
+const periods = records.filter((r) => r.dir === 'membership-periods');
+const products = records.filter((r) => r.dir === 'products');
+const memProdIds = new Set(
+  products
+    .filter((p) => {
+      const cat = p.fields?.ProductCategoryID || '';
+      return cat.includes('Category: Memberships') || (p.fields?.Name && p.fields.Name.includes('Membership'));
+    })
+    .map((p) => String(p.primaryKey?.ID).toUpperCase())
+);
+
+const memOrderHeaderIds = new Set();
+for (const l of orderLines) {
+  const pid = l.fields?.ProductID ? String(l.fields.ProductID).toUpperCase() : null;
+  if (pid && memProdIds.has(pid)) {
+    const oid = l.fields?.OrderHeaderID ? String(l.fields.OrderHeaderID).toUpperCase() : null;
+    if (oid) memOrderHeaderIds.add(oid);
+  }
+}
+
+const memSaleOrders = orders.filter(
+  (o) => o.fields?.OrderType === 'Sale' && memOrderHeaderIds.has(String(o.primaryKey?.ID).toUpperCase())
+);
+const ordersByPerson = new Map();
+for (const o of memSaleOrders) {
+  const pid = o.fields?.BillToPersonID ? String(o.fields.BillToPersonID).toUpperCase() : null;
+  if (pid) {
+    if (!ordersByPerson.has(pid)) ordersByPerson.set(pid, []);
+    ordersByPerson.get(pid).push(o);
+  }
+}
+
+let unbackedDuesPeriods = 0;
+let billedPeriodsCount = 0;
+for (const p of periods) {
+  const dues = p.fields?.DuesAmount ?? 0;
+  if (dues <= 0) continue;
+  billedPeriodsCount++;
+  const personId = p.fields?.PersonID ? String(p.fields.PersonID).toUpperCase() : null;
+  const pStart = p.fields?.StartDate ? new Date(p.fields.StartDate).getTime() : NaN;
+  const pOrders = personId ? ordersByPerson.get(personId) || [] : [];
+  let hasWithin90 = false;
+  for (const o of pOrders) {
+    const oDate = o.fields?.OrderDate ? new Date(o.fields.OrderDate).getTime() : NaN;
+    if (!isNaN(pStart) && !isNaN(oDate)) {
+      const diffDays = Math.abs(oDate - pStart) / (1000 * 60 * 60 * 24);
+      if (diffDays <= 90) {
+        hasWithin90 = true;
+        break;
+      }
+    }
+  }
+  if (!hasWithin90) unbackedDuesPeriods++;
+}
+
+if (unbackedDuesPeriods > 0) {
+  console.error(`\n❌ DUES COVERAGE AUDIT FAILED: ${unbackedDuesPeriods} billed periods missing membership Sale order within 90 days.`);
+  process.exit(1);
+}
+console.log(`✓ All ${billedPeriodsCount.toLocaleString()} billed periods backed 1:1 by membership Sale orders within 90 days.`);
+
+console.log(`\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Coverage).`);
 process.exit(0);

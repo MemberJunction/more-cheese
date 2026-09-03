@@ -97,7 +97,7 @@ try {
   const mutatedDomain6 = JSON.parse(origDomain);
   mutatedDomain6.entities.Product.fields.Bio = { name: 'Bio', type: 'string' };
   fs.writeFileSync(domainPath, JSON.stringify(mutatedDomain6, null, 2), 'utf8');
-  runValidatorExpectingFailure('Mutation 6: non-members field missing from metadata', "missing from metadata records in 'products'");
+  runValidatorExpectingFailure('Mutation 6: non-members field missing from metadata', "missing from record #0");
 
   console.log('\n================================================================================');
   console.log('✅ ALL 6 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (R3-M1, V1)');

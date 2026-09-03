@@ -396,7 +396,7 @@ node scripts/check-metadata-closure.mjs
 ## 5. Architectural Decisions & Scope
 
 ### 5.1 Source of Truth Decision (heroes.json vs Committed Dataset)
-The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`.
+The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`. Members with a `JoinDate` before 2019 are recorded with their historical association tenure as an opening state, while billing and commerce history begins at the unified 2019-01-01 baseline.
 - **Automated Conformance Gate (R2-H1)**: `scripts/validate-loom-data.mjs` verifies in CI that 100% of heroes in `data/ruleset/heroes.json` match the committed metadata records byte-for-byte.
 
 ### 5.2 State Ladder Vocabulary Decision (R2-L1)
