@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, relative, sep } from 'node:path';
 
 const METADATA_DIR = resolve(process.cwd(), 'metadata');
 
@@ -11,35 +11,33 @@ function findJsonFiles(dir) {
     const stat = statSync(full);
     if (stat.isDirectory()) {
       results.push(...findJsonFiles(full));
-    } else if (entry.endsWith('.json') && !entry.startsWith('.')) {
-      results.push(full);
-    } else if (entry.startsWith('.') && entry.endsWith('.json')) {
-      // e.g. .events.json, .people.json
+    } else if (entry.endsWith('.json')) {
       results.push(full);
     }
   }
   return results;
 }
 
-// 1. Index all primary keys and group by directory/entity
+// 1. Index all primary keys and load all records
 const allPrimaryKeys = new Set();
-const recordsByDir = new Map();
+const records = [];
 
 const files = findJsonFiles(METADATA_DIR);
 for (const file of files) {
   try {
     const raw = readFileSync(file, 'utf-8');
-    const records = JSON.parse(raw);
-    if (!Array.isArray(records)) continue;
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) continue;
 
-    const relPath = file.replace(METADATA_DIR + '/', '');
-    const dir = relPath.split('/')[0];
-    if (!recordsByDir.has(dir)) recordsByDir.set(dir, []);
-    recordsByDir.get(dir).push(...records);
+    const relPath = relative(METADATA_DIR, file);
+    const dir = relPath.split(sep)[0];
 
-    for (const r of records) {
+    for (const r of parsed) {
       if (r?.primaryKey?.ID) {
         allPrimaryKeys.add(r.primaryKey.ID.toUpperCase());
+      }
+      if (r?.fields) {
+        records.push({ dir, fields: r.fields });
       }
     }
   } catch (err) {
@@ -47,65 +45,79 @@ for (const file of files) {
   }
 }
 
-// 2. Define standard referential closure checks
-const checks = [
-  { sourceDir: 'organization-profiles', fkField: 'OrganizationID', targetName: 'Organizations' },
-  { sourceDir: 'member-profiles', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'membership-periods', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'event-registrations', fkField: 'EventID', targetName: 'Events' },
-  { sourceDir: 'event-registrations', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'competition-entries', fkField: 'EventID', targetName: 'Events' },
-  { sourceDir: 'enrollments', fkField: 'CourseID', targetName: 'Courses' },
-  { sourceDir: 'enrollments', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'orders', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'order-lines', fkField: 'OrderID', targetName: 'Orders' },
-  { sourceDir: 'order-lines', fkField: 'ProductID', targetName: 'Products' },
-  { sourceDir: 'payments', fkField: 'OrderID', targetName: 'Orders' },
-  { sourceDir: 'advocacy-actions', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'member-certifications', fkField: 'PersonID', targetName: 'People' },
-  { sourceDir: 'member-certifications', fkField: 'CertificationID', targetName: 'Certifications' },
-];
+// 2. Explicit, documented exclusion list for known external cross-repo references
+// Each exclusion tracks hit counts; an exclusion that matches 0 records will fail the build to catch stale exclusions.
+const EXCLUDED_EXTERNAL_FIELDS = new Map([
+  ['relationships.RelationshipTypeID', { reason: 'Points to @memberjunction/bizapps-common seeded types', hits: 0 }],
+  ['form-responses.AnonymousSessionID', { reason: 'Anonymous browser session tokens from public form submissions', hits: 0 }],
+  ['sonar-score-models.OwnerUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
+  ['sonar-score-model-versions.PublishedByUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }]
+]);
 
 console.log('='.repeat(80));
-console.log('           METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT           ');
+console.log('       GENERIC METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT       ');
 console.log('='.repeat(80));
-console.log(`Indexed ${allPrimaryKeys.size.toLocaleString()} unique Primary Keys across ${recordsByDir.size} metadata collections.\n`);
+console.log(`Indexed ${allPrimaryKeys.size.toLocaleString()} unique Primary Keys across ${records.length.toLocaleString()} records.\n`);
 
-let totalChecked = 0;
-let totalFailures = 0;
+let evaluatedCount = 0;
+const orphanMap = new Map();
 
-for (const check of checks) {
-  const records = recordsByDir.get(check.sourceDir) || [];
-  let checked = 0;
-  let orphans = 0;
+for (const r of records) {
+  for (const [fieldName, val] of Object.entries(r.fields)) {
+    // Check every field ending in 'ID' except primary key 'ID'
+    if (fieldName.endsWith('ID') && fieldName !== 'ID') {
+      if (!val || typeof val !== 'string' || val.startsWith('@lookup:')) {
+        continue;
+      }
 
-  for (const r of records) {
-    const val = r?.fields?.[check.fkField];
-    if (val && typeof val === 'string' && !val.startsWith('@lookup:')) {
-      checked++;
+      const qualifiedKey = `${r.dir}.${fieldName}`;
+      if (EXCLUDED_EXTERNAL_FIELDS.has(qualifiedKey)) {
+        EXCLUDED_EXTERNAL_FIELDS.get(qualifiedKey).hits++;
+        continue;
+      }
+
+      evaluatedCount++;
       if (!allPrimaryKeys.has(val.toUpperCase())) {
-        orphans++;
+        if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
+        orphanMap.get(qualifiedKey).push(val);
       }
     }
   }
-
-  totalChecked += checked;
-  totalFailures += orphans;
-
-  const status = orphans === 0 ? 'PASSED' : `FAILED (${orphans} orphans)`;
-  const label = `${check.sourceDir} -> ${check.targetName} (${check.fkField})`;
-  console.log(`  ${label.padEnd(52)} : ${status.padEnd(10)} [${checked.toLocaleString()} checked]`);
 }
 
-console.log('-'.repeat(80));
-console.log(`Total Foreign Keys Evaluated: ${totalChecked.toLocaleString()}`);
-console.log(`Total Referential Orphans:    ${totalFailures}`);
+// Verify that every declared exclusion actually matched records
+let staleExclusions = 0;
+console.log('External Exclusions Evaluated:');
+for (const [key, meta] of EXCLUDED_EXTERNAL_FIELDS.entries()) {
+  console.log(`  ${key.padEnd(46)} : ${meta.hits.toLocaleString()} skipped (${meta.reason})`);
+  if (meta.hits === 0) {
+    console.error(`  ❌ STALE EXCLUSION: ${key} matched 0 records! Remove it from EXCLUDED_EXTERNAL_FIELDS.`);
+    staleExclusions++;
+  }
+}
+
+console.log('\n' + '-'.repeat(80));
+console.log(`Total Foreign Key References Evaluated: ${evaluatedCount.toLocaleString()}`);
+console.log(`Total Orphaned References Found:        ${orphanMap.size}`);
 console.log('='.repeat(80));
 
-if (totalFailures > 0) {
-  console.error(`\n❌ Metadata closure check FAILED with ${totalFailures} orphaned foreign keys.`);
+if (staleExclusions > 0) {
+  console.error(`\n❌ Metadata closure check FAILED due to ${staleExclusions} stale exclusion(s).`);
   process.exit(1);
-} else {
-  console.log('\n✅ Metadata closure check PASSED. All relationships closed with 0 orphans.');
-  process.exit(0);
 }
+
+if (evaluatedCount === 0) {
+  console.error('\n❌ Metadata closure check FAILED: 0 foreign key references were evaluated!');
+  process.exit(1);
+}
+
+if (orphanMap.size > 0) {
+  console.error(`\n❌ Metadata closure check FAILED: Unresolved foreign keys detected:`);
+  for (const [field, samples] of orphanMap.entries()) {
+    console.error(`  - ${field}: ${samples.length} orphans (sample: ${samples[0]})`);
+  }
+  process.exit(1);
+}
+
+console.log(`\n✅ Metadata closure check PASSED. All ${evaluatedCount.toLocaleString()} foreign keys closed with 0 orphans.`);
+process.exit(0);

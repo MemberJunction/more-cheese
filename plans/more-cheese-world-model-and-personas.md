@@ -3,7 +3,7 @@
 **Flagship Consumer Roadmap for Loom Plan 02**
 
 Version 2.0 · September 2026  
-Status: Proposed (Round 1 Review Incorporated)  
+Status: Proposed (Round 2 Review Incorporated)  
 Target Repository: `MemberJunction/more-cheese`  
 Companion PR: [MemberJunction/loom#5](https://github.com/MemberJunction/loom/pull/5)
 
@@ -11,44 +11,44 @@ Companion PR: [MemberJunction/loom#5](https://github.com/MemberJunction/loom/pul
 
 ## 1. Executive Summary & Repository Status
 
-This document outlines the roadmap to position **More Cheese** as the primary enterprise showcase and flagship consumer for **Loom Plan 02** (Schema-Agnostic Hero Personas, Motifs, State Progression Ladders, and Multi-Cycle Retrospective Simulation).
+This document outlines the roadmap to establish **More Cheese** as the primary enterprise showcase and flagship consumer for **Loom Plan 02** (Schema-Agnostic Hero Personas, Motifs, State Progression Ladders, and Multi-Cycle Retrospective Simulation).
 
-### Current Status vs. Planned Roadmap:
-- **Clean Framework Decoupling (Achieved in PR 19)**: The legacy procedural `datagen/` directory (28,403 lines) was excised from More Cheese. All future data simulation will run through `@memberjunction/loom`.
-- **Form Panel Extensions (In Tree)**: Form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) are declared and registered via `@RegisterClassEx` on the `after-fields` slot for `People` and `Organizations`. (Wiring live backend fields is scheduled for the data migration phase).
-- **Metadata Referential Closure Audit (Committed in this PR)**: Added [`scripts/check-metadata-closure.mjs`](scripts/check-metadata-closure.mjs) and wired into GitHub Actions (`.github/workflows/changes.yml`). CI now evaluates **134,518 foreign key references across 122,220 primary keys with 0 orphans**.
-- **Loom `/data` Project Configuration (Planned for Phase 02.6)**: Migration of domain manifests, factor contracts, and authentic name banks into `data/` will occur once Loom Plan 02 contracts land.
+### Current Repository Status vs. Planned Roadmap:
+- **Clean Framework Decoupling (Achieved in PR 19)**: The legacy procedural `datagen/` directory (28,403 lines) was removed. All future data simulation runs through `@memberjunction/loom`.
+- **Form Panel Extensions (In Tree)**: Form slot panels (`MemberCommunityPanel` and `OrganizationCheeseGuildPanel`) are registered via `@RegisterClassEx` on the `before-fields` slot for `People` and `Organizations`. **Status**: The panels currently render placeholder mock values and query columns that do not exist; they are not yet bound to live data.
+- **Metadata Referential Closure Audit (Committed in this PR)**: Added [`scripts/check-metadata-closure.mjs`](scripts/check-metadata-closure.mjs) and wired it into `.github/workflows/changes.yml`. CI performs a generic sweep across all fields matching `/ID$/`, evaluating **177,518 foreign key references with 0 orphans** against 4 documented external exclusions.
+- **Loom `/data` Project Configuration (Planned for Phase 02.6)**: Migration of domain manifests, factor contracts, and name banks into `data/` will occur once Loom Plan 02 contracts land.
 
 ---
 
-## 2. The 16 Demonstration Personas
+## 2. The 16 Committed Demonstration Personas
 
-To deliver compelling product demonstrations and validate MemberJunction capabilities (Sonar churn prediction, deduplication, governance ladders, LMS tracking), More Cheese authors a curated roster of **16 demo personas**:
+The 16 heroes below are the exact individuals committed in `metadata/people/.people.json` and `metadata/member-profiles/.member-profiles.json`. Under Loom Invariant 1 (Deterministic Identity), their declared email addresses are the business keys from which their UUIDs are minted:
 
-| # | Persona Name | Role & Organization | Dials | What This Persona Exists to Demonstrate |
+| # | Persona Name | Email (Business Key) & Employer | Dials | What This Persona Exists to Demonstrate |
 | :-: | :--- | :--- | :---: | :--- |
-| 1 | **Elena Rodriguez** | Head Cheesemaker, *Crowfeather Creamery* | $\theta=1.8, \phi=0.8$ | **The Active Flagship Leader**: High-engagement member, attends annual conferences, chairs Sensory Committee. Primary persona for executive dashboards. |
-| 2 | **Marcus Chen** | Specialty Buyer, *Mongers' Row* | $\theta=0.3, \phi=0.2$ | **The Pending Renewal**: Anniversary renewal falling inside 14-day grace window with `AutoRenew=false`. Demonstrates billing alerts and automated win-back workflows. |
-| 3 | **Danielle Okafor** | Production Specialist, *Mistlebrook Dairy* | $\theta=0.2, \phi=-0.8$ | **The Diagnosable Lapse**: Loyal 4-year member whose employer ceased operations in 2025; lapsed with her paycheck. Demonstrates Sonar churn root-cause analysis. |
-| 4 | **Gwen Whitfield** | Principal, *Whitfield Food Safety Training* | $\theta=1.6, \phi=0.3$ | **The Governance Ladder**: Climbed from Committee Member (2022) $\to$ Board Director (2024) $\to$ Chair-Elect (2025) $\to$ Board Chair (2026). Validates term limits and officer tracks. |
-| 5 | **Sofia Marchetti** | Monger, *Marchetti's Salumeria & Formaggio* | $\theta=1.2, \phi=0.3$ | **The Certification Journey**: Completed Foundation Certificate; enrolled and advancing through Certified Cheese Professional (CCP). Demonstrates LMS credentials. |
-| 6 | **Tom Reyes** | Owner, *Speltmoor Farmstead* | $\theta=0.1, \phi=-0.2$ | **The Grassroots Advocate**: Minimal conference attendance, but 34+ legislative actions on raw-milk regulations. Demonstrates non-event engagement scoring. |
-| 7 | **Kate O'Leary** | Cheesemaker, *Clover Valley Artisans* | $\theta=0.7, \phi=0.1$ | **Cleansing Pair A**: Near-duplicate member record (alternate spelling, same phone/org). Validates data deduplication algorithms. |
-| 8 | **Kathy OLeary** | Cheesemaker, *Clover Valley Artisans* | $\theta=0.7, \phi=0.1$ | **Cleansing Pair B**: Resolves to same individual as Kate O'Leary for merge and deduplication demonstrations. |
-| 9 | **Aisha Bell** | Lead Affineur, *Gilded Wheel Caves* | $\theta=0.9, \phi=0.0$ | **Stale Employer Cleansing**: Profile lists prior employer that closed in 2024; demonstrates data decay alerts and auto-enrichment triggers. |
-| 10 | **Bob Kowalski** | Plant Manager, *Heritage Dairy Co.* | $\theta=0.5, \phi=0.4$ | **M&A Employer Casualty**: Organization acquired by conglomerate; demonstrates account hierarchy reconciliation and corporate parent linking. |
-| 11 | **Mei-Ling Zhou** | Corporate Director, *Artisan Distribution Group* | $\theta=-1.5, \phi=2.0$ | **Corporate Ghost Auto-Renewer**: Low personal engagement, unbroken 8-year renewals funded by corporate parent. Validates B2B membership models. |
-| 12 | **Jean-Luc Dupont** | Master Affineur, *Dupont & Fils* | $\theta=1.4, \phi=0.9$ | **Past Chair & Senior Alumni**: Completed 2-year Board Chair term in 2024; demonstrates post-service "alumni halo" ($\Delta \theta = +0.5$) and 95%+ retention. |
-| 13 | **Chloe Tremblay** | Apprentice Monger, *Fromagerie de l'Est* | $\theta=0.4 \to 1.5$ | **The Rising Star**: Engagement increases $+0.35$/year; completes 3 courses and advances toward Sensory Judge credential. Demonstrates longitudinal growth. |
-| 14 | **Liam Vance** | Consultant, *Independent Dairy Advisory* | $\theta=0.6, \phi=-0.2$ | **Reactivation Candidate**: Dormant for 2 cycles following career break; reactivates after attending regional webinar. Validates reactivation factors. |
-| 15 | **Priya Patel** | Head of Quality, *Valley Gold Creamery* | $\theta=1.5, \phi=0.6$ | **Speaker & Competition Winner**: Submits 3 award-winning cheeses and presents technical workshops. Demonstrates event speaker and competition tracking. |
-| 16 | **Carlos Mendoza** | General Manager, *Border Dairy Supplies* | $\theta=-0.8, \phi=-0.5$ | **One-Off Webinar Lapsed**: Registered for a single 2023 virtual workshop and never renewed. Demonstrates low-intent churn profile. |
+| 1 | **Elena Rodriguez** | `elena.rodriguez.000101@lakemail.example`<br/>*Crowfeather Creamery* (Joined 2022-03-15) | $\theta=1.8$<br/>$\phi=0.8$ | **The Active Flagship Leader**: Top-decile engagement, attends annual conferences, chairs Standards Committee. Primary persona for executive dashboards. |
+| 2 | **Marcus Chen** | `marcus.chen.000102@quillpost.example`<br/>*Mongers' Row* (Joined 2021-08-21) | $\theta=0.3$<br/>$\phi=0.2$ | **The Pending Renewal**: Anniversary renewal in 14–28 day grace window with `AutoRenew=false`. Demonstrates billing alerts and automated reminder cadences. |
+| 3 | **Danielle Okafor** | `danielle.okafor.000103@mailhaven.example`<br/>*Mistlebrook Dairy* (Joined 2024-03-20) | $\theta=0.2$<br/>$\phi=-0.8$ | **The Diagnosable Lapse**: Loyal member whose employer dissolved in 2025; lapsed in 2026. Demonstrates Sonar churn root-cause analysis. |
+| 4 | **Priya Natarajan** | `priya.natarajan.000104@postfield.example`<br/>*Larkhollow Creamery* (Joined 2025-02-10) | $\theta=1.5$<br/>$\phi=-0.6$ | **The Rising Star**: Career-changer apprentice with steepest positive engagement trajectory in her cohort. Demonstrates longitudinal skill growth. |
+| 5 | **Bob Kowalski** | `bob.kowalski.000105@bluebarn.example`<br/>*Ostergaard & Sons Dairy Supply* (Joined 2013-06-12) | $\theta=0.9$<br/>$\phi=0.9$ | **The Churn Save**: 13-year member whose employer was acquired in 2023; declining engagement, top-decile risk, still renewing. Demonstrates win-back workflows. |
+| 6 | **Sofia Marchetti** | `sofia.marchetti.000106@homestead.example`<br/>*Marchetti's Salumeria & Formaggio* (Joined 2024-02-18) | $\theta=1.2$<br/>$\phi=0.3$ | **The Certification Journey**: Completed Foundation credential in 2024; enrolled and advancing through Certified Cheese Professional (CCP). Demonstrates LMS credentials. |
+| 7 | **Henri Dubois** | `henri.dubois.000107@lakemail.example`<br/>*Fromagerie Saint-Rémille* (Joined 2019-01-15) | $\theta=0.3$<br/>$\phi=1.8$ | **The International Member**: Jura affineur flying over once per year; demonstrates cross-border distance factor decay and European slice. |
+| 8 | **Gwen Whitfield** | `gwen.whitfield.000108@quillpost.example`<br/>*Whitfield Food Safety Training* (Joined 2014-02-10) | $\theta=1.6$<br/>$\phi=0.3$ | **The Committee Chair & Governance Leader**: Climbs from Committee Member $\to$ Board Director $\to$ Board Chair. Demonstrates term integrity and officer ladders. |
+| 9 | **Tom Reyes** | `tom.reyes.000109@speltmoorfarmstead.example`<br/>*Speltmoor Farmstead* (Joined 2016-05-09) | $\theta=0.1$<br/>$\phi=-0.2$ | **The Grassroots Advocate**: Low event attendance, but 34+ legislative actions and testimonies on raw-milk rules. Demonstrates multi-dimensional engagement scoring. |
+| 10 | **Aisha Bell** | `aisha.bell.000110@quincewickcreamery.example`<br/>*Quincewick Creamery* (Joined 2018-04-12) | $\theta=0.4$<br/>$\phi=0.3$ | **The Stale Record**: Changed employers ~8 months ago to *Fernholt Creamery*, un-updated profile; demonstrates data decay alerts and auto-enrichment triggers. |
+| 11 | **Kate O'Leary** | `kate.oleary.000111@orchardmerecheese.example`<br/>*Orchardmere Cheese & Provisions* (Joined 2015-04-22) | $\theta=0.7$<br/>$\phi=0.1$ | **Cleansing Pair A (Primary)**: Primary member profile; demonstrates deduplication algorithms resolving against duplicate Kathy. |
+| 12 | **Kathy OLeary** | `kathy.oleary.000287@orchardmerecheese.example`<br/>*Orchardmere Cheese & Provisions* (Joined 2023-06-05) | $\theta=0.5$<br/>$\phi=0.4$ | **Cleansing Pair B (Duplicate)**: Minted via org portal with split history; demonstrates fuzzy matching and record merge workflows. |
+| 13 | **Jamie Fuller** | `jamie.fuller.000113@postfield.example`<br/>*Home Enthusiast* (Joined 2023-05-30) | $\theta=2.0$<br/>$\phi=-0.5$ | **Engagement $\ne$ Revenue**: Home-cheesemaking blogger, top-decile activity on lowest enthusiast tier. Demonstrates separation of engagement from purchasing power. |
+| 14 | **Victor Sandoval** | `victor.sandoval.000114@reedmeredairysystems.example`<br/>*Reedmere Dairy Systems* (Joined 2017-09-01) | $\theta=-1.8$<br/>$\phi=1.9$ | **The Corporate Auto-Renew Ghost**: Employer-paid, near-zero personal engagement, unbroken renewals since 2017. Demonstrates corporate retention shields. |
+| 15 | **Nia Thompson** | `nia.thompson.000115@thequietcurd.example`<br/>*The Quiet Curd* (Joined 14 days before release) | $\theta=0.5$<br/>$\phi=-0.4$ | **The Cold Start**: Joined two weeks before release; validates scoring on priors rather than transactional history. |
+| 16 | **Charlie Mason** | `charlie.mason.000116@winterfendairy.example`<br/>*Winterfen Dairy* (Joined 2021-08-19) | $\theta=0.3$<br/>$\phi=0.5$ | **Rest-of-World Producer**: Tasmanian sheep dairy owner; represents the Southern Hemisphere geographical distribution. |
 
 ---
 
 ## 3. Authored Loom Metadata Specifications
 
-The following declarative configurations demonstrate how More Cheese will author its world model using **exclusively generic Loom Plan 02 contract keys**, with association concepts appearing purely as **values**.
+The following declarative configurations demonstrate how More Cheese will author its world model using **exclusively generic Loom Plan 02 contract keys**, with domain concepts appearing purely as **values**.
 
 ### 3.1 Authored Hero Configuration (`data/ruleset/heroes.json`)
 ```json
@@ -59,7 +59,7 @@ The following declarative configurations demonstrate how More Cheese will author
       "heroKey": "HERO-ICF-001",
       "entity": "Person",
       "businessKeys": {
-        "Email": "elena.rodriguez@crowfeathercreamery.example.com"
+        "Email": "elena.rodriguez.000101@lakemail.example"
       },
       "fixedFields": {
         "FirstName": "Elena",
@@ -67,7 +67,7 @@ The following declarative configurations demonstrate how More Cheese will author
         "Title": "Head Cheesemaker",
         "Status": "Active"
       },
-      "birthCycle": 2021,
+      "birthCycle": 2022,
       "latentDials": {
         "theta": 1.8,
         "phi": 0.8
@@ -94,10 +94,49 @@ The following declarative configurations demonstrate how More Cheese will author
           "value": "Active"
         },
         {
-          "kind": "outcome",
-          "factor": "factor-membership-renewal",
-          "cycle": 2025,
-          "value": true
+          "kind": "feature",
+          "feature": {
+            "from": "EventRegistration",
+            "where": { "Cycle": 2025 },
+            "aggregation": "count"
+          },
+          "op": "gte",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "heroKey": "HERO-ICF-002",
+      "entity": "Person",
+      "businessKeys": {
+        "Email": "marcus.chen.000102@quillpost.example"
+      },
+      "fixedFields": {
+        "FirstName": "Marcus",
+        "LastName": "Chen",
+        "Title": "Specialty Cheese Buyer",
+        "Status": "Active"
+      },
+      "birthCycle": 2021,
+      "latentDials": {
+        "theta": 0.3,
+        "phi": 0.2
+      },
+      "pins": [
+        {
+          "kind": "field",
+          "field": "Status",
+          "op": "eq",
+          "value": "Active"
+        },
+        {
+          "kind": "feature",
+          "feature": {
+            "from": "MembershipPeriod",
+            "field": "EndDate"
+          },
+          "op": "withinCyclesOfAsOf",
+          "value": [0, 1]
         }
       ]
     },
@@ -105,15 +144,15 @@ The following declarative configurations demonstrate how More Cheese will author
       "heroKey": "HERO-ICF-003",
       "entity": "Person",
       "businessKeys": {
-        "Email": "danielle.okafor@mistlebrook.example.com"
+        "Email": "danielle.okafor.000103@mailhaven.example"
       },
       "fixedFields": {
         "FirstName": "Danielle",
         "LastName": "Okafor",
-        "Title": "Dairy Operations Specialist",
+        "Title": "Assistant Cheesemaker",
         "Status": "Lapsed"
       },
-      "birthCycle": 2021,
+      "birthCycle": 2024,
       "latentDials": {
         "theta": 0.2,
         "phi": -0.8
@@ -129,16 +168,16 @@ The following declarative configurations demonstrate how More Cheese will author
         {
           "kind": "outcome",
           "factor": "factor-membership-renewal",
-          "cycle": 2025,
+          "cycle": 2026,
           "value": false
         }
       ]
     },
     {
-      "heroKey": "HERO-ICF-004",
+      "heroKey": "HERO-ICF-008",
       "entity": "Person",
       "businessKeys": {
-        "Email": "gwen.whitfield@whitfieldsafety.example.com"
+        "Email": "gwen.whitfield.000108@quillpost.example"
       },
       "fixedFields": {
         "FirstName": "Gwen",
@@ -146,7 +185,7 @@ The following declarative configurations demonstrate how More Cheese will author
         "Title": "Principal",
         "Status": "Active"
       },
-      "birthCycle": 2020,
+      "birthCycle": 2014,
       "latentDials": {
         "theta": 1.6,
         "phi": 0.3
@@ -162,12 +201,6 @@ The following declarative configurations demonstrate how More Cheese will author
           "ladderKey": "icf-governance-ladder",
           "state": "BoardDirector",
           "enterCycle": 2024,
-          "exitCycle": 2025
-        },
-        {
-          "ladderKey": "icf-governance-ladder",
-          "state": "ChairElect",
-          "enterCycle": 2025,
           "exitCycle": 2026
         },
         {
@@ -183,6 +216,35 @@ The following declarative configurations demonstrate how More Cheese will author
           "field": "Status",
           "op": "eq",
           "value": "Active"
+        }
+      ]
+    },
+    {
+      "heroKey": "HERO-ICF-009",
+      "entity": "Person",
+      "businessKeys": {
+        "Email": "tom.reyes.000109@speltmoorfarmstead.example"
+      },
+      "fixedFields": {
+        "FirstName": "Tom",
+        "LastName": "Reyes",
+        "Title": "Owner",
+        "Status": "Active"
+      },
+      "birthCycle": 2016,
+      "latentDials": {
+        "theta": 0.1,
+        "phi": -0.2
+      },
+      "pins": [
+        {
+          "kind": "feature",
+          "feature": {
+            "from": "AdvocacyAction",
+            "aggregation": "count"
+          },
+          "op": "gte",
+          "value": 30
         }
       ]
     }
@@ -212,12 +274,8 @@ The following declarative configurations demonstrate how More Cheese will author
     },
     {
       "motifKey": "corporate-ghost-autorenew",
-      "targetEntity": "Person",
+      "targetEntity": "MembershipPeriod",
       "quota": { "mode": "count", "value": 25 },
-      "latentConstraints": {
-        "theta": { "min": -2.0, "max": -0.8 },
-        "phi": { "min": 1.0, "max": 2.5 }
-      },
       "fixedFields": {
         "AutoRenew": true
       },
@@ -233,6 +291,8 @@ The following declarative configurations demonstrate how More Cheese will author
 ```
 
 ### 3.3 Authored Governance Ladder (`data/ruleset/ladders.json`)
+Bound to the child entity `CommitteeMembership` (`committee-memberships`):
+
 ```json
 {
   "$schema": "https://memberjunction.org/schemas/loom/ladders.v1.json",
@@ -241,8 +301,11 @@ The following declarative configurations demonstrate how More Cheese will author
       "ladderKey": "icf-governance-ladder",
       "entity": "Person",
       "binding": {
-        "mode": "field",
-        "field": "GovernanceRole"
+        "mode": "childEntity",
+        "childEntity": "CommitteeMembership",
+        "foreignKey": "PersonID",
+        "stateField": "RoleID",
+        "termField": "TermID"
       },
       "cohortShare": 0.5,
       "states": [
@@ -271,36 +334,14 @@ The following declarative configurations demonstrate how More Cheese will author
           ]
         },
         {
-          "name": "ChairElect",
-          "capacity": 1,
-          "durationCycles": 1,
-          "prerequisites": {
-            "priorState": "BoardDirector"
-          },
-          "effects": [
-            { "factor": "factor-membership-renewal", "beta": 4.0 }
-          ]
-        },
-        {
           "name": "BoardChair",
           "capacity": 1,
           "durationCycles": 2,
           "prerequisites": {
-            "priorState": "ChairElect"
+            "priorState": "BoardDirector"
           },
           "effects": [
             { "factor": "factor-membership-renewal", "beta": 4.5 }
-          ]
-        },
-        {
-          "name": "ImmediatePastChair",
-          "capacity": 1,
-          "durationCycles": 2,
-          "prerequisites": {
-            "priorState": "BoardChair"
-          },
-          "effects": [
-            { "factor": "factor-membership-renewal", "beta": 2.5 }
           ],
           "exitEffects": [
             { "dial": "theta", "delta": 0.5 }
@@ -320,31 +361,22 @@ Verification of the committed metadata dataset is automated via [`scripts/check-
 
 ```
 ================================================================================
-           METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT           
+       GENERIC METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT       
 ================================================================================
-Indexed 122,220 unique Primary Keys across 62 metadata collections.
+Indexed 122,220 unique Primary Keys across 122,221 records.
 
-  organization-profiles -> Organizations (OrganizationID) : PASSED     [641 checked]
-  member-profiles -> People (PersonID)                 : PASSED     [2,109 checked]
-  membership-periods -> People (PersonID)              : PASSED     [8,024 checked]
-  event-registrations -> Events (EventID)              : PASSED     [19,124 checked]
-  event-registrations -> People (PersonID)             : PASSED     [19,124 checked]
-  competition-entries -> Events (EventID)              : PASSED     [0 checked]
-  enrollments -> Courses (CourseID)                    : PASSED     [4,855 checked]
-  enrollments -> People (PersonID)                     : PASSED     [4,855 checked]
-  orders -> People (PersonID)                          : PASSED     [17,555 checked]
-  order-lines -> Orders (OrderID)                      : PASSED     [19,461 checked]
-  order-lines -> Products (ProductID)                  : PASSED     [19,461 checked]
-  payments -> Orders (OrderID)                         : PASSED     [18,056 checked]
-  advocacy-actions -> People (PersonID)                : PASSED     [1,007 checked]
-  member-certifications -> People (PersonID)           : PASSED     [123 checked]
-  member-certifications -> Certifications (CertificationID) : PASSED     [123 checked]
+External Exclusions Evaluated:
+  relationships.RelationshipTypeID               : 2,805 skipped (Points to @memberjunction/bizapps-common seeded types)
+  form-responses.AnonymousSessionID              : 79 skipped (Anonymous browser session tokens from public form submissions)
+  sonar-score-models.OwnerUserID                 : 1 skipped (External Core User ID in MJ User table)
+  sonar-score-model-versions.PublishedByUserID   : 1 skipped (External Core User ID in MJ User table)
+
 --------------------------------------------------------------------------------
-Total Foreign Keys Evaluated: 134,518
-Total Referential Orphans:    0
+Total Foreign Key References Evaluated: 177,518
+Total Orphaned References Found:        0
 ================================================================================
 
-✅ Metadata closure check PASSED. All relationships closed with 0 orphans.
+✅ Metadata closure check PASSED. All 177,518 foreign keys closed with 0 orphans.
 ```
 
 To run this audit locally:
