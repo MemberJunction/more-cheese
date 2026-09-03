@@ -425,7 +425,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101321-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2013-03-14",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -435,8 +435,9 @@
       "Balance": 0,
       "DueDate": "2013-03-14",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -447,15 +448,15 @@
       "OrderNumber": "ORD-D-ICF-101368-P1",
       "OrderType": "Sale",
       "OrderDate": "2013-01-22",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "05C8361C-A865-5308-B6B4-5894F9C71535",
       "TotalGross": 354,
-      "AmountPaid": 354,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2013-02-21",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -585,7 +586,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101830-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2013-12-24",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -595,8 +596,9 @@
       "Balance": 0,
       "DueDate": "2013-12-24",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -2427,15 +2429,15 @@
       "OrderNumber": "ORD-D-ICF-100515-P2",
       "OrderType": "Sale",
       "OrderDate": "2014-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "BD36CB61-AD8C-5A42-825E-0E6A4F5486EC",
       "TotalGross": 112,
-      "AmountPaid": 112,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2015-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -4107,15 +4109,15 @@
       "OrderNumber": "ORD-D-ICF-000105-P4",
       "OrderType": "Sale",
       "OrderDate": "2015-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "8090D46F-6D4D-54FE-B90B-8541EEF33569",
       "TotalGross": 306,
-      "AmountPaid": 306,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -4227,15 +4229,15 @@
       "OrderNumber": "ORD-D-ICF-100051-P1",
       "OrderType": "Sale",
       "OrderDate": "2016-02-21",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EC5CA0FD-D6AA-5DA5-A53A-BD66188C60C4",
       "TotalGross": 134,
-      "AmountPaid": 134,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-02-21",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -4305,7 +4307,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100145-P4",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2015-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -4315,8 +4317,9 @@
       "Balance": 0,
       "DueDate": "2016-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -5567,15 +5570,15 @@
       "OrderNumber": "ORD-D-ICF-101138-P1",
       "OrderType": "Sale",
       "OrderDate": "2016-01-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "DEC1C0E6-EC5B-5F9F-B69F-652187C7DD30",
       "TotalGross": 766,
-      "AmountPaid": 766,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-02-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -5785,7 +5788,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101297-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2016-01-07",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -5795,8 +5798,9 @@
       "Balance": 0,
       "DueDate": "2016-01-07",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -5887,15 +5891,15 @@
       "OrderNumber": "ORD-D-ICF-101336-P1",
       "OrderType": "Sale",
       "OrderDate": "2015-06-21",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C3BAA79C-E94B-51FD-8E95-9DF76DAEC94D",
       "TotalGross": 131,
-      "AmountPaid": 131,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2015-06-21",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -5927,15 +5931,15 @@
       "OrderNumber": "ORD-D-ICF-101364-P3",
       "OrderType": "Sale",
       "OrderDate": "2014-12-12",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EA083819-F4F1-5CD5-A43D-2CD309718835",
       "TotalGross": 131,
-      "AmountPaid": 131,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2015-01-11",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -6127,15 +6131,15 @@
       "OrderNumber": "ORD-D-ICF-101509-P3",
       "OrderType": "Sale",
       "OrderDate": "2015-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C4BDC52A-7709-5D80-8147-A12C39B9BD98",
       "TotalGross": 134,
-      "AmountPaid": 134,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -7767,15 +7771,15 @@
       "OrderNumber": "ORD-D-ICF-100225-P4",
       "OrderType": "Sale",
       "OrderDate": "2016-11-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D",
       "TotalGross": 115,
-      "AmountPaid": 115,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-12-06",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -8287,15 +8291,15 @@
       "OrderNumber": "ORD-D-ICF-100521-P3",
       "OrderType": "Sale",
       "OrderDate": "2016-03-30",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C530EB45-9DE9-5458-91C7-458214CD16AB",
       "TotalGross": 134,
-      "AmountPaid": 134,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-04-29",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -8687,15 +8691,15 @@
       "OrderNumber": "ORD-D-ICF-100811-P5",
       "OrderType": "Sale",
       "OrderDate": "2016-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "741B91B4-06DF-56E0-9CCA-BEC73E42CF9A",
       "TotalGross": 138,
-      "AmountPaid": 138,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2017-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -9965,7 +9969,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101448-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2016-11-20",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -9975,8 +9979,9 @@
       "Balance": 0,
       "DueDate": "2016-12-20",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -10427,15 +10432,15 @@
       "OrderNumber": "ORD-D-ICF-101686-P1",
       "OrderType": "Sale",
       "OrderDate": "2016-08-10",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "20C2D8C6-FE99-55A9-B40B-45A0385BA68F",
       "TotalGross": 134,
-      "AmountPaid": 134,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2016-08-10",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -10447,15 +10452,15 @@
       "OrderNumber": "ORD-D-ICF-101711-P5",
       "OrderType": "Sale",
       "OrderDate": "2016-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1CD5F393-C6AA-50AC-97E2-BF4B31A85EC1",
       "TotalGross": 138,
-      "AmountPaid": 138,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2017-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -10725,7 +10730,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101830-P5",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2016-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -10735,8 +10740,9 @@
       "Balance": 0,
       "DueDate": "2017-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -11427,15 +11433,15 @@
       "OrderNumber": "ORD-D-ICF-102165-P1",
       "OrderType": "Sale",
       "OrderDate": "2017-04-19",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "730AD8D4-6382-5745-9ECB-BB9FB0416CCD",
       "TotalGross": 315,
-      "AmountPaid": 315,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2017-05-19",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -11965,7 +11971,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-000105-P6",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2017-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -11975,8 +11981,9 @@
       "Balance": 0,
       "DueDate": "2018-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -13367,15 +13374,15 @@
       "OrderNumber": "ORD-D-ICF-100611-P5",
       "OrderType": "Sale",
       "OrderDate": "2017-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "50C4B479-7320-5314-A525-F03017ED9411",
       "TotalGross": 323,
-      "AmountPaid": 323,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -15167,15 +15174,15 @@
       "OrderNumber": "ORD-D-ICF-101372-P3",
       "OrderType": "Sale",
       "OrderDate": "2017-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C8973B5D-4B33-55B9-8AC7-3B3F7283AAF2",
       "TotalGross": 141,
-      "AmountPaid": 141,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -15405,7 +15412,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101484-P4",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2017-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -15415,8 +15422,9 @@
       "Balance": 0,
       "DueDate": "2018-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -16147,15 +16155,15 @@
       "OrderNumber": "ORD-D-ICF-101758-P4",
       "OrderType": "Sale",
       "OrderDate": "2017-01-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "408EEC38-CC4D-510A-8348-DEB3EE45A98C",
       "TotalGross": 138,
-      "AmountPaid": 138,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2017-02-05",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -16507,15 +16515,15 @@
       "OrderNumber": "ORD-D-ICF-101873-P1",
       "OrderType": "Sale",
       "OrderDate": "2018-12-04",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "6CBBAB33-C724-5D6E-8E40-0E8DE99650D9",
       "TotalGross": 141,
-      "AmountPaid": 141,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-12-04",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -17067,15 +17075,15 @@
       "OrderNumber": "ORD-D-ICF-102119-P3",
       "OrderType": "Sale",
       "OrderDate": "2017-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EEF7EE8A-8EBB-53F8-966C-16DA5B7BCAB5",
       "TotalGross": 323,
-      "AmountPaid": 323,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -17427,15 +17435,15 @@
       "OrderNumber": "ORD-D-ICF-102273-P4",
       "OrderType": "Sale",
       "OrderDate": "2017-10-05",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "DB6B0B9F-3078-500E-8FBA-40CA3C4A4A42",
       "TotalGross": 138,
-      "AmountPaid": 138,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2017-11-04",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -17787,15 +17795,15 @@
       "OrderNumber": "ORD-D-ICF-102426-P1",
       "OrderType": "Sale",
       "OrderDate": "2018-02-27",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "2856E009-307C-5B51-AE49-2E91902C7673",
       "TotalGross": 141,
-      "AmountPaid": 141,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-02-27",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -18107,15 +18115,15 @@
       "OrderNumber": "ORD-D-ICF-100051-P4",
       "OrderType": "Sale",
       "OrderDate": "2018-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EC5CA0FD-D6AA-5DA5-A53A-BD66188C60C4",
       "TotalGross": 145,
-      "AmountPaid": 145,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -19525,7 +19533,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100530-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2019-02-21",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -19535,8 +19543,9 @@
       "Balance": 0,
       "DueDate": "2019-02-21",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -19787,15 +19796,15 @@
       "OrderNumber": "ORD-D-ICF-100653-P2",
       "OrderType": "Sale",
       "OrderDate": "2018-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EDF8B133-43A4-584F-8CAD-03924C22ED64",
       "TotalGross": 145,
-      "AmountPaid": 145,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -19805,7 +19814,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100656-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2019-11-21",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -19815,8 +19824,9 @@
       "Balance": 0,
       "DueDate": "2019-11-21",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -19947,15 +19957,15 @@
       "OrderNumber": "ORD-D-ICF-100724-P1",
       "OrderType": "Sale",
       "OrderDate": "2019-05-03",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "63EE135A-BF20-5983-9C85-AD86B7B886BD",
       "TotalGross": 332,
-      "AmountPaid": 332,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-06-02",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -20025,7 +20035,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100740-P2",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2018-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -20035,8 +20045,9 @@
       "Balance": 0,
       "DueDate": "2019-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -20507,15 +20518,15 @@
       "OrderNumber": "ORD-D-ICF-100874-P3",
       "OrderType": "Sale",
       "OrderDate": "2018-01-04",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "5192006D-C9CD-500D-9CB2-7C10A498347C",
       "TotalGross": 141,
-      "AmountPaid": 141,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-02-03",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -21487,15 +21498,15 @@
       "OrderNumber": "ORD-D-ICF-101266-P4",
       "OrderType": "Sale",
       "OrderDate": "2018-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "8D9D7609-E6AC-57FB-B105-17CE2D8C6FC8",
       "TotalGross": 214,
-      "AmountPaid": 214,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -23267,15 +23278,15 @@
       "OrderNumber": "ORD-D-ICF-101819-P3",
       "OrderType": "Sale",
       "OrderDate": "2018-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C370BCEF-4688-5B44-8D6D-3BFCA0D45697",
       "TotalGross": 226,
-      "AmountPaid": 226,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -23505,7 +23516,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101868-P6",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2018-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -23515,8 +23526,9 @@
       "Balance": 0,
       "DueDate": "2019-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -23947,15 +23959,15 @@
       "OrderNumber": "ORD-D-ICF-102013-P1",
       "OrderType": "Sale",
       "OrderDate": "2019-09-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "184D1A23-F016-5D7B-969A-83E046A906E8",
       "TotalGross": 145,
-      "AmountPaid": 145,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-09-06",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -24147,15 +24159,15 @@
       "OrderNumber": "ORD-D-ICF-102089-P3",
       "OrderType": "Sale",
       "OrderDate": "2018-08-09",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "78E29F46-3965-5314-BC2F-BB79336EAD05",
       "TotalGross": 323,
-      "AmountPaid": 323,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2018-10-08",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -25485,7 +25497,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100035-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2020-09-28",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -25495,8 +25507,9 @@
       "Balance": 0,
       "DueDate": "2020-09-28",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -26447,15 +26460,15 @@
       "OrderNumber": "ORD-D-ICF-100342-P2",
       "OrderType": "Sale",
       "OrderDate": "2019-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "0FA12DC1-05A0-58B8-AE78-418DABED14BB",
       "TotalGross": 341,
-      "AmountPaid": 341,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -27967,15 +27980,15 @@
       "OrderNumber": "ORD-D-ICF-100747-P2",
       "OrderType": "Sale",
       "OrderDate": "2019-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3DC650C8-27D1-5CAA-B760-F8938048B235",
       "TotalGross": 149,
-      "AmountPaid": 149,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -28185,7 +28198,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100792-P3",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2019-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -28195,8 +28208,9 @@
       "Balance": 0,
       "DueDate": "2020-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -29587,15 +29601,15 @@
       "OrderNumber": "ORD-D-ICF-101234-P1",
       "OrderType": "Sale",
       "OrderDate": "2019-11-13",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
       "TotalGross": 145,
-      "AmountPaid": 145,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-11-13",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -29707,15 +29721,15 @@
       "OrderNumber": "ORD-D-ICF-101254-P2",
       "OrderType": "Sale",
       "OrderDate": "2019-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "2E490BC2-3CEA-5C59-A35C-1E6DD63E2A27",
       "TotalGross": 341,
-      "AmountPaid": 341,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -31387,15 +31401,15 @@
       "OrderNumber": "ORD-D-ICF-101640-P1",
       "OrderType": "Sale",
       "OrderDate": "2020-01-13",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F",
       "TotalGross": 341,
-      "AmountPaid": 341,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-02-12",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -31707,15 +31721,15 @@
       "OrderNumber": "ORD-D-ICF-101751-P3",
       "OrderType": "Sale",
       "OrderDate": "2019-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "9FE55C26-8983-53AA-B517-52BE385CC0F0",
       "TotalGross": 341,
-      "AmountPaid": 341,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -31947,15 +31961,15 @@
       "OrderNumber": "ORD-D-ICF-101807-P5",
       "OrderType": "Sale",
       "OrderDate": "2019-03-29",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "CEF0857A-FE0D-5351-BC42-86041D3864E5",
       "TotalGross": 124,
-      "AmountPaid": 124,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2019-04-28",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -31985,7 +31999,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101819-P4",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2019-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -31995,8 +32009,9 @@
       "Balance": 0,
       "DueDate": "2020-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -33627,15 +33642,15 @@
       "OrderNumber": "ORD-D-ICF-102249-P6",
       "OrderType": "Sale",
       "OrderDate": "2019-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "9D57034D-94F7-5E46-B9A8-5977E53A69BF",
       "TotalGross": 149,
-      "AmountPaid": 149,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -34407,15 +34422,15 @@
       "OrderNumber": "ORD-D-ICF-000107-P3",
       "OrderType": "Sale",
       "OrderDate": "2020-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3C33BD05-03EC-5EEE-9EBF-F2F5F8815E99",
       "TotalGross": 875,
-      "AmountPaid": 875,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -35987,15 +36002,15 @@
       "OrderNumber": "ORD-D-ICF-100415-P4",
       "OrderType": "Sale",
       "OrderDate": "2020-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -36145,7 +36160,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100463-P2",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2020-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -36155,8 +36170,9 @@
       "Balance": 0,
       "DueDate": "2021-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -36607,15 +36623,15 @@
       "OrderNumber": "ORD-D-ICF-100543-P5",
       "OrderType": "Sale",
       "OrderDate": "2020-05-29",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "D592441C-750A-542F-90DC-85EFD0D8B29C",
       "TotalGross": 234,
-      "AmountPaid": 234,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-06-28",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -37567,15 +37583,15 @@
       "OrderNumber": "ORD-D-ICF-100777-P6",
       "OrderType": "Sale",
       "OrderDate": "2020-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "21B6BB4E-8CC6-55AD-A778-F5F2FC72F630",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -39247,15 +39263,15 @@
       "OrderNumber": "ORD-D-ICF-101230-P5",
       "OrderType": "Sale",
       "OrderDate": "2020-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C071B42E-7C8E-52AF-A111-DF90D052913C",
       "TotalGross": 225,
-      "AmountPaid": 225,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -39545,7 +39561,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101289-P3",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2020-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -39555,8 +39571,9 @@
       "Balance": 0,
       "DueDate": "2021-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -40967,15 +40984,15 @@
       "OrderNumber": "ORD-D-ICF-101600-P5",
       "OrderType": "Sale",
       "OrderDate": "2020-03-25",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "CB65D5CB-1286-57BF-BB66-5F96F8057F33",
       "TotalGross": 149,
-      "AmountPaid": 149,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2020-04-24",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -41047,15 +41064,15 @@
       "OrderNumber": "ORD-D-ICF-101618-P7",
       "OrderType": "Sale",
       "OrderDate": "2020-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "E1AAC538-D0F5-5AEC-B7A7-C9EFC7EE1492",
       "TotalGross": 350,
-      "AmountPaid": 350,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -41785,7 +41802,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101823-P4",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2020-01-18",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -41795,8 +41812,9 @@
       "Balance": 0,
       "DueDate": "2020-02-17",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -42207,15 +42225,15 @@
       "OrderNumber": "ORD-D-ICF-101923-P1",
       "OrderType": "Sale",
       "OrderDate": "2021-04-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "41FB4961-9C94-5755-8BE1-1E99115855D9",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-04-06",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -43067,15 +43085,15 @@
       "OrderNumber": "ORD-D-ICF-102135-P5",
       "OrderType": "Sale",
       "OrderDate": "2020-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "8030C7A5-57D2-5793-8120-84407F763F06",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -43505,7 +43523,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-102280-P6",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2020-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -43515,8 +43533,9 @@
       "Balance": 0,
       "DueDate": "2021-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -44347,15 +44366,15 @@
       "OrderNumber": "ORD-D-ICF-000114-P6",
       "OrderType": "Sale",
       "OrderDate": "2021-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "4AE7D208-DB44-5910-A44A-82FAE6520415",
       "TotalGross": 973,
-      "AmountPaid": 973,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -44565,7 +44584,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100035-P3",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2021-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -44575,8 +44594,9 @@
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -45387,15 +45407,15 @@
       "OrderNumber": "ORD-D-ICF-100229-P7",
       "OrderType": "Sale",
       "OrderDate": "2021-06-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "CE620CE1-D552-5F3E-B564-E53FB52CDC1A",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-07-06",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -46207,15 +46227,15 @@
       "OrderNumber": "ORD-D-ICF-100415-P5",
       "OrderType": "Sale",
       "OrderDate": "2021-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -47267,15 +47287,15 @@
       "OrderNumber": "ORD-D-ICF-100592-P4",
       "OrderType": "Sale",
       "OrderDate": "2021-03-10",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "2D28D0D8-075F-5E7A-BDF3-AEAF9414218F",
       "TotalGross": 227,
-      "AmountPaid": 227,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-04-09",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -47907,15 +47927,15 @@
       "OrderNumber": "ORD-D-ICF-100749-P10",
       "OrderType": "Sale",
       "OrderDate": "2021-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "508B52F1-2BBB-578D-88AB-680D881CB476",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -48125,7 +48145,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100789-P9",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2021-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -48135,8 +48155,9 @@
       "Balance": 0,
       "DueDate": "2022-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -48567,15 +48588,15 @@
       "OrderNumber": "ORD-D-ICF-100874-P6",
       "OrderType": "Sale",
       "OrderDate": "2021-01-04",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "5192006D-C9CD-500D-9CB2-7C10A498347C",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-02-03",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -48725,7 +48746,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100906-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-01-16",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -48735,8 +48756,9 @@
       "Balance": 0,
       "DueDate": "2022-01-16",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -49565,7 +49587,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101106-P3",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2021-08-11",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -49575,8 +49597,9 @@
       "Balance": 0,
       "DueDate": "2021-09-10",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -49847,15 +49870,15 @@
       "OrderNumber": "ORD-D-ICF-101145-P8",
       "OrderType": "Sale",
       "OrderDate": "2021-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -50667,15 +50690,15 @@
       "OrderNumber": "ORD-D-ICF-101309-P1",
       "OrderType": "Sale",
       "OrderDate": "2022-12-04",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3E3F720C-89A0-580D-A4F6-5E9EB9218999",
       "TotalGross": 135,
-      "AmountPaid": 135,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-12-04",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -51767,15 +51790,15 @@
       "OrderNumber": "ORD-D-ICF-101505-P6",
       "OrderType": "Sale",
       "OrderDate": "2021-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "0DEDDA50-9797-5A5B-B911-3AE0DED4F95C",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -51945,7 +51968,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101546-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-12-08",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -51955,8 +51978,9 @@
       "Balance": 0,
       "DueDate": "2022-12-08",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -51965,7 +51989,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101553-P10",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2021-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -51975,8 +51999,9 @@
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -52747,15 +52772,15 @@
       "OrderNumber": "ORD-D-ICF-101734-P7",
       "OrderType": "Sale",
       "OrderDate": "2021-07-29",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "07A1FEBA-F9D2-5FA0-AC52-AAE64A4E0136",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-08-28",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -53887,15 +53912,15 @@
       "OrderNumber": "ORD-D-ICF-101978-P6",
       "OrderType": "Sale",
       "OrderDate": "2021-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "405455F3-A250-578C-800A-680D7F7B1AFA",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -55207,15 +55232,15 @@
       "OrderNumber": "ORD-D-ICF-102273-P8",
       "OrderType": "Sale",
       "OrderDate": "2021-10-05",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "DB6B0B9F-3078-500E-8FBA-40CA3C4A4A42",
       "TotalGross": 153,
-      "AmountPaid": 153,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2021-11-04",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -56807,15 +56832,15 @@
       "OrderNumber": "ORD-D-ICF-100051-P8",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EC5CA0FD-D6AA-5DA5-A53A-BD66188C60C4",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -57065,7 +57090,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100107-P6",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -57075,8 +57100,9 @@
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -57625,7 +57651,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100192-P5",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-09-28",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -57635,8 +57661,9 @@
       "Balance": 0,
       "DueDate": "2022-10-28",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -58347,15 +58374,15 @@
       "OrderNumber": "ORD-D-ICF-100307-P3",
       "OrderType": "Sale",
       "OrderDate": "2022-03-23",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "51247A2F-B62F-55E7-BCB6-E1B33D783205",
       "TotalGross": 135,
-      "AmountPaid": 135,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-04-22",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -58707,15 +58734,15 @@
       "OrderNumber": "ORD-D-ICF-100371-P7",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "20FF74A7-9536-5EE3-A7B4-C2A4253DD2C0",
       "TotalGross": 369,
-      "AmountPaid": 369,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -58967,15 +58994,15 @@
       "OrderNumber": "ORD-D-ICF-100418-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-04-21",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "75CAA667-9200-5622-8457-25AA71A1837D",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-04-21",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -60107,15 +60134,15 @@
       "OrderNumber": "ORD-D-ICF-100582-P2",
       "OrderType": "Sale",
       "OrderDate": "2021-12-30",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EEFFFD90-CDF4-55B3-BC6D-C53840064A38",
       "TotalGross": 231,
-      "AmountPaid": 231,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-29",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -60467,15 +60494,15 @@
       "OrderNumber": "ORD-D-ICF-100653-P6",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "EDF8B133-43A4-584F-8CAD-03924C22ED64",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -60625,7 +60652,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100669-P2",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -60635,8 +60662,9 @@
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -60907,15 +60935,15 @@
       "OrderNumber": "ORD-D-ICF-100713-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-06-12",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "7604EFCB-D372-5410-98F2-D1C961774977",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-06-12",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -61307,15 +61335,15 @@
       "OrderNumber": "ORD-D-ICF-100775-P1",
       "OrderType": "Sale",
       "OrderDate": "2022-05-08",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "6CDA7615-B7FE-5AFD-9876-52EE1CC96F7B",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-05-08",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -62127,15 +62155,15 @@
       "OrderNumber": "ORD-D-ICF-100884-P4",
       "OrderType": "Sale",
       "OrderDate": "2022-10-30",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "463AACB5-AC2B-5292-9CB8-523E903BEFF7",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-11-29",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -62227,15 +62255,15 @@
       "OrderNumber": "ORD-D-ICF-100906-P2",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "5B76FD85-6C54-5918-91D0-B29A0AD99604",
       "TotalGross": 238,
-      "AmountPaid": 238,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -63427,15 +63455,15 @@
       "OrderNumber": "ORD-D-ICF-101105-P1",
       "OrderType": "Sale",
       "OrderDate": "2022-07-23",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "3CAB250F-64E2-5CE8-B3FE-409572899F73",
       "TotalGross": 436,
-      "AmountPaid": 436,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-08-22",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -63567,15 +63595,15 @@
       "OrderNumber": "ORD-D-ICF-101124-P3",
       "OrderType": "Sale",
       "OrderDate": "2022-08-27",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "69C2E255-B3F0-547E-9165-27C57791983E",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-09-26",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -63807,15 +63835,15 @@
       "OrderNumber": "ORD-D-ICF-101142-P2",
       "OrderType": "Sale",
       "OrderDate": "2022-02-21",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1F5EED06-66CA-506F-8487-C09FBF94E719",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-03-23",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -64267,15 +64295,15 @@
       "OrderNumber": "ORD-D-ICF-101226-P3",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "D4E66DFA-1FFA-58D7-862C-5A792FC142B8",
       "TotalGross": 369,
-      "AmountPaid": 369,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -64585,7 +64613,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101268-P11",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -64595,8 +64623,9 @@
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -64667,15 +64696,15 @@
       "OrderNumber": "ORD-D-ICF-101275-P2",
       "OrderType": "Sale",
       "OrderDate": "2022-06-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "8B91B7F8-4067-5E5F-91A2-181018350486",
       "TotalGross": 247,
-      "AmountPaid": 247,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-07-02",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -65245,7 +65274,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101349-P8",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-06-03",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -65255,8 +65284,9 @@
       "Balance": 0,
       "DueDate": "2022-08-02",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -66107,15 +66137,15 @@
       "OrderNumber": "ORD-D-ICF-101458-P6",
       "OrderType": "Sale",
       "OrderDate": "2021-12-04",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "048675BC-9297-5E31-9556-96E0E3C02EA6",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-01-03",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -66187,15 +66217,15 @@
       "OrderNumber": "ORD-D-ICF-101470-P10",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "2DEDE9BC-DD2B-51BC-93C7-9B475C6D7D9A",
       "TotalGross": 369,
-      "AmountPaid": 369,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -67347,15 +67377,15 @@
       "OrderNumber": "ORD-D-ICF-101686-P7",
       "OrderType": "Sale",
       "OrderDate": "2022-07-12",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "20C2D8C6-FE99-55A9-B40B-45A0385BA68F",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-08-11",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -68267,15 +68297,15 @@
       "OrderNumber": "ORD-D-ICF-101806-P3",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "D609A950-5337-5B3C-B1EB-75B3936BBE53",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -68565,7 +68595,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101842-P10",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2022-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -68575,8 +68605,9 @@
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -68907,15 +68938,15 @@
       "OrderNumber": "ORD-D-ICF-101893-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-09-18",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "D70D7E41-4317-5592-BD3F-B17DE155D3F9",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-09-18",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -69645,7 +69676,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-102015-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-04-03",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -69655,8 +69686,9 @@
       "Balance": 0,
       "DueDate": "2023-04-03",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -70087,15 +70119,15 @@
       "OrderNumber": "ORD-D-ICF-102076-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-12-19",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "F7039640-FEDE-5D51-918C-C0CC39BC056D",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-12-19",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -70287,15 +70319,15 @@
       "OrderNumber": "ORD-D-ICF-102104-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-07-12",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "44BBE434-64EB-54E7-AEF5-09A95BE867A7",
       "TotalGross": 138,
-      "AmountPaid": 138,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-07-12",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -70887,15 +70919,15 @@
       "OrderNumber": "ORD-D-ICF-102179-P2",
       "OrderType": "Sale",
       "OrderDate": "2022-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1735922A-651F-550B-97A0-9A1AD69C0AA8",
       "TotalGross": 238,
-      "AmountPaid": 238,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -71367,15 +71399,15 @@
       "OrderNumber": "ORD-D-ICF-102250-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-02-18",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "ACF136C9-6B53-5D1C-897F-139F873DB5B2",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-02-18",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -72907,15 +72939,15 @@
       "OrderNumber": "ORD-D-ICF-102460-P5",
       "OrderType": "Sale",
       "OrderDate": "2022-03-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1BD19116-54A8-590F-BF98-C1DCB81188E8",
       "TotalGross": 157,
-      "AmountPaid": 157,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2022-04-05",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -73707,15 +73739,15 @@
       "OrderNumber": "ORD-D-ICF-100035-P5",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "183F4FA3-8730-520A-85BD-B56B5CDC5784",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -74827,15 +74859,15 @@
       "OrderNumber": "ORD-D-ICF-100178-P1",
       "OrderType": "Sale",
       "OrderDate": "2024-06-16",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "920D544C-DF08-5E58-A51B-D14F82E472CF",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-06-16",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -75687,15 +75719,15 @@
       "OrderNumber": "ORD-D-ICF-100273-P2",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1F00878A-94AE-54C5-971A-38CF4BDB2DEB",
       "TotalGross": 948,
-      "AmountPaid": 948,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -75945,7 +75977,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100313-P9",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -75955,8 +75987,9 @@
       "Balance": 0,
       "DueDate": "2024-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -77427,15 +77460,15 @@
       "OrderNumber": "ORD-D-ICF-100518-P7",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "DFAB6297-82A3-58EB-8DC5-105F95EC8246",
       "TotalGross": 379,
-      "AmountPaid": 379,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -77767,15 +77800,15 @@
       "OrderNumber": "ORD-D-ICF-100557-P5",
       "OrderType": "Sale",
       "OrderDate": "2023-09-08",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "13FC4618-78AC-5BDA-831E-868BB3264471",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-10-08",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -77787,15 +77820,15 @@
       "OrderNumber": "ORD-D-ICF-100558-P4",
       "OrderType": "Sale",
       "OrderDate": "2023-01-18",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "072EC674-2A47-5F88-8AD1-9D487E298397",
       "TotalGross": 254,
-      "AmountPaid": 254,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-02-17",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -79347,15 +79380,15 @@
       "OrderNumber": "ORD-D-ICF-100755-P6",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "907230B8-B67E-57C6-BDE8-94DF4A200F2C",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -79645,7 +79678,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100791-P7",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -79655,8 +79688,9 @@
       "Balance": 0,
       "DueDate": "2024-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -81027,15 +81061,15 @@
       "OrderNumber": "ORD-D-ICF-100937-P9",
       "OrderType": "Sale",
       "OrderDate": "2023-05-08",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "0294D962-F4DD-50FD-918D-9EC65EE6DF14",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-06-07",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -81287,15 +81321,15 @@
       "OrderNumber": "ORD-D-ICF-100971-P3",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1A3E7616-EF59-543E-AA03-413D8790979A",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -82385,7 +82419,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101108-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2024-06-11",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -82395,8 +82429,9 @@
       "Balance": 0,
       "DueDate": "2024-06-11",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -83447,15 +83482,15 @@
       "OrderNumber": "ORD-D-ICF-101245-P8",
       "OrderType": "Sale",
       "OrderDate": "2023-01-27",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "7FE6EFB0-84D0-5E30-88F4-5FB408AD82C5",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-02-26",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -83487,15 +83522,15 @@
       "OrderNumber": "ORD-D-ICF-101248-P10",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "54A492F1-A72B-5A20-98B3-07CE672840CC",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -83607,15 +83642,15 @@
       "OrderNumber": "ORD-D-ICF-101267-P7",
       "OrderType": "Sale",
       "OrderDate": "2023-10-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "B2CC9998-6BA2-5190-9FD3-432B69916CAF",
       "TotalGross": 1001,
-      "AmountPaid": 1001,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-12-05",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -83805,7 +83840,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101286-P10",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-08-17",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -83815,8 +83850,9 @@
       "Balance": 0,
       "DueDate": "2023-09-16",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -83865,7 +83901,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101296-P5",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -83875,8 +83911,9 @@
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -85467,15 +85504,15 @@
       "OrderNumber": "ORD-D-ICF-101496-P6",
       "OrderType": "Sale",
       "OrderDate": "2023-08-14",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "A6D88D7D-27DB-5AB5-AD30-141A7CB1F4F1",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-09-13",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -85487,15 +85524,15 @@
       "OrderNumber": "ORD-D-ICF-101501-P11",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "020EDE93-86BA-5796-998F-2987637B3B57",
       "TotalGross": 379,
-      "AmountPaid": 379,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -86125,7 +86162,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101594-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2024-02-28",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -86135,8 +86172,9 @@
       "Balance": 0,
       "DueDate": "2024-02-28",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -86347,15 +86385,15 @@
       "OrderNumber": "ORD-D-ICF-101615-P1",
       "OrderType": "Sale",
       "OrderDate": "2023-01-06",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "636BE84E-26C9-5404-BB2B-7C5F46415DAA",
       "TotalGross": 240,
-      "AmountPaid": 240,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-01-06",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -87547,15 +87585,15 @@
       "OrderNumber": "ORD-D-ICF-101752-P5",
       "OrderType": "Sale",
       "OrderDate": "2023-03-30",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "0A6718AE-9438-5FC2-9F19-759892838B4A",
       "TotalGross": 162,
-      "AmountPaid": 162,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2023-04-29",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -87647,15 +87685,15 @@
       "OrderNumber": "ORD-D-ICF-101765-P9",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "067065F5-7F1C-57F1-A0F8-92D707C25B7D",
       "TotalGross": 379,
-      "AmountPaid": 379,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-31",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -88005,7 +88043,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-101806-P4",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -88015,8 +88053,9 @@
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -89667,15 +89706,15 @@
       "OrderNumber": "ORD-D-ICF-101977-P1",
       "OrderType": "Sale",
       "OrderDate": "2024-01-23",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "5972B581-2293-511D-99C2-D51687A0C515",
       "TotalGross": 379,
-      "AmountPaid": 379,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-02-22",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -90047,15 +90086,15 @@
       "OrderNumber": "ORD-D-ICF-102032-P2",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "2E99F327-D82C-54B2-914E-6724E1FBAC66",
       "TotalGross": 258,
-      "AmountPaid": 258,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -92547,15 +92586,15 @@
       "OrderNumber": "ORD-D-ICF-102310-P8",
       "OrderType": "Sale",
       "OrderDate": "2023-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "F034E43B-FCA1-5A2A-A03D-8CFC92D8EFA9",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -92705,7 +92744,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-102325-P2",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2023-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -92715,8 +92754,9 @@
       "Balance": 0,
       "DueDate": "2024-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -94587,15 +94627,15 @@
       "OrderNumber": "ORD-D-ICF-000106-P2",
       "OrderType": "Sale",
       "OrderDate": "2024-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "0D2B1994-E693-5F50-8B9C-0336EC93E5C6",
       "TotalGross": 170,
-      "AmountPaid": 170,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2025-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -94725,7 +94765,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100024-P2",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2024-02-01",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -94735,8 +94775,9 @@
       "Balance": 0,
       "DueDate": "2024-03-02",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -94845,7 +94886,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100037-P2",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2024-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -94855,8 +94896,9 @@
       "Balance": 0,
       "DueDate": "2025-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -95105,7 +95147,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100052-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2025-10-03",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -95115,8 +95157,9 @@
       "Balance": 0,
       "DueDate": "2025-10-03",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -95191,8 +95234,8 @@
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1B7B661F-9B2D-53C4-A5DC-24BECFB49EED",
       "TotalGross": 170,
-      "AmountPaid": 170,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 170,
       "DueDate": "2025-12-13",
       "Origin": "Online",
       "FulfillmentStatus": "Fulfilled",
@@ -95231,8 +95274,8 @@
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "C8257B59-5616-57B6-A992-045F0865028B",
       "TotalGross": 170,
-      "AmountPaid": 170,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 170,
       "DueDate": "2025-12-08",
       "Origin": "Online",
       "FulfillmentStatus": "Fulfilled",
@@ -95605,7 +95648,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100105-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2024-08-17",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -95615,8 +95658,9 @@
       "Balance": 0,
       "DueDate": "2024-08-17",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -96425,7 +96469,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100177-P1",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2025-12-09",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -96435,8 +96479,9 @@
       "Balance": 0,
       "DueDate": "2025-12-09",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
@@ -96667,15 +96712,15 @@
       "OrderNumber": "ORD-D-ICF-100197-P2",
       "OrderType": "Sale",
       "OrderDate": "2024-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "6CF4116F-6958-503D-BC98-0EC8683FE905",
       "TotalGross": 170,
-      "AmountPaid": 170,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2025-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -96811,8 +96856,8 @@
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "365A5932-0CF2-5257-AD65-914F4E33F161",
       "TotalGross": 170,
-      "AmountPaid": 170,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 170,
       "DueDate": "2025-12-09",
       "Origin": "Online",
       "FulfillmentStatus": "Fulfilled",
@@ -96827,15 +96872,15 @@
       "OrderNumber": "ORD-D-ICF-100216-P4",
       "OrderType": "Sale",
       "OrderDate": "2024-07-05",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "459759C2-7083-5C88-ADF4-14B00F4AA3CD",
       "TotalGross": 379,
-      "AmountPaid": 379,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-09-03",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -97767,15 +97812,15 @@
       "OrderNumber": "ORD-D-ICF-100303-P1",
       "OrderType": "Sale",
       "OrderDate": "2024-11-11",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "02CF19F9-D56D-58B0-9CAB-D746BB182AAB",
       "TotalGross": 166,
-      "AmountPaid": 166,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2024-11-11",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -97991,8 +98036,8 @@
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "7FAEBADE-0BE3-5567-A9BF-BE4D063E9922",
       "TotalGross": 146,
-      "AmountPaid": 146,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 146,
       "DueDate": "2025-12-13",
       "Origin": "Online",
       "FulfillmentStatus": "Fulfilled",
@@ -98271,8 +98316,8 @@
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "1C4597C9-1399-5A63-A89C-7F9D4F5467A4",
       "TotalGross": 170,
-      "AmountPaid": 170,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 170,
       "DueDate": "2025-12-27",
       "Origin": "Online",
       "FulfillmentStatus": "Fulfilled",
@@ -98411,8 +98456,8 @@
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "85EEEBB8-DB9A-5CAD-B114-248B21BCB1CA",
       "TotalGross": 170,
-      "AmountPaid": 170,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 170,
       "DueDate": "2025-12-23",
       "Origin": "Online",
       "FulfillmentStatus": "Fulfilled",
@@ -99067,15 +99112,15 @@
       "OrderNumber": "ORD-D-ICF-100416-P7",
       "OrderType": "Sale",
       "OrderDate": "2024-12-02",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "8C38DDBF-6C5B-50AC-BFDB-3001D33B48DC",
       "TotalGross": 170,
-      "AmountPaid": 170,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2025-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -99207,15 +99252,15 @@
       "OrderNumber": "ORD-D-ICF-100428-P1",
       "OrderType": "Sale",
       "OrderDate": "2025-12-27",
-      "Status": "Confirmed",
+      "Status": "Voided",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
       "BillToPersonID": "F61EF601-9DDA-57B0-BB3D-86A9388369E1",
       "TotalGross": 146,
-      "AmountPaid": 146,
+      "AmountPaid": 0,
       "Balance": 0,
       "DueDate": "2025-12-27",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
+      "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 0
     }
   },
@@ -99305,7 +99350,7 @@
     },
     "fields": {
       "OrderNumber": "ORD-D-ICF-100437-P3",
-      "OrderType": "Sale",
+      "OrderType": "Cancellation",
       "OrderDate": "2024-12-02",
       "Status": "Confirmed",
       "CompanyID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
@@ -99315,8 +99360,9 @@
       "Balance": 0,
       "DueDate": "2025-01-01",
       "Origin": "Online",
-      "FulfillmentStatus": "Fulfilled",
-      "InitialPaymentAmount": 0
+      "FulfillmentStatus": "Returned",
+      "InitialPaymentAmount": 0,
+      "ReversalReason": "Duplicate registration cancelled by attendee"
     }
   },
   {
