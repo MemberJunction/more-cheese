@@ -60,7 +60,6 @@ module.exports = {
       { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
       { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
-      { SchemaName: 'morecheese_orders', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
     ],
   },
 
