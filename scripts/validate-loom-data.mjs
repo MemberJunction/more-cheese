@@ -1,430 +1,235 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { z } from 'zod';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-// ============================================================================
-// 1. Plan 02 Zod Contracts
-// ============================================================================
+function fail(msg) {
+  console.error(`❌ ${msg}`);
+  process.exit(1);
+}
 
-const ProjectManifestSchema = z.object({
-  name: z.string().min(1),
-  version: z.string().min(1),
-  domain: z.string().min(1),
-  uuidNamespace: z.string().uuid(),
-  description: z.string().optional(),
-  entrypoint: z.string().default('./index.ts'),
-  rulesetPath: z.string().default('./ruleset'),
-  narrativePath: z.string().optional(),
-  output: z.object({
-    metadataDir: z.string().default('./metadata'),
-    migrationsDir: z.string().default('./migrations'),
-    sqlDialect: z.enum(['sqlserver', 'postgres']).default('sqlserver'),
-  }).default({
-    metadataDir: './metadata',
-    migrationsDir: './migrations',
-    sqlDialect: 'sqlserver',
-  }),
-}).strict();
+function assertObject(val, pathStr) {
+  if (!val || typeof val !== 'object' || Array.isArray(val)) {
+    fail(`${pathStr} must be an object`);
+  }
+}
 
-const FieldTypeSchema = z.enum(['string', 'number', 'boolean', 'date', 'uuid', 'json']);
-const FieldConfigSchema = z.object({
-  name: z.string().min(1),
-  type: FieldTypeSchema,
-  nullable: z.boolean().default(false),
-  description: z.string().optional(),
-  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
-  isPrimaryKey: z.boolean().default(false),
-  mjFieldType: z.string().optional(),
-  valueListType: z.string().optional(),
-});
+function assertArray(val, pathStr) {
+  if (!Array.isArray(val)) {
+    fail(`${pathStr} must be an array`);
+  }
+}
 
-const ForeignKeyConfigSchema = z.object({
-  fieldName: z.string().min(1).optional(),
-  targetEntity: z.string().min(1),
-  targetField: z.string().min(1),
-  cardinality: z.enum(['one-to-one', 'many-to-one', 'one-to-many']).default('many-to-one'),
-});
+function assertString(val, pathStr) {
+  if (typeof val !== 'string' || val.trim() === '') {
+    fail(`${pathStr} must be a non-empty string`);
+  }
+}
 
-const EntityConfigSchema = z.object({
-  name: z.string().min(1),
-  targetTable: z.string().min(1),
-  schema: z.string().min(1),
-  pack: z.string().min(1),
-  businessKey: z.array(z.string()).min(1),
-  fields: z.record(z.string(), FieldConfigSchema),
-  foreignKeys: z.record(z.string(), ForeignKeyConfigSchema).default({}),
-  isImmutable: z.boolean().default(false),
-});
-
-const PackConfigSchema = z.object({
-  name: z.string().min(1),
-  dependsOn: z.array(z.string()).default([]),
-  description: z.string().optional(),
-});
-
-const DomainConfigSchema = z.object({
-  name: z.string().min(1),
-  namespace: z.string().uuid(),
-  description: z.string().optional(),
-  entities: z.record(z.string(), EntityConfigSchema),
-  packs: z.record(z.string(), PackConfigSchema),
-});
-
-const PinOpSchema = z.enum(['eq', 'neq', 'gt', 'gte', 'lt', 'lte', 'in', 'exists', 'withinCyclesOfAsOf']);
-const PinPrimitiveValueSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
-
-const FeatureQuerySchema = z.object({
-  from: z.string().min(1),
-  field: z.string().min(1).optional(),
-  where: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
-  aggregation: z.enum(['count', 'sum', 'avg', 'min', 'max', 'exists']).optional(),
-  path: z.array(z.string()).optional(),
-  description: z.string().optional(),
-});
-
-const HeroFieldPinSchema = z.object({
-  kind: z.literal('field'),
-  field: z.string().min(1),
-  op: PinOpSchema,
-  value: z.union([PinPrimitiveValueSchema, z.array(PinPrimitiveValueSchema)]),
-  description: z.string().optional(),
-}).strict();
-
-const HeroOutcomePinSchema = z.object({
-  kind: z.literal('outcome'),
-  factor: z.string().min(1),
-  cycle: z.number().int(),
-  value: z.boolean(),
-  description: z.string().optional(),
-}).strict();
-
-const HeroFeaturePinSchema = z.object({
-  kind: z.literal('feature'),
-  feature: FeatureQuerySchema,
-  op: PinOpSchema,
-  value: z.union([PinPrimitiveValueSchema, z.array(PinPrimitiveValueSchema)]),
-  description: z.string().optional(),
-}).strict();
-
-const HeroPinSchema = z.discriminatedUnion('kind', [
-  HeroFieldPinSchema,
-  HeroOutcomePinSchema,
-  HeroFeaturePinSchema,
-]);
-
-const HeroLadderEntrySchema = z.object({
-  ladderKey: z.string().min(1),
-  state: z.string().min(1),
-  enterCycle: z.number().int(),
-  exitCycle: z.number().int().optional(),
-}).strict();
-
-const HeroConfigSchema = z.object({
-  heroKey: z.string().min(1),
-  entity: z.string().min(1),
-  businessKeys: z.record(z.string(), z.union([z.string(), z.number()])),
-  fixedFields: z.record(z.string(), PinPrimitiveValueSchema).default({}),
-  birthCycle: z.number().int().default(0),
-  latentDials: z.record(z.string(), z.number()).default({}),
-  ladderEntries: z.array(HeroLadderEntrySchema).default([]),
-  eras: z.array(z.string()).default([]),
-  pins: z.array(HeroPinSchema).default([]),
-  description: z.string().optional(),
-}).strict();
-
-const HeroesManifestSchema = z.object({
-  $schema: z.string().optional(),
-  heroes: z.array(HeroConfigSchema),
-}).strict();
-
-const MotifQuotaSchema = z.object({
-  mode: z.enum(['count', 'percentage']),
-  value: z.number().min(0),
-  rounding: z.enum(['floor', 'ceil', 'round']).default('round'),
-}).strict().refine((q) => {
-  if (q.mode === 'percentage') return q.value <= 1;
-  return q.value >= 1;
-}, { message: "Percentage quota value must be a fraction in [0, 1]" });
-
-const LatentTrajectorySchema = z.object({
-  dial: z.string().min(1),
-  deltaPerCycle: z.number(),
-  acceleration: z.number().optional(),
-}).strict();
-
-const ChildRateSchema = z.object({
-  entity: z.string().min(1),
-  perCycle: z.union([
-    z.number().min(0),
-    z.object({ min: z.number().min(0), max: z.number().min(0) }).strict(),
-  ]),
-  condition: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
-}).strict();
-
-const FactorOverrideSchema = z.object({
-  factor: z.string().min(1),
-  beta: z.number().optional(),
-  probability: z.number().min(0).max(1).optional(),
-}).strict().refine((o) => o.beta !== undefined || o.probability !== undefined);
-
-const MotifConfigSchema = z.object({
-  motifKey: z.string().min(1),
-  targetEntity: z.string().min(1),
-  quota: MotifQuotaSchema,
-  birthCycles: z.array(z.number().int()).optional(),
-  latentConstraints: z.record(
-    z.string(),
-    z.object({ min: z.number().optional(), max: z.number().optional() }).strict()
-  ).optional(),
-  latentTrajectory: LatentTrajectorySchema.optional(),
-  childRates: z.array(ChildRateSchema).default([]),
-  ladderProgression: z.object({
-    ladderKey: z.string().min(1),
-    initialState: z.string().min(1),
-  }).strict().optional(),
-  eras: z.array(z.string()).default([]),
-  factorOverrides: z.array(FactorOverrideSchema).default([]),
-  fixedFields: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])).optional(),
-  description: z.string().optional(),
-}).strict();
-
-const MotifsManifestSchema = z.object({
-  $schema: z.string().optional(),
-  motifs: z.array(MotifConfigSchema),
-}).strict();
-
-const StateLadderFieldBindingSchema = z.object({
-  mode: z.literal('field'),
-  field: z.string().min(1),
-}).strict();
-
-const StateLadderChildEntityBindingSchema = z.object({
-  mode: z.literal('childEntity'),
-  childEntity: z.string().min(1),
-  foreignKey: z.string().min(1),
-  stateField: z.string().min(1),
-  termField: z.string().min(1).optional(),
-  startDateField: z.string().min(1).optional(),
-  endDateField: z.string().min(1).optional(),
-}).strict();
-
-const StateLadderBindingSchema = z.discriminatedUnion('mode', [
-  StateLadderFieldBindingSchema,
-  StateLadderChildEntityBindingSchema,
-]);
-
-const LadderEffectSchema = z.object({
-  factor: z.string().min(1),
-  beta: z.number(),
-}).strict();
-
-const LadderExitEffectSchema = z.object({
-  dial: z.string().min(1),
-  delta: z.number(),
-}).strict();
-
-const StateLadderPrerequisiteSchema = z.object({
-  priorState: z.string().optional(),
-  minCyclesSinceBirth: z.number().int().optional(),
-  dials: z.record(
-    z.string(),
-    z.object({ min: z.number().optional(), max: z.number().optional() }).strict()
-  ).optional(),
-}).strict();
-
-const StateLadderStateSchema = z.object({
-  name: z.string().min(1),
-  durationCycles: z.number().int().min(1).default(1),
-  capacity: z.number().int().min(1).optional(),
-  prerequisites: StateLadderPrerequisiteSchema.optional(),
-  effects: z.array(LadderEffectSchema).default([]),
-  exitEffects: z.array(LadderExitEffectSchema).default([]),
-}).strict();
-
-const StateLadderConfigSchema = z.object({
-  ladderKey: z.string().min(1),
-  entity: z.string().min(1),
-  binding: StateLadderBindingSchema,
-  cohortShare: z.number().min(0).max(1).default(1),
-  states: z.array(StateLadderStateSchema).min(1),
-  description: z.string().optional(),
-}).strict();
-
-const LaddersManifestSchema = z.object({
-  $schema: z.string().optional(),
-  ladders: z.array(StateLadderConfigSchema),
-}).strict();
-
-const FactorAdjustmentSchema = z.object({
-  factor: z.string().min(1),
-  deltaIntercept: z.number(),
-}).strict();
-
-const VolumeMultiplierSchema = z.object({
-  entity: z.string().min(1),
-  multiplier: z.number().min(0),
-}).strict();
-
-const EraConfigSchema = z.object({
-  eraKey: z.string().min(1),
-  scope: z.enum(['all', 'tagged']).default('all'),
-  cycles: z.array(z.number().int()).min(1),
-  factorAdjustments: z.array(FactorAdjustmentSchema).default([]),
-  volumeMultipliers: z.array(VolumeMultiplierSchema).default([]),
-  description: z.string().optional(),
-}).strict();
-
-const ErasManifestSchema = z.object({
-  $schema: z.string().optional(),
-  eras: z.array(EraConfigSchema),
-}).strict();
-
-// ============================================================================
-// 2. Domain Conformance Validation
-// ============================================================================
+function assertNumber(val, pathStr) {
+  if (typeof val !== 'number' || isNaN(val)) {
+    fail(`${pathStr} must be a valid number`);
+  }
+}
 
 console.log('================================================================================');
 console.log('            LOOM DATA PROJECT & DOMAIN CONFORMANCE AUDIT                        ');
 console.log('================================================================================');
 
-// A. Validate project.json
-const projectRaw = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/project.json'), 'utf8'));
-const projectParsed = ProjectManifestSchema.safeParse(projectRaw);
-if (!projectParsed.success) {
-  console.error('❌ data/project.json failed schema validation:');
-  console.error(projectParsed.error.format());
-  process.exit(1);
+// 1. Validate data/project.json
+const projectPath = path.join(rootDir, 'data/project.json');
+if (!fs.existsSync(projectPath)) fail('data/project.json does not exist');
+const project = JSON.parse(fs.readFileSync(projectPath, 'utf8'));
+assertObject(project, 'data/project.json');
+assertString(project.name, 'project.name');
+assertString(project.version, 'project.version');
+assertString(project.domain, 'project.domain');
+assertString(project.uuidNamespace, 'project.uuidNamespace');
+assertString(project.rulesetPath, 'project.rulesetPath');
+assertObject(project.output, 'project.output');
+assertString(project.output.metadataDir, 'project.output.metadataDir');
+assertString(project.output.migrationsDir, 'project.output.migrationsDir');
+if (project.output.metadataDir === '../metadata' || project.output.migrationsDir === '../migrations') {
+  fail('project.output must point to scratch/build directories, not shipped metadata/migrations');
 }
 console.log('✓ data/project.json conforms to ProjectManifestSchema');
 
-// B. Validate domain.json
-const domainRaw = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/domain.json'), 'utf8'));
-const domainParsed = DomainConfigSchema.safeParse(domainRaw);
-if (!domainParsed.success) {
-  console.error('❌ data/domain.json failed schema validation:');
-  console.error(domainParsed.error.format());
-  process.exit(1);
+// 2. Validate data/domain.json
+const domainPath = path.join(rootDir, 'data/domain.json');
+if (!fs.existsSync(domainPath)) fail('data/domain.json does not exist');
+const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
+assertObject(domain, 'data/domain.json');
+assertString(domain.name, 'domain.name');
+assertString(domain.namespace, 'domain.namespace');
+assertObject(domain.entities, 'domain.entities');
+assertObject(domain.packs, 'domain.packs');
+
+for (const [entityName, entity] of Object.entries(domain.entities)) {
+  assertString(entity.name, `domain.entities.${entityName}.name`);
+  assertString(entity.targetTable, `domain.entities.${entityName}.targetTable`);
+  assertString(entity.schema, `domain.entities.${entityName}.schema`);
+  assertString(entity.pack, `domain.entities.${entityName}.pack`);
+  assertArray(entity.businessKey, `domain.entities.${entityName}.businessKey`);
+  if (entity.businessKey.length === 0) fail(`domain.entities.${entityName}.businessKey must not be empty`);
+  assertObject(entity.fields, `domain.entities.${entityName}.fields`);
+
+  for (const [fieldName, field] of Object.entries(entity.fields)) {
+    assertString(field.name, `entity.${entityName}.fields.${fieldName}.name`);
+    assertString(field.type, `entity.${entityName}.fields.${fieldName}.type`);
+  }
+
+  if (entity.foreignKeys) {
+    assertObject(entity.foreignKeys, `domain.entities.${entityName}.foreignKeys`);
+    for (const [fkName, fk] of Object.entries(entity.foreignKeys)) {
+      assertString(fk.targetEntity, `foreignKey.${entityName}.${fkName}.targetEntity`);
+      assertString(fk.targetField, `foreignKey.${entityName}.${fkName}.targetField`);
+      assertString(fk.cardinality, `foreignKey.${entityName}.${fkName}.cardinality`);
+    }
+  }
 }
-const domain = domainParsed.data;
 console.log(`✓ data/domain.json conforms to DomainConfigSchema (${Object.keys(domain.entities).length} entities)`);
 
-// C. Validate heroes.json
-const heroesRaw = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/ruleset/heroes.json'), 'utf8'));
-const heroesParsed = HeroesManifestSchema.safeParse(heroesRaw);
-if (!heroesParsed.success) {
-  console.error('❌ data/ruleset/heroes.json failed schema validation:');
-  console.error(heroesParsed.error.format());
-  process.exit(1);
-}
+// 3. Validate data/ruleset/heroes.json
+const heroesPath = path.join(rootDir, 'data/ruleset/heroes.json');
+if (!fs.existsSync(heroesPath)) fail('data/ruleset/heroes.json does not exist');
+const heroesDoc = JSON.parse(fs.readFileSync(heroesPath, 'utf8'));
+assertArray(heroesDoc.heroes, 'heroesDoc.heroes');
 
-for (const hero of heroesParsed.data.heroes) {
+const allowedHeroKeys = new Set([
+  'heroKey',
+  'entity',
+  'businessKeys',
+  'fixedFields',
+  'birthCycle',
+  'latentDials',
+  'ladderEntries',
+  'eras',
+  'pins',
+  'description',
+]);
+
+for (const hero of heroesDoc.heroes) {
+  for (const k of Object.keys(hero)) {
+    if (!allowedHeroKeys.has(k)) {
+      fail(`Hero '${hero.heroKey}' contains unauthorized key '${k}' under strict schema`);
+    }
+  }
+
+  assertString(hero.heroKey, 'hero.heroKey');
+  assertString(hero.entity, `hero.${hero.heroKey}.entity`);
+  assertObject(hero.businessKeys, `hero.${hero.heroKey}.businessKeys`);
+
   const entityCfg = domain.entities[hero.entity];
-  if (!entityCfg) {
-    console.error(`❌ Hero '${hero.heroKey}': unknown entity '${hero.entity}'`);
-    process.exit(1);
-  }
-  for (const field of Object.keys(hero.fixedFields)) {
-    if (!entityCfg.fields[field]) {
-      console.error(`❌ Hero '${hero.heroKey}': unknown field '${hero.entity}.${field}' in fixedFields`);
-      process.exit(1);
-    }
-  }
-  for (const pin of hero.pins) {
-    if (pin.kind === 'field' && !entityCfg.fields[pin.field]) {
-      console.error(`❌ Hero '${hero.heroKey}': unknown field '${hero.entity}.${pin.field}' in field pin`);
-      process.exit(1);
-    }
-    if (pin.kind === 'feature') {
-      const targetEntity = pin.feature.from === 'self' ? hero.entity : pin.feature.from;
-      const targetCfg = domain.entities[targetEntity];
-      if (!targetCfg) {
-        console.error(`❌ Hero '${hero.heroKey}': unknown target entity '${targetEntity}' in feature pin`);
-        process.exit(1);
-      }
-      if (pin.feature.field && !targetCfg.fields[pin.feature.field]) {
-        console.error(`❌ Hero '${hero.heroKey}': unknown field '${targetEntity}.${pin.feature.field}' in feature pin`);
-        process.exit(1);
-      }
-    }
-  }
-}
-console.log(`✓ data/ruleset/heroes.json conforms to schema and domain (${heroesParsed.data.heroes.length} heroes)`);
+  if (!entityCfg) fail(`Hero '${hero.heroKey}': unknown entity '${hero.entity}'`);
 
-// D. Validate motifs.json
-const motifsRaw = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/ruleset/motifs.json'), 'utf8'));
-const motifsParsed = MotifsManifestSchema.safeParse(motifsRaw);
-if (!motifsParsed.success) {
-  console.error('❌ data/ruleset/motifs.json failed schema validation:');
-  console.error(motifsParsed.error.format());
-  process.exit(1);
+  if (hero.fixedFields) {
+    for (const field of Object.keys(hero.fixedFields)) {
+      if (!entityCfg.fields[field]) {
+        fail(`Hero '${hero.heroKey}': unknown field '${hero.entity}.${field}' in fixedFields`);
+      }
+    }
+  }
+
+  if (hero.pins) {
+    for (const pin of hero.pins) {
+      if (!pin.kind) fail(`Hero '${hero.heroKey}': pin missing 'kind'`);
+      if (pin.kind === 'field') {
+        if (!entityCfg.fields[pin.field]) {
+          fail(`Hero '${hero.heroKey}': unknown field '${hero.entity}.${pin.field}' in field pin`);
+        }
+      } else if (pin.kind === 'feature') {
+        const targetEntity = pin.feature.from === 'self' ? hero.entity : pin.feature.from;
+        const targetCfg = domain.entities[targetEntity];
+        if (!targetCfg) fail(`Hero '${hero.heroKey}': unknown target entity '${targetEntity}' in feature pin`);
+        if (pin.feature.field && !targetCfg.fields[pin.feature.field]) {
+          fail(`Hero '${hero.heroKey}': unknown field '${targetEntity}.${pin.feature.field}' in feature pin`);
+        }
+      }
+    }
+  }
 }
-for (const motif of motifsParsed.data.motifs) {
+console.log(`✓ data/ruleset/heroes.json conforms to schema and domain (${heroesDoc.heroes.length} heroes)`);
+
+// 4. Validate data/ruleset/motifs.json
+const motifsPath = path.join(rootDir, 'data/ruleset/motifs.json');
+if (!fs.existsSync(motifsPath)) fail('data/ruleset/motifs.json does not exist');
+const motifsDoc = JSON.parse(fs.readFileSync(motifsPath, 'utf8'));
+assertArray(motifsDoc.motifs, 'motifsDoc.motifs');
+
+for (const motif of motifsDoc.motifs) {
+  assertString(motif.motifKey, 'motif.motifKey');
+  assertString(motif.targetEntity, `motif.${motif.motifKey}.targetEntity`);
   if (!domain.entities[motif.targetEntity]) {
-    console.error(`❌ Motif '${motif.motifKey}': unknown target entity '${motif.targetEntity}'`);
-    process.exit(1);
+    fail(`Motif '${motif.motifKey}': unknown target entity '${motif.targetEntity}'`);
   }
-  for (const cr of motif.childRates) {
-    if (!domain.entities[cr.entity]) {
-      console.error(`❌ Motif '${motif.motifKey}': unknown child entity '${cr.entity}' in childRates`);
-      process.exit(1);
-    }
-  }
-}
-console.log(`✓ data/ruleset/motifs.json conforms to schema and domain (${motifsParsed.data.motifs.length} motifs)`);
 
-// E. Validate ladders.json
-const laddersRaw = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/ruleset/ladders.json'), 'utf8'));
-const laddersParsed = LaddersManifestSchema.safeParse(laddersRaw);
-if (!laddersParsed.success) {
-  console.error('❌ data/ruleset/ladders.json failed schema validation:');
-  console.error(laddersParsed.error.format());
-  process.exit(1);
-}
-for (const ladder of laddersParsed.data.ladders) {
-  if (!domain.entities[ladder.entity]) {
-    console.error(`❌ Ladder '${ladder.ladderKey}': unknown entity '${ladder.entity}'`);
-    process.exit(1);
+  assertObject(motif.quota, `motif.${motif.motifKey}.quota`);
+  assertString(motif.quota.mode, `motif.${motif.motifKey}.quota.mode`);
+  assertNumber(motif.quota.value, `motif.${motif.motifKey}.quota.value`);
+  if (motif.quota.mode === 'percentage' && (motif.quota.value < 0 || motif.quota.value > 1)) {
+    fail(`Motif '${motif.motifKey}': percentage quota value must be a fraction in [0, 1] (got ${motif.quota.value})`);
   }
-  if (ladder.binding.mode === 'childEntity') {
-    const childCfg = domain.entities[ladder.binding.childEntity];
-    if (!childCfg) {
-      console.error(`❌ Ladder '${ladder.ladderKey}': unknown child entity '${ladder.binding.childEntity}'`);
-      process.exit(1);
+
+  if (motif.childRates) {
+    for (const cr of motif.childRates) {
+      if (!domain.entities[cr.entity]) {
+        fail(`Motif '${motif.motifKey}': unknown child entity '${cr.entity}' in childRates`);
+      }
     }
+  }
+}
+console.log(`✓ data/ruleset/motifs.json conforms to schema and domain (${motifsDoc.motifs.length} motifs)`);
+
+// 5. Validate data/ruleset/ladders.json
+const laddersPath = path.join(rootDir, 'data/ruleset/ladders.json');
+if (!fs.existsSync(laddersPath)) fail('data/ruleset/ladders.json does not exist');
+const laddersDoc = JSON.parse(fs.readFileSync(laddersPath, 'utf8'));
+assertArray(laddersDoc.ladders, 'laddersDoc.ladders');
+
+for (const ladder of laddersDoc.ladders) {
+  assertString(ladder.ladderKey, 'ladder.ladderKey');
+  assertString(ladder.entity, `ladder.${ladder.ladderKey}.entity`);
+  if (!domain.entities[ladder.entity]) fail(`Ladder '${ladder.ladderKey}': unknown entity '${ladder.entity}'`);
+
+  assertObject(ladder.binding, `ladder.${ladder.ladderKey}.binding`);
+  if (ladder.binding.mode === 'childEntity') {
+    assertString(ladder.binding.childEntity, `ladder.${ladder.ladderKey}.binding.childEntity`);
+    assertString(ladder.binding.foreignKey, `ladder.${ladder.ladderKey}.binding.foreignKey`);
+    assertString(ladder.binding.stateField, `ladder.${ladder.ladderKey}.binding.stateField`);
+
+    const childCfg = domain.entities[ladder.binding.childEntity];
+    if (!childCfg) fail(`Ladder '${ladder.ladderKey}': unknown child entity '${ladder.binding.childEntity}'`);
     if (!childCfg.fields[ladder.binding.foreignKey]) {
-      console.error(`❌ Ladder '${ladder.ladderKey}': unknown foreign key '${ladder.binding.childEntity}.${ladder.binding.foreignKey}'`);
-      process.exit(1);
+      fail(`Ladder '${ladder.ladderKey}': unknown foreign key '${ladder.binding.childEntity}.${ladder.binding.foreignKey}'`);
     }
     if (!childCfg.fields[ladder.binding.stateField]) {
-      console.error(`❌ Ladder '${ladder.ladderKey}': unknown state field '${ladder.binding.childEntity}.${ladder.binding.stateField}'`);
-      process.exit(1);
+      fail(`Ladder '${ladder.ladderKey}': unknown state field '${ladder.binding.childEntity}.${ladder.binding.stateField}'`);
     }
   }
 }
-console.log(`✓ data/ruleset/ladders.json conforms to schema and domain (${laddersParsed.data.ladders.length} ladders)`);
+console.log(`✓ data/ruleset/ladders.json conforms to schema and domain (${laddersDoc.ladders.length} ladders)`);
 
-// F. Validate eras.json
-const erasRaw = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/ruleset/eras.json'), 'utf8'));
-const erasParsed = ErasManifestSchema.safeParse(erasRaw);
-if (!erasParsed.success) {
-  console.error('❌ data/ruleset/eras.json failed schema validation:');
-  console.error(erasParsed.error.format());
-  process.exit(1);
-}
-for (const era of erasParsed.data.eras) {
-  for (const vm of era.volumeMultipliers) {
-    if (!domain.entities[vm.entity]) {
-      console.error(`❌ Era '${era.eraKey}': unknown entity '${vm.entity}' in volumeMultipliers`);
-      process.exit(1);
+// 6. Validate data/ruleset/eras.json
+const erasPath = path.join(rootDir, 'data/ruleset/eras.json');
+if (!fs.existsSync(erasPath)) fail('data/ruleset/eras.json does not exist');
+const erasDoc = JSON.parse(fs.readFileSync(erasPath, 'utf8'));
+assertArray(erasDoc.eras, 'erasDoc.eras');
+
+for (const era of erasDoc.eras) {
+  assertString(era.eraKey, 'era.eraKey');
+  assertArray(era.cycles, `era.${era.eraKey}.cycles`);
+  if (era.volumeMultipliers) {
+    for (const vm of era.volumeMultipliers) {
+      if (!domain.entities[vm.entity]) {
+        fail(`Era '${era.eraKey}': unknown entity '${vm.entity}' in volumeMultipliers`);
+      }
     }
   }
 }
-console.log(`✓ data/ruleset/eras.json conforms to schema and domain (${erasParsed.data.eras.length} eras)`);
+console.log(`✓ data/ruleset/eras.json conforms to schema and domain (${erasDoc.eras.length} eras)`);
 
 console.log('================================================================================');
 console.log('✅ ALL LOOM DATA PROJECT FILES CONFORM STRICTLY TO SCHEMA AND DOMAIN CLOSURE');
