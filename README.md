@@ -53,6 +53,9 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
 
 ## 🧩 Dynamic Forms Architecture (`BaseFormPanel` Slot System)
 
+> [!NOTE]
+> **Form Panel Implementation Status**: The `MemberCommunityPanel` and `OrganizationCheeseGuildPanel` form slot panels are registered on the `before-fields` slot for `People` and `Organizations`. They currently render unpopulated UI mockups pending live data query wiring in follow-up integration work.
+
 A premier feature of MemberJunction's UI architecture is the **BaseFormPanel Dynamic Slot System**. In downstream applications like MoreCheese, you frequently need to enrich upstream records (such as `MJ_BizApps_Common: People` or `MJ_BizApps_Common: Organizations`) with downstream domain intelligence without modifying upstream templates or touching core repositories.
 
 MoreCheese implements this via `BaseFormPanel` decorators:
@@ -94,7 +97,10 @@ export class MemberCommunityPanel extends BaseFormPanel<BaseEntity> {
 
 ## 🧵 Data Generation & Synthetic Worlds with Loom
 
-Synthetic data for MoreCheese is designed and generated using **[Loom](https://github.com/MemberJunction/loom)** (`@memberjunction/loom`), MemberJunction's framework for causal, calibrated, and deterministic synthetic universes.
+> [!NOTE]
+> **Loom World Simulation**: The legacy procedural `datagen/` script tree (28,403 lines) was removed in PR #19 and is preserved at git tag `archive/datagen-reference` (commit `f513f258`). All data generation is now defined declaratively in `data/` and driven by **[Loom](https://github.com/MemberJunction/loom)** (`@memberjunction/loom`). Run data project validation locally via `npm run validate:loom` and mutation testing via `npm run test:loom-mutations`.
+
+Synthetic data for MoreCheese is designed and generated using **Loom**, MemberJunction's framework for causal, calibrated, and deterministic synthetic universes:
 
 - **Causally Correlated**: Member join dates, event attendance, certification progress, order amounts, and churn risk are drawn from joint causal graphs, not isolated pseudo-random generators.
 - **Referentially Closed**: 100% referential integrity across 4 tiers of foreign keys with guaranteed topological migration ordering.
