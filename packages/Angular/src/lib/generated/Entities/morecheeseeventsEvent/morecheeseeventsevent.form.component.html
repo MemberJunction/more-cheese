@@ -144,9 +144,9 @@
         <div>
             <mj-explorer-entity-data-grid
                 [Params]="BuildRelationshipViewParamsByEntityName('MoreCheese: Event Registrations','EventID')"
-                [NewRecordValues]="NewRecordValues('MoreCheese: Event Registrations','EventID')"
+                [NewRecordValues]="NewRecordValues('MoreCheese: Event Registrations')"
                 [AllowLoad]="IsSectionExpanded('moreCheeseEventRegistrations')"
-                [ShowToolbar]="true"
+                [ShowToolbar]="false"
                 (Navigate)="OnFormNavigate($event)"
                 (AfterDataLoad)="SetSectionRowCount('moreCheeseEventRegistrations', $event.totalRowCount)"
                 >

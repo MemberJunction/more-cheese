@@ -129,9 +129,9 @@
         <div>
             <mj-explorer-entity-data-grid
                 [Params]="BuildRelationshipViewParamsByEntityName('MoreCheese: Payments','OrderID')"
-                [NewRecordValues]="NewRecordValues('MoreCheese: Payments','OrderID')"
+                [NewRecordValues]="NewRecordValues('MoreCheese: Payments')"
                 [AllowLoad]="IsSectionExpanded('moreCheesePayments')"
-                [ShowToolbar]="true"
+                [ShowToolbar]="false"
                 (Navigate)="OnFormNavigate($event)"
                 (AfterDataLoad)="SetSectionRowCount('moreCheesePayments', $event.totalRowCount)"
                 >
@@ -154,9 +154,9 @@
         <div>
             <mj-explorer-entity-data-grid
                 [Params]="BuildRelationshipViewParamsByEntityName('MoreCheese: Order Lines','OrderID')"
-                [NewRecordValues]="NewRecordValues('MoreCheese: Order Lines','OrderID')"
+                [NewRecordValues]="NewRecordValues('MoreCheese: Order Lines')"
                 [AllowLoad]="IsSectionExpanded('moreCheeseOrderLines')"
-                [ShowToolbar]="true"
+                [ShowToolbar]="false"
                 (Navigate)="OnFormNavigate($event)"
                 (AfterDataLoad)="SetSectionRowCount('moreCheeseOrderLines', $event.totalRowCount)"
                 >
