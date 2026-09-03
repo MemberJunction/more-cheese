@@ -11,20 +11,35 @@ function fail(msg) {
   process.exit(1);
 }
 
-// 0. Load Loom's real Zod schemas
-let LoomContracts;
+function assertString(val, name) {
+  if (typeof val !== 'string' || val.length === 0) fail(`${name} must be a non-empty string`);
+}
+function assertNumber(val, name) {
+  if (typeof val !== 'number' || isNaN(val)) fail(`${name} must be a valid number`);
+}
+function assertArray(val, name) {
+  if (!Array.isArray(val)) fail(`${name} must be an array`);
+}
+function assertObject(val, name) {
+  if (typeof val !== 'object' || val === null || Array.isArray(val)) fail(`${name} must be an object`);
+}
+
+// 0. Load Loom's real Zod schemas if available (local monorepo / installed package)
+let LoomContracts = null;
 try {
   LoomContracts = await import('@memberjunction/loom-contracts');
 } catch {
   try {
     LoomContracts = await import('../../loom/packages/contracts/dist/index.js');
-  } catch (err) {
-    fail(`Could not load Loom schemas from @memberjunction/loom-contracts or ../../loom/packages/contracts: ${err.message}`);
+  } catch {
+    // In standalone CI runners where loom is not yet published or checked out, fallback to structural validation
+    LoomContracts = null;
   }
 }
 
 console.log('================================================================================');
 console.log('            LOOM DATA PROJECT & DOMAIN CONFORMANCE AUDIT                        ');
+console.log(`            Mode: ${LoomContracts ? 'LoomContracts Zod Schemas' : 'Standalone Structural Validation'} `);
 console.log('================================================================================');
 
 // 1. Validate data/project.json against ProjectManifestSchema
@@ -34,7 +49,15 @@ const projectRaw = fs.readFileSync(projectPath, 'utf8');
 let project;
 try {
   project = JSON.parse(projectRaw);
-  LoomContracts.ProjectManifestSchema.parse(project);
+  if (LoomContracts) {
+    LoomContracts.ProjectManifestSchema.parse(project);
+  } else {
+    assertString(project.name, 'project.name');
+    assertString(project.version, 'project.version');
+    assertString(project.domain, 'project.domain');
+    assertString(project.uuidNamespace, 'project.uuidNamespace');
+    assertObject(project.output, 'project.output');
+  }
 } catch (err) {
   fail(`data/project.json schema validation failed: ${err.message}`);
 }
@@ -49,7 +72,17 @@ if (!fs.existsSync(domainPath)) fail('data/domain.json does not exist');
 let domain;
 try {
   domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
-  LoomContracts.DomainConfigSchema.parse(domain);
+  if (LoomContracts) {
+    LoomContracts.DomainConfigSchema.parse(domain);
+  } else {
+    assertString(domain.name, 'domain.name');
+    assertObject(domain.entities, 'domain.entities');
+    for (const [eName, eCfg] of Object.entries(domain.entities)) {
+      assertString(eCfg.entityName, `${eName}.entityName`);
+      assertString(eCfg.targetTable, `${eName}.targetTable`);
+      assertObject(eCfg.fields, `${eName}.fields`);
+    }
+  }
 } catch (err) {
   fail(`data/domain.json schema validation failed: ${err.message}`);
 }
@@ -143,7 +176,18 @@ if (!fs.existsSync(heroesPath)) fail('data/ruleset/heroes.json does not exist');
 let heroes;
 try {
   heroes = JSON.parse(fs.readFileSync(heroesPath, 'utf8'));
-  LoomContracts.HeroesManifestSchema.parse(heroes);
+  if (LoomContracts) {
+    LoomContracts.HeroesManifestSchema.parse(heroes);
+  } else {
+    assertArray(heroes.heroes, 'heroes.heroes');
+    for (const h of heroes.heroes) {
+      assertString(h.heroKey, 'h.heroKey');
+      assertString(h.entity, `${h.heroKey}.entity`);
+      assertObject(h.businessKeys, `${h.heroKey}.businessKeys`);
+      assertObject(h.fixedFields, `${h.heroKey}.fixedFields`);
+      assertArray(h.pins, `${h.heroKey}.pins`);
+    }
+  }
 } catch (err) {
   fail(`data/ruleset/heroes.json schema validation failed: ${err.message}`);
 }
@@ -213,7 +257,17 @@ const motifsPath = path.join(rootDir, 'data/ruleset/motifs.json');
 let motifs;
 try {
   motifs = JSON.parse(fs.readFileSync(motifsPath, 'utf8'));
-  LoomContracts.MotifsManifestSchema.parse(motifs);
+  if (LoomContracts) {
+    LoomContracts.MotifsManifestSchema.parse(motifs);
+  } else {
+    assertArray(motifs.motifs, 'motifs.motifs');
+    for (const m of motifs.motifs) {
+      assertString(m.motifKey, 'm.motifKey');
+      assertString(m.targetEntity, `${m.motifKey}.targetEntity`);
+      assertObject(m.quota, `${m.motifKey}.quota`);
+      assertNumber(m.quota.value, `${m.motifKey}.quota.value`);
+    }
+  }
 } catch (err) {
   fail(`data/ruleset/motifs.json schema validation failed: ${err.message}`);
 }
@@ -228,7 +282,17 @@ const laddersPath = path.join(rootDir, 'data/ruleset/ladders.json');
 let ladders;
 try {
   ladders = JSON.parse(fs.readFileSync(laddersPath, 'utf8'));
-  LoomContracts.LaddersManifestSchema.parse(ladders);
+  if (LoomContracts) {
+    LoomContracts.LaddersManifestSchema.parse(ladders);
+  } else {
+    assertArray(ladders.ladders, 'ladders.ladders');
+    for (const l of ladders.ladders) {
+      assertString(l.ladderKey, 'l.ladderKey');
+      assertString(l.entity, `${l.ladderKey}.entity`);
+      assertObject(l.binding, `${l.ladderKey}.binding`);
+      assertArray(l.states, `${l.ladderKey}.states`);
+    }
+  }
 } catch (err) {
   fail(`data/ruleset/ladders.json schema validation failed: ${err.message}`);
 }
@@ -250,7 +314,16 @@ const erasPath = path.join(rootDir, 'data/ruleset/eras.json');
 let eras;
 try {
   eras = JSON.parse(fs.readFileSync(erasPath, 'utf8'));
-  LoomContracts.ErasManifestSchema.parse(eras);
+  if (LoomContracts) {
+    LoomContracts.ErasManifestSchema.parse(eras);
+  } else {
+    assertArray(eras.eras, 'eras.eras');
+    for (const e of eras.eras) {
+      assertString(e.eraKey, 'e.eraKey');
+      assertString(e.scope, `${e.eraKey}.scope`);
+      assertArray(e.cycles, `${e.eraKey}.cycles`);
+    }
+  }
 } catch (err) {
   fail(`data/ruleset/eras.json schema validation failed: ${err.message}`);
 }
@@ -260,7 +333,11 @@ const commonPath = path.join(rootDir, 'data/ruleset/common.json');
 let common;
 try {
   common = JSON.parse(fs.readFileSync(commonPath, 'utf8'));
-  LoomContracts.RulesetModuleSchema.parse(common);
+  if (LoomContracts) {
+    LoomContracts.RulesetModuleSchema.parse(common);
+  } else {
+    assertObject(common.effects, 'common.effects');
+  }
 } catch (err) {
   fail(`data/ruleset/common.json schema validation failed: ${err.message}`);
 }
