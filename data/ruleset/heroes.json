@@ -19,15 +19,9 @@
       },
       "ladderEntries": [
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "CommitteeMember",
-          "enterCycle": 2022,
-          "exitCycle": 2024
-        },
-        {
-          "ladderKey": "icf-governance-ladder",
-          "state": "BoardDirector",
-          "enterCycle": 2024,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Member",
+          "enterCycle": 2023,
           "exitCycle": 2026
         }
       ],
@@ -42,7 +36,9 @@
           "kind": "feature",
           "feature": {
             "from": "EventRegistration",
-            "where": { "Attended": true },
+            "where": {
+              "Attended": true
+            },
             "aggregation": "count"
           },
           "op": "gte",
@@ -78,14 +74,17 @@
           "kind": "feature",
           "feature": {
             "from": "MembershipPeriod",
-            "where": { "Status": "PendingRenewal" },
+            "where": {
+              "Status": "PendingRenewal"
+            },
             "aggregation": "exists"
           },
           "op": "eq",
           "value": 1
         }
       ],
-      "description": "Marcus Chen: Pending Renewal persona in active grace window with AutoRenew=false"
+      "description": "Marcus Chen: Pending Renewal persona in active grace window with AutoRenew=false",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-003",
@@ -103,13 +102,17 @@
         "theta": 0.2,
         "phi": -0.8
       },
-      "eras": ["era-creamery-closures-2025"],
+      "eras": [
+        "era-creamery-closures-2025"
+      ],
       "pins": [
         {
           "kind": "feature",
           "feature": {
             "from": "MembershipPeriod",
-            "where": { "Status": "Lapsed" },
+            "where": {
+              "Status": "Lapsed"
+            },
             "aggregation": "exists"
           },
           "op": "eq",
@@ -122,7 +125,8 @@
           "value": false
         }
       ],
-      "description": "Danielle Okafor: Diagnosable Lapse after employer dissolution in 2025"
+      "description": "Danielle Okafor: Diagnosable Lapse after employer dissolution in 2025",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-004",
@@ -133,7 +137,7 @@
       "fixedFields": {
         "FirstName": "Priya",
         "LastName": "Natarajan",
-        "Title": "Cheesemaking Apprentice"
+        "Title": "Affinage Apprentice"
       },
       "birthCycle": 2025,
       "latentDials": {
@@ -145,14 +149,17 @@
           "kind": "feature",
           "feature": {
             "from": "CourseEnrollment",
-            "where": { "Status": "Completed" },
+            "where": {
+              "Status": "Completed"
+            },
             "aggregation": "count"
           },
           "op": "gte",
           "value": 1
         }
       ],
-      "description": "Priya Natarajan: The Rising Star career-changer apprentice with steep engagement trajectory"
+      "description": "Priya Natarajan: The Rising Star career-changer apprentice with steep engagement trajectory",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-005",
@@ -163,7 +170,7 @@
       "fixedFields": {
         "FirstName": "Bob",
         "LastName": "Kowalski",
-        "Title": "Senior Supply Specialist"
+        "Title": "Regional Sales Director"
       },
       "birthCycle": 2013,
       "latentDials": {
@@ -178,7 +185,8 @@
           "value": "Active"
         }
       ],
-      "description": "Bob Kowalski: 13-year veteran member demonstrating churn win-back workflow"
+      "description": "Bob Kowalski: 13-year veteran member demonstrating churn win-back workflow",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-006",
@@ -189,7 +197,7 @@
       "fixedFields": {
         "FirstName": "Sofia",
         "LastName": "Marchetti",
-        "Title": "Fromagerie Manager"
+        "Title": "Cheesemonger"
       },
       "birthCycle": 2024,
       "latentDials": {
@@ -207,7 +215,8 @@
           "value": 2
         }
       ],
-      "description": "Sofia Marchetti: The Certification Journey advancing through Certified Cheese Professional"
+      "description": "Sofia Marchetti: The Certification Journey advancing through Certified Cheese Professional",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-007",
@@ -218,7 +227,7 @@
       "fixedFields": {
         "FirstName": "Henri",
         "LastName": "Dubois",
-        "Title": "Maître Affineur"
+        "Title": "Affineur & Owner"
       },
       "birthCycle": 2019,
       "latentDials": {
@@ -233,7 +242,8 @@
           "value": "Active"
         }
       ],
-      "description": "Henri Dubois: The International Member representing European Jura affineur slice"
+      "description": "Henri Dubois: The International Member representing European Jura affineur slice",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-008",
@@ -253,22 +263,16 @@
       },
       "ladderEntries": [
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "CommitteeMember",
-          "enterCycle": 2022,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Member",
+          "enterCycle": 2023,
           "exitCycle": 2024
         },
         {
-          "ladderKey": "icf-governance-ladder",
-          "state": "BoardDirector",
-          "enterCycle": 2024,
+          "ladderKey": "governance-leadership-ladder",
+          "state": "Chair",
+          "enterCycle": 2025,
           "exitCycle": 2026
-        },
-        {
-          "ladderKey": "icf-governance-ladder",
-          "state": "BoardChair",
-          "enterCycle": 2026,
-          "exitCycle": 2028
         }
       ],
       "pins": [
@@ -308,7 +312,8 @@
           "value": 30
         }
       ],
-      "description": "Tom Reyes: Grassroots Advocate with 30+ legislative actions and raw-milk testimonies"
+      "description": "Tom Reyes: Grassroots Advocate with 30+ legislative actions and raw-milk testimonies",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-010",
@@ -319,7 +324,7 @@
       "fixedFields": {
         "FirstName": "Aisha",
         "LastName": "Bell",
-        "Title": "Quality Assurance Specialist"
+        "Title": "Quality Manager"
       },
       "birthCycle": 2018,
       "latentDials": {
@@ -334,7 +339,8 @@
           "value": "Active"
         }
       ],
-      "description": "Aisha Bell: The Stale Record with employer transition demonstrating data hygiene workflows"
+      "description": "Aisha Bell: The Stale Record with employer transition demonstrating data hygiene workflows",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-011",
@@ -345,7 +351,7 @@
       "fixedFields": {
         "FirstName": "Kate",
         "LastName": "O'Leary",
-        "Title": "Retail Monger"
+        "Title": "Cheese Program Director"
       },
       "birthCycle": 2015,
       "latentDials": {
@@ -360,7 +366,8 @@
           "value": "Active"
         }
       ],
-      "description": "Kate O'Leary: Cleansing Pair A (Primary) for deduplication demonstration"
+      "description": "Kate O'Leary: Cleansing Pair A (Primary) for deduplication demonstration",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-012",
@@ -371,7 +378,7 @@
       "fixedFields": {
         "FirstName": "Kathy",
         "LastName": "OLeary",
-        "Title": "Cheesemonger"
+        "Title": "Cheese Program Director"
       },
       "birthCycle": 2023,
       "latentDials": {
@@ -386,7 +393,8 @@
           "value": "Active"
         }
       ],
-      "description": "Kathy OLeary: Cleansing Pair B (Duplicate) minted via portal with split record history"
+      "description": "Kathy OLeary: Cleansing Pair B (Duplicate) minted via portal with split record history",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-013",
@@ -401,7 +409,7 @@
       },
       "birthCycle": 2023,
       "latentDials": {
-        "theta": 2.0,
+        "theta": 2,
         "phi": -0.5
       },
       "pins": [
@@ -412,7 +420,8 @@
           "value": "Active"
         }
       ],
-      "description": "Jamie Fuller: Engagement != Revenue persona on low enthusiast tier with top activity"
+      "description": "Jamie Fuller: Engagement != Revenue persona on low enthusiast tier with top activity",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-014",
@@ -423,7 +432,7 @@
       "fixedFields": {
         "FirstName": "Victor",
         "LastName": "Sandoval",
-        "Title": "Engineering Director"
+        "Title": "VP Procurement"
       },
       "birthCycle": 2017,
       "latentDials": {
@@ -435,14 +444,17 @@
           "kind": "feature",
           "feature": {
             "from": "MembershipPeriod",
-            "where": { "AutoRenew": true },
+            "where": {
+              "AutoRenew": true
+            },
             "aggregation": "exists"
           },
           "op": "eq",
           "value": 1
         }
       ],
-      "description": "Victor Sandoval: Corporate Auto-Renew Ghost with zero engagement and unbroken renewals"
+      "description": "Victor Sandoval: Corporate Auto-Renew Ghost with zero engagement and unbroken renewals",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-015",
@@ -453,7 +465,7 @@
       "fixedFields": {
         "FirstName": "Nia",
         "LastName": "Thompson",
-        "Title": "Assistant Monger"
+        "Title": "Junior Cheesemonger"
       },
       "birthCycle": 2026,
       "latentDials": {
@@ -468,7 +480,8 @@
           "value": "Active"
         }
       ],
-      "description": "Nia Thompson: Cold Start persona joined shortly before release validating scoring on priors"
+      "description": "Nia Thompson: Cold Start persona joined shortly before release validating scoring on priors",
+      "ladderEntries": []
     },
     {
       "heroKey": "HERO-ICF-016",
@@ -479,7 +492,7 @@
       "fixedFields": {
         "FirstName": "Charlie",
         "LastName": "Mason",
-        "Title": "Farm Principal"
+        "Title": "Cheesemaker & Co-owner"
       },
       "birthCycle": 2021,
       "latentDials": {
@@ -494,7 +507,8 @@
           "value": "Active"
         }
       ],
-      "description": "Charlie Mason: Rest-of-World Tasmanian sheep dairy owner representing Southern Hemisphere"
+      "description": "Charlie Mason: Rest-of-World Tasmanian sheep dairy owner representing Southern Hemisphere",
+      "ladderEntries": []
     }
   ]
 }

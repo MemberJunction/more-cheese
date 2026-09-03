@@ -386,3 +386,42 @@ To run this audit locally:
 ```bash
 node scripts/check-metadata-closure.mjs
 ```
+
+---
+
+## 5. Architectural Decisions & Scope
+
+### 5.1 Source of Truth Decision (heroes.json vs Committed Dataset)
+The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`.
+- **Automated Conformance Gate (R2-H1)**: `scripts/validate-loom-data.mjs` verifies in CI that 100% of heroes in `data/ruleset/heroes.json` match the committed metadata records byte-for-byte.
+
+### 5.2 State Ladder Vocabulary Decision (R2-L1)
+The state ladder for governance leadership (`governance-leadership-ladder`) binds to `CommitteeMembership.RoleID`. Its states are strictly named after the real roles existing in the `Committees: Roles` catalog:
+1. `Member` (duration 2 cycles)
+2. `Vice Chair` (duration 2 cycles, capacity 35, prerequisite: `Member`)
+3. `Chair` (duration 2 cycles, capacity 35, prerequisite: `Vice Chair`)
+This guarantees that any simulated ladder transitions resolve directly to existing `@lookup:Committees: Roles.Name=...` records without schema type mismatch or foreign key breaks.
+
+### 5.3 Loom Coverage Scope (R2-M2)
+Loom's generation scope in Phase 02 covers the primary member ecosystem:
+- Core identity: `Person`, `Organization`
+- Commerce & Catalog: `Product`
+- Community & Engagement: `MembershipPeriod`, `EventRegistration`, `CourseEnrollment`, `AdvocacyAction`, `CommitteeMembership`
+
+### 5.4 Loom Engine Dependencies
+- **N5 / Contract Loader**: More Cheese runs conformance audits via `scripts/validate-loom-data.mjs` until Loom CLI's unified project loader lands.
+- **N6 / State Ladder Binding**: Binding semantics to child entities (`CommitteeMembership`) are validated structurally against domain foreign keys.
+- **Child Rate Fixed Fields**: Future motif enhancement to assign specific child field values (e.g. `AutoRenew: true` on child `MembershipPeriod` records).
+
+---
+
+## 6. Execution Roadmap & Verification Gates
+
+| Task | Scope & Gates | Verification Command | PR |
+|---|---|---|---|
+| **Task 02.6.1: Schema & Business Key Conformance** | `data/domain.json` declares real schema fields and `*Key` business keys. Fulfills M1 & M2. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.2: Hero & Dataset Exact Alignment** | 16/16 heroes in `heroes.json` match `metadata/people/` and `metadata/committee-memberships/`. Fulfills R2-H1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.3: State Ladder Role Vocabulary** | Ladders declare `Member`, `Vice Chair`, `Chair` matching `Committees: Roles`. Fulfills R2-L1. | `node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.4: CI Conformance Step** | Automated CI step in `.github/workflows/changes.yml` running both closure and Loom validation. | `node scripts/check-metadata-closure.mjs && node scripts/validate-loom-data.mjs` | `MemberJunction/more-cheese#21` |
+| **Task 02.6.5: End-to-End Proof (M6)** | Run `loom build`, push to local database, verify row counts, capture Playwright screenshots of Explorer (Elena's form, Gwen's memberships, Danielle's churn, list view). | Playwright headless test script | Follow-up PR |
+

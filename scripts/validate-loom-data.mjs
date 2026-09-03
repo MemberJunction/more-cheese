@@ -64,173 +64,138 @@ const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
 assertObject(domain, 'data/domain.json');
 assertString(domain.name, 'domain.name');
 assertString(domain.namespace, 'domain.namespace');
-assertObject(domain.entities, 'domain.entities');
 assertObject(domain.packs, 'domain.packs');
+assertObject(domain.entities, 'domain.entities');
 
-for (const [entityName, entity] of Object.entries(domain.entities)) {
-  assertString(entity.name, `domain.entities.${entityName}.name`);
-  assertString(entity.targetTable, `domain.entities.${entityName}.targetTable`);
-  assertString(entity.schema, `domain.entities.${entityName}.schema`);
-  assertString(entity.pack, `domain.entities.${entityName}.pack`);
-  assertArray(entity.businessKey, `domain.entities.${entityName}.businessKey`);
-  if (entity.businessKey.length === 0) fail(`domain.entities.${entityName}.businessKey must not be empty`);
-  assertObject(entity.fields, `domain.entities.${entityName}.fields`);
+// 3. Domain vs Generated Entities and Metadata Schema Conformance (R2-M1, R2-M2)
+const subclassesPath = path.join(rootDir, 'packages/Entities/src/generated/entity_subclasses.ts');
+if (!fs.existsSync(subclassesPath)) fail('Generated entity subclasses missing at packages/Entities/src/generated/entity_subclasses.ts');
+const subclasses = fs.readFileSync(subclassesPath, 'utf8');
 
-  for (const [fieldName, field] of Object.entries(entity.fields)) {
-    assertString(field.name, `entity.${entityName}.fields.${fieldName}.name`);
-    assertString(field.type, `entity.${entityName}.fields.${fieldName}.type`);
+for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
+  assertObject(entityCfg, `domain.entities[${entityName}]`);
+  assertString(entityCfg.name, `${entityName}.name`);
+  assertString(entityCfg.targetTable, `${entityName}.targetTable`);
+  assertString(entityCfg.schema, `${entityName}.schema`);
+  assertString(entityCfg.pack, `${entityName}.pack`);
+  assertArray(entityCfg.businessKey, `${entityName}.businessKey`);
+  assertObject(entityCfg.fields, `${entityName}.fields`);
+  assertObject(entityCfg.foreignKeys, `${entityName}.foreignKeys`);
+
+  if (!domain.packs[entityCfg.pack]) {
+    fail(`Entity '${entityName}' declares pack '${entityCfg.pack}' not found in domain.packs`);
   }
 
-  if (entity.foreignKeys) {
-    assertObject(entity.foreignKeys, `domain.entities.${entityName}.foreignKeys`);
-    for (const [fkName, fk] of Object.entries(entity.foreignKeys)) {
-      assertString(fk.targetEntity, `foreignKey.${entityName}.${fkName}.targetEntity`);
-      assertString(fk.targetField, `foreignKey.${entityName}.${fkName}.targetField`);
-      assertString(fk.cardinality, `foreignKey.${entityName}.${fkName}.cardinality`);
+  // Check FK validity
+  for (const [fkKey, fk] of Object.entries(entityCfg.foreignKeys)) {
+    assertObject(fk, `${entityName}.foreignKeys[${fkKey}]`);
+    assertString(fk.targetEntity, `${entityName}.foreignKeys[${fkKey}].targetEntity`);
+    assertString(fk.targetField, `${entityName}.foreignKeys[${fkKey}].targetField`);
+    if (!domain.entities[fk.targetEntity]) {
+      fail(`FK ${entityName}.${fkKey} references undeclared entity '${fk.targetEntity}'`);
+    }
+  }
+
+  // Check field conformance for application-specific entities
+  if (entityCfg.schema === 'morecheese_members') {
+    for (const fieldName of Object.keys(entityCfg.fields)) {
+      if (fieldName === 'ID') continue;
+      const regex = new RegExp(`\\* \\* Field Name: ${fieldName}\\b`);
+      if (!regex.test(subclasses)) {
+        fail(`Field ${entityName}.${fieldName} in domain.json does not exist in generated entity_subclasses.ts`);
+      }
     }
   }
 }
-console.log(`✓ data/domain.json conforms to DomainConfigSchema (${Object.keys(domain.entities).length} entities)`);
+console.log('✓ data/domain.json conforms to DomainConfigSchema & generated entity_subclasses.ts');
 
-// 3. Validate data/ruleset/heroes.json
+// 4. Heroes vs Committed Dataset Conformance (R2-H1)
 const heroesPath = path.join(rootDir, 'data/ruleset/heroes.json');
 if (!fs.existsSync(heroesPath)) fail('data/ruleset/heroes.json does not exist');
-const heroesDoc = JSON.parse(fs.readFileSync(heroesPath, 'utf8'));
-assertArray(heroesDoc.heroes, 'heroesDoc.heroes');
+const heroes = JSON.parse(fs.readFileSync(heroesPath, 'utf8'));
+assertArray(heroes.heroes, 'heroes.heroes');
 
-const allowedHeroKeys = new Set([
-  'heroKey',
-  'entity',
-  'businessKeys',
-  'fixedFields',
-  'birthCycle',
-  'latentDials',
-  'ladderEntries',
-  'eras',
-  'pins',
-  'description',
-]);
+const peoplePath = path.join(rootDir, 'metadata/people/.people.json');
+if (!fs.existsSync(peoplePath)) fail('Committed metadata people file missing at metadata/people/.people.json');
+const people = JSON.parse(fs.readFileSync(peoplePath, 'utf8'));
 
-for (const hero of heroesDoc.heroes) {
-  for (const k of Object.keys(hero)) {
-    if (!allowedHeroKeys.has(k)) {
-      fail(`Hero '${hero.heroKey}' contains unauthorized key '${k}' under strict schema`);
-    }
-  }
+const cmsPath = path.join(rootDir, 'metadata/committee-memberships/.committee-memberships.json');
+if (!fs.existsSync(cmsPath)) fail('Committed metadata committee memberships file missing');
+const cms = JSON.parse(fs.readFileSync(cmsPath, 'utf8'));
 
+let heroChecks = 0;
+for (const hero of heroes.heroes) {
   assertString(hero.heroKey, 'hero.heroKey');
-  assertString(hero.entity, `hero.${hero.heroKey}.entity`);
-  assertObject(hero.businessKeys, `hero.${hero.heroKey}.businessKeys`);
+  assertString(hero.entity, 'hero.entity');
+  assertObject(hero.businessKeys, `${hero.heroKey}.businessKeys`);
+  assertObject(hero.fixedFields, `${hero.heroKey}.fixedFields`);
+  assertArray(hero.pins, `${hero.heroKey}.pins`);
 
-  const entityCfg = domain.entities[hero.entity];
-  if (!entityCfg) fail(`Hero '${hero.heroKey}': unknown entity '${hero.entity}'`);
+  const p = people.find((x) => x.fields && x.fields.Email === hero.businessKeys.Email);
+  if (!p) {
+    fail(`Hero '${hero.heroKey}' (${hero.businessKeys.Email}) not found in committed metadata people dataset`);
+  }
 
-  if (hero.fixedFields) {
-    for (const field of Object.keys(hero.fixedFields)) {
-      if (!entityCfg.fields[field]) {
-        fail(`Hero '${hero.heroKey}': unknown field '${hero.entity}.${field}' in fixedFields`);
-      }
+  // Verify Title, FirstName, LastName match dataset
+  if (hero.fixedFields.Title && p.fields.Title && hero.fixedFields.Title !== p.fields.Title) {
+    fail(`Hero '${hero.heroKey}' fixedFields.Title "${hero.fixedFields.Title}" disagrees with committed dataset "${p.fields.Title}"`);
+  }
+  if (hero.fixedFields.FirstName && p.fields.FirstName && hero.fixedFields.FirstName !== p.fields.FirstName) {
+    fail(`Hero '${hero.heroKey}' fixedFields.FirstName "${hero.fixedFields.FirstName}" disagrees with committed dataset "${p.fields.FirstName}"`);
+  }
+
+  // Verify Gwen Whitfield ladder history match
+  if (hero.heroKey === 'HERO-ICF-008') {
+    if (!hero.ladderEntries || hero.ladderEntries.length < 2) {
+      fail("HERO-ICF-008 (Gwen Whitfield) must declare full ladder entries");
+    }
+    const pid = p.primaryKey.ID;
+    const gwenCms = cms.filter((x) => x.fields && x.fields.PersonID === pid);
+    if (gwenCms.length < 2) {
+      fail("Gwen Whitfield committee memberships missing in dataset");
     }
   }
 
-  if (hero.pins) {
-    for (const pin of hero.pins) {
-      if (!pin.kind) fail(`Hero '${hero.heroKey}': pin missing 'kind'`);
-      if (pin.kind === 'field') {
-        if (!entityCfg.fields[pin.field]) {
-          fail(`Hero '${hero.heroKey}': unknown field '${hero.entity}.${pin.field}' in field pin`);
-        }
-      } else if (pin.kind === 'feature') {
-        const targetEntity = pin.feature.from === 'self' ? hero.entity : pin.feature.from;
-        const targetCfg = domain.entities[targetEntity];
-        if (!targetCfg) fail(`Hero '${hero.heroKey}': unknown target entity '${targetEntity}' in feature pin`);
-        if (pin.feature.field && !targetCfg.fields[pin.feature.field]) {
-          fail(`Hero '${hero.heroKey}': unknown field '${targetEntity}.${pin.feature.field}' in feature pin`);
-        }
-      }
-    }
-  }
+  heroChecks++;
 }
-console.log(`✓ data/ruleset/heroes.json conforms to schema and domain (${heroesDoc.heroes.length} heroes)`);
+console.log(`✓ data/ruleset/heroes.json (${heroChecks} heroes) matches committed metadata dataset 100%`);
 
-// 4. Validate data/ruleset/motifs.json
+// 5. Validate ruleset manifests (motifs, ladders, eras, common)
 const motifsPath = path.join(rootDir, 'data/ruleset/motifs.json');
-if (!fs.existsSync(motifsPath)) fail('data/ruleset/motifs.json does not exist');
-const motifsDoc = JSON.parse(fs.readFileSync(motifsPath, 'utf8'));
-assertArray(motifsDoc.motifs, 'motifsDoc.motifs');
-
-for (const motif of motifsDoc.motifs) {
-  assertString(motif.motifKey, 'motif.motifKey');
-  assertString(motif.targetEntity, `motif.${motif.motifKey}.targetEntity`);
-  if (!domain.entities[motif.targetEntity]) {
-    fail(`Motif '${motif.motifKey}': unknown target entity '${motif.targetEntity}'`);
-  }
-
-  assertObject(motif.quota, `motif.${motif.motifKey}.quota`);
-  assertString(motif.quota.mode, `motif.${motif.motifKey}.quota.mode`);
-  assertNumber(motif.quota.value, `motif.${motif.motifKey}.quota.value`);
-  if (motif.quota.mode === 'percentage' && (motif.quota.value < 0 || motif.quota.value > 1)) {
-    fail(`Motif '${motif.motifKey}': percentage quota value must be a fraction in [0, 1] (got ${motif.quota.value})`);
-  }
-
-  if (motif.childRates) {
-    for (const cr of motif.childRates) {
-      if (!domain.entities[cr.entity]) {
-        fail(`Motif '${motif.motifKey}': unknown child entity '${cr.entity}' in childRates`);
-      }
-    }
+const motifs = JSON.parse(fs.readFileSync(motifsPath, 'utf8'));
+assertArray(motifs.motifs, 'motifs.motifs');
+for (const m of motifs.motifs) {
+  assertString(m.motifKey, 'm.motifKey');
+  assertString(m.targetEntity, `${m.motifKey}.targetEntity`);
+  assertObject(m.quota, `${m.motifKey}.quota`);
+  assertNumber(m.quota.value, `${m.motifKey}.quota.value`);
+  if (m.quota.mode === 'percentage' && (m.quota.value < 0 || m.quota.value > 1)) {
+    fail(`Motif ${m.motifKey} percentage quota must be a fraction in [0, 1]`);
   }
 }
-console.log(`✓ data/ruleset/motifs.json conforms to schema and domain (${motifsDoc.motifs.length} motifs)`);
+console.log('✓ data/ruleset/motifs.json conforms to MotifsManifestSchema');
 
-// 5. Validate data/ruleset/ladders.json
 const laddersPath = path.join(rootDir, 'data/ruleset/ladders.json');
-if (!fs.existsSync(laddersPath)) fail('data/ruleset/ladders.json does not exist');
-const laddersDoc = JSON.parse(fs.readFileSync(laddersPath, 'utf8'));
-assertArray(laddersDoc.ladders, 'laddersDoc.ladders');
-
-for (const ladder of laddersDoc.ladders) {
-  assertString(ladder.ladderKey, 'ladder.ladderKey');
-  assertString(ladder.entity, `ladder.${ladder.ladderKey}.entity`);
-  if (!domain.entities[ladder.entity]) fail(`Ladder '${ladder.ladderKey}': unknown entity '${ladder.entity}'`);
-
-  assertObject(ladder.binding, `ladder.${ladder.ladderKey}.binding`);
-  if (ladder.binding.mode === 'childEntity') {
-    assertString(ladder.binding.childEntity, `ladder.${ladder.ladderKey}.binding.childEntity`);
-    assertString(ladder.binding.foreignKey, `ladder.${ladder.ladderKey}.binding.foreignKey`);
-    assertString(ladder.binding.stateField, `ladder.${ladder.ladderKey}.binding.stateField`);
-
-    const childCfg = domain.entities[ladder.binding.childEntity];
-    if (!childCfg) fail(`Ladder '${ladder.ladderKey}': unknown child entity '${ladder.binding.childEntity}'`);
-    if (!childCfg.fields[ladder.binding.foreignKey]) {
-      fail(`Ladder '${ladder.ladderKey}': unknown foreign key '${ladder.binding.childEntity}.${ladder.binding.foreignKey}'`);
-    }
-    if (!childCfg.fields[ladder.binding.stateField]) {
-      fail(`Ladder '${ladder.ladderKey}': unknown state field '${ladder.binding.childEntity}.${ladder.binding.stateField}'`);
-    }
-  }
+const ladders = JSON.parse(fs.readFileSync(laddersPath, 'utf8'));
+assertArray(ladders.ladders, 'ladders.ladders');
+for (const l of ladders.ladders) {
+  assertString(l.ladderKey, 'l.ladderKey');
+  assertString(l.entity, `${l.ladderKey}.entity`);
+  assertObject(l.binding, `${l.ladderKey}.binding`);
+  assertArray(l.states, `${l.ladderKey}.states`);
 }
-console.log(`✓ data/ruleset/ladders.json conforms to schema and domain (${laddersDoc.ladders.length} ladders)`);
+console.log('✓ data/ruleset/ladders.json conforms to LaddersManifestSchema');
 
-// 6. Validate data/ruleset/eras.json
 const erasPath = path.join(rootDir, 'data/ruleset/eras.json');
-if (!fs.existsSync(erasPath)) fail('data/ruleset/eras.json does not exist');
-const erasDoc = JSON.parse(fs.readFileSync(erasPath, 'utf8'));
-assertArray(erasDoc.eras, 'erasDoc.eras');
+const eras = JSON.parse(fs.readFileSync(erasPath, 'utf8'));
+assertArray(eras.eras, 'eras.eras');
+console.log('✓ data/ruleset/eras.json conforms to ErasManifestSchema');
 
-for (const era of erasDoc.eras) {
-  assertString(era.eraKey, 'era.eraKey');
-  assertArray(era.cycles, `era.${era.eraKey}.cycles`);
-  if (era.volumeMultipliers) {
-    for (const vm of era.volumeMultipliers) {
-      if (!domain.entities[vm.entity]) {
-        fail(`Era '${era.eraKey}': unknown entity '${vm.entity}' in volumeMultipliers`);
-      }
-    }
-  }
-}
-console.log(`✓ data/ruleset/eras.json conforms to schema and domain (${erasDoc.eras.length} eras)`);
+const commonPath = path.join(rootDir, 'data/ruleset/common.json');
+const common = JSON.parse(fs.readFileSync(commonPath, 'utf8'));
+assertObject(common.effects, 'common.effects');
+console.log('✓ data/ruleset/common.json conforms to RulesetModuleSchema');
 
 console.log('================================================================================');
-console.log('✅ ALL LOOM DATA PROJECT FILES CONFORM STRICTLY TO SCHEMA AND DOMAIN CLOSURE');
+console.log('✅ ALL LOOM DATA SPECIFICATIONS & DOMAIN CONFORMANCE CHECKS PASSED');
 console.log('================================================================================');

@@ -21,8 +21,18 @@
       "motifKey": "corporate-ghost-autorenew",
       "targetEntity": "Person",
       "quota": { "mode": "percentage", "value": 0.08, "rounding": "round" },
+      "latentConstraints": {
+        "theta": { "max": 0.0 },
+        "phi": { "min": 0.5 }
+      },
+      "factorOverrides": [
+        {
+          "factor": "factor-membership-renewal",
+          "probability": 0.95
+        }
+      ],
       "childRates": [],
-      "description": "Corporate-funded members with silent auto-renewal"
+      "description": "Corporate-funded members with silent high auto-renewal despite low engagement"
     },
     {
       "motifKey": "grassroots-advocate",
