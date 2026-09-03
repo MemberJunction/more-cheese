@@ -1,6 +1,6 @@
 {
-  "name": "@mj-sample-app/ng",
-  "version": "1.0.0",
+  "name": "@mj-more-cheese-demo/ng",
+  "version": "1.1.0",
   "type": "module",
   "description": "Client bootstrap package - Angular components loaded by MJExplorer via the generated open-app bootstrap import. TODO(template): rename.",
   "main": "dist/public-api.js",
@@ -11,20 +11,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MemberJunction/mj-sample-open-app"
+    "url": "https://github.com/BlueCypress/More-Cheese-Demo-V2"
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-sample-app/entities": "1.0.0"
+    "@mj-more-cheese-demo/entities": "^1.1.0"
   },
   "peerDependencies": {
+    "@angular/animations": ">=21.0.0 <22.0.0",
     "@angular/common": ">=21.0.0 <22.0.0",
     "@angular/core": ">=21.0.0 <22.0.0",
     "@angular/forms": ">=21.0.0 <22.0.0",
-    "@memberjunction/global": "^5.44.0",
-    "@memberjunction/ng-base-forms": "^5.44.0",
-    "@memberjunction/ng-entity-viewer": "^5.44.0",
-    "@memberjunction/ng-link-directives": "^5.44.0"
+    "@angular/router": ">=21.0.0 <22.0.0",
+    "@memberjunction/core": "^6.1.0-edge.4",
+    "@memberjunction/global": "^6.1.0-edge.4",
+    "@memberjunction/ng-base-forms": "^6.1.0-edge.4",
+    "@memberjunction/ng-entity-viewer": "^6.1.0-edge.4",
+    "@memberjunction/ng-link-directives": "^6.1.0-edge.4"
   },
   "devDependencies": {
     "@angular/compiler": "21.1.3",

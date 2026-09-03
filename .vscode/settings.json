@@ -1,0 +1,17 @@
+{
+  "$comment": [
+    "Editor support for datagen ruleset authoring. This is what turns ruleset/modules/*.json",
+    "from 'a wall of numbers you have to already understand' into a guided surface:",
+    "  • Ctrl/Cmd+Space at the top level lists the blocks (membership, events, committees…)",
+    "  • hovering any key explains what it is, in prose",
+    "  • a share of 45, a tolerance of 0, an arrow with no evidence: red squiggle as you type",
+    "The same schema is executed in the suite (node cli/check-ruleset-schema.mjs), so what the",
+    "editor promises and what the build enforces cannot drift apart."
+  ],
+  "json.schemas": [
+    {
+      "fileMatch": ["/datagen/projects/*/ruleset/modules/*.json"],
+      "url": "./datagen/engine/ruleset.schema.json"
+    }
+  ]
+}

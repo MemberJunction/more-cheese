@@ -1,6 +1,6 @@
 # R11 — Support ticket topics & volumes · was GAP-2 candidate sources
 
-**Status: ✅ REVIEWED — RESOLVED ESTIMATE-LED (Marcelo, 2026-07-06).** Ruling: *"take the
+**Status: ✅ REVIEWED — RESOLVED ESTIMATE-LED (the schema owner, 2026-07-06).** Ruling: *"take the
 Gartner finding and maybe the HDI/MetricNet finding; the rest seem to be marketing material —
 lean heavier on estimating. Draw inspiration, but don't treat them as gold-standard empirical
 evidence unless they are."* Verdicts applied below; adopted estimates live in

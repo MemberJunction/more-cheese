@@ -4,6 +4,8 @@
 > **Spot-check note**: Figures marked **[990]** come directly from ProPublica Form 990 summaries and are the most reliable data in this document. Figures marked **[web]** come from org websites / trade press retrieved during research. Figures marked **[recall — verify]** are LLM-recalled or inferred and should be spot-checked before load-bearing use. All dollar figures USD.
 >
 > **Purpose**: Test whether food/beverage/craft associations behave differently from generic professional societies, to calibrate the synthetic-data generator for a ~2,500-member cheese professional society (benchmarks-draft.json v0.6).
+>
+> **2026-07-07 VERIFICATION (see benchmarks-draft.json `$v091`)**: the ACS FY2024 row below was checked against the e-filed 990 — revenue, expenses, net assets and the 77.8%/19.5% shares all confirmed (program service revenue = $1,329,798). The ACS dues lattice (§ Dues) re-verified line-by-line on cheesesociety.org. ACS conference "1,000 cheese professionals" (2023) and ~2,300 membership re-confirmed at source.
 
 ---
 

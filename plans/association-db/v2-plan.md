@@ -309,7 +309,7 @@ v1’s schema lives entirely in the `AssociationDemo` SQL Server schema. It cont
 
 ### 4.2 What Changes in v2
 
-v2's custom data is **split across multiple schemas** (rather than a single `AssociationDemoV2` namespace) — per Robert's review feedback — to demonstrate MJ's data-unification capability against the shape of a realistic customer environment (multiple source systems, multiple schemas, cross-schema soft-key joins). v1 and v2 can coexist in the same database if needed. The domain remapping:
+v2's custom data is **split across multiple schemas** (rather than a single `AssociationDemoV2` namespace) — per the domain lead's review feedback — to demonstrate MJ's data-unification capability against the shape of a realistic customer environment (multiple source systems, multiple schemas, cross-schema soft-key joins). v1 and v2 can coexist in the same database if needed. The domain remapping:
 
 |Domain                   |v2 Location                       |Notes                                                |
 |-------------------------|----------------------------------|-----------------------------------------------------|
@@ -955,12 +955,12 @@ This section is the primary execution reference. Each phase contains tasks with 
 - [ ] **1.1** Produce `docs/V1_TO_V2_ENTITY_MAPPING.md` listing every v1 table and specifying its v2 destination, **including the target schema** (multiple custom schemas now — see Phase 2). Each v1 entity maps to one of: (a) an open app schema, (b) one of the multiple `AssociationDemoV2_*` custom schemas, (c) deprecated.
 - [ ] **1.2** For each entity refactored into biz-apps-common, specify the field-by-field mapping (what v1 columns go to `Person`, `PersonEmail`, `Employment`, etc.)
 - [ ] **1.3** For each v1 table that moves to an open app (committees, tasks, etc.), specify which v1 columns map to the open app entity and which become deprecated
-- [ ] **1.4** Identify any v1 columns that have no v2 destination (deprecated concepts) and document the rationale. Also identify v1 columns with semantic ambiguity (notably `EndDate` vs `RenewalDate` vs `CancellationDate` on Memberships — see Robert's review feedback) and document the v2 semantics explicitly so the seed generator and integrity checks have a single source of truth.
-- [ ] **1.5** Review mapping with the user (Amith) before proceeding to Phase 2
+- [ ] **1.4** Identify any v1 columns that have no v2 destination (deprecated concepts) and document the rationale. Also identify v1 columns with semantic ambiguity (notably `EndDate` vs `RenewalDate` vs `CancellationDate` on Memberships — see the domain lead's review feedback) and document the v2 semantics explicitly so the seed generator and integrity checks have a single source of truth.
+- [ ] **1.5** Review mapping with the user (the demo lead) before proceeding to Phase 2
 
 ### Phase 2 — Schema Migrations
 
-**Goal:** Create the v2 schemas and tables. **Split across multiple schemas** rather than a single `AssociationDemoV2` namespace, to demonstrate MJ's data-unification superpower against the realistic shape of an actual customer environment (multiple source systems, multiple schemas, soft-key joins). Per Robert's feedback — a real client environment never has all custom data in one tidy schema.
+**Goal:** Create the v2 schemas and tables. **Split across multiple schemas** rather than a single `AssociationDemoV2` namespace, to demonstrate MJ's data-unification superpower against the realistic shape of an actual customer environment (multiple source systems, multiple schemas, soft-key joins). Per the domain lead's feedback — a real client environment never has all custom data in one tidy schema.
 
 - [ ] **2.1** `V001__create_v2_schemas.sql` — create the multiple custom schemas:
   - `AssociationDemoV2_Members` — member profiles, membership types, chapters
@@ -972,7 +972,7 @@ This section is the primary execution reference. Each phase contains tasks with 
   - `AssociationDemoV2_Marketing` — campaigns, segments, email templates, sends, engagement
   - `AssociationDemoV2_Resources` — resource library
 - [ ] **2.2** `V002__create_members_schema.sql` — `MemberProfile`, `MembershipType`, `MembershipStatus`, chapters, chapter officers (in `AssociationDemoV2_Members`). All FKs to `biz-apps-common.Person`.
-  **Document the temporal semantic of `RenewalDate` vs `EndDate` explicitly in extended properties** (per Robert's feedback): `EndDate` = the end of the current paid period (subscription expires here unless renewed); `RenewalDate` = the date the renewal action was last taken / next scheduled (operational, not contractual). Seed data must respect this distinction — see Phase 3.10.
+  **Document the temporal semantic of `RenewalDate` vs `EndDate` explicitly in extended properties** (per the domain lead's feedback): `EndDate` = the end of the current paid period (subscription expires here unless renewed); `RenewalDate` = the date the renewal action was last taken / next scheduled (operational, not contractual). Seed data must respect this distinction — see Phase 3.10.
 - [ ] **2.3** `V003__create_events_schema.sql` — events, sessions, registrations, speakers, tracks (in `AssociationDemoV2_Events`)
 - [ ] **2.4** `V004__create_learning_schema.sql` — courses, enrollments, certificate records, CE tracking (in `AssociationDemoV2_Learning`)
 - [ ] **2.5** `V005__create_forums_schema.sql` — forum categories, threads, posts, reactions, moderation (in `AssociationDemoV2_Forums`)
@@ -994,11 +994,11 @@ This section is the primary execution reference. Each phase contains tasks with 
 The standard for this phase is **full coverage, not just headline tables**: lookup/reference tables, history/audit tables, status enums, junction tables — everything that ships with the open app schema gets representative data. The demo only feels real if you can drill into any entity and find populated, sensible records.
 
 - [ ] **3.0** Build the procedural data generator (seeded, deterministic) that produces all mj-sync JSON below from a small config + name/org distributions + realistic transaction patterns. Generator is committed; output JSON is committed; install does NOT run the generator.
-  - **Configurable scale** (per Robert's feedback): `small` / `medium` / `large` size presets so the same package can serve different demo footprints. Suggested footprints:
+  - **Configurable scale** (per the domain lead's feedback): `small` / `medium` / `large` size presets so the same package can serve different demo footprints. Suggested footprints:
     - `small` — ~500 Persons, ~10 Organizations (lightweight local dev, fast install for sandbox tinkering)
     - `medium` — ~2,500 Persons, ~25 Organizations (default — current plan target)
-    - `large` — ~15,000 Persons, ~100 Organizations (credibility for larger-association prospects — Robert's headline ask)
-  - **Hero personas are an INPUT, not generated output** (per Robert's feedback on demo-script reliability — see Section 7.0). The generator reads hand-authored hero personas from committed JSON and produces the procedural long tail around them. Heroes are stable across rebuilds; long-tail fillers are deterministically regenerated.
+    - `large` — ~15,000 Persons, ~100 Organizations (credibility for larger-association prospects — the domain lead's headline ask)
+  - **Hero personas are an INPUT, not generated output** (per the domain lead's feedback on demo-script reliability — see Section 7.0). The generator reads hand-authored hero personas from committed JSON and produces the procedural long tail around them. Heroes are stable across rebuilds; long-tail fillers are deterministically regenerated.
   - Generator seed and config committed alongside output JSON. Re-running the generator with the same seed produces byte-identical output.
 - [ ] **3.1** Date anchor convention: **all date fields in all open app metadata** use `OFFSET_DAYS_FROM_RELEASE` semantics. Release pipeline (see §7.3) resolves them at tag time — uniformly across all ten open apps, not just AssociationDB-specific data.
 
@@ -1025,7 +1025,7 @@ The standard for this phase is **full coverage, not just headline tables**: look
 - [ ] **3.9** **payments** — `metadata/payments/`: transactions backing every order in 3.8 plus subscription renewals; payment methods on file per Person; refunds and chargebacks; provider attribution (Stripe / Chase / Authorize.net showcasing the abstraction).
 
 - [ ] **3.10** **subscriptions** — `metadata/subscriptions/`: subscription records representing memberships with varying statuses (active, lapsed, canceled, pending renewal); renewal history; tier changes over time.
-  - **Temporal/status invariants ENFORCED at generation time** (per Robert — v1 had `Status='Active'` on records with past `EndDate`s, causing Skip reports to misrepresent member status). Generator must respect:
+  - **Temporal/status invariants ENFORCED at generation time** (per the domain lead — v1 had `Status='Active'` on records with past `EndDate`s, causing Skip reports to misrepresent member status). Generator must respect:
     - `Status='Active'` ⟹ `EndDate IS NULL OR EndDate >= today`
     - `Status='Canceled'` ⟹ `CancellationDate IS NOT NULL` AND `CancellationDate <= today`
     - `Status='Lapsed'` ⟹ `EndDate < today AND (RenewalDate IS NULL OR RenewalDate < today)`
@@ -1054,7 +1054,7 @@ The standard for this phase is **full coverage, not just headline tables**: look
 - [ ] **4.11** `metadata/associationdb/marketing-email/` — 45 campaigns, 80 segments, 30 templates, email sends with engagement data
 - [ ] **4.12** Add an install-time **integrity check** (post `mj sync push`) that fails loudly on any of:
   - **Referential integrity**: every FK across every open app boundary resolves
-  - **Temporal/status consistency** (per Robert's feedback — catches the v1 class of bugs where `Status='Active'` records have past `EndDate`s):
+  - **Temporal/status consistency** (per the domain lead's feedback — catches the v1 class of bugs where `Status='Active'` records have past `EndDate`s):
     - Every `MemberProfile` / `MembershipSubscription` / `Subscription` row satisfies the invariants in Phase 3.10
     - Every Event with `Status='Completed'` has an `EndDate < today`; every Event with `Status='Upcoming'` has `StartDate >= today`
     - Every Certification with `Status='Earned'` has an `EarnedDate <= today`; renewals respect the cert period
@@ -1114,7 +1114,7 @@ All assets persist via the same uniform mechanism: authored in a dev environment
 
 #### 7.0 — Hero Personas (Foundational, Stable Across Releases)
 
-Per Robert's feedback (PR #2431 review): demo prep teams currently can't reliably script demos around specific members because v1 regenerates names on every rebuild. "Let's look at Anna Brown's lapsed membership and have Sage diagnose why she churned" stops working as soon as Anna ceases to exist. This is a meaningful gap in demo dependability.
+Per the domain lead's feedback (PR #2431 review): demo prep teams currently can't reliably script demos around specific members because v1 regenerates names on every rebuild. "Let's look at Anna Brown's lapsed membership and have Sage diagnose why she churned" stops working as soon as Anna ceases to exist. This is a meaningful gap in demo dependability.
 
 **Solution**: a curated set of ~50–100 **hand-authored hero personas** with stable names, employers, engagement histories, and rich storylines that ship unchanged in every release. The procedural generator (Phase 3.0) reads these as input and produces the long-tail population *around* them. Heroes are stable; long tail is deterministically regenerated.
 
@@ -1609,14 +1609,14 @@ The v2 effort is successful when all of the following are demonstrably true:
 
 |Date      |Version|Author                           |Notes             |
 |----------|-------|---------------------------------|------------------|
-|2026-04-19|0.1    |Amith + Claude (planning session)|Initial plan draft|
-|2026-04-19|0.2    |Amith + Claude                   |Demo positioning fix; AMS partner framing; §7.6 cost guardrails; Phase 0 readiness gate; Phase 7 mj-sync; Phase 11 expansion|
-|2026-04-19|0.3    |Amith + Claude                   |Two-package split; demo→app + demo-data; mj-sync pull/push for all seed data|
-|2026-04-19|0.4    |Amith + Claude                   |Golden Image deleted; Release Pipeline & Portability; pre-computed embeddings as ERDs into SVS; bundled Content Sources; install path uniform across local/MJC/customer|
-|2026-04-19|0.5    |Amith + Claude                   |Phase 7 expansion: Predictive Studio models, Lists, Views, Queries, Scheduled Actions, Workspaces, Custom Forms, Prompts/Actions/Templates/Search Scopes/Record Processes|
-|2026-04-19|0.6    |Amith + Claude                   |Full BizApps catalog (10 open apps: + issues / sonar / secure-messaging / orders / accounting); Sonar as Predictive Studio substrate; BC SaaS portfolio integration (Skip / Izzy / Betty / rasa.io); standing rule for future open apps|
-|2026-06-27|0.7    |Amith + Claude                   |Rename to **demo-morecheese** repo (separate from MJ monorepo and bizapps-*); SaaS integrations simplified to single global instances; Phase 14: morecheese.org public site redesign + Betty voice agent + app.morecheese.org Explorer + production deployment|
-|2026-06-27|0.8    |Robert Kihm (review) → Amith + Claude|Folded in Robert's PR review feedback: (1) configurable scale (small/medium/large); (2) temporal/status consistency invariants in Phases 3.10 + 4.12; (3) **hero personas** as a first-class deliverable (new §7.0) ensuring demo-script reliability across releases; (4) multi-schema split of custom schemas to demo cross-source data unification|
+|2026-04-19|0.1    |the demo lead + Claude (planning session)|Initial plan draft|
+|2026-04-19|0.2    |the demo lead + Claude                   |Demo positioning fix; AMS partner framing; §7.6 cost guardrails; Phase 0 readiness gate; Phase 7 mj-sync; Phase 11 expansion|
+|2026-04-19|0.3    |the demo lead + Claude                   |Two-package split; demo→app + demo-data; mj-sync pull/push for all seed data|
+|2026-04-19|0.4    |the demo lead + Claude                   |Golden Image deleted; Release Pipeline & Portability; pre-computed embeddings as ERDs into SVS; bundled Content Sources; install path uniform across local/MJC/customer|
+|2026-04-19|0.5    |the demo lead + Claude                   |Phase 7 expansion: Predictive Studio models, Lists, Views, Queries, Scheduled Actions, Workspaces, Custom Forms, Prompts/Actions/Templates/Search Scopes/Record Processes|
+|2026-04-19|0.6    |the demo lead + Claude                   |Full BizApps catalog (10 open apps: + issues / sonar / secure-messaging / orders / accounting); Sonar as Predictive Studio substrate; BC SaaS portfolio integration (Skip / Izzy / Betty / rasa.io); standing rule for future open apps|
+|2026-06-27|0.7    |the demo lead + Claude                   |Rename to **demo-morecheese** repo (separate from MJ monorepo and bizapps-*); SaaS integrations simplified to single global instances; Phase 14: morecheese.org public site redesign + Betty voice agent + app.morecheese.org Explorer + production deployment|
+|2026-06-27|0.8    |the domain lead Kihm (review) → the demo lead + Claude|Folded in the domain lead's PR review feedback: (1) configurable scale (small/medium/large); (2) temporal/status consistency invariants in Phases 3.10 + 4.12; (3) **hero personas** as a first-class deliverable (new §7.0) ensuring demo-script reliability across releases; (4) multi-schema split of custom schemas to demo cross-source data unification|
 
 -----
 

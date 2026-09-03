@@ -1,0 +1,21 @@
+[
+  {
+    "primaryKey": {
+      "ID": "832E6ECA-62AC-57AA-B6D8-9408A37E3084"
+    },
+    "fields": {
+      "ModelID": "D6B3CFD1-6C41-5A26-B89F-54C875097FA6",
+      "VendorID": "EB93BD78-D94F-5EB4-A88D-7B73DA2C8B6F",
+      "TypeID": "@lookup:MJ: AI Vendor Type Definitions.Name=Inference Provider",
+      "DriverClass": "BettyBotLLM",
+      "APIName": "default",
+      "Priority": 0,
+      "Status": "Active",
+      "SupportsStreaming": false
+    },
+    "sync": {
+      "lastModified": "2026-07-27T18:40:42.762Z",
+      "checksum": "f91b27980ec1928f8347045a31bb856efdae7cafb19470d6c4cd46f6c55849f1"
+    }
+  }
+]

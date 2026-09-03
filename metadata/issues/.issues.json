@@ -1,0 +1,2165 @@
+[
+  {
+    "primaryKey": {
+      "ID": "BE90AFD1-F2E1-5310-8035-06EBDDC0D18C"
+    },
+    "fields": {
+      "IssueNumber": "MC-0031",
+      "Title": "Please update my employer — Gorsemere Cheesemaking Supply no longer current",
+      "Description": "Reported 2019-09-13. Member's profile still lists Gorsemere Cheesemaking Supply as employer; the organization record had a Dissolved event in 2019. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "858F210B-5810-5FDC-AEF2-9863C06BC4AA",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "8010857E-9CEF-56E7-8879-A72AE72E6B3C",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "C531F83E-5A2E-5C2B-B8C6-5B22AA7250C7",
+      "ResolvedAt": "2019-09-15T08:23:00Z",
+      "ClosedAt": "2019-10-11T12:14:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D40150A3-0538-599D-A8B7-49C2514233D9"
+    },
+    "fields": {
+      "IssueNumber": "MC-0032",
+      "Title": "Change of employment: profile still lists Cloverholt Creamery Cooperative",
+      "Description": "Reported 2019-11-28. Member's profile still lists Cloverholt Creamery Cooperative as employer; the organization record had a ProgramCut event in 2019. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "E2A73B61-3A3F-586C-93D2-847DC33AB4C1",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "2980EAB2-2260-5C34-9828-158B1EE2C44D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "A4CE0BF5-7F91-518C-A45C-DA08F7A325AF",
+      "ResolvedAt": "2019-12-03T13:53:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A8CE6170-F05E-5BD8-BCFA-BA81D066229B"
+    },
+    "fields": {
+      "IssueNumber": "MC-0033",
+      "Title": "Please update my employer — Juniperfen Cheesemonger no longer current",
+      "Description": "Reported 2019-12-29. Member's profile still lists Juniperfen Cheesemonger as employer; the organization record had a Acquired event in 2019. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "A96CE815-B121-5BD2-823B-ACA6C5600EEA",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "7DC8AC80-C8E9-5DBA-B1FA-FEFC5064D550",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "8CE95E33-70A8-5ACA-A209-114F5BA1C023",
+      "ResolvedAt": "2020-01-02T08:42:00Z",
+      "ClosedAt": "2020-01-23T12:50:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1BCF1884-9EF2-5997-8703-377F5397C554"
+    },
+    "fields": {
+      "IssueNumber": "MC-0034",
+      "Title": "Directory shows the wrong employer (Cindervale Cheesemonger)",
+      "Description": "Reported 2020-10-08. Member's profile still lists Cindervale Cheesemonger as employer; the organization record had a Dissolved event in 2020. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "5585C6B5-B0CF-504E-8206-BF92ECE3AC22",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "1A9580BC-2009-59D6-98FA-4DA50ED4719A",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "DA286E97-9BCB-5701-8BD4-3516D3A4A511",
+      "ResolvedAt": "2020-10-10T16:20:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C336F4A8-CE0C-5313-AC74-2965751C92B4"
+    },
+    "fields": {
+      "IssueNumber": "MC-0035",
+      "Title": "Change of employment: profile still lists Emberlea Cheese Co.",
+      "Description": "Reported 2020-10-10. Member's profile still lists Emberlea Cheese Co. as employer; the organization record had a Dissolved event in 2020. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "875F2632-1B94-516C-B713-1AB213994913",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "78E29F46-3965-5314-BC2F-BB79336EAD05",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "4A769FF0-C83D-5851-AEAD-38A436C76F46",
+      "ResolvedAt": "2020-10-21T13:51:00Z",
+      "ClosedAt": "2020-11-09T10:50:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3BDE6B1C-EE6F-5E79-B57E-ACE5442B5B0A"
+    },
+    "fields": {
+      "IssueNumber": "MC-0036",
+      "Title": "Employer listing needs correction after changes at Plumgate Cheesemaking Supply",
+      "Description": "Reported 2020-11-15. Member's profile still lists Plumgate Cheesemaking Supply as employer; the organization record had a ProgramCut event in 2020. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "B1319915-100D-52CE-8C10-6B08F170CC09",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "2980EAB2-2260-5C34-9828-158B1EE2C44D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "89B60498-5411-5F2F-BF94-3D53D4F5C8A4",
+      "ResolvedAt": "2020-11-16T09:42:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0E920AC8-38A6-55BC-A630-8B0B0FB40B59"
+    },
+    "fields": {
+      "IssueNumber": "MC-0037",
+      "Title": "Please update my employer — Cloverholt Cheesemaking Supply no longer current",
+      "Description": "Reported 2020-11-19. Member's profile still lists Cloverholt Cheesemaking Supply as employer; the organization record had a Dissolved event in 2020. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "19FAF53F-76B6-5CCF-8A3B-7FB0EB5135D4",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "90964562-E65D-5FBA-A1D9-4642DECE1380",
+      "ResolvedAt": "2020-11-21T14:02:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A6638C2B-C1C0-5F99-A50C-A6E8081C26C2"
+    },
+    "fields": {
+      "IssueNumber": "MC-0038",
+      "Title": "Employer listing needs correction after changes at Vandermolen Cultures Co.",
+      "Description": "Reported 2021-09-14. Member's profile still lists Vandermolen Cultures Co. as employer; the organization record had a ProgramCut event in 2021. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "3AD70FA1-DEA7-5BE0-8104-2A9D8CCC62FE",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A5264D6B-6ED7-516A-9200-3585DE999856",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "5921BDDF-0195-5AC5-9DB6-3595C8C3B473",
+      "ResolvedAt": "2021-09-25T13:25:00Z",
+      "ClosedAt": "2021-09-28T17:28:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0508F0C6-35F9-5280-B731-562FDE5F0649"
+    },
+    "fields": {
+      "IssueNumber": "MC-0039",
+      "Title": "Employer record out of date — Hazelcombe Cheese Co.",
+      "Description": "Reported 2021-11-01. Member's profile still lists Hazelcombe Cheese Co. as employer; the organization record had a Dissolved event in 2021. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "8B59DE27-A3D9-5A1B-A63E-226F160744E9",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "1126D14A-ACD8-5B7E-BA80-5C44A8D5BDF8",
+      "ResolvedAt": "2021-11-12T11:27:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E0620021-5AED-5389-BF70-34D5D1B7177B"
+    },
+    "fields": {
+      "IssueNumber": "MC-0040",
+      "Title": "Directory shows the wrong employer (Hazelcombe Cheese Co.)",
+      "Description": "Reported 2021-11-08. Member's profile still lists Hazelcombe Cheese Co. as employer; the organization record had a Dissolved event in 2021. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "E2C611B9-A72B-5B05-AFA0-4347FD4D6306",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "9E87FF0D-F5FD-5ECC-B55A-D7183BD57789",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "1126D14A-ACD8-5B7E-BA80-5C44A8D5BDF8",
+      "ResolvedAt": "2021-11-11T14:02:00Z",
+      "ClosedAt": "2021-12-03T14:50:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31635D48-82E1-529B-8D4E-6BE6E487B492"
+    },
+    "fields": {
+      "IssueNumber": "MC-0041",
+      "Title": "Directory shows the wrong employer (Birchmoor Cheese Co.)",
+      "Description": "Reported 2021-12-05. Member's profile still lists Birchmoor Cheese Co. as employer; the organization record had a ProgramCut event in 2021. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "EF64CAD8-A034-5979-B212-5C3E618904BE",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "3D7C12E5-DFBB-5197-B5BA-633A7A26DDC4",
+      "ResolvedAt": "2021-12-06T11:37:00Z",
+      "ClosedAt": "2021-12-18T09:49:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47C30D74-DF2D-5709-A448-FA016C9E49BF"
+    },
+    "fields": {
+      "IssueNumber": "MC-0042",
+      "Title": "Employer listing needs correction after changes at Vandermolen Cultures Co.",
+      "Description": "Reported 2021-12-28. Member's profile still lists Vandermolen Cultures Co. as employer; the organization record had a ProgramCut event in 2021. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "High",
+      "Priority": "Medium",
+      "ReporterPersonID": "1842ABB0-3196-5145-A1E9-4FFEC642ED52",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "9885A0BF-9D5F-5BED-B067-B518093A4C1F",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "5921BDDF-0195-5AC5-9DB6-3595C8C3B473",
+      "ResolvedAt": "2022-01-01T13:17:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "552CD620-4CE5-54F4-A82C-A19A87EA286E"
+    },
+    "fields": {
+      "IssueNumber": "MC-0043",
+      "Title": "No-show refund policy question (Workshop: Meadow Cut & Wrap)",
+      "Description": "Reported 2022-03-15. Member registered for Workshop: Meadow Cut & Wrap (2022-03-08) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "92E30246-47F2-5BE7-81C6-F8CB10B44A48",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "71BBDF70-8C62-5113-9B59-5E680181CAFA",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "CF6BC326-0F40-54B7-B743-AE89A97EB7B2",
+      "ResolvedAt": "2022-04-24T13:44:00Z",
+      "ClosedAt": "2022-05-18T16:30:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "932C65B6-8239-511D-906D-D8C73BBECC9B"
+    },
+    "fields": {
+      "IssueNumber": "MC-0044",
+      "Title": "Missed Workshop: Meadow Cut & Wrap; is a credit possible?",
+      "Description": "Reported 2022-03-16. Member registered for Workshop: Meadow Cut & Wrap (2022-03-08) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "87A37AE8-711D-5D63-9C79-8D7A1FB54F9C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "9885A0BF-9D5F-5BED-B067-B518093A4C1F",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "7F4E2E29-EC16-590B-A4DB-DBAFB01D9087",
+      "ResolvedAt": "2022-03-17T13:41:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FD4FB467-E7E2-5C2C-A786-76711CB66F10"
+    },
+    "fields": {
+      "IssueNumber": "MC-0045",
+      "Title": "Missed ICF Annual Conference 2022; is a credit possible?",
+      "Description": "Reported 2022-07-20. Member registered for ICF Annual Conference 2022 (2022-07-19) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "5825F04A-0ADD-5B52-854B-245294D3F54B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "496717A7-1068-5F63-B3AD-A9D4D1256B5D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "ACFC7204-568B-5700-AFE6-E2D6451E41A3",
+      "ResolvedAt": "2022-09-04T09:40:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3FC82B64-252F-5D8F-BA0E-48651F5A41E0"
+    },
+    "fields": {
+      "IssueNumber": "MC-0046",
+      "Title": "Please update my employer — Norgaard Farmstead no longer current",
+      "Description": "Reported 2022-09-23. Member's profile still lists Norgaard Farmstead as employer; the organization record had a ProgramCut event in 2022. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "79929129-4DB2-5047-BC78-A9493AEB9A81",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "B253E680-3869-5D3B-8349-57E1D2424E02",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "9450580B-BE27-5ACC-9786-7C1FC5B78DCF",
+      "ResolvedAt": "2022-09-29T16:36:00Z",
+      "ClosedAt": "2022-10-12T10:20:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D498049B-9965-5E49-B47C-3E9C0C67A2E2"
+    },
+    "fields": {
+      "IssueNumber": "MC-0047",
+      "Title": "Employer record out of date — Birchmoor Cheesemaking Supply",
+      "Description": "Reported 2022-10-11. Member's profile still lists Birchmoor Cheesemaking Supply as employer; the organization record had a ProgramCut event in 2022. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "ADDE7626-0F8D-5895-9A44-73635AF2DC15",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "9E87FF0D-F5FD-5ECC-B55A-D7183BD57789",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "D9B50876-2CDB-5AD5-B378-99EDE3963557",
+      "ResolvedAt": "2022-10-16T16:07:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A0A7EFC9-488A-5F52-B454-80B1AA1E6F52"
+    },
+    "fields": {
+      "IssueNumber": "MC-0048",
+      "Title": "Refund request — Workshop: Hollow Pasta Filata",
+      "Description": "Reported 2022-11-12. Member registered for Workshop: Hollow Pasta Filata (2022-11-08) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "High",
+      "Priority": "High",
+      "ReporterPersonID": "9F66B705-578B-5AE3-9097-6343196377D3",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "486D746C-5913-5805-9ADD-528EC4413B92",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "A83A8462-9EA2-5057-8675-BC7D96B29000",
+      "ResolvedAt": "2022-11-16T08:08:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C4BFDF8F-01D7-50F5-A62E-76D5C96CC6C0"
+    },
+    "fields": {
+      "IssueNumber": "MC-0049",
+      "Title": "No-show refund policy question (Workshop: Hollow Pasta Filata)",
+      "Description": "Reported 2022-11-16. Member registered for Workshop: Hollow Pasta Filata (2022-11-08) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "9F9D7202-43E3-50B5-BF25-9DA9A90703AD",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "9885A0BF-9D5F-5BED-B067-B518093A4C1F",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "E8CD48AB-3373-52EF-9B53-E374CD5C4DDA",
+      "ResolvedAt": "2022-11-21T12:22:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E088C026-C638-5628-8844-B973B0813F4C"
+    },
+    "fields": {
+      "IssueNumber": "MC-0050",
+      "Title": "No-show refund policy question (Workshop: Hollow Pasta Filata)",
+      "Description": "Reported 2022-11-16. Member registered for Workshop: Hollow Pasta Filata (2022-11-08) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "B2CC9998-6BA2-5190-9FD3-432B69916CAF",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "7DDB98F9-70E6-53AE-A821-66CB729F7109",
+      "ResolvedAt": "2022-11-16T13:12:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98749ACA-2442-5290-8D7A-3AA1295E0631"
+    },
+    "fields": {
+      "IssueNumber": "MC-0051",
+      "Title": "Please update my employer — Heathercombe Creamery no longer current",
+      "Description": "Reported 2022-11-25. Member's profile still lists Heathercombe Creamery as employer; the organization record had a Acquired event in 2022. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "2475108E-5E76-5D1A-A37C-A26DDFBF967F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "486D746C-5913-5805-9ADD-528EC4413B92",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "26DFBB7B-6E61-577B-B642-C28D9F9EFC90",
+      "ResolvedAt": "2022-11-28T13:23:00Z",
+      "ClosedAt": "2022-12-13T14:41:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F28D5106-92EF-5394-B25F-AB4ABE0134A5"
+    },
+    "fields": {
+      "IssueNumber": "MC-0052",
+      "Title": "Trouble logging into the member portal",
+      "Description": "Reported 2022-11-25 via the member portal. Member reports the certificate download link on their profile returns an error.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "FC42E2BE-3EEB-50A2-A3DC-F9223F4CE80B",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "FC42E2BE-3EEB-50A2-A3DC-F9223F4CE80B",
+      "ResolvedAt": "2022-12-06T10:03:00Z",
+      "ClosedAt": "2022-12-25T17:41:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EBF3A269-AA81-512B-AFDF-6E86DBB403C9"
+    },
+    "fields": {
+      "IssueNumber": "MC-0053",
+      "Title": "Employer listing needs correction after changes at Bramblewick Cheese & Provisions",
+      "Description": "Reported 2022-12-02. Member's profile still lists Bramblewick Cheese & Provisions as employer; the organization record had a ProgramCut event in 2022. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "1C05CD71-2B48-5B53-AB40-961F7B48773E",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "A01AD2B8-9A93-5FB3-B00F-952CBCF18034",
+      "ResolvedAt": "2022-12-02T12:18:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D6065B84-0A81-5804-BADF-3F87E909F7FE"
+    },
+    "fields": {
+      "IssueNumber": "MC-0054",
+      "Title": "Employer listing needs correction after changes at Dapplewick Cheesemaking Supply",
+      "Description": "Reported 2022-12-05. Member's profile still lists Dapplewick Cheesemaking Supply as employer; the organization record had a ProgramCut event in 2022. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "High",
+      "Priority": "High",
+      "ReporterPersonID": "DE0B43CB-7025-5F5B-96BD-35100CDAFBB4",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "F3F7CD24-C34F-5718-B69B-327893DBBB24",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "83937F57-B361-5C9B-B36B-3F0B13A6224F",
+      "ResolvedAt": "2022-12-06T09:42:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "644699FC-F603-5B0D-B4BC-595A0686EA93"
+    },
+    "fields": {
+      "IssueNumber": "MC-0055",
+      "Title": "Directory listing update request",
+      "Description": "Reported 2022-12-27 via the member portal. Member reports the monthly newsletter stopped arriving after an email change.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "0FA575D5-F0A8-5B1A-B008-12DE5B88761D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "496717A7-1068-5F63-B3AD-A9D4D1256B5D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "0FA575D5-F0A8-5B1A-B008-12DE5B88761D",
+      "ResolvedAt": "2022-12-27T13:09:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FA4AAB3C-C9B5-5743-A0F3-44AEC9BEB78F"
+    },
+    "fields": {
+      "IssueNumber": "MC-0056",
+      "Title": "Trouble logging into the member portal",
+      "Description": "Reported 2023-01-19 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "28C130FE-EB16-5D78-833B-D7607FC5A92F",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "28C130FE-EB16-5D78-833B-D7607FC5A92F",
+      "ResolvedAt": "2023-01-29T16:42:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8E39B978-F3DE-5F78-A786-0C5E9C225BFA"
+    },
+    "fields": {
+      "IssueNumber": "MC-0057",
+      "Title": "How do I access past webinar recordings?",
+      "Description": "Reported 2023-04-17 via the member portal. Member asks which benefits apply at their tier and whether webinar recordings are included.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "C4BDC52A-7709-5D80-8147-A12C39B9BD98",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "486D746C-5913-5805-9ADD-528EC4413B92",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "C4BDC52A-7709-5D80-8147-A12C39B9BD98",
+      "ResolvedAt": "2023-04-19T08:55:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31CD6035-E111-5B26-921F-E1678FFF6401"
+    },
+    "fields": {
+      "IssueNumber": "MC-0058",
+      "Title": "How do I access past webinar recordings?",
+      "Description": "Reported 2023-05-19 via the member portal. Member reports the monthly newsletter stopped arriving after an email change.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "78C1A640-D563-5339-BA0B-D5C8BB22ECB0",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "78C1A640-D563-5339-BA0B-D5C8BB22ECB0",
+      "ResolvedAt": "2023-05-22T15:04:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8FFE3A5C-6B28-507B-B267-6D1CEBD50E83"
+    },
+    "fields": {
+      "IssueNumber": "MC-0059",
+      "Title": "Directory listing update request",
+      "Description": "Reported 2023-06-19 via the member portal. Member reports the certificate download link on their profile returns an error.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "75F3B7F3-5CE6-5E42-9EE3-76A40068B633",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "75F3B7F3-5CE6-5E42-9EE3-76A40068B633",
+      "ResolvedAt": "2023-06-22T09:00:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0AEE4381-9017-541D-9B55-3E983DE5A778"
+    },
+    "fields": {
+      "IssueNumber": "MC-0060",
+      "Title": "Employer listing needs correction after changes at Sorrelgate Dairy",
+      "Description": "Reported 2023-09-11. Member's profile still lists Sorrelgate Dairy as employer; the organization record had a Dissolved event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "41FB4961-9C94-5755-8BE1-1E99115855D9",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "08E9592C-5E02-5913-BECF-ABE855B0EB39",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "E888B70B-61AA-5A4F-AB02-5BBD09A66830",
+      "ResolvedAt": "2024-01-03T16:11:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE970932-FEC9-5377-977D-9ADADBBC8D1B"
+    },
+    "fields": {
+      "IssueNumber": "MC-0061",
+      "Title": "Employer record out of date — Orchardmere Fine Cheese",
+      "Description": "Reported 2023-09-13. Member's profile still lists Orchardmere Fine Cheese as employer; the organization record had a ProgramCut event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "E1AAC538-D0F5-5AEC-B7A7-C9EFC7EE1492",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "C1B59C75-5E28-5EE4-A365-6F84F9A3CC5D",
+      "ResolvedAt": "2023-09-15T15:29:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FBF33CAF-6A00-52BB-826C-36C5A07A5993"
+    },
+    "fields": {
+      "IssueNumber": "MC-0062",
+      "Title": "Employer record out of date — Aspenholt Farm",
+      "Description": "Reported 2023-09-25. Member's profile still lists Aspenholt Farm as employer; the organization record had a Dissolved event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "76CCF685-6B52-574A-A0A7-A66CBF4AF2EA",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "B6C01E28-5747-5F86-A554-9504DE0DDE7A",
+      "ResolvedAt": "2023-09-25T11:14:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E5E6C020-A7C5-5D92-A591-B6E46B7C3FC9"
+    },
+    "fields": {
+      "IssueNumber": "MC-0063",
+      "Title": "Question about membership benefits",
+      "Description": "Reported 2023-10-13 via the member portal. Member asks where to find recordings of past webinars they registered for.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "3345474A-B468-5EF8-9007-D0412C7AF5B4",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "713F9D46-0C6A-5239-B259-A2A30AD711AB",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "3345474A-B468-5EF8-9007-D0412C7AF5B4",
+      "ResolvedAt": "2023-10-19T10:44:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C35EB1D7-773A-536B-A5B3-4C0588600023"
+    },
+    "fields": {
+      "IssueNumber": "MC-0064",
+      "Title": "Employer listing needs correction after changes at Orchardmere Fine Cheese",
+      "Description": "Reported 2023-11-12. Member's profile still lists Orchardmere Fine Cheese as employer; the organization record had a ProgramCut event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "697542DE-3AAB-545B-BCA2-191D4FB7DCBC",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "C1B59C75-5E28-5EE4-A365-6F84F9A3CC5D",
+      "ResolvedAt": "2023-11-15T13:09:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1659C79E-86D1-537B-8656-6FDDEC787644"
+    },
+    "fields": {
+      "IssueNumber": "MC-0065",
+      "Title": "Please update my employer — Orchardmere Fine Cheese no longer current",
+      "Description": "Reported 2023-11-19. Member's profile still lists Orchardmere Fine Cheese as employer; the organization record had a ProgramCut event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "5F8EBA79-8C1D-50EB-93E6-A51111F9A365",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "346BE678-4FB4-52EC-8F91-05D7976784E4",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "C1B59C75-5E28-5EE4-A365-6F84F9A3CC5D",
+      "ResolvedAt": "2023-11-23T11:31:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "34144C98-811A-5995-97EB-D887348421A3"
+    },
+    "fields": {
+      "IssueNumber": "MC-0066",
+      "Title": "Employer record out of date — Nettlewick Farm",
+      "Description": "Reported 2023-11-21. Member's profile still lists Nettlewick Farm as employer; the organization record had a Acquired event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "2A63553B-4A88-5374-9C87-2309ECAB08BD",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "E3313AB6-540A-54E8-963E-769A7DB2F8D4",
+      "ResolvedAt": "2023-11-21T08:14:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "330AFB39-5343-5EFE-8DE3-3C173AAFE00B"
+    },
+    "fields": {
+      "IssueNumber": "MC-0067",
+      "Title": "Directory shows the wrong employer (Novacek Farmstead Creamery)",
+      "Description": "Reported 2023-11-25. Member's profile still lists Novacek Farmstead Creamery as employer; the organization record had a ProgramCut event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "61B58E8A-68A5-5B97-BB77-D1884BB1850A",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "058F8F5B-C749-5866-BD3D-66CFAB6971C3",
+      "ResolvedAt": "2023-12-21T09:31:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "543E119B-4CC8-5A10-A169-1506365D2AE6"
+    },
+    "fields": {
+      "IssueNumber": "MC-0068",
+      "Title": "Employer record out of date — Orchardmere Dairy",
+      "Description": "Reported 2023-11-29. Member's profile still lists Orchardmere Dairy as employer; the organization record had a Dissolved event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "BEC9E898-2689-5812-8474-53E7F8690D04",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "CB62E458-A926-5101-A9C7-435E0769985E",
+      "ResolvedAt": "2023-12-03T09:02:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F14C734-29A2-5D36-84F7-63C2331E5B0A"
+    },
+    "fields": {
+      "IssueNumber": "MC-0069",
+      "Title": "Change of employment: profile still lists Quillbrook Creamery Cooperative",
+      "Description": "Reported 2023-12-11. Member's profile still lists Quillbrook Creamery Cooperative as employer; the organization record had a Dissolved event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "3927F0D5-2693-51BD-B367-E416CDDA1C4F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "486D746C-5913-5805-9ADD-528EC4413B92",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "5F5567AC-60BD-5400-8834-4F947290CFB9",
+      "ResolvedAt": "2024-01-04T09:00:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D19D4E6A-59F6-5A47-8210-ABD8975D3F92"
+    },
+    "fields": {
+      "IssueNumber": "MC-0070",
+      "Title": "Employer listing needs correction after changes at Bergstrom & Daughters Fine Cheese",
+      "Description": "Reported 2023-12-13. Member's profile still lists Bergstrom & Daughters Fine Cheese as employer; the organization record had a ProgramCut event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "High",
+      "Priority": "High",
+      "ReporterPersonID": "39AA803B-E87A-587A-88BD-88E1567727CD",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "0F947AB1-5D08-5691-88A8-076CB5D4341D",
+      "ResolvedAt": "2023-12-15T13:05:00Z",
+      "ClosedAt": "2024-01-02T17:05:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1DDD06E3-C54A-55C9-84C0-93653532E477"
+    },
+    "fields": {
+      "IssueNumber": "MC-0071",
+      "Title": "Directory shows the wrong employer (Orchardmere Fine Cheese)",
+      "Description": "Reported 2023-12-14. Member's profile still lists Orchardmere Fine Cheese as employer; the organization record had a ProgramCut event in 2023. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "7E3721F1-00B6-5041-878F-C732984592E3",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "C1B59C75-5E28-5EE4-A365-6F84F9A3CC5D",
+      "ResolvedAt": "2023-12-16T16:39:00Z",
+      "ClosedAt": "2024-01-08T12:38:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C60A59BE-4C7C-566D-90A4-1FFB8AC96D3E"
+    },
+    "fields": {
+      "IssueNumber": "MC-0072",
+      "Title": "Newsletter not arriving",
+      "Description": "Reported 2023-12-15 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "0C7964B4-6A26-5D45-B05A-D8C99EA826B5",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "0C7964B4-6A26-5D45-B05A-D8C99EA826B5",
+      "ResolvedAt": "2024-09-09T10:29:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "11F1EA3D-E1FF-5328-96B9-35526F0819D5"
+    },
+    "fields": {
+      "IssueNumber": "MC-0073",
+      "Title": "Question about membership benefits",
+      "Description": "Reported 2024-01-20 via the member portal. Member asks which benefits apply at their tier and whether webinar recordings are included.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "38462C1A-999E-520E-BE56-FA3FD1B9C162",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "38462C1A-999E-520E-BE56-FA3FD1B9C162",
+      "ResolvedAt": "2024-02-13T16:44:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EFAB5A8C-F7A5-5082-9F9D-9E028CF0D57C"
+    },
+    "fields": {
+      "IssueNumber": "MC-0074",
+      "Title": "Question about membership benefits",
+      "Description": "Reported 2024-02-11 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "C3E25DEA-F660-569F-8A8B-4F678C3C41DE",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "346BE678-4FB4-52EC-8F91-05D7976784E4",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "C3E25DEA-F660-569F-8A8B-4F678C3C41DE",
+      "ResolvedAt": "2024-02-14T13:22:00Z",
+      "ClosedAt": "2024-03-07T08:50:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B3E56861-F4B3-59DB-BA5A-9E24ED8BD0EF"
+    },
+    "fields": {
+      "IssueNumber": "MC-0075",
+      "Title": "Couldn't attend Workshop: Dairy Blue Styles — refund options?",
+      "Description": "Reported 2024-03-06. Member registered for Workshop: Dairy Blue Styles (2024-03-05) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "50C4B479-7320-5314-A525-F03017ED9411",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "4545C47B-98B2-5CCB-B4D1-AF3F49BF88A4",
+      "ResolvedAt": "2024-09-08T10:40:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "14B2DFF7-32ED-5AF2-A26D-A29BD4074043"
+    },
+    "fields": {
+      "IssueNumber": "MC-0076",
+      "Title": "Directory listing update request",
+      "Description": "Reported 2024-04-10 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "689F043D-963A-590E-B712-9404AD2A5426",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "08E9592C-5E02-5913-BECF-ABE855B0EB39",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "689F043D-963A-590E-B712-9404AD2A5426",
+      "ResolvedAt": "2024-05-02T08:23:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7ECA6549-EDC1-5D57-9875-17184C4FC4E0"
+    },
+    "fields": {
+      "IssueNumber": "MC-0077",
+      "Title": "Couldn't attend ICF Annual Conference 2024 — refund options?",
+      "Description": "Reported 2024-07-24. Member registered for ICF Annual Conference 2024 (2024-07-16) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "71D79854-CEBE-54C2-AAB4-77F79BC69892",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "5725292C-ACAC-5498-983D-D28DAC664F98",
+      "ResolvedAt": "2024-09-15T17:50:00Z",
+      "ClosedAt": "2024-10-08T17:34:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B84AF40E-F1E6-5FC5-A7B6-7BF1344ACCF2"
+    },
+    "fields": {
+      "IssueNumber": "MC-0078",
+      "Title": "Refund request — Workshop: Hollow Food Safety",
+      "Description": "Reported 2024-07-25. Member registered for Workshop: Hollow Food Safety (2024-07-17) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "4106750C-D56C-5D58-8CDC-7EEB71D80612",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "62570120-C622-5A4B-BE0C-F5F221A9A097",
+      "ResolvedAt": "2024-07-28T14:29:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0A7F3E1F-5A60-5087-8C51-AF5AFBA273A5"
+    },
+    "fields": {
+      "IssueNumber": "MC-0079",
+      "Title": "Certificate download link broken",
+      "Description": "Reported 2024-08-06 via the member portal. Member reports the certificate download link on their profile returns an error.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "75E2DD35-160D-5E76-ADAF-FCCEE7541A39",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "75E2DD35-160D-5E76-ADAF-FCCEE7541A39",
+      "ResolvedAt": "2024-08-06T16:08:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1225264-A6BC-51A2-AD20-3757EDF082ED"
+    },
+    "fields": {
+      "IssueNumber": "MC-0080",
+      "Title": "How do I access past webinar recordings?",
+      "Description": "Reported 2024-08-08 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "AE949BC2-D2D4-5D49-8FC9-DE816994F770",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "AE949BC2-D2D4-5D49-8FC9-DE816994F770",
+      "ResolvedAt": "2024-08-13T16:30:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3FF51D95-1965-5B56-995A-5096E2F420C7"
+    },
+    "fields": {
+      "IssueNumber": "MC-0081",
+      "Title": "Employer listing needs correction after changes at Heathercombe Dairy",
+      "Description": "Reported 2024-09-02. Member's profile still lists Heathercombe Dairy as employer; the organization record had a Dissolved event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "0294D962-F4DD-50FD-918D-9EC65EE6DF14",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "6B7727F2-C577-5865-B2C1-C34ABFBAEEE5",
+      "ResolvedAt": "2024-09-06T10:02:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "00379A00-4BDD-511C-B26D-B8DBB0C56E79"
+    },
+    "fields": {
+      "IssueNumber": "MC-0082",
+      "Title": "Refund request — Workshop: Curd Food Safety",
+      "Description": "Reported 2024-09-04. Member registered for Workshop: Curd Food Safety (2024-08-28) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "ECD287B0-2D4E-53C0-8440-0DCDC3C71084",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "054A24EF-A743-5E6B-8492-DD2EB63DF043",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "D4CE1851-2CCC-5E80-976B-B01A0C51FA00",
+      "ResolvedAt": "2024-09-06T14:34:00Z",
+      "ClosedAt": "2024-09-13T08:00:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "785EBF14-5C36-5073-BE91-6E10AF1B4945"
+    },
+    "fields": {
+      "IssueNumber": "MC-0083",
+      "Title": "Newsletter not arriving",
+      "Description": "Reported 2024-10-09 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "FFCFF056-0C8E-5F95-9E0C-6AE71AF66348",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "486D746C-5913-5805-9ADD-528EC4413B92",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "FFCFF056-0C8E-5F95-9E0C-6AE71AF66348",
+      "ResolvedAt": "2024-10-09T09:48:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D851CB30-907E-55BE-AC84-28E437A70E3A"
+    },
+    "fields": {
+      "IssueNumber": "MC-0084",
+      "Title": "Change of employment: profile still lists Kilnbrook Cheese & Provisions",
+      "Description": "Reported 2024-11-07. Member's profile still lists Kilnbrook Cheese & Provisions as employer; the organization record had a Acquired event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "F0F0B055-1AAC-5A6C-8077-537B4FB7CA23",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "71BBDF70-8C62-5113-9B59-5E680181CAFA",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "B9F9B673-3257-5559-ABBB-268D1B17E154",
+      "ResolvedAt": "2024-11-18T15:07:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18E6F59F-AE38-5562-B4BA-7E4B0DF3B89B"
+    },
+    "fields": {
+      "IssueNumber": "MC-0085",
+      "Title": "Directory shows the wrong employer (Kilnbrook Cheese & Provisions)",
+      "Description": "Reported 2024-11-08. Member's profile still lists Kilnbrook Cheese & Provisions as employer; the organization record had a Acquired event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "A420938B-651F-5A1B-A187-019CE67775CE",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "B9F9B673-3257-5559-ABBB-268D1B17E154",
+      "ResolvedAt": "2024-11-11T16:46:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B747E72-CB84-5B5C-AE95-65498D1114F1"
+    },
+    "fields": {
+      "IssueNumber": "MC-0086",
+      "Title": "Employer listing needs correction after changes at Aldermere Cheese School",
+      "Description": "Reported 2024-11-20. Member's profile still lists Aldermere Cheese School as employer; the organization record had a Dissolved event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "02CC3CD5-9ADF-5DCB-974D-4FCDBD2969E3",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "054A24EF-A743-5E6B-8492-DD2EB63DF043",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "618848B4-E1C2-5ECD-A8C0-6DFBB272F5D9",
+      "ResolvedAt": "2024-11-21T10:54:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BA097016-7AA5-5689-8FC6-9627017078FA"
+    },
+    "fields": {
+      "IssueNumber": "MC-0087",
+      "Title": "Please update my employer — Aldermere Cheese School no longer current",
+      "Description": "Reported 2024-11-25. Member's profile still lists Aldermere Cheese School as employer; the organization record had a Dissolved event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "6FDDF5AB-8E81-59AA-9B7B-D97715370668",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "054A24EF-A743-5E6B-8492-DD2EB63DF043",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "618848B4-E1C2-5ECD-A8C0-6DFBB272F5D9",
+      "ResolvedAt": "2024-12-09T17:29:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7F7E0F65-32E6-5FF8-B9BF-F5419022A077"
+    },
+    "fields": {
+      "IssueNumber": "MC-0088",
+      "Title": "Directory shows the wrong employer (Kilnbrook Dairy)",
+      "Description": "Reported 2024-12-07. Member's profile still lists Kilnbrook Dairy as employer; the organization record had a Dissolved event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "2316E84B-EEFC-5D5A-B582-5AA12A01714D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A5264D6B-6ED7-516A-9200-3585DE999856",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "16A1E0DD-C1A0-5875-AA69-31BD43843CA8",
+      "ResolvedAt": "2024-12-11T12:06:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "712661F1-05C0-52DC-989E-707E1CCEA4FC"
+    },
+    "fields": {
+      "IssueNumber": "MC-0089",
+      "Title": "Directory shows the wrong employer (Aldermere Cheese School)",
+      "Description": "Reported 2024-12-08. Member's profile still lists Aldermere Cheese School as employer; the organization record had a Dissolved event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "A25301FB-735B-50DE-99CE-3FC7C1FF701F",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "618848B4-E1C2-5ECD-A8C0-6DFBB272F5D9",
+      "ResolvedAt": "2024-12-24T14:18:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E8FD18BC-917E-5DD9-831E-C0DC8FA70729"
+    },
+    "fields": {
+      "IssueNumber": "MC-0090",
+      "Title": "Employer record out of date — Kilnbrook Dairy",
+      "Description": "Reported 2024-12-13. Member's profile still lists Kilnbrook Dairy as employer; the organization record had a Dissolved event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "D192DFE8-AC55-58BC-A1C3-72F376C2E84B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "346BE678-4FB4-52EC-8F91-05D7976784E4",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "16A1E0DD-C1A0-5875-AA69-31BD43843CA8",
+      "ResolvedAt": "2024-12-13T08:07:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "37FC0D41-0806-5F67-A73F-7B0E81BF3C14"
+    },
+    "fields": {
+      "IssueNumber": "MC-0091",
+      "Title": "Employer listing needs correction after changes at Iversen's Cheese Shop",
+      "Description": "Reported 2024-12-30. Member's profile still lists Iversen's Cheese Shop as employer; the organization record had a Acquired event in 2024. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "B5457E20-7938-5A1C-B28D-3081FF5FAB84",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "7A746DDF-056A-5061-999E-BDC649B2D2B1",
+      "ResolvedAt": "2025-01-01T08:44:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A4DDFE12-985A-583E-ADED-BB76FBCFAD41"
+    },
+    "fields": {
+      "IssueNumber": "MC-0092",
+      "Title": "Trouble logging into the member portal",
+      "Description": "Reported 2024-12-31 via the member portal. Member reports the certificate download link on their profile returns an error.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "69FEBAB4-AEB5-5699-9C84-77D8059C4A3F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "976770B1-F266-55ED-94DB-0D2C9A3BBD7C",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "69FEBAB4-AEB5-5699-9C84-77D8059C4A3F",
+      "ResolvedAt": "2025-04-04T11:41:00Z",
+      "ClosedAt": "2025-04-13T08:21:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1238B7F-8DE0-5647-A2D2-5A6D2A2DBF71"
+    },
+    "fields": {
+      "IssueNumber": "MC-0093",
+      "Title": "Question about membership benefits",
+      "Description": "Reported 2025-01-25 via the member portal. Member asks which benefits apply at their tier and whether webinar recordings are included.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "59C88B6F-E275-5459-B125-700CF8C819B3",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3CEC8FC4-71D3-5BCE-A9C6-E8C21F13C689",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "59C88B6F-E275-5459-B125-700CF8C819B3",
+      "ResolvedAt": "2025-02-20T17:05:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "55149543-45A0-51F7-9207-3DCF3639F001"
+    },
+    "fields": {
+      "IssueNumber": "MC-0094",
+      "Title": "Trouble logging into the member portal",
+      "Description": "Reported 2025-02-18 via the member portal. Member asks where to find recordings of past webinars they registered for.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "729A49E2-B90F-595A-A36E-354B390760D5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "729A49E2-B90F-595A-A36E-354B390760D5",
+      "ResolvedAt": "2025-05-15T15:49:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AF22F567-6055-5FB8-98DE-A925C6EF6F21"
+    },
+    "fields": {
+      "IssueNumber": "MC-0095",
+      "Title": "No-show refund policy question (Workshop: Alpine Farm Shop Retail)",
+      "Description": "Reported 2025-04-17. Member registered for Workshop: Alpine Farm Shop Retail (2025-04-16) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "DE0B43CB-7025-5F5B-96BD-35100CDAFBB4",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "47FEDCE8-BB80-5AEC-927D-28156090E342",
+      "ResolvedAt": "2025-04-20T08:56:00Z",
+      "ClosedAt": "2025-05-14T16:21:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EC7B6713-9D1B-580E-85B5-9D9AD7103AAC"
+    },
+    "fields": {
+      "IssueNumber": "MC-0096",
+      "Title": "Question about membership benefits",
+      "Description": "Reported 2025-04-30 via the member portal. Member reports the certificate download link on their profile returns an error.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "D592441C-750A-542F-90DC-85EFD0D8B29C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "E535DD86-20AD-5841-A5D8-DCA26A3C1038",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "D592441C-750A-542F-90DC-85EFD0D8B29C",
+      "ResolvedAt": "2025-05-02T12:37:00Z",
+      "ClosedAt": "2025-05-04T16:50:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8A3F51FD-88A4-5134-A96C-09A1F69E695C"
+    },
+    "fields": {
+      "IssueNumber": "MC-0097",
+      "Title": "Missed Workshop: Prairie Costing; is a credit possible?",
+      "Description": "Reported 2025-05-01. Member registered for Workshop: Prairie Costing (2025-04-29) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Critical",
+      "Priority": "High",
+      "ReporterPersonID": "F6AA6408-C465-578E-9B77-A92E8722A59B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "DCF7D464-02AC-58A2-BC44-DFDD409A932C",
+      "ResolvedAt": "2025-05-02T12:09:00Z",
+      "ClosedAt": "2025-05-26T08:35:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42C98BFD-984A-5E81-88A2-AAF82C87FFAB"
+    },
+    "fields": {
+      "IssueNumber": "MC-0098",
+      "Title": "No-show refund policy question (Workshop: Prairie Costing)",
+      "Description": "Reported 2025-05-06. Member registered for Workshop: Prairie Costing (2025-04-29) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "22B7E5ED-CEB6-5DDB-AA82-59B1E05B11CC",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "E535DD86-20AD-5841-A5D8-DCA26A3C1038",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "CCE8C739-0865-5B6C-A275-8CE114EA4B9F",
+      "ResolvedAt": "2025-05-06T14:36:00Z",
+      "ClosedAt": "2025-06-01T08:48:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6266B811-4352-577B-8109-1FE1CE70D56A"
+    },
+    "fields": {
+      "IssueNumber": "MC-0099",
+      "Title": "Newsletter not arriving",
+      "Description": "Reported 2025-05-16 via the member portal. Member cannot sign in to the portal; password reset email reportedly never arrives.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "46AF0D32-F462-55B0-8B5A-B01D1350C629",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "46AF0D32-F462-55B0-8B5A-B01D1350C629",
+      "ResolvedAt": "2025-06-06T12:18:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4682563E-DD85-520F-8B5D-E41060A2FC16"
+    },
+    "fields": {
+      "IssueNumber": "MC-0100",
+      "Title": "No-show refund policy question (Workshop: Cave Farm Shop Retail)",
+      "Description": "Reported 2025-09-21. Member registered for Workshop: Cave Farm Shop Retail (2025-09-11) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "0C5F6A58-FF88-5B40-802B-E54976EBFBF5",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "4026DAFE-238C-5AB1-903C-34582F88B88E",
+      "ResolvedAt": "2025-11-12T10:17:00Z",
+      "ClosedAt": "2025-12-03T12:49:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D2127E92-C7EE-5370-AD08-6267293DDB3D"
+    },
+    "fields": {
+      "IssueNumber": "MC-0101",
+      "Title": "Change of employment: profile still lists Nettlewick Fine Cheese",
+      "Description": "Reported 2025-09-24. Member's profile still lists Nettlewick Fine Cheese as employer; the organization record had a ProgramCut event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "DBBD089C-F6EA-5AF6-AEFE-5DD8A4FEB7F1",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "63A3D467-CFA0-59DA-ADA2-A4769504D358",
+      "ResolvedAt": "2025-10-02T11:29:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "54611CB2-A769-52E0-B76D-2CCCF01598D1"
+    },
+    "fields": {
+      "IssueNumber": "MC-0102",
+      "Title": "Employer record out of date — Loamfield Fine Cheese",
+      "Description": "Reported 2025-10-08. Member's profile still lists Loamfield Fine Cheese as employer; the organization record had a ProgramCut event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "3DC650C8-27D1-5CAA-B760-F8938048B235",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "11DDF75D-0D60-519A-8722-E963C2BA072B",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "A24196C3-A6C2-5D61-B760-02B4F4F55C07",
+      "ResolvedAt": "2025-11-22T15:15:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD4C20C0-CBF6-509F-852E-75BFEF43A26F"
+    },
+    "fields": {
+      "IssueNumber": "MC-0103",
+      "Title": "Please update my employer — Rimefield Creamery no longer current",
+      "Description": "Reported 2025-10-20. Member's profile still lists Rimefield Creamery as employer; the organization record had a Dissolved event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "3ADDF481-AEBA-58F6-B1F3-77A4383EF8C2",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "71BBDF70-8C62-5113-9B59-5E680181CAFA",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "F0CBDE1D-8E2B-5DC5-8A51-E0B17DFF4729",
+      "ResolvedAt": "2025-11-07T08:55:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EDE3917E-0D70-5D1B-B840-CB5BCCE5BEFB"
+    },
+    "fields": {
+      "IssueNumber": "MC-0104",
+      "Title": "How do I access past webinar recordings?",
+      "Description": "Reported 2025-10-21 via the member portal. Member requests an update to how their name appears in the public directory.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "B2A96F41-7951-521B-9BB3-0DC721E2260B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "B2A96F41-7951-521B-9BB3-0DC721E2260B",
+      "ResolvedAt": "2025-10-21T12:47:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "83B8BF28-70B4-518A-AF71-6199E93D57A9"
+    },
+    "fields": {
+      "IssueNumber": "MC-0105",
+      "Title": "Employer record out of date — Thistlemere Dairy Systems",
+      "Description": "Reported 2025-11-04. Member's profile still lists Thistlemere Dairy Systems as employer; the organization record had a Dissolved event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "High",
+      "Priority": "High",
+      "ReporterPersonID": "BDDE2E77-F127-57A9-AFDB-BCF60DE24169",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "CD9B268A-E7EC-5F54-8DBF-CFBF0E67310D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "CCE39B5C-94D6-5E5C-BA09-2F3A2E70776E",
+      "ResolvedAt": "2025-11-04T17:12:00Z",
+      "ClosedAt": "2025-11-13T17:41:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EE4A4A88-A43C-5F4F-BECD-67B333C18BE7"
+    },
+    "fields": {
+      "IssueNumber": "MC-0106",
+      "Title": "Please update my employer — Reedmere Creamery no longer current",
+      "Description": "Reported 2025-11-28. Member's profile still lists Reedmere Creamery as employer; the organization record had a ProgramCut event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "High",
+      "Priority": "High",
+      "ReporterPersonID": "0C34716B-7CB9-5CAD-A331-F62CD9DDE8FB",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "07C85CC2-6711-5096-A6F6-F20C638B3981",
+      "ResolvedAt": "2025-11-30T14:11:00Z",
+      "ClosedAt": "2025-12-21T15:31:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9941BDDC-8F15-5DF7-966B-83C91FF88229"
+    },
+    "fields": {
+      "IssueNumber": "MC-0107",
+      "Title": "Directory shows the wrong employer (Mistlebrook Dairy)",
+      "Description": "Reported 2025-12-06. Member's profile still lists Mistlebrook Dairy as employer; the organization record had a Dissolved event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "9DE343E8-A72A-558A-9FC3-F7110F73B75D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "47C52061-5A36-5789-B23D-154FDA553793",
+      "ResolvedAt": "2026-01-16T12:24:00Z",
+      "ClosedAt": "2026-01-24T10:07:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A8BDB93D-619A-5C56-9D28-336BFFD1AA87"
+    },
+    "fields": {
+      "IssueNumber": "MC-0108",
+      "Title": "Question about membership benefits",
+      "Description": "Reported 2025-12-19 via the member portal. Member cannot sign in to the portal; password reset email reportedly never arrives.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "4F0EC5EA-83F8-5F4C-9A47-EA8ADAE5BC9C",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "11DDF75D-0D60-519A-8722-E963C2BA072B",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "4F0EC5EA-83F8-5F4C-9A47-EA8ADAE5BC9C",
+      "ResolvedAt": "2025-12-19T16:29:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3EDA3A06-7EB2-5EBC-85B4-C9671530FE95"
+    },
+    "fields": {
+      "IssueNumber": "MC-0109",
+      "Title": "Trouble logging into the member portal",
+      "Description": "Reported 2025-12-24 via the member portal. Member reports the monthly newsletter stopped arriving after an email change.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "F222478F-AF80-5770-8B81-80C0E9F9B42D",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "F222478F-AF80-5770-8B81-80C0E9F9B42D",
+      "ResolvedAt": "2025-12-27T13:42:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FE20917A-7A4C-592E-B33A-9F6FFC040466"
+    },
+    "fields": {
+      "IssueNumber": "MC-0110",
+      "Title": "Employer record out of date — Nettlewick Fine Cheese",
+      "Description": "Reported 2025-12-25. Member's profile still lists Nettlewick Fine Cheese as employer; the organization record had a ProgramCut event in 2025. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "BE5B107D-BFEE-50BB-B39A-19652F7AEB91",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "71BBDF70-8C62-5113-9B59-5E680181CAFA",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "63A3D467-CFA0-59DA-ADA2-A4769504D358",
+      "ResolvedAt": "2025-12-27T08:19:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D2F5A2AE-12AD-53E6-868B-5C4109CBA21F"
+    },
+    "fields": {
+      "IssueNumber": "MC-0111",
+      "Title": "Missed Workshop: Cedar Cut & Wrap; is a credit possible?",
+      "Description": "Reported 2026-01-06. Member registered for Workshop: Cedar Cut & Wrap (2026-01-05) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Low",
+      "Priority": "Medium",
+      "ReporterPersonID": "B9D53854-D395-5062-A403-58E88DE28744",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "2CFE400B-9305-5091-9EA2-9A0E969A5A13",
+      "ResolvedAt": "2026-01-09T13:52:00Z",
+      "ClosedAt": "2026-02-04T15:50:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5CA20334-0961-5EAC-9AB0-D968BBDCDE55"
+    },
+    "fields": {
+      "IssueNumber": "MC-0112",
+      "Title": "Refund request — Workshop: Cedar Cut & Wrap",
+      "Description": "Reported 2026-01-12. Member registered for Workshop: Cedar Cut & Wrap (2026-01-05) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "High",
+      "Priority": "High",
+      "ReporterPersonID": "11E6859F-147D-5ED2-9D88-4B705B2F3DDB",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "11DDF75D-0D60-519A-8722-E963C2BA072B",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "386B34D8-C1F9-520D-8CAF-11A18CE200D8",
+      "ResolvedAt": "2026-01-13T16:50:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "972481FB-9623-5E82-9A69-DE5D1DB66334"
+    },
+    "fields": {
+      "IssueNumber": "MC-0113",
+      "Title": "Couldn't attend Workshop: Cedar Cut & Wrap — refund options?",
+      "Description": "Reported 2026-01-14. Member registered for Workshop: Cedar Cut & Wrap (2026-01-05) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Closed",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "8F2F7CC4-D317-56AB-9CE2-470910E24336",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "E5324B9D-B56E-5E20-B64F-2340E85624F6",
+      "ResolvedAt": "2026-01-14T13:16:00Z",
+      "ClosedAt": "2026-01-28T11:48:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F6DBEF39-890F-527F-B519-509C9E0821E3"
+    },
+    "fields": {
+      "IssueNumber": "MC-0114",
+      "Title": "Couldn't attend Workshop: Cedar Cut & Wrap — refund options?",
+      "Description": "Reported 2026-01-14. Member registered for Workshop: Cedar Cut & Wrap (2026-01-05) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "9A63D5B2-BDB1-5C70-BE7F-786922F5D47D",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "1913CBAC-F1FF-5A03-8D7F-A3676CBC3D58",
+      "ResolvedAt": "2026-01-18T09:31:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D1906D4A-09D6-5B06-BE81-DA22CB1A5E2E"
+    },
+    "fields": {
+      "IssueNumber": "MC-0115",
+      "Title": "Trouble logging into the member portal",
+      "Description": "Reported 2026-03-24 via the member portal. Member asks where to find recordings of past webinars they registered for.",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=Resolved",
+      "Severity": "Low",
+      "Priority": "Low",
+      "ReporterPersonID": "9DE9D749-4BBD-5725-A91E-D7816440A88F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C21FC6D5-5DBD-572F-B65D-EF8F972DB40D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "9DE9D749-4BBD-5725-A91E-D7816440A88F",
+      "ResolvedAt": "2026-04-07T12:37:00Z",
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "14FDB3E1-98BD-56B1-B5E4-DB4185F7FF2A"
+    },
+    "fields": {
+      "IssueNumber": "MC-0116",
+      "Title": "How do I submit written testimony through the federation?",
+      "Description": "Reported 2026-06-16 by the member via the member portal. How do I submit written testimony through the federation?",
+      "IssueTypeID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "8A87AB15-2766-52DB-8B17-10F08727BE37",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "C94BDCF1-D9BC-5A0B-A944-278E6D4D6C5B",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "8A87AB15-2766-52DB-8B17-10F08727BE37",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5ABD6B5F-07BF-5531-AEEE-31D2F413EE3E"
+    },
+    "fields": {
+      "IssueNumber": "MC-0117",
+      "Title": "Invoice went to old Ostergaard AP contact after acquisition",
+      "Description": "Reported 2026-07-01 by the member via the member portal. Invoice went to old Ostergaard AP contact after acquisition",
+      "IssueTypeID": "DE642792-4FE3-531D-A387-9ABB76A44C7F",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=New",
+      "Severity": "Medium",
+      "Priority": "High",
+      "ReporterPersonID": "8090D46F-6D4D-54FE-B90B-8541EEF33569",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "8090D46F-6D4D-54FE-B90B-8541EEF33569",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1B8EA8C3-09F9-5826-BD7B-B99411D2753E"
+    },
+    "fields": {
+      "IssueNumber": "MC-0118",
+      "Title": "Duplicate member records — Kate O'Leary appears twice",
+      "Description": "Reported 2026-07-10. Member reports two records under variants of her name (Kate / Kathy O'Leary), causing duplicate mailings and a split event history. Requesting the records be merged and the surviving record verified.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "High",
+      "Priority": "Medium",
+      "ReporterPersonID": "1D0FED47-F850-561A-9CFB-649953199664",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "D8FE5D60-508F-52FA-8FA5-53CA1E3E101B",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DEB28252-032D-5CF9-9FAF-2F38E94965E4"
+    },
+    "fields": {
+      "IssueNumber": "MC-0119",
+      "Title": "Food Safety Committee roster shows outdated affiliation",
+      "Description": "Reported 2026-07-13 by the member via the member portal. Food Safety Committee roster shows outdated affiliation",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "63D95CC9-CD52-584B-9229-CEF5293F8694"
+    },
+    "fields": {
+      "IssueNumber": "MC-0120",
+      "Title": "Session recordings missing from attendee portal",
+      "Description": "Reported 2026-07-19 by the member via the member portal. Session recordings missing from attendee portal",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=New",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "SourceRecordID": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B6128C4A-8C85-58A1-9A49-807AD69AA0AC"
+    },
+    "fields": {
+      "IssueNumber": "MC-0121",
+      "Title": "Refund request — ICF Annual Conference 2026",
+      "Description": "Reported 2026-07-22. Member registered for ICF Annual Conference 2026 (2026-07-21) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=New",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "6DF39015-E571-5361-93EE-AD232070006B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "42085060-1298-56EC-8EED-5349E1E209E9",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C28231A-46D5-5AC0-BC1F-2122BFB8549A"
+    },
+    "fields": {
+      "IssueNumber": "MC-0122",
+      "Title": "Dues invoice ORD-D-ICF-100514-P1 still showing unpaid",
+      "Description": "Reported 2026-07-23 via the member portal. Member asks about order ORD-D-ICF-100514-P1, which was due 2026-07-14 and is showing past due. Wants to confirm the balance and whether a payment already sent has been applied.",
+      "IssueTypeID": "DE642792-4FE3-531D-A387-9ABB76A44C7F",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "High",
+      "Priority": "Critical",
+      "ReporterPersonID": "F3F4C874-C7F8-57F9-BD50-7662C8A52040",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "A4DE38AD-0012-5BCE-9D57-FFB006465087",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "SourceRecordID": "00FD933D-5762-5CA8-BF43-1CD6E2E70E1D",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C392BE5-336E-5C79-ADE1-253A13A906B0"
+    },
+    "fields": {
+      "IssueNumber": "MC-0123",
+      "Title": "Refund request — Workshop: Stone Food Safety",
+      "Description": "Reported 2026-07-23. Member registered for Workshop: Stone Food Safety (2026-07-22) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "6F27EF0D-83CB-5400-8E1F-91005ED2223B",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "4DED3A06-4B2C-530A-B49E-AFA270658335",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ECCF9617-5610-53FC-A2BE-5E1817A9CEFF"
+    },
+    "fields": {
+      "IssueNumber": "MC-0124",
+      "Title": "Dues invoice ORD-D-ICF-000115-P1 still showing unpaid",
+      "Description": "Reported 2026-07-25 via the member portal. Member asks about order ORD-D-ICF-000115-P1, which was due 2026-07-17 and is showing past due. Wants to confirm the balance and whether a payment already sent has been applied.",
+      "IssueTypeID": "DE642792-4FE3-531D-A387-9ABB76A44C7F",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "E5275DC0-22AE-5D19-8624-B8835F048FE6",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "71BBDF70-8C62-5113-9B59-5E680181CAFA",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "SourceRecordID": "14AF1F6F-9FAF-5721-A91B-8904440EC984",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3F38422C-5C94-5394-96A4-0255FC5A9E14"
+    },
+    "fields": {
+      "IssueNumber": "MC-0125",
+      "Title": "Refund request — ICF Annual Conference 2026",
+      "Description": "Reported 2026-07-27. Member registered for ICF Annual Conference 2026 (2026-07-21) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "A24C2B3D-3FBB-5054-8A4E-A33F34BADD63",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "5EFFFB1E-E975-5E69-B2C8-8B64FD4FA319",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3683D374-5F52-555D-AF31-525009BEBBF4"
+    },
+    "fields": {
+      "IssueNumber": "MC-0126",
+      "Title": "Question about a past-due balance (ORD-D-ICF-102143-P1)",
+      "Description": "Reported 2026-07-28 via the member portal. Member asks about order ORD-D-ICF-102143-P1, which was due 2026-07-18 and is showing past due. Wants to confirm the balance and whether a payment already sent has been applied.",
+      "IssueTypeID": "DE642792-4FE3-531D-A387-9ABB76A44C7F",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=New",
+      "Severity": "Medium",
+      "Priority": "High",
+      "ReporterPersonID": "5F31F00B-8263-55CD-89DC-77786DF3AAF2",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "SourceRecordID": "FE43BEF5-55DD-54E9-8C37-AC57A89BD1AC",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CE3AB990-0B86-5BCE-8813-9080470069AA"
+    },
+    "fields": {
+      "IssueNumber": "MC-0127",
+      "Title": "Couldn't attend Workshop: Stone Food Safety — refund options?",
+      "Description": "Reported 2026-07-29. Member registered for Workshop: Stone Food Safety (2026-07-22) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=New",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "26C0E67E-F39D-583D-A06C-CB098AA8A01F",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "07B3D5C4-D21C-51D2-9858-7A89330B3867",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "64BD0E27-9DC6-57E2-B6CB-EB4C3F3DA080",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "45EFCCFB-59B1-5FAD-B0A9-932B22056051"
+    },
+    "fields": {
+      "IssueNumber": "MC-0128",
+      "Title": "Missed Workshop: Stone Food Safety; is a credit possible?",
+      "Description": "Reported 2026-07-30. Member registered for Workshop: Stone Food Safety (2026-07-22) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=New",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "DBA3D108-8093-51A2-BFA4-657E78C3AD6E",
+      "AssigneeEntityID": null,
+      "AssigneeRecordID": null,
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "20AEC1F7-0F4C-5190-9E98-9A78D9861132",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A919A993-EFBC-5687-93C2-A41760218C6E"
+    },
+    "fields": {
+      "IssueNumber": "MC-0129",
+      "Title": "Refund request — Workshop: Stone Food Safety",
+      "Description": "Reported 2026-07-31. Member registered for Workshop: Stone Food Safety (2026-07-22) but did not attend, and asks whether a refund or credit toward a future event is available under the no-show policy.",
+      "IssueTypeID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "C4C2EDA4-480A-535D-99CF-DB7C01F2D44A",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "SourceRecordID": "BA27DB18-3152-5E10-8112-CBF9B5327025",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D1DB964F-A843-51C9-ADDA-AF3E8DD814D4"
+    },
+    "fields": {
+      "IssueNumber": "MC-0130",
+      "Title": "Payment not reflected on order ORD-D-ICF-100421-P1",
+      "Description": "Reported 2026-08-13 via the member portal. Member asks about order ORD-D-ICF-100421-P1, which was due 2026-07-27 and is showing past due. Wants to confirm the balance and whether a payment already sent has been applied.",
+      "IssueTypeID": "DE642792-4FE3-531D-A387-9ABB76A44C7F",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "High",
+      "ReporterPersonID": "F990ACA2-5CD1-518F-BE14-2CBC452DAD18",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "3CEC8FC4-71D3-5BCE-A9C6-E8C21F13C689",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "SourceRecordID": "E529CE61-4EDB-5611-B942-E11ABE286B25",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "17DA8DC2-ED6C-5E48-A9AD-2D74A5108AEF"
+    },
+    "fields": {
+      "IssueNumber": "MC-0131",
+      "Title": "Employer record out of date — Ostergaard Farmstead Creamery",
+      "Description": "Reported 2026-09-28. Member's profile still lists Ostergaard Farmstead Creamery as employer; the organization record had a ProgramCut event in 2026. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "E8ABB3D2-116F-549C-A214-9BF70988FFBF",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "18514560-40CA-5819-A3D6-B162641141CF",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "F0216BE5-58B9-58CF-9906-8B29B4284A40",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "DD2C1F05-A7BE-58B0-907F-61A1EAAE4926"
+    },
+    "fields": {
+      "IssueNumber": "MC-0132",
+      "Title": "Directory shows the wrong employer (Nettlewick Cheese Co.)",
+      "Description": "Reported 2026-11-07. Member's profile still lists Nettlewick Cheese Co. as employer; the organization record had a Dissolved event in 2026. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Low",
+      "ReporterPersonID": "8E50537B-176D-5709-AADA-F3D0C1DEEB70",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "21800A48-0979-5A38-A47F-66DB03226894",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CF3E5C60-C6B0-5411-A2A0-78A547CED2C2"
+    },
+    "fields": {
+      "IssueNumber": "MC-0133",
+      "Title": "Change of employment: profile still lists Juniperfen Fine Cheese",
+      "Description": "Reported 2026-11-18. Member's profile still lists Juniperfen Fine Cheese as employer; the organization record had a Dissolved event in 2026. Requesting the employment record be corrected.",
+      "IssueTypeID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A",
+      "StatusID": "@lookup:MJ_BizApps_Issues: Issue Status.Name=In Progress",
+      "Severity": "Medium",
+      "Priority": "Medium",
+      "ReporterPersonID": "33DA3560-864E-5E49-BCAF-6B6ED71938DA",
+      "AssigneeEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "AssigneeRecordID": "11DDF75D-0D60-519A-8722-E963C2BA072B",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "SourceRecordID": "B5208086-F035-5B39-8DCE-0691FADA2636",
+      "ResolvedAt": null,
+      "ClosedAt": null
+    }
+  }
+]

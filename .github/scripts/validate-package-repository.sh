@@ -1,17 +1,23 @@
 #!/bin/bash
-# Validates repository.url in all @mj-sample-app packages
+# Validates repository.url in all @mj-more-cheese-demo packages
 # Required for npm provenance verification (OIDC trusted publishing)
 
-EXPECTED_URL="https://github.com/MemberJunction/bizapps-common"
+# Derive the expected URL from the ROOT package.json so this script survives
+# the template rename — keep repository.url correct there and everywhere else.
+EXPECTED_URL=$(jq -r '.repository.url // ""' package.json)
+if [ -z "$EXPECTED_URL" ]; then
+  echo "::error::Root package.json has no repository.url — set it first"
+  exit 1
+fi
 ERRORS=0
 
-echo "Checking repository.url in all @mj-sample-app packages..."
+echo "Checking repository.url in all @mj-more-cheese-demo packages..."
 
 for pkg_json in $(find packages -name "package.json" -maxdepth 2 -not -path "*/node_modules/*" -not -path "*/dist/*"); do
   name=$(jq -r '.name // ""' "$pkg_json")
 
-  # Only check @mj-sample-app scoped packages
-  if [[ "$name" != @mj-sample-app/* ]]; then
+  # Only check @mj-more-cheese-demo scoped packages
+  if [[ "$name" != @mj-more-cheese-demo/* ]]; then
     continue
   fi
 
@@ -30,7 +36,7 @@ if [ $ERRORS -gt 0 ]; then
   echo ""
   echo "::error::Found $ERRORS package(s) with missing or invalid repository.url"
   echo ""
-  echo "All @mj-sample-app packages must have:"
+  echo "All @mj-more-cheese-demo packages must have:"
   echo '  "repository": {'
   echo '    "type": "git",'
   echo "    \"url\": \"$EXPECTED_URL\""
@@ -38,4 +44,4 @@ if [ $ERRORS -gt 0 ]; then
   exit 1
 fi
 
-echo "All @mj-sample-app packages have valid repository.url"
+echo "All @mj-more-cheese-demo packages have valid repository.url"
