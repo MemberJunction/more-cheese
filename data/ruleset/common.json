@@ -6,7 +6,19 @@
     "baseRenewalTarget": 0.82,
     "annualConferenceTarget": 0.35,
     "ccpEnrollmentTarget": 0.12,
-    "advocacyParticipationTarget": 0.20
+    "advocacyParticipationTarget": 0.20,
+    "volume_Organization": 50,
+    "volume_Person": 300,
+    "volume_MembershipPeriod": 300,
+    "volume_EventRegistration": 150,
+    "volume_CourseEnrollment": 150,
+    "volume_AdvocacyAction": 150,
+    "intake_Organization": 5,
+    "intake_Person": 20,
+    "intake_MembershipPeriod": 20,
+    "intake_EventRegistration": 10,
+    "intake_CourseEnrollment": 10,
+    "intake_AdvocacyAction": 10
   },
   "effects": {
     "factor-membership-renewal": {
@@ -23,6 +35,9 @@
         "from": "self",
         "where": {
           "Status": "Active"
+        },
+        "otherwise": {
+          "Status": "Lapsed"
         }
       },
       "arrows": {
@@ -71,7 +86,7 @@
       "id": "factor-ccp-enrollment",
       "effect": "CourseEnrollment",
       "target": 0.12,
-      "tolerance": 0.03,
+      "tolerance": 0.04,
       "evidence": {
         "source": "ICF Education Commission Annual Report",
         "confidence": "medium",
@@ -81,6 +96,9 @@
         "from": "self",
         "where": {
           "Status": "Completed"
+        },
+        "otherwise": {
+          "Status": "Enrolled"
         }
       },
       "arrows": {
@@ -105,6 +123,9 @@
         "from": "self",
         "where": {
           "Kind": "LegislativeComment"
+        },
+        "otherwise": {
+          "Kind": "PetitionSignature"
         }
       },
       "arrows": {
