@@ -204,19 +204,41 @@ if (duplicatePks > 0) {
 }
 console.log(`✓ Zero cross-directory Primary Key collisions across ${pkOwnerMap.size.toLocaleString()} unique PKs.`);
 
-// 6. Order Financial Integrity audit (TotalGross == line sum, Balance == TotalGross - AmountPaid, 0 overpaid)
-console.log('\n--- Order Financial Integrity Audit ---');
+// 6. Order & Line Financial Integrity audit (TotalGross == line sum, Balance == TotalGross - AmountPaid, 0 overpaid, LineTotalNet/LineTotalGross match formula)
+console.log('\n--- Order & Line Financial Integrity Audit ---');
 const orderLines = records.filter((r) => r.dir === 'order-lines');
+let lineTotalNetMismatches = 0;
+let lineTotalGrossMismatches = 0;
+
+for (const ol of orderLines) {
+  const q = Number(ol.fields?.Quantity) || 1;
+  const p = Number(ol.fields?.UnitPrice) || 0;
+  const d = Number(ol.fields?.DiscountAmount) || 0;
+  const c = Number(ol.fields?.ChargeAmount) || 0;
+  const t = Number(ol.fields?.LineTax) || 0;
+  const expNet = Math.round(((q * p) - d) * 100) / 100;
+  const expGross = Math.round((expNet + c + t) * 100) / 100;
+
+  if (ol.fields?.LineTotalNet === undefined || Math.abs(ol.fields.LineTotalNet - expNet) > 0.01) {
+    lineTotalNetMismatches++;
+  }
+  if (ol.fields?.LineTotalGross === undefined || Math.abs(ol.fields.LineTotalGross - expGross) > 0.01) {
+    lineTotalGrossMismatches++;
+  }
+}
+
+if (lineTotalNetMismatches > 0 || lineTotalGrossMismatches > 0) {
+  console.error(
+    `\n❌ ORDER LINE TOTAL AUDIT FAILED: LineTotalNet mismatches: ${lineTotalNetMismatches}, LineTotalGross mismatches: ${lineTotalGrossMismatches}`
+  );
+  process.exit(1);
+}
+
 const lineSums = new Map();
 for (const ol of orderLines) {
   const oid = ol.fields.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
   if (!oid) continue;
-  const lineTotal =
-    (Number(ol.fields.Quantity) || 1) * (Number(ol.fields.UnitPrice) || 0) -
-    (Number(ol.fields.DiscountAmount) || 0) +
-    (Number(ol.fields.ChargeAmount) || 0) +
-    (Number(ol.fields.LineTax) || 0);
-  lineSums.set(oid, (lineSums.get(oid) ?? 0) + lineTotal);
+  lineSums.set(oid, (lineSums.get(oid) ?? 0) + Number(ol.fields.LineTotalGross));
 }
 
 const orders = records.filter((r) => r.dir === 'orders');
@@ -247,17 +269,20 @@ if (grossMismatches > 0 || balanceMismatches > 0 || overpaidOrders > 0) {
   process.exit(1);
 }
 console.log(
+  `✓ All ${orderLines.length.toLocaleString()} order lines carry valid LineTotalNet and LineTotalGross.`
+);
+console.log(
   `✓ All ${orders.length.toLocaleString()} orders pass financial integrity (TotalGross matches lines, Balance = TotalGross - AmountPaid, 0 overpaid).`
 );
 
-// 7. Membership period dues order coverage audit (R4-1)
-console.log('\n--- Membership Period Dues Order Coverage Audit (R4-1) ---');
+// 7. Membership Period Dues Order Pairing & Financial Identity Audit (R7-3, R7-4)
+console.log('\n--- Membership Period Dues Order Pairing & Financial Identity Audit (R7-3, R7-4) ---');
 const periods = records.filter((r) => r.dir === 'membership-periods');
 const products = records.filter((r) => r.dir === 'products');
 const categories = records.filter((r) => r.dir === 'product-categories');
 const membershipCategory = categories.find((c) => c.fields?.Name === 'Memberships');
 if (!membershipCategory) {
-  console.error("\n❌ DUES COVERAGE AUDIT FAILED: 'Memberships' category not found in metadata/product-categories");
+  console.error("\n❌ DUES PAIRING AUDIT FAILED: 'Memberships' category not found in metadata/product-categories");
   process.exit(1);
 }
 const membershipCategoryID = String(membershipCategory.primaryKey?.ID).toUpperCase();
@@ -271,55 +296,158 @@ const memProdIds = new Set(
     .map((p) => String(p.primaryKey?.ID).toUpperCase())
 );
 
-const memOrderHeaderIds = new Set();
+const memOrders = new Map();
+const ordersById = new Map(orders.map((o) => [String(o.primaryKey?.ID).toUpperCase(), o]));
+
 for (const l of orderLines) {
   const pid = l.fields?.ProductID ? String(l.fields.ProductID).toUpperCase() : null;
   if (pid && memProdIds.has(pid)) {
     const oid = l.fields?.OrderHeaderID ? String(l.fields.OrderHeaderID).toUpperCase() : null;
-    if (oid) memOrderHeaderIds.add(oid);
-  }
-}
-
-const memSaleOrders = orders.filter(
-  (o) => o.fields?.OrderType === 'Sale' && memOrderHeaderIds.has(String(o.primaryKey?.ID).toUpperCase())
-);
-const ordersByPerson = new Map();
-for (const o of memSaleOrders) {
-  const pid = o.fields?.BillToPersonID ? String(o.fields.BillToPersonID).toUpperCase() : null;
-  if (pid) {
-    if (!ordersByPerson.has(pid)) ordersByPerson.set(pid, []);
-    ordersByPerson.get(pid).push(o);
-  }
-}
-
-let unbackedDuesPeriods = 0;
-let billedPeriodsCount = 0;
-for (const p of periods) {
-  const dues = p.fields?.DuesAmount ?? 0;
-  if (dues <= 0) continue;
-  billedPeriodsCount++;
-  const personId = p.fields?.PersonID ? String(p.fields.PersonID).toUpperCase() : null;
-  const pStart = p.fields?.StartDate ? new Date(p.fields.StartDate).getTime() : NaN;
-  const pOrders = personId ? ordersByPerson.get(personId) || [] : [];
-  let hasWithin90 = false;
-  for (const o of pOrders) {
-    const oDate = o.fields?.OrderDate ? new Date(o.fields.OrderDate).getTime() : NaN;
-    if (!isNaN(pStart) && !isNaN(oDate)) {
-      const diffDays = Math.abs(oDate - pStart) / (1000 * 60 * 60 * 24);
-      if (diffDays <= 90) {
-        hasWithin90 = true;
-        break;
+    if (oid) {
+      const o = ordersById.get(oid);
+      if (o && o.fields?.OrderType === 'Sale') {
+        memOrders.set(oid, { order: o, line: l });
       }
     }
   }
-  if (!hasWithin90) unbackedDuesPeriods++;
 }
 
-if (unbackedDuesPeriods > 0) {
-  console.error(`\n❌ DUES COVERAGE AUDIT FAILED: ${unbackedDuesPeriods} billed periods missing membership Sale order within 90 days.`);
+const billedPeriods = periods.filter((p) => (Number(p.fields?.DuesAmount) || 0) > 0);
+billedPeriods.sort((a, b) => new Date(a.fields.StartDate).getTime() - new Date(b.fields.StartDate).getTime());
+
+const claimedOrderIds = new Set();
+let unmatchedPeriods = 0;
+let duesIdentityMismatches = 0;
+
+for (const p of billedPeriods) {
+  const personId = p.fields?.PersonID ? String(p.fields.PersonID).toUpperCase() : null;
+  const pStart = p.fields?.StartDate ? new Date(p.fields.StartDate).getTime() : NaN;
+  if (!personId || isNaN(pStart)) {
+    unmatchedPeriods++;
+    continue;
+  }
+
+  const candidates = Array.from(memOrders.values()).filter(
+    (mo) =>
+      String(mo.order.fields?.BillToPersonID).toUpperCase() === personId &&
+      !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+  );
+
+  let best = null;
+  let bestDiff = Infinity;
+  for (const c of candidates) {
+    const oDate = c.order.fields?.OrderDate ? new Date(c.order.fields.OrderDate).getTime() : NaN;
+    if (!isNaN(oDate)) {
+      const diff = Math.abs(oDate - pStart);
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        best = c;
+      }
+    }
+  }
+
+  const diffDays = bestDiff / (1000 * 60 * 60 * 24);
+  if (best && diffDays <= 90) {
+    claimedOrderIds.add(String(best.order.primaryKey?.ID).toUpperCase());
+    const orderLinePrice = Number(best.line.fields?.UnitPrice) || 0;
+    const periodDues = Number(p.fields?.DuesAmount) || 0;
+    if (Math.abs(periodDues - orderLinePrice) > 0.01) {
+      duesIdentityMismatches++;
+    }
+  } else {
+    unmatchedPeriods++;
+  }
+}
+
+if (unmatchedPeriods > 0) {
+  console.error(
+    `\n❌ DUES PAIRING AUDIT FAILED: ${unmatchedPeriods} billed periods could not claim a distinct membership Sale order within 90 days.`
+  );
   process.exit(1);
 }
-console.log(`✓ All ${billedPeriodsCount.toLocaleString()} billed periods backed 1:1 by membership Sale orders within 90 days.`);
 
-console.log(`\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Coverage).`);
+if (duesIdentityMismatches > 0) {
+  console.error(
+    `\n❌ DUES FINANCIAL IDENTITY AUDIT FAILED: ${duesIdentityMismatches} periods have DuesAmount differing from paired invoice UnitPrice.`
+  );
+  process.exit(1);
+}
+
+// Residual unclaimed orders audit
+const unclaimedOrders = Array.from(memOrders.values()).filter(
+  (mo) => !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+);
+
+for (const u of unclaimedOrders) {
+  const f = u.order.fields;
+  const isPendingRenewalDraft =
+    f.OrderNumber.startsWith('ORD-R-') &&
+    f.Status === 'Draft' &&
+    (f.AmountPaid || 0) === 0 &&
+    f.FulfillmentStatus === 'Pending';
+  if (!isPendingRenewalDraft) {
+    console.error(
+      `\n❌ RESIDUAL ORDERS AUDIT FAILED: Unclaimed membership Sale order ${f.OrderNumber} is not a valid pending renewal draft.`
+    );
+    process.exit(1);
+  }
+}
+
+console.log(
+  `✓ All ${billedPeriods.length.toLocaleString()} billed periods paired 1:1 to distinct membership Sale orders within 90 days.`
+);
+console.log(
+  `✓ 100% financial identity tie-out: MembershipPeriod.DuesAmount === OrderLine.UnitPrice on all ${billedPeriods.length.toLocaleString()} periods.`
+);
+console.log(
+  `✓ Exactly ${unclaimedOrders.length} residual membership Sale orders verified as upcoming unpaid renewal drafts (ORD-R-* Draft/Pending).`
+);
+
+// 8. Order & Line Status Shape Audit (R7-5)
+console.log('\n--- Order & Line Status Shape Audit (R7-5) ---');
+let invalidOrderStatusCount = 0;
+for (const o of orders) {
+  const s = o.fields?.Status;
+  const f = o.fields?.FulfillmentStatus;
+  const t = o.fields?.OrderType;
+  if (['Draft', 'Quoted', 'Voided'].includes(s) && f === 'Fulfilled') {
+    invalidOrderStatusCount++;
+  }
+  if (t === 'Cancellation' && f !== 'Returned') {
+    invalidOrderStatusCount++;
+  }
+}
+
+let invalidLineStatusCount = 0;
+for (const ol of orderLines) {
+  const fs = ol.fields?.FulfillmentStatus;
+  if (!['Fulfilled', 'Pending', 'Returned'].includes(fs)) {
+    invalidLineStatusCount++;
+  }
+  const oid = ol.fields?.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
+  const o = oid ? ordersById.get(oid) : null;
+  if (o) {
+    if (['Draft', 'Quoted', 'Voided'].includes(o.fields?.Status) && fs === 'Fulfilled') {
+      invalidLineStatusCount++;
+    }
+    if (o.fields?.OrderType === 'Cancellation' && fs !== 'Returned') {
+      invalidLineStatusCount++;
+    }
+  }
+}
+
+if (invalidOrderStatusCount > 0 || invalidLineStatusCount > 0) {
+  console.error(
+    `\n❌ STATUS SHAPE AUDIT FAILED: ${invalidOrderStatusCount} invalid order statuses, ${invalidLineStatusCount} invalid line fulfillment statuses.`
+  );
+  process.exit(1);
+}
+
+console.log(
+  `✓ All ${orders.length.toLocaleString()} orders and ${orderLines.length.toLocaleString()} order lines pass status & fulfillment shape integrity.`
+);
+
+console.log(
+  `\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Pairing & Identity, Status Shape).`
+);
 process.exit(0);

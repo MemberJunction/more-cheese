@@ -399,7 +399,17 @@ node scripts/check-metadata-closure.mjs
 The committed dataset in `metadata/` is the primary source of truth. All 16 heroes in `data/ruleset/heroes.json` derive their `fixedFields` (`Title`, `FirstName`, `LastName`), business keys (`Email`), and `ladderEntries` directly from `metadata/people/.people.json` and `metadata/committee-memberships/.committee-memberships.json`. Members with a `JoinDate` before 2019 are recorded with their historical association tenure as an opening state, while billing and commerce history begins at the unified 2019-01-01 baseline.
 - **Automated Conformance Gate (R2-H1)**: `scripts/validate-loom-data.mjs` verifies in CI that 100% of heroes in `data/ruleset/heroes.json` match the committed metadata records byte-for-byte.
 
-### 5.2 State Ladder Vocabulary Decision (R2-L1)
+### 5.2 Seeded Historical Orders Booking Bypass & Fulfillment Model (R7-1, R7-5)
+Seeded demo history represents static simulated historical accounting pushed directly via metadata sync into the `@mj-biz-apps/orders` schema.
+1. **Engine Bypass**: Pushing historical orders directly into the database bypasses runtime entity server confirmation workflows (`OrderEntityServer` / `OrderLineEntityServer` booking of GL journal entries and dynamic creation of membership terms). All financial fields (`LineTotalNet`, `LineTotalGross`, `TotalGross`, `AmountPaid`, `Balance`) are pre-materialized deterministically in metadata and verified via automated closure gates (`scripts/check-metadata-closure.mjs`).
+2. **Status & Fulfillment Shape**:
+   - Orders with `Status IN ('Draft', 'Quoted', 'Voided')` carry `FulfillmentStatus = 'Pending'`.
+   - Orders with `OrderType = 'Cancellation'` carry `FulfillmentStatus = 'Returned'`.
+   - Orders with `Status = 'Confirmed'` where all lines are non-physical (memberships, conference registrations, exam fees, donations) carry `FulfillmentStatus = 'NotApplicable'`.
+   - Orders with physical goods carry `FulfillmentStatus = 'Fulfilled'` when paid in full (`AmountPaid >= TotalGross`), or `'Pending'` when unpaid.
+   - The 50 unclaimed membership Sale orders dated July 2026 are explicit upcoming renewal draft invoices (`ORD-R-ICF-...`, `Status = 'Draft'`, `AmountPaid = 0`, `FulfillmentStatus = 'Pending'`) for members whose annual terms expire in August 2026 and have not yet paid/renewed.
+
+### 5.3 State Ladder Vocabulary Decision (R2-L1)
 The state ladder for governance leadership (`governance-leadership-ladder`) binds to `CommitteeMembership.RoleID`. Its states are strictly named after the real roles existing in the `Committees: Roles` catalog:
 1. `Member` (duration 2 cycles)
 2. `Vice Chair` (duration 2 cycles, capacity 35, prerequisite: `Member`)
