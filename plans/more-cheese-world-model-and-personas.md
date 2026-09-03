@@ -133,10 +133,11 @@ The following declarative configurations demonstrate how More Cheese will author
           "kind": "feature",
           "feature": {
             "from": "MembershipPeriod",
-            "field": "EndDate"
+            "where": { "Status": "PendingRenewal" },
+            "aggregation": "exists"
           },
-          "op": "withinCyclesOfAsOf",
-          "value": [0, 1]
+          "op": "eq",
+          "value": true
         }
       ]
     },
@@ -162,10 +163,11 @@ The following declarative configurations demonstrate how More Cheese will author
           "kind": "feature",
           "feature": {
             "from": "MembershipPeriod",
-            "field": "Status"
+            "where": { "Status": "Lapsed" },
+            "aggregation": "exists"
           },
           "op": "eq",
-          "value": "Lapsed"
+          "value": true
         },
         {
           "kind": "outcome",
