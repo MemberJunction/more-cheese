@@ -73,6 +73,16 @@
         "Status": {
           "name": "Status",
           "type": "string"
+        },
+        "LogoURL": {
+          "name": "LogoURL",
+          "type": "string",
+          "nullable": true,
+          "logo": {
+            "format": "base64",
+            "nameField": "Name",
+            "seedField": "Name"
+          }
         }
       },
       "foreignKeys": {},

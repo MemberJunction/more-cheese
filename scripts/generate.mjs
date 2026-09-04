@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 import { execSync } from 'node:child_process';
 import { runAvatarGeneration } from './generate-avatars.mjs';
+import { runLogoGeneration } from './generate-logos.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -69,8 +70,9 @@ if (loomCmd) {
   }
 }
 
-// 2. Run deterministic avatar generation across Person entities
+// 2. Run deterministic avatar and logo generation across Person and Organization entities
 runAvatarGeneration();
+runLogoGeneration();
 
 // 3. Verify / ensure checkpoint.json
 if (!fs.existsSync(checkpointPath)) {
