@@ -10,7 +10,8 @@ placeholders in this file when you rename the app.
 ```
 mj-app.json            - MJ Open App manifest (the source of truth for the app)
 migrations/            - Skyway migrations for the app schema (starts empty)
-metadata/              - mj-sync metadata (dev-time; seeds ship as migrations)
+generated/             - mj-sync synthetic data & world model (Loom-generated)
+config/                - mj-sync application configuration & taxonomies
 packages/
   Entities/            - @mj-more-cheese-demo/entities   (CodeGen entity subclasses)
   CoreEntitiesServer/  - @mj-more-cheese-demo/core-entities-server (server-side entity overrides)

@@ -1,7 +1,7 @@
 # 8 · Metadata & mj-sync
 
 How MJ metadata records (applications, lookup seeds, actions, prompts,
-queries…) are authored as files and pushed. This app's `metadata/` folder follows these rules; the full authoring guide
+queries…) are authored as files and pushed. This app partitions files into `generated/` (Loom simulated world) and `config/` (administrative configurations); the full authoring guide
 with worked examples is [`../template-docs/metadata.md`](../template-docs/metadata.md),
 and the app-repo capture flow (metadata → `V*_Metadata_Sync.sql` migration) is in
 [`../template-docs/codegen-and-metadata-migrations.md`](../template-docs/codegen-and-metadata-migrations.md).
@@ -12,7 +12,7 @@ and the app-repo capture flow (metadata → `V*_Metadata_Sync.sql` migration) is
   options) + `.<records>.json` (array of `{ "fields": {...} }` objects).
 - New records **omit `primaryKey` and `sync`** — mj-sync writes them back on
   first push. Re-pushing is safe (upsert semantics).
-- List folders in the root `metadata/.mj-sync.json` `directoryOrder` so
+- List folders in the root `.mj-sync.json` `directoryOrder` so
   dependencies push in order.
 - **Externalize complex JSON values** with `@file:` references
   (`"FieldSchema": "@file:schemas/api-key.schema.json"`) instead of escaped
@@ -39,8 +39,8 @@ per app. Worked example: [`../template-docs/metadata.md`](../template-docs/metad
 ## Commands
 
 ```sh
-npx mj-sync validate --dir=metadata          # validate before pushing
-npx mj sync push --dir=metadata --format=json  # push (non-interactive)
+npx mj sync push --dir=generated --format=json  # push simulated world data
+npx mj sync push --dir=config --format=json     # push administrative configuration
 ```
 
 Validation understands virtual properties, defaults, and reference integrity;

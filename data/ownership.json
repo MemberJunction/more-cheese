@@ -16,61 +16,6 @@
       "classification": "config",
       "reason": "Hand-authored administrative, taxonomy, or model configuration"
     },
-    "certifications": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "committee-types": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "courses": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "data-quality-labels": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "form-pages": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "form-question-options": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "form-questions": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "form-versions": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "forms": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "issue-types": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
-    "relationship-types": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
     "sonar-factors": {
       "tier": "config",
       "classification": "config",
@@ -111,40 +56,40 @@
       "classification": "config",
       "reason": "Hand-authored administrative, taxonomy, or model configuration"
     },
-    "task-types": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Hand-authored administrative, taxonomy, or model configuration"
-    },
     "address-links": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "addresses": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "advocacy-actions": {
       "tier": "generated",
       "classification": "loom",
       "reason": "Synthetic world model entity generated and simulated by Loom"
     },
+    "certifications": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+    },
     "committee-agenda-items": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "committee-attendance": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "committee-meetings": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "committee-memberships": {
       "tier": "generated",
@@ -153,23 +98,28 @@
     },
     "committee-motions": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "committee-terms": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
+    },
+    "committee-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
     },
     "committee-votes": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "committees": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "companies": {
       "tier": "generated",
@@ -178,13 +128,23 @@
     },
     "competition-entries": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "contact-methods": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
+    },
+    "courses": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+    },
+    "data-quality-labels": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
     },
     "enrollments": {
       "tier": "generated",
@@ -198,48 +158,78 @@
     },
     "events": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "form-answers": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "form-distributions": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
+    },
+    "form-pages": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+    },
+    "form-question-options": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+    },
+    "form-questions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
     },
     "form-responses": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
+    },
+    "form-versions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+    },
+    "forms": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
     },
     "issue-comments": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "issue-sequences": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
+    },
+    "issue-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
     },
     "issues": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "member-certifications": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "member-profiles": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "membership-periods": {
       "tier": "generated",
@@ -248,18 +238,18 @@
     },
     "order-lines": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "orders": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "organization-profiles": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "organizations": {
       "tier": "generated",
@@ -268,13 +258,13 @@
     },
     "payment-lines": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "payments": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "people": {
       "tier": "generated",
@@ -284,7 +274,7 @@
     "portal-sessions": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Legacy portal web telemetry frozen per owner ruling (archive/datagen-reference)"
+      "reason": "Legacy portal web telemetry frozen (proposed, pending owner confirmation)"
     },
     "product-categories": {
       "tier": "generated",
@@ -296,35 +286,45 @@
       "classification": "loom",
       "reason": "Synthetic world model entity generated and simulated by Loom"
     },
+    "relationship-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+    },
     "relationships": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "secure-messages": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "secure-threads": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "task-assignments": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     },
     "task-links": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
+    },
+    "task-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
     },
     "tasks": {
       "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity generated and simulated by Loom"
+      "classification": "frozen",
+      "reason": "datagen-origin, moves under Loom in C27-4"
     }
   }
 }

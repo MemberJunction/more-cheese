@@ -39,12 +39,27 @@ for (const dir of configDirs) {
   if (!entry) {
     console.error(`❌ Unclassified directory in config/: ${dir}`);
     errors++;
-  } else if (entry.classification !== 'config') {
-    console.error(`❌ Directory in config/ classified as ${entry.classification}: ${dir}`);
-    errors++;
-  } else if (!entry.reason || entry.reason.trim().length === 0) {
-    console.error(`❌ Missing classification reason for config/: ${dir}`);
-    errors++;
+  } else {
+    if (entry.tier !== 'config') {
+      console.error(`❌ Directory in config/ has tier mismatch: ${dir} (tier: ${entry.tier})`);
+      errors++;
+    }
+    if (entry.classification !== 'config') {
+      console.error(`❌ Directory in config/ classified as ${entry.classification}: ${dir}`);
+      errors++;
+    }
+    if (!entry.reason || entry.reason.trim().length === 0) {
+      console.error(`❌ Missing classification reason for config/: ${dir}`);
+      errors++;
+    }
+  }
+}
+
+// Build declared domain output directories set
+const domainOutputDirs = new Set();
+if (domain && domain.entities) {
+  for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
+    domainOutputDirs.add(entityCfg.outputDirectory ?? entityName);
   }
 }
 
@@ -54,12 +69,27 @@ for (const dir of generatedDirs) {
   if (!entry) {
     console.error(`❌ Unclassified directory in generated/: ${dir}`);
     errors++;
-  } else if (entry.classification !== 'loom' && entry.classification !== 'frozen') {
-    console.error(`❌ Directory in generated/ must be classified loom or frozen, got ${entry.classification}: ${dir}`);
-    errors++;
-  } else if (!entry.reason || entry.reason.trim().length === 0) {
-    console.error(`❌ Missing classification reason for generated/: ${dir}`);
-    errors++;
+  } else {
+    if (entry.tier !== 'generated') {
+      console.error(`❌ Directory in generated/ has tier mismatch: ${dir} (tier: ${entry.tier})`);
+      errors++;
+    }
+    if (entry.classification !== 'loom' && entry.classification !== 'frozen') {
+      console.error(`❌ Directory in generated/ must be classified loom or frozen, got ${entry.classification}: ${dir}`);
+      errors++;
+    }
+    if (!entry.reason || entry.reason.trim().length === 0) {
+      console.error(`❌ Missing classification reason for generated/: ${dir}`);
+      errors++;
+    }
+
+    // C2: Check that loom-classified directories are declared in domain.json
+    if (entry.classification === 'loom') {
+      if (!domainOutputDirs.has(dir)) {
+        console.error(`❌ Directory in generated/ classified as 'loom' is not declared in data/domain.json: ${dir}`);
+        errors++;
+      }
+    }
   }
 }
 
@@ -88,11 +118,22 @@ if (configEntities) {
   }
 }
 
-// 4. Proposed rulings check: portal-sessions may be frozen; others may not
+// 4. Proposed rulings & frozen validation check (C1, C2)
 for (const [dir, entry] of Object.entries(ownership.directories)) {
-  if (entry.classification === 'frozen' && dir !== 'portal-sessions') {
-    console.error(`❌ Unapproved frozen directory: ${dir} (only portal-sessions approved to stay frozen)`);
-    errors++;
+  if (entry.classification === 'frozen') {
+    if (dir === 'portal-sessions') {
+      if (!entry.reason.includes('proposed, pending owner confirmation')) {
+        console.error(`❌ portal-sessions reason must state "proposed, pending owner confirmation": got "${entry.reason}"`);
+        errors++;
+      }
+    } else if (entry.reason.includes('Reference taxonomy')) {
+      // Approved reference taxonomy per C27-2 Option A
+    } else if (entry.reason.includes('moves under Loom in C27-4')) {
+      // Transitional frozen directory pending C27-4 widening
+    } else {
+      console.error(`❌ Unapproved frozen directory or reason: ${dir} (reason: "${entry.reason}")`);
+      errors++;
+    }
   }
 }
 

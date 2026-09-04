@@ -4,21 +4,10 @@
     "autoCreateMissingRecords": true
   },
   "sqlLogging": {
-    "outputDirectory": "./migrations/codegen"
+    "outputDirectory": "./migrations/codegen/config",
+    "formatAsMigration": true
   },
   "directoryOrder": [
-    "data-quality-labels",
-    "relationship-types",
-    "committee-types",
-    "task-types",
-    "issue-types",
-    "certifications",
-    "courses",
-    "forms",
-    "form-versions",
-    "form-pages",
-    "form-questions",
-    "form-question-options",
     "sonar-score-band-sets",
     "sonar-score-bands",
     "sonar-time-windows",

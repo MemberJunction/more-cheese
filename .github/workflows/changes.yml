@@ -24,6 +24,9 @@ jobs:
       - name: Validate metadata referential integrity closure
         run: node scripts/check-metadata-closure.mjs
 
+      - name: Check metadata and config ownership manifest
+        run: npm run check:ownership
+
       - name: Checkout Loom Contracts
         uses: actions/checkout@v4
         with:

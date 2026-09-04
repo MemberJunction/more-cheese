@@ -106,9 +106,10 @@ MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
    ```sh
    npx mj codegen
    ```
-4. Push application metadata (apps, navigation items, entity permissions):
+4. Push application metadata and simulated data:
    ```sh
-   npx mj sync push --dir ./metadata --format=json
+   npx mj sync push --dir ./generated --format=json
+   npx mj sync push --dir ./config --format=json
    ```
 
 ---

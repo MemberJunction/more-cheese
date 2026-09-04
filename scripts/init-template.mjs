@@ -24,7 +24,8 @@
  * before committing.
  */
 import { createInterface } from 'node:readline';
-import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
+import { dirname } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 
@@ -265,6 +266,9 @@ m2.repository = repoUrl; m2.publisher = { name: publisher, email };
 if (m2.schema) m2.schema.name = schema;
 writeFileSync('mj-app.json', JSON.stringify(m2, null, 2) + '\n');
 
+if (!existsSync(dirname(SCHEMA_INFO))) {
+  mkdirSync(dirname(SCHEMA_INFO), { recursive: true });
+}
 writeFileSync(SCHEMA_INFO, JSON.stringify([{
   fields: {
     SchemaName: schema,

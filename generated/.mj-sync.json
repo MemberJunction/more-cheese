@@ -4,13 +4,26 @@
     "autoCreateMissingRecords": true
   },
   "sqlLogging": {
-    "outputDirectory": "./migrations/codegen"
+    "outputDirectory": "./migrations/codegen/generated",
+    "formatAsMigration": true
   },
   "directoryOrder": [
     "companies",
+    "committee-types",
+    "courses",
+    "certifications",
+    "task-types",
+    "issue-types",
+    "relationship-types",
+    "forms",
+    "form-versions",
+    "form-pages",
+    "form-questions",
+    "form-question-options",
     "organizations",
     "organization-profiles",
     "people",
+    "data-quality-labels",
     "member-profiles",
     "product-categories",
     "products",
