@@ -17,28 +17,26 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
 
 ```
                            ┌─────────────────────────────────────────┐
-                           │      MemberJunction Core Framework      │
-                           │  (@memberjunction/core, server, ng)     │
-                           └────────────────────┬────────────────────┘
-                                                │
-                           ┌────────────────────▼────────────────────┐
-                           │       Upstream BizApps Foundations      │
-                           │  (@mj-biz-apps/common, /orders, etc.)   │
-                           │   • People                              │
-                           │   • Organizations                       │
-                           │   • Invoicing & Line Items              │
-                           └────────────────────┬────────────────────┘
-                                                │
-                 ┌──────────────────────────────┴──────────────────────────────┐
-                 │                                                             │
-   ┌─────────────▼─────────────┐                                 ┌─────────────▼─────────────┐
-   │ Dynamic Form Slot Panels  │                                 │ Downstream Domain Schemas │
-   │ (BaseFormPanel Injection) │                                 │ (morecheese_* Schemas)    │
-   │  • MemberCommunityPanel   │                                 │  • morecheese_members     │
-   │  • OrganizationGuildPanel │                                 │  • morecheese_events      │
-   │  (Mounted into Upstream   │                                 │  • morecheese_learning    │
-   │   People & Org Forms)     │                                 └───────────────────────────┘
-   └───────────────────────────┘                                 
+                           ┌─────────────────────────────────────┐
+                           │    MemberJunction Core Framework    │
+                           │  (@memberjunction/core, server, ng) │
+                           └──────────────────┬──────────────────┘
+                                              │
+                           ┌──────────────────▼──────────────────┐
+                           │     Upstream BizApps Foundations    │
+                           │ (@mj-biz-apps/common, /orders, etc) │
+                           │  • People                           │
+                           │  • Organizations                    │
+                           │  • Invoicing & Line Items           │
+                           └──────────────────┬──────────────────┘
+                                              │
+                           ┌──────────────────▼──────────────────┐
+                           │      Downstream Domain Schemas      │
+                           │        (morecheese_* Schemas)       │
+                           │  • morecheese_members               │
+                           │  • morecheese_events                │
+                           │  • morecheese_learning              │
+                           └─────────────────────────────────────┘
 ```
 
 ### Key Domain Capabilities
@@ -48,50 +46,6 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
 - **Cheese Competitions & Sensory Scoring**: World Cheese Cup events, entry submissions, blind judging rounds, and medal awards.
 - **Continuing Education & Master Certification**: Academy coursework, affineur apprenticeships, and food safety credentials.
 - **Advocacy & Legislative Coalitions**: Grassroots dairy campaigns, raw-milk regulation monitoring, and legislative testimonies.
-
----
-
-## 🧩 Dynamic Forms Architecture (`BaseFormPanel` Slot System)
-
-> [!NOTE]
-> **Form Panel Implementation Status**: The `MemberCommunityPanel` and `OrganizationCheeseGuildPanel` form slot panels are registered on the `before-fields` slot for `People` and `Organizations`. They currently render unpopulated UI mockups pending live data query wiring in follow-up integration work.
-
-A premier feature of MemberJunction's UI architecture is the **BaseFormPanel Dynamic Slot System**. In downstream applications like MoreCheese, you frequently need to enrich upstream records (such as `MJ_BizApps_Common: People` or `MJ_BizApps_Common: Organizations`) with downstream domain intelligence without modifying upstream templates or touching core repositories.
-
-MoreCheese implements this via `BaseFormPanel` decorators:
-
-```typescript
-import { BaseFormPanel } from '@memberjunction/ng-base-forms';
-import { RegisterClassEx } from '@memberjunction/global';
-
-@RegisterClassEx(BaseFormPanel, {
-  key: 'more-cheese:member-community-panel',
-  skipNullKeyWarning: true,
-  metadata: {
-    entity: 'MJ_BizApps_Common: People', // Targets upstream BizApps Person entity
-    slot: 'after-fields',                // Dynamically injected after primary form fields
-    sortKey: 100,
-  },
-})
-@Component({
-  selector: 'mj-morecheese-member-community-panel',
-  standalone: true,
-  template: `...`,
-})
-export class MemberCommunityPanel extends BaseFormPanel<BaseEntity> {
-  // Panel lifecycle, reactive RunView queries, and domain visualization
-}
-```
-
-### Supported Injection Slots
-
-| Slot Name | Placement | Typical Use Case |
-|---|---|---|
-| `top-area` | Header banner above form tabs | Critical warning banners, VIP status alerts, accreditation shields |
-| `before-fields` | Above standard entity fields | High-level summary metrics, quick KPIs |
-| `after-fields` | Below primary fields, above related tabs | Domain community cards, custom attribute grids, specialized meters |
-| `after-related` | Below related entity grids | Cross-system audit logs, external CRM timeline feeds |
-| `after-everything` | Footer of entire form layout | Regulatory notices, signature stamps |
 
 ---
 
