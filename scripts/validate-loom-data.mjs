@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -292,6 +293,47 @@ for (const [fId, fContract] of Object.entries(common.effects)) {
 }
 console.log('✓ data/ruleset/common.json conforms to Loom RulesetModuleSchema with valid effect arrows');
 
+// 8. Run Loom Validator over generated/
+console.log('\n--- Running Loom Full Dataset Validator ---');
+const candidates = [
+  'loom',
+  path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js')
+];
+let loomCmd = null;
+for (const c of candidates) {
+  if (c === 'loom') {
+    try {
+      execSync('which loom', { stdio: 'ignore' });
+      loomCmd = 'loom';
+      break;
+    } catch {}
+  } else if (fs.existsSync(c)) {
+    loomCmd = `node ${c}`;
+    break;
+  }
+}
+
+if (!loomCmd) {
+  fail('Could not locate Loom CLI binary to run dataset validation');
+}
+
+try {
+  const out = execSync(`${loomCmd} validate -p data -d generated`, {
+    cwd: rootDir,
+    encoding: 'utf8',
+    stdio: 'pipe'
+  });
+  console.log(out);
+  console.log('✓ Loom Validator verified all dataset gates cleanly (exit 0)');
+} catch (err) {
+  const errOut = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
+  console.error(errOut);
+  fail(`Loom Validator failed with broken gates: ${err.message}`);
+}
+
 console.log('================================================================================');
 console.log('✅ ALL LOOM DATA SPECIFICATIONS & DOMAIN CONFORMANCE CHECKS PASSED');
 console.log('================================================================================');
+

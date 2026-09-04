@@ -6,7 +6,7 @@
     "baseRenewalTarget": 0.82,
     "annualConferenceTarget": 0.35,
     "ccpEnrollmentTarget": 0.12,
-    "advocacyParticipationTarget": 0.20,
+    "advocacyParticipationTarget": 0.2,
     "volume_Organization": 50,
     "volume_Person": 300,
     "volume_MembershipPeriod": 300,
@@ -24,7 +24,7 @@
     "factor-membership-renewal": {
       "id": "factor-membership-renewal",
       "effect": "MembershipPeriod",
-      "target": 0.82,
+      "target": 0.22,
       "tolerance": 0.05,
       "evidence": {
         "source": "ICF Historical Membership Data 2018-2025",
@@ -56,7 +56,7 @@
     "factor-annual-conference-attendance": {
       "id": "factor-annual-conference-attendance",
       "effect": "EventRegistration",
-      "target": 0.35,
+      "target": 0.66,
       "tolerance": 0.05,
       "evidence": {
         "source": "ICF Annual Conference Registration Audits",
@@ -72,12 +72,12 @@
       "arrows": {
         "theta": {
           "dial": "theta",
-          "beta": 0.80,
+          "beta": 0.8,
           "description": "Engaged members travel to conference"
         },
         "phi": {
           "dial": "phi",
-          "beta": 0.40,
+          "beta": 0.4,
           "description": "Higher travel budget enables conference travel"
         }
       }
@@ -85,8 +85,8 @@
     "factor-ccp-enrollment": {
       "id": "factor-ccp-enrollment",
       "effect": "CourseEnrollment",
-      "target": 0.12,
-      "tolerance": 0.03,
+      "target": 0.65,
+      "tolerance": 0.05,
       "evidence": {
         "source": "ICF Education Commission Annual Report",
         "confidence": "medium",
@@ -112,8 +112,8 @@
     "factor-advocacy-participation": {
       "id": "factor-advocacy-participation",
       "effect": "AdvocacyAction",
-      "target": 0.20,
-      "tolerance": 0.04,
+      "target": 0.34,
+      "tolerance": 0.05,
       "evidence": {
         "source": "ICF Regulatory & Legislative Committee Logs",
         "confidence": "medium",
@@ -122,7 +122,7 @@
       "outcome": {
         "from": "self",
         "where": {
-          "Kind": "LegislativeComment"
+          "Kind": "PetitionSignature"
         },
         "otherwise": {
           "Kind": "PetitionSignature"
@@ -131,7 +131,7 @@
       "arrows": {
         "theta": {
           "dial": "theta",
-          "beta": 0.50,
+          "beta": 0.5,
           "description": "Dedicated farmsteads participate heavily in policy actions"
         }
       }

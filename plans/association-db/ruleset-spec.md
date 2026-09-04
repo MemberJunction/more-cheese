@@ -83,7 +83,7 @@ substrate Sonar trends and churn early-warning train on — and it's gated (§7)
 final-year activity must sit below their own within-person baseline. Two harness notes that
 came with it: arrow refits include the anchor and prior-year θ as nuisance covariates
 (selection acts on θ *history*, and omitting it attenuates neighbors), and magnitude gates
-carry a 3·SE small-sample allowance (the multiple-comparisons budget across ~30 gates).
+carry a 3·SE small-sample allowance (the multiple-comparisons budget across validation checks).
 
 **Regime gates:** era and seasonal effects are multiplicative modifiers with calendar
 anchors (COVID: event volume ×0.5, entries ×0 in 2020–21; December renewal season;

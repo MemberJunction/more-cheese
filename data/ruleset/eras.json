@@ -4,7 +4,9 @@
     {
       "eraKey": "era-pre-pandemic-baseline",
       "scope": "all",
-      "cycles": [2019],
+      "cycles": [
+        2019
+      ],
       "factorAdjustments": [],
       "volumeMultipliers": [],
       "description": "Healthy pre-pandemic in-person events, conferences, and wholesale dues"
@@ -12,11 +14,13 @@
     {
       "eraKey": "era-pandemic-shock-2020",
       "scope": "all",
-      "cycles": [2020],
+      "cycles": [
+        2020
+      ],
       "factorAdjustments": [
         {
           "factor": "factor-membership-renewal",
-          "deltaIntercept": -0.40
+          "deltaIntercept": -0.4
         }
       ],
       "volumeMultipliers": [
@@ -34,13 +38,10 @@
     {
       "eraKey": "era-virtual-pivot-2021",
       "scope": "all",
-      "cycles": [2021],
-      "factorAdjustments": [
-        {
-          "factor": "factor-membership-renewal",
-          "deltaIntercept": 1.0
-        }
+      "cycles": [
+        2021
       ],
+      "factorAdjustments": [],
       "volumeMultipliers": [
         {
           "entity": "EventRegistration",
@@ -48,7 +49,7 @@
         },
         {
           "entity": "CourseEnrollment",
-          "multiplier": 1.50
+          "multiplier": 1.5
         }
       ],
       "description": "Virtual symposiums, online credentials, and emergency digital support programs yielding a strong retention surge among small creameries"
@@ -56,17 +57,16 @@
     {
       "eraKey": "era-artisan-boom-2022-2024",
       "scope": "all",
-      "cycles": [2022, 2023, 2024],
-      "factorAdjustments": [
-        {
-          "factor": "factor-membership-renewal",
-          "deltaIntercept": 1.35
-        }
+      "cycles": [
+        2022,
+        2023,
+        2024
       ],
+      "factorAdjustments": [],
       "volumeMultipliers": [
         {
           "entity": "EventRegistration",
-          "multiplier": 1.40
+          "multiplier": 1.4
         },
         {
           "entity": "CourseEnrollment",
@@ -78,13 +78,10 @@
     {
       "eraKey": "era-creamery-closures-2025",
       "scope": "all",
-      "cycles": [2025],
-      "factorAdjustments": [
-        {
-          "factor": "factor-membership-renewal",
-          "deltaIntercept": -0.65
-        }
+      "cycles": [
+        2025
       ],
+      "factorAdjustments": [],
       "volumeMultipliers": [],
       "description": "Regional feed and energy cost inflation driving small farmstead creamery distress"
     }

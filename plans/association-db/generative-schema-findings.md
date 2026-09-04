@@ -75,7 +75,7 @@ the generative-data lead's doc defines `Generate(X, S, seed, scale)`: the LLM au
 | G11 | Migration-as-verifier shipping gate | **Per-row logical constraints emitted as DB CHECKs** so the seed migration self-verifies on a scratch DB (invoice arithmetic, date ordering, status/date agreement). |
 | G12 | Fidelity benchmarks | External targets — the v1 demo's **108 queries are ready-made `X.benchmarks`** (renewal rate by type, no-show rate, campaign ROI…). |
 | G13 | Text-fill with held-out-fact recoverability | Text columns (Bio, TastingNotes, ForumPost.Body) must sit **next to the structured driver columns** their template slots reference. |
-| G14 | Anti-requirement | **Polymorphic links** (`RelatedEntityType` + `RecordID`) defeat FK enforcement and the F2/F8 gates — the generator can still copy real keys, but the DB can't verify. Minimize in the generated surface. |
+| G14 | Anti-requirement | **Polymorphic links** (`RelatedEntityType` + `RecordID`) defeat FK enforcement and the F2/F8 verification rules — the generator can still copy real keys, but the DB can't verify. Minimize in the generated surface. |
 
 ---
 

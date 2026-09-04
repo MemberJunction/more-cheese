@@ -10,12 +10,17 @@
     },
     "community": {
       "name": "community",
-      "dependsOn": ["core"],
+      "dependsOn": [
+        "core"
+      ],
       "description": "Memberships, events, courses, certifications, and committees"
     },
     "commerce": {
       "name": "commerce",
-      "dependsOn": ["core", "community"],
+      "dependsOn": [
+        "core",
+        "community"
+      ],
       "description": "Orders, lines, payments, and product catalog"
     }
   },
@@ -27,16 +32,48 @@
       "schema": "__mj_BizAppsCommon",
       "pack": "core",
       "outputDirectory": "organizations",
-      "businessKey": ["Name"],
+      "businessKey": [
+        "Name"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "Name": { "name": "Name", "type": "string" },
-        "OrganizationTypeID": { "name": "OrganizationTypeID", "type": "string", "nullable": true },
-        "LegalName": { "name": "LegalName", "type": "string", "nullable": true },
-        "Website": { "name": "Website", "type": "string", "nullable": true },
-        "Phone": { "name": "Phone", "type": "string", "nullable": true },
-        "FoundedDate": { "name": "FoundedDate", "type": "date", "nullable": true },
-        "Status": { "name": "Status", "type": "string" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "OrganizationTypeID": {
+          "name": "OrganizationTypeID",
+          "type": "string",
+          "nullable": true
+        },
+        "LegalName": {
+          "name": "LegalName",
+          "type": "string",
+          "nullable": true
+        },
+        "Website": {
+          "name": "Website",
+          "type": "string",
+          "nullable": true
+        },
+        "Phone": {
+          "name": "Phone",
+          "type": "string",
+          "nullable": true
+        },
+        "FoundedDate": {
+          "name": "FoundedDate",
+          "type": "date",
+          "nullable": true
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
       },
       "foreignKeys": {},
       "isImmutable": false
@@ -48,14 +85,47 @@
       "schema": "__mj_BizAppsCommon",
       "pack": "core",
       "outputDirectory": "people",
-      "businessKey": ["Email"],
+      "businessKey": [
+        "Email"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "FirstName": { "name": "FirstName", "type": "string" },
-        "LastName": { "name": "LastName", "type": "string" },
-        "Email": { "name": "Email", "type": "string" },
-        "Title": { "name": "Title", "type": "string", "nullable": true },
-        "Status": { "name": "Status", "type": "string" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "FirstName": {
+          "name": "FirstName",
+          "type": "string"
+        },
+        "LastName": {
+          "name": "LastName",
+          "type": "string"
+        },
+        "Email": {
+          "name": "Email",
+          "type": "string"
+        },
+        "Title": {
+          "name": "Title",
+          "type": "string",
+          "nullable": true
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "PhotoURL": {
+          "name": "PhotoURL",
+          "type": "string",
+          "nullable": true,
+          "avatar": {
+            "style": "adventurer",
+            "format": "base64",
+            "genderField": "Gender",
+            "seedField": "Email"
+          }
+        }
       },
       "foreignKeys": {},
       "isImmutable": false
@@ -67,13 +137,34 @@
       "schema": "__mj",
       "pack": "core",
       "outputDirectory": "companies",
-      "businessKey": ["Name"],
+      "businessKey": [
+        "Name"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "Name": { "name": "Name", "type": "string" },
-        "Description": { "name": "Description", "type": "string", "nullable": true },
-        "Website": { "name": "Website", "type": "string", "nullable": true },
-        "Domain": { "name": "Domain", "type": "string", "nullable": true }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "string",
+          "nullable": true
+        },
+        "Website": {
+          "name": "Website",
+          "type": "string",
+          "nullable": true
+        },
+        "Domain": {
+          "name": "Domain",
+          "type": "string",
+          "nullable": true
+        }
       },
       "foreignKeys": {},
       "isImmutable": true
@@ -85,15 +176,34 @@
       "schema": "__mj_BizAppsOrders",
       "pack": "commerce",
       "outputDirectory": "product-categories",
-      "businessKey": ["Name"],
+      "businessKey": [
+        "Name"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "CompanyID": { "name": "CompanyID", "type": "uuid" },
-        "Name": { "name": "Name", "type": "string" },
-        "Description": { "name": "Description", "type": "string", "nullable": true }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "CompanyID": {
+          "name": "CompanyID",
+          "type": "uuid"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "string",
+          "nullable": true
+        }
       },
       "foreignKeys": {
-        "CompanyID": { "targetEntity": "Company", "targetField": "ID" }
+        "CompanyID": {
+          "targetEntity": "Company",
+          "targetField": "ID"
+        }
       },
       "isImmutable": true
     },
@@ -104,22 +214,61 @@
       "schema": "__mj_BizAppsOrders",
       "pack": "commerce",
       "outputDirectory": "products",
-      "businessKey": ["SKU"],
+      "businessKey": [
+        "SKU"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "SKU": { "name": "SKU", "type": "string" },
-        "Name": { "name": "Name", "type": "string" },
-        "CompanyID": { "name": "CompanyID", "type": "uuid" },
-        "ProductTypeID": { "name": "ProductTypeID", "type": "uuid" },
-        "ProductCategoryID": { "name": "ProductCategoryID", "type": "uuid" },
-        "RevenueRecognitionTypeID": { "name": "RevenueRecognitionTypeID", "type": "uuid" },
-        "Status": { "name": "Status", "type": "string" },
-        "StandaloneSellingPrice": { "name": "StandaloneSellingPrice", "type": "number" },
-        "IsTaxable": { "name": "IsTaxable", "type": "boolean" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "SKU": {
+          "name": "SKU",
+          "type": "string"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "CompanyID": {
+          "name": "CompanyID",
+          "type": "uuid"
+        },
+        "ProductTypeID": {
+          "name": "ProductTypeID",
+          "type": "uuid"
+        },
+        "ProductCategoryID": {
+          "name": "ProductCategoryID",
+          "type": "uuid"
+        },
+        "RevenueRecognitionTypeID": {
+          "name": "RevenueRecognitionTypeID",
+          "type": "uuid"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "StandaloneSellingPrice": {
+          "name": "StandaloneSellingPrice",
+          "type": "number"
+        },
+        "IsTaxable": {
+          "name": "IsTaxable",
+          "type": "boolean"
+        }
       },
       "foreignKeys": {
-        "CompanyID": { "targetEntity": "Company", "targetField": "ID" },
-        "ProductCategoryID": { "targetEntity": "ProductCategory", "targetField": "ID" }
+        "CompanyID": {
+          "targetEntity": "Company",
+          "targetField": "ID"
+        },
+        "ProductCategoryID": {
+          "targetEntity": "ProductCategory",
+          "targetField": "ID"
+        }
       },
       "isImmutable": false
     },
@@ -130,21 +279,66 @@
       "schema": "morecheese_members",
       "pack": "community",
       "outputDirectory": "membership-periods",
-      "businessKey": ["PeriodKey"],
+      "businessKey": [
+        "PeriodKey"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "PeriodKey": { "name": "PeriodKey", "type": "string" },
-        "PersonID": { "name": "PersonID", "type": "uuid" },
-        "MembershipTier": { "name": "MembershipTier", "type": "string" },
-        "DuesAmount": { "name": "DuesAmount", "type": "number" },
-        "StartDate": { "name": "StartDate", "type": "date" },
-        "EndDate": { "name": "EndDate", "type": "date" },
-        "RenewalDate": { "name": "RenewalDate", "type": "date", "nullable": true },
-        "Status": { "name": "Status", "type": "string" },
-        "CancellationDate": { "name": "CancellationDate", "type": "date", "nullable": true },
-        "CancellationReason": { "name": "CancellationReason", "type": "string", "nullable": true },
-        "AutoRenew": { "name": "AutoRenew", "type": "boolean" },
-        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PeriodKey": {
+          "name": "PeriodKey",
+          "type": "string"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "MembershipTier": {
+          "name": "MembershipTier",
+          "type": "string"
+        },
+        "DuesAmount": {
+          "name": "DuesAmount",
+          "type": "number"
+        },
+        "StartDate": {
+          "name": "StartDate",
+          "type": "date"
+        },
+        "EndDate": {
+          "name": "EndDate",
+          "type": "date"
+        },
+        "RenewalDate": {
+          "name": "RenewalDate",
+          "type": "date",
+          "nullable": true
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "CancellationDate": {
+          "name": "CancellationDate",
+          "type": "date",
+          "nullable": true
+        },
+        "CancellationReason": {
+          "name": "CancellationReason",
+          "type": "string",
+          "nullable": true
+        },
+        "AutoRenew": {
+          "name": "AutoRenew",
+          "type": "boolean"
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
       },
       "foreignKeys": {
         "PersonID": {
@@ -163,15 +357,39 @@
       "schema": "morecheese_members",
       "pack": "community",
       "outputDirectory": "event-registrations",
-      "businessKey": ["RegKey"],
+      "businessKey": [
+        "RegKey"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "RegKey": { "name": "RegKey", "type": "string" },
-        "PersonID": { "name": "PersonID", "type": "uuid" },
-        "EventID": { "name": "EventID", "type": "uuid" },
-        "RegisteredOn": { "name": "RegisteredOn", "type": "date" },
-        "Attended": { "name": "Attended", "type": "boolean" },
-        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "RegKey": {
+          "name": "RegKey",
+          "type": "string"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "EventID": {
+          "name": "EventID",
+          "type": "uuid"
+        },
+        "RegisteredOn": {
+          "name": "RegisteredOn",
+          "type": "date"
+        },
+        "Attended": {
+          "name": "Attended",
+          "type": "boolean"
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
       },
       "foreignKeys": {
         "PersonID": {
@@ -190,16 +408,44 @@
       "schema": "morecheese_members",
       "pack": "community",
       "outputDirectory": "enrollments",
-      "businessKey": ["EnrollKey"],
+      "businessKey": [
+        "EnrollKey"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "EnrollKey": { "name": "EnrollKey", "type": "string" },
-        "PersonID": { "name": "PersonID", "type": "uuid" },
-        "CourseID": { "name": "CourseID", "type": "uuid" },
-        "EnrolledOn": { "name": "EnrolledOn", "type": "date" },
-        "Status": { "name": "Status", "type": "string" },
-        "CompletedOn": { "name": "CompletedOn", "type": "date", "nullable": true },
-        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "EnrollKey": {
+          "name": "EnrollKey",
+          "type": "string"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "CourseID": {
+          "name": "CourseID",
+          "type": "uuid"
+        },
+        "EnrolledOn": {
+          "name": "EnrolledOn",
+          "type": "date"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "CompletedOn": {
+          "name": "CompletedOn",
+          "type": "date",
+          "nullable": true
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
       },
       "foreignKeys": {
         "PersonID": {
@@ -218,15 +464,39 @@
       "schema": "morecheese_members",
       "pack": "community",
       "outputDirectory": "advocacy-actions",
-      "businessKey": ["ActionKey"],
+      "businessKey": [
+        "ActionKey"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "ActionKey": { "name": "ActionKey", "type": "string" },
-        "PersonID": { "name": "PersonID", "type": "uuid" },
-        "ActionDate": { "name": "ActionDate", "type": "date" },
-        "Kind": { "name": "Kind", "type": "string" },
-        "Topic": { "name": "Topic", "type": "string" },
-        "IsSharedDemo": { "name": "IsSharedDemo", "type": "boolean" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "ActionKey": {
+          "name": "ActionKey",
+          "type": "string"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "ActionDate": {
+          "name": "ActionDate",
+          "type": "date"
+        },
+        "Kind": {
+          "name": "Kind",
+          "type": "string"
+        },
+        "Topic": {
+          "name": "Topic",
+          "type": "string"
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
       },
       "foreignKeys": {
         "PersonID": {
@@ -245,15 +515,41 @@
       "schema": "__mj_BizAppsCommittees",
       "pack": "community",
       "outputDirectory": "committee-memberships",
-      "businessKey": ["PersonID", "RoleID", "TermID"],
+      "businessKey": [
+        "PersonID",
+        "RoleID",
+        "TermID"
+      ],
       "fields": {
-        "ID": { "name": "ID", "type": "uuid", "isPrimaryKey": true },
-        "PersonID": { "name": "PersonID", "type": "uuid" },
-        "RoleID": { "name": "RoleID", "type": "string" },
-        "TermID": { "name": "TermID", "type": "uuid" },
-        "StartDate": { "name": "StartDate", "type": "date" },
-        "EndDate": { "name": "EndDate", "type": "date" },
-        "Status": { "name": "Status", "type": "string" }
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "RoleID": {
+          "name": "RoleID",
+          "type": "string"
+        },
+        "TermID": {
+          "name": "TermID",
+          "type": "uuid"
+        },
+        "StartDate": {
+          "name": "StartDate",
+          "type": "date"
+        },
+        "EndDate": {
+          "name": "EndDate",
+          "type": "date"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
       },
       "foreignKeys": {
         "PersonID": {
@@ -264,7 +560,1969 @@
         }
       },
       "isImmutable": false
+    },
+    "AddressLink": {
+      "name": "AddressLink",
+      "entityName": "MJ_BizApps_Common: Address Links",
+      "targetTable": "AddressLink",
+      "schema": "__mj_BizAppsCommon",
+      "pack": "core",
+      "outputDirectory": "address-links",
+      "businessKey": [
+        "AddressID",
+        "EntityID",
+        "RecordID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "AddressID": {
+          "name": "AddressID",
+          "type": "uuid"
+        },
+        "EntityID": {
+          "name": "EntityID",
+          "type": "string"
+        },
+        "RecordID": {
+          "name": "RecordID",
+          "type": "uuid"
+        },
+        "AddressTypeID": {
+          "name": "AddressTypeID",
+          "type": "string"
+        },
+        "IsPrimary": {
+          "name": "IsPrimary",
+          "type": "boolean"
+        },
+        "Rank": {
+          "name": "Rank",
+          "type": "number"
+        }
+      },
+      "foreignKeys": {
+        "AddressID": {
+          "targetEntity": "Address",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Address": {
+      "name": "Address",
+      "entityName": "MJ_BizApps_Common: Addresses",
+      "targetTable": "Address",
+      "schema": "__mj_BizAppsCommon",
+      "pack": "core",
+      "outputDirectory": "addresses",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "Line1": {
+          "name": "Line1",
+          "type": "string"
+        },
+        "Line2": {
+          "name": "Line2",
+          "type": "string",
+          "nullable": true
+        },
+        "City": {
+          "name": "City",
+          "type": "string"
+        },
+        "StateProvince": {
+          "name": "StateProvince",
+          "type": "string"
+        },
+        "PostalCode": {
+          "name": "PostalCode",
+          "type": "string"
+        },
+        "Country": {
+          "name": "Country",
+          "type": "string"
+        },
+        "Latitude": {
+          "name": "Latitude",
+          "type": "number"
+        },
+        "Longitude": {
+          "name": "Longitude",
+          "type": "number"
+        }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "CommitteeAgendaItem": {
+      "name": "CommitteeAgendaItem",
+      "entityName": "Committees: Agenda Items",
+      "targetTable": "AgendaItem",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committee-agenda-items",
+      "businessKey": [
+        "MeetingID",
+        "Sequence"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "MeetingID": {
+          "name": "MeetingID",
+          "type": "uuid"
+        },
+        "Sequence": {
+          "name": "Sequence",
+          "type": "number"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "PresenterPersonID": {
+          "name": "PresenterPersonID",
+          "type": "uuid"
+        },
+        "DurationMinutes": {
+          "name": "DurationMinutes",
+          "type": "number"
+        },
+        "ItemType": {
+          "name": "ItemType",
+          "type": "string"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "MeetingID": {
+          "targetEntity": "CommitteeMeeting",
+          "targetField": "ID"
+        },
+        "PresenterPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "CommitteeAttendance": {
+      "name": "CommitteeAttendance",
+      "entityName": "Committees: Attendances",
+      "targetTable": "Attendance",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committee-attendance",
+      "businessKey": [
+        "MeetingID",
+        "PersonID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "MeetingID": {
+          "name": "MeetingID",
+          "type": "uuid"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "AttendanceStatus": {
+          "name": "AttendanceStatus",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "MeetingID": {
+          "targetEntity": "CommitteeMeeting",
+          "targetField": "ID"
+        },
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "CommitteeMeeting": {
+      "name": "CommitteeMeeting",
+      "entityName": "Committees: Meetings",
+      "targetTable": "Meeting",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committee-meetings",
+      "businessKey": [
+        "CommitteeID",
+        "Name",
+        "StartDateTime"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "CommitteeID": {
+          "name": "CommitteeID",
+          "type": "uuid"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "StartDateTime": {
+          "name": "StartDateTime",
+          "type": "date"
+        },
+        "EndDateTime": {
+          "name": "EndDateTime",
+          "type": "date"
+        },
+        "TimeZone": {
+          "name": "TimeZone",
+          "type": "string"
+        },
+        "LocationType": {
+          "name": "LocationType",
+          "type": "string"
+        },
+        "LocationText": {
+          "name": "LocationText",
+          "type": "string",
+          "nullable": true
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "CommitteeID": {
+          "targetEntity": "Committee",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "CommitteeMotion": {
+      "name": "CommitteeMotion",
+      "entityName": "Committees: Motions",
+      "targetTable": "Motion",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committee-motions",
+      "businessKey": [
+        "MeetingID",
+        "Sequence"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "MeetingID": {
+          "name": "MeetingID",
+          "type": "uuid"
+        },
+        "AgendaItemID": {
+          "name": "AgendaItemID",
+          "type": "uuid"
+        },
+        "Sequence": {
+          "name": "Sequence",
+          "type": "number"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "MovedByMembershipID": {
+          "name": "MovedByMembershipID",
+          "type": "uuid"
+        },
+        "SecondedByMembershipID": {
+          "name": "SecondedByMembershipID",
+          "type": "uuid"
+        },
+        "Result": {
+          "name": "Result",
+          "type": "string"
+        },
+        "ResultSummary": {
+          "name": "ResultSummary",
+          "type": "string"
+        },
+        "YesCount": {
+          "name": "YesCount",
+          "type": "number"
+        },
+        "NoCount": {
+          "name": "NoCount",
+          "type": "number"
+        },
+        "AbstainCount": {
+          "name": "AbstainCount",
+          "type": "number"
+        }
+      },
+      "foreignKeys": {
+        "MeetingID": {
+          "targetEntity": "CommitteeMeeting",
+          "targetField": "ID"
+        },
+        "AgendaItemID": {
+          "targetEntity": "CommitteeAgendaItem",
+          "targetField": "ID"
+        },
+        "MovedByMembershipID": {
+          "targetEntity": "CommitteeMembership",
+          "targetField": "ID"
+        },
+        "SecondedByMembershipID": {
+          "targetEntity": "CommitteeMembership",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "CommitteeTerm": {
+      "name": "CommitteeTerm",
+      "entityName": "Committees: Terms",
+      "targetTable": "Term",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committee-terms",
+      "businessKey": [
+        "CommitteeID",
+        "Name"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "CommitteeID": {
+          "name": "CommitteeID",
+          "type": "uuid"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "StartDate": {
+          "name": "StartDate",
+          "type": "date"
+        },
+        "EndDate": {
+          "name": "EndDate",
+          "type": "date"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "CommitteeID": {
+          "targetEntity": "Committee",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "CommitteeVote": {
+      "name": "CommitteeVote",
+      "entityName": "Committees: Votes",
+      "targetTable": "Vote",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committee-votes",
+      "businessKey": [
+        "MotionID",
+        "MembershipID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "MotionID": {
+          "name": "MotionID",
+          "type": "uuid"
+        },
+        "MembershipID": {
+          "name": "MembershipID",
+          "type": "uuid"
+        },
+        "VoteValue": {
+          "name": "VoteValue",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "MotionID": {
+          "targetEntity": "CommitteeMotion",
+          "targetField": "ID"
+        },
+        "MembershipID": {
+          "targetEntity": "CommitteeMembership",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Committee": {
+      "name": "Committee",
+      "entityName": "Committees: Committees",
+      "targetTable": "Committee",
+      "schema": "__mj_BizAppsCommittees",
+      "pack": "community",
+      "outputDirectory": "committees",
+      "businessKey": [
+        "Name"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "TypeID": {
+          "name": "TypeID",
+          "type": "uuid"
+        },
+        "MissionStatement": {
+          "name": "MissionStatement",
+          "type": "string"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "IsPublic": {
+          "name": "IsPublic",
+          "type": "boolean"
+        },
+        "FormationDate": {
+          "name": "FormationDate",
+          "type": "date"
+        }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "CompetitionEntry": {
+      "name": "CompetitionEntry",
+      "entityName": "MoreCheese: Competition Entries",
+      "targetTable": "CompetitionEntry",
+      "schema": "morecheese_events",
+      "pack": "community",
+      "outputDirectory": "competition-entries",
+      "businessKey": [
+        "EntryKey"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "EntryKey": {
+          "name": "EntryKey",
+          "type": "string"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "OrganizationID": {
+          "name": "OrganizationID",
+          "type": "uuid"
+        },
+        "EntryYear": {
+          "name": "EntryYear",
+          "type": "number"
+        },
+        "Category": {
+          "name": "Category",
+          "type": "string"
+        },
+        "ProductName": {
+          "name": "ProductName",
+          "type": "string"
+        },
+        "Result": {
+          "name": "Result",
+          "type": "string"
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        },
+        "OrganizationID": {
+          "targetEntity": "Organization",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "ContactMethod": {
+      "name": "ContactMethod",
+      "entityName": "MJ_BizApps_Common: Contact Methods",
+      "targetTable": "ContactMethod",
+      "schema": "__mj_BizAppsCommon",
+      "pack": "core",
+      "outputDirectory": "contact-methods",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "OrganizationID": {
+          "name": "OrganizationID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "ContactTypeID": {
+          "name": "ContactTypeID",
+          "type": "string"
+        },
+        "Value": {
+          "name": "Value",
+          "type": "string"
+        },
+        "Label": {
+          "name": "Label",
+          "type": "string",
+          "nullable": true
+        },
+        "IsPrimary": {
+          "name": "IsPrimary",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        },
+        "OrganizationID": {
+          "targetEntity": "Organization",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Event": {
+      "name": "Event",
+      "entityName": "MoreCheese: Events",
+      "targetTable": "Event",
+      "schema": "morecheese_events",
+      "pack": "community",
+      "outputDirectory": "events",
+      "businessKey": [
+        "EventKey"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "EventKey": {
+          "name": "EventKey",
+          "type": "string"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "EventType": {
+          "name": "EventType",
+          "type": "string"
+        },
+        "EventDate": {
+          "name": "EventDate",
+          "type": "date"
+        },
+        "IsVirtual": {
+          "name": "IsVirtual",
+          "type": "boolean"
+        },
+        "IsPaid": {
+          "name": "IsPaid",
+          "type": "boolean"
+        },
+        "City": {
+          "name": "City",
+          "type": "string",
+          "nullable": true
+        },
+        "State": {
+          "name": "State",
+          "type": "string",
+          "nullable": true
+        },
+        "Latitude": {
+          "name": "Latitude",
+          "type": "number",
+          "nullable": true
+        },
+        "Longitude": {
+          "name": "Longitude",
+          "type": "number",
+          "nullable": true
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "FormAnswer": {
+      "name": "FormAnswer",
+      "entityName": "MJ_BizApps_Forms: Form Response Answers",
+      "targetTable": "ResponseAnswer",
+      "schema": "__mj_BizAppsForms",
+      "pack": "community",
+      "outputDirectory": "form-answers",
+      "businessKey": [
+        "ResponseID",
+        "QuestionID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "ResponseID": {
+          "name": "ResponseID",
+          "type": "uuid"
+        },
+        "QuestionID": {
+          "name": "QuestionID",
+          "type": "uuid"
+        },
+        "TextValue": {
+          "name": "TextValue",
+          "type": "string",
+          "nullable": true
+        },
+        "NumericValue": {
+          "name": "NumericValue",
+          "type": "number",
+          "nullable": true
+        },
+        "BooleanValue": {
+          "name": "BooleanValue",
+          "type": "boolean",
+          "nullable": true
+        }
+      },
+      "foreignKeys": {
+        "ResponseID": {
+          "targetEntity": "FormResponse",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "FormDistribution": {
+      "name": "FormDistribution",
+      "entityName": "MJ_BizApps_Forms: Form Distributions",
+      "targetTable": "Distribution",
+      "schema": "__mj_BizAppsForms",
+      "pack": "community",
+      "outputDirectory": "form-distributions",
+      "businessKey": [
+        "FormID",
+        "Name"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "FormID": {
+          "name": "FormID",
+          "type": "uuid"
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "ChannelType": {
+          "name": "ChannelType",
+          "type": "string"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "OpenAt": {
+          "name": "OpenAt",
+          "type": "date"
+        },
+        "CloseAt": {
+          "name": "CloseAt",
+          "type": "date",
+          "nullable": true
+        },
+        "ResponseCount": {
+          "name": "ResponseCount",
+          "type": "number"
+        },
+        "CaptchaRequired": {
+          "name": "CaptchaRequired",
+          "type": "boolean"
+        },
+        "IsActive": {
+          "name": "IsActive",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "FormResponse": {
+      "name": "FormResponse",
+      "entityName": "MJ_BizApps_Forms: Form Responses",
+      "targetTable": "Response",
+      "schema": "__mj_BizAppsForms",
+      "pack": "community",
+      "outputDirectory": "form-responses",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "FormID": {
+          "name": "FormID",
+          "type": "uuid"
+        },
+        "FormVersionID": {
+          "name": "FormVersionID",
+          "type": "uuid"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "RespondentPersonID": {
+          "name": "RespondentPersonID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "AnonymousSessionID": {
+          "name": "AnonymousSessionID",
+          "type": "string",
+          "nullable": true
+        },
+        "SourceMetadata": {
+          "name": "SourceMetadata",
+          "type": "string",
+          "nullable": true
+        },
+        "StartedAt": {
+          "name": "StartedAt",
+          "type": "date",
+          "nullable": true
+        },
+        "SubmittedAt": {
+          "name": "SubmittedAt",
+          "type": "date",
+          "nullable": true
+        }
+      },
+      "foreignKeys": {
+        "RespondentPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "IssueComment": {
+      "name": "IssueComment",
+      "entityName": "MJ_BizApps_Issues: Issue Comments",
+      "targetTable": "Comment",
+      "schema": "__mj_BizAppsIssues",
+      "pack": "community",
+      "outputDirectory": "issue-comments",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "IssueID": {
+          "name": "IssueID",
+          "type": "uuid"
+        },
+        "Body": {
+          "name": "Body",
+          "type": "string"
+        },
+        "Source": {
+          "name": "Source",
+          "type": "string"
+        },
+        "AuthorPersonID": {
+          "name": "AuthorPersonID",
+          "type": "uuid",
+          "nullable": true
+        }
+      },
+      "foreignKeys": {
+        "IssueID": {
+          "targetEntity": "Issue",
+          "targetField": "ID"
+        },
+        "AuthorPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "IssueSequence": {
+      "name": "IssueSequence",
+      "entityName": "MJ_BizApps_Issues: Issue Number Sequences",
+      "targetTable": "NumberSequence",
+      "schema": "__mj_BizAppsIssues",
+      "pack": "community",
+      "outputDirectory": "issue-sequences",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ScopeCode": {
+          "name": "ScopeCode",
+          "type": "string",
+          "isPrimaryKey": true
+        },
+        "NextSequenceNumber": {
+          "name": "NextSequenceNumber",
+          "type": "number"
+        }
+      },
+      "foreignKeys": {},
+      "isImmutable": false
+    },
+    "Issue": {
+      "name": "Issue",
+      "entityName": "MJ_BizApps_Issues: Issues",
+      "targetTable": "Issue",
+      "schema": "__mj_BizAppsIssues",
+      "pack": "community",
+      "outputDirectory": "issues",
+      "businessKey": [
+        "IssueNumber"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "IssueNumber": {
+          "name": "IssueNumber",
+          "type": "string"
+        },
+        "Title": {
+          "name": "Title",
+          "type": "string"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "string"
+        },
+        "IssueTypeID": {
+          "name": "IssueTypeID",
+          "type": "uuid"
+        },
+        "StatusID": {
+          "name": "StatusID",
+          "type": "string"
+        },
+        "Severity": {
+          "name": "Severity",
+          "type": "string"
+        },
+        "Priority": {
+          "name": "Priority",
+          "type": "string"
+        },
+        "ReporterPersonID": {
+          "name": "ReporterPersonID",
+          "type": "uuid"
+        },
+        "AssigneeEntityID": {
+          "name": "AssigneeEntityID",
+          "type": "string",
+          "nullable": true
+        },
+        "AssigneeRecordID": {
+          "name": "AssigneeRecordID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "SourceEntityID": {
+          "name": "SourceEntityID",
+          "type": "string"
+        },
+        "SourceRecordID": {
+          "name": "SourceRecordID",
+          "type": "uuid"
+        },
+        "ResolvedAt": {
+          "name": "ResolvedAt",
+          "type": "date",
+          "nullable": true
+        },
+        "ClosedAt": {
+          "name": "ClosedAt",
+          "type": "date",
+          "nullable": true
+        }
+      },
+      "foreignKeys": {
+        "ReporterPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "MemberCertification": {
+      "name": "MemberCertification",
+      "entityName": "MoreCheese: Member Certifications",
+      "targetTable": "MemberCertification",
+      "schema": "morecheese_learning",
+      "pack": "community",
+      "outputDirectory": "member-certifications",
+      "businessKey": [
+        "MemberCertKey"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "MemberCertKey": {
+          "name": "MemberCertKey",
+          "type": "string"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "CertificationID": {
+          "name": "CertificationID",
+          "type": "uuid"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "EnrolledOn": {
+          "name": "EnrolledOn",
+          "type": "date"
+        },
+        "AwardedOn": {
+          "name": "AwardedOn",
+          "type": "date",
+          "nullable": true
+        },
+        "ExpiresOn": {
+          "name": "ExpiresOn",
+          "type": "date",
+          "nullable": true
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "MemberProfile": {
+      "name": "MemberProfile",
+      "entityName": "MoreCheese: Member Profiles",
+      "targetTable": "MemberProfile",
+      "schema": "morecheese_members",
+      "pack": "core",
+      "outputDirectory": "member-profiles",
+      "businessKey": [
+        "MemberNumber"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        },
+        "OrganizationID": {
+          "name": "OrganizationID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "MemberNumber": {
+          "name": "MemberNumber",
+          "type": "string"
+        },
+        "Segment": {
+          "name": "Segment",
+          "type": "string"
+        },
+        "Region": {
+          "name": "Region",
+          "type": "string"
+        },
+        "Country": {
+          "name": "Country",
+          "type": "string"
+        },
+        "CountryName": {
+          "name": "CountryName",
+          "type": "string"
+        },
+        "City": {
+          "name": "City",
+          "type": "string"
+        },
+        "State": {
+          "name": "State",
+          "type": "string"
+        },
+        "AddressLine1": {
+          "name": "AddressLine1",
+          "type": "string",
+          "nullable": true
+        },
+        "AddressLine2": {
+          "name": "AddressLine2",
+          "type": "string",
+          "nullable": true
+        },
+        "PostalCode": {
+          "name": "PostalCode",
+          "type": "string",
+          "nullable": true
+        },
+        "Latitude": {
+          "name": "Latitude",
+          "type": "number"
+        },
+        "Longitude": {
+          "name": "Longitude",
+          "type": "number"
+        },
+        "JoinDate": {
+          "name": "JoinDate",
+          "type": "date"
+        },
+        "RaceEthnicity": {
+          "name": "RaceEthnicity",
+          "type": "string",
+          "nullable": true
+        },
+        "EthnicityHispanic": {
+          "name": "EthnicityHispanic",
+          "type": "string",
+          "nullable": true
+        },
+        "PronounSet": {
+          "name": "PronounSet",
+          "type": "string",
+          "nullable": true
+        },
+        "PrimaryLanguage": {
+          "name": "PrimaryLanguage",
+          "type": "string"
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        },
+        "OrganizationID": {
+          "targetEntity": "Organization",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "OrderLine": {
+      "name": "OrderLine",
+      "entityName": "MJ_BizApps_Orders: Order Lines",
+      "targetTable": "OrderLine",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "outputDirectory": "order-lines",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "OrderHeaderID": {
+          "name": "OrderHeaderID",
+          "type": "uuid"
+        },
+        "ProductID": {
+          "name": "ProductID",
+          "type": "uuid"
+        },
+        "CompanyID": {
+          "name": "CompanyID",
+          "type": "uuid"
+        },
+        "LineNumber": {
+          "name": "LineNumber",
+          "type": "number"
+        },
+        "Quantity": {
+          "name": "Quantity",
+          "type": "number"
+        },
+        "UnitPrice": {
+          "name": "UnitPrice",
+          "type": "number"
+        },
+        "DiscountPct": {
+          "name": "DiscountPct",
+          "type": "number"
+        },
+        "DiscountAmount": {
+          "name": "DiscountAmount",
+          "type": "number"
+        },
+        "ChargeAmount": {
+          "name": "ChargeAmount",
+          "type": "number"
+        },
+        "LineTax": {
+          "name": "LineTax",
+          "type": "number"
+        },
+        "IsRollupParent": {
+          "name": "IsRollupParent",
+          "type": "boolean"
+        },
+        "IsQuantityOverridden": {
+          "name": "IsQuantityOverridden",
+          "type": "boolean"
+        },
+        "FulfillmentStatus": {
+          "name": "FulfillmentStatus",
+          "type": "string"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "string"
+        },
+        "LineTotalNet": {
+          "name": "LineTotalNet",
+          "type": "number"
+        },
+        "LineTotalGross": {
+          "name": "LineTotalGross",
+          "type": "number"
+        }
+      },
+      "foreignKeys": {
+        "OrderHeaderID": {
+          "targetEntity": "Order",
+          "targetField": "ID"
+        },
+        "ProductID": {
+          "targetEntity": "Product",
+          "targetField": "ID"
+        },
+        "CompanyID": {
+          "targetEntity": "Company",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Order": {
+      "name": "Order",
+      "entityName": "MJ_BizApps_Orders: Order Headers",
+      "targetTable": "OrderHeader",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "outputDirectory": "orders",
+      "businessKey": [
+        "OrderNumber"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "OrderNumber": {
+          "name": "OrderNumber",
+          "type": "string"
+        },
+        "OrderType": {
+          "name": "OrderType",
+          "type": "string"
+        },
+        "OrderDate": {
+          "name": "OrderDate",
+          "type": "date"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "CompanyID": {
+          "name": "CompanyID",
+          "type": "uuid"
+        },
+        "BillToPersonID": {
+          "name": "BillToPersonID",
+          "type": "uuid"
+        },
+        "TotalGross": {
+          "name": "TotalGross",
+          "type": "number"
+        },
+        "AmountPaid": {
+          "name": "AmountPaid",
+          "type": "number"
+        },
+        "Balance": {
+          "name": "Balance",
+          "type": "number"
+        },
+        "DueDate": {
+          "name": "DueDate",
+          "type": "date"
+        },
+        "Origin": {
+          "name": "Origin",
+          "type": "string"
+        },
+        "FulfillmentStatus": {
+          "name": "FulfillmentStatus",
+          "type": "string"
+        },
+        "InitialPaymentAmount": {
+          "name": "InitialPaymentAmount",
+          "type": "number"
+        }
+      },
+      "foreignKeys": {
+        "CompanyID": {
+          "targetEntity": "Company",
+          "targetField": "ID"
+        },
+        "BillToPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "OrganizationProfile": {
+      "name": "OrganizationProfile",
+      "entityName": "MoreCheese: Organization Profiles",
+      "targetTable": "OrganizationProfile",
+      "schema": "morecheese_members",
+      "pack": "core",
+      "outputDirectory": "organization-profiles",
+      "businessKey": [
+        "OrgKey"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "OrganizationID": {
+          "name": "OrganizationID",
+          "type": "uuid"
+        },
+        "OrgKey": {
+          "name": "OrgKey",
+          "type": "string"
+        },
+        "Type": {
+          "name": "Type",
+          "type": "string"
+        },
+        "Region": {
+          "name": "Region",
+          "type": "string"
+        },
+        "Country": {
+          "name": "Country",
+          "type": "string",
+          "nullable": true
+        },
+        "CountryName": {
+          "name": "CountryName",
+          "type": "string",
+          "nullable": true
+        },
+        "City": {
+          "name": "City",
+          "type": "string"
+        },
+        "State": {
+          "name": "State",
+          "type": "string"
+        },
+        "AddressLine1": {
+          "name": "AddressLine1",
+          "type": "string",
+          "nullable": true
+        },
+        "PostalCode": {
+          "name": "PostalCode",
+          "type": "string",
+          "nullable": true
+        },
+        "Latitude": {
+          "name": "Latitude",
+          "type": "number"
+        },
+        "Longitude": {
+          "name": "Longitude",
+          "type": "number"
+        },
+        "LifecycleEventKind": {
+          "name": "LifecycleEventKind",
+          "type": "string",
+          "nullable": true
+        },
+        "LifecycleEventYear": {
+          "name": "LifecycleEventYear",
+          "type": "number",
+          "nullable": true
+        },
+        "IsSharedDemo": {
+          "name": "IsSharedDemo",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {
+        "OrganizationID": {
+          "targetEntity": "Organization",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "PaymentLine": {
+      "name": "PaymentLine",
+      "entityName": "MJ_BizApps_Orders: Payment Lines",
+      "targetTable": "PaymentLine",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "outputDirectory": "payment-lines",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PaymentHeaderID": {
+          "name": "PaymentHeaderID",
+          "type": "uuid"
+        },
+        "OrderHeaderID": {
+          "name": "OrderHeaderID",
+          "type": "uuid"
+        },
+        "Amount": {
+          "name": "Amount",
+          "type": "number"
+        },
+        "AllocatedAt": {
+          "name": "AllocatedAt",
+          "type": "date"
+        }
+      },
+      "foreignKeys": {
+        "PaymentHeaderID": {
+          "targetEntity": "Payment",
+          "targetField": "ID"
+        },
+        "OrderHeaderID": {
+          "targetEntity": "Order",
+          "targetField": "ID"
+        },
+        "OrderLineID": {
+          "targetEntity": "OrderLine",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Payment": {
+      "name": "Payment",
+      "entityName": "MJ_BizApps_Orders: Payment Headers",
+      "targetTable": "PaymentHeader",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "outputDirectory": "payments",
+      "businessKey": [
+        "PaymentNumber"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PaymentNumber": {
+          "name": "PaymentNumber",
+          "type": "string"
+        },
+        "ReceivingCompanyID": {
+          "name": "ReceivingCompanyID",
+          "type": "uuid"
+        },
+        "BillToPersonID": {
+          "name": "BillToPersonID",
+          "type": "uuid"
+        },
+        "PaymentDate": {
+          "name": "PaymentDate",
+          "type": "date"
+        },
+        "PaymentTypeID": {
+          "name": "PaymentTypeID",
+          "type": "uuid"
+        },
+        "Amount": {
+          "name": "Amount",
+          "type": "number"
+        },
+        "ProcessingFeeAmount": {
+          "name": "ProcessingFeeAmount",
+          "type": "number"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "ReceivingCompanyID": {
+          "targetEntity": "Company",
+          "targetField": "ID"
+        },
+        "BillToPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Relationship": {
+      "name": "Relationship",
+      "entityName": "MJ_BizApps_Common: Relationships",
+      "targetTable": "Relationship",
+      "schema": "__mj_BizAppsCommon",
+      "pack": "core",
+      "outputDirectory": "relationships",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "RelationshipTypeID": {
+          "name": "RelationshipTypeID",
+          "type": "uuid"
+        },
+        "FromPersonID": {
+          "name": "FromPersonID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "FromOrganizationID": {
+          "name": "FromOrganizationID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "ToPersonID": {
+          "name": "ToPersonID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "ToOrganizationID": {
+          "name": "ToOrganizationID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "Title": {
+          "name": "Title",
+          "type": "string",
+          "nullable": true
+        },
+        "StartDate": {
+          "name": "StartDate",
+          "type": "date",
+          "nullable": true
+        },
+        "EndDate": {
+          "name": "EndDate",
+          "type": "date",
+          "nullable": true
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "Notes": {
+          "name": "Notes",
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "foreignKeys": {
+        "FromPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        },
+        "FromOrganizationID": {
+          "targetEntity": "Organization",
+          "targetField": "ID"
+        },
+        "ToPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        },
+        "ToOrganizationID": {
+          "targetEntity": "Organization",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "SecureMessage": {
+      "name": "SecureMessage",
+      "entityName": "MJ_BizApps_SecureMessaging: Secure Messages",
+      "targetTable": "Message",
+      "schema": "__mj_BizAppsSecureMessaging",
+      "pack": "community",
+      "outputDirectory": "secure-messages",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PortalSessionID": {
+          "name": "PortalSessionID",
+          "type": "uuid"
+        },
+        "ThreadID": {
+          "name": "ThreadID",
+          "type": "uuid"
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid",
+          "nullable": true
+        },
+        "Direction": {
+          "name": "Direction",
+          "type": "string"
+        },
+        "Sender": {
+          "name": "Sender",
+          "type": "string"
+        },
+        "Recipient": {
+          "name": "Recipient",
+          "type": "string"
+        },
+        "Subject": {
+          "name": "Subject",
+          "type": "string",
+          "nullable": true
+        },
+        "Content": {
+          "name": "Content",
+          "type": "string"
+        },
+        "IsSecure": {
+          "name": "IsSecure",
+          "type": "boolean"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "ReceivedAt": {
+          "name": "ReceivedAt",
+          "type": "date"
+        },
+        "IsStarred": {
+          "name": "IsStarred",
+          "type": "boolean"
+        },
+        "IsImported": {
+          "name": "IsImported",
+          "type": "boolean"
+        },
+        "SourceChannel": {
+          "name": "SourceChannel",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "ThreadID": {
+          "targetEntity": "SecureThread",
+          "targetField": "ID"
+        },
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "SecureThread": {
+      "name": "SecureThread",
+      "entityName": "MJ_BizApps_SecureMessaging: Secure Threads",
+      "targetTable": "Thread",
+      "schema": "__mj_BizAppsSecureMessaging",
+      "pack": "community",
+      "outputDirectory": "secure-threads",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "ContactID": {
+          "name": "ContactID",
+          "type": "uuid"
+        },
+        "Subject": {
+          "name": "Subject",
+          "type": "string"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "SourceChannel": {
+          "name": "SourceChannel",
+          "type": "string"
+        },
+        "CreatedByUserID": {
+          "name": "CreatedByUserID",
+          "type": "string",
+          "nullable": true
+        },
+        "LastMessageAt": {
+          "name": "LastMessageAt",
+          "type": "date"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "boolean"
+        }
+      },
+      "foreignKeys": {
+        "ContactID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "TaskAssignment": {
+      "name": "TaskAssignment",
+      "entityName": "MJ_BizApps_Tasks: Task Assignments",
+      "targetTable": "TaskAssignment",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "outputDirectory": "task-assignments",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "TaskID": {
+          "name": "TaskID",
+          "type": "uuid"
+        },
+        "AssigneeEntityID": {
+          "name": "AssigneeEntityID",
+          "type": "string"
+        },
+        "AssigneeRecordID": {
+          "name": "AssigneeRecordID",
+          "type": "uuid"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        }
+      },
+      "foreignKeys": {
+        "TaskID": {
+          "targetEntity": "Task",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "TaskLink": {
+      "name": "TaskLink",
+      "entityName": "MJ_BizApps_Tasks: Task Links",
+      "targetTable": "TaskLink",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "outputDirectory": "task-links",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "TaskID": {
+          "name": "TaskID",
+          "type": "uuid"
+        },
+        "EntityID": {
+          "name": "EntityID",
+          "type": "string"
+        },
+        "RecordID": {
+          "name": "RecordID",
+          "type": "uuid"
+        }
+      },
+      "foreignKeys": {
+        "TaskID": {
+          "targetEntity": "Task",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "Task": {
+      "name": "Task",
+      "entityName": "MJ_BizApps_Tasks: Tasks",
+      "targetTable": "Task",
+      "schema": "__mj_BizAppsTasks",
+      "pack": "community",
+      "outputDirectory": "tasks",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "Name": {
+          "name": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "string"
+        },
+        "TypeID": {
+          "name": "TypeID",
+          "type": "uuid"
+        },
+        "Status": {
+          "name": "Status",
+          "type": "string"
+        },
+        "Priority": {
+          "name": "Priority",
+          "type": "string"
+        },
+        "DueAt": {
+          "name": "DueAt",
+          "type": "date"
+        },
+        "StartedAt": {
+          "name": "StartedAt",
+          "type": "date",
+          "nullable": true
+        },
+        "CompletedAt": {
+          "name": "CompletedAt",
+          "type": "date",
+          "nullable": true
+        },
+        "PercentComplete": {
+          "name": "PercentComplete",
+          "type": "number"
+        },
+        "HoursEstimated": {
+          "name": "HoursEstimated",
+          "type": "number"
+        },
+        "HoursActual": {
+          "name": "HoursActual",
+          "type": "number",
+          "nullable": true
+        },
+        "CreatedByPersonID": {
+          "name": "CreatedByPersonID",
+          "type": "uuid"
+        }
+      },
+      "foreignKeys": {
+        "CreatedByPersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "isImmutable": false
     }
-  }
+  },
+  "relationalRules": [
+    {
+      "kind": "date-window",
+      "name": "committee-membership-covered-by-term",
+      "sourceEntity": "CommitteeMembership",
+      "dateField": "StartDate",
+      "windowEntity": "CommitteeTerm",
+      "windowForeignKey": "TermID",
+      "windowStartField": "StartDate",
+      "windowEndField": "EndDate",
+      "requireWindow": true
+    },
+    {
+      "kind": "outcome-derived-from-ballots",
+      "name": "motion-outcome-derived-from-votes",
+      "sourceEntity": "CommitteeMotion",
+      "outcomeField": "Result",
+      "ballotEntity": "CommitteeVote",
+      "ballotDecisionForeignKey": "MotionID",
+      "ballotVoteField": "VoteValue",
+      "positiveVoteValue": "Yes",
+      "negativeVoteValue": "No",
+      "abstainVoteValue": "Abstain",
+      "passedOutcomeValue": "Passed",
+      "failedOutcomeValue": "Failed",
+      "tieOutcomeValue": "Failed",
+      "quorum": 1,
+      "tieRule": "Failed",
+      "abstainHandling": "ignore",
+      "rule": "majority"
+    },
+    {
+      "kind": "path-match",
+      "name": "order-line-company-matches-order",
+      "sourceEntity": "OrderLine",
+      "sourceField": "CompanyID",
+      "path": [
+        "OrderHeaderID:Order"
+      ],
+      "targetField": "CompanyID"
+    }
+  ]
 }
-

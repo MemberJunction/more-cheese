@@ -13,7 +13,7 @@
     "build": "npm run build:stream",
     "build:stream": "turbo --log-order=stream build",
     "build:packages": "turbo --log-order=stream build --filter=\"@mj-more-cheese-demo/*\"",
-    "generate": "loom build -p data -o generated",
+    "generate": "node scripts/generate.mjs",
     "check:ownership": "node scripts/check-ownership.mjs",
     "test": "turbo --log-order=stream test --filter=\"@mj-more-cheese-demo/*\"",
     "validate:loom": "node scripts/validate-loom-data.mjs",

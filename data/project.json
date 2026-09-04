@@ -10,5 +10,13 @@
   "cycleUnit": "year",
   "output": {
     "metadataDir": "../generated"
+  },
+  "catalogs": {
+    "MJ_BizApps_Common: Organization Types": "./catalogs/organization-types.json",
+    "MJ_BizApps_Common: Address Types": "./catalogs/address-types.json",
+    "MJ_BizApps_Common: Contact Types": "./catalogs/contact-types.json",
+    "Committees: Roles": "./catalogs/committee-roles.json",
+    "MJ_BizApps_Issues: Issue Status": "./catalogs/issue-statuses.json",
+    "MJ: Entities": "./catalogs/entities.json"
   }
 }

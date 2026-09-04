@@ -1,0 +1,66 @@
+[
+  {
+    "ID": "9DD3365E-F51A-4841-B3A2-F7BCB7B227A7",
+    "Name": "Chair",
+    "Description": "Leads the committee and runs meetings",
+    "IsOfficer": true,
+    "IsVotingRole": true,
+    "Sequence": 10
+  },
+  {
+    "ID": "84456685-A82A-4EC4-8D13-2D7C78F4BC4B",
+    "Name": "Vice Chair",
+    "Description": "Supports chair and leads in their absence",
+    "IsOfficer": true,
+    "IsVotingRole": true,
+    "Sequence": 20
+  },
+  {
+    "ID": "8D87B1BD-3653-462F-B99E-F639186B243A",
+    "Name": "Secretary",
+    "Description": "Records minutes and manages documentation",
+    "IsOfficer": true,
+    "IsVotingRole": true,
+    "Sequence": 30
+  },
+  {
+    "ID": "D329D503-C280-45C4-9265-DBA4AC3FF8BA",
+    "Name": "Treasurer",
+    "Description": "Manages committee finances and reporting",
+    "IsOfficer": true,
+    "IsVotingRole": true,
+    "Sequence": 40
+  },
+  {
+    "ID": "D0409541-ABAA-4780-8E0A-2A07E78E15E3",
+    "Name": "Member",
+    "Description": "Voting member of the committee",
+    "IsOfficer": false,
+    "IsVotingRole": true,
+    "Sequence": 100
+  },
+  {
+    "ID": "CA5CD32E-2869-4904-93F4-1E63630BF84A",
+    "Name": "Non-Voting Member",
+    "Description": "Participates but does not vote",
+    "IsOfficer": false,
+    "IsVotingRole": false,
+    "Sequence": 110
+  },
+  {
+    "ID": "D1C2B6D4-9119-4D3E-A0D3-19EFBE56F2A9",
+    "Name": "Liaison",
+    "Description": "Represents another group or organization",
+    "IsOfficer": false,
+    "IsVotingRole": false,
+    "Sequence": 120
+  },
+  {
+    "ID": "8764A17C-1690-4E8D-AFF1-4CC6D4CA8E54",
+    "Name": "Advisor",
+    "Description": "Provides expertise without membership",
+    "IsOfficer": false,
+    "IsVotingRole": false,
+    "Sequence": 130
+  }
+]

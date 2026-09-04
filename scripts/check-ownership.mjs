@@ -128,8 +128,6 @@ for (const [dir, entry] of Object.entries(ownership.directories)) {
       }
     } else if (entry.reason.includes('reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)')) {
       // Approved reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)
-    } else if (entry.reason.includes('moves under Loom in C27-4')) {
-      // Transitional frozen directory pending C27-4 widening
     } else {
       console.error(`❌ Unapproved frozen directory or reason: ${dir} (reason: "${entry.reason}")`);
       errors++;
