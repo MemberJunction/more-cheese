@@ -265,46 +265,6 @@
       },
       "isImmutable": false
     }
-  },
-  "relationalRules": [
-    {
-      "kind": "path-match",
-      "name": "Comment Author Committee Membership",
-      "sourceEntity": "Committees: Comments",
-      "path": ["AgendaItemID:Committees: Agenda Items", "MeetingID:Committees: Meetings"],
-      "targetField": "CommitteeID",
-      "inclusion": {
-        "poolEntity": "Committees: Memberships",
-        "poolItemField": "PersonID",
-        "poolContainerField": "CommitteeID",
-        "sourceItemField": "PersonID"
-      }
-    },
-    {
-      "kind": "date-window",
-      "name": "Activity Within Membership Period",
-      "sourceEntity": "MJ_BizApps_Common: Activities",
-      "dateField": "ActivityDate",
-      "linkEntity": "MJ_BizApps_Common: Activity Links",
-      "linkSourceField": "ActivityID",
-      "linkTargetField": "RecordID",
-      "windowEntity": "MoreCheese: Membership Periods",
-      "windowForeignKey": "PersonID",
-      "windowStartField": "StartDate",
-      "windowEndField": "EndDate"
-    },
-    {
-      "kind": "text-contains-path",
-      "name": "Minute Context and Agenda Reference",
-      "sourceEntity": "Committees: Minutes",
-      "textField": "Content",
-      "path": ["MeetingID:Committees: Meetings"],
-      "targetFields": ["Name", "MeetingDate"],
-      "childReferences": {
-        "childEntity": "Committees: Agenda Items",
-        "foreignKey": "MeetingID",
-        "childField": "Title"
-      }
-    }
-  ]
+  }
 }
+
