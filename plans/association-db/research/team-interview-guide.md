@@ -6,7 +6,7 @@ Two short chats (~20–30 min each). Just ask the questions and write down what 
 
 ---
 
-## Chat 1 — the domain lead (how membership data really works)
+## Chat 1 — Robert (how membership data really works)
 
 **1. "A membership record has these date fields — can you walk me through what each one means exactly?"**
 - **StartDate / EndDate** — *we think: the paid period. EndDate is when the current paid term runs out, even if they'll probably renew.*
@@ -35,7 +35,7 @@ Then confirm the status rules: *"So an 'Active' member always has EndDate in the
 
 ---
 
-## Chat 2 — the demo lead / leadership (what the demo needs to show)
+## Chat 2 — Amith / leadership (what the demo needs to show)
 
 **1. "In demos, what 3–5 numbers do prospects always ask about?"**
 *Those numbers get the most care in generation — they have to look right.*

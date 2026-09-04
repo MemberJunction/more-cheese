@@ -173,7 +173,7 @@ For a **trade** association generator, weight: engagement-lapse ≫ company clos
 
 ## Proposed benchmark targets for the generator (medium scale, ~2,500 members)
 
-> **REVISED 2026-07-02 — decision applied.** The original draft assumed a "combination-style trade association" (87% renewal). It was **DECIDED (the workstream lead, from the morecheese site) that MoreCheese is a professional society** — individuals are members — so rows 1, 2, 2b, 5a, 9b, and 10a below are re-derived on MGI's individual-membership-org (IMO) numbers. `benchmarks-draft.json` (v0.2+) is the canonical target list; if this table and the JSON disagree, **the JSON wins**.
+> **REVISED 2026-07-02 — decision applied.** The original draft assumed a "combination-style trade association" (87% renewal). It was **DECIDED (Barnatt, from the morecheese site) that MoreCheese is a professional society** — individuals are members — so rows 1, 2, 2b, 5a, 9b, and 10a below are re-derived on MGI's individual-membership-org (IMO) numbers. `benchmarks-draft.json` (v0.2+) is the canonical target list; if this table and the JSON disagree, **the JSON wins**.
 >
 > **⚠ FURTHER SUPERSEDED 2026-07-02/05 (R8/R9 + Q&A alignment).** Several rows below were later re-derived on in-domain IRS-990 evidence and team answers — notably renewal **82% → 87%** (row 1), the tenure curve re-anchored at **68% yr-1 / 92% yr-5+**, conference attendance → **35% of members** (+32% non-member registrants), engagement tiers → the team's **50/40/10** with renewal coupling 95/82/67, and acquisition → **~14%** of base. Do NOT lift numbers from this table without checking `benchmarks-draft.json` (v0.8) first.
 

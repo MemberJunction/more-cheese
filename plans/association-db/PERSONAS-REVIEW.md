@@ -42,7 +42,7 @@ members) is generated around them.
 
 **Members —**
 
-- **Elena Rodriguez** · Head Cheesemaker, Crowfeather Creamery (CA) — the flagship member:
+- **Elena Rodriguez** · Head Cheesemaker, Sierra Vista Creamery (CA) — the flagship member:
   active in events, courses, committees, forums since 2022. *Use for:* member-360, "great
   member" retention story, semantic search ("tell me about Elena").
 - **Anna Brown** · former Specialty Cheese Buyer, Northgate Market Group (Boston) — was a

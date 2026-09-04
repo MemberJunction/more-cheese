@@ -1,6 +1,6 @@
 # R5 — Causal Map Draft (pre-workshop)
 
-**Status: DRAFT for the R5 workshop.** Every arrow needs human review (the schema owner, the generative-data lead, the domain lead). Strength values marked `TBD-R1`/`TBD-R3` get filled from the research deliverables; the *signs* and *justifications* are the reviewable content — a sign flip in the pilot run is a hard reject, so get them right here.
+**Status: DRAFT for the R5 workshop.** Every arrow needs human review (Marcelo, Madhav, Robert). Strength values marked `TBD-R1`/`TBD-R3` get filled from the research deliverables; the *signs* and *justifications* are the reviewable content — a sign flip in the pilot run is a hard reject, so get them right here.
 
 Format per arrow: `from → to` | sign | strength (weak/med/strong) | mechanism (one line).
 
@@ -33,7 +33,7 @@ Proposed copula: φ↔θ **+med**, φ↔ε **+weak**, θ↔ε **+med**
 | 1.7 | time(regime: duesInflation) → duesAmount | + | weak | ~2-4%/yr drift |
 | 1.8 | engagement → renewed? | + | strong | THE headline arrow; disengaged members lapse |
 | 1.9 | tenure → renewed? | + | med | concave: year-1 renewal ≪ tenured renewal (curve from R1) |
-| 1.10 | autoRenew → renewed? | + | med | friction removal (lift from R1/the domain lead) |
+| 1.10 | autoRenew → renewed? | + | med | friction removal (lift from R1/Robert) |
 | 1.11 | affluence → renewed? | + | weak | budget-driven non-renewal (R1 reason rankings) |
 | 1.12 | time(regime: covid) → renewed? | − | med | 2020-21 retention dip |
 
@@ -124,7 +124,7 @@ Proposed copula: φ↔θ **+med**, φ↔ε **+weak**, θ↔ε **+med**
 **New arrows/constraints discovered:**
 - **6.5 (NEW, gate):** `CompetitionEntry → Product.Organization must hold an org-level membership` — a real ACS rule (R2). Hard referential constraint; add to schema reconciliation list.
 - **6.3 calibration:** medal rate ≈ 25% of entries (ACS). v1 shipped 51% — R3 flags the fix.
-- **1.13 (NEW, weak):** fixed-calendar renewal date + 2–3-month grace period correlate with ≥80% renewal (MGI) — decide in workshop whether to model grace-period reinstatement as a distinct transition (R4 the domain lead Q2).
+- **1.13 (NEW, weak):** fixed-calendar renewal date + 2–3-month grace period correlate with ≥80% renewal (MGI) — decide in workshop whether to model grace-period reinstatement as a distinct transition (R4 Robert Q2).
 
 **The v1 anti-pattern, named (R3's core finding):** nearly every v1 bug is the *same* flaw — correlated business facts sampled as **independent** random draws (Status ⊥ EndDate, NoShow ⊥ CheckIn, Completed ⊥ CompletionDate, Medal ⊥ JudgeScore). The causal map above is precisely the cure: every one of those pairs sits on an arrow or a gate here, so the generator draws them *jointly*. Any column pair that v1 broke must appear in this map — use R3 §4 as the completeness checklist.
 
@@ -167,32 +167,15 @@ R2b research (in flight) fills these: World Cheese Awards volumes, Guilde Intern
 
 Also: **1.2's mechanism example ("WI/CA producers") is US-parochial** — rewrite with international examples at workshop; **3.8 bundles two hops** (CE credits → renewal) — split into two arrows when authoring the ruleset.
 
-**Open decisions — RESOLVED 2026-07-02 (the workstream lead: customer base is US → lean US metrics):**
+**Open decisions — RESOLVED 2026-07-02 (Barnatt: customer base is US → lean US metrics):**
 1. **Geography mix: 60% NA / 25% Europe / 15% RoW** (US-majority international federation; R2b's 12-value Region list kept for flavor). Arrows 2.10–2.12 stay — they now shape the international *minority*'s behavior.
-2. **Currency: single USD** — off the schema owner's blocking list.
+2. **Currency: single USD** — off Marcelo's blocking list.
 3. **Event topology: fixed US-hosted flagship conference** + chapter/regional events. The WCA host-country-bump arrow is NOT adopted.
 4. Certification: one global credential (CCP-style) — consistent with US calibration.
 5. **Honorific grades: rejected** — MembershipType stays a paid-tier-only dimension.
-
-## 2026-07-07 — post-v0.9 alignment: proposed NEW arrows (benchmarks now exist with no generating arrow; DRAFT for workshop)
-
-The v0.8/v0.9 gap-fill passes added benchmark families this map predates. Each proposed arrow
-below cites the benchmark it must reproduce:
-
-| # | Arrow | Sign | Strength | Mechanism / benchmark |
-|---|---|---|---|---|
-| 4.8 | payerTimingTrait (per-member sticky early/on-time/late) → days-to-pay | trait | med | `payer_trait_persistence` 0.70 — timing is a persistent member trait, not an independent draw; interacts with grace/lapse + back-dated renewals |
-| 4.9 | invoiceChannel (card-at-checkout / auto-pay dues / net-terms B2B) → payment-timing shape | gate/mixture | strong | the `payments_timing` 3-part mixture: checkout mass, due-date spike (+3–14d failed-card retries), Atradius/CRF late curve for net-terms only |
-| 4.10 | affluence → merch orders | + | weak | `merch_orders_per_member_year` 0.15, `merch_revenue_share` 2.5% — affluence-coupled like other spend |
-| 5.15 | season(Nov–Jan renewal window) → support tickets (dues/login topics); post-event window → refund/transfer tickets | + | med | `support_topic_mix` seasonal coupling — seasonality matters more than topic precision (R11 flag) |
-| 1.15 | employerEvent (dissolution / acquisition / program-cut) → renewed? | − | med | crowd-level mechanism behind the hero churn stories (Anna/Bob/Danielle all churn via employer events); makes "every lapse has a findable cause" (FEATURES-REVIEW #2) statistical rather than hero-only — requires employer-org lifecycle events in the generated world. **Review 2026-07-08: LOAD-BEARING — walk this arrow FIRST at the workshop** (without it, feature #2 collapses to hero-only) |
-| 4.11 | *(conditional on D10/forms)* engagement → form/survey response rate | + | med | engaged members answer the post-event survey; ghosts don't — responses become another engagement observable |
-| 4.12 | *(conditional on D10/forms)* satisfaction (survey scores) → repeat attendance / renewal | + | weak-med | closes the event-ROI loop (Dale Peterson's "great reviews" get a table AND a consequence) |
 
 ## Workshop protocol
 1. Walk arrows ranked by strength (strong first). For each: agree/flip/cut + one-line justification survives into the ruleset as `signPrediction` + `justification`.
 2. Fill strengths marked TBD from R1/R3 deliverables.
 3. Confirm the copula (φ↔θ +med) and whether `expertise` earns its place as a third latent (cost: every ε arrow) or folds into θ.
-4. **Confirm the 2026-07-07 proposed arrows above** (4.8–4.10, 5.15, 1.15) — they carry benchmarks with no other generating mechanism.
-5. **Ratify GAP-12** (calendar-year renewals vs release-relative hero pins — see `../gaps-to-fill.md`): the workstream lead's proposal (2026-07-07) is option (a) — calendar-year dominant + a ~25–30% anniversary cohort via auto-pay-bills-on-anniversary (+ optional grandfathered legacy cohort from a 2022 policy switch). Confirm with the domain lead/the demo lead; if ratified, the renewal-unroll rule gains a cycle-type branch and Marcus Chen moves to the anniversary cohort (auto-renew OFF).
-6. Output = `X.correlations` + `CausalDAG.edges` first draft for the vertical slice (arrows 1.1–1.12, 2.1–2.9, 4.1–4.3 + the payments arrows 4.8–4.9 if the money chain is in-slice).
+4. Output = `X.correlations` + `CausalDAG.edges` first draft for the vertical slice (arrows 1.1–1.12, 2.1–2.9, 4.1–4.3).

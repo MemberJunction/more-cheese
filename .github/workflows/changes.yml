@@ -21,26 +21,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Validate metadata referential integrity closure
-        run: node scripts/check-metadata-closure.mjs
-
-      - name: Checkout Loom Contracts
-        uses: actions/checkout@v4
-        with:
-          repository: MemberJunction/loom
-          ref: 432ec9225b7338d8987e450ce71c2e362c8a1833
-          path: loom
-
-      - name: Build Loom Contracts
-        working-directory: loom
-        run: |
-          corepack enable
-          pnpm install --frozen-lockfile
-          pnpm --filter @memberjunction/loom-contracts build
-
-      - name: Validate Loom data project & schema conformance
-        run: node scripts/validate-loom-data.mjs
-
       - name: Check for migration file changes
         id: migration_check
         run: |

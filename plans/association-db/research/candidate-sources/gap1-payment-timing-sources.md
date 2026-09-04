@@ -1,17 +1,17 @@
 # R10 — Payment timing (days-to-pay vs due date) · was GAP-1 candidate sources
 
-**Status: ✅ REVIEWED & ADOPTED (the schema owner, 2026-07-06).** Sources approved with **official
+**Status: ✅ REVIEWED & ADOPTED (Marcelo, 2026-07-06).** Sources approved with **official
 sources weighted above the two software companies** (Xero/QuickBooks → secondary corroboration
 only). The 3-part mixture-model strategy change was approved. Adopted numbers live in
 `benchmarks-draft.json` v0.9 `payments_timing` (canonical). Per-source verdicts below.
 
-**2026-07-06 association-specific check (the schema owner's ask): do associations report payment-timing
+**2026-07-06 association-specific check (Marcelo's ask): do associations report payment-timing
 data? VERDICT: NO.** Checked: MGI Benchmarking Report (covers renewal process — installments
 33%, ~3mo grace — but no days-to-pay/aging); ASAE Financial & Operational Performance / former
 Operating Ratio Report (Form-990 balance-sheet ratios incl. net AR — levels, not timing); AMS
 vendors (Personify, iMIS/ASI, Fonteva, Wild Apricot — features, no behavior datasets);
 Nonprofit Finance Fund State of the Sector (government-funder payment delays — wrong payer).
-⟹ Per the schema owner's rule, the cross-industry sources below stand as the defensible basis, with the
+⟹ Per Marcelo's rule, the cross-industry sources below stand as the defensible basis, with the
 MGI installment/grace stats and ASAE net-AR ratios available as association-specific context.
 
 | # | Verdict | Source | Publisher / year | Nature | Headline numbers | Access |
@@ -31,7 +31,7 @@ MGI installment/grace stats and ASAE net-AR ratios available as association-spec
 - `netterms_dollar_aging` [0.87 current, 0.004 >91d] (#4 primary — thin-tail bound)
 - `payer_trait_persistence` 0.70 (requirement; no published stat — ESTIMATE)
 
-## Strategy flags raised by the run (per the schema owner's "raise it at the end" instruction)
+## Strategy flags raised by the run (per Marcelo's "raise it at the end" instruction)
 
 1. **A single days-late curve would mislead — recommend a 3-part mixture.** Most individual
    association payments (event regs, course fees, merch) are card-at-checkout: invoice and

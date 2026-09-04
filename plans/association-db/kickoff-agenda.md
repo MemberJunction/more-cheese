@@ -1,11 +1,11 @@
 # demo-morecheese — Kickoff Meeting
 
-**60 min, Monday. Add the demo lead (he asked to be in it).**
+**60 min, Monday. Add Amith (he asked to be in it).**
 **Pre-read:** `work-breakdown.md` (the working summary) + open `morecheese-site-mockup/index.html` (the website starting point).
 
 **The point of this meeting:** the whole project hinges on one thing — **are the apps we depend on actually ready?** This meeting confirms that, clears the early roadblocks, and agrees what starts this week. Ship date is **July 31** (~4.5 weeks).
 
-**The thesis in one line:** MoreCheese is "just another Open App" — it composes 10 apps we already have + adds the cheese-specific bits, and installs anywhere with one command. No golden image, no special setup. (This is why the generative-data lead's old "template" idea is gone — you just install the app.)
+**The thesis in one line:** MoreCheese is "just another Open App" — it composes 10 apps we already have + adds the cheese-specific bits, and installs anywhere with one command. No golden image, no special setup. (This is why Madhav's old "template" idea is gone — you just install the app.)
 
 ---
 

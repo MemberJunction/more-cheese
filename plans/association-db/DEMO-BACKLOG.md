@@ -1,11 +1,11 @@
 # Demo Backlog — deferred work (circle back after the current release)
 
-**Created 2026-07-06 (the schema owner's call).** Items deliberately dropped from the current demo
+**Created 2026-07-06 (Marcelo's call).** Items deliberately dropped from the current demo
 scope. Each has enough context to pick up cold. Raise BL-1 in a team meeting when the time
 comes.
 
 ## BL-1 — Real-system integration modeling (was GAP-3): HubSpot / Higher Logic schema calibration
-- **Decision (the schema owner, 2026-07-06):** dropped for this demo — "integration modeling isn't
+- **Decision (Marcelo, 2026-07-06):** dropped for this demo — "integration modeling isn't
   super important" yet. The marketing + community schemas ship as the **simple baseline** in
   `research-plan-and-schema-proposal.md` §2.4/§2.7 (no HubSpot-style email event log, no
   Community container / Libraries / Announcements).
@@ -19,8 +19,8 @@ comes.
   exports share them?
 
 ## BL-2 — 990 transcription spot-check (was GAP-9)
-- the workstream lead's own caveat: the IRS-990 figures behind renewal-87% and dues-share-22% are
-  LLM-transcribed from ProPublica. Deferred by the schema owner (2026-07-06) — not pre-sales work.
+- Barnatt's own caveat: the IRS-990 figures behind renewal-87% and dues-share-22% are
+  LLM-transcribed from ProPublica. Deferred by Marcelo (2026-07-06) — not pre-sales work.
   Verify the load-bearing figures before the ruleset FREEZES; log verdicts in
   `benchmarks-draft.json` `$verification`.
 

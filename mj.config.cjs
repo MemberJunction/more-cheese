@@ -7,9 +7,9 @@
 // NOT put credentials here. Most settings have sensible package defaults; this
 // file only declares what is specific to this app's directory structure.
 //
-// TODO(template): everywhere you see "sample" or "@mj-more-cheese-demo", replace with
+// TODO(template): everywhere you see "sample" or "@mj-sample-app", replace with
 // your app's schema name and npm scope. The full rename checklist lives in
-// docs/template-docs/getting-started.md.
+// docs/getting-started.md.
 //
 module.exports = {
   // ==========================================================================
@@ -18,7 +18,7 @@ module.exports = {
 
   // The npm package that receives generated entity subclasses. Must match
   // packages/Entities/package.json "name".
-  entityPackageName: '@mj-more-cheese-demo/entities',
+  entityPackageName: '@mj-sample-app/entities',
 
   // Where each kind of generated artifact is written. These paths match this
   // template's packages/ layout — keep them in sync if you rename packages.
@@ -30,6 +30,7 @@ module.exports = {
       options: [{ name: 'maxComponentsPerModule', value: 20 }],
     },
     { type: 'GraphQLServer', directory: './packages/Server/src/generated' },
+    { type: 'ActionSubclasses', directory: './packages/Actions/src/generated' },
     { type: 'EntitySubclasses', directory: './packages/Entities/src/generated' },
     { type: 'DBSchemaJSON', directory: './Schema Files' },
   ],
@@ -38,6 +39,7 @@ module.exports = {
   // so the generated TypeScript is compiled and committed alongside its source.
   commands: [
     { workingDirectory: './packages/Entities', command: 'npm', args: ['run', 'build'], when: 'after' },
+    { workingDirectory: './packages/Actions', command: 'npm', args: ['run', 'build'], when: 'after' },
     { workingDirectory: './packages/Server', command: 'npm', args: ['run', 'build'], when: 'after' },
     { workingDirectory: './packages/Angular', command: 'npm', args: ['run', 'build'], when: 'after' },
   ],
@@ -51,15 +53,8 @@ module.exports = {
   newEntityDefaults: {
     NameRulesBySchema: [
       { SchemaName: '${mj_core_schema}', EntityNamePrefix: 'MJ: ' },
-      // stand-in for the bizapps-common dependency (playground DBs): their prefix, not ours
-      { SchemaName: '__mj_BizAppsCommon', EntityNamePrefix: 'MJ_BizApps_Common: ', EntityNameSuffix: '' },
-      { SchemaName: '__mj_BizAppsCommittees', EntityNamePrefix: 'Committees: ', EntityNameSuffix: '' },
-      { SchemaName: '__mj_BizAppsForms', EntityNamePrefix: 'MJ_BizApps_Forms: ', EntityNameSuffix: '' },
-      { SchemaName: '__mj_BizAppsTasks', EntityNamePrefix: 'MJ_BizApps_Tasks: ', EntityNameSuffix: '' },
-      { SchemaName: '__mj_BizAppsIssues', EntityNamePrefix: 'MJ_BizApps_Issues: ', EntityNameSuffix: '' },
-      { SchemaName: 'morecheese_members', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
-      { SchemaName: 'morecheese_events', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
-      { SchemaName: 'morecheese_learning', EntityNamePrefix: 'MoreCheese: ', EntityNameSuffix: '' },
+      // TODO(template): your schema + your prefix:
+      { SchemaName: 'sample_app', EntityNamePrefix: 'Sample App: ', EntityNameSuffix: '' },
     ],
   },
 
@@ -68,9 +63,7 @@ module.exports = {
   // ==========================================================================
   // CodeGen for THIS app must only touch THIS app's schema. Never generate
   // against MJ core (__mj) or system schemas from an app repo.
-  // Include schemas for dependencies to avoid generating duplicate entities for 
-  // them. See docs/template-docs/codegen-and-metadata-migrations.md.
-  includeSchemas: ['morecheese_members', 'morecheese_events', 'morecheese_learning'],
+  excludeSchemas: ['sys', 'staging', 'dbo', '__mj'],
 
   // ==========================================================================
   // SQL output for migrations — RECOMMENDED
@@ -90,7 +83,7 @@ module.exports = {
       // Order matters: more-specific schema names must come first (greedy
       // sequential substitution).
       // TODO(template): your schema name here:
-      { schema: 'morecheese_members', placeholder: '${flyway:defaultSchema}' },
+      { schema: 'sample_app', placeholder: '${flyway:defaultSchema}' },
       { schema: '__mj', placeholder: '${mjSchema}' },
     ],
   },

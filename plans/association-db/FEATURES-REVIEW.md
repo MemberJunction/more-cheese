@@ -15,60 +15,62 @@ anything missing that comes up in real conversations.
 
 ## 1. What the data is built to show off (priority order)
 
-**1. One person, every system — the unification story.**
-The same member appears in membership, events, learning, community, marketing, support, and
-money data, structured like a real multi-system environment. Every cross-system drill-down
-resolves.
-
-**2. Retention stories with discoverable causes.**
-Every lapse and decline has a cause findable in the data (Anna's program was cut, Bob's company
-was acquired, Danielle's creamery closed) — so an AI can genuinely diagnose "why did she
-churn?" live — plus the full renewal machinery (queues, cadences, grace, December spike).
-
-**3. Engagement scoring with receipts.**
-Scores are computed from behavior, never painted on: believable component breakdowns
-(all-advocacy Tom vs all-rounder Elena), a 50/40/10 mix, and counter-patterns that punish
-naive readings (Jamie: engaged but low-revenue; Victor: disengaged but safe).
-
-**4. A predictive-model substrate that actually predicts.**
-Churn, renewal, LTV, attendance, cert-completion and event-ROI models are trainable because
-the causal relationships are in the data — explanations hold up on the second click.
-
-**5. Numbers that survive a knowledgeable prospect.**
-Every sniff-testable rate is calibrated to published benchmarks and real IRS-990s (renewal
-87%, dues $175 / 22% of revenue, 25% medal rate) — and the 15k preset is sized on real
-same-size associations, so nothing inflates.
-
-**6. Data-quality problems with known-truth answers.**
-~50 duplicate people and ~100 stale-employer records with the truth stored as labeled ground
-truth — dedup and enrichment demos have a verifiably right answer.
-
-**7. Stable, named heroes — repeatable scripts.**
-~20 hand-authored members whose identities never change between releases; "let's look at Anna
-Brown" works in every demo, forever. See `PERSONAS-REVIEW.md`.
-
-**8. Time that tells a story.**
-Five years of history shaped by real regimes (growth → COVID shock → recovery → annual cycle
-with the December renewal spike), and release-time date-baking keeps "upcoming" events upcoming.
-
-**9. Geography that maps well.**
-Realistic addresses with pre-baked coordinates on members, orgs, and event venues, clustered
-like a real food association — the member map is most demos' opening visual.
-**[being added: coordinates + event venue city/state]**
-
-**10. Money that reconciles.**
-Everything sellable flows order → payment → balanced journal entry, with realistic payment
-timing (checkout, auto-pay spike, sourced late curve). *(Activates when the orders app ships.)*
-
-**11. Text and semantics rich enough for AI.**
-Varied, template-driven text so semantic search finds "smelly cheese" without the words,
-clustering yields believable families, and records carry topical tags.
-**[being added: site articles as searchable content items; tags per record type]**
-
-**12. The unglamorous realism that sells breadth.**
-Support tickets (members and non-members, seasonal spikes), staff on the other side of every
-queue, governance with motions and votes, advocacy, real no-show rates, and one suspended
-member proving the edge cases work.
+1. **One person, every system — the unification story.** The same member appears consistently
+   in membership, events, learning, community, marketing, support, and money data, structured
+   like a real customer environment (multiple schemas/"systems," soft-key joins). This is the
+   dataset's #1 engineered feature: every cross-system drill-down resolves, so "reason across
+   all your data" is demonstrable, not hypothetical.
+2. **Retention stories with discoverable causes.** Churn isn't a random flag — every lapse and
+   decline has a cause you can *find in the data*: Anna Brown's employer killed her program
+   (title change on record), Bob Kowalski's company was acquired, Danielle Okafor's creamery
+   dissolved. Built so an AI agent can genuinely diagnose "why did she churn?" live, plus the
+   full renewal machinery around it (pending-renewal queues, reminder cadences, 2-month grace,
+   late renewals, December renewal spike).
+3. **Engagement scoring with receipts.** Scores are *computed from* generated behavior — never
+   painted on. Component breakdowns differ believably (Tom Reyes is all-advocacy; Elena is an
+   all-rounder), the 50/40/10 engaged/casual/ghost mix holds, and deliberate counter-patterns
+   stress-test naive readings (Jamie: highly engaged, low revenue; Victor: zero engagement,
+   zero risk).
+4. **A predictive-model substrate that actually predicts.** Churn, renewal likelihood, LTV,
+   attendance forecast, certification completion, and event ROI are trainable because the
+   causal relationships are IN the data (tenure→renewal, engagement→attendance,
+   affluence→spend) — cross-tabs and model explanations hold up under scrutiny instead of
+   falling apart on the second click.
+5. **Numbers that survive a knowledgeable prospect.** Every sniff-testable rate is calibrated
+   to published benchmarks and real IRS-990 filings: renewal 87% (first-year 68%), conference
+   at 35% of members, dues $175 and 22% of revenue, 25% medal rate, 34% email opens. At the
+   15,000-member preset, sizing follows real same-size associations (flagship ≈ 2,000
+   registrants, ~$4M revenue, multi-event portfolio) — nothing inflates.
+6. **Data-quality problems with known-truth answers.** ~50 duplicate people with realistic
+   origins (Kate O'Leary's split identity) and ~100 stale-employer records with the true
+   employer stored as labeled ground truth (Aisha Bell) — so dedup and enrichment demos have a
+   verifiably right answer, not a plausible guess.
+7. **Stable, named heroes — repeatable scripts.** ~20 hand-authored members whose identities
+   and storylines never change between releases ("let's look at Anna Brown" works in every
+   demo, forever), each anchoring a specific pitch moment. See `PERSONAS-REVIEW.md`.
+8. **Time that tells a story.** Five years of dated history shaped by real regimes — growth,
+   the COVID shock (events halved, competition canceled), recovery, hybrid normal, the annual
+   cycle (entry deadlines → judging → summer conference + exam → holiday retail → December
+   renewals). Timelines and trend charts show a believable arc, and release-time date-baking
+   keeps "upcoming" events permanently upcoming.
+9. **Geography that maps well.** Realistic addresses with pre-baked coordinates on members,
+   organizations, and event venues, clustered the way a real food association clusters
+   (dairy-belt density, coastal retail) — because the member map is the first visual most
+   demos open with **[being added: coordinates + event venue city/state]**.
+10. **Money that reconciles.** Every dues renewal, registration, enrollment, entry fee,
+    product purchase and donation flows order → payment → balanced journal entry. Payments
+    behave like real payments (card-at-checkout, auto-pay due-date spike, sourced late curve
+    for corporate invoices). *(Activates when the orders application ships.)*
+11. **Text and semantics rich enough for AI.** Varied tasting notes, bios, forum posts and
+    articles (template-driven, anti-repetitive) so semantic search finds "smelly cheese"
+    without those words, product clustering yields believable families, and topical tags
+    appear on records **[being added: site articles as searchable content items; tags emitted
+    per record type]**.
+12. **The unglamorous realism that sells breadth.** Support tickets from members AND
+    non-members across real topics with seasonal spikes; staff personas on the other side of
+    every queue; governance with motions and votes; advocacy actions; no-shows at real rates;
+    an edge-case member (suspension, chargeback) proving the corner cases work; competition
+    entries gated on membership with scores that agree with medals.
 
 ## 2. Where each shows up in a live demo (the walkthrough arc)
 
