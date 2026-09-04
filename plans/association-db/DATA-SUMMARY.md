@@ -3,7 +3,7 @@
 **Date:** 2026-07-05 · **Status: FOR REVIEW** — this is the pre-generation approval document.
 Once sales signs off (and the open items in §7 are decided), we generate the dataset.
 Deep-dive companions: `research-plan-and-schema-proposal.md` (design),
-`research/benchmarks-draft.json` v0.9.2 (every target number, primary-source-verified), `hero-personas-draft.md` (the
+`research/benchmarks-draft.json` v0.9 (every target number), `hero-personas-draft.md` (the
 named characters), `gaps-to-fill.md` (what's still open), and the master plan at
 `mj/plans/association-db/v2-plan.md` + `PLAN-UPDATES.md`.
 
@@ -51,7 +51,7 @@ engagement score — because **cross-system unification is the product demo**. A
 | Secure messaging | Member↔staff and board threads | staff-volume calibrated |
 | Awards & competition | Products (cheeses), annual competition, entries (~1,575/yr from ~210 member companies), judges, scores, medals (25% medal rate — judged scores and medals actually agree) | ~110 products, 5 competitions |
 | Advocacy / legislative | Bodies, issues (raw-milk rules, labeling, FSMA…), positions, member advocacy actions | 12 issues, ~150 actions |
-| Money chain (orders → payments → accounting) | Every dues renewal, event registration, enrollment, entry fee, product purchase **and donation** becomes an **order → payment → balanced journal entry**; payments land early/on-time/late against due dates with per-member payer habits — card-at-checkout mass, an auto-pay due-date spike, and a sourced B2B late curve for net-terms invoices (Atradius/CRF-calibrated; module switches on when the orders app ships). Donations ride Orders as **post-install configuration** (donation products/categories/GL accounts shipped as demo seed config, per the domain lead's ruling) | every dollar reconciles |
+| Money chain (orders → payments → accounting) | Every dues renewal, event registration, enrollment, entry fee, product purchase **and donation** becomes an **order → payment → balanced journal entry**; payments land early/on-time/late against due dates with per-member payer habits — card-at-checkout mass, an auto-pay due-date spike, and a sourced B2B late curve for net-terms invoices (Atradius/CRF-calibrated; module switches on when the orders app ships). Donations ride Orders as **post-install configuration** (donation products/categories/GL accounts shipped as demo seed config, per Robert's ruling) | every dollar reconciles |
 | Engagement scoring (Sonar) | Signals computed **from the actual generated behavior** (not invented): event, course, forum, committee, advocacy, payment-recency components → composite scores, history, bands (50% engaged / 40% casual / 10% ghost) | 1 score + history per member |
 | Analytics | The 108 curated queries ported from v1 — each guaranteed a meaningful, non-degenerate answer | 108 queries |
 
@@ -61,13 +61,13 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 
 | Number | Value | Grounding |
 |---|---|---|
-| Renewal rate | **87%** overall; **68%** first-year; 92% at 5+ years | IRS-990 dues-trend analysis across 8 real craft-food societies + MGI benchmark — every figure verified against the e-filed 990s (2026-07-07) |
+| Renewal rate | **87%** overall; **68%** first-year; 92% at 5+ years | IRS-990 dues-trend analysis across 8 real craft-food societies + MGI benchmark |
 | Flagship conference | **35%** of members attend + ~32% of registrants are non-members | Real ACS attendance (~1,000–1,300 of ~2,300) |
-| Individual dues | **$175** | ACS exactly — verified on cheesesociety.org (2026-07-07; full tier lattice matches) |
+| Individual dues | **$175** | ACS exactly; independently re-confirmed (Cider Assn = $175) |
 | Dues share of revenue | **22%** (events/programs ~78%) | ACS FY2024 IRS-990 |
 | Email engagement | 34% open / 3% click | Higher Logic association benchmark |
 | Competition | ~7.5 entries per entering company, 25% medal rate | ACS 2025 actuals |
-| Engagement mix | 50/40/10 engaged/casual/ghost | Team ground truth (the domain lead), coupled to renewal 95/82/67 |
+| Engagement mix | 50/40/10 engaged/casual/ghost | Team ground truth (Robert), coupled to renewal 95/82/67 |
 
 ## 5. How we control the structure (why this won't be "random data that looks off")
 
@@ -85,7 +85,7 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
    lapse timing) are enforced at generation and re-verified by an **install-time integrity
    check**. Member status is always **derived from the membership records** — never a stored
    column that can drift (the confirmed v1 bug).
-4. **Stable heroes, deterministic crowd.** 22 (20 members + 2 staff, growing to 50–100) hand-authored hero members
+4. **Stable heroes, deterministic crowd.** ~16 (growing to 50–100) hand-authored hero members
    with storylines are pinned inputs; the generator builds a consistent history around them.
    Same seed → identical output, so **names and demo scripts survive every rebuild**. Heroes
    are release-blocking: every release re-verifies each one loads with their storyline intact.
@@ -106,8 +106,7 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 - REQ-5 Give all 108 shipped queries non-degenerate results.
 - REQ-6 Regenerate byte-identically from the committed seed; install never runs the generator.
 - REQ-7 Ship small (~500) / medium (~2,500) / large (~15,000) presets — large is the "10k+
-  credibility" build (size-attenuated: flagship ≈ 2,000 total registrants, ~1,400 member
-  attendees ≈ 9% of members; revenue ≈ $4M — anchored on real turnouts of same-size associations).
+  credibility" build (size-attenuated: conference ≈ 13% of members, revenue ≈ $4M — fitted on real association data).
 - REQ-8 Include labeled dirty data with known-truth answers (duplicates, stale employers).
 - REQ-9 Make every dollar reconcile: order → payment → balanced journal entry, with realistic
   payment timing vs due dates (3-part mixture: checkout / auto-pay / net-terms).
@@ -127,7 +126,7 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 - Committee governance: meetings, motions, votes, minutes (Gwen Whitfield)
 - International/timezone behavior (Henri Dubois, Lars Vestergaard, Charlie Mason)
 - Predictive Studio: churn, renewal likelihood, LTV, attendance forecast, cert completion,
-  event ROI (Dale Peterson's mispositioned winter workshop) — all fed by Sonar engagement signals
+  event ROI *(ROI hero pending — GAP-8)* — all fed by Sonar engagement signals
 - Cross-system unification story: AMS + LMS + marketing + community + support + event reg
   joined by soft keys — "one member, six systems, one view"
 - New-member conversion story (non-member conference registrants; Nia Thompson cold start)
@@ -137,25 +136,20 @@ Headline numbers and their evidence — the full list with tolerances is `benchm
 
 ## 7. Open items before generation (the approval checklist)
 
-> The open decisions — with recommendations and one-line evidence per item — live in
-> **[DESIGN-REVIEW.md](DESIGN-REVIEW.md) §1** (the design review). The items below are the
-> same asks in summary form.
-
-1. Sign off **renewal 87%** and **conference 35%** (evidence packet vs the domain lead's 89/25 priors).
+1. Sign off **renewal 87%** and **conference 35%** (evidence packet vs Robert's 89/25 priors).
 2. Confirm **grace period = 2 months** and **org count ~625** at medium (deviation from the
    master plan's ~25 — needed for a credible competition).
 3. Choose the **default preset for the hosted demo** (recommend large 15k per the "10k+" ask —
-   size-attenuation is now in place: at 15k the flagship runs ~2,000 total registrants
-   (~1,400 member attendees, ≈9% of members) and revenue ≈ $4M, anchored on real reported
-   turnouts of same-size associations).
+   size-attenuation is now in place: at 15k the flagship runs ~1,950 member attendees and
+   revenue ≈ $4M, fitted on real association data).
 4. **Bless the hero names** (permanent afterward) + assign hero-authoring ownership.
 5. Gap status per `gaps-to-fill.md` — as of 07-06 evening, **all gaps are closed or routed**:
    GAP-1 (payment timing) FILLED with approved sources (Atradius/CRF primary) + the 3-part
    mixture model; GAP-2 (support taxonomy) resolved estimate-led (Gartner + HDI anchors only);
    GAP-3 dropped to `DEMO-BACKLOG.md` (integration modeling deferred — simple baseline schemas
-   ship); GAP-4 merch estimate in; GAP-5 (large-preset attenuation) FILLED — anchored on real
-   association data (ACF/ATA turnouts + ACS anchor): a 15k org's flagship ≈ 2,000 total
-   registrants (~9% member attendance), revenue ≈ $4M; GAP-6/7/8 decided (templates, donations-as-Orders-config, hero roster with
+   ship); GAP-4 merch estimate in; GAP-5 (large-preset attenuation) FILLED — fitted on real
+   association data points (ACF/SNA/AND + anchor): a 15k org's conference ≈ 13% of members,
+   revenue ≈ $4M; GAP-6/7/8 decided (templates, donations-as-Orders-config, hero roster with
    Anna Brown carried); GAP-9 backlogged. **Remaining before generation: only the GAP-10 team
    sign-offs (item 1–4 above) + the reconciliation and causal-map sessions.**
 6. Then: schema reconciliation + causal-map workshop → ruleset v0.1 → **pilot at N≈500** →

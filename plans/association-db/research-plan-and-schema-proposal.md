@@ -1,9 +1,9 @@
 # Research Plan + Concrete Schema Proposal (Generation Angle)
 
-**Author:** the workstream lead · **Date:** 2026-07-02 · **Updated 2026-07-05** (the schema owner's agent, the workstream lead-approved: Q&A alignment; see below)
-**Purpose:** Two deliverables for the reconciliation with the schema owner:
+**Author:** Barnatt · **Date:** 2026-07-02 · **Updated 2026-07-05** (Marcelo's agent, Barnatt-approved: Q&A alignment; see below)
+**Purpose:** Two deliverables for the reconciliation with Marcelo:
 1. A **research plan** for building the generator's ruleset (the `X` artifact — priors, causal map, benchmarks)
-2. A **concrete schema proposal** for the cheese-specific tables, annotated for data generation, that the schema owner reconciles against his BizApps findings
+2. A **concrete schema proposal** for the cheese-specific tables, annotated for data generation, that Marcelo reconciles against his BizApps findings
 
 > **2026-07-05 status.** R1–R3/R6–R9 are done and consolidated in `research/benchmarks-draft.json`
 > **v0.8** (canonical); the R4 team answers are applied throughout (this doc's §2.1 MembershipPeriod
@@ -65,8 +65,8 @@ The ruleset (`X`) needs four kinds of content: **realistic numbers** (renewal ra
 
 **Question:** what do the people who've run/sold to associations actually know?
 
-- the domain lead: the date-semantics rules (EndDate vs RenewalDate — already settled in the v2 plan), plus real-world renewal behavior and what made v1 reports feel wrong.
-- the demo lead / leadership: what numbers a *prospect* would sniff-test in a demo (the credibility metrics — if our renewal rate or event sizes look silly, the demo fails regardless of internal consistency).
+- Robert: the date-semantics rules (EndDate vs RenewalDate — already settled in the v2 plan), plus real-world renewal behavior and what made v1 reports feel wrong.
+- Amith / leadership: what numbers a *prospect* would sniff-test in a demo (the credibility metrics — if our renewal rate or event sizes look silly, the demo fails regardless of internal consistency).
 - Hero personas: collect the 50–100 storylines early (long lead time, release-blocking per the v2 plan). Each hero is a *pinned* row set the generator builds around.
 
 **Deliverable:** ground-truth memo + first-cut hero persona list.
@@ -83,7 +83,7 @@ Draft the arrows on the skeleton from the findings doc §5 — for each: directi
 - engagement → forum activity; discipline → forum topic
 - ALL behavior → Sonar score (sink) → predictive models
 
-Review the ranked arrow list with the schema owner + the generative-data lead (humans review the *map*, never rows).
+Review the ranked arrow list with Marcelo + Madhav (humans review the *map*, never rows).
 
 ## Sequencing & validation
 
@@ -100,7 +100,7 @@ Review the ranked arrow list with the schema owner + the generative-data lead (h
 
 # Part 2 — Concrete Schema Proposal
 
-**Status: PROPOSAL** — written from the generation angle for the schema owner to reconcile against BizApps reality. Where a composed app owns the table, I specify the **interface we need**, not the table itself.
+**Status: PROPOSAL** — written from the generation angle for Marcelo to reconcile against BizApps reality. Where a composed app owns the table, I specify the **interface we need**, not the table itself.
 
 ## Conventions (apply to every table below)
 
@@ -156,7 +156,7 @@ Tier ordering matters (dues must be monotone in tier) — encode rank in `Displa
 `ID · ChapterID FK · MemberProfileID FK · Role CHECK(President·VicePresident·Secretary·Treasurer·AtLarge) · TermStart DATE · TermEnd DATE · IsSharedDemo`
 CHECKs: `TermEnd > TermStart`. UNIQUE `(ChapterID, Role, TermStart)`. Terms per (chapter, role) must not overlap — generation guarantee + audit.
 
-### MembershipPeriod  ⚠️ *shape depends on the schema owner's subscriptions findings*
+### MembershipPeriod  ⚠️ *shape depends on Marcelo's subscriptions findings*
 One row per membership year/cycle (the renewal unroll — v1's "multiple Membership rows" pattern, kept deliberately). Links to `subscriptions.Subscription` for billing truth.
 
 | Column | Type | Constraint | Causal role |
@@ -188,7 +188,7 @@ The time-relative rules (`Active ⟹ EndDate ≥ today`) can't live in a static 
 2. **Grace period precedes termination**: a lapse's `CancellationDate` falls at `EndDate + grace`, not at `EndDate`; explicit cancels can fall mid-period. Grace length itself is a ruleset parameter (ask pending).
 3. **NO static status column on MemberProfile — banned.** Team confirmed this is exactly the v1 bug: a member-level status that drifts out of sync with the membership records ("status says Active while the latest period ended 5/1/2026"). Member-level status is always **derived from the latest MembershipPeriod** (view or computed column, never stored).
 
-**Ask for the schema owner:** does `subscriptions.Subscription` already carry Status/Start/End/CancellationDate? If yes, `MembershipPeriod` slims down to the association-semantics overlay (type, dues, renewal semantics) and status lives *only* in subscriptions — no duplicated status, per the v2 plan.
+**Ask for Marcelo:** does `subscriptions.Subscription` already carry Status/Start/End/CancellationDate? If yes, `MembershipPeriod` slims down to the association-semantics overlay (type, dues, renewal semantics) and status lives *only* in subscriptions — no duplicated status, per the v2 plan.
 
 ---
 
@@ -293,7 +293,7 @@ This replaces v1's untyped `RelatedEntityType + RelatedEntityID` — same flexib
   - Cross-table rule (audit): `PostedAt >= thread.CreatedAt`; reply posted after its parent.
 - **ForumReaction**: `ID · PostID FK · PersonID FK · Kind CHECK(Like·Helpful·Thanks) · ReactedAt · UNIQUE(PostID, PersonID, Kind) · IsSharedDemo`
 
-Dropped from v1: PostTag, MemberFollow, PostAttachment, ForumModeration → keep only if a demo script needs them (each is more generation surface for little story value). **Reconcile with the schema owner.**
+Dropped from v1: PostTag, MemberFollow, PostAttachment, ForumModeration → keep only if a demo script needs them (each is more generation surface for little story value). **Reconcile with Marcelo.**
 
 ## 2.5 `awards` schema
 
@@ -337,7 +337,7 @@ Dropped from v1: PostTag, MemberFollow, PostAttachment, ForumModeration → keep
 
 ## 2.9 Interface contracts with the composed apps (asks, not our tables)
 
-We don't design these — but generation needs specific things *from* them. This is the checklist for the schema owner's BizApps survey:
+We don't design these — but generation needs specific things *from* them. This is the checklist for Marcelo's BizApps survey:
 
 | App | What generation needs | Blocking? |
 |---|---|---|
@@ -362,7 +362,7 @@ Explicitly *absent* from the schema above (v1 stored these; v2 must not):
 
 ---
 
-## 2.11 Reconciliation protocol (the working session with the schema owner)
+## 2.11 Reconciliation protocol (the working session with Marcelo)
 
 Go table-by-table through Part 2 and mark each: **✅ agree · ✏️ amend (BizApps already covers it / different shape) · ❌ drop · ➕ missing**. Specifically:
 

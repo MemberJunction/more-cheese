@@ -1,42 +1,53 @@
 /**
- * @mj-more-cheese-demo/ng — the CLIENT BOOTSTRAP package.
+ * @mj-sample-app/ng — the CLIENT BOOTSTRAP package.
  *
- * MJExplorer bundles this package; evaluating it fires the @RegisterClass
- * decorators for the generated entity forms, and the host's generated
- * class-registration manifest imports the form components by name — so every
- * generated component must be exported here.
+ * This is the package named in mj-app.json under packages.client with role
+ * "bootstrap". When the app is installed (or dev-linked), MJExplorer's
+ * auto-generated open-app-bootstrap.generated.ts gains a static
+ * `import '@mj-sample-app/ng';` — ESBuild bundles it and module evaluation
+ * fires the @RegisterClass decorators that make your components discoverable.
  *
- * NOTE: regenerated 2026-07-23 to match the 16 CodeGen-generated forms exactly
- * (removed 2 stale cross-scope common exports; added 7 missing morecheese exports).
+ * WHAT LIVES HERE
+ *   src/lib/generated/ — CodeGen Angular output (entity forms; do not edit)
+ *   src/lib/           — your hand-written components (dashboards, tabs, ...)
+ *
+ * AFTER YOUR FIRST CODEGEN RUN (the pattern every shipped app uses): import
+ * the entity package + the generated forms module so their @RegisterClass
+ * decorators fire, and RE-EXPORT the generated module/components so the
+ * host's class-registration manifest can import them by name:
+ *
+ *   import '@mj-sample-app/entities';
+ *   import './lib/generated/generated-forms.module';
+ *   export { GeneratedFormsModule } from './lib/generated/generated-forms.module';
+ *   export { <YourEntity>FormComponent } from './lib/generated/Entities/<YourEntity>/<yourentity>.form.component';
+ *
+ * HAND-WRITTEN COMPONENT EXAMPLE — a resource component that renders as a tab
+ * in MJ Explorer (its DriverClass must match a DefaultNavItems entry in your
+ * application metadata — see metadata/_examples/application.example.json):
+ *
+ *   import { Component } from '@angular/core';
+ *   import { RegisterClass } from '@memberjunction/global';
+ *   import { BaseResourceComponent, ResourceData } from '@memberjunction/ng-shared';
+ *
+ *   @RegisterClass(BaseResourceComponent, 'SampleAppDashboard')
+ *   @Component({
+ *     selector: 'sample-app-dashboard',
+ *     template: '<div><h2>Sample App</h2></div>',
+ *     standalone: false
+ *   })
+ *   export class SampleAppDashboardComponent extends BaseResourceComponent {
+ *     async GetResourceDisplayName(data: ResourceData): Promise<string> { return 'Sample App'; }
+ *     async GetResourceIconClass(data: ResourceData): Promise<string> { return 'fa-solid fa-cube'; }
+ *   }
+ *
+ * NOTE: package.json already carries the peer deps the generated forms will
+ * import (@angular/forms, ng-base-forms, ng-entity-viewer, ng-link-directives)
+ * so your first codegen run builds without dependency surgery.
+ *
+ * TODO(template): rename the function to Load<YourApp>Client and keep it in
+ * sync with mj-app.json "startupExport".
  */
-
-// Register entity subclasses on the client
-import '@mj-more-cheese-demo/entities';
-
-// Evaluate the generated forms module (fires @RegisterClass for every form)
-import './lib/generated/generated-forms.module';
-
-// Re-export for consumers + the host class-registration manifest
-export { GeneratedFormsModule } from './lib/generated/generated-forms.module';
-export { morecheeseeventsCompetitionEntryFormComponent } from './lib/generated/Entities/morecheeseeventsCompetitionEntry/morecheeseeventscompetitionentry.form.component';
-export { morecheeseeventsEventFormComponent } from './lib/generated/Entities/morecheeseeventsEvent/morecheeseeventsevent.form.component';
-export { morecheeseeventsEventRegistrationFormComponent } from './lib/generated/Entities/morecheeseeventsEventRegistration/morecheeseeventseventregistration.form.component';
-export { morecheeselearningCertificationFormComponent } from './lib/generated/Entities/morecheeselearningCertification/morecheeselearningcertification.form.component';
-export { morecheeselearningCourseEnrollmentFormComponent } from './lib/generated/Entities/morecheeselearningCourseEnrollment/morecheeselearningcourseenrollment.form.component';
-export { morecheeselearningCourseFormComponent } from './lib/generated/Entities/morecheeselearningCourse/morecheeselearningcourse.form.component';
-export { morecheeselearningMemberCertificationFormComponent } from './lib/generated/Entities/morecheeselearningMemberCertification/morecheeselearningmembercertification.form.component';
-export { morecheesemembersAdvocacyActionFormComponent } from './lib/generated/Entities/morecheesemembersAdvocacyAction/morecheesemembersadvocacyaction.form.component';
-export { morecheesemembersDataQualityLabelFormComponent } from './lib/generated/Entities/morecheesemembersDataQualityLabel/morecheesemembersdataqualitylabel.form.component';
-export { morecheesemembersMemberProfileFormComponent } from './lib/generated/Entities/morecheesemembersMemberProfile/morecheesemembersmemberprofile.form.component';
-export { morecheesemembersMembershipPeriodFormComponent } from './lib/generated/Entities/morecheesemembersMembershipPeriod/morecheesemembersmembershipperiod.form.component';
-export { morecheesemembersOrganizationProfileFormComponent } from './lib/generated/Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component';
-
-
-/**
- * Bootstrap function named by mj-app.json "startupExport" for the client.
- * The static imports above handle all registration; this function ensures
- * the module is fully evaluated.
- */
-export function LoadMoreCheeseDemoClient(): void {
-    // Static imports above ensure all classes are registered.
+export function LoadSampleAppClient(): void {
+    // No-op until you add components: importing this module is what
+    // registers everything above.
 }
