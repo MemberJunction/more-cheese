@@ -9,7 +9,6 @@
   ],
   "scripts": {
     "prebuild": "node -e \"try { require.resolve('turbo') } catch (e) { console.error('\\n[ERROR] Dependencies not installed. Run: npm install\\n'); process.exit(1); }\"",
-    "generate": "loom build -p data -o metadata",
     "init": "node scripts/init-template.mjs",
     "build": "npm run build:stream",
     "build:stream": "turbo --log-order=stream build",

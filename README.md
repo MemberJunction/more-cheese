@@ -7,7 +7,7 @@
 
 > **The Definitive OpenApp Reference Implementation for MemberJunction**
 >
-> MoreCheese models the fictional **International Cheese Federation (ICF)** — a global trade and professional association of artisan cheesemakers, creameries, affineurs, and industry partners. It showcases how domain-specific applications cleanly compose upstream MemberJunction BizApps catalogs (`@mj-biz-apps/*`) with custom association schemas, dynamic form slot extensions, and causally-generated synthetic universes.
+> MoreCheese models the fictional **International Cheese Federation (ICF)** — a global trade and professional association of artisan cheesemakers, creameries, affineurs, and industry partners. It showcases how domain-specific applications cleanly compose upstream MemberJunction BizApps catalogs (`@mj-biz-apps/*`) with custom association schemas and causally-generated synthetic universes.
 
 ---
 
@@ -104,7 +104,7 @@ Synthetic data for MoreCheese is designed and generated using **Loom**, MemberJu
 
 - **Causally Correlated**: Member join dates, event attendance, certification progress, order amounts, and churn risk are drawn from joint causal graphs, not isolated pseudo-random generators.
 - **Referentially Closed**: 100% referential integrity across 4 tiers of foreign keys with guaranteed topological migration ordering.
-- **Idempotent & Additive**: Generates initial baseline snapshots (`V*__Baseline.sql`) and consecutive weekly delta cycles (`V*__Delta_Cycle_*.sql`) with strictly monotonic ID persistence and zero unwanted mutations.
+- **Idempotent & Additive**: Generates initial baseline snapshots with strictly monotonic ID persistence and zero unwanted mutations.
 
 ---
 
@@ -116,7 +116,7 @@ Synthetic data for MoreCheese is designed and generated using **Loom**, MemberJu
 | [`packages/CoreEntitiesServer`](packages/CoreEntitiesServer) | `@mj-more-cheese-demo/core-entities-server` | Server-side entity overrides, business logic validation, and database save pipelines. |
 | [`packages/Actions`](packages/Actions) | `@mj-more-cheese-demo/actions` | Deterministic MemberJunction Actions invokable by workflows, agents, and APIs. |
 | [`packages/Server`](packages/Server) | `@mj-more-cheese-demo/server` | Server bootstrap package loaded by MJAPI at startup via `startupExport`. |
-| [`packages/Angular`](packages/Angular) | `@mj-more-cheese-demo/ng` | Angular client package bundled into MJExplorer; provides generated entity forms and `BaseFormPanel` slot extensions. |
+| [`packages/Angular`](packages/Angular) | `@mj-more-cheese-demo/ng` | Angular client package bundled into MJExplorer; provides generated entity forms. |
 
 ---
 
