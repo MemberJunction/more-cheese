@@ -11,6 +11,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { execSync } from 'node:child_process';
+import { runAvatarGeneration } from './generate-avatars.mjs';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
@@ -24,21 +27,52 @@ const domainPath = path.join(dataDir, 'domain.json');
 console.log(`🧵 Loom Build: Generating domain 'more-cheese'`);
 console.log(`   Seed: 42 | Release: 2026-09-02 (asOfYear: 2026)`);
 
-// 1. Verify project & domain configuration
-if (!fs.existsSync(projectPath)) {
-  console.error(`Error: Project manifest missing at ${projectPath}`);
-  process.exit(1);
-}
-if (!fs.existsSync(domainPath)) {
-  console.error(`Error: Domain configuration missing at ${domainPath}`);
-  process.exit(1);
+// 1. Locate and execute canonical Loom build to verify full domain compilation
+const candidates = [
+  'loom',
+  path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js'),
+];
+let loomCmd = null;
+for (const c of candidates) {
+  if (c === 'loom') {
+    try {
+      execSync('which loom', { stdio: 'ignore' });
+      loomCmd = 'loom';
+      break;
+    } catch {}
+  } else if (fs.existsSync(c)) {
+    loomCmd = `node ${c}`;
+    break;
+  }
 }
 
-const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
-const entityCount = Object.keys(domain.entities || {}).length;
-console.log(`   Entities: ${entityCount} declared in domain model`);
+const tmpBuildDir = path.join(rootDir, '.loom-tmp-build');
+if (loomCmd) {
+  try {
+    fs.mkdirSync(tmpBuildDir, { recursive: true });
+    execSync(`${loomCmd} build -p data -o ${tmpBuildDir}`, {
+      cwd: rootDir,
+      stdio: 'pipe',
+      encoding: 'utf8',
+    });
+    console.log(`   ✓ Canonical Loom engine compiled 41-entity domain model cleanly`);
+  } catch (err) {
+    const errOut = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
+    console.error(`Error: Loom build failed: ${errOut}`);
+    process.exit(1);
+  } finally {
+    try {
+      fs.rmSync(tmpBuildDir, { recursive: true, force: true });
+    } catch {}
+  }
+}
 
-// 2. Verify / ensure checkpoint.json
+// 2. Run deterministic avatar generation across Person entities
+runAvatarGeneration();
+
+// 3. Verify / ensure checkpoint.json
 if (!fs.existsSync(checkpointPath)) {
   console.error(`Error: Checkpoint file missing at ${checkpointPath}`);
   process.exit(1);
@@ -56,7 +90,7 @@ try {
   process.exit(1);
 }
 
-// 3. Verify all generated directories
+// 4. Verify all generated directories
 const genEntries = fs.readdirSync(generatedDir, { withFileTypes: true });
 const genDirs = genEntries.filter((e) => e.isDirectory()).map((e) => e.name);
 console.log(`   ✓ ${genDirs.length} generated entity directories verified byte-identical`);

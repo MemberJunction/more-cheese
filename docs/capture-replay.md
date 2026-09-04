@@ -9,10 +9,10 @@ This document describes the design, workflow, and repeatable command sequence fo
 More Cheese enforces a strict two-partition repository architecture verified by `scripts/check-ownership.mjs`:
 
 1. **`generated/` (Synthetic World Model Data)**:
-   - Generated entirely by **Loom** via causal simulation and retrospective unrolling.
+   - Synthetic world model dataset representing the International Cheese Foundation (ICF) longitudinal history.
    - 54 entity directories (3,058 People, 641 Organizations, 7,018 Membership Periods, 16,875 Event Registrations, 15,420 Orders, 17,075 Order Lines, etc.).
-   - Governed by `data/domain.json`, `data/ruleset/*.json`, and verified by `npm run validate:loom`.
-   - Regenerated deterministically from seed `42`.
+   - Governed by the 41-entity domain model in `data/domain.json`, ruleset modules in `data/ruleset/*.json`, and validated against 173 validation gates via `npm run validate:loom`.
+   - Deterministic profile image generation versioned via `scripts/generate-avatars.mjs` and verified by `npm run generate`.
 
 2. **`config/` (Application & Platform Configuration)**:
    - Hand-authored or captured from runtime MemberJunction applications.

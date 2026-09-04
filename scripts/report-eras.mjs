@@ -40,7 +40,11 @@ const orders = readRecords('orders');
 
 function getYear(val) {
   if (!val) return NaN;
-  return new Date(val).getFullYear();
+  if (typeof val === 'string' && val.length >= 4) {
+    const y = parseInt(val.slice(0, 4), 10);
+    if (!isNaN(y)) return y;
+  }
+  return new Date(val).getUTCFullYear();
 }
 
 console.log('='.repeat(96));

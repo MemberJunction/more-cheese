@@ -2496,6 +2496,17 @@
       "requireWindow": true
     },
     {
+      "kind": "date-window",
+      "name": "vote-covered-by-membership-window",
+      "sourceEntity": "CommitteeVote",
+      "dateField": "CreatedAt",
+      "windowEntity": "CommitteeMembership",
+      "windowForeignKey": "MembershipID",
+      "windowStartField": "StartDate",
+      "windowEndField": "EndDate",
+      "requireWindow": true
+    },
+    {
       "kind": "outcome-derived-from-ballots",
       "name": "motion-outcome-derived-from-votes",
       "sourceEntity": "CommitteeMotion",
