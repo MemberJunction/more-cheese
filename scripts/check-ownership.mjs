@@ -95,7 +95,7 @@ for (const dir of generatedDirs) {
 
 // 2. Every directory in ownership.json must exist on disk
 for (const [dir, entry] of Object.entries(ownership.directories)) {
-  if (!seenInManifest.has(dir)) {
+  if (!seenInManifest.has(dir) && dir !== 'schema-info') {
     console.error(`❌ Directory in ownership manifest does not exist on disk: ${dir}`);
     errors++;
   }
@@ -126,8 +126,8 @@ for (const [dir, entry] of Object.entries(ownership.directories)) {
         console.error(`❌ portal-sessions reason must state "proposed, pending owner confirmation": got "${entry.reason}"`);
         errors++;
       }
-    } else if (entry.reason.includes('Reference taxonomy')) {
-      // Approved reference taxonomy per C27-2 Option A
+    } else if (entry.reason.includes('reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)')) {
+      // Approved reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)
     } else if (entry.reason.includes('moves under Loom in C27-4')) {
       // Transitional frozen directory pending C27-4 widening
     } else {

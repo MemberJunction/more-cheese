@@ -56,6 +56,11 @@
       "classification": "config",
       "reason": "Hand-authored administrative, taxonomy, or model configuration"
     },
+    "schema-info": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Application schema registration metadata (template-authored)"
+    },
     "address-links": {
       "tier": "generated",
       "classification": "frozen",
@@ -74,7 +79,7 @@
     "certifications": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "committee-agenda-items": {
       "tier": "generated",
@@ -109,7 +114,7 @@
     "committee-types": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "committee-votes": {
       "tier": "generated",
@@ -139,12 +144,12 @@
     "courses": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "data-quality-labels": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "enrollments": {
       "tier": "generated",
@@ -174,17 +179,17 @@
     "form-pages": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "form-question-options": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "form-questions": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "form-responses": {
       "tier": "generated",
@@ -194,12 +199,12 @@
     "form-versions": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "forms": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "issue-comments": {
       "tier": "generated",
@@ -214,7 +219,7 @@
     "issue-types": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "issues": {
       "tier": "generated",
@@ -289,7 +294,7 @@
     "relationship-types": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "relationships": {
       "tier": "generated",
@@ -319,7 +324,7 @@
     "task-types": {
       "tier": "generated",
       "classification": "frozen",
-      "reason": "Reference taxonomy and label data required for referential closure (C27-2 Option A)"
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "tasks": {
       "tier": "generated",

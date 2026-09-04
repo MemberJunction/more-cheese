@@ -43,6 +43,9 @@ npx mj sync push --dir=generated --format=json  # push simulated world data
 npx mj sync push --dir=config --format=json     # push administrative configuration
 ```
 
+> **Note on metadata roots**: In `mj-app.json`, `metadata.directory` specifies `"generated"` for OpenApp packaging, while `config/` maintains an independent sync and `sqlLogging` root for Explorer-authored configuration.
+
+
 Validation understands virtual properties, defaults, and reference integrity;
 `push` runs it automatically. Remember: `mj sync push` is a **single-author,
 dev-time** tool — teammates and installs receive metadata via migrations, not

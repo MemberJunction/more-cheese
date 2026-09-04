@@ -111,6 +111,8 @@ MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
    npx mj sync push --dir ./generated --format=json
    npx mj sync push --dir ./config --format=json
    ```
+> **Note on metadata roots**: In `mj-app.json`, `metadata.directory` specifies `generated` for OpenApp manifest validation. The `config/` tree holds Explorer-authored configurations and AI/Sonar models pushed alongside `generated/`.
+
 
 ---
 
