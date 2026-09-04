@@ -28,15 +28,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MemberJunction/loom
-          ref: 432ec9225b7338d8987e450ce71c2e362c8a1833
+          ref: 4659f5842673201ca3fd573061f9d0fdf7a059be
           path: loom
 
-      - name: Build Loom Contracts
+      - name: Build Loom
         working-directory: loom
         run: |
           corepack enable
           pnpm install --frozen-lockfile
           pnpm --filter @memberjunction/loom-contracts build
+          pnpm --filter @memberjunction/loom-engine build
+          pnpm --filter @memberjunction/loom-cli build
+          echo "$GITHUB_WORKSPACE/loom/packages/cli/dist/bin" >> $GITHUB_PATH
 
       - name: Validate Loom data project & schema conformance
         run: node scripts/validate-loom-data.mjs
