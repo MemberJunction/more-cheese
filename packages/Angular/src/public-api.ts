@@ -31,11 +31,6 @@ export { morecheesemembersMemberProfileFormComponent } from './lib/generated/Ent
 export { morecheesemembersMembershipPeriodFormComponent } from './lib/generated/Entities/morecheesemembersMembershipPeriod/morecheesemembersmembershipperiod.form.component';
 export { morecheesemembersOrganizationProfileFormComponent } from './lib/generated/Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component';
 
-// Dynamic Form Extension Panels (BaseFormPanel slot system)
-import './lib/panels/member-community/member-community.panel';
-import './lib/panels/organization-guild/organization-guild.panel';
-export { MemberCommunityPanel } from './lib/panels/member-community/member-community.panel';
-export { OrganizationCheeseGuildPanel } from './lib/panels/organization-guild/organization-guild.panel';
 
 /**
  * Bootstrap function named by mj-app.json "startupExport" for the client.

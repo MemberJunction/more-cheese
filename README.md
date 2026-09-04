@@ -7,7 +7,7 @@
 
 > **The Definitive OpenApp Reference Implementation for MemberJunction**
 >
-> MoreCheese models the fictional **International Cheese Federation (ICF)** — a global trade and professional association of artisan cheesemakers, creameries, affineurs, and industry partners. It showcases how domain-specific applications cleanly compose upstream MemberJunction BizApps catalogs (`@mj-biz-apps/*`) with custom association schemas, dynamic form slot extensions, and causally-generated synthetic universes.
+> MoreCheese models the fictional **International Cheese Federation (ICF)** — a global trade and professional association of artisan cheesemakers, creameries, affineurs, and industry partners. It showcases how domain-specific applications cleanly compose upstream MemberJunction BizApps catalogs (`@mj-biz-apps/*`) with custom association schemas and causally-generated synthetic universes.
 
 ---
 
@@ -17,28 +17,26 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
 
 ```
                            ┌─────────────────────────────────────────┐
-                           │      MemberJunction Core Framework      │
-                           │  (@memberjunction/core, server, ng)     │
-                           └────────────────────┬────────────────────┘
-                                                │
-                           ┌────────────────────▼────────────────────┐
-                           │       Upstream BizApps Foundations      │
-                           │  (@mj-biz-apps/common, /orders, etc.)   │
-                           │   • People                              │
-                           │   • Organizations                       │
-                           │   • Invoicing & Line Items              │
-                           └────────────────────┬────────────────────┘
-                                                │
-                 ┌──────────────────────────────┴──────────────────────────────┐
-                 │                                                             │
-   ┌─────────────▼─────────────┐                                 ┌─────────────▼─────────────┐
-   │ Dynamic Form Slot Panels  │                                 │ Downstream Domain Schemas │
-   │ (BaseFormPanel Injection) │                                 │ (morecheese_* Schemas)    │
-   │  • MemberCommunityPanel   │                                 │  • morecheese_members     │
-   │  • OrganizationGuildPanel │                                 │  • morecheese_events      │
-   │  (Mounted into Upstream   │                                 │  • morecheese_learning    │
-   │   People & Org Forms)     │                                 └───────────────────────────┘
-   └───────────────────────────┘                                 
+                           ┌─────────────────────────────────────┐
+                           │    MemberJunction Core Framework    │
+                           │  (@memberjunction/core, server, ng) │
+                           └──────────────────┬──────────────────┘
+                                              │
+                           ┌──────────────────▼──────────────────┐
+                           │     Upstream BizApps Foundations    │
+                           │ (@mj-biz-apps/common, /orders, etc) │
+                           │  • People                           │
+                           │  • Organizations                    │
+                           │  • Invoicing & Line Items           │
+                           └──────────────────┬──────────────────┘
+                                              │
+                           ┌──────────────────▼──────────────────┐
+                           │      Downstream Domain Schemas      │
+                           │        (morecheese_* Schemas)       │
+                           │  • morecheese_members               │
+                           │  • morecheese_events                │
+                           │  • morecheese_learning              │
+                           └─────────────────────────────────────┘
 ```
 
 ### Key Domain Capabilities
@@ -51,50 +49,6 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
 
 ---
 
-## 🧩 Dynamic Forms Architecture (`BaseFormPanel` Slot System)
-
-> [!NOTE]
-> **Form Panel Implementation Status**: The `MemberCommunityPanel` and `OrganizationCheeseGuildPanel` form slot panels are registered on the `before-fields` slot for `People` and `Organizations`. They currently render unpopulated UI mockups pending live data query wiring in follow-up integration work.
-
-A premier feature of MemberJunction's UI architecture is the **BaseFormPanel Dynamic Slot System**. In downstream applications like MoreCheese, you frequently need to enrich upstream records (such as `MJ_BizApps_Common: People` or `MJ_BizApps_Common: Organizations`) with downstream domain intelligence without modifying upstream templates or touching core repositories.
-
-MoreCheese implements this via `BaseFormPanel` decorators:
-
-```typescript
-import { BaseFormPanel } from '@memberjunction/ng-base-forms';
-import { RegisterClassEx } from '@memberjunction/global';
-
-@RegisterClassEx(BaseFormPanel, {
-  key: 'more-cheese:member-community-panel',
-  skipNullKeyWarning: true,
-  metadata: {
-    entity: 'MJ_BizApps_Common: People', // Targets upstream BizApps Person entity
-    slot: 'after-fields',                // Dynamically injected after primary form fields
-    sortKey: 100,
-  },
-})
-@Component({
-  selector: 'mj-morecheese-member-community-panel',
-  standalone: true,
-  template: `...`,
-})
-export class MemberCommunityPanel extends BaseFormPanel<BaseEntity> {
-  // Panel lifecycle, reactive RunView queries, and domain visualization
-}
-```
-
-### Supported Injection Slots
-
-| Slot Name | Placement | Typical Use Case |
-|---|---|---|
-| `top-area` | Header banner above form tabs | Critical warning banners, VIP status alerts, accreditation shields |
-| `before-fields` | Above standard entity fields | High-level summary metrics, quick KPIs |
-| `after-fields` | Below primary fields, above related tabs | Domain community cards, custom attribute grids, specialized meters |
-| `after-related` | Below related entity grids | Cross-system audit logs, external CRM timeline feeds |
-| `after-everything` | Footer of entire form layout | Regulatory notices, signature stamps |
-
----
-
 ## 🧵 Data Generation & Synthetic Worlds with Loom
 
 > [!NOTE]
@@ -104,7 +58,7 @@ Synthetic data for MoreCheese is designed and generated using **Loom**, MemberJu
 
 - **Causally Correlated**: Member join dates, event attendance, certification progress, order amounts, and churn risk are drawn from joint causal graphs, not isolated pseudo-random generators.
 - **Referentially Closed**: 100% referential integrity across 4 tiers of foreign keys with guaranteed topological migration ordering.
-- **Idempotent & Additive**: Generates initial baseline snapshots (`V*__Baseline.sql`) and consecutive weekly delta cycles (`V*__Delta_Cycle_*.sql`) with strictly monotonic ID persistence and zero unwanted mutations.
+- **Idempotent & Additive**: Generates initial baseline snapshots with strictly monotonic ID persistence and zero unwanted mutations.
 
 ---
 
@@ -116,7 +70,7 @@ Synthetic data for MoreCheese is designed and generated using **Loom**, MemberJu
 | [`packages/CoreEntitiesServer`](packages/CoreEntitiesServer) | `@mj-more-cheese-demo/core-entities-server` | Server-side entity overrides, business logic validation, and database save pipelines. |
 | [`packages/Actions`](packages/Actions) | `@mj-more-cheese-demo/actions` | Deterministic MemberJunction Actions invokable by workflows, agents, and APIs. |
 | [`packages/Server`](packages/Server) | `@mj-more-cheese-demo/server` | Server bootstrap package loaded by MJAPI at startup via `startupExport`. |
-| [`packages/Angular`](packages/Angular) | `@mj-more-cheese-demo/ng` | Angular client package bundled into MJExplorer; provides generated entity forms and `BaseFormPanel` slot extensions. |
+| [`packages/Angular`](packages/Angular) | `@mj-more-cheese-demo/ng` | Angular client package bundled into MJExplorer; provides generated entity forms. |
 
 ---
 
