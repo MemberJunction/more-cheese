@@ -1,0 +1,330 @@
+{
+  "version": "1.0.0",
+  "directories": {
+    "ai-model-vendors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ai-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ai-vendors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "certifications": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "committee-types": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "courses": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "data-quality-labels": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "form-pages": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "form-question-options": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "form-questions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "form-versions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "forms": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "issue-types": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "relationship-types": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-factors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-model-factors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-model-related-entities": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-band-sets": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-bands": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-model-versions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-time-windows": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "task-types": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "address-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "addresses": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "advocacy-actions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-agenda-items": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-attendance": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-meetings": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-memberships": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-motions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-terms": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committee-votes": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "committees": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "companies": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "competition-entries": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "contact-methods": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "enrollments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "event-registrations": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "events": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "form-answers": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "form-distributions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "form-responses": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "issue-comments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "issue-sequences": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "issues": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "member-certifications": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "member-profiles": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "membership-periods": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "order-lines": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "orders": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "organization-profiles": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "organizations": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "payment-lines": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "payments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "people": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "portal-sessions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Legacy portal web telemetry frozen per owner ruling (archive/datagen-reference)"
+    },
+    "product-categories": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "products": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "relationships": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "secure-messages": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "secure-threads": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "task-assignments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "task-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    },
+    "tasks": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity generated and simulated by Loom"
+    }
+  }
+}

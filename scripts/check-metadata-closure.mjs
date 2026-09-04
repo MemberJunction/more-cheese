@@ -2,7 +2,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve, relative, sep } from 'node:path';
 
-const METADATA_DIR = resolve(process.cwd(), 'metadata');
+const TARGET_ROOTS = [resolve(process.cwd(), 'generated'), resolve(process.cwd(), 'config')];
 
 function findJsonFiles(dir) {
   const results = [];
@@ -23,14 +23,19 @@ const allPrimaryKeys = new Set();
 const primaryKeysByDir = new Map();
 const records = [];
 
-const files = findJsonFiles(METADATA_DIR);
-for (const file of files) {
+const files = [];
+for (const root of TARGET_ROOTS) {
+  for (const f of findJsonFiles(root)) {
+    files.push({ root, file: f });
+  }
+}
+for (const { root, file } of files) {
   try {
     const raw = readFileSync(file, 'utf-8');
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) continue;
 
-    const relPath = relative(METADATA_DIR, file);
+    const relPath = relative(root, file);
     const dir = relPath.split(sep)[0];
 
     if (!primaryKeysByDir.has(dir)) {
@@ -116,7 +121,7 @@ for (const r of records) {
         const targetKeys = primaryKeysByDir.get(targetDir);
         if (!targetKeys || !targetKeys.has(valUpper)) {
           if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
-          orphanMap.get(qualifiedKey).push(`${val} (expected in metadata/${targetDir})`);
+          orphanMap.get(qualifiedKey).push(`${val} (expected in ${targetDir})`);
         }
       } else {
         // Fallback global closure check
@@ -165,24 +170,26 @@ if (orphanMap.size > 0) {
 
 // 4. Directory coverage audit: Every directory containing .mj-sync.json must be in root .mj-sync.json directoryOrder
 console.log('\n--- Directory Coverage Audit ---');
-const rootSyncConfig = JSON.parse(readFileSync(join(METADATA_DIR, '.mj-sync.json'), 'utf-8'));
-const declaredDirs = new Set(rootSyncConfig.directoryOrder ?? []);
-const actualSyncDirs = [];
-for (const entry of readdirSync(METADATA_DIR)) {
-  const full = join(METADATA_DIR, entry);
-  if (statSync(full).isDirectory() && !entry.startsWith('.')) {
-    if (readdirSync(full).includes('.mj-sync.json')) {
-      actualSyncDirs.push(entry);
+for (const root of TARGET_ROOTS) {
+  const rootSyncConfig = JSON.parse(readFileSync(join(root, '.mj-sync.json'), 'utf-8'));
+  const declaredDirs = new Set(rootSyncConfig.directoryOrder ?? []);
+  const actualSyncDirs = [];
+  for (const entry of readdirSync(root)) {
+    const full = join(root, entry);
+    if (statSync(full).isDirectory() && !entry.startsWith('.')) {
+      if (readdirSync(full).includes('.mj-sync.json')) {
+        actualSyncDirs.push(entry);
+      }
     }
   }
+  const missingFromOrder = actualSyncDirs.filter((d) => !declaredDirs.has(d));
+  if (missingFromOrder.length > 0) {
+    console.error('\n❌ DIRECTORY ORDER AUDIT FAILED: The following ' + missingFromOrder.length + ' entity directories are missing from ' + relative(process.cwd(), root) + '/.mj-sync.json directoryOrder:');
+    for (const d of missingFromOrder) console.error('  - ' + d);
+    process.exit(1);
+  }
+  console.log('✓ All ' + actualSyncDirs.length + ' entity directories declared in ' + relative(process.cwd(), root) + '/.mj-sync.json directoryOrder.');
 }
-const missingFromOrder = actualSyncDirs.filter((d) => !declaredDirs.has(d));
-if (missingFromOrder.length > 0) {
-  console.error(`\n❌ DIRECTORY ORDER AUDIT FAILED: The following ${missingFromOrder.length} entity directories are missing from metadata/.mj-sync.json directoryOrder:`);
-  for (const d of missingFromOrder) console.error(`  - ${d}`);
-  process.exit(1);
-}
-console.log(`✓ All ${actualSyncDirs.length} entity directories declared in root .mj-sync.json directoryOrder.`);
 
 // 5. Cross-directory Primary Key Uniqueness audit
 console.log('\n--- Cross-Directory Primary Key Uniqueness Audit ---');
@@ -283,7 +290,7 @@ const products = records.filter((r) => r.dir === 'products');
 const categories = records.filter((r) => r.dir === 'product-categories');
 const membershipCategory = categories.find((c) => c.fields?.Name === 'Memberships');
 if (!membershipCategory) {
-  console.error("\n❌ DUES PAIRING AUDIT FAILED: 'Memberships' category not found in metadata/product-categories");
+  console.error("\n❌ DUES PAIRING AUDIT FAILED: 'Memberships' category not found in generated/product-categories");
   process.exit(1);
 }
 const membershipCategoryID = String(membershipCategory.primaryKey?.ID).toUpperCase();
@@ -408,7 +415,7 @@ console.log(
 console.log('\n--- Order & Line Status Shape Audit (R7-5, R8-1) ---');
 const physicalCategory = categories.find((c) => c.fields?.Name === 'Publications & Goods');
 if (!physicalCategory) {
-  console.error("\n❌ STATUS SHAPE AUDIT FAILED: 'Publications & Goods' category not found in metadata/product-categories");
+  console.error("\n❌ STATUS SHAPE AUDIT FAILED: 'Publications & Goods' category not found in generated/product-categories");
   process.exit(1);
 }
 const physicalCategoryID = String(physicalCategory.primaryKey?.ID).toUpperCase();

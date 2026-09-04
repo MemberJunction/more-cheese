@@ -2,7 +2,7 @@
 /**
  * init-template.mjs — template setup / rename tool.
  *
- * Reads the repo's CURRENT identity (mj-app.json + metadata/schema-info) and
+ * Reads the repo's CURRENT identity (mj-app.json + config/schema-info) and
  * renames it to YOUR answers. Because it works from current values — not
  * hardcoded template tokens — it is RE-RUNNABLE: every prompt shows the
  * current value as its default (press Enter to keep it), so you can come back
@@ -64,7 +64,7 @@ const cur = {
 cur.repoName = cur.repo.split('/').pop();
 
 // prefix / ID range / UUID: from the activated schema-info record when present
-const SCHEMA_INFO = 'metadata/schema-info/.schema-info.json';
+const SCHEMA_INFO = 'config/schema-info/.schema-info.json';
 let schemaInfoRecord = null;
 if (existsSync(SCHEMA_INFO)) {
   try { schemaInfoRecord = JSON.parse(readFileSync(SCHEMA_INFO, 'utf8'))[0]; } catch { /* rewrite below */ }

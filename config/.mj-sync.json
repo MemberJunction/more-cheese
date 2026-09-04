@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0",
+  "push": {
+    "autoCreateMissingRecords": true
+  },
+  "sqlLogging": {
+    "outputDirectory": "./migrations/codegen"
+  },
+  "directoryOrder": [
+    "data-quality-labels",
+    "relationship-types",
+    "committee-types",
+    "task-types",
+    "issue-types",
+    "certifications",
+    "courses",
+    "forms",
+    "form-versions",
+    "form-pages",
+    "form-questions",
+    "form-question-options",
+    "sonar-score-band-sets",
+    "sonar-score-bands",
+    "sonar-time-windows",
+    "sonar-score-models",
+    "sonar-score-model-versions",
+    "sonar-model-related-entities",
+    "sonar-factors",
+    "sonar-model-factors",
+    "ai-vendors",
+    "ai-models",
+    "ai-model-vendors"
+  ]
+}
