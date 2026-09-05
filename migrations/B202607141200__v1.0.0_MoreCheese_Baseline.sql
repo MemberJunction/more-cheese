@@ -14177,7 +14177,25 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spCreateMemberProfile]
     @Latitude decimal(9, 6),
     @Longitude decimal(9, 6),
     @JoinDate date,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @AddressLine2_Clear bit = 0,
+    @AddressLine2 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL,
+    @RaceEthnicity_Clear bit = 0,
+    @RaceEthnicity nvarchar(200) = NULL,
+    @EthnicityHispanic_Clear bit = 0,
+    @EthnicityHispanic nvarchar(30) = NULL,
+    @PronounSet_Clear bit = 0,
+    @PronounSet nvarchar(50) = NULL,
+    @PrimaryLanguage_Clear bit = 0,
+    @PrimaryLanguage nvarchar(50) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -14199,7 +14217,16 @@ BEGIN
                 [Latitude],
                 [Longitude],
                 [JoinDate],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [AddressLine2],
+                [PostalCode],
+                [RaceEthnicity],
+                [EthnicityHispanic],
+                [PronounSet],
+                [PrimaryLanguage]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -14215,7 +14242,16 @@ BEGIN
                 @Latitude,
                 @Longitude,
                 @JoinDate,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @AddressLine2_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine2, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END,
+                CASE WHEN @RaceEthnicity_Clear = 1 THEN NULL ELSE ISNULL(@RaceEthnicity, NULL) END,
+                CASE WHEN @EthnicityHispanic_Clear = 1 THEN NULL ELSE ISNULL(@EthnicityHispanic, NULL) END,
+                CASE WHEN @PronounSet_Clear = 1 THEN NULL ELSE ISNULL(@PronounSet, NULL) END,
+                CASE WHEN @PrimaryLanguage_Clear = 1 THEN NULL ELSE ISNULL(@PrimaryLanguage, NULL) END
             )
     END
     ELSE
@@ -14233,7 +14269,16 @@ BEGIN
                 [Latitude],
                 [Longitude],
                 [JoinDate],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [AddressLine2],
+                [PostalCode],
+                [RaceEthnicity],
+                [EthnicityHispanic],
+                [PronounSet],
+                [PrimaryLanguage]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -14248,7 +14293,16 @@ BEGIN
                 @Latitude,
                 @Longitude,
                 @JoinDate,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @AddressLine2_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine2, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END,
+                CASE WHEN @RaceEthnicity_Clear = 1 THEN NULL ELSE ISNULL(@RaceEthnicity, NULL) END,
+                CASE WHEN @EthnicityHispanic_Clear = 1 THEN NULL ELSE ISNULL(@EthnicityHispanic, NULL) END,
+                CASE WHEN @PronounSet_Clear = 1 THEN NULL ELSE ISNULL(@PronounSet, NULL) END,
+                CASE WHEN @PrimaryLanguage_Clear = 1 THEN NULL ELSE ISNULL(@PrimaryLanguage, NULL) END
             )
     END
     -- return the new record from the base view, which might have some calculated fields
@@ -14291,7 +14345,25 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spUpdateMemberProfile]
     @Latitude decimal(9, 6) = NULL,
     @Longitude decimal(9, 6) = NULL,
     @JoinDate date = NULL,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @AddressLine2_Clear bit = 0,
+    @AddressLine2 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL,
+    @RaceEthnicity_Clear bit = 0,
+    @RaceEthnicity nvarchar(200) = NULL,
+    @EthnicityHispanic_Clear bit = 0,
+    @EthnicityHispanic nvarchar(30) = NULL,
+    @PronounSet_Clear bit = 0,
+    @PronounSet nvarchar(50) = NULL,
+    @PrimaryLanguage_Clear bit = 0,
+    @PrimaryLanguage nvarchar(50) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -14308,7 +14380,16 @@ BEGIN
         [Latitude] = ISNULL(@Latitude, [Latitude]),
         [Longitude] = ISNULL(@Longitude, [Longitude]),
         [JoinDate] = ISNULL(@JoinDate, [JoinDate]),
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo]),
+        [Country] = CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, [Country]) END,
+        [CountryName] = CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, [CountryName]) END,
+        [AddressLine1] = CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, [AddressLine1]) END,
+        [AddressLine2] = CASE WHEN @AddressLine2_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine2, [AddressLine2]) END,
+        [PostalCode] = CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, [PostalCode]) END,
+        [RaceEthnicity] = CASE WHEN @RaceEthnicity_Clear = 1 THEN NULL ELSE ISNULL(@RaceEthnicity, [RaceEthnicity]) END,
+        [EthnicityHispanic] = CASE WHEN @EthnicityHispanic_Clear = 1 THEN NULL ELSE ISNULL(@EthnicityHispanic, [EthnicityHispanic]) END,
+        [PronounSet] = CASE WHEN @PronounSet_Clear = 1 THEN NULL ELSE ISNULL(@PronounSet, [PronounSet]) END,
+        [PrimaryLanguage] = CASE WHEN @PrimaryLanguage_Clear = 1 THEN NULL ELSE ISNULL(@PrimaryLanguage, [PrimaryLanguage]) END
     WHERE
         [ID] = @ID
 
@@ -14400,6 +14481,20 @@ GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteMemberProfile] TO [cdp_Devel
 /* spDelete Permissions for MoreCheese: Member Profiles */
 
 GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteMemberProfile] TO [cdp_Developer], [cdp_Integration];
+
+/* Index for Foreign Keys for OrganizationProfile */
+
+/* Base View SQL for MoreCheese: Organization Profiles */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Organization Profiles
+-- Item: vwOrganizationProfiles
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
 
 /* Index for Foreign Keys for MembershipPeriod */
 -----------------------------------------------------------------
@@ -14843,7 +14938,15 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spCreateOrganizationProfile]
     @LifecycleEventKind nvarchar(50) = NULL,
     @LifecycleEventYear_Clear bit = 0,
     @LifecycleEventYear int = NULL,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -14865,7 +14968,11 @@ BEGIN
                 [Longitude],
                 [LifecycleEventKind],
                 [LifecycleEventYear],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [PostalCode]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -14881,7 +14988,11 @@ BEGIN
                 @Longitude,
                 CASE WHEN @LifecycleEventKind_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventKind, NULL) END,
                 CASE WHEN @LifecycleEventYear_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventYear, NULL) END,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END
             )
     END
     ELSE
@@ -14899,7 +15010,11 @@ BEGIN
                 [Longitude],
                 [LifecycleEventKind],
                 [LifecycleEventYear],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [PostalCode]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -14914,7 +15029,11 @@ BEGIN
                 @Longitude,
                 CASE WHEN @LifecycleEventKind_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventKind, NULL) END,
                 CASE WHEN @LifecycleEventYear_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventYear, NULL) END,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END
             )
     END
     -- return the new record from the base view, which might have some calculated fields
@@ -14958,7 +15077,15 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spUpdateOrganizationProfile]
     @LifecycleEventKind nvarchar(50) = NULL,
     @LifecycleEventYear_Clear bit = 0,
     @LifecycleEventYear int = NULL,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -14975,7 +15102,11 @@ BEGIN
         [Longitude] = ISNULL(@Longitude, [Longitude]),
         [LifecycleEventKind] = CASE WHEN @LifecycleEventKind_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventKind, [LifecycleEventKind]) END,
         [LifecycleEventYear] = CASE WHEN @LifecycleEventYear_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventYear, [LifecycleEventYear]) END,
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo]),
+        [Country] = CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, [Country]) END,
+        [CountryName] = CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, [CountryName]) END,
+        [AddressLine1] = CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, [AddressLine1]) END,
+        [PostalCode] = CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, [PostalCode]) END
     WHERE
         [ID] = @ID
 
@@ -15067,6 +15198,12 @@ GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteOrganizationProfile] TO [cdp
 /* spDelete Permissions for MoreCheese: Organization Profiles */
 
 GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteOrganizationProfile] TO [cdp_Developer], [cdp_Integration];
+
+/* SQL text to delete unneeded entity fields (2 scoped entities) */
+
+/* SQL text to update existing entity fields from schema (2 scoped entities) */
+
+/* SQL text to set default column width where needed */
 
 /* SQL text to delete unneeded entity fields (12 scoped entities) */
 EXEC [${mjSchema}].[spDeleteUnneededEntityFields] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}', @EntityIDs='49DF9400-9C38-422C-8DB6-1373D5392E35,23916A8E-3487-4793-9E18-C209EF097E58,9F493BE6-006B-4FC2-986C-D15AB527E65B,F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F,FF152388-ED04-4F1F-B237-94D502C4AA54,A3D95071-B312-40E2-AEF3-F90D8EF881AD,BE4D97E0-48DE-4240-A09F-8B39AD4BD043,16538F9B-E025-460D-9505-BD03A7648EC5,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,A3E60AF2-D7CA-407E-A1D3-34320E851892,428C670F-EBE3-41E6-86E4-EB5A274960A1';
