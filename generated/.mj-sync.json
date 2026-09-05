@@ -4,7 +4,7 @@
     "autoCreateMissingRecords": true
   },
   "sqlLogging": {
-    "outputDirectory": "./migrations/codegen/generated",
+    "outputDirectory": "../migrations/codegen/generated",
     "formatAsMigration": true
   },
   "directoryOrder": [

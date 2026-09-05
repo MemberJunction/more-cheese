@@ -47,6 +47,9 @@ jobs:
       - name: Validate Loom data project & schema conformance
         run: npm run validate:loom
 
+      - name: Assert MetadataSync IDs match generated/ for every loom directory
+        run: npm run check:sync-id-parity
+
       - name: Run Loom mutation test suite
         run: npm run test:loom-mutations
 
