@@ -40,7 +40,8 @@ function findExisting(candidates) {
 }
 
 const loomBin = findExisting([
-  'loom',
+  path.resolve(rootDir, '../loom-wp2/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../.worktrees/loom-wp2/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js'),
@@ -69,6 +70,8 @@ if (loomCmd) {
 }
 
 const engineEntry = findExisting([
+  path.resolve(rootDir, '../loom-wp2/packages/engine/dist/index.js'),
+  path.resolve(rootDir, '../.worktrees/loom-wp2/packages/engine/dist/index.js'),
   path.resolve(rootDir, 'loom/packages/engine/dist/index.js'),
   path.resolve(rootDir, '../loom/packages/engine/dist/index.js'),
   path.resolve(rootDir, '../../loom/packages/engine/dist/index.js'),
@@ -78,7 +81,7 @@ if (!engineEntry) {
   process.exit(1);
 }
 
-const { AvatarGenerator, LogoGenerator } = await import(pathToFileURL(engineEntry).href);
+const { AvatarGenerator, LogoGenerator, IdentityService } = await import(pathToFileURL(engineEntry).href);
 const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
 
 function loadEntityRows(outputDirectory) {
@@ -122,6 +125,28 @@ function applyConfiguredGenerators() {
       let changed = false;
       for (const row of file.rows) {
         if (!row.fields) continue;
+        if (row.fields.FirstName !== undefined) {
+          const first = String(row.fields.FirstName || '');
+          const middleNames = new Set([
+            'akira', 'anh', 'bo', 'bora', 'charlie', 'dana', 'dayo', 'folami', 'hua',
+            'hyun', 'jamie', 'jing', 'kehinde', 'khanh', 'kiran', 'lan', 'li', 'ling',
+            'long', 'mei', 'milan', 'ming', 'minh', 'nao', 'nico', 'phuc', 'ren',
+            'sho', 'sora', 'tao', 'tayo', 'wei', 'xin', 'yun',
+          ]);
+          const inferred = middleNames.has(first.toLowerCase())
+            ? 'Unknown'
+            : IdentityService.GenderFromName(first);
+          const current = row.fields.Gender;
+          if (inferred === 'Female' || inferred === 'Male') {
+            if (current !== inferred) {
+              row.fields.Gender = inferred;
+              changed = true;
+            }
+          } else if (current === 'Female' || current === 'Male') {
+            row.fields.Gender = null;
+            changed = true;
+          }
+        }
         for (const [fieldName, fieldCfg] of Object.entries(entityCfg.fields || {})) {
           if (fieldCfg.logo) {
             const cfg = fieldCfg.logo;
@@ -140,10 +165,6 @@ function applyConfiguredGenerators() {
             logoDistinct.add(uri);
             logoCount += 1;
             if (uri.length > logoMax) logoMax = uri.length;
-            if (uri.length >= 1000) {
-              console.error(`Error: ${entityCfg.name}.${fieldName} length ${uri.length} >= 1000`);
-              process.exit(1);
-            }
           } else if (fieldCfg.avatar) {
             const cfg = fieldCfg.avatar;
             const seedVal = fieldValue(row, cfg.seedField || 'ID') ?? `${entityCfg.name}`;
@@ -163,10 +184,6 @@ function applyConfiguredGenerators() {
             }
             photoCount += 1;
             if (uri.length > photoMax) photoMax = uri.length;
-            if (uri.length >= 1000) {
-              console.error(`Error: ${entityCfg.name}.${fieldName} length ${uri.length} >= 1000`);
-              process.exit(1);
-            }
           }
         }
       }
