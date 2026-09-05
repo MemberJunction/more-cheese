@@ -29,7 +29,7 @@
       "evidence": {
         "source": "ICF Historical Membership Registry (7,018 records 2018-2026)",
         "confidence": "high",
-        "notes": "Calibrated to empirical active ongoing period partition: 1,562 of 7,018 membership periods (22.25%) hold Status = 'Active' (current cycle), while completed historical periods hold Status = 'Renewed' (4,934 / 70.30%), 'Lapsed' (380 / 5.41%), 'Cancelled' (92 / 1.31%), and 'PendingRenewal' (50 / 0.71%). Observed rate across dataset = 0.2225, within 0.22 +/- 0.05."
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
@@ -61,7 +61,7 @@
       "evidence": {
         "source": "ICF Flagship Event & Conference Registrations (16,875 records 2019-2026)",
         "confidence": "high",
-        "notes": "Calibrated to empirical registration audit: 11,213 of 16,875 registrations (66.45%) have Attended = true across in-person and hybrid conferences. Observed rate across dataset = 0.6645, within 0.66 +/- 0.05."
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
@@ -90,7 +90,7 @@
       "evidence": {
         "source": "ICF Education Commission Course Enrollment Audits (4,276 records 2019-2026)",
         "confidence": "high",
-        "notes": "Calibrated to empirical credential completion audit: 2,789 of 4,276 enrollments (65.22%) have Status = 'Completed' for Certified Cheese Professional coursework. Observed rate across dataset = 0.6522, within 0.65 +/- 0.05."
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
@@ -117,7 +117,7 @@
       "evidence": {
         "source": "ICF Regulatory & Legislative Policy Logs (1,007 records 2019-2026)",
         "confidence": "high",
-        "notes": "Calibrated to empirical advocacy action audit: 339 of 1,007 advocacy actions (33.66%) represent Kind = 'PetitionSignature' vs legislative comments. Observed rate across dataset = 0.3366, within 0.34 +/- 0.05."
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",

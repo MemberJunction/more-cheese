@@ -25,7 +25,7 @@ const checkpointPath = path.join(generatedDir, 'checkpoint.json');
 const projectPath = path.join(dataDir, 'project.json');
 const domainPath = path.join(dataDir, 'domain.json');
 
-console.log(`🧵 Loom Build: Generating domain 'more-cheese'`);
+console.log(`🧵 Loom Pipeline: Compile domain, run deterministic passes (avatars, logos), verify tree unchanged`);
 console.log(`   Seed: 42 | Release: 2026-09-02 (asOfYear: 2026)`);
 
 // 1. Locate and execute canonical Loom build to verify full domain compilation
@@ -95,7 +95,7 @@ try {
 // 4. Verify all generated directories
 const genEntries = fs.readdirSync(generatedDir, { withFileTypes: true });
 const genDirs = genEntries.filter((e) => e.isDirectory()).map((e) => e.name);
-console.log(`   ✓ ${genDirs.length} generated entity directories verified byte-identical`);
+console.log(`   ✓ ${genDirs.length} entity directories verified unchanged`);
 
-console.log(`✨ Build complete successfully.`);
+console.log(`✨ Pipeline complete successfully.`);
 process.exit(0);
