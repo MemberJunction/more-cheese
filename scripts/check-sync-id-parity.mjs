@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Assert that MetadataSync migrations insert exactly the IDs in generated/
- * for every loom-classified directory. Fails if the capture drifted from
- * the committed tree (extra IDs, missing IDs, or a directory with no
- * spCreate/spUpdate blocks).
+ * Assert that MetadataSync migrations insert exactly the primary keys in
+ * generated/ for every loom-classified directory. Keys are every field on
+ * the record's primaryKey (not only ID) matched to the corresponding
+ * spCreate/spUpdate argument. A directory that yields zero keys fails.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -19,20 +19,42 @@ const loomDirs = Object.entries(ownership.directories)
   .map(([k]) => k)
   .sort();
 
-function generatedIds(dir) {
+function normalizeValue(v) {
+  if (v === undefined || v === null) return null;
+  const s = String(v);
+  if (/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/.test(s)) {
+    return s.toUpperCase();
+  }
+  return s;
+}
+
+function canonKey(pk, fieldNames) {
+  return fieldNames
+    .map((f) => `${f}=${normalizeValue(pk[f])}`)
+    .join('|');
+}
+
+function generatedKeys(dir) {
   const folder = path.join(generatedRoot, dir);
-  const ids = new Set();
-  if (!fs.existsSync(folder)) return ids;
+  const keys = new Set();
+  const fieldNames = new Set();
+  if (!fs.existsSync(folder)) return { keys, fieldNames: [] };
   for (const name of fs.readdirSync(folder)) {
     if (!name.endsWith('.json') || name === '.mj-sync.json') continue;
     const data = JSON.parse(fs.readFileSync(path.join(folder, name), 'utf8'));
     const rows = Array.isArray(data) ? data : data.records || data.items || [];
     for (const row of rows) {
-      const id = row?.primaryKey?.ID ?? row?.primaryKey?.Id ?? row?.ID;
-      if (id) ids.add(String(id).toUpperCase());
+      const pk = row?.primaryKey;
+      if (!pk || typeof pk !== 'object') continue;
+      const names = Object.keys(pk);
+      for (const n of names) fieldNames.add(n);
+      if (names.length === 0) continue;
+      const ordered = [...names].sort();
+      const key = canonKey(pk, ordered);
+      if (ordered.every((f) => normalizeValue(pk[f]) !== null)) keys.add(key);
     }
   }
-  return ids;
+  return { keys, fieldNames: [...fieldNames].sort() };
 }
 
 function entityNameFor(dir) {
@@ -52,59 +74,146 @@ if (syncSqlFiles.length === 0) {
   process.exit(1);
 }
 
-const byEntity = new Map(); // entityName -> Set(id)
-
-function currentSet(entity) {
-  if (!byEntity.has(entity)) byEntity.set(entity, new Set());
-  return byEntity.get(entity);
+const pkFieldsByEntity = new Map();
+const treeKeysByDir = new Map();
+for (const dir of loomDirs) {
+  const entity = entityNameFor(dir);
+  const { keys, fieldNames } = generatedKeys(dir);
+  treeKeysByDir.set(dir, { entity, keys, fieldNames });
+  if (entity && fieldNames.length) {
+    const existing = pkFieldsByEntity.get(entity) || new Set();
+    for (const f of fieldNames) existing.add(f);
+    pkFieldsByEntity.set(entity, existing);
+  }
 }
 
 const saveRe = /^-- Save (.+?)(?: \([^)]+\))?\s*$/;
-const idAssignRe = /^  @ID_[A-Za-z0-9]+ = '([0-9A-Fa-f-]{36})'\s*$/;
+const assignRe = /^\s*@([A-Za-z][A-Za-z0-9]*)_([A-Za-z0-9]+) = (?:N)?'([^']*)'/;
+const assignNumRe = /^\s*@([A-Za-z][A-Za-z0-9]*)_([A-Za-z0-9]+) = (-?[0-9]+(?:\.[0-9]+)?)(?:\s|$)/;
+const execArgVarRe = /@([A-Za-z][A-Za-z0-9]*)\s*=\s*@([A-Za-z][A-Za-z0-9_]*)/g;
+const execArgLitRe = /@([A-Za-z][A-Za-z0-9]*)\s*=\s*N?'([^']*)'/g;
 
-async function loadInsertedIds() {
-  let currentEntity = null;
+function resetBlock(state) {
+  state.vars = new Map();
+  state.execArgs = new Map();
+  state.execArgVars = [];
+  state.sawExec = false;
+}
+
+function flushBlock(state, byEntity) {
+  if (!state.entity || !state.sawExec) {
+    resetBlock(state);
+    return;
+  }
+  const pkFields = [...(pkFieldsByEntity.get(state.entity) || [])].sort();
+  if (pkFields.length === 0) {
+    resetBlock(state);
+    return;
+  }
+  const args = new Map(state.execArgs);
+  for (const [param, varName] of state.execArgVars) {
+    const resolved = state.vars.get(varName) ?? state.vars.get(varName.replace(/^@/, ''));
+    if (resolved !== undefined) args.set(param, resolved);
+  }
+  const pk = {};
+  let complete = true;
+  for (const f of pkFields) {
+    const val = args.has(f) ? args.get(f) : null;
+    if (val === null || val === undefined) {
+      complete = false;
+      break;
+    }
+    pk[f] = val;
+  }
+  if (complete) {
+    if (!byEntity.has(state.entity)) byEntity.set(state.entity, new Set());
+    byEntity.get(state.entity).add(canonKey(pk, pkFields));
+  }
+  resetBlock(state);
+}
+
+async function loadInsertedKeys() {
+  const byEntity = new Map();
   for (const file of syncSqlFiles) {
     const rl = readline.createInterface({
       input: fs.createReadStream(file),
       crlfDelay: Infinity,
     });
-    for await (const line of rl) {
+    const state = {
+      entity: null,
+      vars: new Map(),
+      execArgs: new Map(),
+      execArgVars: [],
+      sawExec: false,
+    };
+    resetBlock(state);
+    for await (const raw of rl) {
+      const line = raw;
       const save = line.match(saveRe);
       if (save) {
-        currentEntity = save[1].trim();
+        flushBlock(state, byEntity);
+        state.entity = save[1].trim();
         continue;
       }
       if (line.startsWith('GO') || line.startsWith('-- SQL Logging') || line.startsWith('-- Split part')) {
-        currentEntity = null;
+        flushBlock(state, byEntity);
+        state.entity = null;
         continue;
       }
-      const assign = line.match(idAssignRe);
-      if (assign && currentEntity) {
-        currentSet(currentEntity).add(assign[1].toUpperCase());
+      const assign = line.match(assignRe) || line.match(assignNumRe);
+      if (assign) {
+        const field = assign[1];
+        const suffix = assign[2];
+        const value = normalizeValue(assign[3]);
+        state.vars.set(`${field}_${suffix}`, value);
+        state.vars.set(`@${field}_${suffix}`, value);
+      }
+      if (/\bEXEC\b/i.test(line)) {
+        state.sawExec = true;
+      }
+      if (state.sawExec) {
+        execArgVarRe.lastIndex = 0;
+        let m;
+        while ((m = execArgVarRe.exec(line))) {
+          state.execArgVars.push([m[1], m[2]]);
+        }
+        execArgLitRe.lastIndex = 0;
+        while ((m = execArgLitRe.exec(line))) {
+          state.execArgs.set(m[1], normalizeValue(m[2]));
+        }
       }
     }
+    flushBlock(state, byEntity);
   }
+  return byEntity;
 }
 
-await loadInsertedIds();
+const byEntity = await loadInsertedKeys();
 
 let failed = 0;
 console.log(`🔍 Sync ID parity: ${loomDirs.length} loom directories vs ${syncSqlFiles.length} MetadataSync file(s)`);
 
 for (const dir of loomDirs) {
-  const entity = entityNameFor(dir);
+  const meta = treeKeysByDir.get(dir);
+  const entity = meta?.entity;
   if (!entity) {
     console.error(`❌ ${dir}: missing generated/${dir}/.mj-sync.json entity`);
     failed++;
     continue;
   }
-  const tree = generatedIds(dir);
+  const tree = meta.keys;
   const inserted = byEntity.get(entity) || new Set();
+  if (tree.size === 0) {
+    failed++;
+    console.error(
+      `❌ ${dir} (${entity}): zero primary keys in generated/ (pk fields: ${meta.fieldNames.join(', ') || 'none'})`,
+    );
+    continue;
+  }
   const extra = [...inserted].filter((id) => !tree.has(id));
   const missing = [...tree].filter((id) => !inserted.has(id));
   if (extra.length === 0 && missing.length === 0) {
-    console.log(`  ✓ ${dir} (${entity}): ${tree.size} IDs`);
+    console.log(`  ✓ ${dir} (${entity}): ${tree.size} keys [${meta.fieldNames.join(', ')}]`);
     continue;
   }
   failed++;
