@@ -2,52 +2,50 @@
 /**
  * scripts/generate.mjs — Deterministic simulation and metadata generation pipeline
  *
- * Implements Builder Brief C27-3:
- * Generates and verifies the complete deterministic metadata tree and checkpoint state,
- * maintaining byte-identity across all 54 generated directories and checkpoint.json.
+ * Compiles the Loom domain, applies Loom AvatarGenerator / LogoGenerator to the
+ * governed generated/ tree from data/domain.json field config, and verifies
+ * checkpoint.json. After the tree is committed, a second run must leave
+ * generated/ byte-identical.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
-import { runAvatarGeneration } from './generate-avatars.mjs';
-import { runLogoGeneration } from './generate-logos.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-const dataDir = path.join(rootDir, 'data');
 const generatedDir = path.join(rootDir, 'generated');
 const checkpointPath = path.join(generatedDir, 'checkpoint.json');
-const projectPath = path.join(dataDir, 'project.json');
-const domainPath = path.join(dataDir, 'domain.json');
+const domainPath = path.join(rootDir, 'data', 'domain.json');
 
 console.log(`🧵 Loom Pipeline: Compile domain, run deterministic passes (avatars, logos), verify tree unchanged`);
 console.log(`   Seed: 42 | Release: 2026-09-02 (asOfYear: 2026)`);
 
-// 1. Locate and execute canonical Loom build to verify full domain compilation
-const candidates = [
+function findExisting(candidates) {
+  for (const c of candidates) {
+    if (c === 'loom') {
+      try {
+        execSync('which loom', { stdio: 'ignore' });
+        return 'loom';
+      } catch {
+        continue;
+      }
+    }
+    if (fs.existsSync(c)) return c;
+  }
+  return null;
+}
+
+const loomBin = findExisting([
   'loom',
   path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js'),
-];
-let loomCmd = null;
-for (const c of candidates) {
-  if (c === 'loom') {
-    try {
-      execSync('which loom', { stdio: 'ignore' });
-      loomCmd = 'loom';
-      break;
-    } catch {}
-  } else if (fs.existsSync(c)) {
-    loomCmd = `node ${c}`;
-    break;
-  }
-}
+]);
+const loomCmd = loomBin === 'loom' ? 'loom' : loomBin ? `node ${loomBin}` : null;
 
 const tmpBuildDir = path.join(rootDir, '.loom-tmp-build');
 if (loomCmd) {
@@ -70,11 +68,130 @@ if (loomCmd) {
   }
 }
 
-// 2. Run deterministic avatar and logo generation across Person and Organization entities
-runAvatarGeneration();
-runLogoGeneration();
+const engineEntry = findExisting([
+  path.resolve(rootDir, 'loom/packages/engine/dist/index.js'),
+  path.resolve(rootDir, '../loom/packages/engine/dist/index.js'),
+  path.resolve(rootDir, '../../loom/packages/engine/dist/index.js'),
+]);
+if (!engineEntry) {
+  console.error('Error: Loom engine dist not found (AvatarGenerator / LogoGenerator)');
+  process.exit(1);
+}
 
-// 3. Verify / ensure checkpoint.json
+const { AvatarGenerator, LogoGenerator } = await import(pathToFileURL(engineEntry).href);
+const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
+
+function loadEntityRows(outputDirectory) {
+  const dir = path.join(generatedDir, outputDirectory);
+  if (!fs.existsSync(dir)) {
+    console.error(`Error: generated directory missing: ${outputDirectory}`);
+    process.exit(1);
+  }
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.json') && f !== '.mj-sync.json')
+    .sort();
+  return files.map((name) => {
+    const full = path.join(dir, name);
+    return { full, rows: JSON.parse(fs.readFileSync(full, 'utf8')) };
+  });
+}
+
+function fieldValue(row, fieldName) {
+  if (fieldName === 'ID' || fieldName === 'id') {
+    return row.primaryKey?.ID ?? row.primaryKey?.id ?? row.fields?.ID ?? row.fields?.id;
+  }
+  if (row.fields && row.fields[fieldName] !== undefined && row.fields[fieldName] !== null) {
+    return row.fields[fieldName];
+  }
+  return row.primaryKey?.[fieldName];
+}
+
+function applyConfiguredGenerators() {
+  let logoDistinct = new Set();
+  let logoCount = 0;
+  let logoMax = 0;
+  let photoCount = 0;
+  let photoMax = 0;
+
+  for (const entityCfg of Object.values(domain.entities || {})) {
+    const outDir = entityCfg.outputDirectory;
+    if (!outDir) continue;
+    const files = loadEntityRows(outDir);
+    for (const file of files) {
+      let changed = false;
+      for (const row of file.rows) {
+        if (!row.fields) continue;
+        for (const [fieldName, fieldCfg] of Object.entries(entityCfg.fields || {})) {
+          if (fieldCfg.logo) {
+            const cfg = fieldCfg.logo;
+            const nameVal = fieldValue(row, cfg.nameField || 'Name') ?? `${entityCfg.name}`;
+            const seedVal = fieldValue(row, cfg.seedField || 'ID') ?? nameVal;
+            const uri = LogoGenerator.Generate({
+              name: String(nameVal),
+              seed: String(seedVal),
+              format: cfg.format,
+              shape: cfg.shape,
+            });
+            if (row.fields[fieldName] !== uri) {
+              row.fields[fieldName] = uri;
+              changed = true;
+            }
+            logoDistinct.add(uri);
+            logoCount += 1;
+            if (uri.length > logoMax) logoMax = uri.length;
+            if (uri.length >= 1000) {
+              console.error(`Error: ${entityCfg.name}.${fieldName} length ${uri.length} >= 1000`);
+              process.exit(1);
+            }
+          } else if (fieldCfg.avatar) {
+            const cfg = fieldCfg.avatar;
+            const seedVal = fieldValue(row, cfg.seedField || 'ID') ?? `${entityCfg.name}`;
+            const traitRaw = cfg.traitField ? fieldValue(row, cfg.traitField) : undefined;
+            const uri = AvatarGenerator.Generate({
+              seed: String(seedVal),
+              trait: traitRaw !== undefined && traitRaw !== null ? String(traitRaw) : undefined,
+              traits: cfg.traits,
+              defaultTrait: cfg.defaultTrait,
+              style: cfg.style,
+              format: cfg.format,
+              backgroundColor: cfg.backgroundColor,
+            });
+            if (row.fields[fieldName] !== uri) {
+              row.fields[fieldName] = uri;
+              changed = true;
+            }
+            photoCount += 1;
+            if (uri.length > photoMax) photoMax = uri.length;
+            if (uri.length >= 1000) {
+              console.error(`Error: ${entityCfg.name}.${fieldName} length ${uri.length} >= 1000`);
+              process.exit(1);
+            }
+          }
+        }
+      }
+      if (changed) {
+        fs.writeFileSync(file.full, JSON.stringify(file.rows, null, 2) + '\n', 'utf8');
+      }
+    }
+  }
+
+  if (logoCount !== 641 || logoDistinct.size !== 641) {
+    console.error(
+      `Error: expected 641/641 distinct organization logos, got count=${logoCount} distinct=${logoDistinct.size}`
+    );
+    process.exit(1);
+  }
+  if (photoCount < 1) {
+    console.error('Error: no PhotoURL values generated');
+    process.exit(1);
+  }
+  console.log(`   ✓ Loom LogoGenerator: ${logoCount}/${logoDistinct.size} distinct LogoURL (max ${logoMax} chars)`);
+  console.log(`   ✓ Loom AvatarGenerator: ${photoCount} PhotoURL (max ${photoMax} chars)`);
+}
+
+applyConfiguredGenerators();
+
 if (!fs.existsSync(checkpointPath)) {
   console.error(`Error: Checkpoint file missing at ${checkpointPath}`);
   process.exit(1);
@@ -92,7 +209,6 @@ try {
   process.exit(1);
 }
 
-// 4. Verify all generated directories
 const genEntries = fs.readdirSync(generatedDir, { withFileTypes: true });
 const genDirs = genEntries.filter((e) => e.isDirectory()).map((e) => e.name);
 console.log(`   ✓ ${genDirs.length} entity directories verified unchanged`);

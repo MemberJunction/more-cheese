@@ -81,7 +81,7 @@
           "logo": {
             "format": "base64",
             "nameField": "Name",
-            "seedField": "Name"
+            "seedField": "ID"
           }
         }
       },
@@ -130,10 +130,15 @@
           "type": "string",
           "nullable": true,
           "avatar": {
-            "style": "adventurer",
+            "style": "compact-svg",
             "format": "base64",
-            "genderField": "Gender",
-            "seedField": "Email"
+            "seedField": "ID",
+            "traitField": "Gender",
+            "traits": {
+              "Female": "long-hair",
+              "Male": "short-hair"
+            },
+            "defaultTrait": "neutral"
           }
         }
       },
