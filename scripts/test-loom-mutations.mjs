@@ -8,12 +8,12 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 console.log('================================================================================');
-console.log('            LOOM DATA VALIDATOR MUTATION TEST SUITE (R3-M1)                      ');
+console.log('            LOOM DATA VALIDATOR MUTATION TEST SUITE (C27-4, C27-6)              ');
 console.log('================================================================================');
 
 function runValidatorExpectingFailure(mutationName, expectedErrorSnippet) {
   try {
-    execSync('node scripts/validate-loom-data.mjs', { cwd: rootDir, stdio: 'pipe' });
+    execSync('npm run validate:loom', { cwd: rootDir, stdio: 'pipe' });
     console.error(`❌ Mutation Test FAILED: '${mutationName}' was expected to fail validation, but passed!`);
     process.exit(1);
   } catch (err) {
@@ -26,7 +26,7 @@ function runValidatorExpectingFailure(mutationName, expectedErrorSnippet) {
   }
 }
 
-// Backup original files
+// Backup original config files
 const heroesPath = path.join(rootDir, 'data/ruleset/heroes.json');
 const laddersPath = path.join(rootDir, 'data/ruleset/ladders.json');
 const domainPath = path.join(rootDir, 'data/domain.json');
@@ -37,10 +37,23 @@ const origLadders = fs.readFileSync(laddersPath, 'utf8');
 const origDomain = fs.readFileSync(domainPath, 'utf8');
 const origCommon = fs.readFileSync(commonPath, 'utf8');
 
+// Backup generated dataset files for relational & closure mutations
+const commMemPath = path.join(rootDir, 'generated/committee-memberships/.committee-memberships.json');
+const commMotionPath = path.join(rootDir, 'generated/committee-motions/.committee-motions.json');
+const orderLinePath = path.join(rootDir, 'generated/order-lines/.order-lines.part-01.json');
+const peoplePath = path.join(rootDir, 'generated/people/.people.json');
+const orgsPath = path.join(rootDir, 'generated/organizations/.organizations.json');
+
+const origCommMem = fs.readFileSync(commMemPath, 'utf8');
+const origCommMotion = fs.readFileSync(commMotionPath, 'utf8');
+const origOrderLine = fs.readFileSync(orderLinePath, 'utf8');
+const origPeople = fs.readFileSync(peoplePath, 'utf8');
+const origOrgs = fs.readFileSync(orgsPath, 'utf8');
+
 try {
   // Baseline verification: original unmutated dataset must pass
   console.log('Testing baseline unmutated dataset:');
-  execSync('node scripts/validate-loom-data.mjs', { cwd: rootDir, stdio: 'pipe' });
+  execSync('npm run validate:loom', { cwd: rootDir, stdio: 'pipe' });
   console.log('✓ Baseline validation passed.\n');
 
   // Mutation 1: Wrong ladder state/year on hero Elena Rodriguez
@@ -97,10 +110,58 @@ try {
   const mutatedDomain6 = JSON.parse(origDomain);
   mutatedDomain6.entities.Product.fields.Bio = { name: 'Bio', type: 'string' };
   fs.writeFileSync(domainPath, JSON.stringify(mutatedDomain6, null, 2), 'utf8');
-  runValidatorExpectingFailure('Mutation 6: non-members field missing from metadata', "missing from record #0");
+  runValidatorExpectingFailure('Mutation 6: non-members field missing from metadata', 'missing from record #0');
+
+  // Mutation 7: Relational Rule 1 (date-window: committee-membership-covered-by-term)
+  console.log('Running Mutation 7: Relational Rule 1 (date-window breach)...');
+  fs.writeFileSync(domainPath, origDomain, 'utf8'); // restore
+  const mutatedCommMem7 = JSON.parse(origCommMem);
+  mutatedCommMem7[0].fields.StartDate = '1985-01-01';
+  fs.writeFileSync(commMemPath, JSON.stringify(mutatedCommMem7, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 7: committee-membership-covered-by-term', 'committee-membership-covered-by-term');
+
+  // Mutation 8: Relational Rule 2 (outcome-derived-from-ballots: motion-outcome-derived-from-votes)
+  console.log('Running Mutation 8: Relational Rule 2 (outcome contradicts ballots)...');
+  fs.writeFileSync(commMemPath, origCommMem, 'utf8'); // restore
+  const mutatedMotion8 = JSON.parse(origCommMotion);
+  mutatedMotion8[0].fields.Result = 'Failed';
+  fs.writeFileSync(commMotionPath, JSON.stringify(mutatedMotion8, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 8: motion-outcome-derived-from-votes', 'motion-outcome-derived-from-votes');
+
+  // Mutation 9: Relational Rule 3 (path-match: order-line-company-matches-order)
+  console.log('Running Mutation 9: Relational Rule 3 (order line company differs from order)...');
+  fs.writeFileSync(commMotionPath, origCommMotion, 'utf8'); // restore
+  const mutatedOrderLine9 = JSON.parse(origOrderLine);
+  mutatedOrderLine9[0].fields.CompanyID = '00000000-0000-0000-0000-000000000000';
+  fs.writeFileSync(orderLinePath, JSON.stringify(mutatedOrderLine9, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 9: order-line-company-matches-order', 'order-line-company-matches-order');
+
+  // Mutation 10: PK Uniqueness violation
+  console.log('Running Mutation 10: Primary Key collision...');
+  fs.writeFileSync(orderLinePath, origOrderLine, 'utf8'); // restore
+  const mutatedPeople10 = JSON.parse(origPeople);
+  mutatedPeople10[1].primaryKey.ID = mutatedPeople10[0].primaryKey.ID;
+  fs.writeFileSync(peoplePath, JSON.stringify(mutatedPeople10, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 10: PK uniqueness duplicate', 'PK Uniqueness');
+
+  // Mutation 11: Foreign Key closure violation
+  console.log('Running Mutation 11: FK orphan reference...');
+  fs.writeFileSync(peoplePath, origPeople, 'utf8'); // restore
+  const mutatedOrderLine11 = JSON.parse(origOrderLine);
+  mutatedOrderLine11[0].fields.ProductID = '00000000-0000-0000-0000-000000000000';
+  fs.writeFileSync(orderLinePath, JSON.stringify(mutatedOrderLine11, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 11: FK closure orphan', 'FK Closure');
+
+  // Mutation 12: Lookup Resolution violation
+  console.log('Running Mutation 12: Unresolvable @lookup expression...');
+  fs.writeFileSync(orderLinePath, origOrderLine, 'utf8'); // restore
+  const mutatedOrgs12 = JSON.parse(origOrgs);
+  mutatedOrgs12[0].fields.OrganizationTypeID = '@lookup:MJ_BizApps_Common: Organization Types.Name=NonExistentTypeXYZ';
+  fs.writeFileSync(orgsPath, JSON.stringify(mutatedOrgs12, null, 2), 'utf8');
+  runValidatorExpectingFailure('Mutation 12: @lookup resolution failure', 'Lookup Resolution');
 
   console.log('\n================================================================================');
-  console.log('✅ ALL 6 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (R3-M1, V1)');
+  console.log('✅ ALL 12 MUTATION TESTS CAUGHT AND REJECTED SUCCESSFULLY (C27-4, C27-6)');
   console.log('================================================================================');
 } finally {
   // Always restore originals
@@ -108,4 +169,9 @@ try {
   fs.writeFileSync(laddersPath, origLadders, 'utf8');
   fs.writeFileSync(domainPath, origDomain, 'utf8');
   fs.writeFileSync(commonPath, origCommon, 'utf8');
+  fs.writeFileSync(commMemPath, origCommMem, 'utf8');
+  fs.writeFileSync(commMotionPath, origCommMotion, 'utf8');
+  fs.writeFileSync(orderLinePath, origOrderLine, 'utf8');
+  fs.writeFileSync(peoplePath, origPeople, 'utf8');
+  fs.writeFileSync(orgsPath, origOrgs, 'utf8');
 }

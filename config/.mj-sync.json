@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "push": {
+    "autoCreateMissingRecords": true
+  },
+  "sqlLogging": {
+    "outputDirectory": "./migrations/codegen/config",
+    "formatAsMigration": true
+  },
+  "directoryOrder": [
+    "sonar-score-band-sets",
+    "sonar-score-bands",
+    "sonar-time-windows",
+    "sonar-score-models",
+    "sonar-score-model-versions",
+    "sonar-model-related-entities",
+    "sonar-factors",
+    "sonar-model-factors",
+    "ai-vendors",
+    "ai-models",
+    "ai-model-vendors"
+  ]
+}

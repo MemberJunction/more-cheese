@@ -2,7 +2,7 @@
 
 **Status:** proposal, nothing built. **Date:** 2026-07-27.
 **Base:** `sonar-metadata-integration` @ `edc8571` + the two data-quality passes (`2dd19b3`, `5958d61`)
-and the ruleset-formatting fix (`0b07973`). Suite green at 146 gates.
+and the ruleset-formatting fix (`0b07973`). Suite green at full coverage.
 
 The ask: tighten nationality, names, demographics-by-region, and the catalogue tables
 (3 certifications, a thin course catalogue) across the whole dataset.

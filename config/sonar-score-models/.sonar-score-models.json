@@ -1,0 +1,21 @@
+[
+  {
+    "primaryKey": {
+      "ID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C"
+    },
+    "fields": {
+      "Name": "Member Engagement Score",
+      "Slug": "morecheese-engagement",
+      "Description": "Composite engagement score for federation members — breadth, recency, and depth of participation across events, governance, learning, advocacy, surveys, certifications, and competitions. The retention early-warning dial, computed live by Sonar.",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Status": "Active",
+      "ScoreScaleMin": 0,
+      "ScoreScaleMax": 100,
+      "CombineStrategy": "WeightedSum",
+      "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
+      "OwnerUserID": "C6309AFC-F5DE-5794-8865-FC99D5DD82F4",
+      "EffectiveFrom": "2025-10-24T14:00:00Z",
+      "CurrentVersionID": "@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=9EC51FE5-B002-564E-9C7E-7B8E4954CC5B?allowDefer"
+    }
+  }
+]

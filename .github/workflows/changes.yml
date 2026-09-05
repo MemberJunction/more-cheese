@@ -24,11 +24,14 @@ jobs:
       - name: Validate metadata referential integrity closure
         run: node scripts/check-metadata-closure.mjs
 
+      - name: Check metadata and config ownership manifest
+        run: npm run check:ownership
+
       - name: Checkout Loom Contracts
         uses: actions/checkout@v4
         with:
           repository: MemberJunction/loom
-          ref: de406d7ff0ed86d1f9b7e2ac3f378063c7251ebf
+          ref: 8b88a025eab3b604fe003fed5f401cac8c1d0379
           path: loom
 
       - name: Build Loom
@@ -42,7 +45,16 @@ jobs:
           echo "$GITHUB_WORKSPACE/loom/packages/cli/dist/bin" >> $GITHUB_PATH
 
       - name: Validate Loom data project & schema conformance
-        run: node scripts/validate-loom-data.mjs
+        run: npm run validate:loom
+
+      - name: Assert MetadataSync IDs match generated/ for every loom directory
+        run: npm run check:sync-id-parity
+
+      - name: Run Loom mutation test suite
+        run: npm run test:loom-mutations
+
+      - name: Compile domain, run deterministic passes (avatars, logos), verify tree unchanged
+        run: npm run generate && test -z "$(git status --porcelain generated/)" && git diff --exit-code generated/
 
       - name: Check for migration file changes
         id: migration_check

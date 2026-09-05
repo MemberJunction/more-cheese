@@ -3,7 +3,7 @@
 -- =========================================================================
 -- Single baseline for the ${flyway:defaultSchema} application schema (home schema:
 -- morecheese_members) plus this app's sibling schemas (morecheese_events,
--- morecheese_learning, morecheese_orders — a deliberate multi-schema app, one schema
+-- morecheese_learning — a deliberate multi-schema app, one schema
 -- per composed demo domain, mirroring the D9 pack pyramid).
 --
 -- Shapes were frozen 2026-07-14 from the datagen generator (datagen/cli/emit-schema.mjs),
@@ -27,7 +27,7 @@
 -- app dependencies in mj-app.json, so install order is guaranteed):
 --   __mj_BizAppsCommon  (sibling repo: bizapps-common) — Person, Organization
 --
--- NOTE: morecheese_orders is the sanctioned STAND-IN for bizapps-orders (pre-implementation,
+-- NOTE: Commercial entities are delivered via @mj-biz-apps/orders
 -- Marcelo memo §2.4). When their Subscription/Order model ships, a follow-up V* migration
 -- handles the decomposition — this baseline is not edited.
 -- No __mj_* audit columns and no FK indexes here — CodeGen owns those.
@@ -40,8 +40,6 @@
 CREATE SCHEMA morecheese_events;
 GO
 CREATE SCHEMA morecheese_learning;
-GO
-CREATE SCHEMA morecheese_orders;
 GO
 
 ---------------------------------------------------------------------------
@@ -221,65 +219,9 @@ GO
 -- bizapps-orders' published design (order-per-cycle, the posted Order IS
 -- the bill, no invoices). SANCTIONED STAND-IN until bizapps-orders ships.
 ---------------------------------------------------------------------------
-CREATE TABLE morecheese_orders.Product (
-    ID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
-    ProductKey NVARCHAR(50) NOT NULL,
-    Name NVARCHAR(200) NOT NULL,
-    ProductType NVARCHAR(50) NOT NULL,
-    UnitPrice DECIMAL(10,2) NOT NULL,
-    IsSharedDemo BIT NOT NULL DEFAULT 1,
-    CONSTRAINT PK_Product PRIMARY KEY (ID),
-    CONSTRAINT UQ_Product_ProductKey UNIQUE (ProductKey),
-    CONSTRAINT CK_Product_ProductType CHECK (ProductType IN ('Membership', 'Event', 'Certification', 'Competition', 'Publication', 'Sponsorship', 'JobPosting', 'Merchandise', 'Donation'))
-);
-GO
 
-CREATE TABLE morecheese_orders.[Order] (
-    ID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
-    OrderKey NVARCHAR(50) NOT NULL,
-    PersonID UNIQUEIDENTIFIER NOT NULL,
-    OrderType NVARCHAR(50) NOT NULL DEFAULT 'Sale',
-    Status NVARCHAR(50) NOT NULL DEFAULT 'Posted',
-    OrderDate DATE NOT NULL,
-    DueDate DATE NOT NULL,
-    TotalGross DECIMAL(10,2) NOT NULL,
-    PaymentStatus NVARCHAR(50) NOT NULL,
-    IsSharedDemo BIT NOT NULL DEFAULT 1,
-    CONSTRAINT PK_Order PRIMARY KEY (ID),
-    CONSTRAINT UQ_Order_OrderKey UNIQUE (OrderKey),
-    CONSTRAINT FK_Order_Person FOREIGN KEY (PersonID) REFERENCES __mj_BizAppsCommon.Person(ID),
-    CONSTRAINT CK_Order_PaymentStatus CHECK (PaymentStatus IN ('Paid', 'Unpaid', 'Overdue'))
-);
-GO
 
-CREATE TABLE morecheese_orders.OrderLine (
-    ID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
-    OrderID UNIQUEIDENTIFIER NOT NULL,
-    ProductID UNIQUEIDENTIFIER NOT NULL,
-    Quantity INT NOT NULL DEFAULT 1,
-    UnitPrice DECIMAL(10,2) NOT NULL,
-    LineTotal DECIMAL(10,2) NOT NULL,
-    IsSharedDemo BIT NOT NULL DEFAULT 1,
-    CONSTRAINT PK_OrderLine PRIMARY KEY (ID),
-    CONSTRAINT FK_OrderLine_Order FOREIGN KEY (OrderID) REFERENCES morecheese_orders.[Order](ID),
-    CONSTRAINT FK_OrderLine_Product FOREIGN KEY (ProductID) REFERENCES morecheese_orders.Product(ID)
-);
-GO
 
-CREATE TABLE morecheese_orders.Payment (
-    ID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
-    OrderID UNIQUEIDENTIFIER NOT NULL,
-    Amount DECIMAL(10,2) NOT NULL,
-    PaymentDate DATE NOT NULL,
-    Method NVARCHAR(50) NOT NULL,
-    Status NVARCHAR(50) NOT NULL DEFAULT 'Captured',
-    IsSharedDemo BIT NOT NULL DEFAULT 1,
-    CONSTRAINT PK_Payment PRIMARY KEY (ID),
-    CONSTRAINT FK_Payment_Order FOREIGN KEY (OrderID) REFERENCES morecheese_orders.[Order](ID),
-    CONSTRAINT CK_Payment_Method CHECK (Method IN ('CreditCard', 'ACH', 'Check', 'Wire')),
-    CONSTRAINT CK_Payment_Status CHECK (Status IN ('Captured', 'Failed', 'Refunded'))
-);
-GO
 
 ---------------------------------------------------------------------------
 -- Extended properties (MS_Description) — CodeGen reads these into entity
@@ -298,14 +240,6 @@ GO
 EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'The learning catalog', @level0type = N'SCHEMA', @level0name = N'morecheese_learning', @level1type = N'TABLE', @level1name = N'Course';
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Course enrollments with completion outcomes', @level0type = N'SCHEMA', @level0name = N'morecheese_learning', @level1type = N'TABLE', @level1name = N'CourseEnrollment';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Sellable products: membership tiers and event registrations', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Product';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'One order per billable fact (order-per-cycle; the posted order IS the bill). Stand-in for bizapps-orders', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Product-typed order lines', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'OrderLine';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Payments against orders, timed by the declared payment profiles (a payment dated after release has not happened yet — orders age instead)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Payment';
 GO
 
 ---------------------------------------------------------------------------
@@ -422,50 +356,6 @@ EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Completion dat
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Marks generated shared-demo rows; the wipe-and-recreate boundary', @level0type = N'SCHEMA', @level0name = N'morecheese_learning', @level1type = N'TABLE', @level1name = N'CourseEnrollment', @level2type = N'COLUMN', @level2name = N'IsSharedDemo';
 GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Business key (e.g. PROD-MEM-INDIVIDUAL); UUIDs derive from it', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'COLUMN', @level2name = N'ProductKey';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Product display name', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'COLUMN', @level2name = N'Name';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Membership (annual dues per tier) or Event (registration)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'COLUMN', @level2name = N'ProductType';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'List price in USD', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'COLUMN', @level2name = N'UnitPrice';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Marks generated shared-demo rows; the wipe-and-recreate boundary', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'COLUMN', @level2name = N'IsSharedDemo';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Business key (ORD-D-* dues, ORD-R-* open renewal, ORD-E-* event); UUIDs derive from it', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'OrderKey';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Always Sale in the demo slice', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'OrderType';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Always Posted — the posted order IS the bill (no invoices, per bizapps-orders design)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'Status';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Date the order posted (dues post at period start; event orders at registration)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'OrderDate';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Payment due date (period start, or +30 days on business-tier net terms)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'DueDate';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Order total in USD', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'TotalGross';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Paid, Unpaid, or Overdue — a payment dated after release has not happened yet, so orders age (real A/R)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'PaymentStatus';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Marks generated shared-demo rows; the wipe-and-recreate boundary', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Order', @level2type = N'COLUMN', @level2name = N'IsSharedDemo';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Line quantity (1 in the demo slice)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'OrderLine', @level2type = N'COLUMN', @level2name = N'Quantity';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Line unit price in USD', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'OrderLine', @level2type = N'COLUMN', @level2name = N'UnitPrice';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Quantity × UnitPrice, in USD', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'OrderLine', @level2type = N'COLUMN', @level2name = N'LineTotal';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Marks generated shared-demo rows; the wipe-and-recreate boundary', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'OrderLine', @level2type = N'COLUMN', @level2name = N'IsSharedDemo';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Payment amount in USD (full payment; no partials in the demo slice)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Payment', @level2type = N'COLUMN', @level2name = N'Amount';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Date the payment landed, per the declared payment-timing profiles', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Payment', @level2type = N'COLUMN', @level2name = N'PaymentDate';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'CreditCard, ACH, Check, or Wire (business tiers pay on net terms)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Payment', @level2type = N'COLUMN', @level2name = N'Method';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Captured (Failed/Refunded reserved for future stories)', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Payment', @level2type = N'COLUMN', @level2name = N'Status';
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'Marks generated shared-demo rows; the wipe-and-recreate boundary', @level0type = N'SCHEMA', @level0name = N'morecheese_orders', @level1type = N'TABLE', @level1name = N'Payment', @level2type = N'COLUMN', @level2name = N'IsSharedDemo';
-GO
 
 -- =========================================================================
 -- 2. APPLICATION — created here, correctly named, BEFORE codegen ever runs.
@@ -487,7 +377,7 @@ IF NOT EXISTS (SELECT 1 FROM __mj.Application WHERE ID = '3C46B3A5-34FB-51EA-B54
         '#F2A900',
         'morecheese',
         0,
-        '${flyway:defaultSchema},morecheese_events,morecheese_learning,morecheese_orders'
+        '${flyway:defaultSchema},morecheese_events,morecheese_learning'
     );
 GO
 
@@ -516,11 +406,6 @@ GO
 -- CodeGen regenerates the TypeScript union on next run.
 -- ============================================================
 
-ALTER TABLE morecheese_orders.Payment DROP CONSTRAINT CK_Payment_Status;
-GO
-ALTER TABLE morecheese_orders.Payment ADD CONSTRAINT CK_Payment_Status
-    CHECK (Status IN ('Captured', 'InProgress', 'Failed', 'Denied', 'Refunded'));
-GO
 
 GO
 -- ==================================================================
@@ -686,213 +571,6 @@ GO
 -- Entity metadata + views + CRUD procs + permissions. Do not hand-edit;
 -- re-run codegen and replace this section.
 -- ==================================================================
-
-/* SQL generated to create new entity MoreCheese: Orders */
-
-      INSERT INTO [${mjSchema}].[Entity] (
-         [ID],
-         [Name],
-         [DisplayName],
-         [Description],
-         [NameSuffix],
-         [BaseTable],
-         [BaseView],
-         [SchemaName],
-         [IncludeInAPI],
-         [AllowUserSearchAPI],
-         [AllowCaching]
-         , [TrackRecordChanges]
-         , [AuditRecordAccess]
-         , [AuditViewRuns]
-         , [AllowAllRowsAPI]
-         , [AllowCreateAPI]
-         , [AllowUpdateAPI]
-         , [AllowDeleteAPI]
-         , [UserViewMaxRows]
-         , [__mj_CreatedAt]
-         , [__mj_UpdatedAt]
-      )
-      VALUES (
-         '81b84f0d-7a7a-4897-a8f3-08eb40a09b51',
-         'MoreCheese: Orders',
-         'Orders',
-         'One order per billable fact (order-per-cycle; the posted order IS the bill). Stand-in for bizapps-orders',
-         NULL,
-         'Order',
-         'vwOrders',
-         'morecheese_orders',
-         1,
-         1,
-         0
-         , 1
-         , 0
-         , 0
-         , 0
-         , 1
-         , 1
-         , 1
-         , 1000
-         , GETUTCDATE()
-         , GETUTCDATE()
-      );
-
-/* SQL generated to add new entity MoreCheese: Orders to application ID: '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF' */
-INSERT INTO [${mjSchema}].[ApplicationEntity]
-                                       ([ApplicationID], [EntityID], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                       ('3C46B3A5-34FB-51EA-B54D-77E9F104ABAF', '81b84f0d-7a7a-4897-a8f3-08eb40a09b51', (SELECT COALESCE(MAX([Sequence]),0)+1 FROM [${mjSchema}].[ApplicationEntity] WHERE [ApplicationID] = '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF'), GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Orders for role UI */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('81b84f0d-7a7a-4897-a8f3-08eb40a09b51', 'E0AFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 0, 0, 0, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Orders for role Developer */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('81b84f0d-7a7a-4897-a8f3-08eb40a09b51', 'DEAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Orders for role Integration */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('81b84f0d-7a7a-4897-a8f3-08eb40a09b51', 'DFAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to create new entity MoreCheese: Order Lines */
-
-      INSERT INTO [${mjSchema}].[Entity] (
-         [ID],
-         [Name],
-         [DisplayName],
-         [Description],
-         [NameSuffix],
-         [BaseTable],
-         [BaseView],
-         [SchemaName],
-         [IncludeInAPI],
-         [AllowUserSearchAPI],
-         [AllowCaching]
-         , [TrackRecordChanges]
-         , [AuditRecordAccess]
-         , [AuditViewRuns]
-         , [AllowAllRowsAPI]
-         , [AllowCreateAPI]
-         , [AllowUpdateAPI]
-         , [AllowDeleteAPI]
-         , [UserViewMaxRows]
-         , [__mj_CreatedAt]
-         , [__mj_UpdatedAt]
-      )
-      VALUES (
-         'b5027754-cb75-4789-aa34-f71b815f0933',
-         'MoreCheese: Order Lines',
-         'Order Lines',
-         'Product-typed order lines',
-         NULL,
-         'OrderLine',
-         'vwOrderLines',
-         'morecheese_orders',
-         1,
-         1,
-         0
-         , 1
-         , 0
-         , 0
-         , 0
-         , 1
-         , 1
-         , 1
-         , 1000
-         , GETUTCDATE()
-         , GETUTCDATE()
-      );
-
-/* SQL generated to add new entity MoreCheese: Order Lines to application ID: '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF' */
-INSERT INTO [${mjSchema}].[ApplicationEntity]
-                                       ([ApplicationID], [EntityID], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                       ('3C46B3A5-34FB-51EA-B54D-77E9F104ABAF', 'b5027754-cb75-4789-aa34-f71b815f0933', (SELECT COALESCE(MAX([Sequence]),0)+1 FROM [${mjSchema}].[ApplicationEntity] WHERE [ApplicationID] = '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF'), GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Order Lines for role UI */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('b5027754-cb75-4789-aa34-f71b815f0933', 'E0AFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 0, 0, 0, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Order Lines for role Developer */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('b5027754-cb75-4789-aa34-f71b815f0933', 'DEAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Order Lines for role Integration */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('b5027754-cb75-4789-aa34-f71b815f0933', 'DFAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to create new entity MoreCheese: Payments */
-
-      INSERT INTO [${mjSchema}].[Entity] (
-         [ID],
-         [Name],
-         [DisplayName],
-         [Description],
-         [NameSuffix],
-         [BaseTable],
-         [BaseView],
-         [SchemaName],
-         [IncludeInAPI],
-         [AllowUserSearchAPI],
-         [AllowCaching]
-         , [TrackRecordChanges]
-         , [AuditRecordAccess]
-         , [AuditViewRuns]
-         , [AllowAllRowsAPI]
-         , [AllowCreateAPI]
-         , [AllowUpdateAPI]
-         , [AllowDeleteAPI]
-         , [UserViewMaxRows]
-         , [__mj_CreatedAt]
-         , [__mj_UpdatedAt]
-      )
-      VALUES (
-         'af2f0cf6-f5be-4769-b43a-fe3066defc44',
-         'MoreCheese: Payments',
-         'Payments',
-         'Payments against orders, timed by the declared payment profiles (a payment dated after release has not happened yet — orders age instead)',
-         NULL,
-         'Payment',
-         'vwPayments',
-         'morecheese_orders',
-         1,
-         1,
-         0
-         , 1
-         , 0
-         , 0
-         , 0
-         , 1
-         , 1
-         , 1
-         , 1000
-         , GETUTCDATE()
-         , GETUTCDATE()
-      );
-
-/* SQL generated to add new entity MoreCheese: Payments to application ID: '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF' */
-INSERT INTO [${mjSchema}].[ApplicationEntity]
-                                       ([ApplicationID], [EntityID], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                       ('3C46B3A5-34FB-51EA-B54D-77E9F104ABAF', 'af2f0cf6-f5be-4769-b43a-fe3066defc44', (SELECT COALESCE(MAX([Sequence]),0)+1 FROM [${mjSchema}].[ApplicationEntity] WHERE [ApplicationID] = '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF'), GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Payments for role UI */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('af2f0cf6-f5be-4769-b43a-fe3066defc44', 'E0AFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 0, 0, 0, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Payments for role Developer */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('af2f0cf6-f5be-4769-b43a-fe3066defc44', 'DEAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
-
-/* SQL generated to add new permission for entity MoreCheese: Payments for role Integration */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('af2f0cf6-f5be-4769-b43a-fe3066defc44', 'DFAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
 
 /* SQL generated to create new entity MoreCheese: Certifications */
 
@@ -1722,109 +1400,13 @@ INSERT INTO [${mjSchema}].[EntityPermission]
                                                    ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
                                                    ('428c670f-ebe3-41e6-86e4-eb5a274960a1', 'DFAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
 
-/* SQL generated to create new entity MoreCheese: Products */
 
-      INSERT INTO [${mjSchema}].[Entity] (
-         [ID],
-         [Name],
-         [DisplayName],
-         [Description],
-         [NameSuffix],
-         [BaseTable],
-         [BaseView],
-         [SchemaName],
-         [IncludeInAPI],
-         [AllowUserSearchAPI],
-         [AllowCaching]
-         , [TrackRecordChanges]
-         , [AuditRecordAccess]
-         , [AuditViewRuns]
-         , [AllowAllRowsAPI]
-         , [AllowCreateAPI]
-         , [AllowUpdateAPI]
-         , [AllowDeleteAPI]
-         , [UserViewMaxRows]
-         , [__mj_CreatedAt]
-         , [__mj_UpdatedAt]
-      )
-      VALUES (
-         'a05cc658-f8d8-476e-8e84-f2022c6dfef9',
-         'MoreCheese: Products',
-         'Products',
-         'Sellable products: membership tiers and event registrations',
-         NULL,
-         'Product',
-         'vwProducts',
-         'morecheese_orders',
-         1,
-         1,
-         0
-         , 1
-         , 0
-         , 0
-         , 0
-         , 1
-         , 1
-         , 1
-         , 1000
-         , GETUTCDATE()
-         , GETUTCDATE()
-      );
 
-/* SQL generated to add new entity MoreCheese: Products to application ID: '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF' */
-INSERT INTO [${mjSchema}].[ApplicationEntity]
-                                       ([ApplicationID], [EntityID], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                       ('3C46B3A5-34FB-51EA-B54D-77E9F104ABAF', 'a05cc658-f8d8-476e-8e84-f2022c6dfef9', (SELECT COALESCE(MAX([Sequence]),0)+1 FROM [${mjSchema}].[ApplicationEntity] WHERE [ApplicationID] = '3C46B3A5-34FB-51EA-B54D-77E9F104ABAF'), GETUTCDATE(), GETUTCDATE());
 
-/* SQL generated to add new permission for entity MoreCheese: Products for role UI */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('a05cc658-f8d8-476e-8e84-f2022c6dfef9', 'E0AFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 0, 0, 0, GETUTCDATE(), GETUTCDATE());
 
-/* SQL generated to add new permission for entity MoreCheese: Products for role Developer */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('a05cc658-f8d8-476e-8e84-f2022c6dfef9', 'DEAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
 
-/* SQL generated to add new permission for entity MoreCheese: Products for role Integration */
-INSERT INTO [${mjSchema}].[EntityPermission]
-                                                   ([EntityID], [RoleID], [CanRead], [CanCreate], [CanUpdate], [CanDelete], [__mj_CreatedAt], [__mj_UpdatedAt]) VALUES
-                                                   ('a05cc658-f8d8-476e-8e84-f2022c6dfef9', 'DFAFCCEC-6A37-EF11-86D4-000D3A4E707E', 1, 1, 1, 1, GETUTCDATE(), GETUTCDATE());
 
-/* SQL text to update existing entities from schema */
-EXEC [${mjSchema}].[spUpdateExistingEntitiesFromSchema] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}';
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Order */
-ALTER TABLE [morecheese_orders].[Order] ADD [__mj_CreatedAt] DATETIMEOFFSET NULL;
-GO
-
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Order */
-UPDATE [morecheese_orders].[Order] SET [__mj_CreatedAt] = GETUTCDATE() WHERE [__mj_CreatedAt] IS NULL;
-GO
-
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Order */
-ALTER TABLE [morecheese_orders].[Order] ALTER COLUMN [__mj_CreatedAt] DATETIMEOFFSET NOT NULL;
-GO
-
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Order */
-ALTER TABLE [morecheese_orders].[Order] ADD CONSTRAINT [DF_morecheese_orders_Order___mj_CreatedAt] DEFAULT GETUTCDATE() FOR [__mj_CreatedAt];
-GO
-
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Order */
-ALTER TABLE [morecheese_orders].[Order] ADD [__mj_UpdatedAt] DATETIMEOFFSET NULL;
-GO
-
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Order */
-UPDATE [morecheese_orders].[Order] SET [__mj_UpdatedAt] = GETUTCDATE() WHERE [__mj_UpdatedAt] IS NULL;
-GO
-
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Order */
-ALTER TABLE [morecheese_orders].[Order] ALTER COLUMN [__mj_UpdatedAt] DATETIMEOFFSET NOT NULL;
-GO
-
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Order */
-ALTER TABLE [morecheese_orders].[Order] ADD CONSTRAINT [DF_morecheese_orders_Order___mj_UpdatedAt] DEFAULT GETUTCDATE() FOR [__mj_UpdatedAt];
-GO
 
 /* SQL text to add special date field __mj_CreatedAt to entity morecheese_learning.Certification */
 ALTER TABLE [morecheese_learning].[Certification] ADD [__mj_CreatedAt] DATETIMEOFFSET NULL;
@@ -2178,69 +1760,21 @@ GO
 ALTER TABLE [morecheese_learning].[CourseEnrollment] ADD CONSTRAINT [DF_morecheese_learning_CourseEnrollment___mj_UpdatedAt] DEFAULT GETUTCDATE() FOR [__mj_UpdatedAt];
 GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Product */
-ALTER TABLE [morecheese_orders].[Product] ADD [__mj_CreatedAt] DATETIMEOFFSET NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Product */
-UPDATE [morecheese_orders].[Product] SET [__mj_CreatedAt] = GETUTCDATE() WHERE [__mj_CreatedAt] IS NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Product */
-ALTER TABLE [morecheese_orders].[Product] ALTER COLUMN [__mj_CreatedAt] DATETIMEOFFSET NOT NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Product */
-ALTER TABLE [morecheese_orders].[Product] ADD CONSTRAINT [DF_morecheese_orders_Product___mj_CreatedAt] DEFAULT GETUTCDATE() FOR [__mj_CreatedAt];
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Product */
-ALTER TABLE [morecheese_orders].[Product] ADD [__mj_UpdatedAt] DATETIMEOFFSET NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Product */
-UPDATE [morecheese_orders].[Product] SET [__mj_UpdatedAt] = GETUTCDATE() WHERE [__mj_UpdatedAt] IS NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Product */
-ALTER TABLE [morecheese_orders].[Product] ALTER COLUMN [__mj_UpdatedAt] DATETIMEOFFSET NOT NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Product */
-ALTER TABLE [morecheese_orders].[Product] ADD CONSTRAINT [DF_morecheese_orders_Product___mj_UpdatedAt] DEFAULT GETUTCDATE() FOR [__mj_UpdatedAt];
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.OrderLine */
-ALTER TABLE [morecheese_orders].[OrderLine] ADD [__mj_CreatedAt] DATETIMEOFFSET NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.OrderLine */
-UPDATE [morecheese_orders].[OrderLine] SET [__mj_CreatedAt] = GETUTCDATE() WHERE [__mj_CreatedAt] IS NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.OrderLine */
-ALTER TABLE [morecheese_orders].[OrderLine] ALTER COLUMN [__mj_CreatedAt] DATETIMEOFFSET NOT NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.OrderLine */
-ALTER TABLE [morecheese_orders].[OrderLine] ADD CONSTRAINT [DF_morecheese_orders_OrderLine___mj_CreatedAt] DEFAULT GETUTCDATE() FOR [__mj_CreatedAt];
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.OrderLine */
-ALTER TABLE [morecheese_orders].[OrderLine] ADD [__mj_UpdatedAt] DATETIMEOFFSET NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.OrderLine */
-UPDATE [morecheese_orders].[OrderLine] SET [__mj_UpdatedAt] = GETUTCDATE() WHERE [__mj_UpdatedAt] IS NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.OrderLine */
-ALTER TABLE [morecheese_orders].[OrderLine] ALTER COLUMN [__mj_UpdatedAt] DATETIMEOFFSET NOT NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.OrderLine */
-ALTER TABLE [morecheese_orders].[OrderLine] ADD CONSTRAINT [DF_morecheese_orders_OrderLine___mj_UpdatedAt] DEFAULT GETUTCDATE() FOR [__mj_UpdatedAt];
-GO
 
 /* SQL text to add special date field __mj_CreatedAt to entity ${flyway:defaultSchema}.OrganizationProfile */
 ALTER TABLE [${flyway:defaultSchema}].[OrganizationProfile] ADD [__mj_CreatedAt] DATETIMEOFFSET NULL;
@@ -2274,795 +1808,15 @@ GO
 ALTER TABLE [${flyway:defaultSchema}].[OrganizationProfile] ADD CONSTRAINT [DF_morecheese_members_OrganizationProfile___mj_UpdatedAt] DEFAULT GETUTCDATE() FOR [__mj_UpdatedAt];
 GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Payment */
-ALTER TABLE [morecheese_orders].[Payment] ADD [__mj_CreatedAt] DATETIMEOFFSET NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Payment */
-UPDATE [morecheese_orders].[Payment] SET [__mj_CreatedAt] = GETUTCDATE() WHERE [__mj_CreatedAt] IS NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Payment */
-ALTER TABLE [morecheese_orders].[Payment] ALTER COLUMN [__mj_CreatedAt] DATETIMEOFFSET NOT NULL;
-GO
 
-/* SQL text to add special date field __mj_CreatedAt to entity morecheese_orders.Payment */
-ALTER TABLE [morecheese_orders].[Payment] ADD CONSTRAINT [DF_morecheese_orders_Payment___mj_CreatedAt] DEFAULT GETUTCDATE() FOR [__mj_CreatedAt];
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Payment */
-ALTER TABLE [morecheese_orders].[Payment] ADD [__mj_UpdatedAt] DATETIMEOFFSET NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Payment */
-UPDATE [morecheese_orders].[Payment] SET [__mj_UpdatedAt] = GETUTCDATE() WHERE [__mj_UpdatedAt] IS NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Payment */
-ALTER TABLE [morecheese_orders].[Payment] ALTER COLUMN [__mj_UpdatedAt] DATETIMEOFFSET NOT NULL;
-GO
 
-/* SQL text to add special date field __mj_UpdatedAt to entity morecheese_orders.Payment */
-ALTER TABLE [morecheese_orders].[Payment] ADD CONSTRAINT [DF_morecheese_orders_Payment___mj_UpdatedAt] DEFAULT GETUTCDATE() FOR [__mj_UpdatedAt];
-GO
 
-/* SQL text to insert 173 new entity field(s) */
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '82b39c60-0d97-4fd0-9f7c-f3371dc0e02e' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'ID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '82b39c60-0d97-4fd0-9f7c-f3371dc0e02e',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100001,
-            'ID',
-            'ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            'newsequentialid()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            1,
-            1,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '1be6daa9-2335-41ce-b730-8a56581a0f48' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'OrderKey')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '1be6daa9-2335-41ce-b730-8a56581a0f48',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100002,
-            'OrderKey',
-            'Order Key',
-            'Business key (ORD-D-* dues, ORD-R-* open renewal, ORD-E-* event); UUIDs derive from it',
-            'nvarchar',
-            100,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            1,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'f5156143-443d-4374-b7e5-4788645028c5' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'PersonID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'f5156143-443d-4374-b7e5-4788645028c5',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100003,
-            'PersonID',
-            'Person ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F',
-            'ID',
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '25ed959b-53ee-4f21-9659-eb174b942916' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'OrderType')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '25ed959b-53ee-4f21-9659-eb174b942916',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100004,
-            'OrderType',
-            'Order Type',
-            'Always Sale in the demo slice',
-            'nvarchar',
-            100,
-            0,
-            0,
-            0,
-            'Sale',
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '80d073b4-370f-43a5-9588-66217a3f4c18' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'Status')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '80d073b4-370f-43a5-9588-66217a3f4c18',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100005,
-            'Status',
-            'Status',
-            'Always Posted — the posted order IS the bill (no invoices, per bizapps-orders design)',
-            'nvarchar',
-            100,
-            0,
-            0,
-            0,
-            'Posted',
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '7d32a126-eeba-42d0-a07a-bc6cbd29cf3d' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'OrderDate')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '7d32a126-eeba-42d0-a07a-bc6cbd29cf3d',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100006,
-            'OrderDate',
-            'Order Date',
-            'Date the order posted (dues post at period start; event orders at registration)',
-            'date',
-            3,
-            10,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '1f2684ad-e808-4288-a352-184faf10473f' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'DueDate')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '1f2684ad-e808-4288-a352-184faf10473f',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100007,
-            'DueDate',
-            'Due Date',
-            'Payment due date (period start, or +30 days on business-tier net terms)',
-            'date',
-            3,
-            10,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '486fe26d-db39-4e63-9ef3-04621fad0b3c' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'TotalGross')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '486fe26d-db39-4e63-9ef3-04621fad0b3c',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100008,
-            'TotalGross',
-            'Total Gross',
-            'Order total in USD',
-            'decimal',
-            9,
-            10,
-            2,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '7a3d85ec-4344-4268-9a5e-52126d42a750' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'PaymentStatus')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '7a3d85ec-4344-4268-9a5e-52126d42a750',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100009,
-            'PaymentStatus',
-            'Payment Status',
-            'Paid, Unpaid, or Overdue — a payment dated after release has not happened yet, so orders age (real A/R)',
-            'nvarchar',
-            100,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '27a3a8a3-e18f-45b3-8875-2ff70da01a77' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'IsSharedDemo')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '27a3a8a3-e18f-45b3-8875-2ff70da01a77',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100010,
-            'IsSharedDemo',
-            'Is Shared Demo',
-            'Marks generated shared-demo rows; the wipe-and-recreate boundary',
-            'bit',
-            1,
-            1,
-            0,
-            0,
-            '(1)',
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '373042e3-1f6d-4114-a17c-e2bdfe003ca7' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = '__mj_CreatedAt')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '373042e3-1f6d-4114-a17c-e2bdfe003ca7',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100011,
-            '__mj_CreatedAt',
-            'Created At',
-            NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '28a0e877-33cf-456c-ae48-1502644b4290' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = '__mj_UpdatedAt')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '28a0e877-33cf-456c-ae48-1502644b4290',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100012,
-            '__mj_UpdatedAt',
-            'Updated At',
-            NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
+/* SQL text to insert 151 new entity field(s) */
 
       IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'e4647eb2-0d66-47b2-8808-d4ab32f91f9a' OR (EntityID = '49DF9400-9C38-422C-8DB6-1373D5392E35' AND Name = 'ID')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
@@ -6195,6 +4949,574 @@ GO
             10,
             0,
             0,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'f7abfedc-4679-5f9f-a967-d409e25b35e0' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'Country')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'f7abfedc-4679-5f9f-a967-d409e25b35e0',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100201,
+            'Country',
+            'Country',
+            'ISO country code',
+            'nvarchar',
+            4,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8525a745-6cf9-5446-8d79-40bb1f26ba7b' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'CountryName')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '8525a745-6cf9-5446-8d79-40bb1f26ba7b',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100202,
+            'CountryName',
+            'Country Name',
+            'Country display name',
+            'nvarchar',
+            200,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '09f8e8ad-3b49-5539-992f-0dcb940faef8' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'AddressLine1')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '09f8e8ad-3b49-5539-992f-0dcb940faef8',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100203,
+            'AddressLine1',
+            'Address Line 1',
+            'Street address',
+            'nvarchar',
+            400,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8400640d-3302-561b-a0b9-538d72580933' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'AddressLine2')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '8400640d-3302-561b-a0b9-538d72580933',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100204,
+            'AddressLine2',
+            'Address Line 2',
+            'Address line 2',
+            'nvarchar',
+            400,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8c48a080-fbe3-5ee5-bfb6-49ebbe079200' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'PostalCode')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '8c48a080-fbe3-5ee5-bfb6-49ebbe079200',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100205,
+            'PostalCode',
+            'Postal Code',
+            'Postal / ZIP code',
+            'nvarchar',
+            40,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '3418e886-6ef9-5a85-a38b-993190659abb' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'RaceEthnicity')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '3418e886-6ef9-5a85-a38b-993190659abb',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100206,
+            'RaceEthnicity',
+            'Race / Ethnicity',
+            'Voluntary self-identified race/ethnicity',
+            'nvarchar',
+            400,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '453eb64b-f362-5fcb-86fc-2eede16175d8' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'EthnicityHispanic')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '453eb64b-f362-5fcb-86fc-2eede16175d8',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100207,
+            'EthnicityHispanic',
+            'Ethnicity Hispanic',
+            'Hispanic / Latino identification',
+            'nvarchar',
+            60,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'fd8b8aa6-ec52-58ff-a1fb-02949b45a1e8' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'PronounSet')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'fd8b8aa6-ec52-58ff-a1fb-02949b45a1e8',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100208,
+            'PronounSet',
+            'Pronoun Set',
+            'Voluntary pronoun set',
+            'nvarchar',
+            100,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '6e9b9720-b620-5fde-b11a-a88ded196210' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'PrimaryLanguage')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '6e9b9720-b620-5fde-b11a-a88ded196210',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100209,
+            'PrimaryLanguage',
+            'Primary Language',
+            'Primary language',
+            'nvarchar',
+            100,
+            0,
+            0,
+            1,
             NULL,
             0,
             1,
@@ -10687,1077 +10009,6 @@ GO
          )
       END;
 
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '5fef500f-8b34-4d32-b53b-26d490bb7353' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = 'ID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '5fef500f-8b34-4d32-b53b-26d490bb7353',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100001,
-            'ID',
-            'ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            'newsequentialid()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            1,
-            1,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'aee3a787-7a62-45d0-a04f-3a035435e920' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = 'ProductKey')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'aee3a787-7a62-45d0-a04f-3a035435e920',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100002,
-            'ProductKey',
-            'Product Key',
-            'Business key (e.g. PROD-MEM-INDIVIDUAL); UUIDs derive from it',
-            'nvarchar',
-            100,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            1,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '48b2653c-1607-4f46-8dd4-fc265c0fb419' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = 'Name')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '48b2653c-1607-4f46-8dd4-fc265c0fb419',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100003,
-            'Name',
-            'Name',
-            'Product display name',
-            'nvarchar',
-            400,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            1,
-            1,
-            0,
-            1,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'cb587108-c61e-46ab-9eeb-f315e3313e02' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = 'ProductType')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'cb587108-c61e-46ab-9eeb-f315e3313e02',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100004,
-            'ProductType',
-            'Product Type',
-            'Membership (annual dues per tier) or Event (registration)',
-            'nvarchar',
-            100,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '49c182be-f762-43e9-8b91-228764cedec4' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = 'UnitPrice')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '49c182be-f762-43e9-8b91-228764cedec4',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100005,
-            'UnitPrice',
-            'Unit Price',
-            'List price in USD',
-            'decimal',
-            9,
-            10,
-            2,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '9235bfb5-a5da-4034-9ec3-5c82b8ca87f7' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = 'IsSharedDemo')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '9235bfb5-a5da-4034-9ec3-5c82b8ca87f7',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100006,
-            'IsSharedDemo',
-            'Is Shared Demo',
-            'Marks generated shared-demo rows; the wipe-and-recreate boundary',
-            'bit',
-            1,
-            1,
-            0,
-            0,
-            '(1)',
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'b25281d3-b4e2-4eea-9ffe-9b5b6900dfe6' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = '__mj_CreatedAt')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'b25281d3-b4e2-4eea-9ffe-9b5b6900dfe6',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100007,
-            '__mj_CreatedAt',
-            'Created At',
-            NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '725876e4-aa1e-4933-818a-83382ff36989' OR (EntityID = 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9' AND Name = '__mj_UpdatedAt')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '725876e4-aa1e-4933-818a-83382ff36989',
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', -- Entity: MoreCheese: Products
-            100008,
-            '__mj_UpdatedAt',
-            'Updated At',
-            NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '7551e6a6-b172-402f-a324-38624139ff2b' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'ID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '7551e6a6-b172-402f-a324-38624139ff2b',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100001,
-            'ID',
-            'ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            'newsequentialid()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            1,
-            1,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '68d80a17-35f6-46d0-bd4e-00f84a8e96e4' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'OrderID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '68d80a17-35f6-46d0-bd4e-00f84a8e96e4',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100002,
-            'OrderID',
-            'Order ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51',
-            'ID',
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '300c666f-4892-473f-a922-8291ad71fd5d' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'ProductID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '300c666f-4892-473f-a922-8291ad71fd5d',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100003,
-            'ProductID',
-            'Product ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            'A05CC658-F8D8-476E-8E84-F2022C6DFEF9',
-            'ID',
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '9fd3a8d4-ac33-4591-9c89-b3ed652426a3' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'Quantity')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '9fd3a8d4-ac33-4591-9c89-b3ed652426a3',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100004,
-            'Quantity',
-            'Quantity',
-            'Line quantity (1 in the demo slice)',
-            'int',
-            4,
-            10,
-            0,
-            0,
-            '(1)',
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '22145de3-fd2b-4f3a-ab92-05b39171de04' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'UnitPrice')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '22145de3-fd2b-4f3a-ab92-05b39171de04',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100005,
-            'UnitPrice',
-            'Unit Price',
-            'Line unit price in USD',
-            'decimal',
-            9,
-            10,
-            2,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '2582e682-7bae-4f60-b083-c7fcdc51a71a' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'LineTotal')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '2582e682-7bae-4f60-b083-c7fcdc51a71a',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100006,
-            'LineTotal',
-            'Line Total',
-            'Quantity × UnitPrice, in USD',
-            'decimal',
-            9,
-            10,
-            2,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8e236ce4-fc66-4fd2-aaae-b4783f8e043a' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'IsSharedDemo')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '8e236ce4-fc66-4fd2-aaae-b4783f8e043a',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100007,
-            'IsSharedDemo',
-            'Is Shared Demo',
-            'Marks generated shared-demo rows; the wipe-and-recreate boundary',
-            'bit',
-            1,
-            1,
-            0,
-            0,
-            '(1)',
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '29359d27-a691-43e7-a3ff-4e4ab0666eb3' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = '__mj_CreatedAt')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '29359d27-a691-43e7-a3ff-4e4ab0666eb3',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100008,
-            '__mj_CreatedAt',
-            'Created At',
-            NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '5b69bb01-7195-41b6-a370-4a3ae528ca94' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = '__mj_UpdatedAt')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '5b69bb01-7195-41b6-a370-4a3ae528ca94',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100009,
-            '__mj_UpdatedAt',
-            'Updated At',
-            NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
       IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8b0403a8-0517-4aa3-93ac-aea730576a3d' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'ID')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
@@ -12451,6 +10702,259 @@ GO
          )
       END;
 
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '624be089-c964-5dec-9a6b-d5a26beb3e96' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'Country')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '624be089-c964-5dec-9a6b-d5a26beb3e96',
+            'A3D95071-B312-40E2-AEF3-F90D8EF881AD', -- Entity: MoreCheese: Organization Profiles
+            100210,
+            'Country',
+            'Country',
+            'ISO country code',
+            'nvarchar',
+            4,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '470d361b-988e-5fe3-90ce-2029b9295df9' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'CountryName')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '470d361b-988e-5fe3-90ce-2029b9295df9',
+            'A3D95071-B312-40E2-AEF3-F90D8EF881AD', -- Entity: MoreCheese: Organization Profiles
+            100211,
+            'CountryName',
+            'Country Name',
+            'Country display name',
+            'nvarchar',
+            200,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '810ae581-536a-57a5-bf86-e7920c1f9f06' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'AddressLine1')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '810ae581-536a-57a5-bf86-e7920c1f9f06',
+            'A3D95071-B312-40E2-AEF3-F90D8EF881AD', -- Entity: MoreCheese: Organization Profiles
+            100212,
+            'AddressLine1',
+            'Address Line 1',
+            'Street address',
+            'nvarchar',
+            400,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'aa86249d-5460-508c-9a16-aad74bebd2f8' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'PostalCode')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'aa86249d-5460-508c-9a16-aad74bebd2f8',
+            'A3D95071-B312-40E2-AEF3-F90D8EF881AD', -- Entity: MoreCheese: Organization Profiles
+            100213,
+            'PostalCode',
+            'Postal Code',
+            'Postal / ZIP code',
+            'nvarchar',
+            40,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            1,
+            0,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
       IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '45632549-2e22-4529-bffe-4e429e6e530e' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'IsSharedDemo')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
@@ -12640,7 +11144,7 @@ GO
          )
       END;
 
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8b7e1dab-fca3-438e-a28d-a5727b8d2e26' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'ID')) BEGIN
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'abf75523-f0c3-4483-b74b-7e0bb2be5387' OR (EntityID = 'F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F' AND Name = 'Person')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
             [ID],
@@ -12673,273 +11177,21 @@ GO
          )
          VALUES
          (
-            '8b7e1dab-fca3-438e-a28d-a5727b8d2e26',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100001,
-            'ID',
-            'ID',
+            'abf75523-f0c3-4483-b74b-7e0bb2be5387',
+            'F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F', -- Entity: MoreCheese: Advocacy Actions
+            100019,
+            'Person',
+            'Person',
             NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            'newsequentialid()',
-            0,
-            0,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            1,
-            1,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '25b38840-3bbc-4cfd-83af-86b40c774249' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'OrderID')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '25b38840-3bbc-4cfd-83af-86b40c774249',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100002,
-            'OrderID',
-            'Order ID',
-            NULL,
-            'uniqueidentifier',
-            16,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51',
-            'ID',
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8af0231b-d452-422c-97fb-af85bcc3dabd' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'Amount')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '8af0231b-d452-422c-97fb-af85bcc3dabd',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100003,
-            'Amount',
-            'Amount',
-            'Payment amount in USD (full payment; no partials in the demo slice)',
-            'decimal',
-            9,
-            10,
-            2,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'f29f8278-cda2-4be2-b0cc-702b63f96a0e' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'PaymentDate')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'f29f8278-cda2-4be2-b0cc-702b63f96a0e',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100004,
-            'PaymentDate',
-            'Payment Date',
-            'Date the payment landed, per the declared payment-timing profiles',
-            'date',
-            3,
-            10,
-            0,
-            0,
-            NULL,
-            0,
-            1,
-            0,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'd37f54d1-5b6c-4a46-baa0-7be1189adb7d' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'Method')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'd37f54d1-5b6c-4a46-baa0-7be1189adb7d',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100005,
-            'Method',
-            'Method',
-            'CreditCard, ACH, Check, or Wire (business tiers pay on net terms)',
             'nvarchar',
-            100,
+            402,
             0,
             0,
             0,
             NULL,
             0,
-            1,
             0,
+            1,
             0,
             NULL,
             NULL,
@@ -12955,7 +11207,7 @@ GO
          )
       END;
 
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '12aebf68-f3fd-4836-b8cf-4d903f8e2fe8' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'Status')) BEGIN
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'a85246a1-1461-4a08-8210-97d3357e04bd' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'Person')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
             [ID],
@@ -12988,21 +11240,21 @@ GO
          )
          VALUES
          (
-            '12aebf68-f3fd-4836-b8cf-4d903f8e2fe8',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100006,
-            'Status',
-            'Status',
-            'Captured (Failed/Refunded reserved for future stories)',
+            'a85246a1-1461-4a08-8210-97d3357e04bd',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100029,
+            'Person',
+            'Person',
+            NULL,
             'nvarchar',
-            100,
+            402,
             0,
             0,
             0,
-            'Captured',
+            NULL,
+            0,
             0,
             1,
-            0,
             0,
             NULL,
             NULL,
@@ -13018,7 +11270,7 @@ GO
          )
       END;
 
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '533f6c5a-9678-4241-8a40-9396045cf234' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = 'IsSharedDemo')) BEGIN
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'Organization')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
             [ID],
@@ -13051,21 +11303,21 @@ GO
          )
          VALUES
          (
-            '533f6c5a-9678-4241-8a40-9396045cf234',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100007,
-            'IsSharedDemo',
-            'Is Shared Demo',
-            'Marks generated shared-demo rows; the wipe-and-recreate boundary',
-            'bit',
-            1,
-            1,
+            'c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1',
+            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
+            100030,
+            'Organization',
+            'Organization',
+            NULL,
+            'nvarchar',
+            510,
             0,
-            0,
-            '(1)',
             0,
             1,
+            NULL,
             0,
+            0,
+            1,
             0,
             NULL,
             NULL,
@@ -13081,7 +11333,7 @@ GO
          )
       END;
 
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'f0cc4563-5c70-42a0-a36f-ec1f25ed1892' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = '__mj_CreatedAt')) BEGIN
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8950e3da-857b-4973-9709-5f44bb2ceb3f' OR (EntityID = 'FF152388-ED04-4F1F-B237-94D502C4AA54' AND Name = 'Person')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
             [ID],
@@ -13114,21 +11366,21 @@ GO
          )
          VALUES
          (
-            'f0cc4563-5c70-42a0-a36f-ec1f25ed1892',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100008,
-            '__mj_CreatedAt',
-            'Created At',
+            '8950e3da-857b-4973-9709-5f44bb2ceb3f',
+            'FF152388-ED04-4F1F-B237-94D502C4AA54', -- Entity: MoreCheese: Data Quality Labels
+            100025,
+            'Person',
+            'Person',
             NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
+            'nvarchar',
+            402,
             0,
             0,
             0,
+            NULL,
+            0,
+            0,
+            1,
             0,
             NULL,
             NULL,
@@ -13144,7 +11396,7 @@ GO
          )
       END;
 
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '7eea03f4-ef62-491a-876a-f88d10a73861' OR (EntityID = 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44' AND Name = '__mj_UpdatedAt')) BEGIN
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'e9599ba2-933b-4699-86c9-f9fa21fb39d0' OR (EntityID = 'FF152388-ED04-4F1F-B237-94D502C4AA54' AND Name = 'RelatedPerson')) BEGIN
          INSERT INTO [${mjSchema}].[EntityField]
          (
             [ID],
@@ -13177,21 +11429,21 @@ GO
          )
          VALUES
          (
-            '7eea03f4-ef62-491a-876a-f88d10a73861',
-            'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', -- Entity: MoreCheese: Payments
-            100009,
-            '__mj_UpdatedAt',
-            'Updated At',
+            'e9599ba2-933b-4699-86c9-f9fa21fb39d0',
+            'FF152388-ED04-4F1F-B237-94D502C4AA54', -- Entity: MoreCheese: Data Quality Labels
+            100026,
+            'RelatedPerson',
+            'Related Person',
             NULL,
-            'datetimeoffset',
-            10,
-            34,
-            7,
-            0,
-            'getutcdate()',
+            'nvarchar',
+            402,
             0,
             0,
+            1,
+            NULL,
             0,
+            0,
+            1,
             0,
             NULL,
             NULL,
@@ -13207,455 +11459,703 @@ GO
          )
       END;
 
-/* SQL text to update existing entity fields from schema */
-EXEC [${mjSchema}].[spUpdateExistingEntityFieldsFromSchema] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}';
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '474481f6-96b3-4235-8d87-d2b0780e3efe' OR (EntityID = 'FF152388-ED04-4F1F-B237-94D502C4AA54' AND Name = 'RelatedOrganization')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '474481f6-96b3-4235-8d87-d2b0780e3efe',
+            'FF152388-ED04-4F1F-B237-94D502C4AA54', -- Entity: MoreCheese: Data Quality Labels
+            100027,
+            'RelatedOrganization',
+            'Related Organization',
+            NULL,
+            'nvarchar',
+            510,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'daa561bf-b427-42ca-975b-4b955d77e31c' OR (EntityID = '16538F9B-E025-460D-9505-BD03A7648EC5' AND Name = 'Person')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'daa561bf-b427-42ca-975b-4b955d77e31c',
+            '16538F9B-E025-460D-9505-BD03A7648EC5', -- Entity: MoreCheese: Membership Periods
+            100031,
+            'Person',
+            'Person',
+            NULL,
+            'nvarchar',
+            402,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '72bb6163-3a23-48c1-a5a0-1c9a75700502' OR (EntityID = '23916A8E-3487-4793-9E18-C209EF097E58' AND Name = 'Person')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '72bb6163-3a23-48c1-a5a0-1c9a75700502',
+            '23916A8E-3487-4793-9E18-C209EF097E58', -- Entity: MoreCheese: Member Certifications
+            100023,
+            'Person',
+            'Person',
+            NULL,
+            'nvarchar',
+            402,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '737e4ac7-1c79-4677-8401-f1eccd81d3a7' OR (EntityID = '23916A8E-3487-4793-9E18-C209EF097E58' AND Name = 'Certification')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '737e4ac7-1c79-4677-8401-f1eccd81d3a7',
+            '23916A8E-3487-4793-9E18-C209EF097E58', -- Entity: MoreCheese: Member Certifications
+            100024,
+            'Certification',
+            'Certification',
+            NULL,
+            'nvarchar',
+            400,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '366f1231-cf05-42ad-afc5-84403d860a66' OR (EntityID = '9F493BE6-006B-4FC2-986C-D15AB527E65B' AND Name = 'Person')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '366f1231-cf05-42ad-afc5-84403d860a66',
+            '9F493BE6-006B-4FC2-986C-D15AB527E65B', -- Entity: MoreCheese: Competition Entries
+            100023,
+            'Person',
+            'Person',
+            NULL,
+            'nvarchar',
+            402,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '0ead38c3-3c9a-4447-9f96-ded688c870c9' OR (EntityID = '9F493BE6-006B-4FC2-986C-D15AB527E65B' AND Name = 'Organization')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '0ead38c3-3c9a-4447-9f96-ded688c870c9',
+            '9F493BE6-006B-4FC2-986C-D15AB527E65B', -- Entity: MoreCheese: Competition Entries
+            100024,
+            'Organization',
+            'Organization',
+            NULL,
+            'nvarchar',
+            510,
+            0,
+            0,
+            1,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '238863f8-a7b8-48d4-a99c-150253a61da2' OR (EntityID = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153' AND Name = 'Person')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '238863f8-a7b8-48d4-a99c-150253a61da2',
+            'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', -- Entity: MoreCheese: Event Registrations
+            100019,
+            'Person',
+            'Person',
+            NULL,
+            'nvarchar',
+            402,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'b43a6aef-4c29-4080-9e08-8d3c3f13efe0' OR (EntityID = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153' AND Name = 'Event')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'b43a6aef-4c29-4080-9e08-8d3c3f13efe0',
+            'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', -- Entity: MoreCheese: Event Registrations
+            100020,
+            'Event',
+            'Event',
+            NULL,
+            'nvarchar',
+            400,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '6df3c4e7-c108-4e4d-b28a-d34b7edc8b59' OR (EntityID = '428C670F-EBE3-41E6-86E4-EB5A274960A1' AND Name = 'Person')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '6df3c4e7-c108-4e4d-b28a-d34b7edc8b59',
+            '428C670F-EBE3-41E6-86E4-EB5A274960A1', -- Entity: MoreCheese: Course Enrollments
+            100021,
+            'Person',
+            'Person',
+            NULL,
+            'nvarchar',
+            402,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'ecf95dce-c50f-4005-b194-8c993480784a' OR (EntityID = '428C670F-EBE3-41E6-86E4-EB5A274960A1' AND Name = 'Course')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'ecf95dce-c50f-4005-b194-8c993480784a',
+            '428C670F-EBE3-41E6-86E4-EB5A274960A1', -- Entity: MoreCheese: Course Enrollments
+            100022,
+            'Course',
+            'Course',
+            NULL,
+            'nvarchar',
+            400,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '7c6915c9-9b5f-4aae-8c5d-0fd2e9c4443c' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'Organization')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '7c6915c9-9b5f-4aae-8c5d-0fd2e9c4443c',
+            'A3D95071-B312-40E2-AEF3-F90D8EF881AD', -- Entity: MoreCheese: Organization Profiles
+            100029,
+            'Organization',
+            'Organization',
+            NULL,
+            'nvarchar',
+            510,
+            0,
+            0,
+            0,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+GO
+
+/* SQL text to insert 16 new entity relationships */
 
-/* SQL text to set default column width where needed */
-EXEC [${mjSchema}].[spSetDefaultColumnWidthWhereNeeded] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}';
-
-/* SQL text to insert entity field value with ID 8120ae6e-cbe3-452f-9a1f-2a7d17593948 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('8120ae6e-cbe3-452f-9a1f-2a7d17593948', 'CB587108-C61E-46AB-9EEB-F315E3313E02', 1, 'Event', 'Event', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 15056f8a-41fb-42bc-898f-d2b8f10219e2 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('15056f8a-41fb-42bc-898f-d2b8f10219e2', 'CB587108-C61E-46AB-9EEB-F315E3313E02', 2, 'Membership', 'Membership', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID CB587108-C61E-46AB-9EEB-F315E3313E02 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='CB587108-C61E-46AB-9EEB-F315E3313E02';
-
-/* SQL text to insert entity field value with ID cfc345fb-1ad2-4bb9-9ab9-afd4f4983f5e */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('cfc345fb-1ad2-4bb9-9ab9-afd4f4983f5e', '7A3D85EC-4344-4268-9A5E-52126D42A750', 1, 'Overdue', 'Overdue', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID e246e127-f433-46c1-9465-9ed231f0b5ff */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('e246e127-f433-46c1-9465-9ed231f0b5ff', '7A3D85EC-4344-4268-9A5E-52126D42A750', 2, 'Paid', 'Paid', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 391273db-f77b-41b4-af10-55060dff9a65 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('391273db-f77b-41b4-af10-55060dff9a65', '7A3D85EC-4344-4268-9A5E-52126D42A750', 3, 'Unpaid', 'Unpaid', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 7A3D85EC-4344-4268-9A5E-52126D42A750 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='7A3D85EC-4344-4268-9A5E-52126D42A750';
-
-/* SQL text to insert entity field value with ID 9ef9d1f0-86b4-4835-8fb0-f7558aa71878 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('9ef9d1f0-86b4-4835-8fb0-f7558aa71878', 'D37F54D1-5B6C-4A46-BAA0-7BE1189ADB7D', 1, 'ACH', 'ACH', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 93ae5b22-9aa7-4b07-9830-7ddbc81a5d98 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('93ae5b22-9aa7-4b07-9830-7ddbc81a5d98', 'D37F54D1-5B6C-4A46-BAA0-7BE1189ADB7D', 2, 'Check', 'Check', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID e44f1685-9ef7-404a-bd3c-0f45ce00e2cb */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('e44f1685-9ef7-404a-bd3c-0f45ce00e2cb', 'D37F54D1-5B6C-4A46-BAA0-7BE1189ADB7D', 3, 'CreditCard', 'CreditCard', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID a71ac384-8cc5-4712-8248-e07eb9f560f9 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('a71ac384-8cc5-4712-8248-e07eb9f560f9', 'D37F54D1-5B6C-4A46-BAA0-7BE1189ADB7D', 4, 'Wire', 'Wire', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID D37F54D1-5B6C-4A46-BAA0-7BE1189ADB7D */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='D37F54D1-5B6C-4A46-BAA0-7BE1189ADB7D';
-
-/* SQL text to insert entity field value with ID 337a74b0-5d7e-4d6b-81cc-cb3ff701c2d1 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('337a74b0-5d7e-4d6b-81cc-cb3ff701c2d1', '12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8', 1, 'Captured', 'Captured', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 8fdce8aa-8840-4502-8482-fdf81d8c621f */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('8fdce8aa-8840-4502-8482-fdf81d8c621f', '12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8', 2, 'Denied', 'Denied', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 3128dba0-cbf6-4ae1-a0e8-79daa862599c */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('3128dba0-cbf6-4ae1-a0e8-79daa862599c', '12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8', 3, 'Failed', 'Failed', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 5fc1b148-3b8d-400e-a7cd-1e7f5e8e6cdb */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('5fc1b148-3b8d-400e-a7cd-1e7f5e8e6cdb', '12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8', 4, 'InProgress', 'InProgress', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 6a3c95f0-b1c1-47e6-94c3-0b0584063242 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('6a3c95f0-b1c1-47e6-94c3-0b0584063242', '12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8', 5, 'Refunded', 'Refunded', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='12AEBF68-F3FD-4836-B8CF-4D903F8E2FE8';
-
-/* SQL text to insert entity field value with ID 8b59fb5c-7a8e-419b-857f-fa3ea41c335d */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('8b59fb5c-7a8e-419b-857f-fa3ea41c335d', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 1, 'Awarded', 'Awarded', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 6299da6d-3441-404c-a741-7e8bfeac3eac */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('6299da6d-3441-404c-a741-7e8bfeac3eac', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 2, 'Expired', 'Expired', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 23296fdd-14f2-47b4-acae-b2d9efc2457d */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('23296fdd-14f2-47b4-acae-b2d9efc2457d', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 3, 'InProgress', 'InProgress', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID dc3aff7e-2783-4f64-beb7-d0cc55c09152 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('dc3aff7e-2783-4f64-beb7-d0cc55c09152', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 4, 'Withdrawn', 'Withdrawn', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID E2A5D9ED-CA19-41D7-AAE1-476652D08C2C */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='E2A5D9ED-CA19-41D7-AAE1-476652D08C2C';
-
-/* SQL text to insert entity field value with ID c0a79831-deeb-4180-a91a-89300af42421 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('c0a79831-deeb-4180-a91a-89300af42421', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 1, 'Bronze', 'Bronze', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID f472c34e-6d79-4618-849c-2bd59bb7c2fb */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('f472c34e-6d79-4618-849c-2bd59bb7c2fb', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 2, 'Gold', 'Gold', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID af563974-c837-4ca0-8afe-52243e1338bf */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('af563974-c837-4ca0-8afe-52243e1338bf', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 3, 'None', 'None', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID a286f2fb-9bfb-4cc6-8e33-77d48699a769 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('a286f2fb-9bfb-4cc6-8e33-77d48699a769', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 4, 'Silver', 'Silver', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 67EAF2F0-0B72-4794-8880-E0BA4F900542 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='67EAF2F0-0B72-4794-8880-E0BA4F900542';
-
-/* SQL text to insert entity field value with ID 1c15c74e-c7ff-4d33-8494-ddaa31ab3258 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('1c15c74e-c7ff-4d33-8494-ddaa31ab3258', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 1, 'CoalitionMeeting', 'CoalitionMeeting', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID ffe9a409-e9aa-425f-9e76-d63f6d2e03e0 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('ffe9a409-e9aa-425f-9e76-d63f6d2e03e0', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 2, 'LetterCampaign', 'LetterCampaign', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID feccc07c-e803-43d9-830e-f91f324c0374 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('feccc07c-e803-43d9-830e-f91f324c0374', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 3, 'PetitionSignature', 'PetitionSignature', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 5d4e0523-8ec1-421b-a3c9-de2565fecdcf */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('5d4e0523-8ec1-421b-a3c9-de2565fecdcf', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 4, 'Testimony', 'Testimony', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 0A8440BD-A3B6-4257-8003-DCD137773CEA */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='0A8440BD-A3B6-4257-8003-DCD137773CEA';
-
-/* SQL text to insert entity field value with ID a186f7ac-a376-4f4e-a51f-e3101ce5b426 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('a186f7ac-a376-4f4e-a51f-e3101ce5b426', '2450C51E-480C-4E3F-9464-82D92305E54C', 1, 'DuplicatePerson', 'DuplicatePerson', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 4d790ef8-d922-4d77-adca-a275eecb027f */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('4d790ef8-d922-4d77-adca-a275eecb027f', '2450C51E-480C-4E3F-9464-82D92305E54C', 2, 'StaleEmployer', 'StaleEmployer', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID db8e954c-43f5-4150-8762-3bf1ec38c9c3 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('db8e954c-43f5-4150-8762-3bf1ec38c9c3', '2450C51E-480C-4E3F-9464-82D92305E54C', 3, 'TypoEmail', 'TypoEmail', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 2450C51E-480C-4E3F-9464-82D92305E54C */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='2450C51E-480C-4E3F-9464-82D92305E54C';
-
-/* SQL text to insert entity field value with ID 9c398f53-09e7-43b3-a723-1c5324b0bc32 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('9c398f53-09e7-43b3-a723-1c5324b0bc32', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 1, 'Educator', 'Educator', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 4dc0e18b-97c5-44ce-bc19-6d5dea979214 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('4dc0e18b-97c5-44ce-bc19-6d5dea979214', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 2, 'Producer', 'Producer', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 2afa69b3-b9d7-40e1-b19c-5b29d0967340 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('2afa69b3-b9d7-40e1-b19c-5b29d0967340', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 3, 'Retailer', 'Retailer', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 9e02d645-3e57-4c20-8316-79f377f753ee */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('9e02d645-3e57-4c20-8316-79f377f753ee', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 4, 'Supplier', 'Supplier', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E';
-
-/* SQL text to insert entity field value with ID 43f9413a-275d-417c-9cd8-91929c3358a7 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('43f9413a-275d-417c-9cd8-91929c3358a7', '57F15499-1FEF-42EA-B670-39B2DC619EEC', 1, 'EU', 'EU', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID cd571dba-d6d7-4a61-888e-9caaaaf6f60a */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('cd571dba-d6d7-4a61-888e-9caaaaf6f60a', '57F15499-1FEF-42EA-B670-39B2DC619EEC', 2, 'NA', 'NA', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 108f53ad-2890-49b4-acc2-264fe04b0418 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('108f53ad-2890-49b4-acc2-264fe04b0418', '57F15499-1FEF-42EA-B670-39B2DC619EEC', 3, 'RoW', 'RoW', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 57F15499-1FEF-42EA-B670-39B2DC619EEC */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='57F15499-1FEF-42EA-B670-39B2DC619EEC';
-
-/* SQL text to insert entity field value with ID c4284652-3fdc-4ea6-9d6d-d1a2fd26a186 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('c4284652-3fdc-4ea6-9d6d-d1a2fd26a186', '3F53B245-8F1D-4B8A-AD6B-86F536A22DEA', 1, 'Acquired', 'Acquired', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 5eb0d252-0d7a-4ca4-aa5b-d03227e2ec9e */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('5eb0d252-0d7a-4ca4-aa5b-d03227e2ec9e', '3F53B245-8F1D-4B8A-AD6B-86F536A22DEA', 2, 'Dissolved', 'Dissolved', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 915616bc-d05a-451d-a664-801716cb0c0f */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('915616bc-d05a-451d-a664-801716cb0c0f', '3F53B245-8F1D-4B8A-AD6B-86F536A22DEA', 3, 'ProgramCut', 'ProgramCut', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 3F53B245-8F1D-4B8A-AD6B-86F536A22DEA */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='3F53B245-8F1D-4B8A-AD6B-86F536A22DEA';
-
-/* SQL text to insert entity field value with ID 32f35c28-d39f-4adb-8d03-ad3e06c33a47 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('32f35c28-d39f-4adb-8d03-ad3e06c33a47', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 1, 'Educator', 'Educator', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 9718bc3c-490e-4d67-a722-a545ab78a81e */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('9718bc3c-490e-4d67-a722-a545ab78a81e', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 2, 'Enthusiast', 'Enthusiast', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 0145fe65-de3a-43d1-919b-189e603a889c */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('0145fe65-de3a-43d1-919b-189e603a889c', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 3, 'Producer', 'Producer', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 68a3b654-5e0e-491b-844f-688cbbb005c1 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('68a3b654-5e0e-491b-844f-688cbbb005c1', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 4, 'Retailer', 'Retailer', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 3d3d6689-4363-4905-9c50-bc7ae57ed687 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('3d3d6689-4363-4905-9c50-bc7ae57ed687', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 5, 'Supplier', 'Supplier', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F';
-
-/* SQL text to insert entity field value with ID 5dc8536b-cf8c-43f1-9181-a171ca4ace60 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('5dc8536b-cf8c-43f1-9181-a171ca4ace60', '8FA7894D-19E6-4662-82D9-C923A8A8CA57', 1, 'EU', 'EU', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID c06c70de-3ea0-427f-b818-f1668fcfbe2c */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('c06c70de-3ea0-427f-b818-f1668fcfbe2c', '8FA7894D-19E6-4662-82D9-C923A8A8CA57', 2, 'NA', 'NA', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID ab4600a8-9caf-4d8b-892a-b7692c624ac7 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('ab4600a8-9caf-4d8b-892a-b7692c624ac7', '8FA7894D-19E6-4662-82D9-C923A8A8CA57', 3, 'RoW', 'RoW', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 8FA7894D-19E6-4662-82D9-C923A8A8CA57 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='8FA7894D-19E6-4662-82D9-C923A8A8CA57';
-
-/* SQL text to insert entity field value with ID f3c9070d-dad0-4f73-be44-284ed21afdb9 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('f3c9070d-dad0-4f73-be44-284ed21afdb9', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 1, 'Active', 'Active', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 11c519cc-bcf3-434f-854f-c94fbb548b3e */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('11c519cc-bcf3-434f-854f-c94fbb548b3e', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 2, 'Cancelled', 'Cancelled', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID e80cd4bf-16e6-4d1d-b593-24fda93bec19 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('e80cd4bf-16e6-4d1d-b593-24fda93bec19', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 3, 'Lapsed', 'Lapsed', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 96c2a1b8-be06-4674-a8ec-7a10e6d1cabe */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('96c2a1b8-be06-4674-a8ec-7a10e6d1cabe', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 4, 'PendingRenewal', 'PendingRenewal', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID a3ee6cdc-b990-4c96-8bb9-9a932f54c4c7 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('a3ee6cdc-b990-4c96-8bb9-9a932f54c4c7', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 5, 'Renewed', 'Renewed', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 66AB3F67-D88F-4002-9601-8F45FF1E9943 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='66AB3F67-D88F-4002-9601-8F45FF1E9943';
-
-/* SQL text to insert entity field value with ID dff91253-daef-4dc4-acf6-c62d0882176c */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('dff91253-daef-4dc4-acf6-c62d0882176c', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 1, 'Corporate', 'Corporate', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID ae66da9e-25ac-4282-9108-ca4fcb3932d7 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('ae66da9e-25ac-4282-9108-ca4fcb3932d7', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 2, 'Enthusiast', 'Enthusiast', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 75a71ccb-cbdb-4516-90e2-67e2269ca57c */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('75a71ccb-cbdb-4516-90e2-67e2269ca57c', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 3, 'Individual', 'Individual', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 7bbeeb78-763f-4d1c-aafb-a9d8c87a3223 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('7bbeeb78-763f-4d1c-aafb-a9d8c87a3223', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 4, 'SmallBusiness', 'SmallBusiness', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID AF860254-0C86-4EFE-AECD-B3E11A10B73F */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='AF860254-0C86-4EFE-AECD-B3E11A10B73F';
-
-/* SQL text to insert entity field value with ID f26ce8f2-f452-41f6-ba70-aeee5c0cc5a3 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('f26ce8f2-f452-41f6-ba70-aeee5c0cc5a3', '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A', 1, 'Conference', 'Conference', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID beefa5b8-ad2d-4ba2-9fad-89eba8126816 */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('beefa5b8-ad2d-4ba2-9fad-89eba8126816', '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A', 2, 'Webinar', 'Webinar', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 6f66c9e7-a992-4ff5-a763-f7ce4638afac */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('6f66c9e7-a992-4ff5-a763-f7ce4638afac', '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A', 3, 'Workshop', 'Workshop', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID 40E4EAC3-EDB5-4AE1-AF99-593C4D74460A */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='40E4EAC3-EDB5-4AE1-AF99-593C4D74460A';
-
-/* SQL text to insert entity field value with ID 7ea87d9a-b3c5-4f9d-b290-ef717cf9707e */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('7ea87d9a-b3c5-4f9d-b290-ef717cf9707e', 'FAEE9E23-7A30-473B-9233-17AC3FE977A2', 1, 'Completed', 'Completed', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID 9201153b-f20a-4ca3-8511-1f28e2a087ab */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('9201153b-f20a-4ca3-8511-1f28e2a087ab', 'FAEE9E23-7A30-473B-9233-17AC3FE977A2', 2, 'Dropped', 'Dropped', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to insert entity field value with ID cb14cbd7-c429-46c3-bd76-d6b3ae48848f */
-INSERT INTO [${mjSchema}].[EntityFieldValue]
-                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
-                                    VALUES
-                                       ('cb14cbd7-c429-46c3-bd76-d6b3ae48848f', 'FAEE9E23-7A30-473B-9233-17AC3FE977A2', 3, 'InProgress', 'InProgress', GETUTCDATE(), GETUTCDATE());
-
-/* SQL text to update ValueListType for entity field ID FAEE9E23-7A30-473B-9233-17AC3FE977A2 */
-UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7A30-473B-9233-17AC3FE977A2';
-
-
-/* Create Entity Relationship: MoreCheese: Orders -> MoreCheese: Payments (One To Many via OrderID) */
-   IF NOT EXISTS (
-      SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = 'd65273e0-e004-4dbe-995d-9c9dc2608458'
-   )
-   BEGIN
-      INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
-                    VALUES ('d65273e0-e004-4dbe-995d-9c9dc2608458', '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', 'AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44', 'OrderID', 'One To Many', 1, 1, 1, GETUTCDATE(), GETUTCDATE())
-   END;
-                    
-/* Create Entity Relationship: MoreCheese: Orders -> MoreCheese: Order Lines (One To Many via OrderID) */
-   IF NOT EXISTS (
-      SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = 'c1d68971-7f5d-4ef1-92b8-5a2ffc93d1b7'
-   )
-   BEGIN
-      INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
-                    VALUES ('c1d68971-7f5d-4ef1-92b8-5a2ffc93d1b7', '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', 'B5027754-CB75-4789-AA34-F71B815F0933', 'OrderID', 'One To Many', 1, 1, 2, GETUTCDATE(), GETUTCDATE())
-   END;
-                    
-/* Create Entity Relationship: MoreCheese: Certifications -> MoreCheese: Member Certifications (One To Many via CertificationID) */
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '84690c21-1027-443c-9b4f-15436244ef1f'
    )
@@ -13663,8 +12163,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('84690c21-1027-443c-9b4f-15436244ef1f', '49DF9400-9C38-422C-8DB6-1373D5392E35', '23916A8E-3487-4793-9E18-C209EF097E58', 'CertificationID', 'One To Many', 1, 1, 1, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MoreCheese: Events -> MoreCheese: Event Registrations (One To Many via EventID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '5e9545b6-0198-41e8-87ea-2abeb8274480'
    )
@@ -13672,8 +12171,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('5e9545b6-0198-41e8-87ea-2abeb8274480', 'CB9A5230-39C0-49EE-A5BC-238D3536B39B', 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', 'EventID', 'One To Many', 1, 1, 1, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MoreCheese: Courses -> MoreCheese: Course Enrollments (One To Many via CourseID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '15f5ccc6-29fe-4ffc-8406-83ec652f32bc'
    )
@@ -13682,8 +12180,6 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
                     VALUES ('15f5ccc6-29fe-4ffc-8406-83ec652f32bc', 'A3E60AF2-D7CA-407E-A1D3-34320E851892', '428C670F-EBE3-41E6-86E4-EB5A274960A1', 'CourseID', 'One To Many', 1, 1, 1, GETUTCDATE(), GETUTCDATE())
    END;
 
-
-/* Create Entity Relationship: MJ_BizApps_Common: Organizations -> MoreCheese: Competition Entries (One To Many via OrganizationID) */
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '03564d10-1320-43fe-8b34-c4c90aaf9ad4'
    )
@@ -13691,8 +12187,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('03564d10-1320-43fe-8b34-c4c90aaf9ad4', 'C70448F9-9792-41D7-A82C-784B66429D54', '9F493BE6-006B-4FC2-986C-D15AB527E65B', 'OrganizationID', 'One To Many', 1, 1, 6, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: Organizations -> MoreCheese: Data Quality Labels (One To Many via RelatedOrganizationID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '84c7a2f1-265b-4751-af89-f49f660b38f3'
    )
@@ -13700,8 +12195,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('84c7a2f1-265b-4751-af89-f49f660b38f3', 'C70448F9-9792-41D7-A82C-784B66429D54', 'FF152388-ED04-4F1F-B237-94D502C4AA54', 'RelatedOrganizationID', 'One To Many', 1, 1, 7, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: Organizations -> MoreCheese: Organization Profiles (One To Many via OrganizationID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '3797ef6c-f545-401f-9e8d-2b246cfc8b45'
    )
@@ -13709,8 +12203,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('3797ef6c-f545-401f-9e8d-2b246cfc8b45', 'C70448F9-9792-41D7-A82C-784B66429D54', 'A3D95071-B312-40E2-AEF3-F90D8EF881AD', 'OrganizationID', 'One To Many', 1, 1, 8, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: Organizations -> MoreCheese: Member Profiles (One To Many via OrganizationID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '564dadee-7be8-46e8-bf81-8137c07a6f90'
    )
@@ -13718,8 +12211,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('564dadee-7be8-46e8-bf81-8137c07a6f90', 'C70448F9-9792-41D7-A82C-784B66429D54', 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', 'OrganizationID', 'One To Many', 1, 1, 9, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Data Quality Labels (One To Many via RelatedPersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = 'd600adaf-b3ac-444a-814e-eea9e7accdda'
    )
@@ -13727,8 +12219,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('d600adaf-b3ac-444a-814e-eea9e7accdda', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', 'FF152388-ED04-4F1F-B237-94D502C4AA54', 'RelatedPersonID', 'One To Many', 1, 1, 18, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Data Quality Labels (One To Many via PersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '39a15131-5cbd-4379-89c6-ba4418459a21'
    )
@@ -13737,8 +12228,6 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
                     VALUES ('39a15131-5cbd-4379-89c6-ba4418459a21', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', 'FF152388-ED04-4F1F-B237-94D502C4AA54', 'PersonID', 'One To Many', 1, 1, 19, GETUTCDATE(), GETUTCDATE())
    END;
 
-
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Member Profiles (One To Many via PersonID) */
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '5f0f70a2-6cf3-4b99-a54c-ba16b8bca19d'
    )
@@ -13746,8 +12235,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('5f0f70a2-6cf3-4b99-a54c-ba16b8bca19d', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', 'PersonID', 'One To Many', 1, 1, 20, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Membership Periods (One To Many via PersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '6a321959-cc17-4e00-807e-9da9e1fd1598'
    )
@@ -13755,8 +12243,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('6a321959-cc17-4e00-807e-9da9e1fd1598', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', '16538F9B-E025-460D-9505-BD03A7648EC5', 'PersonID', 'One To Many', 1, 1, 21, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Member Certifications (One To Many via PersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = 'f3982200-bb04-4da2-8930-03666346c37d'
    )
@@ -13764,17 +12251,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('f3982200-bb04-4da2-8930-03666346c37d', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', '23916A8E-3487-4793-9E18-C209EF097E58', 'PersonID', 'One To Many', 1, 1, 22, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Orders (One To Many via PersonID) */
-   IF NOT EXISTS (
-      SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = 'df362d9b-cc16-4abf-8d07-d72b67b816d9'
-   )
-   BEGIN
-      INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
-                    VALUES ('df362d9b-cc16-4abf-8d07-d72b67b816d9', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', 'PersonID', 'One To Many', 1, 1, 23, GETUTCDATE(), GETUTCDATE())
-   END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Course Enrollments (One To Many via PersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = 'f52a99f9-0c69-4325-8de7-ba2bea0882a8'
    )
@@ -13783,8 +12260,6 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
                     VALUES ('f52a99f9-0c69-4325-8de7-ba2bea0882a8', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', '428C670F-EBE3-41E6-86E4-EB5A274960A1', 'PersonID', 'One To Many', 1, 1, 24, GETUTCDATE(), GETUTCDATE())
    END;
 
-
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Event Registrations (One To Many via PersonID) */
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '2955bca8-cdac-4d83-a7b9-6bfffaf9de44'
    )
@@ -13792,8 +12267,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('2955bca8-cdac-4d83-a7b9-6bfffaf9de44', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', 'PersonID', 'One To Many', 1, 1, 25, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Competition Entries (One To Many via PersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '6c1bff43-8e92-453d-af79-088d965af2ab'
    )
@@ -13801,8 +12275,7 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('6c1bff43-8e92-453d-af79-088d965af2ab', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', '9F493BE6-006B-4FC2-986C-D15AB527E65B', 'PersonID', 'One To Many', 1, 1, 26, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MJ_BizApps_Common: People -> MoreCheese: Advocacy Actions (One To Many via PersonID) */
+
    IF NOT EXISTS (
       SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '21ee6fb9-031a-4002-829a-b1e4382f2ba3'
    )
@@ -13810,139 +12283,10 @@ UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7
       INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
                     VALUES ('21ee6fb9-031a-4002-829a-b1e4382f2ba3', '7A94ADA9-7880-4FAE-97D8-DB0E934C3F5F', 'F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F', 'PersonID', 'One To Many', 1, 1, 27, GETUTCDATE(), GETUTCDATE())
    END;
-                    
-/* Create Entity Relationship: MoreCheese: Products -> MoreCheese: Order Lines (One To Many via ProductID) */
-   IF NOT EXISTS (
-      SELECT 1 FROM [${mjSchema}].[EntityRelationship] WHERE [ID] = '08fa4551-7338-4c18-b397-5c3ccbfc7954'
-   )
-   BEGIN
-      INSERT INTO [${mjSchema}].[EntityRelationship] ([ID], [EntityID], [RelatedEntityID], [RelatedEntityJoinField], [Type], [BundleInAPI], [DisplayInForm], [Sequence], [__mj_CreatedAt], [__mj_UpdatedAt])
-                    VALUES ('08fa4551-7338-4c18-b397-5c3ccbfc7954', 'A05CC658-F8D8-476E-8E84-F2022C6DFEF9', 'B5027754-CB75-4789-AA34-F71B815F0933', 'ProductID', 'One To Many', 1, 1, 1, GETUTCDATE(), GETUTCDATE())
-   END;
 
-/* SQL text to sync schema info from database schemas */
-EXEC [${mjSchema}].[spUpdateSchemaInfoFromDatabase] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}';
-
-/* Index for Foreign Keys for AdvocacyAction */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Advocacy Actions
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
--- Index for foreign key PersonID in table AdvocacyAction
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_AdvocacyAction_PersonID' 
-    AND object_id = OBJECT_ID('[${flyway:defaultSchema}].[AdvocacyAction]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_AdvocacyAction_PersonID ON [${flyway:defaultSchema}].[AdvocacyAction] ([PersonID]);
-
-/* SQL text to update entity field related entity name field map for entity field ID 04FB77E8-2A7F-4446-9A90-9BA70889AAAB */
-EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='04FB77E8-2A7F-4446-9A90-9BA70889AAAB', @RelatedEntityNameFieldMap='Person';
-
-/* Index for Foreign Keys for Certification */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Certifications
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------;
-
-/* Index for Foreign Keys for CompetitionEntry */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Competition Entries
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
--- Index for foreign key PersonID in table CompetitionEntry
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_CompetitionEntry_PersonID' 
-    AND object_id = OBJECT_ID('[morecheese_events].[CompetitionEntry]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_CompetitionEntry_PersonID ON [morecheese_events].[CompetitionEntry] ([PersonID]);
-
--- Index for foreign key OrganizationID in table CompetitionEntry
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_CompetitionEntry_OrganizationID' 
-    AND object_id = OBJECT_ID('[morecheese_events].[CompetitionEntry]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_CompetitionEntry_OrganizationID ON [morecheese_events].[CompetitionEntry] ([OrganizationID]);
-
-/* SQL text to update entity field related entity name field map for entity field ID 92DD1DF5-83C7-487A-8B9B-99E263C5875E */
-EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='92DD1DF5-83C7-487A-8B9B-99E263C5875E', @RelatedEntityNameFieldMap='Person';
-
-/* Index for Foreign Keys for CourseEnrollment */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Course Enrollments
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
--- Index for foreign key PersonID in table CourseEnrollment
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_CourseEnrollment_PersonID' 
-    AND object_id = OBJECT_ID('[morecheese_learning].[CourseEnrollment]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_CourseEnrollment_PersonID ON [morecheese_learning].[CourseEnrollment] ([PersonID]);
-
--- Index for foreign key CourseID in table CourseEnrollment
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_CourseEnrollment_CourseID' 
-    AND object_id = OBJECT_ID('[morecheese_learning].[CourseEnrollment]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_CourseEnrollment_CourseID ON [morecheese_learning].[CourseEnrollment] ([CourseID]);
-
-/* SQL text to update entity field related entity name field map for entity field ID AC3E81FA-C066-4370-8FAE-80D5754F5320 */
-EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='AC3E81FA-C066-4370-8FAE-80D5754F5320', @RelatedEntityNameFieldMap='Person';
-
-/* Index for Foreign Keys for Course */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Courses
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------;
-
-/* Base View SQL for MoreCheese: Certifications */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Certifications
--- Item: vwCertifications
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ BASE VIEW FOR ENTITY:      MoreCheese: Certifications
------               SCHEMA:      morecheese_learning
------               BASE TABLE:  Certification
------               PRIMARY KEY: ID
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_learning].[vwCertifications]', 'V') IS NOT NULL
-    DROP VIEW [morecheese_learning].[vwCertifications];
 GO
+
+
 
 CREATE VIEW [morecheese_learning].[vwCertifications]
 AS
@@ -16654,7 +14998,25 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spCreateMemberProfile]
     @Latitude decimal(9, 6),
     @Longitude decimal(9, 6),
     @JoinDate date,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @AddressLine2_Clear bit = 0,
+    @AddressLine2 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL,
+    @RaceEthnicity_Clear bit = 0,
+    @RaceEthnicity nvarchar(200) = NULL,
+    @EthnicityHispanic_Clear bit = 0,
+    @EthnicityHispanic nvarchar(30) = NULL,
+    @PronounSet_Clear bit = 0,
+    @PronounSet nvarchar(50) = NULL,
+    @PrimaryLanguage_Clear bit = 0,
+    @PrimaryLanguage nvarchar(50) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -16676,7 +15038,16 @@ BEGIN
                 [Latitude],
                 [Longitude],
                 [JoinDate],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [AddressLine2],
+                [PostalCode],
+                [RaceEthnicity],
+                [EthnicityHispanic],
+                [PronounSet],
+                [PrimaryLanguage]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -16692,7 +15063,16 @@ BEGIN
                 @Latitude,
                 @Longitude,
                 @JoinDate,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @AddressLine2_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine2, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END,
+                CASE WHEN @RaceEthnicity_Clear = 1 THEN NULL ELSE ISNULL(@RaceEthnicity, NULL) END,
+                CASE WHEN @EthnicityHispanic_Clear = 1 THEN NULL ELSE ISNULL(@EthnicityHispanic, NULL) END,
+                CASE WHEN @PronounSet_Clear = 1 THEN NULL ELSE ISNULL(@PronounSet, NULL) END,
+                CASE WHEN @PrimaryLanguage_Clear = 1 THEN NULL ELSE ISNULL(@PrimaryLanguage, NULL) END
             )
     END
     ELSE
@@ -16710,7 +15090,16 @@ BEGIN
                 [Latitude],
                 [Longitude],
                 [JoinDate],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [AddressLine2],
+                [PostalCode],
+                [RaceEthnicity],
+                [EthnicityHispanic],
+                [PronounSet],
+                [PrimaryLanguage]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -16725,7 +15114,16 @@ BEGIN
                 @Latitude,
                 @Longitude,
                 @JoinDate,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @AddressLine2_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine2, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END,
+                CASE WHEN @RaceEthnicity_Clear = 1 THEN NULL ELSE ISNULL(@RaceEthnicity, NULL) END,
+                CASE WHEN @EthnicityHispanic_Clear = 1 THEN NULL ELSE ISNULL(@EthnicityHispanic, NULL) END,
+                CASE WHEN @PronounSet_Clear = 1 THEN NULL ELSE ISNULL(@PronounSet, NULL) END,
+                CASE WHEN @PrimaryLanguage_Clear = 1 THEN NULL ELSE ISNULL(@PrimaryLanguage, NULL) END
             )
     END
     -- return the new record from the base view, which might have some calculated fields
@@ -16768,7 +15166,25 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spUpdateMemberProfile]
     @Latitude decimal(9, 6) = NULL,
     @Longitude decimal(9, 6) = NULL,
     @JoinDate date = NULL,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @AddressLine2_Clear bit = 0,
+    @AddressLine2 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL,
+    @RaceEthnicity_Clear bit = 0,
+    @RaceEthnicity nvarchar(200) = NULL,
+    @EthnicityHispanic_Clear bit = 0,
+    @EthnicityHispanic nvarchar(30) = NULL,
+    @PronounSet_Clear bit = 0,
+    @PronounSet nvarchar(50) = NULL,
+    @PrimaryLanguage_Clear bit = 0,
+    @PrimaryLanguage nvarchar(50) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -16785,7 +15201,16 @@ BEGIN
         [Latitude] = ISNULL(@Latitude, [Latitude]),
         [Longitude] = ISNULL(@Longitude, [Longitude]),
         [JoinDate] = ISNULL(@JoinDate, [JoinDate]),
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo]),
+        [Country] = CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, [Country]) END,
+        [CountryName] = CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, [CountryName]) END,
+        [AddressLine1] = CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, [AddressLine1]) END,
+        [AddressLine2] = CASE WHEN @AddressLine2_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine2, [AddressLine2]) END,
+        [PostalCode] = CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, [PostalCode]) END,
+        [RaceEthnicity] = CASE WHEN @RaceEthnicity_Clear = 1 THEN NULL ELSE ISNULL(@RaceEthnicity, [RaceEthnicity]) END,
+        [EthnicityHispanic] = CASE WHEN @EthnicityHispanic_Clear = 1 THEN NULL ELSE ISNULL(@EthnicityHispanic, [EthnicityHispanic]) END,
+        [PronounSet] = CASE WHEN @PronounSet_Clear = 1 THEN NULL ELSE ISNULL(@PronounSet, [PronounSet]) END,
+        [PrimaryLanguage] = CASE WHEN @PrimaryLanguage_Clear = 1 THEN NULL ELSE ISNULL(@PrimaryLanguage, [PrimaryLanguage]) END
     WHERE
         [ID] = @ID
 
@@ -16878,6 +15303,20 @@ GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteMemberProfile] TO [cdp_Devel
 
 GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteMemberProfile] TO [cdp_Developer], [cdp_Integration];
 
+/* Index for Foreign Keys for OrganizationProfile */
+
+/* Base View SQL for MoreCheese: Organization Profiles */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Organization Profiles
+-- Item: vwOrganizationProfiles
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+
 /* Index for Foreign Keys for MembershipPeriod */
 -----------------------------------------------------------------
 -- SQL Code Generation
@@ -16908,47 +15347,10 @@ EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID
 -- This was generated by the MemberJunction CodeGen tool.
 -- This file should NOT be edited by hand.
 -----------------------------------------------------------------
--- Index for foreign key OrderID in table OrderLine
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_OrderLine_OrderID' 
-    AND object_id = OBJECT_ID('[morecheese_orders].[OrderLine]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_OrderLine_OrderID ON [morecheese_orders].[OrderLine] ([OrderID]);
 
--- Index for foreign key ProductID in table OrderLine
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_OrderLine_ProductID' 
-    AND object_id = OBJECT_ID('[morecheese_orders].[OrderLine]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_OrderLine_ProductID ON [morecheese_orders].[OrderLine] ([ProductID]);
 
-/* SQL text to update entity field related entity name field map for entity field ID 300C666F-4892-473F-A922-8291AD71FD5D */
-EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='300C666F-4892-473F-A922-8291AD71FD5D', @RelatedEntityNameFieldMap='Product';
 
-/* Index for Foreign Keys for Order */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Orders
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
--- Index for foreign key PersonID in table Order
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_Order_PersonID' 
-    AND object_id = OBJECT_ID('[morecheese_orders].[Order]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_Order_PersonID ON [morecheese_orders].[Order] ([PersonID]);
 
-/* SQL text to update entity field related entity name field map for entity field ID F5156143-443D-4374-B7E5-4788645028C5 */
-EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='F5156143-443D-4374-B7E5-4788645028C5', @RelatedEntityNameFieldMap='Person';
 
 /* Index for Foreign Keys for OrganizationProfile */
 -----------------------------------------------------------------
@@ -16970,829 +15372,6 @@ CREATE INDEX IDX_AUTO_MJ_FKEY_OrganizationProfile_OrganizationID ON [${flyway:de
 
 /* SQL text to update entity field related entity name field map for entity field ID 1A222081-1065-4574-9E04-E94D98517C15 */
 EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='1A222081-1065-4574-9E04-E94D98517C15', @RelatedEntityNameFieldMap='Organization';
-
-/* Index for Foreign Keys for Payment */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Payments
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
--- Index for foreign key OrderID in table Payment
-IF NOT EXISTS (
-    SELECT 1
-    FROM sys.indexes
-    WHERE name = 'IDX_AUTO_MJ_FKEY_Payment_OrderID' 
-    AND object_id = OBJECT_ID('[morecheese_orders].[Payment]')
-)
-CREATE INDEX IDX_AUTO_MJ_FKEY_Payment_OrderID ON [morecheese_orders].[Payment] ([OrderID]);
-
-/* Base View SQL for MoreCheese: Payments */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Payments
--- Item: vwPayments
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ BASE VIEW FOR ENTITY:      MoreCheese: Payments
------               SCHEMA:      morecheese_orders
------               BASE TABLE:  Payment
------               PRIMARY KEY: ID
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[vwPayments]', 'V') IS NOT NULL
-    DROP VIEW [morecheese_orders].[vwPayments];
-GO
-
-CREATE VIEW [morecheese_orders].[vwPayments]
-AS
-SELECT
-    p.*
-FROM
-    [morecheese_orders].[Payment] AS p
-GO
-GRANT SELECT ON [morecheese_orders].[vwPayments] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* Base View Permissions SQL for MoreCheese: Payments */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Payments
--- Item: Permissions for vwPayments
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-GRANT SELECT ON [morecheese_orders].[vwPayments] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* spCreate SQL for MoreCheese: Payments */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Payments
--- Item: spCreatePayment
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ CREATE PROCEDURE FOR Payment
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spCreatePayment]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spCreatePayment];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spCreatePayment]
-    @ID uniqueidentifier = NULL,
-    @OrderID uniqueidentifier,
-    @Amount decimal(10, 2),
-    @PaymentDate date,
-    @Method nvarchar(50),
-    @Status nvarchar(50) = NULL,
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
-
-    IF @ID IS NOT NULL
-    BEGIN
-        -- User provided a value, use it
-        INSERT INTO [morecheese_orders].[Payment]
-            (
-                [ID],
-                [OrderID],
-                [Amount],
-                [PaymentDate],
-                [Method],
-                [Status],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @ID,
-                @OrderID,
-                @Amount,
-                @PaymentDate,
-                @Method,
-                ISNULL(@Status, 'Captured'),
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    ELSE
-    BEGIN
-        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
-        INSERT INTO [morecheese_orders].[Payment]
-            (
-                [OrderID],
-                [Amount],
-                [PaymentDate],
-                [Method],
-                [Status],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @OrderID,
-                @Amount,
-                @PaymentDate,
-                @Method,
-                ISNULL(@Status, 'Captured'),
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    -- return the new record from the base view, which might have some calculated fields
-    SELECT * FROM [morecheese_orders].[vwPayments] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spCreatePayment] TO [cdp_Developer], [cdp_Integration];
-
-/* spCreate Permissions for MoreCheese: Payments */
-
-GRANT EXECUTE ON [morecheese_orders].[spCreatePayment] TO [cdp_Developer], [cdp_Integration];
-
-/* spUpdate SQL for MoreCheese: Payments */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Payments
--- Item: spUpdatePayment
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ UPDATE PROCEDURE FOR Payment
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spUpdatePayment]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spUpdatePayment];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spUpdatePayment]
-    @ID uniqueidentifier,
-    @OrderID uniqueidentifier = NULL,
-    @Amount decimal(10, 2) = NULL,
-    @PaymentDate date = NULL,
-    @Method nvarchar(50) = NULL,
-    @Status nvarchar(50) = NULL,
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[Payment]
-    SET
-        [OrderID] = ISNULL(@OrderID, [OrderID]),
-        [Amount] = ISNULL(@Amount, [Amount]),
-        [PaymentDate] = ISNULL(@PaymentDate, [PaymentDate]),
-        [Method] = ISNULL(@Method, [Method]),
-        [Status] = ISNULL(@Status, [Status]),
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
-    WHERE
-        [ID] = @ID
-
-    -- Check if the update was successful
-    IF @@ROWCOUNT = 0
-        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
-        SELECT TOP 0 * FROM [morecheese_orders].[vwPayments] WHERE 1=0
-    ELSE
-        -- Return the updated record so the caller can see the updated values and any calculated fields
-        SELECT
-                                        *
-                                    FROM
-                                        [morecheese_orders].[vwPayments]
-                                    WHERE
-                                        [ID] = @ID
-                                    
-END
-GO
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdatePayment] TO [cdp_Developer], [cdp_Integration]
-GO
-
-------------------------------------------------------------
------ TRIGGER FOR __mj_UpdatedAt field for the Payment table
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[trgUpdatePayment]', 'TR') IS NOT NULL
-    DROP TRIGGER [morecheese_orders].[trgUpdatePayment];
-GO
-CREATE TRIGGER [morecheese_orders].trgUpdatePayment
-ON [morecheese_orders].[Payment]
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[Payment]
-    SET
-        __mj_UpdatedAt = GETUTCDATE()
-    FROM
-        [morecheese_orders].[Payment] AS _organicTable
-    INNER JOIN
-        INSERTED AS I ON
-        _organicTable.[ID] = I.[ID];
-END;
-GO
-
-/* spUpdate Permissions for MoreCheese: Payments */
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdatePayment] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete SQL for MoreCheese: Payments */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Payments
--- Item: spDeletePayment
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ DELETE PROCEDURE FOR Payment
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spDeletePayment]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spDeletePayment];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spDeletePayment]
-    @ID uniqueidentifier
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DELETE FROM
-        [morecheese_orders].[Payment]
-    WHERE
-        [ID] = @ID
-
-
-    -- Check if the delete was successful
-    IF @@ROWCOUNT = 0
-        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
-    ELSE
-        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spDeletePayment] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete Permissions for MoreCheese: Payments */
-
-GRANT EXECUTE ON [morecheese_orders].[spDeletePayment] TO [cdp_Developer], [cdp_Integration];
-
-/* Base View SQL for MoreCheese: Orders */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Orders
--- Item: vwOrders
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ BASE VIEW FOR ENTITY:      MoreCheese: Orders
------               SCHEMA:      morecheese_orders
------               BASE TABLE:  Order
------               PRIMARY KEY: ID
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[vwOrders]', 'V') IS NOT NULL
-    DROP VIEW [morecheese_orders].[vwOrders];
-GO
-
-CREATE VIEW [morecheese_orders].[vwOrders]
-AS
-SELECT
-    o.*,
-    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person]
-FROM
-    [morecheese_orders].[Order] AS o
-INNER JOIN
-    [${mjSchema}_BizAppsCommon].[Person] AS mjBizAppsCommonPerson_PersonID
-  ON
-    [o].[PersonID] = mjBizAppsCommonPerson_PersonID.[ID]
-GO
-GRANT SELECT ON [morecheese_orders].[vwOrders] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* Base View Permissions SQL for MoreCheese: Orders */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Orders
--- Item: Permissions for vwOrders
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-GRANT SELECT ON [morecheese_orders].[vwOrders] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* spCreate SQL for MoreCheese: Orders */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Orders
--- Item: spCreateOrder
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ CREATE PROCEDURE FOR Order
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spCreateOrder]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spCreateOrder];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spCreateOrder]
-    @ID uniqueidentifier = NULL,
-    @OrderKey nvarchar(50),
-    @PersonID uniqueidentifier,
-    @OrderType nvarchar(50) = NULL,
-    @Status nvarchar(50) = NULL,
-    @OrderDate date,
-    @DueDate date,
-    @TotalGross decimal(10, 2),
-    @PaymentStatus nvarchar(50),
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
-
-    IF @ID IS NOT NULL
-    BEGIN
-        -- User provided a value, use it
-        INSERT INTO [morecheese_orders].[Order]
-            (
-                [ID],
-                [OrderKey],
-                [PersonID],
-                [OrderType],
-                [Status],
-                [OrderDate],
-                [DueDate],
-                [TotalGross],
-                [PaymentStatus],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @ID,
-                @OrderKey,
-                @PersonID,
-                ISNULL(@OrderType, 'Sale'),
-                ISNULL(@Status, 'Posted'),
-                @OrderDate,
-                @DueDate,
-                @TotalGross,
-                @PaymentStatus,
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    ELSE
-    BEGIN
-        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
-        INSERT INTO [morecheese_orders].[Order]
-            (
-                [OrderKey],
-                [PersonID],
-                [OrderType],
-                [Status],
-                [OrderDate],
-                [DueDate],
-                [TotalGross],
-                [PaymentStatus],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @OrderKey,
-                @PersonID,
-                ISNULL(@OrderType, 'Sale'),
-                ISNULL(@Status, 'Posted'),
-                @OrderDate,
-                @DueDate,
-                @TotalGross,
-                @PaymentStatus,
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    -- return the new record from the base view, which might have some calculated fields
-    SELECT * FROM [morecheese_orders].[vwOrders] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spCreateOrder] TO [cdp_Developer], [cdp_Integration];
-
-/* spCreate Permissions for MoreCheese: Orders */
-
-GRANT EXECUTE ON [morecheese_orders].[spCreateOrder] TO [cdp_Developer], [cdp_Integration];
-
-/* spUpdate SQL for MoreCheese: Orders */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Orders
--- Item: spUpdateOrder
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ UPDATE PROCEDURE FOR Order
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spUpdateOrder]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spUpdateOrder];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spUpdateOrder]
-    @ID uniqueidentifier,
-    @OrderKey nvarchar(50) = NULL,
-    @PersonID uniqueidentifier = NULL,
-    @OrderType nvarchar(50) = NULL,
-    @Status nvarchar(50) = NULL,
-    @OrderDate date = NULL,
-    @DueDate date = NULL,
-    @TotalGross decimal(10, 2) = NULL,
-    @PaymentStatus nvarchar(50) = NULL,
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[Order]
-    SET
-        [OrderKey] = ISNULL(@OrderKey, [OrderKey]),
-        [PersonID] = ISNULL(@PersonID, [PersonID]),
-        [OrderType] = ISNULL(@OrderType, [OrderType]),
-        [Status] = ISNULL(@Status, [Status]),
-        [OrderDate] = ISNULL(@OrderDate, [OrderDate]),
-        [DueDate] = ISNULL(@DueDate, [DueDate]),
-        [TotalGross] = ISNULL(@TotalGross, [TotalGross]),
-        [PaymentStatus] = ISNULL(@PaymentStatus, [PaymentStatus]),
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
-    WHERE
-        [ID] = @ID
-
-    -- Check if the update was successful
-    IF @@ROWCOUNT = 0
-        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
-        SELECT TOP 0 * FROM [morecheese_orders].[vwOrders] WHERE 1=0
-    ELSE
-        -- Return the updated record so the caller can see the updated values and any calculated fields
-        SELECT
-                                        *
-                                    FROM
-                                        [morecheese_orders].[vwOrders]
-                                    WHERE
-                                        [ID] = @ID
-                                    
-END
-GO
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdateOrder] TO [cdp_Developer], [cdp_Integration]
-GO
-
-------------------------------------------------------------
------ TRIGGER FOR __mj_UpdatedAt field for the Order table
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[trgUpdateOrder]', 'TR') IS NOT NULL
-    DROP TRIGGER [morecheese_orders].[trgUpdateOrder];
-GO
-CREATE TRIGGER [morecheese_orders].trgUpdateOrder
-ON [morecheese_orders].[Order]
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[Order]
-    SET
-        __mj_UpdatedAt = GETUTCDATE()
-    FROM
-        [morecheese_orders].[Order] AS _organicTable
-    INNER JOIN
-        INSERTED AS I ON
-        _organicTable.[ID] = I.[ID];
-END;
-GO
-
-/* spUpdate Permissions for MoreCheese: Orders */
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdateOrder] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete SQL for MoreCheese: Orders */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Orders
--- Item: spDeleteOrder
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ DELETE PROCEDURE FOR Order
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spDeleteOrder]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spDeleteOrder];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spDeleteOrder]
-    @ID uniqueidentifier
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DELETE FROM
-        [morecheese_orders].[Order]
-    WHERE
-        [ID] = @ID
-
-
-    -- Check if the delete was successful
-    IF @@ROWCOUNT = 0
-        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
-    ELSE
-        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spDeleteOrder] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete Permissions for MoreCheese: Orders */
-
-GRANT EXECUTE ON [morecheese_orders].[spDeleteOrder] TO [cdp_Developer], [cdp_Integration];
-
-/* Base View SQL for MoreCheese: Order Lines */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Order Lines
--- Item: vwOrderLines
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ BASE VIEW FOR ENTITY:      MoreCheese: Order Lines
------               SCHEMA:      morecheese_orders
------               BASE TABLE:  OrderLine
------               PRIMARY KEY: ID
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[vwOrderLines]', 'V') IS NOT NULL
-    DROP VIEW [morecheese_orders].[vwOrderLines];
-GO
-
-CREATE VIEW [morecheese_orders].[vwOrderLines]
-AS
-SELECT
-    o.*,
-    morecheeseordersProduct_ProductID.[Name] AS [Product]
-FROM
-    [morecheese_orders].[OrderLine] AS o
-INNER JOIN
-    [morecheese_orders].[Product] AS morecheeseordersProduct_ProductID
-  ON
-    [o].[ProductID] = morecheeseordersProduct_ProductID.[ID]
-GO
-GRANT SELECT ON [morecheese_orders].[vwOrderLines] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* Base View Permissions SQL for MoreCheese: Order Lines */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Order Lines
--- Item: Permissions for vwOrderLines
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-GRANT SELECT ON [morecheese_orders].[vwOrderLines] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* spCreate SQL for MoreCheese: Order Lines */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Order Lines
--- Item: spCreateOrderLine
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ CREATE PROCEDURE FOR OrderLine
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spCreateOrderLine]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spCreateOrderLine];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spCreateOrderLine]
-    @ID uniqueidentifier = NULL,
-    @OrderID uniqueidentifier,
-    @ProductID uniqueidentifier,
-    @Quantity int = NULL,
-    @UnitPrice decimal(10, 2),
-    @LineTotal decimal(10, 2),
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
-
-    IF @ID IS NOT NULL
-    BEGIN
-        -- User provided a value, use it
-        INSERT INTO [morecheese_orders].[OrderLine]
-            (
-                [ID],
-                [OrderID],
-                [ProductID],
-                [Quantity],
-                [UnitPrice],
-                [LineTotal],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @ID,
-                @OrderID,
-                @ProductID,
-                ISNULL(@Quantity, 1),
-                @UnitPrice,
-                @LineTotal,
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    ELSE
-    BEGIN
-        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
-        INSERT INTO [morecheese_orders].[OrderLine]
-            (
-                [OrderID],
-                [ProductID],
-                [Quantity],
-                [UnitPrice],
-                [LineTotal],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @OrderID,
-                @ProductID,
-                ISNULL(@Quantity, 1),
-                @UnitPrice,
-                @LineTotal,
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    -- return the new record from the base view, which might have some calculated fields
-    SELECT * FROM [morecheese_orders].[vwOrderLines] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spCreateOrderLine] TO [cdp_Developer], [cdp_Integration];
-
-/* spCreate Permissions for MoreCheese: Order Lines */
-
-GRANT EXECUTE ON [morecheese_orders].[spCreateOrderLine] TO [cdp_Developer], [cdp_Integration];
-
-/* spUpdate SQL for MoreCheese: Order Lines */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Order Lines
--- Item: spUpdateOrderLine
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ UPDATE PROCEDURE FOR OrderLine
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spUpdateOrderLine]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spUpdateOrderLine];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spUpdateOrderLine]
-    @ID uniqueidentifier,
-    @OrderID uniqueidentifier = NULL,
-    @ProductID uniqueidentifier = NULL,
-    @Quantity int = NULL,
-    @UnitPrice decimal(10, 2) = NULL,
-    @LineTotal decimal(10, 2) = NULL,
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[OrderLine]
-    SET
-        [OrderID] = ISNULL(@OrderID, [OrderID]),
-        [ProductID] = ISNULL(@ProductID, [ProductID]),
-        [Quantity] = ISNULL(@Quantity, [Quantity]),
-        [UnitPrice] = ISNULL(@UnitPrice, [UnitPrice]),
-        [LineTotal] = ISNULL(@LineTotal, [LineTotal]),
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
-    WHERE
-        [ID] = @ID
-
-    -- Check if the update was successful
-    IF @@ROWCOUNT = 0
-        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
-        SELECT TOP 0 * FROM [morecheese_orders].[vwOrderLines] WHERE 1=0
-    ELSE
-        -- Return the updated record so the caller can see the updated values and any calculated fields
-        SELECT
-                                        *
-                                    FROM
-                                        [morecheese_orders].[vwOrderLines]
-                                    WHERE
-                                        [ID] = @ID
-                                    
-END
-GO
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdateOrderLine] TO [cdp_Developer], [cdp_Integration]
-GO
-
-------------------------------------------------------------
------ TRIGGER FOR __mj_UpdatedAt field for the OrderLine table
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[trgUpdateOrderLine]', 'TR') IS NOT NULL
-    DROP TRIGGER [morecheese_orders].[trgUpdateOrderLine];
-GO
-CREATE TRIGGER [morecheese_orders].trgUpdateOrderLine
-ON [morecheese_orders].[OrderLine]
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[OrderLine]
-    SET
-        __mj_UpdatedAt = GETUTCDATE()
-    FROM
-        [morecheese_orders].[OrderLine] AS _organicTable
-    INNER JOIN
-        INSERTED AS I ON
-        _organicTable.[ID] = I.[ID];
-END;
-GO
-
-/* spUpdate Permissions for MoreCheese: Order Lines */
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdateOrderLine] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete SQL for MoreCheese: Order Lines */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Order Lines
--- Item: spDeleteOrderLine
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ DELETE PROCEDURE FOR OrderLine
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spDeleteOrderLine]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spDeleteOrderLine];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spDeleteOrderLine]
-    @ID uniqueidentifier
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DELETE FROM
-        [morecheese_orders].[OrderLine]
-    WHERE
-        [ID] = @ID
-
-
-    -- Check if the delete was successful
-    IF @@ROWCOUNT = 0
-        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
-    ELSE
-        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spDeleteOrderLine] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete Permissions for MoreCheese: Order Lines */
-
-GRANT EXECUTE ON [morecheese_orders].[spDeleteOrderLine] TO [cdp_Developer], [cdp_Integration];
 
 /* Base View SQL for MoreCheese: Membership Periods */
 -----------------------------------------------------------------
@@ -18180,7 +15759,15 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spCreateOrganizationProfile]
     @LifecycleEventKind nvarchar(50) = NULL,
     @LifecycleEventYear_Clear bit = 0,
     @LifecycleEventYear int = NULL,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -18202,7 +15789,11 @@ BEGIN
                 [Longitude],
                 [LifecycleEventKind],
                 [LifecycleEventYear],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [PostalCode]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -18218,7 +15809,11 @@ BEGIN
                 @Longitude,
                 CASE WHEN @LifecycleEventKind_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventKind, NULL) END,
                 CASE WHEN @LifecycleEventYear_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventYear, NULL) END,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END
             )
     END
     ELSE
@@ -18236,7 +15831,11 @@ BEGIN
                 [Longitude],
                 [LifecycleEventKind],
                 [LifecycleEventYear],
-                [IsSharedDemo]
+                [IsSharedDemo],
+                [Country],
+                [CountryName],
+                [AddressLine1],
+                [PostalCode]
             )
         OUTPUT INSERTED.[ID] INTO @InsertedRow
         VALUES
@@ -18251,7 +15850,11 @@ BEGIN
                 @Longitude,
                 CASE WHEN @LifecycleEventKind_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventKind, NULL) END,
                 CASE WHEN @LifecycleEventYear_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventYear, NULL) END,
-                ISNULL(@IsSharedDemo, 1)
+                ISNULL(@IsSharedDemo, 1),
+                CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, NULL) END,
+                CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, NULL) END,
+                CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, NULL) END,
+                CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, NULL) END
             )
     END
     -- return the new record from the base view, which might have some calculated fields
@@ -18295,7 +15898,15 @@ CREATE PROCEDURE [${flyway:defaultSchema}].[spUpdateOrganizationProfile]
     @LifecycleEventKind nvarchar(50) = NULL,
     @LifecycleEventYear_Clear bit = 0,
     @LifecycleEventYear int = NULL,
-    @IsSharedDemo bit = NULL
+    @IsSharedDemo bit = NULL,
+    @Country_Clear bit = 0,
+    @Country nvarchar(2) = NULL,
+    @CountryName_Clear bit = 0,
+    @CountryName nvarchar(100) = NULL,
+    @AddressLine1_Clear bit = 0,
+    @AddressLine1 nvarchar(200) = NULL,
+    @PostalCode_Clear bit = 0,
+    @PostalCode nvarchar(20) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -18312,7 +15923,11 @@ BEGIN
         [Longitude] = ISNULL(@Longitude, [Longitude]),
         [LifecycleEventKind] = CASE WHEN @LifecycleEventKind_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventKind, [LifecycleEventKind]) END,
         [LifecycleEventYear] = CASE WHEN @LifecycleEventYear_Clear = 1 THEN NULL ELSE ISNULL(@LifecycleEventYear, [LifecycleEventYear]) END,
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo]),
+        [Country] = CASE WHEN @Country_Clear = 1 THEN NULL ELSE ISNULL(@Country, [Country]) END,
+        [CountryName] = CASE WHEN @CountryName_Clear = 1 THEN NULL ELSE ISNULL(@CountryName, [CountryName]) END,
+        [AddressLine1] = CASE WHEN @AddressLine1_Clear = 1 THEN NULL ELSE ISNULL(@AddressLine1, [AddressLine1]) END,
+        [PostalCode] = CASE WHEN @PostalCode_Clear = 1 THEN NULL ELSE ISNULL(@PostalCode, [PostalCode]) END
     WHERE
         [ID] = @ID
 
@@ -18405,1409 +16020,13 @@ GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteOrganizationProfile] TO [cdp
 
 GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteOrganizationProfile] TO [cdp_Developer], [cdp_Integration];
 
-/* Index for Foreign Keys for Product */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Products
--- Item: Index for Foreign Keys
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------;
+/* SQL text to delete unneeded entity fields (2 scoped entities) */
 
-/* Base View SQL for MoreCheese: Products */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Products
--- Item: vwProducts
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ BASE VIEW FOR ENTITY:      MoreCheese: Products
------               SCHEMA:      morecheese_orders
------               BASE TABLE:  Product
------               PRIMARY KEY: ID
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[vwProducts]', 'V') IS NOT NULL
-    DROP VIEW [morecheese_orders].[vwProducts];
-GO
-
-CREATE VIEW [morecheese_orders].[vwProducts]
-AS
-SELECT
-    p.*
-FROM
-    [morecheese_orders].[Product] AS p
-GO
-GRANT SELECT ON [morecheese_orders].[vwProducts] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* Base View Permissions SQL for MoreCheese: Products */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Products
--- Item: Permissions for vwProducts
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-GRANT SELECT ON [morecheese_orders].[vwProducts] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
-
-/* spCreate SQL for MoreCheese: Products */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Products
--- Item: spCreateProduct
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ CREATE PROCEDURE FOR Product
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spCreateProduct]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spCreateProduct];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spCreateProduct]
-    @ID uniqueidentifier = NULL,
-    @ProductKey nvarchar(50),
-    @Name nvarchar(200),
-    @ProductType nvarchar(50),
-    @UnitPrice decimal(10, 2),
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
-
-    IF @ID IS NOT NULL
-    BEGIN
-        -- User provided a value, use it
-        INSERT INTO [morecheese_orders].[Product]
-            (
-                [ID],
-                [ProductKey],
-                [Name],
-                [ProductType],
-                [UnitPrice],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @ID,
-                @ProductKey,
-                @Name,
-                @ProductType,
-                @UnitPrice,
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    ELSE
-    BEGIN
-        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
-        INSERT INTO [morecheese_orders].[Product]
-            (
-                [ProductKey],
-                [Name],
-                [ProductType],
-                [UnitPrice],
-                [IsSharedDemo]
-            )
-        OUTPUT INSERTED.[ID] INTO @InsertedRow
-        VALUES
-            (
-                @ProductKey,
-                @Name,
-                @ProductType,
-                @UnitPrice,
-                ISNULL(@IsSharedDemo, 1)
-            )
-    END
-    -- return the new record from the base view, which might have some calculated fields
-    SELECT * FROM [morecheese_orders].[vwProducts] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spCreateProduct] TO [cdp_Developer], [cdp_Integration];
-
-/* spCreate Permissions for MoreCheese: Products */
-
-GRANT EXECUTE ON [morecheese_orders].[spCreateProduct] TO [cdp_Developer], [cdp_Integration];
-
-/* spUpdate SQL for MoreCheese: Products */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Products
--- Item: spUpdateProduct
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ UPDATE PROCEDURE FOR Product
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spUpdateProduct]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spUpdateProduct];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spUpdateProduct]
-    @ID uniqueidentifier,
-    @ProductKey nvarchar(50) = NULL,
-    @Name nvarchar(200) = NULL,
-    @ProductType nvarchar(50) = NULL,
-    @UnitPrice decimal(10, 2) = NULL,
-    @IsSharedDemo bit = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[Product]
-    SET
-        [ProductKey] = ISNULL(@ProductKey, [ProductKey]),
-        [Name] = ISNULL(@Name, [Name]),
-        [ProductType] = ISNULL(@ProductType, [ProductType]),
-        [UnitPrice] = ISNULL(@UnitPrice, [UnitPrice]),
-        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
-    WHERE
-        [ID] = @ID
-
-    -- Check if the update was successful
-    IF @@ROWCOUNT = 0
-        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
-        SELECT TOP 0 * FROM [morecheese_orders].[vwProducts] WHERE 1=0
-    ELSE
-        -- Return the updated record so the caller can see the updated values and any calculated fields
-        SELECT
-                                        *
-                                    FROM
-                                        [morecheese_orders].[vwProducts]
-                                    WHERE
-                                        [ID] = @ID
-                                    
-END
-GO
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdateProduct] TO [cdp_Developer], [cdp_Integration]
-GO
-
-------------------------------------------------------------
------ TRIGGER FOR __mj_UpdatedAt field for the Product table
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[trgUpdateProduct]', 'TR') IS NOT NULL
-    DROP TRIGGER [morecheese_orders].[trgUpdateProduct];
-GO
-CREATE TRIGGER [morecheese_orders].trgUpdateProduct
-ON [morecheese_orders].[Product]
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-    UPDATE
-        [morecheese_orders].[Product]
-    SET
-        __mj_UpdatedAt = GETUTCDATE()
-    FROM
-        [morecheese_orders].[Product] AS _organicTable
-    INNER JOIN
-        INSERTED AS I ON
-        _organicTable.[ID] = I.[ID];
-END;
-GO
-
-/* spUpdate Permissions for MoreCheese: Products */
-
-GRANT EXECUTE ON [morecheese_orders].[spUpdateProduct] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete SQL for MoreCheese: Products */
------------------------------------------------------------------
--- SQL Code Generation
--- Entity: MoreCheese: Products
--- Item: spDeleteProduct
---
--- This was generated by the MemberJunction CodeGen tool.
--- This file should NOT be edited by hand.
------------------------------------------------------------------
-
-------------------------------------------------------------
------ DELETE PROCEDURE FOR Product
-------------------------------------------------------------
-IF OBJECT_ID('[morecheese_orders].[spDeleteProduct]', 'P') IS NOT NULL
-    DROP PROCEDURE [morecheese_orders].[spDeleteProduct];
-GO
-
-CREATE PROCEDURE [morecheese_orders].[spDeleteProduct]
-    @ID uniqueidentifier
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DELETE FROM
-        [morecheese_orders].[Product]
-    WHERE
-        [ID] = @ID
-
-
-    -- Check if the delete was successful
-    IF @@ROWCOUNT = 0
-        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
-    ELSE
-        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
-END
-GO
-GRANT EXECUTE ON [morecheese_orders].[spDeleteProduct] TO [cdp_Developer], [cdp_Integration];
-
-/* spDelete Permissions for MoreCheese: Products */
-
-GRANT EXECUTE ON [morecheese_orders].[spDeleteProduct] TO [cdp_Developer], [cdp_Integration];
-
-/* SQL text to delete unneeded entity fields (16 scoped entities) */
-EXEC [${mjSchema}].[spDeleteUnneededEntityFields] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}', @EntityIDs='81B84F0D-7A7A-4897-A8F3-08EB40A09B51,B5027754-CB75-4789-AA34-F71B815F0933,AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44,49DF9400-9C38-422C-8DB6-1373D5392E35,23916A8E-3487-4793-9E18-C209EF097E58,9F493BE6-006B-4FC2-986C-D15AB527E65B,F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F,FF152388-ED04-4F1F-B237-94D502C4AA54,A3D95071-B312-40E2-AEF3-F90D8EF881AD,BE4D97E0-48DE-4240-A09F-8B39AD4BD043,16538F9B-E025-460D-9505-BD03A7648EC5,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,A3E60AF2-D7CA-407E-A1D3-34320E851892,428C670F-EBE3-41E6-86E4-EB5A274960A1,A05CC658-F8D8-476E-8E84-F2022C6DFEF9';
-
-/* SQL text to insert 18 new entity field(s) */
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'fc04bdb9-a550-4dd9-be9d-5507186bb0ed' OR (EntityID = '81B84F0D-7A7A-4897-A8F3-08EB40A09B51' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'fc04bdb9-a550-4dd9-be9d-5507186bb0ed',
-            '81B84F0D-7A7A-4897-A8F3-08EB40A09B51', -- Entity: MoreCheese: Orders
-            100025,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'abf75523-f0c3-4483-b74b-7e0bb2be5387' OR (EntityID = 'F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'abf75523-f0c3-4483-b74b-7e0bb2be5387',
-            'F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F', -- Entity: MoreCheese: Advocacy Actions
-            100019,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'a85246a1-1461-4a08-8210-97d3357e04bd' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'a85246a1-1461-4a08-8210-97d3357e04bd',
-            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
-            100029,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1' OR (EntityID = 'BE4D97E0-48DE-4240-A09F-8B39AD4BD043' AND Name = 'Organization')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1',
-            'BE4D97E0-48DE-4240-A09F-8B39AD4BD043', -- Entity: MoreCheese: Member Profiles
-            100030,
-            'Organization',
-            'Organization',
-            NULL,
-            'nvarchar',
-            510,
-            0,
-            0,
-            1,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '8950e3da-857b-4973-9709-5f44bb2ceb3f' OR (EntityID = 'FF152388-ED04-4F1F-B237-94D502C4AA54' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '8950e3da-857b-4973-9709-5f44bb2ceb3f',
-            'FF152388-ED04-4F1F-B237-94D502C4AA54', -- Entity: MoreCheese: Data Quality Labels
-            100025,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'e9599ba2-933b-4699-86c9-f9fa21fb39d0' OR (EntityID = 'FF152388-ED04-4F1F-B237-94D502C4AA54' AND Name = 'RelatedPerson')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'e9599ba2-933b-4699-86c9-f9fa21fb39d0',
-            'FF152388-ED04-4F1F-B237-94D502C4AA54', -- Entity: MoreCheese: Data Quality Labels
-            100026,
-            'RelatedPerson',
-            'Related Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            1,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '474481f6-96b3-4235-8d87-d2b0780e3efe' OR (EntityID = 'FF152388-ED04-4F1F-B237-94D502C4AA54' AND Name = 'RelatedOrganization')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '474481f6-96b3-4235-8d87-d2b0780e3efe',
-            'FF152388-ED04-4F1F-B237-94D502C4AA54', -- Entity: MoreCheese: Data Quality Labels
-            100027,
-            'RelatedOrganization',
-            'Related Organization',
-            NULL,
-            'nvarchar',
-            510,
-            0,
-            0,
-            1,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'daa561bf-b427-42ca-975b-4b955d77e31c' OR (EntityID = '16538F9B-E025-460D-9505-BD03A7648EC5' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'daa561bf-b427-42ca-975b-4b955d77e31c',
-            '16538F9B-E025-460D-9505-BD03A7648EC5', -- Entity: MoreCheese: Membership Periods
-            100031,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '72bb6163-3a23-48c1-a5a0-1c9a75700502' OR (EntityID = '23916A8E-3487-4793-9E18-C209EF097E58' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '72bb6163-3a23-48c1-a5a0-1c9a75700502',
-            '23916A8E-3487-4793-9E18-C209EF097E58', -- Entity: MoreCheese: Member Certifications
-            100023,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '737e4ac7-1c79-4677-8401-f1eccd81d3a7' OR (EntityID = '23916A8E-3487-4793-9E18-C209EF097E58' AND Name = 'Certification')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '737e4ac7-1c79-4677-8401-f1eccd81d3a7',
-            '23916A8E-3487-4793-9E18-C209EF097E58', -- Entity: MoreCheese: Member Certifications
-            100024,
-            'Certification',
-            'Certification',
-            NULL,
-            'nvarchar',
-            400,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '366f1231-cf05-42ad-afc5-84403d860a66' OR (EntityID = '9F493BE6-006B-4FC2-986C-D15AB527E65B' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '366f1231-cf05-42ad-afc5-84403d860a66',
-            '9F493BE6-006B-4FC2-986C-D15AB527E65B', -- Entity: MoreCheese: Competition Entries
-            100023,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '0ead38c3-3c9a-4447-9f96-ded688c870c9' OR (EntityID = '9F493BE6-006B-4FC2-986C-D15AB527E65B' AND Name = 'Organization')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '0ead38c3-3c9a-4447-9f96-ded688c870c9',
-            '9F493BE6-006B-4FC2-986C-D15AB527E65B', -- Entity: MoreCheese: Competition Entries
-            100024,
-            'Organization',
-            'Organization',
-            NULL,
-            'nvarchar',
-            510,
-            0,
-            0,
-            1,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '238863f8-a7b8-48d4-a99c-150253a61da2' OR (EntityID = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '238863f8-a7b8-48d4-a99c-150253a61da2',
-            'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', -- Entity: MoreCheese: Event Registrations
-            100019,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'b43a6aef-4c29-4080-9e08-8d3c3f13efe0' OR (EntityID = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153' AND Name = 'Event')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'b43a6aef-4c29-4080-9e08-8d3c3f13efe0',
-            'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', -- Entity: MoreCheese: Event Registrations
-            100020,
-            'Event',
-            'Event',
-            NULL,
-            'nvarchar',
-            400,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '6df3c4e7-c108-4e4d-b28a-d34b7edc8b59' OR (EntityID = '428C670F-EBE3-41E6-86E4-EB5A274960A1' AND Name = 'Person')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '6df3c4e7-c108-4e4d-b28a-d34b7edc8b59',
-            '428C670F-EBE3-41E6-86E4-EB5A274960A1', -- Entity: MoreCheese: Course Enrollments
-            100021,
-            'Person',
-            'Person',
-            NULL,
-            'nvarchar',
-            402,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'ecf95dce-c50f-4005-b194-8c993480784a' OR (EntityID = '428C670F-EBE3-41E6-86E4-EB5A274960A1' AND Name = 'Course')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            'ecf95dce-c50f-4005-b194-8c993480784a',
-            '428C670F-EBE3-41E6-86E4-EB5A274960A1', -- Entity: MoreCheese: Course Enrollments
-            100022,
-            'Course',
-            'Course',
-            NULL,
-            'nvarchar',
-            400,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '84fdbf7c-7ec8-4c61-86f1-0f44656b6dd8' OR (EntityID = 'B5027754-CB75-4789-AA34-F71B815F0933' AND Name = 'Product')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '84fdbf7c-7ec8-4c61-86f1-0f44656b6dd8',
-            'B5027754-CB75-4789-AA34-F71B815F0933', -- Entity: MoreCheese: Order Lines
-            100019,
-            'Product',
-            'Product',
-            NULL,
-            'nvarchar',
-            400,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '7c6915c9-9b5f-4aae-8c5d-0fd2e9c4443c' OR (EntityID = 'A3D95071-B312-40E2-AEF3-F90D8EF881AD' AND Name = 'Organization')) BEGIN
-         INSERT INTO [${mjSchema}].[EntityField]
-         (
-            [ID],
-            [EntityID],
-            [Sequence],
-            [Name],
-            [DisplayName],
-            [Description],
-            [Type],
-            [Length],
-            [Precision],
-            [Scale],
-            [AllowsNull],
-            [DefaultValue],
-            [AutoIncrement],
-            [AllowUpdateAPI],
-            [IsVirtual],
-            [IsComputed],
-            [RelatedEntityID],
-            [RelatedEntityFieldName],
-            [IsNameField],
-            [IncludeInUserSearchAPI],
-            [IncludeRelatedEntityNameFieldInBaseView],
-            [DefaultInView],
-            [IsPrimaryKey],
-            [IsUnique],
-            [RelatedEntityDisplayType],
-            [__mj_CreatedAt],
-            [__mj_UpdatedAt]
-         )
-         VALUES
-         (
-            '7c6915c9-9b5f-4aae-8c5d-0fd2e9c4443c',
-            'A3D95071-B312-40E2-AEF3-F90D8EF881AD', -- Entity: MoreCheese: Organization Profiles
-            100029,
-            'Organization',
-            'Organization',
-            NULL,
-            'nvarchar',
-            510,
-            0,
-            0,
-            0,
-            NULL,
-            0,
-            0,
-            1,
-            0,
-            NULL,
-            NULL,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            'Search',
-            GETUTCDATE(),
-            GETUTCDATE()
-         )
-      END;
-
-/* SQL text to update existing entity fields from schema (16 scoped entities) */
-EXEC [${mjSchema}].[spUpdateExistingEntityFieldsFromSchema] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}', @EntityIDs='81B84F0D-7A7A-4897-A8F3-08EB40A09B51,B5027754-CB75-4789-AA34-F71B815F0933,AF2F0CF6-F5BE-4769-B43A-FE3066DEFC44,49DF9400-9C38-422C-8DB6-1373D5392E35,23916A8E-3487-4793-9E18-C209EF097E58,9F493BE6-006B-4FC2-986C-D15AB527E65B,F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F,FF152388-ED04-4F1F-B237-94D502C4AA54,A3D95071-B312-40E2-AEF3-F90D8EF881AD,BE4D97E0-48DE-4240-A09F-8B39AD4BD043,16538F9B-E025-460D-9505-BD03A7648EC5,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,A3E60AF2-D7CA-407E-A1D3-34320E851892,428C670F-EBE3-41E6-86E4-EB5A274960A1,A05CC658-F8D8-476E-8E84-F2022C6DFEF9';
+/* SQL text to update existing entity fields from schema (2 scoped entities) */
 
 /* SQL text to set default column width where needed */
-EXEC [${mjSchema}].[spSetDefaultColumnWidthWhereNeeded] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}';
 
+/* SQL text to delete unneeded entity fields (12 scoped entities) */
+EXEC [${mjSchema}].[spDeleteUnneededEntityFields] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}', @EntityIDs='49DF9400-9C38-422C-8DB6-1373D5392E35,23916A8E-3487-4793-9E18-C209EF097E58,9F493BE6-006B-4FC2-986C-D15AB527E65B,F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F,FF152388-ED04-4F1F-B237-94D502C4AA54,A3D95071-B312-40E2-AEF3-F90D8EF881AD,BE4D97E0-48DE-4240-A09F-8B39AD4BD043,16538F9B-E025-460D-9505-BD03A7648EC5,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,A3E60AF2-D7CA-407E-A1D3-34320E851892,428C670F-EBE3-41E6-86E4-EB5A274960A1';
+
+/* SQL text to insert 13 new entity field(s) */

@@ -1,0 +1,335 @@
+{
+  "version": "1.0.0",
+  "directories": {
+    "ai-model-vendors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ai-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ai-vendors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-factors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-model-factors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-model-related-entities": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-band-sets": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-bands": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-model-versions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-time-windows": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "schema-info": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Application schema registration metadata (template-authored)"
+    },
+    "address-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "addresses": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "advocacy-actions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "certifications": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "committee-agenda-items": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-attendance": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-meetings": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-memberships": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-motions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-terms": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "committee-votes": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committees": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "companies": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "competition-entries": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "contact-methods": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "courses": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "data-quality-labels": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "enrollments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "event-registrations": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "events": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-answers": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-distributions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-pages": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "form-question-options": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "form-questions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "form-responses": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-versions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "forms": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "issue-comments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "issue-sequences": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "issue-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "issues": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "member-certifications": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "member-profiles": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "membership-periods": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "order-lines": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "orders": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "organization-profiles": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "organizations": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "payment-lines": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "payments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "people": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "portal-sessions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Legacy portal web telemetry frozen (proposed, pending owner confirmation)"
+    },
+    "product-categories": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "products": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "relationship-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "relationships": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "secure-messages": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "secure-threads": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "task-assignments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "task-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "task-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "tasks": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    }
+  }
+}

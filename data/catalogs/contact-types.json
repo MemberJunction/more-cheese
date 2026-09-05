@@ -1,0 +1,58 @@
+[
+  {
+    "ID": "FB4D3737-8479-44E5-AF91-2DB63311D293",
+    "Name": "Email",
+    "Description": "Email address",
+    "IconClass": "fa-solid fa-envelope",
+    "DisplayRank": 10
+  },
+  {
+    "ID": "96421246-0F8F-4CDB-A5C5-BA6B190C1AFE",
+    "Name": "Mobile Phone",
+    "Description": "Mobile or cell phone number",
+    "IconClass": "fa-solid fa-mobile-screen",
+    "DisplayRank": 20
+  },
+  {
+    "ID": "BCDA98AC-06A4-40FC-A1CC-E44BB783FBC9",
+    "Name": "Work Phone",
+    "Description": "Business or office phone number",
+    "IconClass": "fa-solid fa-phone-office",
+    "DisplayRank": 30
+  },
+  {
+    "ID": "C3BA9432-8D05-4AFE-BF6D-61F976A466E6",
+    "Name": "Home Phone",
+    "Description": "Residential phone number",
+    "IconClass": "fa-solid fa-phone",
+    "DisplayRank": 40
+  },
+  {
+    "ID": "FDBFF502-CE06-456B-BCC3-8A2C23D16D45",
+    "Name": "LinkedIn",
+    "Description": "LinkedIn profile URL",
+    "IconClass": "fa-brands fa-linkedin",
+    "DisplayRank": 50
+  },
+  {
+    "ID": "02A126F9-ED1B-4BBF-8479-8B10CC916150",
+    "Name": "Twitter / X",
+    "Description": "Twitter / X profile URL or handle",
+    "IconClass": "fa-brands fa-x-twitter",
+    "DisplayRank": 60
+  },
+  {
+    "ID": "F2DBF3EA-7ACF-4725-92D3-AB630B613293",
+    "Name": "Website",
+    "Description": "Personal or professional website URL",
+    "IconClass": "fa-solid fa-globe",
+    "DisplayRank": 70
+  },
+  {
+    "ID": "A33D19DB-27FD-400C-A9C9-F3D3C4A12E8F",
+    "Name": "Fax",
+    "Description": "Fax number",
+    "IconClass": "fa-solid fa-fax",
+    "DisplayRank": 80
+  }
+]

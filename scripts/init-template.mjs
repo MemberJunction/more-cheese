@@ -2,7 +2,7 @@
 /**
  * init-template.mjs — template setup / rename tool.
  *
- * Reads the repo's CURRENT identity (mj-app.json + metadata/schema-info) and
+ * Reads the repo's CURRENT identity (mj-app.json + config/schema-info) and
  * renames it to YOUR answers. Because it works from current values — not
  * hardcoded template tokens — it is RE-RUNNABLE: every prompt shows the
  * current value as its default (press Enter to keep it), so you can come back
@@ -24,7 +24,8 @@
  * before committing.
  */
 import { createInterface } from 'node:readline';
-import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
+import { dirname } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 
@@ -64,7 +65,7 @@ const cur = {
 cur.repoName = cur.repo.split('/').pop();
 
 // prefix / ID range / UUID: from the activated schema-info record when present
-const SCHEMA_INFO = 'metadata/schema-info/.schema-info.json';
+const SCHEMA_INFO = 'config/schema-info/.schema-info.json';
 let schemaInfoRecord = null;
 if (existsSync(SCHEMA_INFO)) {
   try { schemaInfoRecord = JSON.parse(readFileSync(SCHEMA_INFO, 'utf8'))[0]; } catch { /* rewrite below */ }
@@ -265,6 +266,9 @@ m2.repository = repoUrl; m2.publisher = { name: publisher, email };
 if (m2.schema) m2.schema.name = schema;
 writeFileSync('mj-app.json', JSON.stringify(m2, null, 2) + '\n');
 
+if (!existsSync(dirname(SCHEMA_INFO))) {
+  mkdirSync(dirname(SCHEMA_INFO), { recursive: true });
+}
 writeFileSync(SCHEMA_INFO, JSON.stringify([{
   fields: {
     SchemaName: schema,

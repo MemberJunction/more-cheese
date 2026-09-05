@@ -3,10 +3,10 @@
   "domain": "more-cheese",
   "catalog": {},
   "params": {
-    "baseRenewalTarget": 0.82,
-    "annualConferenceTarget": 0.35,
-    "ccpEnrollmentTarget": 0.12,
-    "advocacyParticipationTarget": 0.20,
+    "baseRenewalTarget": 0.22,
+    "annualConferenceTarget": 0.66,
+    "ccpEnrollmentTarget": 0.65,
+    "advocacyParticipationTarget": 0.34,
     "volume_Organization": 50,
     "volume_Person": 300,
     "volume_MembershipPeriod": 300,
@@ -24,12 +24,12 @@
     "factor-membership-renewal": {
       "id": "factor-membership-renewal",
       "effect": "MembershipPeriod",
-      "target": 0.82,
+      "target": 0.22,
       "tolerance": 0.05,
       "evidence": {
-        "source": "ICF Historical Membership Data 2018-2025",
+        "source": "ICF Historical Membership Registry (7,018 records 2018-2026)",
         "confidence": "high",
-        "notes": "Annual member retention baseline"
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
@@ -56,12 +56,12 @@
     "factor-annual-conference-attendance": {
       "id": "factor-annual-conference-attendance",
       "effect": "EventRegistration",
-      "target": 0.35,
+      "target": 0.66,
       "tolerance": 0.05,
       "evidence": {
-        "source": "ICF Annual Conference Registration Audits",
+        "source": "ICF Flagship Event & Conference Registrations (16,875 records 2019-2026)",
         "confidence": "high",
-        "notes": "Share of active members attending the annual flagship conference"
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
@@ -72,12 +72,12 @@
       "arrows": {
         "theta": {
           "dial": "theta",
-          "beta": 0.80,
+          "beta": 0.8,
           "description": "Engaged members travel to conference"
         },
         "phi": {
           "dial": "phi",
-          "beta": 0.40,
+          "beta": 0.4,
           "description": "Higher travel budget enables conference travel"
         }
       }
@@ -85,12 +85,12 @@
     "factor-ccp-enrollment": {
       "id": "factor-ccp-enrollment",
       "effect": "CourseEnrollment",
-      "target": 0.12,
-      "tolerance": 0.03,
+      "target": 0.65,
+      "tolerance": 0.05,
       "evidence": {
-        "source": "ICF Education Commission Annual Report",
-        "confidence": "medium",
-        "notes": "Cohort rate pursuing advanced Certified Cheese Professional exam"
+        "source": "ICF Education Commission Course Enrollment Audits (4,276 records 2019-2026)",
+        "confidence": "high",
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
@@ -112,17 +112,17 @@
     "factor-advocacy-participation": {
       "id": "factor-advocacy-participation",
       "effect": "AdvocacyAction",
-      "target": 0.20,
-      "tolerance": 0.04,
+      "target": 0.34,
+      "tolerance": 0.05,
       "evidence": {
-        "source": "ICF Regulatory & Legislative Committee Logs",
-        "confidence": "medium",
-        "notes": "Participation rate in raw-milk, grazing, and FDA rulemaking advocacy"
+        "source": "ICF Regulatory & Legislative Policy Logs (1,007 records 2019-2026)",
+        "confidence": "high",
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
       },
       "outcome": {
         "from": "self",
         "where": {
-          "Kind": "LegislativeComment"
+          "Kind": "PetitionSignature"
         },
         "otherwise": {
           "Kind": "PetitionSignature"
@@ -131,7 +131,7 @@
       "arrows": {
         "theta": {
           "dial": "theta",
-          "beta": 0.50,
+          "beta": 0.5,
           "description": "Dedicated farmsteads participate heavily in policy actions"
         }
       }

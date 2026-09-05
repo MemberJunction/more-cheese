@@ -25,7 +25,7 @@ import './generated/generated.js';
 
 // Register the Betty AI provider (rasa.io). Fires @RegisterClass(BaseLLM,
 // "BettyBotLLM") so MJ's class factory can resolve the DriverClass on the
-// Betty AIModelVendor row (shipped via metadata/ai-model-vendors). The API key
+// Betty AIModelVendor row (shipped via config/ai-model-vendors). The API key
 // is supplied at runtime via AI_VENDOR_API_KEY__BETTYBOTLLM — never in the repo.
 import '@memberjunction/ai-betty-bot';
 

@@ -1,0 +1,13 @@
+[
+  {
+    "primaryKey": {
+      "ID": "D6B3CFD1-6C41-5A26-B89F-54C875097FA6"
+    },
+    "fields": {
+      "Name": "Betty",
+      "Description": "Association-trained retrieval assistant (rasa.io). Answers member questions grounded in the federation's published knowledge base.",
+      "AIModelTypeID": "@lookup:MJ: AI Model Types.Name=LLM",
+      "IsActive": true
+    }
+  }
+]

@@ -42,7 +42,7 @@ The repo is substantially further along than casual description suggests. An age
 `datagen/` is a causal, deterministic, benchmark-calibrated engine. Not a row filler.
 
 - **22 pipeline stages**, dependency-ordered, with the non-obvious mutation edges declared and suite-checked (`PIPELINE.md` is generated from code; the suite fails if they disagree)
-- **12 packs**, ~70 tables, **335 validation gates**
+- **12 packs**, ~70 tables, **validation test suite**
 - **Five declarative patterns** (`annualParticipation`, `childOutcome`, `recurringDecision`, `derivedTransaction`, `staticAssignment`) interpreted by `engine/patterns.mjs`
 - **The factor contract** — every causal claim is authored as `{ effect, feature, evidence }`, with evidence lint-enforced. The executor reads it forward, the validator derives recovery gates backward, RULESET.md renders it in English
 - **Deterministic identity** — `uuidv5(namespace, "entity:businessKey")`, per-project namespaces registered in `engine/ids.mjs`
@@ -86,7 +86,7 @@ Metadata-first, ruled 2026-07-24. Generate to `out/packs/*.json` → `emit-mjsyn
 
 - The capture is a **photograph of one push against one prepared database**. ~122,000 records, ~22 minutes, by hand, cannot run in CI. It has gone stale silently five times, once by 19,823 rows, with every gate green.
 - It ships as two ~68MB SQL files in the repo.
-- **CI does not run the datagen suite at all.** 335 gates, the engine-boundary checker, and the fixture build run only when someone remembers to type the command.
+- **CI does not run the datagen suite at all.** The validator suite, the engine-boundary checker, and the fixture build run only when someone remembers to type the command.
 - The world is anchored to `--release` with no wall clock, so it **ages** — left alone, "recent" activity drifts into the past.
 
 ---

@@ -1,0 +1,62 @@
+[
+  {
+    "primaryKey": {
+      "ID": "D486E40F-0667-5323-AD61-B2A9229F53AD"
+    },
+    "fields": {
+      "QuestionID": "F34437E7-0554-5218-88DC-EEEA90FFD2A6",
+      "Label": "Producer",
+      "Value": "Producer",
+      "DisplayOrder": 0,
+      "IsDefault": false
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7DD531C3-3AED-5F1B-86A7-CA09DED9B12E"
+    },
+    "fields": {
+      "QuestionID": "F34437E7-0554-5218-88DC-EEEA90FFD2A6",
+      "Label": "Retailer",
+      "Value": "Retailer",
+      "DisplayOrder": 1,
+      "IsDefault": false
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "81E61204-CC57-59E3-ACFE-7B1951EABFF2"
+    },
+    "fields": {
+      "QuestionID": "F34437E7-0554-5218-88DC-EEEA90FFD2A6",
+      "Label": "Supplier",
+      "Value": "Supplier",
+      "DisplayOrder": 2,
+      "IsDefault": false
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1054C88F-2324-542B-8255-994F970529BE"
+    },
+    "fields": {
+      "QuestionID": "F34437E7-0554-5218-88DC-EEEA90FFD2A6",
+      "Label": "Educator",
+      "Value": "Educator",
+      "DisplayOrder": 3,
+      "IsDefault": false
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4697A1AC-B8A4-5EC5-858C-EA5BCDFFC3C5"
+    },
+    "fields": {
+      "QuestionID": "F34437E7-0554-5218-88DC-EEEA90FFD2A6",
+      "Label": "Enthusiast",
+      "Value": "Enthusiast",
+      "DisplayOrder": 4,
+      "IsDefault": false
+    }
+  }
+]

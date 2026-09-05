@@ -9,8 +9,8 @@
 > `ScoreModel.Slug` is UNIQUE and the Sonar demo DB already owns three engagement slugs;
 > the ScoreModel⇄Version circular FK is resolved by a pack POSTAMBLE UPDATE.
 
-**Date:** 2026-07-23 · **Status:** BUILT + VERIFIED 2026-07-23. Suite green (113 gates
-at spot / 114 canonical). Verified three ways: (1) fresh full install (all 16 migrations,
+**Date:** 2026-07-23 · **Status:** BUILT + VERIFIED 2026-07-23. Suite green (validation
+suite at spot / canonical). Verified three ways: (1) fresh full install (all 16 migrations,
 row-level audit green); (2) live-stack UI pass — MJAPI served the pack; the reusable
 query rendered in Explorer, the Chat app listed + opened the seeded conversation
 (saved-view GRID rendering unwitnessed there: the only available Explorer client was

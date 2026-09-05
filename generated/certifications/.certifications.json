@@ -1,0 +1,86 @@
+[
+  {
+    "primaryKey": {
+      "ID": "740CA1E4-6E0E-5BC2-9B92-2A2B69A788CF"
+    },
+    "fields": {
+      "CertKey": "CERT-FOUNDATION",
+      "Name": "Cheese Foundations Certificate",
+      "Description": "Entry-level credential covering milk handling, basic make procedures, hygiene and cheese styles. No prerequisite; the usual first step into the federation's credential ladder.",
+      "ValidYears": 5,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E47053CA-362D-554B-ACEC-967CED84FFDE"
+    },
+    "fields": {
+      "CertKey": "CERT-FOODSAFETY",
+      "Name": "Food Safety & HACCP Certificate",
+      "Description": "Hazard analysis, environmental monitoring and recall readiness for small and mid-sized creameries. Shortest validity in the programme: food-safety practice moves, so holders recertify every two years.",
+      "ValidYears": 2,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "076D179A-0EB5-580A-AA09-AFBA24FF489D"
+    },
+    "fields": {
+      "CertKey": "CERT-MONGER",
+      "Name": "Certified Cheesemonger",
+      "Description": "Counter-side credential: cut and wrap, storage and rotation, customer guidance, and building a balanced case. Popular with retail members.",
+      "ValidYears": 4,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "169AD79A-12F1-54D1-893B-2DE6075D3C80"
+    },
+    "fields": {
+      "CertKey": "CERT-CCP",
+      "Name": "Certified Cheese Professional (CCP)",
+      "Description": "The federation's flagship professional credential. Requires documented working hours and a foundation certificate, and covers make procedures, affinage, safety and business practice end to end.",
+      "ValidYears": 3,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6B965323-F825-5614-97EE-796C25495964"
+    },
+    "fields": {
+      "CertKey": "CERT-SENSORY",
+      "Name": "Sensory Evaluation Certificate",
+      "Description": "Structured tasting, defect identification and scoring against style standards. The usual route onto a competition judging panel.",
+      "ValidYears": 3,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6BD99407-BFA9-501F-B122-F94A54ADB30C"
+    },
+    "fields": {
+      "CertKey": "CERT-AFFINAGE",
+      "Name": "Advanced Affinage Certificate",
+      "Description": "Advanced maturation practice: rind management, cave environment control and maturation planning across styles. Open to CCP holders.",
+      "ValidYears": 3,
+      "IsSharedDemo": true
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91EA0FA3-F9FA-5E06-BE47-6B28BC0368D5"
+    },
+    "fields": {
+      "CertKey": "CERT-JUDGE",
+      "Name": "Competition Judge Accreditation",
+      "Description": "Accreditation to judge federation competitions. Requires the sensory certificate plus supervised panel experience, and lapses quickly without active judging.",
+      "ValidYears": 2,
+      "IsSharedDemo": true
+    }
+  }
+]
