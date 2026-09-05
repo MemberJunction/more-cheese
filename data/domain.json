@@ -82,7 +82,8 @@
             "format": "base64",
             "nameField": "Name",
             "seedField": "ID"
-          }
+          },
+          "uniqueness": "generated"
         }
       },
       "foreignKeys": {},
@@ -125,20 +126,36 @@
           "name": "Status",
           "type": "string"
         },
+        "Gender": {
+          "name": "Gender",
+          "type": "string",
+          "nullable": true
+        },
         "PhotoURL": {
           "name": "PhotoURL",
           "type": "string",
           "nullable": true,
           "avatar": {
-            "style": "compact-svg",
+            "style": "toon-head",
             "format": "base64",
             "seedField": "ID",
             "traitField": "Gender",
             "traits": {
-              "Female": "long-hair",
-              "Male": "short-hair"
-            },
-            "defaultTrait": "neutral"
+              "Female": {
+                "rearHair": ["longStraight", "longWavy", "shoulderHigh"],
+                "rearHairProbability": 100,
+                "hairProbability": 0,
+                "beardProbability": 0,
+                "clothes": ["dress", "turtleNeck", "shirt"]
+              },
+              "Male": {
+                "hair": ["sideComed", "undercut", "spiky", "bun"],
+                "hairProbability": 100,
+                "rearHairProbability": 0,
+                "beardProbability": 40,
+                "clothes": ["shirt", "tShirt", "turtleNeck", "openJacket"]
+              }
+            }
           }
         }
       },
