@@ -16030,3 +16030,4093 @@ GRANT EXECUTE ON [${flyway:defaultSchema}].[spDeleteOrganizationProfile] TO [cdp
 EXEC [${mjSchema}].[spDeleteUnneededEntityFields] @ExcludedSchemaNames='sys,staging,dbo,${mjSchema},${mjSchema}_UDT,sample_app,AssociationDemo,Bookstore,${mjSchema}_BizAppsCommon,${mjSchema}_BizAppsTasks,${mjSchema}_BizAppsCommittees,${mjSchema}_BizAppsForms,${mjSchema}_BizAppsIssues,secure_messaging,${mjSchema}', @EntityIDs='49DF9400-9C38-422C-8DB6-1373D5392E35,23916A8E-3487-4793-9E18-C209EF097E58,9F493BE6-006B-4FC2-986C-D15AB527E65B,F2C9BD57-8734-4AFE-B20A-2C8C1C3BB25F,FF152388-ED04-4F1F-B237-94D502C4AA54,A3D95071-B312-40E2-AEF3-F90D8EF881AD,BE4D97E0-48DE-4240-A09F-8B39AD4BD043,16538F9B-E025-460D-9505-BD03A7648EC5,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,A3E60AF2-D7CA-407E-A1D3-34320E851892,428C670F-EBE3-41E6-86E4-EB5A274960A1';
 
 /* SQL text to insert 13 new entity field(s) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==============================================================================================
+   METADATA REFRESH — inlined copy of MJ/migrations/R__RefreshMetadata.sql
+   (minus ${flyway:timestamp}). EXEC target ${mjSchema} (__mj).
+   ============================================================================================== */
+
+/* SQL text to recompile all views (dependency order: inner layered views before g.* wrappers) */
+EXEC [${mjSchema}].spRecompileAllViews
+GO
+
+/* SQL text to update existing entities from schema */
+EXEC [${mjSchema}].spUpdateExistingEntitiesFromSchema @ExcludedSchemaNames='sys,staging'
+GO
+
+/* SQL text to sync schema info from database schemas */
+EXEC [${mjSchema}].spUpdateSchemaInfoFromDatabase @ExcludedSchemaNames='sys,staging'
+GO
+
+/* SQL text to delete unneeded entity fields */
+EXEC [${mjSchema}].spDeleteUnneededEntityFields @ExcludedSchemaNames='sys,staging'
+GO
+
+/* SQL text to update existing entity fields from schema */
+EXEC [${mjSchema}].spUpdateExistingEntityFieldsFromSchema @ExcludedSchemaNames='sys,staging'
+GO
+
+/* SQL text to set default column width where needed */
+EXEC [${mjSchema}].spSetDefaultColumnWidthWhereNeeded @ExcludedSchemaNames='sys,staging'
+GO
+
+/* SQL text to recompile all stored procedures in dependency order */
+EXEC [${mjSchema}].spRecompileAllProceduresInDependencyOrder @ExcludedSchemaNames='sys,staging', @LogOutput=0, @ContinueOnError=1
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================================================
+   ==== CODEGEN OUTPUT — DO NOT EDIT BELOW THIS LINE ====
+   Local MJ CLI 6.1.0-edge.5, includeSchemas morecheese_members/events/learning, --skipfiles.
+   Source: migrations/codegen/CodeGen_Run_2026-09-06_17-44-57.sql
+   ============================================================================================ */
+
+/* SQL text to update existing entities from schema */
+EXEC [${mjSchema}].[spUpdateExistingEntitiesFromSchema] @ExcludedSchemaNames='sys,staging,${mjSchema}', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to update existing entity fields from schema */
+EXEC [${mjSchema}].[spUpdateExistingEntityFieldsFromSchema] @ExcludedSchemaNames='sys,staging,${mjSchema}', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to set default column width where needed */
+EXEC [${mjSchema}].[spSetDefaultColumnWidthWhereNeeded] @ExcludedSchemaNames='sys,staging,${mjSchema}', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to insert entity field value with ID f08f9043-a777-4f78-bc01-d6805c74b45f */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('f08f9043-a777-4f78-bc01-d6805c74b45f', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 1, 'Awarded', 'Awarded', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 37316aa9-407f-4d04-a3f1-1e720924d4fa */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('37316aa9-407f-4d04-a3f1-1e720924d4fa', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 2, 'Expired', 'Expired', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 811e3745-816a-4a9c-b30d-bea4985fa3f3 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('811e3745-816a-4a9c-b30d-bea4985fa3f3', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 3, 'InProgress', 'InProgress', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 9dd4b88a-f5e1-49c5-a20d-2f847adbf9ed */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('9dd4b88a-f5e1-49c5-a20d-2f847adbf9ed', 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C', 4, 'Withdrawn', 'Withdrawn', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID E2A5D9ED-CA19-41D7-AAE1-476652D08C2C */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='E2A5D9ED-CA19-41D7-AAE1-476652D08C2C';
+
+/* SQL text to insert entity field value with ID 1b239f06-ecaa-4ce6-941b-7daae1108283 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('1b239f06-ecaa-4ce6-941b-7daae1108283', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 1, 'Bronze', 'Bronze', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID c91510b9-277d-4866-aada-d93291bfff10 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('c91510b9-277d-4866-aada-d93291bfff10', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 2, 'Gold', 'Gold', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 470b82fa-c3c9-46c1-a8e7-996b49d87bb0 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('470b82fa-c3c9-46c1-a8e7-996b49d87bb0', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 3, 'None', 'None', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID cf439853-e337-4786-9105-ce67af4a4202 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('cf439853-e337-4786-9105-ce67af4a4202', '67EAF2F0-0B72-4794-8880-E0BA4F900542', 4, 'Silver', 'Silver', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 67EAF2F0-0B72-4794-8880-E0BA4F900542 */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='67EAF2F0-0B72-4794-8880-E0BA4F900542';
+
+/* SQL text to insert entity field value with ID bca80f94-99ac-493b-ad7a-3399837e5aeb */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('bca80f94-99ac-493b-ad7a-3399837e5aeb', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 1, 'CoalitionMeeting', 'CoalitionMeeting', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 8a205129-b191-4b09-93ef-103fbcb334a6 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('8a205129-b191-4b09-93ef-103fbcb334a6', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 2, 'LetterCampaign', 'LetterCampaign', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID ce34927f-65c5-4322-873b-f6b1ac3da8aa */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('ce34927f-65c5-4322-873b-f6b1ac3da8aa', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 3, 'PetitionSignature', 'PetitionSignature', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 01a31b48-4838-4def-af57-98c115f04cee */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('01a31b48-4838-4def-af57-98c115f04cee', '0A8440BD-A3B6-4257-8003-DCD137773CEA', 4, 'Testimony', 'Testimony', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 0A8440BD-A3B6-4257-8003-DCD137773CEA */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='0A8440BD-A3B6-4257-8003-DCD137773CEA';
+
+/* SQL text to insert entity field value with ID 090d090a-6746-4e38-bb4c-fce1b8f8db11 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('090d090a-6746-4e38-bb4c-fce1b8f8db11', '2450C51E-480C-4E3F-9464-82D92305E54C', 1, 'DuplicatePerson', 'DuplicatePerson', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID b1533ba9-743e-4549-884a-7ea7f56f212b */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('b1533ba9-743e-4549-884a-7ea7f56f212b', '2450C51E-480C-4E3F-9464-82D92305E54C', 2, 'StaleEmployer', 'StaleEmployer', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID f5314a0f-79bb-4680-ae00-4eb2fbab1600 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('f5314a0f-79bb-4680-ae00-4eb2fbab1600', '2450C51E-480C-4E3F-9464-82D92305E54C', 3, 'TypoEmail', 'TypoEmail', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 2450C51E-480C-4E3F-9464-82D92305E54C */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='2450C51E-480C-4E3F-9464-82D92305E54C';
+
+/* SQL text to insert entity field value with ID e4542e2d-5504-45ff-ac2b-7d5ce4901880 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('e4542e2d-5504-45ff-ac2b-7d5ce4901880', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 1, 'Educator', 'Educator', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 52c33e2b-2a5c-48e3-840f-aa62d7a8bd7c */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('52c33e2b-2a5c-48e3-840f-aa62d7a8bd7c', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 2, 'Producer', 'Producer', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 5aa88cec-cc4e-4136-bcb7-bbbbc3edd456 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('5aa88cec-cc4e-4136-bcb7-bbbbc3edd456', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 3, 'Retailer', 'Retailer', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 40cdefd1-109a-4fc0-9ca9-cdf48f06a1ae */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('40cdefd1-109a-4fc0-9ca9-cdf48f06a1ae', '6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E', 4, 'Supplier', 'Supplier', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='6DE789B0-6C3C-4773-90A6-5DB6CFBE3C3E';
+
+/* SQL text to insert entity field value with ID 4ff7feb2-a588-49a7-97c0-cbbcb0091912 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('4ff7feb2-a588-49a7-97c0-cbbcb0091912', '57F15499-1FEF-42EA-B670-39B2DC619EEC', 1, 'EU', 'EU', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID f0fae361-dd5f-4b2b-83c6-0a336c433193 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('f0fae361-dd5f-4b2b-83c6-0a336c433193', '57F15499-1FEF-42EA-B670-39B2DC619EEC', 2, 'NA', 'NA', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 9777e090-4f07-45e4-8392-332700b958ca */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('9777e090-4f07-45e4-8392-332700b958ca', '57F15499-1FEF-42EA-B670-39B2DC619EEC', 3, 'RoW', 'RoW', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 57F15499-1FEF-42EA-B670-39B2DC619EEC */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='57F15499-1FEF-42EA-B670-39B2DC619EEC';
+
+/* SQL text to insert entity field value with ID a3b3de8b-17a8-4496-9676-74b10f46544f */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('a3b3de8b-17a8-4496-9676-74b10f46544f', '3F53B245-8F1D-4B8A-AD6B-86F536A22DEA', 1, 'Acquired', 'Acquired', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 3f297ce6-949e-4602-80d3-ce352ce8b148 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('3f297ce6-949e-4602-80d3-ce352ce8b148', '3F53B245-8F1D-4B8A-AD6B-86F536A22DEA', 2, 'Dissolved', 'Dissolved', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 113b77a8-c64a-4c66-81ec-8f42734922c2 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('113b77a8-c64a-4c66-81ec-8f42734922c2', '3F53B245-8F1D-4B8A-AD6B-86F536A22DEA', 3, 'ProgramCut', 'ProgramCut', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 3F53B245-8F1D-4B8A-AD6B-86F536A22DEA */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='3F53B245-8F1D-4B8A-AD6B-86F536A22DEA';
+
+/* SQL text to insert entity field value with ID 42cd544e-d9d7-4e1c-8392-4388b76ef61c */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('42cd544e-d9d7-4e1c-8392-4388b76ef61c', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 1, 'Educator', 'Educator', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 246f7385-b271-4a55-8cd0-db32f8eb1ad2 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('246f7385-b271-4a55-8cd0-db32f8eb1ad2', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 2, 'Enthusiast', 'Enthusiast', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 22d5eff9-54a7-42ec-b00f-6882b4bd8276 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('22d5eff9-54a7-42ec-b00f-6882b4bd8276', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 3, 'Producer', 'Producer', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 3bc855ab-2c8c-4821-af2a-f6405a9934af */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('3bc855ab-2c8c-4821-af2a-f6405a9934af', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 4, 'Retailer', 'Retailer', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 4b48fd9f-fe1a-47bd-a348-b993fbe4ebb4 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('4b48fd9f-fe1a-47bd-a348-b993fbe4ebb4', 'E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F', 5, 'Supplier', 'Supplier', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='E0442068-AE13-4CC6-A5AA-6E2EBE16EF0F';
+
+/* SQL text to insert entity field value with ID 63125cf8-7074-4bea-a23b-c71554594c61 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('63125cf8-7074-4bea-a23b-c71554594c61', '8FA7894D-19E6-4662-82D9-C923A8A8CA57', 1, 'EU', 'EU', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 202888a8-5b66-4f63-85c9-f7cb7104fd53 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('202888a8-5b66-4f63-85c9-f7cb7104fd53', '8FA7894D-19E6-4662-82D9-C923A8A8CA57', 2, 'NA', 'NA', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 6995f97e-aac3-4b78-924a-3ff37e7d89d4 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('6995f97e-aac3-4b78-924a-3ff37e7d89d4', '8FA7894D-19E6-4662-82D9-C923A8A8CA57', 3, 'RoW', 'RoW', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 8FA7894D-19E6-4662-82D9-C923A8A8CA57 */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='8FA7894D-19E6-4662-82D9-C923A8A8CA57';
+
+/* SQL text to insert entity field value with ID c22d033b-d43b-4f31-b047-8f4aff1c8a10 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('c22d033b-d43b-4f31-b047-8f4aff1c8a10', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 1, 'Active', 'Active', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 9b0be239-b025-48ee-803a-e03c989946ca */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('9b0be239-b025-48ee-803a-e03c989946ca', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 2, 'Cancelled', 'Cancelled', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 5f7a1a0b-f23b-4e73-93cd-41f44dace45a */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('5f7a1a0b-f23b-4e73-93cd-41f44dace45a', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 3, 'Lapsed', 'Lapsed', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 40cc710b-0db2-45b6-859e-59c5d58fff5e */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('40cc710b-0db2-45b6-859e-59c5d58fff5e', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 4, 'PendingRenewal', 'PendingRenewal', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID c3f81dae-f069-4b3e-abac-f07b98f3238a */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('c3f81dae-f069-4b3e-abac-f07b98f3238a', '66AB3F67-D88F-4002-9601-8F45FF1E9943', 5, 'Renewed', 'Renewed', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 66AB3F67-D88F-4002-9601-8F45FF1E9943 */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='66AB3F67-D88F-4002-9601-8F45FF1E9943';
+
+/* SQL text to insert entity field value with ID 1e945c1e-4f0b-4a68-8468-baf8be9765eb */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('1e945c1e-4f0b-4a68-8468-baf8be9765eb', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 1, 'Corporate', 'Corporate', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 6a4531d7-0ff2-4f5e-b424-84aab4a91ed7 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('6a4531d7-0ff2-4f5e-b424-84aab4a91ed7', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 2, 'Enthusiast', 'Enthusiast', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID ba6c0415-9f65-49db-ad22-5d6bad202dae */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('ba6c0415-9f65-49db-ad22-5d6bad202dae', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 3, 'Individual', 'Individual', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID ad3c7ae5-1cf3-4364-85f3-612ee3c90e34 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('ad3c7ae5-1cf3-4364-85f3-612ee3c90e34', 'AF860254-0C86-4EFE-AECD-B3E11A10B73F', 4, 'SmallBusiness', 'SmallBusiness', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID AF860254-0C86-4EFE-AECD-B3E11A10B73F */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='AF860254-0C86-4EFE-AECD-B3E11A10B73F';
+
+/* SQL text to insert entity field value with ID 0c3bf1af-84a7-4334-818d-15c3c9082e86 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('0c3bf1af-84a7-4334-818d-15c3c9082e86', '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A', 1, 'Conference', 'Conference', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 9b3f2592-012e-46c1-9756-875aba8fef22 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('9b3f2592-012e-46c1-9756-875aba8fef22', '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A', 2, 'Webinar', 'Webinar', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 3372d9de-d0f5-43e7-a637-9ef3a973b609 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('3372d9de-d0f5-43e7-a637-9ef3a973b609', '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A', 3, 'Workshop', 'Workshop', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID 40E4EAC3-EDB5-4AE1-AF99-593C4D74460A */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='40E4EAC3-EDB5-4AE1-AF99-593C4D74460A';
+
+/* SQL text to insert entity field value with ID 449a9479-ac92-4a3d-9245-b0951bfb7b1b */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('449a9479-ac92-4a3d-9245-b0951bfb7b1b', 'FAEE9E23-7A30-473B-9233-17AC3FE977A2', 1, 'Completed', 'Completed', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID b28900dc-8a7d-412b-a289-3e37e200ba15 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('b28900dc-8a7d-412b-a289-3e37e200ba15', 'FAEE9E23-7A30-473B-9233-17AC3FE977A2', 2, 'Dropped', 'Dropped', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to insert entity field value with ID 8048431a-5e41-4a39-a133-24f0897c4a80 */
+INSERT INTO [${mjSchema}].[EntityFieldValue]
+                                       ([ID], [EntityFieldID], [Sequence], [Value], [Code], [__mj_CreatedAt], [__mj_UpdatedAt])
+                                    VALUES
+                                       ('8048431a-5e41-4a39-a133-24f0897c4a80', 'FAEE9E23-7A30-473B-9233-17AC3FE977A2', 3, 'InProgress', 'InProgress', GETUTCDATE(), GETUTCDATE());
+
+/* SQL text to update ValueListType for entity field ID FAEE9E23-7A30-473B-9233-17AC3FE977A2 */
+UPDATE [${mjSchema}].[EntityField] SET ValueListType='List' WHERE ID='FAEE9E23-7A30-473B-9233-17AC3FE977A2';
+
+/* SQL text to sync schema info from database schemas */
+EXEC [${mjSchema}].[spUpdateSchemaInfoFromDatabase] @ExcludedSchemaNames='sys,staging,${mjSchema}', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to update entity field related entity name field map for entity field ID 04FB77E8-2A7F-4446-9A90-9BA70889AAAB */
+EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='04FB77E8-2A7F-4446-9A90-9BA70889AAAB', @RelatedEntityNameFieldMap='Person';
+
+/* Index for Foreign Keys for Certification */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Certifications
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------;
+
+/* Index for Foreign Keys for CompetitionEntry */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Competition Entries
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+-- Index for foreign key PersonID in table CompetitionEntry
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_CompetitionEntry_PersonID' 
+    AND object_id = OBJECT_ID('[morecheese_events].[CompetitionEntry]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_CompetitionEntry_PersonID ON [morecheese_events].[CompetitionEntry] ([PersonID]);
+
+-- Index for foreign key OrganizationID in table CompetitionEntry
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_CompetitionEntry_OrganizationID' 
+    AND object_id = OBJECT_ID('[morecheese_events].[CompetitionEntry]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_CompetitionEntry_OrganizationID ON [morecheese_events].[CompetitionEntry] ([OrganizationID]);
+
+/* SQL text to update entity field related entity name field map for entity field ID 92DD1DF5-83C7-487A-8B9B-99E263C5875E */
+EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='92DD1DF5-83C7-487A-8B9B-99E263C5875E', @RelatedEntityNameFieldMap='Person';
+
+/* Index for Foreign Keys for CourseEnrollment */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Course Enrollments
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+-- Index for foreign key PersonID in table CourseEnrollment
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_CourseEnrollment_PersonID' 
+    AND object_id = OBJECT_ID('[morecheese_learning].[CourseEnrollment]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_CourseEnrollment_PersonID ON [morecheese_learning].[CourseEnrollment] ([PersonID]);
+
+-- Index for foreign key CourseID in table CourseEnrollment
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_CourseEnrollment_CourseID' 
+    AND object_id = OBJECT_ID('[morecheese_learning].[CourseEnrollment]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_CourseEnrollment_CourseID ON [morecheese_learning].[CourseEnrollment] ([CourseID]);
+
+/* SQL text to update entity field related entity name field map for entity field ID AC3E81FA-C066-4370-8FAE-80D5754F5320 */
+EXEC [${mjSchema}].[spUpdateEntityFieldRelatedEntityNameFieldMap] @EntityFieldID='AC3E81FA-C066-4370-8FAE-80D5754F5320', @RelatedEntityNameFieldMap='Person';
+
+/* Index for Foreign Keys for Course */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Courses
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------;
+
+/* Index for Foreign Keys for EventRegistration */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Event Registrations
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+-- Index for foreign key PersonID in table EventRegistration
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_EventRegistration_PersonID' 
+    AND object_id = OBJECT_ID('[morecheese_events].[EventRegistration]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_EventRegistration_PersonID ON [morecheese_events].[EventRegistration] ([PersonID]);
+
+-- Index for foreign key EventID in table EventRegistration
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_EventRegistration_EventID' 
+    AND object_id = OBJECT_ID('[morecheese_events].[EventRegistration]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_EventRegistration_EventID ON [morecheese_events].[EventRegistration] ([EventID]);
+
+/* Index for Foreign Keys for Event */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------;
+
+/* Base View SQL for MoreCheese: Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Certifications
+-- Item: vwCertifications
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Certifications
+-----               SCHEMA:      morecheese_learning
+-----               BASE TABLE:  Certification
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[vwCertifications]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_learning].[vwCertifications];
+GO
+
+CREATE VIEW [morecheese_learning].[vwCertifications]
+AS
+SELECT
+    c.*
+FROM
+    [morecheese_learning].[Certification] AS c
+GO
+GRANT SELECT ON [morecheese_learning].[vwCertifications] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Certifications
+-- Item: Permissions for vwCertifications
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_learning].[vwCertifications] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Certifications
+-- Item: spCreateCertification
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR Certification
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spCreateCertification]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spCreateCertification];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spCreateCertification]
+    @ID uniqueidentifier = NULL,
+    @CertKey nvarchar(50),
+    @Name nvarchar(200),
+    @Description_Clear bit = 0,
+    @Description nvarchar(MAX) = NULL,
+    @ValidYears int = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_learning].[Certification]
+            (
+                [ID],
+                [CertKey],
+                [Name],
+                [Description],
+                [ValidYears],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @CertKey,
+                @Name,
+                CASE WHEN @Description_Clear = 1 THEN NULL ELSE ISNULL(@Description, NULL) END,
+                ISNULL(@ValidYears, 3),
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_learning].[Certification]
+            (
+                [CertKey],
+                [Name],
+                [Description],
+                [ValidYears],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @CertKey,
+                @Name,
+                CASE WHEN @Description_Clear = 1 THEN NULL ELSE ISNULL(@Description, NULL) END,
+                ISNULL(@ValidYears, 3),
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_learning].[vwCertifications] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spCreateCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Certifications */
+
+GRANT EXECUTE ON [morecheese_learning].[spCreateCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Certifications
+-- Item: spUpdateCertification
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR Certification
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spUpdateCertification]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spUpdateCertification];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spUpdateCertification]
+    @ID uniqueidentifier,
+    @CertKey nvarchar(50) = NULL,
+    @Name nvarchar(200) = NULL,
+    @Description_Clear bit = 0,
+    @Description nvarchar(MAX) = NULL,
+    @ValidYears int = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[Certification]
+    SET
+        [CertKey] = ISNULL(@CertKey, [CertKey]),
+        [Name] = ISNULL(@Name, [Name]),
+        [Description] = CASE WHEN @Description_Clear = 1 THEN NULL ELSE ISNULL(@Description, [Description]) END,
+        [ValidYears] = ISNULL(@ValidYears, [ValidYears]),
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_learning].[vwCertifications] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_learning].[vwCertifications]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateCertification] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the Certification table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[trgUpdateCertification]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_learning].[trgUpdateCertification];
+GO
+CREATE TRIGGER [morecheese_learning].trgUpdateCertification
+ON [morecheese_learning].[Certification]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[Certification]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_learning].[Certification] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Certifications */
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* Base View SQL for MoreCheese: Courses */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Courses
+-- Item: vwCourses
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Courses
+-----               SCHEMA:      morecheese_learning
+-----               BASE TABLE:  Course
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[vwCourses]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_learning].[vwCourses];
+GO
+
+CREATE VIEW [morecheese_learning].[vwCourses]
+AS
+SELECT
+    c.*
+FROM
+    [morecheese_learning].[Course] AS c
+GO
+GRANT SELECT ON [morecheese_learning].[vwCourses] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Courses */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Courses
+-- Item: Permissions for vwCourses
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_learning].[vwCourses] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Courses */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Courses
+-- Item: spCreateCourse
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR Course
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spCreateCourse]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spCreateCourse];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spCreateCourse]
+    @ID uniqueidentifier = NULL,
+    @CourseKey nvarchar(50),
+    @Name nvarchar(200),
+    @StartDate date,
+    @DurationWeeks int,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_learning].[Course]
+            (
+                [ID],
+                [CourseKey],
+                [Name],
+                [StartDate],
+                [DurationWeeks],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @CourseKey,
+                @Name,
+                @StartDate,
+                @DurationWeeks,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_learning].[Course]
+            (
+                [CourseKey],
+                [Name],
+                [StartDate],
+                [DurationWeeks],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @CourseKey,
+                @Name,
+                @StartDate,
+                @DurationWeeks,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_learning].[vwCourses] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spCreateCourse] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Courses */
+
+GRANT EXECUTE ON [morecheese_learning].[spCreateCourse] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Courses */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Courses
+-- Item: spUpdateCourse
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR Course
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spUpdateCourse]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spUpdateCourse];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spUpdateCourse]
+    @ID uniqueidentifier,
+    @CourseKey nvarchar(50) = NULL,
+    @Name nvarchar(200) = NULL,
+    @StartDate date = NULL,
+    @DurationWeeks int = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[Course]
+    SET
+        [CourseKey] = ISNULL(@CourseKey, [CourseKey]),
+        [Name] = ISNULL(@Name, [Name]),
+        [StartDate] = ISNULL(@StartDate, [StartDate]),
+        [DurationWeeks] = ISNULL(@DurationWeeks, [DurationWeeks]),
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_learning].[vwCourses] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_learning].[vwCourses]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateCourse] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the Course table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[trgUpdateCourse]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_learning].[trgUpdateCourse];
+GO
+CREATE TRIGGER [morecheese_learning].trgUpdateCourse
+ON [morecheese_learning].[Course]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[Course]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_learning].[Course] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Courses */
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateCourse] TO [cdp_Developer], [cdp_Integration];
+
+/* Base View SQL for MoreCheese: Event Registrations */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Event Registrations
+-- Item: vwEventRegistrations
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Event Registrations
+-----               SCHEMA:      morecheese_events
+-----               BASE TABLE:  EventRegistration
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[vwEventRegistrations]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_events].[vwEventRegistrations];
+GO
+
+CREATE VIEW [morecheese_events].[vwEventRegistrations]
+AS
+SELECT
+    e.*,
+    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person],
+    morecheeseeventsEvent_EventID.[Name] AS [Event]
+FROM
+    [morecheese_events].[EventRegistration] AS e
+INNER JOIN
+    [${mjSchema}_BizAppsCommon].[Person] AS mjBizAppsCommonPerson_PersonID
+  ON
+    [e].[PersonID] = mjBizAppsCommonPerson_PersonID.[ID]
+INNER JOIN
+    [morecheese_events].[Event] AS morecheeseeventsEvent_EventID
+  ON
+    [e].[EventID] = morecheeseeventsEvent_EventID.[ID]
+GO
+GRANT SELECT ON [morecheese_events].[vwEventRegistrations] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Event Registrations */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Event Registrations
+-- Item: Permissions for vwEventRegistrations
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_events].[vwEventRegistrations] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Event Registrations */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Event Registrations
+-- Item: spCreateEventRegistration
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR EventRegistration
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spCreateEventRegistration]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spCreateEventRegistration];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spCreateEventRegistration]
+    @ID uniqueidentifier = NULL,
+    @RegKey nvarchar(120),
+    @PersonID uniqueidentifier,
+    @EventID uniqueidentifier,
+    @RegisteredOn date,
+    @Attended_Clear bit = 0,
+    @Attended bit = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_events].[EventRegistration]
+            (
+                [ID],
+                [RegKey],
+                [PersonID],
+                [EventID],
+                [RegisteredOn],
+                [Attended],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @RegKey,
+                @PersonID,
+                @EventID,
+                @RegisteredOn,
+                CASE WHEN @Attended_Clear = 1 THEN NULL ELSE ISNULL(@Attended, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_events].[EventRegistration]
+            (
+                [RegKey],
+                [PersonID],
+                [EventID],
+                [RegisteredOn],
+                [Attended],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @RegKey,
+                @PersonID,
+                @EventID,
+                @RegisteredOn,
+                CASE WHEN @Attended_Clear = 1 THEN NULL ELSE ISNULL(@Attended, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_events].[vwEventRegistrations] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spCreateEventRegistration] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Event Registrations */
+
+GRANT EXECUTE ON [morecheese_events].[spCreateEventRegistration] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Event Registrations */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Event Registrations
+-- Item: spUpdateEventRegistration
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR EventRegistration
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spUpdateEventRegistration]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spUpdateEventRegistration];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spUpdateEventRegistration]
+    @ID uniqueidentifier,
+    @RegKey nvarchar(120) = NULL,
+    @PersonID uniqueidentifier = NULL,
+    @EventID uniqueidentifier = NULL,
+    @RegisteredOn date = NULL,
+    @Attended_Clear bit = 0,
+    @Attended bit = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[EventRegistration]
+    SET
+        [RegKey] = ISNULL(@RegKey, [RegKey]),
+        [PersonID] = ISNULL(@PersonID, [PersonID]),
+        [EventID] = ISNULL(@EventID, [EventID]),
+        [RegisteredOn] = ISNULL(@RegisteredOn, [RegisteredOn]),
+        [Attended] = CASE WHEN @Attended_Clear = 1 THEN NULL ELSE ISNULL(@Attended, [Attended]) END,
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_events].[vwEventRegistrations] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_events].[vwEventRegistrations]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateEventRegistration] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the EventRegistration table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[trgUpdateEventRegistration]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_events].[trgUpdateEventRegistration];
+GO
+CREATE TRIGGER [morecheese_events].trgUpdateEventRegistration
+ON [morecheese_events].[EventRegistration]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[EventRegistration]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_events].[EventRegistration] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Event Registrations */
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateEventRegistration] TO [cdp_Developer], [cdp_Integration];
+
+/* Base View SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: vwEvents
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Events
+-----               SCHEMA:      morecheese_events
+-----               BASE TABLE:  Event
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[vwEvents]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_events].[vwEvents];
+GO
+
+CREATE VIEW [morecheese_events].[vwEvents]
+AS
+SELECT
+    e.*
+FROM
+    [morecheese_events].[Event] AS e
+GO
+GRANT SELECT ON [morecheese_events].[vwEvents] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: Permissions for vwEvents
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_events].[vwEvents] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: spCreateEvent
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR Event
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spCreateEvent]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spCreateEvent];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spCreateEvent]
+    @ID uniqueidentifier = NULL,
+    @EventKey nvarchar(50),
+    @Name nvarchar(200),
+    @EventType nvarchar(50),
+    @EventDate date,
+    @IsVirtual bit = NULL,
+    @IsPaid bit = NULL,
+    @City_Clear bit = 0,
+    @City nvarchar(100) = NULL,
+    @State_Clear bit = 0,
+    @State nvarchar(50) = NULL,
+    @Latitude_Clear bit = 0,
+    @Latitude decimal(9, 6) = NULL,
+    @Longitude_Clear bit = 0,
+    @Longitude decimal(9, 6) = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_events].[Event]
+            (
+                [ID],
+                [EventKey],
+                [Name],
+                [EventType],
+                [EventDate],
+                [IsVirtual],
+                [IsPaid],
+                [City],
+                [State],
+                [Latitude],
+                [Longitude],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @EventKey,
+                @Name,
+                @EventType,
+                @EventDate,
+                ISNULL(@IsVirtual, 0),
+                ISNULL(@IsPaid, 0),
+                CASE WHEN @City_Clear = 1 THEN NULL ELSE ISNULL(@City, NULL) END,
+                CASE WHEN @State_Clear = 1 THEN NULL ELSE ISNULL(@State, NULL) END,
+                CASE WHEN @Latitude_Clear = 1 THEN NULL ELSE ISNULL(@Latitude, NULL) END,
+                CASE WHEN @Longitude_Clear = 1 THEN NULL ELSE ISNULL(@Longitude, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_events].[Event]
+            (
+                [EventKey],
+                [Name],
+                [EventType],
+                [EventDate],
+                [IsVirtual],
+                [IsPaid],
+                [City],
+                [State],
+                [Latitude],
+                [Longitude],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @EventKey,
+                @Name,
+                @EventType,
+                @EventDate,
+                ISNULL(@IsVirtual, 0),
+                ISNULL(@IsPaid, 0),
+                CASE WHEN @City_Clear = 1 THEN NULL ELSE ISNULL(@City, NULL) END,
+                CASE WHEN @State_Clear = 1 THEN NULL ELSE ISNULL(@State, NULL) END,
+                CASE WHEN @Latitude_Clear = 1 THEN NULL ELSE ISNULL(@Latitude, NULL) END,
+                CASE WHEN @Longitude_Clear = 1 THEN NULL ELSE ISNULL(@Longitude, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_events].[vwEvents] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spCreateEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Events */
+
+GRANT EXECUTE ON [morecheese_events].[spCreateEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: spUpdateEvent
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR Event
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spUpdateEvent]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spUpdateEvent];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spUpdateEvent]
+    @ID uniqueidentifier,
+    @EventKey nvarchar(50) = NULL,
+    @Name nvarchar(200) = NULL,
+    @EventType nvarchar(50) = NULL,
+    @EventDate date = NULL,
+    @IsVirtual bit = NULL,
+    @IsPaid bit = NULL,
+    @City_Clear bit = 0,
+    @City nvarchar(100) = NULL,
+    @State_Clear bit = 0,
+    @State nvarchar(50) = NULL,
+    @Latitude_Clear bit = 0,
+    @Latitude decimal(9, 6) = NULL,
+    @Longitude_Clear bit = 0,
+    @Longitude decimal(9, 6) = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[Event]
+    SET
+        [EventKey] = ISNULL(@EventKey, [EventKey]),
+        [Name] = ISNULL(@Name, [Name]),
+        [EventType] = ISNULL(@EventType, [EventType]),
+        [EventDate] = ISNULL(@EventDate, [EventDate]),
+        [IsVirtual] = ISNULL(@IsVirtual, [IsVirtual]),
+        [IsPaid] = ISNULL(@IsPaid, [IsPaid]),
+        [City] = CASE WHEN @City_Clear = 1 THEN NULL ELSE ISNULL(@City, [City]) END,
+        [State] = CASE WHEN @State_Clear = 1 THEN NULL ELSE ISNULL(@State, [State]) END,
+        [Latitude] = CASE WHEN @Latitude_Clear = 1 THEN NULL ELSE ISNULL(@Latitude, [Latitude]) END,
+        [Longitude] = CASE WHEN @Longitude_Clear = 1 THEN NULL ELSE ISNULL(@Longitude, [Longitude]) END,
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_events].[vwEvents] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_events].[vwEvents]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateEvent] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the Event table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[trgUpdateEvent]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_events].[trgUpdateEvent];
+GO
+CREATE TRIGGER [morecheese_events].trgUpdateEvent
+ON [morecheese_events].[Event]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[Event]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_events].[Event] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Events */
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Certifications
+-- Item: spDeleteCertification
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR Certification
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spDeleteCertification]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spDeleteCertification];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spDeleteCertification]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_learning].[Certification]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spDeleteCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Certifications */
+
+GRANT EXECUTE ON [morecheese_learning].[spDeleteCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Courses */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Courses
+-- Item: spDeleteCourse
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR Course
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spDeleteCourse]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spDeleteCourse];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spDeleteCourse]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_learning].[Course]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spDeleteCourse] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Courses */
+
+GRANT EXECUTE ON [morecheese_learning].[spDeleteCourse] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Event Registrations */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Event Registrations
+-- Item: spDeleteEventRegistration
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR EventRegistration
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spDeleteEventRegistration]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spDeleteEventRegistration];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spDeleteEventRegistration]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_events].[EventRegistration]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spDeleteEventRegistration] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Event Registrations */
+
+GRANT EXECUTE ON [morecheese_events].[spDeleteEventRegistration] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: spDeleteEvent
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR Event
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spDeleteEvent]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spDeleteEvent];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spDeleteEvent]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_events].[Event]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spDeleteEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Events */
+
+GRANT EXECUTE ON [morecheese_events].[spDeleteEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* Base View SQL for MoreCheese: Competition Entries */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Competition Entries
+-- Item: vwCompetitionEntries
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Competition Entries
+-----               SCHEMA:      morecheese_events
+-----               BASE TABLE:  CompetitionEntry
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[vwCompetitionEntries]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_events].[vwCompetitionEntries];
+GO
+
+CREATE VIEW [morecheese_events].[vwCompetitionEntries]
+AS
+SELECT
+    c.*,
+    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person],
+    mjBizAppsCommonOrganization_OrganizationID.[Name] AS [Organization]
+FROM
+    [morecheese_events].[CompetitionEntry] AS c
+INNER JOIN
+    [${mjSchema}_BizAppsCommon].[Person] AS mjBizAppsCommonPerson_PersonID
+  ON
+    [c].[PersonID] = mjBizAppsCommonPerson_PersonID.[ID]
+LEFT OUTER JOIN
+    [${mjSchema}_BizAppsCommon].[Organization] AS mjBizAppsCommonOrganization_OrganizationID
+  ON
+    [c].[OrganizationID] = mjBizAppsCommonOrganization_OrganizationID.[ID]
+GO
+GRANT SELECT ON [morecheese_events].[vwCompetitionEntries] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Competition Entries */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Competition Entries
+-- Item: Permissions for vwCompetitionEntries
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_events].[vwCompetitionEntries] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Competition Entries */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Competition Entries
+-- Item: spCreateCompetitionEntry
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR CompetitionEntry
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spCreateCompetitionEntry]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spCreateCompetitionEntry];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spCreateCompetitionEntry]
+    @ID uniqueidentifier = NULL,
+    @EntryKey nvarchar(80),
+    @PersonID uniqueidentifier,
+    @OrganizationID_Clear bit = 0,
+    @OrganizationID uniqueidentifier = NULL,
+    @EntryYear int,
+    @Category nvarchar(100),
+    @ProductName nvarchar(200),
+    @Result nvarchar(50) = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_events].[CompetitionEntry]
+            (
+                [ID],
+                [EntryKey],
+                [PersonID],
+                [OrganizationID],
+                [EntryYear],
+                [Category],
+                [ProductName],
+                [Result],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @EntryKey,
+                @PersonID,
+                CASE WHEN @OrganizationID_Clear = 1 THEN NULL ELSE ISNULL(@OrganizationID, NULL) END,
+                @EntryYear,
+                @Category,
+                @ProductName,
+                ISNULL(@Result, 'None'),
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_events].[CompetitionEntry]
+            (
+                [EntryKey],
+                [PersonID],
+                [OrganizationID],
+                [EntryYear],
+                [Category],
+                [ProductName],
+                [Result],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @EntryKey,
+                @PersonID,
+                CASE WHEN @OrganizationID_Clear = 1 THEN NULL ELSE ISNULL(@OrganizationID, NULL) END,
+                @EntryYear,
+                @Category,
+                @ProductName,
+                ISNULL(@Result, 'None'),
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_events].[vwCompetitionEntries] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spCreateCompetitionEntry] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Competition Entries */
+
+GRANT EXECUTE ON [morecheese_events].[spCreateCompetitionEntry] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Competition Entries */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Competition Entries
+-- Item: spUpdateCompetitionEntry
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR CompetitionEntry
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spUpdateCompetitionEntry]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spUpdateCompetitionEntry];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spUpdateCompetitionEntry]
+    @ID uniqueidentifier,
+    @EntryKey nvarchar(80) = NULL,
+    @PersonID uniqueidentifier = NULL,
+    @OrganizationID_Clear bit = 0,
+    @OrganizationID uniqueidentifier = NULL,
+    @EntryYear int = NULL,
+    @Category nvarchar(100) = NULL,
+    @ProductName nvarchar(200) = NULL,
+    @Result nvarchar(50) = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[CompetitionEntry]
+    SET
+        [EntryKey] = ISNULL(@EntryKey, [EntryKey]),
+        [PersonID] = ISNULL(@PersonID, [PersonID]),
+        [OrganizationID] = CASE WHEN @OrganizationID_Clear = 1 THEN NULL ELSE ISNULL(@OrganizationID, [OrganizationID]) END,
+        [EntryYear] = ISNULL(@EntryYear, [EntryYear]),
+        [Category] = ISNULL(@Category, [Category]),
+        [ProductName] = ISNULL(@ProductName, [ProductName]),
+        [Result] = ISNULL(@Result, [Result]),
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_events].[vwCompetitionEntries] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_events].[vwCompetitionEntries]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateCompetitionEntry] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the CompetitionEntry table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[trgUpdateCompetitionEntry]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_events].[trgUpdateCompetitionEntry];
+GO
+CREATE TRIGGER [morecheese_events].trgUpdateCompetitionEntry
+ON [morecheese_events].[CompetitionEntry]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[CompetitionEntry]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_events].[CompetitionEntry] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Competition Entries */
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateCompetitionEntry] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Competition Entries */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Competition Entries
+-- Item: spDeleteCompetitionEntry
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR CompetitionEntry
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spDeleteCompetitionEntry]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spDeleteCompetitionEntry];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spDeleteCompetitionEntry]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_events].[CompetitionEntry]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spDeleteCompetitionEntry] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Competition Entries */
+
+GRANT EXECUTE ON [morecheese_events].[spDeleteCompetitionEntry] TO [cdp_Developer], [cdp_Integration];
+
+/* Base View SQL for MoreCheese: Course Enrollments */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Course Enrollments
+-- Item: vwCourseEnrollments
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Course Enrollments
+-----               SCHEMA:      morecheese_learning
+-----               BASE TABLE:  CourseEnrollment
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[vwCourseEnrollments]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_learning].[vwCourseEnrollments];
+GO
+
+CREATE VIEW [morecheese_learning].[vwCourseEnrollments]
+AS
+SELECT
+    c.*,
+    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person],
+    morecheeselearningCourse_CourseID.[Name] AS [Course]
+FROM
+    [morecheese_learning].[CourseEnrollment] AS c
+INNER JOIN
+    [${mjSchema}_BizAppsCommon].[Person] AS mjBizAppsCommonPerson_PersonID
+  ON
+    [c].[PersonID] = mjBizAppsCommonPerson_PersonID.[ID]
+INNER JOIN
+    [morecheese_learning].[Course] AS morecheeselearningCourse_CourseID
+  ON
+    [c].[CourseID] = morecheeselearningCourse_CourseID.[ID]
+GO
+GRANT SELECT ON [morecheese_learning].[vwCourseEnrollments] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Course Enrollments */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Course Enrollments
+-- Item: Permissions for vwCourseEnrollments
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_learning].[vwCourseEnrollments] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Course Enrollments */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Course Enrollments
+-- Item: spCreateCourseEnrollment
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR CourseEnrollment
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spCreateCourseEnrollment]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spCreateCourseEnrollment];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spCreateCourseEnrollment]
+    @ID uniqueidentifier = NULL,
+    @EnrollKey nvarchar(80),
+    @PersonID uniqueidentifier,
+    @CourseID uniqueidentifier,
+    @EnrolledOn date,
+    @Status nvarchar(50),
+    @CompletedOn_Clear bit = 0,
+    @CompletedOn date = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_learning].[CourseEnrollment]
+            (
+                [ID],
+                [EnrollKey],
+                [PersonID],
+                [CourseID],
+                [EnrolledOn],
+                [Status],
+                [CompletedOn],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @EnrollKey,
+                @PersonID,
+                @CourseID,
+                @EnrolledOn,
+                @Status,
+                CASE WHEN @CompletedOn_Clear = 1 THEN NULL ELSE ISNULL(@CompletedOn, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_learning].[CourseEnrollment]
+            (
+                [EnrollKey],
+                [PersonID],
+                [CourseID],
+                [EnrolledOn],
+                [Status],
+                [CompletedOn],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @EnrollKey,
+                @PersonID,
+                @CourseID,
+                @EnrolledOn,
+                @Status,
+                CASE WHEN @CompletedOn_Clear = 1 THEN NULL ELSE ISNULL(@CompletedOn, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_learning].[vwCourseEnrollments] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spCreateCourseEnrollment] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Course Enrollments */
+
+GRANT EXECUTE ON [morecheese_learning].[spCreateCourseEnrollment] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Course Enrollments */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Course Enrollments
+-- Item: spUpdateCourseEnrollment
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR CourseEnrollment
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spUpdateCourseEnrollment]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spUpdateCourseEnrollment];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spUpdateCourseEnrollment]
+    @ID uniqueidentifier,
+    @EnrollKey nvarchar(80) = NULL,
+    @PersonID uniqueidentifier = NULL,
+    @CourseID uniqueidentifier = NULL,
+    @EnrolledOn date = NULL,
+    @Status nvarchar(50) = NULL,
+    @CompletedOn_Clear bit = 0,
+    @CompletedOn date = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[CourseEnrollment]
+    SET
+        [EnrollKey] = ISNULL(@EnrollKey, [EnrollKey]),
+        [PersonID] = ISNULL(@PersonID, [PersonID]),
+        [CourseID] = ISNULL(@CourseID, [CourseID]),
+        [EnrolledOn] = ISNULL(@EnrolledOn, [EnrolledOn]),
+        [Status] = ISNULL(@Status, [Status]),
+        [CompletedOn] = CASE WHEN @CompletedOn_Clear = 1 THEN NULL ELSE ISNULL(@CompletedOn, [CompletedOn]) END,
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_learning].[vwCourseEnrollments] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_learning].[vwCourseEnrollments]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateCourseEnrollment] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the CourseEnrollment table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[trgUpdateCourseEnrollment]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_learning].[trgUpdateCourseEnrollment];
+GO
+CREATE TRIGGER [morecheese_learning].trgUpdateCourseEnrollment
+ON [morecheese_learning].[CourseEnrollment]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[CourseEnrollment]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_learning].[CourseEnrollment] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Course Enrollments */
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateCourseEnrollment] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Course Enrollments */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Course Enrollments
+-- Item: spDeleteCourseEnrollment
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR CourseEnrollment
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spDeleteCourseEnrollment]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spDeleteCourseEnrollment];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spDeleteCourseEnrollment]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_learning].[CourseEnrollment]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spDeleteCourseEnrollment] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Course Enrollments */
+
+GRANT EXECUTE ON [morecheese_learning].[spDeleteCourseEnrollment] TO [cdp_Developer], [cdp_Integration];
+
+/* Index for Foreign Keys for MemberCertification */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Member Certifications
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+-- Index for foreign key PersonID in table MemberCertification
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_MemberCertification_PersonID' 
+    AND object_id = OBJECT_ID('[morecheese_learning].[MemberCertification]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_MemberCertification_PersonID ON [morecheese_learning].[MemberCertification] ([PersonID]);
+
+-- Index for foreign key CertificationID in table MemberCertification
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = 'IDX_AUTO_MJ_FKEY_MemberCertification_CertificationID' 
+    AND object_id = OBJECT_ID('[morecheese_learning].[MemberCertification]')
+)
+CREATE INDEX IDX_AUTO_MJ_FKEY_MemberCertification_CertificationID ON [morecheese_learning].[MemberCertification] ([CertificationID]);
+
+/* Base View SQL for MoreCheese: Member Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Member Certifications
+-- Item: vwMemberCertifications
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Member Certifications
+-----               SCHEMA:      morecheese_learning
+-----               BASE TABLE:  MemberCertification
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[vwMemberCertifications]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_learning].[vwMemberCertifications];
+GO
+
+CREATE VIEW [morecheese_learning].[vwMemberCertifications]
+AS
+SELECT
+    m.*,
+    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person],
+    morecheeselearningCertification_CertificationID.[Name] AS [Certification]
+FROM
+    [morecheese_learning].[MemberCertification] AS m
+INNER JOIN
+    [${mjSchema}_BizAppsCommon].[Person] AS mjBizAppsCommonPerson_PersonID
+  ON
+    [m].[PersonID] = mjBizAppsCommonPerson_PersonID.[ID]
+INNER JOIN
+    [morecheese_learning].[Certification] AS morecheeselearningCertification_CertificationID
+  ON
+    [m].[CertificationID] = morecheeselearningCertification_CertificationID.[ID]
+GO
+GRANT SELECT ON [morecheese_learning].[vwMemberCertifications] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Member Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Member Certifications
+-- Item: Permissions for vwMemberCertifications
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_learning].[vwMemberCertifications] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Member Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Member Certifications
+-- Item: spCreateMemberCertification
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR MemberCertification
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spCreateMemberCertification]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spCreateMemberCertification];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spCreateMemberCertification]
+    @ID uniqueidentifier = NULL,
+    @MemberCertKey nvarchar(80),
+    @PersonID uniqueidentifier,
+    @CertificationID uniqueidentifier,
+    @Status nvarchar(50),
+    @EnrolledOn date,
+    @AwardedOn_Clear bit = 0,
+    @AwardedOn date = NULL,
+    @ExpiresOn_Clear bit = 0,
+    @ExpiresOn date = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_learning].[MemberCertification]
+            (
+                [ID],
+                [MemberCertKey],
+                [PersonID],
+                [CertificationID],
+                [Status],
+                [EnrolledOn],
+                [AwardedOn],
+                [ExpiresOn],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @MemberCertKey,
+                @PersonID,
+                @CertificationID,
+                @Status,
+                @EnrolledOn,
+                CASE WHEN @AwardedOn_Clear = 1 THEN NULL ELSE ISNULL(@AwardedOn, NULL) END,
+                CASE WHEN @ExpiresOn_Clear = 1 THEN NULL ELSE ISNULL(@ExpiresOn, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_learning].[MemberCertification]
+            (
+                [MemberCertKey],
+                [PersonID],
+                [CertificationID],
+                [Status],
+                [EnrolledOn],
+                [AwardedOn],
+                [ExpiresOn],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @MemberCertKey,
+                @PersonID,
+                @CertificationID,
+                @Status,
+                @EnrolledOn,
+                CASE WHEN @AwardedOn_Clear = 1 THEN NULL ELSE ISNULL(@AwardedOn, NULL) END,
+                CASE WHEN @ExpiresOn_Clear = 1 THEN NULL ELSE ISNULL(@ExpiresOn, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_learning].[vwMemberCertifications] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spCreateMemberCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Member Certifications */
+
+GRANT EXECUTE ON [morecheese_learning].[spCreateMemberCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Member Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Member Certifications
+-- Item: spUpdateMemberCertification
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR MemberCertification
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spUpdateMemberCertification]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spUpdateMemberCertification];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spUpdateMemberCertification]
+    @ID uniqueidentifier,
+    @MemberCertKey nvarchar(80) = NULL,
+    @PersonID uniqueidentifier = NULL,
+    @CertificationID uniqueidentifier = NULL,
+    @Status nvarchar(50) = NULL,
+    @EnrolledOn date = NULL,
+    @AwardedOn_Clear bit = 0,
+    @AwardedOn date = NULL,
+    @ExpiresOn_Clear bit = 0,
+    @ExpiresOn date = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[MemberCertification]
+    SET
+        [MemberCertKey] = ISNULL(@MemberCertKey, [MemberCertKey]),
+        [PersonID] = ISNULL(@PersonID, [PersonID]),
+        [CertificationID] = ISNULL(@CertificationID, [CertificationID]),
+        [Status] = ISNULL(@Status, [Status]),
+        [EnrolledOn] = ISNULL(@EnrolledOn, [EnrolledOn]),
+        [AwardedOn] = CASE WHEN @AwardedOn_Clear = 1 THEN NULL ELSE ISNULL(@AwardedOn, [AwardedOn]) END,
+        [ExpiresOn] = CASE WHEN @ExpiresOn_Clear = 1 THEN NULL ELSE ISNULL(@ExpiresOn, [ExpiresOn]) END,
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_learning].[vwMemberCertifications] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_learning].[vwMemberCertifications]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateMemberCertification] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the MemberCertification table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[trgUpdateMemberCertification]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_learning].[trgUpdateMemberCertification];
+GO
+CREATE TRIGGER [morecheese_learning].trgUpdateMemberCertification
+ON [morecheese_learning].[MemberCertification]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_learning].[MemberCertification]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_learning].[MemberCertification] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Member Certifications */
+
+GRANT EXECUTE ON [morecheese_learning].[spUpdateMemberCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Member Certifications */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Member Certifications
+-- Item: spDeleteMemberCertification
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR MemberCertification
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_learning].[spDeleteMemberCertification]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_learning].[spDeleteMemberCertification];
+GO
+
+CREATE PROCEDURE [morecheese_learning].[spDeleteMemberCertification]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_learning].[MemberCertification]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_learning].[spDeleteMemberCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Member Certifications */
+
+GRANT EXECUTE ON [morecheese_learning].[spDeleteMemberCertification] TO [cdp_Developer], [cdp_Integration];
+
+/* SQL text to delete unneeded entity fields (7 scoped entities) */
+EXEC [${mjSchema}].[spDeleteUnneededEntityFields] @ExcludedSchemaNames='sys,staging,${mjSchema}', @EntityIDs='428C670F-EBE3-41E6-86E4-EB5A274960A1,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,23916A8E-3487-4793-9E18-C209EF097E58,49DF9400-9C38-422C-8DB6-1373D5392E35,A3E60AF2-D7CA-407E-A1D3-34320E851892,9F493BE6-006B-4FC2-986C-D15AB527E65B', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to update existing entity fields from schema (7 scoped entities) */
+EXEC [${mjSchema}].[spUpdateExistingEntityFieldsFromSchema] @ExcludedSchemaNames='sys,staging,${mjSchema}', @EntityIDs='428C670F-EBE3-41E6-86E4-EB5A274960A1,CB9A5230-39C0-49EE-A5BC-238D3536B39B,DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153,23916A8E-3487-4793-9E18-C209EF097E58,49DF9400-9C38-422C-8DB6-1373D5392E35,A3E60AF2-D7CA-407E-A1D3-34320E851892,9F493BE6-006B-4FC2-986C-D15AB527E65B', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to set default column width where needed */
+EXEC [${mjSchema}].[spSetDefaultColumnWidthWhereNeeded] @ExcludedSchemaNames='sys,staging,${mjSchema}', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '9A7C9FF2-AD80-4E7A-8BFD-B8CC0F7D7BEE'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '8D374D1B-9BD2-47F0-8522-F4C6B274F6ED'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'EEC71ADD-2E31-4DE9-9402-FC844D514619'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '9A7C9FF2-AD80-4E7A-8BFD-B8CC0F7D7BEE'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = 'DDD3066B-EB4B-4CA6-94D3-FF1DFFD8A4A6'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'Exact'
+               WHERE ID = '9A7C9FF2-AD80-4E7A-8BFD-B8CC0F7D7BEE'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'F0462571-752C-4602-BD9D-58229C8D782D'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'FAEE9E23-7A30-473B-9233-17AC3FE977A2'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '499D65A7-6992-477D-A2C2-6C2F999414B0'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '6DF3C4E7-C108-4E4D-B28A-D34B7EDC8B59'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'ECF95DCE-C50F-4005-B194-8C993480784A'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '6DF3C4E7-C108-4E4D-B28A-D34B7EDC8B59'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = 'ECF95DCE-C50F-4005-B194-8C993480784A'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = '6DF3C4E7-C108-4E4D-B28A-D34B7EDC8B59'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = 'ECF95DCE-C50F-4005-B194-8C993480784A'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IsNameField = 1
+               WHERE ID = 'EF681974-0B57-47EF-9A8C-86E058DF172E'
+               AND AutoUpdateIsNameField = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'AA10BBA2-6C17-42AF-9228-4D7585F38D3A'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'C6260BBF-D011-4DB0-843B-D262A7868C5D'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '238863F8-A7B8-48D4-A99C-150253A61DA2'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'B43A6AEF-4C29-4080-9E08-8D3C3F13EFE0'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = 'EF681974-0B57-47EF-9A8C-86E058DF172E'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = 'EF681974-0B57-47EF-9A8C-86E058DF172E'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IsNameField = 1
+               WHERE ID = '9B0D5BCA-163B-40B3-9268-1EF5CEE4483F'
+               AND AutoUpdateIsNameField = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'EF4319FF-B470-44F1-8931-DC182FBABF11'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'A2129745-3476-4908-AAAA-35FD4A4CA92B'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '9B0D5BCA-163B-40B3-9268-1EF5CEE4483F'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '67EAF2F0-0B72-4794-8880-E0BA4F900542'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '366F1231-CF05-42AD-AFC5-84403D860A66'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '0EAD38C3-3C9A-4447-9F96-DED688C870C9'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '288C5441-CE57-45F4-9955-3AA3E52DB704'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '9B0D5BCA-163B-40B3-9268-1EF5CEE4483F'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = '9B0D5BCA-163B-40B3-9268-1EF5CEE4483F'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'Exact'
+               WHERE ID = '288C5441-CE57-45F4-9955-3AA3E52DB704'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '7C06CC50-44FA-4742-A899-D15AA8C5BCBB'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '944D7084-2ABD-4B6E-BC9B-93D6BD5D2366'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '7C06CC50-44FA-4742-A899-D15AA8C5BCBB'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = '57379C3B-8913-402E-900B-52BE638A9035'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'Exact'
+               WHERE ID = '7C06CC50-44FA-4742-A899-D15AA8C5BCBB'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set categories for 8 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '44AD68BD-C6DF-4E03-A78F-8853B294F578' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.CourseKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Course Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '9A7C9FF2-AD80-4E7A-8BFD-B8CC0F7D7BEE' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.Name 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Course Details',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Course Title'
+WHERE 
+   ID = 'DDD3066B-EB4B-4CA6-94D3-FF1DFFD8A4A6' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.StartDate 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Timeline and Configuration',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '8D374D1B-9BD2-47F0-8522-F4C6B274F6ED' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.DurationWeeks 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Timeline and Configuration',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Duration (Weeks)'
+WHERE 
+   ID = 'EEC71ADD-2E31-4DE9-9402-FC844D514619' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Timeline and Configuration',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'DD75F718-67D8-413A-8DE0-0F25327C2528' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'FE716808-5300-4168-9440-B0365F5BBF45' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Courses.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'BA6140C1-D5B8-4B83-86E7-7FDB1AAD9CD8' AND AutoUpdateCategory = 1;
+
+/* Set entity icon to fa fa-book-open */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-book-open', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = 'A3E60AF2-D7CA-407E-A1D3-34320E851892';
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('a4e956fc-ea04-4570-b0c7-d0b2782e3e08', 'A3E60AF2-D7CA-407E-A1D3-34320E851892', 'FieldCategoryInfo', '{"Course Details":{"icon":"fa fa-info-circle","description":"Core descriptive information about the learning course"},"Timeline and Configuration":{"icon":"fa fa-calendar-alt","description":"Schedule settings and operational configuration for the course"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit and tracking fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('1ee7322a-f952-45cc-8679-30a5b67f7c46', 'A3E60AF2-D7CA-407E-A1D3-34320E851892', 'FieldCategoryIcons', '{"Course Details":"fa fa-info-circle","Timeline and Configuration":"fa fa-calendar-alt","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Set categories for 11 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A04C813A-2C44-4D63-BBA9-BD5B0A70CF70' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.RegKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Registration Details',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Registration Key'
+WHERE 
+   ID = 'EF681974-0B57-47EF-9A8C-86E058DF172E' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.PersonID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Registration Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '84BF9B95-CEF9-4AD3-B807-95578FA1FEA1' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.EventID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Registration Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A10B7340-6A2D-430C-8587-1BF283644D8C' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.Person 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Registration Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '238863F8-A7B8-48D4-A99C-150253A61DA2' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.Event 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Registration Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'B43A6AEF-4C29-4080-9E08-8D3C3F13EFE0' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.RegisteredOn 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Participation',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'AA10BBA2-6C17-42AF-9228-4D7585F38D3A' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.Attended 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Participation',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'C6260BBF-D011-4DB0-843B-D262A7868C5D' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'F297F16C-1253-4C19-ADA4-DB257AE91646' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'B644DEB4-D341-46AE-A6E6-DB2DAEEF5125' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Event Registrations.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'B6B112FE-D8FD-425D-8DF1-C0C603FBA7E5' AND AutoUpdateCategory = 1;
+
+/* Set categories for 8 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'E4647EB2-0D66-47B2-8808-D4AB32F91F9A' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.CertKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Certification Key'
+WHERE 
+   ID = '7C06CC50-44FA-4742-A899-D15AA8C5BCBB' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.Name 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '57379C3B-8913-402E-900B-52BE638A9035' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.Description 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'DBEDEE9B-8F33-44C1-9FE0-EE9FB7BEB959' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.ValidYears 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '944D7084-2ABD-4B6E-BC9B-93D6BD5D2366' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Configuration',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '6AAE4039-B297-44B1-9379-544A91D1FC50' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A39ECF32-C099-4422-9764-58D454B86506' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Certifications.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '2E1F3025-ACEC-483B-9716-875466CDA060' AND AutoUpdateCategory = 1;
+
+/* Set entity icon to fa fa-certificate */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-certificate', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = '49DF9400-9C38-422C-8DB6-1373D5392E35';
+
+/* Set entity icon to fa fa-calendar-check */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-calendar-check', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153';
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('a0f8d74c-5782-4207-8609-a7cf14584706', 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', 'FieldCategoryInfo', '{"Registration Details":{"icon":"fa fa-id-card","description":"Core registration information linking members to events"},"Event Participation":{"icon":"fa fa-check-circle","description":"Details regarding event attendance and registration timing"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit, tracking, and configuration fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('f258ba4a-2e3d-451e-bbd3-10888ac5c6da', '49DF9400-9C38-422C-8DB6-1373D5392E35', 'FieldCategoryInfo', '{"Certification Details":{"icon":"fa fa-certificate","description":"Core information defining the certification, its name, and validity period"},"Configuration":{"icon":"fa fa-sliders-h","description":"System settings and visibility flags for the certification"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit and tracking fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('2aaa17e9-33a5-4afa-9180-81ac9c4aec3e', '49DF9400-9C38-422C-8DB6-1373D5392E35', 'FieldCategoryIcons', '{"Certification Details":"fa fa-certificate","Configuration":"fa fa-sliders-h","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('a1accc6b-de73-4693-a970-fd548dd59641', 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153', 'FieldCategoryIcons', '{"Registration Details":"fa fa-id-card","Event Participation":"fa fa-check-circle","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Set categories for 12 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '292D9B4B-CE3F-44E5-B516-06561F9C5B16' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.EnrollKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Enrollment Details',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Enrollment Key'
+WHERE 
+   ID = 'A305A1DC-0F32-436C-8371-6788F4291F90' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.PersonID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Relationships',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Person'
+WHERE 
+   ID = 'AC3E81FA-C066-4370-8FAE-80D5754F5320' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.CourseID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Relationships',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Course'
+WHERE 
+   ID = 'CC41734D-83EE-421B-9D1F-B7BBCE05E0DE' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.EnrolledOn 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Enrollment Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'F0462571-752C-4602-BD9D-58229C8D782D' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.Status 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Enrollment Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'FAEE9E23-7A30-473B-9233-17AC3FE977A2' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.CompletedOn 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Enrollment Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '499D65A7-6992-477D-A2C2-6C2F999414B0' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'AD3EC0B4-1847-4B0A-B189-4F32FCFEB7AB' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '287358F7-8A60-4603-99F1-D103EED51761' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '7F0E218B-CC9A-4137-A85E-06D24237BE2A' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.Person 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Relationships',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Person Name'
+WHERE 
+   ID = '6DF3C4E7-C108-4E4D-B28A-D34B7EDC8B59' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Course Enrollments.Course 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Relationships',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Course Title'
+WHERE 
+   ID = 'ECF95DCE-C50F-4005-B194-8C993480784A' AND AutoUpdateCategory = 1;
+
+/* Set entity icon to fa fa-graduation-cap */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-graduation-cap', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = '428C670F-EBE3-41E6-86E4-EB5A274960A1';
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('08aabc41-da2e-40f5-ae63-503a4af39d6d', '428C670F-EBE3-41E6-86E4-EB5A274960A1', 'FieldCategoryInfo', '{"Enrollment Details":{"icon":"fa fa-calendar-check","description":"Core enrollment timeline, status, and completion information"},"Relationships":{"icon":"fa fa-link","description":"Links to associated people and courses"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit and configuration fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('ec23b82d-95af-49b7-9f18-bf5560190df3', '428C670F-EBE3-41E6-86E4-EB5A274960A1', 'FieldCategoryIcons', '{"Enrollment Details":"fa fa-calendar-check","Relationships":"fa fa-link","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Set categories for 13 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '150A3741-7DC3-445C-9C78-85FCEF7992C3' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.EntryKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Entry Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '288C5441-CE57-45F4-9955-3AA3E52DB704' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.EntryYear 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Entry Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'EF4319FF-B470-44F1-8931-DC182FBABF11' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.Category 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Entry Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A2129745-3476-4908-AAAA-35FD4A4CA92B' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.ProductName 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Entry Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '9B0D5BCA-163B-40B3-9268-1EF5CEE4483F' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.Result 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Competition Results',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '67EAF2F0-0B72-4794-8880-E0BA4F900542' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.PersonID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Participant Information',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Person'
+WHERE 
+   ID = '92DD1DF5-83C7-487A-8B9B-99E263C5875E' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.Person 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Participant Information',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Person Name'
+WHERE 
+   ID = '366F1231-CF05-42AD-AFC5-84403D860A66' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.OrganizationID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Participant Information',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Organization'
+WHERE 
+   ID = '46D0584D-8063-41C5-9684-CC8371F28E4B' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.Organization 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Participant Information',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Organization Name'
+WHERE 
+   ID = '0EAD38C3-3C9A-4447-9F96-DED688C870C9' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '92F08FB2-A82C-4149-8893-1A3C78D2C932' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '4C2DFA3F-D838-45D9-BB6C-4861AD5D7468' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Competition Entries.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '9437E481-B71E-4481-A954-A9E9932A3DFC' AND AutoUpdateCategory = 1;
+
+/* Set entity icon to fa fa-trophy */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-trophy', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = '9F493BE6-006B-4FC2-986C-D15AB527E65B';
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('c28c5e3f-96c3-4ba5-a125-2781fc0da3e8', '9F493BE6-006B-4FC2-986C-D15AB527E65B', 'FieldCategoryInfo', '{"Entry Details":{"icon":"fa fa-cheese","description":"Core details about the competition entry, including year, category, and product name"},"Competition Results":{"icon":"fa fa-medal","description":"Outcome and medal status for the competition entry"},"Participant Information":{"icon":"fa fa-users","description":"Details regarding the individual and organization associated with the entry"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit and configuration fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('1f851898-5979-4270-8efc-8248cfaed088', '9F493BE6-006B-4FC2-986C-D15AB527E65B', 'FieldCategoryIcons', '{"Entry Details":"fa fa-cheese","Competition Results":"fa fa-medal","Participant Information":"fa fa-users","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '72F75915-79E2-486B-A555-D4A506863B8A'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'DFDF741D-523D-4AE0-94BA-B2C44214FC06'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '72BB6163-3A23-48C1-A5A0-1C9A75700502'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '737E4AC7-1C79-4677-8401-F1ECCD81D3A7'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '72BB6163-3A23-48C1-A5A0-1C9A75700502'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = '737E4AC7-1C79-4677-8401-F1ECCD81D3A7'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = '72BB6163-3A23-48C1-A5A0-1C9A75700502'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = '737E4AC7-1C79-4677-8401-F1ECCD81D3A7'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set field properties for entity */
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '1647E597-B94B-4C47-AF58-8194DA4812D8'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'A86A565F-68D9-47CC-8931-F000A6D1422C'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = 'DD914D99-2B94-4BBB-8642-C1C261782F79'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET DefaultInView = 1
+               WHERE ID = '7A636AE3-36AD-4DA4-A173-867C55B139C9'
+               AND AutoUpdateDefaultInView = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET IncludeInUserSearchAPI = 1
+               WHERE ID = 'CEB59A83-A25F-44F7-9182-B48EB4D587B3'
+               AND AutoUpdateIncludeInUserSearchAPI = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'BeginsWith'
+               WHERE ID = '8A853B0D-1298-4428-A194-4ADD53C17D99'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+               UPDATE [${mjSchema}].[EntityField]
+               SET UserSearchPredicateAPI = 'Exact'
+               WHERE ID = 'CEB59A83-A25F-44F7-9182-B48EB4D587B3'
+               AND AutoUpdateUserSearchPredicate = 1;
+
+/* Set categories for 14 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'D9A3FC07-EFE5-48DF-9F0B-3749A13F99A1' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.EventKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'CEB59A83-A25F-44F7-9182-B48EB4D587B3' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.Name 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Details',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Event Name'
+WHERE 
+   ID = '8A853B0D-1298-4428-A194-4ADD53C17D99' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.EventType 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '40E4EAC3-EDB5-4AE1-AF99-593C4D74460A' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.EventDate 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '1647E597-B94B-4C47-AF58-8194DA4812D8' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.IsVirtual 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A86A565F-68D9-47CC-8931-F000A6D1422C' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.IsPaid 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Event Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'E5BA2927-942D-419F-82A4-4A6F01D6CCA8' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.City 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Venue Location',
+   GeneratedFormSection = 'Category',
+   ExtendedType = 'GeoCity'
+WHERE 
+   ID = 'DD914D99-2B94-4BBB-8642-C1C261782F79' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.State 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Venue Location',
+   GeneratedFormSection = 'Category',
+   ExtendedType = 'GeoStateProvince'
+WHERE 
+   ID = '7A636AE3-36AD-4DA4-A173-867C55B139C9' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.Latitude 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Venue Location',
+   GeneratedFormSection = 'Category',
+   ExtendedType = 'GeoLatitude'
+WHERE 
+   ID = '8DA63195-2484-4EEA-84B6-4F4B5609C358' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.Longitude 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Venue Location',
+   GeneratedFormSection = 'Category',
+   ExtendedType = 'GeoLongitude'
+WHERE 
+   ID = '9A507AEA-F589-475B-BED7-2543568BF839' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A8001744-46FA-49DA-82B3-7AFD88AB9DBF' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '986C2F99-9CA7-4A49-BBED-37DB4DF72DAA' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Events.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '3C76A3F4-420F-4770-93EA-D44A5C30CB9A' AND AutoUpdateCategory = 1;
+
+/* Set SupportsGeoCoding = true for MoreCheese: Events */
+
+            UPDATE [${mjSchema}].[Entity]
+            SET [SupportsGeoCoding] = 1
+            WHERE [ID] = 'CB9A5230-39C0-49EE-A5BC-238D3536B39B' AND [AutoUpdateSupportsGeoCoding] = 1;
+
+/* Set entity icon to fa fa-calendar-alt */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-calendar-alt', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = 'CB9A5230-39C0-49EE-A5BC-238D3536B39B';
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('7e5587b6-16da-4cf2-b385-8472bf4eaabb', 'CB9A5230-39C0-49EE-A5BC-238D3536B39B', 'FieldCategoryInfo', '{"Event Details":{"icon":"fa fa-info-circle","description":"Core information about the event including name, type, date, and format"},"Venue Location":{"icon":"fa fa-map-marker-alt","description":"Geographic location details for in-person events"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit and maintenance fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('ab53087a-0fc8-45c0-9b94-7a0411f9ba84', 'CB9A5230-39C0-49EE-A5BC-238D3536B39B', 'FieldCategoryIcons', '{"Event Details":"fa fa-info-circle","Venue Location":"fa fa-map-marker-alt","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Set categories for 13 fields */
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.MemberCertKey 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category',
+   DisplayName = 'Member Certification Key'
+WHERE 
+   ID = 'A69DBFE9-8F28-4503-BB5E-8F7ED81AA4EF' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.Person 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '72BB6163-3A23-48C1-A5A0-1C9A75700502' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.Certification 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '737E4AC7-1C79-4677-8401-F1ECCD81D3A7' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.Status 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Certification Details',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'E2A5D9ED-CA19-41D7-AAE1-476652D08C2C' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.EnrolledOn 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Timeline',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'F9DF9BFC-8CA3-476E-967A-D2D8ABE09C46' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.AwardedOn 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Timeline',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '72F75915-79E2-486B-A555-D4A506863B8A' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.ExpiresOn 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Timeline',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'DFDF741D-523D-4AE0-94BA-B2C44214FC06' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.IsSharedDemo 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'Configuration',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '98E96508-DA31-4439-8658-314178424980' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.ID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '6BEA23D1-74F3-4661-B875-9AB47902215F' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.PersonID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '996B6888-46A9-4088-BD6E-1FD4E85482B4' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.CertificationID 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = '6316A924-E1AD-46F7-9AD9-A3D18EBB085D' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.__mj_CreatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'A564A588-F10C-44C4-A1B2-5F4D4128CA2E' AND AutoUpdateCategory = 1;
+
+-- UPDATE Entity Field Category Info MoreCheese: Member Certifications.__mj_UpdatedAt 
+UPDATE [${mjSchema}].[EntityField]
+SET 
+   Category = 'System Metadata',
+   GeneratedFormSection = 'Category'
+WHERE 
+   ID = 'D0710E24-883F-49B3-9375-A129F210CAFA' AND AutoUpdateCategory = 1;
+
+/* Set entity icon to fa fa-graduation-cap */
+
+               UPDATE [${mjSchema}].[Entity]
+               SET [Icon] = 'fa fa-graduation-cap', [__mj_UpdatedAt] = GETUTCDATE()
+               WHERE [ID] = '23916A8E-3487-4793-9E18-C209EF097E58';
+
+/* Insert FieldCategoryInfo setting for entity */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('06e831e1-1f27-433e-9c20-fc509b07bf0f', '23916A8E-3487-4793-9E18-C209EF097E58', 'FieldCategoryInfo', '{"Certification Details":{"icon":"fa fa-certificate","description":"Core information about the member and the certification program"},"Timeline":{"icon":"fa fa-calendar-alt","description":"Key dates related to the certification lifecycle"},"Configuration":{"icon":"fa fa-sliders-h","description":"Settings and flags for certification records"},"System Metadata":{"icon":"fa fa-cog","description":"System-managed audit and technical fields"}}', GETUTCDATE(), GETUTCDATE());
+
+/* Insert FieldCategoryIcons setting (legacy) */
+
+               INSERT INTO [${mjSchema}].[EntitySetting] ([ID], [EntityID], [Name], [Value], [__mj_CreatedAt], [__mj_UpdatedAt])
+               VALUES ('369e8f7e-7126-4650-a581-7a039f5864a8', '23916A8E-3487-4793-9E18-C209EF097E58', 'FieldCategoryIcons', '{"Certification Details":"fa fa-certificate","Timeline":"fa fa-calendar-alt","Configuration":"fa fa-sliders-h","System Metadata":"fa fa-cog"}', GETUTCDATE(), GETUTCDATE());
+
+/* Index for Foreign Keys for Event */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: Index for Foreign Keys
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------;
+
+/* Base View SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: vwEvents
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- BASE VIEW FOR ENTITY:      MoreCheese: Events
+-----               SCHEMA:      morecheese_events
+-----               BASE TABLE:  Event
+-----               PRIMARY KEY: ID
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[vwEvents]', 'V') IS NOT NULL
+    DROP VIEW [morecheese_events].[vwEvents];
+GO
+
+CREATE VIEW [morecheese_events].[vwEvents]
+AS
+SELECT
+    e.*,    [e].[Latitude] AS [${mjSchema}_Latitude],
+    [e].[Longitude] AS [${mjSchema}_Longitude]
+FROM
+    [morecheese_events].[Event] AS e
+GO
+GRANT SELECT ON [morecheese_events].[vwEvents] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* Base View Permissions SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: Permissions for vwEvents
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+GRANT SELECT ON [morecheese_events].[vwEvents] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
+
+/* spCreate SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: spCreateEvent
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- CREATE PROCEDURE FOR Event
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spCreateEvent]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spCreateEvent];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spCreateEvent]
+    @ID uniqueidentifier = NULL,
+    @EventKey nvarchar(50),
+    @Name nvarchar(200),
+    @EventType nvarchar(50),
+    @EventDate date,
+    @IsVirtual bit = NULL,
+    @IsPaid bit = NULL,
+    @City_Clear bit = 0,
+    @City nvarchar(100) = NULL,
+    @State_Clear bit = 0,
+    @State nvarchar(50) = NULL,
+    @Latitude_Clear bit = 0,
+    @Latitude decimal(9, 6) = NULL,
+    @Longitude_Clear bit = 0,
+    @Longitude decimal(9, 6) = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InsertedRow TABLE ([ID] UNIQUEIDENTIFIER)
+
+    IF @ID IS NOT NULL
+    BEGIN
+        -- User provided a value, use it
+        INSERT INTO [morecheese_events].[Event]
+            (
+                [ID],
+                [EventKey],
+                [Name],
+                [EventType],
+                [EventDate],
+                [IsVirtual],
+                [IsPaid],
+                [City],
+                [State],
+                [Latitude],
+                [Longitude],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @ID,
+                @EventKey,
+                @Name,
+                @EventType,
+                @EventDate,
+                ISNULL(@IsVirtual, 0),
+                ISNULL(@IsPaid, 0),
+                CASE WHEN @City_Clear = 1 THEN NULL ELSE ISNULL(@City, NULL) END,
+                CASE WHEN @State_Clear = 1 THEN NULL ELSE ISNULL(@State, NULL) END,
+                CASE WHEN @Latitude_Clear = 1 THEN NULL ELSE ISNULL(@Latitude, NULL) END,
+                CASE WHEN @Longitude_Clear = 1 THEN NULL ELSE ISNULL(@Longitude, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    ELSE
+    BEGIN
+        -- No value provided, let database use its default (e.g., NEWSEQUENTIALID())
+        INSERT INTO [morecheese_events].[Event]
+            (
+                [EventKey],
+                [Name],
+                [EventType],
+                [EventDate],
+                [IsVirtual],
+                [IsPaid],
+                [City],
+                [State],
+                [Latitude],
+                [Longitude],
+                [IsSharedDemo]
+            )
+        OUTPUT INSERTED.[ID] INTO @InsertedRow
+        VALUES
+            (
+                @EventKey,
+                @Name,
+                @EventType,
+                @EventDate,
+                ISNULL(@IsVirtual, 0),
+                ISNULL(@IsPaid, 0),
+                CASE WHEN @City_Clear = 1 THEN NULL ELSE ISNULL(@City, NULL) END,
+                CASE WHEN @State_Clear = 1 THEN NULL ELSE ISNULL(@State, NULL) END,
+                CASE WHEN @Latitude_Clear = 1 THEN NULL ELSE ISNULL(@Latitude, NULL) END,
+                CASE WHEN @Longitude_Clear = 1 THEN NULL ELSE ISNULL(@Longitude, NULL) END,
+                ISNULL(@IsSharedDemo, 1)
+            )
+    END
+    -- return the new record from the base view, which might have some calculated fields
+    SELECT * FROM [morecheese_events].[vwEvents] WHERE [ID] = (SELECT [ID] FROM @InsertedRow)
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spCreateEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spCreate Permissions for MoreCheese: Events */
+
+GRANT EXECUTE ON [morecheese_events].[spCreateEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spUpdate SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: spUpdateEvent
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- UPDATE PROCEDURE FOR Event
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spUpdateEvent]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spUpdateEvent];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spUpdateEvent]
+    @ID uniqueidentifier,
+    @EventKey nvarchar(50) = NULL,
+    @Name nvarchar(200) = NULL,
+    @EventType nvarchar(50) = NULL,
+    @EventDate date = NULL,
+    @IsVirtual bit = NULL,
+    @IsPaid bit = NULL,
+    @City_Clear bit = 0,
+    @City nvarchar(100) = NULL,
+    @State_Clear bit = 0,
+    @State nvarchar(50) = NULL,
+    @Latitude_Clear bit = 0,
+    @Latitude decimal(9, 6) = NULL,
+    @Longitude_Clear bit = 0,
+    @Longitude decimal(9, 6) = NULL,
+    @IsSharedDemo bit = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[Event]
+    SET
+        [EventKey] = ISNULL(@EventKey, [EventKey]),
+        [Name] = ISNULL(@Name, [Name]),
+        [EventType] = ISNULL(@EventType, [EventType]),
+        [EventDate] = ISNULL(@EventDate, [EventDate]),
+        [IsVirtual] = ISNULL(@IsVirtual, [IsVirtual]),
+        [IsPaid] = ISNULL(@IsPaid, [IsPaid]),
+        [City] = CASE WHEN @City_Clear = 1 THEN NULL ELSE ISNULL(@City, [City]) END,
+        [State] = CASE WHEN @State_Clear = 1 THEN NULL ELSE ISNULL(@State, [State]) END,
+        [Latitude] = CASE WHEN @Latitude_Clear = 1 THEN NULL ELSE ISNULL(@Latitude, [Latitude]) END,
+        [Longitude] = CASE WHEN @Longitude_Clear = 1 THEN NULL ELSE ISNULL(@Longitude, [Longitude]) END,
+        [IsSharedDemo] = ISNULL(@IsSharedDemo, [IsSharedDemo])
+    WHERE
+        [ID] = @ID
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT = 0
+        -- Nothing was updated, return no rows, but column structure from base view intact, semantically correct this way.
+        SELECT TOP 0 * FROM [morecheese_events].[vwEvents] WHERE 1=0
+    ELSE
+        -- Return the updated record so the caller can see the updated values and any calculated fields
+        SELECT
+                                        *
+                                    FROM
+                                        [morecheese_events].[vwEvents]
+                                    WHERE
+                                        [ID] = @ID
+                                    
+END
+GO
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateEvent] TO [cdp_Developer], [cdp_Integration]
+GO
+
+------------------------------------------------------------
+----- TRIGGER FOR __mj_UpdatedAt field for the Event table
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[trgUpdateEvent]', 'TR') IS NOT NULL
+    DROP TRIGGER [morecheese_events].[trgUpdateEvent];
+GO
+CREATE TRIGGER [morecheese_events].trgUpdateEvent
+ON [morecheese_events].[Event]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE
+        [morecheese_events].[Event]
+    SET
+        __mj_UpdatedAt = GETUTCDATE()
+    FROM
+        [morecheese_events].[Event] AS _organicTable
+    INNER JOIN
+        INSERTED AS I ON
+        _organicTable.[ID] = I.[ID];
+END;
+GO
+
+/* spUpdate Permissions for MoreCheese: Events */
+
+GRANT EXECUTE ON [morecheese_events].[spUpdateEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete SQL for MoreCheese: Events */
+-----------------------------------------------------------------
+-- SQL Code Generation
+-- Entity: MoreCheese: Events
+-- Item: spDeleteEvent
+--
+-- This was generated by the MemberJunction CodeGen tool.
+-- This file should NOT be edited by hand.
+-----------------------------------------------------------------
+
+------------------------------------------------------------
+----- DELETE PROCEDURE FOR Event
+------------------------------------------------------------
+IF OBJECT_ID('[morecheese_events].[spDeleteEvent]', 'P') IS NOT NULL
+    DROP PROCEDURE [morecheese_events].[spDeleteEvent];
+GO
+
+CREATE PROCEDURE [morecheese_events].[spDeleteEvent]
+    @ID uniqueidentifier
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM
+        [morecheese_events].[Event]
+    WHERE
+        [ID] = @ID
+
+
+    -- Check if the delete was successful
+    IF @@ROWCOUNT = 0
+        SELECT NULL AS [ID] -- Return NULL for all primary key fields to indicate no record was deleted
+    ELSE
+        SELECT @ID AS [ID] -- Return the primary key values to indicate we successfully deleted the record
+END
+GO
+GRANT EXECUTE ON [morecheese_events].[spDeleteEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* spDelete Permissions for MoreCheese: Events */
+
+GRANT EXECUTE ON [morecheese_events].[spDeleteEvent] TO [cdp_Developer], [cdp_Integration];
+
+/* SQL text to delete unneeded entity fields (1 scoped entities) */
+EXEC [${mjSchema}].[spDeleteUnneededEntityFields] @ExcludedSchemaNames='sys,staging,${mjSchema}', @EntityIDs='CB9A5230-39C0-49EE-A5BC-238D3536B39B', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to insert 3 new entity field(s) */
+UPDATE [${mjSchema}].[EntityField]
+         SET [Sequence] = [Sequence] + 100000
+       WHERE [EntityID] = 'CB9A5230-39C0-49EE-A5BC-238D3536B39B'
+         AND [Sequence] < 100000
+         AND NOT EXISTS (
+             SELECT 1 FROM [${mjSchema}].[EntityField]
+              WHERE [EntityID] = 'CB9A5230-39C0-49EE-A5BC-238D3536B39B'
+                AND [Sequence] >= 100000
+         );
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = 'f8c174ad-c079-429c-95c9-381985df6de2' OR (EntityID = 'CB9A5230-39C0-49EE-A5BC-238D3536B39B' AND Name = '${mjSchema}_Latitude')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            'f8c174ad-c079-429c-95c9-381985df6de2',
+            'CB9A5230-39C0-49EE-A5BC-238D3536B39B', -- Entity: MoreCheese: Events
+            15,
+            '${mjSchema}_Latitude',
+            'Mj Latitude',
+            NULL,
+            'decimal',
+            5,
+            9,
+            6,
+            1,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+      IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[EntityField] WHERE ID = '4c34fcee-8f12-448a-a60b-1e8a26c3206a' OR (EntityID = 'CB9A5230-39C0-49EE-A5BC-238D3536B39B' AND Name = '${mjSchema}_Longitude')) BEGIN
+         INSERT INTO [${mjSchema}].[EntityField]
+         (
+            [ID],
+            [EntityID],
+            [Sequence],
+            [Name],
+            [DisplayName],
+            [Description],
+            [Type],
+            [Length],
+            [Precision],
+            [Scale],
+            [AllowsNull],
+            [DefaultValue],
+            [AutoIncrement],
+            [AllowUpdateAPI],
+            [IsVirtual],
+            [IsComputed],
+            [RelatedEntityID],
+            [RelatedEntityFieldName],
+            [IsNameField],
+            [IncludeInUserSearchAPI],
+            [IncludeRelatedEntityNameFieldInBaseView],
+            [DefaultInView],
+            [IsPrimaryKey],
+            [IsUnique],
+            [RelatedEntityDisplayType],
+            [__mj_CreatedAt],
+            [__mj_UpdatedAt]
+         )
+         VALUES
+         (
+            '4c34fcee-8f12-448a-a60b-1e8a26c3206a',
+            'CB9A5230-39C0-49EE-A5BC-238D3536B39B', -- Entity: MoreCheese: Events
+            16,
+            '${mjSchema}_Longitude',
+            'Mj Longitude',
+            NULL,
+            'decimal',
+            5,
+            9,
+            6,
+            1,
+            NULL,
+            0,
+            0,
+            1,
+            0,
+            NULL,
+            NULL,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            'Search',
+            GETUTCDATE(),
+            GETUTCDATE()
+         )
+      END;
+
+/* SQL text to update existing entity fields from schema (1 scoped entities) */
+EXEC [${mjSchema}].[spUpdateExistingEntityFieldsFromSchema] @ExcludedSchemaNames='sys,staging,${mjSchema}', @EntityIDs='CB9A5230-39C0-49EE-A5BC-238D3536B39B', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* SQL text to set default column width where needed */
+EXEC [${mjSchema}].[spSetDefaultColumnWidthWhereNeeded] @ExcludedSchemaNames='sys,staging,${mjSchema}', @IncludedSchemaNames='${flyway:defaultSchema},morecheese_events,morecheese_learning';
+
+/* Set ExtendedType=GeoLatitude on virtual geo fields */
+UPDATE [${mjSchema}].[EntityField] SET [ExtendedType] = 'GeoLatitude' WHERE [Name] = '${mjSchema}_Latitude' AND [ExtendedType] IS NULL AND [EntityID] IN ('CB9A5230-39C0-49EE-A5BC-238D3536B39B');
+
+/* Set ExtendedType=GeoLongitude on virtual geo fields */
+UPDATE [${mjSchema}].[EntityField] SET [ExtendedType] = 'GeoLongitude' WHERE [Name] = '${mjSchema}_Longitude' AND [ExtendedType] IS NULL AND [EntityID] IN ('CB9A5230-39C0-49EE-A5BC-238D3536B39B');
