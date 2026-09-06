@@ -140,11 +140,13 @@
             "format": "base64",
             "seedField": "ID",
             "traitField": "Gender",
+            "defaultTrait": "Female",
             "traits": {
               "Female": {
+                "hair": ["bun"],
+                "hairProbability": 100,
                 "rearHair": ["longStraight", "longWavy", "shoulderHigh"],
                 "rearHairProbability": 100,
-                "hairProbability": 0,
                 "beardProbability": 0,
                 "clothes": ["dress", "turtleNeck", "shirt"]
               },
