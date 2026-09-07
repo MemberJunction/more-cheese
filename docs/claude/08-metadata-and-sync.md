@@ -38,9 +38,29 @@ per app. Worked example: [`../template-docs/metadata.md`](../template-docs/metad
 
 ## Commands
 
+World data (`generated/`) **must** be pushed from the **MJ repo cwd** with the
+local CLI so host `dynamicPackages.server` loads (Common / Accounting / Orders
+entity servers). Confirmed orders book subscriptions and journal entries only
+on that path.
+
+People and Organizations `.mj-sync.json` set `"push": { "skipGeoCoding": true }`
+because they are **display-only** geo (virtual `PrimaryAddressLatitude`). Addresses
+already include `Latitude`/`Longitude` in the JSON; do not skip geo on addresses
+and do not author `RecordGeoCode` rows or SHA hashes.
+
+`--parallel-batch-size` defaults to **10**. Each record is saved on an
+**independent provider** (shared connection pool, own transaction stack), same
+as MJAPI per-request providers. Do not default to 1 to work around a shared
+provider. Durable AfterCreate (`Common.LogActivity`) defers until that
+provider's transaction depth is 0 (fire-and-forget), not nested in Person.Save.
+
 ```sh
-npx mj sync push --dir=generated --format=json  # push simulated world data
-npx mj sync push --dir=config --format=json     # push administrative configuration
+# from the MJ repo root — never `cd` into more-cheese for this push
+MJCLI=packages/MJCLI/bin/run.js
+CHEESE=/Users/amith/Dropbox/develop/M5/more-cheese
+
+node "$MJCLI" sync push --dir "$CHEESE/generated" --ci --no-interactive
+node "$MJCLI" sync push --dir "$CHEESE/config" --ci --no-interactive
 ```
 
 > **Note on metadata roots**: In `mj-app.json`, `metadata.directory` specifies `"generated"` for OpenApp packaging, while `config/` maintains an independent sync and `sqlLogging` root for Explorer-authored configuration.

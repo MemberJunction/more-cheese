@@ -1,4 +1,5 @@
 {
   "entity": "MJ_BizApps_Common: Organizations",
-  "filePattern": "**/.*.json"
+  "filePattern": "**/.*.json",
+  "push": { "skipGeoCoding": true }
 }

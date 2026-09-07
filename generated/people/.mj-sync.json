@@ -1,4 +1,5 @@
 {
   "entity": "MJ_BizApps_Common: People",
-  "filePattern": "**/.*.json"
+  "filePattern": "**/.*.json",
+  "push": { "skipGeoCoding": true }
 }
