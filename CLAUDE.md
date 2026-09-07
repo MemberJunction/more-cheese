@@ -61,6 +61,15 @@ covered there). Read the relevant topic before working in its area:
 6. **When linked into MJ**: the wiring edits in the MJ repo (root
    `package.json`, `mj.config.cjs`, MJAPI/MJExplorer `package.json`, bootstrap
    import, lockfile) are local-only — never commit them to MJ.
+7. **`mj sync push` of `generated/` must run from the MJ repo cwd** so
+   `dynamicPackages.server` loads (Accounting/Orders/Common). Do not `cd` here
+   to sync. People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
+   — they are display-only geo (virtual PrimaryAddress*). Addresses carry
+   `Latitude`/`Longitude` in JSON; do **not** skip geo on addresses (coords
+   already set → provider is not called). Do **not** author `RecordGeoCode` JSON
+   or SHA hashes. Parallel default is 10: each record gets its own provider
+   (shared pool, own TX). Full command:
+   [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
 
 ## Build & dev commands
 
