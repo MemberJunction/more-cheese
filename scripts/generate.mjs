@@ -87,8 +87,7 @@ const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
 function loadEntityRows(outputDirectory) {
   const dir = path.join(generatedDir, outputDirectory);
   if (!fs.existsSync(dir)) {
-    console.error(`Error: generated directory missing: ${outputDirectory}`);
-    process.exit(1);
+    return [];
   }
   const files = fs
     .readdirSync(dir)
