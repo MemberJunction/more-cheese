@@ -69,7 +69,7 @@ jobs:
       - name: Run Loom mutation test suite
         run: npm run test:loom-mutations
 
-      - name: Compile domain, run deterministic passes (avatars, logos), verify tree unchanged
+      - name: Compile domain smoke test, verify entity directories present and avatar/logo determinism
         run: npm run generate && test -z "$(git status --porcelain generated/)" && git diff --exit-code generated/
 
       - name: Check for migration file changes

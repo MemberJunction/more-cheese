@@ -21,7 +21,7 @@ const generatedDir = path.join(rootDir, 'generated');
 const checkpointPath = path.join(generatedDir, 'checkpoint.json');
 const domainPath = path.join(rootDir, 'data', 'domain.json');
 
-console.log(`🧵 Loom Pipeline: Compile domain, run deterministic passes (avatars, logos), verify tree unchanged`);
+console.log(`🧵 Loom Pipeline: Compile domain smoke test, run deterministic passes (avatars, logos), verify entity directories`);
 console.log(`   Seed: 42 | Release: 2026-09-02 (asOfYear: 2026)`);
 
 function findExisting(candidates) {
@@ -84,10 +84,39 @@ if (!engineEntry) {
 const { AvatarGenerator, LogoGenerator, IdentityService } = await import(pathToFileURL(engineEntry).href);
 const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
 
+// Derive composed entities (collections, embeds, isA) that legitimately have no standalone output directory on disk
+const composedOutputDirs = new Set();
+for (const [name, entityCfg] of Object.entries(domain.entities || {})) {
+  const compCols = entityCfg.composition?.collections || entityCfg.collections;
+  if (compCols) {
+    const cols = Array.isArray(compCols) ? compCols : Object.values(compCols);
+    for (const c of cols) {
+      if (c.entity && domain.entities[c.entity]?.outputDirectory) {
+        composedOutputDirs.add(domain.entities[c.entity].outputDirectory);
+      }
+    }
+  }
+  const compEmbeds = entityCfg.composition?.embeds || entityCfg.embeds;
+  if (compEmbeds) {
+    const embeds = Array.isArray(compEmbeds) ? compEmbeds : Object.values(compEmbeds);
+    for (const e of embeds) {
+      if (e.entity && domain.entities[e.entity]?.outputDirectory) {
+        composedOutputDirs.add(domain.entities[e.entity].outputDirectory);
+      }
+    }
+  }
+  if (entityCfg.composition?.isA && entityCfg.outputDirectory) {
+    composedOutputDirs.add(entityCfg.outputDirectory);
+  }
+}
+
 function loadEntityRows(outputDirectory) {
   const dir = path.join(generatedDir, outputDirectory);
   if (!fs.existsSync(dir)) {
-    return [];
+    if (composedOutputDirs.has(outputDirectory)) {
+      return [];
+    }
+    throw new Error(`Directory does not exist on disk for entity outputDirectory: ${outputDirectory}`);
   }
   const files = fs
     .readdirSync(dir)
@@ -225,9 +254,16 @@ try {
   process.exit(1);
 }
 
-const genEntries = fs.readdirSync(generatedDir, { withFileTypes: true });
-const genDirs = genEntries.filter((e) => e.isDirectory()).map((e) => e.name);
-console.log(`   ✓ ${genDirs.length} entity directories verified unchanged`);
+const syncConfigPath = path.join(generatedDir, '.mj-sync.json');
+const syncConfig = JSON.parse(fs.readFileSync(syncConfigPath, 'utf8'));
+const missingDirs = (syncConfig.directoryOrder || []).filter(
+  (dirName) => !fs.existsSync(path.join(generatedDir, dirName))
+);
+if (missingDirs.length > 0) {
+  console.error(`Error: directories in .mj-sync.json missing on disk: ${missingDirs.join(', ')}`);
+  process.exit(1);
+}
+console.log(`   ✓ All ${syncConfig.directoryOrder?.length} entity directories in .mj-sync.json present on disk`);
 
 console.log(`✨ Pipeline complete successfully.`);
 process.exit(0);
