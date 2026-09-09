@@ -70,6 +70,15 @@ covered there). Read the relevant topic before working in its area:
    or SHA hashes. Parallel default is 10: each record gets its own provider
    (shared pool, own TX). Full command:
    [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
+8. **ICF accounting seed** lives in `generated/companies` (with `extension` for
+   `AccountingCompanyProfile`), `gl-accounts`, `gl-account-links`, and
+   `journal-entry-sequences`. Company-level `GLAccountLink` rows are required for
+   order confirm (AR / Sales / Deferred Revenue / Cash / …).
+9. **Catalog composition** — Event products and event order lines use first-class
+   `extension` composition (Event Products on `generated/products`, Event Order Lines
+   with `PersonID` on `generated/order-lines`). Committee meetings use nested
+   `collections` (`AgendaItems`, `Attendance`, `Motions` with `Votes`). All composition
+   axes persist cleanly via single-save `mj sync push` with zero raw SQL inserts.
 
 ## Build & dev commands
 

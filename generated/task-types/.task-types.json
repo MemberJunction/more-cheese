@@ -1,26 +1,34 @@
 [
   {
-    "primaryKey": {
-      "ID": "07688EBB-89F2-58C5-8B6A-659E6A799727"
-    },
     "fields": {
       "Name": "Committee Action Item",
       "Code": "COMMITTEE_ACTION_ITEM",
       "Description": "Follow-up work items arising from committee meetings",
       "DefaultPriority": "Medium",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "07688EBB-89F2-58C5-8B6A-659E6A799727"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.360Z",
+      "checksum": "d34dd7130e478ce77ff5b0bfc77488f6e8940b4cfe40bd1e0d0b9e958941e260"
     }
   },
   {
-    "primaryKey": {
-      "ID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8"
-    },
     "fields": {
       "Name": "Renewal Outreach",
       "Code": "RENEWAL_OUTREACH",
       "Description": "Staff outreach to members whose renewal is due",
       "DefaultPriority": "High",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "A7A45EFF-97A0-56E7-9468-6C7E25C4DCD8"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.360Z",
+      "checksum": "cfc6749f9430152cecc16ec7da38ef5850f7b829235fb8d4c3a388c75fc3a85e"
     }
   }
 ]

@@ -1,8 +1,5 @@
 [
   {
-    "primaryKey": {
-      "ID": "0F4E6E6A-FDCF-5D5E-9DF0-D4A3023C90A3"
-    },
     "fields": {
       "Name": "Mentor",
       "Description": "Demo-owned type: structured mentorship pairs",
@@ -11,12 +8,16 @@
       "ForwardLabel": "mentors",
       "ReverseLabel": "is mentored by",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "0F4E6E6A-FDCF-5D5E-9DF0-D4A3023C90A3"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.364Z",
+      "checksum": "c64d59605e7873c608f80ef5737888d3950041d41e833830460dce2967a6a930"
     }
   },
   {
-    "primaryKey": {
-      "ID": "B93A4452-68D3-5B4D-A2B2-C3537FA29B2E"
-    },
     "fields": {
       "Name": "Duplicate Of",
       "Description": "Demo-owned type: labeled ground truth for the dedup demo",
@@ -25,12 +26,16 @@
       "ForwardLabel": "is duplicate of",
       "ReverseLabel": "has duplicate",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "B93A4452-68D3-5B4D-A2B2-C3537FA29B2E"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.364Z",
+      "checksum": "cf0a9fbf66893cd4aebe734d922d4c6ac1783bdb5b0e0dc75a5ef41667dd980f"
     }
   },
   {
-    "primaryKey": {
-      "ID": "370C5AFE-D4AD-54BE-89DA-D0F7B90CF329"
-    },
     "fields": {
       "Name": "Referred By",
       "Description": "Demo-owned type: member-get-a-member referrals — a real acquisition channel, and the edge a retention team wants to see",
@@ -39,12 +44,16 @@
       "ForwardLabel": "was referred by",
       "ReverseLabel": "referred",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "370C5AFE-D4AD-54BE-89DA-D0F7B90CF329"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.364Z",
+      "checksum": "526f5d9aa5a0045619a3ccec7c90d6ade51e4d74e830ff5aff0cc2df15a9e994"
     }
   },
   {
-    "primaryKey": {
-      "ID": "CF8F060A-470D-5FA7-971D-08C640800BC8"
-    },
     "fields": {
       "Name": "Supplier Of",
       "Description": "Demo-owned type: trade relationships between supplier organizations and the creameries they serve",
@@ -53,6 +62,13 @@
       "ForwardLabel": "supplies",
       "ReverseLabel": "is supplied by",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "CF8F060A-470D-5FA7-971D-08C640800BC8"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.364Z",
+      "checksum": "5f5d2196c7426d08c26d3c73bc8a737a74f09a845e3e0210fb4e5337b9ee56c6"
     }
   }
 ]

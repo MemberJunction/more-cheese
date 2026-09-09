@@ -1,0 +1,189 @@
+[
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000011101",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Cash",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Cash"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A010"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.121Z",
+      "checksum": "95427d35d63f04c11e5e0f7c1d84735ca0b18bfbdd8f5559fb8f70e31e9cb5fc"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000011102",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=BankAccount",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — BankAccount"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A015"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.146Z",
+      "checksum": "e0d5b9601455a21c99facd2a2ad211648ea8aaa84f193344d29129a21d848c0f"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000011201",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Accounts Receivable",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Accounts Receivable"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A020"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.181Z",
+      "checksum": "c1c601951a54a8ffb3889a917e9c8f6ed51058ce8b0991771be3c16b0971ac5c"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000013000",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Inventory",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Inventory"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A030"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.213Z",
+      "checksum": "70b6f8eeb219b139bb816d4d821500956116adf5af7f4b3e6f0ac272f11e1c01"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000050000",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Cost of Goods Sold",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Cost of Goods Sold"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A040"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.246Z",
+      "checksum": "f21886a8574f18a2a386c76adc666808cf55ba6749064244dc56155ed94cfe06"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000040100",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Sales",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Sales (events/courses/goods)"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A050"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.277Z",
+      "checksum": "1b139f9ed7218612de2bf33f73027714d1b4ba0e7d48cb7e09ab42878aff08c1"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000041000",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Sales Discounts",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Sales Discounts"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A060"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.308Z",
+      "checksum": "3ea5a7772a9e742e043b43804193b582db56f9daf1e6f614d4211ee194c4c617"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000042000",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Sales Returns and Allowances",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Sales Returns and Allowances"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A070"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.342Z",
+      "checksum": "3f2ad5b05e002d2b653cf247be5596a3f0652f13e370410c1c0e0085fe19848f"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000021301",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Deferred Revenue",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Deferred Revenue"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A080"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.378Z",
+      "checksum": "e713422313ec1e0d144f0fd78452f6827fbcd1d96e4571006dec8f83cea120b8"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000051000",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Processing Fee",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ: Companies",
+      "RecordID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Status": "Active",
+      "Comments": "ICF company default — Processing Fee"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000A090"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.415Z",
+      "checksum": "07f1083c7fc2fe817d28bbd358a7d81b2ced64a09df904c6fa898aeed9b886ea"
+    }
+  },
+  {
+    "fields": {
+      "GLAccountID": "E8A1D92C-38A2-51E7-8FB2-000000040200",
+      "GLAccountRoleID": "@lookup:MJ_BizApps_Accounting: GL Account Roles.Name=Sales",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Product Types",
+      "RecordID": "9A783463-F0E6-450E-B7AD-DD3EFD1F0DAF",
+      "Status": "Active",
+      "Comments": "Membership product type — Sales → 40200 Subscription Revenue"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-00000000C402"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:35.452Z",
+      "checksum": "cebbead7fdd4e32f65cbea09fa91734ae65a95750824707f4cf23c0ba49b071e"
+    }
+  }
+]
