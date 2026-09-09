@@ -52,6 +52,22 @@ for (const { root, file } of files) {
       if (r?.fields) {
         records.push({ dir, primaryKey: r.primaryKey, fields: r.fields });
       }
+      if (r?.collections) {
+        for (const [colName, items] of Object.entries(r.collections)) {
+          if (Array.isArray(items)) {
+            for (const item of items) {
+              if (item?.primaryKey?.ID) {
+                const pk = item.primaryKey.ID.toUpperCase();
+                allPrimaryKeys.add(pk);
+                dirKeys.add(pk);
+              }
+              if (item?.fields) {
+                records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
+              }
+            }
+          }
+        }
+      }
     }
   } catch (err) {
     console.error(`Error reading ${file}:`, err);
@@ -71,7 +87,7 @@ const FIELD_TARGET_DIR_MAP = new Map([
   ['OrderHeaderID', 'orders'],
   ['OrderID', 'orders'],
   ['ReversesOrderHeaderID', 'orders'],
-  ['OrderLineID', 'order-lines'],
+  ['OrderLineID', 'orders'],
   ['PaymentHeaderID', 'payments'],
   ['EventID', 'events'],
   ['CourseID', 'courses'],
@@ -225,7 +241,7 @@ console.log(`✓ Zero cross-directory Primary Key collisions across ${pkOwnerMap
 
 // 6. Order & Line Financial Integrity audit (TotalGross == line sum, Balance == TotalGross - AmountPaid, 0 overpaid, LineTotalNet/LineTotalGross match formula)
 console.log('\n--- Order & Line Financial Integrity Audit ---');
-const orderLines = records.filter((r) => r.dir === 'order-lines');
+const orderLines = records.filter((r) => r.dir === 'order-lines' || (r.dir === 'orders' && r.fields?.OrderHeaderID));
 let lineTotalNetMismatches = 0;
 let lineTotalGrossMismatches = 0;
 
@@ -261,7 +277,7 @@ for (const ol of orderLines) {
   lineSums.set(oid, (lineSums.get(oid) ?? 0) + Number(ol.fields.LineTotalGross));
 }
 
-const orders = records.filter((r) => r.dir === 'orders');
+const orders = records.filter((r) => r.dir === 'orders' && !r.fields?.OrderHeaderID);
 let grossMismatches = 0;
 let balanceMismatches = 0;
 let overpaidOrders = 0;
