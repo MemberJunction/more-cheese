@@ -1,8 +1,5 @@
 [
   {
-    "primaryKey": {
-      "ID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6"
-    },
     "fields": {
       "Name": "Standards Committee",
       "TypeID": "97B1E92D-DBF0-5A37-BC04-963E511C198D",
@@ -10,12 +7,12 @@
       "Status": "Active",
       "IsPublic": true,
       "FormationDate": "2015-03-01"
+    },
+    "primaryKey": {
+      "ID": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6"
     }
   },
   {
-    "primaryKey": {
-      "ID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39"
-    },
     "fields": {
       "Name": "Food Safety Committee",
       "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
@@ -23,12 +20,12 @@
       "Status": "Active",
       "IsPublic": true,
       "FormationDate": "2014-06-01"
+    },
+    "primaryKey": {
+      "ID": "5F2F642E-9FC8-5AA7-9A44-D755498BCD39"
     }
   },
   {
-    "primaryKey": {
-      "ID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7"
-    },
     "fields": {
       "Name": "Education Committee",
       "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
@@ -36,12 +33,12 @@
       "Status": "Active",
       "IsPublic": true,
       "FormationDate": "2016-01-15"
+    },
+    "primaryKey": {
+      "ID": "9C14CE8E-C575-5AD2-B63D-8E21D37C87B7"
     }
   },
   {
-    "primaryKey": {
-      "ID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E"
-    },
     "fields": {
       "Name": "Awards & Competition Committee",
       "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
@@ -49,12 +46,12 @@
       "Status": "Active",
       "IsPublic": true,
       "FormationDate": "2015-01-01"
+    },
+    "primaryKey": {
+      "ID": "C5D0AC4D-19AF-56E6-9C8B-283A40EC238E"
     }
   },
   {
-    "primaryKey": {
-      "ID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842"
-    },
     "fields": {
       "Name": "Events Committee",
       "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
@@ -62,12 +59,12 @@
       "Status": "Active",
       "IsPublic": true,
       "FormationDate": "2016-09-01"
+    },
+    "primaryKey": {
+      "ID": "B09D67C9-ADE4-5531-B8C2-D3BD1C325842"
     }
   },
   {
-    "primaryKey": {
-      "ID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA"
-    },
     "fields": {
       "Name": "Membership & Outreach Committee",
       "TypeID": "D079B344-B897-57D0-94CB-927CF6E825AF",
@@ -75,6 +72,9 @@
       "Status": "Active",
       "IsPublic": true,
       "FormationDate": "2017-09-01"
+    },
+    "primaryKey": {
+      "ID": "811211D3-BCDD-5118-AF02-5BB0AF3642BA"
     }
   }
 ]

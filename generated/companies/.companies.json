@@ -1,13 +1,28 @@
 [
   {
-    "primaryKey": {
-      "ID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30"
-    },
     "fields": {
       "Name": "International Cheese Federation",
       "Description": "Global trade association for artisan cheese producers, affineurs, and industry retailers.",
       "Website": "https://internationalcheese.org",
       "Domain": "internationalcheese.org"
+    },
+    "extension": {
+      "fields": {
+        "EntityType": "LegalEntity",
+        "CompanyCode": "ICF",
+        "FunctionalCurrencyCode": "USD",
+        "FiscalYearStartMonth": 1,
+        "FiscalYearStartDay": 1,
+        "OperatingTimeZone": "UTC",
+        "IsActive": true
+      }
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:33:15.675Z",
+      "checksum": "e4cf4f3b09357caa554d31a81205f37735756a555138b929f38151a3a3c5c56a"
     }
   }
 ]

@@ -1,4 +1,15 @@
 {
   "entity": "Committees: Meetings",
-  "filePattern": "**/.*.json"
+  "filePattern": "**/.*.json",
+  "collections": {
+    "AgendaItems": {
+      "mode": "upsert"
+    },
+    "Attendance": {
+      "mode": "upsert"
+    },
+    "Motions": {
+      "mode": "upsert"
+    }
+  }
 }

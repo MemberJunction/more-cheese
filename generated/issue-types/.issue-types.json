@@ -1,46 +1,62 @@
 [
   {
-    "primaryKey": {
-      "ID": "DE642792-4FE3-531D-A387-9ABB76A44C7F"
-    },
     "fields": {
       "Name": "Billing",
       "Description": "Dues and payment problems",
       "DefaultPriority": "High",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "DE642792-4FE3-531D-A387-9ABB76A44C7F"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.362Z",
+      "checksum": "8d65c6c6e2c1f59f114bdcebc1d4a9be979d3a9f6d910133adb40a92739c6181"
     }
   },
   {
-    "primaryKey": {
-      "ID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A"
-    },
     "fields": {
       "Name": "Data Correction",
       "Description": "Member/organization record fixes",
       "DefaultPriority": "Medium",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "9F2EE1F7-BD3E-5621-A8F4-C1050D67449A"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.362Z",
+      "checksum": "e773d4b9bb530dbc9163b2e5b8e8c02a3c61f4078e70e4d6ff9c6a4bb69d41d4"
     }
   },
   {
-    "primaryKey": {
-      "ID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C"
-    },
     "fields": {
       "Name": "Events",
       "Description": "Registration and refund requests",
       "DefaultPriority": "Medium",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "2A49F8ED-CD44-5D04-BA85-B6F93A6BAF0C"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.362Z",
+      "checksum": "f2704c6152c056c4df689c8ab6f54a9df52fd082c24b1fedb676e2c3573f2971"
     }
   },
   {
-    "primaryKey": {
-      "ID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B"
-    },
     "fields": {
       "Name": "General",
       "Description": "Everything else",
       "DefaultPriority": "Low",
       "IsActive": true
+    },
+    "primaryKey": {
+      "ID": "29EC82D7-A868-59AB-ABE4-D4F286F7841B"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T04:11:30.362Z",
+      "checksum": "4e029a3f7fe0ba4531e555920ebbab674f1cd0a91474b5978ad96ea2bb0b7e82"
     }
   }
 ]

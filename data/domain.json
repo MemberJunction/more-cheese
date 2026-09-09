@@ -857,6 +857,25 @@
           "targetField": "ID"
         }
       },
+      "composition": {
+        "collections": {
+          "AgendaItems": {
+            "entity": "CommitteeAgendaItem",
+            "foreignKey": "MeetingID",
+            "mode": "upsert"
+          },
+          "Attendance": {
+            "entity": "CommitteeAttendance",
+            "foreignKey": "MeetingID",
+            "mode": "upsert"
+          },
+          "Motions": {
+            "entity": "CommitteeMotion",
+            "foreignKey": "MeetingID",
+            "mode": "upsert"
+          }
+        }
+      },
       "isImmutable": false
     },
     "CommitteeMotion": {
@@ -937,6 +956,15 @@
         "SecondedByMembershipID": {
           "targetEntity": "CommitteeMembership",
           "targetField": "ID"
+        }
+      },
+      "composition": {
+        "collections": {
+          "Votes": {
+            "entity": "CommitteeVote",
+            "foreignKey": "MotionID",
+            "mode": "upsert"
+          }
         }
       },
       "isImmutable": false
@@ -1850,6 +1878,40 @@
         "CompanyID": {
           "targetEntity": "Company",
           "targetField": "ID"
+        }
+      },
+      "isImmutable": false
+    },
+    "EventOrderLine": {
+      "name": "EventOrderLine",
+      "entityName": "MJ_BizApps_Orders: Event Order Lines",
+      "targetTable": "EventOrderLine",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "composition": {
+        "isA": {
+          "parentEntity": "OrderLine",
+          "when": "ProductID.ProductTypeID.OrderLineExtensionEntity"
         }
       },
       "isImmutable": false

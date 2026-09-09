@@ -1,8 +1,5 @@
 [
   {
-    "primaryKey": {
-      "ID": "736DDC26-30BF-5357-8F5E-9BB946B3B415"
-    },
     "fields": {
       "Name": "Enthusiast Membership (annual)",
       "SKU": "PROD-MEM-ENTHUSIAST",
@@ -13,13 +10,18 @@
       "Status": "Active",
       "StandaloneSellingPrice": 150,
       "IsTaxable": false,
-      "Description": "Enthusiast Membership (annual)"
+      "Description": "Enthusiast Membership (annual)",
+      "SubscriptionTypeID": "C5E1A870-9B24-4D63-8E17-5A6B7C8D9E01"
+    },
+    "primaryKey": {
+      "ID": "736DDC26-30BF-5357-8F5E-9BB946B3B415"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:40:06.071Z",
+      "checksum": "b6f944ed27c1a0828999523428ef13d16d82fde611c1e871e83f6577fd034f9d"
     }
   },
   {
-    "primaryKey": {
-      "ID": "67FBE689-6598-536D-BC8D-09D25B63F982"
-    },
     "fields": {
       "Name": "Individual Membership (annual)",
       "SKU": "PROD-MEM-INDIVIDUAL",
@@ -30,13 +32,18 @@
       "Status": "Active",
       "StandaloneSellingPrice": 175,
       "IsTaxable": false,
-      "Description": "Individual Membership (annual)"
+      "Description": "Individual Membership (annual)",
+      "SubscriptionTypeID": "C5E1A870-9B24-4D63-8E17-5A6B7C8D9E01"
+    },
+    "primaryKey": {
+      "ID": "67FBE689-6598-536D-BC8D-09D25B63F982"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:40:06.052Z",
+      "checksum": "f569c2a0bc80872f150907a0cf3b502d630afd751e1937b936f1cb5a49796800"
     }
   },
   {
-    "primaryKey": {
-      "ID": "0F37A3CC-2D70-54FB-8474-C9A7D4AE73F1"
-    },
     "fields": {
       "Name": "SmallBusiness Membership (annual)",
       "SKU": "PROD-MEM-SMALLBUSINESS",
@@ -47,13 +54,18 @@
       "Status": "Active",
       "StandaloneSellingPrice": 400,
       "IsTaxable": false,
-      "Description": "SmallBusiness Membership (annual)"
+      "Description": "SmallBusiness Membership (annual)",
+      "SubscriptionTypeID": "C5E1A870-9B24-4D63-8E17-5A6B7C8D9E01"
+    },
+    "primaryKey": {
+      "ID": "0F37A3CC-2D70-54FB-8474-C9A7D4AE73F1"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:40:06.064Z",
+      "checksum": "7defe2ebe6cfec44cfbf4069b8b954261bb6576e785757505933f855f3b6869a"
     }
   },
   {
-    "primaryKey": {
-      "ID": "23C8BE1D-3AE0-5413-AC7D-D7C779647A31"
-    },
     "fields": {
       "Name": "Corporate Membership (annual)",
       "SKU": "PROD-MEM-CORPORATE",
@@ -64,13 +76,18 @@
       "Status": "Active",
       "StandaloneSellingPrice": 1000,
       "IsTaxable": false,
-      "Description": "Corporate Membership (annual)"
+      "Description": "Corporate Membership (annual)",
+      "SubscriptionTypeID": "C5E1A870-9B24-4D63-8E17-5A6B7C8D9E01"
+    },
+    "primaryKey": {
+      "ID": "23C8BE1D-3AE0-5413-AC7D-D7C779647A31"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:40:06.058Z",
+      "checksum": "7741a10a4377f82ea03cc3f91dd802c269b2ccd5ac228a5c8638bea7b6de81e2"
     }
   },
   {
-    "primaryKey": {
-      "ID": "9AA3136D-3DC7-5B78-8E46-C949083E5EB0"
-    },
     "fields": {
       "Name": "Conference Registration",
       "SKU": "PROD-EVT-CONFERENCE",
@@ -82,12 +99,21 @@
       "StandaloneSellingPrice": 450,
       "IsTaxable": true,
       "Description": "Conference Registration"
+    },
+    "extension": {
+      "fields": {
+        "EventStartsAt": "2026-07-21T12:00:00.000Z",
+        "EventEndsAt": null,
+        "VenueName": "ICF Annual Conference",
+        "Capacity": 800,
+        "RequiresAttendeeInfo": true
+      }
+    },
+    "primaryKey": {
+      "ID": "9AA3136D-3DC7-5B78-8E46-C949083E5EB0"
     }
   },
   {
-    "primaryKey": {
-      "ID": "24ABF9A9-C12F-56EE-8B06-A4081BD24475"
-    },
     "fields": {
       "Name": "Workshop Registration",
       "SKU": "PROD-EVT-WORKSHOP",
@@ -99,12 +125,21 @@
       "StandaloneSellingPrice": 150,
       "IsTaxable": true,
       "Description": "Workshop Registration"
+    },
+    "extension": {
+      "fields": {
+        "EventStartsAt": "2026-11-19T12:00:00.000Z",
+        "EventEndsAt": null,
+        "VenueName": "ICF Workshop",
+        "Capacity": 40,
+        "RequiresAttendeeInfo": true
+      }
+    },
+    "primaryKey": {
+      "ID": "24ABF9A9-C12F-56EE-8B06-A4081BD24475"
     }
   },
   {
-    "primaryKey": {
-      "ID": "2899F1CD-B9D3-5B6A-80EF-D5D2945BC18F"
-    },
     "fields": {
       "Name": "Certification exam fee",
       "SKU": "PROD-CERT-EXAM",
@@ -116,12 +151,12 @@
       "StandaloneSellingPrice": 425,
       "IsTaxable": false,
       "Description": "Certification exam fee"
+    },
+    "primaryKey": {
+      "ID": "2899F1CD-B9D3-5B6A-80EF-D5D2945BC18F"
     }
   },
   {
-    "primaryKey": {
-      "ID": "D370F7BC-45AB-5D5E-9EE3-F6723E283613"
-    },
     "fields": {
       "Name": "Recertification fee",
       "SKU": "PROD-CERT-RECERT",
@@ -133,12 +168,12 @@
       "StandaloneSellingPrice": 195,
       "IsTaxable": false,
       "Description": "Recertification fee"
+    },
+    "primaryKey": {
+      "ID": "D370F7BC-45AB-5D5E-9EE3-F6723E283613"
     }
   },
   {
-    "primaryKey": {
-      "ID": "148551BB-4CA0-500B-BA1B-CB23E5CB2504"
-    },
     "fields": {
       "Name": "Competition entry (per cheese)",
       "SKU": "PROD-COMP-ENTRY",
@@ -150,12 +185,16 @@
       "StandaloneSellingPrice": 65,
       "IsTaxable": false,
       "Description": "Competition entry (per cheese)"
+    },
+    "primaryKey": {
+      "ID": "148551BB-4CA0-500B-BA1B-CB23E5CB2504"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:40:06.076Z",
+      "checksum": "85d10899f9086872ac25105c2ef2425e842e0803cec9741de6a049ab7d57f8fd"
     }
   },
   {
-    "primaryKey": {
-      "ID": "2AB8E892-AF0B-5535-8E59-5040CF86F281"
-    },
     "fields": {
       "Name": "Journal of Artisan Cheese (annual)",
       "SKU": "PROD-PUB-JOURNAL",
@@ -167,12 +206,12 @@
       "StandaloneSellingPrice": 85,
       "IsTaxable": true,
       "Description": "Journal of Artisan Cheese (annual)"
+    },
+    "primaryKey": {
+      "ID": "2AB8E892-AF0B-5535-8E59-5040CF86F281"
     }
   },
   {
-    "primaryKey": {
-      "ID": "E0F68778-466A-5377-ADA6-A7C080D37856"
-    },
     "fields": {
       "Name": "Standards handbook",
       "SKU": "PROD-PUB-STANDARDS",
@@ -184,12 +223,12 @@
       "StandaloneSellingPrice": 140,
       "IsTaxable": true,
       "Description": "Standards handbook"
+    },
+    "primaryKey": {
+      "ID": "E0F68778-466A-5377-ADA6-A7C080D37856"
     }
   },
   {
-    "primaryKey": {
-      "ID": "098F9568-DA3F-5177-AA13-B867441584F6"
-    },
     "fields": {
       "Name": "Conference exhibitor booth",
       "SKU": "PROD-SPON-EXPO",
@@ -201,12 +240,12 @@
       "StandaloneSellingPrice": 2400,
       "IsTaxable": false,
       "Description": "Conference exhibitor booth"
+    },
+    "primaryKey": {
+      "ID": "098F9568-DA3F-5177-AA13-B867441584F6"
     }
   },
   {
-    "primaryKey": {
-      "ID": "3D313D46-A31B-5A27-BC1F-22EC3B655B5E"
-    },
     "fields": {
       "Name": "Job board posting (30 days)",
       "SKU": "PROD-JOB-POST",
@@ -218,12 +257,12 @@
       "StandaloneSellingPrice": 250,
       "IsTaxable": false,
       "Description": "Job board posting (30 days)"
+    },
+    "primaryKey": {
+      "ID": "3D313D46-A31B-5A27-BC1F-22EC3B655B5E"
     }
   },
   {
-    "primaryKey": {
-      "ID": "4F4EADE8-555D-5A60-B7B3-940529922D44"
-    },
     "fields": {
       "Name": "Federation apron",
       "SKU": "PROD-MERCH-APRON",
@@ -235,12 +274,12 @@
       "StandaloneSellingPrice": 38,
       "IsTaxable": true,
       "Description": "Federation apron"
+    },
+    "primaryKey": {
+      "ID": "4F4EADE8-555D-5A60-B7B3-940529922D44"
     }
   },
   {
-    "primaryKey": {
-      "ID": "E6D5D364-B07E-5C87-9C91-4A8E873433A8"
-    },
     "fields": {
       "Name": "Cheese atlas",
       "SKU": "PROD-MERCH-BOOK",
@@ -252,12 +291,12 @@
       "StandaloneSellingPrice": 52,
       "IsTaxable": true,
       "Description": "Cheese atlas"
+    },
+    "primaryKey": {
+      "ID": "E6D5D364-B07E-5C87-9C91-4A8E873433A8"
     }
   },
   {
-    "primaryKey": {
-      "ID": "AF9356C2-5BD6-5608-A773-8C285436C643"
-    },
     "fields": {
       "Name": "Education fund donation",
       "SKU": "PROD-DONATION",
@@ -269,6 +308,9 @@
       "StandaloneSellingPrice": 100,
       "IsTaxable": false,
       "Description": "Education fund donation"
+    },
+    "primaryKey": {
+      "ID": "AF9356C2-5BD6-5608-A773-8C285436C643"
     }
   }
 ]

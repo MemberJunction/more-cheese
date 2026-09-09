@@ -81,27 +81,12 @@
       "classification": "frozen",
       "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
-    "committee-agenda-items": {
-      "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity governed and validated by Loom domain config"
-    },
-    "committee-attendance": {
-      "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity governed and validated by Loom domain config"
-    },
     "committee-meetings": {
       "tier": "generated",
       "classification": "loom",
       "reason": "Synthetic world model entity governed and validated by Loom domain config"
     },
     "committee-memberships": {
-      "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity governed and validated by Loom domain config"
-    },
-    "committee-motions": {
       "tier": "generated",
       "classification": "loom",
       "reason": "Synthetic world model entity governed and validated by Loom domain config"
@@ -115,11 +100,6 @@
       "tier": "generated",
       "classification": "frozen",
       "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
-    },
-    "committee-votes": {
-      "tier": "generated",
-      "classification": "loom",
-      "reason": "Synthetic world model entity governed and validated by Loom domain config"
     },
     "committees": {
       "tier": "generated",
@@ -206,6 +186,16 @@
       "classification": "frozen",
       "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
+    "gl-account-links": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "gl-accounts": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
     "issue-comments": {
       "tier": "generated",
       "classification": "loom",
@@ -217,6 +207,11 @@
       "reason": "Synthetic world model entity governed and validated by Loom domain config"
     },
     "issue-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "journal-entry-sequences": {
       "tier": "generated",
       "classification": "frozen",
       "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
@@ -285,6 +280,11 @@
       "tier": "generated",
       "classification": "loom",
       "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "product-prices": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
     },
     "products": {
       "tier": "generated",

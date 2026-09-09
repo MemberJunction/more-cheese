@@ -39,13 +39,13 @@ const origCommon = fs.readFileSync(commonPath, 'utf8');
 
 // Backup generated dataset files for relational & closure mutations
 const commMemPath = path.join(rootDir, 'generated/committee-memberships/.committee-memberships.json');
-const commMotionPath = path.join(rootDir, 'generated/committee-motions/.committee-motions.json');
+const commMeetingsPath = path.join(rootDir, 'generated/committee-meetings/.committee-meetings.json');
 const orderLinePath = path.join(rootDir, 'generated/order-lines/.order-lines.part-01.json');
 const peoplePath = path.join(rootDir, 'generated/people/.people.json');
 const orgsPath = path.join(rootDir, 'generated/organizations/.organizations.json');
 
 const origCommMem = fs.readFileSync(commMemPath, 'utf8');
-const origCommMotion = fs.readFileSync(commMotionPath, 'utf8');
+const origCommMeetings = fs.readFileSync(commMeetingsPath, 'utf8');
 const origOrderLine = fs.readFileSync(orderLinePath, 'utf8');
 const origPeople = fs.readFileSync(peoplePath, 'utf8');
 const origOrgs = fs.readFileSync(orgsPath, 'utf8');
@@ -123,14 +123,15 @@ try {
   // Mutation 8: Relational Rule 2 (outcome-derived-from-ballots: motion-outcome-derived-from-votes)
   console.log('Running Mutation 8: Relational Rule 2 (outcome contradicts ballots)...');
   fs.writeFileSync(commMemPath, origCommMem, 'utf8'); // restore
-  const mutatedMotion8 = JSON.parse(origCommMotion);
-  mutatedMotion8[0].fields.Result = 'Failed';
-  fs.writeFileSync(commMotionPath, JSON.stringify(mutatedMotion8, null, 2), 'utf8');
+  const mutatedMeetings8 = JSON.parse(origCommMeetings);
+  const meetingWithMotion = mutatedMeetings8.find(m => m.collections?.Motions?.length > 0);
+  meetingWithMotion.collections.Motions[0].fields.Result = 'Failed';
+  fs.writeFileSync(commMeetingsPath, JSON.stringify(mutatedMeetings8, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 8: motion-outcome-derived-from-votes', 'motion-outcome-derived-from-votes');
 
   // Mutation 9: Relational Rule 3 (path-match: order-line-company-matches-order)
   console.log('Running Mutation 9: Relational Rule 3 (order line company differs from order)...');
-  fs.writeFileSync(commMotionPath, origCommMotion, 'utf8'); // restore
+  fs.writeFileSync(commMeetingsPath, origCommMeetings, 'utf8'); // restore
   const mutatedOrderLine9 = JSON.parse(origOrderLine);
   mutatedOrderLine9[0].fields.CompanyID = '00000000-0000-0000-0000-000000000000';
   fs.writeFileSync(orderLinePath, JSON.stringify(mutatedOrderLine9, null, 2), 'utf8');
@@ -170,7 +171,7 @@ try {
   fs.writeFileSync(domainPath, origDomain, 'utf8');
   fs.writeFileSync(commonPath, origCommon, 'utf8');
   fs.writeFileSync(commMemPath, origCommMem, 'utf8');
-  fs.writeFileSync(commMotionPath, origCommMotion, 'utf8');
+  fs.writeFileSync(commMeetingsPath, origCommMeetings, 'utf8');
   fs.writeFileSync(orderLinePath, origOrderLine, 'utf8');
   fs.writeFileSync(peoplePath, origPeople, 'utf8');
   fs.writeFileSync(orgsPath, origOrgs, 'utf8');
