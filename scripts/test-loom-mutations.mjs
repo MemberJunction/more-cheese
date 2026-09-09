@@ -40,13 +40,13 @@ const origCommon = fs.readFileSync(commonPath, 'utf8');
 // Backup generated dataset files for relational & closure mutations
 const commMemPath = path.join(rootDir, 'generated/committee-memberships/.committee-memberships.json');
 const commMeetingsPath = path.join(rootDir, 'generated/committee-meetings/.committee-meetings.json');
-const orderLinePath = path.join(rootDir, 'generated/order-lines/.order-lines.part-01.json');
+const ordersPath = path.join(rootDir, 'generated/orders/.orders.part-01.json');
 const peoplePath = path.join(rootDir, 'generated/people/.people.json');
 const orgsPath = path.join(rootDir, 'generated/organizations/.organizations.json');
 
 const origCommMem = fs.readFileSync(commMemPath, 'utf8');
 const origCommMeetings = fs.readFileSync(commMeetingsPath, 'utf8');
-const origOrderLine = fs.readFileSync(orderLinePath, 'utf8');
+const origOrders = fs.readFileSync(ordersPath, 'utf8');
 const origPeople = fs.readFileSync(peoplePath, 'utf8');
 const origOrgs = fs.readFileSync(orgsPath, 'utf8');
 
@@ -132,14 +132,14 @@ try {
   // Mutation 9: Relational Rule 3 (path-match: order-line-company-matches-order)
   console.log('Running Mutation 9: Relational Rule 3 (order line company differs from order)...');
   fs.writeFileSync(commMeetingsPath, origCommMeetings, 'utf8'); // restore
-  const mutatedOrderLine9 = JSON.parse(origOrderLine);
-  mutatedOrderLine9[0].fields.CompanyID = '00000000-0000-0000-0000-000000000000';
-  fs.writeFileSync(orderLinePath, JSON.stringify(mutatedOrderLine9, null, 2), 'utf8');
+  const mutatedOrders9 = JSON.parse(origOrders);
+  mutatedOrders9[0].collections.Lines[0].fields.CompanyID = '00000000-0000-0000-0000-000000000000';
+  fs.writeFileSync(ordersPath, JSON.stringify(mutatedOrders9, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 9: order-line-company-matches-order', 'order-line-company-matches-order');
 
   // Mutation 10: PK Uniqueness violation
   console.log('Running Mutation 10: Primary Key collision...');
-  fs.writeFileSync(orderLinePath, origOrderLine, 'utf8'); // restore
+  fs.writeFileSync(ordersPath, origOrders, 'utf8'); // restore
   const mutatedPeople10 = JSON.parse(origPeople);
   mutatedPeople10[1].primaryKey.ID = mutatedPeople10[0].primaryKey.ID;
   fs.writeFileSync(peoplePath, JSON.stringify(mutatedPeople10, null, 2), 'utf8');
@@ -148,14 +148,14 @@ try {
   // Mutation 11: Foreign Key closure violation
   console.log('Running Mutation 11: FK orphan reference...');
   fs.writeFileSync(peoplePath, origPeople, 'utf8'); // restore
-  const mutatedOrderLine11 = JSON.parse(origOrderLine);
-  mutatedOrderLine11[0].fields.ProductID = '00000000-0000-0000-0000-000000000000';
-  fs.writeFileSync(orderLinePath, JSON.stringify(mutatedOrderLine11, null, 2), 'utf8');
+  const mutatedOrders11 = JSON.parse(origOrders);
+  mutatedOrders11[0].collections.Lines[0].fields.ProductID = '00000000-0000-0000-0000-000000000000';
+  fs.writeFileSync(ordersPath, JSON.stringify(mutatedOrders11, null, 2), 'utf8');
   runValidatorExpectingFailure('Mutation 11: FK closure orphan', 'FK Closure');
 
   // Mutation 12: Lookup Resolution violation
   console.log('Running Mutation 12: Unresolvable @lookup expression...');
-  fs.writeFileSync(orderLinePath, origOrderLine, 'utf8'); // restore
+  fs.writeFileSync(ordersPath, origOrders, 'utf8'); // restore
   const mutatedOrgs12 = JSON.parse(origOrgs);
   mutatedOrgs12[0].fields.OrganizationTypeID = '@lookup:MJ_BizApps_Common: Organization Types.Name=NonExistentTypeXYZ';
   fs.writeFileSync(orgsPath, JSON.stringify(mutatedOrgs12, null, 2), 'utf8');
@@ -172,7 +172,7 @@ try {
   fs.writeFileSync(commonPath, origCommon, 'utf8');
   fs.writeFileSync(commMemPath, origCommMem, 'utf8');
   fs.writeFileSync(commMeetingsPath, origCommMeetings, 'utf8');
-  fs.writeFileSync(orderLinePath, origOrderLine, 'utf8');
+  fs.writeFileSync(ordersPath, origOrders, 'utf8');
   fs.writeFileSync(peoplePath, origPeople, 'utf8');
   fs.writeFileSync(orgsPath, origOrgs, 'utf8');
 }

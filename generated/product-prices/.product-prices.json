@@ -7,17 +7,17 @@
       "FeeType": "Standard",
       "Amount": 150,
       "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
       "Priority": 100,
       "Status": "Active",
-      "Description": "List price for Enthusiast Membership (annual)",
-      "RecurrenceMonths": "12"
+      "Description": "List price for Enthusiast Membership (annual)"
     },
     "primaryKey": {
       "ID": "0FD77933-317D-4BA9-9837-F30A37FE8F76"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:43:11.305Z",
-      "checksum": "c4a6ac8fd61c4a7e26430e7b12ab4a5cdfa09154cce473dffb1227932052b2f3"
+      "lastModified": "2026-09-09T16:30:20.042Z",
+      "checksum": "5d2b8841b8ccdeaea417a06831330bd930f5d3327c0cef03ecdcd2ec3ba065a8"
     }
   },
   {
@@ -28,17 +28,13 @@
       "FeeType": "Standard",
       "Amount": 175,
       "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
       "Priority": 100,
       "Status": "Active",
-      "Description": "List price for Individual Membership (annual)",
-      "RecurrenceMonths": "12"
+      "Description": "List price for Individual Membership (annual)"
     },
     "primaryKey": {
       "ID": "488480D6-4B47-470B-9BFD-F3EA1FBB9A1F"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T01:43:11.305Z",
-      "checksum": "fccadf6faa71e8b4cdd257cfee9e0b8428cb3fd961b53bccd7c1782054f75b65"
     }
   },
   {
@@ -49,17 +45,17 @@
       "FeeType": "Standard",
       "Amount": 400,
       "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
       "Priority": 100,
       "Status": "Active",
-      "Description": "List price for SmallBusiness Membership (annual)",
-      "RecurrenceMonths": "12"
+      "Description": "List price for SmallBusiness Membership (annual)"
     },
     "primaryKey": {
       "ID": "D5156F09-228F-4731-882C-0FC077A4E768"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:43:11.305Z",
-      "checksum": "95869ff31a98fbffc38194d8527f5243ccb8c6f751511246d1a2895d76df26f6"
+      "lastModified": "2026-09-09T16:30:20.045Z",
+      "checksum": "17d1e8a7dd03a80dff2ed2fb7ac402ffac900fb968380cf62660434eae85ee40"
     }
   },
   {
@@ -70,17 +66,17 @@
       "FeeType": "Standard",
       "Amount": 1000,
       "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
       "Priority": 100,
       "Status": "Active",
-      "Description": "List price for Corporate Membership (annual)",
-      "RecurrenceMonths": "12"
+      "Description": "List price for Corporate Membership (annual)"
     },
     "primaryKey": {
       "ID": "FF98075B-2C62-45E8-BB3B-5333230EBA99"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:43:11.305Z",
-      "checksum": "526c2141e1d517393fb883edf086affd5cdde665e5757517f7821b13a7cf7577"
+      "lastModified": "2026-09-09T16:30:20.045Z",
+      "checksum": "baa3fad65acd72afc018f33761adc9b3b3812d3e7eb68a271200851f3d280085"
     }
   },
   {
@@ -99,8 +95,8 @@
       "ID": "E75D2867-3181-4B95-9CDF-196AA69A829C"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.222Z",
-      "checksum": "6e284b77a9023174ee3116f8c19562a8673c1cb2b02a557de0514504cca7fa40"
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "03176edab3b37d2f7d0d394f00b7ddba90643085ea5fc8471aa858873feae49c"
     }
   },
   {
@@ -119,8 +115,8 @@
       "ID": "16980E2D-D921-45E8-A412-544DCF8D6E37"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.231Z",
-      "checksum": "f864fdc0a5af4366d473e8a1c3bd98f8da6d3c349864a7d09e2cec50c7479031"
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "06082c3c4a4ebd67fcf8932c8fa753410b9810396d8779dc2f5b6bbaea3290e3"
     }
   },
   {
@@ -139,8 +135,8 @@
       "ID": "1F99585E-2119-4017-B43E-92D3C30C8CD9"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.239Z",
-      "checksum": "f6336631bc18448576b6a46becd17354f01d698cdd8eb085396b6ea13367b63b"
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "03ea16425f2d4ad8009ea5386990155fc40e549a00f953f3a5728aaba8ef42ca"
     }
   },
   {
@@ -159,8 +155,8 @@
       "ID": "BAE438F3-795A-48F5-A23D-69DDED31138F"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.249Z",
-      "checksum": "9f00cd1e88a65a2ca5d65258528c205679d49f9faf38acf5e1795fc2ff569690"
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "22ba09cefba626c23a5ebcf32b65f7e760feba5708055d3dc2e9a996838ae113"
     }
   },
   {
@@ -179,8 +175,8 @@
       "ID": "BA7C6F90-3A0C-4544-9A31-E93B84EC0AE0"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.258Z",
-      "checksum": "5510787a7bb7f1113fec59f96b2063693e650846a7253a2eb28188d594b70e38"
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "e53d440eba47ab9d491da1e23f68144f078592b96fb8c45e9fcac64c42cda485"
     }
   },
   {
@@ -199,8 +195,8 @@
       "ID": "03B5B229-9DB5-46D6-B441-C24257C3AB89"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.267Z",
-      "checksum": "887902490203eb4fe557f0db13542cc2e85a797bb8ab6628f65f04e909476258"
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "49bb4a0b222c8e9a15d5dfcda182b327a55e5a2b6e3725cabb962e89a9bba9ea"
     }
   },
   {
@@ -219,8 +215,8 @@
       "ID": "7E2A5112-278E-4DDA-9475-89694266A957"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.283Z",
-      "checksum": "976181d80ed557b2a46da276727118c86265209c6f7dc713cf6ce4840a6fb73f"
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "b7a56ef4ab604641a8c0c1a5d91dbfe109ce01cc285f72cbd7e0bb77a4bb80f3"
     }
   },
   {
@@ -239,8 +235,8 @@
       "ID": "6E9BB79F-516A-477D-A3D8-C2C3B3CC960D"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.320Z",
-      "checksum": "157319a0373be3beaccf88257dee0ee71313143c2d5d01fb5ee580a7792e85d0"
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "e84f443636f438ae47caa6dad0fd0f82d298a9621e0b38e1edfae3478354f65d"
     }
   },
   {
@@ -259,8 +255,8 @@
       "ID": "015FA7AD-462B-4082-955B-FE0ACFE36A5D"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.292Z",
-      "checksum": "3b9c658cc50dddd37a136b1471c823af34e288a9719ad991fbbd0c2cb7ff4423"
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "53120d3ea0d491527c48cdb13b04c663b707d9b3507f1ca288218eee0a93c154"
     }
   },
   {
@@ -279,8 +275,8 @@
       "ID": "E4E61DFE-4543-4757-B6EE-91D93DD81E76"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.330Z",
-      "checksum": "2af12e49fa4e36cd4d3dd7c68bf6b049784e6a6c6985598514003be32272c62e"
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "1573a59b65c72931d4510c053de754fdbebd21d3591106a245344658a10b4a24"
     }
   },
   {
@@ -299,8 +295,8 @@
       "ID": "C4729610-DFF6-4CB4-AC49-E4380EA500B1"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.302Z",
-      "checksum": "eb0c9f80c9e616a1f8513b65dd0bb91d9ec1aeb8845233d9a07263ebd8ce56fe"
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "d31582d5eed2bfb3a0efa2afe7e244e26edc050c10089d6df828358fddd1f7d7"
     }
   },
   {
@@ -319,8 +315,8 @@
       "ID": "99597ABD-C39A-49EB-9BA4-EF11377F0E78"
     },
     "sync": {
-      "lastModified": "2026-09-09T01:42:35.311Z",
-      "checksum": "76accbfaa0d1e436da8f97e79949419fd979f9b996639f432d4b10776f039820"
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "6838b8b0df154428bb37ba52295b4f75c08aae0aee3508730cd74a1de6dc9b43"
     }
   }
 ]

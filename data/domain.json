@@ -143,19 +143,39 @@
             "defaultTrait": "Female",
             "traits": {
               "Female": {
-                "hair": ["bun"],
+                "hair": [
+                  "bun"
+                ],
                 "hairProbability": 100,
-                "rearHair": ["longStraight", "longWavy", "shoulderHigh"],
+                "rearHair": [
+                  "longStraight",
+                  "longWavy",
+                  "shoulderHigh"
+                ],
                 "rearHairProbability": 100,
                 "beardProbability": 0,
-                "clothes": ["dress", "turtleNeck", "shirt"]
+                "clothes": [
+                  "dress",
+                  "turtleNeck",
+                  "shirt"
+                ]
               },
               "Male": {
-                "hair": ["sideComed", "undercut", "spiky", "bun"],
+                "hair": [
+                  "sideComed",
+                  "undercut",
+                  "spiky",
+                  "bun"
+                ],
                 "hairProbability": 100,
                 "rearHairProbability": 0,
                 "beardProbability": 40,
-                "clothes": ["shirt", "tShirt", "turtleNeck", "openJacket"]
+                "clothes": [
+                  "shirt",
+                  "tShirt",
+                  "turtleNeck",
+                  "openJacket"
+                ]
               }
             }
           }
@@ -1995,7 +2015,16 @@
           "targetField": "ID"
         }
       },
-      "isImmutable": false
+      "isImmutable": false,
+      "composition": {
+        "collections": {
+          "Lines": {
+            "entity": "OrderLine",
+            "foreignKey": "OrderHeaderID",
+            "mode": "upsert"
+          }
+        }
+      }
     },
     "OrganizationProfile": {
       "name": "OrganizationProfile",
