@@ -81,9 +81,49 @@ for (const baseDir of scanRoots) {
       try {
         const s = JSON.parse(fs.readFileSync(syncFile, 'utf8'));
         if (s.entity) {
-          entityNameToMetaDir.set(s.entity, { dirName: md.name, dirPath: path.join(baseDir, md.name) });
+          entityNameToMetaDir.set(s.entity, { dirName: md.name, dirPath: path.join(baseDir, md.name), syncConfig: s });
         }
       } catch {}
+    }
+  }
+}
+
+// Resolve composed children (collections and isA) to their parent directories until fixpoint
+let resolvedNew = true;
+while (resolvedNew) {
+  resolvedNew = false;
+  for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
+    if (entityCfg.composition?.collections) {
+      const parentMeta = entityNameToMetaDir.get(entityCfg.entityName);
+      if (parentMeta) {
+        for (const [colName, colCfg] of Object.entries(entityCfg.composition.collections)) {
+          const childCfg = domain.entities[colCfg.entity];
+          if (childCfg && !entityNameToMetaDir.has(childCfg.entityName)) {
+            const parentPath = parentMeta.collectionPath ?? [];
+            entityNameToMetaDir.set(childCfg.entityName, {
+              dirName: parentMeta.dirName,
+              dirPath: parentMeta.dirPath,
+              collectionPath: [...parentPath, colName],
+              foreignKey: colCfg.foreignKey,
+            });
+            resolvedNew = true;
+          }
+        }
+      }
+    }
+    if (entityCfg.composition?.isA && !entityNameToMetaDir.has(entityCfg.entityName)) {
+      const parentEntity = domain.entities[entityCfg.composition.isA.parentEntity];
+      if (parentEntity) {
+        const parentMeta = entityNameToMetaDir.get(parentEntity.entityName);
+        if (parentMeta) {
+          entityNameToMetaDir.set(entityCfg.entityName, {
+            dirName: parentMeta.dirName,
+            dirPath: parentMeta.dirPath,
+            isA: true,
+          });
+          resolvedNew = true;
+        }
+      }
     }
   }
 }
@@ -136,7 +176,35 @@ for (const [entityName, entityCfg] of Object.entries(domain.entities)) {
   const declaredFieldNames = Object.keys(entityCfg.fields ?? {});
   for (const file of dataFiles) {
     const fileContent = JSON.parse(fs.readFileSync(path.join(dirPath, file), 'utf8'));
-    const records = Array.isArray(fileContent) ? fileContent : (fileContent.records ? fileContent.records : [fileContent]);
+    const rawRecords = Array.isArray(fileContent) ? fileContent : (fileContent.records ? fileContent.records : [fileContent]);
+    let records = rawRecords;
+
+    if (metaDirEntry.isA) {
+      const childList = [];
+      for (const r of rawRecords) {
+        if (r.extension && r.extension.fields) {
+          childList.push({
+            primaryKey: r.primaryKey,
+            fields: r.extension.fields,
+          });
+        }
+      }
+      records = childList;
+    } else if (metaDirEntry.collectionPath && metaDirEntry.collectionPath.length > 0) {
+      let current = rawRecords;
+      for (const colKey of metaDirEntry.collectionPath) {
+        const next = [];
+        for (const r of current) {
+          const colItems = r.collections?.[colKey] ?? [];
+          for (const item of colItems) {
+            next.push(item);
+          }
+        }
+        current = next;
+      }
+      records = current;
+    }
+
     for (let idx = 0; idx < records.length; idx++) {
       const rec = records[idx];
       const recFields = rec.fields || rec;

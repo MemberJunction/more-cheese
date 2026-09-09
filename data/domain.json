@@ -1882,6 +1882,40 @@
       },
       "isImmutable": false
     },
+    "EventOrderLine": {
+      "name": "EventOrderLine",
+      "entityName": "MJ_BizApps_Orders: Event Order Lines",
+      "targetTable": "EventOrderLine",
+      "schema": "__mj_BizAppsOrders",
+      "pack": "commerce",
+      "businessKey": [
+        "ID"
+      ],
+      "fields": {
+        "ID": {
+          "name": "ID",
+          "type": "uuid",
+          "isPrimaryKey": true
+        },
+        "PersonID": {
+          "name": "PersonID",
+          "type": "uuid"
+        }
+      },
+      "foreignKeys": {
+        "PersonID": {
+          "targetEntity": "Person",
+          "targetField": "ID"
+        }
+      },
+      "composition": {
+        "isA": {
+          "parentEntity": "OrderLine",
+          "when": "ProductID.ProductTypeID.OrderLineExtensionEntity"
+        }
+      },
+      "isImmutable": false
+    },
     "Order": {
       "name": "Order",
       "entityName": "MJ_BizApps_Orders: Order Headers",

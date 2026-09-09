@@ -87,7 +87,13 @@ const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['sonar-score-model-versions.PublishedByUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
   ['products.ProductTypeID', { reason: 'Points to @mj-biz-apps/orders seeded product types', hits: 0 }],
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
-  ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }]
+  ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
+  ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
+  ['gl-account-links.RecordID', {
+    reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
+    hits: 0,
+    condition: (fields) => String(fields.EntityID ?? '').includes('Product Types')
+  }]
 ]);
 
 console.log('='.repeat(80));
@@ -107,16 +113,22 @@ for (const r of records) {
       }
 
       const qualifiedKey = `${r.dir}.${fieldName}`;
-      if (EXCLUDED_EXTERNAL_FIELDS.has(qualifiedKey)) {
-        EXCLUDED_EXTERNAL_FIELDS.get(qualifiedKey).hits++;
-        continue;
+      const exclusion = EXCLUDED_EXTERNAL_FIELDS.get(qualifiedKey);
+      if (exclusion) {
+        if (!exclusion.condition || exclusion.condition(r.fields)) {
+          exclusion.hits++;
+          continue;
+        }
       }
 
       evaluatedCount++;
       const valUpper = val.toUpperCase();
 
       // Target-aware check if target directory is known
-      const targetDir = FIELD_TARGET_DIR_MAP.get(fieldName);
+      let targetDir = FIELD_TARGET_DIR_MAP.get(fieldName);
+      if (r.dir === 'gl-account-links' && fieldName === 'RecordID' && String(r.fields.EntityID ?? '').includes('Companies')) {
+        targetDir = 'companies';
+      }
       if (targetDir) {
         const targetKeys = primaryKeysByDir.get(targetDir);
         if (!targetKeys || !targetKeys.has(valUpper)) {
