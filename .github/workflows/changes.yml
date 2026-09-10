@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MemberJunction/loom
-          ref: 136e90c4ddb192aafa0f699af6a1781f3a78fdb9
+          ref: c47e3750054a324a1c551ba2840cfa1346492d59
           path: loom
 
       - name: Build Loom
