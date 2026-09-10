@@ -364,10 +364,10 @@ console.log('✓ data/ruleset/common.json conforms to Loom RulesetModuleSchema w
 // 8. Run Loom Validator over generated/
 console.log('\n--- Running Loom Full Dataset Validator ---');
 const candidates = [
-  'loom',
-  path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../loom/packages/cli/dist/bin/loom.js'),
-  path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js')
+  path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js'),
+  'loom'
 ];
 let loomCmd = null;
 for (const c of candidates) {

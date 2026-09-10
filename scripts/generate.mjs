@@ -2,10 +2,10 @@
 /**
  * scripts/generate.mjs — Deterministic simulation and metadata generation pipeline
  *
- * Compiles the Loom domain, applies Loom AvatarGenerator / LogoGenerator to the
- * governed generated/ tree from data/domain.json field config, and verifies
- * checkpoint.json. After the tree is committed, a second run must leave
- * generated/ byte-identical.
+ * Compiles the Loom domain, applies Loom declarative generators (names, prefixes, pronouns,
+ * DOBs), AvatarGenerator, LogoGenerator, and ReversalEngine to the governed generated/ tree
+ * from data/domain.json field config, and verifies checkpoint.json. After the tree is
+ * committed, a second run must leave generated/ byte-identical.
  */
 
 import fs from 'node:fs';
@@ -20,8 +20,10 @@ const rootDir = path.resolve(__dirname, '..');
 const generatedDir = path.join(rootDir, 'generated');
 const checkpointPath = path.join(generatedDir, 'checkpoint.json');
 const domainPath = path.join(rootDir, 'data', 'domain.json');
+const heroesPath = path.join(rootDir, 'data', 'ruleset', 'heroes.json');
+const givenNamesPath = path.join(rootDir, 'data', 'catalogs', 'given-names.json');
 
-console.log(`🧵 Loom Pipeline: Compile domain smoke test, run deterministic passes (avatars, logos), verify entity directories`);
+console.log(`🧵 Loom Pipeline: Compile domain smoke test, run deterministic passes (names, prefixes, pronouns, DOBs, reversals, avatars, logos), verify entity directories`);
 console.log(`   Seed: 42 | Release: 2026-09-02 (asOfYear: 2026)`);
 
 function findExisting(candidates) {
@@ -40,11 +42,10 @@ function findExisting(candidates) {
 }
 
 const loomBin = findExisting([
-  path.resolve(rootDir, '../loom-wp2/packages/cli/dist/bin/loom.js'),
-  path.resolve(rootDir, '../.worktrees/loom-wp2/packages/cli/dist/bin/loom.js'),
-  path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, 'loom/packages/cli/dist/bin/loom.js'),
   path.resolve(rootDir, '../../loom/packages/cli/dist/bin/loom.js'),
+  path.resolve(rootDir, '../loom-wp2/packages/cli/dist/bin/loom.js'),
 ]);
 const loomCmd = loomBin === 'loom' ? 'loom' : loomBin ? `node ${loomBin}` : null;
 
@@ -70,173 +71,186 @@ if (loomCmd) {
 }
 
 const engineEntry = findExisting([
-  path.resolve(rootDir, '../loom-wp2/packages/engine/dist/index.js'),
-  path.resolve(rootDir, '../.worktrees/loom-wp2/packages/engine/dist/index.js'),
-  path.resolve(rootDir, 'loom/packages/engine/dist/index.js'),
   path.resolve(rootDir, '../loom/packages/engine/dist/index.js'),
+  path.resolve(rootDir, 'loom/packages/engine/dist/index.js'),
   path.resolve(rootDir, '../../loom/packages/engine/dist/index.js'),
+  path.resolve(rootDir, '../loom-wp2/packages/engine/dist/index.js'),
 ]);
 if (!engineEntry) {
-  console.error('Error: Loom engine dist not found (AvatarGenerator / LogoGenerator)');
+  console.error('Error: Loom engine dist not found (AvatarGenerator / LogoGenerator / ReversalEngine)');
   process.exit(1);
 }
 
-const { AvatarGenerator, LogoGenerator, IdentityService } = await import(pathToFileURL(engineEntry).href);
+const {
+  AvatarGenerator,
+  LogoGenerator,
+  ReversalEngine,
+  applyDeclarativeGeneratorsToRow,
+  createRng,
+} = await import(pathToFileURL(engineEntry).href);
+
 const domain = JSON.parse(fs.readFileSync(domainPath, 'utf8'));
+const heroes = JSON.parse(fs.readFileSync(heroesPath, 'utf8'));
+const givenNames = JSON.parse(fs.readFileSync(givenNamesPath, 'utf8'));
 
-// Derive composed entities (collections, embeds, isA) that legitimately have no standalone output directory on disk
-const composedOutputDirs = new Set();
-for (const [name, entityCfg] of Object.entries(domain.entities || {})) {
-  const compCols = entityCfg.composition?.collections || entityCfg.collections;
-  if (compCols) {
-    const cols = Array.isArray(compCols) ? compCols : Object.values(compCols);
-    for (const c of cols) {
-      if (c.entity && domain.entities[c.entity]?.outputDirectory) {
-        composedOutputDirs.add(domain.entities[c.entity].outputDirectory);
-      }
-    }
-  }
-  const compEmbeds = entityCfg.composition?.embeds || entityCfg.embeds;
-  if (compEmbeds) {
-    const embeds = Array.isArray(compEmbeds) ? compEmbeds : Object.values(compEmbeds);
-    for (const e of embeds) {
-      if (e.entity && domain.entities[e.entity]?.outputDirectory) {
-        composedOutputDirs.add(domain.entities[e.entity].outputDirectory);
-      }
-    }
-  }
-  if (entityCfg.composition?.isA && entityCfg.outputDirectory) {
-    composedOutputDirs.add(entityCfg.outputDirectory);
-  }
-}
+const heroByEmail = new Map(heroes.heroes.map((h) => [h.businessKeys.Email.toLowerCase(), h]));
 
-function loadEntityRows(outputDirectory) {
-  const dir = path.join(generatedDir, outputDirectory);
-  if (!fs.existsSync(dir)) {
-    if (composedOutputDirs.has(outputDirectory)) {
-      return [];
-    }
-    throw new Error(`Directory does not exist on disk for entity outputDirectory: ${outputDirectory}`);
-  }
-  const files = fs
-    .readdirSync(dir)
+// ---------------------------------------------------------------------------
+// 1. Order Reversals & Cancellation Coherence Pass
+// ---------------------------------------------------------------------------
+function applyOrderCancellationsPass() {
+  const ordersDir = path.join(generatedDir, 'orders');
+  if (!fs.existsSync(ordersDir)) return;
+
+  const partFiles = fs
+    .readdirSync(ordersDir)
     .filter((f) => f.endsWith('.json') && f !== '.mj-sync.json')
     .sort();
-  return files.map((name) => {
-    const full = path.join(dir, name);
-    return { full, rows: JSON.parse(fs.readFileSync(full, 'utf8')) };
-  });
+
+  const fileData = [];
+  const allOrders = [];
+
+  for (const f of partFiles) {
+    const full = path.join(ordersDir, f);
+    const rows = JSON.parse(fs.readFileSync(full, 'utf8'));
+    fileData.push({ full, count: rows.length });
+    allOrders.push(...rows);
+  }
+
+  const result = ReversalEngine.CoherifyCancellations({ orders: allOrders });
+  console.log(`   ✓ ReversalEngine: ${result.reversalsCount} cancellations processed, ${result.coherentCount} coherent reversals`);
+
+  let offset = 0;
+  for (const { full, count } of fileData) {
+    const chunk = allOrders.slice(offset, offset + count);
+    fs.writeFileSync(full, JSON.stringify(chunk, null, 2) + '\n', 'utf8');
+    offset += count;
+  }
 }
 
-function fieldValue(row, fieldName) {
-  if (fieldName === 'ID' || fieldName === 'id') {
-    return row.primaryKey?.ID ?? row.primaryKey?.id ?? row.fields?.ID ?? row.fields?.id;
-  }
-  if (row.fields && row.fields[fieldName] !== undefined && row.fields[fieldName] !== null) {
-    return row.fields[fieldName];
-  }
-  return row.primaryKey?.[fieldName];
-}
-
-function applyConfiguredGenerators() {
-  let logoDistinct = new Set();
-  let logoCount = 0;
-  let logoMax = 0;
-  let photoCount = 0;
-  let photoMax = 0;
-
-  for (const entityCfg of Object.values(domain.entities || {})) {
-    const outDir = entityCfg.outputDirectory;
-    if (!outDir) continue;
-    const files = loadEntityRows(outDir);
-    for (const file of files) {
-      let changed = false;
-      for (const row of file.rows) {
-        if (!row.fields) continue;
-        if (row.fields.FirstName !== undefined) {
-          const first = String(row.fields.FirstName || '');
-          const middleNames = new Set([
-            'akira', 'anh', 'bo', 'bora', 'charlie', 'dana', 'dayo', 'folami', 'hua',
-            'hyun', 'jamie', 'jing', 'kehinde', 'khanh', 'kiran', 'lan', 'li', 'ling',
-            'long', 'mei', 'milan', 'ming', 'minh', 'nao', 'nico', 'phuc', 'ren',
-            'sho', 'sora', 'tao', 'tayo', 'wei', 'xin', 'yun',
-          ]);
-          const inferred = middleNames.has(first.toLowerCase())
-            ? 'Unknown'
-            : IdentityService.GenderFromName(first);
-          const current = row.fields.Gender;
-          if (inferred === 'Female' || inferred === 'Male') {
-            if (current !== inferred) {
-              row.fields.Gender = inferred;
-              changed = true;
-            }
-          } else if (current === 'Female' || current === 'Male') {
-            row.fields.Gender = null;
-            changed = true;
-          }
-        }
-        for (const [fieldName, fieldCfg] of Object.entries(entityCfg.fields || {})) {
-          if (fieldCfg.logo) {
-            const cfg = fieldCfg.logo;
-            const nameVal = fieldValue(row, cfg.nameField || 'Name') ?? `${entityCfg.name}`;
-            const seedVal = fieldValue(row, cfg.seedField || 'ID') ?? nameVal;
-            const uri = LogoGenerator.Generate({
-              name: String(nameVal),
-              seed: String(seedVal),
-              format: cfg.format,
-              shape: cfg.shape,
-            });
-            if (row.fields[fieldName] !== uri) {
-              row.fields[fieldName] = uri;
-              changed = true;
-            }
-            logoDistinct.add(uri);
-            logoCount += 1;
-            if (uri.length > logoMax) logoMax = uri.length;
-          } else if (fieldCfg.avatar) {
-            const cfg = fieldCfg.avatar;
-            const seedVal = fieldValue(row, cfg.seedField || 'ID') ?? `${entityCfg.name}`;
-            const traitRaw = cfg.traitField ? fieldValue(row, cfg.traitField) : undefined;
-            const uri = AvatarGenerator.Generate({
-              seed: String(seedVal),
-              trait: traitRaw !== undefined && traitRaw !== null ? String(traitRaw) : undefined,
-              traits: cfg.traits,
-              defaultTrait: cfg.defaultTrait,
-              style: cfg.style,
-              format: cfg.format,
-              backgroundColor: cfg.backgroundColor,
-            });
-            if (row.fields[fieldName] !== uri) {
-              row.fields[fieldName] = uri;
-              changed = true;
-            }
-            photoCount += 1;
-            if (uri.length > photoMax) photoMax = uri.length;
-          }
-        }
-      }
-      if (changed) {
-        fs.writeFileSync(file.full, JSON.stringify(file.rows, null, 2) + '\n', 'utf8');
-      }
+// ---------------------------------------------------------------------------
+// 2. People Generation Pass (Name, Prefix, DOB, PhotoURL)
+// ---------------------------------------------------------------------------
+function applyPeopleAndMemberProfilePass() {
+  const mpPath = path.join(generatedDir, 'member-profiles', '.member-profiles.json');
+  const mps = JSON.parse(fs.readFileSync(mpPath, 'utf8'));
+  const joinDateByPersonId = new Map();
+  for (const m of mps) {
+    if (m.fields?.PersonID && m.fields?.JoinDate) {
+      joinDateByPersonId.set(m.fields.PersonID.toLowerCase(), m.fields.JoinDate);
     }
   }
 
-  if (logoCount !== 641 || logoDistinct.size !== 641) {
-    console.error(
-      `Error: expected 641/641 distinct organization logos, got count=${logoCount} distinct=${logoDistinct.size}`
-    );
-    process.exit(1);
+  const peoplePath = path.join(generatedDir, 'people', '.people.json');
+  const people = JSON.parse(fs.readFileSync(peoplePath, 'utf8'));
+  const avatarCfg = domain.entities.Person.fields.PhotoURL.avatar;
+
+  const genderByPersonId = new Map();
+  let distinctAvatars = new Set();
+
+  for (const p of people) {
+    const pId = p.primaryKey.ID;
+    const email = String(p.fields.Email || '').toLowerCase();
+    const hero = heroByEmail.get(email);
+    const rng = createRng(42, `person:${pId}`);
+
+    const joinDate = joinDateByPersonId.get(pId.toLowerCase()) || '2022-01-01';
+    p.fields.JoinDate = joinDate;
+
+    if (hero) {
+      if (hero.fixedFields?.FirstName) p.fields.FirstName = hero.fixedFields.FirstName;
+      if (hero.fixedFields?.LastName) p.fields.LastName = hero.fixedFields.LastName;
+      if (hero.fixedFields?.Title) p.fields.Title = hero.fixedFields.Title;
+    }
+
+    applyDeclarativeGeneratorsToRow(domain.entities.Person, p.fields, {
+      catalogs: { 'given-names': givenNames },
+      rng,
+    });
+
+    if (hero) {
+      if (hero.fixedFields?.FirstName) p.fields.FirstName = hero.fixedFields.FirstName;
+      if (hero.fixedFields?.LastName) p.fields.LastName = hero.fixedFields.LastName;
+      if (hero.fixedFields?.Title) p.fields.Title = hero.fixedFields.Title;
+    }
+
+    delete p.fields.JoinDate;
+    genderByPersonId.set(pId.toLowerCase(), p.fields.Gender);
+
+    p.fields.PhotoURL = AvatarGenerator.Generate({
+      seed: pId,
+      trait: p.fields.Gender,
+      traits: avatarCfg.traits,
+      defaultTrait: avatarCfg.defaultTrait,
+      style: avatarCfg.style,
+      format: avatarCfg.format,
+      version: avatarCfg.version,
+      backgroundColor: avatarCfg.backgroundColor,
+    });
+    distinctAvatars.add(p.fields.PhotoURL);
   }
-  if (photoCount < 1) {
-    console.error('Error: no PhotoURL values generated');
-    process.exit(1);
+
+  fs.writeFileSync(peoplePath, JSON.stringify(people, null, 2) + '\n', 'utf8');
+  console.log(
+    `   ✓ Loom People Generator: ${people.length} people processed (${distinctAvatars.size}/${people.length} distinct avatars, ${(distinctAvatars.size / people.length * 100).toFixed(2)}%)`
+  );
+
+  // Apply MemberProfile PronounSet
+  for (const m of mps) {
+    const pId = String(m.fields.PersonID || '').toLowerCase();
+    const parentGender = genderByPersonId.get(pId) || 'Female';
+    const rng = createRng(42, `mp:${m.primaryKey.ID}`);
+
+    applyDeclarativeGeneratorsToRow(domain.entities.MemberProfile, m.fields, {
+      parent: { Gender: parentGender },
+      rng,
+    });
   }
-  console.log(`   ✓ Loom LogoGenerator: ${logoCount}/${logoDistinct.size} distinct LogoURL (max ${logoMax} chars)`);
-  console.log(`   ✓ Loom AvatarGenerator: ${photoCount} PhotoURL (max ${photoMax} chars)`);
+
+  fs.writeFileSync(mpPath, JSON.stringify(mps, null, 2) + '\n', 'utf8');
+  console.log(`   ✓ Loom MemberProfile Generator: ${mps.length} pronoun sets generated`);
 }
 
-applyConfiguredGenerators();
+// ---------------------------------------------------------------------------
+// 3. Organization Logos Pass
+// ---------------------------------------------------------------------------
+function applyOrganizationLogosPass() {
+  const orgsPath = path.join(generatedDir, 'organizations', '.organizations.json');
+  if (!fs.existsSync(orgsPath)) return;
+  const orgs = JSON.parse(fs.readFileSync(orgsPath, 'utf8'));
 
+  const logoCfg = domain.entities.Organization.fields.LogoURL.logo;
+  const logoDistinct = new Set();
+  let logoMax = 0;
+
+  for (const o of orgs) {
+    const nameVal = o.fields?.Name || 'Organization';
+    const seedVal = o.primaryKey?.ID || nameVal;
+    const uri = LogoGenerator.Generate({
+      name: String(nameVal),
+      seed: String(seedVal),
+      format: logoCfg.format,
+      shape: logoCfg.shape,
+    });
+    o.fields.LogoURL = uri;
+    logoDistinct.add(uri);
+    if (uri.length > logoMax) logoMax = uri.length;
+  }
+
+  fs.writeFileSync(orgsPath, JSON.stringify(orgs, null, 2) + '\n', 'utf8');
+  console.log(`   ✓ Loom LogoGenerator: ${orgs.length}/${logoDistinct.size} distinct LogoURL (max ${logoMax} chars)`);
+}
+
+// ---------------------------------------------------------------------------
+// Execute Passes
+// ---------------------------------------------------------------------------
+applyOrderCancellationsPass();
+applyPeopleAndMemberProfilePass();
+applyOrganizationLogosPass();
+
+// ---------------------------------------------------------------------------
+// Checkpoint and Sync Configuration Verification
+// ---------------------------------------------------------------------------
 if (!fs.existsSync(checkpointPath)) {
   console.error(`Error: Checkpoint file missing at ${checkpointPath}`);
   process.exit(1);

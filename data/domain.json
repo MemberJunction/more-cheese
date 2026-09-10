@@ -107,7 +107,17 @@
         },
         "FirstName": {
           "name": "FirstName",
-          "type": "string"
+          "type": "string",
+          "generator": {
+            "type": "catalogLookup",
+            "catalog": "given-names",
+            "conditionalOn": "Gender",
+            "mappingKey": {
+              "Female": "female",
+              "Male": "male",
+              "Non-binary": "unisex"
+            }
+          }
         },
         "LastName": {
           "name": "LastName",
@@ -121,6 +131,43 @@
           "name": "Title",
           "type": "string",
           "nullable": true
+        },
+        "Prefix": {
+          "name": "Prefix",
+          "type": "string",
+          "nullable": true,
+          "generator": {
+            "type": "conditionalDistribution",
+            "conditionalOn": "Gender",
+            "distributions": {
+              "Female": {
+                "values": ["Ms.", "Mrs.", "Dr."],
+                "weights": [0.75, 0.20, 0.05]
+              },
+              "Male": {
+                "values": ["Mr.", "Dr."],
+                "weights": [0.95, 0.05]
+              },
+              "Non-binary": {
+                "values": ["Mx.", "Dr."],
+                "weights": [0.95, 0.05]
+              }
+            }
+          }
+        },
+        "DateOfBirth": {
+          "name": "DateOfBirth",
+          "type": "string",
+          "nullable": true,
+          "generator": {
+            "type": "relativeDateRange",
+            "relativeTo": "intakeDate",
+            "minOffsetYears": -75,
+            "maxOffsetYears": -18,
+            "distribution": "normal",
+            "meanOffsetYears": -42,
+            "stdDevYears": 12
+          }
         },
         "Status": {
           "name": "Status",
@@ -138,43 +185,96 @@
           "avatar": {
             "style": "toon-head",
             "format": "base64",
+            "version": "9.4.2",
             "seedField": "ID",
             "traitField": "Gender",
             "defaultTrait": "Female",
             "traits": {
               "Female": {
                 "hair": [
-                  "bun"
+                  "bun",
+                  "sideComed"
                 ],
                 "hairProbability": 100,
                 "rearHair": [
                   "longStraight",
                   "longWavy",
-                  "shoulderHigh"
+                  "shoulderHigh",
+                  "neckHigh"
                 ],
                 "rearHairProbability": 100,
                 "beardProbability": 0,
                 "clothes": [
                   "dress",
                   "turtleNeck",
-                  "shirt"
+                  "shirt",
+                  "tShirt",
+                  "openJacket"
+                ],
+                "eyes": [
+                  "happy",
+                  "wide"
+                ],
+                "mouth": [
+                  "smile",
+                  "laugh"
+                ],
+                "eyebrows": [
+                  "happy",
+                  "neutral",
+                  "raised"
+                ],
+                "skinColor": [
+                  "f1c3a5",
+                  "e8be9e",
+                  "d4a37a",
+                  "c68e7a",
+                  "b98e6a",
+                  "a36b4f",
+                  "8f5638"
                 ]
               },
               "Male": {
                 "hair": [
                   "sideComed",
                   "undercut",
-                  "spiky",
-                  "bun"
+                  "spiky"
                 ],
                 "hairProbability": 100,
                 "rearHairProbability": 0,
-                "beardProbability": 40,
+                "beardProbability": 25,
+                "beard": [
+                  "fullBeard",
+                  "chin",
+                  "chinMoustache"
+                ],
                 "clothes": [
                   "shirt",
                   "tShirt",
                   "turtleNeck",
                   "openJacket"
+                ],
+                "eyes": [
+                  "happy",
+                  "wide"
+                ],
+                "mouth": [
+                  "smile",
+                  "laugh"
+                ],
+                "eyebrows": [
+                  "happy",
+                  "neutral",
+                  "raised"
+                ],
+                "skinColor": [
+                  "f1c3a5",
+                  "e8be9e",
+                  "d4a37a",
+                  "c68e7a",
+                  "b98e6a",
+                  "a36b4f",
+                  "8f5638"
                 ]
               }
             }
@@ -1782,7 +1882,25 @@
         "PronounSet": {
           "name": "PronounSet",
           "type": "string",
-          "nullable": true
+          "nullable": true,
+          "generator": {
+            "type": "conditionalDistribution",
+            "conditionalOn": "parent.Gender",
+            "distributions": {
+              "Female": {
+                "values": ["she/her", "they/them"],
+                "weights": [0.96, 0.04]
+              },
+              "Male": {
+                "values": ["he/him", "they/them"],
+                "weights": [0.96, 0.04]
+              },
+              "Non-binary": {
+                "values": ["they/them", "she/they", "he/they"],
+                "weights": [0.85, 0.08, 0.07]
+              }
+            }
+          }
         },
         "PrimaryLanguage": {
           "name": "PrimaryLanguage",
