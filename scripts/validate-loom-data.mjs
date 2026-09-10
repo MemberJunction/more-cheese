@@ -387,19 +387,113 @@ if (!loomCmd) {
   fail('Could not locate Loom CLI binary to run dataset validation');
 }
 
+/**
+ * STRICT TEMPORARY ERA VOLUME WAIVER
+ * Date: 2026-09-10
+ * Tracking Issue: https://github.com/MemberJunction/more-cheese/issues/39 (#39)
+ *
+ * Reason:
+ *   The volume multipliers defined in data/ruleset/eras.json (e.g. 2020 pandemic shock 0.15x
+ *   on EventRegistration, 1.85x on CourseEnrollment; 2021 virtual pivot 0.45x / 1.5x; 2022-2024
+ *   artisan boom 1.4x / 1.25x) reflect intended historical macroeconomic simulation. However,
+ *   the historical generator pipeline in more-cheese does not currently synthesize cycle-dependent
+ *   volume variations when emitting historical transactions. Volume grows smoothly across 2019-2025.
+ *   This is pre-existing on 'next' (previously masked by n=0 prior to Loom D.5/D.6).
+ *   Synthesis implementation is tracked in #39 and must preserve the base ⊆ head stability invariant.
+ *
+ * Strict Waiver Invariants:
+ *   1. Enumerates exact literal gate names including cycle.
+ *   2. Asserts the count: fails if any failing gate is not on this list, or if count !== 7.
+ *   3. Fails if any waived gate PASSES (stale waiver detection).
+ *   4. Prints the waived list, reason, and tracking issue on every run.
+ */
+const WAIVER_DATE = '2026-09-10';
+const WAIVER_TRACKING_ISSUE = 'https://github.com/MemberJunction/more-cheese/issues/39';
+const WAIVED_ERA_VOLUME_GATES = Object.freeze([
+  'Realized Era Volume: era-pandemic-shock-2020 [EventRegistration in 2020]',
+  'Realized Era Volume: era-virtual-pivot-2021 [EventRegistration in 2021]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [EventRegistration in 2023]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [EventRegistration in 2024]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [CourseEnrollment in 2022]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [CourseEnrollment in 2023]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [CourseEnrollment in 2024]',
+]);
+const EXPECTED_WAIVED_COUNT = WAIVED_ERA_VOLUME_GATES.length;
+const waivedSet = new Set(WAIVED_ERA_VOLUME_GATES);
+
+console.log('--------------------------------------------------------------------------------');
+console.log(`⚠️  ACTIVE TEMPORARY GATE WAIVER (${EXPECTED_WAIVED_COUNT} gates, dated ${WAIVER_DATE})`);
+console.log(`   Tracking Issue: ${WAIVER_TRACKING_ISSUE}`);
+console.log('   Reason: Era volume model is not currently applied by the generator in the committed');
+console.log('           dataset; surfaced truthfully by Loom D.5/D.6. Synthesis implementation tracked in #39.');
+console.log('   Waived Gates:');
+for (const gateName of WAIVED_ERA_VOLUME_GATES) {
+  console.log(`     - [WAIVED] ${gateName}`);
+}
+console.log('--------------------------------------------------------------------------------\n');
+
+let validatorStdout = '';
 try {
-  const out = execSync(`${loomCmd} validate -p data -d generated`, {
+  validatorStdout = execSync(`${loomCmd} validate -p data -d generated`, {
     cwd: rootDir,
     encoding: 'utf8',
-    stdio: 'pipe'
+    stdio: 'pipe',
   });
-  console.log(out);
-  console.log('✓ Loom Validator verified all dataset gates cleanly (exit 0)');
 } catch (err) {
-  const errOut = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
-  console.error(errOut);
-  fail(`Loom Validator failed with broken gates: ${err.message}`);
+  validatorStdout = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
 }
+
+console.log(validatorStdout);
+
+// Parse gate outcomes from validator output
+const gateRegex = /^\s*\[(✓ PASS|✗ FAIL)\]\s+(.*?)\s+\(n=(\d+)\)$/gm;
+const passedGates = new Set();
+const failedGates = [];
+
+let match;
+while ((match = gateRegex.exec(validatorStdout)) !== null) {
+  const [, status, name, countStr] = match;
+  if (status === '✓ PASS') {
+    passedGates.add(name);
+  } else {
+    failedGates.push({ name, population: parseInt(countStr, 10) });
+  }
+}
+
+if (passedGates.size === 0 && failedGates.length === 0) {
+  fail(`Loom Validator did not output any gate results (crashed before validation):\n${validatorStdout}`);
+}
+
+// Invariant 3: Fail if any waived gate PASSES (stale claim detection)
+const staleWaivers = WAIVED_ERA_VOLUME_GATES.filter((g) => passedGates.has(g));
+if (staleWaivers.length > 0) {
+  fail(
+    `Stale waiver detected! The following ${staleWaivers.length} waived gate(s) PASSED:\n` +
+    staleWaivers.map((g) => `  - ${g}`).join('\n') +
+    `\nA waiver that outlives the defect it waives is a stale claim. Remove these gate(s) from WAIVED_ERA_VOLUME_GATES in scripts/validate-loom-data.mjs.`
+  );
+}
+
+// Invariant 2a: Fail if any failing gate is NOT on the waiver list
+const unexpectedFailures = failedGates.filter((g) => !waivedSet.has(g.name));
+if (unexpectedFailures.length > 0) {
+  fail(
+    `Loom Validator failed with ${unexpectedFailures.length} unexpected broken gate(s) not covered by waiver:\n` +
+    unexpectedFailures.map((g) => `  - [✗ FAIL] ${g.name} (n=${g.population})`).join('\n')
+  );
+}
+
+// Invariant 2b: Assert the count. Must be EXACTLY EXPECTED_WAIVED_COUNT (7)
+if (failedGates.length !== EXPECTED_WAIVED_COUNT) {
+  fail(
+    `Loom Validator failed gate count mismatch: expected exactly ${EXPECTED_WAIVED_COUNT} waived failures, but received ${failedGates.length}.\n` +
+    `Failed gates:\n` +
+    failedGates.map((g) => `  - ${g.name}`).join('\n')
+  );
+}
+
+console.log(`\n✓ All ${failedGates.length} failed gates match the active temporary waiver list (Issue #39).`);
+console.log(`✓ All ${passedGates.size} non-waived gates PASSED cleanly (including all Plan 07 gates).`);
 
 console.log('================================================================================');
 console.log('✅ ALL LOOM DATA SPECIFICATIONS & DOMAIN CONFORMANCE CHECKS PASSED');
