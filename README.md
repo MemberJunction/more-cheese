@@ -60,7 +60,68 @@ Synthetic data for MoreCheese is designed and generated using **Loom**, MemberJu
 
 - **Causally Correlated**: Member join dates, event attendance, certification progress, order amounts, and churn risk are drawn from joint causal graphs, not isolated pseudo-random generators.
 - **Referentially Closed**: 100% referential integrity across 4 tiers of foreign keys with guaranteed topological migration ordering.
-- **Idempotent & Additive**: Generates initial baseline snapshots with strictly monotonic ID persistence and zero unwanted mutations.
+- **Accumulative, not regenerative**: each run appends the next period on top of what is already committed. IDs that shipped in an earlier cycle are never re-minted, dropped, or re-keyed.
+
+### 🗓️ Monthly cadence — Loom accumulates, it does not replace
+
+**The intent for this repository is to re-run Loom roughly once a month to generate the next
+month of activity and append it to `generated/`** — new members and registrations, new orders and
+order lines, new payments, new event attendance, new certifications — on top of every record
+already committed. The corpus tracks the calendar so the demo database keeps pace with real-world
+time instead of freezing at its release date.
+
+It is **not** a wipe-and-regenerate. Nothing that shipped in a previous cycle is removed or
+re-keyed. Agents and humans working in this repo should assume the corpus only grows.
+
+#### The retention invariant: `base ⊆ head`
+
+Every primary key present in the base branch must still be present, with the same ID, in the same
+directory (or in the parent that now composes it). Records may be **added** freely. Records may
+never be **dropped** or **re-keyed**.
+
+CI enforces this in the Base Delta check inside `node scripts/check-metadata-closure.mjs`
+(wired into `.github/workflows/changes.yml`). It walks the base commit's primary keys and asserts
+each one survives, so a month of pure additions passes cleanly while a dropped or re-minted ID
+fails the build with an exact count and the directories it came from. Composed axes are followed:
+a record that moved from a standalone `order-lines/` or `payment-lines/` directory into its
+parent's `collections.Lines` still counts as retained.
+
+There is a deliberate override, `SKIP_BASE_DELTA_CHECK=1`, for a re-key that is genuinely
+intended — a schema-shape change, not a data refresh. Say why in the PR body. It is not a way to
+turn a red build green.
+
+#### Two operating modes — say which one a PR is in
+
+| Mode | What changed | What a reviewer should expect |
+|---|---|---|
+| **Increment** (the monthly cadence) | The next period's records are appended | Record counts go **up**. No prior-period record changes in any field — not merely that its key survived. `cycleIndex` and `continuity.asOfDate` advance. |
+| **Regeneration** (a generator or schema change) | The generator itself changed, not the calendar | Counts typically hold steady. Additions are as suspect as deletions — an unexplained new record means the generator drifted. Only the fields the change targets should move. |
+
+State the mode and the record-count delta in the PR body. A gate can prove the IDs held; only the
+author can say whether the delta is the one that was intended.
+
+#### Continuity state lives in `generated/checkpoint.json`
+
+Accumulation needs memory of where the last run stopped, and `checkpoint.json` carries it:
+
+| Field | Purpose |
+|---|---|
+| `cycleIndex` | Which generation cycle produced the current corpus (`0` = the initial release) |
+| `committedRecordCounts` | Per-entity counts already committed, so the next run appends rather than re-mints |
+| `continuity.asOfDate` | The simulation's "today" — the boundary the next cycle generates forward from |
+| `continuity.activeEntityIds` | The IDs still live at the checkpoint, per entity, so the next cycle references real records instead of inventing new ones |
+| `continuity.latentStates` / `activeLifecycleStates` / `birthCycles` | Per-record simulation state carried across cycles (membership lifecycle, churn latency, cohort birth) |
+
+Treat `checkpoint.json` as load-bearing state, not an output artifact. Hand-editing it — or
+reverting it while keeping the records it describes — desynchronises the next run from the corpus
+it is meant to extend.
+
+#### Why `mj sync push` suits an accumulative corpus
+
+`mj sync push` matches records on primary key and **never deletes**. It inserts what is new and
+updates what changed, and leaves anything already in the database and unchanged in `generated/`
+alone. So pushing cycle N+1 tops the database up rather than rebuilding it, and re-pushing a cycle
+already applied is a no-op.
 
 ---
 
@@ -114,6 +175,11 @@ MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
    npx mj sync push --dir ./config --format=json
    ```
 > **Note on metadata roots**: In `mj-app.json`, `metadata.directory` specifies `generated` for OpenApp manifest validation. The `config/` tree holds Explorer-authored configurations and AI/Sonar models pushed alongside `generated/`.
+>
+> **Note on cadence**: `generated/` is refreshed by re-running Loom roughly monthly, and each run
+> **appends** the next month rather than replacing the corpus — see
+> [Monthly cadence](#-monthly-cadence--loom-accumulates-it-does-not-replace). Because `mj sync push`
+> matches on primary key and never deletes, pushing a new cycle tops up an existing database.
 
 
 ---
