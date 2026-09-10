@@ -74,11 +74,22 @@ covered there). Read the relevant topic before working in its area:
    `AccountingCompanyProfile`), `gl-accounts`, `gl-account-links`, and
    `journal-entry-sequences`. Company-level `GLAccountLink` rows are required for
    order confirm (AR / Sales / Deferred Revenue / Cash / …).
-9. **Catalog composition** — Event products and event order lines use first-class
-   `extension` composition (Event Products on `generated/products`, Event Order Lines
-   with `PersonID` on `generated/order-lines`). Committee meetings use nested
-   `collections` (`AgendaItems`, `Attendance`, `Motions` with `Votes`). All composition
-   axes persist cleanly via single-save `mj sync push` with zero raw SQL inserts.
+9. **Catalog and payment composition** — Event products use first-class
+   `extension` composition on `generated/products`. Orders use nested
+   `collections.Lines` on `generated/orders` (with `PersonID` on `EventOrderLine`
+   extensions). Payments use nested `collections.Lines` on `generated/payments`.
+   Committee meetings use nested `collections` (`AgendaItems`, `Attendance`,
+   `Motions` with `Votes`). All composition axes persist cleanly via single-save
+   `mj sync push` with zero raw SQL inserts.
+10. **Never "tidy" `RecurrenceMonths: null` out of the four annual membership rows**
+    in `generated/product-prices/.product-prices.json` (`0FD77933-317D-4BA9-9837-F30A37FE8F76`,
+    `488480D6-4B47-470B-9BFD-F3EA1FBB9A1F`, `D5156F09-228F-4731-882C-0FC077A4E768`,
+    `FF98075B-2C62-45E8-BB3B-5333230EBA99`). The explicit `null` is load-bearing:
+    `mj sync push` only applies fields present in a record (`PushService.ts:1163`),
+    so omitting the field leaves the pre-fix `'12'` in any already-pushed database.
+    `RecurrenceMonths` is calendar-month applicability, not duration — `'12'` meant
+    "December only" and rejected list-price rules for the other eleven months.
+    Enforced by assertion in `scripts/check-metadata-closure.mjs`.
 
 ## Build & dev commands
 

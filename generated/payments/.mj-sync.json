@@ -1,4 +1,9 @@
 {
   "entity": "MJ_BizApps_Orders: Payment Headers",
-  "filePattern": "**/.*.json"
+  "filePattern": "**/.*.json",
+  "collections": {
+    "Lines": {
+      "mode": "upsert"
+    }
+  }
 }
