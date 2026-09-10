@@ -511,6 +511,7 @@
       "schema": "morecheese_members",
       "pack": "community",
       "outputDirectory": "event-registrations",
+      "cycleField": "RegisteredOn",
       "businessKey": [
         "RegKey"
       ],
@@ -562,6 +563,7 @@
       "schema": "morecheese_members",
       "pack": "community",
       "outputDirectory": "enrollments",
+      "cycleField": "EnrolledOn",
       "businessKey": [
         "EnrollKey"
       ],
