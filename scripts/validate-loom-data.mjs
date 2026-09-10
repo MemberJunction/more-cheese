@@ -464,6 +464,37 @@ if (passedGates.size === 0 && failedGates.length === 0) {
   fail(`Loom Validator did not output any gate results (crashed before validation):\n${validatorStdout}`);
 }
 
+// D.10: Parse validator's own summary tally and cross-check with line parser
+const summaryRegex = /Total Gates:\s*(\d+)\s*\|\s*Passed:\s*(\d+)\s*\|\s*Failed:\s*(\d+)\s*\|\s*Total Rows Examined:\s*(\d+)/;
+const summaryMatch = validatorStdout.match(summaryRegex);
+if (!summaryMatch) {
+  fail(`Loom Validator did not output the expected summary tally line ("Total Gates: ... | Passed: ... | Failed: ..."):\n${validatorStdout}`);
+}
+
+const summaryTotal = parseInt(summaryMatch[1], 10);
+const summaryPassed = parseInt(summaryMatch[2], 10);
+const summaryFailed = parseInt(summaryMatch[3], 10);
+const summaryExamined = parseInt(summaryMatch[4], 10);
+
+// Anti-drift cross-check: regex line parser must agree exactly with validator's internal tally
+if (passedGates.size !== summaryPassed || failedGates.length !== summaryFailed) {
+  fail(
+    `Loom Validator tally divergence detected (parser format drift):\n` +
+    `  Summary reported: ${summaryPassed} passed, ${summaryFailed} failed (${summaryTotal} total)\n` +
+    `  Line parser parsed: ${passedGates.size} passed, ${failedGates.length} failed (${passedGates.size + failedGates.length} total)\n` +
+    `The gate line format or status glyph has drifted from the parser regex.`
+  );
+}
+
+// Floor guard: ensure no gates silently stop being emitted (shrinkage detection)
+const MIN_EXPECTED_TOTAL_GATES = 191;
+if (summaryTotal < MIN_EXPECTED_TOTAL_GATES) {
+  fail(
+    `Gate disappearance detected! Total gates evaluated (${summaryTotal}) is below the minimum floor of ${MIN_EXPECTED_TOTAL_GATES}.\n` +
+    `A gate has silently stopped being emitted.`
+  );
+}
+
 // Invariant 3: Fail if any waived gate PASSES (stale claim detection)
 const staleWaivers = WAIVED_ERA_VOLUME_GATES.filter((g) => passedGates.has(g));
 if (staleWaivers.length > 0) {
