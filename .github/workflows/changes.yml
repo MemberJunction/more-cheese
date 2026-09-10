@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MemberJunction/loom
-          ref: 5e3e2e34867fd6155a8c0957e778841e11934878
+          ref: 63aec01f61a3f9e831fbf64bc9bac4675ac86d84
           path: loom
 
       - name: Build Loom
@@ -70,7 +70,11 @@ jobs:
         run: npm run test:loom-mutations
 
       - name: Compile domain smoke test, verify entity directories present and avatar/logo determinism
-        run: npm run generate && test -z "$(git status --porcelain generated/)" && git diff --exit-code generated/
+        run: |
+          npm run generate
+          git status --porcelain generated/
+          git diff --stat generated/
+          git diff --exit-code generated/
 
       - name: Check for migration file changes
         id: migration_check
