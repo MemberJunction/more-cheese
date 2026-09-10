@@ -2003,10 +2003,6 @@
         "InitialPaymentAmount": {
           "name": "InitialPaymentAmount",
           "type": "number"
-        },
-        "InitialPaymentTypeID": {
-          "name": "InitialPaymentTypeID",
-          "type": "uuid"
         }
       },
       "foreignKeys": {

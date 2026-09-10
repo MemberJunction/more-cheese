@@ -9,10 +9,6 @@
       "Alias": "registrations",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.014Z",
-      "checksum": "b321d46b97ac94a80607df11b739c933d04f3bf1c2b603f79d5cbedeac7132b5"
     }
   },
   {
@@ -25,10 +21,6 @@
       "Alias": "committees",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.018Z",
-      "checksum": "8897e7274d13d079a46e41888823443f3e35493930c4a6d60753aa728205f6f0"
     }
   },
   {
@@ -41,10 +33,6 @@
       "Alias": "certifications",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.034Z",
-      "checksum": "9f9fd53b9b636213ea3e1f358f2f2472c774fe886431a0bdc62be9d677ce494e"
     }
   },
   {
@@ -57,10 +45,6 @@
       "Alias": "enrollments",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.016Z",
-      "checksum": "9d23f674563247a9cf8f1ddc8851f7d74004b138f6f8c380de0e0488e0996e65"
     }
   },
   {
@@ -73,10 +57,6 @@
       "Alias": "advocacy",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.016Z",
-      "checksum": "129addff07c5519a404f2d781c7db2f5e1de7c8a7eac9abc81adf87472fd9e6e"
     }
   },
   {
@@ -89,10 +69,6 @@
       "Alias": "competitions",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.021Z",
-      "checksum": "8c5ff096211dc05fe608b7dea486bece91bf0bd4234ee92399ac4a0d2841c770"
     }
   },
   {
@@ -105,10 +81,6 @@
       "Alias": "recentEvents",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.020Z",
-      "checksum": "3b7e1f1be73aeadb225d938d840c7d21eff49e540d73639ccaee5d79486d4ebc"
     }
   },
   {
@@ -121,10 +93,6 @@
       "Alias": "surveyResponses",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.021Z",
-      "checksum": "5655c9d0c2aeb3e16cd6e5789da5e34ca907fa6bd713991d4c287589ac9beb8b"
     }
   },
   {
@@ -137,10 +105,6 @@
       "Alias": "orders",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.015Z",
-      "checksum": "8deefd2c5d6a2a7211038181f0e878fa4446a664cfbd714f364a4e4e1ffcdd1a"
     }
   },
   {
@@ -153,10 +117,6 @@
       "Alias": "profile",
       "RelationshipPath": "[]",
       "JoinType": "Left"
-    },
-    "sync": {
-      "lastModified": "2026-09-09T18:06:59.017Z",
-      "checksum": "227b683817834160b4ea5b3d7bb33b3329b12cb4e33f00a70df5cc18128b3ef7"
     }
   }
 ]

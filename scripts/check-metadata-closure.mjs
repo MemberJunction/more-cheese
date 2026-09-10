@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve, relative, sep } from 'node:path';
+import { execSync } from 'node:child_process';
 
 const TARGET_ROOTS = [resolve(process.cwd(), 'generated'), resolve(process.cwd(), 'config')];
 
@@ -105,7 +106,6 @@ const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
   ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
   ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
-  ['orders.InitialPaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
   ['gl-account-links.RecordID', {
     reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
     hits: 0,
@@ -546,7 +546,122 @@ console.log(
   `✓ All 4 annual membership prices explicitly declare "RecurrenceMonths": null (load-bearing sync guard).`
 );
 
+// 10. Base Branch Record Count & Primary Key ID Stability Audit
+console.log('\n--- Base Branch Record Count & ID Stability Audit ---');
+
+function getBaseCommit() {
+  if (process.env.SKIP_BASE_DELTA_CHECK === '1') return null;
+
+  try {
+    execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
+  } catch {
+    return null;
+  }
+
+  const candidates = [
+    process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : null,
+    'origin/next',
+    'origin/main',
+    'HEAD~1'
+  ].filter(Boolean);
+
+  for (const ref of candidates) {
+    try {
+      execSync(`git rev-parse --verify ${ref}^{commit}`, { stdio: 'ignore' });
+      const baseSha = execSync(`git merge-base HEAD ${ref}`, { encoding: 'utf8' }).trim();
+      if (baseSha) return { ref, sha: baseSha };
+    } catch {}
+  }
+  return null;
+}
+
+const baseInfo = getBaseCommit();
+if (!baseInfo) {
+  console.log('⚠️ Skipping base delta check (no reachable base git commit or shallow clone).');
+} else {
+  console.log(`Auditing count and ID stability against base ${baseInfo.ref} (${baseInfo.sha.substring(0, 8)})...`);
+
+  try {
+    const out = execSync(`git ls-tree -r --name-only ${baseInfo.sha} generated/ config/`, { encoding: 'utf8' });
+    const baseFiles = out.trim().split('\n').filter(f => f.endsWith('.json') && !f.split('/').pop().startsWith('.mj-sync'));
+
+    const baseAllPKs = new Set();
+    const basePKsByDir = new Map();
+
+    for (const f of baseFiles) {
+      const parts = f.split('/');
+      const dir = parts[1];
+      if (!basePKsByDir.has(dir)) basePKsByDir.set(dir, new Set());
+      const dirSet = basePKsByDir.get(dir);
+
+      const raw = execSync(`git show ${baseInfo.sha}:${f}`, { maxBuffer: 100 * 1024 * 1024, encoding: 'utf8' });
+      const parsed = JSON.parse(raw);
+      const arr = Array.isArray(parsed) ? parsed : [parsed];
+      for (const r of arr) {
+        if (r?.primaryKey?.ID) {
+          const pk = r.primaryKey.ID.toUpperCase();
+          baseAllPKs.add(pk);
+          dirSet.add(pk);
+        }
+        if (r?.collections) {
+          for (const items of Object.values(r.collections)) {
+            if (Array.isArray(items)) {
+              for (const item of items) {
+                if (item?.primaryKey?.ID) {
+                  const pk = item.primaryKey.ID.toUpperCase();
+                  baseAllPKs.add(pk);
+                  dirSet.add(pk);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Folded / composed entities mapping (legacy standalone dir -> composed parent dir)
+    const composedInto = {
+      'payment-lines': 'payments',
+      'order-lines': 'orders'
+    };
+
+    let totalDroppedPKs = 0;
+    const droppedDetails = [];
+
+    for (const [dir, bSet] of basePKsByDir.entries()) {
+      const targetDir = composedInto[dir] || dir;
+      const cSet = primaryKeysByDir.get(targetDir) || new Set();
+      let kept = 0;
+      const missing = [];
+      for (const id of bSet) {
+        if (cSet.has(id)) {
+          kept++;
+        } else {
+          missing.push(id);
+        }
+      }
+      if (kept < bSet.size) {
+        totalDroppedPKs += missing.length;
+        droppedDetails.push(`  ${dir}: lost ${missing.length} of ${bSet.size} records (target: ${targetDir})`);
+      }
+    }
+
+    if (totalDroppedPKs > 0) {
+      console.error(`\n❌ BASE DELTA CHECK FAILED: Found ${totalDroppedPKs.toLocaleString()} dropped or re-keyed Primary Keys compared to ${baseInfo.ref}!`);
+      for (const d of droppedDetails) {
+        console.error(d);
+      }
+      process.exit(1);
+    }
+
+    console.log(`✓ Zero dropped records and 100% Primary Key preservation across all ${baseAllPKs.size.toLocaleString()} base records.`);
+  } catch (err) {
+    console.error(`\n❌ Error during base delta audit:`, err);
+    process.exit(1);
+  }
+}
+
 console.log(
-  `\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Pairing & Identity, Status Shape, Price Guard).`
+  `\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Pairing & Identity, Status Shape, Price Guard, Base Delta).`
 );
 process.exit(0);
