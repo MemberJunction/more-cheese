@@ -105,6 +105,7 @@ const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
   ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
   ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
+  ['orders.InitialPaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
   ['gl-account-links.RecordID', {
     reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
     hits: 0,
@@ -515,11 +516,37 @@ if (invalidOrderStatusCount > 0 || invalidLineStatusCount > 0) {
   process.exit(1);
 }
 
+// 9. Membership Product Prices Load-Bearing RecurrenceMonths: null Audit
+console.log('\n--- Membership Product Prices RecurrenceMonths Audit ---');
+const ANNUAL_MEMBERSHIP_PRICE_IDS = [
+  '0FD77933-317D-4BA9-9837-F30A37FE8F76', // Enthusiast Membership
+  '488480D6-4B47-470B-9BFD-F3EA1FBB9A1F', // Individual Membership
+  'D5156F09-228F-4731-882C-0FC077A4E768', // SmallBusiness Membership
+  'FF98075B-2C62-45E8-BB3B-5333230EBA99', // Corporate Membership
+];
+
+const prices = records.filter((r) => r.dir === 'product-prices');
+const pricesById = new Map(prices.map((p) => [String(p.primaryKey?.ID).toUpperCase(), p]));
+
+for (const id of ANNUAL_MEMBERSHIP_PRICE_IDS) {
+  const price = pricesById.get(id);
+  if (!price) {
+    console.error(`\n❌ PRODUCT PRICE AUDIT FAILED: Required annual membership price ${id} not found.`);
+    process.exit(1);
+  }
+  const fields = price.fields || {};
+  if (!('RecurrenceMonths' in fields) || fields.RecurrenceMonths !== null) {
+    console.error(
+      `\n❌ PRODUCT PRICE AUDIT FAILED: Price ${id} must explicitly carry "RecurrenceMonths": null to clear pre-fix '12' values on push. Found: ${JSON.stringify(fields.RecurrenceMonths)}`
+    );
+    process.exit(1);
+  }
+}
 console.log(
-  `✓ All ${orders.length.toLocaleString()} orders and ${orderLines.length.toLocaleString()} order lines pass status & fulfillment shape integrity.`
+  `✓ All 4 annual membership prices explicitly declare "RecurrenceMonths": null (load-bearing sync guard).`
 );
 
 console.log(
-  `\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Pairing & Identity, Status Shape).`
+  `\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Pairing & Identity, Status Shape, Price Guard).`
 );
 process.exit(0);

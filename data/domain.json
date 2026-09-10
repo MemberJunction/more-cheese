@@ -2003,6 +2003,10 @@
         "InitialPaymentAmount": {
           "name": "InitialPaymentAmount",
           "type": "number"
+        },
+        "InitialPaymentTypeID": {
+          "name": "InitialPaymentTypeID",
+          "type": "uuid"
         }
       },
       "foreignKeys": {
@@ -2225,7 +2229,16 @@
           "targetField": "ID"
         }
       },
-      "isImmutable": false
+      "isImmutable": false,
+      "composition": {
+        "collections": {
+          "Lines": {
+            "entity": "PaymentLine",
+            "foreignKey": "PaymentHeaderID",
+            "mode": "upsert"
+          }
+        }
+      }
     },
     "Relationship": {
       "name": "Relationship",

@@ -16,7 +16,8 @@
       "InitialPaymentAmount": 1000,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "033EAAD3-57BC-5235-A09E-6DF868CC7694"
+      "ShipToPersonID": "033EAAD3-57BC-5235-A09E-6DF868CC7694",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "1A2F0103-6259-576B-A7A3-2D20A0C9D603"
@@ -49,8 +50,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "338f9b222e0808711bb7a2a049627ede5bb383d4422e049b682cc989e2edea89"
+      "lastModified": "2026-09-09T19:52:57.622Z",
+      "checksum": "5e1df7c035f158aeaeb64eb27061625eeaf009e5977f1419110e09871c7e9e37"
     }
   },
   {
@@ -62,15 +63,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "C79C29B4-0E9E-5720-89F0-361A72072862",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 70,
+      "Balance": 105,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C79C29B4-0E9E-5720-89F0-361A72072862"
+      "ShipToPersonID": "C79C29B4-0E9E-5720-89F0-361A72072862",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "C8C203D4-15CF-5817-8697-05E85D1606D3"
@@ -103,8 +105,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "9e99848db6d63bedc51f1e9aee92d581c2de1a2f2ced32309dd3e4d500421806"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8a568da695c4dcf0e6e9c7641aad32c29be2f8ced78581f87a0e2cc952b3ddda"
     }
   },
   {
@@ -124,7 +126,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "1760712E-1F45-5207-8CF3-AFB5C91EAA59"
+      "ShipToPersonID": "1760712E-1F45-5207-8CF3-AFB5C91EAA59",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "7A4D7C99-781E-5A03-AEC0-8810F90440ED"
@@ -157,8 +160,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "1ccee4644a906ce18ab13822c8f7867015e45ea7049694d686e467b413948e98"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3d07f5b2dd49e857b625a3d17ba5853a1935bf357ffeefc8081d59b751b5b751"
     }
   },
   {
@@ -175,10 +178,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D8D82DD1-6AE6-571C-AEFC-737782926B3A"
+      "ShipToPersonID": "D8D82DD1-6AE6-571C-AEFC-737782926B3A",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "05F59BE7-5FBD-585D-BA3C-9B275402F7E1"
@@ -211,8 +215,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "8adffa3ee00b7f05458e9de872d330d2830bc63975799561f691af35430418cf"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "020495e00b02677933ccfeab4e359ef43db35170e0254c8a5765610beb13a772"
     }
   },
   {
@@ -224,15 +228,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "7D1D1249-BCD3-5AC4-B842-99FE08C2AE30",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7D1D1249-BCD3-5AC4-B842-99FE08C2AE30"
+      "ShipToPersonID": "7D1D1249-BCD3-5AC4-B842-99FE08C2AE30",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "57EC36DD-65A6-5846-BBE2-5FF6E4A722FC"
@@ -265,8 +270,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "ee24155b3da0bbd8e67c58b9617ed5aa7a07c63805f45959c91c1b916defeba8"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "b0ff005041b732f1a5569ff3efe4da6b0a3afdc2957d15df1b60e890a040059b"
     }
   },
   {
@@ -278,15 +283,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "E1AAC538-D0F5-5AEC-B7A7-C9EFC7EE1492",
       "TotalGross": 400,
-      "AmountPaid": 400,
-      "Balance": 0,
+      "AmountPaid": 200,
+      "Balance": 200,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "E1AAC538-D0F5-5AEC-B7A7-C9EFC7EE1492"
+      "ShipToPersonID": "E1AAC538-D0F5-5AEC-B7A7-C9EFC7EE1492",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "4695A38D-D651-525C-B100-BD91827DF655"
@@ -319,8 +325,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "738253a9aa6d18a0418358a70dcc4328d977cd30005e1c92d4993c946c8b54a1"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "21a4472cc38d821971f9eedbd42cec3e18053d7d440d753dbe911b227b2451d0"
     }
   },
   {
@@ -337,10 +343,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7905F68A-CFB6-5A0E-86D2-EBFB89D6001A"
+      "ShipToPersonID": "7905F68A-CFB6-5A0E-86D2-EBFB89D6001A",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "91E918FB-425B-5151-8377-A59397961C65"
@@ -373,8 +380,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "e7fd1f0f492bed8d0f95898d5a16119ee2824e19141a708419b0b1ebba5454bb"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f7a446a5056ca085dc549533c3122ed40f0772496733b563aa73e4c7df436ade"
     }
   },
   {
@@ -394,7 +401,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "08C1E0CF-C68C-5950-9A75-0D297DC8F687"
+      "ShipToPersonID": "08C1E0CF-C68C-5950-9A75-0D297DC8F687",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "67AD46A8-6DA1-51F6-AD46-1ED55612EE9E"
@@ -427,8 +435,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "b08cede000e3b697ced3b56859d580d998edcd8f757a7759012914c55a63f7f5"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "24bcd1b958275353aeb5541c93eb316e1f034b8e5239683dbaee42af61af2cae"
     }
   },
   {
@@ -440,15 +448,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "43EC7A5B-F566-5BA5-96B3-08875265248D",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "43EC7A5B-F566-5BA5-96B3-08875265248D"
+      "ShipToPersonID": "43EC7A5B-F566-5BA5-96B3-08875265248D",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "5CC4CDA4-5E6F-5414-A612-8A77FB676AF2"
@@ -481,8 +490,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "26dde976c335471583eabcad99cec10b31c01ff33affe97d7357a44f3bac2dc9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "01859b075d2032889b3dc1c40e285b6853e9094c253c4051b55d312ca57084ee"
     }
   },
   {
@@ -502,7 +511,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "32D63A1D-7FA4-5B35-82C6-98241F06F864"
+      "ShipToPersonID": "32D63A1D-7FA4-5B35-82C6-98241F06F864",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "D71D7999-8159-5BBB-A03B-E3DEA01D58C3"
@@ -535,8 +545,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "e96c39c474b380c955747f0659ffd44b551e67f10d26b65d16ee024861ad9d75"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8172e0c113e786782b334a434c7b708984117a4961cfec9620b55f4e64262e6c"
     }
   },
   {
@@ -556,7 +566,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "920EA76F-9960-5760-8C58-CC50B3A18DB5"
+      "ShipToPersonID": "920EA76F-9960-5760-8C58-CC50B3A18DB5",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B5B8B855-7698-54CA-9C28-6016098DB621"
@@ -589,8 +600,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "10e021efcf8befa584c0899b88ea74ef715e605ad3541e8f3a81532a32497707"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8cc09f1362697c279e2ad19a87df14d0555d9472dd98160198e7a60610b44463"
     }
   },
   {
@@ -610,7 +621,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "1CD5F393-C6AA-50AC-97E2-BF4B31A85EC1"
+      "ShipToPersonID": "1CD5F393-C6AA-50AC-97E2-BF4B31A85EC1",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C85A0F8B-5A48-5764-8D1F-396EF8D44541"
@@ -643,8 +655,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "dbaa7e49b39f8eae0c647fd5c976fa8dc8090a6ce6236baa87c01692de673424"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ea84c6bf5bbb3cc39b2bcb75666cd40ae4bb64a05fda8b47b3d67fa1a685c90f"
     }
   },
   {
@@ -664,7 +676,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C4275E9A-FF73-5735-8448-8A5625E60737"
+      "ShipToPersonID": "C4275E9A-FF73-5735-8448-8A5625E60737",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "CEB0B2AD-D9FA-5984-9655-04D8F3295004"
@@ -697,8 +710,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "629c949135776b714327fca8456503db7fb89346ba74702062390a4ffd90ade3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ca4a317bccab03566eef7ed30cb949dbe2d546a790b8a167c4915b70e188eabd"
     }
   },
   {
@@ -718,7 +731,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0056BB80-F9A7-5348-9EF7-C3FDD323C8C9"
+      "ShipToPersonID": "0056BB80-F9A7-5348-9EF7-C3FDD323C8C9",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9216907E-5B3D-510F-B6EB-5E9946290DD4"
@@ -751,8 +765,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "4dafdc7973e1f57d270d45ec8a7ee5af4fc7aebc826ecb23b49833f67fc4cb97"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8bf8045b2c1eb4e393233f58896961092e94bbe660b1955ec470064981549597"
     }
   },
   {
@@ -769,10 +783,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "9FE55C26-8983-53AA-B517-52BE385CC0F0"
+      "ShipToPersonID": "9FE55C26-8983-53AA-B517-52BE385CC0F0",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "49B38A7D-3CEE-50E8-AD09-DB2313F04378"
@@ -805,8 +820,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "658f18786592cd72230c56657f66c5fcbd373af28661abe5e473d6267b769b91"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "098cb0ff32141d2ffed86559211c2bafe62a42eaa22744ce518e9443b80a617a"
     }
   },
   {
@@ -818,15 +833,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "79BB15C1-B77B-5DE8-9774-334FCF60970E",
       "TotalGross": 150,
-      "AmountPaid": 150,
-      "Balance": 0,
+      "AmountPaid": 75,
+      "Balance": 75,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 150,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "79BB15C1-B77B-5DE8-9774-334FCF60970E"
+      "ShipToPersonID": "79BB15C1-B77B-5DE8-9774-334FCF60970E",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "B0179F56-9D5B-5B07-98D2-6B75636A85BB"
@@ -859,8 +875,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "aa50348b59f93ff213081a909bdffab9c9437ade23fa8ce0ca9720d0430e4b8c"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f7c2d95a1228f6387e2934d6333d6e83e2407036945bba98a91a7fdc42ca98e6"
     }
   },
   {
@@ -880,7 +896,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "067065F5-7F1C-57F1-A0F8-92D707C25B7D"
+      "ShipToPersonID": "067065F5-7F1C-57F1-A0F8-92D707C25B7D",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "09E15CA0-51B9-54DF-85FF-A538320F6FAB"
@@ -913,8 +930,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "3fcafc892be7b806030fe8851688681ec8e9449f02ae3289c67dd3ff1024680d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ef63e352a657fca4ba9177e6535afaf2369ad0139b63990a4461504f1dc9f37d"
     }
   },
   {
@@ -931,10 +948,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "04C22DFB-1251-5DF5-8739-E89E5E1C51BA"
+      "ShipToPersonID": "04C22DFB-1251-5DF5-8739-E89E5E1C51BA",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "64E56460-A52C-5B25-B71D-F4B254FFDF9C"
@@ -967,8 +985,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "a5140ef4c470337168a38cacd0ff069a920b837a24d0e5490f1992b5ece52cde"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "6c9b2148e4b62869ca5bd5b365dd9c7ba139af701392b89bb860d367086241fd"
     }
   },
   {
@@ -988,7 +1006,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "CCC015AC-1247-5EA6-A662-FBE02C930AFA"
+      "ShipToPersonID": "CCC015AC-1247-5EA6-A662-FBE02C930AFA",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "E0BEFF5A-B835-5693-9774-4717FD498BDE"
@@ -1021,8 +1040,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "035d74d46b027549c4c801153567b07c3182ba2375dc2d337523a4d7318bbea7"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "6d6447c3e785d94945af53ad070d33e0607f442e91a33b71dc26ac7a731d5038"
     }
   },
   {
@@ -1039,10 +1058,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C370BCEF-4688-5B44-8D6D-3BFCA0D45697"
+      "ShipToPersonID": "C370BCEF-4688-5B44-8D6D-3BFCA0D45697",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "432EAC2B-E0A4-512E-8646-2D2AEC736475"
@@ -1075,8 +1095,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "a03fe23ac988bb10591ddea1b682c3758bff341fc777b23a519335c3beab8ca4"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "62c51dc7511a7771eff007b84be7f8a065236f657613a48b5b54b9e95bd730ca"
     }
   },
   {
@@ -1096,7 +1116,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DE0C8EC0-E0B7-5670-863A-DD79C02D2A40"
+      "ShipToPersonID": "DE0C8EC0-E0B7-5670-863A-DD79C02D2A40",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "78DEF1CA-FE09-5AC5-8944-8809A664323B"
@@ -1129,8 +1150,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "01da07004ffe0c46cc1d7567ec80eb6dc80d18cf2e9fa7077fc93b03ecedafad"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "b027d3f77cc7aafbe87d06d00550578b77b8796a5779aaf41796527b99d4841d"
     }
   },
   {
@@ -1150,7 +1171,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "8B2563A6-6C67-5DE3-A97B-F0C117A6C1A7"
+      "ShipToPersonID": "8B2563A6-6C67-5DE3-A97B-F0C117A6C1A7",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9D02674D-93C0-5F4B-98FB-30D22750176A"
@@ -1183,8 +1205,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "ac2fc8168d9bb9b4573529ca6d9550683a96f905e76853e1b5ed5dfb39494b84"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f5469edc47e79195defef92ecfdfc4b35468893357ce3649941e7a09d6a0dca4"
     }
   },
   {
@@ -1204,7 +1226,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "22450F34-119C-5ED1-A13D-AE0661E86C72"
+      "ShipToPersonID": "22450F34-119C-5ED1-A13D-AE0661E86C72",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C488F3AA-CAE8-5F23-870A-65F6E3833C7F"
@@ -1237,8 +1260,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "711b35bf90e7f17c5f794874768715a800232cc65b0a03d9649513280dbbd8e9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "4b9da949a47a53d995a0bbe902e196bebbb6dfdbf9d2a54baf62698ae4361af4"
     }
   },
   {
@@ -1250,15 +1273,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "F856AC54-7602-5898-91CE-7C5B9E50AD89",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F856AC54-7602-5898-91CE-7C5B9E50AD89"
+      "ShipToPersonID": "F856AC54-7602-5898-91CE-7C5B9E50AD89",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "595A50CC-482B-5BC0-B7F9-85A0BAF584B0"
@@ -1291,8 +1315,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "128fcb04c8e3c0893ce1f1556b09b788539d9684961040a8904d08a180887e9b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bc0f20207e1db0442815cf94c17b0521da0da199236987f04c27b41ede486733"
     }
   },
   {
@@ -1312,7 +1336,8 @@
       "InitialPaymentAmount": 1000,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "91150E12-A165-5567-9AFD-D0771661B949"
+      "ShipToPersonID": "91150E12-A165-5567-9AFD-D0771661B949",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "2A9634A5-E639-5A8A-889C-5EBE7A42DC6A"
@@ -1345,8 +1370,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "e58c04179f93aee9344c9ac15000b7a1452192f0ed8692627137690e9edc8012"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "196d36b139e8437964f19fcf33f276592dcb2d443ff6a8047cf3ae9cb729eda6"
     }
   },
   {
@@ -1366,7 +1391,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D5D50FA9-1540-5428-9524-E54682F84603"
+      "ShipToPersonID": "D5D50FA9-1540-5428-9524-E54682F84603",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "478D8749-E491-5D07-BA97-4BD9EC8A2A51"
@@ -1399,8 +1425,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "0db796eebb519e6b1f557ea5f75e0dde711e7e6c7799bcaf7df93d19aaeeb4e0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ad05a87066fdd36b0a413e27c662971c2bf5880b2589b69acdc992fe8185ebca"
     }
   },
   {
@@ -1417,10 +1443,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "6CBBAB33-C724-5D6E-8E40-0E8DE99650D9"
+      "ShipToPersonID": "6CBBAB33-C724-5D6E-8E40-0E8DE99650D9",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "3D1C09F4-E43A-59D9-8299-111CDD9F1CAD"
@@ -1453,8 +1480,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "8dc2a5f0f4839b82c97e3759fb701218ef918a2333f4e65da56b342cf3b68ddd"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "864f3d7e7d5e62a0f3c677878fdb17a318dc10efe11fc592acb4ffd40430ffb9"
     }
   },
   {
@@ -1474,7 +1501,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "A077CA54-4EC0-5F10-93B2-706F255E6876"
+      "ShipToPersonID": "A077CA54-4EC0-5F10-93B2-706F255E6876",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "DB3AAE7E-0D3A-5721-A388-32DBC48B7BB5"
@@ -1507,8 +1535,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "5456bd5dab342ffcdc05aaf76e86864b50470bae90db68b1e1df0d510824d93a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "373e5cea51962416e9b47686aa03dfef16f51bb92252a605f94b0296cc77e756"
     }
   },
   {
@@ -1528,7 +1556,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3EBCB131-E88B-5792-AA20-5B6C602B58B0"
+      "ShipToPersonID": "3EBCB131-E88B-5792-AA20-5B6C602B58B0",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "8533ED62-634C-539B-BCD9-0BA30C930B5F"
@@ -1561,8 +1590,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "99e4a1d26a4a6debf7cd5b358a0628d64291b3cb288d37263c7ee32920b16aa0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "70a1bec6d6f7f2e04a233c9903528948f2ce8d8c0dde0bb910e15b7628d0a3c8"
     }
   },
   {
@@ -1582,7 +1611,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "26C9CD3D-67A4-58C8-A636-8CEB4666527D"
+      "ShipToPersonID": "26C9CD3D-67A4-58C8-A636-8CEB4666527D",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "215B1A89-3D9C-5B82-82A2-AED31268EAA0"
@@ -1615,8 +1645,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "079fa913470865bc4b0ba2b28e1017dc978eb6cda4e722f2eb780440f817f070"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "176a56549817ee706788ae37805c2351e02a18f4be3609e2b3b1a14817cf5d6e"
     }
   },
   {
@@ -1636,7 +1666,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0D19E3DA-E1E4-5CCB-9C9D-AE74E7751D4E"
+      "ShipToPersonID": "0D19E3DA-E1E4-5CCB-9C9D-AE74E7751D4E",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4BE2AB05-E140-5781-AAE8-01DA5300D01D"
@@ -1669,8 +1700,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "8cfa2174133d56ac4aa671a3512b94233d4797bf78877878259213cc5c1ffd24"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bcdc7527594578e884b5b1f9c434057e4f69df7d0b4a206215de66a184f0159a"
     }
   },
   {
@@ -1690,7 +1721,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "54CD881F-0B09-5380-8229-C0DFD6B829B5"
+      "ShipToPersonID": "54CD881F-0B09-5380-8229-C0DFD6B829B5",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "FA3C62D8-5C9F-52B8-9A49-C1D050B23A9B"
@@ -1723,8 +1755,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "5acd64be9dbf2ea554a693a7806c75434a4b72ceade03ac9b06d4518da287365"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bfd4715bd6ba18039b6b80631ba4693ed5fba3696a0097d376d2b36b52e0d159"
     }
   },
   {
@@ -1744,7 +1776,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF"
+      "ShipToPersonID": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "FFC2F3D9-2F74-5189-8C97-5E482DC7EDDE"
@@ -1777,8 +1810,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "343f037ef31fdf5874f00d02266477df2de03e83b66d586f47b223eb61b82fd5"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ad89267422b9cbbe6ac0906db50324757025eb67b2a2593bcf9faa72a7f55cc3"
     }
   },
   {
@@ -1798,7 +1831,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2E17C750-1E13-5D3F-8D20-2F805D75046D"
+      "ShipToPersonID": "2E17C750-1E13-5D3F-8D20-2F805D75046D",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "83DAD94D-0E3D-5C31-9A36-8CB17D72B00F"
@@ -1831,8 +1865,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "20cd55b246ed447dcc076882ed855879b54012956572c8148d3e7a66644ff740"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "156af5dec54f7fc886e2cae7e6cbf7cbc35fefa7aa280b6333743a2ec31c1fd2"
     }
   },
   {
@@ -1849,10 +1883,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3155405A-8DA3-5C0C-84A9-E0BF6AA4C9A4"
+      "ShipToPersonID": "3155405A-8DA3-5C0C-84A9-E0BF6AA4C9A4",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "909A65D1-3A23-5DB5-9BAC-C30682ABF591"
@@ -1885,8 +1920,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "ed91026157e09dd00f8b1c41d43015e702d07fd39ee5e60ecbcb450fa5bce512"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "e2449d75de404161f63f7f56b0d9d801a03e4332156a731643829fe7e0306be6"
     }
   },
   {
@@ -1898,15 +1933,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "0892ADF1-BE12-551B-BDC4-CACBE35C6B3A",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0892ADF1-BE12-551B-BDC4-CACBE35C6B3A"
+      "ShipToPersonID": "0892ADF1-BE12-551B-BDC4-CACBE35C6B3A",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "21D2EFF1-B874-552C-BE02-C385BC938200"
@@ -1939,8 +1975,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "0b93d191213ed0c47406181577b0f2113b4b3a7b496e22587255a82a047a40fd"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c11897bceffaf76133310a2009dfcae9477ce756797ddd1443e431570a3b177c"
     }
   },
   {
@@ -1960,7 +1996,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3618A7F4-1C4A-50DD-9715-6E2BCE0961C0"
+      "ShipToPersonID": "3618A7F4-1C4A-50DD-9715-6E2BCE0961C0",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F0187D8E-574E-52CB-80B0-64C363A19D9E"
@@ -1993,8 +2030,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "09a904b4467033918a06a11e3d9fff7d78aa52485cbcf830608d62824b858163"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8a01c539d41c993ed2c9657c6daf5885d9cf433e5975936c18d8f80bd849b1d6"
     }
   },
   {
@@ -2006,15 +2043,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "405455F3-A250-578C-800A-680D7F7B1AFA",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 105,
+      "Balance": 70,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "405455F3-A250-578C-800A-680D7F7B1AFA"
+      "ShipToPersonID": "405455F3-A250-578C-800A-680D7F7B1AFA",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "4B034C93-EB99-5BF2-B80B-D791CD0364F5"
@@ -2047,8 +2085,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "d35661994acf7ffeb22fe054682ff789699a05b82992a4ab5f705646f7dba2c7"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "65de85d1894735f8f5ba6ece2890c59a5e3c60c975d2f0626692e33e5f112946"
     }
   },
   {
@@ -2068,7 +2106,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "B2A0B831-AB09-5C8F-99F6-846EF707693E"
+      "ShipToPersonID": "B2A0B831-AB09-5C8F-99F6-846EF707693E",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "20481FA2-C8FC-540F-A365-1FC958B0F35E"
@@ -2101,8 +2140,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "c1335700797c79e6c9084f5811e1fc835160a8524536fbca710971f0a0ca231e"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "77c5b72e52d1f4a35a032e5bdf2c41ba50a5befddbbd7877944295df7f0e8c80"
     }
   },
   {
@@ -2119,10 +2158,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "CC3022CB-25F3-5E4C-851B-E0FE42C38342"
+      "ShipToPersonID": "CC3022CB-25F3-5E4C-851B-E0FE42C38342",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "CBA9755E-1FF4-55BD-93EA-B88F3DEE4177"
@@ -2155,8 +2195,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "147aa5dadb7971b8b5087faf91d5c889ad6b004e4f9f81d22eb4cd6d35fe9516"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ec7a4094b6ea8e99b6caf9772ad7312bfd2d2d91fb5763e708eb3c765eafa3ba"
     }
   },
   {
@@ -2176,7 +2216,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F1D02A34-C468-5615-9FE2-EA008940E187"
+      "ShipToPersonID": "F1D02A34-C468-5615-9FE2-EA008940E187",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "16562D4E-D1AF-52F7-8384-8440F6C7DF2F"
@@ -2209,8 +2250,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "75e8885974ff9bca6e6ae3775206b6be6fd99b300cee16e30bbf8fd06d476e9d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5b96cb6fea2dff1c9ae06d9e1f3a5274aed0738f568f6e2d056fbff67968614f"
     }
   },
   {
@@ -2227,10 +2268,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "63E19143-DB9A-5D70-AF46-97C9B3332233"
+      "ShipToPersonID": "63E19143-DB9A-5D70-AF46-97C9B3332233",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "0A6D8BA0-2817-5787-93FF-AF4DF9A2DE7B"
@@ -2263,8 +2305,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "a242e37b76cc18d7a8ade0472bbc8f0f6cbbe46ba3a784cc16858bfa4b7f8ab3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8f0602981ae3e628cee0b6e89461c4f3d7d9c76dbcafa6b3d91a22628780d214"
     }
   },
   {
@@ -2281,10 +2323,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C3E25DEA-F660-569F-8A8B-4F678C3C41DE"
+      "ShipToPersonID": "C3E25DEA-F660-569F-8A8B-4F678C3C41DE",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "81DEBB83-61A5-5D4F-B933-F14A85475705"
@@ -2317,8 +2360,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "dcc814b0c67da1f89cd471879da3beea9ece0b0ca815f09e9dd7e2cee3fa98ec"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "4a365909a55cb3efa0164ca1f2c2068beac5cee1204cd8f725ebbbfbcc7cf30a"
     }
   },
   {
@@ -2335,10 +2378,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3BB89256-4B57-5CA3-B30F-92D1229F39EC"
+      "ShipToPersonID": "3BB89256-4B57-5CA3-B30F-92D1229F39EC",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "337DDD16-AC8D-5A87-9052-F8F9DBB9949E"
@@ -2371,8 +2415,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "1ff6504090fc5fc42198922e6e7897d52663fb3cf72cc9f645ba1caa9b4cbd07"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "699771b028b6f011cbfd335d32d3f23acfe5a3e546efb607a7645630c0fb4713"
     }
   },
   {
@@ -2384,15 +2428,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "EE7EAC23-13FE-52FF-B3EC-4C89B72D8F12",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "EE7EAC23-13FE-52FF-B3EC-4C89B72D8F12"
+      "ShipToPersonID": "EE7EAC23-13FE-52FF-B3EC-4C89B72D8F12",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "B5458B50-8863-5B87-AB62-CA65376B5FFB"
@@ -2425,8 +2470,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "5309d20b0370347497ca3d2902fa645c4a79c308f11da8ee38e50b0bce246473"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "84cd557d68153479c598b6b944c53214d71bfe73f7eb55368ac68b6c5dd4e0d2"
     }
   },
   {
@@ -2446,7 +2491,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "EEF7EE8A-8EBB-53F8-966C-16DA5B7BCAB5"
+      "ShipToPersonID": "EEF7EE8A-8EBB-53F8-966C-16DA5B7BCAB5",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "17E70595-F374-533C-A351-B3393F8C31BF"
@@ -2479,8 +2525,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "7684d4482b367d93f9c350c866b8f227822f1846a84779a63ed5c52329fafae5"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "317d5f01c2f74327abfa71723d3fbab6eb47e64cb163fd3ab0302f05e0b07646"
     }
   },
   {
@@ -2497,10 +2543,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "46A9847E-9AAA-5F1E-9E0E-AAD4EE7BCB0D"
+      "ShipToPersonID": "46A9847E-9AAA-5F1E-9E0E-AAD4EE7BCB0D",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "6A225CD3-80AD-5F91-BAB6-EE9E7CB85F7A"
@@ -2533,8 +2580,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "cbda13712929fbc00a67232e0ff9a9b3ede45e91d2efe29beae8aba8b708ef4d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7c5142e64ca874d6fb96cfb2112e33fd9dddd9b1a8128dd62bb007338ca969d5"
     }
   },
   {
@@ -2554,7 +2601,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7960EE51-4AF5-5CD6-A89F-F3AF363BDDEC"
+      "ShipToPersonID": "7960EE51-4AF5-5CD6-A89F-F3AF363BDDEC",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "5A234DA0-AEBD-579F-94A1-CD4DC17699FF"
@@ -2587,8 +2635,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "8148b6b03e2e76392f2d802f6ec84a0ab32d6d04ddf18fec9cbb800b69b64692"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "d74b428e314870cca1415c5245a29cd4ea34d0739c2d874d99ca7a0765566e09"
     }
   },
   {
@@ -2608,7 +2656,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "8030C7A5-57D2-5793-8120-84407F763F06"
+      "ShipToPersonID": "8030C7A5-57D2-5793-8120-84407F763F06",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "BE7185CC-2B89-59FA-B408-00F54749AC10"
@@ -2641,8 +2690,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "8a0a78e3a73f6d098d32567f969768caa689ec88ba510049f566fb9434fbd898"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c60cad45eb916096f3e7e336bb15fb65fb7cc1aac9313ea577fc82ca0d0bdb6c"
     }
   },
   {
@@ -2659,10 +2708,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 200,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "730AD8D4-6382-5745-9ECB-BB9FB0416CCD"
+      "ShipToPersonID": "730AD8D4-6382-5745-9ECB-BB9FB0416CCD",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "1BAB5520-81D3-5258-B364-E00F712C2645"
@@ -2695,8 +2745,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "3194a9882cc720a0388b15bf8160f789f3368b082d58266b896dc3c7f7666602"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "334cca0fd4ceac80e417dc4f34ff228a88d7afaa345977c9a01951d2395ddaa5"
     }
   },
   {
@@ -2708,15 +2758,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "5585C6B5-B0CF-504E-8206-BF92ECE3AC22",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 105,
+      "Balance": 70,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "5585C6B5-B0CF-504E-8206-BF92ECE3AC22"
+      "ShipToPersonID": "5585C6B5-B0CF-504E-8206-BF92ECE3AC22",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "F6FA3716-0ABC-5E75-AD11-10A6B62A73DA"
@@ -2749,8 +2800,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "27692e3fbc3f3d617c2fdef2614b969291001e1211820f8e327d7acbcbf7565d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a43140f121a815a9e2bc84af72ca86e2dbb7ee46388b2b109352f77c04afbe95"
     }
   },
   {
@@ -2767,10 +2818,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2223944C-7779-5A44-A5BE-AB831E3EFF9B"
+      "ShipToPersonID": "2223944C-7779-5A44-A5BE-AB831E3EFF9B",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "E30DD4C5-9F14-5E04-B716-0305B8040F20"
@@ -2803,8 +2855,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "0d65c2351f891a6a1bb813f7b7d1cd8e19836302e0c6a82cd4f273ac9d92bdc7"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "0beba0c1b9324f0aae43676e6967e592041caf02f56cb97f603a3375a226f126"
     }
   },
   {
@@ -2821,10 +2873,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "6B2C065B-76AE-5AC8-AFF6-C5E3D67D7890"
+      "ShipToPersonID": "6B2C065B-76AE-5AC8-AFF6-C5E3D67D7890",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "7C9046E0-F8A7-51C6-B464-9A1858273625"
@@ -2857,8 +2910,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "74783e326aea46250b9b5611ae92396597ca0daed0b2776d2a0c233fbfdb56ae"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ca2da6f7c57f89fdb45366ec8dba828532f24d46bae8171f235c8942e6b593cf"
     }
   },
   {
@@ -2878,7 +2931,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "CAA31F4C-7915-5791-81B1-B7F34EAB4D07"
+      "ShipToPersonID": "CAA31F4C-7915-5791-81B1-B7F34EAB4D07",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C98253B5-B845-562B-8E67-460C2504432A"
@@ -2911,8 +2965,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "c34cdaea703f00ba265ccd3275a38be94efe4a809b5401b81656447ab5173f6b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5b350d6ca01fe8473dfdd9194dd4bfed76ca05b4b9db7940a784acfe9c8611e6"
     }
   },
   {
@@ -2932,7 +2986,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "9D57034D-94F7-5E46-B9A8-5977E53A69BF"
+      "ShipToPersonID": "9D57034D-94F7-5E46-B9A8-5977E53A69BF",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "690F20DE-D94D-55F8-85DD-CA4A7B9B8226"
@@ -2965,8 +3020,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "f9966f7bf02d9b80d1f611f47a3fc21a61498631d4dc6eb83f4b2beefcd06b29"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ff6653346608315c28ebe3f1c12d55c91e6bae18f35169af39a5dd2156a8093a"
     }
   },
   {
@@ -2986,7 +3041,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "1168D7EF-3F29-558C-A646-A1771978A142"
+      "ShipToPersonID": "1168D7EF-3F29-558C-A646-A1771978A142",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "E2AFE307-3E0D-578D-A806-1E54ED6E0FF1"
@@ -3019,8 +3075,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "4be2ab62d614d45da5a16f269b36577316385f6cb2471f5e765845543d0ed440"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "68b092d9d721c033f206e66e90371fef87c86b2356df6e175d140cdac8048446"
     }
   },
   {
@@ -3040,7 +3096,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "FBA90009-E6CD-5582-8105-67A999238AE0"
+      "ShipToPersonID": "FBA90009-E6CD-5582-8105-67A999238AE0",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "8BF647C8-42E3-592E-A506-950700847A07"
@@ -3073,8 +3130,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "8a14fe519a72b801f819a165fb5b3a1c923367459000d1824d724b7dfd76d71f"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "36688e94ee9e20d131ff1c2f3e07d457de1d501094cbda1f08ed9b92e83b285b"
     }
   },
   {
@@ -3094,7 +3151,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C19D6EDE-CE83-5C4D-A400-CA547652A0BB"
+      "ShipToPersonID": "C19D6EDE-CE83-5C4D-A400-CA547652A0BB",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "438E5371-7DE2-5A8E-B9C9-6ED0691E9D65"
@@ -3127,8 +3185,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "92429e5a490b42d1e56dec7e7726d3d6c71475202c3911fd50517a7fbac7bc44"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "74dcce3036b2a99871023cbbd5f5caa71fcab5a3e58b3f5ecee2194d09a6cea8"
     }
   },
   {
@@ -3140,15 +3198,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "F034E43B-FCA1-5A2A-A03D-8CFC92D8EFA9",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 88,
+      "Balance": 87,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F034E43B-FCA1-5A2A-A03D-8CFC92D8EFA9"
+      "ShipToPersonID": "F034E43B-FCA1-5A2A-A03D-8CFC92D8EFA9",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "ADDCA05D-81BE-5956-B715-E684BB48537A"
@@ -3181,8 +3240,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "c6685da870f37d0fa85e543dc3f3ec608e36fcf30d575b94706b16c9acf8a737"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8fec1a88aca7a08d20e27d7d2f556e9b23fc29dc88a4312ec46eef8817be1dae"
     }
   },
   {
@@ -3202,7 +3261,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "1CEAB292-47F7-55E5-A956-0FEF2C7D62A9"
+      "ShipToPersonID": "1CEAB292-47F7-55E5-A956-0FEF2C7D62A9",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "67694B26-FA67-5358-923A-8934C16073C7"
@@ -3235,8 +3295,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "75064c51b8b43f46b1a66e4cff6148d0ce6a8170055409b06db5e58faef2b93c"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a990715668bdd17c4b6061018bd5853cefd3f5537007601893357337ccd7d5d6"
     }
   },
   {
@@ -3256,7 +3316,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "5E9F2CDA-B022-53E7-AA02-F23E36EBE498"
+      "ShipToPersonID": "5E9F2CDA-B022-53E7-AA02-F23E36EBE498",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "E72DA603-3FD6-50A6-AB45-775BB5F4F830"
@@ -3289,8 +3350,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "5df3242710079868ed7aa8f0acde98dcc3ed26a4ff422f8118a23f8d410a8a01"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7cd2d73edb71c6079429f94193a4d6c893f818ddbee662cf224577b91019da4e"
     }
   },
   {
@@ -3310,7 +3371,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D11A9B1E-CA44-54C0-B945-C4594B34CA32"
+      "ShipToPersonID": "D11A9B1E-CA44-54C0-B945-C4594B34CA32",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "3E9E3047-AF9C-5173-9B1E-B6483C486B14"
@@ -3343,8 +3405,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "a79003d0e01563d5b4052aab3a9200bd7c2eb6b7fd65202b876ba2f0dd6c8ee0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "fb89941c1a30d50fcbbda64c4fca3d7792bfb0e3cfbb065dad2059f118f4e345"
     }
   },
   {
@@ -3356,15 +3418,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "40EAE986-8590-536C-82B5-BD31FF16B2C6",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "40EAE986-8590-536C-82B5-BD31FF16B2C6"
+      "ShipToPersonID": "40EAE986-8590-536C-82B5-BD31FF16B2C6",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "14430BA7-8401-558E-A09D-09FF1FFAF158"
@@ -3397,8 +3460,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "00503c96c1f17097cec0acc9a168d3844a8d249a3f253b00492639e156f44a03"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a2db75f16b64960e5218e5684a422aba024c4ec7fda5018ffa801a1f339d8ac3"
     }
   },
   {
@@ -3415,10 +3478,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "A35AF57F-7995-5354-9355-0FA9BB9082B3"
+      "ShipToPersonID": "A35AF57F-7995-5354-9355-0FA9BB9082B3",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "401E09DD-CFDB-5B85-8F34-3266871EB666"
@@ -3451,8 +3515,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "29dd1309dbc536d4cb8e68df83564b9970279334c61106fa8c14e1726d85e36e"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "d81b7fd70ae814970bf312c196216dd0d8798adc93b570496ad5fdb994bbced5"
     }
   },
   {
@@ -3469,10 +3533,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2856E009-307C-5B51-AE49-2E91902C7673"
+      "ShipToPersonID": "2856E009-307C-5B51-AE49-2E91902C7673",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "F666F17C-C6CE-55BC-A9DD-E97471B1B232"
@@ -3505,8 +3570,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "61d10fbd91a7b1da99c8a369ca399859d4f470bf9f44ccef4854efd37ba31db0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f7c5b7176541ea45e14f4ed3e4b81ae04c7cda7792f82d62453476627f095340"
     }
   },
   {
@@ -3526,7 +3591,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "69E566CE-D8DB-5AD8-87EF-A78EDAE07D71"
+      "ShipToPersonID": "69E566CE-D8DB-5AD8-87EF-A78EDAE07D71",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "CD783CC3-9417-52D4-A87D-18FBC27E16F1"
@@ -3559,8 +3625,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "695739b5fdb52e3cc48304463dc12d1ccce813728e6387dd779674ee46a50968"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ad891b7ad66004dc18944993308de90d8213888c0c1b31641b400d50bd01934b"
     }
   },
   {
@@ -3572,15 +3638,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "A7683792-65EE-51BF-B0AA-7B509CFEDB0E",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 88,
+      "Balance": 87,
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "A7683792-65EE-51BF-B0AA-7B509CFEDB0E"
+      "ShipToPersonID": "A7683792-65EE-51BF-B0AA-7B509CFEDB0E",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "371FDAEB-D2BB-575D-A45A-85A5205A2871"
@@ -3613,8 +3680,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "368f2ea58f6ecec33e26e7e6d1c1876931b266d7befd0e400114dbe08be5db1f"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7ad9b65b041bcfbc1afc52ed4d928531f8d777786ffde5c06d64d2e1fa96b6f2"
     }
   },
   {
@@ -3631,10 +3698,11 @@
       "DueDate": "2019-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7FC6B80D-6172-5250-A89A-4577039D3BE1"
+      "ShipToPersonID": "7FC6B80D-6172-5250-A89A-4577039D3BE1",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "CADF393F-E8A8-58EF-966A-B625FE4853D0"
@@ -3667,8 +3735,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "0a6b3f3ff5a6c05128094cd135b6dfd1cb14d72f743100db28e90f003c7ecd09"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c3b88079cef2e152d7e77b0fc5be2b18b3f6d55efb3e8e02964f88892541002d"
     }
   },
   {
@@ -3685,10 +3753,11 @@
       "DueDate": "2019-01-21",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "E5639886-0524-5AD0-A707-A3D7E1BF2F3F"
+      "ShipToPersonID": "E5639886-0524-5AD0-A707-A3D7E1BF2F3F",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "4599FEAD-E9AA-57BC-AC15-7833AFE48C96"
@@ -3721,8 +3790,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "cdd790d7055f5a674dd6d50040b50bf6e654e81b8606d1736925ac037a1d0ab3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "e747439539db42503e8baf5483a56ea90e7b174dd21b53a54eaf241bb02e1ab5"
     }
   },
   {
@@ -3742,7 +3811,8 @@
       "InitialPaymentAmount": 1000,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F3D3922F-CB0B-5598-A450-89F88923722F"
+      "ShipToPersonID": "F3D3922F-CB0B-5598-A450-89F88923722F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9F426C3C-0E43-518A-A5AF-D36D61B1372E"
@@ -3775,8 +3845,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "55d52797e26257ef1e9b6ea814fa83c1cd2bc58940126bde7ee588c884ffb154"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "cbb94ef0d9b50e3e04e72f208e50de75f3413cf5441be4dd7c23e0d5ef5c5353"
     }
   },
   {
@@ -3796,7 +3866,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "907230B8-B67E-57C6-BDE8-94DF4A200F2C"
+      "ShipToPersonID": "907230B8-B67E-57C6-BDE8-94DF4A200F2C",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "561ECDF8-A5FD-54A8-A732-7846A49C0515"
@@ -3829,8 +3900,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "635393abba8ce2100fe6381612400137c7738499041b5a4f61f431da3bb59eba"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "1eceeec43b14ef55df8406ebf6482bc0ac20ea81273fb2b590f3c6e3486346d3"
     }
   },
   {
@@ -3847,10 +3918,11 @@
       "DueDate": "2019-01-26",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2B2219FF-5E08-5E02-9C34-9B502BB3E69C"
+      "ShipToPersonID": "2B2219FF-5E08-5E02-9C34-9B502BB3E69C",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "1B6D0002-FF6C-5B2B-B784-337A6B67FBA6"
@@ -3883,8 +3955,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "290f2079deb0c29109db25f8d5467fdea799fbe443ab33fc196d63125fdced91"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "75968a9a7ac66fdf71cfd1c4cb11bb1c0f51494a160e1ca91521188b455862dd"
     }
   },
   {
@@ -3904,7 +3976,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "58FF5B88-9ACC-5A5D-BF0A-BEC87F0B9FED"
+      "ShipToPersonID": "58FF5B88-9ACC-5A5D-BF0A-BEC87F0B9FED",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "126A76C0-FEE3-5ED5-938D-FBA301F59C5C"
@@ -3937,8 +4010,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "0bf4850cded7e60195843a508560b9cac050f498f0d8748e0f0e64ed4b9a9901"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3e7c8a8b5dea2278838ad4cbb9e6ab387b10f1d19caa512bbf9997242305ac12"
     }
   },
   {
@@ -3958,7 +4031,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "78C1A640-D563-5339-BA0B-D5C8BB22ECB0"
+      "ShipToPersonID": "78C1A640-D563-5339-BA0B-D5C8BB22ECB0",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "A6228103-7CF3-50A5-9967-B8F3D4E4A25B"
@@ -3991,8 +4065,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "465d37bd9af28b927eb4549d83cea62e53452591c979404e333e45d491db4845"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "e24cafc00962d752bfa82b48753ac7083efb2ee09931469ede645b84eb406877"
     }
   },
   {
@@ -4004,15 +4078,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "EA083819-F4F1-5CD5-A43D-2CD309718835",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2019-01-11",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "EA083819-F4F1-5CD5-A43D-2CD309718835"
+      "ShipToPersonID": "EA083819-F4F1-5CD5-A43D-2CD309718835",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "AAD0EDEC-6406-5F93-B54F-F6ABA53D75BC"
@@ -4045,8 +4120,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "dc40a7aaf0a1a5eafc1fcbacd43ad3b6599a95255150446a15ff3252a89a6e89"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "53e99c783e22516e3f5edf0269d7749bb24efdc1806a05d96bbdeec5a9258596"
     }
   },
   {
@@ -4063,10 +4138,11 @@
       "DueDate": "2019-01-03",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "048675BC-9297-5E31-9556-96E0E3C02EA6"
+      "ShipToPersonID": "048675BC-9297-5E31-9556-96E0E3C02EA6",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "35594C19-E141-5269-8DB2-829F6406C898"
@@ -4099,8 +4175,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "f1c8b73ebc2368faf35f875b6903965fb03131dc2f522abec0cc6068c0b3fe9b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "00f2ee68d51e08a82539fae009814c417065a0c306bc0365aa6340f87dd665fc"
     }
   },
   {
@@ -4120,7 +4196,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F34D9413-D44D-5215-9186-DA6EABEC8F96"
+      "ShipToPersonID": "F34D9413-D44D-5215-9186-DA6EABEC8F96",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "25986214-F3C6-594F-8D10-8B398DF87574"
@@ -4153,8 +4230,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "4ebf3d17c1d08712393108247d2eef0db30acd1c5108bb7d68ecd08cb6180113"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "aa29d824dc2fb8ef367bcca8704522c4a3a3d84687ced8b3b8d8ed78b4fac034"
     }
   },
   {
@@ -4166,15 +4243,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "3E1239EE-F7AE-5538-9B06-B054703D8185",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 70,
+      "Balance": 105,
       "DueDate": "2020-03-20",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3E1239EE-F7AE-5538-9B06-B054703D8185"
+      "ShipToPersonID": "3E1239EE-F7AE-5538-9B06-B054703D8185",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "326E2C0B-1E5F-50DC-9135-E73234B7D9FC"
@@ -4207,8 +4285,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "74fe80c01c198861c77c70a27ac376086f53276255d72a0de5c864bdf7c9732b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5b9d72d20fb09f958adef1318eec3a8b16e7084b6945ca5e1210ce04c0598ddf"
     }
   },
   {
@@ -4228,7 +4306,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7EBE6D41-C3AF-5494-B765-B1DE5DEA1819"
+      "ShipToPersonID": "7EBE6D41-C3AF-5494-B765-B1DE5DEA1819",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B1352D14-178A-5B9D-A8FE-5BFD010A1718"
@@ -4261,8 +4340,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "ca313de414729def81f313d7c327332185873139d6162e3502632360577f6d15"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5bd6ab98316272b80b72fe3a7e77570988568a01fb0db22a9c45c0588438d4f3"
     }
   },
   {
@@ -4282,7 +4361,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "E0343322-6B12-5B7F-B87E-E32340983D41"
+      "ShipToPersonID": "E0343322-6B12-5B7F-B87E-E32340983D41",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "800A2E13-BDA1-5A0B-AC4E-19AB90340E2F"
@@ -4315,8 +4395,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "888b9e2033a1b48f46952fbcb76b64b7191ec932fad7c45b946397da909eed4d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "fb8f799d68ee07a9969d197e0e912b2f0dae45706891e6d635c559c4b767ceec"
     }
   },
   {
@@ -4333,10 +4413,11 @@
       "DueDate": "2020-02-10",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "E0BBDAEA-5708-5A4F-9020-8AB72B3543D1"
+      "ShipToPersonID": "E0BBDAEA-5708-5A4F-9020-8AB72B3543D1",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "CAB52D35-B5D0-54B9-A539-3B6D14AF14A3"
@@ -4369,8 +4450,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "85575ac9771909d3f1c0def1254714eb1bf0892f1e0223e76143d0f250ea2052"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "dd913aab1b3f24c40c0cb2d9f6498914414367c1458c1b014dee57b9d57646fb"
     }
   },
   {
@@ -4390,7 +4471,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF"
+      "ShipToPersonID": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "2071FEA1-936F-5DFC-950F-40651B3D106E"
@@ -4423,8 +4505,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "b493a37f6e549cd065e0feb26c426080b281cf9db2ba518d3576ebfa4e273c04"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "324ab1e4aa9cefb679764880962145f4039e66ac5eade9a7f366f7d64e31ef09"
     }
   },
   {
@@ -4444,7 +4526,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C42B12B4-04E1-57C0-A286-962978C71D08"
+      "ShipToPersonID": "C42B12B4-04E1-57C0-A286-962978C71D08",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C05DEB1F-8675-580A-8DE8-0B93E7D5ECF3"
@@ -4477,8 +4560,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "1f7a4a62f018d3eca506bb45851c62721f5635fbbd94b14233734b27bb7e8767"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c28d8581d20d50508627ca015d42691189c5b4e9ea87d56d7678b9a870bcba4c"
     }
   },
   {
@@ -4498,7 +4581,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "AA2DFF9C-9CB3-5092-A5E5-E916D21CFACD"
+      "ShipToPersonID": "AA2DFF9C-9CB3-5092-A5E5-E916D21CFACD",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "2B8CCA7C-8FFD-5CEF-B14D-1CBF59DDC662"
@@ -4531,8 +4615,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "9aedd18b60a99017a87e262efebfe294f181f086c6b7163059516ef9ab1fb989"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "57152146437866f392bee5fdf5344436be02e58a6c6a63398c2637ce767eaab6"
     }
   },
   {
@@ -4549,10 +4633,11 @@
       "DueDate": "2019-01-24",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "36C673F0-5EEA-5607-8040-1EDA127803F4"
+      "ShipToPersonID": "36C673F0-5EEA-5607-8040-1EDA127803F4",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "D280FE85-298A-5776-B1CC-B1082657D526"
@@ -4585,8 +4670,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "f907b302c89ed3751f15b0db9b65a3f5d7f43e2854838c0f02aa7acc82b775d2"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "370c0c356f382ccd9892a7582ab0d39f458bcaf3d7d943f4bdcee2a0c67fd719"
     }
   },
   {
@@ -4606,7 +4691,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "AC73CCD5-783B-5A03-9A6B-3A974B40201B"
+      "ShipToPersonID": "AC73CCD5-783B-5A03-9A6B-3A974B40201B",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9901A28A-59FE-59EE-AA01-8F8B400F3A06"
@@ -4639,8 +4725,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "62e0a47e3403542f81c9dc47df462929f82ed4aa91e1792b6d3f588bdd831a8f"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "cbd6b75c1dba12a65111c55fc7ad9ee6a78b65438f6666b4f9244fe1854dbdfd"
     }
   },
   {
@@ -4660,7 +4746,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "06D3A575-1D11-5F9F-ABFA-686E044566BA"
+      "ShipToPersonID": "06D3A575-1D11-5F9F-ABFA-686E044566BA",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "E4EBBEA7-6B88-5782-B2DF-2A8598CBF34B"
@@ -4693,8 +4780,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "6188760bc430561dacab87f8c5e2d31f93a72bc1cb17d36f4fee2f93b68a05bf"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bc7e8f7aff3a2925910305ba648198119914b4c4e09c1696f150abc724ab9762"
     }
   },
   {
@@ -4714,7 +4801,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "345E26AE-A748-5B49-A2AA-CD62838D756F"
+      "ShipToPersonID": "345E26AE-A748-5B49-A2AA-CD62838D756F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F28B6FA7-D2C3-5E18-8520-7FAEA52A5E6B"
@@ -4747,8 +4835,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "31509f17502d49eded572178b75048c1a97ba02a8faea1cc99b99a3aaa8e0218"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "374a329b7468e74f1d71b995f7ac19298b1e143256e00326a797bc35a3473fa4"
     }
   },
   {
@@ -4768,7 +4856,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "62608AFC-06B4-5753-B0D3-688E1C720DFB"
+      "ShipToPersonID": "62608AFC-06B4-5753-B0D3-688E1C720DFB",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9040B82B-253B-50B2-9BC6-AD5EA898CF36"
@@ -4801,8 +4890,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "bc5e37104eb5451b11bd61e7be6d9d15cce0307b0cc64d3f24c62bbf0d3ced3c"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8210e29ec6efabfb99d00357af67a4a3ff536cd80b6d72dcbf5c633c4a1f6356"
     }
   },
   {
@@ -4819,10 +4908,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "1D0FED47-F850-561A-9CFB-649953199664"
+      "ShipToPersonID": "1D0FED47-F850-561A-9CFB-649953199664",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "E7985F08-6B3B-58B4-8F8A-D95E280ECC8B"
@@ -4855,8 +4945,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "1a21cbc79dfbd7fcc6d0d200c2f3e8bcae313d8533e66363a31705e7f9fb7f79"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bc6153c2d77e903aa6f14f3e6701c75e7cb218eeb89178728be8e2e5f477d775"
     }
   },
   {
@@ -4868,15 +4958,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "550909F0-527A-539C-AF82-4603AD448838",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2020-11-26",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "550909F0-527A-539C-AF82-4603AD448838"
+      "ShipToPersonID": "550909F0-527A-539C-AF82-4603AD448838",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "44FE6EBF-A23E-5F42-9DE4-8E16298542A2"
@@ -4909,8 +5000,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "94d74031b8dfdb9981c01390604038d1851aac3c8de94748128c690fe492ef0d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f2c9f3e23fa984acc98891ac3c47d665518495f3e7a538faea9efc77cf6e2fd6"
     }
   },
   {
@@ -4927,10 +5018,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "99E0BDB0-D33E-52D6-92A3-072E2BFC6961"
+      "ShipToPersonID": "99E0BDB0-D33E-52D6-92A3-072E2BFC6961",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "28EA302C-99E2-5A34-A5CD-667BCB1ECFAE"
@@ -4963,8 +5055,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "70c946c217d0cb7117e568e52fa56866154f2919c06175f83ffdd9d0b762d4e9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "e30c1be605a5fcb601089463d62e98cb5b44f06590d2a75eb05f0df214518e53"
     }
   },
   {
@@ -4984,7 +5076,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "8E9C6A71-1B0D-548F-AC75-4437A4B249A6"
+      "ShipToPersonID": "8E9C6A71-1B0D-548F-AC75-4437A4B249A6",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "E0040525-FA6E-552F-833F-08D0CC8C0E42"
@@ -5017,8 +5110,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "79d2955eab46010f8ea4eeb3933509ea27b649dee1bab274527115b0c139d387"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ac414f81cb61cd93e07c6748bfd81f795982ad28a8f165f4301bc8bc9a1cc3b8"
     }
   },
   {
@@ -5038,7 +5131,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3256DD1E-9F3F-5159-9A26-3AEB94A9BACD"
+      "ShipToPersonID": "3256DD1E-9F3F-5159-9A26-3AEB94A9BACD",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B61710FC-ACC6-5FAF-B542-4A9681EECCF1"
@@ -5071,8 +5165,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "84d09cb632d7d7206bd9a17093fb3d0d0ae6f479609e6b3d2b03bb1207831da5"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "59b6271c7242b76b0f772ae454549a301136ffd0edacc3379262ab95f1f535d9"
     }
   },
   {
@@ -5089,10 +5183,11 @@
       "DueDate": "2020-07-06",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "CE620CE1-D552-5F3E-B564-E53FB52CDC1A"
+      "ShipToPersonID": "CE620CE1-D552-5F3E-B564-E53FB52CDC1A",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "4FD7D65E-3936-541A-950C-E760B9575D2D"
@@ -5125,8 +5220,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "d20b49c3480d82cee0bf8e7a394449711e0f0efb788e0f23d7d5c6a94991a904"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3d648ed363c2dca826c992795401b963172f6b1528d8d553b1729b9443aad024"
     }
   },
   {
@@ -5146,7 +5241,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "51EC2E5B-8C9F-569B-BB3C-7BA6C2969201"
+      "ShipToPersonID": "51EC2E5B-8C9F-569B-BB3C-7BA6C2969201",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "68C04EF4-85F8-58DA-AE1D-675C3391ABEA"
@@ -5179,8 +5275,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "ea92ecfd941442fbca13b77daecc80685dce087fdd6dd0b2960737e1eab502f0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "06902e9a975b9c2aab36f62e65ace7134c765e08265fefbb43d283c843930243"
     }
   },
   {
@@ -5200,7 +5296,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "054A24EF-A743-5E6B-8492-DD2EB63DF043"
+      "ShipToPersonID": "054A24EF-A743-5E6B-8492-DD2EB63DF043",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9A43EDD9-4E20-5BC6-BF55-5763AF444854"
@@ -5233,8 +5330,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "c6b9ef9936ea00dd9a70d1cab12c70b8dcac92fa2560b5cd62ab4696282b1824"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "74f01d80441c22e8ce36a129c29f1b7df5348c6bdd8ef2756977b077af6b61f3"
     }
   },
   {
@@ -5254,7 +5351,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "92E30246-47F2-5BE7-81C6-F8CB10B44A48"
+      "ShipToPersonID": "92E30246-47F2-5BE7-81C6-F8CB10B44A48",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "3633E2EC-E577-5E19-B3AB-A350DB28C98E"
@@ -5287,8 +5385,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "d4d5b45dd9b5f870bc40e370295ce42640fe3501154475ad28011014f380b75a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bfddc3240e520ad96f125f878b04541e8d0da884a11d7c6b863f2a33234132e4"
     }
   },
   {
@@ -5308,7 +5406,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "ECD287B0-2D4E-53C0-8440-0DCDC3C71084"
+      "ShipToPersonID": "ECD287B0-2D4E-53C0-8440-0DCDC3C71084",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "AC39D1B4-286C-5E6D-B211-1CB916A4368B"
@@ -5341,8 +5440,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "1e912af39f8b0ccfa09ee4720d475e81500760fed755ef23a3e11634adf0a797"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a35bafad72b3238d49af8d1aa26951fefffd674fe5fbf2a753983a2030a221e6"
     }
   },
   {
@@ -5359,10 +5458,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C3CF006E-E321-51C1-99A6-D9F4DB6B062D"
+      "ShipToPersonID": "C3CF006E-E321-51C1-99A6-D9F4DB6B062D",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "A99C7522-FA5B-54F5-ABBB-A534D9C72E4E"
@@ -5395,8 +5495,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "118cae5422c79f0a164747af662e1ccddc92e703abed50c2b2dbba8a7b937b22"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "965c69e69d2fc918e1050f0d0cefb3ed446fc8b1f59908c9be4294fe67aabd0d"
     }
   },
   {
@@ -5413,10 +5513,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0"
+      "ShipToPersonID": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "E9AB811D-FBF9-5CAA-89A5-2E7543B7D6B0"
@@ -5449,8 +5550,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "ea3054346c966bb5dddcf9beac447b33c6c90df3ec4ab83ee5974d3d634f75c9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "77d047e4b8b76fe230e39ef22077c7e2f38451e3e167d4bfb0144d31ea21aab7"
     }
   },
   {
@@ -5462,15 +5563,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "B3AD67FD-D186-5098-82E8-EE248FCC03A1",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "B3AD67FD-D186-5098-82E8-EE248FCC03A1"
+      "ShipToPersonID": "B3AD67FD-D186-5098-82E8-EE248FCC03A1",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "FDC4B3B0-3C19-5EBF-ABE5-90CF6952CB41"
@@ -5503,8 +5605,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "e725649f1833be25b357c4f91813d0809815476a8e63bb6ed8bcef65614b033b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "d7c80cd819fae3047d58999ee6365fde1335ee1207e5826352e0b64dd50846fa"
     }
   },
   {
@@ -5516,15 +5618,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "2E64DD9E-FAA0-5AB2-9A12-99F3021AD38F",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 70,
+      "Balance": 105,
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2E64DD9E-FAA0-5AB2-9A12-99F3021AD38F"
+      "ShipToPersonID": "2E64DD9E-FAA0-5AB2-9A12-99F3021AD38F",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "A08F52BE-4F9E-5CB7-A4B8-FEA9A620418F"
@@ -5557,8 +5660,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "57f9b4c22959d622f6ca5eb4d2f5b7ddcfa9b7ba86996ef9363216ad940c1263"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f81005227bf3bde63d156548753ffc1e377dfa6a82f0a6bd3561bd189be1e7c2"
     }
   },
   {
@@ -5578,7 +5681,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7AFC951F-90E6-5975-930D-D4B542DA49B7"
+      "ShipToPersonID": "7AFC951F-90E6-5975-930D-D4B542DA49B7",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C1E7EA03-2306-5598-A152-FA085C7CF655"
@@ -5611,8 +5715,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "9970ac15b7bd2038bc9c89d9beaf9ca0f8fb91f19d33cdaa2790af0659e01322"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "15123a960577939deb26880e14f2402a4bdc2389be3db394c6ae0baf79c8dbf8"
     }
   },
   {
@@ -5624,15 +5728,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "493931EA-D567-5CB8-8C46-9CE840CD49B7",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 70,
+      "Balance": 105,
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "493931EA-D567-5CB8-8C46-9CE840CD49B7"
+      "ShipToPersonID": "493931EA-D567-5CB8-8C46-9CE840CD49B7",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "8FF93226-2552-5A6C-A299-785C7E8CA8B9"
@@ -5665,8 +5770,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.219Z",
-      "checksum": "83bda436ccc23d713c8895da5c64df5a89bab3bf0c5ac983c9f09dc3cb351a07"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f80f152b07b3effe78814f292e4cc61c8c4ae865966db585992a28ed405f0c93"
     }
   },
   {
@@ -5683,10 +5788,11 @@
       "DueDate": "2020-06-28",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D592441C-750A-542F-90DC-85EFD0D8B29C"
+      "ShipToPersonID": "D592441C-750A-542F-90DC-85EFD0D8B29C",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "346E81E6-F18B-56A3-BE9B-56214046D6A9"
@@ -5719,8 +5825,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e0bc9ec726792cecf1b7ed488da90f9587c5d67e5ffdfa349a57b2039237de6d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "e3da75035c92bad3f5225c7d17fbc757a9167233290b37310fd18bb001207b33"
     }
   },
   {
@@ -5740,7 +5846,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DD7DE566-FB96-5FFF-A641-DEBFFFF7B2D5"
+      "ShipToPersonID": "DD7DE566-FB96-5FFF-A641-DEBFFFF7B2D5",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F6D326AF-5E61-5022-989E-926359B0B0EF"
@@ -5773,8 +5880,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5f68f85e0bf588a984e7f9bbe728a89d283c5cc85cdaf3770a9f64bc652e2830"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "24aecef6a663e6930f943ab67ded667f7ee1bdebf38ac236980cc018c7dfa014"
     }
   },
   {
@@ -5794,7 +5901,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "B2A26737-D6CB-5149-8848-01C2954C376E"
+      "ShipToPersonID": "B2A26737-D6CB-5149-8848-01C2954C376E",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "0725870A-06E4-53C0-A5FC-69C04CAB0640"
@@ -5827,8 +5935,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "6f2c811dc1555e7a5fa0c0a9f6eacf5acbc55920f900a2ce30469a8850d19371"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "477fb49d7b4378db2007bc36e530e230520863f9bef70c2e37a4765d2a3f601f"
     }
   },
   {
@@ -5845,10 +5953,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 1000,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "5026A519-2A2C-5D87-A0B3-55136E2EF0A1"
+      "ShipToPersonID": "5026A519-2A2C-5D87-A0B3-55136E2EF0A1",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "88473F77-13A8-55A9-86E9-2278DFBB2296"
@@ -5881,8 +5990,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "891651ca72f5ca5ee4fc70ccc61e42fb1d5a1c5fe21ec902b452178a5ffd64f9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "98bf04a3088240f1c17ce39abd112a0294a51750cb71325050676671f6c696fd"
     }
   },
   {
@@ -5902,7 +6011,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F4731847-05D3-578E-B1FA-59FCFD643522"
+      "ShipToPersonID": "F4731847-05D3-578E-B1FA-59FCFD643522",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "1CA07826-AF7A-5D09-AA49-6A5E3F0BD1AD"
@@ -5935,8 +6045,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "0a222b78a738369c01cb0d1494105b26d052d6228012bdbdd818abe33baeab84"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "0c9214aa796438eb148462531e35168240e62d048b4d27ff9deb23ede6f40d10"
     }
   },
   {
@@ -5956,7 +6066,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "907230B8-B67E-57C6-BDE8-94DF4A200F2C"
+      "ShipToPersonID": "907230B8-B67E-57C6-BDE8-94DF4A200F2C",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F08C4B07-092B-5B67-AE05-AFA6972185CD"
@@ -5989,8 +6100,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "09568471782d24fe7dd70f7f540fbb28fd55af8529c112ba53036c5aa3690010"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f23c20a3daedd026f9131c9961b480938002af71786fd3f0de343d144e2f83f9"
     }
   },
   {
@@ -6007,10 +6118,11 @@
       "DueDate": "2020-11-09",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 150,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "8EED369D-82D6-5F08-8CDE-285A2B05C6B6"
+      "ShipToPersonID": "8EED369D-82D6-5F08-8CDE-285A2B05C6B6",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "54ABCBFD-5FE4-52AA-9F33-C27EAB30367F"
@@ -6043,8 +6155,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e6e4dcc79fb1f3f614f2fdf9d52c0974630567b873935774d095976c0242ccf4"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f4ca86c65118d8ffe63f62b0be7efb3d58a5a66e20628a3bdb8c75ef39125f69"
     }
   },
   {
@@ -6064,7 +6176,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DD6BF761-F045-5066-A56B-F251F59CF02B"
+      "ShipToPersonID": "DD6BF761-F045-5066-A56B-F251F59CF02B",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4BD2B94C-60FE-5447-B843-F9B3F7064B6C"
@@ -6097,8 +6210,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "f580ca8c5b5932f707e7b06fcd89caabe82de5827ccb62e6e087a938e51c9ce3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "032e73c1e4888403c0252d57bb74c12c1a6c5757af61ee0fb23dbf8dd9b36c12"
     }
   },
   {
@@ -6118,7 +6231,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F9C47E84-4FD8-5B8E-A0EA-9618070C75A6"
+      "ShipToPersonID": "F9C47E84-4FD8-5B8E-A0EA-9618070C75A6",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4DD227FB-3325-5317-9B4C-E864A341DA2F"
@@ -6151,8 +6265,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "655c80068b96646d5ce35b6ab41a95b43bfaa588ae5a1ea66dbc81712d67baa6"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "d81f8e6b2edabadfac979f80a861bbc14ca9734a6318ad51d28fc12d38cc6a31"
     }
   },
   {
@@ -6172,7 +6286,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "9885A0BF-9D5F-5BED-B067-B518093A4C1F"
+      "ShipToPersonID": "9885A0BF-9D5F-5BED-B067-B518093A4C1F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "909EC918-D8AF-5C84-B2E7-AD1C2E7B47F1"
@@ -6205,8 +6320,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e805c76db7b4aee5566eab7d171412b4a2a55ff4a504e5bcdf723fa78e2d9064"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "53ee1c8a1f6e9df1da6a2a8e604821309dce11c2bdb107ec1aec27d97d8d6d48"
     }
   },
   {
@@ -6218,15 +6333,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "0018AD46-F1E4-5FD6-B6E1-6B418D4F6A4B",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0018AD46-F1E4-5FD6-B6E1-6B418D4F6A4B"
+      "ShipToPersonID": "0018AD46-F1E4-5FD6-B6E1-6B418D4F6A4B",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "B922904C-47A8-59E5-9A4A-4F389D43CA66"
@@ -6259,8 +6375,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "4785a07280fe389f2c612395ac36039a77200abbd5935a566493a1225d405955"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "d443e9ab34c8eb37c2b3871b8d3e0a908bc42827131685c96c24dcbd6712abe0"
     }
   },
   {
@@ -6280,7 +6396,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "CBC8B01F-A83D-5BA7-B9F7-05BDE4871077"
+      "ShipToPersonID": "CBC8B01F-A83D-5BA7-B9F7-05BDE4871077",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4070AF3B-C1CD-5C40-9F89-CEC489316B48"
@@ -6313,8 +6430,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "62212f03d197cdaff4146d6fb574951a3a1c750f327644c2764558536db98131"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a962831c4446a2f297d396731c2d3209a1b5b843bfcfbf2a70d66bdc61f9603d"
     }
   },
   {
@@ -6334,7 +6451,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "8F2F7CC4-D317-56AB-9CE2-470910E24336"
+      "ShipToPersonID": "8F2F7CC4-D317-56AB-9CE2-470910E24336",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "ACD1E40D-6A70-5926-B1C7-97BDC33E7BB6"
@@ -6367,8 +6485,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "7ee918deacc20f119151f0f51824a9027135e53a556ff3db58dc0fa36f599125"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3e98cbe1781d959cb577b706ef8cc1fbf5fb8ef1ecf57a24a326235fe8447225"
     }
   },
   {
@@ -6388,7 +6506,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "B8EFB2D0-DC87-5DB8-B9E7-CC899877F945"
+      "ShipToPersonID": "B8EFB2D0-DC87-5DB8-B9E7-CC899877F945",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "90CB8D3A-DC8B-5E84-A48D-E737CCAE2CDB"
@@ -6421,8 +6540,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "a89544ab97ff9e98c466d6aa53e7a97c151bae07172a671b489e014bd8ee2fb4"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3df429aff10505c2ac4ba4c9333a11c2bee891833412d6a48dbd927306b68dff"
     }
   },
   {
@@ -6442,7 +6561,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "FF91FA23-E15F-5060-9BBD-72B5A6AE612F"
+      "ShipToPersonID": "FF91FA23-E15F-5060-9BBD-72B5A6AE612F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "AA6B06F7-D5A4-5422-A957-73CC18E72A73"
@@ -6475,8 +6595,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "c7e5bc6bd6cfcacee38a671fe19febb2cd6af55b2a9e774a7a117ca63bd50271"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "9f7f8adc39b19c42bdd77c776e4a0699fd88772729869f36e5d4f802316c51f5"
     }
   },
   {
@@ -6496,7 +6616,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D7406FF6-041B-5DF9-976E-F85631A7DC46"
+      "ShipToPersonID": "D7406FF6-041B-5DF9-976E-F85631A7DC46",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "D81A22D4-6B52-5342-8CA8-21C65F0D4D9A"
@@ -6529,8 +6650,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "edfef45de60c9378329ba0ebac05981421f823c64f4c2643e850cdd233be7b27"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5c24b26c710db7334dba89f6e8cb276e8b62ce683385fc220b373c97b267293b"
     }
   },
   {
@@ -6547,10 +6668,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 1000,
+      "InitialPaymentAmount": 500,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "306F6492-82B8-5D3E-93CE-C4A0C843690A"
+      "ShipToPersonID": "306F6492-82B8-5D3E-93CE-C4A0C843690A",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F5A08366-1A7E-5903-A8A0-593F27D25940"
@@ -6583,8 +6705,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e8b730d28d3ee0019e434f955031c60af19f9f5afa34237e3517343678cc7e42"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "6a927efdd14ef3b50cde9b0833d56fa23bcf5edbf85b27547dd660400ef3a002"
     }
   },
   {
@@ -6596,15 +6718,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "40966FD0-EFB8-5882-806B-4DCB13DAB56D",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2020-09-16",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "40966FD0-EFB8-5882-806B-4DCB13DAB56D"
+      "ShipToPersonID": "40966FD0-EFB8-5882-806B-4DCB13DAB56D",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "1778E33F-36E9-5095-BB79-AA99B07C9953"
@@ -6637,8 +6760,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "0f91b66cfcf27f53930bde04184855cfe1f2099794bb577a1e2403c312006246"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c39e0c4dfbf4a1b32032bc008e1981d9283ee67c0c122c2e2e0edc152014fd98"
     }
   },
   {
@@ -6658,7 +6781,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D8E17652-A847-577B-9FF9-4FB7B83A7A01"
+      "ShipToPersonID": "D8E17652-A847-577B-9FF9-4FB7B83A7A01",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "524CB4FD-FD1F-56AC-8F64-0F5F231BF20F"
@@ -6691,8 +6815,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "bd7c1edcfecfca29341b38d702ce27ee995d242c848a6c9cf3ea715de77bedb3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "2e8e5afd8cf2c275a9909c52e9afa4db9f4401f321d5197b3a00e0d86e415f3e"
     }
   },
   {
@@ -6712,7 +6836,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "05C8361C-A865-5308-B6B4-5894F9C71535"
+      "ShipToPersonID": "05C8361C-A865-5308-B6B4-5894F9C71535",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "17E72D44-7A20-53EA-BE98-F4FACD6325F5"
@@ -6745,8 +6870,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "033ce7fd7d61aafb7002a40cfb9a4a47eb0b18ee08b1da3822fed8e42aee11c6"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "9969437e3c722932aba75e3be03d314cff90aeeb5500c2fa79752a308807bccb"
     }
   },
   {
@@ -6766,7 +6891,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2CD4B4D6-9C90-5983-8BCB-0A28422F9E36"
+      "ShipToPersonID": "2CD4B4D6-9C90-5983-8BCB-0A28422F9E36",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "CB5D193C-D2C8-5FDA-97E5-AFDDF9092E40"
@@ -6799,8 +6925,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e5b577d3ce98012332d6b592dc2ffd955de9050365cf92908ba61541b1da6ba4"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f84fd958c17545a3a2158678fefa19774f3595974cc19ef7ad2b21458b6b06ee"
     }
   },
   {
@@ -6817,10 +6943,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F9EDF879-BBB9-5DE1-9715-26AAF70B43E7"
+      "ShipToPersonID": "F9EDF879-BBB9-5DE1-9715-26AAF70B43E7",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "35093AAF-835A-55A5-A3C3-9624C9A78157"
@@ -6853,8 +6980,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "fc4e5e851d3f1d685ac3ab86adb1d74b2e5783669b73ba6e416bc67ebbe52ee8"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "561efed564eec4a6e0b76daa0535f1a8d1eb53b4e9871555c9646dc5970f7814"
     }
   },
   {
@@ -6874,7 +7001,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D8D82DD1-6AE6-571C-AEFC-737782926B3A"
+      "ShipToPersonID": "D8D82DD1-6AE6-571C-AEFC-737782926B3A",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "CCD1228E-A933-50FA-AE96-DF33A28B0E24"
@@ -6907,8 +7035,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "d634a82e441e71b6777f7a4bcc88847b493fbe10a1a1af6f6a3a65fe777fb5c3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5bc9dc2f4441cf1fa1fce8862c2cfc766b0507372b54ad5b6b7668275847e8ad"
     }
   },
   {
@@ -6925,10 +7053,11 @@
       "DueDate": "2020-04-04",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C9C52270-1C1C-59A4-8A6F-95F598F384EA"
+      "ShipToPersonID": "C9C52270-1C1C-59A4-8A6F-95F598F384EA",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "7D5A6461-BED5-599F-8CA6-0E88D2958E77"
@@ -6961,8 +7090,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "9223274b2ce81739950f4473c0f8a83632c3e9993fb48ee048efb0d98b20a0fc"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bd9dfbada3a61e7519a388294be446f03243918e3fc1cc2b57231fd035ff9da3"
     }
   },
   {
@@ -6982,7 +7111,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F"
+      "ShipToPersonID": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C7EF7EAF-ABE6-5FA2-9F24-6A2033DDDDE8"
@@ -7015,8 +7145,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "dcdb05cdb53454b41b97af5bf027f437f7f337e0527db4889c4436b0612b4528"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "1015da83f323b070d2292002b7235f3ec1a2de398b35887f328a89f8eab71ff8"
     }
   },
   {
@@ -7036,7 +7166,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "07A1FEBA-F9D2-5FA0-AC52-AAE64A4E0136"
+      "ShipToPersonID": "07A1FEBA-F9D2-5FA0-AC52-AAE64A4E0136",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4B46C412-0E67-52B9-A34F-200D0B187F47"
@@ -7069,8 +7200,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5dde38ca54d93ca85188bb07f0019fb0d6900eb80f1ae9b7ea416391476477e2"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "261acb7565bcd987bda56f42ff0b26630177e318e95cf082f4fe7b3430db2392"
     }
   },
   {
@@ -7090,7 +7221,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0056BB80-F9A7-5348-9EF7-C3FDD323C8C9"
+      "ShipToPersonID": "0056BB80-F9A7-5348-9EF7-C3FDD323C8C9",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "077D9EF1-C853-5E27-883B-6E8471B89D62"
@@ -7123,8 +7255,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "cc096d2edd5c9ae7cdce011eb6eb750552c408bf20285d8d441c3b2f7c6a8d38"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "85983075aad175fd07cb2403a0b837c293b0050ac747731431ad234581a7b3f2"
     }
   },
   {
@@ -7141,10 +7273,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C370BCEF-4688-5B44-8D6D-3BFCA0D45697"
+      "ShipToPersonID": "C370BCEF-4688-5B44-8D6D-3BFCA0D45697",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "F43C2858-C352-5F1D-83F4-E7FC75CFAF54"
@@ -7177,8 +7310,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "9bcee752a44592e7fe6441fa6aae2a7ccdda7e8a1acbbe96af0b23bd0bc21aa0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "63eb1d5e7635c19b49494c2d2ad3850d921ba1a7c88010c8699f5c3f5510a947"
     }
   },
   {
@@ -7198,7 +7331,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3EBCB131-E88B-5792-AA20-5B6C602B58B0"
+      "ShipToPersonID": "3EBCB131-E88B-5792-AA20-5B6C602B58B0",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "CA8BCDF8-714B-5FA3-9512-8CD76271F7D4"
@@ -7231,8 +7365,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "d80e62ab540967a066666c80b44bcab9b687d9ae444b53a4db276a87949ae803"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f7ee3d5d5d1227be3518dc1be06557c6723cb7b92b64ac346348e94e20c27afb"
     }
   },
   {
@@ -7249,10 +7383,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3618A7F4-1C4A-50DD-9715-6E2BCE0961C0"
+      "ShipToPersonID": "3618A7F4-1C4A-50DD-9715-6E2BCE0961C0",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "D458F541-3D96-5D65-BD0E-F5EDE6F17314"
@@ -7285,8 +7420,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "856ed17f16b61e1427da89089ae6b0470c7d3c6c512239965bde0c30e80fb833"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "04aa7fd09983621093366151e1cda995cb8c2240946edb55c5db72b6aa1490d1"
     }
   },
   {
@@ -7303,10 +7438,11 @@
       "DueDate": "2020-12-21",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "A7494213-EBF3-5A89-8197-86572EE6B8F4"
+      "ShipToPersonID": "A7494213-EBF3-5A89-8197-86572EE6B8F4",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "BBCD832E-D640-53DA-9751-55DEEFE41AE4"
@@ -7339,8 +7475,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "780c0d7e99b4214052bbdc98aa74afbaafdd6cb67a8bd70ff542bbeb71fd093e"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "36d79a39a485339c1f24bfd869df6ec7a31bb8a971f8acd6f05b4510cdb452bf"
     }
   },
   {
@@ -7360,7 +7496,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DBE0287D-6ABA-59B0-A251-C6F2B6049265"
+      "ShipToPersonID": "DBE0287D-6ABA-59B0-A251-C6F2B6049265",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B63EBFF5-DB6F-5CA9-8BB2-3F126F1E790B"
@@ -7393,8 +7530,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "a775f53b4bb317637ad5c358a93835535071ac0ef8b4b07a1a5f6c45a3b45f03"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "fff2bfbac933d74109ab75174cc79bdf0b557aba2f67880577d195b92ab50a48"
     }
   },
   {
@@ -7414,7 +7551,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "8ABCD548-0BBB-5C3E-B5DA-85FCACFC1108"
+      "ShipToPersonID": "8ABCD548-0BBB-5C3E-B5DA-85FCACFC1108",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C0BD0033-DEC1-584D-A314-00EBC4E43D77"
@@ -7447,8 +7585,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "071aaee3c5a575ce20e8c6310f5f53658bad72b79e0b7c97b10b5a83f74c1f78"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "22ca93c279d5f8e92b663d6e81a5c13fb5c80dab1dbacd9c1b36b70f3bfdb68f"
     }
   },
   {
@@ -7465,10 +7603,11 @@
       "DueDate": "2020-10-25",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "A5B841FC-5FAC-5C15-84B8-01E923FDC052"
+      "ShipToPersonID": "A5B841FC-5FAC-5C15-84B8-01E923FDC052",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "D768291A-99AD-5A30-A929-9BDC96E2FF2E"
@@ -7501,8 +7640,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "b97d2dc4a65939f6bd2b54a4245902d61e071f0a5e45dea59861a7313457fac4"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "738d15030c72a7f9da42bb7791025c4691e2a3ae99b8db774117f607f38cf10a"
     }
   },
   {
@@ -7522,7 +7661,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2316E84B-EEFC-5D5A-B582-5AA12A01714D"
+      "ShipToPersonID": "2316E84B-EEFC-5D5A-B582-5AA12A01714D",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F82D2652-2455-5500-8C5C-547151B770DB"
@@ -7555,8 +7695,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "c377cc97a000b2a65944f5556c05aa1ab4653b475ab9fd8b5aee8bb85a249946"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a0e1bab55208bfd579eb69b125664711feff046265016ac27f3ebe767d739b3d"
     }
   },
   {
@@ -7573,10 +7713,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "2223944C-7779-5A44-A5BE-AB831E3EFF9B"
+      "ShipToPersonID": "2223944C-7779-5A44-A5BE-AB831E3EFF9B",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "DB8135C5-E8FE-5D6E-AEF3-8DE07C4C00D4"
@@ -7609,8 +7750,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "6f2da2886d7eab4737b2cee1267df6af20acf95a08f4156d3f4433ac62a806de"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c9ca0b72c1315e27ae0d4e5367a376ae58a46cb0b5c9c527fa75d4efa8ba199c"
     }
   },
   {
@@ -7630,7 +7771,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "406105DC-4033-55AD-A7CE-23DB2C30DEF7"
+      "ShipToPersonID": "406105DC-4033-55AD-A7CE-23DB2C30DEF7",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "FDCC8AC1-6A64-5A1F-84CD-16050E2B8552"
@@ -7663,8 +7805,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "9ce66ea87df1eb3a0b454597762027b14f7e574b56fca7dbb6344d245685a9a2"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "071e395be97e1e5423d4b4c57598dcf0560bf120d1d033d06986b7793d575655"
     }
   },
   {
@@ -7681,10 +7823,11 @@
       "DueDate": "2020-01-09",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 200,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F2DC632F-26A6-5C6A-8040-F0B8B4EC8576"
+      "ShipToPersonID": "F2DC632F-26A6-5C6A-8040-F0B8B4EC8576",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "6430EF1B-826B-50BE-B770-7CF8CB4937D3"
@@ -7717,8 +7860,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "187cbfef4b9445cc2a8ac181c942fd6f0d3c476a7f0343850c0af3bfe580b4de"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f2e8ff3cb7658405554c66ffc99ca05367cade5a86dabccceb4d5591c2a834f4"
     }
   },
   {
@@ -7735,10 +7878,11 @@
       "DueDate": "2021-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "D11A9B1E-CA44-54C0-B945-C4594B34CA32"
+      "ShipToPersonID": "D11A9B1E-CA44-54C0-B945-C4594B34CA32",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "67DDBCC8-BB94-5CC2-9092-5446E4435570"
@@ -7771,8 +7915,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "c7ac6c105c39f73470055c9a72298258408b147d1e6371d4777bfc4c5d62f460"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5fec6ffa3e8e09a92d049604c861d6fed28fed3ae505d6dbbfae489e732d07a5"
     }
   },
   {
@@ -7792,7 +7936,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "428B287D-C6A8-51EC-A12D-B731FBB6D825"
+      "ShipToPersonID": "428B287D-C6A8-51EC-A12D-B731FBB6D825",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9AB5D92A-37CC-5E3E-9EA4-F04C10103435"
@@ -7825,8 +7970,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "f46cd55ec8810af4fecae6db4fccf1f05233e7db4d586a0c5037ae2e0bfd1359"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "cbcdeba01a5390ce9e057b91a882540720d7f39bc8deb3e7944466dde63c7c9e"
     }
   },
   {
@@ -7846,7 +7991,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "329D01CA-700C-58C2-9F4A-CBC6F64412F1"
+      "ShipToPersonID": "329D01CA-700C-58C2-9F4A-CBC6F64412F1",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "8E954E2C-C0D8-574F-91BE-BEEB2747B8EB"
@@ -7879,8 +8025,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "fc6c2b07f0dea38e024591bce8b71aae8c32e102fe830795d1a2a12ba057a17c"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "05959173563ff36568c3419cf83124882551301e47c66fa94e7b693b0c081bfd"
     }
   },
   {
@@ -7900,7 +8046,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "496717A7-1068-5F63-B3AD-A9D4D1256B5D"
+      "ShipToPersonID": "496717A7-1068-5F63-B3AD-A9D4D1256B5D",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "6F2B8484-2494-595A-9F49-C301D5EA61B5"
@@ -7933,8 +8080,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "4210aca2024c05e78e6150e038c9696b53b278d12aa2a7838c73684a15bda369"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "b357265e0702ae62ef475ddb22ab65fbdce8f91c2939b7ab1dde336b3cd22c5f"
     }
   },
   {
@@ -7951,10 +8098,11 @@
       "DueDate": "2021-01-21",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "E5639886-0524-5AD0-A707-A3D7E1BF2F3F"
+      "ShipToPersonID": "E5639886-0524-5AD0-A707-A3D7E1BF2F3F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4D57BAE5-5CE3-5659-8923-EE04CE4E30ED"
@@ -7987,8 +8135,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "a2bf5502993a318df35d22b1a73ca3b0fcd842eb0038d81465f9eb05cdcf516c"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ef74feff96692ff740dc6dab49baf7588bb54402540736f0f7f8c147b7e5f7c1"
     }
   },
   {
@@ -8008,7 +8156,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "6D2AE022-5A14-51AC-81ED-40DF8C0788B9"
+      "ShipToPersonID": "6D2AE022-5A14-51AC-81ED-40DF8C0788B9",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B12E1778-D44A-536F-8907-25D52AC2256A"
@@ -8041,8 +8190,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "469ab50e2d644fdfbea246a66ee8fa04b29b000c9016726d8a6909c97073f9e7"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "8ae095397ae7f2d33d2364670540e3530fe8233e83f4707edf2dc2934b4f87cf"
     }
   },
   {
@@ -8062,7 +8211,8 @@
       "InitialPaymentAmount": 1000,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "306F6492-82B8-5D3E-93CE-C4A0C843690A"
+      "ShipToPersonID": "306F6492-82B8-5D3E-93CE-C4A0C843690A",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "11427E7A-6E54-5BB9-91F6-FFE68CF75C93"
@@ -8095,8 +8245,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "cb099a70bf7b68b9455efa04db540cbd7703ad0fbd1bbadcfb285efbc8e48763"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "926e817fbe621715738acef7e2e1a47ea6bf7340fd6e7f44ac16920ffaa2f0b3"
     }
   },
   {
@@ -8113,10 +8263,11 @@
       "DueDate": "2021-01-03",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "048675BC-9297-5E31-9556-96E0E3C02EA6"
+      "ShipToPersonID": "048675BC-9297-5E31-9556-96E0E3C02EA6",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "15B4A2BB-FA27-5784-807C-AEAA81910B95"
@@ -8149,8 +8300,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "f9c5b81af446b8be2a8b652dcc26ee782f77161106fe3249f39c4ec5ef2a4040"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a16d2e391e960900bea42d20db11a9707502caea7a626a3f9929c522c2b955de"
     }
   },
   {
@@ -8167,10 +8318,11 @@
       "DueDate": "2021-02-17",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "00A67717-B8A0-56FB-901E-432266DE1350"
+      "ShipToPersonID": "00A67717-B8A0-56FB-901E-432266DE1350",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "F30335E1-3755-5890-B7E5-B5B15FC80198"
@@ -8203,8 +8355,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "ecee2d7c4b4edf83e99603ca3cce310d476222f595c6e9872f30868b128ccfe9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "321d771710f56aac704b3f32c39ea91ef6705644c1b96d176314197ba1ca30e0"
     }
   },
   {
@@ -8221,10 +8373,11 @@
       "DueDate": "2022-02-11",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3E5B4803-778B-5FE8-9626-468C8D30C39C"
+      "ShipToPersonID": "3E5B4803-778B-5FE8-9626-468C8D30C39C",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "2DBAFA9A-CF4D-5A68-A9E8-115762BF2B36"
@@ -8257,8 +8410,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "b3e63c28b09aeaedb0c3d3ae02389383ef4e71cc162491e797c2c9ea2a3c9316"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "5e665ffbdee95c06d5cb7c6539d52a005693ce505eb4a553817de1e38a5309fb"
     }
   },
   {
@@ -8278,7 +8431,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "AC73CCD5-783B-5A03-9A6B-3A974B40201B"
+      "ShipToPersonID": "AC73CCD5-783B-5A03-9A6B-3A974B40201B",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "11C6132D-6A79-5C84-8BA0-F96775E7ADB0"
@@ -8311,8 +8465,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "59fa5cb543cc0794c8976d48071ce7e07fccf5291e52cf26b4d858a48a91ff81"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "bcd68e2e23784b5ae8cc5c6f41f03c4ca7a5a9bf207bf76e2e96c7661d959c48"
     }
   },
   {
@@ -8324,15 +8478,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "5AA2D8CB-2205-53E0-842C-403DD0230605",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2022-07-28",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "5AA2D8CB-2205-53E0-842C-403DD0230605"
+      "ShipToPersonID": "5AA2D8CB-2205-53E0-842C-403DD0230605",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "531614D4-C3FE-508F-9822-127D370725A0"
@@ -8365,8 +8520,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "04749b95a9ac93bec773d4b1fb6baa18c2561511c567815485e8014bb8244176"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c467f6f81ee7083776293c248f0ee761eb7b2a4982c2ab9b66cf4ab62729590b"
     }
   },
   {
@@ -8383,10 +8538,11 @@
       "DueDate": "2023-04-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "36FF241B-7B4B-555C-9B33-59347D4CB2B0"
+      "ShipToPersonID": "36FF241B-7B4B-555C-9B33-59347D4CB2B0",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "0613493E-BB93-5393-A5E9-8BBA8D9CB5F2"
@@ -8419,8 +8575,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "d2fca86ed4ad4f1de0f017c62d38ea9ec016cdec6bc9f6c6efc4a153514d19da"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "a5a58dc986365916f2be8f5eebbdcf3d285a8b85135ac17694e784adf85b1b86"
     }
   },
   {
@@ -8440,7 +8596,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "AAF2E698-25D2-58D8-B9E7-B6F5E6739303"
+      "ShipToPersonID": "AAF2E698-25D2-58D8-B9E7-B6F5E6739303",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "98EAA0D4-42E6-51D9-9AAD-8E68199B13A9"
@@ -8473,8 +8630,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5d62c005fb299ab99121aa2bd4110f5ee54ad9091cf1712a5ccbeb4daab8d8fd"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f089e08e6da73d8ed7a15888acd14d37bfdfbc3e0a301588b8dc0f33903c94a2"
     }
   },
   {
@@ -8491,10 +8648,11 @@
       "DueDate": "2023-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "496150C7-2ADE-564F-BB8C-EE61BD7FAE5B"
+      "ShipToPersonID": "496150C7-2ADE-564F-BB8C-EE61BD7FAE5B",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "E661D02C-61C3-5187-AA1D-2A78AC37B8C9"
@@ -8527,8 +8685,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "de826ade5dfd9c387dfd7636a3f52dd0eb779a8025f332562a723c43f6564fa7"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "49d20133197149f21240453ee743f7d54810cab5d0679bb2ea57265f78296313"
     }
   },
   {
@@ -8548,7 +8706,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C00D167A-6B0E-516D-BA62-05B39B6B00C2"
+      "ShipToPersonID": "C00D167A-6B0E-516D-BA62-05B39B6B00C2",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B70B757E-0EF2-51CC-B604-63537ABE920D"
@@ -8581,8 +8740,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "9b63dc98b54fd565ec7f0bff0791be0143a96d973982e91e74d7385033cbafe2"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "4215cf15c14d768e7be2f08e27a7f4e707d98c31c56fcc59c7badd2ddf5235a4"
     }
   },
   {
@@ -8599,10 +8758,11 @@
       "DueDate": "2023-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 1000,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "5673FF6A-66AD-59E2-AA3F-0A0C0EFF8D64"
+      "ShipToPersonID": "5673FF6A-66AD-59E2-AA3F-0A0C0EFF8D64",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "B50760BC-727D-5411-8945-25EAFD320C98"
@@ -8635,8 +8795,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "f8a0c3f56b9569da3268738f33190ba2385b27287fdf3726f025f5951f56d55a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "86348e81dbe6ca5d269f40897524fb4ae9bf9caba244a6d0076d858c8c9cf7f1"
     }
   },
   {
@@ -8653,10 +8813,11 @@
       "DueDate": "2022-02-14",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "13BD93C9-2C0E-54A9-A496-4FDBF50C6065"
+      "ShipToPersonID": "13BD93C9-2C0E-54A9-A496-4FDBF50C6065",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "29A170D7-6E26-5719-9B05-6E06D25949CD"
@@ -8689,8 +8850,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "afded14a64571b37f5f91f9dd4cd16d528b1d8192d1ea538c3fcecc9eeb7f2f3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "dd50d549b8c4a6c8231ce9047fa4adb2224543ba21a4f139b4b731c6746aa82e"
     }
   },
   {
@@ -8707,10 +8868,11 @@
       "DueDate": "2023-06-28",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 150,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F63D638B-A734-5ADF-8C2A-96A6E8459A38"
+      "ShipToPersonID": "F63D638B-A734-5ADF-8C2A-96A6E8459A38",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "AD5D0186-02AE-5E7D-A45B-6D03C0F8BB1D"
@@ -8743,8 +8905,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "537bf44b2b7bcf783f668f6eae75252b19c5e992da27b1af0b66b58a985aa4b4"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ce434d7307349935a8c77501bb419c5ac8a54844cd6e0db0c550d48482658212"
     }
   },
   {
@@ -8764,7 +8926,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "26CDD612-4839-549D-8318-079BD964B479"
+      "ShipToPersonID": "26CDD612-4839-549D-8318-079BD964B479",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "76C5AF86-6D9B-51C4-9149-582DEB5C5155"
@@ -8797,8 +8960,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "9742965834b9dc0ed9f7f1e0f9014516e27705292f119d848d59d0265284af3a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "114374629893251f41fcc41d4262df3c122f676ba1a885333702540e5354420b"
     }
   },
   {
@@ -8815,10 +8978,11 @@
       "DueDate": "2023-03-04",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "AA84446D-B836-543B-89CA-8CFF5BAC3F56"
+      "ShipToPersonID": "AA84446D-B836-543B-89CA-8CFF5BAC3F56",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "90AA1D87-5826-52E6-9F30-33341B69EF4A"
@@ -8851,8 +9015,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "18285fb8c3a622611906c304565548635fbb84ea2b4028893e9c54af9d76c04d"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "829e87d565221fe87288ad0573f0ace7ebd385324f6007b21c397f1d7231aca7"
     }
   },
   {
@@ -8864,15 +9028,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "DF209504-3059-5A92-9192-D390E5AD3AFC",
       "TotalGross": 400,
-      "AmountPaid": 400,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 400,
       "DueDate": "2024-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DF209504-3059-5A92-9192-D390E5AD3AFC"
+      "ShipToPersonID": "DF209504-3059-5A92-9192-D390E5AD3AFC",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "63338BA1-CDF8-52F8-A75E-793222016AA9"
@@ -8905,8 +9070,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "37f959ec7f32cdeaab6a1795b812417592b249a2d4bca686cd8fe9db6ead66d1"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7db491f91a531b0125d148686609abb274bc8d09b09e5bee5aa78be397544f3e"
     }
   },
   {
@@ -8918,15 +9083,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "69C2E255-B3F0-547E-9165-27C57791983E",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2023-09-26",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "69C2E255-B3F0-547E-9165-27C57791983E"
+      "ShipToPersonID": "69C2E255-B3F0-547E-9165-27C57791983E",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "928C11D1-4737-57B5-9190-952A43CB3379"
@@ -8959,8 +9125,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "1dd76f4006d6170d4f3c5a1b7aa27794a2701178e835a609f4124fc5aecc7ff9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "99d7987a6a0a8318360fb1e94b4b42024e148d9b2de33b6739def0d88e3c96fa"
     }
   },
   {
@@ -8972,15 +9138,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "0645C42E-A09D-55A7-ADA7-4024347789C6",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 88,
+      "Balance": 87,
       "DueDate": "2024-12-17",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0645C42E-A09D-55A7-ADA7-4024347789C6"
+      "ShipToPersonID": "0645C42E-A09D-55A7-ADA7-4024347789C6",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "823E7144-056C-57E1-9871-78E7F0312CCE"
@@ -9013,8 +9180,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "0023f8e83de09d2ec20fa6b4a67d910b2942baf85bc21a9f34f3d4f6f7c47b77"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "455b52fd6e4f7a39db036c0cf57912e1e6874ba9f695bcd09badf93ffc0468d3"
     }
   },
   {
@@ -9031,10 +9198,11 @@
       "DueDate": "2024-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DB0A77EE-F5B6-53F0-8F87-4572A494DE29"
+      "ShipToPersonID": "DB0A77EE-F5B6-53F0-8F87-4572A494DE29",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B4D7CCF3-365D-5D8E-B357-C978A9FC149E"
@@ -9067,8 +9235,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5e83f1ef205035bbb4f43b85f440329b355961d4c1a1baaf487f3e715c9c7251"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f7f06819af62a24d6166a20cc46b7ac008cb85cf2e9c32558aa939be814d7880"
     }
   },
   {
@@ -9080,15 +9248,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "F5F38F3D-8A68-5ABC-9591-CB070D6BEFAD",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 105,
+      "Balance": 70,
       "DueDate": "2024-03-23",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F5F38F3D-8A68-5ABC-9591-CB070D6BEFAD"
+      "ShipToPersonID": "F5F38F3D-8A68-5ABC-9591-CB070D6BEFAD",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "62015481-C76F-51B1-A8F0-9B1CC0D7105E"
@@ -9121,8 +9290,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "fc6ef853f00ecdda217a3676c1aa83391fa3850267db5fcbb51715b80d0b9c8b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "25f7480f1fca8c53cfc39c8fc9edd2e38d5b119d51de817a39af714abe6413fb"
     }
   },
   {
@@ -9139,10 +9308,11 @@
       "DueDate": "2024-04-05",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "4EC92158-E01F-5931-AAE1-6578C6208CD0"
+      "ShipToPersonID": "4EC92158-E01F-5931-AAE1-6578C6208CD0",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "00975277-DC91-5E8B-BC11-81234F25D212"
@@ -9175,8 +9345,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "266741e0e55c9be695f0f35417eb68a6d59ddcc2864372542eade193b91394a9"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "90fdf5f94440dc64b82a30da4587d63cdbeca832d472e84a44fb1d341055ae25"
     }
   },
   {
@@ -9196,7 +9366,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "76520CD2-2568-53CD-87CD-FFC846614FEB"
+      "ShipToPersonID": "76520CD2-2568-53CD-87CD-FFC846614FEB",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "8017BCBE-1293-55F7-B4B7-DA15D1212103"
@@ -9229,8 +9400,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e60b608c82aab59fd915b8458a2849830339f8e0f79051c27e1f4ada98a3d028"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "076bf0b0a52297184ed4e82de775c5bdd0d00285f50e686405c16fd4a9a2b81f"
     }
   },
   {
@@ -9250,7 +9421,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "F61A1109-7DFC-53A3-A19A-4B3E78829DDB"
+      "ShipToPersonID": "F61A1109-7DFC-53A3-A19A-4B3E78829DDB",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "EF501FA9-6243-5220-BB52-DF54E98A7640"
@@ -9283,8 +9455,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "938b958cc449a178080427ad8517e522cd4032f51b8326f3958c09d9c60a7607"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ccd4e3e452a5967f6816dc801d55e14d9bd8df5c2ee92f96f75009cd635f377f"
     }
   },
   {
@@ -9296,15 +9468,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "71BB1653-DE96-5580-A1F8-9224EA3B99EC",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 70,
+      "Balance": 105,
       "DueDate": "2025-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "71BB1653-DE96-5580-A1F8-9224EA3B99EC"
+      "ShipToPersonID": "71BB1653-DE96-5580-A1F8-9224EA3B99EC",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "1066C89F-8345-59E4-B1D2-0596E472EAD4"
@@ -9337,8 +9510,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "64b0b96e37e05f2572bea7e3c8e18518c30efef53831858d6713ac6675d53730"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "f3bcd83c81fdd6a2f6556ce9c57471e6c1f383ea02f0f9c68575cff24374d961"
     }
   },
   {
@@ -9358,7 +9531,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "11FB7396-8AA8-5A8D-8123-91A7CCDED895"
+      "ShipToPersonID": "11FB7396-8AA8-5A8D-8123-91A7CCDED895",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "9796467A-5307-51D3-B040-AD310B45EAF4"
@@ -9391,8 +9565,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "585854d180b045ff60d0260c4a2523ce5f35eb0036ca40a40feed8ee005ae26a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "64891a36cb27ebe0d22df5261ac5bd922ce0ba110a2ed6eee1ea06ec0c47e8ad"
     }
   },
   {
@@ -9412,7 +9586,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "BF8A6919-7E8F-53BA-AB92-58FEA13F691F"
+      "ShipToPersonID": "BF8A6919-7E8F-53BA-AB92-58FEA13F691F",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "84AD6BCD-EB59-54A7-A32F-3B398DACBEEF"
@@ -9445,8 +9620,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "747269b2a07eea1eade696cdbb10be15628b5f5d2e1591ecbec49bf5fa84bc49"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "d28f89498cac945b81ee0c19b25916db675cd1e60a74d70f4156a1c7690f930f"
     }
   },
   {
@@ -9466,7 +9641,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3CAB250F-64E2-5CE8-B3FE-409572899F73"
+      "ShipToPersonID": "3CAB250F-64E2-5CE8-B3FE-409572899F73",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "CBAF1911-B6F1-560B-B2B4-0C9CFE05FF09"
@@ -9499,8 +9675,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "51310a3e2d67e71b4c2e57fcc6f07d9e8e7c8c4d2c09a2ef0f359b2c6b1a9d6b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7cbe693597a55fdd79a58cc1b9df3e620cf4fdc0273f2b021fee2ab4268e728e"
     }
   },
   {
@@ -9520,7 +9696,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "5193D6F3-154E-520D-9A9C-E2B86C0E80A7"
+      "ShipToPersonID": "5193D6F3-154E-520D-9A9C-E2B86C0E80A7",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "B2341221-4E80-5DE1-B170-88A07B7EE1E0"
@@ -9553,8 +9730,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "0f01db24c27391656a2e913a1b756e53409774c4baf830ea9b19e40be9ee53fb"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "349fd74a18b1868c533806639e5533e0d06029fffe496eb620466f110aecdbe4"
     }
   },
   {
@@ -9574,7 +9751,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3BCD01BB-7F42-5662-91D5-92A6250B4058"
+      "ShipToPersonID": "3BCD01BB-7F42-5662-91D5-92A6250B4058",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "3998ED65-D42E-5E61-8A90-49C539DBD808"
@@ -9607,8 +9785,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e6b3136b976fd33709bb28c4302e59dc1e1c1eda972d5d3392f712d525432d46"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7888125a262ce8a97fb9527498e3bdd48c74c16a68064c6a48dd70b4486b059f"
     }
   },
   {
@@ -9628,7 +9806,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "99EB833B-C603-533F-B09C-57625DDC9A2B"
+      "ShipToPersonID": "99EB833B-C603-533F-B09C-57625DDC9A2B",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "4EC6327E-3676-57BB-B5B8-6484D91B120E"
@@ -9661,8 +9840,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "e001d915a10bac8d89eec0b7166299d94f4fe4cb1077d02ef2f4e6df5a9c58da"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "212dcf1d5330121080a7498f66dac3933dc8b4b4a29747026b37b5cd82e6f625"
     }
   },
   {
@@ -9682,7 +9861,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "C42B12B4-04E1-57C0-A286-962978C71D08"
+      "ShipToPersonID": "C42B12B4-04E1-57C0-A286-962978C71D08",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "1B8409E0-051B-59FF-9A82-D5E6B68EBD15"
@@ -9715,8 +9895,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "1f18e7d1a88d8d259b425abd99fa26ab76f5a9d1fc6153306d5ca4a321923b76"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "aced4697d6a7c60aef2c84bf1dc810dc76a2ef53dc559c2ad2cafb6334d621d1"
     }
   },
   {
@@ -9736,7 +9916,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "6DF3EFC5-87B1-54B7-82A0-E56DBC8F4CB9"
+      "ShipToPersonID": "6DF3EFC5-87B1-54B7-82A0-E56DBC8F4CB9",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "5AB9F7F4-F807-59AB-9A5E-34B966C7A15B"
@@ -9769,8 +9950,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "0a9157d984f0abbb6424f45dc547e21c8f7238080f5d83c2f03cd52cc9705449"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3e909198362ea947555cb8eb71d74c23adcd98c789e1553c8f73701d348bdcb4"
     }
   },
   {
@@ -9790,7 +9971,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "6C75BE62-3A10-5467-857F-58BAD48FB088"
+      "ShipToPersonID": "6C75BE62-3A10-5467-857F-58BAD48FB088",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "1D0043E1-B7F3-5F94-B813-EFDC6478245A"
@@ -9823,8 +10005,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "736783289dc8f1066b206214d37b9af9e6960bd84a7f645492e578090a0100a1"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "60ec569b67c20cea7a0a4cbaf1c00d6071027639a8c2e380284fa83f0e948c28"
     }
   },
   {
@@ -9844,7 +10026,8 @@
       "InitialPaymentAmount": 400,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "73619338-F1FC-50C4-8C4A-3585459464A1"
+      "ShipToPersonID": "73619338-F1FC-50C4-8C4A-3585459464A1",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C960CA53-F8F1-5687-B270-3802DA2C6D68"
@@ -9877,8 +10060,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "a06933ab76949331b7cd5e64c88dd1b6b93f9b475f6ac38b9e28be43a7204958"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "ecbd7cc93ccf39c0e9358fc060c85fd1b3d4942e662eb0c10bdcc1b44bfc5939"
     }
   },
   {
@@ -9898,7 +10081,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DAFCCD29-FD42-5F34-B20C-B8F4E2D9B5BA"
+      "ShipToPersonID": "DAFCCD29-FD42-5F34-B20C-B8F4E2D9B5BA",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "D4489B8D-7626-5096-B758-DA57FE459044"
@@ -9931,8 +10115,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "6497381b7bf13f7f74884422a83307d94331a2c0e28c8ccc38ff86d7aeacf14c"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c2ae9ba349c5697b90ebd902acad65e56cb2ba523f6eabe1943761a6f23dcca0"
     }
   },
   {
@@ -9949,10 +10133,11 @@
       "DueDate": "2026-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "DD7DE566-FB96-5FFF-A641-DEBFFFF7B2D5"
+      "ShipToPersonID": "DD7DE566-FB96-5FFF-A641-DEBFFFF7B2D5",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "1613ACEF-C957-55DF-8B2F-FE3FCE705B9E"
@@ -9985,8 +10170,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "0b50440b439019db05dc9d24223ca2aa17517a74c106b69384e2bbff4afe4e6b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "c70ffad4fc340da126fda7bc90c039ac00fc113b23ef387a7092007031dbceb7"
     }
   },
   {
@@ -10003,10 +10188,11 @@
       "DueDate": "2026-06-12",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 88,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "FAC8A1F1-2548-5933-AF33-575E92BB379E"
+      "ShipToPersonID": "FAC8A1F1-2548-5933-AF33-575E92BB379E",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "46FCC63E-083C-5F67-9182-E0D709A257EF"
@@ -10039,8 +10225,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "7890cf9b640717a35a9715cd87194e54689afe51c661649065f722ec4a2c184e"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "374469a8707c34754096baf4ec901f78d75e7fc120b124e8867787558004bbcc"
     }
   },
   {
@@ -10060,7 +10246,8 @@
       "InitialPaymentAmount": 150,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "A31FE0CD-1759-50C0-9D91-0EB5D17239B2"
+      "ShipToPersonID": "A31FE0CD-1759-50C0-9D91-0EB5D17239B2",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "2DD77E38-16EC-525A-9405-9D11843D979B"
@@ -10093,8 +10280,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "3fb3f32b41a3074edb612332077e687738d71359986f7912eb6168fa3adc7b66"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "9e77d8b957637d94d67c5957929a014b39a3e5a3983ac13f2974f94bf266047c"
     }
   },
   {
@@ -10114,7 +10301,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "3E190C59-6B86-5374-AFEF-54F778B3E006"
+      "ShipToPersonID": "3E190C59-6B86-5374-AFEF-54F778B3E006",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "17E73BEA-C72E-55A4-A78F-54E4F870FDE4"
@@ -10147,8 +10335,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5c7b18671424626b4ba7a18efa16563c4b51e9aeb371136daffb9c9dfec3ef3b"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "73705cba4a1ba1d65836568042a49fbc025979d773bacf131f08ee4b6f20bcd5"
     }
   },
   {
@@ -10160,15 +10348,16 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "1760712E-1F45-5207-8CF3-AFB5C91EAA59",
       "TotalGross": 175,
-      "AmountPaid": 175,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 175,
       "DueDate": "2026-01-01",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 175,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "1760712E-1F45-5207-8CF3-AFB5C91EAA59"
+      "ShipToPersonID": "1760712E-1F45-5207-8CF3-AFB5C91EAA59",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "478D1F2E-D8F5-5CEB-B8E2-FAA1541CEE84"
@@ -10201,8 +10390,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "3390d9a828e4d4502e96a60af5fd6cad217abd03162154cdebef43057aab7ce2"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "59ed3c0d313aa9cfc9d6b0e7dd6ab817baaa8c065daa32144ffed30134b0b8bc"
     }
   },
   {
@@ -10222,7 +10411,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0D19E3DA-E1E4-5CCB-9C9D-AE74E7751D4E"
+      "ShipToPersonID": "0D19E3DA-E1E4-5CCB-9C9D-AE74E7751D4E",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "37831F33-5CB2-52EC-9733-A42F5069F98C"
@@ -10255,8 +10445,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5508ea865a5179249ac4b7d81a1cd2f646d2bf9ff621e9581fc041a1ba584d71"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "54e4dccda8405f9272a47b7766e263b9aea9d2d3dc72b73f02dfd5191b3a306a"
     }
   },
   {
@@ -10276,7 +10466,8 @@
       "InitialPaymentAmount": 175,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "6FF0B71A-5321-5187-9DDA-5FC44DCFDC31"
+      "ShipToPersonID": "6FF0B71A-5321-5187-9DDA-5FC44DCFDC31",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "D4C765ED-6CCC-5FE4-A53C-E93D4F133D18"
@@ -10309,8 +10500,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "25e9df57d3e1732c250f2613b390b37fd20d3a6c71fdefbed88cdf5fbf052fa3"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "501a49c429162d85afde3d046be29c4bedce730175b9e8e6123b361f1bb4a6f2"
     }
   },
   {
@@ -10330,7 +10521,8 @@
       "InitialPaymentAmount": 1000,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "0173EB21-9057-5DD1-A827-ABC235A10EFB"
+      "ShipToPersonID": "0173EB21-9057-5DD1-A827-ABC235A10EFB",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "1919F679-9240-58BC-970B-49F98BCC2F7A"
@@ -10363,8 +10555,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "6f3656a455af3237fb3d72cabb1d8313e9651ad9dcfbdc96ad52461993400a78"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "050bcc0d04b4a5233d9ba1ef8cb2f83f635cec9aebf4a597f6db63c8bf29a361"
     }
   },
   {
@@ -10381,10 +10573,11 @@
       "DueDate": "2025-12-28",
       "Origin": "Online",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 400,
+      "InitialPaymentAmount": 0,
       "ReversesOrderHeaderID": null,
       "ReversalReason": null,
-      "ShipToPersonID": "7D868A84-0297-5CD2-8D36-BFCEE85D4A1D"
+      "ShipToPersonID": "7D868A84-0297-5CD2-8D36-BFCEE85D4A1D",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "EA754ACC-6C77-5E09-B4E2-3EC58E154D86"
@@ -10417,8 +10610,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "c08b5b63be89a21bb5c8c729b15a434d168dab40e8529868bcb40276ac1b572e"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "2b681c485800b67c0c99ef2448bb260cecc428b19405565ee3ca8e163900b2e2"
     }
   },
   {
@@ -10430,13 +10623,14 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "406105DC-4033-55AD-A7CE-23DB2C30DEF7",
       "TotalGross": 150,
-      "AmountPaid": 150,
-      "Balance": 0,
+      "AmountPaid": 75,
+      "Balance": 75,
       "DueDate": "2020-01-01T00:00:00.000Z",
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 150,
-      "ShipToPersonID": "406105DC-4033-55AD-A7CE-23DB2C30DEF7"
+      "InitialPaymentAmount": 0,
+      "ShipToPersonID": "406105DC-4033-55AD-A7CE-23DB2C30DEF7",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "8A9058D3-17D5-55CA-A389-A28FB555C4FF"
@@ -10469,8 +10663,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "b3ceffe7ff6e4b00b0bed5030feaab63b06c788a277ab5388c3257317e13b787"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "14fcd2f896ab61a1f6fde332db995a695fdb42ffad943fc5eae93e407c615b7e"
     }
   },
   {
@@ -10487,8 +10681,9 @@
       "DueDate": "2021-01-01T00:00:00.000Z",
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 155,
-      "ShipToPersonID": "5825F04A-0ADD-5B52-854B-245294D3F54B"
+      "InitialPaymentAmount": 0,
+      "ShipToPersonID": "5825F04A-0ADD-5B52-854B-245294D3F54B",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "86B3AA32-A26B-55FE-99D8-822F3BB3C7C6"
@@ -10521,8 +10716,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "6392a1faad29c277e2528542aaff4c5031d243ce1a495c8863d22687e3ac0bec"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "dd85cdcc63c5f932b06e54c7020889fa71a55dc0d3242194ea658dfa22d69542"
     }
   },
   {
@@ -10534,13 +10729,14 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "09FE277E-A585-541E-9DA2-EA6206E60FB8",
       "TotalGross": 155,
-      "AmountPaid": 155,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 155,
       "DueDate": "2021-01-01T00:00:00.000Z",
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 155,
-      "ShipToPersonID": "09FE277E-A585-541E-9DA2-EA6206E60FB8"
+      "InitialPaymentAmount": 0,
+      "ShipToPersonID": "09FE277E-A585-541E-9DA2-EA6206E60FB8",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "F0E69F7E-2B15-5C19-9F9D-BC70B76AADC6"
@@ -10573,8 +10769,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "4072db313757b8fdb7f0b26fafa0d88efd355d875f8d6b26581ac2f92a02dfd8"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "9fb88138607dc0ff4bd543d41002714a7b3dba94c568fd4669214ed39ad791ab"
     }
   },
   {
@@ -10592,7 +10788,8 @@
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 155,
-      "ShipToPersonID": "D25E90CC-1F63-5CB4-8594-726561A3A7F6"
+      "ShipToPersonID": "D25E90CC-1F63-5CB4-8594-726561A3A7F6",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "D89CB74D-1F95-57C8-AEF0-DA772C822C8F"
@@ -10625,8 +10822,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "f1833895bf37aab796c3b4d647f6aa3ae569ea5c11f31b190a03209aa9395c4a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "2607f9360ccf1e89c8ad9aa64ecc05bcab409553a3162a895ecf5f65a19f4e06"
     }
   },
   {
@@ -10638,13 +10835,14 @@
       "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
       "BillToPersonID": "8BA3B6CA-644D-57AB-B82F-2F51B2475043",
       "TotalGross": 165,
-      "AmountPaid": 165,
-      "Balance": 0,
+      "AmountPaid": 0,
+      "Balance": 165,
       "DueDate": "2023-01-01T00:00:00.000Z",
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 165,
-      "ShipToPersonID": "8BA3B6CA-644D-57AB-B82F-2F51B2475043"
+      "InitialPaymentAmount": 0,
+      "ShipToPersonID": "8BA3B6CA-644D-57AB-B82F-2F51B2475043",
+      "InitialPaymentTypeID": null
     },
     "primaryKey": {
       "ID": "BD29E243-63A3-5F07-8774-4FA111CA4932"
@@ -10677,8 +10875,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "96f2f7c6af68d5b0623a4163c208c76941b9599395ce45767916c4837a06226e"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "256c4af7c05da9a9a4c336be9b4b6ca3e37abf55f17d02df2f5e4830ab992be3"
     }
   },
   {
@@ -10695,8 +10893,9 @@
       "DueDate": "2025-01-01T00:00:00.000Z",
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
-      "InitialPaymentAmount": 1000,
-      "ShipToPersonID": "622A429A-398A-5A9A-B140-672A7A39A890"
+      "InitialPaymentAmount": 500,
+      "ShipToPersonID": "622A429A-398A-5A9A-B140-672A7A39A890",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "26FC5613-4F34-5E65-89E8-49586C1BA7E0"
@@ -10729,8 +10928,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "f7ae848750a7262cdb0b2222062e8751d77befbf4c434b2cf8560216f4f645d0"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "7cc09aba839a9575ab09f8d6d5af203dee947eb1ca57045fbcd9e8834eb451b1"
     }
   },
   {
@@ -10748,7 +10947,8 @@
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 175,
-      "ShipToPersonID": "491E5D46-8432-5F21-B401-CF1585F28DD8"
+      "ShipToPersonID": "491E5D46-8432-5F21-B401-CF1585F28DD8",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "AAF90FC9-AC77-5F41-9A07-C4441E8946C3"
@@ -10781,8 +10981,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "221ba27de19ab6265791a31953cb1e08adf197c9d95e432926b7eda290534748"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3dc62b1dab1d769e7c9c6af8044e9ae3bd14c946c18f12a7379207172613329e"
     }
   },
   {
@@ -10800,7 +11000,8 @@
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 175,
-      "ShipToPersonID": "FDE53E00-B3AE-5E87-8AD3-EB320AC25CB3"
+      "ShipToPersonID": "FDE53E00-B3AE-5E87-8AD3-EB320AC25CB3",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "0AA92F1D-AF88-5914-985C-21D6D8D17ECE"
@@ -10833,8 +11034,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "2e9cd24ea859a8224fab7e5f6b66fbee35c08caa461eec04a869ad216f553567"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "3910fe6f9f6de5f048c0dcfe6dfe7611d3fb00845dc8005de99fc2bad578ce48"
     }
   },
   {
@@ -10852,7 +11053,8 @@
       "Origin": "Web",
       "FulfillmentStatus": "NotApplicable",
       "InitialPaymentAmount": 175,
-      "ShipToPersonID": "1F63EA32-2370-557C-85CE-E819229B965A"
+      "ShipToPersonID": "1F63EA32-2370-557C-85CE-E819229B965A",
+      "InitialPaymentTypeID": "2F1A6D30-0C41-4E7B-9E51-0A1B7C2D3E01"
     },
     "primaryKey": {
       "ID": "C0EAD20E-1E57-56AB-8525-2AB895A09AB8"
@@ -10885,8 +11087,8 @@
       ]
     },
     "sync": {
-      "lastModified": "2026-09-09T17:41:00.220Z",
-      "checksum": "5128c95f3a3698e1bc124cf83e13a85fb604ebbdb7571bbfd443279f593dac7a"
+      "lastModified": "2026-09-09T19:52:57.623Z",
+      "checksum": "1abdb6fc1a0e908c04309fd59d5fc7af8329b593083af87d6444ae1ee875f57f"
     }
   }
 ]
