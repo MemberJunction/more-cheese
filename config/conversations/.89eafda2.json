@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Chapter Engagement with Drill-Down",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Create a chapter engagement report showing each chapter's member count, event participation, and average member tenure in a chart. Let me click on any chapter to see a breakdown of their top 5 most active members. Then from that member list, I want to click on a member to see their detailed activity. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "81BD240D-2356-4644-A497-DBEDA4749580"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Heads up, I ran into some issues generating your Chapter Engagement & Member Activity Report dashboard. The overall structure was created to include the chapter benchmark chart, top active members ranking, and detailed activity timeline, but encountered query parameter validation errors during setup. Your administrator will need to review and adjust the query parameters before the report can display properly.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "9AAE574C-BD4F-4BD0-A496-673681F453F0"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "89EAFDA2-D366-40C9-89B1-3CC2F93F48FA"
+    }
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "entity": "MJ: User Applications",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".user-applications.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "overwrite",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt"
+    ],
+    "ignoreVirtualFields": true,
+    "ignoreNullFields": true,
+    "lookupFields": {
+      "UserID": {
+        "entity": "MJ: Users",
+        "field": "Email"
+      },
+      "ApplicationID": {
+        "entity": "MJ: Applications",
+        "field": "Name"
+      }
+    }
+  }
+}

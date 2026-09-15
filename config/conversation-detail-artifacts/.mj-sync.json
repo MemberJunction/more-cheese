@@ -1,0 +1,6 @@
+{
+  "entity": "MJ: Conversation Detail Artifacts",
+  "filePattern": "**/.*.json",
+  "pull": { "filePattern": ".*.json", "createNewFileIfNotFound": true, "newFileName": ".conversation-detail-artifacts.json", "updateExistingRecords": true, "mergeStrategy": "overwrite",
+            "excludeFields": ["__mj_CreatedAt", "__mj_UpdatedAt", "__mj_DeletedAt"], "ignoreVirtualFields": true, "ignoreNullFields": true }
+}

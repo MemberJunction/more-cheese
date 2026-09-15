@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Engagement Matrix with Embedded Sparklines",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Build me a matrix table showing member engagement across chapters and time periods. The rows should be our chapters (one row per chapter), and the columns should be quarters for the past 2 years (8 quarters total). Each cell should show the engagement score for that chapter in that quarter, with the number color-coded (green for high engagement above 75, yellow for medium 50-75, red for low below 50). Inside each cell, include a tiny sparkline showing the trend of that chapter's weekly engagement throughout the quarter. When I click on any cell, show me a bar chart breaking down the engagement by activity type (events attended, courses completed, committee participation) for that specific chapter and quarter. Then when I click on any activity type bar, show me a detailed table listing the actual activities - who participated, what they did, and when. Make every row in that activity table clickable to open the member, event, course, or committee record as appropriate. The matrix should have sortable columns so I can reorder by different quarters, and highlight the cell I'm currently viewing. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "D50EE4B3-FCC2-4F71-B527-670DAB1D5600"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Awesome, your Chapter Engagement Matrix & Activity Explorer is ready with an 8-quarter view across your chapters, events, courses, and committee data. You can benchmark color-coded engagement scores with intra-quarter weekly sparklines, sort by any quarter, and select cells to view proportional activity breakdowns. It also includes an audit table with direct deep links to Member, Event, Course, and Committee records, though please note the detail list may display as empty if no member activity occurred during a selected quarter.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "1096C88C-E843-4329-B4E0-9467A756F805"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "25582A06-9FA6-401F-B737-B0EAAC3DBCFF"
+    }
+  }
+]

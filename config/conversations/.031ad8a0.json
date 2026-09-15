@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Members with Events but No Courses",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Find all members who have attended at least one event but have never enrolled in a course. Show me a table with their names and the number of events they've attended. I want to click on a member to see which specific events they attended. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "199C5192-0B99-4089-AD6C-80C269557796"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Event-Only Member Engagement Explorer is ready, pulling data from Member Profiles, Event Registrations, Events, and Course Enrollments. It displays qualifying members with their total event counts in a sortable master table alongside summary engagement KPIs. You can click on any member row to immediately inspect their detailed chronological attendance history or export the targeted cohort.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "FDCB8EED-ECBC-4D0A-90EE-13FF9FE84AEF"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "031AD8A0-2B62-4E5D-B6CB-6BA4C9154643"
+    }
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "fields": {
+    "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+    "Name": "5-Year Membership Growth Trend",
+    "Description": "Payload returned by Skip",
+    "TypeID": "@lookup:MJ: Artifact Types.Name=Component",
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "Visibility": "Always",
+    "SkipEmbeddings": true
+  },
+  "relatedEntities": {
+    "MJ: Artifact Versions": [
+      {
+        "fields": {
+          "ArtifactID": "@parent:ID",
+          "VersionNumber": 1,
+          "Content": "{\n  \"name\": \"MembershipGrowthTrend\",\n  \"title\": \"5-Year Membership Growth Trend\",\n  \"description\": \"Interactive growth analytics dashboard visualizing annual member acquisition trends over the trailing 5-year period with interactive year-level drill-down into new member rosters.\",\n  \"type\": \"dashboard\",\n  \"location\": \"registry\",\n  \"registry\": \"Skip\",\n  \"namespace\": \"analytics/dashboards\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": [\n    {\n      \"name\": \"GrowthFilterBar\",\n      \"title\": \"Growth Filter Bar\",\n      \"description\": \"Filter controls for preset timeframes (Past 5 Years, Past 3 Years, All Time), member segments, and geographic regions.\",\n      \"type\": \"form\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/filters\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"GrowthKpiRibbon\",\n      \"title\": \"Growth KPI Ribbon\",\n      \"description\": \"Summary metric cards displaying 5-year total additions, selected year cohort size, top growth segment, and YoY growth rate.\",\n      \"type\": \"card\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/kpis\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"GrowthTrendChart\",\n      \"title\": \"Growth Trend Chart\",\n      \"description\": \"Interactive line chart visualizing annual member join trends with active year marker highlight and click-to-drill capability.\",\n      \"type\": \"chart\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/charts\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"DataGrid\",\n      \"title\": \"Data Grid\",\n      \"description\": \"Flexible data grid component with its own simplified API. Accepts **data via props** (you manage data loading). Supports sorting, filtering, paging, row selection. Optional native record opening on row click (provide entityName + entityPrimaryKeys). Two column modes: simple (string array `['Name', 'Price']`) or advanced (ColumnDef objects: `{field, header, render, width, sortable}`). Metadata-aware formatting: dates (locale with time), booleans (Yes/No), value lists (colored tags with 50+ status colors), money ($USD), decimals, integers (commas). Long text handling: truncate (ellipsis), expand (click 'show more/less'), tooltip (hover), wrap (word-break), none.\\n\\n#### DataGrid - ONLY use when:\\n✅ You already have the data (from your own RunView call, aggregated query, joined tables, API response, etc.)\\n✅ You need custom data manipulation before display (filtering, transformation, merging multiple sources)\\n✅ You need full control over the data loading logic\\n✅ Displaying 2+ records in a list/table format\\n✅ Works with any array of objects (not just entity records)\\n\\n❌ DO NOT USE DataGrid when:\\n- You want automatic entity record loading → **Use EntityDataGrid instead** (it calls RunView for you)\\n- Displaying a single record → **Use SingleRecordView instead**\\n- Need data visualization → **Use SimpleChart or SimpleDrilldownChart instead**\\n- Need automatic caching and pagination logic → **Use EntityDataGrid instead**\\n\\n**Key difference from EntityDataGrid**: DataGrid is data-agnostic and passive (you pass data in). EntityDataGrid is entity-aware and active (it loads data via RunView). Choose DataGrid when you need control over data loading, EntityDataGrid for automatic entity record loading with smart caching.\\n\\n**Row keys**: DataGrid assigns each row's React key using this priority: `row.key` → `entityPrimaryKeys` (joined with `_`) → `row.ID` → `row.id` → `index`. When `entityPrimaryKeys` is provided, the primary key fields are used to build a unique key per row. For client-side joins where the output `ID` may not be unique, provide `entityPrimaryKeys` pointing to the field(s) that uniquely identify each row.\\n\",\n      \"type\": \"table\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"Generic/UI/Table\",\n      \"version\": \"1.0.0\"\n    }\n  ]\n}",
+          "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+          "ContentHash": "ed84ec5f812071e7f51815c82ab47acacdb66a271ccffaad01d8513c21cd5266",
+          "Name": "5-Year Membership Growth Trend",
+          "Description": "Interactive growth analytics dashboard visualizing annual member acquisition trends over the trailing 5-year period with interactive year-level drill-down into new member rosters.",
+          "ContentMode": "Text",
+          "ContentSizeBytes": "3969",
+          "ForceToolsOnly": false,
+          "SkipEmbeddings": true
+        },
+        "primaryKey": {
+          "ID": "D1CDB540-C1AE-4695-B6E3-9F1C3CAD38AE"
+        }
+      }
+    ]
+  },
+  "primaryKey": {
+    "ID": "796C1596-D4C8-4FBF-B89E-4E694819214E"
+  }
+}

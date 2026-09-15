@@ -1,0 +1,39 @@
+{
+  "entity": "MJ: User Views",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".user-views.json",
+    "appendRecordsToExistingFile": true,
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt",
+      "GridStateObject",
+      "FilterStateObject",
+      "SkipEmbeddings"
+    ],
+    "lookupFields": {
+      "UserID": {
+        "entity": "MJ: Users",
+        "field": "Email"
+      },
+      "EntityID": {
+        "entity": "MJ: Entities",
+        "field": "Name"
+      },
+      "CategoryID": {
+        "entity": "MJ: User View Categories",
+        "field": "Name"
+      },
+      "ViewTypeID": {
+        "entity": "MJ: View Types",
+        "field": "Name"
+      }
+    },
+    "ignoreVirtualFields": true
+  }
+}

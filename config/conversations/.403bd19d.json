@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Event Attendance by Quarter",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "What are our event attendance trends by quarter for the last 2 years? Show it as a chart. I want to be able to click on a quarter to see which events happened and their attendance. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "CAB6CD9A-357B-4DA9-95BE-1C7B1C106558"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Quarterly Event Attendance Trends dashboard is ready using data from Events and Event Registrations. It features an interactive bar chart comparing quarterly registrations against actual attendance alongside summary KPI metrics. You can click any quarter to filter the breakdown table below and drill directly into individual event records.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "8A20E693-66C6-49B8-8E98-0D2C8BE4A95D"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "403BD19D-7DAB-44EE-9909-4C6ED28A4082"
+    }
+  }
+]

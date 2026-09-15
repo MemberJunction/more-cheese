@@ -98,10 +98,9 @@ const FIELD_TARGET_DIR_MAP = new Map([
 // 3. Explicit, documented exclusion list for known external cross-repo references
 // Each exclusion tracks hit counts; an exclusion that matches 0 records will fail the build to catch stale exclusions.
 const EXCLUDED_EXTERNAL_FIELDS = new Map([
+  ['vector-indexes.ExternalID', { reason: 'Provider-side index name (a string, e.g. the Pinecone index), not a foreign key', hits: 0 }],
   ['relationships.RelationshipTypeID', { reason: 'Points to @memberjunction/bizapps-common seeded types', hits: 0 }],
   ['form-responses.AnonymousSessionID', { reason: 'Anonymous browser session tokens from public form submissions', hits: 0 }],
-  ['sonar-score-models.OwnerUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
-  ['sonar-score-model-versions.PublishedByUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
   ['products.ProductTypeID', { reason: 'Points to @mj-biz-apps/orders seeded product types', hits: 0 }],
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
   ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
@@ -223,8 +222,12 @@ for (const root of TARGET_ROOTS) {
 // 5. Cross-directory Primary Key Uniqueness audit
 console.log('\n--- Cross-Directory Primary Key Uniqueness Audit ---');
 const pkOwnerMap = new Map();
+const SECOND_PASS_DIRECTORIES = new Map([
+  ['sonar-score-models-activate', 'sonar-score-models'],
+]);
 let duplicatePks = 0;
 for (const [dir, pks] of primaryKeysByDir.entries()) {
+  if (SECOND_PASS_DIRECTORIES.has(dir)) continue; // second-pass dirs re-touch first-pass records on purpose
   for (const pk of pks) {
     if (pkOwnerMap.has(pk)) {
       console.error(`❌ PK COLLISION: Primary Key ${pk} exists in both '${pkOwnerMap.get(pk)}' and '${dir}'!`);

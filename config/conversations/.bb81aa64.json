@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Course Performance with Enrollment Cohorts",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Show me the top 10 courses by enrollment in a chart. When I click on a course, show me a line chart of completion rates by enrollment quarter. Then let me click on any quarter to see the actual students who enrolled then and whether they completed. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "7000482F-ECB7-4538-9527-7B0087FAB563"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Course Enrollment & Completion Analytics dashboard connects Courses, Course Enrollments, People, and Member Profiles. It features a ranked bar chart of your top courses by enrollment, an interactive line chart tracking quarterly completion rates for the selected course, and a detailed student roster where you can filter by status and click student names to view their profiles.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "1A98C62D-2153-4C28-B9A3-34D803BF8426"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "BB81AA64-2109-4DED-AA5C-CE212FFE75FD"
+    }
+  }
+]

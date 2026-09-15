@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Membership Growth 5 Years",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Show me how our membership has grown over the past 5 years with a line chart showing the trend by year. I'd like to click on any year to see the members who joined that year. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "0A346637-51DD-4402-B3F9-E59183BAE3DA"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your 5-Year Membership Growth Trend dashboard is ready using data from Member Profiles and People. It features an interactive line chart tracking annual join volumes alongside summary KPI cards for cohort size, leading segments, and YoY growth. You can click on any year point on the chart to instantly drill into that year's member roster and search, sort, or open individual profiles.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "DDB5BBB3-B0E0-480B-B482-D77C9919B645"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "A897D981-F62A-440E-8C20-F25CAD6238DC"
+    }
+  }
+]

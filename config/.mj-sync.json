@@ -4,10 +4,16 @@
     "autoCreateMissingRecords": true
   },
   "sqlLogging": {
-    "outputDirectory": "./migrations/codegen/config",
+    "enabled": true,
+    "outputDirectory": "../migrations/codegen/config",
     "formatAsMigration": true
   },
   "directoryOrder": [
+    "users",
+    "user-roles",
+    "user-applications",
+    "file-storage-providers",
+    "credential-types",
     "sonar-score-band-sets",
     "sonar-score-bands",
     "sonar-time-windows",
@@ -16,8 +22,27 @@
     "sonar-model-related-entities",
     "sonar-factors",
     "sonar-model-factors",
+    "sonar-score-models-activate",
     "ai-vendors",
     "ai-models",
-    "ai-model-vendors"
+    "ai-model-vendors",
+    "vector-indexes",
+    "content-types",
+    "content-sources",
+    "application-roles",
+    "user-views",
+    "resource-permissions",
+    "projects",
+    "query-categories",
+    "queries",
+    "artifacts",
+    "conversations",
+    "conversation-detail-artifacts",
+    "conversations-owner",
+    "file-storage-accounts",
+    "file-storage-account-permissions",
+    "dashboard-categories",
+    "dashboards",
+    "dashboard-category-links"
   ]
 }

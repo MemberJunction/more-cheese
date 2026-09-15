@@ -1,0 +1,20 @@
+[
+  {
+    "primaryKey": {
+      "ID": "A1B2C3D4-0001-4E5F-8A9B-0C1D2E3F4A05"
+    },
+    "fields": {
+      "ApplicationID": "@lookup:MJ: Applications.Name=Knowledge Hub",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A1B2C3D4-0002-4E5F-8A9B-0C1D2E3F4A05"
+    },
+    "fields": {
+      "ApplicationID": "@lookup:MJ: Applications.Name=Knowledge Hub",
+      "RoleID": "@lookup:MJ: Roles.Name=Developer"
+    }
+  }
+]

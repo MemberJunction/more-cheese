@@ -1,0 +1,15 @@
+[
+  {
+    "fields": {
+      "Name": "More Cheese Dropbox",
+      "ProviderID": "@lookup:MJ: File Storage Providers.Name=Dropbox",
+      "CredentialID": "@lookup:MJ: Credentials.Name=Dropbox OAuth",
+      "IncludeInGlobalSearch": true,
+      "SkipEmbeddings": false,
+      "Description": "Dropbox Business team space, folder More Cheese/vault/internal. Credential values live only in the encrypted Credential record (create it in Explorer before pushing this)."
+    },
+    "primaryKey": {
+      "ID": "636E204B-12CB-4D67-A861-09DA9C825BA3"
+    }
+  }
+]

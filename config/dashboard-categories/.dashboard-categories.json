@@ -1,0 +1,12 @@
+[
+  {
+    "primaryKey": {
+      "ID": "8D2F4A61-3B7C-4E9D-A5F1-2C6B8E0D4A93"
+    },
+    "fields": {
+      "Name": "More Cheese",
+      "Description": "International Cheese Federation demo dashboards",
+      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io"
+    }
+  }
+]
