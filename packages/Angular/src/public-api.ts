@@ -16,6 +16,12 @@ import '@mj-more-cheese-demo/entities';
 // Evaluate the generated forms module (fires @RegisterClass for every form)
 import './lib/generated/generated-forms.module';
 
+// Custom form contributions to upstream apps' forms (forms architecture guide §7c).
+// Importing the file fires @RegisterClassEx; the People form picks the panel up at runtime.
+import './lib/custom/form-panels/person-membership.panel';
+export { PersonMembershipPanel } from './lib/custom/form-panels/person-membership.panel';
+export { PersonMembershipComponent } from './lib/custom/form-panels/person-membership.component';
+
 // Re-export for consumers + the host class-registration manifest
 export { GeneratedFormsModule } from './lib/generated/generated-forms.module';
 export { morecheeseeventsCompetitionEntryFormComponent } from './lib/generated/Entities/morecheeseeventsCompetitionEntry/morecheeseeventscompetitionentry.form.component';
