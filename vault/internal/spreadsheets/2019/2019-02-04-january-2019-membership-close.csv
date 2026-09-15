@@ -1,0 +1,25 @@
+# title: January 2019 membership close by tier
+# date: 2019-02-04
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-02-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership-close, tiers, autorenew, variance]
+# data_sources: [generated/membership-periods, generated/orders, generated/order-lines, generated/products]
+# source: VAULT-DESIGN Appendix A.0 loader + A.2 (tier mix, dues) and A.5 (revenue by product line), scoped to 2019-01-01..2019-01-31
+# basis: periods_active_31jan counts membership periods with StartDate <= 2019-01-31 <= EndDate. membership_order_revenue_usd sums order lines for the tier's membership product on orders dated in January.
+# caveat: new-vs-renewing is NOT reportable for 2019. Membership-period history begins at the 2019-01-01 baseline, so every active period starts 1 January regardless of actual join date.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious trade
+#   association created for the MemberJunction More Cheese demonstration environment. All names,
+#   figures, events, and decisions are invented.
+#
+tier,list_price_usd,periods_active_31jan,dues_billed_usd,autorenew_on,autorenew_pct,membership_order_lines,membership_order_revenue_usd,variance_usd
+Enthusiast,150,13,1950,5,38.5,13,1950,0
+Individual,175,148,25840,44,29.7,162,27870,2030
+SmallBusiness,400,46,18332,10,21.7,46,18332,0
+Corporate,1000,15,14830,5,33.3,15,14830,0
+TOTAL,,222,60952,64,28.8,236,62982,2030
