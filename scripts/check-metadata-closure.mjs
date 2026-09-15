@@ -224,6 +224,7 @@ console.log('\n--- Cross-Directory Primary Key Uniqueness Audit ---');
 const pkOwnerMap = new Map();
 const SECOND_PASS_DIRECTORIES = new Map([
   ['sonar-score-models-activate', 'sonar-score-models'],
+  ['conversations-owner', 'conversations'], // created as System (owner gate on details), then ownership flipped to the demo user
 ]);
 let duplicatePks = 0;
 for (const [dir, pks] of primaryKeysByDir.entries()) {
