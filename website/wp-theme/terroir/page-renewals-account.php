@@ -54,7 +54,7 @@ get_header();
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Do you renew automatically?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">Only if you ask us to. Auto-renew is optional and off by default, and you can switch it either way in your account at any time without talking to anybody.</p>
-          <p class="m-0">Members are split roughly evenly on it. Organisations with a purchase-order process usually leave it off so that Finance can raise the paperwork; individuals usually turn it on so they stop thinking about it.</p>
+          <p class="m-0">Members are split roughly evenly on it. Organizations with a purchase-order process usually leave it off so that Finance can raise the paperwork; individuals usually turn it on so they stop thinking about it.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
@@ -68,41 +68,41 @@ get_header();
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do I change the card, the billing address, or switch auto-renew?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">All three are in your account under billing, and none of them need an email to staff. Changing the card does not change the renewal date.</p>
-          <p class="m-0">If your organisation pays by invoice rather than card and something needs to change on the invoice itself &mdash; a purchase-order number, a different billing entity &mdash; that one does need <a href="mailto:finance@morecheese.org" class="text-brick underline underline-offset-2">finance@morecheese.org</a>.</p>
+          <p class="m-0">If your organization pays by invoice rather than card and something needs to change on the invoice itself &mdash; a purchase-order number, a different billing entity &mdash; that one does need <a href="mailto:finance@morecheese.org" class="text-brick underline underline-offset-2">finance@morecheese.org</a>.</p>
         </div>
       </details>
       </div>
     </section>
 
     <section class="js-faq-group mb-8" aria-labelledby="g-acct">
-      <h2 id="g-acct" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">Your account and your organisation</h2>
+      <h2 id="g-acct" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">Your account and your organization</h2>
       <div class="space-y-3">
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do I add or swap the staff a Creamery or Retailer membership covers?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">Send the names to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a>. Creamery covers up to six people and Retailer up to four; swapping one out for another is free and takes about a day.</p>
-          <p class="m-0">Each covered person gets their own account rather than sharing a login, which matters because course records and credentials attach to a person, not to the organisation. When someone leaves, tell us &mdash; their credential stays theirs, but their access under your membership should not.</p>
+          <p class="m-0">Each covered person gets their own account rather than sharing a login, which matters because course records and credentials attach to a person, not to the organization. When someone leaves, tell us &mdash; their credential stays theirs, but their access under your membership should not.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do I move a membership to a new owner or a new organisation?</summary>
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do I move a membership to a new owner or a new organization?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">An organisational membership follows the organisation, so a change of owner is a change of contact: the current administrator writes to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> naming the new one. We confirm with both.</p>
-          <p class="m-0">An Individual membership follows the person and cannot be transferred to a colleague. If someone is leaving and the organisation wants to keep the seat, the cleanest route is usually to convert to the appropriate organisational tier at the next renewal.</p>
+          <p class="m-0 mb-2">An organizational membership follows the organization, so a change of owner is a change of contact: the current administrator writes to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> naming the new one. We confirm with both.</p>
+          <p class="m-0">An Individual membership follows the person and cannot be transferred to a colleague. If someone is leaving and the organization wants to keep the seat, the cleanest route is usually to convert to the appropriate organizational tier at the next renewal.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">I need a receipt, an invoice, or a letter confirming our standing.</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">Receipts and invoices for every payment are in your account under billing history, and can be downloaded as often as you like. A receipt documents money already paid; an invoice requests money not yet paid, and Finance can issue one in advance if your ledger needs it.</p>
-          <p class="m-0">For anything a form cannot produce &mdash; a letter on headed paper confirming membership term, standing and credentials held, for a bank, a licence application or a regulatory query &mdash; write to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> with what the letter has to say and who it is addressed to. Three to five business days.</p>
+          <p class="m-0">For anything a form cannot produce &mdash; a letter on headed paper confirming membership term, standing and credentials held, for a bank, a license application or a regulatory query &mdash; write to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> with what the letter has to say and who it is addressed to. Three to five business days.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do I correct or remove our directory entry?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">You control your own entry. Ask Membership Operations to correct it, expand it, or take it down, and it changes within a day.</p>
-          <p class="m-0">You can also narrow it rather than remove it: keep the organisation listed and what it does, drop the contact detail. Members who are listed but unreachable get fewer useful enquiries, which is worth knowing before you choose that.</p>
+          <p class="m-0">You can also narrow it rather than remove it: keep the organization listed and what it does, drop the contact detail. Members who are listed but unreachable get fewer useful inquiries, which is worth knowing before you choose that.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
@@ -157,12 +157,12 @@ get_header();
         </a>
         <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
           <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The organisation directory, your entry, and which inbox to use.</p>
+          <p class="m-0 mt-1 text-[13px] text-mid">The organization directory, your entry, and which inbox to use.</p>
         </a>
       </div>
       <div class="mt-8 rounded-2xl bg-pasture px-6 py-8 text-white md:px-10">
         <h2 class="font-display m-0 text-[26px] font-extrabold tracking-tight">Still stuck?</h2>
-        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the enquiry page if you would rather fill in a form.</p>
+        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
         <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-5 inline-block rounded-full bg-milk px-6 py-3 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
       </div>
     </div>

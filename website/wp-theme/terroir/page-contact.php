@@ -39,7 +39,7 @@ get_header();
       <h3 class="font-display mb-3 mt-8 text-xl font-bold tracking-tight">Who handles what</h3>
       <ul class="space-y-2 text-[15px] text-[#3A403C]">
         <li><b class="font-display text-charcoal">Membership Operations</b> — joining, tiers, dues, renewals, hardship dues, the directory. <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a></li>
-        <li><b class="font-display text-charcoal">Education Programmes</b> — the credential ladder, exam sittings, cohorts, the course catalogue. <a href="mailto:education@morecheese.org" class="text-brick underline underline-offset-2">education@morecheese.org</a></li>
+        <li><b class="font-display text-charcoal">Education Programs</b> — the credential ladder, exam sittings, cohorts, the course catalog. <a href="mailto:education@morecheese.org" class="text-brick underline underline-offset-2">education@morecheese.org</a></li>
         <li><b class="font-display text-charcoal">Events</b> — the Annual Conference, workshops, webinars, competition entries. <a href="mailto:events@morecheese.org" class="text-brick underline underline-offset-2">events@morecheese.org</a></li>
         <li><b class="font-display text-charcoal">Communications</b> — the Monday brief, the blog, press. <a href="mailto:info@morecheese.org" class="text-brick underline underline-offset-2">info@morecheese.org</a></li>
         <li><b class="font-display text-charcoal">Advocacy Committee</b> — comments on proposed rules; see the <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-brick underline underline-offset-2">advocacy page</a>.</li>
@@ -53,7 +53,7 @@ get_header();
     </div>
 
     <div>
-      <h2 class="font-display m-0 mb-2 text-[28px] font-extrabold tracking-tight">Send an enquiry</h2>
+      <h2 class="font-display m-0 mb-2 text-[28px] font-extrabold tracking-tight">Send an inquiry</h2>
       <p class="m-0 mb-5 rounded-2xl border-[1.5px] border-brick px-4 py-3 text-[15px] text-brick">
         <b>This demonstration site does not send messages.</b> The form below is static: nothing is submitted, stored or emailed anywhere.
       </p>
@@ -68,8 +68,8 @@ get_header();
           <input id="f-email" name="email" type="email" autocomplete="email" class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-3 text-[15px]" placeholder="you@example.com">
         </div>
         <div>
-          <label for="f-org" class="font-display mb-1 block text-sm font-bold">Organisation <span class="font-normal text-mid">(optional)</span></label>
-          <input id="f-org" name="organisation" type="text" autocomplete="organization" class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-3 text-[15px]" placeholder="Creamery, shop, lab or distributor">
+          <label for="f-org" class="font-display mb-1 block text-sm font-bold">Organization <span class="font-normal text-mid">(optional)</span></label>
+          <input id="f-org" name="organization" type="text" autocomplete="organization" class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-3 text-[15px]" placeholder="Creamery, shop, lab or distributor">
         </div>
         <div>
           <label for="f-topic" class="font-display mb-1 block text-sm font-bold">What is this about?</label>
@@ -89,11 +89,11 @@ get_header();
           <textarea id="f-message" name="message" rows="6" class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-3 text-[15px]" placeholder="Tell us which tier fits, or what you are trying to work out."></textarea>
         </div>
         <p id="form-note" class="m-0 text-sm text-mid">No data leaves this page. In the live product this form writes straight to the association's membership records.</p>
-        <button type="submit" class="rounded-full bg-pasture px-7 py-3.5 text-sm font-bold text-white hover:bg-[#0E4530]">Send enquiry</button>
+        <button type="submit" class="rounded-full bg-pasture px-7 py-3.5 text-sm font-bold text-white hover:bg-[#0E4530]">Send inquiry</button>
         <p class="m-0 text-sm text-mid">Prefer email? Write to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> and it reaches the same people.</p>
       </form>
 
-      <!-- Betty assistant widget mounts here. Left empty and clearly labelled on purpose. -->
+      <!-- Betty assistant widget mounts here. Left empty and clearly labeled on purpose. -->
       <div class="mt-10">
         <h2 class="font-display m-0 mb-2 text-[28px] font-extrabold tracking-tight">Ask Betty</h2>
         <p class="m-0 mb-4 text-[15px] text-[#3A403C]">Betty is the Federation's assistant: dues, cohort dates, which rung to start on, what closed last week. The widget is embedded below.</p>
@@ -109,7 +109,7 @@ get_header();
   <section class="border-t-[1.5px] border-charcoal bg-milk">
     <div class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="faster-h">
       <h2 id="faster-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Faster than an email</h2>
-      <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Four of every five enquiries we get are already answered somewhere on this site, and reading it takes less time than waiting two business days for us to send you the link.</p>
+      <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Four of every five inquiries we get are already answered somewhere on this site, and reading it takes less time than waiting two business days for us to send you the link.</p>
       <div class="grid grid-cols-1 gap-3 md:grid-cols-2 nav:grid-cols-4">
         <a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
           <h3 class="font-display m-0 text-[19px] font-bold leading-tight tracking-tight text-charcoal">The FAQ</h3>
@@ -123,7 +123,7 @@ get_header();
         </a>
         <a href="<?php echo esc_url( home_url( '/library/' ) ); ?>" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
           <h3 class="font-display m-0 text-[19px] font-bold leading-tight tracking-tight text-charcoal">The Cheese Library</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">Eight families and 25 reference styles with milk, ageing, texture and what to look for. Open reference, no login.</p>
+          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">Eight families and 25 reference styles with milk, aging, texture and what to look for. Open reference, no login.</p>
           <span class="mt-3 text-[13px] font-bold text-pasture">Browse styles &rarr;</span>
         </a>
         <a href="<?php echo esc_url( home_url( '/careers/' ) ); ?>" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">

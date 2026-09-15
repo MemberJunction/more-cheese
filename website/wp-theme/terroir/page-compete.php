@@ -43,7 +43,7 @@ get_header();
       </article>
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
         <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Aged Cheddar &amp; Territorials</h3>
-        <p class="m-0 mt-2 text-sm text-[#3A403C]">Cheddars over twelve months and the regional territorials alongside them. Texture and crystal development count as much as flavour.</p>
+        <p class="m-0 mt-2 text-sm text-[#3A403C]">Cheddars over twelve months and the regional territorials alongside them. Texture and crystal development count as much as flavor.</p>
       </article>
       <article class="rounded-2xl bg-pasture p-6 text-white">
         <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Blue</h3>
@@ -65,9 +65,9 @@ get_header();
       <div>
         <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">How judging works</h2>
         <ol class="space-y-3 text-[15px] text-[#3A403C]">
-          <li><b class="font-display text-charcoal">1 · Entries are stripped.</b> Every wheel is re-labelled with a number when it arrives. Judges see the number and the category, nothing else — no creamery, no region, no story.</li>
+          <li><b class="font-display text-charcoal">1 · Entries are stripped.</b> Every wheel is re-labeled with a number when it arrives. Judges see the number and the category, nothing else — no creamery, no region, no story.</li>
           <li><b class="font-display text-charcoal">2 · Panels of three.</b> Each category is judged by a panel of three, drawn from makers, affineurs and buyers so that no single point of view sets the standard.</li>
-          <li><b class="font-display text-charcoal">3 · A score sheet per wheel.</b> Appearance and rind, aroma, texture, flavour, and finish, each scored against the category standard, with written comments required for any score at either extreme.</li>
+          <li><b class="font-display text-charcoal">3 · A score sheet per wheel.</b> Appearance and rind, aroma, texture, flavor, and finish, each scored against the category standard, with written comments required for any score at either extreme.</li>
           <li><b class="font-display text-charcoal">4 · Faults are named.</b> A wheel that is downscored is told why: the specific fault, not a number alone. This is the part entrants say they come back for.</li>
           <li><b class="font-display text-charcoal">5 · Panels reconcile.</b> Where the three sheets disagree sharply, the panel re-tastes together and records the disagreement rather than averaging it away.</li>
           <li><b class="font-display text-charcoal">6 · Results are published with the sheets.</b> Every entrant receives their own sheets; placings and the full category sheets go up on the site after the Annual Conference.</li>

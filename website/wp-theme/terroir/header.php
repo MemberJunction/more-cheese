@@ -38,9 +38,16 @@ $terroir_nav = array(
 
 <header class="relative border-b border-charcoal/15 bg-milk">
   <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="<?php esc_attr_e( 'Main', 'terroir' ); ?>">
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-      <span class="logo-dot" aria-hidden="true"></span><?php echo esc_html__( 'More Cheese', 'terroir' ); ?>
-    </a>
+    <div class="flex items-center gap-2.5">
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
+        <span class="logo-dot" aria-hidden="true"></span><?php echo esc_html__( 'More Cheese', 'terroir' ); ?>
+      </a>
+      <a href="<?php echo esc_url( home_url( '/about/' ) . '#fiction' ); ?>" class="mc-badge js-fiction-link" title="<?php esc_attr_e( 'Everything on this site is invented — read the note on the fiction', 'terroir' ); ?>">
+        <span class="mc-badge__dot" aria-hidden="true"></span>
+        <span class="mc-badge__long"><?php esc_html_e( 'Fictional demo', 'terroir' ); ?></span>
+        <span class="mc-badge__short"><?php esc_html_e( 'Fiction', 'terroir' ); ?></span>
+      </a>
+    </div>
     <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
 <?php foreach ( $terroir_nav as $terroir_path => $terroir_label ) : ?>
       <li><a href="<?php echo esc_url( home_url( $terroir_path ) ); ?>" class="text-charcoal no-underline hover:text-pasture"><?php echo esc_html( $terroir_label ); ?></a></li>

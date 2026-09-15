@@ -6,6 +6,7 @@
    5. the Cheese Library filter/search bar (library.html)
    6. the in-page question filter on the FAQ pages
    7. suppressing submit on the two deliberately inert forms
+   8. the first-visit "this site is fiction" notice (once per browser)
    Every block is defensive: a page without the element simply skips it. */
 (function () {
   'use strict';
@@ -278,7 +279,7 @@
 
   /* ---- 7. Inert forms -------------------------------------------------- */
   // Two forms on this site exist to be looked at, not submitted: the contact
-  // enquiry form (this is a demonstration build) and the library filter bar
+  // inquiry form (this is a demonstration build) and the library filter bar
   // (which filters live, so a submit would only reload the page). Both carry
   // data-inert rather than an inline handler, to keep all script in this file.
   function initInertForms() {
@@ -288,6 +289,123 @@
     }
   }
 
+  /* ---- 8. First-visit fiction notice ----------------------------------- */
+  // A visitor arriving for the first time gets one quiet bottom sheet saying
+  // the association is invented, and then never sees it again. The flag lives
+  // in localStorage, which throws in some privacy modes, so every access is
+  // wrapped: if the store is unavailable the notice simply shows each visit
+  // rather than breaking the page. The panel is built here rather than copied
+  // into twenty-two HTML files, and its "Read more" target is taken from the
+  // header badge so this file stays byte-identical between the static build
+  // and the WordPress theme (where the link is /about/#fiction).
+  var NOTICE_KEY = 'mc-fiction-notice-v1';
+
+  function noticeSeen() {
+    try {
+      return window.localStorage && window.localStorage.getItem(NOTICE_KEY) === 'dismissed';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markNoticeSeen() {
+    try {
+      if (window.localStorage) window.localStorage.setItem(NOTICE_KEY, 'dismissed');
+    } catch (e) {
+      /* private mode, quota, disabled storage — nothing to do */
+    }
+  }
+
+  function initFictionNotice() {
+    if (document.getElementById('mc-fiction-notice')) return;
+    if (noticeSeen()) return;
+
+    var badge = document.querySelector('.js-fiction-link');
+    var moreHref = badge ? badge.getAttribute('href') : './about.html#fiction';
+    var returnTo = document.activeElement;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'mc-notice';
+    wrap.id = 'mc-fiction-notice';
+
+    var panel = document.createElement('div');
+    panel.className = 'mc-notice__panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'false');
+    panel.setAttribute('aria-labelledby', 'mc-fiction-title');
+    panel.setAttribute('aria-describedby', 'mc-fiction-body');
+    panel.tabIndex = -1;
+
+    var eyebrow = document.createElement('p');
+    eyebrow.className = 'mc-notice__eyebrow';
+    eyebrow.textContent = 'Before you read on';
+
+    var title = document.createElement('h2');
+    title.className = 'mc-notice__title';
+    title.id = 'mc-fiction-title';
+    title.textContent = 'None of this is real.';
+
+    var body = document.createElement('p');
+    body.className = 'mc-notice__body';
+    body.id = 'mc-fiction-body';
+    body.textContent = 'The International Cheese Federation and More Cheese do not exist: every member, ' +
+      'course, event, figure and quotation on this site is invented. It is demonstration content built ' +
+      'to show what an association\u2019s public website looks like when it runs on MemberJunction.';
+
+    var actions = document.createElement('div');
+    actions.className = 'mc-notice__actions';
+
+    var ok = document.createElement('button');
+    ok.type = 'button';
+    ok.className = 'mc-notice__ok';
+    ok.textContent = 'Got it';
+
+    var more = document.createElement('a');
+    more.className = 'mc-notice__more';
+    more.href = moreHref;
+    more.textContent = 'Read more';
+
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'mc-notice__close';
+    close.setAttribute('aria-label', 'Dismiss this notice');
+    close.innerHTML = '&times;';
+
+    actions.appendChild(ok);
+    actions.appendChild(more);
+    panel.appendChild(close);
+    panel.appendChild(eyebrow);
+    panel.appendChild(title);
+    panel.appendChild(body);
+    panel.appendChild(actions);
+    wrap.appendChild(panel);
+
+    function onKey(e) {
+      if (e.key === 'Escape' || e.key === 'Esc') dismiss();
+    }
+
+    function dismiss() {
+      document.removeEventListener('keydown', onKey);
+      markNoticeSeen();
+      if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      // Hand focus back where it was, or to the permanent nav badge, which says
+      // the same thing in three words and stays available on every page.
+      var target = (returnTo && document.contains(returnTo) && returnTo !== document.body)
+        ? returnTo
+        : badge;
+      if (target && target.focus) target.focus();
+    }
+
+    ok.addEventListener('click', dismiss);
+    close.addEventListener('click', dismiss);
+    // Following "Read more" is itself an acknowledgement; do not ask twice.
+    more.addEventListener('click', function () { markNoticeSeen(); });
+    document.addEventListener('keydown', onKey);
+
+    document.body.appendChild(wrap);
+    panel.focus();
+  }
+
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
@@ -295,5 +413,6 @@
 
   ready(function () {
     initNav(); initCurrent(); initHoles(); initYear(); initLibrary(); initFaqFilter(); initInertForms();
+    initFictionNotice();
   });
 })();

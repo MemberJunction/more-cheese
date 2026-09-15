@@ -46,8 +46,8 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Do you have a job board?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Vacancies from member organisations go out in the Monday brief and are collected on the <a href="<?php echo esc_url( home_url( '/careers/' ) ); ?>" class="text-brick underline underline-offset-2">careers page</a>, which is open to anyone &mdash; a vacancy nobody outside the membership can see is a vacancy that will not be filled.</p>
-          <p class="m-0">Postings are free for member organisations. Non-members can post too, at a modest charge that exists mainly to keep the board free of recruitment-agency volume. Send the role to <a href="mailto:careers@morecheese.org" class="text-brick underline underline-offset-2">careers@morecheese.org</a>.</p>
+          <p class="m-0 mb-2">Vacancies from member organizations go out in the Monday brief and are collected on the <a href="<?php echo esc_url( home_url( '/careers/' ) ); ?>" class="text-brick underline underline-offset-2">careers page</a>, which is open to anyone &mdash; a vacancy nobody outside the membership can see is a vacancy that will not be filled.</p>
+          <p class="m-0">Postings are free for member organizations. Non-members can post too, at a modest charge that exists mainly to keep the board free of recruitment-agency volume. Send the role to <a href="mailto:careers@morecheese.org" class="text-brick underline underline-offset-2">careers@morecheese.org</a>.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
@@ -73,15 +73,15 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What do the six committees actually do?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2"><b>Standards</b> maintains the six competition category standards and reviews them in public every year after judging. <b>Food Safety</b> owns the HACCP curriculum and the Federation&rsquo;s position on testing regimes. <b>Education</b> owns the credential ladder, the 63-course catalogue and the cohorts.</p>
-          <p class="m-0"><b>Events</b> runs the Annual Conference, the workshops and the year-round virtual strand. <b>Membership</b> owns tiers, dues, hardship dues and the organisation directory. <b>Advocacy</b> handles raw-milk rules, labelling, tariffs and import lines, and assembles the comment packets members contribute to.</p>
+          <p class="m-0 mb-2"><b>Standards</b> maintains the six competition category standards and reviews them in public every year after judging. <b>Food Safety</b> owns the HACCP curriculum and the Federation&rsquo;s position on testing regimes. <b>Education</b> owns the credential ladder, the 63-course catalog and the cohorts.</p>
+          <p class="m-0"><b>Events</b> runs the Annual Conference, the workshops and the year-round virtual strand. <b>Membership</b> owns tiers, dues, hardship dues and the organization directory. <b>Advocacy</b> handles raw-milk rules, labeling, tariffs and import lines, and assembles the comment packets members contribute to.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What does committee service involve?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">Most committees meet remotely four to six times a year, with work between meetings that is measured in hours rather than days. Terms run three years and start after the October conference.</p>
-          <p class="m-0">It counts towards continuing education for members holding a credential, which is worth knowing if you are working towards a reconfirmation date anyway. It is also, by a distance, the fastest way to meet the people who know things.</p>
+          <p class="m-0">It counts toward continuing education for members holding a credential, which is worth knowing if you are working toward a reconfirmation date anyway. It is also, by a distance, the fastest way to meet the people who know things.</p>
         </div>
       </details>
       </div>
@@ -93,7 +93,7 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How does voting work?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Every membership carries one vote, whatever it cost. A $170 Individual membership and a $480 Creamery membership have exactly the same weight, and an organisational membership has one vote rather than one per covered person.</p>
+          <p class="m-0 mb-2">Every membership carries one vote, whatever it cost. A $170 Individual membership and a $480 Creamery membership have exactly the same weight, and an organizational membership has one vote rather than one per covered person.</p>
           <p class="m-0">The annual election is announced at the October conference. Members vote on board seats and on anything the board puts forward; results are published with the counts.</p>
         </div>
       </details>
@@ -114,14 +114,14 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What about a conflict of interest?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Board members and committee volunteers declare interests annually, recuse themselves where a conflict exists, and do not vote on matters that benefit their own businesses. Exam material is written under confidentiality and by rotating panels, so that no single organisation shapes what gets tested.</p>
+          <p class="m-0 mb-2">Board members and committee volunteers declare interests annually, recuse themselves where a conflict exists, and do not vote on matters that benefit their own businesses. Exam material is written under confidentiality and by rotating panels, so that no single organization shapes what gets tested.</p>
           <p class="m-0">If you think something was not managed properly, write to <a href="mailto:governance@morecheese.org" class="text-brick underline underline-offset-2">governance@morecheese.org</a> with the names, the decision affected and how you came to know. It is a different inbox from ethics on purpose.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Are there awards, and who nominates?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Members nominate members. The awards recognise long service, someone early in their career who has already changed how a room thinks, and work that advanced what the trade knows. They are presented at the October conference.</p>
+          <p class="m-0 mb-2">Members nominate members. The awards recognize long service, someone early in their career who has already changed how a room thinks, and work that advanced what the trade knows. They are presented at the October conference.</p>
           <p class="m-0">Nominations open in the spring and are announced in the brief. Self-nomination is allowed and is not held against anyone.</p>
         </div>
       </details>
@@ -136,7 +136,7 @@ get_header();
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Why did dues go up?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">Dues have moved rarely and by small amounts, and each time the reason is presented to the membership at the October conference with the budget behind it rather than announced in an email.</p>
-          <p class="m-0">The recurring drivers are the same three: the course catalogue getting bigger, exam development, and keeping hardship dues funded so that a bad year for a member does not end the membership. If you want the detail, the papers are in the members&rsquo; archive under governance.</p>
+          <p class="m-0">The recurring drivers are the same three: the course catalog getting bigger, exam development, and keeping hardship dues funded so that a bad year for a member does not end the membership. If you want the detail, the papers are in the members&rsquo; archive under governance.</p>
         </div>
       </details>
       </div>
@@ -177,12 +177,12 @@ get_header();
         </a>
         <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
           <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The organisation directory, your entry, and which inbox to use.</p>
+          <p class="m-0 mt-1 text-[13px] text-mid">The organization directory, your entry, and which inbox to use.</p>
         </a>
       </div>
       <div class="mt-8 rounded-2xl bg-pasture px-6 py-8 text-white md:px-10">
         <h2 class="font-display m-0 text-[26px] font-extrabold tracking-tight">Still stuck?</h2>
-        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the enquiry page if you would rather fill in a form.</p>
+        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
         <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-5 inline-block rounded-full bg-milk px-6 py-3 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
       </div>
     </div>

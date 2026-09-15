@@ -30,11 +30,11 @@ get_header();
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
         <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Raw-milk rules</h3>
-        <p class="m-0 mt-2 text-[15px] text-[#3A403C]">The ageing thresholds, the testing regimes and the interstate rules that decide whether a cheese can legally exist. Our position has been consistent: rules should be written around measured outcomes, and a small maker should be able to meet them without a laboratory on site. We file on every proposal that touches ageing periods, and we publish what we filed.</p>
+        <p class="m-0 mt-2 text-[15px] text-[#3A403C]">The aging thresholds, the testing regimes and the interstate rules that decide whether a cheese can legally exist. Our position has been consistent: rules should be written around measured outcomes, and a small maker should be able to meet them without a laboratory on site. We file on every proposal that touches aging periods, and we publish what we filed.</p>
       </article>
       <article class="rounded-2xl bg-clover p-6">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Labelling</h3>
-        <p class="m-0 mt-2 text-[15px] text-[#243027]">What a label must say, what it may say, and what it must not. Milk type and treatment, ageing claims, the words "artisan" and "farmstead", and the recurring question of whether a style name belongs to a place. A labelling change looks small on paper and costs a creamery a print run, so we argue for long lead-in periods as hard as we argue for the substance.</p>
+        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Labeling</h3>
+        <p class="m-0 mt-2 text-[15px] text-[#243027]">What a label must say, what it may say, and what it must not. Milk type and treatment, aging claims, the words "artisan" and "farmstead", and the recurring question of whether a style name belongs to a place. A labeling change looks small on paper and costs a creamery a print run, so we argue for long lead-in periods as hard as we argue for the substance.</p>
       </article>
       <article class="rounded-2xl bg-brick p-6 text-white">
         <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Tariffs</h3>
@@ -42,7 +42,7 @@ get_header();
       </article>
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
         <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Import lines</h3>
-        <p class="m-0 mt-2 text-[15px] text-[#3A403C]">Quotas, licences, inspection holds and the practical business of getting a wheel across a border in the condition it left in. Importers and buyers bring us the cases where a consignment sat too long or a line was reclassified; we take those cases in, anonymised, and use them as evidence.</p>
+        <p class="m-0 mt-2 text-[15px] text-[#3A403C]">Quotas, licenses, inspection holds and the practical business of getting a wheel across a border in the condition it left in. Importers and buyers bring us the cases where a consignment sat too long or a line was reclassified; we take those cases in, anonymized, and use them as evidence.</p>
       </article>
     </div>
   </section>
@@ -55,10 +55,10 @@ get_header();
           <li><b class="font-display text-charcoal">1 · We post the proposal.</b> When a rule opens for comment it goes on the <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="text-brick underline underline-offset-2">notice board</a> with the closing date and a plain summary of what would change.</li>
           <li><b class="font-display text-charcoal">2 · You send us your experience.</b> Not a legal argument — what the rule would do to your cave, your label, your route to market. Specific beats eloquent every time.</li>
           <li><b class="font-display text-charcoal">3 · The Advocacy Committee drafts.</b> Members of the committee draft the Federation's position and circulate it to affected members before it is final.</li>
-          <li><b class="font-display text-charcoal">4 · Your comment goes in the packet.</b> We file the Federation position with member comments attached, named or anonymised as you prefer.</li>
+          <li><b class="font-display text-charcoal">4 · Your comment goes in the packet.</b> We file the Federation position with member comments attached, named or anonymized as you prefer.</li>
           <li><b class="font-display text-charcoal">5 · We publish what we filed.</b> Every filing goes into the archive, so a member can see exactly what was said in their name.</li>
         </ol>
-        <p class="mt-5 text-[15px] text-mid">The raw-milk labelling proposal closes <b class="text-charcoal">3 October</b>. <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">Send the Advocacy Committee your comment.</a></p>
+        <p class="mt-5 text-[15px] text-mid">The raw-milk labeling proposal closes <b class="text-charcoal">3 October</b>. <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">Send the Advocacy Committee your comment.</a></p>
       </div>
       <div>
         <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">Themes, 2019–2025</h2>
@@ -73,11 +73,11 @@ get_header();
           </li>
           <li class="rounded-2xl bg-clover p-5">
             <b class="font-display text-lg">2021 · Virtual pivot</b>
-            <p class="m-0 mt-1 text-[15px] text-[#243027]">The first virtual symposium, meant as a stopgap, reached members who had never travelled to a conference. Online sessions became permanent.</p>
+            <p class="m-0 mt-1 text-[15px] text-[#243027]">The first virtual symposium, meant as a stopgap, reached members who had never traveled to a conference. Online sessions became permanent.</p>
           </li>
           <li class="rounded-2xl border-[1.5px] border-charcoal p-5">
             <b class="font-display text-lg">2022–24 · Artisan boom</b>
-            <p class="m-0 mt-1 text-[15px] text-[#3A403C]">Three years of expansion: new creameries, new counters, full cohorts, and a competition that had to cap entries for the first time. Advocacy work shifted to labelling and to defending the ageing thresholds new makers depend on.</p>
+            <p class="m-0 mt-1 text-[15px] text-[#3A403C]">Three years of expansion: new creameries, new counters, full cohorts, and a competition that had to cap entries for the first time. Advocacy work shifted to labeling and to defending the aging thresholds new makers depend on.</p>
           </li>
           <li class="rounded-2xl bg-brick p-5 text-white">
             <b class="font-display text-lg">2025 · Creamery closures and hardship dues</b>

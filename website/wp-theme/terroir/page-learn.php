@@ -22,7 +22,7 @@ get_header();
       <div>
         <p class="text-xs font-bold uppercase tracking-[.14em] text-brick">Education</p>
         <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[16ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">A ladder, not a shelf of courses.</h1>
-        <p class="m-0 max-w-[54ch] text-[17px] text-[#3A403C]">Four rungs, in order. Each one assumes the one below it and each one means something specific on a résumé. Around them sit <b>63 courses this year</b> — single sessions, two-day workshops and cohort programmes — that fill in the gaps between the rungs.</p>
+        <p class="m-0 max-w-[54ch] text-[17px] text-[#3A403C]">Four rungs, in order. Each one assumes the one below it and each one means something specific on a résumé. Around them sit <b>63 courses this year</b> — single sessions, two-day workshops and cohort programs — that fill in the gaps between the rungs.</p>
         <p class="m-0 mt-4 max-w-[54ch] text-[15px] text-mid">Cohorts are named for cheeses, not numbers: <b class="text-charcoal">Brook</b>, <b class="text-charcoal">Meadow</b>, <b class="text-charcoal">Alpine</b> and <b class="text-charcoal">Birch</b> run through the year, and people tend to stay in touch with the cohort they came up with.</p>
       </div>
       <!-- Section graphic: the cheese wheel drawn for the Cave concept, retinted for the light ground -->
@@ -66,7 +66,7 @@ get_header();
       <li class="rounded-2xl bg-pasture p-6 text-white md:p-8">
         <span class="font-display text-[13px] font-bold uppercase tracking-[.14em] text-clover">Rung two · exam</span>
         <h3 class="font-display m-0 mt-2 text-[28px] font-bold leading-tight tracking-tight">Certified Cheese Professional</h3>
-        <p class="m-0 mt-3 max-w-[70ch] text-[15px] opacity-95">The credential most members mean when they say "certified". It is an examination, not a course: you sit it when you are ready, and most candidates prepare for six to nine months. It tests retail and wholesale practice — ordering, rotation, margin, shrink, how to cut a wheel so the last sale is as good as the first — alongside sensory evaluation, where you are asked to taste blind and describe what you find in language another professional would recognise. Retailer-tier members get priority in the preparation cohorts.</p>
+        <p class="m-0 mt-3 max-w-[70ch] text-[15px] opacity-95">The credential most members mean when they say "certified". It is an examination, not a course: you sit it when you are ready, and most candidates prepare for six to nine months. It tests retail and wholesale practice — ordering, rotation, margin, shrink, how to cut a wheel so the last sale is as good as the first — alongside sensory evaluation, where you are asked to taste blind and describe what you find in language another professional would recognize. Retailer-tier members get priority in the preparation cohorts.</p>
       </li>
 
       <li class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6 md:p-8">
@@ -87,7 +87,7 @@ get_header();
     <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-12 md:px-10 nav:grid-cols-3">
       <div>
         <h2 class="font-display m-0 mb-2 text-2xl font-bold tracking-tight">63 courses this year</h2>
-        <p class="m-0 text-[15px] text-[#3A403C]">Between the rungs sit single sessions and workshops: pasta filata, wholesale negotiation, judging standards, apprenticeship, cave humidity in a hot summer. Members pay member rates; the catalogue is published each January.</p>
+        <p class="m-0 text-[15px] text-[#3A403C]">Between the rungs sit single sessions and workshops: pasta filata, wholesale negotiation, judging standards, apprenticeship, cave humidity in a hot summer. Members pay member rates; the catalog is published each January.</p>
       </div>
       <div>
         <h2 class="font-display m-0 mb-2 text-2xl font-bold tracking-tight">Cohorts named for cheeses</h2>
@@ -95,13 +95,13 @@ get_header();
       </div>
       <div>
         <h2 class="font-display m-0 mb-2 text-2xl font-bold tracking-tight">What it costs</h2>
-        <p class="m-0 text-[15px] text-[#3A403C]">Every membership tier carries a discount on credential exams, from day one. <a href="<?php echo esc_url( home_url( '/join/' ) ); ?>" class="text-brick underline underline-offset-2">Compare the tiers</a> or <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">ask Education Programmes</a> which rung to start on.</p>
+        <p class="m-0 text-[15px] text-[#3A403C]">Every membership tier carries a discount on credential exams, from day one. <a href="<?php echo esc_url( home_url( '/join/' ) ); ?>" class="text-brick underline underline-offset-2">Compare the tiers</a> or <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">ask Education Programs</a> which rung to start on.</p>
       </div>
     </div>
   </section>
   <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="prog-h">
-    <h2 id="prog-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Around the ladder: four programme areas</h2>
-    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">The ladder is the part members see. It sits inside four programmes that the committees run, and each one feeds the teaching: a standard has to be written before it can be taught, and a course is the fastest way to find out that a standard was written badly.</p>
+    <h2 id="prog-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Around the ladder: four program areas</h2>
+    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">The ladder is the part members see. It sits inside four programs that the committees run, and each one feeds the teaching: a standard has to be written before it can be taught, and a course is the fastest way to find out that a standard was written badly.</p>
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Standards</p>
@@ -111,17 +111,17 @@ get_header();
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Research</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Work commissioned to settle arguments</h3>
-        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Microbiology, flavour development, production efficiency and the four standing reports. Committees commission work when a question keeps coming back without an answer; the results end up in the curriculum within a year or two. <a href="<?php echo esc_url( home_url( '/research/' ) ); ?>" class="text-brick underline underline-offset-2">See what is published.</a></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Microbiology, flavor development, production efficiency and the four standing reports. Committees commission work when a question keeps coming back without an answer; the results end up in the curriculum within a year or two. <a href="<?php echo esc_url( home_url( '/research/' ) ); ?>" class="text-brick underline underline-offset-2">See what is published.</a></p>
       </article>
       <article class="rounded-2xl bg-clover p-6">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-pasture">Capacity</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Getting knowledge to where it is not</h3>
-        <p class="m-0 mt-3 text-[15px] text-[#243027]">Workshops in regions with few members, expert exchanges, mentorship, and the apprenticeship strand and fund that help a creamery train its next maker. What a maker knows is mostly undocumented and it leaves when they do; this is the programme aimed squarely at that. <a href="<?php echo esc_url( home_url( '/careers/' ) ); ?>" class="text-pasture underline underline-offset-2">Routes in and mentoring.</a></p>
+        <p class="m-0 mt-3 text-[15px] text-[#243027]">Workshops in regions with few members, expert exchanges, mentorship, and the apprenticeship strand and fund that help a creamery train its next maker. What a maker knows is mostly undocumented and it leaves when they do; this is the program aimed squarely at that. <a href="<?php echo esc_url( home_url( '/careers/' ) ); ?>" class="text-pasture underline underline-offset-2">Routes in and mentoring.</a></p>
       </article>
       <article class="rounded-2xl bg-pasture p-6 text-white">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Advocacy</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">The rules that decide what you may make</h3>
-        <p class="m-0 mt-3 text-[15px] opacity-95">Raw-milk rules, labelling, tariffs, import lines and geographic protections. The Food Safety &amp; HACCP rung exists because members kept meeting these in an inspection rather than in a document. <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-clover underline underline-offset-2">See the advocacy programme.</a></p>
+        <p class="m-0 mt-3 text-[15px] opacity-95">Raw-milk rules, labeling, tariffs, import lines and geographic protections. The Food Safety &amp; HACCP rung exists because members kept meeting these in an inspection rather than in a document. <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-clover underline underline-offset-2">See the advocacy program.</a></p>
       </article>
     </div>
   </section>
@@ -149,7 +149,7 @@ get_header();
         </article>
         <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Climate resilience</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Hotter summers change the cave before they change the herd. Ripening schedules, cave engineering and seasonal make plans, gathered from members already adapting rather than modelled.</p>
+          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Hotter summers change the cave before they change the herd. Ripening schedules, cave engineering and seasonal make plans, gathered from members already adapting rather than modeled.</p>
         </article>
         <article class="rounded-2xl bg-clover p-5">
           <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Emerging regions</h3>

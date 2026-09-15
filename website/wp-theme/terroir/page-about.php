@@ -25,7 +25,7 @@ get_header();
       <dl class="mt-8 grid max-w-2xl grid-cols-2 gap-6 nav:grid-cols-4">
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Founded</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">2014</dd></div>
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Members</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">3,058</dd></div>
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Organisations</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">641</dd></div>
+        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Organizations</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">641</dd></div>
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Countries</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">41</dd></div>
       </dl>
     </div>
@@ -36,17 +36,17 @@ get_header();
       <h2 id="who-h" class="font-display m-0 mb-4 text-[34px] font-extrabold tracking-tight">What we are</h2>
       <p class="m-0 mb-3 text-[15px] text-[#3A403C]">The Federation is a trade association for cheesemakers, affineurs, mongers and buyers. We do four things: we run a credential ladder that means something on a résumé; we run a competition judged blind and published with the score sheets; we file on the rules that decide what a member can legally make, label and ship; and we publish a weekly brief so that a maker in one country knows what happened to the price in another.</p>
       <p class="m-0 mb-3 text-[15px] text-[#3A403C]">We are member-governed. Every membership carries one vote whatever it costs, committee seats are open to members rather than reserved for the board, and the annual election is announced at the October conference. The staff are small by design; most of the work is done by members on committees.</p>
-      <p class="m-0 text-[15px] text-[#3A403C]">Three thousand and fifty-eight people belong, across 641 member organisations in 41 countries — farmstead creameries with two vats, regional plants, shop counters, wholesale buyers, laboratories, distributors and a good number of individual members between jobs or on the way up the ladder.</p>
+      <p class="m-0 text-[15px] text-[#3A403C]">Three thousand and fifty-eight people belong, across 641 member organizations in 41 countries — farmstead creameries with two vats, regional plants, shop counters, wholesale buyers, laboratories, distributors and a good number of individual members between jobs or on the way up the ladder.</p>
     </div>
     <div class="rounded-2xl border-[1.5px] border-charcoal p-6">
       <h2 class="font-display m-0 mb-3 text-2xl font-bold tracking-tight">The six committees</h2>
       <ul class="space-y-3 text-[15px] text-[#3A403C]">
         <li><b class="font-display text-charcoal">Standards</b> — maintains the six competition category standards and reviews them every year after judging.</li>
         <li><b class="font-display text-charcoal">Food Safety</b> — owns the HACCP curriculum and the Federation's position on testing regimes.</li>
-        <li><b class="font-display text-charcoal">Education</b> — the credential ladder, the 63-course catalogue and the cohorts.</li>
+        <li><b class="font-display text-charcoal">Education</b> — the credential ladder, the 63-course catalog and the cohorts.</li>
         <li><b class="font-display text-charcoal">Events</b> — the Annual Conference, the workshops and the year-round webinar strand.</li>
-        <li><b class="font-display text-charcoal">Membership</b> — tiers, dues, hardship dues and the organisation directory.</li>
-        <li><b class="font-display text-charcoal">Advocacy</b> — raw-milk rules, labelling, tariffs, import lines, and the comment packets members contribute to.</li>
+        <li><b class="font-display text-charcoal">Membership</b> — tiers, dues, hardship dues and the organization directory.</li>
+        <li><b class="font-display text-charcoal">Advocacy</b> — raw-milk rules, labeling, tariffs, import lines, and the comment packets members contribute to.</li>
       </ul>
       <p class="m-0 mt-4 text-sm text-mid">Any member may ask for a committee seat; Individual membership includes one.</p>
     </div>
@@ -63,14 +63,14 @@ get_header();
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-6">
           <h3 class="font-display m-0 text-xl font-bold tracking-tight">Membership Operations</h3>
-          <p class="m-0 mt-2 text-sm text-[#3A403C]">Applications, tiers, dues, renewals, hardship dues and the organisation directory. Most member email starts here.</p>
+          <p class="m-0 mt-2 text-sm text-[#3A403C]">Applications, tiers, dues, renewals, hardship dues and the organization directory. Most member email starts here.</p>
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-6">
           <h3 class="font-display m-0 text-xl font-bold tracking-tight">Communications</h3>
-          <p class="m-0 mt-2 text-sm text-[#3A403C]">The Monday brief, the blog, the archive, and telling members when a tariff line or a labelling rule has moved.</p>
+          <p class="m-0 mt-2 text-sm text-[#3A403C]">The Monday brief, the blog, the archive, and telling members when a tariff line or a labeling rule has moved.</p>
         </div>
         <div class="rounded-2xl bg-clover p-6">
-          <h3 class="font-display m-0 text-xl font-bold tracking-tight">Education Programmes</h3>
+          <h3 class="font-display m-0 text-xl font-bold tracking-tight">Education Programs</h3>
           <p class="m-0 mt-2 text-sm text-[#243027]">The four rungs, the 63 courses, the exam sittings and the Brook, Meadow, Alpine and Birch cohorts.</p>
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-6">
@@ -108,7 +108,7 @@ get_header();
   <section class="border-y-[1.5px] border-charcoal bg-milk">
     <div class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="reach-h">
       <h2 id="reach-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Where the membership is</h2>
-      <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">641 organisations in 41 countries, unevenly. Being honest about the unevenness is more useful than a map with a dot on every continent.</p>
+      <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">641 organizations in 41 countries, unevenly. Being honest about the unevenness is more useful than a map with a dot on every continent.</p>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">North America</h3>
@@ -116,7 +116,7 @@ get_header();
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Europe</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">The deepest bench on affinage and the most engaged on labelling and geographic protection. Most of the Advanced Affinage cohort&rsquo;s cave visits happen here.</p>
+          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">The deepest bench on affinage and the most engaged on labeling and geographic protection. Most of the Advanced Affinage cohort&rsquo;s cave visits happen here.</p>
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Latin America</h3>
@@ -135,14 +135,15 @@ get_header();
           <p class="m-0 mt-2 text-[14px] text-[#243027]">Some of the oldest continuous cheesemaking anywhere, and a standing reminder to the Standards Committee that a definition written around one continent is not a definition.</p>
         </div>
       </div>
-      <p class="m-0 mt-6 text-[15px] text-[#3A403C]">Find any of them in the organisation directory &mdash; how it works is on the <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="text-brick underline underline-offset-2">directory FAQ</a>.</p>
+      <p class="m-0 mt-6 text-[15px] text-[#3A403C]">Find any of them in the organization directory &mdash; how it works is on the <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="text-brick underline underline-offset-2">directory FAQ</a>.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10">
+  <section id="fiction" class="mx-auto max-w-6xl scroll-mt-6 px-5 py-12 md:px-10" aria-labelledby="fiction-h">
     <div class="rounded-2xl border-[1.5px] border-brick bg-milk p-6 md:p-8">
-      <h2 class="font-display m-0 mb-3 text-2xl font-bold tracking-tight text-brick">A note on the fiction</h2>
-      <p class="m-0 text-[15px] text-[#3A403C]">Everything on this site is invented. There is no International Cheese Federation, no More Cheese, no competition, no credential ladder and no member at 1 Rind Lane. The site exists to show what an association's public web presence looks like when it is built on MemberJunction: membership tiers and dues, an education catalogue, an events board, an advocacy programme and a publication, all of which map onto real records behind the scenes. The names, the numbers, the quotations and the history are there to make the demonstration legible, not to describe anything that exists.</p>
+      <p class="m-0 mb-1 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Fictional demonstration</p>
+      <h2 id="fiction-h" class="font-display m-0 mb-3 text-2xl font-bold tracking-tight text-brick">A note on the fiction</h2>
+      <p class="m-0 text-[15px] text-[#3A403C]">Everything on this site is invented. There is no International Cheese Federation, no More Cheese, no competition, no credential ladder and no member at 1 Rind Lane. The site exists to show what an association's public web presence looks like when it is built on MemberJunction: membership tiers and dues, an education catalog, an events board, an advocacy program and a publication, all of which map onto real records behind the scenes. The names, the numbers, the quotations and the history are there to make the demonstration legible, not to describe anything that exists.</p>
     </div>
   </section>
 </main>

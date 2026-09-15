@@ -109,7 +109,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Lactic curd fresh</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">0-7 days</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">0-7 days</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Lowland dairy valleys</dd></div>
         </dl>
@@ -121,7 +121,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Drained goat log</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Goat</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">3-14 days</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">3-14 days</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Dry limestone uplands</dd></div>
         </dl>
@@ -133,139 +133,139 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Whey ricotta-style</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Mixed herd</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">1-3 days</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">1-3 days</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Mediterranean coastal plains</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Recooked from the whey of a harder make, so it exists because something else was made first. Sweet, grainy and very perishable.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Loose grain that holds its shape on a spoon. Rubbery means it was cooked too hard.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="bloomy" data-milk="cow" data-texture="soft" data-search="bloomy disc bloomy-rind cow soft temperate river plains the classic white-coated disc: mould ripens it from the outside in, so a young one has a chalky line down the middle and an old one has none. an even, close coat with no grey. ammonia on the nose means it is past, not ripe. 3-6 weeks">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="bloomy" data-milk="cow" data-texture="soft" data-search="bloomy disc bloomy-rind cow soft temperate river plains the classic white-coated disc: mold ripens it from the outside in, so a young one has a chalky line down the middle and an old one has none. an even, close coat with no gray. ammonia on the nose means it is past, not ripe. 3-6 weeks">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Bloomy-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Bloomy disc</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">3-6 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">3-6 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Temperate river plains</dd></div>
         </dl>
-        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">The classic white-coated disc: mould ripens it from the outside in, so a young one has a chalky line down the middle and an old one has none.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> An even, close coat with no grey. Ammonia on the nose means it is past, not ripe.</p>
+        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">The classic white-coated disc: mold ripens it from the outside in, so a young one has a chalky line down the middle and an old one has none.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> An even, close coat with no gray. Ammonia on the nose means it is past, not ripe.</p>
       </article>
       <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="bloomy" data-milk="cow" data-texture="soft" data-search="triple-cream round bloomy-rind cow soft rich pasture lowlands cream added back to the milk before setting. rich enough that most people eat a third of what they intended to. a paste that slumps but does not run. a sunken top means the rind collapsed early. 4-8 weeks">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Bloomy-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Triple-cream round</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">4-8 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">4-8 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Rich pasture lowlands</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Cream added back to the milk before setting. Rich enough that most people eat a third of what they intended to.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A paste that slumps but does not run. A sunken top means the rind collapsed early.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="bloomy" data-milk="goat" data-texture="soft" data-search="ash-lined goat pyramid bloomy-rind goat soft dry limestone uplands a truncated pyramid dusted with ash before the mould takes, which slows the rind and lets the paste catch up. grey-blue bloom over the ash, even on the corners. cracked corners mean it dried unevenly. 2-5 weeks">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="bloomy" data-milk="goat" data-texture="soft" data-search="ash-lined goat pyramid bloomy-rind goat soft dry limestone uplands a truncated pyramid dusted with ash before the mold takes, which slows the rind and lets the paste catch up. gray-blue bloom over the ash, even on the corners. cracked corners mean it dried unevenly. 2-5 weeks">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Bloomy-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Ash-lined goat pyramid</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Goat</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">2-5 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">2-5 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Dry limestone uplands</dd></div>
         </dl>
-        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">A truncated pyramid dusted with ash before the mould takes, which slows the rind and lets the paste catch up.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Grey-blue bloom over the ash, even on the corners. Cracked corners mean it dried unevenly.</p>
+        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">A truncated pyramid dusted with ash before the mold takes, which slows the rind and lets the paste catch up.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Gray-blue bloom over the ash, even on the corners. Cracked corners mean it dried unevenly.</p>
       </article>
       <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="washed" data-milk="cow" data-texture="semi-soft" data-search="washed-rind square washed-rind cow semi-soft northern monastic valleys washed two or three times a week until the rind turns orange and tacky. smells far more assertive than it tastes. a supple, slightly sticky rind. a dry, cracked rind means the washing stopped early. 6-10 weeks">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Washed-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Washed-rind square</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">6-10 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">6-10 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Northern monastic valleys</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Washed two or three times a week until the rind turns orange and tacky. Smells far more assertive than it tastes.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A supple, slightly sticky rind. A dry, cracked rind means the washing stopped early.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="washed" data-milk="cow" data-texture="semi-soft" data-search="brine-washed wheel washed-rind cow semi-soft cool maritime hills a larger washed format that holds its shape for months. the paste goes translucent at the edge as it ages. even colour under the rind. a dark band more than a few millimetres deep means it was held too warm. 3-6 months">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="washed" data-milk="cow" data-texture="semi-soft" data-search="brine-washed wheel washed-rind cow semi-soft cool maritime hills a larger washed format that holds its shape for months. the paste goes translucent at the edge as it ages. even color under the rind. a dark band more than a few millimeters deep means it was held too warm. 3-6 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Washed-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Brine-washed wheel</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">3-6 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">3-6 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Cool maritime hills</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">A larger washed format that holds its shape for months. The paste goes translucent at the edge as it ages.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Even colour under the rind. A dark band more than a few millimetres deep means it was held too warm.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Even color under the rind. A dark band more than a few millimeters deep means it was held too warm.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="washed" data-milk="sheep" data-texture="semi-soft" data-search="washed-rind sheep tomme washed-rind sheep semi-soft southern mountain foothills sheep milk under a washed rind: fattier paste, so the wash reads as savoury rather than barnyard. a close, fine paste with no mechanical openings. pinholes mean gas where none should be. 8-16 weeks">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="washed" data-milk="sheep" data-texture="semi-soft" data-search="washed-rind sheep tomme washed-rind sheep semi-soft southern mountain foothills sheep milk under a washed rind: fattier paste, so the wash reads as savory rather than barnyard. a close, fine paste with no mechanical openings. pinholes mean gas where none should be. 8-16 weeks">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Washed-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Washed-rind sheep tomme</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Sheep</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">8-16 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">8-16 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Southern mountain foothills</dd></div>
         </dl>
-        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Sheep milk under a washed rind: fattier paste, so the wash reads as savoury rather than barnyard.</p>
+        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Sheep milk under a washed rind: fattier paste, so the wash reads as savory rather than barnyard.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A close, fine paste with no mechanical openings. Pinholes mean gas where none should be.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="blue" data-milk="cow" data-texture="crumbly" data-search="natural-rind blue blue cow crumbly cave-rich limestone country pierced twice to let air to the mould, then left to grow its own rind. the blue runs in seams rather than spots. veining that follows the piercing lines. grey-brown mush at the veins means it over-ripened. 3-6 months">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="blue" data-milk="cow" data-texture="crumbly" data-search="natural-rind blue blue cow crumbly cave-rich limestone country pierced twice to let air to the mold, then left to grow its own rind. the blue runs in seams rather than spots. veining that follows the piercing lines. gray-brown mush at the veins means it over-ripened. 3-6 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Blue</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Natural-rind blue</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">3-6 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">3-6 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Crumbly</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Cave-rich limestone country</dd></div>
         </dl>
-        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Pierced twice to let air to the mould, then left to grow its own rind. The blue runs in seams rather than spots.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Veining that follows the piercing lines. Grey-brown mush at the veins means it over-ripened.</p>
+        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Pierced twice to let air to the mold, then left to grow its own rind. The blue runs in seams rather than spots.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Veining that follows the piercing lines. Gray-brown mush at the veins means it over-ripened.</p>
       </article>
       <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="blue" data-milk="sheep" data-texture="crumbly" data-search="sheep's-milk blue blue sheep crumbly southern high plateaux higher fat and higher salt than a cow blue, which is why it reads sweet before it reads sharp. white paste, not yellow, with a clean salt finish. bitterness usually means young milk and old salt. 4-8 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Blue</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Sheep's-milk blue</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Sheep</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">4-8 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">4-8 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Crumbly</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Southern high plateaux</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Higher fat and higher salt than a cow blue, which is why it reads sweet before it reads sharp.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> White paste, not yellow, with a clean salt finish. Bitterness usually means young milk and old salt.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="blue" data-milk="cow" data-texture="soft" data-search="creamy blue log blue cow soft lowland dairy valleys a soft blue made in a small format so it ripens fast. spreadable at the edge by six weeks. a soft edge and a firmer centre. uniformly runny means it has gone. 8-12 weeks">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="blue" data-milk="cow" data-texture="soft" data-search="creamy blue log blue cow soft lowland dairy valleys a soft blue made in a small format so it ripens fast. spreadable at the edge by six weeks. a soft edge and a firmer center. uniformly runny means it has gone. 8-12 weeks">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Blue</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Creamy blue log</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">8-12 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">8-12 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Lowland dairy valleys</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">A soft blue made in a small format so it ripens fast. Spreadable at the edge by six weeks.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A soft edge and a firmer centre. Uniformly runny means it has gone.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A soft edge and a firmer center. Uniformly runny means it has gone.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="semi-hard" data-milk="cow" data-texture="semi-hard" data-search="mountain tomme semi-hard cow semi-hard mid-altitude alpine slopes the everyday wheel of a mountain make: pressed, brined and turned, eaten young by the people who made it. a dry, dusty grey rind and an elastic paste. a greasy rind means it was wrapped too soon. 2-6 months">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="semi-hard" data-milk="cow" data-texture="semi-hard" data-search="mountain tomme semi-hard cow semi-hard mid-altitude alpine slopes the everyday wheel of a mountain make: pressed, brined and turned, eaten young by the people who made it. a dry, dusty gray rind and an elastic paste. a greasy rind means it was wrapped too soon. 2-6 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Semi-hard</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Mountain tomme</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">2-6 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">2-6 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Mid-altitude alpine slopes</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">The everyday wheel of a mountain make: pressed, brined and turned, eaten young by the people who made it.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A dry, dusty grey rind and an elastic paste. A greasy rind means it was wrapped too soon.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A dry, dusty gray rind and an elastic paste. A greasy rind means it was wrapped too soon.</p>
       </article>
       <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="semi-hard" data-milk="cow" data-texture="semi-hard" data-search="farmhouse cloth-bound semi-hard cow semi-hard maritime grass country bound in cloth and larded, so the rind breathes and the paste dries slowly. ages into something brothy rather than sharp. cloth still bonded to the rind. lifting cloth means moisture got underneath. 6-18 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Semi-hard</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Farmhouse cloth-bound</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">6-18 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">6-18 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Maritime grass country</dd></div>
         </dl>
@@ -277,23 +277,23 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Goat tomme</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Goat</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">3-8 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">3-8 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Dry limestone uplands</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">A pressed goat wheel, which is rarer than it should be: most goat milk goes to fresh formats because it pays sooner.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Bright white paste with a firm break. Yellowing under the rind means oxidation.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="semi-hard" data-milk="sheep" data-texture="semi-hard" data-search="brined sheep wheel semi-hard sheep semi-hard eastern steppe pastures held in brine through its ageing rather than salted dry, which keeps the paste close and the flavour direct. firm, close paste with no rind to speak of. crumbling at the edge means the brine was too strong. 3-9 months">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="semi-hard" data-milk="sheep" data-texture="semi-hard" data-search="brined sheep wheel semi-hard sheep semi-hard eastern steppe pastures held in brine through its aging rather than salted dry, which keeps the paste close and the flavor direct. firm, close paste with no rind to speak of. crumbling at the edge means the brine was too strong. 3-9 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Semi-hard</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Brined sheep wheel</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Sheep</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">3-9 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">3-9 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Eastern steppe pastures</dd></div>
         </dl>
-        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Held in brine through its ageing rather than salted dry, which keeps the paste close and the flavour direct.</p>
+        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Held in brine through its aging rather than salted dry, which keeps the paste close and the flavor direct.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Firm, close paste with no rind to speak of. Crumbling at the edge means the brine was too strong.</p>
       </article>
       <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="alpine" data-milk="cow" data-texture="hard" data-search="alpine eye wheel hard / alpine cow hard high alpine valleys cooked curd pressed into a large wheel; a second fermentation opens round eyes as it warms in the cellar. round, shiny eyes and a slight sweetness. splits and cracks mean the eyes opened too fast. 6-14 months">
@@ -301,7 +301,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Alpine eye wheel</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">6-14 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">6-14 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">High alpine valleys</dd></div>
         </dl>
@@ -313,7 +313,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Alpine grating wheel</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">18-36 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">18-36 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">High alpine valleys</dd></div>
         </dl>
@@ -325,7 +325,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Aged sheep grating</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Sheep</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">10-24 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">10-24 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Southern high plateaux</dd></div>
         </dl>
@@ -337,7 +337,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Fresh stretched curd</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Buffalo</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">1-3 days</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">1-3 days</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Elastic</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Warm coastal wetlands</dd></div>
         </dl>
@@ -349,7 +349,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Aged stretched wheel</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">4-12 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">4-12 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Southern lowland plains</dd></div>
         </dl>
@@ -361,7 +361,7 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Smoked braided curd</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">1-2 weeks</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">1-2 weeks</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Elastic</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Southern lowland plains</dd></div>
         </dl>
@@ -373,36 +373,36 @@ get_header();
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Cloth-bound territorial</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Cow</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">9-24 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">9-24 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Crumbly</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Maritime grass country</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">The long-aged crumbling style: pressed hard, cloth-bound, and left until the paste breaks rather than bends.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A break that flakes along a plane. Bendy paste at eighteen months means it was pressed light.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="natural" data-milk="mixed" data-texture="semi-soft" data-search="leaf-wrapped natural rind natural-rind mixed herd semi-soft wooded upland valleys wrapped in leaves for the cellar, which is a handling decision that became a flavour one. leaves still pliable and bonded. dry, lifting leaves mean the cellar ran dry. 2-5 months">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="natural" data-milk="mixed" data-texture="semi-soft" data-search="leaf-wrapped natural rind natural-rind mixed herd semi-soft wooded upland valleys wrapped in leaves for the cellar, which is a handling decision that became a flavor one. leaves still pliable and bonded. dry, lifting leaves mean the cellar ran dry. 2-5 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Natural-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Leaf-wrapped natural rind</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Mixed herd</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">2-5 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">2-5 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-soft</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Wooded upland valleys</dd></div>
         </dl>
-        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Wrapped in leaves for the cellar, which is a handling decision that became a flavour one.</p>
+        <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Wrapped in leaves for the cellar, which is a handling decision that became a flavor one.</p>
         <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> Leaves still pliable and bonded. Dry, lifting leaves mean the cellar ran dry.</p>
       </article>
-      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="natural" data-milk="mixed" data-texture="semi-hard" data-search="cave-aged natural tomme natural-rind mixed herd semi-hard cave-rich limestone country brushed and turned in a cave, with whatever the cave grows allowed to form the rind. no two batches match. a mottled grey rind with no bald patches. orange slime means it turned into a washed rind by accident. 5-12 months">
+      <article class="js-lib-item flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5" data-family="natural" data-milk="mixed" data-texture="semi-hard" data-search="cave-aged natural tomme natural-rind mixed herd semi-hard cave-rich limestone country brushed and turned in a cave, with whatever the cave grows allowed to form the rind. no two batches match. a mottled gray rind with no bald patches. orange slime means it turned into a washed rind by accident. 5-12 months">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Natural-rind</p>
         <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Cave-aged natural tomme</h3>
         <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-charcoal/20 py-3 text-[13px]">
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Milk</dt><dd class="m-0 mt-0.5">Mixed herd</dd></div>
-          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Ageing</dt><dd class="m-0 mt-0.5">5-12 months</dd></div>
+          <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Aging</dt><dd class="m-0 mt-0.5">5-12 months</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Texture</dt><dd class="m-0 mt-0.5">Semi-hard</dd></div>
           <div><dt class="font-bold uppercase tracking-[.1em] text-mid">Region</dt><dd class="m-0 mt-0.5">Cave-rich limestone country</dd></div>
         </dl>
         <p class="m-0 mt-3 flex-1 text-[14px] text-[#3A403C]">Brushed and turned in a cave, with whatever the cave grows allowed to form the rind. No two batches match.</p>
-        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A mottled grey rind with no bald patches. Orange slime means it turned into a washed rind by accident.</p>
+        <p class="m-0 mt-3 rounded-xl bg-clover/50 px-3 py-2 text-[13px] text-[#243027]"><b class="font-display">What to look for.</b> A mottled gray rind with no bald patches. Orange slime means it turned into a washed rind by accident.</p>
       </article>
     </div>
 
@@ -422,7 +422,7 @@ get_header();
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-lg font-bold tracking-tight">Bloomy-rind</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">A white mould coat ripens the paste from the rind inwards, so the edge softens before the centre.</p>
+          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">A white mold coat ripens the paste from the rind inwards, so the edge softens before the center.</p>
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-lg font-bold tracking-tight">Washed-rind</h3>
@@ -430,7 +430,7 @@ get_header();
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-lg font-bold tracking-tight">Blue</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Blue mould introduced to the curd, then air let in by piercing. Salt carries the whole balance.</p>
+          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Blue mold introduced to the curd, then air let in by piercing. Salt carries the whole balance.</p>
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-lg font-bold tracking-tight">Semi-hard</h3>
@@ -446,7 +446,7 @@ get_header();
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
           <h3 class="font-display m-0 text-lg font-bold tracking-tight">Natural-rind</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">No wash, no mould coat: the rind is whatever the cave grows on it, brushed and turned.</p>
+          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">No wash, no mold coat: the rind is whatever the cave grows on it, brushed and turned.</p>
         </div>
       </div>
     </div>
@@ -456,7 +456,7 @@ get_header();
     <div>
       <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">How to use this</h2>
       <p class="m-0 mb-3 text-[15px] text-[#3A403C]">The library was built for three jobs. Behind a counter, it settles an argument about what a customer is holding. In a cave, it gives you the failure modes for a family before you meet them. In a classroom, it is the vocabulary sheet the Cheese Foundations Certificate assumes you already have by week two.</p>
-      <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Ageing ranges are the window a style is normally sold in, not a rule. A style with a three-to-six-month range will have members selling at ten weeks and members selling at a year, and both will be right about their own make.</p>
+      <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Aging ranges are the window a style is normally sold in, not a rule. A style with a three-to-six-month range will have members selling at ten weeks and members selling at a year, and both will be right about their own make.</p>
       <p class="m-0 text-[15px] text-[#3A403C]">The &ldquo;what to look for&rdquo; line on every card is the one the Standards Committee uses when it reviews category definitions after judging. If you disagree with one, that is a committee conversation and they would rather have it than not.</p>
     </div>
     <div class="space-y-4">

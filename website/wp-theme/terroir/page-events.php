@@ -65,7 +65,7 @@ get_header();
           </tr>
           <tr class="border-t border-charcoal/20">
             <th scope="row" class="whitespace-nowrap px-4 py-4 text-left font-display font-bold">3 Oct</th>
-            <td class="px-4 py-4"><b>Raw-milk labelling proposal — comment period closes</b><br><span class="text-mid">Send us your comment and it goes into the Federation's packet. The Advocacy Committee files on behalf of members who ask.</span></td>
+            <td class="px-4 py-4"><b>Raw-milk labeling proposal — comment period closes</b><br><span class="text-mid">Send us your comment and it goes into the Federation's packet. The Advocacy Committee files on behalf of members who ask.</span></td>
             <td class="px-4 py-4 text-mid">Advocacy</td>
             <td class="px-4 py-4"><a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="rounded-full bg-clover px-3 py-1 text-xs font-bold text-pasture no-underline hover:bg-pasture hover:text-white">Comment</a></td>
           </tr>
@@ -79,7 +79,7 @@ get_header();
     <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:px-10 nav:grid-cols-2">
       <div>
         <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">The Annual Conference</h2>
-        <p class="m-0 mb-3 text-[15px] text-[#3A403C]">The Federation meets once a year, in October, and it is the only week when the whole membership is in one building. Three days: competition results announced with the score sheets on the tables, the six category standards reviewed in public, a floor of member organisations, and the sessions that are too hands-on to run over video — cave problems, case planning, the milk market year ahead.</p>
+        <p class="m-0 mb-3 text-[15px] text-[#3A403C]">The Federation meets once a year, in October, and it is the only week when the whole membership is in one building. Three days: competition results announced with the score sheets on the tables, the six category standards reviewed in public, a floor of member organizations, and the sessions that are too hands-on to run over video — cave problems, case planning, the milk market year ahead.</p>
         <p class="m-0 mb-3 text-[15px] text-[#3A403C]">It is also where the governance happens. The annual election is announced, committee chairs report, and the membership votes on anything the board has put forward. Early-bird registration closes 30 September; Creamery and Retailer memberships can register their covered staff under the one membership.</p>
         <p class="m-0 text-[15px] text-[#3A403C]">Attendance has grown every year except 2020, and the room in October 2025 was noticeably more mixed than it used to be: more buyers, more affiliates, more people who came for a credential and stayed for the trade.</p>
       </div>
@@ -95,7 +95,7 @@ get_header();
   </section>
   <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="regional-h">
     <h2 id="regional-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Regional meetups</h2>
-    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Organised by members, for members, in whatever room somebody could get. Most are free or close to it, all of them are open to any member regardless of where you are based, and a member who is travelling is usually the most interesting person there.</p>
+    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Organized by members, for members, in whatever room somebody could get. Most are free or close to it, all of them are open to any member regardless of where you are based, and a member who is traveling is usually the most interesting person there.</p>
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Creamery tours</h3>
@@ -111,7 +111,7 @@ get_header();
       </article>
       <article class="rounded-2xl bg-clover p-5">
         <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Regulatory briefings</h3>
-        <p class="m-0 mt-2 text-[14px] text-[#243027]">When a rule moves in a region, the Advocacy Committee sends someone to explain what it means in practice before the comment period closes. <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-pasture underline underline-offset-2">See the advocacy programme.</a></p>
+        <p class="m-0 mt-2 text-[14px] text-[#243027]">When a rule moves in a region, the Advocacy Committee sends someone to explain what it means in practice before the comment period closes. <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-pasture underline underline-offset-2">See the advocacy program.</a></p>
       </article>
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">New-member socials</h3>
@@ -142,7 +142,7 @@ get_header();
         </div>
         <div class="rounded-2xl bg-clover p-6">
           <h3 class="font-display m-0 text-xl font-bold tracking-tight">Continuing education</h3>
-          <p class="m-0 mt-2 text-[15px] text-[#243027]">Most Federation sessions count towards reconfirming the Certified Cheese Professional credential; each listing says so. The Annual Conference on its own will usually get you most of the way through a cycle.</p>
+          <p class="m-0 mt-2 text-[15px] text-[#243027]">Most Federation sessions count toward reconfirming the Certified Cheese Professional credential; each listing says so. The Annual Conference on its own will usually get you most of the way through a cycle.</p>
           <a href="<?php echo esc_url( home_url( '/learn/' ) ); ?>" class="mt-4 inline-block rounded-full bg-pasture px-5 py-2.5 text-sm font-bold text-white no-underline hover:bg-[#0E4530]">The credential ladder</a>
         </div>
       </div>

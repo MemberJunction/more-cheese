@@ -83,7 +83,7 @@ generic fallback, and the footer carries the fiction disclaimer.
 
 ```
 /                                        front page, hero canvas, 3 latest posts from the loop
-/join/  /learn/  /library/  /compete/    the four new programme pages
+/join/  /learn/  /library/  /compete/    the four new program pages
 /events/  /advocacy/  /about/  /careers/
 /research/  /contact/                    existing pages, new templates
 /faq/                                    hub: 8 topic cards + 10 quick answers
@@ -228,7 +228,7 @@ disclaimer present verbatim · no PHP warning/notice/deprecation/fatal in the HT
    runs to 11 pages; the numbered list is fine at that size but worth a look on mobile.
 6. **Global block styles are left enqueued.** They are ~8 KB of unused custom properties on the 20
    hand-written templates, kept because `page.php` and `single.php` render whatever the editor
-   produced and a preset colour would otherwise lose its CSS. Safe to remove later if no page ever
+   produced and a preset color would otherwise lose its CSS. Safe to remove later if no page ever
    uses blocks.
 7. **`screenshot.png` is a flat palette composition**, not a render of the homepage. Cosmetic, only
    visible in Appearance → Themes.

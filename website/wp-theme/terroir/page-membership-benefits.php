@@ -46,7 +46,7 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What does every membership include, whatever the tier?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The Monday brief every week, with the full archive behind it. One vote in the annual election. A committee seat if you want one. Member rates on all 63 courses this year, on credential exams, on workshops and on the Annual Conference. Comment standing, so that when the Federation files on a proposed rule your comment goes into the packet. And the organisation directory: 641 member organisations in 41 countries, searchable by what they do and where they are.</p>
+          <p class="m-0 mb-2">The Monday brief every week, with the full archive behind it. One vote in the annual election. A committee seat if you want one. Member rates on all 63 courses this year, on credential exams, on workshops and on the Annual Conference. Comment standing, so that when the Federation files on a proposed rule your comment goes into the packet. And the organization directory: 641 member organizations in 41 countries, searchable by what they do and where they are.</p>
           <p class="m-0">None of that is tiered. A $170 Individual membership and a $480 Creamery membership get the same vote and the same discount; the Creamery covers more people and adds competition entry and a buyers&rsquo; directory listing.</p>
         </div>
       </details>
@@ -143,12 +143,12 @@ get_header();
         </a>
         <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
           <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The organisation directory, your entry, and which inbox to use.</p>
+          <p class="m-0 mt-1 text-[13px] text-mid">The organization directory, your entry, and which inbox to use.</p>
         </a>
       </div>
       <div class="mt-8 rounded-2xl bg-pasture px-6 py-8 text-white md:px-10">
         <h2 class="font-display m-0 text-[26px] font-extrabold tracking-tight">Still stuck?</h2>
-        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the enquiry page if you would rather fill in a form.</p>
+        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
         <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-5 inline-block rounded-full bg-milk px-6 py-3 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
       </div>
     </div>

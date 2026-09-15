@@ -33,7 +33,7 @@ get_header();
       </div>
       <dl class="mt-10 grid max-w-md grid-cols-3 gap-4 border-t-[1.5px] border-charcoal pt-4">
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-mid">Members</dt><dd class="font-display m-0 text-2xl font-bold tracking-tight">3,058</dd></div>
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-mid">Organisations</dt><dd class="font-display m-0 text-2xl font-bold tracking-tight">641</dd></div>
+        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-mid">Organizations</dt><dd class="font-display m-0 text-2xl font-bold tracking-tight">641</dd></div>
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-mid">Countries</dt><dd class="font-display m-0 text-2xl font-bold tracking-tight">41</dd></div>
       </dl>
     </div>
@@ -46,8 +46,8 @@ get_header();
     </div>
   </section>
 
-  <!-- Member organisations marquee -->
-  <div class="marquee border-y-[1.5px] border-charcoal bg-milk" aria-label="Member organisations">
+  <!-- Member organizations marquee -->
+  <div class="marquee border-y-[1.5px] border-charcoal bg-milk" aria-label="Member organizations">
     <ul class="m-0 list-none p-0">
       <li class="font-display px-[26px] py-3 text-[15px] font-semibold tracking-tight">Quincewick Creamery <span aria-hidden="true" class="ml-[26px] text-brick">·</span></li>
       <li class="font-display px-[26px] py-3 text-[15px] font-semibold tracking-tight">Mongers' Row <span aria-hidden="true" class="ml-[26px] text-brick">·</span></li>
@@ -102,7 +102,7 @@ get_header();
       <div>
         <p class="m-0 text-xs font-bold uppercase tracking-[.14em] text-brick">New &middot; open to everyone</p>
         <h2 id="lib-h" class="font-display m-0 mb-3 mt-2 max-w-[18ch] text-[clamp(28px,3.6vw,44px)] font-extrabold leading-[1] tracking-tight text-pasture">The Cheese Library</h2>
-        <p class="m-0 mb-4 max-w-[52ch] text-[17px] text-[#3A403C]">Eight families and twenty-five reference styles &mdash; milk, ageing, texture, producing region, and the one line a monger actually needs: what to look for, and what it means when you do not see it. Filter it by family, milk or texture. No login, no membership.</p>
+        <p class="m-0 mb-4 max-w-[52ch] text-[17px] text-[#3A403C]">Eight families and twenty-five reference styles &mdash; milk, aging, texture, producing region, and the one line a monger actually needs: what to look for, and what it means when you do not see it. Filter it by family, milk or texture. No login, no membership.</p>
         <div class="flex flex-wrap items-center gap-2.5">
           <a href="<?php echo esc_url( home_url( '/library/' ) ); ?>" class="rounded-full bg-pasture px-[18px] py-3 text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Browse the library</a>
           <a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="rounded-full border-[1.5px] border-charcoal px-[18px] py-3 text-sm font-semibold text-charcoal no-underline hover:bg-charcoal hover:text-milk">Or start with the FAQ</a>

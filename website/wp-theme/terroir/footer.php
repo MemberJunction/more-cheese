@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
           </ul>
         </div>
         <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]"><?php esc_html_e( 'Programmes', 'terroir' ); ?></h2>
+          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]"><?php esc_html_e( 'Programs', 'terroir' ); ?></h2>
           <ul class="space-y-1.5">
             <li><a href="<?php echo esc_url( home_url( '/learn/' ) ); ?>" class="text-[#D9DBD4] no-underline hover:text-clover"><?php esc_html_e( 'Learn', 'terroir' ); ?></a></li>
             <li><a href="<?php echo esc_url( home_url( '/compete/' ) ); ?>" class="text-[#D9DBD4] no-underline hover:text-clover"><?php esc_html_e( 'Compete', 'terroir' ); ?></a></li>

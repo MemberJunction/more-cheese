@@ -87,8 +87,8 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Can I advertise, sponsor, or reach the membership?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">There are three legitimate routes: sponsor an event, take space in the publications, or take part in the organisation floor at the Annual Conference. Affiliate members get first refusal on event sponsorship, which is one of the reasons that tier exists.</p>
-          <p class="m-0">Rates and the media pack come from <a href="mailto:advertising@morecheese.org" class="text-brick underline underline-offset-2">advertising@morecheese.org</a>. What is not a route is the organisation directory: it is for professional contact, and using it as a marketing list breaches the terms every member agrees to.</p>
+          <p class="m-0 mb-2">There are three legitimate routes: sponsor an event, take space in the publications, or take part in the organization floor at the Annual Conference. Affiliate members get first refusal on event sponsorship, which is one of the reasons that tier exists.</p>
+          <p class="m-0">Rates and the media pack come from <a href="mailto:advertising@morecheese.org" class="text-brick underline underline-offset-2">advertising@morecheese.org</a>. What is not a route is the organization directory: it is for professional contact, and using it as a marketing list breaches the terms every member agrees to.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
@@ -102,13 +102,13 @@ get_header();
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Do you keep a list of approved suppliers?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
           <p class="m-0 mb-2">No, deliberately. We do not endorse products, approve vendors or guarantee anyone&rsquo;s work, because the moment we did, the list would be worth gaming.</p>
-          <p class="m-0">What we have instead is the organisation directory, where the laboratories, distributors and suppliers in membership list what they do and where they are. Filter it by activity and region, then do your own diligence. The <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="text-brick underline underline-offset-2">directory page</a> explains how it works.</p>
+          <p class="m-0">What we have instead is the organization directory, where the laboratories, distributors and suppliers in membership list what they do and where they are. Filter it by activity and region, then do your own diligence. The <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="text-brick underline underline-offset-2">directory page</a> explains how it works.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Where are the competition score sheets?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">In the members&rsquo; archive, filed by year and by category, from the first competition onwards. Entrants get their own sheets whether or not they placed, which is the point of judging to a published standard rather than to a taste.</p>
+          <p class="m-0 mb-2">In the members&rsquo; archive, filed by year and by category, from the first competition onward. Entrants get their own sheets whether or not they placed, which is the point of judging to a published standard rather than to a taste.</p>
           <p class="m-0">The category standards themselves are public, on the <a href="<?php echo esc_url( home_url( '/compete/' ) ); ?>" class="text-brick underline underline-offset-2">compete page</a>.</p>
         </div>
       </details>
@@ -150,12 +150,12 @@ get_header();
         </a>
         <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
           <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The organisation directory, your entry, and which inbox to use.</p>
+          <p class="m-0 mt-1 text-[13px] text-mid">The organization directory, your entry, and which inbox to use.</p>
         </a>
       </div>
       <div class="mt-8 rounded-2xl bg-pasture px-6 py-8 text-white md:px-10">
         <h2 class="font-display m-0 text-[26px] font-extrabold tracking-tight">Still stuck?</h2>
-        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the enquiry page if you would rather fill in a form.</p>
+        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
         <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-5 inline-block rounded-full bg-milk px-6 py-3 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
       </div>
     </div>

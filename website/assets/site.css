@@ -1,5 +1,5 @@
 /* More Cheese — Terroir
-   Small custom layer on top of Tailwind (play CDN). Everything colour-related
+   Small custom layer on top of Tailwind (play CDN). Everything color-related
    lives in the tailwind.config block in each page's <head>; this file only holds
    the handful of things utilities cannot express: variable-font axes, the
    marquee keyframes, the mobile nav breakpoint (900px) and article typography. */
@@ -120,3 +120,177 @@ body {
 
 /* ---- Tables ------------------------------------------------------------ */
 .table-wrap { overflow-x: auto; }
+
+/* Tailwind utilities (flex/grid/block) outrank the UA [hidden] rule; the Library and FAQ filters toggle el.hidden. */
+[hidden] { display: none !important; }
+
+/* ---- "Fictional demo" nav badge ---------------------------------------- */
+/* A permanent, quiet marker next to the logo. Colors are repeated here in hex
+   for the same reason .logo-dot repeats them: this element has to look right
+   before the Tailwind play CDN has finished compiling utilities. */
+.mc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  border: 1px solid rgba(20, 92, 61, .35);
+  background: #EEF6E2;
+  color: #145C3D;
+  border-radius: 999px;
+  padding: 3px 10px 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+.mc-badge:hover { background: #C8E3A0; border-color: #145C3D; }
+.mc-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #A23C2C;
+  flex: none;
+}
+.mc-badge__short { display: none; }
+/* Phone widths: the short label, and a tighter nav rhythm to pay for it. The
+   attribute selector is only there to out-specify Tailwind's gap-4 utility on
+   the header nav; the footer nav is not a descendant of <header>. */
+@media (max-width: 639px) {
+  .mc-badge__long { display: none; }
+  .mc-badge__short { display: inline; }
+  .mc-badge {
+    padding: 2px 7px;
+    gap: 5px;
+    font-size: 10px;
+    letter-spacing: .04em;
+  }
+  /* Tighten the header rhythm and let the badge drop under the wordmark rather
+     than squeeze it. The [aria-label] is there only to out-specify Tailwind's
+     gap utilities on these two elements; the footer nav is not inside <header>. */
+  header nav[aria-label] { gap: 8px; }
+  header nav[aria-label] > div:first-child {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+}
+
+/* 900px is where the full nav list appears; between there and 1024px the row is
+   at its tightest, so the badge uses the short label there too. */
+@media (min-width: 900px) and (max-width: 1023px) {
+  .mc-badge__long { display: none; }
+  .mc-badge__short { display: inline; }
+  header nav[aria-label] { gap: 12px; }
+  header nav[aria-label] #nav-menu { gap: 16px; }
+}
+
+/* ---- First-visit fiction notice ---------------------------------------- */
+/* Injected by assets/site.js on a visitor's first page view and then never
+   again (localStorage). Styled here rather than with utilities so it renders
+   correctly the instant it is inserted, with no dependency on the CDN. */
+.mc-notice {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  padding: 0 16px 16px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.mc-notice__panel {
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  background: #FCFBF7;
+  border: 1.5px solid #242424;
+  border-radius: 20px;
+  padding: 22px 24px 20px;
+  box-shadow: 0 18px 44px rgba(36, 36, 36, .22);
+  animation: mc-notice-in .28s cubic-bezier(.2, .8, .3, 1) both;
+}
+.mc-notice__panel:focus { outline: none; }
+.mc-notice__panel:focus-visible { outline: 3px solid #A23C2C; outline-offset: 3px; }
+@keyframes mc-notice-in {
+  from { transform: translateY(18px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mc-notice__panel { animation: none; }
+}
+.mc-notice__eyebrow {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #A23C2C;
+}
+.mc-notice__title {
+  font-family: "Bricolage Grotesque", "Trebuchet MS", system-ui, -apple-system, sans-serif;
+  font-variation-settings: "opsz" 96, "wdth" 88;
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  color: #145C3D;
+  padding-right: 32px;
+}
+.mc-notice__body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3A403C;
+  max-width: 56ch;
+}
+.mc-notice__actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+.mc-notice__ok {
+  border: 0;
+  border-radius: 999px;
+  background: #145C3D;
+  color: #FCFBF7;
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 22px;
+  cursor: pointer;
+}
+.mc-notice__ok:hover { background: #0E4530; }
+.mc-notice__more {
+  color: #A23C2C;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mc-notice__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: none;
+  color: #5E6560;
+  font-size: 22px;
+  line-height: 1;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 999px;
+}
+.mc-notice__close:hover { color: #242424; background: rgba(36, 36, 36, .06); }
+@media (max-width: 480px) {
+  .mc-notice { padding: 0 8px 8px; }
+  .mc-notice__panel { padding: 20px 18px 18px; border-radius: 18px; }
+  .mc-notice__title { font-size: 22px; }
+}

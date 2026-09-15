@@ -21,7 +21,7 @@ get_header();
     <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
       <p class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Membership</p>
       <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[18ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">Four tiers, one federation.</h1>
-      <p class="m-0 max-w-[56ch] text-[17px] text-[#243027]">Dues start at $170 a year. Every tier carries the same vote, the same weekly brief and the same discount on credential exams — the difference is how many people at your organisation the membership covers, and what your organisation needs from us.</p>
+      <p class="m-0 max-w-[56ch] text-[17px] text-[#243027]">Dues start at $170 a year. Every tier carries the same vote, the same weekly brief and the same discount on credential exams — the difference is how many people at your organization the membership covers, and what your organization needs from us.</p>
     </div>
   </section>
 
@@ -72,7 +72,7 @@ get_header();
         <ul class="mt-4 flex-1 space-y-2 text-sm text-[#243027]">
           <li>For suppliers, labs and distributors</li>
           <li>First refusal on event sponsorship</li>
-          <li>Listing in the organisation directory</li>
+          <li>Listing in the organization directory</li>
         </ul>
         <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-5 rounded-full bg-pasture px-5 py-3 text-center text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Join as an Affiliate</a>
       </article>
@@ -89,7 +89,7 @@ get_header();
           <li><b class="font-display text-charcoal">Committee access.</b> Standards, Food Safety, Education, Events, Membership and Advocacy all seat members, not just board members.</li>
           <li><b class="font-display text-charcoal">Member rates on everything.</b> Courses, workshops, the Annual Conference and the competition.</li>
           <li><b class="font-display text-charcoal">Comment standing.</b> When we file on a proposed rule, your comment goes in the packet.</li>
-          <li><b class="font-display text-charcoal">The directory.</b> Find a lab, a distributor, a cave or a buyer among 641 member organisations in 41 countries.</li>
+          <li><b class="font-display text-charcoal">The directory.</b> Find a lab, a distributor, a cave or a buyer among 641 member organizations in 41 countries.</li>
         </ul>
       </div>
       <div>

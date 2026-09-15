@@ -46,7 +46,7 @@ get_header();
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Route three</p>
         <h3 class="font-display m-0 mt-1 text-[20px] font-bold leading-tight tracking-tight">Sideways from food science</h3>
-        <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Quality, laboratory and technical roles take people from dairy and food science programmes directly. The gap to close is sensory: a lab result and a tasting note have to agree, and only one of them is taught at university.</p>
+        <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Quality, laboratory and technical roles take people from dairy and food science programs directly. The gap to close is sensory: a lab result and a tasting note have to agree, and only one of them is taught at university.</p>
       </article>
       <article class="rounded-2xl bg-pasture p-5 text-white">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Route four</p>
@@ -61,15 +61,15 @@ get_header();
     <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:px-10 nav:grid-cols-[1.15fr_1fr]">
       <div>
         <h2 class="font-display m-0 mb-4 text-[34px] font-extrabold tracking-tight">Member vacancies</h2>
-        <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Roles at member organisations go out in the Monday brief and are collected here. The board is open to anyone, member or not &mdash; a vacancy that only members can see is a vacancy that will not be filled, and the point is to get people into the trade rather than to reward being in it already.</p>
+        <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Roles at member organizations go out in the Monday brief and are collected here. The board is open to anyone, member or not &mdash; a vacancy that only members can see is a vacancy that will not be filled, and the point is to get people into the trade rather than to reward being in it already.</p>
         <p class="m-0 mb-3 text-[15px] text-[#3A403C]">What gets posted, in rough order of volume: counter and shop-floor roles, assistant makers, affineurs, quality and laboratory positions, wholesale and account roles, and every so often a creamery looking for the person who will eventually take it over.</p>
         <p class="m-0 mb-3 text-[15px] text-[#3A403C]">What does not: anything without a stated pay range. The Membership Committee took that decision in 2024 after members asked for it, and it removed about a fifth of submissions in the first month. None of them came back to complain.</p>
-        <p class="m-0 text-[15px] text-[#3A403C]">Registration and applications are not live on this demonstration site. <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">Ask about anything on the board</a> and it will be routed to the right member organisation.</p>
+        <p class="m-0 text-[15px] text-[#3A403C]">Registration and applications are not live on this demonstration site. <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">Ask about anything on the board</a> and it will be routed to the right member organization.</p>
       </div>
       <div class="space-y-4">
         <div class="rounded-2xl bg-clover p-6">
           <h3 class="font-display m-0 text-xl font-bold tracking-tight">Posting a vacancy</h3>
-          <p class="m-0 mt-2 text-[15px] text-[#243027]">Free for member organisations, on every tier, with no limit on how many. Non-members pay a modest fee that exists to keep recruitment-agency volume off the board rather than to make money.</p>
+          <p class="m-0 mt-2 text-[15px] text-[#243027]">Free for member organizations, on every tier, with no limit on how many. Non-members pay a modest fee that exists to keep recruitment-agency volume off the board rather than to make money.</p>
           <p class="m-0 mt-2 text-[15px] text-[#243027]">Send the role, the location, the pay range and a contact to <a href="mailto:careers@morecheese.org" class="text-pasture underline underline-offset-2">careers@morecheese.org</a>. It goes into the next brief.</p>
         </div>
         <div class="rounded-2xl border-[1.5px] border-charcoal p-6">
@@ -83,7 +83,7 @@ get_header();
 
   <section id="volunteer" class="mx-auto max-w-6xl px-5 py-12 md:px-10 scroll-mt-4" aria-labelledby="vol-h">
     <h2 id="vol-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Volunteer roles</h2>
-    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">The staff are small by design; most of the Federation&rsquo;s work is done by members. Every role here is open to any member in good standing, and service counts towards reconfirming a credential.</p>
+    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">The staff are small by design; most of the Federation&rsquo;s work is done by members. Every role here is open to any member in good standing, and service counts toward reconfirming a credential.</p>
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
       <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Committee seat</h3>
@@ -123,7 +123,7 @@ get_header();
     <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:px-10 nav:grid-cols-2">
       <div>
         <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">Working for the Federation</h2>
-        <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Five roles carry the day-to-day work: Executive Director, Membership Operations, Communications, Education Programmes and Events. That is the whole staff, and it is deliberate &mdash; a larger office would do worse work than several hundred members on committees.</p>
+        <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Five roles carry the day-to-day work: Executive Director, Membership Operations, Communications, Education Programs and Events. That is the whole staff, and it is deliberate &mdash; a larger office would do worse work than several hundred members on committees.</p>
         <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Vacancies here are rare and are posted on this page alongside member roles rather than in a separate portal. Speculative approaches are read; roles in a body this size tend to get built around the person rather than the other way round.</p>
         <p class="m-0 text-[15px] text-[#3A403C]">Write to <a href="mailto:careers@morecheese.org" class="text-brick underline underline-offset-2">careers@morecheese.org</a> with what you would want to do. The <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="text-brick underline underline-offset-2">about page</a> describes what each role actually covers.</p>
       </div>

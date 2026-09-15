@@ -74,7 +74,7 @@ get_header();
         <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
           <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#9678;</span>
           <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">The organisation directory, your entry, and which inbox to use.</p>
+          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">The organization directory, your entry, and which inbox to use.</p>
           <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
         </a>
     </div>
@@ -102,7 +102,7 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What do membership dues cost, and what decides my tier?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Individual is $170 a year, Creamery $480, Retailer $390 and Affiliate $260. The tier is decided by what your organisation does, not by its size: Creamery if you make cheese, Retailer if you sell it at counter or wholesale, Affiliate if you supply the trade as a supplier, laboratory or distributor, and Individual if the membership is yours rather than an employer&rsquo;s.</p>
+          <p class="m-0 mb-2">Individual is $170 a year, Creamery $480, Retailer $390 and Affiliate $260. The tier is decided by what your organization does, not by its size: Creamery if you make cheese, Retailer if you sell it at counter or wholesale, Affiliate if you supply the trade as a supplier, laboratory or distributor, and Individual if the membership is yours rather than an employer&rsquo;s.</p>
           <p class="m-0">Creamery covers up to 6 staff and Retailer up to 4 under the one membership. <a href="<?php echo esc_url( home_url( '/join/' ) ); ?>" class="text-brick underline underline-offset-2">The full rate card is on the Join page</a>, and the detail is in <a href="<?php echo esc_url( home_url( '/faq/membership-dues/' ) ); ?>" class="text-brick underline underline-offset-2">Membership &amp; dues</a>.</p>
         </div>
       </details>
@@ -121,9 +121,9 @@ get_header();
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Who can use my organisation&rsquo;s membership?</summary>
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Who can use my organization&rsquo;s membership?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0">A Creamery membership covers up to 6 staff and a Retailer membership up to 4. Each covered person gets their own account, their own brief and their own member rate on courses and events; the organisation gets one vote. Adding or swapping a name is a note to Membership Operations, not a new invoice. Affiliate and Individual memberships cover one person each.</p>
+          <p class="m-0">A Creamery membership covers up to 6 staff and a Retailer membership up to 4. Each covered person gets their own account, their own brief and their own member rate on courses and events; the organization gets one vote. Adding or swapping a name is a note to Membership Operations, not a new invoice. Affiliate and Individual memberships cover one person each.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
@@ -136,14 +136,14 @@ get_header();
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Do certifications expire, and do members pay less?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The certificates do not expire. The Certified Cheese Professional credential is reconfirmed every five years, either by sitting the current exam or by logging continuing education from the course catalogue &mdash; most people choose the second.</p>
+          <p class="m-0 mb-2">The certificates do not expire. The Certified Cheese Professional credential is reconfirmed every five years, either by sitting the current exam or by logging continuing education from the course catalog &mdash; most people choose the second.</p>
           <p class="m-0">Every membership tier carries a discount on credential exams from the day you join, and members pay member rates on all 63 courses this year.</p>
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
         <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What happens at the Annual Conference, and is anything online?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The conference runs for three days in October: competition results with the score sheets on the tables, a public review of the six category standards, the member organisation floor, the hands-on sessions, and the governance &mdash; the annual election and the committee reports. Early-bird registration closes 30 September.</p>
+          <p class="m-0 mb-2">The conference runs for three days in October: competition results with the score sheets on the tables, a public review of the six category standards, the member organization floor, the hands-on sessions, and the governance &mdash; the annual election and the committee reports. Early-bird registration closes 30 September.</p>
           <p class="m-0">Plenty is online. The virtual symposium began in 2021 as a stopgap and stayed; webinars and sessions run year-round and recordings live in the members&rsquo; archive. <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="text-brick underline underline-offset-2">See the notice board.</a></p>
         </div>
       </details>
@@ -155,9 +155,9 @@ get_header();
         </div>
       </details>
       <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How does the organisation directory work?</summary>
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How does the organization directory work?</summary>
         <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">All 641 member organisations across 41 countries are listed and searchable by what they do and where they are &mdash; creameries, shops and wholesale buyers, laboratories and distributors. Creamery members also appear in the buyers&rsquo; directory, which is the listing buyers actually shop from.</p>
+          <p class="m-0 mb-2">All 641 member organizations across 41 countries are listed and searchable by what they do and where they are &mdash; creameries, shops and wholesale buyers, laboratories and distributors. Creamery members also appear in the buyers&rsquo; directory, which is the listing buyers actually shop from.</p>
           <p class="m-0">You control your own entry. Ask Membership Operations to correct it, expand it, or take it down.</p>
         </div>
       </details>
@@ -179,7 +179,7 @@ get_header();
   <section class="mx-auto max-w-6xl px-5 py-14 md:px-10">
     <div class="rounded-2xl bg-pasture px-6 py-10 text-center text-white md:px-12">
       <h2 class="font-display m-0 text-[clamp(26px,4vw,40px)] font-extrabold leading-[1] tracking-tight">Still not answered?</h2>
-      <p class="mx-auto mt-3 max-w-[54ch] text-[17px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the enquiry page.</p>
+      <p class="mx-auto mt-3 max-w-[54ch] text-[17px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page.</p>
       <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-6 inline-block rounded-full bg-milk px-7 py-3.5 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
     </div>
   </section>

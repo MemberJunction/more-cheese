@@ -176,7 +176,7 @@ add_filter( 'tiny_mce_plugins', 'terroir_disable_emoji_tinymce' );
  *
  * Global styles (the block preset custom properties) are deliberately left
  * alone. page.php and single.php render whatever the editor produced, and a
- * page added later in wp-admin using a preset colour would lose it.
+ * page added later in wp-admin using a preset color would lose it.
  */
 function terroir_dequeue_block_css() {
 	wp_dequeue_style( 'wp-block-library' );
@@ -286,7 +286,7 @@ function terroir_card_excerpt( $words = 28 ) {
 }
 
 /**
- * The card colourway for position $i in a grid, reproducing the rhythm of the
+ * The card colorway for position $i in a grid, reproducing the rhythm of the
  * hand-built blog index: mostly outlined, with a clover, a pasture and a brick
  * card breaking it up.
  *

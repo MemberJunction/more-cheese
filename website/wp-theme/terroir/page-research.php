@@ -23,7 +23,7 @@ get_header();
       <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[19ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">Arguments settled with data.</h1>
       <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">The Federation publishes for one reason: members kept having the same arguments with no numbers to hand. Four standing reports a year, the journal articles the committees commission, and the Monday brief that carries the week.</p>
       <dl class="mt-8 grid max-w-3xl grid-cols-2 gap-6 nav:grid-cols-4">
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Produced globally</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">22.6M<span class="block text-xs font-semibold text-mid">tonnes a year</span></dd></div>
+        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Produced globally</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">22.6M<span class="block text-xs font-semibold text-mid">metric tons a year</span></dd></div>
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Market value</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">$98B<span class="block text-xs font-semibold text-mid">at wholesale</span></dd></div>
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Annual growth</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">3.2%<span class="block text-xs font-semibold text-mid">five-year mean</span></dd></div>
         <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Crosses a border</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">1 in 4<span class="block text-xs font-semibold text-mid">wheels made</span></dd></div>
@@ -40,7 +40,7 @@ get_header();
       <article class="flex flex-col rounded-2xl bg-pasture p-6 text-white">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Market &middot; published January</p>
         <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Global production and consumption</h3>
-        <p class="m-0 mt-3 flex-1 text-[15px] opacity-95">Where the 22.6 million tonnes are made and where they are eaten, by category and by region, with a ten-year projection. The section members read first is the one on which styles are growing in markets that did not previously buy them &mdash; the answer has changed three years running.</p>
+        <p class="m-0 mt-3 flex-1 text-[15px] opacity-95">Where the 22.6 million metric tons are made and where they are eaten, by category and by region, with a ten-year projection. The section members read first is the one on which styles are growing in markets that did not previously buy them &mdash; the answer has changed three years running.</p>
         <p class="m-0 mt-4 text-[13px] text-clover">Members: in the archive on publication. Non-members: <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-white underline underline-offset-2">request a copy</a>.</p>
       </article>
 
@@ -48,13 +48,13 @@ get_header();
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Trade &middot; published April</p>
         <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Export and trade barriers</h3>
         <p class="m-0 mt-3 flex-1 text-[15px] text-[#3A403C]">Tariff structures, the non-tariff barriers that cost more than tariffs, sanitary requirements, and what trade agreements have actually done to member shipments as opposed to what they were said they would do. Written for a maker deciding whether an export line is worth the paperwork.</p>
-        <p class="m-0 mt-4 text-[13px] text-mid">Feeds the <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-brick underline underline-offset-2">advocacy programme</a> directly.</p>
+        <p class="m-0 mt-4 text-[13px] text-mid">Feeds the <a href="<?php echo esc_url( home_url( '/advocacy/' ) ); ?>" class="text-brick underline underline-offset-2">advocacy program</a> directly.</p>
       </article>
 
       <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
         <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Regulatory &middot; published July</p>
         <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Regulatory frameworks by region</h3>
-        <p class="m-0 mt-3 flex-1 text-[15px] text-[#3A403C]">A comparative read of food safety rules, labelling requirements and certification standards across the regions members work in, with the divergences called out rather than averaged away. Raw-milk rules get their own chapter because they generate more member questions than everything else combined.</p>
+        <p class="m-0 mt-3 flex-1 text-[15px] text-[#3A403C]">A comparative read of food safety rules, labeling requirements and certification standards across the regions members work in, with the divergences called out rather than averaged away. Raw-milk rules get their own chapter because they generate more member questions than everything else combined.</p>
         <p class="m-0 mt-4 text-[13px] text-mid">Maintained with the Food Safety and Advocacy committees.</p>
       </article>
 
