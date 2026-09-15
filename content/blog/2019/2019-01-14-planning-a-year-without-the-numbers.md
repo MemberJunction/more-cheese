@@ -51,18 +51,18 @@ that no agency can fail to publish.
 
 ## The new safety net exists, on paper
 
-The farm bill signed just before Christmas replaced the old margin protection programme for dairy
-with a new margin coverage programme, and the terms are meaningfully better for small producers.
+The farm bill signed just before Christmas replaced the old margin protection program for dairy
+with a new margin coverage program, and the terms are meaningfully better for small producers.
 Coverage now runs from 5% to 95% of production history rather than 25% to 90%. The top coverage
 level for the first tier moves up to $9.50 per hundredweight, first-tier premiums come down, and a
 producer can elect different coverage on the two tiers rather than one setting for the whole herd.
 Production history is still built from the best of 2011–2013, updated forward.
 
 The catch is administrative rather than legislative. The offices where a producer would actually
-sign up are part of what is closed, and loan closings and programme applications are stacked up
+sign up are part of what is closed, and loan closings and program applications are stacked up
 behind the same door. So we are not going to tell you a sign-up date, because we do not have one.
 What we will say is that when it opens it will likely be a short window with a queue in front of
-it. Members who expect to enrol should be pulling their production records together now, while
+it. Members who expect to enroll should be pulling their production records together now, while
 January is quiet, rather than in whatever week the announcement lands.
 
 For members outside the United States, the transferable lesson is the boring one we keep

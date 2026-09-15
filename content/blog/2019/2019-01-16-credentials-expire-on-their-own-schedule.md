@@ -51,7 +51,7 @@ handling food to have training appropriate to what they are doing.
 
 Now the plain part, without the collegial tone: **a credential is not compliance.** Holding our
 certificate does not make your plan adequate, does not tell you whether your operation is covered
-by a given rule, and is not a defence to anybody. We teach the material. Whether your facility
+by a given rule, and is not a defense to anybody. We teach the material. Whether your facility
 meets a requirement is between you, the rule as written, and whoever inspects you. Members who
 want that assessed should be paying someone qualified to assess it.
 

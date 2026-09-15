@@ -240,6 +240,10 @@ function checkBlog(file, text, ctx) {
         if (prev !== '---') fails.push('the disclaimer must be preceded by a `---` rule');
     }
     const bodyNoDisc = lines.slice(0, -1).join('\n').replace(/\n---\s*$/, '');
+    // US English only (PM feedback 2026-09-15): warn on common British spellings in title, excerpt and body.
+    const BRITISH = /\b(organis(e|es|ed|ing|ation|ations)|programmes?|labell(ing|ed)|centres?|colours?|favourites?|favour|licences?|catalogues?|behaviours?|recognis(e|es|ed|ing|ably)|specialis(e|es|ed|ing)|analys(e|es|ed|ing)|cheques?|flavours?|honours?|travell(ing|ed|ers?)|enrol|enrolments?|whilst|amongst|learnt|practise|judgement|ageing|neighbours?|neighbourhood|grey|moulds?|moulded|pasteuris(e|ed)|unpasteurised|standardis(e|ed)|optimis(e|ed)|prioritis(e|ed)|minimis(e|ed)|maximis(e|ed)|realis(e|ed)|utilis(e|ed)|summaris(e|ed)|emphasis(e|ed)|apologis(e|ed)|jewellery|fulfil|fulfilment|instalments?|skilful|defence|offence|metres?|litres?|kilometres?|artefacts?|aluminium|sulphur|savoury|enquir(y|ies)|anonymis(e|ed)|modell(ed|ing)|millimetres?|tonnes?|afterwards|towards|onwards)\b/gi;
+    const brit = new Set((`${f.title ?? ''} ${f.excerpt ?? ''} ${bodyNoDisc}`.match(BRITISH) || []).map((w) => w.toLowerCase()));
+    if (brit.size) warns.push(`British spelling (use US English): ${[...brit].slice(0, 8).join(', ')}`);
     const wc = words(bodyNoDisc);
     if (wc < 500 || wc > 900) fails.push(`body is ${wc} words (required 500–900)`);
     else info.push(`${wc} words`);

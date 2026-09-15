@@ -17,7 +17,7 @@ research_sources:
   - https://www.dol.gov/sites/dolgov/files/ETA/apprenticeship/pdfs/Bulletin_2019-53_New-NPS-USDA-FSIS.doc
 ---
 
-If you've been putting off a decision about bringing on your first apprentice, this Thursday's webinar, "Apprenticeship Programmes 2019," is built for exactly that stage of the question. It's free, it's virtual, and it runs about an hour with time at the end for members to ask about their own situation.
+If you've been putting off a decision about bringing on your first apprentice, this Thursday's webinar, "Apprenticeship Programs 2019," is built for exactly that stage of the question. It's free, it's virtual, and it runs about an hour with time at the end for members to ask about their own situation.
 
 We've heard the same hesitation from a lot of small producers over the past year: an apprentice sounds useful in theory, but nobody's sure what a program is actually supposed to include beyond "someone follows you around the make room." Thursday's session walks through what other member creameries have used successfully — a written learning plan, a rough timeline for what an apprentice should be doing at three months versus nine, and who on your team needs to sign off on progress. None of it requires a formal registered-apprenticeship filing to be useful; several members run an informal version of the same structure and have found it cuts down on the "wait, what am I supposed to be teaching them today" problem in the first few weeks.
 

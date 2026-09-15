@@ -32,7 +32,7 @@ hit=[l for l in sys.stdin.read().split() if len(l)>=10 and l[:10]>=wk.isoformat(
 sys.exit(0 if hit else 1)"; then
     echo -e "$wk\tskipped\texisting\t0" >> "$LOGDIR/results.tsv"; return
   fi
-  PROMPT="Use the morecheese-weekly-blog skill. Generate the ICF weekly blog for the week of Monday $wk.
+  PROMPT="Use the morecheese-weekly-blog skill. Generate the ICF weekly blog for the week of Monday $wk. Write in US English spelling (organization, program, labeling, color, aging, center); never British spellings.
 When the three files are written, run from the repo root: node scripts/validate-content.mjs --week $wk
 Fix every FAIL and every ⚠ warning it prints (thin or undated research, homepage sources, copied source lists, real organisations named, missing member voice) and re-run until the output shows no FAIL and no ⚠. If you must discard a draft, remove it with rm (only under content/blog/). Before choosing topics, read the titles of every post already in content/blog/ within four weeks of this one and do not repeat a theme or re-spotlight the same hero; a hero may only appear after their JoinDate in generated/member-profiles. Do not edit posts from other weeks. Do not run git. Finish with the skill's §8 completion checklist."
   start=$(date +%s)

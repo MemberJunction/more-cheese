@@ -39,7 +39,7 @@ room will give you two different cheeses off the same make day, and by the time 
 which is which you have lost weeks.
 
 The rest of the practice is physical and stubbornly unautomatable. Wheels get brushed to knock
-back surface mould and spread the useful flora evenly. Heavy wheels get turned by hand every few
+back surface mold and spread the useful flora evenly. Heavy wheels get turned by hand every few
 days so moisture does not settle on one face and pull the shape out of true. He keeps a
 handwritten log per batch — temperature, humidity, what he did, what the rind looked like — and
 was mildly appalled that we asked whether it was digitised.
@@ -49,7 +49,7 @@ better than it should be, I can find out what I did."
 
 He is also clear that his flora are not portable. The native population in a Jura room is not the
 population in an alpine room two valleys away, which is why two cheeses made to nearly the same
-recipe come out as recognisably different things. It is a good corrective to the idea that
+recipe come out as recognizably different things. It is a good corrective to the idea that
 affinage is a set of settings you can copy off a spreadsheet.
 
 ## Why he joined, and what he wants from us
@@ -57,7 +57,7 @@ affinage is a set of settings you can copy off a spreadsheet.
 Two reasons, both practical.
 
 The first is standards. He deals with buyers who ask him to put a maturation claim on a label and
-then cannot tell him what the claim has to be able to survive. Aging and labelling standards are
+then cannot tell him what the claim has to be able to survive. Aging and labeling standards are
 squarely the Standards Committee's territory, and he has asked to be put in front of whoever will
 listen. We have connected him.
 
@@ -68,7 +68,7 @@ options in a decade — the near-30% duty on hard cheese begins a long phased wa
 customer," he said. "But it is a reason to go and look for one."
 
 He will not be a fixture at our regional workshops, and he is upfront about it: the Jura is a long
-way from most of our programme, and he intends to fly over once a year rather than pretend
+way from most of our program, and he intends to fly over once a year rather than pretend
 otherwise. This year that trip is the Annual Conference in Madison in July, and he has said he is
 happy to talk to anyone who wants to corner him about maturation rooms — which, given how many of
 you are currently trying to make a converted shipping container behave, may be a queue.

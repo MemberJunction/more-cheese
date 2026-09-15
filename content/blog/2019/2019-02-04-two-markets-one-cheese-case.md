@@ -28,7 +28,7 @@ better and the constraint is supply.
 
 Both are accurate. They are just describing different industries that happen to share a word.
 
-## The numbers our members recognise
+## The numbers our members recognize
 
 A survey of the US artisan and specialty sector published last month is the clearest picture
 anyone has had in a while, and the shape of it will be familiar to most of you. The sector has
@@ -69,11 +69,11 @@ written to us about exactly that, and it is now firmly on the agenda for the fed
 work this year.
 
 We are not going to pretend a trade agreement is a level playing field for a farmstead operation
-making eight styles by hand. Export readiness is a real threshold: documentation, labelling,
+making eight styles by hand. Export readiness is a real threshold: documentation, labeling,
 cold-chain evidence, a buyer who will hold a slot. What we can do is lower the cost of finding out
 whether you are close to it. Members thinking about a first export conversation should look at
-*Export Documentation Essentials* in the course catalogue, and the Standards Committee is a
-sensible first stop on labelling questions before you commit to artwork.
+*Export Documentation Essentials* in the course catalog, and the Standards Committee is a
+sensible first stop on labeling questions before you commit to artwork.
 
 ## What we're doing about it
 
@@ -83,7 +83,7 @@ much use when you are the one deciding whether to add a second make day. The Edu
 is reviewing whether *Pricing & Margin for Specialty Cheese* is pitched at the right size of
 business — early feedback says it assumes a slightly larger operation than most of you run. And
 we will keep saying, in every room that will have us, that "dairy" and "specialty cheese" are not
-interchangeable words when rules and support programmes get written.
+interchangeable words when rules and support programs get written.
 
 If your own numbers for last year look nothing like the survey's, we would genuinely like to hear
 it. Both directions.

@@ -41,7 +41,7 @@ who attended represent a 93 per cent show rate and an increase of 61 attendees o
 conference in Louisville, Kentucky. The federation now has just under 1,000 members holding an
 active membership period.
 
-The 2024 competition drew 65 entries from 47 member organisations across all six categories:
+The 2024 competition drew 65 entries from 47 member organizations across all six categories:
 Soft-Ripened, Alpine Styles, Aged Cheddar & Territorials, Washed Rind, Blue Veined, and Fresh &
 Pasta Filata. Thirteen medals were awarded — two Gold, five Silver and six Bronze.
 
@@ -53,17 +53,17 @@ Ivywick Blue from Foxcombe Cheesemaking Supply. Soft-Ripened was the largest fie
 the federation's Events Director. "A competition is only as good as the number of people willing to
 put a wheel on the table, and this year a lot more of them were."
 
-The federation's education programme continues through the year with webinars on regenerative
+The federation's education program continues through the year with webinars on regenerative
 dairy practice, digital storefronts, farm shop design, and water activity and shelf life, alongside
 in-person workshops. Conference registration is $450 and workshop registration is $150. Full
-results by category, and dates for the 2025 programme, are published on the federation's website.
+results by category, and dates for the 2025 program, are published on the federation's website.
 
 ### About the International Cheese Federation
 
 The International Cheese Federation is a membership association for cheesemakers, affineurs,
 cheesemongers, distributors, educators and enthusiasts. It runs an annual conference, a workshop
-and webinar programme, a course and credential ladder, an annual competition across six categories,
-and an advocacy programme directed by its members through six standing committees.
+and webinar program, a course and credential ladder, an annual competition across six categories,
+and an advocacy program directed by its members through six standing committees.
 
 ### Media contact
 

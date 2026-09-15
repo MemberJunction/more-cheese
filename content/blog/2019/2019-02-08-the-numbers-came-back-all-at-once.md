@@ -44,9 +44,9 @@ the federation will keep making, and it is not a partisan one: agricultural stat
 infrastructure. They should be funded and published the way a road is maintained, whatever else is
 happening.
 
-The second piece of this is programme timing. The new farm bill authorised a redesigned dairy
-safety net late last year, and the funding lapse arrived almost immediately afterwards. Members
-who need that programme are being asked to make coverage decisions for a year that is already
+The second piece of this is program timing. The new farm bill authorised a redesigned dairy
+safety net late last year, and the funding lapse arrived almost immediately afterward. Members
+who need that program are being asked to make coverage decisions for a year that is already
 five weeks old, against sign-up dates that have not yet been announced. We have asked, in writing,
 for two things: that sign-up dates be published as early as possible even if they are far out, and
 that the eligibility window be written so that nobody is penalised for the weeks when the offices

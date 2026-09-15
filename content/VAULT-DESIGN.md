@@ -48,10 +48,10 @@ Two consumers, and they are why the vault has two halves:
    generated into `vault/` and pushed to Dropbox; git tracks it, but Dropbox is the demo's runtime
    source and can be re-seeded.
 
-### 1.2 One organisation, two records
+### 1.2 One organization, two records
 
 The single most important property of the vault: **for any given week, the public and internal
-artifacts must read as the same organisation.** If the blog on 2019-02-08 says federal data
+artifacts must read as the same organization.** If the blog on 2019-02-08 says federal data
 landed in a heap, the internal memo from 2019-02-04 should show someone planning for it, and the
 Thursday email thread should show the comms lead asking membership ops for a number that ends up
 in the post. That coherence is what makes a Knowledge Hub demo feel real, and it is the reason
@@ -292,7 +292,7 @@ multipliers are not decoration — they are the plot.
 | `era-pandemic-shock-2020` | 2020 | Event cancellations, emergency member support, online course pivot. Press releases announce postponement, then virtual replacement. Annual report leads with the `EventRegistration ×0.15` collapse and the `CourseEnrollment ×1.85` surge. | The most interesting internal year. Cancellation decision memos, refund-policy threads, a scramble deck, a revenue-hole spreadsheet. This is where the Knowledge Hub demo should point. |
 | `era-virtual-pivot-2021` | 2021 | Virtual symposium recaps, online credential launches, retention wins among small creameries (`EventRegistration ×0.45`, `CourseEnrollment ×1.5`). | Platform-selection memo, virtual-event policy, "are we going back in person" thread. |
 | `era-artisan-boom-2022-2024` | 2022-24 | Busy and optimistic. In-person conference returns, competition entries climb, sponsorship holds. Three annual reports of real growth. | Capacity strain: staffing memo, venue-contract thread, a QBR deck with a hiring ask. |
-| `era-creamery-closures-2025` | 2025 | Sober and practical. Cost-inflation coverage, hardship-dues framing, closure support. | Hardship-programme design memo, a lapse-risk spreadsheet, a board packet that is mostly bad news handled well. |
+| `era-creamery-closures-2025` | 2025 | Sober and practical. Cost-inflation coverage, hardship-dues framing, closure support. | Hardship-program design memo, a lapse-risk spreadsheet, a board packet that is mostly bad news handled well. |
 
 **Rule:** an artifact's tone must match its `era`. A 2020 press release that reads like 2019 is a
 defect. The skills check `era` against `eras.json` and must refuse a cycle outside 2019-2025.
@@ -359,9 +359,9 @@ Certificate; Advanced Affinage Certificate; Competition Judge Accreditation.
 
 **Competitions** — six categories: Soft-Ripened, Alpine Styles, Aged Cheddar & Territorials,
 Fresh & Pasta Filata, Washed Rind, Blue Veined. Results are `Gold | Silver | Bronze | None`.
-Product and organisation names come from the entry rows, never invented.
+Product and organization names come from the entry rows, never invented.
 
-**Organisations** — `data/banks/organizations.json` and `generated/organizations` only.
+**Organizations** — `data/banks/organizations.json` and `generated/organizations` only.
 
 ### 4.4 Weekly coherence contract
 
@@ -426,7 +426,7 @@ Notes for the approval decision:
 
 ---
 
-## 6. Fiction labelling standard
+## 6. Fiction labeling standard
 
 ### 6.1 Public artifacts — the verbatim disclaimer
 
@@ -439,7 +439,7 @@ the final line of the file:
 
 Do not reword, shorten, or relocate it. It says "This post" even in an annual report; that is
 deliberate — the instruction is verbatim reuse of the blog skill's paragraph so that a single grep
-finds every labelled artifact in the corpus. See §9, decision 2, if a per-type variant is wanted.
+finds every labeled artifact in the corpus. See §9, decision 2, if a per-type variant is wanted.
 
 ### 6.2 Internal artifacts — the header line
 
@@ -467,7 +467,7 @@ after the rendered header block, before the message body.
 ## 7. The do-not list
 
 1. **No real brands or companies as actors.** Not as buyers, sellers, sponsors, venues, vendors,
-   platforms, or examples. Organisation names come from `data/banks/organizations.json` and
+   platforms, or examples. Organization names come from `data/banks/organizations.json` and
    `generated/organizations`. (A real *city* as an event location is fine — the events data
    already uses Madison, Louisville, Des Moines, Petaluma, Hobart, Querétaro, Guelph.)
 2. **No real people.** No executives, legislators, scientists, journalists, cheesemakers, or
@@ -491,7 +491,7 @@ after the rendered header block, before the message body.
    quote $175 as the list price and treat $145 as an internal open question, not a published
    figure.) Blog posts keep their existing stricter rule: no prices at all.
 7. **No invented world-model objects.** No new committees, events, courses, certifications,
-   competition categories, eras, motifs, ladders, heroes, or member organisations. If a piece needs
+   competition categories, eras, motifs, ladders, heroes, or member organizations. If a piece needs
    one that does not exist, change the piece or report the gap.
 8. **No heroes out of period, and no contradiction of an arc** (§4.3).
 9. **No named ICF staff** until §5.2 is approved.
@@ -522,7 +522,7 @@ Rules of practice:
    Annual reports therefore report **revenue by line, cash collected, and receivable balance** and
    explicitly say the figures are unaudited operating revenue. **Never invent an expense number,
    a surplus, a reserve, or a headcount cost.**
-6. **Internal preliminary figures must be labelled.** An internal doc may show a number that later
+6. **Internal preliminary figures must be labeled.** An internal doc may show a number that later
    changes, but must say it is preliminary and be dated before the final.
 7. **Fiscal year == calendar year.** Every membership period in the data runs Jan 1 - Dec 31.
 8. **The 2019-01-01 baseline is a data artifact — never narrate it as fact.** Billing and
@@ -553,7 +553,7 @@ FY2023 detail, all from Appendix A: 924 active periods · tier mix 655 Individua
 SmallBusiness / 80 Enthusiast / 41 Corporate · 271 first-time members · 814 Renewed, 84 Lapsed,
 26 Cancelled (88.1% renewal) · $209,774 dues billed · 13 events, 2,244 registrations, 1,535
 attended · Annual Conference 2023 (Louisville, KY, 2023-07-25) 298 registered / 276 attended ·
-8 course instances, 506 enrolments, 257 completions · 12 certification enrolments, 2 awards ·
+8 course instances, 506 enrollments, 257 completions · 12 certification enrollments, 2 awards ·
 47 competition entries across 6 categories · 88 advocacy actions · 24 committee meetings ·
 $490,358 gross orders, $479,915 applied, $462,776 captured payments.
 
@@ -669,14 +669,14 @@ console.log({
 });
 ```
 
-### A.6 Education: courses, enrolments, completions, credentials
+### A.6 Education: courses, enrollments, completions, credentials
 
 ```js
 const co = load('courses'), en = load('enrollments'), mc = load('member-certifications'), ce = load('certifications');
 const certName = Object.fromEntries(ce.map(c => [c.id, c.Name]));
 console.log({
   courseInstances: co.filter(c => c.StartDate.startsWith(String(YEAR))).length,
-  enrolments: en.filter(e => e.EnrolledOn.startsWith(String(YEAR))).length,
+  enrollments: en.filter(e => e.EnrolledOn.startsWith(String(YEAR))).length,
   completions: en.filter(e => e.CompletedOn && e.CompletedOn.startsWith(String(YEAR))).length,
   certEnrolments: mc.filter(m => m.EnrolledOn && m.EnrolledOn.startsWith(String(YEAR))).length,
   awarded: mc.filter(m => m.AwardedOn && m.AwardedOn.startsWith(String(YEAR))).map(m => certName[m.CertificationID])

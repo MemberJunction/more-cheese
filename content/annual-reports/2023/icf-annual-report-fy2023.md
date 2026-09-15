@@ -55,7 +55,7 @@ The headline is straightforward: the federation ended 2023 with 924 members hold
 membership period, up from 661 at the end of 2022. Two hundred and seventy-one of those members
 joined us for the first time. Growth of that size in a single year changes an association whether
 it wants to be changed or not, and much of this report is an honest accounting of what it changed —
-the programme calendar, the competition, the committee workload, and the small operational seams
+the program calendar, the competition, the committee workload, and the small operational seams
 that a smaller federation could get away with ignoring.
 
 What did not change is where the work actually happens. It happens in a make room at five in the
@@ -102,33 +102,33 @@ attendance rate of about 68 per cent. Webinar no-shows account for most of the g
 normal and which we would rather have than a smaller registration number.
 
 The ICF Annual Conference 2023 ran on 25 July in Louisville, Kentucky. Two hundred and ninety-eight
-members registered and 276 attended. The workshop programme ranged more widely than usual —
+members registered and 276 attended. The workshop program ranged more widely than usual —
 Alpine styles in Greensboro in February, competition preparation in Guelph in June, sensory work in
 Chicago in October, bloomy rinds in Burlington in November, and a second competition-preparation
 session in Green Bay in December. Running workshops in five locations across two countries is more
 than we have attempted before. The two competition-preparation sessions, in June and December, took
 160 and 148 registrations respectively.
 
-The webinar track carried the topics that members ask about between events: allergen labelling,
+The webinar track carried the topics that members ask about between events: allergen labeling,
 export paperwork, small-room affinage, rennet alternatives, packaging sustainability, and Listeria
 control. Listeria control drew the largest webinar registration of the year at 191, with packaging
 sustainability just behind at 188 — against a webinar average of 169.
 
 Eight course instances began during 2023: Listeria Control in Small Creameries, Cut & Wrap
 Fundamentals, Advanced Sensory Evaluation, Blue Cheese Production, Cheese Chemistry, Milk Quality &
-Herd Health, Rind Development & Washing, and Cave Management. Those courses took 506 enrolments
+Herd Health, Rind Development & Washing, and Cave Management. Those courses took 506 enrollments
 during the year, of which 360 have since been completed; 257 course completions were recorded
 during 2023 itself, some of them by members who had enrolled the previous year.
 
 Credentialing moved more slowly, and we are not going to dress that up. Twelve members enrolled in
 a certification pathway during 2023 and two credentials were awarded, both Sensory Evaluation
 Certificates. Thirteen members held an unexpired credential at year end across the federation's
-seven certifications. Our credential ladder is the part of the programme that has not yet caught up
+seven certifications. Our credential ladder is the part of the program that has not yet caught up
 with the growth in membership, and the Education Committee has it as a standing item.
 
 ## Competitions
 
-The 2023 competition drew 47 entries from 31 member organisations across all six categories: Blue
+The 2023 competition drew 47 entries from 31 member organizations across all six categories: Blue
 Veined (12 entries), Alpine Styles (10), Soft-Ripened (8), Fresh & Pasta Filata (7), Washed Rind
 (5), and Aged Cheddar & Territorials (5). Fourteen medals were awarded.
 
@@ -210,7 +210,7 @@ its dues revenue is an association with a concentrated risk, as we learned expen
 
 The remaining five per cent comes from publications, credentials, competition entries, merchandise
 and donations. Certification exam fees at $4,704 reflect the credential volume described above:
-real, but not yet a programme of scale.
+real, but not yet a program of scale.
 
 Prices were unchanged in 2023. Membership runs from $150 for the Enthusiast tier to $1,000 for
 Corporate; conference registration is $450, workshop registration $150, a certification exam $425,
@@ -219,14 +219,14 @@ and a competition entry $65 per cheese.
 ## Looking ahead
 
 The ICF Annual Conference 2024 is scheduled for 16 July in Des Moines, Iowa, and on current
-registration behaviour we expect it to be larger than Louisville. We would rather book a room that
+registration behavior we expect it to be larger than Louisville. We would rather book a room that
 is slightly too big than repeat 2023's cheerful scramble.
 
 Three priorities carry into 2024. The first is credentialing: the gap between 924 members and 13
-current credential holders is the clearest programme gap in this report, and closing it means
+current credential holders is the clearest program gap in this report, and closing it means
 making the pathway easier to start rather than making the credential easier to earn. The second is
 the event revenue concentration described in the financial summary — not by holding fewer events,
-but by growing the parts of the programme that do not depend on a room. The third is the
+but by growing the parts of the program that do not depend on a room. The third is the
 record-keeping question behind the 84 lapses, which is a data problem before it is a retention
 problem.
 
@@ -240,8 +240,8 @@ Thank you for a genuinely good year.
 
 The International Cheese Federation is a membership association for cheesemakers, affineurs,
 cheesemongers, distributors, educators and enthusiasts. It runs an annual conference, a workshop
-and webinar programme, a course and credential ladder, an annual competition across six categories,
-and an advocacy programme directed by its members through six standing committees.
+and webinar program, a course and credential ladder, an annual competition across six categories,
+and an advocacy program directed by its members through six standing committees.
 
 ---
 
