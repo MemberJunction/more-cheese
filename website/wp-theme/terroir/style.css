@@ -1,0 +1,19 @@
+/*
+Theme Name: Terroir — More Cheese
+Theme URI: https://morecheese.org/
+Author: International Cheese Federation (demonstration content for MemberJunction)
+Description: The Terroir theme for More Cheese, the demonstration site of the fictional International Cheese Federation. Static-first: Tailwind from the play CDN with an inline config, a small custom CSS layer and vanilla JavaScript — no build step, no bundler, no framework. One template per page, selected by slug, so no template assignment is needed in wp-admin.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 7.4
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: terroir
+Tags: one-column, custom-menu, full-width-template, block-styles
+*/
+
+/* The real stylesheet is assets/site.css, enqueued by functions.php. This file
+   exists for the theme header above; WordPress requires it and reads it, but the
+   theme does not load it as a stylesheet. Palette changes live in the
+   tailwind.config block in functions.php. */
