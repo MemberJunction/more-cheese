@@ -1,0 +1,60 @@
+name: Publish public website
+
+# The More Cheese public site (website/) is a static build deployed to an Azure
+# Static Web App. It follows the same release model as everything else in this
+# repo — feature branch → next → a "Release vX.Y.Z" PR into main — so the site
+# goes live at the moment the release PR merges, and never from `next`.
+#
+# This is deliberately separate from publish.yml: that workflow versions and
+# publishes the npm packages and must not be coupled to a copy change on the
+# marketing site, and this one must not wait 30 minutes behind a package build.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - 'content/blog/**'
+      - 'scripts/build-site.mjs'
+      - '.github/workflows/publish-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: 'publish-site'
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+
+      # The repo is an npm workspace (package-lock.json, packageManager npm@10),
+      # matching publish.yml. The build only needs marked and js-yaml, both of
+      # which are root devDependencies.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the static site
+        run: node scripts/build-site.mjs
+
+      # Uploads website/dist as-is. skip_app_build is what stops Oryx from trying
+      # to detect and build a framework it would not find: the build already ran.
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: upload
+          app_location: website/dist
+          skip_app_build: true
+          output_location: ''

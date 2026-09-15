@@ -14,6 +14,7 @@
     "build:stream": "turbo --log-order=stream build",
     "build:packages": "turbo --log-order=stream build --filter=\"@mj-more-cheese-demo/*\"",
     "generate": "node scripts/generate.mjs",
+    "build:site": "node scripts/build-site.mjs",
     "check:ownership": "node scripts/check-ownership.mjs",
     "test": "turbo --log-order=stream test --filter=\"@mj-more-cheese-demo/*\"",
     "validate:loom": "node scripts/validate-loom-data.mjs",
