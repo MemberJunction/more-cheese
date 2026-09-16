@@ -1,0 +1,23 @@
+{
+  "$comment": "Primary keys deliberately removed from config/ or generated/. scripts/check-metadata-closure.mjs base-delta audit skips these; every entry needs a reason.",
+  "removals": [
+    {
+      "id": "0199FC9E-1468-57FC-8A4E-EF1131DA76EB",
+      "directory": "users",
+      "removed": "2026-09-16",
+      "reason": "Owned by the skip-client Open App (Skip Service Account user and its role grants); it creates them on install, so More Cheese config must not seed them. Pulled into config by mistake on 2026-09-13."
+    },
+    {
+      "id": "60022E69-E534-4AE6-B399-814B36F721A3",
+      "directory": "user-roles",
+      "removed": "2026-09-16",
+      "reason": "Owned by the skip-client Open App (Skip Service Account user and its role grants); it creates them on install, so More Cheese config must not seed them. Pulled into config by mistake on 2026-09-13."
+    },
+    {
+      "id": "65BC9077-D7B9-49BE-B610-90CA037217DC",
+      "directory": "user-roles",
+      "removed": "2026-09-16",
+      "reason": "Owned by the skip-client Open App (Skip Service Account user and its role grants); it creates them on install, so More Cheese config must not seed them. Pulled into config by mistake on 2026-09-13."
+    }
+  ]
+}
