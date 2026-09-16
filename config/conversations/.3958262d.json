@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Member Lifetime Value by Join Year",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Calculate the average lifetime value (total revenue generated) for members grouped by the year they joined, and show how this has changed over time in a chart. When I click on a year, show me a pie chart breaking down revenue by type (membership fees, events, courses). Then let me click a pie slice to see the actual members and transactions. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "73F5E33B-ED46-4F10-800C-B1ACDAD4F86D"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Member Cohort LTV & Revenue Analytics dashboard is ready, bringing together data from Member Profiles, Orders, and Products. It features an interactive bar chart tracking average lifetime value across join cohorts, a dynamic donut chart breaking down revenue by product category when you select a year, and a detailed transaction ledger for exploring individual purchases. You can also click directly on any member or order number to inspect their full records, or export the ledger to CSV, Excel, or PDF.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "92306ABC-5C34-4E29-8B58-71E592ACDB23"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "3958262D-5C2F-4EE7-9C33-3EC7D293433B"
+    }
+  }
+]

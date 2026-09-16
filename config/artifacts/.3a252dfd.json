@@ -1,0 +1,36 @@
+{
+  "fields": {
+    "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+    "Name": "Upcoming Events",
+    "Description": "Payload returned by Skip",
+    "TypeID": "@lookup:MJ: Artifact Types.Name=Component",
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "Visibility": "Always",
+    "SkipEmbeddings": true
+  },
+  "relatedEntities": {
+    "MJ: Artifact Versions": [
+      {
+        "fields": {
+          "ArtifactID": "@parent:ID",
+          "VersionNumber": 1,
+          "Content": "{\n  \"name\": \"UpcomingEventsSchedule\",\n  \"title\": \"Upcoming Events\",\n  \"description\": \"Interactive tabular schedule displaying upcoming conferences, workshops, and webinars within configurable rolling date horizons, featuring instant search, categorical filtering, and direct entity drill-down.\",\n  \"type\": \"table\",\n  \"location\": \"registry\",\n  \"registry\": \"Skip\",\n  \"namespace\": \"operations/schedules/alt-1\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": [\n    {\n      \"name\": \"EventFilterToolbar\",\n      \"title\": \"Event Filter Toolbar\",\n      \"description\": \"Interactive control header featuring keyword search, event type dropdown selector, date horizon preset selector, and custom date range picker.\",\n      \"type\": \"form\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/filters\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"DataGrid\",\n      \"title\": \"Data Grid\",\n      \"description\": \"Flexible data grid component with its own simplified API. Accepts **data via props** (you manage data loading). Supports sorting, filtering, paging, row selection. Optional native record opening on row click (provide entityName + entityPrimaryKeys). Two column modes: simple (string array `['Name', 'Price']`) or advanced (ColumnDef objects: `{field, header, render, width, sortable}`). Metadata-aware formatting: dates (locale with time), booleans (Yes/No), value lists (colored tags with 50+ status colors), money ($USD), decimals, integers (commas). Long text handling: truncate (ellipsis), expand (click 'show more/less'), tooltip (hover), wrap (word-break), none.\\n\\n#### DataGrid - ONLY use when:\\n✅ You already have the data (from your own RunView call, aggregated query, joined tables, API response, etc.)\\n✅ You need custom data manipulation before display (filtering, transformation, merging multiple sources)\\n✅ You need full control over the data loading logic\\n✅ Displaying 2+ records in a list/table format\\n✅ Works with any array of objects (not just entity records)\\n\\n❌ DO NOT USE DataGrid when:\\n- You want automatic entity record loading → **Use EntityDataGrid instead** (it calls RunView for you)\\n- Displaying a single record → **Use SingleRecordView instead**\\n- Need data visualization → **Use SimpleChart or SimpleDrilldownChart instead**\\n- Need automatic caching and pagination logic → **Use EntityDataGrid instead**\\n\\n**Key difference from EntityDataGrid**: DataGrid is data-agnostic and passive (you pass data in). EntityDataGrid is entity-aware and active (it loads data via RunView). Choose DataGrid when you need control over data loading, EntityDataGrid for automatic entity record loading with smart caching.\\n\\n**Row keys**: DataGrid assigns each row's React key using this priority: `row.key` → `entityPrimaryKeys` (joined with `_`) → `row.ID` → `row.id` → `index`. When `entityPrimaryKeys` is provided, the primary key fields are used to build a unique key per row. For client-side joins where the output `ID` may not be unique, provide `entityPrimaryKeys` pointing to the field(s) that uniquely identify each row.\\n\",\n      \"type\": \"table\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"Generic/UI/Table\",\n      \"version\": \"1.0.0\"\n    }\n  ]\n}",
+          "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+          "ContentHash": "19ce148bec3da17d6e744ec9ea7d1d914f8f6b3256c5b8a74ab72c39131edcb2",
+          "Name": "Upcoming Events",
+          "Description": "Interactive tabular schedule displaying upcoming conferences, workshops, and webinars within configurable rolling date horizons, featuring instant search, categorical filtering, and direct entity drill-down.",
+          "ContentMode": "Text",
+          "ContentSizeBytes": "3268",
+          "ForceToolsOnly": false,
+          "SkipEmbeddings": true
+        },
+        "primaryKey": {
+          "ID": "C3CAC88C-4386-4C1A-A807-312858AECDCA"
+        }
+      }
+    ]
+  },
+  "primaryKey": {
+    "ID": "3A252DFD-F112-44F3-849D-6F7D9FFC7C36"
+  }
+}

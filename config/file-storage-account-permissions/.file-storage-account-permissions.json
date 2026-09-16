@@ -1,0 +1,26 @@
+[
+  {
+    "primaryKey": {
+      "ID": "79A45295-2080-56FD-93A4-D995CA5382E7"
+    },
+    "fields": {
+      "FileStorageAccountID": "@lookup:MJ: File Storage Accounts.Name=More Cheese Dropbox",
+      "Type": "Role",
+      "RoleID": "@lookup:MJ: Roles.Name=UI",
+      "CanRead": true,
+      "CanWrite": false
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0ADD75FF-B902-55D7-81AB-DC6535E81749"
+    },
+    "fields": {
+      "FileStorageAccountID": "@lookup:MJ: File Storage Accounts.Name=More Cheese Dropbox",
+      "Type": "Role",
+      "RoleID": "@lookup:MJ: Roles.Name=Developer",
+      "CanRead": true,
+      "CanWrite": false
+    }
+  }
+]

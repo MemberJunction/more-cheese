@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "YTD Revenue by Month",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Show me our total revenue for this year, broken down by month in a bar chart. When I click on a month, I want to see the invoices for that month. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "F7CBBAE0-5EBE-41DF-B4CF-0F6E2EF47358"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "I ran into some issues generating your Monthly Revenue & Invoice Explorer dashboard due to component validation errors in the code. I've set up the overall structure—including the \"Monthly Revenue and Order Summary (1)\" query, the monthly revenue bar chart, top-line KPI cards, and the invoice drill-down table linked to Order Headers. However, your administrator will need to review and fix the child component references before the dashboard can render properly.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "D88986CB-F3C2-4F65-8CA5-238F338CB903"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "1A6A59BE-6F7C-4FC0-9B57-664F8FB1C9BB"
+    }
+  }
+]

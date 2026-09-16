@@ -1,0 +1,36 @@
+{
+  "fields": {
+    "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+    "Name": "Chapter Engagement Matrix & Activity Explorer",
+    "Description": "Payload returned by Skip",
+    "TypeID": "@lookup:MJ: Artifact Types.Name=Component",
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "Visibility": "Always",
+    "SkipEmbeddings": true
+  },
+  "relatedEntities": {
+    "MJ: Artifact Versions": [
+      {
+        "fields": {
+          "ArtifactID": "@parent:ID",
+          "VersionNumber": 1,
+          "Content": "{\n  \"name\": \"ChapterEngagementMatrixExplorer\",\n  \"title\": \"Chapter Engagement Matrix & Activity Explorer\",\n  \"description\": \"Executive and operational intelligence matrix providing an 8-quarter view of member engagement across regional chapters with weekly sparklines, distribution breakdown, and member-level activity audit logs.\",\n  \"type\": \"dashboard\",\n  \"location\": \"registry\",\n  \"registry\": \"Skip\",\n  \"namespace\": \"analytics/dashboards\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": [\n    {\n      \"name\": \"EngagementMatrixTable\",\n      \"title\": \"Engagement Matrix Table\",\n      \"description\": \"Renders the 8-quarter matrix table with chapter names, location subtitles, composite engagement scores, dynamic tier styling, weekly SVG sparklines, and column sort toggles.\",\n      \"type\": \"custom\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/reports\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"ActivityBreakdownChart\",\n      \"title\": \"Contextual Activity Breakdown Chart\",\n      \"description\": \"Displays proportional engagement distribution across Events Attended, Courses Completed, and Committee Participation for the selected Chapter and Quarter.\",\n      \"type\": \"custom\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/charts\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"ActivityDetailTable\",\n      \"title\": \"Filtered Activity Detail Table\",\n      \"description\": \"Granular activity audit log table displaying member participations with badges, in-grid search, column sorting, and deep navigation to People, Events, Courses, and Committees.\",\n      \"type\": \"table\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"operations/activities\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"DataGrid\",\n      \"title\": \"Data Grid\",\n      \"description\": \"Flexible data grid component with its own simplified API. Accepts **data via props** (you manage data loading). Supports sorting, filtering, paging, row selection. Optional native record opening on row click (provide entityName + entityPrimaryKeys). Two column modes: simple (string array `['Name', 'Price']`) or advanced (ColumnDef objects: `{field, header, render, width, sortable}`). Metadata-aware formatting: dates (locale with time), booleans (Yes/No), value lists (colored tags with 50+ status colors), money ($USD), decimals, integers (commas). Long text handling: truncate (ellipsis), expand (click 'show more/less'), tooltip (hover), wrap (word-break), none.\\n\\n#### DataGrid - ONLY use when:\\n✅ You already have the data (from your own RunView call, aggregated query, joined tables, API response, etc.)\\n✅ You need custom data manipulation before display (filtering, transformation, merging multiple sources)\\n✅ You need full control over the data loading logic\\n✅ Displaying 2+ records in a list/table format\\n✅ Works with any array of objects (not just entity records)\\n\\n❌ DO NOT USE DataGrid when:\\n- You want automatic entity record loading → **Use EntityDataGrid instead** (it calls RunView for you)\\n- Displaying a single record → **Use SingleRecordView instead**\\n- Need data visualization → **Use SimpleChart or SimpleDrilldownChart instead**\\n- Need automatic caching and pagination logic → **Use EntityDataGrid instead**\\n\\n**Key difference from EntityDataGrid**: DataGrid is data-agnostic and passive (you pass data in). EntityDataGrid is entity-aware and active (it loads data via RunView). Choose DataGrid when you need control over data loading, EntityDataGrid for automatic entity record loading with smart caching.\\n\\n**Row keys**: DataGrid assigns each row's React key using this priority: `row.key` → `entityPrimaryKeys` (joined with `_`) → `row.ID` → `row.id` → `index`. When `entityPrimaryKeys` is provided, the primary key fields are used to build a unique key per row. For client-side joins where the output `ID` may not be unique, provide `entityPrimaryKeys` pointing to the field(s) that uniquely identify each row.\\n\",\n      \"type\": \"table\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"Generic/UI/Table\",\n      \"version\": \"1.0.0\"\n    }\n  ]\n}",
+          "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+          "ContentHash": "8c104d702217bc360c3d6db3bd7bc690b04c55e0c42bf4e989569aaaf3f0e836",
+          "Name": "Chapter Engagement Matrix & Activity Explorer",
+          "Description": "Executive and operational intelligence matrix providing an 8-quarter view of member engagement across regional chapters with weekly sparklines, distribution breakdown, and member-level activity audit logs.",
+          "ContentMode": "Text",
+          "ContentSizeBytes": "4219",
+          "ForceToolsOnly": false,
+          "SkipEmbeddings": true
+        },
+        "primaryKey": {
+          "ID": "21FA12A7-B30A-4E73-9B54-5F6F5472C5E0"
+        }
+      }
+    ]
+  },
+  "primaryKey": {
+    "ID": "7E649D63-AA1B-46E2-AEB9-68DD862E75AA"
+  }
+}

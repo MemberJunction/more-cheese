@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Monthly Course Completion Rates",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Show me monthly course completion rates for the past year in a line chart. When I click on a month, show me which courses had enrollments and their completion details. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "062588BD-A09B-47B7-A9E0-1578C1A4D5E7"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Course Completion Trends & Breakdown dashboard tracks monthly completion rates pulled from Course Enrollments and Courses. Clicking any month on the trend line chart dynamically filters the performance table below to show active cohorts and completion outcomes. You can also expand individual course rows to inspect student-level progress with status badges and direct links to learner profiles.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "720212C6-E35F-4FCE-8442-12B1FF38C710"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "4DEDFF0A-2A56-43F6-A045-55ADC420E68D"
+    }
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "entity": "MJ: Artifacts",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json", "createNewFileIfNotFound": true, "newFileName": ".artifacts.json",
+    "updateExistingRecords": true, "mergeStrategy": "overwrite",
+    "excludeFields": ["__mj_CreatedAt", "__mj_UpdatedAt", "__mj_DeletedAt"], "ignoreVirtualFields": true, "ignoreNullFields": true,
+    "lookupFields": {
+      "UserID": { "entity": "MJ: Users", "field": "Email" },
+      "EnvironmentID": { "entity": "MJ: Environments", "field": "Name" },
+      "TypeID": { "entity": "MJ: Artifact Types", "field": "Name" }
+    },
+    "relatedEntities": {
+      "MJ: Artifact Versions": {
+        "entity": "MJ: Artifact Versions", "foreignKey": "ArtifactID",
+        "excludeFields": ["__mj_CreatedAt", "__mj_UpdatedAt", "__mj_DeletedAt"], "ignoreVirtualFields": true, "ignoreNullFields": true,
+        "lookupFields": { "UserID": { "entity": "MJ: Users", "field": "Email" } }
+      }
+    }
+  }
+}

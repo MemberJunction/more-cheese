@@ -1,0 +1,186 @@
+<?php
+/**
+ * Template for the "conferences-events" page (/faq/conferences-events/).
+ *
+ * Body copy is the static page's <main> verbatim; only the links are rewritten.
+ * Selected automatically by slug, so no template assignment is needed.
+ *
+ * @package Terroir
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+get_header();
+?>
+
+<main id="main">
+
+  <section class="border-b border-charcoal/15 bg-milk">
+    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
+      <p class="m-0 text-sm"><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="text-brick underline underline-offset-2">&larr; All FAQ topics</a></p>
+      <p class="mt-4 text-xs font-bold uppercase tracking-[.14em] text-brick">FAQ &middot; Conferences &amp; events</p>
+      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[20ch] text-[clamp(34px,4.8vw,60px)] font-extrabold leading-[0.96] tracking-tight text-pasture">October, and the other fifty-one weeks.</h1>
+      <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">The Annual Conference, the virtual strand that outlived the year it was invented for, and the regional meetups. Dates and the notice board live on the <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="text-brick underline underline-offset-2">events page</a>.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[78ch] px-5 py-10">
+    <div class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+      <label for="faq-filter" class="font-display mb-1 block text-sm font-bold">Filter these questions</label>
+      <input id="faq-filter" type="search" autocomplete="off" placeholder="dues, renewal, exam, directory&hellip;"
+             class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-2.5 text-[15px]">
+      <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+        <p id="faq-filter-count" class="m-0 text-sm font-semibold text-mid" role="status" aria-live="polite">11 questions on this page.</p>
+        <button id="faq-filter-clear" type="button" class="rounded-full border-[1.5px] border-charcoal px-5 py-2 text-sm font-semibold hover:bg-charcoal hover:text-milk">Clear</button>
+      </div>
+      <noscript>
+        <p class="m-0 mt-3 rounded-xl border-[1.5px] border-brick px-4 py-2 text-sm text-brick">Filtering needs JavaScript. Every question is listed below.</p>
+      </noscript>
+    </div>
+
+    <section class="js-faq-group mb-8" aria-labelledby="g-conf">
+      <h2 id="g-conf" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">The Annual Conference</h2>
+      <div class="space-y-3">
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">When and where is the Annual Conference?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">October, three days, once a year, and it is the only week when the whole membership is in one building. The location moves; it is announced in the brief in the spring and carried on the <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="text-brick underline underline-offset-2">events page</a> from then on.</p>
+          <p class="m-0">Three days covers the competition results with the score sheets on the tables, a public review of the six category standards, the member organization floor, the hands-on sessions that do not work over video, and the governance &mdash; the annual election and the committee reports.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What does it cost, and when does early-bird end?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">Early-bird registration closes on 30 September and rates rise at midnight. Members pay the member rate; non-members pay more and can still come.</p>
+          <p class="m-0">Creamery and Retailer memberships can register their covered staff under the one membership, which is the part organizations most often miss until after the deadline.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Can non-members attend?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">Yes. Sessions, the organization floor and the evening events are open to anyone who registers.</p>
+          <p class="m-0">Two things are not: the annual general session where the election and the votes happen is for members, and the competition score sheets are distributed to members. If you are coming anyway, joining first is usually cheaper than the non-member rate plus a year of not being a member.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Is there a day pass?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">No. Registration covers all three days, and we have kept it that way on purpose &mdash; the conference is built as one arc, and the sessions people rate highest are on the last morning when a day pass would have sent them home.</p>
+          <p class="m-0">If three days is genuinely impossible, the virtual strand carries a good share of the content and the recordings stay in the archive.</p>
+        </div>
+      </details>
+      </div>
+    </section>
+
+    <section class="js-faq-group mb-8" aria-labelledby="g-sess">
+      <h2 id="g-sess" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">Sessions, changes and recordings</h2>
+      <div class="space-y-3">
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do I propose a session?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">The call for sessions opens about six months ahead and is announced in the brief and on the <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="text-brick underline underline-offset-2">events page</a>. Send the Events Committee a title, three or four sentences on what an attendee leaves knowing, the format, and how long you need.</p>
+          <p class="m-0">What gets accepted: a specific problem, solved, by someone who has actually solved it. Cave humidity in a hot summer. What a buyer can really move on. What went wrong with a make and what fixed it. What does not get accepted: anything that is a product pitch wearing a session title. Members and non-members are both read, by the same committee, against the same test. Send proposals to <a href="mailto:events@morecheese.org" class="text-brick underline underline-offset-2">events@morecheese.org</a>.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">I need to cancel, or send a colleague instead.</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">Substitution is free and easy: email <a href="mailto:registration@morecheese.org" class="text-brick underline underline-offset-2">registration@morecheese.org</a> with your confirmation and the name of whoever is coming instead, any time before the doors open. It happens constantly and nobody minds.</p>
+          <p class="m-0">Cancellation refunds close 15 days out, because that is when the catering and the room numbers are committed. Inside that window, write to Registration anyway if something has happened &mdash; illness, a family emergency, a herd problem the week of. Those are read case by case, and substitution is almost always the better answer.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Are sessions recorded?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">The conference sessions are recorded and go into the members&rsquo; archive, where they stay indefinitely. Hands-on workshops are not recorded, for the obvious reason that watching somebody else&rsquo;s hands in curd teaches very little.</p>
+          <p class="m-0">Everything in the year-round virtual strand is recorded and archived as a matter of course.</p>
+        </div>
+      </details>
+      </div>
+    </section>
+
+    <section class="js-faq-group mb-8" aria-labelledby="g-year">
+      <h2 id="g-year" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">The rest of the year</h2>
+      <div class="space-y-3">
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What runs online during the rest of the year?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">The virtual symposium began in 2021 as a stopgap for a year when travel was unreliable, and was not treated as one: 1,100 people came, a third of them from countries that had never sent anyone to a conference, and the sessions were left open in the archive.</p>
+          <p class="m-0">It stayed. Webinars and sessions now run year-round alongside the in-person calendar &mdash; wholesale negotiation, judging standards, apprenticeship, cave problems. A member in one hemisphere and a member in another are in the same room for an hour, which the Federation could not do before 2021.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Are there regional meetups, and can I go to one outside my region?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">Yes and yes. Regional meetups are organized by members for members, most of them informal, most of them free or close to it: a tasting, a creamery tour, a roundtable on whatever is biting locally that season.</p>
+          <p class="m-0">They are open to any member regardless of where you are based, and a member traveling is usually the most interesting person in the room. Dates are on the <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="text-brick underline underline-offset-2">events page</a>; to start one where there is nothing, write to <a href="mailto:events@morecheese.org" class="text-brick underline underline-offset-2">events@morecheese.org</a> and they will find you the other members nearby.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Which events count toward continuing education?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">Most Federation sessions carry credit toward reconfirming the Certified Cheese Professional credential, and the event listing says so on each entry. The hands-on workshops and the technical sessions carry the most.</p>
+          <p class="m-0">Social meetups and the organization floor do not, which surprises nobody. If you are working toward a reconfirmation date, the Annual Conference on its own will usually get you most of the way.</p>
+        </div>
+      </details>
+      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
+        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Is registration live on this site?</summary>
+        <div class="mt-3 text-[15px] text-[#3A403C]">
+          <p class="m-0 mb-2">Not on this one. This is a demonstration build, so nothing here takes a payment or holds a place. In the live product registration writes straight to the association&rsquo;s membership and order records.</p>
+          <p class="m-0">Anything on the notice board can be asked about through the <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-brick underline underline-offset-2">contact page</a>.</p>
+        </div>
+      </details>
+      </div>
+    </section>
+
+    <p id="faq-filter-empty" hidden class="rounded-2xl border-[1.5px] border-brick bg-milk p-6 text-center text-[15px] text-brick">
+      No question on this page matches that. Try a shorter word, check the <a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" class="underline underline-offset-2">other FAQ topics</a>, or <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="underline underline-offset-2">write to Member Services</a>.
+    </p>
+  </section>
+
+  <section class="border-t-[1.5px] border-charcoal bg-milk">
+    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
+      <h2 class="font-display m-0 mb-5 text-[28px] font-extrabold tracking-tight">Other FAQ topics</h2>
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-2 nav:grid-cols-4">
+        <a href="<?php echo esc_url( home_url( '/faq/membership-dues/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Membership &amp; dues</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">What a membership costs, which tier fits, and how billing works.</p>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/faq/membership-benefits/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Benefits &amp; services</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">What a membership actually gets you &mdash; and what it does not.</p>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/faq/renewals-account/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Renewals &amp; your account</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">Renewal dates, covered staff, receipts and directory entries.</p>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/faq/certifications/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Certifications</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">The four rungs, the exam, reconfirmation and continuing education.</p>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/faq/publications-resources/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Publications &amp; resources</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">The Monday brief, the archive, research and sponsorship.</p>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/faq/career-governance/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Careers, committees &amp; governance</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">Vacancies, committee seats, the election, ethics and advocacy.</p>
+        </a>
+        <a href="<?php echo esc_url( home_url( '/faq/organization-directory/' ) ); ?>" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
+          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
+          <p class="m-0 mt-1 text-[13px] text-mid">The organization directory, your entry, and which inbox to use.</p>
+        </a>
+      </div>
+      <div class="mt-8 rounded-2xl bg-pasture px-6 py-8 text-white md:px-10">
+        <h2 class="font-display m-0 text-[26px] font-extrabold tracking-tight">Still stuck?</h2>
+        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
+        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="mt-5 inline-block rounded-full bg-milk px-6 py-3 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<?php
+get_footer();

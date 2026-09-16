@@ -1,0 +1,16 @@
+[
+  {
+    "primaryKey": {
+      "ID": "6A2C1F0E-3B8D-4E57-9C41-2D7F8A5B6C01"
+    },
+    "fields": {
+      "Name": "More Cheese Content (Pinecone)",
+      "Description": "Knowledge Hub vector index for the International Cheese Federation public content (blog, reports, releases) and the internal vault. Pinecone serverless index 'morecheese-content', 3072 dimensions, cosine, embedded with Gemini Embedding 2.",
+      "VectorDatabaseID": "@lookup:MJ: Vector Databases.Name=Pinecone",
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "ExternalID": "morecheese-content",
+      "Dimensions": 3072,
+      "Metric": "cosine"
+    }
+  }
+]

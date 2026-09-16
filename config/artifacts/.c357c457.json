@@ -1,0 +1,36 @@
+{
+  "fields": {
+    "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+    "Name": "Member Activity Timeline Explorer",
+    "Description": "Payload returned by Skip",
+    "TypeID": "@lookup:MJ: Artifact Types.Name=Component",
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "Visibility": "Always",
+    "SkipEmbeddings": true
+  },
+  "relatedEntities": {
+    "MJ: Artifact Versions": [
+      {
+        "fields": {
+          "ArtifactID": "@parent:ID",
+          "VersionNumber": 1,
+          "Content": "{\n  \"name\": \"MemberActivityTimelineExplorer\",\n  \"title\": \"Member Activity Timeline Explorer\",\n  \"description\": \"Interactive Member 360 profile and multi-domain engagement workspace providing unified chronological timeline tracking, trajectory charting, detail inspection, and direct entity drill-down.\",\n  \"type\": \"dashboard\",\n  \"location\": \"registry\",\n  \"registry\": \"Skip\",\n  \"namespace\": \"customer/members\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": [\n    {\n      \"name\": \"MemberProfileHeader\",\n      \"title\": \"Member Profile Header\",\n      \"description\": \"Header displaying member search autocomplete, identity avatar, demographics, segment badges, and 4 KPI summary cards (Tenure, Events, Courses, Committees).\",\n      \"type\": \"card\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"customer/members\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"CategoryFilterSortBar\",\n      \"title\": \"Category Filter & Sort Bar\",\n      \"description\": \"Toolbar containing activity category filter chips/checkboxes and chronological sort order selector.\",\n      \"type\": \"form\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/filters\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"EngagementTrajectoryChart\",\n      \"title\": \"Engagement Trajectory Chart\",\n      \"description\": \"SVG visual milestone timeline plotting chronological engagement events over member active years.\",\n      \"type\": \"custom\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/charts\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"ActivityLogList\",\n      \"title\": \"Activity Log List\",\n      \"description\": \"Chronological vertical list of engagement activities with category styling, status indicators, and row selection.\",\n      \"type\": \"list\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"operations/timelines\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"ActivityDetailInspector\",\n      \"title\": \"Activity Detail Inspector\",\n      \"description\": \"Side-by-side detail inspector displaying category-specific formatted attributes and direct record navigation button.\",\n      \"type\": \"card\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"operations/activities\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"OpenRecordButton\",\n      \"title\": \"Open Record Button\",\n      \"description\": \"Intelligent button that opens MemberJunction entity records using metadata-driven primary key detection. Requires record object and entityName props. Auto-detects primary keys from entity metadata (handles single keys like 'ID' or composite keys like 'OrderID + LineNumber'). Calls callbacks.OpenEntityRecord with proper key-value pairs. Four variant styles: primary (blue filled), default (blue filled), text (transparent with blue text), link (underlined text). Three sizes: small, medium, large. Optional icon (emoji/unicode). Validates all primary key values exist before enabling button. Fires recordOpened event on success. Shows descriptive tooltip.\\n\\n#### OpenRecordButton - ONLY use when:\\n✅ Need a standalone button to open a specific entity record\\n✅ Record and entity name are available in component scope\\n✅ Opening records from custom UI (detail panels, lists, cards, search results)\\n✅ Want automatic primary key handling (no manual key extraction)\\n✅ Need multiple open-record buttons in same view with different styling\\n\\n❌ DO NOT USE OpenRecordButton when:\\n- DataGrid or EntityDataGrid already handles row clicks → Built-in record opening is simpler\\n- SingleRecordView with allowOpenRecord=true → It uses OpenRecordButton internally\\n- Need complex pre-open validation/confirmation → Use direct callbacks.OpenEntityRecord call with custom logic\\n- Record is not a MemberJunction entity → Use custom navigation logic\\n- Opening external links or non-entity routes → Use regular anchor tags or router links\\n\\n**Use Cases**: 'View Details' buttons, drill-down from charts to records, master-detail 'Open in Full View' actions, search result 'View Record' buttons, related record links in custom forms.\\n\",\n      \"type\": \"navigation\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"Generic/Navigation\",\n      \"version\": \"1.0.0\"\n    }\n  ]\n}",
+          "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+          "ContentHash": "fb7774dfb72441d4ce189e30feaa8dc2105346842fddd043485576035d833d07",
+          "Name": "Member Activity Timeline Explorer",
+          "Description": "Interactive Member 360 profile and multi-domain engagement workspace providing unified chronological timeline tracking, trajectory charting, detail inspection, and direct entity drill-down.",
+          "ContentMode": "Text",
+          "ContentSizeBytes": "4355",
+          "ForceToolsOnly": false,
+          "SkipEmbeddings": true
+        },
+        "primaryKey": {
+          "ID": "35FA169F-D914-4EC2-B615-459C5C945D97"
+        }
+      }
+    ]
+  },
+  "primaryKey": {
+    "ID": "C357C457-3DB9-4D74-B586-13F9F2CF9FBA"
+  }
+}

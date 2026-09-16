@@ -1,0 +1,10 @@
+{
+  "fields": {
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "RoleID": "@lookup:MJ: Roles.Name=Developer",
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "E41B5F3E-F36B-1410-8DD4-0033802F0180"
+  }
+}

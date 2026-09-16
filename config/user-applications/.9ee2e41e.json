@@ -1,0 +1,12 @@
+{
+  "fields": {
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "ApplicationID": "@lookup:MJ: Applications.Name=Common",
+    "Sequence": 8,
+    "IsActive": true,
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "9EE2E41E-AA73-4AB8-B85E-B7139185116D"
+  }
+}

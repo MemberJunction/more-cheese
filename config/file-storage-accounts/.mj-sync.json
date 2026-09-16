@@ -1,0 +1,28 @@
+{
+  "entity": "MJ: File Storage Accounts",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".file-storage-accounts.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "overwrite",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt"
+    ],
+    "ignoreVirtualFields": true,
+    "ignoreNullFields": true,
+    "lookupFields": {
+      "ProviderID": {
+        "entity": "MJ: File Storage Providers",
+        "field": "Name"
+      },
+      "CredentialID": {
+        "entity": "MJ: Credentials",
+        "field": "Name"
+      }
+    }
+  }
+}

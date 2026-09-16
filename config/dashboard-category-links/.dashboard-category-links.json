@@ -1,0 +1,14 @@
+[
+  {
+    "primaryKey": {
+      "ID": "C3E5A7B9-1D2F-4A6C-8E0B-4F6D8A2C1E75"
+    },
+    "fields": {
+      "DashboardID": "@lookup:MJ: Dashboards.Name=Membership Analytics",
+      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
+      "DisplayName": "Membership Analytics",
+      "Sequence": 1
+    }
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Complete Member Journey Timeline",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Show me a complete activity timeline for member 'Sarah Johnson' including all memberships, events attended, courses completed, chapters joined, and committees served on. Present as a chronological timeline chart. When I click on any activity, show me the specific details in a panel or table. From there, let me open the actual record for that activity. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "CF0A9A0B-6568-47D7-829F-EDE0EEF376B0"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Member Activity Timeline Explorer aggregates Sarah Johnson's complete engagement history across Membership Periods, Event Registrations, Course Enrollments, and Committee Memberships. It features an interactive SVG trajectory timeline, high-level KPI cards, and a filterable chronological activity feed. Clicking any milestone or activity card displays full details in the side-by-side inspector with a direct link to open the underlying record in MemberJunction.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "9C94EB68-9925-4C0D-BB74-671BC1917408"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "F8ADAEAD-0C70-4D6A-9F43-F3C490E5C851"
+    }
+  }
+]

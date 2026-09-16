@@ -1,0 +1,12 @@
+{
+  "fields": {
+    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "ApplicationID": "@lookup:MJ: Applications.Name=Workflows",
+    "Sequence": 16,
+    "IsActive": true,
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "272F8C07-1C6F-41F9-AFD5-648ED362F5A6"
+  }
+}
