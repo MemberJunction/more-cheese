@@ -13,11 +13,11 @@ migrations/            - Skyway migrations for the app schema (starts empty)
 generated/             - mj-sync synthetic data & world model (Loom-generated)
 config/                - mj-sync application configuration & taxonomies
 packages/
-  Entities/            - @mj-more-cheese-demo/entities   (CodeGen entity subclasses)
-  CoreEntitiesServer/  - @mj-more-cheese-demo/core-entities-server (server-side entity overrides)
-  Actions/             - @mj-more-cheese-demo/actions    (MJ Actions)
-  Server/              - @mj-more-cheese-demo/server     (server bootstrap -> MJAPI)
-  Angular/             - @mj-more-cheese-demo/ng         (client bootstrap -> MJExplorer)
+  Entities/            - @mj-biz-apps/more-cheese-entities   (CodeGen entity subclasses)
+  CoreEntitiesServer/  - @mj-biz-apps/more-cheese-core-entities-server (server-side entity overrides)
+  Actions/             - @mj-biz-apps/more-cheese-actions    (MJ Actions)
+  Server/              - @mj-biz-apps/more-cheese-server     (server bootstrap -> MJAPI)
+  Angular/             - @mj-biz-apps/more-cheese-ng         (client bootstrap -> MJExplorer)
 docs/                  - how this repo works (branching, publishing, codegen, linking)
 docs/claude/           - the MemberJunction development guide (topic-split, with TOC)
 ```
@@ -95,7 +95,7 @@ covered there). Read the relevant topic before working in its area:
 
 ```sh
 # linked (from the MJ repo root — the normal mode):
-npx turbo build --filter="@mj-more-cheese-demo/*"
+npx turbo build --filter="@mj-biz-apps/*"
 npx mj migrate --schema morecheese_members --dir packages/dev-apps/more-cheese-demo/migrations
 npx mj codegen
 

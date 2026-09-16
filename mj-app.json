@@ -12,12 +12,12 @@
     "name": "Blue Cypress",
     "email": "marcelo.torres@bluecypress.io"
   },
-  "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2",
+  "repository": "https://github.com/MemberJunction/more-cheese",
   "mjVersionRange": ">=6.1.0-edge.4 <7.0.0",
   "schema": {
     "name": "morecheese_members",
     "createIfNotExists": true,
-    "entityPackage": "@mj-more-cheese-demo/entities"
+    "entityPackage": "@mj-biz-apps/more-cheese-entities"
   },
   "migrations": {
     "directory": "migrations",
@@ -71,21 +71,21 @@
   "packages": {
     "server": [
       {
-        "name": "@mj-more-cheese-demo/server",
+        "name": "@mj-biz-apps/more-cheese-server",
         "role": "bootstrap",
         "startupExport": "LoadMoreCheeseDemoServer"
       }
     ],
     "client": [
       {
-        "name": "@mj-more-cheese-demo/ng",
+        "name": "@mj-biz-apps/more-cheese-ng",
         "role": "bootstrap",
         "startupExport": "LoadMoreCheeseDemoClient"
       }
     ],
     "shared": [
       {
-        "name": "@mj-more-cheese-demo/entities",
+        "name": "@mj-biz-apps/more-cheese-entities",
         "role": "library"
       }
     ]

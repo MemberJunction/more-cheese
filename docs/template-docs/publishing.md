@@ -21,7 +21,7 @@ Trigger: push to `main` (i.e. merging the release PR from `next`).
 6. Tags `vX.Y.Z`, pushes the version-bump commit back to `main`.
 7. Merges `main` → `next` and refreshes `package-lock.json` there.
 
-## One-time setup for a new app (first publish bootstrap)
+## One-time setup for a new app (first publish bootstrap) — ✅ DONE 2026-09-16
 
 npm refuses OIDC publishing for packages that don't exist yet, and the
 validation step fails until they do. So, once per package:
@@ -33,6 +33,50 @@ validation step fails until they do. So, once per package:
 3. From then on the workflow publishes via **OIDC trusted publishing** — there
    is **no `NPM_TOKEN` secret** to create or rotate. (`publish.yml` already
    declares `permissions: id-token: write`.)
+
+**All three packages completed this on 2026-09-16**, via
+`npx setup-npm-trusted-publish` for step 1 and the npm web UI for step 2:
+
+| Package | npm | Trusted publisher connection |
+|---|---|---|
+| `@mj-biz-apps/more-cheese-entities` | `0.0.0`, public | `72f3b2bf-ce33-4552-a1d9-09c9d1151fd6` |
+| `@mj-biz-apps/more-cheese-server` | `0.0.0`, public | `5e8f2292-bac8-4883-97d1-992c06b77acf` |
+| `@mj-biz-apps/more-cheese-ng` | `0.0.0`, public | `e53cfcb5-888f-4a0a-8769-b0f6612b65aa` |
+
+Every connection reads `file: publish.yml`, `repository: MemberJunction/more-cheese`,
+`permissions: publish, stage publish`, environment **blank** — blank because
+`publish.yml` declares no `environment:`, and a value npm holds that the workflow
+does not claim makes the OIDC match fail.
+
+⚠️ **Leave "Allow `npm publish`" checked**, though npm's UI labels it *"Not
+recommended"*. That advice assumes staged publishing; `publish.yml` runs
+`npx changeset publish`, which publishes **directly**. Unchecked, only
+`npm stage publish` is permitted and the release fails at the OIDC exchange.
+
+⚠️ **A trusted-publisher connection is immutable** — npm fixes the provider and
+its required fields at creation. A wrong repo or workflow filename must be
+deleted and re-added, not edited.
+
+### Verifying it, and two commands that will lie to you
+
+The honest check — it needs an interactive 2FA prompt, so no script can run it:
+
+```sh
+npm trust list @mj-biz-apps/more-cheese-entities
+```
+
+- **`npm access get status <pkg>` does NOT prove a package exists.** It never
+  404s; it reports a default. Asked about a package name invented on the spot it
+  answered `private`, so a `public` from it means nothing. Use `npm view <pkg>
+  version`, or the registry directly, to test existence.
+- **`.github/scripts/validate-npm-packages.sh` cannot pass on macOS.** It calls
+  `timeout`, which macOS does not ship, so the check exits `127` and every
+  package is reported missing no matter what is on npm. CI runs `ubuntu-latest`
+  where `timeout` exists, so releases are unaffected — but do not trust a local
+  run. (MJ's copy of this script guards it with `command -v timeout`; ours does
+  not yet.)
+- **Expect propagation lag.** A package can 404 for a few minutes after a
+  successful publish. A 404 immediately after registering is not a failure.
 
 ## GitHub release tags
 
