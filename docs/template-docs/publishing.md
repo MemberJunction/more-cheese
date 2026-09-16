@@ -69,12 +69,12 @@ npm trust list @mj-biz-apps/more-cheese-entities
   404s; it reports a default. Asked about a package name invented on the spot it
   answered `private`, so a `public` from it means nothing. Use `npm view <pkg>
   version`, or the registry directly, to test existence.
-- **`.github/scripts/validate-npm-packages.sh` cannot pass on macOS.** It calls
-  `timeout`, which macOS does not ship, so the check exits `127` and every
-  package is reported missing no matter what is on npm. CI runs `ubuntu-latest`
-  where `timeout` exists, so releases are unaffected — but do not trust a local
-  run. (MJ's copy of this script guards it with `command -v timeout`; ours does
-  not yet.)
+- **`validate-npm-packages.sh` used to be unrunnable on macOS** — it called
+  `timeout`, which macOS does not ship, so the check exited `127`, the loop read
+  that as "package missing", and the retry made it look intermittent rather than
+  broken. CI runs `ubuntu-latest` where `timeout` exists, so releases were never
+  affected; the check was wrong only where a human would run it by hand. Guarded
+  with `command -v timeout` as of 2026-09-16, so a local run is now evidence.
 - **Expect propagation lag.** A package can 404 for a few minutes after a
   successful publish. A 404 immediately after registering is not a failure.
 
