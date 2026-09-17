@@ -20,7 +20,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { generateTeardown, readConfigSeed, readBaselineCoreRows, UNDROPPED_SCHEMAS } from './generate-teardown.mjs';
 
@@ -284,11 +285,47 @@ test('the Application row the baseline creates is derived', () => {
  * directory is a set of rows stranded on every host's uninstall — and silently, which is the one
  * failure mode a generated teardown exists to make impossible.
  */
+/**
+ * A directory whose entity cannot be resolved is a set of rows stranded on every host's uninstall,
+ * so it must be a hard error rather than a silent skip.
+ *
+ * This asserts the GUARD, against a real fixture. The previous version passed `no-such-repo-root`
+ * and accepted any `Error`, which `readdirSync` supplies as ENOENT before either guard is reached —
+ * so it went green whether the guard existed or not. Assert the guard's own message, not merely
+ * that something threw.
+ */
 test('a config directory with no entity name is a hard error', () => {
-    assert.throws(
-        () => readConfigSeed(path.join(HERE, 'no-such-repo-root')),
-        (err) => err instanceof Error,
-    );
+    const root = path.join(tmpdir(), `teardown-guard-${Date.now()}`);
+    try {
+        mkdirSync(path.join(root, 'config', 'nameless'), { recursive: true });
+        writeFileSync(path.join(root, 'config', 'nameless', '.mj-sync.json'), JSON.stringify({ entity: '   ' }));
+        assert.throws(
+            () => readConfigSeed(root),
+            (err) =>
+                err instanceof Error &&
+                /cannot derive the teardown from config\/:/.test(err.message) &&
+                /config\/nameless\/\.mj-sync\.json declares no "entity"/.test(err.message),
+            'readConfigSeed must reject a directory whose .mj-sync.json names no entity',
+        );
+    } finally {
+        rmSync(root, { recursive: true, force: true });
+    }
+});
+
+/** The sibling guard: a directory with no `.mj-sync.json` at all. Also previously unexercised. */
+test('a config directory with no .mj-sync.json is a hard error', () => {
+    const root = path.join(tmpdir(), `teardown-guard2-${Date.now()}`);
+    try {
+        mkdirSync(path.join(root, 'config', 'orphan'), { recursive: true });
+        writeFileSync(path.join(root, 'config', 'orphan', 'record.json'), '{}');
+        assert.throws(
+            () => readConfigSeed(root),
+            (err) => err instanceof Error && /config\/orphan has no \.mj-sync\.json/.test(err.message),
+            'readConfigSeed must reject a directory with no .mj-sync.json',
+        );
+    } finally {
+        rmSync(root, { recursive: true, force: true });
+    }
 });
 
 // ── Scope, stated so a reader cannot mistake it ────────────────────────────────────────────────
