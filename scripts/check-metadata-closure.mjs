@@ -33,12 +33,9 @@ for (const root of TARGET_ROOTS) {
 for (const { root, file } of files) {
   try {
     const raw = readFileSync(file, 'utf-8');
-    const rawParsed = JSON.parse(raw);
-    // Per-record files (config/<dir>/.<id>.json, written by `mj sync pull`) hold ONE record object, not an
-    // array. Skipping them made every per-record directory look empty to the PK audits and the base-delta
-    // check reported them as "lost" the moment origin/next contained them.
-    const parsed = Array.isArray(rawParsed) ? rawParsed : (rawParsed && typeof rawParsed === 'object' && rawParsed.fields ? [rawParsed] : null);
-    if (!parsed) continue;
+    const parsed = JSON.parse(raw);
+    const arr = Array.isArray(parsed) ? parsed : (parsed && typeof parsed === 'object' ? [parsed] : []);
+    if (arr.length === 0) continue;
 
     const relPath = relative(root, file);
     const dir = relPath.split(sep)[0];
@@ -48,7 +45,7 @@ for (const { root, file } of files) {
     }
     const dirKeys = primaryKeysByDir.get(dir);
 
-    for (const r of parsed) {
+    for (const r of arr) {
       if (r?.primaryKey?.ID) {
         const pk = r.primaryKey.ID.toUpperCase();
         allPrimaryKeys.add(pk);
@@ -57,28 +54,20 @@ for (const { root, file } of files) {
       if (r?.fields) {
         records.push({ dir, primaryKey: r.primaryKey, fields: r.fields });
       }
-      if (r?.relatedEntities) {
-        // `mj sync pull` nests child records (Conversation Details, Artifact Versions, Query Fields…) under
-        // relatedEntities; their PKs are real targets for other directories' foreign keys.
-        for (const items of Object.values(r.relatedEntities)) {
-          if (!Array.isArray(items)) continue;
+      const subCollections = [
+        ...(r?.collections ? Object.values(r.collections) : []),
+        ...(r?.relatedEntities ? Object.values(r.relatedEntities) : [])
+      ];
+      for (const items of subCollections) {
+        if (Array.isArray(items)) {
           for (const item of items) {
-            if (item?.primaryKey?.ID) { const pk = item.primaryKey.ID.toUpperCase(); allPrimaryKeys.add(pk); dirKeys.add(pk); }
-          }
-        }
-      }
-      if (r?.collections) {
-        for (const [colName, items] of Object.entries(r.collections)) {
-          if (Array.isArray(items)) {
-            for (const item of items) {
-              if (item?.primaryKey?.ID) {
-                const pk = item.primaryKey.ID.toUpperCase();
-                allPrimaryKeys.add(pk);
-                dirKeys.add(pk);
-              }
-              if (item?.fields) {
-                records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
-              }
+            if (item?.primaryKey?.ID) {
+              const pk = item.primaryKey.ID.toUpperCase();
+              allPrimaryKeys.add(pk);
+              dirKeys.add(pk);
+            }
+            if (item?.fields) {
+              records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
             }
           }
         }
@@ -121,6 +110,8 @@ const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
   ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
   ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
+  ['queries.EmbeddingModelID', { reason: 'Points to core MJ AI Model seeded by @memberjunction/server', hits: 0 }],
+  ['queries.SQLDialectID', { reason: 'Points to core MJ SQL Dialect seeded by @memberjunction/server', hits: 0 }],
   ['gl-account-links.RecordID', {
     reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
     hits: 0,
@@ -140,7 +131,7 @@ for (const r of records) {
   for (const [fieldName, val] of Object.entries(r.fields)) {
     // Check every field ending in 'ID' except primary key 'ID'
     if (fieldName.endsWith('ID') && fieldName !== 'ID') {
-      if (!val || typeof val !== 'string' || val.startsWith('@lookup:')) {
+      if (!val || typeof val !== 'string' || val.startsWith('@lookup:') || val.startsWith('@parent:')) {
         continue;
       }
 
@@ -623,15 +614,17 @@ if (!baseInfo) {
           baseAllPKs.add(pk);
           dirSet.add(pk);
         }
-        if (r?.collections) {
-          for (const items of Object.values(r.collections)) {
-            if (Array.isArray(items)) {
-              for (const item of items) {
-                if (item?.primaryKey?.ID) {
-                  const pk = item.primaryKey.ID.toUpperCase();
-                  baseAllPKs.add(pk);
-                  dirSet.add(pk);
-                }
+        const subCollections = [
+          ...(r?.collections ? Object.values(r.collections) : []),
+          ...(r?.relatedEntities ? Object.values(r.relatedEntities) : [])
+        ];
+        for (const items of subCollections) {
+          if (Array.isArray(items)) {
+            for (const item of items) {
+              if (item?.primaryKey?.ID) {
+                const pk = item.primaryKey.ID.toUpperCase();
+                baseAllPKs.add(pk);
+                dirSet.add(pk);
               }
             }
           }
