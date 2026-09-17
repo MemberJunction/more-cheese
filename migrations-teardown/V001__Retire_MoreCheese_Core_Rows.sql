@@ -62,7 +62,8 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (410 configuration records):
+-- Seed provenance (384 distinct records; 410 declared across
+-- 36 directories, 26 of them declared in two directories and inserted once):
 --     75 from config/conversations
 --     63 from config/queries
 --     46 from config/artifacts
@@ -269,31 +270,6 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Conversations', 'F92E4123-3627-4D2C-9972-C8556D625410'),
     ('MJ: Conversations', '48D7F31C-BF36-4732-B7A9-57F4075CCDF3'),
     ('MJ: Conversations', '8FFF9237-0DE1-43DA-BEE9-A5725F08C921'),
-    ('MJ: Conversations', '031AD8A0-2B62-4E5D-B6CB-6BA4C9154643'),
-    ('MJ: Conversations', '1A6A59BE-6F7C-4FC0-9B57-664F8FB1C9BB'),
-    ('MJ: Conversations', '25582A06-9FA6-401F-B737-B0EAAC3DBCFF'),
-    ('MJ: Conversations', '27EC6794-7006-461C-9CAB-932544CA93EC'),
-    ('MJ: Conversations', '3958262D-5C2F-4EE7-9C33-3EC7D293433B'),
-    ('MJ: Conversations', '403BD19D-7DAB-44EE-9909-4C6ED28A4082'),
-    ('MJ: Conversations', '4DEDFF0A-2A56-43F6-A045-55ADC420E68D'),
-    ('MJ: Conversations', '4FA88702-C81B-4F1E-B1BD-D114D34FE580'),
-    ('MJ: Conversations', '5A66B567-37D1-4259-AADA-886ADD363D70'),
-    ('MJ: Conversations', '5E3BAEC5-AFAE-4F17-8C4B-E18A552EE7C3'),
-    ('MJ: Conversations', '651BA430-DAF2-49E4-902A-230A12706B20'),
-    ('MJ: Conversations', '67021547-E287-482C-AE3C-DEF4DAB040B2'),
-    ('MJ: Conversations', '8127E707-891A-494D-99B1-8D0BE8A8D41E'),
-    ('MJ: Conversations', '89EAFDA2-D366-40C9-89B1-3CC2F93F48FA'),
-    ('MJ: Conversations', '8C7C1809-0DDA-4FA7-A80E-77AF322EA5F1'),
-    ('MJ: Conversations', '9B413F4F-18FE-44CA-B225-85080BC24B5B'),
-    ('MJ: Conversations', 'A897D981-F62A-440E-8C20-F25CAD6238DC'),
-    ('MJ: Conversations', 'B32BE779-6F34-4709-8F9F-2096A6D08156'),
-    ('MJ: Conversations', 'BB81AA64-2109-4DED-AA5C-CE212FFE75FD'),
-    ('MJ: Conversations', 'C690CB25-AFBA-496F-8CA0-CC6B8EB42C66'),
-    ('MJ: Conversations', 'CABDEACA-5C4C-4CB4-A0D5-E3589C9FA871'),
-    ('MJ: Conversations', 'EB78F09B-E6C3-4FFC-B755-9C1F6CFB3983'),
-    ('MJ: Conversations', 'F58A352D-8AAF-4ED4-AC11-0D826A83DDB4'),
-    ('MJ: Conversations', 'F8ADAEAD-0C70-4D6A-9F43-F3C490E5C851'),
-    ('MJ: Conversations', 'F92E4123-3627-4D2C-9972-C8556D625410'),
     ('MJ: Credential Types', '5E7A2C41-9B3D-4F1E-8A6C-2D4B7F9E0C15'),
     ('MJ: Credentials', '7A1E4C2B-5D3F-4E8A-9B6C-2F0D8E1A3C55'),
     ('MJ: Dashboard Categories', '8D2F4A61-3B7C-4E9D-A5F1-2C6B8E0D4A93'),
@@ -472,7 +448,6 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Score Bands', 'ED587C74-F495-5AF6-8E7A-1F0D892AB80E'),
     ('MJ_BizApps_Sonar: Score Bands', '36C432E5-EE8F-57F8-8BF6-808EC147C339'),
     ('MJ_BizApps_Sonar: Score Model Versions', '9EC51FE5-B002-564E-9C7E-7B8E4954CC5B'),
-    ('MJ_BizApps_Sonar: Score Models', '05C13018-27B8-53DE-9D1D-129E6E15DF1C'),
     ('MJ_BizApps_Sonar: Score Models', '05C13018-27B8-53DE-9D1D-129E6E15DF1C'),
     ('MJ_BizApps_Sonar: Time Windows', 'CF6F428F-7016-5898-BF94-22795E3B3F91'),
     ('MJ_BizApps_Sonar: Time Windows', '97DF3796-A479-558E-9927-755A48D0D061'),

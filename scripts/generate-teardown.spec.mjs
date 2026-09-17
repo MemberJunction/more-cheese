@@ -306,3 +306,46 @@ test('the teardown says plainly that generated/ is left behind', () => {
 test('the teardown says plainly that it has not been run against a database', () => {
     assert.match(sql(), /NOT TESTED AGAINST A DATABASE/);
 });
+
+/**
+ * The seed temp table is declared `PRIMARY KEY (EntityName, RowID)`, and `batchedInsert` puts all
+ * 410 of today's rows in ONE `VALUES` constructor, so a repeated tuple is not a tidiness problem —
+ * SQL Server rejects the whole statement with Msg 2627. `HandleTeardown` runs the file inside one
+ * transaction and rolls back on error while `mj app remove` drops the declared schema regardless,
+ * so the duplicate turns the entire teardown into a no-op at precisely the moment it is needed.
+ *
+ * This is the shape that actually shipped: ids dedupe WITHIN a config directory but two pairs of
+ * directories declare the same mj-sync entity over the same records — `config/conversations` with
+ * `config/conversations-owner` (25 shared) and `config/sonar-score-models` with
+ * `config/sonar-score-models-activate` (1 shared). 26 duplicate tuples, in a suite that was 110/110
+ * green, because nothing here asserted the key.
+ */
+test('no (EntityName, RowID) tuple is inserted into #MoreCheeseSeed twice', () => {
+    const sql = readFileSync(TEARDOWN, 'utf8');
+    const block = sql.slice(sql.indexOf('INSERT INTO #MoreCheeseSeed'));
+    const tuples = block.slice(0, block.indexOf(';')).match(/\('[^)]*'\)/g) ?? [];
+    assert.ok(tuples.length > 0, 'found no seed tuples to check — the parser, not the file, is wrong');
+    const seen = new Set();
+    const dupes = tuples.filter((t) => (seen.has(t) ? true : (seen.add(t), false)));
+    assert.deepEqual(dupes, [], `${dupes.length} duplicate seed key(s) would fail the INSERT: ${dupes.slice(0, 3).join(', ')}`);
+});
+
+/** The same invariant one layer up, so a regeneration cannot reintroduce it without the spec failing. */
+test('the generator emits each (entity, id) pair at most once', () => {
+    const rows = readConfigSeed(REPO_ROOT);
+    const keys = rows.map((r) => `${r.entity}|${r.id}`);
+    const seen = new Set();
+    const dupes = keys.filter((k) => (seen.has(k) ? true : (seen.add(k), false)));
+    // readConfigSeed deliberately keeps every declaration so the provenance header can name all 36
+    // directories; the emitted INSERT is what must be distinct. Assert the relationship explicitly.
+    const generated = generateTeardown({
+        configRows: rows,
+        baseline: readBaselineCoreRows(REPO_ROOT),
+        entities: readBaselineCoreRows(REPO_ROOT).entities,
+        applicationId: readBaselineCoreRows(REPO_ROOT).applicationId,
+    });
+    const block = generated.slice(generated.indexOf('INSERT INTO #MoreCheeseSeed'));
+    const emitted = block.slice(0, block.indexOf(';')).match(/\('[^)]*'\)/g) ?? [];
+    assert.equal(new Set(emitted).size, emitted.length, 'the generator emitted a duplicate seed key');
+    assert.equal(emitted.length, new Set(keys).size, `emitted ${emitted.length} rows for ${new Set(keys).size} distinct declarations (${dupes.length} shared across directories)`);
+});

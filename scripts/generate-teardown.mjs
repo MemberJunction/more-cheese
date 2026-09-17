@@ -646,10 +646,24 @@ export function generateTeardown({ configRows, baseline, entities, applicationId
         .map(([where, n]) => `--   ${String(n).padStart(4)} from ${where}`)
         .join('\n');
 
+    // `#MoreCheeseSeed` is declared PRIMARY KEY (EntityName, RowID) and batchedInsert puts today's
+    // rows in ONE VALUES constructor, so a repeated tuple fails the whole statement with Msg 2627 —
+    // and because MJ runs the teardown in a single transaction that rolls back on error while
+    // `mj app remove` drops the declared schema regardless, one duplicate turns the entire teardown
+    // into a no-op at the exact moment it is needed.
+    //
+    // The duplicates are legitimate declarations, not junk: ids are unique WITHIN a config directory,
+    // but two pairs of directories declare the same mj-sync entity over the same records
+    // (`conversations` + `conversations-owner`, `sonar-score-models` + `sonar-score-models-activate`).
+    // Deduping inside readConfigSeed would be the smaller edit and the wrong one — the provenance
+    // header below is built from those same rows, so the second directory of each pair would drop
+    // out of the 36-line summary silently. It stays declared there and distinct here.
+    const distinctSeedRows = [...new Map(configRows.map((r) => [`${r.entity}|${r.id}`, r])).values()];
+
     const seedRows = batchedInsert(
         '#MoreCheeseSeed',
         'EntityName, RowID',
-        configRows,
+        distinctSeedRows,
         (r) => `    (${quote(r.entity)}, '${r.id}')`,
     );
 
@@ -740,7 +754,8 @@ ${entitySummary}
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (${configRows.length} configuration records):
+-- Seed provenance (${distinctSeedRows.length} distinct records; ${configRows.length} declared across
+-- ${byProvenance.size} directories, ${configRows.length - distinctSeedRows.length} of them declared in two directories and inserted once):
 ${summary}
 -- =============================================================================================
 
@@ -779,12 +794,15 @@ function main(argv) {
     const configRows = readConfigSeed(REPO_ROOT);
     const { baseline, entities, applicationId } = readBaselineCoreRows(REPO_ROOT);
     const sql = generateTeardown({ configRows, baseline, entities, applicationId });
+    // Same key the emitted INSERT is distinct on, so the summary cannot drift from the file.
+    const distinctSeed = new Set(configRows.map((r) => `${r.entity}|${r.id}`)).size;
 
     mkdirSync(path.dirname(outPath), { recursive: true });
     writeFileSync(outPath, sql, 'utf8');
 
     console.log(
-        `Wrote ${path.relative(REPO_ROOT, outPath)} — ${configRows.length} configuration record(s), ` +
+        `Wrote ${path.relative(REPO_ROOT, outPath)} — ${distinctSeed} distinct configuration record(s) ` +
+        `from ${configRows.length} declaration(s), ` +
             `${entities.length} entity row(s), ${applicationId === null ? 0 : 1} application row, ` +
             `${UNDROPPED_SCHEMAS.length} schema(s) dropped; dependents resolved at apply time.`,
     );
