@@ -3,7 +3,7 @@
     "fields": {
       "Name": "Skip",
       "Description": "Auto-created category from path: Skip/Finance/Receivables",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -17,7 +17,7 @@
       "Name": "Analytics",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Analytics/KPIs",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -31,7 +31,7 @@
       "Name": "Chapters",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Chapters/Engagement",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -45,7 +45,7 @@
       "Name": "Committees",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Committees/Memberships",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -59,7 +59,7 @@
       "Name": "Courses",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Courses/Enrollments",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -73,7 +73,7 @@
       "Name": "Events",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Events/Attendance",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -87,7 +87,7 @@
       "Name": "Executive",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Executive/Trends",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -101,7 +101,7 @@
       "Name": "Finance",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Finance/Receivables",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -115,7 +115,7 @@
       "Name": "Learning",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Learning/Enrollments",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -129,7 +129,7 @@
       "Name": "Marketing",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Marketing/Email",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -143,7 +143,7 @@
       "Name": "Members",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Members/Cohorts",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -157,7 +157,7 @@
       "Name": "Membership",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Membership/Analytics",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -171,7 +171,7 @@
       "Name": "Memberships",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Memberships/Tiers",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -185,7 +185,7 @@
       "Name": "Organizations",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Organizations/Engagement",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -199,7 +199,7 @@
       "Name": "Sales",
       "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
       "Description": "Auto-created category from path: Skip/Sales/Revenue",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -213,7 +213,7 @@
       "Name": "Acquisitions",
       "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
       "Description": "Auto-created category from path: Skip/Membership/Acquisitions",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -227,7 +227,7 @@
       "Name": "Activity",
       "ParentID": "F1C13450-0CE0-493D-8D4C-126AE028B10F",
       "Description": "Auto-created category from path: Skip/Organizations/Activity",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -241,7 +241,7 @@
       "Name": "Activity",
       "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
       "Description": "Auto-created category from path: Skip/Members/Activity",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -255,7 +255,7 @@
       "Name": "Analytics",
       "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
       "Description": "Auto-created category from path: Skip/Membership/Analytics",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -269,7 +269,7 @@
       "Name": "Attendance",
       "ParentID": "B14247D0-8962-4B01-A485-8BFD76ABCECF",
       "Description": "Auto-created category from path: Skip/Events/Attendance",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -283,7 +283,7 @@
       "Name": "Chapters",
       "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
       "Description": "Auto-created category from path: Skip/Membership/Chapters",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -297,7 +297,7 @@
       "Name": "Cohort Analysis",
       "ParentID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799",
       "Description": "Auto-created category from path: Skip/Sales/Cohort Analysis",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -311,7 +311,7 @@
       "Name": "Cohort Analysis",
       "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
       "Description": "Auto-created category from path: Skip/Members/Cohort Analysis",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -325,7 +325,7 @@
       "Name": "Cohorts",
       "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
       "Description": "Auto-created category from path: Skip/Members/Cohorts",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -339,7 +339,7 @@
       "Name": "Courses",
       "ParentID": "76AC9359-0959-4553-9D20-4589178E8798",
       "Description": "Auto-created category from path: Skip/Learning/Courses",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -353,7 +353,7 @@
       "Name": "Email",
       "ParentID": "4FC6DC99-B66A-4F70-9D42-FC9E81C0BD43",
       "Description": "Auto-created category from path: Skip/Marketing/Email",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -367,7 +367,7 @@
       "Name": "Engagement",
       "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
       "Description": "Auto-created category from path: Skip/Members/Engagement",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -381,7 +381,7 @@
       "Name": "Engagement",
       "ParentID": "F1C13450-0CE0-493D-8D4C-126AE028B10F",
       "Description": "Auto-created category from path: Skip/Organizations/Engagement",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -395,7 +395,7 @@
       "Name": "Engagement",
       "ParentID": "907A8463-69AF-4205-A9F1-4C668BBC29C5",
       "Description": "Auto-created category from path: Skip/Chapters/Engagement",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -409,7 +409,7 @@
       "Name": "Enrollments",
       "ParentID": "B42C64DE-D4FD-47CB-9C32-5DB6C2056D9B",
       "Description": "Auto-created category from path: Skip/Courses/Enrollments",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -423,7 +423,7 @@
       "Name": "Enrollments",
       "ParentID": "76AC9359-0959-4553-9D20-4589178E8798",
       "Description": "Auto-created category from path: Skip/Learning/Enrollments",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -437,7 +437,7 @@
       "Name": "KPIs",
       "ParentID": "C8ACE109-ED11-4ACD-B7FD-94B31D9F2056",
       "Description": "Auto-created category from path: Skip/Analytics/KPIs",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -451,7 +451,7 @@
       "Name": "Memberships",
       "ParentID": "8C6F805D-200E-406A-90CA-A379B2253098",
       "Description": "Auto-created category from path: Skip/Committees/Memberships",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -465,7 +465,7 @@
       "Name": "Orders",
       "ParentID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799",
       "Description": "Auto-created category from path: Skip/Sales/Orders",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -479,7 +479,7 @@
       "Name": "Performance",
       "ParentID": "B14247D0-8962-4B01-A485-8BFD76ABCECF",
       "Description": "Auto-created category from path: Skip/Events/Performance",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -493,7 +493,7 @@
       "Name": "Receivables",
       "ParentID": "7C13B6EF-2E46-4337-8B8F-AF03C8D131D7",
       "Description": "Auto-created category from path: Skip/Finance/Receivables",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -507,7 +507,7 @@
       "Name": "Revenue",
       "ParentID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799",
       "Description": "Auto-created category from path: Skip/Sales/Revenue",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -521,7 +521,7 @@
       "Name": "Revenue",
       "ParentID": "0E6918F0-453E-43DE-9995-431B11F9F342",
       "Description": "Auto-created category from path: Skip/Memberships/Revenue",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -535,7 +535,7 @@
       "Name": "Roster",
       "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
       "Description": "Auto-created category from path: Skip/Membership/Roster",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -549,7 +549,7 @@
       "Name": "Roster",
       "ParentID": "0E6918F0-453E-43DE-9995-431B11F9F342",
       "Description": "Auto-created category from path: Skip/Memberships/Roster",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -563,7 +563,7 @@
       "Name": "Rosters",
       "ParentID": "8C6F805D-200E-406A-90CA-A379B2253098",
       "Description": "Auto-created category from path: Skip/Committees/Rosters",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -577,7 +577,7 @@
       "Name": "Tiers",
       "ParentID": "0E6918F0-453E-43DE-9995-431B11F9F342",
       "Description": "Auto-created category from path: Skip/Memberships/Tiers",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -591,7 +591,7 @@
       "Name": "Transactions",
       "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
       "Description": "Auto-created category from path: Skip/Members/Transactions",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false
@@ -605,7 +605,7 @@
       "Name": "Trends",
       "ParentID": "DAE72EFC-4003-4B61-8ACE-15F61415C4EB",
       "Description": "Auto-created category from path: Skip/Executive/Trends",
-      "UserID": "@lookup:MJ: Users.Email=skip-service@skip.internal",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "DefaultCacheEnabled": false,
       "CacheInheritanceEnabled": true,
       "SkipEmbeddings": false

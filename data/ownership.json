@@ -61,6 +61,16 @@
       "classification": "config",
       "reason": "Application schema registration metadata (template-authored)"
     },
+    "activities": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "activity-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
     "address-links": {
       "tier": "generated",
       "classification": "loom",
@@ -440,6 +450,11 @@
       "tier": "config",
       "classification": "config",
       "reason": "Dropbox OAuth credential type so the storage account can name a credential; the credential VALUE is never in config"
+    },
+    "credentials": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Placeholder \"Dropbox OAuth\" credential (Values = {}, inactive) so the File Storage Account can resolve its CredentialID on a fresh install; the real secret is entered in Explorer, never in config"
     }
   }
 }
