@@ -304,10 +304,35 @@ const SCHEMAS_NEVER_SYNCED = [
  * natural-key guard (`WHERE ID = '<guid>' OR (EntityID = … AND Name = …)`), which is the shape the
  * violation message points at.
  *
- * CHECK 5, 6 and 7 are clean on the baseline at ANY watershed — it makes no schema-sync call, passes
- * only string literals to its 300-plus extended-property writes, and every one of the 362 entity-id
- * references it carries resolves to one of the 12 `Entity` rows it seeds itself. So the exemption
- * buys CHECK 4 only, and costs nothing elsewhere.
+ * CHECK 6 and 7 are clean on the baseline at ANY watershed — it passes only string literals to its
+ * 300-plus extended-property writes, and every one of the 362 entity-id references it carries
+ * resolves to one of the 12 `Entity` rows it seeds itself. Neither is gated on this stamp at all.
+ *
+ * CHECK 5 IS EXEMPTED TOO, and the cost is 7 more violations — measured the same way, by removing
+ * the stamp and re-running: 145 total, of which 138 are the CHECK 4 distribution above and 7 are
+ * CHECK 5. An earlier revision of this paragraph said the baseline "makes no schema-sync call" and
+ * that the exemption "buys CHECK 4 only". Both were wrong: it makes 17 calls carrying
+ * `@ExcludedSchemaNames`, and seven of them are not positively scoped —
+ *
+ *   6 at B202607141200:16093-16113  the inlined `R__RefreshMetadata` block, `@ExcludedSchemaNames`
+ *                                   = 'sys,staging' and no `@IncludedSchemaNames`
+ *   1 at B202607141200:16030        a long exclusion list, but still no `@IncludedSchemaNames`
+ *
+ * `@ExcludedSchemaNames` alone is not a scope. MJ's own proc bodies gate every WHERE on
+ * `(@HasInclude = 0 OR SchemaName IN @IncludedSchemas)` and set `@HasInclude` only when the caller
+ * supplies a non-empty include list, so omitting it leaves the reach at everything-but-sys-staging
+ * — `dbo`, `${mjSchema}`, and every sibling Open App schema, all of which are installed before this
+ * app. One of the seven is `spDeleteUnneededEntityFields`, which DELETEs over that reach. The
+ * repo's own pre-existing gate already forbids that proc in a V or B migration
+ * (`.github/scripts/check-migration-no-prune.mjs`); run read-only with `--all` it reports four hits
+ * here, and it does not fire in CI only because the CI form inspects PR-added lines.
+ *
+ * This is recorded rather than repaired because the repair is not available: the baseline is
+ * Skyway-checksummed and already applied, so editing it breaks every database that has it and
+ * changes nothing about what a future host runs. The exemption is still right — it is MORE
+ * justified for CHECK 5 than for CHECK 4, since these calls could otherwise fail CI permanently
+ * with no fix in reach. What is NOT available is pretending the door has nothing behind it. Track
+ * the exposure as an issue against the next baseline, not by moving this constant.
  *
  * Moving this stamp forward to quiet a NEW violation would be the wrong repair in every case.
  */
@@ -467,8 +492,12 @@ function shippedExclusionLists(repoRoot) {
         for (const file of readdirSync(dir).filter((f) => f.endsWith('.sql'))) {
             const version = gatedVersionOf(file);
             if (version === null) continue;
-            // The STRUCTURE mask, so `--` comments do not count: a commented-out call excludes
-            // nothing, so reading one is wrong twice over.
+            // The VALUES mask. Comments are blanked in BOTH masks, so a commented-out call still
+            // excludes nothing here — but `structure` also blanks string-literal BODIES, which is
+            // exactly where `@ExcludedSchemaNames='a,b,c'` lives. Reading `.structure` would leave
+            // `raw` all spaces, `names` empty, and every gated call reporting the full
+            // SCHEMAS_NEVER_SYNCED set as dropped. `.values` is the only correct mask at this site;
+            // findIdOnlyGuardedInserts and findUnguardedCoreInserts want `structure` and say so.
             const sql = maskSql(readFileSync(join(dir, file), 'utf-8')).values;
             for (const { raw, positivelyScoped } of exclusionListsIn(sql, procNames)) {
                 const names = raw.split(',').map((n) => n.trim()).filter((n) => n.length > 0);
