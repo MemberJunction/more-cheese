@@ -13,7 +13,7 @@
     "email": "marcelo.torres@bluecypress.io"
   },
   "repository": "https://github.com/MemberJunction/more-cheese",
-  "mjVersionRange": ">=6.1.0-edge.4 <7.0.0",
+  "mjVersionRange": ">=6.1.2 <7.0.0",
   "schema": {
     "name": "morecheese_members",
     "createIfNotExists": true,
@@ -21,7 +21,8 @@
   },
   "migrations": {
     "directory": "migrations",
-    "engine": "skyway"
+    "engine": "skyway",
+    "teardownDirectory": "migrations-teardown"
   },
   "metadata": {
     "directory": "generated"
@@ -40,7 +41,7 @@
       "repository": "https://github.com/MemberJunction/bizapps-accounting"
     },
     "mj-committees": {
-      "version": ">=1.0.0 <2.0.0",
+      "version": ">=1.2.0 <2.0.0",
       "repository": "https://github.com/MemberJunction/bizapps-committees"
     },
     "mj-bizapps-forms": {
@@ -56,7 +57,7 @@
       "repository": "https://github.com/MemberJunction/bizapps-issues"
     },
     "mj-secure-messaging": {
-      "version": ">=1.0.0 <2.0.0",
+      "version": ">=2.0.0 <3.0.0",
       "repository": "https://github.com/MemberJunction/bizapps-secure-messaging"
     },
     "mj-bizapps-sonar": {
