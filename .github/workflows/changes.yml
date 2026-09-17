@@ -47,22 +47,22 @@ jobs:
       - name: Validate Loom data project & schema conformance
         run: npm run validate:loom
 
-      # #30 dropped the MetadataSync seed migrations (world data now reaches a host via
+      # #30 dropped the Metadata_Sync seed migrations (world data now reaches a host via
       # `mj sync push` from generated/; the build engineer folds seeds at release). The
       # parity gate compares those seeds to generated/, so it has nothing to check until
-      # a `*MetadataSync*.sql` file returns. Detect that explicitly and skip the step
+      # a `*Metadata_Sync*.sql` file returns. Detect that explicitly and skip the step
       # visibly rather than letting it fail on every PR or pass on nothing.
-      - name: Detect MetadataSync seed migrations
+      - name: Detect Metadata_Sync seed migrations
         id: seed_check
         run: |
-          if ls migrations/*MetadataSync*.sql >/dev/null 2>&1; then
+          if ls migrations/*Metadata_Sync*.sql >/dev/null 2>&1; then
             echo "has_seeds=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_seeds=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::No MetadataSync seed migrations in migrations/ — sync-id parity gate skipped (see #30)"
+            echo "::notice::No Metadata_Sync seed migrations in migrations/ — sync-id parity gate skipped (see #30)"
           fi
 
-      - name: Assert MetadataSync IDs match generated/ for every loom directory
+      - name: Assert Metadata_Sync IDs match generated/ for every loom directory
         if: steps.seed_check.outputs.has_seeds == 'true'
         run: npm run check:sync-id-parity
 

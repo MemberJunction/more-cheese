@@ -65,12 +65,12 @@ function entityNameFor(dir) {
 
 const syncSqlFiles = fs
   .readdirSync(migrationsDir)
-  .filter((f) => /MetadataSync/i.test(f) && f.endsWith('.sql'))
+  .filter((f) => /Metadata_?Sync/i.test(f) && f.endsWith('.sql'))
   .map((f) => path.join(migrationsDir, f))
   .sort();
 
 if (syncSqlFiles.length === 0) {
-  console.error('❌ No MetadataSync migration files in migrations/');
+  console.error('❌ No Metadata_Sync migration files in migrations/');
   process.exit(1);
 }
 
@@ -191,7 +191,7 @@ async function loadInsertedKeys() {
 const byEntity = await loadInsertedKeys();
 
 let failed = 0;
-console.log(`🔍 Sync ID parity: ${loomDirs.length} loom directories vs ${syncSqlFiles.length} MetadataSync file(s)`);
+console.log(`🔍 Sync ID parity: ${loomDirs.length} loom directories vs ${syncSqlFiles.length} Metadata_Sync file(s)`);
 
 for (const dir of loomDirs) {
   const meta = treeKeysByDir.get(dir);
@@ -229,5 +229,5 @@ if (failed) {
   process.exit(1);
 }
 
-console.log('\n✅ MetadataSync inserted ID sets match generated/ for every loom directory.');
+console.log('\n✅ Metadata_Sync inserted ID sets match generated/ for every loom directory.');
 process.exit(0);

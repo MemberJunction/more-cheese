@@ -102,6 +102,8 @@ const FIELD_TARGET_DIR_MAP = new Map([
 // Each exclusion tracks hit counts; an exclusion that matches 0 records will fail the build to catch stale exclusions.
 const EXCLUDED_EXTERNAL_FIELDS = new Map([
   ['vector-indexes.ExternalID', { reason: 'Provider-side index name (a string, e.g. the Pinecone index), not a foreign key', hits: 0 }],
+  ['queries.EmbeddingModelID', { reason: 'Points to an MJ core AI Model seeded by MemberJunction', hits: 0 }],
+  ['queries.SQLDialectID', { reason: 'Points to an MJ core SQL Dialect seeded by MemberJunction', hits: 0 }],
   ['relationships.RelationshipTypeID', { reason: 'Points to @memberjunction/bizapps-common seeded types', hits: 0 }],
   ['form-responses.AnonymousSessionID', { reason: 'Anonymous browser session tokens from public form submissions', hits: 0 }],
   ['products.ProductTypeID', { reason: 'Points to @mj-biz-apps/orders seeded product types', hits: 0 }],
@@ -636,6 +638,12 @@ if (!baseInfo) {
       'order-lines': 'orders'
     };
 
+    // Deliberate removals are declared (with a reason) in data/pk-removals.json and are not "dropped".
+    let allowedRemovals = new Set();
+    try {
+      const rem = JSON.parse(readFileSync(resolve(process.cwd(), 'data', 'pk-removals.json'), 'utf-8'));
+      allowedRemovals = new Set((rem.removals || []).filter(r => r.reason).map(r => String(r.id).toUpperCase()));
+    } catch { /* no removals file */ }
     let totalDroppedPKs = 0;
     const droppedDetails = [];
 
@@ -645,6 +653,7 @@ if (!baseInfo) {
       let kept = 0;
       const missing = [];
       for (const id of bSet) {
+        if (allowedRemovals.has(id)) { kept++; continue; }
         if (cSet.has(id)) {
           kept++;
         } else {
