@@ -1,5 +1,5 @@
 /**
- * @mj-more-cheese-demo/server — the SERVER BOOTSTRAP package.
+ * @mj-biz-apps/more-cheese-server — the SERVER BOOTSTRAP package.
  *
  * This is the package named in mj-app.json under packages.server with role
  * "bootstrap". At startup MJAPI dynamically imports it and calls the function
@@ -18,7 +18,7 @@
 // Import the entities package to trigger @RegisterClass decorators.
 // (This app ships no custom Actions or server-side entity overrides — the
 // Actions + CoreEntitiesServer packages were dropped as empty; see mj-app.json.)
-import '@mj-more-cheese-demo/entities';
+import '@mj-biz-apps/more-cheese-entities';
 
 // Import generated GraphQL resolvers (registers them with type-graphql)
 import './generated/generated.js';

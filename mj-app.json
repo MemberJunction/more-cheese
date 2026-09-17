@@ -17,7 +17,7 @@
   "schema": {
     "name": "morecheese_members",
     "createIfNotExists": true,
-    "entityPackage": "@mj-more-cheese-demo/entities"
+    "entityPackage": "@mj-biz-apps/more-cheese-entities"
   },
   "migrations": {
     "directory": "migrations",
@@ -71,21 +71,21 @@
   "packages": {
     "server": [
       {
-        "name": "@mj-more-cheese-demo/server",
+        "name": "@mj-biz-apps/more-cheese-server",
         "role": "bootstrap",
         "startupExport": "LoadMoreCheeseDemoServer"
       }
     ],
     "client": [
       {
-        "name": "@mj-more-cheese-demo/ng",
+        "name": "@mj-biz-apps/more-cheese-ng",
         "role": "bootstrap",
         "startupExport": "LoadMoreCheeseDemoClient"
       }
     ],
     "shared": [
       {
-        "name": "@mj-more-cheese-demo/entities",
+        "name": "@mj-biz-apps/more-cheese-entities",
         "role": "library"
       }
     ]

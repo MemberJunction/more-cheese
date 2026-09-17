@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { morecheesemembersAdvocacyActionEntity } from '@mj-more-cheese-demo/entities';
+import { morecheesemembersAdvocacyActionEntity } from '@mj-biz-apps/more-cheese-entities';
 import { RegisterClass } from '@memberjunction/global';
 import { BaseFormComponent } from '@memberjunction/ng-base-forms';
 

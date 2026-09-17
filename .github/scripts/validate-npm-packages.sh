@@ -1,5 +1,5 @@
 #!/bin/bash
-# Validates that all @mj-more-cheese-demo packages exist on npm before publishing
+# Validates that all @mj-biz-apps packages exist on npm before publishing
 
 echo "Checking for new packages that need npm placeholders..."
 
@@ -11,8 +11,8 @@ RETRY_DELAY=2
 for pkg_json in $(find packages -name "package.json" -maxdepth 2 -not -path "*/node_modules/*"); do
   name=$(jq -r '.name // ""' "$pkg_json")
 
-  # Only check @mj-more-cheese-demo scoped packages
-  if [[ "$name" != @mj-more-cheese-demo/* ]]; then
+  # Only check @mj-biz-apps scoped packages
+  if [[ "$name" != @mj-biz-apps/* ]]; then
     continue
   fi
 
@@ -21,11 +21,21 @@ for pkg_json in $(find packages -name "package.json" -maxdepth 2 -not -path "*/n
   # Check if package exists on npm with retry logic
   EXISTS=false
   for attempt in $(seq 1 $MAX_RETRIES); do
-    if timeout 10 npm view "$name" version > /dev/null 2>&1; then
+    # `timeout` is coreutils: present on Linux (GitHub Actions), absent on macOS.
+    # Called unguarded it exits 127, which this loop reads as "not found" — so a
+    # local run reported every package missing no matter what was on npm, and the
+    # retry made it look intermittent rather than broken. CI was always fine,
+    # which is why it survived: the check is only wrong where you run it by hand.
+    if command -v timeout > /dev/null 2>&1; then
+      timeout 10 npm view "$name" version > /dev/null 2>&1
+    else
+      npm view "$name" version > /dev/null 2>&1
+    fi
+    exit_code=$?
+    if [ $exit_code -eq 0 ]; then
       EXISTS=true
       break
     fi
-    exit_code=$?
     if [ $exit_code -eq 1 ]; then
       # Package not found (E404) — no point retrying
       break
@@ -40,7 +50,7 @@ for pkg_json in $(find packages -name "package.json" -maxdepth 2 -not -path "*/n
 
   # Progress indicator
   if [ $((CHECKED % 10)) -eq 0 ]; then
-    echo "  Checked $CHECKED @mj-more-cheese-demo packages..."
+    echo "  Checked $CHECKED @mj-biz-apps packages..."
   fi
 done
 
@@ -56,4 +66,4 @@ if [ ${#MISSING[@]} -gt 0 ]; then
   exit 1
 fi
 
-echo "All $CHECKED @mj-more-cheese-demo packages exist on npm"
+echo "All $CHECKED @mj-biz-apps packages exist on npm"
