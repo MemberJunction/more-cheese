@@ -63,13 +63,23 @@ covered there). Read the relevant topic before working in its area:
    import, lockfile) are local-only — never commit them to MJ.
 7. **`mj sync push` of `generated/` must run from the MJ repo cwd** so
    `dynamicPackages.server` loads (Accounting/Orders/Common). Do not `cd` here
-   to sync. People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
-   — they are display-only geo (virtual PrimaryAddress*). Addresses carry
-   `Latitude`/`Longitude` in JSON; do **not** skip geo on addresses (coords
-   already set → provider is not called). Do **not** author `RecordGeoCode` JSON
-   or SHA hashes. Parallel default is 10: each record gets its own provider
-   (shared pool, own TX). Full command:
-   [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
+   to sync.
+   - **CRITICAL: NEVER pass `--no-app-packages`**. Passing `--no-app-packages` forces
+     `GetEntityObject` to fall back to generic `BaseEntity`, bypassing `OrderEntityServer`.
+     Loom does **not** (and should never) emit static JSON for Journal Entries or
+     Subscriptions; they are automatic runtime side-effects of `OrderEntityServer.Save()`
+     booking confirmed orders. Bypassing app packages causes confirmed orders to be saved
+     without Journal Entries or Subscriptions.
+   - **Heap Size**: Set `NODE_OPTIONS="--max-old-space-size=16384"` when running `mj sync push`
+     on large datasets like `generated/` (17k+ orders with deeply nested lines) to prevent V8
+     heap exhaustion during sync.
+   - People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
+     — they are display-only geo (virtual PrimaryAddress*). Addresses carry
+     `Latitude`/`Longitude` in JSON; do **not** skip geo on addresses (coords
+     already set → provider is not called). Do **not** author `RecordGeoCode` JSON
+     or SHA hashes. Parallel default is 10: each record gets its own provider
+     (shared pool, own TX). Full command:
+     [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
 8. **ICF accounting seed** lives in `generated/companies` (with `extension` for
    `AccountingCompanyProfile`), `gl-accounts`, `gl-account-links`, and
    `journal-entry-sequences`. Company-level `GLAccountLink` rows are required for

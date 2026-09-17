@@ -61,6 +61,16 @@
       "classification": "config",
       "reason": "Application schema registration metadata (template-authored)"
     },
+    "activities": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "activity-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
     "address-links": {
       "tier": "generated",
       "classification": "loom",
