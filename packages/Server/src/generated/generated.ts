@@ -17,7 +17,7 @@ import { MaxLength } from 'class-validator';
 import * as mj_core_schema_server_object_types from '@memberjunction/server'
 
 
-import { morecheesemembersAdvocacyActionEntity, morecheeselearningCertificationEntity, morecheeseeventsCompetitionEntryEntity, morecheeselearningCourseEnrollmentEntity, morecheeselearningCourseEntity, morecheesemembersDataQualityLabelEntity, morecheeseeventsEventRegistrationEntity, morecheeseeventsEventEntity, morecheeselearningMemberCertificationEntity, morecheesemembersMemberProfileEntity, morecheesemembersMembershipPeriodEntity, morecheesemembersOrganizationProfileEntity } from '@mj-more-cheese-demo/entities';
+import { morecheesemembersAdvocacyActionEntity, morecheeselearningCertificationEntity, morecheeseeventsCompetitionEntryEntity, morecheeselearningCourseEnrollmentEntity, morecheeselearningCourseEntity, morecheesemembersDataQualityLabelEntity, morecheeseeventsEventRegistrationEntity, morecheeseeventsEventEntity, morecheeselearningMemberCertificationEntity, morecheesemembersMemberProfileEntity, morecheesemembersMembershipPeriodEntity, morecheesemembersOrganizationProfileEntity } from '@mj-biz-apps/more-cheese-entities';
     
 
 //****************************************************************************

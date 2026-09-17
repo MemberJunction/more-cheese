@@ -41,7 +41,9 @@ per app. Worked example: [`../template-docs/metadata.md`](../template-docs/metad
 World data (`generated/`) **must** be pushed from the **MJ repo cwd** with the
 local CLI so host `dynamicPackages.server` loads (Common / Accounting / Orders
 entity servers). Confirmed orders book subscriptions and journal entries only
-on that path.
+on that path. **NEVER pass `--no-app-packages`**, which forces generic `BaseEntity`
+and bypasses `OrderEntityServer`'s booking lifecycle, leaving confirmed orders without
+Journal Entries or Subscriptions.
 
 People and Organizations `.mj-sync.json` set `"push": { "skipGeoCoding": true }`
 because they are **display-only** geo (virtual `PrimaryAddressLatitude`). Addresses

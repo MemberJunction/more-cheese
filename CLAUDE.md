@@ -13,11 +13,11 @@ migrations/            - Skyway migrations for the app schema (starts empty)
 generated/             - mj-sync synthetic data & world model (Loom-generated)
 config/                - mj-sync application configuration & taxonomies
 packages/
-  Entities/            - @mj-more-cheese-demo/entities   (CodeGen entity subclasses)
-  CoreEntitiesServer/  - @mj-more-cheese-demo/core-entities-server (server-side entity overrides)
-  Actions/             - @mj-more-cheese-demo/actions    (MJ Actions)
-  Server/              - @mj-more-cheese-demo/server     (server bootstrap -> MJAPI)
-  Angular/             - @mj-more-cheese-demo/ng         (client bootstrap -> MJExplorer)
+  Entities/            - @mj-biz-apps/more-cheese-entities   (CodeGen entity subclasses)
+  CoreEntitiesServer/  - @mj-biz-apps/more-cheese-core-entities-server (server-side entity overrides)
+  Actions/             - @mj-biz-apps/more-cheese-actions    (MJ Actions)
+  Server/              - @mj-biz-apps/more-cheese-server     (server bootstrap -> MJAPI)
+  Angular/             - @mj-biz-apps/more-cheese-ng         (client bootstrap -> MJExplorer)
 docs/                  - how this repo works (branching, publishing, codegen, linking)
 docs/claude/           - the MemberJunction development guide (topic-split, with TOC)
 ```
@@ -63,13 +63,23 @@ covered there). Read the relevant topic before working in its area:
    import, lockfile) are local-only — never commit them to MJ.
 7. **`mj sync push` of `generated/` must run from the MJ repo cwd** so
    `dynamicPackages.server` loads (Accounting/Orders/Common). Do not `cd` here
-   to sync. People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
-   — they are display-only geo (virtual PrimaryAddress*). Addresses carry
-   `Latitude`/`Longitude` in JSON; do **not** skip geo on addresses (coords
-   already set → provider is not called). Do **not** author `RecordGeoCode` JSON
-   or SHA hashes. Parallel default is 10: each record gets its own provider
-   (shared pool, own TX). Full command:
-   [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
+   to sync.
+   - **CRITICAL: NEVER pass `--no-app-packages`**. Passing `--no-app-packages` forces
+     `GetEntityObject` to fall back to generic `BaseEntity`, bypassing `OrderEntityServer`.
+     Loom does **not** (and should never) emit static JSON for Journal Entries or
+     Subscriptions; they are automatic runtime side-effects of `OrderEntityServer.Save()`
+     booking confirmed orders. Bypassing app packages causes confirmed orders to be saved
+     without Journal Entries or Subscriptions.
+   - **Heap Size**: Set `NODE_OPTIONS="--max-old-space-size=16384"` when running `mj sync push`
+     on large datasets like `generated/` (17k+ orders with deeply nested lines) to prevent V8
+     heap exhaustion during sync.
+   - People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
+     — they are display-only geo (virtual PrimaryAddress*). Addresses carry
+     `Latitude`/`Longitude` in JSON; do **not** skip geo on addresses (coords
+     already set → provider is not called). Do **not** author `RecordGeoCode` JSON
+     or SHA hashes. Parallel default is 10: each record gets its own provider
+     (shared pool, own TX). Full command:
+     [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
 8. **ICF accounting seed** lives in `generated/companies` (with `extension` for
    `AccountingCompanyProfile`), `gl-accounts`, `gl-account-links`, and
    `journal-entry-sequences`. Company-level `GLAccountLink` rows are required for
@@ -95,7 +105,7 @@ covered there). Read the relevant topic before working in its area:
 
 ```sh
 # linked (from the MJ repo root — the normal mode):
-npx turbo build --filter="@mj-more-cheese-demo/*"
+npx turbo build --filter="@mj-biz-apps/*"
 npx mj migrate --schema morecheese_members --dir packages/dev-apps/more-cheese-demo/migrations
 npx mj codegen
 
