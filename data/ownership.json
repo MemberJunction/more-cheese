@@ -445,6 +445,11 @@
       "tier": "config",
       "classification": "config",
       "reason": "Placeholder \"Dropbox OAuth\" credential (Values = {}, inactive) so the File Storage Account can resolve its CredentialID on a fresh install; the real secret is entered in Explorer, never in config"
+    },
+    "user-settings": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Home-screen pins for the demo user (HomeApp.PinnedItems): Conversations plus the four Skip dashboards, so a fresh install opens to them"
     }
   }
 }
