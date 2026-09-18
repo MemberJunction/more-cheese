@@ -62,7 +62,7 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (391 distinct records; 417 declared across
+-- Seed provenance (388 distinct records; 414 declared across
 -- 37 directories, 26 of them declared in two directories and inserted once):
 --     75 from config/conversations
 --     63 from config/queries
@@ -72,7 +72,7 @@
 --     25 from config/resource-permissions
 --     25 from config/user-views
 --     23 from config/conversation-detail-artifacts
---     22 from config/user-applications
+--     19 from config/user-applications
 --     10 from config/sonar-factors
 --     10 from config/sonar-model-factors
 --     10 from config/sonar-model-related-entities
@@ -458,14 +458,11 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Score Models', '05C13018-27B8-53DE-9D1D-129E6E15DF1C'),
     ('MJ_BizApps_Sonar: Time Windows', 'CF6F428F-7016-5898-BF94-22795E3B3F91'),
     ('MJ_BizApps_Sonar: Time Windows', '97DF3796-A479-558E-9927-755A48D0D061'),
-    ('MJ: User Applications', '179DE7D3-EA5D-4A9A-8F4E-27A5EDB25460'),
-    ('MJ: User Applications', '22256767-18DA-4D43-9991-AFC6D2B3F605'),
     ('MJ: User Applications', '272F8C07-1C6F-41F9-AFD5-648ED362F5A6'),
     ('MJ: User Applications', '2E205A2C-270F-4BEC-AAB8-54D412105993'),
     ('MJ: User Applications', '3385D969-9511-4517-9F5D-0F7FDD9BF8C5'),
     ('MJ: User Applications', '38FCF30B-F7A8-49E5-A606-69869E960048'),
     ('MJ: User Applications', '46C26329-6033-4B48-AC2E-2703093EAC43'),
-    ('MJ: User Applications', '4B5B4F25-4672-4A93-B6C4-A63031669F25'),
     ('MJ: User Applications', '5A29431D-B198-4CB5-9346-77A051FE6CE6'),
     ('MJ: User Applications', '5C2971D3-B51E-4BF3-8E31-5E3EFDFE674B'),
     ('MJ: User Applications', '5D1134B3-EDE3-4334-BB42-435E04E0504E'),
