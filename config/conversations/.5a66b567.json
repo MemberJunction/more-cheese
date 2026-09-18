@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Create a treemap visualization showing our revenue breakdown by membership type. Each rectangle should be sized by total revenue amount, and colored by growth rate compared to last year (use a gradient from red for negative growth to green for positive growth). When I click on any membership type rectangle, I want to see a horizontal bar chart showing the top 10 members in that type ranked by their individual revenue contribution. Then, when I click on any member's bar, show me a detailed breakdown table listing all their transactions (memberships, event registrations, course enrollments) with dates, amounts, and transaction types. Make sure each row in that transaction table is clickable so I can open the actual record. Include a breadcrumb or back button so I can navigate back up through the levels. The treemap should show both the membership type name and the total revenue amount in each rectangle. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

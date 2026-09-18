@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Calculate the average lifetime value (total revenue generated) for members grouped by the year they joined, and show how this has changed over time in a chart. When I click on a year, show me a pie chart breaking down revenue by type (membership fees, events, courses). Then let me click a pie slice to see the actual members and transactions. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

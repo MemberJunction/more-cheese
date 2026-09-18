@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Show me all events from the past year ranked by total revenue generated, including the number of registrations for each event. Display as a table. Let me click on an event to see who registered for it. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

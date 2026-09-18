@@ -33,16 +33,27 @@ const BASELINE = 'B202607141200__v1.0.0_MoreCheese_Baseline.sql';
 const state = ({ tag = null, released = [BASELINE], current = [BASELINE], syncChanged = [] } = {}) =>
     () => ({ tag, released, current, syncChanged });
 
-const part = (n, m, stamp = '202609180900') => `V${stamp}__v1.2.0__Metadata_Sync_Part${n}of${m}.sql`;
+// `base` is the GENERATION stamp; part N's own stamp is base + (N − 1) minutes, as the assembler writes
+// them (Skyway refuses two files with one version, so parts cannot share a stamp).
+const plusMinutes = (stamp, n) => {
+    const t = new Date(
+        Date.UTC(+stamp.slice(0, 4), +stamp.slice(4, 6) - 1, +stamp.slice(6, 8), +stamp.slice(8, 10), +stamp.slice(10, 12)) +
+            n * 60_000,
+    );
+    const pad = (x) => String(x).padStart(2, '0');
+    return `${t.getUTCFullYear()}${pad(t.getUTCMonth() + 1)}${pad(t.getUTCDate())}${pad(t.getUTCHours())}${pad(t.getUTCMinutes())}`;
+};
+const part = (n, m, base = '202609180900') => `V${plusMinutes(base, n - 1)}__v1.2.0__Metadata_Sync_Part${n}of${m}.sql`;
 
 // ── parseSeedName ───────────────────────────────────────────────────────────────────────────────
 
 test('a parted seed name yields its generation stamp and its place in it', () => {
     assert.deepEqual(parseSeedName(part(2, 4)), {
         file: part(2, 4),
-        stamp: '202609180900',
+        stamp: '202609180901',
         part: 2,
         of: 4,
+        generation: '202609180900',
     });
 });
 
@@ -55,8 +66,12 @@ test('an unparted seed name yields a stamp and no part', () => {
 // The label carries the app version, and two parts of one run can legitimately disagree about it if
 // the release version is bumped between writing them. The STAMP is the generation key.
 test('the label is not part of the generation key', () => {
-    assert.equal(parseSeedName('V202609180900__v1.2.0__Metadata_Sync_Part1of2.sql').stamp, '202609180900');
-    assert.equal(parseSeedName('V202609180900__v1.2.1__Metadata_Sync_Part2of2.sql').stamp, '202609180900');
+    assert.equal(parseSeedName('V202609180900__v1.2.0__Metadata_Sync_Part1of2.sql').generation, '202609180900');
+    assert.equal(parseSeedName('V202609180901__v1.2.1__Metadata_Sync_Part2of2.sql').generation, '202609180900');
+});
+
+test('a part offset across a day boundary still folds back to its generation', () => {
+    assert.equal(parseSeedName('V202609190001__v1.2.0__Metadata_Sync_Part3of3.sql').generation, '202609182359');
 });
 
 test('a name this gate cannot order reports as unreadable rather than guessing', () => {
@@ -103,7 +118,7 @@ test('several missing parts are all named', () => {
     assert.match(problems[0], /part\(s\) 1, 3, 4, 5/);
 });
 
-test('two files claiming the same part fail', () => {
+test('two files sharing one version stamp fail, because Skyway refuses the set', () => {
     const files = [
         BASELINE,
         'V202609180900__v1.2.0__Metadata_Sync_Part1of2.sql',
@@ -112,11 +127,11 @@ test('two files claiming the same part fail', () => {
     ];
     const { problems } = findUnconsolidatedSeedDeltas('/x', state({ current: files }));
     assert.equal(problems.length, 1);
-    assert.match(problems[0], /2 files claiming part 1 of 2/);
+    assert.match(problems[0], /2 seed files share the version stamp 202609180900/);
 });
 
 test('parts disagreeing about the total fail', () => {
-    const files = [BASELINE, part(1, 3), 'V202609180900__v1.2.0__Metadata_Sync_Part2of4.sql'];
+    const files = [BASELINE, part(1, 3), 'V202609180901__v1.2.0__Metadata_Sync_Part2of4.sql'];
     const { problems } = findUnconsolidatedSeedDeltas('/x', state({ current: files }));
     assert.equal(problems.length, 1);
     assert.match(problems[0], /disagrees about how many parts/);
@@ -125,7 +140,8 @@ test('parts disagreeing about the total fail', () => {
 // Without PartNofM on every file, "how many parts should there be" has no answer, so a missing one
 // is undetectable — which is the property the whole rule rests on.
 test('mixing a parted and an unparted file in one generation fails', () => {
-    const files = [BASELINE, part(1, 2), 'V202609180900__v1.2.0__Metadata_Sync.sql'];
+    // Part2of2 stamped 0901 folds back to generation 0900, where the unparted file sits under its own stamp.
+    const files = [BASELINE, part(2, 2), 'V202609180900__v1.2.0__Metadata_Sync.sql'];
     const { problems } = findUnconsolidatedSeedDeltas('/x', state({ current: files }));
     assert.equal(problems.length, 1);
     assert.match(problems[0], /mixes parted and unparted/);
@@ -139,7 +155,7 @@ test('two unparted files under one stamp fail', () => {
     ];
     const { problems } = findUnconsolidatedSeedDeltas('/x', state({ current: files }));
     assert.equal(problems.length, 1);
-    assert.match(problems[0], /unparted seed files with the same stamp/);
+    assert.match(problems[0], /2 seed files share the version stamp 202609180900/);
 });
 
 /**

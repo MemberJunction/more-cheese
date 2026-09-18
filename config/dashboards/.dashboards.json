@@ -6,7 +6,7 @@
     "fields": {
       "Name": "Membership Analytics",
       "Description": "Five Skip-built dashboards pinned side by side: membership growth, revenue by source, member lifetime value by join cohort, chapter engagement, and the member journey flow. Each panel drills into the underlying records.",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "CategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "Type": "Config",
       "Scope": "Global",
@@ -21,7 +21,7 @@
     "fields": {
       "Name": "Revenue and Finance",
       "Description": "Revenue and receivables from the Skip suite: product-category breakdown, monthly invoices, year-over-year comparison, the membership revenue treemap and cohort lifetime value.",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "CategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "Type": "Config",
       "Scope": "Global",
@@ -36,7 +36,7 @@
     "fields": {
       "Name": "Events and Learning",
       "Description": "Events and the credential ladder: upcoming events, quarterly attendance, course completion trends, top courses and the catalog by category.",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "CategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "Type": "Config",
       "Scope": "Global",
@@ -51,7 +51,7 @@
     "fields": {
       "Name": "Member Engagement",
       "Description": "Who shows up: engagement score leaderboard, the top ten members, the chapter engagement matrix, member activity timelines, email engagement and organization activity rankings.",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "CategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "Type": "Config",
       "Scope": "Global",

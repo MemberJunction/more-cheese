@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Show me the top 10 courses by enrollment in a chart. When I click on a course, show me a line chart of completion rates by enrollment quarter. Then let me click on any quarter to see the actual students who enrolled then and whether they completed. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,
