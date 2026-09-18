@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Show me how many active members we have, broken down by membership type in a chart. I'd like to be able to click on any membership type to see the actual list of members in that category. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

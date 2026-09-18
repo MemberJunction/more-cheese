@@ -5,7 +5,7 @@
     },
     "fields": {
       "DashboardID": "@lookup:MJ: Dashboards.Name=Membership Analytics",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "DisplayName": "Membership Analytics",
       "Sequence": 1
@@ -17,7 +17,7 @@
     },
     "fields": {
       "DashboardID": "@lookup:MJ: Dashboards.Name=Revenue and Finance",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "DisplayName": "Revenue and Finance",
       "Sequence": 2
@@ -29,7 +29,7 @@
     },
     "fields": {
       "DashboardID": "@lookup:MJ: Dashboards.Name=Events and Learning",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "DisplayName": "Events and Learning",
       "Sequence": 3
@@ -41,7 +41,7 @@
     },
     "fields": {
       "DashboardID": "@lookup:MJ: Dashboards.Name=Member Engagement",
-      "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
       "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
       "DisplayName": "Member Engagement",
       "Sequence": 4

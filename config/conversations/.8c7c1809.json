@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "For each organization with 5 or more member employees, show me the organization name, member count, and their combined event and course activity. Display as a table ranked by total activity. Let me click on an organization to see who the members are and their individual activity. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

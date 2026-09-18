@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Show me our total revenue for this year, broken down by month in a bar chart. When I click on a month, I want to see the invoices for that month. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

@@ -22,7 +22,8 @@
  * that actually costs something — a gate that fails on the correct shape is one somebody switches off.
  *
  * So the unit of "one seed" is the GENERATION, not the file. {@link findUnconsolidatedSeedDeltas}
- * groups the unreleased seed files by version stamp and asserts:
+ * groups the unreleased seed files by GENERATION — the base stamp each part's own stamp was offset
+ * from (see {@link generationStamp}; Skyway forbids two files with one version) — and asserts:
  *
  *   • exactly one stamp — two stamps are two generations, which IS the per-PR cadence returning;
  *   • the parts of that stamp form a complete `1of M … M of M` run — no gap, no duplicate, no
@@ -175,13 +176,37 @@ export function readReleaseState(repoRoot) {
  */
 export function parseSeedName(file) {
     const m = /^[VB](\d{12})__.*?Metadata[_ -]?Sync(?:[_-]?Part(\d+)of(\d+))?\.sql$/i.exec(file);
-    if (m === null) return { file, stamp: null, part: null, of: null };
+    if (m === null) return { file, stamp: null, part: null, of: null, generation: null };
+    const stamp = m[1];
+    const part = m[2] === undefined ? null : Number(m[2]);
     return {
         file,
-        stamp: m[1],
-        part: m[2] === undefined ? null : Number(m[2]),
+        stamp,
+        part,
         of: m[3] === undefined ? null : Number(m[3]),
+        generation: generationStamp(stamp, part),
     };
+}
+
+/**
+ * The generation a seed file belongs to, derived from its own stamp and part number.
+ *
+ * Skyway (like Flyway) refuses two migrations with the same version — `Found more than one migration
+ * with version …` — so the parts of one split generation CANNOT share a stamp. The assembler
+ * (`release-seed.sh`) therefore stamps part N at `<base> + (N − 1)` minutes: `…0305_Part1of5`,
+ * `…0306_Part2of5`, … `…0309_Part5of5`. Undoing that offset gives every part of a run the same
+ * generation key, which is what the rules below group on. Unparted files are their own generation.
+ */
+export function generationStamp(stamp, part) {
+    if (stamp === null || part === null || part <= 1) return stamp;
+    const y = Number(stamp.slice(0, 4));
+    const mo = Number(stamp.slice(4, 6)) - 1;
+    const d = Number(stamp.slice(6, 8));
+    const h = Number(stamp.slice(8, 10));
+    const mi = Number(stamp.slice(10, 12));
+    const t = new Date(Date.UTC(y, mo, d, h, mi) - (part - 1) * 60_000);
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${t.getUTCFullYear()}${pad(t.getUTCMonth() + 1)}${pad(t.getUTCDate())}${pad(t.getUTCHours())}${pad(t.getUTCMinutes())}`;
 }
 
 /**
@@ -220,10 +245,28 @@ export function findUnconsolidatedSeedDeltas(repoRoot = REPO_ROOT, readState = r
     }
 
     const readable = parsed.filter((p) => p.stamp !== null);
+
+    // Two files with one version stamp never reach a database: Skyway refuses the set outright
+    // ("Found more than one migration with version …"). Report that first and stop — generation
+    // accounting on a set the runner will not load is noise on top of the real problem.
+    const filesByStamp = new Map();
+    for (const p of readable) filesByStamp.set(p.stamp, [...(filesByStamp.get(p.stamp) ?? []), p.file]);
+    const sharedStamps = [...filesByStamp.entries()].filter(([, files]) => files.length > 1);
+    if (sharedStamps.length > 0) {
+        for (const [stamp, files] of sharedStamps) {
+            problems.push(
+                `${files.length} seed files share the version stamp ${stamp}: ${files.join(', ')}. Skyway refuses ` +
+                    'duplicate versions, so this set can never be applied. Parts of one generation are stamped ' +
+                    '`<base> + (N − 1)` minutes apart (what the assembler does); regenerate rather than renaming by hand.',
+            );
+        }
+        return { problems, tag: state.tag, unreleased };
+    }
+
     const byStamp = new Map();
     for (const p of readable) {
-        if (!byStamp.has(p.stamp)) byStamp.set(p.stamp, []);
-        byStamp.get(p.stamp).push(p);
+        if (!byStamp.has(p.generation)) byStamp.set(p.generation, []);
+        byStamp.get(p.generation).push(p);
     }
 
     if (byStamp.size > 1) {

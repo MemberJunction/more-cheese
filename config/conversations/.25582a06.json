@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Build me a matrix table showing member engagement across chapters and time periods. The rows should be our chapters (one row per chapter), and the columns should be quarters for the past 2 years (8 quarters total). Each cell should show the engagement score for that chapter in that quarter, with the number color-coded (green for high engagement above 75, yellow for medium 50-75, red for low below 50). Inside each cell, include a tiny sparkline showing the trend of that chapter's weekly engagement throughout the quarter. When I click on any cell, show me a bar chart breaking down the engagement by activity type (events attended, courses completed, committee participation) for that specific chapter and quarter. Then when I click on any activity type bar, show me a detailed table listing the actual activities - who participated, what they did, and when. Make every row in that activity table clickable to open the member, event, course, or committee record as appropriate. The matrix should have sortable columns so I can reorder by different quarters, and highlight the cell I'm currently viewing. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,
