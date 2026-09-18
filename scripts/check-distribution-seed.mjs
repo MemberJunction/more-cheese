@@ -89,30 +89,43 @@ const UUID_LITERAL = new RegExp(`^N?'(${UUID_PATTERN})'$`);
  * an unmasked CHECK 2 reads as a third placeholder and fails the only migration this app has.
  */
 function maskSql(sql) {
-    // `split('')`, never `[...sql]`: the spread iterates CODE POINTS while every index below is a
-    // UTF-16 CODE UNIT, so one astral character — and this repo's baseline and generated data are
-    // full of them — slides the mask out of alignment with the source. A silent pass.
-    const structure = sql.split('');
-    const values = sql.split('');
-    const blankBoth = (from, to) => {
-        for (let k = from; k < to; k++) {
-            if (structure[k] === '\n') continue;
-            structure[k] = ' ';
-            values[k] = ' ';
-        }
-    };
-    const blankStructureOnly = (from, to) => {
-        for (let k = from; k < to; k++) if (structure[k] !== '\n') structure[k] = ' ';
-    };
+    const cached = MASK_CACHE.get(sql);
+    if (cached !== undefined) return cached;
+    // One linear scan over the source, jumping with a regex to the next `--`, `/*` or `'` and copying
+    // the untouched stretches as slices. Offsets are UTF-16 code units throughout (slice/indexOf), so
+    // the masks stay aligned with the source even through the astral characters this repo's data is
+    // full of. The previous shape — `sql.split('')` twice and a per-character loop — allocated two
+    // 90-million-element arrays per seed part and ran the CI job past its 10-minute budget; this pass
+    // is a few hundred milliseconds per part, and the result is cached because five callers mask the
+    // same file.
+    const structure = [];
+    const values = [];
+    const blank = (text) => text.replace(/[^\n]/g, ' ');
+    const next = /--|\/\*|'/g;
     let i = 0;
     while (i < sql.length) {
-        const pair = sql.slice(i, i + 2);
-        if (pair === '--') {
+        next.lastIndex = i;
+        const m = next.exec(sql);
+        if (m === null) {
+            const rest = sql.slice(i);
+            structure.push(rest);
+            values.push(rest);
+            break;
+        }
+        if (m.index > i) {
+            const plain = sql.slice(i, m.index);
+            structure.push(plain);
+            values.push(plain);
+        }
+        i = m.index;
+        if (m[0] === '--') {
             const newline = sql.indexOf('\n', i);
             const end = newline === -1 ? sql.length : newline;
-            blankBoth(i, end);
+            const blanked = blank(sql.slice(i, end));
+            structure.push(blanked);
+            values.push(blanked);
             i = end;
-        } else if (pair === '/*') {
+        } else if (m[0] === '/*') {
             // Ends at the FIRST `*/`, deliberately, even though T-SQL block comments nest. Tracking
             // depth is more faithful to the dialect and strictly worse here: a header reading
             // "per migrations/*.sql convention" opens a phantom nesting level the real `*/` cannot
@@ -121,19 +134,32 @@ function maskSql(sql) {
             // structure pass, which fails loudly instead of silently.
             const close = sql.indexOf('*/', i + 2);
             const end = close === -1 ? sql.length : close + 2;
-            blankBoth(i, end);
+            const blanked = blank(sql.slice(i, end));
+            structure.push(blanked);
+            values.push(blanked);
             i = end;
-        } else if (sql[i] === "'") {
-            let j = i + 1;
-            while (j < sql.length && !(sql[j] === "'" && sql[j + 1] !== "'")) j += sql[j] === "'" ? 2 : 1;
-            blankStructureOnly(i + 1, j); // quotes stay, so offsets and token shape are preserved
-            i = Math.min(j + 1, sql.length);
         } else {
-            i++;
+            // String literal: the closing quote is the first `'` not followed by another `'`.
+            let j = i + 1;
+            for (;;) {
+                const q = sql.indexOf("'", j);
+                if (q === -1) { j = sql.length; break; }
+                if (sql[q + 1] === "'") { j = q + 2; continue; }
+                j = q;
+                break;
+            }
+            const literal = sql.slice(i, Math.min(j + 1, sql.length));
+            values.push(literal);
+            // quotes stay, so offsets and token shape are preserved; only the body is blanked
+            structure.push(j >= sql.length ? "'" + blank(literal.slice(1)) : "'" + blank(literal.slice(1, -1)) + "'");
+            i = Math.min(j + 1, sql.length);
         }
     }
-    return { structure: structure.join(''), values: values.join('') };
+    const result = { structure: structure.join(''), values: values.join('') };
+    MASK_CACHE.set(sql, result);
+    return result;
 }
+const MASK_CACHE = new Map();
 
 /** Index of the `)` closing the `(` at `open`, or -1. */
 function matchingParen(text, open) {
@@ -1076,13 +1102,32 @@ const ENTITY_REFERENCE_SHAPES = [
  * would read as a reference. That is a false positive in the loud direction, and this file prefers
  * loud.
  */
+
+/** Returns a function mapping a character offset to its 1-based line number, O(log n) per call. */
+function lineLocator(text) {
+    const starts = [0];
+    for (let i = text.indexOf('\n'); i !== -1; i = text.indexOf('\n', i + 1)) starts.push(i + 1);
+    return (offset) => {
+        let lo = 0, hi = starts.length - 1;
+        while (lo < hi) {
+            const mid = (lo + hi + 1) >> 1;
+            if (starts[mid] <= offset) lo = mid; else hi = mid - 1;
+        }
+        return lo + 1;
+    };
+}
+
 export function findEntityIdReferences(sql) {
     const { values } = maskSql(sql);
     const found = [];
+    // Line numbers by binary search over the newline offsets, computed once: slicing the 90 MB
+    // prefix and splitting it per match was 40 s per seed part (2,000 matches) and put the CI job
+    // past its budget.
+    const lineOf = lineLocator(values);
     for (const { shape, pattern, read, confirm } of ENTITY_REFERENCE_SHAPES) {
         for (const match of values.matchAll(pattern)) {
             if (confirm !== undefined && !confirm(sql, match)) continue;
-            const line = values.slice(0, match.index).split('\n').length;
+            const line = lineOf(match.index);
             for (const id of read(match)) found.push({ id: id.toUpperCase(), line, shape });
         }
     }
@@ -1101,11 +1146,33 @@ export function findEntityIdReferences(sql) {
 const ENTITY_SEED_DIRS = SHIPPED_MIGRATION_DIRS;
 const ENTITY_REFERENCE_DIRS = [...SHIPPED_MIGRATION_DIRS, 'migrations-teardown'];
 
+/**
+ * Entity ids this repo does not own but may reference as literals: created by a dependency's shipped
+ * migration (MJ core, or a BizApp's CodeGen tail), hence identical on every host. Kept as data with
+ * provenance so a new one has to be argued for, not just added. Ids of entities CodeGen mints per host
+ * (an app with no CodeGen tail in its migrations) must never appear here.
+ */
+const DEPENDENCY_ENTITY_IDS_FILE = 'data/dependency-entity-ids.json';
+function dependencyEntityIds(repoRoot) {
+    const file = join(repoRoot, DEPENDENCY_ENTITY_IDS_FILE);
+    if (!existsSync(file)) return new Map();
+    const parsed = JSON.parse(readFileSync(file, 'utf-8'));
+    const out = new Map();
+    for (const e of parsed.entities ?? []) {
+        if (typeof e.id !== 'string' || !new RegExp(`^${UUID_PATTERN}$`, 'i').test(e.id) || !e.entity || !e.shippedBy) {
+            throw new Error(`${DEPENDENCY_ENTITY_IDS_FILE}: every entry needs id (uuid), entity and shippedBy — got ${JSON.stringify(e)}`);
+        }
+        out.set(e.id.toUpperCase(), e);
+    }
+    return out;
+}
+
 function checkEntityIdReferences(repoRoot, violations) {
     const seeded = new Set();
     for (const { sql } of shippedSqlFiles(repoRoot, ENTITY_SEED_DIRS)) {
         for (const id of findSeededEntityIds(sql)) seeded.add(id);
     }
+    for (const id of dependencyEntityIds(repoRoot).keys()) seeded.add(id);
     for (const { path, sql } of shippedSqlFiles(repoRoot, ENTITY_REFERENCE_DIRS)) {
         // One violation per id per file, listing every line: the same wrong literal is written many
         // times in one generated file, and identical messages train people to skim.
@@ -1124,8 +1191,8 @@ function checkEntityIdReferences(repoRoot, violations) {
                     'Resolve the entity by natural key instead: `DECLARE @X UNIQUEIDENTIFIER = (SELECT TOP 1 [ID] ' +
                     "FROM [${mjSchema}].[Entity] WHERE [BaseTable] = '<Table>' AND [SchemaName] = " +
                     "'${flyway:defaultSchema}');` with a THROW when it comes back NULL. If the id genuinely belongs " +
-                    'to an entity this repo does not own — MJ core, or one of the nine sibling Open Apps — it still ' +
-                    'may not be a literal, because that host minted its own too: look it up by name the same way.',
+                    'to an entity this repo does not own — MJ core, or one of the nine sibling Open Apps — it is a ' +
+                    `literal only if that dependency SHIPS the id in its own migrations; record it with provenance in ${DEPENDENCY_ENTITY_IDS_FILE} (after checking it is identical on independent installs), otherwise look it up by name the same way.`,
             );
         }
     }
