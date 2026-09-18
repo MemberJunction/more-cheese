@@ -62,8 +62,8 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (384 distinct records; 410 declared across
--- 36 directories, 26 of them declared in two directories and inserted once):
+-- Seed provenance (391 distinct records; 417 declared across
+-- 37 directories, 26 of them declared in two directories and inserted once):
 --     75 from config/conversations
 --     63 from config/queries
 --     46 from config/artifacts
@@ -76,6 +76,8 @@
 --     10 from config/sonar-factors
 --     10 from config/sonar-model-factors
 --     10 from config/sonar-model-related-entities
+--      4 from config/dashboard-category-links
+--      4 from config/dashboards
 --      4 from config/sonar-score-bands
 --      2 from config/application-roles
 --      2 from config/content-sources
@@ -89,8 +91,6 @@
 --      1 from config/credential-types
 --      1 from config/credentials
 --      1 from config/dashboard-categories
---      1 from config/dashboard-category-links
---      1 from config/dashboards
 --      1 from config/file-storage-accounts
 --      1 from config/file-storage-providers
 --      1 from config/projects
@@ -98,6 +98,7 @@
 --      1 from config/sonar-score-model-versions
 --      1 from config/sonar-score-models
 --      1 from config/sonar-score-models-activate
+--      1 from config/user-settings
 --      1 from config/users
 --      1 from config/vector-indexes
 -- =============================================================================================
@@ -274,7 +275,13 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Credentials', '7A1E4C2B-5D3F-4E8A-9B6C-2F0D8E1A3C55'),
     ('MJ: Dashboard Categories', '8D2F4A61-3B7C-4E9D-A5F1-2C6B8E0D4A93'),
     ('MJ: Dashboard Category Links', 'C3E5A7B9-1D2F-4A6C-8E0B-4F6D8A2C1E75'),
+    ('MJ: Dashboard Category Links', 'BC0DB1F0-35C8-560D-A69D-FCD66A992D2B'),
+    ('MJ: Dashboard Category Links', '335DDC9D-47FF-5E8B-B003-0D3EB857A5AE'),
+    ('MJ: Dashboard Category Links', '72877428-C78B-5065-95D6-E4236226DD81'),
     ('MJ: Dashboards', '5A7C9E21-4D6B-4F83-B2E7-9C1D3F5A7B60'),
+    ('MJ: Dashboards', '9F177261-C909-52F2-8ACF-475613ABFB49'),
+    ('MJ: Dashboards', '82858464-5FFD-5DF7-A79E-E6DADD0652CA'),
+    ('MJ: Dashboards', '74420F91-79C0-59FF-8E4B-C4A4AFDC4C83'),
     ('MJ: File Storage Account Permissions', '79A45295-2080-56FD-93A4-D995CA5382E7'),
     ('MJ: File Storage Account Permissions', '0ADD75FF-B902-55D7-81AB-DC6535E81749'),
     ('MJ: File Storage Accounts', '636E204B-12CB-4D67-A861-09DA9C825BA3'),
@@ -475,6 +482,7 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Applications', 'F8431342-5F1E-4D38-B7EA-18FA8389F8A9'),
     ('MJ: User Roles', '536EFF6C-EE9D-4D65-B6C6-2BE52124F2BA'),
     ('MJ: User Roles', 'E41B5F3E-F36B-1410-8DD4-0033802F0180'),
+    ('MJ: User Settings', 'DCD29593-E66F-5A0C-BF7D-46D7645E7332'),
     ('MJ: User Views', 'BFD12082-4704-5963-9E6F-896A83F09032'),
     ('MJ: User Views', 'D2F4C4F4-44EC-5617-B479-640DB962969F'),
     ('MJ: User Views', 'A4B45F20-87E7-5F9D-9137-E9B8DC2E32B5'),
