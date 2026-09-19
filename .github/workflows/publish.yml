@@ -93,7 +93,20 @@ jobs:
       #   0                  | no             | publish and tag
       - name: The bump has to have happened before this branch was merged
         run: |
-          PENDING=$(find .changeset -name "*.md" -not -name "README.md" 2>/dev/null | wc -l | tr -d ' ')
+          set -euo pipefail
+
+          # `.changeset/` missing or unreadable is an ERROR, never a zero. The previous spelling —
+          # `find .changeset … 2>/dev/null | wc -l` — takes `wc`'s exit status and swallows `find`'s
+          # message, so a vanished or unreadable directory reported "0 pending changesets": the one
+          # answer that lets the release proceed. This gate is the only thing standing between a
+          # re-run and republishing the version that is already live, so it must not be able to pass
+          # by failing. `2>/dev/null` is gone for the same reason — the cause should be in the log.
+          if [ ! -d .changeset ]; then
+            echo "::error::.changeset/ does not exist, so this step cannot tell whether the version was bumped. It is checked into this repository; a checkout without it is broken, not a clean release."
+            exit 1
+          fi
+
+          PENDING=$(find .changeset -name "*.md" -not -name "README.md" | wc -l | tr -d ' ')
           if [ "$PENDING" -ne 0 ]; then
             VERSION=$(jq -r .version packages/Entities/package.json)
             echo "::error::$PENDING changeset(s) are still on this branch, so the version was never bumped. Publishing now would republish $VERSION. Cut the release with the 'Prepare a release' dispatch (release-prep.yml) and merge the PR it opens — see docs/template-docs/publishing.md."
@@ -131,21 +144,55 @@ jobs:
         env:
           VERSION: ${{ steps.release_check.outputs.VERSION }}
         run: |
-          LAST_TAG=$(git tag --list 'v*' --sort=-v:refname | head -1)
+          # Every early exit in this step means "in policy", so a git command that fails and yields
+          # EMPTY output is read as a PASS. That is the failure .claude/rules/repo-gates.md names —
+          # "a silently skipped gate is worse than a missing one: it reports green" — and it is the
+          # defect class this whole workflow exists to close, so it does not get to live here.
+          # Hence pipefail and errexit, and not one `|| true` below.
+          set -euo pipefail
+
+          # Not piped into `head`: with `pipefail`, a `head` that closes the pipe early can surface
+          # as SIGPIPE from `git tag` and kill a healthy run, and this step must fail for real
+          # reasons only. `git tag --list` exits 0 and prints nothing when nothing matches, so after
+          # this an empty value means "no v* tag exists" and nothing else — a `git tag` that
+          # genuinely failed has already stopped the step.
+          ALL_TAGS=$(git tag --list 'v*' --sort=-v:refname)
+          LAST_TAG=${ALL_TAGS%%$'\n'*}
           if [ -z "$LAST_TAG" ]; then
             echo "No previous v* tag — first release, no previously-shipped schema to have changed"
             exit 0
           fi
 
-          NEW_MIGRATIONS=$(git --no-pager diff --name-only "$LAST_TAG" "$GITHUB_SHA" -- migrations/ || true)
+          # Both versions are parsed, and rejected, BEFORE either is compared. `git tag --list 'v*'`
+          # matches `vNext` as happily as `v1.2.0`; parsing at the comparison instead would let a
+          # non-semver tag fall through the numeric test below and be reported as "only a patch" —
+          # a real-looking policy violation that is actually this step not understanding its input.
+          PREV="${LAST_TAG#v}"
+          if ! [[ "$PREV" =~ ^([0-9]+)\.([0-9]+)\. ]]; then
+            echo "::error::the newest v* tag is '$LAST_TAG', which is not a vMAJOR.MINOR.PATCH tag. Refusing to guess which schema it shipped."
+            exit 1
+          fi
+          PREV_MAJOR="${BASH_REMATCH[1]}"
+          PREV_MINOR="${BASH_REMATCH[2]}"
+
+          if ! [[ "$VERSION" =~ ^([0-9]+)\.([0-9]+)\. ]]; then
+            echo "::error::release-plan reported the version as '$VERSION', which is not MAJOR.MINOR.PATCH. Refusing to decide the schema policy on it."
+            exit 1
+          fi
+          NEW_MAJOR="${BASH_REMATCH[1]}"
+          NEW_MINOR="${BASH_REMATCH[2]}"
+
+          # No `|| true`. `git diff --name-only` is not `--exit-code`, so it exits 0 whether or not
+          # there are differences — the only thing that mask could ever have hidden was git itself
+          # failing, and a failed git prints NOTHING, which the `-z` test below would have read as
+          # "no migrations changed, a patch is in policy". A schema change would then have shipped
+          # as a patch behind a green gate.
+          NEW_MIGRATIONS=$(git --no-pager diff --name-only "$LAST_TAG" "$GITHUB_SHA" -- migrations/)
           if [ -z "$NEW_MIGRATIONS" ]; then
             echo "No migrations changed since $LAST_TAG — a patch release is in policy"
             exit 0
           fi
 
-          PREV="${LAST_TAG#v}"
-          IFS='.' read -r PREV_MAJOR PREV_MINOR _ <<< "$PREV"
-          IFS='.' read -r NEW_MAJOR NEW_MINOR _ <<< "$VERSION"
           if [ "$NEW_MAJOR" -gt "$PREV_MAJOR" ] || [ "$NEW_MINOR" -gt "$PREV_MINOR" ]; then
             echo "migrations/ changed since $LAST_TAG and $PREV -> $VERSION is at least a minor — in policy"
             exit 0
@@ -323,8 +370,19 @@ jobs:
             # A second remote rather than re-pointing `origin`: `origin` keeps the job's own token for
             # the fetches and the tag push above, and the App credential stays attached to the writes
             # that need it.
-            git remote remove app-push 2>/dev/null || true
+            # The App token lives in `.git/config` for as long as this remote does, so its removal is
+            # a trap rather than a line at the end: the refusal below, a failed push, `set -e` on
+            # anything, and the `exit 0` inside the merge loop are all paths out of here, and a line
+            # at the end covers exactly one of them. Tested-then-removed rather than `|| true`,
+            # because nothing on this path is allowed to mask a failure.
+            drop_app_remote() {
+              if git remote get-url app-push >/dev/null 2>&1; then
+                git remote remove app-push
+              fi
+            }
+            drop_app_remote
             git remote add app-push "https://x-access-token:$APP_TOKEN@github.com/$GITHUB_REPOSITORY"
+            trap drop_app_remote EXIT
 
             # No `--exit-code`: an absent branch is empty output and a zero exit, while an unreachable
             # remote still exits 128 and, with pipefail, stops the step. Conflating the two would read
@@ -356,12 +414,16 @@ jobs:
               echo "the merge was refused — the publish run that opened it is red and says so."
             } > "$RUNNER_TEMP/backmerge-body.md"
 
+            # `tail -n1` because `$GITHUB_OUTPUT` is a line-oriented file: `gh pr create` printing
+            # anything above the URL would write a multi-line `pr_url=` and corrupt every value
+            # after it. `pipefail` keeps a failing `gh` fatal — `tail` cannot turn it into a
+            # successful empty capture.
             PR_URL=$(gh pr create \
               --repo "$GITHUB_REPOSITORY" \
               --base next \
               --head "$BRANCH" \
               --title "chore: back-merge main into next after v$VERSION" \
-              --body-file "$RUNNER_TEMP/backmerge-body.md")
+              --body-file "$RUNNER_TEMP/backmerge-body.md" | tail -n1)
           fi
 
           # A postcondition, because every message below is built around naming this pull request.
@@ -394,11 +456,20 @@ jobs:
             # then tripped over something incidental must not be re-tried and reported as a failure,
             # and a zero exit must not be taken on trust for the one fact this whole step exists to
             # establish.
-            STATE=$(gh pr view "$PR_URL" --repo "$GITHUB_REPOSITORY" --json state --jq .state)
-            if [ "$STATE" = "MERGED" ]; then
-              echo "merged=true" >> "$GITHUB_OUTPUT"
-              echo "::notice::back-merge merged: $PR_URL"
-              exit 0
+            #
+            # A failed READ is not a failed merge, so it does not end the loop: under plain `set -e`
+            # a transient `gh pr view` would abort here and the run would report "back-merge OPEN and
+            # unmerged" even when the merge had just landed. Tested explicitly rather than masked —
+            # the attempt cap is still the only way out, so a `gh` that never recovers ends red
+            # naming the PR, exactly as a refused merge does.
+            if STATE=$(gh pr view "$PR_URL" --repo "$GITHUB_REPOSITORY" --json state --jq .state 2>&1); then
+              if [ "$STATE" = "MERGED" ]; then
+                echo "merged=true" >> "$GITHUB_OUTPUT"
+                echo "::notice::back-merge merged: $PR_URL"
+                exit 0
+              fi
+            else
+              echo "::notice::could not read the state of $PR_URL on attempt $ATTEMPT/$MAX_ATTEMPTS: $STATE"
             fi
 
             ATTEMPT=$((ATTEMPT + 1))
