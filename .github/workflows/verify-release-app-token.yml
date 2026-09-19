@@ -13,10 +13,12 @@
 # `scripts/check-release-pushes.mjs` refuses a direct push to either branch regardless of what
 # GitHub currently enforces — the release path is designed not to depend on that staying true.
 #
-# MJ core and bizapps-forms hit the equivalent problem before this repo did and both fixed it the
-# same way: a GitHub App, minted from `vars.APP_CLIENT_ID` (org variable) and
-# `secrets.APP_PRIVATE_KEY` (org secret) — both already visible here, so the App model costs this
-# repo no new infrastructure.
+# Two sibling repos hit the equivalent problem before this one did (plans/release-readiness-
+# 2026-09-18.md records both). bizapps-common rewrote its pipeline around the same constraint —
+# "versioning and publishing are separate, and neither writes to a protected branch" — and
+# bizapps-forms fixed it with exactly this GitHub App, minted from `vars.APP_CLIENT_ID` (org
+# variable) and `secrets.APP_PRIVATE_KEY` (org secret) — both already visible here, so the App
+# model costs this repo no new infrastructure.
 #
 # WHAT THE APP IS FOR, AND WHAT IT IS EMPHATICALLY NOT FOR
 # --------------------------------------------------------
@@ -112,6 +114,8 @@ jobs:
       - name: The token can actually reach this repository
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
+          APP_SLUG: ${{ steps.token.outputs.app-slug }}
+          INSTALLATION_ID: ${{ steps.token.outputs.installation-id }}
         run: |
           set -euo pipefail
           # `.full_name`, not `.permissions`. That block is computed for an authenticated USER, so an
@@ -123,14 +127,14 @@ jobs:
             exit 1
           fi
           DEFAULT_BRANCH=$(gh api "repos/$GITHUB_REPOSITORY" --jq '.default_branch')
-          echo "::notice::Read $FULL_NAME (default branch $DEFAULT_BRANCH) as ${{ steps.token.outputs.app-slug }}."
+          echo "::notice::Read $FULL_NAME (default branch $DEFAULT_BRANCH) as $APP_SLUG."
           {
             echo "### Release App credential"
             echo
             echo '| field | value |'
             echo '|---|---|'
-            echo "| app | \`${{ steps.token.outputs.app-slug }}\` |"
-            echo "| installation | \`${{ steps.token.outputs.installation-id }}\` |"
+            echo "| app | \`$APP_SLUG\` |"
+            echo "| installation | \`$INSTALLATION_ID\` |"
             echo "| scoped to | \`$FULL_NAME\` |"
             echo "| grants requested | \`contents: write\`, \`pull-requests: write\` |"
             echo

@@ -329,6 +329,7 @@ jobs:
           BRANCH: ${{ steps.plan.outputs.branch }}
           COUNT: ${{ steps.changesets.outputs.count }}
           PR_URL: ${{ steps.pr.outputs.pr_url }}
+          APP_SLUG: ${{ steps.token.outputs.app-slug }}
         run: |
           set -euo pipefail
           {
@@ -341,7 +342,7 @@ jobs:
             echo "| version | \`v$VERSION\` |"
             echo "| branch | \`$BRANCH\` |"
             echo "| changesets consumed | $COUNT |"
-            echo "| opened as | \`${{ steps.token.outputs.app-slug }}\` |"
+            echo "| opened as | \`$APP_SLUG\` |"
             echo
             echo "changes.yml runs on it like any other pull request into \`main\` — opening it with the App"
             echo "rather than \`GITHUB_TOKEN\` is what makes that happen at all. The App holds no ruleset bypass"
