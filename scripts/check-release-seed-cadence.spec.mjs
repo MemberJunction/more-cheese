@@ -7,11 +7,15 @@
  * rewrite of a gate is a gate nobody should trust:
  *
  *   1. "one seed" is one GENERATION, which may be several `_PartNofM` files;
- *   2. this repo has no `v*` tag, so rule 1 must work without one and rule 2 must not fail for it.
+ *   2. the gate must work either side of the first release — with no `v*` tag, as this repo stood
+ *      until v1.2.0 shipped on 2026-09-19, and with one, as it has stood since.
  *
- * Every case injects a stub `readState`, so none of them needs a git repository and none can pass or
- * fail because of what happens to be tagged here today. The two cases at the end run against the real
- * repo and the real CLI.
+ * Every stub-injected case supplies its own `readState`, so it needs no git repository and cannot pass
+ * or fail because of what happens to be tagged here today. The two cases at the end deliberately do
+ * run against the real repo and the real CLI — and that is the sharp edge: the second of them once
+ * asserted the no-tag branch outright, so the first release turned `next` red for every pull request.
+ * A real-repo case may assert that the CLI AGREES WITH the repo's state; it may never hardcode which
+ * state that is.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -292,8 +296,16 @@ test('the checked-in repo passes', () => {
     assert.deepEqual(problems, [], problems.join('\n'));
 });
 
-test('the CLI exits 0 on this repo and says the drift rule is unarmed', () => {
+// This case used to assert the unarmed branch outright, and v1.2.0 falsified it the hour the first
+// release landed — a red `next` for every pull request, caused by a test that had pinned a state the
+// repo was always going to leave. The tag now comes from the gate's own boundary, so the CLI contract
+// stays covered on both sides of a release and the two branches cannot drift apart.
+test('the CLI exits 0 on this repo and reports the drift rule against the tag it actually finds', () => {
+    const { tag } = findUnshippedMetadataDrift(REPO_ROOT);
     const run = spawnSync(process.execPath, [path.join(HERE, 'check-release-seed-cadence.mjs')], { encoding: 'utf8' });
     assert.equal(run.status, 0, run.stderr);
-    assert.match(run.stdout, /no v\* release tag exists/);
+    const expected = tag === null
+        ? /no v\* release tag exists/
+        : new RegExp(`since ${tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
+    assert.match(run.stdout, expected);
 });

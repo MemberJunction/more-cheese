@@ -33,12 +33,16 @@
  *     lines deep; this names the one fact that explains them.
  *   • parted and unparted files are not mixed under one stamp.
  *
- * ── THE OTHER ADAPTATION: THIS REPO HAS NEVER BEEN RELEASED ───────────────────────────────────
+ * ── THE OTHER ADAPTATION: THIS REPO HAD NEVER BEEN RELEASED ───────────────────────────────────
  * Forms derives "what has already shipped" from `v*` tags and treats their absence as a broken run.
- * more-cheese has NO `v*` tag at all — six `publish.yml` runs, six failures, nothing ever published
- * (#48) — and that is a true, current, correct state rather than a broken checkout. Before v1 every
- * migration in the tree is unreleased, which is what makes the part-set rule above the whole of what
- * can be checked.
+ * more-cheese had NO `v*` tag at all when this gate was written — six `publish.yml` runs, six
+ * failures, nothing ever published (#48) — and that was a true, current, correct state rather than a
+ * broken checkout. Before v1 every migration in the tree is unreleased, which is what made the
+ * part-set rule above the whole of what could be checked.
+ *
+ * v1.2.0 shipped on 2026-09-19, so the drift rule below is now ARMED and this repo exercises the
+ * tagged path. Both paths stay supported and both stay tested: the untagged one is not dead code,
+ * it is what any fork or successor repo hits before its own first release.
  *
  * The two rules therefore degrade differently, and deliberately:
  *
