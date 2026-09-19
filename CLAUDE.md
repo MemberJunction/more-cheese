@@ -1,23 +1,26 @@
-# <Your App> — development guide (template)
+# More Cheese — development guide
 
-This repository is a **MemberJunction Open App** built from the
-mj-sample-open-app template. It is developed **linked inside a MemberJunction
-checkout** — see `docs/template-docs/linking-to-mj.md`. TODO(template): replace the
-placeholders in this file when you rename the app.
+This repository is the **MoreCheese Demo** MemberJunction Open App: the fictional
+International Cheese Federation (ICF) association demo. It was built from the
+mj-sample-open-app template and is developed **linked inside a MemberJunction
+checkout** — see `docs/template-docs/linking-to-mj.md`.
 
 ## Repository structure
 
 ```
 mj-app.json            - MJ Open App manifest (the source of truth for the app)
-migrations/            - Skyway migrations for the app schema (starts empty)
+migrations/            - Skyway migrations: the baseline plus the Metadata_Sync release seed
+migrations-teardown/   - generated, never hand-edited (npm run generate:teardown)
 generated/             - mj-sync synthetic data & world model (Loom-generated)
 config/                - mj-sync application configuration & taxonomies
-packages/
-  Entities/            - @mj-biz-apps/more-cheese-entities   (CodeGen entity subclasses)
-  CoreEntitiesServer/  - @mj-biz-apps/more-cheese-core-entities-server (server-side entity overrides)
-  Actions/             - @mj-biz-apps/more-cheese-actions    (MJ Actions)
-  Server/              - @mj-biz-apps/more-cheese-server     (server bootstrap -> MJAPI)
-  Angular/             - @mj-biz-apps/more-cheese-ng         (client bootstrap -> MJExplorer)
+packages/              - three published packages, version-locked as one changesets group
+  Entities/            - @mj-biz-apps/more-cheese-entities (CodeGen entity subclasses)
+  Server/              - @mj-biz-apps/more-cheese-server   (server bootstrap -> MJAPI)
+  Angular/             - @mj-biz-apps/more-cheese-ng       (client bootstrap -> MJExplorer)
+scripts/               - release gates and data tooling; *.spec.mjs run by npm run test:gates
+.github/scripts/       - CI gates; the .mjs ones carry a --self-test mode
+content/, vault/       - the public blog corpus and the internal staff corpus
+website/               - static site built by npm run build:site, deployed from main
 docs/                  - how this repo works (branching, publishing, codegen, linking)
 docs/claude/           - the MemberJunction development guide (topic-split, with TOC)
 ```
@@ -71,7 +74,7 @@ covered there). Read the relevant topic before working in its area:
      booking confirmed orders. Bypassing app packages causes confirmed orders to be saved
      without Journal Entries or Subscriptions.
    - **Heap Size**: Set `NODE_OPTIONS="--max-old-space-size=16384"` when running `mj sync push`
-     on large datasets like `generated/` (17k+ orders with deeply nested lines) to prevent V8
+     on large datasets like `generated/` (15k+ orders with deeply nested lines) to prevent V8
      heap exhaustion during sync.
    - People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
      — they are display-only geo (virtual PrimaryAddress*). Addresses carry
@@ -106,11 +109,23 @@ covered there). Read the relevant topic before working in its area:
 ```sh
 # linked (from the MJ repo root — the normal mode):
 npx turbo build --filter="@mj-biz-apps/*"
-npx mj migrate --schema morecheese_members --dir packages/dev-apps/more-cheese-demo/migrations
 npx mj codegen
+# --dir is this repo's folder under packages/dev-apps/, which linking-to-mj.md names after
+# the repo. From inside this repo, `npm run mj:migrate` carries the right schema and path.
+npx mj migrate --schema morecheese_members --dir packages/dev-apps/<this-repo>/migrations
+
+# from this repo:
+npm run mj:migrate          # mj migrate --schema morecheese_members --dir ./migrations
+npm run mj:codegen
 
 # standalone smoke build (no DB):
 npm install && npm run build:packages
+
+# gates — all of these run in CI and none needs a database:
+npm run test:gates          # the gates' own specs (they run FIRST in changes.yml)
+npm run lint:peer-ranges && npm run lint:migrations && npm run lint:distribution
+npm run check:seed-cadence && npm run check:release-seed && npm run check:ownership
+npm run build:site          # the public site; publish-site.yml runs this on push to main
 ```
 
 The full development workflow (where to add code, capturing codegen +
