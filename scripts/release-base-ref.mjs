@@ -26,7 +26,7 @@
  * WHY A MODULE. docs/release.md rejects release logic that lives in workflow YAML, because a
  * decision only ever taken while cutting a release cannot be proven by anything short of cutting
  * one. `scripts/validate-loom-data.mjs` runs its whole audit at import, so the decision could not
- * be tested inside it. Hence this file and `loom-corpus-base.spec.mjs`.
+ * be tested inside it. Hence this file and `release-base-ref.spec.mjs`.
  */
 
 /** The branch a release pull request targets. Its corpus predecessor is `RELEASE_SOURCE`. */

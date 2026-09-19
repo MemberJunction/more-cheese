@@ -7,7 +7,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveCorpusBaseRef } from './loom-corpus-base.mjs';
+import { resolveCorpusBaseRef } from './release-base-ref.mjs';
 
 test('a release pull request into main compares the corpus against next', () => {
     const override = resolveCorpusBaseRef({ GITHUB_BASE_REF: 'main' });
