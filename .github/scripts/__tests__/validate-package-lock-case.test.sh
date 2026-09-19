@@ -141,27 +141,59 @@ check "[-F] a lockfile path with a regex metacharacter does not match an unrelat
 check "[-x] a lockfile path that is a suffix of a longer tracked path is not matched" \
   0 "packages/Thing" false "No case-sensitivity issues found" "vendor/packages/Thing Server"
 
-# grep exiting >1 is grep FAILING, not "no case variant tracked", and the two must not collapse:
-# a broken grep that reports "no mismatch found" is a green check over a gate that checked
-# nothing. The stub fails only the detection call — the one passing -m1 — so the lockfile-parsing
-# grep ahead of it still works and the loop is actually reached.
-GREP_DIR=$(make_repo "packages/Ghost")
-REAL_GREP=$(command -v grep)
-mkdir -p "$GREP_DIR/fakebin"
-{
-  echo '#!/bin/bash'
-  echo 'for a in "$@"; do [ "$a" = "-m1" ] && exit 2; done'
-  echo "exec $REAL_GREP \"\$@\""
-} > "$GREP_DIR/fakebin/grep"
-chmod +x "$GREP_DIR/fakebin/grep"
-out=$(cd "$GREP_DIR" && PATH="$GREP_DIR/fakebin:$PATH" bash "$SCRIPT" 2>&1); rc=$?
-if [ "$rc" -eq 1 ] && grep -qF "grep failed (exit 2)" <<<"$out"; then
-  PASS=$((PASS + 1)); echo "  ok   — a failing grep fails the gate instead of reading as 'no mismatch'"
-else
-  FAIL=$((FAIL + 1)); echo "  FAIL — a failing grep fails the gate instead of reading as 'no mismatch' (exit $rc)"
-  sed 's/^/         | /' <<<"$out"
-fi
-rm -rf "$GREP_DIR"
+# The gate calls grep twice, for two different jobs, and BOTH used to read a failing grep as an
+# ordinary "found nothing" — an empty result, a loop that never runs or never matches, and "No
+# case-sensitivity issues found" over a lockfile the gate had not actually checked. Neither is
+# reachable through the gate's arguments, so each is provoked with a stub on PATH that fails one
+# call and passes the other through, identified by a flag only that call uses.
+#
+# grep_fails_on <flag> <lock-paths> — echoes a fixture repo whose PATH-first grep exits 2 for any
+# invocation carrying <flag>, and execs the real grep otherwise.
+grep_fails_on() {
+  local flag="$1" lock_paths="$2"
+  local dir; dir=$(make_repo "$lock_paths")
+  local real; real=$(command -v grep)
+  mkdir -p "$dir/fakebin"
+  {
+    echo '#!/bin/bash'
+    echo "for a in \"\$@\"; do [ \"\$a\" = \"$flag\" ] && exit 2; done"
+    echo "exec $real \"\$@\""
+  } > "$dir/fakebin/grep"
+  chmod +x "$dir/fakebin/grep"
+  echo "$dir"
+}
+
+# check_grep_failure <name> <flag> <lock-paths> <expected-text>
+check_grep_failure() {
+  local name="$1" flag="$2" lock_paths="$3" expect_text="$4"
+  local dir out rc
+  dir=$(grep_fails_on "$flag" "$lock_paths")
+  if [ -z "$dir" ] || [ ! -d "$dir" ]; then
+    FAIL=$((FAIL + 1)); echo "  FAIL — $name (fixture repo could not be built)"
+    return
+  fi
+  out=$(cd "$dir" && PATH="$dir/fakebin:$PATH" bash "$SCRIPT" 2>&1); rc=$?
+  if [ "$rc" -eq 1 ] && grep -qF "$expect_text" <<<"$out"; then
+    PASS=$((PASS + 1)); echo "  ok   — $name"
+  else
+    FAIL=$((FAIL + 1)); echo "  FAIL — $name (exit $rc, wanted 1)"; sed 's/^/         | /' <<<"$out"
+  fi
+  rm -rf "$dir"
+}
+
+# The DETECTION grep (-m1): a failure here reads as "no case variant is tracked" — no mismatch,
+# green. The lockfile-parsing grep ahead of it still works, so the loop is genuinely reached.
+check_grep_failure "a failing detection grep fails the gate instead of reading as 'no mismatch'" \
+  "-m1" "packages/Ghost" "grep failed (exit 2) while checking"
+
+# The PARSING grep (-E): a failure here reads as "this lockfile has no workspace entries" — an
+# empty path list, a loop that runs zero times, and an all-clear over a lockfile never examined.
+# The fixture deliberately HAS a workspace entry, so an all-clear could only mean the failure was
+# swallowed. Note the pair below: the same grep exiting 1 on a genuinely empty list must stay
+# silent, and the "no workspace entries" cases above assert exactly that — closing this must not
+# be paid for by breaking that.
+check_grep_failure "a failing lockfile-parsing grep fails the gate instead of reading as 'no workspace entries'" \
+  "-E" "packages/Entities" "grep failed (exit 2) while extracting workspace paths"
 
 # A gate that cannot parse its input has not passed — it abstained. Without the explicit jq check
 # this is the fail-open shape the whole file is written against: empty key list, zero loop

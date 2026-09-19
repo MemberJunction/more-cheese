@@ -15,11 +15,27 @@ if ! LOCKFILE_KEYS=$(jq -r '.packages | keys[]' package-lock.json); then
   exit 1
 fi
 
-# `grep` matching ZERO keys — a lockfile with no packages/apps workspace entries — is the
-# routine "nothing to check yet" case, not a parse failure, and must not abort under pipefail.
-# `|| true` is scoped to exactly this one grep, immediately after the jq failure above is
-# already handled separately, so it can't mask that.
-PATHS=$(echo "$LOCKFILE_KEYS" | grep -E '^(packages|apps)/' || true)
+# TWO outcomes hide behind this grep's non-zero status, and they mean opposite things.
+#
+# Exit 1 is "no key starts with packages/ or apps/" — a lockfile with no workspace entries at
+# all. That is the routine "nothing to check yet" state, it must stay silent, and it must not
+# abort under `set -e`/`pipefail`.
+#
+# Exit >1 is grep ITSELF failing, and the `|| true` that used to stand here swallowed it: an
+# empty path list, zero loop iterations, and "No case-sensitivity issues found" — this gate
+# reporting all-clear over a lockfile it never actually read. That is the exact failure the file
+# exists to not have, and the jq check above does not cover it: jq had already succeeded. So the
+# status is read and the two are separated, the same way the detection grep below does it.
+#
+# A here-string rather than `echo ... |`, also matching below: with no pipeline there is no
+# pipefail or SIGPIPE question about whose exit status this even is.
+keys_rc=0
+PATHS=$(grep -E '^(packages|apps)/' <<< "$LOCKFILE_KEYS") || keys_rc=$?
+if [ "$keys_rc" -gt 1 ]; then
+  echo "::error file=package-lock.json::grep failed (exit $keys_rc) while extracting workspace paths — this gate validated nothing and has not passed"
+  exit 1
+fi
+
 PATHS=$(echo "$PATHS" | sed 's|/$||')
 
 # Every workspace package.json git actually tracks, enumerated ONCE with no per-path pathspec
