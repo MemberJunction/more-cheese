@@ -3,19 +3,19 @@
  * Release-push gate — refuse any push to a protected branch (`main`, `next`) from anywhere in this
  * repo's release automation.
  *
- * This repo has never published, but three scripts already push straight to a protected branch:
- * `ci/commit_push.mjs` pushes `HEAD:main`, and `ci/merge_main_and_update_lock.mjs` and
- * `ci/merge_main.mjs` each push `HEAD:next`. Both `main` and `next` carry rulesets with required
- * status checks. A direct push introduces a commit SHA the remote has never seen, so no check run
- * can exist for it yet — the push is rejected (GH013) by construction, not by a race that a retry
- * could win. Today nothing calls these three scripts on the release path yet, so the failure has
- * not been felt; it is designed to be felt the day this repo first tries to publish, in someone
- * else's pull request, months from now.
+ * This repo had never published, and three scripts pushed straight to a protected branch:
+ * `ci/commit_push.mjs` pushed `HEAD:main`, and `ci/merge_main_and_update_lock.mjs` and
+ * `ci/merge_main.mjs` each pushed `HEAD:next`. `next` is the default branch and carries the
+ * `next-protect` ruleset (id 18797049, `~DEFAULT_BRANCH`, a `pull_request` rule, no bypass actors),
+ * which refuses a direct push outright. `publish.yml` ran the last of those pushes AFTER `changeset
+ * publish` and AFTER the tag push, so the first release to get that far would have published to
+ * npm, tagged, and then gone red with `next` never updated.
  *
- * This gate is deliberately written, and landed, BEFORE those three scripts are fixed — it is
- * expected to fail right now, loudly, naming exactly those three files. A later change removes the
- * pushes; this gate is what keeps them from coming back afterward, including if `ci/` itself is
- * ever reintroduced (`ci` stays in `SCANNED_DIRS` although the directory will then be empty).
+ * This gate was deliberately written, and landed, BEFORE those three scripts were removed — it
+ * failed loudly on landing, naming exactly those three files, and went green the moment
+ * `publish.yml` was rewritten to back-merge through a pull request instead. That is what it is for
+ * now: keeping the pushes from coming back, including if `ci/` itself is ever reintroduced (`ci`
+ * stays in `SCANNED_DIRS` although the directory no longer exists).
  *
  * Ported from `mj-dev/bizapps-forms`'s `scripts/check-release-pushes.mjs`, which exists because of
  * that repo's own #177/#187: two scripts pushed straight to protected branches, both rulesets grew

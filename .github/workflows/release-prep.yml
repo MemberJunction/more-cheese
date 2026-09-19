@@ -12,8 +12,8 @@
 # NOT A PUSH TO A PROTECTED BRANCH, and this is the distinction the whole design turns on. `next-
 # protect` targets only the default branch (`next` itself), so it says nothing about `release/*`.
 # `main` currently carries no ruleset at all in this repo — which is not a reassurance, it is the
-# reason `ci/commit_push.mjs`'s direct push to `main` has gotten away with it so far. This workflow
-# does not rely on that staying true: `scripts/check-release-pushes.mjs` is a standing tripwire that
+# only reason the deleted `ci/commit_push.mjs`'s direct push to `main` would ever have landed. This
+# workflow does not rely on that staying true: `scripts/check-release-pushes.mjs` is a tripwire that
 # fails any script or workflow pushing straight to `main` or `next`, so `release/*` and a pull
 # request are the only way this file ever reaches either branch.
 #
