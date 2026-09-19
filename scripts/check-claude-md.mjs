@@ -83,6 +83,16 @@ const IGNORED_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage', '.turb
 /** Claude Code gives a rule's whole `paths` list one budget of this many expanded patterns. */
 const BRACE_EXPANSION_BUDGET = 1000;
 
+/**
+ * A reference into `.changeset/` that `changeset version` will delete at release.
+ *
+ * README.md and config.json are checked in and outlive every release; the changesets themselves
+ * are consumed the moment a release is cut. An instruction file linking one therefore resolves on
+ * `next` and dangles on the release branch — so the gate has to reject it HERE, while the file is
+ * still on disk, rather than discovering it after the release branch exists.
+ */
+const EPHEMERAL_CHANGESET = /^\.changeset\/(?!README\.md$|config\.json$)/;
+
 // ─────────────────────────────────────────────────────────────────────────────────────────────
 // Pure helpers — exported so the spec can exercise them without a subprocess.
 // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -505,6 +515,12 @@ export function checkInstructionFiles(root) {
             const rel = relative(root, target);
             if (rel.startsWith('..')) {
                 fail('references', `${file} -> "${ref}" escapes the repository root`);
+                continue;
+            }
+            // Deliberately ahead of the existence check, and deliberately not conditional on it:
+            // on `next` the changeset IS there, and that is exactly the case worth failing.
+            if (EPHEMERAL_CHANGESET.test(rel.split(/[\\/]/).join('/'))) {
+                fail('references', `${file} -> "${ref}" points at a changeset, which is consumed at release — it resolves here and dangles on every release branch`);
                 continue;
             }
             if (!existsSync(target)) {
