@@ -418,4 +418,10 @@ if (json) {
     for (const x of weekFails) console.log(`FAIL  week: ${x}`);
     console.log(`\n${results.length} file(s) checked, ${failed} failing${week ? `, week ${week.start}..${week.end}` : ''}.`);
 }
-process.exit(failed ? 1 : 0);
+// `process.exitCode`, never `process.exit()`. The --json report is ~320 KB over the full corpus,
+// and when stdout is a pipe (build-site.mjs and publish-wordpress.mjs both capture it) writes are
+// asynchronous: process.exit() tears the process down before the buffer drains, delivering exactly
+// one 64 KB pipe buffer of a JSON document and nothing else. The consumer then dies on
+// "Unterminated string in JSON" — pointing at its own JSON.parse, not at this line. Setting
+// exitCode lets node exit naturally once stdout has flushed, with the same status.
+process.exitCode = failed ? 1 : 0;
