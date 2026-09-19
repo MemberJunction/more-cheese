@@ -4,14 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [next]
-    paths:
-      - 'package-lock.json'
-      - 'packages/**'
   pull_request:
-    branches: [next]
-    paths:
-      - 'package-lock.json'
-      - 'packages/**'
+    branches: [next, main]
 
 concurrency:
   group: build-${{ github.ref }}
@@ -35,6 +29,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Nothing may push to main or next
+        run: npm run lint:release-pushes
+
+      - name: Every publishable package declares files and publishConfig
+        run: ./.github/scripts/validate-package-files.sh
 
       - name: Build all packages
         run: npm run build:packages

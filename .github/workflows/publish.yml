@@ -76,6 +76,9 @@ jobs:
       - name: Validate repository.url for npm provenance
         run: ./.github/scripts/validate-package-repository.sh
 
+      - name: Every publishable package declares files and publishConfig
+        run: ./.github/scripts/validate-package-files.sh
+
       - name: Configure git credentials
         run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
