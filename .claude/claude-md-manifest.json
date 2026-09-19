@@ -53,7 +53,7 @@
       "",
       "The root file did NOT get smaller (133 -> 173 lines), and that is the intended outcome, not a",
       "regression. What changed is WHAT is resident. Four `generated/`-only footguns (old rules",
-      "7-10) left the always-loaded budget for the 385 files they actually protect, and the space",
+      "7-10) left the always-loaded budget for the 344 files they actually protect, and the space",
       "went to a routing table and a skills index — navigation, which is useful on every task, in",
       "place of detail that was useful on almost none.",
       "",

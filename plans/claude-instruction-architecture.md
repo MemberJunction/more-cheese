@@ -25,7 +25,7 @@ of the hardest-won facts in this repo — `--no-app-packages` silently dropping
 Journal Entries, the 16 GB heap ceiling, `skipGeoCoding` belonging to
 People/Organizations but not Addresses, and `RecurrenceMonths: null` being
 load-bearing. Every one of them is about `generated/`. All four were paid for on
-every single task, and loaded for none of the 385 files they protect.
+every single task, and loaded for none of the 344 files they protect.
 
 So the repo was spending context on guidance where it did not apply, and
 spending nothing on guidance where it did.
@@ -55,14 +55,15 @@ already this repo's donor for the release gates (#48).
 ## The taxonomy
 
 Rules are derived from **this repo's** file mass and footguns, not copied from
-MJ's. The repo is 1,150 markdown files, 385 JSON, 31 `.mjs`, and 21 TypeScript
-files — 18 of which are generated.
+MJ's. The repo is 1,151 markdown files and 33 `.mjs` gate scripts, against 21
+TypeScript files — 15 of which are generated, leaving 6 hand-written, and three
+of those are barrel files.
 
 | Rule | `paths` | Matches | Absorbed from |
 |---|---|---|---|
-| `metadata-sync.md` | `generated/**`, `config/**` | 385 JSON | `08` + root rules 7, 8, 9, 10 |
+| `metadata-sync.md` | `generated/**`, `config/**` | 344 JSON | `08` + root rules 7, 8, 9, 10 |
 | `migrations.md` | `migrations/**`, `migrations-teardown/**` | 7 SQL | `05` + root rule 3 |
-| `generated-code.md` | `packages/*/src/generated/**` | 18 TS, 12 HTML | root rule 2 |
+| `generated-code.md` | `packages/*/src/generated/**` | 15 TS, 12 HTML | root rule 2 |
 | `mj-data-access.md` | `**/*.ts` | 21 TS | `03` + `04` |
 | `typescript-style.md` | `**/*.ts` | 21 TS | `07` + typing half of `01` |
 | `angular.md` | `packages/Angular/**` | Angular package | `06` |

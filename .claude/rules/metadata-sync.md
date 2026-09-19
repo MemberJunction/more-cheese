@@ -7,9 +7,10 @@ paths:
 # Metadata & mj-sync
 
 Loads when you open anything under `generated/` (the Loom-simulated world) or
-`config/` (administrative configuration). These two trees are ~385 JSON files
-and they are where this repo's most expensive mistakes have happened — every
-footgun below has already cost someone a debugging session.
+`config/` (administrative configuration). These two trees are 344 JSON files
+across 91 entity directories, and they are where this repo's most expensive
+mistakes have happened — every footgun below has already cost someone a
+debugging session.
 
 Authoring guide with worked examples:
 [`docs/template-docs/metadata.md`](../../docs/template-docs/metadata.md).
