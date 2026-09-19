@@ -25,21 +25,32 @@
  *
  * ── RULE 2 — EVERY `@memberjunction/*` PEER AGREES WITH `mj-app.json`'s FLOOR ──────────────────
  * ADDED HERE, not ported: forms has no equivalent, and this repo has a mechanism forms does not.
- * `.github/workflows/publish.yml` (the "Sync mj-app.json version and MJ version range" step) does
- * not READ `mjVersionRange` — it RE-DERIVES it, from the `@memberjunction/core` peer in
- * `packages/Entities/package.json`, as `>=<that version> <next-major>`, and overwrites the manifest
- * with the result on every publish.
+ * `mj-app.json`'s MJ floor is not maintained by hand — `scripts/sync-app-version.mjs` DERIVES
+ * `mjVersionRange` from the `@memberjunction/core` peer in `packages/Entities/package.json`, as
+ * `>=<that version> <next-major>`. `npm run version` writes it during the release bump, and
+ * `--check` is the identical derivation asserted instead of written, on every pull request
+ * (`build.yml`), inside `release-prep.mjs --apply`, and again in `publish.yml` before anything
+ * reaches npm.
  *
- * So a peer range that drifts BELOW the manifest does not produce a mismatch anyone can see in the
- * repo. It produces a manifest that is silently rewritten DOWNWARD at publish time, undoing the
- * version bump in the published artifact while the committed file still reads correctly. The reverse
- * drift is worse in the other direction: a manifest floor below what the peers demand admits a host
- * that passes MJ's install gate and then fails npm resolution — and `mj app install` runs a bare
- * `npm install`, records the app, and leaves it Disabled rather than erroring.
+ * The peer range is therefore the SOURCE and the manifest floor a copy of it, which is what makes a
+ * drift between them a real failure rather than an untidy one: `--check` stops the release, naming
+ * two fields, when the cause is a peer range somebody edited for unrelated reasons. This gate asks
+ * the same question of the peer side, so the drift fails on the pull request that introduces it
+ * rather than during a release.
+ *
+ * (An earlier shape of this rationale described publish.yml RE-DERIVING the manifest and overwriting
+ * it on every publish, which made a downward drift silently rewrite the published artifact. That
+ * step is gone — publish.yml only runs `--check` now — so that hazard no longer exists. The rule
+ * outlives it.)
+ *
+ * The drift matters on its own account too, in the direction the derivation cannot fix: a manifest
+ * floor below what the peers demand admits a host that passes MJ's install gate and then fails npm
+ * resolution — and `mj app install` runs a bare `npm install`, records the app, and leaves it
+ * Disabled rather than erroring.
  *
  * The rule is therefore EQUALITY, not compatibility: every `@memberjunction/*` peer must be exactly
  * `^<floor>` where `<floor>` is the `>=` floor of `mjVersionRange`. That is the only shape under
- * which the re-derivation is a no-op.
+ * which the derivation is a no-op.
  *
  * ── WHAT WAS DROPPED FROM THE FORMS ORIGINAL ──────────────────────────────────────────────────
  * `SCANNED_DIRS` loses `apps/` — this repo has no `apps/` tree, and scanning a directory that cannot

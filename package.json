@@ -26,17 +26,17 @@
     "lint:distribution": "node scripts/check-distribution-seed.mjs",
     "lint:migrations": "node scripts/check-migration-order.mjs",
     "lint:peer-ranges": "node scripts/check-peer-ranges.mjs",
-    "test:gates": "node --test scripts/check-claude-md.spec.mjs scripts/check-peer-ranges.spec.mjs scripts/check-release-seed-cadence.spec.mjs scripts/check-release-seed-coverage.spec.mjs scripts/generate-teardown.spec.mjs scripts/validate-content.spec.mjs",
+    "lint:release-pushes": "node scripts/check-release-pushes.mjs",
+    "sync:app-version": "node scripts/sync-app-version.mjs",
+    "release:plan": "node scripts/release-prep.mjs --plan",
+    "test:gates": "node --test scripts/check-claude-md.spec.mjs scripts/check-peer-ranges.spec.mjs scripts/check-release-seed-cadence.spec.mjs scripts/check-release-seed-coverage.spec.mjs scripts/generate-teardown.spec.mjs scripts/validate-content.spec.mjs scripts/sync-app-version.spec.mjs scripts/check-release-pushes.spec.mjs scripts/release-plan.spec.mjs scripts/release-prep.spec.mjs scripts/check-distribution-seed.spec.mjs scripts/check-migration-order.spec.mjs scripts/check-metadata-closure.spec.mjs scripts/check-ownership.spec.mjs scripts/check-sync-id-parity.spec.mjs",
     "generate:teardown": "node scripts/generate-teardown.mjs",
     "test:teardown": "node --test scripts/generate-teardown.spec.mjs",
     "mj:migrate": "mj migrate --schema morecheese_members --dir ./migrations",
     "mj:codegen": "mj codegen",
     "mj:migrate:convert": "mj migrate convert --source-dir ./migrations --output-dir ./migrations-pg --schema morecheese_members",
     "change": "changeset",
-    "version": "changeset version",
-    "commitpush": "node ci/commit_push.mjs",
-    "mergemain": "node ci/merge_main.mjs",
-    "mergemain:update-lock": "node ci/merge_main_and_update_lock.mjs"
+    "version": "changeset version && npm run sync:app-version"
   },
   "repository": {
     "type": "git",
@@ -61,7 +61,6 @@
     "@memberjunction/server": "^6.1.2",
     "@types/node": "^22.10.0",
     "acorn": "^8.12.0",
-    "simple-git": "^3.31.1",
     "tsc-alias": "^1.8.16",
     "turbo": "^2.7.3",
     "typescript": "^5.9.3",
@@ -70,7 +69,7 @@
     "js-yaml": "^4.1.0"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=20.0.0",
     "npm": ">=10.0.0"
   }
 }
