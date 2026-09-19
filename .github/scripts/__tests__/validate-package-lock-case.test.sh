@@ -31,13 +31,15 @@ SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/validate-package-lock-c
 PASS=0
 FAIL=0
 
-# Builds a repo tracking packages/Entities + packages/Server, with a package-lock.json whose
-# `.packages` keys are $1 (space-separated, may be empty). Echoes the directory.
+# Builds a repo whose git index tracks packages/<each of $2> (default: Entities + Server), with a
+# package-lock.json whose `.packages` keys are $1 (space-separated, may be empty). Echoes the
+# directory. $2 may contain a nested path such as `vendor/packages/Thing`.
 #
 # The `node_modules/typescript` entry is not filler: every real lockfile is mostly node_modules
 # keys, and they must never be mistaken for workspace paths.
 make_repo() {
   local lock_paths="$1"
+  local tracked="${2:-Entities Server}"
   local dir; dir=$(mktemp -d)
   git -C "$dir" init -q
   git -C "$dir" config user.email t@t.local
@@ -45,9 +47,9 @@ make_repo() {
   # No ${p,,} here: macOS ships bash 3.2, where that expansion is a FATAL "bad substitution" that
   # aborts this function before it echoes $dir — leaving the caller with an empty path and, before
   # the guard in `check`, silently running the gate against the real repository instead.
-  for p in Entities Server; do
+  for p in $tracked; do
     mkdir -p "$dir/packages/$p"
-    echo "{\"name\":\"@mj-biz-apps/more-cheese-$p\"}" > "$dir/packages/$p/package.json"
+    echo "{\"name\":\"@mj-biz-apps/more-cheese-$(basename "$p")\"}" > "$dir/packages/$p/package.json"
   done
   {
     echo '{'
@@ -68,11 +70,11 @@ make_repo() {
   echo "$dir"
 }
 
-# check <name> <expected-exit> <lock-paths> <ignorecase> [grep-for-in-output]
+# check <name> <expected-exit> <lock-paths> <ignorecase> [grep-for-in-output] [tracked-dirs]
 check() {
-  local name="$1" want="$2" lock_paths="$3" ignorecase="$4" expect_text="${5:-}"
+  local name="$1" want="$2" lock_paths="$3" ignorecase="$4" expect_text="${5:-}" tracked="${6:-Entities Server}"
   local dir out rc
-  dir=$(make_repo "$lock_paths")
+  dir=$(make_repo "$lock_paths" "$tracked")
   # If the fixture failed to build, `cd ""` is a no-op and the gate would run against the REAL
   # repository — reporting a result about the wrong tree. Refuse rather than measure the wrong
   # thing. (Not hypothetical: a bash-4-ism in make_repo did exactly this in the sibling repo.)
@@ -118,6 +120,48 @@ for ic in true false; do
   check "[$label] a lockfile with no workspace entries passes" \
     0 "" "$ic" "No case-sensitivity issues found"
 done
+
+# The two cases below pin the grep flags the gate's own comment claims are load-bearing. Both
+# assert a PASS, which on its own would also pass against a gate that detects nothing — so each
+# was confirmed by mutation instead: deleting the flag it names turns that case red (a bogus
+# `lockfile: ... -> git: ...` finding and exit 1) while every other case stays green.
+#
+# They run once, at core.ignorecase=false (the CI value), rather than under both: what they pin is
+# grep's behaviour, which git's index-casing setting does not reach.
+
+# Without -F the lockfile key is a REGEX, so `Foo.Bar` matches the unrelated package `fooxbar` and
+# the gate invents a case mismatch between two genuinely different packages.
+check "[-F] a lockfile path with a regex metacharacter does not match an unrelated package" \
+  0 "packages/Foo.Bar" false "No case-sensitivity issues found" "fooxbar Server"
+
+# Without -x the match is a SUBSTRING, so `packages/Thing/package.json` matches inside the longer
+# tracked path `packages/vendor/packages/Thing/package.json` — and the gate reports a mismatch
+# naming a directory that is not the workspace at all. (A git pathspec `*` crosses `/`, so the
+# nested manifest really is in GIT_PATHS; this case is live, not vacuous.)
+check "[-x] a lockfile path that is a suffix of a longer tracked path is not matched" \
+  0 "packages/Thing" false "No case-sensitivity issues found" "vendor/packages/Thing Server"
+
+# grep exiting >1 is grep FAILING, not "no case variant tracked", and the two must not collapse:
+# a broken grep that reports "no mismatch found" is a green check over a gate that checked
+# nothing. The stub fails only the detection call — the one passing -m1 — so the lockfile-parsing
+# grep ahead of it still works and the loop is actually reached.
+GREP_DIR=$(make_repo "packages/Ghost")
+REAL_GREP=$(command -v grep)
+mkdir -p "$GREP_DIR/fakebin"
+{
+  echo '#!/bin/bash'
+  echo 'for a in "$@"; do [ "$a" = "-m1" ] && exit 2; done'
+  echo "exec $REAL_GREP \"\$@\""
+} > "$GREP_DIR/fakebin/grep"
+chmod +x "$GREP_DIR/fakebin/grep"
+out=$(cd "$GREP_DIR" && PATH="$GREP_DIR/fakebin:$PATH" bash "$SCRIPT" 2>&1); rc=$?
+if [ "$rc" -eq 1 ] && grep -qF "grep failed (exit 2)" <<<"$out"; then
+  PASS=$((PASS + 1)); echo "  ok   — a failing grep fails the gate instead of reading as 'no mismatch'"
+else
+  FAIL=$((FAIL + 1)); echo "  FAIL — a failing grep fails the gate instead of reading as 'no mismatch' (exit $rc)"
+  sed 's/^/         | /' <<<"$out"
+fi
+rm -rf "$GREP_DIR"
 
 # A gate that cannot parse its input has not passed — it abstained. Without the explicit jq check
 # this is the fail-open shape the whole file is written against: empty key list, zero loop

@@ -52,15 +52,26 @@ while IFS= read -r path; do
     continue
   fi
 
-  # No exact match. Is there one that differs ONLY by case? -F so a package name containing a
-  # regex metacharacter is compared literally, -x so it is a whole-line match and not a substring,
-  # -m1 so two index entries differing only by case still yield one line rather than a two-line
-  # $actual that `dirname` would mangle.
+  # No exact match. Is there one that differs ONLY by case? -F so a lockfile path containing a
+  # regex metacharacter is compared literally and cannot match a different package, -x so it is a
+  # whole-line match and not a substring of some longer tracked path, -m1 so two index entries
+  # differing only by case still yield one line rather than a two-line $actual that `dirname`
+  # would mangle. A here-string, not a pipe, so no pipefail or SIGPIPE interaction is left to
+  # reason about. All three flags are pinned by cases in __tests__/.
   #
-  # A here-string, not a pipe: `grep` matching nothing is the ordinary case (an untracked
-  # workspace), so `|| actual=""` is what stops `set -e` aborting the whole gate on it, and with
-  # no pipeline there is no pipefail/SIGPIPE interaction left to reason about.
-  actual=$(grep -ixF -m1 -e "$path/package.json" <<< "$GIT_PATHS") || actual=""
+  # grep's exit status is READ, not discarded. 1 means "no case variant is tracked" — the ordinary
+  # outcome for a workspace git does not have, which must not abort the gate. Anything ABOVE 1 is
+  # grep itself failing; a here-string is a bash temp file, so an unwritable or full TMPDIR lands
+  # here. A bare `|| actual=""` collapses the two and turns a broken grep into "no mismatch found"
+  # and a green check — the exact fail-open shape this gate was rewritten to remove, so it does
+  # not get to reappear in the rewrite.
+  grep_rc=0
+  actual=$(grep -ixF -m1 -e "$path/package.json" <<< "$GIT_PATHS") || grep_rc=$?
+  if [ "$grep_rc" -gt 1 ]; then
+    echo "::error file=package-lock.json::grep failed (exit $grep_rc) while checking '$path' — this gate validated nothing and has not passed"
+    exit 1
+  fi
+
   if [ -n "$actual" ]; then
     MISMATCHES+=("lockfile: $path -> git: $(dirname "$actual")")
   fi
