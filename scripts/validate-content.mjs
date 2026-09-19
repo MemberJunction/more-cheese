@@ -334,6 +334,17 @@ function checkInternal(file, text) {
     return { rel, fails, warns: [], info: [] };
 }
 
+// content/ holds two planning documents beside the corpus. They are repo documentation — no
+// frontmatter, no fiction disclaimer, by design — so validating them as publishable content fails
+// them forever. Named in full rather than matched by suffix: an endsWith() test also silences a
+// real post that happens to end this way, and it named only VAULT-DESIGN.md while CONTENT-CALENDAR.md
+// (added in the same commit, and referenced from it) failed every run and took the whole gate's
+// exit status with it.
+const NOT_CORPUS = new Set([
+    path.join('content', 'VAULT-DESIGN.md'),
+    path.join('content', 'CONTENT-CALENDAR.md'),
+]);
+
 // ---------- discovery ----------
 function walk(dir, out = []) {
     if (!fs.existsSync(dir)) return out;
@@ -382,7 +393,7 @@ for (const f of walk(path.join(ROOT, 'content', 'blog'))) {
 const results = [];
 for (const file of files) {
     const rel = path.relative(ROOT, file);
-    if (rel.endsWith('VAULT-DESIGN.md')) continue;
+    if (NOT_CORPUS.has(rel)) continue;
     const text = fs.readFileSync(file, 'utf8');
     let r;
     if (rel.startsWith(path.join('content', 'blog'))) {
