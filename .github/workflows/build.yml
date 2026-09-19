@@ -27,11 +27,56 @@ jobs:
       - name: Validate repository.url in packages
         run: ./.github/scripts/validate-package-repository.sh
 
+      # BEFORE `npm ci`, and the ordering is the whole point of running it here. A mis-cased
+      # lockfile makes `npm ci` itself fail, so with this step after it the job stops on a raw npm
+      # EUSAGE and this gate — the only thing in the run that can say `lockfile: packages/server
+      # -> git: packages/Server` and hand over the three-step fix — never prints at all. A
+      # diagnosis has to be emitted before the crash it explains. It needs no node_modules, only
+      # `package-lock.json` and `git ls-files`; `validate-package-repository.sh` above sits
+      # pre-install for the same reason.
+      #
+      # publish.yml runs this gate too, but a check that can only run during a release cannot
+      # prevent the mistake that causes one — the same argument that pulled `sync-app-version
+      # --check` forward into this workflow. A mis-cased lockfile is written on a macOS developer's
+      # machine (case-insensitive, so nothing local complains), merged on a pull request, and then
+      # breaks the install on Linux at the moment the release is cut, over an already-merged
+      # promotion. Asking here puts the answer on the pull request that introduced it.
+      #
+      # NOT the same check as `CI guard script tests` below. That one runs this same script against
+      # throwaway fixtures to ask whether the GATE still works; this one runs it against our real
+      # package-lock.json to ask whether OUR lockfile is mis-cased. Neither subsumes the other —
+      # delete neither.
+      - name: package-lock.json casing matches what git tracks
+        run: ./.github/scripts/validate-package-lock-case.sh
+
       - name: Install dependencies
         run: npm ci
 
       - name: Nothing may push to main or next
         run: npm run lint:release-pushes
+
+      # The fixture tests for the gate that runs above, before `npm ci`. The pair is NOT a
+      # duplicate: that step asks whether OUR package-lock.json is mis-cased, this one asks whether
+      # the GATE can still tell — it runs the same script against throwaway repos under mktemp,
+      # including a deliberately mis-cased one it must reject. Delete neither.
+      #
+      # This gate earned its test the hard way: it spent its entire life unable to detect the
+      # mis-casing it exists for, asking git for the case variant through a pathspec glob, which is
+      # byte-exact whatever core.ignorecase says, and so reported "No case-sensitivity issues
+      # found" over every lockfile it was ever handed. The fixtures pin both core.ignorecase
+      # values, since a developer only ever observes one locally — which is how that survived.
+      #
+      # It sits AFTER the gate it validates, inverting repo-gates.md's spec-first ordering, and
+      # that is deliberate: spec-first exists so nobody trusts a green gate whose test has gone
+      # red, and inside one job both must pass for the job to pass, so a red harness fails the run
+      # from either position. The gate step has a hard ordering constraint (it must precede
+      # `npm ci` to be heard at all); this step has none, touching only its own fixtures.
+      #
+      # It is a .sh harness rather than an entry in `npm run test:gates`, which is `node --test`
+      # over the .mjs specs — the sibling repos (bizapps-forms, bizapps-common) run this same
+      # harness as its own step, and matching them keeps the port legible in both directions.
+      - name: CI guard script tests
+        run: ./.github/scripts/__tests__/validate-package-lock-case.test.sh
 
       - name: Every publishable package declares files and publishConfig
         run: ./.github/scripts/validate-package-files.sh
