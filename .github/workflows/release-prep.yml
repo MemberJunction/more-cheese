@@ -1,0 +1,349 @@
+# Cuts the release pull request: `next` -> `release/vX.Y.Z` -> a PR into `main`.
+#
+# This is step 1 of the three-step release in plans/release-readiness-2026-09-18.md: dispatch this,
+# review and merge the PR it opens (the only human gate), then `publish.yml` builds, publishes to
+# npm and tags the release. This repo has never published — no `v*` tag exists yet — and the design
+# doc records why the previous shape of this (inline `jq` in `publish.yml`, plus two scripts that
+# pushed straight to a protected branch) could not be trusted: the version decision could only ever
+# be exercised by cutting a real release, and `next` carries the `next-protect` ruleset (id
+# 18797049, targets `~DEFAULT_BRANCH`, requires a pull request, lists no bypass actors) which
+# refuses a direct push outright.
+#
+# NOT A PUSH TO A PROTECTED BRANCH, and this is the distinction the whole design turns on. `next-
+# protect` targets only the default branch (`next` itself), so it says nothing about `release/*`.
+# `main` currently carries no ruleset at all in this repo — which is not a reassurance, it is the
+# reason `ci/commit_push.mjs`'s direct push to `main` has gotten away with it so far. This workflow
+# does not rely on that staying true: `scripts/check-release-pushes.mjs` is a standing tripwire that
+# fails any script or workflow pushing straight to `main` or `next`, so `release/*` and a pull
+# request are the only way this file ever reaches either branch.
+#
+# The one thing `GITHUB_TOKEN` cannot do is author that branch and that PR: GitHub does not start
+# workflow runs from events it authors, so a PR opened with it would never get `changes.yml` to run
+# on it, and a reviewer would be merging with no gate signal at all. Hence a GitHub App, minted from
+# `vars.APP_CLIENT_ID` + `secrets.APP_PRIVATE_KEY` (org-level, already visible to this repo), whose
+# only powers are `contents: write` and `pull-requests: write`. Run `verify-release-app-token.yml`
+# if you need to know that credential is live.
+#
+# The work itself lives in scripts/release-prep.mjs, not here: a decision that only ever runs during
+# a release cannot be proven by running a release. This file is the plumbing around two calls —
+#
+#   --plan   pure read, always exits 0, emits `ready`, `version` and `branch`
+#   --apply  refuses non-zero if the preconditions fail; otherwise runs `npm run version`,
+#            `npm install --package-lock-only`, verifies the postconditions and commits. It creates
+#            no branch and pushes nothing — the branch and the push are this file's job, because they
+#            are the parts that need a credential.
+#
+# `dry_run` runs the read half and stops: no branch, no commit, no PR, nothing on the remote.
+# The name is the one a human clicks in the Actions sidebar, and the two must stay identical:
+# GitHub lists a workflow by this field and nothing else, so a name that merely echoes the filename
+# leaves a runbook pointing at a label that is not there. Imperative, matching `Verify the release
+# App token` — these are things you do, not files you have.
+name: Prepare a release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Compute the plan and stop — no branch, no commit, no pull request'
+        type: boolean
+        default: false
+
+# Only the checkout uses this. Every write below goes through the App token, so trimming the job's
+# own token to `read` means a bug here cannot write to the repository as Actions.
+permissions:
+  contents: read
+
+# Never two at once. Both would compute the same version from the same tip of `next` and race to
+# create the same branch; the loser fails on a rejected push after having already run the bump.
+concurrency:
+  group: release-prep
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Cut the release PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Pinned to `next`, not to the dispatch ref. A release is by definition the current tip of
+          # the integration branch; letting whoever pressed the button choose the ref would let a
+          # feature branch be cut as a release, and that mistake surfaces only in review, after the
+          # CHANGELOGs have been rewritten. The workflow FILE still comes from the dispatch ref —
+          # that is how workflow_dispatch resolves — so this file stays testable from its own branch
+          # while the tree it operates on is always `next`.
+          ref: next
+          # `changeset version` rewrites CHANGELOGs from history and scripts/release-prep.mjs reads
+          # tags to know what has already shipped. Neither survives a shallow clone.
+          fetch-depth: 0
+          fetch-tags: true
+          # Without this the release cannot be pushed, and the error names neither credentials nor
+          # this line. `persist-credentials: true` (the default) writes
+          # `http.https://github.com/.extraheader: AUTHORIZATION: basic <GITHUB_TOKEN>` into the
+          # LOCAL git config. That header matches every remote whose URL is github.com — including
+          # the `app-push` remote below, whose URL carries the App token — and a config header
+          # OUTRANKS credentials embedded in a remote's URL. So the push would authenticate as
+          # github-actions[bot], not as the App; this job deliberately holds `contents: read`, so it
+          # would be refused with a 403 naming github-actions[bot], not the App — a message that
+          # reads like a credential problem and is actually this line.
+          #
+          # This exact failure is documented in bizapps-forms' release-prep.yml (its first-ever run,
+          # 2026-09-15, cut v0.11.0 correctly and died on the push): the App itself was fine, and the
+          # persisted credential is what won. Applying the fix here pre-emptively, before this
+          # workflow has ever run once, is the entire point of porting it rather than rediscovering
+          # it the same way.
+          #
+          # Safe because nothing in this job reaches the remote except the one App-token push below —
+          # checkout still authenticates its OWN fetch, it simply leaves no credential behind. Do NOT
+          # copy this to publish.yml as it stands today: that workflow still pushes directly through
+          # `origin` (the pre-existing defect `scripts/check-release-pushes.mjs` names) and needs the
+          # persisted credential until that is fixed on its own.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Pure read. `ready: false` on a dry run is this workflow working, not failing — the point of
+      # asking is that the answer can be no. `--plan` always exits 0 (that is how it stays truthful
+      # about a checkout it cannot assess, too), so the guard below reads the `ready` OUTPUT, never
+      # this step's exit status.
+      - name: What would this release be?
+        id: plan
+        run: node scripts/release-prep.mjs --plan
+
+      # Counted BEFORE --apply, because `changeset version` consumes the files: afterwards there is
+      # nothing left to count, and "what went into this version" is the first thing a reviewer wants
+      # to know. The find expression is publish.yml's "Check for pending changesets" step, in
+      # substance — the two must agree about what counts as a changeset, since publish.yml refuses
+      # to release while any remain.
+      - name: Inventory the changesets this release consumes
+        id: changesets
+        run: |
+          set -euo pipefail
+          FILES=$(find .changeset -name '*.md' -not -name 'README.md' | sort)
+          COUNT=$(printf '%s' "$FILES" | grep -c . || true)
+          LIST="$RUNNER_TEMP/changesets.md"
+          : > "$LIST"
+          if [ -n "$FILES" ]; then
+            while IFS= read -r f; do
+              # A changeset is a YAML front-matter block between two `---` lines, then the summary.
+              # Drop the opening fence, seek the closing one, drop it, take the first non-empty line.
+              # `|| true` because grep -m1 exits 1 with no match and SIGPIPEs its upstream on a hit.
+              SUMMARY=$(tail -n +2 "$f" | sed -n '/^---$/,$p' | tail -n +2 | grep -m1 . || true)
+              echo "- \`$(basename "$f")\` — ${SUMMARY:-(no summary in the changeset)}" >> "$LIST"
+            done <<< "$FILES"
+          fi
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "$COUNT changeset(s) to consume"
+          cat "$LIST"
+
+      - name: Dry run — this is where it stops
+        if: ${{ inputs.dry_run }}
+        env:
+          READY: ${{ steps.plan.outputs.ready }}
+          VERSION: ${{ steps.plan.outputs.version }}
+          BRANCH: ${{ steps.plan.outputs.branch }}
+          COUNT: ${{ steps.changesets.outputs.count }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## Dry run — nothing was created"
+            echo
+            echo "| field | value |"
+            echo "|---|---|"
+            echo "| ready | \`$READY\` |"
+            echo "| version | \`$VERSION\` |"
+            echo "| branch | \`$BRANCH\` |"
+            echo "| changesets | $COUNT |"
+            echo
+            cat "$RUNNER_TEMP/changesets.md"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$READY" != "true" ]; then
+            echo "::warning::Not ready to cut a release — scripts/release-prep.mjs --plan said so above. A real run would refuse."
+          fi
+
+      # Guard clause, and the reason every step below carries only `if: ${{ !inputs.dry_run }}` and
+      # not a readiness condition as well: a failed step stops the job, so refusing HERE is what
+      # keeps an unready release out of the branch-creating half. `--apply` refuses too — it is the
+      # authority on readiness and this step does not re-derive it — but it refuses after this
+      # workflow would already have created a branch, and a stray `release/*` is then someone's
+      # afternoon.
+      - name: Refuse to cut a release that is not ready
+        if: ${{ !inputs.dry_run }}
+        env:
+          READY: ${{ steps.plan.outputs.ready }}
+          VERSION: ${{ steps.plan.outputs.version }}
+          BRANCH: ${{ steps.plan.outputs.branch }}
+        run: |
+          set -euo pipefail
+          if [ "$READY" != "true" ]; then
+            echo "::error::scripts/release-prep.mjs --plan reports ready=$READY. Read its output above; it names what is missing."
+            exit 1
+          fi
+          if [ -z "$VERSION" ] || [ -z "$BRANCH" ]; then
+            echo "::error::--plan reported ready but left version='$VERSION' branch='$BRANCH' empty. Refusing to guess either."
+            exit 1
+          fi
+          # Better than a rejected push several steps later, which reads as a credential problem and
+          # is not one. A `release/*` branch already on the remote means the release PR was already
+          # cut (go find it) or a previous run half-finished (delete it, or finish it by hand).
+          #
+          # Deliberately NOT `--exit-code`, which answers "no such ref" with 2 and "I could not reach
+          # the remote" with 128. Treating both as "it does not exist" would let a dead credential or
+          # a flaky network walk past this guard and fail at the push instead, which is precisely the
+          # error this step exists to pre-empt.
+          #
+          # Captured by ASSIGNMENT, not tested inline as `if [ -n "$(...)" ]`. Errexit is suppressed
+          # for the condition part of an `if`, and a command substitution's status is discarded when
+          # it is only a word inside `[ ... ]` — so the inline form reads an unreachable remote as
+          # "branch absent" and walks into the bump, the commit and the push, which is the exact
+          # conflation the paragraph above rejects. `pipefail` cannot save it: it sets a status
+          # nothing goes on to read.
+          EXISTING_BRANCH=$(git ls-remote --heads origin "refs/heads/$BRANCH" | cut -f1)
+          if [ -n "$EXISTING_BRANCH" ]; then
+            echo "::error::$BRANCH already exists on the remote. Either its pull request is already open, or a previous run left it behind — this workflow will not overwrite it."
+            exit 1
+          fi
+
+      - name: Configure git credentials
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      # The branch is created here and the commit is made by --apply, in that order, because the
+      # script deliberately does neither of the two things that need a credential or a destination.
+      # Committer identity is cosmetic: what decides whether changes.yml runs on the resulting PR is
+      # the token the PUSH and the PR are authenticated with, not who authored the commit.
+      - name: Cut the release branch and bump the version
+        if: ${{ !inputs.dry_run }}
+        env:
+          BRANCH: ${{ steps.plan.outputs.branch }}
+        run: |
+          set -euo pipefail
+          git switch -c "$BRANCH"
+          node scripts/release-prep.mjs --apply
+
+      - name: Compose the pull request body
+        if: ${{ !inputs.dry_run }}
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+          BRANCH: ${{ steps.plan.outputs.branch }}
+          COUNT: ${{ steps.changesets.outputs.count }}
+        run: |
+          set -euo pipefail
+          {
+            echo "Cut from \`next\` by \`.github/workflows/release-prep.yml\`."
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| version | **v$VERSION** |"
+            echo "| changesets consumed | $COUNT |"
+            echo "| branch | \`$BRANCH\` |"
+            echo
+            echo "### What this release contains"
+            echo
+            cat "$RUNNER_TEMP/changesets.md"
+            echo
+            echo "### What needs human eyes"
+            echo
+            echo "Everything below is something no gate downstream can second-guess."
+            echo
+            echo "- [ ] **The version.** \`changeset version\` chose v$VERSION from the changesets above, and that is"
+            echo "  the version scripts/release-prep.mjs predicted and named this branch after. A schema change"
+            echo "  must not ship as a patch — the same rule that predicted this version also forces a minor when"
+            echo "  \`migrations/\` moved since the last tag, so a mismatch here means the two disagree and this"
+            echo "  branch should not be trusted as-is."
+            echo "- [ ] **The consolidated \`Metadata_Sync\` seed.** Feature PRs contribute declarative JSON under"
+            echo "  \`generated/\` and \`config/\` and no seed migration; the build engineer generates one"
+            echo "  consolidated seed per release (\`migrations/README.md\`). \`check:seed-cadence\` and"
+            echo "  \`check:release-seed\` run on this PR like any other, so a missing or split seed fails here"
+            echo "  first."
+            echo "- [ ] **The CHANGELOGs.** They are what consumers read, and they are generated from changeset"
+            echo "  summaries written weeks ago by people who were describing a diff, not a release."
+            echo
+            echo "### On merge"
+            echo
+            echo "Merge with a **merge commit**. That triggers \`publish.yml\` (\`push: branches: [main]\`), which"
+            echo "builds, publishes to npm and tags \`v$VERSION\`."
+          } > "$RUNNER_TEMP/release-pr-body.md"
+
+      # Minted LATE, immediately before use, and that is load-bearing: an installation token lives
+      # one hour, while everything above it — a cold `npm ci`, `changeset version`, a lockfile
+      # regeneration, every release gate `--apply` re-runs — is measured in minutes and grows with
+      # the repo. A token minted at checkout is a token that will eventually expire mid-release, on a
+      # day nobody changed anything.
+      - name: Mint the App token for the push and the pull request
+        if: ${{ !inputs.dry_run }}
+        id: token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          # Least privilege, named at the call site rather than inherited from whatever the App
+          # happens to hold. Two effects: this token's blast radius is legible right here, and if the
+          # App's grants are ever trimmed the mint fails HERE with a clear error instead of surfacing
+          # as a push that dies looking like the branch protection this whole design works around.
+          # contents -> the push of `release/*`; pull-requests -> the PR into `main`.
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Push the release branch and open the pull request
+        if: ${{ !inputs.dry_run }}
+        id: pr
+        env:
+          APP_TOKEN: ${{ steps.token.outputs.token }}
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          VERSION: ${{ steps.plan.outputs.version }}
+          BRANCH: ${{ steps.plan.outputs.branch }}
+        run: |
+          set -euo pipefail
+          # A second remote rather than re-pointing `origin`. The App token is the credential for
+          # exactly one write; leaving it in `origin`'s URL would hand it silently to every later
+          # step that happens to touch the remote, which is the opposite of naming the permissions
+          # at the call site above.
+          git remote remove app-push 2>/dev/null || true
+          git remote add app-push "https://x-access-token:$APP_TOKEN@github.com/$GITHUB_REPOSITORY"
+          git push app-push "HEAD:refs/heads/$BRANCH"
+
+          PR_URL=$(gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head "$BRANCH" \
+            --title "Release v$VERSION" \
+            --body-file "$RUNNER_TEMP/release-pr-body.md")
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+          echo "::notice::Release PR: $PR_URL"
+
+      - name: Summary
+        if: ${{ !inputs.dry_run }}
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+          BRANCH: ${{ steps.plan.outputs.branch }}
+          COUNT: ${{ steps.changesets.outputs.count }}
+          PR_URL: ${{ steps.pr.outputs.pr_url }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## Release v$VERSION is ready for review"
+            echo
+            echo "$PR_URL"
+            echo
+            echo "| field | value |"
+            echo "|---|---|"
+            echo "| version | \`v$VERSION\` |"
+            echo "| branch | \`$BRANCH\` |"
+            echo "| changesets consumed | $COUNT |"
+            echo "| opened as | \`${{ steps.token.outputs.app-slug }}\` |"
+            echo
+            echo "changes.yml runs on it like any other pull request into \`main\` — opening it with the App"
+            echo "rather than \`GITHUB_TOKEN\` is what makes that happen at all. The App holds no ruleset bypass"
+            echo "and is used here only because a PR authored with \`GITHUB_TOKEN\` starts no workflow runs."
+          } >> "$GITHUB_STEP_SUMMARY"
