@@ -478,7 +478,7 @@ const RETIRED = {
     '/about-page/': '/about.html',
 };
 
-function staticWebAppConfig() {
+export function staticWebAppConfig() {
     const routes = [];
 
     // /blog/ is a real generated directory; naming it explicitly documents that
@@ -578,4 +578,23 @@ function main() {
     }
 }
 
-main();
+/**
+ * `main()` ran unconditionally, so importing this module ran the whole build — which is why the
+ * routing table below had never been unit-tested, and why a duplicate-route defect reached
+ * production. Same reasoning and same shape as the other four scripts here; they must answer this
+ * identically or the inconsistency is itself the bug.
+ */
+const isEntryPoint = () => {
+    try {
+        return (
+            process.argv[1] !== undefined &&
+            fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))
+        );
+    } catch {
+        return false;
+    }
+};
+
+if (isEntryPoint()) {
+    main();
+}
