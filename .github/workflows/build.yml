@@ -33,6 +33,21 @@ jobs:
       - name: Nothing may push to main or next
         run: npm run lint:release-pushes
 
+      # A gate whose own test is not wired into CI is a gate nobody is checking — and this one
+      # spent its whole life unable to detect the mis-casing it exists for, because it asked git
+      # for the case variant through a pathspec glob, which is byte-exact whatever core.ignorecase
+      # says. It reported "No case-sensitivity issues found" over every lockfile it was ever given.
+      #
+      # The gate itself runs in publish.yml, where a mis-cased lockfile breaks `npm ci` on Linux;
+      # its test runs HERE, on every pull request, so the repair is checked by the workflow that
+      # blocks a merge rather than only by the one that cuts a release. It is a .sh harness rather
+      # than an entry in `npm run test:gates`, which is `node --test` over the .mjs specs — the
+      # sibling repos (bizapps-forms, bizapps-common) run this same harness as its own step, and
+      # matching them keeps the port in both directions legible. It needs only git and jq, so its
+      # placement after `npm ci` is for grouping with the other gate steps, not a dependency.
+      - name: CI guard script tests
+        run: ./.github/scripts/__tests__/validate-package-lock-case.test.sh
+
       - name: Every publishable package declares files and publishConfig
         run: ./.github/scripts/validate-package-files.sh
 

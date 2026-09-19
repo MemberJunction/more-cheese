@@ -22,29 +22,52 @@ fi
 PATHS=$(echo "$LOCKFILE_KEYS" | grep -E '^(packages|apps)/' || true)
 PATHS=$(echo "$PATHS" | sed 's|/$||')
 
+# Every workspace package.json git actually tracks, enumerated ONCE with no per-path pathspec
+# filtering, so the case-insensitive comparison below happens in grep rather than in git.
+#
+# ⚠️ THIS LIST IS THE FIX. The version of this script inherited from the template (bizapps-caliber,
+# bizapps-tasks and BlueCypress/SaaS all still carry it) looked for the case variant with
+#     git ls-files "$path*/package.json" | grep -i "^$path/package.json$"
+# and that can never match: a git PATHSPEC GLOB is byte-exact regardless of core.ignorecase, so
+# `packages/server*` does not match `packages/Server` and the glob returns EMPTY — the `grep -i`
+# behind it is handed nothing to be insensitive about. MISMATCHES therefore stayed empty for a
+# genuinely mis-cased lockfile, on Linux CI as well as macOS, and this script printed "No
+# case-sensitivity issues found" and exited 0. The gate had never once detected the failure it
+# exists for. `__tests__/validate-package-lock-case.test.sh` pins it under BOTH core.ignorecase
+# settings, because the macOS (true) and CI (false) behaviours differ and a developer only ever
+# observes one of them locally — which is how this survived.
+#
+# `apps/` stays in the pathspec even though this repo has no apps/ directory: the key filter above
+# accepts `apps/` paths, so dropping it here would extract such a path and then be unable to match
+# it in ANY casing — a narrower copy of the same silent miss. A pathspec matching nothing is inert.
+GIT_PATHS=$(git ls-files -- 'packages/*/package.json' 'apps/*/package.json')
+
 # Line-based read, not `for path in $PATHS`: a path containing a space (e.g. a package
 # directory named "My Package") would otherwise word-split into two garbage arguments below.
 while IFS= read -r path; do
   [ -z "$path" ] && continue
 
-  # Check if the path exists in git with exact casing
-  if ! git ls-files --error-unmatch "$path/package.json" > /dev/null 2>&1; then
-    # Try case-insensitive match. `pipefail` is switched off for exactly this one pipeline:
-    # `head -1` closing the pipe after its first line can SIGPIPE the upstream `git ls-files`,
-    # and pipefail then reports the WHOLE pipeline as exit 141 even when the match was captured
-    # cleanly — verified empirically, and `if actual=$(...); then` would misread that 141 as
-    # "no match" and silently DROP a real case mismatch, which is worse than not checking at
-    # all. Without pipefail here, the pipeline's exit status is `head`'s own (always 0 on a
-    # normal read), so the actual signal is read from `$actual` being non-empty, exactly as
-    # this script worked before it ran under strict mode.
-    set +o pipefail
-    actual=$(git ls-files "$path*/package.json" 2>/dev/null | grep -i "^$path/package.json$" | head -1)
-    set -o pipefail
-    if [ -n "$actual" ]; then
-      actual_dir=$(dirname "$actual")
-      MISMATCHES+=("lockfile: $path -> git: $actual_dir")
-    fi
+  # Exact casing present in the index — nothing to report.
+  if git ls-files --error-unmatch "$path/package.json" > /dev/null 2>&1; then
+    continue
   fi
+
+  # No exact match. Is there one that differs ONLY by case? -F so a package name containing a
+  # regex metacharacter is compared literally, -x so it is a whole-line match and not a substring,
+  # -m1 so two index entries differing only by case still yield one line rather than a two-line
+  # $actual that `dirname` would mangle.
+  #
+  # A here-string, not a pipe: `grep` matching nothing is the ordinary case (an untracked
+  # workspace), so `|| actual=""` is what stops `set -e` aborting the whole gate on it, and with
+  # no pipeline there is no pipefail/SIGPIPE interaction left to reason about.
+  actual=$(grep -ixF -m1 -e "$path/package.json" <<< "$GIT_PATHS") || actual=""
+  if [ -n "$actual" ]; then
+    MISMATCHES+=("lockfile: $path -> git: $(dirname "$actual")")
+  fi
+
+  # A lockfile path git does not track in ANY casing is deliberately NOT reported here: that is a
+  # missing or renamed workspace, which breaks the install identically on both platforms and so is
+  # not a case-sensitivity finding. Naming it here would fail this gate for an unrelated reason.
 done <<< "$PATHS"
 
 if [ ${#MISMATCHES[@]} -gt 0 ]; then
