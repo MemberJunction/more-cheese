@@ -1,0 +1,234 @@
+[
+  {
+    "primaryKey": {
+      "ID": "8A1C44F3-938C-4E65-B6DE-D621BC4C3001"
+    },
+    "fields": {
+      "Name": "MoreCheese: Member Renewal Risk",
+      "Description": "Predicts whether an active More Cheese membership will renew or lapse/cancel at the end of the period, guarding against post-lapse leakage.",
+      "Version": 1,
+      "Status": "Published",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
+      "Hyperparameters": {},
+      "SourceBindings": [
+        {
+          "Kind": "Entity",
+          "Ref": "MoreCheese: Membership Periods"
+        }
+      ],
+      "FeatureSteps": {
+        "Steps": [
+          {
+            "Id": "select-features",
+            "Kind": "select",
+            "Columns": [
+              "AutoRenew",
+              "MembershipTier",
+              "DuesAmount",
+              "MemberSegment",
+              "MemberRegion",
+              "TenureDays",
+              "PriorPeriodsCount",
+              "EventsAttendedCount",
+              "CoursesEnrolledCount",
+              "CommitteeCount",
+              "TotalOrderSpend",
+              "OrdersCount",
+              "DaysSinceLastOrder",
+              "DaysSinceLastEvent",
+              "CoursesCompletedCount"
+            ]
+          },
+          {
+            "Id": "onehot-MembershipTier",
+            "Kind": "onehot",
+            "Column": "MembershipTier"
+          },
+          {
+            "Id": "onehot-MemberSegment",
+            "Kind": "onehot",
+            "Column": "MemberSegment"
+          },
+          {
+            "Id": "onehot-MemberRegion",
+            "Kind": "onehot",
+            "Column": "MemberRegion"
+          },
+          {
+            "Id": "impute-TenureDays",
+            "Kind": "impute",
+            "Column": "TenureDays",
+            "Strategy": "median"
+          },
+          {
+            "Id": "impute-DaysSinceLastOrder",
+            "Kind": "impute",
+            "Column": "DaysSinceLastOrder",
+            "Strategy": "median"
+          },
+          {
+            "Id": "impute-DaysSinceLastEvent",
+            "Kind": "impute",
+            "Column": "DaysSinceLastEvent",
+            "Strategy": "median"
+          },
+          {
+            "Id": "standardize-numerics",
+            "Kind": "standardize",
+            "Columns": [
+              "DuesAmount",
+              "TenureDays",
+              "PriorPeriodsCount",
+              "EventsAttendedCount",
+              "CoursesEnrolledCount",
+              "CommitteeCount",
+              "TotalOrderSpend",
+              "OrdersCount",
+              "DaysSinceLastOrder",
+              "DaysSinceLastEvent",
+              "CoursesCompletedCount"
+            ]
+          }
+        ]
+      },
+      "AsOfStrategy": {
+        "Mode": "none"
+      },
+      "LeakageGuard": {
+        "DenyFields": [
+          "CancellationDate",
+          "CancellationReason",
+          "RenewalDate",
+          "EndDate",
+          "StartDate",
+          "PeriodKey",
+          "PersonID",
+          "Person",
+          "IsSharedDemo"
+        ],
+        "SingleFeatureDominanceThreshold": 0.85
+      },
+      "ValidationStrategy": {
+        "Strategy": "train_test_split",
+        "TestSize": 0.2,
+        "LockedHoldoutFraction": 0.15
+      }
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8A1C44F3-938C-4E65-B6DE-D621BC4C3002"
+    },
+    "fields": {
+      "Name": "MoreCheese: Event No-Show Propensity",
+      "Description": "Predicts whether a registered attendee will actually attend the conference/webinar.",
+      "Version": 1,
+      "Status": "Published",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "TargetVariable": "Attended",
+      "ProblemType": "classification",
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
+      "Hyperparameters": {},
+      "SourceBindings": [
+        {
+          "Kind": "Entity",
+          "Ref": "MoreCheese: Event Registrations"
+        }
+      ],
+      "FeatureSteps": {
+        "Steps": [
+          {
+            "Id": "select-features",
+            "Kind": "select",
+            "Columns": [
+              "RegisteredOn",
+              "EventID"
+            ]
+          }
+        ]
+      },
+      "AsOfStrategy": {
+        "Mode": "none"
+      },
+      "LeakageGuard": {
+        "DenyFields": [
+          "Attended",
+          "IsSharedDemo",
+          "RegKey",
+          "PersonID",
+          "Person"
+        ],
+        "SingleFeatureDominanceThreshold": 0.85
+      },
+      "ValidationStrategy": {
+        "Strategy": "train_test_split",
+        "TestSize": 0.2,
+        "LockedHoldoutFraction": 0.15
+      }
+    },
+    "sync": {
+      "lastModified": "2026-09-19T16:33:57.793Z",
+      "checksum": "c34c075e62d5100fab2ede9a6b3ab24bfd3b6c5aeda92710031fcc71ab367166"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8A1C44F3-938C-4E65-B6DE-D621BC4C3003"
+    },
+    "fields": {
+      "Name": "MoreCheese: Course Completion Risk",
+      "Description": "Predicts whether an enrolled learner will complete their enrolled academy course or drop out.",
+      "Version": 1,
+      "Status": "Published",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=Random Forest",
+      "Hyperparameters": {},
+      "SourceBindings": [
+        {
+          "Kind": "Entity",
+          "Ref": "MoreCheese: Course Enrollments"
+        }
+      ],
+      "FeatureSteps": {
+        "Steps": [
+          {
+            "Id": "select-features",
+            "Kind": "select",
+            "Columns": [
+              "EnrolledOn",
+              "CourseID"
+            ]
+          }
+        ]
+      },
+      "AsOfStrategy": {
+        "Mode": "none"
+      },
+      "LeakageGuard": {
+        "DenyFields": [
+          "CompletedOn",
+          "Status",
+          "IsSharedDemo",
+          "EnrollKey",
+          "PersonID",
+          "Person"
+        ],
+        "SingleFeatureDominanceThreshold": 0.85
+      },
+      "ValidationStrategy": {
+        "Strategy": "train_test_split",
+        "TestSize": 0.2,
+        "LockedHoldoutFraction": 0.15
+      }
+    },
+    "sync": {
+      "lastModified": "2026-09-19T16:33:57.794Z",
+      "checksum": "ab8d523648ba01d7ecf53f84bf1e3cad35315e49f2fb6bee2190616b6e6b21ba"
+    }
+  }
+]

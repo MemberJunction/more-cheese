@@ -15397,13 +15397,31 @@ CREATE VIEW [${flyway:defaultSchema}].[vwMembershipPeriods]
 AS
 SELECT
     m.*,
-    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person]
+    mjBizAppsCommonPerson_PersonID.[DisplayName] AS [Person],
+    ISNULL(prof.[Segment], 'Unknown') AS [MemberSegment],
+    ISNULL(prof.[Region], 'Unknown') AS [MemberRegion],
+    ISNULL(prof.[Country], 'Unknown') AS [MemberCountry],
+    prof.[JoinDate] AS [MemberJoinDate],
+    ISNULL(DATEDIFF(day, prof.[JoinDate], m.[StartDate]), 0) AS [TenureDays],
+    ISNULL((SELECT COUNT(*) FROM [${flyway:defaultSchema}].[MembershipPeriod] prev WHERE prev.[PersonID] = m.[PersonID] AND prev.[StartDate] < m.[StartDate]), 0) AS [PriorPeriodsCount],
+    ISNULL((SELECT COUNT(*) FROM [morecheese_events].[EventRegistration] er WHERE er.[PersonID] = m.[PersonID] AND er.[Attended] = 1 AND er.[RegisteredOn] <= m.[StartDate]), 0) AS [EventsAttendedCount],
+    ISNULL((SELECT COUNT(*) FROM [morecheese_learning].[CourseEnrollment] ce WHERE ce.[PersonID] = m.[PersonID] AND ce.[EnrolledOn] <= m.[StartDate]), 0) AS [CoursesEnrolledCount],
+    ISNULL((SELECT COUNT(*) FROM [${mjSchema}_BizAppsCommittees].[Membership] cm WHERE cm.[PersonID] = m.[PersonID] AND cm.[StartDate] <= m.[StartDate]), 0) AS [CommitteeCount],
+    ISNULL((SELECT SUM(TotalGross) FROM [${mjSchema}_BizAppsOrders].[OrderHeader] o WHERE o.[BillToPersonID] = m.[PersonID] AND o.[OrderDate] <= m.[StartDate]), 0.0) AS [TotalOrderSpend],
+    ISNULL((SELECT COUNT(*) FROM [${mjSchema}_BizAppsOrders].[OrderHeader] o WHERE o.[BillToPersonID] = m.[PersonID] AND o.[OrderDate] <= m.[StartDate]), 0) AS [OrdersCount],
+    ISNULL(DATEDIFF(day, (SELECT MAX(OrderDate) FROM [${mjSchema}_BizAppsOrders].[OrderHeader] o WHERE o.[BillToPersonID] = m.[PersonID] AND o.[OrderDate] <= m.[StartDate]), m.[StartDate]), 999) AS [DaysSinceLastOrder],
+    ISNULL(DATEDIFF(day, (SELECT MAX(RegisteredOn) FROM [morecheese_events].[EventRegistration] er WHERE er.[PersonID] = m.[PersonID] AND er.[Attended] = 1 AND er.[RegisteredOn] <= m.[StartDate]), m.[StartDate]), 999) AS [DaysSinceLastEvent],
+    ISNULL((SELECT COUNT(*) FROM [morecheese_learning].[CourseEnrollment] ce WHERE ce.[PersonID] = m.[PersonID] AND ce.[Status] = 'Completed' AND ce.[CompletedOn] <= m.[StartDate]), 0) AS [CoursesCompletedCount]
 FROM
     [${flyway:defaultSchema}].[MembershipPeriod] AS m
 INNER JOIN
     [${mjSchema}_BizAppsCommon].[Person] AS mjBizAppsCommonPerson_PersonID
   ON
     [m].[PersonID] = mjBizAppsCommonPerson_PersonID.[ID]
+LEFT JOIN
+    [${flyway:defaultSchema}].[MemberProfile] AS prof
+  ON
+    [prof].[PersonID] = m.[PersonID];
 GO
 GRANT SELECT ON [${flyway:defaultSchema}].[vwMembershipPeriods] TO [cdp_UI], [cdp_Developer], [cdp_Integration];
 

@@ -56,6 +56,21 @@
       "classification": "config",
       "reason": "Hand-authored administrative, taxonomy, or model configuration"
     },
+    "ml-training-pipelines": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ml-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ml-model-scoring-bindings": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
     "schema-info": {
       "tier": "config",
       "classification": "config",

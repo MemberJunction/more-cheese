@@ -62,8 +62,8 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (391 distinct records; 417 declared across
--- 37 directories, 26 of them declared in two directories and inserted once):
+-- Seed provenance (399 distinct records; 425 declared across
+-- 40 directories, 26 of them declared in two directories and inserted once):
 --     75 from config/conversations
 --     63 from config/queries
 --     46 from config/artifacts
@@ -78,7 +78,9 @@
 --     10 from config/sonar-model-related-entities
 --      4 from config/dashboard-category-links
 --      4 from config/dashboards
+--      4 from config/ml-models
 --      4 from config/sonar-score-bands
+--      3 from config/ml-training-pipelines
 --      2 from config/application-roles
 --      2 from config/content-sources
 --      2 from config/file-storage-account-permissions
@@ -93,6 +95,7 @@
 --      1 from config/dashboard-categories
 --      1 from config/file-storage-accounts
 --      1 from config/file-storage-providers
+--      1 from config/ml-model-scoring-bindings
 --      1 from config/projects
 --      1 from config/sonar-score-band-sets
 --      1 from config/sonar-score-model-versions
@@ -286,6 +289,14 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: File Storage Account Permissions', '0ADD75FF-B902-55D7-81AB-DC6535E81749'),
     ('MJ: File Storage Accounts', '636E204B-12CB-4D67-A861-09DA9C825BA3'),
     ('MJ: File Storage Providers', 'C9B9433E-F36B-1410-8DA0-00021F8B792E'),
+    ('MJ: ML Model Scoring Bindings', '87CC87FF-D9ED-4183-A25B-2C9C787D3103'),
+    ('MJ: ML Models', 'E93F0238-6902-4521-87D9-FE9A1201B001'),
+    ('MJ: ML Models', 'E93F0238-6902-4521-87D9-FE9A1201B002'),
+    ('MJ: ML Models', 'E93F0238-6902-4521-87D9-FE9A1201B003'),
+    ('MJ: ML Models', '451EE0FD-23E7-4913-9DEA-8E32A4542E29'),
+    ('MJ: ML Training Pipelines', '8A1C44F3-938C-4E65-B6DE-D621BC4C3001'),
+    ('MJ: ML Training Pipelines', '8A1C44F3-938C-4E65-B6DE-D621BC4C3002'),
+    ('MJ: ML Training Pipelines', '8A1C44F3-938C-4E65-B6DE-D621BC4C3003'),
     ('MJ: Projects', '3C9E1F52-7A4B-4D8E-9B2C-6F1A8D3E5B70'),
     ('MJ: Queries', '01233BE6-F40A-48C0-81F3-A04476E1429F'),
     ('MJ: Queries', '04282792-0C95-4E26-8F54-942C7784CF8F'),
