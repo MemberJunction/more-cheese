@@ -29,7 +29,7 @@
     "lint:release-pushes": "node scripts/check-release-pushes.mjs",
     "sync:app-version": "node scripts/sync-app-version.mjs",
     "release:plan": "node scripts/release-prep.mjs --plan",
-    "test:gates": "node --test scripts/check-claude-md.spec.mjs scripts/check-peer-ranges.spec.mjs scripts/check-release-seed-cadence.spec.mjs scripts/check-release-seed-coverage.spec.mjs scripts/generate-teardown.spec.mjs scripts/validate-content.spec.mjs scripts/sync-app-version.spec.mjs scripts/check-release-pushes.spec.mjs scripts/release-plan.spec.mjs scripts/release-prep.spec.mjs scripts/check-distribution-seed.spec.mjs scripts/check-migration-order.spec.mjs scripts/check-metadata-closure.spec.mjs scripts/check-ownership.spec.mjs scripts/check-sync-id-parity.spec.mjs scripts/release-base-ref.spec.mjs scripts/build-site.spec.mjs",
+    "test:gates": "node --test scripts/check-claude-md.spec.mjs scripts/check-peer-ranges.spec.mjs scripts/check-release-seed-cadence.spec.mjs scripts/check-release-seed-coverage.spec.mjs scripts/generate-teardown.spec.mjs scripts/validate-content.spec.mjs scripts/sync-app-version.spec.mjs scripts/check-release-pushes.spec.mjs scripts/release-plan.spec.mjs scripts/release-prep.spec.mjs scripts/check-distribution-seed.spec.mjs scripts/check-migration-order.spec.mjs scripts/check-metadata-closure.spec.mjs scripts/check-ownership.spec.mjs scripts/check-sync-id-parity.spec.mjs scripts/release-base-ref.spec.mjs scripts/site-routes.spec.mjs",
     "generate:teardown": "node scripts/generate-teardown.mjs",
     "test:teardown": "node --test scripts/generate-teardown.spec.mjs",
     "mj:migrate": "mj migrate --schema morecheese_members --dir ./migrations",

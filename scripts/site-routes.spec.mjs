@@ -19,7 +19,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { staticWebAppConfig } from './build-site.mjs';
+import { staticWebAppConfig } from './site-routes.mjs';
 
 /** Azure's own rule: a trailing slash is not part of the route's identity. `/` stays `/`. */
 const normalise = (route) => (route.length > 1 ? route.replace(/\/+$/, '') : route);
