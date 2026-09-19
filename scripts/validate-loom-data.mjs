@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
-import { resolveCorpusBaseRef } from './loom-corpus-base.mjs';
+import { resolveCorpusBaseRef } from './release-base-ref.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -434,7 +434,7 @@ for (const gateName of WAIVED_ERA_VOLUME_GATES) {
 console.log('--------------------------------------------------------------------------------\n');
 
 // Loom resolves its corpus base from GITHUB_BASE_REF, which on a release pull request is `main` —
-// a snapshot predating generated/ entirely. loom-corpus-base.mjs carries the incident and the
+// a snapshot predating generated/ entirely. release-base-ref.mjs carries the incident and the
 // argument for `next`; an untouched base means every other pull request is resolved by Loom alone.
 const corpusBase = resolveCorpusBaseRef(process.env);
 const loomEnv = { ...process.env };
