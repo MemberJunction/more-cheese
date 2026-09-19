@@ -1,6 +1,6 @@
 # Cuts the release pull request: `next` -> `release/vX.Y.Z` -> a PR into `main`.
 #
-# This is step 1 of the three-step release in plans/release-readiness-2026-09-18.md: dispatch this,
+# This is step 1 of the four-step release in plans/release-readiness-2026-09-18.md: dispatch this,
 # review and merge the PR it opens (the only human gate), then `publish.yml` builds, publishes to
 # npm and tags the release. This repo has never published — no `v*` tag exists yet — and the design
 # doc records why the previous shape of this (inline `jq` in `publish.yml`, plus two scripts that
@@ -263,7 +263,7 @@ jobs:
             echo "  branch should not be trusted as-is."
             echo "- [ ] **The consolidated \`Metadata_Sync\` seed.** Feature PRs contribute declarative JSON under"
             echo "  \`generated/\` and \`config/\` and no seed migration; the build engineer generates one"
-            echo "  consolidated seed per release (\`migrations/README.md\`). \`check:seed-cadence\` and"
+            echo "  consolidated seed per release (\`migrations/_README.md\`). \`check:seed-cadence\` and"
             echo "  \`check:release-seed\` run on this PR like any other, so a missing or split seed fails here"
             echo "  first."
             echo "- [ ] **The CHANGELOGs.** They are what consumers read, and they are generated from changeset"
@@ -309,8 +309,20 @@ jobs:
           # exactly one write; leaving it in `origin`'s URL would hand it silently to every later
           # step that happens to touch the remote, which is the opposite of naming the permissions
           # at the call site above.
-          git remote remove app-push 2>/dev/null || true
+          # The App token lives in `.git/config` for as long as this remote does, so its removal is a
+          # trap rather than a line at the end: a failed push, a `gh pr create` that errors, and
+          # `set -e` on anything between them are all paths out of this step, and a trailing line
+          # covers exactly one of them. The same shape publish.yml's back-merge step uses.
+          # Tested-then-removed rather than `2>/dev/null || true`, because nothing on this path is
+          # allowed to mask a failure.
+          drop_app_remote() {
+            if git remote get-url app-push >/dev/null 2>&1; then
+              git remote remove app-push
+            fi
+          }
+          drop_app_remote
           git remote add app-push "https://x-access-token:$APP_TOKEN@github.com/$GITHUB_REPOSITORY"
+          trap drop_app_remote EXIT
           git push app-push "HEAD:refs/heads/$BRANCH"
 
           PR_URL=$(gh pr create \

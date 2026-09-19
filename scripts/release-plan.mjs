@@ -23,7 +23,7 @@
  * only ever runs inside a release cannot be proven by running a release. Plain Node, stdlib only —
  * `changes.yml` runs no `npm ci`.
  */
-import { readdirSync, readFileSync, appendFileSync } from 'node:fs';
+import { readdirSync, readFileSync, appendFileSync, realpathSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -153,6 +153,26 @@ function main() {
     }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+/**
+ * Is this module the program that was started? `realpathSync` on both sides because a script reached
+ * through a SYMLINK arrives as the link in `process.argv[1]` and as its target in `import.meta.url`,
+ * so comparing the raw spellings silently answers "no" — the CLI never runs, the step it answers
+ * writes no output, and the run goes green having done nothing. A missing `process.argv[1]`
+ * (`node -e`) and an unresolvable path are both answered as "not the entry point": in each, nothing
+ * started this file. scripts/release-prep.mjs carries the full rationale; all four release scripts
+ * must answer this identically or the inconsistency is itself the bug.
+ */
+const isEntryPoint = () => {
+    try {
+        return (
+            process.argv[1] !== undefined &&
+            realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))
+        );
+    } catch {
+        return false;
+    }
+};
+
+if (isEntryPoint()) {
     main();
 }

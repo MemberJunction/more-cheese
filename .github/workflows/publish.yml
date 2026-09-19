@@ -1,4 +1,4 @@
-# Step 3 of the three-step release in plans/release-readiness-2026-09-18.md: `release-prep.yml`
+# Step 3 of the four-step release in plans/release-readiness-2026-09-18.md: `release-prep.yml`
 # cuts the release PR, a human merges it into `main`, and this builds, publishes to npm, tags the
 # release and carries `main` back into `next`.
 #
@@ -127,6 +127,39 @@ jobs:
         id: release_check
         run: node scripts/release-plan.mjs
 
+      # Every step below is gated on one of these three answers, so a `release_check` that produced
+      # NOTHING — a crash before the `$GITHUB_OUTPUT` append, an entry guard that no-opped, a runner
+      # that could not write the file — makes every `if:` false and the whole run go GREEN having
+      # published nothing, tagged nothing and back-merged nothing. A green no-op release is the exact
+      # failure class this workflow exists to eliminate, and absence is the one state an `if:` cannot
+      # distinguish from "no", so it is checked here instead. `release-prep.yml` refuses the same way
+      # when `--plan` reports ready with an empty version.
+      - name: The release plan has to have said something
+        env:
+          VERSION: ${{ steps.release_check.outputs.VERSION }}
+          WORK: ${{ steps.release_check.outputs.work }}
+          PUBLISH: ${{ steps.release_check.outputs.publish }}
+          TAG: ${{ steps.release_check.outputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "$VERSION" ]; then
+            echo "::error::scripts/release-plan.mjs produced no VERSION. Every publish, tag and back-merge step below is gated on its output, so continuing would report success having released nothing. Read the step above: it either failed to run or failed to write \$GITHUB_OUTPUT."
+            exit 1
+          fi
+
+          # Not `!= true` — an output that is empty, or anything other than the two words the script
+          # writes, is a script that did not answer, not an answer of "no".
+          for answer in "work=$WORK" "publish=$PUBLISH" "tag=$TAG"; do
+            case "${answer#*=}" in
+              true|false) ;;
+              *)
+                echo "::error::scripts/release-plan.mjs left ${answer%%=*} as '${answer#*=}', which is neither true nor false. Refusing to read that as 'nothing to do' — v$VERSION may be half-published."
+                exit 1
+                ;;
+            esac
+          done
+
       # The derivation used to happen here, as inline `jq` rewriting `mj-app.json`, and was persisted
       # by the push this change removes. It happens on the release branch now (`npm run version`
       # runs `sync:app-version`), so this end only VERIFIES — a hand-edited mj-app.json, or a release
@@ -212,7 +245,7 @@ jobs:
       # generated/ appear in a shipped migration?
       #
       # A red step means the release seed has not been regenerated — fix it by generating the
-      # Metadata_Sync (migrations/README.md), never by editing this step. It sits before `Publish to
+      # Metadata_Sync (migrations/_README.md), never by editing this step. It sits before `Publish to
       # npm` and before the tag, so a failure here costs nothing but a re-run.
       #
       # The spec runs first, for the reason .claude/rules/repo-gates.md gives: a gate whose spec has

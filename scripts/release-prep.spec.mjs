@@ -211,3 +211,88 @@ test('a changeset with empty frontmatter reports level null, so blocker 2 can se
   assert.equal(blocked.ready, false);
   assert.match(blocked.blockers.join(' '), /bump level/i);
 });
+
+// ── The changeset level and the predicted version have to agree ─────────────────────────────────
+//
+// `.github/scripts/determine-next-version.mjs` raises the bump to minor only when `migrations/`
+// carries a file the last release did not; it never reads a changeset level. `changeset version`
+// reads nothing else. So the two answers can differ, and when they do `--apply` is guaranteed to
+// fail its postcondition check — AFTER release-prep.yml has already cut the branch. These cases pin
+// that the disagreement is caught up front, as a collected blocker, and that agreement in either
+// direction stays silent.
+//
+// `predictedVersion` in each fixture is what planNextVersion would have returned for that state:
+// 1.1.0 -> 1.1.1 with no new migrations, -> 1.2.0 with them, -> 2.0.0 for a major changeset.
+
+test('a minor changeset with no new migrations blocks: the prediction is a patch', () => {
+  const r = assessRelease({
+    ...clean,
+    changesets: [{ file: '.changeset/a-feature.md', level: 'minor' }],
+    predictedVersion: '1.1.1',
+  });
+  assert.equal(r.ready, false);
+  assert.equal(r.blockers.length, 1);
+  // Both numbers, both levels, and the changeset that drives it — the blocker is read by someone
+  // deciding which of the two answers is the wrong one.
+  assert.match(r.blockers[0], /minor/);
+  assert.match(r.blockers[0], /1\.2\.0/);
+  assert.match(r.blockers[0], /1\.1\.1/);
+  assert.match(r.blockers[0], /a-feature\.md/);
+});
+
+test('a minor changeset with new migrations does not block', () => {
+  const r = assessRelease({
+    ...clean,
+    changesets: [{ file: '.changeset/a-migration.md', level: 'minor' }],
+    predictedVersion: '1.2.0',
+  });
+  assert.equal(r.ready, true);
+  assert.deepEqual(r.blockers, []);
+});
+
+test('a patch changeset with no new migrations does not block', () => {
+  const r = assessRelease({
+    ...clean,
+    changesets: [{ file: '.changeset/a-fix.md', level: 'patch' }],
+    predictedVersion: '1.1.1',
+  });
+  assert.equal(r.ready, true);
+  assert.deepEqual(r.blockers, []);
+});
+
+test('a major changeset does not block: the rule returns a major for it too', () => {
+  const r = assessRelease({
+    ...clean,
+    changesets: [{ file: '.changeset/a-break.md', level: 'major' }],
+    predictedVersion: '2.0.0',
+  });
+  assert.equal(r.ready, true);
+  assert.deepEqual(r.blockers, []);
+});
+
+test('the comparison is symmetric: a patch changeset with new migrations blocks too', () => {
+  // changes.yml already refuses this shape on the pull request ("migration => changeset with >=
+  // minor"), so reaching here means that gate was bypassed — and `changeset version` would write
+  // 1.1.1 onto a branch named release/v1.2.0.
+  const r = assessRelease({
+    ...clean,
+    changesets: [{ file: '.changeset/a-fix.md', level: 'patch' }],
+    predictedVersion: '1.2.0',
+  });
+  assert.equal(r.ready, false);
+  assert.equal(r.blockers.length, 1);
+  assert.match(r.blockers[0], /patch/);
+});
+
+test('the strongest changeset level is the one compared, not the first', () => {
+  const r = assessRelease({
+    ...clean,
+    changesets: [
+      { file: '.changeset/a-fix.md', level: 'patch' },
+      { file: '.changeset/a-feature.md', level: 'minor' },
+    ],
+    predictedVersion: '1.2.0',
+  });
+  assert.equal(r.ready, true);
+  assert.deepEqual(r.blockers, []);
+});

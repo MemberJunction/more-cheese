@@ -27,12 +27,12 @@
  * Plain Node, stdlib only: `changes.yml` runs no `npm ci`, so a gate that guards the release must
  * run without installing anything.
  */
-import { readdirSync, readFileSync, appendFileSync } from 'node:fs';
+import { readdirSync, readFileSync, appendFileSync, realpathSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { join, dirname, delimiter } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { publishablePackages } from './release-plan.mjs';
-import { planNextVersion } from '../.github/scripts/determine-next-version.mjs';
+import { bumps, planNextVersion } from '../.github/scripts/determine-next-version.mjs';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -48,7 +48,7 @@ const VERSION_ANCHOR = join('packages', 'Entities', 'package.json');
  * rather than a red publish run over an already-merged promotion.
  */
 const GATE_MEANINGS = Object.freeze({
-    'check:release-seed': 'a record declared under generated/ or config/ carries a primaryKey that no shipped migration names, so the release would ship a record no host ever receives. The gate names the IDs; migrations/README.md has the consolidated-seed recipe.',
+    'check:release-seed': 'a record declared under generated/ or config/ carries a primaryKey that no shipped migration names, so the release would ship a record no host ever receives. The gate names the IDs; migrations/_README.md has the consolidated-seed recipe.',
     'check:seed-cadence': 'the ONE consolidated Metadata_Sync generation this release owes is missing, incomplete (a PartNofM gap), or split across two generations. generated/ or config/ moving with no seed ships none of it; two generations is the per-PR cadence MJ abolished.',
     'lint:migrations': 'migrations/ is out of order — a regenerated migration sorts before one that has already shipped, so a host would apply the chain in a different order than this repo did, and the later DROP/CREATE would silently undo the earlier one. The gate names the file.',
     'lint:distribution': 'shipped SQL carries a hazard that only fails on SOMEBODY ELSE\'S database: an unknown ${...} placeholder Skyway leaves as a literal, a core-metadata insert with no guard, a schema sync reaching a schema this app does not own. The gate names the file and the rule.',
@@ -262,6 +262,48 @@ export function assessRelease(state) {
                         'state `changeset publish` produces BY DESIGN and expects a RE-RUN of publish.yml to ' +
                         'finish (scripts/release-plan.mjs asks that question) — finish that release rather than ' +
                         'cutting a second one over it.',
+                );
+            }
+        }
+
+        // THE TWO NUMBERS A RELEASE HAS, AND THE ONE PLACE THEY ARE COMPARED.
+        //
+        // `bumpLevel` is what the changesets ask for, and therefore what `changeset version` will
+        // actually write. `version` is what .github/scripts/determine-next-version.mjs PREDICTS, and
+        // therefore what the release branch is named after. That rule raises the bump to minor when
+        // `migrations/` carries a file the last release did not, and it never reads a changeset
+        // level — so an ordinary feature release (one `minor` changeset, no migration) predicts a
+        // patch and then produces a minor.
+        //
+        // Nothing downstream catches that in time: `--plan` reports READY, `release-prep.yml` cuts
+        // `release/v<predicted>`, and `checkPostconditions` only then reports the mismatch. Nothing
+        // is pushed or published and the tree stays inspectable, but the answer arrives after the
+        // branch exists — which is the one moment this script exists to move it away from. Both
+        // numbers are already in hand here, so the disagreement is collected with the other
+        // blockers rather than thrown at apply time.
+        if (bumpLevel !== null) {
+            // `bumps()` rather than a second copy of the increment arithmetic: the whole point of
+            // comparing the two numbers is that they come from two different DECISIONS, and a
+            // duplicated `+1` would let them differ for a reason that is not one.
+            const changesetVersion = bumps(currentVersion)[bumpLevel];
+            if (changesetVersion !== version) {
+                const drivers = [
+                    ...new Set(
+                        changesets
+                            .filter((entry) => entry.level === bumpLevel)
+                            .map((entry) => entry.file ?? '<unnamed changeset>'),
+                    ),
+                ];
+                blockers.push(
+                    `the changesets and the version rule disagree. The changesets ask for a ${bumpLevel} bump ` +
+                        `(v${currentVersion} -> v${changesetVersion}, driven by ${drivers.join(', ')}), but the ` +
+                        `predicted next version is v${version}. \`changeset version\` follows the changesets while ` +
+                        `release-prep.yml names the branch release/v${version} after the prediction, so cutting now ` +
+                        `would produce release/v${version} carrying v${changesetVersion} and fail after the branch ` +
+                        'exists. The rule (.github/scripts/determine-next-version.mjs) raises the bump to minor ' +
+                        'when migrations/ has moved since the last release and reads no changeset level, so ' +
+                        'reconcile the two: either the changeset level is wrong for what actually landed, or the ' +
+                        'migration this release is meant to carry is missing.',
                 );
             }
         }
@@ -782,6 +824,14 @@ function printReport(assessment, gateResults, detail) {
     }
     console.log(`  main into next    ${detail.ancestry.detail}`);
     console.log(`  gates             ${gates}`);
+    if (assessment.seedOwed) {
+        // Its own line, above the gate output, because its fix is the ONE thing in a release that
+        // no workflow and no code change can do: generating the consolidated Metadata_Sync against a
+        // database (step 0 of docs/release.md). An operator scanning a wall of gate prose should not
+        // have to work out that this blocker sends them back to a SQL Server rather than to an
+        // editor.
+        console.log('  seed              OWED — this release still needs its consolidated Metadata_Sync (docs/release.md, step 0)');
+    }
 
     for (const gate of GATE_SCRIPTS) {
         if (gateResults[gate] !== 0 && detail.gateOutput[gate]) {
@@ -868,7 +918,38 @@ function main(argv) {
     return 0;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+/**
+ * Is this module the program that was started, rather than something an importer pulled in?
+ *
+ * `realpathSync` on both sides, and that is the whole point: a script reached through a SYMLINK —
+ * an `npx` bin shim, a linked workspace, a checkout mounted through one — arrives as the link in
+ * `process.argv[1]` and as its target in `import.meta.url`, so comparing the two raw spellings
+ * (in either direction, as a path or as a URL) silently answers "no". The CLI then never runs, the
+ * step it was supposed to answer writes no output, and the run goes GREEN having done nothing.
+ *
+ * Both failures are answered as "not the entry point" rather than raised: `process.argv[1]` is
+ * undefined under `node -e`, and `realpathSync` throws on a path that does not resolve. Neither is
+ * an error about THIS module — in both, nothing started this file — and throwing would take an
+ * innocent importer down with it. Nothing is discarded: the only question asked here is whether to
+ * run `main()`.
+ *
+ * The same spelling as `.github/scripts/determine-next-version.mjs`'s, duplicated knowingly rather
+ * than shared: these scripts are stdlib-only and standalone on purpose (`changes.yml` runs no
+ * `npm ci`), and all four release scripts must answer this identically or the inconsistency is
+ * itself the bug.
+ */
+const isEntryPoint = () => {
+    try {
+        return (
+            process.argv[1] !== undefined &&
+            realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))
+        );
+    } catch {
+        return false;
+    }
+};
+
+if (isEntryPoint()) {
     try {
         process.exitCode = main(process.argv.slice(2));
     } catch (error) {

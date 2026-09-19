@@ -64,7 +64,7 @@ Universal package rules: `main: dist/...`, `types`, `repository.url`
 | `.github/workflows/release-prep.yml` | REC | `workflow_dispatch` (with `dry_run`): cuts `release/vX.Y.Z` from `next`, bumps, opens the PR into `main`. The bump happens HERE, not at publish time. |
 | `.github/workflows/publish.yml` | REC | Push to `main`: validate → verify the bump already happened → build → `changeset publish` (npm **OIDC trusted publishing**, no token secret) → tag `vX.Y.Z` → open **and merge** the `main`→`next` back-merge PR. Never pushes to a protected branch. |
 | `.github/workflows/pg-migrations.yml` | OPT | PG migration conversion/validation (bizapps-accounting). |
-| `.github/scripts/*.sh` | REC | The four validators used by the workflows (migration filenames, npm package existence, lockfile case, repository.url). |
+| `.github/scripts/*.sh` | REC | The five validators used by the workflows (migration filenames, npm package existence, lockfile case, repository.url, and `files`/`publishConfig` on every publishable package). |
 | `scripts/release-prep.mjs`, `scripts/release-plan.mjs`, `scripts/sync-app-version.mjs` | REC | The release decision engine (cut the branch + bump), the publish/tag question, and the `mj-app.json` version derivation. Each ships a `.spec.mjs`. |
 | `.changeset/` | REC | Changesets config with `fixed: [["@scope/*"]]` — one version for the whole app. |
 

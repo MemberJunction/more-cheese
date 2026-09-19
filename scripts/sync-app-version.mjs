@@ -12,9 +12,9 @@
  *
  * Plain Node, stdlib only — this runs in CI jobs that do not `npm ci`.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, realpathSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ENTITIES_PKG_PATH = join(REPO_ROOT, 'packages', 'Entities', 'package.json');
@@ -88,6 +88,26 @@ function main() {
     console.log('mj-app.json synced.');
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+/**
+ * Is this module the program that was started? `realpathSync` on both sides because a script reached
+ * through a SYMLINK arrives as the link in `process.argv[1]` and as its target in `import.meta.url`,
+ * so comparing the raw spellings silently answers "no" — the CLI never runs, the step it answers
+ * writes no output, and the run goes green having done nothing. A missing `process.argv[1]`
+ * (`node -e`) and an unresolvable path are both answered as "not the entry point": in each, nothing
+ * started this file. scripts/release-prep.mjs carries the full rationale; all four release scripts
+ * must answer this identically or the inconsistency is itself the bug.
+ */
+const isEntryPoint = () => {
+    try {
+        return (
+            process.argv[1] !== undefined &&
+            realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))
+        );
+    } catch {
+        return false;
+    }
+};
+
+if (isEntryPoint()) {
     main();
 }
