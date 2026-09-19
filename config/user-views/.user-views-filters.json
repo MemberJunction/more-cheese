@@ -1,0 +1,442 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "Name": "Renewals at Risk — Grace Window to 90 Days Out, Auto-Renew Off",
+      "Description": "Advanced filter: (Active OR PendingRenewal) AND renewal date from 30 days ago (the grace window) to 90 days ahead AND auto-renew off. The reminder-cadence list; Marcus Chen (renewal 21 Aug, pending) sits on it.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 130, \"orderIndex\": 1}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 130, \"orderIndex\": 3}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 4}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 5}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 6}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"PendingRenewal\"},{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Active\"}]},{\"logic\":\"and\",\"filters\":[{\"field\":\"RenewalDate\",\"operator\":\"gte\",\"value\":\"2026-08-15\"},{\"field\":\"RenewalDate\",\"operator\":\"lte\",\"value\":\"2026-12-13\"}]},{\"field\":\"AutoRenew\",\"operator\":\"eq\",\"value\":false}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"RenewalDate\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "BFD12082-4704-5963-9E6F-896A83F09032"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "Name": "Cancellations — Cost or Non-Payment since 2024",
+      "Description": "Advanced filter with an OR group on the free-text reason: cancelled AND (reason contains \"cost\" OR reason starts with \"non-payment\") AND cancelled in 2024 or later. Win-back candidates; excludes retirements and industry exits.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 130, \"orderIndex\": 1}, {\"ID\": \"c9de47d6-db85-4d66-a081-63de219a4a3e\", \"Name\": \"CancellationDate\", \"DisplayName\": \"Cancelled On\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"a0ece410-43fb-492c-b0c2-6233ae2d8306\", \"Name\": \"CancellationReason\", \"DisplayName\": \"Reason\", \"hidden\": false, \"width\": 360, \"orderIndex\": 3}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 4}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 5}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Cancelled\"},{\"logic\":\"or\",\"filters\":[{\"field\":\"CancellationReason\",\"operator\":\"contains\",\"value\":\"cost\"},{\"field\":\"CancellationReason\",\"operator\":\"startswith\",\"value\":\"non-payment\"}]},{\"field\":\"CancellationDate\",\"operator\":\"gte\",\"value\":\"2024-01-01\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"CancellationDate\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "D2F4C4F4-44EC-5617-B479-640DB962969F"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Name": "Producers & Educators outside North America",
+      "Description": "Advanced filter: (Producer OR Educator) AND region is not NA. The international programme slice: Henri Dubois (Jura) and Charlie Mason (Tasmania) both land here.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"a85246a1-1461-4a08-8210-97d3357e04bd\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"cdf8f3e5-f527-44b0-be23-10b8431c3a19\", \"Name\": \"MemberNumber\", \"DisplayName\": \"Member #\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"e0442068-ae13-4cc6-a5aa-6e2ebe16ef0f\", \"Name\": \"Segment\", \"DisplayName\": \"Segment\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"8fa7894d-19e6-4662-82d9-c923a8a8ca57\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 4}, {\"ID\": \"8525a745-6cf9-5446-8d79-40bb1f26ba7b\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 5}, {\"ID\": \"7cfdb7cd-97c9-491e-b94d-62c5776f40a9\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"8a705b0f-1d40-40d1-9877-9b3662c70c40\", \"Name\": \"JoinDate\", \"DisplayName\": \"Joined\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"6e9b9720-b620-5fde-b11a-a88ded196210\", \"Name\": \"PrimaryLanguage\", \"DisplayName\": \"Language\", \"hidden\": false, \"width\": 120, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"Segment\",\"operator\":\"eq\",\"value\":\"Producer\"},{\"field\":\"Segment\",\"operator\":\"eq\",\"value\":\"Educator\"}]},{\"field\":\"Region\",\"operator\":\"neq\",\"value\":\"NA\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"CountryName\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "A4B45F20-87E7-5F9D-9137-E9B8DC2E32B5"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Name": "New Members — Last 12 Months, Non-English Speakers",
+      "Description": "Joined since September 2025 AND primary language is not English. Drives the translated-onboarding mailing; Nia Thompson is excluded (English) by design.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"a85246a1-1461-4a08-8210-97d3357e04bd\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"cdf8f3e5-f527-44b0-be23-10b8431c3a19\", \"Name\": \"MemberNumber\", \"DisplayName\": \"Member #\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"e0442068-ae13-4cc6-a5aa-6e2ebe16ef0f\", \"Name\": \"Segment\", \"DisplayName\": \"Segment\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"8fa7894d-19e6-4662-82d9-c923a8a8ca57\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 4}, {\"ID\": \"8525a745-6cf9-5446-8d79-40bb1f26ba7b\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 5}, {\"ID\": \"7cfdb7cd-97c9-491e-b94d-62c5776f40a9\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"8a705b0f-1d40-40d1-9877-9b3662c70c40\", \"Name\": \"JoinDate\", \"DisplayName\": \"Joined\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"6e9b9720-b620-5fde-b11a-a88ded196210\", \"Name\": \"PrimaryLanguage\", \"DisplayName\": \"Language\", \"hidden\": false, \"width\": 120, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"JoinDate\",\"operator\":\"gte\",\"value\":\"2025-09-14\"},{\"field\":\"PrimaryLanguage\",\"operator\":\"neq\",\"value\":\"English\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"JoinDate\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "904AD6FF-D13F-5600-80A6-5773EF8214E2"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Events",
+      "Name": "Events 2026 — Workshops & Conferences",
+      "Description": "Timeline view of the 2026 in-person calendar: EventDate in 2026 AND (Workshop OR Conference). Webinars excluded by the OR group.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"8a853b0d-1298-4428-a194-4add53c17d99\", \"Name\": \"Name\", \"DisplayName\": \"Event\", \"hidden\": false, \"width\": 300, \"orderIndex\": 0}, {\"ID\": \"40e4eac3-edb5-4ae1-af99-593c4d74460a\", \"Name\": \"EventType\", \"DisplayName\": \"Type\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"1647e597-b94b-4c47-af58-8194da4812d8\", \"Name\": \"EventDate\", \"DisplayName\": \"Date\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"dd914d99-2b94-4bbb-8642-c1c261782f79\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 3}, {\"ID\": \"7a636ae3-36ad-4da4-a173-867c55b139c9\", \"Name\": \"State\", \"DisplayName\": \"State\", \"hidden\": false, \"width\": 80, \"orderIndex\": 4}, {\"ID\": \"e5ba2927-942d-419f-82a4-4a6f01d6cca8\", \"Name\": \"IsPaid\", \"DisplayName\": \"Paid\", \"hidden\": false, \"width\": 80, \"orderIndex\": 5}, {\"ID\": \"a86a565f-68d9-47cc-8931-f000a6d1422c\", \"Name\": \"IsVirtual\", \"DisplayName\": \"Virtual\", \"hidden\": false, \"width\": 80, \"orderIndex\": 6}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"EventDate\",\"operator\":\"gte\",\"value\":\"2026-01-01\"},{\"field\":\"EventDate\",\"operator\":\"lte\",\"value\":\"2026-12-31\"},{\"logic\":\"or\",\"filters\":[{\"field\":\"EventType\",\"operator\":\"eq\",\"value\":\"Workshop\"},{\"field\":\"EventType\",\"operator\":\"eq\",\"value\":\"Conference\"}]}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EventDate\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Timeline",
+      "DisplayState": "{\"defaultMode\": \"timeline\", \"viewTypeConfigs\": [{\"viewTypeId\": \"bcd1c1b8-158a-45a4-9525-d4a2bc096aaf\", \"config\": {\"dateFieldName\": \"EventDate\"}}]}"
+    },
+    "primaryKey": {
+      "ID": "CF1A97D9-A3E2-5DA1-8F25-A2F988CBB5A9"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
+      "Name": "Registered but Did Not Attend — 2025 to Date",
+      "Description": "No-shows: Attended = false AND registered on or after 1 Jan 2025. Feeds the follow-up survey and the refund-policy review.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"238863f8-a7b8-48d4-a99c-150253a61da2\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"b43a6aef-4c29-4080-9e08-8d3c3f13efe0\", \"Name\": \"Event\", \"DisplayName\": \"Event\", \"hidden\": false, \"width\": 300, \"orderIndex\": 1}, {\"ID\": \"aa10bba2-6c17-42af-9228-4d7585f38d3a\", \"Name\": \"RegisteredOn\", \"DisplayName\": \"Registered\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"c6260bbf-d011-4db0-843b-d262a7868c5d\", \"Name\": \"Attended\", \"DisplayName\": \"Attended\", \"hidden\": false, \"width\": 90, \"orderIndex\": 3}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Attended\",\"operator\":\"eq\",\"value\":false},{\"field\":\"RegisteredOn\",\"operator\":\"gte\",\"value\":\"2025-01-01\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"RegisteredOn\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "3FE9B436-2A55-5B6C-AA98-7AAC5C8979A8"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "Name": "Competition Medalists — Blue & Washed Rind, 2022+",
+      "Description": "Two OR groups nested under AND: (Gold OR Silver OR Bronze) AND (Blue Veined OR Washed Rind) AND entry year ≥ 2022. The press-release shortlist for the two hardest categories.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"366f1231-cf05-42ad-afc5-84403d860a66\", \"Name\": \"Person\", \"DisplayName\": \"Entrant\", \"hidden\": false, \"width\": 200, \"orderIndex\": 0}, {\"ID\": \"0ead38c3-3c9a-4447-9f96-ded688c870c9\", \"Name\": \"Organization\", \"DisplayName\": \"Creamery\", \"hidden\": false, \"width\": 220, \"orderIndex\": 1}, {\"ID\": \"ef4319ff-b470-44f1-8931-dc182fbabf11\", \"Name\": \"EntryYear\", \"DisplayName\": \"Year\", \"hidden\": false, \"width\": 80, \"orderIndex\": 2}, {\"ID\": \"a2129745-3476-4908-aaaa-35fd4a4ca92b\", \"Name\": \"Category\", \"DisplayName\": \"Category\", \"hidden\": false, \"width\": 200, \"orderIndex\": 3}, {\"ID\": \"9b0d5bca-163b-40b3-9268-1ef5cee4483f\", \"Name\": \"ProductName\", \"DisplayName\": \"Product\", \"hidden\": false, \"width\": 240, \"orderIndex\": 4}, {\"ID\": \"67eaf2f0-0b72-4794-8880-e0ba4f900542\", \"Name\": \"Result\", \"DisplayName\": \"Result\", \"hidden\": false, \"width\": 100, \"orderIndex\": 5}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"Result\",\"operator\":\"eq\",\"value\":\"Gold\"},{\"field\":\"Result\",\"operator\":\"eq\",\"value\":\"Silver\"},{\"field\":\"Result\",\"operator\":\"eq\",\"value\":\"Bronze\"}]},{\"logic\":\"or\",\"filters\":[{\"field\":\"Category\",\"operator\":\"eq\",\"value\":\"Blue Veined\"},{\"field\":\"Category\",\"operator\":\"eq\",\"value\":\"Washed Rind\"}]},{\"field\":\"EntryYear\",\"operator\":\"gte\",\"value\":2022}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EntryYear\", \"dir\": \"desc\"}, {\"field\": \"Result\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "30A3DD46-B308-5EFE-925F-73C7F98683D0"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Certifications",
+      "Name": "Certifications Expiring — Next 12 Months",
+      "Description": "Awarded credentials whose expiry falls between today and September 2027. Recertification reminders.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"72bb6163-3a23-48c1-a5a0-1c9a75700502\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"737e4ac7-1c79-4677-8401-f1eccd81d3a7\", \"Name\": \"Certification\", \"DisplayName\": \"Credential\", \"hidden\": false, \"width\": 260, \"orderIndex\": 1}, {\"ID\": \"e2a5d9ed-ca19-41d7-aae1-476652d08c2c\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 110, \"orderIndex\": 2}, {\"ID\": \"72f75915-79e2-486b-a555-d4a506863b8a\", \"Name\": \"AwardedOn\", \"DisplayName\": \"Awarded\", \"hidden\": false, \"width\": 120, \"orderIndex\": 3}, {\"ID\": \"dfdf741d-523d-4ae0-94ba-b2c44214fc06\", \"Name\": \"ExpiresOn\", \"DisplayName\": \"Expires\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Awarded\"},{\"field\":\"ExpiresOn\",\"operator\":\"gte\",\"value\":\"2026-09-14\"},{\"field\":\"ExpiresOn\",\"operator\":\"lte\",\"value\":\"2027-09-14\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"ExpiresOn\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "B830A7C6-2FE9-5A44-979E-093EED038A66"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "Name": "Course Dropouts — Affinage & Sensory Tracks",
+      "Description": "Filters on the related Course name: Dropped AND (course contains \"Affinage\" OR course contains \"Sensory\"). Curriculum committee asked which tracks lose learners.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"6df3c4e7-c108-4e4d-b28a-d34b7edc8b59\", \"Name\": \"Person\", \"DisplayName\": \"Learner\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"ecf95dce-c50f-4005-b194-8c993480784a\", \"Name\": \"Course\", \"DisplayName\": \"Course\", \"hidden\": false, \"width\": 320, \"orderIndex\": 1}, {\"ID\": \"f0462571-752c-4602-bd9d-58229c8d782d\", \"Name\": \"EnrolledOn\", \"DisplayName\": \"Enrolled\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"faee9e23-7a30-473b-9233-17ac3fe977a2\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 110, \"orderIndex\": 3}, {\"ID\": \"499d65a7-6992-477d-a2c2-6c2f999414b0\", \"Name\": \"CompletedOn\", \"DisplayName\": \"Completed\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Dropped\"},{\"logic\":\"or\",\"filters\":[{\"field\":\"Course\",\"operator\":\"contains\",\"value\":\"Affinage\"},{\"field\":\"Course\",\"operator\":\"contains\",\"value\":\"Sensory\"}]}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EnrolledOn\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "C5E7CEDD-8E37-5B72-9B3B-7CB1750BCD3B"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Advocacy Actions",
+      "Name": "Advocacy — Testimony & Coalition Meetings on Raw Milk",
+      "Description": "High-effort advocacy only: (Testimony OR CoalitionMeeting) AND topic = Raw-milk aging rules. Tom Reyes’s grassroots record is the persona anchor.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"abf75523-f0c3-4483-b74b-7e0bb2be5387\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"9b8e004e-cb4a-4eb6-8e69-c075028f6b00\", \"Name\": \"ActionDate\", \"DisplayName\": \"Date\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"0a8440bd-a3b6-4257-8003-dcd137773cea\", \"Name\": \"Kind\", \"DisplayName\": \"Kind\", \"hidden\": false, \"width\": 160, \"orderIndex\": 2}, {\"ID\": \"2c606e23-dd74-4cf3-9527-330ef3b99309\", \"Name\": \"Topic\", \"DisplayName\": \"Topic\", \"hidden\": false, \"width\": 240, \"orderIndex\": 3}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"Kind\",\"operator\":\"eq\",\"value\":\"Testimony\"},{\"field\":\"Kind\",\"operator\":\"eq\",\"value\":\"CoalitionMeeting\"}]},{\"field\":\"Topic\",\"operator\":\"eq\",\"value\":\"Raw-milk aging rules\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"ActionDate\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "FF096534-A80F-511B-BDF2-4B9F4962015B"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Organization Profiles",
+      "Name": "Organizations — Dissolved or Acquired since 2023",
+      "Description": "Map of member employers with a lifecycle event (Dissolved OR Acquired) in 2023 or later. Churn root-cause context: Mistlebrook Dairy (Danielle Okafor) dissolved in 2025.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"7c6915c9-9b5f-4aae-8c5d-0fd2e9c4443c\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 260, \"orderIndex\": 0}, {\"ID\": \"6de789b0-6c3c-4773-90a6-5db6cfbe3c3e\", \"Name\": \"Type\", \"DisplayName\": \"Type\", \"hidden\": false, \"width\": 110, \"orderIndex\": 1}, {\"ID\": \"57f15499-1fef-42ea-b670-39b2dc619eec\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 2}, {\"ID\": \"470d361b-988e-5fe3-90ce-2029b9295df9\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 3}, {\"ID\": \"684bf7fe-98e7-49d0-b09a-683437c9a001\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 4}, {\"ID\": \"3f53b245-8f1d-4b8a-ad6b-86f536a22dea\", \"Name\": \"LifecycleEventKind\", \"DisplayName\": \"Lifecycle Event\", \"hidden\": false, \"width\": 140, \"orderIndex\": 5}, {\"ID\": \"cec6f5e5-c9cd-454c-80a8-9d931d76aa8a\", \"Name\": \"LifecycleEventYear\", \"DisplayName\": \"Year\", \"hidden\": false, \"width\": 80, \"orderIndex\": 6}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"LifecycleEventKind\",\"operator\":\"eq\",\"value\":\"Dissolved\"},{\"field\":\"LifecycleEventKind\",\"operator\":\"eq\",\"value\":\"Acquired\"}]},{\"field\":\"LifecycleEventYear\",\"operator\":\"gte\",\"value\":2023}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"LifecycleEventYear\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Map",
+      "DisplayState": "{\"defaultMode\": \"map\", \"viewTypeConfigs\": [{\"viewTypeId\": \"ecc439a3-2042-4b01-80b0-c64d267684ba\", \"config\": {\"renderMode\": \"point\"}}]}"
+    },
+    "primaryKey": {
+      "ID": "5CB88F7E-1368-5963-8973-4FC0E9D5A504"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "Name": "Orders — Overdue Balances",
+      "Description": "Confirmed AND overdue AND balance > 0. The collections worklist, oldest due date first.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"37ed0567-5213-4e33-9123-c88cf3e9a851\", \"Name\": \"OrderNumber\", \"DisplayName\": \"Order #\", \"hidden\": false, \"width\": 130, \"orderIndex\": 0}, {\"ID\": \"1acd14d9-6f12-4283-bbc3-b766ea19648b\", \"Name\": \"BillToPerson\", \"DisplayName\": \"Bill To\", \"hidden\": false, \"width\": 220, \"orderIndex\": 1}, {\"ID\": \"08b057b1-867e-4c67-b315-16949250187e\", \"Name\": \"BillToOrganization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 2}, {\"ID\": \"41e3a5e2-f717-4220-ac33-8abc132f8dd0\", \"Name\": \"OrderDate\", \"DisplayName\": \"Ordered\", \"hidden\": false, \"width\": 120, \"orderIndex\": 3}, {\"ID\": \"91dc0304-93ee-48a0-b77c-9f3945f8b4f8\", \"Name\": \"DueDate\", \"DisplayName\": \"Due\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}, {\"ID\": \"7aeb02a2-1574-4fc4-adf1-299328154295\", \"Name\": \"TotalGross\", \"DisplayName\": \"Total\", \"hidden\": false, \"width\": 110, \"orderIndex\": 5}, {\"ID\": \"b66538b2-a77c-4b69-9b58-30d0d2016cc4\", \"Name\": \"Balance\", \"DisplayName\": \"Balance\", \"hidden\": false, \"width\": 110, \"orderIndex\": 6}, {\"ID\": \"dfcee14e-6200-4025-bf35-06e5a2fddd8a\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 110, \"orderIndex\": 7}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Confirmed\"},{\"field\":\"IsOverdue\",\"operator\":\"eq\",\"value\":1},{\"field\":\"Balance\",\"operator\":\"gt\",\"value\":0}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"DueDate\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "F89A3421-3A95-5730-A873-F4B9A46E7ABE"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "Name": "Orders — Open Quotes & Drafts, Summer 2026",
+      "Description": "(Quoted OR Draft) AND ordered since 1 June 2026. Pipeline the sales team still has to convert or void.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"37ed0567-5213-4e33-9123-c88cf3e9a851\", \"Name\": \"OrderNumber\", \"DisplayName\": \"Order #\", \"hidden\": false, \"width\": 130, \"orderIndex\": 0}, {\"ID\": \"dfcee14e-6200-4025-bf35-06e5a2fddd8a\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 110, \"orderIndex\": 1}, {\"ID\": \"1acd14d9-6f12-4283-bbc3-b766ea19648b\", \"Name\": \"BillToPerson\", \"DisplayName\": \"Bill To\", \"hidden\": false, \"width\": 220, \"orderIndex\": 2}, {\"ID\": \"08b057b1-867e-4c67-b315-16949250187e\", \"Name\": \"BillToOrganization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"41e3a5e2-f717-4220-ac33-8abc132f8dd0\", \"Name\": \"OrderDate\", \"DisplayName\": \"Ordered\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}, {\"ID\": \"7aeb02a2-1574-4fc4-adf1-299328154295\", \"Name\": \"TotalGross\", \"DisplayName\": \"Total\", \"hidden\": false, \"width\": 110, \"orderIndex\": 5}, {\"ID\": \"39ecff1c-9311-49f2-b4c0-c79e50e3115e\", \"Name\": \"Origin\", \"DisplayName\": \"Origin\", \"hidden\": false, \"width\": 100, \"orderIndex\": 6}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Quoted\"},{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Draft\"}]},{\"field\":\"OrderDate\",\"operator\":\"gte\",\"value\":\"2026-06-01\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"OrderDate\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "E284181A-91DF-5A96-8D16-63076ABCA8BA"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Name": "Members With No Event Registration in 24 Months",
+      "Description": "Custom WHERE clause with a NOT IN subquery: members who joined before September 2024 and have registered for nothing since. Re-engagement campaign list.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"a85246a1-1461-4a08-8210-97d3357e04bd\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"cdf8f3e5-f527-44b0-be23-10b8431c3a19\", \"Name\": \"MemberNumber\", \"DisplayName\": \"Member #\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"e0442068-ae13-4cc6-a5aa-6e2ebe16ef0f\", \"Name\": \"Segment\", \"DisplayName\": \"Segment\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"8fa7894d-19e6-4662-82d9-c923a8a8ca57\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 4}, {\"ID\": \"8525a745-6cf9-5446-8d79-40bb1f26ba7b\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 5}, {\"ID\": \"7cfdb7cd-97c9-491e-b94d-62c5776f40a9\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"8a705b0f-1d40-40d1-9877-9b3662c70c40\", \"Name\": \"JoinDate\", \"DisplayName\": \"Joined\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"6e9b9720-b620-5fde-b11a-a88ded196210\", \"Name\": \"PrimaryLanguage\", \"DisplayName\": \"Language\", \"hidden\": false, \"width\": 120, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": true,
+      "SortState": "[{\"field\": \"JoinDate\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null,
+      "WhereClause": "([JoinDate] < '2024-09-14' AND [PersonID] NOT IN (SELECT PersonID FROM morecheese_events.vwEventRegistrations WHERE RegisteredOn >= '2024-09-14'))"
+    },
+    "primaryKey": {
+      "ID": "4AC57CE7-D9D7-5140-A0B3-13EF49DA882D"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Name": "Multi-Term Loyalists — 5+ Membership Periods",
+      "Description": "Custom WHERE clause with a GROUP BY / HAVING subquery: members holding five or more membership periods. Bob Kowalski (13 years) is the anchor.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"a85246a1-1461-4a08-8210-97d3357e04bd\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"cdf8f3e5-f527-44b0-be23-10b8431c3a19\", \"Name\": \"MemberNumber\", \"DisplayName\": \"Member #\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"e0442068-ae13-4cc6-a5aa-6e2ebe16ef0f\", \"Name\": \"Segment\", \"DisplayName\": \"Segment\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"8fa7894d-19e6-4662-82d9-c923a8a8ca57\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 4}, {\"ID\": \"8525a745-6cf9-5446-8d79-40bb1f26ba7b\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 5}, {\"ID\": \"7cfdb7cd-97c9-491e-b94d-62c5776f40a9\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"8a705b0f-1d40-40d1-9877-9b3662c70c40\", \"Name\": \"JoinDate\", \"DisplayName\": \"Joined\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"6e9b9720-b620-5fde-b11a-a88ded196210\", \"Name\": \"PrimaryLanguage\", \"DisplayName\": \"Language\", \"hidden\": false, \"width\": 120, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": true,
+      "SortState": "[{\"field\": \"JoinDate\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null,
+      "WhereClause": "([PersonID] IN (SELECT PersonID FROM morecheese_members.vwMembershipPeriods GROUP BY PersonID HAVING COUNT(*) >= 5))"
+    },
+    "primaryKey": {
+      "ID": "F770DD7A-032E-553C-B144-07655C3CC700"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Name": "Duplicate-Suspect People",
+      "Description": "Custom WHERE clause joining to the data-quality labels: every person on either side of a DuplicatePerson label. Kate O’Leary / Kathy OLeary are the cleansing pair.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"76d49448-c586-4701-9fff-63f390ec78c0\", \"Name\": \"DisplayName\", \"DisplayName\": \"Name\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"2c5f0735-bcce-4ffe-a225-df937dace682\", \"Name\": \"PrimaryEmail\", \"DisplayName\": \"Email\", \"hidden\": false, \"width\": 260, \"orderIndex\": 1}, {\"ID\": \"0b992115-7c59-4d6e-a49e-ddae2d7e9056\", \"Name\": \"Title\", \"DisplayName\": \"Title\", \"hidden\": false, \"width\": 160, \"orderIndex\": 2}, {\"ID\": \"0904a337-b7d5-4ef5-a431-d780f5ea6140\", \"Name\": \"CurrentOrganizationName\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"df8cc5b5-f424-4b3c-8d37-4e6c247477aa\", \"Name\": \"PrimaryAddressCity\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 4}, {\"ID\": \"f847d2da-3f4a-48c9-8db1-add65d33b6cf\", \"Name\": \"PrimaryAddressState\", \"DisplayName\": \"State\", \"hidden\": false, \"width\": 80, \"orderIndex\": 5}, {\"ID\": \"57f78065-e9db-4d2c-a2f8-524d4f15d902\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 90, \"orderIndex\": 6}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "CustomWhereClause": true,
+      "SortState": "[{\"field\": \"LastName\", \"dir\": \"asc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null,
+      "WhereClause": "([ID] IN (SELECT PersonID FROM morecheese_members.vwDataQualityLabels WHERE DefectKind = 'DuplicatePerson') OR [ID] IN (SELECT RelatedPersonID FROM morecheese_members.vwDataQualityLabels WHERE DefectKind = 'DuplicatePerson' AND RelatedPersonID IS NOT NULL))"
+    },
+    "primaryKey": {
+      "ID": "97A75D49-A060-5828-98DD-7BA09A948F71"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "Name": "Smart: Lapsed Members Worth Winning Back",
+      "Description": "Smart filter — the WHERE clause is generated from the plain-English prompt and can be inspected under the filter panel.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 130, \"orderIndex\": 1}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 130, \"orderIndex\": 3}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 4}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 5}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 6}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": true,
+      "SmartFilterPrompt": "Membership periods that lapsed or were cancelled on or after 1 January 2024 where the cancellation reason mentions cost or non-payment, excluding anyone who retired or left the industry.",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EndDate\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "698F8C76-2071-544C-BCE6-5FB66673F709"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "Name": "Smart: Gold-Medal Producers since 2023",
+      "Description": "Smart filter on competition entries: gold medals in 2023 or later.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"366f1231-cf05-42ad-afc5-84403d860a66\", \"Name\": \"Person\", \"DisplayName\": \"Entrant\", \"hidden\": false, \"width\": 200, \"orderIndex\": 0}, {\"ID\": \"0ead38c3-3c9a-4447-9f96-ded688c870c9\", \"Name\": \"Organization\", \"DisplayName\": \"Creamery\", \"hidden\": false, \"width\": 220, \"orderIndex\": 1}, {\"ID\": \"ef4319ff-b470-44f1-8931-dc182fbabf11\", \"Name\": \"EntryYear\", \"DisplayName\": \"Year\", \"hidden\": false, \"width\": 80, \"orderIndex\": 2}, {\"ID\": \"a2129745-3476-4908-aaaa-35fd4a4ca92b\", \"Name\": \"Category\", \"DisplayName\": \"Category\", \"hidden\": false, \"width\": 200, \"orderIndex\": 3}, {\"ID\": \"9b0d5bca-163b-40b3-9268-1ef5cee4483f\", \"Name\": \"ProductName\", \"DisplayName\": \"Product\", \"hidden\": false, \"width\": 240, \"orderIndex\": 4}, {\"ID\": \"67eaf2f0-0b72-4794-8880-e0ba4f900542\", \"Name\": \"Result\", \"DisplayName\": \"Result\", \"hidden\": false, \"width\": 100, \"orderIndex\": 5}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": true,
+      "SmartFilterPrompt": "Competition entries that won a Gold result in 2023 or any later year.",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EntryYear\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "1C3B0B3B-3A74-51BB-A485-FFACE8CCBE87"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "Name": "Smart: Big Unpaid Orders",
+      "Description": "Smart filter on orders: confirmed, overdue, and more than $500 still outstanding.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"37ed0567-5213-4e33-9123-c88cf3e9a851\", \"Name\": \"OrderNumber\", \"DisplayName\": \"Order #\", \"hidden\": false, \"width\": 130, \"orderIndex\": 0}, {\"ID\": \"1acd14d9-6f12-4283-bbc3-b766ea19648b\", \"Name\": \"BillToPerson\", \"DisplayName\": \"Bill To\", \"hidden\": false, \"width\": 220, \"orderIndex\": 1}, {\"ID\": \"08b057b1-867e-4c67-b315-16949250187e\", \"Name\": \"BillToOrganization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 2}, {\"ID\": \"41e3a5e2-f717-4220-ac33-8abc132f8dd0\", \"Name\": \"OrderDate\", \"DisplayName\": \"Ordered\", \"hidden\": false, \"width\": 120, \"orderIndex\": 3}, {\"ID\": \"91dc0304-93ee-48a0-b77c-9f3945f8b4f8\", \"Name\": \"DueDate\", \"DisplayName\": \"Due\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}, {\"ID\": \"7aeb02a2-1574-4fc4-adf1-299328154295\", \"Name\": \"TotalGross\", \"DisplayName\": \"Total\", \"hidden\": false, \"width\": 110, \"orderIndex\": 5}, {\"ID\": \"b66538b2-a77c-4b69-9b58-30d0d2016cc4\", \"Name\": \"Balance\", \"DisplayName\": \"Balance\", \"hidden\": false, \"width\": 110, \"orderIndex\": 6}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": true,
+      "SmartFilterPrompt": "Confirmed orders that are overdue and still have an outstanding balance greater than 500 dollars.",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"Balance\", \"dir\": \"desc\"}]",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "DisplayState": null
+    },
+    "primaryKey": {
+      "ID": "5DBB924D-9E66-5A62-BC59-065C9AA5A9F7"
+    }
+  }
+]

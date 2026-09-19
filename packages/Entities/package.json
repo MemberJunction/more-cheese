@@ -1,8 +1,8 @@
 {
-  "name": "@mj-more-cheese-demo/entities",
+  "name": "@mj-biz-apps/more-cheese-entities",
   "version": "1.1.0",
   "type": "module",
-  "description": "Generated entity subclasses for the app schema. TODO(template): rename package + description.",
+  "description": "Generated entity subclasses for the MoreCheese (International Cheese Federation) demo schema.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,17 +11,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlueCypress/More-Cheese-Demo-V2"
+    "url": "https://github.com/MemberJunction/more-cheese"
   },
   "license": "MIT",
   "dependencies": {
     "zod": "^3.25.76"
   },
   "peerDependencies": {
-    "@memberjunction/core": "^6.1.0-edge.4",
-    "@memberjunction/global": "^6.1.0-edge.4"
+    "@memberjunction/core": "^6.1.2",
+    "@memberjunction/global": "^6.1.2"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
+  },
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

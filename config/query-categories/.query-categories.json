@@ -1,0 +1,617 @@
+[
+  {
+    "fields": {
+      "Name": "Skip",
+      "Description": "Auto-created category from path: Skip/Finance/Receivables",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Analytics",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Analytics/KPIs",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C8ACE109-ED11-4ACD-B7FD-94B31D9F2056"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Chapters",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Chapters/Engagement",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "907A8463-69AF-4205-A9F1-4C668BBC29C5"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Committees",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Committees/Memberships",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "8C6F805D-200E-406A-90CA-A379B2253098"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Courses",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Courses/Enrollments",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B42C64DE-D4FD-47CB-9C32-5DB6C2056D9B"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Events",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Events/Attendance",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B14247D0-8962-4B01-A485-8BFD76ABCECF"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Executive",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Executive/Trends",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DAE72EFC-4003-4B61-8ACE-15F61415C4EB"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Finance",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Finance/Receivables",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "7C13B6EF-2E46-4337-8B8F-AF03C8D131D7"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Learning",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Learning/Enrollments",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "76AC9359-0959-4553-9D20-4589178E8798"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Marketing",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Marketing/Email",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4FC6DC99-B66A-4F70-9D42-FC9E81C0BD43"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Members",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Members/Cohorts",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Membership/Analytics",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AF8FA334-298D-4D3E-BCFC-6225060B046A"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Memberships",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Memberships/Tiers",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "0E6918F0-453E-43DE-9995-431B11F9F342"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Organizations",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Organizations/Engagement",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F1C13450-0CE0-493D-8D4C-126AE028B10F"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Sales",
+      "ParentID": "73DC0889-EDFF-463E-A27B-B4CDF8150D62",
+      "Description": "Auto-created category from path: Skip/Sales/Revenue",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Acquisitions",
+      "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
+      "Description": "Auto-created category from path: Skip/Membership/Acquisitions",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "3F3630FF-D956-4A14-AAE9-08E9FA15B872"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Activity",
+      "ParentID": "F1C13450-0CE0-493D-8D4C-126AE028B10F",
+      "Description": "Auto-created category from path: Skip/Organizations/Activity",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "310D55CB-124C-4C59-9202-9378ADB3BC27"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Activity",
+      "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
+      "Description": "Auto-created category from path: Skip/Members/Activity",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F8B084A3-3D45-4896-98B7-FEE5736FA71F"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Analytics",
+      "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
+      "Description": "Auto-created category from path: Skip/Membership/Analytics",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "91FA28D2-A699-47E4-9708-33003D5A22F9"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Attendance",
+      "ParentID": "B14247D0-8962-4B01-A485-8BFD76ABCECF",
+      "Description": "Auto-created category from path: Skip/Events/Attendance",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "28BA117D-4EA3-4F21-9247-EEDB8EE66E2F"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Chapters",
+      "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
+      "Description": "Auto-created category from path: Skip/Membership/Chapters",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4ACF3EC1-D97F-41D4-8E9C-A289EBF6E2DA"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cohort Analysis",
+      "ParentID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799",
+      "Description": "Auto-created category from path: Skip/Sales/Cohort Analysis",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "299562AB-5017-4D0B-B06E-12872A0BF732"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cohort Analysis",
+      "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
+      "Description": "Auto-created category from path: Skip/Members/Cohort Analysis",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "45A22A65-F6BB-45E4-A692-7D66496A3511"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cohorts",
+      "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
+      "Description": "Auto-created category from path: Skip/Members/Cohorts",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "27EE2C4E-69C5-437E-8CF0-8D0E1A1D5C0E"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Courses",
+      "ParentID": "76AC9359-0959-4553-9D20-4589178E8798",
+      "Description": "Auto-created category from path: Skip/Learning/Courses",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "972753F6-0627-41DB-8A68-1B829F8DF53C"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Email",
+      "ParentID": "4FC6DC99-B66A-4F70-9D42-FC9E81C0BD43",
+      "Description": "Auto-created category from path: Skip/Marketing/Email",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "271A5166-6C06-4DD5-96D3-0BB80BF1E8E6"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Engagement",
+      "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
+      "Description": "Auto-created category from path: Skip/Members/Engagement",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "8D4F7766-B115-4B87-AF11-891AF5A265ED"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Engagement",
+      "ParentID": "F1C13450-0CE0-493D-8D4C-126AE028B10F",
+      "Description": "Auto-created category from path: Skip/Organizations/Engagement",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E0B2973E-C99C-4C74-90D7-81035270ECD7"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Engagement",
+      "ParentID": "907A8463-69AF-4205-A9F1-4C668BBC29C5",
+      "Description": "Auto-created category from path: Skip/Chapters/Engagement",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4D499ED2-94EF-42BD-A04E-5621EAA89B44"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Enrollments",
+      "ParentID": "B42C64DE-D4FD-47CB-9C32-5DB6C2056D9B",
+      "Description": "Auto-created category from path: Skip/Courses/Enrollments",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "3B8652CB-E248-4D99-B32F-8E70B858CF03"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Enrollments",
+      "ParentID": "76AC9359-0959-4553-9D20-4589178E8798",
+      "Description": "Auto-created category from path: Skip/Learning/Enrollments",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "44D30D65-E0DC-4F70-984E-06E5041756F0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "KPIs",
+      "ParentID": "C8ACE109-ED11-4ACD-B7FD-94B31D9F2056",
+      "Description": "Auto-created category from path: Skip/Analytics/KPIs",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E176AAB1-2EDF-4FFF-9EA0-85AB7E0CF008"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Memberships",
+      "ParentID": "8C6F805D-200E-406A-90CA-A379B2253098",
+      "Description": "Auto-created category from path: Skip/Committees/Memberships",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4EB7ECFB-BAF4-4CD3-B054-FAF3CDEFBC04"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Orders",
+      "ParentID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799",
+      "Description": "Auto-created category from path: Skip/Sales/Orders",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "A841A12C-2F66-48EB-B383-211D11D5A2C7"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Performance",
+      "ParentID": "B14247D0-8962-4B01-A485-8BFD76ABCECF",
+      "Description": "Auto-created category from path: Skip/Events/Performance",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "7333DBDC-381E-476E-84E9-357EA0EAFE25"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Receivables",
+      "ParentID": "7C13B6EF-2E46-4337-8B8F-AF03C8D131D7",
+      "Description": "Auto-created category from path: Skip/Finance/Receivables",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FB712356-61E4-4992-8712-41C91FCDE085"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Revenue",
+      "ParentID": "FBAF81C4-57D0-4C6A-A0A8-B6C084B86799",
+      "Description": "Auto-created category from path: Skip/Sales/Revenue",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FD4C8862-E63F-4509-B702-62D345521487"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Revenue",
+      "ParentID": "0E6918F0-453E-43DE-9995-431B11F9F342",
+      "Description": "Auto-created category from path: Skip/Memberships/Revenue",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "16DC714B-8648-47B7-94D4-481CF18195AE"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Roster",
+      "ParentID": "AF8FA334-298D-4D3E-BCFC-6225060B046A",
+      "Description": "Auto-created category from path: Skip/Membership/Roster",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "23FD90D3-C0AC-40E6-A378-33DFA867C78D"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Roster",
+      "ParentID": "0E6918F0-453E-43DE-9995-431B11F9F342",
+      "Description": "Auto-created category from path: Skip/Memberships/Roster",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "A1A42040-DA6A-4053-B713-7BAC7C352112"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Rosters",
+      "ParentID": "8C6F805D-200E-406A-90CA-A379B2253098",
+      "Description": "Auto-created category from path: Skip/Committees/Rosters",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C7503D04-6A4E-4F76-B0D9-FE7A0BF84BFD"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Tiers",
+      "ParentID": "0E6918F0-453E-43DE-9995-431B11F9F342",
+      "Description": "Auto-created category from path: Skip/Memberships/Tiers",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "8D044066-1D85-43D2-BB24-10D2716F968F"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Transactions",
+      "ParentID": "09EDA406-D3B9-4F8E-A584-746F3CADB78E",
+      "Description": "Auto-created category from path: Skip/Members/Transactions",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AD5719EE-0FE4-44D2-A919-7AA8A1C94332"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Trends",
+      "ParentID": "DAE72EFC-4003-4B61-8ACE-15F61415C4EB",
+      "Description": "Auto-created category from path: Skip/Executive/Trends",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "5478D31A-2876-4CEA-A4A9-511F55F49A3A"
+    }
+  }
+]

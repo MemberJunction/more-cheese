@@ -24,6 +24,66 @@ jobs:
       - name: Validate metadata referential integrity closure
         run: node scripts/check-metadata-closure.mjs
 
+      # ── Release gates, ported from bizapps-forms (#48) ────────────────────────────────────
+      # All five read the repo only — no database, no npm install, no network — so they sit
+      # here at the top of the job where they fail fast and cost nothing. `scripts/*.spec.mjs`
+      # runs FIRST: every one of these gates is only as good as its own parser, and a gate
+      # whose spec has gone red is one whose green means nothing.
+      - name: Test the release gates themselves
+        run: npm run test:gates
+
+      # The release-version rule only ever runs on the release commit, where a mistake is
+      # most expensive and least recoverable — so its fixtures run here, on every PR, rather
+      # than waiting for publish.yml to be the first thing that exercises them.
+      - name: Release version rule self-test
+        run: node ./.github/scripts/determine-next-version.mjs --self-test
+
+      # The agent rulebook decays silently: nothing in a diff says CLAUDE.md has crossed the length
+      # where it stops being read, that a path-scoped rule's glob matches nothing so it can never
+      # fire, or that a rule is missing `paths` and is therefore loaded on every task rather than
+      # none. Three sibling repos are at ~2,010 lines right now. Rationale:
+      # plans/claude-instruction-architecture.md
+      - name: Instruction files stay small, routed, and resolvable
+        run: npm run check:claude-md
+
+      - name: Peer ranges match the manifest floor and name no exact version
+        run: npm run lint:peer-ranges
+
+      - name: Migration ordering is consistent across the chain
+        run: npm run lint:migrations
+
+      - name: Distribution gate (shipped SQL installs on a stranger's database)
+        run: npm run lint:distribution
+
+      - name: Teardown is structurally sound
+        run: npm run test:teardown
+
+      # `check:release-seed` needs a seed to measure. #30 dropped the Metadata_Sync
+      # migrations (world data now reaches a host via `mj sync push` from generated/; the
+      # build engineer folds seeds at release), so until one returns the gate reports the
+      # no-seed state and exits non-zero — correct at a release boundary, wrong as a PR gate.
+      # Detected explicitly and skipped VISIBLY, the same pattern this workflow already used
+      # for the sync-id parity gate below, which consumes this same output.
+      - name: Detect Metadata_Sync seed migrations
+        id: seed_check
+        run: |
+          if ls migrations/*Metadata_Sync*.sql >/dev/null 2>&1; then
+            echo "has_seeds=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_seeds=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No Metadata_Sync seed migrations in migrations/ — seed coverage and sync-id parity gates skipped (see #30)"
+          fi
+
+      # Cadence runs UNCONDITIONALLY, unlike coverage: "zero seeds" is a state it is designed
+      # to pass on, and its part-set rule is exactly what catches a generation that lands
+      # half-committed — which is the moment the has_seeds flag above first flips to true.
+      - name: Release seed cadence (one generation, complete part set)
+        run: npm run check:seed-cadence
+
+      - name: Release seed coverage (every declared record reaches a host)
+        if: steps.seed_check.outputs.has_seeds == 'true'
+        run: npm run check:release-seed
+
       - name: Check metadata and config ownership manifest
         run: npm run check:ownership
 
@@ -47,22 +107,9 @@ jobs:
       - name: Validate Loom data project & schema conformance
         run: npm run validate:loom
 
-      # #30 dropped the MetadataSync seed migrations (world data now reaches a host via
-      # `mj sync push` from generated/; the build engineer folds seeds at release). The
-      # parity gate compares those seeds to generated/, so it has nothing to check until
-      # a `*MetadataSync*.sql` file returns. Detect that explicitly and skip the step
-      # visibly rather than letting it fail on every PR or pass on nothing.
-      - name: Detect MetadataSync seed migrations
-        id: seed_check
-        run: |
-          if ls migrations/*MetadataSync*.sql >/dev/null 2>&1; then
-            echo "has_seeds=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_seeds=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::No MetadataSync seed migrations in migrations/ — sync-id parity gate skipped (see #30)"
-          fi
-
-      - name: Assert MetadataSync IDs match generated/ for every loom directory
+      # The detection step this `if` reads now runs near the top of the job, beside the other
+      # DB-free gates, so one `ls` serves both it and the seed-coverage gate (see #48).
+      - name: Assert Metadata_Sync IDs match generated/ for every loom directory
         if: steps.seed_check.outputs.has_seeds == 'true'
         run: npm run check:sync-id-parity
 

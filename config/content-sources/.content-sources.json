@@ -1,0 +1,33 @@
+[
+  {
+    "primaryKey": {
+      "ID": "8C4E3B2A-5D0F-4A79-9E63-4F9B0C7D8E03"
+    },
+    "fields": {
+      "Name": "morecheese.org — public site",
+      "URL": "https://morecheese.org/blog/",
+      "ContentTypeID": "@lookup:MJ: Content Types.Name=ICF web page, blog post, FAQ, archive listing or internal document (memo, deck, spreadsheet, email)",
+      "ContentSourceTypeID": "@lookup:MJ: Content Source Types.Name=Website",
+      "ContentFileTypeID": "@lookup:MJ: Content File Types.Name=HTML",
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Content (Pinecone)",
+      "Configuration": "{\"Website\": {\"MaxDepth\": 10, \"CrawlSitesInLowerLevelDomain\": true, \"CrawlOtherSitesInTopLevelDomain\": false, \"URLPattern\": \"^https://(www\\\\.)?morecheese\\\\.org/(?!tag/|wp-|author/|sample-page|feed)((?!/feed|/comments)[^?#])*$\", \"RootURL\": \"https://morecheese.org/\"}, \"MaxItemsPerRun\": 300}",
+      "Description": "Public site crawl seeded at the Blog index (morecheese.org/blog, the WordPress posts page). Follows posts, pagination, category archives and the static pages; skips tag archives, feeds and WordPress system URLs."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9D5F4C3B-6E1A-4B8A-AF74-5A0C1D8E9F04"
+    },
+    "fields": {
+      "Name": "More Cheese vault — internal (Dropbox)",
+      "URL": "https://www.dropbox.com/home/MoreCheese/vault/internal",
+      "ContentTypeID": "@lookup:MJ: Content Types.Name=ICF web page, blog post, FAQ, archive listing or internal document (memo, deck, spreadsheet, email)",
+      "ContentSourceTypeID": "@lookup:MJ: Content Source Types.Name=Cloud Storage",
+      "ContentFileTypeID": "@lookup:MJ: Content File Types.Name=Other",
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Content (Pinecone)",
+      "Configuration": "{\"FileStorageProviderKey\": \"Dropbox Storage\", \"PathPrefix\": \"vault/internal\", \"MaxItemsPerRun\": 200}"
+    }
+  }
+]

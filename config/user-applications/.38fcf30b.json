@@ -1,0 +1,12 @@
+{
+  "fields": {
+    "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+    "ApplicationID": "@lookup:MJ: Applications.Name=Testing",
+    "Sequence": 17,
+    "IsActive": true,
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "38FCF30B-F7A8-49E5-A606-69869E960048"
+  }
+}

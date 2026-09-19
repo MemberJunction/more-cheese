@@ -1,4 +1,4 @@
-# @mj-more-cheese-demo/ng
+# @mj-biz-apps/more-cheese-ng
 
 ## 1.1.0
 
@@ -12,7 +12,7 @@
 - f6d3a45: Identity columns on the member and organization profiles: country, postal address, and voluntary self-identified demographics (race/ethnicity, Hispanic origin, pronouns, primary language). Adds the columns to the baseline schema and folds the CodeGen regeneration — base views, CRUD stored procedures and update triggers for the two changed tables — into a migration, with the regenerated entity subclasses, resolvers and form components.
 - MemberJunction 6.1 compatibility. Raises every `@memberjunction/*` peer/dev pin from `^5.43.0` to `^6.1.0-edge.4` and lifts `mj-app.json` `mjVersionRange` to `>=6.1.0-edge.4 <7.0.0`, so the app installs and resolves against an MJ 6.1 host.
 
-  Two dependency fixes the MJ 6 pin change forced. MJ 6.1's `@memberjunction/ng-base-forms` relaxed its Angular peers from exact (`21.1.3`) to caret (`^21.1.3`); with the previously undeclared `@angular/animations` and `@angular/router` free to float, npm resolved them to 21.2.x and then demanded a matching `@angular/core`, conflicting with this repo's pinned 21.1.3. Both are now declared explicitly at 21.1.3 in the root dev dependencies and mirrored as `>=21.0.0 <22.0.0` peers on `@mj-more-cheese-demo/ng`, alongside the existing Angular entries.
+  Two dependency fixes the MJ 6 pin change forced. MJ 6.1's `@memberjunction/ng-base-forms` relaxed its Angular peers from exact (`21.1.3`) to caret (`^21.1.3`); with the previously undeclared `@angular/animations` and `@angular/router` free to float, npm resolved them to 21.2.x and then demanded a matching `@angular/core`, conflicting with this repo's pinned 21.1.3. Both are now declared explicitly at 21.1.3 in the root dev dependencies and mirrored as `>=21.0.0 <22.0.0` peers on `@mj-biz-apps/more-cheese-ng`, alongside the existing Angular entries.
 
   The lockfile is regenerated; it had carried stale `packages/Actions` and `packages/CoreEntitiesServer` workspace entries for directories that no longer exist, which made a clean install unresolvable.
 
@@ -40,4 +40,4 @@
 - Updated dependencies [52313cf]
 - Updated dependencies [dd279f3]
 - Updated dependencies [76964d8]
-  - @mj-more-cheese-demo/entities@1.1.0
+  - @mj-biz-apps/more-cheese-entities@1.1.0

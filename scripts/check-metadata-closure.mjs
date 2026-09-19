@@ -34,7 +34,8 @@ for (const { root, file } of files) {
   try {
     const raw = readFileSync(file, 'utf-8');
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) continue;
+    const arr = Array.isArray(parsed) ? parsed : (parsed && typeof parsed === 'object' ? [parsed] : []);
+    if (arr.length === 0) continue;
 
     const relPath = relative(root, file);
     const dir = relPath.split(sep)[0];
@@ -44,7 +45,7 @@ for (const { root, file } of files) {
     }
     const dirKeys = primaryKeysByDir.get(dir);
 
-    for (const r of parsed) {
+    for (const r of arr) {
       if (r?.primaryKey?.ID) {
         const pk = r.primaryKey.ID.toUpperCase();
         allPrimaryKeys.add(pk);
@@ -53,18 +54,20 @@ for (const { root, file } of files) {
       if (r?.fields) {
         records.push({ dir, primaryKey: r.primaryKey, fields: r.fields });
       }
-      if (r?.collections) {
-        for (const [colName, items] of Object.entries(r.collections)) {
-          if (Array.isArray(items)) {
-            for (const item of items) {
-              if (item?.primaryKey?.ID) {
-                const pk = item.primaryKey.ID.toUpperCase();
-                allPrimaryKeys.add(pk);
-                dirKeys.add(pk);
-              }
-              if (item?.fields) {
-                records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
-              }
+      const subCollections = [
+        ...(r?.collections ? Object.values(r.collections) : []),
+        ...(r?.relatedEntities ? Object.values(r.relatedEntities) : [])
+      ];
+      for (const items of subCollections) {
+        if (Array.isArray(items)) {
+          for (const item of items) {
+            if (item?.primaryKey?.ID) {
+              const pk = item.primaryKey.ID.toUpperCase();
+              allPrimaryKeys.add(pk);
+              dirKeys.add(pk);
+            }
+            if (item?.fields) {
+              records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
             }
           }
         }
@@ -98,14 +101,17 @@ const FIELD_TARGET_DIR_MAP = new Map([
 // 3. Explicit, documented exclusion list for known external cross-repo references
 // Each exclusion tracks hit counts; an exclusion that matches 0 records will fail the build to catch stale exclusions.
 const EXCLUDED_EXTERNAL_FIELDS = new Map([
+  ['vector-indexes.ExternalID', { reason: 'Provider-side index name (a string, e.g. the Pinecone index), not a foreign key', hits: 0 }],
+  ['queries.EmbeddingModelID', { reason: 'Points to an MJ core AI Model seeded by MemberJunction', hits: 0 }],
+  ['queries.SQLDialectID', { reason: 'Points to an MJ core SQL Dialect seeded by MemberJunction', hits: 0 }],
   ['relationships.RelationshipTypeID', { reason: 'Points to @memberjunction/bizapps-common seeded types', hits: 0 }],
   ['form-responses.AnonymousSessionID', { reason: 'Anonymous browser session tokens from public form submissions', hits: 0 }],
-  ['sonar-score-models.OwnerUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
-  ['sonar-score-model-versions.PublishedByUserID', { reason: 'External Core User ID in MJ User table', hits: 0 }],
   ['products.ProductTypeID', { reason: 'Points to @mj-biz-apps/orders seeded product types', hits: 0 }],
   ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
   ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
   ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
+  ['queries.EmbeddingModelID', { reason: 'Points to core MJ AI Model seeded by @memberjunction/server', hits: 0 }],
+  ['queries.SQLDialectID', { reason: 'Points to core MJ SQL Dialect seeded by @memberjunction/server', hits: 0 }],
   ['gl-account-links.RecordID', {
     reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
     hits: 0,
@@ -125,7 +131,7 @@ for (const r of records) {
   for (const [fieldName, val] of Object.entries(r.fields)) {
     // Check every field ending in 'ID' except primary key 'ID'
     if (fieldName.endsWith('ID') && fieldName !== 'ID') {
-      if (!val || typeof val !== 'string' || val.startsWith('@lookup:')) {
+      if (!val || typeof val !== 'string' || val.startsWith('@lookup:') || val.startsWith('@parent:')) {
         continue;
       }
 
@@ -223,8 +229,13 @@ for (const root of TARGET_ROOTS) {
 // 5. Cross-directory Primary Key Uniqueness audit
 console.log('\n--- Cross-Directory Primary Key Uniqueness Audit ---');
 const pkOwnerMap = new Map();
+const SECOND_PASS_DIRECTORIES = new Map([
+  ['sonar-score-models-activate', 'sonar-score-models'],
+  ['conversations-owner', 'conversations'], // created as System (owner gate on details), then ownership flipped to the demo user
+]);
 let duplicatePks = 0;
 for (const [dir, pks] of primaryKeysByDir.entries()) {
+  if (SECOND_PASS_DIRECTORIES.has(dir)) continue; // second-pass dirs re-touch first-pass records on purpose
   for (const pk of pks) {
     if (pkOwnerMap.has(pk)) {
       console.error(`❌ PK COLLISION: Primary Key ${pk} exists in both '${pkOwnerMap.get(pk)}' and '${dir}'!`);
@@ -603,15 +614,17 @@ if (!baseInfo) {
           baseAllPKs.add(pk);
           dirSet.add(pk);
         }
-        if (r?.collections) {
-          for (const items of Object.values(r.collections)) {
-            if (Array.isArray(items)) {
-              for (const item of items) {
-                if (item?.primaryKey?.ID) {
-                  const pk = item.primaryKey.ID.toUpperCase();
-                  baseAllPKs.add(pk);
-                  dirSet.add(pk);
-                }
+        const subCollections = [
+          ...(r?.collections ? Object.values(r.collections) : []),
+          ...(r?.relatedEntities ? Object.values(r.relatedEntities) : [])
+        ];
+        for (const items of subCollections) {
+          if (Array.isArray(items)) {
+            for (const item of items) {
+              if (item?.primaryKey?.ID) {
+                const pk = item.primaryKey.ID.toUpperCase();
+                baseAllPKs.add(pk);
+                dirSet.add(pk);
               }
             }
           }
@@ -625,6 +638,12 @@ if (!baseInfo) {
       'order-lines': 'orders'
     };
 
+    // Deliberate removals are declared (with a reason) in data/pk-removals.json and are not "dropped".
+    let allowedRemovals = new Set();
+    try {
+      const rem = JSON.parse(readFileSync(resolve(process.cwd(), 'data', 'pk-removals.json'), 'utf-8'));
+      allowedRemovals = new Set((rem.removals || []).filter(r => r.reason).map(r => String(r.id).toUpperCase()));
+    } catch { /* no removals file */ }
     let totalDroppedPKs = 0;
     const droppedDetails = [];
 
@@ -634,6 +653,7 @@ if (!baseInfo) {
       let kept = 0;
       const missing = [];
       for (const id of bSet) {
+        if (allowedRemovals.has(id)) { kept++; continue; }
         if (cSet.has(id)) {
           kept++;
         } else {

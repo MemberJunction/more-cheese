@@ -1,0 +1,210 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Name": "ICF Members — World Map",
+      "Description": "Every ICF member with a geocoded primary address, plotted worldwide. Demo anchor for the international slice (Henri Dubois in the Jura, Charlie Mason in Tasmania).",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"6bd597e1-05b9-46f6-80fd-5a98d35c4fdd\", \"Name\": \"PhotoURL\", \"DisplayName\": \"Photo\", \"hidden\": false, \"width\": 48, \"orderIndex\": 0, \"format\": {\"type\": \"image\"}}, {\"ID\": \"76d49448-c586-4701-9fff-63f390ec78c0\", \"Name\": \"DisplayName\", \"DisplayName\": \"Name\", \"hidden\": false, \"width\": 220, \"orderIndex\": 1}, {\"ID\": \"0b992115-7c59-4d6e-a49e-ddae2d7e9056\", \"Name\": \"Title\", \"DisplayName\": \"Title\", \"hidden\": false, \"width\": 180, \"orderIndex\": 2}, {\"ID\": \"0904a337-b7d5-4ef5-a431-d780f5ea6140\", \"Name\": \"CurrentOrganizationName\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"df8cc5b5-f424-4b3c-8d37-4e6c247477aa\", \"Name\": \"PrimaryAddressCity\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 4}, {\"ID\": \"f847d2da-3f4a-48c9-8db1-add65d33b6cf\", \"Name\": \"PrimaryAddressState\", \"DisplayName\": \"State\", \"hidden\": false, \"width\": 90, \"orderIndex\": 5}, {\"ID\": \"f7613583-6b36-4589-b6d5-d6a6cac04657\", \"Name\": \"PrimaryAddressCountry\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"57f78065-e9db-4d2c-a2f8-524d4f15d902\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 100, \"orderIndex\": 7}]}",
+      "FilterState": "{\"logic\": \"and\", \"filters\": []}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "SmartFilterWhereClause": null,
+      "SmartFilterExplanation": null,
+      "WhereClause": null,
+      "CustomWhereClause": false,
+      "SortState": null,
+      "Thumbnail": null,
+      "CardState": null,
+      "DisplayState": "{\"defaultMode\": \"grid\", \"viewTypeConfigs\": [{\"viewTypeId\": \"ecc439a3-2042-4b01-80b0-c64d267684ba\", \"config\": {\"renderMode\": \"point\"}}]}",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Map",
+      "DisplayStateObject": {
+        "defaultMode": "grid",
+        "viewTypeConfigs": [
+          {
+            "viewTypeId": "ecc439a3-2042-4b01-80b0-c64d267684ba",
+            "config": {
+              "renderMode": "point"
+            }
+          }
+        ]
+      }
+    },
+    "primaryKey": {
+      "ID": "99E510A6-2160-4664-BE08-8EC28A64FA2E"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Name": "ICF Members — United States by State",
+      "Description": "US-based members shown as state-level regions; zooms to the USA. Built for the geocoding acceptance check (USA filter renders at state resolution).",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"6bd597e1-05b9-46f6-80fd-5a98d35c4fdd\", \"Name\": \"PhotoURL\", \"DisplayName\": \"Photo\", \"hidden\": false, \"width\": 48, \"orderIndex\": 0, \"format\": {\"type\": \"image\"}}, {\"ID\": \"76d49448-c586-4701-9fff-63f390ec78c0\", \"Name\": \"DisplayName\", \"DisplayName\": \"Name\", \"hidden\": false, \"width\": 220, \"orderIndex\": 1}, {\"ID\": \"0b992115-7c59-4d6e-a49e-ddae2d7e9056\", \"Name\": \"Title\", \"DisplayName\": \"Title\", \"hidden\": false, \"width\": 180, \"orderIndex\": 2}, {\"ID\": \"0904a337-b7d5-4ef5-a431-d780f5ea6140\", \"Name\": \"CurrentOrganizationName\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"df8cc5b5-f424-4b3c-8d37-4e6c247477aa\", \"Name\": \"PrimaryAddressCity\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 4}, {\"ID\": \"f847d2da-3f4a-48c9-8db1-add65d33b6cf\", \"Name\": \"PrimaryAddressState\", \"DisplayName\": \"State\", \"hidden\": false, \"width\": 90, \"orderIndex\": 5}, {\"ID\": \"f7613583-6b36-4589-b6d5-d6a6cac04657\", \"Name\": \"PrimaryAddressCountry\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"57f78065-e9db-4d2c-a2f8-524d4f15d902\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 100, \"orderIndex\": 7}]}",
+      "FilterState": "{\"logic\": \"and\", \"filters\": [{\"field\": \"PrimaryAddressCountry\", \"operator\": \"eq\", \"value\": \"United States\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "SmartFilterWhereClause": null,
+      "SmartFilterExplanation": null,
+      "WhereClause": "([PrimaryAddressCountry] = 'United States')",
+      "CustomWhereClause": false,
+      "SortState": null,
+      "Thumbnail": null,
+      "CardState": null,
+      "DisplayState": "{\"defaultMode\": \"grid\", \"viewTypeConfigs\": [{\"viewTypeId\": \"ecc439a3-2042-4b01-80b0-c64d267684ba\", \"config\": {\"renderMode\": \"choropleth\"}}]}",
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Map",
+      "DisplayStateObject": {
+        "defaultMode": "grid",
+        "viewTypeConfigs": [
+          {
+            "viewTypeId": "ecc439a3-2042-4b01-80b0-c64d267684ba",
+            "config": {
+              "renderMode": "choropleth"
+            }
+          }
+        ]
+      }
+    },
+    "primaryKey": {
+      "ID": "A3CF1C6C-7B59-4A0D-AD3D-EC17DD8770CF"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "Name": "Renewals Pending — Auto-Renew Off",
+      "Description": "Membership periods awaiting renewal where the member has NOT enabled auto-renew: the reminder queue. Marcus Chen is here (term ended 2026-08-21).",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 140, \"orderIndex\": 1}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 2}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 3}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 120, \"orderIndex\": 5}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 6}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"020e84fa-a521-45fd-93ba-1cb0c0d5aa4f\", \"Name\": \"PeriodKey\", \"DisplayName\": \"Period\", \"hidden\": false, \"width\": 150, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\": \"and\", \"filters\": [{\"field\": \"Status\", \"operator\": \"eq\", \"value\": \"PendingRenewal\"}, {\"field\": \"AutoRenew\", \"operator\": \"eq\", \"value\": false}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "SmartFilterWhereClause": null,
+      "SmartFilterExplanation": null,
+      "WhereClause": "([Status] = 'PendingRenewal' AND [AutoRenew] = 0)",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EndDate\", \"dir\": \"asc\"}]",
+      "Thumbnail": null,
+      "CardState": null,
+      "DisplayState": null,
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "SortStateObject": [
+        {
+          "field": "EndDate",
+          "dir": "asc"
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "3BF98DAF-CCC4-4C14-AF8D-D7DE74FAFB2A"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "Name": "Renewals Pending — All",
+      "Description": "All membership periods currently in PendingRenewal, auto-renew or not, oldest term end first.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 140, \"orderIndex\": 1}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 2}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 3}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 120, \"orderIndex\": 5}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 6}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"020e84fa-a521-45fd-93ba-1cb0c0d5aa4f\", \"Name\": \"PeriodKey\", \"DisplayName\": \"Period\", \"hidden\": false, \"width\": 150, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\": \"and\", \"filters\": [{\"field\": \"Status\", \"operator\": \"eq\", \"value\": \"PendingRenewal\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "SmartFilterWhereClause": null,
+      "SmartFilterExplanation": null,
+      "WhereClause": "([Status] = 'PendingRenewal')",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EndDate\", \"dir\": \"asc\"}]",
+      "Thumbnail": null,
+      "CardState": null,
+      "DisplayState": null,
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "SortStateObject": [
+        {
+          "field": "EndDate",
+          "dir": "asc"
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "BA61903F-1E34-4BD1-94EA-A45258127A92"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "Name": "Lapsed Members — Last 12 Months",
+      "Description": "Membership periods that lapsed since September 2025. Root-cause candidates for churn analysis; Danielle Okafor (employer dissolved 2025) is in this set.",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 140, \"orderIndex\": 1}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 2}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 3}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 4}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 120, \"orderIndex\": 5}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 6}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"020e84fa-a521-45fd-93ba-1cb0c0d5aa4f\", \"Name\": \"PeriodKey\", \"DisplayName\": \"Period\", \"hidden\": false, \"width\": 150, \"orderIndex\": 8}]}",
+      "FilterState": "{\"logic\": \"and\", \"filters\": [{\"field\": \"Status\", \"operator\": \"eq\", \"value\": \"Lapsed\"}, {\"field\": \"EndDate\", \"operator\": \"gte\", \"value\": \"2025-09-01\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "SmartFilterWhereClause": null,
+      "SmartFilterExplanation": null,
+      "WhereClause": "([Status] = 'Lapsed' AND [EndDate] >= '2025-09-01')",
+      "CustomWhereClause": false,
+      "SortState": "[{\"field\": \"EndDate\", \"dir\": \"desc\"}]",
+      "Thumbnail": null,
+      "CardState": null,
+      "DisplayState": null,
+      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
+      "SortStateObject": [
+        {
+          "field": "EndDate",
+          "dir": "desc"
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "3EF9D448-B589-4332-B344-0F737DE8BB55"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Name": "testing view part 2",
+      "Description": "pls",
+      "CategoryID": null,
+      "IsShared": true,
+      "IsDefault": false,
+      "GridState": "{\"columnSettings\":[{\"ID\":\"6BD597E1-05B9-46F6-80FD-5A98D35C4FDD\",\"Name\":\"PhotoURL\",\"DisplayName\":\"Photo URL\",\"hidden\":false,\"width\":47,\"orderIndex\":0,\"format\":{\"type\":\"image\"}},{\"ID\":\"76D49448-C586-4701-9FFF-63F390EC78C0\",\"Name\":\"DisplayName\",\"DisplayName\":\"Display Name\",\"hidden\":false,\"width\":254,\"orderIndex\":1},{\"ID\":\"0B992115-7C59-4D6E-A49E-DDAE2D7E9056\",\"Name\":\"Title\",\"DisplayName\":\"Title\",\"hidden\":false,\"width\":184,\"orderIndex\":2},{\"ID\":\"0904A337-B7D5-4EF5-A431-D780F5EA6140\",\"Name\":\"CurrentOrganizationName\",\"DisplayName\":\"Current Organization Name\",\"hidden\":false,\"width\":231,\"orderIndex\":3},{\"ID\":\"2C5F0735-BCCE-4FFE-A225-DF937DACE682\",\"Name\":\"PrimaryEmail\",\"DisplayName\":\"Primary Email\",\"hidden\":false,\"width\":231,\"orderIndex\":4},{\"ID\":\"2470EF76-2225-4AC3-958B-A01B3A48B910\",\"Name\":\"PrimaryPhone\",\"DisplayName\":\"Primary Phone\",\"hidden\":false,\"width\":161,\"orderIndex\":5},{\"ID\":\"57F78065-E9DB-4D2C-A2F8-524D4F15D902\",\"Name\":\"Status\",\"DisplayName\":\"Status\",\"hidden\":false,\"width\":126,\"orderIndex\":6}]}",
+      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Title\",\"operator\":\"eq\",\"value\":\"Cheesemonger\"}]}",
+      "CustomFilterState": false,
+      "SmartFilterEnabled": false,
+      "SmartFilterPrompt": "",
+      "SmartFilterWhereClause": null,
+      "SmartFilterExplanation": null,
+      "WhereClause": "([Title] = 'Cheesemonger')",
+      "CustomWhereClause": false,
+      "SortState": null,
+      "Thumbnail": null,
+      "CardState": null,
+      "DisplayState": null,
+      "ViewTypeID": null
+    },
+    "primaryKey": {
+      "ID": "D78F3FFA-B2F2-4CB0-9CE7-AFE1E1FF22D0"
+    }
+  }
+]

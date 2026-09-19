@@ -1,0 +1,16 @@
+[
+  {
+    "primaryKey": {
+      "ID": "7B3D2A1F-4C9E-4F68-8D52-3E8A9B6C7D02"
+    },
+    "fields": {
+      "Name": "ICF web page, blog post, FAQ, archive listing or internal document (memo, deck, spreadsheet, email)",
+      "Description": "Fictional International Cheese Federation content: weekly blog posts, newsletters, annual reports, press releases, committee minutes (public) and memos, decks, spreadsheets, email threads (internal). Tagged for members, programmes, events, credentials, advocacy topics and eras (2019–2025).",
+      "AIModelID": "@lookup:MJ: AI Models.Name=Gemini 2.5 Flash",
+      "MinTags": 3,
+      "MaxTags": 8,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Content (Pinecone)"
+    }
+  }
+]

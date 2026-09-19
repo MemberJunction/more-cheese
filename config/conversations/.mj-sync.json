@@ -1,0 +1,69 @@
+{
+  "entity": "MJ: Conversations",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".conversations.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "overwrite",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt",
+      "TestRunID",
+      "LastConversationID",
+      "ExternalID",
+      "RecordingFileID",
+      "EgressID",
+      "VisitorKey"
+    ],
+    "ignoreVirtualFields": true,
+    "ignoreNullFields": true,
+    "lookupFields": {
+      "UserID": {
+        "entity": "MJ: Users",
+        "field": "Email"
+      },
+      "EnvironmentID": {
+        "entity": "MJ: Environments",
+        "field": "Name"
+      },
+      "ProjectID": {
+        "entity": "MJ: Projects",
+        "field": "Name"
+      },
+      "DefaultAgentID": {
+        "entity": "MJ: AI Agents",
+        "field": "Name"
+      }
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": {
+        "entity": "MJ: Conversation Details",
+        "foreignKey": "ConversationID",
+        "excludeFields": [
+          "__mj_CreatedAt",
+          "__mj_UpdatedAt",
+          "__mj_DeletedAt",
+          "TestRunID",
+          "AgentSessionID",
+          "ExternalID",
+          "Sequence"
+        ],
+        "ignoreVirtualFields": true,
+        "ignoreNullFields": true,
+        "lookupFields": {
+          "UserID": {
+            "entity": "MJ: Users",
+            "field": "Email"
+          },
+          "AgentID": {
+            "entity": "MJ: AI Agents",
+            "field": "Name"
+          }
+        }
+      }
+    }
+  }
+}

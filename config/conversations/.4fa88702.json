@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Email Engagement Trends",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "How has our email open rate and click-through rate changed month by month this year? Show both metrics on the same chart. I'd like to click on a month to see the actual emails sent during that period. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "7604680B-78A7-4972-B38F-754F55270DE2"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Email Engagement & Monthly Performance Explorer tracks email trends across the year using data from Activities and People. It features KPI summary cards, a composite chart comparing Open Rate and Click-Through Rate side-by-side, and an interactive drill-down table to inspect individual sent emails for any selected month. Note that as outbound email activity logs are recorded, the metrics and charts will automatically populate.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "95705806-36E7-4178-88F3-5AE13676A30F"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "4FA88702-C81B-4F1E-B1BD-D114D34FE580"
+    }
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "entity": "MJ: Users",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".users.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "overwrite",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt",
+      "LinkedEntityID",
+      "LinkedRecordID",
+      "EmployeeID"
+    ],
+    "ignoreVirtualFields": true,
+    "ignoreNullFields": true
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * @mj-more-cheese-demo/entities — the app's ENTITY package.
+ * @mj-biz-apps/more-cheese-entities — the app's ENTITY package.
  *
  * WHAT LIVES HERE
  *   src/generated/entity_subclasses.ts — written by MemberJunction CodeGen

@@ -12,12 +12,12 @@ Read in this order when starting from the template:
 | [metadata.md](metadata.md) | Authoring metadata: file formats, `@file`/`@lookup` references, worked examples, the push→capture workflow |
 | [branching.md](branching.md) | The `next` → `main` branch model and feature-branch rules |
 | [versioning-and-peer-deps.md](versioning-and-peer-deps.md) | How package versions and peer dependencies work (with the examples in this repo) |
-| [publishing.md](publishing.md) | Publishing to npm + GitHub releases; first-publish bootstrap; the no-breaking-changes policy |
+| [publishing.md](publishing.md) | The npm trusted-publishing bootstrap record; the no-breaking-changes policy |
+| [../release.md](../release.md) | **Cutting a release**: the four steps, the `release:plan` preflight, and what to do when a run goes red |
 
 The **MemberJunction development guide** (critical rules, entity/data
 patterns, CodeGen + migration authoring, Angular, style, testing — adapted
 from MJ's own `CLAUDE.md` into topic docs) is **[../claude/](../claude/README.md)**.
 
-The **format reference** for the manifest is [`../../mj-app.reference.jsonc`](../../mj-app.reference.jsonc);
-the **inventory of what a finished app contains** (required vs optional) is
-[`../plans/TEMPLATE-SPEC.md`](../../plans/complete/TEMPLATE-SPEC.md).
+The **inventory of what a finished app contains** (required vs optional) is
+[`plans/complete/TEMPLATE-SPEC.md`](../../plans/complete/TEMPLATE-SPEC.md).

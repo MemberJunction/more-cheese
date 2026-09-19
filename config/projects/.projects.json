@@ -1,0 +1,15 @@
+[
+  {
+    "primaryKey": {
+      "ID": "3C9E1F52-7A4B-4D8E-9B2C-6F1A8D3E5B70"
+    },
+    "fields": {
+      "Name": "Skip Analytics Suite (Sep 2026)",
+      "Description": "Staged Skip conversations from the 25-test More Cheese analytics suite: one conversation per prompt with the dashboard artifact Skip produced. Kept in this folder so they don't crowd the main chat list.",
+      "Color": "#145C3D",
+      "Icon": "fa-solid fa-flask",
+      "IsArchived": false,
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default"
+    }
+  }
+]

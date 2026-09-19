@@ -1,0 +1,44 @@
+[
+  {
+    "ID": "09233D7A-5A96-4F39-B2BF-177D8B55B220",
+    "Code": "Call",
+    "Name": "Call",
+    "Description": "Phone or voice call. Outcome (Connected, LeftVoicemail, NoAnswer) lives on the Activity."
+  },
+  {
+    "ID": "5C0674D6-A07B-447B-8755-66BE48B38303",
+    "Code": "Email",
+    "Name": "Email",
+    "Description": "Email message. Direction (Inbound/Outbound) lives on the Activity."
+  },
+  {
+    "ID": "40E239B0-20C0-4A12-8014-D82EBCE240DC",
+    "Code": "Meeting",
+    "Name": "Meeting",
+    "Description": "In-person or virtual meeting. Organizer/Attendee roles live on ActivityLink."
+  },
+  {
+    "ID": "3569BFCA-CF4D-4F3A-ADE8-FE29F2F30A65",
+    "Code": "Note",
+    "Name": "Note",
+    "Description": "Free-form note logged against one or more records."
+  },
+  {
+    "ID": "BAF5157F-31D1-4F20-8268-2EC8479CA4BB",
+    "Code": "SystemEvent",
+    "Name": "System Event",
+    "Description": "A lifecycle or system-generated timeline entry."
+  },
+  {
+    "ID": "1C6F6220-7C39-4E71-95AD-AB554F48F1AA",
+    "Code": "SMS",
+    "Name": "SMS",
+    "Description": "SMS or text message."
+  },
+  {
+    "ID": "F051065B-EBA1-4EA6-B95D-3BCCC2597EBA",
+    "Code": "Chat",
+    "Name": "Chat",
+    "Description": "Instant message or chat transcript excerpt."
+  }
+]

@@ -1,5 +1,5 @@
 /**
- * @mj-more-cheese-demo/ng — the CLIENT BOOTSTRAP package.
+ * @mj-biz-apps/more-cheese-ng — the CLIENT BOOTSTRAP package.
  *
  * MJExplorer bundles this package; evaluating it fires the @RegisterClass
  * decorators for the generated entity forms, and the host's generated
@@ -11,10 +11,16 @@
  */
 
 // Register entity subclasses on the client
-import '@mj-more-cheese-demo/entities';
+import '@mj-biz-apps/more-cheese-entities';
 
 // Evaluate the generated forms module (fires @RegisterClass for every form)
 import './lib/generated/generated-forms.module';
+
+// Custom form contributions to upstream apps' forms (forms architecture guide §7c).
+// Importing the file fires @RegisterClassEx; the People form picks the panel up at runtime.
+import './lib/custom/form-panels/person-membership.panel';
+export { PersonMembershipPanel } from './lib/custom/form-panels/person-membership.panel';
+export { PersonMembershipComponent } from './lib/custom/form-panels/person-membership.component';
 
 // Re-export for consumers + the host class-registration manifest
 export { GeneratedFormsModule } from './lib/generated/generated-forms.module';

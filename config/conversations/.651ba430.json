@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Dual-Axis Time Series with 4-Level Drill-Down",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "I need a comprehensive dashboard showing our membership and revenue trends over the past 5 years. Create a line chart with two Y-axes: the left axis should show membership count (as a line), and the right axis should show total revenue (as a different colored line). Make the chart interactive so that when I click on any data point, it opens up a pie chart breaking down that specific year's activity by category (membership fees, event revenue, course revenue). Then, when I click on any slice of that pie chart, show me a detailed table of all the transactions in that category for that year. Finally, make sure I can click on any row in that transaction table to open the actual invoice or membership record in the system. I want to see clear axis labels, a legend distinguishing the two metrics, and smooth navigation through all four levels. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "C2365FCF-FF5E-46FE-86F0-E33B0D1B965C"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Membership & Revenue Trends Dashboard is ready, combining longitudinal analytics from Membership Periods and Order Headers. It features a 5-year dual-axis chart comparing active members against gross revenue, an interactive category breakdown chart, and a searchable transaction ledger. You can drill down seamlessly through all four levels and click any transaction or member name to open the live record directly in MemberJunction.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "86C0AE99-41FD-4522-B30E-DAF711528D8E"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "651BA430-DAF2-49E4-902A-230A12706B20"
+    }
+  }
+]

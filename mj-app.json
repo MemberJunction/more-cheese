@@ -5,23 +5,24 @@
   "displayName": "MoreCheese Demo",
   "description": "The MoreCheese demo association (International Cheese Federation): a generated, causally-consistent dataset demonstrating the MJ platform across composed BizApps.",
   "version": "1.1.0",
-  "license": "ISC",
+  "license": "MIT",
   "icon": "fa-solid fa-cheese",
   "color": "#E8A33D",
   "publisher": {
     "name": "Blue Cypress",
     "email": "marcelo.torres@bluecypress.io"
   },
-  "repository": "https://github.com/BlueCypress/More-Cheese-Demo-V2",
-  "mjVersionRange": ">=6.1.0-edge.4 <7.0.0",
+  "repository": "https://github.com/MemberJunction/more-cheese",
+  "mjVersionRange": ">=6.1.2 <7.0.0",
   "schema": {
     "name": "morecheese_members",
     "createIfNotExists": true,
-    "entityPackage": "@mj-more-cheese-demo/entities"
+    "entityPackage": "@mj-biz-apps/more-cheese-entities"
   },
   "migrations": {
     "directory": "migrations",
-    "engine": "skyway"
+    "engine": "skyway",
+    "teardownDirectory": "migrations-teardown"
   },
   "metadata": {
     "directory": "generated"
@@ -40,7 +41,7 @@
       "repository": "https://github.com/MemberJunction/bizapps-accounting"
     },
     "mj-committees": {
-      "version": ">=1.0.0 <2.0.0",
+      "version": ">=1.3.0 <2.0.0",
       "repository": "https://github.com/MemberJunction/bizapps-committees"
     },
     "mj-bizapps-forms": {
@@ -56,7 +57,7 @@
       "repository": "https://github.com/MemberJunction/bizapps-issues"
     },
     "mj-secure-messaging": {
-      "version": ">=1.0.0 <2.0.0",
+      "version": ">=2.0.0 <3.0.0",
       "repository": "https://github.com/MemberJunction/bizapps-secure-messaging"
     },
     "mj-bizapps-sonar": {
@@ -71,21 +72,21 @@
   "packages": {
     "server": [
       {
-        "name": "@mj-more-cheese-demo/server",
+        "name": "@mj-biz-apps/more-cheese-server",
         "role": "bootstrap",
         "startupExport": "LoadMoreCheeseDemoServer"
       }
     ],
     "client": [
       {
-        "name": "@mj-more-cheese-demo/ng",
+        "name": "@mj-biz-apps/more-cheese-ng",
         "role": "bootstrap",
         "startupExport": "LoadMoreCheeseDemoClient"
       }
     ],
     "shared": [
       {
-        "name": "@mj-more-cheese-demo/entities",
+        "name": "@mj-biz-apps/more-cheese-entities",
         "role": "library"
       }
     ]

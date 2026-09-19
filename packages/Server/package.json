@@ -1,8 +1,8 @@
 {
-  "name": "@mj-more-cheese-demo/server",
+  "name": "@mj-biz-apps/more-cheese-server",
   "version": "1.1.0",
   "type": "module",
-  "description": "Server bootstrap package - loaded by MJAPI at startup via the manifest's startupExport. TODO(template): rename.",
+  "description": "Server bootstrap for the MoreCheese demo app, loaded by MJAPI at startup via the manifest's startupExport.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,21 +11,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlueCypress/More-Cheese-Demo-V2"
+    "url": "https://github.com/MemberJunction/more-cheese"
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-more-cheese-demo/entities": "^1.1.0",
+    "@mj-biz-apps/more-cheese-entities": "1.1.0",
     "class-validator": "^0.14.3"
   },
   "peerDependencies": {
-    "@memberjunction/ai-betty-bot": "^6.1.0-edge.4",
-    "@memberjunction/core": "^6.1.0-edge.4",
-    "@memberjunction/global": "^6.1.0-edge.4",
-    "@memberjunction/server": "^6.1.0-edge.4",
-    "@memberjunction/sqlserver-dataprovider": "^6.1.0-edge.4"
+    "@memberjunction/ai-betty-bot": "^6.1.2",
+    "@memberjunction/core": "^6.1.2",
+    "@memberjunction/global": "^6.1.2",
+    "@memberjunction/server": "^6.1.2",
+    "@memberjunction/sqlserver-dataprovider": "^6.1.2"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
+  },
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

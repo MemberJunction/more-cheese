@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Hierarchical Treemap with Color-Coded Drill-Down",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Create a treemap visualization showing our revenue breakdown by membership type. Each rectangle should be sized by total revenue amount, and colored by growth rate compared to last year (use a gradient from red for negative growth to green for positive growth). When I click on any membership type rectangle, I want to see a horizontal bar chart showing the top 10 members in that type ranked by their individual revenue contribution. Then, when I click on any member's bar, show me a detailed breakdown table listing all their transactions (memberships, event registrations, course enrollments) with dates, amounts, and transaction types. Make sure each row in that transaction table is clickable so I can open the actual record. Include a breadcrumb or back button so I can navigate back up through the levels. The treemap should show both the membership type name and the total revenue amount in each rectangle. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "447E68E1-2D14-4821-B042-F4E3838EC1EE"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Membership Revenue Treemap & Member Explorer visualizes dues revenue across membership tiers with color-coded Year-over-Year growth tracking. Clicking any tier reveals a ranking of its top 10 contributing members, while selecting a member displays their complete transaction history across memberships, event registrations, and course enrollments. You can click any transaction row to open the live entity record and use the breadcrumb bar to smoothly navigate back through each level.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "A1BBBE70-F4F5-491A-BA8B-30200C820E93"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "5A66B567-37D1-4259-AADA-886ADD363D70"
+    }
+  }
+]

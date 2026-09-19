@@ -1,0 +1,5 @@
+{
+  "entity": "MJ: Conversations",
+  "filePattern": "**/.*.json",
+  "_note": "Second pass: hands the staged conversations to the demo operator. Turns can only be written by the conversation owner, and mj sync push runs as System, so conversations/ creates them as System first."
+}

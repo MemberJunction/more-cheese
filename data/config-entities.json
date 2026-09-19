@@ -1,13 +1,150 @@
 [
-  { "directory": "ai-model-vendors", "entity": "MJ: AI Model Vendors" },
-  { "directory": "ai-models", "entity": "MJ: AI Models" },
-  { "directory": "ai-vendors", "entity": "MJ: AI Vendors" },
-  { "directory": "sonar-factors", "entity": "MJ_BizApps_Sonar: Factors" },
-  { "directory": "sonar-model-factors", "entity": "MJ_BizApps_Sonar: Model Factors" },
-  { "directory": "sonar-model-related-entities", "entity": "MJ_BizApps_Sonar: Model Related Entities" },
-  { "directory": "sonar-score-band-sets", "entity": "MJ_BizApps_Sonar: Score Band Sets" },
-  { "directory": "sonar-score-bands", "entity": "MJ_BizApps_Sonar: Score Bands" },
-  { "directory": "sonar-score-model-versions", "entity": "MJ_BizApps_Sonar: Score Model Versions" },
-  { "directory": "sonar-score-models", "entity": "MJ_BizApps_Sonar: Score Models" },
-  { "directory": "sonar-time-windows", "entity": "MJ_BizApps_Sonar: Time Windows" }
+  {
+    "directory": "ai-model-vendors",
+    "entity": "MJ: AI Model Vendors"
+  },
+  {
+    "directory": "ai-models",
+    "entity": "MJ: AI Models"
+  },
+  {
+    "directory": "ai-vendors",
+    "entity": "MJ: AI Vendors"
+  },
+  {
+    "directory": "sonar-factors",
+    "entity": "MJ_BizApps_Sonar: Factors"
+  },
+  {
+    "directory": "sonar-model-factors",
+    "entity": "MJ_BizApps_Sonar: Model Factors"
+  },
+  {
+    "directory": "sonar-model-related-entities",
+    "entity": "MJ_BizApps_Sonar: Model Related Entities"
+  },
+  {
+    "directory": "sonar-score-band-sets",
+    "entity": "MJ_BizApps_Sonar: Score Band Sets"
+  },
+  {
+    "directory": "sonar-score-bands",
+    "entity": "MJ_BizApps_Sonar: Score Bands"
+  },
+  {
+    "directory": "sonar-score-model-versions",
+    "entity": "MJ_BizApps_Sonar: Score Model Versions"
+  },
+  {
+    "directory": "sonar-score-models",
+    "entity": "MJ_BizApps_Sonar: Score Models"
+  },
+  {
+    "directory": "sonar-time-windows",
+    "entity": "MJ_BizApps_Sonar: Time Windows"
+  },
+  {
+    "directory": "sonar-score-models-activate",
+    "entity": "MJ_BizApps_Sonar: Score Models"
+  },
+  {
+    "directory": "user-views",
+    "entity": "MJ: User Views"
+  },
+  {
+    "directory": "resource-permissions",
+    "entity": "MJ: Resource Permissions"
+  },
+  {
+    "directory": "vector-indexes",
+    "entity": "MJ: Vector Indexes"
+  },
+  {
+    "directory": "content-types",
+    "entity": "MJ: Content Types"
+  },
+  {
+    "directory": "content-sources",
+    "entity": "MJ: Content Sources"
+  },
+  {
+    "directory": "application-roles",
+    "entity": "MJ: Application Roles"
+  },
+  {
+    "directory": "projects",
+    "entity": "MJ: Projects"
+  },
+  {
+    "directory": "artifacts",
+    "entity": "MJ: Artifacts"
+  },
+  {
+    "directory": "conversations",
+    "entity": "MJ: Conversations"
+  },
+  {
+    "directory": "conversation-detail-artifacts",
+    "entity": "MJ: Conversation Detail Artifacts"
+  },
+  {
+    "directory": "users",
+    "entity": "MJ: Users"
+  },
+  {
+    "directory": "user-roles",
+    "entity": "MJ: User Roles"
+  },
+  {
+    "directory": "user-applications",
+    "entity": "MJ: User Applications"
+  },
+  {
+    "directory": "conversations-owner",
+    "entity": "MJ: Conversations"
+  },
+  {
+    "directory": "file-storage-accounts",
+    "entity": "MJ: File Storage Accounts"
+  },
+  {
+    "directory": "file-storage-account-permissions",
+    "entity": "MJ: File Storage Account Permissions"
+  },
+  {
+    "directory": "dashboard-categories",
+    "entity": "MJ: Dashboard Categories"
+  },
+  {
+    "directory": "dashboards",
+    "entity": "MJ: Dashboards"
+  },
+  {
+    "directory": "dashboard-category-links",
+    "entity": "MJ: Dashboard Category Links"
+  },
+  {
+    "directory": "query-categories",
+    "entity": "MJ: Query Categories"
+  },
+  {
+    "directory": "queries",
+    "entity": "MJ: Queries"
+  },
+  {
+    "directory": "credential-types",
+    "entity": "MJ: Credential Types"
+  },
+  {
+    "directory": "file-storage-providers",
+    "entity": "MJ: File Storage Providers"
+  },
+  {
+    "directory": "credentials",
+    "entity": "MJ: Credentials"
+  },
+  {
+    "directory": "user-settings",
+    "entity": "MJ: User Settings"
+  }
 ]

@@ -28,7 +28,7 @@ stays clean:
 
 ```sh
 # from your app clone
-git worktree add <path-to-MJ>/packages/dev-apps/mj-sample-open-app feature/my-feature
+git worktree add <path-to-MJ>/packages/dev-apps/more-cheese feature/my-feature
 ```
 
 (A plain `git clone` into that folder also works; the worktree just keeps one
@@ -71,14 +71,14 @@ Two edits in the MJ repo:
 
 1. `packages/MJAPI/package.json` — add your server bootstrap package:
    ```json
-   "dependencies": { "@more-cheese-demo/server": "1.0.0" }
+   "dependencies": { "@mj-biz-apps/more-cheese-server": "1.0.0" }
    ```
 2. MJ root `mj.config.cjs` — tell MJAPI to load it at boot:
    ```js
    dynamicPackages: {
      server: [
        {
-         PackageName: '@more-cheese-demo/server',
+         PackageName: '@mj-biz-apps/more-cheese-server',
          StartupExport: 'LoadMoreCheeseDemoServer',   // must match mj-app.json
          AppName: 'more-cheese-demo',
          Enabled: true
@@ -90,11 +90,11 @@ Two edits in the MJ repo:
 
 ## 4. Wire the client (MJExplorer) — only if you ship UI packages
 
-1. `packages/MJExplorer/package.json` — add `"@more-cheese-demo/ng": "1.0.0"`.
+1. `packages/MJExplorer/package.json` — add `"@mj-biz-apps/more-cheese-ng": "1.0.0"`.
 2. Add a static import to
    `packages/MJExplorer/src/app/generated/open-app-bootstrap.generated.ts`:
    ```ts
-   import '@more-cheese-demo/ng';
+   import '@mj-biz-apps/more-cheese-ng';
    ```
    (When an app is *installed* via `mj app install`, the CLI maintains this
    file; in a manual link you add the line yourself. Re-run `npm install`.)
@@ -113,7 +113,7 @@ depends on which manifest blocks you kept:
 For a schema-backed app, from the MJ repo root:
 
 ```sh
-npx mj migrate --schema AssociationDemoV2_Members --dir packages/dev-apps/mj-sample-open-app/migrations
+npx mj migrate --schema morecheese_members --dir packages/dev-apps/more-cheese/migrations
 ```
 
 This creates the schema (if missing) and applies your app's migrations to the
@@ -124,7 +124,7 @@ schema changes, run `npx mj codegen` (see codegen-and-metadata-migrations.md).
 
 ```sh
 # from the MJ repo root
-npx turbo build --filter="@more-cheese-demo/*"   # build your app's packages
+npx turbo build --filter="@mj-biz-apps/*"   # build your app's packages
 npm run start:api                              # MJAPI — watch the log for your startupExport being called
 npm run start:explorer                         # MJExplorer (if you wired a client package)
 ```

@@ -1,0 +1,24 @@
+{
+  "entity": "MJ: Query Categories",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".query-categories.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "overwrite",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt"
+    ],
+    "ignoreVirtualFields": true,
+    "ignoreNullFields": true,
+    "lookupFields": {
+      "UserID": {
+        "entity": "MJ: Users",
+        "field": "Email"
+      }
+    }
+  }
+}
