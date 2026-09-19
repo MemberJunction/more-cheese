@@ -56,8 +56,17 @@ const RED = '\x1b[0;31m', YELLOW = '\x1b[0;33m', GREEN = '\x1b[0;32m', DIM = '\x
 const GIT_MAX_BUFFER = Number(process.env.MJ_GIT_MAX_BUFFER) || 256 * 1024 * 1024;
 /** Flyway VERSIONED migrations only. Baselines are excluded deliberately — see SCOPE. Fixture SQL never runs. */
 const VERSIONED_MIGRATION_RE = /(^|\/)V\d{12}__[^/]*\.sql$/;
+/** Versioned AND baseline. Only the `--all` inventory uses this — see `inReportScope`. */
+const ANY_MIGRATION_RE = /(^|\/)[VB]\d{12}__[^/]*\.sql$/;
 const FIXTURE_DIR_RE = /(^|\/)tests?\//;
+
+// Two questions live here, and they have different right answers for a baseline. They shared one
+// predicate until narrowing it for ENFORCEMENT silently narrowed REPORTING too, and `--all` began
+// printing "no literal EntityField sequences in any migrations" over a baseline holding 166.
+/** ENFORCEMENT — may a PR be blocked on this file? Not for a baseline: literal by construction, and first to run. */
 const inScope = (f) => VERSIONED_MIGRATION_RE.test(f) && !FIXTURE_DIR_RE.test(f);
+/** REPORTING (`--all`) — does this file CARRY the literal debt? A baseline does; enumerating it is the mode's purpose. */
+const inReportScope = (f) => ANY_MIGRATION_RE.test(f) && !FIXTURE_DIR_RE.test(f);
 
 /** Opening of an EntityField INSERT in either quoting dialect; `EntityFieldValue` etc. do not match. */
 const EF_INSERT_RE = /INSERT\s+INTO\s+(?:[^\s(]*?[.\]"`])?(?:\[EntityField\]|"EntityField"|`EntityField`|EntityField)\s*\(/gi;
@@ -336,6 +345,20 @@ const SCOPE_TEST_FIXTURES = [
     ['non-migration sql file is excluded', false, 'scripts/seed.sql'],
 ];
 
+/**
+ * `--all` asks a DIFFERENT question from the CI gate: not "may a PR be blocked on this file?" but
+ * "which committed files CARRY the literal debt?". A baseline carries it — 166 rows in this repo —
+ * and enumerating exactly that is the mode's only purpose, so a baseline is in REPORTING scope
+ * even though it is deliberately out of ENFORCEMENT scope.
+ */
+const REPORT_SCOPE_TEST_FIXTURES = [
+    ['baseline IS in --all reporting scope — it carries the debt --all exists to report', true,
+        'migrations/B202607141200__v1.0.0_MoreCheese_Baseline.sql'],
+    ['versioned migration is in --all reporting scope', true, 'migrations/V202607141200__v1.0.0.sql'],
+    ['fixture SQL is excluded from reporting too — it never runs', false, 'tests/migrations/V202607141200__v1.0.0.sql'],
+    ['repeatable migration is excluded from reporting', false, 'migrations/R__RefreshMetadata.sql'],
+];
+
 function selfTest() {
     let fails = 0;
     for (const [name, shouldFlag, sql] of SELF_TEST_FIXTURES) {
@@ -351,6 +374,15 @@ function selfTest() {
         const actual = inScope(path);
         if (actual === expected) {
             console.log(`${GREEN}self-test ok${NC}: ${name} ${expected ? 'in-scope' : 'excluded'}`);
+        } else {
+            console.log(`${RED}self-test FAIL${NC}: ${name} expected ${expected}, got ${actual}`);
+            fails++;
+        }
+    }
+    for (const [name, expected, path] of REPORT_SCOPE_TEST_FIXTURES) {
+        const actual = inReportScope(path);
+        if (actual === expected) {
+            console.log(`${GREEN}self-test ok${NC}: ${name} ${expected ? 'reported' : 'excluded'}`);
         } else {
             console.log(`${RED}self-test FAIL${NC}: ${name} expected ${expected}, got ${actual}`);
             fails++;
@@ -390,7 +422,7 @@ function main(argv) {
     let entries, base, head;
     if (argv[0] === '--all') {
         entries = git(['ls-files', '--cached', '--others', '--exclude-standard', '--', 'migrations'])
-            .split('\n').filter(inScope).map((file) => ({ file, allLinesNew: true }));
+            .split('\n').filter(inReportScope).map((file) => ({ file, allLinesNew: true }));
     } else {
         if (argv.length >= 2) {
             [base, head] = argv;
