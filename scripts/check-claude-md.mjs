@@ -24,9 +24,13 @@
  * both a deletion and an addition.
  *
  * ── CHECK 2 — BUDGET ──────────────────────────────────────────────────────────────────────────
- * Root CLAUDE.md stays under its committed line/byte ceiling. Claude Code's own guidance is ~200
- * lines: longer files consume context AND reduce adherence, so this is a correctness ceiling, not
- * a tidiness one.
+ * Root CLAUDE.md stays under its committed ceiling. Claude Code's own guidance is ~200 lines:
+ * longer files consume context AND reduce adherence, so this is a correctness ceiling, not a
+ * tidiness one.
+ *
+ * Measured EFFECTIVE, not raw. Claude Code strips block-level HTML comments before injecting a
+ * CLAUDE.md into context, and blank lines cost nothing, so counting raw would charge the file for
+ * maintainer notes that are free and discourage exactly the commenting the docs recommend.
  *
  * ── CHECK 3 — REFERENCES ──────────────────────────────────────────────────────────────────────
  * Every markdown link in every instruction file resolves. Instruction files are read by agents that
@@ -39,8 +43,13 @@
  * rule nobody can find is a rule nobody follows, and path-scoped rules are invisible by design —
  * they do not announce themselves until you happen to open a matching file.
  *
+ * Discovery covers NESTED `.claude/` directories (`packages/Foo/.claude/rules/`, `.../skills/`),
+ * which Claude Code loads too. `.claude/CLAUDE.md` is excluded: that is an alternative location
+ * for the PROJECT file, not a per-directory one, so it is not the routing table's job to list it.
+ *
  * ── CHECK 5 — RULES ───────────────────────────────────────────────────────────────────────────
- * Frontmatter parses, `paths` is PRESENT, and every glob matches at least one tracked file.
+ * Frontmatter parses, `paths` is PRESENT, every glob is valid, every glob matches at least one
+ * tracked file, and the `paths` list stays inside Claude Code's 1,000-pattern brace budget.
  *
  * The `paths` requirement is the subtle one and the reason this check earns its place. Per Claude
  * Code's documented behaviour, a rule WITHOUT `paths` is loaded unconditionally at launch, at the
@@ -70,6 +79,9 @@ const SKILLS_DIR = '.claude/skills';
 
 /** Directories never worth walking for instruction files or glob matches. */
 const IGNORED_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage', '.turbo']);
+
+/** Claude Code gives a rule's whole `paths` list one budget of this many expanded patterns. */
+const BRACE_EXPANSION_BUDGET = 1000;
 
 // ─────────────────────────────────────────────────────────────────────────────────────────────
 // Pure helpers — exported so the spec can exercise them without a subprocess.
@@ -112,31 +124,151 @@ export function parseRuleFrontmatter(text) {
     return { hasFrontmatter: true, hasPathsKey, paths };
 }
 
+/** Escape a literal character for use inside a RegExp. */
+const esc = (c) => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 /**
- * Translate one `paths` glob into a RegExp over POSIX-style repo-relative paths.
+ * Translate one `paths` glob into a RegExp over POSIX-style repo-relative paths, or return `null`
+ * for a pattern Claude Code treats as invalid.
  *
- * Supports the forms Claude Code documents: `**` across directories, `*` within a segment, `?`, and
- * `{a,b}` brace expansion. `**` is handled before `*` so the two do not collide.
+ * Mirrors the syntax Claude Code documents: `**` across directories, `*` within a segment, `?`,
+ * `{a,b}` brace expansion, and `[abc]` / `[a-z]` / `[!abc]` bracket expressions.
+ *
+ * Three details here were wrong in the first version of this gate, and each mattered:
+ *
+ *   1. `,` was translated to alternation UNCONDITIONALLY. Outside a brace group a comma is a
+ *      literal character in a filename, so `a,b.ts` became the pattern `a|b.ts` — a glob that
+ *      matched two things it should not and missed the one it should.
+ *   2. `[` was ESCAPED to a literal. Claude Code reads `[` as the start of a bracket expression,
+ *      so this gate would happily report a match for a pattern Claude Code resolves differently.
+ *   3. An unterminated `[`, such as `photos [2024/**`, is INVALID to Claude Code: it matches
+ *      nothing, while the rule's other patterns keep working. Escaping it made this gate say the
+ *      rule fires when it cannot. Returning null lets the RULES check report it honestly.
  */
 export function globToRegExp(glob) {
     let out = '';
+    let braceDepth = 0;
+
     for (let i = 0; i < glob.length; i++) {
         const c = glob[i];
+
+        if (c === '\\') {                        // escaped literal: `\[` matches a real bracket
+            const next = glob[++i];
+            if (next === undefined) return null; // trailing backslash is not a valid pattern
+            out += esc(next);
+            continue;
+        }
+
         if (c === '*') {
             if (glob[i + 1] === '*') {
-                // `**/` may match zero segments, so the slash is part of the optional group.
+                // `**/` may match zero segments, so the slash belongs to the optional group.
                 if (glob[i + 2] === '/') { out += '(?:.*/)?'; i += 2; }
                 else { out += '.*'; i += 1; }
             } else {
                 out += '[^/]*';
             }
-        } else if (c === '?') out += '[^/]';
-        else if (c === '{') out += '(?:';
-        else if (c === '}') out += ')';
-        else if (c === ',') out += '|';
-        else out += c.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+            continue;
+        }
+
+        if (c === '?') { out += '[^/]'; continue; }
+
+        if (c === '[') {
+            const close = findBracketClose(glob, i);
+            if (close === -1) return null;       // invalid pattern — matches nothing
+            let body = glob.slice(i + 1, close);
+            let negated = false;
+            if (body.startsWith('!') || body.startsWith('^')) { negated = true; body = body.slice(1); }
+            // A bracket expression never matches a path separator.
+            out += `(?!/)[${negated ? '^' : ''}${body.replace(/\\/g, '\\\\').replace(/\]/g, '\\]')}]`;
+            i = close;
+            continue;
+        }
+
+        if (c === '{') { braceDepth++; out += '(?:'; continue; }
+        if (c === '}') {
+            if (braceDepth === 0) { out += esc(c); continue; } // unmatched `}` is a literal
+            braceDepth--; out += ')'; continue;
+        }
+        if (c === ',') { out += braceDepth > 0 ? '|' : esc(c); continue; }
+
+        out += esc(c);
     }
-    return new RegExp(`^${out}$`);
+
+    if (braceDepth !== 0) return null;           // unbalanced `{` — not a usable pattern
+    try {
+        return new RegExp(`^${out}$`);
+    } catch {
+        return null;
+    }
+}
+
+/** Index of the `]` closing the bracket expression opened at `start`, or -1 if there is none. */
+function findBracketClose(glob, start) {
+    // POSIX allows a `]` as the first character of the body, where it is a literal.
+    let i = start + 1;
+    if (glob[i] === '!' || glob[i] === '^') i++;
+    if (glob[i] === ']') i++;
+    for (; i < glob.length; i++) {
+        if (glob[i] === '\\') { i++; continue; }
+        if (glob[i] === ']') return i;
+    }
+    return -1;
+}
+
+/**
+ * How many patterns a `paths` list expands to once brace groups are multiplied out.
+ *
+ * Claude Code gives a rule's whole `paths` list one budget of 1,000 expanded patterns. Over that,
+ * it uses the offending pattern UNEXPANDED — and then its literal braces match no files, so the
+ * rule silently stops firing. That is the same failure this gate's "matches nothing" check exists
+ * to catch, arriving by a different route, so it is worth counting. Patterns without braces do not
+ * count against the budget.
+ */
+export function countBraceExpansions(globs) {
+    let total = 0;
+    for (const glob of globs) {
+        if (!glob.includes('{')) continue;
+        let combos = 1;
+        let alternatives = 1;
+        let depth = 0;
+        for (let i = 0; i < glob.length; i++) {
+            const c = glob[i];
+            if (c === '\\') { i++; continue; }
+            if (c === '{') { depth++; if (depth === 1) alternatives = 1; }
+            else if (c === '}') { depth--; if (depth === 0) combos *= alternatives; }
+            else if (c === ',' && depth === 1) alternatives++;
+        }
+        total += combos;
+    }
+    return total;
+}
+
+/**
+ * Remove block-level HTML comments, which Claude Code strips before injecting a CLAUDE.md into
+ * context. Comments inside fenced code blocks are preserved, so they still cost context and still
+ * count against the budget.
+ */
+export function stripMaintainerComments(text) {
+    const lines = text.split('\n');
+    const kept = [];
+    let inFence = false;
+    let inComment = false;
+
+    for (const line of lines) {
+        if (/^\s*(```|~~~)/.test(line)) { inFence = !inFence; kept.push(line); continue; }
+        if (inFence) { kept.push(line); continue; }
+
+        if (inComment) {
+            if (line.includes('-->')) inComment = false;
+            continue;
+        }
+        if (/^\s*<!--/.test(line)) {
+            if (!line.includes('-->')) inComment = true;
+            continue;
+        }
+        kept.push(line);
+    }
+    return kept.join('\n');
 }
 
 /**
@@ -197,18 +329,69 @@ export function listTrackedFiles(root) {
 
 /** Every .md under .claude/rules/, recursively, POSIX-relative to the repo root. */
 export function listRuleFiles(root) {
-    const base = join(root, RULES_DIR);
-    if (!existsSync(base)) return [];
+    const acc = [];
+
+    const walkRules = (rulesDirRel) => {
+        const base = join(root, rulesDirRel);
+        if (!existsSync(base)) return;
+        const walk = (sub) => {
+            for (const e of readdirSync(join(base, sub || '.'), { withFileTypes: true })) {
+                const rel = sub ? posix.join(sub, e.name) : e.name;
+                // withFileTypes reports a symlink as a link, so stat through it. `.claude/rules/`
+                // supports symlinks, and a linked rule is still a rule.
+                let isDir = e.isDirectory();
+                if (e.isSymbolicLink()) {
+                    try { isDir = statSync(join(base, rel)).isDirectory(); } catch { continue; }
+                }
+                if (isDir) walk(rel);
+                else if (e.name.endsWith('.md')) acc.push(posix.join(rulesDirRel, rel));
+            }
+        };
+        walk('');
+    };
+
+    walkRules(RULES_DIR);
+    for (const dir of findNestedClaudeDirs(root)) walkRules(posix.join(dir, 'rules'));
+
+    return [...new Set(acc)].sort();
+}
+
+/** Nested `.claude/` directories (excluding the repo root's), POSIX-relative to the root. */
+export function findNestedClaudeDirs(root) {
     const acc = [];
     const walk = (dir) => {
-        for (const e of readdirSync(join(base, dir || '.'), { withFileTypes: true })) {
+        let entries;
+        try { entries = readdirSync(join(root, dir || '.'), { withFileTypes: true }); } catch { return; }
+        for (const e of entries) {
+            if (!e.isDirectory()) continue;
+            if (IGNORED_DIRS.has(e.name)) continue;
             const rel = dir ? posix.join(dir, e.name) : e.name;
-            if (e.isDirectory()) walk(rel);
-            else if (e.name.endsWith('.md')) acc.push(posix.join(RULES_DIR, rel));
+            if (e.name === '.claude') {
+                if (rel !== '.claude') acc.push(rel);
+                continue; // do not descend into a .claude dir hunting for another
+            }
+            walk(rel);
         }
     };
     walk('');
-    return acc.sort();
+    return acc;
+}
+
+/** Every `<name>/SKILL.md` under any `.claude/skills/`, POSIX-relative to the repo root. */
+export function listSkillFiles(root) {
+    const acc = [];
+    const collect = (skillsDirRel) => {
+        const base = join(root, skillsDirRel);
+        if (!existsSync(base)) return;
+        for (const e of readdirSync(base, { withFileTypes: true })) {
+            if (!e.isDirectory() && !e.isSymbolicLink()) continue;
+            const skillMd = posix.join(skillsDirRel, e.name, 'SKILL.md');
+            if (existsSync(join(root, skillMd))) acc.push(skillMd);
+        }
+    };
+    collect(SKILLS_DIR);
+    for (const dir of findNestedClaudeDirs(root)) collect(posix.join(dir, 'skills'));
+    return [...new Set(acc)].sort();
 }
 
 // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -278,18 +461,28 @@ export function checkInstructionFiles(root) {
     if (!exists(ROOT_FILE)) {
         fail('budget', `${ROOT_FILE} is missing`);
     } else if (manifest?.budget) {
-        const text = read(ROOT_FILE);
-        const lines = text.split('\n').length - (text.endsWith('\n') ? 1 : 0);
-        const bytes = Buffer.byteLength(text, 'utf8');
+        const raw = read(ROOT_FILE);
+
+        // Budget the EFFECTIVE size — what actually reaches the context window. Claude Code strips
+        // block-level HTML comments before injecting a CLAUDE.md, so counting them would charge the
+        // file for maintainer notes that cost nothing, and would discourage exactly the commenting
+        // the docs recommend. The ~200-line guidance is about context cost, so measure context cost.
+        const effective = stripMaintainerComments(raw);
+        const lines = effective.split('\n').filter((l) => l.trim() !== '').length;
+        const bytes = Buffer.byteLength(effective, 'utf8');
+        const rawLines = raw.split('\n').length - (raw.endsWith('\n') ? 1 : 0);
         const { maxLines, maxBytes } = manifest.budget;
 
         if (maxLines && lines > maxLines) {
-            fail('budget', `${ROOT_FILE} is ${lines} lines, over the ${maxLines}-line ceiling. Route the new content to a rule — see "Where new guidance goes".`);
+            fail('budget', `${ROOT_FILE} is ${lines} effective lines, over the ${maxLines}-line ceiling. Route the new content to a rule — see "Where new guidance goes".`);
         }
         if (maxBytes && bytes > maxBytes) {
-            fail('budget', `${ROOT_FILE} is ${bytes} bytes, over the ${maxBytes}-byte ceiling.`);
+            fail('budget', `${ROOT_FILE} is ${bytes} effective bytes, over the ${maxBytes}-byte ceiling.`);
         }
-        notes.push(`budget: ${ROOT_FILE} ${lines}/${maxLines} lines, ${bytes}/${maxBytes} bytes`);
+        notes.push(
+            `budget: ${ROOT_FILE} ${lines}/${maxLines} effective lines, ${bytes}/${maxBytes} effective bytes ` +
+            `(${rawLines} raw lines; blank lines and stripped HTML comments do not reach context)`,
+        );
     }
 
     // ── 3. REFERENCES ────────────────────────────────────────────────────────────────────────
@@ -330,8 +523,12 @@ export function checkInstructionFiles(root) {
         }
     }
 
+    // `.claude/CLAUDE.md` is an alternative location for the PROJECT file, not a nested one, so it
+    // is not something the routing table should have to list alongside per-directory files.
     const nestedClaudeMds = listTrackedFiles(root).filter(
-        (f) => f.endsWith('/CLAUDE.md') && !f.startsWith('.claude/worktrees/')
+        (f) => f.endsWith('/CLAUDE.md')
+            && !f.startsWith('.claude/worktrees/')
+            && f !== '.claude/CLAUDE.md',
     );
     for (const nested of nestedClaudeMds) {
         if (!rootText.includes(nested)) {
@@ -339,13 +536,10 @@ export function checkInstructionFiles(root) {
         }
     }
 
-    if (existsSync(join(root, SKILLS_DIR))) {
-        for (const e of readdirSync(join(root, SKILLS_DIR), { withFileTypes: true })) {
-            if (!e.isDirectory()) continue;
-            if (!existsSync(join(root, SKILLS_DIR, e.name, 'SKILL.md'))) continue;
-            if (!rootText.includes(e.name)) {
-                fail('routing', `skill "${e.name}" exists but is not in ${ROOT_FILE}'s routing table`);
-            }
+    for (const skillMd of listSkillFiles(root)) {
+        const name = posix.basename(posix.dirname(skillMd));
+        if (!rootText.includes(name)) {
+            fail('routing', `skill "${name}" (${skillMd}) exists but is not in ${ROOT_FILE}'s routing table`);
         }
     }
 
@@ -366,8 +560,17 @@ export function checkInstructionFiles(root) {
             fail('rules', `${rule} has an empty "paths" list`);
             continue;
         }
+        const expansions = countBraceExpansions(paths);
+        if (expansions > BRACE_EXPANSION_BUDGET) {
+            fail('rules', `${rule} expands to ${expansions} patterns, over Claude Code's ${BRACE_EXPANSION_BUDGET}-pattern budget. Over the budget the pattern is used UNEXPANDED, so its literal braces match no files and the rule stops firing.`);
+        }
+
         for (const glob of paths) {
             const re = globToRegExp(glob);
+            if (re === null) {
+                fail('rules', `${rule} glob "${glob}" is not a valid pattern (unterminated "[" or "{"). Claude Code matches nothing for it while the rule's other patterns keep working, so the rule silently half-fires.`);
+                continue;
+            }
             if (!tracked.some((f) => re.test(f))) {
                 fail('rules', `${rule} glob "${glob}" matches no tracked file — the rule can never fire.`);
             }

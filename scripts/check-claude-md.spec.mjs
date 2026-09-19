@@ -22,6 +22,10 @@ import {
     globToRegExp,
     extractReferences,
     isCheckableReference,
+    countBraceExpansions,
+    stripMaintainerComments,
+    listRuleFiles,
+    listSkillFiles,
 } from './check-claude-md.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -334,6 +338,120 @@ test('globToRegExp handles the patterns Claude Code documents', () => {
 test('globToRegExp escapes regex metacharacters in literal segments', () => {
     assert.ok(globToRegExp('.changeset/**').test('.changeset/foo.md'));
     assert.ok(!globToRegExp('.changeset/**').test('Xchangeset/foo.md'));
+});
+
+test('globToRegExp treats a comma OUTSIDE braces as a literal, not alternation', () => {
+    // Regression: every "," was translated to "|" regardless of brace depth, so a filename
+    // containing a comma became an alternation matching two things it should not.
+    const re = globToRegExp('docs/a,b.md');
+    assert.ok(re.test('docs/a,b.md'));
+    assert.ok(!re.test('docs/a'), 'must not match the left alternative');
+    assert.ok(!re.test('b.md'), 'must not match the right alternative');
+});
+
+test('globToRegExp reads [ as a bracket expression, as Claude Code does', () => {
+    assert.ok(globToRegExp('src/v[0-9]/*.ts').test('src/v2/a.ts'));
+    assert.ok(!globToRegExp('src/v[0-9]/*.ts').test('src/vx/a.ts'));
+    assert.ok(globToRegExp('src/[abc].ts').test('src/b.ts'));
+    assert.ok(!globToRegExp('src/[abc].ts').test('src/d.ts'));
+    assert.ok(globToRegExp('src/[!abc].ts').test('src/d.ts'), 'negation');
+    assert.ok(!globToRegExp('src/[!abc].ts').test('src/a.ts'));
+});
+
+test('globToRegExp returns null for a pattern Claude Code treats as invalid', () => {
+    // Documented: `photos [2024/**` cannot be read as a bracket expression, so it matches nothing
+    // while the rule's other patterns keep working.
+    assert.equal(globToRegExp('photos [2024/**'), null);
+    assert.equal(globToRegExp('src/{a,b/*.ts'), null, 'unbalanced brace');
+    assert.equal(globToRegExp('src/trailing\\'), null, 'trailing backslash');
+});
+
+test('globToRegExp matches a literal bracket when it is escaped', () => {
+    assert.ok(globToRegExp('photos \\[2024\\]/**').test('photos [2024]/a.jpg'));
+});
+
+test('countBraceExpansions multiplies brace groups and ignores brace-free patterns', () => {
+    assert.equal(countBraceExpansions(['**/*.ts']), 0, 'no braces means no budget cost');
+    assert.equal(countBraceExpansions(['src/*.{ts,tsx}']), 2);
+    assert.equal(countBraceExpansions(['{a,b}/{c,d}/*.{ts,tsx}']), 8);
+    assert.equal(countBraceExpansions(['src/*.{ts,tsx}', '{a,b,c}/**']), 5);
+});
+
+test('rules: a paths list over the brace-expansion budget fails', () => {
+    // Over the budget Claude Code uses the pattern unexpanded, and its literal braces match
+    // nothing — the rule silently stops firing.
+    const many = Array.from({ length: 11 }, () => '{a,b,c,d}').join('/');
+    const root = makeCleanRepo({
+        '.claude/rules/style.md': ['---', 'paths:', '  - "src/**/*.ts"', `  - "${many}/*.ts"`, '---', '', '# Style'].join('\n'),
+    });
+    const msgs = messagesFor(root, 'rules');
+    assert.ok(msgs.some((m) => /pattern budget/.test(m)), msgs.join('\n'));
+});
+
+test('rules: an invalid glob is reported as invalid, not as matching nothing', () => {
+    const root = makeCleanRepo({
+        '.claude/rules/style.md': ['---', 'paths:', '  - "photos [2024/**"', '---', '', '# Style'].join('\n'),
+    });
+    const msgs = messagesFor(root, 'rules');
+    assert.ok(msgs.some((m) => /not a valid pattern/.test(m)), msgs.join('\n'));
+});
+
+// ── unit: effective size ──────────────────────────────────────────────────────────────────────
+
+test('stripMaintainerComments removes block-level HTML comments', () => {
+    const out = stripMaintainerComments(['# Title', '<!-- a note -->', 'body', '<!--', 'multi', 'line', '-->', 'tail'].join('\n'));
+    assert.equal(out.replace(/\n+/g, '\n'), '# Title\nbody\ntail');
+});
+
+test('stripMaintainerComments preserves comments inside fenced code blocks', () => {
+    // Those are not stripped by Claude Code, so they still cost context and still count.
+    const src = ['# Title', '```html', '<!-- shown to the reader -->', '```', 'tail'].join('\n');
+    assert.ok(stripMaintainerComments(src).includes('<!-- shown to the reader -->'));
+});
+
+test('budget measures effective size, so maintainer comments are free', () => {
+    const padding = Array(40).fill('<!-- a maintainer note that never reaches context -->').join('\n');
+    const root = makeCleanRepo({
+        'CLAUDE.md': ['# Fixture', '- [style](.claude/rules/style.md)', '- [guide](docs/guide.md)', padding].join('\n'),
+    });
+    assert.ok(!failedChecks(root).has('budget'), 'comment lines must not count against the ceiling');
+});
+
+// ── nested .claude/ directories ───────────────────────────────────────────────────────────────
+
+test('listRuleFiles finds rules in nested .claude/rules/ directories', () => {
+    const root = makeCleanRepo({
+        'packages/api/.claude/rules/api.md': ['---', 'paths:', '  - "src/**/*.ts"', '---', '', '# API'].join('\n'),
+    });
+    const found = listRuleFiles(root);
+    assert.ok(found.includes('packages/api/.claude/rules/api.md'), found.join(', '));
+    assert.ok(found.includes('.claude/rules/style.md'));
+});
+
+test('routing: a rule in a nested .claude/rules/ must still be routed', () => {
+    const root = makeCleanRepo({
+        'packages/api/.claude/rules/api.md': ['---', 'paths:', '  - "src/**/*.ts"', '---', '', '# API'].join('\n'),
+    });
+    const msgs = messagesFor(root, 'routing');
+    assert.ok(msgs.some((m) => /packages\/api\/\.claude\/rules\/api\.md/.test(m)), msgs.join('\n'));
+});
+
+test('listSkillFiles finds per-directory skills as well as root ones', () => {
+    const root = makeCleanRepo({
+        '.claude/skills/root-skill/SKILL.md': '# root\n',
+        'packages/api/.claude/skills/api-skill/SKILL.md': '# api\n',
+    });
+    const found = listSkillFiles(root);
+    assert.ok(found.includes('.claude/skills/root-skill/SKILL.md'), found.join(', '));
+    assert.ok(found.includes('packages/api/.claude/skills/api-skill/SKILL.md'), found.join(', '));
+});
+
+test('routing: .claude/CLAUDE.md is the project file, not a nested one to route', () => {
+    // `./CLAUDE.md` and `./.claude/CLAUDE.md` are both valid locations for the PROJECT file, so the
+    // latter must not be demanded in the routing table the way a per-directory file is.
+    const root = makeCleanRepo({ '.claude/CLAUDE.md': '# alternative project file location\n' });
+    const msgs = messagesFor(root, 'routing');
+    assert.ok(!msgs.some((m) => /\.claude\/CLAUDE\.md/.test(m)), msgs.join('\n'));
 });
 
 // ── unit: reference classification ────────────────────────────────────────────────────────────

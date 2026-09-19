@@ -109,6 +109,14 @@ linked-into-MJ local-only rule, repository structure, and build commands — plu
 a routing table and the decision procedure above, so the next person with
 something to add has somewhere to put it other than the bottom of this file.
 
+In raw lines the file grew 133 → 173, which looks like a 30% regression. It
+isn't, and the reason is worth knowing: **Claude Code strips block-level HTML
+comments before injecting a `CLAUDE.md` into context**, and blank lines cost
+nothing either. Measured as context actually consumed, the file went **119 → 128
+effective lines** — nine lines, bought a routing table and a skills index. The
+gate budgets the effective number for the same reason, which also means a
+maintainer comment explaining a rule is free rather than something to ration.
+
 `docs/claude/README.md` survives as a human-facing router. `01`–`09` are gone;
 the manifest says where each of their 45 sections went.
 
@@ -122,16 +130,38 @@ one whose green means nothing.
 | Check | Fails when |
 |---|---|
 | COMPLETENESS | a manifest section has no destination, names one that does not exist, or is deleted without a reason |
-| BUDGET | root `CLAUDE.md` exceeds its committed line/byte ceiling |
-| REFERENCES | a markdown link or backticked path in any instruction file does not resolve |
-| ROUTING | a rule or nested `CLAUDE.md` exists on disk but is missing from the root routing table |
-| RULES | frontmatter does not parse, `paths` is absent, or a glob matches nothing tracked |
-| SKILLS | a `.claude/skills/*/SKILL.md` is missing from the routing table |
+| BUDGET | root `CLAUDE.md` exceeds its committed ceiling, measured as *effective* size (HTML comments stripped, blank lines excluded) |
+| REFERENCES | a markdown link in any instruction file does not resolve |
+| ROUTING | a rule, nested `CLAUDE.md`, or skill exists on disk but is missing from the root routing table |
+| RULES | frontmatter does not parse, `paths` is absent, a glob is invalid, a glob matches nothing tracked, or the `paths` list blows the 1,000-pattern brace-expansion budget |
+
+Rule and skill discovery covers **nested** `.claude/` directories too
+(`packages/Foo/.claude/rules/`, `packages/Foo/.claude/skills/`), which Claude
+Code loads as well — a rule added beside a package would otherwise be invisible
+to every check here.
 
 The budget is the point. The root file did not reach 2,256 lines in MJ through
 carelessness; it got there one reasonable-seeming addition at a time, each of
 which was individually defensible. A committed ceiling converts "keep it small"
 from an intention into a property of the repo.
+
+### Checking what actually loaded
+
+The gate proves a rule *can* fire. Two built-in tools prove one *did*, which is
+what you want when a rule seems to be ignored:
+
+- **`/context`** lists the instruction files in the session under **Memory
+  files**. If a file is not there, Claude cannot see it.
+- **The `InstructionsLoaded` hook** logs which `CLAUDE.md` and rules files
+  loaded, when, and why — the documented way to debug path-scoped rules and
+  lazily-loaded files in subdirectories.
+
+Worth knowing before reaching for either: instruction files are delivered as a
+user message after the system prompt, not as part of it. They are context, not
+enforcement. Anything that must happen every time regardless of what Claude
+decides belongs in a hook or a gate, not in a rule — which is why the footguns
+with real money behind them (`RecurrenceMonths`, migration ordering, seed
+coverage) each have a script in `scripts/` as well as a sentence in a rule.
 
 The manifest is the review artifact. Relocating 45 sections is not reviewable by
 reading a diff — the content moves between files, so every line shows as both a
