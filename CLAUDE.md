@@ -105,8 +105,8 @@ npm run build:site          # the public site; publish-site.yml runs this on pus
 ```
 
 The full development workflow (where to add code, capturing codegen +
-metadata-sync migrations, releasing) is in the README's "Development
-workflow" table.
+metadata-sync migrations) is the README's "Development workflow" section.
+Cutting a release is [`docs/release.md`](docs/release.md).
 
 ---
 
@@ -142,6 +142,7 @@ fiction headers, frontmatter, and cross-week coherence these skills own.
 
 ### Repo documentation
 
+- [`docs/release.md`](docs/release.md) — the release runbook: the steps, `npm run release:plan`, and what to do when a run goes red
 - [`docs/template-docs/`](docs/template-docs/README.md) — branching, publishing, codegen + metadata migrations, linking to MJ, versioning
 - [`docs/claude/README.md`](docs/claude/README.md) — how the MJ guidance is organized here
 - [`plans/`](plans/_README.md) — design documents, including [the rationale for this arrangement](plans/claude-instruction-architecture.md)

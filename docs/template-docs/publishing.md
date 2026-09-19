@@ -2,29 +2,12 @@
 
 An Open App is **consumed from GitHub + npm**: the manifest and migrations are
 fetched from a tagged GitHub release, the packages are installed from npm.
-Publishing = making those two things exist for a version. The pipeline is
-already wired in `.github/workflows/publish.yml`.
+Publishing = making those two things exist for a version.
 
-## The release pipeline (what publish.yml does)
-
-Trigger: push to `main` (i.e. merging the release PR from `next`).
-
-1. Validations: lockfile case-sensitivity, migration filenames, every package
-   already exists on npm, `repository.url` present (npm provenance).
-2. If there are **no pending changesets → no-op** (safe to merge doc-only PRs).
-3. `changeset version` — bumps all fixed packages to the next version and
-   verifies it against the expected bump, computed by
-   `.github/scripts/determine-next-version.mjs` (major changeset → major; new
-   migrations since the last tag → at least minor; else patch). On the **first**
-   release there is no `vX.Y.Z` tag to measure against, so every migration in the
-   tree counts as new. A missing tag in a repo that *has* released before is a
-   release-setup error and stops the run — the two states are not the same, and
-   conflating them is what kept this repo from ever publishing (#48).
-4. Syncs `mj-app.json`: `"version"` ← package version; `"mjVersionRange"` ←
-   derived from the `@memberjunction/core` peer dep.
-5. Builds all packages, then `changeset publish` → **npm**.
-6. Tags `vX.Y.Z`, pushes the version-bump commit back to `main`.
-7. Merges `main` → `next` and refreshes `package-lock.json` there.
+**How to cut a release — the steps, and what to do when a run goes red — is
+[`docs/release.md`](../release.md).** It is the single description of the
+pipeline; this file keeps only what it does not cover: the one-time npm
+trusted-publishing bootstrap, and the no-breaking-changes policy.
 
 ## One-time setup for a new app (first publish bootstrap) — ✅ DONE 2026-09-16
 
@@ -86,8 +69,10 @@ npm trust list @mj-biz-apps/more-cheese-entities
 ## GitHub release tags
 
 `mj app install <repo>` resolves versions from **git tags** (`vX.Y.Z`) — the
-publish workflow creates them. The manifest version at a tag must equal the
-tag (step 4 guarantees it).
+publish workflow creates them. The manifest version at a tag must equal the tag;
+`scripts/sync-app-version.mjs` derives it when the release branch is cut and
+`publish.yml` re-runs the same script with `--check` before publishing, so a
+manifest that disagrees stops the release rather than reaching npm.
 
 ## The no-breaking-changes policy (IMPORTANT)
 
@@ -97,11 +82,3 @@ parameters. Anything breaking forces a **major** bump. Consult MemberJunction's
 `packages/OpenApp/PUBLISH_NO_BREAK_POLICY.md` before authoring any migration
 that touches an existing published schema — upgraders run only your NEW
 migrations, never a rebuild.
-
-## Publish checklist
-
-- [ ] Changesets on `next` describe everything since the last release
-- [ ] Migrations + regenerated code committed together (see codegen doc)
-- [ ] `next` is green (build.yml + changes.yml)
-- [ ] Release PR `next` → `main` merged
-- [ ] Workflow run green; tag exists; packages on npm; `next` got the merge-back
