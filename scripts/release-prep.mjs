@@ -387,6 +387,30 @@ export function parseChangesetFile(text, file) {
 
 // ── Fact gathering (impure; everything above is not) ────────────────────────────────────────────
 
+/**
+ * `JSON.parse` with the subject of the parse attached to the failure.
+ *
+ * A bare parse reports `Unexpected token '<'` and nothing else — not which file, not which package,
+ * not what was being done. The three things this script parses fail in ways that read identically
+ * from that message alone, and the likeliest of them is a registry or proxy answering `npm view`
+ * with an HTML error page, where the payload is the whole diagnosis.
+ *
+ * @param source what was being parsed, as a reader would name it (a path, or the command that
+ *               produced the text)
+ */
+function parseJson(text, source) {
+    try {
+        return JSON.parse(text);
+    } catch (error) {
+        const preview = String(text ?? '').trim().slice(0, 200);
+        throw new Error(
+            `release-prep could not parse ${source} as JSON: ${error.message}. ` +
+                `First ${preview.length} character(s) received: ${JSON.stringify(preview)}`,
+            { cause: error },
+        );
+    }
+}
+
 /** git, with the failure turned into something a reader can act on. */
 function git(root, args) {
     try {
@@ -434,7 +458,7 @@ function readChangesets(root) {
 /** The version the group is at now. The same anchor sync-app-version.mjs derives mj-app.json from. */
 function readCurrentVersion(root) {
     const path = join(root, VERSION_ANCHOR);
-    const manifest = JSON.parse(readFileSync(path, 'utf8'));
+    const manifest = parseJson(readFileSync(path, 'utf8'), path);
     if (typeof manifest.version !== 'string' || manifest.version === '') {
         throw new Error(`release-prep: ${VERSION_ANCHOR} has no version — there is nothing to increment`);
     }
@@ -501,17 +525,32 @@ function readPublishedVersions(packages) {
                 error: `could not ask the npm registry about ${pkg.name}: ${stderr.trim() || error.message}`,
             };
         }
-        const parsed = JSON.parse(raw);
+        const parsed = parseJson(raw, `\`npm view ${pkg.name} versions --json\` output`);
         // npm returns a bare string, not an array, for a package with exactly one version.
         published[pkg.name] = Array.isArray(parsed) ? parsed : [parsed];
     }
     return { published, error: null };
 }
 
-/** The first of `candidates` that resolves here, or `null`. */
+/**
+ * The first of `candidates` that resolves here, or `null` when git ran and resolved none of them.
+ *
+ * `run.error` — git missing from PATH, or unspawnable — is NOT that answer and must not be folded
+ * into it. A `null` from here reaches the reader as the STALE_MAIN_BLOCKER's advice to run
+ * `git fetch origin main next`, which cannot possibly help when git itself is what failed. This is
+ * the one place in the file where an unknown could become a specific and wrong instruction, so it
+ * throws instead.
+ */
 function resolveRef(root, candidates) {
     for (const ref of candidates) {
         const run = spawnSync('git', ['rev-parse', '--verify', '--quiet', ref], { cwd: root, stdio: 'ignore' });
+        if (run.error) {
+            throw new Error(
+                `release-prep could not execute git to resolve ${ref}: ${run.error.message}. This is git ` +
+                    'failing to start, not a ref that is missing — nothing about fetching would help.',
+                { cause: run.error },
+            );
+        }
         if (run.status === 0) {
             return ref;
         }
@@ -553,7 +592,8 @@ function readMainReachedNext(root) {
  * as "not found" and read as a real gate failure.
  */
 function runGates(root) {
-    const manifest = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+    const manifestPath = join(root, 'package.json');
+    const manifest = parseJson(readFileSync(manifestPath, 'utf8'), manifestPath);
     const scripts = manifest.scripts ?? {};
     const env = { ...process.env, PATH: `${join(root, 'node_modules', '.bin')}${delimiter}${process.env.PATH ?? ''}` };
     const results = {};
@@ -572,7 +612,16 @@ function runGates(root) {
                 cause: run.error,
             });
         }
-        // A null status means a signal killed it, which is a failure and not a pass.
+        // A null status means a signal killed the gate. Mapping it to 1 here DELIBERATELY pre-empts
+        // `assertStateIsWellFormed`'s "a gate that did not run must not be read as a gate that
+        // passed" throw, which is therefore unreachable for the signal case from this gatherer. The
+        // same fact is decided in two places on purpose, because the two callers know different
+        // things: there, a missing exit code means the caller built `gateResults` wrong and there is
+        // nothing to report but the defect; here, we watched this gate start and get killed, which
+        // is a fact about this run. 1 is the safe answer because both readings of a killed gate —
+        // it was failing, or we never found out — are "not a pass", and the release must not proceed
+        // on either. It also produces the better message: a named red gate with its meaning, rather
+        // than a stack trace. The throw stays as the backstop for any `gateResults` not built here.
         results[gate] = run.status === null ? 1 : run.status;
         output[gate] = `${run.stdout ?? ''}${run.stderr ?? ''}`.trim();
     }
