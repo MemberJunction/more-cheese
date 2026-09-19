@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Create an interactive Sankey flow diagram that visualizes how members move through different engagement stages in our association. The left side should start with membership type categories (Professional, Student, Associate, etc.), flowing into event participation levels (High: 5+ events, Medium: 2-4 events, Low: 1 event, None: 0 events), then flowing into course completion levels (Completed 3+, Completed 1-2, Enrolled but not completed, No courses). Color-code each flow band by the originating membership type. The thickness of each flow should represent the number of members following that path. Include tooltips on hover showing the exact member count and percentage for each flow segment. When I click on any flow band between two stages, show me a summary panel with the count and a bar chart breaking down those members by their chapter affiliation. Then, when I click on any bar in that chapter breakdown, show me a detailed table listing all the individual members in that segment - include their name, email, join date, and total engagement score. Finally, make sure I can click on any member row to open their member record. Make the diagram responsive and ensure the labels are readable at each stage. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

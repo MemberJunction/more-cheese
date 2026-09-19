@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "Show me a complete activity timeline for member 'Sarah Johnson' including all memberships, events attended, courses completed, chapters joined, and committees served on. Present as a chronological timeline chart. When I click on any activity, show me the specific details in a panel or table. From there, let me open the actual record for that activity. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

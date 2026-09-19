@@ -1,6 +1,6 @@
 {
   "fields": {
-    "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+    "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
     "ApplicationID": "@lookup:MJ: Applications.Name=Bulk Operations",
     "Sequence": 18,
     "IsActive": true,

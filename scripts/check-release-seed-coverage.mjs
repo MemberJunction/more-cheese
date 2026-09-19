@@ -97,6 +97,7 @@ const NOT_A_RECORD_FILE = new Set(['.mj-sync.json', 'checkpoint.json']);
 const SEED_FILE = /Metadata[_ -]?Sync.*\.sql$/i;
 
 const UUID = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+const UUID_ANYWHERE = /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/g;
 
 /** Every record file under `dir`, sorted, excluding generator output. */
 function collectRecordFiles(dir, acc = []) {
@@ -150,8 +151,17 @@ function readShippedSql(migrationsDir) {
     if (!existsSync(migrationsDir)) return null;
     const files = readdirSync(migrationsDir).filter((f) => f.endsWith('.sql'));
     if (files.length === 0) return null;
+    // Every UUID named anywhere in the shipped SQL, collected once per file. A substring search of
+    // each declared id over the joined SQL (the previous shape) is quadratic: the v1.2.0 seed is
+    // 340 MB and this repo declares ~88k ids, which put the gate past an hour. A Set lookup is
+    // flat in the number of ids and finishes in seconds; files are read one at a time so the whole
+    // seed is never held in memory at once.
+    const shippedIds = new Set();
+    for (const f of files) {
+        for (const m of readFileSync(join(migrationsDir, f), 'utf8').matchAll(UUID_ANYWHERE)) shippedIds.add(m[0].toLowerCase());
+    }
     return {
-        haystack: files.map((f) => readFileSync(join(migrationsDir, f), 'utf8')).join('\n').toLowerCase(),
+        shippedIds,
         seedFiles: files.filter((f) => SEED_FILE.test(f)).sort(),
     };
 }
@@ -215,7 +225,7 @@ export function findSeedCoverageGaps(repoRoot = REPO_ROOT) {
             // The parsed tree is dropped here rather than accumulated: `generated/people/.people.json`
             // alone is 22 MB, and holding every tree at once is how this stops being runnable in CI.
             if (shipped.seedFiles.length > 0) {
-                const unseen = unique.filter((id) => !shipped.haystack.includes(id.toLowerCase()));
+                const unseen = unique.filter((id) => !shipped.shippedIds.has(id.toLowerCase()));
                 if (unseen.length > 0) uncoveredByFile.push({ shown, unseen, total: unique.length });
             }
             void name;

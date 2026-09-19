@@ -14,7 +14,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { SYNC_TREES, findSeedCoverageGaps } from './check-release-seed-coverage.mjs';
@@ -254,22 +254,33 @@ test('a root with neither sync tree is reported as not the repo root', () => {
 
 // ── The real repo ───────────────────────────────────────────────────────────────────────────────
 
-/**
- * Today this repo has no seed, so the gate FAILS by design — and this case pins that the failure is
- * the one-sentence "no seed yet" report over a tree it genuinely read, not a crash and not a dump.
- * When the release seed lands, this case is what should be flipped to expect a pass.
- */
-test('the checked-in repo reports the no-seed state over a tree it actually read', () => {
+// The checked-in repo has two legitimate states and the gate must be right in both: before the first
+// seed was cut (one "contains NO *Metadata_Sync*.sql" finding), and after it (every declared id covered,
+// zero findings). Which state the tree is in is read from migrations/, not assumed, so this test keeps
+// passing as seeds are cut and consolidated — and still fails if a seed lands that misses records.
+const repoHasSeed = readdirSync(path.join(REPO_ROOT, 'migrations')).some((f) => /Metadata[_ -]?Sync.*\.sql$/i.test(f));
+
+test('the checked-in repo is measured over a tree it actually read, in whichever seed state it is in', () => {
     const { problems, idsChecked, filesRead, seedFiles } = findSeedCoverageGaps(REPO_ROOT);
-    assert.deepEqual(seedFiles, []);
     assert.ok(idsChecked > 100000, `expected the real tree to declare >100k ids, got ${idsChecked}`);
     assert.ok(filesRead > 200, `expected >200 record files, got ${filesRead}`);
-    assert.equal(problems.length, 1, problems.map((p) => p.slice(0, 200)).join('\n'));
-    assert.match(problems[0], /contains NO \*Metadata_Sync\*\.sql/);
+    if (repoHasSeed) {
+        assert.ok(seedFiles.length > 0);
+        assert.equal(problems.length, 0, problems.map((p) => p.slice(0, 200)).join('\n'));
+    } else {
+        assert.deepEqual(seedFiles, []);
+        assert.equal(problems.length, 1, problems.map((p) => p.slice(0, 200)).join('\n'));
+        assert.match(problems[0], /contains NO \*Metadata_Sync\*\.sql/);
+    }
 });
 
-test('the CLI exits non-zero while there is no seed', () => {
+test('the CLI exit code follows the repo state: non-zero with no seed, zero with a covering seed', () => {
     const run = spawnSync(process.execPath, [path.join(HERE, 'check-release-seed-coverage.mjs')], { encoding: 'utf8' });
-    assert.equal(run.status, 1);
-    assert.match(run.stderr, /contains NO \*Metadata_Sync\*\.sql/);
+    if (repoHasSeed) {
+        assert.equal(run.status, 0, run.stderr.slice(0, 500));
+        assert.match(run.stdout + run.stderr, /coverage passed/i);
+    } else {
+        assert.equal(run.status, 1);
+        assert.match(run.stderr, /contains NO \*Metadata_Sync\*\.sql/);
+    }
 });

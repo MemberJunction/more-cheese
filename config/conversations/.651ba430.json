@@ -21,7 +21,7 @@
             "Role": "User",
             "Message": "I need a comprehensive dashboard showing our membership and revenue trends over the past 5 years. Create a line chart with two Y-axes: the left axis should show membership count (as a line), and the right axis should show total revenue (as a different colored line). Make the chart interactive so that when I click on any data point, it opens up a pie chart breaking down that specific year's activity by category (membership fees, event revenue, course revenue). Then, when I click on any slice of that pie chart, show me a detailed table of all the transactions in that category for that year. Finally, make sure I can click on any row in that transaction table to open the actual invoice or membership record in the system. I want to see clear axis labels, a legend distinguishing the two metrics, and smooth navigation through all four levels. [NO CHAT]",
             "HiddenToUser": false,
-            "UserID": "@lookup:MJ: Users.Email=yuri.lee@bluecypress.io",
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
             "IsPinned": false,
             "Status": "Complete",
             "OriginalMessageChanged": false,

@@ -71,45 +71,24 @@ jobs:
         if: steps.changeset_check.outputs.pending != '0' && github.ref == 'refs/heads/main' && !github.event.inputs.targetVersion
         id: version_check
         run: |
-          # Get current version from entities package (any of the 4 BAC packages works since they're fixed-versioned)
+          # The rule — major changeset wins, else new migrations force a minor, else patch —
+          # lives in determine-next-version.mjs with its own fixtures, because getting it wrong
+          # is only ever discovered here, on the release commit. Both previous shapes of this
+          # step conflated "this repo has never released" with "the tag for the current version
+          # is missing": the rev-parse guard read a missing tag as "no new migrations" and
+          # expected a patch, and the bare `git diff v<current>` exits 128 on the first release,
+          # where no v* tag can exist yet. The script keeps those two states apart — the first
+          # is normal and measures the whole tree, the second still fails loudly.
+          #
+          # The self-test runs first, in this same job, for the reason changes.yml already
+          # states about its gates: one whose spec has gone red is one whose green means nothing.
+          node ./.github/scripts/determine-next-version.mjs --self-test
+
+          # Any of the three packages works as the version source — the changesets "fixed"
+          # group keeps them in step. The script appends EXPECTED_NEXT_VERSION to $GITHUB_OUTPUT.
           CURRENT_VERSION=$(jq -r .version packages/Entities/package.json)
           echo "Current version: $CURRENT_VERSION"
-
-          IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
-          NEXT_MAJOR_VERSION="$(( ${VERSION_PARTS[0]} + 1 )).0.0"
-          NEXT_MINOR_VERSION="${VERSION_PARTS[0]}.$(( ${VERSION_PARTS[1]} + 1 )).0"
-          NEXT_PATCH_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$(( ${VERSION_PARTS[2]} + 1 ))"
-
-          # Check if any changeset requests a major bump
-          HAS_MAJOR=false
-          for f in .changeset/*.md; do
-            [ "$f" = ".changeset/README.md" ] && continue
-            [ ! -f "$f" ] && continue
-            if grep -qE '^"@mj-biz-apps/.*":\s*major' "$f"; then
-              HAS_MAJOR=true
-              break
-            fi
-          done
-
-          if [ "$HAS_MAJOR" = true ]; then
-            echo "Major changeset found — bumping major version"
-            echo "EXPECTED_NEXT_VERSION=$NEXT_MAJOR_VERSION" >> "$GITHUB_OUTPUT"
-          else
-            # Check for new migration files since the tag of the current version. Same rule as MJ's
-            # publish.yml and run the same way: bare, no rev-parse guard, no `|| true`. If the tag is
-            # missing the diff fails loudly here instead of reading as "no migrations" and quietly
-            # expecting a patch bump (that guard is how the first release computed 1.1.1 against
-            # changesets that said 1.2.0). A missing v<current> tag is a release-setup error to fix.
-            NEW_MIGRATION_FILES=$(git --no-pager diff --name-only "v${CURRENT_VERSION}" "${{ github.sha }}" -- migrations/)
-
-            if [ -n "$NEW_MIGRATION_FILES" ]; then
-              echo "New migrations found — bumping minor version"
-              echo "EXPECTED_NEXT_VERSION=$NEXT_MINOR_VERSION" >> "$GITHUB_OUTPUT"
-            else
-              echo "No new migrations — bumping patch version"
-              echo "EXPECTED_NEXT_VERSION=$NEXT_PATCH_VERSION" >> "$GITHUB_OUTPUT"
-            fi
-          fi
+          node ./.github/scripts/determine-next-version.mjs "$CURRENT_VERSION" "${{ github.sha }}" > /dev/null
 
       - name: Update version
         if: steps.changeset_check.outputs.pending != '0'

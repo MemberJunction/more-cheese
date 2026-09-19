@@ -62,8 +62,8 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (399 distinct records; 425 declared across
--- 40 directories, 26 of them declared in two directories and inserted once):
+-- Seed provenance (388 distinct records; 414 declared across
+-- 37 directories, 26 of them declared in two directories and inserted once):
 --     75 from config/conversations
 --     63 from config/queries
 --     46 from config/artifacts
@@ -72,15 +72,13 @@
 --     25 from config/resource-permissions
 --     25 from config/user-views
 --     23 from config/conversation-detail-artifacts
---     22 from config/user-applications
+--     19 from config/user-applications
 --     10 from config/sonar-factors
 --     10 from config/sonar-model-factors
 --     10 from config/sonar-model-related-entities
 --      4 from config/dashboard-category-links
 --      4 from config/dashboards
---      4 from config/ml-models
 --      4 from config/sonar-score-bands
---      3 from config/ml-training-pipelines
 --      2 from config/application-roles
 --      2 from config/content-sources
 --      2 from config/file-storage-account-permissions
@@ -95,7 +93,6 @@
 --      1 from config/dashboard-categories
 --      1 from config/file-storage-accounts
 --      1 from config/file-storage-providers
---      1 from config/ml-model-scoring-bindings
 --      1 from config/projects
 --      1 from config/sonar-score-band-sets
 --      1 from config/sonar-score-model-versions
@@ -289,14 +286,6 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: File Storage Account Permissions', '0ADD75FF-B902-55D7-81AB-DC6535E81749'),
     ('MJ: File Storage Accounts', '636E204B-12CB-4D67-A861-09DA9C825BA3'),
     ('MJ: File Storage Providers', 'C9B9433E-F36B-1410-8DA0-00021F8B792E'),
-    ('MJ: ML Model Scoring Bindings', '87CC87FF-D9ED-4183-A25B-2C9C787D3103'),
-    ('MJ: ML Models', 'E93F0238-6902-4521-87D9-FE9A1201B001'),
-    ('MJ: ML Models', 'E93F0238-6902-4521-87D9-FE9A1201B002'),
-    ('MJ: ML Models', 'E93F0238-6902-4521-87D9-FE9A1201B003'),
-    ('MJ: ML Models', '451EE0FD-23E7-4913-9DEA-8E32A4542E29'),
-    ('MJ: ML Training Pipelines', '8A1C44F3-938C-4E65-B6DE-D621BC4C3001'),
-    ('MJ: ML Training Pipelines', '8A1C44F3-938C-4E65-B6DE-D621BC4C3002'),
-    ('MJ: ML Training Pipelines', '8A1C44F3-938C-4E65-B6DE-D621BC4C3003'),
     ('MJ: Projects', '3C9E1F52-7A4B-4D8E-9B2C-6F1A8D3E5B70'),
     ('MJ: Queries', '01233BE6-F40A-48C0-81F3-A04476E1429F'),
     ('MJ: Queries', '04282792-0C95-4E26-8F54-942C7784CF8F'),
@@ -469,14 +458,11 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Score Models', '05C13018-27B8-53DE-9D1D-129E6E15DF1C'),
     ('MJ_BizApps_Sonar: Time Windows', 'CF6F428F-7016-5898-BF94-22795E3B3F91'),
     ('MJ_BizApps_Sonar: Time Windows', '97DF3796-A479-558E-9927-755A48D0D061'),
-    ('MJ: User Applications', '179DE7D3-EA5D-4A9A-8F4E-27A5EDB25460'),
-    ('MJ: User Applications', '22256767-18DA-4D43-9991-AFC6D2B3F605'),
     ('MJ: User Applications', '272F8C07-1C6F-41F9-AFD5-648ED362F5A6'),
     ('MJ: User Applications', '2E205A2C-270F-4BEC-AAB8-54D412105993'),
     ('MJ: User Applications', '3385D969-9511-4517-9F5D-0F7FDD9BF8C5'),
     ('MJ: User Applications', '38FCF30B-F7A8-49E5-A606-69869E960048'),
     ('MJ: User Applications', '46C26329-6033-4B48-AC2E-2703093EAC43'),
-    ('MJ: User Applications', '4B5B4F25-4672-4A93-B6C4-A63031669F25'),
     ('MJ: User Applications', '5A29431D-B198-4CB5-9346-77A051FE6CE6'),
     ('MJ: User Applications', '5C2971D3-B51E-4BF3-8E31-5E3EFDFE674B'),
     ('MJ: User Applications', '5D1134B3-EDE3-4334-BB42-435E04E0504E'),
