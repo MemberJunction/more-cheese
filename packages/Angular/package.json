@@ -7,7 +7,7 @@
   "types": "dist/public-api.d.ts",
   "scripts": {
     "build": "ngc",
-    "test": "echo \"No tests configured yet\""
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",

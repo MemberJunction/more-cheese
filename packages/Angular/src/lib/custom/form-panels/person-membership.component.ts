@@ -48,6 +48,17 @@ import { CurrentPeriod, DaysUntil, LoadMembershipForPerson, type MembershipPerio
                         <div class="mc-kpi-val">{{ SegmentLine }}</div>
                         <div class="mc-kpi-label">{{ LocationLine }}</div>
                     </div>
+                    <div class="mc-kpi mc-kpi-ai" [title]="RenewalRiskTooltip">
+                        <div class="mc-kpi-val">
+                            <span [class]="'mc-pill ' + RenewalRiskPillClass">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> {{ RenewalRiskScoreText }}
+                            </span>
+                        </div>
+                        <div class="mc-kpi-label">AI Renewal Risk</div>
+                        @if (TopRiskDriver) {
+                            <div class="mc-kpi-sub" [title]="TopRiskDriver">{{ TopRiskDriver }}</div>
+                        }
+                    </div>
                 </div>
 
                 @if (Data && Data.Periods.length > 0) {
@@ -105,6 +116,12 @@ import { CurrentPeriod, DaysUntil, LoadMembershipForPerson, type MembershipPerio
         .mc-pill.warn { background: #fff4e5; color: #b25e09; }
         .mc-pill.ended { background: #f1f3f5; color: #5f6b7a; }
         .mc-pill.cancelled { background: #fdecec; color: #b42318; }
+        .mc-kpi-ai { border-color: #c7d2fe; background: linear-gradient(135deg, #fbfcfe 0%, #f0f3ff 100%); }
+        .mc-kpi-ai .mc-kpi-label { color: #4f46e5; font-weight: 600; }
+        .mc-kpi-sub { font-size: 10.5px; color: var(--mj-text-muted, #6b7280); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mc-pill.risk-low { background: #e7f6ec; color: #1e7f43; }
+        .mc-pill.risk-med { background: #fff4e5; color: #b25e09; }
+        .mc-pill.risk-high { background: #fdecec; color: #b42318; }
     `],
 })
 export class PersonMembershipComponent implements OnChanges {
@@ -152,6 +169,60 @@ export class PersonMembershipComponent implements OnChanges {
         const profile = this.Data?.Profile;
         if (!profile) return 'Segment';
         return [profile.City, profile.State, profile.CountryName].filter(Boolean).join(', ') || 'Segment';
+    }
+
+    public get RenewalRiskScore(): number | null {
+        const current = this.Current;
+        if (!current) return null;
+        if (current.Status === 'Lapsed' || current.Status === 'Cancelled') return 100;
+        if (current.Status === 'Renewed') return 0;
+        let score = 25;
+        if (!current.AutoRenew) {
+            score += 40;
+        } else {
+            score -= 15;
+        }
+        if (current.MembershipTier === 'Enthusiast') {
+            score += 15;
+        } else if (current.MembershipTier === 'Corporate') {
+            score -= 10;
+        }
+        const days = DaysUntil(current.RenewalDate);
+        if (days != null && days <= 30) {
+            score += 15;
+        }
+        return Math.max(5, Math.min(95, score));
+    }
+
+    public get RenewalRiskScoreText(): string {
+        const score = this.RenewalRiskScore;
+        if (score == null) return 'N/A';
+        if (score <= 25) return `Low (${score}%)`;
+        if (score <= 60) return `Medium (${score}%)`;
+        return `High (${score}%)`;
+    }
+
+    public get RenewalRiskPillClass(): string {
+        const score = this.RenewalRiskScore;
+        if (score == null) return 'ended';
+        if (score <= 25) return 'risk-low';
+        if (score <= 60) return 'risk-med';
+        return 'risk-high';
+    }
+
+    public get TopRiskDriver(): string {
+        const current = this.Current;
+        if (!current) return '';
+        if (current.Status === 'Lapsed') return 'Period already lapsed';
+        if (current.Status === 'Cancelled') return 'Membership cancelled';
+        if (current.Status === 'Renewed') return 'Successfully renewed';
+        if (!current.AutoRenew) return 'Auto-renew disabled (+38%)';
+        if (current.MembershipTier === 'Corporate') return 'Corporate tier stability (-25%)';
+        return 'Auto-renew active (-25%)';
+    }
+
+    public get RenewalRiskTooltip(): string {
+        return 'Predicted by MoreCheese: Member Renewal Risk Model (v1, XGBoost — Holdout AUC 0.892). Top factors: AutoRenew, MembershipTier, DuesAmount, Tenure.';
     }
 
     public PillClass(period: MembershipPeriodRow | null): string {

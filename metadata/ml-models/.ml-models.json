@@ -1,0 +1,498 @@
+[
+  {
+    "primaryKey": {
+      "ID": "E93F0238-6902-4521-87D9-FE9A1201B001"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 1,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
+      "FeatureSchema": [
+        {
+          "Name": "AutoRenew",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MembershipTier",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CommitteeCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.9162,
+        "f1": 0.9555,
+        "precision": 0.9271,
+        "recall": 0.9857,
+        "auc": 0.8082
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.9162,
+        "f1": 0.9556,
+        "precision": 0.9253,
+        "recall": 0.9878,
+        "auc": 0.7301
+      },
+      "FeatureImportance": {
+        "TenureDays": 936,
+        "DuesAmount": 605,
+        "EventsAttendedCount": 382,
+        "CoursesEnrolledCount": 252,
+        "PriorPeriodsCount": 123,
+        "AutoRenew": 99,
+        "MemberRegion=EU": 90,
+        "MemberSegment=Producer": 75,
+        "MemberSegment=Retailer": 71,
+        "MemberRegion=NA": 65,
+        "MemberRegion=RoW": 60,
+        "MemberSegment=Educator": 60,
+        "CommitteeCount": 52,
+        "MembershipTier=Enthusiast": 51,
+        "MemberSegment=Supplier": 42,
+        "MembershipTier=Individual": 25,
+        "MembershipTier=SmallBusiness": 11,
+        "MembershipTier=Corporate": 1
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Renewal Risk Tournament Wave 1",
+        "Algorithm": "LightGBM",
+        "Outcome": "Baseline Wave 1 - Archived"
+      },
+      "TrainingDurationSec": 2,
+      "TrainingRowCount": 5406,
+      "Status": "Archived"
+    },
+    "sync": {
+      "lastModified": "2026-09-19T16:33:57.833Z",
+      "checksum": "ebb0f179048cdd527b20defa2c45458beed9350d95ff61a7fbb52eadc419887d"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E93F0238-6902-4521-87D9-FE9A1201B002"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 2,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=XGBoost",
+      "FeatureSchema": [
+        {
+          "Name": "AutoRenew",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MembershipTier",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CommitteeCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.9108,
+        "f1": 0.9527,
+        "precision": 0.9229,
+        "recall": 0.9845,
+        "auc": 0.8117
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.9051,
+        "f1": 0.9496,
+        "precision": 0.9202,
+        "recall": 0.9811,
+        "auc": 0.7241
+      },
+      "FeatureImportance": {
+        "MembershipTier=Enthusiast": 0.2968,
+        "AutoRenew": 0.2004,
+        "TenureDays": 0.0441,
+        "DuesAmount": 0.0397,
+        "MemberRegion=RoW": 0.0372,
+        "MemberRegion=EU": 0.0359,
+        "MemberSegment=Retailer": 0.0342,
+        "CoursesEnrolledCount": 0.0334,
+        "EventsAttendedCount": 0.0331,
+        "MemberSegment=Educator": 0.0327,
+        "MembershipTier=Individual": 0.0325,
+        "CommitteeCount": 0.0312,
+        "PriorPeriodsCount": 0.0309,
+        "MemberSegment=Producer": 0.0306,
+        "MemberRegion=NA": 0.0294,
+        "MemberSegment=Supplier": 0.0288,
+        "MembershipTier=SmallBusiness": 0.0188,
+        "MembershipTier=Corporate": 0.0103
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Renewal Risk Tournament Wave 1",
+        "Algorithm": "XGBoost",
+        "Outcome": "Challenger - Validated"
+      },
+      "TrainingDurationSec": 1,
+      "TrainingRowCount": 5406,
+      "Status": "Validated"
+    },
+    "sync": {
+      "lastModified": "2026-09-19T16:33:57.830Z",
+      "checksum": "0d5925cc962f0ec92bfe18a21809021650c24672dea0f09777c53da85ac9db12"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E93F0238-6902-4521-87D9-FE9A1201B003"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 3,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=Random Forest",
+      "FeatureSchema": [
+        {
+          "Name": "AutoRenew",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MembershipTier",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CommitteeCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.9064,
+        "f1": 0.9501,
+        "precision": 0.9254,
+        "recall": 0.9762,
+        "auc": 0.7863
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.9051,
+        "f1": 0.9496,
+        "precision": 0.9202,
+        "recall": 0.9811,
+        "auc": 0.703
+      },
+      "FeatureImportance": {
+        "TenureDays": 0.2842,
+        "DuesAmount": 0.2004,
+        "EventsAttendedCount": 0.1102,
+        "CoursesEnrolledCount": 0.065,
+        "AutoRenew": 0.0636,
+        "PriorPeriodsCount": 0.0604,
+        "MemberRegion=EU": 0.0241,
+        "MemberRegion=NA": 0.024,
+        "MemberSegment=Enthusiast": 0.0231,
+        "MembershipTier=Enthusiast": 0.0205,
+        "MemberSegment=Producer": 0.0204,
+        "MemberSegment=Retailer": 0.0202,
+        "MemberRegion=RoW": 0.0194,
+        "CommitteeCount": 0.0154,
+        "MemberSegment=Supplier": 0.0153,
+        "MemberSegment=Educator": 0.0141,
+        "MembershipTier=Individual": 0.0097,
+        "MembershipTier=SmallBusiness": 0.0066,
+        "MembershipTier=Corporate": 0.0035
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Renewal Risk Tournament Wave 1",
+        "Algorithm": "Random Forest",
+        "Outcome": "Baseline - Draft"
+      },
+      "TrainingDurationSec": 1,
+      "TrainingRowCount": 5406,
+      "Status": "Draft"
+    },
+    "sync": {
+      "lastModified": "2026-09-19T16:33:57.832Z",
+      "checksum": "acf54ceb44c3499001b9dd9b29b3f4f89706da3a230549edbf85cc41893f272c"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "451EE0FD-23E7-4913-9DEA-8E32A4542E29"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 4,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
+      "ArtifactFileID": "127FB761-5DF0-47B8-B4C0-0EBF49A2DD02",
+      "FittedPreprocessing": {
+        "ops": [
+          {
+            "op": "onehot",
+            "col": "MembershipTier",
+            "vocabulary": [
+              "Corporate",
+              "Enthusiast",
+              "Individual",
+              "SmallBusiness"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberSegment",
+            "vocabulary": [
+              "Educator",
+              "Enthusiast",
+              "Producer",
+              "Retailer",
+              "Supplier"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberRegion",
+            "vocabulary": [
+              "EU",
+              "NA",
+              "RoW"
+            ]
+          },
+          {
+            "op": "impute",
+            "col": "TenureDays",
+            "strategy": "median",
+            "fill": 712
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastOrder",
+            "strategy": "median",
+            "fill": 30
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastEvent",
+            "strategy": "median",
+            "fill": 371
+          },
+          {
+            "op": "standardize",
+            "cols": [
+              "DuesAmount",
+              "TenureDays",
+              "PriorPeriodsCount",
+              "EventsAttendedCount",
+              "CoursesEnrolledCount",
+              "CommitteeCount",
+              "TotalOrderSpend",
+              "OrdersCount",
+              "DaysSinceLastOrder",
+              "DaysSinceLastEvent",
+              "CoursesCompletedCount"
+            ]
+          }
+        ]
+      },
+      "FeatureSchema": [
+        {
+          "Name": "AutoRenew",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MembershipTier",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CommitteeCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "TotalOrderSpend",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "OrdersCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastOrder",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastEvent",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesCompletedCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.8706,
+        "f1": 0.8563,
+        "precision": 0.8481,
+        "recall": 0.8706,
+        "auc": 0.8955
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.86,
+        "f1": 0.849,
+        "precision": 0.8507,
+        "recall": 0.86,
+        "auc": 0.9105
+      },
+      "FeatureImportance": {
+        "TotalOrderSpend": 0.2154,
+        "DuesAmount": 0.1851,
+        "TenureDays": 0.1042,
+        "DaysSinceLastEvent": 0.0895,
+        "CoursesEnrolledCount": 0.0403,
+        "AutoRenew": 0.0389,
+        "MemberRegion=NA": 0.0313,
+        "EventsAttendedCount": 0.0304,
+        "OrdersCount": 0.0278,
+        "PriorPeriodsCount": 0.0276,
+        "MemberSegment=Supplier": 0.0264,
+        "MemberRegion=EU": 0.0264,
+        "MemberSegment=Producer": 0.0244,
+        "MemberSegment=Retailer": 0.0227,
+        "DaysSinceLastOrder": 0.0226,
+        "CoursesCompletedCount": 0.0177,
+        "MemberRegion=RoW": 0.0152,
+        "MembershipTier=Individual": 0.0142,
+        "MembershipTier=Enthusiast": 0.0129,
+        "MemberSegment=Educator": 0.0115,
+        "MembershipTier=Corporate": 0.0062,
+        "MembershipTier=SmallBusiness": 0.0053,
+        "CommitteeCount": 0.004,
+        "MemberSegment=Enthusiast": 0
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Renewal Risk Tournament Wave 2 (Transactional Enrichment)",
+        "Algorithm": "LightGBM",
+        "Outcome": "Winner - Published"
+      },
+      "TrainingDurationSec": 7,
+      "TrainingRowCount": 850,
+      "Status": "Published"
+    },
+    "sync": {
+      "lastModified": "2026-09-19T16:33:57.833Z",
+      "checksum": "c22a8e8c8f8c61513b2128880b1faad7ee9582df18ae78bacce3f2c919e8967b"
+    }
+  }
+]
