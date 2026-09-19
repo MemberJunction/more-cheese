@@ -32,6 +32,12 @@ jobs:
       - name: Test the release gates themselves
         run: npm run test:gates
 
+      # The release-version rule only ever runs on the release commit, where a mistake is
+      # most expensive and least recoverable — so its fixtures run here, on every PR, rather
+      # than waiting for publish.yml to be the first thing that exercises them.
+      - name: Release version rule self-test
+        run: node ./.github/scripts/determine-next-version.mjs --self-test
+
       - name: Peer ranges match the manifest floor and name no exact version
         run: npm run lint:peer-ranges
 

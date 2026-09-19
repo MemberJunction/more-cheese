@@ -13,8 +13,13 @@ Trigger: push to `main` (i.e. merging the release PR from `next`).
    already exists on npm, `repository.url` present (npm provenance).
 2. If there are **no pending changesets → no-op** (safe to merge doc-only PRs).
 3. `changeset version` — bumps all fixed packages to the next version and
-   verifies it against the expected bump (major changeset → major; new
-   migrations since the last tag → at least minor; else patch).
+   verifies it against the expected bump, computed by
+   `.github/scripts/determine-next-version.mjs` (major changeset → major; new
+   migrations since the last tag → at least minor; else patch). On the **first**
+   release there is no `vX.Y.Z` tag to measure against, so every migration in the
+   tree counts as new. A missing tag in a repo that *has* released before is a
+   release-setup error and stops the run — the two states are not the same, and
+   conflating them is what kept this repo from ever publishing (#48).
 4. Syncs `mj-app.json`: `"version"` ← package version; `"mjVersionRange"` ←
    derived from the `@memberjunction/core` peer dep.
 5. Builds all packages, then `changeset publish` → **npm**.
