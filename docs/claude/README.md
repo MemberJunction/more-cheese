@@ -1,29 +1,50 @@
 # MemberJunction development guide (for this app)
 
-A topic-split, app-repo-focused adaptation of **MemberJunction's `CLAUDE.md`**
-— the development rulebook every MJ agent and developer works from. The
-original is one large file in the MJ repo
-(<https://github.com/MemberJunction/MJ/blob/next/CLAUDE.md>, or `CLAUDE.md` at
-the root of an MJ checkout); it remains the **authoritative source for MJ-core
-work** and is the fallback for anything not covered here. This set curates the
-parts that matter when building an Open App, reorganized so you can read (and
-an agent can load) only the topic you need.
+**This directory no longer holds the guidance — it points at it.**
 
-## Table of contents
+Until 2026-09, this folder held nine topic documents (`01-critical-rules.md`
+through `09-testing.md`): a curated snapshot of MemberJunction's `CLAUDE.md`,
+copied in when this repo was scaffolded from `mj-sample-open-app`. Eight of the
+ten files were still byte-identical to that template.
 
-| # | Doc | What it covers |
-|---|---|---|
-| 1 | [Critical rules](01-critical-rules.md) | The non-negotiables: commits, `any` types, destructive git, re-exports, dynamic imports, singletons, user preferences, tests |
-| 2 | [Git & branches](02-git-and-branches.md) | Feature-branch tracking rules and why they exist |
-| 3 | [Entities & data access](03-entities-and-data.md) | `Metadata`/`GetEntityObject`, `RunView`, error handling, typing rules, entity naming |
-| 4 | [Performance](04-performance.md) | Batching, `entity_object` vs `simple`, keyset pagination, reactive engines, caching |
-| 5 | [CodeGen & migrations](05-codegen-and-migrations.md) | What CodeGen owns, migration authoring rules, the change workflow |
-| 6 | [Angular](06-angular.md) | Component strategy, modern syntax, custom forms, design tokens |
-| 7 | [Code style](07-code-style.md) | Naming conventions, functional decomposition, DRY |
-| 8 | [Metadata & mj-sync](08-metadata-and-sync.md) | Authoring metadata files, seeding lookup tables, applications/nav items |
-| 9 | [Testing](09-testing.md) | Vitest conventions and expectations |
+The problem was not the content, it was the delivery. Ordinary markdown in an
+ordinary folder does not load. Nothing told an agent editing
+`generated/products/.products.json` that a document about `mj sync push` existed
+three directories away, and nothing kept the copy in step with its upstream.
 
-**Where to start:** read 1 (rules), then 3 + 5 (the data + codegen mental
-model) — the rest as the work touches them. The repo-specific workflow
-(worktree linking, publishing, branching model) lives one level up in
-[`docs/template-docs/`](../template-docs/README.md).
+That guidance now lives in [`.claude/rules/`](../../.claude/rules/) as
+**path-scoped rules**, which Claude Code loads automatically when a matching file
+is opened, and in [`CLAUDE.md`](../../CLAUDE.md) for the handful of rules that are
+unrecoverable if violated. The rationale, the taxonomy, and what enforces it:
+[`plans/claude-instruction-architecture.md`](../../plans/claude-instruction-architecture.md).
+
+## Where each topic went
+
+| Was | Now |
+|---|---|
+| `01-critical-rules.md` | [`CLAUDE.md`](../../CLAUDE.md) (commits, destructive git) · [`typescript-style.md`](../../.claude/rules/typescript-style.md) (no `any`, re-exports, dynamic import, `BaseSingleton`) · [`mj-data-access.md`](../../.claude/rules/mj-data-access.md) (`UserInfoEngine`) |
+| `02-git-and-branches.md` | [`CLAUDE.md`](../../CLAUDE.md) — branch tracking bypasses review, so it stays resident |
+| `03-entities-and-data.md` | [`mj-data-access.md`](../../.claude/rules/mj-data-access.md) |
+| `04-performance.md` | [`mj-data-access.md`](../../.claude/rules/mj-data-access.md) |
+| `05-codegen-and-migrations.md` | [`migrations.md`](../../.claude/rules/migrations.md) · [`generated-code.md`](../../.claude/rules/generated-code.md) |
+| `06-angular.md` | [`angular.md`](../../.claude/rules/angular.md) |
+| `07-code-style.md` | [`typescript-style.md`](../../.claude/rules/typescript-style.md) |
+| `08-metadata-and-sync.md` | [`metadata-sync.md`](../../.claude/rules/metadata-sync.md) |
+| `09-testing.md` | [`repo-gates.md`](../../.claude/rules/repo-gates.md), retargeted from Vitest onto the gate suite this repo actually runs |
+
+Section-by-section, with reasons for the two deletions:
+[`.claude/claude-md-manifest.json`](../../.claude/claude-md-manifest.json), which
+`npm run check:claude-md` verifies.
+
+## Reading MJ's own guide
+
+MJ's [`CLAUDE.md`](https://github.com/MemberJunction/MJ/blob/next/CLAUDE.md) is
+authoritative for MJ-core work and for anything not covered here. It has since
+been refactored the same way — a small root file plus `.claude/rules/`, nested
+`CLAUDE.md` files, and an indexed `guides/` directory — so read its routing table
+rather than expecting one large document.
+
+MJ also ships a **Claude pack** (`templates/claude-pack`, applied with
+`mj update:claude`) that would replace hand-maintained copies like this one with
+a managed, versioned block. Its published `dist/` is `v5`; MJ is currently 6.1.0.
+Worth revisiting when a v6 pack ships.

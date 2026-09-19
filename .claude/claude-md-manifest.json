@@ -1,0 +1,149 @@
+{
+  "$comment": [
+    "Maps every section of the PRE-REFACTOR instruction surface — root CLAUDE.md plus the nine",
+    "docs/claude/ topic documents, at the git rev under 'baseline' — to where its content now",
+    "lives. This file is the evidence for the claim that the refactor RELOCATED guidance rather",
+    "than dropping it.",
+    "",
+    "It exists because the change is not reviewable from the diff. Content moved between files, so",
+    "every relocated line shows up as both a deletion and an addition; nothing in `git diff` states",
+    "that 08-metadata-and-sync.md's four sections all landed in one rule, or that two sections were",
+    "dropped on purpose. This file states it, and check-claude-md.mjs verifies the statement.",
+    "",
+    "Destination grammar:",
+    "  root                 -> stayed in root CLAUDE.md (unrecoverable-if-violated, or always true)",
+    "  rule:<path>          -> a path-scoped rule under .claude/rules/ (loads on matching file)",
+    "  skill:<name>         -> a skill under .claude/skills/ (loads on invocation)",
+    "  doc:<path>           -> ordinary documentation (read on request, never auto-loaded)",
+    "  deleted              -> intentionally removed; 'reason' is REQUIRED",
+    "",
+    "Enforced by scripts/check-claude-md.mjs (npm run check:claude-md)."
+  ],
+
+  "baseline": {
+    "gitRev": "2ca2ae0",
+    "files": [
+      { "file": "CLAUDE.md", "lines": 133, "bytes": 8349, "loaded": "every session" },
+      { "file": "docs/claude/01-critical-rules.md", "lines": 74, "bytes": 3783, "loaded": "on request only" },
+      { "file": "docs/claude/02-git-and-branches.md", "lines": 35, "bytes": 1206, "loaded": "on request only" },
+      { "file": "docs/claude/03-entities-and-data.md", "lines": 75, "bytes": 3079, "loaded": "on request only" },
+      { "file": "docs/claude/04-performance.md", "lines": 55, "bytes": 2532, "loaded": "on request only" },
+      { "file": "docs/claude/05-codegen-and-migrations.md", "lines": 62, "bytes": 2932, "loaded": "on request only" },
+      { "file": "docs/claude/06-angular.md", "lines": 55, "bytes": 2870, "loaded": "on request only" },
+      { "file": "docs/claude/07-code-style.md", "lines": 38, "bytes": 1725, "loaded": "on request only" },
+      { "file": "docs/claude/08-metadata-and-sync.md", "lines": 74, "bytes": 3984, "loaded": "on request only" },
+      { "file": "docs/claude/09-testing.md", "lines": 44, "bytes": 1593, "loaded": "on request only" }
+    ],
+    "note": [
+      "512 of these 645 lines were never loaded unless an agent chose to read them. Eight of the",
+      "nine topic documents were still byte-identical to the mj-sample-open-app template they were",
+      "scaffolded from, so they had also stopped tracking their upstream."
+    ]
+  },
+
+  "budget": {
+    "file": "CLAUDE.md",
+    "maxLines": 150,
+    "maxBytes": 10500,
+    "achieved": { "lines": 128, "bytes": 9357 },
+    "measured": "effective",
+    "note": [
+      "Claude Code's own guidance is ~200 lines per CLAUDE.md: longer files consume context AND",
+      "reduce adherence. Above 200 lines the docs warn adherence drops; above 4 MiB the file is",
+      "skipped outright.",
+      "",
+      "MEASURED EFFECTIVE, NOT RAW. Claude Code strips block-level HTML comments before injecting a",
+      "CLAUDE.md into context, and blank lines cost nothing, so the gate counts what actually",
+      "reaches the context window. Counting raw would charge the file for maintainer notes that are",
+      "free, and would discourage exactly the commenting the docs recommend.",
+      "",
+      "That correction also fixes the headline number. Raw, the file went 133 -> 173 lines, which",
+      "read as a 30% regression. In context cost it went 119 -> 128 effective lines: +9 lines, for",
+      "a routing table and a skills index that are useful on every task. Four `generated/`-only",
+      "footguns (old rules 7-10) left the resident budget for the 344 files they actually protect.",
+      "",
+      "The ceiling sits ~17% above the achieved result so small additions do not cause churn.",
+      "Raising it requires justifying why the new content is unrecoverable-if-violated or",
+      "true-on-every-task. If it is neither, it belongs in a rule."
+    ]
+  },
+
+  "sections": [
+    { "source": "CLAUDE.md", "title": "Repository structure", "destinations": ["root"], "note": "Always true, and cheap. `plans/` added to the listing; `docs/claude/` dropped from it since it is now a signpost rather than a location." },
+    { "source": "CLAUDE.md", "title": "📖 The MemberJunction development guide → docs/claude/", "destinations": ["root", "doc:docs/claude/README.md"], "note": "The nine-row topic table became the routing table over .claude/rules/. docs/claude/README.md survives as a human-facing redirect explaining where each topic went and why." },
+    { "source": "CLAUDE.md", "title": "Rule 1 — No commits without explicit approval", "destinations": ["root"], "note": "Unrecoverable: an unwanted commit rewrites shared history. Must survive /compact." },
+    { "source": "CLAUDE.md", "title": "Rule 2 — Never edit src/generated/", "destinations": ["rule:.claude/rules/generated-code.md"], "note": "Path-scoped to the files it protects, where it now loads on open instead of being recited on every task." },
+    { "source": "CLAUDE.md", "title": "Rule 3 — Never edit an applied migration", "destinations": ["rule:.claude/rules/migrations.md"] },
+    { "source": "CLAUDE.md", "title": "Rule 4 — Branch rules", "destinations": ["root", "rule:.claude/rules/changesets.md"], "note": "Split: the tracking half stays in root because wrong tracking pushes straight to next and bypasses review. The 'migration PR needs a changeset >= minor' half moved to the rule that loads when you open .changeset/." },
+    { "source": "CLAUDE.md", "title": "Rule 5 — Single-copy invariant", "destinations": ["root"], "note": "Unrecoverable and true on every task in linked mode: a stray npm install duplicates packages and fails far from the cause." },
+    { "source": "CLAUDE.md", "title": "Rule 6 — When linked into MJ, wiring edits are local-only", "destinations": ["root"], "note": "Unrecoverable in another repo's history — the worst place to discover a mistake." },
+    { "source": "CLAUDE.md", "title": "Rule 7 — mj sync push runs from the MJ repo cwd", "destinations": ["rule:.claude/rules/metadata-sync.md"], "note": "Including all three sub-bullets: --no-app-packages, the 16GB heap ceiling, and the geocoding split between People/Organizations and Addresses." },
+    { "source": "CLAUDE.md", "title": "Rule 8 — ICF accounting seed", "destinations": ["rule:.claude/rules/metadata-sync.md"] },
+    { "source": "CLAUDE.md", "title": "Rule 9 — Catalog and payment composition", "destinations": ["rule:.claude/rules/metadata-sync.md"] },
+    { "source": "CLAUDE.md", "title": "Rule 10 — Never tidy RecurrenceMonths: null away", "destinations": ["rule:.claude/rules/metadata-sync.md"], "note": "The four GUIDs, the PushService.ts:1163 mechanism, and the calendar-month-applicability explanation all retained verbatim — this one is only correct in full." },
+    { "source": "CLAUDE.md", "title": "Build & dev commands", "destinations": ["root"], "note": "check:claude-md added to the gate list." },
+
+    { "source": "docs/claude/01-critical-rules.md", "title": "No commits without explicit approval", "destinations": ["root"] },
+    { "source": "docs/claude/01-critical-rules.md", "title": "No `any` types — ever", "destinations": ["rule:.claude/rules/typescript-style.md"], "note": "With both corollaries: no .Get()/.Set() where a typed property exists, and derive value-list unions from the entity instead of hand-copying." },
+    { "source": "docs/claude/01-critical-rules.md", "title": "No destructive git operations without explicit approval", "destinations": ["root"], "note": "Promoted INTO root. It was previously only in a file nothing loaded — the single most consequential rule in the set with the weakest delivery." },
+    { "source": "docs/claude/01-critical-rules.md", "title": "No re-exports between packages", "destinations": ["rule:.claude/rules/typescript-style.md"] },
+    { "source": "docs/claude/01-critical-rules.md", "title": "No dynamic import() unless narrowly justified", "destinations": ["rule:.claude/rules/typescript-style.md"] },
+    { "source": "docs/claude/01-critical-rules.md", "title": "Use BaseSingleton for all singletons", "destinations": ["rule:.claude/rules/typescript-style.md"] },
+    { "source": "docs/claude/01-critical-rules.md", "title": "Persist user preferences via UserInfoEngine — never localStorage", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/01-critical-rules.md", "title": "Always run and update unit tests", "destinations": ["rule:.claude/rules/repo-gates.md"], "note": "Retargeted. The obligation is kept, but pointed at the gate suite rather than at `npm test`, which passes vacuously here — all three packages ship echo stubs. repo-gates.md says so explicitly so the green light is not mistaken for evidence." },
+    { "source": "docs/claude/01-critical-rules.md", "title": "App-repo additions (this template's own rules)", "destinations": ["rule:.claude/rules/generated-code.md", "rule:.claude/rules/migrations.md"], "note": "Duplicated the root rules 2 and 3 it sat alongside; both now have exactly one home." },
+
+    { "source": "docs/claude/02-git-and-branches.md", "title": "Feature branches MUST track same-named remote branches", "destinations": ["root"] },
+    { "source": "docs/claude/02-git-and-branches.md", "title": "Where to cut from", "destinations": ["root"] },
+
+    { "source": "docs/claude/03-entities-and-data.md", "title": "Creating entity objects — always via Metadata", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/03-entities-and-data.md", "title": "Loading collections — RunView", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/03-entities-and-data.md", "title": "Save / Delete — booleans, not exceptions", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/03-entities-and-data.md", "title": "The spread-operator trap", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/03-entities-and-data.md", "title": "Looking up entity definitions", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/03-entities-and-data.md", "title": "Entity naming — the \"MJ: \" prefix", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/03-entities-and-data.md", "title": "Provider awareness (multi-provider code paths)", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+
+    { "source": "docs/claude/04-performance.md", "title": "entity_object vs simple (the biggest easy win)", "destinations": ["rule:.claude/rules/mj-data-access.md"], "note": "03 and 04 merged into one rule. They share a glob (**/*.ts) and are read together — splitting them would have produced two shallow files loading in lockstep." },
+    { "source": "docs/claude/04-performance.md", "title": "Batch everything", "destinations": ["rule:.claude/rules/mj-data-access.md"], "note": "Merged with 03's RunViews bullet, which said the same thing — an accidental duplication the split had hidden." },
+    { "source": "docs/claude/04-performance.md", "title": "Deep pagination — keyset, not offset", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/04-performance.md", "title": "Reactive caches — BaseEngine + ObserveProperty", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+    { "source": "docs/claude/04-performance.md", "title": "Server-side caching (know it exists)", "destinations": ["rule:.claude/rules/mj-data-access.md"] },
+
+    { "source": "docs/claude/05-codegen-and-migrations.md", "title": "What CodeGen generates (never write these by hand)", "destinations": ["rule:.claude/rules/generated-code.md"] },
+    { "source": "docs/claude/05-codegen-and-migrations.md", "title": "The change workflow (order matters)", "destinations": ["rule:.claude/rules/migrations.md", "rule:.claude/rules/generated-code.md"], "note": "Intentionally in both: migrations.md states the ordering for someone writing a migration, generated-code.md states the commit-together obligation for someone looking at generated output. Each states only its own half." },
+    { "source": "docs/claude/05-codegen-and-migrations.md", "title": "Migration authoring rules", "destinations": ["rule:.claude/rules/migrations.md"] },
+    { "source": "docs/claude/05-codegen-and-migrations.md", "title": "Record Changes (built-in versioning)", "destinations": ["rule:.claude/rules/mj-data-access.md"], "note": "Moved to the data rule: it is a don't-build-your-own-audit-trail instruction for someone writing TypeScript, not migration guidance." },
+
+    { "source": "docs/claude/06-angular.md", "title": "Standalone vs NgModule", "destinations": ["rule:.claude/rules/angular.md"] },
+    { "source": "docs/claude/06-angular.md", "title": "Modern syntax (required for new code)", "destinations": ["rule:.claude/rules/angular.md"] },
+    { "source": "docs/claude/06-angular.md", "title": "MJ component conventions", "destinations": ["rule:.claude/rules/angular.md"] },
+    { "source": "docs/claude/06-angular.md", "title": "Custom entity forms", "destinations": ["rule:.claude/rules/angular.md"] },
+    { "source": "docs/claude/06-angular.md", "title": "Design tokens — no hardcoded colors", "destinations": ["rule:.claude/rules/angular.md"], "note": "Kept, but deliberately NOT given its own **/*.scss rule the way MJ has one. This repo has zero SCSS; its three .css files are a static marketing site under website/assets/ with no MJ token system. angular.md is scoped to packages/Angular/** and says so, so the rule cannot fire on the website." },
+
+    { "source": "docs/claude/07-code-style.md", "title": "Naming (MJ's signature convention)", "destinations": ["rule:.claude/rules/typescript-style.md"] },
+    { "source": "docs/claude/07-code-style.md", "title": "Functional decomposition is mandatory", "destinations": ["rule:.claude/rules/typescript-style.md"], "note": "Softened from a line-count rule to a smell-to-investigate: decompose by abstraction, not by length. A cohesive deep function beats several shallow helpers that must be read together." },
+    { "source": "docs/claude/07-code-style.md", "title": "DRY / OO design", "destinations": ["rule:.claude/rules/typescript-style.md"] },
+    { "source": "docs/claude/07-code-style.md", "title": "Miscellany", "destinations": ["rule:.claude/rules/typescript-style.md"] },
+
+    { "source": "docs/claude/08-metadata-and-sync.md", "title": "File organization", "destinations": ["rule:.claude/rules/metadata-sync.md"] },
+    { "source": "docs/claude/08-metadata-and-sync.md", "title": "Seeding lookup/reference tables", "destinations": ["rule:.claude/rules/metadata-sync.md"] },
+    { "source": "docs/claude/08-metadata-and-sync.md", "title": "Applications & nav items", "destinations": ["rule:.claude/rules/metadata-sync.md"] },
+    { "source": "docs/claude/08-metadata-and-sync.md", "title": "Commands", "destinations": ["rule:.claude/rules/metadata-sync.md"], "note": "Merged with root rule 7, which restated the same push discipline in different words. The two had already drifted — root carried the heap ceiling, this one carried the parallel-batch-size and AfterCreate detail, and neither carried both." },
+
+    { "source": "docs/claude/09-testing.md", "title": "The framework", "destinations": ["rule:.claude/rules/repo-gates.md"], "note": "Reduced to the one durable sentence — Vitest is MJ's standard, Jest is deprecated — recorded as what to adopt IF a real suite is added." },
+    { "source": "docs/claude/09-testing.md", "title": "Running", "destinations": ["rule:.claude/rules/repo-gates.md"], "note": "Commands replaced. `npm run test:watch` and `npx turbo run test --filter=...[HEAD~1]` address a suite that does not exist here; the gate commands that do run took their place." },
+    { "source": "docs/claude/09-testing.md", "title": "Writing", "destinations": ["deleted"], "reason": "Describes a Vitest suite this repo does not have: src/__tests__/<Source>.test.ts layout, vi mocking, @memberjunction/test-utils helpers, and a describe/it skeleton. There are ZERO *.test.ts files here and all three packages ship `\"test\": \"echo 'No tests configured yet'\"`. repo-gates.md documents the conventions for the tests this repo DOES have — node --test, scripts/*.spec.mjs, throwaway temp-dir repo roots. Keeping both would have shipped two contradictory testing conventions, and the one describing nothing would have been indistinguishable from the one describing the gates." },
+    { "source": "docs/claude/09-testing.md", "title": "Expectations", "destinations": ["rule:.claude/rules/repo-gates.md"], "note": "Report pass/fail/skip honestly, and say what was not run. Kept, with the vacuous-npm-test warning attached so the honesty requirement has teeth here." }
+  ],
+
+  "newContent": {
+    "$comment": "Not part of the baseline — authored with this change. Listed so the gate's routing check has a complete picture and so a reader can tell relocated content from new.",
+    "entries": [
+      { "path": ".claude/rules/repo-gates.md", "why": "The gate conventions — every gate carries its own test, skips must be visible, the header comment carries the incident — were enforced by CI and described in changes.yml comments, but stated in no instruction file. An agent adding a gate had to infer them from the neighbours." },
+      { "path": ".claude/rules/changesets.md", "why": "The fixed group means one minor bumps all three packages. That was implicit in .changeset/config.json and nowhere in prose." },
+      { "path": "plans/claude-instruction-architecture.md", "why": "The rationale for this arrangement, so the next person to add guidance knows where it goes and why the root file is not the default answer." },
+      { "path": "scripts/check-claude-md.mjs", "why": "The gate. Without it the budget is an intention rather than a property of the repo." }
+    ]
+  }
+}
