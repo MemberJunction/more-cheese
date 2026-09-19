@@ -237,6 +237,41 @@ test('references: a backticked path is prose, NOT a checked claim', () => {
     assert.ok(!failedChecks(root).has('references'));
 });
 
+test('references: a link to a changeset fails even though the file is on disk', () => {
+    // The whole point. `changeset version` DELETES every changeset at release, so a link to one
+    // resolves on `next` and dangles on the release branch — surfacing only after the branch has
+    // been cut, which is the expensive moment to learn it. The fixture writes the file so this
+    // test can only pass because the rule fired, never because the path happened to be missing.
+    const root = makeCleanRepo({
+        '.changeset/brave-moons-shout.md': '---\n"pkg": minor\n---\n\nA change.\n',
+        'CLAUDE.md': [
+            '# Fixture',
+            '- [style](.claude/rules/style.md)',
+            '- [guide](docs/guide.md)',
+            '- [shape](.changeset/brave-moons-shout.md)',
+        ].join('\n'),
+    });
+    const msgs = messagesFor(root, 'references');
+    assert.ok(msgs.some((m) => /consumed at release/.test(m)), msgs.join('\n'));
+});
+
+test('references: the durable files in .changeset/ stay linkable', () => {
+    // README.md and config.json are checked in and survive every release; only the changesets
+    // themselves are ephemeral. Blanket-banning the directory would cost real, correct links.
+    const root = makeCleanRepo({
+        '.changeset/README.md': '# changesets\n',
+        '.changeset/config.json': '{ "fixed": [] }\n',
+        'CLAUDE.md': [
+            '# Fixture',
+            '- [style](.claude/rules/style.md)',
+            '- [guide](docs/guide.md)',
+            '- [readme](.changeset/README.md)',
+            '- [config](.changeset/config.json)',
+        ].join('\n'),
+    });
+    assert.ok(!failedChecks(root).has('references'), messagesFor(root, 'references').join('\n'));
+});
+
 // ── CHECK 4 — ROUTING ─────────────────────────────────────────────────────────────────────────
 
 test('routing: a rule on disk that the routing table never mentions fails', () => {
