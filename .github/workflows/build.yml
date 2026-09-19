@@ -33,20 +33,33 @@ jobs:
       - name: Nothing may push to main or next
         run: npm run lint:release-pushes
 
-      # A gate whose own test is not wired into CI is a gate nobody is checking — and this one
-      # spent its whole life unable to detect the mis-casing it exists for, because it asked git
-      # for the case variant through a pathspec glob, which is byte-exact whatever core.ignorecase
-      # says. It reported "No case-sensitivity issues found" over every lockfile it was ever given.
+      # The next two steps are NOT duplicates of each other, and deleting either loses something:
+      # the first runs the gate's own fixture tests — does the gate still work? — and the second
+      # runs that gate against THIS repo's real package-lock.json — is our lockfile mis-cased?
+      # Both need only git and jq, so sitting after `npm ci` is for grouping with the other gate
+      # steps, not a dependency.
       #
-      # The gate itself runs in publish.yml, where a mis-cased lockfile breaks `npm ci` on Linux;
-      # its test runs HERE, on every pull request, so the repair is checked by the workflow that
-      # blocks a merge rather than only by the one that cuts a release. It is a .sh harness rather
-      # than an entry in `npm run test:gates`, which is `node --test` over the .mjs specs — the
-      # sibling repos (bizapps-forms, bizapps-common) run this same harness as its own step, and
-      # matching them keeps the port in both directions legible. It needs only git and jq, so its
-      # placement after `npm ci` is for grouping with the other gate steps, not a dependency.
+      # The test runs first on purpose: repo-gates.md's rule for `npm run test:gates` is that a
+      # gate's spec precedes the gate it validates, because a gate whose test has gone red is one
+      # whose green means nothing. This gate earned that rule the hard way — it spent its entire
+      # life unable to detect the mis-casing it exists for, asking git for the case variant through
+      # a pathspec glob, which is byte-exact whatever core.ignorecase says, and so reported
+      # "No case-sensitivity issues found" over every lockfile it was ever handed.
+      #
+      # It is a .sh harness rather than an entry in `npm run test:gates`, which is `node --test`
+      # over the .mjs specs — the sibling repos (bizapps-forms, bizapps-common) run this same
+      # harness as its own step, and matching them keeps the port legible in both directions.
       - name: CI guard script tests
         run: ./.github/scripts/__tests__/validate-package-lock-case.test.sh
+
+      # publish.yml runs this gate too, but a check that can only run during a release cannot
+      # prevent the mistake that causes one — the same argument that pulled `sync-app-version
+      # --check` forward into this workflow. A mis-cased lockfile is written on a macOS developer's
+      # machine (case-insensitive, so nothing local complains), merged on a pull request, and then
+      # breaks `npm ci` on Linux at the moment the release is cut, over an already-merged
+      # promotion. Asking here puts the answer on the pull request that introduced it.
+      - name: package-lock.json casing matches what git tracks
+        run: ./.github/scripts/validate-package-lock-case.sh
 
       - name: Every publishable package declares files and publishConfig
         run: ./.github/scripts/validate-package-files.sh
