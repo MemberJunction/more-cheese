@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Revenue Year-over-Year Comparison",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Compare our revenue this year versus last year, broken down by month. Show both years on the same chart so I can see the comparison. Let me click on any data point to see the invoices for that specific month and year. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "683E1B54-EA16-490C-9506-200D31BF011F"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your YoY Monthly Revenue Comparison dashboard is ready with data from Order Headers. It features a side-by-side clustered bar chart comparing 2026 and 2025 monthly revenue alongside executive KPI summary cards. You can click on any month's bar to immediately filter and inspect the detailed invoice list below, complete with sorting, search, and CSV export.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "F7F60843-D0AD-4B70-A094-549944E8A191"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "F58A352D-8AAF-4ED4-AC11-0D826A83DDB4"
+    }
+  }
+]

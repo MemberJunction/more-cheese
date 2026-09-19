@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "push": {
+    "autoCreateMissingRecords": true
+  },
+  "sqlLogging": {
+    "enabled": true,
+    "outputDirectory": "../migrations/codegen/config",
+    "formatAsMigration": true
+  },
+  "directoryOrder": [
+    "users",
+    "user-roles",
+    "user-applications",
+    "file-storage-providers",
+    "credential-types",
+    "credentials",
+    "sonar-score-band-sets",
+    "sonar-score-bands",
+    "sonar-time-windows",
+    "sonar-score-models",
+    "sonar-score-model-versions",
+    "sonar-model-related-entities",
+    "sonar-factors",
+    "sonar-model-factors",
+    "sonar-score-models-activate",
+    "ai-vendors",
+    "ai-models",
+    "ai-model-vendors",
+    "vector-indexes",
+    "content-types",
+    "content-sources",
+    "application-roles",
+    "user-views",
+    "resource-permissions",
+    "projects",
+    "query-categories",
+    "queries",
+    "artifacts",
+    "conversations",
+    "conversation-detail-artifacts",
+    "conversations-owner",
+    "file-storage-accounts",
+    "file-storage-account-permissions",
+    "dashboard-categories",
+    "dashboards",
+    "dashboard-category-links",
+    "user-settings"
+  ]
+}

@@ -1,0 +1,465 @@
+{
+  "version": "1.0.0",
+  "directories": {
+    "ai-model-vendors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ai-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "ai-vendors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-factors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-model-factors": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-model-related-entities": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-band-sets": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-bands": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-model-versions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-score-models": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "sonar-time-windows": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Hand-authored administrative, taxonomy, or model configuration"
+    },
+    "schema-info": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Application schema registration metadata (template-authored)"
+    },
+    "activities": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "activity-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "address-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "addresses": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "advocacy-actions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "certifications": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "committee-meetings": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-memberships": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-terms": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "committee-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "committees": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "companies": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "competition-entries": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "contact-methods": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "courses": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "data-quality-labels": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "enrollments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "event-registrations": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "events": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-answers": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-distributions": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-pages": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "form-question-options": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "form-questions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "form-responses": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "form-versions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "forms": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "gl-account-links": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "gl-accounts": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "issue-comments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "issue-sequences": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "issue-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "journal-entry-sequences": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "issues": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "member-certifications": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "member-profiles": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "membership-periods": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "orders": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "organization-profiles": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "organizations": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "payments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "people": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "portal-sessions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Legacy portal web telemetry frozen (proposed, pending owner confirmation)"
+    },
+    "product-categories": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "product-prices": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "products": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "relationship-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "relationships": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "secure-messages": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "secure-threads": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "task-assignments": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "task-links": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "task-types": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)"
+    },
+    "tasks": {
+      "tier": "generated",
+      "classification": "loom",
+      "reason": "Synthetic world model entity governed and validated by Loom domain config"
+    },
+    "sonar-score-models-activate": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Second pass over Score Models: flips seeded models from Draft to Active after their factors and bands exist (Sonar server refuses Active without factors)"
+    },
+    "user-views": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Explorer-authored saved views captured with mj sync pull (Track 2 configuration stream)"
+    },
+    "resource-permissions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Role grants that make the shared demo views/dashboards visible to every user (owner is the System user)"
+    },
+    "vector-indexes": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub vector index (Pinecone morecheese-content + Gemini Embedding 2) for ICF content"
+    },
+    "content-types": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub content type for ICF association content (tagging model, tag bounds, default embedding/index)"
+    },
+    "content-sources": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub content sources: the public WordPress site (Website) and, once credentials exist, the Dropbox vault (Cloud Storage)"
+    },
+    "application-roles": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Makes the Knowledge Hub application visible to the UI and Developer roles so staff can browse tagged content and run ingestion"
+    },
+    "projects": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Chat folder that groups the staged Skip analytics conversations"
+    },
+    "artifacts": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Skip dashboard artifacts (component payloads) referenced by the staged conversations"
+    },
+    "conversations": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Staged agent conversations with nested turns, loaded as demo chat history"
+    },
+    "conversation-detail-artifacts": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Links from conversation turns to the artifact versions they produced"
+    },
+    "users": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Demo operator account so ownership lookups resolve on a clean install"
+    },
+    "user-roles": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Role grants for the demo operator (UI + Developer)"
+    },
+    "user-applications": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "App switcher entries for the demo operator"
+    },
+    "conversations-owner": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Second-pass owner flip for the staged conversations (turns are owner-gated; push runs as System)"
+    },
+    "file-storage-accounts": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Dropbox vault as a File Storage Account (credential values are NOT in config; the credential named here must be created in Explorer first)"
+    },
+    "file-storage-account-permissions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Role access to the Dropbox storage account"
+    },
+    "dashboard-categories": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Dashboard folder for the demo"
+    },
+    "dashboards": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Config dashboards composed from the staged Skip artifacts"
+    },
+    "dashboard-category-links": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Places the demo dashboards in their category for the operator"
+    },
+    "query-categories": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Skip/… query category tree the staged dashboards reference by path"
+    },
+    "queries": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Saved queries Skip generated for the staged dashboards (with SQL, params, fields, entities)"
+    },
+    "file-storage-providers": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Activates the Dropbox File Storage Provider row (core MJ provider list; no credentials)"
+    },
+    "credential-types": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Dropbox OAuth credential type so the storage account can name a credential; the credential VALUE is never in config"
+    },
+    "credentials": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Placeholder \"Dropbox OAuth\" credential (Values = {}, inactive) so the File Storage Account can resolve its CredentialID on a fresh install; the real secret is entered in Explorer, never in config"
+    },
+    "user-settings": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Home-screen pins for the demo user (HomeApp.PinnedItems): Conversations plus the four Skip dashboards, so a fresh install opens to them"
+    }
+  }
+}

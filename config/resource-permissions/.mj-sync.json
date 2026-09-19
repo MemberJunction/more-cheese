@@ -1,0 +1,20 @@
+{
+  "entity": "MJ: Resource Permissions",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".resource-permissions.json",
+    "appendRecordsToExistingFile": true,
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": ["__mj_CreatedAt", "__mj_UpdatedAt", "__mj_DeletedAt"],
+    "lookupFields": {
+      "ResourceTypeID": { "entity": "MJ: Resource Types", "field": "Name" },
+      "RoleID": { "entity": "MJ: Roles", "field": "Name" },
+      "UserID": { "entity": "MJ: Users", "field": "Email" },
+      "SharedByUserID": { "entity": "MJ: Users", "field": "Email" }
+    },
+    "ignoreVirtualFields": true
+  }
+}

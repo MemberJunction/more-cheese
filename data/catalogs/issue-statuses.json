@@ -1,0 +1,66 @@
+[
+  {
+    "ID": "E02A9B9E-45A0-4853-A82C-EDDC00BA5126",
+    "Name": "New",
+    "Description": "Newly reported, not yet triaged.",
+    "Sequence": 10,
+    "IsDefault": true,
+    "IsTerminal": false,
+    "ColorCode": "#EAB308"
+  },
+  {
+    "ID": "6C38314F-970D-4965-9D9E-48D6BBF690A0",
+    "Name": "Triaged",
+    "Description": "Reviewed and accepted; prioritized and ready to be worked.",
+    "Sequence": 20,
+    "IsDefault": false,
+    "IsTerminal": false,
+    "ColorCode": "#8B5CF6"
+  },
+  {
+    "ID": "4A9D16B2-3CFC-4E4A-A94E-B1C0D0CBFA1D",
+    "Name": "In Progress",
+    "Description": "Actively being worked on.",
+    "Sequence": 30,
+    "IsDefault": false,
+    "IsTerminal": false,
+    "ColorCode": "#3B82F6"
+  },
+  {
+    "ID": "20A6DDEC-24A3-4FAD-AF5B-F291B870255D",
+    "Name": "Waiting on Reporter",
+    "Description": "Blocked pending more information or a response from the reporter.",
+    "Sequence": 40,
+    "IsDefault": false,
+    "IsTerminal": false,
+    "ColorCode": "#F97316"
+  },
+  {
+    "ID": "BA34155E-E6A5-4BAE-A57C-20BFF88275EA",
+    "Name": "Resolved",
+    "Description": "A fix or answer has been delivered; awaiting confirmation before closing.",
+    "Sequence": 50,
+    "IsDefault": false,
+    "IsResolved": true,
+    "IsTerminal": false,
+    "ColorCode": "#10B981"
+  },
+  {
+    "ID": "DC42F011-C589-41BD-8FE0-D96258245E70",
+    "Name": "Closed",
+    "Description": "Completed and confirmed. Terminal state.",
+    "Sequence": 60,
+    "IsDefault": false,
+    "IsTerminal": true,
+    "ColorCode": "#475569"
+  },
+  {
+    "ID": "7B4A372A-E9F9-4685-A093-9D69C3D892C2",
+    "Name": "Won't Fix",
+    "Description": "Acknowledged but will not be addressed (by design, duplicate, or out of scope). Terminal state.",
+    "Sequence": 70,
+    "IsDefault": false,
+    "IsTerminal": true,
+    "ColorCode": "#9CA3AF"
+  }
+]

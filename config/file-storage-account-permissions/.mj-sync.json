@@ -1,0 +1,32 @@
+{
+  "entity": "MJ: File Storage Account Permissions",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".file-storage-account-permissions.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "overwrite",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt"
+    ],
+    "ignoreVirtualFields": true,
+    "ignoreNullFields": true,
+    "lookupFields": {
+      "FileStorageAccountID": {
+        "entity": "MJ: File Storage Accounts",
+        "field": "Name"
+      },
+      "RoleID": {
+        "entity": "MJ: Roles",
+        "field": "Name"
+      },
+      "UserID": {
+        "entity": "MJ: Users",
+        "field": "Email"
+      }
+    }
+  }
+}

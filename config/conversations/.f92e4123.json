@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Active Members by Type",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Show me how many active members we have, broken down by membership type in a chart. I'd like to be able to click on any membership type to see the actual list of members in that category. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "48D7F31C-BF36-4732-B7A9-57F4075CCDF3"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Awesome, your Active Members by Membership Tier dashboard is ready, bringing together data from Membership Periods, Member Profiles, and People. It features executive KPI cards and an interactive tier distribution bar chart displaying member counts and annualized dues revenue. Clicking any tier in the chart or summary cards instantly filters the roster table below, where you can search, sort, and jump directly into individual member profiles.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "8FFF9237-0DE1-43DA-BEE9-A5725F08C921"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "F92E4123-3627-4D2C-9972-C8556D625410"
+    }
+  }
+]

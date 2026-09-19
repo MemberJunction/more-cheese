@@ -2,7 +2,7 @@
 
 Applied in filename order against **your app's schema** at install/upgrade and
 during development. Once published, a migration is IMMUTABLE — never edit an
-applied file; add a new one (see PUBLISH_NO_BREAK policy in docs/publishing.md).
+applied file; add a new one (see PUBLISH_NO_BREAK policy in docs/template-docs/publishing.md).
 
 ## Naming
 
@@ -21,4 +21,28 @@ skeleton to copy for new work; for a complete worked example (table + view +
 SPs + entity/field registration) see any shipped BizApps app's baseline
 migration. Schema registration (`__mj.SchemaInfo`) is handled by
 `metadata/schema-info/` in this template — don't duplicate it here.
-See docs/codegen-and-metadata-migrations.md for the full authoring loop.
+See docs/template-docs/codegen-and-metadata-migrations.md for the full authoring loop.
+
+## Migration Format
+
+``` sql
+-- ============================================================
+-- <YourApp>: <what this migration does> (v<X.Y.x>)
+-- Copy to: V<YYYYMMDDHHMM>__v<X.Y.x>_<Description>.sql (timestamp = now, UTC)
+-- ============================================================
+
+-- Your schema objects (use the placeholder, never a hardcoded schema name):
+-- CREATE TABLE ${flyway:defaultSchema}.Widget (
+--     ID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
+--     Name NVARCHAR(200) NOT NULL,
+--     CONSTRAINT PK_Widget PRIMARY KEY (ID)
+-- )
+-- GO
+
+-- REMEMBER (docs/template-docs/codegen-and-metadata-migrations.md):
+--   * no __mj_CreatedAt/__mj_UpdatedAt columns, no FK indexes (CodeGen adds them)
+--   * hardcoded UUIDs for any metadata rows (never NEWID())
+--   * after this migration: run codegen, commit the regenerated code + the
+--     codegen-emitted SQL folded into this (or a follow-up) migration
+--   * add a changeset: npx changeset  (>= minor when a migration is added)
+```

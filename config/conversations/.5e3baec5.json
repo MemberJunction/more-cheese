@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Top 10 Most Engaged Members",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "Who are our top 10 most engaged members based on their event attendance, course enrollments, and chapter participation? Show this as a ranked table with their engagement metrics. I want to be able to click on any member to open their profile. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "9A521F2E-D481-402D-B38E-CBA74B5928A4"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Top 10 Most Engaged Members Leaderboard ranks your top federation members using a composite engagement score calculated from event attendance, course completions, and committee participation. It includes summary benchmark KPI cards, quick segment and region filters, and one-click navigation directly to any member's full profile.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "ADBDF56E-E73F-41BC-81BD-242E4829F3E8"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "5E3BAEC5-AFAE-4F17-8C4B-E18A552EE7C3"
+    }
+  }
+]

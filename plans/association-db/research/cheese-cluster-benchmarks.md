@@ -3,6 +3,8 @@
 > **LLM-researched (2026-07-02).** Compiled via web search + IRS Form 990 filings read from ProPublica Nonprofit Explorer (full-filing views; figures transcribed by an LLM extraction pass — **spot-check any number before it becomes load-bearing**, especially the ADGA annual-report figures flagged below). Purpose: calibrate `benchmarks-draft.json` v0.6 → v0.7 using the orgs MOST similar to the American Cheese Society (individual craft-producer members, ~500–5,000 scale, competition culture, certification programs, enthusiast periphery), replacing weaker evidence from dissimilar orgs (IACP = culinary media society; AHA = 30k pure hobbyists).
 >
 > **Key technique:** year-over-year membership-dues revenue from consecutive 990s as a membership-trajectory / retention-health proxy. Caveat: a dues line can move because of price changes or tier-mix shifts, not just headcount — noted per org where relevant.
+>
+> **✅ 2026-07-07 SPOT-CHECK DONE (benchmarks-draft.json `$v091`):** every dollar figure in the BBGA/ACA/FCIA/AMMA/CACG/WCMA tables below was verified against the e-filed 990s (ProPublica full-filing views) — **all exact**. Two corrections applied inline: the BBGA streak is **five** down years (2020–2024, −3.6%/yr), not six; and ACA's *individual* dues are **$75**, not $175 (the $175/$185 is their smallest commercial-cidery tier) — the "$175 independently re-confirmed" claim is retracted (ACS's own $175 was instead verified directly on cheesesociety.org). Neither correction moves a cluster verdict.
 
 ---
 
@@ -24,7 +26,7 @@
 | 2023 | $196,398 | −3.6% | $433,958 | $167,000 |
 | 2024 | $187,034 | −4.8% | $538,363 | $133,264 |
 
-  **Verdict: DECLINING.** Peak 2019, then six consecutive down years; −16.8% cumulative from peak, ~−3%/yr average, accelerating to −4.8% in the latest year. With no evident dues-price increase (individual has sat at ~$100), this is a headcount decline. If acquisition runs ~10%/yr, the implied renewal is ~86–88%.
+  **Verdict: DECLINING.** Peak 2019, then five consecutive down years (2020–2024, 990-verified); −16.8% cumulative from peak, ~−3.6%/yr average, accelerating to −4.8% in the latest year. With no evident dues-price increase (individual has sat at ~$100), this is a headcount decline. If acquisition runs ~10%/yr, the implied renewal is ~86–88%.
 - **Events vs membership:** No large flagship conference — the model is many master classes/seminars (program expense $218k FY2024) plus the occasional Camp Bread (2024 edition was **members-only**, small-scale). Events revenue ≈ $130–170k/yr ≈ 25–30% of total revenue. Revenue mix FY2023: dues ~45% of revenue — dues-heavier than ACS because there's no big conference+competition engine.
 - Sources: ProPublica EIN 251706251 full filings (objects 201931359349312848 … 202513189349312641); bbga.org/join; newsletter.wordloaf.org/bread-bakers-guild-of-america-647/.
 
@@ -42,7 +44,7 @@
 
 **EIN 46-1778586** (Portland, OR). 5 employees.
 
-- **Membership/dues structure:** tiered **commercial-cidery dues $185–$3,450** banded by annual gallonage; **Individual level $175/yr** — *identical to ACS's individual rate*. Member count not published on current site; dues revenue at a blended $150–200 implies roughly **~1,000 member entities** (order of magnitude; treat as estimate).
+- **Membership/dues structure:** tiered **commercial-cidery dues $185–$3,450** banded by annual gallonage (smallest tier was $175 until July 2024); **individual tiers (enthusiast/hospitality) are $75/yr** — ⚠️ CORRECTED 2026-07-07: an earlier pass misread the $175 cidery tier as the individual rate. Member count not published on current site; dues revenue implies roughly **~1,000 member entities** (order of magnitude; treat as estimate).
 - **990 trend (dues + program lines):**
 
 | Tax yr | Dues | CiderCon | Exam fees (CCP) | Competition entry | Total rev |
@@ -123,8 +125,8 @@ Dues-trend proxy across the cluster, ordered by similarity to ACS:
 
 | Org | Model | Dues-line trajectory | Health read |
 |---|---|---|---|
-| Bread Bakers Guild (twin) | individual+company | **−3%/yr for 6 straight yrs, −4.8% latest** | soft |
-| American Cider Assn | producer tiers + $175 individual | **−6.7% latest yr**, post-boom plateau | soft |
+| Bread Bakers Guild (twin) | individual+company | **−3.6%/yr for 5 straight yrs, −4.8% latest** | soft |
+| American Cider Assn | producer tiers + $75 individual | **−6.7% latest yr**, post-boom plateau | soft |
 | FCIA | company+individual+enthusiast | **−16% latest yr**, dues cut to retain | soft |
 | AMMA | producer+hobbyist | **collapsed** (rev −78% from 2019) | very soft |
 | CA Artisan Cheese Guild | creamery+supporter | revenue −26% over 5 yrs | soft |
@@ -149,7 +151,7 @@ The generic-society 25% prior is clearly wrong for this cluster; every flagship-
 
 ## Verdict 3 — Other targets the cluster moves
 
-1. **`dues_individual` $175 — CONFIRMED AGAIN, independently.** ACA's individual tier is *exactly* $175. (BBG is $100 — the low end for a guild without a conference/competition engine.) Keep $175 ±25, confidence high.
+1. **`dues_individual` $175 — ~~CONFIRMED AGAIN, independently~~ RETRACTED 2026-07-07.** ACA's *individual* tier is $75; the $175 was their smallest commercial-cidery tier (raised to $185 July 2024). The $175 target stands on ACS alone — verified directly on cheesesociety.org 2026-07-07. (BBG is $100 — the low end for a guild without a conference/competition engine.) Keep $175 ±25, confidence high.
 2. **`dues_corporate_range` [225, 3000] — validated.** ACA producer tiers $185–$3,450; BBG company tiers $154–$1,760; WCMA company tiers larger. ACS's $225–$3,000 sits mid-cluster. No change.
 3. **`dues_share_of_revenue` 0.22 — validated for a flagship-holding society.** ACA dues ≈ 19–21% of revenue; WCMA ≈ 19% of organic revenue; SCA ≈ 5%. BBG (no flagship) runs ~40–45% — the exception that proves the mechanism: dues share is low *because* the conference/competition engine exists. Keep 0.22 ±0.04. The `nondues_revenue_mix` events-dominance (~60%) is directly reproduced by ACA (CiderCon 60% of revenue).
 4. **`cert_candidates_per_year` 0.045 — keep, but raise the non-member share of candidates.** ACA's CCP runs exam fees of ~$40.8k/yr (order 500+ candidates) against ~1,000 members — because craft-food certifications sell to the hospitality/retail *periphery*, not the member core (same at SCA, where education/cert revenue is 43% of total and 8× dues). The 4.5%-of-members candidate rate is right for the ACS-style single-sitting CCP, but the "~20% of candidates are non-members" note should move to **~30% (tolerance ±10)**, and this is a growth lever worth a demo storyline (education revenue is THE growth line at both certification-rich analogs).
@@ -172,7 +174,7 @@ The generic-society 25% prior is clearly wrong for this cluster; every flagship-
 | `staff_fte` | 10 ±3 | **8 ±3** | Cluster runs 3–11 (BBG 3–5, ACA 5, WCMA 8–11) |
 | `scenarios.decliningOrg` | cites IACP/AHA | **add AMMA (rev −78% from 2019) + CACG (6 straight down yrs) as in-domain evidence** | Same-shape, same-sector declines |
 | `regimes.covid_shock` (note) | entries = 0 | **keep, annotate:** entries=0 is ACS-specific; WCMA contest revenue was COVID-flat, so recovery can show competition rebounding faster than conference | WCMA 990s 2018–2024 |
-| `dues_individual` | 175 ±25, high | **no change** — re-confirmed (ACA individual = $175 exactly) | — |
+| `dues_individual` | 175 ±25, high | **no change** — ~~ACA re-confirmation~~ retracted 2026-07-07 (ACA individual = $75; ACS $175 verified at source instead) | — |
 | `dues_corporate_range` | [225,3000], high | **no change** — cluster brackets it ($154–$1,760 BBG; $185–$3,450 ACA) | — |
 | `dues_share_of_revenue` | 0.22 ±0.04, high | **no change** — ACA 19–21%, WCMA ~19% organic; BBG's 40%+ is the no-flagship counterfactual | — |
 | `nondues_revenue_mix` | events ~60% dominant | **no change** — ACA: CiderCon alone = 60% of revenue | — |

@@ -1,0 +1,24 @@
+[
+  {
+    "primaryKey": {
+      "ID": "CF6F428F-7016-5898-BF94-22795E3B3F91"
+    },
+    "fields": {
+      "Name": "Trailing 12 Months (MoreCheese)",
+      "WindowType": "Rolling",
+      "LengthMonths": 12,
+      "LengthDays": null
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97DF3796-A479-558E-9927-755A48D0D061"
+    },
+    "fields": {
+      "Name": "Trailing 24 Months (MoreCheese)",
+      "WindowType": "Rolling",
+      "LengthMonths": 24,
+      "LengthDays": null
+    }
+  }
+]

@@ -21,10 +21,123 @@ jobs:
         with:
           node-version: 24
 
+      - name: Validate metadata referential integrity closure
+        run: node scripts/check-metadata-closure.mjs
+
+      # ── Release gates, ported from bizapps-forms (#48) ────────────────────────────────────
+      # All five read the repo only — no database, no npm install, no network — so they sit
+      # here at the top of the job where they fail fast and cost nothing. `scripts/*.spec.mjs`
+      # runs FIRST: every one of these gates is only as good as its own parser, and a gate
+      # whose spec has gone red is one whose green means nothing.
+      - name: Test the release gates themselves
+        run: npm run test:gates
+
+      # The release-version rule only ever runs on the release commit, where a mistake is
+      # most expensive and least recoverable — so its fixtures run here, on every PR, rather
+      # than waiting for publish.yml to be the first thing that exercises them.
+      - name: Release version rule self-test
+        run: node ./.github/scripts/determine-next-version.mjs --self-test
+
+      # The agent rulebook decays silently: nothing in a diff says CLAUDE.md has crossed the length
+      # where it stops being read, that a path-scoped rule's glob matches nothing so it can never
+      # fire, or that a rule is missing `paths` and is therefore loaded on every task rather than
+      # none. Three sibling repos are at ~2,010 lines right now. Rationale:
+      # plans/claude-instruction-architecture.md
+      - name: Instruction files stay small, routed, and resolvable
+        run: npm run check:claude-md
+
+      - name: Peer ranges match the manifest floor and name no exact version
+        run: npm run lint:peer-ranges
+
+      - name: Migration ordering is consistent across the chain
+        run: npm run lint:migrations
+
+      - name: Distribution gate (shipped SQL installs on a stranger's database)
+        run: npm run lint:distribution
+
+      - name: Teardown is structurally sound
+        run: npm run test:teardown
+
+      # `check:release-seed` needs a seed to measure. #30 dropped the Metadata_Sync
+      # migrations (world data now reaches a host via `mj sync push` from generated/; the
+      # build engineer folds seeds at release), so until one returns the gate reports the
+      # no-seed state and exits non-zero — correct at a release boundary, wrong as a PR gate.
+      # Detected explicitly and skipped VISIBLY, the same pattern this workflow already used
+      # for the sync-id parity gate below, which consumes this same output.
+      - name: Detect Metadata_Sync seed migrations
+        id: seed_check
+        run: |
+          if ls migrations/*Metadata_Sync*.sql >/dev/null 2>&1; then
+            echo "has_seeds=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_seeds=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No Metadata_Sync seed migrations in migrations/ — seed coverage and sync-id parity gates skipped (see #30)"
+          fi
+
+      # Cadence runs UNCONDITIONALLY, unlike coverage: "zero seeds" is a state it is designed
+      # to pass on, and its part-set rule is exactly what catches a generation that lands
+      # half-committed — which is the moment the has_seeds flag above first flips to true.
+      - name: Release seed cadence (one generation, complete part set)
+        run: npm run check:seed-cadence
+
+      - name: Release seed coverage (every declared record reaches a host)
+        if: steps.seed_check.outputs.has_seeds == 'true'
+        run: npm run check:release-seed
+
+      - name: Check metadata and config ownership manifest
+        run: npm run check:ownership
+
+      - name: Checkout Loom Contracts
+        uses: actions/checkout@v4
+        with:
+          repository: MemberJunction/loom
+          ref: 63aec01f61a3f9e831fbf64bc9bac4675ac86d84
+          path: loom
+
+      - name: Build Loom
+        working-directory: loom
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm --filter @memberjunction/loom-contracts build
+          pnpm --filter @memberjunction/loom-engine build
+          pnpm --filter @memberjunction/loom-cli build
+          echo "$GITHUB_WORKSPACE/loom/packages/cli/dist/bin" >> $GITHUB_PATH
+
+      - name: Validate Loom data project & schema conformance
+        run: npm run validate:loom
+
+      # The detection step this `if` reads now runs near the top of the job, beside the other
+      # DB-free gates, so one `ls` serves both it and the seed-coverage gate (see #48).
+      - name: Assert Metadata_Sync IDs match generated/ for every loom directory
+        if: steps.seed_check.outputs.has_seeds == 'true'
+        run: npm run check:sync-id-parity
+
+      - name: Run Loom mutation test suite
+        run: npm run test:loom-mutations
+
+      - name: Compile domain smoke test, verify entity directories present and avatar/logo determinism
+        run: |
+          npm run generate
+          git status --porcelain generated/
+          git diff --stat generated/
+          git diff --exit-code generated/
+
+      # Every check below reads this one output, so the release-pull-request case is answered once
+      # here rather than guarded five times. scripts/release-base-ref.mjs carries both incidents
+      # and the argument for `next`; it prints the ref on stdout and any override reason as a
+      # ::notice:: on stderr, and refuses to print an empty ref.
+      - name: Resolve current base branch tip
+        id: base
+        run: |
+          BASE_REF="$(node ./scripts/release-base-ref.mjs)"
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
+          echo "sha=$(git rev-parse FETCH_HEAD)" >> $GITHUB_OUTPUT
+
       - name: Check for migration file changes
         id: migration_check
         run: |
-          MIGRATION_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -E '^migrations/.*\.sql$' || true)
+          MIGRATION_FILES=$(git diff --name-only ${{ steps.base.outputs.sha }} ${{ github.sha }} | grep -E '^migrations/.*\.sql$' || true)
           if [ -n "$MIGRATION_FILES" ]; then
             echo "has_migrations=true" >> "$GITHUB_OUTPUT"
             echo "Migration files changed:"
@@ -38,15 +151,25 @@ jobs:
         if: steps.migration_check.outputs.has_migrations == 'true'
         run: ./.github/scripts/validate-migration-filenames.sh
 
+      - name: EntityField Sequence must not be a literal placeholder
+        run: |
+          node ./.github/scripts/check-migration-entityfield-sequence.mjs --self-test
+          node ./.github/scripts/check-migration-entityfield-sequence.mjs ${{ steps.base.outputs.sha }} ${{ github.sha }}
+
+      - name: Versioned migrations must not contain spDeleteUnneededEntityFields
+        run: |
+          node ./.github/scripts/check-migration-no-prune.mjs --self-test
+          node ./.github/scripts/check-migration-no-prune.mjs ${{ steps.base.outputs.sha }} ${{ github.sha }}
+
       - name: Validate migration timestamps are newer than existing
         if: steps.migration_check.outputs.has_migrations == 'true'
         run: |
           # Get max timestamp from existing migrations on base branch
-          MAX_EXISTING=$(git show ${{ github.event.pull_request.base.sha }}:migrations/ 2>/dev/null | \
+          MAX_EXISTING=$(git show ${{ steps.base.outputs.sha }}:migrations/ 2>/dev/null | \
             grep -oE 'V[0-9]{12}' | sed 's/^V//' | sort -n | tail -1 || echo "0")
 
           # Check only newly added migration files (not modified existing ones, not renames)
-          NEW_FILES=$(git diff --diff-filter=A --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} -- migrations/ | grep -E '\.sql$' || true)
+          NEW_FILES=$(git diff --diff-filter=A --name-only ${{ steps.base.outputs.sha }} ${{ github.sha }} -- migrations/ | grep -E '\.sql$' || true)
           for file in $NEW_FILES; do
             basename=$(basename "$file")
             timestamp=$(echo "$basename" | grep -oE '^V[0-9]{12}' | sed 's/^V//' || true)
@@ -62,7 +185,7 @@ jobs:
           steps.migration_check.outputs.has_migrations == 'true' &&
           github.base_ref == 'next'
         run: |
-          CHANGESET_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -E '^\.changeset/.*\.md$' | grep -v 'README.md' || true)
+          CHANGESET_FILES=$(git diff --name-only ${{ steps.base.outputs.sha }} ${{ github.sha }} | grep -E '^\.changeset/.*\.md$' | grep -v 'README.md' || true)
           if [ -z "$CHANGESET_FILES" ]; then
             echo "::error::Migrations were added but no changeset found. Run 'npx changeset' to create one with at least a 'minor' bump."
             exit 1

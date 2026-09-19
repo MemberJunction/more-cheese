@@ -1,0 +1,58 @@
+[
+  {
+    "ID": "A8DB7343-DCC9-44D1-B99F-9E21024C3C2E",
+    "Name": "Corporation",
+    "Description": "Incorporated business entity (C-Corp, S-Corp)",
+    "IconClass": "fa-solid fa-building",
+    "DisplayRank": 10
+  },
+  {
+    "ID": "288B017D-60A4-48A7-A845-EF30B99BDBEF",
+    "Name": "LLC",
+    "Description": "Limited liability company",
+    "IconClass": "fa-solid fa-briefcase",
+    "DisplayRank": 20
+  },
+  {
+    "ID": "BAAA53F4-A8AA-4EAA-B04E-1BA6F964B341",
+    "Name": "Non-Profit",
+    "Description": "Tax-exempt non-profit organization (501(c)(3), etc.)",
+    "IconClass": "fa-solid fa-hand-holding-heart",
+    "DisplayRank": 30
+  },
+  {
+    "ID": "1E61230B-0F48-458A-811B-66C9CF6B688E",
+    "Name": "Government",
+    "Description": "Government agency or department",
+    "IconClass": "fa-solid fa-landmark",
+    "DisplayRank": 40
+  },
+  {
+    "ID": "5CAB6265-CB87-4269-A321-2473160BD625",
+    "Name": "Partnership",
+    "Description": "General or limited partnership",
+    "IconClass": "fa-solid fa-handshake",
+    "DisplayRank": 50
+  },
+  {
+    "ID": "042C63AF-93EB-4BB4-A469-F3C209F8936E",
+    "Name": "Sole Proprietorship",
+    "Description": "Unincorporated business owned by a single individual",
+    "IconClass": "fa-solid fa-user-tie",
+    "DisplayRank": 60
+  },
+  {
+    "ID": "7D6D1763-3198-42B2-A23C-F0FF76DAD8D2",
+    "Name": "Association",
+    "Description": "Professional or trade association",
+    "IconClass": "fa-solid fa-people-group",
+    "DisplayRank": 70
+  },
+  {
+    "ID": "4BE0D87B-EFCB-447D-9410-FEF8EED23BC8",
+    "Name": "Educational Institution",
+    "Description": "School, college, university, or training organization",
+    "IconClass": "fa-solid fa-graduation-cap",
+    "DisplayRank": 80
+  }
+]

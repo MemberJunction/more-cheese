@@ -1,0 +1,36 @@
+{
+  "fields": {
+    "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+    "Name": "Course Offerings by Category",
+    "Description": "Payload returned by Skip",
+    "TypeID": "@lookup:MJ: Artifact Types.Name=Component",
+    "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+    "Visibility": "Always",
+    "SkipEmbeddings": true
+  },
+  "relatedEntities": {
+    "MJ: Artifact Versions": [
+      {
+        "fields": {
+          "ArtifactID": "@parent:ID",
+          "VersionNumber": 1,
+          "Content": "{\n  \"name\": \"CourseOfferingsByCategory\",\n  \"title\": \"Course Offerings by Category\",\n  \"description\": \"Educational analytics dashboard displaying the distribution of course offerings across subject categories with drill-down capabilities to explore individual course cohorts, schedules, and duration.\",\n  \"type\": \"dashboard\",\n  \"location\": \"registry\",\n  \"registry\": \"Skip\",\n  \"namespace\": \"analytics/dashboards\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": [\n    {\n      \"name\": \"CourseMetricsHeader\",\n      \"title\": \"Course Metrics Header\",\n      \"description\": \"KPI summary cards and cohort year filter controls with reset view action\",\n      \"type\": \"form\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"analytics/kpis\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"SimpleChart\",\n      \"title\": \"Simple Chart\",\n      \"description\": \"Standalone single-level chart component with NO built-in drill-down functionality. Renders bar/line/pie/doughnut/area/scatter charts using Chart.js 4.4.1. Emits onClick events but doesn't handle navigation - parent component must wire up drill-down logic.\\n\\n#### SimpleChart - ONLY use when:\\n✅ Single data series (one line, one set of bars, one pie)\\n✅ No built-in drill-down needed (parent handles onClick)\\n✅ Standard chart types (bar, line, pie, doughnut, area, scatter)\\n\\n❌ DO NOT USE SimpleChart when:\\n- Multiple series on same chart (e.g., \\\"this year vs last year\\\", \\\"revenue AND count\\\")\\n- Dual Y-axes needed\\n- Complex legend with multiple data series\\n- Any multi-dimensional comparison\\n- User explicitly wants 'drill-down to table' (use SimpleDrilldownChart instead)\\n\\n**Use For:** standalone visualizations, dashboard widgets, building blocks in custom multi-level drill-downs.\\n\\nAuto-aggregates data client-side by groupBy field with count/sum/average/min/max methods. Smart auto-type selection: date fields→line, ≤5 categories→pie (preferred over doughnut), else→bar. Single-series bar charts use different colors for each bar. Formats values automatically: currency ($ for Amount fields), dates (locale format), numbers (commas). Exports as PNG image. Click events highlight the selected element and return {label, value, records: Array<object>, percentage} for parent to implement custom drill logic. No re-animation on element clicks.\\n\\n**Layout:** SimpleChart manages its own height via the `height` prop (default 400px). To control chart size, pass `height` directly — do not use a fixed-height wrapper div.\\n\",\n      \"type\": \"chart\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"Generic/UI/Chart\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"name\": \"DataGrid\",\n      \"title\": \"Data Grid\",\n      \"description\": \"Flexible data grid component with its own simplified API. Accepts **data via props** (you manage data loading). Supports sorting, filtering, paging, row selection. Optional native record opening on row click (provide entityName + entityPrimaryKeys). Two column modes: simple (string array `['Name', 'Price']`) or advanced (ColumnDef objects: `{field, header, render, width, sortable}`). Metadata-aware formatting: dates (locale with time), booleans (Yes/No), value lists (colored tags with 50+ status colors), money ($USD), decimals, integers (commas). Long text handling: truncate (ellipsis), expand (click 'show more/less'), tooltip (hover), wrap (word-break), none.\\n\\n#### DataGrid - ONLY use when:\\n✅ You already have the data (from your own RunView call, aggregated query, joined tables, API response, etc.)\\n✅ You need custom data manipulation before display (filtering, transformation, merging multiple sources)\\n✅ You need full control over the data loading logic\\n✅ Displaying 2+ records in a list/table format\\n✅ Works with any array of objects (not just entity records)\\n\\n❌ DO NOT USE DataGrid when:\\n- You want automatic entity record loading → **Use EntityDataGrid instead** (it calls RunView for you)\\n- Displaying a single record → **Use SingleRecordView instead**\\n- Need data visualization → **Use SimpleChart or SimpleDrilldownChart instead**\\n- Need automatic caching and pagination logic → **Use EntityDataGrid instead**\\n\\n**Key difference from EntityDataGrid**: DataGrid is data-agnostic and passive (you pass data in). EntityDataGrid is entity-aware and active (it loads data via RunView). Choose DataGrid when you need control over data loading, EntityDataGrid for automatic entity record loading with smart caching.\\n\\n**Row keys**: DataGrid assigns each row's React key using this priority: `row.key` → `entityPrimaryKeys` (joined with `_`) → `row.ID` → `row.id` → `index`. When `entityPrimaryKeys` is provided, the primary key fields are used to build a unique key per row. For client-side joins where the output `ID` may not be unique, provide `entityPrimaryKeys` pointing to the field(s) that uniquely identify each row.\\n\",\n      \"type\": \"table\",\n      \"location\": \"registry\",\n      \"registry\": \"Skip\",\n      \"namespace\": \"Generic/UI/Table\",\n      \"version\": \"1.0.0\"\n    }\n  ]\n}",
+          "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+          "ContentHash": "3f2f20d2d0af824f7d0b76bc049970ac946c3f9a512636061cc4f4857d9a52c2",
+          "Name": "Course Offerings by Category",
+          "Description": "Educational analytics dashboard displaying the distribution of course offerings across subject categories with drill-down capabilities to explore individual course cohorts, schedules, and duration.",
+          "ContentMode": "Text",
+          "ContentSizeBytes": "5098",
+          "ForceToolsOnly": false,
+          "SkipEmbeddings": true
+        },
+        "primaryKey": {
+          "ID": "C865EE7B-9F39-4755-977D-DB87BA7B1E9A"
+        }
+      }
+    ]
+  },
+  "primaryKey": {
+    "ID": "F70CF3A3-40A1-4821-9606-0ACBFE4487EF"
+  }
+}

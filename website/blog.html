@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · More Cheese</title>
+<meta name="description" content="The ICF blog: certification, education, advocacy, events, industry news and member spotlights from the International Cheese Federation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // One place to change the palette. A yellower variant is a change to these
+  // six values (plus `butter`, which is defined and deliberately unused today).
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          milk:     '#FCFBF7',
+          pasture:  '#145C3D',
+          clover:   '#C8E3A0',
+          brick:    '#A23C2C',
+          charcoal: '#242424',
+          mid:      '#5E6560',
+          butter:   '#EFC24A'
+        },
+        fontFamily: {
+          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
+          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
+        },
+        screens: { nav: '900px' }
+      }
+    }
+  };
+</script>
+<link rel="stylesheet" href="./assets/site.css">
+<script src="./assets/site.js" defer></script>
+</head>
+<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="relative border-b border-charcoal/15 bg-milk">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
+    <div class="flex items-center gap-2.5">
+      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
+        <span class="logo-dot" aria-hidden="true"></span>More Cheese
+      </a>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
+        <span class="mc-badge__dot" aria-hidden="true"></span>
+        <span class="mc-badge__long">Fictional demo</span>
+        <span class="mc-badge__short">Fiction</span>
+      </a>
+    </div>
+    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
+      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
+      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
+      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
+      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
+      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
+      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
+      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
+    </ul>
+    <div class="flex items-center gap-2">
+      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
+      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav-toggle-label">Menu</span>
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="border-b border-charcoal/15 bg-milk">
+    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
+      <p class="text-xs font-bold uppercase tracking-[.14em] text-brick">Publications</p>
+      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">ICF Blog</h1>
+      <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">Certification, education, advocacy, events, industry news and the members behind them — written by the Federation, for the people who make, age, sell and buy the cheese.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="posts-h">
+    <h2 id="posts-h" class="sr-only">Recent posts</h2>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Certification</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/the-plan-behind-the-plan/" class="text-charcoal no-underline hover:text-pasture">The plan behind the plan: what the HACCP credential actually covers</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-09-11">11 September 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Your food-safety plan is about your facility; the credential is about whether you can defend that plan to an inspector who has questions.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl bg-clover p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-pasture">Member Spotlight</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/a-jura-affineurs-one-week-a-year/" class="text-charcoal no-underline hover:text-pasture">A Jura affineur's one week a year</a>
+        </h3>
+        <p class="m-0 text-sm text-[#41503F]"><time datetime="2019-08-23">23 August 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#243027]">Henri Dubois comes over for seven days each summer, and the cohort he teaches spends the rest of the year arguing about what he said.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Education</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/what-cave-management-actually-teaches/" class="text-charcoal no-underline hover:text-pasture">What cave management actually teaches</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-08-14">14 August 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Less about humidity numbers than about noticing, a week early, that the numbers are drifting.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Certification</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/the-case-not-the-cave/" class="text-charcoal no-underline hover:text-pasture">The case, not the cave</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-07-12">12 July 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">The Certified Cheese Professional exam is written for the person at the counter, and retailers keep telling us the sensory section is the easy half.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Events</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/join-thursdays-apprenticeship-webinar/" class="text-charcoal no-underline hover:text-pasture">Join Thursday's apprenticeship webinar</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-07-10">10 July 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">An hour on how member creameries are training the next maker, and what they wish they had done differently.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl bg-pasture p-6 text-white">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Advocacy</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/three-months-of-safety-net-payments/" class="text-white no-underline underline-offset-4 hover:underline">Three months of safety-net payments</a>
+        </h3>
+        <p class="m-0 text-sm text-clover"><time datetime="2019-07-08">8 July 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] opacity-95">What the payments covered, what they did not, and what members told us when we asked whether the program reached them at all.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Industry News</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/a-smaller-herd-and-a-firmer-price/" class="text-charcoal no-underline hover:text-pasture">A smaller herd and a firmer price</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-06-28">28 June 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Fewer cows has meant a steadier milk price, which is good news for anyone selling milk and a harder year for anyone buying it.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl bg-clover p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-pasture">Education</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/an-affineurs-cave-in-a-hot-june/" class="text-charcoal no-underline hover:text-pasture">An affineur's cave in a hot June</a>
+        </h3>
+        <p class="m-0 text-sm text-[#41503F]"><time datetime="2019-06-26">26 June 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#243027]">Three members describe what a fortnight of heat did to their rinds, and what they changed before the next one.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Events</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/tune-in-wholesale-negotiation-webinar/" class="text-charcoal no-underline hover:text-pasture">Tune in: Wholesale Negotiation webinar</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-06-24">24 June 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Marcus Chen buys specialty cheese for Mongers' Row in Seattle, and he has agreed to explain what he can and cannot move on.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Events</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/registration-opens-clover-pasta-filata-workshop/" class="text-charcoal no-underline hover:text-pasture">Registration opens: Clover pasta-filata workshop</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-06-21">21 June 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Two days on stretch, salt and the mozzarella nobody gets right the first time; seats are limited because everyone works the curd.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl bg-brick p-6 text-white">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Industry News</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/one-tariff-line-opens-as-another-closes/" class="text-white no-underline underline-offset-4 hover:underline">One tariff line opens as another closes</a>
+        </h3>
+        <p class="m-0 text-sm text-clover"><time datetime="2019-06-10">10 June 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] opacity-95">One market reopened this spring and another shut on 1 June, which is the whole game for our export-active members.</p>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
+        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Certification</p>
+        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
+          <a href="https://morecheese.org/what-the-cheese-foundations-certificate-is-for/" class="text-charcoal no-underline hover:text-pasture">What the Cheese Foundations Certificate is for</a>
+        </h3>
+        <p class="m-0 text-sm text-mid"><time datetime="2019-05-22">22 May 2019</time></p>
+        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Six weeks that give a newcomer the vocabulary to ask a maker, a monger and an inspector the right question.</p>
+      </article>
+
+    </div>
+    <p class="mt-8 text-[15px] text-mid">Looking for the article layout? <a href="./post.html" class="text-brick underline underline-offset-2">See the single-post template</a>.</p>
+  </section>
+</main>
+
+<footer class="bg-charcoal text-[#D9DBD4]">
+  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
+    <div class="flex flex-wrap justify-between gap-10">
+      <div class="max-w-sm">
+        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
+          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+        </div>
+        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
+        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+      </div>
+      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
+        <div>
+          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
+          <ul class="space-y-1.5">
+            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
+            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
+            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
+            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
+          <ul class="space-y-1.5">
+            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
+            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
+            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
+            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
+          <ul class="space-y-1.5">
+            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
+            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
+            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
+          <ul class="space-y-1.5">
+            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
+            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
+    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+  </div>
+</footer>
+
+</body>
+</html>

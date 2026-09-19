@@ -1,0 +1,299 @@
+[
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "11101",
+      "Name": "Operating Cash",
+      "AccountType": "Asset",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true,
+      "Description": "ICF operating cash — company default for Cash"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000011101"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.874Z",
+      "checksum": "64dae2bfe755e2ff862ba822475918acf8e0efbd181af22018e897d7c979d424"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "11102",
+      "Name": "Operating Bank",
+      "AccountType": "Asset",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": false,
+      "Description": "ICF bank account — company default for BankAccount"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000011102"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.887Z",
+      "checksum": "31ccbe2c7881a2db222e8312d6ad75f662607909727486b0c5be5ec5cdc973f4"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "11201",
+      "Name": "Accounts Receivable",
+      "AccountType": "Asset",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true,
+      "Description": "ICF AR control — company default for Accounts Receivable"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000011201"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.900Z",
+      "checksum": "c6e33117dbcc2ee757af7aacdadd1a1ecee4f39d62d025a8e002540d110db483"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "13000",
+      "Name": "Inventory",
+      "AccountType": "Asset",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": false,
+      "Description": "ICF inventory — company default for Inventory"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000013000"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.912Z",
+      "checksum": "b4b38e66d0143502fb365afccfbf9734342725e8751d611aed703e06c7fe3137"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "21201",
+      "Name": "Sales Tax Payable",
+      "AccountType": "Liability",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000021201"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.923Z",
+      "checksum": "9406a02677c1ba100e5a31f96c43fa56c83f8c24ae0671ddeccaa6097ec7563f"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "21301",
+      "Name": "Deferred Revenue",
+      "AccountType": "Liability",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true,
+      "Description": "ICF deferred revenue — company default (memberships recognize Even Over Time)"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000021301"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.934Z",
+      "checksum": "dff3468a9ed0ac2911fcd600c12715e4b7596ad8ac3a519467c27218ab5f75ea"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "21401",
+      "Name": "Commission Payable",
+      "AccountType": "Liability",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000021401"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.946Z",
+      "checksum": "4dbd72ea2e838877777bc82522b0c951e90ca7b3fc92bcc7b9f3a1a44c63987e"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "21402",
+      "Name": "Partner Rev Share Payable",
+      "AccountType": "Liability",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000021402"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.956Z",
+      "checksum": "5825bed9df2df8bb92ea5793c59a6763519e5d1554b49fadaf19213057727d96"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "40100",
+      "Name": "Sales Revenue",
+      "AccountType": "Revenue",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true,
+      "Description": "ICF sales — company default for Sales (events/courses/goods)"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000040100"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.968Z",
+      "checksum": "c7835d434454dcffc3b70143882a3f08b49e8e16160621c4a9dbc65071207c06"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "40200",
+      "Name": "Subscription Revenue",
+      "AccountType": "Revenue",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true,
+      "Description": "ICF membership/subscription revenue — Product Type Membership Sales role"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000040200"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.979Z",
+      "checksum": "0af25d68e9d49489ff03f4d16f4bdb054e7f61d2e42f922949b3d6e657562b6e"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "41000",
+      "Name": "Sales Discounts",
+      "AccountType": "Revenue",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": false,
+      "Description": "ICF sales discounts (contra-revenue)"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000041000"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:24.993Z",
+      "checksum": "68ff6cd73d8fe3c3832ff744930ac53be8a723ede3eec4afd69a978b50bca48f"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "42000",
+      "Name": "Sales Returns and Allowances",
+      "AccountType": "Revenue",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": false
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000042000"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:25.007Z",
+      "checksum": "713671c6c6970fd9c6b70169b2384d1ae9f350467bbecff282ebd8d44fea6a5e"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "50400",
+      "Name": "Realized FX Gain/Loss",
+      "AccountType": "Expense",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000050400"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:25.020Z",
+      "checksum": "00e0df66068707686b6047d637e1f7d4a8f58f4b7b475a88af31e607675f6409"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "50500",
+      "Name": "Unrealized FX Gain/Loss",
+      "AccountType": "Expense",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": true
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000050500"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:25.037Z",
+      "checksum": "54ae0af9f4e87835ee317338b494e18da6b535dc4410648fa962de1731741f78"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "50000",
+      "Name": "Cost of Goods Sold",
+      "AccountType": "Expense",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": false
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000050000"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:25.050Z",
+      "checksum": "62211a2c1c0044c724a784f104652571fd49c1da9755912bac019eef5513c4f5"
+    }
+  },
+  {
+    "fields": {
+      "CompanyID": "E8A1D92C-38A2-51E7-8FB2-12C9B7A65D30",
+      "Code": "51000",
+      "Name": "Processing Fee",
+      "AccountType": "Expense",
+      "CurrencyCode": "USD",
+      "IsActive": true,
+      "IsSystemSeeded": false,
+      "Description": "Payment provider cut — company default for Processing Fee"
+    },
+    "primaryKey": {
+      "ID": "E8A1D92C-38A2-51E7-8FB2-000000051000"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T01:24:25.064Z",
+      "checksum": "80e0cf6e961cedbc6730844a507d850808f5528c45e2fa70f298b1d709eb0ad2"
+    }
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Organization Member Activity Summary",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "For each organization with 5 or more member employees, show me the organization name, member count, and their combined event and course activity. Display as a table ranked by total activity. Let me click on an organization to see who the members are and their individual activity. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "AEEE395C-56A6-4126-B6A7-55529FA55922"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Organization Member Activity Ranking leaderboard is ready, powered by Organizations, Member Profiles, Event Registrations, and Course Enrollments. It displays qualifying organizations with 5 or more employee members ranked by their combined event and course engagement, along with top-level KPI summary cards. You can click any organization row to expand its member roster and see individual activity breakdowns, or drill directly into organization and person profiles.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "126FAF17-08F7-462B-B61C-86F7A7FC7C74"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "8C7C1809-0DDA-4FA7-A80E-77AF322EA5F1"
+    }
+  }
+]

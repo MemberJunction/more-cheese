@@ -1,0 +1,50 @@
+[
+  {
+    "primaryKey": {
+      "ID": "C3E5A7B9-1D2F-4A6C-8E0B-4F6D8A2C1E75"
+    },
+    "fields": {
+      "DashboardID": "@lookup:MJ: Dashboards.Name=Membership Analytics",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+      "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
+      "DisplayName": "Membership Analytics",
+      "Sequence": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BC0DB1F0-35C8-560D-A69D-FCD66A992D2B"
+    },
+    "fields": {
+      "DashboardID": "@lookup:MJ: Dashboards.Name=Revenue and Finance",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+      "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
+      "DisplayName": "Revenue and Finance",
+      "Sequence": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "335DDC9D-47FF-5E8B-B003-0D3EB857A5AE"
+    },
+    "fields": {
+      "DashboardID": "@lookup:MJ: Dashboards.Name=Events and Learning",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+      "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
+      "DisplayName": "Events and Learning",
+      "Sequence": 3
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72877428-C78B-5065-95D6-E4236226DD81"
+    },
+    "fields": {
+      "DashboardID": "@lookup:MJ: Dashboards.Name=Member Engagement",
+      "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+      "DashboardCategoryID": "@lookup:MJ: Dashboard Categories.Name=More Cheese",
+      "DisplayName": "Member Engagement",
+      "Sequence": 4
+    }
+  }
+]

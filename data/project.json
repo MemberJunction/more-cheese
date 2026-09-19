@@ -1,0 +1,24 @@
+{
+  "name": "more-cheese",
+  "version": "1.0.0",
+  "domain": "more-cheese",
+  "uuidNamespace": "8d3e9117-2b36-4078-a6fe-4c60144f8101",
+  "description": "International Cheese Foundation world model, hero personas, motifs, and retrospective simulation configuration",
+  "rulesetPath": "./ruleset",
+  "startCycle": 2019,
+  "releaseDate": "2026-09-02",
+  "cycleUnit": "year",
+  "output": {
+    "metadataDir": "../generated"
+  },
+  "catalogs": {
+    "MJ_BizApps_Common: Organization Types": "./catalogs/organization-types.json",
+    "MJ_BizApps_Common: Address Types": "./catalogs/address-types.json",
+    "MJ_BizApps_Common: Contact Types": "./catalogs/contact-types.json",
+    "Committees: Roles": "./catalogs/committee-roles.json",
+    "MJ_BizApps_Issues: Issue Status": "./catalogs/issue-statuses.json",
+    "MJ: Entities": "./catalogs/entities.json",
+    "MJ_BizApps_Common: Activity Types": "./catalogs/activity-types.json",
+    "MJ: Users": "./catalogs/users.json"
+  }
+}

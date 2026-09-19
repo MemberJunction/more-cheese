@@ -1,0 +1,687 @@
+#!/usr/bin/env node
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, resolve, relative, sep } from 'node:path';
+import { execSync } from 'node:child_process';
+
+const TARGET_ROOTS = [resolve(process.cwd(), 'generated'), resolve(process.cwd(), 'config')];
+
+function findJsonFiles(dir) {
+  const results = [];
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    const stat = statSync(full);
+    if (stat.isDirectory()) {
+      results.push(...findJsonFiles(full));
+    } else if (entry.endsWith('.json')) {
+      results.push(full);
+    }
+  }
+  return results;
+}
+
+// 1. Index primary keys globally and per target directory
+const allPrimaryKeys = new Set();
+const primaryKeysByDir = new Map();
+const records = [];
+
+const files = [];
+for (const root of TARGET_ROOTS) {
+  for (const f of findJsonFiles(root)) {
+    files.push({ root, file: f });
+  }
+}
+for (const { root, file } of files) {
+  try {
+    const raw = readFileSync(file, 'utf-8');
+    const parsed = JSON.parse(raw);
+    const arr = Array.isArray(parsed) ? parsed : (parsed && typeof parsed === 'object' ? [parsed] : []);
+    if (arr.length === 0) continue;
+
+    const relPath = relative(root, file);
+    const dir = relPath.split(sep)[0];
+
+    if (!primaryKeysByDir.has(dir)) {
+      primaryKeysByDir.set(dir, new Set());
+    }
+    const dirKeys = primaryKeysByDir.get(dir);
+
+    for (const r of arr) {
+      if (r?.primaryKey?.ID) {
+        const pk = r.primaryKey.ID.toUpperCase();
+        allPrimaryKeys.add(pk);
+        dirKeys.add(pk);
+      }
+      if (r?.fields) {
+        records.push({ dir, primaryKey: r.primaryKey, fields: r.fields });
+      }
+      const subCollections = [
+        ...(r?.collections ? Object.values(r.collections) : []),
+        ...(r?.relatedEntities ? Object.values(r.relatedEntities) : [])
+      ];
+      for (const items of subCollections) {
+        if (Array.isArray(items)) {
+          for (const item of items) {
+            if (item?.primaryKey?.ID) {
+              const pk = item.primaryKey.ID.toUpperCase();
+              allPrimaryKeys.add(pk);
+              dirKeys.add(pk);
+            }
+            if (item?.fields) {
+              records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.error(`Error reading ${file}:`, err);
+  }
+}
+
+// 2. Directory target map: enforce target-aware referential resolution
+const FIELD_TARGET_DIR_MAP = new Map([
+  ['CompanyID', 'companies'],
+  ['ReceivingCompanyID', 'companies'],
+  ['PersonID', 'people'],
+  ['BillToPersonID', 'people'],
+  ['OrganizationID', 'organizations'],
+  ['BillToOrganizationID', 'organizations'],
+  ['ProductID', 'products'],
+  ['ProductCategoryID', 'product-categories'],
+  ['OrderHeaderID', 'orders'],
+  ['OrderID', 'orders'],
+  ['ReversesOrderHeaderID', 'orders'],
+  ['OrderLineID', 'orders'],
+  ['PaymentHeaderID', 'payments'],
+  ['EventID', 'events'],
+  ['CourseID', 'courses'],
+  ['CertificationID', 'certifications']
+]);
+
+// 3. Explicit, documented exclusion list for known external cross-repo references
+// Each exclusion tracks hit counts; an exclusion that matches 0 records will fail the build to catch stale exclusions.
+const EXCLUDED_EXTERNAL_FIELDS = new Map([
+  ['vector-indexes.ExternalID', { reason: 'Provider-side index name (a string, e.g. the Pinecone index), not a foreign key', hits: 0 }],
+  ['queries.EmbeddingModelID', { reason: 'Points to an MJ core AI Model seeded by MemberJunction', hits: 0 }],
+  ['queries.SQLDialectID', { reason: 'Points to an MJ core SQL Dialect seeded by MemberJunction', hits: 0 }],
+  ['relationships.RelationshipTypeID', { reason: 'Points to @memberjunction/bizapps-common seeded types', hits: 0 }],
+  ['form-responses.AnonymousSessionID', { reason: 'Anonymous browser session tokens from public form submissions', hits: 0 }],
+  ['products.ProductTypeID', { reason: 'Points to @mj-biz-apps/orders seeded product types', hits: 0 }],
+  ['products.RevenueRecognitionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded revenue recognition types', hits: 0 }],
+  ['products.SubscriptionTypeID', { reason: 'Points to @mj-biz-apps/orders seeded subscription types', hits: 0 }],
+  ['payments.PaymentTypeID', { reason: 'Points to @mj-biz-apps/orders seeded payment types', hits: 0 }],
+  ['queries.EmbeddingModelID', { reason: 'Points to core MJ AI Model seeded by @memberjunction/server', hits: 0 }],
+  ['queries.SQLDialectID', { reason: 'Points to core MJ SQL Dialect seeded by @memberjunction/server', hits: 0 }],
+  ['gl-account-links.RecordID', {
+    reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
+    hits: 0,
+    condition: (fields) => String(fields.EntityID ?? '').includes('Product Types')
+  }]
+]);
+
+console.log('='.repeat(80));
+console.log('       TARGET-AWARE METADATA REFERENTIAL INTEGRITY CLOSURE AUDIT       ');
+console.log('='.repeat(80));
+console.log(`Indexed ${allPrimaryKeys.size.toLocaleString()} unique Primary Keys across ${primaryKeysByDir.size} directories and ${records.length.toLocaleString()} records.\n`);
+
+let evaluatedCount = 0;
+const orphanMap = new Map();
+
+for (const r of records) {
+  for (const [fieldName, val] of Object.entries(r.fields)) {
+    // Check every field ending in 'ID' except primary key 'ID'
+    if (fieldName.endsWith('ID') && fieldName !== 'ID') {
+      if (!val || typeof val !== 'string' || val.startsWith('@lookup:') || val.startsWith('@parent:')) {
+        continue;
+      }
+
+      const qualifiedKey = `${r.dir}.${fieldName}`;
+      const exclusion = EXCLUDED_EXTERNAL_FIELDS.get(qualifiedKey);
+      if (exclusion) {
+        if (!exclusion.condition || exclusion.condition(r.fields)) {
+          exclusion.hits++;
+          continue;
+        }
+      }
+
+      evaluatedCount++;
+      const valUpper = val.toUpperCase();
+
+      // Target-aware check if target directory is known
+      let targetDir = FIELD_TARGET_DIR_MAP.get(fieldName);
+      if (r.dir === 'gl-account-links' && fieldName === 'RecordID' && String(r.fields.EntityID ?? '').includes('Companies')) {
+        targetDir = 'companies';
+      }
+      if (targetDir) {
+        const targetKeys = primaryKeysByDir.get(targetDir);
+        if (!targetKeys || !targetKeys.has(valUpper)) {
+          if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
+          orphanMap.get(qualifiedKey).push(`${val} (expected in ${targetDir})`);
+        }
+      } else {
+        // Fallback global closure check
+        if (!allPrimaryKeys.has(valUpper)) {
+          if (!orphanMap.has(qualifiedKey)) orphanMap.set(qualifiedKey, []);
+          orphanMap.get(qualifiedKey).push(val);
+        }
+      }
+    }
+  }
+}
+
+// Verify that every declared exclusion actually matched records
+let staleExclusions = 0;
+console.log('External Exclusions Evaluated:');
+for (const [key, meta] of EXCLUDED_EXTERNAL_FIELDS.entries()) {
+  console.log(`  ${key.padEnd(46)} : ${meta.hits.toLocaleString()} skipped (${meta.reason})`);
+  if (meta.hits === 0) {
+    console.error(`  ❌ STALE EXCLUSION: ${key} matched 0 records! Remove it from EXCLUDED_EXTERNAL_FIELDS.`);
+    staleExclusions++;
+  }
+}
+
+console.log('\n' + '-'.repeat(80));
+console.log(`Total Foreign Key References Evaluated: ${evaluatedCount.toLocaleString()}`);
+console.log(`Total Orphaned References Found:        ${orphanMap.size}`);
+console.log('='.repeat(80));
+
+if (staleExclusions > 0) {
+  console.error(`\n❌ Metadata closure check FAILED due to ${staleExclusions} stale exclusion(s).`);
+  process.exit(1);
+}
+
+if (evaluatedCount === 0) {
+  console.error('\n❌ Metadata closure check FAILED: 0 foreign key references were evaluated!');
+  process.exit(1);
+}
+
+if (orphanMap.size > 0) {
+  console.error(`\n❌ Metadata closure check FAILED: Unresolved foreign keys detected:`);
+  for (const [field, samples] of orphanMap.entries()) {
+    console.error(`  - ${field}: ${samples.length} orphans (sample: ${samples[0]})`);
+  }
+  process.exit(1);
+}
+
+// 4. Directory coverage audit: Every directory containing .mj-sync.json must be in root .mj-sync.json directoryOrder
+console.log('\n--- Directory Coverage Audit ---');
+for (const root of TARGET_ROOTS) {
+  const rootSyncConfig = JSON.parse(readFileSync(join(root, '.mj-sync.json'), 'utf-8'));
+  const declaredDirs = new Set(rootSyncConfig.directoryOrder ?? []);
+  const actualSyncDirs = [];
+  for (const entry of readdirSync(root)) {
+    const full = join(root, entry);
+    if (statSync(full).isDirectory() && !entry.startsWith('.')) {
+      if (readdirSync(full).includes('.mj-sync.json')) {
+        actualSyncDirs.push(entry);
+      }
+    }
+  }
+  const missingFromOrder = actualSyncDirs.filter((d) => !declaredDirs.has(d));
+  if (missingFromOrder.length > 0) {
+    console.error('\n❌ DIRECTORY ORDER AUDIT FAILED: The following ' + missingFromOrder.length + ' entity directories are missing from ' + relative(process.cwd(), root) + '/.mj-sync.json directoryOrder:');
+    for (const d of missingFromOrder) console.error('  - ' + d);
+    process.exit(1);
+  }
+  console.log('✓ All ' + actualSyncDirs.length + ' entity directories declared in ' + relative(process.cwd(), root) + '/.mj-sync.json directoryOrder.');
+}
+
+// 5. Cross-directory Primary Key Uniqueness audit
+console.log('\n--- Cross-Directory Primary Key Uniqueness Audit ---');
+const pkOwnerMap = new Map();
+const SECOND_PASS_DIRECTORIES = new Map([
+  ['sonar-score-models-activate', 'sonar-score-models'],
+  ['conversations-owner', 'conversations'], // created as System (owner gate on details), then ownership flipped to the demo user
+]);
+let duplicatePks = 0;
+for (const [dir, pks] of primaryKeysByDir.entries()) {
+  if (SECOND_PASS_DIRECTORIES.has(dir)) continue; // second-pass dirs re-touch first-pass records on purpose
+  for (const pk of pks) {
+    if (pkOwnerMap.has(pk)) {
+      console.error(`❌ PK COLLISION: Primary Key ${pk} exists in both '${pkOwnerMap.get(pk)}' and '${dir}'!`);
+      duplicatePks++;
+    } else {
+      pkOwnerMap.set(pk, dir);
+    }
+  }
+}
+if (duplicatePks > 0) {
+  console.error(`\n❌ PK UNIQUENESS AUDIT FAILED: ${duplicatePks} cross-directory primary key collision(s) found.`);
+  process.exit(1);
+}
+console.log(`✓ Zero cross-directory Primary Key collisions across ${pkOwnerMap.size.toLocaleString()} unique PKs.`);
+
+// 6. Order & Line Financial Integrity audit (TotalGross == line sum, Balance == TotalGross - AmountPaid, 0 overpaid, LineTotalNet/LineTotalGross match formula)
+console.log('\n--- Order & Line Financial Integrity Audit ---');
+const orderLines = records.filter((r) => r.dir === 'order-lines' || (r.dir === 'orders' && r.fields?.OrderHeaderID));
+let lineTotalNetMismatches = 0;
+let lineTotalGrossMismatches = 0;
+
+for (const ol of orderLines) {
+  const q = Number(ol.fields?.Quantity) || 1;
+  const p = Number(ol.fields?.UnitPrice) || 0;
+  const discountPct = Number(ol.fields?.DiscountPct) || 0;
+  const d = Number(ol.fields?.DiscountAmount) || 0;
+  const c = Number(ol.fields?.ChargeAmount) || 0;
+  const t = Number(ol.fields?.LineTax) || 0;
+  const expNet = Math.round(((q * p * (1 - discountPct)) - d) * 100) / 100;
+  const expGross = Math.round((expNet + c + t) * 100) / 100;
+
+  if (ol.fields?.LineTotalNet === undefined || Math.abs(ol.fields.LineTotalNet - expNet) > 0.01) {
+    lineTotalNetMismatches++;
+  }
+  if (ol.fields?.LineTotalGross === undefined || Math.abs(ol.fields.LineTotalGross - expGross) > 0.01) {
+    lineTotalGrossMismatches++;
+  }
+}
+
+if (lineTotalNetMismatches > 0 || lineTotalGrossMismatches > 0) {
+  console.error(
+    `\n❌ ORDER LINE TOTAL AUDIT FAILED: LineTotalNet mismatches: ${lineTotalNetMismatches}, LineTotalGross mismatches: ${lineTotalGrossMismatches}`
+  );
+  process.exit(1);
+}
+
+const lineSums = new Map();
+for (const ol of orderLines) {
+  const oid = ol.fields.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
+  if (!oid) continue;
+  lineSums.set(oid, (lineSums.get(oid) ?? 0) + Number(ol.fields.LineTotalGross));
+}
+
+const orders = records.filter((r) => r.dir === 'orders' && !r.fields?.OrderHeaderID);
+let grossMismatches = 0;
+let balanceMismatches = 0;
+let overpaidOrders = 0;
+
+for (const o of orders) {
+  const oid = o.primaryKey?.ID ? String(o.primaryKey.ID).toUpperCase() : null;
+  const f = o.fields;
+  const lineTotal = lineSums.get(oid);
+  if (lineTotal !== undefined && Math.abs(f.TotalGross - lineTotal) > 0.01) {
+    grossMismatches++;
+  }
+  const expectedBalance = Math.round((f.TotalGross - f.AmountPaid) * 100) / 100;
+  if (Math.abs(f.Balance - expectedBalance) > 0.01) {
+    balanceMismatches++;
+  }
+  if (f.AmountPaid > f.TotalGross + 0.01) {
+    overpaidOrders++;
+  }
+}
+
+if (grossMismatches > 0 || balanceMismatches > 0 || overpaidOrders > 0) {
+  console.error(
+    `\n❌ ORDER FINANCIAL AUDIT FAILED: Gross mismatches: ${grossMismatches}, Balance mismatches: ${balanceMismatches}, Overpaid orders: ${overpaidOrders}`
+  );
+  process.exit(1);
+}
+console.log(
+  `✓ All ${orderLines.length.toLocaleString()} order lines carry valid LineTotalNet and LineTotalGross.`
+);
+console.log(
+  `✓ All ${orders.length.toLocaleString()} orders pass financial integrity (TotalGross matches lines, Balance = TotalGross - AmountPaid, 0 overpaid).`
+);
+
+// 7. Membership Period Dues Order Pairing & Financial Identity Audit (R7-3, R7-4)
+console.log('\n--- Membership Period Dues Order Pairing & Financial Identity Audit (R7-3, R7-4) ---');
+const periods = records.filter((r) => r.dir === 'membership-periods');
+const products = records.filter((r) => r.dir === 'products');
+const categories = records.filter((r) => r.dir === 'product-categories');
+const membershipCategory = categories.find((c) => c.fields?.Name === 'Memberships');
+if (!membershipCategory) {
+  console.error("\n❌ DUES PAIRING AUDIT FAILED: 'Memberships' category not found in generated/product-categories");
+  process.exit(1);
+}
+const membershipCategoryID = String(membershipCategory.primaryKey?.ID).toUpperCase();
+
+const memProdIds = new Set(
+  products
+    .filter((p) => {
+      const catId = p.fields?.ProductCategoryID ? String(p.fields.ProductCategoryID).toUpperCase() : null;
+      return catId === membershipCategoryID;
+    })
+    .map((p) => String(p.primaryKey?.ID).toUpperCase())
+);
+
+const memOrders = new Map();
+const ordersById = new Map(orders.map((o) => [String(o.primaryKey?.ID).toUpperCase(), o]));
+
+for (const l of orderLines) {
+  const pid = l.fields?.ProductID ? String(l.fields.ProductID).toUpperCase() : null;
+  if (pid && memProdIds.has(pid)) {
+    const oid = l.fields?.OrderHeaderID ? String(l.fields.OrderHeaderID).toUpperCase() : null;
+    if (oid) {
+      const o = ordersById.get(oid);
+      if (o && o.fields?.OrderType === 'Sale') {
+        memOrders.set(oid, { order: o, line: l });
+      }
+    }
+  }
+}
+
+const billedPeriods = periods.filter((p) => (Number(p.fields?.DuesAmount) || 0) > 0);
+billedPeriods.sort((a, b) => new Date(a.fields.StartDate).getTime() - new Date(b.fields.StartDate).getTime());
+
+const claimedOrderIds = new Set();
+let unmatchedPeriods = 0;
+let duesIdentityMismatches = 0;
+
+for (const p of billedPeriods) {
+  const personId = p.fields?.PersonID ? String(p.fields.PersonID).toUpperCase() : null;
+  const pStart = p.fields?.StartDate ? new Date(p.fields.StartDate).getTime() : NaN;
+  if (!personId || isNaN(pStart)) {
+    unmatchedPeriods++;
+    continue;
+  }
+
+  const candidates = Array.from(memOrders.values()).filter(
+    (mo) =>
+      String(mo.order.fields?.BillToPersonID).toUpperCase() === personId &&
+      !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+  );
+
+  let best = null;
+  let bestDiff = Infinity;
+  for (const c of candidates) {
+    const oDate = c.order.fields?.OrderDate ? new Date(c.order.fields.OrderDate).getTime() : NaN;
+    if (!isNaN(oDate)) {
+      const diff = Math.abs(oDate - pStart);
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        best = c;
+      }
+    }
+  }
+
+  const diffDays = bestDiff / (1000 * 60 * 60 * 24);
+  if (best && diffDays <= 90) {
+    claimedOrderIds.add(String(best.order.primaryKey?.ID).toUpperCase());
+    const orderLinePrice = Number(best.line.fields?.UnitPrice) || 0;
+    const periodDues = Number(p.fields?.DuesAmount) || 0;
+    if (Math.abs(periodDues - orderLinePrice) > 0.01) {
+      duesIdentityMismatches++;
+    }
+  } else {
+    unmatchedPeriods++;
+  }
+}
+
+if (unmatchedPeriods > 0) {
+  console.error(
+    `\n❌ DUES PAIRING AUDIT FAILED: ${unmatchedPeriods} billed periods could not claim a distinct membership Sale order within 90 days.`
+  );
+  process.exit(1);
+}
+
+if (duesIdentityMismatches > 0) {
+  console.error(
+    `\n❌ DUES FINANCIAL IDENTITY AUDIT FAILED: ${duesIdentityMismatches} periods have DuesAmount differing from paired invoice UnitPrice.`
+  );
+  process.exit(1);
+}
+
+// Residual unclaimed orders audit
+const unclaimedOrders = Array.from(memOrders.values()).filter(
+  (mo) => !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+);
+
+for (const u of unclaimedOrders) {
+  const f = u.order.fields;
+  const isPendingRenewalDraft =
+    f.OrderNumber.startsWith('ORD-R-') &&
+    f.Status === 'Draft' &&
+    (f.AmountPaid || 0) === 0 &&
+    f.FulfillmentStatus === 'Pending';
+  if (!isPendingRenewalDraft) {
+    console.error(
+      `\n❌ RESIDUAL ORDERS AUDIT FAILED: Unclaimed membership Sale order ${f.OrderNumber} is not a valid pending renewal draft.`
+    );
+    process.exit(1);
+  }
+}
+
+console.log(
+  `✓ All ${billedPeriods.length.toLocaleString()} billed periods paired 1:1 to distinct membership Sale orders within 90 days.`
+);
+console.log(
+  `✓ 100% financial identity tie-out: MembershipPeriod.DuesAmount === OrderLine.UnitPrice on all ${billedPeriods.length.toLocaleString()} periods.`
+);
+console.log(
+  `✓ Exactly ${unclaimedOrders.length} residual membership Sale orders verified as upcoming unpaid renewal drafts (ORD-R-* Draft/Pending).`
+);
+
+// 8. Order & Line Status Shape Audit (R7-5, R8-1)
+console.log('\n--- Order & Line Status Shape Audit (R7-5, R8-1) ---');
+const physicalCategory = categories.find((c) => c.fields?.Name === 'Publications & Goods');
+if (!physicalCategory) {
+  console.error("\n❌ STATUS SHAPE AUDIT FAILED: 'Publications & Goods' category not found in generated/product-categories");
+  process.exit(1);
+}
+const physicalCategoryID = String(physicalCategory.primaryKey?.ID).toUpperCase();
+const physicalProductIds = new Set(
+  products
+    .filter((p) => String(p.fields?.ProductCategoryID).toUpperCase() === physicalCategoryID)
+    .map((p) => String(p.primaryKey?.ID).toUpperCase())
+);
+
+const linesByOrderId = new Map();
+for (const ol of orderLines) {
+  const oid = ol.fields?.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
+  if (!oid) continue;
+  if (!linesByOrderId.has(oid)) linesByOrderId.set(oid, []);
+  linesByOrderId.get(oid).push(ol);
+}
+
+let invalidOrderStatusCount = 0;
+for (const o of orders) {
+  const oid = String(o.primaryKey?.ID).toUpperCase();
+  const s = o.fields?.Status;
+  const f = o.fields?.FulfillmentStatus;
+  const t = o.fields?.OrderType;
+  const lines = linesByOrderId.get(oid) || [];
+  const hasPhysical = lines.some((l) => physicalProductIds.has(String(l.fields?.ProductID).toUpperCase()));
+
+  if (['Draft', 'Quoted', 'Voided'].includes(s) && f === 'Fulfilled') {
+    invalidOrderStatusCount++;
+  }
+  if (t === 'Cancellation') {
+    if (f !== 'Returned') {
+      invalidOrderStatusCount++;
+    }
+  } else if (s === 'Confirmed') {
+    if (!hasPhysical && f !== 'NotApplicable') {
+      invalidOrderStatusCount++;
+    } else if (hasPhysical) {
+      if ((o.fields?.AmountPaid || 0) >= (o.fields?.TotalGross || 0) && f !== 'Fulfilled') {
+        invalidOrderStatusCount++;
+      } else if ((o.fields?.AmountPaid || 0) === 0 && f !== 'Pending') {
+        invalidOrderStatusCount++;
+      }
+    }
+  }
+}
+
+let invalidLineStatusCount = 0;
+for (const ol of orderLines) {
+  const fs = ol.fields?.FulfillmentStatus;
+  if (!['Fulfilled', 'Pending', 'Returned'].includes(fs)) {
+    invalidLineStatusCount++;
+  }
+  const oid = ol.fields?.OrderHeaderID ? String(ol.fields.OrderHeaderID).toUpperCase() : null;
+  const o = oid ? ordersById.get(oid) : null;
+  if (o) {
+    if (['Draft', 'Quoted', 'Voided'].includes(o.fields?.Status) && fs === 'Fulfilled') {
+      invalidLineStatusCount++;
+    }
+    if (o.fields?.OrderType === 'Cancellation' && fs !== 'Returned') {
+      invalidLineStatusCount++;
+    }
+  }
+}
+
+if (invalidOrderStatusCount > 0 || invalidLineStatusCount > 0) {
+  console.error(
+    `\n❌ STATUS SHAPE AUDIT FAILED: ${invalidOrderStatusCount} invalid order statuses, ${invalidLineStatusCount} invalid line fulfillment statuses.`
+  );
+  process.exit(1);
+}
+
+// 9. Membership Product Prices Load-Bearing RecurrenceMonths: null Audit
+console.log('\n--- Membership Product Prices RecurrenceMonths Audit ---');
+const ANNUAL_MEMBERSHIP_PRICE_IDS = [
+  '0FD77933-317D-4BA9-9837-F30A37FE8F76', // Enthusiast Membership
+  '488480D6-4B47-470B-9BFD-F3EA1FBB9A1F', // Individual Membership
+  'D5156F09-228F-4731-882C-0FC077A4E768', // SmallBusiness Membership
+  'FF98075B-2C62-45E8-BB3B-5333230EBA99', // Corporate Membership
+];
+
+const prices = records.filter((r) => r.dir === 'product-prices');
+const pricesById = new Map(prices.map((p) => [String(p.primaryKey?.ID).toUpperCase(), p]));
+
+for (const id of ANNUAL_MEMBERSHIP_PRICE_IDS) {
+  const price = pricesById.get(id);
+  if (!price) {
+    console.error(`\n❌ PRODUCT PRICE AUDIT FAILED: Required annual membership price ${id} not found.`);
+    process.exit(1);
+  }
+  const fields = price.fields || {};
+  if (!('RecurrenceMonths' in fields) || fields.RecurrenceMonths !== null) {
+    console.error(
+      `\n❌ PRODUCT PRICE AUDIT FAILED: Price ${id} must explicitly carry "RecurrenceMonths": null to clear pre-fix '12' values on push. Found: ${JSON.stringify(fields.RecurrenceMonths)}`
+    );
+    process.exit(1);
+  }
+}
+console.log(
+  `✓ All 4 annual membership prices explicitly declare "RecurrenceMonths": null (load-bearing sync guard).`
+);
+
+// 10. Base Branch Record Count & Primary Key ID Stability Audit
+console.log('\n--- Base Branch Record Count & ID Stability Audit ---');
+
+function getBaseCommit() {
+  if (process.env.SKIP_BASE_DELTA_CHECK === '1') return null;
+
+  try {
+    execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
+  } catch {
+    return null;
+  }
+
+  const candidates = [
+    process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : null,
+    'origin/next',
+    'origin/main',
+    'HEAD~1'
+  ].filter(Boolean);
+
+  for (const ref of candidates) {
+    try {
+      execSync(`git rev-parse --verify ${ref}^{commit}`, { stdio: 'ignore' });
+      const baseSha = execSync(`git merge-base HEAD ${ref}`, { encoding: 'utf8' }).trim();
+      if (baseSha) return { ref, sha: baseSha };
+    } catch {}
+  }
+  return null;
+}
+
+const baseInfo = getBaseCommit();
+if (!baseInfo) {
+  console.log('⚠️ Skipping base delta check (no reachable base git commit or shallow clone).');
+} else {
+  console.log(`Auditing count and ID stability against base ${baseInfo.ref} (${baseInfo.sha.substring(0, 8)})...`);
+
+  try {
+    const out = execSync(`git ls-tree -r --name-only ${baseInfo.sha} generated/ config/`, { encoding: 'utf8' });
+    const baseFiles = out.trim().split('\n').filter(f => f.endsWith('.json') && !f.split('/').pop().startsWith('.mj-sync'));
+
+    const baseAllPKs = new Set();
+    const basePKsByDir = new Map();
+
+    for (const f of baseFiles) {
+      const parts = f.split('/');
+      const dir = parts[1];
+      if (!basePKsByDir.has(dir)) basePKsByDir.set(dir, new Set());
+      const dirSet = basePKsByDir.get(dir);
+
+      const raw = execSync(`git show ${baseInfo.sha}:${f}`, { maxBuffer: 100 * 1024 * 1024, encoding: 'utf8' });
+      const parsed = JSON.parse(raw);
+      const arr = Array.isArray(parsed) ? parsed : [parsed];
+      for (const r of arr) {
+        if (r?.primaryKey?.ID) {
+          const pk = r.primaryKey.ID.toUpperCase();
+          baseAllPKs.add(pk);
+          dirSet.add(pk);
+        }
+        const subCollections = [
+          ...(r?.collections ? Object.values(r.collections) : []),
+          ...(r?.relatedEntities ? Object.values(r.relatedEntities) : [])
+        ];
+        for (const items of subCollections) {
+          if (Array.isArray(items)) {
+            for (const item of items) {
+              if (item?.primaryKey?.ID) {
+                const pk = item.primaryKey.ID.toUpperCase();
+                baseAllPKs.add(pk);
+                dirSet.add(pk);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Folded / composed entities mapping (legacy standalone dir -> composed parent dir)
+    const composedInto = {
+      'payment-lines': 'payments',
+      'order-lines': 'orders'
+    };
+
+    // Deliberate removals are declared (with a reason) in data/pk-removals.json and are not "dropped".
+    let allowedRemovals = new Set();
+    try {
+      const rem = JSON.parse(readFileSync(resolve(process.cwd(), 'data', 'pk-removals.json'), 'utf-8'));
+      allowedRemovals = new Set((rem.removals || []).filter(r => r.reason).map(r => String(r.id).toUpperCase()));
+    } catch { /* no removals file */ }
+    let totalDroppedPKs = 0;
+    const droppedDetails = [];
+
+    for (const [dir, bSet] of basePKsByDir.entries()) {
+      const targetDir = composedInto[dir] || dir;
+      const cSet = primaryKeysByDir.get(targetDir) || new Set();
+      let kept = 0;
+      const missing = [];
+      for (const id of bSet) {
+        if (allowedRemovals.has(id)) { kept++; continue; }
+        if (cSet.has(id)) {
+          kept++;
+        } else {
+          missing.push(id);
+        }
+      }
+      if (kept < bSet.size) {
+        totalDroppedPKs += missing.length;
+        droppedDetails.push(`  ${dir}: lost ${missing.length} of ${bSet.size} records (target: ${targetDir})`);
+      }
+    }
+
+    if (totalDroppedPKs > 0) {
+      console.error(`\n❌ BASE DELTA CHECK FAILED: Found ${totalDroppedPKs.toLocaleString()} dropped or re-keyed Primary Keys compared to ${baseInfo.ref}!`);
+      for (const d of droppedDetails) {
+        console.error(d);
+      }
+      process.exit(1);
+    }
+
+    console.log(`✓ Zero dropped records and 100% Primary Key preservation across all ${baseAllPKs.size.toLocaleString()} base records.`);
+  } catch (err) {
+    console.error(`\n❌ Error during base delta audit:`, err);
+    process.exit(1);
+  }
+}
+
+console.log(
+  `\n✅ ALL METADATA INTEGRITY CHECKS PASSED (Closure, Directory Order, PK Uniqueness, Financials, Dues Pairing & Identity, Status Shape, Price Guard, Base Delta).`
+);
+process.exit(0);

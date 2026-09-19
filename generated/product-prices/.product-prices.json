@@ -1,0 +1,326 @@
+[
+  {
+    "fields": {
+      "ProductID": "736DDC26-30BF-5357-8F5E-9BB946B3B415",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 150,
+      "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Enthusiast Membership (annual)"
+    },
+    "primaryKey": {
+      "ID": "0FD77933-317D-4BA9-9837-F30A37FE8F76"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T16:30:20.042Z",
+      "checksum": "5d2b8841b8ccdeaea417a06831330bd930f5d3327c0cef03ecdcd2ec3ba065a8"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "67FBE689-6598-536D-BC8D-09D25B63F982",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 175,
+      "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Individual Membership (annual)"
+    },
+    "primaryKey": {
+      "ID": "488480D6-4B47-470B-9BFD-F3EA1FBB9A1F"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T20:37:02.328Z",
+      "checksum": "e346f07077e2383b64294a65c8efe5f52f5d507d71322349edd72f96b5329998"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "0F37A3CC-2D70-54FB-8474-C9A7D4AE73F1",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 400,
+      "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for SmallBusiness Membership (annual)"
+    },
+    "primaryKey": {
+      "ID": "D5156F09-228F-4731-882C-0FC077A4E768"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T16:30:20.045Z",
+      "checksum": "17d1e8a7dd03a80dff2ed2fb7ac402ffac900fb968380cf62660434eae85ee40"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "23C8BE1D-3AE0-5413-AC7D-D7C779647A31",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 1000,
+      "EffectiveFrom": "2018-01-01",
+      "RecurrenceMonths": null,
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Corporate Membership (annual)"
+    },
+    "primaryKey": {
+      "ID": "FF98075B-2C62-45E8-BB3B-5333230EBA99"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T16:30:20.045Z",
+      "checksum": "baa3fad65acd72afc018f33761adc9b3b3812d3e7eb68a271200851f3d280085"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "9AA3136D-3DC7-5B78-8E46-C949083E5EB0",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 450,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Conference Registration"
+    },
+    "primaryKey": {
+      "ID": "E75D2867-3181-4B95-9CDF-196AA69A829C"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "03176edab3b37d2f7d0d394f00b7ddba90643085ea5fc8471aa858873feae49c"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "24ABF9A9-C12F-56EE-8B06-A4081BD24475",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 150,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Workshop Registration"
+    },
+    "primaryKey": {
+      "ID": "16980E2D-D921-45E8-A412-544DCF8D6E37"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "06082c3c4a4ebd67fcf8932c8fa753410b9810396d8779dc2f5b6bbaea3290e3"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "2899F1CD-B9D3-5B6A-80EF-D5D2945BC18F",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 425,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Certification exam fee"
+    },
+    "primaryKey": {
+      "ID": "1F99585E-2119-4017-B43E-92D3C30C8CD9"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "03ea16425f2d4ad8009ea5386990155fc40e549a00f953f3a5728aaba8ef42ca"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "D370F7BC-45AB-5D5E-9EE3-F6723E283613",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 195,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Recertification fee"
+    },
+    "primaryKey": {
+      "ID": "BAE438F3-795A-48F5-A23D-69DDED31138F"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "22ba09cefba626c23a5ebcf32b65f7e760feba5708055d3dc2e9a996838ae113"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "148551BB-4CA0-500B-BA1B-CB23E5CB2504",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 65,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Competition entry (per cheese)"
+    },
+    "primaryKey": {
+      "ID": "BA7C6F90-3A0C-4544-9A31-E93B84EC0AE0"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "e53d440eba47ab9d491da1e23f68144f078592b96fb8c45e9fcac64c42cda485"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "2AB8E892-AF0B-5535-8E59-5040CF86F281",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 85,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Journal of Artisan Cheese (annual)"
+    },
+    "primaryKey": {
+      "ID": "03B5B229-9DB5-46D6-B441-C24257C3AB89"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.563Z",
+      "checksum": "49bb4a0b222c8e9a15d5dfcda182b327a55e5a2b6e3725cabb962e89a9bba9ea"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "E0F68778-466A-5377-ADA6-A7C080D37856",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 140,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Standards handbook"
+    },
+    "primaryKey": {
+      "ID": "7E2A5112-278E-4DDA-9475-89694266A957"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "b7a56ef4ab604641a8c0c1a5d91dbfe109ce01cc285f72cbd7e0bb77a4bb80f3"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "098F9568-DA3F-5177-AA13-B867441584F6",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 2400,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Conference exhibitor booth"
+    },
+    "primaryKey": {
+      "ID": "6E9BB79F-516A-477D-A3D8-C2C3B3CC960D"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "e84f443636f438ae47caa6dad0fd0f82d298a9621e0b38e1edfae3478354f65d"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "3D313D46-A31B-5A27-BC1F-22EC3B655B5E",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 250,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Job board posting (30 days)"
+    },
+    "primaryKey": {
+      "ID": "015FA7AD-462B-4082-955B-FE0ACFE36A5D"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "53120d3ea0d491527c48cdb13b04c663b707d9b3507f1ca288218eee0a93c154"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "4F4EADE8-555D-5A60-B7B3-940529922D44",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 38,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Federation apron"
+    },
+    "primaryKey": {
+      "ID": "E4E61DFE-4543-4757-B6EE-91D93DD81E76"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "1573a59b65c72931d4510c053de754fdbebd21d3591106a245344658a10b4a24"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "E6D5D364-B07E-5C87-9C91-4A8E873433A8",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 52,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Cheese atlas"
+    },
+    "primaryKey": {
+      "ID": "C4729610-DFF6-4CB4-AC49-E4380EA500B1"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "d31582d5eed2bfb3a0efa2afe7e244e26edc050c10089d6df828358fddd1f7d7"
+    }
+  },
+  {
+    "fields": {
+      "ProductID": "AF9356C2-5BD6-5608-A773-8C285436C643",
+      "Name": "List",
+      "PricingModel": "PerUnit",
+      "FeeType": "Standard",
+      "Amount": 100,
+      "EffectiveFrom": "2018-01-01",
+      "Priority": 100,
+      "Status": "Active",
+      "Description": "List price for Education fund donation"
+    },
+    "primaryKey": {
+      "ID": "99597ABD-C39A-49EB-9BA4-EF11377F0E78"
+    },
+    "sync": {
+      "lastModified": "2026-09-09T14:14:29.568Z",
+      "checksum": "6838b8b0df154428bb37ba52295b4f75c08aae0aee3508730cd74a1de6dc9b43"
+    }
+  }
+]

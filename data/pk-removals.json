@@ -1,0 +1,41 @@
+{
+  "$comment": "Primary keys deliberately removed from config/ or generated/. scripts/check-metadata-closure.mjs base-delta audit skips these; every entry needs a reason.",
+  "removals": [
+    {
+      "id": "0199FC9E-1468-57FC-8A4E-EF1131DA76EB",
+      "directory": "users",
+      "removed": "2026-09-16",
+      "reason": "Owned by the skip-client Open App (Skip Service Account user and its role grants); it creates them on install, so More Cheese config must not seed them. Pulled into config by mistake on 2026-09-13."
+    },
+    {
+      "id": "60022E69-E534-4AE6-B399-814B36F721A3",
+      "directory": "user-roles",
+      "removed": "2026-09-16",
+      "reason": "Owned by the skip-client Open App (Skip Service Account user and its role grants); it creates them on install, so More Cheese config must not seed them. Pulled into config by mistake on 2026-09-13."
+    },
+    {
+      "id": "65BC9077-D7B9-49BE-B610-90CA037217DC",
+      "directory": "user-roles",
+      "removed": "2026-09-16",
+      "reason": "Owned by the skip-client Open App (Skip Service Account user and its role grants); it creates them on install, so More Cheese config must not seed them. Pulled into config by mistake on 2026-09-13."
+    },
+    {
+      "id": "179DE7D3-EA5D-4A9A-8F4E-27A5EDB25460",
+      "directory": "user-applications",
+      "removed": "2026-09-18",
+      "reason": "User Application row for the CodeGen-generated schema application \"__mj_BizAppsCommon\". Amith (2026-09-18): the generated apps must not be in the demo operator's configured app list; the real apps (Common, Issues, Forms, MoreCheese, …) stay."
+    },
+    {
+      "id": "22256767-18DA-4D43-9991-AFC6D2B3F605",
+      "directory": "user-applications",
+      "removed": "2026-09-18",
+      "reason": "User Application row for the CodeGen-generated schema application \"__mj_BizAppsIssues\". Amith (2026-09-18): the generated apps must not be in the demo operator's configured app list; the real apps (Common, Issues, Forms, MoreCheese, …) stay."
+    },
+    {
+      "id": "4B5B4F25-4672-4A93-B6C4-A63031669F25",
+      "directory": "user-applications",
+      "removed": "2026-09-18",
+      "reason": "User Application row for the CodeGen-generated schema application \"__mj_BizAppsForms\". Amith (2026-09-18): the generated apps must not be in the demo operator's configured app list; the real apps (Common, Issues, Forms, MoreCheese, …) stay."
+    }
+  ]
+}

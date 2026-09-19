@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Name": "Revenue Breakdown by Source",
+      "Description": "Skip analytics conversation from the More Cheese suite",
+      "Type": "Skip",
+      "IsArchived": false,
+      "Status": "Available",
+      "EnvironmentID": "@lookup:MJ: Environments.Name=Default",
+      "IsPinned": false,
+      "ApplicationScope": "Global",
+      "SkipEmbeddings": true,
+      "ProjectID": "@lookup:MJ: Projects.Name=Skip Analytics Suite (Sep 2026)"
+    },
+    "relatedEntities": {
+      "MJ: Conversation Details": [
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "User",
+            "Message": "What percentage of our revenue comes from memberships, events, and courses? Show this as a pie chart with the breakdown. When I click on a slice, show me a table of the actual transactions in that category. [NO CHAT]",
+            "HiddenToUser": false,
+            "UserID": "@lookup:MJ: Users.Email=demo.user@morecheese.org",
+            "IsPinned": false,
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "60E1BC4A-09FD-4411-A00D-DAF8B0EA76E0"
+          }
+        },
+        {
+          "fields": {
+            "ConversationID": "@parent:ID",
+            "Role": "AI",
+            "Message": "Here you go, your Revenue Breakdown Dashboard visualizes income distribution across Memberships, Events, Courses, and other categories using data from your Order Lines and Product Categories. It features executive KPI cards alongside an interactive donut chart showing percentage shares and dollar totals. Clicking any slice or category row instantly filters the detailed transaction table below, allowing you to search line items and click order numbers to open full records.",
+            "HiddenToUser": false,
+            "IsPinned": false,
+            "AgentID": "@lookup:MJ: AI Agents.Name=Skip",
+            "Status": "Complete",
+            "OriginalMessageChanged": false,
+            "SkipEmbeddings": true
+          },
+          "primaryKey": {
+            "ID": "C70293F7-1EEB-45FF-8B99-49FF88758DCF"
+          }
+        }
+      ]
+    },
+    "primaryKey": {
+      "ID": "B32BE779-6F34-4709-8F9F-2096A6D08156"
+    }
+  }
+]

@@ -1,6 +1,8 @@
 #!/bin/bash
 # Validates migration file naming conventions
-# Expected format: V[YYYYMMDDHHMM]__v[VERSION].x_[DESCRIPTION].sql
+# Expected format: [VB][YYYYMMDDHHMM]__v[VERSION].x_[DESCRIPTION].sql
+
+set -euo pipefail
 
 MIGRATION_DIR="${1:-migrations}"
 ERRORS=()
@@ -9,18 +11,30 @@ COUNT=0
 
 echo "::notice::Validating migration file naming conventions..."
 
-for file in $(find "$MIGRATION_DIR" -name "V*.sql" -type f 2>/dev/null); do
+# Null-delimited find/read via process substitution, not `for file in $(find ...)`: unquoted
+# command substitution word-splits a filename containing a space, and piping into `while read`
+# instead of using process substitution would run the loop in a subshell, resetting
+# COUNT/ERRORS/WARNINGS the moment it exited. `2>/dev/null` is unchanged from before — a missing
+# MIGRATION_DIR still surfaces as the loud "Validated 0 migration files" error below, it just
+# doesn't ALSO print find's own "No such file or directory" on top of that clearer message.
+while IFS= read -r -d '' file; do
   COUNT=$((COUNT + 1))
   basename=$(basename "$file")
 
-  # Check format: V followed by 12-digit timestamp
-  if ! echo "$basename" | grep -qE '^V[0-9]{12}__'; then
-    ERRORS+=("$basename: Does not match pattern V[YYYYMMDDHHMM]__")
+  # Check format: V or B followed by 12-digit timestamp
+  if ! echo "$basename" | grep -qE '^[VB][0-9]{12}__'; then
+    ERRORS+=("$basename: Does not match pattern [VB][YYYYMMDDHHMM]__")
     continue
   fi
 
-  # Extract and validate timestamp components
-  timestamp=$(echo "$basename" | grep -oE '^V[0-9]{12}' | sed 's/^V//')
+  # Extract and validate timestamp components. This cannot fail today — the anchor check above
+  # already proved the same prefix matches — but it is guarded explicitly rather than left to
+  # run bare under `set -e`: an unguarded failure here would abort the ENTIRE script mid-run,
+  # with no indication of which file caused it, which is worse than the check it replaces.
+  if ! timestamp=$(echo "$basename" | grep -oE '^[VB][0-9]{12}' | sed -E 's/^[VB]//'); then
+    ERRORS+=("$basename: Could not extract a timestamp despite matching the naming pattern")
+    continue
+  fi
   hours=${timestamp:8:2}
   minutes=${timestamp:10:2}
 
@@ -37,7 +51,13 @@ for file in $(find "$MIGRATION_DIR" -name "V*.sql" -type f 2>/dev/null); do
   if [ "$file_date" -gt "$today" ]; then
     WARNINGS+=("$basename: Date is in the future ($file_date)")
   fi
-done
+done < <(find "$MIGRATION_DIR" -maxdepth 1 -name "[VB]*.sql" -type f -print0 2>/dev/null)
+
+# Fail if no migrations were found/inspected
+if [ "$COUNT" -eq 0 ]; then
+  echo "::error::Validated 0 migration files in $MIGRATION_DIR. Pattern [VB]*.sql matched nothing."
+  exit 1
+fi
 
 # Report results
 if [ ${#WARNINGS[@]} -gt 0 ]; then
