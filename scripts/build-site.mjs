@@ -486,11 +486,13 @@ export function staticWebAppConfig() {
     routes.push({ route: '/blog/', rewrite: '/blog/index.html' });
 
     for (const [from, to] of Object.entries({ ...RETIRED, ...LEGACY_PAGES })) {
-        // Both spellings: WordPress served the trailing-slash form, but plenty of
-        // links in the wild drop it, and SWA matches the path literally.
+        // ONE rule per URL, in the trailing-slash spelling WordPress served. This used to emit the
+        // bare spelling too, on the belief that "SWA matches the path literally" — it does not. Azure
+        // normalises the trailing slash away before matching, so `/programs/` and `/programs` are the
+        // same rule to it, and it rejects the second as a duplicate. It rejects the whole config with
+        // it: 22 of 45 routes collided and the v1.2.0 deployment never happened. One rule still
+        // answers both spellings, because the same normalisation applies to the incoming request.
         routes.push({ route: from, redirect: to, statusCode: 301 });
-        const bare = from.replace(/\/$/, '');
-        if (bare) routes.push({ route: bare, redirect: to, statusCode: 301 });
     }
 
     return {
