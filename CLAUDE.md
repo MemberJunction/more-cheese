@@ -5,6 +5,60 @@ International Cheese Federation (ICF) association demo. It was built from the
 mj-sample-open-app template and is developed **linked inside a MemberJunction
 checkout** — see `docs/template-docs/linking-to-mj.md`.
 
+<!-- This file is deliberately small. Claude Code's own guidance is ~200 lines per CLAUDE.md:
+     longer files consume context AND reduce adherence. Everything below is either
+     UNRECOVERABLE IF VIOLATED (so it must survive /compact) or TRUE ON EVERY TASK. Detailed
+     guidance lives in .claude/rules/, which load only when you open a matching file — see the
+     routing table. `npm run check:claude-md` enforces the budget and proves nothing was lost.
+     Before adding anything here, read "Where new guidance goes" at the bottom.
+     The design rationale is plans/claude-instruction-architecture.md. -->
+
+---
+
+## 🚨 Critical rules — violations are unacceptable
+
+### 1. No commits without explicit approval
+Never run `git commit` unless the user asked for **that** commit — each one needs
+its own approval. Commit only what is staged; never fold extra work into someone
+else's staged changes. Never ask to commit — wait to be asked.
+
+### 2. No destructive git operations without explicit approval
+Never `git checkout -- <file>`, `git restore <file>`, or `git reset --hard` to
+discard changes without explicit approval — even in bypass permission mode. They
+destroy uncommitted work irrecoverably. To undo your own edits, identify them
+with `git diff` and reverse them with targeted edits, which preserves everyone
+else's in-progress work.
+
+### 3. Feature branches must track their own remote branch
+A branch must track `origin/<same-name>` — never `origin/next` or `origin/main`.
+If `my-feature` tracks `origin/next`, a plain `git push` sends commits **directly
+to `next`**, bypassing review.
+
+```sh
+git checkout next && git pull
+git checkout -b my-feature        # cut from next, never from main
+git push -u origin my-feature     # -u sets the correct upstream
+
+git branch -vv                    # verify: my-feature [origin/my-feature] ✅
+git branch --set-upstream-to=origin/<name> <name>   # fix if wrong
+```
+
+PRs target `next`. A PR adding a migration must include a changeset (≥ minor).
+Full model: [`docs/template-docs/branching.md`](docs/template-docs/branching.md).
+
+### 4. Single-copy invariant
+`@memberjunction/*` are **peerDependencies**. Never hard-depend on them, and
+never run `npm install` inside a subfolder of a linked MJ workspace — it
+duplicates packages and breaks resolution in ways that surface far from the
+cause. [`docs/template-docs/versioning-and-peer-deps.md`](docs/template-docs/versioning-and-peer-deps.md).
+
+### 5. When linked into MJ, the wiring edits are local-only
+The edits in the **MJ repo** — root `package.json`, `mj.config.cjs`,
+MJAPI/MJExplorer `package.json`, the bootstrap import, the lockfile — are local
+to your machine. **Never commit them to MJ.**
+
+---
+
 ## Repository structure
 
 ```
@@ -22,87 +76,8 @@ scripts/               - release gates and data tooling; *.spec.mjs run by npm r
 content/, vault/       - the public blog corpus and the internal staff corpus
 website/               - static site built by npm run build:site, deployed from main
 docs/                  - how this repo works (branching, publishing, codegen, linking)
-docs/claude/           - the MemberJunction development guide (topic-split, with TOC)
+plans/                 - design documents and research notes
 ```
-
-## 📖 The MemberJunction development guide → [`docs/claude/`](docs/claude/README.md)
-
-The MJ coding rulebook — critical rules, entity/data patterns, performance,
-CodeGen + migration authoring, Angular conventions, code style, metadata
-authoring, testing — lives in **[docs/claude/](docs/claude/README.md)** as a
-set of topic docs with a table of contents (adapted from MemberJunction's own
-`CLAUDE.md`; MJ's copy remains authoritative for MJ-core work and anything not
-covered there). Read the relevant topic before working in its area:
-
-| Topic | Doc |
-|---|---|
-| Critical rules (non-negotiable) | [docs/claude/01-critical-rules.md](docs/claude/01-critical-rules.md) |
-| Git & branches | [docs/claude/02-git-and-branches.md](docs/claude/02-git-and-branches.md) |
-| Entities & data access | [docs/claude/03-entities-and-data.md](docs/claude/03-entities-and-data.md) |
-| Performance | [docs/claude/04-performance.md](docs/claude/04-performance.md) |
-| CodeGen & migrations | [docs/claude/05-codegen-and-migrations.md](docs/claude/05-codegen-and-migrations.md) |
-| Angular | [docs/claude/06-angular.md](docs/claude/06-angular.md) |
-| Code style | [docs/claude/07-code-style.md](docs/claude/07-code-style.md) |
-| Metadata & mj-sync | [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md) |
-| Testing | [docs/claude/09-testing.md](docs/claude/09-testing.md) |
-
-## The rules that matter most in THIS repo
-
-1. **No commits without explicit approval** — never run `git commit` unless
-   the user asked for that commit; commit only what is staged.
-2. **Never edit `src/generated/`** in any package — CodeGen overwrites it.
-   After schema/metadata changes run codegen and **commit the regenerated code
-   together with its migration** (`docs/template-docs/codegen-and-metadata-migrations.md`).
-3. **Never edit an applied migration** — add a new `V*` file. Additive-only
-   within a published major version.
-4. **Branch rules** — feature branches cut from `next`, tracking
-   `origin/<same-name>` only; PRs target `next`; a PR adding a migration must
-   include a changeset (≥ minor). See `docs/template-docs/branching.md`.
-5. **Single-copy invariant** — `@memberjunction/*` are peerDependencies; never
-   hard-depend on them, never `npm install` inside subfolders of a linked MJ
-   workspace (`docs/template-docs/versioning-and-peer-deps.md`).
-6. **When linked into MJ**: the wiring edits in the MJ repo (root
-   `package.json`, `mj.config.cjs`, MJAPI/MJExplorer `package.json`, bootstrap
-   import, lockfile) are local-only — never commit them to MJ.
-7. **`mj sync push` of `generated/` must run from the MJ repo cwd** so
-   `dynamicPackages.server` loads (Accounting/Orders/Common). Do not `cd` here
-   to sync.
-   - **CRITICAL: NEVER pass `--no-app-packages`**. Passing `--no-app-packages` forces
-     `GetEntityObject` to fall back to generic `BaseEntity`, bypassing `OrderEntityServer`.
-     Loom does **not** (and should never) emit static JSON for Journal Entries or
-     Subscriptions; they are automatic runtime side-effects of `OrderEntityServer.Save()`
-     booking confirmed orders. Bypassing app packages causes confirmed orders to be saved
-     without Journal Entries or Subscriptions.
-   - **Heap Size**: Set `NODE_OPTIONS="--max-old-space-size=16384"` when running `mj sync push`
-     on large datasets like `generated/` (15k+ orders with deeply nested lines) to prevent V8
-     heap exhaustion during sync.
-   - People/Organizations `.mj-sync.json` sets `"push": { "skipGeoCoding": true }`
-     — they are display-only geo (virtual PrimaryAddress*). Addresses carry
-     `Latitude`/`Longitude` in JSON; do **not** skip geo on addresses (coords
-     already set → provider is not called). Do **not** author `RecordGeoCode` JSON
-     or SHA hashes. Parallel default is 10: each record gets its own provider
-     (shared pool, own TX). Full command:
-     [docs/claude/08-metadata-and-sync.md](docs/claude/08-metadata-and-sync.md).
-8. **ICF accounting seed** lives in `generated/companies` (with `extension` for
-   `AccountingCompanyProfile`), `gl-accounts`, `gl-account-links`, and
-   `journal-entry-sequences`. Company-level `GLAccountLink` rows are required for
-   order confirm (AR / Sales / Deferred Revenue / Cash / …).
-9. **Catalog and payment composition** — Event products use first-class
-   `extension` composition on `generated/products`. Orders use nested
-   `collections.Lines` on `generated/orders` (with `PersonID` on `EventOrderLine`
-   extensions). Payments use nested `collections.Lines` on `generated/payments`.
-   Committee meetings use nested `collections` (`AgendaItems`, `Attendance`,
-   `Motions` with `Votes`). All composition axes persist cleanly via single-save
-   `mj sync push` with zero raw SQL inserts.
-10. **Never "tidy" `RecurrenceMonths: null` out of the four annual membership rows**
-    in `generated/product-prices/.product-prices.json` (`0FD77933-317D-4BA9-9837-F30A37FE8F76`,
-    `488480D6-4B47-470B-9BFD-F3EA1FBB9A1F`, `D5156F09-228F-4731-882C-0FC077A4E768`,
-    `FF98075B-2C62-45E8-BB3B-5333230EBA99`). The explicit `null` is load-bearing:
-    `mj sync push` only applies fields present in a record (`PushService.ts:1163`),
-    so omitting the field leaves the pre-fix `'12'` in any already-pushed database.
-    `RecurrenceMonths` is calendar-month applicability, not duration — `'12'` meant
-    "December only" and rejected list-price rules for the other eleven months.
-    Enforced by assertion in `scripts/check-metadata-closure.mjs`.
 
 ## Build & dev commands
 
@@ -125,9 +100,74 @@ npm install && npm run build:packages
 npm run test:gates          # the gates' own specs (they run FIRST in changes.yml)
 npm run lint:peer-ranges && npm run lint:migrations && npm run lint:distribution
 npm run check:seed-cadence && npm run check:release-seed && npm run check:ownership
+npm run check:claude-md     # instruction-file budget, links, routing, rule globs
 npm run build:site          # the public site; publish-site.yml runs this on push to main
 ```
 
 The full development workflow (where to add code, capturing codegen +
 metadata-sync migrations, releasing) is in the README's "Development
 workflow" table.
+
+---
+
+## Where the rest of the guidance lives
+
+Loaded **on demand**, so it costs nothing until it's relevant. If you need a rule
+you don't currently have, it's here.
+
+### Path-scoped rules (`.claude/rules/`) — load when you open a matching file
+
+| Rule | Loads for | Covers |
+|---|---|---|
+| [`metadata-sync.md`](.claude/rules/metadata-sync.md) | `generated/**`, `config/**` | 🚨 `mj sync push` from the MJ cwd, never `--no-app-packages`, the heap ceiling, geocoding, `RecurrenceMonths: null`, the ICF accounting seed, composition axes, file organization |
+| [`migrations.md`](.claude/rules/migrations.md) | `migrations/**`, `migrations-teardown/**` | 🚨 Never edit an applied migration; naming, `${flyway:defaultSchema}`, hardcoded UUIDs, extended properties, what CodeGen owns |
+| [`generated-code.md`](.claude/rules/generated-code.md) | `packages/*/src/generated/**` | 🚨 Never hand-edit; what CodeGen produces and what to do instead |
+| [`mj-data-access.md`](.claude/rules/mj-data-access.md) | `**/*.ts` | `Metadata`/`GetEntityObject`, `RunView`/`RunViews`, save/delete booleans, the spread trap, entity naming, `UserInfoEngine`, batching, keyset pagination, caching |
+| [`typescript-style.md`](.claude/rules/typescript-style.md) | `**/*.ts` | No `any`, no `.Get()`/`.Set()`, derive field types, no re-exports, no dynamic `import()`, `BaseSingleton`, naming, decomposition |
+| [`angular.md`](.claude/rules/angular.md) | `packages/Angular/**` | Standalone vs NgModule, modern syntax, MJ UI components, `NotifyLoadComplete`, custom forms, design tokens |
+| [`repo-gates.md`](.claude/rules/repo-gates.md) | `scripts/*.mjs`, `.github/**` | What a gate is here, every gate carries its own test, visible skips, why `npm test` is vacuous today |
+| [`changesets.md`](.claude/rules/changesets.md) | `.changeset/**` | The fixed group, bump levels, migration PRs need ≥ minor |
+
+### Skills (`.claude/skills/`) — load only when invoked
+
+| Skill | Use for |
+|---|---|
+| [`morecheese-weekly-blog`](.claude/skills/morecheese-weekly-blog/SKILL.md) | The weekly ICF blog — 3 dated posts per week, into `content/` |
+| [`morecheese-press-release`](.claude/skills/morecheese-press-release/SKILL.md) | A dated ICF press release for a real event in `generated/` |
+| [`morecheese-annual-report`](.claude/skills/morecheese-annual-report/SKILL.md) | The ICF annual report for one fiscal year, computed from `generated/` |
+| [`morecheese-internal-comms`](.claude/skills/morecheese-internal-comms/SKILL.md) | The internal staff corpus under `vault/internal/` |
+
+Never hand-write ICF content without loading the matching skill — the corpus has
+fiction headers, frontmatter, and cross-week coherence these skills own.
+
+### Repo documentation
+
+- [`docs/template-docs/`](docs/template-docs/README.md) — branching, publishing, codegen + metadata migrations, linking to MJ, versioning
+- [`docs/claude/README.md`](docs/claude/README.md) — how the MJ guidance is organized here
+- [`plans/`](plans/_README.md) — design documents, including [the rationale for this arrangement](plans/claude-instruction-architecture.md)
+
+MJ's own [`CLAUDE.md`](https://github.com/MemberJunction/MJ/blob/next/CLAUDE.md)
+remains authoritative for MJ-core work and anything not covered here.
+
+---
+
+## Where new guidance goes
+
+Before adding anything to this file, route it:
+
+1. **Unrecoverable if violated?** (destroys work, bypasses review, breaks every
+   install) → here, so it survives `/compact`.
+2. **True on literally every task?** → here.
+3. **Applies to a file type or directory?** → a path-scoped rule in `.claude/rules/`.
+4. **A multi-step procedure?** → a skill in `.claude/skills/`.
+5. **Does an enforcement script already exist, or could one?** → a gate in
+   `scripts/`, not prose. See [`repo-gates.md`](.claude/rules/repo-gates.md).
+6. **Explaining *why* a design is the way it is?** → a document in `plans/`.
+
+Anything reaching step 3 or beyond **does not belong in this file**. The test:
+*"would removing this line cause a mistake?"* — and then *"on every task, or only
+when touching a particular kind of file?"* The second answer routes it out.
+
+A rule with no `paths` frontmatter loads unconditionally at launch, so omitting
+`paths` does not scope a rule down — it makes it permanent. `check:claude-md`
+fails on a rule missing `paths`, and on a glob that matches nothing.
