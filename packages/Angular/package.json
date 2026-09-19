@@ -1,6 +1,6 @@
 {
   "name": "@mj-biz-apps/more-cheese-ng",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "description": "Angular client bootstrap for the MoreCheese demo app, loaded by MJExplorer.",
   "main": "dist/public-api.js",
@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@mj-biz-apps/more-cheese-entities": "1.1.0"
+    "@mj-biz-apps/more-cheese-entities": "1.2.0"
   },
   "peerDependencies": {
     "@angular/animations": ">=21.0.0 <22.0.0",
