@@ -2,11 +2,17 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { CommonModule } from '@angular/common';
 import type { IMetadataProvider } from '@memberjunction/core';
 import type { FormNavigationEvent } from '@memberjunction/ng-base-forms';
-import { LoadMembershipForPerson, type PersonMembership, type PersonPredictionInfo } from './membership-data';
+import {
+    LoadMembershipForPerson,
+    type PersonMembership,
+    type PersonPredictionInfo,
+    type PredictionDriver,
+    type PredictionHistoryItem,
+} from './membership-data';
 
 /**
- * The More Cheese membership picture for one person: member profile KPIs and
- * real-time Predictive Studio AI Renewal Risk.
+ * The More Cheese membership picture for one person: member profile KPIs,
+ * real-time Predictive Studio AI Renewal Risk, top attribution drivers, and run history.
  * Rendered inside the People form by {@link PersonMembershipPanel}.
  */
 @Component({
@@ -60,10 +66,86 @@ import { LoadMembershipForPerson, type PersonMembership, type PersonPredictionIn
                     </div>
                     <div class="mc-summary-body">
                         Scored across upstream activity, order frequency, course completion, and engagement data via
-                        <strong>Predictive Studio</strong>. Detailed model attribution and historical prediction runs are available in the
-                        <strong>Model Predictions</strong> panel below.
+                        <strong>Predictive Studio</strong>. Detailed model attribution and historical prediction runs are available below.
                     </div>
                 </div>
+
+                @if (Drivers.length > 0 || History.length > 0) {
+                    <div class="mc-insights-panel">
+                        <button type="button" class="mc-insights-toggle" (click)="ToggleExpanded()">
+                            <div class="mc-insights-title">
+                                <i class="fa-solid fa-brain"></i>
+                                <span>Attribution Drivers & Prediction History</span>
+                                @if (Drivers.length > 0) {
+                                    <span class="mc-badge">{{ Drivers.length }} Drivers</span>
+                                }
+                                @if (History.length > 0) {
+                                    <span class="mc-badge mc-badge-muted">{{ History.length }} {{ History.length === 1 ? 'Run' : 'Runs' }}</span>
+                                }
+                            </div>
+                            <i class="fa-solid" [class.fa-chevron-up]="Expanded" [class.fa-chevron-down]="!Expanded"></i>
+                        </button>
+
+                        @if (Expanded) {
+                            <div class="mc-insights-content">
+                                @if (Drivers.length > 0) {
+                                    <div class="mc-drivers-section">
+                                        <div class="mc-section-heading">Top Model Feature Attribution</div>
+                                        <div class="mc-driver-list">
+                                            @for (driver of Drivers; track driver.name) {
+                                                <div class="mc-driver-row">
+                                                    <div class="mc-driver-info">
+                                                        <span class="mc-driver-name">{{ driver.name }}</span>
+                                                        <span class="mc-driver-pct">{{ (driver.importance * 100).toFixed(1) }}%</span>
+                                                    </div>
+                                                    <div class="mc-driver-bar-track">
+                                                        <div class="mc-driver-bar-fill" [style.width.%]="driver.relativePct"></div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (History.length > 0) {
+                                    <div class="mc-history-section">
+                                        <div class="mc-section-heading">Prediction Run History</div>
+                                        <div class="mc-history-list">
+                                            @for (item of History; track item.id) {
+                                                <div class="mc-history-item">
+                                                    <div class="mc-history-header">
+                                                        <div class="mc-history-meta">
+                                                            <span [class]="'mc-pill ' + item.pillClass">
+                                                                <i class="fa-solid fa-wand-magic-sparkles"></i> {{ item.riskText }}
+                                                            </span>
+                                                            <span class="mc-history-model">{{ item.modelName }}</span>
+                                                        </div>
+                                                        <span class="mc-history-date">{{ item.formattedDate }}</span>
+                                                    </div>
+                                                    @if (item.topDriver) {
+                                                        <div class="mc-history-driver">
+                                                            Primary factor: <strong>{{ item.topDriver }}</strong>
+                                                        </div>
+                                                    }
+                                                    @if (item.rawPayload) {
+                                                        <div class="mc-history-raw-toggle">
+                                                            <button type="button" class="mc-raw-btn" (click)="TogglePayload(item.id)">
+                                                                <i class="fa-solid fa-code"></i> {{ IsPayloadOpen(item.id) ? 'Hide Raw Payload' : 'View Raw Payload' }}
+                                                            </button>
+                                                        </div>
+                                                        @if (IsPayloadOpen(item.id)) {
+                                                            <pre class="mc-raw-json">{{ item.rawPayload }}</pre>
+                                                        }
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
             }
         </div>
     `,
@@ -109,6 +191,191 @@ import { LoadMembershipForPerson, type PersonMembership, type PersonPredictionIn
             color: var(--mj-text, #374151);
             line-height: 1.5;
         }
+
+        /* Expandable Insights Panel */
+        .mc-insights-panel {
+            border: 1px solid #e0e7ff;
+            border-radius: 8px;
+            background: #fafbff;
+            overflow: hidden;
+        }
+        .mc-insights-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            text-align: left;
+            transition: background 0.15s ease;
+        }
+        .mc-insights-toggle:hover {
+            background: #f0f3ff;
+        }
+        .mc-insights-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mc-insights-title i {
+            color: #6366f1;
+        }
+        .mc-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 1px 7px;
+            border-radius: 10px;
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+        .mc-badge-muted {
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+        .mc-insights-content {
+            padding: 14px;
+            border-top: 1px solid #e0e7ff;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #ffffff;
+        }
+        .mc-section-heading {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        /* Attribution Drivers */
+        .mc-drivers-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mc-driver-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mc-driver-row {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .mc-driver-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #374151;
+        }
+        .mc-driver-name {
+            font-weight: 500;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 11.5px;
+        }
+        .mc-driver-pct {
+            font-weight: 600;
+            color: #4f46e5;
+        }
+        .mc-driver-bar-track {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .mc-driver-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #4f46e5);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Prediction History */
+        .mc-history-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mc-history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mc-history-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 10px 12px;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mc-history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mc-history-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mc-history-model {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        .mc-history-date {
+            font-size: 11.5px;
+            color: #9ca3af;
+        }
+        .mc-history-driver {
+            font-size: 12px;
+            color: #4b5563;
+        }
+        .mc-history-driver strong {
+            color: #1f2937;
+        }
+        .mc-history-raw-toggle {
+            margin-top: 2px;
+        }
+        .mc-raw-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 11px;
+            color: #6366f1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .mc-raw-btn:hover {
+            text-decoration: underline;
+        }
+        .mc-raw-json {
+            margin: 6px 0 0;
+            padding: 8px 10px;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 11px;
+            line-height: 1.4;
+            border-radius: 4px;
+            overflow-x: auto;
+            max-height: 200px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
     `],
 })
 export class PersonMembershipComponent implements OnChanges {
@@ -121,6 +388,8 @@ export class PersonMembershipComponent implements OnChanges {
     public Loading = false;
     public ErrorMessage: string | null = null;
     public Data: PersonMembership | null = null;
+    public Expanded = true;
+    public ExpandedPayloads = new Set<string>();
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes['PersonID'] || changes['Provider']) {
@@ -136,6 +405,14 @@ export class PersonMembershipComponent implements OnChanges {
         return this.Data?.Prediction ?? null;
     }
 
+    public get Drivers(): PredictionDriver[] {
+        return this.Prediction?.Drivers ?? [];
+    }
+
+    public get History(): PredictionHistoryItem[] {
+        return this.Data?.History ?? [];
+    }
+
     public get SegmentLine(): string {
         const profile = this.Data?.Profile;
         if (!profile) return '—';
@@ -146,6 +423,24 @@ export class PersonMembershipComponent implements OnChanges {
         const profile = this.Data?.Profile;
         if (!profile) return 'Segment';
         return [profile.City, profile.State, profile.CountryName].filter(Boolean).join(', ') || 'Segment';
+    }
+
+    public ToggleExpanded(): void {
+        this.Expanded = !this.Expanded;
+        this.cdr.markForCheck();
+    }
+
+    public TogglePayload(id: string): void {
+        if (this.ExpandedPayloads.has(id)) {
+            this.ExpandedPayloads.delete(id);
+        } else {
+            this.ExpandedPayloads.add(id);
+        }
+        this.cdr.markForCheck();
+    }
+
+    public IsPayloadOpen(id: string): boolean {
+        return this.ExpandedPayloads.has(id);
     }
 
     private async Load(): Promise<void> {

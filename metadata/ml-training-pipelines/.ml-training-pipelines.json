@@ -5,10 +5,10 @@
     },
     "fields": {
       "Name": "MoreCheese: Member Renewal Risk",
-      "Description": "Predicts whether an active More Cheese membership will renew or lapse/cancel at the end of the period, guarding against post-lapse leakage.",
+      "Description": "Predicts whether an active More Cheese membership will renew or lapse at the end of the period based on canonical member profiles, dues orders, store orders, event attendance, and course completions.",
       "Version": 1,
       "Status": "Published",
-      "TargetEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "TargetVariable": "Status",
       "ProblemType": "classification",
       "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
@@ -16,7 +16,7 @@
       "SourceBindings": [
         {
           "Kind": "Entity",
-          "Ref": "MoreCheese: Membership Periods"
+          "Ref": "MJ_BizApps_Common: People"
         }
       ],
       "FeatureSteps": {
@@ -25,20 +25,18 @@
             "Id": "select-features",
             "Kind": "select",
             "Columns": [
-              "AutoRenew",
               "MembershipTier",
-              "DuesAmount",
               "MemberSegment",
               "MemberRegion",
               "TenureDays",
+              "DuesAmount",
               "PriorPeriodsCount",
-              "EventsAttendedCount",
-              "CoursesEnrolledCount",
-              "CommitteeCount",
               "TotalOrderSpend",
               "OrdersCount",
               "DaysSinceLastOrder",
+              "EventsAttendedCount",
               "DaysSinceLastEvent",
+              "CoursesEnrolledCount",
               "CoursesCompletedCount"
             ]
           },
@@ -79,16 +77,15 @@
             "Id": "standardize-numerics",
             "Kind": "standardize",
             "Columns": [
-              "DuesAmount",
               "TenureDays",
+              "DuesAmount",
               "PriorPeriodsCount",
-              "EventsAttendedCount",
-              "CoursesEnrolledCount",
-              "CommitteeCount",
               "TotalOrderSpend",
               "OrdersCount",
               "DaysSinceLastOrder",
+              "EventsAttendedCount",
               "DaysSinceLastEvent",
+              "CoursesEnrolledCount",
               "CoursesCompletedCount"
             ]
           }
@@ -99,15 +96,19 @@
       },
       "LeakageGuard": {
         "DenyFields": [
-          "CancellationDate",
-          "CancellationReason",
-          "RenewalDate",
-          "EndDate",
-          "StartDate",
-          "PeriodKey",
-          "PersonID",
-          "Person",
-          "IsSharedDemo"
+          "ID",
+          "FirstName",
+          "LastName",
+          "MiddleName",
+          "DisplayName",
+          "Email",
+          "Phone",
+          "DateOfBirth",
+          "Gender",
+          "PhotoURL",
+          "Bio",
+          "LinkedUserID",
+          "Status"
         ],
         "SingleFeatureDominanceThreshold": 0.85
       },

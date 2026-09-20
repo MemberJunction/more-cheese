@@ -14,6 +14,13 @@ export interface MemberProfileRow {
     Organization: string | null;
 }
 
+/** Predictive Studio feature attribution driver. */
+export interface PredictionDriver {
+    name: string;
+    importance: number;
+    relativePct: number;
+}
+
 /** Predictive Studio prediction details resolved for a person. */
 export interface PersonPredictionInfo {
     Score: number | null;
@@ -22,14 +29,32 @@ export interface PersonPredictionInfo {
     RiskText: string;
     PillClass: 'risk-low' | 'risk-med' | 'risk-high' | 'ended';
     TopDriver: string | null;
+    Drivers: PredictionDriver[];
     Tooltip: string;
     ScoredAt: string | null;
     ModelName: string;
 }
 
+/** Historical scoring run record for a person. */
+export interface PredictionHistoryItem {
+    id: string;
+    completedAt: string | null;
+    formattedDate: string;
+    score: number | null;
+    predictedClass: string | null;
+    displayValue: string;
+    riskText: string;
+    pillClass: 'risk-low' | 'risk-med' | 'risk-high' | 'ended';
+    modelName: string;
+    topDriver: string | null;
+    drivers: PredictionDriver[];
+    rawPayload: string | null;
+}
+
 export interface PersonMembership {
     Profile: MemberProfileRow | null;
     Prediction: PersonPredictionInfo | null;
+    History: PredictionHistoryItem[];
 }
 
 const PROFILE_FIELDS = ['ID', 'MemberNumber', 'Segment', 'Region', 'CountryName', 'City', 'State', 'JoinDate', 'OrganizationID', 'Organization'];
@@ -50,6 +75,26 @@ function ResultsOrThrow<T>(result: RunViewResult<T>, what: string): T[] {
 }
 
 /**
+ * Format a timestamp into a human-readable date/time string.
+ */
+export function FormatHistoryDate(dateStr: string | null | undefined): string {
+    if (!dateStr) return '—';
+    try {
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr;
+        return d.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    } catch {
+        return dateStr;
+    }
+}
+
+/**
  * Format raw prediction values into a decorated {@link PersonPredictionInfo}.
  */
 export function FormatPredictionInfo(
@@ -60,6 +105,17 @@ export function FormatPredictionInfo(
     scoredAt?: string | null,
 ): PersonPredictionInfo {
     const name = modelName || 'Predictive Studio Model';
+
+    let formattedDrivers: PredictionDriver[] = [];
+    if (drivers && drivers.length > 0) {
+        const maxImp = Math.max(...drivers.map(d => d.importance), 0.0001);
+        formattedDrivers = drivers.map(d => ({
+            name: d.name,
+            importance: d.importance,
+            relativePct: Math.max(5, Math.round((d.importance / maxImp) * 100)),
+        }));
+    }
+
     if (score == null && !predictedClass) {
         return {
             Score: null,
@@ -68,6 +124,7 @@ export function FormatPredictionInfo(
             RiskText: 'Not Scored',
             PillClass: 'ended',
             TopDriver: null,
+            Drivers: formattedDrivers,
             Tooltip: 'Predictive Studio model scoring has not been executed for this member yet.',
             ScoredAt: null,
             ModelName: name,
@@ -93,7 +150,7 @@ export function FormatPredictionInfo(
         riskText = `High (${pct}%)`;
     }
 
-    const topDriver = drivers && drivers.length > 0 ? drivers[0].name : null;
+    const topDriver = formattedDrivers.length > 0 ? formattedDrivers[0].name : null;
     const scoredPhrase = scoredAt ? ` · Scored ${scoredAt}` : '';
     const tooltip = `Predicted by ${name}${scoredPhrase}.`;
 
@@ -104,6 +161,7 @@ export function FormatPredictionInfo(
         RiskText: riskText,
         PillClass: pillClass,
         TopDriver: topDriver,
+        Drivers: formattedDrivers,
         Tooltip: tooltip,
         ScoredAt: scoredAt || null,
         ModelName: name,
@@ -118,8 +176,61 @@ interface RunDetailRecord {
 }
 
 /**
+ * Parses one `RunDetailRecord` into a structured {@link PredictionHistoryItem}.
+ */
+export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem | null {
+    if (!row.ResultPayload) return null;
+    try {
+        const raw = JSON.parse(row.ResultPayload) as Record<string, unknown>;
+        const output = (raw['output'] && typeof raw['output'] === 'object' ? raw['output'] : raw) as Record<string, unknown>;
+        const scoreVal = typeof output['score'] === 'number' ? output['score'] : (typeof output['value'] === 'number' ? output['value'] : null);
+        const classVal = typeof output['class'] === 'string' ? output['class'] : null;
+        const targetVal = typeof output['target'] === 'string' ? output['target'] : 'Renewal Risk';
+        const scoredAtVal = typeof output['scoredAt'] === 'string' ? output['scoredAt'] : (row.CompletedAt || null);
+
+        let parsedDrivers: Array<{ name: string; importance: number }> | null = null;
+        if (Array.isArray(output['drivers'])) {
+            parsedDrivers = output['drivers']
+                .map((d: unknown) => {
+                    if (!d || typeof d !== 'object') return null;
+                    const rec = d as Record<string, unknown>;
+                    const n = typeof rec['feature'] === 'string' ? rec['feature'] : '';
+                    const v = typeof rec['value'] === 'number' ? Math.abs(rec['value']) : 0;
+                    return n ? { name: n, importance: v } : null;
+                })
+                .filter((d): d is { name: string; importance: number } => d != null && d.importance > 0);
+        }
+
+        const info = FormatPredictionInfo(scoreVal, classVal, parsedDrivers, targetVal, scoredAtVal);
+        let prettyPayload: string | null = null;
+        try {
+            prettyPayload = JSON.stringify(raw, null, 2);
+        } catch {
+            prettyPayload = row.ResultPayload;
+        }
+
+        return {
+            id: row.ID,
+            completedAt: row.CompletedAt,
+            formattedDate: FormatHistoryDate(scoredAtVal || row.CompletedAt),
+            score: info.Score,
+            predictedClass: info.Class,
+            displayValue: info.DisplayValue,
+            riskText: info.RiskText,
+            pillClass: info.PillClass,
+            modelName: info.ModelName,
+            topDriver: info.TopDriver,
+            drivers: info.Drivers,
+            rawPayload: prettyPayload,
+        };
+    } catch {
+        return null;
+    }
+}
+
+/**
  * Loads the More Cheese membership picture for one person:
- * the member profile and the latest Predictive Studio model prediction.
+ * the member profile and up to 10 recent Predictive Studio model prediction runs.
  */
 export async function LoadMembershipForPerson(personID: string, provider?: IMetadataProvider): Promise<PersonMembership> {
     const profileFilter = `PersonID = '${Quote(personID)}'`;
@@ -137,7 +248,7 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
             EntityName: 'MJ: Process Run Details',
             ExtraFilter: detailFilter,
             OrderBy: 'CompletedAt DESC',
-            MaxRows: 1,
+            MaxRows: 10,
             Fields: ['ID', 'CompletedAt', 'ResultPayload'],
             ResultType: 'simple',
         },
@@ -146,33 +257,29 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
     const profileRows = ResultsOrThrow(profiles as RunViewResult<MemberProfileRow>, 'the member profile');
     const detailRows = (runDetails as RunViewResult<RunDetailRecord>).Results ?? [];
 
-    let prediction: PersonPredictionInfo | null = null;
-    if (detailRows.length > 0 && detailRows[0].ResultPayload) {
-        try {
-            const raw = JSON.parse(detailRows[0].ResultPayload) as Record<string, unknown>;
-            const output = (raw['output'] && typeof raw['output'] === 'object' ? raw['output'] : raw) as Record<string, unknown>;
-            const scoreVal = typeof output['score'] === 'number' ? output['score'] : (typeof output['value'] === 'number' ? output['value'] : null);
-            const classVal = typeof output['class'] === 'string' ? output['class'] : null;
-            const targetVal = typeof output['target'] === 'string' ? output['target'] : 'Renewal Risk';
-            const scoredAtVal = typeof output['scoredAt'] === 'string' ? output['scoredAt'] : (detailRows[0].CompletedAt || null);
-
-            let drivers: Array<{ name: string; importance: number }> | null = null;
-            if (Array.isArray(output['drivers'])) {
-                drivers = output['drivers']
-                    .map((d: unknown) => {
-                        if (!d || typeof d !== 'object') return null;
-                        const rec = d as Record<string, unknown>;
-                        const n = typeof rec['feature'] === 'string' ? rec['feature'] : '';
-                        const v = typeof rec['value'] === 'number' ? Math.abs(rec['value']) : 0;
-                        return n ? { name: n, importance: v } : null;
-                    })
-                    .filter((d): d is { name: string; importance: number } => d != null && d.importance > 0);
-            }
-
-            prediction = FormatPredictionInfo(scoreVal, classVal, drivers, targetVal, scoredAtVal);
-        } catch {
-            prediction = FormatPredictionInfo(null, null, null);
+    const history: PredictionHistoryItem[] = [];
+    for (const row of detailRows) {
+        const item = ParseRunDetailItem(row);
+        if (item) {
+            history.push(item);
         }
+    }
+
+    let prediction: PersonPredictionInfo | null = null;
+    if (history.length > 0) {
+        const latest = history[0];
+        prediction = {
+            Score: latest.score,
+            Class: latest.predictedClass,
+            DisplayValue: latest.displayValue,
+            RiskText: latest.riskText,
+            PillClass: latest.pillClass,
+            TopDriver: latest.topDriver,
+            Drivers: latest.drivers,
+            Tooltip: `Predicted by ${latest.modelName}${latest.completedAt ? ` · Scored ${latest.completedAt}` : ''}.`,
+            ScoredAt: latest.completedAt,
+            ModelName: latest.modelName,
+        };
     } else {
         prediction = FormatPredictionInfo(null, null, null);
     }
@@ -180,5 +287,6 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
     return {
         Profile: profileRows[0] ?? null,
         Prediction: prediction,
+        History: history,
     };
 }
