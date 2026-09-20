@@ -17,61 +17,76 @@
         {
           "Kind": "Entity",
           "Ref": "MJ_BizApps_Common: People"
+        },
+        {
+          "Kind": "Entity",
+          "Ref": "MoreCheese: Member Profiles"
+        },
+        {
+          "Kind": "Entity",
+          "Ref": "MJ_BizApps_Orders: Order Headers"
+        },
+        {
+          "Kind": "Entity",
+          "Ref": "MJ_BizApps_Orders: Event Order Lines"
+        },
+        {
+          "Kind": "Entity",
+          "Ref": "MoreCheese: Course Enrollments"
         }
       ],
       "FeatureSteps": {
         "Steps": [
           {
-            "Id": "select-features",
-            "Kind": "select",
-            "Columns": [
-              "MembershipTier",
-              "MemberSegment",
-              "MemberRegion",
-              "TenureDays",
-              "DuesAmount",
-              "PriorPeriodsCount",
-              "TotalOrderSpend",
-              "OrdersCount",
-              "DaysSinceLastOrder",
-              "EventsAttendedCount",
-              "DaysSinceLastEvent",
-              "CoursesEnrolledCount",
-              "CoursesCompletedCount"
-            ]
-          },
-          {
             "Id": "onehot-MembershipTier",
             "Kind": "onehot",
-            "Column": "MembershipTier"
+            "Column": "MembershipTier",
+            "Inputs": [
+              "MoreCheese: Member Profiles"
+            ]
           },
           {
             "Id": "onehot-MemberSegment",
             "Kind": "onehot",
-            "Column": "MemberSegment"
+            "Column": "MemberSegment",
+            "Inputs": [
+              "MoreCheese: Member Profiles"
+            ]
           },
           {
             "Id": "onehot-MemberRegion",
             "Kind": "onehot",
-            "Column": "MemberRegion"
+            "Column": "MemberRegion",
+            "Inputs": [
+              "MoreCheese: Member Profiles"
+            ]
           },
           {
             "Id": "impute-TenureDays",
             "Kind": "impute",
             "Column": "TenureDays",
-            "Strategy": "median"
+            "Strategy": "median",
+            "Inputs": [
+              "MoreCheese: Member Profiles"
+            ]
           },
           {
             "Id": "impute-DaysSinceLastOrder",
             "Kind": "impute",
             "Column": "DaysSinceLastOrder",
-            "Strategy": "median"
+            "Strategy": "median",
+            "Inputs": [
+              "MJ_BizApps_Orders: Order Headers"
+            ]
           },
           {
             "Id": "impute-DaysSinceLastEvent",
             "Kind": "impute",
             "Column": "DaysSinceLastEvent",
-            "Strategy": "median"
+            "Strategy": "median",
+            "Inputs": [
+              "MJ_BizApps_Orders: Event Order Lines"
+            ]
           },
           {
             "Id": "standardize-numerics",
@@ -87,6 +102,12 @@
               "DaysSinceLastEvent",
               "CoursesEnrolledCount",
               "CoursesCompletedCount"
+            ],
+            "Inputs": [
+              "MoreCheese: Course Enrollments",
+              "impute-TenureDays",
+              "impute-DaysSinceLastOrder",
+              "impute-DaysSinceLastEvent"
             ]
           }
         ]
@@ -128,15 +149,15 @@
       "Description": "Predicts whether a registered attendee will actually attend the conference/webinar.",
       "Version": 1,
       "Status": "Published",
-      "TargetEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
-      "TargetVariable": "Attended",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Event Order Lines",
+      "TargetVariable": "AttendanceStatus",
       "ProblemType": "classification",
       "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
       "Hyperparameters": {},
       "SourceBindings": [
         {
           "Kind": "Entity",
-          "Ref": "MoreCheese: Event Registrations"
+          "Ref": "MJ_BizApps_Orders: Event Order Lines"
         }
       ],
       "FeatureSteps": {
@@ -145,8 +166,10 @@
             "Id": "select-features",
             "Kind": "select",
             "Columns": [
-              "RegisteredOn",
-              "EventID"
+              "TicketTier",
+              "ProductID",
+              "UnitPrice",
+              "LineTotalNet"
             ]
           }
         ]
@@ -156,11 +179,15 @@
       },
       "LeakageGuard": {
         "DenyFields": [
-          "Attended",
-          "IsSharedDemo",
-          "RegKey",
-          "PersonID",
-          "Person"
+          "AttendanceStatus",
+          "CheckInAt",
+          "BadgePrintedAt",
+          "CheckInNotes",
+          "SpecialRequests",
+          "Comments",
+          "DietaryPreferences",
+          "Allergies",
+          "PersonID"
         ],
         "SingleFeatureDominanceThreshold": 0.85
       },

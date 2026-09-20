@@ -16,8 +16,6 @@ import { LinkDirectivesModule } from '@memberjunction/ng-link-directives';
 
 // Import Generated Components
 import { morecheeseeventsCompetitionEntryFormComponent } from "./Entities/morecheeseeventsCompetitionEntry/morecheeseeventscompetitionentry.form.component";
-import { morecheeseeventsEventFormComponent } from "./Entities/morecheeseeventsEvent/morecheeseeventsevent.form.component";
-import { morecheeseeventsEventRegistrationFormComponent } from "./Entities/morecheeseeventsEventRegistration/morecheeseeventseventregistration.form.component";
 import { morecheeselearningCertificationFormComponent } from "./Entities/morecheeselearningCertification/morecheeselearningcertification.form.component";
 import { morecheeselearningCourseEnrollmentFormComponent } from "./Entities/morecheeselearningCourseEnrollment/morecheeselearningcourseenrollment.form.component";
 import { morecheeselearningCourseFormComponent } from "./Entities/morecheeselearningCourse/morecheeselearningcourse.form.component";
@@ -62,42 +60,6 @@ exports: [
 ]
 })
 export class GeneratedForms_SubModule_5 { }
-    
-
-
-@NgModule({
-declarations: [
-    morecheeseeventsEventFormComponent
-],
-imports: [
-    CommonModule,
-    FormsModule,
-    BaseFormsModule,
-    EntityViewerModule,
-    LinkDirectivesModule
-],
-exports: [
-]
-})
-export class GeneratedForms_SubModule_9 { }
-    
-
-
-@NgModule({
-declarations: [
-    morecheeseeventsEventRegistrationFormComponent
-],
-imports: [
-    CommonModule,
-    FormsModule,
-    BaseFormsModule,
-    EntityViewerModule,
-    LinkDirectivesModule
-],
-exports: [
-]
-})
-export class GeneratedForms_SubModule_10 { }
     
 
 
@@ -215,8 +177,6 @@ declarations: [
 imports: [
     GeneratedForms_SubModule_0,
     GeneratedForms_SubModule_5,
-    GeneratedForms_SubModule_9,
-    GeneratedForms_SubModule_10,
     GeneratedForms_SubModule_16,
     GeneratedForms_SubModule_22,
     GeneratedForms_SubModule_23,
