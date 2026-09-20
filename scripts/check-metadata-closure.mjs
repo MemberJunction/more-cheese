@@ -642,16 +642,30 @@ if (!baseInfo) {
       'order-lines': 'orders'
     };
 
-    // Deliberate removals are declared (with a reason) in data/pk-removals.json and are not "dropped".
+    // Deliberate removals and retired directories are declared (with a reason) in data/pk-removals.json and are not "dropped".
     let allowedRemovals = new Set();
+    const retiredDirectories = new Map();
     try {
       const rem = JSON.parse(readFileSync(resolve(process.cwd(), 'data', 'pk-removals.json'), 'utf-8'));
       allowedRemovals = new Set((rem.removals || []).filter(r => r.reason).map(r => String(r.id).toUpperCase()));
+      for (const rd of rem.retiredDirectories || []) {
+        if (rd.directory && rd.reason) {
+          retiredDirectories.set(rd.directory, rd);
+        }
+      }
     } catch { /* no removals file */ }
     let totalDroppedPKs = 0;
     const droppedDetails = [];
 
     for (const [dir, bSet] of basePKsByDir.entries()) {
+      if (retiredDirectories.has(dir)) {
+        const rd = retiredDirectories.get(dir);
+        if (rd.expectedCount != null && rd.expectedCount !== bSet.size) {
+          console.warn(`  ⚠️ Retired directory ${dir} had ${bSet.size} records in base commit, expected ${rd.expectedCount}`);
+        }
+        console.log(`  ✓ Directory ${dir} (${bSet.size.toLocaleString()} records) deliberately retired: ${rd.reason}`);
+        continue;
+      }
       const targetDir = composedInto[dir] || dir;
       const cSet = primaryKeysByDir.get(targetDir) || new Set();
       let kept = 0;

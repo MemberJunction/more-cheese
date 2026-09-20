@@ -1,5 +1,13 @@
 {
-  "$comment": "Primary keys deliberately removed from config/ or generated/. scripts/check-metadata-closure.mjs base-delta audit skips these; every entry needs a reason.",
+  "$comment": "Primary keys and retired directories deliberately removed from config/ or generated/. scripts/check-metadata-closure.mjs base-delta audit skips these; every entry needs a reason.",
+  "retiredDirectories": [
+    {
+      "directory": "membership-periods",
+      "expectedCount": 7018,
+      "removed": "2026-09-20",
+      "reason": "Membership Periods entity retired in favor of Predictive Studio models and standard Subscription / Order structures (PR #62)."
+    }
+  ],
   "removals": [
     {
       "id": "0199FC9E-1468-57FC-8A4E-EF1131DA76EB",
