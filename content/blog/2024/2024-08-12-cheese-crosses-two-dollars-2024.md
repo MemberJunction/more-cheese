@@ -1,7 +1,7 @@
 ---
 title: "Cheese crosses two dollars a pound"
 date: 2024-08-12
-slug: cheese-crosses-two-dollars
+slug: cheese-crosses-two-dollars-2024
 author: "ICF Communications Team"
 category: "Industry News"
 tags:

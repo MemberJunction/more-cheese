@@ -1,7 +1,7 @@
 ---
 title: "What it takes to judge the competition"
 date: 2025-08-20
-slug: what-it-takes-to-judge-the-competition
+slug: judging-the-competition-what-it-takes-2025
 author: "ICF Communications Team"
 category: "Certification"
 tags:

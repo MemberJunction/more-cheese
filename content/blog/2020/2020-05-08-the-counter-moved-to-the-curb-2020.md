@@ -1,7 +1,7 @@
 ---
 title: "The counter that moved to the curb"
 date: 2020-05-08
-slug: the-counter-that-moved-to-the-curb
+slug: the-counter-moved-to-the-curb-2020
 author: "ICF Communications Team"
 category: "Member Spotlight"
 tags:

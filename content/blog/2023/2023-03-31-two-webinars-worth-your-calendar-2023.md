@@ -1,7 +1,7 @@
 ---
 title: "Two webinars worth clearing your calendar for"
 date: 2023-03-31
-slug: two-webinars-worth-clearing-your-calendar-for
+slug: two-webinars-worth-your-calendar-2023
 author: "ICF Communications Team"
 category: "Events"
 tags:

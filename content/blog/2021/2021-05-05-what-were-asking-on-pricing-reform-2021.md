@@ -1,7 +1,7 @@
 ---
 title: "What we're asking for on pricing reform"
 date: 2021-05-05
-slug: what-were-asking-for-on-pricing-reform
+slug: what-were-asking-on-pricing-reform-2021
 author: "ICF Communications Team"
 category: "Advocacy"
 tags:

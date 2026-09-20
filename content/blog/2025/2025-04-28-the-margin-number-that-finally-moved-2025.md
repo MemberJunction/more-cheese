@@ -1,7 +1,7 @@
 ---
 title: "The margin number that finally moved"
 date: 2025-04-28
-slug: the-margin-number-that-finally-moved
+slug: the-margin-number-that-finally-moved-2025
 author: "ICF Communications Team"
 category: "Industry News"
 tags:

@@ -1,7 +1,7 @@
 ---
 title: "A cheese market that finally turned"
 date: 2020-10-13
-slug: a-cheese-market-that-finally-turned
+slug: a-cheese-market-that-finally-turned-2020
 author: "ICF Communications Team"
 category: "Industry News"
 tags:
