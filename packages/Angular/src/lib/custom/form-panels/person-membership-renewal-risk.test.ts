@@ -125,4 +125,31 @@ describe('ParseRunDetailItem', () => {
     expect(item!.drivers[0].relativePct).toBe(100);
     expect(item!.rawPayload).toContain('E93F0238-6902-4521-87D9-FE9A1201B001'); // formatted JSON
   });
+
+  it('respects pre-evaluated outcome metadata fields from payload when present', () => {
+    const payload = JSON.stringify({
+      output: {
+        score: 0.92,
+        class: 'Active',
+        status: 'Very Safe',
+        band: 'super-safe',
+        badgeColor: 'green',
+        icon: 'fa-star',
+        scoreLabel: 'Retention Likelihood',
+        statusLabel: 'Health Level',
+      },
+    });
+
+    const item = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-002',
+      CompletedAt: '2026-09-20T17:00:00.000Z',
+      ResultPayload: payload,
+    });
+
+    expect(item).not.toBeNull();
+    expect(item!.riskText).toBe('Very Safe (92%)');
+    expect(item!.pillClass).toBe('risk-low');
+    expect(item!.badgeColor).toBe('green');
+    expect(item!.icon).toBe('fa-star');
+  });
 });

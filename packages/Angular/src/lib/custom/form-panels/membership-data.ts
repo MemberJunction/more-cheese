@@ -28,6 +28,10 @@ export interface PersonPredictionInfo {
     DisplayValue: string;
     RiskText: string;
     PillClass: 'risk-low' | 'risk-med' | 'risk-high' | 'ended';
+    BadgeColor?: string;
+    Icon?: string;
+    ScoreLabel?: string;
+    StatusLabel?: string;
     TopDriver: string | null;
     Drivers: PredictionDriver[];
     Tooltip: string;
@@ -45,6 +49,8 @@ export interface PredictionHistoryItem {
     displayValue: string;
     riskText: string;
     pillClass: 'risk-low' | 'risk-med' | 'risk-high' | 'ended';
+    badgeColor?: string;
+    icon?: string;
     modelName: string;
     topDriver: string | null;
     drivers: PredictionDriver[];
@@ -104,6 +110,13 @@ export function FormatPredictionInfo(
     drivers: Array<{ name: string; importance: number }> | null,
     modelName?: string,
     scoredAt?: string | null,
+    options?: {
+        status?: string;
+        badgeColor?: string;
+        icon?: string;
+        scoreLabel?: string;
+        statusLabel?: string;
+    },
 ): PersonPredictionInfo {
     const name = modelName || 'Predictive Studio Model';
 
@@ -141,7 +154,11 @@ export function FormatPredictionInfo(
     // Renewal probability: higher value is better (≥60% = High / green; 40-59% = Medium / amber; <40% = Low / red)
     let pillClass: 'risk-low' | 'risk-med' | 'risk-high';
     let riskText: string;
-    if (pct >= 60) {
+
+    if (options?.status) {
+        riskText = `${options.status} (${pct}%)`;
+        pillClass = options.badgeColor === 'green' ? 'risk-low' : options.badgeColor === 'amber' ? 'risk-med' : 'risk-high';
+    } else if (pct >= 60) {
         pillClass = 'risk-low';
         riskText = `High (${pct}%)`;
     } else if (pct >= 40) {
@@ -154,7 +171,8 @@ export function FormatPredictionInfo(
 
     const topDriver = formattedDrivers.length > 0 ? formattedDrivers[0].name : null;
     const scoredPhrase = scoredAt ? ` · Scored ${scoredAt}` : '';
-    const tooltip = `Predicted by ${name} · ${pct}% Renewal Probability${scoredPhrase}.`;
+    const scoreLabel = options?.scoreLabel || 'Renewal Probability';
+    const tooltip = `Predicted by ${name} · ${pct}% ${scoreLabel}${scoredPhrase}.`;
 
     return {
         Score: score,
@@ -162,6 +180,10 @@ export function FormatPredictionInfo(
         DisplayValue: predictedClass || `${pct}%`,
         RiskText: riskText,
         PillClass: pillClass,
+        BadgeColor: options?.badgeColor,
+        Icon: options?.icon,
+        ScoreLabel: options?.scoreLabel,
+        StatusLabel: options?.statusLabel,
         TopDriver: topDriver,
         Drivers: formattedDrivers,
         Tooltip: tooltip,
@@ -227,7 +249,26 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
             renewalProb = scoreIsLapseRisk ? Math.max(0, Math.min(1, 1 - norm)) : norm;
         }
 
-        const info = FormatPredictionInfo(renewalProb, classVal, parsedDrivers, targetVal, scoredAtVal);
+        const statusVal = typeof output['status'] === 'string' ? output['status'] : undefined;
+        const badgeColorVal = typeof output['badgeColor'] === 'string' ? output['badgeColor'] : undefined;
+        const iconVal = typeof output['icon'] === 'string' ? output['icon'] : undefined;
+        const scoreLabelVal = typeof output['scoreLabel'] === 'string' ? output['scoreLabel'] : undefined;
+        const statusLabelVal = typeof output['statusLabel'] === 'string' ? output['statusLabel'] : undefined;
+
+        const info = FormatPredictionInfo(
+            renewalProb,
+            classVal,
+            parsedDrivers,
+            targetVal,
+            scoredAtVal,
+            statusVal ? {
+                status: statusVal,
+                badgeColor: badgeColorVal,
+                icon: iconVal,
+                scoreLabel: scoreLabelVal,
+                statusLabel: statusLabelVal,
+            } : undefined,
+        );
         let prettyPayload: string | null = null;
         try {
             prettyPayload = JSON.stringify(raw, null, 2);
@@ -244,6 +285,8 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
             displayValue: info.DisplayValue,
             riskText: info.RiskText,
             pillClass: info.PillClass,
+            badgeColor: info.BadgeColor,
+            icon: info.Icon,
             modelName: info.ModelName,
             topDriver: info.TopDriver,
             drivers: info.Drivers,

@@ -75,6 +75,19 @@ IF OBJECT_ID('__mj.EntityFieldValue', 'U') IS NOT NULL
 IF OBJECT_ID('__mj.EntityField', 'U') IS NOT NULL
     DELETE FROM [__mj].[EntityField] WHERE [EntityID] = @entityId;
 
+-- 14b. Queries, query entities, query fields and views referencing this entity
+IF OBJECT_ID('__mj.QueryField', 'U') IS NOT NULL
+    DELETE FROM [__mj].[QueryField] WHERE [SourceEntityID] = @entityId;
+
+IF OBJECT_ID('__mj.QueryEntity', 'U') IS NOT NULL
+    DELETE FROM [__mj].[QueryEntity] WHERE [EntityID] = @entityId;
+
+IF OBJECT_ID('__mj.UserViewRun', 'U') IS NOT NULL
+    DELETE FROM [__mj].[UserViewRun] WHERE [UserViewID] IN (SELECT [ID] FROM [__mj].[UserView] WHERE [EntityID] = @entityId);
+
+IF OBJECT_ID('__mj.UserView', 'U') IS NOT NULL
+    DELETE FROM [__mj].[UserView] WHERE [EntityID] = @entityId;
+
 -- 15. Core Entity entry
 IF OBJECT_ID('__mj.Entity', 'U') IS NOT NULL
     DELETE FROM [__mj].[Entity] WHERE [ID] = @entityId;

@@ -40,6 +40,17 @@ IF OBJECT_ID('__mj_BizAppsIssues.Issue', 'U') IS NOT NULL
     SET [SourceEntityID] = @canonicalEventOrderLineEntityId
     WHERE [SourceEntityID] IN (@regEntityId, @evtEntityId);
 
+-- 1b. Rebind Sonar model related entities and factors referencing legacy Event Registrations
+IF OBJECT_ID('__mj_BizAppsSonar.ModelRelatedEntity', 'U') IS NOT NULL
+    UPDATE [__mj_BizAppsSonar].[ModelRelatedEntity]
+    SET [RelatedEntityID] = @canonicalEventOrderLineEntityId
+    WHERE [RelatedEntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('__mj_BizAppsSonar.Factor', 'U') IS NOT NULL
+    UPDATE [__mj_BizAppsSonar].[Factor]
+    SET [SourceEntityID] = @canonicalEventOrderLineEntityId
+    WHERE [SourceEntityID] IN (@regEntityId, @evtEntityId);
+
 -- 2. ML model bindings
 IF OBJECT_ID('__mj.MLModelScoringBinding', 'U') IS NOT NULL
     DELETE FROM [__mj].[MLModelScoringBinding] 
@@ -111,6 +122,19 @@ IF OBJECT_ID('__mj.EntityField', 'U') IS NOT NULL
 -- 16. Entity fields
 IF OBJECT_ID('__mj.EntityField', 'U') IS NOT NULL
     DELETE FROM [__mj].[EntityField] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+-- 16b. Queries, query entities, query fields and views referencing these entities
+IF OBJECT_ID('__mj.QueryField', 'U') IS NOT NULL
+    DELETE FROM [__mj].[QueryField] WHERE [SourceEntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('__mj.QueryEntity', 'U') IS NOT NULL
+    DELETE FROM [__mj].[QueryEntity] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('__mj.UserViewRun', 'U') IS NOT NULL
+    DELETE FROM [__mj].[UserViewRun] WHERE [UserViewID] IN (SELECT [ID] FROM [__mj].[UserView] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
+
+IF OBJECT_ID('__mj.UserView', 'U') IS NOT NULL
+    DELETE FROM [__mj].[UserView] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
 
 -- 17. Core Entity entry
 IF OBJECT_ID('__mj.Entity', 'U') IS NOT NULL
