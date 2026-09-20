@@ -1,7 +1,7 @@
 ---
 title: "Getting your market stand ready before the rush"
 date: 2024-06-12
-slug: getting-your-market-stand-ready
+slug: getting-your-market-stand-ready-2024
 author: "ICF Communications Team"
 category: "Education"
 tags:

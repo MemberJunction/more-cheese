@@ -1,7 +1,7 @@
 ---
 title: "What the Sensory Evaluation Certificate actually tests"
 date: 2022-06-03
-slug: what-the-sensory-evaluation-certificate-actually-tests
+slug: sensory-evaluation-certificate-what-it-tests-2022
 author: "ICF Communications Team"
 category: "Certification"
 tags:

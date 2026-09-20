@@ -1,7 +1,7 @@
 ---
 title: "What the Advanced Affinage Certificate actually covers"
 date: 2022-04-04
-slug: what-the-affinage-credential-actually-covers
+slug: what-the-affinage-credential-actually-covers-2022
 author: "ICF Communications Team"
 category: "Certification"
 tags:

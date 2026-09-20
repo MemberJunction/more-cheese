@@ -1,7 +1,7 @@
 ---
 title: "What the cheesemonger credential actually tests"
 date: 2025-04-30
-slug: what-the-cheesemonger-credential-actually-tests
+slug: what-the-cheesemonger-credential-actually-tests-2025
 author: "ICF Communications Team"
 category: "Certification"
 tags:

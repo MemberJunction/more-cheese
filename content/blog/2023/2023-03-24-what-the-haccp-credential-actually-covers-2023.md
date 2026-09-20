@@ -1,7 +1,7 @@
 ---
 title: "What the HACCP credential actually covers"
 date: 2023-03-24
-slug: what-the-haccp-credential-actually-covers
+slug: what-the-haccp-credential-actually-covers-2023
 author: "ICF Communications Team"
 category: "Certification"
 tags:

@@ -16,6 +16,7 @@ on:
       - 'website/**'
       - 'content/blog/**'
       - 'scripts/build-site.mjs'
+      - 'scripts/site-routes.mjs'
       - '.github/workflows/publish-site.yml'
   workflow_dispatch:
 

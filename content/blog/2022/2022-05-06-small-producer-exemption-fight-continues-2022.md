@@ -1,7 +1,7 @@
 ---
 title: "The small-producer exemption fight isn't over"
 date: 2022-05-06
-slug: the-small-producer-exemption-fight-isnt-over
+slug: small-producer-exemption-fight-continues-2022
 author: "ICF Communications Team"
 category: "Advocacy"
 tags:

@@ -1,7 +1,7 @@
 ---
 title: "What a small-producer exemption actually covers"
 date: 2021-04-30
-slug: what-a-small-producer-exemption-actually-covers
+slug: what-a-small-producer-exemption-covers-2021
 author: "ICF Communications Team"
 category: "Advocacy"
 tags:

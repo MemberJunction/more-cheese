@@ -1,7 +1,7 @@
 ---
 title: "What the cheesemonger credential actually tests"
 date: 2022-02-09
-slug: what-the-cheesemonger-credential-actually-tests
+slug: cheesemonger-credential-what-it-tests-feb-2022
 author: "ICF Communications Team"
 category: "Certification"
 tags:
