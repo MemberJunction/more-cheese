@@ -12,17 +12,18 @@ describe('PersonMembershipComponent — Predictive Studio Prediction Resolution'
     expect(res.Tooltip).toContain('has not been executed');
   });
 
-  it('formats low risk probabilities correctly (≤25%)', () => {
-    const res = FormatPredictionInfo(0.15, 'Renewing', [{ name: 'HighLMSCompletion', importance: 0.8 }], 'Member Retention Model', '2026-09-20');
-    expect(res.Score).toBe(0.15);
-    expect(res.RiskText).toBe('Low (15%)');
+  it('formats high renewal probabilities correctly (≥60%)', () => {
+    const res = FormatPredictionInfo(0.85, 'Renewing', [{ name: 'HighLMSCompletion', importance: 0.8 }], 'Member Retention Model', '2026-09-20');
+    expect(res.Score).toBe(0.85);
+    expect(res.RiskText).toBe('High (85%)');
     expect(res.PillClass).toBe('risk-low');
     expect(res.TopDriver).toBe('HighLMSCompletion');
     expect(res.Tooltip).toContain('Member Retention Model');
+    expect(res.Tooltip).toContain('85% Renewal Probability');
     expect(res.Tooltip).toContain('2026-09-20');
   });
 
-  it('formats medium risk probabilities correctly (26-60%)', () => {
+  it('formats medium renewal probabilities correctly (40-59%)', () => {
     const res = FormatPredictionInfo(0.48, null, [{ name: 'OrderFrequencyDrop', importance: 0.5 }], 'Member Churn Model');
     expect(res.Score).toBe(0.48);
     expect(res.RiskText).toBe('Medium (48%)');
@@ -30,18 +31,18 @@ describe('PersonMembershipComponent — Predictive Studio Prediction Resolution'
     expect(res.TopDriver).toBe('OrderFrequencyDrop');
   });
 
-  it('formats high risk probabilities correctly (>60%)', () => {
-    const res = FormatPredictionInfo(0.85, 'NonRenewing', [{ name: 'InactivityDays', importance: 0.9 }], 'Member Churn Model');
-    expect(res.Score).toBe(0.85);
-    expect(res.RiskText).toBe('High (85%)');
+  it('formats low renewal probabilities correctly (<40%)', () => {
+    const res = FormatPredictionInfo(0.15, 'NonRenewing', [{ name: 'InactivityDays', importance: 0.9 }], 'Member Churn Model');
+    expect(res.Score).toBe(0.15);
+    expect(res.RiskText).toBe('Low (15%)');
     expect(res.PillClass).toBe('risk-high');
     expect(res.TopDriver).toBe('InactivityDays');
   });
 
   it('normalizes percentage inputs > 1 correctly', () => {
-    const res = FormatPredictionInfo(92, 'Lapsed', [{ name: 'ZeroOrders', importance: 0.7 }]);
+    const res = FormatPredictionInfo(92, 'Renewed', [{ name: 'ZeroOrders', importance: 0.7 }]);
     expect(res.RiskText).toBe('High (92%)');
-    expect(res.PillClass).toBe('risk-high');
+    expect(res.PillClass).toBe('risk-low');
   });
 
   it('calculates driver relative percentages correctly against top driver', () => {
@@ -114,9 +115,9 @@ describe('ParseRunDetailItem', () => {
 
     expect(item).not.toBeNull();
     expect(item!.id).toBe('RUN-DETAIL-001');
-    expect(item!.score).toBe(0.013);
+    expect(item!.score).toBeCloseTo(0.987);
     expect(item!.predictedClass).toBe('Renewed');
-    expect(item!.riskText).toBe('Low (1%)');
+    expect(item!.riskText).toBe('High (99%)');
     expect(item!.pillClass).toBe('risk-low');
     expect(item!.topDriver).toBe('TenureDays');
     expect(item!.drivers).toHaveLength(2);

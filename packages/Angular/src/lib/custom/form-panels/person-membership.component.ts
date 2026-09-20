@@ -12,7 +12,7 @@ import {
 
 /**
  * The More Cheese membership picture for one person: member profile KPIs,
- * real-time Predictive Studio AI Renewal Risk, top attribution drivers, and run history.
+ * real-time Predictive Studio AI Renewal Probability, top attribution drivers, and run history.
  * Rendered inside the People form by {@link PersonMembershipPanel}.
  */
 @Component({
@@ -52,7 +52,7 @@ import {
                                 <i class="fa-solid fa-wand-magic-sparkles"></i> {{ Prediction?.RiskText || 'Not Scored' }}
                             </span>
                         </div>
-                        <div class="mc-kpi-label">AI Renewal Risk</div>
+                        <div class="mc-kpi-label">AI Renewal Probability</div>
                         @if (Prediction?.TopDriver) {
                             <div class="mc-kpi-sub" [title]="Prediction?.TopDriver">{{ Prediction?.TopDriver }}</div>
                         }

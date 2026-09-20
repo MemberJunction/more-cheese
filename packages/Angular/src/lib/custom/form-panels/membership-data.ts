@@ -96,6 +96,7 @@ export function FormatHistoryDate(dateStr: string | null | undefined): string {
 
 /**
  * Format raw prediction values into a decorated {@link PersonPredictionInfo}.
+ * Standardized on **Renewal Probability** (higher value = better / more likely to renew).
  */
 export function FormatPredictionInfo(
     score: number | null,
@@ -137,22 +138,23 @@ export function FormatPredictionInfo(
     }
     const pct = Math.round(Math.max(0, Math.min(1, norm)) * 100);
 
+    // Renewal probability: higher value is better (≥60% = High / green; 40-59% = Medium / amber; <40% = Low / red)
     let pillClass: 'risk-low' | 'risk-med' | 'risk-high';
     let riskText: string;
-    if (pct <= 25) {
+    if (pct >= 60) {
         pillClass = 'risk-low';
-        riskText = `Low (${pct}%)`;
-    } else if (pct <= 60) {
+        riskText = `High (${pct}%)`;
+    } else if (pct >= 40) {
         pillClass = 'risk-med';
         riskText = `Medium (${pct}%)`;
     } else {
         pillClass = 'risk-high';
-        riskText = `High (${pct}%)`;
+        riskText = `Low (${pct}%)`;
     }
 
     const topDriver = formattedDrivers.length > 0 ? formattedDrivers[0].name : null;
     const scoredPhrase = scoredAt ? ` · Scored ${scoredAt}` : '';
-    const tooltip = `Predicted by ${name}${scoredPhrase}.`;
+    const tooltip = `Predicted by ${name} · ${pct}% Renewal Probability${scoredPhrase}.`;
 
     return {
         Score: score,
@@ -177,6 +179,7 @@ interface RunDetailRecord {
 
 /**
  * Parses one `RunDetailRecord` into a structured {@link PredictionHistoryItem}.
+ * Automatically resolves renewal probability whether the raw score represents P(Lapse) or P(Renewed).
  */
 export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem | null {
     if (!row.ResultPayload) return null;
@@ -201,7 +204,30 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
                 .filter((d): d is { name: string; importance: number } => d != null && d.importance > 0);
         }
 
-        const info = FormatPredictionInfo(scoreVal, classVal, parsedDrivers, targetVal, scoredAtVal);
+        // Determine effective renewal probability (0–1)
+        let renewalProb = scoreVal;
+        if (scoreVal != null) {
+            let norm = scoreVal > 1 ? scoreVal / 100 : scoreVal;
+            norm = Math.max(0, Math.min(1, norm));
+
+            const cls = (classVal || '').toLowerCase();
+            const isLapseTarget = targetVal.toLowerCase().includes('risk') || targetVal.toLowerCase().includes('lapse') || targetVal.toLowerCase().includes('churn');
+
+            let scoreIsLapseRisk = false;
+            if (cls === 'renewed' || cls === 'active') {
+                // A renewed member with small score (< 0.5) means score represents P(Lapse)
+                scoreIsLapseRisk = norm < 0.5;
+            } else if (cls === 'lapsed' || cls === 'cancelled' || cls === 'churn') {
+                // A lapsed member with large score (> 0.5) means score represents P(Lapse)
+                scoreIsLapseRisk = norm > 0.5;
+            } else {
+                scoreIsLapseRisk = isLapseTarget;
+            }
+
+            renewalProb = scoreIsLapseRisk ? Math.max(0, Math.min(1, 1 - norm)) : norm;
+        }
+
+        const info = FormatPredictionInfo(renewalProb, classVal, parsedDrivers, targetVal, scoredAtVal);
         let prettyPayload: string | null = null;
         try {
             prettyPayload = JSON.stringify(raw, null, 2);
