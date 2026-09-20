@@ -3,56 +3,21 @@
   "domain": "more-cheese",
   "catalog": {},
   "params": {
-    "baseRenewalTarget": 0.22,
     "annualConferenceTarget": 0.66,
     "ccpEnrollmentTarget": 0.65,
     "advocacyParticipationTarget": 0.34,
     "volume_Organization": 50,
     "volume_Person": 300,
-    "volume_MembershipPeriod": 300,
     "volume_EventRegistration": 150,
     "volume_CourseEnrollment": 150,
     "volume_AdvocacyAction": 150,
     "intake_Organization": 5,
     "intake_Person": 20,
-    "intake_MembershipPeriod": 20,
     "intake_EventRegistration": 10,
     "intake_CourseEnrollment": 10,
     "intake_AdvocacyAction": 10
   },
   "effects": {
-    "factor-membership-renewal": {
-      "id": "factor-membership-renewal",
-      "effect": "MembershipPeriod",
-      "target": 0.22,
-      "tolerance": 0.05,
-      "evidence": {
-        "source": "ICF Historical Membership Registry (7,018 records 2018-2026)",
-        "confidence": "high",
-        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
-      },
-      "outcome": {
-        "from": "self",
-        "where": {
-          "Status": "Active"
-        },
-        "otherwise": {
-          "Status": "Lapsed"
-        }
-      },
-      "arrows": {
-        "theta": {
-          "dial": "theta",
-          "beta": 0.75,
-          "description": "Engagement increases retention probability"
-        },
-        "phi": {
-          "dial": "phi",
-          "beta": 0.25,
-          "description": "Affluence moderates price-sensitivity"
-        }
-      }
-    },
     "factor-annual-conference-attendance": {
       "id": "factor-annual-conference-attendance",
       "effect": "EventRegistration",

@@ -328,128 +328,132 @@ console.log('\n--- Membership Period Dues Order Pairing & Financial Identity Aud
 const periods = records.filter((r) => r.dir === 'membership-periods');
 const products = records.filter((r) => r.dir === 'products');
 const categories = records.filter((r) => r.dir === 'product-categories');
-const membershipCategory = categories.find((c) => c.fields?.Name === 'Memberships');
-if (!membershipCategory) {
-  console.error("\n❌ DUES PAIRING AUDIT FAILED: 'Memberships' category not found in generated/product-categories");
-  process.exit(1);
-}
-const membershipCategoryID = String(membershipCategory.primaryKey?.ID).toUpperCase();
-
-const memProdIds = new Set(
-  products
-    .filter((p) => {
-      const catId = p.fields?.ProductCategoryID ? String(p.fields.ProductCategoryID).toUpperCase() : null;
-      return catId === membershipCategoryID;
-    })
-    .map((p) => String(p.primaryKey?.ID).toUpperCase())
-);
-
-const memOrders = new Map();
 const ordersById = new Map(orders.map((o) => [String(o.primaryKey?.ID).toUpperCase(), o]));
-
-for (const l of orderLines) {
-  const pid = l.fields?.ProductID ? String(l.fields.ProductID).toUpperCase() : null;
-  if (pid && memProdIds.has(pid)) {
-    const oid = l.fields?.OrderHeaderID ? String(l.fields.OrderHeaderID).toUpperCase() : null;
-    if (oid) {
-      const o = ordersById.get(oid);
-      if (o && o.fields?.OrderType === 'Sale') {
-        memOrders.set(oid, { order: o, line: l });
-      }
-    }
+if (periods.length === 0) {
+  console.log('✓ Membership Periods entity retired in favor of Predictive Studio models; skipping legacy dues pairing audit.');
+} else {
+  const membershipCategory = categories.find((c) => c.fields?.Name === 'Memberships');
+  if (!membershipCategory) {
+    console.error("\n❌ DUES PAIRING AUDIT FAILED: 'Memberships' category not found in generated/product-categories");
+    process.exit(1);
   }
-}
+  const membershipCategoryID = String(membershipCategory.primaryKey?.ID).toUpperCase();
 
-const billedPeriods = periods.filter((p) => (Number(p.fields?.DuesAmount) || 0) > 0);
-billedPeriods.sort((a, b) => new Date(a.fields.StartDate).getTime() - new Date(b.fields.StartDate).getTime());
-
-const claimedOrderIds = new Set();
-let unmatchedPeriods = 0;
-let duesIdentityMismatches = 0;
-
-for (const p of billedPeriods) {
-  const personId = p.fields?.PersonID ? String(p.fields.PersonID).toUpperCase() : null;
-  const pStart = p.fields?.StartDate ? new Date(p.fields.StartDate).getTime() : NaN;
-  if (!personId || isNaN(pStart)) {
-    unmatchedPeriods++;
-    continue;
-  }
-
-  const candidates = Array.from(memOrders.values()).filter(
-    (mo) =>
-      String(mo.order.fields?.BillToPersonID).toUpperCase() === personId &&
-      !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+  const memProdIds = new Set(
+    products
+      .filter((p) => {
+        const catId = p.fields?.ProductCategoryID ? String(p.fields.ProductCategoryID).toUpperCase() : null;
+        return catId === membershipCategoryID;
+      })
+      .map((p) => String(p.primaryKey?.ID).toUpperCase())
   );
 
-  let best = null;
-  let bestDiff = Infinity;
-  for (const c of candidates) {
-    const oDate = c.order.fields?.OrderDate ? new Date(c.order.fields.OrderDate).getTime() : NaN;
-    if (!isNaN(oDate)) {
-      const diff = Math.abs(oDate - pStart);
-      if (diff < bestDiff) {
-        bestDiff = diff;
-        best = c;
+  const memOrders = new Map();
+
+  for (const l of orderLines) {
+    const pid = l.fields?.ProductID ? String(l.fields.ProductID).toUpperCase() : null;
+    if (pid && memProdIds.has(pid)) {
+      const oid = l.fields?.OrderHeaderID ? String(l.fields.OrderHeaderID).toUpperCase() : null;
+      if (oid) {
+        const o = ordersById.get(oid);
+        if (o && o.fields?.OrderType === 'Sale') {
+          memOrders.set(oid, { order: o, line: l });
+        }
       }
     }
   }
 
-  const diffDays = bestDiff / (1000 * 60 * 60 * 24);
-  if (best && diffDays <= 90) {
-    claimedOrderIds.add(String(best.order.primaryKey?.ID).toUpperCase());
-    const orderLinePrice = Number(best.line.fields?.UnitPrice) || 0;
-    const periodDues = Number(p.fields?.DuesAmount) || 0;
-    if (Math.abs(periodDues - orderLinePrice) > 0.01) {
-      duesIdentityMismatches++;
+  const billedPeriods = periods.filter((p) => (Number(p.fields?.DuesAmount) || 0) > 0);
+  billedPeriods.sort((a, b) => new Date(a.fields.StartDate).getTime() - new Date(b.fields.StartDate).getTime());
+
+  const claimedOrderIds = new Set();
+  let unmatchedPeriods = 0;
+  let duesIdentityMismatches = 0;
+
+  for (const p of billedPeriods) {
+    const personId = p.fields?.PersonID ? String(p.fields.PersonID).toUpperCase() : null;
+    const pStart = p.fields?.StartDate ? new Date(p.fields.StartDate).getTime() : NaN;
+    if (!personId || isNaN(pStart)) {
+      unmatchedPeriods++;
+      continue;
     }
-  } else {
-    unmatchedPeriods++;
+
+    const candidates = Array.from(memOrders.values()).filter(
+      (mo) =>
+        String(mo.order.fields?.BillToPersonID).toUpperCase() === personId &&
+        !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+    );
+
+    let best = null;
+    let bestDiff = Infinity;
+    for (const c of candidates) {
+      const oDate = c.order.fields?.OrderDate ? new Date(c.order.fields.OrderDate).getTime() : NaN;
+      if (!isNaN(oDate)) {
+        const diff = Math.abs(oDate - pStart);
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          best = c;
+        }
+      }
+    }
+
+    const diffDays = bestDiff / (1000 * 60 * 60 * 24);
+    if (best && diffDays <= 90) {
+      claimedOrderIds.add(String(best.order.primaryKey?.ID).toUpperCase());
+      const orderLinePrice = Number(best.line.fields?.UnitPrice) || 0;
+      const periodDues = Number(p.fields?.DuesAmount) || 0;
+      if (Math.abs(periodDues - orderLinePrice) > 0.01) {
+        duesIdentityMismatches++;
+      }
+    } else {
+      unmatchedPeriods++;
+    }
   }
-}
 
-if (unmatchedPeriods > 0) {
-  console.error(
-    `\n❌ DUES PAIRING AUDIT FAILED: ${unmatchedPeriods} billed periods could not claim a distinct membership Sale order within 90 days.`
-  );
-  process.exit(1);
-}
-
-if (duesIdentityMismatches > 0) {
-  console.error(
-    `\n❌ DUES FINANCIAL IDENTITY AUDIT FAILED: ${duesIdentityMismatches} periods have DuesAmount differing from paired invoice UnitPrice.`
-  );
-  process.exit(1);
-}
-
-// Residual unclaimed orders audit
-const unclaimedOrders = Array.from(memOrders.values()).filter(
-  (mo) => !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
-);
-
-for (const u of unclaimedOrders) {
-  const f = u.order.fields;
-  const isPendingRenewalDraft =
-    f.OrderNumber.startsWith('ORD-R-') &&
-    f.Status === 'Draft' &&
-    (f.AmountPaid || 0) === 0 &&
-    f.FulfillmentStatus === 'Pending';
-  if (!isPendingRenewalDraft) {
+  if (unmatchedPeriods > 0) {
     console.error(
-      `\n❌ RESIDUAL ORDERS AUDIT FAILED: Unclaimed membership Sale order ${f.OrderNumber} is not a valid pending renewal draft.`
+      `\n❌ DUES PAIRING AUDIT FAILED: ${unmatchedPeriods} billed periods could not claim a distinct membership Sale order within 90 days.`
     );
     process.exit(1);
   }
-}
 
-console.log(
-  `✓ All ${billedPeriods.length.toLocaleString()} billed periods paired 1:1 to distinct membership Sale orders within 90 days.`
-);
-console.log(
-  `✓ 100% financial identity tie-out: MembershipPeriod.DuesAmount === OrderLine.UnitPrice on all ${billedPeriods.length.toLocaleString()} periods.`
-);
-console.log(
-  `✓ Exactly ${unclaimedOrders.length} residual membership Sale orders verified as upcoming unpaid renewal drafts (ORD-R-* Draft/Pending).`
-);
+  if (duesIdentityMismatches > 0) {
+    console.error(
+      `\n❌ DUES FINANCIAL IDENTITY AUDIT FAILED: ${duesIdentityMismatches} periods have DuesAmount differing from paired invoice UnitPrice.`
+    );
+    process.exit(1);
+  }
+
+  // Residual unclaimed orders audit
+  const unclaimedOrders = Array.from(memOrders.values()).filter(
+    (mo) => !claimedOrderIds.has(String(mo.order.primaryKey?.ID).toUpperCase())
+  );
+
+  for (const u of unclaimedOrders) {
+    const f = u.order.fields;
+    const isPendingRenewalDraft =
+      f.OrderNumber.startsWith('ORD-R-') &&
+      f.Status === 'Draft' &&
+      (f.AmountPaid || 0) === 0 &&
+      f.FulfillmentStatus === 'Pending';
+    if (!isPendingRenewalDraft) {
+      console.error(
+        `\n❌ RESIDUAL ORDERS AUDIT FAILED: Unclaimed membership Sale order ${f.OrderNumber} is not a valid pending renewal draft.`
+      );
+      process.exit(1);
+    }
+  }
+
+  console.log(
+    `✓ All ${billedPeriods.length.toLocaleString()} billed periods paired 1:1 to distinct membership Sale orders within 90 days.`
+  );
+  console.log(
+    `✓ 100% financial identity tie-out: MembershipPeriod.DuesAmount === OrderLine.UnitPrice on all ${billedPeriods.length.toLocaleString()} periods.`
+  );
+  console.log(
+    `✓ Exactly ${unclaimedOrders.length} residual membership Sale orders verified as upcoming unpaid renewal drafts (ORD-R-* Draft/Pending).`
+  );
+}
 
 // 8. Order & Line Status Shape Audit (R7-5, R8-1)
 console.log('\n--- Order & Line Status Shape Audit (R7-5, R8-1) ---');

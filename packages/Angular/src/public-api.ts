@@ -34,7 +34,6 @@ export { morecheeselearningMemberCertificationFormComponent } from './lib/genera
 export { morecheesemembersAdvocacyActionFormComponent } from './lib/generated/Entities/morecheesemembersAdvocacyAction/morecheesemembersadvocacyaction.form.component';
 export { morecheesemembersDataQualityLabelFormComponent } from './lib/generated/Entities/morecheesemembersDataQualityLabel/morecheesemembersdataqualitylabel.form.component';
 export { morecheesemembersMemberProfileFormComponent } from './lib/generated/Entities/morecheesemembersMemberProfile/morecheesemembersmemberprofile.form.component';
-export { morecheesemembersMembershipPeriodFormComponent } from './lib/generated/Entities/morecheesemembersMembershipPeriod/morecheesemembersmembershipperiod.form.component';
 export { morecheesemembersOrganizationProfileFormComponent } from './lib/generated/Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component';
 
 
