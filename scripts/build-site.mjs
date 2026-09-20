@@ -40,6 +40,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import yaml from 'js-yaml';
+import { staticWebAppConfig } from './site-routes.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = path.join(ROOT, 'website');
@@ -442,72 +443,7 @@ function rootAbsoluteLinks() {
     return { touched, rewrites };
 }
 
-/* -------------------------------------------- Azure Static Web App routing */
-
-// The WordPress URLs that exist on morecheese.org today, and the static file each
-// one now maps to. Everything here 301s: the .html file is the canonical address
-// of the static site, and a permanent redirect keeps whatever already links to
-// the old URL (search engines, the Knowledge Hub crawler's seed list, bookmarks)
-// pointing at one address rather than two.
-const LEGACY_PAGES = {
-    '/join/': '/join.html',
-    '/learn/': '/learn.html',
-    '/library/': '/library.html',
-    '/compete/': '/compete.html',
-    '/events/': '/events.html',
-    '/advocacy/': '/advocacy.html',
-    '/about/': '/about.html',
-    '/faq/': '/faq.html',
-    '/research/': '/research.html',
-    '/careers/': '/careers.html',
-    '/contact/': '/contact.html',
-    '/faq/membership-dues/': '/faq-membership-dues.html',
-    '/faq/membership-benefits/': '/faq-membership-benefits.html',
-    '/faq/renewals-account/': '/faq-renewals-account.html',
-    '/faq/certifications/': '/faq-certifications.html',
-    '/faq/conferences-events/': '/faq-conferences-events.html',
-    '/faq/publications-resources/': '/faq-publications-resources.html',
-    '/faq/career-governance/': '/faq-career-governance.html',
-    '/faq/organization-directory/': '/faq-organization-directory.html',
-};
-
-// Retired at the WordPress cutover and kept retired here.
-const RETIRED = {
-    '/faq/cheese-education/': '/library.html',
-    '/programs/': '/learn.html',
-    '/about-page/': '/about.html',
-};
-
-function staticWebAppConfig() {
-    const routes = [];
-
-    // /blog/ is a real generated directory; naming it explicitly documents that
-    // this URL is load-bearing (it is the Knowledge Hub crawler's seed).
-    routes.push({ route: '/blog/', rewrite: '/blog/index.html' });
-
-    for (const [from, to] of Object.entries({ ...RETIRED, ...LEGACY_PAGES })) {
-        // Both spellings: WordPress served the trailing-slash form, but plenty of
-        // links in the wild drop it, and SWA matches the path literally.
-        routes.push({ route: from, redirect: to, statusCode: 301 });
-        const bare = from.replace(/\/$/, '');
-        if (bare) routes.push({ route: bare, redirect: to, statusCode: 301 });
-    }
-
-    return {
-        $schema: 'https://json.schemastore.org/staticwebapp.config.json',
-        routes,
-        // No navigationFallback: a rewrite there would answer every unknown URL
-        // with 200 and the 404 page, which is worse than useless for a site whose
-        // content is crawled. responseOverrides keeps the 404 status honest.
-        responseOverrides: {
-            404: { rewrite: '/404.html', statusCode: 404 },
-        },
-        globalHeaders: {
-            'X-Content-Type-Options': 'nosniff',
-            'Referrer-Policy': 'strict-origin-when-cross-origin',
-        },
-    };
-}
+/* ---- Azure Static Web App routing lives in site-routes.mjs; see its header for why ---- */
 
 /* ------------------------------------------------------------------- main */
 
@@ -578,4 +514,23 @@ function main() {
     }
 }
 
-main();
+/**
+ * `main()` ran unconditionally, so importing this module ran the whole build — which is why the
+ * routing table below had never been unit-tested, and why a duplicate-route defect reached
+ * production. Same reasoning and same shape as the other four scripts here; they must answer this
+ * identically or the inconsistency is itself the bug.
+ */
+const isEntryPoint = () => {
+    try {
+        return (
+            process.argv[1] !== undefined &&
+            fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))
+        );
+    } catch {
+        return false;
+    }
+};
+
+if (isEntryPoint()) {
+    main();
+}

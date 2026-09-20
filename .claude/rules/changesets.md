@@ -34,8 +34,9 @@ The house style is specific and verifiable: what was generated, from what, on
 what date, against which MJ version, and what it replays cleanly on. Name any
 cross-app dependency and its floor (`Depends on bizapps-committees >=1.3.0, whose
 SQL Server Metadata_Sync migration seeds the committee roles the membership rows
-reference`). See [`v1-2-0-metadata-seed.md`](../../.changeset/v1-2-0-metadata-seed.md)
-for the shape.
+reference`). The published changelogs are the durable record of that shape — see
+[`packages/Entities/CHANGELOG.md`](../../packages/Entities/CHANGELOG.md). Do not point
+here at a changeset: they are consumed at release, and the link would die with them.
 
 Avoid a bare "update dependencies" — the changelog is what a host operator reads
 when an install fails.

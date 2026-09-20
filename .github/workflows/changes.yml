@@ -123,10 +123,15 @@ jobs:
           git diff --stat generated/
           git diff --exit-code generated/
 
+      # Every check below reads this one output, so the release-pull-request case is answered once
+      # here rather than guarded five times. scripts/release-base-ref.mjs carries both incidents
+      # and the argument for `next`; it prints the ref on stdout and any override reason as a
+      # ::notice:: on stderr, and refuses to print an empty ref.
       - name: Resolve current base branch tip
         id: base
         run: |
-          git fetch --no-tags --depth=1 origin ${{ github.event.pull_request.base.ref }}
+          BASE_REF="$(node ./scripts/release-base-ref.mjs)"
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
           echo "sha=$(git rev-parse FETCH_HEAD)" >> $GITHUB_OUTPUT
 
       - name: Check for migration file changes
