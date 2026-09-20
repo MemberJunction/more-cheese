@@ -1,7 +1,7 @@
 ---
 title: "What the cheesemonger credential actually covers"
 date: 2023-08-25
-slug: what-the-cheesemonger-credential-actually-covers
+slug: what-the-cheesemonger-credential-actually-covers-2023
 author: "ICF Communications Team"
 category: "Certification"
 tags:

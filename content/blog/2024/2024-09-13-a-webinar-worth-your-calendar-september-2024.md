@@ -1,7 +1,7 @@
 ---
 title: "A webinar worth clearing your calendar for on the 17th"
 date: 2024-09-13
-slug: a-webinar-worth-clearing-your-calendar-for
+slug: a-webinar-worth-your-calendar-september-2024
 author: "ICF Communications Team"
 category: "Events"
 tags:
