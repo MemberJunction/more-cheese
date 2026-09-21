@@ -280,29 +280,63 @@ IF OBJECT_ID('${mjSchema}.UserView', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[UserView] WHERE [ID] = 'F770DD7A-032E-553C-B144-07655C3CC700';
 
 -- 14d. Live-host runtime references to retired Entity
+-- Policy: Non-destructive preservation of user data and historical records wherever possible.
+-- For nullable entity foreign keys, set to NULL to satisfy the FK constraint while preserving the
+-- conversation threads, agent run telemetry, audit trail history, and user context items intact.
 IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
     UPDATE [${mjSchema}].[DataContextItem] SET [EntityID] = NULL WHERE [EntityID] = @entityId;
 
+IF OBJECT_ID('${mjSchema}.Conversation', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[Conversation] SET [LinkedEntityID] = NULL WHERE [LinkedEntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.AIAgentRun', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[AIAgentRun] SET [PrimaryScopeEntityID] = NULL WHERE [PrimaryScopeEntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.AuditLog', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[AuditLog] SET [EntityID] = NULL WHERE [EntityID] = @entityId;
+
+-- Leaf user bookmarks and link associations for the retired entity
 IF OBJECT_ID('${mjSchema}.UserFavorite', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[UserFavorite] WHERE [EntityID] = @entityId;
 
 IF OBJECT_ID('${mjSchema}.TaggedItem', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[TaggedItem] WHERE [EntityID] = @entityId;
 
-IF OBJECT_ID('${mjSchema}.AuditLog', 'U') IS NOT NULL
-    DELETE FROM [${mjSchema}].[AuditLog] WHERE [EntityID] = @entityId;
-
-IF OBJECT_ID('${mjSchema}.List', 'U') IS NOT NULL
-    DELETE FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId;
-
 IF OBJECT_ID('${mjSchema}.RecordLink', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[RecordLink] WHERE [SourceEntityID] = @entityId OR [TargetEntityID] = @entityId;
 
-IF OBJECT_ID('${mjSchema}.Conversation', 'U') IS NOT NULL
-    DELETE FROM [${mjSchema}].[Conversation] WHERE [LinkedEntityID] = @entityId;
+-- Lists scoped to the retired entity (List.EntityID is NOT NULL, so clean up child references first)
+IF OBJECT_ID('${mjSchema}.RecordProcess', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[RecordProcess] SET [ScopeListID] = NULL 
+    WHERE [ScopeListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId);
 
-IF OBJECT_ID('${mjSchema}.AIAgentRun', 'U') IS NOT NULL
-    DELETE FROM [${mjSchema}].[AIAgentRun] WHERE [PrimaryScopeEntityID] = @entityId;
+IF OBJECT_ID('${mjSchema}.DuplicateRunDetail', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRunDetail]
+    WHERE [DuplicateRunID] IN (
+        SELECT [ID] FROM [${mjSchema}].[DuplicateRun]
+        WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId)
+           OR [EntityID] = @entityId
+    );
+
+IF OBJECT_ID('${mjSchema}.DuplicateRun', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRun]
+    WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId)
+       OR [EntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.ListDetail', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[ListDetail] 
+    WHERE [ListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId);
+
+IF OBJECT_ID('${mjSchema}.ListShare', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[ListShare] 
+    WHERE [ListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId);
+
+IF OBJECT_ID('${mjSchema}.ListInvitation', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[ListInvitation] 
+    WHERE [ListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId);
+
+IF OBJECT_ID('${mjSchema}.List', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId;
 
 -- 15. Core Entity entry
 IF OBJECT_ID('${mjSchema}.Entity', 'U') IS NOT NULL
