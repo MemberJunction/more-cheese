@@ -286,6 +286,38 @@ test('both sync trees are in scope, not just generated/', () => {
     assert.equal(problems.length, 1);
 });
 
+// Retired directories declared in data/pk-removals.json are excluded from drift, while non-retired directories are counted.
+test('records in a retired directory owe no seed', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.0',
+            syncChanged: [
+                'generated/membership-periods/.7018.json',
+                'generated/membership-periods/.0001.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, []);
+    assert.deepEqual(problems, []);
+});
+
+test('records in a non-retired directory still owe a seed when retired directories are present', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.0',
+            syncChanged: [
+                'generated/membership-periods/.7018.json',
+                'generated/people/.people.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, ['generated/people/.people.json']);
+    assert.equal(problems.length, 1);
+    assert.match(problems[0], /1 record file\(s\) changed since v1\.2\.0/);
+});
+
 // ── Fixture verification for clean repo states and CLI contracts ────────────────────────────────
 
 test('a clean repo fixture passes both cadence and drift checks', () => {
