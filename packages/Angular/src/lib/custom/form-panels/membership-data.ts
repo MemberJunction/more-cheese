@@ -32,6 +32,7 @@ export interface PersonPredictionInfo {
     Icon?: string;
     ScoreLabel?: string;
     StatusLabel?: string;
+    ProblemType?: 'classification' | 'regression';
     TopDriver: string | null;
     Drivers: PredictionDriver[];
     Tooltip: string;
@@ -52,6 +53,10 @@ export interface PredictionHistoryItem {
     badgeColor?: string;
     icon?: string;
     modelName: string;
+    scoreLabel?: string;
+    statusLabel?: string;
+    problemType?: 'classification' | 'regression';
+    target?: string;
     topDriver: string | null;
     drivers: PredictionDriver[];
     rawPayload: string | null;
@@ -60,6 +65,8 @@ export interface PredictionHistoryItem {
 export interface PersonMembership {
     Profile: MemberProfileRow | null;
     Prediction: PersonPredictionInfo | null;
+    RenewalPrediction?: PersonPredictionInfo | null;
+    LtvPrediction?: PersonPredictionInfo | null;
     History: PredictionHistoryItem[];
 }
 
@@ -101,8 +108,30 @@ export function FormatHistoryDate(dateStr: string | null | undefined): string {
 }
 
 /**
+ * Formats a continuous numeric prediction value for display.
+ * If the label or model suggests a financial or lifetime value metric,
+ * formats with a dollar sign and integer commas.
+ */
+export function FormatRegressionValue(value: number, scoreLabel?: string, modelName?: string): string {
+    const combined = `${scoreLabel || ''} ${modelName || ''}`.toLowerCase();
+    const isCurrency = combined.includes('ltv') ||
+        combined.includes('spend') ||
+        combined.includes('revenue') ||
+        combined.includes('amount') ||
+        combined.includes('cost') ||
+        combined.includes('price') ||
+        combined.includes('$');
+    if (isCurrency) {
+        return '$' + Math.round(value).toLocaleString('en-US');
+    }
+    return Number.isInteger(value)
+        ? value.toLocaleString('en-US')
+        : value.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+}
+
+/**
  * Format raw prediction values into a decorated {@link PersonPredictionInfo}.
- * Standardized on **Renewal Probability** (higher value = better / more likely to renew).
+ * Standardized on **Renewal Probability** for classification, or continuous formatted values for regression.
  */
 export function FormatPredictionInfo(
     score: number | null,
@@ -116,6 +145,7 @@ export function FormatPredictionInfo(
         icon?: string;
         scoreLabel?: string;
         statusLabel?: string;
+        problemType?: 'classification' | 'regression';
     },
 ): PersonPredictionInfo {
     const name = modelName || 'Predictive Studio Model';
@@ -145,45 +175,70 @@ export function FormatPredictionInfo(
         };
     }
 
-    let norm = score ?? 0;
-    if (norm > 1) {
-        norm = norm / 100;
-    }
-    const pct = Math.round(Math.max(0, Math.min(1, norm)) * 100);
-
-    // Renewal probability: higher value is better (≥60% = High / green; 40-59% = Medium / amber; <40% = Low / red)
-    let pillClass: 'risk-low' | 'risk-med' | 'risk-high';
-    let riskText: string;
-
-    if (options?.status) {
-        riskText = `${options.status} (${pct}%)`;
-        pillClass = options.badgeColor === 'green' ? 'risk-low' : options.badgeColor === 'amber' ? 'risk-med' : 'risk-high';
-    } else if (pct >= 60) {
-        pillClass = 'risk-low';
-        riskText = `High (${pct}%)`;
-    } else if (pct >= 40) {
-        pillClass = 'risk-med';
-        riskText = `Medium (${pct}%)`;
-    } else {
-        pillClass = 'risk-high';
-        riskText = `Low (${pct}%)`;
-    }
-
+    const isRegression = options?.problemType === 'regression';
     const topDriver = formattedDrivers.length > 0 ? formattedDrivers[0].name : null;
     const scoredPhrase = scoredAt ? ` · Scored ${scoredAt}` : '';
-    const scoreLabel = options?.scoreLabel || 'Renewal Probability';
-    const tooltip = `Predicted by ${name} · ${pct}% ${scoreLabel}${scoredPhrase}.`;
+
+    let pillClass: 'risk-low' | 'risk-med' | 'risk-high' | 'ended';
+    let riskText: string;
+    let displayVal: string;
+    let tooltip: string;
+
+    if (isRegression) {
+        const formattedVal = FormatRegressionValue(score ?? 0, options?.scoreLabel, name);
+        displayVal = formattedVal;
+        if (options?.badgeColor) {
+            pillClass = options.badgeColor === 'green' ? 'risk-low' : options.badgeColor === 'amber' ? 'risk-med' : options.badgeColor === 'red' ? 'risk-high' : 'ended';
+        } else {
+            pillClass = 'risk-low';
+        }
+
+        if (options?.status) {
+            riskText = `${options.status} (${formattedVal})`;
+        } else {
+            riskText = formattedVal;
+        }
+
+        const scoreLabel = options?.scoreLabel || 'Predicted Value';
+        tooltip = `Predicted by ${name} · ${scoreLabel}: ${formattedVal}${scoredPhrase}.`;
+    } else {
+        let norm = score ?? 0;
+        if (norm > 1) {
+            norm = norm / 100;
+        }
+        const pct = Math.round(Math.max(0, Math.min(1, norm)) * 100);
+        displayVal = predictedClass || `${pct}%`;
+
+        // Renewal probability: higher value is better (≥60% = High / green; 40-59% = Medium / amber; <40% = Low / red)
+        if (options?.status) {
+            riskText = `${options.status} (${pct}%)`;
+            pillClass = options.badgeColor === 'green' ? 'risk-low' : options.badgeColor === 'amber' ? 'risk-med' : 'risk-high';
+        } else if (pct >= 60) {
+            pillClass = 'risk-low';
+            riskText = `High (${pct}%)`;
+        } else if (pct >= 40) {
+            pillClass = 'risk-med';
+            riskText = `Medium (${pct}%)`;
+        } else {
+            pillClass = 'risk-high';
+            riskText = `Low (${pct}%)`;
+        }
+
+        const scoreLabel = options?.scoreLabel || 'Renewal Probability';
+        tooltip = `Predicted by ${name} · ${pct}% ${scoreLabel}${scoredPhrase}.`;
+    }
 
     return {
         Score: score,
         Class: predictedClass,
-        DisplayValue: predictedClass || `${pct}%`,
+        DisplayValue: displayVal,
         RiskText: riskText,
         PillClass: pillClass,
         BadgeColor: options?.badgeColor,
         Icon: options?.icon,
         ScoreLabel: options?.scoreLabel,
         StatusLabel: options?.statusLabel,
+        ProblemType: options?.problemType || (isRegression ? 'regression' : 'classification'),
         TopDriver: topDriver,
         Drivers: formattedDrivers,
         Tooltip: tooltip,
@@ -201,7 +256,7 @@ interface RunDetailRecord {
 
 /**
  * Parses one `RunDetailRecord` into a structured {@link PredictionHistoryItem}.
- * Automatically resolves renewal probability whether the raw score represents P(Lapse) or P(Renewed).
+ * Automatically resolves renewal probability for classification, and preserves continuous values for regression.
  */
 export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem | null {
     if (!row.ResultPayload) return null;
@@ -213,22 +268,31 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
         const targetVal = typeof output['target'] === 'string' ? output['target'] : 'Renewal Risk';
         const scoredAtVal = typeof output['scoredAt'] === 'string' ? output['scoredAt'] : (row.CompletedAt || null);
 
+        const problemTypeRaw = typeof output['problemType'] === 'string' ? output['problemType'].toLowerCase() : '';
+        const isRegression = problemTypeRaw === 'regression' ||
+            targetVal.toLowerCase().includes('ltv') ||
+            (scoreVal != null && scoreVal > 100 && problemTypeRaw !== 'classification');
+        const problemType: 'classification' | 'regression' = isRegression ? 'regression' : 'classification';
+
         let parsedDrivers: Array<{ name: string; importance: number }> | null = null;
         if (Array.isArray(output['drivers'])) {
             parsedDrivers = output['drivers']
                 .map((d: unknown) => {
                     if (!d || typeof d !== 'object') return null;
                     const rec = d as Record<string, unknown>;
-                    const n = typeof rec['feature'] === 'string' ? rec['feature'] : '';
-                    const v = typeof rec['value'] === 'number' ? Math.abs(rec['value']) : 0;
+                    const n = typeof rec['feature'] === 'string' && rec['feature'].length > 0
+                        ? rec['feature']
+                        : (typeof rec['label'] === 'string' ? rec['label'] : '');
+                    const v = typeof rec['value'] === 'number'
+                        ? Math.abs(rec['value'])
+                        : (typeof rec['importance'] === 'number' ? Math.abs(rec['importance']) : 0);
                     return n ? { name: n, importance: v } : null;
                 })
                 .filter((d): d is { name: string; importance: number } => d != null && d.importance > 0);
         }
 
-        // Determine effective renewal probability (0–1)
-        let renewalProb = scoreVal;
-        if (scoreVal != null) {
+        let effectiveScore = scoreVal;
+        if (!isRegression && scoreVal != null) {
             let norm = scoreVal > 1 ? scoreVal / 100 : scoreVal;
             norm = Math.max(0, Math.min(1, norm));
 
@@ -237,37 +301,41 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
 
             let scoreIsLapseRisk = false;
             if (cls === 'renewed' || cls === 'active') {
-                // A renewed member with small score (< 0.5) means score represents P(Lapse)
                 scoreIsLapseRisk = norm < 0.5;
             } else if (cls === 'lapsed' || cls === 'cancelled' || cls === 'churn') {
-                // A lapsed member with large score (> 0.5) means score represents P(Lapse)
                 scoreIsLapseRisk = norm > 0.5;
             } else {
                 scoreIsLapseRisk = isLapseTarget;
             }
 
-            renewalProb = scoreIsLapseRisk ? Math.max(0, Math.min(1, 1 - norm)) : norm;
+            effectiveScore = scoreIsLapseRisk ? Math.max(0, Math.min(1, 1 - norm)) : norm;
         }
 
         const statusVal = typeof output['status'] === 'string' ? output['status'] : undefined;
         const badgeColorVal = typeof output['badgeColor'] === 'string' ? output['badgeColor'] : undefined;
         const iconVal = typeof output['icon'] === 'string' ? output['icon'] : undefined;
-        const scoreLabelVal = typeof output['scoreLabel'] === 'string' ? output['scoreLabel'] : undefined;
+        const scoreLabelVal = typeof output['scoreLabel'] === 'string'
+            ? output['scoreLabel']
+            : (isRegression ? 'Predicted Customer LTV' : 'Renewal Probability');
         const statusLabelVal = typeof output['statusLabel'] === 'string' ? output['statusLabel'] : undefined;
+        const modelNameDisplay = typeof output['modelName'] === 'string' && output['modelName'].length > 0
+            ? output['modelName']
+            : (scoreLabelVal || targetVal);
 
         const info = FormatPredictionInfo(
-            renewalProb,
+            effectiveScore,
             classVal,
             parsedDrivers,
-            targetVal,
+            modelNameDisplay,
             scoredAtVal,
-            statusVal ? {
+            {
                 status: statusVal,
                 badgeColor: badgeColorVal,
                 icon: iconVal,
                 scoreLabel: scoreLabelVal,
                 statusLabel: statusLabelVal,
-            } : undefined,
+                problemType: problemType,
+            },
         );
         let prettyPayload: string | null = null;
         try {
@@ -288,6 +356,10 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
             badgeColor: info.BadgeColor,
             icon: info.Icon,
             modelName: info.ModelName,
+            scoreLabel: scoreLabelVal,
+            statusLabel: statusLabelVal,
+            problemType: problemType,
+            target: targetVal,
             topDriver: info.TopDriver,
             drivers: info.Drivers,
             rawPayload: prettyPayload,
@@ -334,28 +406,47 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
         }
     }
 
-    let prediction: PersonPredictionInfo | null = null;
-    if (history.length > 0) {
-        const latest = history[0];
-        prediction = {
-            Score: latest.score,
-            Class: latest.predictedClass,
-            DisplayValue: latest.displayValue,
-            RiskText: latest.riskText,
-            PillClass: latest.pillClass,
-            TopDriver: latest.topDriver,
-            Drivers: latest.drivers,
-            Tooltip: `Predicted by ${latest.modelName}${latest.completedAt ? ` · Scored ${latest.completedAt}` : ''}.`,
-            ScoredAt: latest.completedAt,
-            ModelName: latest.modelName,
-        };
-    } else {
-        prediction = FormatPredictionInfo(null, null, null);
-    }
+    const toPredictionInfo = (item: PredictionHistoryItem): PersonPredictionInfo => ({
+        Score: item.score,
+        Class: item.predictedClass,
+        DisplayValue: item.displayValue,
+        RiskText: item.riskText,
+        PillClass: item.pillClass,
+        BadgeColor: item.badgeColor,
+        Icon: item.icon,
+        ScoreLabel: item.scoreLabel,
+        StatusLabel: item.statusLabel,
+        ProblemType: item.problemType,
+        TopDriver: item.topDriver,
+        Drivers: item.drivers,
+        Tooltip: `Predicted by ${item.modelName}${item.completedAt ? ` · Scored ${FormatHistoryDate(item.completedAt)}` : ''}.`,
+        ScoredAt: item.completedAt,
+        ModelName: item.modelName,
+    });
+
+    const renewalItem = history.find(h =>
+        h.problemType === 'classification' ||
+        h.target?.toLowerCase().includes('renewal') ||
+        h.target?.toLowerCase().includes('risk') ||
+        h.modelName.toLowerCase().includes('renewal')
+    );
+
+    const ltvItem = history.find(h =>
+        h.problemType === 'regression' ||
+        h.target?.toLowerCase().includes('ltv') ||
+        h.modelName.toLowerCase().includes('ltv') ||
+        h.scoreLabel?.toLowerCase().includes('ltv')
+    );
+
+    const renewalPrediction = renewalItem ? toPredictionInfo(renewalItem) : FormatPredictionInfo(null, null, null);
+    const ltvPrediction = ltvItem ? toPredictionInfo(ltvItem) : null;
+    const defaultPrediction = renewalPrediction || (history[0] ? toPredictionInfo(history[0]) : FormatPredictionInfo(null, null, null));
 
     return {
         Profile: profileRows[0] ?? null,
-        Prediction: prediction,
+        Prediction: defaultPrediction,
+        RenewalPrediction: renewalPrediction,
+        LtvPrediction: ltvPrediction,
         History: history,
     };
 }

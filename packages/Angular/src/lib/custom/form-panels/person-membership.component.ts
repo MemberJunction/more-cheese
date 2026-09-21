@@ -46,17 +46,30 @@ import {
                         <div class="mc-kpi-val">{{ SegmentLine }}</div>
                         <div class="mc-kpi-label">{{ LocationLine }}</div>
                     </div>
-                    <div class="mc-kpi mc-kpi-ai" [title]="Prediction?.Tooltip || 'No prediction on file'">
+                    <div class="mc-kpi mc-kpi-ai" [title]="RenewalPrediction?.Tooltip || 'No prediction on file'">
                         <div class="mc-kpi-val">
-                            <span [class]="'mc-pill ' + (Prediction?.PillClass || 'ended')">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> {{ Prediction?.RiskText || 'Not Scored' }}
+                            <span [class]="'mc-pill ' + (RenewalPrediction?.PillClass || 'ended')">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> {{ RenewalPrediction?.RiskText || 'Not Scored' }}
                             </span>
                         </div>
                         <div class="mc-kpi-label">AI Renewal Probability</div>
-                        @if (Prediction?.TopDriver) {
-                            <div class="mc-kpi-sub" [title]="Prediction?.TopDriver">{{ Prediction?.TopDriver }}</div>
+                        @if (RenewalPrediction?.TopDriver) {
+                            <div class="mc-kpi-sub" [title]="RenewalPrediction?.TopDriver">{{ RenewalPrediction?.TopDriver }}</div>
                         }
                     </div>
+                    @if (LtvPrediction) {
+                        <div class="mc-kpi mc-kpi-ai mc-kpi-ltv" [title]="LtvPrediction.Tooltip || 'Predicted Customer Lifetime Value'">
+                            <div class="mc-kpi-val">
+                                <span [class]="'mc-pill ' + (LtvPrediction.PillClass || 'ended')">
+                                    <i [class]="'fa-solid ' + (LtvPrediction.Icon || 'fa-arrow-trend-up')"></i> {{ LtvPrediction.RiskText || 'Not Scored' }}
+                                </span>
+                            </div>
+                            <div class="mc-kpi-label">Predicted Customer LTV</div>
+                            @if (LtvPrediction.TopDriver) {
+                                <div class="mc-kpi-sub" [title]="LtvPrediction.TopDriver">{{ LtvPrediction.TopDriver }}</div>
+                            }
+                        </div>
+                    }
                 </div>
 
                 <div class="mc-profile-summary">
@@ -116,9 +129,9 @@ import {
                                                     <div class="mc-history-header">
                                                         <div class="mc-history-meta">
                                                             <span [class]="'mc-pill ' + item.pillClass">
-                                                                <i class="fa-solid fa-wand-magic-sparkles"></i> {{ item.riskText }}
+                                                                <i [class]="'fa-solid ' + (item.icon || (item.problemType === 'regression' ? 'fa-arrow-trend-up' : 'fa-wand-magic-sparkles'))"></i> {{ item.riskText }}
                                                             </span>
-                                                            <span class="mc-history-model">{{ item.modelName }}</span>
+                                                            <span class="mc-history-model">{{ item.scoreLabel || item.modelName }}</span>
                                                         </div>
                                                         <span class="mc-history-date">{{ item.formattedDate }}</span>
                                                     </div>
@@ -162,6 +175,8 @@ import {
         .mc-pill.ended { background: #f1f3f5; color: #5f6b7a; }
         .mc-kpi-ai { border-color: #c7d2fe; background: linear-gradient(135deg, #fbfcfe 0%, #f0f3ff 100%); }
         .mc-kpi-ai .mc-kpi-label { color: #4f46e5; font-weight: 600; }
+        .mc-kpi-ltv { border-color: #a7f3d0; background: linear-gradient(135deg, #fbfcfe 0%, #f0fdf4 100%); }
+        .mc-kpi-ltv .mc-kpi-label { color: #059669; font-weight: 600; }
         .mc-kpi-sub { font-size: 10.5px; color: var(--mj-text-muted, #6b7280); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .mc-pill.risk-low { background: #e7f6ec; color: #1e7f43; }
         .mc-pill.risk-med { background: #fff4e5; color: #b25e09; }
@@ -403,6 +418,14 @@ export class PersonMembershipComponent implements OnChanges {
 
     public get Prediction(): PersonPredictionInfo | null {
         return this.Data?.Prediction ?? null;
+    }
+
+    public get RenewalPrediction(): PersonPredictionInfo | null {
+        return this.Data?.RenewalPrediction ?? this.Data?.Prediction ?? null;
+    }
+
+    public get LtvPrediction(): PersonPredictionInfo | null {
+        return this.Data?.LtvPrediction ?? null;
     }
 
     public get Drivers(): PredictionDriver[] {
