@@ -21,11 +21,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import {
     parseSeedName,
     findUnconsolidatedSeedDeltas,
     findUnshippedMetadataDrift,
+    isAllowedRemovalChange,
 } from './check-release-seed-cadence.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -346,6 +348,59 @@ test('deliberately removed views from filter JSON files declared in pk-removals.
     );
     assert.deepEqual(changed, []);
     assert.deepEqual(problems, []);
+});
+
+test('a deleted file whose id is not in removals still owes a seed', () => {
+    const isAllowed = isAllowedRemovalChange(REPO_ROOT, 'config/queries/.04282792.json', 'v1.2.1', new Set(['WRONG-ID']));
+    assert.equal(isAllowed, false);
+});
+
+test('a file where one record was removed and another was edited still owes a seed', () => {
+    const oldRecords = [
+        { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Original' } },
+        { primaryKey: { ID: 'REC-2' }, fields: { Name: 'Removed' } },
+    ];
+    const tmp = mkdtempSync(path.join(tmpdir(), 'cadence-test-'));
+    try {
+        mkdirSync(path.join(tmp, 'config'), { recursive: true });
+        writeFileSync(path.join(tmp, 'config/test.json'), JSON.stringify([
+            { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Modified' } },
+        ]));
+        const isAllowed = isAllowedRemovalChange(
+            tmp,
+            'config/test.json',
+            'v1.0.0',
+            new Set(['REC-2']),
+            () => JSON.stringify(oldRecords),
+        );
+        assert.equal(isAllowed, false);
+    } finally {
+        rmSync(tmp, { recursive: true, force: true });
+    }
+});
+
+test('a modified file with undeclared removals still owes a seed', () => {
+    const oldRecords = [
+        { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Same' } },
+        { primaryKey: { ID: 'REC-2' }, fields: { Name: 'Removed' } },
+    ];
+    const tmp = mkdtempSync(path.join(tmpdir(), 'cadence-test-'));
+    try {
+        mkdirSync(path.join(tmp, 'config'), { recursive: true });
+        writeFileSync(path.join(tmp, 'config/test.json'), JSON.stringify([
+            { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Same' } },
+        ]));
+        const isAllowed = isAllowedRemovalChange(
+            tmp,
+            'config/test.json',
+            'v1.0.0',
+            new Set(['OTHER-ID']),
+            () => JSON.stringify(oldRecords),
+        );
+        assert.equal(isAllowed, false);
+    } finally {
+        rmSync(tmp, { recursive: true, force: true });
+    }
 });
 
 // ── Fixture verification for clean repo states and CLI contracts ────────────────────────────────

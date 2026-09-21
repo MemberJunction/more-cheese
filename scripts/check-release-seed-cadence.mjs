@@ -388,13 +388,19 @@ function getRemovalsInfo(repoRoot) {
  * declared in data/pk-removals.json (e.g. deleted files whose IDs are in allowedRemovals,
  * or multi-record JSON files where only declared removed IDs were deleted with no surviving edits).
  */
-export function isAllowedRemovalChange(repoRoot, file, tag, allowedRemovals) {
+export function isAllowedRemovalChange(
+    repoRoot,
+    file,
+    tag,
+    allowedRemovals,
+    getOldContent = (r, f, t) => git(r, ['show', `${t}:${f}`]),
+) {
     if (!allowedRemovals || allowedRemovals.size === 0 || !tag) return false;
 
     const fullPath = join(repoRoot, file);
     if (!existsSync(fullPath)) {
         try {
-            const oldContent = git(repoRoot, ['show', `${tag}:${file}`]);
+            const oldContent = getOldContent(repoRoot, file, tag);
             const parsed = JSON.parse(oldContent);
             const records = Array.isArray(parsed) ? parsed : [parsed];
             const ids = records
@@ -412,7 +418,7 @@ export function isAllowedRemovalChange(repoRoot, file, tag, allowedRemovals) {
         const currentParsed = JSON.parse(currentContent);
         if (!Array.isArray(currentParsed)) return false;
 
-        const oldContent = git(repoRoot, ['show', `${tag}:${file}`]);
+        const oldContent = getOldContent(repoRoot, file, tag);
         const oldParsed = JSON.parse(oldContent);
         if (!Array.isArray(oldParsed)) return false;
 
