@@ -1,0 +1,902 @@
+[
+  {
+    "primaryKey": {
+      "ID": "E93F0238-6902-4521-87D9-FE9A1201B001"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 1,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
+      "FittedPreprocessing": {
+        "ops": [
+          {
+            "op": "onehot",
+            "col": "MembershipTier",
+            "vocabulary": [
+              "Corporate",
+              "Enthusiast",
+              "Individual",
+              "SmallBusiness"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberSegment",
+            "vocabulary": [
+              "Educator",
+              "Enthusiast",
+              "Producer",
+              "Retailer",
+              "Supplier"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberRegion",
+            "vocabulary": [
+              "EU",
+              "NA",
+              "RoW"
+            ]
+          },
+          {
+            "op": "impute",
+            "col": "TenureDays",
+            "strategy": "median",
+            "fill": 693
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastOrder",
+            "strategy": "median",
+            "fill": 335
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastEvent",
+            "strategy": "median",
+            "fill": 272
+          },
+          {
+            "op": "standardize",
+            "cols": [
+              "TenureDays",
+              "DuesAmount",
+              "PriorPeriodsCount",
+              "TotalOrderSpend",
+              "OrdersCount",
+              "DaysSinceLastOrder",
+              "EventsAttendedCount",
+              "DaysSinceLastEvent",
+              "CoursesEnrolledCount",
+              "CoursesCompletedCount"
+            ],
+            "stats": {
+              "TenureDays": {
+                "mean": 1010.5230460921844,
+                "std": 1079.4262106846913
+              },
+              "DuesAmount": {
+                "mean": 231.6993987975952,
+                "std": 175.13095847330914
+              },
+              "PriorPeriodsCount": {
+                "mean": 1.936236108580798,
+                "std": 1.9188151175334174
+              },
+              "TotalOrderSpend": {
+                "mean": 849.5904536345419,
+                "std": 1096.360160211935
+              },
+              "OrdersCount": {
+                "mean": 3.903261067589725,
+                "std": 4.569808954024013
+              },
+              "DaysSinceLastOrder": {
+                "mean": 252.06157770085625,
+                "std": 130.38550628423255
+              },
+              "EventsAttendedCount": {
+                "mean": 2.996538531608672,
+                "std": 4.573461316306379
+              },
+              "DaysSinceLastEvent": {
+                "mean": 249.92985971943887,
+                "std": 185.15976566838316
+              },
+              "CoursesEnrolledCount": {
+                "mean": 1.251047549644744,
+                "std": 1.7367281122052733
+              },
+              "CoursesCompletedCount": {
+                "mean": 0.8136272545090181,
+                "std": 1.3212627409827262
+              }
+            }
+          }
+        ],
+        "output_columns": [
+          "MembershipTier=Corporate",
+          "MembershipTier=Enthusiast",
+          "MembershipTier=Individual",
+          "MembershipTier=SmallBusiness",
+          "MemberSegment=Educator",
+          "MemberSegment=Enthusiast",
+          "MemberSegment=Producer",
+          "MemberSegment=Retailer",
+          "MemberSegment=Supplier",
+          "MemberRegion=EU",
+          "MemberRegion=NA",
+          "MemberRegion=RoW",
+          "TenureDays",
+          "DuesAmount",
+          "PriorPeriodsCount",
+          "TotalOrderSpend",
+          "OrdersCount",
+          "DaysSinceLastOrder",
+          "EventsAttendedCount",
+          "DaysSinceLastEvent",
+          "CoursesEnrolledCount",
+          "CoursesCompletedCount"
+        ]
+      },
+      "FeatureSchema": [
+        {
+          "Name": "MembershipTier",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "TotalOrderSpend",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "OrdersCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastOrder",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastEvent",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesCompletedCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.9314,
+        "f1": 0.9644,
+        "precision": 0.9342,
+        "recall": 0.9965,
+        "auc": 0.7405
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.9272,
+        "f1": 0.9622,
+        "precision": 0.9328,
+        "recall": 0.9935,
+        "auc": 0.7493
+      },
+      "FeatureImportance": {
+        "MembershipTier=Corporate": 0.0007,
+        "MembershipTier=Enthusiast": 0.007,
+        "MembershipTier=Individual": 0.0033,
+        "MembershipTier=SmallBusiness": 0.004,
+        "MemberSegment=Educator": 0.0103,
+        "MemberSegment=Enthusiast": 0,
+        "MemberSegment=Producer": 0.0243,
+        "MemberSegment=Retailer": 0.009,
+        "MemberSegment=Supplier": 0.012,
+        "MemberRegion=EU": 0.025,
+        "MemberRegion=NA": 0.018,
+        "MemberRegion=RoW": 0.0113,
+        "TenureDays": 0.1717,
+        "DuesAmount": 0.132,
+        "PriorPeriodsCount": 0.023,
+        "TotalOrderSpend": 0.1367,
+        "OrdersCount": 0.0377,
+        "DaysSinceLastOrder": 0.1297,
+        "EventsAttendedCount": 0.0443,
+        "DaysSinceLastEvent": 0.148,
+        "CoursesEnrolledCount": 0.032,
+        "CoursesCompletedCount": 0.02
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Canonical Renewal Risk Tournament Wave 1",
+        "Algorithm": "LightGBM",
+        "Outcome": "Winner - Published",
+        "outcomeConfig": {
+          "ScoreLabel": "Renewal Probability",
+          "StatusLabel": "Renewal Status",
+          "Polarity": "positive",
+          "Bands": [
+            {
+              "Key": "high",
+              "Label": "High",
+              "Min": 0.6,
+              "Max": 1,
+              "MinScore": 0.6,
+              "MaxScore": 1,
+              "BadgeColor": "green",
+              "Icon": "fa-circle-check"
+            },
+            {
+              "Key": "medium",
+              "Label": "Medium",
+              "Min": 0.4,
+              "Max": 0.5999,
+              "MinScore": 0.4,
+              "MaxScore": 0.5999,
+              "BadgeColor": "amber",
+              "Icon": "fa-triangle-exclamation"
+            },
+            {
+              "Key": "low",
+              "Label": "Low",
+              "Min": 0,
+              "Max": 0.3999,
+              "MinScore": 0,
+              "MaxScore": 0.3999,
+              "BadgeColor": "red",
+              "Icon": "fa-circle-exclamation"
+            }
+          ],
+          "OutcomeStyles": {
+            "Renewed": {
+              "BadgeColor": "green",
+              "Icon": "fa-check"
+            },
+            "Lapsed": {
+              "BadgeColor": "red",
+              "Icon": "fa-xmark"
+            },
+            "Active": {
+              "BadgeColor": "green",
+              "Icon": "fa-check"
+            }
+          }
+        }
+      },
+      "TrainingDurationSec": 2,
+      "TrainingRowCount": 5489,
+      "Status": "Published"
+    },
+    "sync": {
+      "lastModified": "2026-09-20T23:04:21.371Z",
+      "checksum": "356171feef5e8fe099de4d7594c0536a0f1d5de33ab9ef5de9f3c3afc0215442"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E93F0238-6902-4521-87D9-FE9A1201B002"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 2,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=XGBoost",
+      "FittedPreprocessing": {
+        "ops": [
+          {
+            "op": "onehot",
+            "col": "MembershipTier",
+            "vocabulary": [
+              "Corporate",
+              "Enthusiast",
+              "Individual",
+              "SmallBusiness"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberSegment",
+            "vocabulary": [
+              "Educator",
+              "Enthusiast",
+              "Producer",
+              "Retailer",
+              "Supplier"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberRegion",
+            "vocabulary": [
+              "EU",
+              "NA",
+              "RoW"
+            ]
+          },
+          {
+            "op": "impute",
+            "col": "TenureDays",
+            "strategy": "median",
+            "fill": 693
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastOrder",
+            "strategy": "median",
+            "fill": 335
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastEvent",
+            "strategy": "median",
+            "fill": 272
+          },
+          {
+            "op": "standardize",
+            "cols": [
+              "TenureDays",
+              "DuesAmount",
+              "PriorPeriodsCount",
+              "TotalOrderSpend",
+              "OrdersCount",
+              "DaysSinceLastOrder",
+              "EventsAttendedCount",
+              "DaysSinceLastEvent",
+              "CoursesEnrolledCount",
+              "CoursesCompletedCount"
+            ],
+            "stats": {
+              "TenureDays": {
+                "mean": 1010.5230460921844,
+                "std": 1079.4262106846913
+              },
+              "DuesAmount": {
+                "mean": 231.6993987975952,
+                "std": 175.13095847330914
+              },
+              "PriorPeriodsCount": {
+                "mean": 1.936236108580798,
+                "std": 1.9188151175334174
+              },
+              "TotalOrderSpend": {
+                "mean": 849.5904536345419,
+                "std": 1096.360160211935
+              },
+              "OrdersCount": {
+                "mean": 3.903261067589725,
+                "std": 4.569808954024013
+              },
+              "DaysSinceLastOrder": {
+                "mean": 252.06157770085625,
+                "std": 130.38550628423255
+              },
+              "EventsAttendedCount": {
+                "mean": 2.996538531608672,
+                "std": 4.573461316306379
+              },
+              "DaysSinceLastEvent": {
+                "mean": 249.92985971943887,
+                "std": 185.15976566838316
+              },
+              "CoursesEnrolledCount": {
+                "mean": 1.251047549644744,
+                "std": 1.7367281122052733
+              },
+              "CoursesCompletedCount": {
+                "mean": 0.8136272545090181,
+                "std": 1.3212627409827262
+              }
+            }
+          }
+        ],
+        "output_columns": [
+          "MembershipTier=Corporate",
+          "MembershipTier=Enthusiast",
+          "MembershipTier=Individual",
+          "MembershipTier=SmallBusiness",
+          "MemberSegment=Educator",
+          "MemberSegment=Enthusiast",
+          "MemberSegment=Producer",
+          "MemberSegment=Retailer",
+          "MemberSegment=Supplier",
+          "MemberRegion=EU",
+          "MemberRegion=NA",
+          "MemberRegion=RoW",
+          "TenureDays",
+          "DuesAmount",
+          "PriorPeriodsCount",
+          "TotalOrderSpend",
+          "OrdersCount",
+          "DaysSinceLastOrder",
+          "EventsAttendedCount",
+          "DaysSinceLastEvent",
+          "CoursesEnrolledCount",
+          "CoursesCompletedCount"
+        ]
+      },
+      "FeatureSchema": [
+        {
+          "Name": "MembershipTier",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "TotalOrderSpend",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "OrdersCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastOrder",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastEvent",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesCompletedCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.9239,
+        "f1": 0.9602,
+        "precision": 0.9356,
+        "recall": 0.9862,
+        "auc": 0.7423
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.9235,
+        "f1": 0.9601,
+        "precision": 0.9346,
+        "recall": 0.987,
+        "auc": 0.725
+      },
+      "FeatureImportance": {
+        "MembershipTier=Corporate": 0,
+        "MembershipTier=Enthusiast": 0.1366,
+        "MembershipTier=Individual": 0.0318,
+        "MembershipTier=SmallBusiness": 0.0267,
+        "MemberSegment=Educator": 0.0315,
+        "MemberSegment=Enthusiast": 0,
+        "MemberSegment=Producer": 0.0416,
+        "MemberSegment=Retailer": 0.048,
+        "MemberSegment=Supplier": 0.0449,
+        "MemberRegion=EU": 0.0413,
+        "MemberRegion=NA": 0.0378,
+        "MemberRegion=RoW": 0.0453,
+        "TenureDays": 0.0666,
+        "DuesAmount": 0.0753,
+        "PriorPeriodsCount": 0.0444,
+        "TotalOrderSpend": 0.0488,
+        "OrdersCount": 0.0437,
+        "DaysSinceLastOrder": 0.0478,
+        "EventsAttendedCount": 0.0519,
+        "DaysSinceLastEvent": 0.0468,
+        "CoursesEnrolledCount": 0.0474,
+        "CoursesCompletedCount": 0.0418
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Canonical Renewal Risk Tournament Wave 1",
+        "Algorithm": "XGBoost",
+        "Outcome": "Challenger - Validated",
+        "outcomeConfig": {
+          "ScoreLabel": "Renewal Probability",
+          "StatusLabel": "Renewal Status",
+          "Polarity": "positive",
+          "Bands": [
+            {
+              "Key": "high",
+              "Label": "High",
+              "Min": 0.6,
+              "Max": 1,
+              "MinScore": 0.6,
+              "MaxScore": 1,
+              "BadgeColor": "green",
+              "Icon": "fa-circle-check"
+            },
+            {
+              "Key": "medium",
+              "Label": "Medium",
+              "Min": 0.4,
+              "Max": 0.5999,
+              "MinScore": 0.4,
+              "MaxScore": 0.5999,
+              "BadgeColor": "amber",
+              "Icon": "fa-triangle-exclamation"
+            },
+            {
+              "Key": "low",
+              "Label": "Low",
+              "Min": 0,
+              "Max": 0.3999,
+              "MinScore": 0,
+              "MaxScore": 0.3999,
+              "BadgeColor": "red",
+              "Icon": "fa-circle-exclamation"
+            }
+          ],
+          "OutcomeStyles": {
+            "Renewed": {
+              "BadgeColor": "green",
+              "Icon": "fa-check"
+            },
+            "Lapsed": {
+              "BadgeColor": "red",
+              "Icon": "fa-xmark"
+            },
+            "Active": {
+              "BadgeColor": "green",
+              "Icon": "fa-check"
+            }
+          }
+        }
+      },
+      "TrainingDurationSec": 0,
+      "TrainingRowCount": 5489,
+      "Status": "Validated"
+    },
+    "sync": {
+      "lastModified": "2026-09-20T23:04:21.370Z",
+      "checksum": "247796152d843d61b59152d8f5c780a5f20796cf796897d4893b93b4c9b67801"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E93F0238-6902-4521-87D9-FE9A1201B003"
+    },
+    "fields": {
+      "PipelineID": "@lookup:MJ: ML Training Pipelines.ID=8A1C44F3-938C-4E65-B6DE-D621BC4C3001",
+      "Version": 3,
+      "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=Random Forest",
+      "FittedPreprocessing": {
+        "ops": [
+          {
+            "op": "onehot",
+            "col": "MembershipTier",
+            "vocabulary": [
+              "Corporate",
+              "Enthusiast",
+              "Individual",
+              "SmallBusiness"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberSegment",
+            "vocabulary": [
+              "Educator",
+              "Enthusiast",
+              "Producer",
+              "Retailer",
+              "Supplier"
+            ]
+          },
+          {
+            "op": "onehot",
+            "col": "MemberRegion",
+            "vocabulary": [
+              "EU",
+              "NA",
+              "RoW"
+            ]
+          },
+          {
+            "op": "impute",
+            "col": "TenureDays",
+            "strategy": "median",
+            "fill": 693
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastOrder",
+            "strategy": "median",
+            "fill": 335
+          },
+          {
+            "op": "impute",
+            "col": "DaysSinceLastEvent",
+            "strategy": "median",
+            "fill": 272
+          },
+          {
+            "op": "standardize",
+            "cols": [
+              "TenureDays",
+              "DuesAmount",
+              "PriorPeriodsCount",
+              "TotalOrderSpend",
+              "OrdersCount",
+              "DaysSinceLastOrder",
+              "EventsAttendedCount",
+              "DaysSinceLastEvent",
+              "CoursesEnrolledCount",
+              "CoursesCompletedCount"
+            ],
+            "stats": {
+              "TenureDays": {
+                "mean": 1010.5230460921844,
+                "std": 1079.4262106846913
+              },
+              "DuesAmount": {
+                "mean": 231.6993987975952,
+                "std": 175.13095847330914
+              },
+              "PriorPeriodsCount": {
+                "mean": 1.936236108580798,
+                "std": 1.9188151175334174
+              },
+              "TotalOrderSpend": {
+                "mean": 849.5904536345419,
+                "std": 1096.360160211935
+              },
+              "OrdersCount": {
+                "mean": 3.903261067589725,
+                "std": 4.569808954024013
+              },
+              "DaysSinceLastOrder": {
+                "mean": 252.06157770085625,
+                "std": 130.38550628423255
+              },
+              "EventsAttendedCount": {
+                "mean": 2.996538531608672,
+                "std": 4.573461316306379
+              },
+              "DaysSinceLastEvent": {
+                "mean": 249.92985971943887,
+                "std": 185.15976566838316
+              },
+              "CoursesEnrolledCount": {
+                "mean": 1.251047549644744,
+                "std": 1.7367281122052733
+              },
+              "CoursesCompletedCount": {
+                "mean": 0.8136272545090181,
+                "std": 1.3212627409827262
+              }
+            }
+          }
+        ],
+        "output_columns": [
+          "MembershipTier=Corporate",
+          "MembershipTier=Enthusiast",
+          "MembershipTier=Individual",
+          "MembershipTier=SmallBusiness",
+          "MemberSegment=Educator",
+          "MemberSegment=Enthusiast",
+          "MemberSegment=Producer",
+          "MemberSegment=Retailer",
+          "MemberSegment=Supplier",
+          "MemberRegion=EU",
+          "MemberRegion=NA",
+          "MemberRegion=RoW",
+          "TenureDays",
+          "DuesAmount",
+          "PriorPeriodsCount",
+          "TotalOrderSpend",
+          "OrdersCount",
+          "DaysSinceLastOrder",
+          "EventsAttendedCount",
+          "DaysSinceLastEvent",
+          "CoursesEnrolledCount",
+          "CoursesCompletedCount"
+        ]
+      },
+      "FeatureSchema": [
+        {
+          "Name": "MembershipTier",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberSegment",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "MemberRegion",
+          "Kind": "categorical"
+        },
+        {
+          "Name": "TenureDays",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DuesAmount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "PriorPeriodsCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "TotalOrderSpend",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "OrdersCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastOrder",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "EventsAttendedCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "DaysSinceLastEvent",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesEnrolledCount",
+          "Kind": "numeric"
+        },
+        {
+          "Name": "CoursesCompletedCount",
+          "Kind": "numeric"
+        }
+      ],
+      "TargetVariable": "Status",
+      "ProblemType": "classification",
+      "Metrics": {
+        "accuracy": 0.9239,
+        "f1": 0.9604,
+        "precision": 0.9318,
+        "recall": 0.9908,
+        "auc": 0.6832
+      },
+      "HoldoutMetrics": {
+        "accuracy": 0.9211,
+        "f1": 0.9589,
+        "precision": 0.9323,
+        "recall": 0.987,
+        "auc": 0.6669
+      },
+      "FeatureImportance": {
+        "MembershipTier=Corporate": 0.0026,
+        "MembershipTier=Enthusiast": 0.0094,
+        "MembershipTier=Individual": 0.0062,
+        "MembershipTier=SmallBusiness": 0.0061,
+        "MemberSegment=Educator": 0.0112,
+        "MemberSegment=Enthusiast": 0.0107,
+        "MemberSegment=Producer": 0.0191,
+        "MemberSegment=Retailer": 0.0182,
+        "MemberSegment=Supplier": 0.0128,
+        "MemberRegion=EU": 0.0211,
+        "MemberRegion=NA": 0.0213,
+        "MemberRegion=RoW": 0.0157,
+        "TenureDays": 0.1637,
+        "DuesAmount": 0.1685,
+        "PriorPeriodsCount": 0.0263,
+        "TotalOrderSpend": 0.11,
+        "OrdersCount": 0.0435,
+        "DaysSinceLastOrder": 0.1242,
+        "EventsAttendedCount": 0.0452,
+        "DaysSinceLastEvent": 0.1064,
+        "CoursesEnrolledCount": 0.0337,
+        "CoursesCompletedCount": 0.0239
+      },
+      "Lineage": {
+        "Tournament": "More Cheese Canonical Renewal Risk Tournament Wave 1",
+        "Algorithm": "Random Forest",
+        "Outcome": "Baseline - Draft",
+        "outcomeConfig": {
+          "ScoreLabel": "Renewal Probability",
+          "StatusLabel": "Renewal Status",
+          "Polarity": "positive",
+          "Bands": [
+            {
+              "Key": "high",
+              "Label": "High",
+              "Min": 0.6,
+              "Max": 1,
+              "MinScore": 0.6,
+              "MaxScore": 1,
+              "BadgeColor": "green",
+              "Icon": "fa-circle-check"
+            },
+            {
+              "Key": "medium",
+              "Label": "Medium",
+              "Min": 0.4,
+              "Max": 0.5999,
+              "MinScore": 0.4,
+              "MaxScore": 0.5999,
+              "BadgeColor": "amber",
+              "Icon": "fa-triangle-exclamation"
+            },
+            {
+              "Key": "low",
+              "Label": "Low",
+              "Min": 0,
+              "Max": 0.3999,
+              "MinScore": 0,
+              "MaxScore": 0.3999,
+              "BadgeColor": "red",
+              "Icon": "fa-circle-exclamation"
+            }
+          ],
+          "OutcomeStyles": {
+            "Renewed": {
+              "BadgeColor": "green",
+              "Icon": "fa-check"
+            },
+            "Lapsed": {
+              "BadgeColor": "red",
+              "Icon": "fa-xmark"
+            },
+            "Active": {
+              "BadgeColor": "green",
+              "Icon": "fa-check"
+            }
+          }
+        }
+      },
+      "TrainingDurationSec": 0,
+      "TrainingRowCount": 5489,
+      "Status": "Draft"
+    },
+    "sync": {
+      "lastModified": "2026-09-20T23:04:21.379Z",
+      "checksum": "c326e2c177dabb897b3d0dd4863103cbab0d1eaac97079dac48681293653cbe1"
+    }
+  }
+]

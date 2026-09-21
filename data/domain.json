@@ -465,90 +465,11 @@
       },
       "isImmutable": false
     },
-    "MembershipPeriod": {
-      "name": "MembershipPeriod",
-      "entityName": "MoreCheese: Membership Periods",
-      "targetTable": "MembershipPeriod",
-      "schema": "morecheese_members",
-      "pack": "community",
-      "outputDirectory": "membership-periods",
-      "cycleField": "RenewalDate",
-      "businessKey": [
-        "PeriodKey"
-      ],
-      "fields": {
-        "ID": {
-          "name": "ID",
-          "type": "uuid",
-          "isPrimaryKey": true
-        },
-        "PeriodKey": {
-          "name": "PeriodKey",
-          "type": "string"
-        },
-        "PersonID": {
-          "name": "PersonID",
-          "type": "uuid"
-        },
-        "MembershipTier": {
-          "name": "MembershipTier",
-          "type": "string"
-        },
-        "DuesAmount": {
-          "name": "DuesAmount",
-          "type": "number"
-        },
-        "StartDate": {
-          "name": "StartDate",
-          "type": "date"
-        },
-        "EndDate": {
-          "name": "EndDate",
-          "type": "date"
-        },
-        "RenewalDate": {
-          "name": "RenewalDate",
-          "type": "date",
-          "nullable": true
-        },
-        "Status": {
-          "name": "Status",
-          "type": "string"
-        },
-        "CancellationDate": {
-          "name": "CancellationDate",
-          "type": "date",
-          "nullable": true
-        },
-        "CancellationReason": {
-          "name": "CancellationReason",
-          "type": "string",
-          "nullable": true
-        },
-        "AutoRenew": {
-          "name": "AutoRenew",
-          "type": "boolean"
-        },
-        "IsSharedDemo": {
-          "name": "IsSharedDemo",
-          "type": "boolean"
-        }
-      },
-      "foreignKeys": {
-        "PersonID": {
-          "fieldName": "PersonID",
-          "targetEntity": "Person",
-          "targetField": "ID",
-          "cardinality": "many-to-one"
-        }
-      },
-      "isImmutable": false
-    },
     "EventRegistration": {
       "name": "EventRegistration",
       "entityName": "MoreCheese: Event Registrations",
       "targetTable": "EventRegistration",
-      "schema": "morecheese_members",
+      "schema": "morecheese_events",
       "pack": "community",
       "outputDirectory": "event-registrations",
       "cycleField": "RegisteredOn",

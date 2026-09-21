@@ -62,16 +62,16 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (388 distinct records; 414 declared across
+-- Seed provenance (350 distinct records; 376 declared across
 -- 37 directories, 26 of them declared in two directories and inserted once):
 --     75 from config/conversations
---     63 from config/queries
 --     46 from config/artifacts
 --     44 from config/query-categories
+--     29 from config/queries
 --     25 from config/conversations-owner
---     25 from config/resource-permissions
---     25 from config/user-views
 --     23 from config/conversation-detail-artifacts
+--     23 from config/resource-permissions
+--     23 from config/user-views
 --     19 from config/user-applications
 --     10 from config/sonar-factors
 --     10 from config/sonar-model-factors
@@ -288,65 +288,31 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: File Storage Providers', 'C9B9433E-F36B-1410-8DA0-00021F8B792E'),
     ('MJ: Projects', '3C9E1F52-7A4B-4D8E-9B2C-6F1A8D3E5B70'),
     ('MJ: Queries', '01233BE6-F40A-48C0-81F3-A04476E1429F'),
-    ('MJ: Queries', '04282792-0C95-4E26-8F54-942C7784CF8F'),
-    ('MJ: Queries', '04DC85EF-583E-4D2A-A8DD-DD0B5972A5C7'),
-    ('MJ: Queries', '153A7F37-6B1A-4BE6-8BF1-61B40DD598C1'),
     ('MJ: Queries', '15BCACCF-3411-49B7-9D55-811486068114'),
-    ('MJ: Queries', '188341AE-1B9B-4E92-B668-AB8B8FF81BC7'),
-    ('MJ: Queries', '1A8CF27F-EB6F-4E96-9D68-CFD0E056FC0A'),
-    ('MJ: Queries', '1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1'),
     ('MJ: Queries', '1C19142E-AD9F-4ABA-A5CE-F43E4147E844'),
     ('MJ: Queries', '2074CD3B-B18D-42AC-8719-C91E16426D29'),
-    ('MJ: Queries', '20C3F9C9-9C9F-404E-AB0B-01BB3BE8E782'),
-    ('MJ: Queries', '279CC0ED-1AE8-438B-AA72-4F2497E57896'),
     ('MJ: Queries', '2D3D9981-4E0E-4D75-BD71-E96E0D583EC4'),
-    ('MJ: Queries', '370F9B87-E39C-4394-A55F-077B70C51106'),
-    ('MJ: Queries', '3879A59D-87B6-4061-BE2F-3FCEC6585508'),
     ('MJ: Queries', '4833639C-B08E-4DE8-8D40-736537600210'),
     ('MJ: Queries', '4A6CAD80-4ABB-4057-A278-B91393207D5E'),
-    ('MJ: Queries', '4E76E086-A270-4BCA-9108-27616EFC4116'),
-    ('MJ: Queries', '527F1950-D882-4684-BE17-F0F7E65EB30D'),
-    ('MJ: Queries', '5BD14A12-DFDF-4C65-A802-D00E714BB30C'),
-    ('MJ: Queries', '6012D5AA-2580-406E-9523-2D19CA18C036'),
-    ('MJ: Queries', '605A91F5-00F9-4DD0-9126-58A11C196E9D'),
-    ('MJ: Queries', '61BDDBE4-1FF4-4088-B373-5FDF5A03FB08'),
     ('MJ: Queries', '69125C05-7700-464E-9C3E-5AB0B3CE3C26'),
     ('MJ: Queries', '6A1D129B-FD58-4B37-A163-6DE69930CF73'),
-    ('MJ: Queries', '6BBE8897-03BB-44CA-AB22-4EFACFD91450'),
     ('MJ: Queries', '70DC5BF9-4382-4FBF-8170-BDFB8FB399A4'),
     ('MJ: Queries', '81596FC4-2758-4531-8F5B-9F83CDE9E887'),
-    ('MJ: Queries', '869C17CA-B51A-4195-B8AE-8D04EE684EBF'),
-    ('MJ: Queries', '86D957A8-1125-4091-B662-6ED0403A75E9'),
-    ('MJ: Queries', '8770A736-D96A-4B47-BC55-F95214E5083F'),
     ('MJ: Queries', '88842A4E-84F6-4F91-905F-723E3B1DB8F0'),
-    ('MJ: Queries', '88FA74D8-24CA-4959-886C-EE6980090D3A'),
     ('MJ: Queries', '89B9E252-9F66-473F-898B-02FB91C96F10'),
     ('MJ: Queries', '8BFDEECF-9767-46F8-8F31-D7ABDD449468'),
-    ('MJ: Queries', '8D59E20E-FF74-4C66-9923-B3EA726E12A6'),
-    ('MJ: Queries', '916AE9E7-9E7B-4632-AF98-AE032A210FE9'),
     ('MJ: Queries', '96129FA0-3DC9-4329-A5A7-ACE3DD6C4025'),
-    ('MJ: Queries', '970F0F7B-454C-422F-86C8-AB631429B947'),
     ('MJ: Queries', '97AA052D-4305-43EA-A6CE-97A23C7073E7'),
     ('MJ: Queries', 'A438A9E2-55F2-4C19-9D5C-48A8A1BA1286'),
     ('MJ: Queries', 'A94EC844-1672-437A-852B-26763C3E5E2B'),
-    ('MJ: Queries', 'AEE7B184-23E4-41A2-9A01-5AD54052F29C'),
-    ('MJ: Queries', 'AFEAE5C5-127D-47D7-A480-E1ABB95F47D6'),
     ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283'),
-    ('MJ: Queries', 'C1FE4ED5-8500-4BDE-AF97-493236FA9584'),
     ('MJ: Queries', 'C3CE64FE-EEAB-4B30-A647-8F89CBE83209'),
-    ('MJ: Queries', 'CB4EED60-5560-4EC9-B634-EE017C9D2666'),
-    ('MJ: Queries', 'CB804BB3-607A-4B74-A33C-700CA23E1733'),
-    ('MJ: Queries', 'CBDDD0E4-3DCA-41A7-8F4D-C4EE65D54ABA'),
-    ('MJ: Queries', 'CC391293-12F2-42F4-AE52-9A52A82F6E40'),
     ('MJ: Queries', 'CE78AD75-1CE9-464D-A492-E047064A0317'),
-    ('MJ: Queries', 'D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B'),
     ('MJ: Queries', 'E30B4FC9-CC3F-4F35-9D60-D22D01C98C23'),
-    ('MJ: Queries', 'E710AC9D-EC60-4CE6-88D0-C0A50A75FB9A'),
     ('MJ: Queries', 'E80E748A-E041-486B-9CCF-4AD0FEEB672B'),
     ('MJ: Queries', 'F4407C5F-4A26-45E8-B359-62BF356CC495'),
     ('MJ: Queries', 'F549132D-33B7-487F-ADEE-C44F4B351C47'),
     ('MJ: Queries', 'F6C89900-1C0B-410B-919D-02945B1892C1'),
-    ('MJ: Queries', 'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'),
     ('MJ: Queries', 'F8BCC51A-F68E-4DB3-8030-4DD70EABEC27'),
     ('MJ: Queries', 'F94D83C9-9800-492E-B539-868C2EE4451F'),
     ('MJ: Queries', 'FBF5A27B-E1E0-41D9-B004-23B920F19209'),
@@ -407,8 +373,6 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Resource Permissions', '0C8E882B-5336-553F-BC0A-6B261E846B93'),
     ('MJ: Resource Permissions', '7CEAD060-3931-5838-A30C-333202F4C254'),
     ('MJ: Resource Permissions', '101BE0A3-B37C-5E3E-B8FE-9B006E32E4B4'),
-    ('MJ: Resource Permissions', 'A9052951-D09A-55DB-AA62-53CF20F3CB3B'),
-    ('MJ: Resource Permissions', 'EB75A6AC-46A4-562D-8708-06309E5480BA'),
     ('MJ: Resource Permissions', '43613F4B-7ABB-557B-B0DF-417ECC9C3D62'),
     ('MJ: Resource Permissions', '1E7F9FD8-4098-55D9-A206-DE46FAB785B7'),
     ('MJ: Resource Permissions', 'D6D24615-B2D9-54FE-8826-FACA10DE9F2B'),
@@ -493,8 +457,6 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Views', '5CB88F7E-1368-5963-8973-4FC0E9D5A504'),
     ('MJ: User Views', 'F89A3421-3A95-5730-A873-F4B9A46E7ABE'),
     ('MJ: User Views', 'E284181A-91DF-5A96-8D16-63076ABCA8BA'),
-    ('MJ: User Views', '4AC57CE7-D9D7-5140-A0B3-13EF49DA882D'),
-    ('MJ: User Views', 'F770DD7A-032E-553C-B144-07655C3CC700'),
     ('MJ: User Views', '97A75D49-A060-5828-98DD-7BA09A948F71'),
     ('MJ: User Views', '698F8C76-2071-544C-BCE6-5FB66673F709'),
     ('MJ: User Views', '1C3B0B3B-3A74-51BB-A485-FFACE8CCBE87'),

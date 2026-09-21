@@ -25,8 +25,6 @@ export { PersonMembershipComponent } from './lib/custom/form-panels/person-membe
 // Re-export for consumers + the host class-registration manifest
 export { GeneratedFormsModule } from './lib/generated/generated-forms.module';
 export { morecheeseeventsCompetitionEntryFormComponent } from './lib/generated/Entities/morecheeseeventsCompetitionEntry/morecheeseeventscompetitionentry.form.component';
-export { morecheeseeventsEventFormComponent } from './lib/generated/Entities/morecheeseeventsEvent/morecheeseeventsevent.form.component';
-export { morecheeseeventsEventRegistrationFormComponent } from './lib/generated/Entities/morecheeseeventsEventRegistration/morecheeseeventseventregistration.form.component';
 export { morecheeselearningCertificationFormComponent } from './lib/generated/Entities/morecheeselearningCertification/morecheeselearningcertification.form.component';
 export { morecheeselearningCourseEnrollmentFormComponent } from './lib/generated/Entities/morecheeselearningCourseEnrollment/morecheeselearningcourseenrollment.form.component';
 export { morecheeselearningCourseFormComponent } from './lib/generated/Entities/morecheeselearningCourse/morecheeselearningcourse.form.component';
@@ -34,7 +32,6 @@ export { morecheeselearningMemberCertificationFormComponent } from './lib/genera
 export { morecheesemembersAdvocacyActionFormComponent } from './lib/generated/Entities/morecheesemembersAdvocacyAction/morecheesemembersadvocacyaction.form.component';
 export { morecheesemembersDataQualityLabelFormComponent } from './lib/generated/Entities/morecheesemembersDataQualityLabel/morecheesemembersdataqualitylabel.form.component';
 export { morecheesemembersMemberProfileFormComponent } from './lib/generated/Entities/morecheesemembersMemberProfile/morecheesemembersmemberprofile.form.component';
-export { morecheesemembersMembershipPeriodFormComponent } from './lib/generated/Entities/morecheesemembersMembershipPeriod/morecheesemembersmembershipperiod.form.component';
 export { morecheesemembersOrganizationProfileFormComponent } from './lib/generated/Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component';
 
 

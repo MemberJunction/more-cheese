@@ -1,0 +1,13 @@
+[
+  {
+    "primaryKey": {
+      "ID": "87CC87FF-D9ED-4183-A25B-2C9C787D3103"
+    },
+    "fields": {
+      "MLModelID": "@lookup:MJ: ML Models.ID=E93F0238-6902-4521-87D9-FE9A1201B001",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "TargetColumn": null,
+      "Mode": "Scheduled"
+    }
+  }
+]
