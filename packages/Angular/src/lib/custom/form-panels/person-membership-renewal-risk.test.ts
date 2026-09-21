@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { FormatPredictionInfo, FormatHistoryDate, ParseRunDetailItem } from './membership-data';
+import { FormatPredictionInfo, FormatHistoryDate, ParseRunDetailItem, FormatRegressionValue } from './membership-data';
 
 describe('PersonMembershipComponent — Predictive Studio Prediction Resolution', () => {
   it('returns Not Scored when there is no prediction on file', () => {
@@ -152,4 +152,116 @@ describe('ParseRunDetailItem', () => {
     expect(item!.badgeColor).toBe('green');
     expect(item!.icon).toBe('fa-star');
   });
+
+  it('correctly parses regression payload with continuous score and label-based drivers', () => {
+    const payload = JSON.stringify({
+      output: {
+        modelId: 'DAB40DD7-AD2A-4DAC-A117-96D56CB6CE6B',
+        target: 'CustomerActualLTV',
+        problemType: 'regression',
+        score: 11253.8,
+        class: 'High Value',
+        status: 'High Value',
+        band: 'high',
+        badgeColor: 'green',
+        icon: 'fa-arrow-trend-up',
+        scoreLabel: 'Predicted Customer LTV',
+        statusLabel: 'LTV Tier',
+        drivers: [
+          { label: 'Total Orders', value: 74, up: true },
+          { label: 'Customer Tenure Days', value: 2700, up: true },
+          { label: 'First Order Gross', value: 830, up: true },
+        ],
+        scoredAt: '2026-09-20T23:33:26.260Z',
+      },
+    });
+
+    const item = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-003',
+      CompletedAt: '2026-09-20T23:33:26.336Z',
+      ResultPayload: payload,
+    });
+
+    expect(item).not.toBeNull();
+    expect(item!.id).toBe('RUN-DETAIL-003');
+    expect(item!.problemType).toBe('regression');
+    expect(item!.score).toBe(11253.8);
+    expect(item!.predictedClass).toBe('High Value');
+    expect(item!.displayValue).toBe('$11,254');
+    expect(item!.riskText).toBe('High Value ($11,254)');
+    expect(item!.pillClass).toBe('risk-low');
+    expect(item!.badgeColor).toBe('green');
+    expect(item!.icon).toBe('fa-arrow-trend-up');
+    expect(item!.scoreLabel).toBe('Predicted Customer LTV');
+    expect(item!.modelName).toBe('Predicted Customer LTV');
+    expect(item!.topDriver).toBe('Total Orders');
+    expect(item!.drivers).toHaveLength(3);
+    expect(item!.drivers[0].name).toBe('Total Orders');
+  });
+
+  it('pins both sides of the score > 100 regression heuristic boundary', () => {
+    // Side 1: score > 100 with explicit problemType: 'classification' must NOT be treated as regression
+    const classificationPayload = JSON.stringify({
+      output: {
+        score: 150,
+        problemType: 'classification',
+        target: 'Engagement Score',
+      },
+    });
+    const classItem = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-004',
+      CompletedAt: '2026-09-20T23:40:00.000Z',
+      ResultPayload: classificationPayload,
+    });
+    expect(classItem).not.toBeNull();
+    expect(classItem!.problemType).toBe('classification');
+    expect(classItem!.displayValue).not.toContain('$');
+    expect(classItem!.displayValue).toBe('100%');
+
+    // Side 2: score > 100 without problemType: 'classification' is inferred as continuous regression
+    const inferredRegressionPayload = JSON.stringify({
+      output: {
+        score: 150,
+        target: 'Customer Spend',
+      },
+    });
+    const regItem = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-005',
+      CompletedAt: '2026-09-20T23:41:00.000Z',
+      ResultPayload: inferredRegressionPayload,
+    });
+    expect(regItem).not.toBeNull();
+    expect(regItem!.problemType).toBe('regression');
+    expect(regItem!.displayValue).toBe('$150');
+
+    // Boundary check: score <= 100 without problemType stays classification
+    const scoreUnder100Payload = JSON.stringify({
+      output: {
+        score: 85,
+        target: 'Engagement Score',
+      },
+    });
+    const boundaryItem = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-006',
+      CompletedAt: '2026-09-20T23:42:00.000Z',
+      ResultPayload: scoreUnder100Payload,
+    });
+    expect(boundaryItem).not.toBeNull();
+    expect(boundaryItem!.problemType).toBe('classification');
+    expect(boundaryItem!.displayValue).toBe('85%');
+  });
 });
+
+describe('FormatRegressionValue', () => {
+  it('formats currency values with dollar signs and commas', () => {
+    expect(FormatRegressionValue(11253.8, 'Predicted Customer LTV')).toBe('$11,254');
+    expect(FormatRegressionValue(400.05, 'Predicted Customer LTV')).toBe('$400');
+    expect(FormatRegressionValue(0, 'Customer LTV')).toBe('$0');
+  });
+
+  it('formats non-currency continuous numbers appropriately', () => {
+    expect(FormatRegressionValue(42, 'Score')).toBe('42');
+    expect(FormatRegressionValue(3.1415, 'Index')).toBe('3.14');
+  });
+});
+

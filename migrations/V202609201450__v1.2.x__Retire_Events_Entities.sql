@@ -6,6 +6,14 @@
 -- [${mjSchema}_BizAppsOrders].[EventProduct] and [${mjSchema}_BizAppsOrders].[EventOrderLine].
 -- Rebinds the MoreCheese Event No-Show Propensity pipeline to [${mjSchema}_BizAppsOrders].[EventOrderLine].
 -- Backfills realistic attendance lifecycle statuses, badge names, and ticket tiers across EventOrderLine.
+--
+-- Referential Integrity Scope Boundary:
+-- Explicitly handles all framework, runtime, and user references that can exist on a MoreCheese host
+-- (ML pipelines/models/runs, ProcessRuns/Details/Watermarks, DataContextItems, UserViews/Runs,
+-- ResourcePermissions, Queries/Parameters/Dependencies, UserFavorites, TaggedItems, RecordLinks,
+-- Conversations, AIAgentRuns, AuditLogs, and Lists with their full child cascades
+-- DuplicateRunDetailMatch -> DuplicateRunDetail -> DuplicateRun and ListDetail/Share/Invitation).
+-- Nullable foreign keys are preserved non-destructively; unhandled core entity children are unreferenced.
 -- =============================================================================
 
 DECLARE @regEntityId UNIQUEIDENTIFIER = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153'; -- MoreCheese: Event Registrations
@@ -77,6 +85,12 @@ IF OBJECT_ID('${mjSchema}.ProcessRunDetail', 'U') IS NOT NULL
 
 IF OBJECT_ID('${mjSchema}.ProcessRun', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[ProcessRun] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+-- 6b. Record process watermarks
+IF OBJECT_ID('${mjSchema}.RecordProcessWatermark', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[RecordProcessWatermark] 
+    WHERE [EntityID] IN (@regEntityId, @evtEntityId)
+       OR [RecordProcessID] IN (SELECT [ID] FROM [${mjSchema}].[RecordProcess] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
 
 -- 7. Record processes
 IF OBJECT_ID('${mjSchema}.RecordProcess', 'U') IS NOT NULL
@@ -206,6 +220,119 @@ IF OBJECT_ID('${mjSchema}.QueryPermission', 'U') IS NOT NULL
         'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'
     );
 
+IF OBJECT_ID('${mjSchema}.QueryParameter', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[QueryParameter] WHERE [QueryID] IN (
+        '04282792-0C95-4E26-8F54-942C7784CF8F',
+        '153A7F37-6B1A-4BE6-8BF1-61B40DD598C1',
+        '1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1',
+        '4E76E086-A270-4BCA-9108-27616EFC4116',
+        '527F1950-D882-4684-BE17-F0F7E65EB30D',
+        '5BD14A12-DFDF-4C65-A802-D00E714BB30C',
+        '605A91F5-00F9-4DD0-9126-58A11C196E9D',
+        '61BDDBE4-1FF4-4088-B373-5FDF5A03FB08',
+        '869C17CA-B51A-4195-B8AE-8D04EE684EBF',
+        '88FA74D8-24CA-4959-886C-EE6980090D3A',
+        '8D59E20E-FF74-4C66-9923-B3EA726E12A6',
+        '916AE9E7-9E7B-4632-AF98-AE032A210FE9',
+        'AEE7B184-23E4-41A2-9A01-5AD54052F29C',
+        'C1FE4ED5-8500-4BDE-AF97-493236FA9584',
+        'CB4EED60-5560-4EC9-B634-EE017C9D2666',
+        'CB804BB3-607A-4B74-A33C-700CA23E1733',
+        'CC391293-12F2-42F4-AE52-9A52A82F6E40',
+        'D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B',
+        'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'
+    );
+
+IF OBJECT_ID('${mjSchema}.QueryDependency', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[QueryDependency] WHERE [QueryID] IN (
+        '04282792-0C95-4E26-8F54-942C7784CF8F',
+        '153A7F37-6B1A-4BE6-8BF1-61B40DD598C1',
+        '1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1',
+        '4E76E086-A270-4BCA-9108-27616EFC4116',
+        '527F1950-D882-4684-BE17-F0F7E65EB30D',
+        '5BD14A12-DFDF-4C65-A802-D00E714BB30C',
+        '605A91F5-00F9-4DD0-9126-58A11C196E9D',
+        '61BDDBE4-1FF4-4088-B373-5FDF5A03FB08',
+        '869C17CA-B51A-4195-B8AE-8D04EE684EBF',
+        '88FA74D8-24CA-4959-886C-EE6980090D3A',
+        '8D59E20E-FF74-4C66-9923-B3EA726E12A6',
+        '916AE9E7-9E7B-4632-AF98-AE032A210FE9',
+        'AEE7B184-23E4-41A2-9A01-5AD54052F29C',
+        'C1FE4ED5-8500-4BDE-AF97-493236FA9584',
+        'CB4EED60-5560-4EC9-B634-EE017C9D2666',
+        'CB804BB3-607A-4B74-A33C-700CA23E1733',
+        'CC391293-12F2-42F4-AE52-9A52A82F6E40',
+        'D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B',
+        'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'
+    ) OR [DependsOnQueryID] IN (
+        '04282792-0C95-4E26-8F54-942C7784CF8F',
+        '153A7F37-6B1A-4BE6-8BF1-61B40DD598C1',
+        '1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1',
+        '4E76E086-A270-4BCA-9108-27616EFC4116',
+        '527F1950-D882-4684-BE17-F0F7E65EB30D',
+        '5BD14A12-DFDF-4C65-A802-D00E714BB30C',
+        '605A91F5-00F9-4DD0-9126-58A11C196E9D',
+        '61BDDBE4-1FF4-4088-B373-5FDF5A03FB08',
+        '869C17CA-B51A-4195-B8AE-8D04EE684EBF',
+        '88FA74D8-24CA-4959-886C-EE6980090D3A',
+        '8D59E20E-FF74-4C66-9923-B3EA726E12A6',
+        '916AE9E7-9E7B-4632-AF98-AE032A210FE9',
+        'AEE7B184-23E4-41A2-9A01-5AD54052F29C',
+        'C1FE4ED5-8500-4BDE-AF97-493236FA9584',
+        'CB4EED60-5560-4EC9-B634-EE017C9D2666',
+        'CB804BB3-607A-4B74-A33C-700CA23E1733',
+        'CC391293-12F2-42F4-AE52-9A52A82F6E40',
+        'D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B',
+        'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'
+    );
+
+IF OBJECT_ID('${mjSchema}.QuerySQL', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[QuerySQL] WHERE [QueryID] IN (
+        '04282792-0C95-4E26-8F54-942C7784CF8F',
+        '153A7F37-6B1A-4BE6-8BF1-61B40DD598C1',
+        '1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1',
+        '4E76E086-A270-4BCA-9108-27616EFC4116',
+        '527F1950-D882-4684-BE17-F0F7E65EB30D',
+        '5BD14A12-DFDF-4C65-A802-D00E714BB30C',
+        '605A91F5-00F9-4DD0-9126-58A11C196E9D',
+        '61BDDBE4-1FF4-4088-B373-5FDF5A03FB08',
+        '869C17CA-B51A-4195-B8AE-8D04EE684EBF',
+        '88FA74D8-24CA-4959-886C-EE6980090D3A',
+        '8D59E20E-FF74-4C66-9923-B3EA726E12A6',
+        '916AE9E7-9E7B-4632-AF98-AE032A210FE9',
+        'AEE7B184-23E4-41A2-9A01-5AD54052F29C',
+        'C1FE4ED5-8500-4BDE-AF97-493236FA9584',
+        'CB4EED60-5560-4EC9-B634-EE017C9D2666',
+        'CB804BB3-607A-4B74-A33C-700CA23E1733',
+        'CC391293-12F2-42F4-AE52-9A52A82F6E40',
+        'D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B',
+        'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'
+    );
+
+-- Null out DataContextItem QueryID references (non-destructive for user saved contexts)
+IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[DataContextItem] SET [QueryID] = NULL WHERE [QueryID] IN (
+        '04282792-0C95-4E26-8F54-942C7784CF8F',
+        '153A7F37-6B1A-4BE6-8BF1-61B40DD598C1',
+        '1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1',
+        '4E76E086-A270-4BCA-9108-27616EFC4116',
+        '527F1950-D882-4684-BE17-F0F7E65EB30D',
+        '5BD14A12-DFDF-4C65-A802-D00E714BB30C',
+        '605A91F5-00F9-4DD0-9126-58A11C196E9D',
+        '61BDDBE4-1FF4-4088-B373-5FDF5A03FB08',
+        '869C17CA-B51A-4195-B8AE-8D04EE684EBF',
+        '88FA74D8-24CA-4959-886C-EE6980090D3A',
+        '8D59E20E-FF74-4C66-9923-B3EA726E12A6',
+        '916AE9E7-9E7B-4632-AF98-AE032A210FE9',
+        'AEE7B184-23E4-41A2-9A01-5AD54052F29C',
+        'C1FE4ED5-8500-4BDE-AF97-493236FA9584',
+        'CB4EED60-5560-4EC9-B634-EE017C9D2666',
+        'CB804BB3-607A-4B74-A33C-700CA23E1733',
+        'CC391293-12F2-42F4-AE52-9A52A82F6E40',
+        'D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B',
+        'F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5'
+    );
+
 IF OBJECT_ID('${mjSchema}.Query', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[Query] WHERE [ID] IN (
         '04282792-0C95-4E26-8F54-942C7784CF8F',
@@ -232,11 +359,87 @@ IF OBJECT_ID('${mjSchema}.Query', 'U') IS NOT NULL
 IF OBJECT_ID('${mjSchema}.ResourcePermission', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[ResourcePermission] WHERE [ID] = 'A9052951-D09A-55DB-AA62-53CF20F3CB3B' OR [ResourceRecordID] = '4AC57CE7-D9D7-5140-A0B3-13EF49DA882D';
 
+-- Null out DataContextItem ViewID references
+IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[DataContextItem] SET [ViewID] = NULL 
+    WHERE [ViewID] IN (SELECT [ID] FROM [${mjSchema}].[UserView] WHERE [EntityID] IN (@regEntityId, @evtEntityId))
+       OR [ViewID] = '4AC57CE7-D9D7-5140-A0B3-13EF49DA882D';
+
 IF OBJECT_ID('${mjSchema}.UserViewRun', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[UserViewRun] WHERE [UserViewID] = '4AC57CE7-D9D7-5140-A0B3-13EF49DA882D';
 
 IF OBJECT_ID('${mjSchema}.UserView', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[UserView] WHERE [ID] = '4AC57CE7-D9D7-5140-A0B3-13EF49DA882D';
+
+-- 16b. Live-host runtime references to retired Entities
+-- Policy: Non-destructive preservation of user data and historical records wherever possible.
+-- For nullable entity foreign keys, set to NULL to satisfy the FK constraint while preserving the
+-- conversation threads, agent run telemetry, audit trail history, and user context items intact.
+IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[DataContextItem] SET [EntityID] = NULL WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('${mjSchema}.Conversation', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[Conversation] SET [LinkedEntityID] = NULL WHERE [LinkedEntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('${mjSchema}.AIAgentRun', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[AIAgentRun] SET [PrimaryScopeEntityID] = NULL WHERE [PrimaryScopeEntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('${mjSchema}.AuditLog', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[AuditLog] SET [EntityID] = NULL WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+-- Leaf user bookmarks and link associations for the retired entities
+IF OBJECT_ID('${mjSchema}.UserFavorite', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[UserFavorite] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('${mjSchema}.TaggedItem', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[TaggedItem] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('${mjSchema}.RecordLink', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[RecordLink] WHERE [SourceEntityID] IN (@regEntityId, @evtEntityId) OR [TargetEntityID] IN (@regEntityId, @evtEntityId);
+
+-- Lists scoped to the retired entities (List.EntityID is NOT NULL, so clean up child references first)
+IF OBJECT_ID('${mjSchema}.RecordProcess', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[RecordProcess] SET [ScopeListID] = NULL 
+    WHERE [ScopeListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
+
+IF OBJECT_ID('${mjSchema}.DuplicateRunDetailMatch', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRunDetailMatch]
+    WHERE [DuplicateRunDetailID] IN (
+        SELECT [ID] FROM [${mjSchema}].[DuplicateRunDetail]
+        WHERE [DuplicateRunID] IN (
+            SELECT [ID] FROM [${mjSchema}].[DuplicateRun]
+            WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId))
+               OR [EntityID] IN (@regEntityId, @evtEntityId)
+        )
+    );
+
+IF OBJECT_ID('${mjSchema}.DuplicateRunDetail', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRunDetail]
+    WHERE [DuplicateRunID] IN (
+        SELECT [ID] FROM [${mjSchema}].[DuplicateRun]
+        WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId))
+           OR [EntityID] IN (@regEntityId, @evtEntityId)
+    );
+
+IF OBJECT_ID('${mjSchema}.DuplicateRun', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRun]
+    WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId))
+       OR [EntityID] IN (@regEntityId, @evtEntityId);
+
+IF OBJECT_ID('${mjSchema}.ListDetail', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[ListDetail] 
+    WHERE [ListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
+
+IF OBJECT_ID('${mjSchema}.ListShare', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[ListShare] 
+    WHERE [ListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
+
+IF OBJECT_ID('${mjSchema}.ListInvitation', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[ListInvitation] 
+    WHERE [ListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
+
+IF OBJECT_ID('${mjSchema}.List', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId);
 
 -- 17. Core Entity entry
 IF OBJECT_ID('${mjSchema}.Entity', 'U') IS NOT NULL
