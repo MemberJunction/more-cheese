@@ -320,7 +320,7 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
         const statusLabelVal = typeof output['statusLabel'] === 'string' ? output['statusLabel'] : undefined;
         const modelNameDisplay = typeof output['modelName'] === 'string' && output['modelName'].length > 0
             ? output['modelName']
-            : (scoreLabelVal || targetVal);
+            : (typeof output['scoreLabel'] === 'string' ? output['scoreLabel'] : (targetVal || scoreLabelVal));
 
         const info = FormatPredictionInfo(
             effectiveScore,
@@ -440,7 +440,9 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
 
     const renewalPrediction = renewalItem ? toPredictionInfo(renewalItem) : FormatPredictionInfo(null, null, null);
     const ltvPrediction = ltvItem ? toPredictionInfo(ltvItem) : null;
-    const defaultPrediction = renewalPrediction || (history[0] ? toPredictionInfo(history[0]) : FormatPredictionInfo(null, null, null));
+    const defaultPrediction = renewalItem
+        ? renewalPrediction
+        : (history[0] ? toPredictionInfo(history[0]) : FormatPredictionInfo(null, null, null));
 
     return {
         Profile: profileRows[0] ?? null,

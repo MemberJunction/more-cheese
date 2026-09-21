@@ -198,6 +198,58 @@ describe('ParseRunDetailItem', () => {
     expect(item!.drivers).toHaveLength(3);
     expect(item!.drivers[0].name).toBe('Total Orders');
   });
+
+  it('pins both sides of the score > 100 regression heuristic boundary', () => {
+    // Side 1: score > 100 with explicit problemType: 'classification' must NOT be treated as regression
+    const classificationPayload = JSON.stringify({
+      output: {
+        score: 150,
+        problemType: 'classification',
+        target: 'Engagement Score',
+      },
+    });
+    const classItem = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-004',
+      CompletedAt: '2026-09-20T23:40:00.000Z',
+      ResultPayload: classificationPayload,
+    });
+    expect(classItem).not.toBeNull();
+    expect(classItem!.problemType).toBe('classification');
+    expect(classItem!.displayValue).not.toContain('$');
+    expect(classItem!.displayValue).toBe('100%');
+
+    // Side 2: score > 100 without problemType: 'classification' is inferred as continuous regression
+    const inferredRegressionPayload = JSON.stringify({
+      output: {
+        score: 150,
+        target: 'Customer Spend',
+      },
+    });
+    const regItem = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-005',
+      CompletedAt: '2026-09-20T23:41:00.000Z',
+      ResultPayload: inferredRegressionPayload,
+    });
+    expect(regItem).not.toBeNull();
+    expect(regItem!.problemType).toBe('regression');
+    expect(regItem!.displayValue).toBe('$150');
+
+    // Boundary check: score <= 100 without problemType stays classification
+    const scoreUnder100Payload = JSON.stringify({
+      output: {
+        score: 85,
+        target: 'Engagement Score',
+      },
+    });
+    const boundaryItem = ParseRunDetailItem({
+      ID: 'RUN-DETAIL-006',
+      CompletedAt: '2026-09-20T23:42:00.000Z',
+      ResultPayload: scoreUnder100Payload,
+    });
+    expect(boundaryItem).not.toBeNull();
+    expect(boundaryItem!.problemType).toBe('classification');
+    expect(boundaryItem!.displayValue).toBe('85%');
+  });
 });
 
 describe('FormatRegressionValue', () => {

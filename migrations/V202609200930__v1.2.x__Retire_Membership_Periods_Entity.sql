@@ -36,6 +36,12 @@ IF OBJECT_ID('${mjSchema}.ProcessRunDetail', 'U') IS NOT NULL
 IF OBJECT_ID('${mjSchema}.ProcessRun', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[ProcessRun] WHERE [EntityID] = @entityId;
 
+-- 5b. Record process watermarks
+IF OBJECT_ID('${mjSchema}.RecordProcessWatermark', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[RecordProcessWatermark] 
+    WHERE [EntityID] = @entityId 
+       OR [RecordProcessID] IN (SELECT [ID] FROM [${mjSchema}].[RecordProcess] WHERE [EntityID] = @entityId);
+
 -- 6. Record processes
 IF OBJECT_ID('${mjSchema}.RecordProcess', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[RecordProcess] WHERE [EntityID] = @entityId;
@@ -200,6 +206,45 @@ IF OBJECT_ID('${mjSchema}.QueryDependency', 'U') IS NOT NULL
         'E710AC9D-EC60-4CE6-88D0-C0A50A75FB9A'
     );
 
+IF OBJECT_ID('${mjSchema}.QuerySQL', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[QuerySQL] WHERE [QueryID] IN (
+        '04DC85EF-583E-4D2A-A8DD-DD0B5972A5C7',
+        '188341AE-1B9B-4E92-B668-AB8B8FF81BC7',
+        '1A8CF27F-EB6F-4E96-9D68-CFD0E056FC0A',
+        '20C3F9C9-9C9F-404E-AB0B-01BB3BE8E782',
+        '279CC0ED-1AE8-438B-AA72-4F2497E57896',
+        '370F9B87-E39C-4394-A55F-077B70C51106',
+        '3879A59D-87B6-4061-BE2F-3FCEC6585508',
+        '6012D5AA-2580-406E-9523-2D19CA18C036',
+        '6BBE8897-03BB-44CA-AB22-4EFACFD91450',
+        '86D957A8-1125-4091-B662-6ED0403A75E9',
+        '8770A736-D96A-4B47-BC55-F95214E5083F',
+        '970F0F7B-454C-422F-86C8-AB631429B947',
+        'AFEAE5C5-127D-47D7-A480-E1ABB95F47D6',
+        'CBDDD0E4-3DCA-41A7-8F4D-C4EE65D54ABA',
+        'E710AC9D-EC60-4CE6-88D0-C0A50A75FB9A'
+    );
+
+-- Null out DataContextItem QueryID references (non-destructive for user saved contexts)
+IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[DataContextItem] SET [QueryID] = NULL WHERE [QueryID] IN (
+        '04DC85EF-583E-4D2A-A8DD-DD0B5972A5C7',
+        '188341AE-1B9B-4E92-B668-AB8B8FF81BC7',
+        '1A8CF27F-EB6F-4E96-9D68-CFD0E056FC0A',
+        '20C3F9C9-9C9F-404E-AB0B-01BB3BE8E782',
+        '279CC0ED-1AE8-438B-AA72-4F2497E57896',
+        '370F9B87-E39C-4394-A55F-077B70C51106',
+        '3879A59D-87B6-4061-BE2F-3FCEC6585508',
+        '6012D5AA-2580-406E-9523-2D19CA18C036',
+        '6BBE8897-03BB-44CA-AB22-4EFACFD91450',
+        '86D957A8-1125-4091-B662-6ED0403A75E9',
+        '8770A736-D96A-4B47-BC55-F95214E5083F',
+        '970F0F7B-454C-422F-86C8-AB631429B947',
+        'AFEAE5C5-127D-47D7-A480-E1ABB95F47D6',
+        'CBDDD0E4-3DCA-41A7-8F4D-C4EE65D54ABA',
+        'E710AC9D-EC60-4CE6-88D0-C0A50A75FB9A'
+    );
+
 IF OBJECT_ID('${mjSchema}.Query', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[Query] WHERE [ID] IN (
         '04DC85EF-583E-4D2A-A8DD-DD0B5972A5C7',
@@ -222,11 +267,42 @@ IF OBJECT_ID('${mjSchema}.Query', 'U') IS NOT NULL
 IF OBJECT_ID('${mjSchema}.ResourcePermission', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[ResourcePermission] WHERE [ID] = 'EB75A6AC-46A4-562D-8708-06309E5480BA' OR [ResourceRecordID] = 'F770DD7A-032E-553C-B144-07655C3CC700';
 
+-- Null out DataContextItem ViewID references
+IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[DataContextItem] SET [ViewID] = NULL 
+    WHERE [ViewID] IN (SELECT [ID] FROM [${mjSchema}].[UserView] WHERE [EntityID] = @entityId)
+       OR [ViewID] = 'F770DD7A-032E-553C-B144-07655C3CC700';
+
 IF OBJECT_ID('${mjSchema}.UserViewRun', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[UserViewRun] WHERE [UserViewID] = 'F770DD7A-032E-553C-B144-07655C3CC700';
 
 IF OBJECT_ID('${mjSchema}.UserView', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[UserView] WHERE [ID] = 'F770DD7A-032E-553C-B144-07655C3CC700';
+
+-- 14d. Live-host runtime references to retired Entity
+IF OBJECT_ID('${mjSchema}.DataContextItem', 'U') IS NOT NULL
+    UPDATE [${mjSchema}].[DataContextItem] SET [EntityID] = NULL WHERE [EntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.UserFavorite', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[UserFavorite] WHERE [EntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.TaggedItem', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[TaggedItem] WHERE [EntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.AuditLog', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[AuditLog] WHERE [EntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.List', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.RecordLink', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[RecordLink] WHERE [SourceEntityID] = @entityId OR [TargetEntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.Conversation', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[Conversation] WHERE [LinkedEntityID] = @entityId;
+
+IF OBJECT_ID('${mjSchema}.AIAgentRun', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[AIAgentRun] WHERE [PrimaryScopeEntityID] = @entityId;
 
 -- 15. Core Entity entry
 IF OBJECT_ID('${mjSchema}.Entity', 'U') IS NOT NULL
