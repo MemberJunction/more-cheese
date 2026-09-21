@@ -6,6 +6,14 @@
 -- [${mjSchema}_BizAppsOrders].[EventProduct] and [${mjSchema}_BizAppsOrders].[EventOrderLine].
 -- Rebinds the MoreCheese Event No-Show Propensity pipeline to [${mjSchema}_BizAppsOrders].[EventOrderLine].
 -- Backfills realistic attendance lifecycle statuses, badge names, and ticket tiers across EventOrderLine.
+--
+-- Referential Integrity Scope Boundary:
+-- Explicitly handles all framework, runtime, and user references that can exist on a MoreCheese host
+-- (ML pipelines/models/runs, ProcessRuns/Details/Watermarks, DataContextItems, UserViews/Runs,
+-- ResourcePermissions, Queries/Parameters/Dependencies, UserFavorites, TaggedItems, RecordLinks,
+-- Conversations, AIAgentRuns, AuditLogs, and Lists with their full child cascades
+-- DuplicateRunDetailMatch -> DuplicateRunDetail -> DuplicateRun and ListDetail/Share/Invitation).
+-- Nullable foreign keys are preserved non-destructively; unhandled core entity children are unreferenced.
 -- =============================================================================
 
 DECLARE @regEntityId UNIQUEIDENTIFIER = 'DC863C47-C1FA-4C3F-92D1-DF7F8A7BC153'; -- MoreCheese: Event Registrations
@@ -393,6 +401,17 @@ IF OBJECT_ID('${mjSchema}.RecordLink', 'U') IS NOT NULL
 IF OBJECT_ID('${mjSchema}.RecordProcess', 'U') IS NOT NULL
     UPDATE [${mjSchema}].[RecordProcess] SET [ScopeListID] = NULL 
     WHERE [ScopeListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId));
+
+IF OBJECT_ID('${mjSchema}.DuplicateRunDetailMatch', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRunDetailMatch]
+    WHERE [DuplicateRunDetailID] IN (
+        SELECT [ID] FROM [${mjSchema}].[DuplicateRunDetail]
+        WHERE [DuplicateRunID] IN (
+            SELECT [ID] FROM [${mjSchema}].[DuplicateRun]
+            WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] IN (@regEntityId, @evtEntityId))
+               OR [EntityID] IN (@regEntityId, @evtEntityId)
+        )
+    );
 
 IF OBJECT_ID('${mjSchema}.DuplicateRunDetail', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[DuplicateRunDetail]

@@ -4,6 +4,14 @@
 -- stored procedures, triggers, and purges entity metadata from [${mjSchema}] tables.
 -- Predictive Studio now scores churn risk directly on upstream canonical entities
 -- (Orders, Order Lines, Event Registrations, Member Profiles).
+--
+-- Referential Integrity Scope Boundary:
+-- Explicitly handles all framework, runtime, and user references that can exist on a MoreCheese host
+-- (ML pipelines/models/runs, ProcessRuns/Details/Watermarks, DataContextItems, UserViews/Runs,
+-- ResourcePermissions, Queries/Parameters/Dependencies, UserFavorites, TaggedItems, RecordLinks,
+-- Conversations, AIAgentRuns, AuditLogs, and Lists with their full child cascades
+-- DuplicateRunDetailMatch -> DuplicateRunDetail -> DuplicateRun and ListDetail/Share/Invitation).
+-- Nullable foreign keys are preserved non-destructively; unhandled core entity children are unreferenced.
 -- =============================================================================
 
 DECLARE @entityId UNIQUEIDENTIFIER = '16538F9B-E025-460D-9505-BD03A7648EC5';
@@ -309,6 +317,17 @@ IF OBJECT_ID('${mjSchema}.RecordLink', 'U') IS NOT NULL
 IF OBJECT_ID('${mjSchema}.RecordProcess', 'U') IS NOT NULL
     UPDATE [${mjSchema}].[RecordProcess] SET [ScopeListID] = NULL 
     WHERE [ScopeListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId);
+
+IF OBJECT_ID('${mjSchema}.DuplicateRunDetailMatch', 'U') IS NOT NULL
+    DELETE FROM [${mjSchema}].[DuplicateRunDetailMatch]
+    WHERE [DuplicateRunDetailID] IN (
+        SELECT [ID] FROM [${mjSchema}].[DuplicateRunDetail]
+        WHERE [DuplicateRunID] IN (
+            SELECT [ID] FROM [${mjSchema}].[DuplicateRun]
+            WHERE [SourceListID] IN (SELECT [ID] FROM [${mjSchema}].[List] WHERE [EntityID] = @entityId)
+               OR [EntityID] = @entityId
+        )
+    );
 
 IF OBJECT_ID('${mjSchema}.DuplicateRunDetail', 'U') IS NOT NULL
     DELETE FROM [${mjSchema}].[DuplicateRunDetail]
