@@ -71,7 +71,7 @@
  * checkout, and folding git into it would break that.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -361,11 +361,35 @@ export function findUnconsolidatedSeedDeltas(repoRoot = REPO_ROOT, readState = r
  * `checkpoint.json` is the generator's own continuity state, ignored for the same reasons
  * `check-release-seed-coverage.mjs` ignores them.
  */
-function isRecordPath(file) {
+function getRetiredDirectories(repoRoot) {
+    const retiredDirs = new Set();
+    try {
+        const removalsPath = join(repoRoot, 'data', 'pk-removals.json');
+        if (existsSync(removalsPath)) {
+            const rem = JSON.parse(readFileSync(removalsPath, 'utf8'));
+            for (const rd of rem.retiredDirectories || []) {
+                if (rd.directory && rd.reason) {
+                    retiredDirs.add(rd.directory);
+                }
+            }
+        }
+    } catch { /* no removals file */ }
+    return retiredDirs;
+}
+
+function isRecordPath(file, retiredDirs) {
     if (/(^|\/)README\.md$/i.test(file)) return false;
     if (/(^|\/)\.mj-sync\.json$/.test(file)) return false;
     if (/(^|\/)checkpoint\.json$/.test(file)) return false;
-    return !/(^|\/)(\.backups|sql_logging|codegen)(\/|$)/.test(file);
+    if (/(^|\/)(\.backups|sql_logging|codegen)(\/|$)/.test(file)) return false;
+    if (retiredDirs) {
+        for (const dir of retiredDirs) {
+            if (file.startsWith(`generated/${dir}/`) || file.startsWith(`config/${dir}/`)) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 /**
@@ -394,7 +418,8 @@ export function findUnshippedMetadataDrift(repoRoot = REPO_ROOT, readState = rea
         };
     }
 
-    const changed = (state.syncChanged ?? []).filter(isRecordPath).sort();
+    const retiredDirs = getRetiredDirectories(repoRoot);
+    const changed = (state.syncChanged ?? []).filter((f) => isRecordPath(f, retiredDirs)).sort();
     const released = new Set(state.released);
     const unreleasedSeeds = state.current.filter((f) => SEED_PATTERN.test(f) && !released.has(f));
     const problems = [];
