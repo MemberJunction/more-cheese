@@ -361,8 +361,9 @@ export function findUnconsolidatedSeedDeltas(repoRoot = REPO_ROOT, readState = r
  * `checkpoint.json` is the generator's own continuity state, ignored for the same reasons
  * `check-release-seed-coverage.mjs` ignores them.
  */
-function getRetiredDirectories(repoRoot) {
+function getRemovalsInfo(repoRoot) {
     const retiredDirs = new Set();
+    const allowedRemovals = new Set();
     try {
         const removalsPath = join(repoRoot, 'data', 'pk-removals.json');
         if (existsSync(removalsPath)) {
@@ -372,9 +373,81 @@ function getRetiredDirectories(repoRoot) {
                     retiredDirs.add(rd.directory);
                 }
             }
+            for (const r of rem.removals || []) {
+                if (r.id && r.reason) {
+                    allowedRemovals.add(String(r.id).toUpperCase());
+                }
+            }
         }
     } catch { /* no removals file */ }
-    return retiredDirs;
+    return { retiredDirs, allowedRemovals };
+}
+
+/**
+ * Checks whether a sync tree file change consists entirely of deliberate removals
+ * declared in data/pk-removals.json (e.g. deleted files whose IDs are in allowedRemovals,
+ * or multi-record JSON files where only declared removed IDs were deleted with no surviving edits).
+ */
+export function isAllowedRemovalChange(repoRoot, file, tag, allowedRemovals) {
+    if (!allowedRemovals || allowedRemovals.size === 0 || !tag) return false;
+
+    const fullPath = join(repoRoot, file);
+    if (!existsSync(fullPath)) {
+        try {
+            const oldContent = git(repoRoot, ['show', `${tag}:${file}`]);
+            const parsed = JSON.parse(oldContent);
+            const records = Array.isArray(parsed) ? parsed : [parsed];
+            const ids = records
+                .map((r) => r?.primaryKey?.ID)
+                .filter(Boolean)
+                .map((id) => String(id).toUpperCase());
+            return ids.length > 0 && ids.every((id) => allowedRemovals.has(id));
+        } catch {
+            return false;
+        }
+    }
+
+    try {
+        const currentContent = readFileSync(fullPath, 'utf8');
+        const currentParsed = JSON.parse(currentContent);
+        if (!Array.isArray(currentParsed)) return false;
+
+        const oldContent = git(repoRoot, ['show', `${tag}:${file}`]);
+        const oldParsed = JSON.parse(oldContent);
+        if (!Array.isArray(oldParsed)) return false;
+
+        const currentMap = new Map();
+        for (const r of currentParsed) {
+            const id = r?.primaryKey?.ID?.toUpperCase();
+            if (!id) return false;
+            currentMap.set(id, r);
+        }
+
+        const oldMap = new Map();
+        for (const r of oldParsed) {
+            const id = r?.primaryKey?.ID?.toUpperCase();
+            if (!id) return false;
+            oldMap.set(id, r);
+        }
+
+        for (const id of currentMap.keys()) {
+            if (!oldMap.has(id)) return false;
+        }
+
+        for (const [id, currentRec] of currentMap.entries()) {
+            const oldRec = oldMap.get(id);
+            if (JSON.stringify(currentRec) !== JSON.stringify(oldRec)) return false;
+        }
+
+        const removedIds = [];
+        for (const id of oldMap.keys()) {
+            if (!currentMap.has(id)) removedIds.push(id);
+        }
+
+        return removedIds.length > 0 && removedIds.every((id) => allowedRemovals.has(id));
+    } catch {
+        return false;
+    }
 }
 
 function isRecordPath(file, retiredDirs) {
@@ -418,8 +491,11 @@ export function findUnshippedMetadataDrift(repoRoot = REPO_ROOT, readState = rea
         };
     }
 
-    const retiredDirs = getRetiredDirectories(repoRoot);
-    const changed = (state.syncChanged ?? []).filter((f) => isRecordPath(f, retiredDirs)).sort();
+    const { retiredDirs, allowedRemovals } = getRemovalsInfo(repoRoot);
+    const changed = (state.syncChanged ?? [])
+        .filter((f) => isRecordPath(f, retiredDirs))
+        .filter((f) => !isAllowedRemovalChange(repoRoot, f, state.tag, allowedRemovals))
+        .sort();
     const released = new Set(state.released);
     const unreleasedSeeds = state.current.filter((f) => SEED_PATTERN.test(f) && !released.has(f));
     const problems = [];

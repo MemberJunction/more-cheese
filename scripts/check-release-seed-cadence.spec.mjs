@@ -318,6 +318,36 @@ test('records in a non-retired directory still owe a seed when retired directori
     assert.match(problems[0], /1 record file\(s\) changed since v1\.2\.0/);
 });
 
+test('deliberately retired query files declared in pk-removals.json owe no seed', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.1',
+            syncChanged: [
+                'config/queries/.04282792.json',
+                'config/queries/.04dc85ef.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, []);
+    assert.deepEqual(problems, []);
+});
+
+test('deliberately removed views from filter JSON files declared in pk-removals.json owe no seed', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.1',
+            syncChanged: [
+                'config/user-views/.user-views-filters.json',
+                'config/resource-permissions/.resource-permissions-filter-views.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, []);
+    assert.deepEqual(problems, []);
+});
+
 // ── Fixture verification for clean repo states and CLI contracts ────────────────────────────────
 
 test('a clean repo fixture passes both cadence and drift checks', () => {
