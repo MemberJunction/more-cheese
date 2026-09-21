@@ -3,8 +3,8 @@
 -- Drops physical tables [morecheese_events].[EventRegistration] and [morecheese_events].[Event],
 -- associated views, stored procedures, triggers, and purges entity metadata from [${mjSchema}] tables.
 -- Canonical event products and event attendee registrations are now managed via BizApps Orders:
--- [__mj_BizAppsOrders].[EventProduct] and [__mj_BizAppsOrders].[EventOrderLine].
--- Rebinds the MoreCheese Event No-Show Propensity pipeline to [__mj_BizAppsOrders].[EventOrderLine].
+-- [${mjSchema}_BizAppsOrders].[EventProduct] and [${mjSchema}_BizAppsOrders].[EventOrderLine].
+-- Rebinds the MoreCheese Event No-Show Propensity pipeline to [${mjSchema}_BizAppsOrders].[EventOrderLine].
 -- Backfills realistic attendance lifecycle statuses, badge names, and ticket tiers across EventOrderLine.
 -- =============================================================================
 
@@ -35,19 +35,19 @@ BEGIN
 END;
 
 -- 1. Rebind issues referencing event registrations to canonical event order lines
-IF OBJECT_ID('__mj_BizAppsIssues.Issue', 'U') IS NOT NULL
-    UPDATE [__mj_BizAppsIssues].[Issue]
+IF OBJECT_ID('${mjSchema}_BizAppsIssues.Issue', 'U') IS NOT NULL
+    UPDATE [${mjSchema}_BizAppsIssues].[Issue]
     SET [SourceEntityID] = @canonicalEventOrderLineEntityId
     WHERE [SourceEntityID] IN (@regEntityId, @evtEntityId);
 
 -- 1b. Rebind Sonar model related entities and factors referencing legacy Event Registrations
-IF OBJECT_ID('__mj_BizAppsSonar.ModelRelatedEntity', 'U') IS NOT NULL
-    UPDATE [__mj_BizAppsSonar].[ModelRelatedEntity]
+IF OBJECT_ID('${mjSchema}_BizAppsSonar.ModelRelatedEntity', 'U') IS NOT NULL
+    UPDATE [${mjSchema}_BizAppsSonar].[ModelRelatedEntity]
     SET [RelatedEntityID] = @canonicalEventOrderLineEntityId
     WHERE [RelatedEntityID] IN (@regEntityId, @evtEntityId);
 
-IF OBJECT_ID('__mj_BizAppsSonar.Factor', 'U') IS NOT NULL
-    UPDATE [__mj_BizAppsSonar].[Factor]
+IF OBJECT_ID('${mjSchema}_BizAppsSonar.Factor', 'U') IS NOT NULL
+    UPDATE [${mjSchema}_BizAppsSonar].[Factor]
     SET [SourceEntityID] = @canonicalEventOrderLineEntityId
     WHERE [SourceEntityID] IN (@regEntityId, @evtEntityId);
 
@@ -178,7 +178,7 @@ IF OBJECT_ID('[morecheese_events].[Event]', 'U') IS NOT NULL
     DROP TABLE [morecheese_events].[Event];
 
 -- 19. Backfill realistic attendance, badge, tier data on canonical EventOrderLines
-IF OBJECT_ID('[__mj_BizAppsOrders].[EventOrderLine]', 'U') IS NOT NULL
+IF OBJECT_ID('[${mjSchema}_BizAppsOrders].[EventOrderLine]', 'U') IS NOT NULL
 BEGIN
     ;WITH EolRanked AS (
         SELECT 
@@ -190,11 +190,11 @@ BEGIN
             ep.EventStartsAt,
             ep.EventFormat,
             ROW_NUMBER() OVER (ORDER BY eol.ID) AS RowNum
-        FROM [__mj_BizAppsOrders].[EventOrderLine] eol
-        JOIN [__mj_BizAppsOrders].[OrderLine] ol ON ol.ID = eol.ID
-        JOIN [__mj_BizAppsOrders].[Product] prod ON prod.ID = ol.ProductID
-        LEFT JOIN [__mj_BizAppsOrders].[EventProduct] ep ON ep.ID = prod.ID
-        LEFT JOIN [__mj_BizAppsCommon].[Person] p ON p.ID = eol.PersonID
+        FROM [${mjSchema}_BizAppsOrders].[EventOrderLine] eol
+        JOIN [${mjSchema}_BizAppsOrders].[OrderLine] ol ON ol.ID = eol.ID
+        JOIN [${mjSchema}_BizAppsOrders].[Product] prod ON prod.ID = ol.ProductID
+        LEFT JOIN [${mjSchema}_BizAppsOrders].[EventProduct] ep ON ep.ID = prod.ID
+        LEFT JOIN [${mjSchema}_BizAppsCommon].[Person] p ON p.ID = eol.PersonID
         LEFT JOIN [${mjSchema}].[Company] comp ON comp.ID = ol.CompanyID
     )
     UPDATE eol
@@ -238,6 +238,6 @@ BEGIN
             WHEN (r.RowNum % 100) < 76 THEN CONCAT('Table ', (r.RowNum % 40) + 1)
             ELSE NULL
         END
-    FROM [__mj_BizAppsOrders].[EventOrderLine] eol
+    FROM [${mjSchema}_BizAppsOrders].[EventOrderLine] eol
     JOIN EolRanked r ON r.ID = eol.ID;
 END;
