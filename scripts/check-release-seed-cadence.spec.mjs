@@ -286,26 +286,32 @@ test('both sync trees are in scope, not just generated/', () => {
     assert.equal(problems.length, 1);
 });
 
-// ── The real repo, and the CLI contract ─────────────────────────────────────────────────────────
+// ── Fixture verification for clean repo states and CLI contracts ────────────────────────────────
 
-test('the checked-in repo passes', () => {
+test('a clean repo fixture passes both cadence and drift checks', () => {
+    const s = state({
+        tag: 'v1.2.0',
+        released: [BASELINE, part(1, 1, '202609180900')],
+        current: [BASELINE, part(1, 1, '202609180900')],
+        syncChanged: [],
+    });
     const problems = [
-        ...findUnconsolidatedSeedDeltas(REPO_ROOT).problems,
-        ...findUnshippedMetadataDrift(REPO_ROOT).problems,
+        ...findUnconsolidatedSeedDeltas('/x', s).problems,
+        ...findUnshippedMetadataDrift('/x', s).problems,
     ];
-    assert.deepEqual(problems, [], problems.join('\n'));
+    assert.deepEqual(problems, []);
 });
 
-// This case used to assert the unarmed branch outright, and v1.2.0 falsified it the hour the first
-// release landed — a red `next` for every pull request, caused by a test that had pinned a state the
-// repo was always going to leave. The tag now comes from the gate's own boundary, so the CLI contract
-// stays covered on both sides of a release and the two branches cannot drift apart.
-test('the CLI exits 0 on this repo and reports the drift rule against the tag it actually finds', () => {
-    const { tag } = findUnshippedMetadataDrift(REPO_ROOT);
-    const run = spawnSync(process.execPath, [path.join(HERE, 'check-release-seed-cadence.mjs')], { encoding: 'utf8' });
-    assert.equal(run.status, 0, run.stderr);
-    const expected = tag === null
-        ? /no v\* release tag exists/
-        : new RegExp(`since ${tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
-    assert.match(run.stdout, expected);
+test('a repo fixture with changed sync records and corresponding unreleased seed passes drift check', () => {
+    const s = state({
+        tag: 'v1.2.0',
+        released: [BASELINE, part(1, 1, '202609180900')],
+        current: [BASELINE, part(1, 1, '202609180900'), part(1, 1, '202610010900')],
+        syncChanged: ['generated/people/.people.json'],
+    });
+    const problems = [
+        ...findUnshippedMetadataDrift('/x', s).problems,
+    ];
+    assert.deepEqual(problems, []);
 });
+

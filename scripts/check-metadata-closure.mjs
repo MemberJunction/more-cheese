@@ -661,7 +661,8 @@ if (!baseInfo) {
       if (retiredDirectories.has(dir)) {
         const rd = retiredDirectories.get(dir);
         if (rd.expectedCount != null && rd.expectedCount !== bSet.size) {
-          console.warn(`  ⚠️ Retired directory ${dir} had ${bSet.size} records in base commit, expected ${rd.expectedCount}`);
+          console.error(`\n❌ Retired directory ${dir} had ${bSet.size} records in base commit, expected ${rd.expectedCount}. Allowance condition is invalid.`);
+          process.exit(1);
         }
         console.log(`  ✓ Directory ${dir} (${bSet.size.toLocaleString()} records) deliberately retired: ${rd.reason}`);
         continue;
