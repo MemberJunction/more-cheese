@@ -266,6 +266,11 @@
       "classification": "loom",
       "reason": "Synthetic world model entity governed and validated by Loom domain config"
     },
+    "person-job-functions": {
+      "tier": "generated",
+      "classification": "frozen",
+      "reason": "Person job function assignments derived from titles via BizApps Common feature pipeline"
+    },
     "portal-sessions": {
       "tier": "generated",
       "classification": "frozen",

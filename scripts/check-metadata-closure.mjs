@@ -116,7 +116,9 @@ const EXCLUDED_EXTERNAL_FIELDS = new Map([
     reason: 'Points to external ProductType in @mj-biz-apps/orders when EntityID is Product Types',
     hits: 0,
     condition: (fields) => String(fields.EntityID ?? '').includes('Product Types')
-  }]
+  }],
+  ['people.SeniorityLevelID', { reason: 'Points to @mj-biz-apps/common seeded Seniority Levels', hits: 0 }],
+  ['person-job-functions.JobFunctionID', { reason: 'Points to @mj-biz-apps/common seeded Job Functions', hits: 0 }]
 ]);
 
 console.log('='.repeat(80));

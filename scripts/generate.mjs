@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
+import { applyPersonJobFunctionsEnrichment } from './enrich-person-job-functions.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -242,11 +243,22 @@ function applyOrganizationLogosPass() {
 }
 
 // ---------------------------------------------------------------------------
+// 4. Person Seniority Levels and Job Functions Pass
+// ---------------------------------------------------------------------------
+function applyPersonJobFunctionsPass() {
+  const stats = applyPersonJobFunctionsEnrichment({ rootDir });
+  console.log(
+    `   ✓ Person Seniority & Job Functions Pass: ${stats.matchedSeniorityCount}/${stats.peopleCount} people assigned seniority, ${stats.personJobFunctionsCount} job functions generated`
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Execute Passes
 // ---------------------------------------------------------------------------
 applyOrderCancellationsPass();
 applyPeopleAndMemberProfilePass();
 applyOrganizationLogosPass();
+applyPersonJobFunctionsPass();
 
 // ---------------------------------------------------------------------------
 // Checkpoint and Sync Configuration Verification

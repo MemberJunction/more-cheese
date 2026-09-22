@@ -126,6 +126,11 @@ for (const [dir, entry] of Object.entries(ownership.directories)) {
         console.error(`❌ portal-sessions reason must state "proposed, pending owner confirmation": got "${entry.reason}"`);
         errors++;
       }
+    } else if (dir === 'person-job-functions') {
+      if (!entry.reason.includes('Person job function assignments derived from titles via BizApps Common feature pipeline')) {
+        console.error(`❌ person-job-functions reason must state "Person job function assignments derived from titles via BizApps Common feature pipeline": got "${entry.reason}"`);
+        errors++;
+      }
     } else if (entry.reason.includes('reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)')) {
       // Approved reference taxonomy (reviewer round-1 C3 Option A; pending owner confirmation)
     } else {
