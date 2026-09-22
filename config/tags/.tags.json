@@ -1,0 +1,4552 @@
+[
+  {
+    "fields": {
+      "Name": "Business Operations",
+      "ParentID": null,
+      "DisplayName": "Business Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.053Z",
+      "checksum": "130ef830bc4099dbb1d6d833a8a28aa9a7efe5293efbd211fe9a5915ef3eb96a"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Certifications",
+      "ParentID": null,
+      "DisplayName": "Certifications",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "7AB4BBDF-34AA-4C94-B451-950253E36E10"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.053Z",
+      "checksum": "0b8720dc0f041ceee487fd6f65935cf446330c41c5dff231e8433c7f1cf842bf"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Industry",
+      "ParentID": null,
+      "DisplayName": "Cheese Industry",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D84E3B53-3E1A-4691-8749-F8F15341A8A9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.101Z",
+      "checksum": "ebca2a63fda59c6f0fef1d2d337ab5568d19b8df269a64b0430e2b6d32532e18"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Selection",
+      "ParentID": null,
+      "DisplayName": "Cheese Selection",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "12AF4979-4584-4AC4-9876-93838A87993D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.070Z",
+      "checksum": "25a5e648d91d19bdac7f1598171d5ba244986dbb7b43390a6f181f9b0c2c0c3e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Varieties",
+      "ParentID": null,
+      "DisplayName": "Cheese Varieties",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "06D64410-DB37-40BF-B12B-480148BFCBEC"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.082Z",
+      "checksum": "f4bbc313c61611876bcc1c6e851391925611d0b657f6498269586654fc4ec044"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Communications",
+      "ParentID": null,
+      "DisplayName": "Communications",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "50C20883-4EC7-4192-82FD-0B07B9593E39"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.043Z",
+      "checksum": "b234fe940bf5cc011200b462041dc596d2840d211a33945d662a7c6b256f9593"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Culinary Advice",
+      "ParentID": null,
+      "DisplayName": "Culinary Advice",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FA4A5DEF-5F7F-42F7-8232-FC81C1EA53C9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.096Z",
+      "checksum": "c916571877c6dde961351d7d1bc1dbab8a2dbfc3a52218533e9309f6771d22ed"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Culinary Practices",
+      "ParentID": null,
+      "DisplayName": "Culinary Practices",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.067Z",
+      "checksum": "9922a6ac1a3d6fcace423153e181d9692bcead9c2b35800801bea679ec1003e2"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Data & Analytics",
+      "ParentID": null,
+      "DisplayName": "Data & Analytics",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C2D47436-CB14-4A03-8E9A-E60459D68A93"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.102Z",
+      "checksum": "6583c1499f1ec4598221d95412a6f1eca10fe04941b71ff8160ff90fd7cd4ee4"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Data Analysis",
+      "ParentID": null,
+      "DisplayName": "Data Analysis",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "04D5C5B5-068A-49FB-B86D-986FF5DB3919"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.083Z",
+      "checksum": "2a48160462f6e61ee8f21cd36fa57b2c55bf412b16a86f62674a498c8d743fc3"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Data Management",
+      "ParentID": null,
+      "DisplayName": "Data Management",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DB462DC5-B27C-429D-BFB8-73C20DD0CAD0"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.254Z",
+      "checksum": "6875f199b059be50d4d56d8ea666d57145d2b1042f469ba4a0c33e283e6aa89d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Data Quality",
+      "ParentID": null,
+      "DisplayName": "Data Quality",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "72BDAB12-9243-4E1C-B8FC-50E22698A08E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.238Z",
+      "checksum": "3351a9b3a20837669a66ee0d5e406a0114296dd4efb901165d696369195985c9"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Event Management",
+      "ParentID": null,
+      "DisplayName": "Event Management",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C69042B9-3468-4892-9F79-6D1645E0F2D0"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.233Z",
+      "checksum": "428f50f05f8c6279cd1e885a0fcb3000aca2c00453f5ed917896e5ca7570ec0a"
+    }
+  },
+  {
+    "fields": {
+      "Name": "External Communications",
+      "ParentID": null,
+      "DisplayName": "External Communications",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "45D0BB04-1461-485B-B695-2CE02F913C46"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.265Z",
+      "checksum": "64e9477402631f9637713c126c3ab763b26d5358ee764a804f8dfab18bddad64"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Financial Management",
+      "ParentID": null,
+      "DisplayName": "Financial Management",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DD941549-EEE5-477C-9CCF-7A7447F9DB52"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.282Z",
+      "checksum": "275f84db73f03f577c86f9c237e1e08309271e670c147359abb8ed22f020ccf8"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Financial Reporting",
+      "ParentID": null,
+      "DisplayName": "Financial Reporting",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B4D3BC74-ABAE-429D-98A7-B5BF207E7E84"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.284Z",
+      "checksum": "dd3c2b5f54224585397ab339d35ab7e2b10b8d9cb2445e5c6a2487c13cc7be17"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Flavor Science",
+      "ParentID": null,
+      "DisplayName": "Flavor Science",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1F90205B-3E54-4E4D-BA4F-1672C77A0838"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.284Z",
+      "checksum": "30d3f5338b9f824567dc3226c59b5e6103f47cfc3c0fd7604b8d9184c395cd3d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Food & Beverage",
+      "ParentID": null,
+      "DisplayName": "Food & Beverage",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.270Z",
+      "checksum": "6d642f176d1c822902268c05077e8d596d03c03e01ef3c008998656783a69f19"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Internal Communications",
+      "ParentID": null,
+      "DisplayName": "Internal Communications",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6DB23EC7-EF34-46BE-8398-702B3C9C407D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.268Z",
+      "checksum": "30131953eeda2cc07abe07251d57968a64837ed78dc9ebc6707f810d5b62ac54"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Member Engagement",
+      "ParentID": null,
+      "DisplayName": "Member Engagement",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "29BD0605-3D7C-4FE2-A1A7-E278F34C72C3"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.269Z",
+      "checksum": "6db596275f687a0e00ab454f5e7761d452de74970ee010013ca9781458baf7a2"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Benefits",
+      "ParentID": null,
+      "DisplayName": "Membership Benefits",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "697F2A28-5AA8-4BCE-A461-6C15BD40CEC7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.449Z",
+      "checksum": "848db359f591473eeb046f2e9526a51b36ca842e4e04f9ca7b35fb11644735f4"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Management",
+      "ParentID": null,
+      "DisplayName": "Membership Management",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "42EBD1E1-9690-45A9-A925-F08DE544D90C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.456Z",
+      "checksum": "5ea6dee0fa9bdc05dec0b80aaa96ddb7b4f9f29e4a9ab29724058fd971287f98"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Operations",
+      "ParentID": null,
+      "DisplayName": "Membership Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B828A202-3476-4DF3-9EEE-203E04ACB28E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.453Z",
+      "checksum": "308d712dcdd021af5838a152e34a5ee34a13db43b3b3962002bb7d41b8a1bbbe"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Operations",
+      "ParentID": null,
+      "DisplayName": "Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "35D7E3C9-3C64-48A0-8196-4FCBCC4B035E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.448Z",
+      "checksum": "7f16fe0f60252e5901dbe43133bd58ced6e8645ccf67cdf028f4fcde089a2ea5"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Organizational Communication",
+      "ParentID": null,
+      "DisplayName": "Organizational Communication",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "29C85AD1-4984-4FB4-A942-913517491F4F"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.422Z",
+      "checksum": "76b79da710af4fbbb9fc1b4ece6c46cf237cd79cd4cd68506be2f8a50fc8cc3b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Organizational Operations",
+      "ParentID": null,
+      "DisplayName": "Organizational Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E60B8DD6-2BB9-413E-9882-6D8D760D56D4"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.431Z",
+      "checksum": "87567f4564aab125ef9c6496fed41c122ce288254c858f781b3646010900de3b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Policy & Regulation",
+      "ParentID": null,
+      "DisplayName": "Policy & Regulation",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.414Z",
+      "checksum": "4b499d5ec3caaaf2a64f837d24bbae38baf28c0993385cd9f7f1873bb870d711"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Programs",
+      "ParentID": null,
+      "DisplayName": "Programs",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C60CCA1B-8C61-4FE2-8FB1-2C759F0AA8E9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.430Z",
+      "checksum": "2782b65f6a7fbbd6a6b3f16d23ed3ba7254483d354500d6d45ea0aa5005aa7d1"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Reporting & Analytics",
+      "ParentID": null,
+      "DisplayName": "Reporting & Analytics",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E77CF0E7-0D93-4DE1-8DBF-71F283CD8522"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.462Z",
+      "checksum": "0665e1591dc78dd6d68ccc05fb3a3cb84f40a5c8d15014d4ed2cf78377333498"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Workshop Content",
+      "ParentID": null,
+      "DisplayName": "Workshop Content",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:13:30.449Z",
+      "checksum": "0e712f9f3114e1a29b9c37359c9bc7b48798aa3b0a65d5167bf9a114c75fa778"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Advocacy",
+      "ParentID": "50C20883-4EC7-4192-82FD-0B07B9593E39",
+      "DisplayName": "Advocacy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "7EB4D103-554D-40B4-82F8-491B318018DE"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.957Z",
+      "checksum": "61d1b4ecdc3f4aa55eb15e082ba6a89aa53c834f80048d8374bba0cc44d546ff"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Artisanal Cheese",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Artisanal Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "18101920-595B-4BBF-AD65-0EBFBA1328AC"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.947Z",
+      "checksum": "e848c5f9b8f3cad52b70a380e9b4be7be569e4589fc94556a8f72fe3257b0f84"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Autorenewal",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Autorenewal",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "71E14437-B6E6-479C-BAB7-FF7BD981E52F"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.898Z",
+      "checksum": "790c8ea29f830a2b3e8546912b1b38bfd0166ddde3d5dac8c94ff35de945210f"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cancellations",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Cancellations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D1E57B45-7923-40F1-8122-4B6AE9C44B69"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.943Z",
+      "checksum": "0d66d7b37d54ee3f160d5a8a46b6f82d7d04f0278e84da89cad24c88fddbcc89"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Capacity Building",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Capacity Building",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BEBAA0E7-1AF6-40AA-BE76-7ACEC62850F3"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.943Z",
+      "checksum": "873c3f1bf6f23c63dca386f3a8c9564dc8b2dd8810b3bbea59711207940bb675"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Certified Cheese Professional",
+      "ParentID": "7AB4BBDF-34AA-4C94-B451-950253E36E10",
+      "DisplayName": "Certified Cheese Professional",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F9D0B5D6-CD96-41B4-8F91-2BA1685F032D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.956Z",
+      "checksum": "786140459f54e666adfc80647928efae4fa8d39dc4dbac6bb58975d88dbeefbb"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheddar",
+      "ParentID": "06D64410-DB37-40BF-B12B-480148BFCBEC",
+      "DisplayName": "Cheddar",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CFA3173A-D8E4-4855-B9F1-EBC246BE3421"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.931Z",
+      "checksum": "948a1760310b73f34e24ad399887d8df37aafa8d142fbaee247b33659779ebda"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D4A01501-8745-411C-A6B8-493AA5EE713E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.957Z",
+      "checksum": "a7039f8ecfc42311e2788f37084e7d47b307513ff50f99e6f8ce393635e1c6a5"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese and Wine Pairing",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Cheese and Wine Pairing",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2F0C3D0F-DEF3-4661-8167-94516DA6B6F6"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.904Z",
+      "checksum": "65f41f50486f51e653585ba4143a8a8654c843e92dd3d73d700ecfd76b9a6316"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Categories",
+      "ParentID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "DisplayName": "Cheese Categories",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "9427C3A0-C57C-4B2E-BEEB-4898373A7098"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:09.918Z",
+      "checksum": "54e48dc72db29e968e7f3009ea68aa00afcf3144827b7a29bce0a498661efdb0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Characteristics",
+      "ParentID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "DisplayName": "Cheese Characteristics",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B096F600-2401-4065-9D61-B5A87DB4D157"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.113Z",
+      "checksum": "fa87982871a87c3831a040c06adfc8b13428db7e4d5f8587c30a76fb0075fbba"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Pairing",
+      "ParentID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "DisplayName": "Cheese Pairing",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "825804D4-B5D6-4D4B-A5DC-575CAAD07274"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.168Z",
+      "checksum": "9612f21ce2b9ece6fe7046a77f51d6710054ff1ae9b97a97c8a5dd9aa53ccd9c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Serving",
+      "ParentID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE",
+      "DisplayName": "Cheese Serving",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "412BB33B-D493-483B-90A9-BB3FFA0E2242"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.152Z",
+      "checksum": "9585ce87e24087b5a18aa71329c69be48d539905cbf1f069e900d1724297ca52"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheese Storage",
+      "ParentID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE",
+      "DisplayName": "Cheese Storage",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "728DD687-BCC8-42DA-B0AB-9FD9F14C3F3F"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.131Z",
+      "checksum": "7a92433347b24f7fa4d1445775ca8aa7e4a8fec15ce486b2016a181cb546c073"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheesemaking Techniques",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Cheesemaking Techniques",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "75DA2C52-92C3-4757-9401-C243F04BB4F4"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.171Z",
+      "checksum": "860beb6e9ab098a332779e568ad00b07a2ea66d0382a024e6677091f05545940"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Competition Judge Accreditation",
+      "ParentID": "7AB4BBDF-34AA-4C94-B451-950253E36E10",
+      "DisplayName": "Competition Judge Accreditation",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B4FE26C9-68C5-4369-B53C-D9FEC6A49976"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.171Z",
+      "checksum": "401c98194e4b679cf2dfb2f414a098a13a46a92864a4b2c727ed01681fba27d8"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Consumer Education",
+      "ParentID": "50C20883-4EC7-4192-82FD-0B07B9593E39",
+      "DisplayName": "Consumer Education",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CE781AC6-B6A0-412B-94C5-F09AABBC597B"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.159Z",
+      "checksum": "7348c5952e92631a8c7b07c68a4224f073c86d31a6ec3c4ee83c23dc8c63f101"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Consumer Guidance",
+      "ParentID": "45D0BB04-1461-485B-B695-2CE02F913C46",
+      "DisplayName": "Consumer Guidance",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CD60E3D3-FD8C-425D-9A65-E257BF406730"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.168Z",
+      "checksum": "e316c0d3c03de6e72c88fdf16bc96af1587af16f5880061abebfbf5c505d5a3c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Consumer Insights",
+      "ParentID": "04D5C5B5-068A-49FB-B86D-986FF5DB3919",
+      "DisplayName": "Consumer Insights",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D70F28E9-92E6-4672-A9A9-239DE95D2384"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.134Z",
+      "checksum": "26bc403d581b93a7b76eaeb81b1fd72127249c3c9d4e68a689bc360a371f4e09"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Content Development",
+      "ParentID": "50C20883-4EC7-4192-82FD-0B07B9593E39",
+      "DisplayName": "Content Development",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "61A0B15F-BEA7-442C-A738-7DF305DB0C44"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.171Z",
+      "checksum": "3fb5beaa4f27f1355af4afb6e853a90567f921cebd82de56269956e494bcde93"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Contingency Planning",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Contingency Planning",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D46FDE2C-501A-41E1-915E-B06CE0C13068"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.337Z",
+      "checksum": "4b0eb7edf4930ba5e83bb8f7df059541f43f487b38f722c0e42709677f5dfe1b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cooking with Cheese",
+      "ParentID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "DisplayName": "Cooking with Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C981E09F-AE7A-4BF6-9A90-546808064FC7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.350Z",
+      "checksum": "477e90c7ac61c44572383bdf5ff979355ef8fd0f88601b4afee55e325d6c9ed0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Culinary Applications",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Culinary Applications",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "5436C569-6D35-419C-A1DE-5F9803931489"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.327Z",
+      "checksum": "84f8ca2a3cf933ddb3f6c665895953afa01348eb81543eb45e5021cb67e62c91"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Culinary Tips",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Culinary Tips",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BFFA4DE7-4FA0-4934-8AB2-DC8DE14BFA61"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.344Z",
+      "checksum": "3439886e29d2e27ca66777befc7de039aa1552a1bb3ac7cbcdba61044c74d80b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cultural Preservation",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Cultural Preservation",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "699CED66-4714-49B4-9447-3509D948541A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.357Z",
+      "checksum": "55558db57f121db5f148d9b9657a290e051460d6d37c6f3849cb3f9269190a09"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Dairy Margin Programs",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Dairy Margin Programs",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "82DCD574-6C10-4CB2-85EF-A6B78C9D8112"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.325Z",
+      "checksum": "30463728f2e80beeb9364a4fa20fd7056528f952b6b22e709e16f5da0949c64c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Data Accuracy",
+      "ParentID": "72BDAB12-9243-4E1C-B8FC-50E22698A08E",
+      "DisplayName": "Data Accuracy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DAE4782B-8790-4E46-BB51-66B31E2CBEE7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.334Z",
+      "checksum": "6f53e140ce37fab9d4ae521cca584af7fe7d5bf1ed3ccf5a8bcfe641fef7df6d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Data Reconciliation",
+      "ParentID": "72BDAB12-9243-4E1C-B8FC-50E22698A08E",
+      "DisplayName": "Data Reconciliation",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6AE5209F-5BF9-437C-8359-032AB75F01B7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.346Z",
+      "checksum": "17a50e3b0b1278e600ca1ab763c0af48646fbf1ff3ce9968bc9d16131abd577a"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Documentation",
+      "ParentID": "DB462DC5-B27C-429D-BFB8-73C20DD0CAD0",
+      "DisplayName": "Documentation",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "233201CB-EAEA-40C3-A0BC-1802B524787E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.333Z",
+      "checksum": "abb51bbee5f6bd3fe25e3c532cc9f1688b52d4d0f718208d6b657b3896be8760"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Dues",
+      "ParentID": "B4D3BC74-ABAE-429D-98A7-B5BF207E7E84",
+      "DisplayName": "Dues",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D3A9ABC3-4689-4868-BB46-2796948F4C7C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.353Z",
+      "checksum": "dd6577781695cd16cec8bb25e7d0b7a8a162ba54371135d4c6864f5555aa3d0f"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Education",
+      "ParentID": "E60B8DD6-2BB9-413E-9882-6D8D760D56D4",
+      "DisplayName": "Education",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1D94A6CF-FDAC-4330-843D-F11914F1E04E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.521Z",
+      "checksum": "f25b9daaa01e225b3c773b56f37bbf8ed0cf9fe92879e8dcefa34883267266ab"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Event Participation",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Event Participation",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F77E4B56-E88D-4AD0-9B06-71C063F63E16"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.524Z",
+      "checksum": "1985e3988298ebf74ac40e04de22678db07f3ee9b53fa4c76d9d84f063028859"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Event Registration",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Event Registration",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "263C12B9-D1CB-4CCB-8E82-55336B30D5E5"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.531Z",
+      "checksum": "409361c3bc3182666a941f7c05ec9e3e60c74e1c007a0aa842c824253375b0c2"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Event Strategy",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Event Strategy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B72B022E-BF23-4679-B0BF-FE019CD81F9E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.531Z",
+      "checksum": "d7e886954f97ed8ddd186f56408cbb4e3841988623ac4dd751962127c294f0e3"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Events",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Events",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E8395B0F-463E-490F-9242-5774EE010CE9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.530Z",
+      "checksum": "11454c78e2680abe9e05185be334c57bd3463b172f2fd7ca786dab9f0aef88b0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Exports",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Exports",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "11A77C04-1F0F-4314-BC96-AC6E321E67CC"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.526Z",
+      "checksum": "bbc932030022eda3a10929b821bae21e091f51d005911f9800c7d33b510c9335"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Fair Trade",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Fair Trade",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1D9569F0-34FD-488E-A82C-F47D5C64F0EC"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.522Z",
+      "checksum": "643d0d8d375b3be8d25e32590da0cb66e346ab877bdaac4d6727d10e6e61eeaa"
+    }
+  },
+  {
+    "fields": {
+      "Name": "FAQ",
+      "ParentID": "45D0BB04-1461-485B-B695-2CE02F913C46",
+      "DisplayName": "FAQ",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1671BA40-8CE0-4924-BF6C-D0EBB943C939"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.524Z",
+      "checksum": "fd77ed58c21794301318e72152bfc683500fcc83a0c21e12bb63b6402391cb9e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Farmstead Operations",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Farmstead Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DAA6A8B1-B67F-423E-B882-171CE8C7B8AD"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.502Z",
+      "checksum": "e6c1a33a6489474ded1d3393e5a4033bd0abeb506302df375ea2066b665f7f19"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Food Handling",
+      "ParentID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE",
+      "DisplayName": "Food Handling",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "56F0C288-1D9E-43EB-B937-C748B92674FE"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.533Z",
+      "checksum": "f402cb15d02104d341374c11df2d99e9821d9b7fa3bfc63bd0058d62f0460dc9"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Food Pairing",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Food Pairing",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B93FEFC7-48A1-4219-A492-A3931025D845"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.702Z",
+      "checksum": "7773d8e95b7845407aa37fb561dcd17b82033a3318f9b5eb05959238da9e16bd"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Food Pairing Principles",
+      "ParentID": "1F90205B-3E54-4E4D-BA4F-1672C77A0838",
+      "DisplayName": "Food Pairing Principles",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D5474406-577D-4C39-A097-A54A348BB92C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.677Z",
+      "checksum": "eaf170bc56f101db319d44a80667e78bf24c53cb0aa333d4abd0b58c701af594"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Food Safety",
+      "ParentID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE",
+      "DisplayName": "Food Safety",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BFFE6CC1-18DF-44E8-8711-32302450C713"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.686Z",
+      "checksum": "26a50d1f0da7f6574e17b38e6e922952b20b1bb6419a5a29ea675d397c871b51"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Food Safety Training",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Food Safety Training",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "715DDF1B-4135-4F97-8DB3-922B32A37443"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.701Z",
+      "checksum": "2c54236aeb3a531d97d12c7f10493c790165d9cfb50c69fd37129fc04593e22d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Imported Cheese",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Imported Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "0825A136-8AFC-4711-8368-3294CA4D306C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.696Z",
+      "checksum": "57f91dcf854c50cdd54093c139bd29ffd157b6d3d95964710fc238634ced8ccf"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Industry News",
+      "ParentID": "45D0BB04-1461-485B-B695-2CE02F913C46",
+      "DisplayName": "Industry News",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6C6011B8-3EC2-4E5B-9CC0-A43AEC2927F6"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.706Z",
+      "checksum": "35a442b407466c99edc368e69532b1a56c0d3f468194426813c365fbeb093122"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Internal Directives",
+      "ParentID": "29C85AD1-4984-4FB4-A942-913517491F4F",
+      "DisplayName": "Internal Directives",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "578D2A9E-8E29-4B8C-9FD5-95A607158F66"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.677Z",
+      "checksum": "9752dbc0fc9fcc847ae28606ea4b90dcdfb07c24a823e4836eb660a8005a9a77"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Internal Operations",
+      "ParentID": "35D7E3C9-3C64-48A0-8196-4FCBCC4B035E",
+      "DisplayName": "Internal Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "996B83A8-429B-4833-A9DC-FC3C99779C6D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.711Z",
+      "checksum": "b9e9ac777e21194652f5dc6cc91bc4cf31353eb2851c7316cdb6ef159fb107dd"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Internal Reporting",
+      "ParentID": "04D5C5B5-068A-49FB-B86D-986FF5DB3919",
+      "DisplayName": "Internal Reporting",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "38AD0CF9-2764-42D4-98A9-982A25B116F1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.705Z",
+      "checksum": "237aafd0cac18bd6f3c19a47caabc33ea2311c9b9684f4275a153cf1b8383070"
+    }
+  },
+  {
+    "fields": {
+      "Name": "International Membership",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "International Membership",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "25833ED7-C005-4268-81A7-EC43F385B18B"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.713Z",
+      "checksum": "3e03f7e54213badca495aec6eb5f2a6ed9754b43476e92465728ef5cdb761c42"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Judging Standards",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Judging Standards",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "76546B76-7FA9-4AA5-8B16-752BFBFF59F1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.854Z",
+      "checksum": "82f9554d0114a5b9adaaf1bce5fb30ab90d65fa3d19e192ec3d67f02459199d5"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Labeling Standards",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Labeling Standards",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D7C5491D-8EEB-4B3D-ADDF-F24D7927ED5A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.874Z",
+      "checksum": "6d880859041a5f6a78227ce1c180f749e5bc55b034a5fc42814eff285be45224"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Logistics",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Logistics",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E6683D60-1D9A-4B79-9782-B1E07CBB2513"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.866Z",
+      "checksum": "694f3c749c3928d2624bd672f4df2a35b538edc9c500637f338c926f7fcfea49"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Market Analysis",
+      "ParentID": "04D5C5B5-068A-49FB-B86D-986FF5DB3919",
+      "DisplayName": "Market Analysis",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "50B037D7-BB22-4C6E-9EC7-D5AA4C85D68D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.883Z",
+      "checksum": "dab7e2cd21140e120d5b3ac989a1cb32fb50685329ef1fa87c5370770f546a7e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Market Prices",
+      "ParentID": "DD941549-EEE5-477C-9CCF-7A7447F9DB52",
+      "DisplayName": "Market Prices",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E6D3488B-3807-46D0-94B2-B5EB704E69DC"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.866Z",
+      "checksum": "61b1b8546995cd26b928a8d0125d6cc9195065d9bb2c70c0244140f148dbf644"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Market Strategy",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Market Strategy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "47F47BFF-17FA-42A9-91D1-8B3E2D0D7EC1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.842Z",
+      "checksum": "78e744d04845409f321eda2a0d1cce9d2a30c3ed565265b21447f0eb501cbd6e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Member Onboarding",
+      "ParentID": "29BD0605-3D7C-4FE2-A1A7-E278F34C72C3",
+      "DisplayName": "Member Onboarding",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CB12E9D1-6B68-45EF-B395-FB6C575968A9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.880Z",
+      "checksum": "7f57cab6c11c6ecead2dba955956d42cea0d09d318ba5c8be11357774bfb43dd"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Member Spotlight",
+      "ParentID": "29BD0605-3D7C-4FE2-A1A7-E278F34C72C3",
+      "DisplayName": "Member Spotlight",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AFD2924E-2BAE-43D6-A398-E33178E78EC1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.887Z",
+      "checksum": "22553b66fa602e1133b3c44b8ff72e0a3b6f1addd110701e829014b763452fbe"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Member Support",
+      "ParentID": "29BD0605-3D7C-4FE2-A1A7-E278F34C72C3",
+      "DisplayName": "Member Support",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2CC078AA-5D13-4761-BCEA-B504139B8E5E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.891Z",
+      "checksum": "5beb32a69306511412a9cb146e68ac6498bd33527f69f72ae1f3f714b7b70ee3"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Close",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Membership Close",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "54D627E6-DC7D-44DF-B699-939B5642B981"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:10.887Z",
+      "checksum": "59128530f4019ba738bd015b1c3c43397c180c61744db225e1b2832f7f8a6322"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Data",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Membership Data",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CDB77D9D-4AD8-4D42-A8BB-9ABA6F2442D2"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.025Z",
+      "checksum": "68a02c0afc79467ac3297c572adb8dc3a1c3b152aa7f1352b900600e798de5ec"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Eligibility",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Membership Eligibility",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6990671A-5932-40AC-A536-82B47C5D9C5C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.068Z",
+      "checksum": "c9fc56d36152543936ff2d2fe3f169e679a123888447251bc3bf4b6ef186f791"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Rates",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Membership Rates",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "22B75C31-EE22-4523-B037-019A8E84492D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.052Z",
+      "checksum": "feee6d818dc16863374065f82a0084efa448bb022fb6a4329c7dad92a89390ac"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Statistics",
+      "ParentID": "B828A202-3476-4DF3-9EEE-203E04ACB28E",
+      "DisplayName": "Membership Statistics",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DC1FD7A9-0B0A-4810-A035-B8F3DC074DBA"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.070Z",
+      "checksum": "c551731ad3c984ad1953f4bb763c6f15bfc1f55ce5a245eb43fbdb3e2ba99f7b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Membership Tiers",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Membership Tiers",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "980957C6-DB44-4240-8AFB-DC8B24C34134"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.021Z",
+      "checksum": "97809bd9b6afbd553aa205a0156d6115b36f06f9f69bea6a2dda4d85fdda3a0a"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Milk Prices",
+      "ParentID": "DD941549-EEE5-477C-9CCF-7A7447F9DB52",
+      "DisplayName": "Milk Prices",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "15A6E15F-5BC8-4BCA-8797-5C3DA22055CB"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.068Z",
+      "checksum": "d5ebb8fcd67be2b7b6de2e0f2c37c09e0e74e9fb5180c540ef1af4b498b2a369"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Milk Quality",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Milk Quality",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F3F40CDE-5CBE-4657-B18A-CA69FDFF5889"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.060Z",
+      "checksum": "7508cd504c614d684579c97e9806f2d43e3424b520b73c53bfbd4c2dcfe1b043"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Occasion-based Recommendations",
+      "ParentID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "DisplayName": "Occasion-based Recommendations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BCF9EB63-65BC-4149-9FC5-6A839734AFFE"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.068Z",
+      "checksum": "ef3a6f015197518a2fca85df29275b87fae469ae6c9c3d091f5213ba36d3b2e3"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Packaging Training",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Packaging Training",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1FDC379B-6DB4-4D29-A2EB-3C4A8C2B550B"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.021Z",
+      "checksum": "62d6a1ea565554ae216ab6815828997d8e81296b54789c752b1866fc87a9e1e1"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Policy Decision",
+      "ParentID": "E60B8DD6-2BB9-413E-9882-6D8D760D56D4",
+      "DisplayName": "Policy Decision",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1784B4FE-A868-4D86-840B-DD5631FF9D91"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.069Z",
+      "checksum": "4bb86430de1d6ff03f95f4d794ced2b1817111703b4f35f01b54c477a3a29fb9"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Policy Issues",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Policy Issues",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "9913F4EF-3068-4B09-8C12-A2AB908BA36B"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.223Z",
+      "checksum": "f3914df5aab495e2721fa728c7d79ecc69df701b68ce93cc5184ba6a4fad6175"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Pricing Discrepancies",
+      "ParentID": "DD941549-EEE5-477C-9CCF-7A7447F9DB52",
+      "DisplayName": "Pricing Discrepancies",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "39F4F2F2-FAEF-4A74-9DFA-AA16FC8AF70A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.231Z",
+      "checksum": "551d9f5ad17fafdbbb61fabbd9602941d0a8d52f33ca9c788bce269e421ed1dd"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Pricing Strategy",
+      "ParentID": "DD941549-EEE5-477C-9CCF-7A7447F9DB52",
+      "DisplayName": "Pricing Strategy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "178DB276-06A9-458B-B553-D560EC4A4EAF"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.218Z",
+      "checksum": "8872a6e01679ea04a02ef472dcbc451c15c26b01ee384fb77a23be956139136d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Product Quality",
+      "ParentID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE",
+      "DisplayName": "Product Quality",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "C0F08080-1618-4F4F-BF96-32501568D758"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.221Z",
+      "checksum": "05a8922049dd3484d8f24175fc32fcafb0789f5512071b01129fe34c1229e948"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Production Records",
+      "ParentID": "DB462DC5-B27C-429D-BFB8-73C20DD0CAD0",
+      "DisplayName": "Production Records",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "27836403-864E-48E7-B054-BAF6D51C56B5"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.235Z",
+      "checksum": "16a5e09cc441148c45b3d3745d79890b7ba6bedaa7a7a8ff1514ee485df424f1"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Professional Standards",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Professional Standards",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E92B8DB9-F414-4D36-A32E-42F350A97BA9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.222Z",
+      "checksum": "2721945f70b613f7660c9fab8c4cdaa036b7b48f74a8e66859520d2cef9d8044"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Profitability",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Profitability",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "3589CDDD-5457-4B59-B2DE-00E9540F863C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.231Z",
+      "checksum": "ca960cac3c2801f586abee7893a2bd1f33e3ae61f2188a242829acc90f5b8e06"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Proration",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Proration",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AD658669-9D78-479C-B5EF-9BD9BAB44B5E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.223Z",
+      "checksum": "e640448dad370d4c972ad7eeb525a5f98e593bb95c4b5638259583978b2e7b07"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Protected Designation of Origin",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Protected Designation of Origin",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AEB6FF17-E287-46D1-B4EB-69FC583B5634"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.221Z",
+      "checksum": "7a23472d061aa60f2d55a75dca56da6e888cc74412d7c909e3563bf8228c927b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Public Comment",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Public Comment",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "420993C4-68A4-44A1-8B24-E139600EBF02"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.243Z",
+      "checksum": "f4146cc22c5608d093a600c26ee69ecc3461150fa949664c2cfdedba532ee385"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Public Content Strategy",
+      "ParentID": "45D0BB04-1461-485B-B695-2CE02F913C46",
+      "DisplayName": "Public Content Strategy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B6834F6B-84FB-4841-B108-41003D4C52CD"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.427Z",
+      "checksum": "51b1d96516f0af6debddd1d7fbb91619c7c4cdc10618abbbb471346738304d68"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Publications",
+      "ParentID": "45D0BB04-1461-485B-B695-2CE02F913C46",
+      "DisplayName": "Publications",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BE717BC2-DBC4-408C-9446-0DD8DB27D22C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.428Z",
+      "checksum": "db1160d10ec18d6bf815a74aad7d8e02b52ae7311947a18959b3ac3ae7f48535"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Refund Policy",
+      "ParentID": "42EBD1E1-9690-45A9-A925-F08DE544D90C",
+      "DisplayName": "Refund Policy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "16C74C89-C651-42AF-B7B0-FB4FA9F1DCD1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.388Z",
+      "checksum": "e3fb3320b29b4ab73f135089689c9a81ecdc53a4f284c97aa7b2858282cbbd60"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Refunds",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Refunds",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "45EAF467-88B9-4123-B6D2-1428444ED985"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.375Z",
+      "checksum": "d799318cceecb51354817884fc1a2f3a0a3eb22341353ab226aad0dc2e6a0eaf"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Regulatory Frameworks",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Regulatory Frameworks",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "055889A1-A800-45E9-B31C-176049BFE13A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.427Z",
+      "checksum": "eb24c56225b2ef8de5994c070e6358c41a683022927e2ff26c5dc3f485ee88c0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Rennet Alternatives",
+      "ParentID": "2E674553-AD9C-4CA0-BCF2-278F8E01E696",
+      "DisplayName": "Rennet Alternatives",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "399D344B-C810-4166-9FAF-B5FE0112D6C7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.412Z",
+      "checksum": "745315fbf71d2549358f9e2ac95ce4abb1a3fb005481c679585a547356fd1b7d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Reporting Constraints",
+      "ParentID": "DB462DC5-B27C-429D-BFB8-73C20DD0CAD0",
+      "DisplayName": "Reporting Constraints",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AC9749AC-7584-44BA-A005-A625B9F21290"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.425Z",
+      "checksum": "fea84b2f9e76d07d874e1fa9852daf091a8fcac1485d1121f8fe14c741a7c46c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Reporting Standards",
+      "ParentID": "DB462DC5-B27C-429D-BFB8-73C20DD0CAD0",
+      "DisplayName": "Reporting Standards",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2692C222-50BD-4F53-8C0B-DF7B9017C98D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.403Z",
+      "checksum": "a433d97f924ffd2971b88935758add2d8b3aa7079b4050f03ec7cd94566de53c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Research",
+      "ParentID": "04D5C5B5-068A-49FB-B86D-986FF5DB3919",
+      "DisplayName": "Research",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CB0167D5-C696-4191-B346-F9F821FB151B"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.426Z",
+      "checksum": "49ba9efb53e4f758d49c1af96b7b93242e79dfc1ea9eae45915e906e3f44efe0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Research Coordination",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Research Coordination",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4B86A9D1-BC0D-451E-84EB-F9F565992DD3"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.427Z",
+      "checksum": "f4034a5233c3a946eea1597979c6fb0017dfc5abb220cc2aa8a0a5fafae807ee"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Retail",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Retail",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6EEA48A1-6B20-49A2-B30D-739EA9E65AA6"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.576Z",
+      "checksum": "6306a501a3b218864b4934eb1e509447959642fee5b422b712f0dd55dad3a24f"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Revenue Reporting",
+      "ParentID": "B4D3BC74-ABAE-429D-98A7-B5BF207E7E84",
+      "DisplayName": "Revenue Reporting",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "8F1526AA-5488-42F8-A225-7658D0FC583C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.580Z",
+      "checksum": "868b3dc39d04b27586e485ee209d777c991add5df8aafb676891ccbaef9123f4"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Seasonal Operations",
+      "ParentID": "35D7E3C9-3C64-48A0-8196-4FCBCC4B035E",
+      "DisplayName": "Seasonal Operations",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D18E3FDC-7C21-47AD-AEF0-17A545503F18"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.613Z",
+      "checksum": "030f0d103f0181e711bd318d3dc4df3a344f45d1ba0644ee254180e6b5e94a49"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Sensory Analysis",
+      "ParentID": "1F90205B-3E54-4E4D-BA4F-1672C77A0838",
+      "DisplayName": "Sensory Analysis",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BBB1CF95-C64B-4B00-BF62-927DDBEEBB67"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.595Z",
+      "checksum": "9ddeb381c305e6418463984eb4d996116402e7d231dc7a8286fcc94d6d94f838"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Sensory Evaluation Certificate",
+      "ParentID": "7AB4BBDF-34AA-4C94-B451-950253E36E10",
+      "DisplayName": "Sensory Evaluation Certificate",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1EDAAF1B-5ACE-49BE-98F9-787F50AC1BCA"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.614Z",
+      "checksum": "b29bbe7a208ddf34c463f19869010a80bd5cbca19a90ac36276a6859ff1f0d8b"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Serving Cheese",
+      "ParentID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "DisplayName": "Serving Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FE44EAC6-6F53-4B50-A94F-346E1C782055"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.612Z",
+      "checksum": "ddadd63a92f69210f4e5b448bf5050dea47bff7a02662eb94e9d064c965302a5"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Small Creameries",
+      "ParentID": "D84E3B53-3E1A-4691-8749-F8F15341A8A9",
+      "DisplayName": "Small Creameries",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "397DEF7A-586B-4267-87B4-34E3EDCEEA58"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.601Z",
+      "checksum": "d2ea994bc03e01ea2314d11780c8bb03d142934c2ef47a21565ff1c3ba81a89d"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Specialty Cheese",
+      "ParentID": "D84E3B53-3E1A-4691-8749-F8F15341A8A9",
+      "DisplayName": "Specialty Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "983F3F2E-BDD2-486F-8A4B-FCA076EB8912"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.600Z",
+      "checksum": "1b30511cdd5c02a2b4aed058359ff6d142207148d766708be9ccf2b7f55820bb"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Supplier Relationships",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Supplier Relationships",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "0A50C18D-27BA-4F5A-AB97-0FD1B29D35BE"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.599Z",
+      "checksum": "9e9e3cc2288d08d3921dc894b8996d6797a8b1d3768960756da14d2d0e7035f9"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Supply Chain",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Supply Chain",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B7BE5250-D6E7-4110-A64B-7C0628CAFBDF"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.617Z",
+      "checksum": "3c60fa93f804417595ec4d71c077d37649c97caabce40feabe1b45cd48825fb8"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Supply Chain Management",
+      "ParentID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "DisplayName": "Supply Chain Management",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CFF4B78B-E6F5-4212-9872-E08CF5834AA3"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.791Z",
+      "checksum": "42d8ea3398c8cc960fe70749d2d9948a4637ef2af4a854e8aeb91fe29db5bfaa"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Sustainability",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Sustainability",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "5409A142-8297-462B-B6D5-16034C4388EB"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.765Z",
+      "checksum": "a8645307cf215caa62db90bd5bb82b783690d045195c96cb647fbaf9b51938f9"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Tariffs",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Tariffs",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4EC3CBD8-457E-4326-96E2-9666726DCE80"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.748Z",
+      "checksum": "06c98a0cf1cef9a152c4220cb2055793b32548f34c57eeb53fe0c4148429095e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Taste Profiles",
+      "ParentID": "06D64410-DB37-40BF-B12B-480148BFCBEC",
+      "DisplayName": "Taste Profiles",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B5A885FB-FCEF-456C-8963-93604D84E99A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.794Z",
+      "checksum": "ccb17adbce5ddb0bbf8eef0863267c5a46a511f8a2f49fb524ae28cc6b56438f"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Trade",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Trade",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B97EAA9A-51F9-440A-BD65-E4DAC869BA79"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.751Z",
+      "checksum": "5d2e64e321f8341a71a316857c201582698f20da1907af42258a2571ae31d5b3"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Trade Policy",
+      "ParentID": "CA16377B-0AC4-4615-B121-E9943D0DDDC8",
+      "DisplayName": "Trade Policy",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D78CFD04-840C-477F-A820-68DBAA7D127F"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.780Z",
+      "checksum": "289e0c42c48ef0a8c0d4cec084b06e260513990cfcff569cb31ffdae56bd91cd"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Training",
+      "ParentID": "C60CCA1B-8C61-4FE2-8FB1-2C759F0AA8E9",
+      "DisplayName": "Training",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FDCCC288-B9D6-4D3B-BDCE-CFDB78FAB39B"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.788Z",
+      "checksum": "6f7c0ae862a35b38eaea7a8da2c3a9b382672d76c17960e547d961dc6fd115fb"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Variance Analysis",
+      "ParentID": "B4D3BC74-ABAE-429D-98A7-B5BF207E7E84",
+      "DisplayName": "Variance Analysis",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FB050D48-190F-4829-A542-AFF1C67441A9"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.782Z",
+      "checksum": "996088111747b39b900560cfb17487f3fbbfc9c05aece2728a37f12cea8beb5a"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Webinars",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Webinars",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "50E865A2-50D3-4F16-BAB3-6391473AB104"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.793Z",
+      "checksum": "31c8d26c6f9f4bdc60537a37d7ceca856f1901b3e08f358e9444f66246e7d188"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Whey",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Whey",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "A32CB772-74B9-440A-8091-A7B029933155"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.788Z",
+      "checksum": "0a37115d6b8d034ece68a52f987a7bfe772b5e6607da111843234392f39f63c0"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Wine",
+      "ParentID": "864DD8AD-5E62-4D06-A47F-BFCBA67F13B0",
+      "DisplayName": "Wine",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "257FDA62-BFAE-4F97-AC09-1652A4F74663"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.846Z",
+      "checksum": "fc8dfd69b60135abc5c9cfc7554456184aa3d94e2fa236cc3cff9eeb84db78db"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Workshops",
+      "ParentID": "C69042B9-3468-4892-9F79-6D1645E0F2D0",
+      "DisplayName": "Workshops",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "CC83D946-29D4-492B-98F6-BE0888187F47"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.846Z",
+      "checksum": "f5e282232dd78398ac78b4e196828da8be4e8e66bc82767cebba77280701c26c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Agricultural Statistics",
+      "ParentID": "50B037D7-BB22-4C6E-9EC7-D5AA4C85D68D",
+      "DisplayName": "Agricultural Statistics",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1DB3CEAF-BFCF-4F6C-88D6-8989CF446BF2"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.983Z",
+      "checksum": "18cb1c92db9dce6265643757d089fb966df9e1b11821cdcdce4a1e95cbcecdac"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Apprenticeship",
+      "ParentID": "FDCCC288-B9D6-4D3B-BDCE-CFDB78FAB39B",
+      "DisplayName": "Apprenticeship",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "75EADCAB-F5FA-46C6-9283-AFB87248DBA2"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.997Z",
+      "checksum": "15060f7d7d560e2ab3cdceed48ee150336f846fadb5d6a412d946c45637e3b91"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Calcium",
+      "ParentID": "F3F40CDE-5CBE-4657-B18A-CA69FDFF5889",
+      "DisplayName": "Calcium",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "ED70D2C3-582B-416F-8BB6-A1BDB13BC336"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.009Z",
+      "checksum": "b30e3902bde3aa75e4caed8b542cea05f99b3332af2f0dcdb14607c951f230ab"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cheesemaking",
+      "ParentID": "D4A01501-8745-411C-A6B8-493AA5EE713E",
+      "DisplayName": "Cheesemaking",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.011Z",
+      "checksum": "e09c1c5fef4929d40d64c273152a8dd6dc1b7780ab0ee74b41ef6bf1ebb393cc"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cold Chain",
+      "ParentID": "B7BE5250-D6E7-4110-A64B-7C0628CAFBDF",
+      "DisplayName": "Cold Chain",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "FD64A9EB-39BD-4BB4-99BB-F724860084AF"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.015Z",
+      "checksum": "ef843658db22bbc95d60ff2f06da11875e5e716965c3532b86ce56e9cebe97b4"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Competition",
+      "ParentID": "E8395B0F-463E-490F-9242-5774EE010CE9",
+      "DisplayName": "Competition",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "DBA6DAD5-EE8A-4480-A536-D47EB9B59BE1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.977Z",
+      "checksum": "f3344fbeb505de3b8bc3cbabecffb6e2212d7c442f21edfa0815eb978c29f435"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Corporate Membership",
+      "ParentID": "980957C6-DB44-4240-8AFB-DC8B24C34134",
+      "DisplayName": "Corporate Membership",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "9742EBAA-C971-490A-B571-95DCEA646F37"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.993Z",
+      "checksum": "e49b21e761a81e47d613bc5e430f5f3b4c2c0ce2b7c4a003700bfbe680fe6b58"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Corrective Actions",
+      "ParentID": "BFFE6CC1-18DF-44E8-8711-32302450C713",
+      "DisplayName": "Corrective Actions",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "E9210200-6725-48CF-95BB-7F81AD8B914C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.016Z",
+      "checksum": "923166042fd1d40f95057fc48958608dff7631a8792e0522a9da1c932dce8008"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Cost Analysis",
+      "ParentID": "178DB276-06A9-458B-B553-D560EC4A4EAF",
+      "DisplayName": "Cost Analysis",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6E6EC8B3-1283-44CB-8B8D-B1E85663B2A0"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.974Z",
+      "checksum": "38a6d0c8daa6537ce71a8e34fcf11618bba277f087bf37c28b4c925ab974d328"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Direct-to-Consumer",
+      "ParentID": "47F47BFF-17FA-42A9-91D1-8B3E2D0D7EC1",
+      "DisplayName": "Direct-to-Consumer",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2CE87D0A-1844-4FC4-A953-667432836D29"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:11.997Z",
+      "checksum": "d6c7ecd263a916d9065ae53fc778eac0ea4550ddefc3f593549611a8f96abb57"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Distribution",
+      "ParentID": "CFF4B78B-E6F5-4212-9872-E08CF5834AA3",
+      "DisplayName": "Distribution",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "99286342-4C8B-4F06-B0A8-DDBC8CC704D7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.146Z",
+      "checksum": "3f569bfd08531310ac3345d47b24ac6de1496b3716189b00af411c11332775db"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Environmental Monitoring",
+      "ParentID": "BFFE6CC1-18DF-44E8-8711-32302450C713",
+      "DisplayName": "Environmental Monitoring",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "4794C4D1-897B-4E1F-9AE5-2FDBA6F1D7F4"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.171Z",
+      "checksum": "756342f03710cb7f339a562a12f4d8467264865218a2838fa2887189474d5f77"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Farmers Markets",
+      "ParentID": "6EEA48A1-6B20-49A2-B30D-739EA9E65AA6",
+      "DisplayName": "Farmers Markets",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B8F1B45C-D3CF-4C3B-B329-F42D14DC5400"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.162Z",
+      "checksum": "bd58b8c6c4abf85cb9184d9db15a328ada049781709fa0a32174640484301350"
+    }
+  },
+  {
+    "fields": {
+      "Name": "HACCP",
+      "ParentID": "715DDF1B-4135-4F97-8DB3-922B32A37443",
+      "DisplayName": "HACCP",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "1EB66732-42DD-420B-B91F-09D123BFA251"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.181Z",
+      "checksum": "f41d414f9eb6d2f778092a6172fe2ad67fcaaf554b419e6a4070c8b6f4af66e8"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Hands-on Training",
+      "ParentID": "FDCCC288-B9D6-4D3B-BDCE-CFDB78FAB39B",
+      "DisplayName": "Hands-on Training",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "6A44AD2F-CD39-4806-85AA-3116AD21B1B8"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.180Z",
+      "checksum": "6b937b68bfd35cbe09c8f6c7c611aad7a5b844a54e9f7f7703ec14bff8d41df6"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Imports",
+      "ParentID": "B97EAA9A-51F9-440A-BD65-E4DAC869BA79",
+      "DisplayName": "Imports",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "BB0CB8C7-1E75-4D8B-9E32-A879ADA1F0F8"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.191Z",
+      "checksum": "4b707b3144d20e7d06d139eb2169650732fa0abe1edb1b2896d2011ff9ff925e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Inspections",
+      "ParentID": "BFFE6CC1-18DF-44E8-8711-32302450C713",
+      "DisplayName": "Inspections",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "45B3E8F4-812A-43FB-8101-7189B0CA452F"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.180Z",
+      "checksum": "9765fa41bee74f1daf4f103071be2a47dbe6f8761b7d7f960ee739e218ac2360"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Interstate Shipment",
+      "ParentID": "B97EAA9A-51F9-440A-BD65-E4DAC869BA79",
+      "DisplayName": "Interstate Shipment",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "2B72E660-27D1-4E6B-8523-13BFE632A470"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.162Z",
+      "checksum": "44c2eb6b8287bc5903c8b6a15f6b8bcc42cb37413b7d4c6a2dfba0d2e89cbfaa"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Inventory Management",
+      "ParentID": "CFF4B78B-E6F5-4212-9872-E08CF5834AA3",
+      "DisplayName": "Inventory Management",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "9BF09C55-1C63-41E6-AB53-41D5F3078C7D"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.160Z",
+      "checksum": "c1233c6cf89b3a01fd3cacee13f4aae118929962314b9dad1a8a19b05a104b8f"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Listeria",
+      "ParentID": "BFFE6CC1-18DF-44E8-8711-32302450C713",
+      "DisplayName": "Listeria",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "EF12B8B5-21A1-4AE1-97FE-0B61D29301A4"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.193Z",
+      "checksum": "785e4b35002d1438b546c63af98697e21ae49421ad0561a1f3b9f4547321e865"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Market Access",
+      "ParentID": "B97EAA9A-51F9-440A-BD65-E4DAC869BA79",
+      "DisplayName": "Market Access",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "68EE637E-EF4F-460F-B721-9731E3322D9A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.306Z",
+      "checksum": "f3013dce15dc3e9d91d0ca552595b57c27ca9fe497903a7b105958749ae70954"
+    }
+  },
+  {
+    "fields": {
+      "Name": "milk supply",
+      "ParentID": "B7BE5250-D6E7-4110-A64B-7C0628CAFBDF",
+      "DisplayName": "milk supply",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "0053AAC6-4069-4DE2-8617-B71D3380418C"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.300Z",
+      "checksum": "50d77db8d00aa16030a4d638de9a03433eddd5955f06228c7b772410c764dd6c"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Plant-based Cheese",
+      "ParentID": "D4A01501-8745-411C-A6B8-493AA5EE713E",
+      "DisplayName": "Plant-based Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "0F0501CF-4980-4936-B823-6F687EDB15DA"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.305Z",
+      "checksum": "ed42d95a38be1b7f0a8c6bfbb855d1beeb349dd8a9924e23fe70ba084c68c969"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Producer Education",
+      "ParentID": "1D94A6CF-FDAC-4330-843D-F11914F1E04E",
+      "DisplayName": "Producer Education",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "5C70890E-A870-43D6-99BD-D09A6B747EBA"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.309Z",
+      "checksum": "3e1c53bebe15c02f05682a0114fb84ca690cd5210348ecfeb1d7069f1d0553a8"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Raw Milk Cheese",
+      "ParentID": "D4A01501-8745-411C-A6B8-493AA5EE713E",
+      "DisplayName": "Raw Milk Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "394CDB0E-2633-4797-A7D1-AF1FEE04E6F7"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.288Z",
+      "checksum": "9e7a23b1d978b22d9a2c2190daad55211c77616434a63cf1a44082e0cf1bf155"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Traceability",
+      "ParentID": "CFF4B78B-E6F5-4212-9872-E08CF5834AA3",
+      "DisplayName": "Traceability",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F1B7C234-87A2-4772-9399-98BA3AADE523"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.288Z",
+      "checksum": "250d91b7886933060f3dd86dc415a91e60482adfc7adac54fdd76d616bf57a69"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Affinage",
+      "ParentID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A",
+      "DisplayName": "Affinage",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "B5BD8D6E-1784-42A2-964E-C2803DD696FC"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.409Z",
+      "checksum": "ebe5fd8d789fc95d6f10775e7b5259c66fa8af3cef990d837559731169e868ee"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Blue Cheese",
+      "ParentID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A",
+      "DisplayName": "Blue Cheese",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "42B8D605-D857-41EB-8650-F6BE5BD0D078"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.403Z",
+      "checksum": "90f8e6e9a33acf539f81018cb5a116338eb6e05aeb72dd3d9565fd5a656d652e"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Curd",
+      "ParentID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A",
+      "DisplayName": "Curd",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "00EB06CC-063D-4E32-9EE6-365D8871CC4A"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.413Z",
+      "checksum": "9d4e1c44a91721938bd1127f6fcbf1a88d1695e777e9652182f881a44b2876e5"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Make Sheet",
+      "ParentID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A",
+      "DisplayName": "Make Sheet",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "F3F12541-BB55-4903-AE76-874BF53CF2C2"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.416Z",
+      "checksum": "5a917aad9ef5760ad547f2986e9889408639456b9e517c8b0cac244ad85c0030"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Pasta Filata",
+      "ParentID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A",
+      "DisplayName": "Pasta Filata",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "AE6E1702-D3AF-4BB2-B980-949EBAF29F0E"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.408Z",
+      "checksum": "f7926b72a577f18161b173982a5442b5913038e8639c4ba18558e07a551ce4cd"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Washed-Curd",
+      "ParentID": "87DDF029-BE6E-4FC0-BC81-93AAC8FF8B8A",
+      "DisplayName": "Washed-Curd",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "D40B4388-7C00-4F6C-A70F-087D6553CF16"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.402Z",
+      "checksum": "919a5882ce7177792db1ded8b2a0a542c6e8ecd1866cad5163697bdf53343942"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Humidity",
+      "ParentID": "B5BD8D6E-1784-42A2-964E-C2803DD696FC",
+      "DisplayName": "Humidity",
+      "Description": null,
+      "Status": "Active",
+      "MergedIntoTagID": null,
+      "IsGlobal": true,
+      "AllowAutoGrow": true,
+      "IsFrozen": false,
+      "MaxChildren": null,
+      "MaxDescendantDepth": null,
+      "MinWeight": null,
+      "RequiresReview": false,
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=all-mpnet-base-v2 (Local)",
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "5BF4402B-C817-46E9-BFB4-5190E33606A1"
+    },
+    "sync": {
+      "lastModified": "2026-09-22T02:12:12.453Z",
+      "checksum": "43ee778952ceafd877ae88ac5de38d6b65848ffeaa9ef9a3e0b788541accb89c"
+    }
+  }
+]

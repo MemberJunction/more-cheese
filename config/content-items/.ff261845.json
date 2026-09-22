@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "ContentSourceID": "9D5F4C3B-6E1A-4B8A-AF74-5A0C1D8E9F04",
+    "Name": "Re: January close — numbers for Friday's post",
+    "Description": "An internal email from the International Cheese Federation's Communications department to Membership Operations, with the Chief Executive's office copied. The email confirms a decision to withhold specific membership figures from public content until discrepancies in individual-tier membership data are resolved and a clear basis for counting new versus renewing members is established. Communications will maintain this policy through Q1 and revisit it in April, requesting clarification on the $145 rate and a standardized definition for member counts.",
+    "ContentTypeID": "@lookup:MJ: Content Types.Name=ICF web page, blog post, FAQ, archive listing or internal document (memo, deck, spreadsheet, email)",
+    "ContentSourceTypeID": "@lookup:MJ: Content Source Types.Name=Cloud Storage",
+    "ContentFileTypeID": "@lookup:MJ: Content File Types.Name=Other",
+    "Checksum": "d125999a9128c0b820afba7e59498634e07d6f0edaa307650784d87b58225443",
+    "URL": "vault/internal/email/2019/2019-02-04-thread-january-close-numbers-for-friday-post/03-2019-02-07-1620-comms-to-membership-ops.md",
+    "Text": "---\ntitle: \"Re: January close — numbers for Friday's post\"\ndate: 2019-02-07\ndoc_type: email\nvisibility: internal\norg: \"International Cheese Federation\"\nera: era-pre-pandemic-baseline\nfiscal_year: 2019\nfictional: true\nfrom: \"Communications <comms@morecheese.example>\"\nto:\n  - \"Membership Operations <membership.ops@morecheese.example>\"\ncc:\n  - \"Office of the Chief Executive <exec@morecheese.example>\"\nsubject: \"Re: January close — numbers for Friday's post\"\nsent: 2019-02-07T16:20:00Z\nthread_id: 2019-02-04-january-close-numbers-for-friday-post\nmessage_id: mc-2019-02-07-1620-comms-membops\nin_reply_to: mc-2019-02-05-0741-membops-comms\nweek_of: 2019-02-04\ntags:\n  - membership-close\n  - blog\n  - decision\ndata_sources:\n  - generated/membership-periods\n---\n\n**From:** Communications <comms@morecheese.example>\n**To:** Membership Operations <membership.ops@morecheese.example>\n**Cc:** Office of the Chief Executive <exec@morecheese.example>\n**Sent:** Thursday, 7 February 2019 16:20\n**Subject:** Re: January close — numbers for Friday's post\n\n> **FICTIONAL DEMONSTRATION DOCUMENT** — International Cheese Federation (ICF), a fictitious trade association created for the MemberJunction More Cheese demonstration environment. All names, figures, events, and decisions are invented.\n\nAgreed, and honestly it improves the post. Friday's piece now says \"members who plan a year at a\ntime\" and links to the membership page instead of quoting a count. The argument was never really\nabout how many of us there are.\n\nDecision, for the record: **no membership figures in public content until the Individual-tier\nvariance is closed and we have a defensible new-versus-renewing basis.** I'll hold that line for\nthe rest of Q1 and revisit with you in April rather than chase it weekly.\n\nCopying the Office in so this isn't a surprise if it comes up. Two things I'd like on someone's\nlist: the $145 rate, and a plain-English description of what our member count actually counts,\nwhich I will happily write once you tell me what it is.\n\nPost ships tomorrow morning. Thanks for the flag — this was the right catch.\n\n*Communications*",
+    "EntityRecordDocumentID": null,
+    "EmbeddingStatus": "Complete",
+    "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+    "TaggingStatus": "Complete",
+    "VectorRecordID": null,
+    "ParentID": null,
+    "DisplayLink": null,
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "FF261845-0F18-4B1B-97A6-876BE66B5870"
+  },
+  "sync": {
+    "lastModified": "2026-09-22T02:12:15.458Z",
+    "checksum": "89c9f296994c86768386509d0507533545a5bdabe19fe013c3126caa4ccb0fa4"
+  }
+}

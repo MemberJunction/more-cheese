@@ -1,0 +1,30 @@
+{
+  "fields": {
+    "ContentItemID": "BC7E73B8-9B5E-4B15-9E7D-543AB1E7096E",
+    "Sequence": 0,
+    "Text": "Re: January close — numbers for Friday's post\nAn internal email from Membership Operations to Communications advising against publishing preliminary January membership numbers due to significant data quality issues. The email highlights an unexplained financial variance in individual tier dues and a misleading membership history that incorrectly identifies all active members as new, which could cause embarrassment if published without reconciliation.\n---\ntitle: \"Re: January close — numbers for Friday's post\"\ndate: 2019-02-05\ndoc_type: email\nvisibility: internal\norg: \"International Cheese Federation\"\nera: era-pre-pandemic-baseline\nfiscal_year: 2019\nfictional: true\nfrom: \"Membership Operations <membership.ops@morecheese.example>\"\nto:\n  - \"Communications <comms@morecheese.example>\"\ncc: []\nsubject: \"Re: January close — numbers for Friday's post\"\nsent: 2019-02-05T07:41:00Z\nthread_id: 2019-02-04-january-close-numbers-for-friday-post\nmessage_id: mc-2019-02-05-0741-membops-comms\nin_reply_to: mc-2019-02-04-0912-comms-membops\nweek_of: 2019-02-04\ntags:\n  - membership-close\n  - data-quality\n  - blog\ndata_sources:\n  - generated/membership-periods\n  - generated/order-lines\n---\n\n**From:** Membership Operations <membership.ops@morecheese.example>\n**To:** Communications <comms@morecheese.example>\n**Sent:** Tuesday, 5 February 2019 07:41\n**Subject:** Re: January close — numbers for Friday's post\n\n> **FICTIONAL DEMONSTRATION DOCUMENT** — International Cheese Federation (ICF), a fictitious trade association created for the MemberJunction More Cheese demonstration environment. All names, figures, events, and decisions are invented.\n\nPreliminary: 222 members held an active membership period at 31 January, carrying $60,952 in dues.\nThat figure is solid. I'd still rather you didn't print it this week, for two reasons.\n\nFirst, there's an unexplained $2,030 variance in the Individual tier between order lines and period\ndues, and a $145 unit price on the Individual line that nobody has documented. If someone asks me\nto reconcile a printed number next month I want to already know the answer.\n\nSecond, and this is the one that would actually embarrass us: our membership history starts at the\n1 January baseline, so every active member shows a period beginning 1 January. If a reader asks\n\"how many are new\" and we run the obvious query, it says 222, which is nonsense — it includes\npeople who've been members since 2013. I don't want a number in print that invites that question\nuntil I can answer it.\n\nHenri Dubois's record is clean. Joined 15 January, nothing outstanding.\n\n*Membership Operations*",
+    "VectorRecordID": "ad76e2d2-5a6d-450c-a68d-aef425b4dc8e",
+    "EmbeddingStatus": "Complete",
+    "TaggingStatus": "Pending",
+    "DeleteStatus": null,
+    "Modality": "text",
+    "StartOffset": null,
+    "EndOffset": null,
+    "StartMs": null,
+    "EndMs": null,
+    "PageNumber": null,
+    "SegmentTitle": null,
+    "Description": null,
+    "Transcript": null,
+    "SegmenterKey": null,
+    "ParentChunkID": null,
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "AD76E2D2-5A6D-450C-A68D-AEF425B4DC8E"
+  },
+  "sync": {
+    "lastModified": "2026-09-22T02:12:19.412Z",
+    "checksum": "1f3fe2c6714b35e98c0bc061b5cafc2e535456ace4814a16059a891ce1a3b5aa"
+  }
+}
