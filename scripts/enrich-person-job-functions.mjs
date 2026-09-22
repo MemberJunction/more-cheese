@@ -85,14 +85,14 @@ export function applyPersonJobFunctionsEnrichment(options = {}) {
       for (const fn of entry.functions) {
         const jfId = fn.jobFunctionID.toUpperCase();
         const seq = fn.sequence;
-        const pkId = uuidv5(`PersonJobFunction:${personId}:${jfId}:${seq}`, DEFAULT_NAMESPACE);
+        const pkId = uuidv5(`PersonJobFunction:${personId}:${jfId}`, DEFAULT_NAMESPACE);
 
         pjfRecords.push({
           fields: {
             PersonID: personId,
             JobFunctionID: jfId,
             Sequence: seq,
-            Source: 'Manual',
+            Source: 'Derived',
             Confidence: fn.confidence,
           },
           primaryKey: {
@@ -110,11 +110,13 @@ export function applyPersonJobFunctionsEnrichment(options = {}) {
   fs.mkdirSync(pjfDir, { recursive: true });
   fs.writeFileSync(pjfPath, JSON.stringify(pjfRecords, null, 2) + '\n', 'utf8');
 
-  const syncConfig = {
-    entity: 'MJ_BizApps_Common: Person Job Functions',
-    filePattern: '**/.*.json',
-  };
-  fs.writeFileSync(pjfSyncPath, JSON.stringify(syncConfig, null, 2) + '\n', 'utf8');
+  if (!fs.existsSync(pjfSyncPath)) {
+    const syncConfig = {
+      entity: 'MJ_BizApps_Common: Person Job Functions',
+      filePattern: '**/.*.json',
+    };
+    fs.writeFileSync(pjfSyncPath, JSON.stringify(syncConfig, null, 2) + '\n', 'utf8');
+  }
 
   return {
     peopleCount: people.length,
