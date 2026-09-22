@@ -3,235 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Research & publications · More Cheese</title>
+<title>Research &amp; publications · More Cheese</title>
 <meta name="description" content="The four standing reports, the journal articles, the Monday brief and the members archive - what the Federation publishes, who can read it, and how to cite it.">
+<link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/brand/mark-cocoa.png">
+<meta property="og:site_name" content="More Cheese · The International Cheese Federation">
+<meta property="og:title" content="Research &amp; publications · More Cheese">
+<meta property="og:description" content="The four standing reports, the journal articles, the Monday brief and the members archive - what the Federation publishes, who can read it, and how to cite it.">
+<meta property="og:image" content="https://morecheese.org/assets/brand/share.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // One place to change the palette. A yellower variant is a change to these
-  // six values (plus `butter`, which is defined and deliberately unused today).
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          milk:     '#FCFBF7',
-          pasture:  '#145C3D',
-          clover:   '#C8E3A0',
-          brick:    '#A23C2C',
-          charcoal: '#242424',
-          mid:      '#5E6560',
-          butter:   '#EFC24A'
-        },
-        fontFamily: {
-          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
-          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
-        },
-        screens: { nav: '900px' }
-      }
-    }
-  };
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
 </head>
-<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+<body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
-
-<header class="relative border-b border-charcoal/15 bg-milk">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
-    <div class="flex items-center gap-2.5">
-      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-        <span class="logo-dot" aria-hidden="true"></span>More Cheese
-      </a>
-      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
-        <span class="mc-badge__dot" aria-hidden="true"></span>
-        <span class="mc-badge__long">Fictional demo</span>
-        <span class="mc-badge__short">Fiction</span>
-      </a>
-    </div>
-    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
-      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
-      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
-      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
-      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
-      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
-      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
-      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
-    </ul>
-    <div class="flex items-center gap-2">
-      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
-      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-    </div>
-  </nav>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="./index.html" class="brand" aria-label="More Cheese home">
+      <img class="brand__mark" src="./assets/brand/mark-cocoa.svg" alt="" width="34" height="34">
+      <span class="brand__name">More Cheese</span>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read why">Fictional demo</a>
+    </a>
+    <nav aria-label="Main" id="nav-menu" class="site-nav">
+      <a href="./about.html#fiction" class="mc-badge mc-badge--drawer js-fiction-link">Fictional demo</a>
+      <ul class="site-nav__list">
+        <li><a href="./join.html">Join</a></li>
+        <li><a href="./learn.html">Learn</a></li>
+        <li><a href="./library.html">Library</a></li>
+        <li><a href="./compete.html">Compete</a></li>
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li class="site-nav__more"><a href="./faq.html">FAQ</a></li>
+        <li class="site-nav__more"><a href="./contact.html">Contact</a></li>
+        <li class="site-nav__more"><a href="./careers.html">Careers</a></li>
+        <li class="site-nav__more"><a href="./research.html">Research</a></li>
+      </ul>
+      <a href="./join.html" class="btn btn-butter site-nav__cta">Become a member</a>
+    </nav>
+    <button type="button" id="nav-toggle" class="btn nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+  </div>
 </header>
 
 <main id="main">
 
-  <section class="border-b border-charcoal/15 bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
-      <p class="text-xs font-bold uppercase tracking-[.14em] text-brick">Research &amp; publications</p>
-      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[19ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">Arguments settled with data.</h1>
-      <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">The Federation publishes for one reason: members kept having the same arguments with no numbers to hand. Four standing reports a year, the journal articles the committees commission, and the Monday brief that carries the week.</p>
-      <dl class="mt-8 grid max-w-3xl grid-cols-2 gap-6 nav:grid-cols-4">
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Produced globally</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">22.6M<span class="block text-xs font-semibold text-mid">metric tons a year</span></dd></div>
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Market value</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">$98B<span class="block text-xs font-semibold text-mid">at wholesale</span></dd></div>
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Annual growth</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">3.2%<span class="block text-xs font-semibold text-mid">five-year mean</span></dd></div>
-        <div><dt class="text-xs font-bold uppercase tracking-[.14em] text-brick">Crosses a border</dt><dd class="font-display m-0 text-[32px] font-extrabold leading-none tracking-tight">1 in 4<span class="block text-xs font-semibold text-mid">wheels made</span></dd></div>
+  <!-- Page head -->
+  <section class="on-ink page-head">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:72%;top:-14%;width:190px;height:190px"></span><span class="hole" style="left:90%;top:56%;width:90px;height:90px"></span><span class="hole" style="left:60%;top:70%;width:44px;height:44px"></span><span class="hole" style="left:3%;top:78%;width:60px;height:60px"></span></div>
+    <div class="wrap page-head__inner">
+      <span class="eyebrow eyebrow--yellow">Research &amp; publications</span>
+      <h1 class="display" style="max-width:16ch">Arguments settled with data.</h1>
+      <p class="lede">The Federation publishes for one reason: members kept having the same arguments with no numbers to hand. Four standing reports a year, the journal articles the committees commission, and the Monday brief that carries the week.</p>
+      <dl style="display:flex;flex-wrap:wrap;gap:20px 44px;border-top:1.5px solid var(--cocoa2);padding-top:22px;margin:6px 0 0">
+        <div style="display:flex;flex-direction:column;gap:3px"><dt class="eyebrow eyebrow--yellow eyebrow--sm">Produced globally</dt><dd class="display" style="font-size:32px">22.6M</dd><dd style="margin:0;font-size:12px;opacity:.8">metric tons a year</dd></div>
+        <div style="display:flex;flex-direction:column;gap:3px"><dt class="eyebrow eyebrow--yellow eyebrow--sm">Market value</dt><dd class="display" style="font-size:32px">$98B</dd><dd style="margin:0;font-size:12px;opacity:.8">at wholesale</dd></div>
+        <div style="display:flex;flex-direction:column;gap:3px"><dt class="eyebrow eyebrow--yellow eyebrow--sm">Annual growth</dt><dd class="display" style="font-size:32px">3.2%</dd><dd style="margin:0;font-size:12px;opacity:.8">five-year mean</dd></div>
+        <div style="display:flex;flex-direction:column;gap:3px"><dt class="eyebrow eyebrow--yellow eyebrow--sm">Crosses a border</dt><dd class="display" style="font-size:32px">1 in 4</dd><dd style="margin:0;font-size:12px;opacity:.8">wheels made</dd></div>
       </dl>
-      <p class="m-0 mt-4 max-w-[58ch] text-sm text-mid">Figures from the Federation&rsquo;s own annual assessment. Methodology notes are published with every report and are open to non-members.</p>
+      <p style="margin:0;font-size:14px;max-width:58ch;opacity:.85">Figures from the Federation&rsquo;s own annual assessment. Methodology notes are published with every report and are open to non-members.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="reports-h">
-    <h2 id="reports-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">The standing reports</h2>
-    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Four reports, published on the same cycle every year so that a member planning a season knows when the numbers land. Members get all four as they publish; non-members can buy them individually.</p>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-      <article class="flex flex-col rounded-2xl bg-pasture p-6 text-white">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Market &middot; published January</p>
-        <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Global production and consumption</h3>
-        <p class="m-0 mt-3 flex-1 text-[15px] opacity-95">Where the 22.6 million metric tons are made and where they are eaten, by category and by region, with a ten-year projection. The section members read first is the one on which styles are growing in markets that did not previously buy them &mdash; the answer has changed three years running.</p>
-        <p class="m-0 mt-4 text-[13px] text-clover">Members: in the archive on publication. Non-members: <a href="./contact.html" class="text-white underline underline-offset-2">request a copy</a>.</p>
+  <!-- The standing reports -->
+  <section class="wrap section" aria-labelledby="reports-h" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <h2 id="reports-h" class="h2">The standing reports</h2>
+      <p class="muted" style="margin:0;max-width:62ch">Four reports, published on the same cycle every year so that a member planning a season knows when the numbers land. Members get all four as they publish; non-members can buy them individually.</p>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))">
+      <article class="card card--soft" style="padding:28px">
+        <span class="eyebrow eyebrow--sm">Market &middot; published January</span>
+        <h3 class="h3" style="font-size:21px">Global production and consumption</h3>
+        <p class="muted" style="margin:0;line-height:1.6;flex:1">Where the 22.6 million metric tons are made and where they are eaten, by category and by region, with a ten-year projection. The section members read first is the one on which styles are growing in markets that did not previously buy them &mdash; the answer has changed three years running.</p>
+        <p style="margin:0;font-size:13px;color:var(--muted)">Members: in the archive on publication. Non-members: <a href="./contact.html">request a copy</a>.</p>
       </article>
-
-      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Trade &middot; published April</p>
-        <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Export and trade barriers</h3>
-        <p class="m-0 mt-3 flex-1 text-[15px] text-[#3A403C]">Tariff structures, the non-tariff barriers that cost more than tariffs, sanitary requirements, and what trade agreements have actually done to member shipments as opposed to what they were said they would do. Written for a maker deciding whether an export line is worth the paperwork.</p>
-        <p class="m-0 mt-4 text-[13px] text-mid">Feeds the <a href="./advocacy.html" class="text-brick underline underline-offset-2">advocacy program</a> directly.</p>
+      <article class="card card--ink" style="padding:28px">
+        <span class="eyebrow eyebrow--sm">Trade &middot; published April</span>
+        <h3 class="h3" style="font-size:21px">Export and trade barriers</h3>
+        <p style="margin:0;line-height:1.6;flex:1">Tariff structures, the non-tariff barriers that cost more than tariffs, sanitary requirements, and what trade agreements have actually done to member shipments as opposed to what they were said they would do. Written for a maker deciding whether an export line is worth the paperwork.</p>
+        <p style="margin:0;font-size:13px;opacity:.85">Feeds the <a href="./advocacy.html">advocacy program</a> directly.</p>
       </article>
-
-      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Regulatory &middot; published July</p>
-        <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Regulatory frameworks by region</h3>
-        <p class="m-0 mt-3 flex-1 text-[15px] text-[#3A403C]">A comparative read of food safety rules, labeling requirements and certification standards across the regions members work in, with the divergences called out rather than averaged away. Raw-milk rules get their own chapter because they generate more member questions than everything else combined.</p>
-        <p class="m-0 mt-4 text-[13px] text-mid">Maintained with the Food Safety and Advocacy committees.</p>
+      <article class="card" style="padding:28px">
+        <span class="eyebrow eyebrow--sm">Regulatory &middot; published July</span>
+        <h3 class="h3" style="font-size:21px">Regulatory frameworks by region</h3>
+        <p class="muted" style="margin:0;line-height:1.6;flex:1">A comparative read of food safety rules, labeling requirements and certification standards across the regions members work in, with the divergences called out rather than averaged away. Raw-milk rules get their own chapter because they generate more member questions than everything else combined.</p>
+        <p style="margin:0;font-size:13px;color:var(--muted)">Maintained with the Food Safety and Advocacy committees.</p>
       </article>
-
-      <article class="flex flex-col rounded-2xl bg-clover p-6">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-pasture">Consumer &middot; published October</p>
-        <h3 class="font-display m-0 mt-1 text-[24px] font-bold leading-tight tracking-tight">Preference shifts, specialty against commodity</h3>
-        <p class="m-0 mt-3 flex-1 text-[15px] text-[#243027]">What buyers say they want, what they actually put in a basket, and the gap between the two. Tracks health framing, sustainability claims, price sensitivity by format, and the slow drift of specialty styles into ordinary weekly shopping.</p>
-        <p class="m-0 mt-4 text-[13px] text-[#41503F]">Presented at the October conference before it is published.</p>
+      <article class="card" style="padding:28px;background:var(--yellow);border-color:var(--yellow)">
+        <span class="eyebrow eyebrow--ink eyebrow--sm">Consumer &middot; published October</span>
+        <h3 class="h3" style="font-size:21px">Preference shifts, specialty against commodity</h3>
+        <p style="margin:0;line-height:1.6;flex:1">What buyers say they want, what they actually put in a basket, and the gap between the two. Tracks health framing, sustainability claims, price sensitivity by format, and the slow drift of specialty styles into ordinary weekly shopping.</p>
+        <p style="margin:0;font-size:13px">Presented at the October conference before it is published.</p>
       </article>
     </div>
   </section>
 
-  <section class="border-y-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="journal-h">
-      <h2 id="journal-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Journal articles</h2>
-      <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Longer pieces, reviewed by members who know the subject, published when they are ready rather than to a schedule. Four from the current volume.</p>
-      <div class="space-y-3">
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[20px] font-bold tracking-tight">The ecology of uncertainty: managing systemic risk in a small make</h3>
-          <p class="m-0 mt-2 text-[15px] text-[#3A403C]">Biological, economic and regulatory uncertainty arrive at a creamery through the same door, and the paper&rsquo;s argument is that treating them as three problems is why small makes fail at the third one. Includes the failure taxonomy the Food Safety Committee has since adopted in the HACCP curriculum.</p>
+  <!-- Journal articles -->
+  <section class="on-paper rule-top" aria-labelledby="journal-h">
+    <div class="wrap section" style="display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h2 id="journal-h" class="h2">Journal articles</h2>
+        <p class="muted" style="margin:0;max-width:62ch">Longer pieces, reviewed by members who know the subject, published when they are ready rather than to a schedule. Four from the current volume.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <article class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:19px">The ecology of uncertainty: managing systemic risk in a small make</h3>
+          <p class="muted" style="margin:0;line-height:1.6">Biological, economic and regulatory uncertainty arrive at a creamery through the same door, and the paper&rsquo;s argument is that treating them as three problems is why small makes fail at the third one. Includes the failure taxonomy the Food Safety Committee has since adopted in the HACCP curriculum.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[20px] font-bold tracking-tight">Balancing tradition and innovation in artisan cheese</h3>
-          <p class="m-0 mt-2 text-[15px] text-[#3A403C]">How craft producers absorb modern food science without losing what makes the make theirs. The interesting finding is negative: the producers who described the two as opposed were markedly more likely to have had a serious quality failure in the previous three years.</p>
+        <article class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:19px">Balancing tradition and innovation in artisan cheese</h3>
+          <p class="muted" style="margin:0;line-height:1.6">How craft producers absorb modern food science without losing what makes the make theirs. The interesting finding is negative: the producers who described the two as opposed were markedly more likely to have had a serious quality failure in the previous three years.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[20px] font-bold tracking-tight">Knowledge preservation in craft cheesemaking</h3>
-          <p class="m-0 mt-2 text-[15px] text-[#3A403C]">Succession is the quiet crisis in the trade: what a maker knows is mostly undocumented, and it leaves when they do. The article sets out what can realistically be written down, what can only be transferred by standing next to someone, and why the apprenticeship strand is built the way it is.</p>
+        <article class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:19px">Knowledge preservation in craft cheesemaking</h3>
+          <p class="muted" style="margin:0;line-height:1.6">Succession is the quiet crisis in the trade: what a maker knows is mostly undocumented, and it leaves when they do. The article sets out what can realistically be written down, what can only be transferred by standing next to someone, and why the apprenticeship strand is built the way it is.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[20px] font-bold tracking-tight">Climate pressure on dairy-based cheesemaking</h3>
-          <p class="m-0 mt-2 text-[15px] text-[#3A403C]">Hotter summers change the cave before they change the herd. A strategic read of what members are already adapting &mdash; ripening schedules, cave engineering, seasonal make plans &mdash; and what the trade has not begun to address.</p>
+        <article class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:19px">Climate pressure on dairy-based cheesemaking</h3>
+          <p class="muted" style="margin:0;line-height:1.6">Hotter summers change the cave before they change the herd. A strategic read of what members are already adapting &mdash; ripening schedules, cave engineering, seasonal make plans &mdash; and what the trade has not begun to address.</p>
         </article>
       </div>
-      <p class="m-0 mt-6 text-[15px] text-[#3A403C]">Members read the full text in the archive. Non-members can <a href="./contact.html" class="text-brick underline underline-offset-2">request an individual article</a>; abstracts are open to everyone.</p>
+      <p class="muted" style="margin:0;line-height:1.65">Members read the full text in the archive. Non-members can <a href="./contact.html">request an individual article</a>; abstracts are open to everyone.</p>
     </div>
   </section>
 
-  <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:px-10 nav:grid-cols-[1.1fr_1fr]">
-    <div>
-      <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">The Monday brief</h2>
-      <p class="m-0 mb-3 text-[15px] text-[#3A403C]">One email a week to every member: what prices did, what moved in policy, what other members are doing, and what closes this fortnight. Written to be read in five minutes by somebody who has already been up for four hours.</p>
-      <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Behind it sits the archive &mdash; every issue since the Federation started publishing, searchable, alongside the competition score sheets, the comment filings and every recorded session. It is the most under-used thing in the membership, and members who find it tend to find it eighteen months in, by accident.</p>
-      <p class="m-0 text-[15px] text-[#3A403C]">The <a href="./blog.html" class="text-brick underline underline-offset-2">blog</a> is the open half of the same work and needs no membership at all.</p>
-    </div>
-    <div class="space-y-4">
-      <div class="rounded-2xl bg-clover p-6">
-        <h3 class="font-display m-0 text-xl font-bold tracking-tight">Open to everyone</h3>
-        <p class="m-0 mt-2 text-[15px] text-[#243027]">The blog, the six competition category standards, the <a href="./library.html" class="text-brick underline underline-offset-2">Cheese Library</a>, report summaries and every methodology note. A standard nobody can read is not a standard.</p>
+  <!-- The Monday brief + access -->
+  <section class="rule-top" aria-labelledby="brief-h">
+    <div class="wrap section grid grid--2" style="align-items:start">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <h2 id="brief-h" class="h2 h2--sm">The Monday brief</h2>
+        <p class="muted" style="margin:0;line-height:1.65">One email a week to every member: what prices did, what moved in policy, what other members are doing, and what closes this fortnight. Written to be read in five minutes by somebody who has already been up for four hours.</p>
+        <p class="muted" style="margin:0;line-height:1.65">Behind it sits the archive &mdash; every issue since the Federation started publishing, searchable, alongside the competition score sheets, the comment filings and every recorded session. It is the most under-used thing in the membership, and members who find it tend to find it eighteen months in, by accident.</p>
+        <p class="muted" style="margin:0;line-height:1.65">The <a href="./blog.html">blog</a> is the open half of the same work and needs no membership at all.</p>
       </div>
-      <div class="rounded-2xl border-[1.5px] border-charcoal p-6">
-        <h3 class="font-display m-0 text-xl font-bold tracking-tight">Members only</h3>
-        <p class="m-0 mt-2 text-[15px] text-[#3A403C]">The brief archive, full report text, competition score sheets and session recordings. <a href="./join.html" class="text-brick underline underline-offset-2">Dues start at $170</a> and every tier gets the same access.</p>
-      </div>
-      <div class="rounded-2xl border-[1.5px] border-brick p-6">
-        <h3 class="font-display m-0 text-xl font-bold tracking-tight text-brick">Propose research</h3>
-        <p class="m-0 mt-2 text-[15px] text-[#3A403C]">Committees commission work when an argument needs settling. If you have the question, or the data, write to the Standards or Food Safety committee through the contact page.</p>
-        <a href="./contact.html" class="mt-4 inline-block rounded-full bg-brick px-5 py-2.5 text-sm font-bold text-white no-underline hover:brightness-110">Put a question forward</a>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card card--soft">
+          <h3 class="h3" style="font-size:20px">Open to everyone</h3>
+          <p class="muted" style="margin:0;line-height:1.6">The blog, the six competition category standards, the <a href="./library.html">Cheese Library</a>, report summaries and every methodology note. A standard nobody can read is not a standard.</p>
+        </div>
+        <div class="card">
+          <h3 class="h3" style="font-size:20px">Members only</h3>
+          <p class="muted" style="margin:0;line-height:1.6">The brief archive, full report text, competition score sheets and session recordings. <a href="./join.html">Dues start at $170</a> and every tier gets the same access.</p>
+        </div>
+        <div class="card card--ink">
+          <h3 class="h3" style="font-size:20px">Propose research</h3>
+          <p style="margin:0;line-height:1.6">Committees commission work when an argument needs settling. If you have the question, or the data, write to the Standards or Food Safety committee through the contact page.</p>
+          <a href="./contact.html" class="btn btn-butter btn-sm" style="align-self:flex-start;margin-top:6px;color:var(--ink)">Put a question forward</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 pb-14 md:px-10">
-    <div class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6 md:p-8">
-      <h2 class="font-display m-0 mb-3 text-2xl font-bold tracking-tight">Using and citing this work</h2>
-      <p class="m-0 mb-3 text-[15px] text-[#3A403C]">Quote it with attribution &mdash; that is what it is for, and a member reprinting a brief item in their own newsletter is a compliment rather than a problem. Reproducing a whole report or a full set of score sheets needs a word with Communications first, mainly so that we can point you at the current version. The competition category standards may be reproduced in full by anyone, member or not.</p>
-      <p class="m-0 text-[15px] text-[#3A403C]">Questions about a figure, a method or a citation go to <a href="mailto:research@morecheese.org" class="text-brick underline underline-offset-2">research@morecheese.org</a>. Advertising and sponsorship go to <a href="mailto:advertising@morecheese.org" class="text-brick underline underline-offset-2">advertising@morecheese.org</a>, and the answer to &ldquo;can I have the member list&rdquo; is on the <a href="./faq-organization-directory.html" class="text-brick underline underline-offset-2">directory FAQ</a>.</p>
+  <!-- Using and citing -->
+  <section class="wrap" aria-labelledby="cite-h" style="padding-bottom:clamp(44px,6vw,72px)">
+    <div class="card" style="padding:clamp(24px,3vw,32px);gap:12px">
+      <h2 id="cite-h" class="h3">Using and citing this work</h2>
+      <p class="muted" style="margin:0;line-height:1.65">Quote it with attribution &mdash; that is what it is for, and a member reprinting a brief item in their own newsletter is a compliment rather than a problem. Reproducing a whole report or a full set of score sheets needs a word with Communications first, mainly so that we can point you at the current version. The competition category standards may be reproduced in full by anyone, member or not.</p>
+      <p class="muted" style="margin:0;line-height:1.65">Questions about a figure, a method or a citation go to <a href="mailto:research@morecheese.org">research@morecheese.org</a>. Advertising and sponsorship go to <a href="mailto:advertising@morecheese.org">advertising@morecheese.org</a>, and the answer to &ldquo;can I have the member list&rdquo; is on the <a href="./faq-organization-directory.html">directory FAQ</a>.</p>
     </div>
   </section>
 </main>
 
-<footer class="bg-charcoal text-[#D9DBD4]">
-  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-    <div class="flex flex-wrap justify-between gap-10">
-      <div class="max-w-sm">
-        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
-          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+<footer class="site-footer">
+  <div class="holes holes--footer" aria-hidden="true"><span class="hole" style="left:6%;top:18%;width:48px;height:48px"></span><span class="hole" style="left:22%;top:70%;width:26px;height:26px"></span><span class="hole" style="left:58%;top:12%;width:34px;height:34px"></span><span class="hole" style="left:81%;top:64%;width:56px;height:56px"></span><span class="hole" style="left:93%;top:22%;width:20px;height:20px"></span></div>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <div class="brand brand--on-ink">
+          <img class="brand__mark" src="./assets/brand/mark-butter.svg" alt="" width="32" height="32">
+          <span class="brand__name">More Cheese</span>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
-        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+        <p>The International Cheese Federation · 1 Rind Lane, Lancaster, PA<br><a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a></p>
       </div>
-      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
-            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
-            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
-            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
-            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
-            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
-            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
-            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
-            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
-            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="site-footer__col"><span class="site-footer__head">Membership</span><a href="./join.html">Join</a><a href="./about.html">About the ICF</a><a href="./faq.html">FAQ</a><a href="./contact.html">Contact</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Programs</span><a href="./learn.html">Learn</a><a href="./compete.html">Compete</a><a href="./events.html">Events</a><a href="./advocacy.html">Advocacy</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Resources</span><a href="./library.html">Cheese Library</a><a href="./research.html">Research &amp; publications</a><a href="./careers.html">Careers &amp; volunteering</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Read</span><a href="./blog.html">Blog</a><a href="./faq.html">FAQ</a></div>
     </div>
-    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
-    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+    <p class="site-footer__legal">The International Cheese Federation (ICF) and More Cheese are entirely fictional. Demonstration content created for MemberJunction. © <span class="js-year">2026</span>.</p>
   </div>
 </footer>
-
+<!-- BETTY-WIDGET: the Betty launcher snippet is inserted here by the build once Colin allow-lists our origins -->
 </body>
 </html>

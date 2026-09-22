@@ -5,268 +5,202 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learn · More Cheese</title>
 <meta name="description" content="The ICF credential ladder: Cheese Foundations, Certified Cheese Professional, Food Safety and HACCP, and Advanced Affinage — plus 63 courses this year in cheese-named cohorts.">
+<link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/brand/mark-cocoa.png">
+<meta property="og:site_name" content="More Cheese · The International Cheese Federation">
+<meta property="og:title" content="Learn · More Cheese">
+<meta property="og:description" content="The ICF credential ladder: Cheese Foundations, Certified Cheese Professional, Food Safety and HACCP, and Advanced Affinage — plus 63 courses this year in cheese-named cohorts.">
+<meta property="og:image" content="https://morecheese.org/assets/brand/share.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // One place to change the palette. A yellower variant is a change to these
-  // six values (plus `butter`, which is defined and deliberately unused today).
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          milk:     '#FCFBF7',
-          pasture:  '#145C3D',
-          clover:   '#C8E3A0',
-          brick:    '#A23C2C',
-          charcoal: '#242424',
-          mid:      '#5E6560',
-          butter:   '#EFC24A'
-        },
-        fontFamily: {
-          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
-          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
-        },
-        screens: { nav: '900px' }
-      }
-    }
-  };
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
 </head>
-<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+<body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip" href="#main">Skip to main content</a>
 
-<header class="relative border-b border-charcoal/15 bg-milk">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
-    <div class="flex items-center gap-2.5">
-      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-        <span class="logo-dot" aria-hidden="true"></span>More Cheese
-      </a>
-      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
-        <span class="mc-badge__dot" aria-hidden="true"></span>
-        <span class="mc-badge__long">Fictional demo</span>
-        <span class="mc-badge__short">Fiction</span>
-      </a>
-    </div>
-    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
-      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
-      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
-      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
-      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
-      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
-      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
-      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
-    </ul>
-    <div class="flex items-center gap-2">
-      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
-      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-    </div>
-  </nav>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="./index.html" class="brand" aria-label="More Cheese home">
+      <img class="brand__mark" src="./assets/brand/mark-cocoa.svg" alt="" width="34" height="34">
+      <span class="brand__name">More Cheese</span>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read why">Fictional demo</a>
+    </a>
+    <nav aria-label="Main" id="nav-menu" class="site-nav">
+      <a href="./about.html#fiction" class="mc-badge mc-badge--drawer js-fiction-link">Fictional demo</a>
+      <ul class="site-nav__list">
+        <li><a href="./join.html">Join</a></li>
+        <li><a href="./learn.html">Learn</a></li>
+        <li><a href="./library.html">Library</a></li>
+        <li><a href="./compete.html">Compete</a></li>
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li class="site-nav__more"><a href="./faq.html">FAQ</a></li>
+        <li class="site-nav__more"><a href="./contact.html">Contact</a></li>
+        <li class="site-nav__more"><a href="./careers.html">Careers</a></li>
+        <li class="site-nav__more"><a href="./research.html">Research</a></li>
+      </ul>
+      <a href="./join.html" class="btn btn-butter site-nav__cta">Become a member</a>
+    </nav>
+    <button type="button" id="nav-toggle" class="btn nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+  </div>
 </header>
 
 <main id="main">
-
-  <section class="border-b border-charcoal/15 bg-milk">
-    <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 py-12 md:px-10 md:py-14 nav:grid-cols-[1.15fr_1fr]">
-      <div>
-        <p class="text-xs font-bold uppercase tracking-[.14em] text-brick">Education</p>
-        <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[16ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">A ladder, not a shelf of courses.</h1>
-        <p class="m-0 max-w-[54ch] text-[17px] text-[#3A403C]">Four rungs, in order. Each one assumes the one below it and each one means something specific on a résumé. Around them sit <b>63 courses this year</b> — single sessions, two-day workshops and cohort programs — that fill in the gaps between the rungs.</p>
-        <p class="m-0 mt-4 max-w-[54ch] text-[15px] text-mid">Cohorts are named for cheeses, not numbers: <b class="text-charcoal">Brook</b>, <b class="text-charcoal">Meadow</b>, <b class="text-charcoal">Alpine</b> and <b class="text-charcoal">Birch</b> run through the year, and people tend to stay in touch with the cohort they came up with.</p>
-      </div>
-      <!-- Section graphic: the cheese wheel drawn for the Cave concept, retinted for the light ground -->
-      <div class="relative mx-auto aspect-square w-full max-w-[380px]">
-        <svg viewBox="0 0 400 400" class="block h-full w-full" role="img" aria-label="A cheese wheel drawn in outline with one wedge cut away, marked 'aged 14 months'">
-          <defs>
-            <radialGradient id="rind" cx="50%" cy="45%" r="60%">
-              <stop offset="0" stop-color="#F1E3C4"/>
-              <stop offset=".7" stop-color="#E7CFA0"/>
-              <stop offset="1" stop-color="#C98F45"/>
-            </radialGradient>
-          </defs>
-          <ellipse cx="200" cy="215" rx="170" ry="60" fill="#242424" opacity=".10"/>
-          <path d="M200 200 L200 40 A160 160 0 1 1 61 120 Z" fill="url(#rind)" stroke="#A23C2C" stroke-width="3"/>
-          <path d="M200 200 L61 120 A160 160 0 0 1 200 40 Z" fill="#145C3D" stroke="#A23C2C" stroke-width="3" stroke-dasharray="6 6"/>
-          <path d="M200 200 L61 120" stroke="#FCFBF7" stroke-width="2"/>
-          <path d="M200 200 L200 40" stroke="#FCFBF7" stroke-width="2"/>
-          <circle cx="140" cy="230" r="9" fill="#C98F45"/>
-          <circle cx="250" cy="260" r="6" fill="#C98F45"/>
-          <circle cx="215" cy="140" r="5" fill="#C98F45"/>
-          <circle cx="300" cy="200" r="8" fill="#C98F45"/>
-          <text x="118" y="112" font-family="Public Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#FCFBF7" letter-spacing="1.5">AGED 14 MO</text>
-        </svg>
-        <p class="m-0 mt-2 text-center text-[11px] font-semibold uppercase tracking-[.14em] text-mid">Soft-ripened · Alpine · Cheddar &amp; territorials · Blue · Washed-rind · Fresh</p>
-      </div>
+  <section class="on-ink" style="position:relative;overflow:hidden">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+    <div class="wrap section" style="position:relative;display:flex;flex-direction:column;gap:20px">
+      <span class="eyebrow eyebrow--yellow">Education</span>
+      <h1 class="display" style="max-width:18ch">A ladder, not a shelf of courses.</h1>
+      <p class="lede">Four rungs, in order. Each one assumes the one below it and each one means something specific on a résumé. Around them sit <strong>63 courses this year</strong> — single sessions, two-day workshops and cohort programs — that fill in the gaps between the rungs.</p>
+      <p class="lede" style="font-size:15px;opacity:.9">Cohorts are named for cheeses, not numbers: <strong>Brook</strong>, <strong>Meadow</strong>, <strong>Alpine</strong> and <strong>Birch</strong> run through the year, and people tend to stay in touch with the cohort they came up with.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="ladder-h">
-    <h2 id="ladder-h" class="font-display m-0 mb-6 text-[34px] font-extrabold tracking-tight">The credential ladder</h2>
-    <ol class="space-y-4">
+  <section class="wrap section" aria-labelledby="ladder-h" style="display:flex;flex-direction:column;gap:28px">
+    <h2 id="ladder-h" class="h2">The credential ladder</h2>
+    <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px">
 
-      <li class="rounded-2xl bg-clover p-6 md:p-8">
-        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <span class="font-display text-[13px] font-bold uppercase tracking-[.14em] text-pasture">Rung one · entry · 6 weeks</span>
+      <li class="card card--soft" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px;padding:30px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span class="eyebrow" style="font-size:11px">Rung one · entry · 6 weeks</span>
+          <h3 class="h3">Cheese Foundations Certificate</h3>
         </div>
-        <h3 class="font-display m-0 mt-2 text-[28px] font-bold leading-tight tracking-tight">Cheese Foundations Certificate</h3>
-        <p class="m-0 mt-3 max-w-[70ch] text-[15px] text-[#243027]">The entry credential, and the one we recommend to anyone who has been in the trade under two years. Six weeks covering milk composition — fat, protein, somatic cell counts and why the season changes all three — the cheese families and what separates them, sanitation as a daily practice rather than a document, and the vocabulary of affinage, so that when an affineur says the rind is slipping you know what has gone wrong and roughly when. It is deliberately broad. People finish it able to hold a conversation with a maker, a monger and an inspector.</p>
+        <p style="margin:0;font-size:15px;line-height:1.65">The entry credential, and the one we recommend to anyone who has been in the trade under two years. Six weeks covering milk composition — fat, protein, somatic cell counts and why the season changes all three — the cheese families and what separates them, sanitation as a daily practice rather than a document, and the vocabulary of affinage, so that when an affineur says the rind is slipping you know what has gone wrong and roughly when. It is deliberately broad. People finish it able to hold a conversation with a maker, a monger and an inspector.</p>
       </li>
 
-      <li class="rounded-2xl bg-pasture p-6 text-white md:p-8">
-        <span class="font-display text-[13px] font-bold uppercase tracking-[.14em] text-clover">Rung two · exam</span>
-        <h3 class="font-display m-0 mt-2 text-[28px] font-bold leading-tight tracking-tight">Certified Cheese Professional</h3>
-        <p class="m-0 mt-3 max-w-[70ch] text-[15px] opacity-95">The credential most members mean when they say "certified". It is an examination, not a course: you sit it when you are ready, and most candidates prepare for six to nine months. It tests retail and wholesale practice — ordering, rotation, margin, shrink, how to cut a wheel so the last sale is as good as the first — alongside sensory evaluation, where you are asked to taste blind and describe what you find in language another professional would recognize. Retailer-tier members get priority in the preparation cohorts.</p>
+      <li class="card card--ink" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px;padding:30px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span class="eyebrow" style="font-size:11px">Rung two · exam</span>
+          <h3 class="h3">Certified Cheese Professional</h3>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.65">The credential most members mean when they say "certified". It is an examination, not a course: you sit it when you are ready, and most candidates prepare for six to nine months. It tests retail and wholesale practice — ordering, rotation, margin, shrink, how to cut a wheel so the last sale is as good as the first — alongside sensory evaluation, where you are asked to taste blind and describe what you find in language another professional would recognize. Retailer-tier members get priority in the preparation cohorts.</p>
       </li>
 
-      <li class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6 md:p-8">
-        <span class="font-display text-[13px] font-bold uppercase tracking-[.14em] text-brick">Rung three · 8 weeks</span>
-        <h3 class="font-display m-0 mt-2 text-[28px] font-bold leading-tight tracking-tight">Food Safety &amp; HACCP Certificate</h3>
-        <p class="m-0 mt-3 max-w-[70ch] text-[15px] text-[#3A403C]">Eight weeks on hazards and the control points that catch them: where in your process a biological, chemical or physical hazard can enter, which steps are genuinely critical, what limits you set and what you do when a limit is missed. The final third of the course is the part people remember — defending the plan to an inspector. You present your own plan, someone plays the inspector, and you learn the difference between a plan that is correct and a plan you can explain under questioning.</p>
+      <li class="card" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px;padding:30px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span class="eyebrow" style="font-size:11px">Rung three · 8 weeks</span>
+          <h3 class="h3">Food Safety &amp; HACCP Certificate</h3>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:var(--body)">Eight weeks on hazards and the control points that catch them: where in your process a biological, chemical or physical hazard can enter, which steps are genuinely critical, what limits you set and what you do when a limit is missed. The final third of the course is the part people remember — defending the plan to an inspector. You present your own plan, someone plays the inspector, and you learn the difference between a plan that is correct and a plan you can explain under questioning.</p>
       </li>
 
-      <li class="rounded-2xl bg-brick p-6 text-white md:p-8">
-        <span class="font-display text-[13px] font-bold uppercase tracking-[.14em] text-clover">Rung four · cohort</span>
-        <h3 class="font-display m-0 mt-2 text-[28px] font-bold leading-tight tracking-tight">Advanced Affinage</h3>
-        <p class="m-0 mt-3 max-w-[70ch] text-[15px] opacity-95">The top rung, and the only one that runs strictly as a cohort, because it depends on people comparing caves. Cave management: airflow, shelving, turning schedules and what a cave can and cannot recover from. Humidity, held and lost, and the instruments that tell you the truth about it. Rind development across washed, bloomy and natural rinds, including the failures — the slip, the crack, the mite. Members bring their own wheels and their own problems; Henri Dubois, a Jura affineur, comes for one week a year and takes the cohort through his own caves.</p>
+      <li class="card" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px;padding:30px;background:var(--yellow);border-color:var(--yellow)">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span class="eyebrow eyebrow--ink" style="font-size:11px">Rung four · cohort</span>
+          <h3 class="h3">Advanced Affinage</h3>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.65">The top rung, and the only one that runs strictly as a cohort, because it depends on people comparing caves. Cave management: airflow, shelving, turning schedules and what a cave can and cannot recover from. Humidity, held and lost, and the instruments that tell you the truth about it. Rind development across washed, bloomy and natural rinds, including the failures — the slip, the crack, the mite. Members bring their own wheels and their own problems; Henri Dubois, a Jura affineur, comes for one week a year and takes the cohort through his own caves.</p>
       </li>
     </ol>
   </section>
 
-  <section class="border-y-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-12 md:px-10 nav:grid-cols-3">
-      <div>
-        <h2 class="font-display m-0 mb-2 text-2xl font-bold tracking-tight">63 courses this year</h2>
-        <p class="m-0 text-[15px] text-[#3A403C]">Between the rungs sit single sessions and workshops: pasta filata, wholesale negotiation, judging standards, apprenticeship, cave humidity in a hot summer. Members pay member rates; the catalog is published each January.</p>
+  <section class="on-paper rule-top">
+    <div class="wrap section grid" style="grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:36px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h2 class="h3" style="font-size:21px">63 courses this year</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Between the rungs sit single sessions and workshops: pasta filata, wholesale negotiation, judging standards, apprenticeship, cave humidity in a hot summer. Members pay member rates; the catalog is published each January.</p>
       </div>
-      <div>
-        <h2 class="font-display m-0 mb-2 text-2xl font-bold tracking-tight">Cohorts named for cheeses</h2>
-        <p class="m-0 text-[15px] text-[#3A403C]">Brook, Meadow, Alpine and Birch. A cohort is 18 to 24 people who start and finish together. Ask a member which cohort they were in and you will usually get a story rather than a date.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h2 class="h3" style="font-size:21px">Cohorts named for cheeses</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Brook, Meadow, Alpine and Birch. A cohort is 18 to 24 people who start and finish together. Ask a member which cohort they were in and you will usually get a story rather than a date.</p>
       </div>
-      <div>
-        <h2 class="font-display m-0 mb-2 text-2xl font-bold tracking-tight">What it costs</h2>
-        <p class="m-0 text-[15px] text-[#3A403C]">Every membership tier carries a discount on credential exams, from day one. <a href="./join.html" class="text-brick underline underline-offset-2">Compare the tiers</a> or <a href="./contact.html" class="text-brick underline underline-offset-2">ask Education Programs</a> which rung to start on.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h2 class="h3" style="font-size:21px">What it costs</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Every membership tier carries a discount on credential exams, from day one. <a href="./join.html">Compare the tiers</a> or <a href="./contact.html">ask Education Programs</a> which rung to start on.</p>
       </div>
     </div>
   </section>
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="prog-h">
-    <h2 id="prog-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Around the ladder: four program areas</h2>
-    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">The ladder is the part members see. It sits inside four programs that the committees run, and each one feeds the teaching: a standard has to be written before it can be taught, and a course is the fastest way to find out that a standard was written badly.</p>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Standards</p>
-        <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Classification and quality parameters</h3>
-        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">The family definitions, the analytical methods behind them, and the six competition category standards reviewed in public every year after judging. If you want to see the output rather than read about it, the <a href="./library.html" class="text-brick underline underline-offset-2">Cheese Library</a> and the <a href="./compete.html" class="text-brick underline underline-offset-2">category standards</a> are both open.</p>
+
+  <section class="wrap section" aria-labelledby="prog-h" style="display:flex;flex-direction:column;gap:12px">
+    <h2 id="prog-h" class="h2">Around the ladder: four program areas</h2>
+    <p style="margin:0 0 16px;max-width:62ch;font-size:15px;line-height:1.6;color:var(--body)">The ladder is the part members see. It sits inside four programs that the committees run, and each one feeds the teaching: a standard has to be written before it can be taught, and a course is the fastest way to find out that a standard was written badly.</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))">
+      <article class="card">
+        <span class="eyebrow" style="font-size:11px">Standards</span>
+        <h3 class="h3" style="font-size:22px">Classification and quality parameters</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">The family definitions, the analytical methods behind them, and the six competition category standards reviewed in public every year after judging. If you want to see the output rather than read about it, the <a href="./library.html">Cheese Library</a> and the <a href="./compete.html">category standards</a> are both open.</p>
       </article>
-      <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">Research</p>
-        <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Work commissioned to settle arguments</h3>
-        <p class="m-0 mt-3 text-[15px] text-[#3A403C]">Microbiology, flavor development, production efficiency and the four standing reports. Committees commission work when a question keeps coming back without an answer; the results end up in the curriculum within a year or two. <a href="./research.html" class="text-brick underline underline-offset-2">See what is published.</a></p>
+      <article class="card">
+        <span class="eyebrow" style="font-size:11px">Research</span>
+        <h3 class="h3" style="font-size:22px">Work commissioned to settle arguments</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Microbiology, flavor development, production efficiency and the four standing reports. Committees commission work when a question keeps coming back without an answer; the results end up in the curriculum within a year or two. <a href="./research.html">See what is published.</a></p>
       </article>
-      <article class="rounded-2xl bg-clover p-6">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-pasture">Capacity</p>
-        <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">Getting knowledge to where it is not</h3>
-        <p class="m-0 mt-3 text-[15px] text-[#243027]">Workshops in regions with few members, expert exchanges, mentorship, and the apprenticeship strand and fund that help a creamery train its next maker. What a maker knows is mostly undocumented and it leaves when they do; this is the program aimed squarely at that. <a href="./careers.html" class="text-pasture underline underline-offset-2">Routes in and mentoring.</a></p>
+      <article class="card card--soft">
+        <span class="eyebrow" style="font-size:11px">Capacity</span>
+        <h3 class="h3" style="font-size:22px">Getting knowledge to where it is not</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6">Workshops in regions with few members, expert exchanges, mentorship, and the apprenticeship strand and fund that help a creamery train its next maker. What a maker knows is mostly undocumented and it leaves when they do; this is the program aimed squarely at that. <a href="./careers.html">Routes in and mentoring.</a></p>
       </article>
-      <article class="rounded-2xl bg-pasture p-6 text-white">
-        <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover">Advocacy</p>
-        <h3 class="font-display m-0 mt-1 text-[22px] font-bold leading-tight tracking-tight">The rules that decide what you may make</h3>
-        <p class="m-0 mt-3 text-[15px] opacity-95">Raw-milk rules, labeling, tariffs, import lines and geographic protections. The Food Safety &amp; HACCP rung exists because members kept meeting these in an inspection rather than in a document. <a href="./advocacy.html" class="text-clover underline underline-offset-2">See the advocacy program.</a></p>
+      <article class="card card--ink">
+        <span class="eyebrow" style="font-size:11px">Advocacy</span>
+        <h3 class="h3" style="font-size:22px">The rules that decide what you may make</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6">Raw-milk rules, labeling, tariffs, import lines and geographic protections. The Food Safety &amp; HACCP rung exists because members kept meeting these in an inspection rather than in a document. <a href="./advocacy.html">See the advocacy program.</a></p>
       </article>
     </div>
   </section>
 
-  <section class="border-y-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="init-h">
-      <h2 id="init-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Current initiatives</h2>
-      <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Standing projects with a committee behind each one. Members can join any of them; three of the six started as a single member&rsquo;s complaint at a meetup.</p>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Alpine heritage</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Documenting high-altitude practice before the people who hold it retire. Summer transhumance makes, cooked-curd technique, and the cellar arithmetic of a wheel meant to last a winter.</p>
+  <section class="on-paper rule-top">
+    <div class="wrap section" aria-labelledby="init-h" style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
+        <h2 id="init-h" class="h2">Current initiatives</h2>
+        <span style="font-size:15px;color:var(--body)">Standing projects with a committee behind each one. Members can join any of them; three of the six started as a single member&rsquo;s complaint at a meetup.</span>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3 class="h3" style="font-size:19px">Alpine heritage</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Documenting high-altitude practice before the people who hold it retire. Summer transhumance makes, cooked-curd technique, and the cellar arithmetic of a wheel meant to last a winter.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Endangered styles registry</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">A running list of styles down to a handful of makers, with what is needed to keep each one alive. Feeds straight into the <a href="./library.html" class="text-brick underline underline-offset-2">Cheese Library</a> as entries are verified.</p>
+        <article class="card">
+          <h3 class="h3" style="font-size:19px">Endangered styles registry</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">A running list of styles down to a handful of makers, with what is needed to keep each one alive. Feeds straight into the <a href="./library.html">Cheese Library</a> as entries are verified.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Apprenticeship fund</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Helps a member creamery carry an apprentice through a first season, on the grounds that the barrier is rarely willingness and almost always cash flow in month four.</p>
+        <article class="card">
+          <h3 class="h3" style="font-size:19px">Apprenticeship fund</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Helps a member creamery carry an apprentice through a first season, on the grounds that the barrier is rarely willingness and almost always cash flow in month four.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Raw-milk practice</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Evidence on what makes a raw-milk make safe, assembled so that members and regulators are arguing about the same data. The single largest source of member questions.</p>
+        <article class="card">
+          <h3 class="h3" style="font-size:19px">Raw-milk practice</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Evidence on what makes a raw-milk make safe, assembled so that members and regulators are arguing about the same data. The single largest source of member questions.</p>
         </article>
-        <article class="rounded-2xl border-[1.5px] border-charcoal p-5">
-          <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Climate resilience</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#3A403C]">Hotter summers change the cave before they change the herd. Ripening schedules, cave engineering and seasonal make plans, gathered from members already adapting rather than modeled.</p>
+        <article class="card">
+          <h3 class="h3" style="font-size:19px">Climate resilience</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Hotter summers change the cave before they change the herd. Ripening schedules, cave engineering and seasonal make plans, gathered from members already adapting rather than modeled.</p>
         </article>
-        <article class="rounded-2xl bg-clover p-5">
-          <h3 class="font-display m-0 text-[19px] font-bold tracking-tight">Emerging regions</h3>
-          <p class="m-0 mt-2 text-[14px] text-[#243027]">Technical help and training where a cheese trade is being built rather than inherited. Runs on the virtual strand, which is the only reason it works at all.</p>
+        <article class="card">
+          <h3 class="h3" style="font-size:19px">Emerging regions</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Technical help and training where a cheese trade is being built rather than inherited. Runs on the virtual strand, which is the only reason it works at all.</p>
         </article>
       </div>
-      <p class="m-0 mt-6 text-[15px] text-[#3A403C]">To join one, ask for the committee that owns it through <a href="./contact.html" class="text-brick underline underline-offset-2">the contact page</a>. Certification questions are answered on the <a href="./faq-certifications.html" class="text-brick underline underline-offset-2">certifications FAQ</a>.</p>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">To join one, ask for the committee that owns it through <a href="./contact.html">the contact page</a>. Certification questions are answered on the <a href="./faq-certifications.html">certifications FAQ</a>.</p>
     </div>
   </section>
 </main>
-
-<footer class="bg-charcoal text-[#D9DBD4]">
-  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-    <div class="flex flex-wrap justify-between gap-10">
-      <div class="max-w-sm">
-        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
-          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+<footer class="site-footer">
+  <div class="holes holes--footer" aria-hidden="true"><span class="hole" style="left:6%;top:18%;width:48px;height:48px"></span><span class="hole" style="left:22%;top:70%;width:26px;height:26px"></span><span class="hole" style="left:58%;top:12%;width:34px;height:34px"></span><span class="hole" style="left:81%;top:64%;width:56px;height:56px"></span><span class="hole" style="left:93%;top:22%;width:20px;height:20px"></span></div>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <div class="brand brand--on-ink">
+          <img class="brand__mark" src="./assets/brand/mark-butter.svg" alt="" width="32" height="32">
+          <span class="brand__name">More Cheese</span>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
-        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+        <p>The International Cheese Federation · 1 Rind Lane, Lancaster, PA<br><a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a></p>
       </div>
-      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
-            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
-            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
-            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
-            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
-            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
-            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
-            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
-            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
-            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="site-footer__col"><span class="site-footer__head">Membership</span><a href="./join.html">Join</a><a href="./about.html">About the ICF</a><a href="./faq.html">FAQ</a><a href="./contact.html">Contact</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Programs</span><a href="./learn.html">Learn</a><a href="./compete.html">Compete</a><a href="./events.html">Events</a><a href="./advocacy.html">Advocacy</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Resources</span><a href="./library.html">Cheese Library</a><a href="./research.html">Research &amp; publications</a><a href="./careers.html">Careers &amp; volunteering</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Read</span><a href="./blog.html">Blog</a><a href="./faq.html">FAQ</a></div>
     </div>
-    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
-    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+    <p class="site-footer__legal">The International Cheese Federation (ICF) and More Cheese are entirely fictional. Demonstration content created for MemberJunction. © <span class="js-year">2026</span>.</p>
   </div>
 </footer>
-
+<!-- BETTY-WIDGET: the Betty launcher snippet is inserted here by the build once Colin allow-lists our origins -->
 </body>
 </html>
