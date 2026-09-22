@@ -5,292 +5,227 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ · More Cheese</title>
 <meta name="description" content="The FAQ hub: eight topics covering dues, benefits, renewals, certifications, events, publications, careers and governance, and the organization directory, plus the ten questions we are asked most.">
+<link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/brand/mark-cocoa.png">
+<meta property="og:site_name" content="More Cheese · The International Cheese Federation">
+<meta property="og:title" content="FAQ · More Cheese">
+<meta property="og:description" content="The FAQ hub: eight topics covering dues, benefits, renewals, certifications, events, publications, careers and governance, and the organization directory, plus the ten questions we are asked most.">
+<meta property="og:image" content="https://morecheese.org/assets/brand/share.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // One place to change the palette. A yellower variant is a change to these
-  // six values (plus `butter`, which is defined and deliberately unused today).
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          milk:     '#FCFBF7',
-          pasture:  '#145C3D',
-          clover:   '#C8E3A0',
-          brick:    '#A23C2C',
-          charcoal: '#242424',
-          mid:      '#5E6560',
-          butter:   '#EFC24A'
-        },
-        fontFamily: {
-          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
-          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
-        },
-        screens: { nav: '900px' }
-      }
-    }
-  };
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
 </head>
-<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+<body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip" href="#main">Skip to main content</a>
 
-<header class="relative border-b border-charcoal/15 bg-milk">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
-    <div class="flex items-center gap-2.5">
-      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-        <span class="logo-dot" aria-hidden="true"></span>More Cheese
-      </a>
-      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
-        <span class="mc-badge__dot" aria-hidden="true"></span>
-        <span class="mc-badge__long">Fictional demo</span>
-        <span class="mc-badge__short">Fiction</span>
-      </a>
-    </div>
-    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
-      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
-      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
-      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
-      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
-      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
-      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
-      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
-    </ul>
-    <div class="flex items-center gap-2">
-      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
-      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-    </div>
-  </nav>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="./index.html" class="brand" aria-label="More Cheese home">
+      <img class="brand__mark" src="./assets/brand/mark-cocoa.svg" alt="" width="34" height="34">
+      <span class="brand__name">More Cheese</span>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read why">Fictional demo</a>
+    </a>
+    <nav aria-label="Main" id="nav-menu" class="site-nav">
+      <a href="./about.html#fiction" class="mc-badge mc-badge--drawer js-fiction-link">Fictional demo</a>
+      <ul class="site-nav__list">
+        <li><a href="./join.html">Join</a></li>
+        <li><a href="./learn.html">Learn</a></li>
+        <li><a href="./library.html">Library</a></li>
+        <li><a href="./compete.html">Compete</a></li>
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li class="site-nav__more"><a href="./faq.html">FAQ</a></li>
+        <li class="site-nav__more"><a href="./contact.html">Contact</a></li>
+        <li class="site-nav__more"><a href="./careers.html">Careers</a></li>
+        <li class="site-nav__more"><a href="./research.html">Research</a></li>
+      </ul>
+      <a href="./join.html" class="btn btn-butter site-nav__cta">Become a member</a>
+    </nav>
+    <button type="button" id="nav-toggle" class="btn nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+  </div>
 </header>
 
 <main id="main">
-
-  <section class="border-b border-charcoal/15 bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
-      <p class="text-xs font-bold uppercase tracking-[.14em] text-brick">Help</p>
-      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">Questions we get weekly.</h1>
-      <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">Eighty-one answers across eight topics, plus the ten we are asked most. Start with a topic, or filter the quick answers below. If yours is not here, <a href="./contact.html" class="text-brick underline underline-offset-2">ask us</a>.</p>
+  <section class="on-ink" style="position:relative;overflow:hidden">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+    <div class="wrap section" style="position:relative;display:flex;flex-direction:column;gap:20px">
+      <span class="eyebrow eyebrow--yellow">Help</span>
+      <h1 class="display">Questions we get weekly.</h1>
+      <p class="lede">Eighty-one answers across eight topics, plus the ten we are asked most. Start with a topic, or filter the quick answers below. If yours is not here, <a href="./contact.html">ask us</a>.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="topics-h">
-    <h2 id="topics-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Browse by topic</h2>
-    <p class="m-0 mb-6 max-w-[62ch] text-[15px] text-mid">Each topic page carries its own filter box, so you can search inside it without scrolling.</p>
-    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 nav:grid-cols-4">
-        <a href="./faq-membership-dues.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#36;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Membership &amp; dues</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">What a membership costs, which tier fits, and how billing works.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+  <section class="wrap section" aria-labelledby="topics-h" style="display:flex;flex-direction:column;gap:12px">
+    <h2 id="topics-h" class="h2">Browse by topic</h2>
+    <p style="margin:0 0 16px;max-width:62ch;font-size:15px;line-height:1.6;color:var(--body)">Each topic page carries its own filter box, so you can search inside it without scrolling.</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:18px">
+        <a href="./faq-membership-dues.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Membership &amp; dues</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">What a membership costs, which tier fits, and how billing works.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-membership-benefits.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#10003;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Benefits &amp; services</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">What a membership actually gets you &mdash; and what it does not.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-membership-benefits.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Benefits &amp; services</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">What a membership actually gets you &mdash; and what it does not.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-renewals-account.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#8635;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Renewals &amp; your account</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">Renewal dates, covered staff, receipts and directory entries.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-renewals-account.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Renewals &amp; your account</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">Renewal dates, covered staff, receipts and directory entries.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-certifications.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#9733;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Certifications</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">The four rungs, the exam, reconfirmation and continuing education.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-certifications.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Certifications</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The four rungs, the exam, reconfirmation and continuing education.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-conferences-events.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#9634;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Conferences &amp; events</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">The October conference, the virtual strand and regional meetups.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-conferences-events.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Conferences &amp; events</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The October conference, the virtual strand and regional meetups.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-publications-resources.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#9776;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Publications &amp; resources</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">The Monday brief, the archive, research and sponsorship.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-publications-resources.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Publications &amp; resources</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The Monday brief, the archive, research and sponsorship.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-career-governance.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#9679;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Careers, committees &amp; governance</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">Vacancies, committee seats, the election, ethics and advocacy.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-career-governance.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Careers, committees &amp; governance</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">Vacancies, committee seats, the election, ethics and advocacy.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-organization-directory.html" class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-5 no-underline transition hover:bg-clover">
-          <span aria-hidden="true" class="font-display text-[20px] font-bold text-brick">&#9678;</span>
-          <h3 class="font-display m-0 mt-1 text-[19px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-2 flex-1 text-[14px] text-[#3A403C]">The organization directory, your entry, and which inbox to use.</p>
-          <span class="mt-3 text-[13px] font-bold text-pasture">Open topic &rarr;</span>
+        <a href="./faq-organization-directory.html" class="card" style="padding:24px;gap:8px">
+          <h3 class="h3" style="font-size:18px">Directory &amp; who to contact</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The organization directory, your entry, and which inbox to use.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
     </div>
   </section>
 
-  <section class="border-y-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto max-w-[78ch] px-5 py-12" aria-labelledby="quick-h">
-      <h2 id="quick-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">Quick answers</h2>
-      <p class="m-0 mb-6 text-[15px] text-mid">The ten we are asked most, each pointing on to the topic that covers it properly.</p>
-
-      <div class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <label for="faq-filter" class="font-display mb-1 block text-sm font-bold">Filter these questions</label>
-        <input id="faq-filter" type="search" autocomplete="off" placeholder="dues, renewal, exam, directory&hellip;"
-               class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-2.5 text-[15px]">
-        <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
-          <p id="faq-filter-count" class="m-0 text-sm font-semibold text-mid" role="status" aria-live="polite">10 questions on this page.</p>
-          <button id="faq-filter-clear" type="button" class="rounded-full border-[1.5px] border-charcoal px-5 py-2 text-sm font-semibold hover:bg-charcoal hover:text-milk">Clear</button>
+  <section class="on-paper rule-top">
+    <div class="wrap section" aria-labelledby="quick-h" style="max-width:820px;display:flex;flex-direction:column;gap:22px">
+      <h2 id="quick-h" class="h2">Quick answers</h2>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">The ten we are asked most, each pointing on to the topic that covers it properly.</p>
+      <div style="background:var(--cream);border:1.5px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px">
+        <label for="faq-filter" style="font-weight:700;font-size:14px">Filter these questions</label>
+        <input id="faq-filter" type="search" autocomplete="off" placeholder="dues, renewal, exam, directory&hellip;" style="width:100%;min-height:44px;font:inherit;font-size:15px;padding:10px 14px;border:1.5px solid var(--ink);border-radius:var(--rs);background:var(--paper);color:var(--ink)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px">
+          <p id="faq-filter-count" role="status" aria-live="polite" style="margin:0;font-size:14px;font-weight:600;color:var(--body)">10 questions on this page.</p>
+          <button id="faq-filter-clear" type="button" class="btn btn-outline">Clear</button>
         </div>
-        <noscript>
-          <p class="m-0 mt-3 rounded-xl border-[1.5px] border-brick px-4 py-2 text-sm text-brick">Filtering needs JavaScript. Every question is listed below.</p>
-        </noscript>
+        <noscript><p style="margin:0;font-size:14px;color:var(--body)">Filtering needs JavaScript. Every question is listed below.</p></noscript>
       </div>
-
-      <div class="mt-6 space-y-3">
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What do membership dues cost, and what decides my tier?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Individual is $170 a year, Creamery $480, Retailer $390 and Affiliate $260. The tier is decided by what your organization does, not by its size: Creamery if you make cheese, Retailer if you sell it at counter or wholesale, Affiliate if you supply the trade as a supplier, laboratory or distributor, and Individual if the membership is yours rather than an employer&rsquo;s.</p>
-          <p class="m-0">Creamery covers up to 6 staff and Retailer up to 4 under the one membership. <a href="./join.html" class="text-brick underline underline-offset-2">The full rate card is on the Join page</a>, and the detail is in <a href="./faq-membership-dues.html" class="text-brick underline underline-offset-2">Membership &amp; dues</a>.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">When am I billed, and how does renewal work?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Dues are annual and billed on your join date, so your membership year runs from the day you joined rather than from January. Auto-renew is optional. With it on, we take the dues on the anniversary; with it off, we send a renewal notice 30 days before and a reminder at 7 days.</p>
-          <p class="m-0">You can switch auto-renew, change the card and download receipts from your account at any time. More in <a href="./faq-renewals-account.html" class="text-brick underline underline-offset-2">Renewals &amp; your account</a>.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Can I change tier, pause, or get help if the business is struggling?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Move up at any time and we bill the difference, prorated to your renewal date. Move down at renewal. We do not pause memberships, because a paused member stops receiving the brief and the archive, which is usually the opposite of what they need.</p>
-          <p class="m-0">Since 2025 the board has offered hardship dues for members whose creamery has closed or is close to it. Write to Membership Operations; the conversation is confidential and the answer is usually yes.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Who can use my organization&rsquo;s membership?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0">A Creamery membership covers up to 6 staff and a Retailer membership up to 4. Each covered person gets their own account, their own brief and their own member rate on courses and events; the organization gets one vote. Adding or swapping a name is a note to Membership Operations, not a new invoice. Affiliate and Individual memberships cover one person each.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Which certification should I start with?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The ladder runs Cheese Foundations Certificate &rarr; Certified Cheese Professional &rarr; Food Safety &amp; HACCP Certificate &rarr; Advanced Affinage, and each rung assumes the one below it. Under two years in the trade, start with Foundations: six weeks on milk composition, the cheese families, sanitation and the vocabulary of affinage.</p>
-          <p class="m-0">If you are behind a counter and already fluent, go straight to the Certified Cheese Professional exam &mdash; most candidates prepare for six to nine months. <a href="./learn.html" class="text-brick underline underline-offset-2">See the whole ladder</a>, or read <a href="./faq-certifications.html" class="text-brick underline underline-offset-2">Certifications</a>.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Do certifications expire, and do members pay less?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The certificates do not expire. The Certified Cheese Professional credential is reconfirmed every five years, either by sitting the current exam or by logging continuing education from the course catalog &mdash; most people choose the second.</p>
-          <p class="m-0">Every membership tier carries a discount on credential exams from the day you join, and members pay member rates on all 63 courses this year.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What happens at the Annual Conference, and is anything online?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The conference runs for three days in October: competition results with the score sheets on the tables, a public review of the six category standards, the member organization floor, the hands-on sessions, and the governance &mdash; the annual election and the committee reports. Early-bird registration closes 30 September.</p>
-          <p class="m-0">Plenty is online. The virtual symposium began in 2021 as a stopgap and stayed; webinars and sessions run year-round and recordings live in the members&rsquo; archive. <a href="./events.html" class="text-brick underline underline-offset-2">See the notice board.</a></p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What do you publish, and can non-members read it?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The Monday brief goes to every member each week: prices, policy movement, and what other members are doing. Members also get the full brief archive, the competition score sheets, everything the Federation has filed in a comment period, and the session recordings.</p>
-          <p class="m-0">The blog is open to anyone, and so is the <a href="./library.html" class="text-brick underline underline-offset-2">Cheese Library</a>. The archive, the score sheets and the recordings are for members. Reports are on the <a href="./research.html" class="text-brick underline underline-offset-2">research page</a>.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How does the organization directory work?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">All 641 member organizations across 41 countries are listed and searchable by what they do and where they are &mdash; creameries, shops and wholesale buyers, laboratories and distributors. Creamery members also appear in the buyers&rsquo; directory, which is the listing buyers actually shop from.</p>
-          <p class="m-0">You control your own entry. Ask Membership Operations to correct it, expand it, or take it down.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How is the Federation governed, and how do I get involved?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Every membership carries one vote, whatever it costs, and the annual election is announced at the October conference. Six committees do most of the work: Standards, Food Safety, Education, Events, Membership and Advocacy. Seats are open to members, not reserved for the board, and an Individual membership includes one.</p>
-          <p class="m-0">For careers, the <a href="./careers.html" class="text-brick underline underline-offset-2">careers page</a> collects member vacancies, the apprenticeship strand and every volunteer role. Ask Membership Operations for a committee seat &mdash; the committees that need people are usually the ones nobody thinks to ask about.</p>
-        </div>
-      </details>
+      <div class="js-faq-group" style="display:flex;flex-direction:column;gap:10px">
+        <details class="faq-q js-faq-item">
+          <summary>What do membership dues cost, and what decides my tier?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Individual is $170 a year, Creamery $480, Retailer $390 and Affiliate $260. The tier is decided by what your organization does, not by its size: Creamery if you make cheese, Retailer if you sell it at counter or wholesale, Affiliate if you supply the trade as a supplier, laboratory or distributor, and Individual if the membership is yours rather than an employer&rsquo;s.</p>
+            <p style="margin:0">Creamery covers up to 6 staff and Retailer up to 4 under the one membership. <a href="./join.html">The full rate card is on the Join page</a>, and the detail is in <a href="./faq-membership-dues.html">Membership &amp; dues</a>.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>When am I billed, and how does renewal work?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Dues are annual and billed on your join date, so your membership year runs from the day you joined rather than from January. Auto-renew is optional. With it on, we take the dues on the anniversary; with it off, we send a renewal notice 30 days before and a reminder at 7 days.</p>
+            <p style="margin:0">You can switch auto-renew, change the card and download receipts from your account at any time. More in <a href="./faq-renewals-account.html">Renewals &amp; your account</a>.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Can I change tier, pause, or get help if the business is struggling?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Move up at any time and we bill the difference, prorated to your renewal date. Move down at renewal. We do not pause memberships, because a paused member stops receiving the brief and the archive, which is usually the opposite of what they need.</p>
+            <p style="margin:0">Since 2025 the board has offered hardship dues for members whose creamery has closed or is close to it. Write to Membership Operations; the conversation is confidential and the answer is usually yes.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Who can use my organization&rsquo;s membership?</summary>
+          <div class="faq-a">
+            <p style="margin:0">A Creamery membership covers up to 6 staff and a Retailer membership up to 4. Each covered person gets their own account, their own brief and their own member rate on courses and events; the organization gets one vote. Adding or swapping a name is a note to Membership Operations, not a new invoice. Affiliate and Individual memberships cover one person each.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Which certification should I start with?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">The ladder runs Cheese Foundations Certificate &rarr; Certified Cheese Professional &rarr; Food Safety &amp; HACCP Certificate &rarr; Advanced Affinage, and each rung assumes the one below it. Under two years in the trade, start with Foundations: six weeks on milk composition, the cheese families, sanitation and the vocabulary of affinage.</p>
+            <p style="margin:0">If you are behind a counter and already fluent, go straight to the Certified Cheese Professional exam &mdash; most candidates prepare for six to nine months. <a href="./learn.html">See the whole ladder</a>, or read <a href="./faq-certifications.html">Certifications</a>.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Do certifications expire, and do members pay less?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">The certificates do not expire. The Certified Cheese Professional credential is reconfirmed every five years, either by sitting the current exam or by logging continuing education from the course catalog &mdash; most people choose the second.</p>
+            <p style="margin:0">Every membership tier carries a discount on credential exams from the day you join, and members pay member rates on all 63 courses this year.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>What happens at the Annual Conference, and is anything online?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">The conference runs for three days in October: competition results with the score sheets on the tables, a public review of the six category standards, the member organization floor, the hands-on sessions, and the governance &mdash; the annual election and the committee reports. Early-bird registration closes 30 September.</p>
+            <p style="margin:0">Plenty is online. The virtual symposium began in 2021 as a stopgap and stayed; webinars and sessions run year-round and recordings live in the members&rsquo; archive. <a href="./events.html">See the notice board.</a></p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>What do you publish, and can non-members read it?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">The Monday brief goes to every member each week: prices, policy movement, and what other members are doing. Members also get the full brief archive, the competition score sheets, everything the Federation has filed in a comment period, and the session recordings.</p>
+            <p style="margin:0">The blog is open to anyone, and so is the <a href="./library.html">Cheese Library</a>. The archive, the score sheets and the recordings are for members. Reports are on the <a href="./research.html">research page</a>.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>How does the organization directory work?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">All 641 member organizations across 41 countries are listed and searchable by what they do and where they are &mdash; creameries, shops and wholesale buyers, laboratories and distributors. Creamery members also appear in the buyers&rsquo; directory, which is the listing buyers actually shop from.</p>
+            <p style="margin:0">You control your own entry. Ask Membership Operations to correct it, expand it, or take it down.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>How is the Federation governed, and how do I get involved?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Every membership carries one vote, whatever it costs, and the annual election is announced at the October conference. Six committees do most of the work: Standards, Food Safety, Education, Events, Membership and Advocacy. Seats are open to members, not reserved for the board, and an Individual membership includes one.</p>
+            <p style="margin:0">For careers, the <a href="./careers.html">careers page</a> collects member vacancies, the apprenticeship strand and every volunteer role. Ask Membership Operations for a committee seat &mdash; the committees that need people are usually the ones nobody thinks to ask about.</p>
+          </div>
+        </details>
       </div>
-
-      <p id="faq-filter-empty" hidden class="mt-6 rounded-2xl border-[1.5px] border-brick bg-milk p-6 text-center text-[15px] text-brick">
-        None of the quick answers match that. Try one of the eight topic pages above, or <a href="./contact.html" class="underline underline-offset-2">write to Member Services</a>.
-      </p>
+      <p id="faq-filter-empty" hidden style="margin:0;border:1.5px solid var(--butter);background:var(--soft);border-radius:var(--rs);padding:20px;text-align:center;font-size:15px;line-height:1.6;color:var(--ink)">None of the quick answers match that. Try one of the eight topic pages above, or <a href="./contact.html">write to Member Services</a>.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-14 md:px-10">
-    <div class="rounded-2xl bg-pasture px-6 py-10 text-center text-white md:px-12">
-      <h2 class="font-display m-0 text-[clamp(26px,4vw,40px)] font-extrabold leading-[1] tracking-tight">Still not answered?</h2>
-      <p class="mx-auto mt-3 max-w-[54ch] text-[17px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page.</p>
-      <a href="./contact.html" class="mt-6 inline-block rounded-full bg-milk px-7 py-3.5 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
-    </div>
+  <section class="wrap section">
+    <div class="on-ink" style="position:relative;overflow:hidden;border-radius:var(--r);padding:clamp(32px,4vw,48px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:14px">
+        <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+        <h2 class="h2" style="position:relative;font-size:26px">Still not answered?</h2>
+        <p class="lede" style="position:relative;font-size:15px;max-width:58ch">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a>, or use the inquiry page.</p>
+        <a href="./contact.html" class="btn btn-butter" style="position:relative;align-self:flex-start">Contact the Federation</a>
+      </div>
   </section>
 </main>
-
-<footer class="bg-charcoal text-[#D9DBD4]">
-  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-    <div class="flex flex-wrap justify-between gap-10">
-      <div class="max-w-sm">
-        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
-          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+<footer class="site-footer">
+  <div class="holes holes--footer" aria-hidden="true"><span class="hole" style="left:6%;top:18%;width:48px;height:48px"></span><span class="hole" style="left:22%;top:70%;width:26px;height:26px"></span><span class="hole" style="left:58%;top:12%;width:34px;height:34px"></span><span class="hole" style="left:81%;top:64%;width:56px;height:56px"></span><span class="hole" style="left:93%;top:22%;width:20px;height:20px"></span></div>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <div class="brand brand--on-ink">
+          <img class="brand__mark" src="./assets/brand/mark-butter.svg" alt="" width="32" height="32">
+          <span class="brand__name">More Cheese</span>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
-        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+        <p>The International Cheese Federation · 1 Rind Lane, Lancaster, PA<br><a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a></p>
       </div>
-      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
-            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
-            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
-            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
-            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
-            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
-            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
-            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
-            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
-            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="site-footer__col"><span class="site-footer__head">Membership</span><a href="./join.html">Join</a><a href="./about.html">About the ICF</a><a href="./faq.html">FAQ</a><a href="./contact.html">Contact</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Programs</span><a href="./learn.html">Learn</a><a href="./compete.html">Compete</a><a href="./events.html">Events</a><a href="./advocacy.html">Advocacy</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Resources</span><a href="./library.html">Cheese Library</a><a href="./research.html">Research &amp; publications</a><a href="./careers.html">Careers &amp; volunteering</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Read</span><a href="./blog.html">Blog</a><a href="./faq.html">FAQ</a></div>
     </div>
-    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
-    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+    <p class="site-footer__legal">The International Cheese Federation (ICF) and More Cheese are entirely fictional. Demonstration content created for MemberJunction. © <span class="js-year">2026</span>.</p>
   </div>
 </footer>
-
+<!-- BETTY-WIDGET: the Betty launcher snippet is inserted here by the build once Colin allow-lists our origins -->
 </body>
 </html>

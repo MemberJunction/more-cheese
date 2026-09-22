@@ -30,32 +30,33 @@
 // the old URL (search engines, the Knowledge Hub crawler's seed list, bookmarks)
 // pointing at one address rather than two.
 const LEGACY_PAGES = {
-    '/join/': '/join.html',
-    '/learn/': '/learn.html',
-    '/library/': '/library.html',
-    '/compete/': '/compete.html',
-    '/events/': '/events.html',
-    '/advocacy/': '/advocacy.html',
-    '/about/': '/about.html',
-    '/faq/': '/faq.html',
-    '/research/': '/research.html',
-    '/careers/': '/careers.html',
-    '/contact/': '/contact.html',
-    '/faq/membership-dues/': '/faq-membership-dues.html',
-    '/faq/membership-benefits/': '/faq-membership-benefits.html',
-    '/faq/renewals-account/': '/faq-renewals-account.html',
-    '/faq/certifications/': '/faq-certifications.html',
-    '/faq/conferences-events/': '/faq-conferences-events.html',
-    '/faq/publications-resources/': '/faq-publications-resources.html',
-    '/faq/career-governance/': '/faq-career-governance.html',
-    '/faq/organization-directory/': '/faq-organization-directory.html',
+    // The old flat addresses (`/join.html`, `/faq-membership-dues.html`) — 19 of them, still linked from
+    // the WordPress era and from search results — now redirect to the pretty URLs the build publishes.
+    '/join.html': '/join/',
+    '/learn.html': '/learn/',
+    '/library.html': '/library/',
+    '/compete.html': '/compete/',
+    '/events.html': '/events/',
+    '/advocacy.html': '/advocacy/',
+    '/about.html': '/about/',
+    '/faq.html': '/faq/',
+    '/research.html': '/research/',
+    '/careers.html': '/careers/',
+    '/contact.html': '/contact/',
+    '/faq-membership-dues.html': '/faq/membership-dues/',
+    '/faq-membership-benefits.html': '/faq/membership-benefits/',
+    '/faq-renewals-account.html': '/faq/renewals-account/',
+    '/faq-certifications.html': '/faq/certifications/',
+    '/faq-conferences-events.html': '/faq/conferences-events/',
+    '/faq-publications-resources.html': '/faq/publications-resources/',
+    '/faq-career-governance.html': '/faq/career-governance/',
+    '/faq-organization-directory.html': '/faq/organization-directory/',
 };
-
-// Retired at the WordPress cutover and kept retired here.
 const RETIRED = {
-    '/faq/cheese-education/': '/library.html',
-    '/programs/': '/learn.html',
-    '/about-page/': '/about.html',
+    '/faq/cheese-education/': '/library/',
+    '/programs/': '/learn/',
+    '/about-page/': '/about/',
+    '/blog.html': '/blog/',
 };
 
 export function staticWebAppConfig() {

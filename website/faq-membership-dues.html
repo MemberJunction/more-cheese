@@ -3,278 +3,231 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Membership & dues · FAQ · More Cheese</title>
+<title>Membership &amp; dues · FAQ · More Cheese</title>
 <meta name="description" content="What a membership costs, which tier fits, and how billing works.">
+<link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/brand/mark-cocoa.png">
+<meta property="og:site_name" content="More Cheese · The International Cheese Federation">
+<meta property="og:title" content="Membership &amp; dues · FAQ · More Cheese">
+<meta property="og:description" content="What a membership costs, which tier fits, and how billing works.">
+<meta property="og:image" content="https://morecheese.org/assets/brand/share.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // One place to change the palette. A yellower variant is a change to these
-  // six values (plus `butter`, which is defined and deliberately unused today).
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          milk:     '#FCFBF7',
-          pasture:  '#145C3D',
-          clover:   '#C8E3A0',
-          brick:    '#A23C2C',
-          charcoal: '#242424',
-          mid:      '#5E6560',
-          butter:   '#EFC24A'
-        },
-        fontFamily: {
-          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
-          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
-        },
-        screens: { nav: '900px' }
-      }
-    }
-  };
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
 </head>
-<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+<body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip" href="#main">Skip to main content</a>
 
-<header class="relative border-b border-charcoal/15 bg-milk">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
-    <div class="flex items-center gap-2.5">
-      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-        <span class="logo-dot" aria-hidden="true"></span>More Cheese
-      </a>
-      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
-        <span class="mc-badge__dot" aria-hidden="true"></span>
-        <span class="mc-badge__long">Fictional demo</span>
-        <span class="mc-badge__short">Fiction</span>
-      </a>
-    </div>
-    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
-      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
-      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
-      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
-      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
-      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
-      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
-      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
-    </ul>
-    <div class="flex items-center gap-2">
-      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
-      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-    </div>
-  </nav>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="./index.html" class="brand" aria-label="More Cheese home">
+      <img class="brand__mark" src="./assets/brand/mark-cocoa.svg" alt="" width="34" height="34">
+      <span class="brand__name">More Cheese</span>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read why">Fictional demo</a>
+    </a>
+    <nav aria-label="Main" id="nav-menu" class="site-nav">
+      <a href="./about.html#fiction" class="mc-badge mc-badge--drawer js-fiction-link">Fictional demo</a>
+      <ul class="site-nav__list">
+        <li><a href="./join.html">Join</a></li>
+        <li><a href="./learn.html">Learn</a></li>
+        <li><a href="./library.html">Library</a></li>
+        <li><a href="./compete.html">Compete</a></li>
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li class="site-nav__more"><a href="./faq.html">FAQ</a></li>
+        <li class="site-nav__more"><a href="./contact.html">Contact</a></li>
+        <li class="site-nav__more"><a href="./careers.html">Careers</a></li>
+        <li class="site-nav__more"><a href="./research.html">Research</a></li>
+      </ul>
+      <a href="./join.html" class="btn btn-butter site-nav__cta">Become a member</a>
+    </nav>
+    <button type="button" id="nav-toggle" class="btn nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+  </div>
 </header>
 
 <main id="main">
-
-  <section class="border-b border-charcoal/15 bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
-      <p class="m-0 text-sm"><a href="./faq.html" class="text-brick underline underline-offset-2">&larr; All FAQ topics</a></p>
-      <p class="mt-4 text-xs font-bold uppercase tracking-[.14em] text-brick">FAQ &middot; Membership &amp; dues</p>
-      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[20ch] text-[clamp(34px,4.8vw,60px)] font-extrabold leading-[0.96] tracking-tight text-pasture">What it costs, and which tier fits.</h1>
-      <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">Four tiers, one federation, and a billing model with no small print. If your question is about renewals rather than joining, it is on the <a href="./faq-renewals-account.html" class="text-brick underline underline-offset-2">renewals and account page</a>.</p>
+  <section class="on-ink" style="position:relative;overflow:hidden">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+    <div class="wrap section" style="position:relative;display:flex;flex-direction:column;gap:18px">
+      <p style="margin:0;font-size:14px"><a href="./faq.html">&larr; All FAQ topics</a></p>
+      <span class="eyebrow eyebrow--yellow">FAQ &middot; Membership &amp; dues</span>
+      <h1 class="display" style="max-width:20ch">What it costs, and which tier fits.</h1>
+      <p class="lede">Four tiers, one federation, and a billing model with no small print. If your question is about renewals rather than joining, it is on the <a href="./faq-renewals-account.html">renewals and account page</a>.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-[78ch] px-5 py-10">
-    <div class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-      <label for="faq-filter" class="font-display mb-1 block text-sm font-bold">Filter these questions</label>
-      <input id="faq-filter" type="search" autocomplete="off" placeholder="dues, renewal, exam, directory&hellip;"
-             class="w-full rounded-xl border-[1.5px] border-charcoal bg-milk px-4 py-2.5 text-[15px]">
-      <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
-        <p id="faq-filter-count" class="m-0 text-sm font-semibold text-mid" role="status" aria-live="polite">10 questions on this page.</p>
-        <button id="faq-filter-clear" type="button" class="rounded-full border-[1.5px] border-charcoal px-5 py-2 text-sm font-semibold hover:bg-charcoal hover:text-milk">Clear</button>
+  <section class="wrap section" style="max-width:820px;display:flex;flex-direction:column;gap:36px">
+    <div style="background:var(--cream);border:1.5px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px">
+        <label for="faq-filter" style="font-weight:700;font-size:14px">Filter these questions</label>
+        <input id="faq-filter" type="search" autocomplete="off" placeholder="dues, renewal, exam, directory&hellip;" style="width:100%;min-height:44px;font:inherit;font-size:15px;padding:10px 14px;border:1.5px solid var(--ink);border-radius:var(--rs);background:var(--paper);color:var(--ink)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px">
+          <p id="faq-filter-count" role="status" aria-live="polite" style="margin:0;font-size:14px;font-weight:600;color:var(--body)">10 questions on this page.</p>
+          <button id="faq-filter-clear" type="button" class="btn btn-outline">Clear</button>
+        </div>
+        <noscript><p style="margin:0;font-size:14px;color:var(--body)">Filtering needs JavaScript. Every question is listed below.</p></noscript>
       </div>
-      <noscript>
-        <p class="m-0 mt-3 rounded-xl border-[1.5px] border-brick px-4 py-2 text-sm text-brick">Filtering needs JavaScript. Every question is listed below.</p>
-      </noscript>
-    </div>
 
-    <section class="js-faq-group mb-8" aria-labelledby="g-cost">
-      <h2 id="g-cost" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">Cost and tiers</h2>
-      <div class="space-y-3">
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What do membership dues cost?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Four tiers, all annual. <b>Individual</b> is $170 a year, <b>Creamery</b> $480, <b>Retailer</b> $390 and <b>Affiliate</b> $260. There is no joining fee and no monthly plan &mdash; one payment covers twelve months.</p>
-          <p class="m-0">Every tier carries the same vote, the same weekly brief, the same archive and the same discount on credential exams. What changes between tiers is how many people at your organization the membership covers and which extras come with it. The full rate card is on the <a href="./join.html" class="text-brick underline underline-offset-2">Join page</a>.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Which tier am I?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">The tier follows what your organization does, not how big it is. <b>Creamery</b> if you make cheese, from a two-vat farmstead to a regional plant. <b>Retailer</b> if you sell it, at a counter or into wholesale. <b>Affiliate</b> if you supply the trade &mdash; suppliers, laboratories, distributors, consultants. <b>Individual</b> if the membership is yours rather than an employer&rsquo;s.</p>
-          <p class="m-0">A farmstead creamery with a shop attached should join as a Creamery: the cheaper of two applicable tiers is not the rule, the primary activity is. If you genuinely cannot tell, say what you do in an email to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> and someone will place you.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Is there a student or early-career rate?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">There is no separate student tier. The Individual tier is set at $170 partly so that it works for someone still training, and it is the tier most students, apprentices and people between jobs join on.</p>
-          <p class="m-0">It carries the same credential discount as every other tier, which is the part that matters if you are working up the ladder. Education Programs also holds a small number of course places each year for members in their first two years in the trade; ask, because they are not advertised.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">We are a team of five. Do we need five memberships?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">No. A <b>Creamery</b> membership covers up to six staff and a <b>Retailer</b> membership up to four, under the one payment. Each covered person gets their own account, their own copy of the brief and their own member rate on courses and events. The organization gets one vote.</p>
-          <p class="m-0">Adding or swapping a name is a note to Membership Operations, not a new invoice. If you need to cover more people than the tier allows, write to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> &mdash; the answer is usually a second membership at the same rate rather than a bespoke deal.</p>
-        </div>
-      </details>
+    <section class="js-faq-group" aria-labelledby="g-cost">
+      <h2 id="g-cost" class="h2" style="font-size:26px;margin:0 0 14px">Cost and tiers</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <details class="faq-q js-faq-item">
+          <summary>What do membership dues cost?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Four tiers, all annual. <b>Individual</b> is $170 a year, <b>Creamery</b> $480, <b>Retailer</b> $390 and <b>Affiliate</b> $260. There is no joining fee and no monthly plan &mdash; one payment covers twelve months.</p>
+            <p style="margin:0">Every tier carries the same vote, the same weekly brief, the same archive and the same discount on credential exams. What changes between tiers is how many people at your organization the membership covers and which extras come with it. The full rate card is on the <a href="./join.html">Join page</a>.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Which tier am I?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">The tier follows what your organization does, not how big it is. <b>Creamery</b> if you make cheese, from a two-vat farmstead to a regional plant. <b>Retailer</b> if you sell it, at a counter or into wholesale. <b>Affiliate</b> if you supply the trade &mdash; suppliers, laboratories, distributors, consultants. <b>Individual</b> if the membership is yours rather than an employer&rsquo;s.</p>
+            <p style="margin:0">A farmstead creamery with a shop attached should join as a Creamery: the cheaper of two applicable tiers is not the rule, the primary activity is. If you genuinely cannot tell, say what you do in an email to <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a> and someone will place you.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Is there a student or early-career rate?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">There is no separate student tier. The Individual tier is set at $170 partly so that it works for someone still training, and it is the tier most students, apprentices and people between jobs join on.</p>
+            <p style="margin:0">It carries the same credential discount as every other tier, which is the part that matters if you are working up the ladder. Education Programs also holds a small number of course places each year for members in their first two years in the trade; ask, because they are not advertised.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>We are a team of five. Do we need five memberships?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">No. A <b>Creamery</b> membership covers up to six staff and a <b>Retailer</b> membership up to four, under the one payment. Each covered person gets their own account, their own copy of the brief and their own member rate on courses and events. The organization gets one vote.</p>
+            <p style="margin:0">Adding or swapping a name is a note to Membership Operations, not a new invoice. If you need to cover more people than the tier allows, write to <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a> &mdash; the answer is usually a second membership at the same rate rather than a bespoke deal.</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <section class="js-faq-group mb-8" aria-labelledby="g-billing">
-      <h2 id="g-billing" class="font-display m-0 mb-4 text-[26px] font-extrabold tracking-tight text-pasture">Billing, refunds and hardship</h2>
-      <div class="space-y-3">
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">If we join in August, do we pay a full year?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Yes, and you get a full year. Dues are billed on your join date and your membership year runs from that day, not from January. Join in August and you renew in August.</p>
-          <p class="m-0">That is deliberate: it means nobody buys a part-year, and nobody has to work out a proration. It also means the renewal reminders land at the same point in your year every year.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Is there a joining fee, and what if I am rejoining?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">No joining fee, and no reinstatement fee for coming back. Former members rejoin at the current rate for their tier.</p>
-          <p class="m-0">Your record comes back with you &mdash; credentials held, courses completed, cohort, competition entries and the years you were a member. If it does not appear within a day or two of rejoining, tell <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a> and they will reattach it.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Can I get a refund if it turns out not to be a fit?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Dues are not refundable once a membership is active, because the brief, the archive and the member rates are available from the first day. That is the plain answer and it is worth knowing before you join.</p>
-          <p class="m-0">The exception is circumstance rather than second thoughts: if something has happened &mdash; a closure, an illness, a business that folded three weeks after joining &mdash; write to <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a>. Those are read by a person, not a policy, and they are usually resolved in the member&rsquo;s favor.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">How do we pay, and can we be invoiced?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Card or bank transfer. If your organization needs a purchase order, a formal invoice or payment in a currency other than US dollars, ask <a href="mailto:finance@morecheese.org" class="text-brick underline underline-offset-2">finance@morecheese.org</a> and they will set it up before the membership starts rather than after.</p>
-          <p class="m-0">Members outside the United States pay the same dues in the same currency; there is no international surcharge and no separate international tier. A third of the membership is outside North America.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">What if the business cannot afford dues this year?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">Ask. Since 2025 the board has offered hardship dues for members whose creamery has closed, is close to closing, or has had a year that makes $480 an unreasonable ask.</p>
-          <p class="m-0">Write to Membership Operations at <a href="mailto:memberservices@morecheese.org" class="text-brick underline underline-offset-2">memberservices@morecheese.org</a>. The conversation is confidential, it does not go to a committee, it does not affect your standing or your credentials, and the answer is usually yes. A member who drops out stops getting the brief and the archive, which is the opposite of what someone in that position needs.</p>
-        </div>
-      </details>
-      <details class="js-faq-item rounded-2xl border-[1.5px] border-charcoal bg-milk p-5">
-        <summary class="font-display cursor-pointer text-lg font-bold tracking-tight">Are dues a deductible business expense?</summary>
-        <div class="mt-3 text-[15px] text-[#3A403C]">
-          <p class="m-0 mb-2">In most places professional association dues are an ordinary business expense, but we are not in a position to advise on your tax position and we will not pretend otherwise &mdash; ask your own accountant.</p>
-          <p class="m-0">What we can give you is the paperwork: a dated receipt for every payment, an invoice in your organization&rsquo;s name if you need one for a purchase ledger, and a letter confirming the membership term and standing. All three come from <a href="mailto:finance@morecheese.org" class="text-brick underline underline-offset-2">finance@morecheese.org</a>.</p>
-        </div>
-      </details>
+    <section class="js-faq-group" aria-labelledby="g-billing">
+      <h2 id="g-billing" class="h2" style="font-size:26px;margin:0 0 14px">Billing, refunds and hardship</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <details class="faq-q js-faq-item">
+          <summary>If we join in August, do we pay a full year?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Yes, and you get a full year. Dues are billed on your join date and your membership year runs from that day, not from January. Join in August and you renew in August.</p>
+            <p style="margin:0">That is deliberate: it means nobody buys a part-year, and nobody has to work out a proration. It also means the renewal reminders land at the same point in your year every year.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Is there a joining fee, and what if I am rejoining?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">No joining fee, and no reinstatement fee for coming back. Former members rejoin at the current rate for their tier.</p>
+            <p style="margin:0">Your record comes back with you &mdash; credentials held, courses completed, cohort, competition entries and the years you were a member. If it does not appear within a day or two of rejoining, tell <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a> and they will reattach it.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Can I get a refund if it turns out not to be a fit?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Dues are not refundable once a membership is active, because the brief, the archive and the member rates are available from the first day. That is the plain answer and it is worth knowing before you join.</p>
+            <p style="margin:0">The exception is circumstance rather than second thoughts: if something has happened &mdash; a closure, an illness, a business that folded three weeks after joining &mdash; write to <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a>. Those are read by a person, not a policy, and they are usually resolved in the member&rsquo;s favor.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>How do we pay, and can we be invoiced?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Card or bank transfer. If your organization needs a purchase order, a formal invoice or payment in a currency other than US dollars, ask <a href="mailto:finance@morecheese.org">finance@morecheese.org</a> and they will set it up before the membership starts rather than after.</p>
+            <p style="margin:0">Members outside the United States pay the same dues in the same currency; there is no international surcharge and no separate international tier. A third of the membership is outside North America.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>What if the business cannot afford dues this year?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">Ask. Since 2025 the board has offered hardship dues for members whose creamery has closed, is close to closing, or has had a year that makes $480 an unreasonable ask.</p>
+            <p style="margin:0">Write to Membership Operations at <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a>. The conversation is confidential, it does not go to a committee, it does not affect your standing or your credentials, and the answer is usually yes. A member who drops out stops getting the brief and the archive, which is the opposite of what someone in that position needs.</p>
+          </div>
+        </details>
+        <details class="faq-q js-faq-item">
+          <summary>Are dues a deductible business expense?</summary>
+          <div class="faq-a">
+            <p style="margin:0 0 10px">In most places professional association dues are an ordinary business expense, but we are not in a position to advise on your tax position and we will not pretend otherwise &mdash; ask your own accountant.</p>
+            <p style="margin:0">What we can give you is the paperwork: a dated receipt for every payment, an invoice in your organization&rsquo;s name if you need one for a purchase ledger, and a letter confirming the membership term and standing. All three come from <a href="mailto:finance@morecheese.org">finance@morecheese.org</a>.</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <p id="faq-filter-empty" hidden class="rounded-2xl border-[1.5px] border-brick bg-milk p-6 text-center text-[15px] text-brick">
-      No question on this page matches that. Try a shorter word, check the <a href="./faq.html" class="underline underline-offset-2">other FAQ topics</a>, or <a href="./contact.html" class="underline underline-offset-2">write to Member Services</a>.
-    </p>
+    <p id="faq-filter-empty" hidden style="margin:0;border:1.5px solid var(--butter);background:var(--soft);border-radius:var(--rs);padding:20px;text-align:center;font-size:15px;line-height:1.6;color:var(--ink)">No question on this page matches that. Try a shorter word, check the <a href="./faq.html">other FAQ topics</a>, or <a href="./contact.html">write to Member Services</a>.</p>
   </section>
 
-  <section class="border-t-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-      <h2 class="font-display m-0 mb-5 text-[28px] font-extrabold tracking-tight">Other FAQ topics</h2>
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-2 nav:grid-cols-4">
-        <a href="./faq-membership-benefits.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Benefits &amp; services</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">What a membership actually gets you &mdash; and what it does not.</p>
+  <section class="on-paper rule-top">
+    <div class="wrap section" style="display:flex;flex-direction:column;gap:28px">
+      <h2 class="h2" style="font-size:30px">Other FAQ topics</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:18px">
+        <a href="./faq-membership-benefits.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Benefits &amp; services</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">What a membership actually gets you &mdash; and what it does not.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-renewals-account.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Renewals &amp; your account</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">Renewal dates, covered staff, receipts and directory entries.</p>
+        <a href="./faq-renewals-account.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Renewals &amp; your account</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">Renewal dates, covered staff, receipts and directory entries.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-certifications.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Certifications</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The four rungs, the exam, reconfirmation and continuing education.</p>
+        <a href="./faq-certifications.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Certifications</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The four rungs, the exam, reconfirmation and continuing education.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-conferences-events.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Conferences &amp; events</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The October conference, the virtual strand and regional meetups.</p>
+        <a href="./faq-conferences-events.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Conferences &amp; events</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The October conference, the virtual strand and regional meetups.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-publications-resources.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Publications &amp; resources</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The Monday brief, the archive, research and sponsorship.</p>
+        <a href="./faq-publications-resources.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Publications &amp; resources</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The Monday brief, the archive, research and sponsorship.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-career-governance.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Careers, committees &amp; governance</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">Vacancies, committee seats, the election, ethics and advocacy.</p>
+        <a href="./faq-career-governance.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Careers, committees &amp; governance</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">Vacancies, committee seats, the election, ethics and advocacy.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
-        <a href="./faq-organization-directory.html" class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-4 no-underline transition hover:bg-clover">
-          <h3 class="font-display m-0 text-[17px] font-bold leading-tight tracking-tight text-charcoal">Directory &amp; who to contact</h3>
-          <p class="m-0 mt-1 text-[13px] text-mid">The organization directory, your entry, and which inbox to use.</p>
+        <a href="./faq-organization-directory.html" class="card" style="padding:20px;gap:8px">
+          <h3 class="h3" style="font-size:17px">Directory &amp; who to contact</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--body)">The organization directory, your entry, and which inbox to use.</p>
+          <span style="margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--gold)">Open topic &rarr;</span>
         </a>
       </div>
-      <div class="mt-8 rounded-2xl bg-pasture px-6 py-8 text-white md:px-10">
-        <h2 class="font-display m-0 text-[26px] font-extrabold tracking-tight">Still stuck?</h2>
-        <p class="m-0 mt-2 max-w-[58ch] text-[15px] opacity-95">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
-        <a href="./contact.html" class="mt-5 inline-block rounded-full bg-milk px-6 py-3 text-sm font-bold text-pasture no-underline hover:bg-clover">Contact the Federation</a>
+      <div class="on-ink" style="position:relative;overflow:hidden;border-radius:var(--r);padding:clamp(32px,4vw,48px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:14px">
+        <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+        <h2 class="h2" style="position:relative;font-size:26px">Still stuck?</h2>
+        <p class="lede" style="position:relative;font-size:15px;max-width:58ch">Member Services reads everything and answers most things within two business days. Write to <a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a>, or use the inquiry page if you would rather fill in a form.</p>
+        <a href="./contact.html" class="btn btn-butter" style="position:relative;align-self:flex-start">Contact the Federation</a>
       </div>
     </div>
   </section>
 </main>
-
-<footer class="bg-charcoal text-[#D9DBD4]">
-  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-    <div class="flex flex-wrap justify-between gap-10">
-      <div class="max-w-sm">
-        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
-          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+<footer class="site-footer">
+  <div class="holes holes--footer" aria-hidden="true"><span class="hole" style="left:6%;top:18%;width:48px;height:48px"></span><span class="hole" style="left:22%;top:70%;width:26px;height:26px"></span><span class="hole" style="left:58%;top:12%;width:34px;height:34px"></span><span class="hole" style="left:81%;top:64%;width:56px;height:56px"></span><span class="hole" style="left:93%;top:22%;width:20px;height:20px"></span></div>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <div class="brand brand--on-ink">
+          <img class="brand__mark" src="./assets/brand/mark-butter.svg" alt="" width="32" height="32">
+          <span class="brand__name">More Cheese</span>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
-        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+        <p>The International Cheese Federation · 1 Rind Lane, Lancaster, PA<br><a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a></p>
       </div>
-      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
-            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
-            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
-            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
-            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
-            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
-            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
-            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
-            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
-            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="site-footer__col"><span class="site-footer__head">Membership</span><a href="./join.html">Join</a><a href="./about.html">About the ICF</a><a href="./faq.html">FAQ</a><a href="./contact.html">Contact</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Programs</span><a href="./learn.html">Learn</a><a href="./compete.html">Compete</a><a href="./events.html">Events</a><a href="./advocacy.html">Advocacy</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Resources</span><a href="./library.html">Cheese Library</a><a href="./research.html">Research &amp; publications</a><a href="./careers.html">Careers &amp; volunteering</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Read</span><a href="./blog.html">Blog</a><a href="./faq.html">FAQ</a></div>
     </div>
-    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
-    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+    <p class="site-footer__legal">The International Cheese Federation (ICF) and More Cheese are entirely fictional. Demonstration content created for MemberJunction. © <span class="js-year">2026</span>.</p>
   </div>
 </footer>
-
+<!-- BETTY-WIDGET: the Betty launcher snippet is inserted here by the build once Colin allow-lists our origins -->
 </body>
 </html>
