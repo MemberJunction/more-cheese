@@ -11,11 +11,11 @@ asking one invocation to do more.
 **Shape of the loop.** One week per invocation, one fresh context per invocation, Mondays only.
 
 ```sh
-# Mondays from 2019-01-07 through 2025-12-29 (the era range in data/ruleset/eras.json)
+# Mondays from 2019-01-07 through 2026-08-31 (the era range in data/ruleset/eras.json; the world runs to 2026-09-02)
 python3 - <<'PY' > /tmp/mc-weeks.txt
 import datetime as d
 w = d.date(2019, 1, 7)
-while w <= d.date(2025, 12, 29):
+while w <= d.date(2026, 8, 31):
     print(w.isoformat()); w += d.timedelta(days=7)
 PY
 wc -l /tmp/mc-weeks.txt   # ~365 weeks
@@ -78,8 +78,8 @@ ls content/blog                                  # year coverage
 
 ## Known limits
 
-- **Era range is 2019–2025.** `data/ruleset/eras.json` defines five eras covering cycles
-  2019–2025 only. Weeks outside that range have no `era` value; the skill is told to stop and
+- **Era range is 2019–2026.** `data/ruleset/eras.json` defines six eras covering cycles
+  2019–2026 only. Weeks outside that range have no `era` value; the skill is told to stop and
   report rather than invent one. Extending coverage means extending the world model first —
   which is out of bounds for this skill.
 - **Hero availability is thin in early years.** Only 7 of the 16 heroes have joined by 2019, and
