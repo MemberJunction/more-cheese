@@ -1,0 +1,506 @@
+{
+  "Account Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000006",
+        "functionName": "Customer Success",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 2,
+        "confidence": 0.85
+      }
+    ]
+  },
+  "Affinage Apprentice": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Affineur": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Affineur & Owner": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000007",
+    "seniorityName": "C-Level",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000012",
+        "functionName": "Executive",
+        "sequence": 1,
+        "confidence": 1
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.85
+      }
+    ]
+  },
+  "Assistant Cheesemaker": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Cheese Buyer": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Cheese Program Director": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000004",
+    "seniorityName": "Director",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000002",
+        "functionName": "Product",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Cheesemaker": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Cheesemaker & Co-owner": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000007",
+    "seniorityName": "C-Level",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000012",
+        "functionName": "Executive",
+        "sequence": 1,
+        "confidence": 1
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.8
+      }
+    ]
+  },
+  "Cheesemonger": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.9
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Co-owner": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000007",
+    "seniorityName": "C-Level",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000012",
+        "functionName": "Executive",
+        "sequence": 1,
+        "confidence": 1
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.6
+      }
+    ]
+  },
+  "Counter Lead": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000002",
+    "seniorityName": "Team Lead",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000006",
+        "functionName": "Customer Success",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Creamery Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Curriculum Lead": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000002",
+    "seniorityName": "Team Lead",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000002",
+        "functionName": "Product",
+        "sequence": 1,
+        "confidence": 0.85
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.6
+      }
+    ]
+  },
+  "Food Safety Consultant": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000010",
+        "functionName": "Legal",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.8
+      }
+    ]
+  },
+  "Head Cheesemaker": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Head Cheesemonger": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Herd Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Instructor": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000006",
+        "functionName": "Customer Success",
+        "sequence": 1,
+        "confidence": 0.85
+      }
+    ]
+  },
+  "Junior Cheesemonger": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Operations Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Owner": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000007",
+    "seniorityName": "C-Level",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000012",
+        "functionName": "Executive",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Principal": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000001",
+        "functionName": "Engineering",
+        "sequence": 1,
+        "confidence": 0.4
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000002",
+        "functionName": "Product",
+        "sequence": 2,
+        "confidence": 0.3
+      }
+    ]
+  },
+  "Product Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000002",
+        "functionName": "Product",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Production Lead": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000002",
+    "seniorityName": "Team Lead",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Program Director": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000004",
+    "seniorityName": "Director",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000002",
+        "functionName": "Product",
+        "sequence": 1,
+        "confidence": 0.9
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Quality Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000001",
+        "functionName": "Engineering",
+        "sequence": 1,
+        "confidence": 0.95
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Regional Sales Director": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000004",
+    "seniorityName": "Director",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Sales Director": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000004",
+    "seniorityName": "Director",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Senior Lecturer": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000012",
+        "functionName": "Executive",
+        "sequence": 1,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "Specialty Cheese Buyer": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "Store Manager": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000003",
+    "seniorityName": "Manager",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 1
+      }
+    ]
+  },
+  "Technical Sales Representative": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000001",
+    "seniorityName": "Individual Contributor",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000005",
+        "functionName": "Sales",
+        "sequence": 1,
+        "confidence": 1
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000001",
+        "functionName": "Engineering",
+        "sequence": 2,
+        "confidence": 0.7
+      }
+    ]
+  },
+  "VP Procurement": {
+    "seniorityID": "7E020001-A101-4B01-8C01-000000000005",
+    "seniorityName": "Vice President",
+    "functions": [
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000007",
+        "functionName": "Operations",
+        "sequence": 1,
+        "confidence": 1
+      },
+      {
+        "jobFunctionID": "7E010001-A101-4B01-8C01-000000000012",
+        "functionName": "Executive",
+        "sequence": 2,
+        "confidence": 0.8
+      }
+    ]
+  }
+}

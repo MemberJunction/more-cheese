@@ -47,8 +47,19 @@ const SITE = path.join(ROOT, 'website');
 const DIST = path.join(SITE, 'dist');
 const CORPUS = path.join(ROOT, 'content', 'blog');
 
-const PER_PAGE = 12;
-const SKIP_TOP = new Set(['dist', 'wp-theme', 'check-links.py', 'README.md']);
+const PER_PAGE = 9; // Matt: 3-column grid, 9 per page, numbered pager
+const SKIP_TOP = new Set(['dist', 'wp-theme', 'check-links.py', 'README.md', 'data']);
+/** Static pages are published at pretty URLs (Matt: `#/about` → `/about/`, one to one). `x.html` lands at
+ *  `/x/index.html`, `faq-x.html` at `/faq/x/index.html`; index.html and 404.html stay at the root; blog.html and
+ *  post.html are build shells and are not published. */
+const SHELLS = new Set(['blog.html', 'post.html']);
+function prettyPath(file) {
+    const base = file.replace(/\.html$/, '');
+    if (base === 'index') return '/';
+    if (base === 'blog') return '/blog/';
+    if (base.startsWith('faq-')) return `/faq/${base.slice(4)}/`;
+    return `/${base}/`;
+}
 
 /* ------------------------------------------------------------------ utils */
 
@@ -161,6 +172,7 @@ function readPosts() {
             category: String(fm.category ?? 'From the Federation'),
             tags: Array.isArray(fm.tags) ? fm.tags.map(String) : [],
             excerpt: String(fm.excerpt ?? ''),
+            author: String(fm.author ?? 'ICF Communications Team'),
             body,
         });
     }
@@ -189,171 +201,229 @@ function readPosts() {
 
 /** The card colorway rotation from blog.html (and terroir_card_style in the
  *  theme): mostly outlined, with a clover, a pasture and a brick card in the mix. */
-function cardStyle(i) {
-    const slot = i % 12;
-    if (slot === 2 || slot === 8) {
-        return {
-            card: 'flex flex-col rounded-2xl bg-clover p-6',
-            kicker: 'm-0 text-[11px] font-bold uppercase tracking-[.14em] text-pasture',
-            meta: 'm-0 text-sm text-[#41503F]',
-            body: 'm-0 mt-3 text-[15px] text-[#243027]',
-            link: 'text-charcoal no-underline hover:text-pasture',
-        };
-    }
-    if (slot === 5) {
-        return {
-            card: 'flex flex-col rounded-2xl bg-pasture p-6 text-white',
-            kicker: 'm-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover',
-            meta: 'm-0 text-sm text-clover',
-            body: 'm-0 mt-3 text-[15px] opacity-95',
-            link: 'text-white no-underline underline-offset-4 hover:underline',
-        };
-    }
-    if (slot === 10) {
-        return {
-            card: 'flex flex-col rounded-2xl bg-brick p-6 text-white',
-            kicker: 'm-0 text-[11px] font-bold uppercase tracking-[.14em] text-clover',
-            meta: 'm-0 text-sm text-clover',
-            body: 'm-0 mt-3 text-[15px] opacity-95',
-            link: 'text-white no-underline underline-offset-4 hover:underline',
-        };
-    }
-    return {
-        card: 'flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6',
-        kicker: 'm-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick',
-        meta: 'm-0 text-sm text-mid',
-        body: 'm-0 mt-3 text-[15px] text-[#3A403C]',
-        link: 'text-charcoal no-underline hover:text-pasture',
-    };
-}
 
+const slugify = (t) => String(t).toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const catHref = (cat, n = 1) => (n <= 1 ? `/blog/category/${slugify(cat)}/` : `/blog/category/${slugify(cat)}/page/${n}/`);
+
+/** One blog card in Matt's pattern: eyebrow + date, Sora title, excerpt, "Read post". Every third card
+ *  sits on cream and every seventh on soft butter so a 3-column grid never reads as a flat sheet. */
 function card(post, i) {
-    const s = cardStyle(i);
-    return `      <article class="${s.card}">
-        <p class="${s.kicker}">${esc(post.category)}</p>
-        <h3 class="font-display mb-2 mt-2 text-[22px] font-bold leading-[1.15] tracking-tight">
-          <a href="/${post.slug}/" class="${s.link}">${esc(post.title)}</a>
-        </h3>
-        <p class="${s.meta}"><time datetime="${post.date}">${longDate(post.date)}</time></p>
-        <p class="${s.body}">${esc(trimWords(post.excerpt, 28))}</p>
-      </article>`;
+    const tone = i % 7 === 6 ? ' card--soft' : i % 3 === 2 ? ' card--cream' : '';
+    return `      <a href="/${post.slug}/" class="card${tone}">
+        <div class="card__meta"><span class="eyebrow">${esc(post.category)}</span><span class="card__date"><time datetime="${post.date}">${longDate(post.date)}</time></span></div>
+        <h3 class="card__title">${esc(post.title)}</h3>
+        <p class="card__excerpt">${esc(trimWords(post.excerpt, 28))}</p>
+        <span class="card__more">Read post</span>
+      </a>`;
 }
 
 const pageHref = (n) => (n <= 1 ? '/blog/' : `/blog/page/${n}/`);
 
-function pagination(page, pages) {
+/** Numbered pager (Matt: no load-more — every page has a real URL). `href(n)` decides the URL family. */
+function pagination(page, pages, href = pageHref) {
     if (pages < 2) return '';
     const bits = [];
-    if (page > 1) {
-        bits.push(`<a href="${pageHref(page - 1)}" class="rounded-full border-[1.5px] border-charcoal px-4 py-2 font-semibold text-charcoal no-underline hover:bg-clover">&larr; Newer</a>`);
-    }
+    const link = (n, label) => `<a href="${href(n)}" class="pager__link"${label ? ` aria-label="${label}"` : ''}>${label ? (n < page ? '←' : '→') : n}</a>`;
+    if (page > 1) bits.push(link(page - 1, 'Previous page'));
     for (let n = 1; n <= pages; n++) {
-        // Keep the strip short: the ends, and a window either side of here.
         if (n !== 1 && n !== pages && Math.abs(n - page) > 2) {
-            if (Math.abs(n - page) === 3) bits.push('<span class="px-1 text-mid" aria-hidden="true">&hellip;</span>');
+            if (Math.abs(n - page) === 3) bits.push('<span class="pager__gap" aria-hidden="true">…</span>');
             continue;
         }
-        bits.push(n === page
-            ? `<span class="rounded-full bg-pasture px-4 py-2 font-bold text-white" aria-current="page">${n}</span>`
-            : `<a href="${pageHref(n)}" class="rounded-full border-[1.5px] border-charcoal px-4 py-2 font-semibold text-charcoal no-underline hover:bg-clover">${n}</a>`);
+        bits.push(n === page ? `<span class="pager__link is-current" aria-current="page">${n}</span>` : link(n));
     }
-    if (page < pages) {
-        bits.push(`<a href="${pageHref(page + 1)}" class="rounded-full border-[1.5px] border-charcoal px-4 py-2 font-semibold text-charcoal no-underline hover:bg-clover">Older &rarr;</a>`);
-    }
+    if (page < pages) bits.push(link(page + 1, 'Next page'));
     return `
-    <nav class="mt-10 flex flex-wrap items-center gap-2 border-t-[1.5px] border-charcoal pt-6 text-[15px]" aria-label="Blog pages">
-      ${bits.join('\n      ')}
+    <nav class="pager" aria-label="Blog pages">
+      <span class="pager__line">Page ${page} of ${pages}</span>
+      <div class="pager__links">${bits.join('')}</div>
     </nav>`;
 }
 
-function blogIndexPage(chunk, page, pages, total, shell) {
-    const heading = page === 1
-        ? 'ICF Blog'
-        : `ICF Blog <span class="text-brick">&middot; page ${page}</span>`;
+/** Category chips are links, not buttons: each category is its own paged URL tree, so the archive stays crawlable. */
+function categoryChips(categories, active) {
+    const all = `<a href="/blog/" class="chip${active ? '' : ' is-on'}"${active ? '' : ' aria-current="page"'}>All</a>`;
+    return all + categories.map((c) => `<a href="${catHref(c)}" class="chip${c === active ? ' is-on' : ''}"${c === active ? ' aria-current="page"' : ''}>${esc(c)}</a>`).join('');
+}
+
+function blogIndexPage(chunk, page, pages, total, shell, { categories = [], category = null } = {}) {
+    const href = category ? (n) => catHref(category, n) : pageHref;
     const main = `<main id="main">
 
-  <section class="border-b border-charcoal/15 bg-milk">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
-      <p class="text-xs font-bold uppercase tracking-[.14em] text-brick">Publications</p>
-      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">${heading}</h1>
-      <p class="m-0 max-w-[58ch] text-[17px] text-[#3A403C]">Certification, education, advocacy, events, industry news and the members behind them &mdash; written by the Federation, for the people who make, age, sell and buy the cheese.</p>
-      <p class="m-0 mt-3 text-sm text-mid">${total} posts &middot; page ${page} of ${pages}</p>
+  <section class="page-head on-ink">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:72%;top:14%;width:44px;height:44px"></span><span class="hole" style="left:88%;top:58%;width:28px;height:28px"></span><span class="hole" style="left:60%;top:70%;width:18px;height:18px"></span></div>
+    <div class="wrap page-head__inner">
+      <span class="eyebrow eyebrow--yellow">Publications</span>
+      <h1 class="display">${category ? esc(category) : 'Blog'}</h1>
+      <p class="lede">${category ? `Every post the Federation has filed under ${esc(category)}.` : 'Certification, education, advocacy, events, industry news and the members behind them — written by the Federation, for the people who make, age, sell and buy the cheese.'}</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="posts-h">
-    <h2 id="posts-h" class="sr-only">Recent posts</h2>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
-
-${chunk.map(card).join('\n\n')}
-
-    </div>${pagination(page, pages)}
+  <section class="wrap section blog-index">
+    <div class="blog-index__bar">
+      <span role="status" class="muted">${total} posts${category ? ` in ${esc(category)}` : ''} · page ${page} of ${pages}</span>
+      <div class="chips">${categoryChips(categories, category)}</div>
+    </div>
+    <div class="grid grid--cards">
+${chunk.map(card).join('\n')}
+    </div>${pagination(page, pages, href)}
   </section>
 </main>`;
 
-    const title = page === 1 ? 'Blog · More Cheese' : `Blog · page ${page} · More Cheese`;
-    const desc = 'The ICF blog: certification, education, advocacy, events, industry news and member spotlights from the International Cheese Federation.';
+    const title = `${category ? `${category} · ` : ''}Blog${page > 1 ? ` · page ${page}` : ''} · More Cheese`;
+    const desc = category
+        ? `ICF blog posts in ${category}: ${total} articles from the International Cheese Federation (fictional demonstration content).`
+        : 'The ICF blog: certification, education, advocacy, events, industry news and member spotlights from the International Cheese Federation (fictional demonstration content).';
     return retitle(shell.head, title, desc) + main + shell.tail;
 }
 
 function tagList(tags) {
     if (!tags.length) return '';
     return `
-    <ul class="mt-8 flex list-none flex-wrap gap-2 p-0 text-[12px]">
-${tags.map((t) => `      <li class="rounded-full border border-charcoal/25 px-3 py-1 font-semibold text-mid">${esc(t)}</li>`).join('\n')}
-    </ul>`;
+      <div class="tags">${tags.map((t) => `<span class="chip">${esc(t)}</span>`).join('')}</div>`;
 }
 
-function postPage(post, prev, next, shell) {
-    // `prev` is the older post and `next` the newer one, matching the theme's
-    // single.php so the two builds read the same way.
+const AUTHOR_BIO = 'The Federation’s communications desk: certification news, advocacy updates, event notices and member spotlights, written for the people who make, age, sell and buy the cheese.';
+const initials = (name) => name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
+
+/** Three related posts: same category, nearest in time, never the post itself. */
+function relatedPosts(post, all) {
+    const i = all.indexOf(post);
+    return all.filter((p) => p.category === post.category && p.slug !== post.slug)
+        .sort((a, b) => Math.abs(all.indexOf(a) - i) - Math.abs(all.indexOf(b) - i))
+        .slice(0, 3);
+}
+
+function postPage(post, prev, next, shell, all = []) {
     const bodyHtml = marked.parse(post.body, { gfm: true, breaks: false });
-    const minutes = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
+    const author = post.author || 'ICF Communications Team';
+    const related = relatedPosts(post, all);
+    const relatedHtml = related.length ? `
+  <section class="on-cream rule-top">
+    <div class="wrap section post-related">
+      <div class="post-related__bar">
+        <h2 class="h2 h2--sm">More from the blog</h2>
+        <a href="${catHref(post.category)}" class="text-link">All ${esc(post.category)} posts →</a>
+      </div>
+      <div class="grid grid--cards">
+${related.map((p) => `        <a href="/${p.slug}/" class="card">
+          <div class="card__meta"><span class="eyebrow">${esc(p.category)}</span><span class="card__date"><time datetime="${p.date}">${longDate(p.date)}</time></span></div>
+          <h3 class="card__title card__title--sm">${esc(p.title)}</h3>
+        </a>`).join('\n')}
+      </div>
+    </div>
+  </section>` : '';
 
-    const nav = (prev || next) ? `
-    <nav class="mt-10 grid grid-cols-1 gap-3 border-t-[1.5px] border-charcoal pt-6 md:grid-cols-2" aria-label="More posts">
-${prev ? `      <a href="/${prev.slug}/" class="rounded-2xl border-[1.5px] border-charcoal p-4 no-underline transition hover:bg-clover">
-        <span class="block text-[11px] font-bold uppercase tracking-[.14em] text-brick">Previous</span>
-        <span class="font-display mt-1 block text-[17px] font-bold leading-tight tracking-tight text-charcoal">${esc(prev.title)}</span>
-      </a>` : ''}
-${next ? `      <a href="/${next.slug}/" class="rounded-2xl border-[1.5px] border-charcoal p-4 no-underline transition hover:bg-clover md:text-right">
-        <span class="block text-[11px] font-bold uppercase tracking-[.14em] text-brick">Next</span>
-        <span class="font-display mt-1 block text-[17px] font-bold leading-tight tracking-tight text-charcoal">${esc(next.title)}</span>
-      </a>` : ''}
-    </nav>` : '';
-
-    // No second disclaimer: the verbatim paragraph is already the last thing in
-    // every post's body, and the footer carries the site-wide copy.
     const main = `<main id="main">
 
-  <article class="mx-auto max-w-[72ch] px-5 py-12 md:py-16">
-    <nav aria-label="Breadcrumb" class="mb-6 text-sm">
-      <a href="/blog/" class="text-brick no-underline hover:underline">&larr; ICF Blog</a>
-    </nav>
-
-    <p class="m-0 text-[11px] font-bold uppercase tracking-[.14em] text-brick">${esc(post.category)}</p>
-    <h1 class="font-display font-display-tight m-0 mb-4 mt-3 text-[clamp(34px,4.6vw,56px)] font-extrabold leading-[0.96] tracking-tight text-pasture">${esc(post.title)}</h1>
-    <p class="m-0 mb-8 border-b border-charcoal/20 pb-6 text-sm text-mid">
-      <time datetime="${post.date}">${longDate(post.date)}</time> &middot; International Cheese Federation &middot; ${minutes} minute read
-    </p>
-
-    <div class="prose-mc">
-${bodyHtml.trimEnd()}
-    </div>${tagList(post.tags)}
-
-    <aside class="mt-10 rounded-2xl bg-clover p-6">
-      <h2 class="font-display m-0 text-xl font-bold tracking-tight">Start on the ladder</h2>
-      <p class="m-0 mt-2 text-[15px] text-[#243027]">Four rungs, 63 courses this year, cohorts named Brook, Meadow, Alpine and Birch.</p>
-      <div class="mt-4 flex flex-wrap gap-2.5">
-        <a href="/learn.html" class="rounded-full bg-pasture px-5 py-2.5 text-sm font-bold text-white no-underline hover:bg-[#0E4530]">See the credential ladder</a>
-        <a href="/join.html" class="rounded-full border-[1.5px] border-charcoal px-5 py-2.5 text-sm font-semibold text-charcoal no-underline hover:bg-charcoal hover:text-milk">Compare membership tiers</a>
+  <section class="page-head on-ink">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:78%;top:12%;width:40px;height:40px"></span><span class="hole" style="left:91%;top:64%;width:22px;height:22px"></span></div>
+    <div class="wrap page-head__inner post-head">
+      <a href="/blog/" class="post-head__back">← All posts</a>
+      <a href="${catHref(post.category)}" class="eyebrow eyebrow--yellow">${esc(post.category)}</a>
+      <h1 class="display display--post">${esc(post.title)}</h1>
+      ${post.excerpt ? `<p class="lede post-head__dek">${esc(post.excerpt)}</p>` : ''}
+      <div class="byline">
+        <span class="byline__avatar" aria-hidden="true">${esc(initials(author))}</span>
+        <div class="byline__text"><strong>${esc(author)}</strong><span>International Cheese Federation · <time datetime="${post.date}">${longDate(post.date)}</time></span></div>
       </div>
-    </aside>${nav}
-  </article>
+    </div>
+  </section>
+
+  <article class="wrap section post">
+    <div class="post__body">
+      <div class="prose-mc">
+${bodyHtml.trimEnd()}
+      </div>${tagList(post.tags)}
+      ${(prev || next) ? `<nav class="post__nav" aria-label="More posts">
+${prev ? `        <a href="/${prev.slug}/" class="post__nav-link"><span class="eyebrow">Previous</span><span>${esc(prev.title)}</span></a>` : '<span></span>'}
+${next ? `        <a href="/${next.slug}/" class="post__nav-link post__nav-link--next"><span class="eyebrow">Next</span><span>${esc(next.title)}</span></a>` : ''}
+      </nav>` : ''}
+    </div>
+    <aside class="post__aside">
+      <div class="card">
+        <span class="eyebrow">Written by</span>
+        <strong class="h3 h3--sm">${esc(author)}</strong>
+        <p class="muted card__excerpt">${AUTHOR_BIO}</p>
+      </div>
+      <div class="brief-cta on-yellow">
+        <strong class="h3 h3--sm">The Monday brief</strong>
+        <p>Every post, plus the week’s rule changes and deadlines, in one email to members.</p>
+        <a href="/join/" class="btn btn-ink btn-sm">Join to get it</a>
+      </div>
+    </aside>
+  </article>${relatedHtml}
 </main>`;
 
     const desc = trimWords(post.excerpt || post.title, 30);
     return retitle(shell.head, `${post.title} · More Cheese`, desc) + main + shell.tail;
+}
+
+/* ------------------------------------------------------------- library */
+
+/** `/library/<family>/` and `/library/<family>/<style>/` from website/data/library.json (Matt: the Library
+ *  wants its own URL tree). Skipped, with a note, when the data file is not there yet. */
+function writeLibraryPages(shell) {
+    const file = path.join(SITE, 'data', 'library.json');
+    if (!fs.existsSync(file)) { console.warn('library: website/data/library.json missing — no style pages generated'); return 0; }
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    let n = 0;
+    const fact = (label, value) => (value ? `<div class="fact"><span class="eyebrow">${esc(label)}</span><span>${esc(value)}</span></div>` : '');
+    const styleCard = (fam, st, small = false) => `<a href="/library/${fam.slug}/${st.slug}/" class="card">${small ? '' : `<div class="card__meta"><span class="eyebrow">${esc([st.milk, st.texture].filter(Boolean).join(' · '))}</span></div>`}<h3 class="card__title${small ? ' card__title--sm' : ''}">${esc(st.name)}</h3><p class="card__excerpt">${esc(trimWords(st.description ?? '', small ? 20 : 26))}</p>${small ? '' : '<span class="card__more">Read the entry</span>'}</a>`;
+    for (const fam of data.families ?? []) {
+        const styles = (data.styles ?? []).filter((st) => st.familySlug === fam.slug);
+        const main = `<main id="main">
+  <section class="page-head on-ink"><div class="wrap page-head__inner"><a href="/library/" class="post-head__back">← The Cheese Library</a><span class="eyebrow eyebrow--yellow">Family</span><h1 class="display">${esc(fam.name)}</h1>${fam.blurb ? `<p class="lede">${esc(fam.blurb)}</p>` : ''}</div></section>
+  <section class="wrap section"><div class="grid grid--cards">
+${styles.map((st) => '    ' + styleCard(fam, st)).join('\n')}
+  </div></section>
+</main>`;
+        write(`library/${fam.slug}/index.html`, retitle(shell.head, `${fam.name} · Cheese Library · More Cheese`, fam.blurb || `${fam.name} styles in the ICF Cheese Library.`) + main + shell.tail);
+        n++;
+        for (const st of styles) {
+            const others = styles.filter((o) => o.slug !== st.slug).slice(0, 3);
+            const main2 = `<main id="main">
+  <section class="page-head on-ink"><div class="wrap page-head__inner"><a href="/library/${fam.slug}/" class="post-head__back">← ${esc(fam.name)}</a><span class="eyebrow eyebrow--yellow">${esc(fam.name)}</span><h1 class="display">${esc(st.name)}</h1>${st.description ? `<p class="lede">${esc(st.description)}</p>` : ''}</div></section>
+  <article class="wrap section post"><div class="post__body">
+    <div class="facts">${fact('Milk', st.milk)}${fact('Texture', st.texture)}${fact('Region', st.region)}${fact('Aging', st.aging)}</div>
+    ${st.lookFor ? `<div class="prose-mc"><h2>What to look for</h2><p>${esc(st.lookFor)}</p></div>` : ''}
+    ${st.notes ? `<div class="prose-mc"><h2>Notes</h2><p>${esc(st.notes)}</p></div>` : ''}
+  </div><aside class="post__aside"><div class="brief-cta on-yellow"><strong class="h3 h3--sm">Learn the ladder</strong><p>The Certified Cheese Professional track covers every family in this library.</p><a href="/learn/" class="btn btn-ink btn-sm">See the credentials</a></div></aside></article>
+  ${others.length ? `<section class="on-cream rule-top"><div class="wrap section"><h2 class="h2 h2--sm">More ${esc(fam.name)} styles</h2><div class="grid grid--cards">${others.map((o) => styleCard(fam, o, true)).join('')}</div></div></section>` : ''}
+</main>`;
+            write(`library/${fam.slug}/${st.slug}/index.html`, retitle(shell.head, `${st.name} · Cheese Library · More Cheese`, trimWords(st.description || st.name, 30)) + main2 + shell.tail);
+            n++;
+        }
+    }
+    return n;
+}
+
+/* --------------------------------------------------------------- betty */
+
+/** Betty launcher (Colin's two-line embed). Opt-in: reads website/data/betty.json
+ *  `{ "publishableKey": "pk_betty_…", "baseUrl": "https://…/betty/v1" }` and replaces the footer's
+ *  `<!-- BETTY-WIDGET … -->` marker on every page. Without the file the marker is simply removed, so a
+ *  build never ships a widget that refuses to open because our origins are not yet allow-listed. */
+function bettySnippet() {
+    const file = path.join(SITE, 'data', 'betty.json');
+    if (!fs.existsSync(file)) return '';
+    const b = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (!b.publishableKey || !b.baseUrl) return '';
+    return `<betty-chat publishable-key="${esc(b.publishableKey)}" base-url="${esc(b.baseUrl)}"
+            display-mode="launcher" allow-feedback="true" references-mode="expanded"
+            locale='{"headerTitle":"Ask the Federation"}'></betty-chat>
+<script src="${esc(b.baseUrl.replace(/\/$/, ''))}/widget/betty-chat.js"></script>`;
+}
+
+function insertBetty() {
+    const snippet = bettySnippet();
+    let files = 0;
+    for (const file of walk(DIST).filter((f) => f.endsWith('.html'))) {
+        const before = fs.readFileSync(file, 'utf8');
+        const after = before.replace(/<!-- BETTY-WIDGET[^>]*-->/, snippet);
+        if (after !== before) { fs.writeFileSync(file, after, 'utf8'); files++; }
+    }
+    return { files, enabled: snippet !== '' };
 }
 
 /* ------------------------------------------------------------------ build */
@@ -363,15 +433,22 @@ function copyStatic() {
     for (const entry of fs.readdirSync(SITE, { withFileTypes: true })) {
         if (SKIP_TOP.has(entry.name) || entry.name.startsWith('.')) continue;
         const from = path.join(SITE, entry.name);
-        const to = path.join(DIST, entry.name);
         if (entry.isDirectory()) {
-            fs.cpSync(from, to, { recursive: true });
+            fs.cpSync(from, path.join(DIST, entry.name), { recursive: true });
             files += walk(from).length;
+            continue;
+        }
+        if (entry.name.endsWith('.html')) {
+            if (SHELLS.has(entry.name)) continue;
+            const pretty = prettyPath(entry.name);
+            const to = pretty === '/' || entry.name === '404.html' ? path.join(DIST, entry.name) : path.join(DIST, pretty.slice(1), 'index.html');
+            fs.mkdirSync(path.dirname(to), { recursive: true });
+            fs.copyFileSync(from, to);
         } else {
             fs.mkdirSync(DIST, { recursive: true });
-            fs.copyFileSync(from, to);
-            files++;
+            fs.copyFileSync(from, path.join(DIST, entry.name));
         }
+        files++;
     }
     return files;
 }
@@ -384,42 +461,16 @@ function rewriteHomeCards(latest) {
     let html = fs.readFileSync(file, 'utf8');
     const open = html.indexOf('<h2 id="week-h"');
     const endOfH2 = html.indexOf('</h2>', open);
-    const closer = html.indexOf('<p class="nav:col-span-3">', endOfH2);
-    if (open < 0 || closer < 0) throw new Error('index.html: could not find the "this week" card block');
-
-    const cards = latest.map((p, i) => {
-        const lead = i === 0;
-        return `    <article class="border-t-[1.5px] border-charcoal pt-3">
-      <div class="text-[11px] font-bold uppercase tracking-[.14em] text-brick">${esc(p.category)}${lead ? ' &middot; this week' : ''}</div>
-      <h3 class="font-display mb-1.5 mt-2 ${lead ? 'text-3xl' : 'text-[22px]'} font-bold leading-[1.1] tracking-tight">
-        <a href="/${p.slug}/" class="text-charcoal no-underline hover:text-pasture">${esc(p.title)}</a>
-      </h3>
-      <p class="m-0 text-sm text-[#3A403C]">${esc(trimWords(p.excerpt, 26))}</p>
-    </article>`;
-    }).join('\n');
-
-    html = html.slice(0, endOfH2 + '</h2>'.length) + '\n' + cards + '\n    ' + html.slice(closer);
+    let closer = html.indexOf('<p class="nav:col-span-3">', endOfH2);
+    if (closer < 0) closer = html.indexOf('<p class="home-blog__more">', endOfH2);
+    if (open < 0 || closer < 0) throw new Error('index.html: could not find the "From the blog" card block');
+    const cards = latest.map((p, i) => card(p, i)).join('\n');
+    html = html.slice(0, endOfH2 + '</h2>'.length) + `\n    <div class="grid grid--cards">\n${cards}\n    </div>\n    ` + html.slice(closer);
     fs.writeFileSync(file, html, 'utf8');
     return latest.length;
 }
 
 /** blog.html was only ever the design of the index; /blog/ is the real thing. */
-function blogRedirect() {
-    write('blog.html', `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=/blog/">
-<link rel="canonical" href="/blog/">
-<title>ICF Blog &middot; More Cheese</title>
-<meta name="robots" content="noindex">
-</head>
-<body>
-<p>The ICF blog has moved to <a href="/blog/">/blog/</a>.</p>
-</body>
-</html>
-`);
-}
 
 /** Every page carries the header, footer and asset links as `./x`; generated
  *  pages sit one and three levels down, so dist is normalised to root-absolute. */
@@ -430,9 +481,10 @@ function rootAbsoluteLinks() {
         if (!file.endsWith('.html')) continue;
         const before = fs.readFileSync(file, 'utf8');
         let n = 0;
-        const after = before.replace(/\b(href|src)="\.\/([^"]*)"/g, (_m, attr, rest) => {
+        const after = before.replace(/\b(href|src)="\.\/([^"#?]*)([#?][^"]*)?"/g, (_m, attr, rest, tail = '') => {
             n++;
-            return `${attr}="/${rest}"`;
+            const m = /^([a-z0-9-]+)\.html$/i.exec(rest);
+            return `${attr}="${m ? prettyPath(rest) : `/${rest}`}${tail}"`;
         });
         if (n) {
             fs.writeFileSync(file, after, 'utf8');
@@ -461,7 +513,7 @@ function main() {
     }
 
     // A post slug that collides with a page would shadow it; say so loudly.
-    const pageNames = new Set(fs.readdirSync(DIST).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, '')));
+    const pageNames = new Set(fs.readdirSync(DIST, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name));
     const collisions = posts.filter((p) => pageNames.has(p.slug)).map((p) => p.slug);
 
     const blogShell = chassis('blog.html');
@@ -470,19 +522,34 @@ function main() {
     const pages = Math.ceil(posts.length / PER_PAGE);
     for (let page = 1; page <= pages; page++) {
         const chunk = posts.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-        const html = blogIndexPage(chunk, page, pages, posts.length, blogShell);
+        const html = blogIndexPage(chunk, page, pages, posts.length, blogShell, { categories: [...new Set(posts.map((p) => p.category))].sort() });
         write(page === 1 ? 'blog/index.html' : `blog/page/${page}/index.html`, html);
+    }
+
+    const categories = [...new Set(posts.map((p) => p.category))].sort();
+    for (const category of categories) {
+        const mine = posts.filter((p) => p.category === category);
+        const catPages = Math.ceil(mine.length / PER_PAGE);
+        for (let page = 1; page <= catPages; page++) {
+            const chunk = mine.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+            const html = blogIndexPage(chunk, page, catPages, mine.length, blogShell, { categories, category });
+            write(page === 1 ? `blog/category/${slugify(category)}/index.html` : `blog/category/${slugify(category)}/page/${page}/index.html`, html);
+        }
     }
 
     posts.forEach((post, i) => {
         const next = i > 0 ? posts[i - 1] : null;      // newer
         const prev = i < posts.length - 1 ? posts[i + 1] : null; // older
-        write(`${post.slug}/index.html`, postPage(post, prev, next, postShell));
+        write(`${post.slug}/index.html`, postPage(post, prev, next, postShell, posts));
     });
 
+    const libraryPages = writeLibraryPages(chassis('library.html'));
+    console.log(`library pages: ${libraryPages}`);
+
     const homeCards = rewriteHomeCards(posts.slice(0, 3));
-    blogRedirect();
     const links = rootAbsoluteLinks();
+    const betty = insertBetty();
+    console.log(`betty embed: ${betty.enabled ? 'ON' : 'off (no website/data/betty.json)'} — marker handled in ${betty.files} files`);
 
     fs.writeFileSync(
         path.join(DIST, 'staticwebapp.config.json'),

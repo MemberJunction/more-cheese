@@ -48,6 +48,7 @@ MoreCheese demonstrates the **OpenApp Composable Architecture**: rather than bui
 - **Cheese Competitions & Sensory Scoring**: World Cheese Cup events, entry submissions, blind judging rounds, and medal awards.
 - **Continuing Education & Master Certification**: Academy coursework, affineur apprenticeships, and food safety credentials.
 - **Advocacy & Legislative Coalitions**: Grassroots dairy campaigns, raw-milk regulation monitoring, and legislative testimonies.
+- **Predictive Studio Intelligence**: Member renewal risk, churn drivers, and lifetime engagement scoring are powered directly by **MemberJunction Predictive Studio** models trained against canonical BizApps transactions (`Orders`, `Order Lines`, `Event Registrations`, `Activities`) rather than synthetic intermediate tables. The legacy `Membership Periods` entity has been cleansed and retired. See [Predictive Studio Integration Documentation](docs/predictive-studio-integration.md).
 
 ---
 

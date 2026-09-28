@@ -42,10 +42,10 @@ test('no two routes collide once Azure normalises the trailing slash away', () =
 
 test('every legacy URL still redirects, so the fix removed duplicates and not coverage', () => {
     const { routes } = staticWebAppConfig();
-    // 19 legacy pages + 3 retired = 22 redirects, plus the /blog/ rewrite.
+    // 19 legacy .html pages + 4 retired (incl. /blog.html) = 23 redirects, plus the /blog/ rewrite.
     const redirects = routes.filter((r) => r.redirect);
-    assert.equal(redirects.length, 22);
-    assert.equal(routes.length, 23);
+    assert.equal(redirects.length, 23);
+    assert.equal(routes.length, 24);
 });
 
 test('the retired URLs are redirects, not rewrites, so the old address stops being canonical', () => {

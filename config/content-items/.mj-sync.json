@@ -1,0 +1,37 @@
+{
+  "entity": "MJ: Content Items",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".content-items.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt",
+      "LastEmbeddedAt",
+      "LastTaggedAt"
+    ],
+    "ignoreVirtualFields": true,
+    "lookupFields": {
+      "ContentTypeID": {
+        "entity": "MJ: Content Types",
+        "field": "Name"
+      },
+      "ContentSourceTypeID": {
+        "entity": "MJ: Content Source Types",
+        "field": "Name"
+      },
+      "ContentFileTypeID": {
+        "entity": "MJ: Content File Types",
+        "field": "Name"
+      },
+      "EmbeddingModelID": {
+        "entity": "MJ: AI Models",
+        "field": "Name"
+      }
+    }
+  }
+}

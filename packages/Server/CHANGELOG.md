@@ -1,5 +1,30 @@
 # @mj-biz-apps/more-cheese-server
 
+## 1.3.0
+
+### Minor Changes
+
+- 5297bfc: Ship the Knowledge Hub content so search works on a fresh install. `config/` gains the crawl output with IDs preserved — 175 Tags (hierarchy, parents first), 192 Content Items (186 pages of the public site, 6 vault documents), 192 Content Item Chunks (their IDs are the vector record IDs in the shared Pinecone index) and 1,425 Content Item Tags — plus a delta `Metadata_Sync` migration (9.4 MB) generated against a fresh `mj app install` of v1.2.0, so the vectors already in `morecheese-content` resolve without a re-crawl. Intra-set references (tag parents, item→source, item-tag→tag) carry fixed IDs rather than `@lookup`s: tag names contain `&`, which the lookup parser cannot read.
+- f4bb0cd: Enrich Person records with SeniorityLevelID and add PersonJobFunction child records derived from titles via BizApps Common feature pipeline taxonomy.
+- 56b5abe: Display predicted customer lifetime value regression scores on member profiles and ensure foreign key teardown order in migrations.
+- d79acbc: Add predictive machine learning pipelines, models, scoring bindings, and baseline view enrichment for Member Renewal Risk scoring in MoreCheese.
+- 466ef6b: Consolidated v1.3.x release seed: one Metadata_Sync migration carrying the Knowledge Hub content (tags, content items, chunks, item tags) and the person seniority levels and job functions, replacing the per-change delta. Requires bizapps-common >= 5.46.0. Also raises the bizapps-common floor to 5.46.0 and restores the bizapps-accounting range to <1.0.0: 0.13.0 installs cleanly on a fresh database and the seed applies to it with identical data to 0.9.0.
+
+### Patch Changes
+
+- c26798e: Public site blog content from October 2025 through August 2026 (144 posts), a 2026 era in the world ruleset, and the weekly-blog skill extended to cover 2026.
+- ea8cb7a: Require bizapps-common >= 5.47.0, the first release that ships its Job Function and Seniority Level rows as a metadata migration, which the 1.3.x seed's person seniority and job functions depend on.
+- 353c376: Pin `mj-bizapps-accounting` to `>=0.4.0 <0.10.0`. bizapps-accounting 0.10.0 (2026-09-21) adds `V202609202352__v0.10.0__Predictive_Journal_Entry_Anomaly_Fields.sql`, which fails on a fresh database with `Violation of UNIQUE KEY constraint 'UQ_EntityField_EntityID_Sequence'`, so `mj app install more-cheese` — which resolves the newest accounting in range — has been failing for every new consumer since that release. Widen the range again once accounting ships a fix.
+- Updated dependencies [c26798e]
+- Updated dependencies [ea8cb7a]
+- Updated dependencies [5297bfc]
+- Updated dependencies [f4bb0cd]
+- Updated dependencies [353c376]
+- Updated dependencies [56b5abe]
+- Updated dependencies [d79acbc]
+- Updated dependencies [466ef6b]
+  - @mj-biz-apps/more-cheese-entities@1.3.0
+
 ## 1.2.1
 
 ### Patch Changes

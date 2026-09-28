@@ -18,7 +18,7 @@
     if (!btn || !menu) return;
 
     btn.addEventListener('click', function () {
-      var open = menu.classList.toggle('is-open');
+      var open = menu.classList.toggle('is-open'); btn.querySelector('.nav-toggle__icon').textContent = open ? '✕' : '☰';
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       btn.querySelector('.nav-toggle-label').textContent = open ? 'Close' : 'Menu';
     });
@@ -28,17 +28,17 @@
       if (e.key === 'Escape' && menu.classList.contains('is-open')) {
         menu.classList.remove('is-open');
         btn.setAttribute('aria-expanded', 'false');
-        btn.querySelector('.nav-toggle-label').textContent = 'Menu';
+        btn.querySelector('.nav-toggle-label').textContent = 'Menu'; var ic = btn.querySelector('.nav-toggle__icon'); if (ic) ic.textContent = '☰';
         btn.focus();
       }
     });
 
     // If the window grows past the breakpoint, drop the open state.
     window.addEventListener('resize', function () {
-      if (window.innerWidth >= 900 && menu.classList.contains('is-open')) {
+      if (window.innerWidth >= 1040 && menu.classList.contains('is-open')) {
         menu.classList.remove('is-open');
         btn.setAttribute('aria-expanded', 'false');
-        btn.querySelector('.nav-toggle-label').textContent = 'Menu';
+        btn.querySelector('.nav-toggle-label').textContent = 'Menu'; var ic = btn.querySelector('.nav-toggle__icon'); if (ic) ic.textContent = '☰';
       }
     });
   }

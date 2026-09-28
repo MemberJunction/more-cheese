@@ -301,54 +301,6 @@
   {
     "fields": {
       "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
-      "Name": "Members With No Event Registration in 24 Months",
-      "Description": "Custom WHERE clause with a NOT IN subquery: members who joined before September 2024 and have registered for nothing since. Re-engagement campaign list.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"a85246a1-1461-4a08-8210-97d3357e04bd\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"cdf8f3e5-f527-44b0-be23-10b8431c3a19\", \"Name\": \"MemberNumber\", \"DisplayName\": \"Member #\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"e0442068-ae13-4cc6-a5aa-6e2ebe16ef0f\", \"Name\": \"Segment\", \"DisplayName\": \"Segment\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"8fa7894d-19e6-4662-82d9-c923a8a8ca57\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 4}, {\"ID\": \"8525a745-6cf9-5446-8d79-40bb1f26ba7b\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 5}, {\"ID\": \"7cfdb7cd-97c9-491e-b94d-62c5776f40a9\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"8a705b0f-1d40-40d1-9877-9b3662c70c40\", \"Name\": \"JoinDate\", \"DisplayName\": \"Joined\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"6e9b9720-b620-5fde-b11a-a88ded196210\", \"Name\": \"PrimaryLanguage\", \"DisplayName\": \"Language\", \"hidden\": false, \"width\": 120, \"orderIndex\": 8}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": false,
-      "SmartFilterPrompt": "",
-      "CustomWhereClause": true,
-      "SortState": "[{\"field\": \"JoinDate\", \"dir\": \"asc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
-      "DisplayState": null,
-      "WhereClause": "([JoinDate] < '2024-09-14' AND [PersonID] NOT IN (SELECT PersonID FROM morecheese_events.vwEventRegistrations WHERE RegisteredOn >= '2024-09-14'))"
-    },
-    "primaryKey": {
-      "ID": "4AC57CE7-D9D7-5140-A0B3-13EF49DA882D"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
-      "Name": "Multi-Term Loyalists — 5+ Membership Periods",
-      "Description": "Custom WHERE clause with a GROUP BY / HAVING subquery: members holding five or more membership periods. Bob Kowalski (13 years) is the anchor.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"a85246a1-1461-4a08-8210-97d3357e04bd\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"cdf8f3e5-f527-44b0-be23-10b8431c3a19\", \"Name\": \"MemberNumber\", \"DisplayName\": \"Member #\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"e0442068-ae13-4cc6-a5aa-6e2ebe16ef0f\", \"Name\": \"Segment\", \"DisplayName\": \"Segment\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"c201aecb-bcdc-4fb0-9a8e-0c2bd206aed1\", \"Name\": \"Organization\", \"DisplayName\": \"Organization\", \"hidden\": false, \"width\": 220, \"orderIndex\": 3}, {\"ID\": \"8fa7894d-19e6-4662-82d9-c923a8a8ca57\", \"Name\": \"Region\", \"DisplayName\": \"Region\", \"hidden\": false, \"width\": 90, \"orderIndex\": 4}, {\"ID\": \"8525a745-6cf9-5446-8d79-40bb1f26ba7b\", \"Name\": \"CountryName\", \"DisplayName\": \"Country\", \"hidden\": false, \"width\": 150, \"orderIndex\": 5}, {\"ID\": \"7cfdb7cd-97c9-491e-b94d-62c5776f40a9\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 6}, {\"ID\": \"8a705b0f-1d40-40d1-9877-9b3662c70c40\", \"Name\": \"JoinDate\", \"DisplayName\": \"Joined\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}, {\"ID\": \"6e9b9720-b620-5fde-b11a-a88ded196210\", \"Name\": \"PrimaryLanguage\", \"DisplayName\": \"Language\", \"hidden\": false, \"width\": 120, \"orderIndex\": 8}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": false,
-      "SmartFilterPrompt": "",
-      "CustomWhereClause": true,
-      "SortState": "[{\"field\": \"JoinDate\", \"dir\": \"asc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
-      "DisplayState": null,
-      "WhereClause": "([PersonID] IN (SELECT PersonID FROM morecheese_members.vwMembershipPeriods GROUP BY PersonID HAVING COUNT(*) >= 5))"
-    },
-    "primaryKey": {
-      "ID": "F770DD7A-032E-553C-B144-07655C3CC700"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "Name": "Duplicate-Suspect People",
       "Description": "Custom WHERE clause joining to the data-quality labels: every person on either side of a DuplicatePerson label. Kate O’Leary / Kathy OLeary are the cleansing pair.",

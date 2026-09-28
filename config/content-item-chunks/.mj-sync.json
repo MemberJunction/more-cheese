@@ -1,0 +1,20 @@
+{
+  "entity": "MJ: Content Item Chunks",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".content-item-chunks.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt",
+      "LastEmbeddedAt",
+      "LastTaggedAt",
+      "LastDeletedAt"
+    ],
+    "ignoreVirtualFields": true
+  }
+}

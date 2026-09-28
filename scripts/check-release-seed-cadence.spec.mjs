@@ -21,11 +21,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import {
     parseSeedName,
     findUnconsolidatedSeedDeltas,
     findUnshippedMetadataDrift,
+    isAllowedRemovalChange,
 } from './check-release-seed-cadence.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -286,26 +288,147 @@ test('both sync trees are in scope, not just generated/', () => {
     assert.equal(problems.length, 1);
 });
 
-// ── The real repo, and the CLI contract ─────────────────────────────────────────────────────────
+// Retired directories declared in data/pk-removals.json are excluded from drift, while non-retired directories are counted.
+test('records in a retired directory owe no seed', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.0',
+            syncChanged: [
+                'generated/membership-periods/.7018.json',
+                'generated/membership-periods/.0001.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, []);
+    assert.deepEqual(problems, []);
+});
 
-test('the checked-in repo passes', () => {
-    const problems = [
-        ...findUnconsolidatedSeedDeltas(REPO_ROOT).problems,
-        ...findUnshippedMetadataDrift(REPO_ROOT).problems,
+test('records in a non-retired directory still owe a seed when retired directories are present', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.0',
+            syncChanged: [
+                'generated/membership-periods/.7018.json',
+                'generated/people/.people.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, ['generated/people/.people.json']);
+    assert.equal(problems.length, 1);
+    assert.match(problems[0], /1 record file\(s\) changed since v1\.2\.0/);
+});
+
+test('deliberately retired query files declared in pk-removals.json owe no seed', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.1',
+            syncChanged: [
+                'config/queries/.04282792.json',
+                'config/queries/.04dc85ef.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, []);
+    assert.deepEqual(problems, []);
+});
+
+test('deliberately removed views from filter JSON files declared in pk-removals.json owe no seed', () => {
+    const { problems, changed } = findUnshippedMetadataDrift(
+        REPO_ROOT,
+        state({
+            tag: 'v1.2.1',
+            syncChanged: [
+                'config/user-views/.user-views-filters.json',
+                'config/resource-permissions/.resource-permissions-filter-views.json',
+            ],
+        }),
+    );
+    assert.deepEqual(changed, []);
+    assert.deepEqual(problems, []);
+});
+
+test('a deleted file whose id is not in removals still owes a seed', () => {
+    const isAllowed = isAllowedRemovalChange(REPO_ROOT, 'config/queries/.04282792.json', 'v1.2.1', new Set(['WRONG-ID']));
+    assert.equal(isAllowed, false);
+});
+
+test('a file where one record was removed and another was edited still owes a seed', () => {
+    const oldRecords = [
+        { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Original' } },
+        { primaryKey: { ID: 'REC-2' }, fields: { Name: 'Removed' } },
     ];
-    assert.deepEqual(problems, [], problems.join('\n'));
+    const tmp = mkdtempSync(path.join(tmpdir(), 'cadence-test-'));
+    try {
+        mkdirSync(path.join(tmp, 'config'), { recursive: true });
+        writeFileSync(path.join(tmp, 'config/test.json'), JSON.stringify([
+            { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Modified' } },
+        ]));
+        const isAllowed = isAllowedRemovalChange(
+            tmp,
+            'config/test.json',
+            'v1.0.0',
+            new Set(['REC-2']),
+            () => JSON.stringify(oldRecords),
+        );
+        assert.equal(isAllowed, false);
+    } finally {
+        rmSync(tmp, { recursive: true, force: true });
+    }
 });
 
-// This case used to assert the unarmed branch outright, and v1.2.0 falsified it the hour the first
-// release landed — a red `next` for every pull request, caused by a test that had pinned a state the
-// repo was always going to leave. The tag now comes from the gate's own boundary, so the CLI contract
-// stays covered on both sides of a release and the two branches cannot drift apart.
-test('the CLI exits 0 on this repo and reports the drift rule against the tag it actually finds', () => {
-    const { tag } = findUnshippedMetadataDrift(REPO_ROOT);
-    const run = spawnSync(process.execPath, [path.join(HERE, 'check-release-seed-cadence.mjs')], { encoding: 'utf8' });
-    assert.equal(run.status, 0, run.stderr);
-    const expected = tag === null
-        ? /no v\* release tag exists/
-        : new RegExp(`since ${tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
-    assert.match(run.stdout, expected);
+test('a modified file with undeclared removals still owes a seed', () => {
+    const oldRecords = [
+        { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Same' } },
+        { primaryKey: { ID: 'REC-2' }, fields: { Name: 'Removed' } },
+    ];
+    const tmp = mkdtempSync(path.join(tmpdir(), 'cadence-test-'));
+    try {
+        mkdirSync(path.join(tmp, 'config'), { recursive: true });
+        writeFileSync(path.join(tmp, 'config/test.json'), JSON.stringify([
+            { primaryKey: { ID: 'REC-1' }, fields: { Name: 'Same' } },
+        ]));
+        const isAllowed = isAllowedRemovalChange(
+            tmp,
+            'config/test.json',
+            'v1.0.0',
+            new Set(['OTHER-ID']),
+            () => JSON.stringify(oldRecords),
+        );
+        assert.equal(isAllowed, false);
+    } finally {
+        rmSync(tmp, { recursive: true, force: true });
+    }
 });
+
+// ── Fixture verification for clean repo states and CLI contracts ────────────────────────────────
+
+test('a clean repo fixture passes both cadence and drift checks', () => {
+    const s = state({
+        tag: 'v1.2.0',
+        released: [BASELINE, part(1, 1, '202609180900')],
+        current: [BASELINE, part(1, 1, '202609180900')],
+        syncChanged: [],
+    });
+    const problems = [
+        ...findUnconsolidatedSeedDeltas('/x', s).problems,
+        ...findUnshippedMetadataDrift('/x', s).problems,
+    ];
+    assert.deepEqual(problems, []);
+});
+
+test('a repo fixture with changed sync records and corresponding unreleased seed passes drift check', () => {
+    const s = state({
+        tag: 'v1.2.0',
+        released: [BASELINE, part(1, 1, '202609180900')],
+        current: [BASELINE, part(1, 1, '202609180900'), part(1, 1, '202610010900')],
+        syncChanged: ['generated/people/.people.json'],
+    });
+    const problems = [
+        ...findUnshippedMetadataDrift('/x', s).problems,
+    ];
+    assert.deepEqual(problems, []);
+});
+

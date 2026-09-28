@@ -85,9 +85,10 @@ function baseFiles() {
         'generated/product-prices/.data.json': ANNUAL_MEMBERSHIP_PRICE_IDS.map((id) =>
             record(id, { ProductID: PRODUCT, RecurrenceMonths: null }),
         ),
-        'generated/people/.data.json': [record(PERSON, { Name: 'A Member' })],
+        'generated/people/.data.json': [record(PERSON, { Name: 'A Member', SeniorityLevelID: 'ext' })],
 
         // One record per declared external exclusion.
+        'generated/person-job-functions/.data.json': [record('44444444-0000-0000-0000-000000000005', { JobFunctionID: 'ext' })],
         'generated/relationships/.data.json': [record('44444444-0000-0000-0000-000000000001', { RelationshipTypeID: 'ext' })],
         'generated/form-responses/.data.json': [record('44444444-0000-0000-0000-000000000002', { AnonymousSessionID: 'sess' })],
         'generated/payments/.data.json': [record('44444444-0000-0000-0000-000000000003', { PaymentTypeID: 'ext' })],
@@ -159,7 +160,7 @@ test('an unmapped ID field pointing nowhere is a violation', () => {
 test('the run reports how many orphans it found, not just the first', () => {
     const files = baseFiles();
     files['generated/people/.data.json'] = [
-        record(PERSON, { Name: 'A', PreferredChapterID: UNDECLARED }),
+        record(PERSON, { Name: 'A', PreferredChapterID: UNDECLARED, SeniorityLevelID: 'ext' }),
         record('33333333-0000-0000-0000-000000000002', { Name: 'B', PreferredChapterID: UNDECLARED }),
     ];
     const run = runGate(fixture(files));

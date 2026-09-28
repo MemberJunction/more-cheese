@@ -5,233 +5,193 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Join · More Cheese</title>
 <meta name="description" content="ICF membership: Individual $170, Creamery $480, Retailer $390 and Affiliate $260 a year — what each tier covers, what every tier includes, and how annual dues billing works.">
+<link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/brand/mark-cocoa.png">
+<meta property="og:site_name" content="More Cheese · The International Cheese Federation">
+<meta property="og:title" content="Join · More Cheese">
+<meta property="og:description" content="ICF membership: Individual $170, Creamery $480, Retailer $390 and Affiliate $260 a year — what each tier covers, what every tier includes, and how annual dues billing works.">
+<meta property="og:image" content="https://morecheese.org/assets/brand/share.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // One place to change the palette. A yellower variant is a change to these
-  // six values (plus `butter`, which is defined and deliberately unused today).
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          milk:     '#FCFBF7',
-          pasture:  '#145C3D',
-          clover:   '#C8E3A0',
-          brick:    '#A23C2C',
-          charcoal: '#242424',
-          mid:      '#5E6560',
-          butter:   '#EFC24A'
-        },
-        fontFamily: {
-          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
-          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
-        },
-        screens: { nav: '900px' }
-      }
-    }
-  };
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
 </head>
-<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+<body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip" href="#main">Skip to main content</a>
 
-<header class="relative border-b border-charcoal/15 bg-milk">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
-    <div class="flex items-center gap-2.5">
-      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-        <span class="logo-dot" aria-hidden="true"></span>More Cheese
-      </a>
-      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
-        <span class="mc-badge__dot" aria-hidden="true"></span>
-        <span class="mc-badge__long">Fictional demo</span>
-        <span class="mc-badge__short">Fiction</span>
-      </a>
-    </div>
-    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
-      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
-      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
-      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
-      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
-      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
-      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
-      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
-    </ul>
-    <div class="flex items-center gap-2">
-      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
-      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-    </div>
-  </nav>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="./index.html" class="brand" aria-label="More Cheese home">
+      <img class="brand__mark" src="./assets/brand/mark-cocoa.svg" alt="" width="34" height="34">
+      <span class="brand__name">More Cheese</span>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read why">Fictional demo</a>
+    </a>
+    <nav aria-label="Main" id="nav-menu" class="site-nav">
+      <a href="./about.html#fiction" class="mc-badge mc-badge--drawer js-fiction-link">Fictional demo</a>
+      <ul class="site-nav__list">
+        <li><a href="./join.html">Join</a></li>
+        <li><a href="./learn.html">Learn</a></li>
+        <li><a href="./library.html">Library</a></li>
+        <li><a href="./compete.html">Compete</a></li>
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li class="site-nav__more"><a href="./faq.html">FAQ</a></li>
+        <li class="site-nav__more"><a href="./contact.html">Contact</a></li>
+        <li class="site-nav__more"><a href="./careers.html">Careers</a></li>
+        <li class="site-nav__more"><a href="./research.html">Research</a></li>
+      </ul>
+      <a href="./join.html" class="btn btn-butter site-nav__cta">Become a member</a>
+    </nav>
+    <button type="button" id="nav-toggle" class="btn nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+  </div>
 </header>
 
 <main id="main">
-
-  <section class="border-b border-charcoal/15 bg-clover">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
-      <p class="text-xs font-bold uppercase tracking-[.14em] text-pasture">Membership</p>
-      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[18ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight text-pasture">Four tiers, one federation.</h1>
-      <p class="m-0 max-w-[56ch] text-[17px] text-[#243027]">Dues start at $170 a year. Every tier carries the same vote, the same weekly brief and the same discount on credential exams — the difference is how many people at your organization the membership covers, and what your organization needs from us.</p>
+  <section class="on-ink" style="position:relative;overflow:hidden">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+    <div class="wrap section" style="position:relative;display:flex;flex-direction:column;gap:20px">
+      <span class="eyebrow eyebrow--yellow">Membership</span>
+      <h1 class="display" style="max-width:16ch">Four tiers, one federation.</h1>
+      <p class="lede">Dues start at $170 a year. Every tier carries the same vote, the same weekly brief and the same discount on credential exams — the difference is how many people at your organization the membership covers, and what your organization needs from us.</p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="tiers-h">
-    <h2 id="tiers-h" class="font-display m-0 mb-6 text-[34px] font-extrabold tracking-tight">The rate card</h2>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-4">
+  <section class="wrap section" aria-labelledby="tiers-h" style="display:flex;flex-direction:column;gap:28px">
+    <h2 id="tiers-h" class="h2">The rate card</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px">
 
-      <article class="flex flex-col rounded-2xl bg-pasture p-6 text-white">
-        <h3 class="font-display m-0 text-2xl font-bold tracking-tight">Individual</h3>
-        <p class="font-display m-0 mt-1 text-[40px] font-extrabold leading-none tracking-tight">$170<span class="text-base font-semibold opacity-80">/yr</span></p>
-        <p class="mt-3 text-sm opacity-95">For one person: a monger behind a counter, a maker between jobs, a student on the ladder.</p>
-        <ul class="mt-4 flex-1 space-y-2 text-sm">
+      <article class="card" style="padding:28px;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;min-height:26px">
+          <h3 class="h3" style="font-size:19px">Individual</h3>
+        </div>
+        <p style="margin:0;display:flex;align-items:baseline;gap:4px"><span class="display" style="font-size:44px">$170</span><span style="font-size:14px;font-weight:600">/yr</span></p>
+        <p style="margin:0;font-size:14px;line-height:1.55">For one person: a monger behind a counter, a maker between jobs, a student on the ladder.</p>
+        <ul style="margin:0;padding:16px 0 0 1.1em;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px;font-size:14px;line-height:1.45">
           <li>Credential exam discounts on every rung of the ladder</li>
           <li>The weekly brief, plus the full archive</li>
           <li>One committee seat of your choosing</li>
         </ul>
-        <a href="./contact.html" class="mt-5 rounded-full bg-milk px-5 py-3 text-center text-sm font-bold text-pasture no-underline hover:bg-clover">Join as an Individual</a>
+        <a href="./contact.html" class="btn btn-outline" style="margin-top:auto">Join as an Individual</a>
       </article>
 
-      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <h3 class="font-display m-0 text-2xl font-bold tracking-tight">Creamery</h3>
-        <p class="font-display m-0 mt-1 text-[40px] font-extrabold leading-none tracking-tight text-pasture">$480<span class="text-base font-semibold text-mid">/yr</span></p>
-        <p class="mt-3 text-sm text-[#3A403C]">For the people who make the cheese, from a two-vat farmstead to a regional plant.</p>
-        <ul class="mt-4 flex-1 space-y-2 text-sm text-[#3A403C]">
+      <article class="card card--soft" style="padding:28px;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;min-height:26px">
+          <h3 class="h3" style="font-size:19px">Creamery</h3>
+          <span style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--yellow);padding:4px 9px;border-radius:999px;white-space:nowrap">Most common</span>
+        </div>
+        <p style="margin:0;display:flex;align-items:baseline;gap:4px"><span class="display" style="font-size:44px">$480</span><span style="font-size:14px;font-weight:600">/yr</span></p>
+        <p style="margin:0;font-size:14px;line-height:1.55">For the people who make the cheese, from a two-vat farmstead to a regional plant.</p>
+        <ul style="margin:0;padding:16px 0 0 1.1em;border-top:1px solid var(--butter);display:flex;flex-direction:column;gap:9px;font-size:14px;line-height:1.45">
           <li>Covers up to 6 staff under one membership</li>
           <li>Competition entry included — no per-wheel fee</li>
           <li>Listing in the buyers' directory</li>
         </ul>
-        <a href="./contact.html" class="mt-5 rounded-full bg-pasture px-5 py-3 text-center text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Join as a Creamery</a>
+        <a href="./contact.html" class="btn btn-ink" style="margin-top:auto">Join as a Creamery</a>
       </article>
 
-      <article class="flex flex-col rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <h3 class="font-display m-0 text-2xl font-bold tracking-tight">Retailer</h3>
-        <p class="font-display m-0 mt-1 text-[40px] font-extrabold leading-none tracking-tight text-pasture">$390<span class="text-base font-semibold text-mid">/yr</span></p>
-        <p class="mt-3 text-sm text-[#3A403C]">For shops, counters and wholesale buyers who have to make the case in front of a customer.</p>
-        <ul class="mt-4 flex-1 space-y-2 text-sm text-[#3A403C]">
+      <article class="card" style="padding:28px;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;min-height:26px">
+          <h3 class="h3" style="font-size:19px">Retailer</h3>
+        </div>
+        <p style="margin:0;display:flex;align-items:baseline;gap:4px"><span class="display" style="font-size:44px">$390</span><span style="font-size:14px;font-weight:600">/yr</span></p>
+        <p style="margin:0;font-size:14px;line-height:1.55">For shops, counters and wholesale buyers who have to make the case in front of a customer.</p>
+        <ul style="margin:0;padding:16px 0 0 1.1em;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px;font-size:14px;line-height:1.45">
           <li>Covers up to 4 staff under one membership</li>
           <li>Priority in Certified Cheese Professional cohorts</li>
           <li>Case-planning resources: rotation, margin and shrink</li>
         </ul>
-        <a href="./contact.html" class="mt-5 rounded-full bg-pasture px-5 py-3 text-center text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Join as a Retailer</a>
+        <a href="./contact.html" class="btn btn-outline" style="margin-top:auto">Join as a Retailer</a>
       </article>
 
-      <article class="flex flex-col rounded-2xl bg-clover p-6">
-        <h3 class="font-display m-0 text-2xl font-bold tracking-tight">Affiliate</h3>
-        <p class="font-display m-0 mt-1 text-[40px] font-extrabold leading-none tracking-tight text-pasture">$260<span class="text-base font-semibold text-[#41503F]">/yr</span></p>
-        <p class="mt-3 text-sm text-[#243027]">For suppliers, laboratories and distributors — the businesses the rest of the trade runs on.</p>
-        <ul class="mt-4 flex-1 space-y-2 text-sm text-[#243027]">
+      <article class="card" style="padding:28px;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;min-height:26px">
+          <h3 class="h3" style="font-size:19px">Affiliate</h3>
+        </div>
+        <p style="margin:0;display:flex;align-items:baseline;gap:4px"><span class="display" style="font-size:44px">$260</span><span style="font-size:14px;font-weight:600">/yr</span></p>
+        <p style="margin:0;font-size:14px;line-height:1.55">For suppliers, laboratories and distributors — the businesses the rest of the trade runs on.</p>
+        <ul style="margin:0;padding:16px 0 0 1.1em;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px;font-size:14px;line-height:1.45">
           <li>For suppliers, labs and distributors</li>
           <li>First refusal on event sponsorship</li>
           <li>Listing in the organization directory</li>
         </ul>
-        <a href="./contact.html" class="mt-5 rounded-full bg-pasture px-5 py-3 text-center text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Join as an Affiliate</a>
+        <a href="./contact.html" class="btn btn-outline" style="margin-top:auto">Join as an Affiliate</a>
       </article>
     </div>
   </section>
 
-  <section class="border-y-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:px-10 nav:grid-cols-2">
-      <div>
-        <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">What every tier includes</h2>
-        <ul class="space-y-3 text-[15px] text-[#3A403C]">
-          <li><b class="font-display text-charcoal">The Monday brief.</b> One email a week on prices, policy and what other members are doing, with the whole archive open to you.</li>
-          <li><b class="font-display text-charcoal">A vote.</b> Every membership carries one vote in the annual election, whatever it costs.</li>
-          <li><b class="font-display text-charcoal">Committee access.</b> Standards, Food Safety, Education, Events, Membership and Advocacy all seat members, not just board members.</li>
-          <li><b class="font-display text-charcoal">Member rates on everything.</b> Courses, workshops, the Annual Conference and the competition.</li>
-          <li><b class="font-display text-charcoal">Comment standing.</b> When we file on a proposed rule, your comment goes in the packet.</li>
-          <li><b class="font-display text-charcoal">The directory.</b> Find a lab, a distributor, a cave or a buyer among 641 member organizations in 41 countries.</li>
+  <section class="on-paper rule-top">
+    <div class="wrap section grid grid--2" style="align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 class="h2" style="font-size:30px">What every tier includes</h2>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:15px;line-height:1.6;color:var(--body)">
+          <li><strong style="color:var(--ink)">The Monday brief.</strong> One email a week on prices, policy and what other members are doing, with the whole archive open to you.</li>
+          <li><strong style="color:var(--ink)">A vote.</strong> Every membership carries one vote in the annual election, whatever it costs.</li>
+          <li><strong style="color:var(--ink)">Committee access.</strong> Standards, Food Safety, Education, Events, Membership and Advocacy all seat members, not just board members.</li>
+          <li><strong style="color:var(--ink)">Member rates on everything.</strong> Courses, workshops, the Annual Conference and the competition.</li>
+          <li><strong style="color:var(--ink)">Comment standing.</strong> When we file on a proposed rule, your comment goes in the packet.</li>
+          <li><strong style="color:var(--ink)">The directory.</strong> Find a lab, a distributor, a cave or a buyer among 641 member organizations in 41 countries.</li>
         </ul>
       </div>
-      <div>
-        <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">How dues billing works</h2>
-        <dl class="space-y-4 text-[15px] text-[#3A403C]">
-          <div class="rounded-2xl bg-clover p-5">
-            <dt class="font-display font-bold text-charcoal">Dues are annual.</dt>
-            <dd class="m-0 mt-1 text-[#243027]">One payment covers twelve months. There is no monthly plan and no joining fee.</dd>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 class="h2" style="font-size:30px">How dues billing works</h2>
+        <dl style="margin:0;display:flex;flex-direction:column;gap:10px">
+          <div class="card card--soft" style="padding:18px 20px;gap:5px">
+            <dt style="font-weight:700;font-size:15px">Dues are annual.</dt>
+            <dd style="margin:0;font-size:14px;line-height:1.55">One payment covers twelve months. There is no monthly plan and no joining fee.</dd>
           </div>
-          <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
-            <dt class="font-display font-bold text-charcoal">Billed on your join date.</dt>
-            <dd class="m-0 mt-1">Your year runs from the day you join, not from January. Join in August and you renew in August.</dd>
+          <div class="card" style="padding:18px 20px;gap:5px">
+            <dt style="font-weight:700;font-size:15px">Billed on your join date.</dt>
+            <dd style="margin:0;font-size:14px;line-height:1.55;color:var(--body)">Your year runs from the day you join, not from January. Join in August and you renew in August.</dd>
           </div>
-          <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
-            <dt class="font-display font-bold text-charcoal">Auto-renew is optional.</dt>
-            <dd class="m-0 mt-1">Turn it on and we take the dues on the anniversary. Leave it off and we send a renewal notice 30 days out and a reminder at 7. Either way you can switch it in your account.</dd>
+          <div class="card" style="padding:18px 20px;gap:5px">
+            <dt style="font-weight:700;font-size:15px">Auto-renew is optional.</dt>
+            <dd style="margin:0;font-size:14px;line-height:1.55;color:var(--body)">Turn it on and we take the dues on the anniversary. Leave it off and we send a renewal notice 30 days out and a reminder at 7. Either way you can switch it in your account.</dd>
           </div>
-          <div class="rounded-2xl border-[1.5px] border-charcoal p-5">
-            <dt class="font-display font-bold text-charcoal">Changing tier mid-year.</dt>
-            <dd class="m-0 mt-1">Move up and we bill the difference, prorated to your renewal date. Move down at renewal. A creamery that closes can ask Membership about hardship dues.</dd>
+          <div class="card" style="padding:18px 20px;gap:5px">
+            <dt style="font-weight:700;font-size:15px">Changing tier mid-year.</dt>
+            <dd style="margin:0;font-size:14px;line-height:1.55;color:var(--body)">Move up and we bill the difference, prorated to your renewal date. Move down at renewal. A creamery that closes can ask Membership about hardship dues.</dd>
           </div>
         </dl>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-14 md:px-10">
-    <div class="rounded-2xl bg-pasture px-6 py-10 text-center text-white md:px-12">
-      <h2 class="font-display m-0 text-[clamp(28px,4vw,44px)] font-extrabold leading-[1] tracking-tight">Join the Federation</h2>
-      <p class="mx-auto mt-3 max-w-[52ch] text-[17px] opacity-95">Tell us which tier fits and we will set up the membership. Applications are reviewed by Membership Operations, usually within two business days.</p>
-      <a href="./contact.html" class="mt-6 inline-block rounded-full bg-milk px-7 py-3.5 text-sm font-bold text-pasture no-underline hover:bg-clover">Start your application</a>
-      <p class="mt-4 text-xs text-clover">This is a demonstration site: the application goes to a contact page, not to a payment processor.</p>
+  <section class="wrap section">
+    <div class="on-ink" style="position:relative;overflow:hidden;border-radius:var(--r);padding:clamp(36px,5vw,56px) clamp(20px,4vw,40px) 104px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center">
+      <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:5%;top:62%;width:56px;height:56px"></span><span class="hole" style="left:24%;top:82%;width:28px;height:28px"></span><span class="hole" style="left:70%;top:78%;width:40px;height:40px"></span><span class="hole" style="left:90%;top:64%;width:60px;height:60px"></span></div>
+      <h2 class="h2" style="position:relative;font-size:38px">Join the Federation</h2>
+      <p class="lede" style="position:relative;font-size:17px;max-width:560px">Tell us which tier fits and we will set up the membership. Applications are reviewed by Membership Operations, usually within two business days.</p>
+      <a href="./contact.html" class="btn btn-butter" style="position:relative">Start your application</a>
+      <span style="position:relative;font-size:13px;opacity:.75">This is a demonstration site: the application goes to a contact page, not to a payment processor.</span>
     </div>
   </section>
 </main>
-
-<footer class="bg-charcoal text-[#D9DBD4]">
-  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-    <div class="flex flex-wrap justify-between gap-10">
-      <div class="max-w-sm">
-        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
-          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+<footer class="site-footer">
+  <div class="holes holes--footer" aria-hidden="true"><span class="hole" style="left:6%;top:18%;width:48px;height:48px"></span><span class="hole" style="left:22%;top:70%;width:26px;height:26px"></span><span class="hole" style="left:58%;top:12%;width:34px;height:34px"></span><span class="hole" style="left:81%;top:64%;width:56px;height:56px"></span><span class="hole" style="left:93%;top:22%;width:20px;height:20px"></span></div>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <div class="brand brand--on-ink">
+          <img class="brand__mark" src="./assets/brand/mark-butter.svg" alt="" width="32" height="32">
+          <span class="brand__name">More Cheese</span>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
-        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+        <p>The International Cheese Federation · 1 Rind Lane, Lancaster, PA<br><a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a></p>
       </div>
-      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
-            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
-            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
-            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
-            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
-            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
-            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
-            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
-            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
-            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="site-footer__col"><span class="site-footer__head">Membership</span><a href="./join.html">Join</a><a href="./about.html">About the ICF</a><a href="./faq.html">FAQ</a><a href="./contact.html">Contact</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Programs</span><a href="./learn.html">Learn</a><a href="./compete.html">Compete</a><a href="./events.html">Events</a><a href="./advocacy.html">Advocacy</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Resources</span><a href="./library.html">Cheese Library</a><a href="./research.html">Research &amp; publications</a><a href="./careers.html">Careers &amp; volunteering</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Read</span><a href="./blog.html">Blog</a><a href="./faq.html">FAQ</a></div>
     </div>
-    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
-    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+    <p class="site-footer__legal">The International Cheese Federation (ICF) and More Cheese are entirely fictional. Demonstration content created for MemberJunction. © <span class="js-year">2026</span>.</p>
   </div>
 </footer>
-
+<!-- BETTY-WIDGET: the Betty launcher snippet is inserted here by the build once Colin allow-lists our origins -->
 </body>
 </html>

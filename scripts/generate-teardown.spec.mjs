@@ -381,8 +381,13 @@ test('the generator emits each (entity, id) pair at most once', () => {
         entities: readBaselineCoreRows(REPO_ROOT).entities,
         applicationId: readBaselineCoreRows(REPO_ROOT).applicationId,
     });
-    const block = generated.slice(generated.indexOf('INSERT INTO #MoreCheeseSeed'));
-    const emitted = block.slice(0, block.indexOf(';')).match(/\('[^)]*'\)/g) ?? [];
+    // batchedInsert splits the seed under T-SQL's 1000-row table-constructor cap (500 per statement),
+    // so the emitted rows span several `INSERT INTO #MoreCheeseSeed … VALUES … ;` statements once
+    // config/ passes 500 records — which it did when the Knowledge Hub content landed. Read them all.
+    const emitted = [];
+    for (const m of generated.matchAll(/INSERT INTO #MoreCheeseSeed \(EntityName, RowID\) VALUES\n([\s\S]*?);/g)) {
+        emitted.push(...(m[1].match(/\('[^)]*'\)/g) ?? []));
+    }
     assert.equal(new Set(emitted).size, emitted.length, 'the generator emitted a duplicate seed key');
     assert.equal(emitted.length, new Set(keys).size, `emitted ${emitted.length} rows for ${new Set(keys).size} distinct declarations (${dupes.length} shared across directories)`);
 });

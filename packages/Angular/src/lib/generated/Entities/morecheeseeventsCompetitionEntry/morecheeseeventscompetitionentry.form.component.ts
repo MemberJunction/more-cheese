@@ -15,7 +15,10 @@ export class morecheeseeventsCompetitionEntryFormComponent extends BaseFormCompo
     override async ngOnInit() {
         await super.ngOnInit();
         this.initSections([
-            { sectionKey: 'details', sectionName: 'Details', isExpanded: true }
+            { sectionKey: 'entryDetails', sectionName: 'Entry Details', isExpanded: true },
+            { sectionKey: 'participantInformation', sectionName: 'Participant Information', isExpanded: true },
+            { sectionKey: 'competitionResults', sectionName: 'Competition Results', isExpanded: true },
+            { sectionKey: 'systemMetadata', sectionName: 'System Metadata', isExpanded: false }
         ]);
     }
 }

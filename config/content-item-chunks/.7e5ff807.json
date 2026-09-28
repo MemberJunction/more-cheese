@@ -1,0 +1,30 @@
+{
+  "fields": {
+    "ContentItemID": "D12DA790-D548-40CB-B635-FC065D05A391",
+    "Sequence": 0,
+    "Text": "January 2019 membership close by tier\nThis internal spreadsheet from the International Cheese Federation provides a detailed membership close report for January 2019, broken down by membership tier. It includes data on active membership periods, billed dues, membership order revenue, autorenewal statistics, and financial variances. The document notes a caveat regarding the inability to report new versus renewing members for 2019 due to baseline data limitations.\n# title: January 2019 membership close by tier\n# date: 2019-02-04\n# doc_type: spreadsheet\n# visibility: internal\n# org: International Cheese Federation\n# era: era-pre-pandemic-baseline\n# fiscal_year: 2019\n# week_of: 2019-02-04\n# fictional: true\n# owner_role: Membership Operations\n# tags: [membership-close, tiers, autorenew, variance]\n# data_sources: [generated/membership-periods, generated/orders, generated/order-lines, generated/products]\n# source: VAULT-DESIGN Appendix A.0 loader + A.2 (tier mix, dues) and A.5 (revenue by product line), scoped to 2019-01-01..2019-01-31\n# basis: periods_active_31jan counts membership periods with StartDate <= 2019-01-31 <= EndDate. membership_order_revenue_usd sums order lines for the tier's membership product on orders dated in January.\n# caveat: new-vs-renewing is NOT reportable for 2019. Membership-period history begins at the 2019-01-01 baseline, so every active period starts 1 January regardless of actual join date.\n# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious trade\n#   association created for the MemberJunction More Cheese demonstration environment. All names,\n#   figures, events, and decisions are invented.\n#\ntier,list_price_usd,periods_active_31jan,dues_billed_usd,autorenew_on,autorenew_pct,membership_order_lines,membership_order_revenue_usd,variance_usd\nEnthusiast,150,13,1950,5,38.5,13,1950,0\nIndividual,175,148,25840,44,29.7,162,27870,2030\nSmallBusiness,400,46,18332,10,21.7,46,18332,0\nCorporate,1000,15,14830,5,33.3,15,14830,0\nTOTAL,,222,60952,64,28.8,236,62982,2030",
+    "VectorRecordID": "7e5ff807-2fde-4e2f-abd7-cf767698eb02",
+    "EmbeddingStatus": "Complete",
+    "TaggingStatus": "Pending",
+    "DeleteStatus": null,
+    "Modality": "text",
+    "StartOffset": null,
+    "EndOffset": null,
+    "StartMs": null,
+    "EndMs": null,
+    "PageNumber": null,
+    "SegmentTitle": null,
+    "Description": null,
+    "Transcript": null,
+    "SegmenterKey": null,
+    "ParentChunkID": null,
+    "SkipEmbeddings": false
+  },
+  "primaryKey": {
+    "ID": "7E5FF807-2FDE-4E2F-ABD7-CF767698EB02"
+  },
+  "sync": {
+    "lastModified": "2026-09-22T02:12:18.358Z",
+    "checksum": "9a25bfefac77761c4ccc38279e425a53620986dae279fbfa64b4712048b733fc"
+  }
+}

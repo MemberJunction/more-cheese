@@ -1,0 +1,24 @@
+{
+  "entity": "MJ: Tags",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".tags.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt",
+      "EmbeddingVector"
+    ],
+    "ignoreVirtualFields": true,
+    "lookupFields": {
+      "EmbeddingModelID": {
+        "entity": "MJ: AI Models",
+        "field": "Name"
+      }
+    }
+  }
+}

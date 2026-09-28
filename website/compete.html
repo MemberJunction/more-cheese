@@ -5,197 +5,149 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Compete · More Cheese</title>
 <meta name="description" content="The ICF annual competition: six categories judged blind, results published with score sheets, entries open in January, and Creamery-tier entry included.">
+<link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/brand/mark-cocoa.png">
+<meta property="og:site_name" content="More Cheese · The International Cheese Federation">
+<meta property="og:title" content="Compete · More Cheese">
+<meta property="og:description" content="The ICF annual competition: six categories judged blind, results published with score sheets, entries open in January, and Creamery-tier entry included.">
+<meta property="og:image" content="https://morecheese.org/assets/brand/share.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Public+Sans:wght@400;500;600;700&display=swap">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // One place to change the palette. A yellower variant is a change to these
-  // six values (plus `butter`, which is defined and deliberately unused today).
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          milk:     '#FCFBF7',
-          pasture:  '#145C3D',
-          clover:   '#C8E3A0',
-          brick:    '#A23C2C',
-          charcoal: '#242424',
-          mid:      '#5E6560',
-          butter:   '#EFC24A'
-        },
-        fontFamily: {
-          display: ['"Bricolage Grotesque"', '"Trebuchet MS"', 'system-ui', 'sans-serif'],
-          sans:    ['"Public Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Helvetica', 'Arial', 'sans-serif']
-        },
-        screens: { nav: '900px' }
-      }
-    }
-  };
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
 </head>
-<body class="bg-milk text-charcoal text-[15px] leading-relaxed">
+<body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip" href="#main">Skip to main content</a>
 
-<header class="relative border-b border-charcoal/15 bg-milk">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-10" aria-label="Main">
-    <div class="flex items-center gap-2.5">
-      <a href="./index.html" class="font-display flex items-center gap-2.5 text-[22px] font-extrabold tracking-tight text-charcoal no-underline">
-        <span class="logo-dot" aria-hidden="true"></span>More Cheese
-      </a>
-      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read the note on the fiction">
-        <span class="mc-badge__dot" aria-hidden="true"></span>
-        <span class="mc-badge__long">Fictional demo</span>
-        <span class="mc-badge__short">Fiction</span>
-      </a>
-    </div>
-    <ul id="nav-menu" class="items-center gap-[22px] text-sm font-medium nav:flex">
-      <li><a href="./join.html" class="text-charcoal no-underline hover:text-pasture">Join</a></li>
-      <li><a href="./learn.html" class="text-charcoal no-underline hover:text-pasture">Learn</a></li>
-      <li><a href="./library.html" class="text-charcoal no-underline hover:text-pasture">Library</a></li>
-      <li><a href="./compete.html" class="text-charcoal no-underline hover:text-pasture">Compete</a></li>
-      <li><a href="./events.html" class="text-charcoal no-underline hover:text-pasture">Events</a></li>
-      <li><a href="./blog.html" class="text-charcoal no-underline hover:text-pasture">Blog</a></li>
-      <li><a href="./about.html" class="text-charcoal no-underline hover:text-pasture">About</a></li>
-    </ul>
-    <div class="flex items-center gap-2">
-      <a href="./join.html" class="rounded-full bg-pasture px-[18px] py-[11px] text-sm font-bold text-white no-underline hover:bg-[#0E4530]">Become a member</a>
-      <button id="nav-toggle" type="button" class="items-center gap-2 rounded-full border-[1.5px] border-charcoal px-4 py-2 text-sm font-semibold" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav-toggle-label">Menu</span>
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-    </div>
-  </nav>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="./index.html" class="brand" aria-label="More Cheese home">
+      <img class="brand__mark" src="./assets/brand/mark-cocoa.svg" alt="" width="34" height="34">
+      <span class="brand__name">More Cheese</span>
+      <a href="./about.html#fiction" class="mc-badge js-fiction-link" title="Everything on this site is invented — read why">Fictional demo</a>
+    </a>
+    <nav aria-label="Main" id="nav-menu" class="site-nav">
+      <a href="./about.html#fiction" class="mc-badge mc-badge--drawer js-fiction-link">Fictional demo</a>
+      <ul class="site-nav__list">
+        <li><a href="./join.html">Join</a></li>
+        <li><a href="./learn.html">Learn</a></li>
+        <li><a href="./library.html">Library</a></li>
+        <li><a href="./compete.html">Compete</a></li>
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li class="site-nav__more"><a href="./faq.html">FAQ</a></li>
+        <li class="site-nav__more"><a href="./contact.html">Contact</a></li>
+        <li class="site-nav__more"><a href="./careers.html">Careers</a></li>
+        <li class="site-nav__more"><a href="./research.html">Research</a></li>
+      </ul>
+      <a href="./join.html" class="btn btn-butter site-nav__cta">Become a member</a>
+    </nav>
+    <button type="button" id="nav-toggle" class="btn nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
+  </div>
 </header>
 
 <main id="main">
-
-  <section class="border-b border-charcoal/15 bg-brick text-white">
-    <div class="mx-auto max-w-6xl px-5 py-12 md:px-10 md:py-14">
-      <p class="text-xs font-bold uppercase tracking-[.14em] text-clover">Competition</p>
-      <h1 class="font-display font-display-tight m-0 mb-4 mt-2 max-w-[17ch] text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[0.94] tracking-tight">Judged blind. Scored on paper.</h1>
-      <p class="m-0 max-w-[58ch] text-[17px] opacity-95">The annual competition runs in six categories. Judges never see a label, results are published with the score sheets, and entries open in January. Creamery-tier membership includes entry.</p>
-      <div class="mt-6 flex flex-wrap gap-2.5">
-        <a href="./join.html" class="rounded-full bg-milk px-[18px] py-3 text-sm font-bold text-brick no-underline hover:bg-clover hover:text-charcoal">Creamery membership includes entry</a>
-        <a href="./events.html" class="rounded-full border-[1.5px] border-white px-[18px] py-3 text-sm font-semibold text-white no-underline hover:bg-white hover:text-brick">See the calendar</a>
+  <section class="on-ink" style="position:relative;overflow:hidden">
+    <div class="holes holes--ink" aria-hidden="true"><span class="hole" style="left:6%;top:14%;width:54px;height:54px"></span><span class="hole" style="left:38%;top:70%;width:30px;height:30px"></span><span class="hole" style="left:64%;top:10%;width:42px;height:42px"></span><span class="hole" style="left:84%;top:58%;width:64px;height:64px"></span><span class="hole" style="left:94%;top:18%;width:22px;height:22px"></span></div>
+    <div class="wrap section" style="position:relative;display:flex;flex-direction:column;gap:22px">
+      <span class="eyebrow eyebrow--yellow">Competition</span>
+      <h1 class="display" style="max-width:16ch">Judged blind. Scored on paper.</h1>
+      <p class="lede">The annual competition runs in six categories. Judges never see a label, results are published with the score sheets, and entries open in January. Creamery-tier membership includes entry.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="./join.html" class="btn btn-butter">Creamery membership includes entry</a>
+        <a href="./events.html" class="btn btn-outline" style="border-color:var(--cream);color:var(--cream)">See the calendar</a>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-12 md:px-10" aria-labelledby="cats-h">
-    <h2 id="cats-h" class="font-display m-0 mb-2 text-[34px] font-extrabold tracking-tight">The six categories</h2>
-    <p class="m-0 mb-6 max-w-[60ch] text-[15px] text-[#3A403C]">Enter as many as you like; each wheel is entered in one category only, and the category you choose is the standard you are judged against.</p>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 nav:grid-cols-3">
-      <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Soft-Ripened</h3>
-        <p class="m-0 mt-2 text-sm text-[#3A403C]">Bloomy rinds, judged on the state of the paste at the moment it reaches the table — not on how impressive it looked a week early.</p>
+  <section class="wrap section" aria-labelledby="cats-h" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
+      <h2 id="cats-h" class="h2">The six categories</h2>
+      <span style="font-size:15px;color:var(--body);max-width:60ch">Enter as many as you like; each wheel is entered in one category only, and the category you choose is the standard you are judged against.</span>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <h3 class="h3" style="font-size:20px">Soft-Ripened</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Bloomy rinds, judged on the state of the paste at the moment it reaches the table — not on how impressive it looked a week early.</p>
       </article>
-      <article class="rounded-2xl bg-clover p-6">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Alpine Styles</h3>
-        <p class="m-0 mt-2 text-sm text-[#243027]">Mountain-style wheels, large formats included. Eyes, body and the long sweet finish that separates a good one from a correct one.</p>
+      <article class="card">
+        <h3 class="h3" style="font-size:20px">Alpine Styles</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Mountain-style wheels, large formats included. Eyes, body and the long sweet finish that separates a good one from a correct one.</p>
       </article>
-      <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Aged Cheddar &amp; Territorials</h3>
-        <p class="m-0 mt-2 text-sm text-[#3A403C]">Cheddars over twelve months and the regional territorials alongside them. Texture and crystal development count as much as flavor.</p>
+      <article class="card">
+        <h3 class="h3" style="font-size:20px">Aged Cheddar &amp; Territorials</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Cheddars over twelve months and the regional territorials alongside them. Texture and crystal development count as much as flavor.</p>
       </article>
-      <article class="rounded-2xl bg-pasture p-6 text-white">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Blue</h3>
-        <p class="m-0 mt-2 text-sm opacity-95">Veining, salt balance and whether the blue is in service of the cheese or has simply taken it over.</p>
+      <article class="card">
+        <h3 class="h3" style="font-size:20px">Blue</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Veining, salt balance and whether the blue is in service of the cheese or has simply taken it over.</p>
       </article>
-      <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Washed-Rind</h3>
-        <p class="m-0 mt-2 text-sm text-[#3A403C]">The category that punishes a careless cave. Rind condition, aroma and the gap between what the nose promises and the paste delivers.</p>
+      <article class="card">
+        <h3 class="h3" style="font-size:20px">Washed-Rind</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">The category that punishes a careless cave. Rind condition, aroma and the gap between what the nose promises and the paste delivers.</p>
       </article>
-      <article class="rounded-2xl border-[1.5px] border-charcoal bg-milk p-6">
-        <h3 class="font-display m-0 text-[22px] font-bold tracking-tight">Fresh</h3>
-        <p class="m-0 mt-2 text-sm text-[#3A403C]">Chèvre, pasta filata, quark and the rest — where there is nowhere to hide, because age cannot fix anything.</p>
+      <article class="card">
+        <h3 class="h3" style="font-size:20px">Fresh</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Chèvre, pasta filata, quark and the rest — where there is nowhere to hide, because age cannot fix anything.</p>
       </article>
     </div>
   </section>
 
-  <section class="border-y-[1.5px] border-charcoal bg-milk">
-    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:px-10 nav:grid-cols-[1.1fr_1fr]">
-      <div>
-        <h2 class="font-display m-0 mb-4 text-[28px] font-extrabold tracking-tight">How judging works</h2>
-        <ol class="space-y-3 text-[15px] text-[#3A403C]">
-          <li><b class="font-display text-charcoal">1 · Entries are stripped.</b> Every wheel is re-labeled with a number when it arrives. Judges see the number and the category, nothing else — no creamery, no region, no story.</li>
-          <li><b class="font-display text-charcoal">2 · Panels of three.</b> Each category is judged by a panel of three, drawn from makers, affineurs and buyers so that no single point of view sets the standard.</li>
-          <li><b class="font-display text-charcoal">3 · A score sheet per wheel.</b> Appearance and rind, aroma, texture, flavor, and finish, each scored against the category standard, with written comments required for any score at either extreme.</li>
-          <li><b class="font-display text-charcoal">4 · Faults are named.</b> A wheel that is downscored is told why: the specific fault, not a number alone. This is the part entrants say they come back for.</li>
-          <li><b class="font-display text-charcoal">5 · Panels reconcile.</b> Where the three sheets disagree sharply, the panel re-tastes together and records the disagreement rather than averaging it away.</li>
-          <li><b class="font-display text-charcoal">6 · Results are published with the sheets.</b> Every entrant receives their own sheets; placings and the full category sheets go up on the site after the Annual Conference.</li>
+  <section class="on-paper rule-top">
+    <div class="wrap section grid grid--2" style="align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 class="h2" style="font-size:30px">How judging works</h2>
+        <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;font-size:15px;line-height:1.6;color:var(--body)">
+          <li><strong style="color:var(--ink)">1 · Entries are stripped.</strong> Every wheel is re-labeled with a number when it arrives. Judges see the number and the category, nothing else — no creamery, no region, no story.</li>
+          <li><strong style="color:var(--ink)">2 · Panels of three.</strong> Each category is judged by a panel of three, drawn from makers, affineurs and buyers so that no single point of view sets the standard.</li>
+          <li><strong style="color:var(--ink)">3 · A score sheet per wheel.</strong> Appearance and rind, aroma, texture, flavor, and finish, each scored against the category standard, with written comments required for any score at either extreme.</li>
+          <li><strong style="color:var(--ink)">4 · Faults are named.</strong> A wheel that is downscored is told why: the specific fault, not a number alone. This is the part entrants say they come back for.</li>
+          <li><strong style="color:var(--ink)">5 · Panels reconcile.</strong> Where the three sheets disagree sharply, the panel re-tastes together and records the disagreement rather than averaging it away.</li>
+          <li><strong style="color:var(--ink)">6 · Results are published with the sheets.</strong> Every entrant receives their own sheets; placings and the full category sheets go up on the site after the Annual Conference.</li>
         </ol>
       </div>
-      <div>
-        <div class="rounded-2xl bg-clover p-6">
-          <h2 class="font-display m-0 text-2xl font-bold tracking-tight">Entering</h2>
-          <dl class="mt-4 space-y-3 text-[15px] text-[#243027]">
-            <div><dt class="font-display font-bold text-charcoal">Entries open</dt><dd class="m-0">January, and close when the category fills.</dd></div>
-            <div><dt class="font-display font-bold text-charcoal">Who can enter</dt><dd class="m-0">Any member creamery. Creamery-tier membership includes entry at no extra fee; other tiers pay a per-wheel fee.</dd></div>
-            <div><dt class="font-display font-bold text-charcoal">What you send</dt><dd class="m-0">A whole wheel or a cut of the published minimum weight, shipped cold, with the make date and the milk declared.</dd></div>
-            <div><dt class="font-display font-bold text-charcoal">Results</dt><dd class="m-0">Announced at the Annual Conference in October and published with the score sheets the same week.</dd></div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="card card--soft" style="padding:30px;gap:18px">
+          <h2 class="h3" style="font-size:22px">Entering</h2>
+          <dl style="margin:0;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:3px"><dt style="font-weight:700;font-size:14px">Entries open</dt><dd style="margin:0;font-size:15px;line-height:1.55;color:var(--body)">January, and close when the category fills.</dd></div>
+            <div style="display:flex;flex-direction:column;gap:3px"><dt style="font-weight:700;font-size:14px">Who can enter</dt><dd style="margin:0;font-size:15px;line-height:1.55;color:var(--body)">Any member creamery. Creamery-tier membership includes entry at no extra fee; other tiers pay a per-wheel fee.</dd></div>
+            <div style="display:flex;flex-direction:column;gap:3px"><dt style="font-weight:700;font-size:14px">What you send</dt><dd style="margin:0;font-size:15px;line-height:1.55;color:var(--body)">A whole wheel or a cut of the published minimum weight, shipped cold, with the make date and the milk declared.</dd></div>
+            <div style="display:flex;flex-direction:column;gap:3px"><dt style="font-weight:700;font-size:14px">Results</dt><dd style="margin:0;font-size:15px;line-height:1.55;color:var(--body)">Announced at the Annual Conference in October and published with the score sheets the same week.</dd></div>
           </dl>
-          <a href="./join.html" class="mt-5 inline-block rounded-full bg-pasture px-5 py-3 text-sm font-bold text-white no-underline hover:bg-[#0E4530]">See Creamery membership</a>
+          <a href="./join.html" class="btn btn-ink" style="align-self:flex-start">See Creamery membership</a>
         </div>
-        <p class="mt-5 text-[15px] text-mid">Standards for each category are maintained by the Standards Committee and reviewed every year after judging. The <a href="./events.html" class="text-brick underline underline-offset-2">Judging Standards session</a> on 17 September walks through all six.</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--body)">Standards for each category are maintained by the Standards Committee and reviewed every year after judging. The <a href="./events.html">Judging Standards session</a> on 17 September walks through all six.</p>
       </div>
     </div>
   </section>
 </main>
-
-<footer class="bg-charcoal text-[#D9DBD4]">
-  <div class="mx-auto max-w-6xl px-5 py-12 md:px-10">
-    <div class="flex flex-wrap justify-between gap-10">
-      <div class="max-w-sm">
-        <div class="font-display flex items-center gap-2.5 text-[20px] font-extrabold tracking-tight text-milk">
-          <span class="logo-dot logo-dot--light" aria-hidden="true"></span>More Cheese
+<footer class="site-footer">
+  <div class="holes holes--footer" aria-hidden="true"><span class="hole" style="left:6%;top:18%;width:48px;height:48px"></span><span class="hole" style="left:22%;top:70%;width:26px;height:26px"></span><span class="hole" style="left:58%;top:12%;width:34px;height:34px"></span><span class="hole" style="left:81%;top:64%;width:56px;height:56px"></span><span class="hole" style="left:93%;top:22%;width:20px;height:20px"></span></div>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <div class="brand brand--on-ink">
+          <img class="brand__mark" src="./assets/brand/mark-butter.svg" alt="" width="32" height="32">
+          <span class="brand__name">More Cheese</span>
         </div>
-        <p class="mt-3 text-sm leading-relaxed text-[#B9BEB7]">The International Cheese Federation &middot; 1 Rind Lane, Lancaster, PA &middot; <a href="mailto:info@morecheese.org" class="text-clover underline underline-offset-2">info@morecheese.org</a></p>
-        <p class="mt-2 text-sm text-[#B9BEB7]">Member Services: <a href="mailto:memberservices@morecheese.org" class="text-clover underline underline-offset-2">memberservices@morecheese.org</a></p>
+        <p>The International Cheese Federation · 1 Rind Lane, Lancaster, PA<br><a href="mailto:memberservices@morecheese.org">memberservices@morecheese.org</a></p>
       </div>
-      <nav class="flex flex-wrap gap-10 text-sm" aria-label="Footer">
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Membership</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./join.html" class="text-[#D9DBD4] no-underline hover:text-clover">Join</a></li>
-            <li><a href="./about.html" class="text-[#D9DBD4] no-underline hover:text-clover">About the ICF</a></li>
-            <li><a href="./faq.html" class="text-[#D9DBD4] no-underline hover:text-clover">FAQ</a></li>
-            <li><a href="./contact.html" class="text-[#D9DBD4] no-underline hover:text-clover">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Programs</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./learn.html" class="text-[#D9DBD4] no-underline hover:text-clover">Learn</a></li>
-            <li><a href="./compete.html" class="text-[#D9DBD4] no-underline hover:text-clover">Compete</a></li>
-            <li><a href="./events.html" class="text-[#D9DBD4] no-underline hover:text-clover">Events</a></li>
-            <li><a href="./advocacy.html" class="text-[#D9DBD4] no-underline hover:text-clover">Advocacy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Resources</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./library.html" class="text-[#D9DBD4] no-underline hover:text-clover">Cheese Library</a></li>
-            <li><a href="./research.html" class="text-[#D9DBD4] no-underline hover:text-clover">Research &amp; publications</a></li>
-            <li><a href="./careers.html" class="text-[#D9DBD4] no-underline hover:text-clover">Careers &amp; volunteering</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-display mb-2 text-xs font-bold uppercase tracking-[.14em] text-[#8E948C]">Read</h2>
-          <ul class="space-y-1.5">
-            <li><a href="./blog.html" class="text-[#D9DBD4] no-underline hover:text-clover">Blog</a></li>
-            <li><a href="./post.html" class="text-[#D9DBD4] no-underline hover:text-clover">Sample post</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="site-footer__col"><span class="site-footer__head">Membership</span><a href="./join.html">Join</a><a href="./about.html">About the ICF</a><a href="./faq.html">FAQ</a><a href="./contact.html">Contact</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Programs</span><a href="./learn.html">Learn</a><a href="./compete.html">Compete</a><a href="./events.html">Events</a><a href="./advocacy.html">Advocacy</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Resources</span><a href="./library.html">Cheese Library</a><a href="./research.html">Research &amp; publications</a><a href="./careers.html">Careers &amp; volunteering</a></div>
+      <div class="site-footer__col"><span class="site-footer__head">Read</span><a href="./blog.html">Blog</a><a href="./faq.html">FAQ</a></div>
     </div>
-    <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-[#A7ADA6]">The International Cheese Federation (ICF) and More Cheese are entirely fictional. This site is demonstration content created for MemberJunction. All people, organizations, events, courses, certifications, figures, and quotations are invented.</p>
-    <p class="mt-3 text-xs text-[#8E948C]">&copy; <span class="js-year">2026</span> International Cheese Federation (fictional).</p>
+    <p class="site-footer__legal">The International Cheese Federation (ICF) and More Cheese are entirely fictional. Demonstration content created for MemberJunction. © <span class="js-year">2026</span>.</p>
   </div>
 </footer>
-
+<!-- BETTY-WIDGET: the Betty launcher snippet is inserted here by the build once Colin allow-lists our origins -->
 </body>
 </html>

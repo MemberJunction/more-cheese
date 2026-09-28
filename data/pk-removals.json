@@ -1,5 +1,13 @@
 {
-  "$comment": "Primary keys deliberately removed from config/ or generated/. scripts/check-metadata-closure.mjs base-delta audit skips these; every entry needs a reason.",
+  "$comment": "Primary keys and retired directories deliberately removed from config/ or generated/. scripts/check-metadata-closure.mjs base-delta audit skips these; every entry needs a reason.",
+  "retiredDirectories": [
+    {
+      "directory": "membership-periods",
+      "expectedCount": 7018,
+      "removed": "2026-09-20",
+      "reason": "Membership Periods entity retired in favor of Predictive Studio models and standard Subscription / Order structures (PR #62)."
+    }
+  ],
   "removals": [
     {
       "id": "0199FC9E-1468-57FC-8A4E-EF1131DA76EB",
@@ -36,6 +44,234 @@
       "directory": "user-applications",
       "removed": "2026-09-18",
       "reason": "User Application row for the CodeGen-generated schema application \"__mj_BizAppsForms\". Amith (2026-09-18): the generated apps must not be in the demo operator's configured app list; the real apps (Common, Issues, Forms, MoreCheese, …) stay."
+    },
+    {
+      "id": "4AC57CE7-D9D7-5140-A0B3-13EF49DA882D",
+      "directory": "user-views",
+      "removed": "2026-09-20",
+      "reason": "User view filtered on retired vwEventRegistrations view (PR #62)."
+    },
+    {
+      "id": "F770DD7A-032E-553C-B144-07655C3CC700",
+      "directory": "user-views",
+      "removed": "2026-09-20",
+      "reason": "User view filtered on retired vwMembershipPeriods view (PR #62)."
+    },
+    {
+      "id": "A9052951-D09A-55DB-AA62-53CF20F3CB3B",
+      "directory": "resource-permissions",
+      "removed": "2026-09-20",
+      "reason": "Resource permission for retired user view 4AC57CE7-D9D7-5140-A0B3-13EF49DA882D (PR #62)."
+    },
+    {
+      "id": "EB75A6AC-46A4-562D-8708-06309E5480BA",
+      "directory": "resource-permissions",
+      "removed": "2026-09-20",
+      "reason": "Resource permission for retired user view F770DD7A-032E-553C-B144-07655C3CC700 (PR #62)."
+    },
+    {
+      "id": "04282792-0C95-4E26-8F54-942C7784CF8F",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Chapter Engagement Overview\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "04DC85EF-583E-4D2A-A8DD-DD0B5972A5C7",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Annual Membership and Revenue Trajectory\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "153A7F37-6B1A-4BE6-8BF1-61B40DD598C1",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Chapter Member Activity Log By Quarter\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "188341AE-1B9B-4E92-B668-AB8B8FF81BC7",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Engagement Leaderboard (2)\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "1A8CF27F-EB6F-4E96-9D68-CFD0E056FC0A",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Top Members by Total Revenue\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "1B512BAF-11A4-4BE8-BB1B-E2BA7E932AA1",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Attended Events History\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "20C3F9C9-9C9F-404E-AB0B-01BB3BE8E782",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Top Members By Tier Revenue\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "279CC0ED-1AE8-438B-AA72-4F2497E57896",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Count and Dues by Membership Tier\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "370F9B87-E39C-4394-A55F-077B70C51106",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Monthly KPI Breakdown By Category\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "3879A59D-87B6-4061-BE2F-3FCEC6585508",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Active Member Roster\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "4E76E086-A270-4BCA-9108-27616EFC4116",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Engagement Leaderboard\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "527F1950-D882-4684-BE17-F0F7E65EB30D",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Activity By Organization\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "5BD14A12-DFDF-4C65-A802-D00E714BB30C",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Organization Member Activity Ranking\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "6012D5AA-2580-406E-9523-2D19CA18C036",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Annual Cohort Member Roster\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "605A91F5-00F9-4DD0-9126-58A11C196E9D",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Event Attendance And Show Rate By Event\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "61BDDBE4-1FF4-4088-B373-5FDF5A03FB08",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Event Only Members Summary\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "6BBE8897-03BB-44CA-AB22-4EFACFD91450",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Roster Details\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "869C17CA-B51A-4195-B8AE-8D04EE684EBF",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Event Revenue and Registration Summary\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "86D957A8-1125-4091-B662-6ED0403A75E9",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Active Membership Count and Dues By Tier\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "8770A736-D96A-4B47-BC55-F95214E5083F",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Acquisition and Initial Dues by Cohort\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "88FA74D8-24CA-4959-886C-EE6980090D3A",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Organization Member Activity Ranking\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "8D59E20E-FF74-4C66-9923-B3EA726E12A6",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Engagement Leaderboard (1)\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "916AE9E7-9E7B-4632-AF98-AE032A210FE9",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Weekly Activity Trends By Chapter\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "970F0F7B-454C-422F-86C8-AB631429B947",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Annual Membership and Revenue Trends\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "AEE7B184-23E4-41A2-9A01-5AD54052F29C",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Quarterly Event Attendance Trends\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "AFEAE5C5-127D-47D7-A480-E1ABB95F47D6",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Membership Count and Revenue by Tier\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "C1FE4ED5-8500-4BDE-AF97-493236FA9584",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Engagement and Activity Analysis\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "CB4EED60-5560-4EC9-B634-EE017C9D2666",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Organization Member Activity Breakdown\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "CB804BB3-607A-4B74-A33C-700CA23E1733",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Event Attendance Performance Summary\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "CBDDD0E4-3DCA-41A7-8F4D-C4EE65D54ABA",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Revenue and YoY Growth By Membership Tier\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "CC391293-12F2-42F4-AE52-9A52A82F6E40",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Quarterly Organization Engagement Summary\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "D7C6E215-A8F1-46D0-ABC7-F4E24A0FA82B",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Member Activity Timeline\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "E710AC9D-EC60-4CE6-88D0-C0A50A75FB9A",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Membership Revenue YoY by Tier\" retired because it selects from retired views (PR #62)."
+    },
+    {
+      "id": "F78EADFA-1D2C-4867-9A6A-4D4E6A3730A5",
+      "directory": "queries",
+      "removed": "2026-09-20",
+      "reason": "Query \"Top Active Members by Engagement Score\" retired because it selects from retired views (PR #62)."
     }
   ]
 }

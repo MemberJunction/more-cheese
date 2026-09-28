@@ -22,7 +22,7 @@ import { PersonMembershipComponent } from './person-membership.component';
         slot: 'after-fields',
         sortKey: 90,
         contributionKey: 'moreCheeseMembership',
-        relatedEntity: 'MoreCheese: Membership Periods',
+        relatedEntity: 'MoreCheese: Member Profiles',
         relatedJoinField: 'PersonID',
         inclusion: 'Primary',
     },

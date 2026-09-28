@@ -22,8 +22,8 @@ One invocation = **one week**. Never batch multiple weeks in a single run.
 1. Take the date the caller gave you and resolve it to a **Monday–Sunday week**.
    If they gave a mid-week date, snap back to that week's Monday.
 2. Confirm the week sits inside a known era by reading `data/ruleset/eras.json`
-   (see §3). The eras cover cycles **2019 through 2025**. If the requested week falls
-   outside 2019–2025, **stop and report it** rather than inventing an era.
+   (see §3). The eras cover cycles **2019 through 2026**. If the requested week falls
+   outside 2019–2026, **stop and report it** rather than inventing an era.
 3. Write down the seven dates. Every post you file must be dated inside that window.
 
 ## 2. Research the week (required — do not skip)
@@ -67,7 +67,7 @@ and **never author new ones**.
 
 | File | What you take from it |
 |---|---|
-| `data/ruleset/eras.json` | The five eras, their cycles, and what each era means for events vs. courses. Pick the `era` frontmatter value from `eraKey`. |
+| `data/ruleset/eras.json` | The six eras, their cycles, and what each era means for events vs. courses. Pick the `era` frontmatter value from `eraKey`. |
 | `data/ruleset/heroes.json` | The 16 named members. Note each one's `birthCycle` and `fixedFields`. |
 | `data/ruleset/motifs.json` | The four member archetypes (rising star, corporate auto-renew ghost, grassroots advocate, diagnosable lapse). Use them to shape *unnamed* composite members. |
 | `plans/more-cheese-world-model-and-personas.md` | §2 is the persona table: employer, join date, dials, and what each persona is for. This is the richest source for a member spotlight. |
@@ -81,6 +81,7 @@ and **never author new ones**.
 | `era-virtual-pivot-2021` | 2021 | Virtual symposiums, online credentials, digital support programmes; strong retention among small creameries. |
 | `era-artisan-boom-2022-2024` | 2022, 2023, 2024 | Artisan renaissance, in-person flagship competition returns, sustained sponsorship. Busy and optimistic. |
 | `era-creamery-closures-2025` | 2025 | Feed and energy cost inflation; small farmstead creamery distress. Sober, practical, supportive. |
+| `era-stabilization-2026` | 2026 | Costs ease after the 2025 squeeze; closures turn into succession and consolidation stories. Next-generation cheesemakers, raw-milk aging rule modernization, traceability. Steady, forward-looking, quietly relieved. |
 
 **Using the 16 heroes.** They MAY appear as members, volunteers, committee people, course
 participants or spotlight subjects. Rules:

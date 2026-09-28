@@ -75,18 +75,6 @@
           "field": "Status",
           "op": "eq",
           "value": "Active"
-        },
-        {
-          "kind": "feature",
-          "feature": {
-            "from": "MembershipPeriod",
-            "where": {
-              "Status": "PendingRenewal"
-            },
-            "aggregation": "exists"
-          },
-          "op": "eq",
-          "value": 1
         }
       ],
       "description": "Marcus Chen: Pending Renewal persona in active grace window with AutoRenew=false",
@@ -111,26 +99,7 @@
       "eras": [
         "era-creamery-closures-2025"
       ],
-      "pins": [
-        {
-          "kind": "feature",
-          "feature": {
-            "from": "MembershipPeriod",
-            "where": {
-              "Status": "Lapsed"
-            },
-            "aggregation": "exists"
-          },
-          "op": "eq",
-          "value": 1
-        },
-        {
-          "kind": "outcome",
-          "factor": "factor-membership-renewal",
-          "cycle": 2026,
-          "value": false
-        }
-      ],
+      "pins": [],
       "description": "Danielle Okafor: Diagnosable Lapse after employer dissolution in 2025",
       "ladderEntries": []
     },
@@ -444,20 +413,7 @@
         "theta": -1.8,
         "phi": 1.9
       },
-      "pins": [
-        {
-          "kind": "feature",
-          "feature": {
-            "from": "MembershipPeriod",
-            "where": {
-              "AutoRenew": true
-            },
-            "aggregation": "exists"
-          },
-          "op": "eq",
-          "value": 1
-        }
-      ],
+      "pins": [],
       "description": "Victor Sandoval: Corporate Auto-Renew Ghost with zero engagement and unbroken renewals",
       "ladderEntries": []
     },
