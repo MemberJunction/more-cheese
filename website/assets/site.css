@@ -311,3 +311,6 @@ a.card:hover .card__title{text-decoration:underline;text-decoration-color:var(--
 .on-ink .btn-butter:hover,.card--ink .btn-butter:hover{color:var(--ink);background:var(--butter)}
 .on-ink .btn-outline,.card--ink .btn-outline{border-color:var(--cream);color:var(--cream)}
 .on-ink .btn-outline:hover,.card--ink .btn-outline:hover{background:var(--cream);color:var(--ink)}
+
+/* Home page: the live inline Betty inside the "Ask Betty" card */
+betty-chat.betty-inline { display: block; width: 100%; height: 440px; }
