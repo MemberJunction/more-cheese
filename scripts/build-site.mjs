@@ -410,7 +410,8 @@ function bettySnippet() {
     const b = JSON.parse(fs.readFileSync(file, 'utf8'));
     if (!b.publishableKey || !b.baseUrl) return '';
     return `<betty-chat publishable-key="${esc(b.publishableKey)}" base-url="${esc(b.baseUrl)}"
-            display-mode="launcher" allow-feedback="true" references-mode="expanded"
+            display-mode="launcher" allow-feedback="true" references-mode="collapsed"
+            avatar-url="https://morecheese.org/assets/brand/mark-cocoa.png"
             locale='{"headerTitle":"Ask the Federation"}'></betty-chat>
 <script src="${esc(b.baseUrl.replace(/\/$/, ''))}/widget/betty-chat.js"></script>`;
 }
@@ -427,7 +428,8 @@ function bettyInlineSnippet() {
         return `<p class="muted" style="margin:0;font-size:15px;line-height:1.5">Dues, the credential ladder, competition rules, or any of the 25 styles in the Cheese Library: start with the <a href="/faq/">FAQ</a>.</p>`;
     }
     return `<betty-chat class="betty-inline" publishable-key="${esc(b.publishableKey)}" base-url="${esc(b.baseUrl)}"
-            display-mode="inline" color-scheme="light" allow-feedback="true" references-mode="expanded"
+            display-mode="inline" color-scheme="light" allow-feedback="true" references-mode="collapsed"
+            avatar-url="https://morecheese.org/assets/brand/mark-cocoa.png"
             intro-title="Ask in plain words"
             intro-body="Dues, the credential ladder, competition rules, or any of the 25 styles in the Cheese Library."
             intro-prompts="${esc(BETTY_HOME_PROMPTS.join('|'))}"
