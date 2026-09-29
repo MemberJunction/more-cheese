@@ -1,5 +1,13 @@
 # @mj-biz-apps/more-cheese-ng
 
+## 1.3.2
+
+### Patch Changes
+
+- 3dfd554: Public site Betty widgets (per the Betty team): sources collapse by default, answers show the More Cheese mark as Betty's icon, and text is larger for readability (17px on the home page's inline Betty with a taller, wider card; 16px and a 420 × 620 panel for the corner launcher).
+- Updated dependencies [3dfd554]
+  - @mj-biz-apps/more-cheese-entities@1.3.2
+
 ## 1.3.1
 
 ### Patch Changes
