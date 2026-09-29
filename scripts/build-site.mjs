@@ -415,15 +415,65 @@ function bettySnippet() {
 <script src="${esc(b.baseUrl.replace(/\/$/, ''))}/widget/betty-chat.js"></script>`;
 }
 
+/** The home page's "Ask Betty" card holds a live, inline Betty instead of the design's static mock. Same
+ *  key and server as the launcher; the launcher's <script> (in the footer) defines the element for both.
+ *  Always light (color-scheme="light"), matching the design's white card, even for viewers in dark mode.
+ *  Without website/data/betty.json the card links to the FAQ rather than showing an empty box. */
+const BETTY_HOME_PROMPTS = ['What do dues cost?', 'Which certification first?', 'How is the competition judged?', 'What is a washed rind?'];
+function bettyInlineSnippet() {
+    const file = path.join(SITE, 'data', 'betty.json');
+    const b = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+    if (!b.publishableKey || !b.baseUrl) {
+        return `<p class="muted" style="margin:0;font-size:15px;line-height:1.5">Dues, the credential ladder, competition rules, or any of the 25 styles in the Cheese Library: start with the <a href="/faq/">FAQ</a>.</p>`;
+    }
+    return `<betty-chat class="betty-inline" publishable-key="${esc(b.publishableKey)}" base-url="${esc(b.baseUrl)}"
+            display-mode="inline" color-scheme="light" allow-feedback="true" references-mode="expanded"
+            intro-title="Ask in plain words"
+            intro-body="Dues, the credential ladder, competition rules, or any of the 25 styles in the Cheese Library."
+            intro-prompts="${esc(BETTY_HOME_PROMPTS.join('|'))}"
+            placeholder="Ask a question…"></betty-chat>`;
+}
+
 function insertBetty() {
     const snippet = bettySnippet();
     let files = 0;
     for (const file of walk(DIST).filter((f) => f.endsWith('.html'))) {
         const before = fs.readFileSync(file, 'utf8');
-        const after = before.replace(/<!-- BETTY-WIDGET[^>]*-->/, snippet);
+        const after = before
+            .replace(/<!-- BETTY-WIDGET[^>]*-->/, snippet)
+            .replace(/<!-- BETTY-INLINE[^>]*-->/, bettyInlineSnippet());
         if (after !== before) { fs.writeFileSync(file, after, 'utf8'); files++; }
     }
     return { files, enabled: snippet !== '' };
+}
+
+/* ------------------------------------------------------------- sitemap */
+
+/** sitemap.xml + robots.txt, so Betty's crawler and search engines find every page after each release.
+ *  Lists every built page except the 404 and blog pagination (`/page/N/`), which only re-list posts.
+ *  Blog posts carry their publish date as <lastmod>. */
+const SITE_ORIGIN = 'https://morecheese.org';
+function writeSitemap(posts) {
+    const dated = new Map(posts.map((p) => [`/${p.slug}/`, p.date]));
+    const urls = walk(DIST)
+        .filter((f) => f.endsWith(`${path.sep}index.html`) || f === path.join(DIST, 'index.html'))
+        .map((f) => {
+            const rel = path.relative(DIST, path.dirname(f)).split(path.sep).join('/');
+            return rel === '' ? '/' : `/${rel}/`;
+        })
+        .filter((u) => !/\/page\/\d+\/$/.test(u))
+        .sort();
+    const xmlEsc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const body = urls.map((u) => {
+        const lastmod = dated.get(u);
+        return `  <url><loc>${xmlEsc(SITE_ORIGIN + u)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`;
+    }).join('\n');
+    fs.writeFileSync(path.join(DIST, 'sitemap.xml'),
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`, 'utf8');
+    if (!fs.existsSync(path.join(SITE, 'robots.txt'))) {
+        fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_ORIGIN}/sitemap.xml\n`, 'utf8');
+    }
+    return urls.length;
 }
 
 /* ------------------------------------------------------------------ build */
@@ -549,6 +599,7 @@ function main() {
     const homeCards = rewriteHomeCards(posts.slice(0, 3));
     const links = rootAbsoluteLinks();
     const betty = insertBetty();
+    console.log(`sitemap: ${writeSitemap(posts)} URLs`);
     console.log(`betty embed: ${betty.enabled ? 'ON' : 'off (no website/data/betty.json)'} — marker handled in ${betty.files} files`);
 
     fs.writeFileSync(

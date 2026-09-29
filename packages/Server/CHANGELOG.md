@@ -1,5 +1,14 @@
 # @mj-biz-apps/more-cheese-server
 
+## 1.3.1
+
+### Patch Changes
+
+- 035f6c0: Public site: the home page's "Ask Betty" card is now a live, inline Betty (with the four suggested questions) instead of the design's static mock, which did nothing when clicked.
+  Adds sitemap.xml (every page except the 404 and blog pagination, posts with their publish date) and robots.txt pointing to it, so crawlers such as Betty's find every page after each release.
+- Updated dependencies [035f6c0]
+  - @mj-biz-apps/more-cheese-entities@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes
