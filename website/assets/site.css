@@ -313,4 +313,6 @@ a.card:hover .card__title{text-decoration:underline;text-decoration-color:var(--
 .on-ink .btn-outline:hover,.card--ink .btn-outline:hover{background:var(--cream);color:var(--ink)}
 
 /* Home page: the live inline Betty inside the "Ask Betty" card */
-betty-chat.betty-inline { display: block; width: 100%; height: 440px; }
+betty-chat.betty-inline { display: block; width: 100%; height: 540px; --betty-font-size: 17px; --betty-line-height: 1.6; }
+/* The corner launcher on every page: slightly larger panel and text for readability */
+betty-chat:not(.betty-inline) { --betty-font-size: 16px; --betty-panel-width: 420px; --betty-panel-height: 620px; }
