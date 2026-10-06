@@ -175,10 +175,11 @@ fails on a rule missing `paths`, and on a glob that matches nothing.
 
 ## Metadata ships as release migrations
 
-`mj app install` and upgrades run migrations only. There is no metadata phase, by design. A record that exists only as JSON under the sync directories (`config/`, `generated/`) reaches no host until a release ships it inside a migration.
+Install and upgrade run migrations only, by design. JSON under `config/` or `generated/` reaches no host until a release ships it in a migration.
 
-- **PRs carry metadata JSON only.** Never hand-write or generate a `*__Metadata_Sync.sql` in a feature PR.
-- **The build engineer** generates one differential `Metadata_Sync` migration per release, from a fresh database.
-- **Rows missing after a fresh install** usually mean a release shipped without its metadata migration. Hand that to the build engineer. Do not change the installer or add a post-install push.
+- **PRs carry metadata JSON only**, never a `*__Metadata_Sync.sql`.
+- **The build engineer** generates one `Metadata_Sync` per release, from a fresh database.
+- **Rows missing after a fresh install** usually mean a release shipped without its seed. Tell the build engineer; don't change the installer.
+- **`metadata/` (ML pipelines, models, scoring bindings) is in no migration yet.** Whether it ships is undecided: don't call it a missed seed or seed it without asking.
 
-Full process: [Release Metadata Migrations Guide](https://github.com/MemberJunction/MJ/blob/next/guides/RELEASE_METADATA_MIGRATIONS_GUIDE.md).
+The model: [Release Metadata Migrations Guide](https://github.com/MemberJunction/MJ/blob/next/guides/RELEASE_METADATA_MIGRATIONS_GUIDE.md). This repo's recipe: [`docs/release.md`](docs/release.md).
