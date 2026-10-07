@@ -104,8 +104,10 @@ npm run check:claude-md     # instruction-file budget, links, routing, rule glob
 npm run build:site          # the public site; publish-site.yml runs this on push to main
 ```
 
-The full development workflow (where to add code, capturing codegen +
-metadata-sync migrations) is the README's "Development workflow" section.
+The full development workflow (where to add code, capturing codegen
+migrations) is the README's "Development workflow" section. Metadata is the
+exception: PRs carry JSON only, and one seed ships per release
+([`.claude/rules/metadata-sync.md`](.claude/rules/metadata-sync.md)).
 Cutting a release is [`docs/release.md`](docs/release.md).
 
 ---
@@ -172,14 +174,3 @@ when touching a particular kind of file?"* The second answer routes it out.
 A rule with no `paths` frontmatter loads unconditionally at launch, so omitting
 `paths` does not scope a rule down — it makes it permanent. `check:claude-md`
 fails on a rule missing `paths`, and on a glob that matches nothing.
-
-## Metadata ships as release migrations
-
-Install and upgrade run migrations only, by design. JSON under `config/` or `generated/` reaches no host until a release ships it in a migration.
-
-- **PRs carry metadata JSON only**, never a `*__Metadata_Sync.sql`.
-- **The build engineer** generates one `Metadata_Sync` per release, from a fresh database.
-- **Rows missing after a fresh install** usually mean a release shipped without its seed. Tell the build engineer; don't change the installer.
-- **`metadata/` (ML pipelines, models, scoring bindings) is in no migration yet.** Whether it ships is undecided: don't call it a missed seed or seed it without asking.
-
-The model: [Release Metadata Migrations Guide](https://github.com/MemberJunction/MJ/blob/next/guides/RELEASE_METADATA_MIGRATIONS_GUIDE.md). This repo's recipe: [`docs/release.md`](docs/release.md).
