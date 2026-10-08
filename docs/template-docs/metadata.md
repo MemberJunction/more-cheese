@@ -105,9 +105,12 @@ A JSON array; each element is one record with a `fields` object:
 ]
 ```
 
-- **New records: write ONLY `fields`.** On first push, mj-sync writes back a
-  `primaryKey` (the generated ID) and a `sync` block (timestamp + checksum) —
-  commit that write-back, and never hand-edit either block.
+- **New records: write `fields` and a `primaryKey` from `uuidgen`, no `sync`
+  block** (MJ's `metadata/CLAUDE.md` §1b). A dev push writes back a `sync` block
+  (timestamp + checksum): don't commit that write-back, because the
+  release-time push writes it. The `sync` blocks already in `config/` and
+  `generated/` come from earlier releases; leave them as they are, and never
+  hand-edit `primaryKey` or `sync`.
 - Pushes are **upserts** — safe to re-run. But note: `mj sync push` is a
   **full reconcile** — it can DELETE rows that exist in the DB for that entity
   scope but not in your files. It is a single-author, dev-time tool.
