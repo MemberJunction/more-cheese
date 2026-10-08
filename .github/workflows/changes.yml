@@ -49,6 +49,18 @@ jobs:
       - name: Peer ranges match the manifest floor and name no exact version
         run: npm run lint:peer-ranges
 
+      # The other half of the same claim: a host installs ONE copy of MemberJunction and one copy of
+      # each Open App, so no published package may carry `@memberjunction/*` or another app's
+      # `@mj-biz-apps/*` (Common, Accounting, Orders…) in `dependencies`, and no peer may be `~` or
+      # exact — `~6.1.5` refuses every 6.2 host. Either way MJ's class-factory registry splits and
+      # registrations miss with no error. Shared verbatim across the BizApps family
+      # (`.github/scripts/`), so it carries its own `--self-test` rather than a scripts/*.spec.mjs,
+      # and that self-test runs first.
+      - name: One copy of MemberJunction and of each app per host
+        run: |
+          node .github/scripts/check-dependency-model.mjs --self-test
+          node .github/scripts/check-dependency-model.mjs
+
       - name: Migration ordering is consistent across the chain
         run: npm run lint:migrations
 
