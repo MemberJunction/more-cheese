@@ -14,8 +14,17 @@ debugging session.
 
 Authoring guide with worked examples:
 [`docs/template-docs/metadata.md`](../../docs/template-docs/metadata.md).
-Capture flow (metadata → `V*_Metadata_Sync.sql`):
+How metadata reaches installs (one seed per release, not per change):
 [`docs/template-docs/codegen-and-metadata-migrations.md`](../../docs/template-docs/codegen-and-metadata-migrations.md).
+
+## Metadata ships as release migrations
+
+Install and upgrade run migrations only, by design. JSON under `config/` or `generated/` reaches no host until a release ships it in a migration.
+
+- **PRs carry metadata JSON only**, never a `*__Metadata_Sync.sql`.
+- **The build engineer** generates one `Metadata_Sync` per release, from a fresh database. The model: [Release Metadata Migrations Guide](https://github.com/MemberJunction/MJ/blob/next/guides/RELEASE_METADATA_MIGRATIONS_GUIDE.md). This repo's recipe: [`docs/release.md`](../../docs/release.md).
+- **Rows missing after a fresh install** usually mean a release shipped without its seed. Tell the build engineer; don't change the installer.
+- **`metadata/` (ML pipelines, models, scoring bindings) is in no migration yet.** Whether it ships is undecided: don't call it a missed seed or seed it without asking.
 
 ## 🚨 `mj sync push` runs from the MJ repo cwd — never from here
 

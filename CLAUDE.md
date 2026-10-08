@@ -104,8 +104,10 @@ npm run check:claude-md     # instruction-file budget, links, routing, rule glob
 npm run build:site          # the public site; publish-site.yml runs this on push to main
 ```
 
-The full development workflow (where to add code, capturing codegen +
-metadata-sync migrations) is the README's "Development workflow" section.
+The full development workflow (where to add code, capturing codegen
+migrations) is the README's "Development workflow" section. Metadata is the
+exception: PRs carry JSON only, and one seed ships per release
+([`.claude/rules/metadata-sync.md`](.claude/rules/metadata-sync.md)).
 Cutting a release is [`docs/release.md`](docs/release.md).
 
 ---
