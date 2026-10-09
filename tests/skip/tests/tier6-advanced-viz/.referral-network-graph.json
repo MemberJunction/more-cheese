@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Member Referral and Employer Network",
+    "Description": "Force-directed network of people and organizations from MJ_BizApps_Common: Relationships (Employee, Referred By, Supplier Of). Ported from \"Force-Directed Network Graph\" plus the Skip Showcase \"Organization & People Atlas\".",
+    "InputDefinition": {
+      "userMessage": "Create an interactive force-directed network graph of our community using the relationships between people and organizations: employee links, 'referred by' links between people, and 'supplier of' links. Colour nodes by type (person vs organization, and member segment for people), size them by number of connections, and let me zoom, pan and filter by relationship type. Hovering a node shows a tooltip. Clicking a node shows a side panel with the profile and its connections; clicking a connection shows the relationship details, with links to open the records. Focus on the most connected organizations so the graph stays readable. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a force-directed network graph, not a table",
+        "Uses MJ_BizApps_Common: Relationships with Relationship Types (Employee about 2,146, Referred By about 357, Supplier Of about 299)",
+        "Nodes are coloured by type/segment and sized by connection count",
+        "Graph supports zoom/pan and a relationship-type filter",
+        "Hover tooltips and a click-to-open side panel with connections",
+        "Records can be opened from the panel",
+        "The graph is limited or aggregated sensibly so it remains readable"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier6-advanced-viz\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3600000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "D2375535-8AE3-4168-917D-CF9925049BE5"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.472Z",
+    "checksum": "99774ff92d7a9cc881e9f08f68274f956a41f4acd6e53958b3c21c296151a8b2"
+  }
+}

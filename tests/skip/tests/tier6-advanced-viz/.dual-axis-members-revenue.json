@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Dual-Axis Members vs Revenue with Drill-Down",
+    "Description": "Dual-axis chart of cumulative members and annual confirmed revenue 2019-2026 with three further drill levels. Ported from \"Dual-Axis Time Series with 4-Level Drill-Down\".",
+    "InputDefinition": {
+      "userMessage": "I need a dashboard showing membership and revenue trends from 2019 through 2026. Create a line chart with two Y-axes: the left axis shows total members (cumulative by join date) and the right axis shows confirmed order revenue per year, in different colours. When I click a year, open a pie chart of that year's revenue by product category. When I click a slice, show a table of the order lines in that category and year. Make every row clickable to open the order. Include clear axis labels, a legend, and titles that show the current selection. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a dual-axis line chart with members on the left axis and revenue on the right",
+        "Covers 2019-2026; revenue peaks in 2025 (about $868K confirmed) and 2026 is partial",
+        "Two distinct coloured series with a legend",
+        "Clicking a year opens a pie chart of that year's revenue by product category",
+        "Clicking a slice shows the order lines for that category and year with date, amount, product and person",
+        "Rows can open the underlying order record",
+        "Titles or breadcrumbs show the current selection at every level"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier6-advanced-viz\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3600000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "78689280-77E5-4CF5-AE51-A6C0AB52FD54"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.438Z",
+    "checksum": "533ae7418b64b15783800adfb7063476744b70a2613692b9f9c5bac278d1a26b"
+  }
+}

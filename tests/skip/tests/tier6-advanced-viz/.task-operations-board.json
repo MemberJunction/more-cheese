@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Task Operations Board",
+    "Description": "Kanban-style board over MJ_BizApps_Tasks: Tasks (Renewal Outreach, Committee Action Item, General) with overdue and priority KPIs. Adapted from the Skip Showcase \"Task Operations Board\".",
+    "InputDefinition": {
+      "userMessage": "Build a task operations board: a kanban with columns for Open, In Progress and Completed tasks, grouped or filterable by task type (renewal outreach, committee action items, general) and priority. Show KPI tiles for open, in progress, completed and overdue tasks. Each card shows the task name, priority, due date and assignee if available, with overdue cards highlighted. Clicking a card opens a detail panel with the task description and links, and lets me open the task record. This should feel like an operations board, not a spreadsheet. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a kanban-style board with Open, InProgress and Completed columns",
+        "Uses MJ_BizApps_Tasks: Tasks with task types Committee Action Item, Renewal Outreach and General (about 239 tasks)",
+        "KPI tiles show open, in-progress, completed and overdue counts computed from data (overdue about 98)",
+        "Filtering by task type and priority works",
+        "Overdue cards are visually highlighted",
+        "Clicking a card shows details and allows opening the task record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier6-advanced-viz\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3600000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "6942D1E9-5C86-4D2B-9134-EC23D2AF23ED"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.524Z",
+    "checksum": "8fdde0a159e297c4e504fbc99f5501012c74355f5e6f19f3bfdd1361ce4c9897"
+  }
+}

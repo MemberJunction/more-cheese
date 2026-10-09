@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Course Performance with Enrollment Cohorts",
+    "Description": "Top courses by enrollment -> completion by enrollment quarter -> students. Ported from \"Course Performance with Enrollment Cohorts\".",
+    "InputDefinition": {
+      "userMessage": "Show me the top 10 courses by enrollment in a chart. When I click on a course, show me its completion rate by enrollment quarter. Then let me click on any quarter to see the actual students who enrolled then and whether they completed or dropped. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of the top 10 courses by enrollment count",
+        "Top course is Direct-to-Consumer & Farmers' Markets (Granite cohort) with about 159 enrollments",
+        "Clicking a course shows completion rate by enrollment quarter",
+        "Clicking a quarter shows the students with their status (Completed, Dropped, InProgress) and dates",
+        "Three levels of drill-down work smoothly",
+        "Student rows can open the member/person or enrollment record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier4-advanced\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 2400000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "011183E0-B2E0-4125-BBDD-1FADCA33E15F"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.052Z",
+    "checksum": "abe802af403dc9e584515586b27a15f9570163a8322df8bbb7c8a36c7b70cce6"
+  }
+}

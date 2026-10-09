@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Conference NPS Trend",
+    "Description": "Net Promoter Score by year from the Post-Conference Attendee Survey (MJ_BizApps_Forms: Form Responses / Form Response Answers, NPS question). Replaces \"Email Engagement Trends\" — no email engagement data exists in the ICF world.",
+    "InputDefinition": {
+      "userMessage": "Using the post-conference attendee survey, calculate our Net Promoter Score by year (promoters 9-10 minus detractors 0-6, as a percentage of responses) and show it as a line chart with the number of responses per year. Let me click a year to see the individual survey responses. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a line chart of NPS by year",
+        "Uses the Post-Conference Attendee Survey responses in the Forms entities (Form Responses / Form Response Answers) and the NPS question",
+        "NPS is computed correctly as % promoters minus % detractors, giving values roughly between -5 and +70 (e.g. about 26-35 in 2023-2026)",
+        "Response counts per year are shown (about 600 completed responses in total)",
+        "Clicking a year shows the individual responses with their NPS score",
+        "Rows can open the underlying form response or person record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier2-trends\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1200000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "89240CD3-290A-459F-A152-F843F7B874BE"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.195Z",
+    "checksum": "8474beb7ccd6c0dae389b6b15132a34dd6c1861c8861656a13ed4aae866dd9ee"
+  }
+}

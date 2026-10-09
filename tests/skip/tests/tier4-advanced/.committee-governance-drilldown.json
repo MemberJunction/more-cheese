@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Committee Governance Drill-Down",
+    "Description": "Committee -> meetings -> motions/votes three-level drill-down over Committees: Committees / Meetings / Attendances / Motions / Votes.",
+    "InputDefinition": {
+      "userMessage": "Create a committee governance report: a chart of each committee with its number of meetings, average attendance rate and number of motions. Let me click a committee to see its meetings over time with attendance. Then let me click a meeting to see the motions voted on, with yes/no/abstain counts and how each member voted. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of all six committees with meeting count, attendance rate and motion count",
+        "Attendance rate is based on Committees: Attendances (Present vs Absent/Excused), roughly 71-75% for each committee",
+        "Clicking a committee shows its meetings over time with attendance",
+        "Clicking a meeting shows its motions with result and Yes/No/Abstain counts, and individual votes",
+        "Three levels of drill-down work with clear context (titles/breadcrumbs)",
+        "Final rows can open the meeting, motion or member record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier4-advanced\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 2400000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "B7EBC0E4-4551-4ABC-B3A1-86AF80E6CDF9"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.750Z",
+    "checksum": "0e6280de389882d200ae2d5b46c5485514c094a5491051e41d8fa01b50222db1"
+  }
+}

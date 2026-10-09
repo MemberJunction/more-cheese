@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - YTD Revenue by Month",
+    "Description": "Monthly confirmed order revenue for the current year (2026) from MJ_BizApps_Orders: Order Headers, with drill-down to the orders. Ported from \"YTD Revenue by Month\" (invoices become order headers).",
+    "InputDefinition": {
+      "userMessage": "Show me our total revenue from confirmed orders for this year, broken down by month in a bar chart. When I click on a month, I want to see the orders for that month. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a bar chart (or similar) of revenue by month for the current year (2026)",
+        "Revenue comes from the Orders domain (Order Headers / Order Lines), using confirmed sales orders rather than drafts, quotes or voided orders",
+        "Months are in chronological order and values are formatted as currency",
+        "Only 2026 data is included; January 2026 is the largest month (renewal season), and there is little or no confirmed revenue after June",
+        "Clicking a month drills down to a table of the orders in that month (order number, date, bill-to person, amount)",
+        "Order rows can open the underlying order record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier1-simple\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 900000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "C81F11D9-5595-44EA-B9B1-09EEC2DD6E4A"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.091Z",
+    "checksum": "de6c9b3a9791f18140453e0e27ba83e2749328d0e2bdc62e5e268e64292a92da"
+  }
+}

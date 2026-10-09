@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Organization Member Activity",
+    "Description": "Organizations with 5+ ICF members and their combined conference, course and committee activity. Ported from \"Organization Member Activity Summary\".",
+    "InputDefinition": {
+      "userMessage": "For each organization that has 5 or more ICF members working there, show me the organization name, member count, and their members' combined activity: conferences attended, course enrollments and committee memberships. Display as a table ranked by total activity. Let me click an organization to see its members and their individual activity. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a table of organizations with at least 5 members (about 69 organizations)",
+        "Member-to-organization link uses Member Profiles OrganizationID (or the employee relationship)",
+        "Activity combines conference attendance, course enrollments and committee memberships",
+        "Organizations are ranked by total activity",
+        "Clicking an organization shows its members with per-member activity counts",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier3-cross-domain\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1800000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "BE037C9E-2BC3-4BEF-85B0-F727D2AC1B40"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.127Z",
+    "checksum": "0ae8c4539323a2f0c7584ef32340791f9e6455881864e42f2b9bebb32342d487"
+  }
+}

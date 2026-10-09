@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Lapsed Membership Renewals",
+    "Description": "Ambiguous \"lapsed member\" definition: bought a membership product in 2025 but not in 2026, using Order Lines in the Memberships category. Tests that Skip states its definition (Subscriptions are empty in this world).",
+    "InputDefinition": {
+      "userMessage": "Which members bought a membership in 2025 but have not renewed in 2026? Show me how many there are by membership product and segment in a chart, and a table of the lapsed members with their last membership order date and amount. Explain how you defined 'lapsed'. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response explains its definition of lapsed (bought a membership product in 2025 with no membership order in 2026)",
+        "Uses confirmed Order Lines for products in the Memberships category (not empty subscription tables)",
+        "The lapsed count is large (about 1,240 people), consistent with most 2026 renewals not yet being in the data",
+        "Chart breaks lapsed members down by membership product (Individual is the largest) and/or segment",
+        "Table lists lapsed members with last membership order date and amount",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier5-edge-cases\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3000000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "E1E74898-2CEF-4E5C-A47E-18173DF83572"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.362Z",
+    "checksum": "4fcb58b4988fd3d5c20b28e100a60c71be102086d8d67646630c9b62972ce438"
+  }
+}

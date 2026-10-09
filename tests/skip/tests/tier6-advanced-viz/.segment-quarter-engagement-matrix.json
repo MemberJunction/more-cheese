@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Engagement Matrix with Sparklines",
+    "Description": "Matrix of member segments x the last 8 quarters with colour-coded activity counts and embedded sparklines, drilling to activity type and records. Ported from \"Engagement Matrix with Embedded Sparklines\" (chapters replaced by segments).",
+    "InputDefinition": {
+      "userMessage": "Build a matrix with our member segments as rows and the last eight calendar quarters with data as columns. Each cell shows the number of engagement activities (course enrollments, conference registrations, advocacy actions and committee meeting attendance) for that segment and quarter, colour-coded high/medium/low, with a tiny sparkline of the monthly trend inside the cell. Clicking a cell shows a bar chart by activity type for that segment and quarter; clicking a bar shows a table of the actual activities (who, what, when) with rows that open the record. Make the columns sortable and highlight the selected cell. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a matrix with the five segments as rows and eight quarters as columns",
+        "Cells show activity counts from real data, colour-coded",
+        "Sparklines are embedded in the cells",
+        "Columns are sortable and the selected cell is highlighted",
+        "Clicking a cell shows a bar chart by activity type",
+        "Clicking a bar shows a table of individual activities with person, activity and date",
+        "Rows can open the underlying records"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier6-advanced-viz\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3600000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "516FF463-A637-4601-A8F1-C3F5AF345A27"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.507Z",
+    "checksum": "5ddc6850f3aedb6da86bf982121beb12eab670f518d7e5176e49a87f1ee73171"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Revenue Year-over-Year Comparison",
+    "Description": "2025 vs 2026 confirmed order revenue by month (MJ_BizApps_Orders: Order Headers). Ported from \"Revenue Year-over-Year Comparison\".",
+    "InputDefinition": {
+      "userMessage": "Compare our confirmed order revenue this year versus last year, broken down by month. Show both years on the same chart. Let me click any data point to see the orders for that month and year. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart with two series: 2025 and 2026, aligned by month",
+        "Revenue comes from confirmed sales orders (Order Headers / Lines), not drafts, quotes or voided orders",
+        "December 2025 shows the large renewal spike (about $329K) and January 2026 is the largest 2026 month",
+        "The response notes that 2026 data only runs through mid-year rather than treating missing months as a collapse",
+        "Clicking a point shows the orders for that month and year",
+        "Order rows can open the underlying order record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier2-trends\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1200000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "F4EBC1D8-BBEC-4A6D-99B7-411DBB89F5BA"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.367Z",
+    "checksum": "1fed6300664640293ff303628a24b6c863d7cadd80a5a42594f72a7a0b3f3d5f"
+  }
+}

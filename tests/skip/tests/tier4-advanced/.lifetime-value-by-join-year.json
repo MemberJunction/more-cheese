@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Member Lifetime Value by Join Year",
+    "Description": "Average confirmed order revenue per member by join-year cohort, drill to category split and then transactions. Ported from \"Member Lifetime Value by Join Year\".",
+    "InputDefinition": {
+      "userMessage": "Calculate the average lifetime value (total confirmed order revenue) for members grouped by the year they joined, and show it in a chart. When I click a year, show me a pie chart of that cohort's revenue by product category. Then let me click a slice to see the actual members and order lines. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of average lifetime value by join year",
+        "Lifetime value uses confirmed sales orders billed to the member (Order Headers BillToPersonID)",
+        "Older cohorts have higher LTV (about $3,000-3,700 for 2013-2019 joiners, falling to a few hundred dollars for 2026 joiners)",
+        "Clicking a year shows a pie chart of that cohort's revenue by product category",
+        "Clicking a slice shows the members and order lines behind it",
+        "Rows can open the member or order record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier4-advanced\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 2400000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "5F1F3321-6A77-4283-9E32-78DB95D3D251"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.198Z",
+    "checksum": "ba2824d965fd43c66d3bef42efa2a077cff664cdd206ebe60dbc2d7c2346930c"
+  }
+}

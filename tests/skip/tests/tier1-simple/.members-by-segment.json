@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Members by Segment",
+    "Description": "Simple aggregation: count ICF members (MoreCheese: Member Profiles) by Segment, with a chart that drills into the member list. Ported from AssociationDB \"Active Members by Type\"; ICF has no membership-type subscriptions (orders are not booked), so the member Segment is the type dimension.",
+    "InputDefinition": {
+      "userMessage": "Show me how many members we have, broken down by member segment, in a chart. I'd like to be able to click on any segment to see the actual list of members in that segment. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of member counts by segment",
+        "Uses the member profile data (MoreCheese: Member Profiles, Segment field) rather than inventing a membership-type table",
+        "All five segments are represented: Producer, Retailer, Enthusiast, Supplier, Educator",
+        "Counts are computed from data, not hardcoded; if totals are shown they are about 2,109 members (Producer about 843 is the largest segment, Educator about 163 the smallest)",
+        "Clicking a segment drills down to a table listing the members in that segment",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier1-simple\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 900000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "CDC4D989-C606-4024-A6A5-C45702A9DEF8"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.065Z",
+    "checksum": "ad730a7b80ae9ea406ac206f6aff39527ee1982c4d03e1f09b1dfe1588a04788"
+  }
+}

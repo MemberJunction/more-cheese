@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Conference Attendees Without Courses",
+    "Description": "Members who attended the conference (Event Order Lines AttendanceStatus=Attended) but never enrolled in a course (MoreCheese: Course Enrollments). Ported from \"Members with Events but No Courses\".",
+    "InputDefinition": {
+      "userMessage": "Find all members who have attended at least one of our conferences but have never enrolled in a course. Show me a table with their names, segment, and how many conferences they attended. I want to click on a member to see which conferences they attended. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a table of members matching the criteria",
+        "Attendance is based on Event Order Lines with AttendanceStatus = Attended",
+        "Members with any course enrollment are excluded",
+        "The result is about 132 members",
+        "Each row shows the member's name, segment and number of conferences attended",
+        "Clicking a member shows the conferences (registrations) they attended",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier3-cross-domain\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1800000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "4D81ED3F-F5CE-43D6-8C53-23165A0DD8BE"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.103Z",
+    "checksum": "0f4d90fa45795530dd6ae3482df75322fcfda3cbe143c75b4b69a708ef837969"
+  }
+}

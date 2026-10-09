@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Conference Attendance by Year",
+    "Description": "ICF Annual Conference registrations by year and attendance status from MJ_BizApps_Orders: Event Order Lines. Ported from \"Event Attendance by Quarter\" (ICF has one annual conference, so the grain is year).",
+    "InputDefinition": {
+      "userMessage": "What are the attendance trends for our annual conference by year? Show registrations split into attended, no-show and cancelled as a stacked bar chart. I want to click a year and status to see the people. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a stacked bar chart by year (2019-2026) split by attendance status",
+        "Uses Event Order Lines (AttendanceStatus) for the Conference Registration product",
+        "Attended is the largest status each year and grows from about 82 (2019) to about 402 (2026)",
+        "Shows the no-show rate or otherwise makes the attended vs no-show comparison easy",
+        "Clicking a year/status shows the registrants (name, ticket tier, status)",
+        "Rows can open the underlying person or registration record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier2-trends\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1200000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "DA4C746D-7827-4A84-B80A-E640B2A0FFC3"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.183Z",
+    "checksum": "e2f92b8fae4cb2e78c3a6e8e00b3af9ac3b77579347cb93c6cb0b4eddec9d28a"
+  }
+}

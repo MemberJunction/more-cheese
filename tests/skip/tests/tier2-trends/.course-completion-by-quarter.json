@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Course Completion Rate by Quarter",
+    "Description": "Completion rate (Completed / all enrollments) by enrollment quarter from MoreCheese: Course Enrollments, 2023-2025. Ported from \"Monthly Course Completion Rates\".",
+    "InputDefinition": {
+      "userMessage": "Show me our course completion rate by enrollment quarter for 2023 through 2025 as a line chart. Completion rate = completed enrollments divided by all enrollments that quarter. When I click a quarter, show me the courses that had enrollments that quarter with their completion counts. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a line chart of completion rate by quarter for 2023-2025",
+        "Completion rate uses MoreCheese: Course Enrollments Status (Completed vs Dropped/InProgress) and is shown as a percentage",
+        "Rates are realistic for the data: roughly 60-85% per quarter, about 72% overall",
+        "Quarters with no enrollments are omitted or shown as gaps rather than as 0%",
+        "Clicking a quarter shows the courses with enrollment and completion counts for that quarter",
+        "Course rows can open the underlying course record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier2-trends\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1200000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "F2FA3FC3-D4F4-4C30-A3F7-3ABF05E790A4"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.208Z",
+    "checksum": "b8c082fc805224e1cf9d814200d8aa248c9e029202763af2dca72db3552037f8"
+  }
+}
