@@ -38,60 +38,6 @@
   {
     "fields": {
       "ResourceTypeID": "@lookup:MJ: Resource Types.Name=User Views",
-      "ResourceRecordID": "3BF98DAF-CCC4-4C14-AF8D-D7DE74FAFB2A",
-      "Type": "Role",
-      "RoleID": "@lookup:MJ: Roles.Name=UI",
-      "PermissionLevel": "View",
-      "Status": "Approved",
-      "SharedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "StartSharingAt": null,
-      "EndSharingAt": null,
-      "UserID": null,
-      "SkipEmbeddings": false
-    },
-    "primaryKey": {
-      "ID": "4AA26C45-285E-4D6A-A5F3-DEC5DC9EF8C8"
-    }
-  },
-  {
-    "fields": {
-      "ResourceTypeID": "@lookup:MJ: Resource Types.Name=User Views",
-      "ResourceRecordID": "BA61903F-1E34-4BD1-94EA-A45258127A92",
-      "Type": "Role",
-      "RoleID": "@lookup:MJ: Roles.Name=UI",
-      "PermissionLevel": "View",
-      "Status": "Approved",
-      "SharedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "StartSharingAt": null,
-      "EndSharingAt": null,
-      "UserID": null,
-      "SkipEmbeddings": false
-    },
-    "primaryKey": {
-      "ID": "4ED75807-7860-48B5-860A-0EB09526B4A9"
-    }
-  },
-  {
-    "fields": {
-      "ResourceTypeID": "@lookup:MJ: Resource Types.Name=User Views",
-      "ResourceRecordID": "3EF9D448-B589-4332-B344-0F737DE8BB55",
-      "Type": "Role",
-      "RoleID": "@lookup:MJ: Roles.Name=UI",
-      "PermissionLevel": "View",
-      "Status": "Approved",
-      "SharedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "StartSharingAt": null,
-      "EndSharingAt": null,
-      "UserID": null,
-      "SkipEmbeddings": false
-    },
-    "primaryKey": {
-      "ID": "6186BDEE-7D63-41A9-B2D6-1740CAB69E75"
-    }
-  },
-  {
-    "fields": {
-      "ResourceTypeID": "@lookup:MJ: Resource Types.Name=User Views",
       "ResourceRecordID": "@lookup:MJ: User Views.Name=testing view part 2",
       "Type": "Role",
       "RoleID": "@lookup:MJ: Roles.Name=UI",
