@@ -5,44 +5,47 @@
     },
     "fields": {
       "Name": "MoreCheese: Member Renewal Risk",
-      "Description": "Predicts whether an active More Cheese membership will renew or lapse at the end of the period based on canonical member profiles, dues orders, store orders, event attendance, and course completions.",
+      "Description": "Predicts whether a More Cheese member renews or lapses. Trained on the live 'MoreCheese: Member Renewal Signals' view: the label (RenewalOutcome) is 'Lapsed' when the member's latest membership-dues order is more than 395 days older than the dataset's reference date, and every feature is computed as of that last membership purchase (tenure, prior terms, dues, store orders, events attended, courses). Scores land on each Member Profile (RenewalProbability / RenewalStatus / RenewalScoredAt). No dependency on Subscriptions or Journal Entries.",
       "Version": 1,
       "Status": "Published",
-      "TargetEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
-      "TargetVariable": "Status",
+      "TargetEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Renewal Signals",
+      "TargetVariable": "RenewalOutcome",
       "ProblemType": "classification",
       "AlgorithmID": "@lookup:MJ: ML Algorithms.Name=LightGBM",
       "Hyperparameters": {},
       "SourceBindings": [
         {
           "Kind": "Entity",
-          "Ref": "MJ_BizApps_Common: People"
-        },
-        {
-          "Kind": "Entity",
-          "Ref": "MoreCheese: Member Profiles"
-        },
-        {
-          "Kind": "Entity",
-          "Ref": "MJ_BizApps_Orders: Order Headers"
-        },
-        {
-          "Kind": "Entity",
-          "Ref": "MJ_BizApps_Orders: Event Order Lines"
-        },
-        {
-          "Kind": "Entity",
-          "Ref": "MoreCheese: Course Enrollments"
+          "Ref": "MoreCheese: Member Renewal Signals"
         }
       ],
       "FeatureSteps": {
         "Steps": [
           {
+            "Id": "select-signals",
+            "Kind": "select",
+            "Columns": [
+              "MembershipTier",
+              "MemberSegment",
+              "MemberRegion",
+              "TenureDays",
+              "PriorTermsCount",
+              "DuesAmount",
+              "OrdersCount",
+              "TotalOrderSpend",
+              "DaysSinceLastOrder",
+              "EventsAttendedCount",
+              "DaysSinceLastEvent",
+              "CoursesEnrolledCount",
+              "CoursesCompletedCount"
+            ]
+          },
+          {
             "Id": "onehot-MembershipTier",
             "Kind": "onehot",
             "Column": "MembershipTier",
             "Inputs": [
-              "MoreCheese: Member Profiles"
+              "select-signals"
             ]
           },
           {
@@ -50,7 +53,7 @@
             "Kind": "onehot",
             "Column": "MemberSegment",
             "Inputs": [
-              "MoreCheese: Member Profiles"
+              "select-signals"
             ]
           },
           {
@@ -58,16 +61,7 @@
             "Kind": "onehot",
             "Column": "MemberRegion",
             "Inputs": [
-              "MoreCheese: Member Profiles"
-            ]
-          },
-          {
-            "Id": "impute-TenureDays",
-            "Kind": "impute",
-            "Column": "TenureDays",
-            "Strategy": "median",
-            "Inputs": [
-              "MoreCheese: Member Profiles"
+              "select-signals"
             ]
           },
           {
@@ -76,7 +70,7 @@
             "Column": "DaysSinceLastOrder",
             "Strategy": "median",
             "Inputs": [
-              "MJ_BizApps_Orders: Order Headers"
+              "select-signals"
             ]
           },
           {
@@ -85,7 +79,7 @@
             "Column": "DaysSinceLastEvent",
             "Strategy": "median",
             "Inputs": [
-              "MJ_BizApps_Orders: Event Order Lines"
+              "select-signals"
             ]
           },
           {
@@ -93,10 +87,10 @@
             "Kind": "standardize",
             "Columns": [
               "TenureDays",
+              "PriorTermsCount",
               "DuesAmount",
-              "PriorPeriodsCount",
-              "TotalOrderSpend",
               "OrdersCount",
+              "TotalOrderSpend",
               "DaysSinceLastOrder",
               "EventsAttendedCount",
               "DaysSinceLastEvent",
@@ -104,8 +98,7 @@
               "CoursesCompletedCount"
             ],
             "Inputs": [
-              "MoreCheese: Course Enrollments",
-              "impute-TenureDays",
+              "select-signals",
               "impute-DaysSinceLastOrder",
               "impute-DaysSinceLastEvent"
             ]
@@ -118,18 +111,10 @@
       "LeakageGuard": {
         "DenyFields": [
           "ID",
-          "FirstName",
-          "LastName",
-          "MiddleName",
-          "DisplayName",
-          "Email",
-          "Phone",
-          "DateOfBirth",
-          "Gender",
-          "PhotoURL",
-          "Bio",
-          "LinkedUserID",
-          "Status"
+          "PersonID",
+          "LastMembershipDate",
+          "ReferenceDate",
+          "RenewalOutcome"
         ],
         "SingleFeatureDominanceThreshold": 0.85
       },
@@ -138,10 +123,6 @@
         "TestSize": 0.2,
         "LockedHoldoutFraction": 0.15
       }
-    },
-    "sync": {
-      "lastModified": "2026-09-21T03:21:08.236Z",
-      "checksum": "abb493545f6bfc555295a06b37c649b2b4f4cd43518d61b3c0d293ade761a5ce"
     }
   },
   {

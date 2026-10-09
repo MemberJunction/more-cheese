@@ -1,0 +1,11 @@
+{
+  "VirtualEntities": [
+    {
+      "SchemaName": "morecheese_members",
+      "ViewName": "vwMemberRenewalSignals",
+      "EntityName": "MoreCheese: Member Renewal Signals",
+      "Description": "Read-only, live per-member renewal signals (label + engagement features as of the last membership purchase) computed from canonical Orders, Event Order Lines and Course Enrollments. One row per Member Profile; ID = MemberProfile.ID. The training source for the Member Renewal Risk Predictive Studio pipeline.",
+      "PrimaryKey": ["ID"]
+    }
+  ]
+}

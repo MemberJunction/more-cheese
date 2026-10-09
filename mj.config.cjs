@@ -73,6 +73,10 @@ module.exports = {
   // them. See docs/template-docs/codegen-and-metadata-migrations.md.
   includeSchemas: ['morecheese_members', 'morecheese_events', 'morecheese_learning'],
 
+  // Extra schema info CodeGen can't infer from the database: here, the read-only virtual
+  // entity over vwMemberRenewalSignals (the Member Renewal Risk model's training source).
+  additionalSchemaInfo: './codegen-schema-info.json',
+
   // ==========================================================================
   // SQL output for migrations — RECOMMENDED
   // ==========================================================================
