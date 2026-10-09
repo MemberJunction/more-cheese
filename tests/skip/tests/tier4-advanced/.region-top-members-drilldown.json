@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Region Engagement Drill-Down",
+    "Description": "Region-level engagement (members, conference attendance, average tenure) -> top 5 members -> member activity. Ported from \"Chapter Engagement with Drill-Down\" (regions replace chapters).",
+    "InputDefinition": {
+      "userMessage": "Create a regional engagement report showing each region's member count, conference attendance and average member tenure in years, in a chart. Let me click a region to see its top 5 most active members. Then from that list, let me click a member to see their detailed activity history. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of NA, EU and RoW with member count, conference attendance and average tenure",
+        "Tenure is computed from Member Profiles JoinDate",
+        "Clicking a region shows its top 5 members by activity with their activity counts",
+        "Clicking a member shows their detailed activity (conferences, courses, committees, certifications or orders)",
+        "Multi-level navigation is clear",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier4-advanced\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 2400000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "C7BF7180-38F3-493F-B48A-22E5B4820369"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.345Z",
+    "checksum": "6443d74cc0168cf3b4e473438ccf7c6978fa86c544bfb9ef525590bb902e9d76"
+  }
+}

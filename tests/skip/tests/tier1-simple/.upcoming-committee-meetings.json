@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Upcoming Committee Meetings",
+    "Description": "Table of scheduled committee meetings (Committees: Meetings with Status=Scheduled). Ported from \"Upcoming Events List\" — ICF has only two event products, so scheduled governance meetings are the dated upcoming-calendar data.",
+    "InputDefinition": {
+      "userMessage": "Give me a table of all committee meetings that are still scheduled (not yet held), with the committee name, meeting name, date and time, and whether it is virtual or in person. I want to be able to click on a meeting to open it. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a table of committee meetings",
+        "Only meetings with a Scheduled status are shown (12 meetings, from October 2026 to January 2027), not completed ones",
+        "Table includes committee name, meeting name, date/time and location type (Virtual or InPerson)",
+        "Meetings are sorted chronologically",
+        "All six committees appear (Events, Awards & Competition, Food Safety, Standards, Membership & Outreach, Education)",
+        "Rows can open the underlying meeting record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier1-simple\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 900000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "96D3108A-CCDE-4C9D-AE7C-7F86D00331A0"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.079Z",
+    "checksum": "9bbdd879f756a5398f6b0f910f7b1f923c0c24cd9a549401793b4e0ee60b4f43"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - KPI Gauge Dashboard with Deep Drill",
+    "Description": "Six radial gauges over real ICF KPIs with trend, breakdown and record drill levels. Ported from \"KPI Gauge Dashboard with 4-Level Drill-Down\" with KPIs remapped to data that exists.",
+    "InputDefinition": {
+      "userMessage": "Design a KPI dashboard with six radial gauges in a 2x3 grid: (1) Conference attendance rate (attended / registered, excluding cancellations) target 85%, (2) Course completion rate target 75%, (3) Conference NPS target 40, (4) Average confirmed revenue per member in 2025 target $400, (5) Committee meeting attendance rate target 80%, (6) Issue resolution rate (resolved or closed / all issues) target 85%. Colour each gauge green if at or above target, yellow if within 10% of target, red otherwise, and show the value and target on each. Clicking a gauge shows that KPI's trend by year; clicking a year shows a breakdown chart of the contributing factors; clicking a segment of that breakdown shows a table of the underlying records with rows that open the record. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes six radial gauges in a grid with value and target labels",
+        "All six KPIs are computed from real data in the Orders, Learning, Forms, Committees and Issues entities",
+        "Values are plausible for the data (e.g. conference attendance rate about 80%, course completion about 72%, committee attendance about 73%, issue resolution about 80%)",
+        "Gauges are colour-coded green/yellow/red relative to targets",
+        "Clicking a gauge shows a yearly trend chart",
+        "Clicking a year shows a breakdown chart; clicking a segment shows a table of records",
+        "Final rows can open the underlying records"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier6-advanced-viz\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3600000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "29B00540-5EDD-40CC-A56E-99362867D092"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.456Z",
+    "checksum": "08b2309548496b41394f5aa80c4a179b8bcdbb0bf239e2356052e66f26b29b74"
+  }
+}

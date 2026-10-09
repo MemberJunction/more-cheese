@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Member Joins by Year",
+    "Description": "New members per year from MoreCheese: Member Profiles.JoinDate (2013-2026). Ported from \"Membership Growth 5 Years\".",
+    "InputDefinition": {
+      "userMessage": "Show me how many new members joined each year, plus the cumulative total, as a line chart. I'd like to click on any year to see the members who joined that year. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a line chart of members joined per year",
+        "Uses JoinDate from MoreCheese: Member Profiles",
+        "Shows growth accelerating in recent years (2025 is the peak with about 552 joins; 2013-2021 are well under 100 per year)",
+        "Includes a cumulative total series or clearly shows the running total (about 2,109 by 2026)",
+        "Response includes a short narrative interpretation of the trend",
+        "Clicking a year shows the members who joined that year",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier2-trends\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1200000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "152F5CD4-985F-4241-94F4-68F1AFB3E33E"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.222Z",
+    "checksum": "1b4fb6ab28562383f179a7a28cef34cd1556e2365b0cedbaf42f8086b119ac44"
+  }
+}

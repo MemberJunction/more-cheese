@@ -1,0 +1,51 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Members by Region and Country",
+    "Description": "Member geography from MoreCheese: Member Profiles (Region, CountryName) with drill-down. Replaces AssociationDB \"Chapter Membership Distribution\" — ICF has regions/countries, not chapters.",
+    "InputDefinition": {
+      "userMessage": "Show me a chart of how many members we have in each region, and let me click a region to see a breakdown by country. Then let me click a country to see who the members are. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of member counts by region",
+        "Regions are NA, EU and RoW with NA the largest (about 1,267 of about 2,109 members)",
+        "Clicking a region shows member counts by country within that region (United States is the largest country, about 1,073)",
+        "Clicking a country shows a table of members in that country",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier1-simple\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 900000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "EF4B8D75-6CBF-4C56-8F60-809F2B0F5B45"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.049Z",
+    "checksum": "9630ae21b99f67a5bc27dff4be16abeee76d93ba323b4f64e3947dd682f62670"
+  }
+}

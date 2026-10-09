@@ -1,0 +1,51 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Top 10 Most Engaged Members",
+    "Description": "Cross-domain engagement ranking using conference attendance, course enrollments, committee service, certifications, competition entries and advocacy. Ported from \"Top 10 Most Engaged Members\" (chapters replaced by committees/advocacy).",
+    "InputDefinition": {
+      "userMessage": "Who are our top 10 most engaged members based on conference attendance, course enrollments, committee service, certifications, competition entries and advocacy actions? Show a ranked table with each metric. I want to click any member to open their profile. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a ranked table of 10 members",
+        "Engagement metrics come from at least four different domains (events, learning, committees, certifications, competitions, advocacy)",
+        "Each metric is shown as its own column and the ranking method is explained",
+        "Names are real people from the data, not placeholders",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier3-cross-domain\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1800000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "9BC7D0D6-C12B-4B7D-B931-DCB314210BA5"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.154Z",
+    "checksum": "62f37f9c7f1e7a0dc7e01dc09b67398b3496956937e9d7899812a8517ec34050"
+  }
+}

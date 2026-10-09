@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Event Revenue and Registrations",
+    "Description": "Events-category products ranked by 2025 confirmed revenue with registration counts, drill to registrants. Ported from \"Events Ranked by Revenue\".",
+    "InputDefinition": {
+      "userMessage": "Show me all of our event products ranked by total confirmed revenue in 2025, with the number of registrations for each. Display as a table. Let me click on an event product to see who registered. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a table of event products ranked by 2025 revenue",
+        "Uses the Orders domain (Order Lines joined to Products in the Events category) with confirmed sales orders",
+        "Workshop Registration (about $214K, about 1,469 lines) ranks above Conference Registration (about $176K, about 402 lines), with Competition entry far behind",
+        "Revenue is formatted as currency and sorted descending",
+        "Clicking a product shows the registrants (person name, order date, amount, ticket tier where available)",
+        "Rows can open the underlying person or order record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier3-cross-domain\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1800000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "776B7BC9-868D-40CD-977F-C65740DFF400"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.115Z",
+    "checksum": "12195a3eabf84d3327f990d215f3602554510bbd773c110fd1f78257cf749cf2"
+  }
+}

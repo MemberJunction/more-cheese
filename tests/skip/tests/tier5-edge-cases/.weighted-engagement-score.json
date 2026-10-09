@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Multi-Dimensional Engagement Scoring",
+    "Description": "Weighted engagement score with per-factor breakdown and drill to underlying activities. Ported from \"Multi-Dimensional Engagement Scoring\" (chapter leadership replaced by committee service, plus advocacy).",
+    "InputDefinition": {
+      "userMessage": "Create an engagement score for all members using these weighted factors: conference attendance (30%), course completion (25%), committee service (20%), advocacy actions (15%), and years as a member (10%). Normalize each factor so the score is 0-100. Show the top 20 members in a ranked table. When I click a member, show a chart of how each factor contributed to their score. Then let me click a factor to see the underlying activities. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a ranked table of the top 20 members with a 0-100 score",
+        "The five factors use the stated weights and come from real data (Event Order Lines, Course Enrollments, Committees: Memberships, Advocacy Actions, Member Profiles JoinDate)",
+        "The normalization approach is explained",
+        "Clicking a member shows a factor breakdown chart",
+        "Clicking a factor shows the underlying activity records",
+        "Rows can open the underlying records"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier5-edge-cases\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3000000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "F8C13D62-85DA-47C6-8C2C-583C0F86B3CB"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.414Z",
+    "checksum": "7f0d9f9baf14075a38b33f1c667c20971d19a54514e2d4ad28ad8a781f4bac17"
+  }
+}

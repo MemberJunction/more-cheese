@@ -1,0 +1,51 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Member Journey Timeline",
+    "Description": "Complete activity timeline for one named member (Finley Draper, ICF-101622) across joins, orders, courses, conferences, committees, certifications and competitions. Ported from \"Complete Member Journey Timeline\".",
+    "InputDefinition": {
+      "userMessage": "Show me a complete activity timeline for member Finley Draper (member number ICF-101622): when they joined, their orders, course enrollments, conferences attended, committee service, certifications and competition entries. Present it as a chronological timeline chart. When I click on any activity, show me its details, and let me open the actual record. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a timeline visualization for Finley Draper",
+        "Timeline starts with the October 2017 join date and is chronologically ordered",
+        "Includes multiple activity types: orders, course enrollments (about 8), conference attendance, committee service (Membership & Outreach Committee member since 2021), certification (Food Safety & HACCP, in progress) and a 2018 competition entry",
+        "Clicking an activity shows its details",
+        "Links allow opening the underlying records"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier5-edge-cases\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3000000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "AA7BBB44-8618-422B-85FD-8DDA1A4CB842"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.377Z",
+    "checksum": "749988ef0a69451542795e1ee1c32f18f7f98f3f36476f3a270c0f81fbbea306"
+  }
+}

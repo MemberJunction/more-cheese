@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Advocacy Actions by Kind and Year",
+    "Description": "Grassroots advocacy activity from MoreCheese: Advocacy Actions by Kind and year, with topic drill-down.",
+    "InputDefinition": {
+      "userMessage": "Show me our advocacy activity over time: a stacked area or bar chart of advocacy actions per year by kind (letters, petition signatures, coalition meetings, testimony). When I click a year, show the breakdown by policy topic, and then let me see the members behind a topic. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a stacked chart of advocacy actions per year by Kind",
+        "Uses MoreCheese: Advocacy Actions (Kind, ActionDate, Topic)",
+        "Kinds include LetterCampaign (largest), PetitionSignature, CoalitionMeeting and Testimony",
+        "2025 is the peak year (about 243 actions)",
+        "Clicking a year shows a breakdown by topic (e.g. Raw-milk aging rules, Interstate cheese shipment, Dairy pricing reform)",
+        "Drilling into a topic shows the members who took those actions, and rows can open the member/person record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier2-trends\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1200000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "141F0355-6105-42B7-B136-A9FAF73BC05E"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.169Z",
+    "checksum": "d1b4ee680928e2683acd8f9ec35a704bd364e37c048c434a1a42d17264f95f20"
+  }
+}

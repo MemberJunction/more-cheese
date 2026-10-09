@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Cheese Competition Results",
+    "Description": "Competition entries by category with medal counts -> entries by year -> entrants. Uses MoreCheese: Competition Entries.",
+    "InputDefinition": {
+      "userMessage": "Show me our cheese competition results: for each competition category, how many entries and how many gold, silver and bronze medals, as a grouped or stacked bar chart. Let me click a category to see entries and medal rate by year, and then click a year to see the individual entries with the cheese name, entrant, organization and result. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart by competition category with entries and gold/silver/bronze counts",
+        "Uses MoreCheese: Competition Entries (Category, EntryYear, Result, ProductName)",
+        "Six categories appear; Alpine Styles has the most entries (about 87); about 423 entries in total, most with no medal",
+        "Clicking a category shows entries and medal rate by year",
+        "Clicking a year shows individual entries with cheese name, entrant, organization and result",
+        "Rows can open the competition entry or person record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier4-advanced\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 2400000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "6AA07917-05A2-4657-9E0D-77F1C2664715"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.899Z",
+    "checksum": "b3238acf72b90427d45973b5c6eba9c3417d97852003a2d849fa407524706283"
+  }
+}

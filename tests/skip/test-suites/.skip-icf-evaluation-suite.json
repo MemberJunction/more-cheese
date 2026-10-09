@@ -1,0 +1,499 @@
+{
+  "fields": {
+    "Name": "Skip ICF Evaluation Suite",
+    "Description": "Skip evaluation on the More Cheese (International Cheese Federation) demo world: 31 Agent Eval tests across six tiers (simple, trends, cross-domain, advanced drill-down, edge cases, advanced visualization). Ported from the AssociationDB comprehensive suite and adapted to BizApps People/Orders/Committees/Forms/Issues/Tasks plus MoreCheese member, learning, competition and advocacy entities. Every test is judged (llm-judge 0.7) plus trace-no-errors (0.3). Run with: DB_DATABASE=<db> node packages/MJCLI/bin/run.js test suite --name \"Skip ICF Evaluation Suite\" from the MJ repo root.",
+    "Status": "Active",
+    "Tags": "[\"skip\",\"more-cheese\"]"
+  },
+  "relatedEntities": {
+    "MJ: Test Suite Tests": [
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Members by Segment",
+          "Sequence": 1,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "6915AA6A-D2D0-426D-BA76-F0B4CAC7D976"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:02.556Z",
+          "checksum": "a6bddd85636b33a3a25c1a0fa59fd1dbf7af700198158ce5e7b2b955da47dd81"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - YTD Revenue by Month",
+          "Sequence": 2,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "94A2BF9A-0CE4-4D71-96F2-1424241465F2"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:02.665Z",
+          "checksum": "1e04f6034c93d4078b52a0ed5e00385ef025ef3a573041d995d9e47b79b6f364"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Upcoming Committee Meetings",
+          "Sequence": 3,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "F854924D-4280-4537-8D55-B74E6E9EE883"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:02.902Z",
+          "checksum": "4b7e6958c1339a4e929af4a0d58a46507a603698cf8e3f56c52a2f27cd58db11"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Members by Region and Country",
+          "Sequence": 4,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "386FE5D3-861E-4781-BE5D-7C4EBB85CBD5"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.048Z",
+          "checksum": "e84ca0e5dd302c173086bc9638bb91a2217f7d1761fadc28ea9b4c63eb727f93"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Certification Status Mix",
+          "Sequence": 5,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "8F09EFEF-99E3-4D35-9E5A-4B9AA9F18304"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.209Z",
+          "checksum": "316cab8eac561a450938818031ea6f6f0f9a362048128c398ad3f88115f8edea"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Issues by Type and Status",
+          "Sequence": 6,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "FD110D20-B678-4F98-ADF2-BF705BFF7D7E"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.420Z",
+          "checksum": "92ea40f6375c43ac53a68ad1c5b82f6997fe4342164fdbd9adbfff1629c62f10"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Member Joins by Year",
+          "Sequence": 7,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "65B00A84-CA54-4044-A505-BC332B08AC7E"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.579Z",
+          "checksum": "f51132c24fb8fa0d67ff71b09b9134dd9348ee3213914210a023479cec7de494"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Revenue Year-over-Year Comparison",
+          "Sequence": 8,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "63EC47B8-EF77-4569-8C87-CE340C2408C9"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.688Z",
+          "checksum": "c090d11327baa6e45f2012f89cd67dcb3df2778eb8d37ac353354d087c865c30"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Course Completion Rate by Quarter",
+          "Sequence": 9,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "FF05737F-4279-44E1-993A-0340DDA854B4"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.848Z",
+          "checksum": "c07942c969113e57d879efa01ebf83511019ffbe05923ecce1a30751962d89da"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Conference Attendance by Year",
+          "Sequence": 10,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "BA034FF8-3C1C-4A84-9179-07542CF721B6"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:03.976Z",
+          "checksum": "2d11c64c082a30ef554bc72e12a3c9e7f3d0b0541c86d338f7f785bfae4df570"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Conference NPS Trend",
+          "Sequence": 11,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "CA2C95C6-8204-4271-A990-9CEDE0D275C0"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:04.257Z",
+          "checksum": "396e0f06361eced09741fb73dd47726297ed8a3f9c2c2cf577bbd35789769800"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Advocacy Actions by Kind and Year",
+          "Sequence": 12,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "4C3FEF98-10B1-4854-B202-2C3690F71D58"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:04.496Z",
+          "checksum": "3c65c0ef45eed68f97b8619834ced3083ac7ab7ec907679ab7759b5d5c5240c3"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Event Revenue and Registrations",
+          "Sequence": 13,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "E162A27B-3B83-48EF-BCD7-8FC4939C1E4B"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:04.771Z",
+          "checksum": "849fc0e76aecea09c1e1b8c8cf5b28594c0e0c714111668bc5f657a4ba903990"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Conference Attendees Without Courses",
+          "Sequence": 14,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "879842D2-342B-442A-AAB5-FB717D354224"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:04.965Z",
+          "checksum": "c906ece5b3f5820ae5f328b0ff6582c159bc99cb051f11bcccfe321d598df627"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Organization Member Activity",
+          "Sequence": 15,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "BF0127EB-B2DA-4463-92AB-70D443F10571"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:05.309Z",
+          "checksum": "67c326d7787e4e16bd9cad9770d912eaf961b0adfbbbc48dd76c312b3fced246"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Revenue Breakdown by Product Category",
+          "Sequence": 16,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "290A6229-DB4E-4055-8F49-794FCC81B713"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:05.566Z",
+          "checksum": "157acc212188b8ec5a5b37f57608f8ad9cb1fdba893eb5fd34068b7ab124c8e3"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Top 10 Most Engaged Members",
+          "Sequence": 17,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "A0254118-083F-4E40-A6AA-2BE187170828"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:05.865Z",
+          "checksum": "dcfd613bebb5626c75f264949d28058bc5c4248815bd6d3e38c6ed1c795408a9"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Committee Governance Drill-Down",
+          "Sequence": 18,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "35FF19B7-DC4C-41A9-BF61-C42C28732D6E"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:06.141Z",
+          "checksum": "2827d5240632d8a397965d94cc9dafddadd71386822085bf2d326f9cdd16f33e"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Course Performance with Enrollment Cohorts",
+          "Sequence": 19,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "23F6C161-4B15-45B2-A4C1-487C94D06DB2"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:06.296Z",
+          "checksum": "e2fec3cdfe8f34267cd68837892438f8efe92141b420f7670987430657bb88cb"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Member Lifetime Value by Join Year",
+          "Sequence": 20,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "61DD16AE-CBC4-41EB-87E4-B1D633E22C9B"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:06.616Z",
+          "checksum": "5508b939191c511075207f780933ad7d236d5b0d881206106653bf8588ac90c6"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Region Engagement Drill-Down",
+          "Sequence": 21,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "EF362BC9-6935-4BDE-8EAE-80422086E9E0"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:06.853Z",
+          "checksum": "0b127653d360d6db38976147ac362df07beb46c3375d2d25a316245cee8a3615"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Cheese Competition Results",
+          "Sequence": 22,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "BC7807A3-BF18-48F4-AD6B-4FBCC45D3D2D"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:07.152Z",
+          "checksum": "63650e5470565313ead4ae3bc6d2a7abf9363e02638c32b829b6a60f36cddf23"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Member Journey Timeline",
+          "Sequence": 23,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "93EA92FE-E1D9-4913-B49A-2B37ACCBBFB7"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:07.326Z",
+          "checksum": "8c2c3bc0a80056c13a25c9c6dac5d0bbb13c6b6567f48b60397325960758b21f"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Multi-Dimensional Engagement Scoring",
+          "Sequence": 24,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "D1969662-C2C8-4099-9B43-0ED68B0DCA26"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:07.470Z",
+          "checksum": "269c7afe7473208bfa3603de866948364f85242348611936275a590eaac5c7a4"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Honesty When Data Is Missing",
+          "Sequence": 25,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "C8917E23-4B07-462F-B277-35A915AB5373"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:07.724Z",
+          "checksum": "e98238570211855ace47d45b24a2ed114cf245540f66cc22d4586e2bf5d3723b"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Lapsed Membership Renewals",
+          "Sequence": 26,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "26440638-A8DB-4A17-B1AB-9356F603B611"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:07.911Z",
+          "checksum": "58ad7d7c180fb5bc2ceb7082fbbf83038852e91eb5ceb9b66f6265e89b24106c"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Dual-Axis Members vs Revenue with Drill-Down",
+          "Sequence": 27,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "3CD779A0-F786-4315-9C9F-4DAF4354AB2F"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:08.116Z",
+          "checksum": "638cd162b32b7b6203c95c013494f0052afb25ccf44414aab2455fc1d31ce2fb"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Hierarchical Revenue Treemap",
+          "Sequence": 28,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "2A635A53-7993-4341-BD0B-C93319E359D7"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:08.414Z",
+          "checksum": "2e45a77972e6a91c3c41bbf05913a149b452105527f13a69c608654f71a3b3cb"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Engagement Matrix with Sparklines",
+          "Sequence": 29,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "430751D5-CC65-4991-99B9-90B0B3A8530D"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:08.585Z",
+          "checksum": "e3d69e66f4abdd297c17d577410f66929da62030bdc8651afb2657b16d29e484"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Member Referral and Employer Network",
+          "Sequence": 30,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "889FCEE5-264C-4C84-9F13-05D9DCD8AF64"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:08.773Z",
+          "checksum": "b7b4e87fe932d7d60d2c3896a1ec643879093abf9cf97e302092a2606788a8cd"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - KPI Gauge Dashboard with Deep Drill",
+          "Sequence": 31,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "6A60F4C6-11A8-4FC6-9E34-1BEA70E7592D"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:08.975Z",
+          "checksum": "bc59fe76df9966fe0edc0a815ff5ba737e17fed07d87f31ba8dc313744556642"
+        }
+      },
+      {
+        "fields": {
+          "SuiteID": "@parent:ID",
+          "TestID": "@lookup:MJ: Tests.Name=Skip ICF - Task Operations Board",
+          "Sequence": 32,
+          "Status": "Active"
+        },
+        "primaryKey": {
+          "ID": "7556FABC-45EC-4B32-BBE3-2ACF6BA7CB2A"
+        },
+        "sync": {
+          "lastModified": "2026-10-09T17:18:09.224Z",
+          "checksum": "770eeb7bbe8ee2cd9c76da940d6f095dd79aceba300d93ada59291b9f225dbd0"
+        }
+      }
+    ]
+  },
+  "primaryKey": {
+    "ID": "C17C2AD4-6F08-4EF7-9AA2-3C429BBCD079"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:18:02.472Z",
+    "checksum": "9d5e591f5f9e71de7a4616b2c9a4f6ae7bd9eb4242641f2d6c61e457be235024"
+  }
+}

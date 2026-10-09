@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Issues by Type and Status",
+    "Description": "Support issue mix from MJ_BizApps_Issues: Issues by Issue Type and Issue Status.",
+    "InputDefinition": {
+      "userMessage": "How are our support issues distributed by issue type and status? Show it as a chart, and let me click on any type/status combination to see those issues. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a chart of issue counts by issue type and status",
+        "Uses MJ_BizApps_Issues: Issues with their Issue Type and Issue Status names (not raw IDs)",
+        "Issue types include Data Correction (largest), General, Events and Billing; total is about 103 issues",
+        "Statuses include New, In Progress, Resolved and Closed",
+        "Clicking a type/status combination shows a table of those issues with number, title, severity and priority",
+        "Rows can open the underlying issue record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier1-simple\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 900000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "C92D8159-A318-472A-96CE-C37F18E0200D"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.032Z",
+    "checksum": "f920956819ab00b79c7178456091e7da4987bc527e4ec1527c155653297f11d8"
+  }
+}

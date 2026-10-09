@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Revenue Breakdown by Product Category",
+    "Description": "Share of confirmed revenue by product category (Memberships, Events, Publications & Goods, Certifications & Training, General). Ported from \"Revenue Breakdown by Source\".",
+    "InputDefinition": {
+      "userMessage": "What percentage of our confirmed revenue comes from each product category (memberships, events, publications, certifications, and so on)? Show this as a pie or donut chart. When I click a slice, show me a table of the order lines in that category. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a pie or donut chart of revenue share by product category",
+        "Uses Order Lines joined to Products and Product Categories, for confirmed sales orders",
+        "Memberships (about 50%) and Events (about 47%) dominate; Publications & Goods, Certifications & Training and General are small slices",
+        "Percentages add up to about 100% and slices are labelled with category and amount or percent",
+        "Clicking a slice shows the order lines in that category (order number, date, product, amount)",
+        "Rows can open the underlying order record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier3-cross-domain\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 1800000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "82B90F28-A492-463F-B33C-FA4A40E6D389"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.140Z",
+    "checksum": "cbd6a1eada847a3e745e5c04f1423122915d98471dff7d0dd73923116f4ddd8c"
+  }
+}

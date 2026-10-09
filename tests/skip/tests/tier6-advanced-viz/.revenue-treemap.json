@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Hierarchical Revenue Treemap",
+    "Description": "Treemap of 2025 confirmed revenue by category -> product, coloured by growth vs 2024, drilling to top buyers and their order lines. Ported from \"Hierarchical Treemap with Color-Coded Drill-Down\".",
+    "InputDefinition": {
+      "userMessage": "Create a treemap of our 2025 confirmed revenue by product category and product. Size each rectangle by revenue and colour it by growth versus 2024 (red for decline, green for growth). When I click a product, show a horizontal bar chart of the top 10 buyers of that product by spend. When I click a buyer, show a table of all their order lines with dates, products and amounts, and make each row open the order. Include a breadcrumb or back button. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a treemap sized by 2025 revenue with category and product levels",
+        "Colour encodes growth vs 2024 on a red-to-green scale, with a legend",
+        "Rectangles are labelled with product/category name and revenue",
+        "Clicking a product shows a horizontal bar chart of its top 10 buyers",
+        "Clicking a buyer shows their order lines with dates, products and amounts",
+        "Rows can open the underlying order record",
+        "Breadcrumb or back navigation is provided"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier6-advanced-viz\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 3600000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "C8852F89-8D84-4506-B7D3-EF13D9F6287E"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:11.490Z",
+    "checksum": "34b4f93f511f396939ecae506e126f1068c0a026a828e67e16604095cfc546e5"
+  }
+}

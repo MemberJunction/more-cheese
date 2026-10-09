@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "TypeID": "@lookup:MJ: Test Types.Name=Agent Eval",
+    "Name": "Skip ICF - Certification Status Mix",
+    "Description": "MoreCheese: Member Certifications grouped by certification and status (Awarded / InProgress / Expired).",
+    "InputDefinition": {
+      "userMessage": "Show me a stacked bar chart of member certifications by certification name, split by status (awarded, in progress, expired). When I click a bar segment, show me the members in that certification and status. [NO CHAT]"
+    },
+    "ExpectedOutcomes": {
+      "judgeValidationCriteria": [
+        "Response includes a stacked (or grouped) bar chart with one bar per certification",
+        "Uses MoreCheese: Member Certifications joined to MoreCheese: Certifications",
+        "Status split includes Awarded, InProgress and Expired",
+        "Totals are consistent with the data: about 123 member certifications; Cheese Foundations Certificate is the largest (about 48)",
+        "Clicking a segment shows a table of the members holding that certification with that status, with award/expiry dates",
+        "Rows in the member table can open the underlying person or member profile record"
+      ]
+    },
+    "Configuration": {
+      "agentId": "@lookup:MJ: AI Agents.Name=Skip",
+      "evaluationStrategy": "final-turn-only",
+      "oracles": [
+        {
+          "type": "trace-no-errors",
+          "weight": 0.3
+        },
+        {
+          "type": "llm-judge",
+          "weight": 0.7,
+          "config": {
+            "model": "Gemini 3.8 Flash"
+          }
+        }
+      ],
+      "scoringWeights": {
+        "trace-no-errors": 0.3,
+        "llm-judge": 0.7
+      }
+    },
+    "Tags": "[\"skip\", \"more-cheese\", \"tier1-simple\"]",
+    "Priority": 100,
+    "MaxExecutionTimeMS": 900000,
+    "Status": "Active"
+  },
+  "primaryKey": {
+    "ID": "A279EE18-0FC2-422C-BA44-18C3872192A5"
+  },
+  "sync": {
+    "lastModified": "2026-10-09T17:25:10.016Z",
+    "checksum": "5dd01dece63a4c057f11a22c776b3539cf7af3d462504d6e145f808c120d855e"
+  }
+}
