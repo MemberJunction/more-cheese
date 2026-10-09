@@ -14,8 +14,79 @@
       "CombineStrategy": "WeightedSum",
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
       "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EffectiveFrom": "2025-10-24T14:00:00Z",
-      "CurrentVersionID": "@lookup:MJ_BizApps_Sonar: Score Model Versions.ID=9EC51FE5-B002-564E-9C7E-7B8E4954CC5B?allowDefer"
+      "EffectiveFrom": "2025-10-24T14:00:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE"
+    },
+    "fields": {
+      "Name": "Member Renewal Health",
+      "Slug": "morecheese-renewal-health",
+      "Description": "Will this member renew? Weighs how recently and how often the member has paid the federation, what they have spent, whether they are still learning and showing up, and how long they have belonged. Low scores are the renewal team's call list.",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Status": "Draft",
+      "ScoreScaleMin": 0,
+      "ScoreScaleMax": 100,
+      "CombineStrategy": "WeightedSum",
+      "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EffectiveFrom": "2025-10-24T14:00:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30"
+    },
+    "fields": {
+      "Name": "Professional Development",
+      "Slug": "morecheese-professional-development",
+      "Description": "How far each member has invested in their craft: courses completed and in flight, credentials earned and being pursued, and competition entries and medals. Surfaces candidates for advanced programs, faculty and judging panels.",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Status": "Draft",
+      "ScoreScaleMin": 0,
+      "ScoreScaleMax": 100,
+      "CombineStrategy": "WeightedSum",
+      "BandSetID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E",
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EffectiveFrom": "2025-10-24T14:00:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92"
+    },
+    "fields": {
+      "Name": "Volunteer & Governance Leadership",
+      "Slug": "morecheese-volunteer-leadership",
+      "Description": "Who carries the federation: committee seats held now and over time, meetings actually attended, votes cast, and advocacy on the industry's behalf. The leadership pipeline for nominating committees and the board.",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Status": "Draft",
+      "ScoreScaleMin": 0,
+      "ScoreScaleMax": 100,
+      "CombineStrategy": "WeightedSum",
+      "BandSetID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847",
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EffectiveFrom": "2025-10-24T14:00:00Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84"
+    },
+    "fields": {
+      "Name": "Company Member Health",
+      "Slug": "morecheese-company-health",
+      "Description": "Health of each member company's relationship with the federation: how many of its people are members, whether it is still sending new ones, how it competes, and whether it has been through a disruptive event (acquisition, dissolution, program cut). The account-management view.",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "Status": "Draft",
+      "ScoreScaleMin": 0,
+      "ScoreScaleMax": 100,
+      "CombineStrategy": "WeightedSum",
+      "BandSetID": "7B38D2C1-FB54-4D80-983A-A93A45F6B2F1",
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "EffectiveFrom": "2025-10-24T14:00:00Z"
     }
   }
 ]

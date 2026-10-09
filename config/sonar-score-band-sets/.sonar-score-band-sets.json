@@ -8,5 +8,45 @@
       "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "Description": "Qualitative engagement bands for the member score."
     }
+  },
+  {
+    "primaryKey": {
+      "ID": "AB7B134D-21F4-48F9-9DBD-63588D62258E"
+    },
+    "fields": {
+      "Name": "MoreCheese Renewal Bands",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Description": "Renewal likelihood bands for the Member Renewal Health score."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E"
+    },
+    "fields": {
+      "Name": "MoreCheese Development Bands",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Description": "Professional development stages for the Professional Development score."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847"
+    },
+    "fields": {
+      "Name": "MoreCheese Leadership Bands",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "Description": "Volunteer leadership stages for the Volunteer & Governance Leadership score."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7B38D2C1-FB54-4D80-983A-A93A45F6B2F1"
+    },
+    "fields": {
+      "Name": "MoreCheese Company Health Bands",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "Description": "Account health bands for the Company Member Health score."
+    }
   }
 ]

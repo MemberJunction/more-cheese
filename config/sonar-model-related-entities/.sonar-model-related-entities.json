@@ -78,7 +78,7 @@
     "fields": {
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
       "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Event Order Lines",
-      "Alias": "recentEvents",
+      "Alias": "attendedEvents",
       "RelationshipPath": "[]",
       "JoinType": "Left"
     }
@@ -101,8 +101,8 @@
     },
     "fields": {
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
-      "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
-      "Alias": "orders",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Payment Headers",
+      "Alias": "payments",
       "RelationshipPath": "[]",
       "JoinType": "Left"
     }
@@ -115,6 +115,187 @@
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
       "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
       "Alias": "profile",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "85CBFE5A-1142-4E78-AE0A-E849E424AE2F"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Payment Headers",
+      "Alias": "payments",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E953FB02-4B44-4C80-BF0B-71F03DA349EE"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "Alias": "enrollments",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "29E9D400-261D-4368-8D43-68C495D84735"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Event Order Lines",
+      "Alias": "eventRegistrations",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3B1D1695-521F-4342-8939-854612B14CCA"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Forms: Form Responses",
+      "Alias": "surveyResponses",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46942F74-E488-4EE6-8AE3-3D3324F8FE5C"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Alias": "profile",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "301A1E66-7A95-4261-8300-E22C4558F99D"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "Alias": "enrollments",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "290690F8-811E-4200-A01A-C17CF8619F6D"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Certifications",
+      "Alias": "certifications",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E406275F-D215-4A77-89FE-31DD4FFDEA79"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "Alias": "competitionEntries",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F71D68C9-34B8-4768-A914-16392BA774B1"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=Committees: Memberships",
+      "Alias": "committeeSeats",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3BD9C6C9-4F52-48EA-9613-26C0534622BB"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=Committees: Attendances",
+      "Alias": "meetingAttendance",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1FF1F883-B167-44A3-ACC3-8F1BFC4C6E2D"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=Committees: Votes",
+      "Alias": "votes",
+      "RelationshipPath": "[{\"fk\":\"MembershipID\",\"entity\":\"Committees: Memberships\"}]",
+      "JoinType": "Left",
+      "Description": "Votes reach the person through the committee membership that cast them."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4752D7AA-6DE4-47F6-A494-69049F123CB9"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Advocacy Actions",
+      "Alias": "advocacy",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3E268FF7-0889-4C52-8C44-D1EA85190FCD"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Alias": "memberEmployees",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7DBD188E-7382-408E-B9EA-2D487D915856"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "Alias": "competitionEntries",
+      "RelationshipPath": "[]",
+      "JoinType": "Left"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D4C64050-A1D0-4319-BE6C-1AA72BA5CF1A"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "RelatedEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Organization Profiles",
+      "Alias": "organizationProfile",
       "RelationshipPath": "[]",
       "JoinType": "Left"
     }

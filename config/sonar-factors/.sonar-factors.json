@@ -6,16 +6,17 @@
     "fields": {
       "Name": "Event Participation",
       "Slug": "morecheese-event-participation",
-      "Description": "Events the member registered for in the last 12 months.",
+      "Description": "Event registrations on the member's record (cancelled registrations excluded).",
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
       "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "FactorType": "Declarative",
       "SourceRelatedEntityID": "F0E5F480-36AB-5E85-B8B8-7C7255837A32",
       "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Event Order Lines",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"AttendanceStatus\",\"operator\":\"neq\",\"value\":\"Cancelled\"}]}",
       "Aggregation": "Count",
       "AggregateFieldName": null,
-      "DateField": "RegisteredOn",
-      "TimeWindowID": "CF6F428F-7016-5898-BF94-22795E3B3F91",
+      "DateField": null,
+      "TimeWindowID": null,
       "NormalizationMethod": "Percentile",
       "HigherIsBetter": true,
       "PromotionState": "Approved"
@@ -136,20 +137,21 @@
       "ID": "2C7B495A-61FE-553A-B219-B5F576E23278"
     },
     "fields": {
-      "Name": "Event Recency",
-      "Slug": "morecheese-event-recency",
-      "Description": "How recently the member last attended an event (sooner is better).",
+      "Name": "Event Attendance",
+      "Slug": "morecheese-event-attendance",
+      "Description": "Events the member actually showed up to (checked-in registrations).",
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
       "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "FactorType": "Declarative",
       "SourceRelatedEntityID": "543604CB-5EB4-5276-AD81-4F27D56B0023",
       "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Event Order Lines",
-      "Aggregation": "Recency",
-      "AggregateFieldName": "RegisteredOn",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"AttendanceStatus\",\"operator\":\"eq\",\"value\":\"Attended\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
       "DateField": null,
       "TimeWindowID": null,
       "NormalizationMethod": "Percentile",
-      "HigherIsBetter": false,
+      "HigherIsBetter": true,
       "PromotionState": "Approved"
     }
   },
@@ -182,15 +184,15 @@
     "fields": {
       "Name": "Member Spend",
       "Slug": "morecheese-member-spend",
-      "Description": "Total billed value of everything the member has ordered in the trailing 24 months — dues, events, credentials, publications and merchandise.",
+      "Description": "Total payments received from the member in the trailing 24 months — dues, events, credentials, publications and merchandise.",
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
       "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "FactorType": "Declarative",
       "SourceRelatedEntityID": "5A171835-2878-55B9-9172-D71434FC2E58",
-      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Payment Headers",
       "Aggregation": "Sum",
-      "AggregateFieldName": "TotalGross",
-      "DateField": null,
+      "AggregateFieldName": "Amount",
+      "DateField": "PaymentDate",
       "TimeWindowID": "97DF3796-A479-558E-9927-755A48D0D061",
       "NormalizationMethod": "Percentile",
       "HigherIsBetter": true,
@@ -204,7 +206,7 @@
     "fields": {
       "Name": "Membership Tenure",
       "Slug": "morecheese-tenure",
-      "Description": "How long the member has belonged to the federation. Recency of the join date, inverted — an older join means longer tenure and a stronger relationship.",
+      "Description": "How long the member has belonged to the federation — days since the join date. Longer tenure, stronger relationship.",
       "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
       "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
       "FactorType": "Declarative",
@@ -215,7 +217,548 @@
       "DateField": null,
       "TimeWindowID": null,
       "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EED166A9-DECF-4AF7-B9B9-2CD77ADA9437"
+    },
+    "fields": {
+      "Name": "Payment Recency",
+      "Slug": "morecheese-renewal-payment-recency",
+      "Description": "Days since the member's most recent payment (sooner is better) — the strongest single renewal signal.",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "85CBFE5A-1142-4E78-AE0A-E849E424AE2F",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Payment Headers",
+      "Aggregation": "Recency",
+      "AggregateFieldName": "PaymentDate",
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
       "HigherIsBetter": false,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7BC90D21-989A-4BE3-99BB-7710B616D2B2"
+    },
+    "fields": {
+      "Name": "Payment Frequency",
+      "Slug": "morecheese-renewal-payment-frequency",
+      "Description": "Payments received from the member in the trailing 24 months.",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "85CBFE5A-1142-4E78-AE0A-E849E424AE2F",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Payment Headers",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": "PaymentDate",
+      "TimeWindowID": "97DF3796-A479-558E-9927-755A48D0D061",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E176748A-753A-4DC1-A563-01ACE0E3AB5D"
+    },
+    "fields": {
+      "Name": "Spend",
+      "Slug": "morecheese-renewal-spend",
+      "Description": "Total paid by the member in the trailing 24 months.",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "85CBFE5A-1142-4E78-AE0A-E849E424AE2F",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Payment Headers",
+      "Aggregation": "Sum",
+      "AggregateFieldName": "Amount",
+      "DateField": "PaymentDate",
+      "TimeWindowID": "97DF3796-A479-558E-9927-755A48D0D061",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "43F487E2-413A-4663-9EE7-0E808509AAB4"
+    },
+    "fields": {
+      "Name": "Learning Momentum",
+      "Slug": "morecheese-renewal-learning-momentum",
+      "Description": "Courses the member enrolled in over the last 12 months (dropped enrollments excluded).",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "E953FB02-4B44-4C80-BF0B-71F03DA349EE",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"neq\",\"value\":\"Dropped\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": "EnrolledOn",
+      "TimeWindowID": "CF6F428F-7016-5898-BF94-22795E3B3F91",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4E74DA08-F7DF-4A9C-9B15-880046F0D968"
+    },
+    "fields": {
+      "Name": "Event Registrations",
+      "Slug": "morecheese-renewal-event-registrations",
+      "Description": "Event registrations on the member's record (cancelled registrations excluded).",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "29E9D400-261D-4368-8D43-68C495D84735",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Event Order Lines",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"AttendanceStatus\",\"operator\":\"neq\",\"value\":\"Cancelled\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "30988A5E-902C-4AAC-B6E9-AF306D7C36DE"
+    },
+    "fields": {
+      "Name": "Member Voice",
+      "Slug": "morecheese-renewal-member-voice",
+      "Description": "Completed survey responses in the trailing 24 months — members who answer are members who care.",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "3B1D1695-521F-4342-8939-854612B14CCA",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Forms: Form Responses",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Complete\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": "SubmittedAt",
+      "TimeWindowID": "97DF3796-A479-558E-9927-755A48D0D061",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "03619E2A-9781-4B64-B409-DBA6F0542B60"
+    },
+    "fields": {
+      "Name": "Membership Tenure",
+      "Slug": "morecheese-renewal-tenure",
+      "Description": "Days since the member joined — long-tenured members renew out of habit.",
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "46942F74-E488-4EE6-8AE3-3D3324F8FE5C",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Aggregation": "Recency",
+      "AggregateFieldName": "JoinDate",
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1CE273D7-2880-49D3-8EC8-3FCDD705353A"
+    },
+    "fields": {
+      "Name": "Courses Completed",
+      "Slug": "morecheese-dev-courses-completed",
+      "Description": "Courses the member has completed, all time.",
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "301A1E66-7A95-4261-8300-E22C4558F99D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Completed\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "235E18FD-83DF-4B9B-8BA5-EB24253CD1CE"
+    },
+    "fields": {
+      "Name": "Recent Learning",
+      "Slug": "morecheese-dev-recent-learning",
+      "Description": "Courses the member enrolled in over the last 12 months (dropped enrollments excluded).",
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "301A1E66-7A95-4261-8300-E22C4558F99D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Course Enrollments",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"neq\",\"value\":\"Dropped\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": "EnrolledOn",
+      "TimeWindowID": "CF6F428F-7016-5898-BF94-22795E3B3F91",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7477DD00-9599-4ADD-83A6-D94FB7A9D5AE"
+    },
+    "fields": {
+      "Name": "Credentials Earned",
+      "Slug": "morecheese-dev-credentials-earned",
+      "Description": "Certifications the member has been awarded.",
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "290690F8-811E-4200-A01A-C17CF8619F6D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Certifications",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Awarded\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "809BD50A-AE0B-478A-985C-DDBC0E8F8BC0"
+    },
+    "fields": {
+      "Name": "Credentials in Progress",
+      "Slug": "morecheese-dev-credentials-in-progress",
+      "Description": "Certifications the member is currently working toward.",
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "290690F8-811E-4200-A01A-C17CF8619F6D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Certifications",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"InProgress\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "73385B86-3647-4E4E-B9A1-0C906373EB1F"
+    },
+    "fields": {
+      "Name": "Competition Entries",
+      "Slug": "morecheese-dev-competition-entries",
+      "Description": "Cheeses the member has entered in federation competitions.",
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "E406275F-D215-4A77-89FE-31DD4FFDEA79",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A0877F26-1A13-401C-B06D-487BA50ADCB9"
+    },
+    "fields": {
+      "Name": "Competition Medals",
+      "Slug": "morecheese-dev-competition-medals",
+      "Description": "Gold, silver and bronze medals the member has won.",
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "E406275F-D215-4A77-89FE-31DD4FFDEA79",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Result\",\"operator\":\"neq\",\"value\":\"None\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "445B19F0-C543-4B8B-9055-CEAAD9F9EC64"
+    },
+    "fields": {
+      "Name": "Active Committee Seats",
+      "Slug": "morecheese-lead-active-seats",
+      "Description": "Committee seats the member holds right now.",
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "F71D68C9-34B8-4768-A914-16392BA774B1",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=Committees: Memberships",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Active\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "CB792387-CDAB-467C-A68D-C8F2BF90EF8B"
+    },
+    "fields": {
+      "Name": "Committee Service History",
+      "Slug": "morecheese-lead-service-history",
+      "Description": "Committee terms the member has served, past and present.",
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "F71D68C9-34B8-4768-A914-16392BA774B1",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=Committees: Memberships",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E7C91325-ECBB-43EA-AAB4-1AACA4AD3427"
+    },
+    "fields": {
+      "Name": "Meetings Attended",
+      "Slug": "morecheese-lead-meetings-attended",
+      "Description": "Committee meetings the member was present for.",
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "3BD9C6C9-4F52-48EA-9613-26C0534622BB",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=Committees: Attendances",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"AttendanceStatus\",\"operator\":\"eq\",\"value\":\"Present\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F764F8B6-96C1-46C4-9473-EAB4C992B893"
+    },
+    "fields": {
+      "Name": "Votes Cast",
+      "Slug": "morecheese-lead-votes-cast",
+      "Description": "Votes the member has cast on committee motions.",
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "1FF1F883-B167-44A3-ACC3-8F1BFC4C6E2D",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=Committees: Votes",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "69A2D0DD-94CE-4AE5-AF25-2EB53317322D"
+    },
+    "fields": {
+      "Name": "Advocacy Actions",
+      "Slug": "morecheese-lead-advocacy-actions",
+      "Description": "Letters, petitions, testimony and coalition meetings in the trailing 24 months.",
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "4752D7AA-6DE4-47F6-A494-69049F123CB9",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Advocacy Actions",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": "ActionDate",
+      "TimeWindowID": "97DF3796-A479-558E-9927-755A48D0D061",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FB32B0A-7F0C-4D53-A57C-35E3034FED65"
+    },
+    "fields": {
+      "Name": "Public Voice",
+      "Slug": "morecheese-lead-public-voice",
+      "Description": "Testimony given and coalition meetings attended on the federation's behalf, all time — the high-commitment end of advocacy.",
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "4752D7AA-6DE4-47F6-A494-69049F123CB9",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Advocacy Actions",
+      "FilterExpression": "{\"logic\":\"or\",\"filters\":[{\"field\":\"Kind\",\"operator\":\"eq\",\"value\":\"Testimony\"},{\"field\":\"Kind\",\"operator\":\"eq\",\"value\":\"CoalitionMeeting\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "204560C1-4D4F-46EF-83E2-593929A19E69"
+    },
+    "fields": {
+      "Name": "Member Footprint",
+      "Slug": "morecheese-company-member-footprint",
+      "Description": "People at the company who hold a federation membership.",
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "3E268FF7-0889-4C52-8C44-D1EA85190FCD",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "27D67222-0837-4739-BEEC-C017FB4F8CB5"
+    },
+    "fields": {
+      "Name": "New Members",
+      "Slug": "morecheese-company-new-members",
+      "Description": "Company staff who joined the federation in the trailing 24 months.",
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "3E268FF7-0889-4C52-8C44-D1EA85190FCD",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": "JoinDate",
+      "TimeWindowID": "97DF3796-A479-558E-9927-755A48D0D061",
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "877A1E59-CD5F-4EAC-A0E5-642A7511C16A"
+    },
+    "fields": {
+      "Name": "Competition Entries",
+      "Slug": "morecheese-company-competition-entries",
+      "Description": "Cheeses the company has entered in federation competitions.",
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "7DBD188E-7382-408E-B9EA-2D487D915856",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "751D0C40-DBDE-43F4-9E1F-E8E1776534AC"
+    },
+    "fields": {
+      "Name": "Competition Medals",
+      "Slug": "morecheese-company-competition-medals",
+      "Description": "Gold, silver and bronze medals the company has won.",
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "7DBD188E-7382-408E-B9EA-2D487D915856",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Competition Entries",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Result\",\"operator\":\"neq\",\"value\":\"None\"}]}",
+      "Aggregation": "Count",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "Percentile",
+      "HigherIsBetter": true,
+      "PromotionState": "Approved"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91C0E7AF-66AB-41B6-93DB-9942E0289661"
+    },
+    "fields": {
+      "Name": "Organizational Stability",
+      "Slug": "morecheese-company-stability",
+      "Description": "The company has had no disruptive lifecycle event — no acquisition, dissolution or program cut on record.",
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "AnchorEntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "FactorType": "Declarative",
+      "SourceRelatedEntityID": "D4C64050-A1D0-4319-BE6C-1AA72BA5CF1A",
+      "SourceEntityID": "@lookup:MJ: Entities.Name=MoreCheese: Organization Profiles",
+      "FilterExpression": "{\"logic\":\"and\",\"filters\":[{\"field\":\"LifecycleEventKind\",\"operator\":\"isnull\"}]}",
+      "Aggregation": "Exists",
+      "AggregateFieldName": null,
+      "DateField": null,
+      "TimeWindowID": null,
+      "NormalizationMethod": "None",
+      "HigherIsBetter": true,
       "PromotionState": "Approved"
     }
   }

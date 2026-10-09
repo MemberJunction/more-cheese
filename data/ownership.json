@@ -326,6 +326,11 @@
       "classification": "config",
       "reason": "Second pass over Score Models: flips seeded models from Draft to Active after their factors and bands exist (Sonar server refuses Active without factors)"
     },
+    "scheduled-jobs": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Nightly Sonar recompute jobs (RunImmediatelyIfNeverRun) so the seeded score models hold scores on a fresh install — Sonar has no scheduler of its own"
+    },
     "user-views": {
       "tier": "config",
       "classification": "config",
