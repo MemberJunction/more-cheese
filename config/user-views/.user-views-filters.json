@@ -2,52 +2,6 @@
   {
     "fields": {
       "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
-      "Name": "Renewals at Risk — Grace Window to 90 Days Out, Auto-Renew Off",
-      "Description": "Advanced filter: (Active OR PendingRenewal) AND renewal date from 30 days ago (the grace window) to 90 days ahead AND auto-renew off. The reminder-cadence list; Marcus Chen (renewal 21 Aug, pending) sits on it.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 130, \"orderIndex\": 1}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 130, \"orderIndex\": 3}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 4}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 5}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 6}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"logic\":\"or\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"PendingRenewal\"},{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Active\"}]},{\"logic\":\"and\",\"filters\":[{\"field\":\"RenewalDate\",\"operator\":\"gte\",\"value\":\"2026-08-15\"},{\"field\":\"RenewalDate\",\"operator\":\"lte\",\"value\":\"2026-12-13\"}]},{\"field\":\"AutoRenew\",\"operator\":\"eq\",\"value\":false}]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": false,
-      "SmartFilterPrompt": "",
-      "CustomWhereClause": false,
-      "SortState": "[{\"field\": \"RenewalDate\", \"dir\": \"asc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
-      "DisplayState": null
-    },
-    "primaryKey": {
-      "ID": "BFD12082-4704-5963-9E6F-896A83F09032"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
-      "Name": "Cancellations — Cost or Non-Payment since 2024",
-      "Description": "Advanced filter with an OR group on the free-text reason: cancelled AND (reason contains \"cost\" OR reason starts with \"non-payment\") AND cancelled in 2024 or later. Win-back candidates; excludes retirements and industry exits.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 130, \"orderIndex\": 1}, {\"ID\": \"c9de47d6-db85-4d66-a081-63de219a4a3e\", \"Name\": \"CancellationDate\", \"DisplayName\": \"Cancelled On\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"a0ece410-43fb-492c-b0c2-6233ae2d8306\", \"Name\": \"CancellationReason\", \"DisplayName\": \"Reason\", \"hidden\": false, \"width\": 360, \"orderIndex\": 3}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 4}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 5}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Status\",\"operator\":\"eq\",\"value\":\"Cancelled\"},{\"logic\":\"or\",\"filters\":[{\"field\":\"CancellationReason\",\"operator\":\"contains\",\"value\":\"cost\"},{\"field\":\"CancellationReason\",\"operator\":\"startswith\",\"value\":\"non-payment\"}]},{\"field\":\"CancellationDate\",\"operator\":\"gte\",\"value\":\"2024-01-01\"}]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": false,
-      "SmartFilterPrompt": "",
-      "CustomWhereClause": false,
-      "SortState": "[{\"field\": \"CancellationDate\", \"dir\": \"desc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
-      "DisplayState": null
-    },
-    "primaryKey": {
-      "ID": "D2F4C4F4-44EC-5617-B479-640DB962969F"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
       "Name": "Producers & Educators outside North America",
       "Description": "Advanced filter: (Producer OR Educator) AND region is not NA. The international programme slice: Henri Dubois (Jura) and Charlie Mason (Tasmania) both land here.",
@@ -89,52 +43,6 @@
     },
     "primaryKey": {
       "ID": "904AD6FF-D13F-5600-80A6-5773EF8214E2"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Events",
-      "Name": "Events 2026 — Workshops & Conferences",
-      "Description": "Timeline view of the 2026 in-person calendar: EventDate in 2026 AND (Workshop OR Conference). Webinars excluded by the OR group.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"8a853b0d-1298-4428-a194-4add53c17d99\", \"Name\": \"Name\", \"DisplayName\": \"Event\", \"hidden\": false, \"width\": 300, \"orderIndex\": 0}, {\"ID\": \"40e4eac3-edb5-4ae1-af99-593c4d74460a\", \"Name\": \"EventType\", \"DisplayName\": \"Type\", \"hidden\": false, \"width\": 120, \"orderIndex\": 1}, {\"ID\": \"1647e597-b94b-4c47-af58-8194da4812d8\", \"Name\": \"EventDate\", \"DisplayName\": \"Date\", \"hidden\": false, \"width\": 120, \"orderIndex\": 2}, {\"ID\": \"dd914d99-2b94-4bbb-8642-c1c261782f79\", \"Name\": \"City\", \"DisplayName\": \"City\", \"hidden\": false, \"width\": 140, \"orderIndex\": 3}, {\"ID\": \"7a636ae3-36ad-4da4-a173-867c55b139c9\", \"Name\": \"State\", \"DisplayName\": \"State\", \"hidden\": false, \"width\": 80, \"orderIndex\": 4}, {\"ID\": \"e5ba2927-942d-419f-82a4-4a6f01d6cca8\", \"Name\": \"IsPaid\", \"DisplayName\": \"Paid\", \"hidden\": false, \"width\": 80, \"orderIndex\": 5}, {\"ID\": \"a86a565f-68d9-47cc-8931-f000a6d1422c\", \"Name\": \"IsVirtual\", \"DisplayName\": \"Virtual\", \"hidden\": false, \"width\": 80, \"orderIndex\": 6}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"EventDate\",\"operator\":\"gte\",\"value\":\"2026-01-01\"},{\"field\":\"EventDate\",\"operator\":\"lte\",\"value\":\"2026-12-31\"},{\"logic\":\"or\",\"filters\":[{\"field\":\"EventType\",\"operator\":\"eq\",\"value\":\"Workshop\"},{\"field\":\"EventType\",\"operator\":\"eq\",\"value\":\"Conference\"}]}]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": false,
-      "SmartFilterPrompt": "",
-      "CustomWhereClause": false,
-      "SortState": "[{\"field\": \"EventDate\", \"dir\": \"asc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Timeline",
-      "DisplayState": "{\"defaultMode\": \"timeline\", \"viewTypeConfigs\": [{\"viewTypeId\": \"bcd1c1b8-158a-45a4-9525-d4a2bc096aaf\", \"config\": {\"dateFieldName\": \"EventDate\"}}]}"
-    },
-    "primaryKey": {
-      "ID": "CF1A97D9-A3E2-5DA1-8F25-A2F988CBB5A9"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Event Registrations",
-      "Name": "Registered but Did Not Attend — 2025 to Date",
-      "Description": "No-shows: Attended = false AND registered on or after 1 Jan 2025. Feeds the follow-up survey and the refund-policy review.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"238863f8-a7b8-48d4-a99c-150253a61da2\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"b43a6aef-4c29-4080-9e08-8d3c3f13efe0\", \"Name\": \"Event\", \"DisplayName\": \"Event\", \"hidden\": false, \"width\": 300, \"orderIndex\": 1}, {\"ID\": \"aa10bba2-6c17-42af-9228-4d7585f38d3a\", \"Name\": \"RegisteredOn\", \"DisplayName\": \"Registered\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"c6260bbf-d011-4db0-843b-d262a7868c5d\", \"Name\": \"Attended\", \"DisplayName\": \"Attended\", \"hidden\": false, \"width\": 90, \"orderIndex\": 3}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[{\"field\":\"Attended\",\"operator\":\"eq\",\"value\":false},{\"field\":\"RegisteredOn\",\"operator\":\"gte\",\"value\":\"2025-01-01\"}]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": false,
-      "SmartFilterPrompt": "",
-      "CustomWhereClause": false,
-      "SortState": "[{\"field\": \"RegisteredOn\", \"dir\": \"desc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
-      "DisplayState": null
-    },
-    "primaryKey": {
-      "ID": "3FE9B436-2A55-5B6C-AA98-7AAC5C8979A8"
     }
   },
   {
@@ -320,29 +228,6 @@
     },
     "primaryKey": {
       "ID": "97A75D49-A060-5828-98DD-7BA09A948F71"
-    }
-  },
-  {
-    "fields": {
-      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
-      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Membership Periods",
-      "Name": "Smart: Lapsed Members Worth Winning Back",
-      "Description": "Smart filter — the WHERE clause is generated from the plain-English prompt and can be inspected under the filter panel.",
-      "CategoryID": null,
-      "IsShared": true,
-      "IsDefault": false,
-      "GridState": "{\"columnSettings\": [{\"ID\": \"daa561bf-b427-42ca-975b-4b955d77e31c\", \"Name\": \"Person\", \"DisplayName\": \"Member\", \"hidden\": false, \"width\": 220, \"orderIndex\": 0}, {\"ID\": \"af860254-0c86-4efe-aecd-b3e11a10b73f\", \"Name\": \"MembershipTier\", \"DisplayName\": \"Tier\", \"hidden\": false, \"width\": 130, \"orderIndex\": 1}, {\"ID\": \"66ab3f67-d88f-4002-9601-8f45ff1e9943\", \"Name\": \"Status\", \"DisplayName\": \"Status\", \"hidden\": false, \"width\": 130, \"orderIndex\": 2}, {\"ID\": \"89d84b86-0813-4420-9cbe-5cd635e79610\", \"Name\": \"RenewalDate\", \"DisplayName\": \"Renewal Date\", \"hidden\": false, \"width\": 130, \"orderIndex\": 3}, {\"ID\": \"ca8e63e8-3b64-464f-bade-df254bfea236\", \"Name\": \"AutoRenew\", \"DisplayName\": \"Auto-Renew\", \"hidden\": false, \"width\": 100, \"orderIndex\": 4}, {\"ID\": \"58e134cf-48e2-4d0c-ab8a-4cb9bdf3883f\", \"Name\": \"DuesAmount\", \"DisplayName\": \"Dues\", \"hidden\": false, \"width\": 100, \"orderIndex\": 5}, {\"ID\": \"37b6ff5c-c0f1-4e0c-ae7c-05e5f6f06149\", \"Name\": \"StartDate\", \"DisplayName\": \"Term Start\", \"hidden\": false, \"width\": 120, \"orderIndex\": 6}, {\"ID\": \"ce20aa70-1692-41c3-a67c-f7fa8d245c10\", \"Name\": \"EndDate\", \"DisplayName\": \"Term End\", \"hidden\": false, \"width\": 120, \"orderIndex\": 7}]}",
-      "FilterState": "{\"logic\":\"and\",\"filters\":[]}",
-      "CustomFilterState": false,
-      "SmartFilterEnabled": true,
-      "SmartFilterPrompt": "Membership periods that lapsed or were cancelled on or after 1 January 2024 where the cancellation reason mentions cost or non-payment, excluding anyone who retired or left the industry.",
-      "CustomWhereClause": false,
-      "SortState": "[{\"field\": \"EndDate\", \"dir\": \"desc\"}]",
-      "ViewTypeID": "@lookup:MJ: View Types.Name=Grid",
-      "DisplayState": null
-    },
-    "primaryKey": {
-      "ID": "698F8C76-2071-544C-BCE6-5FB66673F709"
     }
   },
   {

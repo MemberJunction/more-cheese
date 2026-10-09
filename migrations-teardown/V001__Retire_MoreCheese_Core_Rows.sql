@@ -62,7 +62,7 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (2334 distinct records; 2360 declared across
+-- Seed provenance (2318 distinct records; 2344 declared across
 -- 41 directories, 26 of them declared in two directories and inserted once):
 --   1425 from config/content-item-tags
 --    192 from config/content-item-chunks
@@ -74,9 +74,9 @@
 --     29 from config/queries
 --     25 from config/conversations-owner
 --     23 from config/conversation-detail-artifacts
---     23 from config/resource-permissions
---     23 from config/user-views
 --     19 from config/user-applications
+--     15 from config/resource-permissions
+--     15 from config/user-views
 --     10 from config/sonar-factors
 --     10 from config/sonar-model-factors
 --     10 from config/sonar-model-related-entities
@@ -2181,12 +2181,8 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Query Categories', '8D044066-1D85-43D2-BB24-10D2716F968F'),
     ('MJ: Query Categories', 'AD5719EE-0FE4-44D2-A919-7AA8A1C94332'),
     ('MJ: Query Categories', '5478D31A-2876-4CEA-A4A9-511F55F49A3A'),
-    ('MJ: Resource Permissions', '0248BC52-59A9-538E-B7B5-2D7FD5133AB6'),
-    ('MJ: Resource Permissions', '49095437-AC96-50CD-8B85-A18B2795C08A'),
     ('MJ: Resource Permissions', 'D787AF2F-419D-50AF-886F-BAD1E64576B7'),
     ('MJ: Resource Permissions', '553E2D08-FFEB-5B0A-8340-9BF7D9EA97AC'),
-    ('MJ: Resource Permissions', 'E0B85809-F8BF-5DA5-9F78-2965F6D94520'),
-    ('MJ: Resource Permissions', '282685ED-32AD-51C8-9D7F-CDF57F76F665'),
     ('MJ: Resource Permissions', 'BF76A340-B8EA-55D8-A517-E8AB18FC7E37'),
     ('MJ: Resource Permissions', 'B91881B3-5119-5468-8CDA-3FB8F084F21D'),
     ('MJ: Resource Permissions', 'DC204575-FFD7-5E14-B010-8F2BE40BE00A'),
@@ -2195,14 +2191,10 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Resource Permissions', '7CEAD060-3931-5838-A30C-333202F4C254'),
     ('MJ: Resource Permissions', '101BE0A3-B37C-5E3E-B8FE-9B006E32E4B4'),
     ('MJ: Resource Permissions', '43613F4B-7ABB-557B-B0DF-417ECC9C3D62'),
-    ('MJ: Resource Permissions', '1E7F9FD8-4098-55D9-A206-DE46FAB785B7'),
     ('MJ: Resource Permissions', 'D6D24615-B2D9-54FE-8826-FACA10DE9F2B'),
     ('MJ: Resource Permissions', '891BA0BA-D624-5A33-B200-AF53EC689DE9'),
     ('MJ: Resource Permissions', '2A22E2D7-A670-4111-B7D6-EDAF30A803A6'),
     ('MJ: Resource Permissions', '60D44E76-664E-475E-98AF-6135CA53214F'),
-    ('MJ: Resource Permissions', '4AA26C45-285E-4D6A-A5F3-DEC5DC9EF8C8'),
-    ('MJ: Resource Permissions', '4ED75807-7860-48B5-860A-0EB09526B4A9'),
-    ('MJ: Resource Permissions', '6186BDEE-7D63-41A9-B2D6-1740CAB69E75'),
     ('MJ: Resource Permissions', 'B3035CFE-243C-4157-8CE1-D0B9444BB31A'),
     ('MJ_BizApps_Sonar: Factors', '83F3C3B5-D8DE-54DA-8969-BAA1D947D77B'),
     ('MJ_BizApps_Sonar: Factors', '570029BF-9C80-5C72-9914-E99D12C338B1'),
@@ -2440,12 +2432,8 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Roles', '536EFF6C-EE9D-4D65-B6C6-2BE52124F2BA'),
     ('MJ: User Roles', 'E41B5F3E-F36B-1410-8DD4-0033802F0180'),
     ('MJ: User Settings', 'DCD29593-E66F-5A0C-BF7D-46D7645E7332'),
-    ('MJ: User Views', 'BFD12082-4704-5963-9E6F-896A83F09032'),
-    ('MJ: User Views', 'D2F4C4F4-44EC-5617-B479-640DB962969F'),
     ('MJ: User Views', 'A4B45F20-87E7-5F9D-9137-E9B8DC2E32B5'),
     ('MJ: User Views', '904AD6FF-D13F-5600-80A6-5773EF8214E2'),
-    ('MJ: User Views', 'CF1A97D9-A3E2-5DA1-8F25-A2F988CBB5A9'),
-    ('MJ: User Views', '3FE9B436-2A55-5B6C-AA98-7AAC5C8979A8'),
     ('MJ: User Views', '30A3DD46-B308-5EFE-925F-73C7F98683D0'),
     ('MJ: User Views', 'B830A7C6-2FE9-5A44-979E-093EED038A66'),
     ('MJ: User Views', 'C5E7CEDD-8E37-5B72-9B3B-7CB1750BCD3B'),
@@ -2454,14 +2442,10 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Views', 'F89A3421-3A95-5730-A873-F4B9A46E7ABE'),
     ('MJ: User Views', 'E284181A-91DF-5A96-8D16-63076ABCA8BA'),
     ('MJ: User Views', '97A75D49-A060-5828-98DD-7BA09A948F71'),
-    ('MJ: User Views', '698F8C76-2071-544C-BCE6-5FB66673F709'),
     ('MJ: User Views', '1C3B0B3B-3A74-51BB-A485-FFACE8CCBE87'),
     ('MJ: User Views', '5DBB924D-9E66-5A62-BC59-065C9AA5A9F7'),
     ('MJ: User Views', '99E510A6-2160-4664-BE08-8EC28A64FA2E'),
     ('MJ: User Views', 'A3CF1C6C-7B59-4A0D-AD3D-EC17DD8770CF'),
-    ('MJ: User Views', '3BF98DAF-CCC4-4C14-AF8D-D7DE74FAFB2A'),
-    ('MJ: User Views', 'BA61903F-1E34-4BD1-94EA-A45258127A92'),
-    ('MJ: User Views', '3EF9D448-B589-4332-B344-0F737DE8BB55'),
     ('MJ: User Views', 'D78F3FFA-B2F2-4CB0-9CE7-AFE1E1FF22D0'),
     ('MJ: Users', '7FE3B684-1136-4881-983E-F87D22E9A0EC'),
     ('MJ: Vector Indexes', '6A2C1F0E-3B8D-4E57-9C41-2D7F8A5B6C01');
