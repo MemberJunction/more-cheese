@@ -12,6 +12,12 @@ export interface MemberProfileRow {
     JoinDate: string;
     OrganizationID: string | null;
     Organization: string | null;
+    /** Latest Member Renewal Risk score materialized on the profile by the scoring Record Process (0-1). */
+    RenewalProbability: number | null;
+    /** Band label of that score (e.g. "High"). */
+    RenewalStatus: string | null;
+    /** When the profile was last scored. */
+    RenewalScoredAt: string | null;
 }
 
 /** Predictive Studio feature attribution driver. */
@@ -70,7 +76,7 @@ export interface PersonMembership {
     History: PredictionHistoryItem[];
 }
 
-const PROFILE_FIELDS = ['ID', 'MemberNumber', 'Segment', 'Region', 'CountryName', 'City', 'State', 'JoinDate', 'OrganizationID', 'Organization'];
+const PROFILE_FIELDS = ['ID', 'MemberNumber', 'Segment', 'Region', 'CountryName', 'City', 'State', 'JoinDate', 'OrganizationID', 'Organization', 'RenewalProbability', 'RenewalStatus', 'RenewalScoredAt'];
 
 function Quote(value: string): string {
     return value.replace(/'/g, "''");
@@ -374,29 +380,27 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
  * the member profile and up to 10 recent Predictive Studio model prediction runs.
  */
 export async function LoadMembershipForPerson(personID: string, provider?: IMetadataProvider): Promise<PersonMembership> {
-    const profileFilter = `PersonID = '${Quote(personID)}'`;
-    const detailFilter = `RecordID = '${Quote(personID)}'`;
-
     const rv = ViewOf(provider);
-    const [profiles, runDetails] = await rv.RunViews([
-        {
-            EntityName: 'MoreCheese: Member Profiles',
-            ExtraFilter: profileFilter,
-            Fields: PROFILE_FIELDS,
-            ResultType: 'simple',
-        },
-        {
-            EntityName: 'MJ: Process Run Details',
-            ExtraFilter: detailFilter,
-            OrderBy: 'CompletedAt DESC',
-            MaxRows: 10,
-            Fields: ['ID', 'CompletedAt', 'ResultPayload'],
-            ResultType: 'simple',
-        },
-    ]);
+    const profiles = await rv.RunView<MemberProfileRow>({
+        EntityName: 'MoreCheese: Member Profiles',
+        ExtraFilter: `PersonID = '${Quote(personID)}'`,
+        Fields: PROFILE_FIELDS,
+        ResultType: 'simple',
+    });
+    const profileRows = ResultsOrThrow(profiles, 'the member profile');
 
-    const profileRows = ResultsOrThrow(profiles as RunViewResult<MemberProfileRow>, 'the member profile');
-    const detailRows = (runDetails as RunViewResult<RunDetailRecord>).Results ?? [];
+    // Predictions are recorded against whichever record the scoring process ran over: the Person
+    // (older person-scoped models) or the Member Profile (Member Renewal Risk scores profiles).
+    const recordIDs = [personID, ...profileRows.map((p) => p.ID)].map((id) => `'${Quote(id)}'`).join(', ');
+    const runDetails = await rv.RunView<RunDetailRecord>({
+        EntityName: 'MJ: Process Run Details',
+        ExtraFilter: `RecordID IN (${recordIDs})`,
+        OrderBy: 'CompletedAt DESC',
+        MaxRows: 10,
+        Fields: ['ID', 'CompletedAt', 'ResultPayload'],
+        ResultType: 'simple',
+    });
+    const detailRows = runDetails.Results ?? [];
 
     const history: PredictionHistoryItem[] = [];
     for (const row of detailRows) {

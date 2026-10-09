@@ -270,6 +270,21 @@ export const morecheesemembersMemberProfileSchema = z.object({
         * * Display Name: Updated At
         * * SQL Data Type: datetimeoffset
         * * Default Value: getutcdate()`),
+    RenewalProbability: z.number().nullable().describe(`
+        * * Field Name: RenewalProbability
+        * * Display Name: Renewal Probability
+        * * SQL Data Type: decimal(9, 6)
+        * * Description: Predicted probability (0-1) that this member renews, written by the Member Renewal Risk scoring process (Predictive Studio).`),
+    RenewalStatus: z.string().nullable().describe(`
+        * * Field Name: RenewalStatus
+        * * Display Name: Renewal Status
+        * * SQL Data Type: nvarchar(100)
+        * * Description: Renewal risk band label for the latest prediction (e.g. High / Medium / Low likelihood), written by the Member Renewal Risk scoring process.`),
+    RenewalScoredAt: z.date().nullable().describe(`
+        * * Field Name: RenewalScoredAt
+        * * Display Name: Renewal Scored At
+        * * SQL Data Type: datetimeoffset
+        * * Description: When the renewal prediction on this member was last scored.`),
     Person: z.string().describe(`
         * * Field Name: Person
         * * Display Name: Person
@@ -281,6 +296,85 @@ export const morecheesemembersMemberProfileSchema = z.object({
 });
 
 export type morecheesemembersMemberProfileEntityType = z.infer<typeof morecheesemembersMemberProfileSchema>;
+
+/**
+ * zod schema definition for the entity MoreCheese: Member Renewal Signals
+ */
+export const morecheesemembersvwMemberRenewalSignalsSchema = z.object({
+    ID: z.string().describe(`
+        * * Field Name: ID
+        * * SQL Data Type: uniqueidentifier`),
+    PersonID: z.string().describe(`
+        * * Field Name: PersonID
+        * * Display Name: Person
+        * * SQL Data Type: uniqueidentifier`),
+    LastMembershipDate: z.date().nullable().describe(`
+        * * Field Name: LastMembershipDate
+        * * Display Name: Last Membership Date
+        * * SQL Data Type: date`),
+    ReferenceDate: z.date().nullable().describe(`
+        * * Field Name: ReferenceDate
+        * * Display Name: Reference Date
+        * * SQL Data Type: date`),
+    RenewalOutcome: z.string().nullable().describe(`
+        * * Field Name: RenewalOutcome
+        * * Display Name: Renewal Outcome
+        * * SQL Data Type: varchar(7)`),
+    MembershipTier: z.string().nullable().describe(`
+        * * Field Name: MembershipTier
+        * * Display Name: Membership Tier
+        * * SQL Data Type: nvarchar(200)`),
+    MemberSegment: z.string().describe(`
+        * * Field Name: MemberSegment
+        * * Display Name: Member Segment
+        * * SQL Data Type: nvarchar(50)`),
+    MemberRegion: z.string().describe(`
+        * * Field Name: MemberRegion
+        * * Display Name: Member Region
+        * * SQL Data Type: nvarchar(50)`),
+    TenureDays: z.number().describe(`
+        * * Field Name: TenureDays
+        * * Display Name: Tenure Days
+        * * SQL Data Type: int`),
+    PriorTermsCount: z.number().nullable().describe(`
+        * * Field Name: PriorTermsCount
+        * * Display Name: Prior Terms Count
+        * * SQL Data Type: int`),
+    DuesAmount: z.number().describe(`
+        * * Field Name: DuesAmount
+        * * Display Name: Dues Amount
+        * * SQL Data Type: decimal(18, 2)`),
+    OrdersCount: z.number().describe(`
+        * * Field Name: OrdersCount
+        * * Display Name: Orders Count
+        * * SQL Data Type: int`),
+    TotalOrderSpend: z.number().describe(`
+        * * Field Name: TotalOrderSpend
+        * * Display Name: Total Order Spend
+        * * SQL Data Type: decimal(38, 2)`),
+    DaysSinceLastOrder: z.number().nullable().describe(`
+        * * Field Name: DaysSinceLastOrder
+        * * Display Name: Days Since Last Order
+        * * SQL Data Type: int`),
+    EventsAttendedCount: z.number().describe(`
+        * * Field Name: EventsAttendedCount
+        * * Display Name: Events Attended Count
+        * * SQL Data Type: int`),
+    DaysSinceLastEvent: z.number().nullable().describe(`
+        * * Field Name: DaysSinceLastEvent
+        * * Display Name: Days Since Last Event
+        * * SQL Data Type: int`),
+    CoursesEnrolledCount: z.number().describe(`
+        * * Field Name: CoursesEnrolledCount
+        * * Display Name: Courses Enrolled Count
+        * * SQL Data Type: int`),
+    CoursesCompletedCount: z.number().describe(`
+        * * Field Name: CoursesCompletedCount
+        * * Display Name: Courses Completed Count
+        * * SQL Data Type: int`),
+});
+
+export type morecheesemembersvwMemberRenewalSignalsEntityType = z.infer<typeof morecheesemembersvwMemberRenewalSignalsSchema>;
 
 /**
  * zod schema definition for the entity MoreCheese: Organization Profiles
@@ -1094,6 +1188,45 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     }
 
     /**
+    * * Field Name: RenewalProbability
+    * * Display Name: Renewal Probability
+    * * SQL Data Type: decimal(9, 6)
+    * * Description: Predicted probability (0-1) that this member renews, written by the Member Renewal Risk scoring process (Predictive Studio).
+    */
+    get RenewalProbability(): number | null {
+        return this.Get('RenewalProbability');
+    }
+    set RenewalProbability(value: number | null) {
+        this.Set('RenewalProbability', value);
+    }
+
+    /**
+    * * Field Name: RenewalStatus
+    * * Display Name: Renewal Status
+    * * SQL Data Type: nvarchar(100)
+    * * Description: Renewal risk band label for the latest prediction (e.g. High / Medium / Low likelihood), written by the Member Renewal Risk scoring process.
+    */
+    get RenewalStatus(): string | null {
+        return this.Get('RenewalStatus');
+    }
+    set RenewalStatus(value: string | null) {
+        this.Set('RenewalStatus', value);
+    }
+
+    /**
+    * * Field Name: RenewalScoredAt
+    * * Display Name: Renewal Scored At
+    * * SQL Data Type: datetimeoffset
+    * * Description: When the renewal prediction on this member was last scored.
+    */
+    get RenewalScoredAt(): Date | null {
+        return this.Get('RenewalScoredAt');
+    }
+    set RenewalScoredAt(value: Date | null) {
+        this.Set('RenewalScoredAt', value);
+    }
+
+    /**
     * * Field Name: Person
     * * Display Name: Person
     * * SQL Data Type: nvarchar(201)
@@ -1109,6 +1242,277 @@ export class morecheesemembersMemberProfileEntity extends BaseEntity<morecheesem
     */
     get Organization(): string | null {
         return this.Get('Organization');
+    }
+}
+
+
+/**
+ * MoreCheese: Member Renewal Signals - strongly typed entity sub-class
+ * * Schema: morecheese_members
+ * * Base Table: vwMemberRenewalSignals
+ * * Base View: vwMemberRenewalSignals
+ * * @description Read-only, live per-member renewal signals (label + engagement features as of the last membership purchase) computed from canonical Orders, Event Order Lines and Course Enrollments. One row per Member Profile; ID = MemberProfile.ID. The training source for the Member Renewal Risk Predictive Studio pipeline.
+ * * Primary Key: ID
+ * @extends {BaseEntity}
+ * @class
+ * @public
+ */
+@RegisterClass(BaseEntity, 'MoreCheese: Member Renewal Signals')
+export class morecheesemembersvwMemberRenewalSignalsEntity extends BaseEntity<morecheesemembersvwMemberRenewalSignalsEntityType> {
+    /**
+    * Loads the MoreCheese: Member Renewal Signals record from the database
+    * @param ID: string - primary key value to load the MoreCheese: Member Renewal Signals record.
+    * @param EntityRelationshipsToLoad - (optional) the relationships to load
+    * @returns {Promise<boolean>} - true if successful, false otherwise
+    * @public
+    * @async
+    * @memberof morecheesemembersvwMemberRenewalSignalsEntity
+    * @method
+    * @override
+    */
+    public async Load(ID: string, EntityRelationshipsToLoad?: string[]) : Promise<boolean> {
+        const compositeKey: CompositeKey = new CompositeKey();
+        compositeKey.KeyValuePairs.push({ FieldName: 'ID', Value: ID });
+        return await super.InnerLoad(compositeKey, EntityRelationshipsToLoad);
+    }
+
+    /**
+    * MoreCheese: Member Renewal Signals - AllowCreateAPI and AllowUpdateAPI are both set to 0 in the database.  Save is not allowed, so this method is generated to override the base class method and throw an error. To enable save for this entity, set AllowCreateAPI and/or AllowUpdateAPI to 1 in the database.
+    * @public
+    * @method
+    * @override
+    * @memberof morecheesemembersvwMemberRenewalSignalsEntity
+    * @throws {Error} - Save is not allowed for MoreCheese: Member Renewal Signals, to enable it set AllowCreateAPI and/or AllowUpdateAPI to 1 in the database.
+    */
+    public override async Save(options?: EntitySaveOptions) : Promise<boolean> {
+        throw new Error('Save is not allowed for MoreCheese: Member Renewal Signals, to enable it set AllowCreateAPI and/or AllowUpdateAPI to 1 in the database.');
+    }
+
+    /**
+    * MoreCheese: Member Renewal Signals - AllowDeleteAPI is set to 0 in the database.  Delete is not allowed, so this method is generated to override the base class method and throw an error. To enable delete for this entity, set AllowDeleteAPI to 1 in the database.
+    * @public
+    * @method
+    * @override
+    * @memberof morecheesemembersvwMemberRenewalSignalsEntity
+    * @throws {Error} - Delete is not allowed for MoreCheese: Member Renewal Signals, to enable it set AllowDeleteAPI to 1 in the database.
+    */
+    public override async Delete(): Promise<boolean> {
+        throw new Error('Delete is not allowed for MoreCheese: Member Renewal Signals, to enable it set AllowDeleteAPI to 1 in the database.');
+    }
+
+    /**
+    * * Field Name: ID
+    * * SQL Data Type: uniqueidentifier
+    */
+    get ID(): string {
+        return this.Get('ID');
+    }
+    set ID(value: string) {
+        this.Set('ID', value);
+    }
+
+    /**
+    * * Field Name: PersonID
+    * * Display Name: Person
+    * * SQL Data Type: uniqueidentifier
+    */
+    get PersonID(): string {
+        return this.Get('PersonID');
+    }
+    set PersonID(value: string) {
+        this.Set('PersonID', value);
+    }
+
+    /**
+    * * Field Name: LastMembershipDate
+    * * Display Name: Last Membership Date
+    * * SQL Data Type: date
+    */
+    get LastMembershipDate(): Date | null {
+        return this.Get('LastMembershipDate');
+    }
+    set LastMembershipDate(value: Date | null) {
+        this.Set('LastMembershipDate', value);
+    }
+
+    /**
+    * * Field Name: ReferenceDate
+    * * Display Name: Reference Date
+    * * SQL Data Type: date
+    */
+    get ReferenceDate(): Date | null {
+        return this.Get('ReferenceDate');
+    }
+    set ReferenceDate(value: Date | null) {
+        this.Set('ReferenceDate', value);
+    }
+
+    /**
+    * * Field Name: RenewalOutcome
+    * * Display Name: Renewal Outcome
+    * * SQL Data Type: varchar(7)
+    */
+    get RenewalOutcome(): string | null {
+        return this.Get('RenewalOutcome');
+    }
+    set RenewalOutcome(value: string | null) {
+        this.Set('RenewalOutcome', value);
+    }
+
+    /**
+    * * Field Name: MembershipTier
+    * * Display Name: Membership Tier
+    * * SQL Data Type: nvarchar(200)
+    */
+    get MembershipTier(): string | null {
+        return this.Get('MembershipTier');
+    }
+    set MembershipTier(value: string | null) {
+        this.Set('MembershipTier', value);
+    }
+
+    /**
+    * * Field Name: MemberSegment
+    * * Display Name: Member Segment
+    * * SQL Data Type: nvarchar(50)
+    */
+    get MemberSegment(): string {
+        return this.Get('MemberSegment');
+    }
+    set MemberSegment(value: string) {
+        this.Set('MemberSegment', value);
+    }
+
+    /**
+    * * Field Name: MemberRegion
+    * * Display Name: Member Region
+    * * SQL Data Type: nvarchar(50)
+    */
+    get MemberRegion(): string {
+        return this.Get('MemberRegion');
+    }
+    set MemberRegion(value: string) {
+        this.Set('MemberRegion', value);
+    }
+
+    /**
+    * * Field Name: TenureDays
+    * * Display Name: Tenure Days
+    * * SQL Data Type: int
+    */
+    get TenureDays(): number {
+        return this.Get('TenureDays');
+    }
+    set TenureDays(value: number) {
+        this.Set('TenureDays', value);
+    }
+
+    /**
+    * * Field Name: PriorTermsCount
+    * * Display Name: Prior Terms Count
+    * * SQL Data Type: int
+    */
+    get PriorTermsCount(): number | null {
+        return this.Get('PriorTermsCount');
+    }
+    set PriorTermsCount(value: number | null) {
+        this.Set('PriorTermsCount', value);
+    }
+
+    /**
+    * * Field Name: DuesAmount
+    * * Display Name: Dues Amount
+    * * SQL Data Type: decimal(18, 2)
+    */
+    get DuesAmount(): number {
+        return this.Get('DuesAmount');
+    }
+    set DuesAmount(value: number) {
+        this.Set('DuesAmount', value);
+    }
+
+    /**
+    * * Field Name: OrdersCount
+    * * Display Name: Orders Count
+    * * SQL Data Type: int
+    */
+    get OrdersCount(): number {
+        return this.Get('OrdersCount');
+    }
+    set OrdersCount(value: number) {
+        this.Set('OrdersCount', value);
+    }
+
+    /**
+    * * Field Name: TotalOrderSpend
+    * * Display Name: Total Order Spend
+    * * SQL Data Type: decimal(38, 2)
+    */
+    get TotalOrderSpend(): number {
+        return this.Get('TotalOrderSpend');
+    }
+    set TotalOrderSpend(value: number) {
+        this.Set('TotalOrderSpend', value);
+    }
+
+    /**
+    * * Field Name: DaysSinceLastOrder
+    * * Display Name: Days Since Last Order
+    * * SQL Data Type: int
+    */
+    get DaysSinceLastOrder(): number | null {
+        return this.Get('DaysSinceLastOrder');
+    }
+    set DaysSinceLastOrder(value: number | null) {
+        this.Set('DaysSinceLastOrder', value);
+    }
+
+    /**
+    * * Field Name: EventsAttendedCount
+    * * Display Name: Events Attended Count
+    * * SQL Data Type: int
+    */
+    get EventsAttendedCount(): number {
+        return this.Get('EventsAttendedCount');
+    }
+    set EventsAttendedCount(value: number) {
+        this.Set('EventsAttendedCount', value);
+    }
+
+    /**
+    * * Field Name: DaysSinceLastEvent
+    * * Display Name: Days Since Last Event
+    * * SQL Data Type: int
+    */
+    get DaysSinceLastEvent(): number | null {
+        return this.Get('DaysSinceLastEvent');
+    }
+    set DaysSinceLastEvent(value: number | null) {
+        this.Set('DaysSinceLastEvent', value);
+    }
+
+    /**
+    * * Field Name: CoursesEnrolledCount
+    * * Display Name: Courses Enrolled Count
+    * * SQL Data Type: int
+    */
+    get CoursesEnrolledCount(): number {
+        return this.Get('CoursesEnrolledCount');
+    }
+    set CoursesEnrolledCount(value: number) {
+        this.Set('CoursesEnrolledCount', value);
+    }
+
+    /**
+    * * Field Name: CoursesCompletedCount
+    * * Display Name: Courses Completed Count
+    * * SQL Data Type: int
+    */
+    get CoursesCompletedCount(): number {
+        return this.Get('CoursesCompletedCount');
+    }
+    set CoursesCompletedCount(value: number) {
+        this.Set('CoursesCompletedCount', value);
     }
 }
 

@@ -24,6 +24,7 @@ import { morecheesemembersAdvocacyActionFormComponent } from "./Entities/moreche
 import { morecheesemembersDataQualityLabelFormComponent } from "./Entities/morecheesemembersDataQualityLabel/morecheesemembersdataqualitylabel.form.component";
 import { morecheesemembersMemberProfileFormComponent } from "./Entities/morecheesemembersMemberProfile/morecheesemembersmemberprofile.form.component";
 import { morecheesemembersOrganizationProfileFormComponent } from "./Entities/morecheesemembersOrganizationProfile/morecheesemembersorganizationprofile.form.component";
+import { morecheesemembersvwMemberRenewalSignalsFormComponent } from "./Entities/morecheesemembersvwMemberRenewalSignals/morecheesemembersvwmemberrenewalsignals.form.component";
    
 
 @NgModule({
@@ -137,6 +138,24 @@ export class GeneratedForms_SubModule_26 { }
 
 @NgModule({
 declarations: [
+    morecheesemembersvwMemberRenewalSignalsFormComponent
+],
+imports: [
+    CommonModule,
+    FormsModule,
+    BaseFormsModule,
+    EntityViewerModule,
+    LinkDirectivesModule
+],
+exports: [
+]
+})
+export class GeneratedForms_SubModule_29 { }
+    
+
+
+@NgModule({
+declarations: [
     morecheeselearningMemberCertificationFormComponent
 ],
 imports: [
@@ -181,6 +200,7 @@ imports: [
     GeneratedForms_SubModule_22,
     GeneratedForms_SubModule_23,
     GeneratedForms_SubModule_26,
+    GeneratedForms_SubModule_29,
     GeneratedForms_SubModule_30,
     GeneratedForms_SubModule_31
 ]

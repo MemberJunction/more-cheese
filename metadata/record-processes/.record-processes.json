@@ -1,0 +1,27 @@
+[
+  {
+    "primaryKey": {
+      "ID": "CE98BCA3-DB7E-4244-80F6-7C4646763E5D"
+    },
+    "fields": {
+      "Name": "MoreCheese: Score Member Renewal Risk",
+      "Description": "Scores every Member Profile with the Member Renewal Risk model and writes the result onto the profile (RenewalProbability / RenewalStatus / RenewalScoredAt). Opts in to Predictive Studio auto-train: on a fresh install (or whenever the model has no trained artifact on this server) the first run trains pipeline 'MoreCheese: Member Renewal Risk', publishes the model, points this process and its scoring binding at it, then scores.",
+      "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Member Profiles",
+      "Status": "Active",
+      "WorkType": "ML Model",
+      "ScopeType": "Filter",
+      "ScopeFilter": "(1=1)",
+      "OnChangeEnabled": false,
+      "ScheduleEnabled": true,
+      "CronExpression": "0 3 * * *",
+      "Timezone": "UTC",
+      "OnDemandEnabled": true,
+      "SkipUnchanged": false,
+      "BatchSize": 100,
+      "MaxConcurrency": 1,
+      "SkipEmbeddings": false,
+      "Configuration": "{\"primaryKeyField\": \"ID\", \"autoTrain\": {\"pipelineId\": \"8A1C44F3-938C-4E65-B6DE-D621BC4C3001\", \"binding\": {\"targetColumn\": \"RenewalProbability\", \"mode\": \"Scheduled\"}}}",
+      "OutputMapping": "{\"fields\": {\"RenewalProbability\": \"$.score\", \"RenewalStatus\": \"$.status\", \"RenewalScoredAt\": \"$.scoredAt\"}}"
+    }
+  }
+]

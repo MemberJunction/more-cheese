@@ -17,13 +17,13 @@ import { MaxLength } from 'class-validator';
 import * as mj_core_schema_server_object_types from '@memberjunction/server'
 
 
-import { morecheesemembersAdvocacyActionEntity, morecheesemembersDataQualityLabelEntity, morecheesemembersMemberProfileEntity, morecheesemembersOrganizationProfileEntity } from '@mj-biz-apps/more-cheese-entities';
+import { morecheesemembersAdvocacyActionEntity, morecheesemembersDataQualityLabelEntity, morecheesemembersMemberProfileEntity, morecheesemembersvwMemberRenewalSignalsEntity, morecheesemembersOrganizationProfileEntity } from '@mj-biz-apps/more-cheese-entities';
     
 
 //****************************************************************************
 // ENTITY CLASS for MoreCheese: Advocacy Actions
 //****************************************************************************
-@ObjectType({ description: `Legislative engagement actions — the advocacy-shaped component of member engagement` })
+@ObjectType({ description: "Legislative engagement actions — the advocacy-shaped component of member engagement" })
 export class morecheesemembersAdvocacyAction_ {
     @Field() 
     @MaxLength(36)
@@ -40,7 +40,7 @@ export class morecheesemembersAdvocacyAction_ {
     @Field({nullable: true}) 
     ActionDate?: Date;
         
-    @Field({nullable: true, description: `LetterCampaign, PetitionSignature, Testimony, or CoalitionMeeting`}) 
+    @Field({nullable: true, description: "LetterCampaign, PetitionSignature, Testimony, or CoalitionMeeting"}) 
     @MaxLength(50)
     Kind?: string;
         
@@ -219,7 +219,7 @@ export class morecheesemembersAdvocacyActionResolver extends ResolverBase {
 //****************************************************************************
 // ENTITY CLASS for MoreCheese: Data Quality Labels
 //****************************************************************************
-@ObjectType({ description: `Labeled ground truth for deliberately injected data defects — every duplicate, stale record, and typo the generator planted, with the correct answer. Data-quality demos verify against this table.` })
+@ObjectType({ description: "Labeled ground truth for deliberately injected data defects — every duplicate, stale record, and typo the generator planted, with the correct answer. Data-quality demos verify against this table." })
 export class morecheesemembersDataQualityLabel_ {
     @Field() 
     @MaxLength(36)
@@ -229,7 +229,7 @@ export class morecheesemembersDataQualityLabel_ {
     @MaxLength(80)
     LabelKey?: string;
         
-    @Field({nullable: true, description: `DuplicatePerson (RelatedPersonID = the canonical record), StaleEmployer (RelatedOrganizationID = the TRUE employer), or TypoEmail (TruthValue = the correct email)`}) 
+    @Field({nullable: true, description: "DuplicatePerson (RelatedPersonID = the canonical record), StaleEmployer (RelatedOrganizationID = the TRUE employer), or TypoEmail (TruthValue = the correct email)"}) 
     @MaxLength(50)
     DefectKind?: string;
         
@@ -245,11 +245,11 @@ export class morecheesemembersDataQualityLabel_ {
     @MaxLength(36)
     RelatedOrganizationID?: string;
         
-    @Field({nullable: true, description: `The defective value as it appears in the data (e.g. the typo'd email, the stale org name)`}) 
+    @Field({nullable: true, description: "The defective value as it appears in the data (e.g. the typo'd email, the stale org name)"}) 
     @MaxLength(400)
     DefectValue?: string;
         
-    @Field({nullable: true, description: `The correct value (the verifiable right answer)`}) 
+    @Field({nullable: true, description: "The correct value (the verifiable right answer)"}) 
     @MaxLength(400)
     TruthValue?: string;
         
@@ -454,7 +454,7 @@ export class morecheesemembersDataQualityLabelResolver extends ResolverBase {
 //****************************************************************************
 // ENTITY CLASS for MoreCheese: Member Profiles
 //****************************************************************************
-@ObjectType({ description: `Member-specific extension of bizapps-common Person: member number, segment, geography, join date (v2-plan §4.2)` })
+@ObjectType({ description: "Member-specific extension of bizapps-common Person: member number, segment, geography, join date (v2-plan §4.2)" })
 export class morecheesemembersMemberProfile_ {
     @Field() 
     @MaxLength(36)
@@ -468,15 +468,15 @@ export class morecheesemembersMemberProfile_ {
     @MaxLength(36)
     OrganizationID?: string;
         
-    @Field({nullable: true, description: `Business key for the member (e.g. ICF-100217); UUIDs derive from it`}) 
+    @Field({nullable: true, description: "Business key for the member (e.g. ICF-100217); UUIDs derive from it"}) 
     @MaxLength(50)
     MemberNumber?: string;
         
-    @Field({nullable: true, description: `Professional segment: Producer, Retailer, Supplier, Educator, or Enthusiast`}) 
+    @Field({nullable: true, description: "Professional segment: Producer, Retailer, Supplier, Educator, or Enthusiast"}) 
     @MaxLength(50)
     Segment?: string;
         
-    @Field({nullable: true, description: `Coarse geography bucket: NA, EU, or RoW`}) 
+    @Field({nullable: true, description: "Coarse geography bucket: NA, EU, or RoW"}) 
     @MaxLength(50)
     Region?: string;
         
@@ -488,11 +488,11 @@ export class morecheesemembersMemberProfile_ {
     @MaxLength(100)
     CountryName?: string;
         
-    @Field({nullable: true, description: `Member city (real city; drives the member map)`}) 
+    @Field({nullable: true, description: "Member city (real city; drives the member map)"}) 
     @MaxLength(100)
     City?: string;
         
-    @Field({nullable: true, description: `Member state/country code`}) 
+    @Field({nullable: true, description: "Member state/country code"}) 
     @MaxLength(50)
     State?: string;
         
@@ -508,13 +508,13 @@ export class morecheesemembersMemberProfile_ {
     @MaxLength(20)
     PostalCode?: string;
         
-    @Field(() => Float, {nullable: true, description: `Member latitude, pre-baked for the map`}) 
+    @Field(() => Float, {nullable: true, description: "Member latitude, pre-baked for the map"}) 
     Latitude?: number;
         
-    @Field(() => Float, {nullable: true, description: `Member longitude, pre-baked for the map`}) 
+    @Field(() => Float, {nullable: true, description: "Member longitude, pre-baked for the map"}) 
     Longitude?: number;
         
-    @Field({nullable: true, description: `Date the member first joined the federation`}) 
+    @Field({nullable: true, description: "Date the member first joined the federation"}) 
     JoinDate?: Date;
         
     @Field({nullable: true}) 
@@ -533,7 +533,7 @@ export class morecheesemembersMemberProfile_ {
     @MaxLength(50)
     PrimaryLanguage?: string;
         
-    @Field(() => Boolean, {nullable: true, description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
+    @Field(() => Boolean, {nullable: true, description: "Marks generated shared-demo rows; the wipe-and-recreate boundary"}) 
     IsSharedDemo?: boolean;
         
     @Field() 
@@ -541,6 +541,16 @@ export class morecheesemembersMemberProfile_ {
         
     @Field() 
     _mj__UpdatedAt: Date;
+        
+    @Field(() => Float, {nullable: true, description: "Predicted probability (0-1) that this member renews, written by the Member Renewal Risk scoring process (Predictive Studio)."}) 
+    RenewalProbability?: number;
+        
+    @Field({nullable: true, description: "Renewal risk band label for the latest prediction (e.g. High / Medium / Low likelihood), written by the Member Renewal Risk scoring process."}) 
+    @MaxLength(100)
+    RenewalStatus?: string;
+        
+    @Field({nullable: true, description: "When the renewal prediction on this member was last scored."}) 
+    RenewalScoredAt?: Date;
         
     @Field({nullable: true}) 
     @MaxLength(201)
@@ -623,6 +633,15 @@ export class CreatemorecheesemembersMemberProfileInput {
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
 
+    @Field(() => Float, { nullable: true })
+    RenewalProbability: number | null;
+
+    @Field({ nullable: true })
+    RenewalStatus: string | null;
+
+    @Field({ nullable: true })
+    RenewalScoredAt: Date | null;
+
     @Field(() => RestoreContextInput, { nullable: true })
     RestoreContext___?: RestoreContextInput;
 }
@@ -695,6 +714,15 @@ export class UpdatemorecheesemembersMemberProfileInput {
 
     @Field(() => Boolean, { nullable: true })
     IsSharedDemo?: boolean;
+
+    @Field(() => Float, { nullable: true })
+    RenewalProbability?: number | null;
+
+    @Field({ nullable: true })
+    RenewalStatus?: string | null;
+
+    @Field({ nullable: true })
+    RenewalScoredAt?: Date | null;
 
     @Field(() => [KeyValuePairInput], { nullable: true })
     OldValues___?: KeyValuePairInput[];
@@ -790,9 +818,138 @@ export class morecheesemembersMemberProfileResolver extends ResolverBase {
 }
 
 //****************************************************************************
+// ENTITY CLASS for MoreCheese: Member Renewal Signals
+//****************************************************************************
+@ObjectType({ description: "Read-only, live per-member renewal signals (label + engagement features as of the last membership purchase) computed from canonical Orders, Event Order Lines and Course Enrollments. One row per Member Profile; ID = MemberProfile.ID. The training source for the Member Renewal Risk Predictive Studio pipeline." })
+export class morecheesemembersvwMemberRenewalSignals_ {
+    @Field() 
+    @MaxLength(36)
+    ID: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(36)
+    PersonID?: string;
+        
+    @Field({nullable: true}) 
+    LastMembershipDate?: Date;
+        
+    @Field({nullable: true}) 
+    ReferenceDate?: Date;
+        
+    @Field({nullable: true}) 
+    @MaxLength(7)
+    RenewalOutcome?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(200)
+    MembershipTier?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(50)
+    MemberSegment?: string;
+        
+    @Field({nullable: true}) 
+    @MaxLength(50)
+    MemberRegion?: string;
+        
+    @Field(() => Int, {nullable: true}) 
+    TenureDays?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    PriorTermsCount?: number;
+        
+    @Field(() => Float, {nullable: true}) 
+    DuesAmount?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    OrdersCount?: number;
+        
+    @Field(() => Float, {nullable: true}) 
+    TotalOrderSpend?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    DaysSinceLastOrder?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    EventsAttendedCount?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    DaysSinceLastEvent?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    CoursesEnrolledCount?: number;
+        
+    @Field(() => Int, {nullable: true}) 
+    CoursesCompletedCount?: number;
+        
+    @Field(() => [String], { nullable: true, description: `Field-level security: when non-null, the fields on this entity the calling user may read. Any other field arriving as null was withheld by the server rather than genuinely empty. Null for callers with no field restrictions.` })
+    ReadableFields___?: string[];
+        
+}
+//****************************************************************************
+// RESOLVER for MoreCheese: Member Renewal Signals
+//****************************************************************************
+@ObjectType()
+export class RunmorecheesemembersvwMemberRenewalSignalsViewResult {
+    @Field(() => [morecheesemembersvwMemberRenewalSignals_])
+    Results: morecheesemembersvwMemberRenewalSignals_[];
+
+    @Field(() => String, {nullable: true})
+    UserViewRunID?: string;
+
+    @Field(() => Int, {nullable: true})
+    RowCount: number;
+
+    @Field(() => Int, {nullable: true})
+    TotalRowCount: number;
+
+    @Field(() => Int, {nullable: true})
+    ExecutionTime: number;
+
+    @Field({nullable: true})
+    ErrorMessage?: string;
+
+    @Field(() => Boolean, {nullable: false})
+    Success: boolean;
+}
+
+@Resolver(morecheesemembersvwMemberRenewalSignals_)
+export class morecheesemembersvwMemberRenewalSignalsResolver extends ResolverBase {
+    @Query(() => RunmorecheesemembersvwMemberRenewalSignalsViewResult)
+    async RunmorecheesemembersvwMemberRenewalSignalsViewByID(@Arg('input', () => RunViewByIDInput) input: RunViewByIDInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
+        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
+        return super.RunViewByIDGeneric(input, provider, userPayload, pubSub);
+    }
+
+    @Query(() => RunmorecheesemembersvwMemberRenewalSignalsViewResult)
+    async RunmorecheesemembersvwMemberRenewalSignalsViewByName(@Arg('input', () => RunViewByNameInput) input: RunViewByNameInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
+        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
+        return super.RunViewByNameGeneric(input, provider, userPayload, pubSub);
+    }
+
+    @Query(() => RunmorecheesemembersvwMemberRenewalSignalsViewResult)
+    async RunmorecheesemembersvwMemberRenewalSignalsDynamicView(@Arg('input', () => RunDynamicViewInput) input: RunDynamicViewInput, @Ctx() { providers, userPayload }: AppContext, @PubSub() pubSub: PubSubEngine) {
+        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
+        input.EntityName = 'MoreCheese: Member Renewal Signals';
+        return super.RunDynamicViewGeneric(input, provider, userPayload, pubSub);
+    }
+    @Query(() => morecheesemembersvwMemberRenewalSignals_, { nullable: true })
+    async morecheesemembersvwMemberRenewalSignals(@Arg('ID', () => String) ID: string, @Ctx() { userPayload, providers }: AppContext, @PubSub() pubSub: PubSubEngine): Promise<morecheesemembersvwMemberRenewalSignals_ | null> {
+        this.CheckUserReadPermissions('MoreCheese: Member Renewal Signals', userPayload);
+        const provider = GetReadOnlyProvider(providers, { allowFallbackToReadWrite: true });
+        const sSQL = `SELECT * FROM ${provider.QuoteSchemaAndView('morecheese_members', 'vwMemberRenewalSignals')} WHERE ${provider.QuoteIdentifier('ID')}=${provider.BuildParameterPlaceholder(0)} ` + this.getRowLevelSecurityWhereClause(provider, 'MoreCheese: Member Renewal Signals', userPayload, EntityPermissionType.Read, 'AND');
+        this.createRecordAccessAuditLogRecord(provider, userPayload, 'MoreCheese: Member Renewal Signals', ID)
+        const rows = await provider.ExecuteSQL(sSQL, [ID], undefined, this.GetUserFromPayload(userPayload));
+        const result = await this.MapFieldNamesToCodeNames('MoreCheese: Member Renewal Signals', rows && rows.length > 0 ? rows[0] : null, this.GetUserFromPayload(userPayload));
+        return result;
+    }
+    
+}
+
+//****************************************************************************
 // ENTITY CLASS for MoreCheese: Organization Profiles
 //****************************************************************************
-@ObjectType({ description: `Org-specific extension of bizapps-common Organization: demo geography and the lifecycle events (dissolution/acquisition/program cut) that drive employer-related churn` })
+@ObjectType({ description: "Org-specific extension of bizapps-common Organization: demo geography and the lifecycle events (dissolution/acquisition/program cut) that drive employer-related churn" })
 export class morecheesemembersOrganizationProfile_ {
     @Field() 
     @MaxLength(36)
@@ -802,15 +959,15 @@ export class morecheesemembersOrganizationProfile_ {
     @MaxLength(36)
     OrganizationID?: string;
         
-    @Field({nullable: true, description: `Business key for the organization (e.g. ORG-0042); UUIDs derive from it`}) 
+    @Field({nullable: true, description: "Business key for the organization (e.g. ORG-0042); UUIDs derive from it"}) 
     @MaxLength(50)
     OrgKey?: string;
         
-    @Field({nullable: true, description: `What the organization does in the cheese world: Producer, Retailer, Supplier, or Educator`}) 
+    @Field({nullable: true, description: "What the organization does in the cheese world: Producer, Retailer, Supplier, or Educator"}) 
     @MaxLength(50)
     Type?: string;
         
-    @Field({nullable: true, description: `Coarse geography bucket: NA, EU, or RoW`}) 
+    @Field({nullable: true, description: "Coarse geography bucket: NA, EU, or RoW"}) 
     @MaxLength(50)
     Region?: string;
         
@@ -822,11 +979,11 @@ export class morecheesemembersOrganizationProfile_ {
     @MaxLength(100)
     CountryName?: string;
         
-    @Field({nullable: true, description: `Headquarters city (real city, invented business name)`}) 
+    @Field({nullable: true, description: "Headquarters city (real city, invented business name)"}) 
     @MaxLength(100)
     City?: string;
         
-    @Field({nullable: true, description: `Headquarters state/country code`}) 
+    @Field({nullable: true, description: "Headquarters state/country code"}) 
     @MaxLength(50)
     State?: string;
         
@@ -838,20 +995,20 @@ export class morecheesemembersOrganizationProfile_ {
     @MaxLength(20)
     PostalCode?: string;
         
-    @Field(() => Float, {nullable: true, description: `Headquarters latitude, pre-baked for the map (no live geocoding)`}) 
+    @Field(() => Float, {nullable: true, description: "Headquarters latitude, pre-baked for the map (no live geocoding)"}) 
     Latitude?: number;
         
-    @Field(() => Float, {nullable: true, description: `Headquarters longitude, pre-baked for the map (no live geocoding)`}) 
+    @Field(() => Float, {nullable: true, description: "Headquarters longitude, pre-baked for the map (no live geocoding)"}) 
     Longitude?: number;
         
-    @Field({nullable: true, description: `The org-level shock, if any: Dissolved, Acquired, or ProgramCut — the driver behind employer-related churn`}) 
+    @Field({nullable: true, description: "The org-level shock, if any: Dissolved, Acquired, or ProgramCut — the driver behind employer-related churn"}) 
     @MaxLength(50)
     LifecycleEventKind?: string;
         
-    @Field(() => Int, {nullable: true, description: `Year the lifecycle event happened`}) 
+    @Field(() => Int, {nullable: true, description: "Year the lifecycle event happened"}) 
     LifecycleEventYear?: number;
         
-    @Field(() => Boolean, {nullable: true, description: `Marks generated shared-demo rows; the wipe-and-recreate boundary`}) 
+    @Field(() => Boolean, {nullable: true, description: "Marks generated shared-demo rows; the wipe-and-recreate boundary"}) 
     IsSharedDemo?: boolean;
         
     @Field() 
