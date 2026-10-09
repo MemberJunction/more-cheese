@@ -1,0 +1,137 @@
+[
+  {
+    "primaryKey": {
+      "ID": "55891D13-685D-4661-B63B-7AD0BA0198C2"
+    },
+    "fields": {
+      "Name": "Sonar — Recompute Member Engagement Score (nightly)",
+      "Description": "Recomputes the MoreCheese Sonar model \"Member Engagement Score\" so its scores exist on a fresh install and stay current. Sonar has no scheduler of its own — a published model holds no scores until something recomputes it — so this job drives the \"Sonar: Recompute Model\" action through the generic ActionScheduledJobDriver. RunImmediatelyIfNeverRun=true makes the first run happen on the scheduler's first poll after install instead of waiting for the nightly tick.",
+      "JobTypeID": "@lookup:MJ: Scheduled Job Types.DriverClass=ActionScheduledJobDriver",
+      "CronExpression": "0 0 5 * * *",
+      "Timezone": "UTC",
+      "Status": "Active",
+      "RunImmediatelyIfNeverRun": true,
+      "ConcurrencyMode": "Skip",
+      "MaxRuntimeMinutes": 30,
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Configuration": {
+        "ActionID": "@lookup:MJ: Actions.Name=Sonar: Recompute Model",
+        "Params": [
+          {
+            "ActionParamID": "@lookup:MJ: Action Params.Name=ModelID&Action=Sonar: Recompute Model",
+            "ValueType": "Static",
+            "Value": "05C13018-27B8-53DE-9D1D-129E6E15DF1C"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3D2FB8E7-44A3-4134-951D-5A2D3B173823"
+    },
+    "fields": {
+      "Name": "Sonar — Recompute Member Renewal Health (nightly)",
+      "Description": "Recomputes the MoreCheese Sonar model \"Member Renewal Health\" so its scores exist on a fresh install and stay current. Sonar has no scheduler of its own — a published model holds no scores until something recomputes it — so this job drives the \"Sonar: Recompute Model\" action through the generic ActionScheduledJobDriver. RunImmediatelyIfNeverRun=true makes the first run happen on the scheduler's first poll after install instead of waiting for the nightly tick.",
+      "JobTypeID": "@lookup:MJ: Scheduled Job Types.DriverClass=ActionScheduledJobDriver",
+      "CronExpression": "0 5 5 * * *",
+      "Timezone": "UTC",
+      "Status": "Active",
+      "RunImmediatelyIfNeverRun": true,
+      "ConcurrencyMode": "Skip",
+      "MaxRuntimeMinutes": 30,
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Configuration": {
+        "ActionID": "@lookup:MJ: Actions.Name=Sonar: Recompute Model",
+        "Params": [
+          {
+            "ActionParamID": "@lookup:MJ: Action Params.Name=ModelID&Action=Sonar: Recompute Model",
+            "ValueType": "Static",
+            "Value": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6F9FDFB1-F1B5-48CA-83B2-DDBAEB73CEB1"
+    },
+    "fields": {
+      "Name": "Sonar — Recompute Professional Development (nightly)",
+      "Description": "Recomputes the MoreCheese Sonar model \"Professional Development\" so its scores exist on a fresh install and stay current. Sonar has no scheduler of its own — a published model holds no scores until something recomputes it — so this job drives the \"Sonar: Recompute Model\" action through the generic ActionScheduledJobDriver. RunImmediatelyIfNeverRun=true makes the first run happen on the scheduler's first poll after install instead of waiting for the nightly tick.",
+      "JobTypeID": "@lookup:MJ: Scheduled Job Types.DriverClass=ActionScheduledJobDriver",
+      "CronExpression": "0 10 5 * * *",
+      "Timezone": "UTC",
+      "Status": "Active",
+      "RunImmediatelyIfNeverRun": true,
+      "ConcurrencyMode": "Skip",
+      "MaxRuntimeMinutes": 30,
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Configuration": {
+        "ActionID": "@lookup:MJ: Actions.Name=Sonar: Recompute Model",
+        "Params": [
+          {
+            "ActionParamID": "@lookup:MJ: Action Params.Name=ModelID&Action=Sonar: Recompute Model",
+            "ValueType": "Static",
+            "Value": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "B44F2E1B-428E-4229-AEA0-7899763598F3"
+    },
+    "fields": {
+      "Name": "Sonar — Recompute Volunteer & Governance Leadership (nightly)",
+      "Description": "Recomputes the MoreCheese Sonar model \"Volunteer & Governance Leadership\" so its scores exist on a fresh install and stay current. Sonar has no scheduler of its own — a published model holds no scores until something recomputes it — so this job drives the \"Sonar: Recompute Model\" action through the generic ActionScheduledJobDriver. RunImmediatelyIfNeverRun=true makes the first run happen on the scheduler's first poll after install instead of waiting for the nightly tick.",
+      "JobTypeID": "@lookup:MJ: Scheduled Job Types.DriverClass=ActionScheduledJobDriver",
+      "CronExpression": "0 15 5 * * *",
+      "Timezone": "UTC",
+      "Status": "Active",
+      "RunImmediatelyIfNeverRun": true,
+      "ConcurrencyMode": "Skip",
+      "MaxRuntimeMinutes": 30,
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Configuration": {
+        "ActionID": "@lookup:MJ: Actions.Name=Sonar: Recompute Model",
+        "Params": [
+          {
+            "ActionParamID": "@lookup:MJ: Action Params.Name=ModelID&Action=Sonar: Recompute Model",
+            "ValueType": "Static",
+            "Value": "AD4FA626-F6FE-4341-9216-4CF711B9FB92"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2771E6D5-A7B4-4D10-B956-23867ACC8A82"
+    },
+    "fields": {
+      "Name": "Sonar — Recompute Company Member Health (nightly)",
+      "Description": "Recomputes the MoreCheese Sonar model \"Company Member Health\" so its scores exist on a fresh install and stay current. Sonar has no scheduler of its own — a published model holds no scores until something recomputes it — so this job drives the \"Sonar: Recompute Model\" action through the generic ActionScheduledJobDriver. RunImmediatelyIfNeverRun=true makes the first run happen on the scheduler's first poll after install instead of waiting for the nightly tick.",
+      "JobTypeID": "@lookup:MJ: Scheduled Job Types.DriverClass=ActionScheduledJobDriver",
+      "CronExpression": "0 20 5 * * *",
+      "Timezone": "UTC",
+      "Status": "Active",
+      "RunImmediatelyIfNeverRun": true,
+      "ConcurrencyMode": "Skip",
+      "MaxRuntimeMinutes": 30,
+      "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Configuration": {
+        "ActionID": "@lookup:MJ: Actions.Name=Sonar: Recompute Model",
+        "Params": [
+          {
+            "ActionParamID": "@lookup:MJ: Action Params.Name=ModelID&Action=Sonar: Recompute Model",
+            "ValueType": "Static",
+            "Value": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84"
+          }
+        ]
+      }
+    }
+  }
+]

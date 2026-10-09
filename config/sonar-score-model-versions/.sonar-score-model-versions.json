@@ -12,6 +12,23 @@
       "PublishedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "PublishedAt": "2025-10-24T14:00:00Z",
       "IsCurrent": true
+    },
+    "deleteRecord": {
+      "delete": true,
+      "deletedAt": "2026-10-09T17:05:41.380Z"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A5C9A67E-9A87-40B1-8EFB-18AC537F8A74"
+    },
+    "fields": {
+      "ScoreModelID": "05C13018-27B8-53DE-9D1D-129E6E15DF1C",
+      "VersionNumber": 2
+    },
+    "deleteRecord": {
+      "delete": true,
+      "deletedAt": "2026-10-09T17:05:41.389Z"
     }
   }
 ]

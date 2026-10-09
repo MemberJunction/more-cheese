@@ -62,8 +62,8 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (2318 distinct records; 2344 declared across
--- 41 directories, 26 of them declared in two directories and inserted once):
+-- Seed provenance (2411 distinct records; 2441 declared across
+-- 42 directories, 30 of them declared in two directories and inserted once):
 --   1425 from config/content-item-tags
 --    192 from config/content-item-chunks
 --    192 from config/content-items
@@ -71,21 +71,26 @@
 --     75 from config/conversations
 --     46 from config/artifacts
 --     44 from config/query-categories
+--     34 from config/sonar-factors
+--     34 from config/sonar-model-factors
 --     29 from config/queries
 --     25 from config/conversations-owner
+--     25 from config/sonar-model-related-entities
 --     23 from config/conversation-detail-artifacts
+--     20 from config/sonar-score-bands
 --     19 from config/user-applications
 --     15 from config/resource-permissions
 --     15 from config/user-views
---     10 from config/sonar-factors
---     10 from config/sonar-model-factors
---     10 from config/sonar-model-related-entities
+--      5 from config/scheduled-jobs
+--      5 from config/sonar-score-band-sets
+--      5 from config/sonar-score-models
+--      5 from config/sonar-score-models-activate
 --      4 from config/dashboard-category-links
 --      4 from config/dashboards
---      4 from config/sonar-score-bands
 --      2 from config/application-roles
 --      2 from config/content-sources
 --      2 from config/file-storage-account-permissions
+--      2 from config/sonar-score-model-versions
 --      2 from config/sonar-time-windows
 --      2 from config/user-roles
 --      1 from config/ai-model-vendors
@@ -98,10 +103,6 @@
 --      1 from config/file-storage-accounts
 --      1 from config/file-storage-providers
 --      1 from config/projects
---      1 from config/sonar-score-band-sets
---      1 from config/sonar-score-model-versions
---      1 from config/sonar-score-models
---      1 from config/sonar-score-models-activate
 --      1 from config/user-settings
 --      1 from config/users
 --      1 from config/vector-indexes
@@ -2196,6 +2197,11 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Resource Permissions', '2A22E2D7-A670-4111-B7D6-EDAF30A803A6'),
     ('MJ: Resource Permissions', '60D44E76-664E-475E-98AF-6135CA53214F'),
     ('MJ: Resource Permissions', 'B3035CFE-243C-4157-8CE1-D0B9444BB31A'),
+    ('MJ: Scheduled Jobs', '55891D13-685D-4661-B63B-7AD0BA0198C2'),
+    ('MJ: Scheduled Jobs', '3D2FB8E7-44A3-4134-951D-5A2D3B173823'),
+    ('MJ: Scheduled Jobs', '6F9FDFB1-F1B5-48CA-83B2-DDBAEB73CEB1'),
+    ('MJ: Scheduled Jobs', 'B44F2E1B-428E-4229-AEA0-7899763598F3'),
+    ('MJ: Scheduled Jobs', '2771E6D5-A7B4-4D10-B956-23867ACC8A82'),
     ('MJ_BizApps_Sonar: Factors', '83F3C3B5-D8DE-54DA-8969-BAA1D947D77B'),
     ('MJ_BizApps_Sonar: Factors', '570029BF-9C80-5C72-9914-E99D12C338B1'),
     ('MJ_BizApps_Sonar: Factors', '7A2C147C-A4DB-5DAD-AB01-A99344A4AA82'),
@@ -2206,6 +2212,30 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Factors', '4D09A1F1-44A7-524F-BFB6-576550070B5D'),
     ('MJ_BizApps_Sonar: Factors', 'EED98A91-5C8D-5E47-BA6B-41EA8159C38B'),
     ('MJ_BizApps_Sonar: Factors', '07B56545-0BE8-51D3-9E17-EE8214F86E11'),
+    ('MJ_BizApps_Sonar: Factors', 'EED166A9-DECF-4AF7-B9B9-2CD77ADA9437'),
+    ('MJ_BizApps_Sonar: Factors', '7BC90D21-989A-4BE3-99BB-7710B616D2B2'),
+    ('MJ_BizApps_Sonar: Factors', 'E176748A-753A-4DC1-A563-01ACE0E3AB5D'),
+    ('MJ_BizApps_Sonar: Factors', '43F487E2-413A-4663-9EE7-0E808509AAB4'),
+    ('MJ_BizApps_Sonar: Factors', '4E74DA08-F7DF-4A9C-9B15-880046F0D968'),
+    ('MJ_BizApps_Sonar: Factors', '30988A5E-902C-4AAC-B6E9-AF306D7C36DE'),
+    ('MJ_BizApps_Sonar: Factors', '03619E2A-9781-4B64-B409-DBA6F0542B60'),
+    ('MJ_BizApps_Sonar: Factors', '1CE273D7-2880-49D3-8EC8-3FCDD705353A'),
+    ('MJ_BizApps_Sonar: Factors', '235E18FD-83DF-4B9B-8BA5-EB24253CD1CE'),
+    ('MJ_BizApps_Sonar: Factors', '7477DD00-9599-4ADD-83A6-D94FB7A9D5AE'),
+    ('MJ_BizApps_Sonar: Factors', '809BD50A-AE0B-478A-985C-DDBC0E8F8BC0'),
+    ('MJ_BizApps_Sonar: Factors', '73385B86-3647-4E4E-B9A1-0C906373EB1F'),
+    ('MJ_BizApps_Sonar: Factors', 'A0877F26-1A13-401C-B06D-487BA50ADCB9'),
+    ('MJ_BizApps_Sonar: Factors', '445B19F0-C543-4B8B-9055-CEAAD9F9EC64'),
+    ('MJ_BizApps_Sonar: Factors', 'CB792387-CDAB-467C-A68D-C8F2BF90EF8B'),
+    ('MJ_BizApps_Sonar: Factors', 'E7C91325-ECBB-43EA-AAB4-1AACA4AD3427'),
+    ('MJ_BizApps_Sonar: Factors', 'F764F8B6-96C1-46C4-9473-EAB4C992B893'),
+    ('MJ_BizApps_Sonar: Factors', '69A2D0DD-94CE-4AE5-AF25-2EB53317322D'),
+    ('MJ_BizApps_Sonar: Factors', '7FB32B0A-7F0C-4D53-A57C-35E3034FED65'),
+    ('MJ_BizApps_Sonar: Factors', '204560C1-4D4F-46EF-83E2-593929A19E69'),
+    ('MJ_BizApps_Sonar: Factors', '27D67222-0837-4739-BEEC-C017FB4F8CB5'),
+    ('MJ_BizApps_Sonar: Factors', '877A1E59-CD5F-4EAC-A0E5-642A7511C16A'),
+    ('MJ_BizApps_Sonar: Factors', '751D0C40-DBDE-43F4-9E1F-E8E1776534AC'),
+    ('MJ_BizApps_Sonar: Factors', '91C0E7AF-66AB-41B6-93DB-9942E0289661'),
     ('MJ_BizApps_Sonar: Model Factors', 'C1D324B8-C8D5-59E5-8125-7E673B33E2F3'),
     ('MJ_BizApps_Sonar: Model Factors', '87AC52AD-B6C5-52B9-925E-37436418C6EB'),
     ('MJ_BizApps_Sonar: Model Factors', '170A62A8-6880-5AF3-8BA2-9A6B122DD9E9'),
@@ -2216,6 +2246,30 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Model Factors', '65EDE704-8EF3-58F1-B1B7-F03972020947'),
     ('MJ_BizApps_Sonar: Model Factors', '4B0450F8-1E97-5BC0-8191-0F5AF3F35002'),
     ('MJ_BizApps_Sonar: Model Factors', '786AF287-F683-5DB3-A81B-A6025321B80B'),
+    ('MJ_BizApps_Sonar: Model Factors', '59EE201E-6663-45E7-BBE1-E1FF9B901498'),
+    ('MJ_BizApps_Sonar: Model Factors', '9CD445DD-6A42-4D81-9EE7-F814012EA070'),
+    ('MJ_BizApps_Sonar: Model Factors', 'D6D761FF-F2B1-4648-BB29-597CD23830AC'),
+    ('MJ_BizApps_Sonar: Model Factors', 'D34D418E-CF36-41BE-97F6-7913D9F7AA02'),
+    ('MJ_BizApps_Sonar: Model Factors', '1751AA6F-014C-48B1-9B88-10F7BB8BFAA6'),
+    ('MJ_BizApps_Sonar: Model Factors', 'BD2E10C8-269A-4936-9DDB-FB1BA54A7C0F'),
+    ('MJ_BizApps_Sonar: Model Factors', '629DA1F0-B056-46D3-830B-0A88D198C43C'),
+    ('MJ_BizApps_Sonar: Model Factors', 'EA29CAF5-4463-4750-8AA2-94A2C6D0E00B'),
+    ('MJ_BizApps_Sonar: Model Factors', '3C16A122-7128-44BE-AA88-CB9BFAA72BB4'),
+    ('MJ_BizApps_Sonar: Model Factors', '890BDA3E-B938-4D8C-843B-C4CC92C5DB9F'),
+    ('MJ_BizApps_Sonar: Model Factors', '3598894D-EDC2-44B0-96AB-0A81DF386321'),
+    ('MJ_BizApps_Sonar: Model Factors', '9504F823-5AAA-42DE-AB8F-14F98E45540A'),
+    ('MJ_BizApps_Sonar: Model Factors', '7FEDD9D7-E6C9-4686-8682-A4717D5C6025'),
+    ('MJ_BizApps_Sonar: Model Factors', '1C560FEB-25E1-430D-8558-25E353A5EF10'),
+    ('MJ_BizApps_Sonar: Model Factors', '967B2BA3-9F3E-49CF-8BCE-5FFC0D641F5F'),
+    ('MJ_BizApps_Sonar: Model Factors', '29C8869F-28BA-4D6E-A52B-9669B659C48A'),
+    ('MJ_BizApps_Sonar: Model Factors', '43D915D2-5CFA-492E-B5D0-3CE81BE65402'),
+    ('MJ_BizApps_Sonar: Model Factors', '0256BE60-5DC8-4574-9512-5155E16F4C12'),
+    ('MJ_BizApps_Sonar: Model Factors', 'AA5C2912-CF23-459A-BDD6-C06269A3976A'),
+    ('MJ_BizApps_Sonar: Model Factors', '32C0BF54-6041-48F2-AB95-637459A3B40D'),
+    ('MJ_BizApps_Sonar: Model Factors', '2A39D0B6-1414-4B34-B346-356BDE7C572C'),
+    ('MJ_BizApps_Sonar: Model Factors', '5ED3F37E-AF18-48AD-9366-9891330E5549'),
+    ('MJ_BizApps_Sonar: Model Factors', '4C7662E1-9DCF-42F2-97DA-AD874725F295'),
+    ('MJ_BizApps_Sonar: Model Factors', '5A75BFF3-2828-455A-BA6E-26D33FB913DA'),
     ('MJ_BizApps_Sonar: Model Related Entities', 'F0E5F480-36AB-5E85-B8B8-7C7255837A32'),
     ('MJ_BizApps_Sonar: Model Related Entities', '1513A3B7-DC66-57D2-9FC5-F364F3147205'),
     ('MJ_BizApps_Sonar: Model Related Entities', 'E5508983-6C7F-5379-8537-FB54E23630FE'),
@@ -2226,13 +2280,53 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Model Related Entities', '73A51ECF-B377-53F4-BFCF-04A2F9C85C1A'),
     ('MJ_BizApps_Sonar: Model Related Entities', '5A171835-2878-55B9-9172-D71434FC2E58'),
     ('MJ_BizApps_Sonar: Model Related Entities', '4BC57B86-7827-5D79-8175-29EBD4CAF032'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '85CBFE5A-1142-4E78-AE0A-E849E424AE2F'),
+    ('MJ_BizApps_Sonar: Model Related Entities', 'E953FB02-4B44-4C80-BF0B-71F03DA349EE'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '29E9D400-261D-4368-8D43-68C495D84735'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '3B1D1695-521F-4342-8939-854612B14CCA'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '46942F74-E488-4EE6-8AE3-3D3324F8FE5C'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '301A1E66-7A95-4261-8300-E22C4558F99D'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '290690F8-811E-4200-A01A-C17CF8619F6D'),
+    ('MJ_BizApps_Sonar: Model Related Entities', 'E406275F-D215-4A77-89FE-31DD4FFDEA79'),
+    ('MJ_BizApps_Sonar: Model Related Entities', 'F71D68C9-34B8-4768-A914-16392BA774B1'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '3BD9C6C9-4F52-48EA-9613-26C0534622BB'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '1FF1F883-B167-44A3-ACC3-8F1BFC4C6E2D'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '4752D7AA-6DE4-47F6-A494-69049F123CB9'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '3E268FF7-0889-4C52-8C44-D1EA85190FCD'),
+    ('MJ_BizApps_Sonar: Model Related Entities', '7DBD188E-7382-408E-B9EA-2D487D915856'),
+    ('MJ_BizApps_Sonar: Model Related Entities', 'D4C64050-A1D0-4319-BE6C-1AA72BA5CF1A'),
     ('MJ_BizApps_Sonar: Score Band Sets', '82A80C88-CF9D-5386-A3C5-8ACDE3025B55'),
+    ('MJ_BizApps_Sonar: Score Band Sets', 'AB7B134D-21F4-48F9-9DBD-63588D62258E'),
+    ('MJ_BizApps_Sonar: Score Band Sets', '2DC4783E-0CB9-4C57-A788-CF79AC13200E'),
+    ('MJ_BizApps_Sonar: Score Band Sets', '7972EDEF-74DE-4EFE-B55E-3BCB52EA7847'),
+    ('MJ_BizApps_Sonar: Score Band Sets', '7B38D2C1-FB54-4D80-983A-A93A45F6B2F1'),
     ('MJ_BizApps_Sonar: Score Bands', '4B51BE35-94A0-5760-AAB5-F7803EC1C22B'),
     ('MJ_BizApps_Sonar: Score Bands', 'CD02E66D-C02F-5BC7-BC62-5DA43A65E10F'),
     ('MJ_BizApps_Sonar: Score Bands', 'ED587C74-F495-5AF6-8E7A-1F0D892AB80E'),
     ('MJ_BizApps_Sonar: Score Bands', '36C432E5-EE8F-57F8-8BF6-808EC147C339'),
+    ('MJ_BizApps_Sonar: Score Bands', 'E8124F13-22B4-404A-B117-815B701152A1'),
+    ('MJ_BizApps_Sonar: Score Bands', '3810C4E2-D66D-49DB-97FE-BD95763B0B1D'),
+    ('MJ_BizApps_Sonar: Score Bands', '46293267-0153-4484-9AD7-3FE14460C891'),
+    ('MJ_BizApps_Sonar: Score Bands', 'A4D94BF9-6639-4D9A-AB47-0DD6E6B0EA35'),
+    ('MJ_BizApps_Sonar: Score Bands', '5039EB8D-C345-4E8B-A3A4-0D2A4FD7CDCC'),
+    ('MJ_BizApps_Sonar: Score Bands', 'F767D244-68B8-4338-80D2-0E19CA8A6744'),
+    ('MJ_BizApps_Sonar: Score Bands', 'D3F79F98-70DE-4056-B602-6736FF9874C8'),
+    ('MJ_BizApps_Sonar: Score Bands', '2D262E95-7416-43AE-9E5D-7E5F52DD0616'),
+    ('MJ_BizApps_Sonar: Score Bands', '755BB885-B80E-4929-B629-2F76234C1B25'),
+    ('MJ_BizApps_Sonar: Score Bands', '51F77DA5-D9C1-4492-9027-2CA4D34DFD73'),
+    ('MJ_BizApps_Sonar: Score Bands', '6275C9B1-2C7B-48BE-9FB9-643DEE8D5856'),
+    ('MJ_BizApps_Sonar: Score Bands', '658561BE-4FFB-4C59-9303-A5465AE6F72D'),
+    ('MJ_BizApps_Sonar: Score Bands', '194AE8A9-4746-40AD-BBAD-80ED8509C5A0'),
+    ('MJ_BizApps_Sonar: Score Bands', 'C5A289FF-B1AF-4F8B-8659-2CAFCA09CE7D'),
+    ('MJ_BizApps_Sonar: Score Bands', 'F7EFE98A-10B2-4264-8F44-A10BB6D8B79C'),
+    ('MJ_BizApps_Sonar: Score Bands', '9B216BB5-1AC5-4026-9ECE-5513007764EB'),
     ('MJ_BizApps_Sonar: Score Model Versions', '9EC51FE5-B002-564E-9C7E-7B8E4954CC5B'),
+    ('MJ_BizApps_Sonar: Score Model Versions', 'A5C9A67E-9A87-40B1-8EFB-18AC537F8A74'),
     ('MJ_BizApps_Sonar: Score Models', '05C13018-27B8-53DE-9D1D-129E6E15DF1C'),
+    ('MJ_BizApps_Sonar: Score Models', 'FFC7F7E0-77EE-443B-B9B4-EBE016D351EE'),
+    ('MJ_BizApps_Sonar: Score Models', '79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30'),
+    ('MJ_BizApps_Sonar: Score Models', 'AD4FA626-F6FE-4341-9216-4CF711B9FB92'),
+    ('MJ_BizApps_Sonar: Score Models', '53465F4F-5A77-4DEE-8BA3-C9FA17687F84'),
     ('MJ_BizApps_Sonar: Time Windows', 'CF6F428F-7016-5898-BF94-22795E3B3F91'),
     ('MJ_BizApps_Sonar: Time Windows', '97DF3796-A479-558E-9927-755A48D0D061'),
     ('MJ: Tags', 'EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C'),

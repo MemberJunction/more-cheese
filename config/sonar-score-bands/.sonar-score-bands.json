@@ -7,7 +7,7 @@
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
       "Label": "At Risk",
       "MinScore": 0,
-      "MaxScore": 22,
+      "MaxScore": 10,
       "Severity": 3,
       "ColorHex": "#D9534F",
       "IsTerminal": false,
@@ -21,8 +21,8 @@
     "fields": {
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
       "Label": "Watch",
-      "MinScore": 22,
-      "MaxScore": 33,
+      "MinScore": 10,
+      "MaxScore": 25,
       "Severity": 2,
       "ColorHex": "#F0AD4E",
       "IsTerminal": false,
@@ -36,8 +36,8 @@
     "fields": {
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
       "Label": "Stable",
-      "MinScore": 33,
-      "MaxScore": 46,
+      "MinScore": 25,
+      "MaxScore": 45,
       "Severity": 1,
       "ColorHex": "#5BC0DE",
       "IsTerminal": false,
@@ -51,12 +51,252 @@
     "fields": {
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
       "Label": "Engaged",
-      "MinScore": 46,
+      "MinScore": 45,
       "MaxScore": 100,
       "Severity": 0,
       "ColorHex": "#5CB85C",
       "IsTerminal": false,
       "Description": "Highly engaged — advocates and volunteers live here."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "E8124F13-22B4-404A-B117-815B701152A1"
+    },
+    "fields": {
+      "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
+      "Label": "Lapsing",
+      "MinScore": 0,
+      "MaxScore": 20,
+      "Severity": 3,
+      "ColorHex": "#D9534F",
+      "IsTerminal": false,
+      "Description": "Payments have stopped or gone stale — renewal is unlikely without outreach."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3810C4E2-D66D-49DB-97FE-BD95763B0B1D"
+    },
+    "fields": {
+      "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
+      "Label": "At Risk",
+      "MinScore": 20,
+      "MaxScore": 40,
+      "Severity": 2,
+      "ColorHex": "#F0AD4E",
+      "IsTerminal": false,
+      "Description": "Still paying, but thinly or irregularly — worth a renewal touchpoint."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46293267-0153-4484-9AD7-3FE14460C891"
+    },
+    "fields": {
+      "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
+      "Label": "Likely to Renew",
+      "MinScore": 40,
+      "MaxScore": 60,
+      "Severity": 1,
+      "ColorHex": "#5BC0DE",
+      "IsTerminal": false,
+      "Description": "Recent, regular payments and steady participation."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "A4D94BF9-6639-4D9A-AB47-0DD6E6B0EA35"
+    },
+    "fields": {
+      "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
+      "Label": "Secure",
+      "MinScore": 60,
+      "MaxScore": 100,
+      "Severity": 0,
+      "ColorHex": "#5CB85C",
+      "IsTerminal": false,
+      "Description": "Long-tenured, recently active, high-value members — renewal is near certain."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5039EB8D-C345-4E8B-A3A4-0D2A4FD7CDCC"
+    },
+    "fields": {
+      "BandSetID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E",
+      "Label": "Not Started",
+      "MinScore": 0,
+      "MaxScore": 0.5,
+      "Severity": 3,
+      "ColorHex": "#9E9E9E",
+      "IsTerminal": false,
+      "Description": "No courses, credentials or competition entries on record."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F767D244-68B8-4338-80D2-0E19CA8A6744"
+    },
+    "fields": {
+      "BandSetID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E",
+      "Label": "Exploring",
+      "MinScore": 0.5,
+      "MaxScore": 15,
+      "Severity": 2,
+      "ColorHex": "#F0AD4E",
+      "IsTerminal": false,
+      "Description": "Has dipped into the learning catalog — a course or two."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D3F79F98-70DE-4056-B602-6736FF9874C8"
+    },
+    "fields": {
+      "BandSetID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E",
+      "Label": "Developing",
+      "MinScore": 15,
+      "MaxScore": 30,
+      "Severity": 1,
+      "ColorHex": "#5BC0DE",
+      "IsTerminal": false,
+      "Description": "Actively building skills: completed coursework and recent enrollments."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2D262E95-7416-43AE-9E5D-7E5F52DD0616"
+    },
+    "fields": {
+      "BandSetID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E",
+      "Label": "Accomplished",
+      "MinScore": 30,
+      "MaxScore": 100,
+      "Severity": 0,
+      "ColorHex": "#5CB85C",
+      "IsTerminal": false,
+      "Description": "Credentialed, competing and still learning — faculty and judge material."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "755BB885-B80E-4929-B629-2F76234C1B25"
+    },
+    "fields": {
+      "BandSetID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847",
+      "Label": "Not Yet Involved",
+      "MinScore": 0,
+      "MaxScore": 0.5,
+      "Severity": 3,
+      "ColorHex": "#9E9E9E",
+      "IsTerminal": false,
+      "Description": "No committee service or advocacy on record — the recruiting pool."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51F77DA5-D9C1-4492-9027-2CA4D34DFD73"
+    },
+    "fields": {
+      "BandSetID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847",
+      "Label": "Contributor",
+      "MinScore": 0.5,
+      "MaxScore": 20,
+      "Severity": 2,
+      "ColorHex": "#F0AD4E",
+      "IsTerminal": false,
+      "Description": "Has answered a call to action or served once."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6275C9B1-2C7B-48BE-9FB9-643DEE8D5856"
+    },
+    "fields": {
+      "BandSetID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847",
+      "Label": "Volunteer",
+      "MinScore": 20,
+      "MaxScore": 40,
+      "Severity": 1,
+      "ColorHex": "#5BC0DE",
+      "IsTerminal": false,
+      "Description": "Serving on committees or advocating regularly."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "658561BE-4FFB-4C59-9303-A5465AE6F72D"
+    },
+    "fields": {
+      "BandSetID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847",
+      "Label": "Leader",
+      "MinScore": 40,
+      "MaxScore": 100,
+      "Severity": 0,
+      "ColorHex": "#5CB85C",
+      "IsTerminal": false,
+      "Description": "Seated, present, voting and advocating — board and chair material."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "194AE8A9-4746-40AD-BBAD-80ED8509C5A0"
+    },
+    "fields": {
+      "BandSetID": "7B38D2C1-FB54-4D80-983A-A93A45F6B2F1",
+      "Label": "At Risk",
+      "MinScore": 0,
+      "MaxScore": 20,
+      "Severity": 3,
+      "ColorHex": "#D9534F",
+      "IsTerminal": false,
+      "Description": "Few or no members, no recent joiners, or a disruptive lifecycle event — the account needs attention."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "C5A289FF-B1AF-4F8B-8659-2CAFCA09CE7D"
+    },
+    "fields": {
+      "BandSetID": "7B38D2C1-FB54-4D80-983A-A93A45F6B2F1",
+      "Label": "Watch",
+      "MinScore": 20,
+      "MaxScore": 40,
+      "Severity": 2,
+      "ColorHex": "#F0AD4E",
+      "IsTerminal": false,
+      "Description": "A modest, static footprint — growth has stalled."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "F7EFE98A-10B2-4264-8F44-A10BB6D8B79C"
+    },
+    "fields": {
+      "BandSetID": "7B38D2C1-FB54-4D80-983A-A93A45F6B2F1",
+      "Label": "Healthy",
+      "MinScore": 40,
+      "MaxScore": 55,
+      "Severity": 1,
+      "ColorHex": "#5BC0DE",
+      "IsTerminal": false,
+      "Description": "A solid member base that is still growing or competing."
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9B216BB5-1AC5-4026-9ECE-5513007764EB"
+    },
+    "fields": {
+      "BandSetID": "7B38D2C1-FB54-4D80-983A-A93A45F6B2F1",
+      "Label": "Thriving",
+      "MinScore": 55,
+      "MaxScore": 100,
+      "Severity": 0,
+      "ColorHex": "#5CB85C",
+      "IsTerminal": false,
+      "Description": "Deep membership, new joiners and medal-winning competition entries."
     }
   }
 ]

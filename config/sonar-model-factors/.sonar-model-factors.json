@@ -10,7 +10,7 @@
       "WeightMode": "Additive",
       "MissingDataPolicy": "Zero",
       "IsRequired": false,
-      "DisplayLabel": "Event participation (12m)",
+      "DisplayLabel": "Event registrations",
       "DisplayOrder": 1
     }
   },
@@ -100,7 +100,7 @@
       "WeightMode": "Additive",
       "MissingDataPolicy": "Zero",
       "IsRequired": false,
-      "DisplayLabel": "Event recency",
+      "DisplayLabel": "Events attended",
       "DisplayOrder": 7
     }
   },
@@ -147,6 +147,366 @@
       "IsRequired": false,
       "DisplayLabel": "Tenure",
       "DisplayOrder": 10
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59EE201E-6663-45E7-BBE1-E1FF9B901498"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "EED166A9-DECF-4AF7-B9B9-2CD77ADA9437",
+      "Weight": 0.3,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Last payment (recency)",
+      "DisplayOrder": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9CD445DD-6A42-4D81-9EE7-F814012EA070"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "7BC90D21-989A-4BE3-99BB-7710B616D2B2",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Payments (24m)",
+      "DisplayOrder": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D6D761FF-F2B1-4648-BB29-597CD23830AC"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "E176748A-753A-4DC1-A563-01ACE0E3AB5D",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Spend (24m)",
+      "DisplayOrder": 3
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "D34D418E-CF36-41BE-97F6-7913D9F7AA02"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "43F487E2-413A-4663-9EE7-0E808509AAB4",
+      "Weight": 0.1,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Learning (12m)",
+      "DisplayOrder": 4
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1751AA6F-014C-48B1-9B88-10F7BB8BFAA6"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "4E74DA08-F7DF-4A9C-9B15-880046F0D968",
+      "Weight": 0.1,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Event registrations",
+      "DisplayOrder": 5
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "BD2E10C8-269A-4936-9DDB-FB1BA54A7C0F"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "30988A5E-902C-4AAC-B6E9-AF306D7C36DE",
+      "Weight": 0.05,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Surveys answered (24m)",
+      "DisplayOrder": 6
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "629DA1F0-B056-46D3-830B-0A88D198C43C"
+    },
+    "fields": {
+      "ScoreModelID": "FFC7F7E0-77EE-443B-B9B4-EBE016D351EE",
+      "FactorID": "03619E2A-9781-4B64-B409-DBA6F0542B60",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Tenure",
+      "DisplayOrder": 7
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "EA29CAF5-4463-4750-8AA2-94A2C6D0E00B"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "FactorID": "1CE273D7-2880-49D3-8EC8-3FCDD705353A",
+      "Weight": 0.25,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Courses completed",
+      "DisplayOrder": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3C16A122-7128-44BE-AA88-CB9BFAA72BB4"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "FactorID": "235E18FD-83DF-4B9B-8BA5-EB24253CD1CE",
+      "Weight": 0.2,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Recent learning (12m)",
+      "DisplayOrder": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "890BDA3E-B938-4D8C-843B-C4CC92C5DB9F"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "FactorID": "7477DD00-9599-4ADD-83A6-D94FB7A9D5AE",
+      "Weight": 0.2,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Credentials earned",
+      "DisplayOrder": 3
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3598894D-EDC2-44B0-96AB-0A81DF386321"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "FactorID": "809BD50A-AE0B-478A-985C-DDBC0E8F8BC0",
+      "Weight": 0.1,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Credentials in progress",
+      "DisplayOrder": 4
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9504F823-5AAA-42DE-AB8F-14F98E45540A"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "FactorID": "73385B86-3647-4E4E-B9A1-0C906373EB1F",
+      "Weight": 0.1,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Competition entries",
+      "DisplayOrder": 5
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7FEDD9D7-E6C9-4686-8682-A4717D5C6025"
+    },
+    "fields": {
+      "ScoreModelID": "79A33ADA-E2F5-4AB1-A3BD-8AE70522DF30",
+      "FactorID": "A0877F26-1A13-401C-B06D-487BA50ADCB9",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Medals won",
+      "DisplayOrder": 6
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1C560FEB-25E1-430D-8558-25E353A5EF10"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "FactorID": "445B19F0-C543-4B8B-9055-CEAAD9F9EC64",
+      "Weight": 0.25,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Active seats",
+      "DisplayOrder": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "967B2BA3-9F3E-49CF-8BCE-5FFC0D641F5F"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "FactorID": "CB792387-CDAB-467C-A68D-C8F2BF90EF8B",
+      "Weight": 0.1,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Terms served",
+      "DisplayOrder": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "29C8869F-28BA-4D6E-A52B-9669B659C48A"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "FactorID": "E7C91325-ECBB-43EA-AAB4-1AACA4AD3427",
+      "Weight": 0.25,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Meetings attended",
+      "DisplayOrder": 3
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "43D915D2-5CFA-492E-B5D0-3CE81BE65402"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "FactorID": "F764F8B6-96C1-46C4-9473-EAB4C992B893",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Votes cast",
+      "DisplayOrder": 4
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0256BE60-5DC8-4574-9512-5155E16F4C12"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "FactorID": "69A2D0DD-94CE-4AE5-AF25-2EB53317322D",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Advocacy (24m)",
+      "DisplayOrder": 5
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "AA5C2912-CF23-459A-BDD6-C06269A3976A"
+    },
+    "fields": {
+      "ScoreModelID": "AD4FA626-F6FE-4341-9216-4CF711B9FB92",
+      "FactorID": "7FB32B0A-7F0C-4D53-A57C-35E3034FED65",
+      "Weight": 0.1,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Testimony & coalition work",
+      "DisplayOrder": 6
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "32C0BF54-6041-48F2-AB95-637459A3B40D"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "FactorID": "204560C1-4D4F-46EF-83E2-593929A19E69",
+      "Weight": 0.3,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Members on staff",
+      "DisplayOrder": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2A39D0B6-1414-4B34-B346-356BDE7C572C"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "FactorID": "27D67222-0837-4739-BEEC-C017FB4F8CB5",
+      "Weight": 0.2,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "New members (24m)",
+      "DisplayOrder": 2
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5ED3F37E-AF18-48AD-9366-9891330E5549"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "FactorID": "877A1E59-CD5F-4EAC-A0E5-642A7511C16A",
+      "Weight": 0.2,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Competition entries",
+      "DisplayOrder": 3
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4C7662E1-9DCF-42F2-97DA-AD874725F295"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "FactorID": "751D0C40-DBDE-43F4-9E1F-E8E1776534AC",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "Medals won",
+      "DisplayOrder": 4
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5A75BFF3-2828-455A-BA6E-26D33FB913DA"
+    },
+    "fields": {
+      "ScoreModelID": "53465F4F-5A77-4DEE-8BA3-C9FA17687F84",
+      "FactorID": "91C0E7AF-66AB-41B6-93DB-9942E0289661",
+      "Weight": 0.15,
+      "WeightMode": "Additive",
+      "MissingDataPolicy": "Zero",
+      "IsRequired": false,
+      "DisplayLabel": "No disruptive event",
+      "DisplayOrder": 5
     }
   }
 ]
