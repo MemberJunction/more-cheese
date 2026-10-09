@@ -62,7 +62,7 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (2413 distinct records; 2443 declared across
+-- Seed provenance (2411 distinct records; 2441 declared across
 -- 42 directories, 30 of them declared in two directories and inserted once):
 --   1425 from config/content-item-tags
 --    192 from config/content-item-chunks
@@ -77,7 +77,7 @@
 --     25 from config/conversations-owner
 --     25 from config/sonar-model-related-entities
 --     23 from config/conversation-detail-artifacts
---     22 from config/sonar-score-bands
+--     20 from config/sonar-score-bands
 --     19 from config/user-applications
 --     15 from config/resource-permissions
 --     15 from config/user-views
@@ -2300,12 +2300,10 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ_BizApps_Sonar: Score Band Sets', '2DC4783E-0CB9-4C57-A788-CF79AC13200E'),
     ('MJ_BizApps_Sonar: Score Band Sets', '7972EDEF-74DE-4EFE-B55E-3BCB52EA7847'),
     ('MJ_BizApps_Sonar: Score Band Sets', '7B38D2C1-FB54-4D80-983A-A93A45F6B2F1'),
-    ('MJ_BizApps_Sonar: Score Bands', 'AA276971-D223-4429-B5C2-F510B5C7E0EB'),
     ('MJ_BizApps_Sonar: Score Bands', '4B51BE35-94A0-5760-AAB5-F7803EC1C22B'),
     ('MJ_BizApps_Sonar: Score Bands', 'CD02E66D-C02F-5BC7-BC62-5DA43A65E10F'),
     ('MJ_BizApps_Sonar: Score Bands', 'ED587C74-F495-5AF6-8E7A-1F0D892AB80E'),
     ('MJ_BizApps_Sonar: Score Bands', '36C432E5-EE8F-57F8-8BF6-808EC147C339'),
-    ('MJ_BizApps_Sonar: Score Bands', 'A0D4BB37-3C6A-4332-8B1D-3B063720AC12'),
     ('MJ_BizApps_Sonar: Score Bands', 'E8124F13-22B4-404A-B117-815B701152A1'),
     ('MJ_BizApps_Sonar: Score Bands', '3810C4E2-D66D-49DB-97FE-BD95763B0B1D'),
     ('MJ_BizApps_Sonar: Score Bands', '46293267-0153-4484-9AD7-3FE14460C891'),

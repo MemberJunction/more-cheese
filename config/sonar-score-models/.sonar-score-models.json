@@ -13,6 +13,7 @@
       "ScoreScaleMax": 100,
       "CombineStrategy": "WeightedSum",
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
+      "PopulationFilter": "{\"logic\":\"and\",\"filters\":[{\"relatedEntity\":\"MoreCheese: Member Profiles\",\"operator\":\"exists\"}]}",
       "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "EffectiveFrom": "2025-10-24T14:00:00Z"
     }
@@ -31,6 +32,7 @@
       "ScoreScaleMax": 100,
       "CombineStrategy": "WeightedSum",
       "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
+      "PopulationFilter": "{\"logic\":\"and\",\"filters\":[{\"relatedEntity\":\"MoreCheese: Member Profiles\",\"operator\":\"exists\"}]}",
       "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "EffectiveFrom": "2025-10-24T14:00:00Z"
     }
@@ -49,6 +51,7 @@
       "ScoreScaleMax": 100,
       "CombineStrategy": "WeightedSum",
       "BandSetID": "2DC4783E-0CB9-4C57-A788-CF79AC13200E",
+      "PopulationFilter": "{\"logic\":\"and\",\"filters\":[{\"relatedEntity\":\"MoreCheese: Member Profiles\",\"operator\":\"exists\"}]}",
       "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "EffectiveFrom": "2025-10-24T14:00:00Z"
     }
@@ -67,6 +70,7 @@
       "ScoreScaleMax": 100,
       "CombineStrategy": "WeightedSum",
       "BandSetID": "7972EDEF-74DE-4EFE-B55E-3BCB52EA7847",
+      "PopulationFilter": "{\"logic\":\"and\",\"filters\":[{\"relatedEntity\":\"MoreCheese: Member Profiles\",\"operator\":\"exists\"}]}",
       "OwnerUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
       "EffectiveFrom": "2025-10-24T14:00:00Z"
     }

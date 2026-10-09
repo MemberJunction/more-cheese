@@ -1,27 +1,12 @@
 [
   {
     "primaryKey": {
-      "ID": "AA276971-D223-4429-B5C2-F510B5C7E0EB"
-    },
-    "fields": {
-      "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
-      "Label": "No Activity",
-      "MinScore": 0,
-      "MaxScore": 0.5,
-      "Severity": 4,
-      "ColorHex": "#9E9E9E",
-      "IsTerminal": false,
-      "Description": "No member activity on record at all — typically a non-member contact (prospect or company staff), not a lapsing member."
-    }
-  },
-  {
-    "primaryKey": {
       "ID": "4B51BE35-94A0-5760-AAB5-F7803EC1C22B"
     },
     "fields": {
       "BandSetID": "82A80C88-CF9D-5386-A3C5-8ACDE3025B55",
       "Label": "At Risk",
-      "MinScore": 0.5,
+      "MinScore": 0,
       "MaxScore": 10,
       "Severity": 3,
       "ColorHex": "#D9534F",
@@ -76,27 +61,12 @@
   },
   {
     "primaryKey": {
-      "ID": "A0D4BB37-3C6A-4332-8B1D-3B063720AC12"
-    },
-    "fields": {
-      "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
-      "Label": "No Activity",
-      "MinScore": 0,
-      "MaxScore": 0.5,
-      "Severity": 4,
-      "ColorHex": "#9E9E9E",
-      "IsTerminal": false,
-      "Description": "No payments, activity or membership profile on record — a non-member contact, not a renewal risk."
-    }
-  },
-  {
-    "primaryKey": {
       "ID": "E8124F13-22B4-404A-B117-815B701152A1"
     },
     "fields": {
       "BandSetID": "AB7B134D-21F4-48F9-9DBD-63588D62258E",
       "Label": "Lapsing",
-      "MinScore": 0.5,
+      "MinScore": 0,
       "MaxScore": 20,
       "Severity": 3,
       "ColorHex": "#D9534F",
