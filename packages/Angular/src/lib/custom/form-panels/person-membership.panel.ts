@@ -19,7 +19,7 @@ import { PersonMembershipComponent } from './person-membership.component';
     key: 'form-panel:People:morecheese-membership',
     metadata: {
         entity: 'MJ_BizApps_Common: People',
-        slot: 'after-fields',
+        slot: 'after-related', // its own rail tab — after-fields would fold it into Details (MJ #4311 slot default)
         sortKey: 90,
         contributionKey: 'moreCheeseMembership',
         relatedEntity: 'MoreCheese: Member Profiles',
