@@ -74,14 +74,30 @@ jobs:
             echo "::notice::No Metadata_Sync seed migrations in migrations/ — seed coverage and sync-id parity gates skipped (see #30)"
           fi
 
-      # Cadence runs UNCONDITIONALLY, unlike coverage: "zero seeds" is a state it is designed
-      # to pass on, and its part-set rule is exactly what catches a generation that lands
-      # half-committed — which is the moment the has_seeds flag above first flips to true.
+      # Both seed gates measure a RELEASE: is the one consolidated Metadata_Sync generation there,
+      # complete, and does every declared record reach a host? A feature PR carries metadata JSON
+      # only and never a seed (the build engineer generates it at release — MJ's
+      # guides/RELEASE_METADATA_MIGRATIONS_GUIDE.md), so on such a PR both gates fail by
+      # construction: edited records "owe" a seed and new records "reach no host" yet. They run
+      # on the release PR in release-prep.yml and again in publish.yml, which is where they
+      # guard. Here they run only when the PR itself adds or changes a Metadata_Sync migration,
+      # where a half-committed part set is a real risk worth catching early.
+      - name: Detect whether this PR touches a Metadata_Sync seed
+        id: pr_seed
+        run: |
+          if git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- 'migrations/*Metadata_Sync*.sql' | grep -q .; then
+            echo "touched=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "touched=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::This PR adds or changes no Metadata_Sync seed — seed cadence and coverage are release gates (release-prep.yml, publish.yml) and are skipped here."
+          fi
+
       - name: Release seed cadence (one generation, complete part set)
+        if: steps.pr_seed.outputs.touched == 'true'
         run: npm run check:seed-cadence
 
       - name: Release seed coverage (every declared record reaches a host)
-        if: steps.seed_check.outputs.has_seeds == 'true'
+        if: steps.seed_check.outputs.has_seeds == 'true' && steps.pr_seed.outputs.touched == 'true'
         run: npm run check:release-seed
 
       - name: Check metadata and config ownership manifest
