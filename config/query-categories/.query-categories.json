@@ -642,6 +642,19 @@
   },
   {
     "fields": {
+      "Name": "Organizations",
+      "ParentID": "F4EB3523-BE34-4AA9-9ABE-006B878A98A8",
+      "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "DefaultCacheEnabled": false,
+      "CacheInheritanceEnabled": true,
+      "SkipEmbeddings": false
+    },
+    "primaryKey": {
+      "ID": "7508AAF3-6BAF-42EE-A83F-2DEB5EA57B2E"
+    }
+  },
+  {
+    "fields": {
       "Name": "Members",
       "ParentID": "F4EB3523-BE34-4AA9-9ABE-006B878A98A8",
       "UserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",

@@ -62,18 +62,18 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (2417 distinct records; 2447 declared across
+-- Seed provenance (2420 distinct records; 2450 declared across
 -- 42 directories, 30 of them declared in two directories and inserted once):
 --   1425 from config/content-item-tags
 --    192 from config/content-item-chunks
 --    192 from config/content-items
 --    175 from config/tags
 --     75 from config/conversations
---     47 from config/query-categories
+--     48 from config/query-categories
 --     46 from config/artifacts
+--     34 from config/queries
 --     34 from config/sonar-factors
 --     34 from config/sonar-model-factors
---     32 from config/queries
 --     25 from config/conversations-owner
 --     25 from config/sonar-model-related-entities
 --     23 from config/conversation-detail-artifacts
@@ -2119,6 +2119,7 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Queries', '4D8B9190-6DAC-4E1F-BECD-CCE0272BCFE5'),
     ('MJ: Queries', '69125C05-7700-464E-9C3E-5AB0B3CE3C26'),
     ('MJ: Queries', '6A1D129B-FD58-4B37-A163-6DE69930CF73'),
+    ('MJ: Queries', '6F972177-E31A-4929-9C20-3D786AE347AE'),
     ('MJ: Queries', '70DC5BF9-4382-4FBF-8170-BDFB8FB399A4'),
     ('MJ: Queries', '81596FC4-2758-4531-8F5B-9F83CDE9E887'),
     ('MJ: Queries', '88842A4E-84F6-4F91-905F-723E3B1DB8F0'),
@@ -2127,11 +2128,12 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Queries', '96129FA0-3DC9-4329-A5A7-ACE3DD6C4025'),
     ('MJ: Queries', '97AA052D-4305-43EA-A6CE-97A23C7073E7'),
     ('MJ: Queries', 'A438A9E2-55F2-4C19-9D5C-48A8A1BA1286'),
-    ('MJ: Queries', 'A94EC844-1672-437A-852B-26763C3E5E2B'),
-    ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283'),
-    ('MJ: Queries', 'C3CE64FE-EEAB-4B30-A647-8F89CBE83209');
+    ('MJ: Queries', 'A90A9F3A-BD11-4574-BD1F-701E2F6E0E51'),
+    ('MJ: Queries', 'A94EC844-1672-437A-852B-26763C3E5E2B');
 
 INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283'),
+    ('MJ: Queries', 'C3CE64FE-EEAB-4B30-A647-8F89CBE83209'),
     ('MJ: Queries', 'CE78AD75-1CE9-464D-A492-E047064A0317'),
     ('MJ: Queries', 'E30B4FC9-CC3F-4F35-9D60-D22D01C98C23'),
     ('MJ: Queries', 'E80E748A-E041-486B-9CCF-4AD0FEEB672B'),
@@ -2187,6 +2189,7 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Query Categories', '5478D31A-2876-4CEA-A4A9-511F55F49A3A'),
     ('MJ: Query Categories', 'F4EB3523-BE34-4AA9-9ABE-006B878A98A8'),
     ('MJ: Query Categories', '1D892D52-0639-45EE-9344-017BC7F60DE7'),
+    ('MJ: Query Categories', '7508AAF3-6BAF-42EE-A83F-2DEB5EA57B2E'),
     ('MJ: Query Categories', 'ACB740BE-E100-4ED6-89E2-C20D74E63750'),
     ('MJ: Resource Permissions', 'D787AF2F-419D-50AF-886F-BAD1E64576B7'),
     ('MJ: Resource Permissions', '553E2D08-FFEB-5B0A-8340-9BF7D9EA97AC'),
