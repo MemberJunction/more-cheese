@@ -654,7 +654,7 @@ SET
 SET
   @Description_8999daa9fa65 = N'Placeholder for the More Cheese Dropbox storage account. The secret is NEVER in config: after install, open this credential in Explorer and enter your own Dropbox app key, secret and refresh token, then set it Active.'
 SET
-  @Values_8999daa9fa65 = N'{}'
+  @Values_8999daa9fa65 = N'$ENC$$85B814C8-A01B-4AE3-A252-DC9D54C914C7$AES-256-GCM$Temlei5KP70HXPIB$0MU=$oQfpDZfqHnAdRClmZnjdUA=='
 SET
   @IsDefault_8999daa9fa65 = 0
 SET

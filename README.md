@@ -189,16 +189,15 @@ with MemberJunction's Knowledge Hub for staff search and discovery. After instal
 2. **Navigate to Credentials** (via the main menu or Admin → Credentials).
 3. **Locate "Dropbox OAuth"** in the credential list (it will appear inactive with empty configuration).
 4. **Click to edit** and fill in:
-   - **App Key**: Your Dropbox app's Client ID (from [Dropbox App Console](https://www.dropbox.com/developers/apps))
-   - **App Secret**: Your Dropbox app's Client Secret
-   - **Refresh Token**: An offline refresh token for the Dropbox account/team (obtain via OAuth 2.0 token exchange with `token_access_type=offline`)
-   - **Team Member ID** (optional): For Business team apps, specify the team member to access
+   - **App key**: your Dropbox app's key (client id), from the [Dropbox App Console](https://www.dropbox.com/developers/apps)
+   - **App secret**: your Dropbox app's secret (client secret)
+   - **Refresh token**: an offline refresh token for the account or team member, obtained with `token_access_type=offline`
+   - **Team member id** (optional): for Business team apps, the member to act as
 5. **Save and activate** the credential (toggle "Is Active" to on).
-6. **Verify Knowledge Hub** can now ingest from the Dropbox folder (typically `vault/internal/`).
+6. **Run the "More Cheese vault — internal (Dropbox)" content source** to confirm Knowledge Hub can read the `vault/internal` folder.
 
-For local development or demo installs without a live Dropbox account, the credential can remain
-inactive — Knowledge Hub will skip Dropbox ingestion and continue to serve the static corpus
-committed to the repository.
+Until then the credential stays inactive, which is fine for local development and demos without a
+Dropbox account.
 
 ---
 
