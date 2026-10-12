@@ -23,7 +23,7 @@ import path from 'node:path';
 import { readFileSync, existsSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { generateTeardown, readConfigSeed, readBaselineCoreRows, UNDROPPED_SCHEMAS } from './generate-teardown.mjs';
+import { generateTeardown, readConfigSeed, readAppCoreRows, readInstallHookRows, readBaselineCoreRows, UNDROPPED_SCHEMAS } from './generate-teardown.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(HERE, '..');
@@ -57,7 +57,7 @@ test('the teardown is checked in', () => {
  * impossible.
  */
 test('the checked-in teardown matches a fresh generation exactly', () => {
-    const configRows = readConfigSeed(REPO_ROOT);
+    const configRows = readAppCoreRows(REPO_ROOT);
     const { baseline, entities, applicationId } = readBaselineCoreRows(REPO_ROOT);
     const fresh = generateTeardown({ configRows, baseline, entities, applicationId });
     assert.equal(
@@ -390,4 +390,20 @@ test('the generator emits each (entity, id) pair at most once', () => {
     }
     assert.equal(new Set(emitted).size, emitted.length, 'the generator emitted a duplicate seed key');
     assert.equal(emitted.length, new Set(keys).size, `emitted ${emitted.length} rows for ${new Set(keys).size} distinct declarations (${dupes.length} shared across directories)`);
+});
+
+/**
+ * The demo Dropbox rows stopped being seeds in v1.4.x (issue #110) and are created by the
+ * post-install hook instead, with the same fixed IDs. They are still this app's rows: uninstall must
+ * still retire every one of them.
+ */
+test('the rows the post-install hook creates are retired too', () => {
+    const hookRows = readInstallHookRows(REPO_ROOT);
+    assert.deepEqual(
+        hookRows.map((r) => r.entity).sort(),
+        ['MJ: Credentials', 'MJ: File Storage Account Permissions', 'MJ: File Storage Account Permissions', 'MJ: File Storage Accounts'],
+    );
+    for (const row of hookRows) {
+        assert.ok(sql().includes(row.id), `${row.entity} ${row.id} (from ${row.why}) is not retired by the teardown`);
+    }
 });

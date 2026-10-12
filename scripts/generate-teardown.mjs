@@ -197,6 +197,41 @@ export function readConfigSeed(repoRoot = REPO_ROOT) {
     return rows;
 }
 
+/** The post-install hook that creates core rows outside `config/` (issue #110). */
+export const INSTALL_HOOK_SOURCE = 'packages/Server/src/setup/dropbox-setup.ts';
+
+/**
+ * Core rows the post-install hook creates on an install, read out of the hook's source.
+ *
+ * The demo Dropbox credential, storage account and its permissions stopped being seeds in v1.4.x:
+ * the hook creates them on the install, with the same fixed IDs the seeds used. They are still
+ * this app's rows, so the teardown must still retire them. Reading the IDs from the hook keeps the
+ * delete list matching what is inserted, the same property the seed and baseline readers give.
+ * A missing ID is a hard error: an unreadable one would be stranded on every uninstall.
+ */
+export function readInstallHookRows(repoRoot = REPO_ROOT) {
+    const source = readFileSync(path.join(repoRoot, INSTALL_HOOK_SOURCE), 'utf8');
+    const guid = "'([0-9a-fA-F-]{36})'";
+    const one = (name, entity) => {
+        const m = new RegExp(`export const ${name} = ${guid}`).exec(source);
+        if (m === null) throw new Error(`${INSTALL_HOOK_SOURCE}: no "export const ${name} = '<guid>'" found.`);
+        return { entity, id: m[1].toUpperCase(), why: INSTALL_HOOK_SOURCE };
+    };
+    const block = /const PERMISSION_IDS[^=]*= \{([\s\S]*?)\};/.exec(source);
+    const permissions = block === null ? [] : [...block[1].matchAll(new RegExp(`\\w+: ${guid}`, 'g'))];
+    if (permissions.length === 0) throw new Error(`${INSTALL_HOOK_SOURCE}: no PERMISSION_IDS entries found.`);
+    return [
+        one('DROPBOX_CREDENTIAL_ID', 'MJ: Credentials'),
+        one('DROPBOX_STORAGE_ACCOUNT_ID', 'MJ: File Storage Accounts'),
+        ...permissions.map((m) => ({ entity: 'MJ: File Storage Account Permissions', id: m[1].toUpperCase(), why: INSTALL_HOOK_SOURCE })),
+    ];
+}
+
+/** Every core row the app puts on an install: the config seed plus what the install hook creates. */
+export function readAppCoreRows(repoRoot = REPO_ROOT) {
+    return [...readConfigSeed(repoRoot), ...readInstallHookRows(repoRoot)];
+}
+
 /**
  * The `__mj.Entity` ids and the `__mj.Application` id the baseline creates.
  *
@@ -791,7 +826,7 @@ function main(argv) {
     };
     const outPath = arg('--out') ?? path.join(REPO_ROOT, 'migrations-teardown', 'V001__Retire_MoreCheese_Core_Rows.sql');
 
-    const configRows = readConfigSeed(REPO_ROOT);
+    const configRows = readAppCoreRows(REPO_ROOT);
     const { baseline, entities, applicationId } = readBaselineCoreRows(REPO_ROOT);
     const sql = generateTeardown({ configRows, baseline, entities, applicationId });
     // Same key the emitted INSERT is distinct on, so the summary cannot drift from the file.

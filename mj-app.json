@@ -95,6 +95,10 @@
     "visibility": "public",
     "sourceDirectory": "packages"
   },
+  "hooks": {
+    "postInstallModule": "@mj-biz-apps/more-cheese-server/dist/setup/dropbox-setup.js",
+    "postUpgradeModule": "@mj-biz-apps/more-cheese-server/dist/setup/dropbox-setup.js"
+  },
   "categories": [
     "Demo"
   ],

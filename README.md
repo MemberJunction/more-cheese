@@ -126,6 +126,36 @@ already applied is a no-op.
 
 ---
 
+## 🔑 Connecting the demo Dropbox
+
+The internal half of the demo corpus (memos, decks, spreadsheets and email threads under
+`vault/internal`) lives in a read-only Dropbox team space run by the More Cheese team. The app
+works without it; Knowledge Hub just has no Dropbox source until it is connected. The key is
+never in this repo: get the read-only app key, app secret and refresh token from the More Cheese
+team.
+
+**At install or upgrade.** `mj app install` runs a post-install hook that offers to connect it.
+In an interactive install it asks for the three values (the secret and token are masked). In a
+non-interactive install, set these before installing or upgrading:
+
+```bash
+export MORECHEESE_DROPBOX_APP_KEY=...
+export MORECHEESE_DROPBOX_APP_SECRET=...
+export MORECHEESE_DROPBOX_REFRESH_TOKEN=...
+export MORECHEESE_DROPBOX_TEAM_MEMBER_ID=...   # optional, Dropbox Business team apps only
+```
+
+The hook saves them through MemberJunction, so they are encrypted with your install's own key.
+It creates the "Dropbox OAuth" credential, the "More Cheese Dropbox" storage account and its
+read permissions for the UI and Developer roles.
+
+**After install.** In Explorer:
+1. **Admin → Credentials → New**: type **Dropbox OAuth**, name **Dropbox OAuth**, fill in the app
+   key, app secret and refresh token, and set it **Active**.
+2. **Admin → File Storage Accounts → New**: name **More Cheese Dropbox**, provider **Dropbox**,
+   credential **Dropbox OAuth**.
+3. Give the roles that should search it read access under the account's permissions.
+
 ## 📦 Monorepo Package Inventory
 
 | Package | Scope | Description |

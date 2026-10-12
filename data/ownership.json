@@ -401,16 +401,6 @@
       "classification": "config",
       "reason": "Second-pass owner flip for the staged conversations (turns are owner-gated; push runs as System)"
     },
-    "file-storage-accounts": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Dropbox vault as a File Storage Account (credential values are NOT in config; the credential named here must be created in Explorer first)"
-    },
-    "file-storage-account-permissions": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Role access to the Dropbox storage account"
-    },
     "dashboard-categories": {
       "tier": "config",
       "classification": "config",
@@ -445,11 +435,6 @@
       "tier": "config",
       "classification": "config",
       "reason": "Dropbox OAuth credential type so the storage account can name a credential; the credential VALUE is never in config"
-    },
-    "credentials": {
-      "tier": "config",
-      "classification": "config",
-      "reason": "Placeholder \"Dropbox OAuth\" credential (Values = {}, inactive) so the File Storage Account can resolve its CredentialID on a fresh install; the real secret is entered in Explorer, never in config"
     },
     "user-settings": {
       "tier": "config",
