@@ -67,7 +67,7 @@ for (const { root, file } of files) {
               dirKeys.add(pk);
             }
             if (item?.fields) {
-              records.push({ dir, primaryKey: item.primaryKey, fields: item.fields });
+              records.push({ dir, primaryKey: item.primaryKey, fields: item.fields, extension: item.extension });
             }
           }
         }
@@ -562,6 +562,44 @@ for (const id of ANNUAL_MEMBERSHIP_PRICE_IDS) {
 console.log(
   `✓ All 4 annual membership prices explicitly declare "RecurrenceMonths": null (load-bearing sync guard).`
 );
+
+// 9c. Hero Event Attendance (moved from data/ruleset/heroes.json, #109)
+// HERO-ICF-001 (Elena Rodriguez) "attends annual conferences": at least two event order lines marked
+// Attended. This was a Loom feature pin on EventRegistration; when Events retired to Event Order Lines
+// (#101/#109) the pin moved here, because Loom's build cannot synthesize an isA child row for a hero pin
+// (its order-line parent has no hero linkage), so the pin broke the domain smoke build.
+console.log('\n--- Hero Event Attendance Audit (HERO-ICF-001) ---');
+{
+  const HERO_EMAIL = 'elena.rodriguez.000101@lakemail.example';
+  const MIN_ATTENDED = 2;
+  // The real world holds ~3,000 people; the closure spec runs this script over small fixture trees with
+  // no heroes, where the audit does not apply.
+  const REAL_WORLD_MIN_PEOPLE = 1000;
+  const peopleCount = records.filter((r) => r.dir === 'people').length;
+  const hero = records.find((r) => r.dir === 'people' && String(r.fields?.Email || '').toLowerCase() === HERO_EMAIL);
+  if (!hero) {
+    if (peopleCount >= REAL_WORLD_MIN_PEOPLE) {
+      console.error(`\n❌ HERO ATTENDANCE AUDIT FAILED: hero ${HERO_EMAIL} not found in generated/people.`);
+      process.exit(1);
+    }
+    console.log('  (fixture tree without heroes: hero attendance audit not applicable)');
+  } else {
+    const heroID = String(hero.primaryKey?.ID).toUpperCase();
+    const attended = orderLines.filter(
+      (ol) =>
+        ol.extension?.entity === 'MJ_BizApps_Orders: Event Order Lines' &&
+        String(ol.extension?.fields?.PersonID || '').toUpperCase() === heroID &&
+        ol.extension?.fields?.AttendanceStatus === 'Attended'
+    ).length;
+    if (attended < MIN_ATTENDED) {
+      console.error(
+        `\n❌ HERO ATTENDANCE AUDIT FAILED: ${HERO_EMAIL} has ${attended} attended event order line(s); needs at least ${MIN_ATTENDED}.`
+      );
+      process.exit(1);
+    }
+    console.log(`✓ HERO-ICF-001 has ${attended} attended event order lines (needs ≥ ${MIN_ATTENDED}).`);
+  }
+}
 
 // 10. Base Branch Record Count & Primary Key ID Stability Audit
 console.log('\n--- Base Branch Record Count & ID Stability Audit ---');

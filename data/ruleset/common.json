@@ -3,35 +3,33 @@
   "domain": "more-cheese",
   "catalog": {},
   "params": {
-    "annualConferenceTarget": 0.66,
+    "annualConferenceTarget": 0.81,
     "ccpEnrollmentTarget": 0.65,
     "advocacyParticipationTarget": 0.34,
     "volume_Organization": 50,
     "volume_Person": 300,
-    "volume_EventRegistration": 150,
     "volume_CourseEnrollment": 150,
     "volume_AdvocacyAction": 150,
     "intake_Organization": 5,
     "intake_Person": 20,
-    "intake_EventRegistration": 10,
     "intake_CourseEnrollment": 10,
     "intake_AdvocacyAction": 10
   },
   "effects": {
     "factor-annual-conference-attendance": {
       "id": "factor-annual-conference-attendance",
-      "effect": "EventRegistration",
-      "target": 0.66,
+      "effect": "EventOrderLine",
+      "target": 0.81,
       "tolerance": 0.05,
       "evidence": {
-        "source": "ICF Flagship Event & Conference Registrations (16,875 records 2019-2026)",
+        "source": "ICF paid event registrations as Event Order Lines (7,714 lines 2019-2026; AttendanceStatus carried from the retired Event Registrations)",
         "confidence": "high",
-        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04."
+        "notes": "Calibrated to the committed baseline per owner ruling 2026-09-04; recalibrated 2026-10-12 when Event Registrations retired to Event Order Lines (paid registrations only, so the attended share rose from 0.66 to 0.81)."
       },
       "outcome": {
         "from": "self",
         "where": {
-          "Attended": true
+          "AttendanceStatus": "Attended"
         }
       },
       "arrows": {

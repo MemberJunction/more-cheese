@@ -37,18 +37,6 @@
           "field": "Status",
           "op": "eq",
           "value": "Active"
-        },
-        {
-          "kind": "feature",
-          "feature": {
-            "from": "EventRegistration",
-            "where": {
-              "Attended": true
-            },
-            "aggregation": "count"
-          },
-          "op": "gte",
-          "value": 2
         }
       ],
       "description": "Elena Rodriguez: Active Flagship Leader, top-decile engagement, attends annual conferences, chairs Standards Committee"
