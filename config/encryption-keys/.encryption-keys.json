@@ -1,0 +1,24 @@
+[
+  {
+    "_comments": [
+      "The More Cheese shared key. Every credential this app ships (config/credentials) is encrypted with it, never with an install's own key, so the same release works on every install.",
+      "The key material is NOT in this repo. It is meant to be shared with anyone installing More Cheese, handed out through the More Cheese portal; an install puts it in MJAPI's environment as MORECHEESE_SHARED_KEY.",
+      "Without it the app installs and runs; the shipped credentials just stay encrypted (MJ logs one warning naming MORECHEESE_SHARED_KEY), and the features that need them (the demo Dropbox, the Skip dashboards' components) are unavailable.",
+      "Only read-only, demo-scoped secrets belong under this key: everyone who has it can read them all. To add or rotate one, see scripts/seal-credential.mjs and \"Shared demo credentials\" in the README."
+    ],
+    "fields": {
+      "Name": "More Cheese Shared Key",
+      "Description": "Encrypts the read-only demo credentials More Cheese ships (Dropbox, Skip component registry). The key is shared with everyone installing More Cheese through the More Cheese portal; set it as MORECHEESE_SHARED_KEY in MJAPI's environment.",
+      "EncryptionKeySourceID": "@lookup:MJ: Encryption Key Sources.Name=Environment Variable",
+      "EncryptionAlgorithmID": "@lookup:MJ: Encryption Algorithms.Name=AES-256-GCM",
+      "KeyLookupValue": "MORECHEESE_SHARED_KEY",
+      "KeyVersion": "1",
+      "Marker": "$ENC$",
+      "IsActive": true,
+      "Status": "Active"
+    },
+    "primaryKey": {
+      "ID": "22FFADC4-C913-4877-9598-2EC8DAE62CEB"
+    }
+  }
+]

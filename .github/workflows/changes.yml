@@ -115,6 +115,9 @@ jobs:
       - name: Check metadata and config ownership manifest
         run: npm run check:ownership
 
+      - name: Shipped credentials are sealed with the More Cheese shared key
+        run: npm run check:shared-credentials
+
       - name: Checkout Loom Contracts
         uses: actions/checkout@v4
         with:

@@ -446,10 +446,15 @@
       "classification": "config",
       "reason": "Dropbox OAuth credential type so the storage account can name a credential; the credential VALUE is never in config"
     },
+    "encryption-keys": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "The More Cheese Shared Key record (environment variable MORECHEESE_SHARED_KEY). The key material is never in config: it is shared with everyone installing More Cheese through the portal, and every shipped credential is sealed with it"
+    },
     "credentials": {
       "tier": "config",
       "classification": "config",
-      "reason": "Placeholder \"Dropbox OAuth\" credential (Values = {}, inactive) so the File Storage Account can resolve its CredentialID on a fresh install; the real secret is entered in Explorer, never in config"
+      "reason": "Read-only demo credentials (Dropbox, Skip component registry), Values sealed with the More Cheese Shared Key so any install given that key can use them; scripts/seal-credential.mjs check gates that nothing ships unsealed"
     },
     "user-settings": {
       "tier": "config",

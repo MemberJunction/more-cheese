@@ -126,6 +126,38 @@ already applied is a no-op.
 
 ---
 
+## 🔑 Shared demo credentials
+
+More Cheese ships a few **read-only, demo-only** credentials so a fresh install works end to end:
+
+| Credential | What it unlocks |
+|---|---|
+| `Dropbox OAuth` | The demo Dropbox (`vault/internal`) as a Knowledge Hub source |
+| `Component Registry: Skip` | The Skip components the pinned dashboards are built from |
+
+They are in `config/credentials`, **encrypted with the More Cheese Shared Key** (`config/encryption-keys`), never in plain text and never with any one install's own key.
+
+**The key is meant to be shared with everyone who installs More Cheese.** Get it from the More Cheese portal and put it in MJAPI's environment (`packages/MJAPI/.env`), then restart MJAPI:
+
+```bash
+MORECHEESE_SHARED_KEY=<the key from the portal>
+```
+
+Without it More Cheese still installs and runs. The shipped credentials stay encrypted (MJAPI logs one warning naming `MORECHEESE_SHARED_KEY`), so Knowledge Hub has no Dropbox source and the Skip dashboards can't load their components. An install that has its own Skip component registry key (`REGISTRY_API_KEY_SKIP`, or a Skip API key the Skip client uses for the registry) uses that instead.
+
+### For maintainers: adding or rotating a shared credential
+
+Everyone with the key can read every credential under it, so **only read-only, demo-scoped secrets** belong here.
+
+```bash
+node scripts/seal-credential.mjs new-key        # once: a new key, which then goes to the portal
+# values file: the credential type's fields, e.g. {"apiKey":"…"}. Keep it outside the repo.
+MORECHEESE_SHARED_KEY=<key> npm run seal:credential -- --name "Component Registry: Skip" --values-file ~/skip.json
+MORECHEESE_SHARED_KEY=<key> node scripts/seal-credential.mjs verify   # lists field names, never values
+```
+
+`npm run check:shared-credentials` (run in CI) fails while any shipped credential is not sealed with the shared key. A plaintext value would otherwise be encrypted at release with the release machine's own key, which no install has (#110). Rotating the key means sealing every credential again with the new one, releasing, and updating the portal.
+
 ## 📦 Monorepo Package Inventory
 
 | Package | Scope | Description |
