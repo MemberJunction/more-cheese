@@ -403,7 +403,7 @@ if (!loomCmd) {
  *
  * Reason:
  *   The volume multipliers defined in data/ruleset/eras.json (e.g. 2020 pandemic shock 0.15x
- *   on EventRegistration, 1.85x on CourseEnrollment; 2021 virtual pivot 0.45x / 1.5x; 2022-2024
+ *   on EventOrderLine (formerly EventRegistration), 1.85x on CourseEnrollment; 2021 virtual pivot 0.45x / 1.5x; 2022-2024
  *   artisan boom 1.4x / 1.25x) reflect intended historical macroeconomic simulation. However,
  *   the historical generator pipeline in more-cheese does not currently synthesize cycle-dependent
  *   volume variations when emitting historical transactions. Volume grows smoothly across 2019-2025.
@@ -412,17 +412,21 @@ if (!loomCmd) {
  *
  * Strict Waiver Invariants:
  *   1. Enumerates exact literal gate names including cycle.
- *   2. Asserts the count: fails if any failing gate is not on this list, or if count !== 7.
+ *   2. Asserts the count: fails if any failing gate is not on this list, or if count !== EXPECTED_WAIVED_COUNT (8).
  *   3. Fails if any waived gate PASSES (stale waiver detection).
  *   4. Prints the waived list, reason, and tracking issue on every run.
  */
 const WAIVER_DATE = '2026-09-10';
 const WAIVER_TRACKING_ISSUE = 'https://github.com/MemberJunction/more-cheese/issues/39';
 const WAIVED_ERA_VOLUME_GATES = Object.freeze([
-  'Realized Era Volume: era-pandemic-shock-2020 [EventRegistration in 2020]',
-  'Realized Era Volume: era-virtual-pivot-2021 [EventRegistration in 2021]',
-  'Realized Era Volume: era-artisan-boom-2022-2024 [EventRegistration in 2023]',
-  'Realized Era Volume: era-artisan-boom-2022-2024 [EventRegistration in 2024]',
+  // EventOrderLine (was EventRegistration until the Events retirement, #101/#109): its order date lives on
+  // the parent Order, and Loom does not resolve an era cycle through an isA parent, so all five eras
+  // report n=0 rather than a volume. Same tracking issue (#39).
+  'Realized Era Volume: era-pandemic-shock-2020 [EventOrderLine in 2020]',
+  'Realized Era Volume: era-virtual-pivot-2021 [EventOrderLine in 2021]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [EventOrderLine in 2022]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [EventOrderLine in 2023]',
+  'Realized Era Volume: era-artisan-boom-2022-2024 [EventOrderLine in 2024]',
   'Realized Era Volume: era-artisan-boom-2022-2024 [CourseEnrollment in 2022]',
   'Realized Era Volume: era-artisan-boom-2022-2024 [CourseEnrollment in 2023]',
   'Realized Era Volume: era-artisan-boom-2022-2024 [CourseEnrollment in 2024]',
@@ -507,7 +511,9 @@ if (passedGates.size !== summaryPassed || failedGates.length !== summaryFailed) 
 }
 
 // Floor guard: ensure no gates silently stop being emitted (shrinkage detection)
-const MIN_EXPECTED_TOTAL_GATES = 191;
+// 186 since the Events retirement (#101/#109): Event and EventRegistration took their schema, PK and FK gates
+// with them; EventOrderLine's are counted in their place.
+const MIN_EXPECTED_TOTAL_GATES = 186;
 if (summaryTotal < MIN_EXPECTED_TOTAL_GATES) {
   fail(
     `Gate disappearance detected! Total gates evaluated (${summaryTotal}) is below the minimum floor of ${MIN_EXPECTED_TOTAL_GATES}.\n` +
@@ -534,7 +540,7 @@ if (unexpectedFailures.length > 0) {
   );
 }
 
-// Invariant 2b: Assert the count. Must be EXACTLY EXPECTED_WAIVED_COUNT (7)
+// Invariant 2b: Assert the count. Must be EXACTLY EXPECTED_WAIVED_COUNT (8)
 if (failedGates.length !== EXPECTED_WAIVED_COUNT) {
   fail(
     `Loom Validator failed gate count mismatch: expected exactly ${EXPECTED_WAIVED_COUNT} waived failures, but received ${failedGates.length}.\n` +
