@@ -19,11 +19,11 @@
     "class-validator": "^0.14.3"
   },
   "peerDependencies": {
-    "@memberjunction/ai-betty-bot": "^6.1.2",
-    "@memberjunction/core": "^6.1.2",
-    "@memberjunction/global": "^6.1.2",
-    "@memberjunction/server": "^6.1.2",
-    "@memberjunction/sqlserver-dataprovider": "^6.1.2"
+    "@memberjunction/ai-betty-bot": "^6.2.0",
+    "@memberjunction/core": "^6.2.0",
+    "@memberjunction/global": "^6.2.0",
+    "@memberjunction/server": "^6.2.0",
+    "@memberjunction/sqlserver-dataprovider": "^6.2.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
