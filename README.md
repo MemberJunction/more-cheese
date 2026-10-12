@@ -180,6 +180,25 @@ MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
 > [Monthly cadence](#-monthly-cadence--loom-accumulates-it-does-not-replace). Because `mj sync push`
 > matches on primary key and never deletes, pushing a new cycle tops up an existing database.
 
+### Configuring Dropbox Access for Knowledge Hub
+
+MoreCheese integrates internal staff documents (memos, spreadsheets, email threads) stored in Dropbox
+with MemberJunction's Knowledge Hub for staff search and discovery. After installation, the Dropbox credential must be configured before Knowledge Hub can ingest the corpus:
+
+1. **Open MemberJunction Explorer** in your browser.
+2. **Navigate to Credentials** (via the main menu or Admin → Credentials).
+3. **Locate "Dropbox OAuth"** in the credential list (it will appear inactive with empty configuration).
+4. **Click to edit** and fill in:
+   - **App Key**: Your Dropbox app's Client ID (from [Dropbox App Console](https://www.dropbox.com/developers/apps))
+   - **App Secret**: Your Dropbox app's Client Secret
+   - **Refresh Token**: An offline refresh token for the Dropbox account/team (obtain via OAuth 2.0 token exchange with `token_access_type=offline`)
+   - **Team Member ID** (optional): For Business team apps, specify the team member to access
+5. **Save and activate** the credential (toggle "Is Active" to on).
+6. **Verify Knowledge Hub** can now ingest from the Dropbox folder (typically `vault/internal/`).
+
+For local development or demo installs without a live Dropbox account, the credential can remain
+inactive — Knowledge Hub will skip Dropbox ingestion and continue to serve the static corpus
+committed to the repository.
 
 ---
 
