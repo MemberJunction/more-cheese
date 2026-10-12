@@ -1,4 +1,4 @@
-import { RunView, type IMetadataProvider, type RunViewResult } from '@memberjunction/core';
+import { RunQuery, RunView, type IMetadataProvider, type IRunQueryProvider, type RunViewResult } from '@memberjunction/core';
 
 /** One `MoreCheese: Member Profiles` row as returned by a simple RunView. */
 export interface MemberProfileRow {
@@ -68,8 +68,33 @@ export interface PredictionHistoryItem {
     rawPayload: string | null;
 }
 
+/**
+ * One row of the "Membership Status" stored query (Skip/Memberships/Roster). That query is the
+ * single definition of Current / Lapsed / Never Purchased; the panel only displays it.
+ */
+export interface MembershipStatusRow {
+    MembershipStatus: 'Current' | 'Lapsed' | 'Never Purchased';
+    MembershipTier: string | null;
+    MembershipExpiresOn: string | null;
+    LastMembershipPurchaseDate: string | null;
+    MembershipPurchaseCount: number;
+}
+
+/** Membership status as shown on the member page. */
+export interface MembershipStatusInfo {
+    Status: MembershipStatusRow['MembershipStatus'];
+    PillClass: 'active' | 'risk-high' | 'ended';
+    Detail: string;
+    Tooltip: string;
+}
+
+/** Name of the stored query the panel reads membership status from (filtered with its optional PersonID parameter). */
+export const MEMBERSHIP_STATUS_QUERY = 'Membership Status';
+
 export interface PersonMembership {
     Profile: MemberProfileRow | null;
+    /** From the "Membership Status" stored query; null when the query is missing or failed. */
+    MembershipStatus: MembershipStatusInfo | null;
     Prediction: PersonPredictionInfo | null;
     RenewalPrediction?: PersonPredictionInfo | null;
     LtvPrediction?: PersonPredictionInfo | null;
@@ -91,6 +116,69 @@ function ResultsOrThrow<T>(result: RunViewResult<T>, what: string): T[] {
         throw new Error(result.ErrorMessage || `Could not load ${what}.`);
     }
     return result.Results ?? [];
+}
+
+/** A date-only value (stored as UTC midnight) as "Oct 7, 2027". */
+function FormatDateOnly(dateStr: string | null): string {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+
+/** Turns a "Membership Status" query row into what the member page shows; null when there is no row. */
+export function FormatMembershipStatus(row: MembershipStatusRow | null): MembershipStatusInfo | null {
+    if (!row) return null;
+    const count = row.MembershipPurchaseCount ?? 0;
+    const purchases = `${count} membership purchase${count === 1 ? '' : 's'}`;
+    const tier = row.MembershipTier ?? 'Membership';
+    switch (row.MembershipStatus) {
+        case 'Current':
+            return {
+                Status: 'Current',
+                PillClass: 'active',
+                Detail: `${tier} · expires ${FormatDateOnly(row.MembershipExpiresOn)}`,
+                Tooltip: `Last membership purchase ${FormatDateOnly(row.LastMembershipPurchaseDate)} · ${purchases}`,
+            };
+        case 'Lapsed':
+            return {
+                Status: 'Lapsed',
+                PillClass: 'risk-high',
+                Detail: `${tier} · lapsed ${FormatDateOnly(row.MembershipExpiresOn)}`,
+                Tooltip: `Last membership purchase ${FormatDateOnly(row.LastMembershipPurchaseDate)} · ${purchases}`,
+            };
+        default:
+            return {
+                Status: 'Never Purchased',
+                PillClass: 'ended',
+                Detail: 'No membership purchase on file',
+                Tooltip: 'No qualifying annual membership purchase',
+            };
+    }
+}
+
+function IsRunQueryProvider(provider: IMetadataProvider): provider is IMetadataProvider & IRunQueryProvider {
+    return typeof (provider as Partial<IRunQueryProvider>).RunQuery === 'function';
+}
+
+/**
+ * Runs the "Membership Status" stored query for one person. Never throws: a missing query or a failed
+ * run returns null so the rest of the panel still renders.
+ */
+async function LoadMembershipStatus(personID: string, provider?: IMetadataProvider): Promise<MembershipStatusInfo | null> {
+    try {
+        const rq = provider && IsRunQueryProvider(provider) ? new RunQuery(provider) : new RunQuery();
+        const result = await rq.RunQuery({ QueryName: MEMBERSHIP_STATUS_QUERY, Parameters: { PersonID: personID } });
+        if (!result.Success) {
+            console.warn(`More Cheese: "${MEMBERSHIP_STATUS_QUERY}" query failed for person ${personID}: ${result.ErrorMessage}`);
+            return null;
+        }
+        const rows = (result.Results ?? []) as MembershipStatusRow[];
+        return FormatMembershipStatus(rows[0] ?? null);
+    } catch (e) {
+        console.warn(`More Cheese: could not run "${MEMBERSHIP_STATUS_QUERY}" for person ${personID}`, e);
+        return null;
+    }
 }
 
 /**
@@ -375,12 +463,64 @@ export function ParseRunDetailItem(row: RunDetailRecord): PredictionHistoryItem 
     }
 }
 
+/** `WorkType` of the `MJ: Record Processes` row that Predictive Studio scoring runs under. */
+export const PREDICTION_WORK_TYPE = 'ML Model';
+
+/** How many recent prediction rows the member page reads. */
+export const PREDICTION_HISTORY_ROWS = 10;
+
 /**
- * Loads the More Cheese membership picture for one person:
- * the member profile and up to 10 recent Predictive Studio model prediction runs.
+ * The part of a `MJ: Process Run Details` filter that keeps only Predictive Studio prediction rows
+ * (see {@link PredictionDetailFilter}). Shared with the Staff section contributor, which reads the
+ * same rows for every staff member at once.
+ */
+export const PREDICTION_ROWS_FILTER = 'ResultPayload IS NOT NULL'
+    + ' AND ProcessRunID IN (SELECT pr.ID FROM [__mj].[vwProcessRuns] pr'
+    + ' INNER JOIN [__mj].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
+    + ` WHERE rp.WorkType = '${PREDICTION_WORK_TYPE}')`;
+
+/**
+ * `ExtraFilter` for `MJ: Process Run Details` that keeps only Predictive Studio prediction rows for the
+ * given records (the Person and its Member Profiles: models score either one).
+ *
+ * A detail row carries no process field of its own (only `ProcessRunID`), so the filter walks
+ * detail → `MJ: Process Runs.RecordProcessID` → `MJ: Record Processes.WorkType` and keeps the
+ * `'ML Model'` runs. Without it, any other process that touches the person (a Sonar rescore, a
+ * field-rules pass) fills the newest-10 window and pushes the prediction off the page. The
+ * `ResultPayload IS NOT NULL` check stays as a cheap guard: a prediction row with no payload
+ * cannot be shown anyway.
+ */
+export function PredictionDetailFilter(recordIDs: string[]): string {
+    const ids = recordIDs.map((id) => `'${Quote(id)}'`).join(', ');
+    return `RecordID IN (${ids}) AND ${PREDICTION_ROWS_FILTER}`;
+}
+
+/**
+ * The renewal card for someone with no membership: there is nothing to renew, so it says
+ * "Not a member" rather than "Not Scored" (which would suggest a score is merely missing).
+ */
+export function NotAMemberRenewalInfo(): PersonPredictionInfo {
+    return {
+        Score: null,
+        Class: null,
+        DisplayValue: '—',
+        RiskText: 'Not a member',
+        PillClass: 'ended',
+        TopDriver: null,
+        Drivers: [],
+        Tooltip: 'No membership purchase on file, so there is no membership to renew.',
+        ScoredAt: null,
+        ModelName: 'Predictive Studio Model',
+    };
+}
+
+/**
+ * Loads the More Cheese membership picture for one person: the member profile, the membership
+ * status, and up to {@link PREDICTION_HISTORY_ROWS} recent Predictive Studio prediction rows.
  */
 export async function LoadMembershipForPerson(personID: string, provider?: IMetadataProvider): Promise<PersonMembership> {
     const rv = ViewOf(provider);
+    const statusPromise = LoadMembershipStatus(personID, provider);
     const profiles = await rv.RunView<MemberProfileRow>({
         EntityName: 'MoreCheese: Member Profiles',
         ExtraFilter: `PersonID = '${Quote(personID)}'`,
@@ -391,12 +531,11 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
 
     // Predictions are recorded against whichever record the scoring process ran over: the Person
     // (older person-scoped models) or the Member Profile (Member Renewal Risk scores profiles).
-    const recordIDs = [personID, ...profileRows.map((p) => p.ID)].map((id) => `'${Quote(id)}'`).join(', ');
     const runDetails = await rv.RunView<RunDetailRecord>({
         EntityName: 'MJ: Process Run Details',
-        ExtraFilter: `RecordID IN (${recordIDs})`,
+        ExtraFilter: PredictionDetailFilter([personID, ...profileRows.map((p) => p.ID)]),
         OrderBy: 'CompletedAt DESC',
-        MaxRows: 10,
+        MaxRows: PREDICTION_HISTORY_ROWS,
         Fields: ['ID', 'CompletedAt', 'ResultPayload'],
         ResultType: 'simple',
     });
@@ -442,14 +581,21 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
         h.scoreLabel?.toLowerCase().includes('ltv')
     );
 
-    const renewalPrediction = renewalItem ? toPredictionInfo(renewalItem) : FormatPredictionInfo(null, null, null);
+    const membershipStatus = await statusPromise;
+    // Someone who never bought a membership has nothing to renew. Lapsed members can still renew,
+    // and an unknown status (query missing or failed) keeps the prediction as before.
+    const isNonMember = membershipStatus?.Status === 'Never Purchased';
+    const renewalPrediction = isNonMember
+        ? NotAMemberRenewalInfo()
+        : (renewalItem ? toPredictionInfo(renewalItem) : FormatPredictionInfo(null, null, null));
     const ltvPrediction = ltvItem ? toPredictionInfo(ltvItem) : null;
-    const defaultPrediction = renewalItem
+    const defaultPrediction = renewalItem || isNonMember
         ? renewalPrediction
         : (history[0] ? toPredictionInfo(history[0]) : FormatPredictionInfo(null, null, null));
 
     return {
         Profile: profileRows[0] ?? null,
+        MembershipStatus: membershipStatus,
         Prediction: defaultPrediction,
         RenewalPrediction: renewalPrediction,
         LtvPrediction: ltvPrediction,

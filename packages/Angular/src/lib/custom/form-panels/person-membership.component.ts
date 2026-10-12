@@ -4,6 +4,7 @@ import type { IMetadataProvider } from '@memberjunction/core';
 import type { FormNavigationEvent } from '@memberjunction/ng-base-forms';
 import {
     LoadMembershipForPerson,
+    type MembershipStatusInfo,
     type PersonMembership,
     type PersonPredictionInfo,
     type PredictionDriver,
@@ -46,6 +47,15 @@ import {
                         <div class="mc-kpi-val">{{ SegmentLine }}</div>
                         <div class="mc-kpi-label">{{ LocationLine }}</div>
                     </div>
+                    @if (MembershipStatus) {
+                        <div class="mc-kpi mc-kpi-status" [title]="MembershipStatus.Tooltip">
+                            <div class="mc-kpi-val">
+                                <span [class]="'mc-pill ' + MembershipStatus.PillClass">{{ MembershipStatus.Status }}</span>
+                            </div>
+                            <div class="mc-kpi-label">Membership status</div>
+                            <div class="mc-kpi-sub">{{ MembershipStatus.Detail }}</div>
+                        </div>
+                    }
                     <div class="mc-kpi mc-kpi-ai" [title]="RenewalPrediction?.Tooltip || 'No prediction on file'">
                         <div class="mc-kpi-val">
                             <span [class]="'mc-pill ' + (RenewalPrediction?.PillClass || 'ended')">
@@ -177,6 +187,7 @@ import {
         .mc-kpi-ai .mc-kpi-label { color: var(--mj-brand-primary); font-weight: 600; }
         .mc-kpi-ltv { border-color: color-mix(in srgb, var(--mj-status-success-border) 40%, var(--mj-border-default)); background: linear-gradient(135deg, var(--mj-bg-surface-card) 0%, color-mix(in srgb, var(--mj-status-success-border) 8%, var(--mj-bg-surface-card)) 100%); }
         .mc-kpi-ltv .mc-kpi-label { color: var(--mj-status-success); font-weight: 600; }
+        .mc-kpi-status .mc-kpi-sub { white-space: normal; overflow: visible; }
         .mc-kpi-sub { font-size: 10.5px; color: var(--mj-text-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .mc-pill.risk-low { background: var(--mj-status-success-bg); color: var(--mj-status-success-text); }
         .mc-pill.risk-med { background: var(--mj-status-warning-bg); color: var(--mj-status-warning-text); }
@@ -420,6 +431,11 @@ export class PersonMembershipComponent implements OnChanges {
 
     public get Prediction(): PersonPredictionInfo | null {
         return this.Data?.Prediction ?? null;
+    }
+
+    /** Current / Lapsed / Never Purchased from the "Membership Status" stored query; null hides the card. */
+    public get MembershipStatus(): MembershipStatusInfo | null {
+        return this.Data?.MembershipStatus ?? null;
     }
 
     public get RenewalPrediction(): PersonPredictionInfo | null {
