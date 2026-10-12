@@ -126,6 +126,30 @@ already applied is a no-op.
 
 ---
 
+## 👤 The demo user and your own login
+
+The demo's work (pinned dashboards, Skip conversations and the components in them, pinned apps
+and settings) belongs to `demo.user@morecheese.org`, a **template user**: an account that exists
+to be copied. Everyone signs in as themselves, so `mj app install` offers to create your own user
+as a copy of it:
+
+- **Interactive install:** enter the email you sign in to Explorer with when asked. You can also
+  choose to give everyone who signs in for the first time the same setup.
+- **Non-interactive install:** set these before installing:
+
+  ```bash
+  export MJ_INSTALL_USER_EMAIL=you@example.com
+  export MJ_INSTALL_USER_FIRST_NAME=Your        # optional, guessed from the email otherwise
+  export MJ_INSTALL_USER_LAST_NAME=Name         # optional
+  export MJ_INSTALL_TEMPLATE_FOR_NEW_USERS=1    # optional: copy the demo setup for every new user
+  ```
+
+- **Later, for anyone:** `mj user clone --from demo.user@morecheese.org --email them@example.com --first Them --last Name`
+
+The copy is always a new user, so use an email that doesn't have one yet. Don't sign in as the
+template itself: Explorer shows a red banner if you do, because whatever you change there is
+copied to every new user.
+
 ## 📦 Monorepo Package Inventory
 
 | Package | Scope | Description |
