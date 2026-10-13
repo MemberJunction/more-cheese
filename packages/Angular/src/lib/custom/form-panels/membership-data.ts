@@ -1,4 +1,4 @@
-import { RunQuery, RunView, type IMetadataProvider, type IRunQueryProvider, type RunViewResult } from '@memberjunction/core';
+import { Metadata, RunQuery, RunView, type IMetadataProvider, type IRunQueryProvider, type RunViewResult } from '@memberjunction/core';
 
 /** One `MoreCheese: Member Profiles` row as returned by a simple RunView. */
 export interface MemberProfileRow {
@@ -470,29 +470,33 @@ export const PREDICTION_WORK_TYPE = 'ML Model';
 export const PREDICTION_HISTORY_ROWS = 10;
 
 /**
+ * `[Schema].[BaseView]` for an entity, read from entity metadata so an ExtraFilter subquery still
+ * resolves when the core or an app schema has a non-default name. Throws, naming the entity, when the
+ * metadata does not have it.
+ */
+export function EntityViewRef(entityName: string, provider?: IMetadataProvider): string {
+    const entity = (provider ?? new Metadata()).EntityByName(entityName);
+    if (!entity?.SchemaName || !entity?.BaseView) {
+        throw new Error(`Entity "${entityName}" is not in the metadata, so its view cannot be named.`);
+    }
+    return `[${entity.SchemaName}].[${entity.BaseView}]`;
+}
+
+/**
  * The part of a `MJ: Process Run Details` filter that keeps only Predictive Studio prediction rows
  * (see {@link PredictionDetailFilter}). Shared with the Staff section contributor, which reads the
  * same rows for every staff member at once.
  */
-export const PREDICTION_ROWS_FILTER = 'ResultPayload IS NOT NULL'
-    + ' AND ProcessRunID IN (SELECT pr.ID FROM [__mj].[vwProcessRuns] pr'
-    + ' INNER JOIN [__mj].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
-    + ` WHERE rp.WorkType = '${PREDICTION_WORK_TYPE}')`;
+export function PredictionRowsFilter(provider?: IMetadataProvider): string {
+    return 'ResultPayload IS NOT NULL'
+        + ` AND ProcessRunID IN (SELECT pr.ID FROM ${EntityViewRef('MJ: Process Runs', provider)} pr`
+        + ` INNER JOIN ${EntityViewRef('MJ: Record Processes', provider)} rp ON rp.ID = pr.RecordProcessID`
+        + ` WHERE rp.WorkType = '${PREDICTION_WORK_TYPE}')`;
+}
 
-/**
- * `ExtraFilter` for `MJ: Process Run Details` that keeps only Predictive Studio prediction rows for the
- * given records (the Person and its Member Profiles: models score either one).
- *
- * A detail row carries no process field of its own (only `ProcessRunID`), so the filter walks
- * detail → `MJ: Process Runs.RecordProcessID` → `MJ: Record Processes.WorkType` and keeps the
- * `'ML Model'` runs. Without it, any other process that touches the person (a Sonar rescore, a
- * field-rules pass) fills the newest-10 window and pushes the prediction off the page. The
- * `ResultPayload IS NOT NULL` check stays as a cheap guard: a prediction row with no payload
- * cannot be shown anyway.
- */
-export function PredictionDetailFilter(recordIDs: string[]): string {
+export function PredictionDetailFilter(recordIDs: string[], provider?: IMetadataProvider): string {
     const ids = recordIDs.map((id) => `'${Quote(id)}'`).join(', ');
-    return `RecordID IN (${ids}) AND ${PREDICTION_ROWS_FILTER}`;
+    return `RecordID IN (${ids}) AND ${PredictionRowsFilter(provider)}`;
 }
 
 /**
@@ -533,7 +537,7 @@ export async function LoadMembershipForPerson(personID: string, provider?: IMeta
     // (older person-scoped models) or the Member Profile (Member Renewal Risk scores profiles).
     const runDetails = await rv.RunView<RunDetailRecord>({
         EntityName: 'MJ: Process Run Details',
-        ExtraFilter: PredictionDetailFilter([personID, ...profileRows.map((p) => p.ID)]),
+        ExtraFilter: PredictionDetailFilter([personID, ...profileRows.map((p) => p.ID)], provider),
         OrderBy: 'CompletedAt DESC',
         MaxRows: PREDICTION_HISTORY_ROWS,
         Fields: ['ID', 'CompletedAt', 'ResultPayload'],

@@ -62,6 +62,7 @@ describe('LoadMembershipForPerson — membership status comes from the stored qu
           ? { Success: true, Results: [profile] }
           : { Success: true, Results: [] }),
       RunQuery: runQuery,
+      EntityByName: (name: string) => ({ SchemaName: '__mj', BaseView: name === 'MJ: Process Runs' ? 'vwProcessRuns' : 'vwRecordProcesses' }),
     } as unknown as IMetadataProvider;
   }
 

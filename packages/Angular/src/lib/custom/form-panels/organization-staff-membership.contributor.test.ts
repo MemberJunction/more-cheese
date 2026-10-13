@@ -15,6 +15,13 @@ const B = 'BBBBBBBB-0000-0000-0000-000000000002';
 const C = 'CCCCCCCC-0000-0000-0000-000000000003';
 const ORG = 'EA49DA78-B450-54CB-B49D-A4CBBBFD73A5';
 const PROFILE_A = 'DDDDDDDD-0000-0000-0000-00000000000A';
+/** Entity metadata with renamed schemas, so any hardcoded `[__mj]` / `[__mj_BizAppsOrders]` would show up. */
+const VIEWS: Record<string, { SchemaName: string; BaseView: string }> = {
+    'MJ: Process Runs': { SchemaName: 'mj_core', BaseView: 'vwProcessRuns' },
+    'MJ: Record Processes': { SchemaName: 'mj_core', BaseView: 'vwRecordProcesses' },
+    'MJ_BizApps_Orders: Order Headers': { SchemaName: 'orders_x', BaseView: 'vwOrderHeaders' },
+};
+const entityByName = (name: string) => VIEWS[name];
 const staff: OrganizationStaffMember[] = [
     { PersonID: A, Name: 'Ana', Title: null, StartDate: null },
     { PersonID: B, Name: 'Ben', Title: null, StartDate: null },
@@ -114,7 +121,7 @@ describe('MoreCheeseStaffContributor.Load', () => {
             Results: [{ ID: 'load-1', RecordID: PROFILE_A, CompletedAt: '2026-10-05', ResultPayload: payload }],
         });
         const runQuery = vi.fn().mockResolvedValue({ Success: true, Results: [membership(A, 'Current', 'Individual')] });
-        const provider = { RunViews: runViews, RunView: runView, RunQuery: runQuery } as unknown as IMetadataProvider;
+        const provider = { RunViews: runViews, RunView: runView, RunQuery: runQuery, EntityByName: entityByName } as unknown as IMetadataProvider;
         const res = await new MoreCheeseStaffContributor().Load({ OrganizationID: ORG, Staff: staff.slice(0, 1), Provider: provider });
         expect(runQuery.mock.calls[0][0]).toEqual({ QueryName: 'Membership Status', Parameters: { OrganizationID: ORG } });
         const views = runViews.mock.calls[0][0];
@@ -124,6 +131,9 @@ describe('MoreCheeseStaffContributor.Load', () => {
         expect(views[1].ExtraFilter).toBe(`OrganizationID = '${ORG}'`);
         expect(views[2].ExtraFilter).toContain(`PersonID IN ('${A}') AND AttendanceStatus = 'Attended'`);
         expect(views[2].ExtraFilter).toContain(`oh.Status = 'Confirmed'`);
+        expect(views[2].ExtraFilter).toContain('SELECT oh.ID FROM [orders_x].[vwOrderHeaders] oh');
+        expect(views[2].ExtraFilter).toContain('SELECT 1 FROM [orders_x].[vwOrderHeaders] r');
+        expect(views[2].ExtraFilter).not.toContain('__mj_BizAppsOrders');
         expect(views[3].ExtraFilter).toBe(`PersonID IN ('${A}')`);
         // Member Renewal Risk scores Member Profiles, so the profile IDs are read along with the person IDs,
         // and only Predictive Studio (ML Model) rows count, so another process's runs cannot pass as a score.
@@ -131,8 +141,8 @@ describe('MoreCheeseStaffContributor.Load', () => {
         expect(details.EntityName).toBe('MJ: Process Run Details');
         expect(details.ExtraFilter).toBe(
             `RecordID IN ('${A}','${PROFILE_A}') AND ResultPayload IS NOT NULL`
-            + ' AND ProcessRunID IN (SELECT pr.ID FROM [__mj].[vwProcessRuns] pr'
-            + ' INNER JOIN [__mj].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
+            + ' AND ProcessRunID IN (SELECT pr.ID FROM [mj_core].[vwProcessRuns] pr'
+            + ' INNER JOIN [mj_core].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
             + " WHERE rp.WorkType = 'ML Model')",
         );
         expect(res.Cells.get(A)?.['membership'].Text).toBe('Current');
@@ -144,6 +154,7 @@ describe('MoreCheeseStaffContributor.Load', () => {
         const provider = {
             RunViews: vi.fn().mockResolvedValue([{ Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] }]),
             RunView: vi.fn().mockResolvedValue({ Success: true, Results: [] }),
+            EntityByName: entityByName,
             RunQuery: vi.fn().mockResolvedValue({ Success: false, ErrorMessage: 'Query not found', Results: [] }),
         } as unknown as IMetadataProvider;
         await expect(new MoreCheeseStaffContributor().Load({ OrganizationID: ORG, Staff: staff.slice(0, 1), Provider: provider })).rejects.toThrow('Query not found');

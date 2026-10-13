@@ -8,7 +8,7 @@ import {
     type StaffContribution,
     type StaffFigure,
 } from '@mj-biz-apps/common-ng';
-import { MEMBERSHIP_STATUS_QUERY, ParseRunDetailItem, PREDICTION_ROWS_FILTER, type MembershipStatusRow } from './membership-data';
+import { EntityViewRef, MEMBERSHIP_STATUS_QUERY, ParseRunDetailItem, PredictionRowsFilter, type MembershipStatusRow } from './membership-data';
 
 /** One "Membership Status" query row, with the person it belongs to. */
 export interface StaffMembershipRow extends MembershipStatusRow {
@@ -128,7 +128,10 @@ function IsRunQueryProvider(provider: IMetadataProvider): provider is IMetadataP
 }
 
 /** Valid registrations only: Confirmed order, not a refund, not refunded (same rule as "Member Event Attendance"). */
-const VALID_ATTENDANCE = `AttendanceStatus = 'Attended' AND OrderHeaderID IN (SELECT oh.ID FROM [__mj_BizAppsOrders].[vwOrderHeaders] oh WHERE oh.Status = 'Confirmed' AND oh.ReversesOrderHeaderID IS NULL AND NOT EXISTS (SELECT 1 FROM [__mj_BizAppsOrders].[vwOrderHeaders] r WHERE r.ReversesOrderHeaderID = oh.ID AND r.Status = 'Confirmed')) AND ReversesOrderLineID IS NULL`;
+function ValidAttendanceFilter(provider?: IMetadataProvider): string {
+    const orders = EntityViewRef('MJ_BizApps_Orders: Order Headers', provider);
+    return `AttendanceStatus = 'Attended' AND OrderHeaderID IN (SELECT oh.ID FROM ${orders} oh WHERE oh.Status = 'Confirmed' AND oh.ReversesOrderHeaderID IS NULL AND NOT EXISTS (SELECT 1 FROM ${orders} r WHERE r.ReversesOrderHeaderID = oh.ID AND r.Status = 'Confirmed')) AND ReversesOrderLineID IS NULL`;
+}
 
 /** Adds membership, certification, competition, attendance and AI renewal figures to Common's Staff section. */
 @RegisterClass(OrganizationStaffContributor, 'more-cheese-membership')
@@ -147,7 +150,7 @@ export class MoreCheeseStaffContributor extends OrganizationStaffContributor {
             rv.RunViews([
                 { EntityName: 'MoreCheese: Member Certifications', ExtraFilter: `PersonID IN (${ids})`, Fields: ['PersonID', 'Status'], ResultType: 'simple' },
                 { EntityName: 'MoreCheese: Competition Entries', ExtraFilter: `OrganizationID = ${org}`, Fields: ['Result'], ResultType: 'simple' },
-                { EntityName: 'MJ_BizApps_Orders: Event Order Lines', ExtraFilter: `PersonID IN (${ids}) AND ${VALID_ATTENDANCE}`, Fields: ['PersonID'], ResultType: 'simple' },
+                { EntityName: 'MJ_BizApps_Orders: Event Order Lines', ExtraFilter: `PersonID IN (${ids}) AND ${ValidAttendanceFilter(provider)}`, Fields: ['PersonID'], ResultType: 'simple' },
                 { EntityName: 'MoreCheese: Member Profiles', ExtraFilter: `PersonID IN (${ids})`, Fields: ['ID', 'PersonID'], ResultType: 'simple' },
             ]),
             rq.RunQuery({ QueryName: MEMBERSHIP_STATUS_QUERY, Parameters: { OrganizationID: request.OrganizationID } }),
@@ -164,7 +167,7 @@ export class MoreCheeseStaffContributor extends OrganizationStaffContributor {
         const scored = QuotedIDs([...request.Staff.map(s => s.PersonID), ...profiles.map(p => p.ID)]);
         const details = await rv.RunView<{ ID: string; RecordID: string; CompletedAt: string | null; ResultPayload: string | null }>({
             EntityName: 'MJ: Process Run Details',
-            ExtraFilter: `RecordID IN (${scored}) AND ${PREDICTION_ROWS_FILTER}`,
+            ExtraFilter: `RecordID IN (${scored}) AND ${PredictionRowsFilter(provider)}`,
             OrderBy: 'CompletedAt DESC',
             Fields: ['ID', 'RecordID', 'CompletedAt', 'ResultPayload'],
             ResultType: 'simple',

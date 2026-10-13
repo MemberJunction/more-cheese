@@ -19,6 +19,13 @@ interface StoredDetail {
     WorkType: 'ML Model' | 'FieldRules' | 'Action';
 }
 
+/** Entity metadata with a renamed core schema, so a hardcoded `[__mj]` would show up as a mismatch. */
+const VIEWS: Record<string, { SchemaName: string; BaseView: string }> = {
+    'MJ: Process Runs': { SchemaName: 'mj_core', BaseView: 'vwProcessRuns' },
+    'MJ: Record Processes': { SchemaName: 'mj_core', BaseView: 'vwRecordProcesses' },
+};
+const entityByName = (name: string) => VIEWS[name];
+
 const PREDICTION_PAYLOAD = JSON.stringify({ output: { score: 0.82, class: 'Renewed', target: 'Renewal Risk' } });
 
 /**
@@ -36,7 +43,7 @@ function fakeProvider(details: StoredDetail[], statusRow: MembershipStatusRow | 
         return { Success: true, Results: rows.map(r => ({ ID: r.ID, CompletedAt: r.CompletedAt, ResultPayload: r.ResultPayload })) };
     });
     const runQuery = vi.fn().mockResolvedValue({ Success: true, Results: statusRow ? [statusRow] : [] });
-    return { provider: { RunView: runView, RunQuery: runQuery } as unknown as IMetadataProvider, runView };
+    return { provider: { RunView: runView, RunQuery: runQuery, EntityByName: entityByName } as unknown as IMetadataProvider, runView };
 }
 
 const CURRENT: MembershipStatusRow = { MembershipStatus: 'Current', MembershipTier: 'Individual', MembershipExpiresOn: '2027-10-07T00:00:00.000Z', LastMembershipPurchaseDate: '2026-10-07T00:00:00.000Z', MembershipPurchaseCount: 3 };
@@ -53,18 +60,29 @@ function predictionBuriedUnderSonarRescores(): StoredDetail[] {
 }
 
 describe('PredictionDetailFilter — member page reads only Predictive Studio prediction rows', () => {
+    const { provider } = fakeProvider([], null);
+
     it('restricts to the given records, a non-null payload, and ML Model record-process runs', () => {
         expect(PREDICTION_WORK_TYPE).toBe('ML Model');
-        expect(PredictionDetailFilter([PERSON, 'P1'])).toBe(
+        expect(PredictionDetailFilter([PERSON, 'P1'], provider)).toBe(
             `RecordID IN ('${PERSON}', 'P1') AND ResultPayload IS NOT NULL`
-            + ' AND ProcessRunID IN (SELECT pr.ID FROM [__mj].[vwProcessRuns] pr'
-            + ' INNER JOIN [__mj].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
+            + ' AND ProcessRunID IN (SELECT pr.ID FROM [mj_core].[vwProcessRuns] pr'
+            + ' INNER JOIN [mj_core].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
             + " WHERE rp.WorkType = 'ML Model')",
         );
     });
 
+    it('takes the Process Runs and Record Processes views from entity metadata, not a hardcoded schema', () => {
+        expect(PredictionDetailFilter([PERSON], provider)).not.toContain('[__mj]');
+    });
+
+    it('names the entity when it is missing from metadata', () => {
+        const bare = { EntityByName: () => undefined } as unknown as IMetadataProvider;
+        expect(() => PredictionDetailFilter([PERSON], bare)).toThrow('"MJ: Process Runs"');
+    });
+
     it('escapes quotes in the person ID', () => {
-        expect(PredictionDetailFilter(["x'y"])).toContain("RecordID IN ('x''y')");
+        expect(PredictionDetailFilter(["x'y"], provider)).toContain("RecordID IN ('x''y')");
     });
 });
 
@@ -74,7 +92,7 @@ describe('LoadMembershipForPerson — other processes cannot push the prediction
         await LoadMembershipForPerson(PERSON, provider);
         const detailParams = runView.mock.calls[1][0] as RunViewParams;
         expect(detailParams.EntityName).toBe('MJ: Process Run Details');
-        expect(detailParams.ExtraFilter).toBe(PredictionDetailFilter([PERSON, 'P1']));
+        expect(detailParams.ExtraFilter).toBe(PredictionDetailFilter([PERSON, 'P1'], provider));
         expect(detailParams.OrderBy).toBe('CompletedAt DESC');
         expect(detailParams.MaxRows).toBe(PREDICTION_HISTORY_ROWS);
         expect(PREDICTION_HISTORY_ROWS).toBe(10);
