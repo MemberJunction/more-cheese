@@ -4,7 +4,8 @@
  *
  * Compiles the Loom domain, applies Loom declarative generators (names, prefixes, pronouns,
  * DOBs), AvatarGenerator, LogoGenerator, and ReversalEngine to the governed generated/ tree
- * from data/domain.json field config, and verifies checkpoint.json. After the tree is
+ * from data/domain.json field config, aligns the planted duplicate people with their
+ * originals, and verifies checkpoint.json. After the tree is
  * committed, a second run must leave generated/ byte-identical.
  */
 
@@ -13,6 +14,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
 import { applyPersonJobFunctionsEnrichment } from './enrich-person-job-functions.mjs';
+import { alignPlantedDuplicates } from './align-planted-duplicates.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -191,6 +193,8 @@ function applyPeopleAndMemberProfilePass() {
     distinctAvatars.add(p.fields.PhotoURL);
   }
 
+  applyPlantedDuplicatesPass(people);
+
   fs.writeFileSync(peoplePath, JSON.stringify(people, null, 2) + '\n', 'utf8');
   console.log(
     `   ✓ Loom People Generator: ${people.length} people processed (${distinctAvatars.size}/${people.length} distinct avatars, ${(distinctAvatars.size / people.length * 100).toFixed(2)}%)`
@@ -210,6 +214,39 @@ function applyPeopleAndMemberProfilePass() {
 
   fs.writeFileSync(mpPath, JSON.stringify(mps, null, 2) + '\n', 'utf8');
   console.log(`   ✓ Loom MemberProfile Generator: ${mps.length} pronoun sets generated`);
+}
+
+// ---------------------------------------------------------------------------
+// 2b. Planted Duplicates Pass (#117) — runs after the name/DOB generators, which would otherwise
+//     give every planted duplicate its own identity. See align-planted-duplicates.mjs.
+// ---------------------------------------------------------------------------
+function applyPlantedDuplicatesPass(people) {
+  const labelsPath = path.join(generatedDir, 'data-quality-labels', '.data-quality-labels.json');
+  const labels = JSON.parse(fs.readFileSync(labelsPath, 'utf8'));
+
+  const cmDir = path.join(generatedDir, 'contact-methods');
+  const cmFiles = fs
+    .readdirSync(cmDir)
+    .filter((f) => f.endsWith('.json') && f !== '.mj-sync.json')
+    .sort()
+    .map((f) => {
+      const full = path.join(cmDir, f);
+      return { full, rows: JSON.parse(fs.readFileSync(full, 'utf8')) };
+    });
+
+  const heroFixedFieldsByEmail = new Map(
+    heroes.heroes.map((h) => [h.businessKeys.Email.toLowerCase(), h.fixedFields || {}])
+  );
+  const stats = alignPlantedDuplicates({
+    people,
+    contactMethods: cmFiles.flatMap((f) => f.rows),
+    labels,
+    heroFixedFieldsByEmail,
+  });
+
+  // The contact-method part files carry no trailing newline.
+  for (const { full, rows } of cmFiles) fs.writeFileSync(full, JSON.stringify(rows, null, 2), 'utf8');
+  console.log(`   ✓ Planted Duplicates Pass: ${stats.pairs} duplicate people aligned with their originals (${stats.phonesAligned} phones)`);
 }
 
 // ---------------------------------------------------------------------------
