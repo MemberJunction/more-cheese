@@ -30,8 +30,8 @@ function person(ID, fields) {
 function contact(ID, PersonID, ContactTypeID, Value, IsPrimary = true) {
     return { fields: { PersonID, OrganizationID: null, ContactTypeID, Value, Label: 'Work', IsPrimary }, primaryKey: { ID } };
 }
-function dupLabel(PersonID, RelatedPersonID) {
-    return { fields: { DefectKind: 'DuplicatePerson', PersonID, RelatedPersonID }, primaryKey: { ID: `L-${PersonID}` } };
+function dupLabel(PersonID, RelatedPersonID, DefectValue = 'Julien Agarwal (ICF-D00467)') {
+    return { fields: { DefectKind: 'DuplicatePerson', PersonID, RelatedPersonID, DefectValue }, primaryKey: { ID: `L-${PersonID}` } };
 }
 
 function pair({ dupPhone = '+1 (222) 222-2222', origPhone = '+1 (111) 111-1111', dupEmail = 'manish.dup@example' } = {}) {
@@ -102,12 +102,34 @@ test('a hero duplicate keeps the names its hero entry fixes and takes the rest',
     assert.equal(dup.Phone, '+1 (111) 111-1111');
 });
 
+test('the label\'s DefectValue names the duplicate as it now reads; its code in brackets stays', () => {
+    const { people, contactMethods, labels } = pair();
+    alignPlantedDuplicates({ people, contactMethods, labels });
+    assert.equal(labels[0].fields.DefectValue, 'Manish Agarwal (ICF-D00467)');
+});
+
+test('a hero duplicate\'s DefectValue keeps the hero\'s fixed name', () => {
+    const { people, contactMethods } = pair({ dupEmail: 'kathy.oleary@example' });
+    const dup = byId(people, 'DUP');
+    dup.FirstName = 'Kathy';
+    dup.LastName = 'OLeary';
+    const labels = [dupLabel('DUP', 'ORIG', 'Kathy OLeary (ICF-000287)')];
+    const heroFixedFieldsByEmail = new Map([['kathy.oleary@example', { FirstName: 'Kathy', LastName: 'OLeary' }]]);
+    alignPlantedDuplicates({ people, contactMethods, labels, heroFixedFieldsByEmail });
+    assert.equal(labels[0].fields.DefectValue, 'Kathy OLeary (ICF-000287)');
+});
+
+test('a DefectValue not in the "Name (code)" shape fails loudly rather than being guessed at', () => {
+    const { people, contactMethods } = pair();
+    assert.throws(() => alignPlantedDuplicates({ people, contactMethods, labels: [dupLabel('DUP', 'ORIG', 'Julien Agarwal')] }), /DefectValue/);
+});
+
 test('a second run changes nothing', () => {
     const { people, contactMethods, labels } = pair();
     alignPlantedDuplicates({ people, contactMethods, labels });
-    const once = JSON.stringify({ people, contactMethods });
+    const once = JSON.stringify({ people, contactMethods, labels });
     const stats = alignPlantedDuplicates({ people, contactMethods, labels });
-    assert.equal(JSON.stringify({ people, contactMethods }), once);
+    assert.equal(JSON.stringify({ people, contactMethods, labels }), once);
     assert.equal(stats.fieldsChanged, 0);
 });
 
@@ -144,6 +166,7 @@ test('the committed generated/ tree: every planted pair looks like a duplicate',
         for (const f of ['FirstName', 'MiddleName', 'LastName', 'DateOfBirth']) {
             if (!(f in fixed) && dup[f] !== orig[f]) problems.push(`${l.DefectValue}: ${f} ${JSON.stringify(dup[f])} ≠ original ${JSON.stringify(orig[f])}`);
         }
+        if (!l.DefectValue.startsWith(`${dup.FirstName} ${dup.LastName} (`)) problems.push(`${l.DefectValue}: DefectValue does not name the duplicate ${dup.FirstName} ${dup.LastName}`);
         if (dup.Phone && orig.Phone && dup.Phone !== orig.Phone) problems.push(`${l.DefectValue}: Phone ${dup.Phone} ≠ original ${orig.Phone}`);
         if (dup.Phone && !(phonesByPerson.get(l.PersonID.toLowerCase()) || []).includes(dup.Phone)) {
             problems.push(`${l.DefectValue}: Phone ${dup.Phone} has no primary phone contact row`);
