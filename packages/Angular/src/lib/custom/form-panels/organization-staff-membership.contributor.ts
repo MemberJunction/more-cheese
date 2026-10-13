@@ -94,11 +94,16 @@ export function BuildStaffMembershipContribution(staff: OrganizationStaffMember[
     };
 }
 
-/** Latest classification (renewal) score per person from Predictive Studio run details, newest first. */
-export function LatestRenewalScores(rows: { ID: string; RecordID: string; CompletedAt: string | null; ResultPayload: string | null }[]): Map<string, number> {
+/**
+ * Latest classification (renewal) score per person from Predictive Studio run details, newest first.
+ * `personOf` maps each scored record's upper-cased ID (a Person or one of its Member Profiles) to its
+ * upper-cased PersonID; without it, each row is keyed by its own RecordID.
+ */
+export function LatestRenewalScores(rows: { ID: string; RecordID: string; CompletedAt: string | null; ResultPayload: string | null }[], personOf?: Map<string, string>): Map<string, number> {
     const scores = new Map<string, number>();
     for (const row of rows) {
-        const key = row.RecordID.toUpperCase();
+        const recordKey = row.RecordID.toUpperCase();
+        const key = personOf?.get(recordKey) ?? recordKey;
         if (scores.has(key)) continue;
         const item = ParseRunDetailItem(row);
         if (item?.problemType === 'classification' && item.score != null) {
@@ -143,19 +148,35 @@ export class MoreCheeseStaffContributor extends OrganizationStaffContributor {
                 { EntityName: 'MoreCheese: Member Certifications', ExtraFilter: `PersonID IN (${ids})`, Fields: ['PersonID', 'Status'], ResultType: 'simple' },
                 { EntityName: 'MoreCheese: Competition Entries', ExtraFilter: `OrganizationID = ${org}`, Fields: ['Result'], ResultType: 'simple' },
                 { EntityName: 'MJ_BizApps_Orders: Event Order Lines', ExtraFilter: `PersonID IN (${ids}) AND ${VALID_ATTENDANCE}`, Fields: ['PersonID'], ResultType: 'simple' },
-                { EntityName: 'MJ: Process Run Details', ExtraFilter: `RecordID IN (${ids}) AND ${PREDICTION_ROWS_FILTER}`, OrderBy: 'CompletedAt DESC', Fields: ['ID', 'RecordID', 'CompletedAt', 'ResultPayload'], ResultType: 'simple' },
+                { EntityName: 'MoreCheese: Member Profiles', ExtraFilter: `PersonID IN (${ids})`, Fields: ['ID', 'PersonID'], ResultType: 'simple' },
             ]),
             rq.RunQuery({ QueryName: MEMBERSHIP_STATUS_QUERY, Parameters: { OrganizationID: request.OrganizationID } }),
         ]);
         const failed = views.find(v => !v.Success);
         if (failed) throw new Error(failed.ErrorMessage || 'Could not read membership figures.');
         if (!status.Success) throw new Error(`"${MEMBERSHIP_STATUS_QUERY}" query failed: ${status.ErrorMessage}`);
+
+        // Predictions are recorded against whichever record the model scored: the Person, or its
+        // Member Profile (Member Renewal Risk scores profiles). Read both and credit each to the person.
+        const profiles = views[3].Results as { ID: string; PersonID: string }[];
+        const personOf = new Map<string, string>(request.Staff.map(s => [s.PersonID.toUpperCase(), s.PersonID.toUpperCase()]));
+        for (const p of profiles) personOf.set(p.ID.toUpperCase(), p.PersonID.toUpperCase());
+        const scored = QuotedIDs([...request.Staff.map(s => s.PersonID), ...profiles.map(p => p.ID)]);
+        const details = await rv.RunView<{ ID: string; RecordID: string; CompletedAt: string | null; ResultPayload: string | null }>({
+            EntityName: 'MJ: Process Run Details',
+            ExtraFilter: `RecordID IN (${scored}) AND ${PREDICTION_ROWS_FILTER}`,
+            OrderBy: 'CompletedAt DESC',
+            Fields: ['ID', 'RecordID', 'CompletedAt', 'ResultPayload'],
+            ResultType: 'simple',
+        });
+        if (!details.Success) throw new Error(details.ErrorMessage || 'Could not read renewal predictions.');
+
         return BuildStaffMembershipContribution(request.Staff, {
             Memberships: (status.Results ?? []) as StaffMembershipRow[],
             Certifications: views[0].Results as { PersonID: string; Status: string }[],
             Competition: views[1].Results as { Result: string | null }[],
             Attendances: views[2].Results as { PersonID: string }[],
-            RenewalScores: LatestRenewalScores(views[3].Results as { ID: string; RecordID: string; CompletedAt: string | null; ResultPayload: string | null }[]),
+            RenewalScores: LatestRenewalScores(details.Results ?? [], personOf),
         });
     }
 }

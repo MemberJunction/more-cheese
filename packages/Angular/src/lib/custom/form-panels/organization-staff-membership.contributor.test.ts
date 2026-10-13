@@ -14,6 +14,7 @@ const A = 'AAAAAAAA-0000-0000-0000-000000000001';
 const B = 'BBBBBBBB-0000-0000-0000-000000000002';
 const C = 'CCCCCCCC-0000-0000-0000-000000000003';
 const ORG = 'EA49DA78-B450-54CB-B49D-A4CBBBFD73A5';
+const PROFILE_A = 'DDDDDDDD-0000-0000-0000-00000000000A';
 const staff: OrganizationStaffMember[] = [
     { PersonID: A, Name: 'Ana', Title: null, StartDate: null },
     { PersonID: B, Name: 'Ben', Title: null, StartDate: null },
@@ -81,6 +82,17 @@ describe('LatestRenewalScores', () => {
         expect(scores.get(A)).toBe(0.8);
         expect(scores.has(B)).toBe(false);
     });
+
+    it('credits a Member Profile score to its person, newest row first across person and profile', () => {
+        const personOf = new Map([[A, A], [PROFILE_A.toLowerCase(), A], [B, B]].map(([k, v]) => [k.toUpperCase(), v.toUpperCase()]));
+        const scores = LatestRenewalScores([
+            { ID: 'p1', RecordID: PROFILE_A.toLowerCase(), CompletedAt: '2026-10-05', ResultPayload: payload(0.65) },
+            { ID: 'p2', RecordID: A, CompletedAt: '2026-09-01', ResultPayload: payload(0.2) },
+        ], personOf);
+        expect(scores.get(A)).toBe(0.65);
+        expect(scores.has(PROFILE_A)).toBe(false);
+        expect([...scores.keys()]).toEqual([A]);
+    });
 });
 
 describe('QuotedIDs', () => {
@@ -91,34 +103,47 @@ describe('QuotedIDs', () => {
 });
 
 describe('MoreCheeseStaffContributor.Load', () => {
-    it('reads the Membership Status query by organization and the four views for the staff', async () => {
+    it('reads the Membership Status query by organization, the four views for the staff, then predictions for each person and their member profiles', async () => {
+        const payload = JSON.stringify({ output: { score: 0.65, class: 'Renewed', problemType: 'classification', target: 'RenewalNextYear' } });
         const runViews = vi.fn().mockResolvedValue([
-            { Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] },
+            { Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] },
+            { Success: true, Results: [{ ID: PROFILE_A, PersonID: A }] },
         ]);
+        const runView = vi.fn().mockResolvedValue({
+            Success: true,
+            Results: [{ ID: 'load-1', RecordID: PROFILE_A, CompletedAt: '2026-10-05', ResultPayload: payload }],
+        });
         const runQuery = vi.fn().mockResolvedValue({ Success: true, Results: [membership(A, 'Current', 'Individual')] });
-        const provider = { RunViews: runViews, RunQuery: runQuery } as unknown as IMetadataProvider;
+        const provider = { RunViews: runViews, RunView: runView, RunQuery: runQuery } as unknown as IMetadataProvider;
         const res = await new MoreCheeseStaffContributor().Load({ OrganizationID: ORG, Staff: staff.slice(0, 1), Provider: provider });
         expect(runQuery.mock.calls[0][0]).toEqual({ QueryName: 'Membership Status', Parameters: { OrganizationID: ORG } });
         const views = runViews.mock.calls[0][0];
         expect(views.map((v: { EntityName: string }) => v.EntityName)).toEqual([
-            'MoreCheese: Member Certifications', 'MoreCheese: Competition Entries', 'MJ_BizApps_Orders: Event Order Lines', 'MJ: Process Run Details',
+            'MoreCheese: Member Certifications', 'MoreCheese: Competition Entries', 'MJ_BizApps_Orders: Event Order Lines', 'MoreCheese: Member Profiles',
         ]);
         expect(views[1].ExtraFilter).toBe(`OrganizationID = '${ORG}'`);
         expect(views[2].ExtraFilter).toContain(`PersonID IN ('${A}') AND AttendanceStatus = 'Attended'`);
         expect(views[2].ExtraFilter).toContain(`oh.Status = 'Confirmed'`);
-        // Only Predictive Studio (ML Model) prediction rows, so another process's runs cannot pass as a score.
-        expect(views[3].ExtraFilter).toBe(
-            `RecordID IN ('${A}') AND ResultPayload IS NOT NULL`
+        expect(views[3].ExtraFilter).toBe(`PersonID IN ('${A}')`);
+        // Member Renewal Risk scores Member Profiles, so the profile IDs are read along with the person IDs,
+        // and only Predictive Studio (ML Model) rows count, so another process's runs cannot pass as a score.
+        const details = runView.mock.calls[0][0];
+        expect(details.EntityName).toBe('MJ: Process Run Details');
+        expect(details.ExtraFilter).toBe(
+            `RecordID IN ('${A}','${PROFILE_A}') AND ResultPayload IS NOT NULL`
             + ' AND ProcessRunID IN (SELECT pr.ID FROM [__mj].[vwProcessRuns] pr'
             + ' INNER JOIN [__mj].[vwRecordProcesses] rp ON rp.ID = pr.RecordProcessID'
             + " WHERE rp.WorkType = 'ML Model')",
         );
         expect(res.Cells.get(A)?.['membership'].Text).toBe('Current');
+        expect(res.Cells.get(A)?.['renewal']).toEqual({ Text: '65%', Tone: 'success' });
+        expect(res.Figures[4]).toMatchObject({ Value: '65%', Detail: '1 of 1 staff scored' });
     });
 
     it('throws when the Membership Status query fails, so the Staff section can name it', async () => {
         const provider = {
             RunViews: vi.fn().mockResolvedValue([{ Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] }, { Success: true, Results: [] }]),
+            RunView: vi.fn().mockResolvedValue({ Success: true, Results: [] }),
             RunQuery: vi.fn().mockResolvedValue({ Success: false, ErrorMessage: 'Query not found', Results: [] }),
         } as unknown as IMetadataProvider;
         await expect(new MoreCheeseStaffContributor().Load({ OrganizationID: ORG, Staff: staff.slice(0, 1), Provider: provider })).rejects.toThrow('Query not found');

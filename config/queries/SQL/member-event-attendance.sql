@@ -1,7 +1,7 @@
 -- ============================================================
 -- Member Event Attendance
 -- Category: Skip/Members/Activity
--- Reusable: true
+-- Reusable: false
 -- Returns member event attendance records with parsed event
 -- metadata, attendance statuses, attendee contact details, and derived outcomes.
 -- Params: (none)

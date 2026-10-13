@@ -4,7 +4,7 @@
 -- (Current, Lapsed, Never Purchased), latest purchase details,
 -- membership tier, expiration date, and qualifying purchase counts.
 -- Category: Skip/Memberships/Roster
--- Reusable: true
+-- Reusable: false
 -- Params (both optional; omit both for every member):
 --   PersonID       - one member (used by the member page)
 --   OrganizationID - that organization's staff (used by the Staff panel)
