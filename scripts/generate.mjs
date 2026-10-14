@@ -244,9 +244,10 @@ function applyPlantedDuplicatesPass(people) {
     heroFixedFieldsByEmail,
   });
 
-  // The contact-method part files carry no trailing newline.
+  // The contact-method part files and the labels file carry no trailing newline.
   for (const { full, rows } of cmFiles) fs.writeFileSync(full, JSON.stringify(rows, null, 2), 'utf8');
-  console.log(`   ✓ Planted Duplicates Pass: ${stats.pairs} duplicate people aligned with their originals (${stats.phonesAligned} phones)`);
+  fs.writeFileSync(labelsPath, JSON.stringify(labels, null, 2), 'utf8');
+  console.log(`   ✓ Planted Duplicates Pass: ${stats.pairs} duplicate people aligned with their originals (${stats.phonesAligned} phones, ${stats.labelsRenamed} labels renamed)`);
 }
 
 // ---------------------------------------------------------------------------

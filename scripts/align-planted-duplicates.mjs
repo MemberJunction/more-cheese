@@ -22,9 +22,17 @@
  * copied only when both people have one, and the duplicate's primary phone row that held the old
  * number takes the new one. When either side has no phone, aligning it would mean adding or dropping
  * a contact row, so the phone is left as it is.
+ *
+ * ── RULE 3 — the label names the duplicate as it now reads ──
+ * A label's DefectValue is "<FirstName> <LastName> (<code>)", written when the duplicate was
+ * planted, so after rule 1 it named someone who no longer exists. The name part is rewritten from
+ * the duplicate's aligned fields; the code in brackets stays. A DefectValue in any other shape
+ * fails loudly rather than being guessed at.
  */
 
 const IDENTITY_FIELDS = ['FirstName', 'MiddleName', 'LastName', 'DateOfBirth'];
+
+const DEFECT_VALUE_SHAPE = /^.+ (\([^()]+\))$/;
 
 const isPhoneType = (contactTypeId) => /Phone$/.test(String(contactTypeId || ''));
 
@@ -36,7 +44,7 @@ const isPhoneType = (contactTypeId) => /Phone$/.test(String(contactTypeId || '')
  * @param {Array<{fields: object, primaryKey: {ID: string}}>} args.contactMethods generated/contact-methods rows
  * @param {Array<{fields: object}>} args.labels                                  generated/data-quality-labels rows
  * @param {Map<string, object>} [args.heroFixedFieldsByEmail]                    lower-cased email → hero fixedFields
- * @returns {{ pairs: number, fieldsChanged: number, phonesAligned: number }}
+ * @returns {{ pairs: number, fieldsChanged: number, phonesAligned: number, labelsRenamed: number }}
  */
 export function alignPlantedDuplicates({ people, contactMethods, labels, heroFixedFieldsByEmail = new Map() }) {
     const personById = new Map(people.map((p) => [p.primaryKey.ID.toLowerCase(), p.fields]));
@@ -46,7 +54,7 @@ export function alignPlantedDuplicates({ people, contactMethods, labels, heroFix
         return fields;
     };
 
-    const stats = { pairs: 0, fieldsChanged: 0, phonesAligned: 0 };
+    const stats = { pairs: 0, fieldsChanged: 0, phonesAligned: 0, labelsRenamed: 0 };
     for (const { fields: label } of labels) {
         if (label.DefectKind !== 'DuplicatePerson') continue;
         const dup = find(label.PersonID, 'duplicate', label);
@@ -71,6 +79,14 @@ export function alignPlantedDuplicates({ people, contactMethods, labels, heroFix
             dup.Phone = orig.Phone;
             stats.fieldsChanged++;
             stats.phonesAligned++;
+        }
+
+        const shape = DEFECT_VALUE_SHAPE.exec(String(label.DefectValue || ''));
+        if (!shape) throw new Error(`DuplicatePerson label ${label.LabelKey || ''} has DefectValue ${JSON.stringify(label.DefectValue)}, not "<name> (<code>)"`);
+        const defectValue = `${dup.FirstName} ${dup.LastName} ${shape[1]}`;
+        if (label.DefectValue !== defectValue) {
+            label.DefectValue = defectValue;
+            stats.labelsRenamed++;
         }
     }
     return stats;
