@@ -8,7 +8,15 @@ import {
     type StaffContribution,
     type StaffFigure,
 } from '@mj-biz-apps/common-ng';
-import { EntityViewRef, MEMBERSHIP_STATUS_QUERY, ParseRunDetailItem, PredictionRowsFilter, type MembershipStatusRow } from './membership-data';
+import {
+    CanFallbackMembershipStatusToViews,
+    EntityViewRef,
+    LoadMembershipRowsFromViews,
+    MEMBERSHIP_STATUS_QUERY,
+    ParseRunDetailItem,
+    PredictionRowsFilter,
+    type MembershipStatusRow,
+} from './membership-data';
 
 /** One "Membership Status" query row, with the person it belongs to. */
 export interface StaffMembershipRow extends MembershipStatusRow {
@@ -157,7 +165,23 @@ export class MoreCheeseStaffContributor extends OrganizationStaffContributor {
         ]);
         const failed = views.find(v => !v.Success);
         if (failed) throw new Error(failed.ErrorMessage || 'Could not read membership figures.');
-        if (!status.Success) throw new Error(`"${MEMBERSHIP_STATUS_QUERY}" query failed: ${status.ErrorMessage}`);
+        let memberships: StaffMembershipRow[];
+        if (!status.Success) {
+            if (CanFallbackMembershipStatusToViews(status.ErrorMessage, provider)) {
+                const staffIds = request.Staff.map(s => s.PersonID);
+                const byPerson = await LoadMembershipRowsFromViews(staffIds, provider);
+                memberships = staffIds
+                    .map(id => {
+                        const row = byPerson.get(id.toUpperCase());
+                        return row ? { PersonID: id, ...row } : null;
+                    })
+                    .filter((r): r is StaffMembershipRow => r !== null);
+            } else {
+                throw new Error(`"${MEMBERSHIP_STATUS_QUERY}" query failed: ${status.ErrorMessage}`);
+            }
+        } else {
+            memberships = (status.Results ?? []) as StaffMembershipRow[];
+        }
 
         // Predictions are recorded against whichever record the model scored: the Person, or its
         // Member Profile (Member Renewal Risk scores profiles). Read both and credit each to the person.
@@ -175,7 +199,7 @@ export class MoreCheeseStaffContributor extends OrganizationStaffContributor {
         if (!details.Success) throw new Error(details.ErrorMessage || 'Could not read renewal predictions.');
 
         return BuildStaffMembershipContribution(request.Staff, {
-            Memberships: (status.Results ?? []) as StaffMembershipRow[],
+            Memberships: memberships,
             Certifications: views[0].Results as { PersonID: string; Status: string }[],
             Competition: views[1].Results as { Result: string | null }[],
             Attendances: views[2].Results as { PersonID: string }[],

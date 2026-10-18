@@ -162,6 +162,143 @@ function IsRunQueryProvider(provider: IMetadataProvider): provider is IMetadataP
 }
 
 /**
+ * True when `RunQuery` failed specifically because the `Membership Status` stored query has not
+ * yet been seeded or loaded into the server's in-memory query cache, and the Orders views needed
+ * to compute the same row via `RunView` are registered in entity metadata.
+ */
+export function CanFallbackMembershipStatusToViews(errorMessage: string | undefined, provider?: IMetadataProvider): boolean {
+    if (!errorMessage?.includes(`Query '${MEMBERSHIP_STATUS_QUERY}' not found`)) {
+        return false;
+    }
+    const md = provider ?? new Metadata();
+    return Boolean(
+        md.EntityByName('MJ_BizApps_Orders: Order Headers')?.BaseView &&
+        md.EntityByName('MJ_BizApps_Orders: Order Lines')?.BaseView &&
+        md.EntityByName('MJ_BizApps_Orders: Products')?.BaseView,
+    );
+}
+
+interface OrderHeaderDateRow {
+    ID: string;
+    BillToPersonID: string;
+    OrderDate: string;
+}
+
+interface OrderLineProductRow {
+    OrderHeaderID: string;
+    ProductID: string;
+}
+
+interface ProductSkuRow {
+    ID: string;
+    SKU: string | null;
+}
+
+function AddOneYearIso(dateStr: string): string | null {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return null;
+    return new Date(Date.UTC(d.getUTCFullYear() + 1, d.getUTCMonth(), d.getUTCDate())).toISOString();
+}
+
+/**
+ * Computes `MembershipStatusRow` per person directly from the Orders entities when the
+ * `Membership Status` stored query is not yet available in the server's query metadata cache.
+ * Mirrors the exact business rule in `config/queries/SQL/membership-status.sql`.
+ */
+export async function LoadMembershipRowsFromViews(
+    personIDs: string[],
+    provider?: IMetadataProvider,
+): Promise<Map<string, MembershipStatusRow>> {
+    const byPerson = new Map<string, MembershipStatusRow>();
+    if (personIDs.length === 0) return byPerson;
+
+    const rv = ViewOf(provider);
+    const ordersView = EntityViewRef('MJ_BizApps_Orders: Order Headers', provider);
+    const productsView = EntityViewRef('MJ_BizApps_Orders: Products', provider);
+    const quotedPeople = personIDs.map((id) => `'${Quote(id)}'`).join(',');
+
+    const headersResult = await rv.RunView<OrderHeaderDateRow>({
+        EntityName: 'MJ_BizApps_Orders: Order Headers',
+        ExtraFilter:
+            `BillToPersonID IN (${quotedPeople}) AND Status = 'Confirmed' AND ReversesOrderHeaderID IS NULL ` +
+            `AND NOT EXISTS (SELECT 1 FROM ${ordersView} r WHERE r.ReversesOrderHeaderID = ID AND r.Status = 'Confirmed')`,
+        OrderBy: 'OrderDate DESC',
+        Fields: ['ID', 'BillToPersonID', 'OrderDate'],
+        ResultType: 'simple',
+    });
+    if (!headersResult.Success) return byPerson;
+
+    const headers = headersResult.Results ?? [];
+    for (const id of personIDs) {
+        byPerson.set(id.toUpperCase(), {
+            MembershipStatus: 'Never Purchased',
+            MembershipTier: null,
+            MembershipExpiresOn: null,
+            LastMembershipPurchaseDate: null,
+            MembershipPurchaseCount: 0,
+        });
+    }
+    if (headers.length === 0) return byPerson;
+
+    const quotedHeaders = headers.map((h) => `'${Quote(h.ID)}'`).join(',');
+    const [linesResult, productsResult] = await rv.RunViews([
+        {
+            EntityName: 'MJ_BizApps_Orders: Order Lines',
+            ExtraFilter:
+                `OrderHeaderID IN (${quotedHeaders}) AND ReversesOrderLineID IS NULL ` +
+                `AND ProductID IN (SELECT p.ID FROM ${productsView} p WHERE p.RevenueRecognitionRule = 'RatableOverTerm' AND p.RevenueTermMonths = 12)`,
+            Fields: ['OrderHeaderID', 'ProductID'],
+            ResultType: 'simple',
+        },
+        {
+            EntityName: 'MJ_BizApps_Orders: Products',
+            ExtraFilter: `RevenueRecognitionRule = 'RatableOverTerm' AND RevenueTermMonths = 12`,
+            Fields: ['ID', 'SKU'],
+            ResultType: 'simple',
+        },
+    ]);
+    if (!linesResult.Success || !productsResult.Success) return byPerson;
+
+    const headerById = new Map<string, OrderHeaderDateRow>(headers.map((h) => [h.ID.toUpperCase(), h]));
+    const skuByProductId = new Map<string, string | null>(
+        ((productsResult.Results ?? []) as ProductSkuRow[]).map((p) => [p.ID.toUpperCase(), p.SKU]),
+    );
+
+    const linesByPerson = new Map<string, Array<{ orderDate: string; sku: string | null }>>();
+    for (const line of (linesResult.Results ?? []) as OrderLineProductRow[]) {
+        const header = headerById.get(line.OrderHeaderID.toUpperCase());
+        if (!header) continue;
+        const personKey = header.BillToPersonID.toUpperCase();
+        const list = linesByPerson.get(personKey) ?? [];
+        list.push({
+            orderDate: header.OrderDate,
+            sku: skuByProductId.get(line.ProductID.toUpperCase()) ?? null,
+        });
+        linesByPerson.set(personKey, list);
+    }
+
+    const todayUtc = new Date();
+    const todayMidnightUtc = Date.UTC(todayUtc.getUTCFullYear(), todayUtc.getUTCMonth(), todayUtc.getUTCDate());
+
+    for (const [personKey, purchases] of linesByPerson.entries()) {
+        purchases.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime());
+        const latest = purchases[0];
+        const expiresIso = AddOneYearIso(latest.orderDate);
+        const expiresTime = expiresIso ? new Date(expiresIso).getTime() : NaN;
+        const tier = latest.sku && latest.sku.startsWith('MEM-') ? latest.sku.slice(4) : null;
+        byPerson.set(personKey, {
+            MembershipStatus: !isNaN(expiresTime) && expiresTime >= todayMidnightUtc ? 'Current' : 'Lapsed',
+            MembershipTier: tier,
+            MembershipExpiresOn: expiresIso,
+            LastMembershipPurchaseDate: latest.orderDate,
+            MembershipPurchaseCount: purchases.length,
+        });
+    }
+
+    return byPerson;
+}
+
+/**
  * Runs the "Membership Status" stored query for one person. Never throws: a missing query or a failed
  * run returns null so the rest of the panel still renders.
  */
@@ -170,6 +307,10 @@ async function LoadMembershipStatus(personID: string, provider?: IMetadataProvid
         const rq = provider && IsRunQueryProvider(provider) ? new RunQuery(provider) : new RunQuery();
         const result = await rq.RunQuery({ QueryName: MEMBERSHIP_STATUS_QUERY, Parameters: { PersonID: personID } });
         if (!result.Success) {
+            if (CanFallbackMembershipStatusToViews(result.ErrorMessage, provider)) {
+                const fallbackRows = await LoadMembershipRowsFromViews([personID], provider);
+                return FormatMembershipStatus(fallbackRows.get(personID.toUpperCase()) ?? null);
+            }
             console.warn(`More Cheese: "${MEMBERSHIP_STATUS_QUERY}" query failed for person ${personID}: ${result.ErrorMessage}`);
             return null;
         }

@@ -92,4 +92,47 @@ describe('LoadMembershipForPerson — membership status comes from the stored qu
     expect(res.MembershipStatus).toBeNull();
     expect(res.Profile?.MemberNumber).toBe('ICF-100289');
   });
+
+  it('falls back to Orders entity views without warning when the stored query is not yet in the server query cache', async () => {
+    const runQuery = vi.fn().mockResolvedValue({
+      Success: false,
+      Results: [],
+      ErrorMessage: "Query 'Membership Status' not found",
+    });
+    const views: Record<string, { SchemaName: string; BaseView: string }> = {
+      'MJ: Process Runs': { SchemaName: '__mj', BaseView: 'vwProcessRuns' },
+      'MJ: Record Processes': { SchemaName: '__mj', BaseView: 'vwRecordProcesses' },
+      'MJ_BizApps_Orders: Order Headers': { SchemaName: '__mj_BizAppsOrders', BaseView: 'vwOrderHeaders' },
+      'MJ_BizApps_Orders: Order Lines': { SchemaName: '__mj_BizAppsOrders', BaseView: 'vwOrderLines' },
+      'MJ_BizApps_Orders: Products': { SchemaName: '__mj_BizAppsOrders', BaseView: 'vwProducts' },
+    };
+    const provider = {
+      RunView: vi.fn().mockImplementation(async (params: { EntityName: string }) => {
+        if (params.EntityName === 'MoreCheese: Member Profiles') {
+          return { Success: true, Results: [profile] };
+        }
+        if (params.EntityName === 'MJ_BizApps_Orders: Order Headers') {
+          return {
+            Success: true,
+            Results: [{ ID: 'OH-1', BillToPersonID: PERSON, OrderDate: '2026-10-07T00:00:00.000Z' }],
+          };
+        }
+        return { Success: true, Results: [] };
+      }),
+      RunViews: vi.fn().mockResolvedValue([
+        { Success: true, Results: [{ OrderHeaderID: 'OH-1', ProductID: 'PROD-1' }] },
+        { Success: true, Results: [{ ID: 'PROD-1', SKU: 'MEM-Individual' }] },
+      ]),
+      RunQuery: runQuery,
+      EntityByName: (name: string) => views[name],
+    } as unknown as IMetadataProvider;
+
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const res = await LoadMembershipForPerson(PERSON, provider);
+    expect(warnSpy).not.toHaveBeenCalled();
+    expect(res.MembershipStatus?.Status).toBe('Current');
+    expect(res.MembershipStatus?.Detail).toContain('Individual');
+    warnSpy.mockRestore();
+  });
 });
+
