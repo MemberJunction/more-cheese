@@ -41,6 +41,9 @@
 --     merely references ours; the reference is released and the row kept.
 --   • `morecheese_members` itself. MJ drops it, and a second DROP SCHEMA would fail on a condition
 --     that is not an error.
+--   • MJ's built-in `Dropbox` `FileStorageProvider` row (`C9B9433E-F36B-1410-8DA0-00021F8B792E`).
+--     `config/file-storage-providers` only flips `IsActive = 1` on that MJ core row; teardown
+--     resets `IsActive = 0` (when no other `FileStorageAccount` references it) rather than deleting it.
 --
 -- ── HOW IT ORDERS DELETES ────────────────────────────────────────────────────────────────────
 -- It does not. An earlier version of the caliber original this is ported from deleted in reverse
@@ -62,8 +65,9 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (2420 distinct records; 2450 declared across
--- 42 directories, 30 of them declared in two directories and inserted once):
+-- Seed provenance (2419 distinct records deleted; 2450 declared across
+-- 42 directories, 30 of them declared in two directories and inserted once,
+-- 1 MJ core row deactivated in place rather than deleted):
 --   1425 from config/content-item-tags
 --    192 from config/content-item-chunks
 --    192 from config/content-items
@@ -2105,7 +2109,6 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: File Storage Account Permissions', '79A45295-2080-56FD-93A4-D995CA5382E7'),
     ('MJ: File Storage Account Permissions', '0ADD75FF-B902-55D7-81AB-DC6535E81749'),
     ('MJ: File Storage Accounts', '636E204B-12CB-4D67-A861-09DA9C825BA3'),
-    ('MJ: File Storage Providers', 'C9B9433E-F36B-1410-8DA0-00021F8B792E'),
     ('MJ: Projects', '3C9E1F52-7A4B-4D8E-9B2C-6F1A8D3E5B70'),
     ('MJ: Queries', '01233BE6-F40A-48C0-81F3-A04476E1429F'),
     ('MJ: Queries', '15BCACCF-3411-49B7-9D55-811486068114'),
@@ -2129,10 +2132,10 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Queries', '97AA052D-4305-43EA-A6CE-97A23C7073E7'),
     ('MJ: Queries', 'A438A9E2-55F2-4C19-9D5C-48A8A1BA1286'),
     ('MJ: Queries', 'A90A9F3A-BD11-4574-BD1F-701E2F6E0E51'),
-    ('MJ: Queries', 'A94EC844-1672-437A-852B-26763C3E5E2B');
+    ('MJ: Queries', 'A94EC844-1672-437A-852B-26763C3E5E2B'),
+    ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283');
 
 INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
-    ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283'),
     ('MJ: Queries', 'C3CE64FE-EEAB-4B30-A647-8F89CBE83209'),
     ('MJ: Queries', 'CE78AD75-1CE9-464D-A492-E047064A0317'),
     ('MJ: Queries', 'E30B4FC9-CC3F-4F35-9D60-D22D01C98C23'),
@@ -2811,6 +2814,19 @@ DEALLOCATE chk_cursor;
 
 IF @remaining > 0
     THROW 51004, 'MoreCheese teardown finished with seeded rows still present. Nothing has been committed.', 1;
+
+-- ── 6b. Deactivate MJ core rows that config/ only activated ───────────────────────────────────
+-- config/file-storage-providers flips IsActive = 1 on MJ's built-in Dropbox FileStorageProvider row
+-- ('C9B9433E-F36B-1410-8DA0-00021F8B792E') rather than creating it. Deleting that row destroys MJ's
+-- core provider record and breaks subsequent installs on FK_FileStorageAccount_FileStorageProvider.
+-- Reset IsActive = 0 once MoreCheese's FileStorageAccount is gone, unless another account uses it.
+UPDATE [${mjSchema}].[FileStorageProvider]
+SET [IsActive] = 0
+WHERE [ID] = 'C9B9433E-F36B-1410-8DA0-00021F8B792E'
+  AND NOT EXISTS (
+      SELECT 1 FROM [${mjSchema}].[FileStorageAccount]
+      WHERE [ProviderID] = 'C9B9433E-F36B-1410-8DA0-00021F8B792E'
+  );
 
 -- ── 7. Drop the two schemas mj app remove does not ────────────────────────────────────────────
 -- THE MULTI-SCHEMA HALF. 'mj app remove' drops schema.name from mj-app.json and nothing else, so
