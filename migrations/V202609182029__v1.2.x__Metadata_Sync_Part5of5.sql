@@ -587,7 +587,20 @@ SET
 SET
   @RequiresOAuth_47091aae12ac = 0
 SET
-  @ID_47091aae12ac = 'C9B9433E-F36B-1410-8DA0-00021F8B792E' EXEC [${mjSchema}].spUpdateFileStorageProvider @Name = @Name_47091aae12ac,
+  @ID_47091aae12ac = 'C9B9433E-F36B-1410-8DA0-00021F8B792E'
+IF NOT EXISTS (SELECT 1 FROM [${mjSchema}].[FileStorageProvider] WHERE [ID] = @ID_47091aae12ac)
+  EXEC [${mjSchema}].spCreateFileStorageProvider @Name = @Name_47091aae12ac,
+  @Description = @Description_47091aae12ac,
+  @ServerDriverKey = @ServerDriverKey_47091aae12ac,
+  @ClientDriverKey = @ClientDriverKey_47091aae12ac,
+  @Priority = @Priority_47091aae12ac,
+  @IsActive = @IsActive_47091aae12ac,
+  @SupportsSearch = @SupportsSearch_47091aae12ac,
+  @Configuration = @Configuration_47091aae12ac,
+  @RequiresOAuth = @RequiresOAuth_47091aae12ac,
+  @ID = @ID_47091aae12ac;
+ELSE
+  EXEC [${mjSchema}].spUpdateFileStorageProvider @Name = @Name_47091aae12ac,
   @Description = @Description_47091aae12ac,
   @ServerDriverKey = @ServerDriverKey_47091aae12ac,
   @ClientDriverKey = @ClientDriverKey_47091aae12ac,

@@ -122,6 +122,20 @@ const UUID = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a
  */
 export const UNDROPPED_SCHEMAS = Object.freeze(['morecheese_events', 'morecheese_learning']);
 
+/**
+ * MJ core rows that `config/` updates in place (`IsActive = 1`) rather than creating.
+ *
+ * `config/file-storage-providers` flips MJ's built-in Dropbox `FileStorageProvider` row
+ * (`C9B9433E-F36B-1410-8DA0-00021F8B792E`, seeded in MJ's core baseline with `IsActive = 0`) to
+ * `IsActive = 1` via `spUpdateFileStorageProvider`. Deleting that row during teardown destroys MJ's
+ * core provider record, so a subsequent `mj app install` hits `spUpdateFileStorageProvider` (which
+ * updates 0 rows) and then fails with `FK_FileStorageAccount_FileStorageProvider` when creating the
+ * Dropbox `FileStorageAccount`. Teardown must therefore EXCLUDE it from `#MoreCheeseSeed` /
+ * `#MoreCheeseDoomed` and instead reset `IsActive = 0` when no remaining `FileStorageAccount`
+ * references it.
+ */
+export const CORE_ACTIVATED_IDS = Object.freeze(new Set(['C9B9433E-F36B-1410-8DA0-00021F8B792E']));
+
 /** `.mj-sync.json` and generator state are not records; `.backups`/`sql_logging`/`codegen` are push
  *  by-products. Matches `scripts/check-release-seed-coverage.mjs` exactly, deliberately: the two
  *  scripts must agree about what a record is, or the teardown's delete list and the coverage gate's
@@ -507,6 +521,19 @@ DEALLOCATE chk_cursor;
 IF @remaining > 0
     THROW 51004, 'MoreCheese teardown finished with seeded rows still present. Nothing has been committed.', 1;
 
+-- ── 6b. Deactivate MJ core rows that config/ only activated ───────────────────────────────────
+-- config/file-storage-providers flips IsActive = 1 on MJ's built-in Dropbox FileStorageProvider row
+-- ('C9B9433E-F36B-1410-8DA0-00021F8B792E') rather than creating it. Deleting that row destroys MJ's
+-- core provider record and breaks subsequent installs on FK_FileStorageAccount_FileStorageProvider.
+-- Reset IsActive = 0 once MoreCheese's FileStorageAccount is gone, unless another account uses it.
+UPDATE [@@CORE_SCHEMA@@].[FileStorageProvider]
+SET [IsActive] = 0
+WHERE [ID] = 'C9B9433E-F36B-1410-8DA0-00021F8B792E'
+  AND NOT EXISTS (
+      SELECT 1 FROM [@@CORE_SCHEMA@@].[FileStorageAccount]
+      WHERE [ProviderID] = 'C9B9433E-F36B-1410-8DA0-00021F8B792E'
+  );
+
 -- ── 7. Drop the two schemas mj app remove does not ────────────────────────────────────────────
 -- THE MULTI-SCHEMA HALF. 'mj app remove' drops schema.name from mj-app.json and nothing else, so
 -- without this block morecheese_events and morecheese_learning survive an uninstall complete with
@@ -658,7 +685,8 @@ export function generateTeardown({ configRows, baseline, entities, applicationId
     // Deduping inside readConfigSeed would be the smaller edit and the wrong one — the provenance
     // header below is built from those same rows, so the second directory of each pair would drop
     // out of the 36-line summary silently. It stays declared there and distinct here.
-    const distinctSeedRows = [...new Map(configRows.map((r) => [`${r.entity}|${r.id}`, r])).values()];
+    const deletableRows = configRows.filter((r) => !CORE_ACTIVATED_IDS.has(r.id));
+    const distinctSeedRows = [...new Map(deletableRows.map((r) => [`${r.entity}|${r.id}`, r])).values()];
 
     const seedRows = batchedInsert(
         '#MoreCheeseSeed',
@@ -733,6 +761,9 @@ ${entitySummary}
 --     merely references ours; the reference is released and the row kept.
 --   • \`morecheese_members\` itself. MJ drops it, and a second DROP SCHEMA would fail on a condition
 --     that is not an error.
+--   • MJ's built-in \`Dropbox\` \`FileStorageProvider\` row (\`C9B9433E-F36B-1410-8DA0-00021F8B792E\`).
+--     \`config/file-storage-providers\` only flips \`IsActive = 1\` on that MJ core row; teardown
+--     resets \`IsActive = 0\` (when no other \`FileStorageAccount\` references it) rather than deleting it.
 --
 -- ── HOW IT ORDERS DELETES ────────────────────────────────────────────────────────────────────
 -- It does not. An earlier version of the caliber original this is ported from deleted in reverse
@@ -754,8 +785,9 @@ ${entitySummary}
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (${distinctSeedRows.length} distinct records; ${configRows.length} declared across
--- ${byProvenance.size} directories, ${configRows.length - distinctSeedRows.length} of them declared in two directories and inserted once):
+-- Seed provenance (${distinctSeedRows.length} distinct records deleted; ${configRows.length} declared across
+-- ${byProvenance.size} directories, ${deletableRows.length - distinctSeedRows.length} of them declared in two directories and inserted once,
+-- ${configRows.length - deletableRows.length} MJ core row deactivated in place rather than deleted):
 ${summary}
 -- =============================================================================================
 
@@ -795,7 +827,9 @@ function main(argv) {
     const { baseline, entities, applicationId } = readBaselineCoreRows(REPO_ROOT);
     const sql = generateTeardown({ configRows, baseline, entities, applicationId });
     // Same key the emitted INSERT is distinct on, so the summary cannot drift from the file.
-    const distinctSeed = new Set(configRows.map((r) => `${r.entity}|${r.id}`)).size;
+    const distinctSeed = new Set(
+        configRows.filter((r) => !CORE_ACTIVATED_IDS.has(r.id)).map((r) => `${r.entity}|${r.id}`),
+    ).size;
 
     mkdirSync(path.dirname(outPath), { recursive: true });
     writeFileSync(outPath, sql, 'utf8');
