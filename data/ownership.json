@@ -344,7 +344,17 @@
     "vector-indexes": {
       "tier": "config",
       "classification": "config",
-      "reason": "Knowledge Hub vector index (Pinecone morecheese-content + Gemini Embedding 2) for ICF content"
+      "reason": "Knowledge Hub vector indexes on Pinecone with Gemini Embedding 2: morecheese-content for ICF content, morecheese-duplicates for duplicate detection"
+    },
+    "entity-documents": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Record Duplicate entity documents for People, Organizations and Products (Gemini Embedding 2 on the Pinecone morecheese-duplicates index)"
+    },
+    "duplicate-runs": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Completed duplicate-detection runs (People, Organizations, Products) shipped as demo results; each run carries only the details that found matches"
     },
     "content-types": {
       "tier": "config",
