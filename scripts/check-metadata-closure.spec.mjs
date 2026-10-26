@@ -202,6 +202,37 @@ test('a key declared inside a parent record resolves', () => {
     assert.equal(runGate(fixture(files)).status, 0);
 });
 
+// Duplicate run details and matches point at records polymorphically, in MJ's single-key URL-segment
+// form (`ID|<uuid>`). The gate resolves the key value, so the pointer is checked rather than ignored.
+test('a record pointer in ID|<uuid> form resolves on its key', () => {
+    const files = baseFiles();
+    files['generated/people/.data.json'][0].fields.RecordID = `ID|${PERSON}`;
+    assert.equal(runGate(fixture(files)).status, 0);
+});
+
+test('a record pointer in ID|<uuid> form naming an undeclared record is a violation', () => {
+    const files = baseFiles();
+    files['generated/people/.data.json'][0].fields.RecordID = `ID|${UNDECLARED}`;
+    const run = runGate(fixture(files));
+    assert.equal(run.status, 1);
+    assert.match(run.stderr, /RecordID/);
+});
+
+// A duplicate run nests its details, and each detail nests its matches: the matches are two levels
+// down, and a gate that read one level would never check them.
+test('a reference two levels down is still checked', () => {
+    const files = baseFiles();
+    files['generated/payments/.data.json'][0].relatedEntities = {
+        'Payment Lines': [{
+            ...record('66666666-0000-0000-0000-000000000001', { Amount: 10 }),
+            relatedEntities: { 'Payment Line Notes': [record('77777777-0000-0000-0000-000000000001', { MatchRecordID: `ID|${UNDECLARED}` })] },
+        }],
+    };
+    const run = runGate(fixture(files));
+    assert.equal(run.status, 1);
+    assert.match(run.stderr, /MatchRecordID/);
+});
+
 // ── The states the gate refuses to call clean ───────────────────────────────────────────────────
 
 // An exclusion is a standing claim that some field points outside this repo. When it stops matching

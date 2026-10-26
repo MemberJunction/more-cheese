@@ -65,14 +65,15 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (2419 distinct records deleted; 2450 declared across
--- 42 directories, 30 of them declared in two directories and inserted once,
+-- Seed provenance (2478 distinct records deleted; 2509 declared across
+-- 44 directories, 30 of them declared in two directories and inserted once,
 -- 1 MJ core row deactivated in place rather than deleted):
 --   1425 from config/content-item-tags
 --    192 from config/content-item-chunks
 --    192 from config/content-items
 --    175 from config/tags
 --     75 from config/conversations
+--     55 from config/duplicate-runs
 --     48 from config/query-categories
 --     46 from config/artifacts
 --     34 from config/queries
@@ -91,12 +92,14 @@
 --      5 from config/sonar-score-models-activate
 --      4 from config/dashboard-category-links
 --      4 from config/dashboards
+--      3 from config/entity-documents
 --      2 from config/application-roles
 --      2 from config/content-sources
 --      2 from config/file-storage-account-permissions
 --      2 from config/sonar-score-model-versions
 --      2 from config/sonar-time-windows
 --      2 from config/user-roles
+--      2 from config/vector-indexes
 --      1 from config/ai-model-vendors
 --      1 from config/ai-models
 --      1 from config/ai-vendors
@@ -109,7 +112,6 @@
 --      1 from config/projects
 --      1 from config/user-settings
 --      1 from config/users
---      1 from config/vector-indexes
 -- =============================================================================================
 
 CREATE TABLE #MoreCheeseSeed (
@@ -2106,6 +2108,66 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Dashboards', '9F177261-C909-52F2-8ACF-475613ABFB49'),
     ('MJ: Dashboards', '82858464-5FFD-5DF7-A79E-E6DADD0652CA'),
     ('MJ: Dashboards', '74420F91-79C0-59FF-8E4B-C4A4AFDC4C83'),
+    ('MJ: Duplicate Runs', '4607C9C8-3147-43B2-B84B-B389F28D0736'),
+    ('MJ: Duplicate Runs', '697844B8-E2C2-4EBE-947D-880A9ED18C5F'),
+    ('MJ: Duplicate Runs', '2FB78EA5-4A22-4E8A-BD99-3C5438931E35'),
+    ('MJ: Duplicate Runs', '2938FF39-23F8-4E87-AE57-FEA60D8DAAC9'),
+    ('MJ: Duplicate Runs', '8A4383D7-90F9-42ED-94FB-ED5866155134'),
+    ('MJ: Duplicate Runs', '75E7F42E-5D68-4BFE-984E-7387A138FE56'),
+    ('MJ: Duplicate Runs', '936B94D8-EF3E-44B5-88CE-637059384EB8'),
+    ('MJ: Duplicate Runs', 'E7FF02B8-2631-46DB-B31E-48D4ED7D4DB1'),
+    ('MJ: Duplicate Runs', 'FBA56745-1647-4BAA-8192-E6D9F465DE1B'),
+    ('MJ: Duplicate Runs', '7347C073-37FF-4BA8-82A4-3F1286AEA0BA'),
+    ('MJ: Duplicate Runs', 'BD60F5F7-497C-422A-8254-FA14DC2CC4BD'),
+    ('MJ: Duplicate Runs', '0AF2D50B-9A3E-4F7B-9442-C2CF4D874AD0'),
+    ('MJ: Duplicate Runs', '2705B393-E860-45C8-A272-B14061ECEE2C'),
+    ('MJ: Duplicate Runs', '042113FE-814A-4DE6-9EE6-60077F1AE35F'),
+    ('MJ: Duplicate Runs', '4E3CEAC9-5BAE-43C8-BBA9-D7C7AE01405C'),
+    ('MJ: Duplicate Runs', '4BFAFCF2-24EA-4A79-A878-1E6C210E21CF'),
+    ('MJ: Duplicate Runs', 'D6957E33-6087-4C5F-A684-F0783128843B'),
+    ('MJ: Duplicate Runs', 'F6872EEA-3769-446F-B57A-79C551D11B73'),
+    ('MJ: Duplicate Runs', '0E3CB29F-6411-496C-9BB7-5C802805198F'),
+    ('MJ: Duplicate Runs', '386D0BFC-7D85-4AA8-B276-2B53C047AE7E'),
+    ('MJ: Duplicate Runs', 'F0A5AE18-0ED4-4775-A196-9A3485FEBA97'),
+    ('MJ: Duplicate Runs', '598FB6A8-CD37-403D-AB19-EC97BED57ABC'),
+    ('MJ: Duplicate Runs', 'B960D362-E134-4933-B4B7-B29CE0F46CDC'),
+    ('MJ: Duplicate Runs', '7C8831DE-6DC0-4419-A250-10FDD13798BF'),
+    ('MJ: Duplicate Runs', 'A9990EBA-6B91-4236-BAA5-9DE938C5BA6F'),
+    ('MJ: Duplicate Runs', '8F800D5E-1833-47CA-8775-CA707F100EE8'),
+    ('MJ: Duplicate Runs', '44287AE9-D97D-4252-AE6A-411F18C27A74'),
+    ('MJ: Duplicate Runs', '41645D03-9CEE-4D62-82B5-7561A8E5DAA6');
+
+INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: Duplicate Runs', '52C54286-E689-4BB1-8890-773A3FC0CA37'),
+    ('MJ: Duplicate Runs', '73C0CCB8-48EE-47BA-89E1-EB02108763DA'),
+    ('MJ: Duplicate Runs', '9B49004E-12E8-4891-AB5D-B76C3D25E19B'),
+    ('MJ: Duplicate Runs', '5BF3A8F4-14B5-44BA-A7E5-4E5A966FAB02'),
+    ('MJ: Duplicate Runs', '95CF140A-AF46-4AD7-89BF-1EB5849048B6'),
+    ('MJ: Duplicate Runs', '08978BEB-B2A0-4F77-A673-0F4A0BA722A2'),
+    ('MJ: Duplicate Runs', '1035FAD0-499A-42DC-9AEB-359EF6CAA369'),
+    ('MJ: Duplicate Runs', '998B50D3-8666-46B9-A915-10CA6B2F65E6'),
+    ('MJ: Duplicate Runs', '287CE4D0-E250-48D1-A903-D65B24B14969'),
+    ('MJ: Duplicate Runs', 'FF970E31-F8F7-4B5B-B475-07923A6ADC85'),
+    ('MJ: Duplicate Runs', 'CE57D640-C7D7-45F9-948A-433BA2DF0F15'),
+    ('MJ: Duplicate Runs', 'FE26F37C-2763-4345-8089-517B459B4462'),
+    ('MJ: Duplicate Runs', '5F9D9B9D-1922-42FC-A2F2-A5F50B2F2629'),
+    ('MJ: Duplicate Runs', 'C22174A4-0DD9-4C02-B4AD-1F2DCFB736CA'),
+    ('MJ: Duplicate Runs', 'CDD05204-3BCD-426E-A838-939A6BF9AD7A'),
+    ('MJ: Duplicate Runs', 'ABFABE36-96B6-4629-884F-897DF5F76AE0'),
+    ('MJ: Duplicate Runs', 'E205BB8E-0D32-4454-A1AD-3A4C34A40C2C'),
+    ('MJ: Duplicate Runs', '8D5AB7B6-3BE4-48C9-BD4E-11C8AAB6D251'),
+    ('MJ: Duplicate Runs', '3435CECD-9803-4530-BADA-A44E18ECD7FF'),
+    ('MJ: Duplicate Runs', '90771306-4692-449B-8F0C-80D9DAB109DE'),
+    ('MJ: Duplicate Runs', 'E72139E5-FAC9-4508-8DD8-0101A5680AEC'),
+    ('MJ: Duplicate Runs', '889434EE-D3AE-4057-8ABC-BFFF90F46188'),
+    ('MJ: Duplicate Runs', '164AFE88-68AB-4B37-A5BF-D37A7717A55E'),
+    ('MJ: Duplicate Runs', 'AABCF0A9-2AD2-4605-8479-AFBB53A84601'),
+    ('MJ: Duplicate Runs', '761B7F91-3398-4E62-9099-7E089189266A'),
+    ('MJ: Duplicate Runs', '50161B71-31D3-4971-A721-49FE7448DEF1'),
+    ('MJ: Duplicate Runs', '70D18A7F-EA5E-4AF0-B10B-EED4D03F49D5'),
+    ('MJ: Entity Documents', '1BCD53D7-638C-43AA-A35B-6F0D239FC557'),
+    ('MJ: Entity Documents', '03790917-5B5D-40A8-BC0F-0949E836C89C'),
+    ('MJ: Entity Documents', 'E58FAF59-25EA-4868-8ADB-9C1CE1745B87'),
     ('MJ: File Storage Account Permissions', '79A45295-2080-56FD-93A4-D995CA5382E7'),
     ('MJ: File Storage Account Permissions', '0ADD75FF-B902-55D7-81AB-DC6535E81749'),
     ('MJ: File Storage Accounts', '636E204B-12CB-4D67-A861-09DA9C825BA3'),
@@ -2133,9 +2195,7 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Queries', 'A438A9E2-55F2-4C19-9D5C-48A8A1BA1286'),
     ('MJ: Queries', 'A90A9F3A-BD11-4574-BD1F-701E2F6E0E51'),
     ('MJ: Queries', 'A94EC844-1672-437A-852B-26763C3E5E2B'),
-    ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283');
-
-INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: Queries', 'B2AD46EF-55E2-4A2E-B12D-AEF35B706283'),
     ('MJ: Queries', 'C3CE64FE-EEAB-4B30-A647-8F89CBE83209'),
     ('MJ: Queries', 'CE78AD75-1CE9-464D-A492-E047064A0317'),
     ('MJ: Queries', 'E30B4FC9-CC3F-4F35-9D60-D22D01C98C23'),
@@ -2554,7 +2614,8 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Views', 'A3CF1C6C-7B59-4A0D-AD3D-EC17DD8770CF'),
     ('MJ: User Views', 'D78F3FFA-B2F2-4CB0-9CE7-AFE1E1FF22D0'),
     ('MJ: Users', '7FE3B684-1136-4881-983E-F87D22E9A0EC'),
-    ('MJ: Vector Indexes', '6A2C1F0E-3B8D-4E57-9C41-2D7F8A5B6C01');
+    ('MJ: Vector Indexes', '6A2C1F0E-3B8D-4E57-9C41-2D7F8A5B6C01'),
+    ('MJ: Vector Indexes', 'E1C999E9-F45E-43E0-849B-E80813543F49');
 
 -- ── The entity metadata this app's baseline creates, for all three schemas ────────────────────
 INSERT INTO #MoreCheeseDoomed (SchemaName, TableName, RowID, Depth) VALUES

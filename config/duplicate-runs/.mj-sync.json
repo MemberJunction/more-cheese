@@ -1,0 +1,23 @@
+{
+  "entity": "MJ: Duplicate Runs",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".duplicate-runs.json",
+    "appendRecordsToExistingFile": true,
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt"
+    ],
+    "ignoreNullFields": true,
+    "ignoreVirtualFields": true,
+    "lookupFields": {
+      "EntityID": { "entity": "MJ: Entities", "field": "Name" },
+      "EntityDocumentID": { "entity": "MJ: Entity Documents", "field": "Name" },
+      "StartedByUserID": { "entity": "MJ: Users", "field": "Email" }
+    }
+  }
+}
