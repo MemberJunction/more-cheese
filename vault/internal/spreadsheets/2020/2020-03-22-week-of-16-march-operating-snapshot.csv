@@ -1,0 +1,29 @@
+# title: Operating snapshot, week of 16 March 2020
+# date: 2020-03-22
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-03-16
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, cash, pandemic-response]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-03-16
+# basis: window 2020-03-16 to 2020-03-22. Members current at week end follows the Membership Status rule. Cash captured is payments received in the window and is not tied to the orders booked in the same window.
+# notice: FICTIONAL DEMONSTRATION DATA — International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo.
+#
+metric,value,unit,source_key,basis_note
+current_members_at_week_end,384,members,currentMembersAtWeekEnd,rolling 12 months from latest qualifying purchase
+membership_purchases,2,purchases,membershipPurchases.total,both Individual tier
+first_time_purchases,2,purchases,membershipPurchases.firstTime,all purchases this week were first-time
+membership_gross_usd,350,usd,membershipPurchases.gross,booked in window; not cash
+confirmed_orders,2,orders,orders.confirmed,same two membership orders
+cancellations,0,orders,orders.cancellations,none this week
+cash_captured_usd,1564,usd,cashCaptured,payments in window; includes payment on earlier orders so exceeds gross
+course_enrollments_taken,0,enrollments,courseEnrollmentsTaken,none dated this week; check month-level before saying sign-ups jumped
+certification_awards,0,awards,certifications.awarded,none this week
+# note: Cash captured exceeds gross booked because payments in the week include money for orders booked earlier. Do not present the difference as an error.
+# note: The snapshot covers all seven days, so it was run after the week closed and is the settled figure for the week.

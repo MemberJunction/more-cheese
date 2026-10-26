@@ -1,0 +1,36 @@
+# title: Weekly snapshot, 1-7 June 2026
+# date: 2026-06-07
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-06-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, annual-conference, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2026-06-01
+# basis: membership purchases, orders, cash, registrations and enrollments are booked inside 2026-06-01..2026-06-07. Current members counts people whose latest qualifying purchase is within 12 months, so it does not tie to membership gross. Gross orders and cash captured are different bases.
+# caveat: pulled on 7 June so every row is preliminary. Cash captured is low next to gross orders and we have not established whether that is payment timing; see the cash row.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1567,members,rolling 12 months,preliminary
+membership,membership_purchases,17,purchases,booked in week,preliminary
+membership,first_time_purchases,7,purchases,booked in week,preliminary
+membership,individual_purchases,14,purchases,booked in week,preliminary
+membership,smallbusiness_purchases,2,purchases,booked in week,preliminary
+membership,corporate_purchases,1,purchases,booked in week,preliminary
+membership,membership_gross_usd,4250,usd,booked in week,preliminary
+orders,confirmed_orders,92,orders,booked in week,preliminary
+orders,confirmed_orders_gross_usd,28321,usd,booked in week,preliminary
+orders,cancellations,1,orders,booked in week,preliminary
+cash,cash_captured_usd,450,usd,payments in week - low against gross and timing not confirmed,preliminary
+events,conference_registrations_taken,46,registrations,EVT-2026-CONF,preliminary
+events,workshop_registrations_taken,13,registrations,EVT-2026-W1,preliminary
+education,course_enrollments_taken,4,enrollments,taken in week,preliminary
+education,course_completions,9,completions,in week,preliminary
+education,certifications_awarded,2,awards,Cheese Foundations Certificate,preliminary

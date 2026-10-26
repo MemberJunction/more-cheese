@@ -1,0 +1,38 @@
+# title: Conference week snapshot, 24-30 July 2023
+# date: 2023-07-30
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-07-24
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, annual-conference, membership, cash]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2023-07-24 and node scripts/vault-facts.mjs event EVT-2023-CONF
+# basis: membership purchases, orders and cash are booked inside 2023-07-24..2023-07-30. Current members counts people whose latest qualifying purchase is within 12 months, so it does not tie to membership gross. Gross orders and cash captured are different bases.
+# caveat: pulled on 30 July, the last day of the week, so every row is preliminary. Conference attendance is also pending reconciliation against the badge-scan log.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,800,members,rolling 12 months,preliminary
+membership,membership_purchases,6,purchases,booked in week,preliminary
+membership,first_time_purchases,2,purchases,booked in week,preliminary
+membership,individual_purchases,4,purchases,booked in week,preliminary
+membership,corporate_purchases,2,purchases,booked in week,preliminary
+membership,membership_gross,2494,usd,booked in week,preliminary
+orders,confirmed_orders,20,orders,booked in week,preliminary
+orders,orders_gross,8575,usd,booked in week,preliminary
+orders,cancellation_orders,0,orders,booked in week,preliminary
+cash,cash_captured,8561,usd,payments in week,preliminary
+conference,registrations_taken_in_week,14,registrations,taken 24-30 July,preliminary
+conference,registered_total,290,registrations,EVT-2023-CONF,preliminary
+conference,attended,268,registrations,attendance field,preliminary
+conference,no_show,22,registrations,attendance field,preliminary
+conference,refunded,0,registrations,EVT-2023-CONF,preliminary
+education,course_enrollments_taken,11,enrollments,taken in week,preliminary
+education,course_completions,3,completions,completed in week,preliminary
+education,certification_enrollments,0,enrollments,taken in week,preliminary
