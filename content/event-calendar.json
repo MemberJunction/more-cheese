@@ -1,0 +1,985 @@
+{
+  "description": "ICF event calendar. The Events entity was retired in v1.2 (registrations now live as Event Order Lines on orders numbered ORD-E-REG-\u2026-<EventKey>); this is the canonical name, date and place for each EventKey, recovered from generated/events as of ea8818c^. Reference for content writers and scripts/vault-facts.mjs \u2014 not mj-sync data.",
+  "events": [
+    {
+      "EventKey": "EVT-2019-W3",
+      "Name": "Workshop: Cedar Packaging",
+      "EventType": "Workshop",
+      "EventDate": "2019-02-18",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Tandil",
+      "State": "AR-B"
+    },
+    {
+      "EventKey": "EVT-2019-W1",
+      "Name": "Workshop: Prairie Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2019-02-27",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Lancaster",
+      "State": "US-PA"
+    },
+    {
+      "EventKey": "EVT-2019-WEB3",
+      "Name": "Webinar: Judging Standards 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-05-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2019-W4",
+      "Name": "Workshop: Meadow Affinage",
+      "EventType": "Workshop",
+      "EventDate": "2019-05-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Courtenay",
+      "State": "CA-BC"
+    },
+    {
+      "EventKey": "EVT-2019-W2",
+      "Name": "Workshop: Curd Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2019-06-04",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Allg\u00e4u",
+      "State": "DE-BY"
+    },
+    {
+      "EventKey": "EVT-2019-WEB4",
+      "Name": "Webinar: Wholesale Negotiation 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-06-27",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2019-W5",
+      "Name": "Workshop: Clover Pasta Filata",
+      "EventType": "Workshop",
+      "EventDate": "2019-07-01",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Courtenay",
+      "State": "CA-BC"
+    },
+    {
+      "EventKey": "EVT-2019-WEB1",
+      "Name": "Webinar: Apprenticeship Programmes 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-07-11",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2019-WEB2",
+      "Name": "Webinar: Apprenticeship Programmes 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-07-11",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2019-CONF",
+      "Name": "ICF Annual Conference 2019",
+      "EventType": "Conference",
+      "EventDate": "2019-07-16",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "WI"
+    },
+    {
+      "EventKey": "EVT-2019-WEB6",
+      "Name": "Webinar: Judging Standards 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-09-18",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2019-WEB5",
+      "Name": "Webinar: Rennet Alternatives 2019",
+      "EventType": "Webinar",
+      "EventDate": "2019-12-12",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-WEB2",
+      "Name": "Webinar: Counter Culture 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-01-14",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-WEB8",
+      "Name": "Webinar: Whey Management 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-01-15",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-WEB9",
+      "Name": "Webinar: Cheese Tourism 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-03-19",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-W1",
+      "Name": "Workshop: Lark Goat & Sheep Milk",
+      "EventType": "Workshop",
+      "EventDate": "2020-05-29",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Ayrshire",
+      "State": "GB-SAY"
+    },
+    {
+      "EventKey": "EVT-2020-WEB4",
+      "Name": "Webinar: Seasonal Milk Variation 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-06-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-WEB5",
+      "Name": "Webinar: Counter Culture 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-07-07",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-CONF",
+      "Name": "ICF Annual Conference 2020",
+      "EventType": "Conference",
+      "EventDate": "2020-07-21",
+      "IsVirtual": true,
+      "IsPaid": true,
+      "City": "Portland",
+      "State": "OR"
+    },
+    {
+      "EventKey": "EVT-2020-WEB6",
+      "Name": "Webinar: Export Paperwork 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-07-30",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-W3",
+      "Name": "Workshop: Harvest Alpine Styles",
+      "EventType": "Workshop",
+      "EventDate": "2020-07-31",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "US-WI"
+    },
+    {
+      "EventKey": "EVT-2020-WEB1",
+      "Name": "Webinar: Costing a Make 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-09-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-W2",
+      "Name": "Workshop: Cave Cheesemaking",
+      "EventType": "Workshop",
+      "EventDate": "2020-09-22",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Bra",
+      "State": "IT-CN"
+    },
+    {
+      "EventKey": "EVT-2020-WEB3",
+      "Name": "Webinar: Digital Storefronts 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-12-03",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2020-WEB7",
+      "Name": "Webinar: Costing a Make 2020",
+      "EventType": "Webinar",
+      "EventDate": "2020-12-31",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB9",
+      "Name": "Webinar: Cheese & Cider Pairing 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-02-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-W1",
+      "Name": "Workshop: Stone Alpine Styles",
+      "EventType": "Workshop",
+      "EventDate": "2021-04-05",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Reggio Emilia",
+      "State": "IT-RE"
+    },
+    {
+      "EventKey": "EVT-2021-WEB6",
+      "Name": "Webinar: Farmers' Market Sales 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-04-21",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-W3",
+      "Name": "Workshop: Lark Defect Diagnosis",
+      "EventType": "Workshop",
+      "EventDate": "2021-07-06",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Brooklyn",
+      "State": "US-NY"
+    },
+    {
+      "EventKey": "EVT-2021-CONF",
+      "Name": "ICF Annual Conference 2021",
+      "EventType": "Conference",
+      "EventDate": "2021-07-20",
+      "IsVirtual": true,
+      "IsPaid": true,
+      "City": "Burlington",
+      "State": "VT"
+    },
+    {
+      "EventKey": "EVT-2021-WEB1",
+      "Name": "Webinar: Wholesale Negotiation 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-07-28",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB7",
+      "Name": "Webinar: Herd Health & Milk Quality 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-08-12",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB2",
+      "Name": "Webinar: Herd Health & Milk Quality 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-08-18",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB3",
+      "Name": "Webinar: Raw Milk Rules 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-08-24",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB8",
+      "Name": "Webinar: Packaging Sustainability 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-11-02",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB4",
+      "Name": "Webinar: Judging Standards 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-11-23",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-WEB5",
+      "Name": "Webinar: Export Paperwork 2021",
+      "EventType": "Webinar",
+      "EventDate": "2021-12-01",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2021-W2",
+      "Name": "Workshop: Cedar Competition Prep",
+      "EventType": "Workshop",
+      "EventDate": "2021-12-31",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Chicago",
+      "State": "US-IL"
+    },
+    {
+      "EventKey": "EVT-2022-W2",
+      "Name": "Workshop: Valley Export Readiness",
+      "EventType": "Workshop",
+      "EventDate": "2022-02-01",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "US-WA"
+    },
+    {
+      "EventKey": "EVT-2022-WEB5",
+      "Name": "Webinar: Cheese & Cider Pairing 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-02-17",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2022-W3",
+      "Name": "Workshop: Meadow Cut & Wrap",
+      "EventType": "Workshop",
+      "EventDate": "2022-03-08",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Lancaster",
+      "State": "US-PA"
+    },
+    {
+      "EventKey": "EVT-2022-WEB3",
+      "Name": "Webinar: Whey Management 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-03-17",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2022-WEB4",
+      "Name": "Webinar: Water Activity & Shelf Life 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-04-12",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2022-W1",
+      "Name": "Workshop: Brook Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2022-05-13",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Seattle",
+      "State": "US-WA"
+    },
+    {
+      "EventKey": "EVT-2022-CONF",
+      "Name": "ICF Annual Conference 2022",
+      "EventType": "Conference",
+      "EventDate": "2022-07-19",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Asheville",
+      "State": "NC"
+    },
+    {
+      "EventKey": "EVT-2022-WEB2",
+      "Name": "Webinar: Allergen Labelling 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-07-20",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2022-W5",
+      "Name": "Workshop: Birch Alpine Styles",
+      "EventType": "Workshop",
+      "EventDate": "2022-09-07",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Quer\u00e9taro",
+      "State": "MX-QUE"
+    },
+    {
+      "EventKey": "EVT-2022-W4",
+      "Name": "Workshop: Hollow Pasta Filata",
+      "EventType": "Workshop",
+      "EventDate": "2022-11-08",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Burlington",
+      "State": "US-VT"
+    },
+    {
+      "EventKey": "EVT-2022-WEB1",
+      "Name": "Webinar: Starter Culture Basics 2022",
+      "EventType": "Webinar",
+      "EventDate": "2022-11-30",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2022-WEB6",
+      "Name": "Webinar: Cut & Wrap Efficiency 2022",
+      "EventType": "Webinar",
+      "EventDate": "2023-01-05",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-W1",
+      "Name": "Workshop: Willow Alpine Styles",
+      "EventType": "Workshop",
+      "EventDate": "2023-02-06",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Greensboro",
+      "State": "US-VT"
+    },
+    {
+      "EventKey": "EVT-2023-WEB3",
+      "Name": "Webinar: Small-Room Affinage 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-02-23",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-WEB1",
+      "Name": "Webinar: Allergen Labelling 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-04-20",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-WEB4",
+      "Name": "Webinar: Rennet Alternatives 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-04-20",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-WEB2",
+      "Name": "Webinar: Export Paperwork 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-06-08",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-W3",
+      "Name": "Workshop: Birch Competition Prep",
+      "EventType": "Workshop",
+      "EventDate": "2023-06-21",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Guelph",
+      "State": "CA-ON"
+    },
+    {
+      "EventKey": "EVT-2023-WEB6",
+      "Name": "Webinar: Listeria Control 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-06-28",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-CONF",
+      "Name": "ICF Annual Conference 2023",
+      "EventType": "Conference",
+      "EventDate": "2023-07-25",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Louisville",
+      "State": "KY"
+    },
+    {
+      "EventKey": "EVT-2023-WEB5",
+      "Name": "Webinar: Packaging Sustainability 2023",
+      "EventType": "Webinar",
+      "EventDate": "2023-08-01",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2023-W4",
+      "Name": "Workshop: Granite Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2023-10-11",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Chicago",
+      "State": "US-IL"
+    },
+    {
+      "EventKey": "EVT-2023-W2",
+      "Name": "Workshop: Rind Bloomy Rinds",
+      "EventType": "Workshop",
+      "EventDate": "2023-11-08",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Burlington",
+      "State": "US-VT"
+    },
+    {
+      "EventKey": "EVT-2023-W5",
+      "Name": "Workshop: Curd Competition Prep",
+      "EventType": "Workshop",
+      "EventDate": "2023-12-19",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Green Bay",
+      "State": "US-WI"
+    },
+    {
+      "EventKey": "EVT-2024-W1",
+      "Name": "Workshop: Birch Milk Handling",
+      "EventType": "Workshop",
+      "EventDate": "2024-02-22",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Petaluma",
+      "State": "US-CA"
+    },
+    {
+      "EventKey": "EVT-2024-W2",
+      "Name": "Workshop: Dairy Blue Styles",
+      "EventType": "Workshop",
+      "EventDate": "2024-03-05",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Hobart",
+      "State": "AU-TAS"
+    },
+    {
+      "EventKey": "EVT-2024-WEB1",
+      "Name": "Webinar: Insurance for Creameries 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-03-20",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2024-WEB5",
+      "Name": "Webinar: Insurance for Creameries 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-03-27",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2024-W4",
+      "Name": "Workshop: Birch Retailing",
+      "EventType": "Workshop",
+      "EventDate": "2024-04-02",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Quer\u00e9taro",
+      "State": "MX-QUE"
+    },
+    {
+      "EventKey": "EVT-2024-CONF",
+      "Name": "ICF Annual Conference 2024",
+      "EventType": "Conference",
+      "EventDate": "2024-07-16",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Des Moines",
+      "State": "IA"
+    },
+    {
+      "EventKey": "EVT-2024-W5",
+      "Name": "Workshop: Hollow Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2024-07-17",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Brooklyn",
+      "State": "US-NY"
+    },
+    {
+      "EventKey": "EVT-2024-WEB4",
+      "Name": "Webinar: Regenerative Dairy 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-07-24",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2024-W3",
+      "Name": "Workshop: Curd Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2024-08-28",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Quer\u00e9taro",
+      "State": "MX-QUE"
+    },
+    {
+      "EventKey": "EVT-2024-WEB3",
+      "Name": "Webinar: Digital Storefronts 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-09-17",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2024-WEB6",
+      "Name": "Webinar: Farm Shop Design 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-11-19",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2024-WEB2",
+      "Name": "Webinar: Water Activity & Shelf Life 2024",
+      "EventType": "Webinar",
+      "EventDate": "2024-12-24",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-W1",
+      "Name": "Workshop: Cedar Export Readiness",
+      "EventType": "Workshop",
+      "EventDate": "2025-02-04",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Brattleboro",
+      "State": "US-VT"
+    },
+    {
+      "EventKey": "EVT-2025-WEB4",
+      "Name": "Webinar: Apprenticeship Programmes 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-03-12",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-W3",
+      "Name": "Workshop: Alpine Farm Shop Retail",
+      "EventType": "Workshop",
+      "EventDate": "2025-04-16",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Saint-Hyacinthe",
+      "State": "CA-QC"
+    },
+    {
+      "EventKey": "EVT-2025-W4",
+      "Name": "Workshop: Prairie Costing",
+      "EventType": "Workshop",
+      "EventDate": "2025-04-29",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "US-WI"
+    },
+    {
+      "EventKey": "EVT-2025-WEB3",
+      "Name": "Webinar: Cheese Photography 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-07-01",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-CONF",
+      "Name": "ICF Annual Conference 2025",
+      "EventType": "Conference",
+      "EventDate": "2025-07-15",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Sacramento",
+      "State": "CA"
+    },
+    {
+      "EventKey": "EVT-2025-WEB2",
+      "Name": "Webinar: Recall Readiness 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-08-21",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-W2",
+      "Name": "Workshop: Cave Farm Shop Retail",
+      "EventType": "Workshop",
+      "EventDate": "2025-09-11",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Ludlow",
+      "State": "GB-SHR"
+    },
+    {
+      "EventKey": "EVT-2025-WEB5",
+      "Name": "Webinar: Judging Standards 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-10-15",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-WEB6",
+      "Name": "Webinar: Digital Storefronts 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-10-23",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-WEB1",
+      "Name": "Webinar: Water Activity & Shelf Life 2025",
+      "EventType": "Webinar",
+      "EventDate": "2025-11-25",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2025-W5",
+      "Name": "Workshop: Curd Pasta Filata",
+      "EventType": "Workshop",
+      "EventDate": "2025-12-10",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Quer\u00e9taro",
+      "State": "MX-QUE"
+    },
+    {
+      "EventKey": "EVT-2026-W4",
+      "Name": "Workshop: Cedar Cut & Wrap",
+      "EventType": "Workshop",
+      "EventDate": "2026-01-05",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Courtenay",
+      "State": "CA-BC"
+    },
+    {
+      "EventKey": "EVT-2026-WEB1",
+      "Name": "Webinar: Listeria Control 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-01-27",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2026-W3",
+      "Name": "Workshop: Stone Sensory",
+      "EventType": "Workshop",
+      "EventDate": "2026-01-30",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Tandil",
+      "State": "AR-B"
+    },
+    {
+      "EventKey": "EVT-2026-WEB6",
+      "Name": "Webinar: Seasonal Milk Variation 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-03-10",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2026-CONF",
+      "Name": "ICF Annual Conference 2026",
+      "EventType": "Conference",
+      "EventDate": "2026-07-21",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Madison",
+      "State": "WI"
+    },
+    {
+      "EventKey": "EVT-2026-W1",
+      "Name": "Workshop: Stone Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2026-07-22",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Bega",
+      "State": "AU-NSW"
+    },
+    {
+      "EventKey": "EVT-2026-WEB4",
+      "Name": "Webinar: Listeria Control 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-09-01",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2026-WEB3",
+      "Name": "Webinar: Water Activity & Shelf Life 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-09-09",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2026-W5",
+      "Name": "Workshop: Curd Food Safety",
+      "EventType": "Workshop",
+      "EventDate": "2026-10-27",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Boise",
+      "State": "US-ID"
+    },
+    {
+      "EventKey": "EVT-2026-WEB2",
+      "Name": "Webinar: Environmental Monitoring 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-11-10",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2026-WEB5",
+      "Name": "Webinar: Farm Shop Design 2026",
+      "EventType": "Webinar",
+      "EventDate": "2026-11-17",
+      "IsVirtual": true,
+      "IsPaid": false,
+      "City": null,
+      "State": null
+    },
+    {
+      "EventKey": "EVT-2026-W2",
+      "Name": "Workshop: Hollow Export Readiness",
+      "EventType": "Workshop",
+      "EventDate": "2026-11-19",
+      "IsVirtual": false,
+      "IsPaid": true,
+      "City": "Bra",
+      "State": "IT-CN"
+    }
+  ]
+}

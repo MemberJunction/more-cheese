@@ -26,7 +26,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, rmSync, mkdirSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, rmSync, mkdirSync, cpSync, readFileSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
@@ -112,4 +112,125 @@ test('the real corpus passes, so consumers publish from a clean report', () => {
     const report = JSON.parse(runJson([path.join(REPO_ROOT, 'content')]));
     const failing = report.files.filter((f) => f.fails.length).map((f) => `${f.rel}: ${f.fails.join('; ')}`);
     assert.deepEqual(failing, [], 'content/ must validate clean');
+});
+
+// ── --internal-week: one internal bundle (morecheese-internal-comms §4, §10) ──
+// Headless backfill runs grade themselves with this mode, so the bundle rules have to fail on the
+// mistakes a run actually makes. Each case copies the checked-in 2019-02-04 sample bundle into a
+// throwaway root (with the world-model files the validator reads) and breaks one thing.
+const SAMPLE_WEEK = '2019-02-04';
+const SAMPLE_THREAD = 'vault/internal/email/2019/2019-02-04-thread-january-close-numbers-for-friday-post';
+
+function makeBundleRoot() {
+    const dir = mkdtempSync(path.join(tmpdir(), 'vc-bundle-'));
+    for (const rel of ['data/ruleset/eras.json', 'data/ruleset/heroes.json', 'data/banks/organizations.json']) {
+        mkdirSync(path.join(dir, path.dirname(rel)), { recursive: true });
+        cpSync(path.join(REPO_ROOT, rel), path.join(dir, rel));
+    }
+    for (const kind of ['memos', 'spreadsheets', 'decks', 'email']) {
+        cpSync(path.join(REPO_ROOT, 'vault/internal', kind, '2019'), path.join(dir, 'vault/internal', kind, '2019'), { recursive: true });
+    }
+    return dir;
+}
+function runBundle(dir, monday = SAMPLE_WEEK) {
+    try {
+        const out = execFileSync(process.execPath, [VALIDATOR, '--internal-week', monday], { cwd: dir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+        return { status: 0, out };
+    } catch (error) {
+        return { status: error.status, out: String(error.stdout ?? '') };
+    }
+}
+function editFile(dir, rel, from, to) {
+    const f = path.join(dir, rel);
+    const text = readFileSync(f, 'utf8');
+    assert.ok(text.includes(from), `fixture ${rel} no longer contains ${from}`);
+    writeFileSync(f, text.replace(from, to));
+}
+function firstFile(dir, sub) {
+    return path.join(sub, readdirSync(path.join(dir, sub)).sort()[0]);
+}
+
+test('--internal-week passes the checked-in sample bundle', () => {
+    const dir = makeBundleRoot();
+    try {
+        const { status, out } = runBundle(dir);
+        assert.equal(status, 0, out);
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('--internal-week fails a week with no internal artifacts', () => {
+    const dir = makeBundleRoot();
+    try {
+        const { status, out } = runBundle(dir, '2019-02-11');
+        assert.equal(status, 1);
+        assert.match(out, /no internal artifacts dated 2019-02-11\.\.2019-02-17/);
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('--internal-week fails a bundle missing its deck', () => {
+    const dir = makeBundleRoot();
+    try {
+        rmSync(path.join(dir, 'vault/internal/decks'), { recursive: true, force: true });
+        const { status, out } = runBundle(dir);
+        assert.equal(status, 1);
+        assert.match(out, /no deck or board packet/);
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('--internal-week fails a non-role or real-domain mailbox', () => {
+    const dir = makeBundleRoot();
+    try {
+        editFile(dir, firstFile(dir, SAMPLE_THREAD), 'comms@morecheese.example', 'comms@morecheese.org');
+        const { status, out } = runBundle(dir);
+        assert.equal(status, 1);
+        assert.match(out, /comms@morecheese\.org is not a role mailbox/);
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('--internal-week fails a week_of that is not the Monday', () => {
+    const dir = makeBundleRoot();
+    try {
+        editFile(dir, firstFile(dir, 'vault/internal/memos/2019'), `week_of: ${SAMPLE_WEEK}`, 'week_of: 2019-02-05');
+        const { status, out } = runBundle(dir);
+        assert.equal(status, 1);
+        assert.match(out, /week_of is 2019-02-05, expected 2019-02-04/);
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('--internal-week fails a broken in_reply_to chain', () => {
+    const dir = makeBundleRoot();
+    try {
+        const second = path.join(SAMPLE_THREAD, readdirSync(path.join(dir, SAMPLE_THREAD)).sort()[1]);
+        const text = readFileSync(path.join(dir, second), 'utf8');
+        const reply = text.match(/^in_reply_to: (.*)$/m)[1];
+        editFile(dir, second, `in_reply_to: ${reply}`, 'in_reply_to: mc-not-a-message');
+        const { status, out } = runBundle(dir);
+        assert.equal(status, 1);
+        assert.match(out, /in_reply_to is mc-not-a-message/);
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('internal artifacts citing retired generated/ directories are warned about', () => {
+    const dir = makeBundleRoot();
+    try {
+        mkdirSync(path.join(dir, 'generated', 'orders'), { recursive: true });
+        const memo = firstFile(dir, 'vault/internal/memos/2019');
+        const out = execFileSync(process.execPath, [VALIDATOR, memo], { cwd: dir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+        assert.match(out, /⚠ data_sources names generated\/membership-periods, which does not exist/);
+        assert.doesNotMatch(out, /names generated\/orders/, 'a directory that exists is not flagged');
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
 });

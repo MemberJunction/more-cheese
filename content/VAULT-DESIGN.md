@@ -94,9 +94,9 @@ each one can be fact-checked mechanically:
 
 | Public type | Anchored to | Cadence |
 |---|---|---|
-| `blog/` | events, courses, advocacy-actions, heroes | 3 / week (existing skill) |
-| `annual-reports/` | membership-periods, orders, payments, events, enrollments | 1 / fiscal year |
-| `press-releases/` | events, competition-entries, certifications, committee-terms | ~6-12 / year |
+| `blog/` | event calendar, courses, advocacy-actions, heroes | 3 / week (existing skill) |
+| `annual-reports/` | orders (memberships, event registrations), payments, enrollments, `content/event-calendar.json` | 1 / fiscal year |
+| `press-releases/` | event calendar + orders, competition-entries, certifications, committee-terms | ~6-12 / year |
 | `competition-results/` | competition-entries (`EntryYear`, `Category`, `Result`) | 1 / year |
 | `committee-minutes/` | committee-meetings, committee-agenda-items, committee-motions, committee-votes | 24 / year (6 committees × 4 quarters, 2015→) |
 | `newsletters/` | *derived* — links only to already-published blog/press items | 12 / year |
@@ -185,8 +185,7 @@ fiscal_year: 2024          # KH · integer; the FY the artifact reports on or be
 fictional: true            # KH · always true; never omit
 tags: [ … ]                # KH · 3-6 lowercase hyphenated
 data_sources:              # KH · which generated/ directories the numbers came from
-  - generated/events
-  - generated/event-registrations
+  - generated/orders       # memberships and event registrations both live on orders
 ```
 
 ### 3.2 `doc_type` controlled vocabulary
@@ -225,7 +224,7 @@ then a blank `#` line, then the real header row:
 # visibility: internal
 # fictional: true
 # fiscal_year: 2019
-# data_sources: [generated/membership-periods, generated/orders]
+# data_sources: [generated/orders, generated/payments]
 # notice: FICTIONAL DEMONSTRATION DATA — International Cheese Federation, a fictitious
 #   association created for the MemberJunction More Cheese demo.
 #
@@ -283,7 +282,7 @@ that volume without an explicit budget decision — see §9.**
 
 ### 4.2 Era beats
 
-The five eras in `data/ruleset/eras.json` set what each year's corpus is *about*. The volume
+The six eras in `data/ruleset/eras.json` set what each year's corpus is *about*. The volume
 multipliers are not decoration — they are the plot.
 
 | Era | Cycles | What the public corpus does | What the internal corpus does |
@@ -293,9 +292,11 @@ multipliers are not decoration — they are the plot.
 | `era-virtual-pivot-2021` | 2021 | Virtual symposium recaps, online credential launches, retention wins among small creameries (`EventRegistration ×0.45`, `CourseEnrollment ×1.5`). | Platform-selection memo, virtual-event policy, "are we going back in person" thread. |
 | `era-artisan-boom-2022-2024` | 2022-24 | Busy and optimistic. In-person conference returns, competition entries climb, sponsorship holds. Three annual reports of real growth. | Capacity strain: staffing memo, venue-contract thread, a QBR deck with a hiring ask. |
 | `era-creamery-closures-2025` | 2025 | Sober and practical. Cost-inflation coverage, hardship-dues framing, closure support. | Hardship-program design memo, a lapse-risk spreadsheet, a board packet that is mostly bad news handled well. |
+| `era-stabilization-2026` | 2026 | Costs ease; closures turn into succession and consolidation stories; next-generation makers, raw-milk aging rule modernization, traceability. | Recovery planning: a succession-support memo, a "did the 2025 lapses come back?" spreadsheet, a cautious budget thread. |
 
 **Rule:** an artifact's tone must match its `era`. A 2020 press release that reads like 2019 is a
-defect. The skills check `era` against `eras.json` and must refuse a cycle outside 2019-2025.
+defect. The skills check `era` against `eras.json` and must refuse a cycle outside 2019-2026, and internal artifacts must not
+be dated past the end of the commerce data (`node scripts/vault-facts.mjs series` prints it; §8.1).
 
 ### 4.3 Who may appear where
 
@@ -347,8 +348,11 @@ Food Safety, Education, Awards & Competition, Events, Membership & Outreach. All
 must be taken from `generated/committee-memberships` joined to `generated/committee-terms` — the
 names there are ordinary generated people, not heroes, and they are the correct names to use.
 
-**Events** — 98 rows in `generated/events`, `EVT-<year>-<key>`. One Annual Conference per year.
-Never invent an event; if the week has no event, write about something else.
+**Events** — 98 events in `content/event-calendar.json`, `EVT-<year>-<key>`, each with name, date,
+type and place. One Annual Conference per year. The Events entity was retired in v1.2; paid
+registrations now live as Event Order Lines on orders numbered `ORD-E-REG-…-<EventKey>`, and free
+webinars carry no registrations at all. Never invent an event; if the week has no event, write
+about something else.
 
 **Courses** — 63 instances, `<Title> (<Cohort> cohort)`. Reference the title; the cohort suffix is
 optional in prose.
@@ -486,7 +490,7 @@ after the rendered header block, before the message body.
    fee $425, Recertification fee $195, Competition entry $65, Journal $85, Standards handbook $140,
    Exhibitor booth $2,400, Job board posting $250, Federation apron $38, plus a cheese atlas and an
    education-fund donation line. If an artifact quotes a price, it must be one of these — or a
-   unit price that actually appears in `generated/order-lines` for that product. (Note: the
+   unit price that actually appears on an order line in `generated/orders` for that product. (Note: the
    Individual membership line carries both $175 and an undocumented $145 rate in the order data;
    quote $175 as the list price and treat $145 as an internal open question, not a published
    figure.) Blog posts keep their existing stricter rule: no prices at all.
@@ -515,8 +519,10 @@ Rules of practice:
 2. **Cite the directory.** Each artifact's `data_sources` frontmatter lists the `generated/`
    directories every quoted figure came from.
 3. **Round honestly.** "More than 900 members" for 924 is fine. "About 1,000" is not.
-4. **Never sum across halves.** Membership counts come from `membership-periods`; revenue comes
-   from `orders`/`order-lines`; cash comes from `payments`. Do not derive one from another.
+4. **Never sum across halves.** Membership counts come from qualifying membership purchases
+   (the Membership Status rule: a Confirmed, un-refunded `… Membership (annual)` purchase in the
+   last 12 months); revenue comes from order lines; cash comes from `payments`. Do not derive one
+   from another.
 5. **Financial statements stay at summary altitude.** `generated/` has orders, order lines,
    payments, and payment lines. It has no general ledger, no expense side, no balance sheet.
    Annual reports therefore report **revenue by line, cash collected, and receivable balance** and
@@ -524,29 +530,55 @@ Rules of practice:
    a surplus, a reserve, or a headcount cost.**
 6. **Internal preliminary figures must be labeled.** An internal doc may show a number that later
    changes, but must say it is preliminary and be dated before the final.
-7. **Fiscal year == calendar year.** Every membership period in the data runs Jan 1 - Dec 31.
-8. **The 2019-01-01 baseline is a data artifact — never narrate it as fact.** Billing and
-   membership-period history begins at a unified 2019-01-01 baseline (world model §5.1). Every
-   member active in 2019 therefore has a period starting 1 January 2019, regardless of when they
-   actually joined. Consequences that are binding on every skill:
-   - **A.3 (first-time members) is meaningless for 2019.** It returns all 404. Never publish a
-     2019 new-member count, and never publish a new-vs-renewing split for 2019.
-   - **A.1 returns 0 members for 2018.** Never make a 2019-vs-2018 comparison.
+7. **Fiscal year == calendar year.** Membership is a rolling 12 months from each purchase, but
+   every year-level figure is reported on the calendar year.
+8. **The 2019 start of order history is a data artifact — never narrate it as fact.** Billing
+   history begins in 2019 (world model §5.1), so every member's first purchase in the data is in
+   2019 or later, regardless of when they actually joined. Consequences that are binding on every
+   skill:
+   - **First-time members (A.3) are meaningless for 2019.** Never publish a 2019 new-member count,
+     and never publish a new-vs-renewing or retained-vs-lapsed split for 2019.
+   - **Nobody is current on 2018-12-31.** Never make a 2019-vs-2018 comparison.
    - First-time-member counts are valid from **2020 onward**; year-over-year comparisons from
      **2020 vs 2019** onward.
    - This artifact is excellent *internal* material — a membership-ops analyst noticing it and
      refusing to publish the number is exactly the seam the internal corpus should show. It is
      never public material.
-9. **Membership counts and membership revenue come from different tables and will not tie.**
-   `membership-periods.DuesAmount` for periods active in a window is not the same as membership
-   product revenue on orders booked in that window — orders can be booked for periods starting
-   later. Report one basis or the other, say which, and never present the difference as an error
-   in a public artifact.
+9. **Membership counts and membership revenue will not tie.** "Current members" counts people
+   whose latest qualifying purchase is within 12 months; membership sales are the purchases booked
+   in a window. A member who bought in March of the prior year is current but contributed nothing
+   to this year's sales. Report one basis or the other, say which, and never present the
+   difference as an error in a public artifact.
+10. **The data has an end.** Confirmed orders run to 2026-06-20 and payments to 2026-07-21 (as of
+   2026-10). A week after that has no commerce figures to quote; internal artifacts must not be
+   dated past it, and public ones must not quote membership, event or revenue figures for it.
 
-### 8.1 Reference figures (spot-checked 2026-09, from the committed `generated/`)
+### 8.1 Reference figures (from `node scripts/vault-facts.mjs`, 2026-10, committed `generated/`)
+
+These replace the September 2026 figures, which were computed from the retired
+`membership-periods`, `events` and `event-registrations` tables. The FY2023 annual report and the
+2024 conference press release were written against those tables, so some of their figures no
+longer reproduce exactly.
 
 | Figure | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
 |---|---|---|---|---|---|---|---|
+| Current members on Dec 31 | 371 | 390 | 483 | 638 | 859 | 1,051 | 1,447 |
+
+FY2023 detail: 859 current on Dec 31 · tier mix 614 Individual / 136 SmallBusiness / 72
+Enthusiast / 37 Corporate · 276 first-time members · of 638 current at the end of 2022, 567
+retained and 71 lapsed · 998 membership purchases, $227,979 membership sales · 13 events, 1,026
+paid registrations, 959 attended · Annual Conference 2023 (Louisville, KY, 2023-07-25) 290
+registered / 268 attended · 8 course instances, 506 enrollments, 257 completions · 12
+certification enrollments, 2 awards · 47 competition entries across 6 categories · 88 advocacy
+actions · 24 committee meetings · 2,106 confirmed orders, $472,294 gross, $462,776 captured
+payments.
+
+FY2024 detail: Annual Conference 2024 (Des Moines, IA, 2024-07-16) 351 registered / 328
+attended · 65 competition entries · 305 first-time members.
+
+Re-run the script before writing; these are a smoke test, not a substitute.
+
+---|---|---|---|---|---|---|---|
 | Members with a period active on Dec 31 | 404 | 474 | 515 | 661 | 924 | 1,125 | 1,545 |
 
 FY2023 detail, all from Appendix A: 924 active periods · tier mix 655 Individual / 148
@@ -579,170 +611,35 @@ Re-run Appendix A before writing; these are a smoke test, not a substitute.
 
 ## Appendix A — aggregation queries
 
-All snippets are plain Node (no dependencies), run from the repo root. They share one loader.
-`generated/**` is split into `.part-NN.json` files; the loader concatenates them and flattens
-`{primaryKey, fields}` into a single object per row.
+Every figure comes from one read-only script, `scripts/vault-facts.mjs` (plain Node, no
+dependencies, run from the repo root; add `--json` for machine-readable output). It encodes the
+current data model so writers don't have to:
 
-### A.0 Loader (prepend to every snippet)
+- **Membership** follows the Membership Status query (`config/queries/SQL/membership-status.sql`):
+  a Confirmed, un-refunded `… Membership (annual)` purchase, billed to the person, makes them
+  current for 12 months. Tier is the latest purchase's product.
+- **Event registrations** are Event Order Lines on Confirmed sale orders numbered
+  `ORD-E-REG-…-<EventKey>`; attendance is the line's `AttendanceStatus`. Names, dates and places
+  come from `content/event-calendar.json`.
+- **Revenue by product** attributes each refund line to the product of the line it reverses
+  (`ReversesOrderLineID`). Cancellation orders often name a different product on the refund line
+  itself, so summing by the refund line's own product misstates every product line.
 
-```js
-const fs = require('fs'), path = require('path');
-function load(dir) {
-  const d = path.join('generated', dir), out = [];
-  for (const f of fs.readdirSync(d).sort()) {
-    if (f === '.mj-sync.json' || !f.endsWith('.json')) continue;
-    const j = JSON.parse(fs.readFileSync(path.join(d, f), 'utf8'));
-    if (Array.isArray(j)) out.push(...j.map(r => ({ id: r.primaryKey && r.primaryKey.ID, ...r.fields })));
-  }
-  return out;
-}
-const YEAR = 2023;                     // set per run
-```
+The section numbers below are what the skills cite.
 
-### A.1 Members active at year end, and the year-over-year series
-
-```js
-const mp = load('membership-periods');
-const activeAt = y => new Set(
-  mp.filter(p => p.StartDate <= `${y}-12-31` && p.EndDate >= `${y}-12-31`).map(p => p.PersonID)
-).size;
-console.log([2019,2020,2021,2022,2023,2024,2025].map(y => [y, activeAt(y)]));
-// 2019:404 2020:474 2021:515 2022:661 2023:924 2024:1125 2025:1545
-```
-
-### A.2 Tier mix, renewal outcome, dues billed
-
-```js
-const mp = load('membership-periods');
-const atYE = mp.filter(p => p.StartDate <= `${YEAR}-12-31` && p.EndDate >= `${YEAR}-12-31`);
-const tiers = {}; atYE.forEach(p => tiers[p.MembershipTier] = (tiers[p.MembershipTier] || 0) + 1);
-const started = mp.filter(p => p.StartDate.startsWith(String(YEAR)));
-const status = {}; started.forEach(p => status[p.Status] = (status[p.Status] || 0) + 1);
-console.log({
-  tiers, status, periods: started.length,
-  renewalRate: +(100 * (status.Renewed || 0) / started.length).toFixed(1),
-  duesBilled: atYE.reduce((s, p) => s + (p.DuesAmount || 0), 0)
-});
-```
-
-### A.3 First-time members in a year
-
-```js
-const mp = load('membership-periods'), first = {};
-mp.forEach(p => { if (!first[p.PersonID] || p.StartDate < first[p.PersonID]) first[p.PersonID] = p.StartDate; });
-console.log(Object.values(first).filter(d => d.startsWith(String(YEAR))).length);
-```
-
-### A.4 Events and attendance (whole year, and one event)
-
-```js
-const ev = load('events'), er = load('event-registrations');
-const byId = Object.fromEntries(ev.map(e => [e.id, e]));
-const evY = ev.filter(e => e.EventDate.startsWith(String(YEAR)));
-const regY = er.filter(r => byId[r.EventID] && byId[r.EventID].EventDate.startsWith(String(YEAR)));
-console.log({ events: evY.length, registrations: regY.length, attended: regY.filter(r => r.Attended).length });
-
-const conf = evY.find(e => e.EventType === 'Conference');          // one per year
-const cr = er.filter(r => r.EventID === conf.id);
-console.log({ name: conf.Name, date: conf.EventDate, city: conf.City, state: conf.State,
-              registered: cr.length, attended: cr.filter(r => r.Attended).length });
-```
-
-### A.5 Revenue by product line, cash collected, receivable
-
-```js
-const or = load('orders'), ol = load('order-lines'), pr = load('products'), py = load('payments');
-const prName = Object.fromEntries(pr.map(p => [p.id, p.Name]));
-const orY = or.filter(o => o.OrderDate.startsWith(String(YEAR)));
-const orIds = new Set(orY.map(o => o.id));
-const byProduct = {};
-ol.filter(l => orIds.has(l.OrderHeaderID))
-  .forEach(l => byProduct[prName[l.ProductID]] = (byProduct[prName[l.ProductID]] || 0) + l.LineTotalGross);
-console.log({
-  orders: orY.length,
-  gross: orY.reduce((s, o) => s + (o.TotalGross || 0), 0),
-  applied: orY.reduce((s, o) => s + (o.AmountPaid || 0), 0),
-  receivable: orY.reduce((s, o) => s + (o.Balance || 0), 0),
-  cashCaptured: py.filter(p => p.PaymentDate.startsWith(String(YEAR)) && p.Status === 'Captured')
-                  .reduce((s, p) => s + p.Amount, 0),
-  byProduct
-});
-```
-
-### A.6 Education: courses, enrollments, completions, credentials
-
-```js
-const co = load('courses'), en = load('enrollments'), mc = load('member-certifications'), ce = load('certifications');
-const certName = Object.fromEntries(ce.map(c => [c.id, c.Name]));
-console.log({
-  courseInstances: co.filter(c => c.StartDate.startsWith(String(YEAR))).length,
-  enrollments: en.filter(e => e.EnrolledOn.startsWith(String(YEAR))).length,
-  completions: en.filter(e => e.CompletedOn && e.CompletedOn.startsWith(String(YEAR))).length,
-  certEnrolments: mc.filter(m => m.EnrolledOn && m.EnrolledOn.startsWith(String(YEAR))).length,
-  awarded: mc.filter(m => m.AwardedOn && m.AwardedOn.startsWith(String(YEAR))).map(m => certName[m.CertificationID])
-});
-```
-
-### A.7 Competition entries and medals for a year
-
-```js
-const ce = load('competition-entries'), pe = load('people'), og = load('organizations');
-const peB = Object.fromEntries(pe.map(p => [p.id, p])), ogB = Object.fromEntries(og.map(o => [o.id, o]));
-const rows = ce.filter(c => c.EntryYear === YEAR);
-const byCat = {}; rows.forEach(c => (byCat[c.Category] = byCat[c.Category] || []).push(c));
-Object.entries(byCat).forEach(([cat, list]) => console.log(cat, list.length,
-  list.filter(c => c.Result !== 'None')
-      .map(c => `${c.Result}: ${c.ProductName} — ${(ogB[c.OrganizationID] || {}).Name}` +
-                ` (${(peB[c.PersonID] || {}).FirstName} ${(peB[c.PersonID] || {}).LastName})`)));
-```
-
-### A.8 Advocacy activity
-
-```js
-const aa = load('advocacy-actions');
-const rows = aa.filter(a => a.ActionDate.startsWith(String(YEAR)));
-const tally = k => rows.reduce((m, r) => (m[r[k]] = (m[r[k]] || 0) + 1, m), {});
-console.log({ total: rows.length, byKind: tally('Kind'), byTopic: tally('Topic') });
-```
-
-### A.9 Governance: meetings, terms, and who actually holds a seat
-
-```js
-const cm = load('committee-meetings'), cmt = load('committees'),
-      cmb = load('committee-memberships'), ct = load('committee-terms'), pe = load('people');
-const cn = Object.fromEntries(cmt.map(c => [c.id, c.Name]));
-const tn = Object.fromEntries(ct.map(t => [t.id, t]));
-const pn = Object.fromEntries(pe.map(p => [p.id, `${p.FirstName} ${p.LastName}`]));
-console.log('meetings', cm.filter(m => m.StartDateTime.startsWith(String(YEAR))).length);
-cmb.filter(m => m.StartDate <= `${YEAR}-12-31` && m.EndDate >= `${YEAR}-01-01`)
-   .filter(m => !m.RoleID.endsWith('Member'))          // chairs and vice chairs only
-   .forEach(m => console.log(cn[(tn[m.TermID] || {}).CommitteeID], m.RoleID.split('=')[1], pn[m.PersonID]));
-```
-
-### A.10 One week (for internal comms and blog cross-checks)
-
-```js
-const A = '2019-02-04', B = '2019-02-10';                     // Monday, Sunday
-const ev = load('events'), er = load('event-registrations'),
-      en = load('enrollments'), or = load('orders'), mp = load('membership-periods');
-const w = (rows, f) => rows.filter(r => r[f] >= A && r[f] <= B);
-console.log({
-  eventsInWeek: ev.filter(e => e.EventDate >= A && e.EventDate <= B).map(e => e.EventKey),
-  registrationsTaken: w(er, 'RegisteredOn').length,
-  enrolmentsTaken: w(en, 'EnrolledOn').length,
-  orders: w(or, 'OrderDate').length,
-  orderGross: w(or, 'OrderDate').reduce((s, o) => s + o.TotalGross, 0),
-  periodsStarted: w(mp, 'StartDate').length
-});
-```
-
-### A.11 Product price list (for the §7.6 pricing rule)
-
-```js
-load('products').forEach(p => console.log(p.SKU, p.Name, p.StandaloneSellingPrice));
-```
-
----
+| § | Command | Output keys |
+|---|---|---|
+| A.1 | `node scripts/vault-facts.mjs series` | `currentMembersOnDec31` per year |
+| A.2 | `node scripts/vault-facts.mjs year <YYYY>` | `membership.tierMixOnDec31`, `retainedFromPriorYear`, `lapsedFromPriorYear`, `membershipSalesGross` |
+| A.3 | `node scripts/vault-facts.mjs year <YYYY>` | `membership.firstTimeMembers` |
+| A.4 | `node scripts/vault-facts.mjs year <YYYY>` · `event <EventKey>` | `events[]`: registered, refunded, attendance by status |
+| A.5 | `node scripts/vault-facts.mjs year <YYYY>` | `revenue`: orders, gross, applied, receivable, cash captured, net by product |
+| A.6 | `node scripts/vault-facts.mjs year <YYYY>` | `education`: course instances, enrollments, completions, certifications |
+| A.7 | `node scripts/vault-facts.mjs year <YYYY>` | `competition`: entries, categories, medals |
+| A.8 | `node scripts/vault-facts.mjs year <YYYY>` | `advocacy`: totals by kind and topic |
+| A.9 | `node scripts/vault-facts.mjs year <YYYY>` | `governance`: meetings, chairs and vice chairs |
+| A.10 | `node scripts/vault-facts.mjs week <Monday>` | one week: membership purchases, orders, cash, registrations taken, events this week and next eight, enrollments, certifications, advocacy, committee meetings, `dataEnds` |
+| A.11 | `node scripts/vault-facts.mjs prices` | product list prices |
 
 ## Appendix B — file inventory of the initial samples
 

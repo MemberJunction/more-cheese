@@ -111,8 +111,10 @@ writing; do not invent additions:
 - `generated/committees/.committees.json` — **the six committees**: Standards Committee;
   Food Safety Committee; Education Committee; Awards & Competition Committee; Events Committee;
   Membership & Outreach Committee. (All formed 2014–2017, so all exist from 2019 on.)
-- `generated/events/.events.json` — ~98 events keyed `EVT-<year>-…`, with `EventDate`,
-  `EventType` (Conference / Webinar / Workshop), `IsVirtual`, `City`, `State`. There is one
+- `content/event-calendar.json` — ~98 events keyed `EVT-<year>-…`, with `EventDate`,
+  `EventType` (Conference / Webinar / Workshop), `IsVirtual`, `City`, `State`. (The Events entity
+  was retired; registrations live on orders. `node scripts/vault-facts.mjs event <EventKey>` gives
+  registered/attended counts.) There is one
   **ICF Annual Conference** per year. Filter to events dated near your week and preview or
   recap those. Do not invent an event.
 - `generated/courses/.courses.json` — 63 course instances named `<Course title> (<X> cohort)`,
@@ -144,7 +146,7 @@ backfill doesn't read as six months of the same post:
 | Member spotlight | `Member Spotlight` | One member (hero or composite) and their make, counter, or cave. |
 | Education / how-to | `Education` | Practical craft or business guidance. Tie it to a real course title. |
 | Education / certification | `Certification` | Credential pathways, recertification, what a credential covers. |
-| Competition / events | `Events` | Preview or recap of an event that actually exists in `generated/events`. |
+| Competition / events | `Events` | Preview or recap of an event that actually exists in `content/event-calendar.json`. |
 | Advocacy update | `Advocacy` | Rulemaking, comment periods, member testimony, what the federation is asking for. |
 
 ### Voice
@@ -212,7 +214,7 @@ Field notes:
   Never list a source you did not read.
 - `data_sources` — OPTIONAL, last. Only when the post quotes a number derived from the dataset
   (VAULT-DESIGN §8.2): list the `generated/<directory>` paths the figure came from, e.g.
-  `- generated/membership-periods`. Omit the field entirely when no such figure appears.
+  `- generated/orders`. Omit the field entirely when no such figure appears.
 
 Body: **500–900 words**, markdown, starting with a paragraph (no repeated `# title`).
 Use `##` for at most two subheads. Then the disclaimer, last.
@@ -241,7 +243,7 @@ before it.
   the generated data; a blog post that invents a number will contradict it. Say "see the
   membership page" instead of a dollar figure.
 - **No dates outside the requested week** in the `date` field or the filename. (Referring
-  *forward* to a real upcoming ICF event from `generated/events` is fine and encouraged.)
+  *forward* to a real upcoming ICF event from `content/event-calendar.json` is fine and encouraged.)
 - **No new committees, events, courses, certifications, competitions, personas, eras, motifs,
   or ladders.** If the post needs one that doesn't exist, change the post, or report the gap.
 - **No heroes before their join year**, and no facts that contradict a hero's arc.
