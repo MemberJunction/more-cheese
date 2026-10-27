@@ -8,7 +8,7 @@ Governing design: [`content/VAULT-DESIGN.md`](../../../content/VAULT-DESIGN.md).
 ## The peg rule
 
 A release only exists because something happened, and in this world "something happened" means
-**a row in `generated/`**. Four peg types: an event (`generated/events`), a competition year
+**a row in `generated/`**. Four peg types: an event (`content/event-calendar.json`), a competition year
 (`generated/competition-entries`), a credential (`generated/certifications`), or a committee term
 seating (`generated/committee-terms` + `committee-memberships`). No peg, no release — the skill
 stops and reports rather than inventing news.

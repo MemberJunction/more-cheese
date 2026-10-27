@@ -22,7 +22,7 @@ implements it. §4.3 (cast), §7 (do-not list), §8 (consistency), Appendix A (q
 
 | Peg | Source | Typical release |
 |---|---|---|
-| **An event** | `generated/events` — `EventKey`, `Name`, `EventDate`, `EventType`, `IsVirtual`, `City`, `State` | Conference announcement (dated ~90 days before), or a post-event recap (dated 1–3 days after) with registered/attended counts from `generated/event-registrations` |
+| **An event** | `content/event-calendar.json` — `EventKey`, `Name`, `EventDate`, `EventType`, `IsVirtual`, `City`, `State` | Conference announcement (dated ~90 days before), or a post-event recap (dated 1–3 days after) with registered/attended counts from `node scripts/vault-facts.mjs event <EventKey>` |
 | **A competition year** | `generated/competition-entries` — `EntryYear`, `Category`, `ProductName`, `Result`, plus `PersonID`/`OrganizationID` | Results announcement naming the Gold, Silver and Bronze cheeses and the organisations that made them |
 | **A credential** | `generated/certifications` (the seven) + `generated/member-certifications` | A credential pathway announcement, or a milestone in credential activity |
 | **Governance** | `generated/committee-terms` + `generated/committee-memberships` | New committee term seating, chairs and vice chairs announced at term start (terms run 2-year, `YYYY-01-01` to `YYYY+1-12-31`) |
@@ -40,9 +40,9 @@ The release year must be **2019–2025**. Outside that, stop and report.
 
 ## 2. Compute the numbers before you write
 
-Run Appendix A of `content/VAULT-DESIGN.md`: A.0 (loader), then A.4 for the event,
-A.7 for competition medals, A.6 for credentials, A.9 for governance, A.1/A.2 if you cite a
-membership figure. Write the fact-sheet first, draft second.
+Run Appendix A of `content/VAULT-DESIGN.md` — `node scripts/vault-facts.mjs event <EventKey>`
+for the event (A.4), and `year <YYYY>` for competition medals (A.7), credentials (A.6),
+governance (A.9) and any membership figure (A.1/A.2). Write the fact-sheet first, draft second.
 
 A 300–500-word release should carry **three to six** hard numbers. Every one must come from a
 snippet. Round honestly ("more than 330" for 337 is fine; "about 350" is not).
@@ -118,8 +118,7 @@ tags:
   - annual-conference
   - competition
 data_sources:
-  - generated/events
-  - generated/event-registrations
+  - generated/orders
   - generated/competition-entries
   - generated/organizations
 ---

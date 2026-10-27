@@ -5,6 +5,7 @@
  *
  *   node scripts/validate-content.mjs                       # everything under content/ and vault/internal/
  *   node scripts/validate-content.mjs --week 2019-01-14     # one blog week (Monday): exactly 3 posts, 3 categories
+ *   node scripts/validate-content.mjs --internal-week 2019-02-04   # one internal bundle (Monday): shape, week_of, mailboxes
  *   node scripts/validate-content.mjs content/blog/2019     # specific files or directories
  *   node scripts/validate-content.mjs --json                # machine-readable report
  *
@@ -22,6 +23,10 @@
  * Other public artifacts (content/annual-reports, press-releases, …): frontmatter, fictional: true, disclaimer last line.
  * Internal artifacts (vault/internal): Markdown must carry the §6.2 header line right after the
  *   frontmatter; CSV must carry the `# notice:` FICTIONAL DEMONSTRATION DATA block.
+ * With --internal-week (morecheese-internal-comms §4, §10): the files dated in Mon–Sun form one bundle —
+ *   one memo or policy, one deck or board packet, one CSV, one email thread of 3–5 messages, five
+ *   artifacts at most; every file's week_of is the Monday and its era matches the year; every email
+ *   address is a @morecheese.example role mailbox; the thread's in_reply_to chain is intact.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -310,6 +315,14 @@ function checkPublicOther(file, text) {
     return { rel, fails, warns: [], info: [] };
 }
 
+// data_sources must name directories that exist. Events, Event Registrations, Membership Periods
+// and the flat order-lines folder were retired (VAULT-DESIGN §8.1); an artifact citing them either
+// predates that or copied a stale example, and its figures cannot be re-derived from what it cites.
+function staleSources(sources) {
+    return sources.map((x) => String(x).trim()).filter((x) => /^generated\//.test(x) && !fs.existsSync(path.join(ROOT, x)))
+        .map((x) => `data_sources names ${x}, which does not exist (retired data; cite generated/orders instead)`);
+}
+
 function checkInternal(file, text) {
     const rel = path.relative(ROOT, file);
     const fails = [];
@@ -317,7 +330,8 @@ function checkInternal(file, text) {
         const head = text.split('\n').slice(0, 30).join('\n');
         if (!/^#\s*notice:/m.test(head) || !head.includes(CSV_NOTICE)) fails.push('CSV lacks the `# notice:` FICTIONAL DEMONSTRATION DATA block');
         if (!/^#\s*fictional:\s*true/m.test(head)) fails.push('CSV comment block lacks `# fictional: true`');
-        return { rel, fails, warns: [], info: [] };
+        const listed = (head.match(/^#\s*data_sources:\s*\[(.*)\]/m) ?? [])[1];
+        return { rel, fails, warns: staleSources(listed ? listed.split(',') : []), info: [] };
     }
     if (path.basename(file).toLowerCase() === 'readme.md') return { rel, fails, warns: [], info: ['README, skipped'] };
     const fm = parseFrontmatter(text);
@@ -331,7 +345,8 @@ function checkInternal(file, text) {
         const within = isEmail ? bodyLines.slice(0, 40) : [bodyLines[firstIdx] ?? ''];
         if (!within.some((l) => l.trim() === INTERNAL_HEADER)) fails.push(isEmail ? 'email lacks the §6.2 header line after the header block' : 'first body line is not the §6.2 FICTIONAL DEMONSTRATION DOCUMENT header');
     }
-    return { rel, fails, warns: [], info: [] };
+    const sources = fm.fields?.data_sources;
+    return { rel, fails, warns: staleSources(Array.isArray(sources) ? sources : []), info: [] };
 }
 
 // content/ holds two planning documents beside the corpus. They are repo documentation — no
@@ -360,9 +375,12 @@ const args = process.argv.slice(2);
 const json = args.includes('--json');
 const weekIdx = args.indexOf('--week');
 const week = weekIdx >= 0 ? weekWindow(args[weekIdx + 1]) : null;
-const targets = args.filter((a, i) => !a.startsWith('--') && !(weekIdx >= 0 && i === weekIdx + 1));
+const iwIdx = args.indexOf('--internal-week');
+const internalWeek = iwIdx >= 0 ? weekWindow(args[iwIdx + 1]) : null;
+const targets = args.filter((a, i) => !a.startsWith('--') && !(weekIdx >= 0 && i === weekIdx + 1) && !(iwIdx >= 0 && i === iwIdx + 1));
 let files = [];
 if (week) files = walk(path.join(ROOT, 'content', 'blog'));
+else if (internalWeek) files = walk(path.join(ROOT, 'vault', 'internal')).filter((f) => { const d = fileDate(f); return d >= internalWeek.start && d <= internalWeek.end; });
 else if (targets.length) for (const t of targets) { const p = path.resolve(ROOT, t); files.push(...(fs.statSync(p).isDirectory() ? walk(p) : [p])); }
 else files = [...walk(path.join(ROOT, 'content')), ...walk(path.join(ROOT, 'vault', 'internal'))];
 
@@ -390,6 +408,51 @@ for (const f of walk(path.join(ROOT, 'content', 'blog'))) {
     const key = [...srcs].map(String).sort().join('|');
     if (key && !ctx.sourceLists.has(key)) ctx.sourceLists.set(key, path.relative(ROOT, f));
 }
+// ---------- internal bundle (--internal-week) ----------
+const ROLE_MAILBOXES = new Set(['comms', 'membership.ops', 'events', 'education', 'advocacy', 'exec', 'press']);
+function fileDate(file) {
+    return (path.basename(file).match(/\d{4}-\d{2}-\d{2}/) ?? [''])[0];
+}
+function checkBundle(files, win) {
+    const fails = [];
+    const kind = (f) => path.relative(path.join(ROOT, 'vault', 'internal'), f).split(path.sep)[0];
+    const emails = files.filter((f) => kind(f) === 'email');
+    const threads = [...new Set(emails.map((f) => path.dirname(f)))];
+    const count = (...kinds) => files.filter((f) => kinds.includes(kind(f))).length;
+    const artifacts = files.length - emails.length + threads.length;
+    if (count('memos', 'policies') < 1) fails.push('bundle has no memo or policy');
+    if (count('decks', 'board-packets') < 1) fails.push('bundle has no deck or board packet');
+    if (count('spreadsheets') < 1) fails.push('bundle has no CSV spreadsheet');
+    if (threads.length !== 1) fails.push(`bundle needs exactly one email thread, found ${threads.length}`);
+    if (artifacts > 5) fails.push(`bundle has ${artifacts} artifacts (five at most)`);
+    const era = eraForYear(Number(win.start.slice(0, 4)));
+    for (const f of files) {
+        const rel = path.relative(ROOT, f);
+        const text = fs.readFileSync(f, 'utf8');
+        const weekOf = f.endsWith('.csv') ? (text.match(/^#\s*week_of:\s*(\S+)/m) ?? [])[1] : parseFrontmatter(text).fields?.week_of;
+        if (weekOf !== win.start) fails.push(`${rel}: week_of is ${weekOf ?? 'missing'}, expected ${win.start}`);
+        const fileEra = f.endsWith('.csv') ? (text.match(/^#\s*era:\s*(\S+)/m) ?? [])[1] : parseFrontmatter(text).fields?.era;
+        if (fileEra !== era) fails.push(`${rel}: era is ${fileEra ?? 'missing'}, expected ${era}`);
+        for (const [, local, domain] of text.matchAll(/([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\.[A-Za-z]+)/g)) {
+            if (domain !== 'morecheese.example' || !ROLE_MAILBOXES.has(local)) fails.push(`${rel}: ${local}@${domain} is not a role mailbox at morecheese.example`);
+        }
+    }
+    for (const t of threads) {
+        const msgs = emails.filter((f) => path.dirname(f) === t).sort();
+        if (msgs.length < 3 || msgs.length > 5) fails.push(`${path.relative(ROOT, t)}: ${msgs.length} messages (need 3–5)`);
+        let prev = null;
+        msgs.forEach((m, i) => {
+            const fm = parseFrontmatter(fs.readFileSync(m, 'utf8')).fields ?? {};
+            const want = i === 0 ? 'null' : prev;
+            if (String(fm.in_reply_to) !== String(want)) fails.push(`${path.relative(ROOT, m)}: in_reply_to is ${fm.in_reply_to}, expected ${want}`);
+            if (!path.basename(m).startsWith(String(i + 1).padStart(2, '0') + '-')) fails.push(`${path.relative(ROOT, m)}: not numbered ${String(i + 1).padStart(2, '0')} in send order`);
+            prev = fm.message_id;
+        });
+        if (fileDate(t) !== fileDate(msgs[0] ?? '')) fails.push(`${path.relative(ROOT, t)}: thread folder is not dated to message 01`);
+    }
+    return fails;
+}
+
 const results = [];
 for (const file of files) {
     const rel = path.relative(ROOT, file);
@@ -415,6 +478,11 @@ if (week) {
     if (posts.length === 3 && cats.size !== 3) weekFails.push(`categories not all different: ${posts.map((p) => p.category).join(', ')}`);
 }
 
+if (internalWeek) {
+    if (!files.length) weekFails.push(`no internal artifacts dated ${internalWeek.start}..${internalWeek.end}`);
+    else weekFails.push(...checkBundle(files, internalWeek));
+}
+
 const failed = results.filter((r) => r.fails.length).length + (weekFails.length ? 1 : 0);
 if (json) {
     console.log(JSON.stringify({ week, files: results, weekFails, ok: failed === 0 }, null, 2));
@@ -427,7 +495,8 @@ if (json) {
         for (const x of r.info) console.log(`    · ${x}`);
     }
     for (const x of weekFails) console.log(`FAIL  week: ${x}`);
-    console.log(`\n${results.length} file(s) checked, ${failed} failing${week ? `, week ${week.start}..${week.end}` : ''}.`);
+    const win = week ?? internalWeek;
+    console.log(`\n${results.length} file(s) checked, ${failed} failing${win ? `, ${internalWeek ? 'internal ' : ''}week ${win.start}..${win.end}` : ''}.`);
 }
 // `process.exitCode`, never `process.exit()`. The --json report is ~320 KB over the full corpus,
 // and when stdout is a pipe (build-site.mjs and publish-wordpress.mjs both capture it) writes are

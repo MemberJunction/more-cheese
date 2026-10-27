@@ -27,20 +27,23 @@ vault/internal/email/2019/2019-02-04-thread-<slug>/01-…md 02-…md 03-…md
 
 ## Running a backfill
 
-One week per invocation, fresh context, Mondays only — same loop shape as the blog skill:
+One week per invocation, fresh context, Mondays only, gated by the validator's bundle mode:
 
 ```sh
-cd /path/to/more-cheese
-while read -r wk; do
-  claude -p "Use the morecheese-internal-comms skill. Generate the ICF internal bundle for the week of Monday $wk."
-done < /tmp/mc-weeks.txt
+scripts/content-backfill-internal.sh 2020-03-16 2023-07-24      # PAR=3 MODEL=sonnet LOGDIR=… by default
+node scripts/validate-content.mjs --internal-week 2020-03-16     # what each run must pass
+node scripts/vault-facts.mjs week 2020-03-16                     # the figures a run may quote
 ```
 
 Generate the **public** week first. The skill reads `content/blog/<year>/` for the window and
 cross-references it; running internal-first loses the coherence that makes the corpus worth having.
 
-Weekly internal comms for 2019–2025 is ~365 bundles ≈ 1,400 files. That is a budget decision, not
-a default — see VAULT-DESIGN §9 decision 4. No bulk runs without sign-off.
+The data has an end: confirmed orders stop at 2026-06-20 (`vault-facts.mjs series` prints the
+date). Don't schedule weeks after it.
+
+Weekly internal comms for 2019 through mid-2026 is ~390 bundles ≈ 1,600 files. That is a budget
+decision, not a default — see VAULT-DESIGN §9 decision 4. Pilot a handful of weeks, read them, and
+use the cost column in `results.tsv` before any tranche.
 
 ## Rendering to Office formats
 

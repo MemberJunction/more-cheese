@@ -1,6 +1,6 @@
 ---
 name: morecheese-internal-comms
-description: Generates the International Cheese Federation (ICF / More Cheese) INTERNAL staff corpus for one week or one event — memos, CSV spreadsheets, slide-deck outlines and email threads — filed under vault/internal/<type>/YYYY/ for the Dropbox account that Knowledge Hub ingests. USE THIS SKILL WHENEVER anyone asks to write, draft, produce, generate, backfill, extend or check ICF internal comms, More Cheese internal documents, staff documents, internal memo, staff memo, internal email, email thread, staff email history, internal spreadsheet, CSV, membership close, board packet, policy doc, slide deck, deck outline, presentation, PowerPoint, QBR, internal docs for Dropbox, Knowledge Hub corpus, "the internal side", "what staff were saying that week", "behind the scenes documents", or an internal bundle for a given week or event — for any week or event in 2019 through 2025. Also use it when asked to verify internal artifacts' filenames, frontmatter, fiction headers, or coherence with the same week's public blog. Do not hand-write ICF internal documents without loading this skill.
+description: Generates the International Cheese Federation (ICF / More Cheese) INTERNAL staff corpus for one week or one event — memos, CSV spreadsheets, slide-deck outlines and email threads — filed under vault/internal/<type>/YYYY/ for the Dropbox account that Knowledge Hub ingests. USE THIS SKILL WHENEVER anyone asks to write, draft, produce, generate, backfill, extend or check ICF internal comms, More Cheese internal documents, staff documents, internal memo, staff memo, internal email, email thread, staff email history, internal spreadsheet, CSV, membership close, board packet, policy doc, slide deck, deck outline, presentation, PowerPoint, QBR, internal docs for Dropbox, Knowledge Hub corpus, "the internal side", "what staff were saying that week", "behind the scenes documents", or an internal bundle for a given week or event — for any week or event in 2019 through 2026, up to the end of the commerce data. Also use it when asked to verify internal artifacts' filenames, frontmatter, fiction headers, or coherence with the same week's public blog. Do not hand-write ICF internal documents without loading this skill.
 ---
 
 # ICF / More Cheese — internal comms generation
@@ -22,10 +22,12 @@ implements it. §2.2 (layout), §3 (metadata), §4.4 (the coherence contract), �
 **Week mode.** Snap the caller's date back to that week's **Monday**; the bundle covers Monday–
 Sunday. Write down the seven dates.
 
-**Event mode.** Take the event's `EventDate` from `generated/events`. A pre-event bundle sits in
+**Event mode.** Take the event's `EventDate` from `content/event-calendar.json`. A pre-event bundle sits in
 the week 2–8 weeks before; a post-event bundle sits in the week containing the event.
 
-Either way, the year must be **2019–2025**. Outside that, stop and report — do not invent an era.
+Either way, the year must be **2019–2026**, and the week must end on or before the `dataEnds` date
+that `node scripts/vault-facts.mjs week <Monday>` prints (VAULT-DESIGN §8 rule 10). Outside that,
+stop and report — do not invent an era or numbers.
 
 ## 2. Read the public half FIRST (required — this is the whole point)
 
@@ -48,9 +50,11 @@ in your report that coherence could not be checked.
 
 ## 3. Compute the week's facts
 
-Run Appendix A of `content/VAULT-DESIGN.md`: A.0 (loader) then **A.10** (the one-week snapshot),
-plus A.2/A.3 for a membership close, A.4 for event registrations, A.5 for revenue, A.6 for
-education, A.9 for governance — whatever the bundle actually talks about.
+Run `node scripts/vault-facts.mjs week <Monday>` (Appendix A.10, the one-week snapshot), plus
+`year <YYYY>` for a membership close, revenue, education or governance (A.2–A.9) and
+`event <EventKey>` for one event's registrations (A.4) — whatever the bundle actually talks about.
+Do not hand-roll queries: the script carries the membership rule, the event-key mapping and the
+refund attribution that a hand-written query gets wrong.
 
 Internal numbers are held to the same standard as public ones with one exception: a document may
 show a *preliminary* number if it is explicitly labelled preliminary and a later document (or the
@@ -100,7 +104,7 @@ vault/internal/spreadsheets/YYYY/YYYY-MM-DD-<slug>.csv
 `#` line, then the header row, then data. Numeric columns are unformatted numbers — no `$`, no
 thousands separators, no percent signs; put the unit in the column name
 (`dues_billed_usd`, `renewal_rate_pct`). Column names are `lower_snake_case`. A trailing
-`# source:` line naming the Appendix A snippet is encouraged.
+`# source:` line naming the `vault-facts.mjs` command is encouraged.
 
 ### 4c. Deck outline format
 
@@ -159,7 +163,8 @@ Internal, not published. Concretely:
 - People disagree, mildly and professionally. Someone pushes a deadline; someone asks for a
   clarification; someone says "I think this is a data problem, not a churn problem".
 - Short. A memo is 400–700 words; an email is 60–200; a slide bullet is under 12 words.
-- Era-appropriate anxiety: 2020 is a scramble; 2022–24 is capacity strain; 2025 is hardship.
+- Era-appropriate anxiety: 2020 is a scramble; 2022–24 is capacity strain; 2025 is hardship;
+  2026 is cautious recovery.
 - Never AI-flavoured ("delve", "landscape", "in today's fast-paced", "game-changer", "leverage").
 
 ## 7. Frontmatter
@@ -224,8 +229,8 @@ Everything in VAULT-DESIGN §7 applies. The ones that bite hardest here:
 5. **No real named people** — list every proper name of a person across the bundle and classify
    each as (a) an eligible hero, (b) a name read from `generated/people`, or (c) a role. Anything
    else is a failure. Confirm no named ICF staff appear.
-6. **Numbers traceable** — table every figure across the bundle with the Appendix A snippet that
-   produced it. Any figure presented as final without a snippet must be removed; any preliminary
+6. **Numbers traceable** — table every figure across the bundle with the `vault-facts.mjs` command
+   and output key that produced it. Any figure presented as final without a snippet must be removed; any preliminary
    figure must be visibly labelled preliminary.
 7. **Public coherence** — name the public artifact(s) in the same window you read, and state the
    specific cross-reference each internal artifact makes. Confirm no contradiction. If there was
