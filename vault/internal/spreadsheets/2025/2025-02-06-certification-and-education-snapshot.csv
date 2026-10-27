@@ -1,0 +1,30 @@
+# title: Certification and education snapshot, week of 3 February 2025
+# date: 2025-02-06
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-02-03
+# fictional: true
+# owner_role: Education & Credentialing
+# tags: [certifications, enrollments, examinations, weekly-snapshot]
+# data_sources: [generated/certifications, generated/member-certifications, generated/courses]
+# source: node scripts/vault-facts.mjs week 2025-02-03
+# basis: certification and education metrics captured during the reporting week. Free webinars carry no registrations.
+# caveat: pulled mid-week on 6 February, so figures are preliminary. Zero certification enrollments were recorded during this specific window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,status
+certification,certifications_enrolled,0,enrollments,booked in week,preliminary
+certification,foundations_certificates_awarded,1,awards,Ritu Ferris,confirmed
+certification,recertification_fees_collected_ytd,950,usd,annual cumulative,preliminary
+certification,exam_fees_collected_ytd,13248,usd,annual cumulative,preliminary
+education,course_enrollments_taken,111,enrollments,booked in week,preliminary
+education,course_completions,13,completions,completed in week,preliminary
+education,upcoming_cohorts_starting,1,cohorts,Pricing & Margin Wheel cohort,scheduled
+events,workshop_registrations_taken,33,registrations,Cedar Export Readiness,preliminary
+events,workshop_attendance,190,attendees,EVT-2025-W1 Brattleboro,confirmed
+events,workshop_no_shows,16,attendees,EVT-2025-W1 Brattleboro,confirmed

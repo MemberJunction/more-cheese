@@ -1,0 +1,32 @@
+# title: Governance and workshop snapshot, week of 25 February 2019
+# date: 2019-03-01
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-02-25
+# fictional: true
+# owner_role: Advocacy & Standards
+# tags: [governance, committees, workshop, operations]
+# data_sources: [generated/committee-meetings, generated/orders]
+# source: node scripts/vault-facts.mjs week 2019-02-25 and year 2019
+# basis: weekly operational totals as of 3 March 2019 data end.
+# caveat: preliminary figures pulled during the active conference and workshop week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+governance,total_committees,6,committees,active ICF committees,final
+governance,annual_committee_meetings,24,meetings,scheduled per year,final
+governance,committee_meetings_this_week,0,meetings,scheduled in window,final
+workshop,workshop_registrations_taken,10,registrations,EVT-2019-W1,final
+workshop,workshop_registered_total,71,registrations,EVT-2019-W1,final
+workshop,workshop_refunded,11,registrations,EVT-2019-W1,final
+workshop,attended,65,attendees,EVT-2019-W1 attendance,final
+workshop,no_show,6,attendees,EVT-2019-W1 attendance,final
+membership,current_members_at_week_end,224,members,rolling 12 months,final
+orders,confirmed_orders,10,orders,booked in week,final
+orders,orders_gross,1240,usd,booked in week,final
+cash,cash_captured,1601,usd,payments in week,final

@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 2023-01-23
+# date: 2023-01-29
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-01-23
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2023-01-23
+# basis: membership purchases, orders, cash, and event registrations booked inside 2023-01-23..2023-01-29. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 29 July 2026 for the 2023 historical record. Figures represent completed week totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,663,members,rolling 12 months,final
+membership,membership_purchases,13,purchases,booked in week,final
+membership,first_time_members,7,purchases,booked in week,final
+membership,corporate_purchases,2,purchases,booked in week,final
+membership,individual_purchases,10,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,membership_gross,3604,usd,booked in week,final
+orders,confirmed_orders,37,orders,booked in week,final
+orders,orders_gross,7242,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,25311,usd,payments in week,final
+events,event_registrations_taken,24,registrations,EVT-2023-W1 Workshop: Willow Alpine Styles,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+advocacy,coalition_meetings,1,meetings,Interstate cheese shipment,final

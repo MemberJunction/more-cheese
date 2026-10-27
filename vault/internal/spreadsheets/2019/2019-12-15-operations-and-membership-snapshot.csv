@@ -1,0 +1,35 @@
+# title: Weekly operations and membership snapshot, week ending 15 December 2019
+# date: 2019-12-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-12-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments, generated/courses, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2019-12-09
+# basis: membership purchases, orders and cash are booked inside 2019-12-09..2019-12-15. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero paid registrations.
+# caveat: weekly figures pulled at data close on Sunday 15 December 2019. Order history begins in 2019 so first-time membership metrics measure data start rather than real joins.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,370,members,rolling 12 months,final
+membership,membership_purchases_total,6,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,membership_purchases_individual,6,purchases,booked in week,final
+membership,membership_purchases_gross_usd,882,usd,booked in week,final
+orders,confirmed_orders,6,orders,booked in week,final
+orders,orders_gross_usd,965,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,2091,usd,payments in week,final
+events,event_registrations_taken,0,registrations,free webinar EVT-2019-WEB5,final
+events,events_this_week_count,1,events,webinar rennet alternatives,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,5,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final

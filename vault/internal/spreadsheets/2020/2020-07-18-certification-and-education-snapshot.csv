@@ -1,0 +1,33 @@
+# title: Certification and education operational snapshot, week ending 19 July 2020
+# date: 2020-07-18
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-07-13
+# fictional: true
+# owner_role: Education & Credentialing
+# tags: [certifications, enrollments, education, weekly-snapshot]
+# data_sources: [generated/certifications, generated/courses, generated/orders]
+# source: node scripts/vault-facts.mjs week 2020-07-13
+# basis: education and certification metrics recorded for the week of 13-19 July 2020. Course completions reflect verified finishes in the system. Free webinars carry no registrations.
+# caveat: preliminary figures pulled ahead of the Sunday close. Certification enrollments and awards remain at zero for the current reporting window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_or_volume,unit,reporting_basis,status
+education,course_enrollments_taken,0,enrollments,booked in week,preliminary
+education,course_completions,6,completions,verified in week,preliminary
+certification,certifications_enrolled,0,enrollments,processed in week,preliminary
+certification,certifications_awarded,0,awards,processed in week,preliminary
+events,annual_conference_registrations,22,registrations,EVT-2020-CONF,preliminary
+events,alpine_workshop_registrations,4,registrations,EVT-2020-W3,preliminary
+advocacy,interstate_petition_signatures,13,signatures,FSMA and shipment rules,preliminary
+advocacy,interstate_letter_campaigns,9,letters,FSMA and shipment rules,preliminary
+membership,membership_purchases,1,purchases,Individual tier,preliminary
+orders,confirmed_orders,32,orders,booked in week,preliminary
+orders,gross_order_value,8166,usd,booked in week,preliminary
+orders,cancellations,5,orders,booked in week,preliminary
+cash,cash_captured,11723,usd,payments captured,preliminary

@@ -1,0 +1,35 @@
+# title: Membership data-quality audit snapshot, week ending 1 November 2020
+# date: 2020-11-01
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-10-26
+# fictional: true
+# owner_role: Membership Operations
+# tags: [data-quality, membership, audit, bounced-mail, duplicates]
+# data_sources: [generated/people, generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-10-26
+# basis: snapshot of database discrepancies, bounced notices, and weekly commerce totals for the week ending 2020-11-01.
+# caveat: preliminary figures pulled at week close; record reconciliation is ongoing.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,metric_name,count_value,unit_type,status_flag,notes
+membership,current_members_at_week_end,424,members,preliminary,rolling 12 months basis
+membership,membership_purchases_total,2,purchases,preliminary,individual tier only
+membership,membership_purchases_gross,298,usd,preliminary,gross sales booked in week
+orders,confirmed_orders,3,orders,preliminary,commercial orders confirmed
+orders,orders_gross,208,usd,preliminary,confirmed order volume
+orders,cancellations,1,orders,preliminary,order cancellations recorded
+cash,cash_captured,895,usd,preliminary,total cash captured in week
+data_quality,bounced_email_notices,14,notices,flagged,undeliverable broadcast messages
+data_quality,duplicate_profile_pairs,6,pairs,flagged,split records requiring merge
+data_quality,stale_employer_records,22,records,flagged,outdated creamery affiliations
+data_quality,payment_mismatch_flags,4,accounts,flagged,dues paid vs order line discrepancies
+education,course_enrollments_taken,28,enrollments,preliminary,across active winter cohorts
+events,events_next_eight_weeks,1,events,scheduled,EVT-2020-WEB3 Digital Storefronts
+courses_starting,blue_cheese_prairie_cohort,1,course,starting_2020-11-08,prairie cohort instance
+courses_starting,listeria_control_willow_cohort,1,course,starting_2020-11-20,willow cohort instance

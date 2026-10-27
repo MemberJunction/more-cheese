@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 21 June 2021
+# date: 2021-06-27
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-06-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-06-21
+# basis: membership purchases, orders, cash, event registrations and course enrollments booked during 2021-06-21..2021-06-27. Current members count as of week end.
+# caveat: week totals are complete as of Sunday 27 June 2021.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,458,members,rolling 12 months,final
+membership,membership_purchases,2,purchases,booked in week,final
+membership,first_time_purchases,0,purchases,booked in week,final
+membership,individual_purchases,2,purchases,booked in week,final
+membership,membership_gross,306,usd,booked in week,final
+orders,confirmed_orders,12,orders,booked in week,final
+orders,orders_gross,3361,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,5272,usd,payments in week,final
+event_registrations,conf_registrations_taken,6,registrations,EVT-2021-CONF,final
+event_registrations,workshop_registrations_taken,4,registrations,EVT-2021-W3,final
+education,course_enrollments_taken,13,enrollments,taken in week,final
+education,course_completions,21,completions,completed in week,final
+certifications,certifications_enrolled,0,enrolled,booked in week,final
+certifications,certifications_awarded,0,awarded,awarded in week,final

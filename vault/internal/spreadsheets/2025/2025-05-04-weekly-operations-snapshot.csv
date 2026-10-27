@@ -1,0 +1,41 @@
+# title: Weekly operations snapshot, week of 28 April 2025
+# date: 2025-05-04
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-04-28
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, workshop, cash]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2025-04-28 and node scripts/vault-facts.mjs event EVT-2025-W4
+# basis: membership purchases, orders, cash, and event registrations booked inside 2025-04-28..2025-05-04. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: weekly figures compiled on Sunday 4 May 2025; complete for the window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1159,members,rolling 12 months,final
+membership,membership_purchases,7,purchases,booked in week,final
+membership,first_time_members,3,purchases,booked in week,final
+membership,individual_purchases,5,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,membership_gross,1970,usd,booked in week,final
+orders,confirmed_orders,52,orders,booked in week,final
+orders,orders_gross,10705,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,10720,usd,payments in week,final
+events,workshop_prairie_costing_registered,206,registrations,EVT-2025-W4,final
+events,workshop_prairie_costing_refunded,2,registrations,EVT-2025-W4,final
+events,workshop_prairie_costing_attended,184,registrations,attendance field,final
+events,workshop_prairie_costing_no_show,22,registrations,attendance field,final
+events,annual_conference_registrations_taken,8,registrations,EVT-2025-CONF,final
+events,workshop_prairie_costing_registrations_taken,30,registrations,EVT-2025-W4,final
+education,course_completions,37,completions,completed in week,final
+education,certification_enrolled,1,enrollments,enrolled in week,final
+education,certification_awarded,0,awards,awarded in week,final
+advocacy,coalition_meetings,1,meetings,raw-milk aging rules,final

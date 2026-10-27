@@ -1,0 +1,33 @@
+# title: Weekly operations snapshot, week ending 4 October 2020
+# date: 2020-10-04
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-09-28
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, advocacy, cash]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2020-09-28
+# basis: membership purchases, orders and cash captured are booked inside 2020-09-28..2020-10-04. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Sunday 4 October 2020. Event registrations and course enrollments show zero activity for this specific week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,421,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,3,purchases,booked in week,final
+membership,individual_tier_purchases,3,purchases,booked in week,final
+membership,enthusiast_tier_purchases,1,purchases,booked in week,final
+membership,membership_gross,601,usd,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross,601,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,1184,usd,payments in week,final
+advocacy,coalition_meetings_fsma,1,actions,logged in week,final
+advocacy,testimony_interstate_shipment,1,actions,logged in week,final
+governance,committee_meetings_completed,1,meetings,Awards and Competition Q4,final

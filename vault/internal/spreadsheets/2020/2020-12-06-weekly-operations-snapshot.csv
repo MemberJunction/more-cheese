@@ -1,0 +1,34 @@
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events, and decisions are invented.
+# title: Weekly operations snapshot, week ending 6 December 2020
+# date: 2020-12-06
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-11-30
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/courses]
+# source: node scripts/vault-facts.mjs week 2020-11-30
+# basis: membership purchases, confirmed orders, cash captured, and course enrollments recorded between 2020-11-30 and 2020-12-06.
+#
+metric_group,metric_name,metric_value,unit,basis,status
+membership,current_members_at_week_end,389,members,rolling 12 months,final
+membership,total_membership_purchases,233,purchases,booked in week,final
+membership,first_time_members,6,purchases,booked in week,final
+membership,small_business_tier,53,purchases,booked in week,final
+membership,corporate_tier,15,purchases,booked in week,final
+membership,individual_tier,154,purchases,booked in week,final
+membership,enthusiast_tier,11,purchases,booked in week,final
+membership,membership_gross_sales,56674,usd,booked in week,final
+orders,confirmed_orders,278,orders,booked in week,final
+orders,gross_order_value,53111,usd,booked in week,final
+orders,order_cancellations,38,orders,booked in week,final
+cash,cash_captured,6677,usd,payments in week,final
+events,webinars_this_week,1,events,EVT-2020-WEB3,final
+courses,course_enrollments_taken,16,enrollments,booked in week,final
+courses,course_completions,0,completions,completed in week,final
+advocacy,coalition_meetings,1,meetings,Labeling standards,final

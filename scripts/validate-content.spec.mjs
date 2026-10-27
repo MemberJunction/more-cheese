@@ -127,8 +127,13 @@ function makeBundleRoot() {
         mkdirSync(path.join(dir, path.dirname(rel)), { recursive: true });
         cpSync(path.join(REPO_ROOT, rel), path.join(dir, rel));
     }
+    // Only the sample week: the backfill filled every other 2019 week, and a fixture that copies the whole
+    // year finds bundles in the "empty" week and a different first memo.
     for (const kind of ['memos', 'spreadsheets', 'decks', 'email']) {
-        cpSync(path.join(REPO_ROOT, 'vault/internal', kind, '2019'), path.join(dir, 'vault/internal', kind, '2019'), { recursive: true });
+        const src = path.join(REPO_ROOT, 'vault/internal', kind, '2019');
+        for (const name of readdirSync(src).filter((n) => n.slice(0, 10) >= SAMPLE_WEEK && n.slice(0, 10) <= '2019-02-10')) {
+            cpSync(path.join(src, name), path.join(dir, 'vault/internal', kind, '2019', name), { recursive: true });
+        }
     }
     return dir;
 }
@@ -230,6 +235,19 @@ test('internal artifacts citing retired generated/ directories are warned about'
         const out = execFileSync(process.execPath, [VALIDATOR, memo], { cwd: dir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
         assert.match(out, /⚠ data_sources names generated\/membership-periods, which does not exist/);
         assert.doesNotMatch(out, /names generated\/orders/, 'a directory that exists is not flagged');
+    } finally {
+        rmSync(dir, { recursive: true, force: true });
+    }
+});
+
+test('internal artifacts missing a §3.1 field fail', () => {
+    const dir = makeBundleRoot();
+    try {
+        const memo = firstFile(dir, 'vault/internal/memos/2019');
+        editFile(dir, memo, 'fiscal_year: 2019\n', '');
+        const { status, out } = runBundle(dir);
+        assert.equal(status, 1);
+        assert.match(out, /frontmatter lacks fiscal_year/);
     } finally {
         rmSync(dir, { recursive: true, force: true });
     }

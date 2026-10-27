@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 2022-12-12
+# date: 2022-12-18
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-12-12
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, events]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2022-12-12
+# basis: totals represent complete activity for the week of 2022-12-12 to 2022-12-18. Current members count represents active members at week end. Cash captured reflects total payments recorded in the window.
+# caveat: end of year holiday slowdown reflected in zero course enrollments taken and zero certification enrollments, while advocacy actions remain steady.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,634,members,rolling 12 months,final
+membership,membership_purchases_total,8,purchases,booked in week,final
+membership,membership_purchases_individual,8,purchases,booked in week,final
+membership,membership_purchases_gross,1286,usd,booked in week,final
+orders,confirmed_orders,10,orders,booked in week,final
+orders,orders_gross,1578,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,8304,usd,payments in week,final
+events,event_registrations_taken,1,registrations,EVT-2023-W1 Workshop Willow Alpine Styles,final
+courses,course_enrollments_taken,0,enrollments,taken in week,final
+courses,course_completions,12,completions,completed in week,final
+certifications,enrolled,0,certifications,enrolled in week,final
+certifications,awarded,0,certifications,awarded in week,final
+advocacy,petition_signatures_interstate_shipment,5,actions,recorded in week,final
+advocacy,letter_campaigns_interstate_shipment,2,actions,recorded in week,final
+advocacy,coalition_meetings_labeling_standards,1,actions,recorded in week,final

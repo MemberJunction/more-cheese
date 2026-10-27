@@ -1,0 +1,38 @@
+# title: Certification and membership operations snapshot, week ending 2020-01-05
+# date: 2019-12-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-12-30
+# fictional: true
+# owner_role: Education & Credentialing
+# tags: [certification, membership, weekly-snapshot, operational-metrics]
+# data_sources: [generated/certifications, generated/member-certifications, generated/orders]
+# source: node scripts/vault-facts.mjs week 2019-12-30 and node scripts/vault-facts.mjs year 2019
+# basis: membership purchases, orders and cash are booked inside 2019-12-30..2020-01-05. Current members count totals 359 at week end. Certification figures reflect annual cumulative totals for 2019.
+# caveat: pulled on Tuesday 31 December 2019; week figures are preliminary and will close on Sunday 2020-01-05.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,metric_value,unit,basis,status
+membership,current_members_at_week_end,359,members,rolling 12 months,preliminary
+membership,membership_purchases_total,5,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,3,purchases,booked in week,preliminary
+membership,individual_tier_purchases,3,purchases,booked in week,preliminary
+membership,enthusiast_tier_purchases,2,purchases,booked in week,preliminary
+membership,membership_gross_usd,726,usd,booked in week,preliminary
+orders,confirmed_orders,7,orders,booked in week,preliminary
+orders,orders_gross_usd,1122,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured_usd,10374,usd,payments in week,preliminary
+certification,certifications_enrolled,0,enrollments,booked in week,preliminary
+certification,certifications_awarded_total,6,awards,2019 annual total,final
+certification,food_safety_haccp_awarded,2,awards,2019 annual total,final
+certification,cheese_foundations_awarded,3,awards,2019 annual total,final
+certification,sensory_evaluation_awarded,1,awards,2019 annual total,final
+certification,certification_enrollments_annual,5,enrollments,2019 annual total,final
+advocacy,coalition_meetings_dairy_pricing,1,meetings,booked in week,final
+governance,committee_meetings_completed,1,meetings,Food Safety Q1 2019-01-01,final

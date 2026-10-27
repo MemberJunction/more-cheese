@@ -1,0 +1,43 @@
+# title: Weekly operations snapshot, week of 8 December 2025
+# date: 2025-12-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-12-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, cash, memberships, events, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-12-08
+# basis: Commerce figures booked between 2025-12-08 and 2025-12-14. Current members counts rolling 12 months. Workshop attendance reflects Workshop Curd Pasta Filata held in Querétaro on 2025-12-10.
+# caveat: Figures pulled at week close on Sunday 2025-12-14. Order confirmations and cash captured are separate financial bases.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1433,members,rolling 12 months,final
+membership,membership_purchases_total,24,purchases,booked in week,final
+membership,membership_purchases_first_time,4,purchases,booked in week,final
+membership,membership_individual_purchases,15,purchases,booked in week,final
+membership,membership_corporate_purchases,2,purchases,booked in week,final
+membership,membership_enthusiast_purchases,4,purchases,booked in week,final
+membership,membership_small_business_purchases,3,purchases,booked in week,final
+membership,membership_purchases_gross,6336,usd,booked in week,final
+orders,confirmed_orders,169,orders,booked in week,final
+orders,orders_gross,27088,usd,booked in week,final
+orders,cancellation_orders,2,orders,booked in week,final
+cash,cash_captured,14757,usd,payments in week,final
+events,pasta_filata_workshop_registered,239,registrations,EVT-2025-W5 total,final
+events,pasta_filata_workshop_attended,220,attendees, Querétaro 2025-12-10,final
+events,pasta_filata_workshop_no_show,19,attendees,Querétaro 2025-12-10,final
+events,pasta_filata_workshop_refunded,0,registrations,EVT-2025-W5 total,final
+events,cedar_cut_wrap_registrations_taken,81,registrations,booked in week,final
+events,stone_sensory_registrations_taken,18,registrations,booked in week,final
+education,course_enrollments_taken,37,enrollments,booked in week,final
+education,course_completions,2,completions,completed in week,final
+certifications,certification_enrollments_taken,1,enrollments,booked in week,final
+certifications,certifications_awarded,1,awards,Akira Carvalho Foundations,final
+advocacy,coalition_meetings_interstate_shipment,1,meetings,advocacy action,final

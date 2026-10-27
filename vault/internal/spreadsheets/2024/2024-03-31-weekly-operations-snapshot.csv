@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2024-03-25
+# date: 2024-03-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-03-25
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, events]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-03-25
+# basis: complete weekly figures for the window of 2024-03-25 to 2024-03-31.
+# caveat: free webinars carry no paid registrations and are reported with zero attendance figures.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,numeric_value,unit,basis,notes
+membership,current_members_at_week_end,913,members,rolling 12 months,end of week total
+membership,membership_purchases_total,11,purchases,booked in week,total tier purchases
+membership,membership_purchases_first_time,4,purchases,booked in week,new member signups
+membership,membership_purchases_individual,6,purchases,booked in week,Individual tier
+membership,membership_purchases_small_business,4,purchases,booked in week,SmallBusiness tier
+membership,membership_purchases_enthusiast,1,purchases,booked in week,Enthusiast tier
+membership,membership_purchases_gross,2654,usd,booked in week,gross dues billed
+orders,confirmed_orders,58,orders,booked in week,total confirmed orders
+orders,orders_gross,10905,usd,booked in week,gross order value
+orders,cancellations,0,orders,booked in week,order cancellations
+cash,cash_captured,9829,usd,payments in week,total cash collected
+events,registrations_annual_conference,4,registrations,EVT-2024-CONF,taken in week
+events,registrations_birch_retailing_workshop,42,registrations,EVT-2024-W4,taken in week
+events,webinar_insurance_registrations,0,registrations,EVT-2024-WEB5,free webinar no paid registrations
+courses,course_completions,5,completions,completed in week,member completions
+courses,course_enrollments_taken,0,enrollments,taken in week,new enrollments
+certifications,certification_enrolled,1,enrollments,processed in week,new certification enrollment
+advocacy,coalition_meetings_fsma,1,meetings,FSMA small-producer exemptions,advocacy action logged

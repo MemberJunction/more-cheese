@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 11 October 2021
+# date: 2021-10-17
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-10-11
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2021-10-11
+# basis: membership purchases, orders, cash, and course enrollments recorded during 2021-10-11 to 2021-10-17. Current members count as of week end.
+# caveat: week totals complete on Sunday 2021-10-17.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,480,members,rolling 12 months,final
+membership,membership_purchases,6,purchases,booked in week,final
+membership,first_time_members,2,purchases,booked in week,final
+membership,individual_purchases,3,purchases,booked in week,final
+membership,enthusiast_purchases,3,purchases,booked in week,final
+membership,membership_gross,852,usd,booked in week,final
+orders,confirmed_orders,6,orders,booked in week,final
+orders,orders_gross,852,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,1911,usd,payments in week,final
+education,course_enrollments_taken,17,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certification,certifications_awarded,1,awards,Food Safety and HACCP,final
+advocacy,raw_milk_aging_meetings,1,meetings,coalition meeting,final
+advocacy,interstate_shipment_meetings,1,meetings,coalition meeting,final

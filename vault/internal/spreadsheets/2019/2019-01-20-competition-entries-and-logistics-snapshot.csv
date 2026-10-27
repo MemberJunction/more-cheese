@@ -1,0 +1,26 @@
+# title: Competition entries, categories, and judging logistics snapshot
+# date: 2019-01-20
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-01-14
+# fictional: true
+# owner_role: Events Team
+# tags: [competition, entries, judging, logistics, madison]
+# data_sources: [generated/competition-entries]
+# source: node scripts/vault-facts.mjs year 2019
+# basis: competition entries and category mix from historical 2019 data records.
+# caveat: preliminary planning numbers for the 16 July conference competition in Madison.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+category,historical_entries_count,shipping_requirement,target_judge_count,scoring_method,status
+Alpine Styles,7,refrigerated transport,4,standard sensory rubric,active
+Soft-Ripened,5,temperature controlled,3,standard sensory rubric,active
+Fresh & Pasta Filata,4,rapid cold chain,3,standard sensory rubric,active
+Washed Rind,4,humidity controlled,3,standard sensory rubric,active
+Aged Cheddar & Territorials,2,standard freight,2,standard sensory rubric,active
+Blue Veined,2,sealed container,2,standard sensory rubric,active

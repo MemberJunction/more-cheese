@@ -1,0 +1,41 @@
+# title: Weekly operations snapshot, week of 2024-04-08
+# date: 2024-04-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-04-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-04-08
+# basis: membership purchases, confirmed orders, cash captured, and advocacy actions booked inside 2024-04-08..2024-04-14. Current members count reflects active status at week end.
+# caveat: pulled at the close of the week on 2024-04-14. Free webinars carry zero registrations and are excluded from registration counts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,921,members,rolling 12 months,final
+membership,membership_purchases_total,9,purchases,booked in week,final
+membership,membership_purchases_first_time,4,purchases,booked in week,final
+membership,individual_membership_purchases,3,purchases,booked in week,final
+membership,small_business_membership_purchases,4,purchases,booked in week,final
+membership,enthusiast_membership_purchases,2,purchases,booked in week,final
+membership,membership_gross_usd,2298,usd,booked in week,final
+orders,confirmed_orders,15,orders,booked in week,final
+orders,orders_gross_usd,5013,usd,booked in week,final
+orders,order_cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,5697,usd,payments in week,final
+events,annual_conference_registrations_taken,6,registrations,EVT-2024-CONF,final
+events,events_this_week,0,events,scheduled in week,final
+events,events_next_eight_weeks,0,events,scheduled next eight weeks,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certification,certifications_enrolled,0,enrollments,enrolled in week,final
+certification,certifications_awarded,0,awards,awarded in week,final
+advocacy,letter_campaign_labeling_standards,4,actions,recorded in week,final
+advocacy,petition_signature_labeling_standards,5,actions,recorded in week,final
+governance,committee_meetings_completed,3,meetings,completed in week,final

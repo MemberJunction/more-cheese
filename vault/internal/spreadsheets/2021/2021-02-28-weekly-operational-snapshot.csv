@@ -1,0 +1,36 @@
+# title: Weekly operational snapshot, week of 22 February 2021
+# date: 2021-02-28
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-02-22
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2021-02-22
+# basis: commerce and enrollment figures are complete for the week of 22-28 February 2021. Membership count reflects current members at week end. Cash captured reflects total payments processed in the window.
+# caveat: free webinars carry no paid registrations in our data and are excluded from registration counts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,442,members,rolling 12 months,final
+membership,membership_purchases,3,purchases,booked in week,final
+membership,first_time_purchases,2,purchases,booked in week,final
+membership,individual_tier_purchases,3,purchases,booked in week,final
+membership,membership_gross,459,usd,booked in week,final
+orders,confirmed_orders,3,orders,booked in week,final
+orders,orders_gross,533,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,3593,usd,payments in week,final
+events,event_registrations_taken,0,registrations,taken in week,final
+education,course_enrollments_taken,34,enrollments,taken in week,final
+education,course_completions,9,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,advocacy_actions_recorded,0,actions,recorded in week,final
+committees,committee_meetings_held,0,meetings,held in week,final

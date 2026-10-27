@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week ending 14 June 2020
+# date: 2020-06-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-06-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2020-06-08
+# basis: membership purchases, orders, cash, and enrollments booked inside 2020-06-08..2020-06-14. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 14 June 2020. Figures reflect complete week totals as reported by vault-facts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,402,members,rolling 12 months,complete
+membership,membership_purchases,2,purchases,booked in week,complete
+membership,first_time_members,1,purchases,booked in week,complete
+membership,enthusiast_purchases,1,purchases,booked in week,complete
+membership,individual_purchases,1,purchases,booked in week,complete
+membership,membership_gross,277,usd,booked in week,complete
+orders,confirmed_orders,11,orders,booked in week,complete
+orders,orders_gross,3236,usd,booked in week,complete
+orders,cancellation_orders,1,orders,booked in week,complete
+cash,cash_captured,3974,usd,payments in week,complete
+event_registrations,conference_registrations_taken,8,registrations,EVT-2020-CONF,complete
+education,course_enrollments_taken,36,enrollments,taken in week,complete
+education,course_completions,12,completions,completed in week,complete
+certification,certification_enrolled,0,enrolled,booked in week,complete
+advocacy,raw_milk_aging_meetings,1,meetings,coalition meeting,complete

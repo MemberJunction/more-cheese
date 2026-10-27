@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week ending 1 March 2020
+# date: 2020-03-01
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-02-24
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/courses]
+# source: node scripts/vault-facts.mjs week 2020-02-24
+# basis: membership purchases, orders, cash, and course enrollments booked inside 2020-02-24..2020-03-01. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Sunday 1 March 2020; figures represent complete week totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,375,members,rolling 12 months,final
+membership,membership_purchases,0,purchases,booked in week,final
+membership,first_time_purchases,0,purchases,booked in week,final
+orders,confirmed_orders,1,orders,booked in week,final
+orders,orders_gross,149,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,3679,usd,payments in week,final
+events,event_registrations_taken,0,registrations,booked in week,final
+events,events_this_week,0,events,scheduled in week,final
+events,upcoming_events_eight_weeks,1,events,scheduled next 8 weeks,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,advocacy_actions,0,actions,recorded in week,final
+governance,committee_meetings,0,meetings,held in week,final

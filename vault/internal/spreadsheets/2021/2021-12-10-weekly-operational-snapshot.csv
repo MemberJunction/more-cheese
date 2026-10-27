@@ -1,0 +1,34 @@
+# title: Weekly operational snapshot, week of 6 December 2021
+# date: 2021-12-10
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-12-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2021-12-06
+# basis: membership purchases, confirmed orders, cash captured, and event registrations booked during 2021-12-06..2021-12-12. Current members count as of week end.
+# caveat: pulled on Friday 10 December 2021; preliminary until Sunday close.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,478,members,rolling 12 months,preliminary
+membership,membership_purchases,3,purchases,booked in week,preliminary
+membership,first_time_purchases,1,purchases,booked in week,preliminary
+membership,small_business_tier_purchases,1,purchases,booked in week,preliminary
+membership,individual_tier_purchases,2,purchases,booked in week,preliminary
+membership,membership_gross,674,usd,booked in week,preliminary
+orders,confirmed_orders,12,orders,booked in week,preliminary
+orders,orders_gross,1477,usd,booked in week,preliminary
+orders,cancellations,1,orders,booked in week,preliminary
+cash,cash_captured,6406,usd,payments in week,preliminary
+events,cedar_competition_prep_registrations_taken,6,registrations,EVT-2021-W2,preliminary
+events,valley_export_readiness_registrations_taken,2,registrations,EVT-2022-W2,preliminary
+education,course_enrollments_taken,0,enrollments,started week,preliminary
+education,course_completions,0,completions,ended week,preliminary

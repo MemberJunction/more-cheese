@@ -1,0 +1,25 @@
+# title: Membership data-quality audit and record integrity snapshot
+# date: 2023-10-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-10-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership-audit, data-quality, duplicate-records, staled-data]
+# data_sources: [generated/people, generated/organizations]
+# source: node scripts/vault-facts.mjs week 2023-10-09
+# basis: Audit snapshot covering 838 current members at week end, tracking identified data anomalies including duplicate pairs, stale employers, bounced addresses, and payment status mismatches.
+# caveat: Figures reflect internal database audit findings as of 15 October 2023 and are subject to final deduplication reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+anomaly_category,description,record_count,severity_level,action_required
+duplicate_identity,overlapping profile IDs requiring merge,14,high,manual consolidation
+stale_employer,outdated creamery or dairy affiliation,29,medium,verify and update
+bounced_address,undeliverable email contact on file,18,high,suppress or re-verify
+payment_mismatch,active status not matching payment log,9,medium,reconcile ledger
+grace_window_stalled,pending renewal awaiting manual review,12,low,process queue

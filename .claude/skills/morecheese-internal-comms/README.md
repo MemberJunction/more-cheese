@@ -27,23 +27,42 @@ vault/internal/email/2019/2019-02-04-thread-<slug>/01-…md 02-…md 03-…md
 
 ## Running a backfill
 
-One week per invocation, fresh context, Mondays only, gated by the validator's bundle mode:
+Bulk runs use **Gemini 3.5 Flash Lite**, not Claude: Amith's direction on #125 was not to use the
+Anthropic API for this workload. One model call per week, Mondays only:
 
 ```sh
-scripts/content-backfill-internal.sh 2020-03-16 2023-07-24      # PAR=3 MODEL=sonnet LOGDIR=… by default
-node scripts/validate-content.mjs --internal-week 2020-03-16     # what each run must pass
-node scripts/vault-facts.mjs week 2020-03-16                     # the figures a run may quote
+GEMINI_ENV_FILE=~/Projects/MJ/.env node scripts/content-backfill-internal-gemini.mjs 2020-03-16 2023-07-24
+node scripts/content-backfill-internal-gemini.mjs --dry-run 2023-07-24   # print the prompt, call nothing
+node scripts/validate-content.mjs --internal-week 2020-03-16            # what each bundle must pass
+node scripts/vault-facts.mjs week 2020-03-16                            # the figures a bundle may quote
 ```
 
-Generate the **public** week first. The skill reads `content/blog/<year>/` for the window and
-cross-references it; running internal-first loses the coherence that makes the corpus worth having.
+The key is `GEMINI_API_KEY`, or MJ's `AI_VENDOR_API_KEY__GeminiLLM`, from the environment or from the
+`.env` that `GEMINI_ENV_FILE` names. A small model cannot run this skill as an agent, so the script does
+the agent's legwork: it puts the week's `vault-facts` output, the week's blog posts, recent internal
+titles, VAULT-DESIGN and this skill into one prompt, writes the returned bundle, and checks it with
+`validate-content.mjs` plus figure traceability, time leaks (attendance quoted before an event),
+lengths, banned phrases and US spelling. Problems go back to the model as the next turn; after three
+tries the draft is moved to `<logdir>/rejected/` so `vault/internal/` only holds bundles that passed.
+`--par N` runs N contiguous lanes; `results.tsv` in the log directory has tokens and cost per week.
+
+`scripts/content-backfill-internal.sh` is the original Claude Code driver, kept for one-off weeks that
+need an agent's judgment; it is ~15× the cost per week.
+
+Generate the **public** week first. The bundle cross-references `content/blog/<year>/` for the window;
+running internal-first loses the coherence that makes the corpus worth having.
 
 The data has an end: confirmed orders stop at 2026-06-20 (`vault-facts.mjs series` prints the
-date). Don't schedule weeks after it.
+date). Weeks after it are skipped.
 
-Weekly internal comms for 2019 through mid-2026 is ~390 bundles ≈ 1,600 files. That is a budget
-decision, not a default — see VAULT-DESIGN §9 decision 4. Pilot a handful of weeks, read them, and
-use the cost column in `results.tsv` before any tranche.
+Each week's email thread gets a topic by rotation (`THREAD_TOPICS` in the script: renewals, event
+logistics, committees, cohorts, certification, data quality, finance, advocacy, press, member complaints,
+the competition, executive reporting, staff capacity, and — one week in fourteen — blog coordination), and
+a thread subject may not repeat one already filed. Without that, 228 of 388 threads in the first full run
+were about "blog alignment".
+
+Cost (2026-10-27): the full 2019 to mid-2026 backfill, 382 bundles plus reruns, was ~$16 and ~35 min at
+`--par 4` — ~$0.04 a week. The Claude driver's pilot was ~$0.51 a week, ~7.5 min.
 
 ## Rendering to Office formats
 

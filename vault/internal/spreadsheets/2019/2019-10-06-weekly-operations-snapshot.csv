@@ -1,0 +1,34 @@
+# title: Weekly operations snapshot, week ending 6 October 2019
+# date: 2019-10-06
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-09-30
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/courses, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2019-09-30
+# basis: commerce data captured and confirmed during the week of 2019-09-30 to 2019-10-06.
+# caveat: weekly figures are complete on Sunday 2019-10-06. Membership purchases reflect first-time joins in the data start year.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,317,members,rolling 12 months,final
+membership,membership_purchases_total,5,purchases,booked in week,final
+membership,membership_purchases_first_time,5,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_individual,3,purchases,booked in week,final
+membership,membership_purchases_corporate,1,purchases,booked in week,final
+membership,membership_gross_usd,1597,usd,booked in week,final
+orders,confirmed_orders,6,orders,booked in week,final
+orders,orders_gross_usd,1813,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,767,usd,payments in week,final
+education,course_enrollments_taken,2,enrollments,taken in week,final
+education,course_completions,3,completions,completed in week,final
+governance,committee_meetings_completed,1,meetings,Food Safety Committee Q4,final

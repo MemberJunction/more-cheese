@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2023-12-18
+# date: 2023-12-24
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-12-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, memberships, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2023-12-18 and node scripts/vault-facts.mjs event EVT-2023-W5
+# basis: membership purchases, orders, cash, and event registrations booked during 2023-12-18..2023-12-24. Current members counts people whose latest qualifying purchase is within 12 months. Event attendance is known after the event date of 2023-12-19.
+# caveat: weekly totals complete on Sunday 2023-12-24. Workshop EVT-2023-W5 occurred on 2023-12-19 with final attendance reconciled.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,859,members,rolling 12 months,final
+membership,membership_purchases,14,purchases,booked in week,final
+membership,first_time_purchases,3,purchases,booked in week,final
+membership,individual_purchases,13,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,membership_gross,2513,usd,booked in week,final
+orders,confirmed_orders,36,orders,booked in week,final
+orders,orders_gross,5953,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,11418,usd,payments in week,final
+events,workshop_curd_prep_registrations,140,registrations,EVT-2023-W5,final
+events,workshop_curd_prep_attended,134,attendees,EVT-2023-W5,final
+events,workshop_curd_prep_noshow,6,attendees,EVT-2023-W5,final
+events,workshop_curd_prep_refunded,0,registrations,EVT-2023-W5,final
+events,workshop_curd_prep_prep_registrations_taken,21,registrations,booked in week,final
+events,workshop_birch_milk_handling_registrations_taken,1,registrations,booked in week,final
+education,course_enrollments_taken,21,enrollments,taken in week,final
+education,course_completions,10,completions,completed in week,final

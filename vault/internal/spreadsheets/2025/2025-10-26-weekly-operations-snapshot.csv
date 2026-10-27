@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 20 October 2025
+# date: 2025-10-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-10-20
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-10-20
+# basis: confirmed figures for the week of 2025-10-20 to 2025-10-26. Current members counts qualifying active purchases over the trailing 12 months.
+# caveat: commerce data ends on 2026-06-20; figures compiled on Sunday 2025-10-26.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,status
+membership,current_members_at_week_end,1382,members,trailing 12 months,confirmed
+membership,membership_purchases_total,24,purchases,booked in week,confirmed
+membership,membership_purchases_first_time,15,purchases,booked in week,confirmed
+membership,membership_purchases_individual,18,purchases,booked in week,confirmed
+membership,membership_purchases_small_business,3,purchases,booked in week,confirmed
+membership,membership_purchases_corporate,1,purchases,booked in week,confirmed
+membership,membership_purchases_enthusiast,2,purchases,booked in week,confirmed
+membership,membership_sales_gross,5493,usd,booked in week,confirmed
+orders,confirmed_orders,32,orders,booked in week,confirmed
+orders,orders_gross,7567,usd,booked in week,confirmed
+orders,cancellations,0,orders,booked in week,confirmed
+cash,cash_captured,3422,usd,payments in week,confirmed
+events,event_registrations_taken_pasta_filata,5,registrations,EVT-2025-W5,confirmed
+events,webinars_this_week,1,webinars,EVT-2025-WEB6 digital storefronts,confirmed
+education,course_enrollments_taken,33,enrollments,taken in week,confirmed
+education,course_completions,4,completions,completed in week,confirmed
+certifications,certifications_enrolled,2,enrollments,enrolled in week,confirmed
+certifications,certifications_awarded,0,awards,awarded in week,confirmed
+advocacy,coalition_meetings_labeling_standards,1,actions,recorded in week,confirmed
+governance,committee_meetings_education,1,meetings,completed 2025-10-20,confirmed

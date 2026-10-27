@@ -323,11 +323,17 @@ function staleSources(sources) {
         .map((x) => `data_sources names ${x}, which does not exist (retired data; cite generated/orders instead)`);
 }
 
+// VAULT-DESIGN §3.1: the fields Knowledge Hub indexes on every artifact. The 2026-10-27 Gemini backfill
+// left fiscal_year off 172 files and title/date off 31 email messages, and nothing here noticed.
+const INTERNAL_FIELDS = ['title', 'date', 'doc_type', 'visibility', 'org', 'era', 'fiscal_year', 'fictional', 'tags', 'data_sources'];
+
 function checkInternal(file, text) {
     const rel = path.relative(ROOT, file);
     const fails = [];
     if (file.endsWith('.csv')) {
         const head = text.split('\n').slice(0, 30).join('\n');
+        const missing = INTERNAL_FIELDS.filter((k) => !new RegExp(`^#\\s*${k}:`, 'm').test(head));
+        if (missing.length) fails.push(`CSV comment block lacks ${missing.join(', ')} (VAULT-DESIGN §3.1)`);
         if (!/^#\s*notice:/m.test(head) || !head.includes(CSV_NOTICE)) fails.push('CSV lacks the `# notice:` FICTIONAL DEMONSTRATION DATA block');
         if (!/^#\s*fictional:\s*true/m.test(head)) fails.push('CSV comment block lacks `# fictional: true`');
         const listed = (head.match(/^#\s*data_sources:\s*\[(.*)\]/m) ?? [])[1];
@@ -337,6 +343,8 @@ function checkInternal(file, text) {
     const fm = parseFrontmatter(text);
     if (fm.error) fails.push(fm.error);
     else {
+        const missing = INTERNAL_FIELDS.filter((k) => !(k in fm.fields));
+        if (missing.length) fails.push(`frontmatter lacks ${missing.join(', ')} (VAULT-DESIGN §3.1)`);
         if (fm.fields.fictional !== true) fails.push('fictional must be true');
         if (fm.fields.visibility && fm.fields.visibility !== 'internal') fails.push(`visibility should be internal, got ${fm.fields.visibility}`);
         const bodyLines = fm.body.split('\n');

@@ -1,0 +1,41 @@
+# title: Weekly operations snapshot, week of 15 July 2024
+# date: 2024-07-21
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-07-15
+# fictional: true
+# owner_role: Events Team
+# tags: [weekly-snapshot, annual-conference, membership, orders]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2024-07-15
+# basis: membership purchases, orders, cash, and event registrations booked or occurring during 2024-07-15..2024-07-21. Current members count reflects node state at week end.
+# caveat: pulled at week close; attendance figures remain subject to final scan reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,993,members,rolling 12 months,final
+membership,membership_purchases,11,purchases,booked in week,final
+membership,first_time_purchases,6,purchases,booked in week,final
+membership,individual_tier_purchases,7,purchases,booked in week,final
+membership,enthusiast_tier_purchases,3,purchases,booked in week,final
+membership,small_business_tier_purchases,1,purchases,booked in week,final
+membership,membership_gross,1967,usd,booked in week,final
+orders,confirmed_orders,55,orders,booked in week,final
+orders,orders_gross,11220,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,11884,usd,payments in week,final
+conference,icf_annual_conference_registered,351,registrations,EVT-2024-CONF,preliminary
+conference,icf_annual_conference_attended,328,registrations,attendance field,preliminary
+conference,icf_annual_conference_no_show,23,registrations,attendance field,preliminary
+conference,icf_annual_conference_refunded,1,registrations,EVT-2024-CONF,preliminary
+workshop,hollow_food_safety_registered,202,registrations,EVT-2024-W5,preliminary
+workshop,hollow_food_safety_attended,187,registrations,attendance field,preliminary
+workshop,hollow_food_safety_no_show,15,registrations,attendance field,preliminary
+workshop,hollow_food_safety_refunded,0,registrations,EVT-2024-W5,preliminary
+education,course_enrollments_taken,29,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final

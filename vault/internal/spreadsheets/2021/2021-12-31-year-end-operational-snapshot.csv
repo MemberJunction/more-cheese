@@ -1,0 +1,38 @@
+# title: Year-end operational snapshot, week of 27 December 2021
+# date: 2021-12-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-12-27
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, year-end, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2021-12-27 and node scripts/vault-facts.mjs year 2021
+# basis: membership purchases, orders and cash captured are booked inside 2021-12-27..2022-01-02. Current members counts members at week end.
+# caveat: pulled on 31 December 2021, preliminary until weekly close reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,479,members,week end,preliminary
+membership,membership_purchases,6,purchases,booked in week,preliminary
+membership,first_time_purchases,1,purchases,booked in week,preliminary
+membership,individual_purchases,4,purchases,booked in week,preliminary
+membership,corporate_purchases,1,purchases,booked in week,preliminary
+membership,small_business_purchases,1,purchases,booked in week,preliminary
+membership,membership_gross,2042,usd,booked in week,preliminary
+orders,confirmed_orders,14,orders,booked in week,preliminary
+orders,orders_gross,3168,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,15273,usd,payments in week,preliminary
+events,cedar_prep_registered,34,registrations,EVT-2021-W2,confirmed
+events,cedar_prep_attended,30,attendees,EVT-2021-W2,confirmed
+events,cedar_prep_no_show,4,attendees,EVT-2021-W2,confirmed
+events,cedar_prep_refunded,0,registrations,EVT-2021-W2,confirmed
+events,valley_export_registered,1,registrations,EVT-2022-W2,preliminary
+advocacy,dairy_pricing_petitions,6,actions,petition signatures,preliminary
+advocacy,dairy_pricing_letters,4,actions,letter campaigns,preliminary

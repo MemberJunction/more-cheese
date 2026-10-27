@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 22 September 2025
+# date: 2025-09-28
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-09-22
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2025-09-22
+# basis: commerce figures and membership purchases booked inside 2025-09-22..2025-09-28. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: weekly totals complete on Sunday 2025-09-28.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1338,members,rolling 12 months,final
+membership,membership_purchases_total,21,purchases,booked in week,final
+membership,membership_purchases_first_time,15,purchases,booked in week,final
+membership,membership_tier_enthusiast,5,purchases,booked in week,final
+membership,membership_tier_individual,14,purchases,booked in week,final
+membership,membership_tier_small_business,2,purchases,booked in week,final
+membership,membership_purchases_gross,3888,usd,booked in week,final
+orders,confirmed_orders,21,orders,booked in week,final
+orders,orders_gross,4317,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,5398,usd,payments in week,final
+events,registrations_taken,0,registrations,booked in week,final
+courses,course_enrollments_taken,0,enrollments,booked in week,final
+courses,course_completions,3,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,coalition_meeting_fsma_exemptions,1,actions,recorded in week,final
+advocacy,testimony_raw_milk_aging,1,actions,recorded in week,final
+advocacy,coalition_meeting_raw_milk_aging,1,actions,recorded in week,final

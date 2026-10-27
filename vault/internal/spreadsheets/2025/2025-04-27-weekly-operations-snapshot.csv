@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 21 April 2025
+# date: 2025-04-27
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-04-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2025-04-21
+# basis: membership purchases, orders, and cash captured booked inside 2025-04-21..2025-04-27. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end on 27 April 2025. Event registrations reflect totals for EVT-2025-CONF and EVT-2025-W4.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1158,members,rolling 12 months,final
+membership,membership_purchases,14,purchases,booked in week,final
+membership,first_time_purchases,6,purchases,booked in week,final
+membership,small_business_purchases,3,purchases,booked in week,final
+membership,individual_purchases,7,purchases,booked in week,final
+membership,enthusiast_purchases,4,purchases,booked in week,final
+membership,membership_gross,2941,usd,booked in week,final
+orders,confirmed_orders,75,orders,booked in week,final
+orders,orders_gross,16012,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,17032,usd,payments in week,final
+event_reg,annual_conference_registrations_taken,13,registrations,EVT-2025-CONF,final
+event_reg,prairie_costing_registrations_taken,48,registrations,EVT-2025-W4,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,14,completions,completed in week,final
+certification,certifications_enrolled,0,enrollments,taken in week,final
+advocacy,coalition_meeting_dairy_pricing,1,actions,logged in week,final
+advocacy,testimony_labeling_standards,1,actions,logged in week,final
+governance,standards_committee_meetings,1,meetings,completed in week,final
+governance,membership_outreach_committee_meetings,1,meetings,completed in week,final

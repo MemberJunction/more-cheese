@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 2024-07-01
+# date: 2024-07-07
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-07-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, cash, memberships, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2024-07-01
+# basis: orders, memberships, cash, and registrations booked inside 2024-07-01..2024-07-07. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end on 2024-07-07. Conference registrations are cumulative totals leading up to the July event.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,984,members,rolling 12 months,final
+membership,membership_purchases,8,purchases,booked in week,final
+membership,first_time_members,4,purchases,booked in week,final
+membership,individual_purchases,6,purchases,booked in week,final
+membership,small_business_purchases,2,purchases,booked in week,final
+membership,membership_gross,1754,usd,booked in week,final
+orders,confirmed_orders,90,orders,booked in week,final
+orders,gross_revenue,26055,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,26908,usd,payments in week,final
+events,conference_registrations_total,44,registrations,EVT-2024-CONF,final
+events,hollow_food_safety_workshop_registrations,32,registrations,EVT-2024-W5,final
+events,curd_food_safety_workshop_registrations,5,registrations,EVT-2024-W3,final
+education,course_enrollments_taken,39,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+advocacy,interstate_cheese_shipment_testimony,1,actions,logged in week,final
+advocacy,dairy_pricing_reform_coalition_meeting,1,actions,logged in week,final
+governance,standards_committee_meetings,1,meetings,completed in week,final

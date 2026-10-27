@@ -1,0 +1,38 @@
+# title: Weekly operational snapshot, week of 8 March 2021
+# date: 2021-03-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-03-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/courses]
+# source: node scripts/vault-facts.mjs week 2021-03-08
+# basis: membership purchases, orders, cash, and course metrics booked strictly within 2021-03-08..2021-03-14. Current members counts active qualifying periods at week end.
+# caveat: pulled at week close on 14 March 2021. Free webinars carry zero registrations and are excluded from registration counts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,444,members,rolling 12 months,final
+membership,membership_purchases,8,purchases,booked in week,final
+membership,first_time_members,3,purchases,booked in week,final
+membership,individual_purchases,7,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,membership_gross,1421,usd,booked in week,final
+orders,confirmed_orders,11,orders,booked in week,final
+orders,orders_gross,2110,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,2575,usd,payments in week,final
+events,event_registrations_taken,3,registrations,EVT-2021-W1 Workshop Stone Alpine Styles,final
+events,events_this_week,0,events,scheduled in week,final
+events,events_next_eight_weeks,2,events,scheduled next 8 weeks,final
+education,course_enrollments_taken,1,enrollments,taken in week,final
+education,course_completions,2,completions,completed in week,final
+education,courses_starting_in_window,2,cohorts,Dairy and Brook cohorts starting,final
+certifications,certifications_enrolled,0,enrollments,enrolled in week,final
+certifications,certifications_awarded,1,certificates,Cheese Foundations Certificate Heidi Nordström,final

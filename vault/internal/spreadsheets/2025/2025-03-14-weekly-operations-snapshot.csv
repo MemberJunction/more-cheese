@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 10 March 2025
+# date: 2025-03-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-03-10
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-03-10
+# basis: all figures cover the window from 2025-03-10 to 2025-03-16. Current members counts qualifying active records at week end. Revenue and cash are booked inside the week.
+# caveat: preliminary figures pulled on Friday 14 March 2025; weekend order processing may adjust totals slightly.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1127,members,rolling 12 months,preliminary
+membership,membership_purchases_total,16,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,8,purchases,booked in week,preliminary
+membership,membership_purchases_individual,9,purchases,booked in week,preliminary
+membership,membership_purchases_small_business,6,purchases,booked in week,preliminary
+membership,membership_purchases_enthusiast,1,purchases,booked in week,preliminary
+membership,membership_sales_gross,4010,usd,booked in week,preliminary
+orders,confirmed_orders,27,orders,booked in week,preliminary
+orders,orders_gross,5865,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,4615,usd,payments in week,preliminary
+events,workshop_alpine_registrations_taken,5,registrations,EVT-2025-W3,preliminary
+events,workshop_prairie_registrations_taken,6,registrations,EVT-2025-W4,preliminary
+events,webinar_apprenticeships_registered,0,registrations,EVT-2025-WEB4,final
+advocacy,petition_signature_labeling,6,actions,recorded in week,preliminary
+advocacy,letter_campaign_pricing_reform,4,actions,recorded in week,preliminary
+advocacy,letter_campaign_labeling,4,actions,recorded in week,preliminary
+advocacy,coalition_meeting_pricing_reform,1,actions,recorded in week,preliminary
+advocacy,petition_signature_pricing_reform,3,actions,recorded in week,preliminary
