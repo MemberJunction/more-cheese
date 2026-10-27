@@ -15,7 +15,7 @@
       "states": [
         {
           "name": "Member",
-          "durationCycles": 2,
+          "durationCycles": 24,
           "effects": [
             {
               "factor": "factor-annual-conference-attendance",
@@ -27,10 +27,10 @@
         {
           "name": "Vice Chair",
           "capacity": 35,
-          "durationCycles": 2,
+          "durationCycles": 24,
           "prerequisites": {
             "priorState": "Member",
-            "minCyclesSinceBirth": 2
+            "minCyclesSinceBirth": 24
           },
           "effects": [
             {
@@ -43,10 +43,10 @@
         {
           "name": "Chair",
           "capacity": 35,
-          "durationCycles": 2,
+          "durationCycles": 24,
           "prerequisites": {
             "priorState": "Vice Chair",
-            "minCyclesSinceBirth": 4
+            "minCyclesSinceBirth": 48
           },
           "effects": [
             {

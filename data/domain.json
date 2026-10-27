@@ -622,6 +622,12 @@
           "targetEntity": "Person",
           "targetField": "ID",
           "cardinality": "many-to-one"
+        },
+        "TermID": {
+          "fieldName": "TermID",
+          "targetEntity": "CommitteeTerm",
+          "targetField": "ID",
+          "cardinality": "many-to-one"
         }
       },
       "isImmutable": false
