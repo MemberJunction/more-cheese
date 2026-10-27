@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 7 December 2020
+# date: 2020-12-13
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-12-07
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2020-12-07
+# basis: membership purchases, orders, cash, enrollments and advocacy actions booked or recorded inside 2020-12-07..2020-12-13. Current members counts accounts whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end on 13 December 2020. Event registrations show zero as no paid events occurred this week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,390,members,rolling 12 months,final
+membership,membership_purchases_total,6,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,membership_purchases_individual,6,purchases,booked in week,final
+membership,membership_purchases_gross,928,usd,booked in week,final
+orders,confirmed_orders,11,orders,booked in week,final
+orders,orders_gross,823,usd,booked in week,final
+orders,cancellation_orders,4,orders,booked in week,final
+cash,cash_captured,3796,usd,payments in week,final
+events,event_registrations_taken,0,registrations,taken in week,final
+courses,course_enrollments_taken,15,enrollments,taken in week,final
+courses,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,enrolled in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,coalition_meetings_dairy_pricing_reform,1,meetings,recorded in week,final

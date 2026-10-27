@@ -1,0 +1,26 @@
+# title: Competition entries and category breakdown, 2026 season
+# date: 2026-01-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-01-05
+# fictional: true
+# owner_role: Awards & Competition Committee
+# tags: [competition, entries, categories, medals]
+# data_sources: [generated/competition-entries]
+# source: node scripts/vault-facts.mjs year 2026
+# basis: historic competition entry counts and medal distribution by category for the 2026 operational year.
+# caveat: preliminary tracking for the upcoming judging cycle.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+category,total_entries,gold_medals,silver_medals,bronze_medals,status
+Soft-Ripened,16,0,3,3,final
+Alpine Styles,21,1,1,1,final
+Aged Cheddar & Territorials,12,0,0,1,final
+Blue Veined,18,0,2,1,final
+Fresh & Pasta Filata,14,0,3,3,final
+Washed Rind,13,0,2,2,final

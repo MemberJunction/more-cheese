@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2024-03-18
+# date: 2024-03-24
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-03-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-03-18
+# basis: commerce data and membership totals for the week ending 2024-03-24.
+# caveat: figures are complete for the reported week but un-audited.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis
+membership,current_members_at_week_end,909,members,rolling 12 months
+membership,membership_purchases_total,15,purchases,booked in week
+membership,membership_purchases_first_time,8,purchases,booked in week
+membership,membership_purchases_individual,12,purchases,booked in week
+membership,membership_purchases_enthusiast,2,purchases,booked in week
+membership,membership_purchases_small_business,1,purchases,booked in week
+membership,membership_purchases_gross,2664,usd,booked in week
+orders,confirmed_orders,62,orders,booked in week
+orders,orders_gross,11520,usd,booked in week
+orders,cancellation_orders,1,orders,booked in week
+cash,cash_captured,13294,usd,payments in week
+events,event_registrations_birch_retailing,38,registrations,EVT-2024-W4
+events,event_registrations_annual_conference,8,registrations,EVT-2024-CONF
+events,webinar_insurance_registered,0,registrations,EVT-2024-WEB1
+advocacy,petition_signature_raw_milk_aging,10,actions,raw-milk aging rules
+advocacy,coalition_meeting_raw_milk_aging,1,actions,raw-milk aging rules
+advocacy,letter_campaign_raw_milk_aging,14,actions,raw-milk aging rules
+education,course_completions,3,completions,completed in week

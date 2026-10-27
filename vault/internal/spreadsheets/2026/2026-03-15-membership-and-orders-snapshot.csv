@@ -1,0 +1,35 @@
+# title: Membership and orders snapshot, week of 9 March 2026
+# date: 2026-03-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-03-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, data-quality]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2026-03-09
+# basis: figures represent confirmed orders, payments, and active membership totals for the week of 2026-03-09 through 2026-03-15.
+# caveat: preliminary weekly figures pulled at week end. Membership totals reflect rolling active status.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1509,members,rolling 12 months,final
+membership,membership_purchases_total,15,purchases,booked in week,final
+membership,membership_purchases_first_time,8,purchases,booked in week,final
+membership,membership_purchases_individual,12,purchases,booked in week,final
+membership,membership_purchases_small_business,3,purchases,booked in week,final
+membership,membership_purchases_gross,3300,usd,booked in week,final
+orders,confirmed_orders,17,orders,booked in week,final
+orders,orders_gross,4045,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,2180,usd,payments in week,final
+events,webinar_registrations,0,registrations,EVT-2026-WEB6,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,10,completions,completed in week,final
+certifications,enrolled,0,enrollments,taken in week,final
+advocacy,raw_milk_coalition_meeting,1,meetings,coalition action,final

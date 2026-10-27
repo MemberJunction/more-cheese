@@ -1,0 +1,42 @@
+# title: Weekly operations snapshot, week of 2023-06-19
+# date: 2023-06-25
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-06-19
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, courses]
+# data_sources: [generated/orders, generated/payments, generated/courses, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2023-06-19
+# basis: membership purchases, orders, cash, event registrations, and course completions booked inside 2023-06-19..2023-06-25. Current members count totals 766 at week end. Gross orders and cash captured represent different financial bases.
+# caveat: pulled on Sunday 2023-06-25 as a complete weekly summary.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,766,members,rolling 12 months,final
+membership,membership_purchases_total,13,purchases,booked in week,final
+membership,membership_purchases_first_time,10,purchases,booked in week,final
+membership,membership_purchases_individual,8,purchases,booked in week,final
+membership,membership_purchases_corporate,2,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_enthusiast,2,purchases,booked in week,final
+membership,membership_gross,3787,usd,booked in week,final
+orders,confirmed_orders,57,orders,booked in week,final
+orders,orders_gross,16770,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,15272,usd,payments in week,final
+events,annual_conference_registrations_taken,22,registrations,EVT-2023-CONF,final
+events,workshop_birch_prep_registrations_taken,20,registrations,EVT-2023-W3,final
+events,workshop_guelph_registered,154,registrations,EVT-2023-W3,final
+events,workshop_guelph_attended,144,attendees,EVT-2023-W3,final
+events,workshop_guelph_no_show,10,attendees,EVT-2023-W3,final
+events,workshop_guelph_refunded,0,registrations,EVT-2023-W3,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,14,completions,completed in week,final
+certifications,enrolled,1,enrollments,taken in week,final
+certifications,awarded,0,awards,awarded in week,final

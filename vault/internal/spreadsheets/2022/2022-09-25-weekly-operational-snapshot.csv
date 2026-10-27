@@ -1,0 +1,36 @@
+# title: Weekly operational snapshot, week of 19 September 2022
+# date: 2022-09-25
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-09-19
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2022-09-19
+# basis: membership purchases, orders, cash, course enrollments, and advocacy actions booked inside 2022-09-19..2022-09-25. Current members count is total active at week end.
+# caveat: pulled at week end on 2022-09-25. Figures represent completed totals for this specific week window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,594,members,rolling 12 months,final
+membership,membership_purchases_total,5,purchases,booked in week,final
+membership,membership_purchases_first_time,2,purchases,booked in week,final
+membership,individual_membership_purchases,5,purchases,booked in week,final
+membership,membership_purchases_gross,785,usd,booked in week,final
+orders,confirmed_orders,8,orders,booked in week,final
+orders,orders_gross,1280,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,1011,usd,payments in week,final
+events,workshop_hollow_pasta_filata_registrations,3,registrations,taken in week,final
+courses,course_enrollments_taken,9,enrollments,taken in week,final
+courses,course_completions,4,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,petition_signatures_fsma,5,actions,recorded in week,final
+advocacy,letter_campaign_fsma,8,actions,recorded in week,final

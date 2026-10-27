@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 2024-02-05
+# date: 2024-11-11
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-02-05
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-02-05
+# basis: commerce figures booked inside 2024-02-05..2024-02-11. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: pulled at week end on 2024-02-11. Event registrations and membership purchases are complete for the week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,882,members,rolling 12 months,final
+membership,membership_purchases_total,6,purchases,booked in week,final
+membership,membership_purchases_first_time,5,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_individual,3,purchases,booked in week,final
+membership,membership_purchases_enthusiast,2,purchases,booked in week,final
+membership,membership_purchases_gross,1161,usd,booked in week,final
+orders,confirmed_orders,82,orders,booked in week,final
+orders,orders_gross,11519,usd,booked in week,final
+orders,cancellations,1,orders,booked in week,final
+cash,cash_captured,22814,usd,payments in week,final
+events,workshop_dairy_blue_styles_registrations,39,registrations,EVT-2024-W2,final
+events,workshop_birch_milk_handling_registrations,32,registrations,EVT-2024-W1,final
+events,workshop_birch_retailing_registrations,4,registrations,EVT-2024-W4,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,10,completions,completed in week,final
+certifications,enrolled,0,certifications,enrolled in week,final

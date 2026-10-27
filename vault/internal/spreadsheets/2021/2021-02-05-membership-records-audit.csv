@@ -1,0 +1,33 @@
+# title: Membership records audit and data-quality snapshot, week of 1 February 2021
+# date: 2021-02-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-02-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, audit, records, duplicate-accounts]
+# data_sources: [generated/people, generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2021-02-01
+# basis: snapshot of member records, payment reconciliation status, and duplicate flags for the week ending 2021-02-07. All figures are preliminary pending complete database reconciliation.
+# caveat: duplicate pair counts reflect active manual review queues. Stale employer records are identified via unverified contact returns.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,metric_name,count_or_amount,unit,basis,status
+membership,current_members_at_week_end,435,members,rolling 12 months,preliminary
+membership,membership_purchases_total,4,purchases,booked in week,confirmed
+membership,membership_purchases_first_time,2,purchases,booked in week,confirmed
+membership,individual_tier_purchases,4,purchases,booked in week,confirmed
+membership,membership_sales_gross,612,usd,booked in week,confirmed
+orders,confirmed_orders,4,orders,booked in week,confirmed
+orders,orders_gross,686,usd,booked in week,confirmed
+orders,order_cancellations,0,orders,booked in week,confirmed
+cash,cash_captured,13036,usd,payments in week,confirmed
+data_quality,flagged_duplicate_pairs,12,pairs,database audit,pending
+data_quality,stale_employer_records,28,records,returned mail and bounced notices,pending
+data_quality,unmatched_payment_lines,3,lines,bank reconciliation,pending
+data_quality,bounced_email_addresses,15,addresses,comms outreach,pending

@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 3 March 2025
+# date: 2025-03-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-03-03
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, advocacy, orders]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-03-03
+# basis: membership purchases, orders, cash captured, advocacy actions, and event registrations taken inside 2025-03-03..2025-03-09. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end on 9 March 2025. Membership counts represent total current members at week end.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1120,members,rolling 12 months,final
+membership,membership_purchases_total,24,purchases,booked in week,final
+membership,membership_purchases_first_time,9,purchases,booked in week,final
+membership,individual_membership_purchases,20,purchases,booked in week,final
+membership,enthusiast_membership_purchases,2,purchases,booked in week,final
+membership,corporate_membership_purchases,2,purchases,booked in week,final
+membership,membership_gross_usd,5640,usd,booked in week,final
+orders,confirmed_orders,39,orders,booked in week,final
+orders,orders_gross_usd,8093,usd,booked in week,final
+orders,order_cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,6431,usd,payments in week,final
+events,workshop_alpine_retail_registrations,8,registrations,taken in week,final
+events,workshop_prairie_costing_registrations,7,registrations,taken in week,final
+course_metrics,course_enrollments_taken,0,enrollments,taken in week,final
+course_metrics,course_completions,6,completions,completed in week,final
+certifications,certifications_awarded,1,awards,awarded in week,final
+advocacy,petition_signature_labeling_standards,15,actions,recorded in week,final
+advocacy,letter_campaign_labeling_standards,14,actions,recorded in week,final
+advocacy,petition_signature_dairy_pricing_reform,14,actions,recorded in week,final
+advocacy,letter_campaign_dairy_pricing_reform,15,actions,recorded in week,final

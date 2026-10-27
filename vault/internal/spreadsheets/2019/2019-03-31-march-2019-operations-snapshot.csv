@@ -1,0 +1,36 @@
+# title: March 2019 operations snapshot and week ending 31 March 2019
+# date: 2019-03-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-03-25
+# fictional: true
+# owner_role: Membership Operations
+# tags: [monthly-close, orders, cash, memberships, reconciliation]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2019-03-25 and node scripts/vault-facts.mjs year 2019
+# basis: weekly figures cover 2019-03-25 through 2019-03-31. Current members count people whose latest qualifying purchase is within 12 months. Gross orders and cash captured represent actual captured flows.
+# caveat: week totals are complete as of Sunday 31 March 2019. Invoice dispute values are excluded from cash captured until settled.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,238,members,rolling 12 months,final
+membership,membership_purchases_week,4,purchases,booked in week,final
+membership,first_time_purchases_week,4,purchases,booked in week,final
+membership,individual_purchases_week,2,purchases,booked in week,final
+membership,small_business_purchases_week,1,purchases,booked in week,final
+membership,enthusiast_purchases_week,1,purchases,booked in week,final
+membership,membership_gross_week,746,usd,booked in week,final
+orders,confirmed_orders_week,11,orders,booked in week,final
+orders,orders_gross_week,2891,usd,booked in week,final
+orders,cancellations_week,0,orders,booked in week,final
+cash,cash_captured_week,2714,usd,payments in week,final
+events,annual_conference_registrations_taken,5,registrations,EVT-2019-CONF,final
+events,meadow_affinage_registrations_taken,2,registrations,EVT-2019-W4,final
+education,course_enrollments_taken,4,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+courses_starting,allergen_management_cave_cohort,1,cohort,starting 29 March 2019,final

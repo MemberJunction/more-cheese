@@ -1,0 +1,32 @@
+# title: Operational snapshot, week of 13 June 2022
+# date: 2022-06-19
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-06-13
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, membership, cash, courses]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2022-06-13
+# basis: membership purchases, orders, and cash captured are booked within the week of 2022-06-13 to 2022-06-19. Current members count is at week end.
+# caveat: pulled at week close on Sunday 2022-06-19. Course enrollments and completions reflect system state at report generation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,551,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,membership_first_time,1,purchases,booked in week,final
+membership,membership_tier_individual,4,purchases,booked in week,final
+membership,membership_purchases_gross,628,usd,booked in week,final
+orders,confirmed_orders,27,orders,booked in week,final
+orders,orders_gross,10060,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,11462,usd,payments in week,final
+events,annual_conference_registrations_taken,22,registrations,EVT-2022-CONF,final
+courses,course_enrollments_taken,0,enrollments,taken in week,final
+courses,course_completions,6,completions,completed in week,final

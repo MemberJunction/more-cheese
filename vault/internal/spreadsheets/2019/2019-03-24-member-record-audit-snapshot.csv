@@ -1,0 +1,28 @@
+# title: Member record audit snapshot, week of 18 March 2019
+# date: 2019-03-24
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-03-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, audit, snapshot]
+# data_sources: [generated/people, generated/organizations, generated/orders]
+# source: node scripts/vault-facts.mjs week 2019-03-18 and generated records audit
+# basis: count of flagged member records requiring administrative intervention across database tables.
+# caveat: pulled at week end on 24 March 2019. Figures reflect active data-quality exceptions identified during weekly reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,issue_type,affected_records_count,priority_level,verification_status,action_owner
+membership,duplicate_record_pairs,1,high,pending_merge,membership_ops
+membership,stale_employer_affiliation,7,medium,pending_review,membership_ops
+membership,bounced_email_address,12,high,pending_bounce_processing,comms
+membership,payment_status_mismatch,4,high,unreconciled,membership_ops
+membership,unverified_mailing_address,9,low,pending_verification,membership_ops
+orders,confirmed_orders_audit,4,low,verified,membership_ops
+orders,membership_purchases_audit,2,low,verified,membership_ops
+cash,cash_captured_audit,1,low,verified,membership_ops

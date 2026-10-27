@@ -1,0 +1,37 @@
+# title: Weekly operational snapshot, week of 28 December 2020
+# date: 2020-12-30
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-12-28
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-12-28
+# basis: membership purchases, orders and cash captured are booked inside 2020-12-28..2021-01-03. Current members count reflects active status at week end.
+# caveat: pulled on 30 December, preliminary until week close on Sunday 3 January 2021.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,430,members,rolling 12 months,preliminary
+membership,membership_purchases,43,purchases,booked in week,preliminary
+membership,first_time_purchases,9,purchases,booked in week,preliminary
+membership,individual_purchases,29,purchases,booked in week,preliminary
+membership,small_business_purchases,9,purchases,booked in week,preliminary
+membership,corporate_purchases,2,purchases,booked in week,preliminary
+membership,enthusiast_purchases,3,purchases,booked in week,preliminary
+membership,membership_gross,11043,usd,booked in week,preliminary
+orders,confirmed_orders,43,orders,booked in week,preliminary
+orders,orders_gross,11043,usd,booked in week,preliminary
+orders,cancellation_orders,0,orders,booked in week,preliminary
+cash,cash_captured,20944,usd,payments in week,preliminary
+events,webinar_registrations_web7,0,registrations,EVT-2020-WEB7 free webinar,preliminary
+education,course_enrollments_taken,0,enrollments,taken in week,preliminary
+education,course_completions,5,completions,completed in week,preliminary
+certifications,enrolled,0,certifications,enrolled in week,preliminary
+certifications,awarded,0,certifications,awarded in week,preliminary

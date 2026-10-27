@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week ending 29 December 2019
+# date: 2019-12-29
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-12-23
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, year-end]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2019-12-23
+# basis: membership purchases, orders, and cash captured are booked within the window 2019-12-23 to 2019-12-29. Current members counts active membership periods at week end.
+# caveat: data ends on 2026-06-20 in the broader repository; weekly totals for 2019-12-23 through 2019-12-29 represent complete week figures. First-time member counts for 2019 measure the data start, not real joins.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,status
+membership,current_members_at_week_end,371,members,active at week end,final
+membership,total_membership_purchases,4,purchases,booked in week,final
+membership,first_time_membership_purchases,1,purchases,booked in week,final
+small_business,membership_purchases,1,purchases,booked in week,final
+individual,membership_purchases,3,purchases,booked in week,final
+membership,membership_gross_usd,775,usd,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross_usd,846,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,2707,usd,captured in week,final
+events,event_registrations_taken,0,registrations,taken in week,final
+events_upcoming,webinars_next_eight_weeks,2,events,scheduled in window,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,enrolled,0,certifications,enrolled in week,final
+certifications,awarded,0,certifications,awarded in week,final
+advocacy,actions_recorded,0,actions,recorded in week,final
+committee,meetings_held,0,meetings,held in week,final

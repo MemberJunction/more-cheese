@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2022-10-03
+# date: 2022-10-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-10-03
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, committees]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-10-03
+# basis: membership purchases, orders, cash, and event registrations booked during 2022-10-03..2022-10-09.
+# caveat: pulled at week end on 2022-10-09. Free webinars carry zero paid registrations.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,598,members,rolling 12 months,final
+membership,membership_purchases,9,purchases,booked in week,final
+membership,first_time_members,4,purchases,booked in week,final
+membership,individual_tier_purchases,7,purchases,booked in week,final
+membership,corporate_tier_purchases,2,purchases,booked in week,final
+membership,membership_sales_gross,2897,usd,booked in week,final
+orders,confirmed_orders,11,orders,booked in week,final
+orders,orders_gross,3243,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,3844,usd,payments in week,final
+events,event_registrations_taken,2,registrations,EVT-2022-W4,final
+events,events_held_this_week,0,events,week total,final
+courses,course_enrollments_taken,0,enrollments,week total,final
+courses,course_completions,2,completions,week total,final
+certifications,certifications_enrolled,0,enrollments,week total,final
+certifications,certifications_awarded,0,awards,week total,final
+advocacy,advocacy_actions_logged,0,actions,week total,final
+governance,committee_meetings_completed,3,meetings,Food Safety Awards Events,final

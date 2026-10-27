@@ -1,0 +1,36 @@
+# title: Weekly operational snapshot, week of 22 November 2021
+# date: 2021-11-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-11-22
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2021-11-22
+# basis: commerce and operational totals for the window 2021-11-22 to 2021-11-28. Free webinars carry zero registrations.
+# caveat: preliminary snapshot pulled on Friday 26 November 2021 before week close. Current members count is final for week-end.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,486,members,rolling 12 months,final
+membership,membership_purchases,3,purchases,booked in week,preliminary
+membership,membership_first_time,1,purchases,booked in week,preliminary
+membership,membership_corporate,1,purchases,booked in week,preliminary
+membership,membership_individual,2,purchases,booked in week,preliminary
+membership,membership_gross,1181,usd,booked in week,preliminary
+orders,confirmed_orders,4,orders,booked in week,preliminary
+orders,orders_gross,1553,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,809,usd,payments in week,preliminary
+events,webinar_registrations,0,registrations,EVT-2021-WEB4,preliminary
+education,course_enrollments_taken,21,enrollments,taken in week,preliminary
+education,course_completions,14,completions,completed in week,preliminary
+certifications,certification_enrolled,1,enrollments,taken in week,preliminary
+certifications,certifications_awarded,0,awards,awarded in week,preliminary
+advocacy,coalition_meetings,1,actions,FSMA small-producer exemptions,preliminary

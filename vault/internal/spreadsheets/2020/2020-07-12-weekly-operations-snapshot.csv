@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week ending 12 July 2020
+# date: 2020-07-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-07-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-07-06
+# basis: membership purchases, orders and cash are booked inside 2020-07-06..2020-07-12. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end, 12 July 2020. Conference registration numbers are preliminary.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,407,members,rolling 12 months,final
+membership,membership_purchases,5,purchases,booked in week,final
+membership,first_time_purchases,2,purchases,booked in week,final
+membership,individual_purchases,5,purchases,booked in week,final
+membership,membership_gross,771,usd,booked in week,final
+orders,confirmed_orders,24,orders,booked in week,final
+orders,orders_gross,6362,usd,booked in week,final
+orders,cancellation_orders,2,orders,booked in week,final
+cash,cash_captured,7265,usd,payments in week,final
+events,annual_conference_registrations_taken,14,registrations,booked in week,preliminary
+events,alpine_workshop_registrations_taken,3,registrations,booked in week,preliminary
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,22,completions,completed in week,final
+education,certification_enrollments,0,enrollments,taken in week,final
+committee,standards_committee_meetings,1,meetings,completed in week,final
+committee,education_committee_meetings,1,meetings,completed in week,final

@@ -1,0 +1,34 @@
+# title: Weekly operational snapshot, week of 8 November 2021
+# date: 2021-11-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-11-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2021-11-08
+# basis: membership purchases, orders, cash, and certifications are booked inside 2021-11-08..2021-11-14. Current members count people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at the close of the week on Sunday 2021-11-14. Free webinars carry zero registrations in our data and are reported as such.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,483,members,rolling 12 months,final
+membership,membership_purchases,3,purchases,booked in week,final
+membership,first_time_purchases,0,purchases,booked in week,final
+membership,individual_purchases,3,purchases,booked in week,final
+membership,membership_gross,459,usd,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross,831,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,896,usd,payments in week,final
+events,event_registrations_taken,0,registrations,free webinars carry none,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,1,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final

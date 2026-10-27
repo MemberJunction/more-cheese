@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week ending 21 July 2019
+# date: 2019-07-21
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-07-15
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, annual-conference, membership, orders]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2019-07-15 and node scripts/vault-facts.mjs year 2019
+# basis: membership purchases, orders, cash, and course enrollments booked inside 2019-07-15..2019-07-21. Current members counts people whose latest qualifying purchase is within 12 months. Event registrations taken and attendance figures reflect EVT-2019-CONF.
+# caveat: pulled on Sunday 21 July 2019; final weekly totals for orders and cash.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,276,members,rolling 12 months,final
+membership,membership_purchases,2,purchases,booked in week,final
+membership,first_time_purchases,2,purchases,booked in week,final
+membership,small_business_membership_purchases,1,purchases,booked in week,final
+membership,individual_membership_purchases,1,purchases,booked in week,final
+membership,membership_gross,477,usd,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross,1027,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,695,usd,payments in week,final
+conference,registrations_taken_in_week,1,registrations,taken in week,final
+conference,registered_total,109,registrations,EVT-2019-CONF,final
+conference,attended,102,registrations,EVT-2019-CONF attendance,final
+conference,no_show,7,registrations,EVT-2019-CONF attendance,final
+conference,refunded,12,registrations,EVT-2019-CONF refunds,final
+education,course_enrollments_taken,15,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certification,certification_enrolled,0,enrollments,taken in week,final
+governance,committee_meetings_completed,3,meetings,completed in week,final

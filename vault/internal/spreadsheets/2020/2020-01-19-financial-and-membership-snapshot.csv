@@ -1,0 +1,33 @@
+# title: Financial and membership snapshot, week ending 19 January 2020
+# date: 2020-01-19
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-01-13
+# fictional: true
+# owner_role: Membership Operations
+# tags: [financial-snapshot, membership-purchases, cash-flow, reconciliation]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-01-13
+# basis: membership purchases, confirmed orders, and cash captured booked inside 2020-01-13..2020-01-19. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: preliminary figures pulled at week end; subject to final bank reconciliation and dispute resolution.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,368,members,rolling 12 months,preliminary
+membership,membership_purchases_total,8,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,6,purchases,booked in week,preliminary
+membership,membership_purchases_corporate,1,purchases,booked in week,preliminary
+membership,membership_purchases_individual,7,purchases,booked in week,preliminary
+membership,membership_purchases_gross,1921,usd,booked in week,preliminary
+orders,confirmed_orders,9,orders,booked in week,preliminary
+orders,orders_gross,2334,usd,booked in week,preliminary
+orders,cancellation_orders,0,orders,booked in week,preliminary
+cash,cash_captured,1516,usd,payments in week,preliminary
+advocacy,letter_campaign_raw_milk_aging,6,actions,submitted in week,preliminary
+advocacy,petition_signature_raw_milk_aging,4,actions,submitted in week,preliminary
+governance,standards_committee_meetings,1,meetings,completed in week,final

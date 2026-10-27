@@ -1,0 +1,36 @@
+# title: Membership data quality and weekly snapshot, week of 16 August 2021
+# date: 2021-08-20
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-08-16
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, renewals, snapshot]
+# data_sources: [generated/orders, generated/payments, generated/people]
+# source: node scripts/vault-facts.mjs week 2021-08-16
+# basis: membership purchases, orders, and cash captured booked inside 2021-08-16..2021-08-22. Current members count is as of week end.
+# caveat: pulled on Friday 20 August; figures are preliminary for the association week closing Sunday 22 August.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_or_amount,unit,basis_or_caveat,status
+membership,current_members_at_week_end,468,members,rolling 12 months,preliminary
+membership,membership_purchases_total,7,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,3,purchases,booked in week,preliminary
+membership,membership_purchases_individual,4,purchases,booked in week,preliminary
+membership,membership_purchases_small_business,1,purchases,booked in week,preliminary
+membership,membership_purchases_corporate,1,purchases,booked in week,preliminary
+membership,membership_purchases_enthusiast,1,purchases,booked in week,preliminary
+membership,membership_sales_gross,1968,usd,booked in week,preliminary
+orders,confirmed_orders,7,orders,booked in week,preliminary
+orders,orders_gross,2292,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,984,usd,payments in week,preliminary
+data_quality,flagged_duplicate_pairs,2,pairs,member records audit,preliminary
+data_quality,stale_employer_records,5,records,member records audit,preliminary
+data_quality,bounced_address_flags,3,addresses,communications outreach,preliminary
+data_quality,payment_tier_mismatches,1,records,billing reconciliation,preliminary

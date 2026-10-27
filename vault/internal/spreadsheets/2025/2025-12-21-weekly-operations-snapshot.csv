@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 15 December 2025
+# date: 2025-12-21
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-12-15
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-12-15
+# basis: confirmed orders, cash captured, and membership purchases booked during 2025-12-15..2025-12-21. Current members count as of week end.
+# caveat: weekly totals completed on 2025-12-21. Registrations taken apply to future 2026 events.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,status
+membership,current_members_at_week_end,1442,members,rolling 12 months,final
+membership,membership_purchases_total,28,purchases,booked in week,final
+membership,membership_purchases_first_time,10,purchases,booked in week,final
+membership,membership_purchases_individual,19,purchases,booked in week,final
+membership,membership_purchases_enthusiast,7,purchases,booked in week,final
+membership,membership_purchases_small_business,2,purchases,booked in week,final
+membership,membership_purchases_gross,5070,usd,booked in week,final
+orders,confirmed_orders,105,orders,booked in week,final
+orders,orders_gross,17004,usd,booked in week,final
+orders,cancellations,1,orders,booked in week,final
+cash,cash_captured,13699,usd,payments in week,final
+events,event_registrations_cedar_cut_wrap,66,registrations,EVT-2026-W4,final
+events,event_registrations_stone_sensory,8,registrations,EVT-2026-W3,final
+education,course_enrollments_taken,42,enrollments,taken in week,final
+education,course_completions,2,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,enrolled in week,final
+certifications,certifications_awarded,1,awards,Food Safety and HACCP,final
+advocacy,advocacy_actions_testimony,1,actions,FSMA small-producer exemptions,final

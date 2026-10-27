@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 2024-04-01
+# date: 2024-04-07
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-04-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, membership, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-04-01 and node scripts/vault-facts.mjs event EVT-2024-W4
+# basis: membership purchases, orders, cash, and event registrations booked during the week of 2024-04-01 to 2024-04-07. Current members count as of week end.
+# caveat: figures are complete for the specified week window. Event attendance is specific to Workshop: Birch Retailing held on 2024-04-02 in Querétaro.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,920,members,rolling 12 months,final
+membership,membership_purchases,14,purchases,booked in week,final
+membership,first_time_members,9,purchases,booked in week,final
+membership,individual_purchases,12,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,membership_gross,2522,usd,booked in week,final
+orders,confirmed_orders,49,orders,booked in week,final
+orders,orders_gross,9983,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,10728,usd,payments in week,final
+events,birch_retailing_registered,182,registrations,EVT-2024-W4,final
+events,birch_retailing_refunded,1,registrations,EVT-2024-W4,final
+events,birch_retailing_attended,167,registrations,EVT-2024-W4,final
+events,birch_retailing_no_show,15,registrations,EVT-2024-W4,final
+events,annual_conference_registrations_taken,8,registrations,EVT-2024-CONF,final
+events,birch_retailing_workshop_registrations_taken,27,registrations,EVT-2024-W4,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,2,completions,completed in week,final

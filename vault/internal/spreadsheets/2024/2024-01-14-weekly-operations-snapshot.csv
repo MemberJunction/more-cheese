@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 2024-01-08
+# date: 2024-01-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-01-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, cash]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-01-08
+# basis: membership purchases, confirmed orders, cash captured, and advocacy actions booked during 2024-01-08 to 2024-01-14. Current members counts active periods at week end.
+# caveat: weekly figures pulled at close of Sunday 2024-01-14.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,872,members,active at week end,final
+membership,membership_purchases_total,10,purchases,booked in week,final
+membership,membership_purchases_first_time,6,purchases,booked in week,final
+membership,membership_purchases_enthusiast,2,purchases,booked in week,final
+membership,membership_purchases_individual,7,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_gross,1825,usd,booked in week,final
+orders,confirmed_orders,17,orders,booked in week,final
+orders,orders_gross,2900,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,5918,usd,payments in week,final
+events,registration_birch_milk_handling,2,registrations,EVT-2024-W1,final
+events,registration_dairy_blue_styles,5,registrations,EVT-2024-W2,final
+education,course_completions,4,completions,completed in week,final
+advocacy,testimony_labeling_standards,1,actions,logged in week,final
+advocacy,coalition_meeting_raw_milk_aging,1,actions,logged in week,final
+governance,committee_meetings_completed,1,meetings,Standards Committee Q1,final

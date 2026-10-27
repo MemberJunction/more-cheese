@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 2022-10-31
+# date: 2022-11-06
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-10-31
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, memberships, enrollments]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2022-10-31
+# basis: commerce and enrollment figures booked during the week of 2022-10-31 to 2022-11-06.
+# caveat: completed figures as of Sunday close.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,615,members,rolling 12 months,final
+membership,membership_purchases,8,purchases,booked in week,final
+membership,first_time_members,4,purchases,booked in week,final
+membership,small_business_purchases,2,purchases,booked in week,final
+membership,individual_purchases,4,purchases,booked in week,final
+membership,enthusiast_purchases,2,purchases,booked in week,final
+membership,membership_gross,1618,usd,booked in week,final
+orders,confirmed_orders,35,orders,booked in week,final
+orders,orders_gross,5519,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,7068,usd,payments in week,final
+events,workshop_hollow_pasta_filata_registrations_taken,27,registrations,EVT-2022-W4,final
+education,course_enrollments_taken,25,enrollments,taken in week,final
+education,course_completions,1,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final

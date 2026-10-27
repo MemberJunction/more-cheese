@@ -1,0 +1,33 @@
+# title: Weekly operations snapshot, week ending 16 August 2020
+# date: 2020-08-16
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-08-10
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, cash]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2020-08-10
+# basis: confirmed orders, cash captured, and advocacy actions booked during the week of 2020-08-10 to 2020-08-16. Current members counts qualifying active periods at week end.
+# caveat: complete weekly totals compiled at week end on Sunday 2020-08-16.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis
+membership,current_members_at_week_end,410,members,rolling 12 months
+membership,membership_purchases_total,2,purchases,booked in week
+membership,membership_purchases_first_time,0,purchases,booked in week
+membership,individual_membership_purchases,2,purchases,booked in week
+membership,membership_gross,298,usd,booked in week
+orders,confirmed_orders,3,orders,booked in week
+orders,orders_gross,426,usd,booked in week
+orders,cancellation_orders,0,orders,booked in week
+cash,cash_captured,426,usd,payments captured in week
+events,workshop_registrations_taken,1,registrations,EVT-2020-W2 Cave Cheesemaking
+advocacy,fsma_small_producer_exemptions_testimony,1,actions,advocacy log
+advocacy,labeling_standards_coalition_meeting,1,actions,advocacy log
+education,course_completions,26,completions,completed in week

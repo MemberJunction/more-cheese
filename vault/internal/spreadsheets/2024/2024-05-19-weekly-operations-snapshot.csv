@@ -1,0 +1,33 @@
+# title: Weekly operations snapshot, week of 2024-05-13
+# date: 2024-05-19
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-05-13
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, conference]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-05-13
+# basis: confirmed figures for the full week of 2024-05-13 through 2024-05-19.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,945,members,rolling 12 months,confirmed
+membership,membership_purchases_total,7,purchases,booked in week,confirmed
+membership,membership_purchases_first_time,4,purchases,booked in week,confirmed
+membership,membership_purchases_individual,7,purchases,booked in week,confirmed
+membership,membership_gross_usd,1162,usd,booked in week,confirmed
+orders,confirmed_orders,25,orders,booked in week,confirmed
+orders,orders_gross_usd,5669,usd,booked in week,confirmed
+orders,cancellations,0,orders,booked in week,confirmed
+cash,cash_captured_usd,6518,usd,payments in week,confirmed
+conference,event_registrations_taken_annual_conference,8,registrations,EVT-2024-CONF,confirmed
+course,course_enrollments_taken,0,enrollments,taken in week,confirmed
+course,course_completions,0,completions,completed in week,confirmed
+certification,certifications_enrolled,1,enrollments,enrolled in week,confirmed
+certification,certifications_awarded,0,awards,awarded in week,confirmed

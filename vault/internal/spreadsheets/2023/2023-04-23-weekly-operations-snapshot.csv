@@ -1,0 +1,42 @@
+# title: Weekly operations snapshot, week of 2023-04-17
+# date: 2023-04-23
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-04-17
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2023-04-17
+# basis: counts and sums booked between 2023-04-17 and 2023-04-23 inclusive. Current members at week end is 717. Cash captured is 2894 USD.
+# caveat: pulled on Sunday 2023-04-23; figures are complete for the week in the generated dataset. Free webinars carry zero registrations and are listed with null attendance.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,717,members,rolling 12 months,final
+membership,membership_purchases_total,11,purchases,booked in week,final
+membership,membership_purchases_first_time,7,purchases,booked in week,final
+membership,individual_tier_purchases,6,purchases,booked in week,final
+membership,small_business_tier_purchases,4,purchases,booked in week,final
+membership,enthusiast_tier_purchases,1,purchases,booked in week,final
+membership,membership_purchases_gross,2586,usd,booked in week,final
+orders,confirmed_orders,13,orders,booked in week,final
+orders,orders_gross,3323,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,2894,usd,payments captured in week,final
+events,annual_conference_registrations_taken,1,registrations,EVT-2023-CONF,final
+events,workshop_registrations_taken,1,registrations,EVT-2023-W3,final
+events,webinar_allergen_registered,0,registrations,EVT-2023-WEB1 free webinar,final
+events,webinar_rennet_registered,0,registrations,EVT-2023-WEB4 free webinar,final
+education,course_enrollments_taken,28,enrollments,taken in week,final
+education,course_completions,3,completions,completed in week,final
+education,certifications_enrolled,0,enrollments,taken in week,final
+education,certifications_awarded,0,awards,awarded in week,final
+advocacy,coalition_meeting_dairy_pricing,1,actions,completed in week,final
+events,testimony_raw_milk_aging_rules,1,actions,completed in week,final
+governance,committee_meetings_completed,2,meetings,Standards and Membership committees,final

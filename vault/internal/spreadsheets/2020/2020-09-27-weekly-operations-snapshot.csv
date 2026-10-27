@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week ending 27 September 2020
+# date: 2020-09-27
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-09-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2020-09-21 and node scripts/vault-facts.mjs year 2020
+# basis: commerce data and membership figures captured for the week of Monday 2020-09-21 through Sunday 2020-09-27.
+# caveat: pulled on Sunday 2020-09-27; figures are final for the reported week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,418,members,rolling 12 months,final
+membership,membership_purchases_total,3,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,membership_purchases_individual,2,purchases,booked in week,final
+membership,membership_purchases_enthusiast,1,purchases,booked in week,final
+membership,membership_purchases_gross,426,usd,booked in week,final
+orders,confirmed_orders,8,orders,booked in week,final
+orders,confirmed_orders_gross,1087,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,1108,usd,payments in week,final
+events,workshop_registrations_taken,4,registrations,EVT-2020-W2,final
+events,workshop_registered_total,23,registrations,EVT-2020-W2,final
+events,workshop_attended,23,registrations,EVT-2020-W2,final
+events,workshop_refunded,0,registrations,EVT-2020-W2,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,1,completions,completed in week,final
+advocacy,petition_signatures_labeling,11,signatures,labeling standards,final
+advocacy,letter_campaign_labeling,2,letters,labeling standards,final

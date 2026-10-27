@@ -1,0 +1,35 @@
+# title: Weekly membership and orders snapshot, week of 2024-06-24
+# date: 2024-06-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-06-24
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, orders, renewals, cash-captured]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-06-24
+# basis: confirmed orders, cash captured, and membership purchases booked during 2024-06-24 to 2024-06-30. Current members count is evaluated at week end.
+# caveat: figures are preliminary as the week data concludes on Sunday 2024-06-30.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,status
+membership,current_members_at_week_end,983,members,rolling 12 months,preliminary
+membership,total_membership_purchases,6,purchases,booked in week,preliminary
+membership,first_time_membership_purchases,3,purchases,booked in week,preliminary
+membership,individual_tier_purchases,6,purchases,booked in week,preliminary
+membership,membership_sales_gross,996,usd,booked in week,preliminary
+orders,confirmed_orders,86,orders,booked in week,preliminary
+orders,orders_gross,21157,usd,booked in week,preliminary
+orders,cancellations,1,orders,booked in week,preliminary
+cash,cash_captured,24523,usd,payments in week,preliminary
+event_registrations,annual_conference_registrations,31,registrations,EVT-2024-CONF,preliminary
+event_registrations,hollow_food_safety_registrations,45,registrations,EVT-2024-W5,preliminary
+event_registrations,curd_food_safety_registrations,3,registrations,EVT-2024-W3,preliminary
+education,course_enrollments_taken,52,enrollments,taken in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+advocacy,raw_milk_aging_rules_meetings,1,meetings,coalition meeting,preliminary

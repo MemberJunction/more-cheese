@@ -1,0 +1,36 @@
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+# title: Weekly operations snapshot, week of 1 September 2025
+# date: 2025-09-07
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-09-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2025-09-01
+# basis: confirmed orders, membership purchases, and cash captured during the week of 2025-09-01 to 2025-09-07.
+# caveat: complete week totals pulled on Sunday 2025-09-07.
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1290,members,rolling 12 months,final
+membership,membership_purchases_total,17,purchases,booked in week,final
+membership,membership_purchases_first_time,10,purchases,booked in week,final
+membership,membership_tier_individual,14,purchases,booked in week,final
+membership,membership_tier_enthusiast,1,purchases,booked in week,final
+membership,membership_tier_small_business,2,purchases,booked in week,final
+membership,membership_gross,3304,usd,booked in week,final
+orders,confirmed_orders,54,orders,booked in week,final
+orders,orders_gross,9237,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,10064,usd,payments in week,final
+events,workshop_cave_farm_shop_retail_registrations_taken,36,registrations,EVT-2025-W2,final
+events,events_this_week_count,0,events,scheduled in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,4,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,enrolled in week,final
+certifications,certifications_awarded,1,awards,awarded in week,final

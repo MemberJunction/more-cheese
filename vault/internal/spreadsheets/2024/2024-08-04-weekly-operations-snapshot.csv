@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week of 2024-07-29
+# date: 2024-08-04
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-07-29
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-07-29
+# basis: membership purchases, orders, cash, and enrollments booked inside 2024-07-29..2024-08-04. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end on 2024-08-04. Figures are complete for the specified window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,998,members,rolling 12 months,final
+membership,membership_purchases_total,5,purchases,booked in week,final
+membership,membership_purchases_first_time,2,purchases,booked in week,final
+membership,individual_membership_purchases,5,purchases,booked in week,final
+membership,membership_sales_gross,830,usd,booked in week,final
+orders,confirmed_orders,28,orders,booked in week,final
+orders,orders_gross,4272,usd,booked in week,final
+orders,order_cancellations,0,orders,booked in week,final
+cash,cash_captured,4390,usd,payments in week,final
+events,workshop_curd_food_safety_registrations,23,registrations,EVT-2024-W3,final
+education,course_enrollments_taken,13,enrollments,taken in week,final
+education,course_completions,10,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,enrolled in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,fsma_small_producer_exemptions_testimony,1,actions,filed in week,final

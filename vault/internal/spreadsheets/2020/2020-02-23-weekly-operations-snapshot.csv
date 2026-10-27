@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week ending 23 February 2020
+# date: 2020-02-23
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-02-17
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, cash]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2020-02-17
+# basis: confirmed orders, cash captured, and advocacy actions booked during the week of 2020-02-17 to 2020-02-23.
+# caveat: pulled at week end, representing complete figures for the specified window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,375,members,rolling 12 months,final
+membership,membership_purchases_total,3,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,membership_purchases_individual,2,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_gross,698,usd,booked in week,final
+orders,confirmed_orders,7,orders,booked in week,final
+orders,orders_gross,1157,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,5742,usd,payments in week,final
+events,event_registrations_taken,0,registrations,booked in week,final
+events,events_this_week,0,events,calendar week,final
+events,events_next_eight_weeks,1,events,upcoming schedule,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,5,completions,completed in week,final
+certifications,enrolled,0,certifications,booked in week,final
+certifications,awarded,0,certifications,awarded in week,final
+advocacy,coalition_meeting_fsma_exemptions,1,actions,logged in week,final

@@ -1,0 +1,43 @@
+# title: Advocacy actions and membership snapshot, week of 2022-09-26
+# date: 2022-09-30
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-09-26
+# fictional: true
+# owner_role: Advocacy & Standards
+# tags: [advocacy, membership, weekly-snapshot, orders]
+# data_sources: [generated/advocacy-actions, generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-09-26 and year 2022
+# basis: advocacy actions lifetime totals and weekly commerce figures booked 2022-09-26 through 2022-10-02.
+# caveat: weekly figures are preliminary as of Friday close; commerce data runs to 2026-06-20.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+advocacy,total_advocacy_actions,74,actions,lifetime total,final
+advocacy,petition_signatures,26,actions,lifetime total,final
+advocacy,coalition_meetings,5,actions,lifetime total,final
+advocacy,letter_campaigns,38,actions,lifetime total,final
+advocacy,testimony_actions,5,actions,lifetime total,final
+advocacy,topic_dairy_pricing_reform,16,actions,lifetime total,final
+advocacy,topic_labeling_standards,15,actions,lifetime total,final
+advocacy,topic_raw_milk_aging_rules,21,actions,lifetime total,final
+advocacy,topic_fsma_small_producer_exemptions,14,actions,lifetime total,final
+advocacy,topic_interstate_cheese_shipment,8,actions,lifetime total,final
+membership,current_members_at_week_end,596,members,rolling 12 months,preliminary
+membership,membership_purchases_total,5,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,1,purchases,booked in week,preliminary
+membership,membership_purchases_small_business,1,purchases,booked in week,preliminary
+membership,membership_purchases_enthusiast,2,purchases,booked in week,preliminary
+membership,membership_purchases_individual,2,purchases,booked in week,preliminary
+membership_purchases,gross_usd,944,usd,booked in week,preliminary
+orders,confirmed_orders,8,orders,booked in week,preliminary
+orders,gross_usd,1439,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,2772,usd,payments in week,preliminary
+events,event_registrations_taken_workshop_hollow_pasta_filata,3,registrations,booked in week,preliminary
+courses,course_completions,7,completions,completed in week,preliminary

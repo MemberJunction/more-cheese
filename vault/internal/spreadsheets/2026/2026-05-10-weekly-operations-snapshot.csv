@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week of 4 May 2026
+# date: 2026-05-10
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-05-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, courses]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2026-05-04
+# basis: membership purchases, orders, enrollments and advocacy actions booked inside 2026-05-04..2026-05-10. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 10 May, representing complete week totals. Cash captured is zero in the weekly window per system records.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1552,members,rolling 12 months,complete
+membership,membership_purchases,22,purchases,booked in week,complete
+membership,first_time_members,12,purchases,booked in week,complete
+membership,individual_purchases,13,purchases,booked in week,complete
+membership,small_business_purchases,5,purchases,booked in week,complete
+membership,enthusiast_purchases,4,purchases,booked in week,complete
+membership,membership_gross,4875,usd,booked in week,complete
+orders,confirmed_orders,47,orders,booked in week,complete
+orders,orders_gross,11166,usd,booked in week,complete
+orders,cancellation_orders,0,orders,booked in week,complete
+cash,cash_captured,0,usd,payments in week,complete
+event_registrations,annual_conference_registrations,11,registrations,EVT-2026-CONF,complete
+course_enrollments,course_enrollments_taken,17,enrollments,taken in week,complete
+course_enrollments,course_completions,0,completions,completed in week,complete
+advocacy,testimony_fsma_exemptions,1,actions,FSMA small-producer exemptions,complete

@@ -1,0 +1,36 @@
+# title: Member record audit and data quality snapshot, week of 6 June 2022
+# date: 2022-06-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-06-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, duplicates, audit]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-06-06
+# basis: snapshot of operational metrics and data-quality exceptions tracked during the week of 6 June 2022.
+# caveat: preliminary operational figures pulled mid-week prior to final reconciliation of duplicate accounts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,550,members,rolling 12 months,preliminary
+membership,membership_purchases_total,3,purchases,booked in week,confirmed
+membership,membership_purchases_first_time,2,purchases,booked in week,confirmed
+membership,membership_purchases_individual,2,purchases,booked in week,confirmed
+membership,membership_purchases_small_business,1,purchases,booked in week,confirmed
+membership,membership_purchases_gross,674,usd,booked in week,confirmed
+orders,confirmed_orders,21,orders,booked in week,confirmed
+orders,orders_gross,6078,usd,booked in week,confirmed
+orders,cancellations,0,orders,booked in week,confirmed
+cash,cash_captured,6143,usd,payments in week,confirmed
+data_quality,duplicate_profile_pairs_flagged,4,pairs,audit finding,pending_review
+data_quality,stale_employer_records_flagged,12,records,audit finding,pending_review
+data_quality,payment_status_mismatches,2,accounts,audit finding,pending_review
+data_quality,bounced_email_addresses,5,contacts,audit finding,pending_review
+education,course_enrollments_taken,19,enrollments,taken in week,confirmed
+education,course_completions,4,completions,completed in week,confirmed

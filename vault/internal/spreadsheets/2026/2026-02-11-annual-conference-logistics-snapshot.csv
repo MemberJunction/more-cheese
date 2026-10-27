@@ -1,0 +1,33 @@
+# title: Annual conference logistics and registration snapshot, week of 9 February 2026
+# date: 2026-02-11
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-02-09
+# fictional: true
+# owner_role: Events Team
+# tags: [annual-conference, logistics, hotel-block, registrations]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs year 2026 and week 2026-02-09
+# basis: conference registration count is pulled from EVT-2026-CONF canon; current membership and weekly purchases are pulled from the 2026-02-09 weekly facts snapshot.
+# caveat: preliminary snapshot for internal logistics planning; hotel block numbers subject to venue contract redline.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+logistics_category,item_description,planned_count,allocated_units,unit_type,status_flag
+venue,madison_primary_hall,300,300,seats,confirmed
+hotel_block,host_hotel_rooms,180,180,rooms,pending_redline
+catering,opening_breakfast_covers,280,252,meals,preliminary
+catering,networking_lunch_covers,280,252,meals,preliminary
+catering,closing_dinner_covers,280,252,meals,preliminary
+sessions,plenary_room_capacity,300,252,attendees,secure
+sessions,breakout_rooms,4,4,rooms,confirmed
+av_support,general_session_projectors,2,2,units,pending_quote
+av_support,breakout_microphones,8,8,units,pending_quote
+registrations,current_conference_registered,252,252,registrations,confirmed
+registrations,current_conference_refunded,0,0,registrations,confirmed
+membership,total_current_members,1479,1479,members,active
+membership,weekly_membership_purchases,16,16,purchases,booked

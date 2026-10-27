@@ -1,0 +1,37 @@
+# title: Competition entries and weekly operational snapshot, week of 14 June 2021
+# date: 2021-06-20
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-06-14
+# fictional: true
+# owner_role: Events Team
+# tags: [competition, entries, operations, snapshot, events]
+# data_sources: [generated/competition-entries, generated/orders, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-06-14 and node scripts/vault-facts.mjs year 2021
+# basis: competition entries and category mix from annual records; weekly purchases, orders, cash, and registrations booked during 2021-06-14..2021-06-20.
+# caveat: weekly figures are complete on Sunday 2021-06-20; conference and workshop registration totals reflect advance numbers for upcoming events.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+competition_entries,total_entries,12,entries,annual total,final
+competition_entries,alpine_styles,2,entries,annual total,final
+competition_entries,soft_ripened,2,entries,annual total,final
+competition_entries,aged_cheddar_territorials,1,entries,annual total,final
+competition_entries,washed_rind,3,entries,annual total,final
+competition_entries,blue_veined,3,entries,annual total,final
+competition_entries,fresh_pasta_filata,1,entries,annual total,final
+membership_week,membership_purchases,1,purchases,booked in week,final
+membership_week,membership_gross,153,usd,booked in week,final
+orders_week,confirmed_orders,17,orders,booked in week,final
+orders_week,orders_gross,4880,usd,booked in week,final
+orders_week,cancellations,1,orders,booked in week,final
+cash_week,cash_captured,5252,usd,payments in week,final
+events_week,conference_registrations_taken,11,registrations,EVT-2021-CONF,final
+events_week,workshop_registrations_taken,4,registrations,EVT-2021-W3,final
+education_week,course_enrollments_taken,27,enrollments,taken in week,final
+education_week,course_completions,5,completions,completed in week,final

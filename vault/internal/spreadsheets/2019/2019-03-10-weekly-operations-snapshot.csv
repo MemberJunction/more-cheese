@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, 4-10 March 2019
+# date: 2019-03-10
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-03-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, advocacy, orders, cash]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2019-03-04
+# basis: membership purchases, orders, cash, and advocacy actions booked inside 2019-03-04..2019-03-10. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 10 March, the final day of the week. Order and cash figures are preliminary pending finance reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,230,members,rolling 12 months,preliminary
+membership,membership_purchases,6,purchases,booked in week,preliminary
+membership,first_time_purchases,6,purchases,booked in week,preliminary
+membership,small_business_tier_purchases,1,purchases,booked in week,preliminary
+membership,individual_tier_purchases,5,purchases,booked in week,preliminary
+membership,membership_gross,1057,usd,booked in week,preliminary
+orders,confirmed_orders,8,orders,booked in week,preliminary
+orders,orders_gross,1702,usd,booked in week,preliminary
+orders,cancellation_orders,0,orders,booked in week,preliminary
+cash,cash_captured,622,usd,payments in week,preliminary
+advocacy,interstate_cheese_shipment_letters,2,actions,logged in week,preliminary
+advocacy,raw_milk_aging_coalition_meetings,1,meetings,logged in week,preliminary
+advocacy,interstate_cheese_shipment_petitions,1,signatures,logged in week,preliminary
+education,course_enrollments_taken,1,enrollments,taken in week,preliminary
+certifications,certifications_enrolled,0,enrollments,taken in week,preliminary

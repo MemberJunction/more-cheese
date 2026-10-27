@@ -1,0 +1,28 @@
+# title: Certification and course enrollment snapshot, week of 11 March 2019
+# date: 2019-03-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-03-11
+# fictional: true
+# owner_role: Education & Credentialing
+# tags: [certification, courses, enrollments, weekly-snapshot]
+# data_sources: [generated/courses, generated/certifications, generated/member-certifications]
+# source: node scripts/vault-facts.mjs week 2019-03-11
+# basis: course enrollments and certificate awards booked during the week of 2019-03-11 to 2019-03-17.
+# caveat: figures are pulled mid-week on 14 March 2019 and are preliminary until the weekly close.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+education,course_enrollments_taken,15,enrollments,booked in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+certification,certifications_enrolled,0,enrollments,booked in week,preliminary
+certification,certifications_awarded,1,awards,Cheese Foundations Certificate,preliminary
+membership,current_members_at_week_end,232,members,rolling 12 months,preliminary
+orders,confirmed_orders,2,orders,booked in week,preliminary
+orders,orders_gross,290,usd,booked in week,preliminary
+cash,cash_captured,145,usd,payments in week,preliminary

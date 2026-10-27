@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week of 2023-12-11
+# date: 2023-12-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-12-11
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2023-12-11
+# basis: confirmed orders, cash captured, and membership purchases booked between 2023-12-11 and 2023-12-17. Current members counts active qualifying periods.
+# caveat: preliminary snapshot pulled mid-week to review failed payment and renewal lapse accounts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,856,members,rolling 12 months,final
+membership,membership_purchases_total,11,purchases,booked in week,final
+membership,membership_purchases_first_time,0,purchases,booked in week,final
+membership,membership_purchases_individual,9,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_enthusiast,1,purchases,booked in week,final
+membership,membership_purchases_gross,1999,usd,booked in week,final
+orders,confirmed_orders,45,orders,booked in week,final
+orders,confirmed_orders_gross,6663,usd,booked in week,final
+orders,cancellations,1,orders,booked in week,final
+cash,cash_captured,14400,usd,payments in week,final
+events,event_registrations_curd_prep_workshop,33,registrations,EVT-2023-W5,final
+education,course_enrollments_taken,27,enrollments,taken in week,final
+education,course_completions,21,completions,completed in week,final
+advocacy,coalition_meeting_raw_milk_aging,1,actions,logged in week,final

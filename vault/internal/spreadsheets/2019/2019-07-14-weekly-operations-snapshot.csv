@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week ending 14 July 2019
+# date: 2019-07-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-07-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2019-07-08
+# basis: membership purchases, orders, cash, course activity, and event registrations booked during the week of 2019-07-08 to 2019-07-14. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 14 July 2019, representing complete week totals. Free webinars carry no registrations in the data.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,274,members,rolling 12 months,final
+membership,membership_purchases,3,purchases,booked in week,final
+membership,first_time_purchases,3,purchases,booked in week,final
+membership,individual_purchases,3,purchases,booked in week,final
+membership,membership_gross,435,usd,booked in week,final
+orders,confirmed_orders,19,orders,booked in week,final
+orders,orders_gross,6668,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,6585,usd,payments in week,final
+events,event_registrations_taken,16,registrations,EVT-2019-CONF,final
+events,webinars_held,2,webinars,EVT-2019-WEB1 and WEB2,final
+events,webinar_registrations,0,registrations,free webinars carry none,
+education,course_enrollments_taken,5,enrollments,taken in week,final
+events,course_completions,3,completions,completed in week,final
+certifications,certification_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+committee_meetings,education_committee_meetings,1,meetings,completed 2019-07-11,final

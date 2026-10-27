@@ -1,0 +1,32 @@
+# title: Week 4 operations snapshot, 2019-01-21 to 2019-01-27
+# date: 2019-01-27
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-01-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2019-01-21
+# basis: orders, memberships and cash captured are booked inside 2019-01-21..2019-01-27. Current members count is complete at week end.
+# caveat: figures represent completed week totals as of 2019-01-27.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,216,members,rolling 12 months,final
+membership,membership_purchases,3,purchases,booked in week,final
+membership,first_time_purchases,3,purchases,booked in week,final
+membership,individual_purchases,3,purchases,booked in week,final
+membership,membership_gross,525,usd,booked in week,final
+orders,confirmed_orders,13,orders,booked in week,final
+orders,orders_gross,1949,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,1517,usd,payments in week,final
+events,workshop_cedar_packaging_registrations,7,registrations,EVT-2019-W3,final
+events,workshop_prairie_food_safety_registrations,1,registrations,EVT-2019-W1,final
+governance,education_committee_meetings,1,meetings,Completed on 2019-01-21,final

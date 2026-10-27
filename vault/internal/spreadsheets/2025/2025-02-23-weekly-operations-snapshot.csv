@@ -1,0 +1,38 @@
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+# title: Weekly operations snapshot, week of 17 February 2025
+# date: 2025-02-23
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-02-17
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-02-17
+# basis: confirmed figures for the week of 17-23 February 2025 as reported by vault-facts.
+# caveat: commerce data ends on 2026-06-20. Weekly totals are complete for this window.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1109,members,rolling 12 months,final
+membership,membership_purchases_total,18,purchases,booked in week,final
+membership,membership_purchases_first_time,12,purchases,booked in week,final
+membership,membership_purchases_individual,16,purchases,booked in week,final
+membership,membership_purchases_corporate,1,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_gross,4083,usd,booked in week,final
+orders,confirmed_orders,23,orders,booked in week,final
+orders,orders_gross,5436,usd,booked in week,final
+orders,orders_cancellations,0,orders,booked in week,final
+cash,cash_captured,16648,usd,payments captured in week,final
+events,workshop_alpine_farm_shop_retail_registrations,5,registrations,EVT-2025-W3,final
+education,course_enrollments_taken,17,enrollments,taken in week,final
+education,course_completions,2,completions,completed in week,final
+certification,certifications_awarded_haccp,1,certificates,Valeria Galvan,final
+advocacy,petition_signature_raw_milk_aging,14,actions,raw-milk aging rules,final
+advocacy,letter_campaign_raw_milk_aging,15,actions,raw-milk aging rules,final
+advocacy,coalition_meeting_interstate_shipment,2,meetings,interstate cheese shipment,final

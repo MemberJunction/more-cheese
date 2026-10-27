@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 21 February 2022
+# date: 2022-02-27
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-02-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-02-21
+# basis: membership purchases, confirmed orders, cash captured, and event registrations booked inside 2022-02-21..2022-02-27. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at the close of Sunday 27 February 2022. Figures represent weekly operational totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,506,members,rolling 12 months,final
+membership,membership_purchases_total,9,purchases,booked in week,final
+membership,membership_purchases_first_time,6,purchases,booked in week,final
+membership,membership_purchases_individual,8,purchases,booked in week,final
+membership,membership_purchases_corporate,1,purchases,booked in week,final
+membership,membership_purchases_gross_usd,2155,usd,booked in week,final
+orders,confirmed_orders,26,orders,booked in week,final
+orders,orders_gross_usd,4616,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,6422,usd,payments in week,final
+events,workshop_meadow_cut_wrap_registrations,17,registrations,EVT-2022-W3,final
+events,courses_enrolled,0,enrollments,booked in week,final
+events,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final

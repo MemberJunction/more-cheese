@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 26 July 2021
+# date: 2021-08-01
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-07-26
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-07-26 and year 2021
+# basis: membership purchases, orders, and cash captured are booked within the week of 2021-07-26 to 2021-08-01. Current members count represents active status at week end.
+# caveat: pulled on 2021-08-01 as a complete week total. Free webinars carry zero registrations in the underlying data.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,notes
+membership,current_members_at_week_end,463,members,rolling 12 months,complete week total
+membership,membership_purchases_total,3,purchases,booked in week,one corporate and two individual
+membership,membership_purchases_corporate,1,purchases,booked in week,
+membership,membership_purchases_individual,2,purchases,booked in week,
+membership,membership_purchases_gross,1181,usd,booked in week,
+orders,confirmed_orders,4,orders,booked in week,
+orders,gross_orders_value,1334,usd,booked in week,
+orders,cancellations,0,orders,booked in week,
+cash,cash_captured,547,usd,payments captured in week,
+events,webinar_registrations,0,registrations,EVT-2021-WEB1,free webinar carries no paid registrations
+events,webinar_refunds,0,registrations,EVT-2021-WEB1,
+education,course_enrollments_taken,0,enrollments,booked in week,
+education,course_completions,5,completions,completed in week,
+certifications,certifications_enrolled,0,enrollments,booked in week,
+certifications,certifications_awarded,0,awards,awarded in week,

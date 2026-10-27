@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 2023-01-30
+# date: 2023-02-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-01-30
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2023-01-30
+# basis: membership purchases, orders, cash, and event registrations are booked inside 2023-01-30..2023-02-05. Current members count is at week end.
+# caveat: pulled on Sunday 2023-02-05, representing complete week totals for the designated window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,667,members,rolling 12 months,final
+membership,membership_purchases_total,8,purchases,booked in week,final
+membership,membership_purchases_first_time,4,purchases,booked in week,final
+membership,membership_purchases_individual,7,purchases,booked in week,final
+membership,membership_purchases_enthusiast,1,purchases,booked in week,final
+membership,membership_purchases_gross,1272,usd,booked in week,final
+orders,confirmed_orders,53,orders,booked in week,final
+orders,orders_gross,7187,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,23701,usd,payments in week,final
+events,event_registrations_taken_willow_alpine,44,registrations,EVT-2023-W1,final
+events,events_this_week_count,0,events,scheduled in week,final
+events,events_next_eight_weeks_count,2,events,scheduled in window,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrolled,enrolled in week,final
