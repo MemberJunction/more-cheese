@@ -74,7 +74,7 @@ const isReleasePullRequest = (env) => env?.GITHUB_BASE_REF === RELEASE_TARGET;
  * Which commit Loom's "Corpus Stability (base ⊆ head)" check should measure the corpus against.
  *
  * Delivered to Loom as `GITHUB_BASE_REF`, because Loom's `validate` exposes only `-p`, `-c` and
- * `-d` at the pinned commit (63aec01f) — `baseRef` and `skipBaseCheck` exist on `executeValidate`
+ * `-d` at the pinned commit (54df8fdc) — `baseRef` and `skipBaseCheck` exist on `executeValidate`
  * but are not wired to flags. If a later Loom adds `--base-ref`, this should move to it; the
  * decision is what matters, not how it is delivered.
  *
