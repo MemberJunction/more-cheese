@@ -98,6 +98,30 @@ const givenNames = JSON.parse(fs.readFileSync(givenNamesPath, 'utf8'));
 
 const heroByEmail = new Map(heroes.heroes.map((h) => [h.businessKeys.Email.toLowerCase(), h]));
 
+// Records a monthly plan added (data/plans/*.plan.json, see plan-month-gemini.mjs) keep the values the plan
+// gave them: a planned "Renata" must not become a catalog first name on the next generate. Keyed by business
+// key; the value is the set of fields the plan supplied.
+function plannedFields(entity, businessKey) {
+  const out = new Map();
+  const dir = path.join(rootDir, 'data', 'plans');
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.plan.json')).sort()) {
+    for (const r of JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')).records ?? []) {
+      const key = r.entity === entity ? r.fields?.[businessKey] : undefined;
+      if (typeof key === 'string') out.set(key.toLowerCase(), new Set(Object.keys(r.fields)));
+    }
+  }
+  return out;
+}
+const plannedPeople = plannedFields('Person', 'Email');
+const plannedProfiles = plannedFields('MemberProfile', 'MemberNumber');
+function keepPlanned(planned, key, fields, apply) {
+  const keep = planned.get(String(key || '').toLowerCase());
+  const before = keep ? Object.fromEntries([...keep].filter((f) => f in fields).map((f) => [f, fields[f]])) : {};
+  apply();
+  Object.assign(fields, before);
+}
+
 // ---------------------------------------------------------------------------
 // 1. Order Reversals & Cancellation Coherence Pass
 // ---------------------------------------------------------------------------
@@ -166,9 +190,11 @@ function applyPeopleAndMemberProfilePass() {
       if (hero.fixedFields?.Title) p.fields.Title = hero.fixedFields.Title;
     }
 
-    applyDeclarativeGeneratorsToRow(domain.entities.Person, p.fields, {
-      catalogs: { 'given-names': givenNames },
-      rng,
+    keepPlanned(plannedPeople, email, p.fields, () => {
+      applyDeclarativeGeneratorsToRow(domain.entities.Person, p.fields, {
+        catalogs: { 'given-names': givenNames },
+        rng,
+      });
     });
 
     if (hero) {
@@ -180,15 +206,17 @@ function applyPeopleAndMemberProfilePass() {
     delete p.fields.JoinDate;
     genderByPersonId.set(pId.toLowerCase(), p.fields.Gender);
 
-    p.fields.PhotoURL = AvatarGenerator.Generate({
-      seed: pId,
-      trait: p.fields.Gender,
-      traits: avatarCfg.traits,
-      defaultTrait: avatarCfg.defaultTrait,
-      style: avatarCfg.style,
-      format: avatarCfg.format,
-      version: avatarCfg.version,
-      backgroundColor: avatarCfg.backgroundColor,
+    keepPlanned(plannedPeople, email, p.fields, () => {
+      p.fields.PhotoURL = AvatarGenerator.Generate({
+        seed: pId,
+        trait: p.fields.Gender,
+        traits: avatarCfg.traits,
+        defaultTrait: avatarCfg.defaultTrait,
+        style: avatarCfg.style,
+        format: avatarCfg.format,
+        version: avatarCfg.version,
+        backgroundColor: avatarCfg.backgroundColor,
+      });
     });
     distinctAvatars.add(p.fields.PhotoURL);
   }
@@ -206,9 +234,11 @@ function applyPeopleAndMemberProfilePass() {
     const parentGender = genderByPersonId.get(pId) || 'Female';
     const rng = createRng(42, `mp:${m.primaryKey.ID}`);
 
-    applyDeclarativeGeneratorsToRow(domain.entities.MemberProfile, m.fields, {
-      parent: { Gender: parentGender },
-      rng,
+    keepPlanned(plannedProfiles, m.fields.MemberNumber, m.fields, () => {
+      applyDeclarativeGeneratorsToRow(domain.entities.MemberProfile, m.fields, {
+        parent: { Gender: parentGender },
+        rng,
+      });
     });
   }
 
