@@ -1,0 +1,36 @@
+# title: Membership and orders snapshot, week of August 31, 2026
+# date: 2026-09-06
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-08-31
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2026-08-31
+# basis: membership purchases, orders and cash are booked inside 2026-08-31..2026-09-06. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: preliminary snapshot pulled at week close. Membership totals reflect rolling active status.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1655,members,rolling 12 months,preliminary
+membership,membership_purchases,28,purchases,booked in week,preliminary
+membership,first_time_members,15,purchases,booked in week,preliminary
+membership,individual_purchases,17,purchases,booked in week,preliminary
+membership,enthusiast_purchases,7,purchases,booked in week,preliminary
+membership,small_business_purchases,4,purchases,booked in week,preliminary
+membership,membership_gross,5625,usd,booked in week,preliminary
+orders,confirmed_orders,38,orders,booked in week,preliminary
+orders,orders_gross,7720,usd,booked in week,preliminary
+orders,cancellation_orders,0,orders,booked in week,preliminary
+cash,cash_captured,7545,usd,payments in week,preliminary
+events,event_registrations_taken,10,registrations,EVT-2026-W5 Workshop: Curd Food Safety,preliminary
+events,webinar_registrations_free,0,registrations,EVT-2026-WEB4 Webinar: Listeria Control 2026,preliminary
+education,course_enrollments_taken,0,enrollments,taken in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+certifications,certification_enrollments,0,enrollments,taken in week,preliminary

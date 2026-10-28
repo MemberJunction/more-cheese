@@ -1,0 +1,39 @@
+# title: Membership and order snapshot for week of August 3, 2026
+# date: 2026-08-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-08-03
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, orders, cash, weekly-snapshot]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2026-08-03
+# basis: membership purchases, confirmed orders, and cash captured booked inside 2026-08-03..2026-08-09. Current members counts active rolling 12-month periods at week end.
+# caveat: data compiled mid-week on August 5 and remains preliminary until the reporting window closes on Sunday August 9.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1591,members,rolling 12 months,preliminary
+membership,membership_purchases_total,26,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,14,purchases,booked in week,preliminary
+membership,membership_purchases_individual,15,purchases,booked in week,preliminary
+membership,membership_purchases_small_business,4,purchases,booked in week,preliminary
+membership,membership_purchases_enthusiast,5,purchases,booked in week,preliminary
+membership,membership_purchases_corporate,2,purchases,booked in week,preliminary
+membership,membership_purchases_gross,6975,usd,booked in week,preliminary
+orders,confirmed_orders,26,orders,booked in week,preliminary
+orders,orders_gross,7825,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,7825,usd,payments in week,preliminary
+events,events_this_week,0,events,scheduled in window,preliminary
+events,events_next_eight_weeks,2,events,upcoming scheduled,preliminary
+education,course_enrollments_taken,0,enrollments,taken in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+certifications,certifications_enrolled,0,enrolled,taken in week,preliminary
+certifications,certifications_awarded,0,awarded,awarded in week,preliminary
+advocacy,coalition_meetings_raw_milk_aging,1,meetings,logged in window,preliminary

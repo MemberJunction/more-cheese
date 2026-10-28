@@ -1,0 +1,26 @@
+# title: Member record discrepancies and data-quality snapshot, week of 15 June 2026
+# date: 2026-06-17
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-06-15
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, database, audit, operations]
+# data_sources: [generated/people, generated/organizations, generated/orders]
+# source: node scripts/vault-facts.mjs week 2026-06-15
+# basis: membership totals and weekly purchases reflect the week ending 21 June 2026. Record anomaly counts are pulled from the active database audit log.
+# caveat: pulled mid-week on 17 June 2026, so figures are preliminary. Current members count reflects total active accounts at week end.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,anomaly_type,affected_count,resolution_status,owner_role,notes
+membership,current_members_total,1578,verified,Membership Operations,total active base at week end
+membership,weekly_purchases_total,10,processed,Membership Operations,booked during current week
+membership,duplicate_profiles,4,pending,Membership Operations,requires manual database merge
+membership,stale_employer_records,9,in_review,Membership Operations,outdated creamery affiliations
+membership,bounced_emails,12,flagged,Communications,undeliverable renewal notices
+membership,payment_status_mismatch,3,pending,Membership Operations,dues payment unlinked from profile

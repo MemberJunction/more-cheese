@@ -138,6 +138,7 @@ you don't currently have, it's here.
 | [`morecheese-press-release`](.claude/skills/morecheese-press-release/SKILL.md) | A dated ICF press release for a real event in `generated/` |
 | [`morecheese-annual-report`](.claude/skills/morecheese-annual-report/SKILL.md) | The ICF annual report for one fiscal year, computed from `generated/` |
 | [`morecheese-internal-comms`](.claude/skills/morecheese-internal-comms/SKILL.md) | The internal staff corpus under `vault/internal/` |
+| [`morecheese-monthly-run`](.claude/skills/morecheese-monthly-run/SKILL.md) | The monthly run: blog weeks, the next Loom cycle, internal weeks, gates, one PR into `next` |
 
 Never hand-write ICF content without loading the matching skill — the corpus has
 fiction headers, frontmatter, and cross-week coherence these skills own.
