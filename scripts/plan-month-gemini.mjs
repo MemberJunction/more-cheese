@@ -49,7 +49,8 @@
  * append-only and cannot move a registration from Registered to Attended next month.
  *
  * Key: GEMINI_API_KEY, else AI_VENDOR_API_KEY__GeminiLLM, from the environment or from the .env file named by
- * GEMINI_ENV_FILE (e.g. GEMINI_ENV_FILE=~/Projects/MJ/.env). The key is never logged. Loom: --loom <checkout>,
+ * GEMINI_ENV_FILE (e.g. GEMINI_ENV_FILE=~/Projects/MJ/.env), or GEMINI_KEY_FROM_PROXY=1 where a cloud network
+ * secret adds the header. The key is never logged. Loom: --loom <checkout>,
  * else LOOM_DIR, else ../loom-plan or ../loom; the checkout must have `accumulate --plan` built.
  */
 import fs from 'node:fs';
@@ -679,6 +680,9 @@ DECISIONS JSON: {"summary": "...", "joins": [...], "lapses": [...], "tierChanges
 
 // ── Gemini (as in content-backfill-internal-gemini.mjs) ──
 function apiKey() {
+    // A Claude Code cloud environment can hold the key as a network secret: its proxy adds the header to
+    // requests for generativelanguage.googleapis.com, and the session never sees the key
+    if (process.env.GEMINI_KEY_FROM_PROXY === '1') return null;
     const fromEnv = process.env.GEMINI_API_KEY || process.env.AI_VENDOR_API_KEY__GeminiLLM;
     if (fromEnv) return fromEnv.trim();
     const file = process.env.GEMINI_ENV_FILE?.replace(/^~(?=\/)/, os.homedir());
@@ -686,7 +690,7 @@ function apiKey() {
         const m = fs.readFileSync(file, 'utf8').match(/^\s*(?:export\s+)?(?:GEMINI_API_KEY|AI_VENDOR_API_KEY__GeminiLLM)\s*=\s*["']?([^"'\s#]+)/m);
         if (m) return m[1];
     }
-    throw new Error('no Gemini key: set GEMINI_API_KEY, or GEMINI_ENV_FILE to a .env holding AI_VENDOR_API_KEY__GeminiLLM');
+    throw new Error('no Gemini key: set GEMINI_API_KEY, or GEMINI_ENV_FILE to a .env holding AI_VENDOR_API_KEY__GeminiLLM, or GEMINI_KEY_FROM_PROXY=1 where a network secret adds it');
 }
 async function generate(opts, contents) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${opts.model}:generateContent`;
@@ -696,7 +700,7 @@ async function generate(opts, contents) {
         generationConfig: { responseMimeType: 'application/json', responseSchema: DECISIONS_SCHEMA, maxOutputTokens: 32768 },
     });
     for (let i = 0; ; i++) {
-        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': opts.key }, body });
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(opts.key ? { 'x-goog-api-key': opts.key } : {}) }, body });
         const data = await res.json().catch(() => ({}));
         if (res.ok) return data;
         if (i < 4 && (res.status === 429 || res.status >= 500)) { await new Promise((r) => setTimeout(r, 2000 * 2 ** i)); continue; }

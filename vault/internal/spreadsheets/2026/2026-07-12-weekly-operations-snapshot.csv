@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 6 July 2026
+# date: 2026-07-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-07-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/committee-meetings, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2026-07-06
+# basis: commerce figures and event registrations booked between 2026-07-06 and 2026-07-12. Membership count is current at week end. Free webinars carry zero registrations.
+# caveat: weekly snapshot compiled at week close on Sunday 2026-07-12.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1573,members,rolling 12 months,final
+membership,membership_purchases_total,13,purchases,booked in week,final
+membership,membership_purchases_first_time,5,purchases,booked in week,final
+membership,membership_purchases_small_business,3,purchases,booked in week,final
+membership,membership_purchases_individual,10,purchases,booked in week,final
+membership,membership_purchases_gross,2950,usd,booked in week,final
+orders,confirmed_orders,111,orders,booked in week,final
+orders,orders_gross,32390,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,32390,usd,payments in week,final
+events,event_registrations_annual_conference_madison,48,registrations,taken in week,final
+events,event_registrations_stone_food_safety_bega,50,registrations,taken in week,final
+education,course_enrollments_taken,112,enrollments,taken in week,final
+education,course_completions,38,completions,completed in week,final
+certifications,certifications_awarded,1,certificates,awarded in week,final
+advocacy,coalition_meeting_labeling_standards,1,meetings,held in week,final
+governance,committee_meetings_completed,2,meetings,completed in week,final

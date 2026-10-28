@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, 14-20 September 2026
+# date: 2026-09-20
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-09-14
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2026-09-14
+# basis: membership purchases, confirmed orders, and cash captured booked within 2026-09-14..2026-09-20. Current members count active accounts at week end.
+# caveat: weekly figures compiled at week close on 20 September 2026.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1675,members,rolling 12 months,final
+membership,membership_purchases,29,purchases,booked in week,final
+membership,first_time_purchases,14,purchases,booked in week,final
+membership,individual_purchases,18,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,small_business_purchases,3,purchases,booked in week,final
+membership,enthusiast_purchases,7,purchases,booked in week,final
+membership,membership_gross,6400,usd,booked in week,final
+orders,confirmed_orders,47,orders,booked in week,final
+orders,orders_gross,9780,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,9780,usd,payments in week,final
+events,curd_food_safety_registrations,15,registrations,taken in week,final
+events,hollow_export_registrations,3,registrations,taken in week,final
+advocacy,labeling_standards_letters,10,actions,submitted in week,final
+advocacy,labeling_standards_petitions,5,actions,signed in week,final
