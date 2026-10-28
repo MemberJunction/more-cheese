@@ -136,9 +136,11 @@ jobs:
         run: npm run validate:loom
 
       # The detection step this `if` reads now runs near the top of the job, beside the other
-      # DB-free gates, so one `ls` serves both it and the seed-coverage gate (see #48).
+      # DB-free gates, so one `ls` serves both it and the seed-coverage gate (see #48). Like the
+      # seed gates above, parity measures a release: a feature PR that appends loom records has no
+      # seed for them yet and fails by construction, so it runs only when the PR touches a seed.
       - name: Assert Metadata_Sync IDs match generated/ for every loom directory
-        if: steps.seed_check.outputs.has_seeds == 'true'
+        if: steps.seed_check.outputs.has_seeds == 'true' && steps.pr_seed.outputs.touched == 'true'
         run: npm run check:sync-id-parity
 
       - name: Run Loom mutation test suite
