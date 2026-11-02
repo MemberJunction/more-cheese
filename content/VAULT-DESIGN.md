@@ -324,7 +324,7 @@ Arc constraints, per persona, that content must not contradict:
 | Hero | Must not | May |
 |---|---|---|
 | Elena Rodriguez | Be called Standards Committee **chair** — the data has her as a **Member** for 2023-24 and 2025-26 (see §9, decision 1) | Appear as an engaged conference attendee and Standards Committee member from 2023 |
-| Gwen Whitfield | Be "board chair" — no board entity exists; the data has her on **Food Safety**, Member 2023-24, **Chair from 2025** | Be described as a governance-minded volunteer any year from 2014; chair Food Safety from 2025 |
+| Gwen Whitfield | Be "board chair" — the elected board (§5.3) has no chair; the data has her on **Food Safety**, Member 2023-24, **Chair from 2025**, and on the board from 2025 (named only in Voting) | Be described as a governance-minded volunteer any year from 2014; chair Food Safety from 2025 |
 | Tom Reyes | Be put on a stage or credited with event attendance | Be quoted on advocacy — he has heavy legislative activity |
 | Victor Sandoval | Volunteer, present, or be thanked for engagement | Appear only as a renewing corporate member, if at all |
 | Marcus Chen | Be shown renewing smoothly | Appear in a lapse/grace-window narrative |
@@ -427,6 +427,58 @@ Notes for the approval decision:
   table), **not** in `data/ruleset/heroes.json` — they are not simulated members and must not get
   membership periods, orders, or committee seats.
 - If rejected, the role-only fallback in §5.1 stands and nothing else in this design changes.
+
+### 5.3 Board of Directors — elected in Voting; content names no director
+
+**Status:** added 2026-10-30 (Yuri). ICF has a nine-member **Board of Directors**, elected by the members: three
+seats a year for staggered three-year terms, at most two terms in a row. The board has existed in the corpus as a role
+all along (board packets, "what did we tell the board"); its elections now exist as data, in bizapps-voting, built by
+`scripts/build-elections-plan.mjs` from `generated/` (`data/elections/elections.plan.json`: every election, and
+`board`, the seats by year). Directors are members who served as committee chairs or vice chairs. The roster is in the
+world model (`plans/more-cheese-world-model-and-personas.md`, "Board of Directors").
+
+Rules for content:
+- **Name no director.** Blog posts, press releases, annual reports and internal comms keep writing "the board" and
+  "board packets", as in §5.1. A director's name appears only in the Voting data and in collaboration Spaces.
+- **Nobody chairs the board in any artifact.** The data has no board chair or officer roles.
+- An artifact may say an election happened ("members elected three directors in November") without the names or
+  the counts.
+- Hero beats the data already carries: Gwen Whitfield runs in 2021 and loses, then is elected in 2024 (term
+  2025–2027); Elena Rodriguez is elected in 2025 (term 2026–2028). Heroes whose arcs rule out volunteering never run
+  (Marcus Chen, Bob Kowalski, Tom Reyes, Victor Sandoval, and the planted duplicate Kathy OLeary).
+
+How the elections run: nominations in September, a secret ranked ballot (single transferable vote) from mid-October to
+mid-November with every current member on the roll as of October 1, and certification by a committee chair acting as
+Election Inspector who is neither running nor on the board.
+
+### 5.4 ICF member standards — balloted in Voting
+
+**Status:** added 2026-11-02 (Yuri). ICF publishes seven voluntary **member standards**, written and balloted by the
+Standards Committee. They are ICF's own codes of practice for members, separate from the federal rules that the
+blog's advocacy posts follow:
+
+| Code | Title | Versions balloted |
+|---|---|---|
+| ICF-STD-101 | Code of Practice for Raw-Milk Cheese Aging | 1.0 (2019), 1.1 (2020), 2.0 (2023, recirculated twice) |
+| ICF-STD-102 | Aging Records Guidance | 1.0 (2020), 1.1 (2022) |
+| ICF-STD-103 | Sheep- and Goat-Milk Aging Annex | 1.0 (2025, recirculated once) |
+| ICF-STD-201 | Labeling Guide for Aged and Washed-Rind Cheeses | 1.0 (2021, recirculated once), 1.1 (2024) |
+| ICF-STD-202 | Net-Weight and Cut-Wedge Labeling Guidance | 1.0 (2021), 2.0 (2026, certified October 2026) |
+| ICF-STD-301 | Raw-Milk Production Hygiene Standard | 1.0 (2019, recirculated once), 1.1 (2022) |
+| ICF-STD-302 | Aging-Room Environmental Monitoring Standard | 1.0 (2024) |
+
+The catalog and every ballot's sections are `data/elections/standards.json`; the ballots, comments and resolutions
+are built by `scripts/build-elections-plan.mjs`, with wording from `data/elections/comments.json`. Each ballot is an
+Open roll call of the committee and a **ballot pool** of engaged members who signed up. Each section is approved by
+two-thirds of votes cast, and every Disapprove carries a comment, which the committee resolves. A section that fails
+goes back to the same voters as a recirculation. The story the data tells: STD-101 2.0's new §3 (validated aging
+protocols) failed twice before a conflict-of-interest rule and a two-year start let it pass in August 2023.
+
+Rules for content:
+- An artifact may name a standard by code and title, and say when it was adopted, revised or recirculated, as above.
+- **Name no commenter and quote no comment.** Comments live only in Voting. Vote counts appear only if they are taken
+  from the data.
+- Never invent a standard, version or ballot that the catalog doesn't have.
 
 ---
 
@@ -600,7 +652,7 @@ Re-run Appendix A before writing; these are a smoke test, not a substitute.
 
 | # | Decision | Why it is blocking | Default if unanswered |
 |---|---|---|---|
-| 1 | **Hero arcs contradict `generated/`.** The blog skill's §3 says Elena Rodriguez "chairs the Standards Committee" and Gwen Whitfield climbs to "board chair". `generated/committee-memberships` has Elena as a Standards Committee **Member** (2023-24, 2025-26) and Gwen on **Food Safety** — Member 2023-24, Chair 2025-26. There is no board entity at all; there are six committees. Per world-model §5.1 the committed dataset is the source of truth. | Any artifact naming a chair will contradict either the data or the blog corpus. | This design follows `generated/`. The blog skill's prose should be corrected — flagged, not edited, per the read-only rule. |
+| 1 | **Hero arcs contradict `generated/`.** The blog skill's §3 says Elena Rodriguez "chairs the Standards Committee" and Gwen Whitfield climbs to "board chair". `generated/committee-memberships` has Elena as a Standards Committee **Member** (2023-24, 2025-26) and Gwen on **Food Safety** — Member 2023-24, Chair 2025-26. There is no board entity at all; there are six committees. (2026-10-30: the board now exists as elections in Voting, §5.3, with no chair.) Per world-model §5.1 the committed dataset is the source of truth. | Any artifact naming a chair will contradict either the data or the blog corpus. | This design follows `generated/`. The blog skill's prose should be corrected — flagged, not edited, per the read-only rule. |
 | 2 | **Disclaimer wording.** The mandated paragraph says "This post". Reused verbatim in an annual report it reads oddly. | Verbatim reuse was an explicit instruction; a variant needs sign-off. | Verbatim everywhere, as written in §6.1. |
 | 3 | **Named staff roster (§5.2).** | Internal comms are markedly better with named senders; role-only is the safe fallback. | Role-only bylines. |
 | 4 | **Volume and budget.** ~2,200 artifacts for 2019-2025 (§4.1). Vision-plan open question 5 already flags model-tier and cost. | Someone must approve the spend and the tranche plan before any bulk run. | No bulk runs. Samples only. |

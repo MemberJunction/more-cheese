@@ -44,6 +44,43 @@ The 16 heroes below are the exact individuals committed in `metadata/people/.peo
 | 15 | **Nia Thompson** | `nia.thompson.000115@thequietcurd.example`<br/>*The Quiet Curd* (Joined 14 days before release) | $\theta=0.5$<br/>$\phi=-0.4$ | **The Cold Start**: Joined two weeks before the pinned release date (same drift caveat as Marcus Chen); validates scoring on priors rather than transactional history. |
 | 16 | **Charlie Mason** | `charlie.mason.000116@winterfendairy.example`<br/>*Winterfen Dairy* (Joined 2021-08-19) | $\theta=0.3$<br/>$\phi=0.5$ | **Rest-of-World Producer**: Tasmanian sheep dairy owner; represents the Southern Hemisphere geographical distribution. |
 
+
+### Board of Directors (elected in Voting)
+
+Added 2026-10-30. Nine directors, three elected each November for a three-year term starting the next January, at most
+two terms in a row (VAULT-DESIGN §5.3). The elections are computed by `scripts/build-elections-plan.mjs` from
+`generated/` and loaded into bizapps-voting by `scripts/load-elections.mjs`; candidates are past committee chairs and
+vice chairs. Directors are named only in Voting and Spaces, never in content.
+
+| Director | Terms | Segment | Country |
+|---|---|---|---|
+| Baptiste Carlsen | 2020–2022, 2023–2025 | Producer | United States |
+| Danielle Marchand | 2020–2022, 2023–2025 | Retailer | Italy |
+| Gonzalo Figueroa | 2020–2022, 2023–2025 | Supplier | United States |
+| Kate Mwangi | 2021–2023, 2024–2026 | Enthusiast | Canada |
+| Margaux Ricci-Serra | 2021–2023, 2024–2026 | Enthusiast | Greece |
+| Nadia Figueroa | 2021–2023 | Retailer | United States |
+| Chiara Gagnon | 2022–2024, 2025–2027 | Educator | New Zealand |
+| Esteban Neves | 2022–2024 | Retailer | United States |
+| Iveta Jansen-Holzer | 2022–2024, 2025–2027 | Supplier | Switzerland |
+| Akira Kaur | 2024–2026 | Retailer | Canada |
+| Gwen Whitfield | 2025–2027 | Educator | United States |
+| Elena Rodriguez | 2026–2028 | Producer | United States |
+| Fabien Guerrero | 2026–2028 | Retailer | United States |
+| Mei Ravn | 2026–2028 | Producer | Australia |
+
+The table is derived from `data/elections/elections.plan.json` (`board`); regenerate it from there if the plan changes.
+Story beats: Gwen Whitfield loses in 2021 and wins in 2024, unseating an incumbent; Fabien Guerrero loses in 2022 and
+wins in 2025; one incumbent loses in 2023.
+
+### Member standards (balloted in Voting)
+
+Added 2026-11-02. The Standards Committee writes ICF's seven voluntary member standards (ICF-STD-101 to 302, listed
+in VAULT-DESIGN §5.4) and ballots each draft section by section, from 2019 on: 18 ballots in all, including four
+recirculations. The voters are the committee plus a ballot pool of engaged producers, retailers, suppliers and
+educators: 12 in 2019, growing to 40 in 2026, and a member stays in the pool while they are current. Two-thirds of votes
+cast approves a section. Elena Rodriguez votes and comments as a committee member from 2023. The chairs who certify:
+Amelia Ochoa (2019–20), Marta Ibarra-Huerta (2021–22), Damien Bergman (2023–24) and Matteo Mikkelsen (2025–26).
 ---
 
 ## 3. Authored Loom Metadata Specifications

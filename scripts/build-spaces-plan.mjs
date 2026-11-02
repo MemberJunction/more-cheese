@@ -110,7 +110,7 @@ export function loadWorld(root) {
 }
 
 // ---------- who is who ----------
-function makeIndex(w) {
+export function makeIndex(w) {
     const person = new Map(w.people.map((p) => [p.id, p]));
     const profile = new Map(w.profiles.map((p) => [p.PersonID, p]));
     const byEmail = new Map(w.people.map((p) => [String(p.Email).toLowerCase(), p.id]));

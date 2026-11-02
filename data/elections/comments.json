@@ -1,0 +1,1517 @@
+{
+  "source": "gemini-3.5-flash-lite via scripts/build-election-comments-gemini.mjs",
+  "comments": {
+    "std-101-1.0:69E566CE-D8DB-5AD8-87EF-A78EDAE07D71:0": {
+      "reference": "§1",
+      "comment": "The heading in section 1 uses lowercase for the word release while other sections use title case. For consistency across the document, the capitalization should be corrected.",
+      "proposedChange": "Change release to Release in the final clause of the section.",
+      "response": "The committee agrees with this editorial fix for consistency. The text will be updated to use title case for Release."
+    },
+    "std-101-1.0:69E566CE-D8DB-5AD8-87EF-A78EDAE07D71:3": {
+      "reference": "§4",
+      "comment": "As a supplier to many producers in New Zealand, I am concerned that holding batches for any review of minor log gaps will disrupt distribution schedules and increase warehouse costs without adding actual safety value.",
+      "proposedChange": null,
+      "response": "The committee notes the concern regarding distribution delays, but maintaining rigorous batch check standards is essential for food safety and traceability of raw-milk cheese. No change is made."
+    },
+    "std-101-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:1": {
+      "reference": "§2",
+      "comment": "The section reference numbering should be checked for consistent bolding across all headings in the document to ensure clean publication formatting by the International Cheese Federation.",
+      "proposedChange": "Bold the section number §1 consistently across the document headers.",
+      "response": "The committee accepts this editorial improvement for document formatting consistency."
+    },
+    "std-101-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:2": {
+      "reference": "§3",
+      "comment": "The punctuation in §2 can be streamlined by adding a comma after the temperature range clause to improve readability for producers reviewing the aging minimums.",
+      "proposedChange": "Add a comma after 35°F (1.7°C) in §2.",
+      "response": "The committee accepts this editorial revision to improve sentence flow and readability."
+    },
+    "std-101-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:3": {
+      "reference": "§4",
+      "comment": "The list of conditions in §3 should use a semicolon before the final clause to separate the cleaning schedule requirement clearly from the logging requirement.",
+      "proposedChange": "Insert a semicolon after raw-milk cheese in §3.",
+      "response": "The committee accepts this editorial correction to clarify the separation of requirements within §3."
+    },
+    "std-101-1.0:8010857E-9CEF-56E7-8879-A72AE72E6B3C:0": {
+      "reference": "§1",
+      "comment": "At Quincewick Creamery Cooperative, we suggest capitalizing ICF Member Producers to maintain professional styling throughout the definitions paragraph.",
+      "proposedChange": "Capitalize member producers in §1.",
+      "response": "The committee accepts this editorial suggestion to enhance the formal presentation of member designations."
+    },
+    "std-101-1.0:8010857E-9CEF-56E7-8879-A72AE72E6B3C:1": {
+      "reference": "§2",
+      "comment": "The temperature scale notation in section 2 lists Fahrenheit first followed by Celsius. For international standardization, we should ensure the degree symbols and spacing match standard metric formatting.",
+      "proposedChange": "Ensure space and degree formatting reads as 35°F (1.7°C) consistently.",
+      "response": "The committee accepts the editorial correction to ensure proper formatting of temperature units across the document."
+    },
+    "std-101-1.0:8010857E-9CEF-56E7-8879-A72AE72E6B3C:3": {
+      "reference": "§4",
+      "comment": "The wording referring to make record in section 4 should be pluralized to match batch documentation practices where multiple records may apply.",
+      "proposedChange": "Change make record to make records.",
+      "response": "The committee accepts this editorial clarification to reflect standard documentation practices accurately."
+    },
+    "std-101-1.0:A93AF7D8-78BB-53A8-BA92-DFFFB1EBB72C:2": {
+      "reference": "§3",
+      "comment": "Retail buyers need more assurance that aging rooms maintain their conditions consistently. Requiring continuous automated temperature and humidity logging alongside daily checks would greatly help us verify the provenance of imported raw-milk cheeses.",
+      "proposedChange": "Add a requirement for continuous electronic logging in addition to daily manual checks.",
+      "response": "The committee accepts the principle of enhancing log verification. While §2 and §3 require daily checks and logging, guidance will be added in the upcoming annual conference materials to encourage continuous digital logging systems."
+    },
+    "std-101-1.0:D8D82DD1-6AE6-571C-AEFC-737782926B3A:0": {
+      "reference": "§1",
+      "comment": "Here at Fallowfen Cheese & Provisions, we noticed a minor typo in the definition list where make date lacks a hyphen. Adding the hyphen aligns with standard dairy terminology in Europe.",
+      "proposedChange": "Insert a hyphen so make date reads make-date where appropriate.",
+      "response": "The committee accepts this editorial correction to improve terminology clarity throughout the scope and definitions section."
+    },
+    "std-101-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:1": {
+      "reference": "§2",
+      "comment": "The phrasing in section 1 refers to unpasteurized milk, but export markets often require explicit mention of raw milk. To avoid confusion for international trade, the terminology should be standardized.",
+      "proposedChange": "Replace unpasteurized milk with raw milk in the opening clause of §1.",
+      "response": "The committee agrees that using raw milk provides better clarity for international trade and aligns with the document title. The text is updated accordingly."
+    },
+    "std-101-1.1:62608AFC-06B4-5753-B0D3-688E1C720DFB:0": {
+      "reference": "Amendment 1",
+      "comment": "At Aspenholt Dairy we train apprentices on transport logs. Simply referencing the daily log is insufficient because transport drivers also need to sign off on transfer temperatures to ensure no cold-chain interruption breaks the aging window before arrival at the secondary facility.",
+      "proposedChange": "Modify the text to require both the continuation of the daily log and the inclusion of transport driver temperature verification signatures during transfer.",
+      "response": "The committee agrees that transport temperatures must be documented during any off-site move. We have accepted the concern in principle by adding a requirement that transport manifests accompany the daily log to verify the cold chain remains intact."
+    },
+    "std-101-1.1:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:0": {
+      "reference": "Amendment 1",
+      "comment": "As Cheese Program Director at Herrera Farmstead, I approve the amendment allowing off-site aging continuity. However, the phrasing contains a minor typo where daily log is uncapitalized despite referring to a specific controlled record defined earlier in the standard.",
+      "proposedChange": "Capitalize the words daily log to read Daily Log for consistency with the defined document titles in the main standard.",
+      "response": "The committee appreciates the careful proofreading from Herrera Farmstead. The suggestion has been accepted, and the text in Amendment 1 now capitalizes Daily Log to maintain document-wide consistency with our defined terminology."
+    },
+    "std-101-2.0-r1:072EC674-2A47-5F88-8AD1-9D487E298397:0": {
+      "reference": "§3",
+      "comment": "Allowing two peer reviewers instead of an outside expert introduces too much variability in how environmental Listeria controls are evaluated across different ripening rooms.",
+      "proposedChange": "Mandate that at least one of the two reviewers be an external food safety professional.",
+      "response": "The committee rejects this proposal. The dual peer review option provides a practical and rigorous mechanism for members while maintaining appropriate oversight of raw-milk aging protocols."
+    },
+    "std-101-2.0-r1:2266EC81-CDCD-5C2D-A2DC-4362538F26CF:0": {
+      "reference": "§3",
+      "comment": "Requiring the first validation to be completed within a year places a heavy burden on smaller operations like Vandermolen Farmstead Creamery. Securing an outside expert or scheduling peers within twelve months disrupts our active production cycles.",
+      "proposedChange": "Extend the deadline for the initial written protocol validation to eighteen months from the date of publication.",
+      "response": "The committee recognizes the scheduling pressures placed on smaller producers during the initial rollout. While we are not extending the timeline to eighteen months, we have added a provision allowing a six-month grace period upon formal request to the committee."
+    },
+    "std-101-2.0-r1:4106750C-D56C-5D58-8CDC-7EEB71D80612:0": {
+      "reference": "§3",
+      "comment": "Allowing peer reviewers from an ICF list without any explicit conflict-of-interest exclusion leaves the validation process open to bias. Reviewers who have commercial ties to the producer should be barred from signing off on the aging protocol.",
+      "proposedChange": "Add: Peer reviewers must not have any financial or commercial relationship with the producer whose protocol they are reviewing.",
+      "response": "The committee agrees that impartiality is essential for credible peer reviews. The text is amended to explicitly bar peer reviewers with commercial ties to the evaluated producer."
+    },
+    "std-101-2.0-r1:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:0": {
+      "reference": "§3",
+      "comment": "The current draft lacks a clear definition of what constitutes a valid protocol document. Producers need a defined template or minimum content checklist to ensure consistency before submission.",
+      "proposedChange": "Add: The written protocol must include temperature logs, humidity controls, and pathogen testing schedules.",
+      "response": "The committee agrees and will incorporate a standardized minimum content outline for the written protocol to ensure all submissions meet baseline safety and documentation expectations."
+    },
+    "std-101-2.0-r1:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:0": {
+      "reference": "§3",
+      "comment": "Relying on peer reviewers from an ICF list does not go far enough. Retailers need assurance that all validators hold formal food safety accreditations rather than just peer status.",
+      "proposedChange": "Require all peer reviewers to hold an accredited food safety certification alongside their ICF membership.",
+      "response": "The committee rejects this change because peer reviewers are chosen for their practical expertise in raw-milk aging rather than mandatory third-party auditing credentials, which would add excessive cost."
+    },
+    "std-101-2.0-r1:6B4BF43A-4C16-5DAD-9EA3-F3EDB4093873:0": {
+      "reference": "§3",
+      "comment": "As an educator, I see that members are confused about where to find the official ICF list of peer reviewers. Without a referenced location, trainees and small producers will struggle to comply with this standard.",
+      "proposedChange": "Add: The ICF list of qualified peer reviewers shall be maintained and published on the official member portal.",
+      "response": "The committee accepts this in principle and will ensure that instructions for accessing the ICF peer reviewer roster are clearly published in the guidance notes accompanying the standard."
+    },
+    "std-101-2.0-r1:76CCF685-6B52-574A-A0A7-A66CBF4AF2EA:0": {
+      "reference": "§3",
+      "comment": "Teaching raw-milk cheese aging principles at Aspenholt Farm requires absolute clarity on who qualifies as an outside expert versus a peer reviewer. The current draft blurs the qualifications and leaves too much room for subjective interpretation.",
+      "proposedChange": "Define an outside expert as a certified dairy scientist or food safety auditor with at least five years of commercial raw-milk aging experience.",
+      "response": "The committee acknowledges the need for precise definitions in educational settings. We have incorporated specific credentialing guidelines for outside experts, specifying relevant professional experience in dairy science to guide members and educators properly."
+    },
+    "std-101-2.0-r1:AC73CCD5-783B-5A03-9A6B-3A974B40201B:0": {
+      "reference": "§3",
+      "comment": "At Pippinvale Farm we worry that the peer review route lacks any explicit conflict-of-interest safeguard. Two peers from the ICF list could easily be business partners or trade rivals, which compromises the integrity of our aging protocol validation.",
+      "proposedChange": "Add a sentence requiring peer reviewers to sign a conflict-of-interest declaration stating they have no financial ties to the evaluated creamery.",
+      "response": "The committee agrees that impartiality must be guaranteed for all peer reviewers. We have accepted the principle of this objection and added a mandatory conflict-of-interest disclosure requirement for all peers on the ICF list, ensuring unbiased reviews before validation is finalized."
+    },
+    "std-101-2.0-r1:CCC015AC-1247-5EA6-A662-FBE02C930AFA:0": {
+      "reference": "§3, second sentence",
+      "comment": "The reference to the ICF list is helpful, but the wording can be smoothed out to make the review pathway easier to read for busy creamery staff.",
+      "proposedChange": "Change reviewed every three years by an outside expert or by two peer reviewers from an ICF list to reviewed triennially by an outside expert or two qualified ICF peer reviewers.",
+      "response": "The committee accepts the proposed wording change as it enhances readability without altering the underlying technical requirements of the review process."
+    },
+    "std-101-2.0-r1:CCFA1913-AF56-545A-B63A-3916FFA4318B:0": {
+      "reference": "§3",
+      "comment": "At Crowfeather Creamery, we find the three-year review cycle too rigid given seasonal batch variations. A fixed triennial review does not account for temporary cave renovations or milk supply shifts that happen naturally.",
+      "proposedChange": "Change triennial review to every three years or upon any major structural modification to the aging facility.",
+      "response": "The committee has addressed this concern by adding language that clarifies reviews may also be triggered by significant facility modifications, aligning the schedule with practical operational realities."
+    },
+    "std-101-2.0-r1:DBE0287D-6ABA-59B0-A251-C6F2B6049265:0": {
+      "reference": "§3, first sentence",
+      "comment": "The section heading and opening sentence are slightly disconnected regarding the distinction between initial validation and subsequent reviews. Adding a hyphen to the term written protocol improves clarity.",
+      "proposedChange": "Change written protocol to formally documented protocol.",
+      "response": "The committee accepts the editorial correction to improve clarity and maintain consistent terminology throughout the document."
+    },
+    "std-101-2.0-r1:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:0": {
+      "reference": "§3",
+      "comment": "Requiring the first validation to be completed within a year places an undue financial and administrative burden on small-scale affineurs like Herrera Farmstead. We need a longer transition period to arrange outside experts without disrupting our aging schedules.",
+      "proposedChange": null,
+      "response": "The committee recognizes the tight timeline for existing producers. The implementation window for the initial validation is extended to two years to allow adequate preparation."
+    },
+    "std-101-2.0-r1:FBB1722E-F036-5279-BD6C-F190A5CCFACA:0": {
+      "reference": "§3",
+      "comment": "The requirement for an outside expert every three years will disproportionately penalize small artisan producers due to high consultant fees and travel expenses.",
+      "proposedChange": "Exempt producers aging fewer than five thousand wheels annually from the outside expert requirement.",
+      "response": "The committee declines the exemption because safety validation standards must apply consistently to raw-milk cheese aging regardless of production volume to protect public health."
+    },
+    "std-101-2.0-r1:FD8E23C5-F87D-556B-B4CA-7BE84D796277:0": {
+      "reference": "§3",
+      "comment": "As a retailer receiving cheese from various producers, Wrenfield Creamery relies on consistent documentation. The three-year review cycle is sensible, but the text fails to state how retailers or inspectors can verify that the protocol was actually reviewed.",
+      "proposedChange": "Require creamery operators to display a validation stamp or date on their batch documentation indicating the last peer review or expert check.",
+      "response": "The committee agrees that traceability and verification are essential for market confidence. We have accepted the proposal to require a visible validation date and reviewer identifier on all protocol summary records kept for inspection."
+    },
+    "std-101-2.0-r2:2266EC81-CDCD-5C2D-A2DC-4362538F26CF:0": {
+      "reference": "§3, fourth paragraph",
+      "comment": "Representing Vandermolen Farmstead Creamery, I am concerned that allowing one validation to cover close variants is too vague without defining specific moisture and pH thresholds, which leaves too much room for subjective interpretation by peer reviewers during audits.",
+      "proposedChange": "Insert specific criteria stating that close variants must remain within plus or minus 2 percent moisture and 0.15 pH of the master protocol.",
+      "response": "The committee accepts the technical critique regarding vague variant definitions. We have incorporated explicit quantitative thresholds for moisture and pH to ensure consistent evaluation by peer reviewers across all certified facilities."
+    },
+    "std-101-2.0-r2:4106750C-D56C-5D58-8CDC-7EEB71D80612:0": {
+      "reference": "§3, third paragraph",
+      "comment": "As a retailer, I support the conflict-of-interest rules for peer reviewers added in this revision. However, the cross-reference pointing to the definitions section uses an incorrect paragraph number, which could cause confusion when auditing supplier documentation.",
+      "proposedChange": "Update the cross-reference from section 1.4 to section 1.5.",
+      "response": "The committee accepts this editorial correction. The cross-reference to the definitions section has been verified and updated to reference section 1.5 as requested."
+    },
+    "std-101-2.0-r2:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:0": {
+      "reference": "§3",
+      "comment": "Speaking as counter lead at Ostergaard's Cheese Shop, giving producers two years is fine, but import requirements and foreign compliance timelines still do not align smoothly with this schedule, creating unnecessary administrative friction for imported raw-milk artisan cheeses coming onto our retail shelves.",
+      "proposedChange": null,
+      "response": "The committee rejects this general comment. The code addresses domestic and international raw-milk aging practices under standard validation frameworks and cannot alter external import regulations or foreign compliance schedules outside its direct scope."
+    },
+    "std-101-2.0-r2:CCFA1913-AF56-545A-B63A-3916FFA4318B:0": {
+      "reference": "§3, second paragraph",
+      "comment": "As head cheesemaker at Crowfeather Creamery, I find the two-year period to validate our first protocol helpful, but the text fails to specify if minor moisture adjustments during affinage require restarting the entire two-year clock. We need explicit wording protecting standard adjustments.",
+      "proposedChange": "Add a sentence stating that standard moisture adjustments during ongoing aging do not restart the two-year validation window.",
+      "response": "The committee notes the concern regarding routine moisture adjustments during aging. While the exact proposed wording is adjusted for drafting style, we have inserted clarifying text ensuring that standard adjustments during affinage do not trigger a reset of the two-year validation period."
+    },
+    "std-101-2.0-r2:DBE0287D-6ABA-59B0-A251-C6F2B6049265:0": {
+      "reference": "§3, first paragraph",
+      "comment": "At Quillbrook Dairy Institute, we welcome the two-year validation window, but the wording about close variants contains a dangling hyphen in the compound adjective 'close-variant'. Fixing this minor typographical error will ensure clear reading across all of our production rooms during daily shifts.",
+      "proposedChange": "Change 'close variants' to 'close-variant cheese styles'.",
+      "response": "The committee agrees that editorial precision aids clarity. The text has been updated to use the hyphenated form 'close-variant' as suggested by the production lead."
+    },
+    "std-101-2.0:067065F5-7F1C-57F1-A0F8-92D707C25B7D:2": {
+      "reference": "§3",
+      "comment": "As a cheese program director at Hazelcombe Cheesemonger, I support the requirement for validated aging protocols in §3, but the section needs a clear definition of what constitutes an acceptable outside expert to guide retailers and producers when selecting reviewers.",
+      "proposedChange": "Add a descriptive sentence in §3 defining an outside expert as an independent food scientist or professional affineur with at least five years of raw-milk experience.",
+      "response": "The committee accepts the comment. Section 3 has been updated to include a clear definition specifying the professional background and experience required for outside experts reviewing aging protocols."
+    },
+    "std-101-2.0:072EC674-2A47-5F88-8AD1-9D487E298397:3": {
+      "reference": "§4",
+      "comment": "As a food safety consultant advising Fernholt Dairy, I suggest clarifying the term temperature excursion in the release checks clause so producers know exactly what degree threshold triggers testing. A precise definition avoids confusion during audits and ensures consistent safety verification across all batches.",
+      "proposedChange": "Define temperature excursion in §4 as any deviation exceeding 40 degrees Fahrenheit for more than four continuous hours.",
+      "response": "The committee agrees that defining temperature excursion provides clarity for producers. We have updated §4 to include the suggested threshold for continuous deviation, ensuring consistent application of the release check protocol across all member operations."
+    },
+    "std-101-2.0:238F296A-96BC-5E37-AB6D-6BC00D3EE9BF:2": {
+      "reference": "§3",
+      "comment": "At Thistlemere Dairy Systems, the three-year outside review requirement does not account for micro-creameries that lack external advisory budgets. We need a provision for peer evaluation groups.",
+      "proposedChange": "Insert: or a certified peer review committee recognized by the ICF after each three-year cycle.",
+      "response": "The committee accepts this proposal. Recognizing ICF-recognized peer review committees provides a practical, community-driven pathway for compliance without compromising technical oversight."
+    },
+    "std-101-2.0:38462C1A-999E-520E-BE56-FA3FD1B9C162:2": {
+      "reference": "§3",
+      "comment": "Operating as an affineur in Portugal, I believe the three-year outside review cycle in §3 fails to account for traditional multi-generational caves where aging dynamics remain perfectly stable over decades. A rigid triennial review mandate disregards proven historical practices.",
+      "proposedChange": "Amend §3 to exempt traditional aging facilities with more than twenty years of documented compliance from the triennial outside review requirement.",
+      "response": "The committee accepts the principle that long-standing facilities demonstrate stability. We have revised §3 to allow facilities with over twenty years of documented compliance to undergo outside expert review every five years instead of three."
+    },
+    "std-101-2.0:4106750C-D56C-5D58-8CDC-7EEB71D80612:0": {
+      "reference": "§1",
+      "comment": "The addition of washed-curd and stretched-curd styles is a wonderful update that helps retailers classify inventory properly. The section is clear, but a small typo fix in the punctuation will make it cleaner.",
+      "proposedChange": "Remove the trailing semicolon after stretched-curd styles and replace with a period.",
+      "response": "The committee accepts this editorial correction. Punctuation has been updated for consistency across all definitions in the scope."
+    },
+    "std-101-2.0:4106750C-D56C-5D58-8CDC-7EEB71D80612:2": {
+      "reference": "§3",
+      "comment": "Retailers rely on consistent aging standards, but forcing small makers into costly third-party audits every three years will shrink product diversity. We should allow alternative verification methods.",
+      "proposedChange": "Amend to permit peer review or accredited internal audits in lieu of outside expert review.",
+      "response": "The committee accepts this in principle. The revised draft will accommodate peer review options and technical guidance developed during chapter meet-ups, addressing cost concerns while maintaining safety."
+    },
+    "std-101-2.0:52C28E21-26ED-505E-8B9A-D2BDE568A26F:1": {
+      "reference": "§2",
+      "comment": "At Rushfen Cheese & Provisions, the inclusion of washed-curd and stretched-curd styles is a great addition, but the cross-reference to ICF-STD-102 lacks specific subsection pointers. Adding the precise subsection will save our team time when cross-checking our record-keeping compliance during internal audits.",
+      "proposedChange": "Update the cross-reference in §2 to point specifically to subsection 3 of ICF-STD-102.",
+      "response": "The committee accepts the comment. The cross-reference in §2 has been updated to point directly to subsection 3 of ICF-STD-102 for improved clarity and ease of navigation during audits."
+    },
+    "std-101-2.0:52C28E21-26ED-505E-8B9A-D2BDE568A26F:2": {
+      "reference": "§3",
+      "comment": "As creamery manager at Rushfen Cheese & Provisions, I find the minimum aging requirement of 60 days at 35 degrees Fahrenheit or above should explicitly mention that it aligns with the federal floor, to prevent any confusion among inspectors regarding state versus federal jurisdictions.",
+      "proposedChange": "Insert text into §3 noting that the 60-day minimum aging period aligns fully with the federal floor for raw-milk cheeses.",
+      "response": "The committee recognizes the importance of regulatory clarity. Although the text of §3 remains unchanged regarding the 60-day minimum, the accompanying guidelines will now explicitly note alignment with the federal floor to assist inspectors and producers."
+    },
+    "std-101-2.0:52C28E21-26ED-505E-8B9A-D2BDE568A26F:4": {
+      "reference": "§5",
+      "comment": "The hold-and-test requirement in §5 is redundant because our existing quality assurance program already mandates microbiological testing after any significant temperature excursion during the aging process. Adding this mandate without acknowledging existing producer controls creates unnecessary paperwork.",
+      "proposedChange": "Remove the mandatory hold-and-test step in §5 for facilities that maintain an approved HACCP monitoring plan.",
+      "response": "The committee rejects this change. While we recognize that many members maintain robust HACCP plans, a uniform hold-and-test requirement following any temperature excursion is essential to guarantee consumer safety and maintain consistent standards across all raw-milk cheese producers."
+    },
+    "std-101-2.0:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:1": {
+      "reference": "§2",
+      "comment": "At Ostergaard's Cheese Shop in Oamaru, the inclusion of stretched-curd styles in §2 raises classification questions regarding specific regional pasta filata cheeses that do not neatly fit standard definitions. This requires careful alignment with international nomenclature before final adoption.",
+      "proposedChange": "Defer the addition of stretched-curd styles in §2 until a comprehensive international survey of pasta filata definitions is completed.",
+      "response": "The committee has decided to defer this specific comment for consideration in the next revision cycle of the document, as the current definitions for washed-curd and stretched-curd styles were thoroughly vetted and approved by the majority of the ballot pool."
+    },
+    "std-101-2.0:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:2": {
+      "reference": "§3",
+      "comment": "The minimum aging requirement of 60 days at 35 degrees Fahrenheit or above creates severe inventory bottlenecks for specialty retailers and small producers who rely on faster turnover for fresh-tasting raw-milk cheeses. The rule should provide seasonal flexibility for specific styles.",
+      "proposedChange": "Add a provision in §3 allowing reduced aging periods for cheeses demonstrated to be safe through accredited pathogen challenge testing.",
+      "response": "The committee notes the concern regarding inventory turnover, but the 60-day minimum aging requirement is anchored in established safety parameters and the federal floor. However, the committee agrees to include guidance clarifying that challenge studies may be used under §3 for novel protocols."
+    },
+    "std-101-2.0:65D40948-FA0D-5DB6-9F63-6AB60342F182:3": {
+      "reference": "§4",
+      "comment": "At Elderfen Farm, our aging room occasionally records brief ambient spikes when loading fresh wheels. Treating every minor chart deviation as a critical excursion requiring microbiological testing places an unfair burden on small-scale producers who already monitor humidity and core pH rigorously.",
+      "proposedChange": "Clarify that excursions under two hours do not trigger mandatory batch testing if core temperature remains stable.",
+      "response": "The committee rejected the comment because any recorded excursion outside the validated aging parameters warrants verification testing. Core temperature stability alone cannot guarantee surface pathogen suppression without a complete hold-and-test verification."
+    },
+    "std-101-2.0:72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC:4": {
+      "reference": "§5",
+      "comment": "At Rushfen Creamery Cooperative, referencing ICF-STD-102 for our aging records creates administrative duplication since our digital inventory system already captures all required parameters. Replacing the old clauses without offering a streamlined integration path places an unnecessary burden on cooperative members managing multiple production lines.",
+      "proposedChange": "Add an exemption clause in §5 allowing validated digital ERP systems to serve in place of standard ICF-STD-102 record forms.",
+      "response": "The committee acknowledges the administrative burden on cooperatives utilizing digital systems. While §5 maintains the reference to ICF-STD-102 for uniformity, we have added a clarifying note permitting equivalent electronic logs that meet the data capture requirements of the referenced standard."
+    },
+    "std-101-2.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:2": {
+      "reference": "§3",
+      "comment": "Mandating an outside expert review every three years imposes a severe financial burden on farmstead producers and smaller regional creameries. Many craft makers operate on tight margins and cannot easily absorb third-party consulting fees without raising retail prices significantly across our distribution network.",
+      "proposedChange": "Replace the mandatory outside expert review with a qualified peer review option every three years.",
+      "response": "The committee accepted the comment in principle. While independent validation remains necessary, the requirement will be revised to allow qualified peer review panels alongside outside experts to ease the financial burden on small producers."
+    },
+    "std-101-2.0:75F3B7F3-5CE6-5E42-9EE3-76A40068B633:1": {
+      "reference": "§2",
+      "comment": "Our creamery operates in a climate where ambient seasonal shifts make maintaining 35°F (1.7°C) challenging without substantial capital upgrades. We need to align this with regional variances permitted under the federal floor.",
+      "proposedChange": "Insert a tolerance of plus or minus 2 degrees Fahrenheit for aging room minimum temperature limits.",
+      "response": "The committee deferred the comment for future study by the technical subcommittee, noting that aging temperature minimums are critical for pathogen inhibition and cannot be adjusted without safety review."
+    },
+    "std-101-2.0:75F3B7F3-5CE6-5E42-9EE3-76A40068B633:2": {
+      "reference": "§3",
+      "comment": "The requirement for written validation protocols and outside expert review imposes an administrative load that diverts our limited creamery staff away from cheese production. Smaller operations should be entirely exempt.",
+      "proposedChange": "Exempt all production facilities processing under fifty thousand liters annually from the outside expert review requirement.",
+      "response": "The committee rejected the comment because food safety validation is essential for all raw-milk cheeses regardless of production volume, though accommodations for peer review have been introduced elsewhere."
+    },
+    "std-101-2.0:772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8:2": {
+      "reference": "§3",
+      "comment": "At Pippinvale Dairy Institute, requiring an outside expert review every three years imposes a rigid burden that ignores internal validation competency. We need to allow peer review or qualified internal quality teams to satisfy this clause.",
+      "proposedChange": "Replace outside expert with qualified peer review or internal quality validation every three years.",
+      "response": "The committee accepts this proposal. Allowing qualified peer review alongside outside experts provides sufficient rigor for validating aging protocols while easing the financial burden on smaller member producers."
+    },
+    "std-101-2.0:856688F8-C895-5E8E-91F2-CDF18AA68503:2": {
+      "reference": "§3",
+      "comment": "Requiring an outside expert to review aging protocols every three years imposes an unreasonable financial burden on small-scale producers like us in Ithaca. Peer review by qualified cheesemakers within our ICF chapter should be permitted as a cost-effective and rigorous alternative to expensive commercial consultants.",
+      "proposedChange": "Revise §3 to allow a qualified peer review committee from the local ICF chapter to fulfill the three-year validation requirement.",
+      "response": "The committee accepts the proposal. Section 3 has been revised to permit qualified peer review by trained members of an ICF chapter, reducing costs for smaller makers while maintaining rigorous scientific oversight of aging protocols."
+    },
+    "std-101-2.0:8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22:2": {
+      "reference": "§3.1",
+      "comment": "As a retail manager receiving raw-milk cheeses from various makers, I appreciate having standardized protocols to review. However, the cross-reference to the outside expert review lacks a specific section number, which makes verifying compliance cumbersome during our intake audits. Adding the proper subsection reference will clarify this obligation.",
+      "proposedChange": "Change the reference to read as §3.2 for outside expert review requirements.",
+      "response": "The committee accepted the comment because clarifying cross-references assists supply chain transparency and retail intake verification. The draft will be updated to include the exact subsection pointer before recirculation."
+    },
+    "std-101-2.0:8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22:3": {
+      "reference": "§4",
+      "comment": "The requirement to hold and test any batch experiencing a temperature excursion is too rigid for retail distribution centers. Minor fluctuations during transport or short display case cycles do not necessarily compromise raw-milk safety, and mandatory testing for every minor blip will disrupt our inventory flow and increase costs unnecessarily.",
+      "proposedChange": "Limit the hold-and-test requirement to temperature excursions exceeding four hours cumulative duration.",
+      "response": "The committee rejected the comment because temperature excursions directly impact pathogen control during raw-milk cheese aging. Maintaining strict hold-and-test triggers is essential for consumer safety, regardless of distribution scale."
+    },
+    "std-101-2.0:958B1085-3310-588F-AAC0-31AA558B19D5:2": {
+      "reference": "§3",
+      "comment": "The mandate for outside expert review every three years is too restrictive for small producers who operate on tight margins. Peer review should be explicitly accepted as an equivalent mechanism.",
+      "proposedChange": "Change outside expert every three years to outside expert or peer review group every three years.",
+      "response": "The committee accepts this in principle. The text will be revised to permit peer reviews conducted under ICF guidelines, balancing affordability with rigorous technical oversight."
+    },
+    "std-101-2.0:965ED95C-59D7-55DE-AA49-FCC9041BC734:0": {
+      "reference": "§1",
+      "comment": "At Cindervale Fine Cheese, we find the inclusion of stretched-curd raw-milk styles creates ambiguity regarding moisture levels and pathogen persistence during aging. The scope should restrict these styles until further data is published.",
+      "proposedChange": "Remove stretched-curd styles from the scope until additional pathogen validation studies are completed by the technical committee.",
+      "response": "The committee rejected the comment because stretched-curd raw-milk cheeses have a long history of safe production and are adequately covered by the validation protocols in §3 and release checks in §4."
+    },
+    "std-101-2.0:976770B1-F266-55ED-94DB-0D2C9A3BBD7C:2": {
+      "reference": "§3, second paragraph",
+      "comment": "The text outlining the validation frequency could be improved for better readability. Using bullet points for the review intervals and documentation steps would help producers understand their obligations at a glance.",
+      "proposedChange": "Reformat the second paragraph of §3 into a bulleted list outlining the three-year validation cycle and documentation requirements.",
+      "response": "The committee accepted the editorial suggestion to format the review intervals as a bulleted list, enhancing readability and ease of compliance for all member producers."
+    },
+    "std-101-2.0:A7494213-EBF3-5A89-8197-86572EE6B8F4:0": {
+      "reference": "§1",
+      "comment": "As a retailer, I support including washed and stretched curd styles. However, the cross-reference to ICF-STD-102 should explicitly mention that it covers record retention periods so that buyers andmongers know what to look for when auditing suppliers.",
+      "proposedChange": "Change the reference to read: points to ICF-STD-102 for records and retention schedules.",
+      "response": "The committee accepts the spirit of this comment in part. While we agree clarity is helpful, explicitly adding retention schedules here duplicates the scope of ICF-STD-102. We have adjusted the wording slightly to ensure seamless cross-referencing without redundancy."
+    },
+    "std-101-2.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:2": {
+      "reference": "§3",
+      "comment": "At Pippinvale Farm, we find the phrasing regarding validation protocols slightly ambiguous. We should ensure the text specifically notes that protocols must account for seasonal milk variations during the aging lifecycle.",
+      "proposedChange": "Add the phrase accounting for seasonal milk variations to the first sentence.",
+      "response": "The committee accepts this proposal. Incorporating seasonal variations strengthens the validation requirement and aligns with best practices discussed at recent ICF webinars."
+    },
+    "std-101-2.0:B2A26737-D6CB-5149-8848-01C2954C376E:1": {
+      "reference": "§2",
+      "comment": "The current wording specifies 35°F (1.7°C) or above, which is clear, but adding an explicit note regarding freezing prevention would help new herd managers operating cold aging rooms.",
+      "proposedChange": "Add a brief advisory note: 'Care must be taken to prevent freezing of the cheese matrix during aging.'",
+      "response": "The committee accepted the addition as a helpful practical clarification for cheese producers managing cold-room setpoints."
+    },
+    "std-101-2.0:B2A26737-D6CB-5149-8848-01C2954C376E:3": {
+      "reference": "§4",
+      "comment": "At Pinebarrow Creamery, holding an entire batch due to a minor, brief temperature fluctuation on a single sensor is overly punitive and ignores the thermal mass of large wheels. We need a risk-based waiver for brief spikes.",
+      "proposedChange": "Add an exemption clause for temperature spikes lasting less than sixty minutes if core cheese temperature remains within safe limits.",
+      "response": "The committee deferred this comment to the next revision cycle, noting that further technical study is required before creating exemptions to mandatory hold-and-test rules."
+    },
+    "std-101-2.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:0": {
+      "reference": "§1",
+      "comment": "The expanded scope mentioning washed-curd and stretched-curd styles creates a pedagogical mismatch with our training materials taught in association courses. We need a clearer demarcation of moisture thresholds in the definitions so educators can properly instruct students on raw-milk aging classifications.",
+      "proposedChange": "Incorporate specific moisture percentage ranges for washed-curd and stretched-curd styles directly into the definitions paragraph.",
+      "response": "The committee rejected the comment because exact moisture thresholds vary widely across traditional styles and are better addressed in guidance documents rather than the core standard's scope definitions."
+    },
+    "std-101-2.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:2": {
+      "reference": "§3",
+      "comment": "Requiring an outside expert review every three years places an undue financial burden on our smaller artisan cheesemakers and member facilities. We should permit a structured peer-review option or extend the cycle for smaller producers to ensure participation without compromising our safety goals.",
+      "proposedChange": "Amend §3 to allow a qualified peer-review process conducted by trained ICF members every three years as an alternative to commercial outside experts.",
+      "response": "The committee accepted the comment because smaller producers raised valid cost concerns during the ballot. Section 3 is revised to permit documented peer review by qualified ICF members every three years for facilities producing under a set volume."
+    },
+    "std-101-2.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:3": {
+      "reference": "§4",
+      "comment": "To maintain clarity when training staff and auditing aging facilities, we should explicitly cross-reference the exact section on temperature logs in ICF-STD-102 so there is no confusion.",
+      "proposedChange": "Add the phrase 'referencing ICF-STD-102 for log requirements' at the end of the paragraph.",
+      "response": "The committee accepted the editorial correction to improve cross-document clarity and alignment with the new records standard."
+    },
+    "std-101-2.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:4": {
+      "reference": "§5",
+      "comment": "The pointer to ICF-STD-102 is clear, but we should add a direct mention of the retention period for digital logs to assist educators and students using this code.",
+      "proposedChange": "Insert 'including digital and paper logs retained for five years' into the sentence.",
+      "response": "The committee rejected this change because specific retention periods and formats are fully detailed in ICF-STD-102, and repeating them here would create redundancy."
+    },
+    "std-101-2.0:CCFA1913-AF56-545A-B63A-3916FFA4318B:3": {
+      "reference": "§4, second paragraph",
+      "comment": "At Crowfeather Creamery, we appreciate the hold-and-test requirement for temperature excursions. However, the term excursion needs a clearer threshold so we know exactly which degree variance triggers the mandatory hold.",
+      "proposedChange": "Clarify 'temperature excursion' to mean any recorded reading exceeding 45°F (7.2°C) for more than two consecutive hours.",
+      "response": "The committee accepted the proposed change to define the temperature excursion threshold clearly, ensuring consistent application across all aging facilities."
+    },
+    "std-101-2.0:DBE0287D-6ABA-59B0-A251-C6F2B6049265:2": {
+      "reference": "§3",
+      "comment": "Mandating external validation reviews every three years will force Quillbrook Dairy Institute to redirect critical capital away from our caves and make operations unnecessarily expensive for craft producers.",
+      "proposedChange": null,
+      "response": "The committee rejects this general comment because independent validation is essential to consumer safety and public trust in raw-milk cheeses. The cost is outweighed by the risk reduction for the sector."
+    },
+    "std-101-2.0:DBE0287D-6ABA-59B0-A251-C6F2B6049265:4": {
+      "reference": "§5",
+      "comment": "Replacing the old record clauses with a clean reference to ICF-STD-102 is great for readability, but we should make sure the section heading clearly indicates that aging records are governed externally by that document.",
+      "proposedChange": "Change heading to read: §5 Aging records (see ICF-STD-102).",
+      "response": "The committee accepts this editorial change. Adding the parenthetical note to the heading improves navigation and immediately directs members to the correct standard."
+    },
+    "std-101-2.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:2": {
+      "reference": "§3",
+      "comment": "As a cheese buyer, I rely on rigorous independent oversight. Allowing peer reviews instead of outside experts for validated aging protocols would weaken consumer confidence and undermine the integrity of raw-milk safety standards.",
+      "proposedChange": "Modify §3 to explicitly restrict validation reviews exclusively to certified commercial outside experts, removing any language permitting peer review.",
+      "response": "The committee rejected this comment because the revised §3 balances expert oversight with a peer-review option to accommodate the diverse operational scales of our membership while maintaining strict safety validation."
+    },
+    "std-101-2.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:2": {
+      "reference": "§3",
+      "comment": "As an affineur working with diverse raw-milk batches, I find the triennial outside review requirement overly prescriptive and costly for small ripening rooms. Allowing alternative validation pathways, such as peer review or documented historical pathogen reduction data, would better serve our community without sacrificing food safety standards.",
+      "proposedChange": "Amend §3 to permit peer review or historical batch safety data as acceptable equivalents to outside expert review.",
+      "response": "The committee accepted the comment because incorporating peer review and documented historical safety data offers a practical alternative while maintaining rigorous oversight of raw-milk aging protocols."
+    },
+    "std-101-2.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:3": {
+      "reference": "§4, first paragraph",
+      "comment": "The release check clause is generally sound, but the terminology referring to temperature excursions could be more precise to align with standard data logger outputs. Specifying that the log must reflect continuous monitoring will prevent ambiguity during audits.",
+      "proposedChange": "Insert the word continuous before monitoring in the first sentence of §4.",
+      "response": "The committee accepted the editorial change to improve clarity regarding data logger requirements and ensure consistent interpretation across all certified aging facilities."
+    },
+    "std-101-2.0:FBB1722E-F036-5279-BD6C-F190A5CCFACA:0": {
+      "reference": "§1",
+      "comment": "At Larkhollow Dairy Systems, we welcome the expanded scope. To ensure complete clarity for producers transitioning to these new styles, we should add a brief clarifying phrase.",
+      "proposedChange": "Insert including traditional formats after stretched-curd styles in the first sentence.",
+      "response": "The committee accepts this proposal. The added phrase clarifies the intended scope for washed-curd and stretched-curd cheeses without changing the core definition."
+    },
+    "std-101-2.0:FBB1722E-F036-5279-BD6C-F190A5CCFACA:1": {
+      "reference": "§2",
+      "comment": "As an owner at Larkhollow Dairy Systems, I welcome the added clarity on washed-curd and stretched-curd styles. However, the cross-reference to ICF-STD-102 for records uses an outdated section numbering style. We should fix this typo before final publication to ensure clear guidance for all members.",
+      "proposedChange": "Update the cross-reference to read ICF-STD-102 Section 4 for records.",
+      "response": "The committee agrees with the commenter that the cross-reference needed correction for clarity and ease of use. The text has been updated to cite ICF-STD-102 Section 4 directly as proposed."
+    },
+    "std-101-2.0:FD8E23C5-F87D-556B-B4CA-7BE84D796277:1": {
+      "reference": "§2",
+      "comment": "The inclusion of washed-curd and stretched-curd styles in the scope is a welcome update for mongers handling diverse inventories. However, the wording should explicitly mention that these styles remain subject to the baseline aging timeframe to avoid any confusion among importers.",
+      "proposedChange": "Add a clarifying sentence stating that all newly included styles are subject to the minimum aging requirements in §2.",
+      "response": "The committee accepted the comment in principle. Rather than adding a duplicate restriction in §1, the committee will cross-reference §2 directly within the scope definitions to ensure absolute clarity."
+    },
+    "std-101-2.0:FD8E23C5-F87D-556B-B4CA-7BE84D796277:2": {
+      "reference": "§3",
+      "comment": "The proposed requirement for outside expert review every three years introduces unnecessary administrative overhead and increases costs for imported raw-milk selections. Retailers rely on steady producer output, and overly complex validation hurdles risk reducing the availability of traditional cheeses.",
+      "proposedChange": "Delete the requirement for outside expert review and rely solely on the federal floor for aging safety.",
+      "response": "The committee rejected the comment because relying solely on the federal floor does not fulfill the association's commitment to self-regulation and validated aging protocols for raw-milk cheeses."
+    },
+    "std-102-1.0:2980EAB2-2260-5C34-9828-158B1EE2C44D:1": {
+      "reference": "§2",
+      "comment": "In our educational programming, we teach producers that two years of record retention following the final sale of a batch aligns well with standard commercial shelf-life expectations for aged cheeses. However, for short-aged fresh cheeses sold within days, holding records for two full years creates excessive storage overhead. A tiered retention schedule based on cheese category would better serve our membership.",
+      "proposedChange": "Revise §2 to specify a one-year retention for fresh cheeses and two years for aged cheeses sold after sixty days.",
+      "response": "The committee accepted the comment in principle. A future guidance document will address tiered retention periods for fresh versus aged varieties, but the current two-year baseline remains appropriate for universal safety coverage across all standardized product types."
+    },
+    "std-102-1.0:62608AFC-06B4-5753-B0D3-688E1C720DFB:2": {
+      "reference": "§3",
+      "comment": "The wording in §3 is clear and concise regarding outsourced aging relationships. To ensure better grammatical flow between clauses, a minor comma adjustment will help members parse the responsibility between the affineur and the original maker.",
+      "proposedChange": "Insert a comma in §3 after the word member so it reads: When an affineur or another member ages the cheese, the maker keeps a copy of the aging log for each batch.",
+      "response": "The committee accepted the comment. The comma is added to improve sentence structure and clarity for readers navigating outsourced aging requirements."
+    },
+    "std-102-1.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:2": {
+      "reference": "§3",
+      "comment": "As a retailer receiving cheese from various collaborative aging programs, having clarity that the maker holds the master aging log copy provides great assurance. Capitalizing the term affineur is unnecessary and should be changed to lower case for consistency with the rest of the drafting style.",
+      "proposedChange": "Change 'affineur' to lowercase in §3.",
+      "response": "The committee accepted the comment. The capitalization is corrected to maintain consistent stylistic standards throughout the document."
+    },
+    "std-102-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:1": {
+      "reference": "§2",
+      "comment": "Reviewing §2 from a quality systems perspective, the phrase 'on paper or electronically' is clear, but adding 'format' immediately after helps align with standard document control terminology used across our manufacturing membership.",
+      "proposedChange": "Amend §2 to read: on paper format or electronically.",
+      "response": "The committee accepted the comment. The addition of the word format improves readability and aligns the section with standard industry documentation terminology."
+    },
+    "std-102-1.0:965ED95C-59D7-55DE-AA49-FCC9041BC734:2": {
+      "reference": "§3",
+      "comment": "At Cindervale Fine Cheese, we frequently purchase batches that have been aged externally by independent affineurs. While we understand the intent to trace history, requiring the original maker to hold copies of every external aging log creates an impossible logistical burden when dealing with artisan facilities that lack integrated software. The third-party affineur should hold sole responsibility for their specific aging records without requiring duplicate copies to be sent back to the primary producer.",
+      "proposedChange": "Amend §3 to state that the affineur keeps the log and makes it available to the maker upon request.",
+      "response": "The committee rejected the comment. Keeping a copy of the aging log at the maker's facility is essential for complete batch traceability from milk source to release. Relying solely on external parties leaves makers vulnerable if an affineur ceases operations or misplaces records during extended maturation cycles."
+    },
+    "std-102-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:0": {
+      "reference": "§1",
+      "comment": "At Nornbrook Cheesemonger, our make sheets capture multiple milk silos and varying culture inoculations across a single production day. Listing every single milk source and culture lot for blended vats becomes excessively burdensome and clutters our standard tracking cards without adding meaningful safety value. We request that batch documentation allow summarizing complex milk blends and culture rotations under standard master batch identifiers.",
+      "proposedChange": "Change §1 to read: Make date, primary milk source or silo group, active culture lot or blend identifier, salting, each move between rooms, and the release date.",
+      "response": "The committee accepted the comment in principle. While detailed tracking remains vital, the wording is clarified in the next revision to permit master identifiers for blended milk silos and culture rotations, ensuring members maintain traceability without administrative overreach."
+    },
+    "std-102-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:1": {
+      "reference": "§2",
+      "comment": "As a producer, I appreciate the flexibility of retaining records either on paper or through electronic formats. However, specifying that records must be kept for at least two years after the last wheel is sold should explicitly clarify that digital scans of paper logs satisfy this requirement to prevent local auditors from demanding original physical sheets.",
+      "proposedChange": "Clarify §2 by adding: electronic formats include scanned physical logs and verified database entries.",
+      "response": "The committee accepted the comment. The text is updated to explicitly note that scanned physical logs and database entries fully satisfy the electronic retention format option."
+    },
+    "std-102-1.1:067065F5-7F1C-57F1-A0F8-92D707C25B7D:0": {
+      "reference": "Amendment 1",
+      "comment": "At Hazelcombe Cheesemonger we find that raw data-logger exports are far too messy to serve as reliable aging logs. Sensors glitch and drop packets, leaving gaps that require manual notation. Treating unedited raw dumps as official records creates compliance risks that inspectors will flag immediately during our routine audits.",
+      "proposedChange": "Require all raw data-logger exports to be transcribed and verified by a supervisor before being accepted as valid aging records.",
+      "response": "The committee declines the change. Raw data-logger and sensor exports provide a direct, untampered record of cave conditions. Requiring manual transcription introduces human error and potential record tampering, which is counter to the intent of verifying environmental controls during aging."
+    },
+    "std-102-1.1:072EC674-2A47-5F88-8AD1-9D487E298397:0": {
+      "reference": "Amendment 1",
+      "comment": "As a food safety consultant visiting various producers, I endorse this amendment. I suggest a minor wording polish to clarify that unedited refers specifically to the digital file structure rather than general record housekeeping.",
+      "proposedChange": "Insert digitally before unedited so it reads kept digitally unedited.",
+      "response": "The committee accepts the proposal. Adding the word digitally clarifies that the prohibition on editing applies to the electronic data file generated by the sensor system."
+    },
+    "std-102-1.1:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:0": {
+      "reference": "Amendment 1",
+      "comment": "At Herrera Farmstead, our digital temperature and humidity logs contain thousands of daily entries. Requiring every single exported data point to be printed for inspection creates an excessive paper burden and high printing costs without adding real food safety value.",
+      "proposedChange": "Change can be printed on request to can be summarized in daily or weekly aggregate reports and printed on request.",
+      "response": "The committee recognizes the volume of data generated by continuous loggers. We accept in principle that summaries may be maintained, provided the underlying unedited raw export remains accessible on the system for complete verification during audits."
+    },
+    "std-102-1.1:A7494213-EBF3-5A89-8197-86572EE6B8F4:0": {
+      "reference": "Amendment 1",
+      "comment": "As a head cheesemonger receiving imported wheels, I support this flexible approach to electronic records. To make the sentence flow better for international readers, we should change printed on request to made available in printed form upon request.",
+      "proposedChange": "Replace can be printed on request with can be made available in printed form upon request.",
+      "response": "The committee rejects the requested wording change. The existing phrasing is direct, active, and easily understood by operators and auditors alike without adding unnecessary words."
+    },
+    "std-102-1.1:AC73CCD5-783B-5A03-9A6B-3A974B40201B:0": {
+      "reference": "Amendment 1",
+      "comment": "As herd manager at Pippinvale Farm, I fully support this amendment for modernizing our cave documentation. However, the phrase can be printed on request is slightly ambiguous regarding the required format and time frame. Specifying a PDF or CSV file format and a maximum response time for audits would improve clarity.",
+      "proposedChange": "Change can be printed on request to can be exported as a PDF or CSV and printed within twenty-four hours of an inspector request.",
+      "response": "The committee agrees that clarity on export formats is helpful. While we do not wish to mandate specific file extensions, the text is adjusted to state that exports must be printable in a standard human-readable format upon request."
+    },
+    "std-102-1.1:EA083819-F4F1-5CD5-A43D-2CD309718835:0": {
+      "reference": "Amendment 1",
+      "comment": "This is a sensible update that reflects current dairy operations. To improve readability and ensure consistent application across all ripening facilities, we should replace the word kept with maintained.",
+      "proposedChange": "Replace kept unedited with maintained unedited in the text.",
+      "response": "The committee accepts the editorial change. The word maintained is more precise and aligns better with standard terminology used across other ICF documentation."
+    },
+    "std-103-1.0-r1:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:0": {
+      "reference": "§A2",
+      "comment": "As an educator at Brackenfell Center for Cheese Studies, I find the reference to ICF-STD-101 §3 helpful, but the wording can be streamlined for better readability across our student materials and course handouts.",
+      "proposedChange": "Replace 'recorded in its validated protocol under ICF-STD-101 §3' with 'documented under ICF-STD-101 §3'.",
+      "response": "The committee agrees with the editorial tightening. The phrasing has been updated to improve clarity for training materials."
+    },
+    "std-103-1.0-r1:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:0": {
+      "reference": "§A2",
+      "comment": "At Dubois Farmstead, we welcome the clarification on the 60-day floor, but the phrase 'each maker's reasons' sounds too informal for an official standards document. We should use professional terminology.",
+      "proposedChange": "Replace 'each maker's reasons' with 'the documented rationale of the producer'.",
+      "response": "The committee accepts this change to enhance the formal tone and professional precision of the standard."
+    },
+    "std-103-1.0-r1:7FC09347-424D-5147-981B-C3DC9AB3F0CC:0": {
+      "reference": "§A2",
+      "comment": "The 60-day floor is too restrictive for certain artisanal lactic goat cheeses produced in our region. We should strike the 60-day floor entirely and rely solely on individual validated protocols.",
+      "proposedChange": "Remove the 60-day floor requirement from the text.",
+      "response": "The committee rejects this comment because the 60-day floor is a fundamental baseline required to maintain baseline safety compliance across all member operations."
+    },
+    "std-103-1.0-r1:83F1E1CF-8BDC-59B2-B3D5-E88E914DA670:0": {
+      "reference": "§A2",
+      "comment": "As a supplier operating across multiple regions, making the extended aging period merely recommended creates uneven market expectations. Buyers want uniform requirements, not optional guidelines that vary from creamery to creamery.",
+      "proposedChange": "Make the extended aging period mandatory for all soft and semi-soft sheep and goat cheeses.",
+      "response": "The committee rejects this comment because member practices and regional styles vary widely. A recommendation provides necessary flexibility while maintaining safety through the 60-day floor."
+    },
+    "std-103-1.0-r1:856688F8-C895-5E8E-91F2-CDF18AA68503:0": {
+      "reference": "§A2",
+      "comment": "In our creamery, we appreciate the distinction between the mandatory 60-day floor and the recommended longer aging for soft styles, but the hyphenation in semi-soft needs correction to align with our style guides.",
+      "proposedChange": "Ensure consistent hyphenation for the term semi-soft throughout the paragraph.",
+      "response": "The committee accepts this editorial correction to ensure consistent formatting throughout the standards document."
+    },
+    "std-103-1.0-r1:89542F64-729C-5166-B18A-7C755CB25D08:0": {
+      "reference": "§A2",
+      "comment": "Working at Rushfen Cheese Co., I noticed a minor grammatical ambiguity regarding whether the recommendation applies to the maker or the protocol. A slight restructuring will prevent any confusion during audits.",
+      "proposedChange": "Revise the clause to read: 'with each maker recording its reasons in a validated protocol under ICF-STD-101 §3.'",
+      "response": "The committee accepts this wording adjustment as it clarifies the responsibility of the maker in maintaining the protocol."
+    },
+    "std-103-1.0-r1:9FE55C26-8983-53AA-B517-52BE385CC0F0:0": {
+      "reference": "§A2",
+      "comment": "At Foxcombe Creamery, we support the revised text. However, referencing ICF-STD-101 §3 directly at the end of the sentence feels slightly abrupt. Adding a comma before the cross-reference would improve readability.",
+      "proposedChange": "Add a comma before the cross-reference to ICF-STD-101 §3.",
+      "response": "The committee accepts the spirit of this suggestion and has adjusted the punctuation to improve the flow of the sentence."
+    },
+    "std-103-1.0-r1:A7494213-EBF3-5A89-8197-86572EE6B8F4:0": {
+      "reference": "§A2",
+      "comment": "The text states that the 60-day floor applies, but for many traditional goat cheeses, this arbitrary duration does not reflect true moisture levels and safety parameters. We should allow alternative scientific validations instead of forcing a strict 60-day minimum across all styles.",
+      "proposedChange": "Add an exemption to the 60-day floor for moisture-tested cheeses with a validated scientific safety protocol.",
+      "response": "The committee rejects this comment because the 60-day minimum remains a baseline standard for safety across member states. Altering this fundamental floor is outside the scope of this annex."
+    },
+    "std-103-1.0-r1:DBE0287D-6ABA-59B0-A251-C6F2B6049265:0": {
+      "reference": "§A2",
+      "comment": "Requiring a validated protocol under ICF-STD-101 §3 imposes an undue administrative burden on small educational facilities like ours at Quillbrook Dairy Institute. We lack the staff resources to maintain formal documentation for every experimental batch.",
+      "proposedChange": null,
+      "response": "The committee rejects this comment because documentation under ICF-STD-101 §3 is essential for traceability and safety assurance, and adequate guidance is provided for all production scales."
+    },
+    "std-103-1.0-r1:FD8E23C5-F87D-556B-B4CA-7BE84D796277:0": {
+      "reference": "§A2",
+      "comment": "At Wrenfield Creamery, our retail customers expect clarity on soft sheep and goat cheeses. Leaving the extended aging period merely recommended makes it difficult for mongers to explain variations in maturity. The protocol should explicitly mandate documentation of the aging duration to protect quality.",
+      "proposedChange": "Change the recommendation for soft and semi-soft styles to a mandatory requirement for documented aging periods.",
+      "response": "The committee agrees that clarity is essential for mongers and producers alike. We accept the change to require explicit documentation of the aging duration within the validated protocol."
+    },
+    "std-103-1.0:072EC674-2A47-5F88-8AD1-9D487E298397:1": {
+      "reference": "§A2",
+      "comment": "From a food safety consulting perspective, a blanket 90-day requirement lacks empirical backing for lower-moisture goat cheeses. The federal floor is fully protective when combined with standard pasteurization or moisture controls.",
+      "proposedChange": "Replace the 90-day rule with the 60-day federal floor.",
+      "response": "The committee accepted the principle of the comment, aligning the standard with the federal floor to address safety and seasonal viability concerns raised across the membership."
+    },
+    "std-103-1.0:220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F:0": {
+      "reference": "§A1",
+      "comment": "As a cheese buyer at Orchardmere Cheese Co., I appreciate the simplicity of applying ICF-STD-101. However, the reference could explicitly state the version number of the base standard to avoid any ambiguity during retail distribution audits.",
+      "proposedChange": "Change to: Applies ICF-STD-101 version 2.0 to cheese made from sheep or goat milk.",
+      "response": "The committee notes the writer withdrew the comment after discussing the scope during the chapter meet-up, agreeing that standard numbering conventions already cover base document references."
+    },
+    "std-103-1.0:220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F:1": {
+      "reference": "§A2",
+      "comment": "Requiring 90 days for raw-milk sheep and goat cheese creates unnecessary inventory stagnation for our retail counters without adding proven food safety benefits beyond the 60-day federal floor. We should align with standard aging practices.",
+      "proposedChange": "Replace 90 days with the federal 60-day floor for raw-milk cheese.",
+      "response": "The committee accepted the comment because members agreed the evidence for a 90-day requirement is insufficient and creates severe hardship for short milking seasons. The section will be revised."
+    },
+    "std-103-1.0:220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F:2": {
+      "reference": "§A3",
+      "comment": "Allowing frozen sheep-milk curd is a welcome flexibility for seasonal producers. To ensure complete traceability for retail buyers, we should specify that the freeze date must appear clearly on both the make record and the master inventory log.",
+      "proposedChange": "Amend to require the freeze date in the make record and master inventory log.",
+      "response": "The committee accepted the change to improve inventory traceability for buyers, noting that adding the master inventory log strengthens recordkeeping without burdening producers."
+    },
+    "std-103-1.0:2266EC81-CDCD-5C2D-A2DC-4362538F26CF:2": {
+      "reference": "§A3",
+      "comment": "The section permits frozen sheep-milk curd but would benefit from specifying exactly where the freeze date must be recorded within the make record for better auditability.",
+      "proposedChange": "Specify that the freeze date must be entered prominently in the lot header of the make record.",
+      "response": "The committee accepted the editorial comment, adding clarifying instructions on where to log the freeze date to ensure smooth compliance audits."
+    },
+    "std-103-1.0:38462C1A-999E-520E-BE56-FA3FD1B9C162:0": {
+      "reference": "§A1",
+      "comment": "As an affineur working with diverse batches, applying the base standard to mixed milks is straightforward. However, terminology around mixed species percentages could be slightly tighter.",
+      "proposedChange": "Clarify mixed milks as containing at least twenty percent sheep or goat milk.",
+      "response": "The committee noted the withdrawal of this comment following discussion during the chapter meet-up regarding mixed-milk definitions."
+    },
+    "std-103-1.0:38462C1A-999E-520E-BE56-FA3FD1B9C162:2": {
+      "reference": "§A3",
+      "comment": "Permitting frozen sheep-milk curd is a major change for traditional affineurs. We need more guidance on traceability and moisture loss differences in cheese made from frozen curd before finalizing this clause.",
+      "proposedChange": "Defer this section to allow time for industry studies on frozen curd aging characteristics.",
+      "response": "The committee deferred this comment for consideration in the next revision of the document, pending further technical data on moisture retention in frozen curd cheeses."
+    },
+    "std-103-1.0:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:1": {
+      "reference": "§A2",
+      "comment": "Teaching cheese science requires regulatory clarity. The 90-day requirement creates confusion against the federal floor without providing documented public health benefits.",
+      "proposedChange": "Replace the 90-day requirement with the standard federal floor.",
+      "response": "The committee accepted the comment, agreeing that educational programs and producers alike benefit from clear alignment with the federal floor, and the text will be updated."
+    },
+    "std-103-1.0:5544CB6B-86DC-58AE-B998-01B75615B1B0:1": {
+      "reference": "§A2",
+      "comment": "The proposed 90-day aging period ignores the economic reality of seasonal dairy operations and exceeds the federal floor without supporting data. We must revert to standard timelines for small ruminants.",
+      "proposedChange": "Remove the 90-day requirement and adopt the 60-day federal floor.",
+      "response": "The committee accepted the principle of aligning with members' operational realities, resolving to revise the aging requirement to match the federal floor while adding guidance on moisture testing."
+    },
+    "std-103-1.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:1": {
+      "reference": "§A2, first paragraph",
+      "comment": "At Dubois Farmstead, our goat milk production is entirely seasonal. Forcing a ninety-day aging period disrupts our cash flow and conflicts with traditional practices without adding measurable safety benefits.",
+      "proposedChange": "Revise the draft to set the mandatory aging period at sixty days for all raw-milk sheep and goat cheeses.",
+      "response": "The committee accepted the principle of this comment by recognizing the economic impact on seasonal producers, and the item will be restructured for the subsequent revision."
+    },
+    "std-103-1.0:65AD0562-1908-540C-937D-2BC23C4F88A6:1": {
+      "reference": "§A2",
+      "comment": "At Wrenfield Fine Cheese, we believe specialized sheep and goat products require extended aging to ensure pathogen reduction and develop distinct regional flavor profiles. Reverting to sixty days weakens the standard.",
+      "proposedChange": "Modify §A2 to mandate the ninety-day aging period for all raw-milk sheep and goat cheese varieties.",
+      "response": "The committee rejected this comment because the ballot item failed, and feedback from the wider membership indicated insufficient evidence to support a mandatory ninety-day period over the federal floor."
+    },
+    "std-103-1.0:66D713AB-A42E-5EFB-AF8B-DA620CB0FD61:2": {
+      "reference": "§A3",
+      "comment": "The section permitting frozen sheep-milk curd is clear and beneficial for our seasonal cheesemaking courses, but the cross-reference to make records lacks a specific timeframe for how long freeze dates must be retained. For educational clarity in our training materials, we should specify the retention period.",
+      "proposedChange": "Change the text to read: Allows frozen sheep-milk curd to be used, with its freeze date recorded in the make record and retained for at least 12 months.",
+      "response": "The committee accepted the editorial suggestion to clarify record retention for frozen curd. The clause will be updated in the revised draft to explicitly state that the freeze date must be maintained in the make record for a minimum of 12 months."
+    },
+    "std-103-1.0:72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC:0": {
+      "reference": "§A1",
+      "comment": "At Rushfen Creamery Cooperative, we find the scope clear regarding mixed milks. I am submitting an editorial note to ensure the term mixed milks is consistently capitalized throughout the document text.",
+      "proposedChange": "Capitalize Mixed Milks when referring to blended species batches.",
+      "response": "The committee notes the writer withdrew the comment after it was clarified that lowercase usage conforms to the stylistic guidelines of the International Cheese Federation style guide."
+    },
+    "std-103-1.0:73619338-F1FC-50C4-8C4A-3585459464A1:2": {
+      "reference": "§A3",
+      "comment": "As a retailer, clear make records including freeze dates help us communicate provenance to customers. The wording is sound, but adding a specific record retention duration will improve compliance.",
+      "proposedChange": "Amend §A3 to specify that freeze dates must be retained in make records for a minimum of two years.",
+      "response": "The committee accepted the editorial suggestion to specify the record retention timeframe for frozen sheep-milk curd batches."
+    },
+    "std-103-1.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:1": {
+      "reference": "§A2",
+      "comment": "At Herrera Farmstead, our retail selection relies on seasonal sheep and goat cheeses coming to market reliably. Imposing a 90-day aging requirement rather than aligning with the standard federal floor creates severe supply bottlenecks without offering tangible safety benefits.",
+      "proposedChange": "Align the aging period for raw-milk sheep and goat cheese directly with the standard federal floor.",
+      "response": "The committee accepted the comment, noting that forcing a 90-day requirement creates undue supply pressures for retailers without substantiated microbiological evidence, and will revise the draft accordingly."
+    },
+    "std-103-1.0:755D763F-EF70-5105-8C95-5FE8D1376BF8:0": {
+      "reference": "§A1",
+      "comment": "As a committee member, I find the cross-reference to ICF-STD-101 too ambiguous when applied to mixed-milk cheeses containing varying ratios of bovine, ovine, and caprine milk. We need clearer guidance on threshold percentages.",
+      "proposedChange": "Clarify that mixed milks apply when sheep or goat milk exceeds fifty percent of the total volume.",
+      "response": "The committee accepted the comment in principle, agreeing that mixed-milk thresholds need clarification, and will add an explanatory note referencing standard dairy accounting rather than a strict 50 percent rule."
+    },
+    "std-103-1.0:755D763F-EF70-5105-8C95-5FE8D1376BF8:1": {
+      "reference": "§A2",
+      "comment": "The 90-day aging mandate in §A2 lacks scientific backing and conflicts with standard industry practices for seasonal goat-milk production, threatening specialty product availability across our retail network.",
+      "proposedChange": "Strike the 90-day rule and align the aging period with the federal floor.",
+      "response": "The committee accepted the comment, noting the extensive feedback from producers and retailers regarding short milking seasons, and will remove the 90-day requirement in the revised draft."
+    },
+    "std-103-1.0:83F1E1CF-8BDC-59B2-B3D5-E88E914DA670:1": {
+      "reference": "§A2, first paragraph",
+      "comment": "The text as drafted demands raw-milk sheep or goat cheese to be aged at least 90 days, beyond the 60-day floor, without adequate pathogen survival data specific to small ruminant milks. Our suppliers in the Jura region find this extra restriction unsupported by microbiological evidence from our annual competition entries and commercial batches.",
+      "proposedChange": "Amend the requirement to state that raw-milk sheep and goat cheese shall be aged for not less than the 60-day federal floor, matching standard pathogen reduction timelines.",
+      "response": "The committee accepted the technical concern in principle. While the 90-day requirement is removed due to lack of definitive pathogen evidence, the text will be revised to align strictly with the federal floor pending a comprehensive review of moisture and acid development in small ruminant cheeses."
+    },
+    "std-103-1.0:856688F8-C895-5E8E-91F2-CDF18AA68503:1": {
+      "reference": "§A2",
+      "comment": "The scope phrasing is mostly clear, but adding a precise reference number to the base standard will help avoid any confusion for inspectors reviewing mixed-milk batches at our creamery.",
+      "proposedChange": "Update §A2 to read: Applies ICF-STD-101 provisions explicitly to cheese made from sheep or goat milk, and from mixed milks.",
+      "response": "The committee accepted the proposed editorial clarification to improve cross-document consistency and make the scope explicit for mixed-milk cheeses."
+    },
+    "std-103-1.0:958B1085-3310-588F-AAC0-31AA558B19D5:1": {
+      "reference": "§A2",
+      "comment": "Our production schedules cannot absorb an arbitrary 90-day aging window. The federal floor provides adequate safety controls, and extending it without clear data penalizes small sheep and goat dairies.",
+      "proposedChange": "Adopt the standard federal floor for raw-milk sheep and goat cheeses.",
+      "response": "The committee accepted the comment, acknowledging that the evidence supporting the 90-day period is insufficient to justify departing from established safety baselines."
+    },
+    "std-103-1.0:958B1085-3310-588F-AAC0-31AA558B19D5:2": {
+      "reference": "§A3",
+      "comment": "Allowing frozen curd is risky for texture and moisture retention during subsequent make steps. We should completely disallow freezing curd to maintain traditional cheese quality.",
+      "proposedChange": "Prohibit the use of frozen sheep-milk curd entirely in standardized production.",
+      "response": "The committee rejected the comment, as seasonal milk supply fluctuations make frozen curd a practical necessity for many producers, and adequate traceability is ensured by recording the freeze date."
+    },
+    "std-103-1.0:9FE55C26-8983-53AA-B517-52BE385CC0F0:1": {
+      "reference": "§A2",
+      "comment": "Foxcombe Creamery operates on a tightly managed seasonal milking schedule. Requiring 90 days of aging makes cash flow nearly impossible to sustain for small dairies, and the scientific justification for extending the federal floor simply is not there.",
+      "proposedChange": "Remove the 90-day requirement and default to the standard federal floor for all raw-milk cheeses.",
+      "response": "The committee accepted the comment, agreeing that the 90-day limit imposes unnecessary economic hardship on seasonal producers given the thin evidence, and the section will be modified."
+    },
+    "std-103-1.0:A7494213-EBF3-5A89-8197-86572EE6B8F4:1": {
+      "reference": "§A2",
+      "comment": "European markets manage raw sheep and goat cheeses perfectly well under standard aging frameworks. Imposing a 90-day minimum creates export friction and misunderstanding among international buyers.",
+      "proposedChange": "Revert the aging period to match the federal floor for consistency.",
+      "response": "The committee rejected the comment, determining that international export considerations do not override domestic safety committee priorities for this draft, and the text stands."
+    },
+    "std-103-1.0:AC1C687E-65B5-5675-B951-D8C96E258A6E:1": {
+      "reference": "§A2",
+      "comment": "Requiring ninety days for raw-milk sheep and goat cheese creates an undue burden on seasonal producers without substantial pathogen survival data. We should align with the federal floor or provide an explicit scientific rationale.",
+      "proposedChange": "Change the aging requirement to align directly with the standard sixty-day federal floor.",
+      "response": "The committee accepted the concern in principle by noting that the item failed on ballot and will be re-evaluated to align more closely with standard pathogen survival timelines and practical dairy seasons."
+    },
+    "std-103-1.0:AC1C687E-65B5-5675-B951-D8C96E258A6E:2": {
+      "reference": "§A3",
+      "comment": "The ninety-day proposal ignores shorter milking seasons for sheep and goats, making commercial viability extremely difficult. At Brackenfell Center for Cheese Studies, our trials show standard aging parameters are sufficient.",
+      "proposedChange": "Remove the ninety-day requirement and retain the standard sixty-day aging period for all raw-milk cheeses.",
+      "response": "The committee accepted the comment, acknowledging that the ninety-day requirement lacked sufficient supportive evidence and disproportionately affected seasonal sheep and goat dairies."
+    },
+    "std-103-1.0:EA36130D-B3E1-56A8-8BEE-00C0B93CF010:1": {
+      "reference": "§A2",
+      "comment": "At Womack Farmstead, our sheep milk production drops sharply in autumn. Forcing a 90-day aging period disrupts our entire yearly inventory plan without improving cheese safety beyond the federal floor.",
+      "proposedChange": "Amend the text to specify that raw-milk sheep and goat cheese follows the federal floor.",
+      "response": "The committee accepted the comment, recognizing the operational realities of short milking seasons, and will align the draft with the federal floor."
+    },
+    "std-103-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:0": {
+      "reference": "§A1",
+      "comment": "The scope clearly covers mixed milks, but we should add a direct parenthetical example to help international traders identify applicable species categories quickly.",
+      "proposedChange": "Add parenthetical example: (e.g., sheep, goat, and mixed-species blends).",
+      "response": "The committee accepted the proposal to add clarifying parenthetical examples, as it improves readability for international traders and aligns with formatting used in previous ICF standards."
+    },
+    "std-103-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:1": {
+      "reference": "§A2",
+      "comment": "As a cheese buyer, forcing raw-milk sheep and goat cheeses to age at least 90 days beyond the federal floor will severely restrict our inventory and pricing during the shoulder seasons. Many small farmstead makers cannot sustain the extra holding costs without passing significant price increases on to retailers and consumers.",
+      "proposedChange": null,
+      "response": "The committee accepted the comment regarding the economic impact on seasonal farmstead makers. Given the narrow vote and member concerns about inventory costs, the aging period requirement of 90 days is removed from the draft for further study."
+    },
+    "std-103-1.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:0": {
+      "reference": "§A1",
+      "comment": "Applying the base standard to mixed milks creates compliance questions for small farmsteads producing small batches seasonally. We must ensure small producers understand how mixed-milk percentages are calculated under this annex.",
+      "proposedChange": "Add a brief explanatory note defining mixed milks within the scope text.",
+      "response": "The committee accepted the comment in principle, noting that clarifying notes regarding mixed-milk percentages will be added to the guidance documents accompanying the standard."
+    },
+    "std-103-1.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:1": {
+      "reference": "§A2",
+      "comment": "The ninety-day requirement lacks sufficient safety justification compared to the sixty-day federal floor, and it penalizes small dairies with short lactation curves. We should remove the extra thirty days entirely.",
+      "proposedChange": "Delete the ninety-day requirement and default to the standard sixty-day aging period.",
+      "response": "The committee accepted the comment, agreeing to remove the ninety-day requirement from the text in light of overwhelming member feedback regarding seasonal milking constraints."
+    },
+    "std-103-1.0:FBB1722E-F036-5279-BD6C-F190A5CCFACA:1": {
+      "reference": "§A2",
+      "comment": "As a dairy owner, our milking season is exceptionally short. Imposing a 90-day hold prevents us from turning inventory fast enough to stay solvent, while the federal floor provides adequate safety assurance.",
+      "proposedChange": "Lower the aging period to the 60-day federal floor for all sheep and goat milk.",
+      "response": "The committee accepted the principle of the comment by removing the 90-day requirement and returning the baseline aging period to the federal floor in the revised draft."
+    },
+    "std-103-1.0:FD8E23C5-F87D-556B-B4CA-7BE84D796277:1": {
+      "reference": "§A2",
+      "comment": "As a cheesemonger, I see no safety justification for forcing a 90-day minimum on goat-milk cheeses when the federal floor has safely governed our sector for decades. This extra month damages cash flow.",
+      "proposedChange": "Strike 90 days and insert the 60-day federal floor.",
+      "response": "The committee accepted the comment because the 90-day aging period failed the ballot due to widespread industry concern over short milking seasons and lack of scientific justification."
+    },
+    "std-103-1.0:FD8E23C5-F87D-556B-B4CA-7BE84D796277:2": {
+      "reference": "§A3",
+      "comment": "Allowing frozen curd compromises the traditional integrity of artisanal sheep-milk cheese. We should completely prohibit frozen curd usage to protect cheese quality standards across the specialty market.",
+      "proposedChange": "Delete §A3 in its entirety.",
+      "response": "The committee rejected the comment because seasonal milk supply fluctuations make frozen curd a vital tool for producers, and adequate traceability is maintained through the make record requirement."
+    },
+    "std-201-1.0-r1:371AD224-298F-55BB-92B6-52FF4E130FDE:0": {
+      "reference": "§2",
+      "comment": "At Verhoeven Farmstead Creamery, we fully support the revised definition as it brings much-needed clarity to our aging cellars. To make the sentence flow better and avoid any confusion regarding multiple solutions, we suggest adding a comma before the final conjunction.",
+      "proposedChange": "Insert a comma before or after beer in the list of wash liquids to improve readability.",
+      "response": "The committee accepted the editorial change to improve punctuation and clarity in the final published guide without altering the technical meaning of the washed-rind definition."
+    },
+    "std-201-1.0-r1:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:0": {
+      "reference": "§2",
+      "comment": "At Ostergaard's Cheese Shop, we sell many artisanal wheels where the wash uses botanical extracts combined with brine. Limiting the definition strictly to brine, beer, wine, or spirit solution excludes traditional herbal washes and creates unnecessary compliance friction for our imported inventory without improving consumer safety.",
+      "proposedChange": "Expand the liquid list to include botanical infusions and herbal extracts used in traditional wash recipes.",
+      "response": "The committee rejected the comment because the current list of brine, beer, wine, or spirit solution covers the vast majority of commercial washed-rind styles globally while maintaining a clear and inspectable standard for members."
+    },
+    "std-201-1.0-r1:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:0": {
+      "reference": "§2",
+      "comment": "At Herrera Farmstead, requiring washing during at least the first half of aging creates a major tracking burden for our staff across different seasonal batches. Shifting aging schedules to meet arbitrary fractions of time will increase our operating costs during peak holiday production periods.",
+      "proposedChange": null,
+      "response": "The committee deferred this comment to the next revision of the document, noting that time fractions for washing require broader operational data collection from retail and farmstead members before any adjustments are made."
+    },
+    "std-201-1.0-r1:AC73CCD5-783B-5A03-9A6B-3A974B40201B:0": {
+      "reference": "§2",
+      "comment": "As Herd Manager at Pippinvale Farm, I note that the phrase repeatedly during at least the first half of aging is too vague for producers trying to align their make-sheets with retail expectations. We need a precise minimum frequency, such as twice weekly, to ensure uniform application across production runs.",
+      "proposedChange": "Change repeatedly during at least the first half of aging to washed at least twice weekly during the first half of aging.",
+      "response": "The committee accepted the proposed change because specifying a minimum frequency of twice weekly provides clear, auditable guidance for producers while maintaining the integrity of traditional washed-rind cheese making."
+    },
+    "std-201-1.0:067065F5-7F1C-57F1-A0F8-92D707C25B7D:1": {
+      "reference": "§2",
+      "comment": "Speaking for Hazelcombe Cheesemonger, the strict washing frequency in section two creates supply chain confusion for imported cheeses that use non-traditional schedules, raising inventory and compliance costs for specialty retailers.",
+      "proposedChange": null,
+      "response": "The committee accepted the general concern in principle, noting that broadening the definition of washed-rind cheeses in section two will resolve retail compliance issues and accommodate diverse import schedules."
+    },
+    "std-201-1.0:26C9CD3D-67A4-58C8-A636-8CEB4666527D:1": {
+      "reference": "§2",
+      "comment": "As owner of Rowanbrook Farm, I approve the intent of section two but suggest tightening the phrasing to make the minimum frequency requirement easier to read for small producers.",
+      "proposedChange": "Revise sentence structure for greater readability regarding the twice weekly washing schedule.",
+      "response": "The committee accepted the editorial proposal to streamline the sentence structure for improved readability among small-scale producers."
+    },
+    "std-201-1.0:26C9CD3D-67A4-58C8-A636-8CEB4666527D:3": {
+      "reference": "§4",
+      "comment": "The raw-milk disclosure requirement in section four mandates front panel placement, which creates significant label redesign costs for small farmstead operations like Rowanbrook Farm that rely on back labels for regulatory compliance text.",
+      "proposedChange": "Allow the raw-milk disclosure to appear on the principal display panel or the back informational panel.",
+      "response": "The committee accepted the comment in part, agreeing to permit placement on either the front panel or the principal display panel to accommodate existing packaging layouts without undue cost."
+    },
+    "std-201-1.0:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:3": {
+      "reference": "§4",
+      "comment": "The requirement for raw-milk disclosure is well structured, but adding a minor clarification regarding font size will help educators teaching standardized labeling at Brackenfell Center for Cheese Studies.",
+      "proposedChange": "Insert a parenthetical note specifying that the raw milk disclosure must match the font size of the product name.",
+      "response": "The committee accepts the editorial clarification linking raw-milk disclosure font sizing directly to production label standards to assist educational training and compliance."
+    },
+    "std-201-1.0:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:0": {
+      "reference": "§1",
+      "comment": "The category names list provides a solid foundation for our retail displays in New Zealand. To ensure international consistency across all merchant shelves, we should simply fix a minor typographical spacing issue in the hyphenation of the rind terms.",
+      "proposedChange": "Ensure uniform hyphenation across all category terms: fresh, bloomy-rind, washed-rind, natural-rind, and hard-aged.",
+      "response": "The committee accepts this editorial correction to standardize hyphenation across the listed category names for consistency in member labeling."
+    },
+    "std-201-1.0:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:1": {
+      "reference": "§2",
+      "comment": "Limiting washed-rind status strictly to brine washes done twice weekly penalizes many wonderful imported cheeses that rely on periodic botanical washes or beer rinses early in the process. This will disrupt our counter merchandising and confuse consumers looking for authentic styles.",
+      "proposedChange": "Broaden the definition to include alternative washing agents and intermittent washing schedules.",
+      "response": "The committee concurs that the definition was overly narrow. The text will be updated to accommodate diverse washing liquids and varied schedules."
+    },
+    "std-201-1.0:65D40948-FA0D-5DB6-9F63-6AB60342F182:1": {
+      "reference": "§2",
+      "comment": "As an assistant cheesemaker at Elderfen Farm, our washed-rind wheels are frequently rubbed with regional spirits rather than plain brine, and we only wash them during the first month of aging before wrapping them in leaves. The current draft makes our traditional regional cheese illegal to label accurately.",
+      "proposedChange": "Redefine washed-rind to include cheeses where rinds are treated with spirits, beer, or wine during initial affinage.",
+      "response": "The committee acknowledges the validity of traditional spirit and leaf-wrapping techniques. The definition will be amended to include early-stage washing with diverse liquids."
+    },
+    "std-201-1.0:65D40948-FA0D-5DB6-9F63-6AB60342F182:3": {
+      "reference": "§4",
+      "comment": "The rule for raw-milk disclosures on labels is clear and functional. I only suggest making the phrasing for unpasteurized milk explicit so there is no ambiguity for export markets.",
+      "proposedChange": "Specify that raw milk may be expressed using full words or recognized equivalent terminology such as 'unpasteurized milk'.",
+      "response": "The committee accepts the editorial clarification allowing standard equivalent phrasing for raw-milk disclosures on product labels."
+    },
+    "std-201-1.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:1": {
+      "reference": "§2",
+      "comment": "Requiring brine washing twice a week throughout the entire aging cycle ignores reality for many surface-ripened styles. At Herrera Farmstead, our smear development slows down significantly in the final weeks of affinage, making continuous washing unnecessary and detrimental to the rind integrity.",
+      "proposedChange": "Change the requirement to allow washing frequency to taper off during the final third of the aging period.",
+      "response": "The committee recognizes that affinage practices change as wheels mature. The text will be revised to permit reduced washing frequency in the latter stages of aging."
+    },
+    "std-201-1.0:75F3B7F3-5CE6-5E42-9EE3-76A40068B633:0": {
+      "reference": "§1",
+      "comment": "While I approve the category names in section one, the text should include a specific reference to regional nomenclature variations to help international members align their traditional descriptors with ICF standards.",
+      "proposedChange": "Add a cross-reference to regional naming conventions.",
+      "response": "The committee rejected this editorial comment because adding regional naming variations would complicate the standardized list required for uniform labeling across international markets. The text stands as written."
+    },
+    "std-201-1.0:75F3B7F3-5CE6-5E42-9EE3-76A40068B633:3": {
+      "reference": "§4",
+      "comment": "As a creamery manager, I find the wording in section 4 very clear regarding raw-milk disclosure. However, specifying that the disclosure statement must appear in bold text would improve legibility for consumers.",
+      "proposedChange": "Change to: Labels on raw-milk cheese say 'made with raw milk' in bold on the front panel.",
+      "response": "The committee agrees that formatting improves consumer legibility on packaging. The text is modified as proposed to require bold font for the raw-milk disclosure."
+    },
+    "std-201-1.0:772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8:2": {
+      "reference": "§3",
+      "comment": "At Pippinvale Dairy Institute, our students and research projects evaluate various artisanal methods. Setting rigid frequency rules for age statements stifles innovation and forces small producers to alter historic records that have been safely crafted for generations under the federal floor.",
+      "proposedChange": "Remove the strict minimum age requirement and replace it with a general description of regular lot aging tracking.",
+      "response": "The committee rejects the request to remove the age statement rule entirely, as some baseline standard is necessary for labeling integrity. However, the definition will be reviewed in a subsequent revision."
+    },
+    "std-201-1.0:965ED95C-59D7-55DE-AA49-FCC9041BC734:1": {
+      "reference": "§2",
+      "comment": "Representing Cindervale Fine Cheese as a retailer, the current draft of section two is too narrow because many artisan makers only wash rinds during the early stages of aging rather than throughout the entire process.",
+      "proposedChange": "Modify the rule to allow cheese washed only during early aging to qualify as washed-rind.",
+      "response": "The committee accepted the technical point that early-stage washing is a valid traditional practice. The text will be revised to include cheeses washed primarily in the early stages of aging."
+    },
+    "std-201-1.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:1": {
+      "reference": "§2",
+      "comment": "At Pippinvale Farm, we firmly believe that a washed-rind cheese must follow strict protocols to maintain category integrity. Allowing washes with beer, wine, or spirits or permitting washing to stop after the early aging phase dilutes the standard and creates ambiguity for producers who adhere to traditional brine methods.",
+      "proposedChange": "Amend §2 to state: Retain the requirement that rinds must be washed with brine at least twice a week throughout aging.",
+      "response": "The committee rejects this requested restriction because a significant portion of members utilize alternative liquids and early-phase washing. Maintaining a rigid brine-only and full-term rule would unfairly exclude established production practices."
+    },
+    "std-201-1.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:3": {
+      "reference": "§4",
+      "comment": "At Pippinvale Farm, we support the requirement for raw-milk disclosures on labels. To avoid any confusion with pasteurized products, it would help to clarify that the disclosure statement must be unobstructed by other label graphics.",
+      "proposedChange": "Change to: Labels on raw-milk cheese say 'made with raw milk' on an unobstructed area of the front panel.",
+      "response": "The committee accepts the suggested clarification to ensure raw-milk disclosures are clearly visible to buyers. The text is updated accordingly."
+    },
+    "std-201-1.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:1": {
+      "reference": "§2",
+      "comment": "When teaching cheese identification courses, I note that hyphenating terms consistently helps students grasp category distinctions. Adding hyphens to washed-rind and natural-rind matches the formatting used for bloomy-rind and hard aged.",
+      "proposedChange": "Ensure consistent hyphenation across all listed category names in the text.",
+      "response": "The committee accepts the editorial correction to standardize hyphenation across all category names, ensuring clarity for educational materials and member labeling guides."
+    },
+    "std-201-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:0": {
+      "reference": "§1",
+      "comment": "Writing as creamery manager at Nornbrook Cheesemonger, I approve of the category names listed in section one but suggest adding a hyphen for consistency in the hard aged category reference throughout the document.",
+      "proposedChange": "Add a hyphen to hard-aged where appropriate in the category listing.",
+      "response": "The committee accepted the editorial suggestion to refine the hyphenation of the category name in section one for consistency throughout the document."
+    },
+    "std-201-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:1": {
+      "reference": "§2",
+      "comment": "At Nornbrook Cheesemonger, our traditional washed-rind wheels use beer and wine washes that would be unfairly excluded by the strict brine-only frequency rule currently drafted in section two.",
+      "proposedChange": "Expand the definition to include rinds washed with beer, wine, spirits, or other traditional fermented liquids.",
+      "response": "The committee accepted the technical concern regarding alternative wash liquids. The definition will be expanded to encompass traditional washes involving beer, wine, and spirits alongside brine."
+    },
+    "std-201-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:2": {
+      "reference": "§3",
+      "comment": "I approve of establishing clear washed-rind guidelines, though we should make sure the terminology used in section two matches the standard definitions discussed at our annual conference workshops.",
+      "proposedChange": "Ensure terminology matches standard glossary terms.",
+      "response": "The committee accepted the editorial comment to align section terminology with standard glossary definitions used across our membership."
+    },
+    "std-201-1.0:DBE0287D-6ABA-59B0-A251-C6F2B6049265:2": {
+      "reference": "§3",
+      "comment": "As production lead at Quillbrook Dairy Institute, I find the phrasing in section three slightly ambiguous regarding the exact application method. To ensure our washed-rind wheels are fully compliant, we should clarify the phrasing slightly.",
+      "proposedChange": "Clarify the washing frequency description to specify routine brine application across the entire surface.",
+      "response": "The committee accepted the editorial suggestion to improve clarity regarding brine application. The revised wording will be incorporated into the next draft to ensure consistent interpretation across all member production facilities."
+    },
+    "std-201-1.0:DBE0287D-6ABA-59B0-A251-C6F2B6049265:3": {
+      "reference": "§4",
+      "comment": "Requiring minimum age statements in both days and months creates unnecessary complexity for our inventory management at Quillbrook Dairy Institute. We prefer a simpler metric that aligns with how our customers track aging milestones without causing label clutter.",
+      "proposedChange": "Allow makers to choose between days or months for the age statement rather than implying both.",
+      "response": "The committee rejected this comment because section three already gives makers the option to state the minimum age in either days or months, not both. The text remains unchanged as it provides adequate flexibility for inventory management."
+    },
+    "std-201-1.0:E33467A6-2B8D-57DF-89B4-FB3546BEF863:1": {
+      "reference": "§2",
+      "comment": "At Iversen Cultures Co., we sell many artisan wheels washed with beer and wine rather than plain brine, and some washed only during the first two weeks of aging. Restricting the washed-rind definition strictly to twice-weekly brine washing throughout the entire aging period ignores traditional methods and will confuse our retail customers.",
+      "proposedChange": "Expand the definition to include rinds washed with beer, wine, spirits, or brine, whether washed throughout aging or only during the initial phase.",
+      "response": "The committee acknowledges that traditional washing agents beyond plain brine and early-stage washing are common among makers. While this item failed on the initial ballot, the concern is met in principle by instructing the drafting subgroup to broaden the definition to encompass alternative liquids and schedules for the upcoming recirculation draft."
+    },
+    "std-201-1.0:EA083819-F4F1-5CD5-A43D-2CD309718835:0": {
+      "reference": "§1",
+      "comment": "As a herd manager overseeing milk quality destined for various cheese types, I note that the categories overlook mixed-milk or multi-style cheeses which are increasingly common on farms. We need an explicit path for cheeses that cross traditional category boundaries.",
+      "proposedChange": "Add a provision for multi-category or mixed-milk cheeses within the labeling guidelines.",
+      "response": "The committee accepts the principle in part. While §1 focuses purely on primary styling categories, a new explanatory note will be added to address mixed-milk and hybrid styles in the commentary."
+    },
+    "std-201-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:1": {
+      "reference": "§2",
+      "comment": "As a retail buyer importing numerous specialty wheels, restricting washed-rind labeling exclusively to brine twice weekly ignores traditional European practices where producers wash with cider, beer, or local spirits. This definition damages heritage producers and creates confusion at our cheese counter.",
+      "proposedChange": "Expand the washed-rind definition to include rinds washed with fermented liquids, beer, wine, or spirits throughout aging.",
+      "response": "The committee agrees that traditional washing liquids are vital to authentic washed-rind cheeses. The section will be rewritten for the next draft to encompass beer, wine, spirits, and other traditional infusions."
+    },
+    "std-201-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:3": {
+      "reference": "§4",
+      "comment": "The text on raw-milk disclosure reads very clearly for our imported inventory, but adding a brief example of how to format the front-panel warning statement would prevent any minor misinterpretations by retail staff unpacking shipments.",
+      "proposedChange": "Add an example: for instance, 'Made with raw milk' in bold lettering on the primary display panel.",
+      "response": "The committee accepts the suggestion to add formatting examples for clarity. The revised text will include illustrative examples for front-panel raw milk disclosures."
+    },
+    "std-201-1.1:072EC674-2A47-5F88-8AD1-9D487E298397:0": {
+      "reference": "Amendment 1",
+      "comment": "While I strongly approve of establishing clear rules for mixed lots at Fernholt Dairy, the phrasing could be slightly tightened to ensure absolute clarity for educational materials and training courses distributed across our membership.",
+      "proposedChange": "Revise the sentence to read: When a commercial lot mixes wheels of different ages, the declared age statement must give the age of the youngest individual wheel.",
+      "response": "The committee notes the withdrawal of this comment by the writer following discussion, as the existing text is already sufficiently clear and well understood by the ballot pool."
+    },
+    "std-201-1.1:78E29F46-3965-5314-BC2F-BB79336EAD05:0": {
+      "reference": "Amendment 1",
+      "comment": "As Quality Manager at Umberfen Dairy Systems, I find that tying the statement rigidly to the youngest individual wheel without any defined tolerance window creates unnecessary rejection risks during audits when minor sorting variations occur in high-throughput packaging lines.",
+      "proposedChange": "Amend the wording to permit mixed lots to use the age of the youngest wheel provided that up to five percent of the lot may fall within a seven-day tolerance window.",
+      "response": "The committee accepts the concern in principle. While we maintain the requirement that mixed lots use the age of the youngest wheel for safety and accuracy, we will add an explanatory note clarifying that minor sorting variations within established operational tolerances do not constitute a labeling violation."
+    },
+    "std-201-1.1:B2A26737-D6CB-5149-8848-01C2954C376E:0": {
+      "reference": "Amendment 1",
+      "comment": "At Pinebarrow Creamery, updating our inventory tracking software and pre-printed packaging inventories to comply with this mandatory youngest-wheel rule will impose substantial costs and operational delays that our small team cannot absorb right now.",
+      "proposedChange": null,
+      "response": "The committee defers this general comment to the next revision of the document, noting that while implementation costs are acknowledged, the consumer protection benefits of the current text require its retention for this edition."
+    },
+    "std-201-1.1:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:0": {
+      "reference": "Amendment 1",
+      "comment": "As Curriculum Lead, I support this amendment fully, but substituting the word 'combines' for 'mixes' would align the terminology perfectly with the glossaries used in our international training webinars and study guides.",
+      "proposedChange": "Replace the word mixes with combines so the text reads: When a lot combines wheels of different ages, the age statement gives the age of the youngest wheel.",
+      "response": "The committee accepts the proposed editorial change, as substituting 'combines' for 'mixes' improves consistency with our educational materials without altering the technical meaning of the requirement."
+    },
+    "std-201-1.1:CCFA1913-AF56-545A-B63A-3916FFA4318B:0": {
+      "reference": "Amendment 1",
+      "comment": "At Crowfeather Creamery, we routinely batch wheels from adjacent vats with minor differences in aging. Requiring the age statement to reflect strictly the youngest wheel penalizes us when the vast majority of the lot is older, misleading consumers who look for a true representation of the batch maturity.",
+      "proposedChange": "Change the requirement so that mixed lots may state the weighted average age of the wheels rounded down to the nearest full week.",
+      "response": "The committee rejects this comment because basing the age statement on the youngest wheel in a mixed lot is essential to prevent misrepresentation and safeguard consumer trust. Allowing an average age could obscure the presence of significantly younger cheese, which compromises the clarity and integrity of our labeling standards."
+    },
+    "std-202-1.0:067065F5-7F1C-57F1-A0F8-92D707C25B7D:0": {
+      "reference": "§1",
+      "comment": "As a cheese program director, I strongly approve this text. I just suggest capitalizing the word whole if it begins a new sentence structure in future expanded versions.",
+      "proposedChange": "Ensure future styling formats treat whole wheel references with initial capital letters in headers.",
+      "response": "The committee accepted the principle of maintaining clean formatting, noting that standard style rules will be applied during final publication preparation."
+    },
+    "std-202-1.0:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:1": {
+      "reference": "§2",
+      "comment": "As co-owner of Brackenfell Center for Cheese Studies, I support this section. However, the phrasing can be slightly sharpened to ensure clarity for student instructors teaching packaging standards across our courses.",
+      "proposedChange": "Change to: Wedges cut at retail shall be weighed and labeled at the counter after wrapping, less the tare of the wrap.",
+      "response": "The committee accepted the editorial suggestion to replace 'are' with 'shall be' to give the text a clearer standard instruction tone without changing the technical meaning."
+    },
+    "std-202-1.0:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:2": {
+      "reference": "§3",
+      "comment": "This section is entirely practical for our retail and educational partners. I simply suggest substituting a more precise verb to maintain consistent drafting style throughout the guidance document.",
+      "proposedChange": "Change to: Producers inform buyers of the expected moisture loss for each style, so retailers can reweigh older stock.",
+      "response": "The committee accepted the proposal to replace words to improve drafting consistency across the entire guidance document."
+    },
+    "std-202-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:1": {
+      "reference": "§2",
+      "comment": "At Umberfen Dairy Systems, we find the rule straightforward. I am voting to approve, but I suggest adding a comma after wrapping for better grammatical flow.",
+      "proposedChange": "Insert a comma after the word wrapping.",
+      "response": "The committee accepted the punctuation correction to improve the readability of the clause."
+    },
+    "std-202-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:2": {
+      "reference": "§3",
+      "comment": "The provision makes complete sense for production and packaging quality controls. I suggest a minor editorial tweak to specify the reweighing process more cleanly.",
+      "proposedChange": "Change 'so retailers can reweigh older stock' to 'allowing retailers to reweigh older stock'.",
+      "response": "The committee accepted the rearrangement of phrases as it enhances readability and flows better for retail staff."
+    },
+    "std-202-1.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:1": {
+      "reference": "§2",
+      "comment": "As a herd manager at Pippinvale Farm, I feel this section does not account for variable humidity in retail display cases which affects tare calculations. The technical requirement here is ambiguous and needs more detail on calibration.",
+      "proposedChange": "Add specific calibration standards for scales used in retail cut-and-wrap operations.",
+      "response": "The committee deferred this comment, noting that scale calibration falls outside the intended scope of net-weight labeling guidance and should be addressed in equipment-specific standards."
+    },
+    "std-202-1.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:2": {
+      "reference": "§3",
+      "comment": "At Pippinvale Farm, we believe moisture loss depends entirely on environmental factors outside our control. Forcing producers to provide these figures exposes us to unjustified compliance liability when older stock dries out on merchant shelves.",
+      "proposedChange": "Limit producer liability for retail weight discrepancies caused by prolonged merchant storage.",
+      "response": "The committee deferred the comment, determining that liability limits require legal review that cannot be completed within the current document revision cycle."
+    },
+    "std-202-1.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:1": {
+      "reference": "§2",
+      "comment": "In our training materials, precision in terminology is essential. Changing 'counter' to 'sales area' would align this guidance with standard terminology taught in our cheese education courses.",
+      "proposedChange": "Replace 'counter' with 'sales area' in the second sentence.",
+      "response": "The committee agrees that standardizing educational and retail terminology is beneficial. The change from counter to sales area is accepted and incorporated into the final version of the document."
+    },
+    "std-202-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:1": {
+      "reference": "§2",
+      "comment": "As a creamery manager at Nornbrook Cheesemonger, I find that requiring wedges to be weighed after wrapping creates unnecessary delays during busy shifts. Retailers should be permitted to use a pre-determined average tare weight for standard wrapping materials without re-weighing every single individual piece.",
+      "proposedChange": null,
+      "response": "The committee rejects the comment because allowing estimated tare without weighing individual wrapped pieces would compromise net-weight accuracy under the federal floor. The text stands as drafted to protect consumers and maintain uniform retail standards."
+    },
+    "std-202-1.0:E33467A6-2B8D-57DF-89B4-FB3546BEF863:0": {
+      "reference": "§1",
+      "comment": "At Iversen Cultures Co., we appreciate the clear standard for whole wheels. However, the phrasing could be slightly improved to mention the tare weight of wax and wrapping explicitly for better clarity.",
+      "proposedChange": "Change to: Whole wheels are labeled with their net weight at packing, explicitly excluding the tare of wax and wrapping.",
+      "response": "The committee agrees that adding explicit reference to tare improves the clarity of the standard for retail staff. The text is modified as proposed to ensure uniform application across all distribution networks."
+    },
+    "std-202-1.0:E33467A6-2B8D-57DF-89B4-FB3546BEF863:1": {
+      "reference": "§2",
+      "comment": "This section is very helpful for our counter staff at Iversen Cultures Co. To make the sequence of operations completely unambiguous, I suggest inserting the word 'immediately' before the word 'weighed'.",
+      "proposedChange": "Insert 'immediately' so it reads: Wedges cut at retail are weighed and labeled...",
+      "response": "The committee accepts the editorial intent to clarify timing, but finds that inserting 'immediately' could conflict with normal counter workflow during peak business hours. Instead, the phrase 'at the time of wrapping' is added to satisfy the reviewer's concern."
+    },
+    "std-202-1.0:EA083819-F4F1-5CD5-A43D-2CD309718835:1": {
+      "reference": "§2",
+      "comment": "I approve this section as a herd manager because it clearly separates the product mass from inedible packaging materials. I suggest changing the lead word for better alignment with other guidelines.",
+      "proposedChange": "Replace 'Wedges cut at retail' with 'Retail cut wedges'.",
+      "response": "The committee accepted the proposed wording adjustment to make the requirement singular and more direct for producers."
+    },
+    "std-202-1.0:EA083819-F4F1-5CD5-A43D-2CD309718835:2": {
+      "reference": "§3",
+      "comment": "As a herd manager, I oppose this section because producers have no control over how retailers store aged cheeses once delivered. Imposing an obligation on us to track expected moisture loss for every single style creates an unfair administrative burden.",
+      "proposedChange": null,
+      "response": "The committee accepted the comment in principle, clarifying that producers only need to supply general guidelines for style categories rather than individual tracking per batch, which addresses the member's administrative concern."
+    },
+    "std-202-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:0": {
+      "reference": "§1",
+      "comment": "As a cheese buyer, I am concerned that whole wheels lose moisture during transit before they ever hit my shelves, making the net weight at packing misleading. We need language addressing shrinkage.",
+      "proposedChange": "Add a provision stating that allowances must be made for natural moisture loss during transit.",
+      "response": "The committee accepted the concern in principle, noting that moisture loss is separately treated in §3 and that adding transit shrinkage language to §1 would conflate packing weight with aging variations."
+    },
+    "std-202-2.0:072EC674-2A47-5F88-8AD1-9D487E298397:0": {
+      "reference": "§1",
+      "comment": "As a food safety educator at Fernholt Dairy, I suggest refining the term net weight at packing in §1 to ensure students understand it applies specifically to the moment the cheese is sealed in its primary wrap.",
+      "proposedChange": "Modify §1 to read: net weight determined at the exact time of packing.",
+      "response": "The committee accepts the proposed wording refinement to specify the exact time of packing, which improves clarity without altering the technical requirement."
+    },
+    "std-202-2.0:220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F:0": {
+      "reference": "§1",
+      "comment": "As a cheese buyer at Orchardmere Cheese Co., I appreciate the clarity on whole wheels. However, the phrase excluding wax and wrapping could be misread on rindless blocks sealed in plastic film. Clarifying that film barriers count as wrapping would help retail staff when unwrapping for service.",
+      "proposedChange": "Change wording in §1 to: net weight at packing, excluding wax, wrapping, and heat-shrink plastic film barriers.",
+      "response": "The committee thanks the commenter for the suggestion. The text in §1 is unchanged from version 1.0 and is widely understood across the industry to cover any non-edible packaging material, so no revision is necessary."
+    },
+    "std-202-2.0:2266EC81-CDCD-5C2D-A2DC-4362538F26CF:2": {
+      "reference": "§3",
+      "comment": "Allowing retailers to use a printed tare without verifying individual wrap lots introduces too much variance, especially when humidity shifts cause packaging materials to absorb ambient moisture in the shop environment.",
+      "proposedChange": "Require retailers to perform weekly sample weighings of all wrap types rather than relying permanently on a static printed tare.",
+      "response": "The committee rejects this proposed change. Mandating weekly sample weighings would defeat the efficiency purpose of the revised rule. Retailers may continue relying on printed tares for established wrap types while adhering to the federal floor for net weight accuracy."
+    },
+    "std-202-2.0:26C9CD3D-67A4-58C8-A636-8CEB4666527D:1": {
+      "reference": "§2",
+      "comment": "At Rowanbrook Farm we cut and wrap various small wedges. In §2, the reference to each type of wrap could be tightened by adding a short parenthetical example, such as parchment or foil, so operators know what is meant.",
+      "proposedChange": "Add examples to §2: each type of wrap (such as parchment, cellophane, or foil).",
+      "response": "The committee agrees that examples improve readability. The phrase will be revised to include common wrap materials as suggested, ensuring consistent application across farmsteads and retail counters."
+    },
+    "std-202-2.0:26C9CD3D-67A4-58C8-A636-8CEB4666527D:3": {
+      "reference": "§4",
+      "comment": "For §4 regarding shipped and online orders, it would be helpful to include a brief reference pointing readers back to the table of styles in the appendix, making it easier for producers to locate the correct percentage values.",
+      "proposedChange": "Add a cross-reference in §4: see Appendix A for standard styles and moisture-loss values.",
+      "response": "The committee accepts the suggestion to add a cross-reference. The text in §4 will be updated to point directly to Appendix A for ease of use."
+    },
+    "std-202-2.0:550909F0-527A-539C-AF82-4603AD448838:1": {
+      "reference": "§2",
+      "comment": "As Regional Sales Director at Saltfen Farm, I initially questioned whether printed tare for wrap types could be standardized across regions, but after reviewing the current text I am satisfied.",
+      "proposedChange": "Clarify that printed tare weights apply to standard commercial plastic films.",
+      "response": "The committee noted the withdrawal of this comment. The text of the item stands as approved by the ballot pool."
+    },
+    "std-202-2.0:5544CB6B-86DC-58AE-B998-01B75615B1B0:0": {
+      "reference": "§1",
+      "comment": "As a committee member, I note that §1 uses the phrase excluding wax and wrapping. Adding commas around or clarifying the exclusion helps prevent any misinterpretation by small producers packaging in natural lard or wax blends.",
+      "proposedChange": "Update §1 to read: net weight at packing, explicitly excluding wax, rind dressings, and wrapping.",
+      "response": "The committee accepts the addition of rind dressings to the exclusion list in §1 for greater precision across diverse cheesemaking traditions."
+    },
+    "std-202-2.0:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:0": {
+      "reference": "§1",
+      "comment": "At Ostergaard's Cheese Shop we find excluding heavy artisan rinds and wax leaves too much ambiguity when selling imported wheels. The standard should define how to deduct rind mass explicitly so we are not guessing during busy service hours.",
+      "proposedChange": "Add a specific formula for deducting rind and wax percentage by wheel diameter.",
+      "response": "The committee deferred this comment to the next revision of the document to allow for a comprehensive study on rind-to-paste ratios across diverse cheese styles."
+    },
+    "std-202-2.0:5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B:3": {
+      "reference": "§4",
+      "comment": "Telling online customers that weight may fall slightly in transit gives no certainty and leads to disputes at Ostergaard's Cheese Shop. We need a defined maximum allowable variance percentage for shipped wedges.",
+      "proposedChange": "Specify a maximum allowable transit weight loss percentage of two percent for online orders.",
+      "response": "The committee rejected the comment because transit conditions vary too widely to enforce a single percentage loss threshold, and the current text offers adequate consumer transparency."
+    },
+    "std-202-2.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:3": {
+      "reference": "§4",
+      "comment": "As co-owner of Dubois Farmstead, I strongly disapprove of adding online weight disclosure rules. Small producers shipping artisan cheeses cannot constantly monitor fluctuating transit conditions and ambient humidity across long delivery routes.",
+      "proposedChange": "Remove the online order weight variation provision entirely from the guidance.",
+      "response": "The committee rejected the comment because online and shipped orders inherently experience environmental variations during transit, making a published notice about weight change essential for fair compliance."
+    },
+    "std-202-2.0:61FA0132-31F1-59E9-9B50-DBDF42780822:2": {
+      "reference": "§3",
+      "comment": "As head cheesemonger at Heathercombe Farm, I fully support this clause. To ensure our counter staff apply the correct printed tare during busy weekend rushes, adding a direct reference to how tare logs are maintained would make the instruction foolproof.",
+      "proposedChange": "Insert a parenthetical reference reminding retailers to maintain a readily accessible log of pre-tested wrap weights near the scale.",
+      "response": "The committee agrees that a reference to maintaining scale logs supports accurate implementation. The text is updated to include a brief note on keeping tare records available for inspection."
+    },
+    "std-202-2.0:65AD0562-1908-540C-937D-2BC23C4F88A6:1": {
+      "reference": "§2",
+      "comment": "At Wrenfield Fine Cheese, we appreciate the flexibility that letting retailers use a printed tare for each type of wrap provides for cut-and-wrap operations. However, the section heading could be slightly more descriptive to ensure staff do not confuse it with whole-wheel procedures.",
+      "proposedChange": "Change the section heading from §2 Cut-and-wrap wedges (revised) to §2 Cut-and-wrap wedges and printed tare allowances.",
+      "response": "The committee agrees that adding clarity to the section heading prevents operational confusion. The heading is updated as requested to specify printed tare allowances for cut wedges."
+    },
+    "std-202-2.0:66D713AB-A42E-5EFB-AF8B-DA620CB0FD61:1": {
+      "reference": "§2",
+      "comment": "The reference to printed tare for each wrap type lacks clarity regarding laminated papers versus simple cheese paper. We must clarify that the tare weight must match the exact wrap manufacturer specifications.",
+      "proposedChange": "Change the text to read: lets retailers use a printed tare for each specific manufacturer wrap type instead of weighing the wrap each time.",
+      "response": "The committee accepted the change to clarify that printed tare weights must correspond to specific manufacturer wrap specifications for cut-and-wrap wedges."
+    },
+    "std-202-2.0:66D713AB-A42E-5EFB-AF8B-DA620CB0FD61:2": {
+      "reference": "§3",
+      "comment": "When teaching dairy courses I notice ambiguity in how producers publish moisture-loss allowances. The section needs a direct cross-reference to the labeling guidelines to ensure uniform application.",
+      "proposedChange": "Add a cross-reference to section one at the end of the moisture-loss allowance requirement.",
+      "response": "The committee accepted the editorial change to add a clear cross-reference, improving the overall readability and instructional utility of the document."
+    },
+    "std-202-2.0:6B4BF43A-4C16-5DAD-9EA3-F3EDB4093873:1": {
+      "reference": "§2",
+      "comment": "When teaching students at Quernstone Creamery about retail compliance, clear phrasing on tare weights is essential. The current text is quite plain and could benefit from an explicit reference to the standard wrapping materials commonly utilized in specialty shops.",
+      "proposedChange": "Add a brief note listing common wrap types such as cellophane, parchment, and two-ply barrier sheets directly under the revised text.",
+      "response": "The committee accepts the principle of improving clarity for educational purposes. Rather than adding a specific list of wraps that might quickly become outdated, the text is revised to direct readers to standard industry packaging categories."
+    },
+    "std-202-2.0:72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC:2": {
+      "reference": "§3",
+      "comment": "At Rushfen Creamery Cooperative, we initially questioned how moisture loss percentages are audited. After reviewing the guidance further during our chapter meet-up, we are satisfied with the current text and withdraw our comment.",
+      "proposedChange": "Withdrawn by writer.",
+      "response": "The comment is marked as withdrawn at the request of the writer following discussion at a chapter meet-up."
+    },
+    "std-202-2.0:73619338-F1FC-50C4-8C4A-3585459464A1:2": {
+      "reference": "§3",
+      "comment": "Reviewing §3 at Elderfen Cheese & Provisions, the sentence structure is clear, but updating the punctuation will help ensure that retail staff quickly grasp the permitted use of pre-weighed wrap data without misinterpretation.",
+      "proposedChange": "Revise punctuation in §3 to separate the allowance of printed tare from the general weighing instructions.",
+      "response": "The committee accepts the editorial change to improve punctuation and clarity in §3, ensuring the sentence structure is straightforward for all users."
+    },
+    "std-202-2.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:0": {
+      "reference": "§1",
+      "comment": "As Cheese Program Director for Herrera Farmstead, I approve whole wheel net weight rules but want a clearer cross-reference to ensure waxing standards are uniform across all distribution channels.",
+      "proposedChange": "Insert a direct cross-reference to packaging annexes regarding wax thickness measurements.",
+      "response": "The committee rejected the change because the existing text in §1 already provides sufficient clarity on excluding wax and wrapping without needing additional cross-references that might confuse producers."
+    },
+    "std-202-2.0:755D763F-EF70-5105-8C95-5FE8D1376BF8:2": {
+      "reference": "§3",
+      "comment": "As a store manager implementing these rules, I find the phrasing around moisture-loss percentages slightly clumsy. A minor wording fix will make it easier for staff to explain to inspectors.",
+      "proposedChange": "Change producers publish a moisture-loss allowance to producers shall publish a moisture-loss allowance.",
+      "response": "The committee accepted the editorial suggestion to strengthen the directive verb, ensuring consistent interpretation across retail and production facilities."
+    },
+    "std-202-2.0:78E29F46-3965-5314-BC2F-BB79336EAD05:2": {
+      "reference": "§3",
+      "comment": "As Quality Manager at Umberfen Dairy Systems, I find the guidance on moisture-loss percentage per month of age lacks clarity regarding varying storage temperatures. Producers need specific climate tables to maintain accurate calculations without constant re-testing during seasonal changes.",
+      "proposedChange": "Add a dedicated sub-clause detailing moisture-loss adjustments for different ripening room temperatures.",
+      "response": "The committee deferred this comment for consideration in the next revision of the document, as gathering comprehensive moisture data for all storage conditions requires further industry-wide study before publishing specific weight allowances."
+    },
+    "std-202-2.0:7FA7515F-6154-574E-85E4-47E810C88F85:2": {
+      "reference": "§3",
+      "comment": "As a buyer at Dvorak Cultures Co., I find the moisture-loss allowance in §3 unworkable for aged semi-hard cheeses stored in variable cellar humidity. A single percentage per month does not account for seasonal fluctuations in our aging facility.",
+      "proposedChange": "Revise §3 to allow a sliding scale of moisture loss based on seasonal cellar humidity logs.",
+      "response": "The committee defers this technical comment to the next full revision of the document, as establishing a sliding scale requires comprehensive data collection from multiple aging facilities."
+    },
+    "std-202-2.0:7FC09347-424D-5147-981B-C3DC9AB3F0CC:1": {
+      "reference": "§2",
+      "comment": "I approve of keeping whole-wheel net weights calculated at packing, excluding wax and wrapping, as it matches our standard make-room practices here in Petaluma. A minor grammatical tweak will improve readability.",
+      "proposedChange": "Revise the clause to read: Net weight determined at the time of packing, explicitly excluding the weight of wax and wrapping materials.",
+      "response": "The committee accepts the wording refinement for improved clarity and readability. The clause is updated accordingly."
+    },
+    "std-202-2.0:7FC09347-424D-5147-981B-C3DC9AB3F0CC:3": {
+      "reference": "§4",
+      "comment": "Publishing moisture-loss percentages per month of age places an unfair administrative burden on smaller producers who lack dedicated laboratory staff to track aging evaporation curves across every single artisanal style we produce.",
+      "proposedChange": null,
+      "response": "The committee defers this comment to the next full revision of the document. The requirement for moisture-loss allowances remains necessary for transparent labeling across diverse cheese styles and aging conditions."
+    },
+    "std-202-2.0:8010857E-9CEF-56E7-8879-A72AE72E6B3C:3": {
+      "reference": "§4",
+      "comment": "At Quincewick Creamery Cooperative, we support the requirement for producers to publish a moisture-loss allowance. To ensure complete clarity on documentation, we suggest clarifying that these percentages should be readily accessible on commercial spec sheets.",
+      "proposedChange": "Amend §4 to state that producers publish a moisture-loss allowance for each style on their official product specification sheets.",
+      "response": "The committee accepts the proposal to clarify where moisture-loss allowances should appear. The section is updated to explicitly mention commercial specification sheets as the publication venue."
+    },
+    "std-202-2.0:856688F8-C895-5E8E-91F2-CDF18AA68503:0": {
+      "reference": "§1",
+      "comment": "As a creamery manager, I find the definition of net weight on whole wheels does not adequately account for variations in traditional clothbound cheeses where lard and bandage wrap absorb moisture differently.",
+      "proposedChange": "Include specific measurement guidelines for clothbound and lard-coated whole wheels.",
+      "response": "The committee deferred this comment to the next standards revision cycle, as addressing specialized clothbound wraps requires targeted technical input from traditional cheesemakers."
+    },
+    "std-202-2.0:856688F8-C895-5E8E-91F2-CDF18AA68503:1": {
+      "reference": "§2",
+      "comment": "Viewing this from a creamery perspective, I object to the printed tare allowance for cut wedges because it assumes uniform film thickness, which fails when suppliers deliver inconsistent roll stock to our cutting rooms.",
+      "proposedChange": "Mandate that wrap suppliers certify film thickness tolerances on every master roll shipped.",
+      "response": "The committee rejected the comment because regulating raw material manufacturing tolerances for film suppliers is outside the scope of this net-weight labeling document for retailers."
+    },
+    "std-202-2.0:8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22:3": {
+      "reference": "§4",
+      "comment": "As a store manager, I approve this section but suggest a small phrasing tweak to improve clarity for customers reading online listings. Changing slight to minimal will sound more professional and precise.",
+      "proposedChange": "Replace the word slight with minimal in the sentence describing transit weight reduction.",
+      "response": "The committee accepted the editorial suggestion. The term has been updated in the final text to provide better clarity for online retail listings."
+    },
+    "std-202-2.0:965ED95C-59D7-55DE-AA49-FCC9041BC734:2": {
+      "reference": "§3",
+      "comment": "At Cindervale Fine Cheese we believe requiring producers to publish moisture-loss percentages is burdensome and assumes uniform aging environments that do not reflect small cellars.",
+      "proposedChange": "Exempt producers aging under five hundred wheels annually from publishing moisture-loss tables.",
+      "response": "The committee rejected the comment because moisture-loss transparency is essential for accurate net-weight verification across all production scales and aging environments."
+    },
+    "std-202-2.0:965ED95C-59D7-55DE-AA49-FCC9041BC734:3": {
+      "reference": "§4",
+      "comment": "Online customers at Cindervale Fine Cheese get confused by vague statements about weight falling in transit. We need clearer wording so buyers understand natural shrinkage without feeling shortchanged.",
+      "proposedChange": "Change online listing wording to state that natural moisture loss may occur during transit.",
+      "response": "The committee accepted the comment in principle, updating the phrasing in the guidelines to emphasize natural moisture reduction during transit for online orders."
+    },
+    "std-202-2.0:A4A08302-3758-529D-8C22-22D8F72A0CBC:1": {
+      "reference": "§2",
+      "comment": "While reviewing the cut-and-wrap wedges section for my classes at Thistlemere Dairy, I noticed the phrasing printed tare is slightly ambiguous. It would help trainees to specify that this refers to pre-printed labels showing the exact tare weight of the packaging material.",
+      "proposedChange": "Amend §2 to read: lets retailers use a pre-printed tare weight label for each type of wrap.",
+      "response": "The committee accepts the principle of clarifying the term printed tare. The section will be revised in the final draft to state pre-printed tare weight to avoid any confusion among retail staff."
+    },
+    "std-202-2.0:A7494213-EBF3-5A89-8197-86572EE6B8F4:1": {
+      "reference": "§2",
+      "comment": "Operating as a head cheesemonger, I object to §2 because the provisions for cut wedges ignore how moisture varies across different pieces. Weighing them immediately at the counter creates discrepancies that the current text does not address.",
+      "proposedChange": "Change §2 to include specific weight variance thresholds for cut wedges based on size.",
+      "response": "The committee rejects the proposed change. The guidance for cut-and-wrap wedges provides adequate flexibility for retail operations while maintaining consistency with baseline standards."
+    },
+    "std-202-2.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:2": {
+      "reference": "§3",
+      "comment": "As Herd Manager at Pippinvale Farm, I believe publishing a moisture-loss percentage per month of age places an unfair testing burden on small-scale producers who lack dedicated laboratory facilities to track aging curves accurately.",
+      "proposedChange": "Provide a simplified default moisture-loss table for small-scale producers to use instead of independent testing.",
+      "response": "The committee rejected the requested change because producers are best positioned to determine the specific maturation characteristics and moisture-loss rates of their own unique cheese styles."
+    },
+    "std-202-2.0:B2A26737-D6CB-5149-8848-01C2954C376E:3": {
+      "reference": "§4",
+      "comment": "As Herd Manager at Pinebarrow Creamery, I am concerned that stating online weights may fall slightly in transit leaves producers vulnerable to consumer complaints when natural moisture evaporation occurs during shipping.",
+      "proposedChange": "Add an explanatory note defining acceptable transit moisture loss percentages for online orders.",
+      "response": "The committee accepted the comment in principle. While the exact wording of the item passes as voted, explanatory examples regarding typical transit loss thresholds will be added to the accompanying guidance notes."
+    },
+    "std-202-2.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:1": {
+      "reference": "§2",
+      "comment": "As Curriculum Lead, I find the revised cut-and-wrap guidance fails to specify how retailers should verify tare accuracy over time. Without calibration intervals, training materials remain incomplete for students learning retail compliance.",
+      "proposedChange": "Require retailers to verify printed tare weights on cut wedges at least once per week.",
+      "response": "The committee rejected this comment because adding mandatory weekly verification intervals exceeds the scope of guidance and creates unnecessary administrative burdens for retail operations."
+    },
+    "std-202-2.0:E4313B6C-F512-518B-99E8-01433EAE7ADA:3": {
+      "reference": "§4",
+      "comment": "Managing online orders at Curd & Cellar is complicated enough without tracking transit weight loss. Customers purchasing shipped cheese expect the weight at packing to remain exact upon arrival.",
+      "proposedChange": "Remove the allowance for transit weight reduction on online orders entirely.",
+      "response": "The committee accepted the comment in principle, modifying the text to clarify that transit loss applies only to high-moisture styles shipped under specific temperature controls."
+    },
+    "std-202-2.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:1": {
+      "reference": "§2",
+      "comment": "As an affineur working with diverse cut styles, I appreciate the flexibility of printed tare, but the wording can be tightened for better enforcement during audits.",
+      "proposedChange": "Insert the word verified before printed tare to ensure accuracy.",
+      "response": "The committee accepted the proposal to add verification language, strengthening the compliance standard for retailers using pre-determined wrap tare weights."
+    },
+    "std-202-2.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:3": {
+      "reference": "§4",
+      "comment": "At Herrera Farmstead we ship delicate bloomy rind cheeses, and stating that weight may fall slightly in transit undermines consumer confidence in our artisanal quality standards.",
+      "proposedChange": "Require refrigerated expedited shipping for all online cheese orders to prevent weight loss.",
+      "response": "The committee rejected the proposed mandate for expedited shipping, noting that it exceeds the scope of a labeling guidance document and imposes commercial burdens on producers."
+    },
+    "std-301-1.0-r1:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:0": {
+      "reference": "§2",
+      "comment": "At Dubois Farmstead, our milking season runs continuously without a distinct break, making the phrase in the first eight weeks of each milking season ambiguous for year-round operations. We need clarity on when the reset for weekly testing occurs for herds that never truly dry off.",
+      "proposedChange": "Revise the testing schedule to specify that weekly testing applies during the first eight weeks of each calendar year for continuous operations.",
+      "response": "The committee agrees that continuous milkers need clear guidance on seasonal triggers. The text is updated to clarify that herds operating without a seasonal dry period shall apply the weekly testing schedule during the first eight weeks of each calendar year."
+    },
+    "std-301-1.0-r1:772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8:0": {
+      "reference": "§2",
+      "comment": "The term pooled sample is clear enough in practice at the Pippinvale Dairy Institute, but adding a hyphen to pooled-sample when used as an adjective before sample improves readability and aligns with standard technical writing conventions in our industry publications.",
+      "proposedChange": "Change pooled sample to pooled-sample in the final clause of the section.",
+      "response": "The committee accepts the editorial correction to improve grammatical consistency. The phrase is revised to pooled-sample to enhance readability across all technical editions of the standard."
+    },
+    "std-301-1.0-r1:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:0": {
+      "reference": "§2",
+      "comment": "Moving to bi-weekly testing after eight weeks creates a blind spot for our cheese shops during the long summer maturation period. Pathogens do not respect seasonal schedules, and safety standards must be consistent across the entire milking year without dropping guard halfway through.",
+      "proposedChange": "Change the testing frequency to weekly throughout the entire milking season for all herds.",
+      "response": "The committee considered the retail safety concerns raised but notes that the current provision balances thorough oversight with reasonable farm burdens. Weekly testing during the critical first eight weeks combined with bi-weekly testing thereafter provides adequate assurance for buyers while keeping compliance feasible for smaller producers."
+    },
+    "std-301-1.0:1168D7EF-3F29-558C-A646-A1771978A142:2": {
+      "reference": "§3",
+      "comment": "The temperature threshold of 40°F (4.4°C) is clear, but adding the equivalent Celsius measurement directly alongside Fahrenheit improves readability for international suppliers across different markets.",
+      "proposedChange": "Ensure both Fahrenheit and Celsius are clearly displayed for all temperature thresholds in §3.",
+      "response": "The committee accepts the editorial recommendation. The dual temperature units are retained and formatted consistently in the text."
+    },
+    "std-301-1.0:1A9580BC-2009-59D6-98FA-4DA50ED4719A:1": {
+      "reference": "§2",
+      "comment": "The requirement for weekly bulk-tank testing fails to account for logistical challenges faced by remote suppliers. Implementing this uniformly will significantly raise administrative costs across the supply chain without providing proportional safety benefits for seasonal operations.",
+      "proposedChange": "Exempt small and seasonal herds from weekly testing requirements.",
+      "response": "The committee accepts the comment. The draft will be modified to introduce flexible testing schedules for small and seasonal operations."
+    },
+    "std-301-1.0:1A9580BC-2009-59D6-98FA-4DA50ED4719A:2": {
+      "reference": "§3",
+      "comment": "The two-hour cooling window for raw milk is appropriate and aligns well with established transport practices across our supplier network.",
+      "proposedChange": "Modify the cooling threshold language to specify mandatory mechanical chilling activation within the two-hour window.",
+      "response": "The committee accepts the comment. The text for milk holding and transport remains unchanged in the revised draft."
+    },
+    "std-301-1.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:0": {
+      "reference": "§1",
+      "comment": "At Dubois Farmstead, our regional veterinary infrastructure cannot support an annual formal review schedule due to a severe shortage of large-animal practitioners. We request that this clause be deferred until veterinary availability stabilizes.",
+      "proposedChange": "Defer the annual veterinarian review requirement to a future standards revision.",
+      "response": "The committee defers this technical comment for consideration in the next scheduled revision of the standard, as current baseline hygiene rules require annual veterinary oversight."
+    },
+    "std-301-1.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:1": {
+      "reference": "§2",
+      "comment": "Weekly bulk-tank testing is entirely impractical for small farmstead operations in our region where postal and courier services do not guarantee timely delivery of biological samples to accredited laboratories.",
+      "proposedChange": "Replace weekly testing with monthly testing for all farmstead producers.",
+      "response": "The committee rejects this change because monthly testing intervals are insufficient for verifying pathogen control in raw milk intended for artisan cheese production. However, alternative logistics pathways will be reviewed."
+    },
+    "std-301-1.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:2": {
+      "reference": "§3",
+      "comment": "The requirement to cool milk within two hours is difficult for remote micro-dairies that lack automated chilling infrastructure immediately following milking. This item should be deferred to allow producers time to upgrade equipment.",
+      "proposedChange": "Defer the cooling time limitation to the next document revision cycle.",
+      "response": "The committee defers this comment to the next revision cycle, noting that temperature control is critical to mitigating microbial growth during raw milk transport."
+    },
+    "std-301-1.0:62608AFC-06B4-5753-B0D3-688E1C720DFB:1": {
+      "reference": "§2",
+      "comment": "As an instructor training future cheesemakers, I see firsthand that small rural dairies struggle to meet weekly testing mandates due to the distance to analytical laboratories. We need a tiered testing frequency based on herd size to maintain educational standards without penalizing micro-dairies.",
+      "proposedChange": "Establish tiered bulk-tank testing frequencies based on daily milk volume.",
+      "response": "The committee accepts this concern in principle and will restructure §2 to incorporate tiered testing requirements that accommodate smaller and remote milk producers without compromising baseline safety."
+    },
+    "std-301-1.0:A93AF7D8-78BB-53A8-BA92-DFFFB1EBB72C:1": {
+      "reference": "§2.1",
+      "comment": "The reference to teat preparation could be made clearer by explicitly stating that pre-dipping must occur prior to milking apparatus attachment. This minor terminology update will ensure uniformity across all distribution channels and avoid any ambiguity during audits.",
+      "proposedChange": "Change teat preparation and pre-dip to teat preparation and pre-dip prior to milking.",
+      "response": "The committee accepts this editorial suggestion to improve clarity. The phrase will be updated in the revised draft to explicitly specify the timing of the pre-dip application."
+    },
+    "std-301-1.0:CCC015AC-1247-5EA6-A662-FBE02C930AFA:1": {
+      "reference": "§2",
+      "comment": "At Nornbrook Cheesemonger, we receive milk from several smaller herds where weekly lab testing for standard plate count and coliforms creates an excessive financial burden and logistical nightmare due to remote locations. Requiring this frequency without exceptions ignores the realities of regional producers who lack daily courier access to certified laboratories.",
+      "proposedChange": "Amend §2 to allow bi-weekly or monthly testing for small and seasonal herds.",
+      "response": "The committee agrees that rigid weekly bulk-tank testing disproportionately burdens remote and small-scale producers. We will revise the text to permit alternative testing intervals for seasonal or small herds upon consultation with their regional milk inspector."
+    },
+    "std-301-1.0:D8D82DD1-6AE6-571C-AEFC-737782926B3A:0": {
+      "reference": "§1",
+      "comment": "At Fallowfen Cheese & Provisions, our herd health plans are robust, but the terminology regarding veterinarian reviews can be tightened. Specifying an annual documented review will align the standard with standard European farm management practices.",
+      "proposedChange": "Change reviewed with a veterinarian each year to reviewed and signed by a licensed veterinarian annually.",
+      "response": "The committee accepts the proposed wording change to clarify that the annual veterinarian review must be officially documented and signed."
+    },
+    "std-301-1.0:D8D82DD1-6AE6-571C-AEFC-737782926B3A:1": {
+      "reference": "§2",
+      "comment": "Mandating weekly bulk-tank testing for standard plate count and coliforms does not account for the realities of seasonal dairies. During winter dry periods, our operations scale down significantly, rendering weekly lab dispatches economically unviable.",
+      "proposedChange": "Add an exemption for seasonal herds not in active milking production.",
+      "response": "The committee accepts this concern in principle. The revised draft will include provisions allowing seasonal herds to suspend bulk-tank testing schedules during non-milking periods."
+    },
+    "std-301-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:1": {
+      "reference": "§2",
+      "comment": "Weekly testing of bulk-tank milk for standard plate count and coliforms is essential for verifying raw milk safety before it enters any cheesemaking facility. Lowering testing standards for certain producers compromises the reliability of our supply chain and introduces unnecessary biological risks to raw-milk cheese production.",
+      "proposedChange": "Revise the testing frequency requirement to mandate alternative accredited laboratory testing protocols.",
+      "response": "The committee rejects this comment because mandatory weekly testing for all farms regardless of scale places an impractical logistical burden on smaller and seasonal producers. The revised draft will incorporate scaled testing frequencies."
+    },
+    "std-301-1.1:AC73CCD5-783B-5A03-9A6B-3A974B40201B:0": {
+      "reference": "Amendment 1",
+      "comment": "Operating Pippinvale Farm with a herd under 40 head, I find the approved labs list overly restrictive and impractical for remote producers. Shipping samples to distant facilities adds prohibitive costs and risks degradation before arrival. Local accredited veterinary labs should be provisionally recognized without forcing small producers to use urban commercial centers.",
+      "proposedChange": "Expand the approved labs list to include state-accredited local veterinary diagnostic laboratories serving rural regions.",
+      "response": "The committee has reviewed the concern regarding laboratory access for small and seasonal herds. Because laboratory accreditation standards vary widely across regions, this specific inclusion requires deeper study and coordination with state authorities. Therefore, the committee defers this matter to the next formal document revision to allow comprehensive stakeholder consultation."
+    },
+    "std-301-1.1:E33467A6-2B8D-57DF-89B4-FB3546BEF863:0": {
+      "reference": "Amendment 1",
+      "comment": "At Iversen Cultures Co., our retail operation relies on consistent testing protocols for all farm sizes. The small herd exemption under 40 head leaves too much ambiguity regarding the frequency of pooled sample collection during seasonal milking drop-offs. Without a strict testing schedule tied to our supplier audits, retail quality assurance becomes difficult to maintain. We need explicit mandatory intervals specified right in the amendment text.",
+      "proposedChange": "Amend the text to explicitly require monthly pooled sample collection for all seasonal herds under 40 head.",
+      "response": "The committee agrees that testing frequency needs better definition for seasonal herds under 40 head. Rather than a rigid monthly mandate which could burden dry periods, the text is amended to require testing at least once per active milking quarter, ensuring adequate oversight while accommodating seasonal production cycles."
+    },
+    "std-302-1.0:2266EC81-CDCD-5C2D-A2DC-4362538F26CF:1": {
+      "reference": "§2",
+      "comment": "Here at Vandermolen Farmstead Creamery in Hokkaido, we find that air handler surfaces present unique microbial profiles compared to static shelves. Grouping them together without distinguishing between product-contact zones and non-contact zones creates confusion during routine environmental swabbing.",
+      "proposedChange": "Add a clarification that air handler swabs must differentiate between internal condensate pans and external housing surfaces.",
+      "response": "The committee accepts the principle of differentiating air handler surfaces and will incorporate explanatory guidance in the accompanying standard handbook without altering the core text of §2."
+    },
+    "std-302-1.0:38462C1A-999E-520E-BE56-FA3FD1B9C162:0": {
+      "reference": "§1",
+      "comment": "Mapping sampling points in aging rooms is standard practice for affineurs. The current text effectively covers the critical zones in our caves without imposing excessive burdens.",
+      "proposedChange": "Clarify that maps must be reviewed annually by quality assurance staff.",
+      "response": "The committee notes the comment supporting the text. However, adding an annual review requirement expands the scope of §1 beyond initial mapping, so the text stands as drafted."
+    },
+    "std-302-1.0:38462C1A-999E-520E-BE56-FA3FD1B9C162:2": {
+      "reference": "§3",
+      "comment": "The corrective action requirements in §3 regarding product holds create severe commercial bottlenecks for affineurs handling delicate specialty inventory. Holding entire room lots pending resamples can disrupt supply chains beyond what is reasonable for a positive swab.",
+      "proposedChange": "Limit product holds to immediately adjacent lots rather than the entire room inventory.",
+      "response": "The committee defers this comment to the next revision cycle. Product hold scopes require comprehensive risk-assessment data that will be studied by a dedicated working group before any modifications are proposed."
+    },
+    "std-302-1.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:1": {
+      "reference": "§2",
+      "comment": "At Dubois Farmstead, drafting detailed environmental maps for every single aging cave creates significant administrative overhead for small producers. Weekly and monthly verification schedules already strain our limited staffing resources without adding extra documentation burdens.",
+      "proposedChange": null,
+      "response": "The committee acknowledges the resource challenges faced by farmstead producers. However, a written sampling map is essential for targeted pathogen control and traceability, aligning with standard industry practices and the federal floor."
+    },
+    "std-302-1.0:65D40948-FA0D-5DB6-9F63-6AB60342F182:2": {
+      "reference": "§3",
+      "comment": "In our facility at Elderfen Farm in Oaxaca, we find the term raw-milk soft cheese is clear, but adding a hyphenation check and ensuring consistent capitalization will help align this section with international labeling practices.",
+      "proposedChange": "Ensure consistent hyphenation of raw-milk soft cheese throughout the second sentence of §3.",
+      "response": "The committee accepts the editorial correction to ensure consistent hyphenation of raw-milk soft cheese in the text."
+    },
+    "std-302-1.0:6B4BF43A-4C16-5DAD-9EA3-F3EDB4093873:1": {
+      "reference": "§2",
+      "comment": "At Quernstone Creamery, our students in Emmental work with a vast array of aging cellars. Mandating a strict written map for every single room regardless of size creates an unnecessary administrative burden for artisan producers who operate small, single-shelf caves. The current scope is overly prescriptive.",
+      "proposedChange": null,
+      "response": "The committee notes the concern regarding small artisan caves, but maintaining a written map of sampling points is essential for environmental control and traceability across all aging rooms. The text stands as written."
+    },
+    "std-302-1.0:73619338-F1FC-50C4-8C4A-3585459464A1:2": {
+      "reference": "§3",
+      "comment": "At Elderfen Cheese & Provisions, we believe the sampling frequency text is mostly clear, but adding a specific minimum time interval between monthly swabs would prevent ambiguity for retail aging rooms that operate on irregular calendar schedules.",
+      "proposedChange": "Amend to specify that monthly environmental swabs shall be conducted at intervals of at least twenty-five days.",
+      "response": "The committee accepts the editorial clarification regarding the minimum interval between monthly swabs and has updated the text accordingly."
+    },
+    "std-302-1.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:1": {
+      "reference": "§2",
+      "comment": "Section 2 establishes a solid baseline for environmental mapping in aging rooms. As a cheese program director, I approve the provision and suggest adding a clarifying reference to facility diagrams.",
+      "proposedChange": "Add a cross-reference to facility blueprints at the end of §2.",
+      "response": "The committee accepts the suggestion in principle. While facility blueprints are useful, adding a mandatory cross-reference is unnecessary as facilities already maintain standard architectural schematics."
+    },
+    "std-302-1.0:74C2B126-78E7-5C93-BEA8-E048CAAFD91C:2": {
+      "reference": "§3",
+      "comment": "Requiring weekly swabs exclusively for raw-milk soft cheese rooms in §3 creates an ambiguous distinction. Pasteurized soft cheeses can also host moisture-loving pathogens, so frequency should be based on moisture content rather than milk type alone.",
+      "proposedChange": "Update §3 to require weekly environmental swabs for all high-moisture soft cheese aging rooms regardless of milk pasteurization status.",
+      "response": "The committee accepts the principle that high-moisture soft cheeses present elevated risks. Section 3 will be updated AcceptedInPrinciple to include high-moisture soft cheese rooms alongside raw-milk soft cheese rooms for weekly testing."
+    },
+    "std-302-1.0:75F3B7F3-5CE6-5E42-9EE3-76A40068B633:2": {
+      "reference": "§3",
+      "comment": "At our creamery in Trikala, the requirement for weekly swabs in rooms holding raw-milk soft cheese is clear. However, changing the prepositional phrasing slightly will improve the flow of the sentence for non-native English speakers.",
+      "proposedChange": "Replace in rooms holding with for rooms containing.",
+      "response": "The committee accepts the editorial refinement to improve the clarity and professional tone of the sentence."
+    },
+    "std-302-1.0:7D1D1249-BCD3-5AC4-B842-99FE08C2AE30:0": {
+      "reference": "§1",
+      "comment": "As a regional sales director supplying culture and monitoring materials, I find the wording in §1 robust and clear. I approve the section as written, with a minor tweak to alphabetize the listed sampling points.",
+      "proposedChange": "Order the sampling points alphabetically as: air handlers, floor drains, shelves and walls.",
+      "response": "The committee accepts the editorial suggestion to reorganize the list alphabetically for better readability. The revised text will reflect this order."
+    },
+    "std-302-1.0:8010857E-9CEF-56E7-8879-A72AE72E6B3C:0": {
+      "reference": "§1",
+      "comment": "At Quincewick Creamery Cooperative, our aging caves span multiple subterranean levels and complex ventilation zones. Requiring a single comprehensive written map under §1 fails to accommodate dynamic mapping updates when air handlers are repositioned or repaired.",
+      "proposedChange": "Add a provision allowing digital, dynamically updated maps that reflect real-time air handler configurations.",
+      "response": "The committee defers this technical comment for the next revision of the document, as it requires broader consultation regarding digital mapping standards and document control software integration across member facilities."
+    },
+    "std-302-1.0:82E5E82A-9152-53FD-A6FF-20F383A65261:0": {
+      "reference": "§1",
+      "comment": "The list of sampling points omits evaporator drip pans, which are a major vector in high humidity aging rooms. As a supplier of monitoring equipment, I see these areas harbouring moisture and biofilms constantly, so leaving them off the written map is a critical oversight.",
+      "proposedChange": "Amend §1 to read: Each aging room has a written map of sampling points: shelves, floor drains, walls, evaporator drip pans and air handlers.",
+      "response": "The committee agrees that evaporator drip pans represent a critical environmental niche in aging rooms. The suggestion is accepted, and the text will be updated to include evaporator drip pans in the required mapping list."
+    },
+    "std-302-1.0:958B1085-3310-588F-AAC0-31AA558B19D5:0": {
+      "reference": "§1",
+      "comment": "As a production lead in Seattle, I appreciate the simplicity of §1. To make the requirement punchier and grammatically seamless for technicians reading the manual on the floor, we should adjust the punctuation of the listed sampling points.",
+      "proposedChange": "Change the punctuation to: shelves, floor drains, walls, and air handlers.",
+      "response": "The committee accepts the proposed punctuation change to improve readability and grammatical consistency."
+    },
+    "std-302-1.0:958B1085-3310-588F-AAC0-31AA558B19D5:1": {
+      "reference": "§2",
+      "comment": "Reviewing §2 from my production perspective in Seattle, the phrasing is solid, but adding the word calendar before monthly will eliminate any ambiguity regarding 30-day testing windows.",
+      "proposedChange": "Change monthly to calendar monthly in the first clause of §2.",
+      "response": "The committee accepts the suggestion to insert the word calendar to clarify the monthly sampling interval."
+    },
+    "std-302-1.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:1": {
+      "reference": "§2",
+      "comment": "At Pippinvale Farm, we support the requirement for a written map. However, the phrasing could be slightly tightened to improve clarity regarding air handlers and structural surfaces so that inspectors do not misinterpret the exact boundaries of a sampling zone.",
+      "proposedChange": "Change to read: Each aging room shall maintain a written map of specific sampling points including shelves, floor drains, walls, and air handlers.",
+      "response": "The committee accepts the proposed wording change to clarify that sampling points must be specifically mapped for shelves, floor drains, walls, and air handlers."
+    },
+    "std-302-1.0:B2A26737-D6CB-5149-8848-01C2954C376E:2": {
+      "reference": "§3",
+      "comment": "At Pinebarrow Creamery in Chicago, weekly swabbing for raw-milk soft cheese rooms creates a severe bottleneck for our laboratory turnaround times. We suggest permitting composite swabbing for rooms holding identical make-days to reduce testing fatigue while maintaining safety.",
+      "proposedChange": "Modify §3 to permit composite environmental swabbing for multiple rooms holding the same lot of raw-milk soft cheese.",
+      "response": "The committee accepts the principle of operational flexibility, but composite environmental swabs compromise individual room traceability. The committee addresses this by adding an explanatory note allowing concurrent processing of separate swabs."
+    },
+    "std-302-1.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:1": {
+      "reference": "§2",
+      "comment": "I approve the monthly and weekly testing schedules for our aging rooms. However, the wording lacks clarity regarding when the weekly count restarts after a room is emptied for sanitation. For our courses taught at chapter meet-ups, we need the text to explicitly state that the weekly clock resets upon completion of the sanitation cycle to avoid trainee confusion.",
+      "proposedChange": "Change to read: Environmental swabs at least monthly in every room, and weekly in rooms holding raw-milk soft cheese, with the weekly schedule restarting immediately following any complete room sanitation cycle.",
+      "response": "The committee agrees that clarifying the restart of the weekly testing cycle following room sanitation improves practical understanding for both operators and educators. The proposed text has been incorporated directly into the standard."
+    },
+    "std-302-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:1": {
+      "reference": "§2",
+      "comment": "As a cheese buyer, I am concerned that monthly testing is insufficient for ensuring safety across delicate batches. While §1 sets out mapping, the frequency in §2 needs to account for higher risk profiles more aggressively.",
+      "proposedChange": "Modify §2 to incorporate mandatory bi-weekly zone testing for all ripening spaces holding aged inventory.",
+      "response": "The committee notes the concern regarding sampling intensity. Although §1 governs mapping rather than frequency, the principle of enhanced verification is addressed under §2 with the weekly requirement for raw-milk soft cheese rooms."
+    },
+    "std-302-1.0:FBB1722E-F036-5279-BD6C-F190A5CCFACA:1": {
+      "reference": "§2",
+      "comment": "The text of §2 is clear and appropriate for dairy operations. I approve the item but suggest adding a hyphen to air-handlers for grammatical consistency across ICF technical documents.",
+      "proposedChange": "Change air handlers to air-handlers in §2.",
+      "response": "The committee thanks the reviewer for the close read, but declines the edit. Current industry terminology commonly uses the open compound noun without a hyphen."
+    },
+    "std-302-1.0:FBB1722E-F036-5279-BD6C-F190A5CCFACA:2": {
+      "reference": "§3",
+      "comment": "Section 3 is well-structured and practical for our production cycle at Larkhollow Dairy Systems. To improve clarity regarding timing intervals, I suggest specifying exact calendar days for the monthly swabs.",
+      "proposedChange": "Replace monthly with every thirty days in §3.",
+      "response": "The committee accepts the proposed change to provide greater scheduling precision. Section 3 will be revised to specify every thirty days for general environmental swabs."
+    }
+  }
+}
