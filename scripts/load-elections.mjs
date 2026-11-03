@@ -8,21 +8,31 @@
  *   1. creates it (contests, options, anchors) as the System user, then puts the plan's roll on it and freezes it;
  *      with nominations, opens them, nominates each candidate (as themself), approves them (each approval makes the
  *      candidate's ballot option), withdraws who the plan withdraws and closes nominations
- *      a standards ballot gets its document row (title, version, the ballot it recirculates) before it opens
- *   2. opens it and casts each ballot for its voter through CastEngine, entered by the certifier when not cast online,
- *      with any comment the plan gives on a standards item
- *   3. closes and tallies it, checks every contest's result against the plan, resolves each standards comment through
+ *      a standards ballot gets its document row (title, version, the ballot it recirculates) before it opens, and a
+ *      vote taking proxies its proxy deadline
+ *   2. opens it, files each proxy designation as its grantor and accepts it, and casts each ballot for its voter through
+ *      CastEngine, entered by the certifier when not cast online (a proxy ballot under its designation), with any comment
+ *      the plan gives on a standards item
+ *   3. closes and tallies it (a race the plan ties is broken by lot, with a seed that gives the plan's winner), checks
+ *      every contest's result against the plan, resolves each standards comment through
  *      CommentEngine (as the System user: resolving needs voting's administrator role) and records each writer's
- *      answer as that voter, and certifies it as the certifier,
+ *      answer as that voter, and certifies it as the certifier (a poll, which has none, stays tallied),
  *      whose Person must be linked to an MJ User (scripts/load-spaces.mjs links everyone it seats); the loader gives
  *      each certifier voting's Election Inspector role first, so the role stays out of More Cheese's own config
  *   4. backdates it: every voting row and Record Changes row written while it loaded is mapped, in proportion and
  *      stretch by stretch, onto the plan's dates: setting up (and nominations) onto the time before it opens, voting
  *      onto its window, and closing, tallying and certifying onto the time after it closes; then each nomination's,
- *      each ballot's and each comment resolution's time is set to the plan's, and each resolution is credited to the
- *      certifier, the committee chair who resolved it. Nothing voting verifies covers a timestamp (roll hash: person, class, weight;
+ *      each ballot's, each proxy designation's and each comment resolution's time is set to the plan's, and each
+ *      resolution is credited to the certifier, the committee chair who resolved it. Nothing voting verifies covers a timestamp (roll hash: person, class, weight;
  *      ballot-set hash: ballot id, style hash, receipt), so the certified results and receipts still check out.
- * An election whose name is already in the database is left alone if it is Certified, and reported otherwise.
+ * An election the plan has open (on the data's as-of date) stops after step 2, with the ballots cast so far; the presenter
+ * given by --presenter <email> (who must have signed in once) is put on its roll, as the Person linked to their MJ User,
+ * made if there is none, so they can vote in the demo. An election the plan has taking nominations is refused for now.
+ * An election whose name is already in the database is left alone if it is Certified (a poll: Tallied; an open one:
+ * Open with all the plan's ballots so far), and reported otherwise, except one an earlier month's plan loaded open: Open
+ * still, or Closed by voting's own scheduler once its real closing time passed, it holds that plan's ballots only, so when
+ * this plan has more of them or the result, it is deleted and loaded again in full (with any ballot the presenter cast).
+ * After a monthly run: rebuild nothing, just load the spaces and then the elections from the merged plans.
  *
  * Before running: load the spaces (scripts/load-spaces.mjs) so voters' People are linked to their Users, and load
  * @mj-biz-apps/voting-server through dynamicPackages.server in the MJ host's mj.config.cjs. Restart MJAPI afterwards:
@@ -31,6 +41,7 @@
  *   node scripts/load-elections.mjs --mj ../MJ                 # DB_* from the environment, as for mj sync push
  *   node scripts/load-elections.mjs --mj ../MJ --dry-run       # connect and check, write nothing
  *   node scripts/load-elections.mjs --mj ../MJ --only motion-  # only elections whose key starts with this
+ *   node scripts/load-elections.mjs --mj ../MJ --presenter you@example.com   # seat the presenter on open elections
  *
  * Run from the repo root.
  */
@@ -64,6 +75,7 @@ const TIME_COLUMNS = {
     ElectionCertification: ['CertifiedAt'],
     ElectionCertifier: ['SignedAt'],
     ElectionAuditEvent: ['OccurredAt'],
+    ProxyDesignation: ['ReceivedAt'],
     ResultSnapshot: ['SnapshotAt'],
     Nomination: ['SubmittedAt', 'DecidedAt'],
     BallotComment: [],
@@ -72,12 +84,13 @@ const TIME_COLUMNS = {
 };
 
 function args(argv) {
-    const out = { plan: 'data/elections/elections.plan.json', mj: process.env.MJ_DIR ?? null, dryRun: false, only: null };
+    const out = { plan: 'data/elections/elections.plan.json', mj: process.env.MJ_DIR ?? null, dryRun: false, only: null, presenter: null };
     for (let i = 0; i < argv.length; i++) {
         if (argv[i] === '--mj') out.mj = argv[++i];
         else if (argv[i] === '--plan') out.plan = argv[++i];
         else if (argv[i] === '--dry-run') out.dryRun = true;
         else if (argv[i] === '--only') out.only = argv[++i];
+        else if (argv[i] === '--presenter') out.presenter = argv[++i];
         else throw new Error(`unknown argument ${argv[i]}`);
     }
     if (!out.mj) throw new Error('--mj <path to the MJ repo or host that has mj.config.cjs> is required (or set MJ_DIR)');
@@ -136,7 +149,10 @@ async function bootstrap(mjDir) {
     const { UserCache } = await fromSync('@memberjunction/generic-database-provider');
     // The engines must be the very build the host loaded, or their singletons and registrations are a second copy.
     const voting = await importer(mjDir)('@mj-biz-apps/voting-server');
-    return { core, pool, UserCache, voting };
+    // The tally's own tie-break, for choosing a lot seed (voting-entities sits beside voting-server).
+    const serverDir = path.dirname(createRequire(path.join(mjDir, 'package.json')).resolve('@mj-biz-apps/voting-server'));
+    const contracts = await importer(serverDir)('@mj-biz-apps/voting-entities/contracts');
+    return { core, pool, UserCache, voting, contracts };
 }
 
 const unwrap = (result, what) => {
@@ -147,9 +163,11 @@ const unwrap = (result, what) => {
 export async function load(opts) {
     const plan = JSON.parse(fs.readFileSync(opts.plan, 'utf8'));
     const elections = plan.elections.filter((e) => !opts.only || e.key.startsWith(opts.only));
+    const waiting = elections.filter((e) => e.stage === 'nominations');
+    if (waiting.length) throw new Error(`${waiting.map((e) => e.key).join(', ')}: loading an election mid-nominations is not supported yet`);
     const unwritten = elections.flatMap((e) => e.ballots.flatMap((b) => b.contests.filter((c) => c.comment && !(c.comment.comment && c.comment.resolution.response))));
     if (unwritten.length) throw new Error(`${unwritten.length} standards comments have no wording: run scripts/build-election-comments-gemini.mjs, then the plan builder`);
-    const { core, pool, UserCache, voting } = await bootstrap(opts.mj);
+    const { core, pool, UserCache, voting, contracts } = await bootstrap(opts.mj);
     const system = UserCache.Instance.GetSystemUser?.() ?? UserCache.Instance.UserByName('System', false);
     const provider = core.Metadata.Provider;
     const systemCtx = { ContextUser: system, Provider: provider };
@@ -162,13 +180,13 @@ export async function load(opts) {
     const dbNow = async () => (await pool.request().query('SELECT SYSDATETIMEOFFSET() AS t')).recordset[0].t;
 
     // Certifiers (who also enter paper and in-person ballots) act as their MJ User, found through their Person's link.
-    const people = [...new Set(elections.map((e) => e.certifier))];
+    const people = [...new Set(elections.map((e) => e.certifier).filter(Boolean))];
     const userOfPerson = new Map();
     for (let i = 0; i < people.length; i += 500) {
         const rows = await run(ENTITY.people, `ID IN (${people.slice(i, i + 500).map((p) => `'${p}'`).join(',')}) AND LinkedUserID IS NOT NULL`, ['ID', 'LinkedUserID']);
         for (const r of rows) userOfPerson.set(r.ID.toUpperCase(), UserCache.Instance.Users.find((u) => sameId(u.ID, r.LinkedUserID)));
     }
-    const certifiers = new Set(elections.map((e) => e.certifier));
+    const certifiers = new Set(elections.map((e) => e.certifier).filter(Boolean));
     const unlinked = [...certifiers].filter((p) => !userOfPerson.get(p));
     if (unlinked.length) throw new Error(`${unlinked.length} certifiers have no linked MJ User (run scripts/load-spaces.mjs first), e.g. ${unlinked.slice(0, 3).join(', ')}`);
     const [inspector] = await run(ENTITY.roles, `Name = '${q(CERTIFIER_ROLE)}'`, ['ID']);
@@ -204,13 +222,13 @@ export async function load(opts) {
         unwrap(await voting.ElectionAdministrationEngine.Instance.OpenNominations(electionId, systemCtx), `open nominations ${e.key}`);
         const nominationsOpened = await dbNow();
         const graph = unwrap(await voting.LoadElectionGraph(electionId, systemCtx), `graph of ${e.key}`);
-        const office = graph.Contests.find((c) => c.Kind === 'Office');
+        const offices = [...graph.Contests].filter((c) => c.Kind === 'Office').sort((a, b) => a.Sequence - b.Sequence);
         const voterOf = new Map((await run(ENTITY.voters, `ElectionID = '${electionId}'`, ['ID', 'PersonID'])).map((v) => [v.PersonID.toUpperCase(), v.ID]));
         for (const n of e.nominations.entries) {
             if (!voterOf.has(n.person)) throw new Error(`${e.key}: nominee ${n.person} is not on the roll`);
             const self = { ElectionID: electionId, EligibleVoterID: voterOf.get(n.person), Via: 'MJSession', CredentialMethodCode: 'mj-session' };
             const { NominationID } = unwrap(await voting.NominationEngine.Instance.SubmitNomination(
-                { ContestID: office.ID, NomineePersonID: n.person, Statement: n.statement ?? undefined }, self, systemCtx), `nominate ${n.person} in ${e.key}`);
+                { ContestID: offices[n.contest ?? 0].ID, NomineePersonID: n.person, Statement: n.statement ?? undefined }, self, systemCtx), `nominate ${n.person} in ${e.key}`);
             const { ContestOptionID } = unwrap(await voting.NominationEngine.Instance.DecideNomination({ NominationID, Decision: 'Approved' }, systemCtx), `approve ${n.person} in ${e.key}`);
             if (!n.withdrawn) continue;
             for (const [entity, id] of [[ENTITY.nominations, NominationID], [ENTITY.options, ContestOptionID]]) {
@@ -268,15 +286,94 @@ export async function load(opts) {
         return done;
     };
 
+    /** Proxies are taken until an hour from now; the backdating moves the deadline to the plan's. */
+    const proxyDeadline = async (e, electionId) => {
+        const election = await new core.Metadata().GetEntityObject(ENTITY.elections, system);
+        if (!(await election.Load(electionId))) throw new Error(`${e.key}: cannot load the election`);
+        election.ProxyDeadline = new Date(Date.now() + 3600000);
+        if (!(await election.Save())) throw new Error(`${e.key}: proxy deadline: ${election.LatestResult?.CompleteMessage}`);
+    };
+
+    /** Each grantor names their proxy holder (as the voter they are), and the designation is accepted. */
+    const designate = async (e, electionId, voterOf) => {
+        const out = new Map();
+        for (const x of e.proxies.entries) {
+            const grantor = voterOf.get(x.person);
+            if (!grantor || !voterOf.has(x.holder)) throw new Error(`${e.key}: proxy ${x.person} → ${x.holder} is not between two voters on the roll`);
+            const self = { ElectionID: electionId, EligibleVoterID: grantor.ID, Via: 'MJSession', CredentialMethodCode: 'mj-session' };
+            const { ProxyDesignationID } = unwrap(await voting.VoterRollEngine.Instance.SubmitProxy(
+                { ElectionID: electionId, ProxyPersonID: x.holder, Scope: 'General' }, self, systemCtx), `proxy of ${x.person} in ${e.key}`);
+            unwrap(await voting.VoterRollEngine.Instance.DecideProxy({ ProxyDesignationID, Decision: 'Accepted' }, systemCtx), `accept proxy of ${x.person} in ${e.key}`);
+            out.set(x.person, ProxyDesignationID);
+        }
+        return out;
+    };
+
+    /**
+     * The tie-break seed under which the plan's winner of its tied race comes first: voting breaks a tie by shuffling the
+     * tied options (in ballot order) with a generator seeded from this, so the loader tries seeds until one does.
+     */
+    const lotSeed = (e, graph, contests) => {
+        const contest = contests[e.lot.contest];
+        const options = [...([...graph.OptionsByContestID].find(([id]) => sameId(id, contest.ID))?.[1] ?? [])]
+            .filter((o) => o.Status === 'Active').sort((a, b) => a.Sequence - b.Sequence);
+        const ids = options.map((o) => o.ID);
+        const totals = Object.fromEntries(options.map((o) => [o.ID, e.lot.tied.some((p) => sameId(p, o.CandidatePersonID)) ? 1 : 0]));
+        for (let i = 0; i < 1000; i++) {
+            const seed = `${e.key}:lot:${i}`;
+            const { ordered } = contracts.RankWithTies(totals, ids, contest.Seats, new contracts.SeededRandom(seed));
+            if (sameId(options.find((o) => o.ID === ordered[0])?.CandidatePersonID, e.lot.winner)) return seed;
+        }
+        throw new Error(`${e.key}: no tie-break seed gives the plan's winner`);
+    };
+
+    /** The presenter's Person: the one linked to their MJ User, else the one with their email (linked now), else a new one. */
+    const presenterPerson = async (email) => {
+        const user = UserCache.Instance.Users.find((u) => String(u.Email).toLowerCase() === email.toLowerCase());
+        if (!user) throw new Error(`--presenter ${email}: no MJ User has that email (sign in to Explorer once first)`);
+        const [linked] = await run(ENTITY.people, `LinkedUserID = '${user.ID}'`, ['ID']);
+        if (linked) return linked.ID.toUpperCase();
+        const person = await new core.Metadata().GetEntityObject(ENTITY.people, system);
+        const [byEmail] = await run(ENTITY.people, `Email = '${q(email)}' AND LinkedUserID IS NULL`, ['ID']);
+        if (byEmail) {
+            if (!(await person.Load(byEmail.ID))) throw new Error(`--presenter ${email}: cannot load their Person`);
+        } else {
+            person.NewRecord();
+            person.FirstName = user.FirstName || 'Demo';
+            person.LastName = user.LastName || 'Presenter';
+            person.Email = email;
+            person.Status = 'Active';
+        }
+        person.LinkedUserID = user.ID;
+        if (!(await person.Save())) throw new Error(`--presenter ${email}: ${person.LatestResult?.CompleteMessage ?? 'save failed'}`);
+        log(`presenter ${email} votes as Person ${person.ID}`);
+        return String(person.ID).toUpperCase();
+    };
+    const seated = elections.some((e) => e.presenter) && opts.presenter && !opts.dryRun ? await presenterPerson(opts.presenter) : null;
+    if (elections.some((e) => e.presenter) && !opts.presenter) log('no --presenter: open elections load without the presenter on their rolls');
+
     const existing = new Map((await run(ENTITY.elections, '', ['ID', 'Name', 'Status'])).map((r) => [r.Name, r]));
-    const counts = { loaded: 0, skipped: 0, ballots: 0 };
+    const counts = { loaded: 0, skipped: 0, replaced: 0, ballots: 0 };
     const problems = [];
     for (const e of elections) {
         const found = existing.get(e.name);
         if (found) {
-            if (found.Status === 'Certified') counts.skipped++;
-            else problems.push(`${e.key}: already in the database as ${found.Status}; delete it to reload`);
-            continue;
+            const want = e.stage === 'open' ? 'Open' : e.certifier ? 'Certified' : 'Tallied';
+            // Loaded open by an earlier month's plan, it is Open still, or Closed by voting's scheduler with only the
+            // ballots that plan had. This plan has more of them, or the result: load it again in full.
+            const cast = ['Open', 'Closed'].includes(found.Status)
+                ? (await pool.request().input('election', found.ID).query(`SELECT COUNT(*) AS n FROM [${VOTING_SCHEMA}].[CastBallot] WHERE ElectionID = @election`)).recordset[0].n
+                : 0;
+            const stale = ['Open', 'Closed'].includes(found.Status) && (want !== 'Open' || cast < e.ballots.length);
+            if (!stale) {
+                if (found.Status === want) counts.skipped++;
+                else problems.push(`${e.key}: already in the database as ${found.Status}; delete it to reload`);
+                continue;
+            }
+            log(`${e.key}: ${found.Status} with ${cast} ballots, the plan has ${e.ballots.length}${want === 'Open' ? '' : ' and its result'}: loading it again (a ballot the presenter cast goes with it)`);
+            if (opts.dryRun) { counts.replaced++; continue; }
+            await withdraw(pool, found.ID);
+            counts.replaced++;
         }
         if (opts.dryRun) { counts.loaded++; counts.ballots += e.ballots.length; continue; }
         const certifier = userOfPerson.get(e.certifier);
@@ -291,15 +388,17 @@ export async function load(opts) {
             EligibilitySource: { Code: 'entity-query', Settings: { EntityName: ENTITY.people, PersonIDField: 'ID', ExtraFilter: '1=0' } },
             Contests: e.contests.map((c) => ({
                 Name: c.name, Kind: c.kind, TallyMethodCode: c.tally, Threshold: c.threshold, ThresholdBasis: c.basis,
-                AllowAbstain: c.allowAbstain, Seats: c.seats, Options: c.options?.map((o) => ({ Label: o.label, CandidatePersonID: o.person })),
+                AllowAbstain: c.allowAbstain, Seats: c.seats, Description: c.description, Options: c.options?.map((o) => ({ Label: o.label, CandidatePersonID: o.person })),
             })),
             SecrecyMode: e.secrecy,
             ResultsTiming: e.resultsTiming,
             ResultsAudience: e.resultsAudience,
         }, systemCtx), `create ${e.key}`).ElectionID;
-        unwrap(await voting.VoterRollEngine.Instance.AmendRoll({ ElectionID: electionId, Add: e.roll.map((r) => ({ PersonID: r.person, VotingClass: r.class, Weight: r.weight })) }, systemCtx), `roll of ${e.key}`);
+        const roll = [...e.roll, ...(e.presenter && seated && !e.roll.some((r) => r.person === seated) ? [{ person: seated, class: e.presenter.class ?? undefined }] : [])];
+        unwrap(await voting.VoterRollEngine.Instance.AmendRoll({ ElectionID: electionId, Add: roll.map((r) => ({ PersonID: r.person, VotingClass: r.class, Weight: r.weight })) }, systemCtx), `roll of ${e.key}`);
         const marks = { started };
         if (e.standards) await describe(e, electionId);
+        if (e.proxies) await proxyDeadline(e, electionId);
         if (e.nominations) Object.assign(marks, await nominate(e, electionId));
         else unwrap(await voting.VoterRollEngine.Instance.FreezeRoll(electionId, systemCtx), `freeze ${e.key}`);
         unwrap(await voting.ElectionAdministrationEngine.Instance.OpenElection(electionId, systemCtx), `open ${e.key}`);
@@ -308,6 +407,7 @@ export async function load(opts) {
         const graph = unwrap(await voting.LoadElectionGraph(electionId, systemCtx), `graph of ${e.key}`);
         const contests = [...graph.Contests].sort((a, b) => a.Sequence - b.Sequence);
         const voterOf = new Map((await run(ENTITY.voters, `ElectionID = '${electionId}'`, ['ID', 'PersonID', 'VotingClass'])).map((v) => [v.PersonID.toUpperCase(), v]));
+        const proxyOf = e.proxies ? await designate(e, electionId, voterOf) : new Map();
         const styles = new Map();
         for (const b of e.ballots) {
             const voter = voterOf.get(b.person);
@@ -335,14 +435,24 @@ export async function load(opts) {
                 BallotStyleHash: styles.get(cls),
                 Submission: submission,
                 Channel: b.channel,
-                ...(b.channel === 'Online' ? {} : { EnteredByUserID: certifier.ID }),
+                ...(b.channel === 'Online' ? {} : { EnteredByUserID: certifier?.ID }),
+                ...(b.channel === 'Proxy' ? { ProxyDesignationID: proxyOf.get(b.person) } : {}),
             }, systemCtx), `cast ${e.key} for ${b.person}`);
             counts.ballots++;
         }
 
+        if (e.stage === 'open') {
+            // Still open on the as-of date: it stays open with the ballots cast so far.
+            await new Promise((r) => setTimeout(r, 500));
+            marks.finished = await dbNow();
+            await backdate(pool, electionId, e, marks);
+            existing.set(e.name, { ID: electionId, Name: e.name, Status: 'Open' });
+            counts.loaded++;
+            continue;
+        }
         marks.closing = await dbNow();
         unwrap(await voting.ElectionAdministrationEngine.Instance.CloseElection(electionId, systemCtx), `close ${e.key}`);
-        unwrap(await voting.TallyEngine.Instance.Tally(electionId, undefined, systemCtx), `tally ${e.key}`);
+        unwrap(await voting.TallyEngine.Instance.Tally(electionId, e.lot ? lotSeed(e, graph, contests) : undefined, systemCtx), `tally ${e.key}`);
         if (e.talliedAt) marks.tallied = await dbNow();
         const results = await run(ENTITY.contestResults, `ContestID IN (${contests.map((c) => `'${c.ID}'`).join(',')}) AND IsFinal = 1`, ['ID', 'ContestID', 'Outcome']);
         const optionResults = results.length ? await run(ENTITY.optionResults, `ContestResultID IN (${results.map((r) => `'${r.ID}'`).join(',')})`, ['ContestResultID', 'ContestOptionID', 'Outcome']) : [];
@@ -357,21 +467,65 @@ export async function load(opts) {
             }
         });
         const resolutions = e.standards ? await resolve(e, electionId, contests, voterOf) : [];
-        unwrap(await voting.CertificationEngine.Instance.Certify(electionId, e.certifyNotes, { ContextUser: certifier, Provider: provider }), `certify ${e.key}`);
+        if (certifier) unwrap(await voting.CertificationEngine.Instance.Certify(electionId, e.certifyNotes, { ContextUser: certifier, Provider: provider }), `certify ${e.key}`);
         marks.certified = await dbNow();
         // MJ writes Record Changes after the commit; give them a moment so they fall inside the window.
         await new Promise((r) => setTimeout(r, 500));
         marks.finished = await dbNow();
 
-        await backdate(pool, electionId, e, marks, resolutions, certifier.ID);
-        existing.set(e.name, { ID: electionId, Name: e.name, Status: 'Certified' });
+        await backdate(pool, electionId, e, marks, resolutions, certifier?.ID ?? null);
+        existing.set(e.name, { ID: electionId, Name: e.name, Status: certifier ? 'Certified' : 'Tallied' });
         counts.loaded++;
         if (counts.loaded % 10 === 0) log(`loaded ${counts.loaded} of ${elections.length}`);
     }
-    log(`elections: ${counts.loaded} loaded (${counts.ballots} ballots), ${counts.skipped} already certified`);
+    log(`elections: ${counts.loaded} loaded (${counts.ballots} ballots; ${counts.replaced} of them replace one loaded open), ${counts.skipped} already there`);
     for (const p of problems) log('PROBLEM', p);
     await pool.close();
     return { ...counts, problems };
+}
+
+/**
+ * Deletes one election and everything voting keeps for it, children first, with its Record Changes rows: used only on an
+ * election an earlier plan loaded open, before loading it again in full.
+ */
+async function withdraw(pool, electionId) {
+    const V = `[${VOTING_SCHEMA}]`;
+    const contests = `SELECT ID FROM ${V}.[Contest] WHERE ElectionID = @election`;
+    const byContest = (t) => `DELETE FROM ${V}.[${t}] WHERE ContestID IN (${contests});`;
+    const byElection = (t) => `DELETE FROM ${V}.[${t}] WHERE ElectionID = @election;`;
+    const sqlText = [
+        `DELETE FROM ${V}.[CommentResolution] WHERE BallotCommentID IN (SELECT ID FROM ${V}.[BallotComment] WHERE ContestID IN (${contests}));`,
+        byContest('BallotComment'),
+        `DELETE FROM ${V}.[BallotAttribution] WHERE CastBallotID IN (SELECT ID FROM ${V}.[CastBallot] WHERE ElectionID = @election);`,
+        byContest('BallotSelection'),
+        byElection('CastBallot'),
+        `DELETE FROM ${V}.[ContestOptionResult] WHERE ContestResultID IN (SELECT ID FROM ${V}.[ContestResult] WHERE ContestID IN (${contests}));`,
+        byContest('ContestResult'),
+        byContest('ContestRunningTally'),
+        `DELETE FROM ${V}.[NominationEndorsement] WHERE NominationID IN (SELECT ID FROM ${V}.[Nomination] WHERE ContestID IN (${contests}));`,
+        byContest('Nomination'),
+        byElection('Participation'),
+        byElection('ProxyDesignation'),
+        `DELETE FROM ${V}.[VoterCredential] WHERE EligibleVoterID IN (SELECT ID FROM ${V}.[EligibleVoter] WHERE ElectionID = @election);`,
+        byElection('EligibleVoter'),
+        byContest('ContestOption'),
+        byElection('Contest'),
+        `DELETE FROM ${V}.[ElectionCertifier] WHERE ElectionCertificationID IN (SELECT ID FROM ${V}.[ElectionCertification] WHERE ElectionID = @election);`,
+        byElection('ElectionCertification'),
+        `DELETE FROM ${V}.[TrusteeKeyCommitment] WHERE ElectionTrusteeID IN (SELECT ID FROM ${V}.[ElectionTrustee] WHERE ElectionID = @election);`,
+        byElection('ElectionTrustee'),
+        byElection('ElectionAuditEvent'),
+        byElection('ElectionAnchor'),
+        byElection('ResultSnapshot'),
+        byElection('BallotDistribution'),
+        `DELETE FROM ${V}.[StandardsBallotElection] WHERE ID = @election;`,
+        `DELETE FROM ${V}.[Election] WHERE ID = @election;`,
+        // Their Record Changes rows, now pointing at nothing.
+        `DECLARE @orphans nvarchar(max) = N''; SELECT @orphans += N'DELETE rc FROM [__mj].[RecordChange] rc WHERE rc.EntityID = ''' + CAST(en.ID AS nvarchar(50)) + ` +
+            `N''' AND NOT EXISTS (SELECT 1 FROM [' + en.SchemaName + N'].[' + en.BaseTable + N'] t WHERE N''ID|'' + CAST(t.ID AS nvarchar(50)) = rc.RecordID); ' ` +
+            `FROM [__mj].[Entity] en WHERE en.SchemaName = '${VOTING_SCHEMA}'; EXEC sp_executesql @orphans;`,
+    ].join('\n');
+    await pool.request().input('election', electionId).query(`SET XACT_ABORT ON; BEGIN TRAN;\n${sqlText}\nCOMMIT;`);
 }
 
 /**
@@ -383,16 +537,21 @@ export async function load(opts) {
  */
 async function backdate(pool, electionId, e, real, resolutions = [], certifierUserId = null) {
     const created = e.createdAt ?? minutes(e.opensAt, -1);
-    const certified = e.certifiedAt ?? minutes(e.closesAt, 2);
+    // A poll is never certified: its last moment is a minute after its tally.
+    const certified = e.certifiedAt ?? (e.talliedAt ? minutes(e.talliedAt, 1) : minutes(e.closesAt, 2));
+    // An open election's last moment is a minute after its latest ballot, within the as-of date.
+    const lastCast = e.ballots.length ? e.ballots[e.ballots.length - 1].at : e.opensAt;
     const pairs = [
         [real.started, created],
         ...(e.nominations ? [[real.nominationsOpened, e.nominations.opensAt], [real.nominationsClosed, e.nominations.closesAt]] : []),
         [real.opened, e.opensAt],
-        [real.closing, e.closesAt],
-        // Comments are resolved between the tally and certifying, so a plan with them says when it was tallied.
-        ...(e.talliedAt ? [[real.tallied, e.talliedAt]] : []),
-        [real.certified, certified],
-        [real.finished, new Date(Date.parse(certified) + 60000).toISOString()],
+        ...(e.stage === 'open' ? [[real.finished, minutes(lastCast, 1) < e.stageAt ? minutes(lastCast, 1) : e.stageAt]] : [
+            [real.closing, e.closesAt],
+            // Comments are resolved between the tally and certifying, so a plan with them says when it was tallied.
+            ...(e.talliedAt ? [[real.tallied, e.talliedAt]] : []),
+            [real.certified, certified],
+            [real.finished, new Date(Date.parse(certified) + 60000).toISOString()],
+        ]),
     ];
     const marks = pairs.map(([r]) => r);
     const plan = pairs.map(([, p]) => new Date(p));
@@ -413,8 +572,19 @@ async function backdate(pool, electionId, e, real, resolutions = [], certifierUs
     statements.push(`UPDATE [${VOTING_SCHEMA}].[ElectionAuditEvent] SET OccurredAt = CASE EventType WHEN 'Opened' THEN @opensAt WHEN 'Closed' THEN @closesAt` +
         `${e.nominations ? " WHEN 'NominationsOpened' THEN @nomOpen WHEN 'NominationsClosed' THEN @nomClose" : ''} END ` +
         `WHERE ElectionID = @election AND EventType IN ('Opened', 'Closed'${e.nominations ? ", 'NominationsOpened', 'NominationsClosed'" : ''});`);
+    statements.push(...pinSetup('@election', '@created', '@recordDate', '@opensAt'));
+    if (e.stage !== 'open') statements.push(...pinMilestones('@election', '@certifiedAt', e.talliedAt ? '@talliedAt' : null));
     statements.push(`UPDATE [${VOTING_SCHEMA}].[Election] SET OpensAt = @opensAt, ClosesAt = @closesAt, RecordDate = @recordDate` +
-        `${e.nominations ? ', NominationsOpenAt = @nomOpen, NominationsCloseAt = @nomClose' : ''} WHERE ID = @election;`);
+        `${e.nominations ? ', NominationsOpenAt = @nomOpen, NominationsCloseAt = @nomClose' : ''}${e.proxies ? ', ProxyDeadline = @proxyDeadline' : ''} WHERE ID = @election;`);
+    if (e.proxies) {
+        // Each designation when the plan says it came in, accepted the next working day (by the deadline at the latest).
+        const rows = e.proxies.entries.map((x) => `('${x.person}', '${x.at}')`).join(',');
+        statements.push(`UPDATE d SET d.ReceivedAt = x.at, d.__mj_CreatedAt = x.at, d.__mj_UpdatedAt = CASE WHEN DATEADD(day, 1, x.at) < @proxyDeadline THEN DATEADD(day, 1, x.at) ELSE @proxyDeadline END ` +
+            `FROM [${VOTING_SCHEMA}].[ProxyDesignation] d JOIN [${VOTING_SCHEMA}].[EligibleVoter] v ON v.ID = d.GrantorEligibleVoterID JOIN (VALUES ${rows}) x(person, at) ON v.PersonID = x.person WHERE d.ElectionID = @election;`);
+        statements.push(`UPDATE a SET a.OccurredAt = CASE a.EventType WHEN 'ProxyDesignated' THEN d.ReceivedAt ELSE d.__mj_UpdatedAt END ` +
+            `FROM [${VOTING_SCHEMA}].[ElectionAuditEvent] a JOIN [${VOTING_SCHEMA}].[ProxyDesignation] d ON d.ID = TRY_CONVERT(uniqueidentifier, JSON_VALUE(a.Details, '$.ProxyDesignationID')) ` +
+            `WHERE a.ElectionID = @election AND a.EventType IN ('ProxyDesignated', 'ProxyDecided');`);
+    }
     if (e.nominations) {
         // Each nomination when the plan says it came in, decided the day after nominations closed; the audit trail and
         // the candidate's option follow.
@@ -454,6 +624,10 @@ async function backdate(pool, electionId, e, real, resolutions = [], certifierUs
     req.input('opensAt', new Date(e.opensAt));
     req.input('closesAt', new Date(e.closesAt));
     req.input('recordDate', new Date(e.recordDate ?? e.opensAt));
+    req.input('certifiedAt', new Date(certified));
+    req.input('created', new Date(created));
+    if (e.talliedAt) req.input('talliedAt', new Date(e.talliedAt));
+    if (e.proxies) req.input('proxyDeadline', new Date(e.proxies.deadline));
     if (e.nominations) {
         req.input('nomOpen', new Date(e.nominations.opensAt));
         req.input('nomClose', new Date(e.nominations.closesAt));
@@ -462,6 +636,37 @@ async function backdate(pool, electionId, e, real, resolutions = [], certifierUs
     // The tables' update triggers would stamp __mj_UpdatedAt with now; they are off only inside this transaction.
     const triggers = (verb) => Object.keys(TIME_COLUMNS).map((t) => `${verb} TRIGGER ALL ON [${VOTING_SCHEMA}].[${t}];`).join(' ');
     await req.query(`SET XACT_ABORT ON; BEGIN TRAN; ${triggers('DISABLE')}\n${statements.join('\n')}\n${triggers('ENABLE')} COMMIT;`);
+}
+
+/**
+ * The SQL that puts an election's setup in order on the plan's times: created when the plan says, its roll entered an
+ * hour before the record date, frozen on the record date, and ready a minute later (or as it opens). `election`,
+ * `created`, `recordDate` and `opensAt` are SQL expressions; the record date must fall between creation and opening
+ * (or opening nominations).
+ */
+export function pinSetup(election, created, recordDate, opensAt) {
+    const rollAt = `CASE WHEN DATEADD(hour, -1, ${recordDate}) > ${created} THEN DATEADD(hour, -1, ${recordDate}) ELSE ${created} END`;
+    const ready = `CASE WHEN DATEADD(minute, 1, ${recordDate}) < ${opensAt} THEN DATEADD(minute, 1, ${recordDate}) ELSE ${opensAt} END`;
+    return [
+        `UPDATE [${VOTING_SCHEMA}].[Election] SET __mj_CreatedAt = ${created}, RollFrozenAt = ${recordDate} WHERE ID = ${election};`,
+        `UPDATE [${VOTING_SCHEMA}].[ElectionAuditEvent] SET OccurredAt = CASE EventType WHEN 'Created' THEN ${created} WHEN 'RollAmended' THEN ${rollAt} ` +
+            `WHEN 'RollFrozen' THEN ${recordDate} ELSE ${ready} END WHERE ElectionID = ${election} AND EventType IN ('Created', 'RollAmended', 'RollFrozen', 'Ready');`,
+        `UPDATE [${VOTING_SCHEMA}].[EligibleVoter] SET __mj_CreatedAt = ${rollAt}, __mj_UpdatedAt = ${rollAt} WHERE ElectionID = ${election};`,
+    ];
+}
+
+/**
+ * The SQL that puts an election's count (when the plan dates it) and certification exactly on the plan's times: the
+ * stretch mapping lands them only roughly there. `election`, `certifiedAt` and `talliedAt` are SQL expressions.
+ */
+export function pinMilestones(election, certifiedAt, talliedAt = null) {
+    return [
+        `UPDATE [${VOTING_SCHEMA}].[ElectionAuditEvent] SET OccurredAt = ${certifiedAt} WHERE ElectionID = ${election} AND EventType = 'Certified';`,
+        ...(talliedAt ? [`UPDATE [${VOTING_SCHEMA}].[ElectionAuditEvent] SET OccurredAt = ${talliedAt} WHERE ElectionID = ${election} AND EventType = 'Tallied';`] : []),
+        `UPDATE [${VOTING_SCHEMA}].[ElectionCertification] SET CertifiedAt = ${certifiedAt}, __mj_CreatedAt = ${certifiedAt}, __mj_UpdatedAt = ${certifiedAt} WHERE ElectionID = ${election};`,
+        `UPDATE s SET s.SignedAt = ${certifiedAt}, s.__mj_CreatedAt = ${certifiedAt}, s.__mj_UpdatedAt = ${certifiedAt} FROM [${VOTING_SCHEMA}].[ElectionCertifier] s ` +
+            `JOIN [${VOTING_SCHEMA}].[ElectionCertification] c ON c.ID = s.ElectionCertificationID WHERE c.ElectionID = ${election};`,
+    ];
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

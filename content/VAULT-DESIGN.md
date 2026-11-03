@@ -448,7 +448,7 @@ Rules for content:
   (Marcus Chen, Bob Kowalski, Tom Reyes, Victor Sandoval, and the planted duplicate Kathy OLeary).
 
 How the elections run: nominations in September, a secret ranked ballot (single transferable vote) from mid-October to
-mid-November with every current member on the roll as of October 1, and certification by a committee chair acting as
+mid-November with every member current on August 31 on the roll, and certification by a committee chair acting as
 Election Inspector who is neither running nor on the board.
 
 ### 5.4 ICF member standards — balloted in Voting
@@ -479,6 +479,77 @@ Rules for content:
 - **Name no commenter and quote no comment.** Comments live only in Voting. Vote counts appear only if they are taken
   from the data.
 - Never invent a standard, version or ballot that the catalog doesn't have.
+
+### 5.5 Member votes — bylaw amendments and referendums in Voting
+
+**Status:** added 2026-11-02 (Yuri). Four times since 2019 the board has put a question to every current member.
+Each vote is a secret ballot in Voting; the catalog and the exact wording are in `data/elections/member-votes.json`,
+and the ballots are built by `scripts/build-elections-plan.mjs`. An amendment needs two-thirds of the votes cast, a
+referendum a majority.
+
+| When | Vote | How members voted | Result |
+|---|---|---|---|
+| June 17 – July 16, 2019 | Bylaw Amendments 2019 — Director Elections: directors elected by ranked ballot (single transferable vote); director ballots may be cast online | By mail, by proxy, and in person at the annual meeting at the 2019 conference in Madison | Both passed |
+| May 4 – June 5, 2020 | Bylaw Amendments 2020 — Remote Meetings and Electronic Ballots: member meetings by video conference; amendments and referendums by online or mail ballot | By mail only, as the bylaws then required | Both passed, in time for the virtual 2020 conference |
+| April 17 – May 15, 2023 | Dues Referendum 2023: raise dues from January 2024 (Individual $175 → $195, Enthusiast $150 → $165, Small Business $400 → $450, Corporate $1,000 → $1,150) to fund a second membership services position | Online and by mail | **Failed.** Dues stay at the 2018 rates, which is why the price list has never changed |
+| June 23 – July 14, 2025 | Hardship Dues Referendum 2025: members facing closure or severe cost pressure may defer a renewal up to six months or renew at a reduced rate, for renewals due August 2025 – July 2026; Corporate memberships excluded | Online and by mail | Passed. The Hardship Dues Program working group designed it; Membership Operations reviews applications |
+
+Rules for content:
+- An artifact may say a vote happened and how it came out, as above, from the day it was certified (2019-07-24,
+  2020-06-12, 2023-05-19, 2025-07-17). Before then it may say a vote is coming or under way.
+- Vote counts and turnout appear only if they are taken from the data. **Never say how any member voted.**
+- Hardship applications are confidential: never name a member who applied, deferred or paid a reduced rate.
+- The 2023 dues increase failed. Never describe ICF dues as having risen since 2018.
+
+### 5.6 Chapter officers and polls — in Voting
+
+**Status:** added 2026-11-02 (Yuri). Every chapter elects a **chair** and a **vice chair** for two years, in March of
+even years from 2020 (Japan from 2022): nominations in February, then a secret ballot of the chapter's current members;
+the candidate with the most votes wins. 55 elections in all, built by `scripts/build-elections-plan.mjs` and anchored
+to each chapter's space. A chair serves at most two terms in a row, and vice chairs often move up. The 2026 winners
+are the officers in each chapter's space. The one tie: Mexico's 2022 vice chair race, 8 votes each, broken by lot.
+Heroes whose arcs rule out volunteering never run (§5.3). Elena Rodriguez is California's vice chair from 2024 and its
+chair from 2026; Henri Dubois is France's vice chair from 2024 and chair from 2026.
+
+Chapters and work groups also run **polls**: 20 Yes/No questions, 2020–2026, hand-written from each space's chat in
+`data/elections/polls.json` (a chapter's spring tastings going online in 2020, the Ludlow market day date, the Tier
+Two dues reduction). A chapter poll goes to the chapter's current members, a work-group poll to the space's members.
+Polls show live results and are never certified.
+
+Rules for content:
+- An artifact may name a chapter's chair or vice chair as the data has them, but only from the day after the election
+  is certified, and never with vote counts unless they are taken from the data.
+- Never name a losing candidate, and never say how anyone voted. A poll's outcome may be mentioned, not its counts.
+
+### 5.7 Votes still open, and votes between meetings
+
+**Status:** added 2026-11-02 (Yuri). The voting data stops at the data's as-of date, like everything else: a vote still
+open then is open in Voting, with the ballots cast so far and no result. As of 2026-10-31 three are open:
+
+| Vote | Open | What it is |
+|---|---|---|
+| ICF Board of Directors Election 2026 | October 15 – November 15, 2026 | The yearly board election (§5.3); nominations closed September 30 |
+| Early-Career Membership Referendum 2026 | October 26 – November 16, 2026 | Should ICF offer an Early-Career membership from 2027 at $95 a year, for members in their first five years of making or affinage? From the Next Generation working group |
+| Endorse ICF's comments on the proposed raw-milk aging rule | October 28 – November 11, 2026 | A Food Safety Committee motion voted electronically between meetings (`data/elections/evotes.json`) |
+
+Each later month's data finishes them (results, certification) and opens the next. The demo's presenter is put on the
+roll of every open vote when the data is loaded, so they can cast a ballot live.
+
+How the monthly run moves voting on (added 2026-11-02):
+- After each month's Loom cycle, `scripts/plan-votes-gemini.mjs` adds that month's new votes: one or two chapter or
+  work-group polls or committee e-votes, one of them still open on the month's last day, so the demo always has a vote
+  in progress. From November 2026 on, `polls.json` and `evotes.json` grow this way instead of by hand.
+- Then the elections plan is rebuilt. It may finish open votes and add new ones, but it refuses any change to a vote the
+  last plan had (`historyChanges`), because the demo database already holds those votes.
+- Spaces are seated as of 2026-10-31 (`SEATED_ON` in `scripts/build-spaces-plan.mjs`), not as of the data's end, so
+  later data never reshuffles a chapter's owner or seats, or the chapter elections that read them.
+- Voting's own scheduler closes a vote in the demo database when its real closing time passes, with only the ballots
+  loaded so far. The next load replaces it, in full, from the new plan. Any ballot the presenter cast goes with it.
+
+Rules for content:
+- An artifact dated before a vote closes may say it is under way and urge members to vote; never its result, its
+  turnout, or who is ahead.
+- After it is certified, the rules for its kind apply (§5.3, §5.5).
 
 ---
 
