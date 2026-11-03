@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week ending 18 August 2019
+# date: 2019-08-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-08-12
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2019-08-12
+# basis: membership purchases, orders and cash captured are booked inside 2019-08-12..2019-08-18. Current members count people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: pulled on Monday 12 August as a preliminary operational baseline; weekly totals close on Sunday 18 August.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,289,members,rolling 12 months,preliminary
+membership,membership_purchases,3,purchases,booked in week,preliminary
+membership,first_time_purchases,3,purchases,booked in week,preliminary
+membership,individual_purchases,3,purchases,booked in week,preliminary
+membership,corporate_purchases,,purchases,booked in week,preliminary
+membership,small_business_purchases,,purchases,booked in week,preliminary
+membership,enthusiast_purchases,,purchases,booked in week,preliminary
+membership,membership_gross,435,usd,booked in week,preliminary
+orders,confirmed_orders,3,orders,booked in week,preliminary
+orders,orders_gross,435,usd,booked in week,preliminary
+orders,cancellation_orders,0,orders,booked in week,preliminary
+cash,cash_captured,373,usd,payments in week,preliminary
+events,event_registrations_taken,,registrations,booked in week,preliminary
+events,upcoming_events_next_eight_weeks,1,events,EVT-2019-WEB6,scheduled
+education,course_enrollments_taken,0,enrollments,booked in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+education,courses_starting_within_eight_weeks,2,cohorts,Stone and Willow,scheduled
+certifications,certifications_enrolled,0,enrollments,booked in week,preliminary
+certifications,certifications_awarded,0,awards,awarded in week,preliminary
+advocacy,advocacy_actions_logged,0,actions,recorded in week,preliminary

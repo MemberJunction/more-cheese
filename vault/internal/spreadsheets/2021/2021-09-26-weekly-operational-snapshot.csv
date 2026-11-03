@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 20 September 2021
+# date: 2021-09-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-09-20
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2021-09-20
+# basis: commerce figures and membership purchases booked between 2021-09-20 and 2021-09-26. Current members counts active accounts at week end.
+# caveat: pulled at the close of the week on Sunday 2021-09-26. Free webinars carry zero paid registrations.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,475,members,rolling 12 months,final
+membership,membership_purchases,3,purchases,booked in week,final
+membership,first_time_members,2,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,individual_purchases,2,purchases,booked in week,final
+membership,membership_gross,437,usd,booked in week,final
+orders,confirmed_orders,3,orders,booked in week,final
+orders,orders_gross,437,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,380,usd,payments in week,final
+education,course_completions,5,completions,completed in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,certifications_enrolled,0,enrollments,taken in week,final
+events,event_registrations_taken,0,registrations,taken in week,final
+advocacy,total_actions,100,actions,cumulative year-to-date,final

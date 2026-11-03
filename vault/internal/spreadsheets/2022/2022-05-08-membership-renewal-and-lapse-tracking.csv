@@ -1,0 +1,33 @@
+# title: Membership renewal, lapse, and grace-window tracking, week of 2 May 2022
+# date: 2022-05-08
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-05-02
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, renewals, lapses, payments, weekly-snapshot]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-05-02
+# basis: membership purchases and orders booked inside 2022-05-02..2022-05-08. Current members count reflects status at week end.
+# caveat: preliminary figures pulled at week close; payment failure counts and grace window requests are subject to finance reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_or_amount,unit,tier,status
+membership,current_members_at_week_end,537,members,all_tiers,final
+membership,membership_purchases_total,4,purchases,Individual,final
+membership,membership_purchases_first_time,4,purchases,Individual,final
+membership,membership_gross_sales,628,usd,Individual,final
+orders,confirmed_orders,41,orders,all_products,final
+orders,orders_gross,7161,usd,all_products,final
+orders,cancellations,0,orders,all_products,final
+cash,cash_captured,7854,usd,all_payments,final
+payments,failed_renewal_payments_flagged,12,payments,SmallBusiness_and_Individual,preliminary
+payments,grace_window_requests_pending,8,requests,all_tiers,preliminary
+payments,accounts_lapsed_this_week,3,accounts,Individual,preliminary
+events,registrations_brook_food_safety,24,registrations,EVT-2022-W1,preliminary
+events,registrations_annual_conference,6,registrations,EVT-2022-CONF,preliminary

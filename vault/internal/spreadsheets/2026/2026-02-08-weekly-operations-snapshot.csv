@@ -1,0 +1,33 @@
+# title: Weekly operations snapshot, week of 2 February 2026
+# date: 2026-02-08
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-02-02
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2026-02-02
+# basis: commerce data and membership purchases booked inside 2026-02-02..2026-02-08. Current members count reflects total active members at week end.
+# caveat: complete weekly totals as of Sunday 2026-02-08.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1474,members,rolling 12 months,final
+membership,membership_purchases_total,13,purchases,booked in week,final
+membership,membership_purchases_first_time,10,purchases,booked in week,final
+membership,individual_purchases,9,purchases,booked in week,final
+membership,small_business_purchases,2,purchases,booked in week,final
+membership,enthusiast_purchases,2,purchases,booked in week,final
+membership,membership_purchases_gross,2675,usd,booked in week,final
+orders,confirmed_orders,14,orders,booked in week,final
+orders,orders_gross,2821,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,17054,usd,payments in week,final
+advocacy,coalition_meeting_labeling_standards,1,actions,logged in week,final
+education,course_completions,33,completions,completed in week,final

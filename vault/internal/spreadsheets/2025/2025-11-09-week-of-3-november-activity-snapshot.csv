@@ -1,0 +1,38 @@
+# title: Week of 3 November 2025 activity snapshot
+# date: 2025-11-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-11-03
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-11-03
+# basis: PRELIMINARY weekly snapshot, Monday 3 to Sunday 9 November. Membership counts follow the Membership Status rule; order gross and cash are separate bases and do not tie to each other.
+# caveat: cash_captured_usd is payments received this week and includes payments on orders booked earlier. Do not subtract it from order gross.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+area,measure,count,amount_usd,basis,note
+membership,current_members_at_week_end,1404,0,member_status_rule,count of current members
+membership,membership_purchases,19,4157,purchases_booked,gross for the week
+membership,first_time_purchases,13,0,purchases_booked,subset of the 19
+membership,purchases_individual,13,0,purchases_booked,tier of purchase
+membership,purchases_enthusiast,4,0,purchases_booked,tier of purchase
+membership,purchases_corporate,1,0,purchases_booked,tier of purchase
+membership,purchases_small_business,1,0,purchases_booked,tier of purchase
+orders,confirmed_orders,31,6338,orders_booked,all products
+orders,cancellations,0,0,orders_booked,none this week
+payments,cash_captured,0,7811,payments_received,includes earlier orders
+events,registrations_workshop_curd_pasta_filata,4,0,registrations_taken,event date 2025-12-10
+events,registrations_workshop_cedar_cut_and_wrap,8,0,registrations_taken,2026 event
+education,course_enrollments_taken,4,0,enrollments_taken,all course instances
+education,course_completions,1,0,completions_recorded,all course instances
+credentials,certified_cheesemonger_awarded,1,0,awards_recorded,one award this week
+advocacy,testimony_raw_milk_aging_rules,1,0,actions_logged,one action
+advocacy,coalition_meeting_labeling_standards,1,0,actions_logged,one action
+# source: node scripts/vault-facts.mjs week 2025-11-03

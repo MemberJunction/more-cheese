@@ -1,0 +1,33 @@
+# title: Membership lapses and grace requests, week ending 15 March 2020
+# date: 2020-03-13
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-03-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, renewals, lapses, grace-window, payments]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-03-09
+# basis: membership purchases, orders, and cash captured booked inside 2020-03-09..2020-03-15. Current members count as of week end.
+# caveat: pulled on Friday 13 March 2020; figures are preliminary for the week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,382,members,rolling 12 months,preliminary
+membership,membership_purchases_total,7,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,4,purchases,booked in week,preliminary
+membership,small_business_tier_purchases,2,purchases,booked in week,preliminary
+membership,individual_tier_purchases,5,purchases,booked in week,preliminary
+membership,membership_purchases_gross_usd,1427,usd,booked in week,preliminary
+orders,confirmed_orders,9,orders,booked in week,preliminary
+orders,orders_gross_usd,1584,usd,booked in week,preliminary
+orders,cancellations,1,orders,booked in week,preliminary
+cash,cash_captured_usd,2729,usd,payments in week,preliminary
+renewals,failed_payment_notices,6,notices,payment gateway,preliminary
+renewals,grace_window_requests,4,requests,member inquiries,preliminary
+renewals,tier_change_inquiries,2,inquiries,member inquiries,preliminary

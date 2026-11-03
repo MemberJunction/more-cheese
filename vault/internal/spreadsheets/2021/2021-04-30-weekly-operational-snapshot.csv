@@ -1,0 +1,39 @@
+# title: Weekly operational snapshot, week of 26 April 2021
+# date: 2021-04-30
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-04-26
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, courses, cash]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-04-26
+# basis: membership purchases, orders, cash, and enrollments booked inside 2021-04-26..2021-05-02. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: pulled on Friday 30 April 2021; weekly totals are preliminary until the Sunday 2 May 2021 window closes.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,455,members,rolling 12 months,preliminary
+membership,membership_purchases,2,purchases,booked in week,preliminary
+membership,first_time_purchases,2,purchases,booked in week,preliminary
+membership,corporate_purchases,1,purchases,booked in week,preliminary
+membership,enthusiast_purchases,1,purchases,booked in week,preliminary
+membership,membership_sales_gross,1006,usd,booked in week,preliminary
+orders,confirmed_orders,7,orders,booked in week,preliminary
+orders,orders_gross,2195,usd,booked in week,preliminary
+orders,cancellation_orders,1,orders,booked in week,preliminary
+cash,cash_captured,2122,usd,payments in week,preliminary
+events,annual_conference_registrations_taken,3,registrations,EVT-2021-CONF,preliminary
+events,events_this_week_count,0,events,scheduled in week,complete
+events,events_next_eight_weeks_count,0,events,scheduled next 8 weeks,complete
+education,course_enrollments_taken,10,enrollments,taken in week,preliminary
+education,course_completions,3,completions,completed in week,preliminary
+certifications,certifications_enrolled,0,enrollments,enrolled in week,preliminary
+certifications,certifications_awarded,0,awards,awarded in week,preliminary
+advocacy,advocacy_actions_logged,0,actions,logged in week,complete
+governance,committee_meetings_held,0,meetings,held in week,complete

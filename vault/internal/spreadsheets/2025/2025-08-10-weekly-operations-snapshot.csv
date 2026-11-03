@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 4 August 2025
+# date: 2025-08-10
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-08-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-08-04
+# basis: membership purchases, orders, cash, and enrollments booked inside 2025-08-04..2025-08-10. Current members counts active rolling periods.
+# caveat: pulled at week close on 10 August 2025. Figures are final for this reporting week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1241,members,rolling 12 months,final
+membership,membership_purchases_total,24,purchases,booked in week,final
+membership,membership_purchases_first_time,18,purchases,booked in week,final
+membership,enthusiast_tier_purchases,7,purchases,booked in week,final
+membership,individual_tier_purchases,12,purchases,booked in week,final
+membership,small_business_tier_purchases,5,purchases,booked in week,final
+membership,membership_purchases_gross,5007,usd,booked in week,final
+orders,confirmed_orders,30,orders,booked in week,final
+orders,orders_gross,6409,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,5281,usd,payments in week,final
+events,workshop_cave_farm_shop_retail_registrations,6,registrations,EVT-2025-W2,final
+education,course_enrollments_taken,46,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,enrolled,0,enrolled,taken in week,final
+certifications,awarded,1,awards,Sensory Evaluation Certificate,final
+advocacy,testimony_labeling_standards,1,actions,submitted in week,final

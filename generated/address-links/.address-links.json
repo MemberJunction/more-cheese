@@ -41481,5 +41481,2878 @@
     "primaryKey": {
       "ID": "3A93725F-B58D-57F4-AC5A-DD215B82D44E"
     }
+  },
+  {
+    "primaryKey": {
+      "ID": "50c3bca0-4c2b-5ac2-bf42-551f0557720b"
+    },
+    "fields": {
+      "AddressID": "84a3a796-01b0-5b5f-93cf-cb8e06930a93",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "aaa61cfe-a891-506b-9cb8-4b04eb482cf8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ea9d57db-12e2-5586-9e0a-29c9d08f37b5"
+    },
+    "fields": {
+      "AddressID": "16e04e21-622f-5032-9ee8-7657b6df0d81",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "3cfae80b-d760-59bc-9e2a-464cc85c0764",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "de50644e-3c00-546f-b748-ed3a2111152b"
+    },
+    "fields": {
+      "AddressID": "4c8dee10-2585-5dac-bd20-f5fe5d39d4b2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "16ee0298-8a0e-5f92-acb1-dd423702299d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "526bca83-bce3-5b9f-8521-f8e053843b50"
+    },
+    "fields": {
+      "AddressID": "c092dc87-bbe2-547a-9c67-f4fefc4fa325",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "572a6a40-d23b-5335-819a-845721bd6136",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a04f81c5-6155-57a4-b7a8-72b34f0fa186"
+    },
+    "fields": {
+      "AddressID": "fc5bad52-61c9-57f7-8346-bb1756a7ec77",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "edcbff65-8782-5ef9-9e33-58b60d7fb452",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "12edd446-f226-5a84-8528-369a5195a73e"
+    },
+    "fields": {
+      "AddressID": "2503c334-6add-54b3-853a-4c1a3a59a276",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ddda0ff3-b3e1-52c4-8411-ef440ad9b4ec",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "eb667135-0532-543a-b542-f0e4c0f107fa"
+    },
+    "fields": {
+      "AddressID": "ef0ede76-4d65-5a24-bbe5-a6049a49b067",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "28b3fe67-0983-5b0b-9153-7cf616efc7ac",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6c9a671d-5ac8-584a-80fe-d268d6eab850"
+    },
+    "fields": {
+      "AddressID": "fa78bddd-6640-5a97-a5aa-7b61ade79d70",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e930203b-b612-5f8b-a9dd-c0316c5c0359",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4ac62476-e4f9-53c3-b1f1-fec443efcbc9"
+    },
+    "fields": {
+      "AddressID": "b75b5eab-3788-5f0d-9d14-1953b825a92b",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "fc7ff3fa-d102-5b6c-86d6-f67617441fc2",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e97f7854-60dd-5665-bdae-4f2fb41b4f43"
+    },
+    "fields": {
+      "AddressID": "6a3cd1f4-94a6-5b24-a245-b7383f574dd2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "47256c0f-e7ea-570a-8cae-1c0e9f71e9cd",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "61455d36-76aa-5e0a-84dd-679df0fda9a1"
+    },
+    "fields": {
+      "AddressID": "5ae156af-0e81-5bb7-8ee8-d14c93b4bbbe",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2a90ee28-2350-5477-a037-afc1d39496af",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "acc9d399-2c00-5756-9349-9a8a31f9ac4f"
+    },
+    "fields": {
+      "AddressID": "82bbfd15-8e14-5222-9583-6c7fffcadba2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "49f21dbd-bd65-548a-b974-3f5cbf1f1d94",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1f9e5714-f963-5e10-b670-4a46088c7bc1"
+    },
+    "fields": {
+      "AddressID": "f78edc7b-2955-5e69-994d-82195895ad55",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "577bf456-b1c1-5852-b578-0cd459fb27cc",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bb59b0fb-15e4-53ae-b24a-84389e887658"
+    },
+    "fields": {
+      "AddressID": "34c94ffe-d2dc-5fdd-9392-e08093b6d663",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "36930fc3-3a72-59d7-9cf1-1230c38ead09",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "987679d5-9af1-5a96-b1c1-a71881642c68"
+    },
+    "fields": {
+      "AddressID": "49352009-5de7-5c5a-a93f-21636cca9ca6",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "9234cdf0-5312-5d8f-9a30-46da10fe499d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1df900be-aea6-5c31-889c-5307931e0b6c"
+    },
+    "fields": {
+      "AddressID": "ff164f18-e05c-5ced-af48-9a6ce76582d7",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0ecdf649-5214-52e3-b1cd-5849f72f1719",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2e274f9a-4c4b-556a-a863-53c1f5f38049"
+    },
+    "fields": {
+      "AddressID": "b553f4bf-f2a3-5aa7-841c-06f1ed7b797e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ccecbdff-a3d0-5c8a-a26f-a5ffc5a1602d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "85af5346-b4c4-5b48-a5d6-7aaff8c13115"
+    },
+    "fields": {
+      "AddressID": "2200989c-54eb-5d27-8a05-aa48f4379616",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7a227b55-7c4b-52f3-a98c-269cfc93fa6e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "af3e5075-cbca-5b08-9005-8f73e4250780"
+    },
+    "fields": {
+      "AddressID": "8f1e7c09-3862-5343-8d90-f1f465abb64c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "73166783-58cc-5a62-9120-1b824dc08c35",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "91c4e09a-8182-5208-a379-f735b20ccf70"
+    },
+    "fields": {
+      "AddressID": "8e9cb78f-6d77-50ae-8f95-05ebe5e5da34",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "610c13c5-a034-5c34-9240-d67857e47fca",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3b21a9aa-25c3-5865-9ce2-27e2e9ac422c"
+    },
+    "fields": {
+      "AddressID": "644f71f4-bf82-50c7-bf87-a3f26c46c500",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "126bd65c-fb9a-5a65-a527-bf813f5591b5",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d2510d42-37cd-5419-a9eb-2d10c6b924f1"
+    },
+    "fields": {
+      "AddressID": "5a219864-2503-514c-97b2-738416110aaf",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2b3b6be6-5a26-541f-aa5f-c81c083fc68e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7bed9bbc-057a-511b-943f-8fe72f6ba0fe"
+    },
+    "fields": {
+      "AddressID": "a8b1feba-22a8-5805-abc7-dead00573a09",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c6688841-4ffc-528b-a230-eefdb9ef8f94",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "955515a4-c8fc-5ef0-ab56-1513e838d101"
+    },
+    "fields": {
+      "AddressID": "e3b05173-ab0c-5c7f-ab5a-edf2062aee88",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1d9b802f-5f37-5679-8355-1f8371089b80",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4a433d19-5436-5901-9a93-ffa8b947219b"
+    },
+    "fields": {
+      "AddressID": "e9e0de37-a331-5fe1-9b01-b2260dfb5c16",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1ff9019e-7177-512d-b94c-78ebb4b5fd82",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1ea4ff8c-a9f8-55b6-922e-546d84c711f9"
+    },
+    "fields": {
+      "AddressID": "b8a3298c-a050-5700-8702-54fc4c4dac01",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0d6e6270-4065-5014-a870-c541aab8a9bd",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2ede5e55-6bf6-5798-9aa4-a7967270338f"
+    },
+    "fields": {
+      "AddressID": "c33220b6-a747-584e-9c6b-a2e6ca2d5721",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1a1cfc1f-2235-5606-ad5c-7933c7d62119",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c95c47f6-3486-599e-9e35-68bc0f7f158c"
+    },
+    "fields": {
+      "AddressID": "cdb9b0c8-1cd6-5772-b05a-6cfbb9ab5c0e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "729e1fab-3f08-5f37-bf75-f90d01367dad",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d7809c79-ed04-5426-9c22-ef03827f27ab"
+    },
+    "fields": {
+      "AddressID": "37405dda-36ef-5fa6-b6e3-c5b99d636afd",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ad6d3e24-1110-5e9b-85f9-7b138d418543",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b62c0b08-ab75-581d-9b12-081928d6df92"
+    },
+    "fields": {
+      "AddressID": "8ea58c5d-3ede-5c89-8a8d-b9b5f3905001",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "9dfe3624-f3ac-5867-b0bc-a743931b5c12",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5482897b-01bb-5b45-a797-de63205600bd"
+    },
+    "fields": {
+      "AddressID": "ba8c9b60-6e75-50b9-9011-5cbc9a9a8291",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "63312667-9b4e-5b6b-a5b1-c2dea9d29e12",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ffd7aa30-f0d4-5a71-b69b-e97c82ea6f09"
+    },
+    "fields": {
+      "AddressID": "799be2e6-1028-551d-9699-2c529d92fa7d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b4f40bb5-b646-5fc6-b533-2c2d2a22e338",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "877f921e-7919-5f5f-a2e4-fc760176919c"
+    },
+    "fields": {
+      "AddressID": "3bd1d3b6-95ca-5250-9a5b-43cae03217a0",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "13fd63d4-d9cc-5440-a646-80780cc1aabb",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e77c683e-0c51-523e-951a-ff20efade1eb"
+    },
+    "fields": {
+      "AddressID": "a791c9dd-38fd-506a-9b1c-060b1efea175",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "5d6b2934-b8f3-5b9e-a92f-942d4ca704ad",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "429c5b51-8f58-5b4b-b18c-5b7a077dacb1"
+    },
+    "fields": {
+      "AddressID": "a26f8799-8b92-5a55-9fe2-3886dfb6f294",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b1cda56f-1d4f-5e44-97a9-6520242a48eb",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31222575-f892-54c9-a004-c86e900f27aa"
+    },
+    "fields": {
+      "AddressID": "c599aa4b-3d4b-5c10-9f81-8561377b0581",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "5191448b-4bd3-55e8-a3a4-a4dafe69c3af",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "312282d1-678b-52b5-a5b0-e61c7190ee9c"
+    },
+    "fields": {
+      "AddressID": "6786732e-4fee-5c53-96b0-25fd2dd5df51",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7b5a1fec-63de-570e-8345-f86a5fa35947",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31a340cf-b4ea-55a7-9556-c1bc032428b3"
+    },
+    "fields": {
+      "AddressID": "26ad7bde-fb96-5599-aa80-cdb5c615a316",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "cee79d3a-621e-580c-81b1-acc4087cef43",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f4f384c1-776a-547f-98d7-5fc67f247466"
+    },
+    "fields": {
+      "AddressID": "04ea7e0d-ff31-5411-8c4d-2b89e3b3de9c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f7406377-4eb8-5a7e-b559-9b8a2984815f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "342eac0a-f128-5aaf-8e94-299398ef2c49"
+    },
+    "fields": {
+      "AddressID": "a590a5b8-e488-53b9-a74c-b2c7389ffb25",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "905f882e-1bc4-54b4-9f71-e8ce2826834a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cc8c2d7c-bdfa-5aff-9a01-f6d7590ebb67"
+    },
+    "fields": {
+      "AddressID": "bce316de-1637-5ca7-866c-97739bd5890d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "01006a1b-1186-5a5f-be90-5871ff0f8dd5",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2f8bc690-38a0-5f19-93f9-bc144823f1e0"
+    },
+    "fields": {
+      "AddressID": "0f95c5d5-e75e-5ba9-b100-491fd9c656f5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "6c43249c-4d01-529e-8e64-b0fb2935e949",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d16bbaee-ef06-5d05-8830-43c514d5a325"
+    },
+    "fields": {
+      "AddressID": "a9520438-b5a1-5e43-8f36-bb0eabe2cfd4",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0fdc179d-37ce-51e5-a5d2-cd63666259b7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9a2199b9-d25b-53bd-8192-987b4bc4cc63"
+    },
+    "fields": {
+      "AddressID": "ac18b6d8-94dd-5347-8605-15a0413efb93",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b050dff6-f1b2-5f47-aa18-cb1e15dc4625",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b1dbfd5a-f7aa-5db6-8ac4-19a31c0cc4de"
+    },
+    "fields": {
+      "AddressID": "3eaef713-978f-57ed-9cef-9ab121ab0a11",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "a19b6655-7f3b-58fb-bcd8-5f1f9df5af89",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5c7eec51-83d3-59cd-81ba-6c2770484a9a"
+    },
+    "fields": {
+      "AddressID": "026e815e-4308-54ca-aa39-a44dfb56c1be",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "67f9afa1-6636-5fcb-b933-a8b37c486981",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3274f23f-1aa4-589d-9fd1-6da70b72f30c"
+    },
+    "fields": {
+      "AddressID": "0eb18960-fb98-5064-85b3-43ba2e6a8e2a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e682c7f3-a75f-5f04-b07d-648a63080f9d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "de11cbfe-c197-57b3-b8ae-1deaf9e24f86"
+    },
+    "fields": {
+      "AddressID": "0f8e8c7c-82b0-5a3c-88e6-e172a7029a01",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "404c1b96-1c35-59ff-96b4-e3188c4ddc72",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "993d63c1-6fad-53f1-9c46-41a8e2437324"
+    },
+    "fields": {
+      "AddressID": "c10503cd-1c5a-54e2-9986-3fb524f330da",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "6af2691b-c70f-5785-bbc1-e8873868a3dc",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "30765088-cd27-51bd-964e-52d57322f85b"
+    },
+    "fields": {
+      "AddressID": "a5b31bb1-d77f-5c24-8df8-39fe2eb70c42",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "78007127-be90-5914-9e10-6c529ca63cb6",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ebc456c1-4a91-5ceb-bab9-4d3db00cad2a"
+    },
+    "fields": {
+      "AddressID": "079871d6-640a-59ba-9bc2-9f4fa07ca8bc",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0a3ac863-705c-572f-ac83-7bf0aaeb5eca",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9dd10c6e-c91a-5778-a2fd-29a1347ebf66"
+    },
+    "fields": {
+      "AddressID": "49976c77-b2d3-53f0-ae42-bbf8d16d5261",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "012b6de1-bd2a-53a7-b2ae-e450db02b0de",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18c2add0-5cbd-53c4-9da5-97f720d3c318"
+    },
+    "fields": {
+      "AddressID": "2954d2c7-96d5-58bd-98cf-a3254a0a4e4a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0345305a-a2b1-5d27-ad95-13f1561266f1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8266b206-aae4-5a1e-b9d7-dc874f8ed5d4"
+    },
+    "fields": {
+      "AddressID": "a8287cd2-a575-5dab-8f61-945295e4933d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "a0d0caee-bed5-573a-a0fe-5d31612b5c20",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "be8ef273-bb78-58af-bcd9-1a0d839ef07b"
+    },
+    "fields": {
+      "AddressID": "6a77e5d4-44a8-5df4-97c6-0e7562e6cda8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "faea00b8-1d6e-53b9-8f99-ea45cbae652a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2d41dda9-f8e8-51d0-bf27-e57d642f051d"
+    },
+    "fields": {
+      "AddressID": "bd32b08b-4e9b-529e-baff-2866a7680de3",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "fa13e87e-ce87-5f5b-b23b-e29a58a93528",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8d1e4758-f864-5535-971f-013343e7c66b"
+    },
+    "fields": {
+      "AddressID": "241161fb-db56-5651-84c3-d26cfd4f02f0",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ec5afdda-e034-55c1-a142-e6d46503d055",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bb00b50b-c750-52a7-932e-8897fc162ed1"
+    },
+    "fields": {
+      "AddressID": "2e7f37b6-f6f0-516b-8f62-550c376b0d28",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c61bd790-ade4-58ed-aed8-1b4e6045f25b",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b915ed19-fa2b-59c9-b2f5-a419303d7410"
+    },
+    "fields": {
+      "AddressID": "cc8ada3f-2da8-5cce-9a21-a1882222faea",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1dc63e9c-1d2f-5a10-a09b-83491d3f55b6",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "68a649b4-dcb0-5f4e-aa06-7e5496818667"
+    },
+    "fields": {
+      "AddressID": "fc7809a0-bddf-5d80-a044-dca92cab909a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "81636304-b525-52d9-8e39-788d9df04546",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7c930888-c80d-5c76-bd21-2054b5bdd1f2"
+    },
+    "fields": {
+      "AddressID": "39692d5f-c259-54f7-bb4b-28edba5ff352",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "69e4d4a0-0087-5164-84d0-17f4b89697b8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "aeb48662-e728-5af7-b2ac-e6d906422936"
+    },
+    "fields": {
+      "AddressID": "f3ac22f6-e8d2-5873-b41e-c142f15c61d8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e1ec276e-5f6a-54ab-9528-f0b4e0fbb4ec",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b523042f-f0fe-5058-83ee-708525fcb3f1"
+    },
+    "fields": {
+      "AddressID": "5ce21a07-56af-572a-a845-ae89c986d689",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2df270f9-0c0e-5ac8-a422-0c73ff46e862",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b9c9bd3d-3595-5763-a801-9e7cc85c1702"
+    },
+    "fields": {
+      "AddressID": "1a1df123-dad6-5488-be9e-4fa4a098f8ad",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "51393ffe-a706-5275-a403-1e1048138319",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "478167f8-a6ac-5c0e-b5b0-94ec65045086"
+    },
+    "fields": {
+      "AddressID": "90e6dc28-fe95-53e8-805d-0b7ad593f3dc",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "671cfcd9-caef-5a74-8edd-6e0b9aa9015d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "37890544-23c9-58ee-a8f5-0afb4b27f92e"
+    },
+    "fields": {
+      "AddressID": "764186fd-48e4-571d-864d-ea9d8ebaf8d5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f1675683-fdcf-5afc-bb20-827b266f4dfa",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c5598abf-5c5c-51f5-8d5f-ee72ee7ac3b5"
+    },
+    "fields": {
+      "AddressID": "038bc175-601d-5b60-8799-e88f32bff409",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c52eb7a4-6aeb-5258-80e5-5e4028642538",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "efc4d7f8-8440-514c-b7f7-f8beaa38d235"
+    },
+    "fields": {
+      "AddressID": "57c6f793-a596-5194-9c50-7aab35cc96f5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "154ceec4-fbee-5d77-9858-58b3425c3a8b",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3e2abf8c-fdd1-5736-a258-0d86a8ffbd7a"
+    },
+    "fields": {
+      "AddressID": "f14383e6-cff3-5b13-8f17-8ee075e7ccc7",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1d60983e-c7a9-50eb-9c69-9ebd7efc0ef7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7f7f28e0-8b5a-54a6-888b-eb9d9cd69692"
+    },
+    "fields": {
+      "AddressID": "f19902f1-1d72-517b-9394-fb7a0f40096f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f67024c7-9d5a-5fb4-97c6-8c89967e5bf3",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97baabb8-4b69-5ae7-9a21-3c0b43a561eb"
+    },
+    "fields": {
+      "AddressID": "92cab43e-f331-5d9c-925c-c8e10fae574d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "aa6c5953-44a9-5af6-b7d4-0aff9e58b1c0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3bddc457-589a-5a02-bf1a-797fc7b36651"
+    },
+    "fields": {
+      "AddressID": "a42c88f9-4395-5dde-80c3-5dff9910dc08",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "a12f4302-b583-5ad7-8ea9-b7fe960d64e8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "af44e4ba-0070-5cd0-a98b-4aa92171f440"
+    },
+    "fields": {
+      "AddressID": "eb6ac0fd-81b9-50cc-b9a6-cc6b88883847",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7cd57bf7-745c-551d-9f72-eba831c55b96",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "739d4d52-e76e-52f3-bd73-c04eda2f8afc"
+    },
+    "fields": {
+      "AddressID": "4f2b1479-e9bb-524a-8642-c54bd329fc79",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1a7e126d-4a2e-54fd-bab2-373fe89fb400",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b40fe60a-8b25-5dcd-a341-123518c8e798"
+    },
+    "fields": {
+      "AddressID": "c96682c0-58c9-56c9-a70b-2d114a1b5a99",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "41fd880a-2b14-5ee0-a5fe-48bcc7aa8cf4",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bd85d75b-0dac-5f75-8b3e-dc72bb32a45b"
+    },
+    "fields": {
+      "AddressID": "0978cd6d-6d50-5c85-b38d-f55fbcaefe40",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "56cfee45-02e0-5d74-9eb9-cdd5569f0b80",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6bdedca6-0a65-5ff6-9dd6-b61a15eaffc1"
+    },
+    "fields": {
+      "AddressID": "5df5109f-010d-5ac2-990d-f298f8d6dd4d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "466178c3-c28a-513d-8ce4-d8f56ff887f7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9e9a0de2-6f7b-5da8-9bec-94ffe41c56f4"
+    },
+    "fields": {
+      "AddressID": "e0196b54-1669-50d3-9d53-6c23a6ae8446",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f1c2461d-b142-5897-998f-76e2071b4481",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "72c4726a-eb94-5fd0-92e2-cb5f87824fe3"
+    },
+    "fields": {
+      "AddressID": "ac40c98c-b245-5a43-b2ef-6bd28a25b813",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7de5268a-7eca-590f-93b0-ad103e40cbc4",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f163666b-81c1-5771-891c-bdda9f2dd4bb"
+    },
+    "fields": {
+      "AddressID": "9c81abfb-7073-5357-ba04-4f295a77b6c1",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "bacc7489-8d68-59d4-b987-ef365d0de2b4",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a3e245b1-0213-5dac-a9ea-51c06a776316"
+    },
+    "fields": {
+      "AddressID": "906404b0-9250-58e5-9c8a-0e4250dab72a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "66e5a7cd-c650-5859-a0a5-6f2478a0c32f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5a12f8a4-70b0-55b2-a0a6-8619bce6416d"
+    },
+    "fields": {
+      "AddressID": "741c8352-94fd-580c-bc49-3acf9f13e5cc",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "578806b7-92f4-5c53-9599-14a3a09010c6",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ecb921a4-bad8-59ca-ab71-64739ba886ae"
+    },
+    "fields": {
+      "AddressID": "cd091368-db8c-5f81-9a7b-b06efd62c2f2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "9fd94e03-de8f-5472-a523-2ba896840472",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "74808263-312a-5a09-8460-959d57a3400c"
+    },
+    "fields": {
+      "AddressID": "1a106ef6-8719-5f8c-9c33-24c90c55f1ff",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e76418c6-e482-5ee7-9216-d75e0c1e957e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42533f15-15bf-5e10-977b-eef78de7da34"
+    },
+    "fields": {
+      "AddressID": "161d0539-5473-58b4-871a-101470d0ad95",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "019c9127-e4d4-5ebb-95e3-db50a6849263",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b32c17b1-a83a-5e00-a3f9-1fd46c42d019"
+    },
+    "fields": {
+      "AddressID": "966a7dd9-8723-5eb7-b1e2-6e8cea1ba5fa",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "15e4fe08-9a71-515a-8c00-3ea5c4598336",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47bf8e1a-670a-5323-87a2-bc539c561d4d"
+    },
+    "fields": {
+      "AddressID": "760b3cfb-06d9-5470-bbda-0708975539ae",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "eb48681d-a4a9-5fe9-aa6b-6c2c8b11eba2",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75dd793f-6bca-5162-8e2b-7fb287965ff0"
+    },
+    "fields": {
+      "AddressID": "289d5216-aea0-5515-b658-74f06e6f1c6c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "23e75ee1-4e55-5e8c-ac53-c4d7f372b2c0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "037d6cef-1961-5364-8c99-071b2d8eff46"
+    },
+    "fields": {
+      "AddressID": "2c8de055-0454-5a39-8b0e-80957e5206a0",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1b3633ea-addc-5cba-9711-e96b8af70dc0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c607e24f-0f1b-516a-a2cb-8973750057d4"
+    },
+    "fields": {
+      "AddressID": "e4071392-287b-5368-b656-9d54c8541907",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4b5a65b1-42e2-54b1-8a52-9481270267fa",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b241b087-eef0-5ed8-a690-fa9041da3d9c"
+    },
+    "fields": {
+      "AddressID": "87c5632b-c10a-58d5-8617-cacd532bc6ef",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "3d851e07-55f1-53f2-8b2f-fd76d44e2059",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "95a28cf2-84a4-55a9-95ba-ff1034359e9a"
+    },
+    "fields": {
+      "AddressID": "5d53fc7d-fc6c-581c-8d11-9c3e805fe81e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ecfa9b7b-bf90-506b-9124-cd593647b933",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a48c5a97-7427-52c8-9adb-6124c84b8b19"
+    },
+    "fields": {
+      "AddressID": "7af7b58b-62d5-5f3e-84ce-075ec67fad5a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b5021614-bc65-5cf2-a7f5-1a8d49e522b1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "85b1fb90-cd95-527e-a910-fe70aa923ac1"
+    },
+    "fields": {
+      "AddressID": "2cbbdf0e-680b-5853-9184-598081a7ca1c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "3bf74d8e-b7a8-5a5c-87c9-75bafa2ef964",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "dfea4849-907e-55ec-8e31-371d5c46903a"
+    },
+    "fields": {
+      "AddressID": "6c375242-43ba-5b4e-8443-c8a6f2b17805",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "d0d8b36f-edf2-51bb-b37e-d0628293c0bc",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9f58f6c4-54ab-5dce-9cb3-fe4652f47857"
+    },
+    "fields": {
+      "AddressID": "4f3a4c6b-017d-5ea1-86ea-eb1a855365c5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f2d923cf-a1fa-5e83-b129-bb5233a3a46e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39eee6b3-74ac-5925-a961-e301b3354027"
+    },
+    "fields": {
+      "AddressID": "8fc63888-e68c-5090-a5da-737a0b09cd53",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "15a9e744-e861-5c41-b06b-b8ce1b44cb0e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3f69b3dd-416a-5d32-a4b9-0c8eb7f0c360"
+    },
+    "fields": {
+      "AddressID": "ab5ca4e9-7324-5797-aeec-59cc1a25e102",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "13387cbd-07e1-5fd6-8fe2-8d94b32f3a60",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a0f148d3-bba8-546a-ac5f-915319ea8565"
+    },
+    "fields": {
+      "AddressID": "08788160-96a0-5c24-92cf-c1f3a05534f7",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "73ad4f8f-29e1-5ead-a014-5ae15aa93782",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8e2df922-011a-5d1f-adf4-2a8c24056e52"
+    },
+    "fields": {
+      "AddressID": "369d3fb1-79d1-5bb0-8133-7d9be18c7008",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7f7bee0f-3476-524e-b979-7c728d4dcc92",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3c38f151-3003-5726-85f1-5fcc753e8c01"
+    },
+    "fields": {
+      "AddressID": "2cb4658e-8a50-5cb1-8bd6-48625bf390dd",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2a92d6d4-0813-5cbf-87e0-06cb8781e502",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8e9dd4b3-cd2e-5a62-b39a-f4e100e0a397"
+    },
+    "fields": {
+      "AddressID": "6481bcaa-2e9c-549a-aaba-3a30af98a4c2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e613b7c4-c079-53c6-be81-9501313cca0a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0154cf7a-b4aa-5cee-b0e6-923a609bef6c"
+    },
+    "fields": {
+      "AddressID": "9f194aae-b316-5e06-8684-70f403028d06",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "21ce6b14-617c-5837-b672-ca14c0d507d9",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e7f21f82-ea7e-5378-aa88-5f4c97d16605"
+    },
+    "fields": {
+      "AddressID": "f7733748-b1cd-5045-b9ec-1315e86d5545",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "09a8fbe8-6945-56b7-bd0b-1c32c9651279",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "dd56e699-6468-5bec-9469-5ef5a7468cee"
+    },
+    "fields": {
+      "AddressID": "6aed082b-08e1-5a56-96ff-20745a0d490f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "cecb0edc-eaa9-5d92-bc12-89ec4d4f83dd",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60a5cef8-d17f-52b6-bce3-034697d9daf5"
+    },
+    "fields": {
+      "AddressID": "46fce74f-89df-5613-becf-e6e7648df2eb",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "42d23100-3f2f-51a3-92cf-90e3766f4ae1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b0af30a7-779a-567e-8ec7-5a8bfc390020"
+    },
+    "fields": {
+      "AddressID": "0a337797-0f60-5636-b74f-5c95e1b2ebd8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7940c5b5-1824-598b-b52b-4dc1808ab686",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8ac31409-4da9-5205-8319-c5b5d2d7a5f8"
+    },
+    "fields": {
+      "AddressID": "7d4a0290-36b8-5e13-9c1d-21b81fd1ee3c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "d75ad909-8465-5c6d-a692-a15d9a803fec",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bf302ca2-3065-5dba-a2e3-b6790c82cfe4"
+    },
+    "fields": {
+      "AddressID": "d77148ea-a4e2-57ed-be6c-61562534d2f5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "255957f4-7e8b-5e60-88e5-939f671d48d9",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "dc342ffd-f3e3-5556-81b1-b13994fa1a46"
+    },
+    "fields": {
+      "AddressID": "1a923961-2d11-547f-946e-fa767b10a5c8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "5b9c3555-a8a7-5c56-aceb-b33f0a97fbb3",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ba179609-2adb-52f1-a3f8-05926fd82bea"
+    },
+    "fields": {
+      "AddressID": "7299c5ac-aaa4-5e6b-9ae3-179953d4d0f4",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "11bfdc14-75db-57ef-9081-805674da69c4",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d795430b-552d-5f3d-9d5c-50eb976bdb90"
+    },
+    "fields": {
+      "AddressID": "9ac111e4-6cb4-5101-b04d-268b2f7a87d6",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "618babce-0fcb-5dc9-80fe-7983bd145930",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "74dd9ff9-f005-5158-a887-e8e4b471a1de"
+    },
+    "fields": {
+      "AddressID": "fff043bb-2147-5dd7-b362-c0651f09bdf7",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b6014a53-bd36-5e7d-ab52-24bfbf0f62e8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65b7e416-948e-55fe-82ee-529f7121700e"
+    },
+    "fields": {
+      "AddressID": "eead08fa-7139-59d8-92f3-7b974c336e7e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "163ef948-213f-5937-aa37-bdf1374418e8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b6437dd6-f279-526a-a563-95c455d5d28c"
+    },
+    "fields": {
+      "AddressID": "97d3d351-d078-5553-943d-5ba1f13aa14e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "9841d2ff-ac99-552b-a921-825d7827745b",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d4366b28-cfff-52ea-bcc9-fd9f1b4ca2e8"
+    },
+    "fields": {
+      "AddressID": "1f1a6500-008a-56df-805a-8e41d29f437c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1018829c-925c-5e4e-a6d3-d96dcbae1fc8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08887fba-edd8-5cb1-b2c5-9bae8396e067"
+    },
+    "fields": {
+      "AddressID": "59b5e6a1-a94b-5803-b64a-e50dea960cdc",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "dfd25d0d-5c69-53a5-a644-30bb4dfccd9e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bf008e30-b733-5a6d-b372-da5eb3900bf0"
+    },
+    "fields": {
+      "AddressID": "e2870508-8e61-5e13-ba04-30fec9ce87fb",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "363feaee-4f5b-5672-9776-1fee0f7be8ad",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b9bf141a-6963-5097-9a96-fa26ed309630"
+    },
+    "fields": {
+      "AddressID": "a77c9dbb-22e1-5976-bdb4-0e11e9131652",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "277e0e3e-0833-501a-9c83-a497baf0af76",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18f64ff5-d4b6-5732-beeb-4fab71c407e3"
+    },
+    "fields": {
+      "AddressID": "960e6514-efaa-595d-bf75-520603e01c8c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "37c51584-4771-5f9e-b24a-1d5f460fb60f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3e0f3366-64cc-50f8-80a5-56282aaf0d39"
+    },
+    "fields": {
+      "AddressID": "fce0fbc1-edc9-5ca9-91f6-7174b7d84ce5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "36904db9-8a42-5f97-acfd-02fa79954a1a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "63057682-2cf5-5172-8227-6e999e0c5aad"
+    },
+    "fields": {
+      "AddressID": "62985e97-16b5-519c-adeb-63431a1ea1e2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e48d49ae-14c8-54cc-9fa6-4576933c68ea",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5369bac5-66a2-5959-bb10-194dec9deeb8"
+    },
+    "fields": {
+      "AddressID": "2f59b344-7c87-5467-8dd5-7a4bf1d3b423",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "99a12eb3-d896-5f43-be5c-9fb488412f93",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "68076269-c1a0-529d-b918-3f8c39e7a7fa"
+    },
+    "fields": {
+      "AddressID": "d82f680b-ab71-5641-adc1-9bd8797e91e2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4e68b4cf-86dc-54a6-aeb5-3d4db349881e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "486f45fa-79c4-57ef-870a-a9f28e94234a"
+    },
+    "fields": {
+      "AddressID": "8e17f238-138f-5c28-814c-549c345fe4a4",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1968b0f2-f04d-5cfe-b855-48aa73b63df5",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8647fcf8-cfdf-5ee6-aaae-c18eba1dbcbf"
+    },
+    "fields": {
+      "AddressID": "97828807-6634-51c8-ba7f-e0eeeac9400f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "73b0b453-f2e7-5d3c-b538-2c488bdcb269",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2dbfeaed-a056-5854-99bc-79ca68eae014"
+    },
+    "fields": {
+      "AddressID": "183a3544-fd4b-5f95-89c8-f8c6ab67253b",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "31764b41-2502-55c6-9e42-2da3333b9bb6",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "14f6e2d9-815c-5f87-9a01-f2d97aa7d478"
+    },
+    "fields": {
+      "AddressID": "390971c5-654a-53c7-b3dc-74b435d8e637",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c5382683-ce5d-5f9d-8ca4-374744943c11",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "35884ba8-0071-52b1-a85f-eb8d1f5bbcdf"
+    },
+    "fields": {
+      "AddressID": "c7123df5-8dfb-5ce1-9455-4723fa7a0a51",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0b548db9-f171-511a-a166-1a7fce6777b8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a510b805-3f2a-51f3-828f-c114625f7ce0"
+    },
+    "fields": {
+      "AddressID": "e035e2cb-d9fd-59cc-8a00-248d4ade1980",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f31acc39-4acb-5891-9802-084259447d67",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40f2211a-678c-518a-94a5-51704bac4666"
+    },
+    "fields": {
+      "AddressID": "c43a54bf-70ed-5f21-b3fc-39798837886e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "774e5fd3-6167-541f-8624-0bdd70a372a0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7579a23f-98d0-52dc-9f9a-e693d1bb79cf"
+    },
+    "fields": {
+      "AddressID": "f291f954-5ea6-5a5e-9010-1008ea2854a7",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "331c7ea4-52f2-5c32-a3f9-9467b24c735d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ae0bfd58-e19d-5946-b2a0-111108f52fb5"
+    },
+    "fields": {
+      "AddressID": "1e048913-ccc9-5193-a5bb-f7fac759080a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f1d634d6-a4bd-58fe-9ebd-73dc087e8274",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "60302f0c-0c15-54da-9a67-ff003f1e35c6"
+    },
+    "fields": {
+      "AddressID": "28377bbf-bde3-5f9d-a4c9-8990b75d924e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4d55c4fb-c743-58d8-ab27-934406d4ba89",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "17ffdd3d-4c79-5054-821a-110d5a4c3691"
+    },
+    "fields": {
+      "AddressID": "2209f3c3-f622-5407-8734-bbfff5e1555b",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b96c235b-28f2-5bd8-8292-304109040873",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8133d0cf-8c99-5951-b95e-663b5d858833"
+    },
+    "fields": {
+      "AddressID": "bd19cd2c-3585-5e8f-87a8-93c3a25f1780",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "531c4819-11af-5765-ad84-5bd6c12f9965",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "84a596e9-cb0a-5faf-afa5-7522f5575308"
+    },
+    "fields": {
+      "AddressID": "a2b9e051-18c4-547d-a7e6-8c356010590a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7195ff36-e2dc-55ba-ad3f-146d9d4895c1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b1373e4d-e59d-5857-949c-8e3d7f7b021c"
+    },
+    "fields": {
+      "AddressID": "44c221ad-1b8f-588b-8b03-e9120a83dc8d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "cff4381f-42d9-5e90-bef6-a5f2a5999e23",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "979c1b52-5888-5f30-a7a0-b432fd972afe"
+    },
+    "fields": {
+      "AddressID": "01e53388-a0ab-5832-9fb0-0c83abd0f76f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0abecfdc-5ab2-5223-8cde-753009fdd3ad",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "17b3d001-1082-5ec3-a9f4-4438d9100360"
+    },
+    "fields": {
+      "AddressID": "8190af9b-9051-500a-937b-1a0ce83f1fa3",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "bce60e8f-bc09-5f6b-934a-317ee60576f8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2c44b9c7-2bc5-5c4b-a106-57510adaf327"
+    },
+    "fields": {
+      "AddressID": "a5bdf4f1-94fe-5bbe-aad7-59d3ccc16674",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "423f40ad-4735-5fda-ba4b-eb18491634b4",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "25d59753-bad4-55b3-939e-83f063255fd7"
+    },
+    "fields": {
+      "AddressID": "7e83fb16-8eea-5018-bd8d-8f1d28884ee6",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "d857f231-a182-57b3-99fe-b48730ee010f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c54e251d-24a2-5789-abc9-a131bd554c65"
+    },
+    "fields": {
+      "AddressID": "9ac874db-ccf5-5f7b-94b5-451e7eeef128",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "822ae6d1-14b2-5853-ad0d-194d63caf690",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4abe8fb7-4de2-5d00-975d-e9284bf2b8f5"
+    },
+    "fields": {
+      "AddressID": "c873b173-6e4f-5a30-ab8a-d5cd93fadd8b",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4103c117-6e84-55d9-adde-a0cb60c545dc",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4e7e7113-ee85-54ec-a78f-2cdb3c1f6277"
+    },
+    "fields": {
+      "AddressID": "5925b421-9042-5627-aac3-bb5ed105a303",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "366dc6b6-e6f5-55a4-bb0e-442bb1c9c462",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ef12dbed-27fb-5b90-a37f-e41251242216"
+    },
+    "fields": {
+      "AddressID": "0c518a99-a644-5a11-bc43-b215326ab775",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c16c5f4a-27d6-50b7-8f87-a3923d461c4c",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3073eec4-8a5c-5983-a4cf-6487b85a9c68"
+    },
+    "fields": {
+      "AddressID": "96a4471d-cb25-5013-aa75-c9c14b52ada1",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "90f7963d-a603-5be0-abb6-af0d8d3254f0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2b40b911-970d-5d38-81a6-842b6f0eb680"
+    },
+    "fields": {
+      "AddressID": "760ffec2-b47a-59a0-8285-a136666fedca",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "e4867649-92ff-52b1-8271-5dade6cff1c0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7fdae7d5-f9be-5023-8427-3a49d107aac3"
+    },
+    "fields": {
+      "AddressID": "f3942277-79fd-59ef-bf32-439d69c3485c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "45529e55-5a66-5968-986a-fd97de7a2007",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "93d8e673-189e-5f9a-96b8-46d97947f058"
+    },
+    "fields": {
+      "AddressID": "e984c043-8a3a-5e88-b2df-dd1e778a4797",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7c7154fd-d5f1-5279-857d-f1a15cbe8130",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4288df1c-39fe-558d-b90b-0414b4511c9d"
+    },
+    "fields": {
+      "AddressID": "a5a317dc-58dc-523d-a09a-e44eb159e850",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "0f7348db-66fb-54c4-a686-6cc2b624b433",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "82f7d290-ef69-5f3c-b49f-ad7f1c157935"
+    },
+    "fields": {
+      "AddressID": "128861cb-b81d-56cf-a728-494dc87d4988",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "58b4191a-20fa-5a90-8bcd-e9da0ec4306c",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6bb52ec8-f954-5b97-a5b3-cc51bee510b9"
+    },
+    "fields": {
+      "AddressID": "4cc85bcb-85d0-59a7-8a75-0de33e86f7d6",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "1e3e9f1b-ef87-576b-a1ff-7cd73bd320d9",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4dc52c28-7310-5250-8841-8f73599a10f1"
+    },
+    "fields": {
+      "AddressID": "c8d45282-4fee-5adc-826b-3ec038058352",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "fc7895d3-ef1f-5606-bd02-4e4a19e2ad1f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d12f2221-ad2e-5b54-9368-62e3cd7fbe64"
+    },
+    "fields": {
+      "AddressID": "8d6bc7d2-9c69-5607-9298-20ea66272eb8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "983589a9-b520-5651-96de-f47d3497ce85",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1ab3e3f3-89da-5ddd-ab0b-3e5beee35e3c"
+    },
+    "fields": {
+      "AddressID": "0fcbeed8-0a68-5f18-9f52-8f75a8a85dd2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "5b55867d-5a4f-5cd4-bfb0-f9078d813bec",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c53cb295-f3bf-50db-8b08-640cfd19e9cb"
+    },
+    "fields": {
+      "AddressID": "6e96fc11-ec03-5f8e-9660-ed2d7d34976f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "3004128a-56aa-54d4-a632-8df0a4fa2b3a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7f720b2a-045b-5d68-bec4-edfcb064d61f"
+    },
+    "fields": {
+      "AddressID": "d7f7a636-497a-5fb7-96e5-311af386d57a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "28955bba-8cbf-5816-96ea-50409f183316",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3a5eb53d-e0de-54ed-a14c-da194189a9a9"
+    },
+    "fields": {
+      "AddressID": "67396cce-a798-5c5a-819d-24101609077f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7b934010-f5b2-5f8d-9ae6-7b260b48e25b",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "dd6c3ecf-5263-59b1-847b-622b261363fd"
+    },
+    "fields": {
+      "AddressID": "524ccc31-fc66-587f-970a-0a6ca7557514",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "33a94c54-5746-5607-a2d9-58c9510ae534",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "77d7df93-8dd0-5d2b-af4e-ef3b7ef13e8c"
+    },
+    "fields": {
+      "AddressID": "848c0126-3a1c-5924-ae75-07e89b654816",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2fec3282-5a8e-56d1-9597-39f5f07dfbe7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01d0c1b4-bb42-592c-941c-c466c3a79351"
+    },
+    "fields": {
+      "AddressID": "ee077fbb-1920-5131-98b2-3b433be2662f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "5c813569-544e-5a3b-9ad2-2e93cc5c1292",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "adebdf52-c373-5539-8e7b-b5b27fc792ec"
+    },
+    "fields": {
+      "AddressID": "1233c2e8-fb70-5312-9280-054bdc0e4c77",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "06891aa8-1a93-54f7-a2ab-92d97615c359",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b3818112-2710-5512-b1a5-c70295cf4f83"
+    },
+    "fields": {
+      "AddressID": "34da6b9a-0df1-52c9-8b90-82acfd9b7bb8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c3207e03-10d7-540b-9e6e-32dc9c340e3b",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "56837e96-97f1-5983-8c82-e5200c056975"
+    },
+    "fields": {
+      "AddressID": "75c93953-0530-518d-a2f1-9d3f75394d51",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "9c187f93-1072-58c3-85b2-299192dd42b8",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7e637ec8-281e-5b1a-82ad-fbf784faa43c"
+    },
+    "fields": {
+      "AddressID": "b8b0c776-32f9-5ed8-a3c5-521dea2becfe",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ec46b107-e5bf-58cb-aaba-7242b0466689",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8b5dd1ed-fd53-5898-a5a0-aca3a3ca9b27"
+    },
+    "fields": {
+      "AddressID": "cf9d1f48-b45d-5ab1-8e32-af5d6d76a2c7",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "568c832a-eeea-5592-ae27-4bfdd28727b7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0186d682-3002-588e-8ccb-ceb02c237159"
+    },
+    "fields": {
+      "AddressID": "a0b3f2b8-a6b2-531b-8301-d440b0b0d7cf",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "5e744033-79be-5908-86b8-bae083a6e729",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0e0bb7f6-a666-512e-929c-dca5e2d7b2c2"
+    },
+    "fields": {
+      "AddressID": "e77bc548-b538-597a-923c-e72ddb0d65e0",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "70d9183d-192b-5f5d-8103-0bea8d72190c",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c0185e1f-a4b0-54fa-b057-b5bad929f60d"
+    },
+    "fields": {
+      "AddressID": "05fd2f5a-d959-5525-965f-26229bf84f11",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "daa8c697-d2f3-51df-87f0-90223e22bf8e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f018dc5d-2fe5-5a79-86fd-65b5e3c9c0c7"
+    },
+    "fields": {
+      "AddressID": "1fa285a2-9df2-5381-99f2-de6ad0a7e857",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f7c3be76-d752-5da6-831c-b43a93f4815d",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f1f6574d-409a-5f13-8e48-8ced2e1c7f03"
+    },
+    "fields": {
+      "AddressID": "254f2e71-fa18-5f26-a512-c484c739b59c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b02b2452-1710-5728-b838-e184d43106df",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "540219e3-cce5-5139-a424-efbb1d407d22"
+    },
+    "fields": {
+      "AddressID": "ca8e8b17-34e8-5df8-817e-7b180f203469",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "53dcb28c-6c1a-5cf5-a203-cd3c05bb47bf",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6ceaa823-9add-5975-805a-c3c9ee8b9606"
+    },
+    "fields": {
+      "AddressID": "55402fed-61ac-5275-b465-79d98f64ac6d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "ac9e9a2f-68e3-5eae-b7c3-9eb7c66360f7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "41918cb6-d16d-54eb-8b68-3bd0aab12351"
+    },
+    "fields": {
+      "AddressID": "69e64efc-1294-5c14-9e1f-12c133bc3fd5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "a35681a0-fbee-5954-b2a9-00740b2bd21f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "724db107-79ec-5fd5-a37c-35e850283e3e"
+    },
+    "fields": {
+      "AddressID": "3628da16-47ed-5aa8-a18d-defa94741139",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "62137d0b-e2a2-5c9c-ba80-b86c643de5d1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4fb9aeec-7594-5139-9b34-20ded0ac157a"
+    },
+    "fields": {
+      "AddressID": "5ea970f9-bda6-55b8-8d8f-d63d6bf6be5c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "069d4f89-fbb1-5511-ba21-29fe604cdfa0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "596a731c-a242-50dd-a6da-8dc49c4132a9"
+    },
+    "fields": {
+      "AddressID": "c38af5ed-d574-567c-9c71-8c8ab91998a5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "440d085c-f10f-576c-b0dd-36cdd7c09d51",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b9fe4cbf-4f05-57bc-b5d0-eca22b1c1b35"
+    },
+    "fields": {
+      "AddressID": "407a25a3-e7ae-51ed-b766-0a504a754485",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "3e96ad21-2721-5c78-9110-07258fa96bac",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "938d61ef-ec85-580c-b6d5-85b87d06679b"
+    },
+    "fields": {
+      "AddressID": "335a5d58-6321-57d9-97f3-59a79f865d70",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "a795eafc-8dba-5888-a018-25519cf789ef",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "828cf22f-9b29-516f-ba21-c974c539d35b"
+    },
+    "fields": {
+      "AddressID": "d1487cc7-e4fc-5e77-828b-ee8b935919ef",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "89add3d3-a637-576a-9dc4-fab9678e76b1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4905d9d7-180d-5a25-aeba-d4fecdab5cbe"
+    },
+    "fields": {
+      "AddressID": "4221d20d-5c31-502a-bc19-29d8e4afe1b3",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "6b8390b6-3b41-5092-8c7d-ad06ba5e7626",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "dec93bf2-7a33-565b-8535-6b3fd45d73eb"
+    },
+    "fields": {
+      "AddressID": "3ee7644b-aaea-5aee-82ea-880fd9af5162",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "38ae7842-95ff-5eba-932e-296c013c8eeb",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "07800fcc-75c0-5f33-aca3-de00ea287374"
+    },
+    "fields": {
+      "AddressID": "05b57e06-952b-5b13-bcef-9c64d2aa9d11",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4dd5a045-0769-5943-a275-7357958e1ad2",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9ebf86dd-a381-5f83-a154-5afb6e47020b"
+    },
+    "fields": {
+      "AddressID": "ac1018ba-1ec0-5194-bdbc-f8d43535df6a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "b2f432f4-c856-5a6c-90ad-1610bde7a1a3",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ca873394-bbd9-51ff-9c98-098b8d4a72aa"
+    },
+    "fields": {
+      "AddressID": "ae567336-2950-51b6-ba4f-e3805757a14a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "6bc03f71-5486-5d64-886b-f194d595769b",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e3764129-5d42-5503-a24e-fc919f7cdfb7"
+    },
+    "fields": {
+      "AddressID": "92b6878f-ccc6-5c21-a732-4511815e6656",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "d6c4ac2b-1a33-5233-8f15-a33c061364c9",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7ecae60b-bfd9-575f-a9f1-182c49765f9d"
+    },
+    "fields": {
+      "AddressID": "09ed559c-cbcb-5562-a58c-8f5e0c393bb1",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "883586c6-62da-5324-9632-8515c8dd1d3c",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e45d4a90-c590-51a9-a090-24ea230434cc"
+    },
+    "fields": {
+      "AddressID": "6aad470c-7743-5198-acfa-623da3b67550",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "61347cef-1e42-5fdd-b5d5-2df6317ab62f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2230958d-ceac-55e5-a3d5-5ab3e70901aa"
+    },
+    "fields": {
+      "AddressID": "7e13fb79-21f0-5489-a47e-42d8cba47bb8",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "aed4815a-5c5f-58c4-87d0-98203b9b18d7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1bf19c1e-57cf-5ad5-aae1-301d1696be4f"
+    },
+    "fields": {
+      "AddressID": "bd496947-f57f-5f4f-8d19-89dfd6f94a2c",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "34855530-d444-5cc8-a01e-dfe318fb488f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "06397425-a177-5915-9181-560c7dfa8b97"
+    },
+    "fields": {
+      "AddressID": "db8526b4-7019-5f52-8c67-3974e0ed4d8a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "36aca93b-a5c3-551b-b6ee-ae466d50774a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65ea4314-d277-5cc9-b969-bd4d1672e06c"
+    },
+    "fields": {
+      "AddressID": "924683d1-f84b-57e7-8ca5-7f9781ce024b",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "30a4837e-2f84-5b18-8d66-605759930d7c",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "14e87b6e-4385-5894-8b74-7cb3f7efcdfd"
+    },
+    "fields": {
+      "AddressID": "69b7ca86-b7c1-541a-849c-e508ccc06ee1",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "11fbeb84-6d9f-5bc7-91f8-cad6eaf10e26",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44c902f2-eef3-522d-a485-8bf342661211"
+    },
+    "fields": {
+      "AddressID": "0e81ed4e-be10-51a7-8e43-099bf8488b1a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2dd96fe9-15f8-587b-bd02-d929b9512268",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "084331e6-7199-5cb9-aa77-39875f721e92"
+    },
+    "fields": {
+      "AddressID": "2b701f52-944a-52e2-86aa-863f923a2f2d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "29af3b42-4969-5f62-b265-b22a0f837827",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94cfef61-c969-5b39-885c-46f322161f06"
+    },
+    "fields": {
+      "AddressID": "9dcf503d-fa59-5d89-a297-fca1e5f6fbcb",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "18c80315-fe04-5da7-b8f4-f13815418b08",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "407d3c0a-3c00-5a44-8178-49843fddac12"
+    },
+    "fields": {
+      "AddressID": "0432c707-7877-5c22-b1a6-24be53bcb8f5",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7b7feaeb-43ad-5fb2-a36b-dcd02854b5c7",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b327b4b5-f0db-54ad-b39d-fc2f248fc9cf"
+    },
+    "fields": {
+      "AddressID": "a7c04a0d-7e4f-51c4-a12b-6e65ad3bbe83",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "91de5981-88fa-5cda-875a-3975f5d0fa86",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d9d00d3f-2bbe-5b16-ba4b-c744a2e0d0cf"
+    },
+    "fields": {
+      "AddressID": "19ab85f6-6c24-5937-aeff-3d199b37696d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "8c03b793-2c43-53f8-869c-90219a5131f6",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cede55b5-42a9-5c96-a258-5c0ef8efadbb"
+    },
+    "fields": {
+      "AddressID": "41e31802-72aa-50ef-bc7d-4c9c46675ccd",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "50408312-84ec-59e7-8e0c-7b2f603c95ce",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cde1cec7-99f7-573c-a250-6dee3df5d331"
+    },
+    "fields": {
+      "AddressID": "94baab0e-213a-51a7-86f0-cb6486d757ed",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7ae767b8-2041-5432-9418-476bbc19bce2",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1c480cba-06c9-5ea3-89bb-fef7712a445a"
+    },
+    "fields": {
+      "AddressID": "584c4ee1-33e4-5894-9185-655d77608a7d",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "8a862a88-c1dc-550b-b8f1-9400076f89c1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cad5516a-5e22-56dd-99f4-c5e330969f5b"
+    },
+    "fields": {
+      "AddressID": "3e3efe70-0757-562b-a17a-cdb5681863ee",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4662fa4d-332c-5004-8c3e-beaf01abb8c2",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "90fb964c-52eb-56d7-8684-ce02619600ed"
+    },
+    "fields": {
+      "AddressID": "15784396-1501-57a1-b902-4695271a6e29",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "36a12f11-d1b0-594f-b3e5-94a4205aa2f1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "45b6bdfa-1c0b-5b74-9420-992c61cbdbfe"
+    },
+    "fields": {
+      "AddressID": "79c76d79-7a61-5ce6-90e7-e25c3295b2b2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "65b56fea-b04e-5210-9c87-e0c03b14ab6e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1c131e44-9377-516d-af82-4ec990304cc3"
+    },
+    "fields": {
+      "AddressID": "a1d6aeca-215c-59fd-b4f8-4ab4c9ee1c4e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "572a745f-c1f7-56b8-9b52-5f7adb3bb9bf",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0feb0d48-7e92-5bd4-8d0a-7915c021c1ef"
+    },
+    "fields": {
+      "AddressID": "2fd8eda4-eaad-5d2d-b05f-1790f1c68be1",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "4708188a-575e-51b2-b6d7-a43bb4d98b9e",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d811d655-a144-5524-93e2-669baadd1688"
+    },
+    "fields": {
+      "AddressID": "04ec11b4-82e0-5f93-b886-cc4f9a8d67b1",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "eacb37d1-e32a-50de-9870-66f912b637a9",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47fe2367-32de-5aef-9f07-17867e8a4f12"
+    },
+    "fields": {
+      "AddressID": "cc57c979-6224-5485-9654-0844276c8ee2",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "379e8847-e79a-5e92-b178-468356bd0002",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0da2fd27-3b43-50b5-bcaf-505bd01a1929"
+    },
+    "fields": {
+      "AddressID": "1f758fe9-2e86-5a97-b72b-256192143a7a",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "2a2ed209-8305-5dae-bcff-b56d14ddd576",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08f8036b-d30e-52e7-bd5d-f921132bbf79"
+    },
+    "fields": {
+      "AddressID": "94d52373-8d76-5849-bb1d-a247c5a148be",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "8f6bb9be-55d1-59a7-a3b4-148235e84423",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "27e54d0c-b687-5f0c-925a-a93e82713091"
+    },
+    "fields": {
+      "AddressID": "fba6ddf6-4297-59c9-b24d-0b54d47f3b3f",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "f8efc67f-29c8-5c2f-ac34-d3b679461410",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09a62662-dfad-5d85-a21c-643158814601"
+    },
+    "fields": {
+      "AddressID": "25e7b5a3-849f-502a-93c4-79963347d358",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "7a6bea68-2544-508b-a927-b30f4ba19d6f",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "40766938-95bd-54d2-b4ac-4a9e9aa86636"
+    },
+    "fields": {
+      "AddressID": "39323cff-6b6b-56b4-913d-13d89ca55449",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "53c86bec-86dc-59b2-aa13-bda349ce45cb",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6b334d07-be8b-56c0-a7d5-a76bba00ef1b"
+    },
+    "fields": {
+      "AddressID": "c5f345d1-bc9c-559c-b2e7-bfd291111e13",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "99062618-cdac-5b71-916c-9044db9227b0",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2ab814af-2e42-5695-b5d2-7df52c59ff35"
+    },
+    "fields": {
+      "AddressID": "afac24ea-3b57-51a7-bafd-e353f4dc4451",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "3d404b7e-3b37-57bf-810f-efcf41beeac1",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4717722b-37c6-51dc-85a3-217fe3199a5f"
+    },
+    "fields": {
+      "AddressID": "f832f17e-bb94-5da2-b56c-ed462956176e",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "c4a95785-61eb-522b-adae-36a13eac9d01",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2b6ec8a7-f52a-5b51-a292-c0f02be7b54c"
+    },
+    "fields": {
+      "AddressID": "32bb1454-56dd-580b-b3a4-1a947e5ddaff",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "777c176f-549f-5607-97ba-62a95be43d8a",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Work",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bef2b794-7389-531a-90cd-31a5cec3e25a"
+    },
+    "fields": {
+      "AddressID": "46c16ccb-5341-5c84-bbca-e6ba42a10abb",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "493b2d2f-659d-5537-9fcf-a456d1ae4ac9",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "52622199-e5b4-589a-88eb-607ef28d84f6"
+    },
+    "fields": {
+      "AddressID": "0567e131-5531-5133-a10a-0be045055e46",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "RecordID": "a84b1e0e-dd57-5376-81f5-6f2a7dc30eee",
+      "AddressTypeID": "@lookup:MJ_BizApps_Common: Address Types.Name=Home",
+      "IsPrimary": true,
+      "Rank": 1
+    }
   }
 ]

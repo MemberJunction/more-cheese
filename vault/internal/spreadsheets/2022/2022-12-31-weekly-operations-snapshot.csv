@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 2022-12-26
+# date: 2023-01-01
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-12-26
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2022-12-26 and node scripts/vault-facts.mjs year 2022
+# basis: membership purchases, orders, cash, and advocacy actions booked inside 2022-12-26..2023-01-01. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 2023-01-01, representing the complete totals for the final week of 2022.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,641,members,rolling 12 months,final
+membership,membership_purchases,8,purchases,booked in week,final
+membership,first_time_purchases,1,purchases,booked in week,final
+membership,individual_purchases,6,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,membership_gross,2383,usd,booked in week,final
+orders,confirmed_orders,13,orders,booked in week,final
+orders,orders_gross,3606,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,16948,usd,payments in week,final
+events,event_registrations_taken,3,registrations,EVT-2023-W1 Workshop,final
+education,course_enrollments_taken,3,enrollments,taken in week,final
+education,course_completions,3,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,enrolled in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,coalition_meetings,1,meetings,Interstate cheese shipment,final

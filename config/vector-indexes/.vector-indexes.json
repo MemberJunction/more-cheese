@@ -12,5 +12,19 @@
       "Dimensions": 3072,
       "Metric": "cosine"
     }
+  },
+  {
+    "primaryKey": {
+      "ID": "E1C999E9-F45E-43E0-849B-E80813543F49"
+    },
+    "fields": {
+      "Name": "More Cheese Duplicates (Pinecone)",
+      "Description": "Duplicate-detection vectors for the More Cheese People, Organizations and Products entity documents. Pinecone serverless index 'morecheese-duplicates', 3072 dimensions, cosine, embedded with Gemini Embedding 2. Each vector carries its EntityDocumentID, so the three documents share the index.",
+      "VectorDatabaseID": "@lookup:MJ: Vector Databases.Name=Pinecone",
+      "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "ExternalID": "morecheese-duplicates",
+      "Dimensions": 3072,
+      "Metric": "cosine"
+    }
   }
 ]

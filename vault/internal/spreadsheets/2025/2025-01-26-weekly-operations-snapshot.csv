@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week of 20 January 2025
+# date: 2025-01-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-01-20
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy, committee-meetings]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-01-20
+# basis: confirmed orders, cash captured, and membership purchases booked during 2025-01-20..2025-01-26. Current members counts active periods at week end. Week totals are complete as of Sunday 2025-01-26.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1078,members,rolling 12 months,complete
+membership,membership_purchases_total,16,purchases,booked in week,complete
+membership,membership_purchases_first_time,7,purchases,booked in week,complete
+membership,individual_membership_purchases,13,purchases,booked in week,complete
+membership,corporate_membership_purchases,2,purchases,booked in week,complete
+membership,small_business_membership_purchases,1,purchases,booked in week,complete
+membership,membership_sales_gross,4547,usd,booked in week,complete
+orders,confirmed_orders,46,orders,booked in week,complete
+orders,orders_gross,9176,usd,booked in week,complete
+orders,cancellation_orders,0,orders,booked in week,complete
+cash,cash_captured,19202,usd,payments in week,complete
+events,cedar_export_readiness_registrations_taken,30,registrations,taken in week,complete
+courses,course_enrollments_taken,68,enrollments,taken in week,complete
+courses,course_completions,13,completions,completed in week,complete
+advocacy,coalition_meeting_interstate_shipment,1,actions,recorded in week,complete
+governance,committee_meetings_completed,1,meetings,Education Committee Q1,complete

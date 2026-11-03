@@ -1,0 +1,32 @@
+# title: Weekly operations snapshot, week ending 17 May 2020
+# date: 2020-05-17
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-05-11
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-05-11
+# basis: membership purchases, orders, and cash captured are booked inside 2020-05-11..2020-05-17. Current members counts qualifying purchases in the trailing 12 months.
+# caveat: pulled on 17 May 2020; final weekly reconciliation pending.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,395,members,rolling 12 months,final
+membership,membership_purchases_total,2,purchases,booked in week,final
+membership,membership_purchases_first_time,0,purchases,booked in week,final
+membership,individual_membership_purchases,2,purchases,booked in week,final
+membership,membership_sales_gross,298,usd,booked in week,final
+orders,confirmed_orders,13,orders,booked in week,final
+orders,orders_gross,1580,usd,booked in week,final
+orders,cancellations,2,orders,booked in week,final
+cash,cash_captured,2189,usd,payments in week,final
+event_registrations,annual_conference_registrations,3,registrations,EVT-2020-CONF,final
+course_enrollments,course_enrollments_taken,0,enrollments,booked in week,final
+course_enrollments,course_completions,0,completions,booked in week,final

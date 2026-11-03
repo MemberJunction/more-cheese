@@ -10,10 +10,11 @@
     "volume_Person": 300,
     "volume_CourseEnrollment": 150,
     "volume_AdvocacyAction": 150,
-    "intake_Organization": 5,
-    "intake_Person": 20,
-    "intake_CourseEnrollment": 10,
-    "intake_AdvocacyAction": 10
+    "intake_Organization": 0,
+    "intake_Person": 0,
+    "intake_CourseEnrollment": 0,
+    "intake_AdvocacyAction": 0,
+    "intake_default": 0
   },
   "effects": {
     "factor-annual-conference-attendance": {

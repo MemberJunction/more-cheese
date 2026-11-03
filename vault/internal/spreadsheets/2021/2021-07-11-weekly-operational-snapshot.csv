@@ -1,0 +1,38 @@
+# title: Weekly operational snapshot, week of 5 July 2021
+# date: 2021-07-11
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-07-05
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-07-05 and node scripts/vault-facts.mjs year 2021
+# basis: membership purchases, orders, cash, course enrollments, and event registrations are booked inside 2021-07-05..2021-07-11. Current members counts people whose latest qualifying purchase is within 12 months as of week end.
+# caveat: week totals compiled on Sunday 11 July 2021. Event attendance figures for EVT-2021-W3 reflect final recorded counts from its 6 July date.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,461,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,1,purchases,booked in week,final
+membership,individual_purchases,4,purchases,booked in week,final
+membership,membership_gross,612,usd,booked in week,final
+orders,confirmed_orders,25,orders,booked in week,final
+orders,orders_gross,8007,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,8007,usd,payments in week,final
+events,conference_registrations_taken,17,registrations,EVT-2021-CONF,final
+events,workshop_registrations_taken,4,registrations,EVT-2021-W3,final
+events_brooklyn,workshop_registered,29,registrations,EVT-2021-W3,final
+events_brooklyn,workshop_refunded,1,registrations,EVT-2021-W3,final
+events_brooklyn,workshop_attended,25,attendees,EVT-2021-W3,final
+events_brooklyn,workshop_noshow,4,attendees,EVT-2021-W3,final
+education,course_enrollments_taken,25,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+governance,standards_committee_meetings,1,meetings,completed 2021-07-06,final

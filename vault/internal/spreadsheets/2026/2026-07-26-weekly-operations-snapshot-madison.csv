@@ -1,0 +1,41 @@
+# title: Weekly operations snapshot, week of 20 July 2026
+# date: 2026-07-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-07-20
+# fictional: true
+# owner_role: Events Team
+# tags: [weekly-snapshot, annual-conference, membership, orders]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2026-07-20 and node scripts/vault-facts.mjs year 2026
+# basis: membership purchases, orders, cash and event registrations booked inside 2026-07-20..2026-07-26. Current members counts people whose latest qualifying purchase is within 12 months. Event attendance pulled from conference records.
+# caveat: pulled on 26 July, closing the week. Conference attendance and no-show figures are finalized from badge scans.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1579,members,rolling 12 months,final
+membership,membership_purchases,8,purchases,booked in week,final
+membership,first_time_purchases,4,purchases,booked in week,final
+membership,individual_purchases,6,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,gross_membership_sales,1600,usd,booked in week,final
+orders,confirmed_orders,69,orders,booked in week,final
+orders,gross_orders,13620,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,13620,usd,payments in week,final
+events,annual_conference_registrations,9,registrations,EVT-2026-CONF,final
+events,annual_conference_attended,338,registrations,badge scan log,final
+events,annual_conference_no_show,42,registrations,badge scan log,final
+events,annual_conference_refunded,0,registrations,EVT-2026-CONF,final
+events,stone_food_safety_registrations,52,registrations,EVT-2026-W1,final
+events,stone_food_safety_attended,283,registrations,attendance record,final
+events,stone_food_safety_no_show,23,registrations,attendance record,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,30,completions,completed in week,final
+advocacy,coalition_meetings,1,meetings,Dairy pricing reform,final

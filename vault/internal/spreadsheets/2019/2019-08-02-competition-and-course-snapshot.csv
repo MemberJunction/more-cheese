@@ -1,0 +1,40 @@
+# title: Competition and course snapshot, week ending 4 August 2019
+# date: 2019-08-02
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-07-29
+# fictional: true
+# owner_role: Events Team
+# tags: [competition, courses, enrollments, madison-recap, judging]
+# data_sources: [generated/competition-entries, generated/courses, generated/certifications, generated/orders]
+# source: node scripts/vault-facts.mjs week 2019-07-29 and year 2019
+# basis: competition entries reflect 2019 totals; course enrollments and completions reflect weekly totals for the week ending 4 August 2019; membership purchases and cash captured reflect current weekly data.
+# caveat: pulled on 2 August 2019; preliminary figures subject to weekly close.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+competition,total_competition_entries,24,entries,2019 full year,final
+competition,alpine_styles_entries,7,entries,2019 full year,final
+competition,soft_ripened_entries,5,entries,2019 full year,final
+competition,washed_rind_entries,4,entries,2019 full year,final
+competition,fresh_pasta_filata_entries,4,entries,2019 full year,final
+competition,aged_cheddar_territorials_entries,2,entries,2019 full year,final
+competition,blue_veined_entries,2,entries,2019 full year,final
+education,course_enrollments_taken,21,enrollments,booked in week,preliminary
+education,course_completions,3,completions,completed in week,preliminary
+education,certifications_enrolled,0,certifications,booked in week,preliminary
+education,certifications_awarded,0,certifications,awarded in week,preliminary
+courses_starting,advanced_sensory_evaluation_cedar_cohort_start,2019-08-04,date,scheduled start,confirmed
+courses_starting,rind_development_washing_clover_cohort_start,2019-08-07,date,scheduled start,confirmed
+courses_starting,advanced_sensory_evaluation_stone_cohort_start,2019-08-14,date,scheduled start,confirmed
+membership,membership_purchases_total,3,purchases,booked in week,preliminary
+membership,membership_purchases_individual,2,purchases,booked in week,preliminary
+inates,membership_purchases_corporate,1,purchases,booked in week,preliminary
+finance,orders_confirmed,5,orders,booked in week,preliminary
+finance,orders_gross,1597,usd,booked in week,preliminary
+finance,cash_captured,622,usd,booked in week,preliminary

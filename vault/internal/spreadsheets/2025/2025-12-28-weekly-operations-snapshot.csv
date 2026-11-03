@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 22 December 2025
+# date: 2025-12-28
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-12-22
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2025-12-22
+# basis: confirmed orders, membership purchases, cash captured, and registrations recorded during the week of 2025-12-22 to 2025-12-28.
+# caveat: year-end figures compiled during holiday closure; preliminary pending final bank reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1448,members,rolling 12 months,final
+membership,membership_purchases_total,29,purchases,booked in week,final
+membership,membership_purchases_first_time,6,purchases,booked in week,final
+membership,membership_purchases_individual,22,purchases,booked in week,final
+membership,membership_purchases_small_business,3,purchases,booked in week,final
+membership,membership_purchases_enthusiast,3,purchases,booked in week,final
+membership,membership_purchases_corporate,1,purchases,booked in week,final
+membership,membership_purchases_gross,6384,usd,booked in week,final
+orders,confirmed_orders,126,orders,booked in week,final
+orders,orders_gross,19602,usd,booked in week,final
+orders,cancellations,4,orders,booked in week,final
+cash,cash_captured,9250,usd,payments in week,final
+events,event_registrations_cedar_cut_and_wrap,81,registrations,EVT-2026-W4,final
+events,event_registrations_stone_sensory,11,registrations,EVT-2026-W3,final
+education,course_enrollments_taken,14,enrollments,taken in week,final
+education,course_completions,3,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,enrolled in week,final
+certifications,certifications_awarded,1,awards,Linda Abara,final

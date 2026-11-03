@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 10 November 2025
+# date: 2025-11-16
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-11-10
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-11-10
+# basis: membership purchases, orders, cash, course enrollments, and advocacy actions booked inside 2025-11-10..2025-11-16. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: preliminary snapshot pulled at week close on 17 June 2026 for the 2025-11-10 window. Export documentation delays are tracked via advocacy and member notes.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1420,members,rolling 12 months,final
+membership,membership_purchases,27,purchases,booked in week,final
+membership,first_time_members,20,purchases,booked in week,final
+membership,enthusiast_tier_purchases,5,purchases,booked in week,final
+membership,individual_tier_purchases,18,purchases,booked in week,final
+membership,corporate_tier_purchases,2,purchases,booked in week,final
+membership,small_business_tier_purchases,2,purchases,booked in week,final
+membership,membership_gross,6516,usd,booked in week,final
+orders,confirmed_orders,71,orders,booked in week,final
+orders,orders_gross,13189,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,10492,usd,payments in week,final
+events,curd_pasta_filata_registrations,31,registrations,EVT-2025-W5,final
+events,cedar_cut_and_wrap_registrations,13,registrations,EVT-2026-W4,final
+education,course_enrollments_taken,34,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,1,awards,Food Safety and HACCP,final
+advocacy,fsma_petition_signatures,14,signatures,booked in week,final
+advocacy,fsma_letter_campaign,15,letters,booked in week,final

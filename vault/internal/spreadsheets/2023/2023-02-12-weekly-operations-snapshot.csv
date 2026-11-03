@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 2023-02-06
+# date: 2023-02-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-02-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2023-02-06 and node scripts/vault-facts.mjs event EVT-2023-W1
+# basis: membership purchases, orders and cash captured are booked inside 2023-02-06..2023-02-12. Current members counts people whose latest qualifying purchase is within 12 months. Event registration figures are for EVT-2023-W1 held on 2023-02-06.
+# caveat: pulled at week end on 2023-02-12. Event attendance is reconciled.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,674,members,rolling 12 months,final
+membership,membership_purchases,11,purchases,booked in week,final
+membership,first_time_purchases,7,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,individual_purchases,8,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,membership_gross,2726,usd,booked in week,final
+orders,confirmed_orders,26,orders,booked in week,final
+orders,orders_gross,4966,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,15378,usd,payments in week,final
+events,event_registrations_taken,15,registrations,taken in week,final
+events,workshop_registered_total,134,registrations,EVT-2023-W1,final
+events,workshop_attended,129,registrations,EVT-2023-W1,final
+events,workshop_no_show,5,registrations,EVT-2023-W1,final
+events,workshop_refunded,3,registrations,EVT-2023-W1,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final

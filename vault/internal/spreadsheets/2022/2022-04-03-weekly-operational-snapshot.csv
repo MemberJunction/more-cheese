@@ -1,0 +1,34 @@
+# title: Weekly operational snapshot, week of 28 March 2022
+# date: 2022-04-03
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-03-28
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-03-28
+# basis: membership purchases, orders, cash, and event registrations booked inside 2022-03-28..2022-04-03. Current members counts active members at week end. Gross orders and cash captured are different bases.
+# caveat: week totals are complete as of Sunday 2022-04-03.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,523,members,rolling 12 months,complete
+membership,membership_purchases,8,purchases,booked in week,complete
+membership,first_time_members,4,purchases,booked in week,complete
+membership,enthusiast_tier_purchases,1,purchases,booked in week,complete
+membership,individual_tier_purchases,7,purchases,booked in week,complete
+membership,membership_gross,1234,usd,booked in week,complete
+orders,confirmed_orders,16,orders,booked in week,complete
+orders,orders_gross,4044,usd,booked in week,complete
+orders,cancellation_orders,0,orders,booked in week,complete
+cash,cash_captured,4104,usd,payments in week,complete
+events,annual_conference_registrations_taken,6,registrations,EVT-2022-CONF,complete
+events,brook_food_safety_registrations_taken,2,registrations,EVT-2022-W1,complete
+education,course_enrollments_taken,0,enrollments,taken in week,complete
+education,course_completions,2,completions,completed in week,complete

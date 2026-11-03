@@ -1,0 +1,35 @@
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+# title: Weekly operational snapshot, week of 19 April 2021
+# date: 2021-04-25
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-04-19
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2021-04-19
+# basis: membership purchases, orders, cash captured, and event registrations booked inside 2021-04-19..2021-04-25. Current members count reflects active status at week end.
+# caveat: pulled on Sunday 25 April 2021; weekly totals are complete.
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,453,members,rolling 12 months,complete
+membership,membership_purchases_total,4,purchases,booked in week,complete
+membership,membership_purchases_first_time,1,purchases,booked in week,complete
+membership,membership_purchases_small_business,3,purchases,booked in week,complete
+membership,membership_purchases_individual,1,purchases,booked in week,complete
+membership,membership_purchases_gross,1203,usd,booked in week,complete
+orders,confirmed_orders,9,orders,booked in week,complete
+orders,orders_gross,3389,usd,booked in week,complete
+orders,cancellations,0,orders,booked in week,complete
+cash,cash_captured,2431,usd,payments in week,complete
+events,annual_conference_registrations_taken,4,registrations,EVT-2021-CONF,complete
+events,farmers_market_webinar_registrations,0,registrations,EVT-2021-WEB6,complete
+education,course_enrollments_taken,0,enrollments,booked in week,complete
+education,course_completions,7,completions,completed in week,complete
+advocacy,testimony_dairy_pricing_reform,1,actions,recorded in week,complete
+advocacy,coalition_meeting_interstate_shipment,1,actions,recorded in week,complete

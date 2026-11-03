@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 9 June 2025
+# date: 2025-06-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-06-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-06-09
+# basis: membership purchases, orders, cash captured, and advocacy actions booked inside 2025-06-09..2025-06-15. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week close on 15 June 2025. Figures represent final weekly totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1193,members,rolling 12 months,final
+membership,membership_purchases,12,purchases,booked in week,final
+membership,first_time_members,2,purchases,booked in week,final
+membership,small_business_purchases,3,purchases,booked in week,final
+membership,individual_purchases,8,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,membership_gross,2673,usd,booked in week,final
+orders,confirmed_orders,44,orders,booked in week,final
+orders,orders_gross,14836,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,13108,usd,payments in week,final
+conference,sacramento_registrations_taken,24,registrations,taken in week,final
+events,events_this_week,0,events,scheduled in week,final
+events,events_next_eight_weeks,2,events,scheduled July 2025,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,6,completions,completed in week,final
+certifications,enrolled,2,certifications,enrolled in week,final
+certifications,awarded,0,certifications,awarded in week,final
+advocacy,interstate_shipment_testimony,1,actions,recorded in week,final

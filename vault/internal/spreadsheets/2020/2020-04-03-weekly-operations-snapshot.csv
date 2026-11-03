@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week ending 5 April 2020
+# date: 2020-04-03
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-03-30
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, cash]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2020-03-30
+# basis: commerce figures cover confirmed orders, membership purchases, cash captured, and advocacy actions booked between 2020-03-30 and 2020-04-05. Current members count reflects week-end totals. Course enrollments and completions reflect the immediate pandemic shock period.
+# caveat: pulled on Friday 3 April 2020; figures are preliminary for the final two days of the statistical week ending Sunday 5 April.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,388,members,rolling 12 months,preliminary
+membership,membership_purchases_total,5,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,2,purchases,booked in week,preliminary
+membership,membership_purchases_individual,4,purchases,booked in week,preliminary
+membership,membership_purchases_small_business,1,purchases,booked in week,preliminary
+membership,membership_purchases_gross,989,usd,booked in week,preliminary
+orders,confirmed_orders,7,orders,booked in week,preliminary
+orders,orders_gross,1757,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,1906,usd,payments in week,preliminary
+events,annual_conference_registrations,2,registrations,EVT-2020-CONF,preliminary
+education,course_enrollments_taken,0,enrollments,taken in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+certification,certifications_enrolled,0,enrollments,taken in week,preliminary
+certification,certifications_awarded,1,awards,Cheese Foundations Certificate,final
+advocacy,testimony_dairy_pricing_reform,1,actions,recorded in week,final
+advocacy,coalition_meeting_interstate_shipment,1,actions,recorded in week,final

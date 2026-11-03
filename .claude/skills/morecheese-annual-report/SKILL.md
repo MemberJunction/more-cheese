@@ -38,8 +38,8 @@ Appendix A (queries) are the parts you will use most.
 
 Write a scratch fact-sheet first, then draft against it. Do not draft prose and reconcile after.
 
-Run **Appendix A** of `content/VAULT-DESIGN.md` — snippets A.0 (loader) plus A.1, A.2, A.3, A.4,
-A.5, A.6, A.7, A.8, A.9 — with `YEAR` set to your fiscal year. Save the output somewhere you can
+Run **Appendix A** of `content/VAULT-DESIGN.md` — `node scripts/vault-facts.mjs year <YYYY>`
+(A.2–A.9) and `node scripts/vault-facts.mjs series` (A.1) for your fiscal year. Save the output somewhere you can
 re-read (a temp file is fine; do not commit it).
 
 Minimum fact-sheet:
@@ -102,7 +102,7 @@ Use these seven `##` headings, in this order, with these names:
    balance sheet** — that data does not exist. Prices quoted must match `generated/products`
    (VAULT-DESIGN §7.6).
 7. **`## Looking ahead`** — 200–300 words. Forward-looking, but only toward things that exist:
-   next year's Annual Conference from `generated/events` if it exists, standing courses,
+   next year's Annual Conference from `content/event-calendar.json` if it exists, standing courses,
    credential pathways, the advocacy topics already in the data. For 2025, look toward 2026 with
    appropriate caution and do not promise outcomes.
 
@@ -153,12 +153,8 @@ report_sections:
   - Financial summary
   - Looking ahead
 data_sources:
-  - generated/membership-periods
   - generated/orders
-  - generated/order-lines
   - generated/payments
-  - generated/events
-  - generated/event-registrations
   - generated/enrollments
   - generated/member-certifications
   - generated/competition-entries

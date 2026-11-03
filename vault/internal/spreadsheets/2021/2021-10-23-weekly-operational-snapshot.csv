@@ -1,0 +1,39 @@
+# title: Weekly operational snapshot, week of 18 October 2021
+# date: 2021-10-23
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-10-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2021-10-18
+# basis: figures represent the complete week of 18-24 October 2021. Current members count is measured at week end. Membership purchases and orders are booked in the window. Cash captured reflects payments received.
+# caveat: pulled on Saturday 23 October, prior to final weekend settlement reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,484,members,rolling 12 months,complete
+membership,membership_purchases_total,5,purchases,booked in week,complete
+membership,membership_purchases_first_time,2,purchases,booked in week,complete
+membership,membership_purchases_individual_tier,2,purchases,booked in week,complete
+membership,membership_purchases_small_business_tier,3,purchases,booked in week,complete
+membership,membership_purchases_gross,1356,usd,booked in week,complete
+orders,confirmed_orders,5,orders,booked in week,complete
+orders,orders_gross,1430,usd,booked in week,complete
+orders,cancellations,0,orders,booked in week,complete
+cash,cash_captured,437,usd,payments received,complete
+event_registrations,registrations_taken,0,registrations,booked in week,complete
+course_enrollments,course_enrollments_taken,0,enrollments,booked in week,complete
+course_enrollments,course_completions,0,completions,completed in week,complete
+certifications,certifications_enrolled,0,enrollments,booked in week,complete
+certifications,certifications_awarded,0,awards,awarded in week,complete
+advocacy,petition_signature_raw_milk_aging,9,signatures,action count,complete
+advocations,letter_campaign_raw_milk_aging,7,letters,action count,complete
+advocacies,testimony_fsma_small_producer_exemptions,1,testimonies,action count,complete
+governance,committee_meetings_completed,1,meetings,Education Committee Q4,complete

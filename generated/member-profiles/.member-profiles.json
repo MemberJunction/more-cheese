@@ -56941,5 +56941,5972 @@
     "primaryKey": {
       "ID": "B10802FA-829A-59DA-B266-CF7C85BBA971"
     }
+  },
+  {
+    "primaryKey": {
+      "ID": "ea3309ba-8665-5600-9bd7-2797e2797ff1"
+    },
+    "fields": {
+      "PersonID": "aaa61cfe-a891-506b-9cb8-4b04eb482cf8",
+      "OrganizationID": "AA2187DD-3F68-5258-B08F-73F12DCEFF42",
+      "MemberNumber": "ICF-102501",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "412 Williamson St",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-07-02",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "da8c5119-2540-5854-9324-72a1449ba7b8"
+    },
+    "fields": {
+      "PersonID": "3cfae80b-d760-59bc-9e2a-464cc85c0764",
+      "OrganizationID": "89EB2D5E-6857-5663-813A-90DC81C34B21",
+      "MemberNumber": "ICF-102502",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Green Bay",
+      "State": "US-WI",
+      "AddressLine1": "815 S Broadway",
+      "AddressLine2": null,
+      "PostalCode": "54304",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "JoinDate": "2026-07-03",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "df386bf5-adfc-56b4-bc6e-961a8b349af7"
+    },
+    "fields": {
+      "PersonID": "16ee0298-8a0e-5f92-acb1-dd423702299d",
+      "OrganizationID": "648D57DC-B44E-5E85-BF0C-77C0E74DD2D0",
+      "MemberNumber": "ICF-102503",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Chicago",
+      "State": "US-IL",
+      "AddressLine1": "1920 W Fulton St",
+      "AddressLine2": null,
+      "PostalCode": "60612",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "JoinDate": "2026-07-05",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8545e561-6cfa-5e6b-84f2-fd4f4e3560d0"
+    },
+    "fields": {
+      "PersonID": "572a6a40-d23b-5335-819a-845721bd6136",
+      "OrganizationID": "E2D57025-A34D-5114-AE74-E82C929E452C",
+      "MemberNumber": "ICF-102504",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "230 Kentucky St",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-07-07",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b820e941-a108-5a35-90eb-f8a7d7c1aedc"
+    },
+    "fields": {
+      "PersonID": "edcbff65-8782-5ef9-9e33-58b60d7fb452",
+      "OrganizationID": "2A7FE510-A147-5CD1-8A93-6F82F1E0F3EA",
+      "MemberNumber": "ICF-102505",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Bega",
+      "State": "AU-NSW",
+      "AddressLine1": "114 Carp St",
+      "AddressLine2": null,
+      "PostalCode": "2550",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409,
+      "JoinDate": "2026-07-08",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04f7b944-263c-5d89-8920-cb5411470509"
+    },
+    "fields": {
+      "PersonID": "ddda0ff3-b3e1-52c4-8411-ef440ad9b4ec",
+      "OrganizationID": "E215A0F7-A569-5956-A918-4204D412E909",
+      "MemberNumber": "ICF-102506",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Poligny",
+      "State": "FR-39",
+      "AddressLine1": "18 Rue du Collège",
+      "AddressLine2": null,
+      "PostalCode": "39800",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "JoinDate": "2026-07-09",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7e167341-e1a8-5da8-9f36-a6fafb4b8621"
+    },
+    "fields": {
+      "PersonID": "28b3fe67-0983-5b0b-9153-7cf616efc7ac",
+      "OrganizationID": "EC0256F2-D4DF-5813-A245-8FC740A1DFEC",
+      "MemberNumber": "ICF-102507",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Burlington",
+      "State": "US-VT",
+      "AddressLine1": "88 Pine St",
+      "AddressLine2": null,
+      "PostalCode": "05401",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "JoinDate": "2026-07-11",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7c35272c-34a5-5a74-aaf3-1f5c8850ccca"
+    },
+    "fields": {
+      "PersonID": "e930203b-b612-5f8b-a9dd-c0316c5c0359",
+      "OrganizationID": "40AE721D-5F9E-5518-8551-52ADB437E5D3",
+      "MemberNumber": "ICF-102508",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "JP",
+      "CountryName": "Japan",
+      "City": "Hokkaido",
+      "State": "JP-01",
+      "AddressLine1": "3-14 Odori Nishi, Chuo-ku",
+      "AddressLine2": null,
+      "PostalCode": "060-0042",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469,
+      "JoinDate": "2026-07-12",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Japanese",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75614a6d-d443-52ba-9669-2ca1bfce9f2a"
+    },
+    "fields": {
+      "PersonID": "fc7ff3fa-d102-5b6c-86d6-f67617441fc2",
+      "OrganizationID": "54736935-CB1A-5B96-80B9-8C873E2A7996",
+      "MemberNumber": "ICF-102509",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "704 E Johnson St",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-07-14",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3b134fc5-63e4-5d4c-8be7-2af1ae8d203d"
+    },
+    "fields": {
+      "PersonID": "47256c0f-e7ea-570a-8cae-1c0e9f71e9cd",
+      "OrganizationID": "A2AA4DC3-2FDD-5526-BD27-CDBA63E7516E",
+      "MemberNumber": "ICF-102510",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Gouda",
+      "State": "NL-ZH",
+      "AddressLine1": "Markt 44",
+      "AddressLine2": null,
+      "PostalCode": "2801 JJ",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104,
+      "JoinDate": "2026-07-15",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9e9edf63-3748-5a03-8a2e-4d1475fca152"
+    },
+    "fields": {
+      "PersonID": "2a90ee28-2350-5477-a037-afc1d39496af",
+      "OrganizationID": "884585C5-B88F-50F6-8B90-1C8FEDB1E5C9",
+      "MemberNumber": "ICF-102511",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "512 First St W",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-07-17",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b1e958a8-79bf-5ad2-b1ae-a603a07f18e7"
+    },
+    "fields": {
+      "PersonID": "49f21dbd-bd65-548a-b974-3f5cbf1f1d94",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102512",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "319 Court St",
+      "AddressLine2": null,
+      "PostalCode": "11231",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-07-18",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "43d05809-820e-534c-b380-8b798706e471"
+    },
+    "fields": {
+      "PersonID": "577bf456-b1c1-5852-b578-0cd459fb27cc",
+      "OrganizationID": "5E12CC79-A2B4-5224-A8F2-07BE94BBD264",
+      "MemberNumber": "ICF-102513",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Hobart",
+      "State": "AU-TAS",
+      "AddressLine1": "62 Salamanca Pl",
+      "AddressLine2": null,
+      "PostalCode": "7000",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "JoinDate": "2026-07-19",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f8f86f8f-7cf6-58f6-a4ae-08f075fdf720"
+    },
+    "fields": {
+      "PersonID": "36930fc3-3a72-59d7-9cf1-1230c38ead09",
+      "OrganizationID": "36F8088C-2679-50EC-BBAE-E862795F2577",
+      "MemberNumber": "ICF-102514",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Austin",
+      "State": "US-TX",
+      "AddressLine1": "1508 S Congress Ave",
+      "AddressLine2": null,
+      "PostalCode": "78704",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "JoinDate": "2026-07-20",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2166e34c-694f-55ec-a800-6f6ef9c7712f"
+    },
+    "fields": {
+      "PersonID": "9234cdf0-5312-5d8f-9a30-46da10fe499d",
+      "OrganizationID": "CDEA8984-ACD4-5F02-8073-371E8319EC62",
+      "MemberNumber": "ICF-102515",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Cork",
+      "State": "IE-CO",
+      "AddressLine1": "29 Patrick St",
+      "AddressLine2": null,
+      "PostalCode": "T12 W890",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756,
+      "JoinDate": "2026-07-22",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6bbecb88-3e8a-503f-800e-fa154a7dfa2a"
+    },
+    "fields": {
+      "PersonID": "0ecdf649-5214-52e3-b1cd-5849f72f1719",
+      "OrganizationID": "4664DF05-C336-5BDB-B5F2-A27CC3F99077",
+      "MemberNumber": "ICF-102516",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Querétaro",
+      "State": "MX-QUE",
+      "AddressLine1": "Av. Zaragoza 142",
+      "AddressLine2": null,
+      "PostalCode": "76000",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899,
+      "JoinDate": "2026-07-24",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44cab41a-9ac7-5e3d-b74d-824a0c41597a"
+    },
+    "fields": {
+      "PersonID": "ccecbdff-a3d0-5c8a-a26f-a5ffc5a1602d",
+      "OrganizationID": "A612F8CB-9D42-5010-B507-88F20222B3AF",
+      "MemberNumber": "ICF-102517",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "1422 Western Ave",
+      "AddressLine2": null,
+      "PostalCode": "98101",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-07-26",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0edce481-cfbd-5b02-8fdc-ba4a24a91a5d"
+    },
+    "fields": {
+      "PersonID": "7a227b55-7c4b-52f3-a98c-269cfc93fa6e",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102518",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "2105 NW 23rd Ave",
+      "AddressLine2": null,
+      "PostalCode": "97210",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-07-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "51f70930-4780-52c0-87ff-cb0bbc55e829"
+    },
+    "fields": {
+      "PersonID": "73166783-58cc-5a62-9120-1b824dc08c35",
+      "OrganizationID": "2B483D62-CAD5-59EA-92EF-00BC684B892C",
+      "MemberNumber": "ICF-102519",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Ithaca",
+      "State": "US-NY",
+      "AddressLine1": "308 N Tioga St",
+      "AddressLine2": null,
+      "PostalCode": "14850",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "JoinDate": "2026-07-29",
+      "RaceEthnicity": "American Indian or Alaska Native",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d8683a26-167c-565b-a0eb-532ddc529568"
+    },
+    "fields": {
+      "PersonID": "610c13c5-a034-5c34-9240-d67857e47fca",
+      "OrganizationID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3",
+      "MemberNumber": "ICF-102520",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Lancaster",
+      "State": "US-PA",
+      "AddressLine1": "45 N Queen St",
+      "AddressLine2": null,
+      "PostalCode": "17603",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055,
+      "JoinDate": "2026-07-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "343a72bf-ae0d-5c93-a199-a48c6bf3292e"
+    },
+    "fields": {
+      "PersonID": "126bd65c-fb9a-5a65-a527-bf813f5591b5",
+      "OrganizationID": "68E14202-A210-5FD9-950D-175AA7D76076",
+      "MemberNumber": "ICF-102521",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brattleboro",
+      "State": "US-VT",
+      "AddressLine1": "118 Main St",
+      "AddressLine2": null,
+      "PostalCode": "05301",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "JoinDate": "2026-07-31",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a572e7a8-181b-59d0-9c97-8cb7a5720037"
+    },
+    "fields": {
+      "PersonID": "2b3b6be6-5a26-541f-aa5f-c81c083fc68e",
+      "OrganizationID": "F51C3011-493F-50D1-9E7A-80A9C06640A9",
+      "MemberNumber": "ICF-102522",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "412 B Street",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-08-01",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16d198a0-f046-5e40-9b07-1864b16e3cce"
+    },
+    "fields": {
+      "PersonID": "c6688841-4ffc-528b-a230-eefdb9ef8f94",
+      "OrganizationID": "7E2A14B4-1A7B-52D5-98E0-13E1649157A6",
+      "MemberNumber": "ICF-102523",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "814 Williamson Street",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-08-02",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c741f6db-6c84-57dc-8f2c-7374c7ed579b"
+    },
+    "fields": {
+      "PersonID": "1d9b802f-5f37-5679-8355-1f8371089b80",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102524",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "219 Bergen Street",
+      "AddressLine2": null,
+      "PostalCode": "11217",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-08-02",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b31637e8-5b49-57e8-aae9-d212188d2bd3"
+    },
+    "fields": {
+      "PersonID": "1ff9019e-7177-512d-b94c-78ebb4b5fd82",
+      "OrganizationID": "46BC9FB5-6F63-54CB-8854-630EDD2864FA",
+      "MemberNumber": "ICF-102525",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "505 First Street West",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-08-03",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f437c8b2-1a4a-5046-9ddc-bd31968e1336"
+    },
+    "fields": {
+      "PersonID": "0d6e6270-4065-5014-a870-c541aab8a9bd",
+      "OrganizationID": "89EB2D5E-6857-5663-813A-90DC81C34B21",
+      "MemberNumber": "ICF-102526",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Green Bay",
+      "State": "US-WI",
+      "AddressLine1": "1120 South Broadway",
+      "AddressLine2": null,
+      "PostalCode": "54304",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "JoinDate": "2026-08-03",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a90ff30b-d3f3-516c-8329-cd2e8cf6a702"
+    },
+    "fields": {
+      "PersonID": "1a1cfc1f-2235-5606-ad5c-7933c7d62119",
+      "OrganizationID": "F57C6EE1-7CFC-5B1E-954D-4F864A4E2867",
+      "MemberNumber": "ICF-102527",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "Country": "JP",
+      "CountryName": "Japan",
+      "City": "Hokkaido",
+      "State": "JP-01",
+      "AddressLine1": "3-4 Kita 5 Jonishi, Chuo Ward",
+      "AddressLine2": null,
+      "PostalCode": "060-0005",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469,
+      "JoinDate": "2026-08-04",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Japanese",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ee1147f0-c869-56ec-bceb-6e02818de77a"
+    },
+    "fields": {
+      "PersonID": "729e1fab-3f08-5f37-bf75-f90d01367dad",
+      "OrganizationID": "EC0256F2-D4DF-5813-A245-8FC740A1DFEC",
+      "MemberNumber": "ICF-102528",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Burlington",
+      "State": "US-VT",
+      "AddressLine1": "74 Pine Street",
+      "AddressLine2": null,
+      "PostalCode": "05401",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "JoinDate": "2026-08-04",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0874338d-6e48-50a3-ba3c-ad62f202b0c2"
+    },
+    "fields": {
+      "PersonID": "ad6d3e24-1110-5e9b-85f9-7b138d418543",
+      "OrganizationID": "26289C3C-AEDF-5ECF-B0FE-D829F13FDFC3",
+      "MemberNumber": "ICF-102529",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Saint-Hyacinthe",
+      "State": "CA-QC",
+      "AddressLine1": "1450 Rue des Cascades",
+      "AddressLine2": null,
+      "PostalCode": "J2S 3H5",
+      "Latitude": 45.63,
+      "Longitude": -72.957,
+      "JoinDate": "2026-08-05",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Prefer not to say",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0f7dba57-d4e2-5eaa-8de7-40fcd8dbf623"
+    },
+    "fields": {
+      "PersonID": "9dfe3624-f3ac-5867-b0bc-a743931b5c12",
+      "OrganizationID": "63755B23-B849-546E-A71F-E947A5439999",
+      "MemberNumber": "ICF-102530",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Cork",
+      "State": "IE-CO",
+      "AddressLine1": "28 Patrick Street",
+      "AddressLine2": null,
+      "PostalCode": "T12 N802",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756,
+      "JoinDate": "2026-08-05",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "35e8e682-f511-564c-9f34-8d6cf3a00975"
+    },
+    "fields": {
+      "PersonID": "63312667-9b4e-5b6b-a5b1-c2dea9d29e12",
+      "OrganizationID": "DBCA1003-D0EE-5D0F-B18B-D182DDE51AAF",
+      "MemberNumber": "ICF-102531",
+      "Segment": "Educator",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "2310 SE Hawthorne Blvd",
+      "AddressLine2": null,
+      "PostalCode": "97214",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-08-06",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "869e7e21-b4f8-5431-b1fc-bef7d40e7354"
+    },
+    "fields": {
+      "PersonID": "b4f40bb5-b646-5fc6-b533-2c2d2a22e338",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102532",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "1512 Pike Place",
+      "AddressLine2": null,
+      "PostalCode": "98101",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-08-06",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a38a4fc3-ec7c-5503-b443-0a061affbe75"
+    },
+    "fields": {
+      "PersonID": "13fd63d4-d9cc-5440-a646-80780cc1aabb",
+      "OrganizationID": "AD5DFFC3-1933-5CA8-83FA-45F9D84FE586",
+      "MemberNumber": "ICF-102533",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "408 South 8th Street",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-08-07",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3bdbdba2-c6c3-5734-9d86-0fa31e858795"
+    },
+    "fields": {
+      "PersonID": "5d6b2934-b8f3-5b9e-a92f-942d4ca704ad",
+      "OrganizationID": "A2AA4DC3-2FDD-5526-BD27-CDBA63E7516E",
+      "MemberNumber": "ICF-102534",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Gouda",
+      "State": "NL-ZH",
+      "AddressLine1": "Markt 42",
+      "AddressLine2": null,
+      "PostalCode": "2801 JJ",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104,
+      "JoinDate": "2026-08-07",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3bc04f69-f183-5b40-828a-1e7d28c92ab6"
+    },
+    "fields": {
+      "PersonID": "b1cda56f-1d4f-5e44-97a9-6520242a48eb",
+      "OrganizationID": "2AD13D42-934B-57B1-B459-C4B554E5A28E",
+      "MemberNumber": "ICF-102535",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "NZ",
+      "CountryName": "New Zealand",
+      "City": "Oamaru",
+      "State": "NZ-OTA",
+      "AddressLine1": "19 Tyne Street",
+      "AddressLine2": null,
+      "PostalCode": "9400",
+      "Latitude": -45.0975,
+      "Longitude": 170.9714,
+      "JoinDate": "2026-08-08",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c79db324-ec4b-5e3f-b91e-e6e0b7a140b6"
+    },
+    "fields": {
+      "PersonID": "5191448b-4bd3-55e8-a3a4-a4dafe69c3af",
+      "OrganizationID": "0F947AB1-5D08-5691-88A8-076CB5D4341D",
+      "MemberNumber": "ICF-102536",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Point Reyes Station",
+      "State": "US-CA",
+      "AddressLine1": "11401 State Route 1",
+      "AddressLine2": null,
+      "PostalCode": "94956",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064,
+      "JoinDate": "2026-08-08",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "87786a0e-2d68-5038-87fc-5a7a873ba259"
+    },
+    "fields": {
+      "PersonID": "7b5a1fec-63de-570e-8345-f86a5fa35947",
+      "OrganizationID": "130F3323-1044-5CFE-A5CA-CA0DE244D334",
+      "MemberNumber": "ICF-102537",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "GR",
+      "CountryName": "Greece",
+      "City": "Trikala",
+      "State": "GR-E4",
+      "AddressLine1": "Asklipiou 18",
+      "AddressLine2": null,
+      "PostalCode": "421 00",
+      "Latitude": 39.5556,
+      "Longitude": 21.7679,
+      "JoinDate": "2026-08-09",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Greek",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d9cf3ea6-4a9f-5a9b-985b-30c69c4b84cb"
+    },
+    "fields": {
+      "PersonID": "cee79d3a-621e-580c-81b1-acc4087cef43",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102538",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Asheville",
+      "State": "US-NC",
+      "AddressLine1": "64 Haywood Street",
+      "AddressLine2": null,
+      "PostalCode": "28801",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "JoinDate": "2026-08-09",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8bb927ff-a3a7-5098-b8ab-9e653ad83311"
+    },
+    "fields": {
+      "PersonID": "f7406377-4eb8-5a7e-b559-9b8a2984815f",
+      "OrganizationID": "F2B0A226-D1A6-52C8-ACAA-7E397AEFF930",
+      "MemberNumber": "ICF-102539",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "DE",
+      "CountryName": "Germany",
+      "City": "Allgäu",
+      "State": "DE-BY",
+      "AddressLine1": "Alpenstraße 14",
+      "AddressLine2": null,
+      "PostalCode": "87561",
+      "Latitude": 47.58,
+      "Longitude": 10.22,
+      "JoinDate": "2026-08-10",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9d6ce90b-d7d9-5d28-9964-5f46a4affb07"
+    },
+    "fields": {
+      "PersonID": "905f882e-1bc4-54b4-9f71-e8ce2826834a",
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "MemberNumber": "ICF-102540",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Querétaro",
+      "State": "MX-QUE",
+      "AddressLine1": "Av. Constituyentes 120",
+      "AddressLine2": null,
+      "PostalCode": "76000",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899,
+      "JoinDate": "2026-08-10",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b9936bc6-bd79-5bf8-bd7c-32e5f5c3c2d1"
+    },
+    "fields": {
+      "PersonID": "01006a1b-1186-5a5f-be90-5871ff0f8dd5",
+      "OrganizationID": "D6729684-9E7B-593D-92A3-64314C3C55BD",
+      "MemberNumber": "ICF-102541",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Ithaca",
+      "State": "US-NY",
+      "AddressLine1": "118 East State Street",
+      "AddressLine2": null,
+      "PostalCode": "14850",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "JoinDate": "2026-08-11",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9aed34a0-8cfe-5ea9-87e7-d5166caf9dba"
+    },
+    "fields": {
+      "PersonID": "6c43249c-4d01-529e-8e64-b0fb2935e949",
+      "OrganizationID": "D53B5FFF-6A15-543D-8526-BF4F29CE1D3C",
+      "MemberNumber": "ICF-102542",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Somerset",
+      "State": "GB-SOM",
+      "AddressLine1": "12 High Street",
+      "AddressLine2": null,
+      "PostalCode": "BA5 2AA",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "JoinDate": "2026-08-11",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bd9714e7-a4bd-5e23-b51d-5f2f40285148"
+    },
+    "fields": {
+      "PersonID": "0fdc179d-37ce-51e5-a5d2-cd63666259b7",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102543",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Austin",
+      "State": "US-TX",
+      "AddressLine1": "1402 South Congress Ave",
+      "AddressLine2": null,
+      "PostalCode": "78704",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "JoinDate": "2026-08-12",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/they"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ceb93e63-4a59-5277-8d4c-fa31ec52603d"
+    },
+    "fields": {
+      "PersonID": "b050dff6-f1b2-5f47-aa18-cb1e15dc4625",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102544",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "DK",
+      "CountryName": "Denmark",
+      "City": "Aarhus",
+      "State": "DK-82",
+      "AddressLine1": "Søndergade 45",
+      "AddressLine2": null,
+      "PostalCode": "8000",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "JoinDate": "2026-08-12",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Danish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "22a9e3c2-a3e5-5baa-b838-08afce5ddc21"
+    },
+    "fields": {
+      "PersonID": "a19b6655-7f3b-58fb-bcd8-5f1f9df5af89",
+      "OrganizationID": "4CBAB92D-0639-54AE-AE87-344BBB647C5A",
+      "MemberNumber": "ICF-102545",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Chicago",
+      "State": "US-IL",
+      "AddressLine1": "932 West Randolph Street",
+      "AddressLine2": null,
+      "PostalCode": "60607",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "JoinDate": "2026-08-12",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ba708d58-8e5f-5fc4-ad26-4b1dc4c1e378"
+    },
+    "fields": {
+      "PersonID": "67f9afa1-6636-5fcb-b933-a8b37c486981",
+      "OrganizationID": "018C36EB-024E-587B-B745-B06E2B180E2E",
+      "MemberNumber": "ICF-102546",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Parma",
+      "State": "IT-PR",
+      "AddressLine1": "Strada Farini 22",
+      "AddressLine2": null,
+      "PostalCode": "43121",
+      "Latitude": 44.8015,
+      "Longitude": 10.3279,
+      "JoinDate": "2026-08-13",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e860da83-4c9c-5bd5-a1bc-e21e889bccb4"
+    },
+    "fields": {
+      "PersonID": "e682c7f3-a75f-5f04-b07d-648a63080f9d",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102547",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "AddressLine1": "55 Wyndham Street North",
+      "AddressLine2": null,
+      "PostalCode": "N1H 4E6",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "JoinDate": "2026-08-13",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4d8423fa-7903-5267-99f1-c5a6be32261b"
+    },
+    "fields": {
+      "PersonID": "404c1b96-1c35-59ff-96b4-e3188c4ddc72",
+      "OrganizationID": "2A7FE510-A147-5CD1-8A93-6F82F1E0F3EA",
+      "MemberNumber": "ICF-102548",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Bega",
+      "State": "AU-NSW",
+      "AddressLine1": "148 Carp Street",
+      "AddressLine2": null,
+      "PostalCode": "2550",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409,
+      "JoinDate": "2026-08-14",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fb3cd6e9-adbd-510d-ae68-7a8b1e7d5e03"
+    },
+    "fields": {
+      "PersonID": "6af2691b-c70f-5785-bbc1-e8873868a3dc",
+      "OrganizationID": "68E14202-A210-5FD9-950D-175AA7D76076",
+      "MemberNumber": "ICF-102549",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brattleboro",
+      "State": "US-VT",
+      "AddressLine1": "104 Main Street",
+      "AddressLine2": null,
+      "PostalCode": "05301",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "JoinDate": "2026-08-14",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "eb6a23c9-768b-51b2-bbc9-cae58fc73b5f"
+    },
+    "fields": {
+      "PersonID": "78007127-be90-5914-9e10-6c529ca63cb6",
+      "OrganizationID": "E215A0F7-A569-5956-A918-4204D412E909",
+      "MemberNumber": "ICF-102550",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Poligny",
+      "State": "FR-39",
+      "AddressLine1": "16 Grande Rue",
+      "AddressLine2": null,
+      "PostalCode": "39800",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "JoinDate": "2026-08-15",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6aa4241c-05bd-524c-8e02-2000f35ad1c5"
+    },
+    "fields": {
+      "PersonID": "0a3ac863-705c-572f-ac83-7bf0aaeb5eca",
+      "OrganizationID": "2066691C-A9A0-5662-92C5-E96DE91530BD",
+      "MemberNumber": "ICF-102551",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Denver",
+      "State": "US-CO",
+      "AddressLine1": "1740 Wazee Street",
+      "AddressLine2": null,
+      "PostalCode": "80202",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "JoinDate": "2026-08-15",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b79713a5-7c0a-5c7e-98ab-68a0e19afe66"
+    },
+    "fields": {
+      "PersonID": "012b6de1-bd2a-53a7-b2ae-e450db02b0de",
+      "OrganizationID": "DE942B58-3E8E-54C3-982D-3108B065EF8B",
+      "MemberNumber": "ICF-102552",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "AR",
+      "CountryName": "Argentina",
+      "City": "Tandil",
+      "State": "AR-B",
+      "AddressLine1": "Gral. Rodríguez 540",
+      "AddressLine2": null,
+      "PostalCode": "B7000",
+      "Latitude": -37.3217,
+      "Longitude": -59.1332,
+      "JoinDate": "2026-08-16",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bff83a4b-5bac-5e2f-88c3-d263e4e79cfa"
+    },
+    "fields": {
+      "PersonID": "0345305a-a2b1-5d27-ad95-13f1561266f1",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102553",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Hobart",
+      "State": "AU-TAS",
+      "AddressLine1": "33 Salamanca Place",
+      "AddressLine2": null,
+      "PostalCode": "7000",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "JoinDate": "2026-08-16",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39563494-1e29-59d8-adb5-0228c9882eaa"
+    },
+    "fields": {
+      "PersonID": "a0d0caee-bed5-573a-a0fe-5d31612b5c20",
+      "OrganizationID": "94CBB866-A8CB-5D1A-9792-B6F3D41E69FA",
+      "MemberNumber": "ICF-102554",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Annecy",
+      "State": "FR-74",
+      "AddressLine1": "8 Rue Royale",
+      "AddressLine2": null,
+      "PostalCode": "74000",
+      "Latitude": 45.8992,
+      "Longitude": 6.1294,
+      "JoinDate": "2026-08-17",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "882efffa-14a7-5081-aa16-d75f43013779"
+    },
+    "fields": {
+      "PersonID": "faea00b8-1d6e-53b9-8f99-ea45cbae652a",
+      "OrganizationID": "B4ADB015-A3C4-5335-897D-9028F6E79289",
+      "MemberNumber": "ICF-102555",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Courtenay",
+      "State": "CA-BC",
+      "AddressLine1": "345 5th Street",
+      "AddressLine2": null,
+      "PostalCode": "V9N 1J9",
+      "Latitude": 49.6877,
+      "Longitude": -124.9936,
+      "JoinDate": "2026-08-17",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9033c787-c36b-5b52-a04b-80d8a68ad52a"
+    },
+    "fields": {
+      "PersonID": "fa13e87e-ce87-5f5b-b23b-e29a58a93528",
+      "OrganizationID": "7028C46D-4449-596E-820E-B26C3F68B3F3",
+      "MemberNumber": "ICF-102556",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "482 Court Street",
+      "AddressLine2": null,
+      "PostalCode": "11231",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-08-18",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26c65828-0872-5e42-90d9-0336ebf8d3a7"
+    },
+    "fields": {
+      "PersonID": "ec5afdda-e034-55c1-a142-e6d46503d055",
+      "OrganizationID": "C917DD14-261E-5B2D-852F-BAB2FA69C3B9",
+      "MemberNumber": "ICF-102557",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Gruyères",
+      "State": "CH-FR",
+      "AddressLine1": "Rue du Bourg 11",
+      "AddressLine2": null,
+      "PostalCode": "1663",
+      "Latitude": 46.5836,
+      "Longitude": 7.0822,
+      "JoinDate": "2026-08-18",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f193a1c2-4fb9-5977-ab03-9a713283caa4"
+    },
+    "fields": {
+      "PersonID": "c61bd790-ade4-58ed-aed8-1b4e6045f25b",
+      "OrganizationID": "466813AD-0D8F-541A-9D76-8B1384AE36EE",
+      "MemberNumber": "ICF-102558",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Greensboro",
+      "State": "US-VT",
+      "AddressLine1": "210 Breezy Avenue",
+      "AddressLine2": null,
+      "PostalCode": "05841",
+      "Latitude": 44.5906,
+      "Longitude": -72.2929,
+      "JoinDate": "2026-08-19",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cee8ec27-6a54-5ca1-b504-45dfa6840842"
+    },
+    "fields": {
+      "PersonID": "1dc63e9c-1d2f-5a10-a09b-83491d3f55b6",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102559",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Oaxaca",
+      "State": "MX-OAX",
+      "AddressLine1": "Calle de los Libres 304",
+      "AddressLine2": null,
+      "PostalCode": "68000",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "JoinDate": "2026-08-19",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b9e6d20c-4b87-5344-bdbc-ecd78bda0c43"
+    },
+    "fields": {
+      "PersonID": "81636304-b525-52d9-8e39-788d9df04546",
+      "OrganizationID": "800923B6-A2B5-5482-BF08-628505CA7C7C",
+      "MemberNumber": "ICF-102560",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "Country": "NZ",
+      "CountryName": "New Zealand",
+      "City": "Auckland",
+      "State": "NZ-AUK",
+      "AddressLine1": "88 Quay Street",
+      "AddressLine2": null,
+      "PostalCode": "1010",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "JoinDate": "2026-08-19",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c1a7e34d-8c08-5295-b933-4485f3d3f255"
+    },
+    "fields": {
+      "PersonID": "69e4d4a0-0087-5164-84d0-17f4b89697b8",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102561",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "DE",
+      "CountryName": "Germany",
+      "City": "Münster",
+      "State": "DE-NW",
+      "AddressLine1": "Prinzipalmarkt 19",
+      "AddressLine2": null,
+      "PostalCode": "48143",
+      "Latitude": 51.9607,
+      "Longitude": 7.6261,
+      "JoinDate": "2026-08-20",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ea4b4ee5-9273-57c5-9b18-ed6fafe13e9f"
+    },
+    "fields": {
+      "PersonID": "e1ec276e-5f6a-54ab-9528-f0b4e0fbb4ec",
+      "OrganizationID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3",
+      "MemberNumber": "ICF-102562",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Lancaster",
+      "State": "US-PA",
+      "AddressLine1": "312 East King Street",
+      "AddressLine2": null,
+      "PostalCode": "17602",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055,
+      "JoinDate": "2026-08-21",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a52e6972-b7d5-5c70-998e-e776cb50455c"
+    },
+    "fields": {
+      "PersonID": "2df270f9-0c0e-5ac8-a422-0c73ff46e862",
+      "OrganizationID": "E2D57025-A34D-5114-AE74-E82C929E452C",
+      "MemberNumber": "ICF-102563",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "19 Water Street",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-08-21",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1fce8fb6-4eda-511f-974e-1731cced0837"
+    },
+    "fields": {
+      "PersonID": "51393ffe-a706-5275-a403-1e1048138319",
+      "OrganizationID": "F9EFB66A-4324-55ED-8EB5-4024B07CB641",
+      "MemberNumber": "ICF-102564",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Ayrshire",
+      "State": "GB-SAY",
+      "AddressLine1": "44 Sandgate",
+      "AddressLine2": null,
+      "PostalCode": "KA7 1BX",
+      "Latitude": 55.4586,
+      "Longitude": -4.6292,
+      "JoinDate": "2026-08-21",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7b3f8819-b7ed-5b34-a6d8-060054e8b80d"
+    },
+    "fields": {
+      "PersonID": "671cfcd9-caef-5a74-8edd-6e0b9aa9015d",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102565",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Rodez",
+      "State": "FR-12",
+      "AddressLine1": "10 Place de la Cité",
+      "AddressLine2": null,
+      "PostalCode": "12000",
+      "Latitude": 44.3506,
+      "Longitude": 2.573,
+      "JoinDate": "2026-08-22",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e00a3b32-6639-5cd7-b09c-db5290c34d78"
+    },
+    "fields": {
+      "PersonID": "f1675683-fdcf-5afc-bb20-827b266f4dfa",
+      "OrganizationID": "BBDAB699-7377-5FF7-8818-96AAE37CBD33",
+      "MemberNumber": "ICF-102566",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "Country": "JP",
+      "CountryName": "Japan",
+      "City": "Hokkaido",
+      "State": "JP-01",
+      "AddressLine1": "7-1 Odori Nishi, Chuo Ward",
+      "AddressLine2": null,
+      "PostalCode": "060-0042",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469,
+      "JoinDate": "2026-08-22",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Japanese",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98e44459-0128-566d-ad08-654d9a835b52"
+    },
+    "fields": {
+      "PersonID": "c52eb7a4-6aeb-5258-80e5-5e4028642538",
+      "OrganizationID": "749BD8DC-A6ED-52EF-A984-1A95818C7B8B",
+      "MemberNumber": "ICF-102567",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "620 State Street",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-08-23",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b06e4480-110e-586e-b6b2-a6156cb711e6"
+    },
+    "fields": {
+      "PersonID": "154ceec4-fbee-5d77-9858-58b3425c3a8b",
+      "OrganizationID": "F3C97ADB-5A6F-5ADD-AA3D-A84D233E31AF",
+      "MemberNumber": "ICF-102568",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Alkmaar",
+      "State": "NL-NH",
+      "AddressLine1": "Waagplein 4",
+      "AddressLine2": null,
+      "PostalCode": "1811 JP",
+      "Latitude": 52.6324,
+      "Longitude": 4.7534,
+      "JoinDate": "2026-08-23",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0ef1eb7a-6b17-518f-a40f-e90a4fae0790"
+    },
+    "fields": {
+      "PersonID": "1d60983e-c7a9-50eb-9c69-9ebd7efc0ef7",
+      "OrganizationID": "20BF9CDA-E5AF-5615-9E81-ABBF7A988B3A",
+      "MemberNumber": "ICF-102569",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "ES",
+      "CountryName": "Spain",
+      "City": "Idiazabal",
+      "State": "ES-PV",
+      "AddressLine1": "Kale Nagusia 15",
+      "AddressLine2": null,
+      "PostalCode": "20213",
+      "Latitude": 43.05,
+      "Longitude": -2.25,
+      "JoinDate": "2026-08-24",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "71f28755-18fd-58eb-8070-44c6b307a4b3"
+    },
+    "fields": {
+      "PersonID": "f67024c7-9d5a-5fb4-97c6-8c89967e5bf3",
+      "OrganizationID": "B30A0BC6-FEC8-5788-8BF2-40E9CDA27687",
+      "MemberNumber": "ICF-102570",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "825 NW 23rd Avenue",
+      "AddressLine2": null,
+      "PostalCode": "97210",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-08-24",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c7b6c1cf-f7fc-5649-941f-7e0920d3011c"
+    },
+    "fields": {
+      "PersonID": "aa6c5953-44a9-5af6-b7d4-0aff9e58b1c0",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102571",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Burlington",
+      "State": "US-VT",
+      "AddressLine1": "195 Church Street",
+      "AddressLine2": null,
+      "PostalCode": "05401",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "JoinDate": "2026-08-24",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31620ae2-8311-5df8-8ba6-6bccaa05222f"
+    },
+    "fields": {
+      "PersonID": "a12f4302-b583-5ad7-8ea9-b7fe960d64e8",
+      "OrganizationID": "937E2308-85B6-5C8A-BC04-6ED2E4B4883E",
+      "MemberNumber": "ICF-102572",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "1205 West Main Street",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-08-25",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6b8ccf89-f848-5a60-9cff-95f48697f62c"
+    },
+    "fields": {
+      "PersonID": "7cd57bf7-745c-551d-9f72-eba831c55b96",
+      "OrganizationID": "A612F8CB-9D42-5010-B507-88F20222B3AF",
+      "MemberNumber": "ICF-102573",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "4412 California Ave SW",
+      "AddressLine2": null,
+      "PostalCode": "98116",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-08-25",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f02e6b0f-361f-5086-9ed5-eb0b153239b6"
+    },
+    "fields": {
+      "PersonID": "1a7e126d-4a2e-54fd-bab2-373fe89fb400",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102574",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Reggio Emilia",
+      "State": "IT-RE",
+      "AddressLine1": "Via Emilia Santo Stefano 12",
+      "AddressLine2": null,
+      "PostalCode": "42121",
+      "Latitude": 44.6983,
+      "Longitude": 10.631,
+      "JoinDate": "2026-08-25",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "53f9ec3a-d6e6-5a55-9555-764919a78fa2"
+    },
+    "fields": {
+      "PersonID": "41fd880a-2b14-5ee0-a5fe-48bcc7aa8cf4",
+      "OrganizationID": "884585C5-B88F-50F6-8B90-1C8FEDB1E5C9",
+      "MemberNumber": "ICF-102575",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "388 Broadway",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-08-26",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "98f06acb-e525-5686-a95c-e109ab5a6672"
+    },
+    "fields": {
+      "PersonID": "56cfee45-02e0-5d74-9eb9-cdd5569f0b80",
+      "OrganizationID": "475FE969-D5A9-5048-8A66-64F1077FE72E",
+      "MemberNumber": "ICF-102576",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Kilkenny",
+      "State": "IE-KK",
+      "AddressLine1": "62 High Street",
+      "AddressLine2": null,
+      "PostalCode": "R95 X2P1",
+      "Latitude": 52.6541,
+      "Longitude": -7.2448,
+      "JoinDate": "2026-08-26",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c69bb31e-16ed-56be-808b-63e3ae3a8ecf"
+    },
+    "fields": {
+      "PersonID": "466178c3-c28a-513d-8ce4-d8f56ff887f7",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102577",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Ludlow",
+      "State": "GB-SHR",
+      "AddressLine1": "9 Broad Street",
+      "AddressLine2": null,
+      "PostalCode": "SY8 1NG",
+      "Latitude": 52.368,
+      "Longitude": -2.718,
+      "JoinDate": "2026-08-26",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42f03f57-a92d-5d42-96c1-c8510821e819"
+    },
+    "fields": {
+      "PersonID": "f1c2461d-b142-5897-998f-76e2071b4481",
+      "OrganizationID": "7A746DDF-056A-5061-999E-BDC649B2D2B1",
+      "MemberNumber": "ICF-102578",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "PL",
+      "CountryName": "Poland",
+      "City": "Kraków",
+      "State": "PL-MA",
+      "AddressLine1": "ul. Floriańska 28",
+      "AddressLine2": null,
+      "PostalCode": "31-021",
+      "Latitude": 50.0647,
+      "Longitude": 19.945,
+      "JoinDate": "2026-08-27",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Polish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d462373f-d922-5982-8d60-04cf76dc7e2b"
+    },
+    "fields": {
+      "PersonID": "7de5268a-7eca-590f-93b0-ad103e40cbc4",
+      "OrganizationID": "3F48EEC1-6C37-5187-B87C-09183A44ED1D",
+      "MemberNumber": "ICF-102579",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Green Bay",
+      "State": "US-WI",
+      "AddressLine1": "518 Adams Street",
+      "AddressLine2": null,
+      "PostalCode": "54301",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "JoinDate": "2026-08-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04fb0495-3f84-5ce1-8dca-d0f62594be2e"
+    },
+    "fields": {
+      "PersonID": "bacc7489-8d68-59d4-b987-ef365d0de2b4",
+      "OrganizationID": "AAD7B903-F86E-54D0-A296-BDCCE6771916",
+      "MemberNumber": "ICF-102580",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "PT",
+      "CountryName": "Portugal",
+      "City": "Serpa",
+      "State": "PT-07",
+      "AddressLine1": "Rua das Portas de Beja 14",
+      "AddressLine2": null,
+      "PostalCode": "7830-342",
+      "Latitude": 37.943,
+      "Longitude": -7.596,
+      "JoinDate": "2026-08-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Portuguese",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ed3a1aed-1f36-510e-bf8c-fe00dffcf237"
+    },
+    "fields": {
+      "PersonID": "66e5a7cd-c650-5859-a0a5-6f2478a0c32f",
+      "OrganizationID": "EE6D10E5-83E6-5F83-8407-A40FD39B1C8A",
+      "MemberNumber": "ICF-102581",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "700 Hopper Street",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-08-28",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02da6546-3517-5836-8416-3e74933e2f60"
+    },
+    "fields": {
+      "PersonID": "578806b7-92f4-5c53-9599-14a3a09010c6",
+      "OrganizationID": "30F94A2E-0A2E-521E-A451-3B876DD4E3FE",
+      "MemberNumber": "ICF-102582",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "2101 Western Avenue",
+      "AddressLine2": null,
+      "PostalCode": "98121",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-08-28",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8a8bc26a-4b29-5947-bc21-060531d24abb"
+    },
+    "fields": {
+      "PersonID": "9fd94e03-de8f-5472-a523-2ba896840472",
+      "OrganizationID": "B5CBF8EA-3A41-505F-887F-C58E0329D8A7",
+      "MemberNumber": "ICF-102583",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Saint-Lô",
+      "State": "FR-50",
+      "AddressLine1": "24 Rue Torteron",
+      "AddressLine2": null,
+      "PostalCode": "50000",
+      "Latitude": 49.1157,
+      "Longitude": -1.091,
+      "JoinDate": "2026-08-28",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7087fe00-4710-545d-82c3-ba008fae711e"
+    },
+    "fields": {
+      "PersonID": "e76418c6-e482-5ee7-9216-d75e0c1e957e",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102584",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "1102 East Johnson Street",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-08-28",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d122c976-5d59-516f-a790-ee4483328252"
+    },
+    "fields": {
+      "PersonID": "019c9127-e4d4-5ebb-95e3-db50a6849263",
+      "OrganizationID": "CE1C741F-901B-5B4F-ADA1-A039B52F4699",
+      "MemberNumber": "ICF-102585",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "DK",
+      "CountryName": "Denmark",
+      "City": "Nykøbing Mors",
+      "State": "DK-81",
+      "AddressLine1": "Algade 21",
+      "AddressLine2": null,
+      "PostalCode": "7900",
+      "Latitude": 56.794,
+      "Longitude": 8.857,
+      "JoinDate": "2026-08-29",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Danish",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a05c10ea-6de4-57f8-ae34-0f33e1c7691b"
+    },
+    "fields": {
+      "PersonID": "15e4fe08-9a71-515a-8c00-3ea5c4598336",
+      "OrganizationID": "CC7A05BB-5699-59BA-A0A8-948961159467",
+      "MemberNumber": "ICF-102586",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "315 Smith Street",
+      "AddressLine2": null,
+      "PostalCode": "11231",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-08-29",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d1c2b005-ad37-5ec8-8a17-897c10dba7fe"
+    },
+    "fields": {
+      "PersonID": "eb48681d-a4a9-5fe9-aa6b-6c2c8b11eba2",
+      "OrganizationID": "43789907-4199-57A8-BF32-A613ABEDD325",
+      "MemberNumber": "ICF-102587",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "AT",
+      "CountryName": "Austria",
+      "City": "Bregenz",
+      "State": "AT-8",
+      "AddressLine1": "Römerstraße 9",
+      "AddressLine2": null,
+      "PostalCode": "6900",
+      "Latitude": 47.5031,
+      "Longitude": 9.7471,
+      "JoinDate": "2026-08-29",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Prefer not to say",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2540f142-6d77-50f6-90b8-3bd1f4f82058"
+    },
+    "fields": {
+      "PersonID": "23e75ee1-4e55-5e8c-ac53-c4d7f372b2c0",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102588",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "3421 NE Broadway",
+      "AddressLine2": null,
+      "PostalCode": "97232",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-08-29",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f5aef4f3-51fe-5c6e-bece-465309f26dac"
+    },
+    "fields": {
+      "PersonID": "1b3633ea-addc-5cba-9711-e96b8af70dc0",
+      "OrganizationID": "D2411197-48AE-585A-B6E8-72CA151EE093",
+      "MemberNumber": "ICF-102589",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Point Reyes Station",
+      "State": "US-CA",
+      "AddressLine1": "11250 Highway 1",
+      "AddressLine2": null,
+      "PostalCode": "94956",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064,
+      "JoinDate": "2026-08-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5cb65292-0f2f-57b2-bfa8-b9fe6780686c"
+    },
+    "fields": {
+      "PersonID": "4b5a65b1-42e2-54b1-8a52-9481270267fa",
+      "OrganizationID": "8A66F4D9-71A6-5202-885D-196C4D7F05C3",
+      "MemberNumber": "ICF-102590",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Sassari",
+      "State": "IT-SS",
+      "AddressLine1": "Via Roma 58",
+      "AddressLine2": null,
+      "PostalCode": "07100",
+      "Latitude": 40.7259,
+      "Longitude": 8.5557,
+      "JoinDate": "2026-08-30",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1d791e5d-1ed2-5c50-b9b2-3b9538899f09"
+    },
+    "fields": {
+      "PersonID": "3d851e07-55f1-53f2-8b2f-fd76d44e2059",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102591",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "214 East Napa Street",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-08-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7bb02dc9-c7ce-5dee-8b46-6d5ffa0dd99d"
+    },
+    "fields": {
+      "PersonID": "ecfa9b7b-bf90-506b-9124-cd593647b933",
+      "OrganizationID": "990035CB-E054-59D5-8F7A-1A43B3CF8B3C",
+      "MemberNumber": "ICF-102592",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Emmental",
+      "State": "CH-BE",
+      "AddressLine1": "Dorfstrasse 31",
+      "AddressLine2": null,
+      "PostalCode": "3550",
+      "Latitude": 47.05,
+      "Longitude": 7.75,
+      "JoinDate": "2026-08-30",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e774201d-d41b-5a27-9e8d-f9609be5c615"
+    },
+    "fields": {
+      "PersonID": "b5021614-bc65-5cf2-a7f5-1a8d49e522b1",
+      "OrganizationID": "777115EF-4D5F-5582-804B-BAB1AD2E7A1B",
+      "MemberNumber": "ICF-102593",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "ES",
+      "CountryName": "Spain",
+      "City": "Cabrales",
+      "State": "ES-AS",
+      "AddressLine1": "Carretera General s/n",
+      "AddressLine2": null,
+      "PostalCode": "33555",
+      "Latitude": 43.3,
+      "Longitude": -4.85,
+      "JoinDate": "2026-08-31",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3e0d661d-e268-5c2c-9e5b-18f35a59787d"
+    },
+    "fields": {
+      "PersonID": "3bf74d8e-b7a8-5a5c-87c9-75bafa2ef964",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102594",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Chicago",
+      "State": "US-IL",
+      "AddressLine1": "2115 North Halsted Street",
+      "AddressLine2": null,
+      "PostalCode": "60614",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "JoinDate": "2026-08-31",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "eb9464f3-fc3a-55d5-930b-c3d2c45b47c3"
+    },
+    "fields": {
+      "PersonID": "d0d8b36f-edf2-51bb-b37e-d0628293c0bc",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102595",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Bern",
+      "State": "CH-BE",
+      "AddressLine1": "Kramgasse 49",
+      "AddressLine2": null,
+      "PostalCode": "3011",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "JoinDate": "2026-08-31",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9e0393b5-a187-5bb2-80fa-344cf5aad8b7"
+    },
+    "fields": {
+      "PersonID": "f2d923cf-a1fa-5e83-b129-bb5233a3a46e",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102596",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Denver",
+      "State": "US-CO",
+      "AddressLine1": "2810 East 3rd Avenue",
+      "AddressLine2": null,
+      "PostalCode": "80206",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "JoinDate": "2026-08-31",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1b7bb10a-4946-54b0-aa0a-cdee7ad753c5"
+    },
+    "fields": {
+      "PersonID": "15a9e744-e861-5c41-b06b-b8ce1b44cb0e",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102597",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "Country": "JP",
+      "CountryName": "Japan",
+      "City": "Hokkaido",
+      "State": "JP-01",
+      "AddressLine1": "2-8 Minami 2 Jonishi, Chuo Ward",
+      "AddressLine2": null,
+      "PostalCode": "060-0062",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469,
+      "JoinDate": "2026-08-31",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Japanese",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7fbc9c0c-094f-5b2b-b065-3fa27fa698a2"
+    },
+    "fields": {
+      "PersonID": "13387cbd-07e1-5fd6-8fe2-8d94b32f3a60",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102598",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Bra",
+      "State": "IT-CN",
+      "AddressLine1": "Via Cavour 17",
+      "AddressLine2": null,
+      "PostalCode": "12042",
+      "Latitude": 44.698,
+      "Longitude": 7.858,
+      "JoinDate": "2026-08-31",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "42ecf9fd-54b0-583e-affc-7bad96b1b84c"
+    },
+    "fields": {
+      "PersonID": "73ad4f8f-29e1-5ead-a014-5ae15aa93782",
+      "OrganizationID": "E2D57025-A34D-5114-AE74-E82C929E452C",
+      "MemberNumber": "ICF-102599",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "412 Liberty Street",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-09-01",
+      "RaceEthnicity": "American Indian or Alaska Native",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26c84f1c-0108-5a23-8bd9-88005bc3b28e"
+    },
+    "fields": {
+      "PersonID": "7f7bee0f-3476-524e-b979-7c728d4dcc92",
+      "OrganizationID": "AD5DFFC3-1933-5CA8-83FA-45F9D84FE586",
+      "MemberNumber": "ICF-102600",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "1108 W Idaho Street",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-09-02",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a5379cfa-ee71-59f0-a139-e0cbe1c74ff3"
+    },
+    "fields": {
+      "PersonID": "2a92d6d4-0813-5cbf-87e0-06cb8781e502",
+      "OrganizationID": "C87E6711-E79E-5404-B04F-94ABE5697A9E",
+      "MemberNumber": "ICF-102601",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Poligny",
+      "State": "FR-39",
+      "AddressLine1": "14 Rue du Collège",
+      "AddressLine2": null,
+      "PostalCode": "39800",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "JoinDate": "2026-09-02",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1cc02d84-2f56-555e-9ea8-34f6628501ca"
+    },
+    "fields": {
+      "PersonID": "e613b7c4-c079-53c6-be81-9501313cca0a",
+      "OrganizationID": "8EE2C65F-CCE4-5280-8B19-9EC17B0273FA",
+      "MemberNumber": "ICF-102602",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "ES",
+      "CountryName": "Spain",
+      "City": "Idiazabal",
+      "State": "ES-PV",
+      "AddressLine1": "Kale Nagusia 22",
+      "AddressLine2": null,
+      "PostalCode": "20213",
+      "Latitude": 43.05,
+      "Longitude": -2.25,
+      "JoinDate": "2026-09-03",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1aa81b15-7786-58b8-bfc2-b398a9b7b55e"
+    },
+    "fields": {
+      "PersonID": "21ce6b14-617c-5837-b672-ca14c0d507d9",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102603",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "824 E Johnson Street",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-09-03",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "af2fd139-6eb1-5fe1-b47e-45a16b8e6dcf"
+    },
+    "fields": {
+      "PersonID": "09a8fbe8-6945-56b7-bd0b-1c32c9651279",
+      "OrganizationID": "884585C5-B88F-50F6-8B90-1C8FEDB1E5C9",
+      "MemberNumber": "ICF-102604",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "540 Broadway",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-09-04",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d173249c-2b80-5b3e-a857-6d66861d1cfa"
+    },
+    "fields": {
+      "PersonID": "cecb0edc-eaa9-5d92-bc12-89ec4d4f83dd",
+      "OrganizationID": "DD371B00-EF93-5D98-B202-E507D6C8BA64",
+      "MemberNumber": "ICF-102605",
+      "Segment": "Educator",
+      "Region": "RoW",
+      "Country": "JP",
+      "CountryName": "Japan",
+      "City": "Hokkaido",
+      "State": "JP-01",
+      "AddressLine1": "Kita 8 Nishi 5, Kita-ku",
+      "AddressLine2": null,
+      "PostalCode": "060-0808",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469,
+      "JoinDate": "2026-09-04",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Japanese",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "34211463-bad3-56d2-bd28-ea9d6c80fa72"
+    },
+    "fields": {
+      "PersonID": "42d23100-3f2f-51a3-92cf-90e3766f4ae1",
+      "OrganizationID": "63755B23-B849-546E-A71F-E947A5439999",
+      "MemberNumber": "ICF-102606",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Cork",
+      "State": "IE-CO",
+      "AddressLine1": "39 MacCurtain Street",
+      "AddressLine2": null,
+      "PostalCode": "T23 F682",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756,
+      "JoinDate": "2026-09-05",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3339199d-ed8c-5949-adec-0f2f369dd829"
+    },
+    "fields": {
+      "PersonID": "7940c5b5-1824-598b-b52b-4dc1808ab686",
+      "OrganizationID": "C014B260-662C-57B2-B2D7-4DE1E438ED89",
+      "MemberNumber": "ICF-102607",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Oaxaca",
+      "State": "MX-OAX",
+      "AddressLine1": "Calle de los Libres 310",
+      "AddressLine2": null,
+      "PostalCode": "68000",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "JoinDate": "2026-09-06",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "374ac692-2f58-59b8-bb0f-6ea8b15f9f1c"
+    },
+    "fields": {
+      "PersonID": "d75ad909-8465-5c6d-a692-a15d9a803fec",
+      "OrganizationID": "7FFF5920-504E-5768-B1AA-4DECD9BDBCE2",
+      "MemberNumber": "ICF-102608",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Alkmaar",
+      "State": "NL-NH",
+      "AddressLine1": "Laat 118",
+      "AddressLine2": null,
+      "PostalCode": "1811 EL",
+      "Latitude": 52.6324,
+      "Longitude": 4.7534,
+      "JoinDate": "2026-09-07",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "37168c37-d2ce-5878-8c26-9aadf358c261"
+    },
+    "fields": {
+      "PersonID": "255957f4-7e8b-5e60-88e5-939f671d48d9",
+      "OrganizationID": "89EB2D5E-6857-5663-813A-90DC81C34B21",
+      "MemberNumber": "ICF-102609",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Green Bay",
+      "State": "US-WI",
+      "AddressLine1": "315 S Washington Street",
+      "AddressLine2": null,
+      "PostalCode": "54301",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "JoinDate": "2026-09-07",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cd5742ab-1804-54d7-a1ae-abee22fbe026"
+    },
+    "fields": {
+      "PersonID": "5b9c3555-a8a7-5c56-aceb-b33f0a97fbb3",
+      "OrganizationID": "018C36EB-024E-587B-B745-B06E2B180E2E",
+      "MemberNumber": "ICF-102610",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Parma",
+      "State": "IT-PR",
+      "AddressLine1": "Strada della Repubblica 45",
+      "AddressLine2": null,
+      "PostalCode": "43121",
+      "Latitude": 44.8015,
+      "Longitude": 10.3279,
+      "JoinDate": "2026-09-08",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6baf306b-ca1a-53cd-8df0-d8f2d73c7d6a"
+    },
+    "fields": {
+      "PersonID": "11bfdc14-75db-57ef-9081-805674da69c4",
+      "OrganizationID": "424094F1-0953-5984-8947-BAD7F6AB0AE4",
+      "MemberNumber": "ICF-102611",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "284 Court Street",
+      "AddressLine2": null,
+      "PostalCode": "11231",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-09-08",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "533a7101-faf9-55f6-9cce-6b5e7865afab"
+    },
+    "fields": {
+      "PersonID": "618babce-0fcb-5dc9-80fe-7983bd145930",
+      "OrganizationID": "B30A0BC6-FEC8-5788-8BF2-40E9CDA27687",
+      "MemberNumber": "ICF-102612",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "2115 NE Alberta Street",
+      "AddressLine2": null,
+      "PostalCode": "97211",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-09-09",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "86afc725-93ba-5e25-9498-a2414f14630c"
+    },
+    "fields": {
+      "PersonID": "b6014a53-bd36-5e7d-ab52-24bfbf0f62e8",
+      "OrganizationID": "43789907-4199-57A8-BF32-A613ABEDD325",
+      "MemberNumber": "ICF-102613",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "AT",
+      "CountryName": "Austria",
+      "City": "Bregenz",
+      "State": "AT-8",
+      "AddressLine1": "Römerstraße 18",
+      "AddressLine2": null,
+      "PostalCode": "6900",
+      "Latitude": 47.5031,
+      "Longitude": 9.7471,
+      "JoinDate": "2026-09-09",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f397dddf-3735-5a6f-9703-271d36d65b49"
+    },
+    "fields": {
+      "PersonID": "163ef948-213f-5937-aa37-bdf1374418e8",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102614",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Ayrshire",
+      "State": "GB-SAY",
+      "AddressLine1": "12 Sandgate",
+      "AddressLine2": null,
+      "PostalCode": "KA7 1BG",
+      "Latitude": 55.4586,
+      "Longitude": -4.6292,
+      "JoinDate": "2026-09-10",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "dc4de8fa-511a-59e7-baff-0bed29ecca74"
+    },
+    "fields": {
+      "PersonID": "9841d2ff-ac99-552b-a921-825d7827745b",
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "MemberNumber": "ICF-102615",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Querétaro",
+      "State": "MX-QUE",
+      "AddressLine1": "Av. Universidad 142",
+      "AddressLine2": null,
+      "PostalCode": "76000",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899,
+      "JoinDate": "2026-09-10",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1f9e7928-6c0a-5448-a9c2-5f9628640999"
+    },
+    "fields": {
+      "PersonID": "1018829c-925c-5e4e-a6d3-d96dcbae1fc8",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102616",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Bra",
+      "State": "IT-CN",
+      "AddressLine1": "Via Vittorio Emanuele II 88",
+      "AddressLine2": null,
+      "PostalCode": "12042",
+      "Latitude": 44.698,
+      "Longitude": 7.858,
+      "JoinDate": "2026-09-11",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6a86e992-134a-5bec-baff-c0296e21d25d"
+    },
+    "fields": {
+      "PersonID": "dfd25d0d-5c69-53a5-a644-30bb4dfccd9e",
+      "OrganizationID": "3F600517-1C26-5C6D-8CF0-55982C616A45",
+      "MemberNumber": "ICF-102617",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "4518 University Way NE",
+      "AddressLine2": null,
+      "PostalCode": "98105",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-09-11",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c4f264d8-bec0-5e8f-bcc1-b72b78ce7c09"
+    },
+    "fields": {
+      "PersonID": "363feaee-4f5b-5672-9776-1fee0f7be8ad",
+      "OrganizationID": "CE1C741F-901B-5B4F-ADA1-A039B52F4699",
+      "MemberNumber": "ICF-102618",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "DK",
+      "CountryName": "Denmark",
+      "City": "Nykøbing Mors",
+      "State": "DK-81",
+      "AddressLine1": "Algade 31",
+      "AddressLine2": null,
+      "PostalCode": "7900",
+      "Latitude": 56.794,
+      "Longitude": 8.857,
+      "JoinDate": "2026-09-12",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Danish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94f31000-f0e8-5d8e-a8b5-cf6773142b63"
+    },
+    "fields": {
+      "PersonID": "277e0e3e-0833-501a-9c83-a497baf0af76",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102619",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Hobart",
+      "State": "AU-TAS",
+      "AddressLine1": "74 Elizabeth Street",
+      "AddressLine2": null,
+      "PostalCode": "7000",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "JoinDate": "2026-09-12",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c9eb0148-2ea5-5d9f-8876-197bdd673181"
+    },
+    "fields": {
+      "PersonID": "37c51584-4771-5f9e-b24a-1d5f460fb60f",
+      "OrganizationID": "8DA9D56C-692A-50C3-A94C-D24E672953BC",
+      "MemberNumber": "ICF-102620",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Saint-Hyacinthe",
+      "State": "CA-QC",
+      "AddressLine1": "1550 Rue des Cascades",
+      "AddressLine2": null,
+      "PostalCode": "J2S 3H5",
+      "Latitude": 45.63,
+      "Longitude": -72.957,
+      "JoinDate": "2026-09-13",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e31a2d60-588c-545e-b941-b3a97054f2c5"
+    },
+    "fields": {
+      "PersonID": "36904db9-8a42-5f97-acfd-02fa79954a1a",
+      "OrganizationID": "8D87BB31-11A7-5F00-8C4E-4331426A50F7",
+      "MemberNumber": "ICF-102621",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Chicago",
+      "State": "US-IL",
+      "AddressLine1": "920 W Fulton Market",
+      "AddressLine2": null,
+      "PostalCode": "60607",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "JoinDate": "2026-09-14",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Prefer not to say",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "63a1d7ac-164c-5074-b389-214bb28e7101"
+    },
+    "fields": {
+      "PersonID": "e48d49ae-14c8-54cc-9fa6-4576933c68ea",
+      "OrganizationID": "2B5F0B4A-F078-557A-A984-B0293B67760D",
+      "MemberNumber": "ICF-102622",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Burlington",
+      "State": "US-VT",
+      "AddressLine1": "168 College Street",
+      "AddressLine2": null,
+      "PostalCode": "05401",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "JoinDate": "2026-09-14",
+      "RaceEthnicity": "American Indian or Alaska Native",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "781c0da9-6137-57d7-935e-320cb266c3bf"
+    },
+    "fields": {
+      "PersonID": "99a12eb3-d896-5f43-be5c-9fb488412f93",
+      "OrganizationID": "DE942B58-3E8E-54C3-982D-3108B065EF8B",
+      "MemberNumber": "ICF-102623",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "AR",
+      "CountryName": "Argentina",
+      "City": "Tandil",
+      "State": "AR-B",
+      "AddressLine1": "Av. España 640",
+      "AddressLine2": null,
+      "PostalCode": "B7000",
+      "Latitude": -37.3217,
+      "Longitude": -59.1332,
+      "JoinDate": "2026-09-15",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b4e4416f-843f-5487-9273-0a527ca27e5f"
+    },
+    "fields": {
+      "PersonID": "4e68b4cf-86dc-54a6-aeb5-3d4db349881e",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102624",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "Country": "NZ",
+      "CountryName": "New Zealand",
+      "City": "Oamaru",
+      "State": "NZ-OTA",
+      "AddressLine1": "19 Harbour Street",
+      "AddressLine2": null,
+      "PostalCode": "9400",
+      "Latitude": -45.0975,
+      "Longitude": 170.9714,
+      "JoinDate": "2026-09-15",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b487c46d-065d-5288-92de-478d27056163"
+    },
+    "fields": {
+      "PersonID": "1968b0f2-f04d-5cfe-b855-48aa73b63df5",
+      "OrganizationID": "05230BD5-A45B-534F-9761-972795A1A482",
+      "MemberNumber": "ICF-102625",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Point Reyes Station",
+      "State": "US-CA",
+      "AddressLine1": "11315 State Route 1",
+      "AddressLine2": null,
+      "PostalCode": "94956",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064,
+      "JoinDate": "2026-09-16",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "65caa593-d24f-5c7c-bea9-e3f21ba0bb08"
+    },
+    "fields": {
+      "PersonID": "73b0b453-f2e7-5d3c-b538-2c488bdcb269",
+      "OrganizationID": "213419D4-F9AB-533F-A724-82AB845DD4EE",
+      "MemberNumber": "ICF-102626",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Lancaster",
+      "State": "US-PA",
+      "AddressLine1": "240 N Queen Street",
+      "AddressLine2": null,
+      "PostalCode": "17603",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055,
+      "JoinDate": "2026-09-16",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2e0ec2e5-bb2a-5ff4-8980-4878ff517ed6"
+    },
+    "fields": {
+      "PersonID": "31764b41-2502-55c6-9e42-2da3333b9bb6",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102627",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Reggio Emilia",
+      "State": "IT-RE",
+      "AddressLine1": "Via Emilia Santo Stefano 29",
+      "AddressLine2": null,
+      "PostalCode": "42121",
+      "Latitude": 44.6983,
+      "Longitude": 10.631,
+      "JoinDate": "2026-09-17",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b96ca456-5dd7-5835-ba85-0514a37def1c"
+    },
+    "fields": {
+      "PersonID": "c5382683-ce5d-5f9d-8ca4-374744943c11",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102628",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Kilkenny",
+      "State": "IE-KK",
+      "AddressLine1": "51 High Street",
+      "AddressLine2": null,
+      "PostalCode": "R95 T294",
+      "Latitude": 52.6541,
+      "Longitude": -7.2448,
+      "JoinDate": "2026-09-17",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5bdc116e-c45d-58a8-ba26-7566c715eddc"
+    },
+    "fields": {
+      "PersonID": "0b548db9-f171-511a-a166-1a7fce6777b8",
+      "OrganizationID": "B8F40ECF-7D8D-5B1B-B86B-B6D7D97E723D",
+      "MemberNumber": "ICF-102629",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Asheville",
+      "State": "US-NC",
+      "AddressLine1": "78 Patton Avenue",
+      "AddressLine2": null,
+      "PostalCode": "28801",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "JoinDate": "2026-09-18",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c93ba096-b6af-5d73-bbc1-fb5abd83d117"
+    },
+    "fields": {
+      "PersonID": "f31acc39-4acb-5891-9802-084259447d67",
+      "OrganizationID": "94CBB866-A8CB-5D1A-9792-B6F3D41E69FA",
+      "MemberNumber": "ICF-102630",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Annecy",
+      "State": "FR-74",
+      "AddressLine1": "9 Rue Royale",
+      "AddressLine2": null,
+      "PostalCode": "74000",
+      "Latitude": 45.8992,
+      "Longitude": 6.1294,
+      "JoinDate": "2026-09-18",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d93e6e7f-ac9e-5bd2-a925-d78cc9607343"
+    },
+    "fields": {
+      "PersonID": "774e5fd3-6167-541f-8624-0bdd70a372a0",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102631",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Denver",
+      "State": "US-CO",
+      "AddressLine1": "1532 Larimer Street",
+      "AddressLine2": null,
+      "PostalCode": "80202",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "JoinDate": "2026-09-19",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/they"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4870c80a-856a-56c0-b867-ae9fad392da7"
+    },
+    "fields": {
+      "PersonID": "331c7ea4-52f2-5c32-a3f9-9467b24c735d",
+      "OrganizationID": "FCE9A459-180C-548C-AEE2-852B842D8DDA",
+      "MemberNumber": "ICF-102632",
+      "Segment": "Educator",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "AddressLine1": "50 Stone Road E",
+      "AddressLine2": null,
+      "PostalCode": "N1G 2W1",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "JoinDate": "2026-09-19",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f8fd1a85-9dcc-50b3-94a9-6bc39a817b1f"
+    },
+    "fields": {
+      "PersonID": "f1d634d6-a4bd-58fe-9ebd-73dc087e8274",
+      "OrganizationID": "C26C086C-0645-58D7-B32F-D580B58C50FB",
+      "MemberNumber": "ICF-102633",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Somerset",
+      "State": "GB-SOM",
+      "AddressLine1": "23 High Street",
+      "AddressLine2": null,
+      "PostalCode": "BA4 5AA",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "JoinDate": "2026-09-20",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9efc3cb5-cd7b-5417-afa8-af38e3e5d40b"
+    },
+    "fields": {
+      "PersonID": "4d55c4fb-c743-58d8-ab27-934406d4ba89",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102634",
+      "Segment": "Enthusiast",
+      "Region": "RoW",
+      "Country": "NZ",
+      "CountryName": "New Zealand",
+      "City": "Auckland",
+      "State": "NZ-AUK",
+      "AddressLine1": "142 Ponsonby Road",
+      "AddressLine2": null,
+      "PostalCode": "1011",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "JoinDate": "2026-09-20",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f35473df-502d-5549-99cd-9da6b4e1acfe"
+    },
+    "fields": {
+      "PersonID": "b96c235b-28f2-5bd8-8292-304109040873",
+      "OrganizationID": "7E2A14B4-1A7B-52D5-98E0-13E1649157A6",
+      "MemberNumber": "ICF-102635",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "610 State Street",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-09-21",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cccc9c7f-aedc-52d0-aa6b-07d900be96ea"
+    },
+    "fields": {
+      "PersonID": "531c4819-11af-5765-ad84-5bd6c12f9965",
+      "OrganizationID": "F2B0A226-D1A6-52C8-ACAA-7E397AEFF930",
+      "MemberNumber": "ICF-102636",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "DE",
+      "CountryName": "Germany",
+      "City": "Allgäu",
+      "State": "DE-BY",
+      "AddressLine1": "Lindauer Straße 44",
+      "AddressLine2": null,
+      "PostalCode": "87439",
+      "Latitude": 47.58,
+      "Longitude": 10.22,
+      "JoinDate": "2026-09-21",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cb9a4587-f3d9-5c50-ac69-7f1c680a89a8"
+    },
+    "fields": {
+      "PersonID": "7195ff36-e2dc-55ba-ad3f-146d9d4895c1",
+      "OrganizationID": "D5760C4F-4D23-5350-86DE-F750A99C2714",
+      "MemberNumber": "ICF-102637",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "GR",
+      "CountryName": "Greece",
+      "City": "Trikala",
+      "State": "GR-E4",
+      "AddressLine1": "Asklipiou 18",
+      "AddressLine2": null,
+      "PostalCode": "421 00",
+      "Latitude": 39.5556,
+      "Longitude": 21.7679,
+      "JoinDate": "2026-09-22",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Greek",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fb56fed1-f8ee-50ca-be1b-27c956bebca2"
+    },
+    "fields": {
+      "PersonID": "cff4381f-42d9-5e90-bef6-a5f2a5999e23",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102638",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Austin",
+      "State": "US-TX",
+      "AddressLine1": "1804 S Congress Avenue",
+      "AddressLine2": null,
+      "PostalCode": "78704",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "JoinDate": "2026-09-22",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "07422c4d-630a-5e3c-8dd1-c8baeac3bf70"
+    },
+    "fields": {
+      "PersonID": "0abecfdc-5ab2-5223-8cde-753009fdd3ad",
+      "OrganizationID": "3398DFA2-20A3-5305-9616-0F4645E13243",
+      "MemberNumber": "ICF-102639",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Greensboro",
+      "State": "US-VT",
+      "AddressLine1": "322 Craftsbury Road",
+      "AddressLine2": null,
+      "PostalCode": "05841",
+      "Latitude": 44.5906,
+      "Longitude": -72.2929,
+      "JoinDate": "2026-09-23",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "48f8f9c7-53e4-5943-b884-5aabe80a3fdc"
+    },
+    "fields": {
+      "PersonID": "bce60e8f-bc09-5f6b-934a-317ee60576f8",
+      "OrganizationID": "C917DD14-261E-5B2D-852F-BAB2FA69C3B9",
+      "MemberNumber": "ICF-102640",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Gruyères",
+      "State": "CH-FR",
+      "AddressLine1": "Rue du Bourg 17",
+      "AddressLine2": null,
+      "PostalCode": "1663",
+      "Latitude": 46.5836,
+      "Longitude": 7.0822,
+      "JoinDate": "2026-09-23",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c9b3dedc-3107-59b2-9649-ce402d44f3c8"
+    },
+    "fields": {
+      "PersonID": "423f40ad-4735-5fda-ba4b-eb18491634b4",
+      "OrganizationID": "D9DAB3A5-50A8-5E81-B721-292346685F6E",
+      "MemberNumber": "ICF-102641",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Bega",
+      "State": "AU-NSW",
+      "AddressLine1": "109 Carp Street",
+      "AddressLine2": null,
+      "PostalCode": "2550",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409,
+      "JoinDate": "2026-09-24",
+      "RaceEthnicity": "American Indian or Alaska Native",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0dca762f-a9c3-5f16-b138-6695c52bf226"
+    },
+    "fields": {
+      "PersonID": "d857f231-a182-57b3-99fe-b48730ee010f",
+      "OrganizationID": "22A71467-70AE-57C2-AB2A-91DB645BD733",
+      "MemberNumber": "ICF-102642",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "PL",
+      "CountryName": "Poland",
+      "City": "Kraków",
+      "State": "PL-MA",
+      "AddressLine1": "ul. Floriańska 33",
+      "AddressLine2": null,
+      "PostalCode": "31-019",
+      "Latitude": 50.0647,
+      "Longitude": 19.945,
+      "JoinDate": "2026-09-24",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Polish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "414f3439-e8d0-556b-ba36-4d3a1f201fd9"
+    },
+    "fields": {
+      "PersonID": "822ae6d1-14b2-5853-ad0d-194d63caf690",
+      "OrganizationID": "6B87A00E-7186-5014-A25A-201852A339C7",
+      "MemberNumber": "ICF-102643",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Ithaca",
+      "State": "US-NY",
+      "AddressLine1": "214 E State Street",
+      "AddressLine2": null,
+      "PostalCode": "14850",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "JoinDate": "2026-09-25",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fa62e7a4-ff45-5c0a-b6de-c0cf8a1bf1d6"
+    },
+    "fields": {
+      "PersonID": "4103c117-6e84-55d9-adde-a0cb60c545dc",
+      "OrganizationID": "A24F6192-A800-5BEE-9727-78F79B73914F",
+      "MemberNumber": "ICF-102644",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "PT",
+      "CountryName": "Portugal",
+      "City": "Serpa",
+      "State": "PT-07",
+      "AddressLine1": "Rua das Portas de Beja 14",
+      "AddressLine2": null,
+      "PostalCode": "7830-345",
+      "Latitude": 37.943,
+      "Longitude": -7.596,
+      "JoinDate": "2026-09-25",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Portuguese",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "52ab7da7-a3e6-54ea-8e74-a68648639c73"
+    },
+    "fields": {
+      "PersonID": "366dc6b6-e6f5-55a4-bb0e-442bb1c9c462",
+      "OrganizationID": "85ACDA02-7681-5D0F-A8AA-B03575E8A921",
+      "MemberNumber": "ICF-102645",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Courtenay",
+      "State": "CA-BC",
+      "AddressLine1": "435 5th Street",
+      "AddressLine2": null,
+      "PostalCode": "V9N 1J7",
+      "Latitude": 49.6877,
+      "Longitude": -124.9936,
+      "JoinDate": "2026-09-25",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "338ae73b-10a2-57ad-bf41-4f55b98ded9e"
+    },
+    "fields": {
+      "PersonID": "c16c5f4a-27d6-50b7-8f87-a3923d461c4c",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102646",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brattleboro",
+      "State": "US-VT",
+      "AddressLine1": "119 Main Street",
+      "AddressLine2": null,
+      "PostalCode": "05301",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "JoinDate": "2026-09-26",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Prefer not to say",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a1503984-dd5c-5cff-8449-c94912febfac"
+    },
+    "fields": {
+      "PersonID": "90f7963d-a603-5be0-abb6-af0d8d3254f0",
+      "OrganizationID": "C61270B3-09A2-5A5F-A5B4-EFE36227C6AD",
+      "MemberNumber": "ICF-102647",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Gouda",
+      "State": "NL-ZH",
+      "AddressLine1": "Markt 41",
+      "AddressLine2": null,
+      "PostalCode": "2801 JK",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104,
+      "JoinDate": "2026-09-26",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1f61bec5-021c-5170-8f79-62530152a84f"
+    },
+    "fields": {
+      "PersonID": "e4867649-92ff-52b1-8271-5dade6cff1c0",
+      "OrganizationID": "777115EF-4D5F-5582-804B-BAB1AD2E7A1B",
+      "MemberNumber": "ICF-102648",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "ES",
+      "CountryName": "Spain",
+      "City": "Cabrales",
+      "State": "ES-AS",
+      "AddressLine1": "Carretera General s/n",
+      "AddressLine2": null,
+      "PostalCode": "33555",
+      "Latitude": 43.3,
+      "Longitude": -4.85,
+      "JoinDate": "2026-09-26",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bf48e51a-6be5-5dd8-b28b-a785d63225cc"
+    },
+    "fields": {
+      "PersonID": "45529e55-5a66-5968-986a-fd97de7a2007",
+      "OrganizationID": "8A66F4D9-71A6-5202-885D-196C4D7F05C3",
+      "MemberNumber": "ICF-102649",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Sassari",
+      "State": "IT-SS",
+      "AddressLine1": "Corso Vittorio Emanuele II 62",
+      "AddressLine2": null,
+      "PostalCode": "07100",
+      "Latitude": 40.7259,
+      "Longitude": 8.5557,
+      "JoinDate": "2026-09-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f1ee61ac-5e31-5b69-a707-82eef8969795"
+    },
+    "fields": {
+      "PersonID": "7c7154fd-d5f1-5279-857d-f1a15cbe8130",
+      "OrganizationID": "09C4F083-E487-5DFA-A153-D6A5857C7B2B",
+      "MemberNumber": "ICF-102650",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "DK",
+      "CountryName": "Denmark",
+      "City": "Aarhus",
+      "State": "DK-82",
+      "AddressLine1": "Vestergade 28",
+      "AddressLine2": null,
+      "PostalCode": "8000",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "JoinDate": "2026-09-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Danish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "64b0fb17-bf3e-5279-989a-82bbf7f4468c"
+    },
+    "fields": {
+      "PersonID": "0f7348db-66fb-54c4-a686-6cc2b624b433",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102651",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Rodez",
+      "State": "FR-12",
+      "AddressLine1": "6 Place de la Cité",
+      "AddressLine2": null,
+      "PostalCode": "12000",
+      "Latitude": 44.3506,
+      "Longitude": 2.573,
+      "JoinDate": "2026-09-27",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "56aeb6a4-2dea-509e-8b5d-4acd1de35fc7"
+    },
+    "fields": {
+      "PersonID": "58b4191a-20fa-5a90-8bcd-e9da0ec4306c",
+      "OrganizationID": "F51C3011-493F-50D1-9E7A-80A9C06640A9",
+      "MemberNumber": "ICF-102652",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "205 Kentucky Street",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-09-28",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "24f79b7a-63d5-5377-abbb-0f92251b716b"
+    },
+    "fields": {
+      "PersonID": "1e3e9f1b-ef87-576b-a1ff-7cd73bd320d9",
+      "OrganizationID": "8C4A6B56-D64D-54A9-A8AA-B73A764B1FFB",
+      "MemberNumber": "ICF-102653",
+      "Segment": "Educator",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "440 Henry Mall",
+      "AddressLine2": null,
+      "PostalCode": "53706",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-09-28",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "faab56fa-0a8f-588d-af41-726a4fa19975"
+    },
+    "fields": {
+      "PersonID": "fc7895d3-ef1f-5606-bd02-4e4a19e2ad1f",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102654",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Emmental",
+      "State": "CH-BE",
+      "AddressLine1": "Dorfstrasse 15",
+      "AddressLine2": null,
+      "PostalCode": "3550",
+      "Latitude": 47.05,
+      "Longitude": 7.75,
+      "JoinDate": "2026-09-28",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f46972a6-8c47-544b-a47b-5eb7bd140968"
+    },
+    "fields": {
+      "PersonID": "983589a9-b520-5651-96de-f47d3497ce85",
+      "OrganizationID": "8C19BFCB-DD63-5DE7-8849-5936554B9A15",
+      "MemberNumber": "ICF-102655",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Ludlow",
+      "State": "GB-SHR",
+      "AddressLine1": "14 Broad Street",
+      "AddressLine2": null,
+      "PostalCode": "SY8 1NG",
+      "Latitude": 52.368,
+      "Longitude": -2.718,
+      "JoinDate": "2026-09-29",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "29e61e49-16d6-51a9-846b-ffd264cd0345"
+    },
+    "fields": {
+      "PersonID": "5b55867d-5a4f-5cd4-bfb0-f9078d813bec",
+      "OrganizationID": "3BFD55A4-DCE6-58EE-8BBB-1D4E99FC9EDB",
+      "MemberNumber": "ICF-102656",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "DE",
+      "CountryName": "Germany",
+      "City": "Münster",
+      "State": "DE-NW",
+      "AddressLine1": "Prinzipalmarkt 19",
+      "AddressLine2": null,
+      "PostalCode": "48143",
+      "Latitude": 51.9607,
+      "Longitude": 7.6261,
+      "JoinDate": "2026-09-29",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "afccebd9-6327-5230-b253-b02e4c7284d5"
+    },
+    "fields": {
+      "PersonID": "3004128a-56aa-54d4-a632-8df0a4fa2b3a",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102657",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "3422 SE Hawthorne Blvd",
+      "AddressLine2": null,
+      "PostalCode": "97214",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-09-29",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Prefer not to say",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "db0bcb9a-2b07-5d2b-84bf-f9166da9f7f8"
+    },
+    "fields": {
+      "PersonID": "28955bba-8cbf-5816-96ea-50409f183316",
+      "OrganizationID": "937E2308-85B6-5C8A-BC04-6ED2E4B4883E",
+      "MemberNumber": "ICF-102658",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "714 N 8th Street",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-09-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7d254a80-cae2-5734-b2da-4e13a175f485"
+    },
+    "fields": {
+      "PersonID": "7b934010-f5b2-5f8d-9ae6-7b260b48e25b",
+      "OrganizationID": "B5CBF8EA-3A41-505F-887F-C58E0329D8A7",
+      "MemberNumber": "ICF-102659",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Saint-Lô",
+      "State": "FR-50",
+      "AddressLine1": "27 Rue Torteron",
+      "AddressLine2": null,
+      "PostalCode": "50000",
+      "Latitude": 49.1157,
+      "Longitude": -1.091,
+      "JoinDate": "2026-09-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0fe5ad40-0923-5910-9627-484e92797352"
+    },
+    "fields": {
+      "PersonID": "33a94c54-5746-5607-a2d9-58c9510ae534",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102660",
+      "Segment": "Enthusiast",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Bern",
+      "State": "CH-BE",
+      "AddressLine1": "Kramgasse 52",
+      "AddressLine2": null,
+      "PostalCode": "3011",
+      "Latitude": 46.948,
+      "Longitude": 7.4474,
+      "JoinDate": "2026-09-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "237d4041-e9c1-59f4-90cd-19740e542a40"
+    },
+    "fields": {
+      "PersonID": "2fec3282-5a8e-56d1-9597-39f5f07dfbe7",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102661",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "612 Vanderbilt Avenue",
+      "AddressLine2": null,
+      "PostalCode": "11238",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-09-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2aa6bd92-6213-5040-b1f1-bdd6233ec67e"
+    },
+    "fields": {
+      "PersonID": "5c813569-544e-5a3b-9ad2-2e93cc5c1292",
+      "OrganizationID": "AD5DFFC3-1933-5CA8-83FA-45F9D84FE586",
+      "MemberNumber": "ICF-102662",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "412 W Idaho St",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-10-02",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "41da7753-6ba0-51d3-8e6c-bb818d6a897e"
+    },
+    "fields": {
+      "PersonID": "06891aa8-1a93-54f7-a2ab-92d97615c359",
+      "OrganizationID": "E2D57025-A34D-5114-AE74-E82C929E452C",
+      "MemberNumber": "ICF-102663",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "218 B St",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-10-02",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e4c6d72a-a527-5936-bc9a-ec0251e9c10f"
+    },
+    "fields": {
+      "PersonID": "c3207e03-10d7-540b-9e6e-32dc9c340e3b",
+      "OrganizationID": "EA659C69-12F5-50DB-9ACB-FA84F0B3944F",
+      "MemberNumber": "ICF-102664",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "745 E Johnson St",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-10-03",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "47a5deab-3c8e-5863-945b-e73d7091cc0d"
+    },
+    "fields": {
+      "PersonID": "9c187f93-1072-58c3-85b2-299192dd42b8",
+      "OrganizationID": "018C36EB-024E-587B-B745-B06E2B180E2E",
+      "MemberNumber": "ICF-102665",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Parma",
+      "State": "IT-PR",
+      "AddressLine1": "Strada Farini 34",
+      "AddressLine2": null,
+      "PostalCode": "43121",
+      "Latitude": 44.8015,
+      "Longitude": 10.3279,
+      "JoinDate": "2026-10-05",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5f8808ac-4f5c-5462-abff-35b498dc68cd"
+    },
+    "fields": {
+      "PersonID": "ec46b107-e5bf-58cb-aaba-7242b0466689",
+      "OrganizationID": "94CBB866-A8CB-5D1A-9792-B6F3D41E69FA",
+      "MemberNumber": "ICF-102666",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Annecy",
+      "State": "FR-74",
+      "AddressLine1": "18 Rue Carnot",
+      "AddressLine2": null,
+      "PostalCode": "74000",
+      "Latitude": 45.8992,
+      "Longitude": 6.1294,
+      "JoinDate": "2026-10-05",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a8800bce-ce13-5e4b-b6df-451ff19093a3"
+    },
+    "fields": {
+      "PersonID": "568c832a-eeea-5592-ae27-4bfdd28727b7",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102667",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "388 Bergen St",
+      "AddressLine2": null,
+      "PostalCode": "11217",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-10-06",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a0b49d57-29de-58e8-adda-c674f43a97fd"
+    },
+    "fields": {
+      "PersonID": "5e744033-79be-5908-86b8-bae083a6e729",
+      "OrganizationID": "2B5F0B4A-F078-557A-A984-B0293B67760D",
+      "MemberNumber": "ICF-102668",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Burlington",
+      "State": "US-VT",
+      "AddressLine1": "154 College St",
+      "AddressLine2": null,
+      "PostalCode": "05401",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "JoinDate": "2026-10-07",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09de51f0-06bd-590c-b892-869deb330600"
+    },
+    "fields": {
+      "PersonID": "70d9183d-192b-5f5d-8103-0bea8d72190c",
+      "OrganizationID": "A612F8CB-9D42-5010-B507-88F20222B3AF",
+      "MemberNumber": "ICF-102669",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "1420 E Pike St",
+      "AddressLine2": null,
+      "PostalCode": "98122",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-10-07",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2fc8a98c-86f9-5701-85b8-48958d9f7c47"
+    },
+    "fields": {
+      "PersonID": "daa8c697-d2f3-51df-87f0-90223e22bf8e",
+      "OrganizationID": "D5340928-F343-5828-97A4-B8AFAFBC2882",
+      "MemberNumber": "ICF-102670",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "JP",
+      "CountryName": "Japan",
+      "City": "Hokkaido",
+      "State": "JP-01",
+      "AddressLine1": "Kita 5-jo Nishi 6-chome, Chuo-ku",
+      "AddressLine2": null,
+      "PostalCode": "060-0005",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469,
+      "JoinDate": "2026-10-08",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Japanese",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0db8e518-dc51-589a-9c3a-97c00c2e5849"
+    },
+    "fields": {
+      "PersonID": "f7c3be76-d752-5da6-831c-b43a93f4815d",
+      "OrganizationID": "ACF57C72-3982-59EE-A216-CEA6EF72B1D5",
+      "MemberNumber": "ICF-102671",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "DK",
+      "CountryName": "Denmark",
+      "City": "Aarhus",
+      "State": "DK-82",
+      "AddressLine1": "Søndergade 42",
+      "AddressLine2": null,
+      "PostalCode": "8000",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039,
+      "JoinDate": "2026-10-08",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Danish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e8999997-bd98-5185-a578-3d78c9cda2a9"
+    },
+    "fields": {
+      "PersonID": "b02b2452-1710-5728-b838-e184d43106df",
+      "OrganizationID": "20BF9CDA-E5AF-5615-9E81-ABBF7A988B3A",
+      "MemberNumber": "ICF-102672",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "ES",
+      "CountryName": "Spain",
+      "City": "Idiazabal",
+      "State": "ES-PV",
+      "AddressLine1": "Kale Nagusia 19",
+      "AddressLine2": null,
+      "PostalCode": "20213",
+      "Latitude": 43.05,
+      "Longitude": -2.25,
+      "JoinDate": "2026-10-09",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8b5805d1-bd16-54ce-aeea-3f2ac06eb2f5"
+    },
+    "fields": {
+      "PersonID": "53dcb28c-6c1a-5cf5-a203-cd3c05bb47bf",
+      "OrganizationID": "44210B1F-CB18-56E7-B138-1D262B662C78",
+      "MemberNumber": "ICF-102673",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "482 First St E",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-10-09",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8dd934a2-6de9-53c1-b8da-fb888d8574f7"
+    },
+    "fields": {
+      "PersonID": "ac9e9a2f-68e3-5eae-b7c3-9eb7c66360f7",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102674",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "2315 NW 23rd Ave",
+      "AddressLine2": null,
+      "PostalCode": "97210",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-10-10",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c779ee79-bb46-54e0-ba52-03431c67d64c"
+    },
+    "fields": {
+      "PersonID": "a35681a0-fbee-5954-b2a9-00740b2bd21f",
+      "OrganizationID": "04FB337D-69E8-5252-87EA-121158F4FA82",
+      "MemberNumber": "ICF-102675",
+      "Segment": "Supplier",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Green Bay",
+      "State": "US-WI",
+      "AddressLine1": "910 S Broadway",
+      "AddressLine2": null,
+      "PostalCode": "54304",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "JoinDate": "2026-10-11",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Prefer not to say",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9c4c286b-ab16-5ef2-82e3-0435b8b2285d"
+    },
+    "fields": {
+      "PersonID": "62137d0b-e2a2-5c9c-ba80-b86c643de5d1",
+      "OrganizationID": "A7887810-47BD-5C74-9E29-AA276CBDBDE3",
+      "MemberNumber": "ICF-102676",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Lancaster",
+      "State": "US-PA",
+      "AddressLine1": "312 N Queen St",
+      "AddressLine2": null,
+      "PostalCode": "17603",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055,
+      "JoinDate": "2026-10-12",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d7bebb17-502a-5d79-b553-980588c0fe2c"
+    },
+    "fields": {
+      "PersonID": "069d4f89-fbb1-5511-ba21-29fe604cdfa0",
+      "OrganizationID": "3398DFA2-20A3-5305-9616-0F4645E13243",
+      "MemberNumber": "ICF-102677",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Greensboro",
+      "State": "US-VT",
+      "AddressLine1": "114 Breezy Ave",
+      "AddressLine2": null,
+      "PostalCode": "05841",
+      "Latitude": 44.5906,
+      "Longitude": -72.2929,
+      "JoinDate": "2026-10-12",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b31937ef-5079-569e-b122-b7771ecbc3fb"
+    },
+    "fields": {
+      "PersonID": "440d085c-f10f-576c-b0dd-36cdd7c09d51",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102678",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Alkmaar",
+      "State": "NL-NH",
+      "AddressLine1": "Laat 88",
+      "AddressLine2": null,
+      "PostalCode": "1811 EK",
+      "Latitude": 52.6324,
+      "Longitude": 4.7534,
+      "JoinDate": "2026-10-13",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4452bc4e-6e20-5c7b-9d0d-eec6b6435e1c"
+    },
+    "fields": {
+      "PersonID": "3e96ad21-2721-5c78-9110-07258fa96bac",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102679",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Austin",
+      "State": "US-TX",
+      "AddressLine1": "1804 S Congress Ave",
+      "AddressLine2": null,
+      "PostalCode": "78704",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431,
+      "JoinDate": "2026-10-13",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "917fdc5a-1c30-5868-967c-4c0c6291bbe1"
+    },
+    "fields": {
+      "PersonID": "a795eafc-8dba-5888-a018-25519cf789ef",
+      "OrganizationID": "F2B0A226-D1A6-52C8-ACAA-7E397AEFF930",
+      "MemberNumber": "ICF-102680",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "DE",
+      "CountryName": "Germany",
+      "City": "Allgäu",
+      "State": "DE-BY",
+      "AddressLine1": "Alpenstraße 27",
+      "AddressLine2": null,
+      "PostalCode": "87435",
+      "Latitude": 47.58,
+      "Longitude": 10.22,
+      "JoinDate": "2026-10-14",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2d59b94f-6ecb-57f9-ac3f-b409921921b7"
+    },
+    "fields": {
+      "PersonID": "89add3d3-a637-576a-9dc4-fab9678e76b1",
+      "OrganizationID": "2AD13D42-934B-57B1-B459-C4B554E5A28E",
+      "MemberNumber": "ICF-102681",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "NZ",
+      "CountryName": "New Zealand",
+      "City": "Oamaru",
+      "State": "NZ-OTA",
+      "AddressLine1": "64 Thames St",
+      "AddressLine2": null,
+      "PostalCode": "9400",
+      "Latitude": -45.0975,
+      "Longitude": 170.9714,
+      "JoinDate": "2026-10-14",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8bd63221-de7e-5854-8add-a32c12b4a979"
+    },
+    "fields": {
+      "PersonID": "6b8390b6-3b41-5092-8c7d-ad06ba5e7626",
+      "OrganizationID": "4BD34E89-F562-5FF3-A31D-71D4DF769537",
+      "MemberNumber": "ICF-102682",
+      "Segment": "Educator",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Saint-Hyacinthe",
+      "State": "CA-QC",
+      "AddressLine1": "2150 Boulevard Laurier O",
+      "AddressLine2": null,
+      "PostalCode": "J2S 3L8",
+      "Latitude": 45.63,
+      "Longitude": -72.957,
+      "JoinDate": "2026-10-15",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a49953b2-9f85-5997-811f-770976722b67"
+    },
+    "fields": {
+      "PersonID": "38ae7842-95ff-5eba-932e-296c013c8eeb",
+      "OrganizationID": "937E2308-85B6-5C8A-BC04-6ED2E4B4883E",
+      "MemberNumber": "ICF-102683",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "1109 W Main St",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-10-15",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "45bee56b-8d85-51cb-8939-645f2a594047"
+    },
+    "fields": {
+      "PersonID": "4dd5a045-0769-5943-a275-7357958e1ad2",
+      "OrganizationID": "6B87A00E-7186-5014-A25A-201852A339C7",
+      "MemberNumber": "ICF-102684",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Ithaca",
+      "State": "US-NY",
+      "AddressLine1": "209 E State St",
+      "AddressLine2": null,
+      "PostalCode": "14850",
+      "Latitude": 42.444,
+      "Longitude": -76.5019,
+      "JoinDate": "2026-10-16",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "22ca0320-3d7c-56ec-a183-d0e45b168dda"
+    },
+    "fields": {
+      "PersonID": "b2f432f4-c856-5a6c-90ad-1610bde7a1a3",
+      "OrganizationID": "08306689-D124-53E9-921D-22D2DF484D91",
+      "MemberNumber": "ICF-102685",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Bra",
+      "State": "IT-CN",
+      "AddressLine1": "Via Vittorio Emanuele II 95",
+      "AddressLine2": null,
+      "PostalCode": "12042",
+      "Latitude": 44.698,
+      "Longitude": 7.858,
+      "JoinDate": "2026-10-16",
+      "RaceEthnicity": "Black or African American",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5bb51242-fc76-5298-846c-9336c2388201"
+    },
+    "fields": {
+      "PersonID": "6bc03f71-5486-5d64-886b-f194d595769b",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102686",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Point Reyes Station",
+      "State": "US-CA",
+      "AddressLine1": "11315 State Route 1",
+      "AddressLine2": null,
+      "PostalCode": "94956",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064,
+      "JoinDate": "2026-10-17",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5c001b5f-6813-5a97-95c3-ef023e988cda"
+    },
+    "fields": {
+      "PersonID": "d6c4ac2b-1a33-5233-8f15-a33c061364c9",
+      "OrganizationID": "D9DAB3A5-50A8-5E81-B721-292346685F6E",
+      "MemberNumber": "ICF-102687",
+      "Segment": "Supplier",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Bega",
+      "State": "AU-NSW",
+      "AddressLine1": "142 Carp St",
+      "AddressLine2": null,
+      "PostalCode": "2550",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409,
+      "JoinDate": "2026-10-17",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b6eb66fd-0e20-5f7d-ac10-9356977e9c24"
+    },
+    "fields": {
+      "PersonID": "883586c6-62da-5324-9632-8515c8dd1d3c",
+      "OrganizationID": "B8F40ECF-7D8D-5B1B-B86B-B6D7D97E723D",
+      "MemberNumber": "ICF-102688",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Asheville",
+      "State": "US-NC",
+      "AddressLine1": "68 N Lexington Ave",
+      "AddressLine2": null,
+      "PostalCode": "28801",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515,
+      "JoinDate": "2026-10-19",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02f0a195-9499-56f5-ac16-dddfad9ab168"
+    },
+    "fields": {
+      "PersonID": "61347cef-1e42-5fdd-b5d5-2df6317ab62f",
+      "OrganizationID": "68E14202-A210-5FD9-950D-175AA7D76076",
+      "MemberNumber": "ICF-102689",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brattleboro",
+      "State": "US-VT",
+      "AddressLine1": "138 Main St",
+      "AddressLine2": null,
+      "PostalCode": "05301",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579,
+      "JoinDate": "2026-10-19",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e87968e7-57bb-5a6b-8f8f-ef087fde7e0e"
+    },
+    "fields": {
+      "PersonID": "aed4815a-5c5f-58c4-87d0-98203b9b18d7",
+      "OrganizationID": "73240336-3BC8-57EE-8CCE-A4D1E575A239",
+      "MemberNumber": "ICF-102690",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Oaxaca",
+      "State": "MX-OAX",
+      "AddressLine1": "Calle de los Libres 405",
+      "AddressLine2": null,
+      "PostalCode": "68000",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266,
+      "JoinDate": "2026-10-19",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "00a7adf1-7254-5185-96de-6f803ca35d88"
+    },
+    "fields": {
+      "PersonID": "34855530-d444-5cc8-a01e-dfe318fb488f",
+      "OrganizationID": "63755B23-B849-546E-A71F-E947A5439999",
+      "MemberNumber": "ICF-102691",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Cork",
+      "State": "IE-CO",
+      "AddressLine1": "52 Patrick St",
+      "AddressLine2": null,
+      "PostalCode": "T12 X250",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756,
+      "JoinDate": "2026-10-20",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "18a0652c-913e-5340-ba46-34d53210b42f"
+    },
+    "fields": {
+      "PersonID": "36aca93b-a5c3-551b-b6ee-ae466d50774a",
+      "OrganizationID": "19CD9C3A-7681-54E0-9C8F-A69BE3F297A4",
+      "MemberNumber": "ICF-102692",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "PL",
+      "CountryName": "Poland",
+      "City": "Kraków",
+      "State": "PL-MA",
+      "AddressLine1": "ul. Floriańska 28",
+      "AddressLine2": null,
+      "PostalCode": "31-021",
+      "Latitude": 50.0647,
+      "Longitude": 19.945,
+      "JoinDate": "2026-10-20",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Polish",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7c199ab7-84f9-52ac-b9e5-94ed506aadbe"
+    },
+    "fields": {
+      "PersonID": "30a4837e-2f84-5b18-8d66-605759930d7c",
+      "OrganizationID": "EC0256F2-D4DF-5813-A245-8FC740A1DFEC",
+      "MemberNumber": "ICF-102693",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Burlington",
+      "State": "US-VT",
+      "AddressLine1": "82 S Winooski Ave",
+      "AddressLine2": null,
+      "PostalCode": "05401",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121,
+      "JoinDate": "2026-10-21",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44b09354-f3a1-54b8-a1e3-77b716d20d72"
+    },
+    "fields": {
+      "PersonID": "11fbeb84-6d9f-5bc7-91f8-cad6eaf10e26",
+      "OrganizationID": "7E2A14B4-1A7B-52D5-98E0-13E1649157A6",
+      "MemberNumber": "ICF-102694",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "1204 Williamson St",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-10-21",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7a261c3c-9269-5491-8cc5-64877cfa9bf5"
+    },
+    "fields": {
+      "PersonID": "2dd96fe9-15f8-587b-bd02-d929b9512268",
+      "OrganizationID": "6870ED95-5624-55C7-BBFC-63D09084B3FE",
+      "MemberNumber": "ICF-102695",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Poligny",
+      "State": "FR-39",
+      "AddressLine1": "44 Grande Rue",
+      "AddressLine2": null,
+      "PostalCode": "39800",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075,
+      "JoinDate": "2026-10-21",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d08b1f1c-7d09-5faa-94d4-09357f5ad4fc"
+    },
+    "fields": {
+      "PersonID": "29af3b42-4969-5f62-b265-b22a0f837827",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102696",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Denver",
+      "State": "US-CO",
+      "AddressLine1": "1530 Blake St",
+      "AddressLine2": null,
+      "PostalCode": "80202",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903,
+      "JoinDate": "2026-10-22",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b52bcf52-ee53-576c-8587-ee5d77aef31a"
+    },
+    "fields": {
+      "PersonID": "18c80315-fe04-5da7-b8f4-f13815418b08",
+      "OrganizationID": "4CBAB92D-0639-54AE-AE87-344BBB647C5A",
+      "MemberNumber": "ICF-102697",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Chicago",
+      "State": "US-IL",
+      "AddressLine1": "1142 W Fulton Market",
+      "AddressLine2": null,
+      "PostalCode": "60607",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298,
+      "JoinDate": "2026-10-22",
+      "RaceEthnicity": "Two or more races",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "910e86f5-4e31-515a-a2eb-aab942542550"
+    },
+    "fields": {
+      "PersonID": "7b7feaeb-43ad-5fb2-a36b-dcd02854b5c7",
+      "OrganizationID": "7028C46D-4449-596E-820E-B26C3F68B3F3",
+      "MemberNumber": "ICF-102698",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Brooklyn",
+      "State": "US-NY",
+      "AddressLine1": "612 Vanderbilt Ave",
+      "AddressLine2": null,
+      "PostalCode": "11238",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442,
+      "JoinDate": "2026-10-23",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "78cbb6e9-ca7a-54d7-9133-bf1b45577836"
+    },
+    "fields": {
+      "PersonID": "91de5981-88fa-5cda-875a-3975f5d0fa86",
+      "OrganizationID": "A24196C3-A6C2-5D61-B760-02B4F4F55C07",
+      "MemberNumber": "ICF-102699",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Guelph",
+      "State": "CA-ON",
+      "AddressLine1": "76 Wyndham St N",
+      "AddressLine2": null,
+      "PostalCode": "N1H 4E7",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482,
+      "JoinDate": "2026-10-23",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e32cbcc8-8894-5583-b21e-53a32936e5ae"
+    },
+    "fields": {
+      "PersonID": "8c03b793-2c43-53f8-869c-90219a5131f6",
+      "OrganizationID": "DE942B58-3E8E-54C3-982D-3108B065EF8B",
+      "MemberNumber": "ICF-102700",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "AR",
+      "CountryName": "Argentina",
+      "City": "Tandil",
+      "State": "AR-B",
+      "AddressLine1": "Av. España 540",
+      "AddressLine2": null,
+      "PostalCode": "B7000",
+      "Latitude": -37.3217,
+      "Longitude": -59.1332,
+      "JoinDate": "2026-10-23",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "02d77ba5-e3eb-504b-9d1a-6b8d57097f36"
+    },
+    "fields": {
+      "PersonID": "50408312-84ec-59e7-8e0c-7b2f603c95ce",
+      "OrganizationID": "B30A0BC6-FEC8-5788-8BF2-40E9CDA27687",
+      "MemberNumber": "ICF-102701",
+      "Segment": "Retailer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Portland",
+      "State": "US-OR",
+      "AddressLine1": "3418 SE Hawthorne Blvd",
+      "AddressLine2": null,
+      "PostalCode": "97214",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784,
+      "JoinDate": "2026-10-24",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/they"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3a95a159-60d0-5285-81a2-4e2023bd3e77"
+    },
+    "fields": {
+      "PersonID": "7ae767b8-2041-5432-9418-476bbc19bce2",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102702",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "CA",
+      "CountryName": "Canada",
+      "City": "Courtenay",
+      "State": "CA-BC",
+      "AddressLine1": "445 5th St",
+      "AddressLine2": null,
+      "PostalCode": "V9N 1J7",
+      "Latitude": 49.6877,
+      "Longitude": -124.9936,
+      "JoinDate": "2026-10-24",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1d68a7ad-5802-5704-8fd7-3a1055bd9676"
+    },
+    "fields": {
+      "PersonID": "8a862a88-c1dc-550b-b8f1-9400076f89c1",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102703",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "FR",
+      "CountryName": "France",
+      "City": "Rodez",
+      "State": "FR-12",
+      "AddressLine1": "12 Place de la Cité",
+      "AddressLine2": null,
+      "PostalCode": "12000",
+      "Latitude": 44.3506,
+      "Longitude": 2.573,
+      "JoinDate": "2026-10-25",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "French",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "80c92e8c-d84d-5636-98a1-c1015130b3bd"
+    },
+    "fields": {
+      "PersonID": "4662fa4d-332c-5004-8c3e-beaf01abb8c2",
+      "OrganizationID": "C917DD14-261E-5B2D-852F-BAB2FA69C3B9",
+      "MemberNumber": "ICF-102704",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "CH",
+      "CountryName": "Switzerland",
+      "City": "Gruyères",
+      "State": "CH-FR",
+      "AddressLine1": "Rue du Bourg 21",
+      "AddressLine2": null,
+      "PostalCode": "1663",
+      "Latitude": 46.5836,
+      "Longitude": 7.0822,
+      "JoinDate": "2026-10-25",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1c8cd7b0-e8f1-532e-a200-e8869de59b55"
+    },
+    "fields": {
+      "PersonID": "36a12f11-d1b0-594f-b3e5-94a4205aa2f1",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102705",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Seattle",
+      "State": "US-WA",
+      "AddressLine1": "2208 Ballard Ave NW",
+      "AddressLine2": null,
+      "PostalCode": "98107",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321,
+      "JoinDate": "2026-10-26",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f1a21cf1-75a4-520d-864b-cff514fbfd1b"
+    },
+    "fields": {
+      "PersonID": "65b56fea-b04e-5210-9c87-e0c03b14ab6e",
+      "OrganizationID": "BAC3207A-5555-5090-9BA0-7EA99ABAD581",
+      "MemberNumber": "ICF-102706",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Boise",
+      "State": "US-ID",
+      "AddressLine1": "605 S Capitol Blvd",
+      "AddressLine2": null,
+      "PostalCode": "83702",
+      "Latitude": 43.615,
+      "Longitude": -116.2023,
+      "JoinDate": "2026-10-26",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2ea2d75e-127a-5c86-9c37-c511abbe8664"
+    },
+    "fields": {
+      "PersonID": "572a745f-c1f7-56b8-9b52-5f7adb3bb9bf",
+      "OrganizationID": "52396B79-ACF1-5BE0-9721-2DCFFF2E4A63",
+      "MemberNumber": "ICF-102707",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "IT",
+      "CountryName": "Italy",
+      "City": "Reggio Emilia",
+      "State": "IT-RE",
+      "AddressLine1": "Via Emilia Santo Stefano 18",
+      "AddressLine2": null,
+      "PostalCode": "42121",
+      "Latitude": 44.6983,
+      "Longitude": 10.631,
+      "JoinDate": "2026-10-26",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Italian",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6ab6900c-8d9f-5ada-af95-b61f2afaef39"
+    },
+    "fields": {
+      "PersonID": "4708188a-575e-51b2-b6d7-a43bb4d98b9e",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102708",
+      "Segment": "Educator",
+      "Region": "EU",
+      "Country": "GB",
+      "CountryName": "United Kingdom",
+      "City": "Somerset",
+      "State": "GB-SOM",
+      "AddressLine1": "29 High St, Wells",
+      "AddressLine2": null,
+      "PostalCode": "BA5 2AA",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183,
+      "JoinDate": "2026-10-27",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1f9b0366-282e-5ca7-858e-47e5c336a62a"
+    },
+    "fields": {
+      "PersonID": "eacb37d1-e32a-50de-9870-66f912b637a9",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102709",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "NL",
+      "CountryName": "Netherlands",
+      "City": "Gouda",
+      "State": "NL-ZH",
+      "AddressLine1": "Markt 33",
+      "AddressLine2": null,
+      "PostalCode": "2801 JJ",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104,
+      "JoinDate": "2026-10-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Dutch",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "563d3f9f-6097-5e50-80bb-81616b638ddd"
+    },
+    "fields": {
+      "PersonID": "379e8847-e79a-5e92-b178-468356bd0002",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102710",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Madison",
+      "State": "US-WI",
+      "AddressLine1": "415 State St",
+      "AddressLine2": null,
+      "PostalCode": "53703",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012,
+      "JoinDate": "2026-10-27",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0aa19b96-da37-5db7-88b5-49ce43a532f5"
+    },
+    "fields": {
+      "PersonID": "2a2ed209-8305-5dae-bcff-b56d14ddd576",
+      "OrganizationID": "FFD99062-2766-58BE-92D6-0A6C2EACDAC8",
+      "MemberNumber": "ICF-102711",
+      "Segment": "Producer",
+      "Region": "NA",
+      "Country": "MX",
+      "CountryName": "Mexico",
+      "City": "Querétaro",
+      "State": "MX-QUE",
+      "AddressLine1": "Av. Constituyentes Ote. 120",
+      "AddressLine2": null,
+      "PostalCode": "76040",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899,
+      "JoinDate": "2026-10-28",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Spanish",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d04058fa-9e7f-5b9d-a782-98c570346b64"
+    },
+    "fields": {
+      "PersonID": "8f6bb9be-55d1-59a7-a3b4-148235e84423",
+      "OrganizationID": "33C91595-442B-5E1B-8B3E-4593C4CCD582",
+      "MemberNumber": "ICF-102712",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "DE",
+      "CountryName": "Germany",
+      "City": "Münster",
+      "State": "DE-NW",
+      "AddressLine1": "Prinzipalmarkt 19",
+      "AddressLine2": null,
+      "PostalCode": "48143",
+      "Latitude": 51.9607,
+      "Longitude": 7.6261,
+      "JoinDate": "2026-10-28",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "31a78220-9de9-5e31-b8e2-0b676e5719a6"
+    },
+    "fields": {
+      "PersonID": "f8efc67f-29c8-5c2f-ac34-d3b679461410",
+      "OrganizationID": "D2A92C23-5DBC-5575-8B88-0CE878600DCD",
+      "MemberNumber": "ICF-102713",
+      "Segment": "Retailer",
+      "Region": "RoW",
+      "Country": "AU",
+      "CountryName": "Australia",
+      "City": "Hobart",
+      "State": "AU-TAS",
+      "AddressLine1": "85 Salamanca Pl",
+      "AddressLine2": null,
+      "PostalCode": "7004",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272,
+      "JoinDate": "2026-10-28",
+      "RaceEthnicity": null,
+      "EthnicityHispanic": null,
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "54342ef0-5298-568b-8ef1-8b1c5ed850e0"
+    },
+    "fields": {
+      "PersonID": "7a6bea68-2544-508b-a927-b30f4ba19d6f",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102714",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Petaluma",
+      "State": "US-CA",
+      "AddressLine1": "112 Kentucky St",
+      "AddressLine2": null,
+      "PostalCode": "94952",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367,
+      "JoinDate": "2026-10-29",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a3b49a7c-bcbf-5e14-8fa0-223ef108c9e7"
+    },
+    "fields": {
+      "PersonID": "53c86bec-86dc-59b2-aa13-bda349ce45cb",
+      "OrganizationID": "020CFEE4-3DBA-5375-83E4-D7364481BD75",
+      "MemberNumber": "ICF-102715",
+      "Segment": "Producer",
+      "Region": "RoW",
+      "Country": "NZ",
+      "CountryName": "New Zealand",
+      "City": "Auckland",
+      "State": "NZ-AUK",
+      "AddressLine1": "210 Queen St",
+      "AddressLine2": null,
+      "PostalCode": "1010",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645,
+      "JoinDate": "2026-10-29",
+      "RaceEthnicity": "Prefer not to say",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "they/them"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a056ee46-d1dd-5997-966c-e6f0d145bbc8"
+    },
+    "fields": {
+      "PersonID": "99062618-cdac-5b71-916c-9044db9227b0",
+      "OrganizationID": "D5760C4F-4D23-5350-86DE-F750A99C2714",
+      "MemberNumber": "ICF-102716",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "GR",
+      "CountryName": "Greece",
+      "City": "Trikala",
+      "State": "GR-E4",
+      "AddressLine1": "Asklipiou 14",
+      "AddressLine2": null,
+      "PostalCode": "421 31",
+      "Latitude": 39.5556,
+      "Longitude": 21.7679,
+      "JoinDate": "2026-10-29",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Greek",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "368ac323-29c8-5ec4-988f-3e1870a482d4"
+    },
+    "fields": {
+      "PersonID": "3d404b7e-3b37-57bf-810f-efcf41beeac1",
+      "OrganizationID": "475FE969-D5A9-5048-8A66-64F1077FE72E",
+      "MemberNumber": "ICF-102717",
+      "Segment": "Supplier",
+      "Region": "EU",
+      "Country": "IE",
+      "CountryName": "Ireland",
+      "City": "Kilkenny",
+      "State": "IE-KK",
+      "AddressLine1": "44 High St",
+      "AddressLine2": null,
+      "PostalCode": "R95 X682",
+      "Latitude": 52.6541,
+      "Longitude": -7.2448,
+      "JoinDate": "2026-10-30",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0968ec95-ef24-5ac7-9980-1a5996c8c31f"
+    },
+    "fields": {
+      "PersonID": "c4a95785-61eb-522b-adae-36a13eac9d01",
+      "OrganizationID": "AAD7B903-F86E-54D0-A296-BDCCE6771916",
+      "MemberNumber": "ICF-102718",
+      "Segment": "Retailer",
+      "Region": "EU",
+      "Country": "PT",
+      "CountryName": "Portugal",
+      "City": "Serpa",
+      "State": "PT-07",
+      "AddressLine1": "Rua das Portas de Beja 11",
+      "AddressLine2": null,
+      "PostalCode": "7830-345",
+      "Latitude": 37.943,
+      "Longitude": -7.596,
+      "JoinDate": "2026-10-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "Portuguese",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4df31b2c-7fde-5437-8ea7-16b68cb7bcaf"
+    },
+    "fields": {
+      "PersonID": "777c176f-549f-5607-97ba-62a95be43d8a",
+      "OrganizationID": "43789907-4199-57A8-BF32-A613ABEDD325",
+      "MemberNumber": "ICF-102719",
+      "Segment": "Producer",
+      "Region": "EU",
+      "Country": "AT",
+      "CountryName": "Austria",
+      "City": "Bregenz",
+      "State": "AT-8",
+      "AddressLine1": "Römerstraße 15",
+      "AddressLine2": null,
+      "PostalCode": "6900",
+      "Latitude": 47.5031,
+      "Longitude": 9.7471,
+      "JoinDate": "2026-10-30",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "German",
+      "IsSharedDemo": true,
+      "PronounSet": "he/him"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f04dd99b-3867-5586-b7d4-fff2e16a3557"
+    },
+    "fields": {
+      "PersonID": "493b2d2f-659d-5537-9fcf-a456d1ae4ac9",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102720",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Sonoma",
+      "State": "US-CA",
+      "AddressLine1": "315 W Spain St",
+      "AddressLine2": null,
+      "PostalCode": "95476",
+      "Latitude": 38.2919,
+      "Longitude": -122.458,
+      "JoinDate": "2026-10-31",
+      "RaceEthnicity": "Asian",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/her"
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3d4d898d-774e-537e-905d-b46a0b8f4f3b"
+    },
+    "fields": {
+      "PersonID": "a84b1e0e-dd57-5376-81f5-6f2a7dc30eee",
+      "OrganizationID": null,
+      "MemberNumber": "ICF-102721",
+      "Segment": "Enthusiast",
+      "Region": "NA",
+      "Country": "US",
+      "CountryName": "United States",
+      "City": "Green Bay",
+      "State": "US-WI",
+      "AddressLine1": "402 N Washington St",
+      "AddressLine2": null,
+      "PostalCode": "54301",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133,
+      "JoinDate": "2026-10-31",
+      "RaceEthnicity": "White",
+      "EthnicityHispanic": "Not Hispanic or Latino",
+      "PrimaryLanguage": "English",
+      "IsSharedDemo": true,
+      "PronounSet": "she/they"
+    }
   }
 ]

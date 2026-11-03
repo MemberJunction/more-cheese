@@ -1,0 +1,34 @@
+# title: Membership and order snapshot for week of August 24, 2026
+# date: 2026-08-29
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-08-24
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2026-08-24
+# basis: membership purchases, confirmed orders, cash captured, and advocacy actions booked during the week of 2026-08-24 to 2026-08-30. Current members counts active membership at week end.
+# caveat: pulled on Saturday, August 29, so weekend order processing is still pending final close.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,metric_value,unit,basis,status
+membership,current_members_at_week_end,1641,members,rolling 12 months,preliminary
+membership,membership_purchases_total,34,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,24,purchases,booked in week,preliminary
+membership,tier_individual_purchases,24,purchases,booked in week,preliminary
+membership,tier_enthusiast_purchases,5,purchases,booked in week,preliminary
+membership,tier_smallbusiness_purchases,3,purchases,booked in week,preliminary
+membership,tier_corporate_purchases,2,purchases,booked in week,preliminary
+membership,membership_gross_usd,8150,usd,booked in week,preliminary
+orders,confirmed_orders,40,orders,booked in week,preliminary
+orders,orders_gross_usd,9645,usd,booked in week,preliminary
+orders,order_cancellations,0,orders,booked in week,preliminary
+cash,cash_captured_usd,9120,usd,payments in week,preliminary
+events,event_registrations_taken,6,registrations,EVT-2026-W5 Workshop: Curd Food Safety,preliminary
+advocacy,coalition_meetings_labeling_standards,1,actions,booked in week,preliminary

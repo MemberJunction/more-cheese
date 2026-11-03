@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 27 October 2025
+# date: 2025-10-27
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-10-27
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/courses]
+# source: node scripts/vault-facts.mjs week 2025-10-27
+# basis: membership purchases, confirmed orders, cash captured, and event registrations booked inside 2025-10-27..2025-11-02. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations in the data.
+# caveat: weekly figures pulled at week end on 2025-11-02. Advocacy actions and committee meetings recorded zero activity for this specific week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1393,members,rolling 12 months,final
+membership,membership_purchases_total,17,purchases,booked in week,final
+membership,membership_purchases_first_time,11,purchases,booked in week,final
+membership,individual_tier_purchases,7,purchases,booked in week,final
+membership,small_business_tier_purchases,2,purchases,booked in week,final
+membership,enthusiast_tier_purchases,7,purchases,booked in week,final
+membership,corporate_tier_purchases,1,purchases,booked in week,final
+membership,membership_purchases_gross,3964,usd,booked in week,final
+orders,confirmed_orders,24,orders,booked in week,final
+orders,orders_gross,5294,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,3907,usd,payments in week,final
+events,event_registrations_taken,5,registrations,EVT-2025-W5 Workshop: Curd Pasta Filata,final
+courses,course_completions,7,completions,completed in week,final
+courses,course_enrollments_taken,0,enrollments,taken in week,final
+certifications,certifications_enrolled,1,enrollments,enrolled in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final

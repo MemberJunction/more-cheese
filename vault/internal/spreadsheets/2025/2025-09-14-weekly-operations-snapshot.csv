@@ -1,0 +1,41 @@
+# title: Weekly operations snapshot, week of 8 September 2025
+# date: 2025-09-14
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-09-08
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, advocacy]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2025-09-08 and event EVT-2025-W2
+# basis: membership purchases, orders, cash, and advocacy actions booked or recorded during 2025-09-08..2025-09-14. Current members counts qualifying active periods at week end.
+# caveat: pulled on Sunday 2025-09-14. Workshop attendance figures reflect finalized counts from Thursday's session in Ludlow.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1306,members,rolling 12 months,final
+membership,membership_purchases,25,purchases,booked in week,final
+membership,first_time_members,19,purchases,booked in week,final
+membership,individual_purchases,16,purchases,booked in week,final
+membership,enthusiast_purchases,5,purchases,booked in week,final
+membership,small_business_purchases,4,purchases,booked in week,final
+membership,membership_gross,5006,usd,booked in week,final
+orders,confirmed_orders,69,orders,booked in week,final
+orders,orders_gross,11304,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,11227,usd,payments in week,final
+events,workshop_registrations_taken,43,registrations,EVT-2025-W2,final
+events,workshop_registered_total,222,registrations,EVT-2025-W2,final
+events,workshop_attended,205,registrations,Ludlow session,final
+events,workshop_no_show,17,registrations,Ludlow session,final
+events,workshop_refunded,0,registrations,EVT-2025-W2,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,7,completions,completed in week,final
+advocacy,interstate_shipment_letters,23,actions,recorded in week,final
+advocacy,interstate_shipment_petitions,17,actions,recorded in week,final
+advocacy,interstate_shipment_meetings,1,actions,recorded in week,final

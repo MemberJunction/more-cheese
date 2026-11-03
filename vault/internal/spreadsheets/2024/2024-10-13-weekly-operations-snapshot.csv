@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot for week of 7 October 2024
+# date: 2024-10-13
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-10-07
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/courses]
+# source: node scripts/vault-facts.mjs week 2024-10-07
+# basis: membership purchases, orders, cash, and course enrollments booked within 2024-10-07..2024-10-13. Current members total is as of week end.
+# caveat: week totals complete as of Sunday 2024-10-13.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1046,members,rolling 12 months,final
+membership,membership_purchases_total,10,purchases,booked in week,final
+membership,membership_purchases_first_time,7,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,individual_purchases,6,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,enthusiast_purchases,2,purchases,booked in week,final
+membership,membership_purchases_gross,2607,usd,booked in week,final
+orders,confirmed_orders,10,orders,booked in week,final
+orders,orders_gross,2688,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,3637,usd,payments in week,final
+education,course_enrollments_taken,34,enrollments,booked in week,final
+education,course_completions,22,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,advocacy_actions_total,0,actions,recorded in week,final
+governance,committee_meetings_completed,1,meetings,Food Safety Q4 meeting,final

@@ -1,0 +1,36 @@
+# title: Weekly operational snapshot, week of 25 July 2022
+# date: 2022-07-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-07-25
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-07-25
+# basis: membership purchases, confirmed orders, cash captured, and event registrations booked during 2022-07-25..2022-07-31. Current members count is at week end.
+# caveat: pulled on Sunday 31 July 2022, representing complete week totals. Conference numbers reflect prior historical totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,570,members,rolling 12 months,final
+membership,membership_purchases_total,10,purchases,booked in week,final
+membership,membership_purchases_first_time,6,purchases,booked in week,final
+membership,membership_tier_individual,6,purchases,booked in week,final
+membership,membership_tier_corporate,2,purchases,booked in week,final
+membership,membership_tier_enthusiast,1,purchases,booked in week,final
+membership,membership_tier_small_business,1,purchases,booked in week,final
+membership,membership_purchases_gross,3253,usd,booked in week,final
+orders,confirmed_orders,14,orders,booked in week,final
+orders,orders_gross,4021,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,1321,usd,payments in week,final
+events,birch_alpine_styles_registrations_taken,4,registrations,taken in week,final
+events,annual_conference_registered_total,187,registrations,EVT-2022-CONF,final
+events,annual_conference_attended,166,registrations,EVT-2022-CONF,final
+events,annual_conference_no_show,21,registrations,EVT-2022-CONF,final

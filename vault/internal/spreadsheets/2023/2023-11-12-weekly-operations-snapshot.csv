@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 2023-11-06
+# date: 2023-11-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-11-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, workshops]
+# data_sources: [generated/orders, generated/payments, generated/courses, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2023-11-06
+# basis: figures cover confirmed orders, membership purchases, event registrations, course completions, and cash captured during the window 2023-11-06 to 2023-11-12.
+# caveat: membership and order totals are final for the week. Event attendance is specific to the Burlington workshop held on 2023-11-08.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,metric_value,unit,basis,status
+membership,current_members_at_week_end,862,members,rolling 12 months,final
+membership,membership_purchases_total,12,purchases,booked in week,final
+membership,membership_purchases_first_time,6,purchases,booked in week,final
+membership,membership_purchases_enthusiast,2,purchases,booked in week,final
+membership,membership_purchases_individual,8,purchases,booked in week,final
+membership,membership_purchases_small_business,2,purchases,booked in week,final
+membership,membership_purchases_gross,2322,usd,booked in week,final
+orders,confirmed_orders,36,orders,booked in week,final
+orders,confirmed_orders_gross,5882,usd,booked in week,final
+orders,order_cancellations,0,orders,booked in week,final
+cash,cash_captured,5012,usd,payments in week,final
+events,burlington_workshop_registered,156,registrations,EVT-2023-W2,final
+events,burlington_workshop_attended,144,attendees,EVT-2023-W2,final
+events,burlington_workshop_no_show,12,attendees,EVT-2023-W2,final
+events,burlington_workshop_refunded,0,registrations,EVT-2023-W2,final
+events,curd_prep_registrations_taken,1,registrations,EVT-2023-W5,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,3,completions,completed in week,final
+certification,certification_enrollments,0,enrollments,booked in week,final
+certification,certifications_awarded,0,awards,awarded in week,final

@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot for week of 12 August 2024
+# date: 2024-08-18
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-08-12
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, advocacy, orders]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-08-12
+# basis: commerce data booked between 2024-08-12 and 2024-08-18. Current members count reflects active status at week end.
+# caveat: pulled at week close on Sunday 2024-08-18. Event registrations reflect workshop sign-ups only.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,metric_value,unit_type,tracking_basis,verification_status
+membership,current_members_at_week_end,1009,members,rolling 12 months,final
+membership,membership_purchases_total,9,purchases,booked in week,final
+membership,membership_purchases_first_time,4,purchases,booked in week,final
+membership,membership_purchases_individual,8,purchases,booked in week,final
+membership,membership_purchases_corporate,1,purchases,booked in week,final
+membership,membership_purchases_gross_usd,2276,usd,booked in week,final
+orders,confirmed_orders,37,orders,booked in week,final
+orders,orders_gross_usd,6510,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured_usd,6830,usd,payments in week,final
+events,workshop_curd_food_safety_registrations,25,registrations,EVT-2024-W3 Querétaro,final
+courses,course_enrollments_taken,29,enrollments,taken in week,final
+courses,course_completions,15,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,taken in week,final
+certifications,certifications_awarded,1,certificates,Cheese Foundations Karan Chevalier,final
+advocacy,interstate_shipment_letter_campaign,5,letters,submitted in week,final
+advocacy,interstate_shipment_petition_signature,1,signatures,signed in week,final

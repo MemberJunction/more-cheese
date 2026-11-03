@@ -1,0 +1,40 @@
+# title: Competition entries and weekly operations snapshot, week of 2022-10-17
+# date: 2022-10-23
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-10-17
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, competition-entries, membership, orders]
+# data_sources: [generated/orders, generated/payments, generated/competition-entries]
+# source: node scripts/vault-facts.mjs week 2022-10-17 and node scripts/vault-facts.mjs year 2022
+# basis: membership purchases, orders and cash are booked inside 2022-10-17..2022-10-23. Current members counts people whose latest qualifying purchase is within 12 months. Competition entries reflect annual totals from generated data.
+# caveat: pulled on 23 October 2022. Event registrations taken reflect workshop bookings for upcoming sessions.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,609,members,rolling 12 months,final
+membership,membership_purchases,9,purchases,booked in week,final
+membership,first_time_purchases,4,purchases,booked in week,final
+membership,individual_purchases,5,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,small_business_purchases,3,purchases,booked in week,final
+membership,membership_gross,2000,usd,booked in week,final
+orders,confirmed_orders,25,orders,booked in week,final
+orders,orders_gross,3966,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,3246,usd,payments in week,final
+events,workshop_hollow_pasta_filata_registrations,14,registrations,taken in week,final
+competition,total_competition_entries,41,entries,annual total,final
+competition,alpine_styles_entries,7,entries,annual total,final
+competition,blue_veined_entries,8,entries,annual total,final
+competition,soft_ripened_entries,7,entries,annual total,final
+competition,fresh_pasta_filata_entries,10,entries,annual total,final
+competition,washed_rind_entries,4,entries,annual total,final
+competition,aged_cheddar_territorials_entries,5,entries,annual total,final
+education,course_completions,2,completions,completed in week,final

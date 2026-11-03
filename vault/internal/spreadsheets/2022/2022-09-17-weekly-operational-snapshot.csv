@@ -1,0 +1,38 @@
+# title: Weekly operational snapshot, week of 12 September 2022
+# date: 2022-09-17
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-09-12
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2022-09-12
+# basis: figures represent activity and totals for the window 2022-09-12 through 2022-09-18. Membership purchases, orders, cash, course activity, and advocacy actions are booked within this week.
+# caveat: pulled on Saturday 17 September 2022, so the week's totals are preliminary and subject to final Sunday close reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,594,members,rolling 12 months,preliminary
+membership,membership_purchases_total,15,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,9,purchases,booked in week,preliminary
+membership,tier_corporate_purchases,2,purchases,booked in week,preliminary
+membership,tier_individual_purchases,11,purchases,booked in week,preliminary
+membership,tier_enthusiast_purchases,1,purchases,booked in week,preliminary
+membership,tier_small_business_purchases,1,purchases,booked in week,preliminary
+membership,membership_purchases_gross,4020,usd,booked in week,preliminary
+orders,confirmed_orders,16,orders,booked in week,preliminary
+orders,orders_gross,4231,usd,booked in week,preliminary
+orders,order_cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,2501,usd,payments in week,preliminary
+events,event_registrations_taken,1,registrations,EVT-2022-W4 Workshop: Hollow Pasta Filata,preliminary
+education,course_enrollments_taken,16,enrollments,taken in week,preliminary
+education,course_completions,23,completions,completed in week,preliminary
+certifications,certifications_enrolled,0,enrollments,taken in week,preliminary
+advocacy,petition_signatures_dairy_reform,7,signatures,logged in week,preliminary
+advocacy,letter_campaign_dairy_reform,7,letters,logged in week,preliminary

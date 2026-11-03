@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 2023-11-20
+# date: 2023-11-26
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-11-20
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2023-11-20
+# basis: commerce and enrollment figures booked inside 2023-11-20..2023-11-26. Current members count as of 2023-11-26.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis,note
+membership,current_members_at_week_end,874,members,rolling 12 months,complete
+membership,membership_purchases_total,10,purchases,booked in week,complete
+membership,membership_purchases_first_time,7,purchases,booked in week,complete
+membership,membership_purchases_individual,9,purchases,booked in week,complete
+membership,membership_purchases_corporate,1,purchases,booked in week,complete
+membership,membership_sales_gross,2381,usd,booked in week,complete
+orders,confirmed_orders,35,orders,booked in week,complete
+orders,orders_gross,5675,usd,booked in week,complete
+orders,cancellation_orders,1,orders,booked in week,complete
+cash,cash_captured,5613,usd,payments in week,complete
+events,workshop_curd_prep_registrations,23,registrations,EVT-2023-W5,complete
+events,events_this_week,0,events,calendar week,complete
+events,events_next_eight_weeks,1,events,Green Bay Dec 19,complete
+education,course_enrollments_taken,26,enrollments,taken in week,complete
+education,course_completions,6,completions,completed in week,complete
+education,certifications_enrolled,0,enrollments,taken in week,complete
+education,certifications_awarded,0,awards,awarded in week,complete
+advocacy,raw_milk_aging_coalition_meetings,1,meetings,coalition action,complete

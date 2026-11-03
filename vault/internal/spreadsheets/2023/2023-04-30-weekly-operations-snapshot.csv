@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2023-04-24
+# date: 2023-04-30
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-04-24
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2023-04-24
+# basis: commerce and advocacy figures captured during the week of 2023-04-24 to 2023-04-30. current members count is total at week end.
+# caveat: weekly totals are complete as of Sunday 2023-04-30. free webinars carry no registrations.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,719,members,rolling 12 months,final
+membership,membership_purchases_total,5,purchases,booked in week,final
+membership,membership_purchases_first_time,2,purchases,booked in week,final
+membership,individual_tier_purchases,5,purchases,booked in week,final
+membership,membership_sales_gross,810,usd,booked in week,final
+orders,confirmed_orders,12,orders,booked in week,final
+orders,orders_gross,3352,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,4890,usd,payments in week,final
+events,annual_conference_registrations,5,registrations,EVT-2023-CONF,final
+events,workshop_birch_prep_registrations,2,registrations,EVT-2023-W3,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,enrolled in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,fsma_letter_campaign,9,actions,logged in week,final
+advocacy,fsma_petition_signature,3,actions,logged in week,final
+advocacy,interstate_shipment_coalition_meeting,1,meetings,logged in week,final

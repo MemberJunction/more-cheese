@@ -1,0 +1,53 @@
+[
+  {
+    "fields": {
+      "Name": "People Duplicate Detection",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "TypeID": "@lookup:MJ: Entity Document Types.Name=Record Duplicate",
+      "Status": "Active",
+      "VectorDatabaseID": "@lookup:MJ: Vector Databases.Name=Pinecone",
+      "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Duplicates (Pinecone)",
+      "AIModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "TemplateText": "@file:templates/people-duplicates.njk",
+      "PotentialMatchThreshold": 0.93,
+      "AbsoluteMatchThreshold": 0.99
+    },
+    "primaryKey": {
+      "ID": "1BCD53D7-638C-43AA-A35B-6F0D239FC557"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Organizations Duplicate Detection",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "TypeID": "@lookup:MJ: Entity Document Types.Name=Record Duplicate",
+      "Status": "Active",
+      "VectorDatabaseID": "@lookup:MJ: Vector Databases.Name=Pinecone",
+      "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Duplicates (Pinecone)",
+      "AIModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "TemplateText": "@file:templates/organizations-duplicates.njk",
+      "PotentialMatchThreshold": 0.96,
+      "AbsoluteMatchThreshold": 0.98
+    },
+    "primaryKey": {
+      "ID": "03790917-5B5D-40A8-BC0F-0949E836C89C"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Products Duplicate Detection",
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Products",
+      "TypeID": "@lookup:MJ: Entity Document Types.Name=Record Duplicate",
+      "Status": "Active",
+      "VectorDatabaseID": "@lookup:MJ: Vector Databases.Name=Pinecone",
+      "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Duplicates (Pinecone)",
+      "AIModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
+      "TemplateText": "@file:templates/products-duplicates.njk",
+      "PotentialMatchThreshold": 0.94,
+      "AbsoluteMatchThreshold": 0.98
+    },
+    "primaryKey": {
+      "ID": "E58FAF59-25EA-4868-8ADB-9C1CE1745B87"
+    }
+  }
+]

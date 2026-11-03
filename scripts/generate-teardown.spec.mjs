@@ -23,7 +23,13 @@ import path from 'node:path';
 import { readFileSync, existsSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { generateTeardown, readConfigSeed, readBaselineCoreRows, UNDROPPED_SCHEMAS } from './generate-teardown.mjs';
+import {
+    generateTeardown,
+    readConfigSeed,
+    readBaselineCoreRows,
+    UNDROPPED_SCHEMAS,
+    CORE_ACTIVATED_IDS,
+} from './generate-teardown.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(HERE, '..');
@@ -370,10 +376,11 @@ test('no (EntityName, RowID) tuple is inserted into #MoreCheeseSeed twice', () =
 /** The same invariant one layer up, so a regeneration cannot reintroduce it without the spec failing. */
 test('the generator emits each (entity, id) pair at most once', () => {
     const rows = readConfigSeed(REPO_ROOT);
-    const keys = rows.map((r) => `${r.entity}|${r.id}`);
+    const deletableRows = rows.filter((r) => !CORE_ACTIVATED_IDS.has(r.id));
+    const keys = deletableRows.map((r) => `${r.entity}|${r.id}`);
     const seen = new Set();
     const dupes = keys.filter((k) => (seen.has(k) ? true : (seen.add(k), false)));
-    // readConfigSeed deliberately keeps every declaration so the provenance header can name all 36
+    // readConfigSeed deliberately keeps every declaration so the provenance header can name all
     // directories; the emitted INSERT is what must be distinct. Assert the relationship explicitly.
     const generated = generateTeardown({
         configRows: rows,
@@ -390,4 +397,22 @@ test('the generator emits each (entity, id) pair at most once', () => {
     }
     assert.equal(new Set(emitted).size, emitted.length, 'the generator emitted a duplicate seed key');
     assert.equal(emitted.length, new Set(keys).size, `emitted ${emitted.length} rows for ${new Set(keys).size} distinct declarations (${dupes.length} shared across directories)`);
+});
+
+test('MJ core Dropbox FileStorageProvider row is deactivated rather than deleted', () => {
+    const dropboxId = 'C9B9433E-F36B-1410-8DA0-00021F8B792E';
+    const emittedSeed = [];
+    for (const m of sql().matchAll(/INSERT INTO #MoreCheeseSeed \(EntityName, RowID\) VALUES\n([\s\S]*?);/g)) {
+        emittedSeed.push(m[1]);
+    }
+    assert.equal(
+        emittedSeed.some((block) => block.includes(dropboxId)),
+        false,
+        `MJ core FileStorageProvider (${dropboxId}) must never be inserted into #MoreCheeseSeed for deletion`,
+    );
+    assert.match(
+        codeOnly(sql()),
+        /UPDATE \[\$\{mjSchema\}\]\.\[FileStorageProvider\]\s+SET \[IsActive\] = 0\s+WHERE \[ID\] = 'C9B9433E-F36B-1410-8DA0-00021F8B792E'/,
+        'Teardown must deactivate the MJ core Dropbox FileStorageProvider row when unused',
+    );
 });

@@ -1,0 +1,34 @@
+# title: Weekly operational snapshot, week of 1 March 2021
+# date: 2021-03-07
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-03-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-03-01
+# basis: membership purchases, orders, cash, and course enrollments are booked inside 2021-03-01..2021-03-07. Current members count people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 7 March 2021 at week end, figures are complete for the window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,442,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,0,purchases,booked in week,final
+membership,individual_purchases,4,purchases,booked in week,final
+membership,corporate_purchases,,purchases,booked in week,
+membership,membership_gross,612,usd,booked in week,final
+orders,confirmed_orders,7,orders,booked in week,final
+orders,orders_gross,1119,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,1370,usd,payments in week,final
+event_registrations,workshop_stone_alpine_styles,2,registrations,EVT-2021-W1,final
+education,course_enrollments_taken,32,enrollments,taken in week,final
+education,course_completions,7,completions,completed in week,final
+education,certification_enrollments,0,enrollments,taken in week,final

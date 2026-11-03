@@ -1,0 +1,34 @@
+# title: Weekly operations snapshot for week of 16 September 2024
+# date: 2024-09-22
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-09-16
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, advocacy, courses]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-09-16
+# basis: confirmed orders, cash captured, and membership purchases booked between 2024-09-16 and 2024-09-22.
+# caveat: weekly totals are complete as of Sunday 2024-09-22. Free webinars carry zero registrations.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1034,members,rolling 12 months,complete
+membership,membership_purchases_total,13,purchases,booked in week,complete
+membership,membership_purchases_first_time,3,purchases,booked in week,complete
+membership,membership_purchases_individual,8,purchases,booked in week,complete
+membership,membership_purchases_small_business,1,purchases,booked in week,complete
+membership,membership_purchases_enthusiast,4,purchases,booked in week,complete
+membership,membership_purchases_gross,2275,usd,booked in week,complete
+orders,confirmed_orders,13,orders,booked in week,complete
+orders,orders_gross,2708,usd,booked in week,complete
+orders,cancellations,0,orders,booked in week,complete
+cash,cash_captured,3751,usd,payments in week,complete
+events,webinar_digital_storefronts_registered,0,registrations,free webinar,complete
+courses,course_completions,9,completions,completed in week,complete
+advocacy,fsma_coalition_meetings,1,meetings,advocacy action,complete

@@ -1,0 +1,38 @@
+# title: Weekly operational snapshot, week of 9 May 2022
+# date: 2022-05-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-05-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, cash, workshops]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2022-05-09 and node scripts/vault-facts.mjs event EVT-2022-W1
+# basis: membership purchases, orders and cash are booked inside 2022-05-09..2022-05-15. Current members counts people whose latest qualifying purchase is within 12 months. Gross orders and cash captured are different bases.
+# caveat: pulled on Sunday 15 May 2022, representing complete week totals for the specified window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,541,members,rolling 12 months,final
+membership,membership_purchases,6,purchases,booked in week,final
+membership,first_time_purchases,5,purchases,booked in week,final
+membership,small_business_purchases,2,purchases,booked in week,final
+membership,enthusiast_purchases,2,purchases,booked in week,final
+membership,individual_purchases,2,purchases,booked in week,final
+membership,membership_gross,1304,usd,booked in week,final
+orders,confirmed_orders,45,orders,booked in week,final
+orders,orders_gross,6300,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,6841,usd,payments in week,final
+workshop,brook_food_safety_registered,111,registrations,EVT-2022-W1,final
+workshop,brook_food_safety_refunded,1,registrations,EVT-2022-W1,final
+workshop,brook_food_safety_attended,101,registrations,EVT-2022-W1,final
+workshop,brook_food_safety_no_show,10,registrations,EVT-2022-W1,final
+event_registrations,annual_conference_registrations_taken,2,registrations,booked in week,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,1,completions,completed in week,final

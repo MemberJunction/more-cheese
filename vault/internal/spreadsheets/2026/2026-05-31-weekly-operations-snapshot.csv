@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 25 May 2026
+# date: 2026-05-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-05-25
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2026-05-25
+# basis: membership purchases, orders, and cash captured are booked inside 2026-05-25..2026-05-31. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: pulled at week end on 31 May 2026. Figures are complete for the reported week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1561,members,rolling 12 months,final
+membership,membership_purchases,11,purchases,booked in week,final
+membership,first_time_purchases,5,purchases,booked in week,final
+membership,individual_purchases,9,purchases,booked in week,final
+membership,enthusiast_purchases,2,purchases,booked in week,final
+membership,membership_gross,1875,usd,booked in week,final
+orders,confirmed_orders,85,orders,booked in week,final
+orders,orders_gross,25807,usd,booked in week,final
+orders,cancellation_orders,1,orders,booked in week,final
+cash,cash_captured,65,usd,payments in week,final
+events,annual_conference_registrations_taken,47,registrations,EVT-2026-CONF Madison,final
+events,stone_food_safety_registrations_taken,9,registrations,EVT-2026-W1 Bega,final
+education,course_enrollments_taken,24,enrollments,taken in week,final
+education,course_completions,9,completions,completed in week,final
+certifications,certifications_awarded,1,awards,Food Safety and HACCP Certificate,final
+advocacy,advocacy_actions,1,actions,Testimony on raw-milk aging rules,final

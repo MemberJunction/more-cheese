@@ -23,6 +23,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { execFileSync } from 'node:child_process';
 import {
     parseSeedName,
     findUnconsolidatedSeedDeltas,
@@ -335,19 +336,30 @@ test('deliberately retired query files declared in pk-removals.json owe no seed'
     assert.deepEqual(problems, []);
 });
 
+// Pinned to ea8818c, the commit that removed the retired views: the files as they stand now may
+// carry later, legitimate changes (a deleteRecord that does owe a seed), which this test is not about.
+const VIEW_REMOVALS_COMMIT = 'ea8818c';
+
 test('deliberately removed views from filter JSON files declared in pk-removals.json owe no seed', () => {
-    const { problems, changed } = findUnshippedMetadataDrift(
-        REPO_ROOT,
-        state({
-            tag: 'v1.2.1',
-            syncChanged: [
-                'config/user-views/.user-views-filters.json',
-                'config/resource-permissions/.resource-permissions-filter-views.json',
-            ],
-        }),
-    );
-    assert.deepEqual(changed, []);
-    assert.deepEqual(problems, []);
+    const files = [
+        'config/user-views/.user-views-filters.json',
+        'config/resource-permissions/.resource-permissions-filter-views.json',
+    ];
+    const removals = JSON.parse(execFileSync('git', ['-C', REPO_ROOT, 'show', `${VIEW_REMOVALS_COMMIT}:data/pk-removals.json`], { encoding: 'utf8' }));
+    const allowed = new Set(removals.removals.map((r) => String(r.id).toUpperCase()));
+    const tmp = mkdtempSync(path.join(tmpdir(), 'cadence-removals-'));
+    try {
+        for (const f of files) {
+            mkdirSync(path.join(tmp, path.dirname(f)), { recursive: true });
+            writeFileSync(path.join(tmp, f), execFileSync('git', ['-C', REPO_ROOT, 'show', `${VIEW_REMOVALS_COMMIT}:${f}`], { encoding: 'utf8' }));
+        }
+        const fromRepo = (_root, f, tag) => execFileSync('git', ['-C', REPO_ROOT, 'show', `${tag}:${f}`], { encoding: 'utf8' });
+        for (const f of files) {
+            assert.equal(isAllowedRemovalChange(tmp, f, 'v1.2.1', allowed, fromRepo), true, f);
+        }
+    } finally {
+        rmSync(tmp, { recursive: true, force: true });
+    }
 });
 
 test('a deleted file whose id is not in removals still owes a seed', () => {

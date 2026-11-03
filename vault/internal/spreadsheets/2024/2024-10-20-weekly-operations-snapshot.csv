@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot for week of 14 October 2024
+# date: 2024-10-20
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-10-14
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, committees]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/committee-meetings, generated/courses]
+# source: node scripts/vault-facts.mjs week 2024-10-14
+# basis: commerce and operational totals for the window 2024-10-14 to 2024-10-20.
+# caveat: weekly totals are complete as of Sunday 2024-10-20.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1051,members,rolling 12 months,final
+membership,membership_purchases_total,11,purchases,booked in week,final
+membership,membership_purchases_first_time,6,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_individual,9,purchases,booked in week,final
+membership,membership_purchases_enthusiast,1,purchases,booked in week,final
+membership,membership_gross_usd,2015,usd,booked in week,final
+orders,confirmed_orders,12,orders,booked in week,final
+orders,orders_gross_usd,2499,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,3799,usd,payments in week,final
+education,course_enrollments_taken,32,enrollments,taken in week,final
+education,course_completions,16,completions,completed in week,final
+certifications,certifications_awarded,1,awards,Food Safety and HACCP,final
+advocacy,fsma_coalition_meetings,2,meetings,CoalitionMeeting topic,final
+committees,completed_committee_meetings,3,meetings,Standards Ed and Membership,final

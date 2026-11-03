@@ -1,0 +1,40 @@
+# title: Competition entries and weekly operations snapshot, week ending 30 August 2020
+# date: 2020-08-30
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-08-24
+# fictional: true
+# owner_role: Membership Operations
+# tags: [competition, membership, orders, cash, weekly-snapshot]
+# data_sources: [generated/competition-entries, generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2020-08-24 and node scripts/vault-facts.mjs year 2020
+# basis: membership purchases, orders and cash captured are booked inside 2020-08-24..2020-08-30. Competition entries represent cumulative year figures.
+# caveat: pulled on Sunday 30 August 2020. Figures reflect complete week totals where noted.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+competition,total_entries,16,entries,cumulative year,final
+competition,alpine_styles_entries,2,entries,cumulative year,final
+competition,aged_cheddar_territorials_entries,3,entries,cumulative year,final
+competition,fresh_pasta_filata_entries,2,entries,cumulative year,final
+competition,blue_veined_entries,5,entries,cumulative year,final
+competition,soft_ripened_entries,2,entries,cumulative year,final
+competition,washed_rind_entries,2,entries,cumulative year,final
+membership,current_members_at_week_end,411,members,rolling 12 months,final
+membership,membership_purchases_total,4,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,membership_purchases_small_business,1,purchases,booked in week,final
+membership,membership_purchases_individual,3,purchases,booked in week,final
+membership,membership_purchases_gross_usd,814,usd,booked in week,final
+orders,confirmed_orders,12,orders,booked in week,final
+orders,orders_gross_usd,1309,usd,booked in week,final
+orders,cancellations,2,orders,booked in week,final
+cash,cash_captured_usd,1518,usd,payments in week,final
+events,cave_cheesemaking_registrations_taken,6,registrations,taken in week,final
+education,course_completions,6,completions,completed in week,final
+advocacy,fsma_coalition_meetings,1,meetings,held in week,final

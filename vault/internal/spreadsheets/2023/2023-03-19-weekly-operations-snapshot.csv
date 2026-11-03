@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week of 13 March 2023
+# date: 2023-03-19
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-03-13
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/courses]
+# source: node scripts/vault-facts.mjs week 2023-03-13
+# basis: confirmed orders, cash captured, and membership purchases booked during 2023-03-13..2023-03-19. Current members count members whose latest qualifying purchase is within 12 months.
+# caveat: weekly figures compiled at week end. Free webinars carry zero registrations. Course completions reflect active cohorts finishing during the window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,693,members,rolling 12 months,final
+membership,membership_purchases_total,5,purchases,booked in week,final
+membership,first_time_membership_purchases,3,purchases,booked in week,final
+membership,individual_membership_purchases,5,purchases,booked in week,final
+orders,confirmed_orders,5,orders,booked in week,final
+orders,orders_gross,810,usd,booked in week,final
+orders,order_cancellations,0,orders,booked in week,final
+cash,cash_captured,2085,usd,payments in week,final
+events,event_registrations_taken,0,registrations,taken in week,final
+courses,course_enrollments_taken,0,enrollments,taken in week,final
+courses,course_completions,16,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final
+advocacy,advocacy_actions,0,actions,recorded in week,final
+governance,committee_meetings,0,meetings,held in week,final

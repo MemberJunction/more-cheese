@@ -1,0 +1,26 @@
+# title: Member record defects audit, week of 1 December 2025
+# date: 2025-12-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-12-01
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, audit, reconciliation]
+# data_sources: [generated/people, generated/organizations, generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2025-12-01
+# basis: Roster audit conducted across current active members (1430 total at week end) and recent purchases (868 membership purchases total for the period).
+# caveat: Preliminary audit figures pending final deduplication run and payment reconciliation check.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,defect_type,affected_records_count,priority_level,resolution_status,verified_by_analyst
+membership_records,duplicate_profile_pairs,14,high,pending_merge,true
+membership_records,stale_employer_affiliations,29,medium,pending_update,true
+membership_records,bounced_email_addresses,8,low,queued_for_review,false
+membership_records,payment_status_mismatch,19,high,under_investigation,true
+certification_records,unlinked_course_history,6,medium,pending_review,false
+workshop_registrations,unmatched_order_lines,4,high,resolved,true

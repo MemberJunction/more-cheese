@@ -1,0 +1,36 @@
+# title: Membership lapse and renewal audit, week of 21 July 2025
+# date: 2025-07-25
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-07-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, lapses, grace-window, renewals, cash]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2025-07-21
+# basis: membership purchases and order totals booked inside 2025-07-21..2025-07-27. Current members count represents active standings at week end.
+# caveat: figures reflect preliminary weekly totals captured as of Friday 25 July 2025, pending final payment reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+category,metric_name,count_or_amount,unit,status
+membership,current_members_at_week_end,1214,members,preliminary
+membership,total_membership_purchases,10,purchases,preliminary
+membership,first_time_members,4,purchases,preliminary
+membership,individual_tier_purchases,5,purchases,preliminary
+membership,small_business_tier_purchases,2,purchases,preliminary
+membership,enthusiast_tier_purchases,2,purchases,preliminary
+membership,corporate_tier_purchases,1,purchases,preliminary
+membership,membership_gross_sales,2894,usd,preliminary
+orders,confirmed_orders,16,orders,preliminary
+orders,orders_gross_sales,4082,usd,preliminary
+orders,order_cancellations,0,orders,preliminary
+cash,cash_captured,2864,usd,preliminary
+events,event_registrations_taken,4,registrations,preliminary
+education,course_enrollments_taken,0,enrollments,preliminary
+education,course_completions,0,completions,preliminary
+certifications,certifications_enrolled,1,enrollments,preliminary

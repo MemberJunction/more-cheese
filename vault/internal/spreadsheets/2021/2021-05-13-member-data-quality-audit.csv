@@ -1,0 +1,26 @@
+# title: Member records data-quality audit snapshot, week of 10 May 2021
+# date: 2021-05-13
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-05-10
+# fictional: true
+# owner_role: Membership Operations
+# tags: [data-quality, member-records, audit, duplicates]
+# data_sources: [generated/people, generated/organizations, generated/orders]
+# source: node scripts/vault-facts.mjs week 2021-05-10
+# basis: audit metrics covering active records, duplicate flags, stale employer links, and bounced addresses as of 13 May 2021.
+# caveat: preliminary figures pulled mid-week during database reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,issue_type,affected_record_count,resolution_status,owner_role
+people,duplicate_identity_pair,1,pending_verification,Membership Operations
+people,stale_employer_link,14,in_review,Membership Operations
+people,bounced_email_address,23,flagged_for_purge,Communications
+organizations,unverified_address,8,pending_outreach,Membership Operations
+orders,mismatched_payer_id,5,requires_manual_adjustment,Membership Operations
+certifications,prerequisite_identity_split,2,under_investigation,Education & Credentialing

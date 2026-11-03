@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 2023-09-18
+# date: 2023-09-24
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-09-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2023-09-18
+# basis: membership purchases, confirmed orders, and cash captured booked inside 2023-09-18..2023-09-24. Current members count people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: figures are complete for the week ending 24 September 2023.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,827,members,rolling 12 months,final
+membership,membership_purchases_total,7,purchases,booked in week,final
+membership,membership_purchases_first_time,4,purchases,booked in week,final
+membership,membership_purchases_enthusiast,1,purchases,booked in week,final
+membership,membership_purchases_individual,6,purchases,booked in week,final
+membership,membership_purchases_gross,1110,usd,booked in week,final
+orders,confirmed_orders,32,orders,booked in week,final
+orders,orders_gross,4560,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,6184,usd,payments in week,final
+events,workshop_granite_sensory_registrations,23,registrations,taken in week,final
+events,workshop_bloomy_rinds_registrations,2,registrations,taken in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,1,completions,completed in week,final
+certifications,enrolled,0,enrollments,taken in week,final
+certifications,awarded,0,awards,awarded in week,final

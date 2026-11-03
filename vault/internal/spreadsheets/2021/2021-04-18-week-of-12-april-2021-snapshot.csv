@@ -1,0 +1,34 @@
+# title: Week of 12 April 2021 membership and order snapshot (preliminary)
+# date: 2021-04-18
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-04-12
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, preliminary]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2021-04-12
+# basis: all figures are the week's printed output for 12-18 April 2021. PRELIMINARY - orders still processing may move the order and cash lines.
+# caveat: course_completions are other cohorts; no enrollments were taken this week. Event registrations are for the ICF Annual Conference 2021 only.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious trade
+#   association created for the MemberJunction More Cheese demonstration environment. All names,
+#   figures, events, and decisions are invented.
+#
+metric,value,unit,vault_facts_key,status
+current_members_at_week_end,454,members,currentMembersAtWeekEnd,preliminary
+membership_purchases_total,8,periods,membershipPurchases.total,preliminary
+membership_purchases_first_time,4,periods,membershipPurchases.firstTime,preliminary
+membership_purchases_enthusiast,1,periods,membershipPurchases.byTier.Enthusiast,preliminary
+membership_purchases_individual,6,periods,membershipPurchases.byTier.Individual,preliminary
+membership_purchases_corporate,1,periods,membershipPurchases.byTier.Corporate,preliminary
+membership_purchases_gross_usd,1924,usd,membershipPurchases.gross,preliminary
+orders_confirmed,13,orders,orders.confirmed,preliminary
+orders_gross_usd,3300,usd,orders.gross,preliminary
+order_cancellations,1,orders,orders.cancellations,preliminary
+cash_captured_usd,2699,usd,cashCaptured,preliminary
+conference_registrations_taken,4,registrations,eventRegistrationsTaken.EVT-2021-CONF,preliminary
+course_enrollments_taken,0,enrollments,courseEnrollmentsTaken,preliminary
+course_completions,3,completions,courseCompletions,preliminary

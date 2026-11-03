@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 26 May 2025
+# date: 2025-05-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-05-26
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, membership, cash, conference]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2025-05-26
+# basis: orders, payments, membership purchases, and event registrations booked between 2025-05-26 and 2025-06-01. Current members counts qualifying purchases in the trailing 12 months.
+# caveat: pulled at the close of the week on 2025-05-01 equivalent window; figures are complete for the association data window ending 2026-06-20.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1185,members,rolling 12 months,final
+membership,membership_purchases,6,purchases,booked in week,final
+membership,first_time_purchases,9,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,individual_purchases,11,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,enthusiast_purchases,2,purchases,booked in week,final
+membership,membership_gross,3525,usd,booked in week,final
+orders,confirmed_orders,62,orders,booked in week,final
+orders,orders_gross,19688,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,18251,usd,payments in week,final
+events,sacramento_conference_registrations_taken,33,registrations,EVT-2025-CONF,final
+events,events_this_week_count,0,events,scheduled in week,final
+education,course_completions,3,completions,completed in week,final
+education,certification_awards,0,awards,awarded in week,final
+advocacy,interstate_shipment_coalition_meetings,1,meetings,coalition action,final

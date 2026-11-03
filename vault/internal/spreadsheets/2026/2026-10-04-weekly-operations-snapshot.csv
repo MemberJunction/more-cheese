@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot for week ending 2026-10-04
+# date: 2026-10-04
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-09-28
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2026-09-28
+# basis: confirmed orders, membership purchases, and cash captured are booked inside 2026-09-28..2026-10-04. Current members counts total members at week end.
+# caveat: pulled on Sunday 2026-10-04 as complete week totals. Event registrations reflect new sign-ups taken this week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1703,members,rolling 12 months,final
+membership,membership_purchases,29,purchases,booked in week,final
+membership,first_time_purchases,13,purchases,booked in week,final
+membership,small_business_tier_purchases,5,purchases,booked in week,final
+membership,individual_tier_purchases,14,purchases,booked in week,final
+membership,enthusiast_tier_purchases,8,purchases,booked in week,final
+membership,corporate_tier_purchases,2,purchases,booked in week,final
+membership,membership_gross,7650,usd,booked in week,final
+orders,confirmed_orders,99,orders,booked in week,final
+orders,orders_gross,18915,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,18740,usd,payments in week,final
+events,curd_food_safety_registrations_taken,59,registrations,taken in week,final
+events,hollow_export_readiness_registrations_taken,11,registrations,taken in week,final
+advocacy,coalition_meetings_interstate_shipment,1,meetings,held in week,final
+governance,committee_meetings_scheduled,1,meetings,Events Committee Q4,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final

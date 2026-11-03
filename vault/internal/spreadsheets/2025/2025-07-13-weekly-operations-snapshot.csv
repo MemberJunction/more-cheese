@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 7 July 2025
+# date: 2025-07-13
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-07-07
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, annual-conference, membership, cash, orders]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/committee-meetings, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-07-07
+# basis: orders, payments, and memberships booked between 2025-07-07 and 2025-07-13. Current members counts active status at week end.
+# caveat: preliminary figures pulled at week close; conference registration and badge data subject to final on-site reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1210,members,rolling 12 months,preliminary
+membership,membership_purchases,11,purchases,booked in week,preliminary
+membership,first_time_purchases,4,purchases,booked in week,preliminary
+membership,individual_purchases,11,purchases,booked in week,preliminary
+membership,membership_gross,1870,usd,booked in week,preliminary
+orders,confirmed_orders,75,orders,booked in week,preliminary
+orders,orders_gross,28825,usd,booked in week,preliminary
+orders,cancellations,2,orders,booked in week,preliminary
+cash,cash_captured,31651,usd,payments in week,preliminary
+events,conference_registrations_taken,61,registrations,EVT-2025-CONF,preliminary
+events,events_this_week_count,0,events,calendar week,final
+events,events_next_eight_weeks_count,2,events,calendar schedule,final
+education,course_enrollments_taken,0,enrollments,taken in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+certifications,certifications_enrolled,1,enrollments,enrolled in week,preliminary
+certifications,certifications_awarded,0,awards,awarded in week,preliminary
+advocacy,raw_milk_aging_meetings,1,meetings,coalition action,final
+advocacy,interstate_shipment_meetings,1,meetings,coalition action,final
+governance,committee_meetings_held,1,meetings,Education Committee Q3,final

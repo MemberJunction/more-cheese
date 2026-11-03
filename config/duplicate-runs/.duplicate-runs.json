@@ -1,0 +1,902 @@
+[
+  {
+    "fields": {
+      "StartedAt": "2026-10-26T13:45:41.684Z",
+      "EndedAt": "2026-10-26T13:50:43.975Z",
+      "ApprovalStatus": "Pending",
+      "ProcessingStatus": "Complete",
+      "TotalItemCount": 3058,
+      "ProcessedItemCount": 3058,
+      "LastProcessedOffset": 3500,
+      "BatchSize": 500,
+      "CancellationRequested": false,
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People",
+      "EntityDocumentID": "@lookup:MJ: Entity Documents.Name=People Duplicate Detection",
+      "StartedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com"
+    },
+    "primaryKey": {
+      "ID": "4607C9C8-3147-43B2-B84B-B389F28D0736"
+    },
+    "relatedEntities": {
+      "MJ: Duplicate Run Details": [
+        {
+          "fields": {
+            "RecordID": "ID|0611A113-1DCB-5645-9842-1011774C4727",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Sebastian Sokolov\",\"DisplayName\":\"Sebastian Sokolov\",\"FirstName\":\"Sebastian\",\"LastName\":\"Sokolov\",\"Title\":\"Cheesemonger\",\"Email\":\"lsokolov.100725@mailhaven.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"lsokolov.100725@mailhaven.example\",\"PrimaryPhone\":\"+1 (695) 485-9369\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "697844B8-E2C2-4EBE-947D-880A9ED18C5F"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|9DE9D749-4BBD-5725-A91E-D7816440A88F",
+                  "MatchProbability": 0.986158252,
+                  "MatchedAt": "2026-10-26T13:46:31.702Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:31.702Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Fri Jun 07 2002 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"lubomir.sokolov.100725@quillpost.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Sebastian\",\"LastName\":\"Sokolov\",\"MiddleName\":\"\",\"Phone\":\"+1 (695) 485-9369\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Denver\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|9DE9D749-4BBD-5725-A91E-D7816440A88F\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Sebastian Sokolov\",\"DisplayName\":\"Sebastian Sokolov\",\"Title\":\"Cheesemonger\",\"Status\":\"Active\",\"PrimaryEmail\":\"lubomir.sokolov.100725@quillpost.example\",\"PrimaryPhone\":\"+1 (695) 485-9369\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "2FB78EA5-4A22-4E8A-BD99-3C5438931E35"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|0DCCDF10-4B64-55B1-8341-678F8D1C42B3",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Marco Holloway\",\"DisplayName\":\"Marco Holloway\",\"FirstName\":\"Marco\",\"LastName\":\"Holloway\",\"Title\":\"Specialty Cheese Buyer\",\"Email\":\"dholloway.101526@mailhaven.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"dholloway.101526@mailhaven.example\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "2938FF39-23F8-4E87-AE57-FEA60D8DAAC9"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|FDE53E00-B3AE-5E87-8AD3-EB320AC25CB3",
+                  "MatchProbability": 0.949199,
+                  "MatchedAt": "2026-10-26T13:46:32.446Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:32.446Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Tue Nov 23 1976 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"david.holloway.101526@juniperfencheese.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Marco\",\"LastName\":\"Holloway\",\"MiddleName\":\"\",\"Phone\":\"\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"\",\"PrimaryAddressCountry\":\"\",\"RecordID\":\"ID|FDE53E00-B3AE-5E87-8AD3-EB320AC25CB3\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Marco Holloway\",\"DisplayName\":\"Marco Holloway\",\"Title\":\"Specialty Cheese Buyer\",\"Status\":\"Active\",\"PrimaryEmail\":\"david.holloway.101526@juniperfencheese.example\",\"CurrentOrganizationName\":\"Juniperfen Cheese & Provisions\",\"CurrentJobTitle\":\"Specialty Cheese Buyer\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "8A4383D7-90F9-42ED-94FB-ED5866155134"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|0FFA17F6-3FC4-58E0-9E75-8EE811566AAE",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Fabien Horvat\",\"DisplayName\":\"Fabien Horvat\",\"FirstName\":\"Fabien\",\"LastName\":\"Horvat\",\"Email\":\"franciszek.horvat.100237@duboisdaughtersfine.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"franciszek.horvat.100237@duboisdaughtersfine.example\",\"PrimaryPhone\":\"+353 12 939 1929\",\"CurrentOrganizationName\":\"Dubois & Daughters Fine Cheese\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "75E7F42E-5D68-4BFE-984E-7387A138FE56"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|BE2B0270-B52D-5D85-B8E0-7C93F1F49EF2",
+                  "MatchProbability": 0.941189051,
+                  "MatchedAt": "2026-10-26T13:46:32.824Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:32.824Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Fri Aug 17 1979 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"fhorvat.100237@lakemail.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Fabien\",\"LastName\":\"Horvat\",\"MiddleName\":\"\",\"Phone\":\"\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Cork\",\"PrimaryAddressCountry\":\"Ireland\",\"RecordID\":\"ID|BE2B0270-B52D-5D85-B8E0-7C93F1F49EF2\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Fabien Horvat\",\"DisplayName\":\"Fabien Horvat\",\"Status\":\"Active\",\"PrimaryEmail\":\"fhorvat.100237@lakemail.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "936B94D8-EF3E-44B5-88CE-637059384EB8"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|1861D0FF-C272-5DBB-9C83-DBDE98989BEF",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Aiko Ellery\",\"DisplayName\":\"Aiko Ellery\",\"FirstName\":\"Aiko\",\"LastName\":\"Ellery\",\"Title\":\"Affineur\",\"Email\":\"kellery.100678@postfield.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"kellery.100678@postfield.example\",\"PrimaryPhone\":\"+1 (810) 243-1470\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "E7FF02B8-2631-46DB-B31E-48D4ED7D4DB1"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|BF27ECAF-E5CB-5D47-943A-30655F7B90B0",
+                  "MatchProbability": 0.975142181,
+                  "MatchedAt": "2026-10-26T13:46:33.397Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:33.397Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Mon Jun 08 1987 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"karen.lelery.100678@mailhaven.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Aiko\",\"LastName\":\"Ellery\",\"MiddleName\":\"\",\"Phone\":\"+1 (810) 243-1470\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Sonoma\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|BF27ECAF-E5CB-5D47-943A-30655F7B90B0\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Aiko Ellery\",\"DisplayName\":\"Aiko Ellery\",\"Title\":\"Affineur\",\"Status\":\"Active\",\"PrimaryEmail\":\"karen.lelery.100678@mailhaven.example\",\"PrimaryPhone\":\"+1 (810) 243-1470\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "FBA56745-1647-4BAA-8192-E6D9F465DE1B"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|1E8435FE-1903-5AF9-A7D1-7F25E8A4D502",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Henrik Holloway\",\"DisplayName\":\"Henrik Holloway\",\"FirstName\":\"Henrik\",\"LastName\":\"Holloway\",\"Title\":\"Cheesemaker\",\"Email\":\"calvin.holloway.100767@quillpost.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"calvin.holloway.100767@quillpost.example\",\"PrimaryPhone\":\"+1 (624) 658-7573\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "7347C073-37FF-4BA8-82A4-3F1286AEA0BA"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|05B66FBA-6271-5721-B132-DB0CFDA326F9",
+                  "MatchProbability": 0.981347382,
+                  "MatchedAt": "2026-10-26T13:46:32.687Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:32.687Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Sat Feb 01 1969 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"cholloway.100767@mailhaven.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Henrik\",\"LastName\":\"Holloway\",\"MiddleName\":\"\",\"Phone\":\"+1 (624) 658-7573\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Chicago\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|05B66FBA-6271-5721-B132-DB0CFDA326F9\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Henrik Holloway\",\"DisplayName\":\"Henrik Holloway\",\"Title\":\"Cheesemaker\",\"Status\":\"Active\",\"PrimaryEmail\":\"cholloway.100767@mailhaven.example\",\"PrimaryPhone\":\"+1 (624) 658-7573\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "BD60F5F7-497C-422A-8254-FA14DC2CC4BD"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|22254D39-F90F-51E8-BC4B-0C3E334BE1EB",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Linh Barrera\",\"DisplayName\":\"Linh Barrera\",\"FirstName\":\"Linh\",\"LastName\":\"Barrera\",\"Title\":\"Cheese Buyer\",\"Email\":\"mbarrera.100775@quillpost.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"mbarrera.100775@quillpost.example\",\"PrimaryPhone\":\"+54 10 5127-0401\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "0AF2D50B-9A3E-4F7B-9442-C2CF4D874AD0"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|6CDA7615-B7FE-5AFD-9876-52EE1CC96F7B",
+                  "MatchProbability": 0.939797878,
+                  "MatchedAt": "2026-10-26T13:46:31.640Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:31.640Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Thu Nov 11 1982 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"marisol.barrera.100775@elderfencheeseprovisions.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Linh\",\"LastName\":\"Barrera\",\"MiddleName\":\"Castillo\",\"Phone\":\"+54 10 5127-0401\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"\",\"PrimaryAddressCountry\":\"\",\"RecordID\":\"ID|6CDA7615-B7FE-5AFD-9876-52EE1CC96F7B\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Linh Barrera\",\"DisplayName\":\"Linh Barrera\",\"Title\":\"Cheese Buyer\",\"Status\":\"Active\",\"PrimaryEmail\":\"marisol.barrera.100775@elderfencheeseprovisions.example\",\"PrimaryPhone\":\"+54 10 5127-0401\",\"CurrentOrganizationName\":\"Elderfen Cheese & Provisions\",\"CurrentJobTitle\":\"Cheese Buyer\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "2705B393-E860-45C8-A272-B14061ECEE2C"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|29A614E6-2977-5DC4-96E4-4F536D7A7363",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Piotr Andersen\",\"DisplayName\":\"Piotr Andersen\",\"FirstName\":\"Piotr\",\"LastName\":\"Andersen\",\"Title\":\"Owner\",\"Email\":\"bandersen.100684@lakemail.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"bandersen.100684@lakemail.example\",\"PrimaryPhone\":\"+1 (305) 278-4849\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "042113FE-814A-4DE6-9EE6-60077F1AE35F"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|FED4E52E-5458-57BE-9A24-5862E4978266",
+                  "MatchProbability": 0.982876122,
+                  "MatchedAt": "2026-10-26T13:46:32.259Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:46:32.259Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Thu Mar 16 1989 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"bram.andersen.100684@homestead.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Piotr\",\"LastName\":\"Andersen\",\"MiddleName\":\"\",\"Phone\":\"+1 (305) 278-4849\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Brooklyn\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|FED4E52E-5458-57BE-9A24-5862E4978266\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Piotr Andersen\",\"DisplayName\":\"Piotr Andersen\",\"Title\":\"Owner\",\"Status\":\"Active\",\"PrimaryEmail\":\"bram.andersen.100684@homestead.example\",\"PrimaryPhone\":\"+1 (305) 278-4849\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "4E3CEAC9-5BAE-43C8-BBA9-D7C7AE01405C"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|36AE6A4F-0BD3-5A90-83F6-D9D9CC2E5D1B",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Lucia Almeida\",\"DisplayName\":\"Lucia Almeida\",\"FirstName\":\"Lucia\",\"LastName\":\"Almeida\",\"Title\":\"Owner\",\"Email\":\"balmeida.101704@lakemail.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"balmeida.101704@lakemail.example\",\"PrimaryPhone\":\"+44 0354 596965\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "4BFAFCF2-24EA-4A79-A878-1E6C210E21CF"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|8202269B-9B33-507A-BEAC-E73F3647E769",
+                  "MatchProbability": 0.975197196,
+                  "MatchedAt": "2026-10-26T13:47:22.309Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:47:22.309Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Thu Dec 20 1951 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"beatriz.almeida.101704@heathercombecheesemaking.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Lucia\",\"LastName\":\"Almeida\",\"MiddleName\":\"\",\"Phone\":\"+44 0354 596965\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Ludlow\",\"PrimaryAddressCountry\":\"United Kingdom\",\"RecordID\":\"ID|8202269B-9B33-507A-BEAC-E73F3647E769\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Lucia Almeida\",\"DisplayName\":\"Lucia Almeida\",\"Title\":\"Owner\",\"Status\":\"Active\",\"PrimaryEmail\":\"beatriz.almeida.101704@heathercombecheesemaking.example\",\"PrimaryPhone\":\"+44 0354 596965\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "D6957E33-6087-4C5F-A684-F0783128843B"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|399FF3F5-7BD3-5A74-819A-771F7097FC7C",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Oleg Kulkarni\",\"DisplayName\":\"Oleg Kulkarni\",\"FirstName\":\"Oleg\",\"LastName\":\"Kulkarni\",\"Title\":\"Quality Manager\",\"Email\":\"akulkarni.100207@postfield.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"akulkarni.100207@postfield.example\",\"PrimaryPhone\":\"+1 (656) 835-6576\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "F6872EEA-3769-446F-B57A-79C551D11B73"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|E1E3F82E-515C-5C13-9F02-C677CE03B098",
+                  "MatchProbability": 0.985140443,
+                  "MatchedAt": "2026-10-26T13:47:21.529Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:47:21.529Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Wed Nov 08 1989 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"anil.kulkarni.100207@sorrelgatedairysystems.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Oleg\",\"LastName\":\"Kulkarni\",\"MiddleName\":\"A.\",\"Phone\":\"+1 (656) 835-6576\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Courtenay\",\"PrimaryAddressCountry\":\"Canada\",\"RecordID\":\"ID|E1E3F82E-515C-5C13-9F02-C677CE03B098\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Oleg Kulkarni\",\"DisplayName\":\"Oleg Kulkarni\",\"Title\":\"Quality Manager\",\"Status\":\"Active\",\"PrimaryEmail\":\"anil.kulkarni.100207@sorrelgatedairysystems.example\",\"PrimaryPhone\":\"+1 (656) 835-6576\",\"CurrentOrganizationName\":\"Sorrelgate Dairy Systems\",\"CurrentJobTitle\":\"Quality Manager\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "0E3CB29F-6411-496C-9BB7-5C802805198F"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|3BB95F23-5007-53FC-A84D-6DBCAA57F4AE",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Frida Norwood\",\"DisplayName\":\"Frida Norwood\",\"FirstName\":\"Frida\",\"LastName\":\"Norwood\",\"Title\":\"Cheesemaker\",\"Email\":\"hannah.norwood.100176@quillpost.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"hannah.norwood.100176@quillpost.example\",\"PrimaryPhone\":\"+1 (887) 155-7373\",\"CurrentOrganizationName\":\"Aldermere Dairy\",\"CurrentJobTitle\":\"Cheesemaker\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "386D0BFC-7D85-4AA8-B276-2B53C047AE7E"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|D4630019-4073-55AD-A1A2-7DC983721F7F",
+                  "MatchProbability": 0.980233729,
+                  "MatchedAt": "2026-10-26T13:47:21.464Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:47:21.464Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Tue Sep 01 1981 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"hnorwood.100176@mailhaven.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Frida\",\"LastName\":\"Norwood\",\"MiddleName\":\"\",\"Phone\":\"+1 (887) 155-7373\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Courtenay\",\"PrimaryAddressCountry\":\"Canada\",\"RecordID\":\"ID|D4630019-4073-55AD-A1A2-7DC983721F7F\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Frida Norwood\",\"DisplayName\":\"Frida Norwood\",\"Title\":\"Cheesemaker\",\"Status\":\"Active\",\"PrimaryEmail\":\"hnorwood.100176@mailhaven.example\",\"PrimaryPhone\":\"+1 (887) 155-7373\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "F0A5AE18-0ED4-4775-A196-9A3485FEBA97"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|3E5B4803-778B-5FE8-9626-468C8D30C39C",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Kiran Fischer\",\"DisplayName\":\"Kiran Fischer\",\"FirstName\":\"Kiran\",\"LastName\":\"Fischer\",\"Title\":\"Owner\",\"Email\":\"gunnar.fischer.102056@stonewickcheesemonger.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"gunnar.fischer.102056@stonewickcheesemonger.example\",\"PrimaryPhone\":\"+1 (357) 703-6750\",\"CurrentOrganizationName\":\"Stonewick Cheesemonger\",\"CurrentJobTitle\":\"Owner\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "598FB6A8-CD37-403D-AB19-EC97BED57ABC"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|CA4498CC-CC79-512A-AF35-55401E662AD3",
+                  "MatchProbability": 0.962441146,
+                  "MatchedAt": "2026-10-26T13:47:21.212Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:47:21.212Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Fri Jan 01 1965 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"gfischer.102056@quillpost.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Kiran\",\"LastName\":\"Fischer\",\"MiddleName\":\"\",\"Phone\":\"\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Sonoma\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|CA4498CC-CC79-512A-AF35-55401E662AD3\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Kiran Fischer\",\"DisplayName\":\"Kiran Fischer\",\"Title\":\"Owner\",\"Status\":\"Active\",\"PrimaryEmail\":\"gfischer.102056@quillpost.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "B960D362-E134-4933-B4B7-B29CE0F46CDC"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|43584488-DDA4-54F3-B217-3A273ED79141",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Irina Grantham\",\"DisplayName\":\"Irina Grantham\",\"FirstName\":\"Irina\",\"LastName\":\"Grantham\",\"Title\":\"Assistant Cheesemaker\",\"Email\":\"fiona.grantham.100140@bluebarn.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"fiona.grantham.100140@bluebarn.example\",\"PrimaryPhone\":\"+1 (419) 121-7002\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "7C8831DE-6DC0-4419-A250-10FDD13798BF"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|F683B206-3458-545D-9897-D57643E6B2B0",
+                  "MatchProbability": 0.964410961,
+                  "MatchedAt": "2026-10-26T13:47:21.139Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:47:21.139Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Sun May 31 1970 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"fgrantham.100140@homestead.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Irina\",\"LastName\":\"Grantham\",\"MiddleName\":\"J.\",\"Phone\":\"\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Sonoma\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|F683B206-3458-545D-9897-D57643E6B2B0\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Irina Grantham\",\"DisplayName\":\"Irina Grantham\",\"Title\":\"Assistant Cheesemaker\",\"Status\":\"Active\",\"PrimaryEmail\":\"fgrantham.100140@homestead.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "A9990EBA-6B91-4236-BAA5-9DE938C5BA6F"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|517D8486-526F-54F9-B838-CBB0F4BDB8DD",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Yun Jaramillo\",\"DisplayName\":\"Yun Jaramillo\",\"FirstName\":\"Yun\",\"LastName\":\"Jaramillo\",\"Title\":\"Cheesemonger\",\"Email\":\"mjaramillo.101460@homestead.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"mjaramillo.101460@homestead.example\",\"PrimaryPhone\":\"+34 999 831 157\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "8F800D5E-1833-47CA-8775-CA707F100EE8"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|83C97F89-5D34-5613-A043-675DE6D2EE88",
+                  "MatchProbability": 0.981849313,
+                  "MatchedAt": "2026-10-26T13:47:22.179Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:47:22.179Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Mon Oct 26 1981 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"marco.jaramillo.101460@verhoevenfarmstead.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Yun\",\"LastName\":\"Jaramillo\",\"MiddleName\":\"\",\"Phone\":\"+34 999 831 157\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Cabrales\",\"PrimaryAddressCountry\":\"Spain\",\"RecordID\":\"ID|83C97F89-5D34-5613-A043-675DE6D2EE88\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Yun Jaramillo\",\"DisplayName\":\"Yun Jaramillo\",\"Title\":\"Cheesemonger\",\"Status\":\"Active\",\"PrimaryEmail\":\"marco.jaramillo.101460@verhoevenfarmstead.example\",\"PrimaryPhone\":\"+34 999 831 157\",\"CurrentOrganizationName\":\"Verhoeven Farmstead Creamery\",\"CurrentJobTitle\":\"Cheesemonger\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "44287AE9-D97D-4252-AE6A-411F18C27A74"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|550491E2-64E9-57DC-8EF9-62C176752D66",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Aurelie Guerrero\",\"DisplayName\":\"Aurelie Guerrero\",\"FirstName\":\"Aurelie\",\"LastName\":\"Guerrero\",\"Title\":\"Production Lead\",\"Email\":\"aguerrero.102309@mailhaven.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"aguerrero.102309@mailhaven.example\",\"PrimaryPhone\":\"+1 (853) 732-2693\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "41645D03-9CEE-4D62-82B5-7561A8E5DAA6"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|890C56A5-5A50-5AFE-AD58-6C03A8CD0C42",
+                  "MatchProbability": 0.982445419,
+                  "MatchedAt": "2026-10-26T13:48:08.723Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:08.723Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Mon Oct 17 1955 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"amelia.guerrero.102309@pinebarrowcheese.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Aurelie\",\"LastName\":\"Guerrero\",\"MiddleName\":\"\",\"Phone\":\"+1 (853) 732-2693\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Chicago\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|890C56A5-5A50-5AFE-AD58-6C03A8CD0C42\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Aurelie Guerrero\",\"DisplayName\":\"Aurelie Guerrero\",\"Title\":\"Production Lead\",\"Status\":\"Active\",\"PrimaryEmail\":\"amelia.guerrero.102309@pinebarrowcheese.example\",\"PrimaryPhone\":\"+1 (853) 732-2693\",\"CurrentOrganizationName\":\"Pinebarrow Cheese & Provisions\",\"CurrentJobTitle\":\"Production Lead\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "52C54286-E689-4BB1-8890-773A3FC0CA37"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|6EEC828C-B7FE-517C-B0AC-AB3C52D6A452",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Oleg Brigham\",\"DisplayName\":\"Oleg Brigham\",\"FirstName\":\"Oleg\",\"LastName\":\"Brigham\",\"Title\":\"Principal\",\"Email\":\"cbrigham.100050@homestead.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"cbrigham.100050@homestead.example\",\"PrimaryPhone\":\"+1 (956) 673-9435\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "73C0CCB8-48EE-47BA-89E1-EB02108763DA"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|B7A26597-C4D5-53DB-90B3-52C94AB6F948",
+                  "MatchProbability": 0.984252512,
+                  "MatchedAt": "2026-10-26T13:48:09.216Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:09.216Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Tue Feb 13 1968 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"cole.brigham.100050@dovetarncheeseprovisions.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Oleg\",\"LastName\":\"Brigham\",\"MiddleName\":\"Y.\",\"Phone\":\"+1 (956) 673-9435\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Madison\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|B7A26597-C4D5-53DB-90B3-52C94AB6F948\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Oleg Brigham\",\"DisplayName\":\"Oleg Brigham\",\"Title\":\"Principal\",\"Status\":\"Active\",\"PrimaryEmail\":\"cole.brigham.100050@dovetarncheeseprovisions.example\",\"PrimaryPhone\":\"+1 (956) 673-9435\",\"CurrentOrganizationName\":\"Dovetarn Cheese & Provisions\",\"CurrentJobTitle\":\"Principal\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "9B49004E-12E8-4891-AB5D-B76C3D25E19B"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|80CA69BC-4E1E-5633-8263-FC90FB2205D7",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Avery Huang\",\"DisplayName\":\"Avery Huang\",\"FirstName\":\"Avery\",\"LastName\":\"Huang\",\"Title\":\"Cheesemaker\",\"Email\":\"jing.huang.101463@ottermerecheeseschool.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"jing.huang.101463@ottermerecheeseschool.example\",\"PrimaryPhone\":\"+1 (606) 290-1047\",\"CurrentOrganizationName\":\"Ottermere Cheese School\",\"CurrentJobTitle\":\"Cheesemaker\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "5BF3A8F4-14B5-44BA-A7E5-4E5A966FAB02"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|CA29B152-5D1E-5011-AF75-19EF5A57D8CC",
+                  "MatchProbability": 0.930342,
+                  "MatchedAt": "2026-10-26T13:48:57.417Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:57.417Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Wed Feb 14 1973 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"jing.huang.101389@duboisfarmstead.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Avery\",\"LastName\":\"Huang\",\"MiddleName\":\"\",\"Phone\":\"+1 (797) 355-4946\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Brooklyn\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|CA29B152-5D1E-5011-AF75-19EF5A57D8CC\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Avery Huang\",\"DisplayName\":\"Avery Huang\",\"Title\":\"Principal\",\"Status\":\"Active\",\"PrimaryEmail\":\"jing.huang.101389@duboisfarmstead.example\",\"PrimaryPhone\":\"+1 (797) 355-4946\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "95CF140A-AF46-4AD7-89BF-1EB5849048B6"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|989F0794-324F-5104-A93D-808E124E53A8",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Alessia Moretti\",\"DisplayName\":\"Alessia Moretti\",\"FirstName\":\"Alessia\",\"LastName\":\"Moretti\",\"Title\":\"Regional Sales Director\",\"Email\":\"cmoretti.100994@bluebarn.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"cmoretti.100994@bluebarn.example\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "08978BEB-B2A0-4F77-A673-0F4A0BA722A2"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|B9D53854-D395-5062-A403-58E88DE28744",
+                  "MatchProbability": 0.966090739,
+                  "MatchedAt": "2026-10-26T13:48:56.506Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:56.506Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Tue Jun 06 1978 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"carlotta.moretti.100994@damsonwickcreamery.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Alessia\",\"LastName\":\"Moretti\",\"MiddleName\":\"L.\",\"Phone\":\"+39 782 173 7744\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Sassari\",\"PrimaryAddressCountry\":\"Italy\",\"RecordID\":\"ID|B9D53854-D395-5062-A403-58E88DE28744\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Alessia Moretti\",\"DisplayName\":\"Alessia Moretti\",\"Title\":\"Regional Sales Director\",\"Status\":\"Active\",\"PrimaryEmail\":\"carlotta.moretti.100994@damsonwickcreamery.example\",\"PrimaryPhone\":\"+39 782 173 7744\",\"CurrentOrganizationName\":\"Damsonwick Creamery Cooperative\",\"CurrentJobTitle\":\"Regional Sales Director\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "1035FAD0-499A-42DC-9AEB-359EF6CAA369"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|997880E4-6606-5BDC-8439-3C3EE498B072",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Greta Suzuki III\",\"DisplayName\":\"Greta Suzuki III\",\"FirstName\":\"Greta\",\"LastName\":\"Suzuki\",\"Title\":\"Cheesemaker\",\"Email\":\"ayumi.suzuki.100456@mailhaven.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"ayumi.suzuki.100456@mailhaven.example\",\"PrimaryPhone\":\"+81 03 3326 5706\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "998B50D3-8666-46B9-A915-10CA6B2F65E6"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|D65C0A88-D622-5E39-819C-2A8C640358E6",
+                  "MatchProbability": 0.986365438,
+                  "MatchedAt": "2026-10-26T13:48:55.915Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:55.915Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Fri Jun 10 1994 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"asuzuki.100456@postfield.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Greta\",\"LastName\":\"Suzuki\",\"MiddleName\":\"\",\"Phone\":\"+81 03 3326 5706\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Hokkaido\",\"PrimaryAddressCountry\":\"Japan\",\"RecordID\":\"ID|D65C0A88-D622-5E39-819C-2A8C640358E6\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Greta Suzuki\",\"DisplayName\":\"Greta Suzuki\",\"Title\":\"Cheesemaker\",\"Status\":\"Active\",\"PrimaryEmail\":\"asuzuki.100456@postfield.example\",\"PrimaryPhone\":\"+81 03 3326 5706\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "287CE4D0-E250-48D1-A903-D65B24B14969"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|9F2AB7D8-5D57-5359-870A-5271E1819E5F",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Sanne Holloway\",\"DisplayName\":\"Sanne Holloway\",\"FirstName\":\"Sanne\",\"LastName\":\"Holloway\",\"Title\":\"Technical Sales Representative\",\"Email\":\"charlotte.holloway.101066@lakemail.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"charlotte.holloway.101066@lakemail.example\",\"PrimaryPhone\":\"+1 (220) 973-8095\",\"CurrentOrganizationName\":\"Rimefield Center for Cheese Studies\",\"CurrentJobTitle\":\"Technical Sales Representative\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "FF970E31-F8F7-4B5B-B475-07923A6ADC85"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|D4A753C7-AC86-5BAB-8B4C-50D46F2E97D2",
+                  "MatchProbability": 0.943902135,
+                  "MatchedAt": "2026-10-26T13:48:56.087Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:56.087Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Tue Aug 07 1962 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"cholloway.101066@quillpost.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Sanne\",\"LastName\":\"Holloway\",\"MiddleName\":\"H.\",\"Phone\":\"+1 (220) 973-8095\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Burlington\",\"PrimaryAddressCountry\":\"United States\",\"RecordID\":\"ID|D4A753C7-AC86-5BAB-8B4C-50D46F2E97D2\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Sanne Holloway\",\"DisplayName\":\"Sanne Holloway\",\"Title\":\"Technical Sales Representative\",\"Status\":\"Active\",\"PrimaryEmail\":\"cholloway.101066@quillpost.example\",\"PrimaryPhone\":\"+1 (220) 973-8095\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "CE57D640-C7D7-45F9-948A-433BA2DF0F15"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|9FA53977-456E-5345-A7E5-035669684E0D",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Oleg Agarwal\",\"DisplayName\":\"Oleg Agarwal\",\"FirstName\":\"Oleg\",\"LastName\":\"Agarwal\",\"Title\":\"Production Lead\",\"Email\":\"manish.agarwal.100467@bramblewickfarm.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"manish.agarwal.100467@bramblewickfarm.example\",\"PrimaryPhone\":\"+61 8 8322 1968\",\"CurrentOrganizationName\":\"Bramblewick Farm\",\"CurrentJobTitle\":\"Production Lead\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "FE26F37C-2763-4345-8089-517B459B4462"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|A19D6D6F-582B-5037-A594-F0BB615BEEB7",
+                  "MatchProbability": 0.984152198,
+                  "MatchedAt": "2026-10-26T13:48:55.630Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:48:55.630Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Fri Feb 01 1974 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"magarwal.100467@homestead.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Oleg\",\"LastName\":\"Agarwal\",\"MiddleName\":\"\",\"Phone\":\"+61 8 8322 1968\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Bega\",\"PrimaryAddressCountry\":\"Australia\",\"RecordID\":\"ID|A19D6D6F-582B-5037-A594-F0BB615BEEB7\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Oleg Agarwal\",\"DisplayName\":\"Oleg Agarwal\",\"Title\":\"Production Lead\",\"Status\":\"Active\",\"PrimaryEmail\":\"magarwal.100467@homestead.example\",\"PrimaryPhone\":\"+61 8 8322 1968\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "5F9D9B9D-1922-42FC-A2F2-A5F50B2F2629"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|ABEB6F85-CBE2-5C4F-82BA-184771F263F9",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Elodie Ferrier\",\"DisplayName\":\"Elodie Ferrier\",\"FirstName\":\"Elodie\",\"LastName\":\"Ferrier\",\"Title\":\"Owner\",\"Email\":\"aferrier.100071@mailhaven.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"aferrier.100071@mailhaven.example\",\"PrimaryPhone\":\"+1 (786) 673-1624\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "C22174A4-0DD9-4C02-B4AD-1F2DCFB736CA"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|DF763A52-A8E9-57B6-BD0D-0EFF68CAE6E1",
+                  "MatchProbability": 0.983401716,
+                  "MatchedAt": "2026-10-26T13:49:44.437Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:49:44.437Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Sat Sep 14 1974 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"amelia.ferrier.100071@quillpost.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Elodie\",\"LastName\":\"Ferrier\",\"MiddleName\":\"S.\",\"Phone\":\"+1 (786) 673-1624\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Courtenay\",\"PrimaryAddressCountry\":\"Canada\",\"RecordID\":\"ID|DF763A52-A8E9-57B6-BD0D-0EFF68CAE6E1\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Elodie Ferrier\",\"DisplayName\":\"Elodie Ferrier\",\"Title\":\"Owner\",\"Status\":\"Active\",\"PrimaryEmail\":\"amelia.ferrier.100071@quillpost.example\",\"PrimaryPhone\":\"+1 (786) 673-1624\",\"CurrentOrganizationName\":\"Damsonwick Dairy Institute\",\"CurrentJobTitle\":\"Owner\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "CDD05204-3BCD-426E-A838-939A6BF9AD7A"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|B2CC9998-6BA2-5190-9FD3-432B69916CAF",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Nadege Lambert\",\"DisplayName\":\"Nadege Lambert\",\"FirstName\":\"Nadege\",\"LastName\":\"Lambert\",\"Title\":\"Account Manager\",\"Email\":\"camille.lambert.101267@postfield.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"camille.lambert.101267@postfield.example\",\"PrimaryPhone\":\"+41 90 491 33 72\",\"CurrentOrganizationName\":\"Brackenfell Dairy Institute\",\"CurrentJobTitle\":\"Account Manager\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "ABFABE36-96B6-4629-884F-897DF5F76AE0"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|BCF5D849-5B9E-50AB-A594-5DFC61BF68E5",
+                  "MatchProbability": 0.942531109,
+                  "MatchedAt": "2026-10-26T13:49:44.717Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:49:44.717Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Thu May 11 1978 20:00:00 GMT-0400 (Eastern Daylight Time)\",\"Email\":\"clambert.101267@bluebarn.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Nadege\",\"LastName\":\"Lambert\",\"MiddleName\":\"\",\"Phone\":\"\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Emmental\",\"PrimaryAddressCountry\":\"Switzerland\",\"RecordID\":\"ID|BCF5D849-5B9E-50AB-A594-5DFC61BF68E5\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Nadege Lambert\",\"DisplayName\":\"Nadege Lambert\",\"Title\":\"Account Manager\",\"Status\":\"Active\",\"PrimaryEmail\":\"clambert.101267@bluebarn.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "E205BB8E-0D32-4454-A1AD-3A4C34A40C2C"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|DFD69A78-E4DB-5465-B5A6-7F4DD7CEEFCC",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: People\",\"EntityIcon\":\"fa fa-users\",\"Name\":\"Kate Schuster\",\"DisplayName\":\"Kate Schuster\",\"FirstName\":\"Kate\",\"LastName\":\"Schuster\",\"Title\":\"Store Manager\",\"Email\":\"aschuster.101893@postfield.example\",\"Status\":\"Active\",\"PrimaryEmail\":\"aschuster.101893@postfield.example\",\"PrimaryPhone\":\"+45 83 09 36 29\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "8D5AB7B6-3BE4-48C9-BD4E-11C8AAB6D251"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|D70D7E41-4317-5592-BD3F-B17DE155D3F9",
+                  "MatchProbability": 0.973130822,
+                  "MatchedAt": "2026-10-26T13:50:35.645Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:50:35.645Z",
+                  "RecordMetadata": "{\"DateOfBirth\":\"Sat Nov 30 1974 19:00:00 GMT-0500 (Eastern Standard Time)\",\"Email\":\"antje.schuster.101893@corbiemoordairy.example\",\"Entity\":\"MJ_BizApps_Common: People\",\"EntityDocumentID\":\"1BCD53D7-638C-43AA-A35B-6F0D239FC557\",\"EntityIcon\":\"fa fa-users\",\"FirstName\":\"Kate\",\"LastName\":\"Schuster\",\"MiddleName\":\"\",\"Phone\":\"\",\"PreferredName\":\"\",\"PrimaryAddressCity\":\"Aarhus\",\"PrimaryAddressCountry\":\"Denmark\",\"RecordID\":\"ID|D70D7E41-4317-5592-BD3F-B17DE155D3F9\",\"TemplateID\":\"047F4CB3-50A2-4698-8566-D84D03977145\",\"Name\":\"Kate Schuster\",\"DisplayName\":\"Kate Schuster\",\"Title\":\"Store Manager\",\"Status\":\"Active\",\"PrimaryEmail\":\"antje.schuster.101893@corbiemoordairy.example\",\"CurrentOrganizationName\":\"Corbiemoor Dairy\",\"CurrentJobTitle\":\"Store Manager\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "3435CECD-9803-4530-BADA-A44E18ECD7FF"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "fields": {
+      "StartedAt": "2026-10-26T13:51:55.423Z",
+      "EndedAt": "2026-10-26T13:52:59.283Z",
+      "ApprovalStatus": "Pending",
+      "ProcessingStatus": "Complete",
+      "TotalItemCount": 641,
+      "ProcessedItemCount": 641,
+      "LastProcessedOffset": 1000,
+      "BatchSize": 500,
+      "CancellationRequested": false,
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations",
+      "EntityDocumentID": "@lookup:MJ: Entity Documents.Name=Organizations Duplicate Detection",
+      "StartedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com"
+    },
+    "primaryKey": {
+      "ID": "90771306-4692-449B-8F0C-80D9DAB109DE"
+    },
+    "relatedEntities": {
+      "MJ: Duplicate Run Details": [
+        {
+          "fields": {
+            "RecordID": "ID|21800A48-0979-5A38-A47F-66DB03226894",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: Organizations\",\"EntityIcon\":\"fa fa-building\",\"Name\":\"Nettlewick Cheese Co.\",\"Phone\":\"+45 30 92 28 76\",\"Status\":\"Dissolved\",\"OrganizationType\":\"Sole Proprietorship\",\"PrimaryAddressCity\":\"Aarhus\",\"PrimaryAddressCountry\":\"Denmark\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "E72139E5-FAC9-4508-8DD8-0101A5680AEC"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|FAB192DD-5289-53BA-8328-C4F224632C7B",
+                  "MatchProbability": 0.96435678,
+                  "MatchedAt": "2026-10-26T13:52:43.176Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:52:43.176Z",
+                  "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: Organizations\",\"EntityDocumentID\":\"03790917-5B5D-40A8-BC0F-0949E836C89C\",\"EntityIcon\":\"fa fa-building\",\"LegalName\":\"Nettlewick Cheesemonger ApS\",\"Name\":\"Nettlewick Cheesemonger\",\"Phone\":\"+45 66 05 91 58\",\"PrimaryAddressCity\":\"Aarhus\",\"PrimaryAddressCountry\":\"Denmark\",\"RecordID\":\"ID|FAB192DD-5289-53BA-8328-C4F224632C7B\",\"TemplateID\":\"74A64285-EDD9-49B4-90E1-4547779A7180\",\"Website\":\"https://www.nettlewickcheesemonger.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "889434EE-D3AE-4057-8ABC-BFFF90F46188"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|49F8D031-623B-551A-9B52-96DBF1387AD8",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: Organizations\",\"EntityIcon\":\"fa fa-building\",\"Name\":\"Orchardmere Cheese & Provisions\",\"Status\":\"Active\",\"OrganizationType\":\"Corporation\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "164AFE88-68AB-4B37-A5BF-D37A7717A55E"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|09E61B9F-0526-50A7-A32F-EAB97C98F37D",
+                  "MatchProbability": 1.00000167,
+                  "MatchedAt": "2026-10-26T13:52:43.543Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:52:43.543Z",
+                  "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: Organizations\",\"EntityDocumentID\":\"03790917-5B5D-40A8-BC0F-0949E836C89C\",\"EntityIcon\":\"fa fa-building\",\"LegalName\":\"Orchardmere Cheese & Provisions Inc.\",\"Name\":\"Orchardmere Cheese & Provisions\",\"Phone\":\"\",\"PrimaryAddressCity\":\"\",\"PrimaryAddressCountry\":\"\",\"RecordID\":\"ID|09E61B9F-0526-50A7-A32F-EAB97C98F37D\",\"TemplateID\":\"74A64285-EDD9-49B4-90E1-4547779A7180\",\"Website\":\"https://www.orchardmerecheese.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "AABCF0A9-2AD2-4605-8479-AFBB53A84601"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "fields": {
+            "RecordID": "ID|4BD0E465-04B7-56FA-A958-A261A7A5D387",
+            "MatchStatus": "Complete",
+            "MergeStatus": "Pending",
+            "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: Organizations\",\"EntityIcon\":\"fa fa-building\",\"Name\":\"Heathercombe Cheesemonger\",\"Status\":\"Active\",\"OrganizationType\":\"Corporation\",\"PrimaryAddressCity\":\"Hokkaido\",\"PrimaryAddressCountry\":\"Japan\"}",
+            "DuplicateRunID": "@parent:ID"
+          },
+          "primaryKey": {
+            "ID": "761B7F91-3398-4E62-9099-7E089189266A"
+          },
+          "relatedEntities": {
+            "MJ: Duplicate Run Detail Matches": [
+              {
+                "fields": {
+                  "MatchSource": "Vector",
+                  "MatchRecordID": "ID|BB357F63-06D2-5529-86A5-EC6ADD0FBDA7",
+                  "MatchProbability": 0.962148726,
+                  "MatchedAt": "2026-10-26T13:52:43.641Z",
+                  "ApprovalStatus": "Pending",
+                  "MergeStatus": "Pending",
+                  "MergedAt": "2026-10-26T13:52:43.641Z",
+                  "RecordMetadata": "{\"Entity\":\"MJ_BizApps_Common: Organizations\",\"EntityDocumentID\":\"03790917-5B5D-40A8-BC0F-0949E836C89C\",\"EntityIcon\":\"fa fa-building\",\"LegalName\":\"Thistlemere Cheesemonger K.K.\",\"Name\":\"Thistlemere Cheesemonger\",\"Phone\":\"\",\"PrimaryAddressCity\":\"Hokkaido\",\"PrimaryAddressCountry\":\"Japan\",\"RecordID\":\"ID|BB357F63-06D2-5529-86A5-EC6ADD0FBDA7\",\"TemplateID\":\"74A64285-EDD9-49B4-90E1-4547779A7180\",\"Website\":\"https://www.thistlemerecheesemonger.example\"}",
+                  "DuplicateRunDetailID": "@parent:ID"
+                },
+                "primaryKey": {
+                  "ID": "50161B71-31D3-4971-A721-49FE7448DEF1"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "fields": {
+      "StartedAt": "2026-10-26T13:53:21.740Z",
+      "EndedAt": "2026-10-26T13:53:23.891Z",
+      "ApprovalStatus": "Pending",
+      "ProcessingStatus": "Complete",
+      "TotalItemCount": 16,
+      "ProcessedItemCount": 16,
+      "LastProcessedOffset": 500,
+      "BatchSize": 500,
+      "CancellationRequested": false,
+      "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Products",
+      "EntityDocumentID": "@lookup:MJ: Entity Documents.Name=Products Duplicate Detection",
+      "StartedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com"
+    },
+    "primaryKey": {
+      "ID": "70D18A7F-EA5E-4AF0-B10B-EED4D03F49D5"
+    },
+    "relatedEntities": {
+      "MJ: Duplicate Run Details": []
+    }
+  }
+]

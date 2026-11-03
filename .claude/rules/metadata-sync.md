@@ -113,9 +113,12 @@ SQL inserts:
 ## File organization
 
 - One subdirectory per entity: `.mj-sync.json` (entity name + push/pull options)
-  plus `.<records>.json` (an array of `{ "fields": {...} }` objects).
-- New records **omit `primaryKey` and `sync`** — mj-sync writes them back on
-  first push. Re-pushing is safe (upsert semantics).
+  plus `.<records>.json` (an array of `{ "fields": {...}, "primaryKey": {...} }` objects).
+- **Every record has a `primaryKey`**, nested `relatedEntities`/`collections`
+  children included: a hardcoded UUID from CLI `uuidgen` for a row the file
+  creates, or an `@lookup` for a row the migration stack or CodeGen already
+  created. Push upserts by `primaryKey`; a record without one is inserted as a
+  new row on every push. Never author `sync` blocks (MJ's `metadata/CLAUDE.md` rule 1).
 - List folders in the root `.mj-sync.json` `directoryOrder` so dependencies push
   in order.
 - **Externalize complex JSON** with `@file:` references

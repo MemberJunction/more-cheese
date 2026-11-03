@@ -1,0 +1,33 @@
+# title: Weekly operations snapshot for week of 4 November 2024
+# date: 2024-11-10
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-11-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2024-11-04
+# basis: membership purchases, orders, cash, and course enrollments are booked inside 2024-11-04..2024-11-10. Current members counts qualifying active periods at week end.
+# caveat: weekly figures pulled on Sunday 2024-11-10. Membership count is final for the week; cash and order figures reflect confirmed transactions.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1059,members,rolling 12 months,final
+membership,membership_purchases_total,10,purchases,booked in week,final
+membership,membership_purchases_first_time,7,purchases,booked in week,final
+membership,membership_purchases_individual,7,purchases,booked in week,final
+membership,membership_purchases_enthusiast,3,purchases,booked in week,final
+membership,membership_purchases_gross,1588,usd,booked in week,final
+orders,confirmed_orders,10,orders,booked in week,final
+orders,orders_gross,1669,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,4789,usd,payments in week,final
+education,course_enrollments_taken,9,enrollments,taken in week,final
+education,course_completions,11,completions,completed in week,final
+certification,certifications_enrolled,0,enrollments,taken in week,final

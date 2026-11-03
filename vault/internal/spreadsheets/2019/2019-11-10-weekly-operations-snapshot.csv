@@ -1,0 +1,34 @@
+# title: Weekly operations snapshot, week ending 10 November 2019
+# date: 2019-11-10
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-11-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2019-11-04
+# basis: all counts and figures reflect confirmed activity during the window 2019-11-04 through 2019-11-10. Membership current count is measured at week-end.
+# caveat: commerce data ends on 2026-06-20; figures for this week are complete and final as of Sunday 2019-11-10.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,338,members,active at Sunday close,final
+membership,membership_purchases_total,7,purchases,booked in week,final
+membership,membership_purchases_first_time,7,purchases,booked in week,final
+membership,membership_purchases_enthusiast,3,purchases,Enthusiast tier,final
+membership,membership_purchases_individual,3,purchases,Individual tier,final
+membership,membership_purchases_corporate,1,purchases,Corporate tier,final
+membership,membership_purchases_gross,1637,usd,gross sales,final
+orders,confirmed_orders,7,orders,confirmed in week,final
+orders,orders_gross,1708,usd,gross orders,final
+orders,cancellations,0,orders,confirmed in week,final
+cash,cash_captured,1178,usd,payments captured,final
+advocacy,coalition_meetings_raw_milk_aging,1,meetings,CoalitionMeeting action,final
+advocacy,petition_signatures_fsma_exemption,4,signatures,PetitionSignature action,final
+education,course_completions,9,completions,completed in week,final

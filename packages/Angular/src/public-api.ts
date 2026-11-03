@@ -21,6 +21,9 @@ import './lib/generated/generated-forms.module';
 import './lib/custom/form-panels/person-membership.panel';
 export { PersonMembershipPanel } from './lib/custom/form-panels/person-membership.panel';
 export { PersonMembershipComponent } from './lib/custom/form-panels/person-membership.component';
+// Staff section contributor (Common's Organization form): importing fires @RegisterClass.
+import './lib/custom/form-panels/organization-staff-membership.contributor';
+export { MoreCheeseStaffContributor } from './lib/custom/form-panels/organization-staff-membership.contributor';
 
 // Re-export for consumers + the host class-registration manifest
 export { GeneratedFormsModule } from './lib/generated/generated-forms.module';

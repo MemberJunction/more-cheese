@@ -1,0 +1,32 @@
+# title: Certification and enrollment audit snapshot, week of 2 March 2026
+# date: 2026-03-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-03-02
+# fictional: true
+# owner_role: Education & Credentialing
+# tags: [certification, enrollments, audit, weekly-snapshot]
+# data_sources: [generated/certifications, generated/member-certifications, generated/courses]
+# source: node scripts/vault-facts.mjs week 2026-03-02
+# basis: weekly operational totals for education and certification records, preliminary until weekly close.
+# caveat: pulled on Thursday 5 March 2026; pending final reconciliation between exam fee orders and candidate transcript files.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_value,unit_type,status_flag,notes
+education,course_completions,45,completions,preliminary,completed across active cohorts this week
+education,course_enrollments_taken,0,enrollments,preliminary,no new course enrollments registered this week
+certification,certifications_enrolled,1,enrollments,preliminary,new candidate enrollment processed in system
+certification,certifications_awarded,0,awards,preliminary,no credentials formally awarded during current window
+certification,pending_transcript_reviews,14,records,preliminary,awaiting manual verification of prerequisites
+certification,unmatched_exam_fees,5,transactions,preliminary,payment recorded without linked candidate profile
+membership,current_members,1504,members,preliminary,total active members at week end
+membership,membership_purchases,24,purchases,preliminary,total membership purchases booked in week
+membership,first_time_purchases,7,purchases,preliminary,first-time members joining this week
+orders,confirmed_orders,25,orders,preliminary,total confirmed orders in week
+orders,orders_gross,6275,usd,preliminary,gross order value for the week
+cash,cash_captured,2241,usd,payments,cash collected against pending accounts

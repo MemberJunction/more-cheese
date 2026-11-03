@@ -1,0 +1,20 @@
+{
+  "fields": {
+    "Name": "Certified Members Without Recent Event Attendance",
+    "CategoryID": "1D892D52-0639-45EE-9344-017BC7F60DE7",
+    "Description": "Members who earned a certification in the last 2 years but have not attended any event in the last 12 months: a re-engagement list of recently certified members who have gone quiet. One row per member, with name, email, region, total certifications earned (including expired ones), and their most recent certification and its award date. \"Attended\" means an Attended registration on a Confirmed order, and the 12-month window is measured on the order date, not the event date. Both windows count back from today. Region is NA / EU / RoW; there is no chapter data.",
+    "TechnicalDescription": "## Overview\n\nIdentifies federation members who earned a professional certification in the trailing 2-year window (`DATEADD(year, -2, GETDATE())`) but have not attended any federation event in the past 12 months (`DATEADD(month, -12, GETDATE())`). This cohort represents credentialed members at risk of disengagement from community events.\n\n## Query Logic\n\n```mermaid\nflowchart TD\n    A[Member Certifications] -->|filter AwardedOn in past 2 years| B[Recent Cert Recipients]\n    C[Event Order Lines & Orders] -->|filter Attended & past 12 months| D[Recent Event Attendees]\n    B -->|left join & filter attended is NULL| E[At-Risk Member Cohort]\n    E -->|join People & Member Profiles| F[Enriched Member Details]\n    F -->|sort by most recent cert date| G[Final Results Grid]\n```\n\n## Data Sources\n\n### MJ_BizApps_Common: People (`[__mj_BizAppsCommon].vwPeople`)\n- **ID** — Unique person identifier\n- **FirstName** — First name\n- **LastName** — Last name\n- **Email** — Contact email address\n\n### MoreCheese: Member Profiles (`[morecheese_members].vwMemberProfiles`)\n- **PersonID** — Foreign key to People\n- **Region** — Regional designation (NA, EU, RoW)\n\n### MoreCheese: Member Certifications (`[morecheese_learning].vwMemberCertifications`)\n- **PersonID** — Foreign key to People\n- **CertificationID** — Foreign key to Certifications catalog\n- **AwardedOn** — Date credential was awarded\n\n### MoreCheese: Certifications (`[morecheese_learning].vwCertifications`)\n- **ID** — Credential identifier\n- **Name** — Formal credential title\n\n### MJ_BizApps_Orders: Event Order Lines (`[__mj_BizAppsOrders].vwEventOrderLines`)\n- **PersonID** — Attendee identifier\n- **AttendanceStatus** — Attendance indicator ('Attended')\n- **OrderHeaderID** — Link to order header for event timing\n\n### MJ_BizApps_Orders: Order Headers (`[__mj_BizAppsOrders].vwOrderHeaders`)\n- **ID** — Order identifier\n- **OrderDate** — Date of event registration / edition\n- **Status** — Order status ('Confirmed')\n\n## Relationships\n\n```mermaid\nerDiagram\n    People ||--o{ MemberCertifications : \"earns\"\n    People ||--|| MemberProfiles : \"has profile\"\n    People ||--o{ EventOrderLines : \"attends\"\n    Certifications ||--o{ MemberCertifications : \"defines\"\n    OrderHeaders ||--o{ EventOrderLines : \"contains\"\n```\n\n## Filters & Conditions\n\n- Certification earned in past 2 years: `mc.AwardedOn >= DATEADD(year, -2, GETDATE())`\n- Excludes attendees from events with confirmed orders in the past 12 months: `eol.AttendanceStatus = 'Attended'`, `oh.Status = 'Confirmed'`, and `oh.OrderDate >= DATEADD(month, -12, GETDATE())`\n- Regional grouping: `mp.Region` output as `Region`\n- Sorted by most recent certification date descending",
+    "SQL": "@file:SQL/certified-members-without-recent-event-attendance.sql",
+    "Status": "Approved",
+    "QualityRank": 0,
+    "UsesTemplate": false,
+    "AuditQueryRuns": false,
+    "CacheEnabled": false,
+    "SQLDialectID": "1F203987-A37B-4BC1-85B3-BA50DC33C3E0",
+    "Reusable": false,
+    "IsMaterialized": false
+  },
+  "primaryKey": {
+    "ID": "38DDD1A1-BF46-4502-ADDB-40333FFFFAC8"
+  }
+}

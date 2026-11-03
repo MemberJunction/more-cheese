@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 18 August 2025
+# date: 2025-08-24
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-08-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2025-08-18
+# basis: confirmed orders, cash payments, and enrollments booked between 2025-08-18 and 2025-08-24. Membership count is total current members at week end.
+# caveat: pulled on Sunday 24 August 2025. Webinar registrations show 0 because free webinars carry no paid registrations in the dataset.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1269,members,rolling 12 months,final
+membership,membership_purchases_total,24,purchases,booked in week,final
+membership,membership_purchases_first_time,17,purchases,booked in week,final
+membership,membership_purchases_small_business,2,purchases,booked in week,final
+membership,membership_purchases_enthusiast,6,purchases,booked in week,final
+membership,membership_purchases_individual,13,purchases,booked in week,final
+membership,membership_purchases_corporate,3,purchases,booked in week,final
+membership,membership_sales_gross,6786,usd,booked in week,final
+orders,confirmed_orders,66,orders,booked in week,final
+orders,orders_gross,13489,usd,booked in week,final
+orders,order_cancellations,1,orders,booked in week,final
+orders,cash_captured,9554,usd,payments in week,final
+events,workshop_registrations_taken,40,registrations,EVT-2025-W2 Workshop Cave Farm Shop Retail,final
+events,webinar_registrations_taken,0,registrations,EVT-2025-WEB2 Recall Readiness 2025,final
+education,course_enrollments_taken,13,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,enrolled in week,final
+certifications,certifications_awarded_foundations,1,awards,Cheese Foundations Certificate Bora Chowdhury,final
+certifications,certifications_awarded_food_safety,1,awards,Food Safety and HACCP Certificate Dario Carlsen,final
+advocacy,testimony_actions,1,actions,Interstate cheese shipment testimony,final

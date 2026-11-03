@@ -1,0 +1,36 @@
+# title: Membership purchases and tier snapshot, week ending 8 December 2019
+# date: 2019-12-06
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-12-02
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, renewals, tier-mix, weekly-snapshot]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2019-12-02
+# basis: membership purchases and order totals booked inside 2019-12-02..2019-12-08. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Friday 6 December 2019; weekend order settlements remain pending. Figures are preliminary.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_or_amount,unit,tier_or_category,status
+membership,current_members_at_week_end,369,members,all_tiers,preliminary
+membership,total_membership_purchases,242,purchases,all_tiers,preliminary
+membership,first_time_members,22,purchases,new_joins,preliminary
+membership,tier_purchases,162,purchases,Individual,preliminary
+membership,tier_purchases,51,purchases,SmallBusiness,preliminary
+membership,tier_purchases,14,purchases,Corporate,preliminary
+membership,tier_purchases,15,purchases,Enthusiast,preliminary
+membership,membership_gross_sales,55369,usd,all_tiers,preliminary
+orders,confirmed_orders,259,orders,all_orders,preliminary
+orders,orders_gross_revenue,62044,usd,all_orders,preliminary
+orders,order_cancellations,2,orders,all_orders,preliminary
+cash,cash_captured,7706,usd,payments_received,preliminary
+events,events_this_week,0,events,schedule,final
+events,events_next_eight_weeks,3,events,schedule,final
+courses,course_completions,2,completions,education,preliminary
+courses,course_enrollments_taken,0,enrollments,education,preliminary

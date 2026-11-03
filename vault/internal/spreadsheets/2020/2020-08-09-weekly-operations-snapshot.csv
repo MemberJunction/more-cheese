@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week ending 9 August 2020
+# date: 2020-08-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-08-03
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, education]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/courses]
+# source: node scripts/vault-facts.mjs week 2020-08-03
+# basis: membership purchases, confirmed orders, cash captured, and advocacy actions booked inside 2020-08-03..2020-08-09. Current members count reflects total at week end. Free webinars carry zero paid registrations.
+# caveat: week totals are complete on Sunday 2020-08-09. Confirmed orders and cash captured reflect association-wide transaction processing.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,410,members,rolling 12 months,final
+membership,membership_purchases_total,3,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,individual_membership_purchases,2,purchases,booked in week,final
+membership,small_business_membership_purchases,1,purchases,booked in week,final
+membership,membership_purchases_gross,639,usd,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross,266,usd,booked in week,final
+orders,cancellations,1,orders,booked in week,final
+cash,cash_captured,596,usd,payments in week,final
+events,event_registrations_taken,0,registrations,free webinars carry none,final
+events,events_this_week,0,events,scheduled in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,10,completions,completed in week,final
+advocacy,testimony_interstate_shipment,1,actions,booked in week,final
+governance,committee_meetings,0,meetings,scheduled in week,final

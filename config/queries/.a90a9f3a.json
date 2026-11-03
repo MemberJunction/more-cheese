@@ -1,0 +1,20 @@
+{
+  "fields": {
+    "Name": "Active Association Members with Geographic Coordinates and Organization",
+    "CategoryID": "ACB740BE-E100-4ED6-89E2-C20D74E63750",
+    "Description": "One row per currently active member, for maps and member directories: name, email, member number, segment, organization, full address (street, city, state/province, postal code, country), latitude/longitude, and membership expiry date. Active means a Confirmed annual membership purchase in the last 12 months that wasn't refunded, the same definition as the Membership Status query (its \"Current\" members); expiry is one year after the latest purchase. Address and coordinates come from the member profile. Every member has coordinates; some have no street address, and individual members have no organization.",
+    "TechnicalDescription": "## Overview\n\nThis query returns all currently active members of the International Cheese Federation (ICF) association, including each member's organization/company name, contact details, address, and geographic coordinates. Active status is defined as having a confirmed, non‑refunded annual membership purchase within the trailing 12‑month window.\n\n## Query Logic\n\n```mermaid\nflowchart TD\n    A[OrderHeaders + OrderLines + Products] -->|filter| B[Qualified Membership Orders]\n    B -->|group by latest per Person| C[ActiveMembership CTE]\n    C -->|join| D[MemberProfiles]\n    C -->|join| E[People]\n    D -->|add Organization column| F[Result Set]\n```\n\n## Data Sources\n\n### MJ_BizApps_Orders: Order Headers (`[__mj_BizAppsOrders].vwOrderHeaders`)\n- ID, BillToPersonID, Status, OrderDate, ReversesOrderHeaderID\n\n### MJ_BizApps_Orders: Order Lines (`[__mj_BizAppsOrders].vwOrderLines`)\n- OrderHeaderID, ProductID\n\n### MJ_BizApps_Orders: Products (`[__mj_BizAppsOrders].vwProducts`)\n- ID, Name (ends with \" Membership (annual)\")\n\n### MoreCheese: Member Profiles (`[morecheese_members].vwMemberProfiles`)\n- PersonID, MemberNumber, Segment, Address fields, Latitude, Longitude, **Organization** (last‑known employer)\n\n### MJ_BizApps_Common: People (`[__mj_BizAppsCommon].vwPeople`)\n- ID, DisplayName, Email\n\n## Relationships\n\n- OrderHeaders → OrderLines → Products (via IDs)\n- OrderHeaders.BillToPersonID = People.ID\n- MemberProfiles.PersonID = People.ID\n\n## Filters & Conditions\n\n- Order status = 'Confirmed' and no reversal orders\n- Product name LIKE '% Membership (annual)'\n- Latest qualifying order date >= DATEADD(YEAR, -1, CAST(GETDATE() AS DATE)) (active window)\n- Output sorted alphabetically by member name\n```",
+    "SQL": "@file:SQL/active-members-with-coordinates-and-organization.sql",
+    "Status": "Approved",
+    "QualityRank": 0,
+    "UsesTemplate": false,
+    "AuditQueryRuns": false,
+    "CacheEnabled": false,
+    "SQLDialectID": "1F203987-A37B-4BC1-85B3-BA50DC33C3E0",
+    "Reusable": false,
+    "IsMaterialized": false
+  },
+  "primaryKey": {
+    "ID": "A90A9F3A-BD11-4574-BD1F-701E2F6E0E51"
+  }
+}

@@ -1,0 +1,40 @@
+# title: Weekly operations snapshot, week of 2024-03-04
+# date: 2024-03-08
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-03-04
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-03-04
+# basis: membership purchases, orders, and cash captured during 2024-03-04..2024-03-10. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Friday 8 March after the Hobart workshop on 5 March; attendance figures now available.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,896,members,rolling 12 months,preliminary
+membership,membership_purchases_total,16,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,2,purchases,booked in week,preliminary
+membership,membership_purchases_individual,13,purchases,booked in week,preliminary
+membership,membership_purchases_corporate,1,purchases,booked in week,preliminary
+membership,membership_purchases_enthusiast,1,purchases,booked in week,preliminary
+membership,membership_purchases_small_business,1,purchases,booked in week,preliminary
+membership,membership_purchases_gross_usd,3627,usd,booked in week,preliminary
+orders,confirmed_orders,68,orders,booked in week,preliminary
+orders,orders_gross_usd,10970,usd,booked in week,preliminary
+orders,cancellations,1,orders,booked in week,preliminary
+cash,cash_captured_usd,10509,usd,payments in week,preliminary
+events,workshop_dairy_blue_styles_registrations,29,registrations,taken in week,preliminary
+events,workshop_birch_retailing_registrations,22,registrations,taken in week,preliminary
+events,hobart_workshop_registered,200,registrations,EVT-2024-W2 total,final
+events,hobart_workshop_attended,181,registrations,EVT-2024-W2 attendance,final
+events,hobart_workshop_no_show,19,registrations,EVT-2024-W2 attendance,final
+education,course_enrollments_taken,0,enrollments,taken in week,preliminary
+education,course_completions,9,completions,completed in week,preliminary
+advocacy,coalition_meeting_labeling_standards,1,meetings,held in week,preliminary

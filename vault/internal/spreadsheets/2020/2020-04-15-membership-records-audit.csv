@@ -1,0 +1,34 @@
+# title: Membership records audit and data quality snapshot, week of 13 April 2020
+# date: 2020-04-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-04-13
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, data-quality, audit, records]
+# data_sources: [generated/orders, generated/payments, generated/organizations, generated/people]
+# source: node scripts/vault-facts.mjs week 2020-04-13
+# basis: snapshot of member records, payment status, and identified data anomalies as of 15 April 2020. Current members count stands at 391 at week end.
+# caveat: preliminary figures subject to final reconciliation of duplicate profiles and bounced addresses.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+record_category,total_records,flagged_issues,resolution_status,verified_tier_mix,notes
+membership_totals,391,4,pending_audit,391,current members at week end per system records
+membership_purchases,4,0,confirmed,4,purchases booked in week ending 19 April 2020
+individual_tier_purchases,3,0,confirmed,3,individual tier purchases in current week
+corporate_tier_purchases,1,0,confirmed,1,corporate tier purchase in current week
+first_time_purchases,1,0,confirmed,1,first time membership purchase in week
+gross_membership_sales,1299,0,confirmed,1299,gross revenue from weekly membership purchases in usd
+orders_confirmed,7,1,review_required,7,total confirmed orders in current week including merchandise
+gross_orders_revenue,2059,1,review_required,2059,gross order value in usd for current week
+order_cancellations,1,0,confirmed,1,confirmed order cancellation in current week
+cash_captured,2546,0,confirmed,2546,total cash captured in payments in usd during week
+duplicate_profiles,2,2,under_investigation,2,duplicate identity pair requiring record merge
+stale_employer_records,14,14,flagged_for_review,14,members with outdated creamery affiliations
+bounced_email_addresses,9,9,address_update_required,9,undelivered messages from recent advocacy mailings
+payment_status_mismatches,3,3,reconciliation_in_progress,3,dues payment records not matching active period status

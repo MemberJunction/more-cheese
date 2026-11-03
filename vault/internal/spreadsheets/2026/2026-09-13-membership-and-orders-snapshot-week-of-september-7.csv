@@ -1,0 +1,37 @@
+# title: Membership and orders snapshot, week of September 7, 2026
+# date: 2026-09-13
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-09-07
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, workshop]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2026-09-07
+# basis: membership purchases, confirmed orders and cash captured are booked inside 2026-09-07..2026-09-13. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: weekly totals are complete as of Sunday, September 13, 2026. Free webinars carry no registrations in the data.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1661,members,rolling 12 months,final
+membership,membership_purchases_total,25,purchases,booked in week,final
+membership,membership_purchases_first_time,13,purchases,booked in week,final
+membership,membership_purchases_individual,19,purchases,booked in week,final
+membership,membership_purchases_small_business,4,purchases,booked in week,final
+membership,membership_purchases_enthusiast,2,purchases,booked in week,final
+membership,membership_gross_usd,5225,usd,booked in week,final
+orders,confirmed_orders,33,orders,booked in week,final
+orders,orders_gross_usd,6850,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,6850,usd,payments in week,final
+events,curd_food_safety_registrations_taken,8,registrations,EVT-2026-W5,final
+events,water_activity_webinar_registered,0,registrations,EVT-2026-WEB3 free webinar,final
+advocacy,letter_campaign_labeling_standards,3,actions,logged in week,final
+advocacy,testimony_raw_milk_aging_rules,1,actions,logged in week,final
+advocacy,petition_signature_labeling_standards,3,actions,logged in week,final
+advocacy,coalition_meeting_raw_milk_aging_rules,1,actions,logged in week,final

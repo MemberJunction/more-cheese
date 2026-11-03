@@ -45,14 +45,18 @@ for (const { root, file } of files) {
     }
     const dirKeys = primaryKeysByDir.get(dir);
 
-    for (const r of arr) {
+    // Nested records are collected at every depth: a duplicate run nests its details, and each
+    // detail nests its matches, whose MatchRecordID must resolve like any other reference.
+    const collect = (r, nested) => {
       if (r?.primaryKey?.ID) {
         const pk = r.primaryKey.ID.toUpperCase();
         allPrimaryKeys.add(pk);
         dirKeys.add(pk);
       }
       if (r?.fields) {
-        records.push({ dir, primaryKey: r.primaryKey, fields: r.fields });
+        records.push(nested
+          ? { dir, primaryKey: r.primaryKey, fields: r.fields, extension: r.extension }
+          : { dir, primaryKey: r.primaryKey, fields: r.fields });
       }
       const subCollections = [
         ...(r?.collections ? Object.values(r.collections) : []),
@@ -60,19 +64,11 @@ for (const { root, file } of files) {
       ];
       for (const items of subCollections) {
         if (Array.isArray(items)) {
-          for (const item of items) {
-            if (item?.primaryKey?.ID) {
-              const pk = item.primaryKey.ID.toUpperCase();
-              allPrimaryKeys.add(pk);
-              dirKeys.add(pk);
-            }
-            if (item?.fields) {
-              records.push({ dir, primaryKey: item.primaryKey, fields: item.fields, extension: item.extension });
-            }
-          }
+          for (const item of items) collect(item, true);
         }
       }
-    }
+    };
+    for (const r of arr) collect(r, false);
   } catch (err) {
     console.error(`Error reading ${file}:`, err);
   }
@@ -147,7 +143,10 @@ for (const r of records) {
       }
 
       evaluatedCount++;
-      const valUpper = val.toUpperCase();
+      // A polymorphic record pointer in MJ's single-key URL-segment form (`ID|<uuid>`, as duplicate
+      // run details and matches store RecordID / MatchRecordID) resolves on its key value.
+      const keySegment = /^[A-Za-z_][A-Za-z0-9_]*\|([0-9A-Fa-f-]{36})$/.exec(val);
+      const valUpper = (keySegment ? keySegment[1] : val).toUpperCase();
 
       // Target-aware check if target directory is known
       let targetDir = FIELD_TARGET_DIR_MAP.get(fieldName);

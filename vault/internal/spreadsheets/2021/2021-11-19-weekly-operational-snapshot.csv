@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 15 November 2021
+# date: 2021-11-19
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-11-15
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, certifications]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2021-11-15
+# basis: membership purchases, orders, cash, and course metrics booked within the week of 2021-11-15 to 2021-11-21. Current members and cash captured reflect association-wide totals as of week end.
+# caveat: pulled on Friday 19 November 2021; figures are preliminary until the weekly close on Sunday.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,485,members,rolling 12 months,preliminary
+membership,membership_purchases_total,6,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,2,purchases,booked in week,preliminary
+membership,individual_membership_purchases,5,purchases,booked in week,preliminary
+membership,enthusiast_membership_purchases,1,purchases,booked in week,preliminary
+membership,membership_purchases_gross,896,usd,booked in week,preliminary
+orders,confirmed_orders,10,orders,booked in week,preliminary
+orders,orders_gross,1604,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,2347,usd,payments in week,preliminary
+events,cedar_competition_prep_registrations_taken,3,registrations,EVT-2021-W2,preliminary
+education,course_enrollments_taken,10,enrollments,taken in week,preliminary
+education,course_completions,4,completions,completed in week,preliminary
+certifications,certification_enrollments_ytd,0,enrollments,year to date,preliminary
+certifications,certifications_awarded_ytd,0,awards,year to date,preliminary

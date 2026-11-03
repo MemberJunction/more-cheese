@@ -1,0 +1,39 @@
+# title: Weekly operations snapshot, week of 2 December 2024
+# date: 2024-12-08
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-12-02
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, advocacy, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions]
+# source: node scripts/vault-facts.mjs week 2024-12-02
+# basis: confirmed orders, cash captured, and membership purchases booked during the week of 2 Dec to 8 Dec 2024. Current members is count at week end.
+# caveat: figures represent full week totals as of 8 Dec 2024.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1051,members,rolling 12 months,final
+membership,membership_purchases_total,631,purchases,booked in week,final
+membership,membership_purchases_first_time,23,purchases,booked in week,final
+membership,membership_purchases_individual,446,purchases,booked in week,final
+membership,membership_purchases_small_business,115,purchases,booked in week,final
+membership,membership_purchases_corporate,29,purchases,booked in week,final
+membership,membership_purchases_enthusiast,41,purchases,booked in week,final
+membership,membership_purchases_gross,154749,usd,booked in week,final
+orders,confirmed_orders,641,orders,booked in week,final
+orders,orders_gross,161803,usd,booked in week,final
+orders,cancellations,7,orders,booked in week,final
+cash,cash_captured,28011,usd,payments in week,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,4,completions,completed in week,final
+education,certification_enrollments,0,enrollments,booked in week,final
+education,certifications_awarded,0,certifications,awarded in week,final
+advocacy,petition_signatures_dairy_pricing,9,actions,logged in week,final
+advocacy,letter_campaign_dairy_pricing,14,actions,logged in week,final
+events,webinars_next_eight_weeks,1,events,EVT-2024-WEB2 scheduled,final

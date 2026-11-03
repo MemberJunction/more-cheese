@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2024-01-22
+# date: 2024-01-28
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-01-22
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, cash, memberships, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2024-01-22
+# basis: membership purchases, orders, cash, and event registrations booked inside 2024-01-22..2024-01-28. Current members count people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on 28 January 2024, representing complete week totals for the window.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,876,members,rolling 12 months,final
+membership,membership_purchases,12,purchases,booked in week,final
+membership,first_time_members,6,purchases,booked in week,final
+membership,individual_tier_purchases,8,purchases,booked in week,final
+membership,enthusiast_tier_purchases,1,purchases,booked in week,final
+membership,small_business_tier_purchases,2,purchases,booked in week,final
+membership,corporate_tier_purchases,1,purchases,booked in week,final
+membership,membership_gross,3176,usd,booked in week,final
+orders,confirmed_orders,44,orders,booked in week,final
+orders,orders_gross,7882,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,28598,usd,payments in week,final
+events,birch_milk_handling_registrations,29,registrations,taken in week,final
+events,dairy_blue_styles_registrations,3,registrations,taken in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,7,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final
+certifications,certifications_awarded,1,awards,awarded in week,final

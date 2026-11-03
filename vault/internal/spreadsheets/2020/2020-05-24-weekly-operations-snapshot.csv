@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week ending 24 May 2020
+# date: 2020-05-24
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-05-18
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2020-05-18
+# basis: membership purchases, orders, cash, event registrations, and course enrollments are booked inside 2020-05-18..2020-05-24. Current members counts people whose latest qualifying purchase is within 12 months. Week totals are complete as of Sunday 24 May 2020.
+# caveat: pulled on 24 May 2020. Free webinars carry zero paid registrations and are excluded from registration counts.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,397,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,2,purchases,booked in week,final
+membership,individual_purchases,4,purchases,booked in week,final
+membership,membership_gross,622,usd,booked in week,final
+orders,confirmed_orders,20,orders,booked in week,final
+orders,orders_gross,3330,usd,booked in week,final
+orders,cancellation_orders,3,orders,booked in week,final
+cash,cash_captured,4208,usd,payments in week,final
+events,annual_conference_registrations_taken,5,registrations,EVT-2020-CONF,final
+events,workshop_lark_registrations_taken,7,registrations,EVT-2020-W1,final
+events,events_this_week,0,events,scheduled in week,final
+events,events_next_eight_weeks_scheduled,3,events,scheduled in 8 weeks,final
+education,course_enrollments_taken,13,enrollments,taken in week,final
+education,course_completions,0,completions,completed in week,final
+education,courses_starting_in_eight_weeks,3,courses,starting in 8 weeks,final

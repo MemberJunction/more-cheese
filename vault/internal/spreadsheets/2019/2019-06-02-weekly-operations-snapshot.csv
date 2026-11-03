@@ -1,0 +1,35 @@
+# title: Weekly operations snapshot, week ending 2 June 2019
+# date: 2019-06-02
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-05-27
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, cash, events, membership]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2019-05-27
+# basis: orders, cash captured, and event registrations booked inside 2019-05-27..2019-06-02. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: weekly snapshot totals are complete as of Sunday 2 May 2019.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,value,unit,basis
+membership,current_members_at_week_end,262,members,rolling 12 months
+membership,membership_purchases_total,1,purchases,booked in week
+membership,membership_purchases_first_time,1,purchases,booked in week
+membership,membership_purchases_individual,1,purchases,booked in week
+membership,membership_gross_usd,145,usd,booked in week
+orders,confirmed_orders,53,orders,booked in week
+orders,orders_gross_usd,7916,usd,booked in week
+orders,cancellation_orders,1,orders,booked in week
+cash,cash_captured_usd,7463,usd,payments in week
+events,workshop_meadow_affinage_registrations,18,registrations,booked in week
+events,workshop_curd_retailing_registrations,17,registrations,booked in week
+events,icf_annual_conference_registrations,7,registrations,booked in week
+events,workshop_clover_pasta_filata_registrations,3,registrations,booked in week
+courses,course_enrollments_taken,0,enrollments,booked in week
+courses,course_completions,1,completions,completed in week

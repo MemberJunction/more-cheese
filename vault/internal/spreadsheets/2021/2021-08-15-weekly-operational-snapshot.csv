@@ -1,0 +1,35 @@
+# title: Weekly operational snapshot, week of 9 August 2021
+# date: 2021-08-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-08-09
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, memberships, orders, cash, certifications]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2021-08-09
+# basis: membership purchases, orders and cash are booked inside 2021-08-09..2021-08-15. Current members counts people whose latest qualifying purchase is within 12 months. Free webinars carry zero registrations.
+# caveat: pulled on Sunday 2021-08-15 as a complete weekly snapshot. Certification enrollments and awards are zero for this specific week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,465,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,1,purchases,booked in week,final
+membership,small_business_purchases,1,purchases,booked in week,final
+membership,individual_purchases,3,purchases,booked in week,final
+membership,membership_gross,809,usd,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross,809,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,686,usd,payments in week,final
+events,webinar_registrations,0,registrations,EVT-2021-WEB7 free webinar,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,32,completions,completed in week,final
+certification,certification_enrolled,0,enrollments,taken in week,final
+certification,certifications_awarded,0,awards,awarded in week,final

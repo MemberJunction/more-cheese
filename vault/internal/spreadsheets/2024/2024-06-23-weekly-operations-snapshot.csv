@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 2024-06-17
+# date: 2024-06-23
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-06-17
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2024-06-17
+# basis: membership purchases, confirmed orders, cash captured, and registrations recorded within the week ending 2024-06-23. Current members count reflects active status at week end.
+# caveat: pulled at week close; preliminary figures subject to monthly reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,982,members,rolling 12 months,preliminary
+membership,membership_purchases_total,10,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,5,purchases,booked in week,preliminary
+membership,enthusiast_purchases,1,purchases,booked in week,preliminary
+membership,individual_purchases,8,purchases,booked in week,preliminary
+membership,corporate_purchases,1,purchases,booked in week,preliminary
+membership,membership_gross_sales,2418,usd,booked in week,preliminary
+orders,confirmed_orders,64,orders,booked in week,preliminary
+orders,orders_gross_sales,18607,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,19839,usd,payments in week,preliminary
+events,annual_conference_registrations_taken,27,registrations,EVT-2024-CONF,preliminary
+events,hollow_food_safety_workshop_registrations,25,registrations,EVT-2024-W5,preliminary
+education,course_enrollments_taken,35,enrollments,taken in week,preliminary
+education,course_completions,0,completions,completed in week,preliminary
+certifications,certifications_enrolled,2,enrollments,enrolled in week,preliminary
+certifications,certifications_awarded,0,awards,awarded in week,preliminary

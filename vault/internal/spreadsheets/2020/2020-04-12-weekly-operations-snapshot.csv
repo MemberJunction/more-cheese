@@ -1,0 +1,32 @@
+# title: Weekly operations snapshot, week ending 12 April 2020
+# date: 2020-04-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-04-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2020-04-06
+# basis: membership purchases, orders, cash, and advocacy actions are booked inside 2020-04-06..2020-04-12. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Sunday 12 April 2020, representing the complete totals for the week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,390,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,2,purchases,booked in week,final
+membership,individual_purchases,4,purchases,booked in week,final
+membership,membership_gross,596,usd,booked in week,final
+orders,confirmed_orders,6,orders,booked in week,final
+orders,orders_gross,1513,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,2032,usd,payments in week,final
+conference,registrations_taken_in_week,2,registrations,EVT-2020-CONF,final
+advocacy,testimony_raw_milk_aging_rules,1,actions,filed in week,final
+governance,committee_meetings_completed,3,meetings,completed in week,final

@@ -1,0 +1,34 @@
+# title: Weekly operations snapshot for week ending 2026-10-11
+# date: 2026-10-11
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-10-05
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, governance]
+# data_sources: [generated/orders, generated/payments, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2026-10-05
+# basis: membership purchases, orders, cash, and event registrations booked during the week of 2026-10-05 to 2026-10-11.
+# caveat: week totals are complete as of Sunday 2026-10-11. Free webinars carry zero paid registrations.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events, and decisions are invented.
+#
+metric_group,metric_name,numeric_value,unit,basis,notes
+membership,current_members_at_week_end,1711,members,rolling 12 months,current active base
+membership,membership_purchases_total,20,purchases,booked in week,
+membership,membership_purchases_first_time,11,purchases,booked in week,
+membership,individual_membership_purchases,14,purchases,booked in week,
+membership,enthusiast_membership_purchases,4,purchases,booked in week,
+membership,small_business_membership_purchases,1,purchases,booked in week,
+membership,corporate_membership_purchases,1,purchases,booked in week,
+membership,membership_gross_usd,4450,usd,booked in week,
+orders,confirmed_orders,87,orders,booked in week,
+orders,orders_gross_usd,15010,usd,booked in week,
+orders,cancellations,0,orders,booked in week,
+cash,cash_captured_usd,15010,usd,payments captured in week,
+events,curd_food_safety_registrations_taken,58,registrations,EVT-2026-W5 workshop,
+events,hollow_export_readiness_registrations_taken,9,registrations,EVT-2026-W2 workshop,
+governance,committee_meetings_scheduled,3,meetings,q4 schedule for week,

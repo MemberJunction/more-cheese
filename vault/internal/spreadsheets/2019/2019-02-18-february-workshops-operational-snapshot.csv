@@ -1,0 +1,26 @@
+# title: February workshops operational snapshot, 18-24 February 2019
+# date: 2019-02-18
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pre-pandemic-baseline
+# fiscal_year: 2019
+# week_of: 2019-02-18
+# fictional: true
+# owner_role: Events Team
+# tags: [workshops, logistics, registration, attendance, cedar-packaging, prairie-food-safety]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2019-02-18 and event queries
+# basis: workshop orders and event registrations booked or reconciled during the week of 2019-02-18. Cash captured and confirmed orders represent association-wide totals for the week.
+# caveat: Tandil attendance figures are preliminary pending final badge reconciliation. Lancaster registrations are active as of Monday pull.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+event_key,event_name,city,state,registered_count,refunded_count,attended_count,no_show_count,venue_status,catering_status
+EVT-2019-W3,Workshop: Cedar Packaging,Tandil,AR-B,55,10,51,4,reconciled,completed
+EVT-2019-W1,Workshop: Prairie Food Safety,Lancaster,US-PA,71,11,,,pending,pending
+EVT-2019-WEB3,Webinar: Judging Standards 2019,,,0,0,,,not_applicable,not_applicable
+EVT-2019-W4,Workshop: Meadow Affinage,Courtenay,CA-BC,66,5,,,pending,pending
+EVT-2019-W2,Workshop: Curd Retailing,Allgäu,DE-BY,59,6,,,pending,pending
+WEEK_TOTALS,Association Weekly Summary,,,32,1,,,,

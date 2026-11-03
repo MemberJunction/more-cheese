@@ -47863,5 +47863,3320 @@
     "primaryKey": {
       "ID": "B871BE0B-528D-5075-8E90-645E20162B2B"
     }
+  },
+  {
+    "primaryKey": {
+      "ID": "84a3a796-01b0-5b5f-93cf-cb8e06930a93"
+    },
+    "fields": {
+      "Line1": "412 Williamson St",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "16e04e21-622f-5032-9ee8-7657b6df0d81"
+    },
+    "fields": {
+      "Line1": "815 S Broadway",
+      "Line2": null,
+      "City": "Green Bay",
+      "StateProvince": "WI",
+      "PostalCode": "54304",
+      "Country": "United States",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4c8dee10-2585-5dac-bd20-f5fe5d39d4b2"
+    },
+    "fields": {
+      "Line1": "1920 W Fulton St",
+      "Line2": null,
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60612",
+      "Country": "United States",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c092dc87-bbe2-547a-9c67-f4fefc4fa325"
+    },
+    "fields": {
+      "Line1": "230 Kentucky St",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fc5bad52-61c9-57f7-8346-bb1756a7ec77"
+    },
+    "fields": {
+      "Line1": "114 Carp St",
+      "Line2": null,
+      "City": "Bega",
+      "StateProvince": "NSW",
+      "PostalCode": "2550",
+      "Country": "Australia",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2503c334-6add-54b3-853a-4c1a3a59a276"
+    },
+    "fields": {
+      "Line1": "18 Rue du Collège",
+      "Line2": null,
+      "City": "Poligny",
+      "StateProvince": "39",
+      "PostalCode": "39800",
+      "Country": "France",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ef0ede76-4d65-5a24-bbe5-a6049a49b067"
+    },
+    "fields": {
+      "Line1": "88 Pine St",
+      "Line2": null,
+      "City": "Burlington",
+      "StateProvince": "VT",
+      "PostalCode": "05401",
+      "Country": "United States",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fa78bddd-6640-5a97-a5aa-7b61ade79d70"
+    },
+    "fields": {
+      "Line1": "3-14 Odori Nishi, Chuo-ku",
+      "Line2": null,
+      "City": "Hokkaido",
+      "StateProvince": "01",
+      "PostalCode": "060-0042",
+      "Country": "Japan",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b75b5eab-3788-5f0d-9d14-1953b825a92b"
+    },
+    "fields": {
+      "Line1": "704 E Johnson St",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6a3cd1f4-94a6-5b24-a245-b7383f574dd2"
+    },
+    "fields": {
+      "Line1": "Markt 44",
+      "Line2": null,
+      "City": "Gouda",
+      "StateProvince": "ZH",
+      "PostalCode": "2801 JJ",
+      "Country": "Netherlands",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5ae156af-0e81-5bb7-8ee8-d14c93b4bbbe"
+    },
+    "fields": {
+      "Line1": "512 First St W",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "82bbfd15-8e14-5222-9583-6c7fffcadba2"
+    },
+    "fields": {
+      "Line1": "319 Court St",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11231",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f78edc7b-2955-5e69-994d-82195895ad55"
+    },
+    "fields": {
+      "Line1": "62 Salamanca Pl",
+      "Line2": null,
+      "City": "Hobart",
+      "StateProvince": "TAS",
+      "PostalCode": "7000",
+      "Country": "Australia",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "34c94ffe-d2dc-5fdd-9392-e08093b6d663"
+    },
+    "fields": {
+      "Line1": "1508 S Congress Ave",
+      "Line2": null,
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "78704",
+      "Country": "United States",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49352009-5de7-5c5a-a93f-21636cca9ca6"
+    },
+    "fields": {
+      "Line1": "29 Patrick St",
+      "Line2": null,
+      "City": "Cork",
+      "StateProvince": "CO",
+      "PostalCode": "T12 W890",
+      "Country": "Ireland",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ff164f18-e05c-5ced-af48-9a6ce76582d7"
+    },
+    "fields": {
+      "Line1": "Av. Zaragoza 142",
+      "Line2": null,
+      "City": "Querétaro",
+      "StateProvince": "QUE",
+      "PostalCode": "76000",
+      "Country": "Mexico",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b553f4bf-f2a3-5aa7-841c-06f1ed7b797e"
+    },
+    "fields": {
+      "Line1": "1422 Western Ave",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2200989c-54eb-5d27-8a05-aa48f4379616"
+    },
+    "fields": {
+      "Line1": "2105 NW 23rd Ave",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97210",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8f1e7c09-3862-5343-8d90-f1f465abb64c"
+    },
+    "fields": {
+      "Line1": "308 N Tioga St",
+      "Line2": null,
+      "City": "Ithaca",
+      "StateProvince": "NY",
+      "PostalCode": "14850",
+      "Country": "United States",
+      "Latitude": 42.444,
+      "Longitude": -76.5019
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8e9cb78f-6d77-50ae-8f95-05ebe5e5da34"
+    },
+    "fields": {
+      "Line1": "45 N Queen St",
+      "Line2": null,
+      "City": "Lancaster",
+      "StateProvince": "PA",
+      "PostalCode": "17603",
+      "Country": "United States",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "644f71f4-bf82-50c7-bf87-a3f26c46c500"
+    },
+    "fields": {
+      "Line1": "118 Main St",
+      "Line2": null,
+      "City": "Brattleboro",
+      "StateProvince": "VT",
+      "PostalCode": "05301",
+      "Country": "United States",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5a219864-2503-514c-97b2-738416110aaf"
+    },
+    "fields": {
+      "Line1": "412 B Street",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a8b1feba-22a8-5805-abc7-dead00573a09"
+    },
+    "fields": {
+      "Line1": "814 Williamson Street",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e3b05173-ab0c-5c7f-ab5a-edf2062aee88"
+    },
+    "fields": {
+      "Line1": "219 Bergen Street",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11217",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e9e0de37-a331-5fe1-9b01-b2260dfb5c16"
+    },
+    "fields": {
+      "Line1": "505 First Street West",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b8a3298c-a050-5700-8702-54fc4c4dac01"
+    },
+    "fields": {
+      "Line1": "1120 South Broadway",
+      "Line2": null,
+      "City": "Green Bay",
+      "StateProvince": "WI",
+      "PostalCode": "54304",
+      "Country": "United States",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c33220b6-a747-584e-9c6b-a2e6ca2d5721"
+    },
+    "fields": {
+      "Line1": "3-4 Kita 5 Jonishi, Chuo Ward",
+      "Line2": null,
+      "City": "Hokkaido",
+      "StateProvince": "01",
+      "PostalCode": "060-0005",
+      "Country": "Japan",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cdb9b0c8-1cd6-5772-b05a-6cfbb9ab5c0e"
+    },
+    "fields": {
+      "Line1": "74 Pine Street",
+      "Line2": null,
+      "City": "Burlington",
+      "StateProvince": "VT",
+      "PostalCode": "05401",
+      "Country": "United States",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "37405dda-36ef-5fa6-b6e3-c5b99d636afd"
+    },
+    "fields": {
+      "Line1": "1450 Rue des Cascades",
+      "Line2": null,
+      "City": "Saint-Hyacinthe",
+      "StateProvince": "QC",
+      "PostalCode": "J2S 3H5",
+      "Country": "Canada",
+      "Latitude": 45.63,
+      "Longitude": -72.957
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8ea58c5d-3ede-5c89-8a8d-b9b5f3905001"
+    },
+    "fields": {
+      "Line1": "28 Patrick Street",
+      "Line2": null,
+      "City": "Cork",
+      "StateProvince": "CO",
+      "PostalCode": "T12 N802",
+      "Country": "Ireland",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ba8c9b60-6e75-50b9-9011-5cbc9a9a8291"
+    },
+    "fields": {
+      "Line1": "2310 SE Hawthorne Blvd",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97214",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "799be2e6-1028-551d-9699-2c529d92fa7d"
+    },
+    "fields": {
+      "Line1": "1512 Pike Place",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3bd1d3b6-95ca-5250-9a5b-43cae03217a0"
+    },
+    "fields": {
+      "Line1": "408 South 8th Street",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a791c9dd-38fd-506a-9b1c-060b1efea175"
+    },
+    "fields": {
+      "Line1": "Markt 42",
+      "Line2": null,
+      "City": "Gouda",
+      "StateProvince": "ZH",
+      "PostalCode": "2801 JJ",
+      "Country": "Netherlands",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a26f8799-8b92-5a55-9fe2-3886dfb6f294"
+    },
+    "fields": {
+      "Line1": "19 Tyne Street",
+      "Line2": null,
+      "City": "Oamaru",
+      "StateProvince": "OTA",
+      "PostalCode": "9400",
+      "Country": "New Zealand",
+      "Latitude": -45.0975,
+      "Longitude": 170.9714
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c599aa4b-3d4b-5c10-9f81-8561377b0581"
+    },
+    "fields": {
+      "Line1": "11401 State Route 1",
+      "Line2": null,
+      "City": "Point Reyes Station",
+      "StateProvince": "CA",
+      "PostalCode": "94956",
+      "Country": "United States",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6786732e-4fee-5c53-96b0-25fd2dd5df51"
+    },
+    "fields": {
+      "Line1": "Asklipiou 18",
+      "Line2": null,
+      "City": "Trikala",
+      "StateProvince": "E4",
+      "PostalCode": "421 00",
+      "Country": "Greece",
+      "Latitude": 39.5556,
+      "Longitude": 21.7679
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "26ad7bde-fb96-5599-aa80-cdb5c615a316"
+    },
+    "fields": {
+      "Line1": "64 Haywood Street",
+      "Line2": null,
+      "City": "Asheville",
+      "StateProvince": "NC",
+      "PostalCode": "28801",
+      "Country": "United States",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04ea7e0d-ff31-5411-8c4d-2b89e3b3de9c"
+    },
+    "fields": {
+      "Line1": "Alpenstraße 14",
+      "Line2": null,
+      "City": "Allgäu",
+      "StateProvince": "BY",
+      "PostalCode": "87561",
+      "Country": "Germany",
+      "Latitude": 47.58,
+      "Longitude": 10.22
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a590a5b8-e488-53b9-a74c-b2c7389ffb25"
+    },
+    "fields": {
+      "Line1": "Av. Constituyentes 120",
+      "Line2": null,
+      "City": "Querétaro",
+      "StateProvince": "QUE",
+      "PostalCode": "76000",
+      "Country": "Mexico",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bce316de-1637-5ca7-866c-97739bd5890d"
+    },
+    "fields": {
+      "Line1": "118 East State Street",
+      "Line2": null,
+      "City": "Ithaca",
+      "StateProvince": "NY",
+      "PostalCode": "14850",
+      "Country": "United States",
+      "Latitude": 42.444,
+      "Longitude": -76.5019
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0f95c5d5-e75e-5ba9-b100-491fd9c656f5"
+    },
+    "fields": {
+      "Line1": "12 High Street",
+      "Line2": null,
+      "City": "Somerset",
+      "StateProvince": "SOM",
+      "PostalCode": "BA5 2AA",
+      "Country": "United Kingdom",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a9520438-b5a1-5e43-8f36-bb0eabe2cfd4"
+    },
+    "fields": {
+      "Line1": "1402 South Congress Ave",
+      "Line2": null,
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "78704",
+      "Country": "United States",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ac18b6d8-94dd-5347-8605-15a0413efb93"
+    },
+    "fields": {
+      "Line1": "Søndergade 45",
+      "Line2": null,
+      "City": "Aarhus",
+      "StateProvince": "82",
+      "PostalCode": "8000",
+      "Country": "Denmark",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3eaef713-978f-57ed-9cef-9ab121ab0a11"
+    },
+    "fields": {
+      "Line1": "932 West Randolph Street",
+      "Line2": null,
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60607",
+      "Country": "United States",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "026e815e-4308-54ca-aa39-a44dfb56c1be"
+    },
+    "fields": {
+      "Line1": "Strada Farini 22",
+      "Line2": null,
+      "City": "Parma",
+      "StateProvince": "PR",
+      "PostalCode": "43121",
+      "Country": "Italy",
+      "Latitude": 44.8015,
+      "Longitude": 10.3279
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0eb18960-fb98-5064-85b3-43ba2e6a8e2a"
+    },
+    "fields": {
+      "Line1": "55 Wyndham Street North",
+      "Line2": null,
+      "City": "Guelph",
+      "StateProvince": "ON",
+      "PostalCode": "N1H 4E6",
+      "Country": "Canada",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0f8e8c7c-82b0-5a3c-88e6-e172a7029a01"
+    },
+    "fields": {
+      "Line1": "148 Carp Street",
+      "Line2": null,
+      "City": "Bega",
+      "StateProvince": "NSW",
+      "PostalCode": "2550",
+      "Country": "Australia",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c10503cd-1c5a-54e2-9986-3fb524f330da"
+    },
+    "fields": {
+      "Line1": "104 Main Street",
+      "Line2": null,
+      "City": "Brattleboro",
+      "StateProvince": "VT",
+      "PostalCode": "05301",
+      "Country": "United States",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a5b31bb1-d77f-5c24-8df8-39fe2eb70c42"
+    },
+    "fields": {
+      "Line1": "16 Grande Rue",
+      "Line2": null,
+      "City": "Poligny",
+      "StateProvince": "39",
+      "PostalCode": "39800",
+      "Country": "France",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "079871d6-640a-59ba-9bc2-9f4fa07ca8bc"
+    },
+    "fields": {
+      "Line1": "1740 Wazee Street",
+      "Line2": null,
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80202",
+      "Country": "United States",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "49976c77-b2d3-53f0-ae42-bbf8d16d5261"
+    },
+    "fields": {
+      "Line1": "Gral. Rodríguez 540",
+      "Line2": null,
+      "City": "Tandil",
+      "StateProvince": "B",
+      "PostalCode": "B7000",
+      "Country": "Argentina",
+      "Latitude": -37.3217,
+      "Longitude": -59.1332
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2954d2c7-96d5-58bd-98cf-a3254a0a4e4a"
+    },
+    "fields": {
+      "Line1": "33 Salamanca Place",
+      "Line2": null,
+      "City": "Hobart",
+      "StateProvince": "TAS",
+      "PostalCode": "7000",
+      "Country": "Australia",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a8287cd2-a575-5dab-8f61-945295e4933d"
+    },
+    "fields": {
+      "Line1": "8 Rue Royale",
+      "Line2": null,
+      "City": "Annecy",
+      "StateProvince": "74",
+      "PostalCode": "74000",
+      "Country": "France",
+      "Latitude": 45.8992,
+      "Longitude": 6.1294
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6a77e5d4-44a8-5df4-97c6-0e7562e6cda8"
+    },
+    "fields": {
+      "Line1": "345 5th Street",
+      "Line2": null,
+      "City": "Courtenay",
+      "StateProvince": "BC",
+      "PostalCode": "V9N 1J9",
+      "Country": "Canada",
+      "Latitude": 49.6877,
+      "Longitude": -124.9936
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bd32b08b-4e9b-529e-baff-2866a7680de3"
+    },
+    "fields": {
+      "Line1": "482 Court Street",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11231",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "241161fb-db56-5651-84c3-d26cfd4f02f0"
+    },
+    "fields": {
+      "Line1": "Rue du Bourg 11",
+      "Line2": null,
+      "City": "Gruyères",
+      "StateProvince": "FR",
+      "PostalCode": "1663",
+      "Country": "Switzerland",
+      "Latitude": 46.5836,
+      "Longitude": 7.0822
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2e7f37b6-f6f0-516b-8f62-550c376b0d28"
+    },
+    "fields": {
+      "Line1": "210 Breezy Avenue",
+      "Line2": null,
+      "City": "Greensboro",
+      "StateProvince": "VT",
+      "PostalCode": "05841",
+      "Country": "United States",
+      "Latitude": 44.5906,
+      "Longitude": -72.2929
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cc8ada3f-2da8-5cce-9a21-a1882222faea"
+    },
+    "fields": {
+      "Line1": "Calle de los Libres 304",
+      "Line2": null,
+      "City": "Oaxaca",
+      "StateProvince": "OAX",
+      "PostalCode": "68000",
+      "Country": "Mexico",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fc7809a0-bddf-5d80-a044-dca92cab909a"
+    },
+    "fields": {
+      "Line1": "88 Quay Street",
+      "Line2": null,
+      "City": "Auckland",
+      "StateProvince": "AUK",
+      "PostalCode": "1010",
+      "Country": "New Zealand",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39692d5f-c259-54f7-bb4b-28edba5ff352"
+    },
+    "fields": {
+      "Line1": "Prinzipalmarkt 19",
+      "Line2": null,
+      "City": "Münster",
+      "StateProvince": "NW",
+      "PostalCode": "48143",
+      "Country": "Germany",
+      "Latitude": 51.9607,
+      "Longitude": 7.6261
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f3ac22f6-e8d2-5873-b41e-c142f15c61d8"
+    },
+    "fields": {
+      "Line1": "312 East King Street",
+      "Line2": null,
+      "City": "Lancaster",
+      "StateProvince": "PA",
+      "PostalCode": "17602",
+      "Country": "United States",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5ce21a07-56af-572a-a845-ae89c986d689"
+    },
+    "fields": {
+      "Line1": "19 Water Street",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1a1df123-dad6-5488-be9e-4fa4a098f8ad"
+    },
+    "fields": {
+      "Line1": "44 Sandgate",
+      "Line2": null,
+      "City": "Ayrshire",
+      "StateProvince": "SAY",
+      "PostalCode": "KA7 1BX",
+      "Country": "United Kingdom",
+      "Latitude": 55.4586,
+      "Longitude": -4.6292
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "90e6dc28-fe95-53e8-805d-0b7ad593f3dc"
+    },
+    "fields": {
+      "Line1": "10 Place de la Cité",
+      "Line2": null,
+      "City": "Rodez",
+      "StateProvince": "12",
+      "PostalCode": "12000",
+      "Country": "France",
+      "Latitude": 44.3506,
+      "Longitude": 2.573
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "764186fd-48e4-571d-864d-ea9d8ebaf8d5"
+    },
+    "fields": {
+      "Line1": "7-1 Odori Nishi, Chuo Ward",
+      "Line2": null,
+      "City": "Hokkaido",
+      "StateProvince": "01",
+      "PostalCode": "060-0042",
+      "Country": "Japan",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "038bc175-601d-5b60-8799-e88f32bff409"
+    },
+    "fields": {
+      "Line1": "620 State Street",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "57c6f793-a596-5194-9c50-7aab35cc96f5"
+    },
+    "fields": {
+      "Line1": "Waagplein 4",
+      "Line2": null,
+      "City": "Alkmaar",
+      "StateProvince": "NH",
+      "PostalCode": "1811 JP",
+      "Country": "Netherlands",
+      "Latitude": 52.6324,
+      "Longitude": 4.7534
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f14383e6-cff3-5b13-8f17-8ee075e7ccc7"
+    },
+    "fields": {
+      "Line1": "Kale Nagusia 15",
+      "Line2": null,
+      "City": "Idiazabal",
+      "StateProvince": "PV",
+      "PostalCode": "20213",
+      "Country": "Spain",
+      "Latitude": 43.05,
+      "Longitude": -2.25
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f19902f1-1d72-517b-9394-fb7a0f40096f"
+    },
+    "fields": {
+      "Line1": "825 NW 23rd Avenue",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97210",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92cab43e-f331-5d9c-925c-c8e10fae574d"
+    },
+    "fields": {
+      "Line1": "195 Church Street",
+      "Line2": null,
+      "City": "Burlington",
+      "StateProvince": "VT",
+      "PostalCode": "05401",
+      "Country": "United States",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a42c88f9-4395-5dde-80c3-5dff9910dc08"
+    },
+    "fields": {
+      "Line1": "1205 West Main Street",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "eb6ac0fd-81b9-50cc-b9a6-cc6b88883847"
+    },
+    "fields": {
+      "Line1": "4412 California Ave SW",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98116",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4f2b1479-e9bb-524a-8642-c54bd329fc79"
+    },
+    "fields": {
+      "Line1": "Via Emilia Santo Stefano 12",
+      "Line2": null,
+      "City": "Reggio Emilia",
+      "StateProvince": "RE",
+      "PostalCode": "42121",
+      "Country": "Italy",
+      "Latitude": 44.6983,
+      "Longitude": 10.631
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c96682c0-58c9-56c9-a70b-2d114a1b5a99"
+    },
+    "fields": {
+      "Line1": "388 Broadway",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0978cd6d-6d50-5c85-b38d-f55fbcaefe40"
+    },
+    "fields": {
+      "Line1": "62 High Street",
+      "Line2": null,
+      "City": "Kilkenny",
+      "StateProvince": "KK",
+      "PostalCode": "R95 X2P1",
+      "Country": "Ireland",
+      "Latitude": 52.6541,
+      "Longitude": -7.2448
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5df5109f-010d-5ac2-990d-f298f8d6dd4d"
+    },
+    "fields": {
+      "Line1": "9 Broad Street",
+      "Line2": null,
+      "City": "Ludlow",
+      "StateProvince": "SHR",
+      "PostalCode": "SY8 1NG",
+      "Country": "United Kingdom",
+      "Latitude": 52.368,
+      "Longitude": -2.718
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e0196b54-1669-50d3-9d53-6c23a6ae8446"
+    },
+    "fields": {
+      "Line1": "ul. Floriańska 28",
+      "Line2": null,
+      "City": "Kraków",
+      "StateProvince": "MA",
+      "PostalCode": "31-021",
+      "Country": "Poland",
+      "Latitude": 50.0647,
+      "Longitude": 19.945
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ac40c98c-b245-5a43-b2ef-6bd28a25b813"
+    },
+    "fields": {
+      "Line1": "518 Adams Street",
+      "Line2": null,
+      "City": "Green Bay",
+      "StateProvince": "WI",
+      "PostalCode": "54301",
+      "Country": "United States",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9c81abfb-7073-5357-ba04-4f295a77b6c1"
+    },
+    "fields": {
+      "Line1": "Rua das Portas de Beja 14",
+      "Line2": null,
+      "City": "Serpa",
+      "StateProvince": "07",
+      "PostalCode": "7830-342",
+      "Country": "Portugal",
+      "Latitude": 37.943,
+      "Longitude": -7.596
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "906404b0-9250-58e5-9c8a-0e4250dab72a"
+    },
+    "fields": {
+      "Line1": "700 Hopper Street",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "741c8352-94fd-580c-bc49-3acf9f13e5cc"
+    },
+    "fields": {
+      "Line1": "2101 Western Avenue",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98121",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cd091368-db8c-5f81-9a7b-b06efd62c2f2"
+    },
+    "fields": {
+      "Line1": "24 Rue Torteron",
+      "Line2": null,
+      "City": "Saint-Lô",
+      "StateProvince": "50",
+      "PostalCode": "50000",
+      "Country": "France",
+      "Latitude": 49.1157,
+      "Longitude": -1.091
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1a106ef6-8719-5f8c-9c33-24c90c55f1ff"
+    },
+    "fields": {
+      "Line1": "1102 East Johnson Street",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "161d0539-5473-58b4-871a-101470d0ad95"
+    },
+    "fields": {
+      "Line1": "Algade 21",
+      "Line2": null,
+      "City": "Nykøbing Mors",
+      "StateProvince": "81",
+      "PostalCode": "7900",
+      "Country": "Denmark",
+      "Latitude": 56.794,
+      "Longitude": 8.857
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "966a7dd9-8723-5eb7-b1e2-6e8cea1ba5fa"
+    },
+    "fields": {
+      "Line1": "315 Smith Street",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11231",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "760b3cfb-06d9-5470-bbda-0708975539ae"
+    },
+    "fields": {
+      "Line1": "Römerstraße 9",
+      "Line2": null,
+      "City": "Bregenz",
+      "StateProvince": "8",
+      "PostalCode": "6900",
+      "Country": "Austria",
+      "Latitude": 47.5031,
+      "Longitude": 9.7471
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "289d5216-aea0-5515-b658-74f06e6f1c6c"
+    },
+    "fields": {
+      "Line1": "3421 NE Broadway",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97232",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2c8de055-0454-5a39-8b0e-80957e5206a0"
+    },
+    "fields": {
+      "Line1": "11250 Highway 1",
+      "Line2": null,
+      "City": "Point Reyes Station",
+      "StateProvince": "CA",
+      "PostalCode": "94956",
+      "Country": "United States",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e4071392-287b-5368-b656-9d54c8541907"
+    },
+    "fields": {
+      "Line1": "Via Roma 58",
+      "Line2": null,
+      "City": "Sassari",
+      "StateProvince": "SS",
+      "PostalCode": "07100",
+      "Country": "Italy",
+      "Latitude": 40.7259,
+      "Longitude": 8.5557
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "87c5632b-c10a-58d5-8617-cacd532bc6ef"
+    },
+    "fields": {
+      "Line1": "214 East Napa Street",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5d53fc7d-fc6c-581c-8d11-9c3e805fe81e"
+    },
+    "fields": {
+      "Line1": "Dorfstrasse 31",
+      "Line2": null,
+      "City": "Emmental",
+      "StateProvince": "BE",
+      "PostalCode": "3550",
+      "Country": "Switzerland",
+      "Latitude": 47.05,
+      "Longitude": 7.75
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7af7b58b-62d5-5f3e-84ce-075ec67fad5a"
+    },
+    "fields": {
+      "Line1": "Carretera General s/n",
+      "Line2": null,
+      "City": "Cabrales",
+      "StateProvince": "AS",
+      "PostalCode": "33555",
+      "Country": "Spain",
+      "Latitude": 43.3,
+      "Longitude": -4.85
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2cbbdf0e-680b-5853-9184-598081a7ca1c"
+    },
+    "fields": {
+      "Line1": "2115 North Halsted Street",
+      "Line2": null,
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60614",
+      "Country": "United States",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6c375242-43ba-5b4e-8443-c8a6f2b17805"
+    },
+    "fields": {
+      "Line1": "Kramgasse 49",
+      "Line2": null,
+      "City": "Bern",
+      "StateProvince": "BE",
+      "PostalCode": "3011",
+      "Country": "Switzerland",
+      "Latitude": 46.948,
+      "Longitude": 7.4474
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4f3a4c6b-017d-5ea1-86ea-eb1a855365c5"
+    },
+    "fields": {
+      "Line1": "2810 East 3rd Avenue",
+      "Line2": null,
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80206",
+      "Country": "United States",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8fc63888-e68c-5090-a5da-737a0b09cd53"
+    },
+    "fields": {
+      "Line1": "2-8 Minami 2 Jonishi, Chuo Ward",
+      "Line2": null,
+      "City": "Hokkaido",
+      "StateProvince": "01",
+      "PostalCode": "060-0062",
+      "Country": "Japan",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ab5ca4e9-7324-5797-aeec-59cc1a25e102"
+    },
+    "fields": {
+      "Line1": "Via Cavour 17",
+      "Line2": null,
+      "City": "Bra",
+      "StateProvince": "CN",
+      "PostalCode": "12042",
+      "Country": "Italy",
+      "Latitude": 44.698,
+      "Longitude": 7.858
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "08788160-96a0-5c24-92cf-c1f3a05534f7"
+    },
+    "fields": {
+      "Line1": "412 Liberty Street",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "369d3fb1-79d1-5bb0-8133-7d9be18c7008"
+    },
+    "fields": {
+      "Line1": "1108 W Idaho Street",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2cb4658e-8a50-5cb1-8bd6-48625bf390dd"
+    },
+    "fields": {
+      "Line1": "14 Rue du Collège",
+      "Line2": null,
+      "City": "Poligny",
+      "StateProvince": "39",
+      "PostalCode": "39800",
+      "Country": "France",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6481bcaa-2e9c-549a-aaba-3a30af98a4c2"
+    },
+    "fields": {
+      "Line1": "Kale Nagusia 22",
+      "Line2": null,
+      "City": "Idiazabal",
+      "StateProvince": "PV",
+      "PostalCode": "20213",
+      "Country": "Spain",
+      "Latitude": 43.05,
+      "Longitude": -2.25
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9f194aae-b316-5e06-8684-70f403028d06"
+    },
+    "fields": {
+      "Line1": "824 E Johnson Street",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f7733748-b1cd-5045-b9ec-1315e86d5545"
+    },
+    "fields": {
+      "Line1": "540 Broadway",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6aed082b-08e1-5a56-96ff-20745a0d490f"
+    },
+    "fields": {
+      "Line1": "Kita 8 Nishi 5, Kita-ku",
+      "Line2": null,
+      "City": "Hokkaido",
+      "StateProvince": "01",
+      "PostalCode": "060-0808",
+      "Country": "Japan",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46fce74f-89df-5613-becf-e6e7648df2eb"
+    },
+    "fields": {
+      "Line1": "39 MacCurtain Street",
+      "Line2": null,
+      "City": "Cork",
+      "StateProvince": "CO",
+      "PostalCode": "T23 F682",
+      "Country": "Ireland",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0a337797-0f60-5636-b74f-5c95e1b2ebd8"
+    },
+    "fields": {
+      "Line1": "Calle de los Libres 310",
+      "Line2": null,
+      "City": "Oaxaca",
+      "StateProvince": "OAX",
+      "PostalCode": "68000",
+      "Country": "Mexico",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7d4a0290-36b8-5e13-9c1d-21b81fd1ee3c"
+    },
+    "fields": {
+      "Line1": "Laat 118",
+      "Line2": null,
+      "City": "Alkmaar",
+      "StateProvince": "NH",
+      "PostalCode": "1811 EL",
+      "Country": "Netherlands",
+      "Latitude": 52.6324,
+      "Longitude": 4.7534
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d77148ea-a4e2-57ed-be6c-61562534d2f5"
+    },
+    "fields": {
+      "Line1": "315 S Washington Street",
+      "Line2": null,
+      "City": "Green Bay",
+      "StateProvince": "WI",
+      "PostalCode": "54301",
+      "Country": "United States",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1a923961-2d11-547f-946e-fa767b10a5c8"
+    },
+    "fields": {
+      "Line1": "Strada della Repubblica 45",
+      "Line2": null,
+      "City": "Parma",
+      "StateProvince": "PR",
+      "PostalCode": "43121",
+      "Country": "Italy",
+      "Latitude": 44.8015,
+      "Longitude": 10.3279
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7299c5ac-aaa4-5e6b-9ae3-179953d4d0f4"
+    },
+    "fields": {
+      "Line1": "284 Court Street",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11231",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9ac111e4-6cb4-5101-b04d-268b2f7a87d6"
+    },
+    "fields": {
+      "Line1": "2115 NE Alberta Street",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97211",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fff043bb-2147-5dd7-b362-c0651f09bdf7"
+    },
+    "fields": {
+      "Line1": "Römerstraße 18",
+      "Line2": null,
+      "City": "Bregenz",
+      "StateProvince": "8",
+      "PostalCode": "6900",
+      "Country": "Austria",
+      "Latitude": 47.5031,
+      "Longitude": 9.7471
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "eead08fa-7139-59d8-92f3-7b974c336e7e"
+    },
+    "fields": {
+      "Line1": "12 Sandgate",
+      "Line2": null,
+      "City": "Ayrshire",
+      "StateProvince": "SAY",
+      "PostalCode": "KA7 1BG",
+      "Country": "United Kingdom",
+      "Latitude": 55.4586,
+      "Longitude": -4.6292
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97d3d351-d078-5553-943d-5ba1f13aa14e"
+    },
+    "fields": {
+      "Line1": "Av. Universidad 142",
+      "Line2": null,
+      "City": "Querétaro",
+      "StateProvince": "QUE",
+      "PostalCode": "76000",
+      "Country": "Mexico",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1f1a6500-008a-56df-805a-8e41d29f437c"
+    },
+    "fields": {
+      "Line1": "Via Vittorio Emanuele II 88",
+      "Line2": null,
+      "City": "Bra",
+      "StateProvince": "CN",
+      "PostalCode": "12042",
+      "Country": "Italy",
+      "Latitude": 44.698,
+      "Longitude": 7.858
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "59b5e6a1-a94b-5803-b64a-e50dea960cdc"
+    },
+    "fields": {
+      "Line1": "4518 University Way NE",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98105",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e2870508-8e61-5e13-ba04-30fec9ce87fb"
+    },
+    "fields": {
+      "Line1": "Algade 31",
+      "Line2": null,
+      "City": "Nykøbing Mors",
+      "StateProvince": "81",
+      "PostalCode": "7900",
+      "Country": "Denmark",
+      "Latitude": 56.794,
+      "Longitude": 8.857
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a77c9dbb-22e1-5976-bdb4-0e11e9131652"
+    },
+    "fields": {
+      "Line1": "74 Elizabeth Street",
+      "Line2": null,
+      "City": "Hobart",
+      "StateProvince": "TAS",
+      "PostalCode": "7000",
+      "Country": "Australia",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "960e6514-efaa-595d-bf75-520603e01c8c"
+    },
+    "fields": {
+      "Line1": "1550 Rue des Cascades",
+      "Line2": null,
+      "City": "Saint-Hyacinthe",
+      "StateProvince": "QC",
+      "PostalCode": "J2S 3H5",
+      "Country": "Canada",
+      "Latitude": 45.63,
+      "Longitude": -72.957
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fce0fbc1-edc9-5ca9-91f6-7174b7d84ce5"
+    },
+    "fields": {
+      "Line1": "920 W Fulton Market",
+      "Line2": null,
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60607",
+      "Country": "United States",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "62985e97-16b5-519c-adeb-63431a1ea1e2"
+    },
+    "fields": {
+      "Line1": "168 College Street",
+      "Line2": null,
+      "City": "Burlington",
+      "StateProvince": "VT",
+      "PostalCode": "05401",
+      "Country": "United States",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2f59b344-7c87-5467-8dd5-7a4bf1d3b423"
+    },
+    "fields": {
+      "Line1": "Av. España 640",
+      "Line2": null,
+      "City": "Tandil",
+      "StateProvince": "B",
+      "PostalCode": "B7000",
+      "Country": "Argentina",
+      "Latitude": -37.3217,
+      "Longitude": -59.1332
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d82f680b-ab71-5641-adc1-9bd8797e91e2"
+    },
+    "fields": {
+      "Line1": "19 Harbour Street",
+      "Line2": null,
+      "City": "Oamaru",
+      "StateProvince": "OTA",
+      "PostalCode": "9400",
+      "Country": "New Zealand",
+      "Latitude": -45.0975,
+      "Longitude": 170.9714
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8e17f238-138f-5c28-814c-549c345fe4a4"
+    },
+    "fields": {
+      "Line1": "11315 State Route 1",
+      "Line2": null,
+      "City": "Point Reyes Station",
+      "StateProvince": "CA",
+      "PostalCode": "94956",
+      "Country": "United States",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "97828807-6634-51c8-ba7f-e0eeeac9400f"
+    },
+    "fields": {
+      "Line1": "240 N Queen Street",
+      "Line2": null,
+      "City": "Lancaster",
+      "StateProvince": "PA",
+      "PostalCode": "17603",
+      "Country": "United States",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "183a3544-fd4b-5f95-89c8-f8c6ab67253b"
+    },
+    "fields": {
+      "Line1": "Via Emilia Santo Stefano 29",
+      "Line2": null,
+      "City": "Reggio Emilia",
+      "StateProvince": "RE",
+      "PostalCode": "42121",
+      "Country": "Italy",
+      "Latitude": 44.6983,
+      "Longitude": 10.631
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "390971c5-654a-53c7-b3dc-74b435d8e637"
+    },
+    "fields": {
+      "Line1": "51 High Street",
+      "Line2": null,
+      "City": "Kilkenny",
+      "StateProvince": "KK",
+      "PostalCode": "R95 T294",
+      "Country": "Ireland",
+      "Latitude": 52.6541,
+      "Longitude": -7.2448
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c7123df5-8dfb-5ce1-9455-4723fa7a0a51"
+    },
+    "fields": {
+      "Line1": "78 Patton Avenue",
+      "Line2": null,
+      "City": "Asheville",
+      "StateProvince": "NC",
+      "PostalCode": "28801",
+      "Country": "United States",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e035e2cb-d9fd-59cc-8a00-248d4ade1980"
+    },
+    "fields": {
+      "Line1": "9 Rue Royale",
+      "Line2": null,
+      "City": "Annecy",
+      "StateProvince": "74",
+      "PostalCode": "74000",
+      "Country": "France",
+      "Latitude": 45.8992,
+      "Longitude": 6.1294
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c43a54bf-70ed-5f21-b3fc-39798837886e"
+    },
+    "fields": {
+      "Line1": "1532 Larimer Street",
+      "Line2": null,
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80202",
+      "Country": "United States",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f291f954-5ea6-5a5e-9010-1008ea2854a7"
+    },
+    "fields": {
+      "Line1": "50 Stone Road E",
+      "Line2": null,
+      "City": "Guelph",
+      "StateProvince": "ON",
+      "PostalCode": "N1G 2W1",
+      "Country": "Canada",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1e048913-ccc9-5193-a5bb-f7fac759080a"
+    },
+    "fields": {
+      "Line1": "23 High Street",
+      "Line2": null,
+      "City": "Somerset",
+      "StateProvince": "SOM",
+      "PostalCode": "BA4 5AA",
+      "Country": "United Kingdom",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "28377bbf-bde3-5f9d-a4c9-8990b75d924e"
+    },
+    "fields": {
+      "Line1": "142 Ponsonby Road",
+      "Line2": null,
+      "City": "Auckland",
+      "StateProvince": "AUK",
+      "PostalCode": "1011",
+      "Country": "New Zealand",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2209f3c3-f622-5407-8734-bbfff5e1555b"
+    },
+    "fields": {
+      "Line1": "610 State Street",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bd19cd2c-3585-5e8f-87a8-93c3a25f1780"
+    },
+    "fields": {
+      "Line1": "Lindauer Straße 44",
+      "Line2": null,
+      "City": "Allgäu",
+      "StateProvince": "BY",
+      "PostalCode": "87439",
+      "Country": "Germany",
+      "Latitude": 47.58,
+      "Longitude": 10.22
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a2b9e051-18c4-547d-a7e6-8c356010590a"
+    },
+    "fields": {
+      "Line1": "Asklipiou 18",
+      "Line2": null,
+      "City": "Trikala",
+      "StateProvince": "E4",
+      "PostalCode": "421 00",
+      "Country": "Greece",
+      "Latitude": 39.5556,
+      "Longitude": 21.7679
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "44c221ad-1b8f-588b-8b03-e9120a83dc8d"
+    },
+    "fields": {
+      "Line1": "1804 S Congress Avenue",
+      "Line2": null,
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "78704",
+      "Country": "United States",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "01e53388-a0ab-5832-9fb0-0c83abd0f76f"
+    },
+    "fields": {
+      "Line1": "322 Craftsbury Road",
+      "Line2": null,
+      "City": "Greensboro",
+      "StateProvince": "VT",
+      "PostalCode": "05841",
+      "Country": "United States",
+      "Latitude": 44.5906,
+      "Longitude": -72.2929
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8190af9b-9051-500a-937b-1a0ce83f1fa3"
+    },
+    "fields": {
+      "Line1": "Rue du Bourg 17",
+      "Line2": null,
+      "City": "Gruyères",
+      "StateProvince": "FR",
+      "PostalCode": "1663",
+      "Country": "Switzerland",
+      "Latitude": 46.5836,
+      "Longitude": 7.0822
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a5bdf4f1-94fe-5bbe-aad7-59d3ccc16674"
+    },
+    "fields": {
+      "Line1": "109 Carp Street",
+      "Line2": null,
+      "City": "Bega",
+      "StateProvince": "NSW",
+      "PostalCode": "2550",
+      "Country": "Australia",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7e83fb16-8eea-5018-bd8d-8f1d28884ee6"
+    },
+    "fields": {
+      "Line1": "ul. Floriańska 33",
+      "Line2": null,
+      "City": "Kraków",
+      "StateProvince": "MA",
+      "PostalCode": "31-019",
+      "Country": "Poland",
+      "Latitude": 50.0647,
+      "Longitude": 19.945
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9ac874db-ccf5-5f7b-94b5-451e7eeef128"
+    },
+    "fields": {
+      "Line1": "214 E State Street",
+      "Line2": null,
+      "City": "Ithaca",
+      "StateProvince": "NY",
+      "PostalCode": "14850",
+      "Country": "United States",
+      "Latitude": 42.444,
+      "Longitude": -76.5019
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c873b173-6e4f-5a30-ab8a-d5cd93fadd8b"
+    },
+    "fields": {
+      "Line1": "Rua das Portas de Beja 14",
+      "Line2": null,
+      "City": "Serpa",
+      "StateProvince": "07",
+      "PostalCode": "7830-345",
+      "Country": "Portugal",
+      "Latitude": 37.943,
+      "Longitude": -7.596
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5925b421-9042-5627-aac3-bb5ed105a303"
+    },
+    "fields": {
+      "Line1": "435 5th Street",
+      "Line2": null,
+      "City": "Courtenay",
+      "StateProvince": "BC",
+      "PostalCode": "V9N 1J7",
+      "Country": "Canada",
+      "Latitude": 49.6877,
+      "Longitude": -124.9936
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0c518a99-a644-5a11-bc43-b215326ab775"
+    },
+    "fields": {
+      "Line1": "119 Main Street",
+      "Line2": null,
+      "City": "Brattleboro",
+      "StateProvince": "VT",
+      "PostalCode": "05301",
+      "Country": "United States",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "96a4471d-cb25-5013-aa75-c9c14b52ada1"
+    },
+    "fields": {
+      "Line1": "Markt 41",
+      "Line2": null,
+      "City": "Gouda",
+      "StateProvince": "ZH",
+      "PostalCode": "2801 JK",
+      "Country": "Netherlands",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "760ffec2-b47a-59a0-8285-a136666fedca"
+    },
+    "fields": {
+      "Line1": "Carretera General s/n",
+      "Line2": null,
+      "City": "Cabrales",
+      "StateProvince": "AS",
+      "PostalCode": "33555",
+      "Country": "Spain",
+      "Latitude": 43.3,
+      "Longitude": -4.85
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f3942277-79fd-59ef-bf32-439d69c3485c"
+    },
+    "fields": {
+      "Line1": "Corso Vittorio Emanuele II 62",
+      "Line2": null,
+      "City": "Sassari",
+      "StateProvince": "SS",
+      "PostalCode": "07100",
+      "Country": "Italy",
+      "Latitude": 40.7259,
+      "Longitude": 8.5557
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e984c043-8a3a-5e88-b2df-dd1e778a4797"
+    },
+    "fields": {
+      "Line1": "Vestergade 28",
+      "Line2": null,
+      "City": "Aarhus",
+      "StateProvince": "82",
+      "PostalCode": "8000",
+      "Country": "Denmark",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a5a317dc-58dc-523d-a09a-e44eb159e850"
+    },
+    "fields": {
+      "Line1": "6 Place de la Cité",
+      "Line2": null,
+      "City": "Rodez",
+      "StateProvince": "12",
+      "PostalCode": "12000",
+      "Country": "France",
+      "Latitude": 44.3506,
+      "Longitude": 2.573
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "128861cb-b81d-56cf-a728-494dc87d4988"
+    },
+    "fields": {
+      "Line1": "205 Kentucky Street",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4cc85bcb-85d0-59a7-8a75-0de33e86f7d6"
+    },
+    "fields": {
+      "Line1": "440 Henry Mall",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53706",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c8d45282-4fee-5adc-826b-3ec038058352"
+    },
+    "fields": {
+      "Line1": "Dorfstrasse 15",
+      "Line2": null,
+      "City": "Emmental",
+      "StateProvince": "BE",
+      "PostalCode": "3550",
+      "Country": "Switzerland",
+      "Latitude": 47.05,
+      "Longitude": 7.75
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "8d6bc7d2-9c69-5607-9298-20ea66272eb8"
+    },
+    "fields": {
+      "Line1": "14 Broad Street",
+      "Line2": null,
+      "City": "Ludlow",
+      "StateProvince": "SHR",
+      "PostalCode": "SY8 1NG",
+      "Country": "United Kingdom",
+      "Latitude": 52.368,
+      "Longitude": -2.718
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0fcbeed8-0a68-5f18-9f52-8f75a8a85dd2"
+    },
+    "fields": {
+      "Line1": "Prinzipalmarkt 19",
+      "Line2": null,
+      "City": "Münster",
+      "StateProvince": "NW",
+      "PostalCode": "48143",
+      "Country": "Germany",
+      "Latitude": 51.9607,
+      "Longitude": 7.6261
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6e96fc11-ec03-5f8e-9660-ed2d7d34976f"
+    },
+    "fields": {
+      "Line1": "3422 SE Hawthorne Blvd",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97214",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d7f7a636-497a-5fb7-96e5-311af386d57a"
+    },
+    "fields": {
+      "Line1": "714 N 8th Street",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "67396cce-a798-5c5a-819d-24101609077f"
+    },
+    "fields": {
+      "Line1": "27 Rue Torteron",
+      "Line2": null,
+      "City": "Saint-Lô",
+      "StateProvince": "50",
+      "PostalCode": "50000",
+      "Country": "France",
+      "Latitude": 49.1157,
+      "Longitude": -1.091
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "524ccc31-fc66-587f-970a-0a6ca7557514"
+    },
+    "fields": {
+      "Line1": "Kramgasse 52",
+      "Line2": null,
+      "City": "Bern",
+      "StateProvince": "BE",
+      "PostalCode": "3011",
+      "Country": "Switzerland",
+      "Latitude": 46.948,
+      "Longitude": 7.4474
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "848c0126-3a1c-5924-ae75-07e89b654816"
+    },
+    "fields": {
+      "Line1": "612 Vanderbilt Avenue",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11238",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ee077fbb-1920-5131-98b2-3b433be2662f"
+    },
+    "fields": {
+      "Line1": "412 W Idaho St",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1233c2e8-fb70-5312-9280-054bdc0e4c77"
+    },
+    "fields": {
+      "Line1": "218 B St",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "34da6b9a-0df1-52c9-8b90-82acfd9b7bb8"
+    },
+    "fields": {
+      "Line1": "745 E Johnson St",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "75c93953-0530-518d-a2f1-9d3f75394d51"
+    },
+    "fields": {
+      "Line1": "Strada Farini 34",
+      "Line2": null,
+      "City": "Parma",
+      "StateProvince": "PR",
+      "PostalCode": "43121",
+      "Country": "Italy",
+      "Latitude": 44.8015,
+      "Longitude": 10.3279
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "b8b0c776-32f9-5ed8-a3c5-521dea2becfe"
+    },
+    "fields": {
+      "Line1": "18 Rue Carnot",
+      "Line2": null,
+      "City": "Annecy",
+      "StateProvince": "74",
+      "PostalCode": "74000",
+      "Country": "France",
+      "Latitude": 45.8992,
+      "Longitude": 6.1294
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cf9d1f48-b45d-5ab1-8e32-af5d6d76a2c7"
+    },
+    "fields": {
+      "Line1": "388 Bergen St",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11217",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a0b3f2b8-a6b2-531b-8301-d440b0b0d7cf"
+    },
+    "fields": {
+      "Line1": "154 College St",
+      "Line2": null,
+      "City": "Burlington",
+      "StateProvince": "VT",
+      "PostalCode": "05401",
+      "Country": "United States",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "e77bc548-b538-597a-923c-e72ddb0d65e0"
+    },
+    "fields": {
+      "Line1": "1420 E Pike St",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98122",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "05fd2f5a-d959-5525-965f-26229bf84f11"
+    },
+    "fields": {
+      "Line1": "Kita 5-jo Nishi 6-chome, Chuo-ku",
+      "Line2": null,
+      "City": "Hokkaido",
+      "StateProvince": "01",
+      "PostalCode": "060-0005",
+      "Country": "Japan",
+      "Latitude": 43.0642,
+      "Longitude": 141.3469
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1fa285a2-9df2-5381-99f2-de6ad0a7e857"
+    },
+    "fields": {
+      "Line1": "Søndergade 42",
+      "Line2": null,
+      "City": "Aarhus",
+      "StateProvince": "82",
+      "PostalCode": "8000",
+      "Country": "Denmark",
+      "Latitude": 56.1629,
+      "Longitude": 10.2039
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "254f2e71-fa18-5f26-a512-c484c739b59c"
+    },
+    "fields": {
+      "Line1": "Kale Nagusia 19",
+      "Line2": null,
+      "City": "Idiazabal",
+      "StateProvince": "PV",
+      "PostalCode": "20213",
+      "Country": "Spain",
+      "Latitude": 43.05,
+      "Longitude": -2.25
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ca8e8b17-34e8-5df8-817e-7b180f203469"
+    },
+    "fields": {
+      "Line1": "482 First St E",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "55402fed-61ac-5275-b465-79d98f64ac6d"
+    },
+    "fields": {
+      "Line1": "2315 NW 23rd Ave",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97210",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "69e64efc-1294-5c14-9e1f-12c133bc3fd5"
+    },
+    "fields": {
+      "Line1": "910 S Broadway",
+      "Line2": null,
+      "City": "Green Bay",
+      "StateProvince": "WI",
+      "PostalCode": "54304",
+      "Country": "United States",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3628da16-47ed-5aa8-a18d-defa94741139"
+    },
+    "fields": {
+      "Line1": "312 N Queen St",
+      "Line2": null,
+      "City": "Lancaster",
+      "StateProvince": "PA",
+      "PostalCode": "17603",
+      "Country": "United States",
+      "Latitude": 40.0379,
+      "Longitude": -76.3055
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "5ea970f9-bda6-55b8-8d8f-d63d6bf6be5c"
+    },
+    "fields": {
+      "Line1": "114 Breezy Ave",
+      "Line2": null,
+      "City": "Greensboro",
+      "StateProvince": "VT",
+      "PostalCode": "05841",
+      "Country": "United States",
+      "Latitude": 44.5906,
+      "Longitude": -72.2929
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c38af5ed-d574-567c-9c71-8c8ab91998a5"
+    },
+    "fields": {
+      "Line1": "Laat 88",
+      "Line2": null,
+      "City": "Alkmaar",
+      "StateProvince": "NH",
+      "PostalCode": "1811 EK",
+      "Country": "Netherlands",
+      "Latitude": 52.6324,
+      "Longitude": 4.7534
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "407a25a3-e7ae-51ed-b766-0a504a754485"
+    },
+    "fields": {
+      "Line1": "1804 S Congress Ave",
+      "Line2": null,
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "78704",
+      "Country": "United States",
+      "Latitude": 30.2672,
+      "Longitude": -97.7431
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "335a5d58-6321-57d9-97f3-59a79f865d70"
+    },
+    "fields": {
+      "Line1": "Alpenstraße 27",
+      "Line2": null,
+      "City": "Allgäu",
+      "StateProvince": "BY",
+      "PostalCode": "87435",
+      "Country": "Germany",
+      "Latitude": 47.58,
+      "Longitude": 10.22
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "d1487cc7-e4fc-5e77-828b-ee8b935919ef"
+    },
+    "fields": {
+      "Line1": "64 Thames St",
+      "Line2": null,
+      "City": "Oamaru",
+      "StateProvince": "OTA",
+      "PostalCode": "9400",
+      "Country": "New Zealand",
+      "Latitude": -45.0975,
+      "Longitude": 170.9714
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "4221d20d-5c31-502a-bc19-29d8e4afe1b3"
+    },
+    "fields": {
+      "Line1": "2150 Boulevard Laurier O",
+      "Line2": null,
+      "City": "Saint-Hyacinthe",
+      "StateProvince": "QC",
+      "PostalCode": "J2S 3L8",
+      "Country": "Canada",
+      "Latitude": 45.63,
+      "Longitude": -72.957
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3ee7644b-aaea-5aee-82ea-880fd9af5162"
+    },
+    "fields": {
+      "Line1": "1109 W Main St",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "05b57e06-952b-5b13-bcef-9c64d2aa9d11"
+    },
+    "fields": {
+      "Line1": "209 E State St",
+      "Line2": null,
+      "City": "Ithaca",
+      "StateProvince": "NY",
+      "PostalCode": "14850",
+      "Country": "United States",
+      "Latitude": 42.444,
+      "Longitude": -76.5019
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ac1018ba-1ec0-5194-bdbc-f8d43535df6a"
+    },
+    "fields": {
+      "Line1": "Via Vittorio Emanuele II 95",
+      "Line2": null,
+      "City": "Bra",
+      "StateProvince": "CN",
+      "PostalCode": "12042",
+      "Country": "Italy",
+      "Latitude": 44.698,
+      "Longitude": 7.858
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "ae567336-2950-51b6-ba4f-e3805757a14a"
+    },
+    "fields": {
+      "Line1": "11315 State Route 1",
+      "Line2": null,
+      "City": "Point Reyes Station",
+      "StateProvince": "CA",
+      "PostalCode": "94956",
+      "Country": "United States",
+      "Latitude": 38.0682,
+      "Longitude": -122.8064
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "92b6878f-ccc6-5c21-a732-4511815e6656"
+    },
+    "fields": {
+      "Line1": "142 Carp St",
+      "Line2": null,
+      "City": "Bega",
+      "StateProvince": "NSW",
+      "PostalCode": "2550",
+      "Country": "Australia",
+      "Latitude": -36.6741,
+      "Longitude": 149.8409
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "09ed559c-cbcb-5562-a58c-8f5e0c393bb1"
+    },
+    "fields": {
+      "Line1": "68 N Lexington Ave",
+      "Line2": null,
+      "City": "Asheville",
+      "StateProvince": "NC",
+      "PostalCode": "28801",
+      "Country": "United States",
+      "Latitude": 35.5951,
+      "Longitude": -82.5515
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "6aad470c-7743-5198-acfa-623da3b67550"
+    },
+    "fields": {
+      "Line1": "138 Main St",
+      "Line2": null,
+      "City": "Brattleboro",
+      "StateProvince": "VT",
+      "PostalCode": "05301",
+      "Country": "United States",
+      "Latitude": 42.8509,
+      "Longitude": -72.5579
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "7e13fb79-21f0-5489-a47e-42d8cba47bb8"
+    },
+    "fields": {
+      "Line1": "Calle de los Libres 405",
+      "Line2": null,
+      "City": "Oaxaca",
+      "StateProvince": "OAX",
+      "PostalCode": "68000",
+      "Country": "Mexico",
+      "Latitude": 17.0732,
+      "Longitude": -96.7266
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "bd496947-f57f-5f4f-8d19-89dfd6f94a2c"
+    },
+    "fields": {
+      "Line1": "52 Patrick St",
+      "Line2": null,
+      "City": "Cork",
+      "StateProvince": "CO",
+      "PostalCode": "T12 X250",
+      "Country": "Ireland",
+      "Latitude": 51.8985,
+      "Longitude": -8.4756
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "db8526b4-7019-5f52-8c67-3974e0ed4d8a"
+    },
+    "fields": {
+      "Line1": "ul. Floriańska 28",
+      "Line2": null,
+      "City": "Kraków",
+      "StateProvince": "MA",
+      "PostalCode": "31-021",
+      "Country": "Poland",
+      "Latitude": 50.0647,
+      "Longitude": 19.945
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "924683d1-f84b-57e7-8ca5-7f9781ce024b"
+    },
+    "fields": {
+      "Line1": "82 S Winooski Ave",
+      "Line2": null,
+      "City": "Burlington",
+      "StateProvince": "VT",
+      "PostalCode": "05401",
+      "Country": "United States",
+      "Latitude": 44.4759,
+      "Longitude": -73.2121
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "69b7ca86-b7c1-541a-849c-e508ccc06ee1"
+    },
+    "fields": {
+      "Line1": "1204 Williamson St",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0e81ed4e-be10-51a7-8e43-099bf8488b1a"
+    },
+    "fields": {
+      "Line1": "44 Grande Rue",
+      "Line2": null,
+      "City": "Poligny",
+      "StateProvince": "39",
+      "PostalCode": "39800",
+      "Country": "France",
+      "Latitude": 46.8367,
+      "Longitude": 5.7075
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2b701f52-944a-52e2-86aa-863f923a2f2d"
+    },
+    "fields": {
+      "Line1": "1530 Blake St",
+      "Line2": null,
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80202",
+      "Country": "United States",
+      "Latitude": 39.7392,
+      "Longitude": -104.9903
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "9dcf503d-fa59-5d89-a297-fca1e5f6fbcb"
+    },
+    "fields": {
+      "Line1": "1142 W Fulton Market",
+      "Line2": null,
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60607",
+      "Country": "United States",
+      "Latitude": 41.8781,
+      "Longitude": -87.6298
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0432c707-7877-5c22-b1a6-24be53bcb8f5"
+    },
+    "fields": {
+      "Line1": "612 Vanderbilt Ave",
+      "Line2": null,
+      "City": "Brooklyn",
+      "StateProvince": "NY",
+      "PostalCode": "11238",
+      "Country": "United States",
+      "Latitude": 40.6782,
+      "Longitude": -73.9442
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a7c04a0d-7e4f-51c4-a12b-6e65ad3bbe83"
+    },
+    "fields": {
+      "Line1": "76 Wyndham St N",
+      "Line2": null,
+      "City": "Guelph",
+      "StateProvince": "ON",
+      "PostalCode": "N1H 4E7",
+      "Country": "Canada",
+      "Latitude": 43.5448,
+      "Longitude": -80.2482
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "19ab85f6-6c24-5937-aeff-3d199b37696d"
+    },
+    "fields": {
+      "Line1": "Av. España 540",
+      "Line2": null,
+      "City": "Tandil",
+      "StateProvince": "B",
+      "PostalCode": "B7000",
+      "Country": "Argentina",
+      "Latitude": -37.3217,
+      "Longitude": -59.1332
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "41e31802-72aa-50ef-bc7d-4c9c46675ccd"
+    },
+    "fields": {
+      "Line1": "3418 SE Hawthorne Blvd",
+      "Line2": null,
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97214",
+      "Country": "United States",
+      "Latitude": 45.5152,
+      "Longitude": -122.6784
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94baab0e-213a-51a7-86f0-cb6486d757ed"
+    },
+    "fields": {
+      "Line1": "445 5th St",
+      "Line2": null,
+      "City": "Courtenay",
+      "StateProvince": "BC",
+      "PostalCode": "V9N 1J7",
+      "Country": "Canada",
+      "Latitude": 49.6877,
+      "Longitude": -124.9936
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "584c4ee1-33e4-5894-9185-655d77608a7d"
+    },
+    "fields": {
+      "Line1": "12 Place de la Cité",
+      "Line2": null,
+      "City": "Rodez",
+      "StateProvince": "12",
+      "PostalCode": "12000",
+      "Country": "France",
+      "Latitude": 44.3506,
+      "Longitude": 2.573
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "3e3efe70-0757-562b-a17a-cdb5681863ee"
+    },
+    "fields": {
+      "Line1": "Rue du Bourg 21",
+      "Line2": null,
+      "City": "Gruyères",
+      "StateProvince": "FR",
+      "PostalCode": "1663",
+      "Country": "Switzerland",
+      "Latitude": 46.5836,
+      "Longitude": 7.0822
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "15784396-1501-57a1-b902-4695271a6e29"
+    },
+    "fields": {
+      "Line1": "2208 Ballard Ave NW",
+      "Line2": null,
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98107",
+      "Country": "United States",
+      "Latitude": 47.6062,
+      "Longitude": -122.3321
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "79c76d79-7a61-5ce6-90e7-e25c3295b2b2"
+    },
+    "fields": {
+      "Line1": "605 S Capitol Blvd",
+      "Line2": null,
+      "City": "Boise",
+      "StateProvince": "ID",
+      "PostalCode": "83702",
+      "Country": "United States",
+      "Latitude": 43.615,
+      "Longitude": -116.2023
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "a1d6aeca-215c-59fd-b4f8-4ab4c9ee1c4e"
+    },
+    "fields": {
+      "Line1": "Via Emilia Santo Stefano 18",
+      "Line2": null,
+      "City": "Reggio Emilia",
+      "StateProvince": "RE",
+      "PostalCode": "42121",
+      "Country": "Italy",
+      "Latitude": 44.6983,
+      "Longitude": 10.631
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "2fd8eda4-eaad-5d2d-b05f-1790f1c68be1"
+    },
+    "fields": {
+      "Line1": "29 High St, Wells",
+      "Line2": null,
+      "City": "Somerset",
+      "StateProvince": "SOM",
+      "PostalCode": "BA5 2AA",
+      "Country": "United Kingdom",
+      "Latitude": 51.0577,
+      "Longitude": -2.7183
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "04ec11b4-82e0-5f93-b886-cc4f9a8d67b1"
+    },
+    "fields": {
+      "Line1": "Markt 33",
+      "Line2": null,
+      "City": "Gouda",
+      "StateProvince": "ZH",
+      "PostalCode": "2801 JJ",
+      "Country": "Netherlands",
+      "Latitude": 52.0115,
+      "Longitude": 4.7104
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "cc57c979-6224-5485-9654-0844276c8ee2"
+    },
+    "fields": {
+      "Line1": "415 State St",
+      "Line2": null,
+      "City": "Madison",
+      "StateProvince": "WI",
+      "PostalCode": "53703",
+      "Country": "United States",
+      "Latitude": 43.0731,
+      "Longitude": -89.4012
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "1f758fe9-2e86-5a97-b72b-256192143a7a"
+    },
+    "fields": {
+      "Line1": "Av. Constituyentes Ote. 120",
+      "Line2": null,
+      "City": "Querétaro",
+      "StateProvince": "QUE",
+      "PostalCode": "76040",
+      "Country": "Mexico",
+      "Latitude": 20.5888,
+      "Longitude": -100.3899
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "94d52373-8d76-5849-bb1d-a247c5a148be"
+    },
+    "fields": {
+      "Line1": "Prinzipalmarkt 19",
+      "Line2": null,
+      "City": "Münster",
+      "StateProvince": "NW",
+      "PostalCode": "48143",
+      "Country": "Germany",
+      "Latitude": 51.9607,
+      "Longitude": 7.6261
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "fba6ddf6-4297-59c9-b24d-0b54d47f3b3f"
+    },
+    "fields": {
+      "Line1": "85 Salamanca Pl",
+      "Line2": null,
+      "City": "Hobart",
+      "StateProvince": "TAS",
+      "PostalCode": "7004",
+      "Country": "Australia",
+      "Latitude": -42.8821,
+      "Longitude": 147.3272
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "25e7b5a3-849f-502a-93c4-79963347d358"
+    },
+    "fields": {
+      "Line1": "112 Kentucky St",
+      "Line2": null,
+      "City": "Petaluma",
+      "StateProvince": "CA",
+      "PostalCode": "94952",
+      "Country": "United States",
+      "Latitude": 38.2324,
+      "Longitude": -122.6367
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "39323cff-6b6b-56b4-913d-13d89ca55449"
+    },
+    "fields": {
+      "Line1": "210 Queen St",
+      "Line2": null,
+      "City": "Auckland",
+      "StateProvince": "AUK",
+      "PostalCode": "1010",
+      "Country": "New Zealand",
+      "Latitude": -36.8509,
+      "Longitude": 174.7645
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "c5f345d1-bc9c-559c-b2e7-bfd291111e13"
+    },
+    "fields": {
+      "Line1": "Asklipiou 14",
+      "Line2": null,
+      "City": "Trikala",
+      "StateProvince": "E4",
+      "PostalCode": "421 31",
+      "Country": "Greece",
+      "Latitude": 39.5556,
+      "Longitude": 21.7679
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "afac24ea-3b57-51a7-bafd-e353f4dc4451"
+    },
+    "fields": {
+      "Line1": "44 High St",
+      "Line2": null,
+      "City": "Kilkenny",
+      "StateProvince": "KK",
+      "PostalCode": "R95 X682",
+      "Country": "Ireland",
+      "Latitude": 52.6541,
+      "Longitude": -7.2448
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "f832f17e-bb94-5da2-b56c-ed462956176e"
+    },
+    "fields": {
+      "Line1": "Rua das Portas de Beja 11",
+      "Line2": null,
+      "City": "Serpa",
+      "StateProvince": "07",
+      "PostalCode": "7830-345",
+      "Country": "Portugal",
+      "Latitude": 37.943,
+      "Longitude": -7.596
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "32bb1454-56dd-580b-b3a4-1a947e5ddaff"
+    },
+    "fields": {
+      "Line1": "Römerstraße 15",
+      "Line2": null,
+      "City": "Bregenz",
+      "StateProvince": "8",
+      "PostalCode": "6900",
+      "Country": "Austria",
+      "Latitude": 47.5031,
+      "Longitude": 9.7471
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "46c16ccb-5341-5c84-bbca-e6ba42a10abb"
+    },
+    "fields": {
+      "Line1": "315 W Spain St",
+      "Line2": null,
+      "City": "Sonoma",
+      "StateProvince": "CA",
+      "PostalCode": "95476",
+      "Country": "United States",
+      "Latitude": 38.2919,
+      "Longitude": -122.458
+    }
+  },
+  {
+    "primaryKey": {
+      "ID": "0567e131-5531-5133-a10a-0be045055e46"
+    },
+    "fields": {
+      "Line1": "402 N Washington St",
+      "Line2": null,
+      "City": "Green Bay",
+      "StateProvince": "WI",
+      "PostalCode": "54301",
+      "Country": "United States",
+      "Latitude": 44.5133,
+      "Longitude": -88.0133
+    }
   }
 ]

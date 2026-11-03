@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 2023-10-02
+# date: 2023-10-08
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-10-02
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications]
+# source: node scripts/vault-facts.mjs week 2023-10-02
+# basis: membership purchases, confirmed orders, cash captured, and event registrations booked during the week of 2023-10-02 through 2023-10-08. Current members count reflects active status at week end.
+# caveat: pulled on Sunday 2023-10-08; figures are complete for the reported week.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,834,members,rolling 12 months,final
+membership,membership_purchases,8,purchases,booked in week,final
+membership,first_time_members,4,purchases,booked in week,final
+membership,individual_purchases,7,purchases,booked in week,final
+membership,corporate_purchases,1,purchases,booked in week,final
+membership,membership_gross,2057,usd,booked in week,final
+orders,confirmed_orders,54,orders,booked in week,final
+orders,orders_gross,8585,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,9716,usd,payments in week,final
+events,granite_sensory_registrations_taken,38,registrations,EVT-2023-W4,final
+events,bloomy_rinds_registrations_taken,7,registrations,EVT-2023-W2,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,19,completions,completed in week,final
+certification,certifications_enrolled,0,enrollments,booked in week,final
+certification,certifications_awarded,0,awards,awarded in week,final
+governance,committee_meetings_completed,3,meetings,completed in week,final

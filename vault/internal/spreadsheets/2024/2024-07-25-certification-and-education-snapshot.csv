@@ -1,0 +1,33 @@
+# title: Certification and education snapshot, week of 22 July 2024
+# date: 2024-07-25
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-07-22
+# fictional: true
+# owner_role: Education & Credentialing
+# tags: [certifications, enrollments, audit, weekly-snapshot]
+# data_sources: [generated/certifications, generated/member-certifications, generated/courses]
+# source: node scripts/vault-facts.mjs week 2024-07-22 and node scripts/vault-facts.mjs year 2024
+# basis: certification counts and course enrollments recorded during the week of 2024-07-22. Figures are preliminary and subject to monthly reconciliation.
+# caveat: pulled on Thursday 25 July 2024. Course enrollments reflect autumn cohort registration activity following the Des Moines conference.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_value,unit_type,status_note
+certification,certifications_enrolled,0,enrollments,preliminary
+certification,certifications_awarded,1,awards,Pascal Napolitano
+certification,sensory_evaluation_total_ytd,3,awards,fy2024 cumulative
+certification,cheese_foundations_total_ytd,7,awards,fy2024 cumulative
+certification,food_safety_haccp_total_ytd,3,awards,fy2024 cumulative
+education,course_enrollments_taken,31,enrollments,booked in week
+education,course_completions,0,completions,booked in week
+education,courses_starting_next_eight_weeks,4,cohorts,starting Aug-Sep 2024
+membership,current_members_at_week_end,997,members,rolling 12 months
+membership,membership_purchases_in_week,8,purchases,booked in week
+orders,confirmed_orders_in_week,9,orders,booked in week
+orders,order_cancellations_in_week,1,orders,booked in week
+cash,cash_captured_in_week,3501,usd,payments in week

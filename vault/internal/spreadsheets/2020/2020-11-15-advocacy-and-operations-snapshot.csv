@@ -1,0 +1,36 @@
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+# title: Weekly advocacy and operations snapshot, week ending 15 November 2020
+# date: 2020-11-15
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-11-09
+# fictional: true
+# owner_role: Advocacy & Standards
+# tags: [advocacy, membership, courses, orders, snapshot]
+# data_sources: [generated/advocacy-actions, generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2020-11-09
+# basis: commerce figures booked inside 2020-11-09..2020-11-15. Advocacy actions recorded in the weekly window.
+# caveat: week totals complete on Sunday 15 November 2020.
+metric_group,metric,value,unit,basis,status
+advocacy,coalition_meetings_labeling,1,meetings,recorded in week,final
+advocacy,advocacy_actions_ytd,110,actions,cumulative year,final
+membership,current_members_at_week_end,426,members,rolling 12 months,final
+membership,membership_purchases_total,4,purchases,booked in week,final
+membership,membership_purchases_first_time,2,purchases,booked in week,final
+membership,purchases_enthusiast_tier,2,purchases,booked in week,final
+membership,purchases_individual_tier,1,purchases,booked in week,final
+membership,purchases_small_business_tier,1,purchases,booked in week,final
+orders,confirmed_orders,4,orders,booked in week,final
+orders,orders_gross_usd,768,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured_usd,904,usd,payments in week,final
+events,event_registrations_taken,0,registrations,booked in week,final
+courses,course_enrollments_taken,14,enrollments,booked in week,final
+courses,course_completions,0,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,awarded in week,final

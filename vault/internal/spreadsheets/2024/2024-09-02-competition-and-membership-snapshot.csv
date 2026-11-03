@@ -1,0 +1,40 @@
+# title: Competition entries, membership purchases, and course snapshot, week of 2 September 2024
+# date: 2024-09-02
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2024
+# week_of: 2024-09-02
+# fictional: true
+# owner_role: Events Team
+# tags: [competition, membership, enrollments, weekly-snapshot]
+# data_sources: [generated/competition-entries, generated/orders, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2024-09-02 and node scripts/vault-facts.mjs year 2024
+# basis: membership purchases and course enrollments recorded during 2024-09-02..2024-09-08. Competition entries represent total active competition inventory for the 2024 cycle.
+# caveat: pulled on Monday 2 September 2024. Course enrollments and orders are preliminary weekly totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1024,members,rolling 12 months,preliminary
+membership,membership_purchases,15,purchases,booked in week,preliminary
+membership,first_time_purchases,8,purchases,booked in week,preliminary
+membership,individual_purchases,12,purchases,booked in week,preliminary
+membership,small_business_purchases,2,purchases,booked in week,preliminary
+membership,enthusiast_purchases,1,purchases,booked in week,preliminary
+membership,membership_gross,2892,usd,booked in week,preliminary
+orders,confirmed_orders,15,orders,booked in week,preliminary
+orders,orders_gross,3054,usd,booked in week,preliminary
+orders,cancellations,0,orders,booked in week,preliminary
+cash,cash_captured,2631,usd,payments in week,preliminary
+competition,total_entries,65,entries,2024 cycle total,final
+competition,soft_ripened_entries,13,entries,category breakdown,final
+competition,alpine_styles_entries,11,entries,category breakdown,final
+competition,aged_cheddar_territorials_entries,11,entries,category breakdown,final
+competition,washed_rind_entries,11,entries,category breakdown,final
+competition,blue_veined_entries,10,entries,category breakdown,final
+competition,fresh_pasta_filata_entries,9,entries,category breakdown,final
+education,course_enrollments_taken,36,enrollments,taken in week,preliminary
+education,course_completions,55,completions,completed in week,preliinary

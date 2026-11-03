@@ -1,0 +1,34 @@
+# title: Weekly operations snapshot, week of 2023-06-05
+# date: 2023-06-11
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-06-05
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2023-06-05
+# basis: membership purchases, orders and cash are booked inside 2023-06-05..2023-06-11. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Sunday 2023-06-11, representing complete weekly totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,751,members,rolling 12 months,final
+membership,membership_purchases,12,purchases,booked in week,final
+membership,first_time_purchases,6,purchases,booked in week,final
+membership,individual_purchases,12,purchases,booked in week,final
+membership,membership_gross,1944,usd,booked in week,final
+orders,confirmed_orders,72,orders,booked in week,final
+orders,orders_gross,18846,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,20279,usd,payments in week,final
+events,annual_conference_registrations_taken,30,registrations,booked in week,final
+events,birch_workshop_registrations_taken,28,registrations,booked in week,final
+events,export_paperwork_webinar_registered,0,registrations,free webinar,final
+education,course_completions,12,completions,completed in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final

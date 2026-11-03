@@ -1,0 +1,37 @@
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events, and decisions are invented.
+# title: Advocacy and operations weekly snapshot, week of 29 June 2026
+# date: 2026-07-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-06-29
+# fictional: true
+# owner_role: Advocacy & Standards
+# tags: [weekly-snapshot, advocacy, membership, orders, events]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2026-06-29
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1568,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,3,purchases,booked in week,final
+membership,individual_purchases,4,purchases,booked in week,final
+membership,membership_gross,700,usd,booked in week,final
+orders,confirmed_orders,83,orders,booked in week,final
+orders,orders_gross,18635,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,18635,usd,payments in week,final
+events,annual_conference_registrations_taken,20,registrations,EVT-2026-CONF,final
+events,stone_food_safety_registrations_taken,59,registrations,EVT-2026-W1,final
+education,course_enrollments_taken,118,enrollments,taken in week,final
+education,course_completions,47,completions,completed in week,final
+certifications,certifications_awarded,1,awards,Food Safety and HACCP,final
+advocacy,total_advocacy_actions_ytd,165,actions,ytd total,final
+advocacy,coalition_meeting_actions,29,actions,ytd total,final
+advocacy,petition_signature_actions,50,actions,ytd total,final
+advocacy,letter_campaign_actions,71,actions,ytd total,final
+advocacy,testimony_actions,15,actions,ytd total,final
+governance,standards_committee_meetings_q3,1,meetings,completed 2 July 2026,final

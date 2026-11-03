@@ -1,0 +1,34 @@
+# title: Weekly operational snapshot, week of 12 July 2021
+# date: 2021-07-18
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-07-12
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, conference]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2021-07-12
+# basis: commerce data captured during 2021-07-12..2021-07-18. Conference registrations and orders are complete for the week. Current members counts week-end total.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,462,members,rolling 12 months,final
+membership,membership_purchases_total,2,purchases,booked in week,final
+membership,membership_purchases_first_time,1,purchases,booked in week,final
+membership,membership_purchases_individual,2,purchases,booked in week,final
+membership,membership_purchases_gross,306,usd,booked in week,final
+orders,confirmed_orders,27,orders,booked in week,final
+orders,orders_gross,10375,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,10787,usd,payments in week,final
+conference,event_registrations_taken_conference,25,registrations,EVT-2021-CONF,final
+conference,events_this_week,0,events,calendar,final
+conference,events_next_eight_weeks,5,events,calendar,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,1,completions,completed in week,final
+committee,committee_meetings_completed,2,meetings,completed in week,final

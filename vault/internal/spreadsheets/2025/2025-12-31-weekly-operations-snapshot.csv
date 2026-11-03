@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week of 29 December 2025
+# date: 2025-12-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-creamery-closures-2025
+# fiscal_year: 2025
+# week_of: 2025-12-29
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events, advocacy]
+# data_sources: [generated/orders, generated/payments, generated/enrollments, generated/certifications, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2025-12-29
+# basis: Commerce and activity totals for the window 2025-12-29 through 2026-01-04. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: Preliminary operating figures pulled at year-end close; subject to final bank reconciliation.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,1459,members,rolling 12 months,preliminary
+membership,membership_purchases_total,17,purchases,booked in week,preliminary
+membership,membership_purchases_first_time,7,purchases,booked in week,preliminary
+membership,membership_purchases_individual,15,purchases,booked in week,preliminary
+membership,membership_purchases_enthusiast,2,purchases,booked in week,preliminary
+membership,membership_purchases_gross,2925,usd,booked in week,preliminary
+orders,confirmed_orders,237,orders,booked in week,preliminary
+orders,orders_gross,36168,usd,booked in week,preliminary
+orders,cancellations,1,orders,booked in week,preliminary
+cash,cash_captured,53869,usd,payments in week,preliminary
+events,registrations_cedar_cut_wrap,159,registrations,EVT-2026-W4,preliminary
+events,registrations_stone_sensory,58,registrations,EVT-2026-W3,preliminary
+education,course_completions,2,completions,completed in week,preliminary
+certifications,enrolled,2,enrollments,enrolled in week,preliminary
+certifications,awarded,1,awards,Cheese Foundations Certificate,preliminary
+advocacy,testimony_dairy_pricing_reform,1,actions,advocacy log,preliminary
+governance,committee_meetings_completed,2,meetings,Awards and Events Q1,preliminary

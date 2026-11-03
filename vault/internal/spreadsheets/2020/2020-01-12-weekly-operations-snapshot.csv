@@ -1,0 +1,37 @@
+# title: Weekly operations snapshot, week ending 12 January 2020
+# date: 2020-01-12
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-pandemic-shock-2020
+# fiscal_year: 2020
+# week_of: 2020-01-06
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, advocacy, committee-meetings]
+# data_sources: [generated/orders, generated/payments, generated/advocacy-actions, generated/committee-meetings]
+# source: node scripts/vault-facts.mjs week 2020-01-06
+# basis: membership purchases, confirmed orders, and cash captured booked inside 2020-01-06..2020-01-12. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled on Sunday 12 January 2020. Event registrations show 0 paid registrations for upcoming webinars as free webinars carry no paid registration lines.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,362,members,rolling 12 months,final
+membership,membership_purchases_total,4,purchases,booked in week,final
+membership,membership_purchases_first_time,3,purchases,booked in week,final
+membership,individual_membership_purchases,4,purchases,booked in week,final
+membership,membership_purchases_gross,596,usd,booked in week,final
+orders,confirmed_orders,5,orders,booked in week,final
+orders,orders_gross,1068,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,3115,usd,payments in week,final
+advocacy,raw_milk_aging_petitions,3,signatures,logged in week,final
+advocacy,interstate_shipment_coalition_meetings,1,meetings,logged in week,final
+committees,awards_competition_committee_meeting,1,completed,2020-01-06,final
+committees,events_committee_meeting,1,completed,2020-01-06,final
+committees,membership_outreach_committee_meeting,1,completed,2020-01-09,final
+education,course_enrollments_taken,0,enrollments,booked in week,final
+education,course_completions,7,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,booked in week,final

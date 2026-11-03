@@ -1,0 +1,34 @@
+# title: Weekly operations snapshot, week of 2023-12-25
+# date: 2023-12-31
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-12-25
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2023-12-25
+# basis: membership purchases, orders, cash, and course enrollments are booked inside 2023-12-25..2023-12-31. Current members count reflects active members at year end on 2023-12-31.
+# caveat: pulled on 31 December 2023, representing complete weekly totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_year_end,859,members,active on Dec 31,final
+membership,membership_purchases_total,10,purchases,booked in week,final
+membership,membership_purchases_first_time,3,purchases,booked in week,final
+membership,individual_tier_purchases,9,purchases,booked in week,final
+membership,enthusiast_tier_purchases,1,purchases,booked in week,final
+membership,membership_purchases_gross,1620,usd,booked in week,final
+orders,confirmed_orders,12,orders,booked in week,final
+orders,orders_gross,1974,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,9443,usd,payments in week,final
+events,birch_milk_handling_registrations,2,registrations,taken in week,final
+education,course_enrollments_taken,14,enrollments,taken in week,final
+education,course_completions,1,completions,completed in week,final
+certifications,certifications_enrolled,0,enrollments,taken in week,final

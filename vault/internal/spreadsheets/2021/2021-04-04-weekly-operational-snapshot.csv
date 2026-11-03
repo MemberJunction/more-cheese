@@ -1,0 +1,37 @@
+# title: Weekly operational snapshot, week of 29 March 2021
+# date: 2021-04-04
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-virtual-pivot-2021
+# fiscal_year: 2021
+# week_of: 2021-03-29
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2021-03-29
+# basis: commerce data booked inside 2021-03-29..2021-04-04. Current members counts people whose latest qualifying purchase is within 12 months.
+# caveat: pulled at week end on Sunday 4 April 2021. Event registrations and cash captured reflect final week totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,447,members,rolling 12 months,final
+membership,membership_purchases,4,purchases,booked in week,final
+membership,first_time_purchases,1,purchases,booked in week,final
+membership,enthusiast_purchases,1,purchases,booked in week,final
+membership,individual_purchases,3,purchases,booked in week,final
+membership,membership_gross,590,usd,booked in week,final
+orders,confirmed_orders,17,orders,booked in week,final
+orders,orders_gross,3742,usd,booked in week,final
+orders,cancellation_orders,0,orders,booked in week,final
+cash,cash_captured,5011,usd,payments in week,final
+events,annual_conference_registrations_taken,5,registrations,EVT-2021-CONF,final
+events,stone_alpine_workshop_registrations_taken,8,registrations,EVT-2021-W1,final
+events,upcoming_stone_alpine_registered,24,registrations,EVT-2021-W1 event total,final
+events,upcoming_stone_alpine_attended,20,attendees,EVT-2021-W1 attendance,final
+events,upcoming_stone_alpine_noshow,4,no_shows,EVT-2021-W1 attendance,final
+education,course_completions,3,completions,completed in week,final
+education,course_enrollments_taken,0,enrollments,taken in week,final

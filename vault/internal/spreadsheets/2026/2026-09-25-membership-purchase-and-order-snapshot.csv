@@ -1,0 +1,29 @@
+# title: Membership purchase and order snapshot for week ending 2026-09-27
+# date: 2026-09-25
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-stabilization-2026
+# fiscal_year: 2026
+# week_of: 2026-09-21
+# fictional: true
+# owner_role: Membership Operations
+# tags: [membership, orders, cash, weekly-snapshot]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2026-09-21
+# basis: membership purchases, confirmed orders, and cash captured booked inside 2026-09-21..2026-09-27. Current members count at week end is 1691. All figures are preliminary until month-end close.
+# caveat: duplicate member profiles and stale employer records require manual reconciliation and may affect tier totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric_name,count_value,gross_usd,cash_captured_usd,notes
+membership,total_purchases,30,6600,10950,includes first-time and renewing
+membership,first_time_purchases,17,,,new member accounts
+membership,small_business_tier,3,,,small business annual tier
+membership,individual_tier,20,,,individual annual tier
+membership,enthusiast_tier,6,,,enthusiast annual tier
+membership,corporate_tier,1,,,corporate annual tier
+orders,confirmed_orders,60,11610,,all confirmed product and membership orders
+orders,cancellations,0,0,,no cancellations recorded this week
+cash,total_cash_captured,,10950,10950,captured across all payment lines

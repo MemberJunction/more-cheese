@@ -1,0 +1,34 @@
+# title: Weekly operational snapshot, week of 14 March 2022
+# date: 2022-03-20
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2022
+# week_of: 2022-03-14
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, orders, membership, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2022-03-14
+# basis: figures cover confirmed transactions and cash captured during 2022-03-14..2022-03-20. Current members count as of week end.
+# caveat: pulled on 20 March 2022; figures are complete for the association's weekly operating cycle.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,516,members,rolling 12 months,final
+membership,membership_purchases,7,purchases,booked in week,final
+membership,first_time_members,6,purchases,booked in week,final
+membership,individual_purchases,7,purchases,booked in week,final
+membership,membership_gross,1099,usd,booked in week,final
+orders,confirmed_orders,10,orders,booked in week,final
+orders,orders_gross,1040,usd,booked in week,final
+orders,cancellation_orders,2,orders,booked in week,final
+cash,cash_captured,2036,usd,payments in week,final
+event,event_registrations_taken,1,registrations,EVT-2022-W1 Workshop Brook Food Safety,final
+event,webinar_registrations,0,registrations,EVT-2022-WEB3 Whey Management,final
+education,course_enrollments_taken,0,enrollments,taken in week,final
+education,course_completions,2,completions,completed in week,final
+certification,certifications_awarded,1,awards,Food Safety & HACCP Certificate,final

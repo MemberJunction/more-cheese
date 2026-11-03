@@ -1,0 +1,38 @@
+# title: Weekly operations snapshot, week of 2023-10-30
+# date: 2023-11-05
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-10-30
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, education]
+# data_sources: [generated/orders, generated/payments, generated/enrollments]
+# source: node scripts/vault-facts.mjs week 2023-10-30
+# basis: Membership purchases, confirmed orders, cash captured, course enrollments, and event registrations booked between 2023-10-30 and 2023-11-05. Current members count represents members at week end.
+# caveat: Figures are complete for the reported weekly window ending 2023-11-05.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,855,members,rolling 12 months,final
+membership,membership_purchases_total,10,purchases,booked in week,final
+membership,membership_purchases_first_time,5,purchases,booked in week,final
+membership,membership_purchases_individual,5,purchases,booked in week,final
+membership,membership_purchases_small_business,2,purchases,booked in week,final
+membership,membership_purchases_enthusiast,2,purchases,booked in week,final
+membership,membership_purchases_corporate,1,purchases,booked in week,final
+membership,membership_purchases_gross,2747,usd,booked in week,final
+orders,confirmed_orders,50,orders,booked in week,final
+orders,orders_gross,8401,usd,booked in week,final
+orders,cancellations,1,orders,booked in week,final
+cash,cash_captured,8555,usd,payments in week,final
+events,event_registrations_taken_bloomy_rinds,38,registrations,EVT-2023-W2 Burlington,final
+education,course_enrollments_taken,20,enrollments,booked in week,final
+education,course_completions,13,completions,completed in week,final
+certifications,certifications_enrolled,1,enrollments,booked in week,final
+certifications,certifications_awarded,0,awards,completed in week,final
+advocacy,coalition_meetings_dairy_pricing,1,meetings,booked in week,final

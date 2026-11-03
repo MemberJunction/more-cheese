@@ -1,0 +1,36 @@
+# title: Weekly operations snapshot, week of 2023-07-03
+# date: 2023-07-09
+# doc_type: spreadsheet
+# visibility: internal
+# org: International Cheese Federation
+# era: era-artisan-boom-2022-2024
+# fiscal_year: 2023
+# week_of: 2023-07-03
+# fictional: true
+# owner_role: Membership Operations
+# tags: [weekly-snapshot, membership, orders, cash, events]
+# data_sources: [generated/orders, generated/payments]
+# source: node scripts/vault-facts.mjs week 2023-07-03
+# basis: snapshot of week 2023-07-03 through 2023-07-09. All figures are complete week totals.
+# notice: FICTIONAL DEMONSTRATION DATA - International Cheese Federation, a fictitious
+#   association created for the MemberJunction More Cheese demo. All names, figures, events,
+#   and decisions are invented.
+#
+metric_group,metric,value,unit,basis,status
+membership,current_members_at_week_end,782,members,rolling 12 months,final
+membership,membership_purchases_total,14,purchases,booked in week,final
+membership,membership_purchases_first_time,10,purchases,booked in week,final
+membership,membership_purchases_enthusiast,4,purchases,booked in week,final
+membership,membership_purchases_individual,6,purchases,booked in week,final
+membership,membership_purchases_small_business,4,purchases,booked in week,final
+membership,membership_purchases_gross,3000,usd,booked in week,final
+orders,confirmed_orders,34,orders,booked in week,final
+orders,orders_gross,11579,usd,booked in week,final
+orders,cancellations,0,orders,booked in week,final
+cash,cash_captured,10441,usd,payments in week,final
+events,event_registrations_taken_conference,20,registrations,EVT-2023-CONF,final
+events,course_enrollments_taken,0,enrollments,booked in week,final
+events,course_completions,3,completions,completed in week,final
+events,certifications_enrolled,0,enrollments,booked in week,final
+advocacy,advocacy_actions_total,0,actions,booked in week,final
+governance,committee_meetings_completed,2,meetings,Standards and Membership,final

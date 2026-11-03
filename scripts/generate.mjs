@@ -4,7 +4,8 @@
  *
  * Compiles the Loom domain, applies Loom declarative generators (names, prefixes, pronouns,
  * DOBs), AvatarGenerator, LogoGenerator, and ReversalEngine to the governed generated/ tree
- * from data/domain.json field config, and verifies checkpoint.json. After the tree is
+ * from data/domain.json field config, aligns the planted duplicate people with their
+ * originals, and verifies checkpoint.json. After the tree is
  * committed, a second run must leave generated/ byte-identical.
  */
 
@@ -13,6 +14,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
 import { applyPersonJobFunctionsEnrichment } from './enrich-person-job-functions.mjs';
+import { alignPlantedDuplicates } from './align-planted-duplicates.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -96,6 +98,30 @@ const givenNames = JSON.parse(fs.readFileSync(givenNamesPath, 'utf8'));
 
 const heroByEmail = new Map(heroes.heroes.map((h) => [h.businessKeys.Email.toLowerCase(), h]));
 
+// Records a monthly plan added (data/plans/*.plan.json, see plan-month-gemini.mjs) keep the values the plan
+// gave them: a planned "Renata" must not become a catalog first name on the next generate. Keyed by business
+// key; the value is the set of fields the plan supplied.
+function plannedFields(entity, businessKey) {
+  const out = new Map();
+  const dir = path.join(rootDir, 'data', 'plans');
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.plan.json')).sort()) {
+    for (const r of JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')).records ?? []) {
+      const key = r.entity === entity ? r.fields?.[businessKey] : undefined;
+      if (typeof key === 'string') out.set(key.toLowerCase(), new Set(Object.keys(r.fields)));
+    }
+  }
+  return out;
+}
+const plannedPeople = plannedFields('Person', 'Email');
+const plannedProfiles = plannedFields('MemberProfile', 'MemberNumber');
+function keepPlanned(planned, key, fields, apply) {
+  const keep = planned.get(String(key || '').toLowerCase());
+  const before = keep ? Object.fromEntries([...keep].filter((f) => f in fields).map((f) => [f, fields[f]])) : {};
+  apply();
+  Object.assign(fields, before);
+}
+
 // ---------------------------------------------------------------------------
 // 1. Order Reversals & Cancellation Coherence Pass
 // ---------------------------------------------------------------------------
@@ -164,9 +190,11 @@ function applyPeopleAndMemberProfilePass() {
       if (hero.fixedFields?.Title) p.fields.Title = hero.fixedFields.Title;
     }
 
-    applyDeclarativeGeneratorsToRow(domain.entities.Person, p.fields, {
-      catalogs: { 'given-names': givenNames },
-      rng,
+    keepPlanned(plannedPeople, email, p.fields, () => {
+      applyDeclarativeGeneratorsToRow(domain.entities.Person, p.fields, {
+        catalogs: { 'given-names': givenNames },
+        rng,
+      });
     });
 
     if (hero) {
@@ -178,18 +206,22 @@ function applyPeopleAndMemberProfilePass() {
     delete p.fields.JoinDate;
     genderByPersonId.set(pId.toLowerCase(), p.fields.Gender);
 
-    p.fields.PhotoURL = AvatarGenerator.Generate({
-      seed: pId,
-      trait: p.fields.Gender,
-      traits: avatarCfg.traits,
-      defaultTrait: avatarCfg.defaultTrait,
-      style: avatarCfg.style,
-      format: avatarCfg.format,
-      version: avatarCfg.version,
-      backgroundColor: avatarCfg.backgroundColor,
+    keepPlanned(plannedPeople, email, p.fields, () => {
+      p.fields.PhotoURL = AvatarGenerator.Generate({
+        seed: pId,
+        trait: p.fields.Gender,
+        traits: avatarCfg.traits,
+        defaultTrait: avatarCfg.defaultTrait,
+        style: avatarCfg.style,
+        format: avatarCfg.format,
+        version: avatarCfg.version,
+        backgroundColor: avatarCfg.backgroundColor,
+      });
     });
     distinctAvatars.add(p.fields.PhotoURL);
   }
+
+  applyPlantedDuplicatesPass(people);
 
   fs.writeFileSync(peoplePath, JSON.stringify(people, null, 2) + '\n', 'utf8');
   console.log(
@@ -202,14 +234,50 @@ function applyPeopleAndMemberProfilePass() {
     const parentGender = genderByPersonId.get(pId) || 'Female';
     const rng = createRng(42, `mp:${m.primaryKey.ID}`);
 
-    applyDeclarativeGeneratorsToRow(domain.entities.MemberProfile, m.fields, {
-      parent: { Gender: parentGender },
-      rng,
+    keepPlanned(plannedProfiles, m.fields.MemberNumber, m.fields, () => {
+      applyDeclarativeGeneratorsToRow(domain.entities.MemberProfile, m.fields, {
+        parent: { Gender: parentGender },
+        rng,
+      });
     });
   }
 
   fs.writeFileSync(mpPath, JSON.stringify(mps, null, 2) + '\n', 'utf8');
   console.log(`   ✓ Loom MemberProfile Generator: ${mps.length} pronoun sets generated`);
+}
+
+// ---------------------------------------------------------------------------
+// 2b. Planted Duplicates Pass (#117) — runs after the name/DOB generators, which would otherwise
+//     give every planted duplicate its own identity. See align-planted-duplicates.mjs.
+// ---------------------------------------------------------------------------
+function applyPlantedDuplicatesPass(people) {
+  const labelsPath = path.join(generatedDir, 'data-quality-labels', '.data-quality-labels.json');
+  const labels = JSON.parse(fs.readFileSync(labelsPath, 'utf8'));
+
+  const cmDir = path.join(generatedDir, 'contact-methods');
+  const cmFiles = fs
+    .readdirSync(cmDir)
+    .filter((f) => f.endsWith('.json') && f !== '.mj-sync.json')
+    .sort()
+    .map((f) => {
+      const full = path.join(cmDir, f);
+      return { full, rows: JSON.parse(fs.readFileSync(full, 'utf8')) };
+    });
+
+  const heroFixedFieldsByEmail = new Map(
+    heroes.heroes.map((h) => [h.businessKeys.Email.toLowerCase(), h.fixedFields || {}])
+  );
+  const stats = alignPlantedDuplicates({
+    people,
+    contactMethods: cmFiles.flatMap((f) => f.rows),
+    labels,
+    heroFixedFieldsByEmail,
+  });
+
+  // The contact-method part files and the labels file carry no trailing newline.
+  for (const { full, rows } of cmFiles) fs.writeFileSync(full, JSON.stringify(rows, null, 2), 'utf8');
+  fs.writeFileSync(labelsPath, JSON.stringify(labels, null, 2), 'utf8');
+  console.log(`   ✓ Planted Duplicates Pass: ${stats.pairs} duplicate people aligned with their originals (${stats.phonesAligned} phones, ${stats.labelsRenamed} labels renamed)`);
 }
 
 // ---------------------------------------------------------------------------
