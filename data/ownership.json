@@ -485,6 +485,31 @@
       "tier": "config",
       "classification": "config",
       "reason": "Knowledge Hub item↔tag assignments (1,425) with weights, produced by the tagging pipeline."
+    },
+    "tag-co-occurrences": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub tag co-occurrence pairs (2,107) computed from content-item-tags so Clusters and Analytics Co-Occurrence Pairs populate out of the box."
+    },
+    "tag-suggestions": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub tag governance suggestions (MergeCandidate, LowUsage, WideNode) derived from the taxonomy and tag usage counts."
+    },
+    "tag-audit-logs": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub tag governance audit trail entries for root taxonomy categories."
+    },
+    "content-item-duplicates": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub content item duplicate pairs detected across crawled site and vault items."
+    },
+    "search-scopes": {
+      "tier": "config",
+      "classification": "config",
+      "reason": "Knowledge Hub and Global Search scopes (All, Knowledge, Entities, Files) with UI and Developer role permissions."
     }
   }
 }

@@ -1,0 +1,17 @@
+{
+  "entity": "MJ: Content Item Duplicates",
+  "filePattern": "**/.*.json",
+  "pull": {
+    "filePattern": ".*.json",
+    "createNewFileIfNotFound": true,
+    "newFileName": ".content-item-duplicates.json",
+    "updateExistingRecords": true,
+    "mergeStrategy": "merge",
+    "excludeFields": [
+      "__mj_CreatedAt",
+      "__mj_UpdatedAt",
+      "__mj_DeletedAt"
+    ],
+    "ignoreVirtualFields": true
+  }
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "fields": {
+      "TagID": "EE866C7D-25FB-4BC8-BE16-4F4A36CDC66C",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Business Operations\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "641F4781-5D7B-53B4-8F6E-0CE6F570BF88"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "7AB4BBDF-34AA-4C94-B451-950253E36E10",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Certifications\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "7CE81906-9F39-5A6E-A4A7-8AA5D9BDFBF9"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "D84E3B53-3E1A-4691-8749-F8F15341A8A9",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Cheese Industry\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "C758324B-38F4-5490-9C5D-9BE0313D4603"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "12AF4979-4584-4AC4-9876-93838A87993D",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Cheese Selection\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "4F4D6F3C-CEB9-569A-A70B-6E3E6A82FDE1"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "06D64410-DB37-40BF-B12B-480148BFCBEC",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Cheese Varieties\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "7C341E8E-BF8F-5A17-8A50-897C6C81A89C"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "50C20883-4EC7-4192-82FD-0B07B9593E39",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Communications\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "C2DD25CD-DE5E-5CDD-845A-1DAE58BEB45D"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "FA4A5DEF-5F7F-42F7-8232-FC81C1EA53C9",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Culinary Advice\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "FC5C7F1C-720B-5130-BC4D-D4DFFA595010"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "2B596FC2-D18D-41FC-8790-47DBE4A9FFCE",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Culinary Practices\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "54A9DD7D-576E-57FD-AA9E-C7503E9FAB18"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "C2D47436-CB14-4A03-8E9A-E60459D68A93",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Data & Analytics\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "19CB011D-C7F8-5C9E-9186-1324A793185F"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "04D5C5B5-068A-49FB-B86D-986FF5DB3919",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Data Analysis\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "F36C490D-1074-51E9-A880-4C23B6A8E8E6"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "DB462DC5-B27C-429D-BFB8-73C20DD0CAD0",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Data Management\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "988DE9BD-A782-572D-BCBC-E9CCF60DACAF"
+    }
+  },
+  {
+    "fields": {
+      "TagID": "72BDAB12-9243-4E1C-B8FC-50E22698A08E",
+      "Action": "Created",
+      "PerformedByUserID": "@lookup:MJ: Users.Email=not.set@nowhere.com",
+      "Details": "{\"TagName\":\"Data Quality\",\"Note\":\"Initial ICF Knowledge Hub taxonomy governance pass\",\"Timestamp\":\"2026-10-26T14:00:00.000Z\"}",
+      "RelatedTagID": null
+    },
+    "primaryKey": {
+      "ID": "EDACB539-BFA7-5DD6-951C-F446E8A990C1"
+    }
+  }
+]

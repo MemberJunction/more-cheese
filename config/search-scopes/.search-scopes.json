@@ -1,0 +1,466 @@
+[
+  {
+    "fields": {
+      "Name": "All",
+      "Description": "Search across all More Cheese Knowledge Hub content, CRM entities, and Dropbox vault files.",
+      "Icon": "fa-solid fa-globe",
+      "Status": "Active",
+      "IsGlobal": false,
+      "IsDefault": false
+    },
+    "primaryKey": {
+      "ID": "776036C3-2083-548A-8CE8-6050BA3A7F71"
+    },
+    "relatedEntities": {
+      "MJ: Search Scope Providers": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Database",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "AC18F701-0210-5C54-862F-29F646CDDF95"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Database Full-Text",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "85EE6118-047E-5CAD-AB3E-821404D73584"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Tags",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "2B93D170-F4F7-5DCC-9248-51824BB53935"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=File Storage",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "3C380258-036F-5033-B0CF-75E5A1A83309"
+          }
+        }
+      ],
+      "MJ: Search Scope Entities": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ: Content Items"
+          },
+          "primaryKey": {
+            "ID": "33B7E79F-5CFA-54AF-A5CF-97C0430B320C"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ: Content Item Chunks"
+          },
+          "primaryKey": {
+            "ID": "8FA37F4A-56BD-50A8-832A-F8F80ABAEEED"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People"
+          },
+          "primaryKey": {
+            "ID": "17429554-D32B-5E81-8A6D-17219D8BDC9E"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations"
+          },
+          "primaryKey": {
+            "ID": "C8F09AA5-FC11-52E3-B986-928BAAA1E598"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Products"
+          },
+          "primaryKey": {
+            "ID": "33D95D90-AD58-5032-A727-799C7F5E4E38"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers"
+          },
+          "primaryKey": {
+            "ID": "E7ACE243-00BA-5A00-8571-FA3B59AE6F80"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Courses"
+          },
+          "primaryKey": {
+            "ID": "29140538-D15B-5201-9498-77AB20A6F571"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Certifications"
+          },
+          "primaryKey": {
+            "ID": "E2016553-BB9F-5D02-AD99-2FD56B63EE0D"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=Committees: Committees"
+          },
+          "primaryKey": {
+            "ID": "7B8FBD0E-9B00-5F16-858B-6C197B04E20B"
+          }
+        }
+      ],
+      "MJ: Search Scope Storage Accounts": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "FileStorageAccountID": "@lookup:MJ: File Storage Accounts.Name=More Cheese Dropbox"
+          },
+          "primaryKey": {
+            "ID": "0F60894A-EC63-5E9C-BE80-97CAC9983FAA"
+          }
+        }
+      ],
+      "MJ: Search Scope Permissions": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=UI",
+            "UserID": null,
+            "PermissionLevel": "Search"
+          },
+          "primaryKey": {
+            "ID": "46D875F3-721D-5B7F-A3BD-89A35344DEFB"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=Developer",
+            "UserID": null,
+            "PermissionLevel": "Manage"
+          },
+          "primaryKey": {
+            "ID": "39CBE473-3B5D-5EB8-8C1A-EF5ED2A89A91"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "fields": {
+      "Name": "Knowledge",
+      "Description": "Search across tagged Knowledge Hub articles, press releases, and internal vault documents.",
+      "Icon": "fa-solid fa-book-open",
+      "Status": "Active",
+      "IsGlobal": false,
+      "IsDefault": false
+    },
+    "primaryKey": {
+      "ID": "9E52D34E-F9DF-5700-9612-EE862718455A"
+    },
+    "relatedEntities": {
+      "MJ: Search Scope Providers": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Database",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "0F35A38E-5229-5E7C-B3DC-E985EF4F8D90"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Database Full-Text",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "F03F8F26-40EB-5E8A-85FA-D49ABB025390"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Tags",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "AB80CFAB-6EAE-52E1-AAF4-EBECEE3848BD"
+          }
+        }
+      ],
+      "MJ: Search Scope Entities": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ: Content Items"
+          },
+          "primaryKey": {
+            "ID": "4C21AE6D-3371-5F14-8D41-F6AB1E4E6CCA"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ: Content Item Chunks"
+          },
+          "primaryKey": {
+            "ID": "F275842F-BA77-528F-A19D-8F36A867EB3D"
+          }
+        }
+      ],
+      "MJ: Search Scope Permissions": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=UI",
+            "UserID": null,
+            "PermissionLevel": "Search"
+          },
+          "primaryKey": {
+            "ID": "54A8E05D-D4E0-5ECF-A92C-46DA223E13D6"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=Developer",
+            "UserID": null,
+            "PermissionLevel": "Manage"
+          },
+          "primaryKey": {
+            "ID": "B26216DC-260D-558C-BD29-2CD0D6946B0D"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "fields": {
+      "Name": "Entities",
+      "Description": "Search across People, Organizations, Products, Orders, Courses, Certifications, and Committees.",
+      "Icon": "fa-solid fa-database",
+      "Status": "Active",
+      "IsGlobal": false,
+      "IsDefault": false
+    },
+    "primaryKey": {
+      "ID": "4D391085-8ED5-59EA-B536-3AD868975697"
+    },
+    "relatedEntities": {
+      "MJ: Search Scope Providers": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Database",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "B048B44E-C230-5C34-BB9A-0683E8A4B4DE"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Database Full-Text",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "82C0B252-4351-599D-9EA8-FD29F5C395B0"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=Tags",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "E1A586A0-8525-579F-B418-4F7252D2F226"
+          }
+        }
+      ],
+      "MJ: Search Scope Entities": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: People"
+          },
+          "primaryKey": {
+            "ID": "464FD35D-B044-56E0-A88A-15B78804BAE5"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Common: Organizations"
+          },
+          "primaryKey": {
+            "ID": "6D88018C-64E4-5AE5-9427-B170CCEB956E"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Products"
+          },
+          "primaryKey": {
+            "ID": "49475037-5C5D-5296-A3A5-22E824F509DD"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MJ_BizApps_Orders: Order Headers"
+          },
+          "primaryKey": {
+            "ID": "4F1B9AA2-2DEB-5104-85ED-CB0438121DC2"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Courses"
+          },
+          "primaryKey": {
+            "ID": "6FA7CCC8-FA78-5EFF-B519-5257E470EC59"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=MoreCheese: Certifications"
+          },
+          "primaryKey": {
+            "ID": "B655EDDA-06AB-5D64-9891-AC87172557F8"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "EntityID": "@lookup:MJ: Entities.Name=Committees: Committees"
+          },
+          "primaryKey": {
+            "ID": "726F2E88-129C-52F6-89C7-7628F722B6D7"
+          }
+        }
+      ],
+      "MJ: Search Scope Permissions": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=UI",
+            "UserID": null,
+            "PermissionLevel": "Search"
+          },
+          "primaryKey": {
+            "ID": "F33D579D-A504-50BE-9FBB-53C23F13E8D6"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=Developer",
+            "UserID": null,
+            "PermissionLevel": "Manage"
+          },
+          "primaryKey": {
+            "ID": "7D475961-D4B2-5619-AD62-F0F02C54DBE3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "fields": {
+      "Name": "Files",
+      "Description": "Search across uploaded documents and Dropbox vault files.",
+      "Icon": "fa-solid fa-folder-open",
+      "Status": "Active",
+      "IsGlobal": false,
+      "IsDefault": false
+    },
+    "primaryKey": {
+      "ID": "15C08F89-AF78-534C-AE4B-B5957FB8057C"
+    },
+    "relatedEntities": {
+      "MJ: Search Scope Providers": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "SearchProviderID": "@lookup:MJ: Search Providers.Name=File Storage",
+            "Enabled": true
+          },
+          "primaryKey": {
+            "ID": "CF49CD37-F740-5320-B2CA-C39DB0889A96"
+          }
+        }
+      ],
+      "MJ: Search Scope Storage Accounts": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "FileStorageAccountID": "@lookup:MJ: File Storage Accounts.Name=More Cheese Dropbox"
+          },
+          "primaryKey": {
+            "ID": "E725CC9F-B050-50D6-AC83-BC9375CDC8BA"
+          }
+        }
+      ],
+      "MJ: Search Scope Permissions": [
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=UI",
+            "UserID": null,
+            "PermissionLevel": "Search"
+          },
+          "primaryKey": {
+            "ID": "CD258660-C456-59B1-96EB-DC351E1B0951"
+          }
+        },
+        {
+          "fields": {
+            "SearchScopeID": "@parent:ID",
+            "RoleID": "@lookup:MJ: Roles.Name=Developer",
+            "UserID": null,
+            "PermissionLevel": "Manage"
+          },
+          "primaryKey": {
+            "ID": "3348602B-EFA2-578C-A016-E828B2C77A47"
+          }
+        }
+      ]
+    }
+  }
+]
