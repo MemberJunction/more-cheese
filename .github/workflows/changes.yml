@@ -32,6 +32,15 @@ jobs:
       - name: Test the release gates themselves
         run: npm run test:gates
 
+      # The spaces and elections plans are computed from generated/ and the vote catalogs, and the demo
+      # database is loaded from the committed plans, so a PR that changes their inputs must carry the
+      # rebuilt plans. Rebuilding never rewrites history: build-elections-plan.mjs refuses a plan that
+      # changes an election the last one planned (VAULT-DESIGN §5.7).
+      - name: Spaces and elections plans are up to date
+        run: |
+          node scripts/build-spaces-plan.mjs --check
+          node scripts/build-elections-plan.mjs --check
+
       # The release-version rule only ever runs on the release commit, where a mistake is
       # most expensive and least recoverable — so its fixtures run here, on every PR, rather
       # than waiting for publish.yml to be the first thing that exercises them.

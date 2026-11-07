@@ -44,6 +44,73 @@ The 16 heroes below are the exact individuals committed in `metadata/people/.peo
 | 15 | **Nia Thompson** | `nia.thompson.000115@thequietcurd.example`<br/>*The Quiet Curd* (Joined 14 days before release) | $\theta=0.5$<br/>$\phi=-0.4$ | **The Cold Start**: Joined two weeks before the pinned release date (same drift caveat as Marcus Chen); validates scoring on priors rather than transactional history. |
 | 16 | **Charlie Mason** | `charlie.mason.000116@winterfendairy.example`<br/>*Winterfen Dairy* (Joined 2021-08-19) | $\theta=0.3$<br/>$\phi=0.5$ | **Rest-of-World Producer**: Tasmanian sheep dairy owner; represents the Southern Hemisphere geographical distribution. |
 
+
+### Board of Directors (elected in Voting)
+
+Added 2026-10-30. Nine directors, three elected each November for a three-year term starting the next January, at most
+two terms in a row (VAULT-DESIGN §5.3). The elections are computed by `scripts/build-elections-plan.mjs` from
+`generated/` and loaded into bizapps-voting by `scripts/load-elections.mjs`; candidates are past committee chairs and
+vice chairs. Directors are named only in Voting and Spaces, never in content.
+
+| Director | Terms | Segment | Country |
+|---|---|---|---|
+| Baptiste Carlsen | 2020–2022, 2023–2025 | Producer | United States |
+| Danielle Marchand | 2020–2022, 2023–2025 | Retailer | Italy |
+| Gonzalo Figueroa | 2020–2022, 2023–2025 | Supplier | United States |
+| Kate Mwangi | 2021–2023, 2024–2026 | Enthusiast | Canada |
+| Margaux Ricci-Serra | 2021–2023, 2024–2026 | Enthusiast | Greece |
+| Nadia Figueroa | 2021–2023 | Retailer | United States |
+| Chiara Gagnon | 2022–2024, 2025–2027 | Educator | New Zealand |
+| Esteban Neves | 2022–2024 | Retailer | United States |
+| Iveta Jansen-Holzer | 2022–2024, 2025–2027 | Supplier | Switzerland |
+| Akira Kaur | 2024–2026 | Retailer | Canada |
+| Gwen Whitfield | 2025–2027 | Educator | United States |
+| Elena Rodriguez | 2026–2028 | Producer | United States |
+| Fabien Guerrero | 2026–2028 | Retailer | United States |
+| Mei Ravn | 2026–2028 | Producer | Australia |
+
+The table is derived from `data/elections/elections.plan.json` (`board`); regenerate it from there if the plan changes.
+Story beats: Gwen Whitfield loses in 2021 and wins in 2024, unseating an incumbent; Fabien Guerrero loses in 2022 and
+wins in 2025; one incumbent loses in 2023.
+
+### Member standards (balloted in Voting)
+
+Added 2026-11-02. The Standards Committee writes ICF's seven voluntary member standards (ICF-STD-101 to 302, listed
+in VAULT-DESIGN §5.4) and ballots each draft section by section, from 2019 on: 18 ballots in all, including four
+recirculations. The voters are the committee plus a ballot pool of engaged producers, retailers, suppliers and
+educators: 12 in 2019, growing to 40 in 2026, and a member stays in the pool while they are current. Two-thirds of votes
+cast approves a section. Elena Rodriguez votes and comments as a committee member from 2023. The chairs who certify:
+Amelia Ochoa (2019–20), Marta Ibarra-Huerta (2021–22), Damien Bergman (2023–24) and Matteo Mikkelsen (2025–26).
+
+### Member votes (bylaw amendments and referendums in Voting)
+
+Added 2026-11-02. The board has put four questions to the whole membership (VAULT-DESIGN §5.5): the 2019 amendments
+that brought in ranked, online director elections; the 2020 amendments for video-conference meetings and electronic
+ballots; the 2023 dues increase, which members turned down 89 to 68; and the 2025 Hardship Dues Program, approved
+356 to 68. Every current member two weeks before a vote opens is on its roll, with their membership type as their
+voting class, and 22–37% vote. The 2019 vote closed at the annual meeting in Madison, where conference registrants voted in
+person and four committee members held nine proxies. Membership & Outreach's chair certifies: Marco Ashworth (2019, 2020), Dan
+Penrose (2023) and Liv Chevalier (2025). Elena Rodriguez votes in 2025.
+
+### Chapter officers and polls (in Voting)
+
+Added 2026-11-02. Each chapter elects a chair and a vice chair every two years from 2020 (VAULT-DESIGN §5.6): 55
+elections, one to four candidates per office, 30–77% turnout (small chapters vote more). The 2026 officers are the
+owner and first admin of each chapter's space, skipping heroes who never run, so Tom Reyes, the New York space's owner,
+never stands. Elena Rodriguez: California vice chair 2024–26, chair from 2026. Henri Dubois: France vice chair 2024–26,
+chair from 2026. Mexico's 2022 vice chair race ties 8–8; Ling Ellison wins by lot over Petra Draper. Membership &
+Outreach's chair certifies each one. Polls: 10 in chapters and 10 in work groups (data/elections/polls.json), two of
+which fail (DACH's online autumn meetup, the New England producers' in-person workshop).
+
+### Votes open at the data's end (in Voting)
+
+Added 2026-11-02. On the data's as-of date (2026-10-31) three votes are open (VAULT-DESIGN §5.7): the 2026 board
+election (five candidates, 349 of 1,647 members have voted), the Early-Career Membership referendum (182 of 1,712),
+and a Food Safety Committee electronic vote on ICF's comments on the proposed raw-milk aging rule (6 of 17). The plan
+already holds every ballot each will get; the next month's data releases the rest and the results. From November 2026,
+each month adds one or two new polls or committee e-votes, written by `scripts/plan-votes-gemini.mjs` in the monthly
+run, with one of them still open at the month's end.
+
 ---
 
 ## 3. Authored Loom Metadata Specifications
