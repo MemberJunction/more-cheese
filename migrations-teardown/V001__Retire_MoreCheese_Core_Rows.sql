@@ -65,8 +65,8 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (3632 distinct records deleted; 3663 declared across
--- 44 directories, 30 of them declared in two directories and inserted once,
+-- Seed provenance (3634 distinct records deleted; 3665 declared across
+-- 45 directories, 30 of them declared in two directories and inserted once,
 -- 1 MJ core row deactivated in place rather than deleted):
 --   1425 from config/content-item-tags
 --    579 from config/user-roles
@@ -97,6 +97,7 @@
 --      3 from config/entity-documents
 --      2 from config/application-roles
 --      2 from config/content-sources
+--      2 from config/credentials
 --      2 from config/file-storage-account-permissions
 --      2 from config/sonar-score-model-versions
 --      2 from config/sonar-time-windows
@@ -106,8 +107,8 @@
 --      1 from config/ai-vendors
 --      1 from config/content-types
 --      1 from config/credential-types
---      1 from config/credentials
 --      1 from config/dashboard-categories
+--      1 from config/encryption-keys
 --      1 from config/file-storage-accounts
 --      1 from config/file-storage-providers
 --      1 from config/projects
@@ -2099,6 +2100,7 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Conversations', '8FFF9237-0DE1-43DA-BEE9-A5725F08C921'),
     ('MJ: Credential Types', '5E7A2C41-9B3D-4F1E-8A6C-2D4B7F9E0C15'),
     ('MJ: Credentials', '7A1E4C2B-5D3F-4E8A-9B6C-2F0D8E1A3C55'),
+    ('MJ: Credentials', '2A57B546-B17A-4EB1-AC02-E92F7F46E435'),
     ('MJ: Dashboard Categories', '8D2F4A61-3B7C-4E9D-A5F1-2C6B8E0D4A93'),
     ('MJ: Dashboard Category Links', 'C3E5A7B9-1D2F-4A6C-8E0B-4F6D8A2C1E75'),
     ('MJ: Dashboard Category Links', 'BC0DB1F0-35C8-560D-A69D-FCD66A992D2B'),
@@ -2134,10 +2136,10 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Duplicate Runs', '7C8831DE-6DC0-4419-A250-10FDD13798BF'),
     ('MJ: Duplicate Runs', 'A9990EBA-6B91-4236-BAA5-9DE938C5BA6F'),
     ('MJ: Duplicate Runs', '8F800D5E-1833-47CA-8775-CA707F100EE8'),
-    ('MJ: Duplicate Runs', '44287AE9-D97D-4252-AE6A-411F18C27A74'),
-    ('MJ: Duplicate Runs', '41645D03-9CEE-4D62-82B5-7561A8E5DAA6');
+    ('MJ: Duplicate Runs', '44287AE9-D97D-4252-AE6A-411F18C27A74');
 
 INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: Duplicate Runs', '41645D03-9CEE-4D62-82B5-7561A8E5DAA6'),
     ('MJ: Duplicate Runs', '52C54286-E689-4BB1-8890-773A3FC0CA37'),
     ('MJ: Duplicate Runs', '73C0CCB8-48EE-47BA-89E1-EB02108763DA'),
     ('MJ: Duplicate Runs', '9B49004E-12E8-4891-AB5D-B76C3D25E19B'),
@@ -2165,6 +2167,7 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Duplicate Runs', '761B7F91-3398-4E62-9099-7E089189266A'),
     ('MJ: Duplicate Runs', '50161B71-31D3-4971-A721-49FE7448DEF1'),
     ('MJ: Duplicate Runs', '70D18A7F-EA5E-4AF0-B10B-EED4D03F49D5'),
+    ('MJ: Encryption Keys', '22FFADC4-C913-4877-9598-2EC8DAE62CEB'),
     ('MJ: Entity Documents', '1BCD53D7-638C-43AA-A35B-6F0D239FC557'),
     ('MJ: Entity Documents', '03790917-5B5D-40A8-BC0F-0949E836C89C'),
     ('MJ: Entity Documents', 'E58FAF59-25EA-4868-8ADB-9C1CE1745B87'),
@@ -2635,11 +2638,11 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Roles', 'A74E750C-13CA-596C-B707-C97B4D2A0F00'),
     ('MJ: User Roles', '4172E327-F526-538C-9EC8-2E6B83DB7819'),
     ('MJ: User Roles', '763B11D3-A7F2-5B82-AD24-266A296D5527'),
-    ('MJ: User Roles', 'EE0F1D16-5C22-5B13-8CBA-1D586A27E7FD'),
-    ('MJ: User Roles', 'B5024B9C-3B05-5F48-92AF-9540EDACDAF6'),
-    ('MJ: User Roles', 'ECA4B054-FC54-5417-98D6-C1863C5BDB31');
+    ('MJ: User Roles', 'EE0F1D16-5C22-5B13-8CBA-1D586A27E7FD');
 
 INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: User Roles', 'B5024B9C-3B05-5F48-92AF-9540EDACDAF6'),
+    ('MJ: User Roles', 'ECA4B054-FC54-5417-98D6-C1863C5BDB31'),
     ('MJ: User Roles', '811DCE3D-B334-5721-8141-53285D40FCB8'),
     ('MJ: User Roles', 'D1DB7F39-0F95-5318-9AA5-1572E8B73DD6'),
     ('MJ: User Roles', '99CF7454-1C8D-5D51-818F-45A3EC792624'),
@@ -3137,11 +3140,11 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Roles', 'F39431E8-0A63-5419-97C7-E3418BA0D3F0'),
     ('MJ: User Roles', 'FA79D136-B2D7-516E-99EF-4F20229F3AFB'),
     ('MJ: User Roles', 'D4888B05-7441-5680-B68B-C0635D6C7213'),
-    ('MJ: User Roles', '19B6C81C-D6F8-5EA1-96F6-5C8FCE4ACC4B'),
-    ('MJ: User Roles', '16A56F98-1208-5A7B-BF8E-CB58DB4A2FD0'),
-    ('MJ: User Roles', '7D3F1287-9736-5891-A511-0EBE182BEFB2');
+    ('MJ: User Roles', '19B6C81C-D6F8-5EA1-96F6-5C8FCE4ACC4B');
 
 INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: User Roles', '16A56F98-1208-5A7B-BF8E-CB58DB4A2FD0'),
+    ('MJ: User Roles', '7D3F1287-9736-5891-A511-0EBE182BEFB2'),
     ('MJ: User Roles', '245C57CA-1513-5E03-B054-BB589E666FF6'),
     ('MJ: User Roles', '8E5DF371-50C8-5933-BA93-6E5FFC517F9B'),
     ('MJ: User Roles', '3FF66B00-0EB9-5C34-8460-DF3B2EE64F91'),
@@ -3639,11 +3642,11 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Users', '95B49119-254E-51EC-97FA-1658824CE72F'),
     ('MJ: Users', '9B96AE6B-4212-562C-98E8-BE03BF379A5A'),
     ('MJ: Users', '0C674057-4E66-56A8-8E9A-2168C2AD801A'),
-    ('MJ: Users', '6136D1AC-3CA1-5621-8861-CA012F8411DC'),
-    ('MJ: Users', 'FAE02525-9B8D-5ACD-B33D-EE7A508E25AC'),
-    ('MJ: Users', '03E9CB43-A933-5E31-A7AC-EDE6DB817D87');
+    ('MJ: Users', '6136D1AC-3CA1-5621-8861-CA012F8411DC');
 
 INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: Users', 'FAE02525-9B8D-5ACD-B33D-EE7A508E25AC'),
+    ('MJ: Users', '03E9CB43-A933-5E31-A7AC-EDE6DB817D87'),
     ('MJ: Users', '794BCDD7-052E-52DA-AD0D-14D951E6B421'),
     ('MJ: Users', '1301E361-1030-5D81-85FC-C71D2674D577'),
     ('MJ: Users', '6CB2F86E-F84E-56D4-86DD-61E8AE72362E'),
