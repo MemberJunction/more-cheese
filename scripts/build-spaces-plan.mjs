@@ -36,6 +36,12 @@ const USERS_FILE = 'config/users/.space-users.json';
 const ROLES_FILE = 'config/user-roles/.space-user-roles.json';
 const COMMITTEES_ENTITY = 'Committees: Committees';
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
+/**
+ * The day the spaces were seated: rosters, owners and invitations are picked as of this date, not the data's end, so
+ * the monthly run's new data never reshuffles a space already loaded (and the chapter elections that read their
+ * owners). Moving it re-seats every space: reload the spaces and the elections that read them.
+ */
+export const SEATED_ON = '2026-10-31';
 
 // ---------- helpers ----------
 const up = (v) => (v == null ? v : String(v).toUpperCase());
@@ -110,7 +116,7 @@ export function loadWorld(root) {
 }
 
 // ---------- who is who ----------
-function makeIndex(w) {
+export function makeIndex(w) {
     const person = new Map(w.people.map((p) => [p.id, p]));
     const profile = new Map(w.profiles.map((p) => [p.PersonID, p]));
     const byEmail = new Map(w.people.map((p) => [String(p.Email).toLowerCase(), p.id]));
@@ -150,7 +156,7 @@ function rank(ids, score) {
 const activeOn = (m, d) => day(m.StartDate) <= d && (!m.EndDate || day(m.EndDate) >= d);
 
 // ---------- the families ----------
-const CHAPTERS = [
+export const CHAPTERS = [
     { key: 'california', name: 'California Chapter', states: ['US-CA'], chair: 'HERO-ICF-001' },
     { key: 'wisconsin', name: 'Wisconsin Chapter', states: ['US-WI'] },
     { key: 'new-england', name: 'New England Chapter', states: ['US-VT', 'US-ME', 'US-NH', 'US-MA', 'US-CT', 'US-RI'] },
@@ -221,7 +227,8 @@ const PRESENTER_SEATS = { 'committee-food-safety': 'admin', 'chapter-california'
 // ---------- build ----------
 export function buildPlan(w) {
     const ix = makeIndex(w);
-    const now = w.asOf;
+    // Seated as of SEATED_ON (or the data's end, if the data stops sooner).
+    const now = w.asOf < SEATED_ON ? w.asOf : SEATED_ON;
     const current = ix.currentAt(now);
     const score = ix.engagementAt(now);
     const seated = new Set();

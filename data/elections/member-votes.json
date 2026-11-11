@@ -1,0 +1,123 @@
+{
+  "about": "ICF's member-wide votes, 2019 on (VAULT-DESIGN §5.5): bylaw amendments and referendums the board puts to every current member. Hand-written; scripts/build-elections-plan.mjs turns each into a secret amendment or referendum election. yes is the share of votes cast in favor (abstentions excluded) and must give the result its fail flag says: an amendment needs two-thirds, a referendum a majority. lean shifts a voting class toward yes (+) or no (-). channels: meeting is the event whose registrants vote in person at the annual meeting, proxy the share of other voters who name a proxy instead of mailing a ballot, paper the share of the rest who vote by mail (1 = a mail-only vote).",
+  "votes": [
+    {
+      "key": "amend-2019",
+      "type": "amendment",
+      "name": "Bylaw Amendments 2019 — Director Elections",
+      "description": "The board's proposed amendments to Article V of the ICF bylaws (Board of Directors), to take effect for the 2019 board election. Voted by mail ballot, by proxy, and in person at the annual meeting at the ICF Annual Conference 2019 in Madison on July 16. Each amendment needs two-thirds of the votes cast.",
+      "opens": "2019-06-17",
+      "closes": "2019-07-16",
+      "meetingAt": "2019-07-16T19:00:00Z",
+      "certified": "2019-07-24",
+      "turnout": 0.24,
+      "channels": { "meeting": "EVT-2019-CONF", "proxy": 0.3, "paper": 1, "proxyDeadline": "2019-07-12" },
+      "contests": [
+        {
+          "name": "Amendment 1: Elect directors by ranked ballot",
+          "kind": "Amendment",
+          "text": "Article V, Section 4 is amended to read: \"Directors are elected by the members by ranked ballot, counted by single transferable vote, for the seats open that year. A member may rank as many or as few candidates as they wish.\" Today the three candidates with the most votes are elected, and a member votes for up to three.",
+          "yes": 0.8,
+          "lean": { "Corporate": -0.05 }
+        },
+        {
+          "name": "Amendment 2: Allow online ballots in director elections",
+          "kind": "Amendment",
+          "text": "Article V, Section 5 is amended to add: \"A member may cast their ballot in a director election online, through a secure ballot sent to them by the Federation, or by mail.\" Today director election ballots are mailed and returned by mail.",
+          "yes": 0.87,
+          "lean": { "Enthusiast": 0.05 }
+        }
+      ]
+    },
+    {
+      "key": "amend-2020",
+      "type": "amendment",
+      "name": "Bylaw Amendments 2020 — Remote Meetings and Electronic Ballots",
+      "description": "The board's proposed amendments to Article IV of the ICF bylaws (Meetings of Members), so that the 2020 annual meeting can be held online. Voted by mail ballot only, as the bylaws then required. Each amendment needs two-thirds of the votes cast.",
+      "opens": "2020-05-04",
+      "closes": "2020-06-05",
+      "certified": "2020-06-12",
+      "turnout": 0.3,
+      "channels": { "paper": 1 },
+      "contests": [
+        {
+          "name": "Amendment 1: Hold member meetings by video conference",
+          "kind": "Amendment",
+          "text": "Article IV, Section 2 is amended to add: \"The board may hold the annual meeting, or any special meeting of members, wholly or partly by video conference, provided every member entitled to attend can hear, be heard and vote. Members attending that way are present for every purpose of these bylaws.\"",
+          "yes": 0.93,
+          "lean": {}
+        },
+        {
+          "name": "Amendment 2: Vote on amendments and referendums by electronic ballot",
+          "kind": "Amendment",
+          "text": "Article IV, Section 6 is amended to read: \"Votes of the members on amendments to these bylaws and on referendums the board refers to them are taken by secret ballot, cast online or by mail, over a voting period of at least twenty-one days.\" Today these votes are taken by mail ballot or at a meeting of members.",
+          "yes": 0.86,
+          "lean": { "Enthusiast": 0.04, "Corporate": 0.03 }
+        }
+      ]
+    },
+    {
+      "key": "referendum-2023",
+      "type": "referendum",
+      "name": "Dues Referendum 2023 — 2024 Dues Schedule",
+      "description": "The board's proposal to raise annual dues from January 1, 2024, the first change since 2018. A majority of the votes cast decides.",
+      "opens": "2023-04-17",
+      "closes": "2023-05-15",
+      "certified": "2023-05-19",
+      "turnout": 0.22,
+      "channels": { "paper": 0.08 },
+      "contests": [
+        {
+          "name": "Approve the 2024 dues schedule",
+          "kind": "Question",
+          "text": "Should annual dues rise on January 1, 2024 as follows? Individual from $175 to $195; Enthusiast from $150 to $165; Small Business from $400 to $450; Corporate from $1,000 to $1,150. The board proposes the increase to fund a second membership services position and to keep event and education fees where they are. If members vote no, dues stay at the 2018 rates.",
+          "yes": 0.43,
+          "fail": true,
+          "lean": { "Corporate": 0.22, "SmallBusiness": -0.12, "Enthusiast": -0.04 }
+        }
+      ]
+    },
+    {
+      "key": "referendum-2025",
+      "type": "referendum",
+      "name": "Hardship Dues Referendum 2025",
+      "description": "The board's proposal for a hardship dues program for members hit by rising costs and creamery closures, designed by the Hardship Dues Program working group. A majority of the votes cast decides.",
+      "opens": "2025-06-23",
+      "closes": "2025-07-14",
+      "certified": "2025-07-17",
+      "turnout": 0.38,
+      "channels": { "paper": 0.1 },
+      "space": "hardship-dues-2025",
+      "contests": [
+        {
+          "name": "Adopt the Hardship Dues Program",
+          "kind": "Question",
+          "text": "Should ICF adopt the Hardship Dues Program for renewals due from August 1, 2025 to July 31, 2026? A member whose creamery or business faces closure or severe cost pressure may apply to defer their renewal for up to six months, or to renew at a reduced rate, under guidelines the working group publishes. Corporate memberships are not eligible. Membership Operations reviews each application in confidence, and the board reports the program's cost to the members at the 2026 annual meeting.",
+          "yes": 0.84,
+          "lean": { "Corporate": -0.14, "SmallBusiness": 0.06 }
+        }
+      ]
+    },
+    {
+      "key": "referendum-2026",
+      "type": "referendum",
+      "name": "Early-Career Membership Referendum 2026",
+      "description": "The board's proposal, from the Next Generation working group, for a membership for members early in their careers. A majority of the votes cast decides.",
+      "opens": "2026-10-26",
+      "closes": "2026-11-16",
+      "certified": "2026-11-19",
+      "turnout": 0.3,
+      "channels": { "paper": 0.08 },
+      "space": "next-generation-2026",
+      "contests": [
+        {
+          "name": "Create an Early-Career membership",
+          "kind": "Question",
+          "text": "Should ICF offer an Early-Career membership from January 1, 2027, at $95 a year, to members in their first five years of cheesemaking or affinage? Early-Career members would vote and serve like Individual members ($175). The Next Generation working group proposes it so apprentices and new makers can join in their own name instead of under an employer's membership.",
+          "yes": 0.72,
+          "lean": { "Enthusiast": 0.05, "Corporate": -0.08 }
+        }
+      ]
+    }
+  ]
+}

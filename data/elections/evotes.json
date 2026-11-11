@@ -1,0 +1,16 @@
+{
+  "about": "Committee votes taken electronically between meetings, 2026 on (VAULT-DESIGN §5.7). Hand-written for October 2026; each later month's are added by scripts/plan-votes-gemini.mjs in the monthly run; scripts/build-elections-plan.mjs turns each into an Open roll-call motion for the committee's members on the day it opens, a majority of votes cast deciding. yes is the share of votes cast in favor (fail marks one that fails), turnout the share of members who vote. A vote still open on the data's as-of date is planned as open, with the ballots cast so far.",
+  "votes": [
+    {
+      "key": "evote-food-safety-2026-10",
+      "committee": "Food Safety Committee",
+      "opens": "2026-10-28",
+      "closes": "2026-11-11",
+      "certified": "2026-11-13",
+      "name": "Endorse ICF's comments on the proposed raw-milk aging rule (Food Safety, electronic vote)",
+      "text": "Motion: that the Food Safety Committee endorse the draft ICF comments on the proposed federal raw-milk aging rule, as circulated on October 27, for filing before the comment period closes. Voted electronically because the comments are due before the committee's next meeting.",
+      "turnout": 0.85,
+      "yes": 0.8
+    }
+  ]
+}

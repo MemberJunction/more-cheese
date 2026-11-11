@@ -82,6 +82,21 @@ test('chapter: the pinned hero chairs, the next two most engaged are admins, lap
     assert.equal(s.seats.filter((x) => x.user !== PRESENTER && x.role !== 'guest').length, 25);
 });
 
+test('a later month of data reseats nobody: spaces are seated as of SEATED_ON', () => {
+    const root = world({ lapsed: [39, 40] });
+    const before = buildPlan(loadWorld(root));
+    // November: the data runs a month further and person 5 becomes the most engaged member in the region.
+    const add = (rel, rows) => {
+        const f = path.join(root, rel);
+        fs.writeFileSync(f, JSON.stringify([...JSON.parse(fs.readFileSync(f, 'utf8')), ...rows]));
+    };
+    add('generated/enrollments/.enrollments.json', Array.from({ length: 60 }, () => ({ fields: { PersonID: pid(5), EnrolledOn: '2026-11-12' } })));
+    fs.writeFileSync(path.join(root, 'generated/checkpoint.json'), JSON.stringify({ continuity: { asOfDate: '2026-11-30' } }));
+    const after = buildPlan(loadWorld(root));
+    assert.deepEqual(after.plan, before.plan);
+    assert.deepEqual(after.users, before.users);
+});
+
 test('the planted duplicate never gets a seat or a user', () => {
     const { plan, users } = buildPlan(loadWorld(world({ kathy: 30 })));
     assert.ok(!plan.spaces.some((s) => s.seats.some((x) => x.user.startsWith('kathy.'))));

@@ -1,6 +1,6 @@
 ---
 name: morecheese-monthly-run
-description: The monthly More Cheese extension run — the weekly blog for every finished week, the next Loom data cycle planned by Gemini Argon, the internal staff bundles up to the new data end, every gate, then one pull request into next. USE THIS SKILL WHENEVER asked to run, resume, dry-run or debug the monthly run, the monthly routine, the scheduled More Cheese extension, "extend the dataset for <month>", "catch More Cheese up", or the cloud routine that does this. Not for writing a single blog week or internal week by hand (use morecheese-weekly-blog or morecheese-internal-comms).
+description: The monthly More Cheese extension run — the weekly blog for every finished week, the next Loom data cycle planned by Gemini Argon, the month's new votes, the rebuilt spaces and elections plans, the internal staff bundles up to the new data end, every gate, then one pull request into next. USE THIS SKILL WHENEVER asked to run, resume, dry-run or debug the monthly run, the monthly routine, the scheduled More Cheese extension, "extend the dataset for <month>", "catch More Cheese up", or the cloud routine that does this. Not for writing a single blog week or internal week by hand (use morecheese-weekly-blog or morecheese-internal-comms).
 ---
 
 # More Cheese — the monthly run
@@ -11,8 +11,9 @@ Claude Code cloud routine on the 1st of the month, but it works the same in a lo
 
 **What the run may do.** Asking for this run is the user's request for **one** commit of its output
 on a fresh branch, one push of that branch, and one pull request into `next` with **no reviewer**.
-It never merges, never pushes to `next` or `main`, never edits code, config, skills or workflows, and
-never commits a Loom checkout, a symlink or a log. If a step fails, it says so in the PR and in its
+It never merges, never pushes to `next` or `main`, never edits code, config, skills or workflows (the
+only config it commits is what §4's `build-spaces-plan.mjs` writes), and never commits a Loom
+checkout, a symlink or a log. If a step fails, it says so in the PR and in its
 final message; it does not work around a failing gate.
 
 ## 1. Set up
@@ -31,7 +32,7 @@ final message; it does not work around a failing gate.
    equal `loom-ref`. If it does not, or `/opt/loom` is missing, **stop before §4**, keep the blog, and say
    that the environment's setup script has to rebuild (any edit to it does). Do not run `pnpm install`
    yourself in a cloud session.
-3. **Gemini.** Both Gemini scripts read `GEMINI_API_KEY`, which the routine's cloud environment sets as an
+3. **Gemini.** The Gemini scripts read `GEMINI_API_KEY`, which the routine's cloud environment sets as an
    environment variable. Check it with `test -n "$GEMINI_API_KEY"`, never by printing it; never echo,
    log or write the key anywhere. (Where the key is instead a cloud **network secret** on
    `generativelanguage.googleapis.com`, header `x-goog-api-key`, prefix the commands below with
@@ -74,6 +75,26 @@ the cycle to `generated/` and written `data/plans/<YYYY-MM>.plan.json` and `.dec
 has restored `generated/` and kept nothing — stop planning, keep the blog, and report the problems from
 its output. Never hand-edit `generated/` or a plan.
 
+Right after each cycle passes, before the next one, plan that month's new votes:
+
+```sh
+node scripts/build-spaces-plan.mjs
+node scripts/plan-votes-gemini.mjs --month <YYYY-MM>
+```
+
+The second appends one or two polls or committee e-votes to `data/elections/polls.json` and
+`evotes.json`, one of them still open on the month's last day, so the demo always has a vote in
+progress. It needs the data to end on that day, which is why it runs inside the loop. If it fails it
+writes nothing: report it and go on (that month just has no new vote); do not write votes by hand.
+
+## 4b. The elections plan
+
+After the last cycle: `node scripts/build-elections-plan.mjs`. It finishes the votes that were open,
+adds the new ones, and prints a `since the last plan:` line for the PR body. It **refuses** a plan that
+would change an election the last plan had, finished or open (the demo database holds them): that
+means the new data rewrote the past. Then stop, keep everything else, and put its list of problems at
+the top of the PR; never pass `--rewrite-history`.
+
 ## 5. Internal — each due week, one at a time
 
 Ask `status` again (planning moved the data end), then for each internal week, oldest first:
@@ -91,6 +112,8 @@ All of these, from the repo root; every one must pass:
 
 ```sh
 npm run test:gates
+node scripts/build-spaces-plan.mjs --check
+node scripts/build-elections-plan.mjs --check
 node scripts/check-metadata-closure.mjs
 npm run validate:loom
 npm run test:loom-mutations
@@ -106,8 +129,10 @@ change nothing. Also run `node scripts/validate-content.mjs --week <Monday>` for
 
 ## 7. Commit and open the pull request
 
-1. Stage only what the run wrote: `content/blog/`, `vault/internal/`, `generated/`, `data/plans/`. Check
-   `git status --short` shows nothing else changed; if something did, leave it unstaged and say so.
+1. Stage only what the run wrote: `content/blog/`, `vault/internal/`, `generated/`, `data/plans/`,
+   `data/elections/`, `data/spaces/spaces.plan.json`, `config/users/.space-users.json` and
+   `config/user-roles/.space-user-roles.json`. Check `git status --short` shows nothing else changed; if
+   something did, leave it unstaged and say so.
 2. Commit: `content+data: monthly run <date> (<cycles>)`, with a body listing the blog weeks, cycles and
    internal weeks, and the attribution trailer this session's instructions give.
 3. `git push -u origin <branch>`.
@@ -116,8 +141,12 @@ change nothing. Also run `node scripts/validate-content.mjs --week <Monday>` for
    No reviewer: the user reviews and merges More Cheese PRs.
 
 The PR body: what was due and what was done; each cycle's summary from its `.decisions.json` (joins,
-lapses, renewals, registrations); Gemini token counts from the script output; every §6 result; and,
-at the top, anything that failed or was skipped and why.
+lapses, renewals, registrations); the new votes and the plan's `since the last plan:` line; Gemini
+token counts from the script output; every §6 result; and, at the top, anything that failed or was
+skipped and why. End it with what to do after merging, since the demo database is not reachable from
+here: "Load the demo database from the merged plans: `node scripts/load-spaces.mjs --mj <MJ dir>`, then
+`node scripts/load-elections.mjs --mj <MJ dir> --presenter <your email>` (a vote loaded open last month
+is replaced in full), then restart MJAPI."
 
 ## 8. Final message
 
