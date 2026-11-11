@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { check, markOf, slots } from './build-election-comments-gemini.mjs';
+import { brief as briefOf, check, markOf, slots } from './build-election-comments-gemini.mjs';
 
 const brief = {
     ballot: 'ICF-STD-900 Test v1.0 — Ballot',
@@ -45,4 +45,18 @@ test('check: the response matches its disposition, an editorial asks for a chang
     assert.match(check(agency, brief).join(), /agency or regulation/);
     const short = good(); short[0].comment = 'Too short.';
     assert.match(check(short, brief).join(), /words/);
+});
+
+test('brief: a finished ballot gives each item\'s count; one still open says so', () => {
+    const comment = { key: 's:P1:0', type: 'Technical', resolution: { disposition: 'Rejected' } };
+    const election = {
+        key: 's', name: 'ICF-STD-900 Test v1.0 — Ballot', standards: { documentTitle: 'Test', documentVersion: '1.0', round: 0 },
+        roll: [{ person: 'P1', class: 'Committee' }],
+        ballots: [{ person: 'P1', contests: [{ option: 'Disapprove', comment }] }],
+    };
+    const catalog = { ballots: [{ key: 's', items: [{ name: '§2 Bulk-tank testing', gist: 'Weekly.' }] }] };
+    const w = { person: new Map(), profile: new Map(), organization: new Map() };
+    const finished = { ...election, expect: [{ result: 'Passed', approve: 9, disapprove: 1, abstain: 0 }] };
+    assert.equal(briefOf(finished, catalog, w, slots(finished)).items[0].vote, 'Passed (9 approve, 1 disapprove, 0 abstain)');
+    assert.equal(briefOf(election, catalog, w, slots(election)).items[0].vote, 'still open');
 });

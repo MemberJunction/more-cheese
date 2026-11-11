@@ -90,7 +90,10 @@ writes nothing: report it and go on (that month just has no new vote); do not wr
 ## 4b. The elections plan
 
 After the last cycle: `node scripts/build-elections-plan.mjs`. It finishes the votes that were open,
-adds the new ones, and prints a `since the last plan:` line for the PR body. It **refuses** a plan that
+adds the new ones, and prints a `since the last plan:` line for the PR body. A standards ballot that
+gained comments needs their words before it can be loaded, so then run
+`node scripts/build-election-comments-gemini.mjs` (it writes only the comments still without words) and
+`node scripts/build-elections-plan.mjs` again; if the comments fail, report it like a failed gate. It **refuses** a plan that
 would change an election the last plan had, finished or open (the demo database holds them): that
 means the new data rewrote the past. Then stop, keep everything else, and put its list of problems at
 the top of the PR; never pass `--rewrite-history`.

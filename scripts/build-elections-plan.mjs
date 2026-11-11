@@ -1002,6 +1002,25 @@ function boardRoster(elections, BOARD) {
 export const renderPlan = (plan) => JSON.stringify(plan, null, 2) + '\n';
 
 // What an election open on the as-of date leaves out until it finishes (asOfCut).
+/**
+ * The last plan with the words of its still-unwritten standards comments taken from the new one. A plan is written
+ * before scripts/build-election-comments-gemini.mjs words its new comments, and scripts/load-elections.mjs refuses a
+ * comment without words, so words arriving later change nothing the database holds.
+ */
+function withWording(prev, next) {
+    const words = new Map();
+    for (const e of next.elections) for (const b of e.ballots ?? []) for (const c of b.contests) if (c.comment) words.set(c.comment.key, c.comment);
+    const fill = (c) => {
+        const w = words.get(c.key);
+        if (c.comment !== null || !w) return c;
+        return { ...c, reference: w.reference, comment: w.comment, proposedChange: w.proposedChange, resolution: { ...c.resolution, response: w.resolution.response } };
+    };
+    return {
+        ...prev,
+        elections: prev.elections.map((e) => ({ ...e, ballots: (e.ballots ?? []).map((b) => ({ ...b, contests: b.contests.map((c) => (c.comment ? { ...c, comment: fill(c.comment) } : c)) })) })),
+    };
+}
+
 const UNFINISHED = new Set(['ballots', 'stage', 'stageAt', 'presenter', 'expect', 'talliedAt', 'certifiedAt', 'lot', 'nominations']);
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
@@ -1013,6 +1032,7 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
  * rewrote the past (a planner bug, or a hand edit to generated/ or a catalog) and the database would no longer match.
  */
 export function historyChanges(prev, next) {
+    prev = withWording(prev, next);
     const byKey = new Map(next.elections.map((e) => [e.key, e]));
     const problems = [];
     for (const e of prev.elections) {

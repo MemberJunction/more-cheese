@@ -14,7 +14,8 @@
     "ICF-STD-201": { "title": "Labeling Guide for Aged and Washed-Rind Cheeses", "short": "Aged and Washed-Rind Labeling" },
     "ICF-STD-202": { "title": "Net-Weight and Cut-Wedge Labeling Guidance", "short": "Net-Weight Labeling" },
     "ICF-STD-301": { "title": "Raw-Milk Production Hygiene Standard", "short": "Raw-Milk Production Hygiene" },
-    "ICF-STD-302": { "title": "Aging-Room Environmental Monitoring Standard", "short": "Aging-Room Monitoring" }
+    "ICF-STD-302": { "title": "Aging-Room Environmental Monitoring Standard", "short": "Aging-Room Monitoring" },
+    "ICF-STD-401": { "title": "Eye Formation Guide for Swiss-Type Cheeses", "short": "Swiss-Type Eye Formation" }
   },
   "ballots": [
     {
@@ -147,6 +148,21 @@
         { "name": "§2 Cut-and-wrap wedges (revised)", "dis": 0.1, "gist": "Lets retailers use a printed tare for each type of wrap instead of weighing the wrap each time." },
         { "name": "§3 Moisture-loss allowance", "dis": 0.14, "gist": "Producers publish a moisture-loss allowance for each style, as a percentage per month of age." },
         { "name": "§4 Shipped and online orders", "dis": 0.16, "gist": "New: an online listing states the net weight at packing and that weight may fall slightly in transit." }
+      ]
+    },
+    {
+      "key": "std-401-1.0", "doc": "ICF-STD-401", "version": "1.0", "opens": "2026-09-08", "days": 30,
+      "items": [
+        { "name": "§1 Eye size", "dis": 0.09, "gist": "Eyes in a Swiss-type wheel are round and glossy and measure 1 to 3 centimeters across: no smaller than a pea, no larger than a walnut." },
+        { "name": "§2 Eyes per cut face", "dis": 0.44, "fail": true, "gist": "Draft: a cut face shows 8 to 12 eyes for every 100 square centimeters, so a wedge looks the way customers expect a Swiss-type cheese to look. Makers of smaller wheels and longer-aged styles say their eyes run fewer and larger." },
+        { "name": "§3 Blind and overset wheels", "dis": 0.13, "gist": "A wheel with almost no eyes (blind) or so many that they crowd each other (overset) is sold as a second, not under the Swiss-type name." },
+        { "name": "§4 Splits and cracks", "dis": 0.17, "gist": "Splits longer than 2 centimeters on a cut face make the wheel a second; the maker records warm-room temperature and time for every batch to trace the cause." }
+      ]
+    },
+    {
+      "key": "std-401-1.0-r1", "doc": "ICF-STD-401", "version": "1.0 rev. 1", "round": 1, "prior": "std-401-1.0", "opens": "2026-10-30", "days": 21,
+      "items": [
+        { "name": "§2 Eyes per cut face (revised)", "carry": 1, "dis": 0.15, "gist": "Revised: 8 to 12 eyes per 100 square centimeters is a guide, not a grade; a wheel outside it keeps the Swiss-type name unless it is blind or overset under §3." }
       ]
     }
   ]
