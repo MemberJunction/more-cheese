@@ -324,7 +324,7 @@ Arc constraints, per persona, that content must not contradict:
 | Hero | Must not | May |
 |---|---|---|
 | Elena Rodriguez | Be called Standards Committee **chair** — the data has her as a **Member** for 2023-24 and 2025-26 (see §9, decision 1) | Appear as an engaged conference attendee and Standards Committee member from 2023 |
-| Gwen Whitfield | Be "board chair" — no board entity exists; the data has her on **Food Safety**, Member 2023-24, **Chair from 2025** | Be described as a governance-minded volunteer any year from 2014; chair Food Safety from 2025 |
+| Gwen Whitfield | Be "board chair" — the elected board (§5.3) has no chair; the data has her on **Food Safety**, Member 2023-24, **Chair from 2025**, and on the board from 2025 (named only in Voting) | Be described as a governance-minded volunteer any year from 2014; chair Food Safety from 2025 |
 | Tom Reyes | Be put on a stage or credited with event attendance | Be quoted on advocacy — he has heavy legislative activity |
 | Victor Sandoval | Volunteer, present, or be thanked for engagement | Appear only as a renewing corporate member, if at all |
 | Marcus Chen | Be shown renewing smoothly | Appear in a lapse/grace-window narrative |
@@ -427,6 +427,129 @@ Notes for the approval decision:
   table), **not** in `data/ruleset/heroes.json` — they are not simulated members and must not get
   membership periods, orders, or committee seats.
 - If rejected, the role-only fallback in §5.1 stands and nothing else in this design changes.
+
+### 5.3 Board of Directors — elected in Voting; content names no director
+
+**Status:** added 2026-10-30 (Yuri). ICF has a nine-member **Board of Directors**, elected by the members: three
+seats a year for staggered three-year terms, at most two terms in a row. The board has existed in the corpus as a role
+all along (board packets, "what did we tell the board"); its elections now exist as data, in bizapps-voting, built by
+`scripts/build-elections-plan.mjs` from `generated/` (`data/elections/elections.plan.json`: every election, and
+`board`, the seats by year). Directors are members who served as committee chairs or vice chairs. The roster is in the
+world model (`plans/more-cheese-world-model-and-personas.md`, "Board of Directors").
+
+Rules for content:
+- **Name no director.** Blog posts, press releases, annual reports and internal comms keep writing "the board" and
+  "board packets", as in §5.1. A director's name appears only in the Voting data and in collaboration Spaces.
+- **Nobody chairs the board in any artifact.** The data has no board chair or officer roles.
+- An artifact may say an election happened ("members elected three directors in November") without the names or
+  the counts.
+- Hero beats the data already carries: Gwen Whitfield runs in 2021 and loses, then is elected in 2024 (term
+  2025–2027); Elena Rodriguez is elected in 2025 (term 2026–2028). Heroes whose arcs rule out volunteering never run
+  (Marcus Chen, Bob Kowalski, Tom Reyes, Victor Sandoval, and the planted duplicate Kathy OLeary).
+
+How the elections run: nominations in September, a secret ranked ballot (single transferable vote) from mid-October to
+mid-November with every member current on August 31 on the roll, and certification by a committee chair acting as
+Election Inspector who is neither running nor on the board.
+
+### 5.4 ICF member standards — balloted in Voting
+
+**Status:** added 2026-11-02 (Yuri). ICF publishes seven voluntary **member standards**, written and balloted by the
+Standards Committee. They are ICF's own codes of practice for members, separate from the federal rules that the
+blog's advocacy posts follow:
+
+| Code | Title | Versions balloted |
+|---|---|---|
+| ICF-STD-101 | Code of Practice for Raw-Milk Cheese Aging | 1.0 (2019), 1.1 (2020), 2.0 (2023, recirculated twice) |
+| ICF-STD-102 | Aging Records Guidance | 1.0 (2020), 1.1 (2022) |
+| ICF-STD-103 | Sheep- and Goat-Milk Aging Annex | 1.0 (2025, recirculated once) |
+| ICF-STD-201 | Labeling Guide for Aged and Washed-Rind Cheeses | 1.0 (2021, recirculated once), 1.1 (2024) |
+| ICF-STD-202 | Net-Weight and Cut-Wedge Labeling Guidance | 1.0 (2021), 2.0 (2026, certified October 2026) |
+| ICF-STD-301 | Raw-Milk Production Hygiene Standard | 1.0 (2019, recirculated once), 1.1 (2022) |
+| ICF-STD-302 | Aging-Room Environmental Monitoring Standard | 1.0 (2024) |
+
+The catalog and every ballot's sections are `data/elections/standards.json`; the ballots, comments and resolutions
+are built by `scripts/build-elections-plan.mjs`, with wording from `data/elections/comments.json`. Each ballot is an
+Open roll call of the committee and a **ballot pool** of engaged members who signed up. Each section is approved by
+two-thirds of votes cast, and every Disapprove carries a comment, which the committee resolves. A section that fails
+goes back to the same voters as a recirculation. The story the data tells: STD-101 2.0's new §3 (validated aging
+protocols) failed twice before a conflict-of-interest rule and a two-year start let it pass in August 2023.
+
+Rules for content:
+- An artifact may name a standard by code and title, and say when it was adopted, revised or recirculated, as above.
+- **Name no commenter and quote no comment.** Comments live only in Voting. Vote counts appear only if they are taken
+  from the data.
+- Never invent a standard, version or ballot that the catalog doesn't have.
+
+### 5.5 Member votes — bylaw amendments and referendums in Voting
+
+**Status:** added 2026-11-02 (Yuri). Four times since 2019 the board has put a question to every current member.
+Each vote is a secret ballot in Voting; the catalog and the exact wording are in `data/elections/member-votes.json`,
+and the ballots are built by `scripts/build-elections-plan.mjs`. An amendment needs two-thirds of the votes cast, a
+referendum a majority.
+
+| When | Vote | How members voted | Result |
+|---|---|---|---|
+| June 17 – July 16, 2019 | Bylaw Amendments 2019 — Director Elections: directors elected by ranked ballot (single transferable vote); director ballots may be cast online | By mail, by proxy, and in person at the annual meeting at the 2019 conference in Madison | Both passed |
+| May 4 – June 5, 2020 | Bylaw Amendments 2020 — Remote Meetings and Electronic Ballots: member meetings by video conference; amendments and referendums by online or mail ballot | By mail only, as the bylaws then required | Both passed, in time for the virtual 2020 conference |
+| April 17 – May 15, 2023 | Dues Referendum 2023: raise dues from January 2024 (Individual $175 → $195, Enthusiast $150 → $165, Small Business $400 → $450, Corporate $1,000 → $1,150) to fund a second membership services position | Online and by mail | **Failed.** Dues stay at the 2018 rates, which is why the price list has never changed |
+| June 23 – July 14, 2025 | Hardship Dues Referendum 2025: members facing closure or severe cost pressure may defer a renewal up to six months or renew at a reduced rate, for renewals due August 2025 – July 2026; Corporate memberships excluded | Online and by mail | Passed. The Hardship Dues Program working group designed it; Membership Operations reviews applications |
+
+Rules for content:
+- An artifact may say a vote happened and how it came out, as above, from the day it was certified (2019-07-24,
+  2020-06-12, 2023-05-19, 2025-07-17). Before then it may say a vote is coming or under way.
+- Vote counts and turnout appear only if they are taken from the data. **Never say how any member voted.**
+- Hardship applications are confidential: never name a member who applied, deferred or paid a reduced rate.
+- The 2023 dues increase failed. Never describe ICF dues as having risen since 2018.
+
+### 5.6 Chapter officers and polls — in Voting
+
+**Status:** added 2026-11-02 (Yuri). Every chapter elects a **chair** and a **vice chair** for two years, in March of
+even years from 2020 (Japan from 2022): nominations in February, then a secret ballot of the chapter's current members;
+the candidate with the most votes wins. 55 elections in all, built by `scripts/build-elections-plan.mjs` and anchored
+to each chapter's space. A chair serves at most two terms in a row, and vice chairs often move up. The 2026 winners
+are the officers in each chapter's space. The one tie: Mexico's 2022 vice chair race, 8 votes each, broken by lot.
+Heroes whose arcs rule out volunteering never run (§5.3). Elena Rodriguez is California's vice chair from 2024 and its
+chair from 2026; Henri Dubois is France's vice chair from 2024 and chair from 2026.
+
+Chapters and work groups also run **polls**: 20 Yes/No questions, 2020–2026, hand-written from each space's chat in
+`data/elections/polls.json` (a chapter's spring tastings going online in 2020, the Ludlow market day date, the Tier
+Two dues reduction). A chapter poll goes to the chapter's current members, a work-group poll to the space's members.
+Polls show live results and are never certified.
+
+Rules for content:
+- An artifact may name a chapter's chair or vice chair as the data has them, but only from the day after the election
+  is certified, and never with vote counts unless they are taken from the data.
+- Never name a losing candidate, and never say how anyone voted. A poll's outcome may be mentioned, not its counts.
+
+### 5.7 Votes still open, and votes between meetings
+
+**Status:** added 2026-11-02 (Yuri). The voting data stops at the data's as-of date, like everything else: a vote still
+open then is open in Voting, with the ballots cast so far and no result. As of 2026-10-31 three are open:
+
+| Vote | Open | What it is |
+|---|---|---|
+| ICF Board of Directors Election 2026 | October 15 – November 15, 2026 | The yearly board election (§5.3); nominations closed September 30 |
+| Early-Career Membership Referendum 2026 | October 26 – November 16, 2026 | Should ICF offer an Early-Career membership from 2027 at $95 a year, for members in their first five years of making or affinage? From the Next Generation working group |
+| Endorse ICF's comments on the proposed raw-milk aging rule | October 28 – November 11, 2026 | A Food Safety Committee motion voted electronically between meetings (`data/elections/evotes.json`) |
+
+Each later month's data finishes them (results, certification) and opens the next. The demo's presenter is put on the
+roll of every open vote when the data is loaded, so they can cast a ballot live.
+
+How the monthly run moves voting on (added 2026-11-02):
+- After each month's Loom cycle, `scripts/plan-votes-gemini.mjs` adds that month's new votes: one or two chapter or
+  work-group polls or committee e-votes, one of them still open on the month's last day, so the demo always has a vote
+  in progress. From November 2026 on, `polls.json` and `evotes.json` grow this way instead of by hand.
+- Then the elections plan is rebuilt. It may finish open votes and add new ones, but it refuses any change to a vote the
+  last plan had (`historyChanges`), because the demo database already holds those votes.
+- Spaces are seated as of 2026-10-31 (`SEATED_ON` in `scripts/build-spaces-plan.mjs`), not as of the data's end, so
+  later data never reshuffles a chapter's owner or seats, or the chapter elections that read them.
+- Voting's own scheduler closes a vote in the demo database when its real closing time passes, with only the ballots
+  loaded so far. The next load replaces it, in full, from the new plan. Any ballot the presenter cast goes with it.
+
+Rules for content:
+- An artifact dated before a vote closes may say it is under way and urge members to vote; never its result, its
+  turnout, or who is ahead.
+- After it is certified, the rules for its kind apply (§5.3, §5.5).
 
 ---
 
@@ -600,7 +723,7 @@ Re-run Appendix A before writing; these are a smoke test, not a substitute.
 
 | # | Decision | Why it is blocking | Default if unanswered |
 |---|---|---|---|
-| 1 | **Hero arcs contradict `generated/`.** The blog skill's §3 says Elena Rodriguez "chairs the Standards Committee" and Gwen Whitfield climbs to "board chair". `generated/committee-memberships` has Elena as a Standards Committee **Member** (2023-24, 2025-26) and Gwen on **Food Safety** — Member 2023-24, Chair 2025-26. There is no board entity at all; there are six committees. Per world-model §5.1 the committed dataset is the source of truth. | Any artifact naming a chair will contradict either the data or the blog corpus. | This design follows `generated/`. The blog skill's prose should be corrected — flagged, not edited, per the read-only rule. |
+| 1 | **Hero arcs contradict `generated/`.** The blog skill's §3 says Elena Rodriguez "chairs the Standards Committee" and Gwen Whitfield climbs to "board chair". `generated/committee-memberships` has Elena as a Standards Committee **Member** (2023-24, 2025-26) and Gwen on **Food Safety** — Member 2023-24, Chair 2025-26. There is no board entity at all; there are six committees. (2026-10-30: the board now exists as elections in Voting, §5.3, with no chair.) Per world-model §5.1 the committed dataset is the source of truth. | Any artifact naming a chair will contradict either the data or the blog corpus. | This design follows `generated/`. The blog skill's prose should be corrected — flagged, not edited, per the read-only rule. |
 | 2 | **Disclaimer wording.** The mandated paragraph says "This post". Reused verbatim in an annual report it reads oddly. | Verbatim reuse was an explicit instruction; a variant needs sign-off. | Verbatim everywhere, as written in §6.1. |
 | 3 | **Named staff roster (§5.2).** | Internal comms are markedly better with named senders; role-only is the safe fallback. | Role-only bylines. |
 | 4 | **Volume and budget.** ~2,200 artifacts for 2019-2025 (§4.1). Vision-plan open question 5 already flags model-tier and cost. | Someone must approve the spend and the tranche plan before any bulk run. | No bulk runs. Samples only. |
