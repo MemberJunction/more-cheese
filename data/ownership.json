@@ -459,7 +459,7 @@
     "encryption-keys": {
       "tier": "config",
       "classification": "config",
-      "reason": "The More Cheese Shared Key record (environment variable MORECHEESE_SHARED_KEY). The key material is never in config: it is shared with everyone installing More Cheese through the portal, and every shipped credential is sealed with it"
+      "reason": "The More Cheese Shared Key record (environment variable MORECHEESE_SHARED_KEY). The key material is never in config: it is shared with everyone installing More Cheese by the More Cheese team, and every shipped credential is sealed with it"
     },
     "credentials": {
       "tier": "config",

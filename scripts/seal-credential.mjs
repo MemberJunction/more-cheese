@@ -7,10 +7,10 @@
  * carries the ID of the key that encrypted it, so every install that has the shared key in
  * MORECHEESE_SHARED_KEY decrypts these, and the release works the same everywhere (issue #110).
  * The key material itself is never in the repo: it is shared with everyone installing More Cheese,
- * through the More Cheese portal. So only read-only, demo-scoped secrets belong here.
+ * by the More Cheese team. So only read-only, demo-scoped secrets belong here.
  *
  *   node scripts/seal-credential.mjs new-key
- *       Print a new random key (base64, 32 bytes). Do this once; the key then goes to the portal.
+ *       Print a new random key (base64, 32 bytes). Do this once; the More Cheese team then hands the key out.
  *   MORECHEESE_SHARED_KEY=… node scripts/seal-credential.mjs seal --name "<credential name>" --values-file <file.json>
  *       Encrypt the JSON in <file.json> (the credential type's fields, e.g. {"apiKey":"…"}) into that
  *       credential's Values and mark it active. Read from a file so the secret stays out of shell
