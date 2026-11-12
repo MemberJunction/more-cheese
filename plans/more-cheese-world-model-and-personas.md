@@ -75,10 +75,10 @@ wins in 2025; one incumbent loses in 2023.
 
 ### Member standards (balloted in Voting)
 
-Added 2026-11-02. The Standards Committee writes ICF's seven voluntary member standards (ICF-STD-101 to 302, listed
-in VAULT-DESIGN §5.4) and ballots each draft section by section, from 2019 on: 18 ballots in all, including four
-recirculations. The voters are the committee plus a ballot pool of engaged producers, retailers, suppliers and
-educators: 12 in 2019, growing to 40 in 2026, and a member stays in the pool while they are current. Two-thirds of votes
+Added 2026-11-02. The Standards Committee writes ICF's eight voluntary member standards (ICF-STD-101 to 401, listed
+in VAULT-DESIGN §5.4) and ballots each draft section by section, from 2019 on: 20 ballots in all, including five
+recirculations (STD-401's, on Swiss-type eye size, still open on October 31, 2026). The voters are the committee
+plus a ballot pool of engaged producers, retailers, suppliers and educators: 12 in 2019, growing to 40 in 2026, and a member stays in the pool while they are current. Two-thirds of votes
 cast approves a section. Elena Rodriguez votes and comments as a committee member from 2023. The chairs who certify:
 Amelia Ochoa (2019–20), Marta Ibarra-Huerta (2021–22), Damien Bergman (2023–24) and Matteo Mikkelsen (2025–26).
 

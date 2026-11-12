@@ -118,7 +118,8 @@ export function brief(election, catalog, w, chunk) {
         recirculation: election.standards.round,
         items: ballot.items.map((it, i) => ({
             index: i, name: it.name, says: it.gist,
-            vote: `${election.expect[i].result} (${election.expect[i].approve} approve, ${election.expect[i].disapprove} disapprove, ${election.expect[i].abstain} abstain)`,
+            // A ballot still open on the plan's as-of date has no result yet.
+            vote: election.expect ? `${election.expect[i].result} (${election.expect[i].approve} approve, ${election.expect[i].disapprove} disapprove, ${election.expect[i].abstain} abstain)` : 'still open',
         })),
         comments: chunk.map((s) => {
             const p = w.person.get(s.person) ?? {};

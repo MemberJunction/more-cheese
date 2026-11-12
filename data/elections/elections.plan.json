@@ -86791,6 +86791,2207 @@
       ]
     },
     {
+      "key": "std-401-1.0",
+      "family": "standards-ballot",
+      "type": "standards-ballot",
+      "name": "ICF-STD-401 Swiss-Type Eye Formation v1.0 — Ballot",
+      "description": "Standards Committee ballot on ICF-STD-401 Eye Formation Guide for Swiss-Type Cheeses, version 1.0: §1 Eye size; §2 Eyes per cut face; §3 Blind and overset wheels; §4 Splits and cracks. The committee and its ballot pool vote each item; two-thirds of votes cast approves it, and a Disapprove must come with a comment.",
+      "secrecy": "Open",
+      "resultsTiming": "AfterClose",
+      "resultsAudience": "Public",
+      "createdAt": "2026-09-01T15:00:00Z",
+      "recordDate": "2026-09-07T12:00:00Z",
+      "opensAt": "2026-09-08T14:00:00Z",
+      "closesAt": "2026-10-08T23:00:00Z",
+      "talliedAt": "2026-10-09T15:00:00Z",
+      "certifiedAt": "2026-10-29T16:00:00Z",
+      "certifier": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "standards": {
+        "code": "ICF-STD-401",
+        "documentTitle": "ICF-STD-401 Eye Formation Guide for Swiss-Type Cheeses",
+        "documentVersion": "1.0",
+        "round": 0,
+        "prior": null
+      },
+      "anchors": [
+        {
+          "entity": "Committees: Committees",
+          "recordId": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+          "role": "Host",
+          "isPrimary": true
+        },
+        {
+          "entity": "MJ_BizApps_Collaboration: Spaces",
+          "recordId": "779DD5A6-1F92-5D3C-A77D-578ACFF7121B",
+          "role": "Host",
+          "isPrimary": false
+        }
+      ],
+      "contests": [
+        {
+          "name": "§1 Eye size",
+          "kind": "StandardsItem",
+          "tally": "majority",
+          "threshold": "TwoThirds",
+          "basis": "VotesCast",
+          "allowAbstain": true,
+          "options": [
+            {
+              "label": "Approve"
+            },
+            {
+              "label": "Disapprove"
+            }
+          ]
+        },
+        {
+          "name": "§2 Eyes per cut face",
+          "kind": "StandardsItem",
+          "tally": "majority",
+          "threshold": "TwoThirds",
+          "basis": "VotesCast",
+          "allowAbstain": true,
+          "options": [
+            {
+              "label": "Approve"
+            },
+            {
+              "label": "Disapprove"
+            }
+          ]
+        },
+        {
+          "name": "§3 Blind and overset wheels",
+          "kind": "StandardsItem",
+          "tally": "majority",
+          "threshold": "TwoThirds",
+          "basis": "VotesCast",
+          "allowAbstain": true,
+          "options": [
+            {
+              "label": "Approve"
+            },
+            {
+              "label": "Disapprove"
+            }
+          ]
+        },
+        {
+          "name": "§4 Splits and cracks",
+          "kind": "StandardsItem",
+          "tally": "majority",
+          "threshold": "TwoThirds",
+          "basis": "VotesCast",
+          "allowAbstain": true,
+          "options": [
+            {
+              "label": "Approve"
+            },
+            {
+              "label": "Disapprove"
+            }
+          ]
+        }
+      ],
+      "roll": [
+        {
+          "person": "05633105-2226-54D0-A769-3B3C016767F7",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "067065F5-7F1C-57F1-A0F8-92D707C25B7D",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "072EC674-2A47-5F88-8AD1-9D487E298397",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "20FD9EFB-3C07-5044-8BF6-803BB3E6571D",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "210CA669-0DB3-51EB-9AD1-32E72F5A4492",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F",
+          "class": "Committee"
+        },
+        {
+          "person": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF",
+          "class": "Committee"
+        },
+        {
+          "person": "26C9CD3D-67A4-58C8-A636-8CEB4666527D",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "38462C1A-999E-520E-BE56-FA3FD1B9C162",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "51CF0B70-44BD-56BE-A6A4-3D6C80D8E3E9",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "52640EB6-BBD5-5EA2-BDF1-14F27ED97879",
+          "class": "Committee"
+        },
+        {
+          "person": "550909F0-527A-539C-AF82-4603AD448838",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+          "class": "Committee"
+        },
+        {
+          "person": "5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "5E9F2CDA-B022-53E7-AA02-F23E36EBE498",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "61FA0132-31F1-59E9-9B50-DBDF42780822",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "65AD0562-1908-540C-937D-2BC23C4F88A6",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "65D40948-FA0D-5DB6-9F63-6AB60342F182",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+          "class": "Committee"
+        },
+        {
+          "person": "69E566CE-D8DB-5AD8-87EF-A78EDAE07D71",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "6B4BF43A-4C16-5DAD-9EA3-F3EDB4093873",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "73619338-F1FC-50C4-8C4A-3585459464A1",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "74C2B126-78E7-5C93-BEA8-E048CAAFD91C",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
+          "class": "Committee"
+        },
+        {
+          "person": "772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8",
+          "class": "Committee"
+        },
+        {
+          "person": "78E29F46-3965-5314-BC2F-BB79336EAD05",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "7FA7515F-6154-574E-85E4-47E810C88F85",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "7FC09347-424D-5147-981B-C3DC9AB3F0CC",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "8010857E-9CEF-56E7-8879-A72AE72E6B3C",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "83F1E1CF-8BDC-59B2-B3D5-E88E914DA670",
+          "class": "Committee"
+        },
+        {
+          "person": "856688F8-C895-5E8E-91F2-CDF18AA68503",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "89542F64-729C-5166-B18A-7C755CB25D08",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "8FC7C365-AFF7-5C8D-8B29-5DD0087BE3B7",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "958B1085-3310-588F-AAC0-31AA558B19D5",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "9FE55C26-8983-53AA-B517-52BE385CC0F0",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "A31FE0CD-1759-50C0-9D91-0EB5D17239B2",
+          "class": "Committee"
+        },
+        {
+          "person": "A4A08302-3758-529D-8C22-22D8F72A0CBC",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "A7494213-EBF3-5A89-8197-86572EE6B8F4",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "AC73CCD5-783B-5A03-9A6B-3A974B40201B",
+          "class": "Committee"
+        },
+        {
+          "person": "AFE3BBA8-E240-5F20-B869-FD1AC974CA79",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "B1049A0E-1E27-5D26-8301-356542774FF2",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "B2A26737-D6CB-5149-8848-01C2954C376E",
+          "class": "Committee"
+        },
+        {
+          "person": "BA129EA6-B517-5C25-9F0D-D2D5AEE72C44",
+          "class": "Committee"
+        },
+        {
+          "person": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+          "class": "Committee"
+        },
+        {
+          "person": "DBE0287D-6ABA-59B0-A251-C6F2B6049265",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "E4313B6C-F512-518B-99E8-01433EAE7ADA",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "EA36130D-B3E1-56A8-8BEE-00C0B93CF010",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "EC981BB1-1AFE-5B09-93C4-BC115E876E0B",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+          "class": "Committee"
+        },
+        {
+          "person": "FBB1722E-F036-5279-BD6C-F190A5CCFACA",
+          "class": "Committee"
+        },
+        {
+          "person": "FD8E23C5-F87D-556B-B4CA-7BE84D796277",
+          "class": "Ballot Pool"
+        }
+      ],
+      "ballots": [
+        {
+          "person": "B2A26737-D6CB-5149-8848-01C2954C376E",
+          "channel": "Online",
+          "at": "2026-09-08T14:51:28Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B",
+          "channel": "Online",
+          "at": "2026-09-08T15:27:05Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "73619338-F1FC-50C4-8C4A-3585459464A1",
+          "channel": "Online",
+          "at": "2026-09-09T01:37:17Z",
+          "contests": [
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:73619338-F1FC-50C4-8C4A-3585459464A1:0",
+                "type": "Technical",
+                "reference": "§1",
+                "comment": "As a retailer at Elderfen Cheese & Provisions, I find comparing sizes to kitchen produce unhelpful for grading. Customers ask for exact measurements. Using common agricultural comparisons rather than clear metric dimensions confuses counter staff.",
+                "proposedChange": "Change to state that eyes measure 1 to 3 centimeters across without mentioning everyday fruits.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee agrees that precise measurements are essential for grading and retail communication. The text will be revised to remove the agricultural fruit references while maintaining the 1 to 3 centimeter requirement.",
+                  "at": "2026-10-17T21:02:36Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-19T22:00:24Z"
+                }
+              }
+            },
+            {
+              "abstain": true
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:73619338-F1FC-50C4-8C4A-3585459464A1:2",
+                "type": "General",
+                "reference": "§3",
+                "comment": "At Elderfen Cheese & Provisions, downgrading blind or overset wheels creates significant inventory management issues with our wholesale suppliers. We need clearer guidance on how seconds are labeled before this standard takes effect.",
+                "proposedChange": null,
+                "resolution": {
+                  "disposition": "Deferred",
+                  "response": "The committee acknowledges the retailer concerns regarding inventory handling and labeling of seconds. This item is deferred for further study in the next revision of the document.",
+                  "at": "2026-10-18T08:09:48Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-21T18:20:35Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "20FD9EFB-3C07-5044-8BF6-803BB3E6571D",
+          "channel": "Online",
+          "at": "2026-09-10T11:42:51Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:20FD9EFB-3C07-5044-8BF6-803BB3E6571D:1",
+                "type": "General",
+                "reference": "§2",
+                "comment": "Teaching cheese styles at Quillbrook Center for Cheese Studies, I see that the draft count of 8 to 12 eyes per 100 square centimeters is too rigid. Smaller formats and extended aging naturally yield sparser counts.",
+                "proposedChange": "Revise the count range to accommodate smaller wheels and longer-aged styles with fewer eyes.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the comment. Since this item failed the vote, the revised draft will be updated to broaden the scope for smaller formats and longer-aged styles.",
+                  "at": "2026-10-13T15:45:22Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-16T22:32:03Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "69E566CE-D8DB-5AD8-87EF-A78EDAE07D71",
+          "channel": "Online",
+          "at": "2026-09-10T14:19:41Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:69E566CE-D8DB-5AD8-87EF-A78EDAE07D71:1",
+                "type": "General",
+                "reference": "§2",
+                "comment": "Our dairy systems clients in New Zealand report that the current eye count requirement does not fit traditional practices for diverse Swiss-type styles. Forcing a single density measure disrupts established grading.",
+                "proposedChange": "Adjust the clause to permit lower eye counts for wheels under ten kilograms.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the comment. The draft failed its initial vote and will be recirculated with expanded provisions for differing wheel sizes and styles.",
+                  "at": "2026-10-13T17:13:22Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-15T19:10:46Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:69E566CE-D8DB-5AD8-87EF-A78EDAE07D71:3",
+                "type": "Editorial",
+                "reference": "§4",
+                "comment": "As a supplier working with automated dairies, I suggest a minor wording polish to clarify that batch logs must be maintained continuously for every single production run.",
+                "proposedChange": "Change 'every batch' to 'every production batch' for absolute clarity.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the proposed editorial improvement to clarify the wording around batch record-keeping.",
+                  "at": "2026-10-13T20:14:52Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-15T18:18:22Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "5E9F2CDA-B022-53E7-AA02-F23E36EBE498",
+          "channel": "Online",
+          "at": "2026-09-11T13:29:19Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:5E9F2CDA-B022-53E7-AA02-F23E36EBE498:3",
+                "type": "General",
+                "reference": "§4",
+                "comment": "At Dubois Farmstead, recording warm-room temperature and time for every batch creates an excessive administrative burden for our small farmstead operation. We already monitor overall ripening conditions adequately.",
+                "proposedChange": "Remove the requirement to record warm-room parameters for every single batch.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects the comment. Tracking warm-room temperature and time is critical for tracing and preventing splits and cracks in Swiss-type cheeses.",
+                  "at": "2026-10-11T07:26:55Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "89542F64-729C-5166-B18A-7C755CB25D08",
+          "channel": "Online",
+          "at": "2026-09-12T02:01:40Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:89542F64-729C-5166-B18A-7C755CB25D08:1",
+                "type": "Editorial",
+                "reference": "§2",
+                "comment": "Working at Rushfen Cheese Co., I support the intent of the section but suggest refining the introductory phrasing to improve readability for cheesemakers.",
+                "proposedChange": "Start the paragraph with 'Standard cut faces should show' instead of 'Draft:'.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the editorial change to remove draft terminology and improve overall readability for members.",
+                  "at": "2026-10-20T04:27:37Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-23T18:46:05Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "210CA669-0DB3-51EB-9AD1-32E72F5A4492",
+          "channel": "Online",
+          "at": "2026-09-13T08:44:30Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "8010857E-9CEF-56E7-8879-A72AE72E6B3C",
+          "channel": "Online",
+          "at": "2026-09-13T18:16:55Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:8010857E-9CEF-56E7-8879-A72AE72E6B3C:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "At Quincewick Creamery Cooperative, our members produce various formats where eye distribution varies widely across the cut surface, making a strict per-square-centimeter rule impractical for cooperative pooling.",
+                "proposedChange": "Incorporate flexible guidelines for eye density that reflect cooperative milk variations.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepts the concern in principle. The failed item will be rewritten in the next draft to provide flexible guidance for varying cheese formats.",
+                  "at": "2026-10-16T13:39:04Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-17T22:28:22Z"
+                }
+              }
+            },
+            {
+              "abstain": true
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "9FE55C26-8983-53AA-B517-52BE385CC0F0",
+          "channel": "Online",
+          "at": "2026-09-14T05:14:22Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+          "channel": "Online",
+          "at": "2026-09-14T10:28:15Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "AC73CCD5-783B-5A03-9A6B-3A974B40201B",
+          "channel": "Online",
+          "at": "2026-09-15T02:56:38Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "abstain": true
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:AC73CCD5-783B-5A03-9A6B-3A974B40201B:2",
+                "type": "General",
+                "reference": "§3",
+                "comment": "Managing herd production at Pippinvale Farm, I believe classifying blind or overset wheels as seconds needs more discussion regarding economic impact on producers before we finalize this restriction.",
+                "proposedChange": null,
+                "resolution": {
+                  "disposition": "Deferred",
+                  "response": "The committee notes the economic concerns raised by producers. This matter is deferred for further evaluation in the next document revision cycle.",
+                  "at": "2026-10-15T15:37:03Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-17T05:11:31Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF",
+          "channel": "Online",
+          "at": "2026-09-15T15:06:55Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "65AD0562-1908-540C-937D-2BC23C4F88A6",
+          "channel": "Online",
+          "at": "2026-09-16T04:03:45Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:65AD0562-1908-540C-937D-2BC23C4F88A6:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "At Wrenfield Fine Cheese, our long-aged specialty wheels naturally develop fewer eyes per 100 square centimeters. The current draft penalizes traditional artisan methods that prioritize flavor over uniform eye density.",
+                "proposedChange": "Exempt wheels aged over twelve months from the standard eye count density rules.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the comment. The item failed the ballot, and the recirculated draft will include specific allowances for long-aged styles.",
+                  "at": "2026-10-19T06:13:22Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-21T22:00:11Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "072EC674-2A47-5F88-8AD1-9D487E298397",
+          "channel": "Online",
+          "at": "2026-09-16T16:38:57Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:072EC674-2A47-5F88-8AD1-9D487E298397:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "The draft count of eight to twelve eyes per hundred square centimeters is too restrictive for smaller specialty cheeses produced at Fernholt Dairy. Our extended aging profiles create fewer, larger openings that do not meet this arbitrary surface density metric despite excellent flavor and texture.",
+                "proposedChange": "Change the eye count to four to twelve eyes per hundred square centimeters to accommodate traditional smaller wheels.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejected the comment because the item failed to achieve consensus in the ballot. The text will be completely reworked for the next draft to address various wheel sizes and aging styles.",
+                  "at": "2026-10-15T06:34:49Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-17T15:12:44Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "83F1E1CF-8BDC-59B2-B3D5-E88E914DA670",
+          "channel": "Online",
+          "at": "2026-09-17T18:49:36Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:83F1E1CF-8BDC-59B2-B3D5-E88E914DA670:2",
+                "type": "Editorial",
+                "reference": "§3, second sentence",
+                "comment": "The sentence explaining how makers of smaller wheels and longer-aged styles experience eye formation is slightly too conversational for a formal standards document. We should tighten the phrasing while keeping the exact meaning intact for all commercial members.",
+                "proposedChange": "Replace with: Smaller wheels and longer-aged styles typically exhibit fewer and larger eyes.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted the editorial suggestion to improve clarity and maintain professional tone throughout the document. The revised phrasing will appear in the next recirculation draft.",
+                  "at": "2026-10-14T18:39:10Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-18T23:02:44Z"
+                }
+              }
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:83F1E1CF-8BDC-59B2-B3D5-E88E914DA670:3",
+                "type": "Technical",
+                "reference": "§4",
+                "comment": "Calling a second-quality cheese something sold as a second is clear enough, but defining the commercial grade requires explicit alignment with standard grading nomenclature used across export markets. We need to ensure blind and overset wheels are categorized precisely without ambiguity.",
+                "proposedChange": "Add the phrase graded and marked explicitly as second quality after sold as a second.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted the comment in principle. Rather than adding extra grading terms, the text will be clarified to state that such wheels must be clearly stamped as second quality before leaving the facility.",
+                  "at": "2026-10-12T12:19:30Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-14T05:05:24Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "B1049A0E-1E27-5D26-8301-356542774FF2",
+          "channel": "Online",
+          "at": "2026-09-18T05:45:13Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:B1049A0E-1E27-5D26-8301-356542774FF2:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "At Kilnbrook Dairy Institute, we teach students that regional variations in propionic acid fermentation lead to different eye counts. Forcing all styles into an eight to twelve range ignores authentic European craft traditions where wheels regularly display fewer eyes.",
+                "proposedChange": "Amend the density requirement to read six to twelve eyes per hundred square centimeters.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejected this comment because the underlying item failed to pass the ballot. The entire section is being reconsidered to properly account for traditional regional practices.",
+                  "at": "2026-10-15T22:20:18Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-17T02:00:34Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+          "channel": "Online",
+          "at": "2026-09-19T10:31:14Z",
+          "contests": [
+            {
+              "abstain": true
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:66D713AB-A42E-5EFB-AF8B-DA620CB0FD61:2",
+                "type": "Technical",
+                "reference": "§3",
+                "comment": "The proposed density of eight to twelve eyes per one hundred square centimeters fails to account for miniature wheels produced for modern retail display. When teaching cheese grading, we notice these formats naturally produce fewer eyes due to faster cooling.",
+                "proposedChange": "Add an explicit exemption for wheels under five kilograms allowing lower eye counts.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted the comment in principle. The failed item will be rewritten for the next draft to include a specific carve-out for miniature and specialty formats.",
+                  "at": "2026-10-17T08:34:50Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-20T05:08:05Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22",
+          "channel": "Online",
+          "at": "2026-09-19T10:52:23Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "The one to three centimeter measurement range for eye size is practical and matches what we see in retail imports here in Tandil. However, adding a visual comparison to everyday objects helps counter staff explain quality to shoppers.",
+                "proposedChange": "Add a note specifying that one centimeter resembles a green pea and three centimeters resembles a large walnut.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted the proposed clarification. The descriptive comparisons will be integrated into the final published version of the guide.",
+                  "at": "2026-10-13T16:04:17Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22:3",
+                "type": "Editorial",
+                "reference": "§4",
+                "comment": "Requiring blind or overset wheels to be sold strictly as seconds protects the Swiss-type reputation on retail shelves. Store managers need assurance that defective internal structures are never marketed under the primary designation.",
+                "proposedChange": "Specify that secondary sales must be clearly labeled on the rind or packaging.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted the comment in principle, noting that while labeling details belong in packaging rules, the text will be strengthened to emphasize that the primary Swiss-type name must be completely obscured on seconds.",
+                  "at": "2026-10-14T20:17:19Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
+          "channel": "Online",
+          "at": "2026-09-20T08:25:28Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "abstain": true
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "A4A08302-3758-529D-8C22-22D8F72A0CBC",
+          "channel": "Online",
+          "at": "2026-09-20T09:56:14Z",
+          "contests": [
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:A4A08302-3758-529D-8C22-22D8F72A0CBC:0",
+                "type": "Editorial",
+                "reference": "§1",
+                "comment": "The description of eye size using everyday comparisons like peas and walnuts is exceptionally clear for training purposes at Thistlemere Dairy. Minor polishing of the sentence structure will make it even better for educational modules.",
+                "proposedChange": "Change the phrase no smaller than a pea, no larger than a walnut to measuring between one and three centimeters across.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted the editorial suggestion to streamline the dimension descriptions while keeping the practical fruit and vegetable references for clarity.",
+                  "at": "2026-10-17T23:49:45Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-22T20:02:46Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "61FA0132-31F1-59E9-9B50-DBDF42780822",
+          "channel": "Online",
+          "at": "2026-09-21T07:44:39Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:61FA0132-31F1-59E9-9B50-DBDF42780822:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "At Heathercombe Farm, our specialty wedges frequently display lower eye counts due to our traditional vat sizes and specific curing cycles. The current draft threshold penalizes authentic regional styles that customers specifically request for cheese boards.",
+                "proposedChange": "Lower the minimum eye count to six per hundred square centimeters.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted the comment, noting that the item failed and must be completely revised to accommodate traditional cheesemaking variations before recirculation.",
+                  "at": "2026-10-14T18:54:41Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-16T03:08:39Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:61FA0132-31F1-59E9-9B50-DBDF42780822:3",
+                "type": "Technical",
+                "reference": "§4",
+                "comment": "Tracking warm-room temperature and time for every batch is essential, but tying crack documentation solely to splits longer than two centimeters creates excessive paperwork for retail operations slicing wheels daily.",
+                "proposedChange": "Limit the mandatory batch logging requirement to splits exceeding three centimeters.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted the comment in principle. The record-keeping obligation will be refined to focus on significant structural defects without imposing undue administrative burdens on mongers.",
+                  "at": "2026-10-16T03:42:11Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-18T04:01:59Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
+          "channel": "Online",
+          "at": "2026-09-21T11:22:22Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:755D763F-EF70-5105-8C95-5FE8D1376BF8:2",
+                "type": "Editorial",
+                "reference": "§3",
+                "comment": "As a retail manager at Tarnwick Creamery Cooperative, I find the phrasing for blind and overset wheels very clear. However, I wish to point out a slight typo in the terminology referencing the secondary market grade.",
+                "proposedChange": "Change second to secondary grade throughout §3 for clarity.",
+                "resolution": {
+                  "disposition": "Withdrawn",
+                  "response": "The committee notes the withdrawal of this comment by the writer following discussion during the chapter meet-ups, and the text remains unchanged as passed.",
+                  "at": "2026-10-13T12:26:57Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:755D763F-EF70-5105-8C95-5FE8D1376BF8:3",
+                "type": "Editorial",
+                "reference": "§4",
+                "comment": "Reviewing inventory terms from the floor of Tarnwick Creamery Cooperative, the terminology designating secondary grade cheese needs a consistent hyphen to match wholesale order sheets.",
+                "proposedChange": "Replace second with second-grade.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects this editorial change because the term second is well understood within retail and wholesale channels to designate wheels failing top-tier standards without need of a hyphen.",
+                  "at": "2026-10-13T18:40:04Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-17T22:58:43Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+          "channel": "Online",
+          "at": "2026-09-21T13:56:35Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "abstain": true
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0:3",
+                "type": "Editorial",
+                "reference": "§4",
+                "comment": "As an affineur at Herrera Farmstead, I approve §4 but suggest adding a brief definition of overset to help newer cheesemakers recognize when eyes are crowding each other too closely.",
+                "proposedChange": "Add parenthetical clarification defining overset as excessive eye crowding.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted this editorial proposal to improve clarity for producers and affineurs, adding a brief descriptive note to §3.",
+                  "at": "2026-10-19T08:44:55Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-21T03:01:30Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "EA36130D-B3E1-56A8-8BEE-00C0B93CF010",
+          "channel": "Online",
+          "at": "2026-09-21T19:33:40Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:EA36130D-B3E1-56A8-8BEE-00C0B93CF010:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "As Head Cheesemaker at Womack Farmstead, I must point out that the density of 8 to 12 eyes for every 100 square centimeters is unworkable for our alpine-style wheels. Our longer-aged cheeses naturally develop fewer, larger openings, making this draft requirement overly restrictive for traditional makers.",
+                "proposedChange": "Revise the count to 5 to 10 eyes for every 100 square centimeters to accommodate longer-aged styles.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted this technical comment given that §2 failed on initial ballot. The text will be adjusted to reflect traditional makers who produce fewer and larger eyes.",
+                  "at": "2026-10-19T06:54:51Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "26C9CD3D-67A4-58C8-A636-8CEB4666527D",
+          "channel": "Online",
+          "at": "2026-09-24T11:40:17Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:26C9CD3D-67A4-58C8-A636-8CEB4666527D:3",
+                "type": "Technical",
+                "reference": "§4",
+                "comment": "As owner of Rowanbrook Farm, I disagree with condemning any wheel with almost no eyes or overcrowding straight to second status without allowing for stylistic exceptions in specialty regional alpine styles.",
+                "proposedChange": "Exempt artisanal wheels under thirty kilograms from the strict blind and overset classification.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted this in principle, noting that while the strict classification stands for standard wheels, guidance notes will be added to clarify regional style variations without altering §3 itself.",
+                  "at": "2026-10-15T10:15:37Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-18T12:09:58Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "FD8E23C5-F87D-556B-B4CA-7BE84D796277",
+          "channel": "Online",
+          "at": "2026-09-25T03:16:35Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:FD8E23C5-F87D-556B-B4CA-7BE84D796277:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "As Head Cheesemonger at Wrenfield Creamery, I find the draft density requirement of 8 to 12 eyes for every 100 square centimeters completely ignores smaller wheels that inherently produce fewer eyes per cut face.",
+                "proposedChange": "Lower the range to 6 to 10 eyes for every 100 square centimeters.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepted this change in light of the failed vote on §2, adjusting the numerical range to better accommodate smaller wheels and longer-aged styles.",
+                  "at": "2026-10-14T19:18:53Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-19T16:23:07Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8",
+          "channel": "Online",
+          "at": "2026-09-25T16:26:24Z",
+          "contests": [
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8:0",
+                "type": "Technical",
+                "reference": "§1",
+                "comment": "As a cheesemaker at Pippinvale Dairy Institute, I argue that defining eyes solely as round and glossy is too narrow. Mechanical openings often occur naturally and should be accommodated in the size definition.",
+                "proposedChange": "Include irregular and mechanical openings in the size parameters of §1.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects this comment because Swiss-type eye formation standards specifically require round and glossy eyes as a key quality parameter, distinguishing them from mechanical openings.",
+                  "at": "2026-10-13T01:59:39Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-15T11:35:43Z"
+                }
+              }
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "Working in production at Pippinvale Dairy Institute, I feel comparing eye size to peas and walnuts is too informal for an official standard. We should rely strictly on metric measurements.",
+                "proposedChange": "Remove the references to peas and walnuts and keep only the metric measurements.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted this in principle, retaining the metric values while keeping the common comparisons as a helpful descriptive aid for graders.",
+                  "at": "2026-10-19T06:42:21Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-22T15:15:46Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8:3",
+                "type": "Technical",
+                "reference": "§4",
+                "comment": "During vat sanitation tracking at Pippinvale Dairy Institute, recording warm-room temperature and time for every single batch to trace splits is an excessive administrative burden on small facilities.",
+                "proposedChange": "Limit record-keeping requirements for splits to batches showing systemic defects.",
+                "resolution": {
+                  "disposition": "Deferred",
+                  "response": "The committee deferred this comment to the next revision cycle of the document to allow for further industry-wide data gathering on batch record-keeping practices.",
+                  "at": "2026-10-18T07:25:04Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-21T02:30:29Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "EC981BB1-1AFE-5B09-93C4-BC115E876E0B",
+          "channel": "Online",
+          "at": "2026-09-28T18:15:06Z",
+          "contests": [
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:0",
+                "type": "Editorial",
+                "reference": "§1",
+                "comment": "As a cheese buyer, I completely approve the size parameters in §1. For customer clarity, it would be helpful to mention both imperial and metric equivalents for the measurements.",
+                "proposedChange": "Add imperial unit equivalents alongside the metric measurements in §1.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepted this in principle, noting that while the document uses metric units as the primary standard, a conversion table will be appended for clarity.",
+                  "at": "2026-10-19T04:57:44Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "As a cheese buyer, I find the density requirement of 8 to 12 eyes per 100 square centimeters ignores how retail wedges actually present in our display cases. Many artisanal wheels naturally display fewer eyes when cut into small consumer portions, leading to unnecessary rejections.",
+                "proposedChange": "Provide an alternative density scale for smaller wheels and wedges to reflect market realities.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee agrees that wedge cuts and smaller formats require adjusted parameters. Because item 1 failed to pass, the committee will restructure §2 for the upcoming recirculation to account for differing wheel sizes and style variations.",
+                  "at": "2026-10-17T09:42:12Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-20T19:23:18Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:3",
+                "type": "Editorial",
+                "reference": "§4",
+                "comment": "The term second is clear, but adding a brief cross-reference to standard grading terminology would improve clarity for retail staff inspecting cheese shipments.",
+                "proposedChange": "Change 'sold as a second' to 'graded and sold as a second quality wheel'.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts this editorial suggestion to improve clarity. The phrase will be updated to ensure consistent grading language across all retail distribution channels.",
+                  "at": "2026-10-13T14:59:25Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-18T03:25:52Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "A31FE0CD-1759-50C0-9D91-0EB5D17239B2",
+          "channel": "Online",
+          "at": "2026-09-28T19:58:49Z",
+          "contests": [
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:A31FE0CD-1759-50C0-9D91-0EB5D17239B2:0",
+                "type": "Technical",
+                "reference": "§1",
+                "comment": "At Saltfen Cheesemonger, we stock traditional cheeses where exceptional flavor sometimes accompanies eyes slightly exceeding 3 centimeters. Restricting size strictly to a walnut limits traditional expressions.",
+                "proposedChange": "Expand the maximum size limit to 3.5 centimeters to accommodate traditional aged wheels.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects the proposed expansion. The range of 1 to 3 centimeters preserves the classic visual standard recognized by consumers worldwide for Swiss-type cheeses.",
+                  "at": "2026-10-12T17:38:35Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-15T02:11:41Z"
+                }
+              }
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:A31FE0CD-1759-50C0-9D91-0EB5D17239B2:1",
+                "type": "General",
+                "reference": "§2",
+                "comment": "Mandating 8 to 12 eyes per 100 square centimeters places an unreasonable burden on makers of specialty long-aged styles, forcing them to alter proven make procedures just to hit an arbitrary count.",
+                "proposedChange": null,
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the general concern raised by members regarding the rigidity of the density count. The item failed on ballot and will be completely rewritten for the next draft.",
+                  "at": "2026-10-16T22:58:28Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-21T16:10:56Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:A31FE0CD-1759-50C0-9D91-0EB5D17239B2:3",
+                "type": "Technical",
+                "reference": "§4",
+                "comment": "Requiring a manual log of warm-room temperature and time for every single batch creates excessive paperwork for cheesemakers without guaranteeing better control over splits and cracks.",
+                "proposedChange": "Make batch logging optional for small-scale producers with established warm-room controls.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects the removal of the logging requirement. Tracking warm-room temperature and time is essential for tracing the root causes of mechanical and gas splits.",
+                  "at": "2026-10-18T13:23:50Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-21T12:12:46Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "65D40948-FA0D-5DB6-9F63-6AB60342F182",
+          "channel": "Online",
+          "at": "2026-09-30T19:51:29Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:65D40948-FA0D-5DB6-9F63-6AB60342F182:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "Working in production at Elderfen Farm, our smaller format wheels naturally yield fewer eyes per 100 square centimeters. The draft density requirement is entirely unworkable for our make protocols.",
+                "proposedChange": "Delete the specific eye count and replace with qualitative descriptions of distribution.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee notes the production challenges raised, but points out that item 2 already failed on the floor. The concerns regarding smaller formats will be integrated into the upcoming revision.",
+                  "at": "2026-10-15T02:05:15Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-19T10:36:01Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC",
+          "channel": "Online",
+          "at": "2026-10-01T16:59:49Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "A7494213-EBF3-5A89-8197-86572EE6B8F4",
+          "channel": "Online",
+          "at": "2026-10-02T00:19:39Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:A7494213-EBF3-5A89-8197-86572EE6B8F4:2",
+                "type": "Technical",
+                "reference": "§3",
+                "comment": "Classifying all blind or overset wheels simply as seconds fails to distinguish between aesthetic faults and structural defects that affect melting behavior in the kitchen.",
+                "proposedChange": "Add separate grading subcategories for blind wheels and overset wheels.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects the addition of subcategories. The current text adequately protects the integrity of the Swiss-type designation by downgrading flawed wheels without overcomplicating sorting.",
+                  "at": "2026-10-13T17:21:53Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-15T13:09:00Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+          "channel": "Online",
+          "at": "2026-10-02T09:15:43Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "BA129EA6-B517-5C25-9F0D-D2D5AEE72C44",
+          "channel": "Online",
+          "at": "2026-10-02T20:25:56Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "As an educator, I find the numerical density of 8 to 12 eyes per 100 square centimeters too narrow for teaching traditional dairy science, which encompasses diverse regional make styles.",
+                "proposedChange": "Broaden the acceptable range to 6 to 14 eyes per 100 square centimeters.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee acknowledges the educational perspective, but notes that the item failed to pass. The entire clause is set for re-evaluation in the subsequent draft.",
+                  "at": "2026-10-12T06:19:38Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-16T08:43:16Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+          "channel": "Online",
+          "at": "2026-10-03T13:11:09Z",
+          "contests": [
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:5544CB6B-86DC-58AE-B998-01B75615B1B0:0",
+                "type": "Editorial",
+                "reference": "§1",
+                "comment": "The reference comparing eye size to peas and walnuts is helpful, but adding metric dimensions alongside helps maintain precise quality control during production.",
+                "proposedChange": "Insert 'approximately' before the metric measurements to clarify that they serve as a practical guide.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the proposal to clarify the metric measurements. The text will be updated to include the qualifying term to assist producers during grading.",
+                  "at": "2026-10-11T05:53:48Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-16T03:51:34Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:5544CB6B-86DC-58AE-B998-01B75615B1B0:2",
+                "type": "Technical",
+                "reference": "§3",
+                "comment": "Labeling overset wheels strictly as seconds might penalize cheeses that have excellent flavor profiles despite dense eye formation. We need clearer guidance on how retailers should market them.",
+                "proposedChange": "Clarify that overset wheels may be marketed under alternative descriptive names provided they meet safety standards.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepts the principle in part. While these wheels cannot carry the Swiss-type name, clarifying text will be added to note that they may be sold under generic or alternative designations.",
+                  "at": "2026-10-15T22:55:02Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-17T09:19:48Z"
+                }
+              }
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:5544CB6B-86DC-58AE-B998-01B75615B1B0:3",
+                "type": "Editorial",
+                "reference": "§4",
+                "comment": "The section is clear and constructive regarding splits, but we should make sure the measurement threshold uses standard terms so graders do not misinterpret it on the cutting table.",
+                "proposedChange": "Change 2 centimeters to two centimeters across the cut face.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee agrees that standardizing the numeral format improves clarity for graders. The text is modified to two centimeters as requested, ensuring consistent application across all grading facilities.",
+                  "at": "2026-10-11T02:41:42Z",
+                  "commenter": null,
+                  "answeredAt": null
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "78E29F46-3965-5314-BC2F-BB79336EAD05",
+          "channel": "Online",
+          "at": "2026-10-04T15:11:37Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:78E29F46-3965-5314-BC2F-BB79336EAD05:1",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "At Umberfen Dairy Systems, we find that our smaller format blocks occasionally yield eyes slightly outside the standard range while retaining perfect flavor and texture. We need the text to account for artisanal format variations without losing the definition of traditional Swiss-type eye development.",
+                "proposedChange": "Amend §2 to allow a tolerance of 0.8 centimeters for wheels under ten kilograms.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee agrees that smaller wheel formats present unique physical constraints during eye formation. The text is revised to permit a slight size variance for artisanal wheels under ten kilograms.",
+                  "at": "2026-10-20T11:57:15Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-25T09:57:03Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "74C2B126-78E7-5C93-BEA8-E048CAAFD91C",
+          "channel": "Online",
+          "at": "2026-10-04T20:04:07Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "05633105-2226-54D0-A769-3B3C016767F7",
+          "channel": "Online",
+          "at": "2026-10-04T20:16:43Z",
+          "contests": [
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:05633105-2226-54D0-A769-3B3C016767F7:0",
+                "type": "Technical",
+                "reference": "§1",
+                "comment": "Comparing eye size to everyday objects like peas and walnuts is imprecise for educational settings. Students need strict metric bounds rather than colloquial fruit and legume comparisons which vary widely in nature and confuse grading criteria.",
+                "proposedChange": "Remove the references to peas and walnuts and rely strictly on the 1 to 3 centimeters measurement.",
+                "resolution": {
+                  "disposition": "Rejected",
+                  "response": "The committee rejects this comment. The references to peas and walnuts are well-understood industry touchstones that help apprentices quickly visualize correct eye formation without needing immediate metric tools on the grading floor.",
+                  "at": "2026-10-13T02:59:49Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-14T23:22:39Z"
+                }
+              }
+            },
+            {
+              "abstain": true
+            },
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0:05633105-2226-54D0-A769-3B3C016767F7:2",
+                "type": "Editorial",
+                "reference": "§3",
+                "comment": "The clause is sound and well-reasoned, but the phrasing regarding secondary sales can be tightened for better readability in course materials and technical manuals.",
+                "proposedChange": "Change sold as a second to graded and sold as a second grade product.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee accepts the editorial suggestion to improve clarity. The phrase is updated to specify graded and sold as a second grade product.",
+                  "at": "2026-10-11T06:37:38Z",
+                  "commenter": "Unsatisfied",
+                  "answeredAt": "2026-10-13T09:38:32Z"
+                }
+              }
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:05633105-2226-54D0-A769-3B3C016767F7:3",
+                "type": "General",
+                "reference": "§4",
+                "comment": "Requiring every single batch to record warm-room temperature and time places an excessive administrative burden on small-scale producers and teaching dairies, raising costs without guaranteeing better quality outcomes.",
+                "proposedChange": "Remove the requirement to record warm-room temperature and time for every batch.",
+                "resolution": {
+                  "disposition": "Accepted",
+                  "response": "The committee agrees that recording every batch creates an undue paperwork burden for smaller makers and educational facilities. The clause is revised to recommend rather than mandate batch logging for warm-room parameters.",
+                  "at": "2026-10-11T09:04:21Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-13T23:14:48Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "7FA7515F-6154-574E-85E4-47E810C88F85",
+          "channel": "Online",
+          "at": "2026-10-05T02:19:55Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "958B1085-3310-588F-AAC0-31AA558B19D5",
+          "channel": "Online",
+          "at": "2026-10-05T12:28:22Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "52640EB6-BBD5-5EA2-BDF1-14F27ED97879",
+          "channel": "Online",
+          "at": "2026-10-08T19:26:01Z",
+          "contests": [
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0:52640EB6-BBD5-5EA2-BDF1-14F27ED97879:1",
+                "type": "General",
+                "reference": "§2",
+                "comment": "At Brackenfell Center for Cheese Studies, our students and members produce various styles where the density requirement of 8 to 12 eyes per 100 square centimeters is simply unachievable for long-aged wheels. We need a flexible approach for diverse styles.",
+                "proposedChange": "Strike the draft eye count requirement until a more comprehensive study of diverse Swiss-type styles is completed.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepts in principle the concern regarding long-aged wheels. The specific eye count range is removed from the mandatory text and addressed by adding an informative note that suggests alternative density expectations for styles aged past twelve months.",
+                  "at": "2026-10-11T21:02:16Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-10-14T10:46:30Z"
+                }
+              }
+            },
+            {
+              "option": "Approve"
+            },
+            {
+              "option": "Approve"
+            }
+          ]
+        }
+      ],
+      "expect": [
+        {
+          "result": "Passed",
+          "approve": 37,
+          "disapprove": 4,
+          "abstain": 1
+        },
+        {
+          "result": "Failed",
+          "approve": 21,
+          "disapprove": 17,
+          "abstain": 4
+        },
+        {
+          "result": "Passed",
+          "approve": 35,
+          "disapprove": 5,
+          "abstain": 2
+        },
+        {
+          "result": "Passed",
+          "approve": 35,
+          "disapprove": 7,
+          "abstain": 0
+        }
+      ]
+    },
+    {
+      "key": "std-401-1.0-r1",
+      "family": "standards-ballot",
+      "type": "standards-ballot",
+      "name": "ICF-STD-401 Swiss-Type Eye Formation v1.0 — Recirculation 1",
+      "description": "Recirculation 1 of the ballot on ICF-STD-401 Eye Formation Guide for Swiss-Type Cheeses 1.0, to the same voters: §2 Eyes per cut face (revised), revised after the last round's comments. The committee and its ballot pool vote each item; two-thirds of votes cast approves it, and a Disapprove must come with a comment.",
+      "secrecy": "Open",
+      "resultsTiming": "AfterClose",
+      "resultsAudience": "Public",
+      "createdAt": "2026-10-23T15:00:00Z",
+      "recordDate": "2026-10-29T12:00:00Z",
+      "opensAt": "2026-10-30T14:00:00Z",
+      "closesAt": "2026-11-20T23:00:00Z",
+      "certifier": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+      "standards": {
+        "code": "ICF-STD-401",
+        "documentTitle": "ICF-STD-401 Eye Formation Guide for Swiss-Type Cheeses",
+        "documentVersion": "1.0 rev. 1",
+        "round": 1,
+        "prior": "ICF-STD-401 Swiss-Type Eye Formation v1.0 — Ballot"
+      },
+      "anchors": [
+        {
+          "entity": "Committees: Committees",
+          "recordId": "B050BC0F-C1A4-5DD7-9562-3659CAADC4B6",
+          "role": "Host",
+          "isPrimary": true
+        },
+        {
+          "entity": "MJ_BizApps_Collaboration: Spaces",
+          "recordId": "779DD5A6-1F92-5D3C-A77D-578ACFF7121B",
+          "role": "Host",
+          "isPrimary": false
+        }
+      ],
+      "contests": [
+        {
+          "name": "§2 Eyes per cut face (revised)",
+          "kind": "StandardsItem",
+          "tally": "majority",
+          "threshold": "TwoThirds",
+          "basis": "VotesCast",
+          "allowAbstain": true,
+          "options": [
+            {
+              "label": "Approve"
+            },
+            {
+              "label": "Disapprove"
+            }
+          ]
+        }
+      ],
+      "roll": [
+        {
+          "person": "05633105-2226-54D0-A769-3B3C016767F7",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "067065F5-7F1C-57F1-A0F8-92D707C25B7D",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "072EC674-2A47-5F88-8AD1-9D487E298397",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "20FD9EFB-3C07-5044-8BF6-803BB3E6571D",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "210CA669-0DB3-51EB-9AD1-32E72F5A4492",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "220E1A3F-4B9F-5D59-8B6A-8A4B0E7DB28F",
+          "class": "Committee"
+        },
+        {
+          "person": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF",
+          "class": "Committee"
+        },
+        {
+          "person": "26C9CD3D-67A4-58C8-A636-8CEB4666527D",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "38462C1A-999E-520E-BE56-FA3FD1B9C162",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "51CF0B70-44BD-56BE-A6A4-3D6C80D8E3E9",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "52640EB6-BBD5-5EA2-BDF1-14F27ED97879",
+          "class": "Committee"
+        },
+        {
+          "person": "550909F0-527A-539C-AF82-4603AD448838",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "5544CB6B-86DC-58AE-B998-01B75615B1B0",
+          "class": "Committee"
+        },
+        {
+          "person": "5E1DE6DE-303A-5B35-87D6-C6BF4E4F023B",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "5E9F2CDA-B022-53E7-AA02-F23E36EBE498",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "61FA0132-31F1-59E9-9B50-DBDF42780822",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "65AD0562-1908-540C-937D-2BC23C4F88A6",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "65D40948-FA0D-5DB6-9F63-6AB60342F182",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "66D713AB-A42E-5EFB-AF8B-DA620CB0FD61",
+          "class": "Committee"
+        },
+        {
+          "person": "69E566CE-D8DB-5AD8-87EF-A78EDAE07D71",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "6B4BF43A-4C16-5DAD-9EA3-F3EDB4093873",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "73619338-F1FC-50C4-8C4A-3585459464A1",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "74C2B126-78E7-5C93-BEA8-E048CAAFD91C",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "755D763F-EF70-5105-8C95-5FE8D1376BF8",
+          "class": "Committee"
+        },
+        {
+          "person": "772B55A8-44C7-51C3-8BEE-37B9BE2D1ED8",
+          "class": "Committee"
+        },
+        {
+          "person": "78E29F46-3965-5314-BC2F-BB79336EAD05",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "7FA7515F-6154-574E-85E4-47E810C88F85",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "7FC09347-424D-5147-981B-C3DC9AB3F0CC",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "8010857E-9CEF-56E7-8879-A72AE72E6B3C",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "83F1E1CF-8BDC-59B2-B3D5-E88E914DA670",
+          "class": "Committee"
+        },
+        {
+          "person": "856688F8-C895-5E8E-91F2-CDF18AA68503",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "89542F64-729C-5166-B18A-7C755CB25D08",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "8EA56787-CF23-5ED9-A4A0-0DEFE7CC9C22",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "8FC7C365-AFF7-5C8D-8B29-5DD0087BE3B7",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "958B1085-3310-588F-AAC0-31AA558B19D5",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "965ED95C-59D7-55DE-AA49-FCC9041BC734",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "9FE55C26-8983-53AA-B517-52BE385CC0F0",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "A31FE0CD-1759-50C0-9D91-0EB5D17239B2",
+          "class": "Committee"
+        },
+        {
+          "person": "A4A08302-3758-529D-8C22-22D8F72A0CBC",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "A7494213-EBF3-5A89-8197-86572EE6B8F4",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "AC73CCD5-783B-5A03-9A6B-3A974B40201B",
+          "class": "Committee"
+        },
+        {
+          "person": "AFE3BBA8-E240-5F20-B869-FD1AC974CA79",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "B1049A0E-1E27-5D26-8301-356542774FF2",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "B2A26737-D6CB-5149-8848-01C2954C376E",
+          "class": "Committee"
+        },
+        {
+          "person": "BA129EA6-B517-5C25-9F0D-D2D5AEE72C44",
+          "class": "Committee"
+        },
+        {
+          "person": "CCFA1913-AF56-545A-B63A-3916FFA4318B",
+          "class": "Committee"
+        },
+        {
+          "person": "DBE0287D-6ABA-59B0-A251-C6F2B6049265",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "E4313B6C-F512-518B-99E8-01433EAE7ADA",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "EA36130D-B3E1-56A8-8BEE-00C0B93CF010",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "EC981BB1-1AFE-5B09-93C4-BC115E876E0B",
+          "class": "Ballot Pool"
+        },
+        {
+          "person": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+          "class": "Committee"
+        },
+        {
+          "person": "FBB1722E-F036-5279-BD6C-F190A5CCFACA",
+          "class": "Committee"
+        },
+        {
+          "person": "FD8E23C5-F87D-556B-B4CA-7BE84D796277",
+          "class": "Ballot Pool"
+        }
+      ],
+      "ballots": [
+        {
+          "person": "FB0FA9E7-BEB6-5525-86E5-E580AFBCE8E0",
+          "channel": "Online",
+          "at": "2026-10-30T15:04:13Z",
+          "contests": [
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "FBB1722E-F036-5279-BD6C-F190A5CCFACA",
+          "channel": "Online",
+          "at": "2026-10-30T18:45:57Z",
+          "contests": [
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "2266EC81-CDCD-5C2D-A2DC-4362538F26CF",
+          "channel": "Online",
+          "at": "2026-10-30T18:56:24Z",
+          "contests": [
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "69E566CE-D8DB-5AD8-87EF-A78EDAE07D71",
+          "channel": "Online",
+          "at": "2026-10-31T07:56:31Z",
+          "contests": [
+            {
+              "option": "Approve"
+            }
+          ]
+        },
+        {
+          "person": "72A4DA25-C472-5D86-81EA-DDCFE8DFBDAC",
+          "channel": "Online",
+          "at": "2026-10-31T09:08:00Z",
+          "contests": [
+            {
+              "abstain": true
+            }
+          ]
+        },
+        {
+          "person": "EC981BB1-1AFE-5B09-93C4-BC115E876E0B",
+          "channel": "Online",
+          "at": "2026-10-31T13:53:48Z",
+          "contests": [
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0-r1:EC981BB1-1AFE-5B09-93C4-BC115E876E0B:0",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "As a retail buyer, I find the phrasing 8 to 12 eyes per 100 square centimeters too vague when sorting imported wheels for our deli cases. Customers expect consistency, and if a wheel sits outside this range without failing, my staff cannot explain why it still carries the Swiss-type label. We need a tighter range or clearer defect limits so retail grading remains dependable.",
+                "proposedChange": "Change the guide to read: 9 to 11 eyes per 100 square centimeters, and explicitly define blind or overset thresholds.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee accepts in principle the buyer's need for greater retail consistency. Rather than tightening the count to 9 to 11, which would alter the established benchmark, we meet this concern by incorporating an explanatory note that details how natural variations are managed under §3.",
+                  "at": "2026-11-29T20:18:14Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-12-03T14:45:19Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "AC1C687E-65B5-5675-B951-D8C96E258A6E",
+          "channel": "Online",
+          "at": "2026-10-31T16:27:15Z",
+          "contests": [
+            {
+              "option": "Approve",
+              "comment": {
+                "key": "std-401-1.0-r1:AC1C687E-65B5-5675-B951-D8C96E258A6E:0",
+                "type": "Editorial",
+                "reference": "§2, first sentence",
+                "comment": "I approve the revised wording because it clarifies that the count is a guide and not a mandatory grade, which aligns well with what we teach in our courses at the Brackenfell Center for Cheese Studies. However, adding a quick cross-reference to §3 directly inside the sentence would make it much easier for students to connect the guide numbers with the failure states.",
+                "proposedChange": "Add the phrase as detailed in §3 at the end of the sentence.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee appreciates the editorial suggestion from the Brackenfell Center for Cheese Studies. While we cannot append the phrase directly without cluttering the guidance text, we will insert a parenthetical cross-reference immediately following §3 to guide readers seamlessly.",
+                  "at": "2026-11-26T22:16:54Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-11-30T13:37:17Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "person": "BA129EA6-B517-5C25-9F0D-D2D5AEE72C44",
+          "channel": "Online",
+          "at": "2026-10-31T22:16:35Z",
+          "contests": [
+            {
+              "option": "Disapprove",
+              "comment": {
+                "key": "std-401-1.0-r1:BA129EA6-B517-5C25-9F0D-D2D5AEE72C44:0",
+                "type": "Technical",
+                "reference": "§2",
+                "comment": "Teaching cheese makers across different regions requires absolute clarity on whether 8 to 12 eyes per 100 square centimeters is strictly advisory. Leaving it as a guide while referencing §3 creates confusion in our training sessions about whether a wheel just below eight eyes is defective or merely atypical. We must ensure the educational material distinguishes clearly between normal variation and outright failure.",
+                "proposedChange": "Revise the text to explicitly state: Wheels exhibiting 8 to 12 eyes per 100 square centimeters are considered standard, while counts outside this range are evaluated solely under §3.",
+                "resolution": {
+                  "disposition": "AcceptedInPrinciple",
+                  "response": "The committee recognizes the curriculum concern raised by our educator member. To address this without rewriting the core standard, we will revise the clause to clarify that any wheel outside the 8 to 12 range is subject strictly to the evaluation criteria set forth in §3.",
+                  "at": "2026-11-26T22:12:03Z",
+                  "commenter": "Satisfied",
+                  "answeredAt": "2026-12-01T06:39:08Z"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "stage": "open",
+      "stageAt": "2026-10-31T23:59:59Z",
+      "presenter": {
+        "class": "Individual"
+      }
+    },
+    {
       "key": "amend-2019",
       "family": "member-vote",
       "type": "amendment",

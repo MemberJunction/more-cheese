@@ -453,7 +453,7 @@ Election Inspector who is neither running nor on the board.
 
 ### 5.4 ICF member standards — balloted in Voting
 
-**Status:** added 2026-11-02 (Yuri). ICF publishes seven voluntary **member standards**, written and balloted by the
+**Status:** added 2026-11-02 (Yuri). ICF publishes eight voluntary **member standards**, written and balloted by the
 Standards Committee. They are ICF's own codes of practice for members, separate from the federal rules that the
 blog's advocacy posts follow:
 
@@ -466,13 +466,16 @@ blog's advocacy posts follow:
 | ICF-STD-202 | Net-Weight and Cut-Wedge Labeling Guidance | 1.0 (2021), 2.0 (2026, certified October 2026) |
 | ICF-STD-301 | Raw-Milk Production Hygiene Standard | 1.0 (2019, recirculated once), 1.1 (2022) |
 | ICF-STD-302 | Aging-Room Environmental Monitoring Standard | 1.0 (2024) |
+| ICF-STD-401 | Eye Formation Guide for Swiss-Type Cheeses | 1.0 (2026, recirculation open in November 2026) |
 
 The catalog and every ballot's sections are `data/elections/standards.json`; the ballots, comments and resolutions
 are built by `scripts/build-elections-plan.mjs`, with wording from `data/elections/comments.json`. Each ballot is an
 Open roll call of the committee and a **ballot pool** of engaged members who signed up. Each section is approved by
 two-thirds of votes cast, and every Disapprove carries a comment, which the committee resolves. A section that fails
 goes back to the same voters as a recirculation. The story the data tells: STD-101 2.0's new §3 (validated aging
-protocols) failed twice before a conflict-of-interest rule and a two-year start let it pass in August 2023.
+protocols) failed twice before a conflict-of-interest rule and a two-year start let it pass in August 2023. The
+lightest one is STD-401 (2026), on the size and number of eyes in a Swiss-type wheel: its eyes-per-cut-face count
+failed, and its recirculation makes the count a guide rather than a grade.
 
 Rules for content:
 - An artifact may name a standard by code and title, and say when it was adopted, revised or recirculated, as above.

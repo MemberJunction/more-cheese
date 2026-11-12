@@ -414,6 +414,20 @@ test('history: a later month may finish an open election and add new ones, never
     assert.match(edit((els) => els.splice(els.findIndex((e) => e.key === 'ev-done'), 1)).join(), /ev-done: the new plan drops it/);
 });
 
+test('history: an unwritten standards comment may gain its words later, a written one may not change', () => {
+    const comment = (words) => ({
+        key: 's-1.0:P:0', type: 'Technical', reference: words && '§1', comment: words, proposedChange: null,
+        resolution: { disposition: 'AcceptedInPrinciple', response: words && 'Agreed.', at: '2026-10-20T10:00:00Z' },
+    });
+    const plan = (c) => ({ elections: [{ key: 's-1.0', name: 'S', ballots: [{ person: 'P', at: '2026-10-01T10:00:00Z', contests: [{ option: 'Disapprove', comment: c }] }] }] });
+    assert.deepEqual(historyChanges(plan(comment(null)), plan(comment('Too strict.'))), []);
+    assert.deepEqual(historyChanges(plan(comment('Too strict.')), plan(comment('Too strict.'))), []);
+    assert.match(historyChanges(plan(comment('Too strict.')), plan(comment('Too loose.'))).join(), /s-1.0: finished, but the new plan changes ballots/);
+    const moved = comment('Too strict.');
+    moved.resolution.disposition = 'Rejected';
+    assert.match(historyChanges(plan(comment(null)), plan(moved)).join(), /s-1.0: finished, but the new plan changes ballots/);
+});
+
 test('CLI: writes the plan, then --check passes until generated/ changes', () => {
     const root = world({ n: 6 });
     const run = (...a) => spawnSync(process.execPath, [SCRIPT, ...a], { cwd: root, encoding: 'utf8' });

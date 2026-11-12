@@ -12,7 +12,8 @@
  *   4. a committee's action items filed into its space (the item by the owner, the task link by System)
  *   5. chats from data/spaces/chats/<key>.json: started by the owner, each message posted by its author
  *   6. closes, each its own save, dated from the plan (after the content: a closed space takes nothing new)
- *   7. links each seated Person to their User (Person.LinkedUserID), as System
+ *   7. links each seated Person to their User (Person.LinkedUserID), and gives a User with no image the
+ *      Person's photo (User.UserImageURL, which MJ's chat and avatars show), as System
  *   8. backdates the created/updated stamps of spaces, seats and new chats to the plan's dates
  * Re-running is safe: spaces, seats, anchors, filed tasks and chats that already exist are left alone.
  *
@@ -41,6 +42,7 @@ const ENTITY = {
     roles: 'MJ_BizApps_Collaboration: Space Role Types',
     statuses: 'MJ_BizApps_Collaboration: Space Type Status',
     people: 'MJ_BizApps_Common: People',
+    users: 'MJ: Users',
     entities: 'MJ: Entities',
     chats: 'MJ_BizApps_Collaboration: Space Chats',
     items: 'MJ_BizApps_Collaboration: Space Items',
@@ -158,7 +160,7 @@ export async function load(opts) {
     const existingSpaces = new Set((await run(ENTITY.spaces, '', ['ID'])).map((r) => r.ID.toUpperCase()));
     const seatsOf = async (spaceId) => new Map((await run(ENTITY.members, `SpaceID = '${spaceId}'`, ['ID', 'UserID', 'Status'])).map((r) => [r.UserID.toUpperCase(), r]));
     const byKey = new Map(plan.spaces.map((s) => [s.key, s]));
-    const counts = { spaces: 0, seats: 0, removed: 0, invited: 0, anchors: 0, tasks: 0, chats: 0, messages: 0, closed: 0, linked: 0 };
+    const counts = { spaces: 0, seats: 0, removed: 0, invited: 0, anchors: 0, tasks: 0, chats: 0, messages: 0, closed: 0, linked: 0, photos: 0 };
 
     const seat = async (space, x, saver) => {
         const rec = await md.GetEntityObject(ENTITY.members, user(saver));
@@ -343,6 +345,31 @@ export async function load(opts) {
         counts.linked++;
     }
     log(`people linked to their users: ${counts.linked}`);
+
+    // Photos: MJ's chat and avatars show User.UserImageURL, so each seated person's user takes their People photo.
+    // A user that already has an image keeps it.
+    const photoOf = new Map();
+    const bare = [];
+    for (let i = 0; i < ids.length; i += 500) {
+        const chunk = ids.slice(i, i + 500);
+        for (const p of await run(ENTITY.people, `ID IN (${chunk.map((x) => `'${x}'`).join(',')}) AND PhotoURL IS NOT NULL`, ['ID', 'PhotoURL'])) {
+            photoOf.set(user(persons.get(p.ID.toUpperCase())).ID.toUpperCase(), p.PhotoURL);
+        }
+    }
+    const userIds = [...photoOf.keys()];
+    for (let i = 0; i < userIds.length; i += 500) {
+        const chunk = userIds.slice(i, i + 500);
+        bare.push(...await run(ENTITY.users, `ID IN (${chunk.map((x) => `'${x}'`).join(',')}) AND UserImageURL IS NULL`, ['ID']));
+    }
+    for (const u of bare) {
+        if (opts.dryRun) { counts.photos++; continue; }
+        const rec = await md.GetEntityObject(ENTITY.users, system);
+        if (!(await rec.Load(u.ID))) throw new Error(`cannot load user ${u.ID}`);
+        rec.UserImageURL = photoOf.get(u.ID.toUpperCase());
+        await save(rec, `photo for user ${u.ID}`);
+        counts.photos++;
+    }
+    log(`users given their person's photo: ${counts.photos}`);
 
     // Backdate: the created/updated stamps follow the plan, so the space tree reads as history.
     if (!opts.dryRun) {
