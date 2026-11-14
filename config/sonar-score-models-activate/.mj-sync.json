@@ -1,4 +1,5 @@
 {
   "entity": "MJ_BizApps_Sonar: Score Models",
-  "filePattern": "**/.*.json"
+  "filePattern": "**/.*.json",
+  "overrides": [{ "folder": "sonar-score-models", "fields": ["Status"] }]
 }

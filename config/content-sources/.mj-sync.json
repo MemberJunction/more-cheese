@@ -1,6 +1,7 @@
 {
   "entity": "MJ: Content Sources",
   "filePattern": "**/.*.json",
+  "_note": "The public site source crawls from the Blog index (morecheese.org/blog, the WordPress posts page): it follows posts, pagination, category archives and the static pages, and skips tag archives, feeds and WordPress system URLs. MJ: Content Sources has no Description field, so this note carries it.",
   "pull": {
     "filePattern": ".*.json",
     "createNewFileIfNotFound": true,
