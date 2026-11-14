@@ -233,6 +233,30 @@ MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
    ```
 > **Note on metadata roots**: In `mj-app.json`, `metadata.directory` specifies `generated` for OpenApp manifest validation. The `config/` tree holds Explorer-authored configurations and AI/Sonar models pushed alongside `generated/`.
 >
+### Building the full demo database (Spaces, committees and voting)
+
+The demo also has collaboration Spaces (chapters, committees, working groups and staff teams, with their
+members, chat and work) and seven years of elections from bizapps-voting. Neither can go in as metadata:
+a space is created by its owner and seats its members, and every election runs through voting's own
+engines. Until bizapps-collaboration and bizapps-voting are released and listed in `mj-app.json`, build
+the whole database with:
+
+```sh
+scripts/build-demo-db.sh --ws <workspace> --db MJ_MoreCheese_Demo --presenter you@example.com
+```
+
+`<workspace>` is an `mj dev workspace`: one folder holding MJ and the sibling repos (`bizapps-common`,
+`-tasks`, `-accounting`, `-orders`, `-committees`, `-forms`, `-issues`, `-sonar`, `-secure-messaging`,
+`-collaboration`, `-voting`), built, with `@mj-biz-apps/collaboration-server` and
+`@mj-biz-apps/voting-server` in `dynamicPackages.server` of MJ's `mj.config.cjs`. The script creates the
+database (it drops one of that name first), migrates MJ and every app, pushes their metadata, runs CodeGen,
+pushes `generated/` and `config/`, makes your user as a copy of the template user, and then runs
+[`load-spaces.mjs`](scripts/load-spaces.mjs) and [`load-elections.mjs`](scripts/load-elections.mjs).
+`--from <step>` resumes after a failure. Restart MJAPI on the new database when it finishes.
+
+After a monthly run merges, an existing demo database needs only the two loaders, then an MJAPI restart:
+`node scripts/load-spaces.mjs --mj <MJ dir>` and `node scripts/load-elections.mjs --mj <MJ dir> --presenter you@example.com`.
+
 > **Note on cadence**: `generated/` is refreshed by re-running Loom roughly monthly, and each run
 > **appends** the next month rather than replacing the corpus — see
 > [Monthly cadence](#-monthly-cadence--loom-accumulates-it-does-not-replace). Because `mj sync push`
