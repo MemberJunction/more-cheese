@@ -11,8 +11,7 @@
       "ContentFileTypeID": "@lookup:MJ: Content File Types.Name=HTML",
       "EmbeddingModelID": "@lookup:MJ: AI Models.Name=Gemini Embedding 2",
       "VectorIndexID": "@lookup:MJ: Vector Indexes.Name=More Cheese Content (Pinecone)",
-      "Configuration": "{\"Website\": {\"MaxDepth\": 10, \"CrawlSitesInLowerLevelDomain\": true, \"CrawlOtherSitesInTopLevelDomain\": false, \"URLPattern\": \"^https://(www\\\\.)?morecheese\\\\.org/(?!tag/|wp-|author/|sample-page|feed)((?!/feed|/comments)[^?#])*$\", \"RootURL\": \"https://morecheese.org/\"}, \"MaxItemsPerRun\": 300}",
-      "Description": "Public site crawl seeded at the Blog index (morecheese.org/blog, the WordPress posts page). Follows posts, pagination, category archives and the static pages; skips tag archives, feeds and WordPress system URLs."
+      "Configuration": "{\"Website\": {\"MaxDepth\": 10, \"CrawlSitesInLowerLevelDomain\": true, \"CrawlOtherSitesInTopLevelDomain\": false, \"URLPattern\": \"^https://(www\\\\.)?morecheese\\\\.org/(?!tag/|wp-|author/|sample-page|feed)((?!/feed|/comments)[^?#])*$\", \"RootURL\": \"https://morecheese.org/\"}, \"MaxItemsPerRun\": 300}"
     }
   },
   {
