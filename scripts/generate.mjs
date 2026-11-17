@@ -5,7 +5,8 @@
  * Compiles the Loom domain, applies Loom declarative generators (names, prefixes, pronouns,
  * DOBs), AvatarGenerator, LogoGenerator, and ReversalEngine to the governed generated/ tree
  * from data/domain.json field config, aligns the planted duplicate people with their
- * originals, and verifies checkpoint.json. After the tree is
+ * originals, closes committee action items their owners have reported back on, and verifies
+ * checkpoint.json. After the tree is
  * committed, a second run must leave generated/ byte-identical.
  */
 
@@ -15,6 +16,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
 import { applyPersonJobFunctionsEnrichment } from './enrich-person-job-functions.mjs';
 import { alignPlantedDuplicates } from './align-planted-duplicates.mjs';
+import { closeReportedActionItems } from './close-reported-action-items.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -321,12 +323,31 @@ function applyPersonJobFunctionsPass() {
 }
 
 // ---------------------------------------------------------------------------
+// 5. Committee Action Items Pass — close an item at the meeting its owner reported back at.
+//    See close-reported-action-items.mjs.
+// ---------------------------------------------------------------------------
+function applyReportedActionItemsPass() {
+  const tasksPath = path.join(generatedDir, 'tasks', '.tasks.json');
+  const read = (rel) => JSON.parse(fs.readFileSync(path.join(generatedDir, rel), 'utf8'));
+  const tasks = JSON.parse(fs.readFileSync(tasksPath, 'utf8'));
+  const stats = closeReportedActionItems({
+    tasks,
+    meetings: read('committee-meetings/.committee-meetings.json'),
+    committees: read('committees/.committees.json'),
+  });
+  // The tasks file carries no trailing newline.
+  fs.writeFileSync(tasksPath, JSON.stringify(tasks, null, 2), 'utf8');
+  console.log(`   ✓ Committee Action Items Pass: ${stats.closed} closed at the meeting that heard them, ${stats.stillOpen} still open of ${stats.actionItems}`);
+}
+
+// ---------------------------------------------------------------------------
 // Execute Passes
 // ---------------------------------------------------------------------------
 applyOrderCancellationsPass();
 applyPeopleAndMemberProfilePass();
 applyOrganizationLogosPass();
 applyPersonJobFunctionsPass();
+applyReportedActionItemsPass();
 
 // ---------------------------------------------------------------------------
 // Checkpoint and Sync Configuration Verification

@@ -150,6 +150,40 @@ The copy is always a new user, so use an email that doesn't have one yet. Don't 
 template itself: Explorer shows a red banner if you do, because whatever you change there is
 copied to every new user.
 
+---
+
+## 🔑 Shared demo credentials
+
+More Cheese ships a few **read-only, demo-only** credentials so a fresh install works end to end:
+
+| Credential | What it unlocks |
+|---|---|
+| `Dropbox OAuth` | The demo Dropbox (`vault/internal`) as a Knowledge Hub source |
+| `Component Registry: Skip` | The Skip components the pinned dashboards are built from |
+
+They are in `config/credentials`, **encrypted with the More Cheese Shared Key** (`config/encryption-keys`), never in plain text and never with any one install's own key.
+
+**The key is meant to be shared with everyone who installs More Cheese.** Until the More Cheese portal is ready (#137), get it from the More Cheese team. Put it in MJAPI's environment (`packages/MJAPI/.env`), then restart MJAPI:
+
+```bash
+MORECHEESE_SHARED_KEY=<the key from the More Cheese team>
+```
+
+Without it More Cheese still installs and runs. The shipped credentials stay encrypted (MJAPI logs one warning naming `MORECHEESE_SHARED_KEY`), so Knowledge Hub has no Dropbox source and the Skip dashboards can't load their components. An install that has its own Skip component registry key (`REGISTRY_API_KEY_SKIP`, or a Skip API key the Skip client uses for the registry) uses that instead.
+
+### For maintainers: adding or rotating a shared credential
+
+Everyone with the key can read every credential under it, so **only read-only, demo-scoped secrets** belong here.
+
+```bash
+node scripts/seal-credential.mjs new-key        # once: a new key, which the More Cheese team then hands out
+# values file: the credential type's fields, e.g. {"apiKey":"…"}. Keep it outside the repo.
+MORECHEESE_SHARED_KEY=<key> npm run seal:credential -- --name "Component Registry: Skip" --values-file ~/skip.json
+MORECHEESE_SHARED_KEY=<key> node scripts/seal-credential.mjs verify   # lists field names, never values
+```
+
+`npm run check:shared-credentials` (run in CI) fails while any shipped credential is not sealed with the shared key. A plaintext value would otherwise be encrypted at release with the release machine's own key, which no install has (#110). Rotating the key means sealing every credential again with the new one, releasing, and handing out the new key.
+
 ## 📦 Monorepo Package Inventory
 
 | Package | Scope | Description |
@@ -199,6 +233,30 @@ MoreCheese follows MemberJunction's **Publish-Then-No-Breaking-Changes Policy**:
    ```
 > **Note on metadata roots**: In `mj-app.json`, `metadata.directory` specifies `generated` for OpenApp manifest validation. The `config/` tree holds Explorer-authored configurations and AI/Sonar models pushed alongside `generated/`.
 >
+### Building the full demo database (Spaces, committees and voting)
+
+The demo also has collaboration Spaces (chapters, committees, working groups and staff teams, with their
+members, chat and work) and seven years of elections from bizapps-voting. Neither can go in as metadata:
+a space is created by its owner and seats its members, and every election runs through voting's own
+engines. Until bizapps-collaboration and bizapps-voting are released and listed in `mj-app.json`, build
+the whole database with:
+
+```sh
+scripts/build-demo-db.sh --ws <workspace> --db MJ_MoreCheese_Demo --presenter you@example.com
+```
+
+`<workspace>` is an `mj dev workspace`: one folder holding MJ and the sibling repos (`bizapps-common`,
+`-tasks`, `-accounting`, `-orders`, `-committees`, `-forms`, `-issues`, `-sonar`, `-secure-messaging`,
+`-collaboration`, `-voting`), built, with `@mj-biz-apps/collaboration-server` and
+`@mj-biz-apps/voting-server` in `dynamicPackages.server` of MJ's `mj.config.cjs`. The script creates the
+database (it drops one of that name first), migrates MJ and every app, pushes their metadata, runs CodeGen,
+pushes `generated/` and `config/`, makes your user as a copy of the template user, and then runs
+[`load-spaces.mjs`](scripts/load-spaces.mjs) and [`load-elections.mjs`](scripts/load-elections.mjs).
+`--from <step>` resumes after a failure. Restart MJAPI on the new database when it finishes.
+
+After a monthly run merges, an existing demo database needs only the two loaders, then an MJAPI restart:
+`node scripts/load-spaces.mjs --mj <MJ dir>` and `node scripts/load-elections.mjs --mj <MJ dir> --presenter you@example.com`.
+
 > **Note on cadence**: `generated/` is refreshed by re-running Loom roughly monthly, and each run
 > **appends** the next month rather than replacing the corpus — see
 > [Monthly cadence](#-monthly-cadence--loom-accumulates-it-does-not-replace). Because `mj sync push`
