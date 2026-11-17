@@ -1,0 +1,12 @@
+{
+  "source": "VAULT-DESIGN §5.2 (approved 2026-10-29 for collaboration Spaces) and world model §2.1",
+  "note": "ICF staff are MJ sign-in users only: no Person, no membership, no orders, no committee seats. Content artifacts stay role-only (VAULT-DESIGN §5.1).",
+  "staff": [
+    { "key": "ashdown", "firstName": "Marguerite", "lastName": "Ashdown", "title": "Chief Executive Officer", "email": "m.ashdown@morecheese.example", "since": 2016, "voice": "Measured, asks for the second-order effect, writes short." },
+    { "key": "oyelaran", "firstName": "Desmond", "lastName": "Oyelaran", "title": "VP, Membership", "email": "d.oyelaran@morecheese.example", "since": 2018, "voice": "Numbers-first, allergic to vague retention language." },
+    { "key": "halloway", "firstName": "Ingrid", "lastName": "Halloway", "title": "VP, Marketing", "email": "i.halloway@morecheese.example", "since": 2019, "voice": "Pushes for earlier deadlines; the one who asks \"can we say that?\"" },
+    { "key": "castellanos", "firstName": "Ruben", "lastName": "Castellanos", "title": "Events Director", "email": "r.castellanos@morecheese.example", "since": 2017, "voice": "Logistics brain, dry, tracks everything in a spreadsheet." },
+    { "key": "tsai", "firstName": "Wei-Lin", "lastName": "Tsai", "title": "Membership Operations Analyst", "email": "w.tsai@morecheese.example", "since": 2021, "voice": "Careful, flags data-quality caveats before anyone asks." },
+    { "key": "rahimi", "firstName": "Noor", "lastName": "Rahimi", "title": "Communications Manager", "email": "n.rahimi@morecheese.example", "since": 2020, "voice": "Writes the blog; chases numbers on Thursdays." }
+  ]
+}
