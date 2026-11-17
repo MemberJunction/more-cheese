@@ -1,0 +1,92 @@
+[
+  {
+    "fields": {
+      "Name": "Marguerite Ashdown",
+      "FirstName": "Marguerite",
+      "LastName": "Ashdown",
+      "Title": "Chief Executive Officer",
+      "Email": "m.ashdown@morecheese.example",
+      "Type": "User",
+      "IsActive": true,
+      "LinkedRecordType": "None"
+    },
+    "primaryKey": {
+      "ID": "C5045DB1-5FA7-5B3F-820E-2F9A9355643B"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Desmond Oyelaran",
+      "FirstName": "Desmond",
+      "LastName": "Oyelaran",
+      "Title": "VP, Membership",
+      "Email": "d.oyelaran@morecheese.example",
+      "Type": "User",
+      "IsActive": true,
+      "LinkedRecordType": "None"
+    },
+    "primaryKey": {
+      "ID": "AEC60CE2-171F-56A4-85B4-D85E88724414"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Ingrid Halloway",
+      "FirstName": "Ingrid",
+      "LastName": "Halloway",
+      "Title": "VP, Marketing",
+      "Email": "i.halloway@morecheese.example",
+      "Type": "User",
+      "IsActive": true,
+      "LinkedRecordType": "None"
+    },
+    "primaryKey": {
+      "ID": "D4FB2DCA-6394-5205-A44F-D3C8C2D68C45"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Ruben Castellanos",
+      "FirstName": "Ruben",
+      "LastName": "Castellanos",
+      "Title": "Events Director",
+      "Email": "r.castellanos@morecheese.example",
+      "Type": "User",
+      "IsActive": true,
+      "LinkedRecordType": "None"
+    },
+    "primaryKey": {
+      "ID": "E2DD1B07-031D-5CE3-932D-52A81912D3C1"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Wei-Lin Tsai",
+      "FirstName": "Wei-Lin",
+      "LastName": "Tsai",
+      "Title": "Membership Operations Analyst",
+      "Email": "w.tsai@morecheese.example",
+      "Type": "User",
+      "IsActive": true,
+      "LinkedRecordType": "None"
+    },
+    "primaryKey": {
+      "ID": "4DD2FE1E-65D9-52F5-9623-A4592C8BF9EC"
+    }
+  },
+  {
+    "fields": {
+      "Name": "Noor Rahimi",
+      "FirstName": "Noor",
+      "LastName": "Rahimi",
+      "Title": "Communications Manager",
+      "Email": "n.rahimi@morecheese.example",
+      "Type": "User",
+      "IsActive": true,
+      "LinkedRecordType": "None"
+    },
+    "primaryKey": {
+      "ID": "B2D5059B-AB6B-5143-A170-5A935CAA648F"
+    }
+  }
+]

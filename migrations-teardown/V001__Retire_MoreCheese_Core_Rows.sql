@@ -65,12 +65,12 @@
 -- used database (not a pristine canary — that is the blind spot caliber's rewrite exists to remove)
 -- before the release.
 --
--- Seed provenance (3632 distinct records deleted; 3663 declared across
+-- Seed provenance (3644 distinct records deleted; 3675 declared across
 -- 44 directories, 30 of them declared in two directories and inserted once,
 -- 1 MJ core row deactivated in place rather than deleted):
 --   1425 from config/content-item-tags
---    579 from config/user-roles
---    578 from config/users
+--    585 from config/user-roles
+--    584 from config/users
 --    192 from config/content-item-chunks
 --    192 from config/content-items
 --    175 from config/tags
@@ -3178,6 +3178,12 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: User Roles', '1B8ADDB4-D4B6-5291-A928-EBD074DF2F41'),
     ('MJ: User Roles', '1AF2A7EC-BE66-5CDA-856C-E6982FEB3AC4'),
     ('MJ: User Roles', 'C6A6B9FF-089A-56D0-88FE-E1D38F8D7CD9'),
+    ('MJ: User Roles', 'B924D4C9-98C5-50C5-AD10-C60AFFC609F6'),
+    ('MJ: User Roles', 'F5565437-F336-57B7-9EC9-00464D68C114'),
+    ('MJ: User Roles', '51B675F9-57DD-5048-8299-2F2385BFAAFB'),
+    ('MJ: User Roles', '3F56E54B-1B43-5B6B-878F-B999E4BA9303'),
+    ('MJ: User Roles', '9E7D2F4E-4F73-5502-8B0B-01F539659B89'),
+    ('MJ: User Roles', '87815CF9-51C6-5D86-B0EB-448899C6674E'),
     ('MJ: User Settings', 'DCD29593-E66F-5A0C-BF7D-46D7645E7332'),
     ('MJ: User Views', 'A4B45F20-87E7-5F9D-9137-E9B8DC2E32B5'),
     ('MJ: User Views', '904AD6FF-D13F-5600-80A6-5773EF8214E2'),
@@ -3635,15 +3641,15 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Users', 'C6D00B66-7F1B-5187-8534-AE95A40EF1A1'),
     ('MJ: Users', '2C2ABA64-1B96-577B-BC92-F035054ECD9C'),
     ('MJ: Users', 'BACB5FB7-D510-55AF-B3DD-1DEE97F04D67'),
-    ('MJ: Users', 'D78F18E3-6182-5A54-9D2B-F4124A969C44'),
+    ('MJ: Users', 'D78F18E3-6182-5A54-9D2B-F4124A969C44');
+
+INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Users', '95B49119-254E-51EC-97FA-1658824CE72F'),
     ('MJ: Users', '9B96AE6B-4212-562C-98E8-BE03BF379A5A'),
     ('MJ: Users', '0C674057-4E66-56A8-8E9A-2168C2AD801A'),
     ('MJ: Users', '6136D1AC-3CA1-5621-8861-CA012F8411DC'),
     ('MJ: Users', 'FAE02525-9B8D-5ACD-B33D-EE7A508E25AC'),
-    ('MJ: Users', '03E9CB43-A933-5E31-A7AC-EDE6DB817D87');
-
-INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
+    ('MJ: Users', '03E9CB43-A933-5E31-A7AC-EDE6DB817D87'),
     ('MJ: Users', '794BCDD7-052E-52DA-AD0D-14D951E6B421'),
     ('MJ: Users', '1301E361-1030-5D81-85FC-C71D2674D577'),
     ('MJ: Users', '6CB2F86E-F84E-56D4-86DD-61E8AE72362E'),
@@ -3774,6 +3780,12 @@ INSERT INTO #MoreCheeseSeed (EntityName, RowID) VALUES
     ('MJ: Users', 'CB16BFCD-6FD5-5A5C-8610-AA9E632EC20E'),
     ('MJ: Users', 'C36EC28C-1648-537C-B419-388BEE9971DB'),
     ('MJ: Users', '86534FBD-DBF4-5466-B76A-2512C30360D8'),
+    ('MJ: Users', 'C5045DB1-5FA7-5B3F-820E-2F9A9355643B'),
+    ('MJ: Users', 'AEC60CE2-171F-56A4-85B4-D85E88724414'),
+    ('MJ: Users', 'D4FB2DCA-6394-5205-A44F-D3C8C2D68C45'),
+    ('MJ: Users', 'E2DD1B07-031D-5CE3-932D-52A81912D3C1'),
+    ('MJ: Users', '4DD2FE1E-65D9-52F5-9623-A4592C8BF9EC'),
+    ('MJ: Users', 'B2D5059B-AB6B-5143-A170-5A935CAA648F'),
     ('MJ: Vector Indexes', '6A2C1F0E-3B8D-4E57-9C41-2D7F8A5B6C01'),
     ('MJ: Vector Indexes', 'E1C999E9-F45E-43E0-849B-E80813543F49');
 

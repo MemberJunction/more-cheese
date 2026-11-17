@@ -1,0 +1,56 @@
+[
+  {
+    "fields": {
+      "UserID": "C5045DB1-5FA7-5B3F-820E-2F9A9355643B",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    },
+    "primaryKey": {
+      "ID": "B924D4C9-98C5-50C5-AD10-C60AFFC609F6"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "AEC60CE2-171F-56A4-85B4-D85E88724414",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    },
+    "primaryKey": {
+      "ID": "F5565437-F336-57B7-9EC9-00464D68C114"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "D4FB2DCA-6394-5205-A44F-D3C8C2D68C45",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    },
+    "primaryKey": {
+      "ID": "51B675F9-57DD-5048-8299-2F2385BFAAFB"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "E2DD1B07-031D-5CE3-932D-52A81912D3C1",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    },
+    "primaryKey": {
+      "ID": "3F56E54B-1B43-5B6B-878F-B999E4BA9303"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "4DD2FE1E-65D9-52F5-9623-A4592C8BF9EC",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    },
+    "primaryKey": {
+      "ID": "9E7D2F4E-4F73-5502-8B0B-01F539659B89"
+    }
+  },
+  {
+    "fields": {
+      "UserID": "B2D5059B-AB6B-5143-A170-5A935CAA648F",
+      "RoleID": "@lookup:MJ: Roles.Name=UI"
+    },
+    "primaryKey": {
+      "ID": "87815CF9-51C6-5D86-B0EB-448899C6674E"
+    }
+  }
+]

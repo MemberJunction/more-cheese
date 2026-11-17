@@ -44,6 +44,27 @@ The 16 heroes below are the exact individuals committed in `metadata/people/.peo
 | 15 | **Nia Thompson** | `nia.thompson.000115@thequietcurd.example`<br/>*The Quiet Curd* (Joined 14 days before release) | $\theta=0.5$<br/>$\phi=-0.4$ | **The Cold Start**: Joined two weeks before the pinned release date (same drift caveat as Marcus Chen); validates scoring on priors rather than transactional history. |
 | 16 | **Charlie Mason** | `charlie.mason.000116@winterfendairy.example`<br/>*Winterfen Dairy* (Joined 2021-08-19) | $\theta=0.3$<br/>$\phi=0.5$ | **Rest-of-World Producer**: Tasmanian sheep dairy owner; represents the Southern Hemisphere geographical distribution. |
 
+
+### 2.1 ICF staff (not members)
+
+Six staff, approved 2026-10-29 for collaboration Spaces (VAULT-DESIGN §5.2, which also covers what
+content may do with them). They are MJ sign-in users, not simulated members: no Person record,
+membership period, order or committee seat, and they are not in `data/ruleset/heroes.json`. The
+machine-readable copy is `data/spaces/staff.json`.
+
+| Name | Role | Sign-in / mailbox | On staff since | Voice |
+| :--- | :--- | :--- | :-: | :--- |
+| **Marguerite Ashdown** | Chief Executive Officer | `m.ashdown@morecheese.example` | 2016 | Measured, asks for the second-order effect, writes short. |
+| **Desmond Oyelaran** | VP, Membership | `d.oyelaran@morecheese.example` | 2018 | Numbers-first, allergic to vague retention language. |
+| **Ingrid Halloway** | VP, Marketing | `i.halloway@morecheese.example` | 2019 | Pushes for earlier deadlines; the one who asks "can we say that?" |
+| **Ruben Castellanos** | Events Director | `r.castellanos@morecheese.example` | 2017 | Logistics brain, dry, tracks everything in a spreadsheet. |
+| **Wei-Lin Tsai** | Membership Operations Analyst | `w.tsai@morecheese.example` | 2021 | Careful, flags data-quality caveats before anyone asks. |
+| **Noor Rahimi** | Communications Manager | `n.rahimi@morecheese.example` | 2020 | Writes the blog; chases numbers on Thursdays. |
+
+Their Spaces: **ICF Staff** (all six, owned by Ashdown) and, sealed under it, **Membership Team**
+(Oyelaran, Tsai, Rahimi; holds the renewal-outreach tasks) and **Events & Communications**
+(Castellanos, Halloway, Rahimi).
+
 ---
 
 ## 3. Authored Loom Metadata Specifications

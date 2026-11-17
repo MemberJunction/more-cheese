@@ -19,7 +19,7 @@ const pid = (n) => `00000000-0000-0000-0000-${String(n).padStart(12, '0')}`;
  * A world of `n` Californian members (current unless listed in `lapsed`), one committee with a chair, a vice
  * chair, a member and an ended member, and Elena (person 1) as the hero who chairs the California chapter.
  */
-function world({ n = 40, lapsed = [], kathy = null } = {}) {
+function world({ n = 40, lapsed = [], kathy = null, staff = null } = {}) {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'spaces-plan-'));
     const put = (rel, body) => { fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true }); fs.writeFileSync(path.join(root, rel), JSON.stringify(body)); };
     const ids = Array.from({ length: n }, (_, i) => i + 1);
@@ -42,8 +42,10 @@ function world({ n = 40, lapsed = [], kathy = null } = {}) {
     put('generated/committee-memberships/.committee-memberships.json', [m(2, 'Chair', 'Active'), m(3, 'Vice Chair', 'Active'), m(4, 'Member', 'Active'), m(5, 'Member', 'Ended', '2025-06-30')]);
     put('generated/tasks/.tasks.json', [
         { fields: { Name: 'Draft the recall checklist', Description: 'Action item recorded at the Food Safety Committee meeting on 2025-02-01.' }, primaryKey: { ID: 'TK1' } },
-        { fields: { Name: 'Renewal outreach', Description: 'Member renewal follow-up.' }, primaryKey: { ID: 'TK2' } },
+        { fields: { Name: 'Renewal outreach — F9 L9 (ICF-000009)', Description: 'F9 L9 is pending renewal.', Status: 'Open', StartedAt: null, DueAt: '2026-08-31T00:00:00Z' }, primaryKey: { ID: 'TK2' } },
+        { fields: { Name: 'Renewal outreach — F8 L8 (ICF-000008)', Description: 'F8 L8 is pending renewal.', Status: 'InProgress', StartedAt: '2026-06-10T15:59:00Z', DueAt: '2026-08-03T00:00:00Z' }, primaryKey: { ID: 'TK3' } },
     ]);
+    if (staff) put('data/spaces/staff.json', { staff });
     put('generated/checkpoint.json', { continuity: { asOfDate: '2026-10-31' } });
     put('data/ruleset/heroes.json', { heroes: [
         { heroKey: 'HERO-ICF-001', businessKeys: { Email: email(1) } },
@@ -51,6 +53,10 @@ function world({ n = 40, lapsed = [], kathy = null } = {}) {
     ] });
     return root;
 }
+
+const STAFF = ['ashdown', 'oyelaran', 'halloway', 'castellanos', 'tsai', 'rahimi'].map((key, i) => ({
+    key, firstName: `S${i}`, lastName: key, title: `Title ${i}`, email: `${key}@morecheese.example`, since: 2016 + i, voice: 'Plain.',
+}));
 
 const spaceOf = (plan, key) => plan.spaces.find((s) => s.key === key);
 const seatOf = (space, email) => space.seats.find((x) => x.user === email);
@@ -99,6 +105,7 @@ test('users: one per seated person, legal first name, stable ids, UI role each',
     const users = JSON.parse(files['config/users/.space-users.json']);
     const elena = users.find((u) => u.fields.Email.startsWith('elena.'));
     assert.equal(elena.fields.FirstName, 'F1');
+    assert.equal(elena.fields.Name, 'F1 L1', 'chats and seat lists show Name, so it is the full name, not the email');
     assert.equal(elena.fields.Type, 'User');
     const roles = JSON.parse(files['config/user-roles/.space-user-roles.json']);
     assert.equal(roles.length, users.length);
@@ -117,4 +124,48 @@ test('CLI: writes the three files, then --check passes until generated/ changes'
     const f = path.join(root, 'generated/enrollments/.enrollments.json');
     fs.writeFileSync(f, JSON.stringify([...JSON.parse(fs.readFileSync(f, 'utf8')), ...Array.from({ length: 200 }, () => ({ fields: { PersonID: pid(7), EnrolledOn: '2026-05-01' } }))]));
     assert.equal(run('--check').status, 1);
+});
+
+test('staff teams: the CEO owns the whole-staff space, two sealed teams sit under it, renewal tasks go to Membership and are dealt out in turn', () => {
+    const { plan, users, staff } = buildPlan(loadWorld(world({ staff: STAFF })));
+    const all = spaceOf(plan, 'staff');
+    assert.equal(all.type, 'workspace');
+    assert.equal(all.staff, true);
+    assert.equal(all.owner, 'ashdown@morecheese.example');
+    assert.equal(all.seats.filter((x) => x.staff).length, 6);
+    assert.equal(seatOf(all, PRESENTER).role, 'member');
+    const membership = spaceOf(plan, 'staff-membership');
+    assert.equal(membership.parent, 'staff');
+    assert.equal(membership.type, 'team');
+    assert.equal(membership.sealed, true);
+    assert.equal(membership.owner, 'oyelaran@morecheese.example');
+    assert.equal(seatOf(membership, 'tsai@morecheese.example').role, 'admin');
+    assert.equal(seatOf(membership, PRESENTER).role, 'admin');
+    assert.deepEqual(membership.tasks, ['TK2', 'TK3']);
+    assert.deepEqual(membership.assignments, [
+        { task: 'TK2', user: 'tsai@morecheese.example', status: 'Pending', assignedAt: '2026-08-01T00:00:00.000Z' },
+        { task: 'TK3', user: 'oyelaran@morecheese.example', status: 'InProgress', assignedAt: '2026-06-10T15:59:00Z' },
+    ]);
+    assert.ok(!('assignments' in spaceOf(plan, 'committee-food-safety')));
+    assert.deepEqual(spaceOf(plan, 'committee-food-safety').tasks, ['TK1']);
+    assert.ok(spaceOf(plan, 'staff-events-comms'));
+    // Staff are users, never people: no person on their seats, none in the member users.
+    assert.ok(plan.spaces.flatMap((s) => s.seats).filter((x) => x.staff).every((x) => !x.person));
+    assert.ok(!users.some((u) => u.email.endsWith('@morecheese.example')));
+    assert.deepEqual(plan.staff.map((s) => s.key), STAFF.map((s) => s.key));
+    const files = renderFiles(plan, users, staff);
+    const staffUsers = JSON.parse(files['config/users/.staff-users.json']);
+    assert.equal(staffUsers.length, 6);
+    assert.equal(staffUsers[0].fields.Title, 'Title 0');
+    assert.equal(staffUsers[0].fields.Name, 'S0 ashdown');
+    const roles = JSON.parse(files['config/user-roles/.staff-user-roles.json']);
+    assert.deepEqual(roles.map((r) => r.fields.UserID), staffUsers.map((u) => u.primaryKey.ID));
+});
+
+test('staff teams: a team that starts before a seated staffer joined is refused; no roster, no teams', () => {
+    const late = STAFF.map((s) => (s.key === 'tsai' ? { ...s, since: 2023 } : s));
+    assert.throws(() => buildPlan(loadWorld(world({ staff: late }))), /starts 2021-03-01, before tsai joined/);
+    const { plan, users } = buildPlan(loadWorld(world()));
+    assert.ok(!plan.spaces.some((s) => s.staff || s.type === 'team' || s.type === 'workspace'));
+    assert.ok(!('config/users/.staff-users.json' in renderFiles(plan, users)));
 });

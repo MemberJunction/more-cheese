@@ -403,15 +403,24 @@ Email From/To use role mailboxes: `comms@`, `membership.ops@`, `events@`, `educa
 This is genuinely realistic for a mid-sized association — internal mail to shared functional
 mailboxes is normal — so the fallback is not a visible compromise.
 
-### 5.2 PROPOSED — requires Amith's approval before use
+### 5.2 Named staff roster — approved for collaboration Spaces only; content stays role-only
 
-**Do not use these names in any artifact until this section is marked approved. Do not add this
-roster to `data/`.** Named staff make internal comms dramatically better (a thread between two
-named people reads real; a thread between two mailboxes reads like a template), so this is worth a
-decision. Proposed roster — six people, deliberately small, no overlap with the 16 member heroes
-and no overlap with any name in `generated/people` (checked at approval time):
+**Status.** Amith approved the roster for the staff users and staff team spaces on 2026-10-29.
+**Content is not approved:** every artifact under `content/` and `vault/` keeps the §5.1 role
+bylines and role mailboxes, and every content skill treats this section as *not approved* until
+this line says otherwise. The 388 backfilled internal weeks are role-only, and switching mid-corpus
+needs its own decision (regenerate them, or name staff from a cut-over date).
 
-| Role | Proposed name | Mailbox | Tenure | Voice |
+**Where the roster lives.** World model §2.1 (`plans/more-cheese-world-model-and-personas.md`), with
+`data/spaces/staff.json` as its machine-readable copy for `scripts/build-spaces-plan.mjs`. Staff are
+MJ sign-in users only (`config/users/.staff-users.json`): no Person record, membership, orders or
+committee seats.
+
+Six people, deliberately small, no overlap with the 16 member heroes. At approval no full name
+matched `generated/people`; two surnames do (Oyelaran ×2, Castellanos ×2), which is unremarkable at
+3,279 people.
+
+| Role | Name | Mailbox | Tenure | Voice |
 |---|---|---|---|---|
 | Chief Executive Officer | Marguerite Ashdown | `m.ashdown@morecheese.example` | 2016- | Measured, asks for the second-order effect, writes short. |
 | VP, Membership | Desmond Oyelaran | `d.oyelaran@morecheese.example` | 2018- | Numbers-first, allergic to vague retention language. |
@@ -420,13 +429,13 @@ and no overlap with any name in `generated/people` (checked at approval time):
 | Membership Operations Analyst | Wei-Lin Tsai | `w.tsai@morecheese.example` | 2021- | Careful, flags data-quality caveats before anyone asks. |
 | Communications Manager | Noor Rahimi | `n.rahimi@morecheese.example` | 2020- | Writes the blog; chases numbers on Thursdays. |
 
-Notes for the approval decision:
-- Tenure start dates matter. Only Ashdown and Castellanos exist for a 2019 artifact; Rahimi and
-  Tsai must not appear before 2020 and 2021. A 2019 email thread stays role-only either way.
-- If approved, these belong in the world model (`plans/…world-model-and-personas.md` §2 as a staff
-  table), **not** in `data/ruleset/heroes.json` — they are not simulated members and must not get
-  membership periods, orders, or committee seats.
-- If rejected, the role-only fallback in §5.1 stands and nothing else in this design changes.
+Rules that come with the roster:
+- Tenure start dates matter. Halloway does not exist before 2019, Rahimi before 2020, Tsai before
+  2021. The staff team spaces start 2021-03-01, once all six are on staff, and the plan builder
+  refuses a team that starts before one of its staff joined.
+- Not in `data/ruleset/heroes.json`: staff are not simulated members and must not get membership
+  periods, orders, or committee seats.
+- In staff team chats, staff name each other but never a member (the chat generator checks it).
 
 ---
 
@@ -498,7 +507,7 @@ after the rendered header block, before the message body.
    competition categories, eras, motifs, ladders, heroes, or member organizations. If a piece needs
    one that does not exist, change the piece or report the gap.
 8. **No heroes out of period, and no contradiction of an arc** (§4.3).
-9. **No named ICF staff** until §5.2 is approved.
+9. **No named ICF staff** in content: §5.2 is approved for collaboration Spaces only.
 10. **No `@morecheese.org` email addresses** anywhere in the corpus — use `.example`.
 11. **No batching across periods.** One week, one year, or one release per invocation.
 12. **No writes outside `content/` and `vault/`.** `data/`, `generated/`, `config/`,
@@ -602,7 +611,7 @@ Re-run Appendix A before writing; these are a smoke test, not a substitute.
 |---|---|---|---|
 | 1 | **Hero arcs contradict `generated/`.** The blog skill's §3 says Elena Rodriguez "chairs the Standards Committee" and Gwen Whitfield climbs to "board chair". `generated/committee-memberships` has Elena as a Standards Committee **Member** (2023-24, 2025-26) and Gwen on **Food Safety** — Member 2023-24, Chair 2025-26. There is no board entity at all; there are six committees. Per world-model §5.1 the committed dataset is the source of truth. | Any artifact naming a chair will contradict either the data or the blog corpus. | This design follows `generated/`. The blog skill's prose should be corrected — flagged, not edited, per the read-only rule. |
 | 2 | **Disclaimer wording.** The mandated paragraph says "This post". Reused verbatim in an annual report it reads oddly. | Verbatim reuse was an explicit instruction; a variant needs sign-off. | Verbatim everywhere, as written in §6.1. |
-| 3 | **Named staff roster (§5.2).** | Internal comms are markedly better with named senders; role-only is the safe fallback. | Role-only bylines. |
+| 3 | **Named staff roster (§5.2).** | Internal comms are markedly better with named senders; role-only is the safe fallback. | **Resolved 2026-10-29:** approved for Spaces; content stays role-only until a cut-over is chosen. |
 | 4 | **Volume and budget.** ~2,200 artifacts for 2019-2025 (§4.1). Vision-plan open question 5 already flags model-tier and cost. | Someone must approve the spend and the tranche plan before any bulk run. | No bulk runs. Samples only. |
 | 5 | **Dropbox sync mechanism.** Is `vault/internal/` git-tracked and pushed by CI, or generated to a working copy and uploaded manually? Does the binary render step (§2.4) run at seed time? | Determines whether `vault/` belongs in `.gitignore`. | `vault/` is git-tracked, text-only, uploaded manually. |
 | 6 | **Public committee minutes.** All six committees are `IsPublic: true`, and `committee-motions`/`committee-votes` exist, so minutes are generatable back to 2015 — earlier than the 2019 era floor. | Pre-2019 content has no era and no commerce data behind it. | Minutes generated for 2019-2025 only. |

@@ -2,11 +2,15 @@
 /**
  * build-spaces-plan.mjs — the collaboration Spaces for More Cheese, computed from the committed generated/.
  *
- * Writes three files, all deterministic (same generated/ in, same bytes out):
+ * Writes five files, all deterministic (same generated/ and data/spaces/staff.json in, same bytes out):
  *   data/spaces/spaces.plan.json         — every space: type, parent, dates, owner, seats, anchors
  *   config/users/.space-users.json       — an MJ User for every person seated in any space
  *   config/user-roles/.space-user-roles.json — the UI role for each of those users
- * Each committee space also lists its committee's action items (generated/tasks) to file into its Work tab.
+ *   config/users/.staff-users.json       — an MJ User for each ICF staffer (data/spaces/staff.json)
+ *   config/user-roles/.staff-user-roles.json — their UI role
+ * Each committee space also lists its committee's action items (generated/tasks) to file into its Work tab, and
+ * the staff Membership Team lists the renewal-outreach tasks with the staffer each one is assigned to.
+ * A user's Name is the person's full name, which is what chats and seat lists show; sign-in matches on Email.
  *
  * The users push with the rest of config/. The spaces do not: collaboration only lets a space's owner
  * create it and seat people, so scripts/load-spaces.mjs replays the plan as each owner.
@@ -16,9 +20,10 @@
  *                seated from committee memberships (current seats Active, ended seats Removed)
  *   chapters   — regional community spaces from member Region/Country, with a few sealed child groups
  *   work groups — working-group / project / event spaces tied to the era storylines
- * Staff teams are left out until VAULT-DESIGN §5.2 (named staff) is approved.
+ *   staff teams — the six ICF staff (VAULT-DESIGN §5.2, approved for Spaces 2026-10-29). Staff are sign-in users
+ *                only, never People: they get no membership, orders or committee seats.
  *
- *   node scripts/build-spaces-plan.mjs           # write the three files
+ *   node scripts/build-spaces-plan.mjs           # write the five files
  *   node scripts/build-spaces-plan.mjs --check   # exit 1 if any file is out of date
  *
  * Plain Node, no dependencies. Run from the repo root.
@@ -34,6 +39,9 @@ export const PRESENTER = 'demo.user@morecheese.org';
 const PLAN_FILE = 'data/spaces/spaces.plan.json';
 const USERS_FILE = 'config/users/.space-users.json';
 const ROLES_FILE = 'config/user-roles/.space-user-roles.json';
+const STAFF_FILE = 'data/spaces/staff.json';
+const STAFF_USERS_FILE = 'config/users/.staff-users.json';
+const STAFF_ROLES_FILE = 'config/user-roles/.staff-user-roles.json';
 const COMMITTEES_ENTITY = 'Committees: Committees';
 const PEOPLE_ENTITY = 'MJ_BizApps_Common: People';
 
@@ -106,7 +114,9 @@ export function loadWorld(root) {
     const advocacy = load(root, 'advocacy-actions').map((r) => ({ person: up(r.fields.PersonID), topic: r.fields.Topic ?? '', date: day(r.fields.ActionDate) }));
     const tasks = load(root, 'tasks').map(flat);
     const heroes = JSON.parse(fs.readFileSync(path.join(root, 'data', 'ruleset', 'heroes.json'), 'utf8')).heroes;
-    return { asOf, people, profiles, committees, terms, memberships, purchases, activity, advocacy, tasks, heroes };
+    const staffFile = path.join(root, STAFF_FILE);
+    const staff = fs.existsSync(staffFile) ? JSON.parse(fs.readFileSync(staffFile, 'utf8')).staff : [];
+    return { asOf, people, profiles, committees, terms, memberships, purchases, activity, advocacy, tasks, heroes, staff };
 }
 
 // ---------- who is who ----------
@@ -216,6 +226,23 @@ const WORK_GROUPS = [
         description: 'Entries, judging panels and results for the 2026 ICF cheese competition.' },
 ];
 
+/**
+ * Staff teams: the whole staff as a workspace (collaboration lets a team sit only under a workspace, project or
+ * working group), and two sealed teams under it. They start once every seated staffer is on staff
+ * (Tsai joined in 2021), so no seat or message predates its owner's tenure.
+ */
+const STAFF_TEAMS = [
+    { key: 'staff', type: 'workspace', name: 'ICF Staff', startedAt: '2021-03-01', owner: 'ashdown', admins: ['oyelaran'],
+        members: ['castellanos', 'halloway', 'rahimi', 'tsai'], presenter: 'member',
+        description: 'The whole ICF staff: the Monday check-in, who is out, deadlines that cross teams and decisions that need the CEO.' },
+    { key: 'staff-membership', type: 'team', parent: 'staff', name: 'Membership Team', startedAt: '2021-03-01', owner: 'oyelaran', admins: ['tsai'],
+        members: ['rahimi'], presenter: 'admin', tasks: /^Renewal outreach — /, assignees: ['tsai', 'oyelaran'],
+        description: 'Renewals and the outreach queue, dues questions, lapsed-member win-backs and the monthly membership numbers.' },
+    { key: 'staff-events-comms', type: 'team', parent: 'staff', name: 'Events & Communications', startedAt: '2021-03-01', owner: 'castellanos', admins: ['halloway'],
+        members: ['rahimi'], presenter: 'member',
+        description: 'The conference, the competition and chapter events, and the blog, newsletter and press calendar that promote them.' },
+];
+
 const PRESENTER_SEATS = { 'committee-food-safety': 'admin', 'chapter-california': 'admin' };
 
 // ---------- build ----------
@@ -241,6 +268,7 @@ export function buildPlan(w) {
             key: s.key,
             id: id(`space:${s.key}`),
             type: s.type,
+            ...(s.staff ? { staff: true } : {}),
             parent: s.parent ?? null,
             name: s.name,
             description: s.description,
@@ -248,10 +276,11 @@ export function buildPlan(w) {
             startedAt: s.startedAt,
             plannedCloseAt: s.plannedCloseAt ?? null,
             closedAt: s.closedAt ?? null,
-            owner: s.seats.find((x) => x.role === 'owner').person,
+            owner: s.seats.find((x) => x.role === 'owner').person ?? s.seats.find((x) => x.role === 'owner').user,
             seats: s.seats,
             anchors: s.anchors ?? [],
             tasks: s.tasks ?? [],
+            ...(s.assignments ? { assignments: s.assignments } : {}),
         };
         addPresenter(out, PRESENTER_SEATS[s.key] ?? s.presenter);
         spaces.push(out);
@@ -371,6 +400,31 @@ export function buildPlan(w) {
         });
     }
 
+    // Staff teams: seated by staff key; the Membership Team files the renewal-outreach tasks and deals them out to its
+    // assignees in turn. Staff are not People, so each assignment names the staffer's MJ User.
+    const ASSIGNMENT_STATUS = { Open: 'Pending', InProgress: 'InProgress', Completed: 'Completed' };
+    const staffer = new Map((w.staff ?? []).map((s) => [s.key, s]));
+    for (const t of STAFF_TEAMS) {
+        const keys = [t.owner, ...t.admins, ...t.members];
+        if (!keys.every((k) => staffer.has(k))) continue;
+        const late = keys.filter((k) => staffer.get(k).since > Number(t.startedAt.slice(0, 4)));
+        if (late.length) throw new Error(`staff team ${t.key} starts ${t.startedAt}, before ${late.join(', ')} joined the staff`);
+        const role = (k) => (k === t.owner ? 'owner' : t.admins.includes(k) ? 'admin' : 'member');
+        const tasks = t.tasks ? (w.tasks ?? []).filter((x) => t.tasks.test(x.Name ?? '')).sort((a, b) => (a.id < b.id ? -1 : 1)) : [];
+        const assignees = (t.assignees ?? []).map((k) => staffer.get(k)?.email).filter(Boolean);
+        space({
+            key: t.key, type: t.type, staff: true, parent: t.parent, sealed: !!t.parent, name: t.name, description: t.description,
+            startedAt: t.startedAt, presenter: t.presenter,
+            seats: keys.map((k) => ({ user: staffer.get(k).email, staff: k, role: role(k), status: 'Active' })),
+            tasks: tasks.map((x) => x.id),
+            assignments: assignees.length ? tasks.map((x, i) => ({
+                task: x.id, user: assignees[i % assignees.length], status: ASSIGNMENT_STATUS[x.Status] ?? 'Pending',
+                // Not started yet: handed out a month before it falls due, when the team starts talking about the queue.
+                assignedAt: x.StartedAt ?? (x.DueAt ? new Date(Date.parse(x.DueAt) - 30 * 86400000).toISOString() : null),
+            })) : undefined,
+        });
+    }
+
     // Users: everyone seated anywhere, keyed by person so the ids survive regeneration.
     const users = [...seated].map((pid) => {
         const p = ix.person.get(pid);
@@ -378,7 +432,7 @@ export function buildPlan(w) {
     }).sort((a, b) => (a.email < b.email ? -1 : 1));
     const emailOf = new Map(users.map((u) => [u.person, u.email]));
     for (const s of spaces) {
-        s.owner = emailOf.get(s.owner);
+        s.owner = emailOf.get(s.owner) ?? s.owner;
         s.seats = s.seats.map((x) => (x.user ? x : { user: emailOf.get(x.person), person: x.person, role: x.role, status: x.status }));
     }
     return {
@@ -388,19 +442,35 @@ export function buildPlan(w) {
             generatedBy: 'scripts/build-spaces-plan.mjs',
             presenter: PRESENTER,
             peopleEntity: PEOPLE_ENTITY,
+            staff: (w.staff ?? []).map((s) => ({ key: s.key, user: s.email, name: `${s.firstName} ${s.lastName}`, title: s.title, since: s.since, voice: s.voice })),
             spaces,
         },
         users,
+        staff: w.staff ?? [],
     };
 }
 
-export function renderFiles(plan, users) {
+export function renderFiles(plan, users, staff = []) {
     const json = (v) => JSON.stringify(v, null, 2) + '\n';
+    const staffFiles = staff.length ? {
+        [STAFF_USERS_FILE]: json(staff.map((s) => ({
+            fields: {
+                Name: `${s.firstName} ${s.lastName}`, FirstName: s.firstName, LastName: s.lastName, Title: s.title, Email: s.email,
+                Type: 'User', IsActive: true, LinkedRecordType: 'None',
+            },
+            primaryKey: { ID: id(`staff-user:${s.key}`) },
+        }))),
+        [STAFF_ROLES_FILE]: json(staff.map((s) => ({
+            fields: { UserID: id(`staff-user:${s.key}`), RoleID: '@lookup:MJ: Roles.Name=UI' },
+            primaryKey: { ID: id(`staff-user-role:ui:${s.key}`) },
+        }))),
+    } : {};
     return {
+        ...staffFiles,
         [PLAN_FILE]: json(plan),
         [USERS_FILE]: json(users.map((u) => ({
             fields: {
-                Name: u.email, FirstName: u.firstName, LastName: u.lastName, Email: u.email,
+                Name: `${u.firstName} ${u.lastName}`, FirstName: u.firstName, LastName: u.lastName, Email: u.email,
                 Type: 'User', IsActive: true, LinkedRecordType: 'None',
             },
             primaryKey: { ID: u.id },
@@ -414,8 +484,8 @@ export function renderFiles(plan, users) {
 
 function main(argv) {
     const root = process.cwd();
-    const { plan, users } = buildPlan(loadWorld(root));
-    const files = renderFiles(plan, users);
+    const { plan, users, staff } = buildPlan(loadWorld(root));
+    const files = renderFiles(plan, users, staff);
     if (argv.includes('--check')) {
         // A push writes its own `sync` bookkeeping back into the record files; that is not drift.
         const unsynced = (text) => JSON.stringify(JSON.parse(text), (k, v) => (k === 'sync' ? undefined : v));
@@ -433,7 +503,7 @@ function main(argv) {
     }
     const seats = plan.spaces.reduce((n, s) => n + s.seats.length, 0);
     const byType = plan.spaces.reduce((m, s) => ((m[s.type] = (m[s.type] ?? 0) + 1), m), {});
-    console.log(`${plan.spaces.length} spaces (${Object.entries(byType).map(([k, v]) => `${v} ${k}`).join(', ')}), ${seats} seats, ${users.length} users`);
+    console.log(`${plan.spaces.length} spaces (${Object.entries(byType).map(([k, v]) => `${v} ${k}`).join(', ')}), ${seats} seats, ${users.length} users, ${staff.length} staff`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) main(process.argv.slice(2));

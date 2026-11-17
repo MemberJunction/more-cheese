@@ -9,7 +9,8 @@
  *   2. every other seat by the space's owner; an invitation by one of the space's admins; a removed seat is
  *      saved Active by the owner and then removed by the owner
  *   3. anchors (a committee space on its Committees record) by the space's owner
- *   4. a committee's action items filed into its space (the item by the owner, the task link by System)
+ *   4. tasks filed into their space — a committee's action items, the staff Membership Team's renewal outreach
+ *      (the item by the owner, the task link by System)
  *   5. chats from data/spaces/chats/<key>.json: started by the owner, each message posted by its author
  *   6. closes, each its own save, dated from the plan (after the content: a closed space takes nothing new)
  *   7. links each seated Person to their User (Person.LinkedUserID), as System
@@ -46,6 +47,9 @@ const ENTITY = {
     items: 'MJ_BizApps_Collaboration: Space Items',
     tasks: 'MJ_BizApps_Tasks: Tasks',
     taskLinks: 'MJ_BizApps_Tasks: Task Links',
+    taskAssignments: 'MJ_BizApps_Tasks: Task Assignments',
+    taskRoles: 'MJ_BizApps_Tasks: Task Roles',
+    users: 'MJ: Users',
 };
 const COLLAB_SCHEMA = '__mj_BizAppsCollaboration';
 
@@ -158,7 +162,7 @@ export async function load(opts) {
     const existingSpaces = new Set((await run(ENTITY.spaces, '', ['ID'])).map((r) => r.ID.toUpperCase()));
     const seatsOf = async (spaceId) => new Map((await run(ENTITY.members, `SpaceID = '${spaceId}'`, ['ID', 'UserID', 'Status'])).map((r) => [r.UserID.toUpperCase(), r]));
     const byKey = new Map(plan.spaces.map((s) => [s.key, s]));
-    const counts = { spaces: 0, seats: 0, removed: 0, invited: 0, anchors: 0, tasks: 0, chats: 0, messages: 0, closed: 0, linked: 0 };
+    const counts = { spaces: 0, seats: 0, removed: 0, invited: 0, anchors: 0, tasks: 0, assignments: 0, chats: 0, messages: 0, closed: 0, linked: 0 };
 
     const seat = async (space, x, saver) => {
         const rec = await md.GetEntityObject(ENTITY.members, user(saver));
@@ -260,7 +264,7 @@ export async function load(opts) {
         }
     }
 
-    // Tasks: a committee's action items filed into its space, as createSpaceTask files a new one — the space item
+    // Tasks: a committee's action items, or a staff team's queue, filed into its space, as createSpaceTask files a new one — the space item
     // by the owner, the task link by System.
     const tasksEntity = md.EntityByName(ENTITY.tasks);
     const spacesEntity = md.EntityByName(ENTITY.spaces);
@@ -287,6 +291,27 @@ export async function load(opts) {
         }
     }
 
+    // Assignments: a staff team's queue, each task to the staffer the plan names, as that staffer's MJ User (staff are
+    // not People). An assignee who already holds the task is left alone.
+    const usersEntity = md.EntityByName(ENTITY.users);
+    const primaryRole = (await run(ENTITY.taskRoles, `Name = 'Primary'`, ['ID']))[0]?.ID ?? null;
+    for (const s of plan.spaces.filter((x) => x.assignments?.length)) {
+        for (const a of s.assignments) {
+            const assignee = user(a.user);
+            if ((await run(ENTITY.taskAssignments, `TaskID = '${a.task}' AND AssigneeEntityID = '${usersEntity.ID}' AND AssigneeRecordID = '${assignee.ID}'`, ['ID'])).length) continue;
+            const rec = await md.GetEntityObject(ENTITY.taskAssignments, system);
+            rec.NewRecord();
+            rec.TaskID = a.task;
+            rec.AssigneeEntityID = usersEntity.ID;
+            rec.AssigneeRecordID = assignee.ID;
+            rec.RoleID = primaryRole;
+            rec.Status = a.status;
+            if (a.assignedAt) rec.AssignedAt = new Date(a.assignedAt);
+            await save(rec, `assign task ${a.task} to ${a.user}`);
+            counts.assignments++;
+        }
+    }
+
     // Chats: data/spaces/chats/<key>.json, the conversation started by the owner and each message posted by its
     // author, then dated as the file says. A chat that already exists is left alone.
     const chatDir = path.join(path.dirname(opts.plan), 'chats');
@@ -309,7 +334,7 @@ export async function load(opts) {
         counts.chats++;
         counts.messages += posted.length;
     }
-    log(`tasks filed: ${counts.tasks}; chats: ${counts.chats} with ${counts.messages} messages`);
+    log(`tasks filed: ${counts.tasks}, assigned: ${counts.assignments}; chats: ${counts.chats} with ${counts.messages} messages`);
 
     // Closes: their own save, by the owner, with the plan's date. They come after the content, because a closed
     // space takes no new seats, chats or messages.

@@ -4,6 +4,56 @@
   "generatedBy": "scripts/build-spaces-plan.mjs",
   "presenter": "demo.user@morecheese.org",
   "peopleEntity": "MJ_BizApps_Common: People",
+  "staff": [
+    {
+      "key": "ashdown",
+      "user": "m.ashdown@morecheese.example",
+      "name": "Marguerite Ashdown",
+      "title": "Chief Executive Officer",
+      "since": 2016,
+      "voice": "Measured, asks for the second-order effect, writes short."
+    },
+    {
+      "key": "oyelaran",
+      "user": "d.oyelaran@morecheese.example",
+      "name": "Desmond Oyelaran",
+      "title": "VP, Membership",
+      "since": 2018,
+      "voice": "Numbers-first, allergic to vague retention language."
+    },
+    {
+      "key": "halloway",
+      "user": "i.halloway@morecheese.example",
+      "name": "Ingrid Halloway",
+      "title": "VP, Marketing",
+      "since": 2019,
+      "voice": "Pushes for earlier deadlines; the one who asks \"can we say that?\""
+    },
+    {
+      "key": "castellanos",
+      "user": "r.castellanos@morecheese.example",
+      "name": "Ruben Castellanos",
+      "title": "Events Director",
+      "since": 2017,
+      "voice": "Logistics brain, dry, tracks everything in a spreadsheet."
+    },
+    {
+      "key": "tsai",
+      "user": "w.tsai@morecheese.example",
+      "name": "Wei-Lin Tsai",
+      "title": "Membership Operations Analyst",
+      "since": 2021,
+      "voice": "Careful, flags data-quality caveats before anyone asks."
+    },
+    {
+      "key": "rahimi",
+      "user": "n.rahimi@morecheese.example",
+      "name": "Noor Rahimi",
+      "title": "Communications Manager",
+      "since": 2020,
+      "voice": "Writes the blog; chases numbers on Thursdays."
+    }
+  ],
   "spaces": [
     {
       "key": "committee-awards-and-competition",
@@ -5897,6 +5947,500 @@
         {
           "user": "esteban.maldonado.101968@vandermolenfarmstead.example",
           "person": "6C1CB3ED-1141-55EE-A205-F9A1499016C6",
+          "role": "member",
+          "status": "Active"
+        }
+      ],
+      "anchors": [],
+      "tasks": []
+    },
+    {
+      "key": "staff",
+      "id": "413029E0-ECD5-53C7-BC92-1B8F9C9414A5",
+      "type": "workspace",
+      "staff": true,
+      "parent": null,
+      "name": "ICF Staff",
+      "description": "The whole ICF staff: the Monday check-in, who is out, deadlines that cross teams and decisions that need the CEO.",
+      "sealed": false,
+      "startedAt": "2021-03-01",
+      "plannedCloseAt": null,
+      "closedAt": null,
+      "owner": "m.ashdown@morecheese.example",
+      "seats": [
+        {
+          "user": "m.ashdown@morecheese.example",
+          "staff": "ashdown",
+          "role": "owner",
+          "status": "Active"
+        },
+        {
+          "user": "d.oyelaran@morecheese.example",
+          "staff": "oyelaran",
+          "role": "admin",
+          "status": "Active"
+        },
+        {
+          "user": "r.castellanos@morecheese.example",
+          "staff": "castellanos",
+          "role": "member",
+          "status": "Active"
+        },
+        {
+          "user": "i.halloway@morecheese.example",
+          "staff": "halloway",
+          "role": "member",
+          "status": "Active"
+        },
+        {
+          "user": "n.rahimi@morecheese.example",
+          "staff": "rahimi",
+          "role": "member",
+          "status": "Active"
+        },
+        {
+          "user": "w.tsai@morecheese.example",
+          "staff": "tsai",
+          "role": "member",
+          "status": "Active"
+        },
+        {
+          "user": "demo.user@morecheese.org",
+          "role": "member",
+          "status": "Active"
+        }
+      ],
+      "anchors": [],
+      "tasks": []
+    },
+    {
+      "key": "staff-membership",
+      "id": "C3B21EBB-BCC8-5008-B754-B057F05B414F",
+      "type": "team",
+      "staff": true,
+      "parent": "staff",
+      "name": "Membership Team",
+      "description": "Renewals and the outreach queue, dues questions, lapsed-member win-backs and the monthly membership numbers.",
+      "sealed": true,
+      "startedAt": "2021-03-01",
+      "plannedCloseAt": null,
+      "closedAt": null,
+      "owner": "d.oyelaran@morecheese.example",
+      "seats": [
+        {
+          "user": "d.oyelaran@morecheese.example",
+          "staff": "oyelaran",
+          "role": "owner",
+          "status": "Active"
+        },
+        {
+          "user": "w.tsai@morecheese.example",
+          "staff": "tsai",
+          "role": "admin",
+          "status": "Active"
+        },
+        {
+          "user": "n.rahimi@morecheese.example",
+          "staff": "rahimi",
+          "role": "member",
+          "status": "Active"
+        },
+        {
+          "user": "demo.user@morecheese.org",
+          "role": "admin",
+          "status": "Active"
+        }
+      ],
+      "anchors": [],
+      "tasks": [
+        "0654D510-B113-541A-A169-4B23079C8C5E",
+        "0779591F-60B6-5C9D-85D5-C24555FB9B70",
+        "186E6721-68C0-5DDC-AD89-9D21D33A0AA5",
+        "1E19772D-9241-5E52-A0A3-62936A2474EA",
+        "24F8025A-2A6E-515F-8304-7CB995A991E9",
+        "2C0A83A5-10BE-59B4-A79C-010F9BAB3BD4",
+        "2E297300-8DB1-5999-B459-8478044274B7",
+        "3245C2D4-2850-59A7-AD2E-CCBBF7176848",
+        "33468206-5B5A-534A-928E-53E3A9E3B6A5",
+        "33E80CAE-1197-5DA5-A5FF-27F902110290",
+        "3456799C-DC77-5358-B573-119C6FEE5FED",
+        "37608288-0506-5C98-9774-795EB17E6232",
+        "3A4AF38D-251D-5146-B035-35904D301678",
+        "42903146-16C2-512D-AB5B-67FFD75782F1",
+        "46B4ED01-8F15-56A7-8334-CE709E705109",
+        "539CEC08-7F34-53CF-935B-293BC2B25585",
+        "59207C95-706F-56A7-92A4-F20774132E58",
+        "5C363228-0064-5BC4-BA3F-E461CC8FA8A3",
+        "5CFBBB30-EF71-5AC4-9432-260974908CAF",
+        "6008D34D-6A2E-5392-9B13-BE5FE2EF9C16",
+        "63F6D07A-C83D-5938-84ED-F9F5A488474F",
+        "658D321C-F3A6-56CA-914A-3A21705E465B",
+        "68110C2F-4B4D-5B33-A4E1-457EE812C90D",
+        "783D9175-B4F2-54A0-A83F-600A45991882",
+        "7D091880-47BD-577F-8887-47B0AE423823",
+        "8548C199-62A4-557F-9022-B21DFF99BD36",
+        "8E959DDA-0504-5FBB-8F95-01EB799574E5",
+        "92FEFDDD-889D-5E76-A563-98CA574D1C23",
+        "98AFFA38-B69C-5211-A7D1-5AE3A3D9F891",
+        "9D065B73-675F-5825-A56A-D3E0BDE39D9E",
+        "A845E3D1-CC2D-5E86-8FF7-0EFB6D0E7A98",
+        "A977335F-EBC0-5D5C-8468-C286BAE38920",
+        "B147158C-5DAC-5EB0-8847-DB9CD6C4BCE9",
+        "B19F0733-EF1C-55F1-BD85-4CF9D65B9EE5",
+        "B36AC43C-6E1F-5AC7-9E55-9EB51A69FBB1",
+        "B6CE72A6-C3E3-5EA0-9EE9-CC6698D48856",
+        "B7EC7E27-0FC3-54C1-A312-63CB4074E5A8",
+        "B836A153-733B-5312-BE0B-B5833127225F",
+        "BCA67D6E-9D92-5698-A391-A88C05857708",
+        "BCD01E8F-D1BE-5F79-AF32-9BEA241CDAEA",
+        "D5F830D4-7CAB-5820-A442-07AEDA90DBEF",
+        "D6EA2994-9E78-5708-A565-DCA14BDB990C",
+        "D7B0553D-02A7-5641-BA85-C2289835C3E3",
+        "DBBBF4EB-6511-5AA6-A106-1708FEF2C6A2",
+        "DBEFBA09-3E7E-56AB-A139-94298639C695",
+        "DC4B5D75-1431-5C3D-B812-74A4CF4753E1",
+        "ECC011FA-72A3-5DBC-ABC4-F4462F1DD08A",
+        "F8814C90-612A-5D4D-8F24-24479C7AC5AD",
+        "F97A947F-0A2E-530D-888D-D034CDE98AB7",
+        "FB9E4E52-B10A-5D7F-BF65-07A54270CEFD"
+      ],
+      "assignments": [
+        {
+          "task": "0654D510-B113-541A-A169-4B23079C8C5E",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-05-21T09:35:00Z"
+        },
+        {
+          "task": "0779591F-60B6-5C9D-85D5-C24555FB9B70",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-30T13:08:00Z"
+        },
+        {
+          "task": "186E6721-68C0-5DDC-AD89-9D21D33A0AA5",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-26T14:30:00.000Z"
+        },
+        {
+          "task": "1E19772D-9241-5E52-A0A3-62936A2474EA",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-21T15:10:00Z"
+        },
+        {
+          "task": "24F8025A-2A6E-515F-8304-7CB995A991E9",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-11T14:09:00.000Z"
+        },
+        {
+          "task": "2C0A83A5-10BE-59B4-A79C-010F9BAB3BD4",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-21T16:09:00Z"
+        },
+        {
+          "task": "2E297300-8DB1-5999-B459-8478044274B7",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-20T10:58:00.000Z"
+        },
+        {
+          "task": "3245C2D4-2850-59A7-AD2E-CCBBF7176848",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-10T08:10:00.000Z"
+        },
+        {
+          "task": "33468206-5B5A-534A-928E-53E3A9E3B6A5",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-25T09:18:00Z"
+        },
+        {
+          "task": "33E80CAE-1197-5DA5-A5FF-27F902110290",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-02T08:24:00.000Z"
+        },
+        {
+          "task": "3456799C-DC77-5358-B573-119C6FEE5FED",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-29T11:57:00Z"
+        },
+        {
+          "task": "37608288-0506-5C98-9774-795EB17E6232",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-31T15:18:00Z"
+        },
+        {
+          "task": "3A4AF38D-251D-5146-B035-35904D301678",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-25T13:23:00Z"
+        },
+        {
+          "task": "42903146-16C2-512D-AB5B-67FFD75782F1",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-02T09:31:00.000Z"
+        },
+        {
+          "task": "46B4ED01-8F15-56A7-8334-CE709E705109",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-13T10:08:00Z"
+        },
+        {
+          "task": "539CEC08-7F34-53CF-935B-293BC2B25585",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-13T11:27:00.000Z"
+        },
+        {
+          "task": "59207C95-706F-56A7-92A4-F20774132E58",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-19T14:16:00.000Z"
+        },
+        {
+          "task": "5C363228-0064-5BC4-BA3F-E461CC8FA8A3",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-15T13:23:00.000Z"
+        },
+        {
+          "task": "5CFBBB30-EF71-5AC4-9432-260974908CAF",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-12T11:37:00.000Z"
+        },
+        {
+          "task": "6008D34D-6A2E-5392-9B13-BE5FE2EF9C16",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-28T08:11:00.000Z"
+        },
+        {
+          "task": "63F6D07A-C83D-5938-84ED-F9F5A488474F",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-07T16:36:00Z"
+        },
+        {
+          "task": "658D321C-F3A6-56CA-914A-3A21705E465B",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-28T11:26:00Z"
+        },
+        {
+          "task": "68110C2F-4B4D-5B33-A4E1-457EE812C90D",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-26T16:39:00.000Z"
+        },
+        {
+          "task": "783D9175-B4F2-54A0-A83F-600A45991882",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-23T08:38:00.000Z"
+        },
+        {
+          "task": "7D091880-47BD-577F-8887-47B0AE423823",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-11T17:27:00.000Z"
+        },
+        {
+          "task": "8548C199-62A4-557F-9022-B21DFF99BD36",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-09T12:46:00.000Z"
+        },
+        {
+          "task": "8E959DDA-0504-5FBB-8F95-01EB799574E5",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-10T15:59:00Z"
+        },
+        {
+          "task": "92FEFDDD-889D-5E76-A563-98CA574D1C23",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-17T16:07:00Z"
+        },
+        {
+          "task": "98AFFA38-B69C-5211-A7D1-5AE3A3D9F891",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-29T10:49:00.000Z"
+        },
+        {
+          "task": "9D065B73-675F-5825-A56A-D3E0BDE39D9E",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-02T10:00:00.000Z"
+        },
+        {
+          "task": "A845E3D1-CC2D-5E86-8FF7-0EFB6D0E7A98",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-23T15:21:00Z"
+        },
+        {
+          "task": "A977335F-EBC0-5D5C-8468-C286BAE38920",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-31T16:43:00Z"
+        },
+        {
+          "task": "B147158C-5DAC-5EB0-8847-DB9CD6C4BCE9",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-20T12:06:00Z"
+        },
+        {
+          "task": "B19F0733-EF1C-55F1-BD85-4CF9D65B9EE5",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-13T14:20:00Z"
+        },
+        {
+          "task": "B36AC43C-6E1F-5AC7-9E55-9EB51A69FBB1",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-22T11:53:00.000Z"
+        },
+        {
+          "task": "B6CE72A6-C3E3-5EA0-9EE9-CC6698D48856",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-23T10:19:00.000Z"
+        },
+        {
+          "task": "B7EC7E27-0FC3-54C1-A312-63CB4074E5A8",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-12T12:38:00Z"
+        },
+        {
+          "task": "B836A153-733B-5312-BE0B-B5833127225F",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-08T11:46:00.000Z"
+        },
+        {
+          "task": "BCA67D6E-9D92-5698-A391-A88C05857708",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-08T15:25:00.000Z"
+        },
+        {
+          "task": "BCD01E8F-D1BE-5F79-AF32-9BEA241CDAEA",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-10T14:44:00.000Z"
+        },
+        {
+          "task": "D5F830D4-7CAB-5820-A442-07AEDA90DBEF",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-05-25T16:51:00Z"
+        },
+        {
+          "task": "D6EA2994-9E78-5708-A565-DCA14BDB990C",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-12T14:33:00Z"
+        },
+        {
+          "task": "D7B0553D-02A7-5641-BA85-C2289835C3E3",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-18T12:21:00Z"
+        },
+        {
+          "task": "DBBBF4EB-6511-5AA6-A106-1708FEF2C6A2",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-12T09:30:00.000Z"
+        },
+        {
+          "task": "DBEFBA09-3E7E-56AB-A139-94298639C695",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-14T15:49:00Z"
+        },
+        {
+          "task": "DC4B5D75-1431-5C3D-B812-74A4CF4753E1",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-19T12:33:00.000Z"
+        },
+        {
+          "task": "ECC011FA-72A3-5DBC-ABC4-F4462F1DD08A",
+          "user": "w.tsai@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-06-29T15:02:00Z"
+        },
+        {
+          "task": "F8814C90-612A-5D4D-8F24-24479C7AC5AD",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "InProgress",
+          "assignedAt": "2026-07-26T11:49:00Z"
+        },
+        {
+          "task": "F97A947F-0A2E-530D-888D-D034CDE98AB7",
+          "user": "w.tsai@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-02T15:15:00.000Z"
+        },
+        {
+          "task": "FB9E4E52-B10A-5D7F-BF65-07A54270CEFD",
+          "user": "d.oyelaran@morecheese.example",
+          "status": "Pending",
+          "assignedAt": "2026-07-15T13:25:00.000Z"
+        }
+      ]
+    },
+    {
+      "key": "staff-events-comms",
+      "id": "C3CE2352-EA02-5F09-9DE1-08DBD94EEA12",
+      "type": "team",
+      "staff": true,
+      "parent": "staff",
+      "name": "Events & Communications",
+      "description": "The conference, the competition and chapter events, and the blog, newsletter and press calendar that promote them.",
+      "sealed": true,
+      "startedAt": "2021-03-01",
+      "plannedCloseAt": null,
+      "closedAt": null,
+      "owner": "r.castellanos@morecheese.example",
+      "seats": [
+        {
+          "user": "r.castellanos@morecheese.example",
+          "staff": "castellanos",
+          "role": "owner",
+          "status": "Active"
+        },
+        {
+          "user": "i.halloway@morecheese.example",
+          "staff": "halloway",
+          "role": "admin",
+          "status": "Active"
+        },
+        {
+          "user": "n.rahimi@morecheese.example",
+          "staff": "rahimi",
+          "role": "member",
+          "status": "Active"
+        },
+        {
+          "user": "demo.user@morecheese.org",
           "role": "member",
           "status": "Active"
         }
