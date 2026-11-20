@@ -61,6 +61,8 @@ export const ENTITY = Object.freeze({
     artifactTypes: 'MJ: Artifact Types',
     environments: 'MJ: Environments',
     users: 'MJ: Users',
+    roles: 'MJ: Roles',
+    userRoles: 'MJ: User Roles',
     people: 'MJ_BizApps_Common: People',
     entities: 'MJ: Entities',
 });
@@ -1218,9 +1220,51 @@ export async function load(opts) {
     };
     const userById = (id, fallback = system) => usersById.get(up(id)) ?? fallback;
 
-    const presenterUser = usersByEmail.get(presenterPlan.presenterEmail);
+    let presenterUser = usersByEmail.get(presenterPlan.presenterEmail);
     if (!presenterUser) {
         throw new Error(`--presenter ${presenterPlan.presenterEmail}: no MJ User has that email (push config/ or clone user first)`);
+    }
+
+    // Grant collaboration/community's 'Space Participant' role to participating ICF users (mirrors load-elections.mjs)
+    const spaceParticipantRole = (await run(ENTITY.roles, `Name = 'Space Participant'`, ['ID', 'Name']))[0];
+    if (spaceParticipantRole) {
+        const neededUserIds = new Set([up(presenterUser.ID)]);
+        for (const cs of plan.communitySpaces) {
+            const u = usersByEmail.get(String(cs.ownerEmail ?? '').toLowerCase());
+            if (u) neededUserIds.add(up(u.ID));
+            for (const s of cs.collaborationSpace?.seats ?? []) {
+                const su = usersByEmail.get(String(s.email ?? '').toLowerCase());
+                if (su) neededUserIds.add(up(su.ID));
+            }
+        }
+        for (const fm of plan.forumMembers) neededUserIds.add(up(fm.fields.UserID));
+        for (const p of plan.posts) if (p.fields.AuthorUserID) neededUserIds.add(up(p.fields.AuthorUserID));
+        for (const r of plan.reactions) neededUserIds.add(up(r.fields.UserID));
+        for (const a of plan.ideaAllocations) neededUserIds.add(up(a.fields.UserID));
+        const existingSP = new Set(
+            (await run(ENTITY.userRoles, `RoleID = '${assertValidUuid(spaceParticipantRole.ID, 'Space Participant role ID')}'`, ['UserID'])).map((r) => up(r.UserID)),
+        );
+        let granted = 0;
+        for (const uid of neededUserIds) {
+            if (!uid || existingSP.has(uid) || !usersById.has(uid)) continue;
+            const ur = await md.GetEntityObject(ENTITY.userRoles, system);
+            ur.NewRecord();
+            ur.UserID = usersById.get(uid).ID;
+            ur.RoleID = spaceParticipantRole.ID;
+            await save(ur, `grant Space Participant to ${uid}`);
+            granted++;
+        }
+        if (granted > 0) {
+            await UserCache.Instance.RefreshNow();
+            usersByEmail.clear();
+            usersById.clear();
+            for (const u of UserCache.Instance.Users) {
+                usersByEmail.set(String(u.Email).toLowerCase(), u);
+                usersById.set(up(u.ID), u);
+            }
+            presenterUser = usersByEmail.get(presenterPlan.presenterEmail) ?? presenterUser;
+            log(`Space Participant role granted to ${granted} participating users`);
+        }
     }
 
     // Verify metadata reference tables (ForumTypes, PostTypes, ForumRoleTypes, SpaceRoleTypes, Artifacts)
@@ -1267,7 +1311,8 @@ export async function load(opts) {
         presenterSeats: 0,
     };
 
-    // 1. Collaboration Spaces + CommunitySpace IS-A
+    // 1. Collaboration Spaces + CommunitySpace (supports both IS-A subtype and 1:1 shared-PK extension)
+    const communitySpaceIsSubtype = Boolean(md.EntityByName(ENTITY.communitySpaces)?.ParentID);
     const existingCollabSpaces = new Set((await run(ENTITY.spaces, '', ['ID'])).map((r) => up(r.ID)));
     const existingCommunitySpaces = new Map((await run(ENTITY.communitySpaces, '', ['ID', 'DefaultForumID'])).map((r) => [up(r.ID), r]));
     const spaceById = new Map(plan.communitySpaces.map((cs) => [up(cs.id), cs]));
@@ -1278,25 +1323,59 @@ export async function load(opts) {
 
         if (cs.createCollaborationSpace && !existingCollabSpaces.has(spaceId)) {
             const spFields = cs.collaborationSpace.fields;
-            const spaceRec = await md.GetEntityObject(ENTITY.spaces, ownerUser);
-            spaceRec.NewRecord();
-            assignFields(spaceRec, {
-                ID: spFields.ID,
-                SpaceTypeID: spFields.SpaceTypeID,
-                ParentID: spFields.ParentID,
-                Name: spFields.Name,
-                Description: spFields.Description,
-                OwnerID: ownerUser.ID,
-                InheritsMembership: spFields.InheritsMembership,
-                AgentRetrieval: spFields.AgentRetrieval,
-                StartedAt: spFields.StartedAt ? new Date(spFields.StartedAt) : new Date(),
-                PlannedCloseAt: spFields.PlannedCloseAt ? new Date(spFields.PlannedCloseAt) : null,
-                IconClass: spFields.IconClass,
-                Color: spFields.Color,
-            });
-            await save(spaceRec, `collaboration space ${cs.key}`);
-            existingCollabSpaces.add(spaceId);
-            counts.collabSpaces++;
+            if (communitySpaceIsSubtype) {
+                const csRec = await md.GetEntityObject(ENTITY.communitySpaces, system);
+                csRec.NewRecord();
+                assignFields(csRec, {
+                    ID: spFields.ID,
+                    SpaceTypeID: spFields.SpaceTypeID,
+                    ParentID: spFields.ParentID,
+                    Name: spFields.Name,
+                    Description: spFields.Description,
+                    OwnerID: ownerUser.ID,
+                    InheritsMembership: spFields.InheritsMembership,
+                    AgentRetrieval: spFields.AgentRetrieval,
+                    StartedAt: spFields.StartedAt ? new Date(spFields.StartedAt) : new Date(),
+                    PlannedCloseAt: spFields.PlannedCloseAt ? new Date(spFields.PlannedCloseAt) : null,
+                    IconClass: spFields.IconClass,
+                    Color: spFields.Color,
+                    Slug: cs.fields.Slug,
+                    CommunityKind: cs.fields.CommunityKind,
+                    CommunityKindDetails: cs.fields.CommunityKindDetails,
+                    AnonymousReadMode: cs.fields.AnonymousReadMode,
+                    AskFirstEnabled: cs.fields.AskFirstEnabled,
+                    DefaultDigestCadence: cs.fields.DefaultDigestCadence,
+                    BannerImageURL: cs.fields.BannerImageURL,
+                    WelcomeMarkdown: cs.fields.WelcomeMarkdown,
+                    DefaultForumID: null,
+                });
+                await save(csRec, `community space ${cs.key}`);
+                existingCollabSpaces.add(spaceId);
+                existingCommunitySpaces.set(spaceId, { ID: cs.id, DefaultForumID: null });
+                counts.collabSpaces++;
+                counts.communitySpaces++;
+            } else {
+                const req = pool.request();
+                req.input('ID', assertValidUuid(spFields.ID, `space ${cs.key} ID`));
+                req.input('SpaceTypeID', assertValidUuid(spFields.SpaceTypeID, `space ${cs.key} SpaceTypeID`));
+                req.input('ParentID', spFields.ParentID ? assertValidUuid(spFields.ParentID, `space ${cs.key} ParentID`) : null);
+                req.input('Name', String(spFields.Name));
+                req.input('Description', spFields.Description != null ? String(spFields.Description) : null);
+                req.input('OwnerID', assertValidUuid(ownerUser.ID, `space ${cs.key} OwnerID`));
+                req.input('InheritsMembership', Boolean(spFields.InheritsMembership));
+                req.input('AgentRetrieval', String(spFields.AgentRetrieval ?? 'Included'));
+                req.input('StartedAt', spFields.StartedAt ? new Date(spFields.StartedAt) : new Date());
+                req.input('PlannedCloseAt', spFields.PlannedCloseAt ? new Date(spFields.PlannedCloseAt) : null);
+                req.input('IconClass', spFields.IconClass != null ? String(spFields.IconClass) : null);
+                req.input('Color', spFields.Color != null ? String(spFields.Color) : null);
+                await req.query(
+                    `INSERT INTO [${COLLAB_SCHEMA}].[Space] ` +
+                        `([ID], [SpaceTypeID], [ParentID], [Name], [Description], [OwnerID], [InheritsMembership], [AgentRetrieval], [StartedAt], [PlannedCloseAt], [IconClass], [Color]) ` +
+                        `VALUES (@ID, @SpaceTypeID, @ParentID, @Name, @Description, @OwnerID, @InheritsMembership, @AgentRetrieval, @StartedAt, @PlannedCloseAt, @IconClass, @Color)`,
+                );
+                existingCollabSpaces.add(spaceId);
+                counts.collabSpaces++;
+            }
         }
 
         if (cs.createCollaborationSpace && existingCollabSpaces.has(spaceId) && Array.isArray(cs.collaborationSpace?.seats)) {
@@ -1328,11 +1407,18 @@ export async function load(opts) {
         }
 
         if (!existingCommunitySpaces.has(spaceId)) {
-            const csRec = await md.GetEntityObject(ENTITY.communitySpaces, ownerUser);
+            const csRec = await md.GetEntityObject(ENTITY.communitySpaces, system);
             csRec.NewRecord();
-            const attached = await csRec.AttachToParent(core.CompositeKey.FromID(cs.id));
-            if (!attached) {
-                throw new Error(`Collaboration Space ${cs.id} (${cs.key}) does not exist — run load-spaces.mjs first`);
+            if (communitySpaceIsSubtype) {
+                const attached = await csRec.AttachToParent(core.CompositeKey.FromID(cs.id));
+                if (!attached) {
+                    throw new Error(`Collaboration Space ${cs.id} (${cs.key}) does not exist — run load-spaces.mjs first`);
+                }
+            } else {
+                if (!existingCollabSpaces.has(spaceId)) {
+                    throw new Error(`Collaboration Space ${cs.id} (${cs.key}) does not exist — run load-spaces.mjs first`);
+                }
+                csRec.ID = cs.id;
             }
             assignFields(csRec, {
                 Slug: cs.fields.Slug,
@@ -1361,18 +1447,31 @@ export async function load(opts) {
     const campaignByKey = new Map(plan.forumIdeaCampaigns.map((c) => [c.campaignKey, c]));
     const forumById = new Map(plan.forums.map((f) => [up(f.fields.ID), f]));
 
+    const campaignIsSubtype = Boolean(md.EntityByName(ENTITY.forumIdeaCampaigns)?.ParentID);
     for (const f of plan.forums) {
         const fid = up(f.fields.ID);
         const ownerUser = userByEmail(spaceById.get(up(f.fields.SpaceID)).ownerEmail);
         const camp = campaignByForumId.get(fid);
         if (camp) {
+            if (!campaignIsSubtype && !existingForums.has(fid)) {
+                const fRec = await md.GetEntityObject(ENTITY.forums, ownerUser);
+                fRec.NewRecord();
+                assignFields(fRec, f.fields);
+                await save(fRec, `forum ${f.key}`);
+                existingForums.add(fid);
+                counts.forums++;
+            }
             if (!existingCampaigns.has(fid)) {
                 const cRec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
                 cRec.NewRecord();
-                if (existingForums.has(fid)) {
-                    await cRec.AttachToParent(core.CompositeKey.FromID(f.fields.ID));
+                if (campaignIsSubtype) {
+                    if (existingForums.has(fid)) {
+                        await cRec.AttachToParent(core.CompositeKey.FromID(f.fields.ID));
+                    } else {
+                        assignFields(cRec, { ...f.fields, ID: f.fields.ID });
+                    }
                 } else {
-                    assignFields(cRec, { ...f.fields, ID: f.fields.ID });
+                    cRec.ID = f.fields.ID;
                 }
                 assignFields(cRec, {
                     DefaultBudgetPoints: camp.fields.DefaultBudgetPoints,
@@ -1382,9 +1481,11 @@ export async function load(opts) {
                     VotingClosesAt: null, // pinned after allocations are saved
                 });
                 await save(cRec, `forum idea campaign ${f.key}`);
-                existingForums.add(fid);
+                if (campaignIsSubtype && !existingForums.has(fid)) {
+                    existingForums.add(fid);
+                    counts.forums++;
+                }
                 existingCampaigns.set(fid, { ID: f.fields.ID, VotingClosesAt: null });
-                counts.forums++;
                 counts.forumIdeaCampaigns++;
             }
         } else if (!existingForums.has(fid)) {
@@ -1400,8 +1501,7 @@ export async function load(opts) {
     for (const cs of plan.communitySpaces) {
         const existing = existingCommunitySpaces.get(up(cs.id));
         if (cs.fields.DefaultForumID && (!existing?.DefaultForumID || !sameId(existing.DefaultForumID, cs.fields.DefaultForumID))) {
-            const ownerUser = userByEmail(cs.ownerEmail);
-            const csRec = await md.GetEntityObject(ENTITY.communitySpaces, ownerUser);
+            const csRec = await md.GetEntityObject(ENTITY.communitySpaces, system);
             if (await csRec.Load(cs.id)) {
                 csRec.DefaultForumID = cs.fields.DefaultForumID;
                 await save(csRec, `default forum on ${cs.key}`);
@@ -1426,8 +1526,7 @@ export async function load(opts) {
         const u = userById(fm.fields.UserID);
         recordMod(fm.fields.ForumID, u, fm.roleCode);
         if (existingForumMembers.has(key)) continue;
-        const ownerUser = userByEmail(spaceById.get(up(forumById.get(up(fm.fields.ForumID)).fields.SpaceID)).ownerEmail);
-        const rec = await md.GetEntityObject(ENTITY.forumMembers, ownerUser);
+        const rec = await md.GetEntityObject(ENTITY.forumMembers, system);
         rec.NewRecord();
         assignFields(rec, fm.fields);
         await save(rec, `forum member ${fm.userEmail} on ${fm.forumKey}`);
@@ -1438,8 +1537,7 @@ export async function load(opts) {
     const existingTags = new Set((await run(ENTITY.forumTopicTags, '', ['ID'])).map((r) => up(r.ID)));
     for (const tag of plan.topicTags) {
         if (existingTags.has(up(tag.fields.ID))) continue;
-        const ownerUser = userByEmail(spaceById.get(up(tag.fields.SpaceID)).ownerEmail);
-        const rec = await md.GetEntityObject(ENTITY.forumTopicTags, ownerUser);
+        const rec = await md.GetEntityObject(ENTITY.forumTopicTags, system);
         rec.NewRecord();
         assignFields(rec, { ...tag.fields, PostCount: 0 });
         await save(rec, `topic tag ${tag.key}`);
@@ -1456,7 +1554,7 @@ export async function load(opts) {
     for (const mp of plan.memberProfiles) {
         const key = `${up(mp.fields.SpaceID)}:${up(mp.fields.UserID)}`;
         if (existingProfiles.has(key)) continue;
-        const rec = await md.GetEntityObject(ENTITY.communityMemberProfiles, userById(mp.fields.UserID));
+        const rec = await md.GetEntityObject(ENTITY.communityMemberProfiles, system);
         rec.NewRecord();
         assignFields(rec, mp.fields);
         await save(rec, `member profile ${mp.userEmail} in ${mp.spaceKey}`);
@@ -1487,8 +1585,7 @@ export async function load(opts) {
     for (const fmSpec of presenterPlan.forumMemberships) {
         const key = `${fmSpec.forumId}:${up(presenterUser.ID)}`;
         if (existingForumMembers.has(key) || !forumAdminRoleId) continue;
-        const ownerUser = userByEmail(spaceById.get(fmSpec.spaceId).ownerEmail);
-        const rec = await md.GetEntityObject(ENTITY.forumMembers, ownerUser);
+        const rec = await md.GetEntityObject(ENTITY.forumMembers, system);
         rec.NewRecord();
         rec.ForumID = fmSpec.forumId;
         rec.UserID = presenterUser.ID;
@@ -1501,7 +1598,7 @@ export async function load(opts) {
     for (const mpSpec of presenterPlan.memberProfiles) {
         const key = `${mpSpec.spaceId}:${up(presenterUser.ID)}`;
         if (existingProfiles.has(key)) continue;
-        const rec = await md.GetEntityObject(ENTITY.communityMemberProfiles, presenterUser);
+        const rec = await md.GetEntityObject(ENTITY.communityMemberProfiles, system);
         rec.NewRecord();
         rec.SpaceID = mpSpec.spaceId;
         rec.UserID = presenterUser.ID;
@@ -1614,7 +1711,7 @@ export async function load(opts) {
             const f = forumById.get(up(p.fields.ForumID));
             const spaceOwner = userByEmail(spaceById.get(up(f.fields.SpaceID)).ownerEmail);
             if (!existingArtifacts.has(artId)) {
-                const art = await md.GetEntityObject(ENTITY.artifacts, spaceOwner);
+                const art = await md.GetEntityObject(ENTITY.artifacts, system);
                 art.NewRecord();
                 art.ID = ap.fields.ArtifactID;
                 art.EnvironmentID = defaultEnvRow.ID;
@@ -1627,7 +1724,7 @@ export async function load(opts) {
                 existingArtifacts.add(artId);
             }
             if (verId && !existingArtifactVersions.has(verId)) {
-                const ver = await md.GetEntityObject(ENTITY.artifactVersions, spaceOwner);
+                const ver = await md.GetEntityObject(ENTITY.artifactVersions, system);
                 ver.NewRecord();
                 ver.ID = ap.fields.PinnedArtifactVersionID;
                 ver.ArtifactID = ap.fields.ArtifactID;
@@ -1662,16 +1759,31 @@ export async function load(opts) {
             };
         }
 
-        const rec = await md.GetEntityObject(targetEntity, authorUser);
-        rec.NewRecord();
-        assignFields(rec, { ...baseFields, ...subtypeFields });
-        await save(rec, `post ${p.fields.ID} (${p.postTypeCode})`);
+        const targetIsSubtype = targetEntity !== ENTITY.forumPosts && Boolean(md.EntityByName(targetEntity)?.ParentID);
+        let savedStatus = baseFields.Status;
+        if (targetEntity === ENTITY.forumPosts || targetIsSubtype) {
+            const rec = await md.GetEntityObject(targetEntity, authorUser);
+            rec.NewRecord();
+            assignFields(rec, { ...baseFields, ...subtypeFields });
+            await save(rec, `post ${p.fields.ID} (${p.postTypeCode})`);
+            savedStatus = rec.Status;
+        } else {
+            const baseRec = await md.GetEntityObject(ENTITY.forumPosts, authorUser);
+            baseRec.NewRecord();
+            assignFields(baseRec, baseFields);
+            await save(baseRec, `post ${p.fields.ID} (${p.postTypeCode})`);
+            savedStatus = baseRec.Status;
+            const extRec = await md.GetEntityObject(targetEntity, authorUser);
+            extRec.NewRecord();
+            assignFields(extRec, { ID: p.fields.ID, ...subtypeFields });
+            await save(extRec, `post subtype ${targetEntity} ${p.fields.ID}`);
+        }
         existingPosts.add(pid);
         counts.posts++;
 
         if (
             (!authorIsMod && (p.fields.IsPinned || p.fields.IsLocked)) ||
-            (p.fields.Status !== 'Answered' && rec.Status !== p.fields.Status)
+            (p.fields.Status !== 'Answered' && savedStatus !== p.fields.Status)
         ) {
             const modRec = await md.GetEntityObject(ENTITY.forumPosts, modUser);
             if (await modRec.Load(p.fields.ID)) {
@@ -1684,6 +1796,7 @@ export async function load(opts) {
     }
 
     // 4b. Finalize Q&A Canon verification & question resolution after replies exist
+    const questionIsSubtype = Boolean(md.EntityByName(ENTITY.forumQuestionPosts)?.ParentID);
     for (const ans of plan.answerPosts) {
         const f = ans.fields;
         if (!f.IsAcceptedByAuthor && !f.IsVerifiedByModerator && f.AIEpistemicStatus !== 'Canon Verified' && f.AIEpistemicStatus !== 'Partially Outdated') {
@@ -1720,8 +1833,15 @@ export async function load(opts) {
                 rec.AcceptedAnswerPostID = f.AcceptedAnswerPostID;
                 rec.AICanonAnswerPostID = f.AICanonAnswerPostID;
                 rec.ResolvedAt = f.ResolvedAt ? new Date(f.ResolvedAt) : null;
-                if (postRow.fields.Status === 'Answered') rec.Status = 'Answered';
+                if (questionIsSubtype && postRow.fields.Status === 'Answered') rec.Status = 'Answered';
                 await save(rec, `resolve question ${f.ID}`);
+            }
+        }
+        if (!questionIsSubtype && postRow.fields.Status === 'Answered') {
+            const pRec = await md.GetEntityObject(ENTITY.forumPosts, modUser);
+            if ((await pRec.Load(f.ID)) && pRec.Status !== 'Answered') {
+                pRec.Status = 'Answered';
+                await save(pRec, `mark question post answered ${f.ID}`);
             }
         }
     }
@@ -1893,7 +2013,7 @@ export async function load(opts) {
     for (const sub of plan.subscriptions) {
         const k = `${up(sub.fields.UserID)}:${up(sub.fields.ForumID) ?? ''}:${up(sub.fields.RootPostID) ?? ''}:${up(sub.fields.TopicTagID) ?? ''}`;
         if (existingSubs.has(k)) continue;
-        const rec = await md.GetEntityObject(ENTITY.forumSubscriptions, userById(sub.fields.UserID));
+        const rec = await md.GetEntityObject(ENTITY.forumSubscriptions, system);
         rec.NewRecord();
         assignFields(rec, sub.fields);
         await save(rec, `subscription ${sub.fields.ID}`);
@@ -1903,7 +2023,7 @@ export async function load(opts) {
     for (const subSpec of presenterPlan.forumSubscriptions) {
         const k = `${up(presenterUser.ID)}:${subSpec.forumId}::`;
         if (existingSubs.has(k)) continue;
-        const rec = await md.GetEntityObject(ENTITY.forumSubscriptions, presenterUser);
+        const rec = await md.GetEntityObject(ENTITY.forumSubscriptions, system);
         rec.NewRecord();
         rec.UserID = presenterUser.ID;
         rec.ForumID = subSpec.forumId;
@@ -1930,7 +2050,7 @@ export async function load(opts) {
         }
     }
     for (const mp of plan.memberProfiles) {
-        const rec = await md.GetEntityObject(ENTITY.communityMemberProfiles, userById(mp.fields.UserID));
+        const rec = await md.GetEntityObject(ENTITY.communityMemberProfiles, system);
         if (await rec.Load(mp.fields.ID)) {
             if (rec.ReputationScore !== mp.fields.ReputationScore) {
                 rec.ReputationScore = mp.fields.ReputationScore;

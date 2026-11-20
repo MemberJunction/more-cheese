@@ -1883,7 +1883,7 @@ export function buildCommunityPlan(world, opts = {}) {
                 for (let k = 2; k < replyCount; k++) {
                     replySpecs.push({
                         postTypeCode: 'comment',
-                        parentReplyIdx: k % 2,
+                        parentReplyIdx: null,
                         body: COMMENT_SNIPPETS[(rIdx + k) % COMMENT_SNIPPETS.length],
                     });
                 }
@@ -1907,11 +1907,14 @@ export function buildCommunityPlan(world, opts = {}) {
                     : CASE_CATALOG[(cycles.indexOf(ym) + rIdx) % CASE_CATALOG.length];
                 const title = `${cs.title} — ${ym}`;
                 const body = `**Situation:** ${cs.situation}\n\n**Action Taken:** ${cs.action}\n\n**Outcome:** ${cs.outcome}`;
-                const replySpecs = Array.from({ length: replyCount }, (_, k) => ({
-                    postTypeCode: k === replyCount - 1 ? 'comment' : 'reply',
-                    parentReplyIdx: k === replyCount - 1 && k > 0 ? 0 : null,
-                    body: REPLY_SNIPPETS_DISCUSSION[(rIdx + k) % REPLY_SNIPPETS_DISCUSSION.length],
-                }));
+                const replySpecs = Array.from({ length: replyCount }, (_, k) => {
+                    const isComment = k === replyCount - 1;
+                    return {
+                        postTypeCode: isComment ? 'comment' : 'reply',
+                        parentReplyIdx: !isComment && k > 0 && k % 2 === 1 ? 0 : null,
+                        body: REPLY_SNIPPETS_DISCUSSION[(rIdx + k) % REPLY_SNIPPETS_DISCUSSION.length],
+                    };
+                });
                 createRootThread({
                     cycle: ym,
                     forum,
@@ -1931,11 +1934,14 @@ export function buildCommunityPlan(world, opts = {}) {
                     : PLAYBOOK_CATALOG[(cycles.indexOf(ym) + rIdx) % PLAYBOOK_CATALOG.length];
                 const title = `${pb.title} (${year} Rev ${monthStr})`;
                 const body = `${pb.body}\n\n*Maintained in ${forum.fields.Name} (${ym}). Suggest section updates in the thread below.*`;
-                const replySpecs = Array.from({ length: replyCount }, (_, k) => ({
-                    postTypeCode: k % 3 === 2 ? 'comment' : 'reply',
-                    parentReplyIdx: k % 3 === 2 && k > 0 ? k - 1 : null,
-                    body: `Reviewed section ${k + 1} of this ${pb.modality.toLowerCase()}—${REPLY_SNIPPETS_DISCUSSION[(rIdx + k) % REPLY_SNIPPETS_DISCUSSION.length]}`,
-                }));
+                const replySpecs = Array.from({ length: replyCount }, (_, k) => {
+                    const isComment = k % 3 === 2;
+                    return {
+                        postTypeCode: isComment ? 'comment' : 'reply',
+                        parentReplyIdx: !isComment && k > 0 && k % 3 === 1 ? k - 1 : null,
+                        body: `Reviewed section ${k + 1} of this ${pb.modality.toLowerCase()}—${REPLY_SNIPPETS_DISCUSSION[(rIdx + k) % REPLY_SNIPPETS_DISCUSSION.length]}`,
+                    };
+                });
                 createRootThread({
                     cycle: ym,
                     forum,
@@ -1981,11 +1987,14 @@ export function buildCommunityPlan(world, opts = {}) {
                 const spaceLabel = spaceByKey.get(forum.spaceKey)?.fields?.Name ?? 'ICF';
                 const title = `${th.title} — ${spaceLabel} (${ym})`;
                 const body = `${th.body}\n\n*Thread opened in ${forum.fields.Name} (${ym}).*`;
-                const replySpecs = Array.from({ length: replyCount }, (_, k) => ({
-                    postTypeCode: k === replyCount - 1 && k > 1 ? 'comment' : 'reply',
-                    parentReplyIdx: k > 0 && k % 2 === 1 ? 0 : null,
-                    body: th.replies[k % th.replies.length] ?? REPLY_SNIPPETS_DISCUSSION[k % REPLY_SNIPPETS_DISCUSSION.length],
-                }));
+                const replySpecs = Array.from({ length: replyCount }, (_, k) => {
+                    const isComment = k === replyCount - 1 && k > 1;
+                    return {
+                        postTypeCode: isComment ? 'comment' : 'reply',
+                        parentReplyIdx: !isComment && k > 0 && k % 2 === 1 ? 0 : null,
+                        body: th.replies[k % th.replies.length] ?? REPLY_SNIPPETS_DISCUSSION[k % REPLY_SNIPPETS_DISCUSSION.length],
+                    };
+                });
                 createRootThread({
                     cycle: ym,
                     forum,
