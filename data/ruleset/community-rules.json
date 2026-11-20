@@ -1,0 +1,1510 @@
+{
+  "$schema": "https://memberjunction.org/schemas/loom/community-rules.v1.json",
+  "version": 1,
+  "domain": "more-cheese",
+  "namespace": "a3f7c812-49b0-4d1e-8c6a-91d4e70b2f55",
+  "description": "Declarative Loom community ruleset for the International Cheese Federation (ICF) on BizApps Community: era-modulated growth curves (2019-2026+), 9 CommunitySpaces anchored onto Collaboration Spaces, 29 Forums across all 6 ForumTypes, 52 ICF topic tags, hero participation rules, and 100-point Quadratic Ideation Campaigns.",
+  "metadataRefs": {
+    "sourceMetadataRoot": "bizapps-community/metadata",
+    "spaceTypes": {
+      "community": {
+        "id": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+        "code": "community",
+        "name": "Community",
+        "spaceExtensionEntity": "MJ_BizApps_Community: Community Spaces"
+      },
+      "working-group": {
+        "id": "3AB9DF10-91C4-444B-B0C2-752383A6E8D3",
+        "code": "working-group",
+        "name": "Working Group"
+      }
+    },
+    "forumTypes": {
+      "general-discussion": {
+        "id": "C8A17100-4E12-4B8F-9A10-100000000001",
+        "code": "general-discussion",
+        "name": "General Discussion",
+        "allowedPostTypeCodes": [
+          "discussion",
+          "reply",
+          "comment",
+          "poll-or-form",
+          "collaborative-doc",
+          "collaborative-sheet",
+          "collaborative-deck",
+          "interactive-experience"
+        ],
+        "defaultRootPostTypeCode": "discussion",
+        "maxReplyDepth": 5,
+        "autoSummarizeThreshold": 4,
+        "askFirstDeflection": true
+      },
+      "qa-knowledge-base": {
+        "id": "C8A17100-4E12-4B8F-9A10-100000000002",
+        "code": "qa-knowledge-base",
+        "name": "Q&A Knowledge Base",
+        "allowedPostTypeCodes": [
+          "question",
+          "answer",
+          "comment"
+        ],
+        "defaultRootPostTypeCode": "question",
+        "maxReplyDepth": 2,
+        "autoSummarizeThreshold": 3,
+        "askFirstDeflection": true
+      },
+      "ideation-campaign": {
+        "id": "C8A17100-4E12-4B8F-9A10-100000000003",
+        "code": "ideation-campaign",
+        "name": "Ideation Campaign",
+        "extensionEntity": "MJ_BizApps_Community: Forum Idea Campaigns",
+        "allowedPostTypeCodes": [
+          "idea-proposal",
+          "reply",
+          "poll-or-form"
+        ],
+        "defaultRootPostTypeCode": "idea-proposal",
+        "maxReplyDepth": 3,
+        "autoSummarizeThreshold": 5,
+        "askFirstDeflection": true
+      },
+      "playbooks-and-docs": {
+        "id": "C8A17100-4E12-4B8F-9A10-100000000004",
+        "code": "playbooks-and-docs",
+        "name": "Playbooks & Collaborative Docs",
+        "allowedPostTypeCodes": [
+          "collaborative-doc",
+          "collaborative-sheet",
+          "collaborative-deck",
+          "reply",
+          "comment"
+        ],
+        "defaultRootPostTypeCode": "collaborative-doc",
+        "maxReplyDepth": 4,
+        "autoSummarizeThreshold": 4,
+        "askFirstDeflection": true
+      },
+      "peer-case-rounds": {
+        "id": "C8A17100-4E12-4B8F-9A10-100000000005",
+        "code": "peer-case-rounds",
+        "name": "Peer Case Rounds",
+        "archetypeAlias": "case-library",
+        "allowedPostTypeCodes": [
+          "case-review",
+          "reply",
+          "comment"
+        ],
+        "defaultRootPostTypeCode": "case-review",
+        "maxReplyDepth": 3,
+        "autoSummarizeThreshold": 3,
+        "askFirstDeflection": true
+      },
+      "live-events-and-amas": {
+        "id": "C8A17100-4E12-4B8F-9A10-100000000006",
+        "code": "live-events-and-amas",
+        "name": "Live Events & AMAs",
+        "archetypeAlias": "ama-session",
+        "allowedPostTypeCodes": [
+          "live-ama",
+          "question",
+          "reply",
+          "poll-or-form",
+          "interactive-experience"
+        ],
+        "defaultRootPostTypeCode": "live-ama",
+        "maxReplyDepth": 3,
+        "autoSummarizeThreshold": 5,
+        "askFirstDeflection": false
+      }
+    },
+    "forumRoleTypes": {
+      "forum-admin": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000001",
+        "code": "forum-admin",
+        "name": "Forum Admin",
+        "level": 1000,
+        "voteWeightMultiplier": 1
+      },
+      "moderator": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000002",
+        "code": "moderator",
+        "name": "Moderator",
+        "level": 800,
+        "voteWeightMultiplier": 1
+      },
+      "topic-host": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000003",
+        "code": "topic-host",
+        "name": "Topic Host",
+        "level": 600,
+        "voteWeightMultiplier": 1
+      },
+      "expert-reviewer": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000004",
+        "code": "expert-reviewer",
+        "name": "Expert Reviewer",
+        "level": 500,
+        "voteWeightMultiplier": 1.25
+      },
+      "contributor": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000005",
+        "code": "contributor",
+        "name": "Contributor",
+        "level": 200,
+        "voteWeightMultiplier": 1
+      },
+      "observer": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000006",
+        "code": "observer",
+        "name": "Observer",
+        "level": 100,
+        "voteWeightMultiplier": 0
+      },
+      "muted": {
+        "id": "C8A17300-4E12-4B8F-9A10-100000000007",
+        "code": "muted",
+        "name": "Muted",
+        "level": 0,
+        "voteWeightMultiplier": 0
+      }
+    },
+    "postTypes": {
+      "discussion": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000001",
+        "code": "discussion",
+        "placementRule": "Root Only",
+        "triggersThreadSynthesis": true
+      },
+      "reply": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000002",
+        "code": "reply",
+        "placementRule": "Reply Only",
+        "triggersThreadSynthesis": true
+      },
+      "comment": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000003",
+        "code": "comment",
+        "placementRule": "Reply Only",
+        "triggersThreadSynthesis": false
+      },
+      "question": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000004",
+        "code": "question",
+        "placementRule": "Root Only",
+        "triggersThreadSynthesis": true
+      },
+      "answer": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000005",
+        "code": "answer",
+        "placementRule": "Reply Only",
+        "triggersThreadSynthesis": true
+      },
+      "idea-proposal": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000006",
+        "code": "idea-proposal",
+        "placementRule": "Root Only",
+        "triggersThreadSynthesis": true
+      },
+      "poll-or-form": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000007",
+        "code": "poll-or-form",
+        "placementRule": "Both",
+        "triggersThreadSynthesis": true
+      },
+      "collaborative-doc": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000008",
+        "code": "collaborative-doc",
+        "placementRule": "Both",
+        "triggersThreadSynthesis": true
+      },
+      "collaborative-sheet": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000009",
+        "code": "collaborative-sheet",
+        "placementRule": "Both",
+        "triggersThreadSynthesis": true
+      },
+      "collaborative-deck": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000010",
+        "code": "collaborative-deck",
+        "placementRule": "Both",
+        "triggersThreadSynthesis": true
+      },
+      "case-review": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000011",
+        "code": "case-review",
+        "placementRule": "Root Only",
+        "triggersThreadSynthesis": true
+      },
+      "live-ama": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000012",
+        "code": "live-ama",
+        "placementRule": "Root Only",
+        "triggersThreadSynthesis": true
+      },
+      "interactive-experience": {
+        "id": "C8A17200-4E12-4B8F-9A10-100000000013",
+        "code": "interactive-experience",
+        "placementRule": "Both",
+        "triggersThreadSynthesis": true
+      }
+    }
+  },
+  "monthlyCadence": {
+    "startMonth": "2019-01",
+    "baselineAsOf": "2026-10-31",
+    "appendMode": "append-only",
+    "baseRootPostsPerMonth": 2,
+    "repliesPerRoot": {
+      "min": 2,
+      "max": 6,
+      "mean": 3.4
+    },
+    "reactionsPerPost": {
+      "rootMean": 4.2,
+      "replyMean": 1.4,
+      "allowedKinds": [
+        "Upvote",
+        "Helpful",
+        "Insightful",
+        "Agree",
+        "Celebrate",
+        "Curious"
+      ]
+    },
+    "tagsPerRootPost": {
+      "min": 2,
+      "max": 4
+    },
+    "canonQaProbability": 0.68,
+    "newSubscriptionsPerMonthBase": 5,
+    "newMemberProfilesFloor": 260,
+    "seasonalMultipliers": {
+      "01": 1.05,
+      "02": 1.0,
+      "03": 1.15,
+      "04": 1.1,
+      "05": 1.05,
+      "06": 1.15,
+      "07": 1.25,
+      "08": 1.0,
+      "09": 1.15,
+      "10": 1.2,
+      "11": 1.1,
+      "12": 0.9
+    }
+  },
+  "eraMultipliers": {
+    "eras": [
+      {
+        "eraKey": "era-pre-pandemic-baseline",
+        "cycles": [2019],
+        "multiplier": 1.0,
+        "narrativeFocus": "Pre-pandemic in-person chapter tastings, CCP exam prep, and baseline farmstead operations.",
+        "topicFocusSlugs": [
+          "ccp-exam-prep",
+          "chapter-tastings",
+          "pasteurized-curd-craft",
+          "cave-humidity-control",
+          "world-cheese-cup-rules",
+          "wholesale-distribution"
+        ]
+      },
+      {
+        "eraKey": "era-pandemic-shock-2020",
+        "cycles": [2020],
+        "multiplier": 1.75,
+        "narrativeFocus": "Wholesale restaurant collapse, emergency direct-to-consumer shipping, curbside cheese boxes, and virtual peer troubleshooting.",
+        "topicFocusSlugs": [
+          "pandemic-pivot",
+          "direct-to-consumer",
+          "cold-chain-shipping",
+          "emergency-relief-grants",
+          "online-ccp-study",
+          "milk-surplus-diversion"
+        ]
+      },
+      {
+        "eraKey": "era-virtual-pivot-2021",
+        "cycles": [2021],
+        "multiplier": 1.55,
+        "narrativeFocus": "Virtual Symposium 2021, digital credentialing surge, online tasting kits, and small-creamery retention solidarity.",
+        "topicFocusSlugs": [
+          "virtual-symposium",
+          "online-ccp-study",
+          "digital-tasting-kits",
+          "fsma-remote-audits",
+          "starter-culture-supply",
+          "apprenticeship-pathways"
+        ]
+      },
+      {
+        "eraKey": "era-artisan-boom-2022-2024",
+        "cycles": [2022, 2023, 2024],
+        "multiplier": 1.35,
+        "narrativeFocus": "Post-pandemic artisan renaissance, return of the World Cheese Cup, washed-rind & alpine innovation, and sponsor expansion.",
+        "topicFocusSlugs": [
+          "world-cheese-cup-rules",
+          "sensory-judging-calibration",
+          "washed-rind-affinage",
+          "alpine-cooked-curd",
+          "cheese-counter-merchandising",
+          "export-certification"
+        ]
+      },
+      {
+        "eraKey": "era-creamery-closures-2025",
+        "cycles": [2025],
+        "multiplier": 1.45,
+        "narrativeFocus": "Feed and energy cost squeeze, small farmstead creamery distress, hardship dues mutual aid, and cooperative shared aging.",
+        "topicFocusSlugs": [
+          "creamery-cost-squeeze",
+          "hardship-dues-aid",
+          "shared-aging-caves",
+          "feed-energy-inflation",
+          "mutual-aid-equipment",
+          "herd-economics"
+        ]
+      },
+      {
+        "eraKey": "era-stabilization-2026",
+        "cycles": [2026],
+        "multiplier": 1.3,
+        "narrativeFocus": "Cost stabilization, next-generation succession, raw-milk aging rule modernization, lot-level traceability, and Madison 2026 conference.",
+        "topicFocusSlugs": [
+          "raw-milk-aging-rule",
+          "next-gen-succession",
+          "lot-level-traceability",
+          "fda-recall-readiness",
+          "world-cheese-cup-2026",
+          "annual-conference-madison"
+        ]
+      }
+    ],
+    "byYear": {
+      "2019": 1.0,
+      "2020": 1.75,
+      "2021": 1.55,
+      "2022": 1.35,
+      "2023": 1.35,
+      "2024": 1.35,
+      "2025": 1.45,
+      "2026": 1.3
+    },
+    "defaultPost2026Multiplier": 1.3
+  },
+  "communitySpaces": [
+    {
+      "key": "icf-member-commons",
+      "slug": "icf-member-commons",
+      "name": "ICF Member Commons",
+      "description": "The Association-wide flagship commons for all International Cheese Federation cheesemakers, affineurs, mongers, buyers, and educators.",
+      "collaborationSpaceKey": "icf-member-commons",
+      "collaborationSpaceId": null,
+      "createCollaborationSpace": true,
+      "spaceTypeCode": "community",
+      "spaceTypeId": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+      "CommunityKind": "Association Wide",
+      "CommunityKindDetails": "Flagship Federation Commons",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Daily Digest",
+      "startedAt": "2019-01-01",
+      "ownerHeroKey": "HERO-ICF-001",
+      "welcomeMarkdown": "Welcome to the **ICF Member Commons** — the shared square for cheesemakers, affineurs, cheesemongers, and dairy scientists worldwide. Search Ask-First before opening a new thread, share verifiable cave and make-room data, and back priorities in our quadratic ideation campaigns."
+    },
+    {
+      "key": "chapter-california",
+      "slug": "chapter-california",
+      "name": "California Chapter",
+      "description": "Regional community for California creameries, coastal pasture dairies, cheesemongers, and Sonoma-Marin affineurs.",
+      "collaborationSpaceKey": "chapter-california",
+      "collaborationSpaceId": "5E03E4FF-97A1-575C-B155-AE339A403853",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "community",
+      "spaceTypeId": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+      "CommunityKind": "Special Interest Group",
+      "CommunityKindDetails": "Regional Chapter — California",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Daily Digest",
+      "startedAt": "2019-01-01",
+      "ownerHeroKey": "HERO-ICF-001",
+      "welcomeMarkdown": "Welcome to the **California Chapter Community** — coastal pasture seasons, CDFA compliance notes, Bay Area & Southern California counter spotlights, and peer cave troubleshooting."
+    },
+    {
+      "key": "chapter-wisconsin",
+      "slug": "chapter-wisconsin",
+      "name": "Wisconsin Chapter",
+      "description": "Regional community for Wisconsin master cheesemakers, cooperative creameries, Madison 2026 hosts, and Midwest dairy suppliers.",
+      "collaborationSpaceKey": "chapter-wisconsin",
+      "collaborationSpaceId": "940563FC-C964-5302-AE3D-33441BDF6F58",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "community",
+      "spaceTypeId": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+      "CommunityKind": "Special Interest Group",
+      "CommunityKindDetails": "Regional Chapter — Wisconsin",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Daily Digest",
+      "startedAt": "2019-01-01",
+      "welcomeMarkdown": "Welcome to the **Wisconsin Chapter Community** — cheddar and alpine vats, master cheesemaker cohorts, whey valorization, and regional guild meet-ups."
+    },
+    {
+      "key": "chapter-new-england",
+      "slug": "chapter-new-england",
+      "name": "New England Chapter",
+      "description": "Regional community for Vermont, Maine, and New England farmstead creameries, seasonal raw-milk producers, and cellar teams.",
+      "collaborationSpaceKey": "chapter-new-england",
+      "collaborationSpaceId": "E3F349BD-BE99-50CC-8A24-C7B1980E95A1",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "community",
+      "spaceTypeId": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+      "CommunityKind": "Special Interest Group",
+      "CommunityKindDetails": "Regional Chapter — New England",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Weekly Digest",
+      "startedAt": "2019-01-01",
+      "welcomeMarkdown": "Welcome to the **New England Chapter Community** — grass-fed seasonal transitions, cave affinage circles, and direct-to-table farmstead resilience."
+    },
+    {
+      "key": "chapter-pacific-northwest",
+      "slug": "chapter-pacific-northwest",
+      "name": "Pacific Northwest Chapter",
+      "description": "Regional community for Oregon, Washington, and Idaho farmsteads, goat and sheep dairies, and specialty retailers.",
+      "collaborationSpaceKey": "chapter-pacific-northwest",
+      "collaborationSpaceId": "9D91D2BB-C1BB-5709-923B-D1809B97C182",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "community",
+      "spaceTypeId": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+      "CommunityKind": "Special Interest Group",
+      "CommunityKindDetails": "Regional Chapter — Pacific Northwest",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Weekly Digest",
+      "startedAt": "2019-01-01",
+      "welcomeMarkdown": "Welcome to the **Pacific Northwest Chapter Community** — multi-species milkcraft, cold-chain co-ops, and newcomer orientation across OR, WA, and ID."
+    },
+    {
+      "key": "chapter-france",
+      "slug": "chapter-france",
+      "name": "France Chapter",
+      "description": "Regional community for French & European affineurs, Jura cave stewards, AOP/IGP producers, and cross-Atlantic export specialists.",
+      "collaborationSpaceKey": "chapter-france",
+      "collaborationSpaceId": "2CF53B30-5EEB-5D3B-BC67-F2166B7FFD96",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "community",
+      "spaceTypeId": "2B2C14A8-CCD6-4835-A1BD-969C54236D57",
+      "CommunityKind": "Special Interest Group",
+      "CommunityKindDetails": "Regional Chapter — France & Jura",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Weekly Digest",
+      "startedAt": "2019-01-01",
+      "ownerHeroKey": "HERO-ICF-007",
+      "welcomeMarkdown": "Bienvenue dans le **Chapitre France** — affineurs du Jura, flore de croûte, cahiers des charges AOP, et échanges techniques transatlantiques."
+    },
+    {
+      "key": "committee-food-safety",
+      "slug": "committee-food-safety",
+      "name": "Food Safety Guild & Committee",
+      "description": "Guild community anchored to the ICF Food Safety Committee covering FSMA compliance, environmental pathogen monitoring, recall drills, and raw-milk safety.",
+      "collaborationSpaceKey": "committee-food-safety",
+      "collaborationSpaceId": "4566B81F-E175-5AB7-91C9-7C43DDE63EA5",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "working-group",
+      "spaceTypeId": "3AB9DF10-91C4-444B-B0C2-752383A6E8D3",
+      "CommunityKind": "Working Group",
+      "CommunityKindDetails": "ICF Standing Guild — Food Safety Committee",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Daily Digest",
+      "startedAt": "2019-01-01",
+      "spaceStartedAt": "2014-06-01",
+      "ownerHeroKey": "HERO-ICF-008",
+      "welcomeMarkdown": "Welcome to the **Food Safety Guild & Committee Community** — peer-verified FSMA answers, anonymized root-cause case rounds, and living HACCP & traceability playbooks."
+    },
+    {
+      "key": "committee-education",
+      "slug": "committee-education",
+      "name": "Education & CCP Guild",
+      "description": "Guild community anchored to the ICF Education Committee for Certified Cheese Professional (CCP) candidates, instructors, and apprenticeship mentors.",
+      "collaborationSpaceKey": "committee-education",
+      "collaborationSpaceId": "4E7E58FA-9271-52E6-B29D-A1A5CF0B6E7C",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "working-group",
+      "spaceTypeId": "3AB9DF10-91C4-444B-B0C2-752383A6E8D3",
+      "CommunityKind": "Working Group",
+      "CommunityKindDetails": "ICF Standing Guild — Education Committee",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Weekly Digest",
+      "startedAt": "2019-01-01",
+      "spaceStartedAt": "2016-01-15",
+      "welcomeMarkdown": "Welcome to the **Education & CCP Guild** — exam study Q&A, workshop masterclasses, and curriculum ideation for the next generation of cheesemakers."
+    },
+    {
+      "key": "committee-awards-and-competition",
+      "slug": "committee-awards-and-competition",
+      "name": "Awards & Judging Guild",
+      "description": "Guild community anchored to the ICF Awards & Competition Committee for World Cheese Cup judging calibration, entry categories, and sensory stewardship.",
+      "collaborationSpaceKey": "committee-awards-and-competition",
+      "collaborationSpaceId": "2AB41022-8DBD-58FA-9809-BC68941CE332",
+      "createCollaborationSpace": false,
+      "spaceTypeCode": "working-group",
+      "spaceTypeId": "3AB9DF10-91C4-444B-B0C2-752383A6E8D3",
+      "CommunityKind": "Working Group",
+      "CommunityKindDetails": "ICF Standing Guild — Awards & Competition Committee",
+      "AnonymousReadMode": "Teaser Only",
+      "AskFirstEnabled": true,
+      "DefaultDigestCadence": "Weekly Digest",
+      "startedAt": "2019-01-01",
+      "spaceStartedAt": "2015-01-01",
+      "welcomeMarkdown": "Welcome to the **Awards & Judging Guild** — sensory scoring calibration, category definitions, and quadratic ideation for World Cheese Cup reform."
+    }
+  ],
+  "forums": [
+    {
+      "key": "commons-town-square",
+      "spaceKey": "icf-member-commons",
+      "slug": "town-square",
+      "name": "Federation Town Square",
+      "description": "Open federation-wide discussion on industry shifts, creamery milestones, milk markets, and annual conference prep.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#C87D20",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "commons-cheesemaker-qa",
+      "spaceKey": "icf-member-commons",
+      "slug": "cheesemaker-qa",
+      "name": "Cheesemaker Technical Q&A",
+      "description": "Canon-verified technical Q&A on acidification curves, rennet flocculation, brining, rind defects, and packaging.",
+      "forumTypeCode": "qa-knowledge-base",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000002",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-circle-question",
+      "colorHex": "#0D9488",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "commons-advocacy-priorities-ideation",
+      "spaceKey": "icf-member-commons",
+      "slug": "advocacy-and-education-priorities",
+      "name": "ICF Education & Advocacy Priorities",
+      "description": "100-point Quadratic Ideation Campaign prioritizing 2026-2027 ICF regulatory advocacy, raw-milk modernization, and scholarship tracks.",
+      "forumTypeCode": "ideation-campaign",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000003",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "ideaCampaignKey": "campaign-2026-2027-education-advocacy",
+      "icon": "fa-solid fa-lightbulb",
+      "colorHex": "#D97706",
+      "startedAt": "2025-11-01"
+    },
+    {
+      "key": "commons-creamery-playbooks",
+      "spaceKey": "icf-member-commons",
+      "slug": "creamery-playbooks",
+      "name": "Living Creamery Playbooks",
+      "description": "Co-authored SOPs, cost-model spreadsheets, and succession planning decks maintained by ICF member guilds.",
+      "forumTypeCode": "playbooks-and-docs",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000004",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 40,
+      "defaultForum": false,
+      "icon": "fa-solid fa-file-signature",
+      "colorHex": "#2563EB",
+      "startedAt": "2019-03-01"
+    },
+    {
+      "key": "commons-town-halls-amas",
+      "spaceKey": "icf-member-commons",
+      "slug": "town-halls-and-amas",
+      "name": "Federation Town Halls & AMAs",
+      "description": "Scheduled Ask-Me-Anything sessions with ICF board chairs, FDA policy liaisons, master affineurs, and World Cheese Cup champions.",
+      "forumTypeCode": "live-events-and-amas",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000006",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 50,
+      "defaultForum": false,
+      "icon": "fa-solid fa-tower-broadcast",
+      "colorHex": "#7C3AED",
+      "startedAt": "2020-03-01"
+    },
+    {
+      "key": "ca-general",
+      "spaceKey": "chapter-california",
+      "slug": "california-commons",
+      "name": "California Chapter Lounge",
+      "description": "Regional updates, Sonoma-Marin tastings, pasture season reports, and drought resilience threads.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#059669",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "ca-milk-and-cave-qa",
+      "spaceKey": "chapter-california",
+      "slug": "california-milk-and-cave-qa",
+      "name": "California Milk & Cave Q&A",
+      "description": "Regional Q&A on CDFA licensing, coastal microclimate aging, and goat/sheep seasonal lactation shifts.",
+      "forumTypeCode": "qa-knowledge-base",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000002",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-circle-question",
+      "colorHex": "#0D9488",
+      "startedAt": "2019-02-01"
+    },
+    {
+      "key": "ca-case-rounds",
+      "spaceKey": "chapter-california",
+      "slug": "california-case-rounds",
+      "name": "California Peer Case Rounds",
+      "description": "Structured Situation / Action / Outcome case reviews on bloomy-rind slip-skin, late-blowing clostridia, and energy retrofits.",
+      "forumTypeCode": "peer-case-rounds",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000005",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-briefcase-medical",
+      "colorHex": "#DC2626",
+      "startedAt": "2019-06-01"
+    },
+    {
+      "key": "wi-general",
+      "spaceKey": "chapter-wisconsin",
+      "slug": "wisconsin-commons",
+      "name": "Wisconsin Chapter Lounge",
+      "description": "Upper Midwest creamery news, Madison 2026 conference planning, and cooperative whey initiatives.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#B45309",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "wi-equipment-and-cultures-qa",
+      "spaceKey": "chapter-wisconsin",
+      "slug": "wisconsin-equipment-cultures-qa",
+      "name": "Vats, Cultures & Whey Q&A",
+      "description": "Technical Q&A on open-vat cheddar cheddaring, bacteriophage rotation, membrane filtration, and brine maintenance.",
+      "forumTypeCode": "qa-knowledge-base",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000002",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-circle-question",
+      "colorHex": "#0D9488",
+      "startedAt": "2019-03-01"
+    },
+    {
+      "key": "wi-conference-and-tasting-amas",
+      "spaceKey": "chapter-wisconsin",
+      "slug": "wisconsin-amas",
+      "name": "Wisconsin Master Maker AMAs",
+      "description": "Live Q&A sessions with Wisconsin Master Cheesemakers and Madison 2026 conference track leads.",
+      "forumTypeCode": "live-events-and-amas",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000006",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-tower-broadcast",
+      "colorHex": "#7C3AED",
+      "startedAt": "2020-06-01"
+    },
+    {
+      "key": "ne-general",
+      "spaceKey": "chapter-new-england",
+      "slug": "new-england-commons",
+      "name": "New England Chapter Lounge",
+      "description": "Farmstead roundtables across Vermont, Maine, and Massachusetts covering silage-free winter milk and regional distribution.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#15803D",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "ne-farmstead-case-rounds",
+      "spaceKey": "chapter-new-england",
+      "slug": "new-england-case-rounds",
+      "name": "Farmstead Cave Case Rounds",
+      "description": "Peer diagnostic case reviews for washed-rind smear balance, mites, wood-board sanitation, and seasonal moisture drift.",
+      "forumTypeCode": "peer-case-rounds",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000005",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-briefcase-medical",
+      "colorHex": "#DC2626",
+      "startedAt": "2019-05-01"
+    },
+    {
+      "key": "ne-seasonal-grazing-playbooks",
+      "spaceKey": "chapter-new-england",
+      "slug": "new-england-playbooks",
+      "name": "Pasture & Cellar Playbooks",
+      "description": "Co-edited playbooks on spring-to-autumn milk fat/protein transitions, shared regional cold-chain routes, and hardship co-ops.",
+      "forumTypeCode": "playbooks-and-docs",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000004",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-file-signature",
+      "colorHex": "#2563EB",
+      "startedAt": "2020-04-01"
+    },
+    {
+      "key": "pnw-general",
+      "spaceKey": "chapter-pacific-northwest",
+      "slug": "pnw-commons",
+      "name": "Pacific Northwest Lounge",
+      "description": "Discussions for Oregon, Washington, and Idaho makers, farmers-market mongers, and regional guild gatherings.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#0F766E",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "pnw-new-maker-qa",
+      "spaceKey": "chapter-pacific-northwest",
+      "slug": "pnw-new-maker-qa",
+      "name": "New Creamery & Monger Q&A",
+      "description": "First-year creamery startup Q&A, state Grade A permitting, and specialty cheese counter calibration.",
+      "forumTypeCode": "qa-knowledge-base",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000002",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-circle-question",
+      "colorHex": "#0D9488",
+      "startedAt": "2019-04-01"
+    },
+    {
+      "key": "pnw-cold-chain-grant-ideation",
+      "spaceKey": "chapter-pacific-northwest",
+      "slug": "cold-chain-dtc-grant-pool",
+      "name": "Farmstead Cold-Chain & D2C Grant Pool",
+      "description": "100-point Quadratic Ideation Campaign allocating ICF mutual-aid grant funding for shared cold-chain logistics and direct-to-consumer packaging.",
+      "forumTypeCode": "ideation-campaign",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000003",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "ideaCampaignKey": "campaign-farmstead-cold-chain-grant",
+      "icon": "fa-solid fa-lightbulb",
+      "colorHex": "#D97706",
+      "startedAt": "2025-03-01"
+    },
+    {
+      "key": "fr-affineurs-general",
+      "spaceKey": "chapter-france",
+      "slug": "france-commons",
+      "name": "France & Jura Affineurs Forum",
+      "description": "Transatlantic exchange on French cave affinage, raw-milk alpine wheels, AOP/IGP traditions, and export logistics.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#1D4ED8",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "fr-cave-microflora-case-rounds",
+      "spaceKey": "chapter-france",
+      "slug": "france-cave-case-rounds",
+      "name": "Cave Microflora Case Rounds",
+      "description": "Detailed Situation / Action / Outcome logs on spruce-board conditioning, ammonia balance, and geotrichum/penicillium succession.",
+      "forumTypeCode": "peer-case-rounds",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000005",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-briefcase-medical",
+      "colorHex": "#DC2626",
+      "startedAt": "2019-07-01"
+    },
+    {
+      "key": "fr-export-and-aop-playbooks",
+      "spaceKey": "chapter-france",
+      "slug": "france-export-playbooks",
+      "name": "Export & AOP/IGP Playbooks",
+      "description": "Living documentation on FDA prior notice, customs cold-chain tolerances, and dual-market labeling standards.",
+      "forumTypeCode": "playbooks-and-docs",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000004",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-file-signature",
+      "colorHex": "#2563EB",
+      "startedAt": "2020-02-01"
+    },
+    {
+      "key": "fs-fsma-qa",
+      "spaceKey": "committee-food-safety",
+      "slug": "food-safety-fsma-qa",
+      "name": "FSMA & Pathogen Control Q&A",
+      "description": "Verified Q&A knowledge base on environmental swabbing zones, Listeria monocytogenes remediation, and preventive controls.",
+      "forumTypeCode": "qa-knowledge-base",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000002",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-circle-question",
+      "colorHex": "#0D9488",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "fs-recall-case-rounds",
+      "spaceKey": "committee-food-safety",
+      "slug": "recall-and-contamination-cases",
+      "name": "Anonymized Recall & Root-Cause Cases",
+      "description": "Blameless peer case rounds with redaction guardrails dissecting positive swabs, lot holds, and corrective actions.",
+      "forumTypeCode": "peer-case-rounds",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000005",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Moderated",
+      "sequence": 20,
+      "defaultForum": false,
+      "icon": "fa-solid fa-briefcase-medical",
+      "colorHex": "#DC2626",
+      "startedAt": "2019-02-01"
+    },
+    {
+      "key": "fs-haccp-and-raw-milk-playbooks",
+      "spaceKey": "committee-food-safety",
+      "slug": "haccp-and-traceability-playbooks",
+      "name": "HACCP, Raw-Milk & Traceability Playbooks",
+      "description": "Co-authored templates for FSMA 204 lot-level traceability, 60-day raw-milk aging verification, and mock recall drills.",
+      "forumTypeCode": "playbooks-and-docs",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000004",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-file-signature",
+      "colorHex": "#2563EB",
+      "startedAt": "2019-04-01"
+    },
+    {
+      "key": "edu-ccp-study-qa",
+      "spaceKey": "committee-education",
+      "slug": "ccp-certification-qa",
+      "name": "CCP Certification & Study Q&A",
+      "description": "Canonical study questions and verified answers for Certified Cheese Professional candidates and dairy science learners.",
+      "forumTypeCode": "qa-knowledge-base",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000002",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-circle-question",
+      "colorHex": "#0D9488",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "edu-apprenticeship-curriculum-ideation",
+      "spaceKey": "committee-education",
+      "slug": "next-gen-curriculum-ideation",
+      "name": "Next-Gen Apprenticeship & Curriculum Lab",
+      "description": "Ideation forum shaping regional affinage apprenticeships, hybrid lab intensives, and succession-ready training modules.",
+      "forumTypeCode": "ideation-campaign",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000003",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "ideaCampaignKey": "campaign-nextgen-apprenticeship-curriculum",
+      "icon": "fa-solid fa-lightbulb",
+      "colorHex": "#D97706",
+      "startedAt": "2024-09-01"
+    },
+    {
+      "key": "edu-masterclass-amas",
+      "spaceKey": "committee-education",
+      "slug": "educator-masterclass-amas",
+      "name": "Cheesemaker & Sensory Masterclass AMAs",
+      "description": "Live pre- and post-workshop Q&As with ICF educators, sensory scientists, and CCP exam committee authors.",
+      "forumTypeCode": "live-events-and-amas",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000006",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-tower-broadcast",
+      "colorHex": "#7C3AED",
+      "startedAt": "2020-05-01"
+    },
+    {
+      "key": "wcc-judging-and-stewardship",
+      "spaceKey": "committee-awards-and-competition",
+      "slug": "judging-and-stewardship",
+      "name": "World Cheese Cup Judging Forum",
+      "description": "Open discussion on competition logistics, shipping cold-boxes, judging table pairings, and medal announcements.",
+      "forumTypeCode": "general-discussion",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000001",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 10,
+      "defaultForum": true,
+      "icon": "fa-solid fa-comments",
+      "colorHex": "#CA8A04",
+      "startedAt": "2019-01-01"
+    },
+    {
+      "key": "wcc-category-reform-ideation",
+      "spaceKey": "committee-awards-and-competition",
+      "slug": "2026-wcc-category-reform",
+      "name": "2026 World Cheese Cup Category Reform",
+      "description": "100-point Quadratic Ideation Campaign reforming World Cheese Cup entry classes, milk-type splits, and affineur co-attribution.",
+      "forumTypeCode": "ideation-campaign",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000003",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 20,
+      "defaultForum": false,
+      "ideaCampaignKey": "campaign-2026-wcc-category-reform",
+      "icon": "fa-solid fa-lightbulb",
+      "colorHex": "#D97706",
+      "startedAt": "2025-10-01"
+    },
+    {
+      "key": "wcc-sensory-calibration-playbooks",
+      "spaceKey": "committee-awards-and-competition",
+      "slug": "sensory-calibration-playbooks",
+      "name": "Sensory Scoring & Steward Playbooks",
+      "description": "Co-authored sensory scorecards, off-flavor reference lexicons, and competition steward training manuals.",
+      "forumTypeCode": "playbooks-and-docs",
+      "forumTypeId": "C8A17100-4E12-4B8F-9A10-100000000004",
+      "visibilityBand": "Shared",
+      "postingPolicy": "Open",
+      "sequence": 30,
+      "defaultForum": false,
+      "icon": "fa-solid fa-file-signature",
+      "colorHex": "#2563EB",
+      "startedAt": "2022-01-01"
+    }
+  ],
+  "forumWeights": {
+    "byForumTypeCode": {
+      "general-discussion": 0.30,
+      "qa-knowledge-base": 0.28,
+      "peer-case-rounds": 0.14,
+      "playbooks-and-docs": 0.11,
+      "ideation-campaign": 0.10,
+      "live-events-and-amas": 0.07
+    },
+    "byForumKey": {
+      "commons-town-square": 1.6,
+      "commons-cheesemaker-qa": 1.5,
+      "fs-fsma-qa": 1.35,
+      "edu-ccp-study-qa": 1.25,
+      "ca-general": 1.15,
+      "wi-general": 1.1,
+      "ne-general": 1.0,
+      "pnw-general": 0.95,
+      "fr-affineurs-general": 0.95,
+      "wcc-category-reform-ideation": 1.2,
+      "commons-advocacy-priorities-ideation": 1.2,
+      "pnw-cold-chain-grant-ideation": 1.1
+    }
+  },
+  "engagementDialWeights": {
+    "source": "data/ruleset/common.json (theta, phi)",
+    "rootPostBeta": {
+      "theta": 0.85,
+      "phi": 0.25,
+      "intercept": -0.4
+    },
+    "replyBeta": {
+      "theta": 0.75,
+      "phi": 0.15,
+      "intercept": -0.1
+    },
+    "helpfulAnswerBeta": {
+      "theta": 0.90,
+      "phi": 0.10,
+      "intercept": -0.5
+    },
+    "reactionBeta": {
+      "theta": 0.65,
+      "phi": 0.20,
+      "intercept": 0.1
+    },
+    "ideationAllocationBeta": {
+      "theta": 0.70,
+      "phi": 0.30,
+      "intercept": -0.2
+    },
+    "subscriptionBeta": {
+      "theta": 0.60,
+      "phi": 0.20,
+      "intercept": 0.0
+    }
+  },
+  "topicTaxonomy": [
+    { "slug": "raw-milk-aging-rule", "name": "Raw-Milk Aging Rule", "category": "Regulation & Policy", "colorHex": "#B91C1C", "isOfficial": true, "description": "FDA 60-day aging modernization, phosphatase testing, and raw-milk safety equivalence." },
+    { "slug": "fsma-204-traceability", "name": "FSMA 204 Traceability", "category": "Food Safety", "colorHex": "#DC2626", "isOfficial": true, "description": "FDA Food Traceability Rule compliance, CTE/KDE logging, and lot-level milk tracking." },
+    { "slug": "lot-level-traceability", "name": "Lot-Level Traceability", "category": "Food Safety", "colorHex": "#EF4444", "isOfficial": true, "description": "Batch make-sheet serialization, vat-to-retail barcode linking, and recall isolation." },
+    { "slug": "listeria-environmental-monitoring", "name": "Listeria Environmental Monitoring", "category": "Food Safety", "colorHex": "#991B1B", "isOfficial": true, "description": "Zone 1-4 swabbing schedules, drain sanitation, and seek-and-destroy protocols." },
+    { "slug": "haccp-preventive-controls", "name": "HACCP & Preventive Controls", "category": "Food Safety", "colorHex": "#DC2626", "isOfficial": true, "description": "PCQI plans, critical control points for pasteurization, and audit documentation." },
+    { "slug": "fda-recall-readiness", "name": "Recall Readiness & Drills", "category": "Food Safety", "colorHex": "#B91C1C", "isOfficial": true, "description": "Mock recall timing, distributor notification trees, and consumer communication." },
+    { "slug": "fsma-remote-audits", "name": "FSMA Remote Audits", "category": "Food Safety", "colorHex": "#EA580C", "isOfficial": false, "description": "Virtual inspection checklists and digital record packages." },
+    { "slug": "starter-culture-supply", "name": "Starter Cultures & Phage", "category": "Cultures & Make-Room", "colorHex": "#D97706", "isOfficial": true, "description": "Mesophilic/thermophilic DVS rotations, bacteriophage detection, and bulk starter management." },
+    { "slug": "rennet-coagulation", "name": "Rennet & Coagulation", "category": "Cultures & Make-Room", "colorHex": "#F59E0B", "isOfficial": true, "description": "Flocculation multipliers, calcium chloride dosing, and animal vs. microbial coagulants." },
+    { "slug": "acidification-ph-curves", "name": "Acidification & pH Curves", "category": "Cultures & Make-Room", "colorHex": "#B45309", "isOfficial": true, "description": "Target pH at drain, mill, salt, and 24-hour press for consistent body and melt." },
+    { "slug": "pasteurized-curd-craft", "name": "Pasteurized Curd Craft", "category": "Cultures & Make-Room", "colorHex": "#D97706", "isOfficial": true, "description": "HTST vs. vat pasteurization impact on curd knitting and flavor development." },
+    { "slug": "alpine-cooked-curd", "name": "Alpine Cooked-Curd", "category": "Cultures & Make-Room", "colorHex": "#92400E", "isOfficial": true, "description": "High-scald copper vat techniques, propionic eye formation, and large-wheel pressing." },
+    { "slug": "pasta-filata-stretching", "name": "Pasta Filata & Stretching", "category": "Cultures & Make-Room", "colorHex": "#CA8A04", "isOfficial": false, "description": "Mozzarella, provolone, and caciocavallo pH windows and hot-water stretching." },
+    { "slug": "blue-veining-penicillium", "name": "Blue Veining & Piercing", "category": "Cultures & Make-Room", "colorHex": "#1D4ED8", "isOfficial": true, "description": "Penicillium roqueforti strains, oxygen piercing timing, and moisture control." },
+    { "slug": "brine-salting-chemistry", "name": "Brine & Salting Chemistry", "category": "Cultures & Make-Room", "colorHex": "#0284C7", "isOfficial": true, "description": "Baumé/salometer saturation, calcium balance, pH buffering, and brine pasteurization." },
+    { "slug": "washed-rind-affinage", "name": "Washed-Rind Affinage", "category": "Affinage & Caves", "colorHex": "#C2410C", "isOfficial": true, "description": "Brevibacterium linens smear development, cider/brine washes, and rind suppleness." },
+    { "slug": "bloomy-rind-management", "name": "Bloomy Rind & Slip-Skin", "category": "Affinage & Caves", "colorHex": "#EA580C", "isOfficial": true, "description": "Geotrichum candidum and P. candidum balance to prevent ammonia and slip-skin." },
+    { "slug": "cave-humidity-control", "name": "Cave Humidity & Airflow", "category": "Affinage & Caves", "colorHex": "#0369A1", "isOfficial": true, "description": "RH/temperature psychrometrics, laminar airflow, and avoiding case-hardening." },
+    { "slug": "wooden-aging-boards", "name": "Wooden Aging Boards", "category": "Affinage & Caves", "colorHex": "#78350F", "isOfficial": true, "description": "Spruce and cedar biofilm stewardship, kiln sanitation, and regulatory validation." },
+    { "slug": "cheese-mite-control", "name": "Cheese Mite Prevention", "category": "Affinage & Caves", "colorHex": "#854D0E", "isOfficial": false, "description": "Tyrophagus monitoring, cave sealing, and natural-rind brushing schedules." },
+    { "slug": "shared-aging-caves", "name": "Shared & Co-Op Caves", "category": "Affinage & Caves", "colorHex": "#0F766E", "isOfficial": true, "description": "Multi-creamery contract affinage hubs, lot segregation, and shared infrastructure." },
+    { "slug": "seasonal-pasture-milk", "name": "Seasonal Pasture Milk", "category": "Milk & Herd Science", "colorHex": "#15803D", "isOfficial": true, "description": "Adjusting make recipes across lush spring grass, summer dry-down, and hay transitions." },
+    { "slug": "goat-and-sheep-dairy", "name": "Goat & Sheep Dairy", "category": "Milk & Herd Science", "colorHex": "#16A34A", "isOfficial": true, "description": "Caprine and ovine butterfat/protein ratios, frozen curd storage, and seasonal breeding." },
+    { "slug": "milk-quality-scc", "name": "Milk Quality & SCC", "category": "Milk & Herd Science", "colorHex": "#059669", "isOfficial": true, "description": "Somatic cell counts, psychrotrophic bacteria, and bulk-tank cooling curves." },
+    { "slug": "milk-surplus-diversion", "name": "Milk Surplus Diversion", "category": "Milk & Herd Science", "colorHex": "#4D7C0F", "isOfficial": false, "description": "Emergency cheese conversion and donation pathways during supply chain shocks." },
+    { "slug": "late-blowing-clostridia", "name": "Silage & Late-Blowing", "category": "Milk & Herd Science", "colorHex": "#65A30D", "isOfficial": false, "description": "Preventing Clostridium tyrobutyricum gas defects in long-aged wheels." },
+    { "slug": "herd-economics", "name": "Herd & Feed Economics", "category": "Creamery Business", "colorHex": "#047857", "isOfficial": true, "description": "Component pricing, forage self-sufficiency, and farmstead margin modeling." },
+    { "slug": "creamery-cost-squeeze", "name": "Creamery Cost Squeeze", "category": "Creamery Business", "colorHex": "#B45309", "isOfficial": true, "description": "Navigating energy, feed, and packaging inflation without sacrificing wheel quality." },
+    { "slug": "hardship-dues-aid", "name": "Hardship Dues & Mutual Aid", "category": "Creamery Business", "colorHex": "#0D9488", "isOfficial": true, "description": "ICF hardship dues relief, shared lab testing credits, and peer bridge support." },
+    { "slug": "mutual-aid-equipment", "name": "Shared Equipment & Co-Ops", "category": "Creamery Business", "colorHex": "#0891B2", "isOfficial": false, "description": "Pooled packaging lines, mobile pasteurizers, and surplus vat transfers." },
+    { "slug": "next-gen-succession", "name": "Next-Gen Succession", "category": "Creamery Business", "colorHex": "#4F46E5", "isOfficial": true, "description": "Retiring founder handoffs, employee buyouts, and land-trust creamery transfers." },
+    { "slug": "apprenticeship-pathways", "name": "Apprenticeship Pathways", "category": "Education & CCP", "colorHex": "#6366F1", "isOfficial": true, "description": "Structured paid make-room and cave apprenticeships for emerging makers." },
+    { "slug": "ccp-exam-prep", "name": "CCP Exam Prep", "category": "Education & CCP", "colorHex": "#4338CA", "isOfficial": true, "description": "Certified Cheese Professional exam domains, flashcards, and study cohorts." },
+    { "slug": "online-ccp-study", "name": "Online CCP Study Groups", "category": "Education & CCP", "colorHex": "#6D28D9", "isOfficial": false, "description": "Virtual tasting cohorts and remote study sessions." },
+    { "slug": "virtual-symposium", "name": "Virtual Symposium Archive", "category": "Education & CCP", "colorHex": "#7C3AED", "isOfficial": false, "description": "Recorded technical sessions, remote demonstrations, and Q&A transcripts." },
+    { "slug": "sensory-judging-calibration", "name": "Sensory Judging Calibration", "category": "Competition & Awards", "colorHex": "#CA8A04", "isOfficial": true, "description": "Defect scoring, balance calibration, and judge table consensus protocols." },
+    { "slug": "world-cheese-cup-rules", "name": "World Cheese Cup Rules", "category": "Competition & Awards", "colorHex": "#EAB308", "isOfficial": true, "description": "Category definitions, entry age minimums, and blind-judging logistics." },
+    { "slug": "world-cheese-cup-2026", "name": "World Cheese Cup 2026", "category": "Competition & Awards", "colorHex": "#D97706", "isOfficial": true, "description": "2026 competition schedule, Madison finals, and category reform rollout." },
+    { "slug": "annual-conference-madison", "name": "Madison 2026 Conference", "category": "Events & Chapters", "colorHex": "#B45309", "isOfficial": true, "description": "ICF Annual Conference 2026 sessions, creamery tours, and volunteer coordination." },
+    { "slug": "chapter-tastings", "name": "Chapter Tastings & Meetups", "category": "Events & Chapters", "colorHex": "#059669", "isOfficial": false, "description": "Regional member tastings, dairy open houses, and local pairings." },
+    { "slug": "digital-tasting-kits", "name": "Digital Tasting Kits", "category": "Events & Chapters", "colorHex": "#0891B2", "isOfficial": false, "description": "Shipped tasting flights paired with live guided sensory broadcasts." },
+    { "slug": "pandemic-pivot", "name": "Pandemic Resilience Pivot", "category": "Creamery Business", "colorHex": "#64748B", "isOfficial": false, "description": "Lessons from 2020-2021 restaurant closures and rapid channel shifts." },
+    { "slug": "direct-to-consumer", "name": "Direct-to-Consumer Boxes", "category": "Retail & Logistics", "colorHex": "#0284C7", "isOfficial": true, "description": "Subscription cheese clubs, e-commerce margins, and farm-store merchandising." },
+    { "slug": "cold-chain-shipping", "name": "Cold-Chain Shipping", "category": "Retail & Logistics", "colorHex": "#0369A1", "isOfficial": true, "description": "Insulated liners, phase-change gel packs, and 2-day transit validation." },
+    { "slug": "wholesale-distribution", "name": "Wholesale & Distributors", "category": "Retail & Logistics", "colorHex": "#1E40AF", "isOfficial": true, "description": "Distributor slotting, cut-to-order vs. whole-wheel turns, and cold-storage hubs." },
+    { "slug": "cheese-counter-merchandising", "name": "Counter Merchandising", "category": "Retail & Logistics", "colorHex": "#9333EA", "isOfficial": true, "description": "Cut-and-wrap paper breathing, case humidity, signage, and monger storytelling." },
+    { "slug": "export-certification", "name": "Export & Customs Certs", "category": "Regulation & Policy", "colorHex": "#1D4ED8", "isOfficial": true, "description": "USDA/FDA health certificates, EU/UK border checks, and AOP compliance." },
+    { "slug": "aop-igp-standards", "name": "AOP & IGP Standards", "category": "Regulation & Policy", "colorHex": "#2563EB", "isOfficial": true, "description": "Protected designation terroir rules, feeding mandates, and affineur attribution." },
+    { "slug": "emergency-relief-grants", "name": "Emergency Relief Grants", "category": "Regulation & Policy", "colorHex": "#0D9488", "isOfficial": false, "description": "USDA, state agricultural, and ICF micro-grant navigation." },
+    { "slug": "whey-valorization", "name": "Whey Valorization & Sustainability", "category": "Sustainability", "colorHex": "#16A34A", "isOfficial": true, "description": "Ricotta/whey butter recovery, anaerobic digesters, and water-use reduction." },
+    { "slug": "compostable-packaging", "name": "Breathable & Eco Packaging", "category": "Sustainability", "colorHex": "#22C55E", "isOfficial": false, "description": "Cellulose micro-perforated cheese wraps and recyclable cold-chain liners." },
+    { "slug": "grassroots-advocacy", "name": "Grassroots Dairy Advocacy", "category": "Regulation & Policy", "colorHex": "#DC2626", "isOfficial": true, "description": "Member testimonies, farm-bill briefs, and state raw-milk working groups." }
+  ],
+  "heroParticipationRules": {
+    "excludedHeroKeys": ["HERO-ICF-012"],
+    "excludedEmails": [
+      "kathy.oleary.000287@orchardmerecheese.example",
+      "demo.user@morecheese.org"
+    ],
+    "note": "HERO-ICF-012 (Kathy OLeary) is the planted duplicate of Kate O'Leary and is excluded. demo.user@morecheese.org is the presenter account and is excluded from historical authorship. Each hero posts/replies strictly on or after their birthCycle.",
+    "heroes": [
+      {
+        "heroKey": "HERO-ICF-001",
+        "name": "Elena Rodriguez",
+        "email": "elena.rodriguez.000101@lakemail.example",
+        "birthCycle": 2022,
+        "roleCode": "forum-admin",
+        "preferredSpaces": ["icf-member-commons", "chapter-california", "committee-food-safety"],
+        "preferredForumTypes": ["general-discussion", "qa-knowledge-base", "playbooks-and-docs"],
+        "activityWeight": 2.4,
+        "canonReviewer": true,
+        "voiceHint": "Decisive Standards Committee chair and California chapter leader; cites pH logs and raw-milk aging data."
+      },
+      {
+        "heroKey": "HERO-ICF-002",
+        "name": "Marcus Chen",
+        "email": "marcus.chen.000102@quillpost.example",
+        "birthCycle": 2021,
+        "roleCode": "contributor",
+        "preferredSpaces": ["icf-member-commons", "chapter-california"],
+        "preferredForumTypes": ["general-discussion", "ideation-campaign"],
+        "activityWeight": 1.0,
+        "canonReviewer": false,
+        "voiceHint": "Specialty buyer focused on cut-to-order shelf life, wholesale margins, and cold-chain consistency."
+      },
+      {
+        "heroKey": "HERO-ICF-003",
+        "name": "Danielle Okafor",
+        "email": "danielle.okafor.000103@mailhaven.example",
+        "birthCycle": 2024,
+        "activeThrough": "2025-09-30",
+        "roleCode": "contributor",
+        "preferredSpaces": ["icf-member-commons", "chapter-new-england"],
+        "preferredForumTypes": ["general-discussion", "peer-case-rounds"],
+        "activityWeight": 0.9,
+        "canonReviewer": false,
+        "voiceHint": "Assistant cheesemaker navigating 2025 creamery cost squeeze and employer dissolution before lapsing."
+      },
+      {
+        "heroKey": "HERO-ICF-004",
+        "name": "Priya Natarajan",
+        "email": "priya.natarajan.000104@postfield.example",
+        "birthCycle": 2025,
+        "roleCode": "contributor",
+        "preferredSpaces": ["icf-member-commons", "committee-education", "chapter-pacific-northwest"],
+        "preferredForumTypes": ["qa-knowledge-base", "ideation-campaign", "live-events-and-amas"],
+        "activityWeight": 2.1,
+        "canonReviewer": false,
+        "voiceHint": "Rising-star affinage apprentice asking sharp technical questions and backing apprenticeship ideation."
+      },
+      {
+        "heroKey": "HERO-ICF-005",
+        "name": "Bob Kowalski",
+        "email": "bob.kowalski.000105@bluebarn.example",
+        "birthCycle": 2013,
+        "roleCode": "contributor",
+        "preferredSpaces": ["icf-member-commons", "chapter-wisconsin"],
+        "preferredForumTypes": ["general-discussion", "ideation-campaign"],
+        "activityWeight": 1.3,
+        "canonReviewer": false,
+        "voiceHint": "13-year veteran regional sales director focused on wholesale distribution and trade show ROI."
+      },
+      {
+        "heroKey": "HERO-ICF-006",
+        "name": "Sofia Marchetti",
+        "email": "sofia.marchetti.000106@homestead.example",
+        "birthCycle": 2024,
+        "roleCode": "contributor",
+        "preferredSpaces": ["committee-education", "icf-member-commons"],
+        "preferredForumTypes": ["qa-knowledge-base", "general-discussion", "live-events-and-amas"],
+        "activityWeight": 1.7,
+        "canonReviewer": false,
+        "voiceHint": "Cheesemonger advancing through CCP coursework, sharing counter merchandising and sensory notes."
+      },
+      {
+        "heroKey": "HERO-ICF-007",
+        "name": "Henri Dubois",
+        "email": "henri.dubois.000107@lakemail.example",
+        "birthCycle": 2019,
+        "roleCode": "expert-reviewer",
+        "preferredSpaces": ["chapter-france", "icf-member-commons", "committee-awards-and-competition"],
+        "preferredForumTypes": ["peer-case-rounds", "playbooks-and-docs", "qa-knowledge-base"],
+        "activityWeight": 1.8,
+        "canonReviewer": true,
+        "voiceHint": "Jura affineur & owner; contributes deep wooden-board flora, alpine wheel, and export cert expertise."
+      },
+      {
+        "heroKey": "HERO-ICF-008",
+        "name": "Gwen Whitfield",
+        "email": "gwen.whitfield.000108@quillpost.example",
+        "birthCycle": 2014,
+        "roleCode": "forum-admin",
+        "preferredSpaces": ["committee-food-safety", "icf-member-commons"],
+        "preferredForumTypes": ["qa-knowledge-base", "peer-case-rounds", "playbooks-and-docs", "live-events-and-amas"],
+        "activityWeight": 2.3,
+        "canonReviewer": true,
+        "voiceHint": "Food Safety Committee chair & governance leader; verifies FSMA canon answers and runs recall case rounds."
+      },
+      {
+        "heroKey": "HERO-ICF-009",
+        "name": "Tom Reyes",
+        "email": "tom.reyes.000109@speltmoorfarmstead.example",
+        "birthCycle": 2016,
+        "roleCode": "topic-host",
+        "preferredSpaces": ["icf-member-commons", "chapter-new-england", "committee-food-safety"],
+        "preferredForumTypes": ["general-discussion", "ideation-campaign", "playbooks-and-docs"],
+        "activityWeight": 1.9,
+        "canonReviewer": false,
+        "voiceHint": "Grassroots farmstead advocate leading raw-milk aging testimony and rural cold-chain co-op proposals."
+      },
+      {
+        "heroKey": "HERO-ICF-010",
+        "name": "Aisha Bell",
+        "email": "aisha.bell.000110@quincewickcreamery.example",
+        "birthCycle": 2018,
+        "roleCode": "expert-reviewer",
+        "preferredSpaces": ["committee-food-safety", "chapter-wisconsin"],
+        "preferredForumTypes": ["qa-knowledge-base", "peer-case-rounds"],
+        "activityWeight": 1.3,
+        "canonReviewer": true,
+        "voiceHint": "Quality manager focused on environmental swabbing, phage monitoring, and batch release QA."
+      },
+      {
+        "heroKey": "HERO-ICF-011",
+        "name": "Kate O'Leary",
+        "email": "kate.oleary.000111@orchardmerecheese.example",
+        "birthCycle": 2015,
+        "roleCode": "topic-host",
+        "preferredSpaces": ["committee-education", "committee-awards-and-competition", "icf-member-commons"],
+        "preferredForumTypes": ["general-discussion", "playbooks-and-docs", "ideation-campaign"],
+        "activityWeight": 1.5,
+        "canonReviewer": true,
+        "voiceHint": "Cheese Program Director contributing judging calibration guides and retail buyer education."
+      },
+      {
+        "heroKey": "HERO-ICF-013",
+        "name": "Jamie Fuller",
+        "email": "jamie.fuller.000113@postfield.example",
+        "birthCycle": 2023,
+        "roleCode": "contributor",
+        "preferredSpaces": ["icf-member-commons", "chapter-pacific-northwest", "committee-education"],
+        "preferredForumTypes": ["general-discussion", "qa-knowledge-base", "ideation-campaign", "live-events-and-amas"],
+        "activityWeight": 2.5,
+        "canonReviewer": false,
+        "voiceHint": "High-engagement enthusiast on lower dues tier; prolific commenter, question asker, and AMA participant."
+      },
+      {
+        "heroKey": "HERO-ICF-014",
+        "name": "Victor Sandoval",
+        "email": "victor.sandoval.000114@reedmeredairysystems.example",
+        "birthCycle": 2017,
+        "roleCode": "observer",
+        "preferredSpaces": ["icf-member-commons"],
+        "preferredForumTypes": ["general-discussion"],
+        "activityWeight": 0.05,
+        "canonReviewer": false,
+        "voiceHint": "Corporate auto-renew ghost; observer-only, near-zero forum posts."
+      },
+      {
+        "heroKey": "HERO-ICF-015",
+        "name": "Nia Thompson",
+        "email": "nia.thompson.000115@thequietcurd.example",
+        "birthCycle": 2026,
+        "roleCode": "contributor",
+        "preferredSpaces": ["chapter-pacific-northwest", "committee-education", "icf-member-commons"],
+        "preferredForumTypes": ["qa-knowledge-base", "general-discussion"],
+        "activityWeight": 1.1,
+        "canonReviewer": false,
+        "voiceHint": "Cold-start 2026 junior cheesemonger asking newcomer counter and CCP onboarding questions."
+      },
+      {
+        "heroKey": "HERO-ICF-016",
+        "name": "Charlie Mason",
+        "email": "charlie.mason.000116@winterfendairy.example",
+        "birthCycle": 2021,
+        "roleCode": "contributor",
+        "preferredSpaces": ["icf-member-commons", "committee-awards-and-competition"],
+        "preferredForumTypes": ["general-discussion", "peer-case-rounds", "ideation-campaign"],
+        "activityWeight": 1.2,
+        "canonReviewer": false,
+        "voiceHint": "Tasmanian sheep dairy co-owner sharing Southern Hemisphere pasture cycles and export cold-chain insights."
+      }
+    ]
+  },
+  "ideationCampaignSchedule": [
+    {
+      "campaignKey": "campaign-2026-wcc-category-reform",
+      "forumKey": "wcc-category-reform-ideation",
+      "spaceKey": "committee-awards-and-competition",
+      "title": "2026 World Cheese Cup Category Reform",
+      "description": "Prioritize structural category, affineur co-attribution, and sensory calibration reforms ahead of the 2026-2027 World Cheese Cup.",
+      "allocationMode": "Quadratic",
+      "defaultBudgetPoints": 100,
+      "maxPointsPerIdea": 64,
+      "opensAt": "2025-10-15T00:00:00Z",
+      "submissionsCloseAt": "2026-09-30T23:59:59Z",
+      "votingClosesAt": "2026-12-15T23:59:59Z",
+      "seedIdeas": [
+        {
+          "slug": "split-raw-milk-alpine-by-aging-tier",
+          "title": "Split Raw-Milk Alpine & Mountain Wheels into 6-12m and 12m+ Aging Tiers",
+          "targetReleaseOrQuarter": "2026 Q4",
+          "ideaStatus": "Planned",
+          "tags": ["world-cheese-cup-rules", "alpine-cooked-curd", "raw-milk-aging-rule"]
+        },
+        {
+          "slug": "dual-credit-maker-and-affineur-medals",
+          "title": "Dual-Credit Medals for Independent Affineurs & Partner Creameries",
+          "targetReleaseOrQuarter": "2026 Q4",
+          "ideaStatus": "In Progress",
+          "tags": ["world-cheese-cup-2026", "washed-rind-affinage", "aop-igp-standards"]
+        },
+        {
+          "slug": "blind-defect-calibration-flight-for-judges",
+          "title": "Mandatory Pre-Cup Blind Defect Calibration Flight for All Lead Judges",
+          "targetReleaseOrQuarter": "2026 Q3",
+          "ideaStatus": "Shipped",
+          "tags": ["sensory-judging-calibration", "world-cheese-cup-rules"]
+        },
+        {
+          "slug": "micro-creamery-mixed-milk-open-class",
+          "title": "Dedicated Micro-Creamery Mixed-Milk (<25,000 lb/yr) Open Class",
+          "targetReleaseOrQuarter": "2027 Q1",
+          "ideaStatus": "Under Consideration",
+          "tags": ["world-cheese-cup-rules", "goat-and-sheep-dairy"]
+        }
+      ]
+    },
+    {
+      "campaignKey": "campaign-2026-2027-education-advocacy",
+      "forumKey": "commons-advocacy-priorities-ideation",
+      "spaceKey": "icf-member-commons",
+      "title": "2026-2027 ICF Education & Advocacy Priorities",
+      "description": "Allocate 100-point quadratic budgets across ICF federal/state raw-milk rulemaking, traceability support, and next-gen succession programs.",
+      "allocationMode": "Quadratic",
+      "defaultBudgetPoints": 100,
+      "maxPointsPerIdea": 49,
+      "opensAt": "2025-11-15T00:00:00Z",
+      "submissionsCloseAt": "2026-10-15T23:59:59Z",
+      "votingClosesAt": "2027-01-31T23:59:59Z",
+      "seedIdeas": [
+        {
+          "slug": "fda-60-day-phosphatase-equivalence-dossier",
+          "title": "Compile Multi-State Raw-Milk Aging & Phosphatase Equivalence Dossier for FDA",
+          "targetReleaseOrQuarter": "2026 Q4",
+          "ideaStatus": "In Progress",
+          "tags": ["raw-milk-aging-rule", "grassroots-advocacy", "haccp-preventive-controls"]
+        },
+        {
+          "slug": "open-source-fsma-204-lot-template-kit",
+          "title": "Publish Open-Source FSMA 204 Lot-Level Traceability Starter Kit for Small Creameries",
+          "targetReleaseOrQuarter": "2026 Q3",
+          "ideaStatus": "Shipped",
+          "tags": ["fsma-204-traceability", "lot-level-traceability", "fda-recall-readiness"]
+        },
+        {
+          "slug": "next-gen-creamery-succession-matching-fund",
+          "title": "Launch Next-Gen Cheesemaker Succession & Employee-Buyout Legal Clinic",
+          "targetReleaseOrQuarter": "2027 Q1",
+          "ideaStatus": "Planned",
+          "tags": ["next-gen-succession", "apprenticeship-pathways", "herd-economics"]
+        },
+        {
+          "slug": "bilingual-ccp-study-scholarships",
+          "title": "Fund 50 Bilingual CCP Exam & Lab Intensive Scholarships for Cave Staff",
+          "targetReleaseOrQuarter": "2027 Q1",
+          "ideaStatus": "Under Consideration",
+          "tags": ["ccp-exam-prep", "apprenticeship-pathways", "online-ccp-study"]
+        }
+      ]
+    },
+    {
+      "campaignKey": "campaign-farmstead-cold-chain-grant",
+      "forumKey": "pnw-cold-chain-grant-ideation",
+      "spaceKey": "chapter-pacific-northwest",
+      "title": "Farmstead Cold-Chain & Direct-to-Consumer Grant Pool",
+      "description": "Quadratic allocation of mutual-aid micro-grants for regional shared refrigerated consolidation hubs and eco-insulated D2C shipping.",
+      "allocationMode": "Quadratic",
+      "defaultBudgetPoints": 100,
+      "maxPointsPerIdea": 64,
+      "opensAt": "2025-03-01T00:00:00Z",
+      "submissionsCloseAt": "2026-08-31T23:59:59Z",
+      "votingClosesAt": "2026-12-31T23:59:59Z",
+      "seedIdeas": [
+        {
+          "slug": "willamette-puget-consolidated-reefer-shuttle",
+          "title": "Weekly Shared Refrigerated Shuttle Linking Willamette Valley & Puget Sound Creameries",
+          "targetReleaseOrQuarter": "2026 Q4",
+          "ideaStatus": "Planned",
+          "tags": ["cold-chain-shipping", "shared-aging-caves", "mutual-aid-equipment"]
+        },
+        {
+          "slug": "compostable-phase-change-dtc-liner-co-buy",
+          "title": "Cooperative Bulk Purchase of Compostable Cellulose Liners & Gel Packs",
+          "targetReleaseOrQuarter": "2026 Q3",
+          "ideaStatus": "Shipped",
+          "tags": ["compostable-packaging", "direct-to-consumer", "cold-chain-shipping"]
+        },
+        {
+          "slug": "shared-post-cut-micro-lab-testing-voucher",
+          "title": "Subsidized Listeria & Water-Activity Lab Vouchers for <10-Employee Creameries",
+          "targetReleaseOrQuarter": "2026 Q4",
+          "ideaStatus": "In Progress",
+          "tags": ["hardship-dues-aid", "listeria-environmental-monitoring", "creamery-cost-squeeze"]
+        }
+      ]
+    },
+    {
+      "campaignKey": "campaign-nextgen-apprenticeship-curriculum",
+      "forumKey": "edu-apprenticeship-curriculum-ideation",
+      "spaceKey": "committee-education",
+      "title": "Next-Gen Apprenticeship & Curriculum Priorities",
+      "description": "Member-driven quadratic prioritization of hands-on affinage labs, sensory kits, and CCP modular coursework.",
+      "allocationMode": "Quadratic",
+      "defaultBudgetPoints": 100,
+      "maxPointsPerIdea": 49,
+      "opensAt": "2024-09-15T00:00:00Z",
+      "submissionsCloseAt": "2026-09-15T23:59:59Z",
+      "votingClosesAt": "2026-12-31T23:59:59Z",
+      "seedIdeas": [
+        {
+          "slug": "rotating-four-region-cave-residency",
+          "title": "12-Week Rotating Cave Residency Across New England, Wisconsin, California & Jura",
+          "targetReleaseOrQuarter": "2026 Q4",
+          "ideaStatus": "Planned",
+          "tags": ["apprenticeship-pathways", "next-gen-succession", "cave-humidity-control"]
+        },
+        {
+          "slug": "at-home-off-flavor-sensory-ampule-kit",
+          "title": "Mail-Order Off-Flavor & Phage Sensory Calibration Kit for Remote Learners",
+          "targetReleaseOrQuarter": "2026 Q2",
+          "ideaStatus": "Shipped",
+          "tags": ["digital-tasting-kits", "sensory-judging-calibration", "online-ccp-study"]
+        },
+        {
+          "slug": "small-vat-financial-unit-economics-module",
+          "title": "Add Creamery Cashflow, Feed-Cost & Whey-Recovery Unit Economics to CCP Track",
+          "targetReleaseOrQuarter": "2027 Q1",
+          "ideaStatus": "Under Consideration",
+          "tags": ["creamery-cost-squeeze", "whey-valorization", "ccp-exam-prep"]
+        }
+      ]
+    }
+  ],
+  "synthesisThreshold": {
+    "defaultThreshold": 4,
+    "byForumType": {
+      "general-discussion": 4,
+      "qa-knowledge-base": 3,
+      "ideation-campaign": 5,
+      "playbooks-and-docs": 4,
+      "peer-case-rounds": 3,
+      "live-events-and-amas": 5
+    },
+    "askFirstDeflectionDefault": true
+  }
+}

@@ -17,6 +17,8 @@
  *   3. INTERNAL  — one staff bundle per week (content-backfill-internal-gemini.mjs). It quotes the week's
  *                  facts and blog, and the internal-comms skill refuses a week ending after the last
  *                  confirmed order (vault-facts dataEnds), so it runs after the plan.
+ *   4. COMMUNITY — the BizApps Community plan (data/community/community.plan.json), extended append-only
+ *                  for each due cycle once its month ends (npm run community:plan).
  *
  * Getting a date wrong is silent: a blog week written before it ends invents its news, and a plan run early
  * puts orders in the future. These rules are small, but they are the routine's whole schedule, so they live
@@ -74,6 +76,20 @@ export function nextCycle(root) {
     return nextMonth(String(cp.continuity?.asOfDate ?? cp.releaseDate).slice(0, 7));
 }
 
+/** The as-of date of data/community/community.plan.json (YYYY-MM-DD), or null if absent. */
+export function communityAsOf(root) {
+    const planPath = path.join(root, 'data', 'community', 'community.plan.json');
+    if (!fs.existsSync(planPath)) return null;
+    const plan = JSON.parse(fs.readFileSync(planPath, 'utf8'));
+    const raw = plan.asOf ?? plan.continuity?.asOfDate ?? plan.through ?? null;
+    if (typeof raw === 'string' && ISO.test(raw.slice(0, 10))) return raw.slice(0, 10);
+    if (Array.isArray(plan.cycles) && plan.cycles.length > 0) {
+        const lastYm = String(plan.cycles[plan.cycles.length - 1]).slice(0, 7);
+        if (/^\d{4}-\d{2}$/.test(lastYm)) return monthEnd(lastYm);
+    }
+    return null;
+}
+
 /** The Loom commit changes.yml checks out, so the routine runs the planner on the Loom CI validates with. */
 export function loomRef(root) {
     const yml = fs.readFileSync(path.join(root, '.github', 'workflows', 'changes.yml'), 'utf8');
@@ -93,25 +109,60 @@ const mondaysAfter = (last, ok) => {
  * Due work for `today`, in run order. A blog week is due once it has ended (Sunday before today). Plan
  * cycles are due once their month has ended, oldest first; each needs the blog to cover its last full week
  * first. Internal weeks are due up to dataEnds, which only moves when a plan lands — so the routine asks
- * again after planning.
+ * again after planning. Community cycles track data/community/community.plan.json independently so a plan
+ * extension is flagged whenever a cycle month has ended past community.asOf.
  */
-export function due({ today, lastBlog, lastInternal, dataEnd, cycle }) {
+export function due({ today, lastBlog, lastInternal, dataEnd, cycle, communityAsOf: commAsOf = null, hasCommunityRules = false }) {
     if (!ISO.test(today)) throw new Error(`today must be YYYY-MM-DD, got ${today}`);
     const blogWeeks = lastBlog ? mondaysAfter(lastBlog, (m) => addDays(m, 6) < today) : [];
     const blogThrough = blogWeeks.length ? addDays(blogWeeks[blogWeeks.length - 1], 6) : lastBlog ? addDays(lastBlog, 6) : null;
     const cycles = [];
     for (let c = cycle; monthEnd(c) < today; c = nextMonth(c)) cycles.push(c);
     const internalWeeks = lastInternal && dataEnd ? mondaysAfter(lastInternal, (m) => addDays(m, 6) <= dataEnd) : [];
+
+    let community;
+    if (commAsOf && ISO.test(commAsOf)) {
+        const commNext = nextMonth(commAsOf.slice(0, 7));
+        const commCycles = [];
+        for (let c = commNext; monthEnd(c) < today; c = nextMonth(c)) commCycles.push(c);
+        community = {
+            asOf: commAsOf,
+            next: commNext,
+            cycles: commCycles,
+            needsExtend: commCycles.length > 0,
+            note: commCycles.length ? null : `${commNext} ends ${monthEnd(commNext)}; no cycle is due before ${addDays(monthEnd(commNext), 1)}`,
+        };
+    } else {
+        community = {
+            asOf: null,
+            next: null,
+            cycles: [],
+            needsExtend: false,
+            note: hasCommunityRules
+                ? 'data/community/community.plan.json not yet generated; run npm run community:plan'
+                : 'no community plan present',
+        };
+    }
+
     return {
         today,
         blog: { last: lastBlog, weeks: blogWeeks, through: blogThrough },
         plan: { next: cycle, cycles, note: cycles.length ? null : `${cycle} ends ${monthEnd(cycle)}; no cycle is due before ${addDays(monthEnd(cycle), 1)}` },
         internal: { last: lastInternal, dataEnds: dataEnd, weeks: internalWeeks },
+        community,
     };
 }
 
 export function status(root, today) {
-    return due({ today, lastBlog: lastBlogMonday(root), lastInternal: lastInternalMonday(root), dataEnd: dataEnds(root), cycle: nextCycle(root) });
+    return due({
+        today,
+        lastBlog: lastBlogMonday(root),
+        lastInternal: lastInternalMonday(root),
+        dataEnd: dataEnds(root),
+        cycle: nextCycle(root),
+        communityAsOf: communityAsOf(root),
+        hasCommunityRules: fs.existsSync(path.join(root, 'data', 'ruleset', 'community-rules.json')),
+    });
 }
 
 // ── CLI ──
@@ -129,6 +180,7 @@ function main(argv) {
     console.log(`1. blog      last week ${s.blog.last}; due: ${list(s.blog.weeks)}`);
     console.log(`2. plan      next cycle ${s.plan.next}; due: ${list(s.plan.cycles)}${s.plan.note ? ` (${s.plan.note})` : ''}`);
     console.log(`3. internal  last week ${s.internal.last}, data ends ${s.internal.dataEnds}; due now: ${list(s.internal.weeks)} (ask again after planning)`);
+    console.log(`4. community as of ${s.community.asOf ?? 'none'}; next cycle ${s.community.next ?? 'none'}; due: ${list(s.community.cycles)}${s.community.note ? ` (${s.community.note})` : ''}`);
     return 0;
 }
 
