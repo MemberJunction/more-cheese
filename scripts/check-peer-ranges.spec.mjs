@@ -270,19 +270,38 @@ test('a release-line repo rejects a caret MJ peer that escapes the line cap', ()
     assert.match(violations[0], />=6\.1\.6 <6\.2\.0/);
 });
 
-test('an edge floor in the manifest fails, even when every peer agrees with it', () => {
-    const root = fixture({
-        mjVersionRange: '>=6.1.0-edge.4 <7.0.0',
-        packages: {
-            Entities: {
-                name: '@mj-biz-apps/more-cheese-entities',
-                peerDependencies: { '@memberjunction/core': '^6.1.0-edge.4' },
-            },
-        },
-    });
+test('an edge prerelease floor on a release-line manifest fails, even when every peer agrees with it', () => {
+    const root = mkdtempSync(path.join(tmpdir(), 'peer-ranges-line-edge-'));
+    writeFileSync(
+        path.join(root, 'mj-app.json'),
+        JSON.stringify({ line: '6.1', mjVersionRange: '>=6.1.0-edge.4 <6.2.0' }, null, 2),
+    );
+    mkdirSync(path.join(root, 'packages', 'Entities'), { recursive: true });
+    writeFileSync(
+        path.join(root, 'packages', 'Entities', 'package.json'),
+        JSON.stringify({
+            name: '@mj-biz-apps/more-cheese-entities',
+            peerDependencies: { '@memberjunction/core': '>=6.1.0-edge.4 <6.2.0' },
+        }),
+    );
     const { violations } = runCheck(root);
     assert.equal(violations.length, 1);
     assert.match(violations[0], /PRERELEASE/);
+});
+
+test('an edge prerelease floor on the unpublished next branch passes when peers match', () => {
+    const root = fixture({
+        mjVersionRange: '>=6.3.0-edge.1 <7.0.0',
+        packages: {
+            Entities: {
+                name: '@mj-biz-apps/more-cheese-entities',
+                peerDependencies: { '@memberjunction/core': '^6.3.0-edge.1' },
+            },
+        },
+    });
+    const { violations, stale } = runCheck(root);
+    assert.deepEqual(violations, []);
+    assert.deepEqual(stale, []);
 });
 
 test('an unreadable mjVersionRange is a violation, not a skip', () => {
