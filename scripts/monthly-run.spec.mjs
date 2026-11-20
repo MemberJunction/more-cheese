@@ -9,18 +9,20 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { mondayOf, monthEnd, due, status, lastBlogMonday, lastInternalMonday, dataEnds, nextCycle, loomRef } from './monthly-run.mjs';
+import { mondayOf, monthEnd, due, status, lastBlogMonday, lastInternalMonday, dataEnds, nextCycle, communityAsOf, loomRef } from './monthly-run.mjs';
 
 const SCRIPT = path.join(path.dirname(fileURLToPath(import.meta.url)), 'monthly-run.mjs');
 const LOOM = '54df8fdc09cfd82ed706d8f1ec46576928ad77da';
 
-function repo({ blog = [], internal = [], orders = [], asOf = '2026-10-31' } = {}) {
+function repo({ blog = [], internal = [], orders = [], asOf = '2026-10-31', community = null, hasCommunityRules = false } = {}) {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'monthly-run-'));
     const put = (rel, body) => { fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true }); fs.writeFileSync(path.join(root, rel), body); };
     for (const d of blog) put(`content/blog/${d.slice(0, 4)}/${d}-a-post.md`, '---\ntitle: x\n---\n');
     for (const [file, week] of internal) put(`vault/internal/${file}`, file.endsWith('.csv') ? `# title: x\n# week_of: ${week}\n` : `---\nweek_of: ${week}\n---\n`);
     put('generated/orders/.orders.part-01.json', JSON.stringify(orders.map(([d, s]) => ({ fields: { OrderDate: `${d}T00:00:00`, Status: s } }))));
     put('generated/checkpoint.json', JSON.stringify({ continuity: { asOfDate: asOf } }));
+    if (community !== null) put('data/community/community.plan.json', JSON.stringify(community));
+    if (hasCommunityRules) put('data/ruleset/community-rules.json', JSON.stringify({ version: 1 }));
     put('.github/workflows/changes.yml', `      - uses: actions/checkout@v4\n        with:\n          repository: MemberJunction/loom\n          ref: ${LOOM}\n          path: loom\n`);
     return root;
 }
@@ -92,4 +94,23 @@ test('CLI: status as JSON and text, loom-ref, and a usage error', () => {
     assert.match(text.stdout, /2\. plan\s+next cycle 2026-11; due: none/);
     assert.equal(run('loom-ref').stdout.trim(), LOOM);
     assert.equal(run('bogus').status, 2);
+});
+
+test('communityAsOf and community extension status track data/community/community.plan.json', () => {
+    const empty = repo({ hasCommunityRules: true });
+    assert.equal(communityAsOf(empty), null);
+    const sEmpty = status(empty, '2026-12-01');
+    assert.equal(sEmpty.community.needsExtend, false);
+    assert.match(sEmpty.community.note, /npm run community:plan/);
+
+    const root = repo({ asOf: '2026-11-30', community: { asOf: '2026-10-31' }, hasCommunityRules: true });
+    assert.equal(communityAsOf(root), '2026-10-31');
+    const beforeMonthEnd = status(root, '2026-11-30');
+    assert.equal(beforeMonthEnd.community.needsExtend, false);
+    assert.deepEqual(beforeMonthEnd.community.cycles, []);
+
+    const dec1 = status(root, '2026-12-01');
+    assert.equal(dec1.community.next, '2026-11');
+    assert.equal(dec1.community.needsExtend, true);
+    assert.deepEqual(dec1.community.cycles, ['2026-11']);
 });
