@@ -1775,31 +1775,41 @@ export async function load(opts) {
         if (camp) campaignsNeedingAllocations.add(up(camp.fields.ID));
     }
 
-    const reopenedCampaigns = [];
+    const reopenedCampaignIds = [];
+    const restoredCampaignIds = new Set();
+    let replaySucceeded = false;
+    let mainError = null;
     const nowMs = Date.now();
-    for (const camp of plan.forumIdeaCampaigns) {
-        const campId = up(camp.fields.ID);
-        if (!campaignsNeedingAllocations.has(campId)) continue;
-        const existingCamp = existingCampaigns.get(campId);
-        if (!existingCamp?.VotingClosesAt) continue;
-        const existingCloseMs = new Date(existingCamp.VotingClosesAt).getTime();
-        if (!Number.isNaN(existingCloseMs) && existingCloseMs <= nowMs) {
-            const ownerUser = userByEmail(spaceById.get(up(forumById.get(campId).fields.SpaceID)).ownerEmail);
-            const cRec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
-            if (await cRec.Load(camp.fields.ID)) {
-                cRec.VotingClosesAt = new Date(Date.now() + 86_400_000);
-                await save(cRec, `temporarily reopen campaign ${camp.campaignKey}`);
-                reopenedCampaigns.push({
-                    camp,
-                    ownerUser,
-                    restoreClosesAt: camp.fields.VotingClosesAt ?? existingCamp.VotingClosesAt,
-                });
+    try {
+        for (const camp of plan.forumIdeaCampaigns) {
+            const campId = up(camp.fields.ID);
+            if (!campaignsNeedingAllocations.has(campId)) continue;
+            const existingCamp = existingCampaigns.get(campId);
+            if (!existingCamp?.VotingClosesAt) continue;
+            const existingClosesAt = existingCamp.VotingClosesAt;
+            const existingCloseMs = new Date(existingClosesAt).getTime();
+            if (!Number.isNaN(existingCloseMs) && existingCloseMs <= nowMs) {
+                const ownerUser = userByEmail(spaceById.get(up(forumById.get(campId).fields.SpaceID)).ownerEmail);
+                const campEntity = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
+                if (await campEntity.Load(camp.fields.ID)) {
+                    const originalStoredClosesAt =
+                        existingClosesAt ||
+                        (typeof campEntity.Get === 'function' ? campEntity.Get('VotingClosesAt') : null) ||
+                        campEntity.VotingClosesAt;
+                    const plannedClosesAt = camp.fields.VotingClosesAt ?? null;
+                    campEntity.VotingClosesAt = new Date(Date.now() + 86_400_000);
+                    await save(campEntity, `temporarily reopen campaign ${camp.campaignKey}`);
+                    reopenedCampaignIds.push({
+                        campId,
+                        camp,
+                        ownerUser,
+                        originalStoredClosesAt,
+                        plannedClosesAt,
+                    });
+                }
             }
         }
-    }
 
-    const restoredCampaignIds = new Set();
-    try {
         for (const al of missingAllocations) {
             const k = `${up(al.fields.IdeaPostID)}:${up(al.fields.UserID)}`;
             if (existingAllocations.has(k)) continue;
@@ -1810,17 +1820,48 @@ export async function load(opts) {
             existingAllocations.add(k);
             counts.ideaAllocations++;
         }
+        replaySucceeded = true;
+    } catch (err) {
+        mainError = err;
+        throw err;
     } finally {
-        for (const { camp, ownerUser, restoreClosesAt } of reopenedCampaigns) {
-            const cRec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
-            if (await cRec.Load(camp.fields.ID)) {
-                cRec.VotingClosesAt = restoreClosesAt ? new Date(restoreClosesAt) : null;
-                await save(cRec, `restore campaign voting close ${camp.campaignKey}`);
-                existingCampaigns.set(up(camp.fields.ID), {
-                    ID: camp.fields.ID,
-                    VotingClosesAt: restoreClosesAt ?? null,
-                });
-                restoredCampaignIds.add(up(camp.fields.ID));
+        const restoreErrors = [];
+        for (const { campId, camp, ownerUser, originalStoredClosesAt, plannedClosesAt } of reopenedCampaignIds) {
+            const targetClosesAt = replaySucceeded ? (plannedClosesAt ?? originalStoredClosesAt) : originalStoredClosesAt;
+            try {
+                const cRec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
+                if (await cRec.Load(camp.fields.ID)) {
+                    cRec.VotingClosesAt = targetClosesAt ? new Date(targetClosesAt) : null;
+                    await save(cRec, `restore campaign voting close ${camp.campaignKey}`);
+                    existingCampaigns.set(campId, {
+                        ID: camp.fields.ID,
+                        VotingClosesAt: targetClosesAt ?? null,
+                    });
+                    restoredCampaignIds.add(campId);
+                }
+            } catch (restoreErr) {
+                restoreErrors.push(
+                    new Error(
+                        `Failed to restore VotingClosesAt for campaign ${camp.campaignKey} (${campId}): ${
+                            restoreErr instanceof Error ? restoreErr.message : String(restoreErr)
+                        }`,
+                        { cause: restoreErr },
+                    ),
+                );
+            }
+        }
+        if (restoreErrors.length > 0) {
+            const summary = restoreErrors.map((e) => e.message).join('; ');
+            if (mainError) {
+                console.error(`Additional campaign restoration error(s) during rollback: ${summary}`);
+                if (typeof mainError === 'object' && mainError !== null) {
+                    mainError.restoreErrors = restoreErrors;
+                }
+            } else {
+                throw new AggregateError(
+                    restoreErrors,
+                    `Failed to restore ${restoreErrors.length} reopened campaign(s): ${summary}`,
+                );
             }
         }
     }

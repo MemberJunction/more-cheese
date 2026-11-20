@@ -711,3 +711,306 @@ test('CR-005: load() temporarily reopens a closed existing ForumIdeaCampaign to 
         fs.rmSync(tmpDir, { recursive: true, force: true });
     }
 });
+
+test('CR-005 (Round 2): two-campaign reopen failure, per-campaign restore failure isolation, and operator-modified stored deadline preservation', async () => {
+    const spaceId = '8BF2CDD5-52DE-5448-8D90-91D299F9927A';
+    const forumAId = '10000000-0000-4000-8000-000000000110';
+    const forumBId = '10000000-0000-4000-8000-000000000111';
+    const forumTypeId = 'C8A17100-4E12-4B8F-9A10-100000000003';
+    const postTypeId = 'D8A17100-4E12-4B8F-9A10-100000000003';
+    const ideaAId = '10000000-0000-4000-8000-000000000120';
+    const ideaBId = '10000000-0000-4000-8000-000000000121';
+    const allocAId = '10000000-0000-4000-8000-000000000131';
+    const allocBId = '10000000-0000-4000-8000-000000000132';
+    const ownerId = '20000000-0000-4000-8000-000000000001';
+    const voter1Id = '20000000-0000-4000-8000-000000000002';
+    const presenterId = '20000000-0000-4000-8000-000000000099';
+
+    const plannedCloseA = '2025-06-30T23:59:59Z';
+    const plannedCloseB = '2025-09-30T23:59:59Z';
+    const operatorStoredCloseA = '2025-04-15T18:30:00Z';
+
+    const twoCampPlan = {
+        version: 1,
+        asOf: '2026-10-31',
+        communitySpaces: [
+            {
+                key: 'icf-member-commons',
+                id: spaceId,
+                createCollaborationSpace: false,
+                startedAt: '2019-01-01',
+                ownerUserId: ownerId,
+                ownerEmail: 'owner@morecheese.org',
+                fields: { ID: spaceId, Slug: 'icf-member-commons', DefaultForumID: forumAId },
+            },
+        ],
+        forums: [
+            {
+                key: 'commons-ideation-a',
+                spaceKey: 'icf-member-commons',
+                forumTypeCode: 'ideation-campaign',
+                startedAt: '2024-09-01',
+                fields: { ID: forumAId, SpaceID: spaceId, ForumTypeID: forumTypeId, Slug: 'commons-ideation-a', Name: 'Ideation A' },
+            },
+            {
+                key: 'commons-ideation-b',
+                spaceKey: 'icf-member-commons',
+                forumTypeCode: 'ideation-campaign',
+                startedAt: '2025-01-01',
+                fields: { ID: forumBId, SpaceID: spaceId, ForumTypeID: forumTypeId, Slug: 'commons-ideation-b', Name: 'Ideation B' },
+            },
+        ],
+        forumIdeaCampaigns: [
+            {
+                campaignKey: 'campaign-a',
+                forumKey: 'commons-ideation-a',
+                spaceKey: 'icf-member-commons',
+                opensAt: '2024-09-01T00:00:00Z',
+                fields: {
+                    ID: forumAId,
+                    DefaultBudgetPoints: 100,
+                    AllocationMode: 'Quadratic',
+                    MaxPointsPerIdea: 49,
+                    SubmissionsCloseAt: '2025-05-31T23:59:59Z',
+                    VotingClosesAt: plannedCloseA,
+                },
+            },
+            {
+                campaignKey: 'campaign-b',
+                forumKey: 'commons-ideation-b',
+                spaceKey: 'icf-member-commons',
+                opensAt: '2025-01-01T00:00:00Z',
+                fields: {
+                    ID: forumBId,
+                    DefaultBudgetPoints: 100,
+                    AllocationMode: 'Quadratic',
+                    MaxPointsPerIdea: 49,
+                    SubmissionsCloseAt: '2025-08-31T23:59:59Z',
+                    VotingClosesAt: plannedCloseB,
+                },
+            },
+        ],
+        topicTags: [],
+        forumMembers: [],
+        memberProfiles: [],
+        posts: [
+            {
+                key: 'idea-a',
+                cycle: '2024-09',
+                createdAt: '2024-09-05T10:00:00Z',
+                fields: {
+                    ID: ideaAId,
+                    ForumID: forumAId,
+                    PostTypeID: postTypeId,
+                    RootPostID: null,
+                    ParentPostID: null,
+                    ReplyDepth: 0,
+                    AuthorUserID: ownerId,
+                    ViewCount: 0,
+                },
+            },
+            {
+                key: 'idea-b',
+                cycle: '2025-01',
+                createdAt: '2025-01-05T10:00:00Z',
+                fields: {
+                    ID: ideaBId,
+                    ForumID: forumBId,
+                    PostTypeID: postTypeId,
+                    RootPostID: null,
+                    ParentPostID: null,
+                    ReplyDepth: 0,
+                    AuthorUserID: ownerId,
+                    ViewCount: 0,
+                },
+            },
+        ],
+        questionPosts: [],
+        answerPosts: [],
+        ideaPosts: [
+            { cycle: '2024-09', campaignKey: 'campaign-a', fields: { ID: ideaAId, IdeaStatus: 'Shipped', TotalPointsAllocated: 25 } },
+            { cycle: '2025-01', campaignKey: 'campaign-b', fields: { ID: ideaBId, IdeaStatus: 'Planned', TotalPointsAllocated: 16 } },
+        ],
+        casePosts: [],
+        amaPosts: [],
+        artifactPosts: [],
+        postTags: [],
+        reactions: [],
+        ideaAllocations: [
+            {
+                cycle: '2024-10',
+                campaignKey: 'campaign-a',
+                createdAt: '2024-10-05T12:00:00Z',
+                fields: { ID: allocAId, IdeaPostID: ideaAId, UserID: voter1Id, PointsAllocated: 25, QuadraticVotes: 5 },
+            },
+            {
+                cycle: '2025-02',
+                campaignKey: 'campaign-b',
+                createdAt: '2025-02-05T12:00:00Z',
+                fields: { ID: allocBId, IdeaPostID: ideaBId, UserID: voter1Id, PointsAllocated: 16, QuadraticVotes: 4 },
+            },
+        ],
+        subscriptions: [],
+    };
+
+    const users = [
+        { ID: '00000000-0000-0000-0000-000000000001', Name: 'System', Email: 'system@morecheese.org' },
+        { ID: ownerId, Name: 'Owner', Email: 'owner@morecheese.org' },
+        { ID: voter1Id, Name: 'Voter 1', Email: 'voter1@morecheese.org' },
+        { ID: presenterId, Name: 'Presenter', Email: DEFAULT_PRESENTER },
+    ];
+
+    const makeInitialTables = (storedCloseA = plannedCloseA, storedCloseB = plannedCloseB) => ({
+        [ENTITY.forumTypes]: [{ ID: forumTypeId, Code: 'ideation-campaign' }],
+        [ENTITY.postTypes]: [{ ID: postTypeId, Code: 'idea-proposal' }],
+        [ENTITY.forumRoleTypes]: [{ ID: '30000000-0000-4000-8000-000000000001', Code: 'forum-admin' }],
+        [ENTITY.spaceRoles]: [{ ID: '40000000-0000-4000-8000-000000000001', Code: 'admin' }],
+        [ENTITY.environments]: [{ ID: '50000000-0000-4000-8000-000000000001', IsDefault: 1 }],
+        [ENTITY.artifactTypes]: [{ ID: '60000000-0000-4000-8000-000000000001', Name: 'Document' }],
+        [ENTITY.spaces]: [{ ID: spaceId }],
+        [ENTITY.spaceMembers]: [{ ID: '70000000-0000-4000-8000-000000000001', SpaceID: spaceId, UserID: presenterId }],
+        [ENTITY.communitySpaces]: [{ ID: spaceId, DefaultForumID: forumAId }],
+        [ENTITY.forums]: [
+            { ID: forumAId, SpaceID: spaceId },
+            { ID: forumBId, SpaceID: spaceId },
+        ],
+        [ENTITY.forumMembers]: [
+            { ID: '70000000-0000-4000-8000-000000000002', ForumID: forumAId, UserID: presenterId },
+            { ID: '70000000-0000-4000-8000-000000000005', ForumID: forumBId, UserID: presenterId },
+        ],
+        [ENTITY.communityMemberProfiles]: [{ ID: '70000000-0000-4000-8000-000000000003', SpaceID: spaceId, UserID: presenterId }],
+        [ENTITY.forumSubscriptions]: [
+            { ID: '70000000-0000-4000-8000-000000000004', UserID: presenterId, ForumID: forumAId },
+            { ID: '70000000-0000-4000-8000-000000000006', UserID: presenterId, ForumID: forumBId },
+        ],
+        [ENTITY.forumIdeaCampaigns]: [
+            { ID: forumAId, VotingClosesAt: storedCloseA },
+            { ID: forumBId, VotingClosesAt: storedCloseB },
+        ],
+        [ENTITY.forumPosts]: [
+            { ID: ideaAId, ForumID: forumAId },
+            { ID: ideaBId, ForumID: forumBId },
+        ],
+    });
+
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'load-comm-cr005-r2-'));
+    try {
+        const planPath = path.join(tmpDir, 'two-camp.plan.json');
+        fs.writeFileSync(planPath, JSON.stringify(twoCampPlan));
+
+        // (a) Two-campaign test: reopening campaign B fails after campaign A was reopened -> campaign A is still restored to its original stored deadline
+        const reopenFailMock = createMockRuntime(makeInitialTables(operatorStoredCloseA, plannedCloseB), users, {
+            onSave: async (entityName, payload) => {
+                if (
+                    entityName === ENTITY.forumIdeaCampaigns &&
+                    uuidsEqual(payload.ID, forumBId) &&
+                    new Date(payload.VotingClosesAt).getTime() > Date.now()
+                ) {
+                    return 'Simulated reopen failure on campaign B';
+                }
+                return null;
+            },
+        });
+        await assert.rejects(
+            () => load({ plan: planPath, runtime: reopenFailMock.runtime }),
+            /Simulated reopen failure on campaign B/,
+        );
+        const campRowsA = reopenFailMock.getRows(ENTITY.forumIdeaCampaigns);
+        const finalA = campRowsA.find((r) => uuidsEqual(r.ID, forumAId));
+        const finalB = campRowsA.find((r) => uuidsEqual(r.ID, forumBId));
+        assert.equal(new Date(finalA.VotingClosesAt).toISOString(), new Date(operatorStoredCloseA).toISOString(), 'campaign A must be restored to its original stored deadline when reopening campaign B throws');
+        assert.equal(new Date(finalB.VotingClosesAt).toISOString(), new Date(plannedCloseB).toISOString(), 'campaign B must remain at its original stored deadline');
+
+        // (b) Restoration-failure isolation test: restoring campaign A throws in finally -> campaign B's restoration is still attempted and succeeds
+        const restoreFailMock = createMockRuntime(makeInitialTables(plannedCloseA, plannedCloseB), users, {
+            onSave: async (entityName, payload) => {
+                if (
+                    entityName === ENTITY.forumIdeaCampaigns &&
+                    uuidsEqual(payload.ID, forumAId) &&
+                    new Date(payload.VotingClosesAt).getTime() <= Date.now()
+                ) {
+                    return 'Simulated restore failure on campaign A';
+                }
+                return null;
+            },
+        });
+        await assert.rejects(
+            () => load({ plan: planPath, runtime: restoreFailMock.runtime }),
+            /Failed to restore 1 reopened campaign\(s\):.*campaign-a.*Simulated restore failure on campaign A/,
+        );
+        const restoredRowsB = restoreFailMock.getRows(ENTITY.forumIdeaCampaigns);
+        const afterRestoreB = restoredRowsB.find((r) => uuidsEqual(r.ID, forumBId));
+        assert.equal(new Date(afterRestoreB.VotingClosesAt).toISOString(), new Date(plannedCloseB).toISOString(), 'campaign B restoration must still run and succeed when restoring campaign A throws');
+
+        // Also verify restoration failure never swallows an original allocation replay error
+        const bothFailMock = createMockRuntime(makeInitialTables(operatorStoredCloseA, plannedCloseB), users, {
+            onSave: async (entityName, payload) => {
+                if (entityName === ENTITY.forumIdeaAllocations && uuidsEqual(payload.ID, allocBId)) {
+                    return 'Original allocation replay error';
+                }
+                if (
+                    entityName === ENTITY.forumIdeaCampaigns &&
+                    uuidsEqual(payload.ID, forumAId) &&
+                    new Date(payload.VotingClosesAt).getTime() <= Date.now()
+                ) {
+                    return 'Simulated restore failure on campaign A';
+                }
+                return null;
+            },
+        });
+        await assert.rejects(
+            () => load({ plan: planPath, runtime: bothFailMock.runtime }),
+            (err) => {
+                assert.match(err.message, /Original allocation replay error/);
+                assert.ok(Array.isArray(err.restoreErrors) && err.restoreErrors.length === 1);
+                assert.match(err.restoreErrors[0].message, /Simulated restore failure on campaign A/);
+                return true;
+            },
+        );
+        const afterBothFailB = bothFailMock.getRows(ENTITY.forumIdeaCampaigns).find((r) => uuidsEqual(r.ID, forumBId));
+        assert.equal(new Date(afterBothFailB.VotingClosesAt).toISOString(), new Date(plannedCloseB).toISOString(), 'campaign B must still be restored even when allocation and campaign A restore both fail');
+
+        // (c) Stored deadline differs from planned deadline and allocation failure restores exact original stored deadline
+        const singleCampPlan = {
+            ...twoCampPlan,
+            forums: [twoCampPlan.forums[0]],
+            forumIdeaCampaigns: [twoCampPlan.forumIdeaCampaigns[0]],
+            posts: [twoCampPlan.posts[0]],
+            ideaPosts: [twoCampPlan.ideaPosts[0]],
+            ideaAllocations: [twoCampPlan.ideaAllocations[0]],
+        };
+        const singlePlanPath = path.join(tmpDir, 'single-camp.plan.json');
+        fs.writeFileSync(singlePlanPath, JSON.stringify(singleCampPlan));
+        const storedDiffTables = makeInitialTables(operatorStoredCloseA, plannedCloseB);
+        storedDiffTables[ENTITY.forums] = [storedDiffTables[ENTITY.forums][0]];
+        storedDiffTables[ENTITY.forumMembers] = [storedDiffTables[ENTITY.forumMembers][0]];
+        storedDiffTables[ENTITY.forumSubscriptions] = [storedDiffTables[ENTITY.forumSubscriptions][0]];
+        storedDiffTables[ENTITY.forumIdeaCampaigns] = [storedDiffTables[ENTITY.forumIdeaCampaigns][0]];
+        storedDiffTables[ENTITY.forumPosts] = [storedDiffTables[ENTITY.forumPosts][0]];
+
+        const diffMock = createMockRuntime(storedDiffTables, users, {
+            onSave: async (entityName, payload) => {
+                if (entityName === ENTITY.forumIdeaAllocations) {
+                    return 'Allocation save aborted';
+                }
+                return null;
+            },
+        });
+        await assert.rejects(
+            () => load({ plan: singlePlanPath, runtime: diffMock.runtime }),
+            /Allocation save aborted/,
+        );
+        const restoredDiffA = diffMock.getRows(ENTITY.forumIdeaCampaigns)[0];
+        assert.equal(
+            new Date(restoredDiffA.VotingClosesAt).toISOString(),
+            new Date(operatorStoredCloseA).toISOString(),
+            'failed allocation replay must restore exact operator-modified original stored deadline instead of planned deadline',
+        );
+        assert.notEqual(
+            new Date(restoredDiffA.VotingClosesAt).toISOString(),
+            new Date(plannedCloseA).toISOString(),
+        );
+    } finally {
+        fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+});
