@@ -2185,68 +2185,103 @@ export function renderCommunityPlan(plan) {
 }
 
 // ---------- CLI ----------
-function parseArgs(argv) {
+export function parseArgs(argv) {
     let check = false;
     let throughMonth = null;
+    let out = PLAN_FILE;
+    let allowShrink = false;
+    const nextVal = (flag, i) => {
+        if (i + 1 >= argv.length) throw new Error(`${flag} requires a value`);
+        return argv[i + 1];
+    };
     for (let i = 0; i < argv.length; i++) {
         const a = argv[i];
         if (a === '--check') check = true;
-        else if (a === '--through' || a === '--month') throughMonth = argv[++i];
+        else if (a === '--through' || a === '--month') throughMonth = nextVal(a, i++);
         else if (a.startsWith('--through=')) throughMonth = a.slice('--through='.length);
         else if (a.startsWith('--month=')) throughMonth = a.slice('--month='.length);
+        else if (a === '--out') out = nextVal('--out', i++);
+        else if (a.startsWith('--out=')) out = a.slice('--out='.length);
+        else if (a === '--allow-shrink' || a === '--reset') allowShrink = true;
         else throw new Error(`Unknown argument: ${a}`);
     }
-    return { check, throughMonth };
+    return { check, throughMonth, out, allowShrink };
 }
 
-function main(argv) {
-    const root = process.cwd();
-    const { check, throughMonth: explicitThrough } = parseArgs(argv);
-    const world = loadCommunityWorld(root);
-    const outPath = path.join(root, PLAN_FILE);
-
-    let targetThrough = explicitThrough;
-    if (!targetThrough && check && fs.existsSync(outPath)) {
-        try {
-            const existing = JSON.parse(fs.readFileSync(outPath, 'utf8'));
-            const committedMonth =
-                existing.throughMonth ??
-                (typeof existing.asOf === 'string' && existing.asOf.length >= 7 ? existing.asOf.slice(0, 7) : null);
-            if (committedMonth && YM_RE.test(committedMonth) && committedMonth >= world.defaultThroughMonth) {
-                targetThrough = committedMonth;
-            }
-        } catch {
-            // Fall through to default and let byte comparison fail cleanly
-        }
+export function readExistingThroughMonth(outPath) {
+    if (!fs.existsSync(outPath)) return null;
+    try {
+        const existing = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+        const committedMonth =
+            existing?.throughMonth ??
+            (typeof existing?.asOf === 'string' && existing.asOf.length >= 7 ? existing.asOf.slice(0, 7) : null);
+        return committedMonth && YM_RE.test(committedMonth) ? committedMonth : null;
+    } catch {
+        return null;
     }
-    targetThrough = targetThrough ?? world.defaultThroughMonth ?? BASELINE_MONTH;
+}
+
+export function main(argv, root = process.cwd()) {
+    const { check, throughMonth: explicitThrough, out, allowShrink } = parseArgs(argv);
+    const world = loadCommunityWorld(root);
+    const outPath = path.resolve(root, out);
+    const relOut = path.relative(root, outPath) || out;
+
+    const existingThroughMonth = readExistingThroughMonth(outPath);
+    const worldDefault = world.defaultThroughMonth ?? BASELINE_MONTH;
+
+    let targetThrough;
+    if (explicitThrough != null) {
+        if (!YM_RE.test(explicitThrough)) {
+            throw new Error(`--through/--month must be YYYY-MM, got "${explicitThrough}"`);
+        }
+        if (existingThroughMonth && explicitThrough < existingThroughMonth && !allowShrink) {
+            throw new Error(
+                `Refusing to shrink existing community plan at ${relOut} from ${existingThroughMonth} to ${explicitThrough}; pass --allow-shrink (or --reset) to truncate.`,
+            );
+        }
+        targetThrough = explicitThrough;
+    } else {
+        targetThrough =
+            existingThroughMonth && existingThroughMonth > worldDefault ? existingThroughMonth : worldDefault;
+    }
 
     const plan = buildCommunityPlan(world, { throughMonth: targetThrough });
     const rendered = renderCommunityPlan(plan);
 
     if (check) {
         if (!fs.existsSync(outPath)) {
-            console.error(`community plan missing at ${PLAN_FILE}; run: npm run community:plan`);
-            process.exit(1);
+            const err = new Error(`community plan missing at ${relOut}; run: npm run community:plan`);
+            err.exitCode = 1;
+            throw err;
         }
         const onDisk = fs.readFileSync(outPath, 'utf8');
         if (onDisk !== rendered) {
-            console.error(`community plan is out of date at ${PLAN_FILE} (horizon ${targetThrough}); run: npm run community:plan`);
-            process.exit(1);
+            const err = new Error(
+                `community plan is out of date at ${relOut} (horizon ${targetThrough}); run: npm run community:plan`,
+            );
+            err.exitCode = 1;
+            throw err;
         }
         console.log(
             `community plan is up to date (${plan.stats.monthsCovered} months through ${plan.asOf}: ${plan.stats.communitySpaces} spaces, ${plan.stats.forums} forums, ${plan.stats.totalPosts} posts, ${plan.stats.ideaAllocations} allocations, ${plan.stats.reactions} reactions)`,
         );
-        return;
+        return plan;
     }
 
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, rendered, 'utf8');
     console.log(
-        `wrote ${PLAN_FILE} (${plan.stats.monthsCovered} months through ${plan.asOf}): ${plan.stats.communitySpaces} spaces, ${plan.stats.forums} forums, ${plan.stats.topicTags} tags (${plan.stats.uniqueTopicSlugs} slugs), ${plan.stats.memberProfiles} profiles, ${plan.stats.totalPosts} posts (${plan.stats.rootPosts} roots, ${plan.stats.replyPosts} replies), ${plan.stats.qaQuestionPosts} Q&As (${plan.stats.verifiedCanonAnswers} verified canon), ${plan.stats.ideaAllocations} allocations, ${plan.stats.reactions} reactions, ${plan.stats.postTags} post tags, ${plan.stats.subscriptions} subscriptions`,
+        `wrote ${relOut} (${plan.stats.monthsCovered} months through ${plan.asOf}): ${plan.stats.communitySpaces} spaces, ${plan.stats.forums} forums, ${plan.stats.topicTags} tags (${plan.stats.uniqueTopicSlugs} slugs), ${plan.stats.memberProfiles} profiles, ${plan.stats.totalPosts} posts (${plan.stats.rootPosts} roots, ${plan.stats.replyPosts} replies), ${plan.stats.qaQuestionPosts} Q&As (${plan.stats.verifiedCanonAnswers} verified canon), ${plan.stats.ideaAllocations} allocations, ${plan.stats.reactions} reactions, ${plan.stats.postTags} post tags, ${plan.stats.subscriptions} subscriptions`,
     );
+    return plan;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))) {
-    main(process.argv.slice(2));
+    try {
+        main(process.argv.slice(2));
+    } catch (err) {
+        console.error(err instanceof Error ? err.message : String(err));
+        process.exit(err?.exitCode ?? 1);
+    }
 }

@@ -17,6 +17,7 @@ import {
     PRESENTER,
     buildCommunityPlan,
     loadCommunityWorld,
+    main as buildCommunityPlanMain,
     renderCommunityPlan,
 } from './build-community-plan.mjs';
 
@@ -257,8 +258,18 @@ test('append-only monthly growth (2026-11): preserves all 2019-01..2026-10 recor
     assert.ok(novTags.length >= 2);
     assert.ok(novSubs.length >= 1);
 
-    // 100% of 2019-01..2026-10 records remain immutable across all cycle-scoped arrays
-    for (const key of [
+    // 100% of 2019-01..2026-10 records remain immutable across ALL 17 entity collections
+    const immutableFullCollections = [
+        'communitySpaces',
+        'forums',
+        'forumMembers',
+        'forumIdeaCampaigns',
+    ];
+    for (const key of immutableFullCollections) {
+        assert.deepEqual(novPlanA[key], basePlan[key], `collection ${key} mutated on 2026-11 append`);
+    }
+
+    const immutableCycleCollections = [
         'posts',
         'questionPosts',
         'answerPosts',
@@ -269,10 +280,86 @@ test('append-only monthly growth (2026-11): preserves all 2019-01..2026-10 recor
         'reactions',
         'ideaAllocations',
         'subscriptions',
-    ]) {
+    ];
+    for (const key of immutableCycleCollections) {
         const baseSlice = basePlan[key];
         const novHistoricalSlice = novPlanA[key].filter((row) => row.cycle <= BASELINE_MONTH);
         assert.deepEqual(novHistoricalSlice, baseSlice, `historical ${key} mutated on 2026-11 append`);
+    }
+
+    // ideaPosts: closed campaigns are byte-for-byte identical; open campaigns preserve identity/metadata while rollups increase monotonically
+    const novIdeaById = new Map(novPlanA.ideaPosts.map((ip) => [ip.fields.ID, ip]));
+    const openCampaignKeys = new Set(
+        novPlanA.forumIdeaCampaigns
+            .filter((c) => !c.fields.VotingClosesAt || c.fields.VotingClosesAt.slice(0, 7) >= '2026-11')
+            .map((c) => c.campaignKey),
+    );
+    for (const baseIdea of basePlan.ideaPosts) {
+        const novIdea = novIdeaById.get(baseIdea.fields.ID);
+        assert.ok(novIdea, `missing ideaPost ${baseIdea.fields.ID} after 2026-11 append`);
+        if (!openCampaignKeys.has(baseIdea.campaignKey)) {
+            assert.deepEqual(novIdea, baseIdea, `closed-campaign ideaPost ${baseIdea.slug} mutated`);
+        } else {
+            assert.equal(novIdea.cycle, baseIdea.cycle);
+            assert.equal(novIdea.campaignKey, baseIdea.campaignKey);
+            assert.equal(novIdea.forumKey, baseIdea.forumKey);
+            assert.equal(novIdea.slug, baseIdea.slug);
+            assert.equal(novIdea.fields.IdeaStatus, baseIdea.fields.IdeaStatus);
+            assert.equal(novIdea.fields.TargetReleaseOrQuarter, baseIdea.fields.TargetReleaseOrQuarter);
+            assert.equal(novIdea.fields.StatusRationaleMarkdown, baseIdea.fields.StatusRationaleMarkdown);
+            assert.equal(novIdea.fields.MergedIntoIdeaPostID, baseIdea.fields.MergedIntoIdeaPostID);
+            assert.ok(novIdea.fields.TotalPointsAllocated >= baseIdea.fields.TotalPointsAllocated);
+            assert.ok(novIdea.fields.EffectiveQuadraticVotes >= baseIdea.fields.EffectiveQuadraticVotes);
+            assert.ok(novIdea.fields.UniqueBackerCount >= baseIdea.fields.UniqueBackerCount);
+        }
+    }
+
+    // topicTags: preexisting PKs, identity, and taxonomy fields unchanged; PostCount only increases monotonically on 2026-11 tag activity
+    const novTaggedSlugs = new Set(novTags.map((t) => `${t.spaceKey}:${t.tagSlug}`));
+    const novTagById = new Map(novPlanA.topicTags.map((t) => [t.fields.ID, t]));
+    assert.equal(novPlanA.topicTags.length, basePlan.topicTags.length);
+    for (const baseTag of basePlan.topicTags) {
+        const novTag = novTagById.get(baseTag.fields.ID);
+        assert.ok(novTag, `missing topicTag ${baseTag.fields.ID} after 2026-11 append`);
+        assert.equal(novTag.key, baseTag.key);
+        assert.equal(novTag.spaceKey, baseTag.spaceKey);
+        assert.equal(novTag.category, baseTag.category);
+        assert.equal(novTag.fields.SpaceID, baseTag.fields.SpaceID);
+        assert.equal(novTag.fields.ParentTagID, baseTag.fields.ParentTagID);
+        assert.equal(novTag.fields.TagID, baseTag.fields.TagID);
+        assert.equal(novTag.fields.Slug, baseTag.fields.Slug);
+        assert.equal(novTag.fields.Name, baseTag.fields.Name);
+        assert.equal(novTag.fields.Description, baseTag.fields.Description);
+        assert.equal(novTag.fields.ColorHex, baseTag.fields.ColorHex);
+        assert.equal(novTag.fields.IsOfficial, baseTag.fields.IsOfficial);
+        assert.ok(novTag.fields.PostCount >= baseTag.fields.PostCount);
+        if (!novTaggedSlugs.has(baseTag.key)) {
+            assert.equal(novTag.fields.PostCount, baseTag.fields.PostCount, `topicTag ${baseTag.key} PostCount changed without 2026-11 activity`);
+        }
+    }
+
+    // memberProfiles: preexisting PKs, identity, bio/expertise, and createdAt unchanged; rollups only increase monotonically
+    const novProfileById = new Map(novPlanA.memberProfiles.map((mp) => [mp.fields.ID, mp]));
+    for (const baseProf of basePlan.memberProfiles) {
+        const novProf = novProfileById.get(baseProf.fields.ID);
+        assert.ok(novProf, `missing memberProfile ${baseProf.fields.ID} after 2026-11 append`);
+        assert.equal(novProf.spaceKey, baseProf.spaceKey);
+        assert.equal(novProf.userEmail, baseProf.userEmail);
+        assert.equal(novProf.heroKey, baseProf.heroKey);
+        assert.equal(novProf.createdAt, baseProf.createdAt);
+        assert.equal(novProf.fields.SpaceID, baseProf.fields.SpaceID);
+        assert.equal(novProf.fields.UserID, baseProf.fields.UserID);
+        assert.equal(novProf.fields.PersonID, baseProf.fields.PersonID);
+        assert.equal(novProf.fields.BioMarkdown, baseProf.fields.BioMarkdown);
+        assert.equal(novProf.fields.ExpertiseTagsJSON, baseProf.fields.ExpertiseTagsJSON);
+        assert.equal(novProf.fields.DigestCadence, baseProf.fields.DigestCadence);
+        assert.equal(novProf.fields.OpenToPeerMentoring, baseProf.fields.OpenToPeerMentoring);
+        assert.ok(novProf.fields.HelpfulAnswerCount >= baseProf.fields.HelpfulAnswerCount);
+        assert.ok(novProf.fields.AcceptedAnswerCount >= baseProf.fields.AcceptedAnswerCount);
+        assert.ok(novProf.fields.ReputationScore >= baseProf.fields.ReputationScore);
+        if (baseProf.updatedAt != null && novProf.updatedAt != null) {
+            assert.ok(novProf.updatedAt >= baseProf.updatedAt);
+        }
     }
 
     // Cumulative wallet across 2019-01..2026-11 remains <= 100 per campaign & user
@@ -339,6 +426,63 @@ test('CLI: committed data/community/community.plan.json passes --check, --throug
         const checkBaselineMismatch = runCli('--check', '--through', '2026-10');
         assert.equal(checkBaselineMismatch.status, 1);
         assert.equal(fs.readFileSync(path.join(tmp, PLAN_FILE), 'utf8'), bytes1, '--check must never mutate disk');
+    } finally {
+        fs.rmSync(tmp, { recursive: true, force: true });
+    }
+});
+
+test('CR-003: default generation preserves extended horizon (--out temp plan) and explicit shrink requires --allow-shrink', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'community-plan-cr003-'));
+    const tempPlanPath = path.join(tmp, 'community.plan.json');
+    try {
+        // (a) Generate 2026-10
+        const plan10 = buildCommunityPlanMain(['--out', tempPlanPath, '--through', '2026-10'], REPO_ROOT);
+        assert.equal(plan10.throughMonth, '2026-10');
+        assert.equal(plan10.asOf, '2026-10-31');
+
+        // (b) Append 2026-11
+        const plan11 = buildCommunityPlanMain(['--out', tempPlanPath, '--through', '2026-11'], REPO_ROOT);
+        assert.equal(plan11.throughMonth, '2026-11');
+        assert.equal(plan11.asOf, '2026-11-30');
+        const novBytes = fs.readFileSync(tempPlanPath, 'utf8');
+
+        // (c) Default generation (no --through) preserves 2026-11 and --check exits 0
+        const defaultRun = buildCommunityPlanMain(['--out', tempPlanPath], REPO_ROOT);
+        assert.equal(defaultRun.throughMonth, '2026-11');
+        assert.equal(defaultRun.asOf, '2026-11-30');
+        assert.equal(fs.readFileSync(tempPlanPath, 'utf8'), novBytes);
+
+        const checkCli = spawnSync(process.execPath, [SCRIPT, '--out', tempPlanPath, '--check'], {
+            cwd: REPO_ROOT,
+            encoding: 'utf8',
+        });
+        assert.equal(checkCli.status, 0, checkCli.stderr);
+
+        // (d) Passing --through 2026-10 against 2026-11 file throws unless --allow-shrink is passed
+        assert.throws(
+            () => buildCommunityPlanMain(['--out', tempPlanPath, '--through', '2026-10'], REPO_ROOT),
+            /allow-shrink/,
+        );
+        assert.equal(fs.readFileSync(tempPlanPath, 'utf8'), novBytes, 'rejected shrink must not modify file');
+
+        const shrinkCli = spawnSync(process.execPath, [SCRIPT, '--out', tempPlanPath, '--through', '2026-10'], {
+            cwd: REPO_ROOT,
+            encoding: 'utf8',
+        });
+        assert.equal(shrinkCli.status, 1);
+        assert.match(shrinkCli.stderr, /allow-shrink/);
+
+        const allowedShrink = buildCommunityPlanMain(
+            ['--out', tempPlanPath, '--through', '2026-10', '--allow-shrink'],
+            REPO_ROOT,
+        );
+        assert.equal(allowedShrink.throughMonth, '2026-10');
+        assert.equal(allowedShrink.asOf, '2026-10-31');
+
+        // Committed data/community/community.plan.json remains at 2026-10
+        const committed = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, PLAN_FILE), 'utf8'));
+        assert.equal(committed.throughMonth, '2026-10');
+        assert.equal(committed.asOf, '2026-10-31');
     } finally {
         fs.rmSync(tmp, { recursive: true, force: true });
     }
