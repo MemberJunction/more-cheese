@@ -250,12 +250,11 @@ export function runCheck(root) {
                     '@memberjunction/core peer on every publish, so a shape it did not produce is one nobody has ' +
                     'checked against it — and the peers below cannot be compared to a floor that cannot be read.',
             );
-        } else if (/-/.test(floor)) {
+        } else if (lineRange !== null && /-/.test(floor)) {
             violations.push(
-                `mj-app.json: mjVersionRange floor is the PRERELEASE ${floor}. MJ coerces a prerelease host to its ` +
-                    'base tuple before testing a range, so a floor like this is not the constraint it looks like — ' +
-                    'and the estate\'s `edge` tag (6.1.0-edge.7) is OLDER than 6.1.2, which is the version the ' +
-                    'nine-app graph actually converges on. Declare a released floor.',
+                `mj-app.json: mjVersionRange floor is the PRERELEASE ${floor} on release line ${manifest.line}. ` +
+                    'Published release lines (`lts/*`, `main`) must pin a released MJ floor; prerelease Edge ' +
+                    'floors are allowed only on the unpublished `next` integration branch.',
             );
         }
     } catch (err) {
