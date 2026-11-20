@@ -26,11 +26,15 @@ const MJ_ANCHOR = '@memberjunction/core';
 /** An optional `^`/`~`/`>=` prefix followed by a semver (prerelease suffix kept). */
 const PIN_PATTERN = /^(?:\^|~|>=)?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)$/;
 
+/** A release-line range that already carries both floor and upper bound (`>=6.1.6 <6.2.0`). */
+const BOUNDED_PIN_PATTERN = /^>=\s*(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)\s+<\s*(\d+\.\d+\.\d+)$/;
+
 /**
  * `mj-app.json`'s derived fields, computed from the entities package's own manifest.
  *
- * `mjVersionRange` is `>=<pin> <(major+1).0.0>`: an app supports the MJ line it is built against,
- * up to but not including the next major.
+ * On `next`, `mjVersionRange` is `>=<pin> <(major+1).0.0>`: an app supports the MJ line it is
+ * built against, up to but not including the next major. On a release line (`lts/X.Y`), the peer
+ * range already carries the minor cap (`>=X.Y.Z <X.(Y+1).0`), which is preserved verbatim.
  */
 export function computeAppVersionFields(entitiesPkg) {
     const version = entitiesPkg?.version;
@@ -44,6 +48,11 @@ export function computeAppVersionFields(entitiesPkg) {
             `packages/Entities/package.json declares no ${MJ_ANCHOR} in peerDependencies or dependencies — ` +
                 'mjVersionRange has no input to derive from',
         );
+    }
+
+    const bounded = BOUNDED_PIN_PATTERN.exec(pin.trim());
+    if (bounded) {
+        return { version, mjVersionRange: `>=${bounded[1]} <${bounded[2]}` };
     }
 
     const match = PIN_PATTERN.exec(pin);

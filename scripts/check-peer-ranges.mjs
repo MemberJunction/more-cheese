@@ -169,16 +169,20 @@ export function manifestFloor(mjVersionRange) {
 }
 
 /**
- * Every `@memberjunction/*` peer in one manifest that is not exactly `^<floor>`.
+ * Every `@memberjunction/*` peer in one manifest that disagrees with the manifest's declared range.
+ *
+ * On `next` (`expectedRange` omitted), every peer must be `^<floor>`. On a release line (`lts/X.Y`),
+ * `mj-app.json` declares `"line"` and a minor-capped `mjVersionRange` (`>=X.Y.Z <X.(Y+1).0`), and
+ * every peer must match that range verbatim.
  *
  * Scoped to `@memberjunction/*` deliberately. `@angular/*` peers are ranges the HOST Explorer
  * satisfies and have no manifest field to agree with; `@mj-biz-apps/*` siblings version in lock-step
  * through changesets' `fixed` group, which is a different mechanism with its own enforcement.
  */
-export function findManifestFloorDrift(manifest, relPath, floor) {
+export function findManifestFloorDrift(manifest, relPath, floor, expectedRange = null) {
     const peers = manifest?.peerDependencies ?? {};
     const packageName = manifest?.name ?? relPath;
-    const expected = `^${floor}`;
+    const expected = expectedRange ?? `^${floor}`;
     const found = [];
     for (const [peer, version] of Object.entries(peers)) {
         if (!peer.startsWith('@memberjunction/')) {
@@ -232,9 +236,13 @@ export function runCheck(root) {
     const seenAllowances = new Set();
 
     let floor = null;
+    let lineRange = null;
     try {
         const manifest = JSON.parse(readFileSync(join(root, 'mj-app.json'), 'utf8'));
         floor = manifestFloor(manifest.mjVersionRange);
+        if (floor !== null && typeof manifest.line === 'string' && manifest.line.trim() !== '') {
+            lineRange = manifest.mjVersionRange.trim();
+        }
         if (floor === null) {
             violations.push(
                 `mj-app.json: mjVersionRange is ${JSON.stringify(manifest.mjVersionRange)}, which is not the ` +
@@ -290,7 +298,7 @@ export function runCheck(root) {
                 }
             }
             if (floor !== null) {
-                for (const hit of findManifestFloorDrift(manifest, relPath, floor)) {
+                for (const hit of findManifestFloorDrift(manifest, relPath, floor, lineRange)) {
                     violations.push(
                         `${hit.file}: peerDependencies["${hit.peer}"] is "${hit.version}", but mj-app.json declares ` +
                             `mjVersionRange floor ${floor}, so it must be exactly "${hit.expected}". These are not two ` +
