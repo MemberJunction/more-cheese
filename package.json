@@ -24,6 +24,8 @@
     "spaces:plan": "node scripts/build-spaces-plan.mjs",
     "spaces:chats": "node scripts/build-spaces-chats-gemini.mjs",
     "spaces:load": "node scripts/load-spaces.mjs",
+    "community:plan": "node scripts/build-community-plan.mjs",
+    "community:load": "node scripts/load-community.mjs",
     "check:release-seed": "node scripts/check-release-seed-coverage.mjs",
     "check:seed-cadence": "node scripts/check-release-seed-cadence.mjs",
     "lint:distribution": "node scripts/check-distribution-seed.mjs",
