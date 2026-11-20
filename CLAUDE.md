@@ -145,6 +145,7 @@ fiction headers, frontmatter, and cross-week coherence these skills own.
 
 ### Repo documentation
 
+- [`guides/RELEASE_LINES.md`](guides/RELEASE_LINES.md) — release-line branch model (`next`, `lts/X.Y`, `main`), backports, and line-cut checks
 - [`docs/release.md`](docs/release.md) — the release runbook: the steps, `npm run release:plan`, and what to do when a run goes red
 - [`docs/template-docs/`](docs/template-docs/README.md) — branching, publishing, codegen + metadata migrations, linking to MJ, versioning
 - [`docs/claude/README.md`](docs/claude/README.md) — how the MJ guidance is organized here

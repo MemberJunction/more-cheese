@@ -18,6 +18,14 @@ test('mjVersionRange spans from the peer floor to the next major', () => {
   assert.equal(out.mjVersionRange, '>=6.1.2 <7.0.0');
 });
 
+test('a release-line bounded peer range is preserved verbatim', () => {
+  const out = computeAppVersionFields({
+    version: '1.3.2',
+    peerDependencies: { '@memberjunction/core': '>=6.1.6 <6.2.0' },
+  });
+  assert.equal(out.mjVersionRange, '>=6.1.6 <6.2.0');
+});
+
 test('a prerelease floor keeps its suffix', () => {
   const out = computeAppVersionFields({
     version: '1.2.0',
