@@ -798,8 +798,54 @@ export function buildCommunityPlan(world, opts = {}) {
     if (!YM_RE.test(throughMonth) || throughMonth < startMonth) {
         throw new Error(`throughMonth must be YYYY-MM >= ${startMonth}, got "${throughMonth}"`);
     }
+    const baselineHorizonMonth =
+        rules.world?.defaultThroughMonth ||
+        (rules.monthlyCadence?.baselineAsOf ? rules.monthlyCadence.baselineAsOf.slice(0, 7) : null) ||
+        BASELINE_MONTH;
+    const baselineAsOfDate = monthEnd(baselineHorizonMonth);
     const cycles = monthRange(startMonth, throughMonth);
     const asOf = monthEnd(throughMonth);
+    const preseedCutDate = asOf < baselineAsOfDate ? asOf : baselineAsOfDate;
+
+    const monthlyIncrements = {};
+    const ensureMonthlyIncrement = (ym) => {
+        if (!monthlyIncrements[ym]) {
+            monthlyIncrements[ym] = {
+                postsAdded: 0,
+                repliesAdded: 0,
+                reactionsAdded: 0,
+                postTagsAdded: 0,
+                subscriptionsAdded: 0,
+                topicTagPostCounts: {},
+                memberProfileDeltas: {},
+            };
+        }
+        return monthlyIncrements[ym];
+    };
+    const recordProfileDelta = (ym, prof, field, delta) => {
+        if (!delta) return;
+        const inc = ensureMonthlyIncrement(ym);
+        const key = `${prof.spaceKey}:${prof.fields.UserID}`;
+        if (!inc.memberProfileDeltas[key]) {
+            inc.memberProfileDeltas[key] = {
+                profileId: prof.fields.ID,
+                spaceKey: prof.spaceKey,
+                userEmail: prof.userEmail,
+                postCount: 0,
+                helpfulCount: 0,
+                acceptedCount: 0,
+                reactionsReceived: 0,
+                reputationDelta: 0,
+            };
+        }
+        const entry = inc.memberProfileDeltas[key];
+        entry[field] += delta;
+        entry.reputationDelta =
+            entry.postCount * 5 +
+            entry.helpfulCount * 20 +
+            entry.acceptedCount * 15 +
+            entry.reactionsReceived * 2;
+    };
 
     const ix = buildActorIndex(world);
     const { actors, actorByUserId, actorByEmail, actorByHeroKey, seatsBySpaceKey } = ix;
@@ -1139,11 +1185,13 @@ export function buildCommunityPlan(world, opts = {}) {
         const cadence = pickOne(`cadence:${mapKey}`, digestChoices);
         const mentoring = actor.canonReviewer || actor.theta > 0.75 || draw(`mentor:${mapKey}`) > 0.58;
         const createdIso = createdAtOverride ?? `${actor.activeFrom > space.startedAt ? actor.activeFrom : space.startedAt}T09:00:00Z`;
+        const isPostBaseline = Boolean(createdAtOverride && createdAtOverride.slice(0, 7) > baselineHorizonMonth);
         const obj = {
             spaceKey,
             userEmail: actor.email,
             heroKey: actor.heroKey,
             createdAt: createdIso,
+            isPostBaseline,
             helpfulCount: 0,
             acceptedCount: 0,
             postCount: 0,
@@ -1168,12 +1216,12 @@ export function buildCommunityPlan(world, opts = {}) {
 
     // Pre-seed rich CommunityMemberProfiles for active heroes & >=300 real active ICF members in icf-member-commons + chapter/guild seats
     for (const heroActor of actorByHeroKey.values()) {
-        if (heroActor.activeFrom <= asOf) {
+        if (heroActor.activeFrom <= preseedCutDate) {
             ensureProfile('icf-member-commons', heroActor);
         }
     }
     const commonsRosterSorted = [...actors]
-        .filter((a) => a.activeFrom <= asOf)
+        .filter((a) => a.activeFrom <= preseedCutDate)
         .sort((a, b) => b.theta - a.theta || (tie(a.userId) < tie(b.userId) ? -1 : 1));
     for (const a of commonsRosterSorted.slice(0, 320)) {
         ensureProfile('icf-member-commons', a);
@@ -1183,7 +1231,7 @@ export function buildCommunityPlan(world, opts = {}) {
         const seatInfo = seatsBySpaceKey.get(cs.key);
         for (const uid of seatInfo?.activeUserIds ?? []) {
             const a = actorByUserId.get(uid);
-            if (a && a.activeFrom <= asOf) {
+            if (a && a.activeFrom <= preseedCutDate) {
                 ensureProfile(cs.key, a);
             }
         }
@@ -1257,7 +1305,13 @@ export function buildCommunityPlan(world, opts = {}) {
         const dedupKey = `${postId}:${tag.fields.ID}`;
         if (postTagDedup.has(dedupKey)) return;
         postTagDedup.add(dedupKey);
-        tag.fields.PostCount += 1;
+        if (cycle <= baselineHorizonMonth) {
+            tag.fields.PostCount += 1;
+        } else {
+            const inc = ensureMonthlyIncrement(cycle);
+            inc.postTagsAdded += 1;
+            inc.topicTagPostCounts[tag.key] = (inc.topicTagPostCounts[tag.key] ?? 0) + 1;
+        }
         postTags.push({
             cycle,
             spaceKey,
@@ -1314,11 +1368,19 @@ export function buildCommunityPlan(world, opts = {}) {
             added += 1;
             scoreSum += weight;
         }
+        if (cycle > baselineHorizonMonth && added > 0) {
+            ensureMonthlyIncrement(cycle).reactionsAdded += added;
+        }
         postObj.fields.ReactionScore = Math.round(scoreSum);
         const authorActor = actorByUserId.get(postObj.fields.AuthorUserID);
         if (authorActor) {
             const prof = ensureProfile(forum.spaceKey, authorActor, postObj.createdAt);
-            prof.reactionsReceived += Math.round(scoreSum);
+            const delta = Math.round(scoreSum);
+            if (cycle <= baselineHorizonMonth || prof.isPostBaseline) {
+                prof.reactionsReceived += delta;
+            } else {
+                recordProfileDelta(cycle, prof, 'reactionsReceived', delta);
+            }
         }
     };
 
@@ -1374,7 +1436,11 @@ export function buildCommunityPlan(world, opts = {}) {
         const maxIso = `${monthEnd(cycle)}T23:55:00Z`;
 
         const authorProf = ensureProfile(forum.spaceKey, authorActor, createdAt);
-        authorProf.postCount += 1;
+        if (cycle <= baselineHorizonMonth || authorProf.isPostBaseline) {
+            authorProf.postCount += 1;
+        } else {
+            recordProfileDelta(cycle, authorProf, 'postCount', 1);
+        }
 
         const rootObj = {
             key: rootKey,
@@ -1418,6 +1484,9 @@ export function buildCommunityPlan(world, opts = {}) {
             },
         };
         posts.push(rootObj);
+        if (cycle > baselineHorizonMonth) {
+            ensureMonthlyIncrement(cycle).postsAdded += 1;
+        }
 
         // Attach tags (2-4 per root post, strictly in the same SpaceID)
         const availTags = topicTags.filter((t) => t.spaceKey === forum.spaceKey);
@@ -1460,7 +1529,12 @@ export function buildCommunityPlan(world, opts = {}) {
                           forum.forumTypeCode,
                       );
             if (!replyAuthor) continue;
-            ensureProfile(forum.spaceKey, replyAuthor, rTime).postCount += 1;
+            const replyProf = ensureProfile(forum.spaceKey, replyAuthor, rTime);
+            if (cycle <= baselineHorizonMonth || replyProf.isPostBaseline) {
+                replyProf.postCount += 1;
+            } else {
+                recordProfileDelta(cycle, replyProf, 'postCount', 1);
+            }
 
             const rTypeCode = spec.postTypeCode;
             const rPostType = postTypeByCode[rTypeCode];
@@ -1511,6 +1585,11 @@ export function buildCommunityPlan(world, opts = {}) {
             };
             posts.push(replyObj);
             threadReplies.push(replyObj);
+            if (cycle > baselineHorizonMonth) {
+                const inc = ensureMonthlyIncrement(cycle);
+                inc.postsAdded += 1;
+                inc.repliesAdded += 1;
+            }
 
             const rReactCount = pickInt(`rreact-reply:${rId}`, 1, 3);
             addReactionsForPost(replyObj, forum, cycle, rReactCount, maxIso);
@@ -1549,11 +1628,19 @@ export function buildCommunityPlan(world, opts = {}) {
                 if (isBest) {
                     acceptedAnswerId = rId;
                     resolvedAt = verifiedAt ?? rTime;
-                    rProf.acceptedCount += 1;
+                    if (cycle <= baselineHorizonMonth || rProf.isPostBaseline) {
+                        rProf.acceptedCount += 1;
+                    } else {
+                        recordProfileDelta(cycle, rProf, 'acceptedCount', 1);
+                    }
                 }
                 if (isBest || isCanon) {
                     aiCanonAnswerId = rId;
-                    rProf.helpfulCount += 1;
+                    if (cycle <= baselineHorizonMonth || rProf.isPostBaseline) {
+                        rProf.helpfulCount += 1;
+                    } else {
+                        recordProfileDelta(cycle, rProf, 'helpfulCount', 1);
+                    }
                 }
             }
         }
@@ -1937,8 +2024,11 @@ export function buildCommunityPlan(world, opts = {}) {
             const openYm = camp.opensAt.slice(0, 7);
             const closeYm = camp.fields.VotingClosesAt ? camp.fields.VotingClosesAt.slice(0, 7) : '2099-12';
             if (ym < openYm || ym > closeYm) continue;
+            if (ym > baselineHorizonMonth && openYm <= baselineHorizonMonth) continue;
 
-            const campIdeas = ideaPosts.filter((ip) => ip.campaignKey === camp.campaignKey);
+            const campIdeas = ideaPosts.filter(
+                (ip) => ip.campaignKey === camp.campaignKey && (ym <= baselineHorizonMonth || ip.cycle > baselineHorizonMonth),
+            );
             if (!campIdeas.length) continue;
 
             const campForum = forumByKey.get(camp.forumKey);
@@ -2077,11 +2167,18 @@ export function buildCommunityPlan(world, opts = {}) {
                 subsAdded += 1;
             }
         }
+        if (ym > baselineHorizonMonth && subsAdded > 0) {
+            ensureMonthlyIncrement(ym).subscriptionsAdded += subsAdded;
+        }
     }
 
     // Recompute idea totals & profile aggregates
     for (const idea of ideaPosts) {
-        const allocs = ideaAllocations.filter((a) => a.fields.IdeaPostID === idea.fields.ID);
+        const allocs = ideaAllocations.filter(
+            (a) =>
+                a.fields.IdeaPostID === idea.fields.ID &&
+                (idea.cycle > baselineHorizonMonth || a.cycle <= baselineHorizonMonth),
+        );
         idea.fields.TotalPointsAllocated = allocs.reduce((s, a) => s + a.fields.PointsAllocated, 0);
         idea.fields.EffectiveQuadraticVotes = Number(
             allocs.reduce((s, a) => s + a.fields.QuadraticVotes, 0).toFixed(2),
@@ -2160,6 +2257,14 @@ export function buildCommunityPlan(world, opts = {}) {
         presenter: PRESENTER,
         cycles,
         stats,
+        ...(throughMonth > baselineHorizonMonth
+            ? {
+                  summary: {
+                      baselineHorizonMonth,
+                      monthlyIncrements,
+                  },
+              }
+            : {}),
         communitySpaces,
         forums,
         forumIdeaCampaigns,

@@ -258,15 +258,45 @@ test('append-only monthly growth (2026-11): preserves all 2019-01..2026-10 recor
     assert.ok(novTags.length >= 2);
     assert.ok(novSubs.length >= 1);
 
-    // 100% of 2019-01..2026-10 records remain immutable across ALL 17 entity collections
+    // 100% of 2019-01..2026-10 records remain byte-for-byte immutable across ALL 17 entity collections
+    const all17Collections = [
+        'communitySpaces',
+        'forums',
+        'forumMembers',
+        'topicTags',
+        'memberProfiles',
+        'subscriptions',
+        'forumIdeaCampaigns',
+        'posts',
+        'questionPosts',
+        'answerPosts',
+        'ideaPosts',
+        'casePosts',
+        'amaPosts',
+        'artifactPosts',
+        'postTags',
+        'reactions',
+        'ideaAllocations',
+    ];
+    for (const key of all17Collections) {
+        const novById = new Map(novPlanA[key].map((row) => [row.fields.ID, row]));
+        for (const octRow of basePlan[key]) {
+            const novRow = novById.get(octRow.fields.ID);
+            assert.ok(novRow, `missing preexisting ${key} record ${octRow.fields.ID} after 2026-11 append`);
+            assert.deepStrictEqual(novRow, octRow, `preexisting ${key} record ${octRow.fields.ID} mutated on 2026-11 append`);
+        }
+    }
+
     const immutableFullCollections = [
         'communitySpaces',
         'forums',
         'forumMembers',
+        'topicTags',
         'forumIdeaCampaigns',
+        'ideaPosts',
     ];
     for (const key of immutableFullCollections) {
-        assert.deepEqual(novPlanA[key], basePlan[key], `collection ${key} mutated on 2026-11 append`);
+        assert.deepStrictEqual(novPlanA[key], basePlan[key], `collection ${key} mutated on 2026-11 append`);
     }
 
     const immutableCycleCollections = [
@@ -284,83 +314,18 @@ test('append-only monthly growth (2026-11): preserves all 2019-01..2026-10 recor
     for (const key of immutableCycleCollections) {
         const baseSlice = basePlan[key];
         const novHistoricalSlice = novPlanA[key].filter((row) => row.cycle <= BASELINE_MONTH);
-        assert.deepEqual(novHistoricalSlice, baseSlice, `historical ${key} mutated on 2026-11 append`);
+        assert.deepStrictEqual(novHistoricalSlice, baseSlice, `historical ${key} mutated on 2026-11 append`);
     }
 
-    // ideaPosts: closed campaigns are byte-for-byte identical; open campaigns preserve identity/metadata while rollups increase monotonically
-    const novIdeaById = new Map(novPlanA.ideaPosts.map((ip) => [ip.fields.ID, ip]));
-    const openCampaignKeys = new Set(
-        novPlanA.forumIdeaCampaigns
-            .filter((c) => !c.fields.VotingClosesAt || c.fields.VotingClosesAt.slice(0, 7) >= '2026-11')
-            .map((c) => c.campaignKey),
-    );
-    for (const baseIdea of basePlan.ideaPosts) {
-        const novIdea = novIdeaById.get(baseIdea.fields.ID);
-        assert.ok(novIdea, `missing ideaPost ${baseIdea.fields.ID} after 2026-11 append`);
-        if (!openCampaignKeys.has(baseIdea.campaignKey)) {
-            assert.deepEqual(novIdea, baseIdea, `closed-campaign ideaPost ${baseIdea.slug} mutated`);
-        } else {
-            assert.equal(novIdea.cycle, baseIdea.cycle);
-            assert.equal(novIdea.campaignKey, baseIdea.campaignKey);
-            assert.equal(novIdea.forumKey, baseIdea.forumKey);
-            assert.equal(novIdea.slug, baseIdea.slug);
-            assert.equal(novIdea.fields.IdeaStatus, baseIdea.fields.IdeaStatus);
-            assert.equal(novIdea.fields.TargetReleaseOrQuarter, baseIdea.fields.TargetReleaseOrQuarter);
-            assert.equal(novIdea.fields.StatusRationaleMarkdown, baseIdea.fields.StatusRationaleMarkdown);
-            assert.equal(novIdea.fields.MergedIntoIdeaPostID, baseIdea.fields.MergedIntoIdeaPostID);
-            assert.ok(novIdea.fields.TotalPointsAllocated >= baseIdea.fields.TotalPointsAllocated);
-            assert.ok(novIdea.fields.EffectiveQuadraticVotes >= baseIdea.fields.EffectiveQuadraticVotes);
-            assert.ok(novIdea.fields.UniqueBackerCount >= baseIdea.fields.UniqueBackerCount);
-        }
-    }
+    // New 2026-11 replies exist alongside root posts
+    const novReplies = novPosts.filter((p) => p.fields.RootPostID != null);
+    assert.ok(novReplies.length >= 2, `expected >= 2 2026-11 replies, got ${novReplies.length}`);
 
-    // topicTags: preexisting PKs, identity, and taxonomy fields unchanged; PostCount only increases monotonically on 2026-11 tag activity
-    const novTaggedSlugs = new Set(novTags.map((t) => `${t.spaceKey}:${t.tagSlug}`));
-    const novTagById = new Map(novPlanA.topicTags.map((t) => [t.fields.ID, t]));
-    assert.equal(novPlanA.topicTags.length, basePlan.topicTags.length);
-    for (const baseTag of basePlan.topicTags) {
-        const novTag = novTagById.get(baseTag.fields.ID);
-        assert.ok(novTag, `missing topicTag ${baseTag.fields.ID} after 2026-11 append`);
-        assert.equal(novTag.key, baseTag.key);
-        assert.equal(novTag.spaceKey, baseTag.spaceKey);
-        assert.equal(novTag.category, baseTag.category);
-        assert.equal(novTag.fields.SpaceID, baseTag.fields.SpaceID);
-        assert.equal(novTag.fields.ParentTagID, baseTag.fields.ParentTagID);
-        assert.equal(novTag.fields.TagID, baseTag.fields.TagID);
-        assert.equal(novTag.fields.Slug, baseTag.fields.Slug);
-        assert.equal(novTag.fields.Name, baseTag.fields.Name);
-        assert.equal(novTag.fields.Description, baseTag.fields.Description);
-        assert.equal(novTag.fields.ColorHex, baseTag.fields.ColorHex);
-        assert.equal(novTag.fields.IsOfficial, baseTag.fields.IsOfficial);
-        assert.ok(novTag.fields.PostCount >= baseTag.fields.PostCount);
-        if (!novTaggedSlugs.has(baseTag.key)) {
-            assert.equal(novTag.fields.PostCount, baseTag.fields.PostCount, `topicTag ${baseTag.key} PostCount changed without 2026-11 activity`);
-        }
-    }
-
-    // memberProfiles: preexisting PKs, identity, bio/expertise, and createdAt unchanged; rollups only increase monotonically
-    const novProfileById = new Map(novPlanA.memberProfiles.map((mp) => [mp.fields.ID, mp]));
-    for (const baseProf of basePlan.memberProfiles) {
-        const novProf = novProfileById.get(baseProf.fields.ID);
-        assert.ok(novProf, `missing memberProfile ${baseProf.fields.ID} after 2026-11 append`);
-        assert.equal(novProf.spaceKey, baseProf.spaceKey);
-        assert.equal(novProf.userEmail, baseProf.userEmail);
-        assert.equal(novProf.heroKey, baseProf.heroKey);
-        assert.equal(novProf.createdAt, baseProf.createdAt);
-        assert.equal(novProf.fields.SpaceID, baseProf.fields.SpaceID);
-        assert.equal(novProf.fields.UserID, baseProf.fields.UserID);
-        assert.equal(novProf.fields.PersonID, baseProf.fields.PersonID);
-        assert.equal(novProf.fields.BioMarkdown, baseProf.fields.BioMarkdown);
-        assert.equal(novProf.fields.ExpertiseTagsJSON, baseProf.fields.ExpertiseTagsJSON);
-        assert.equal(novProf.fields.DigestCadence, baseProf.fields.DigestCadence);
-        assert.equal(novProf.fields.OpenToPeerMentoring, baseProf.fields.OpenToPeerMentoring);
-        assert.ok(novProf.fields.HelpfulAnswerCount >= baseProf.fields.HelpfulAnswerCount);
-        assert.ok(novProf.fields.AcceptedAnswerCount >= baseProf.fields.AcceptedAnswerCount);
-        assert.ok(novProf.fields.ReputationScore >= baseProf.fields.ReputationScore);
-        if (baseProf.updatedAt != null && novProf.updatedAt != null) {
-            assert.ok(novProf.updatedAt >= baseProf.updatedAt);
-        }
-    }
+    // Post-baseline monthly activity deltas recorded in summary.monthlyIncrements without mutating baseline rows
+    assert.ok(novPlanA.summary?.monthlyIncrements?.['2026-11'], 'expected summary.monthlyIncrements["2026-11"]');
+    assert.ok(novPlanA.summary.monthlyIncrements['2026-11'].postsAdded >= 4);
+    assert.ok(novPlanA.summary.monthlyIncrements['2026-11'].reactionsAdded >= 4);
+    assert.ok(novPlanA.summary.monthlyIncrements['2026-11'].postTagsAdded >= 2);
 
     // Cumulative wallet across 2019-01..2026-11 remains <= 100 per campaign & user
     const campByKey = new Map(novPlanA.forumIdeaCampaigns.map((c) => [c.campaignKey, c]));
