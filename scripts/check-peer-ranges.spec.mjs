@@ -232,6 +232,44 @@ test('a repo whose peers agree with its manifest passes', () => {
     assert.deepEqual(stale, []);
 });
 
+test('a release-line repo whose peers match the minor-capped mjVersionRange passes', () => {
+    const root = mkdtempSync(path.join(tmpdir(), 'peer-ranges-line-'));
+    writeFileSync(
+        path.join(root, 'mj-app.json'),
+        JSON.stringify({ line: '6.1', mjVersionRange: '>=6.1.6 <6.2.0' }, null, 2),
+    );
+    mkdirSync(path.join(root, 'packages', 'Entities'), { recursive: true });
+    writeFileSync(
+        path.join(root, 'packages', 'Entities', 'package.json'),
+        JSON.stringify({
+            name: '@mj-biz-apps/more-cheese-entities',
+            peerDependencies: { '@memberjunction/core': '>=6.1.6 <6.2.0' },
+        }),
+    );
+    const { violations, stale } = runCheck(root);
+    assert.deepEqual(violations, []);
+    assert.deepEqual(stale, []);
+});
+
+test('a release-line repo rejects a caret MJ peer that escapes the line cap', () => {
+    const root = mkdtempSync(path.join(tmpdir(), 'peer-ranges-line-drift-'));
+    writeFileSync(
+        path.join(root, 'mj-app.json'),
+        JSON.stringify({ line: '6.1', mjVersionRange: '>=6.1.6 <6.2.0' }, null, 2),
+    );
+    mkdirSync(path.join(root, 'packages', 'Entities'), { recursive: true });
+    writeFileSync(
+        path.join(root, 'packages', 'Entities', 'package.json'),
+        JSON.stringify({
+            name: '@mj-biz-apps/more-cheese-entities',
+            peerDependencies: { '@memberjunction/core': '^6.1.6' },
+        }),
+    );
+    const { violations } = runCheck(root);
+    assert.equal(violations.length, 1);
+    assert.match(violations[0], />=6\.1\.6 <6\.2\.0/);
+});
+
 test('an edge floor in the manifest fails, even when every peer agrees with it', () => {
     const root = fixture({
         mjVersionRange: '>=6.1.0-edge.4 <7.0.0',
