@@ -69,14 +69,22 @@ const UUID_RE = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
 const ISO_TS_RE = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2}))?$/;
 
 const up = (v) => (v == null ? null : String(v).toUpperCase());
-const q = (s) => String(s).replace(/'/g, "''");
-const sameId = (a, b) => String(a ?? '').toUpperCase() === String(b ?? '').toUpperCase();
+export const escapeSqlLiteral = (s) => String(s).replace(/'/g, "''");
+const q = escapeSqlLiteral;
+export const uuidsEqual = (a, b) => String(a ?? '').toUpperCase() === String(b ?? '').toUpperCase();
+const sameId = uuidsEqual;
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
-function assertUuid(value, label) {
+export function assertValidUuid(value, label) {
     const s = String(value ?? '');
     if (!UUID_RE.test(s)) throw new Error(`Invalid UUID for ${label}: "${s}"`);
     return s.toUpperCase();
+}
+const assertUuid = assertValidUuid;
+
+function assertOptionalUuid(value, label) {
+    if (value == null) return null;
+    return assertValidUuid(value, label);
 }
 
 function assertIsoTimestamp(value, label) {
@@ -182,7 +190,197 @@ export function validateCommunityPlanForLoader(plan) {
         throw new Error('Community plan has 0 forums');
     }
 
-    const spaceIds = new Set(plan.communitySpaces.map((cs) => up(cs.fields?.ID ?? cs.id)));
+    const validateRowId = (row, label, requireTopLevelId = false) => {
+        if (!row || typeof row !== 'object' || !row.fields || typeof row.fields !== 'object') {
+            throw new Error(`${label} must be an object with fields`);
+        }
+        const fieldId = assertValidUuid(row.fields.ID, `${label}.fields.ID`);
+        if (requireTopLevelId || row.id !== undefined) {
+            const topId = assertValidUuid(row.id, `${label}.id`);
+            if (!uuidsEqual(topId, fieldId)) {
+                throw new Error(`${label}: mismatched id (${row.id}) and fields.ID (${row.fields.ID})`);
+            }
+        }
+        return fieldId;
+    };
+
+    for (let i = 0; i < plan.communitySpaces.length; i++) {
+        const cs = plan.communitySpaces[i];
+        const label = `communitySpaces[${i}] (${cs?.key ?? 'unknown'})`;
+        const spaceId = validateRowId(cs, label, true);
+        assertOptionalUuid(cs.ownerUserId, `${label}.ownerUserId`);
+        assertOptionalUuid(cs.fields.DefaultForumID, `${label}.fields.DefaultForumID`);
+        if (cs.collaborationSpace != null) {
+            const collab = cs.collaborationSpace;
+            if (!collab.fields || typeof collab.fields !== 'object') {
+                throw new Error(`${label}.collaborationSpace must be an object with fields`);
+            }
+            const collabFieldId = assertValidUuid(collab.fields.ID, `${label}.collaborationSpace.fields.ID`);
+            if (!uuidsEqual(cs.fields.ID, collabFieldId)) {
+                throw new Error(`${label}: fields.ID (${cs.fields.ID}) does not match collaborationSpace.fields.ID (${collab.fields.ID})`);
+            }
+            if (collab.id !== undefined) {
+                const collabTopId = assertValidUuid(collab.id, `${label}.collaborationSpace.id`);
+                if (!uuidsEqual(cs.id, collabTopId)) {
+                    throw new Error(`${label}: id (${cs.id}) does not match collaborationSpace.id (${collab.id})`);
+                }
+            }
+            assertValidUuid(collab.fields.SpaceTypeID, `${label}.collaborationSpace.fields.SpaceTypeID`);
+            assertOptionalUuid(collab.fields.ParentID, `${label}.collaborationSpace.fields.ParentID`);
+            assertValidUuid(collab.fields.OwnerID, `${label}.collaborationSpace.fields.OwnerID`);
+            if (collab.seats != null) {
+                if (!Array.isArray(collab.seats)) {
+                    throw new Error(`${label}.collaborationSpace.seats must be an array`);
+                }
+                for (let sIdx = 0; sIdx < collab.seats.length; sIdx++) {
+                    const seat = collab.seats[sIdx];
+                    assertValidUuid(seat?.userId, `${label}.collaborationSpace.seats[${sIdx}].userId`);
+                    assertOptionalUuid(seat?.personId, `${label}.collaborationSpace.seats[${sIdx}].personId`);
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < plan.forums.length; i++) {
+        const f = plan.forums[i];
+        const label = `forums[${i}] (${f?.key ?? 'unknown'})`;
+        validateRowId(f, label);
+        assertValidUuid(f.fields.SpaceID, `${label}.fields.SpaceID`);
+        assertOptionalUuid(f.fields.ParentForumID, `${label}.fields.ParentForumID`);
+        assertValidUuid(f.fields.ForumTypeID, `${label}.fields.ForumTypeID`);
+    }
+
+    for (let i = 0; i < plan.forumIdeaCampaigns.length; i++) {
+        const c = plan.forumIdeaCampaigns[i];
+        validateRowId(c, `forumIdeaCampaigns[${i}] (${c?.campaignKey ?? 'unknown'})`);
+    }
+
+    for (let i = 0; i < plan.topicTags.length; i++) {
+        const t = plan.topicTags[i];
+        const label = `topicTags[${i}]`;
+        validateRowId(t, label);
+        assertValidUuid(t.fields.SpaceID, `${label}.fields.SpaceID`);
+        assertOptionalUuid(t.fields.ParentTagID, `${label}.fields.ParentTagID`);
+        assertOptionalUuid(t.fields.TagID, `${label}.fields.TagID`);
+    }
+
+    for (let i = 0; i < plan.forumMembers.length; i++) {
+        const fm = plan.forumMembers[i];
+        const label = `forumMembers[${i}]`;
+        validateRowId(fm, label);
+        assertValidUuid(fm.fields.ForumID, `${label}.fields.ForumID`);
+        assertValidUuid(fm.fields.UserID, `${label}.fields.UserID`);
+        assertValidUuid(fm.fields.ForumRoleTypeID, `${label}.fields.ForumRoleTypeID`);
+    }
+
+    for (let i = 0; i < plan.memberProfiles.length; i++) {
+        const mp = plan.memberProfiles[i];
+        const label = `memberProfiles[${i}]`;
+        validateRowId(mp, label);
+        assertValidUuid(mp.fields.SpaceID, `${label}.fields.SpaceID`);
+        assertValidUuid(mp.fields.UserID, `${label}.fields.UserID`);
+        assertOptionalUuid(mp.fields.PersonID, `${label}.fields.PersonID`);
+    }
+
+    for (let i = 0; i < plan.posts.length; i++) {
+        const p = plan.posts[i];
+        const label = `posts[${i}]`;
+        validateRowId(p, label);
+        assertValidUuid(p.fields.ForumID, `${label}.fields.ForumID`);
+        assertValidUuid(p.fields.PostTypeID, `${label}.fields.PostTypeID`);
+        assertOptionalUuid(p.fields.RootPostID, `${label}.fields.RootPostID`);
+        assertOptionalUuid(p.fields.ParentPostID, `${label}.fields.ParentPostID`);
+        assertValidUuid(p.fields.AuthorUserID, `${label}.fields.AuthorUserID`);
+        assertOptionalUuid(p.fields.AuthorPersonID, `${label}.fields.AuthorPersonID`);
+        assertOptionalUuid(p.fields.AuthorAgentID, `${label}.fields.AuthorAgentID`);
+        assertOptionalUuid(p.fields.PromotedToSpaceID, `${label}.fields.PromotedToSpaceID`);
+        assertOptionalUuid(p.fields.LinkedTaskID, `${label}.fields.LinkedTaskID`);
+        assertOptionalUuid(p.fields.LinkedEntityID, `${label}.fields.LinkedEntityID`);
+        assertOptionalUuid(p.fields.LinkedRecordID, `${label}.fields.LinkedRecordID`);
+        assertOptionalUuid(p.fields.ConversationID, `${label}.fields.ConversationID`);
+    }
+
+    for (let i = 0; i < plan.questionPosts.length; i++) {
+        const qp = plan.questionPosts[i];
+        const label = `questionPosts[${i}]`;
+        validateRowId(qp, label);
+        assertOptionalUuid(qp.fields.AcceptedAnswerPostID, `${label}.fields.AcceptedAnswerPostID`);
+        assertOptionalUuid(qp.fields.AICanonAnswerPostID, `${label}.fields.AICanonAnswerPostID`);
+    }
+
+    for (let i = 0; i < plan.answerPosts.length; i++) {
+        const ap = plan.answerPosts[i];
+        const label = `answerPosts[${i}]`;
+        validateRowId(ap, label);
+        assertValidUuid(ap.fields.QuestionPostID, `${label}.fields.QuestionPostID`);
+        assertOptionalUuid(ap.fields.VerifiedByUserID, `${label}.fields.VerifiedByUserID`);
+    }
+
+    for (let i = 0; i < plan.ideaPosts.length; i++) {
+        const ip = plan.ideaPosts[i];
+        const label = `ideaPosts[${i}]`;
+        validateRowId(ip, label);
+        assertOptionalUuid(ip.fields.MergedIntoIdeaPostID, `${label}.fields.MergedIntoIdeaPostID`);
+    }
+
+    for (let i = 0; i < plan.casePosts.length; i++) {
+        const cp = plan.casePosts[i];
+        const label = `casePosts[${i}]`;
+        validateRowId(cp, label);
+        assertOptionalUuid(cp.fields.RedactionConfirmedByUserID, `${label}.fields.RedactionConfirmedByUserID`);
+    }
+
+    for (let i = 0; i < plan.amaPosts.length; i++) {
+        const ama = plan.amaPosts[i];
+        const label = `amaPosts[${i}]`;
+        validateRowId(ama, label);
+        assertValidUuid(ama.fields.HostUserID, `${label}.fields.HostUserID`);
+    }
+
+    for (let i = 0; i < plan.artifactPosts.length; i++) {
+        const art = plan.artifactPosts[i];
+        const label = `artifactPosts[${i}]`;
+        validateRowId(art, label);
+        assertValidUuid(art.fields.ArtifactID, `${label}.fields.ArtifactID`);
+        assertOptionalUuid(art.fields.PinnedArtifactVersionID, `${label}.fields.PinnedArtifactVersionID`);
+        assertValidUuid(art.fields.SpaceItemID, `${label}.fields.SpaceItemID`);
+    }
+
+    for (let i = 0; i < plan.postTags.length; i++) {
+        const pt = plan.postTags[i];
+        const label = `postTags[${i}]`;
+        validateRowId(pt, label);
+        assertValidUuid(pt.fields.PostID, `${label}.fields.PostID`);
+        assertValidUuid(pt.fields.TopicTagID, `${label}.fields.TopicTagID`);
+    }
+
+    for (let i = 0; i < plan.reactions.length; i++) {
+        const r = plan.reactions[i];
+        const label = `reactions[${i}]`;
+        validateRowId(r, label);
+        assertValidUuid(r.fields.PostID, `${label}.fields.PostID`);
+        assertValidUuid(r.fields.UserID, `${label}.fields.UserID`);
+    }
+
+    for (let i = 0; i < plan.ideaAllocations.length; i++) {
+        const al = plan.ideaAllocations[i];
+        const label = `ideaAllocations[${i}]`;
+        validateRowId(al, label);
+        assertValidUuid(al.fields.IdeaPostID, `${label}.fields.IdeaPostID`);
+        assertValidUuid(al.fields.UserID, `${label}.fields.UserID`);
+    }
+
+    for (let i = 0; i < plan.subscriptions.length; i++) {
+        const sub = plan.subscriptions[i];
+        const label = `subscriptions[${i}]`;
+        validateRowId(sub, label);
+        assertValidUuid(sub.fields.UserID, `${label}.fields.UserID`);
+        assertOptionalUuid(sub.fields.ForumID, `${label}.fields.ForumID`);
+        assertOptionalUuid(sub.fields.RootPostID, `${label}.fields.RootPostID`);
+        assertOptionalUuid(sub.fields.TopicTagID, `${label}.fields.TopicTagID`);
+    }
+
+    const spaceIds = new Set(plan.communitySpaces.map((cs) => up(cs.fields.ID)));
     const forumIds = new Set(plan.forums.map((f) => up(f.fields?.ID)));
     for (const f of plan.forums) {
         if (!spaceIds.has(up(f.fields?.SpaceID))) {
@@ -529,7 +727,9 @@ export function buildBackdateSqlStatements(plan, options = {}) {
                     const idLit = `'${assertUuid(row.id, `${table}.ID`)}'`;
                     const vals = columns.map((c) => {
                         const raw = row[c.prop];
-                        return raw == null ? 'NULL' : `'${assertIsoTimestamp(raw, `${table}.${c.col}`)}'`;
+                        return raw == null
+                            ? 'CAST(NULL AS datetimeoffset)'
+                            : `CAST('${assertIsoTimestamp(raw, `${table}.${c.col}`)}' AS datetimeoffset)`;
                     });
                     return `(${idLit}, ${vals.join(', ')})`;
                 })
@@ -568,7 +768,7 @@ export function buildBackdateSqlStatements(plan, options = {}) {
             for (const cs of commonsSpaces) {
                 const ts = assertIsoTimestamp(`${cs.startedAt}T00:00:00Z`, 'commonsSpace.startedAt');
                 statements.push(
-                    `UPDATE [${COLLAB_SCHEMA}].[SpaceMember] SET [__mj_CreatedAt] = '${ts}', [__mj_UpdatedAt] = '${ts}' WHERE [SpaceID] = '${assertUuid(cs.id, 'SpaceID')}' AND [Status] <> 'Invited';`,
+                    `UPDATE [${COLLAB_SCHEMA}].[SpaceMember] SET [__mj_CreatedAt] = CAST('${ts}' AS datetimeoffset), [__mj_UpdatedAt] = CAST('${ts}' AS datetimeoffset) WHERE [SpaceID] = '${assertValidUuid(cs.id, 'SpaceID')}' AND [Status] <> 'Invited';`,
                 );
             }
         }
@@ -988,7 +1188,7 @@ export async function load(opts) {
         return { dryRun: true, counts, presenterPlan, backdateStatements: backdate.statements.length };
     }
 
-    const { core, pool, UserCache, collab } = await bootstrap(opts.mj);
+    const { core, pool, UserCache, collab } = opts.runtime ?? (await bootstrap(opts.mj));
     const md = new core.Metadata();
     const system = UserCache.Instance.GetSystemUser?.() ?? UserCache.Instance.UserByName('System', false);
     const run = async (entity, filter, fields, user = system) => {
@@ -1073,7 +1273,7 @@ export async function load(opts) {
     const spaceById = new Map(plan.communitySpaces.map((cs) => [up(cs.id), cs]));
 
     for (const cs of plan.communitySpaces) {
-        const spaceId = up(cs.id);
+        const spaceId = assertValidUuid(cs.id, `communitySpace ${cs.key} id`);
         const ownerUser = userByEmail(cs.ownerEmail);
 
         if (cs.createCollaborationSpace && !existingCollabSpaces.has(spaceId)) {
@@ -1097,9 +1297,12 @@ export async function load(opts) {
             await save(spaceRec, `collaboration space ${cs.key}`);
             existingCollabSpaces.add(spaceId);
             counts.collabSpaces++;
+        }
 
+        if (cs.createCollaborationSpace && existingCollabSpaces.has(spaceId) && Array.isArray(cs.collaborationSpace?.seats)) {
+            const safeSpaceId = assertValidUuid(spaceId, `communitySpace ${cs.key} spaceId`);
             const existingSeats = new Set(
-                (await run(ENTITY.spaceMembers, `SpaceID = '${spaceId}'`, ['UserID'])).map((r) => up(r.UserID)),
+                (await run(ENTITY.spaceMembers, `SpaceID = '${safeSpaceId}'`, ['UserID'])).map((r) => up(r.UserID)),
             );
             const ownerSeat = cs.collaborationSpace.seats.find((x) => x.role === 'owner');
             const orderedSeats = ownerSeat
@@ -1151,8 +1354,11 @@ export async function load(opts) {
 
     // 2. Forums, ForumIdeaCampaign IS-A, CommunitySpace.DefaultForumID, ForumMembers, ForumTopicTags, CommunityMemberProfiles
     const existingForums = new Set((await run(ENTITY.forums, '', ['ID'])).map((r) => up(r.ID)));
-    const existingCampaigns = new Set((await run(ENTITY.forumIdeaCampaigns, '', ['ID'])).map((r) => up(r.ID)));
+    const existingCampaigns = new Map(
+        (await run(ENTITY.forumIdeaCampaigns, '', ['ID', 'VotingClosesAt'])).map((r) => [up(r.ID), r]),
+    );
     const campaignByForumId = new Map(plan.forumIdeaCampaigns.map((c) => [up(c.fields.ID), c]));
+    const campaignByKey = new Map(plan.forumIdeaCampaigns.map((c) => [c.campaignKey, c]));
     const forumById = new Map(plan.forums.map((f) => [up(f.fields.ID), f]));
 
     for (const f of plan.forums) {
@@ -1177,7 +1383,7 @@ export async function load(opts) {
                 });
                 await save(cRec, `forum idea campaign ${f.key}`);
                 existingForums.add(fid);
-                existingCampaigns.add(fid);
+                existingCampaigns.set(fid, { ID: f.fields.ID, VotingClosesAt: null });
                 counts.forums++;
                 counts.forumIdeaCampaigns++;
             }
@@ -1262,8 +1468,9 @@ export async function load(opts) {
     const adminSpaceRoleId = spaceRolesByCode.get('admin')?.ID ?? spaceRolesByCode.get('member')?.ID;
     const forumAdminRoleId = forumRolesByCode.get('forum-admin')?.ID;
     for (const seatSpec of presenterPlan.collaborationSpaceSeats) {
+        const safeSeatSpaceId = assertValidUuid(seatSpec.spaceId, `presenterPlan.spaceId (${seatSpec.spaceKey})`);
         const spaceMembers = new Set(
-            (await run(ENTITY.spaceMembers, `SpaceID = '${seatSpec.spaceId}'`, ['UserID'])).map((r) => up(r.UserID)),
+            (await run(ENTITY.spaceMembers, `SpaceID = '${safeSeatSpaceId}'`, ['UserID'])).map((r) => up(r.UserID)),
         );
         if (spaceMembers.has(up(presenterUser.ID)) || !adminSpaceRoleId) continue;
         const ownerUser = userByEmail(spaceById.get(seatSpec.spaceId).ownerEmail);
@@ -1556,20 +1763,80 @@ export async function load(opts) {
             (r) => `${up(r.IdeaPostID)}:${up(r.UserID)}`,
         ),
     );
-    for (const al of plan.ideaAllocations) {
-        const k = `${up(al.fields.IdeaPostID)}:${up(al.fields.UserID)}`;
-        if (existingAllocations.has(k)) continue;
-        const rec = await md.GetEntityObject(ENTITY.forumIdeaAllocations, userById(al.fields.UserID));
-        rec.NewRecord();
-        assignFields(rec, al.fields);
-        await save(rec, `idea allocation ${al.fields.ID}`);
-        existingAllocations.add(k);
-        counts.ideaAllocations++;
+    const missingAllocations = plan.ideaAllocations.filter(
+        (al) => !existingAllocations.has(`${up(al.fields.IdeaPostID)}:${up(al.fields.UserID)}`),
+    );
+    const postById = new Map(sortedPosts.map((p) => [up(p.fields.ID), p]));
+    const campaignsNeedingAllocations = new Set();
+    for (const al of missingAllocations) {
+        const camp =
+            campaignByKey.get(al.campaignKey) ??
+            campaignByForumId.get(up(postById.get(up(al.fields.IdeaPostID))?.fields?.ForumID));
+        if (camp) campaignsNeedingAllocations.add(up(camp.fields.ID));
+    }
+
+    const reopenedCampaigns = [];
+    const nowMs = Date.now();
+    for (const camp of plan.forumIdeaCampaigns) {
+        const campId = up(camp.fields.ID);
+        if (!campaignsNeedingAllocations.has(campId)) continue;
+        const existingCamp = existingCampaigns.get(campId);
+        if (!existingCamp?.VotingClosesAt) continue;
+        const existingCloseMs = new Date(existingCamp.VotingClosesAt).getTime();
+        if (!Number.isNaN(existingCloseMs) && existingCloseMs <= nowMs) {
+            const ownerUser = userByEmail(spaceById.get(up(forumById.get(campId).fields.SpaceID)).ownerEmail);
+            const cRec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
+            if (await cRec.Load(camp.fields.ID)) {
+                cRec.VotingClosesAt = new Date(Date.now() + 86_400_000);
+                await save(cRec, `temporarily reopen campaign ${camp.campaignKey}`);
+                reopenedCampaigns.push({
+                    camp,
+                    ownerUser,
+                    restoreClosesAt: camp.fields.VotingClosesAt ?? existingCamp.VotingClosesAt,
+                });
+            }
+        }
+    }
+
+    const restoredCampaignIds = new Set();
+    try {
+        for (const al of missingAllocations) {
+            const k = `${up(al.fields.IdeaPostID)}:${up(al.fields.UserID)}`;
+            if (existingAllocations.has(k)) continue;
+            const rec = await md.GetEntityObject(ENTITY.forumIdeaAllocations, userById(al.fields.UserID));
+            rec.NewRecord();
+            assignFields(rec, al.fields);
+            await save(rec, `idea allocation ${al.fields.ID}`);
+            existingAllocations.add(k);
+            counts.ideaAllocations++;
+        }
+    } finally {
+        for (const { camp, ownerUser, restoreClosesAt } of reopenedCampaigns) {
+            const cRec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
+            if (await cRec.Load(camp.fields.ID)) {
+                cRec.VotingClosesAt = restoreClosesAt ? new Date(restoreClosesAt) : null;
+                await save(cRec, `restore campaign voting close ${camp.campaignKey}`);
+                existingCampaigns.set(up(camp.fields.ID), {
+                    ID: camp.fields.ID,
+                    VotingClosesAt: restoreClosesAt ?? null,
+                });
+                restoredCampaignIds.add(up(camp.fields.ID));
+            }
+        }
     }
 
     for (const camp of plan.forumIdeaCampaigns) {
         if (!camp.fields.VotingClosesAt) continue;
-        const ownerUser = userByEmail(spaceById.get(up(forumById.get(up(camp.fields.ID)).fields.SpaceID)).ownerEmail);
+        const campId = up(camp.fields.ID);
+        if (restoredCampaignIds.has(campId)) continue;
+        const existingCamp = existingCampaigns.get(campId);
+        if (
+            existingCamp?.VotingClosesAt &&
+            new Date(existingCamp.VotingClosesAt).getTime() === new Date(camp.fields.VotingClosesAt).getTime()
+        ) {
+            continue;
+        }
+        const ownerUser = userByEmail(spaceById.get(up(forumById.get(campId).fields.SpaceID)).ownerEmail);
         const rec = await md.GetEntityObject(ENTITY.forumIdeaCampaigns, ownerUser);
         if (await rec.Load(camp.fields.ID)) {
             rec.VotingClosesAt = new Date(camp.fields.VotingClosesAt);
@@ -1637,7 +1904,7 @@ export async function load(opts) {
         log(`backdated ${backdate.tables.length} tables across ${backdate.statements.length} SQL batches`);
     }
 
-    await pool.close();
+    await pool?.close?.();
     return { dryRun: false, counts, presenterPlan, backdateStatements: backdate.statements.length };
 }
 
