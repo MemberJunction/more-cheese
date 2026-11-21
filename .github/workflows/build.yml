@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build-only:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -49,8 +49,13 @@ jobs:
       - name: package-lock.json casing matches what git tracks
         run: ./.github/scripts/validate-package-lock-case.sh
 
+      # PRs into next (and next itself) build against MJ next and the sibling apps' next, from
+      # source, in one generated pnpm workspace; release PRs and lts/* lines install the committed
+      # lockfile, i.e. the published versions. See .github/actions/ci-install/action.yml.
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/ci-install
+        with:
+          published-install: npm ci
 
       - name: Nothing may push to main or next
         run: npm run lint:release-pushes
