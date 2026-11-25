@@ -262,7 +262,16 @@
             "TourID": "@parent:ID",
             "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
             "ToStepID": "654C9B69-7E6B-41EE-9DE2-C294E6B90442",
-            "Condition": "Choice:at-risk-creameries",
+            "Condition": {
+              "logic": "and",
+              "filters": [
+                {
+                  "field": "lastChoiceKey",
+                  "operator": "eq",
+                  "value": "at-risk-creameries"
+                }
+              ]
+            },
             "Label": "At-Risk Creameries",
             "Priority": 100,
             "Sequence": 1,
@@ -277,7 +286,16 @@
             "TourID": "@parent:ID",
             "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
             "ToStepID": "26062417-17AF-4454-A7E4-75FAFE854DCB",
-            "Condition": "Choice:world-cheese-cup",
+            "Condition": {
+              "logic": "and",
+              "filters": [
+                {
+                  "field": "lastChoiceKey",
+                  "operator": "eq",
+                  "value": "world-cheese-cup"
+                }
+              ]
+            },
             "Label": "World Cheese Cup",
             "Priority": 90,
             "Sequence": 2,
@@ -292,7 +310,16 @@
             "TourID": "@parent:ID",
             "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
             "ToStepID": "1F82606E-521F-4A34-A76E-D72D5B251070",
-            "Condition": "Choice:standards-committees",
+            "Condition": {
+              "logic": "and",
+              "filters": [
+                {
+                  "field": "lastChoiceKey",
+                  "operator": "eq",
+                  "value": "standards-committees"
+                }
+              ]
+            },
             "Label": "Standards Committees",
             "Priority": 80,
             "Sequence": 3,
