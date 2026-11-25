@@ -1,0 +1,505 @@
+[
+  {
+    "fields": {
+      "Name": "International Cheese Federation: 12-App Grand Tour",
+      "TourKey": "cheese.grand-tour-icf",
+      "Description": "Explore how the International Cheese Federation unifies 12 composed OpenApps — from Sonar health bands and Predictive Studio churn models to World Cheese Cup orders, accounting ledgers, PDO committees, and trustee elections.",
+      "ApplicationID": null,
+      "RunInAuthenticatedHosts": true,
+      "Status": "Draft",
+      "EstimatedMinutes": 5,
+      "Priority": 95,
+      "DefaultGuideMode": "Visual",
+      "AllowAgentActions": false,
+      "Goal": {
+        "Type": "Navigation",
+        "Application": "Home",
+        "Description": "User explores the 12-OpenApp ICF federation and branches into a domain storyline before continuing to Member 360."
+      },
+      "StartLocation": {
+        "Application": "Home"
+      }
+    },
+    "primaryKey": {
+      "ID": "57774DED-4B4E-48F8-9AD0-DC6989108E83"
+    },
+    "relatedEntities": {
+      "MJ: Tour Prerequisites": [
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "PrerequisiteType": "Tour",
+            "RequiredTourID": "@lookup:MJ: Tours.TourKey=core.welcome",
+            "Strength": "Recommended",
+            "Sequence": 1
+          },
+          "primaryKey": {
+            "ID": "A3C60283-074D-4E87-9913-538A5E988CB0"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "PrerequisiteType": "Tour",
+            "RequiredTourID": "@lookup:MJ: Tours.TourKey=sonar.overview-portfolio",
+            "Strength": "Recommended",
+            "Sequence": 2
+          },
+          "primaryKey": {
+            "ID": "BD54AFBB-D2CF-4D0E-AE2E-5096E4537E8E"
+          }
+        }
+      ],
+      "MJ: Tour Steps": [
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "icf-welcome",
+            "Sequence": 1,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Modal",
+            "Title": "Welcome to the International Cheese Federation",
+            "Body": "Step inside the MoreCheese demonstration — a causally-consistent association dataset spanning membership, commerce, accounting, events, committees, voting, community, and AI intelligence across 12 OpenApps.",
+            "Configuration": {
+              "Variant": "welcome",
+              "PrimaryButtonText": "Start Grand Tour",
+              "ShowProgress": true
+            },
+            "Placement": "Center",
+            "Mode": "Show",
+            "Prepare": {
+              "ApplicationName": "Home"
+            },
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "4A8F8326-59C3-4C27-8379-86D2BB376379"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "icf-app-switcher",
+            "Sequence": 2,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Spotlight",
+            "Title": "12 OpenApps Unified in One Workspace",
+            "Body": "Use the Application Switcher to move seamlessly across Common, Orders, Accounting, Committees, Forms, Tasks, Issues, Secure Messages, Sonar, Collaboration, Community, and Predictive Studio.",
+            "Configuration": {
+              "ShowProgress": true,
+              "AllowTargetClick": true
+            },
+            "Anchor": {
+              "Strategy": "Registered",
+              "Key": "core.shell.app-switcher"
+            },
+            "Placement": "Bottom",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "9A32D526-80DB-4276-93BF-5BFDA1AED1FA"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "choose-icf-storyline",
+            "Sequence": 3,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Choice",
+            "Title": "Choose an ICF Federation Storyline",
+            "Body": "Pick which cross-app workflow you want to trace across the International Cheese Federation workspace.",
+            "Configuration": {
+              "Question": "Which ICF federation storyline would you like to explore?",
+              "Options": [
+                {
+                  "Key": "at-risk-creameries",
+                  "Label": "At-Risk Creameries & Renewal Rescue",
+                  "Description": "Combine Sonar engagement bands and Predictive Studio churn drivers to save renewals."
+                },
+                {
+                  "Key": "world-cheese-cup",
+                  "Label": "World Cheese Cup Orders & Events",
+                  "Description": "Follow competition entry orders, catalog pricing, and accounting batch posting."
+                },
+                {
+                  "Key": "standards-committees",
+                  "Label": "PDO Standards Committees & Elections",
+                  "Description": "Inspect appellation motions, trustee ballots, and member community forums."
+                }
+              ]
+            },
+            "Placement": "Center",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "storyline-at-risk-creameries",
+            "Sequence": 4,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Spotlight",
+            "Title": "Storyline: At-Risk Creameries & Sonar Health",
+            "Body": "Pin Sonar and Predictive Studio dashboards here to spot creameries slipping into Watch or At-Risk score bands, trace Member Renewal Risk drivers, and coordinate outreach tasks before renewal lapses.",
+            "Configuration": {
+              "ShowProgress": true
+            },
+            "Anchor": {
+              "Strategy": "Registered",
+              "Key": "core.home.pinned"
+            },
+            "Placement": "Bottom",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "654C9B69-7E6B-41EE-9DE2-C294E6B90442"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "storyline-world-cheese-cup",
+            "Sequence": 5,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Spotlight",
+            "Title": "Storyline: World Cheese Cup Orders & Ledger",
+            "Body": "Open Orders, MoreCheese Competition Entries, and Accounting from your workspace apps to follow World Cheese Cup entry fees, product catalog pricing, payment settlements, and GL journal batches.",
+            "Configuration": {
+              "ShowProgress": true
+            },
+            "Anchor": {
+              "Strategy": "Registered",
+              "Key": "core.home.apps"
+            },
+            "Placement": "Top",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "26062417-17AF-4454-A7E4-75FAFE854DCB"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "storyline-standards-committees",
+            "Sequence": 6,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Spotlight",
+            "Title": "Storyline: Standards Committees & Member Ballots",
+            "Body": "Search across Committees, BizApps Voting, and Community from the Omnibar to trace PDO standards motions, committee meeting minutes, trustee election ballots, and member forum discussions.",
+            "Configuration": {
+              "ShowProgress": true
+            },
+            "Anchor": {
+              "Strategy": "Registered",
+              "Key": "core.shell.omnibar"
+            },
+            "Placement": "Bottom",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "1F82606E-521F-4A34-A76E-D72D5B251070"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "icf-continue-member-360",
+            "Sequence": 7,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Modal",
+            "Title": "Continue Exploring the ICF Member 360",
+            "Body": "Next, inspect how every member's People record brings together membership tenure, certifications, course enrollments, Sonar health, and Predictive Studio churn attribution in one 360-degree view.",
+            "Configuration": {
+              "Variant": "summary",
+              "PrimaryButtonText": "Next: ICF Member 360",
+              "NextTourKey": "cheese.member-360",
+              "LearningPathKey": "cheese.icf-onboarding",
+              "ShowProgress": true
+            },
+            "Placement": "Center",
+            "Mode": "Show",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "F60C2060-0696-4B34-BEAF-5D028B069F8C"
+          }
+        }
+      ],
+      "MJ: Tour Step Paths": [
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
+            "ToStepID": "654C9B69-7E6B-41EE-9DE2-C294E6B90442",
+            "Condition": "Choice:at-risk-creameries",
+            "Label": "At-Risk Creameries",
+            "Priority": 100,
+            "Sequence": 1,
+            "IsDefault": false
+          },
+          "primaryKey": {
+            "ID": "0025DF78-9132-41B7-96DA-12C77F04FB84"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
+            "ToStepID": "26062417-17AF-4454-A7E4-75FAFE854DCB",
+            "Condition": "Choice:world-cheese-cup",
+            "Label": "World Cheese Cup",
+            "Priority": 90,
+            "Sequence": 2,
+            "IsDefault": false
+          },
+          "primaryKey": {
+            "ID": "B3C2C849-2233-4678-B2F0-E9E9A1030B95"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
+            "ToStepID": "1F82606E-521F-4A34-A76E-D72D5B251070",
+            "Condition": "Choice:standards-committees",
+            "Label": "Standards Committees",
+            "Priority": 80,
+            "Sequence": 3,
+            "IsDefault": false
+          },
+          "primaryKey": {
+            "ID": "432477D3-92DD-4A06-880F-59E19E63A948"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "75A18268-0FF6-4B0F-9CED-3E5B64414C2C",
+            "ToStepID": "654C9B69-7E6B-41EE-9DE2-C294E6B90442",
+            "Condition": null,
+            "Label": "Default Storyline",
+            "Priority": 0,
+            "Sequence": 4,
+            "IsDefault": true
+          },
+          "primaryKey": {
+            "ID": "33025C87-5180-4DCA-96E6-100879EB6AD6"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "654C9B69-7E6B-41EE-9DE2-C294E6B90442",
+            "ToStepID": "F60C2060-0696-4B34-BEAF-5D028B069F8C",
+            "Condition": null,
+            "Label": "To Member 360",
+            "Priority": 10,
+            "Sequence": 1,
+            "IsDefault": true
+          },
+          "primaryKey": {
+            "ID": "F274CA53-A412-41E8-B68B-9E089BBA0931"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "26062417-17AF-4454-A7E4-75FAFE854DCB",
+            "ToStepID": "F60C2060-0696-4B34-BEAF-5D028B069F8C",
+            "Condition": null,
+            "Label": "To Member 360",
+            "Priority": 10,
+            "Sequence": 1,
+            "IsDefault": true
+          },
+          "primaryKey": {
+            "ID": "41611FF3-8F60-4D88-8FE7-D37596D78204"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "FromStepID": "1F82606E-521F-4A34-A76E-D72D5B251070",
+            "ToStepID": "F60C2060-0696-4B34-BEAF-5D028B069F8C",
+            "Condition": null,
+            "Label": "To Member 360",
+            "Priority": 10,
+            "Sequence": 1,
+            "IsDefault": true
+          },
+          "primaryKey": {
+            "ID": "AB1D03EB-05D0-4D63-856E-94347ABADBF7"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "fields": {
+      "Name": "ICF Member 360: Churn Drivers, Certifications & Sonar",
+      "TourKey": "cheese.member-360",
+      "Description": "Inspect the PersonMembershipPanel on Common People records — uniting membership status, Predictive Studio renewal and LTV scores, attribution drivers, certifications, courses, and Sonar engagement timelines.",
+      "ApplicationID": null,
+      "RunInAuthenticatedHosts": true,
+      "Status": "Draft",
+      "EstimatedMinutes": 3,
+      "Priority": 85,
+      "DefaultGuideMode": "Visual",
+      "AllowAgentActions": false,
+      "Goal": {
+        "Type": "Navigation",
+        "Application": "Home",
+        "Description": "User learns how PersonMembershipPanel unifies MoreCheese membership, certifications, courses, Predictive Studio drivers, and Sonar engagement."
+      },
+      "StartLocation": {
+        "Application": "Home"
+      }
+    },
+    "primaryKey": {
+      "ID": "4A8150C3-C7BA-4F4F-910F-AB1EC21DD971"
+    },
+    "relatedEntities": {
+      "MJ: Tour Steps": [
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "member-360-welcome",
+            "Sequence": 1,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Modal",
+            "Title": "ICF Member 360 Federation Profile",
+            "Body": "Every person in Common receives a dedicated Membership rail panel (PersonMembershipPanel) that weaves together dues, AI renewal forecasts, certifications, course history, and Sonar engagement.",
+            "Configuration": {
+              "Variant": "welcome",
+              "PrimaryButtonText": "Explore Member 360",
+              "ShowProgress": true
+            },
+            "Placement": "Center",
+            "Mode": "Show",
+            "Prepare": {
+              "ApplicationName": "Home"
+            },
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "E4EFA6E3-A5A0-4E80-8A0C-FD12FC99DD06"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "member-kpis-renewal",
+            "Sequence": 2,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Spotlight",
+            "Title": "Membership KPIs, AI Renewal & Predicted LTV",
+            "Body": "On any People record's Membership tab, PersonMembershipPanel surfaces Member Number, join date, current vs. lapsed dues status, AI Renewal Probability, and Predicted Customer LTV.",
+            "Configuration": {
+              "ShowProgress": true
+            },
+            "Anchor": {
+              "Strategy": "Registered",
+              "Key": "cheese.member.kpis"
+            },
+            "Placement": "Bottom",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "8A10B94B-522E-4A73-98B3-D27F82FB1873"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "member-attribution-drivers",
+            "Sequence": 3,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Spotlight",
+            "Title": "Churn Attribution Drivers, Courses & Certifications",
+            "Body": "Expand Attribution Drivers & Prediction History to see which features — like MoreCheese course completions, earned cheese-making certifications, or conference attendance — drive each member's renewal score.",
+            "Configuration": {
+              "ShowProgress": true
+            },
+            "Anchor": {
+              "Strategy": "Registered",
+              "Key": "cheese.member.insights"
+            },
+            "Placement": "Top",
+            "Mode": "Guide",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "58272AD6-A2B6-4391-8E94-D1E8A2EB5452"
+          }
+        },
+        {
+          "fields": {
+            "TourID": "@parent:ID",
+            "StepKey": "member-cross-app-timeline",
+            "Sequence": 4,
+            "StepTypeID": "@lookup:MJ: Tour Step Types.Name=Modal",
+            "Title": "Cross-App Member Timeline & Organization Rollups",
+            "Body": "Complementing the People panel, OrganizationStaffMembershipContributor rolls up member counts, certifications, competition medals, and average renewal probability across creamery staff rosters alongside Sonar score history.",
+            "Configuration": {
+              "Variant": "summary",
+              "PrimaryButtonText": "Finish Onboarding Path",
+              "LearningPathKey": "cheese.icf-onboarding",
+              "ShowProgress": true
+            },
+            "Placement": "Center",
+            "Mode": "Show",
+            "Completion": {
+              "Type": "NextButton"
+            },
+            "OnMissing": "Center",
+            "IsOptional": false
+          },
+          "primaryKey": {
+            "ID": "F44517E1-CEBA-4453-9D70-239E1FA62549"
+          }
+        }
+      ]
+    }
+  }
+]

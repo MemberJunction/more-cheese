@@ -1,0 +1,66 @@
+[
+  {
+    "fields": {
+      "Name": "ICF Staff Federation Onboarding",
+      "PathKey": "cheese.icf-onboarding",
+      "Description": "Cross-app federation onboarding path for International Cheese Federation staff — starting with MemberJunction fundamentals and Sonar portfolio health before exploring the 12-OpenApp ICF Grand Tour and Member 360.",
+      "ApplicationID": null,
+      "Status": "Active",
+      "Configuration": {
+        "AllowSkipOptional": true,
+        "ShowNextConcreteStep": true
+      }
+    },
+    "primaryKey": {
+      "ID": "AA6F58DF-FFFE-43A4-A0D2-9D3B03B8B7C3"
+    },
+    "relatedEntities": {
+      "MJ: Learning Path Tours": [
+        {
+          "fields": {
+            "LearningPathID": "@parent:ID",
+            "TourID": "@lookup:MJ: Tours.TourKey=core.welcome",
+            "Sequence": 1,
+            "IsRequired": true
+          },
+          "primaryKey": {
+            "ID": "B8854D5B-D3DF-4D2F-806E-5AB4E9EFCC16"
+          }
+        },
+        {
+          "fields": {
+            "LearningPathID": "@parent:ID",
+            "TourID": "@lookup:MJ: Tours.TourKey=sonar.overview-portfolio",
+            "Sequence": 2,
+            "IsRequired": true
+          },
+          "primaryKey": {
+            "ID": "7A91B1F5-C2A7-4522-8C9F-9705547E3D73"
+          }
+        },
+        {
+          "fields": {
+            "LearningPathID": "@parent:ID",
+            "TourID": "@lookup:MJ: Tours.TourKey=cheese.grand-tour-icf",
+            "Sequence": 3,
+            "IsRequired": true
+          },
+          "primaryKey": {
+            "ID": "E993BE89-D482-47CF-AD99-899659241846"
+          }
+        },
+        {
+          "fields": {
+            "LearningPathID": "@parent:ID",
+            "TourID": "@lookup:MJ: Tours.TourKey=cheese.member-360",
+            "Sequence": 4,
+            "IsRequired": true
+          },
+          "primaryKey": {
+            "ID": "0B4DC523-8C0A-4FC1-B08A-047522C030D7"
+          }
+        }
+      ]
+    }
+  }
+]

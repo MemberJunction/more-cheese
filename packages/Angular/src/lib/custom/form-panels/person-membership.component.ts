@@ -30,7 +30,7 @@ import {
             } @else if (!HasMembership) {
                 <div class="mc-muted">No More Cheese member profile on file.</div>
             } @else {
-                <div class="mc-kpis">
+                <div class="mc-kpis" data-mj-tour-anchor="cheese.member.kpis">
                     <div class="mc-kpi">
                         <div class="mc-kpi-val">{{ Data?.Profile?.MemberNumber || '—' }}</div>
                         <div class="mc-kpi-label">Member number</div>
@@ -94,7 +94,7 @@ import {
                 </div>
 
                 @if (Drivers.length > 0 || History.length > 0) {
-                    <div class="mc-insights-panel">
+                    <div class="mc-insights-panel" data-mj-tour-anchor="cheese.member.insights">
                         <button type="button" class="mc-insights-toggle" (click)="ToggleExpanded()">
                             <div class="mc-insights-title">
                                 <i class="fa-solid fa-brain"></i>
